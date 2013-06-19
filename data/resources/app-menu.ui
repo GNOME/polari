@@ -1,0 +1,24 @@
+<interface>
+  <menu id="app-menu">
+    <section>
+      <item>
+        <attribute name="action">app.connections</attribute>
+        <attribute name="label" translatable="yes">Connections</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">Preferences</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">About Polari</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.quit</attribute>
+        <attribute name="label" translatable="yes">Quit</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

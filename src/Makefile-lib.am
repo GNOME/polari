@@ -1,0 +1,28 @@
+pkglib_LTLIBRARIES = libpolari-1.0.la
+
+libpolari_headers = \
+	lib/polari-room.h \
+	$(NULL)
+
+libpolari_sources = \
+	lib/polari-room.c \
+	$(NULL)
+
+libpolari_1_0_la_SOURCES = $(libpolari_headers) $(libpolari_sources)
+
+libpolari_1_0_la_LIBADD = $(POLARI_LIBS)
+libpolari_1_0_la_CFLAGS = $(POLARI_CFLAGS)
+
+INTROSPECTION_GIRS += Polari-1.0.gir
+
+Polari-1.0.gir: libpolari-1.0.la Makefile
+Polari_1_0_gir_NAMESPACE = Polari
+Polari_1_0_gir_VERSION = 1.0
+Polari_1_0_gir_LIBS = libpolari-1.0.la
+Polari_1_0_gir_CFLAGS = $(POLARI_CFLAGS)
+Polari_1_0_gir_FILES = $(libpolari_headers) $(libpolari_sources)
+Polari_1_0_gir_SCANNERFLAGS = --warn-all --symbol-prefix=polari --identifier-prefix=Polari
+Polari_1_0_gir_INCLUDES =  \
+	Gio-2.0            \
+	TelepathyGLib-0.12 \
+	$(NULL)

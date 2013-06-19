@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.10 -->
+  <menu id="join_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Join a Room</attribute>
+        <attribute name="action">win.join-room</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Message a User</attribute>
+        <attribute name="action">win.message-user</attribute>
+      </item>
+    </section>
+  </menu>
+  <object class="GtkApplicationWindow" id="main_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Polari</property>
+    <property name="default_width">600</property>
+    <property name="default_height">400</property>
+    <property name="icon_name">polari</property>
+    <style>
+      <class name="polari-main-window"/>
+    </style>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="titlebar">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkMenuButton" id="button1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="menu_model">join_menu</property>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage" id="image1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">list-add-symbolic</property>
+                <property name="icon_size">1</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">start</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="action_name">win.leave-room</property>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage" id="image2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">list-remove-symbolic</property>
+                <property name="icon_size">1</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">start</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToggleButton" id="button3">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="action_name">win.user-list</property>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage" id="image3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">system-users-symbolic</property>
+                <property name="icon_size">1</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button4">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="action_name">app.quit</property>
+            <property name="relief">none</property>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage" id="image4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">window-close-symbolic</property>
+                <property name="icon_size">1</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox" id="box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkRevealer" id="room_list_revealer">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="hexpand">False</property>
+            <property name="transition_type">slide-right</property>
+            <child>
+              <object class="GtkScrolledWindow" id="room_list_scrollview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">never</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkOverlay" id="overlay">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkStack" id="chat_stack">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">False</property>
+                    <property name="transition_type">crossfade</property>
+                    <style>
+                      <class name="polari-chat-stack"/>
+                    </style>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                </child>
+                <child type="overlay">
+                  <object class="GtkRevealer" id="user_list_revealer">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">end</property>
+                    <property name="hexpand">False</property>
+                    <property name="transition_type">slide-left</property>
+                    <child>
+                      <object class="GtkScrolledWindow" id="user_list_scrollview">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox" id="main_input_area">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">6</property>
+                <property name="margin_right">6</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkBox" id="box3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <style>
+                      <class name="linked"/>
+                    </style>
+                    <child>
+                      <object class="GtkEntry" id="nick_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="message_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hexpand">True</property>
+                        <property name="activates_default">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="send_button">
+                    <property name="label" translatable="yes">Send</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="can_default">True</property>
+                    <property name="receives_default">True</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

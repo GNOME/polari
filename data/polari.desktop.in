@@ -1,0 +1,10 @@
+[Desktop Entry]
+_Name=Polari
+_Comment=An Internet Relay Chat Client for GNOME
+Exec=polari
+TryExec=polari
+Icon=
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Network;IRCClient;
+_Keywords=IRC;Internet;Relay;Chat;

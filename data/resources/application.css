@@ -1,0 +1,32 @@
+@define-color polari_dark_bg_color shade(@theme_bg_color, 0.95);
+
+.polari-main-window.background {
+    background-color: @polari_dark_bg_color;
+}
+
+.polari-room-list {
+    background-color: @theme_bg_color;
+}
+
+.polari-room-list .room-list-header {
+    background-color: @polari_dark_bg_color;
+    font-size: smaller;
+    padding: 2px 6px;
+}
+
+.polari-room-list .list-row:selected {
+    background-color: mix(@theme_selected_bg_color, @theme_selected_fg_color, 0.7);
+    color: @theme_text_color;
+}
+
+.polari-room-list .list-row .pending-messages-count {
+    color: @theme_selected_fg_color;
+    background-color: mix(@theme_selected_bg_color, @theme_selected_fg_color, 0.3);
+    font-size: smaller;
+    border-radius: 4px;
+    padding: 0px 4px;
+}
+
+.polari-chat-stack {
+    background-color: @theme_base_color;
+}
