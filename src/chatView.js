@@ -37,6 +37,7 @@ const ChatView = new Lang.Class({
         this._scrollBottom = false;
         this._active = false;
         this._toplevelFocus = false;
+        this._maxNickChars = MAX_NICK_CHARS;
 
         let channelSignals = [
             { name: 'message-received',
@@ -111,10 +112,10 @@ const ChatView = new Lang.Class({
         let pixelWidth = Pango.units_to_double(charWidth);
 
         let tabs = Pango.TabArray.new(1, true);
-        tabs.set_tab(0, Pango.TabAlign.LEFT, MAX_NICK_CHARS * pixelWidth);
+        tabs.set_tab(0, Pango.TabAlign.LEFT, this._maxNickChars * pixelWidth);
         this._view.tabs = tabs;
-        this._view.indent = -MAX_NICK_CHARS * pixelWidth;
-        this._view.left_margin = MAX_NICK_CHARS * pixelWidth;
+        this._view.indent = -this._maxNickChars * pixelWidth;
+        this._view.left_margin = this._maxNickChars * pixelWidth;
     },
 
     _onParentSet: function(widget, oldParent) {
@@ -213,6 +214,11 @@ const ChatView = new Lang.Class({
         let [text, flags] = message.to_text();
 
         this._ensureNewLine();
+
+        if (nick.length > this._maxNickChars) {
+            this._maxNickChars = nick.length;
+            this._updateIndent();
+        }
 
         let tags = [];
         if (message.get_message_type() == Tp.ChannelTextMessageType.ACTION) {
