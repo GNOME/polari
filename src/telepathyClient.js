@@ -1,10 +1,14 @@
 const Gdk = imports.gi.Gdk;
+const GLib = imports.gi.GLib;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Signals = imports.signals;
+
+const TP_ERROR_PREFIX = 'org.freedesktop.Telepathy.Error.'
+const TP_ERROR_ALREADY_CONNECTED = TP_ERROR_PREFIX + 'AlreadyConnected';
 
 const TelepathyClient = new Lang.Class({
     Name: 'TelepathyClient',
@@ -75,6 +79,11 @@ const TelepathyClient = new Lang.Class({
             }));
     },
 
+    _updateAccountName: function(account, name, callback) {
+        let params = GLib.Variant.new('a{sv}', { account: GLib.Variant.new('s', name) });
+        account.update_parameters_vardict_async(params, [], callback);
+    },
+
     joinRoom: function(account, name) {
         let channelRequest = Tp.AccountChannelRequest.new_text(account,
                                                                Gdk.CURRENT_TIME);
@@ -82,13 +91,34 @@ const TelepathyClient = new Lang.Class({
         channelRequest.set_delegate_to_preferred_handler(true);
         let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
         channelRequest.ensure_channel_async(preferredHandler, null,
-            function(req, res) {
+            Lang.bind(this, function(req, res) {
                 try {
                     req.ensure_channel_finish(res);
+
+                    if (account._originalNick)
+                        this._updateAccountName(account, account._originalNick,
+                            function() {
+                                delete account._originalNick;
+                            });
+                } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
+                    let [error,] = account.dup_detailed_error_vardict();
+                    if (error != TP_ERROR_ALREADY_CONNECTED)
+                        throw(e);
+
+                    // Try again with a different nick
+                    if (!account._originalNick)
+                        account._originalNick = account.nickname;
+                    let params = account.dup_parameters_vardict().deep_unpack();
+                    let oldNick = params['account'].deep_unpack();
+                    let nick = oldNick + '_';
+                    this._updateAccountName(account, nick, Lang.bind(this,
+                        function() {
+                            this.joinRoom(account, name);
+                        }));
                 } catch (e) {
-                    log(e);
+                    logError(e, "Failed to create channel");
                 }
-            });
+            }));
     },
 
     _observeChannels: function(observer, account, conn, channels, op, requests, context) {
