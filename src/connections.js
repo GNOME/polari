@@ -95,7 +95,10 @@ const ConnectionsDialog = new Lang.Class({
 
         sw.connect('notify::active',
             function() {
-                account.set_enabled_async(sw.active, null);
+                account.set_enabled_async(sw.active, Lang.bind(this,
+                    function(a, res) {
+                        a.set_enabled_finish(res);
+                    }));
             });
     },
 
