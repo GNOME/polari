@@ -19,6 +19,11 @@
     color: @theme_text_color;
 }
 
+.polari-room-list .list-row:selected:backdrop {
+    background-color: @theme_unfocused_selected_bg_color;
+    color: @theme_unfocused_text_color;
+}
+
 .polari-room-list .list-row .pending-messages-count {
     color: @theme_selected_fg_color;
     background-color: mix(@theme_selected_bg_color, @theme_selected_fg_color, 0.3);
@@ -27,6 +32,15 @@
     padding: 0px 4px;
 }
 
+.polari-room-list .list-row .pending-messages-count:backdrop {
+    color: @theme_unfocused_selected_fg_color;
+    background-color: mix(@theme_unfocused_selected_bg_color, @theme_unfocused_selected_fg_color, 0.1);
+}
+
 .polari-chat-stack {
     background-color: @theme_base_color;
+}
+
+.polari-chat-stack:backdrop {
+    background-color: @theme_unfocused_base_color;
 }
