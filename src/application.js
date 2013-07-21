@@ -69,14 +69,16 @@ const Application = new Lang.Class({
                             props[prop] = actionEntry[prop];
                     });
                 let action = new Gio.SimpleAction(props);
+                if (actionEntry.create_hook)
+                    actionEntry.create_hook(action);
                 if (actionEntry.activate)
                     action.connect('activate', actionEntry.activate);
                 if (actionEntry.change_state)
                     action.connect('change-state', actionEntry.change_state);
-                this.add_action(action);
                 if (actionEntry.accel)
                     this.add_accelerator(actionEntry.accel,
                                          'app.' + actionEntry.name, null);
+                this.add_action(action);
         }));
 
         this._window = new MainWindow.MainWindow(this);
