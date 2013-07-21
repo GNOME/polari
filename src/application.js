@@ -8,7 +8,6 @@ const Format = imports.format;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
-const Utils = imports.utils;
 
 const Application = new Lang.Class({
     Name: 'Application',

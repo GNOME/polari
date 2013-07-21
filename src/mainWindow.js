@@ -8,7 +8,6 @@ const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
 const TelepathyClient = imports.telepathyClient;
 const UserList = imports.userList;
-const Utils = imports.utils;
 
 const MAX_NICK_UPDATE_TIME = 5;
 

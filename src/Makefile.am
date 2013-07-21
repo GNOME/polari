@@ -36,7 +36,6 @@ dist_js_DATA = \
 	roomList.js \
 	telepathyClient.js \
 	userList.js \
-	utils.js \
 	$(NULL)
 
 config.js: config.js.in Makefile
