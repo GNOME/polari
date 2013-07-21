@@ -34,6 +34,7 @@
             <property name="halign">center</property>
             <property name="valign">center</property>
             <property name="menu_model">join_menu</property>
+            <property name="action_name">app.room-menu</property>
             <style>
               <class name="image-button"/>
             </style>

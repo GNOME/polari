@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Tp = imports.gi.TelepathyGLib;
 
 const ChatroomManager = imports.chatroomManager;
 const Config = imports.config;
@@ -35,14 +36,20 @@ const Application = new Lang.Class({
         resource._register();
 
         this._chatroomManager = ChatroomManager.getDefault();
+        this._accountManager = Tp.AccountManager.dup();
 
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/app-menu.ui');
         this.set_app_menu(builder.get_object('app-menu'));
 
         let actionEntries = [
+          { name: 'room-menu',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._accountActionsCreateHook),
+            state: GLib.Variant.new('b', false) },
           { name: 'join-room',
             activate: Lang.bind(this, this._onJoinRoom),
+            create_hook: Lang.bind(this, this._accountActionsCreateHook),
             accel: '<Primary>n' },
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser) },
@@ -105,6 +112,36 @@ const Application = new Lang.Class({
     vfunc_activate: function() {
         if (this._window)
             this._window.window.present();
+    },
+
+    _updateAccountAction: function(action) {
+        action.enabled = this._accountManager.dup_valid_accounts().filter(
+            function(a) {
+                return a.enabled;
+            }).length > 0;
+    },
+
+    _accountActionsCreateHook: function(action) {
+        this._accountManager.connect('account-enabled', Lang.bind(this,
+            function() {
+                this._updateAccountAction(action);
+            }));
+        this._accountManager.connect('account-disabled', Lang.bind(this,
+            function() {
+                this._updateAccountAction(action);
+            }));
+        this._accountManager.connect('account-validity-changed', Lang.bind(this,
+            function() {
+                this._updateAccountAction(action);
+            }));
+        this._accountManager.connect('account-removed', Lang.bind(this,
+            function() {
+                this._updateAccountAction(action);
+            }));
+        this._accountManager.prepare_async(null, Lang.bind(this,
+            function() {
+                this._updateAccountAction(action);
+            }));
     },
 
     _updateRoomAction: function(action) {
