@@ -39,14 +39,17 @@ const Application = new Lang.Class({
 
         let actionEntries = [
           { name: 'join-room',
-            activate: Lang.bind(this, this._onJoinRoom) },
+            activate: Lang.bind(this, this._onJoinRoom),
+            accel: '<Primary>n' },
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser) },
           { name: 'leave-room',
-            activate: Lang.bind(this, this._onLeaveRoom) },
+            activate: Lang.bind(this, this._onLeaveRoom),
+            accel: '<Primary>w' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
-            state: GLib.Variant.new('b', false) },
+            state: GLib.Variant.new('b', false),
+            accel: 'F9' },
           { name: 'connections',
             activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
@@ -54,7 +57,8 @@ const Application = new Lang.Class({
           { name: 'about',
             activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
-            activate: Lang.bind(this, this._onQuit) }
+            activate: Lang.bind(this, this._onQuit),
+            accel: '<Primary>q' }
         ];
         actionEntries.forEach(Lang.bind(this,
             function(actionEntry) {
@@ -70,15 +74,9 @@ const Application = new Lang.Class({
                 if (actionEntry.change_state)
                     action.connect('change-state', actionEntry.change_state);
                 this.add_action(action);
-        }));
-        let accels = [
-          { accel: '<Primary>q', action: 'app.quit', parameter: null },
-          { accel: '<Primary>n', action: 'app.join-room', parameter: null },
-          { accel: '<Primary>w', action: 'app.leave-room', parameter: null },
-          { accel: 'F9', action: 'app.user-list', parameter: null }
-        ];
-        accels.forEach(Lang.bind(this, function(a) {
-            this.add_accelerator(a.accel, a.action, a.parameter);
+                if (actionEntry.accel)
+                    this.add_accelerator(actionEntry.accel,
+                                         'app.' + actionEntry.name, null);
         }));
 
         this._window = new MainWindow.MainWindow(this);
