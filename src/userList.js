@@ -101,7 +101,7 @@ const UserList = new Lang.Class({
                                 margin_left: 6,
                                 margin_right: 6,
                                 spacing: 6 });
-        box.add(new Gtk.Label({ label: '<b>' + "All" + '</b>',
+        box.add(new Gtk.Label({ label: '<b>' + _("All") + '</b>',
                                 use_markup: true,
                                 hexpand: true,
                                 halign: Gtk.Align.START }));

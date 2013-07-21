@@ -205,8 +205,8 @@ const ConnectionDetailsDialog = new Lang.Class({
         this._createWindow();
 
         if (account) {
-            this.widget.title = 'Edit Connection';
-            this._confirmButton.label = 'Apply';
+            this.widget.title = _("Edit Connection");
+            this._confirmButton.label = _("A_pply");
 
             this._populateFromAccount(account);
         }

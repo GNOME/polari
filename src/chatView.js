@@ -170,34 +170,36 @@ const ChatView = new Lang.Class({
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
-        this._insertStatus('%s is now known as %s'.format(oldMember.alias,
-                                                          newMember.alias));
+        this._insertStatus(_("%s is now known as %s").format(oldMember.alias,
+                                                             newMember.alias));
     },
 
     _onMemberDisconnected: function(room, member) {
-        this._insertStatus('%s has disconnected'.format(member.alias));
+        this._insertStatus(_("%s has disconnected").format(member.alias));
     },
 
     _onMemberKicked: function(room, member, actor) {
-        let message = !actor ? '%s has been kicked'.format(member.alias)
-                             : '%s has been kicked by %s'.format(member.alias,
-                                                                 actor.alias);
+        let message =
+            actor ? _("%s has been kicked by %s").format(member.alias,
+                                                         actor.alias)
+                  : _("%s has been kicked").format(member.alias);
         this._insertStatus(message);
     },
 
     _onMemberBanned: function(room, member, actor) {
-        let message = !actor ? '%s has been banned'.format(member.alias)
-                             : '%s has been banned by %s'.format(member.alias,
-                                                                 actor.alias);
+        let message =
+            actor ? _("%s has been banned by %s").format(member.alias,
+                                                         actor.alias)
+                  : _("%s has been banned").format(member.alias)
         this._insertStatus(message);
     },
 
     _onMemberJoined: function(room, member) {
-        this._insertStatus('%s joined'.format(member.alias));
+        this._insertStatus(_("%s joined").format(member.alias));
     },
 
     _onMemberLeft: function(room, member, message) {
-        let text = '%s left'.format(member.alias);
+        let text = _("%s left").format(member.alias);
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text);

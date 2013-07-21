@@ -5,6 +5,7 @@ const Gtk = imports.gi.Gtk;
 const Config = imports.config;
 const Connections = imports.connections;
 const Format = imports.format;
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const Utils = imports.utils;
@@ -15,6 +16,9 @@ const Application = new Lang.Class({
 
     _init: function() {
         this.parent({ application_id: 'org.gnome.Polari' });
+
+        Gettext.bindtextdomain('polari', Config.LOCALE_DIR);
+        Gettext.textdomain('polari');
         GLib.set_prgname('polari');
         GLib.set_application_name('Polari');
         this._window = null;
@@ -23,6 +27,9 @@ const Application = new Lang.Class({
     vfunc_startup: function() {
         this.parent();
         String.prototype.format = Format.format;
+
+        window._ = Gettext.gettext;
+        window.C_ = Gettext.pgettext;
 
         let resource = Gio.Resource.load(Config.RESOURCE_DIR + '/polari.gresource');
         resource._register();
@@ -81,15 +88,24 @@ const Application = new Lang.Class({
     },
 
     _showAbout: function() {
-        let authors = [ 'Florian M' + String.fromCharCode(0x00FC) + 'llner <fmuellner@gnome.org>' ];
-        let dialog = new Gtk.AboutDialog({ transient_for: this._window.window,
-                                           modal: true,
+        let aboutParams = {
+            authors: [
+                'Florian M' + String.fromCharCode(0x00FC) // ü
+                            + 'llner <fmuellner@gnome.org>',
+            ],
+            translator_credits: _("translator-credits"),
+            comments: _('An Internet Relay Chat Client for GNOME'),
+            copyright: 'Copyright ' + String.fromCharCode(0x00A9) // ©
+                                    + ' 2013 Red Hat, Inc.',
+            license_type: Gtk.License.GPL_2_0,
+            wrap_license: true,
+            version: Config.PACKAGE_VERSION,
 
-                                           authors: authors,
-                                           comments: 'An Internet Relay Chat Client for GNOME',
-                                           version: Config.PACKAGE_VERSION,
-                                           license_type: Gtk.License.GPL_3_0,
-                                           wrap_license: true });
+            transient_for: this._window.window,
+            modal: true
+        };
+
+        let dialog = new Gtk.AboutDialog(aboutParams);
         dialog.show();
         dialog.connect('response', function() {
             dialog.destroy();
