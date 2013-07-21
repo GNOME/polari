@@ -5,11 +5,11 @@
     <section>
       <item>
         <attribute name="label" translatable="yes">Join a Room</attribute>
-        <attribute name="action">win.join-room</attribute>
+        <attribute name="action">app.join-room</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Message a User</attribute>
-        <attribute name="action">win.message-user</attribute>
+        <attribute name="action">app.message-user</attribute>
       </item>
     </section>
   </menu>
@@ -57,7 +57,7 @@
             <property name="receives_default">True</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="action_name">win.leave-room</property>
+            <property name="action_name">app.leave-room</property>
             <style>
               <class name="image-button"/>
             </style>
@@ -81,7 +81,7 @@
             <property name="receives_default">True</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="action_name">win.user-list</property>
+            <property name="action_name">app.user-list</property>
             <style>
               <class name="image-button"/>
             </style>

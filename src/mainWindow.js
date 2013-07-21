@@ -42,32 +42,7 @@ const MainWindow = new Lang.Class({
         this._nicknameChangedId = 0;
         this._channelChangedId = 0;
 
-        let actionEntries = [
-          { name: 'join-room',
-            activate: Lang.bind(this, this._joinRoom) },
-          { name: 'message-user',
-            activate: Lang.bind(this, this._messageUser) },
-          { name: 'leave-room',
-            activate: Lang.bind(this, this._leaveRoom) },
-          { name: 'user-list',
-            activate: Lang.bind(this, this._toggleAction),
-            state: GLib.Variant.new('b', false) }
-        ];
-        Utils.createActions(actionEntries).forEach(Lang.bind(this,
-            function(a) {
-                this.window.add_action(a);
-            }));
         this._updateActionStates();
-
-        let accels = [
-          { accel: '<Primary>n', action: 'win.join-room', parameter: null },
-          { accel: '<Primary>w', action: 'win.leave-room', parameter: null },
-          { accel: 'F9', action: 'win.user-list', parameter: null }
-        ];
-        accels.forEach(Lang.bind(this, function(a) {
-            app.add_accelerator(a.accel, a.action, a.parameter);
-        }));
-
 
         this._titlebar = builder.get_object('titlebar');
         this._revealer = builder.get_object('room_list_revealer');
@@ -88,7 +63,7 @@ const MainWindow = new Lang.Class({
         scroll.add(this._userListStack);
 
         let revealer = builder.get_object('user_list_revealer');
-        this.window.connect('action-state-changed::user-list', Lang.bind(this,
+        app.connect('action-state-changed::user-list', Lang.bind(this,
             function(group, actionName, value) {
                 revealer.reveal_child = value.get_boolean();
             }));
@@ -201,7 +176,7 @@ const MainWindow = new Lang.Class({
             }));
     },
 
-    _joinRoom: function() {
+    showJoinRoomDialog: function() {
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/join-room-dialog.ui');
 
@@ -238,19 +213,6 @@ const MainWindow = new Lang.Class({
             }
             dialog.destroy();
         }));
-    },
-
-    _messageUser: function() {
-        log('Activated action "Message user"');
-    },
-
-    _leaveRoom: function() {
-        this._room.leave();
-    },
-
-    _toggleAction: function(action) {
-        let state = action.get_state();
-        action.change_state(GLib.Variant.new('b', !state.get_boolean()));
     },
 
     _updateTitlebar: function() {
@@ -295,7 +257,7 @@ const MainWindow = new Lang.Class({
         let actionNames = ['leave-room', 'user-list'];
         actionNames.forEach(Lang.bind(this,
             function(actionName) {
-                let action = this.window.lookup_action(actionName);
+                let action = this.window.application.lookup_action(actionName);
                 action.enabled = this._room != null;
                 if (action.state && !action.enabled)
                     action.change_state(GLib.Variant.new('b', false));

@@ -39,20 +39,48 @@ const Application = new Lang.Class({
         this.set_app_menu(builder.get_object('app-menu'));
 
         let actionEntries = [
+          { name: 'join-room',
+            activate: Lang.bind(this, this._onJoinRoom) },
+          { name: 'message-user',
+            activate: Lang.bind(this, this._onMessageUser) },
+          { name: 'leave-room',
+            activate: Lang.bind(this, this._onLeaveRoom) },
+          { name: 'user-list',
+            activate: Lang.bind(this, this._onToggleAction),
+            state: GLib.Variant.new('b', false) },
           { name: 'connections',
-            activate: Lang.bind(this, this._listConnections) },
+            activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
-            activate: Lang.bind(this, this._showPreferences) },
+            activate: Lang.bind(this, this._onShowPreferences) },
           { name: 'about',
-            activate: Lang.bind(this, this._showAbout) },
+            activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
-            activate: Lang.bind(this, this.release) }
+            activate: Lang.bind(this, this._onQuit) }
         ];
-        Utils.createActions(actionEntries).forEach(Lang.bind(this,
-            function(a) {
-                this.add_action(a);
-            }));
-        this.add_accelerator('<Primary>q', 'app.quit', null);
+        actionEntries.forEach(Lang.bind(this,
+            function(actionEntry) {
+                let props = {};
+                ['name', 'state', 'parameter_type'].forEach(
+                    function(prop) {
+                        if (actionEntry[prop])
+                            props[prop] = actionEntry[prop];
+                    });
+                let action = new Gio.SimpleAction(props);
+                if (actionEntry.activate)
+                    action.connect('activate', actionEntry.activate);
+                if (actionEntry.change_state)
+                    action.connect('change-state', actionEntry.change_state);
+                this.add_action(action);
+        }));
+        let accels = [
+          { accel: '<Primary>q', action: 'app.quit', parameter: null },
+          { accel: '<Primary>n', action: 'app.join-room', parameter: null },
+          { accel: '<Primary>w', action: 'app.leave-room', parameter: null },
+          { accel: 'F9', action: 'app.user-list', parameter: null }
+        ];
+        accels.forEach(Lang.bind(this, function(a) {
+            this.add_accelerator(a.accel, a.action, a.parameter);
+        }));
 
         this._window = new MainWindow.MainWindow(this);
 
@@ -75,7 +103,24 @@ const Application = new Lang.Class({
             this._window.window.present();
     },
 
-    _listConnections: function() {
+    _onJoinRoom: function() {
+        this._window.showJoinRoomDialog();
+    },
+
+    _onMessageUser: function() {
+        log('Activated action "Message user"');
+    },
+
+    _onLeaveRoom: function() {
+        this._window._room.leave();
+    },
+
+    _onToggleAction: function(action) {
+        let state = action.get_state();
+        action.change_state(GLib.Variant.new('b', !state.get_boolean()));
+    },
+
+    _onListConnections: function() {
         let dialog = new Connections.ConnectionsDialog();
         dialog.widget.show();
         dialog.widget.connect('response',
@@ -84,10 +129,10 @@ const Application = new Lang.Class({
             });
     },
 
-    _showPreferences: function() {
+    _onShowPreferences: function() {
     },
 
-    _showAbout: function() {
+    _onShowAbout: function() {
         let aboutParams = {
             authors: [
                 'Florian M' + String.fromCharCode(0x00FC) // ü
@@ -110,5 +155,9 @@ const Application = new Lang.Class({
         dialog.connect('response', function() {
             dialog.destroy();
         });
+    },
+
+    _onQuit: function() {
+        this._window.window.destroy();
     }
 });
