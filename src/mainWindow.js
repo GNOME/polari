@@ -41,8 +41,6 @@ const MainWindow = new Lang.Class({
         this._nicknameChangedId = 0;
         this._channelChangedId = 0;
 
-        this._updateActionStates();
-
         this._titlebar = builder.get_object('titlebar');
         this._revealer = builder.get_object('room_list_revealer');
         this._chatStack = builder.get_object('chat_stack');
@@ -143,7 +141,6 @@ const MainWindow = new Lang.Class({
 
         this._updateTitlebar();
         this._updateAccount();
-        this._updateActionStates();
     },
 
     _setNick: function(nick) {
@@ -250,16 +247,5 @@ const MainWindow = new Lang.Class({
 
         this._sendButton.grab_default();
         this._entry.grab_focus();
-    },
-
-    _updateActionStates: function() {
-        let actionNames = ['leave-room', 'user-list'];
-        actionNames.forEach(Lang.bind(this,
-            function(actionName) {
-                let action = this.window.application.lookup_action(actionName);
-                action.enabled = this._room != null;
-                if (action.state && !action.enabled)
-                    action.change_state(GLib.Variant.new('b', false));
-            }));
     }
 });

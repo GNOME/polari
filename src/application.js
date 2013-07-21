@@ -2,6 +2,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 
+const ChatroomManager = imports.chatroomManager;
 const Config = imports.config;
 const Connections = imports.connections;
 const Format = imports.format;
@@ -33,6 +34,8 @@ const Application = new Lang.Class({
         let resource = Gio.Resource.load(Config.RESOURCE_DIR + '/polari.gresource');
         resource._register();
 
+        this._chatroomManager = ChatroomManager.getDefault();
+
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/app-menu.ui');
         this.set_app_menu(builder.get_object('app-menu'));
@@ -45,9 +48,11 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onMessageUser) },
           { name: 'leave-room',
             activate: Lang.bind(this, this._onLeaveRoom),
+            create_hook: Lang.bind(this, this._roomActionsCreateHook),
             accel: '<Primary>w' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._roomActionsCreateHook),
             state: GLib.Variant.new('b', false),
             accel: 'F9' },
           { name: 'connections',
@@ -100,6 +105,20 @@ const Application = new Lang.Class({
     vfunc_activate: function() {
         if (this._window)
             this._window.window.present();
+    },
+
+    _updateRoomAction: function(action) {
+        action.enabled = this._chatroomManager.roomCount > 0;
+        if (action.state && !action.enabled)
+            action.change_state(GLib.Variant.new('b', false));
+    },
+
+    _roomActionsCreateHook: function(action) {
+        this._chatroomManager.connect('active-changed', Lang.bind(this,
+            function() {
+                this._updateRoomAction(action);
+            }));
+        this._updateRoomAction(action);
     },
 
     _onJoinRoom: function() {
