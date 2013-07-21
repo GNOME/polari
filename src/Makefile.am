@@ -30,6 +30,7 @@ dist_js_DATA = \
 	application.js \
 	chatroomManager.js \
 	chatView.js \
+	connections.js \
 	main.js \
 	mainWindow.js \
 	roomList.js \

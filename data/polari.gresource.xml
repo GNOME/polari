@@ -2,6 +2,8 @@
 <gresources>
   <gresource prefix="/org/gnome/polari">
     <file alias="app-menu.ui" preprocess="xml-stripblanks">resources/app-menu.ui</file>
+    <file alias="connection-details-dialog.ui" preprocess="xml-stripblanks">resources/connection-details-dialog.ui</file>
+    <file alias="connection-list-dialog.ui" preprocess="xml-stripblanks">resources/connection-list-dialog.ui</file>
     <file alias="join-room-dialog.ui" preprocess="xml-stripblanks">resources/join-room-dialog.ui</file>
     <file alias="main-window.ui" preprocess="xml-stripblanks">resources/main-window.ui</file>
     <file alias="application.css">resources/application.css</file>

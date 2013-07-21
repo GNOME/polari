@@ -1,5 +1,7 @@
 data/polari.desktop.in
 [type: gettext/glade]data/resources/app-menu.ui
+[type: gettext/glade]data/resources/connection-details-dialog.ui
+[type: gettext/glade]data/resources/connection-list-dialog.ui
 [type: gettext/glade]data/resources/join-room-dialog.ui
 [type: gettext/glade]data/resources/main-window.ui
 src/application.js

@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 
 const Config = imports.config;
+const Connections = imports.connections;
 const Format = imports.format;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
@@ -68,6 +69,12 @@ const Application = new Lang.Class({
     },
 
     _listConnections: function() {
+        let dialog = new Connections.ConnectionsDialog();
+        dialog.widget.show();
+        dialog.widget.connect('response',
+            function(widget) {
+                widget.destroy();
+            });
     },
 
     _showPreferences: function() {
