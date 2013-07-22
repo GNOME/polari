@@ -62,28 +62,6 @@ static guint signals[LAST_SIGNAL];
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
 void
-polari_room_send (PolariRoom *room,
-                  const char *message)
-{
-  TpMessage *tp_message;
-  TpChannelTextMessageType type;
-
-  g_return_if_fail (POLARI_IS_ROOM (room));
-
-  type = TP_CHANNEL_TEXT_MESSAGE_TYPE_NORMAL;
-
-  if (g_str_has_prefix (message, "/me "))
-    {
-      message += strlen ("/me ");
-      type = TP_CHANNEL_TEXT_MESSAGE_TYPE_ACTION;
-    }
-  tp_message = tp_client_message_new_text (type, message);
-
-  tp_text_channel_send_message_async (TP_TEXT_CHANNEL (room->priv->channel),
-                                      tp_message, 0, NULL, NULL);
-}
-
-void
 polari_room_leave (PolariRoom *room)
 {
   g_return_if_fail (POLARI_IS_ROOM (room));

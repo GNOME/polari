@@ -48,7 +48,6 @@ struct _PolariRoomClass {
 
 GType polari_room_get_type (void) G_GNUC_CONST;
 
-void  polari_room_send    (PolariRoom *room, const char *message);
 void  polari_room_leave   (PolariRoom *room);
 
 gboolean polari_room_should_highlight_message (PolariRoom *room,
