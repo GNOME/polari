@@ -145,7 +145,7 @@ const Application = new Lang.Class({
     },
 
     _updateRoomAction: function(action) {
-        action.enabled = this._chatroomManager.roomCount > 0;
+        action.enabled = this._chatroomManager.getActiveRoom() != null;
         if (action.state && !action.enabled)
             action.change_state(GLib.Variant.new('b', false));
     },
