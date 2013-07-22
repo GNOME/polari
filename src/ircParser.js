@@ -20,7 +20,6 @@ const knownCommands = {
     MODE: "/MODE <mode> <nick|channel> - ",
     NOTICE: _("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
     OP: _("/OP <nick> - gives channel operator status to <nick>"),
-    QUERY: _("</QUERY <nick> - opens a private conversation with <nick>"),
     WHOIS: _("/WHOIS <nick> - requests information on <nick>"),
     */
 
@@ -30,6 +29,7 @@ const knownCommands = {
     NAMES: _("/NAMES - lists users on the current channel"),
     NICK: _("/NICK <nickname> - sets your nick to <nickname>"),
     PART: _("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
+    QUERY: _("</QUERY <nick> - opens a private conversation with <nick>"),
     QUIT: _("</QUIT [<reason>] - disconnects from the current server"),
     SAY: _("</SAY <text> - sends <text> to the current room/contact"),
     TOPIC: _("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
@@ -175,6 +175,29 @@ const IrcParser = new Lang.Class({
                             c.leave_finish(res);
                         } catch(e) {
                             logError(e, 'Failed to leave channel');
+                        }
+                    }));
+                break;
+            }
+            case 'QUERY': {
+                let nick = argv.shift();
+                if (!nick) {
+                    output = this._createFeedbackUsage(cmd);
+                    break;
+                }
+
+                let time = Gdk.CURRENT_TIME;
+                let account = this._room.channel.connection.get_account();
+                let req = Tp.AccountChannelRequest.new_text(account, time);
+                let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+                req.set_target_id(Tp.HandleType.CONTACT, nick);
+                req.set_delegate_to_preferred_handler(true);
+                req.ensure_channel_async(preferredHandler, null, Lang.bind(this,
+                    function(req, res) {
+                        try {
+                            req.ensure_channel_finish(res);
+                        } catch(e) {
+                            logError(e, 'Failed to open private chat');
                         }
                     }));
                 break;
