@@ -59,11 +59,11 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onMessageUser) },
           { name: 'leave-room',
             activate: Lang.bind(this, this._onLeaveRoom),
-            create_hook: Lang.bind(this, this._roomActionsCreateHook),
+            create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accel: '<Primary>w' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
-            create_hook: Lang.bind(this, this._roomActionsCreateHook),
+            create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accel: 'F9' },
           { name: 'connections',
@@ -148,18 +148,27 @@ const Application = new Lang.Class({
             }));
     },
 
-    _updateRoomAction: function(action) {
+    _leaveRoomCreateHook: function(action) {
+        this._chatroomManager.connect('active-changed', Lang.bind(this,
+            function() {
+                action.enabled = this._chatroomManager.getActiveRoom() != null;
+            }));
         action.enabled = this._chatroomManager.getActiveRoom() != null;
-        if (action.state && !action.enabled)
+    },
+
+    _updateUserListAction: function(action) {
+        let room = this._chatroomManager.getActiveRoom();
+        action.enabled = room && room.channel.handle_type == Tp.HandleType.ROOM;
+        if (!action.enabled)
             action.change_state(GLib.Variant.new('b', false));
     },
 
-    _roomActionsCreateHook: function(action) {
+    _userListCreateHook: function(action) {
         this._chatroomManager.connect('active-changed', Lang.bind(this,
             function() {
-                this._updateRoomAction(action);
+                this._updateUserListAction(action);
             }));
-        this._updateRoomAction(action);
+        this._updateUserListAction(action);
     },
 
     _onJoinRoom: function() {
