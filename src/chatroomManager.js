@@ -39,6 +39,10 @@ const _ChatroomManager = new Lang.Class({
         this.emit('active-changed', room);
     },
 
+    getActiveRoom: function(room) {
+        return this._activeRoom;
+    },
+
     get roomCount() {
         return Object.keys(this._rooms).length;
     }
