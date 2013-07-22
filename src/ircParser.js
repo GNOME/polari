@@ -21,7 +21,6 @@ const knownCommands = {
     NOTICE: _("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
     OP: _("/OP <nick> - gives channel operator status to <nick>"),
     QUERY: _("</QUERY <nick> - opens a private conversation with <nick>"),
-    TOPIC: _("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
     WHOIS: _("/WHOIS <nick> - requests information on <nick>"),
     */
 
@@ -33,6 +32,7 @@ const knownCommands = {
     PART: _("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
     QUIT: _("</QUIT [<reason>] - disconnects from the current server"),
     SAY: _("</SAY <text> - sends <text> to the current room/contact"),
+    TOPIC: _("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
 };
 const UNKNOWN_COMMAND_MESSAGE =
     _("Unknown command - try /HELP for a list of available commands");
@@ -202,6 +202,13 @@ const IrcParser = new Lang.Class({
                 let type = Tp.ChannelTextMessageType.NORMAL;
                 let message = Tp.ClientMessage.new_text(type, raw);
                 this._sendMessage(message);
+                break;
+            }
+            case 'TOPIC': {
+                if (argv.length)
+                    this._room.set_topic(stripCommand(text));
+                else
+                    output = this._createFeedbackLabel(this._room.topic || _("No topic set"));
                 break;
             }
             default:

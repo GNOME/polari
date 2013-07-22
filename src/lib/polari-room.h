@@ -51,6 +51,8 @@ GType polari_room_get_type (void) G_GNUC_CONST;
 gboolean polari_room_should_highlight_message (PolariRoom *room,
                                                TpMessage *message);
 
+void  polari_room_set_topic (PolariRoom *room, const char *topic);
+
 int   polari_room_compare (PolariRoom *room, PolariRoom *other);
 
 G_END_DECLS

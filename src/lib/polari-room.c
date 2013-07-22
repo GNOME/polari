@@ -100,6 +100,17 @@ polari_room_should_highlight_message (PolariRoom *room,
   return result;
 }
 
+void
+polari_room_set_topic (PolariRoom *room,
+                       const char *topic)
+{
+  g_return_if_fail (POLARI_IS_ROOM (room));
+
+  tp_cli_channel_interface_subject_call_set_subject (room->priv->channel, -1,
+      topic, NULL, NULL, NULL, G_OBJECT (room));
+
+}
+
 int
 polari_room_compare (PolariRoom *room,
                      PolariRoom *other)
