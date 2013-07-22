@@ -87,7 +87,8 @@ const ChatView = new Lang.Class({
             scale: HIGHLIGHT_SCALE },
           { name: 'status',
             foreground_rgba: color,
-            left_margin: 0 }
+            left_margin: 0,
+            indent: 0 }
         ];
         tags.forEach(function(tagProps) {
                 tagTable.add(new Gtk.TextTag(tagProps));
