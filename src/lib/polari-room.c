@@ -219,7 +219,7 @@ on_group_contacts_changed (TpChannel  *channel,
     case TP_CHANNEL_GROUP_CHANGE_REASON_OFFLINE:
       for (i = 0; i < removed->len; i++)
         g_signal_emit (user_data, signals[MEMBER_DISCONNECTED], 0,
-                       g_ptr_array_index (removed, i));
+                       g_ptr_array_index (removed, i), message);
       break;
     case TP_CHANNEL_GROUP_CHANGE_REASON_KICKED:
       for (i = 0; i < removed->len; i++)
@@ -415,7 +415,7 @@ polari_room_class_init (PolariRoomClass *klass)
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL, NULL,
-                  G_TYPE_NONE, 1, TP_TYPE_CONTACT);
+                  G_TYPE_NONE, 2, TP_TYPE_CONTACT, G_TYPE_STRING);
 
   signals[MEMBER_RENAMED] =
     g_signal_new ("member-renamed",

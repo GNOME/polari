@@ -175,8 +175,11 @@ const ChatView = new Lang.Class({
                                                              newMember.alias));
     },
 
-    _onMemberDisconnected: function(room, member) {
-        this._insertStatus(_("%s has disconnected").format(member.alias));
+    _onMemberDisconnected: function(room, member, message) {
+        let text = _("%s has disconnected").format(member.alias);
+        if (message)
+            text += ' (%s)'.format(message);
+        this._insertStatus(text);
     },
 
     _onMemberKicked: function(room, member, actor) {
