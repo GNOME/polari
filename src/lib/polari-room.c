@@ -61,16 +61,6 @@ static guint signals[LAST_SIGNAL];
 
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
-void
-polari_room_leave (PolariRoom *room)
-{
-  g_return_if_fail (POLARI_IS_ROOM (room));
-
-  tp_channel_leave_async (room->priv->channel,
-                          TP_CHANNEL_GROUP_CHANGE_REASON_NONE, "Good bye!",
-                          NULL, NULL);
-}
-
 gboolean
 polari_room_should_highlight_message (PolariRoom *room,
                                       TpMessage *message)

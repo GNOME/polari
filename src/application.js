@@ -171,7 +171,19 @@ const Application = new Lang.Class({
     },
 
     _onLeaveRoom: function() {
-        this._window._room.leave();
+        let reason = Tp.ChannelGroupChangeReason.NONE;
+        let message = _("Good Bye"); // TODO - our first setting!
+        let room = this._chatroomManager.getActiveRoom();
+        if (!room)
+            return;
+        room.channel.leave_async(reason, message, Lang.bind(this,
+            function(c, res) {
+                try {
+                    c.leave_finish(res);
+                } catch(e) {
+                    logError(e, 'Failed to leave channel');
+                }
+            }));
     },
 
     _onToggleAction: function(action) {
