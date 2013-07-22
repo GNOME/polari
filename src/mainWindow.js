@@ -5,6 +5,7 @@ const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
 const IrcParser = imports.ircParser;
+const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
@@ -181,42 +182,13 @@ const MainWindow = new Lang.Class({
     },
 
     showJoinRoomDialog: function() {
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/polari/join-room-dialog.ui');
-
-        let dialog = builder.get_object('join_room_dialog');
-        dialog.set_transient_for(this.window);
-
-        let connectionCombo = builder.get_object('connection_combo');
-
-        let accounts = this._tpClient.getAccounts();
-        let names = accounts.map(function(a) { return a.display_name; });
-        for (let i = 0; i < names.length; i++)
-            connectionCombo.append_text(names[i]);
-        connectionCombo.set_active(0);
-        connectionCombo.sensitive = accounts.length > 1;
-
-        let joinButton = builder.get_object('join_button');
-        joinButton.sensitive = false;
-
-        let nameEntry = builder.get_object('name_entry');
-        nameEntry.connect('changed', function() {
-            joinButton.sensitive = accounts.length > 0 &&
-                                   nameEntry.get_text_length() > 0;
-        });
-        dialog.show();
-        dialog.connect('response', Lang.bind(this, function(dialog, response) {
-            if (response == Gtk.ResponseType.OK) {
-                let account = accounts[connectionCombo.get_active()];
-
-                let room = nameEntry.get_text();
-                if (room[0] != '#')
-                    room = '#' + room;
-
-                this._tpClient.joinRoom(account, room);
-            }
-            dialog.destroy();
-        }));
+        let dialog = new JoinDialog.JoinDialog();
+        dialog.widget.transient_for = this.window;
+        dialog.widget.show();
+        dialog.widget.connect('response',
+            function(widget) {
+                widget.destroy();
+            });
     },
 
     _updateTitlebar: function() {
