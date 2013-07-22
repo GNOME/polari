@@ -1,5 +1,6 @@
 const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
+const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
@@ -107,8 +108,13 @@ const MainWindow = new Lang.Class({
     },
 
     _roomAdded: function(roomManager, room) {
-        let userList = new UserList.UserList(room);
+        let userList;
         let chatView = new ChatView.ChatView(room);
+
+        if (room.channel.handle_type == Tp.HandleType.ROOM)
+            userList = new UserList.UserList(room);
+        else
+            userList = { widget: new Gtk.Label() };
 
         this._rooms[room.id] = [chatView, userList];
 
