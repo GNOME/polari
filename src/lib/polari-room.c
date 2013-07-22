@@ -128,6 +128,7 @@ polari_room_compare (PolariRoom *room,
                      PolariRoom *other)
 {
   TpAccount *account1, *account2;
+  TpHandleType type1, type2;
   TpConnection *conn;
 
   g_return_val_if_fail (POLARI_IS_ROOM (room) && POLARI_IS_ROOM (other), 0);
@@ -142,6 +143,13 @@ polari_room_compare (PolariRoom *room,
   if (account1 != account2)
     return strcmp (tp_account_get_display_name (account1),
                    tp_account_get_display_name (account2));
+
+  tp_channel_get_handle (room->priv->channel, &type1);
+  tp_channel_get_handle (other->priv->channel, &type2);
+
+  if (type1 != type2)
+    return type1 == TP_HANDLE_TYPE_ROOM ? -1 : 1;
+
   return strcmp (room->priv->display_name, other->priv->display_name);
 }
 
