@@ -136,6 +136,11 @@ const IrcParser = new Lang.Class({
                 break;
             }
             case 'NAMES': {
+                let channel = this._room.channel;
+                let members = channel.group_dup_members_contacts().map(
+                    function(m) { return m.alias; });
+                output = this._createFeedbackGrid(_("Users on %s:").format(channel.identifier),
+                                                    members);
                 break;
             }
             case 'NICK': {
