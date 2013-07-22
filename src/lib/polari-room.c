@@ -26,9 +26,12 @@ struct _PolariRoomPrivate {
   GIcon *icon;
   char  *id;
   char  *display_name;
+  char  *topic;
 
   guint identifier_notify_id;
   guint group_contacts_changed_id;
+
+  TpProxySignalConnection *properties_changed_id;
 };
 
 enum
@@ -39,6 +42,7 @@ enum
   PROP_ICON,
   PROP_CHANNEL,
   PROP_DISPLAY_NAME,
+  PROP_TOPIC,
 
   LAST_PROP
 };
@@ -60,6 +64,11 @@ enum
 static guint signals[LAST_SIGNAL];
 
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
+
+#define tp_properties_changed_cb \
+        tp_cli_dbus_properties_signal_callback_properties_changed
+#define tp_properties_get_all_cb \
+        tp_cli_dbus_properties_callback_for_get_all
 
 gboolean
 polari_room_should_highlight_message (PolariRoom *room,
@@ -218,6 +227,50 @@ on_group_contacts_changed (TpChannel  *channel,
 }
 
 static void
+update_subject (PolariRoom *room,
+                GHashTable *properties)
+{
+  PolariRoomPrivate *priv = room->priv;
+  const char *subject;
+
+  subject = tp_asv_get_string (properties, "Subject");
+  if (subject == NULL || g_strcmp0 (priv->topic, subject) == 0)
+    return;
+
+  g_free (priv->topic);
+  priv->topic = *subject ? g_strdup (subject) : NULL;
+
+  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
+}
+
+static void
+subject_get_all (TpProxy *proxy,
+                 GHashTable *properties,
+                 GError     *error,
+                 gpointer    user_data,
+                 GObject    *object)
+{
+  if (error)
+    return;
+
+  update_subject (POLARI_ROOM (user_data), properties);
+}
+
+static void
+properties_changed (TpProxy *proxy,
+                    const char *iface_name,
+                    GHashTable *changed,
+                    const char *invalidated,
+                    gpointer    data,
+                    GObject    *weak_ref)
+{
+  if (strcmp (iface_name, TP_IFACE_CHANNEL_INTERFACE_SUBJECT) != 0)
+    return;
+
+  update_subject (POLARI_ROOM (data), changed);
+}
+
+static void
 polari_room_set_channel (PolariRoom *room,
                          TpChannel  *channel)
 {
@@ -235,6 +288,9 @@ polari_room_set_channel (PolariRoom *room,
     {
       g_signal_handler_disconnect (priv->channel, priv->identifier_notify_id);
       g_signal_handler_disconnect (priv->channel, priv->group_contacts_changed_id);
+
+      tp_proxy_signal_connection_disconnect (priv->properties_changed_id);
+
       g_clear_object (&priv->channel);
     }
 
@@ -245,12 +301,23 @@ polari_room_set_channel (PolariRoom *room,
       if (priv->id == NULL)
         priv->id = g_strdup (tp_proxy_get_object_path (TP_PROXY (channel)));
 
+      tp_cli_dbus_properties_call_get_all (channel, -1,
+                                     TP_IFACE_CHANNEL_INTERFACE_SUBJECT,
+                                     (tp_properties_get_all_cb)subject_get_all,
+                                     room, NULL, NULL);
+
+
       priv->identifier_notify_id =
         g_signal_connect (channel, "notify::identifier",
                           G_CALLBACK (on_identifier_notify), room);
       priv->group_contacts_changed_id =
         g_signal_connect (channel, "group-contacts-changed",
                           G_CALLBACK (on_group_contacts_changed), room);
+      priv->properties_changed_id =
+        tp_cli_dbus_properties_connect_to_properties_changed (
+                                 channel,
+                                 (tp_properties_changed_cb) properties_changed,
+                                 room, NULL, NULL, NULL);
     }
 
     g_object_freeze_notify (G_OBJECT (room));
@@ -284,6 +351,9 @@ polari_room_get_property (GObject    *object,
       break;
     case PROP_DISPLAY_NAME:
       g_value_set_string (value, priv->display_name);
+      break;
+    case PROP_TOPIC:
+      g_value_set_string (value, priv->topic);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -349,6 +419,13 @@ polari_room_class_init (PolariRoomClass *klass)
     g_param_spec_string ("display-name",
                          "Display name",
                          "Display name",
+                         NULL,
+                         G_PARAM_READABLE);
+
+  props[PROP_TOPIC] =
+    g_param_spec_string ("topic",
+                         "Topic",
+                         "Topic",
                          NULL,
                          G_PARAM_READABLE);
 

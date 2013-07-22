@@ -49,6 +49,7 @@ const MainWindow = new Lang.Class({
         this._account = null;
 
         this._displayNameChangedId = 0;
+        this._topicChangedId = 0;
         this._nicknameChangedId = 0;
         this._channelChangedId = 0;
 
@@ -134,9 +135,11 @@ const MainWindow = new Lang.Class({
     _activeRoomChanged: function(manager, room) {
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
+            this._room.disconnect(this._topicChangedId);
             this._room.disconnect(this._channelChangedId);
         }
         this._displayNameChangedId = 0;
+        this._topicChangedId = 0;
         this._channelChangedId = 0;
 
         this._room = room;
@@ -144,6 +147,9 @@ const MainWindow = new Lang.Class({
         if (this._room) {
             this._displayNameChangedId =
                 this._room.connect('notify::display-name',
+                                   Lang.bind(this, this._updateTitlebar));
+            this._topicChangedId =
+                this._room.connect('notify::topic',
                                    Lang.bind(this, this._updateTitlebar));
             this._channelChangedId =
                 this._room.connect('notify::channel',
@@ -199,6 +205,7 @@ const MainWindow = new Lang.Class({
 
     _updateTitlebar: function() {
         this._titlebar.title = this._room ? this._room.display_name : null;
+        this._titlebar.subtitle = this._room ? this._room.topic : null;
     },
 
     _updateAccount: function() {
