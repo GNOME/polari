@@ -158,7 +158,6 @@ update_identifier (PolariRoom *room)
   if (id)
     priv->display_name = g_strdup (id + (id[0] == '#' ? 1 : 0));
 
-  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ID]);
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_DISPLAY_NAME]);
 }
 
