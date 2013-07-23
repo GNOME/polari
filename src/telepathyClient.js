@@ -23,7 +23,7 @@ const TelepathyClient = new Lang.Class({
             'Polari', true, Lang.bind(this, this._observeChannels));
 
         this._handler = Tp.SimpleHandler.new_with_am(this._accountMgr, false,
-            false, 'Polari', true, Lang.bind(this, this._handleChannels));
+            false, 'Polari', false, Lang.bind(this, this._handleChannels));
 
         let filters = [];
 
