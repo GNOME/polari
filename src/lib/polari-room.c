@@ -107,8 +107,54 @@ polari_room_set_topic (PolariRoom *room,
   g_return_if_fail (POLARI_IS_ROOM (room));
 
   tp_cli_channel_interface_subject_call_set_subject (room->priv->channel, -1,
-      topic, NULL, NULL, NULL, G_OBJECT (room));
+      topic, NULL, NULL, NULL, NULL);
 
+}
+
+void
+polari_room_add_member (PolariRoom *room,
+                        TpContact  *member)
+{
+  TpChannel *channel;
+
+  g_return_if_fail (POLARI_IS_ROOM (room));
+
+  channel = room->priv->channel;
+
+  if (!tp_proxy_has_interface_by_id (TP_PROXY (channel),
+                                     TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP))
+    return;
+
+  {
+    TpHandle handle = tp_contact_get_handle (member);
+    GArray handles = { (char *)&handle, 1 };
+
+    tp_cli_channel_interface_group_call_add_members (channel,
+                                   -1, &handles, NULL, NULL, NULL, NULL, NULL);
+  }
+}
+
+void
+polari_room_remove_member (PolariRoom *room,
+                           TpContact  *member)
+{
+  TpChannel *channel;
+
+  g_return_if_fail (POLARI_IS_ROOM (room));
+
+  channel = room->priv->channel;
+
+  if (!tp_proxy_has_interface_by_id (TP_PROXY (channel),
+                                     TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP))
+    return;
+
+  {
+    TpHandle handle = tp_contact_get_handle (member);
+    GArray handles = { (char *)&handle, 1 };
+
+    tp_cli_channel_interface_group_call_remove_members (channel,
+                                   -1, &handles, NULL, NULL, NULL, NULL, NULL);
+  }
 }
 
 int

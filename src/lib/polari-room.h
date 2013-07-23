@@ -53,6 +53,9 @@ gboolean polari_room_should_highlight_message (PolariRoom *room,
 
 void  polari_room_set_topic (PolariRoom *room, const char *topic);
 
+void  polari_room_add_member    (PolariRoom *room, TpContact *member);
+void  polari_room_remove_member (PolariRoom *room, TpContact *member);
+
 int   polari_room_compare (PolariRoom *room, PolariRoom *other);
 
 G_END_DECLS
