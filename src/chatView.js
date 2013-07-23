@@ -72,8 +72,10 @@ const ChatView = new Lang.Class({
         this.widget.connect('parent-set', Lang.bind(this, this._onParentSet));
         this.widget.connect('hierarchy-changed',
                             Lang.bind(this, this._onHierarchyChanged));
+        this.widget.vadjustment.connect('value-changed',
+                                        Lang.bind(this, this._checkMessages));
         this.widget.vadjustment.connect('changed',
-                                        Lang.bind(this, this._onAdjustmentChanged));
+                                        Lang.bind(this, this._updateScroll));
         this._view.connect('button-release-event',
                            Lang.bind(this, this._handleLinkClicks));
         this._view.connect('motion-notify-event',
@@ -82,11 +84,11 @@ const ChatView = new Lang.Class({
         this._room = room;
         this._lastNick = null;
         this._stackNotifyVisibleChildId = 0;
-        this._scrollBottom = false;
         this._active = false;
         this._toplevelFocus = false;
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveringLink = false;
+        this._pending = [];
 
         this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
@@ -94,7 +96,9 @@ const ChatView = new Lang.Class({
             { name: 'message-received',
               handler: Lang.bind(this, this._insertMessage) },
             { name: 'message-sent',
-              handler: Lang.bind(this, this._insertMessage) }
+              handler: Lang.bind(this, this._insertMessage) },
+            { name: 'pending-message-removed',
+              handler: Lang.bind(this, this._pendingMessageRemoved) }
         ];
         this._channelSignals = [];
         channelSignals.forEach(Lang.bind(this, function(signal) {
@@ -126,7 +130,8 @@ const ChatView = new Lang.Class({
         let color = context.get_color(Gtk.StateFlags.NORMAL);
         context.restore();
 
-        let tagTable = this._view.get_buffer().get_tag_table();
+        let buffer = this._view.get_buffer();
+        let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
             foreground_rgba: color,
@@ -212,12 +217,19 @@ const ChatView = new Lang.Class({
         this._checkMessages();
     },
 
-    _onAdjustmentChanged: function(adjustment) {
-        if (!this._scrollBottom)
-            return;
+    _updateScroll: function() {
+        if (this._pending.length == 0)
+            this.widget.vadjustment.value = this.widget.vadjustment.upper;
+    },
 
-        this._scrollBottom = false;
-        adjustment.value = adjustment.upper;
+    _pendingMessageRemoved: function(channel, message) {
+        for (let i = 0; i < this._pending.length; i++) {
+            if (this._pending[i].message != message)
+                continue;
+
+            this._pending.splice(i, 1);
+            break;
+        }
     },
 
     _handleLinkClicks: function(view, event) {
@@ -263,8 +275,21 @@ const ChatView = new Lang.Class({
     },
 
     _checkMessages: function() {
-        if (this._active && this._toplevelFocus)
-            this._room.channel.ack_all_pending_messages_async(null);
+        if (!this._pending.length)
+            return;
+
+        if (!this._active || !this._toplevelFocus)
+            return;
+
+        let rect = this._view.get_visible_rect();
+        let buffer = this._view.get_buffer();
+        for (let i = 0; i < this._pending.length; i++) {
+            let pending = this._pending[i];
+            let iter = buffer.get_iter_at_mark(pending.mark);
+            let iterRect = this._view.get_iter_location(iter);
+            if (rect.y <= iterRect.y && rect.y + rect.height > iterRect.y)
+                this._room.channel.ack_message_async(pending.message, null);
+        }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -355,7 +380,15 @@ const ChatView = new Lang.Class({
         }
         this._insertWithTags(text.substr(pos), tags);
 
-        this._checkMessages();
+
+        let buffer = this._view.get_buffer();
+        if (message.get_pending_message_id() == 0 /* outgoing */ ||
+            (this._active && this._toplevelFocus && this._pending.length == 0)) {
+            this._room.channel.ack_message_async(message, null);
+        } else {
+            let mark = buffer.create_mark(null, buffer.get_end_iter(), true);
+            this._pending.push({ message: message, mark: mark });
+        }
     },
 
     _ensureNewLine: function() {
@@ -379,7 +412,6 @@ const ChatView = new Lang.Class({
         let offset = iter.get_offset();
 
         buffer.insert(iter, text, -1);
-        this._scrollBottom = this._active && this._toplevelFocus;
 
         let start = buffer.get_iter_at_offset(offset);
 
