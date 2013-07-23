@@ -14,8 +14,6 @@ const knownCommands = {
     /* commands that would be nice to support: */
     /*
     AWAY: _("/AWAY [<message>] - sets or unsets away message"),
-    INVITE: _("/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"),
-    KICK: _("/KICK <nick> - kicks <nick> from current channel"),
     LIST: _("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
     MODE: "/MODE <mode> <nick|channel> - ",
     NOTICE: _("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
@@ -24,7 +22,9 @@ const knownCommands = {
     */
 
     HELP: _("/HELP [<command>] - displays help for <command>, or a list of available commands"),
+    INVITE: _("/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"),
     JOIN: _("/JOIN <channel> - joins <channel>"),
+    KICK: _("/KICK <nick> - kicks <nick> from current channel"),
     ME: _("/ME <action> - sends <action> to the current channel"),
     NAMES: _("/NAMES - lists users on the current channel"),
     NICK: _("/NICK <nickname> - sets your nick to <nickname>"),
@@ -98,6 +98,25 @@ const IrcParser = new Lang.Class({
 
                 break;
             }
+            case 'INVITE': {
+                let nick = argv.shift();
+                if (!nick) {
+                    this._createFeedbackUsage(cmd);
+                    break;
+                }
+                this._room.channel.connection.dup_contact_by_id_async(nick, [],
+                    Lang.bind(this, function(c, res) {
+                        let contact;
+                        try {
+                            contact = c.dup_contact_by_id_finish(res);
+                        } catch(e) {
+                            logError(e, 'Failed to get contact for ' + nick);
+                            return;
+                        }
+                        this._room.add_member(contact);
+                    }));
+                break;
+            }
             case 'JOIN': {
                 let room = argv.shift();
                 if (!room) {
@@ -121,6 +140,25 @@ const IrcParser = new Lang.Class({
                         } catch(e) {
                             logError(e, 'Failed to join channel');
                         }
+                    }));
+                break;
+            }
+            case 'KICK': {
+                let nick = argv.shift();
+                if (!nick) {
+                    output = this._createFeedbackUsage(cmd);
+                    break;
+                }
+                this._room.channel.connection.dup_contact_by_id_async(nick, [],
+                    Lang.bind(this, function(c, res) {
+                        let contact;
+                        try {
+                            contact = c.dup_contact_by_id_finish(res);
+                        } catch(e) {
+                            logError(e, 'Failed to get contact for ' + nick);
+                            return;
+                        }
+                        this._room.remove_member(contact);
                     }));
                 break;
             }
