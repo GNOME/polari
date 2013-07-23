@@ -1,3 +1,5 @@
+const Gdk = imports.gi.Gdk;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
@@ -7,6 +9,48 @@ const Lang = imports.lang;
 const MAX_NICK_CHARS = 8;
 
 const HIGHLIGHT_SCALE = (1.0 / 1.1);
+
+// http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
+const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
+const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
+
+const _urlRegexp = new RegExp(
+    '(^|' + _leadingJunk + ')' +
+    '(' +
+        '(?:' +
+            '(?:http|https|ftp)://' +             // scheme://
+            '|' +
+            'www\\d{0,3}[.]' +                    // www.
+            '|' +
+            '[a-z0-9.\\-]+[.][a-z]{2,4}/' +       // foo.xx/
+        ')' +
+        '(?:' +                                   // one or more:
+            '[^\\s()<>]+' +                       // run of non-space non-()
+            '|' +                                 // or
+            _balancedParens +                     // balanced parens
+        ')+' +
+        '(?:' +                                   // end with:
+            _balancedParens +                     // balanced parens
+            '|' +                                 // or
+            _notTrailingJunk +                    // last non-junk char
+        ')' +
+    ')', 'gi');
+
+// findUrls:
+// @str: string to find URLs in
+//
+// Searches @str for URLs and returns an array of objects with %url
+// properties showing the matched URL string, and %pos properties indicating
+// the position within @str where the URL was found.
+//
+// Return value: the list of match objects, as described above
+function findUrls(str) {
+    let res = [], match;
+    while ((match = _urlRegexp.exec(str)))
+        res.push({ url: match[2], pos: match.index + match[1].length });
+    return res;
+}
 
 const ChatView = new Lang.Class({
     Name: 'ChatView',
@@ -30,6 +74,10 @@ const ChatView = new Lang.Class({
                             Lang.bind(this, this._onHierarchyChanged));
         this.widget.vadjustment.connect('changed',
                                         Lang.bind(this, this._onAdjustmentChanged));
+        this._view.connect('button-release-event',
+                           Lang.bind(this, this._handleLinkClicks));
+        this._view.connect('motion-notify-event',
+                           Lang.bind(this, this._handleLinkHovers));
 
         this._room = room;
         this._lastNick = null;
@@ -38,6 +86,9 @@ const ChatView = new Lang.Class({
         this._active = false;
         this._toplevelFocus = false;
         this._maxNickChars = MAX_NICK_CHARS;
+        this._hoveringLink = false;
+
+        this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
         let channelSignals = [
             { name: 'message-received',
@@ -88,7 +139,11 @@ const ChatView = new Lang.Class({
           { name: 'status',
             foreground_rgba: color,
             left_margin: 0,
-            indent: 0 }
+            indent: 0 },
+          { name: 'url',
+            foreground: 'blue',
+            underline: Pango.Underline.SINGLE
+          }
         ];
         tags.forEach(function(tagProps) {
                 tagTable.add(new Gtk.TextTag(tagProps));
@@ -165,6 +220,48 @@ const ChatView = new Lang.Class({
         adjustment.value = adjustment.upper;
     },
 
+    _handleLinkClicks: function(view, event) {
+        let [, button] = event.get_button();
+        if (button != Gdk.BUTTON_PRIMARY)
+            return false;
+
+        let [, eventX, eventY] = event.get_coords();
+        let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
+                                                  eventX, eventY);
+
+        let iter = view.get_iter_at_location(x, y);
+        let tags = iter.get_tags();
+        for (let i = 0; i < tags.length; i++) {
+            let url = tags[i]._url;
+            if (url) {
+                if (url.indexOf(':') == -1)
+                    url = 'http://' + url;
+                Gio.AppInfo.launch_default_for_uri(url, null);
+                break;
+            }
+        }
+        return false;
+    },
+
+    _handleLinkHovers: function(view, event) {
+        let [, eventX, eventY] = event.get_coords();
+        let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
+                                                  eventX, eventY);
+        let iter = view.get_iter_at_location(x, y);
+        let tags = iter.get_tags();
+        let hovering = false;
+        for (let i = 0; i < tags.length && !hovering; i++)
+            if (tags[i]._url)
+                hovering = true;
+
+        if (this._hoveringLink != hovering) {
+            this._hoveringLink = hovering;
+            let cursor = this._hoveringLink ? this._linkCursor : null;
+            this._view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor);
+        }
+        return false;
+    },
+
     _checkMessages: function() {
         if (this._active && this._toplevelFocus)
             this._room.channel.ack_all_pending_messages_async(null);
@@ -212,7 +309,7 @@ const ChatView = new Lang.Class({
     _insertStatus: function(text) {
         this._lastNick = null;
         this._ensureNewLine();
-        this._insertWithTag(text, 'status');
+        this._insertWithTagName(text, 'status');
     },
 
     _insertMessage: function(room, message) {
@@ -230,18 +327,33 @@ const ChatView = new Lang.Class({
         if (message.get_message_type() == Tp.ChannelTextMessageType.ACTION) {
             text = "%s %s".format(nick, text);
             this._lastNick = null;
-            tags.push('status');
+            tags.push(this._lookupTag('status'));
         } else {
             if (this._lastNick != nick)
-                this._insertWithTag(nick + '\t', 'nick');
+                this._insertWithTagName(nick + '\t', 'nick');
             this._lastNick = nick;
-            tags.push('message');
+            tags.push(this._lookupTag('message'));
         }
 
         if (this._room.should_highlight_message(message))
-            tags.push('highlight');
+            tags.push(this._lookupTag('highlight'));
 
-        this._insertWithTags(text, tags);
+        let urls = findUrls(text);
+        let pos = 0;
+        for (let i = 0; i < urls.length; i++) {
+            let url = urls[i];
+            this._insertWithTags(text.substr(pos, url.pos - pos), tags);
+
+            let tag = new Gtk.TextTag();
+            tag._url = url.url;
+            this._view.get_buffer().tag_table.add(tag);
+
+            this._insertWithTags(url.url,
+                                 tags.concat(this._lookupTag('url'), tag));
+
+            pos = url.pos + url.url.length;
+        }
+        this._insertWithTags(text.substr(pos), tags);
 
         this._checkMessages();
     },
@@ -253,8 +365,12 @@ const ChatView = new Lang.Class({
             buffer.insert(iter, '\n', -1);
     },
 
-    _insertWithTag: function(text, tag) {
-        this._insertWithTags(text, [tag]);
+    _lookupTag: function(name) {
+        return this._view.get_buffer().tag_table.lookup(name);
+    },
+
+    _insertWithTagName: function(text, name) {
+        this._insertWithTags(text, [this._lookupTag(name)]);
     },
 
     _insertWithTags: function(text, tags) {
@@ -268,6 +384,6 @@ const ChatView = new Lang.Class({
         let start = buffer.get_iter_at_offset(offset);
 
         for (let i = 0; i < tags.length; i++)
-            buffer.apply_tag_by_name(tags[i], start, iter);
+            buffer.apply_tag(tags[i], start, iter);
     }
 });
