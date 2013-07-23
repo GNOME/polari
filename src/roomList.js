@@ -17,13 +17,15 @@ const RoomRow = new Lang.Class({
         this.widget.add(box);
 
         let icon = new Gtk.Image({ gicon: room.icon,
-                                   icon_size: Gtk.IconSize.MENU });
+                                   icon_size: Gtk.IconSize.MENU,
+                                   valign: Gtk.Align.BASELINE });
         icon.get_style_context().add_class('dim-label');
         box.add(icon);
 
         this._roomLabel = new Gtk.Label({ use_markup: true,
                                           hexpand: true,
-                                          halign: Gtk.Align.START });
+                                          halign: Gtk.Align.START,
+                                          valign: Gtk.Align.BASELINE });
         box.add(this._roomLabel);
 
         this._counter = new Gtk.Label({ width_chars: 2 });
