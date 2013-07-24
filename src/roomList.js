@@ -159,6 +159,9 @@ const RoomList = new Lang.Class({
             return;
         }
 
+        if (row.get_header())
+            return;
+
         let label = new Gtk.Label({ xalign: 0,
                                     max_width_chars: 15,
                                     ellipsize: Pango.EllipsizeMode.END });
