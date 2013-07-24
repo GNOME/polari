@@ -26,6 +26,10 @@ const ConnectionsDialog = new Lang.Class({
         this._listBox = builder.get_object('accounts_list');
         this._stack = builder.get_object('stack');
 
+        this._listBox.set_sort_func(function(row1, row2) {
+            return row1._account.display_name < row2._account.display_name ? -1 : 1;
+        });
+
         let addButton = builder.get_object('add_button');
         addButton.connect('clicked', Lang.bind(this, this._addConnection));
 
@@ -92,6 +96,10 @@ const ConnectionsDialog = new Lang.Class({
                               GObject.BindingFlags.SYNC_CREATE);
         account.bind_property('enabled', sw, 'active',
                               GObject.BindingFlags.SYNC_CREATE);
+        account.connect('notify::display-name',
+            function() {
+                row.changed();
+            });
 
         sw.connect('notify::active',
             function() {
