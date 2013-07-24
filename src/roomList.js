@@ -97,19 +97,32 @@ const RoomList = new Lang.Class({
         return null;
     },
 
+    _changeRoom: function(row) {
+        row.can_focus = false;
+        this._roomManager.setActiveRoom(row.room);
+        row.can_focus = true;
+    },
+
     _roomAdded: function(roomManager, room) {
         let row = new RoomRow(room);
         this.widget.add(row.widget);
 
-        row.widget.can_focus = false;
-        this._roomManager.setActiveRoom(room);
-        row.widget.can_focus = true;
+        this._changeRoom(row.widget);
     },
 
     _roomRemoved: function(roomManager, room) {
         let row = this._getRowByRoom(room);
-        if (row)
-            this.widget.remove(row);
+        if (!row)
+            return;
+
+        let selected = this.widget.get_selected_row();
+        if (selected == row && this.widget.get_children().length > 1) {
+            let index = row.get_index();
+            let newFocus = this.widget.get_row_at_index(index ? index - 1
+                                                              : index + 1);
+            this._changeRoom(newFocus);
+        }
+        this.widget.remove(row);
     },
 
     _activeRoomChanged: function(roomManager, room) {
