@@ -8,15 +8,51 @@ const RoomRow = new Lang.Class({
     Name: 'RoomRow',
 
     _init: function(room) {
-        this.widget = new Gtk.ListBoxRow({ margin_top: 4 });
+        this._createWidget(room.icon);
+
         this.widget.room = room;
+
+        room.channel.connect('message-received',
+                             Lang.bind(this, this._updateCounter));
+        room.channel.connect('pending-message-removed',
+                             Lang.bind(this, this._updateCounter));
+        room.connect('notify::display-name',
+                     Lang.bind(this, this._updateLabel));
+
+        this._updateCounter();
+    },
+
+    _updateCounter: function() {
+        let channel = this.widget.room.channel;
+        let numPending = channel.dup_pending_messages().length;
+
+        this._counter.label = numPending.toString();
+        this._counter.visible = numPending > 0;
+
+        this._updateLabel();
+    },
+
+    _updateLabel: function() {
+        let room = this.widget.room;
+
+        let highlight = false;
+        let pending = room.channel.dup_pending_messages();
+        for (let i = 0; i < pending.length && !highlight; i++)
+            highlight = room.should_highlight_message(pending[i]);
+
+        this._roomLabel.label = (highlight ? "<b>%s</b>"
+                                           : "%s").format(room.display_name);
+    },
+
+    _createWidget: function(gicon) {
+        this.widget = new Gtk.ListBoxRow({ margin_top: 4 });
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                 margin_left: 8, margin_right: 8,
                                 margin_top: 2, margin_bottom: 2, spacing: 6 });
         this.widget.add(box);
 
-        let icon = new Gtk.Image({ gicon: room.icon,
+        let icon = new Gtk.Image({ gicon: gicon,
                                    icon_size: Gtk.IconSize.MENU,
                                    valign: Gtk.Align.BASELINE });
         icon.get_style_context().add_class('dim-label');
@@ -33,33 +69,6 @@ const RoomRow = new Lang.Class({
         box.add(this._counter);
 
         this.widget.show_all();
-
-        this._room = room;
-        this._room.channel.connect('message-received',
-                                   Lang.bind(this, this._updateCounter));
-        this._room.channel.connect('pending-message-removed',
-                                   Lang.bind(this, this._updateCounter));
-        this._room.connect('notify::display-name',
-                           Lang.bind(this, this._updateLabel));
-
-        this._updateLabel();
-        this._updateCounter();
-    },
-
-    _updateCounter: function() {
-        let numPending = this._room.channel.dup_pending_messages().length;
-        this._counter.label = numPending.toString();
-        this._counter.visible = numPending > 0;
-        this._updateLabel();
-    },
-
-    _updateLabel: function() {
-        let highlight = false;
-        let pending = this._room.channel.dup_pending_messages();
-        for (let i = 0; i < pending.length && !highlight; i++)
-            highlight = this._room.should_highlight_message(pending[i]);
-        this._roomLabel.label = (highlight ? "<b>%s</b>"
-                                           : "%s").format(this._room.display_name);
     }
 });
 
