@@ -56,6 +56,11 @@ const AccountsMonitor = new Lang.Class({
         if (!this._shouldMonitorAccount(account))
             return;
 
+        account._statusNotifyId =
+            account.connect('notify::connection-status', Lang.bind(this,
+                function() {
+                    this.emit('account-status-changed', account);
+                }));
         this._accounts.push(account);
 
         this.emit('account-added', account);
@@ -68,6 +73,8 @@ const AccountsMonitor = new Lang.Class({
         if (index == -1)
             return;
 
+        account.disconnect(account._statusNotifyId);
+        delete account._statusNotifyId;
         this._accounts.splice(index, 1);
 
         this.emit('account-removed', account);
