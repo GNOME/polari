@@ -147,9 +147,12 @@ const RoomList = new Lang.Class({
     },
 
     _updateHeader: function(row, before) {
-        let beforeAccount = before ? before.room.channel.connection.get_account()
-                                   : null;
-        let account = row.room.channel.connection.get_account();
+        let getAccount = function(row) {
+            return row ? row.room.channel.connection.get_account() : null;
+        };
+        let beforeAccount = getAccount(before);
+        let account = getAccount(row);
+
         if (beforeAccount == account) {
             row.set_header(null);
             return;
