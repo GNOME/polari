@@ -8,8 +8,6 @@ const Lang = imports.lang;
 
 const MAX_NICK_CHARS = 8;
 
-const HIGHLIGHT_SCALE = (1.0 / 1.1);
-
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
 const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
 const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
@@ -139,8 +137,7 @@ const ChatView = new Lang.Class({
           { name: 'message',
             indent: 0 },
           { name: 'highlight',
-            weight: Pango.Weight.BOLD,
-            scale: HIGHLIGHT_SCALE },
+            weight: Pango.Weight.BOLD },
           { name: 'status',
             foreground_rgba: color,
             left_margin: 0,

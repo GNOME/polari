@@ -58,7 +58,7 @@ const RoomRow = new Lang.Class({
         let pending = this._room.channel.dup_pending_messages();
         for (let i = 0; i < pending.length && !highlight; i++)
             highlight = this._room.should_highlight_message(pending[i]);
-        this._roomLabel.label = (highlight ? "<b><small>%s</small></b>"
+        this._roomLabel.label = (highlight ? "<b>%s</b>"
                                            : "%s").format(this._room.display_name);
     }
 });
