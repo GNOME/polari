@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 
 const MAX_RETRIES = 3;
@@ -14,11 +15,28 @@ const JoinDialog = new Lang.Class({
     Name: 'JoinDialog',
 
     _init: function() {
-        this._accountManager = Tp.AccountManager.dup();
-        this._accountManager.prepare_async(null,
-                                           Lang.bind(this, this._onPrepared));
-        this._accounts = {};
+        this._createWidget();
 
+        this._accounts = {};
+        AccountsMonitor.getDefault().dupAccounts().forEach(Lang.bind(this,
+            function(a) {
+                if (!a.enabled)
+                    return;
+                this._accounts[a.display_name] = a;
+            }));
+        let names = Object.keys(this._accounts).sort(
+            function(a, b) {
+                // TODO: figure out combo box sorting
+                return (a < b) ? -1 : ((a > b) ? 1 : 0);
+            });
+        for (let i = 0; i < names.length; i++)
+            this._connectionCombo.append_text(names[i]);
+        this._connectionCombo.set_active(0);
+        this._connectionCombo.sensitive = names.length > 1;
+        this._updateCanConfirm();
+    },
+
+    _createWidget: function() {
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/join-room-dialog.ui');
 
@@ -35,25 +53,6 @@ const JoinDialog = new Lang.Class({
         this._nameEntry = builder.get_object('name_entry');
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._updateCanConfirm));
-    },
-
-    _onPrepared: function() {
-        this._accountManager.dup_valid_accounts().forEach(Lang.bind(this,
-            function(a) {
-                if (!a.enabled || a.protocol_name != 'irc')
-                    return;
-                this._accounts[a.display_name] = a;
-            }));
-        let names = Object.keys(this._accounts).sort(
-            function(a, b) {
-                // TODO: figure out combo box sorting
-                return (a < b) ? -1 : ((a > b) ? 1 : 0);
-            });
-        for (let i = 0; i < names.length; i++)
-            this._connectionCombo.append_text(names[i]);
-        this._connectionCombo.set_active(0);
-        this._connectionCombo.sensitive = names.length > 1;
-        this._updateCanConfirm();
     },
 
     _onJoinClicked: function() {

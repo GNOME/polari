@@ -4,6 +4,7 @@ const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 
 const ConnectionsDialog = new Lang.Class({
@@ -11,7 +12,20 @@ const ConnectionsDialog = new Lang.Class({
 
     _init: function() {
         this._createWindow();
-        this._prepareAccountManager();
+
+        this._accountsMonitor = AccountsMonitor.getDefault();
+
+        this._accountAddedId =
+            this._accountsMonitor.connect('account-added', Lang.bind(this,
+                function(am, account) {
+                    this._addAccount(account);
+                }));
+        this._accountRemovedId =
+            this._accountsMonitor.connect('account-removed', Lang.bind(this,
+                function(am, account) {
+                    this._removeAccount(account);
+                }));
+        this._accountsMonitor.dupAccounts().forEach(Lang.bind(this, this._addAccount));
     },
 
     _createWindow: function() {
@@ -47,32 +61,6 @@ const ConnectionsDialog = new Lang.Class({
                 editButton.sensitive = row != null;
             });
         this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
-    },
-
-    _prepareAccountManager: function() {
-        this._accountMgr = Tp.AccountManager.dup();
-
-        this._accountValidityChangedId =
-            this._accountMgr.connect('account-validity-changed', Lang.bind(this,
-                function(am, account, valid) {
-                    if (valid)
-                        this._addAccount(account);
-                    else
-                        this._removeAccount(account);
-                }));
-        this._accountRemovedId =
-            this._accountMgr.connect('account-removed', Lang.bind(this,
-                function(am, account) {
-                    this._removeAccount(account);
-                }));
-
-        this._accountMgr.prepare_async(null, Lang.bind(this,
-            function(am) {
-                am.dup_valid_accounts().filter(
-                    function(a) {
-                        return a.protocol_name == 'irc';
-                }).forEach(Lang.bind(this, this._addAccount));
-            }));
     },
 
     _addAccount: function(account) {
@@ -142,7 +130,8 @@ const ConnectionsDialog = new Lang.Class({
     },
 
     _createAccount: function(params) {
-        let req = new Tp.AccountRequest({ account_manager: this._accountMgr,
+        let accountManager = Tp.AccountManager.dup();
+        let req = new Tp.AccountRequest({ account_manager: accountManager,
                                           connection_manager: 'idle',
                                           protocol: 'irc',
                                           display_name: params.name });
@@ -204,8 +193,8 @@ const ConnectionsDialog = new Lang.Class({
     },
 
     _onDestroy: function() {
-        this._accountMgr.disconnect(this._accountValidityChangedId);
-        this._accountMgr.disconnect(this._accountRemovedId);
+        this._accountsMonitor.disconnect(this._accountAddedId);
+        this._accountsMonitor.disconnect(this._accountRemovedId);
     }
 });
 

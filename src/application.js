@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Config = imports.config;
@@ -37,7 +38,7 @@ const Application = new Lang.Class({
         resource._register();
 
         this._chatroomManager = ChatroomManager.getDefault();
-        this._accountManager = Tp.AccountManager.dup();
+        this._accountsMonitor = AccountsMonitor.getDefault();
 
         this.notificationQueue = new AppNotifications.NotificationQueue();
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
@@ -119,30 +120,14 @@ const Application = new Lang.Class({
     },
 
     _updateAccountAction: function(action) {
-        action.enabled = this._accountManager.dup_valid_accounts().filter(
+        action.enabled = this._accountsMonitor.dupAccounts().filter(
             function(a) {
                 return a.enabled;
             }).length > 0;
     },
 
     _accountActionsCreateHook: function(action) {
-        this._accountManager.connect('account-enabled', Lang.bind(this,
-            function() {
-                this._updateAccountAction(action);
-            }));
-        this._accountManager.connect('account-disabled', Lang.bind(this,
-            function() {
-                this._updateAccountAction(action);
-            }));
-        this._accountManager.connect('account-validity-changed', Lang.bind(this,
-            function() {
-                this._updateAccountAction(action);
-            }));
-        this._accountManager.connect('account-removed', Lang.bind(this,
-            function() {
-                this._updateAccountAction(action);
-            }));
-        this._accountManager.prepare_async(null, Lang.bind(this,
+        this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
             function() {
                 this._updateAccountAction(action);
             }));
