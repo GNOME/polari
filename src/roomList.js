@@ -1,3 +1,4 @@
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 
@@ -158,11 +159,13 @@ const RoomList = new Lang.Class({
             return;
         }
 
-        let label = new Gtk.Label({ label: account.display_name,
-                                    xalign: 0,
+        let label = new Gtk.Label({ xalign: 0,
                                     max_width_chars: 15,
                                     ellipsize: Pango.EllipsizeMode.END });
         label.get_style_context().add_class('room-list-header');
+
+        account.bind_property('display-name', label, 'label',
+                              GObject.BindingFlags.SYNC_CREATE);
         row.set_header(label);
     },
 
