@@ -54,30 +54,8 @@ const ChatView = new Lang.Class({
     Name: 'ChatView',
 
     _init: function(room) {
-        this.widget = new Gtk.ScrolledWindow();
-        this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
-        this.widget.resize_mode = Gtk.ResizeMode.QUEUE;
-
-        this._view = new Gtk.TextView({ editable: false, cursor_visible: false,
-                                        margin: 6, visible: true,
-                                        wrap_mode: Gtk.WrapMode.WORD });
-        this.widget.add(this._view);
-        this.widget.show_all();
-
-        this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
-        this.widget.connect('screen-changed',
-                            Lang.bind(this, this._updateIndent));
-        this.widget.connect('parent-set', Lang.bind(this, this._onParentSet));
-        this.widget.connect('hierarchy-changed',
-                            Lang.bind(this, this._onHierarchyChanged));
-        this.widget.vadjustment.connect('value-changed',
-                                        Lang.bind(this, this._checkMessages));
-        this.widget.vadjustment.connect('changed',
-                                        Lang.bind(this, this._updateScroll));
-        this._view.connect('button-release-event',
-                           Lang.bind(this, this._handleLinkClicks));
-        this._view.connect('motion-notify-event',
-                           Lang.bind(this, this._handleLinkHovers));
+        this._createWidget();
+        this._createTags();
 
         this._room = room;
         this._lastNick = null;
@@ -121,35 +99,70 @@ const ChatView = new Lang.Class({
         roomSignals.forEach(Lang.bind(this, function(signal) {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
+    },
 
+    _createTags: function() {
         let context = this.widget.get_style_context();
         context.save();
         context.add_class('dim-label');
-        let color = context.get_color(Gtk.StateFlags.NORMAL);
+        let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
         context.restore();
+
+        let [found, linkColor] = context.lookup_color("link_color");
+        if (!found) {
+            linkColor = new Gdk.RGBA();
+            linkColor.parse('blue');
+        }
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            foreground_rgba: color,
+            foreground_rgba: dimColor,
             left_margin: 0 },
           { name: 'message',
             indent: 0 },
           { name: 'highlight',
             weight: Pango.Weight.BOLD },
           { name: 'status',
-            foreground_rgba: color,
+            foreground_rgba: dimColor,
             left_margin: 0,
             indent: 0 },
           { name: 'url',
-            foreground: 'blue',
+            foreground_rgba: linkColor,
             underline: Pango.Underline.SINGLE
           }
         ];
         tags.forEach(function(tagProps) {
                 tagTable.add(new Gtk.TextTag(tagProps));
             });
+    },
+
+    _createWidget: function() {
+        this.widget = new Gtk.ScrolledWindow();
+        this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        this.widget.resize_mode = Gtk.ResizeMode.QUEUE;
+
+        this._view = new Gtk.TextView({ editable: false, cursor_visible: false,
+                                        margin: 6, visible: true,
+                                        wrap_mode: Gtk.WrapMode.WORD });
+        this.widget.add(this._view);
+        this.widget.show_all();
+
+        this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.widget.connect('screen-changed',
+                            Lang.bind(this, this._updateIndent));
+        this.widget.connect('parent-set', Lang.bind(this, this._onParentSet));
+        this.widget.connect('hierarchy-changed',
+                            Lang.bind(this, this._onHierarchyChanged));
+        this.widget.vadjustment.connect('value-changed',
+                                 Lang.bind(this, this._checkMessages));
+        this.widget.vadjustment.connect('changed',
+                                 Lang.bind(this, this._updateScroll));
+        this._view.connect('button-release-event',
+                           Lang.bind(this, this._handleLinkClicks));
+        this._view.connect('motion-notify-event',
+                           Lang.bind(this, this._handleLinkHovers));
     },
 
     _onDestroy: function() {
