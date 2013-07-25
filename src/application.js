@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
+const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Config = imports.config;
 const Connections = imports.connections;
@@ -37,6 +38,8 @@ const Application = new Lang.Class({
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountManager = Tp.AccountManager.dup();
+
+        this.notificationQueue = new AppNotifications.NotificationQueue();
 
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/app-menu.ui');

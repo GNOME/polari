@@ -1,6 +1,7 @@
 const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
 
+const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
 const Lang = imports.lang;
@@ -23,6 +24,10 @@ const MainWindow = new Lang.Class({
         this.window.application = app;
 
         this._tpClient = new TelepathyClient.TelepathyClient(); // should be in app
+
+        let overlay = builder.get_object('overlay');
+
+        overlay.add_overlay(app.notificationQueue.widget);
 
         this._roomManager = new ChatroomManager.getDefault();
         this._roomManager.connect('room-added',

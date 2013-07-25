@@ -28,6 +28,7 @@ polari: polari.in
 jsdir = $(pkgdatadir)/js/
 dist_js_DATA = \
 	application.js \
+	appNotifications.js \
 	chatroomManager.js \
 	chatView.js \
 	connections.js \
