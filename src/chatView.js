@@ -241,7 +241,7 @@ const ChatView = new Lang.Class({
     _updateScroll: function() {
         if (this._pending.length == 0)
             this.widget.vadjustment.value = this.widget.vadjustment.upper;
-        else
+        else if (!this._active)
             this._view.scroll_mark_onscreen(this._pending[0].mark);
     },
 
