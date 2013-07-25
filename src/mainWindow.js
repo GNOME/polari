@@ -51,7 +51,6 @@ const MainWindow = new Lang.Class({
         this._rooms = {};
 
         this._room = null;
-        this._account = null;
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
@@ -149,32 +148,41 @@ const MainWindow = new Lang.Class({
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
             this._room.disconnect(this._topicChangedId);
+            this._room.channel.connection.disconnect(this._nicknameChangedId);
         }
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
+        this._nicknameChangedId = 0;
 
         this._room = room;
 
-        if (this._room) {
-            this._displayNameChangedId =
-                this._room.connect('notify::display-name',
-                                   Lang.bind(this, this._updateTitlebar));
-            this._topicChangedId =
-                this._room.connect('notify::topic',
-                                   Lang.bind(this, this._updateTitlebar));
-
-            this._chatStack.set_visible_child_name(this._room.id);
-            this._userListStack.set_visible_child_name(this._room.id);
-            this._entry.grab_focus();
-        }
-
         this._updateTitlebar();
-        this._updateAccount();
+        this._updateNick();
+        this._updateSensitivity();
+
+        if (!this._room)
+            return; // finished
+
+        this._displayNameChangedId =
+            this._room.connect('notify::display-name',
+                               Lang.bind(this, this._updateTitlebar));
+        this._topicChangedId =
+            this._room.connect('notify::topic',
+                               Lang.bind(this, this._updateTitlebar));
+        this._nicknameChangedId =
+            this._room.channel.connection.connect('notify::self-contact',
+                                                  Lang.bind(this,
+                                                            this._updateNick));
+
+        this._chatStack.set_visible_child_name(this._room.id);
+        this._userListStack.set_visible_child_name(this._room.id);
     },
 
     _setNick: function(nick) {
         this._nickEntry.placeholder_text = nick;
-        this._account.set_nickname_async(nick, Lang.bind(this,
+
+        let account = this._room.channel.connection.get_account();
+        account.set_nickname_async(nick, Lang.bind(this,
             function(a, res) {
                 try {
                     a.set_nickname_finish(res);
@@ -216,35 +224,14 @@ const MainWindow = new Lang.Class({
         this._titlebar.subtitle = this._room ? this._room.topic : null;
     },
 
-    _updateAccount: function() {
-        if (this._conn)
-            this._conn.disconnect(this._nicknameChangedId);
-        this._nicknameChangedId = 0;
-
-        if (this._room) {
-            this._conn = this._room.channel.connection;
-            this._account = this._room.channel.connection.get_account();
-        } else {
-            this._account = null;
-            this._conn = null;
-        }
-
-        if (this._conn)
-            this._nicknameChangedId =
-                this._conn.connect('notify::self-contact',
-                                   Lang.bind(this, this._updateNick));
-
-        this._updateNick();
-        this._updateSensitivity();
-    },
-
     _updateNick: function() {
-        let nick = this._conn ? this._conn.self_contact.alias : '';
+        let nick = this._room ? this._room.channel.connection.self_contact.alias
+                              : '';
         this._nickEntry.placeholder_text = nick;
     },
 
     _updateSensitivity: function() {
-        this._inputArea.sensitive = this._account != null;
+        this._inputArea.sensitive = this._room != null;
 
         if (!this._inputArea.sensitive)
             return;
