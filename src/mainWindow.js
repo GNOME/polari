@@ -70,9 +70,7 @@ const MainWindow = new Lang.Class({
         this._roomList = new RoomList.RoomList();
         scroll.add(this._roomList.widget);
 
-        scroll = builder.get_object('user_list_scrollview');
-        this._userListStack = new Gtk.Stack();
-        scroll.add(this._userListStack);
+        this._userListStack = builder.get_object('user_list_stack');
 
         let revealer = builder.get_object('user_list_revealer');
         app.connect('action-state-changed::user-list', Lang.bind(this,

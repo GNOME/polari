@@ -174,7 +174,7 @@ const ChatView = new Lang.Class({
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
 
-        if (this._room.channel) {
+        if (!this._room.channel.get_invalidated()) {
             let app = Gio.Application.get_default();
             app.hold();
             this._room.channel.connect('invalidated',

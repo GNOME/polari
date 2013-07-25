@@ -8,20 +8,24 @@ const UserList = new Lang.Class({
     Name: 'UserList',
 
     _init: function(room) {
-        this.widget = new Gtk.ListBox();
+        this.widget = new Gtk.ScrolledWindow();
+        this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
         this.widget.set_size_request(150, -1);
 
-        this.widget.set_selection_mode(Gtk.SelectionMode.NONE);
-        this.widget.set_header_func(Lang.bind(this, this._updateHeader));
-        this.widget.set_sort_func(Lang.bind(this, this._sort));
+        this._list = new Gtk.ListBox();
+        this.widget.add(this._list);
+
+        this._list.set_selection_mode(Gtk.SelectionMode.NONE);
+        this._list.set_header_func(Lang.bind(this, this._updateHeader));
+        this._list.set_sort_func(Lang.bind(this, this._sort));
 
         this._room = room;
 
         /* tmp - use a stylesheet instead */
         let bg = new Gdk.RGBA();
         bg.parse("#eee");
-        this.widget.override_background_color(0, bg);
+        this._list.override_background_color(0, bg);
 
 
         room.connect('member-renamed',
@@ -70,15 +74,15 @@ const UserList = new Lang.Class({
                                 ellipsize: Pango.EllipsizeMode.END }));
         row.add(box);
         row.show_all();
-        this.widget.add(row);
+        this._list.add(row);
     },
 
     _removeMember: function(member) {
-        let rows = this.widget.get_children();
+        let rows = this._list.get_children();
         for (let i = 0; i < rows.length; i++) {
             if (rows[i]._member != member)
                 continue;
-            this.widget.remove(rows[i]);
+            this._list.remove(rows[i]);
             break;
         }
     },
@@ -88,12 +92,12 @@ const UserList = new Lang.Class({
     },
 
     _updateHeader: function(row, before) {
-        let numMembers = this.widget.get_children().length;
+        let numMembers = this._list.get_children().length;
 
         if (before)
             row.set_header(null);
 
-        let header = this.widget.get_row_at_index(0).get_header();
+        let header = this._list.get_row_at_index(0).get_header();
         if (header) {
             header._counterLabel.label = numMembers.toString();
             return;
