@@ -65,7 +65,8 @@ const RoomRow = new Lang.Class({
                                           valign: Gtk.Align.BASELINE });
         box.add(this._roomLabel);
 
-        this._counter = new Gtk.Label({ width_chars: 2 });
+        this._counter = new Gtk.Label({ width_chars: 2,
+                                        halign: Gtk.Align.END });
         this._counter.get_style_context().add_class('pending-messages-count');
         box.add(this._counter);
 
