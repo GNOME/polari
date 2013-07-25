@@ -28,7 +28,7 @@ const RoomRow = new Lang.Class({
         let numPending = channel.dup_pending_messages().length;
 
         this._counter.label = numPending.toString();
-        this._counter.visible = numPending > 0;
+        this._counter.opacity = numPending > 0 ? 1. : 0.;
 
         this._updateLabel();
     },
