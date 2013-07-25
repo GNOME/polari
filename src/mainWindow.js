@@ -56,7 +56,6 @@ const MainWindow = new Lang.Class({
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
         this._nicknameChangedId = 0;
-        this._channelChangedId = 0;
 
         this._titlebar = builder.get_object('titlebar');
         this._revealer = builder.get_object('room_list_revealer');
@@ -150,11 +149,9 @@ const MainWindow = new Lang.Class({
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
             this._room.disconnect(this._topicChangedId);
-            this._room.disconnect(this._channelChangedId);
         }
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
-        this._channelChangedId = 0;
 
         this._room = room;
 
@@ -165,9 +162,6 @@ const MainWindow = new Lang.Class({
             this._topicChangedId =
                 this._room.connect('notify::topic',
                                    Lang.bind(this, this._updateTitlebar));
-            this._channelChangedId =
-                this._room.connect('notify::channel',
-                                   Lang.bind(this, this._updateAccount));
 
             this._chatStack.set_visible_child_name(this._room.id);
             this._userListStack.set_visible_child_name(this._room.id);
@@ -227,7 +221,7 @@ const MainWindow = new Lang.Class({
             this._conn.disconnect(this._nicknameChangedId);
         this._nicknameChangedId = 0;
 
-        if (this._room && this._room.channel) {
+        if (this._room) {
             this._conn = this._room.channel.connection;
             this._account = this._room.channel.connection.get_account();
         } else {
