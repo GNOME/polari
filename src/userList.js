@@ -10,6 +10,8 @@ const UserList = new Lang.Class({
     _init: function(room) {
         this.widget = new Gtk.ListBox();
 
+        this.widget.set_size_request(150, -1);
+
         this.widget.set_selection_mode(Gtk.SelectionMode.NONE);
         this.widget.set_header_func(Lang.bind(this, this._updateHeader));
         this.widget.set_sort_func(Lang.bind(this, this._sort));
