@@ -100,7 +100,7 @@ const JoinDialog = new Lang.Class({
                 throw(e);
 
             if (++this._retry >= MAX_RETRIES) {
-                log('Exceeded maximum number of retries, giving up');
+                throw(e);
                 return;
             }
 
