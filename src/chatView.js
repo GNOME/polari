@@ -173,6 +173,17 @@ const ChatView = new Lang.Class({
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
+
+        if (this._room.channel) {
+            let app = Gio.Application.get_default();
+            app.hold();
+            this._room.channel.connect('invalidated',
+                function() {
+                    app.release();
+                });
+            this._room.channel.leave_async(Tp.ChannelGroupChangeReason.NONE,
+                                           '', null);
+        }
     },
 
     _updateIndent: function() {
