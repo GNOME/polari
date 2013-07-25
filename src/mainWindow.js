@@ -223,26 +223,29 @@ const MainWindow = new Lang.Class({
     },
 
     _updateAccount: function() {
-        if (this._account)
-            this._account.disconnect(this._nicknameChangedId);
+        if (this._conn)
+            this._conn.disconnect(this._nicknameChangedId);
         this._nicknameChangedId = 0;
 
-        if (this._room && this._room.channel)
+        if (this._room && this._room.channel) {
+            this._conn = this._room.channel.connection;
             this._account = this._room.channel.connection.get_account();
-        else
+        } else {
             this._account = null;
+            this._conn = null;
+        }
 
-        if (this._account)
+        if (this._conn)
             this._nicknameChangedId =
-                this._account.connect('notify::normalized-name',
-                                      Lang.bind(this, this._updateNick));
+                this._conn.connect('notify::self-contact',
+                                   Lang.bind(this, this._updateNick));
 
         this._updateNick();
         this._updateSensitivity();
     },
 
     _updateNick: function() {
-        let nick = this._account ? this._account.normalized_name : '';
+        let nick = this._conn ? this._conn.self_contact.alias : '';
         this._nickEntry.placeholder_text = nick;
     },
 
