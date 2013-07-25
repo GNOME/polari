@@ -498,7 +498,7 @@ polari_room_class_init (PolariRoomClass *klass)
                          "Channel",
                          "Channel",
                          TP_TYPE_CHANNEL,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   g_object_class_install_properties (object_class, LAST_PROP, props);
 
