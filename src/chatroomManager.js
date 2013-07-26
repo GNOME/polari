@@ -23,8 +23,6 @@ const _ChatroomManager = new Lang.Class({
         this._accountManager = Tp.AccountManager.dup();
 
         let factory = this._accountManager.get_factory();
-        factory.add_account_features([Tp.Account.get_feature_quark_connection()]);
-        factory.add_connection_features([Tp.Connection.get_feature_quark_capabilities()]);
         factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
 
         this._accountManager.prepare_async(null,
