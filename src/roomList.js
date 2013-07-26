@@ -108,17 +108,25 @@ const RoomList = new Lang.Class({
         return null;
     },
 
-    _changeRoom: function(row) {
-        row.can_focus = false;
-        this._roomManager.setActiveRoom(row.room);
-        row.can_focus = true;
+    _moveSelection: function(movement, count) {
+        let toplevel = this.widget.get_toplevel();
+        let focus = toplevel.get_focus();
+
+        this.widget.emit('move-cursor', movement, count);
+
+        let newFocus = this.widget.get_focus_child();
+        if (newFocus)
+            this.widget.select_row(newFocus);
+
+        if (focus && focus.get_parent() != this.widget)
+            focus.emit('grab-focus');
     },
 
     _roomAdded: function(roomManager, room) {
         let row = new RoomRow(room);
         this.widget.add(row.widget);
 
-        this._changeRoom(row.widget);
+        this._roomManager.setActiveRoom(room);
     },
 
     _roomRemoved: function(roomManager, room) {
@@ -128,10 +136,8 @@ const RoomList = new Lang.Class({
 
         let selected = this.widget.get_selected_row();
         if (selected == row && this.widget.get_children().length > 1) {
-            let index = row.get_index();
-            let newFocus = this.widget.get_row_at_index(index ? index - 1
-                                                              : index + 1);
-            this._changeRoom(newFocus);
+            let count = row.get_index() == 0 ? 1 : -1;
+            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
         }
         this.widget.remove(row);
     },
