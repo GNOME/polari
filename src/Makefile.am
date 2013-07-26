@@ -39,6 +39,7 @@ dist_js_DATA = \
 	mainWindow.js \
 	roomList.js \
 	userList.js \
+	utils.js \
 	$(NULL)
 
 config.js: config.js.in Makefile
