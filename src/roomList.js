@@ -47,7 +47,7 @@ const RoomRow = new Lang.Class({
     },
 
     _createWidget: function(gicon) {
-        this.widget = new Gtk.ListBoxRow({ margin_top: 4 });
+        this.widget = new Gtk.ListBoxRow({ margin_bottom: 4 });
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                 margin_left: 8, margin_right: 8,
@@ -196,7 +196,7 @@ const RoomList = new Lang.Class({
         if (row.get_header())
             return;
 
-        let label = new Gtk.Label({ xalign: 0,
+        let label = new Gtk.Label({ margin_bottom: 4, xalign: 0,
                                     max_width_chars: 15,
                                     ellipsize: Pango.EllipsizeMode.END });
         label.get_style_context().add_class('room-list-header');
