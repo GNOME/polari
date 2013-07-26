@@ -1,3 +1,4 @@
+const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
@@ -98,6 +99,30 @@ const RoomList = new Lang.Class({
                                   Lang.bind(this, this._roomRemoved));
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
+
+        let app = Gio.Application.get_default();
+        let action;
+
+        action = app.lookup_action('next-room');
+        action.connect('activate', Lang.bind(this,
+            function() {
+                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
+            }));
+        action = app.lookup_action('previous-room');
+        action.connect('activate', Lang.bind(this,
+            function() {
+                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
+            }));
+        action = app.lookup_action('first-room');
+        action.connect('activate', Lang.bind(this,
+            function() {
+                this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, -1);
+            }));
+        action = app.lookup_action('last-room');
+        action.connect('activate', Lang.bind(this,
+            function() {
+                this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, 1);
+            }));
     },
 
     _getRowByRoom: function(room) {

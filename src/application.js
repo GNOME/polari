@@ -75,7 +75,15 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
             activate: Lang.bind(this, this._onQuit),
-            accel: '<Primary>q' }
+            accel: '<Primary>q' },
+          { name: 'next-room',
+            accel: '<Primary>Page_Down' },
+          { name: 'previous-room',
+            accel: '<Primary>Page_Up' },
+          { name: 'first-room',
+            accel: '<Primary>Home' },
+          { name: 'last-room',
+            accel: '<Primary>End' }
         ];
         actionEntries.forEach(Lang.bind(this,
             function(actionEntry) {
