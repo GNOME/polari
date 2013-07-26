@@ -99,6 +99,12 @@ const ChatView = new Lang.Class({
         roomSignals.forEach(Lang.bind(this, function(signal) {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
+
+        room.channel.dup_pending_messages().forEach(Lang.bind(this,
+            function(message) {
+                this._insertMessage(room, message);
+            }));
+        this._checkMessages();
     },
 
     _createTags: function() {
