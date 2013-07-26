@@ -257,6 +257,7 @@ const ChatView = new Lang.Class({
                 continue;
 
             this._pending.splice(i, 1);
+            this._updateScroll();
             break;
         }
     },
