@@ -12,6 +12,7 @@ const Format = imports.format;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
+const Utils = imports.utils;
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -107,6 +108,10 @@ const Application = new Lang.Class({
         }));
 
         this._window = new MainWindow.MainWindow(this);
+        this._window.window.connect('destroy', Lang.bind(this,
+            function() {
+                this.emitJS('prepare-shutdown');
+            }));
 
         let provider = new Gtk.CssProvider();
         let uri = 'resource:///org/gnome/polari/application.css';
@@ -234,3 +239,4 @@ const Application = new Lang.Class({
         this._window.window.destroy();
     }
 });
+Utils.addJSSignalMethods(Application.prototype);
