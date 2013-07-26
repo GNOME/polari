@@ -150,8 +150,6 @@ const RoomList = new Lang.Class({
     _roomAdded: function(roomManager, room) {
         let row = new RoomRow(room);
         this.widget.add(row.widget);
-
-        this._roomManager.setActiveRoom(room);
     },
 
     _roomRemoved: function(roomManager, room) {

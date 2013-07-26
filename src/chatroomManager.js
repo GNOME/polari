@@ -118,12 +118,9 @@ const _ChatroomManager = new Lang.Class({
 
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
-                let room = this._rooms[channel.get_object_path()];
-                if (room)
-                    return; // already added from observer
-
-                this._ensureRoomForChannel(channel);
-                channel.join_async('', null);
+                let room = this._ensureRoomForChannel(channel);
+                //channel.join_async('', null);
+                this.setActiveRoom(room);
             }));
     },
 
