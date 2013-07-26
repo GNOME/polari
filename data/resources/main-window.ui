@@ -23,111 +23,150 @@
       <class name="polari-main-window"/>
     </style>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="titlebar">
+      <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkMenuButton" id="button1">
+          <object class="GtkHeaderBar" id="headerbar1">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="menu_model">join_menu</property>
-            <property name="action_name">app.room-menu</property>
-            <style>
-              <class name="image-button"/>
-            </style>
+            <property name="can_focus">False</property>
+            <property name="hexpand">False</property>
+            <!-- see commend for titlebar -->
+            <property name="hpadding">6</property>
             <child>
-              <object class="GtkImage" id="image1">
+              <object class="GtkMenuButton" id="button1">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">list-add-symbolic</property>
-                <property name="icon_size">1</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="menu_model">join_menu</property>
+                <property name="action_name">app.room-menu</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="image1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">list-add-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
               </object>
+              <packing>
+                <property name="pack_type">start</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="action_name">app.leave-room</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="image2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">list-remove-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack_type">start</property>
+              </packing>
             </child>
           </object>
-          <packing>
-            <property name="pack_type">start</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button2">
+          <object class="GtkHeaderBar" id="titlebar">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="action_name">app.leave-room</property>
+            <property name="hexpand">True</property>
+            <!-- set vpadding to 0 so the separator label extends to the bottom;
+                 other elements are not are center-aligned, so with the other
+                 headerbar's (default) vpadding, they end up just right -->
+            <property name="vpadding">0</property>
+            <!-- the hpadding property confuses left_side_size_group, so we
+                 add it as margin-left to the separator label to account for
+                 the difference; this is why we set hpadding explicitly, though
+                 6 should be the default value -->
+            <property name="hpadding">6</property>
             <style>
-              <class name="image-button"/>
+              <class name="polari-titlebar"/>
             </style>
             <child>
-              <object class="GtkImage" id="image2">
+              <object class="GtkLabel" id="titlebar_separator">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">list-remove-symbolic</property>
-                <property name="icon_size">1</property>
+                <property name="margin-left">6</property>
+                <style>
+                  <class name="polari-titlebar-separator"/>
+                </style>
               </object>
+              <packing>
+                <property name="pack_type">start</property>
+              </packing>
             </child>
-          </object>
-          <packing>
-            <property name="pack_type">start</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="button3">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="action_name">app.user-list</property>
-            <style>
-              <class name="image-button"/>
-            </style>
             <child>
-              <object class="GtkImage" id="image3">
+              <object class="GtkToggleButton" id="button3">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">system-users-symbolic</property>
-                <property name="icon_size">1</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="action_name">app.user-list</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="image3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">system-users-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
               </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
             </child>
-          </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button4">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="action_name">app.quit</property>
-            <property name="relief">none</property>
-            <style>
-              <class name="image-button"/>
-            </style>
             <child>
-              <object class="GtkImage" id="image4">
+              <object class="GtkButton" id="button4">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">window-close-symbolic</property>
-                <property name="icon_size">1</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="action_name">app.quit</property>
+                <property name="relief">none</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="image4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">window-close-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
               </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
             </child>
           </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
         </child>
       </object>
     </child>
     <child>
-      <object class="GtkBox" id="box1">
+      <object class="GtkBox" id="box2">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -155,7 +194,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box2">
+          <object class="GtkBox" id="box3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">True</property>
@@ -289,4 +328,11 @@
       </object>
     </child>
   </object>
+    <object class="GtkSizeGroup" id="left_side_size_group">
+        <property name="mode">horizontal</property>
+        <widgets>
+          <widget name="headerbar1"/>
+        </widgets>
+    </object>
+
 </interface>

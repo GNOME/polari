@@ -53,3 +53,14 @@
     border-radius: 6px 6px 0 0;
     padding: 6px;
 }
+
+.polari-titlebar-separator {
+    border-image: linear-gradient(to bottom, @theme_bg_color, shade(@borders, 1.2));
+    border-image-width: 0 1px 0 0;
+    border-image-slice: 1;
+}
+
+.polari-titlebar-separator:backdrop {
+    border-image: none;
+    border-color: transparent;
+}
