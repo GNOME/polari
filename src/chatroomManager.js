@@ -120,6 +120,8 @@ const _ChatroomManager = new Lang.Class({
                 //channel.join_async('', null);
                 this.setActiveRoom(room);
             }));
+        let app = Gio.Application.get_default();
+        app.get_active_window().present_with_time(userTime);
     },
 
     _addRoom: function(room) {
