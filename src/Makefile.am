@@ -38,7 +38,6 @@ dist_js_DATA = \
 	main.js \
 	mainWindow.js \
 	roomList.js \
-	telepathyClient.js \
 	userList.js \
 	$(NULL)
 

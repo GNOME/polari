@@ -11,7 +11,6 @@ const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
-const TelepathyClient = imports.telepathyClient;
 const UserList = imports.userList;
 
 const MAX_NICK_UPDATE_TIME = 5;
@@ -26,8 +25,6 @@ const MainWindow = new Lang.Class({
 
         this.window = builder.get_object('main_window');
         this.window.application = app;
-
-        this._tpClient = new TelepathyClient.TelepathyClient(); // should be in app
 
         let overlay = builder.get_object('overlay');
 
