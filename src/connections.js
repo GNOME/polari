@@ -1,3 +1,4 @@
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
@@ -96,6 +97,16 @@ const ConnectionsDialog = new Lang.Class({
                         a.set_enabled_finish(res);
                     }));
             });
+
+        row.connect('key-press-event', Lang.bind(this,
+            function(w, ev) {
+                let [, keyval] = ev.get_keyval();
+                if (keyval == Gdk.KEY_space ||
+                    keyval == Gdk.KEY_Return ||
+                    keyval == Gdk.KEY_ISO_Enter ||
+                    keyval == Gdk.KEY_KP_Enter)
+                    sw.activate();
+            }));
     },
 
     _removeAccount: function(account) {
