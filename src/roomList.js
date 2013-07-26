@@ -140,8 +140,12 @@ const RoomList = new Lang.Class({
         if (!room)
             return;
         let row = this._getRowByRoom(room);
-        if (row)
-            this.widget.select_row(row);
+        if (!row)
+            return;
+
+        row.can_focus = false;
+        this.widget.select_row(row);
+        row.can_focus = true;
     },
 
     _onRowSelected: function(w, row) {
