@@ -106,7 +106,9 @@ const _ChatroomManager = new Lang.Class({
                 if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP) &&
                     channel.group_self_contact != null)
                     return;
-                this._ensureRoomForChannel(channel);
+                let room = this._ensureRoomForChannel(channel);
+                if (this.roomCount == 1)
+                    this.setActiveRoom(room);
             }));
     },
 
