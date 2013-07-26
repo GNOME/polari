@@ -66,8 +66,23 @@ const _ChatroomManager = new Lang.Class({
         this._observer.register();
     },
 
-    _observeChannels: function(observer, account, conn, channels, op, requests, context) {
-        if (conn.protocol_name != 'irc') {
+    _ensureRoomForChannel: function(channel) {
+        let room = this._rooms[channel.get_object_path()];
+        if (room)
+            return room;
+
+        let room = new Polari.Room({ channel: channel });
+        room.channel.connect('invalidated', Lang.bind(this,
+            function() {
+                this._removeRoom(room);
+            }));
+        this._addRoom(room);
+
+        return room;
+    },
+
+    _processRequest: function(context, connection, channels, processChannel) {
+        if (connection.protocol_name != 'irc') {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({ code: Tp.Error.NOT_IMPLEMENTED,
                                         message: message }));
@@ -77,47 +92,39 @@ const _ChatroomManager = new Lang.Class({
         for (let i = 0; i < channels.length; i++) {
             if (channels[i].get_invalidated())
                 continue;
-
-            // this is an invitation - only add it in handleChannel if accepted
-            if (channels[i].has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP) &&
-                channels[i].group_self_contact != null)
-                continue;
-
-            let room = new Polari.Room({ channel: channels[i] });
-            room.channel.connect('invalidated', Lang.bind(this,
-                function() {
-                    this._removeRoom(room);
-                }));
-            this._addRoom(room);
+            processChannel.call(this, channels[i]);
         }
         context.accept();
     },
 
-    _handleChannels: function(handler, account, conn, channels, satisfied, user_time, context) {
-        if (conn.protocol_name != 'irc') {
-            let message = 'Not implementing non-IRC protocols';
-            context.fail(new Tp.Error({ code: Tp.Error.NOT_IMPLEMENTED,
-                                        message: message }));
-            return;
-        }
+    _observeChannels: function() {
+        let [observer, account, connection,
+             channels, op, requests, context] = arguments;
 
-        for (let i = 0; i < channels.length; i++) {
-            if (channels[i].get_invalidated())
-                continue;
+        this._processRequest(context, connection, channels, Lang.bind(this,
+            function(channel) {
+                // this is an invitation - only add it in handleChannel
+                // if accepted
+                if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP) &&
+                    channel.group_self_contact != null)
+                    return;
+                this._ensureRoomForChannel(channel);
+            }));
+    },
 
-            let room = this._rooms[channels[i].get_object_path()];
-            if (room)
-                continue; // already added from observer
+    _handleChannels: function() {
+        let [handler, account, connection,
+             channels, satisfied, userTime, context] = arguments;
 
-            room = new Polari.Room({ channel: channels[i] });
-            room.channel.connect('invalidated', Lang.bind(this,
-                function() {
-                    this._removeRoom(room);
-                }));
-            this._addRoom(room);
-            channels[i].join_async('', null);
-        }
-        context.accept();
+        this._processRequest(context, connection, channels, Lang.bind(this,
+            function(channel) {
+                let room = this._rooms[channel.get_object_path()];
+                if (room)
+                    return; // already added from observer
+
+                this._ensureRoomForChannel(channel);
+                channel.join_async('', null);
+            }));
     },
 
     _addRoom: function(room) {
