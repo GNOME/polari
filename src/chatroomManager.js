@@ -1,4 +1,5 @@
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -34,11 +35,21 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _onPrepareShutdown: function() {
+        this._app.hold();
+        let savedChannels = [];
+
         for (let id in this._rooms) {
             let room = this._rooms[id];
 
             if (room.channel.get_invalidated())
                 continue;
+
+            let account = room.channel.connection.get_account();
+            let serializedChannel = {
+                account: GLib.Variant.new('s', account.get_object_path()),
+                channel: GLib.Variant.new('s', room.channel.identifier)
+            };
+            savedChannels.push(serializedChannel);
 
             this._app.hold();
             room.channel.connect('invalidated', Lang.bind(this,
@@ -47,6 +58,12 @@ const _ChatroomManager = new Lang.Class({
                 }));
             room.channel.leave_async(Tp.ChannelGroupChangeReason.NONE, '', null);
         }
+
+        let settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+        settings.set_value('saved-channel-list',
+                           GLib.Variant.new('aa{sv}', savedChannels));
+
+        this._app.release();
     },
 
     _onPrepared: function(am, res) {

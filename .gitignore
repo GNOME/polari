@@ -16,6 +16,8 @@ config.*
 configure
 data/*.desktop
 data/*.gresource
+data/*.gschema.valid
+data/*.gschema.xml
 depcomp
 install-sh
 libtool

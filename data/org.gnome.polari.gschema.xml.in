@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="polari">
+  <schema path="/org/gnome/polari/" id="org.gnome.polari">
+    <key type="aa{sv}" name="saved-channel-list">
+      <default>[]</default>
+      <summary>Saved channel list</summary>
+      <description>List of channels to restore on startup</description>
+    </key>
+  </schema>
+</schemalist>
