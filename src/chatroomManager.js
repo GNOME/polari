@@ -20,6 +20,10 @@ const _ChatroomManager = new Lang.Class({
         this._rooms = {};
         this._activeRoom = null;
 
+        this._app = Gio.Application.get_default();
+        this._app.connectJS('prepare-shutdown',
+                            Lang.bind(this, this._onPrepareShutdown));
+
         this._accountManager = Tp.AccountManager.dup();
 
         let factory = this._accountManager.get_factory();
@@ -29,12 +33,27 @@ const _ChatroomManager = new Lang.Class({
                                            Lang.bind(this, this._onPrepared));
     },
 
+    _onPrepareShutdown: function() {
+        for (let id in this._rooms) {
+            let room = this._rooms[id];
+
+            if (room.channel.get_invalidated())
+                continue;
+
+            this._app.hold();
+            room.channel.connect('invalidated', Lang.bind(this,
+                function() {
+                    this._app.release();
+                }));
+            room.channel.leave_async(Tp.ChannelGroupChangeReason.NONE, '', null);
+        }
+    },
+
     _onPrepared: function(am, res) {
         try {
             am.prepare_finish(res);
         } catch(e) {
-            let app = Gio.Application.get_default();
-            app.release(); // no point in carrying on
+            this._app.release(); // no point in carrying on
         }
 
         this._observer = Tp.SimpleObserver.new_with_am(am, true,
@@ -122,8 +141,7 @@ const _ChatroomManager = new Lang.Class({
                 //channel.join_async('', null);
                 this.setActiveRoom(room);
             }));
-        let app = Gio.Application.get_default();
-        app.get_active_window().present_with_time(userTime);
+        this._app.get_active_window().present_with_time(userTime);
     },
 
     _addRoom: function(room) {
