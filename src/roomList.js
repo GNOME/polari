@@ -62,6 +62,7 @@ const RoomRow = new Lang.Class({
 
         this._roomLabel = new Gtk.Label({ use_markup: true,
                                           hexpand: true,
+                                          ellipsize: Pango.EllipsizeMode.END,
                                           halign: Gtk.Align.START,
                                           valign: Gtk.Align.BASELINE });
         box.add(this._roomLabel);
