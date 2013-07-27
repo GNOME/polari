@@ -67,9 +67,6 @@ const MainWindow = new Lang.Class({
         this._roomList = new RoomList.RoomList();
         scroll.add(this._roomList.widget);
 
-        let group = builder.get_object('left_side_size_group');
-        group.add_widget(this._roomList.widget);
-
         this._userListStack = builder.get_object('user_list_stack');
 
         let revealer = builder.get_object('user_list_revealer');

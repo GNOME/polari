@@ -82,13 +82,9 @@ const RoomList = new Lang.Class({
     _init: function() {
         this.widget = new Gtk.ListBox({ hexpand: false });
 
-        this.widget.get_style_context().add_class('polari-room-list');
-
         this.widget.set_selection_mode(Gtk.SelectionMode.BROWSE);
         this.widget.set_header_func(Lang.bind(this, this._updateHeader));
         this.widget.set_sort_func(Lang.bind(this, this._sort));
-
-        this.widget.set_size_request(150, -1);
 
         this.widget.connect('row-selected',
                             Lang.bind(this, this._onRowSelected));

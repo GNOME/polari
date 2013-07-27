@@ -11,8 +11,6 @@ const UserList = new Lang.Class({
         this.widget = new Gtk.ScrolledWindow();
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
-        this.widget.set_size_request(150, -1);
-
         this._list = new Gtk.ListBox();
         this.widget.add(this._list);
 
@@ -21,12 +19,6 @@ const UserList = new Lang.Class({
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
         this._room = room;
-
-        /* tmp - use a stylesheet instead */
-        let bg = new Gdk.RGBA();
-        bg.parse("#eee");
-        this._list.override_background_color(0, bg);
-
 
         room.connect('member-renamed',
                      Lang.bind(this, this._onMemberRenamed));
@@ -70,7 +62,6 @@ const UserList = new Lang.Class({
         box.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
         box.add(new Gtk.Label({ label: member.alias,
                                 halign: Gtk.Align.START,
-                                //max_width_chars: MAX_NICK_CHARS,
                                 ellipsize: Pango.EllipsizeMode.END }));
         row.add(box);
         row.show_all();

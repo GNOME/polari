@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
@@ -34,6 +35,11 @@ const Application = new Lang.Class({
 
         window._ = Gettext.gettext;
         window.C_ = Gettext.pgettext;
+
+        Gtk.init(null);
+
+        let w = new Polari.FixedSizeFrame(); // register gtype
+        w.destroy();
 
         let resource = Gio.Resource.load(Config.RESOURCE_DIR + '/polari.gresource');
         resource._register();
