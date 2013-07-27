@@ -1,4 +1,4 @@
-const Gdk = imports.gi.Gdk;
+const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
@@ -9,6 +9,8 @@ const Lang = imports.lang;
 const Signals = imports.signals;
 
 const _ = imports.gettext.gettext;
+
+const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const knownCommands = {
     /* commands that would be nice to support: */
@@ -126,7 +128,7 @@ const IrcParser = new Lang.Class({
                 if (argv.length)
                     log('Excess arguments to JOIN command: ' + argv);
 
-                let time = Gdk.CURRENT_TIME;
+                let time = TP_CURRENT_TIME;
                 let account = this._room.channel.connection.get_account();
                 let req = Tp.AccountChannelRequest.new_text(account, time);
 
@@ -229,7 +231,7 @@ const IrcParser = new Lang.Class({
                     break;
                 }
 
-                let time = Gdk.CURRENT_TIME;
+                let time = TP_CURRENT_TIME;
                 let account = this._room.channel.connection.get_account();
                 let req = Tp.AccountChannelRequest.new_text(account, time);
                 let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';

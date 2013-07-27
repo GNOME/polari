@@ -1,4 +1,3 @@
-const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
@@ -10,6 +9,8 @@ const MAX_RETRIES = 3;
 
 const TP_ERROR_PREFIX = 'org.freedesktop.Telepathy.Error.'
 const TP_ERROR_ALREADY_CONNECTED = TP_ERROR_PREFIX + 'AlreadyConnected';
+
+const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const JoinDialog = new Lang.Class({
     Name: 'JoinDialog',
@@ -81,7 +82,7 @@ const JoinDialog = new Lang.Class({
     _ensureChannel: function() {
         let account = this._requestData.account;
 
-        let req = Tp.AccountChannelRequest.new_text(account, Gdk.CURRENT_TIME);
+        let req = Tp.AccountChannelRequest.new_text(account, TP_CURRENT_TIME);
         req.set_target_id(Tp.HandleType.ROOM, this._requestData.target);
         req.set_delegate_to_preferred_handler(true);
         let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
