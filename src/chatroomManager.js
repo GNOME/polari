@@ -178,13 +178,18 @@ const _ChatroomManager = new Lang.Class({
         let [handler, account, connection,
              channels, satisfied, userTime, context] = arguments;
 
+        let [present, time] = Tp.user_action_time_should_present(userTime);
+
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
                 let room = this._ensureRoomForChannel(channel);
                 //channel.join_async('', null);
-                this.setActiveRoom(room);
+
+                if (present || this.roomCount == 1)
+                    this.setActiveRoom(room);
             }));
-        this._app.get_active_window().present_with_time(userTime);
+        if (present)
+            this._app.get_active_window().present_with_time(time);
     },
 
     _addRoom: function(room) {
