@@ -1,3 +1,4 @@
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Polari = imports.gi.Polari;
@@ -98,6 +99,31 @@ const _ChatroomManager = new Lang.Class({
             }));
         this._handler.register();
         this._observer.register();
+
+        this._restoreSavedChannels();
+    },
+
+    _restoreSavedChannels: function() {
+        let settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+        let savedChannels = settings.get_value('saved-channel-list').deep_unpack();
+        for (let i = 0; i < savedChannels.length; i++) {
+            let serializedChannel = savedChannels[i];
+            for (let prop in serializedChannel)
+                serializedChannel[prop] = serializedChannel[prop].deep_unpack();
+
+            this._restoreChannel(serializedChannel);
+        }
+    },
+
+    _restoreChannel: function(serializedChannel) {
+        let factory = this._accountManager.get_factory();
+        let account = factory.ensure_account(serializedChannel.account, []);
+
+        let req = Tp.AccountChannelRequest.new_text(account, Gdk.CURRENT_TIME);
+        req.set_target_id(Tp.HandleType.ROOM, serializedChannel.channel);
+        req.set_delegate_to_preferred_handler(true);
+        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        req.ensure_channel_async(preferredHandler, null, null);
     },
 
     _ensureRoomForChannel: function(channel) {
