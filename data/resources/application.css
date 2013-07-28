@@ -15,7 +15,7 @@
 }
 
 .polari-sidebar.polari-user-list {
-    border-width: 0 0 0 1px;
+    border-width: 0 0 1px 1px;
 }
 
 .polari-room-list .room-list-header {
@@ -49,6 +49,8 @@
 
 .polari-chat-stack {
     background-color: @theme_base_color;
+    border-color: @borders;
+    border-width: 0 0 1px 0;
 }
 
 .polari-chat-stack:backdrop {
