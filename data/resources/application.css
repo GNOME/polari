@@ -4,8 +4,18 @@
     background-color: @polari_dark_bg_color;
 }
 
-.polari-room-list {
-    background-color: @theme_bg_color;
+.polari-sidebar {
+    border-style: solid;
+    border-color: @borders;
+    border-image: none;
+}
+
+.polari-sidebar.polari-room-list {
+    border-width: 0 1px 0 0;
+}
+
+.polari-sidebar.polari-user-list {
+    border-width: 0 0 0 1px;
 }
 
 .polari-room-list .room-list-header {
