@@ -16,8 +16,8 @@
   <object class="GtkApplicationWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Polari</property>
-    <property name="default_width">600</property>
-    <property name="default_height">400</property>
+    <property name="default_width">800</property>
+    <property name="default_height">500</property>
     <property name="icon_name">polari</property>
     <style>
       <class name="polari-main-window"/>
