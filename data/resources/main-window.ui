@@ -42,7 +42,6 @@
               <object class="GtkMenuButton" id="button1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="margin-left">6</property>
@@ -68,7 +67,7 @@
               <object class="GtkButton" id="button2">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="action_name">app.leave-room</property>
@@ -117,7 +116,7 @@
               <object class="GtkToggleButton" id="button3">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="action_name">app.user-list</property>
@@ -141,7 +140,7 @@
               <object class="GtkButton" id="button4">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="action_name">app.quit</property>
