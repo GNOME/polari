@@ -1,3 +1,4 @@
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
@@ -7,9 +8,11 @@ const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Utils = imports.utils;
 
 const _ = imports.gettext.gettext;
 
+const MAX_LINES = 5;
 const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const knownCommands = {
@@ -70,9 +73,14 @@ const IrcParser = new Lang.Class({
             return;
 
         if (text[0] != '/') {
-            let type = Tp.ChannelTextMessageType.NORMAL;
-            let message = Tp.ClientMessage.new_text(type, text);
-            this._sendMessage(message);
+            if (text.split('\n').length > MAX_LINES) {
+                let app = Gio.Application.get_default();
+                app.pasteManager.pasteText(text);
+            } else {
+                let type = Tp.ChannelTextMessageType.NORMAL;
+                let message = Tp.ClientMessage.new_text(type, text);
+                this._sendMessage(message);
+            }
             return;
         }
 
