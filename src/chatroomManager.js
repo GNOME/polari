@@ -44,6 +44,9 @@ const _ChatroomManager = new Lang.Class({
             if (room.channel.get_invalidated())
                 continue;
 
+            if (!room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
+                continue;
+
             let account = room.channel.connection.get_account();
             let serializedChannel = {
                 account: GLib.Variant.new('s', account.get_object_path()),
