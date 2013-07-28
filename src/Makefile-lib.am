@@ -1,10 +1,12 @@
 pkglib_LTLIBRARIES = libpolari-1.0.la
 
 libpolari_headers = \
+	lib/polari-fixed-size-frame.h \
 	lib/polari-room.h \
 	$(NULL)
 
 libpolari_sources = \
+	lib/polari-fixed-size-frame.c \
 	lib/polari-room.c \
 	$(NULL)
 
@@ -24,5 +26,6 @@ Polari_1_0_gir_FILES = $(libpolari_headers) $(libpolari_sources)
 Polari_1_0_gir_SCANNERFLAGS = --warn-all --symbol-prefix=polari --identifier-prefix=Polari
 Polari_1_0_gir_INCLUDES =  \
 	Gio-2.0            \
+	Gtk-3.0            \
 	TelepathyGLib-0.12 \
 	$(NULL)
