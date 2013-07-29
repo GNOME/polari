@@ -66,6 +66,9 @@ const ChatView = new Lang.Class({
         this._hoveringLink = false;
         this._pending = [];
 
+        let app = Gio.Application.get_default();
+        app.pasteManager.addWidget(this._view);
+
         this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
         let channelSignals = [

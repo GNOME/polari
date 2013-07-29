@@ -13,6 +13,7 @@ const Format = imports.format;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
+const PasteManager = imports.pasteManager;
 const Utils = imports.utils;
 
 const Application = new Lang.Class({
@@ -46,6 +47,7 @@ const Application = new Lang.Class({
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
+        this.pasteManager = new PasteManager.PasteManager();
 
         this.notificationQueue = new AppNotifications.NotificationQueue();
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
