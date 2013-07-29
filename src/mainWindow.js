@@ -1,4 +1,5 @@
 const Gdk = imports.gi.Gdk;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -35,7 +36,9 @@ const MainWindow = new Lang.Class({
 
         this._accountsMonitor = new AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
-                                      Lang.bind(this, this._accountStatusChanged));
+                                      Lang.bind(this, this._onAccountChanged));
+        this._accountsMonitor.connect('account-added',
+                                      Lang.bind(this, this._onAccountChanged));
 
         this._roomManager = new ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -106,12 +109,22 @@ const MainWindow = new Lang.Class({
         this.window.show_all();
     },
 
-    _accountStatusChanged: function(am, account) {
+    _onAccountChanged: function(am, account) {
         if (account.connection_status != Tp.ConnectionStatus.CONNECTING)
             return;
 
+        if (account._connectingNotification)
+            return;
+
+        let app = Gio.Application.get_default();
         let notification = new AppNotifications.ConnectingNotification(account);
-        this._notifications.addNotification(notification);
+        app.notificationQueue.addNotification(notification);
+
+        account._connectingNotification = notification;
+        notification.widget.connect('destroy',
+            function() {
+		delete account._connectingNotification;
+            });
     },
 
 
