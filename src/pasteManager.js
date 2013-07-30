@@ -6,6 +6,7 @@ const Gtk = imports.gi.Gtk;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
+const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Utils = imports.utils;
@@ -65,15 +66,27 @@ const PasteManager = new Lang.Class({
     },
 
     pasteText: function(text) {
+        let app = Gio.Application.get_default();
+        let n = new UploadNotification("text");
+        app.notificationQueue.addNotification(n);
+
+        this._pasteText(text, n);
+    },
+
+    _pasteText: function(text, notification) {
         let room = this._roomManager.getActiveRoom();
-        if (!room)
+        if (!room) {
+            notification.close();
             return;
+        }
 
         let nick = room.channel.connection.self_contact.alias;
         Utils.fpaste(text, nick, Lang.bind(this,
             function(url) {
-                if (!url)
+                if (!url) {
+                    notification.close();
                     return;
+                }
 
                 let type = Tp.ChannelTextMessageType.NORMAL;
                 let message = Tp.ClientMessage.new_text(type, url);
@@ -84,6 +97,7 @@ const PasteManager = new Lang.Class({
                         } catch(e) {
                              logError(e, 'Failed to send message')
                         }
+                        notification.close();
                     }));
             }));
     },
@@ -164,7 +178,9 @@ const PasteManager = new Lang.Class({
 
             // TODO: handle multiple files ...
             let file = Gio.File.new_for_uri(uris[0]);
-            file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+            let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE + ',' +
+                       Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME;
+            file.query_info_async(attr,
                                   Gio.FileQueryInfoFlags.NONE,
                                   GLib.PRIORITY_DEFAULT,
                                   null, Lang.bind(this,
@@ -177,10 +193,11 @@ const PasteManager = new Lang.Class({
                         Gtk.drag_finish(context, false, false, time);
                     }
 
+                    let displayName = fileInfo.get_display_name();
                     let contentType = fileInfo.get_content_type();
                     let targetType = this._getTargetForContentType(contentType);
 
-                    this._handleFileContent(file, targetType);
+                    this._handleFileContent(file, displayName, targetType);
                     Gtk.drag_finish(context, true, false, time);
                 }));
         } else {
@@ -208,12 +225,16 @@ const PasteManager = new Lang.Class({
            return 0;
     },
 
-    _handleFileContent: function(file, type) {
+    _handleFileContent: function(file, name, type) {
+        let app = Gio.Application.get_default();
+        let n = new UploadNotification(name);
+        app.notificationQueue.addNotification(n);
+
         if (type == DndTargetType.TEXT) {
             file.load_contents_async(null, Lang.bind(this,
                 function(f, res) {
                     let [, contents, ,] = f.load_contents_finish(res);
-                    this.pasteText(contents.toString());
+                    this._pasteText(contents.toString(), n);
                 }));
         } else if (type == DndTargetType.IMAGE) {
             file.read_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
@@ -222,11 +243,32 @@ const PasteManager = new Lang.Class({
                     GdkPixbuf.Pixbuf.new_from_stream_async(stream, null,
                         Lang.bind(this, function(stream, res) {
                             let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(res);
-                            this._pasteImage(pixbuf);
+                            this._pasteImage(pixbuf, n);
                         }));
                 }));
         } else {
             log('Unhandled type');
+            n.close();
         }
+    }
+});
+
+const UploadNotification = new Lang.Class({
+    Name: 'UploadNotification',
+    Extends: AppNotifications.AppNotification,
+
+    _init: function(content) {
+        this.parent();
+
+        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
+                                    column_spacing: 12 });
+
+        this._grid.add(new Gtk.Spinner({ active: true }));
+
+        let label = new Gtk.Label({ label: _("Uploading %s").format(content) });
+        this._grid.add(label);
+
+        this.widget.add(this._grid);
+        this.widget.show_all();
     }
 });
