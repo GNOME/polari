@@ -165,7 +165,15 @@ const PasteManager = new Lang.Class({
 
             let uris = data.get_uris();
             this._dragDataReceived = true;
-            Gdk.drag_status(context, Gdk.DragAction.COPY, time);
+            // TODO: handle multiple files ...
+            let file = Gio.File.new_for_uri(uris[0]);
+            this._lookupFileInfo(file, Lang.bind(this,
+                function(name, targetType) {
+                    let action = 0;
+                    if (targetType == DndTargetType.TEXT)
+                        action = Gdk.DragAction.COPY;
+                    Gdk.drag_status(context, action, time);
+                }));
             return;
         }
 
@@ -178,27 +186,14 @@ const PasteManager = new Lang.Class({
 
             // TODO: handle multiple files ...
             let file = Gio.File.new_for_uri(uris[0]);
-            let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE + ',' +
-                       Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME;
-            file.query_info_async(attr,
-                                  Gio.FileQueryInfoFlags.NONE,
-                                  GLib.PRIORITY_DEFAULT,
-                                  null, Lang.bind(this,
-                function(f, res) {
-                    let fileInfo = null;
-                    try {
-                        fileInfo = file.query_info_finish(res);
-                    } catch(e) {
-                        logError(e);
-                        Gtk.drag_finish(context, false, false, time);
-                    }
+            this._lookupFileInfo(file, Lang.bind(this,
+                function(name, targetType) {
+                    let canHandle = // targetType != 0;
+                                       targetType == DndTargetType.TEXT;
 
-                    let displayName = fileInfo.get_display_name();
-                    let contentType = fileInfo.get_content_type();
-                    let targetType = this._getTargetForContentType(contentType);
-
-                    this._handleFileContent(file, displayName, targetType);
-                    Gtk.drag_finish(context, true, false, time);
+                    if (canHandle)
+                        this._handleFileContent(file, displayName, targetType);
+                    Gtk.drag_finish(context, canHandle, false, time);
                 }));
         } else {
             let success = false;
@@ -224,6 +219,31 @@ const PasteManager = new Lang.Class({
         else
            return 0;
     },
+
+    _lookupFileInfo: function(file, callback) {
+        let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE + ',' +
+                   Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME;
+        file.query_info_async(attr,
+                              Gio.FileQueryInfoFlags.NONE,
+                              GLib.PRIORITY_DEFAULT,
+                              null, Lang.bind(this,
+            function(f, res) {
+                let fileInfo = null;
+                try {
+                    fileInfo = file.query_info_finish(res);
+                } catch(e) {
+                    logError(e);
+                    callback(null, 0);
+                    Gtk.drag_finish(context, false, false, time);
+                }
+
+                let displayName = fileInfo.get_display_name();
+                let contentType = fileInfo.get_content_type();
+                let targetType = this._getTargetForContentType(contentType);
+                callback(displayName, targetType);
+            }))
+    },
+
 
     _handleFileContent: function(file, name, type) {
         let app = Gio.Application.get_default();
