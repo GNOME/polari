@@ -5,6 +5,7 @@ const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
+const Notify = imports.notify;
 
 const MAX_NICK_CHARS = 8;
 
@@ -382,8 +383,14 @@ const ChatView = new Lang.Class({
             tags.push(this._lookupTag('message'));
         }
 
-        if (this._room.should_highlight_message(message))
+        if (this._room.should_highlight_message(message)) {
             tags.push(this._lookupTag('highlight'));
+
+            if (!this._toplevelFocus) {
+                let notification = new Notify.Notification(text, '');
+                notification.show();
+            }
+        }
 
         let urls = findUrls(text);
         let pos = 0;
