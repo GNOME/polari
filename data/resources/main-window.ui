@@ -200,14 +200,71 @@
                   <class name="polari-room-list"/>
                 </style>
                 <child>
-                  <object class="GtkScrolledWindow" id="room_list_scrollview">
+                  <object class="GtkGrid" id="grid1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">never</property>
-                    <property name="vexpand">True</property>
-                    <property name="hexpand">True</property>
+                    <property name="hexpand">False</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <placeholder/>
+                      <object class="GtkScrolledWindow" id="room_list_scrollview">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="vexpand">True</property>
+                        <property name="hexpand">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkRevealer" id="selection_toolbar_revealer">
+                        <property name="visible">True</property>
+                        <property name="transition_type">slide-up</property>
+                        <child>
+                          <object class="GtkToolbar" id="selection_toolbar">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">False</property>
+                            <property name="show_arrow">False</property>
+                            <style>
+                              <class name="menubar"/>
+                              <class name="polari-selection-toolbar"/>
+                            </style>
+                            <child>
+                              <object class="GtkSeparatorToolItem" id="toolbutton1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="draw">False</property>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="homogeneous">True</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolItem" id="toolbutton2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButton" id="button5">
+                                    <property name="label" translatable="yes">_Leave</property>
+                                    <property name="width_request">70</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="action_name">app.leave-selected-rooms</property>
+                                    <property name="use_underline">True</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="homogeneous">True</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
                     </child>
                   </object>
                 </child>
@@ -359,6 +416,13 @@
         <widgets>
           <widget name="titlebar_left"/>
           <widget name="frame1"/>
+        </widgets>
+    </object>
+    <object class="GtkSizeGroup" id="bottom_size_group">
+        <property name="mode">vertical</property>
+        <widgets>
+          <widget name="selection_toolbar"/>
+          <widget name="main_input_area"/>
         </widgets>
     </object>
 
