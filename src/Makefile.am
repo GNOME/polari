@@ -37,6 +37,7 @@ dist_js_DATA = \
 	joinDialog.js \
 	main.js \
 	mainWindow.js \
+	notify.js \
 	pasteManager.js \
 	roomList.js \
 	userList.js \
