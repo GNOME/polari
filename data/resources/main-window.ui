@@ -298,41 +298,16 @@
                 <property name="margin_right">6</property>
                 <property name="margin_top">6</property>
                 <property name="margin_bottom">6</property>
-                <property name="spacing">6</property>
+                <style>
+                  <class name="linked"/>
+                </style>
                 <child>
-                  <object class="GtkBox" id="box3">
+                  <object class="GtkEntry" id="nick_entry">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
                     <style>
-                      <class name="linked"/>
+                      <class name="dim-label"/>
                     </style>
-                    <child>
-                      <object class="GtkEntry" id="nick_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="message_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="activates_default">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -341,15 +316,11 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="send_button">
-                    <property name="label" translatable="yes">Send</property>
+                  <object class="GtkEntry" id="message_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="can_default">True</property>
-                    <property name="receives_default">True</property>
-                    <style>
-                      <class name="suggested-action"/>
-                    </style>
+                    <property name="hexpand">True</property>
+                    <property name="activates_default">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

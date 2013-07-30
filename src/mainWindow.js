@@ -62,7 +62,6 @@ const MainWindow = new Lang.Class({
         this._inputArea = builder.get_object('main_input_area');
         this._nickEntry = builder.get_object('nick_entry');
         this._entry = builder.get_object('message_entry');
-        this._sendButton = builder.get_object('send_button');
 
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
 
@@ -78,7 +77,7 @@ const MainWindow = new Lang.Class({
                 revealer.reveal_child = value.get_boolean();
             }));
 
-        this._sendButton.connect('clicked', Lang.bind(this,
+        this._entry.connect('activate', Lang.bind(this,
             function() {
                 this._ircParser.process(this._entry.text);
                 this._entry.text = '';
@@ -244,7 +243,6 @@ const MainWindow = new Lang.Class({
         if (!this._inputArea.sensitive)
             return;
 
-        this._sendButton.grab_default();
         this._entry.grab_focus();
     }
 });
