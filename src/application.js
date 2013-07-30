@@ -88,6 +88,10 @@ const Application = new Lang.Class({
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accel: 'F9' },
+          { name: 'selection-mode',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._selectionModeHook),
+            state: GLib.Variant.new('b', false) },
           { name: 'connections',
             activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
@@ -187,6 +191,20 @@ const Application = new Lang.Class({
                 this._updateUserListAction(action);
             }));
         this._updateUserListAction(action);
+    },
+
+    _updateSelectionModeAction: function(action) {
+        action.enabled = this._chatroomManager.roomCount > 0;
+        if (!action.enabled)
+            action.change_state(GLib.Variant.new('b', false));
+    },
+
+    _selectionModeHook: function(action) {
+        this._chatroomManager.connect('active-changed', Lang.bind(this,
+            function() {
+                this._updateSelectionModeAction(action);
+            }));
+        this._updateSelectionModeAction(action);
     },
 
     _onShowJoinDialog: function() {
