@@ -145,15 +145,16 @@ const RoomList = new Lang.Class({
     },
 
     _roomAdded: function(roomManager, room) {
-        let row = new RoomRow(room);
-        this.widget.add(row.widget);
+        let roomRow = new RoomRow(room);
+        this.widget.add(roomRow.widget);
     },
 
     _roomRemoved: function(roomManager, room) {
-        let row = this._getRowByRoom(room);
-        if (!row)
+        let roomRow = this._roomRows[room.id];
+        if (!roomRow)
             return;
 
+        let row = roomRow.widget;
         let selected = this.widget.get_selected_row();
         if (selected == row && this.widget.get_children().length > 1) {
             let count = row.get_index() == 0 ? 1 : -1;
