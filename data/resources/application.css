@@ -18,6 +18,13 @@
     border-width: 0 0 1px 1px;
 }
 
+.polari-input-area {
+    background-color: @polari_dark_bg_color;
+    border-color: @borders;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+
 .polari-room-list .room-list-header {
     background-color: @polari_dark_bg_color;
     font-size: smaller;
@@ -49,8 +56,7 @@
 
 .polari-chat-stack {
     background-color: @theme_base_color;
-    border-color: @borders;
-    border-width: 0 0 1px 0;
+    border-width: 0;
 }
 
 .polari-chat-stack:backdrop {
