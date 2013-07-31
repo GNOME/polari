@@ -1,4 +1,5 @@
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
@@ -12,7 +13,12 @@ const RoomRow = new Lang.Class({
     _init: function(room) {
         this._createWidget(room.icon);
 
+        let app = Gio.Application.get_default();
         this.widget.room = room;
+
+        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction.connect('notify::state',
+                          Lang.bind(this, this._onSelectionModeChanged));
 
         room.channel.connect('message-received',
                              Lang.bind(this, this._updateCounter));
@@ -22,6 +28,15 @@ const RoomRow = new Lang.Class({
                      Lang.bind(this, this._updateLabel));
 
         this._updateCounter();
+        this._updateMode();
+    },
+
+    _updateMode: function() {
+        let selectionMode = this._selectionModeAction.state.get_boolean();
+        this._stack.set_visible_child_name(selectionMode ? 'selection'
+                                                         : 'normal');
+        if (!selectionMode)
+            this.selection_button.active = false;
     },
 
     _updateCounter: function() {
@@ -46,6 +61,11 @@ const RoomRow = new Lang.Class({
                                            : "%s").format(room.display_name);
     },
 
+    _onSelectionModeChanged: function() {
+        let selectionMode = this._selectionModeAction.state.get_boolean();
+        this._updateMode();
+    },
+
     _createWidget: function(gicon) {
         this.widget = new Gtk.ListBoxRow({ margin_bottom: 4 });
 
@@ -67,10 +87,16 @@ const RoomRow = new Lang.Class({
                                           valign: Gtk.Align.BASELINE });
         box.add(this._roomLabel);
 
+        this._stack = new Gtk.Stack();
+        box.add(this._stack);
+
         this._counter = new Gtk.Label({ width_chars: 2,
                                         halign: Gtk.Align.END });
         this._counter.get_style_context().add_class('pending-messages-count');
-        box.add(this._counter);
+        this._stack.add_named(this._counter, 'normal');
+
+        this.selection_button = new Gtk.CheckButton();
+        this._stack.add_named(this.selection_button, 'selection');
 
         this.widget.show_all();
     }
@@ -87,9 +113,12 @@ const RoomList = new Lang.Class({
         this.widget.set_sort_func(Lang.bind(this, this._sort));
 
         this._roomRows = {};
+        this._selectionMode = false;
 
         this.widget.connect('row-selected',
                             Lang.bind(this, this._onRowSelected));
+        this.widget.connect('row-activated',
+                            Lang.bind(this, this._onRowActivated));
 
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -100,8 +129,10 @@ const RoomList = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
 
         let app = Gio.Application.get_default();
-        let action;
+        app.connect('action-state-changed::selection-mode',
+                    Lang.bind(this, this._onSelectionModeChanged));
 
+        let action;
         action = app.lookup_action('next-room');
         action.connect('activate', Lang.bind(this,
             function() {
@@ -122,6 +153,16 @@ const RoomList = new Lang.Class({
             function() {
                 this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, 1);
             }));
+    },
+
+    _onSelectionModeChanged: function(group, name, value) {
+        this._selectionMode = value.get_boolean();
+
+        if (this._selectionMode)
+            this.widget.get_selected_row().grab_focus();
+        else
+            this._activeRoomChanged(this._roomManager,
+                                    this._roomManager.getActiveRoom());
     },
 
     _moveSelection: function(movement, count) {
@@ -178,7 +219,16 @@ const RoomList = new Lang.Class({
     },
 
     _onRowSelected: function(w, row) {
+        if (this._selectionMode)
+            return;
         this._roomManager.setActiveRoom(row ? row.room : null);
+    },
+
+    _onRowActivated: function(w, row) {
+        if (!this._selectionMode || !row)
+            return;
+        let toggle = this._roomRows[row.room.id].selection_button;
+        toggle.set_active(!toggle.active);
     },
 
     _updateHeader: function(row, before) {
