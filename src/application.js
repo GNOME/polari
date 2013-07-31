@@ -67,8 +67,8 @@ const Application = new Lang.Class({
             accel: '<Primary>n' },
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser) },
-          { name: 'leave-room',
-            activate: Lang.bind(this, this._onLeaveRoom),
+          { name: 'leave-current-room',
+            activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accel: '<Primary>w' },
           { name: 'user-list',
@@ -185,7 +185,7 @@ const Application = new Lang.Class({
         log('Activated action "Message user"');
     },
 
-    _onLeaveRoom: function() {
+    _onLeaveCurrentRoom: function() {
         let reason = Tp.ChannelGroupChangeReason.NONE;
         let message = _("Good Bye"); // TODO - our first setting!
         let room = this._chatroomManager.getActiveRoom();

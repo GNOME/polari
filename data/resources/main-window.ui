@@ -70,7 +70,7 @@
                 <property name="focus_on_click">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="action_name">app.leave-room</property>
+                <property name="action_name">app.leave-current-room</property>
                 <style>
                   <class name="image-button"/>
                 </style>
