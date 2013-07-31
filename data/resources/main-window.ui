@@ -27,7 +27,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkHeaderBar" id="headerbar1">
+          <object class="GtkHeaderBar" id="titlebar_left">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">False</property>
@@ -101,13 +101,13 @@
           </object>
         </child>
         <child>
-          <object class="GtkHeaderBar" id="titlebar">
+          <object class="GtkHeaderBar" id="titlebar_right">
             <property name="visible">True</property>
             <property name="hexpand">True</property>
             <!-- 6 should be the default value, but we set it explicitly
                  to make sure it matches the value used in the left group
-                 (where we move the padding to the first element instead
-                 to not confuse the size group, see comment for headerbar1 -->
+                 (where we move the padding to the first element instead to
+                 not confuse the size group, see comment for titlebar_left -->
             <property name="hpadding">6</property>
             <style>
               <class name="polari-titlebar"/>
@@ -357,7 +357,7 @@
     <object class="GtkSizeGroup" id="left_side_size_group">
         <property name="mode">horizontal</property>
         <widgets>
-          <widget name="headerbar1"/>
+          <widget name="titlebar_left"/>
           <widget name="frame1"/>
         </widgets>
     </object>

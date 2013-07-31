@@ -56,7 +56,9 @@ const MainWindow = new Lang.Class({
         this._topicChangedId = 0;
         this._nicknameChangedId = 0;
 
-        this._titlebar = builder.get_object('titlebar');
+        this._titlebarRight = builder.get_object('titlebar_right');
+        this._titlebarLeft = builder.get_object('titlebar_left');
+
         this._revealer = builder.get_object('room_list_revealer');
         this._chatStack = builder.get_object('chat_stack');
         this._inputArea = builder.get_object('main_input_area');
@@ -227,8 +229,8 @@ const MainWindow = new Lang.Class({
     },
 
     _updateTitlebar: function() {
-        this._titlebar.title = this._room ? this._room.display_name : null;
-        this._titlebar.subtitle = this._room ? this._room.topic : null;
+        this._titlebarRight.title = this._room ? this._room.display_name : null;
+        this._titlebarRight.subtitle = this._room ? this._room.topic : null;
     },
 
     _updateNick: function() {
