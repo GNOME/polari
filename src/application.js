@@ -16,6 +16,12 @@ const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
 const Utils = imports.utils;
 
+
+const MAX_RETRIES = 3;
+
+const TP_ERROR_PREFIX = 'org.freedesktop.Telepathy.Error.'
+const TP_ERROR_ALREADY_CONNECTED = TP_ERROR_PREFIX + 'AlreadyConnected';
+
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
@@ -191,17 +197,70 @@ const Application = new Lang.Class({
         log('Activated action "Message user"');
     },
 
+    _updateAccountName: function(account, name, callback) {
+        let sv = { account: GLib.Variant.new('s', name) };
+        let asv = GLib.Variant.new('a{sv}', sv);
+        account.update_parameters_vardict_async(asv, [], callback);
+    },
+
+    _ensureChannel: function(requestData) {
+        let account = requestData.account;
+
+        let req = Tp.AccountChannelRequest.new_text(account, requestData.time);
+        req.set_target_id(Tp.HandleType.ROOM, requestData.target);
+        req.set_delegate_to_preferred_handler(true);
+        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        req.ensure_channel_async(preferredHandler, null,
+                                 Lang.bind(this,
+                                           this._onEnsureChannel, requestData));
+    },
+
+    _onEnsureChannel: function(req, res, requestData) {
+        let account = req.account;
+
+        try {
+            req.ensure_channel_finish(res);
+        } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
+            let [error,] = account.dup_detailed_error_vardict();
+            if (error != TP_ERROR_ALREADY_CONNECTED)
+                throw(e);
+
+            if (++requestData.retry >= MAX_RETRIES) {
+                throw(e);
+                return;
+            }
+
+            // Try again with a different nick
+            let params = account.dup_parameters_vardict().deep_unpack();
+            let oldNick = params['account'].deep_unpack();
+            let nick = oldNick + '_';
+            this._updateAccountName(account, nick, Lang.bind(this,
+                function() {
+                    this._ensureChannel(requestData);
+                }));
+            return;
+        } catch (e) {
+            logError(e, 'Failed to ensure channel');
+        }
+
+        if (requestData.retry > 0)
+            this._updateAccountName(account, requestData.originalNick, null);
+    },
+
     _onJoinRoom: function(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
         // have this in AccountMonitor?
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
 
-        let req = Tp.AccountChannelRequest.new_text(account, time);
-        req.set_target_id(Tp.HandleType.ROOM, channelName);
-        req.set_delegate_to_preferred_handler(true);
-        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_channel_async(preferredHandler, null, null);
+        let requestData = {
+          account: account,
+          target: channelName,
+          time: time,
+          retry: 0,
+          originalNick: account.nickname };
+
+        this._ensureChannel(requestData);
     },
 
     _onLeaveRoom: function(action, parameter) {
