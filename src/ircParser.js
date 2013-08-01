@@ -136,21 +136,14 @@ const IrcParser = new Lang.Class({
                 if (argv.length)
                     log('Excess arguments to JOIN command: ' + argv);
 
-                let time = TP_CURRENT_TIME;
                 let account = this._room.channel.connection.get_account();
-                let req = Tp.AccountChannelRequest.new_text(account, time);
 
-                let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-                req.set_target_id(Tp.HandleType.ROOM, room);
-                req.set_delegate_to_preferred_handler(true);
-                req.ensure_channel_async(preferredHandler, null, Lang.bind(this,
-                    function(req, res) {
-                        try {
-                            req.ensure_channel_finish(res);
-                        } catch(e) {
-                            logError(e, 'Failed to join channel');
-                        }
-                    }));
+                let app = Gio.Application.get_default();
+                let action = app.lookup_action('join-room');
+                action.activate(GLib.Variant.new('(ssu)',
+                                                 [ account.get_object_path(),
+                                                   room,
+                                                   TP_CURRENT_TIME ]));
                 break;
             }
             case 'KICK': {
@@ -220,16 +213,10 @@ const IrcParser = new Lang.Class({
                     argv.shift(); // first arg was a room name
                 else
                     room = this._room;
-                let reason = Tp.ChannelGroupChangeReason.NONE;
-                let message = argv.join(' ') || '';
-                room.channel.leave_async(reason, message, Lang.bind(this,
-                    function(c, res) {
-                        try {
-                            c.leave_finish(res);
-                        } catch(e) {
-                            logError(e, 'Failed to leave channel');
-                        }
-                    }));
+
+                let app = Gio.Application.get_default();
+                let action = app.lookup_action('leave-room');
+                action.activate(GLib.Variant.new('s', room.id));
                 break;
             }
             case 'QUERY': {
@@ -239,20 +226,14 @@ const IrcParser = new Lang.Class({
                     break;
                 }
 
-                let time = TP_CURRENT_TIME;
                 let account = this._room.channel.connection.get_account();
-                let req = Tp.AccountChannelRequest.new_text(account, time);
-                let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-                req.set_target_id(Tp.HandleType.CONTACT, nick);
-                req.set_delegate_to_preferred_handler(true);
-                req.ensure_channel_async(preferredHandler, null, Lang.bind(this,
-                    function(req, res) {
-                        try {
-                            req.ensure_channel_finish(res);
-                        } catch(e) {
-                            logError(e, 'Failed to open private chat');
-                        }
-                    }));
+
+                let app = Gio.Application.get_default();
+                let action = app.lookup_action('join-room');
+                action.activate(GLib.Variant.new('(ssu)',
+                                                 [ account.get_object_path(),
+                                                   nick,
+                                                   TP_CURRENT_TIME ]));
                 break;
             }
             case 'QUIT': {
