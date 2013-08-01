@@ -61,8 +61,8 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._accountActionsCreateHook),
             state: GLib.Variant.new('b', false) },
-          { name: 'join-room',
-            activate: Lang.bind(this, this._onJoinRoom),
+          { name: 'show-join-dialog',
+            activate: Lang.bind(this, this._onShowJoinDialog),
             create_hook: Lang.bind(this, this._accountActionsCreateHook),
             accel: '<Primary>n' },
           { name: 'message-user',
@@ -177,7 +177,7 @@ const Application = new Lang.Class({
         this._updateUserListAction(action);
     },
 
-    _onJoinRoom: function() {
+    _onShowJoinDialog: function() {
         this._window.showJoinRoomDialog();
     },
 

@@ -5,7 +5,7 @@
     <section>
       <item>
         <attribute name="label" translatable="yes">Join a Room</attribute>
-        <attribute name="action">app.join-room</attribute>
+        <attribute name="action">app.show-join-dialog</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Message a User</attribute>
