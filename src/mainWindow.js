@@ -1,5 +1,6 @@
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -80,7 +81,8 @@ const MainWindow = new Lang.Class({
                 revealer.reveal_child = value.get_boolean();
             }));
 
-        app.connect('action-state-changed::selection-mode',
+        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction.connect('notify::state',
                     Lang.bind(this, this._onSelectionModeChanged));
 
         this._entry.connect('activate', Lang.bind(this,
@@ -99,7 +101,7 @@ const MainWindow = new Lang.Class({
              function() {
                this._nickEntry.text = '';
             }));
-        this._nickEntry.connect('key-press-event', Lang.bind(this,
+        this._nickEntry.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
                 if (keyval == Gdk.KEY_Escape) {
@@ -108,14 +110,21 @@ const MainWindow = new Lang.Class({
                 }
                 return false;
             }));
+        this.window.connect_after('key-press-event', Lang.bind(this,
+            function(w, event) {
+                let [, keyval] = event.get_keyval();
+                if (keyval == Gdk.KEY_Escape) {
+                    this._selectionModeAction.change_state(GLib.Variant.new('b', false));
+                }
+            }));
 
         this._updateSensitivity();
 
         this.window.show_all();
     },
 
-    _onSelectionModeChanged: function(group, actionName, value) {
-        let enabled = value.get_boolean();
+    _onSelectionModeChanged: function() {
+        let enabled = this._selectionModeAction.state.get_boolean();
         this._selectionRevealer.reveal_child = enabled;
 
         if (enabled) {
