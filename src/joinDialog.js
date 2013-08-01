@@ -1,3 +1,4 @@
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
@@ -66,61 +67,12 @@ const JoinDialog = new Lang.Class({
         if (room[0] != '#')
             room = '#' + room;
 
-        this._requestData = { account: account, target: room };
-        this._originalNick = account.nickname;
-        this._retry = 0;
-
-        this._ensureChannel();
-    },
-
-    _updateAccountName: function(account, name, callback) {
-        let sv = { account: GLib.Variant.new('s', name) };
-        let asv = GLib.Variant.new('a{sv}', sv);
-        account.update_parameters_vardict_async(asv, [], callback);
-    },
-
-    _ensureChannel: function() {
-        let account = this._requestData.account;
-
-        let req = Tp.AccountChannelRequest.new_text(account, TP_CURRENT_TIME);
-        req.set_target_id(Tp.HandleType.ROOM, this._requestData.target);
-        req.set_delegate_to_preferred_handler(true);
-        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_channel_async(preferredHandler, null,
-                                 Lang.bind(this, this._onEnsureChannel));
-    },
-
-    _onEnsureChannel: function(req, res) {
-        let account = req.account;
-
-        try {
-            req.ensure_channel_finish(res);
-        } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
-            let [error,] = account.dup_detailed_error_vardict();
-            if (error != TP_ERROR_ALREADY_CONNECTED)
-                throw(e);
-
-            if (++this._retry >= MAX_RETRIES) {
-                throw(e);
-                return;
-            }
-
-            // Try again with a different nick
-            let params = account.dup_parameters_vardict().deep_unpack();
-            let oldNick = params['account'].deep_unpack();
-            let nick = oldNick + '_';
-            this._updateAccountName(account, nick, Lang.bind(this,
-                function() {
-                    this._ensureChannel();
-                }));
-            return;
-        } catch (e) {
-            logError(e, 'Failed to ensure channel');
-        }
-
-        if (this._retry > 0)
-            this._updateAccountName(account, this._originalNick, null);
-
+        let app = Gio.Application.get_default();
+        let action = app.lookup_action('join-room');
+        action.activate(GLib.Variant.new('(ssu)',
+                                         [ account.get_object_path(),
+                                           room,
+                                           TP_CURRENT_TIME ]));
         this.widget.response(Gtk.ResponseType.OK);
     },
 
