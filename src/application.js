@@ -53,8 +53,10 @@ const Application = new Lang.Class({
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this.pasteManager = new PasteManager.PasteManager();
 
+        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+
+        this.pasteManager = new PasteManager.PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
@@ -216,6 +218,39 @@ const Application = new Lang.Class({
         log('Activated action "Message user"');
     },
 
+    _addSavedChannel: function(account, channel) {
+        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let savedChannel = {
+            account: GLib.Variant.new('s', account.get_object_path()),
+            channel: GLib.Variant.new('s', channel)
+        };
+        for (let i = 0; i < savedChannels.length; i++)
+            if (savedChannels[i].account.equal(savedChannel.account) &&
+                savedChannels[i].channel.equal(savedChannel.channel))
+                return;
+        savedChannels.push(savedChannel);
+        this._settings.set_value('saved-channel-list',
+                                 GLib.Variant.new('aa{sv}', savedChannels));
+    },
+
+    _removeSavedChannel: function(account, channel) {
+        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let savedChannel = {
+            account: GLib.Variant.new('s', account.get_object_path()),
+            channel: GLib.Variant.new('s', channel)
+        };
+        let i;
+        for (i = 0; i < savedChannels.length; i++)
+            if (savedChannels[i].account.equal(savedChannel.account) &&
+                savedChannels[i].channel.equal(savedChannel.channel))
+                break;
+        if (!savedChannels[i])
+            return;
+        savedChannels.splice(i, 1);
+        this._settings.set_value('saved-channel-list',
+                                 GLib.Variant.new('aa{sv}', savedChannels));
+    },
+
     _updateAccountName: function(account, name, callback) {
         let sv = { account: GLib.Variant.new('s', name) };
         let asv = GLib.Variant.new('a{sv}', sv);
@@ -264,6 +299,7 @@ const Application = new Lang.Class({
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
+        this._addSavedChannel(account, requestData.target);
     },
 
     _onJoinRoom: function(action, parameter) {
@@ -296,6 +332,8 @@ const Application = new Lang.Class({
                     logError(e, 'Failed to leave channel');
                 }
             }));
+        this._removeSavedChannel(room.channel.connection.get_account(),
+                                 room.channel.identifier);
     },
 
     _onLeaveCurrentRoom: function() {
