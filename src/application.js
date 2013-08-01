@@ -67,6 +67,12 @@ const Application = new Lang.Class({
             accel: '<Primary>n' },
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser) },
+          { name: 'join-room',
+            activate: Lang.bind(this, this._onJoinRoom),
+            parameter_type: GLib.VariantType.new('(ssu)') },
+          { name: 'leave-room',
+            activate: Lang.bind(this, this._onLeaveRoom),
+            parameter_type: GLib.VariantType.new('s') },
           { name: 'leave-current-room',
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
@@ -185,10 +191,23 @@ const Application = new Lang.Class({
         log('Activated action "Message user"');
     },
 
-    _onLeaveCurrentRoom: function() {
+    _onJoinRoom: function(action, parameter) {
+        let [accountPath, channelName, time] = parameter.deep_unpack();
+        // have this in AccountMonitor?
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        let req = Tp.AccountChannelRequest.new_text(account, time);
+        req.set_target_id(Tp.HandleType.ROOM, channelName);
+        req.set_delegate_to_preferred_handler(true);
+        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        req.ensure_channel_async(preferredHandler, null, null);
+    },
+
+    _onLeaveRoom: function(action, parameter) {
         let reason = Tp.ChannelGroupChangeReason.NONE;
         let message = _("Good Bye"); // TODO - our first setting!
-        let room = this._chatroomManager.getActiveRoom();
+        let room = this._chatroomManager.getRoomById(parameter.deep_unpack());
         if (!room)
             return;
         room.channel.leave_async(reason, message, Lang.bind(this,
@@ -199,6 +218,14 @@ const Application = new Lang.Class({
                     logError(e, 'Failed to leave channel');
                 }
             }));
+    },
+
+    _onLeaveCurrentRoom: function() {
+        let room = this._chatroomManager.getActiveRoom();
+        if (!room)
+            return;
+        let action = this.lookup_action('leave-room');
+        action.activate(GLib.Variant.new('s', room.id));
     },
 
     _onToggleAction: function(action) {

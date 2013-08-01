@@ -227,6 +227,10 @@ const _ChatroomManager = new Lang.Class({
         return null;
     },
 
+    getRoomById: function(id) {
+        return this._rooms[id];
+    },
+
     get roomCount() {
         return Object.keys(this._rooms).length;
     }
