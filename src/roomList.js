@@ -157,6 +157,8 @@ const RoomList = new Lang.Class({
                                           Lang.bind(this, this._onLeaveSelectedActivated));
 
         this._leaveAction = app.lookup_action('leave-room');
+        this._leaveAction.connect('activate',
+                                  Lang.bind(this, this._onLeaveActivated));
 
         let action;
         action = app.lookup_action('next-room');
@@ -201,6 +203,17 @@ const RoomList = new Lang.Class({
         this._selectionModeAction.change_state(GLib.Variant.new('b', false));
     },
 
+    _onLeaveActivated: function(action, param) {
+        let id = param.deep_unpack();
+        let row = this._roomRows[id].widget;
+        let selected = this.widget.get_selected_row();
+        if (selected == row && this.widget.get_children().length > 1) {
+            let count = row.get_index() == 0 ? 1 : -1;
+            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
+        }
+        row.hide();
+    },
+
     _moveSelection: function(movement, count) {
         let toplevel = this.widget.get_toplevel();
         let focus = toplevel.get_focus();
@@ -242,13 +255,7 @@ const RoomList = new Lang.Class({
         if (!roomRow)
             return;
 
-        let row = roomRow.widget;
-        let selected = this.widget.get_selected_row();
-        if (selected == row && this.widget.get_children().length > 1) {
-            let count = row.get_index() == 0 ? 1 : -1;
-            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
-        }
-        this.widget.remove(row);
+        this.widget.remove(roomRow.widget);
         delete this._roomRows[room.id];
     },
 
