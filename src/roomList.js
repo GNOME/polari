@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
+const Tp = imports.gi.TelepathyGLib;
 
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
@@ -113,6 +114,7 @@ const RoomList = new Lang.Class({
         this.widget.set_sort_func(Lang.bind(this, this._sort));
 
         this._roomRows = {};
+        this._selectedRows = 0;
         this._selectionMode = false;
 
         this.widget.connect('row-selected',
@@ -129,8 +131,15 @@ const RoomList = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
 
         let app = Gio.Application.get_default();
-        app.connect('action-state-changed::selection-mode',
-                    Lang.bind(this, this._onSelectionModeChanged));
+        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction.connect('notify::state', Lang.bind(this,
+                                          this._onSelectionModeChanged));
+
+        this._leaveSelectedAction = app.lookup_action('leave-selected-rooms');
+        this._leaveSelectedAction.connect('activate',
+                                          Lang.bind(this, this._onLeaveSelectedActivated));
+
+        this._leaveAction = app.lookup_action('leave-room');
 
         let action;
         action = app.lookup_action('next-room');
@@ -155,14 +164,24 @@ const RoomList = new Lang.Class({
             }));
     },
 
-    _onSelectionModeChanged: function(group, name, value) {
-        this._selectionMode = value.get_boolean();
+    _onSelectionModeChanged: function() {
+        this._selectionMode = this._selectionModeAction.state.get_boolean();
+        this._leaveSelectedAction.enabled = this._selectedRows > 0;
 
         if (this._selectionMode)
             this.widget.get_selected_row().grab_focus();
         else
             this._activeRoomChanged(this._roomManager,
                                     this._roomManager.getActiveRoom());
+    },
+
+    _onLeaveSelectedActivated: function() {
+        for (let id in this._roomRows)
+            if (this._roomRows[id].selection_button.active) {
+                let room = this._roomRows[id].widget.room;
+                this._leaveAction.activate(GLib.Variant.new('s', room.id));
+            }
+        this._selectionModeAction.change_state(GLib.Variant.new('b', false));
     },
 
     _moveSelection: function(movement, count) {
@@ -187,6 +206,14 @@ const RoomList = new Lang.Class({
         roomRow.widget.connect('destroy', Lang.bind(this,
             function(w) {
                 delete this._roomRows[w.room.id];
+            }));
+        roomRow.selection_button.connect('toggled', Lang.bind(this,
+            function(button) {
+                if (button.active)
+                    this._selectedRows++;
+                else
+                    this._selectedRows--;
+                this._leaveSelectedAction.enabled = this._selectedRows > 0;
             }));
     },
 
