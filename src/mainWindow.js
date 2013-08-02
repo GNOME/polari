@@ -59,6 +59,7 @@ const MainWindow = new Lang.Class({
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
 
+        this._selectionRevealer = builder.get_object('selection_toolbar_revealer');
         this._revealer = builder.get_object('room_list_revealer');
         this._chatStack = builder.get_object('chat_stack');
         this._inputArea = builder.get_object('main_input_area');
@@ -78,6 +79,9 @@ const MainWindow = new Lang.Class({
             function(group, actionName, value) {
                 revealer.reveal_child = value.get_boolean();
             }));
+
+        app.connect('action-state-changed::selection-mode',
+                    Lang.bind(this, this._onSelectionModeChanged));
 
         this._entry.connect('activate', Lang.bind(this,
             function() {
@@ -108,6 +112,19 @@ const MainWindow = new Lang.Class({
         this._updateSensitivity();
 
         this.window.show_all();
+    },
+
+    _onSelectionModeChanged: function(group, actionName, value) {
+        let enabled = value.get_boolean();
+        this._selectionRevealer.reveal_child = enabled;
+
+        if (enabled) {
+            this._titlebarLeft.get_style_context().add_class('selection-mode');
+            this._titlebarRight.get_style_context().add_class('selection-mode');
+        } else {
+            this._titlebarLeft.get_style_context().remove_class('selection-mode');
+            this._titlebarRight.get_style_context().remove_class('selection-mode');
+        }
     },
 
     _onAccountChanged: function(am, account) {
