@@ -1,3 +1,4 @@
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
@@ -16,6 +17,9 @@ const RoomRow = new Lang.Class({
 
         let app = Gio.Application.get_default();
         this.widget.room = room;
+
+        this._eventBox.connect('button-release-event',
+                            Lang.bind(this, this._onButtonRelease));
 
         this._selectionModeAction = app.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
@@ -67,13 +71,26 @@ const RoomRow = new Lang.Class({
         this._updateMode();
     },
 
+    _onButtonRelease: function(w, event) {
+        let [, button] = event.get_button();
+        if (button != Gdk.BUTTON_SECONDARY)
+            return false;
+
+        this.selection_button.active = !this.selection_button.active;
+
+        return true;
+    },
+
     _createWidget: function(gicon) {
         this.widget = new Gtk.ListBoxRow({ margin_bottom: 4 });
+
+        this._eventBox = new Gtk.EventBox();
+        this.widget.add(this._eventBox);
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                 margin_left: 8, margin_right: 8,
                                 margin_top: 2, margin_bottom: 2, spacing: 6 });
-        this.widget.add(box);
+        this._eventBox.add(box);
 
         let icon = new Gtk.Image({ gicon: gicon,
                                    icon_size: Gtk.IconSize.MENU,
@@ -214,6 +231,9 @@ const RoomList = new Lang.Class({
                 else
                     this._selectedRows--;
                 this._leaveSelectedAction.enabled = this._selectedRows > 0;
+
+                if (button.active)
+                    this._selectionModeAction.change_state(GLib.Variant.new('b', true));
             }));
     },
 
