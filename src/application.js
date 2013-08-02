@@ -83,6 +83,7 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accel: '<Primary>w' },
+          { name: 'leave-selected-rooms' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._userListCreateHook),
