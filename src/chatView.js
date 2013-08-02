@@ -155,7 +155,7 @@ const ChatView = new Lang.Class({
 
         this._view = new Gtk.TextView({ editable: false, cursor_visible: false,
                                         margin: 6, visible: true,
-                                        wrap_mode: Gtk.WrapMode.WORD });
+                                        wrap_mode: Gtk.WrapMode.WORD_CHAR });
         this.widget.add(this._view);
         this.widget.show_all();
 
