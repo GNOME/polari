@@ -118,14 +118,12 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _restoreChannel: function(serializedChannel) {
-        let factory = this._accountManager.get_factory();
-        let account = factory.ensure_account(serializedChannel.account, []);
-
-        let req = Tp.AccountChannelRequest.new_text(account, 0);
-        req.set_target_id(Tp.HandleType.ROOM, serializedChannel.channel);
-        req.set_delegate_to_preferred_handler(true);
-        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_channel_async(preferredHandler, null, null);
+        let action = this._app.lookup_action('join-room');
+        let parameter = GLib.Variant.new('(ssu)',
+                                        [serializedChannel.account,
+                                         serializedChannel.channel,
+                                         0]);
+        action.activate(parameter);
     },
 
     _ensureRoomForChannel: function(channel) {
