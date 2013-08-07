@@ -86,6 +86,8 @@ const RoomList = new Lang.Class({
         this.widget.set_header_func(Lang.bind(this, this._updateHeader));
         this.widget.set_sort_func(Lang.bind(this, this._sort));
 
+        this._roomRows = {};
+
         this.widget.connect('row-selected',
                             Lang.bind(this, this._onRowSelected));
 
@@ -122,14 +124,6 @@ const RoomList = new Lang.Class({
             }));
     },
 
-    _getRowByRoom: function(room) {
-        let rows = this.widget.get_children();
-        for (let i = 0; i < rows.length; i++)
-            if (rows[i].room.id == room.id)
-                return rows[i];
-        return null;
-    },
-
     _moveSelection: function(movement, count) {
         let toplevel = this.widget.get_toplevel();
         let focus = toplevel.get_focus();
@@ -147,6 +141,12 @@ const RoomList = new Lang.Class({
     _roomAdded: function(roomManager, room) {
         let roomRow = new RoomRow(room);
         this.widget.add(roomRow.widget);
+        this._roomRows[room.id] = roomRow;
+
+        roomRow.widget.connect('destroy', Lang.bind(this,
+            function(w) {
+                delete this._roomRows[w.room.id];
+            }));
     },
 
     _roomRemoved: function(roomManager, room) {
@@ -161,15 +161,17 @@ const RoomList = new Lang.Class({
             this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
         }
         this.widget.remove(row);
+        delete this._roomRows[room.id];
     },
 
     _activeRoomChanged: function(roomManager, room) {
         if (!room)
             return;
-        let row = this._getRowByRoom(room);
-        if (!row)
+        let roomRow = this._roomRows[room.id];
+        if (!roomRow)
             return;
 
+        let row = roomRow.widget;
         row.can_focus = false;
         this.widget.select_row(row);
         row.can_focus = true;
