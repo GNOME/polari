@@ -104,6 +104,7 @@
           <object class="GtkHeaderBar" id="titlebar_right">
             <property name="visible">True</property>
             <property name="hexpand">True</property>
+            <property name="show_close_button">True</property>
             <!-- 6 should be the default value, but we set it explicitly
                  to make sure it matches the value used in the left group
                  (where we move the padding to the first element instead to
@@ -141,31 +142,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">system-users-symbolic</property>
-                    <property name="icon_size">1</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button4">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="focus_on_click">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="action_name">app.quit</property>
-                <property name="relief">none</property>
-                <style>
-                  <class name="image-button"/>
-                </style>
-                <child>
-                  <object class="GtkImage" id="image4">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">window-close-symbolic</property>
                     <property name="icon_size">1</property>
                   </object>
                 </child>
