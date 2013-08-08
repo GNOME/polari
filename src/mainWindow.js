@@ -28,6 +28,7 @@ const MainWindow = new Lang.Class({
         let overlay = builder.get_object('overlay');
 
         overlay.add_overlay(app.notificationQueue.widget);
+        overlay.add_overlay(app.commandOutputQueue.widget);
 
         this._roomManager = new ChatroomManager.getDefault();
         this._roomManager.connect('room-added',

@@ -40,6 +40,7 @@ const Application = new Lang.Class({
         this._accountManager = Tp.AccountManager.dup();
 
         this.notificationQueue = new AppNotifications.NotificationQueue();
+        this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/app-menu.ui');

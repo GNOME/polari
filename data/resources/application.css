@@ -44,3 +44,12 @@
 .polari-chat-stack:backdrop {
     background-color: @theme_unfocused_base_color;
 }
+
+.irc-feedback {
+    background-color: @theme_bg_color;
+    border-style: solid;
+    border-color: @borders;
+    border-width: 1px 1px 0 1px;
+    border-radius: 6px 6px 0 0;
+    padding: 6px;
+}

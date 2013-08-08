@@ -1,6 +1,10 @@
 const Gtk = imports.gi.Gtk;
+const Pango = imports.gi.Pango;
 
 const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+
+const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
 const AppNotification = new Lang.Class({
     Name: 'AppNotification',
@@ -21,6 +25,20 @@ const AppNotification = new Lang.Class({
     _onChildRevealed: function() {
         if (!this.widget.child_revealed)
             this.widget.destroy();
+    }
+});
+
+const CommandOutputNotification = new Lang.Class({
+    Name: 'CommandOutputNotification',
+    Extends: AppNotification,
+    Abstract: true,
+
+    _init: function() {
+        this.parent();
+
+        this.widget.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+        Mainloop.timeout_add_seconds(COMMAND_OUTPUT_REVEAL_TIME,
+                                     Lang.bind(this, this.close));
     }
 });
 
@@ -49,5 +67,17 @@ const NotificationQueue = new Lang.Class({
     _onChildDestroy: function() {
         if (this._grid.get_children().length == 0)
            this.widget.hide();
+    }
+});
+
+const CommandOutputQueue = new Lang.Class({
+    Name: 'CommandOutputQueue',
+    Extends: NotificationQueue,
+
+    _init: function() {
+        this.parent();
+
+        this.widget.valign = Gtk.Align.END;
+        this.widget.get_style_context().add_class('irc-feedback');
     }
 });
