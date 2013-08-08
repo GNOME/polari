@@ -15,7 +15,8 @@ const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
 const UserList = imports.userList;
 
-const MAX_NICK_UPDATE_TIME = 5;
+const MAX_NICK_UPDATE_TIME = 5; /* s */
+const CONFIGURE_TIMEOUT = 100; /* ms */
 
 
 const MainWindow = new Lang.Class({
@@ -52,10 +53,12 @@ const MainWindow = new Lang.Class({
         this._rooms = {};
 
         this._room = null;
+        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
         this._nicknameChangedId = 0;
+        this._configureId = 0;
 
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
@@ -117,10 +120,87 @@ const MainWindow = new Lang.Class({
                     this._selectionModeAction.change_state(GLib.Variant.new('b', false));
                 }
             }));
+        this.window.connect('window-state-event',
+                            Lang.bind(this, this._onWindowStateEvent));
+        this.window.connect('configure-event',
+                            Lang.bind(this, this._onConfigureEvent));
+        this.window.connect('delete-event',
+                            Lang.bind(this, this._onDelete));
+
+        let size = this._settings.get_value('window-size');
+        if (size.n_children() == 2) {
+            let width = size.get_child_value(0);
+            let height = size.get_child_value(1);
+            this.window.set_default_size(width.get_int32(), height.get_int32());
+        }
+
+        let position = this._settings.get_value('window-position');
+        if (size.n_children() == 2) {
+            let x = position.get_child_value(0);
+            let y = position.get_child_value(1);
+            this.window.move(x.get_int32(), y.get_int32());
+        }
+
+        if (this._settings.get_boolean('window-maximized'))
+            this.window.maximize();
 
         this._updateSensitivity();
 
         this.window.show_all();
+    },
+
+    _onWindowStateEvent: function(widget, event) {
+        let window = widget.get_window();
+        let state = window.get_state();
+
+        if (state & Gdk.WindowState.FULLSCREEN)
+            return;
+
+        let maximized = (state & Gdk.WindowState.MAXIMIZED);
+        this._settings.set_boolean('window-maximized', maximized);
+    },
+
+    _saveGeometry: function() {
+        let window = this.window.get_window();
+        let state = window.get_state();
+
+        if (state & Gdk.WindowState.MAXIMIZED)
+            return;
+
+        let size = this.window.get_size();
+        this._settings.set_value('window-size', GLib.Variant.new('ai', size));
+
+        let position = this.window.get_position();
+        this._settings.set_value('window-position',
+                                 GLib.Variant.new('ai', position));
+    },
+
+    _onConfigureEvent: function(widget, event) {
+        let window = widget.get_window();
+        let state = window.get_state();
+
+        if (state & Gdk.WindowState.FULLSCREEN)
+            return;
+
+        if (this._configureId != 0) {
+            Mainloop.source_remove(this._configureId);
+            this._configureId = 0;
+        }
+
+        this._configureId = Mainloop.timeout_add(CONFIGURE_TIMEOUT,
+            Lang.bind(this, function() {
+                this._saveGeometry();
+                return false;
+            }));
+    },
+
+    _onDelete: function(widget, event) {
+        if (this._configureId != 0) {
+            Mainloop.source_remove(this._configureId);
+            this._configureId = 0;
+        }
+
+        this._saveGeometry();
     },
 
     _onSelectionModeChanged: function() {
