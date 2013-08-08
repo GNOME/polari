@@ -45,6 +45,14 @@ const ConnectionsDialog = new Lang.Class({
             return row1._account.display_name < row2._account.display_name ? -1 : 1;
         });
 
+        let toolbar = builder.get_object('toolbar');
+        let context = toolbar.get_style_context();
+        context.set_junction_sides(Gtk.JunctionSides.TOP);
+
+        let scrolledwindow = builder.get_object('scrolledwindow');
+        context = scrolledwindow.get_style_context();
+        context.set_junction_sides(Gtk.JunctionSides.BOTTOM);
+
         let addButton = builder.get_object('add_button');
         addButton.connect('clicked', Lang.bind(this, this._addConnection));
 
