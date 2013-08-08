@@ -11,11 +11,8 @@ const TelepathyClient = new Lang.Class({
     Name: 'TelepathyClient',
 
     _init: function() {
-        this._connMgrs = {};
-
         this._roomMgr = ChatroomManager.getDefault();
         this._accountMgr = Tp.AccountManager.dup();
-        this._accountMgr.prepare_async(null, Lang.bind(this, this._onPrepared));
 
         let factory = this._accountMgr.get_factory();
         factory.add_account_features([Tp.Account.get_feature_quark_connection()]);
@@ -47,33 +44,6 @@ const TelepathyClient = new Lang.Class({
             }));
         this._handler.register();
         this._observer.register();
-    },
-
-    _onPrepared: function() {
-        Tp.list_connection_managers_async(null,
-            Lang.bind(this, function (o, res) {
-                let mgrs = Tp.list_connection_managers_finish(res);
-                for (let i = 0; i < mgrs.length; i++)
-                    this._connMgrs[mgrs[i].cm_name] = mgrs[i];
-            }));
-    },
-
-    getAccounts: function() {
-        return this._accountMgr.dup_valid_accounts().filter(Lang.bind(this,
-            function(a) {
-                if (!a.enabled)
-                    return false;
-
-                if (a.connection)
-                    return a.connection.capabilities.supports_text_chatrooms();
-
-                if (!this._connMgrs[a.cm_name])
-                    return false;
-
-                let proto = this._connMgrs[a.cm_name].get_protocol_object(a.protocol_name);
-                //return proto.capabilities.supports_text_chatrooms();
-                return proto != null;
-            }));
     },
 
     _observeChannels: function(observer, account, conn, channels, op, requests, context) {
