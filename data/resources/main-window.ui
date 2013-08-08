@@ -5,11 +5,11 @@
     <section>
       <item>
         <attribute name="label" translatable="yes">Join a Room</attribute>
-        <attribute name="action">app.show-join-dialog</attribute>
+        <attribute name="action">win.show-join-dialog</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Message a User</attribute>
-        <attribute name="action">app.message-user</attribute>
+        <attribute name="action">win.message-user</attribute>
       </item>
     </section>
   </menu>
@@ -46,7 +46,7 @@
                 <property name="valign">center</property>
                 <property name="margin-left">6</property>
                 <property name="menu_model">join_menu</property>
-                <property name="action_name">app.room-menu</property>
+                <property name="action_name">win.room-menu</property>
                 <style>
                   <class name="image-button"/>
                 </style>
@@ -70,7 +70,7 @@
                 <property name="focus_on_click">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="action_name">app.selection-mode</property>
+                <property name="action_name">win.selection-mode</property>
                 <style>
                   <class name="image-button"/>
                 </style>
@@ -133,7 +133,7 @@
                      it on the first and last button has the same effect,
                      and spares us from using a custom title widget -->
                 <property name="margin-left">24</property>
-                <property name="action_name">app.user-list</property>
+                <property name="action_name">win.user-list</property>
                 <style>
                   <class name="image-button"/>
                 </style>
@@ -228,7 +228,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="action_name">app.leave-selected-rooms</property>
+                                    <property name="action_name">win.leave-selected-rooms</property>
                                     <property name="use_underline">True</property>
                                   </object>
                                 </child>

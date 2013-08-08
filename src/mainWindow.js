@@ -28,12 +28,7 @@ const MainWindow = new Lang.Class({
         this.window = builder.get_object('main_window');
         this.window.application = app;
 
-        let overlay = builder.get_object('overlay');
-
-        overlay.add_overlay(app.notificationQueue.widget);
-        overlay.add_overlay(app.commandOutputQueue.widget);
-
-        this._ircParser = new IrcParser.IrcParser();
+        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
 
         this._accountsMonitor = new AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
@@ -48,6 +43,68 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._roomRemoved));
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
+
+        let actionEntries = [
+          { name: 'room-menu',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._accountActionsCreateHook),
+            state: GLib.Variant.new('b', false) },
+          { name: 'show-join-dialog',
+            activate: Lang.bind(this, this._onShowJoinDialog),
+            create_hook: Lang.bind(this, this._accountActionsCreateHook) },
+          { name: 'message-user',
+            activate: Lang.bind(this, this._onMessageUser) },
+          { name: 'join-room',
+            activate: Lang.bind(this, this._onJoinRoom),
+            parameter_type: GLib.VariantType.new('(ssu)') },
+          { name: 'leave-room',
+            activate: Lang.bind(this, this._onLeaveRoom),
+            parameter_type: GLib.VariantType.new('s') },
+          { name: 'leave-current-room',
+            activate: Lang.bind(this, this._onLeaveCurrentRoom),
+            create_hook: Lang.bind(this, this._leaveRoomCreateHook) },
+          { name: 'leave-selected-rooms' },
+          { name: 'user-list',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._userListCreateHook),
+            state: GLib.Variant.new('b', false) },
+          { name: 'selection-mode',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._selectionModeHook),
+            state: GLib.Variant.new('b', false) },
+          { name: 'next-room',
+            accel: '<Primary>Page_Down' },
+          { name: 'previous-room',
+            accel: '<Primary>Page_Up' },
+          { name: 'first-room',
+            accel: '<Primary>Home' },
+          { name: 'last-room',
+            accel: '<Primary>End' }
+        ];
+        actionEntries.forEach(Lang.bind(this,
+            function(actionEntry) {
+                let props = {};
+                ['name', 'state', 'parameter_type'].forEach(
+                    function(prop) {
+                        if (actionEntry[prop])
+                            props[prop] = actionEntry[prop];
+                    });
+                let action = new Gio.SimpleAction(props);
+                if (actionEntry.create_hook)
+                    actionEntry.create_hook(action);
+                if (actionEntry.activate)
+                    action.connect('activate', actionEntry.activate);
+                if (actionEntry.change_state)
+                    action.connect('change-state', actionEntry.change_state);
+                this.window.add_action(action);
+        }));
+
+        let overlay = builder.get_object('overlay');
+
+        overlay.add_overlay(app.notificationQueue.widget);
+        overlay.add_overlay(app.commandOutputQueue.widget);
+
+        this._ircParser = new IrcParser.IrcParser();
 
         this._rooms = {};
 
@@ -70,7 +127,7 @@ const MainWindow = new Lang.Class({
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
 
         let scroll = builder.get_object('room_list_scrollview');
-        this._roomList = new RoomList.RoomList();
+        this._roomList = new RoomList.RoomList(this.window);
         scroll.add(this._roomList.widget);
 
         this._userListStack = builder.get_object('user_list_stack');
@@ -81,7 +138,7 @@ const MainWindow = new Lang.Class({
                 revealer.reveal_child = value.get_boolean();
             }));
 
-        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction = this.window.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
                     Lang.bind(this, this._onSelectionModeChanged));
 
@@ -121,6 +178,197 @@ const MainWindow = new Lang.Class({
         this._updateSensitivity();
 
         this.window.show_all();
+    },
+
+    _onToggleAction: function(action) {
+        let state = action.get_state();
+        action.change_state(GLib.Variant.new('b', !state.get_boolean()));
+    },
+
+    _updateAccountAction: function(action) {
+        action.enabled = this._accountsMonitor.dupAccounts().filter(
+            function(a) {
+                return a.enabled;
+            }).length > 0;
+    },
+
+    _accountActionsCreateHook: function(action) {
+        this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
+            function() {
+                this._updateAccountAction(action);
+            }));
+        this._updateAccountAction(action);
+    },
+
+    _onShowJoinDialog: function() {
+        this.showJoinRoomDialog();
+    },
+
+    _onMessageUser: function() {
+        log('Activated action "Message user"');
+    },
+
+    _addSavedChannel: function(account, channel) {
+        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let savedChannel = {
+            account: GLib.Variant.new('s', account.get_object_path()),
+            channel: GLib.Variant.new('s', channel)
+        };
+        for (let i = 0; i < savedChannels.length; i++)
+            if (savedChannels[i].account.equal(savedChannel.account) &&
+                savedChannels[i].channel.equal(savedChannel.channel))
+                return;
+        savedChannels.push(savedChannel);
+        this._settings.set_value('saved-channel-list',
+                                 GLib.Variant.new('aa{sv}', savedChannels));
+    },
+
+    _removeSavedChannel: function(account, channel) {
+        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let savedChannel = {
+            account: GLib.Variant.new('s', account.get_object_path()),
+            channel: GLib.Variant.new('s', channel)
+        };
+        let i;
+        for (i = 0; i < savedChannels.length; i++)
+            if (savedChannels[i].account.equal(savedChannel.account) &&
+                savedChannels[i].channel.equal(savedChannel.channel))
+                break;
+        if (!savedChannels[i])
+            return;
+        savedChannels.splice(i, 1);
+        this._settings.set_value('saved-channel-list',
+                                 GLib.Variant.new('aa{sv}', savedChannels));
+    },
+
+    _updateAccountName: function(account, name, callback) {
+        let sv = { account: GLib.Variant.new('s', name) };
+        let asv = GLib.Variant.new('a{sv}', sv);
+        account.update_parameters_vardict_async(asv, [], callback);
+    },
+
+    _ensureChannel: function(requestData) {
+        let account = requestData.account;
+
+        let req = Tp.AccountChannelRequest.new_text(account, requestData.time);
+        req.set_target_id(Tp.HandleType.ROOM, requestData.target);
+        req.set_delegate_to_preferred_handler(true);
+        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        req.ensure_channel_async(preferredHandler, null,
+                                 Lang.bind(this,
+                                           this._onEnsureChannel, requestData));
+    },
+
+    _onEnsureChannel: function(req, res, requestData) {
+        let account = req.account;
+
+        try {
+            req.ensure_channel_finish(res);
+        } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
+            let [error,] = account.dup_detailed_error_vardict();
+            if (error != TP_ERROR_ALREADY_CONNECTED)
+                throw(e);
+
+            if (++requestData.retry >= MAX_RETRIES) {
+                throw(e);
+                return;
+            }
+
+            // Try again with a different nick
+            let params = account.dup_parameters_vardict().deep_unpack();
+            let oldNick = params['account'].deep_unpack();
+            let nick = oldNick + '_';
+            this._updateAccountName(account, nick, Lang.bind(this,
+                function() {
+                    this._ensureChannel(requestData);
+                }));
+            return;
+        } catch (e) {
+            logError(e, 'Failed to ensure channel');
+        }
+
+        if (requestData.retry > 0)
+            this._updateAccountName(account, requestData.originalNick, null);
+        this._addSavedChannel(account, requestData.target);
+    },
+
+    _onJoinRoom: function(action, parameter) {
+        let [accountPath, channelName, time] = parameter.deep_unpack();
+        // have this in AccountMonitor?
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        let requestData = {
+          account: account,
+          target: channelName,
+          time: time,
+          retry: 0,
+          originalNick: account.nickname };
+
+        this._ensureChannel(requestData);
+    },
+
+    _onLeaveRoom: function(action, parameter) {
+        let reason = Tp.ChannelGroupChangeReason.NONE;
+        let message = _("Good Bye"); // TODO - our first setting!
+        let room = this._roomManager.getRoomById(parameter.deep_unpack());
+        if (!room)
+            return;
+        room.channel.leave_async(reason, message, Lang.bind(this,
+            function(c, res) {
+                try {
+                    c.leave_finish(res);
+                } catch(e) {
+                    logError(e, 'Failed to leave channel');
+                }
+            }));
+        this._removeSavedChannel(room.channel.connection.get_account(),
+                                 room.channel.identifier);
+    },
+
+    _leaveRoomCreateHook: function(action) {
+        this._roomManager.connect('active-changed', Lang.bind(this,
+            function() {
+                action.enabled = this._roomManager.getActiveRoom() != null;
+            }));
+        action.enabled = this._roomManager.getActiveRoom() != null;
+    },
+
+    _onLeaveCurrentRoom: function() {
+        let room = this._roomManager.getActiveRoom();
+        if (!room)
+            return;
+        let action = this.lookup_action('leave-room');
+        action.activate(GLib.Variant.new('s', room.id));
+    },
+
+    _updateUserListAction: function(action) {
+        let room = this._roomManager.getActiveRoom();
+        action.enabled = room && room.channel.handle_type == Tp.HandleType.ROOM;
+        if (!action.enabled)
+            action.change_state(GLib.Variant.new('b', false));
+    },
+
+    _userListCreateHook: function(action) {
+        this._roomManager.connect('active-changed', Lang.bind(this,
+            function() {
+                this._updateUserListAction(action);
+            }));
+        this._updateUserListAction(action);
+    },
+
+    _updateSelectionModeAction: function(action) {
+        action.enabled = this._roomManager.roomCount > 0;
+        if (!action.enabled)
+            action.change_state(GLib.Variant.new('b', false));
+    },
+
+    _selectionModeHook: function(action) {
+        this._roomManager.connect('active-changed', Lang.bind(this,
+            function() {
+                this._updateSelectionModeAction(action);
+            }));
+        this._updateSelectionModeAction(action);
     },
 
     _onSelectionModeChanged: function() {
@@ -245,7 +493,7 @@ const MainWindow = new Lang.Class({
     },
 
     showJoinRoomDialog: function() {
-        let dialog = new JoinDialog.JoinDialog();
+        let dialog = new JoinDialog.JoinDialog(this.window);
         dialog.widget.transient_for = this.window;
         dialog.widget.show();
         dialog.widget.connect('response',

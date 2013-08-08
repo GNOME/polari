@@ -12,16 +12,15 @@ const Lang = imports.lang;
 const RoomRow = new Lang.Class({
     Name: 'RoomRow',
 
-    _init: function(room) {
+    _init: function(window, room) {
         this._createWidget(room.icon);
 
-        let app = Gio.Application.get_default();
         this.widget.room = room;
 
         this._eventBox.connect('button-release-event',
                             Lang.bind(this, this._onButtonRelease));
 
-        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction = window.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
                           Lang.bind(this, this._onSelectionModeChanged));
 
@@ -123,7 +122,8 @@ const RoomRow = new Lang.Class({
 const RoomList = new Lang.Class({
     Name: 'RoomList',
 
-    _init: function() {
+    _init: function(window) {
+        this.window = window
         this.widget = new Gtk.ListBox({ hexpand: false });
 
         this.widget.set_selection_mode(Gtk.SelectionMode.BROWSE);
@@ -147,36 +147,35 @@ const RoomList = new Lang.Class({
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
 
-        let app = Gio.Application.get_default();
-        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction = window.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state', Lang.bind(this,
                                           this._onSelectionModeChanged));
 
-        this._leaveSelectedAction = app.lookup_action('leave-selected-rooms');
+        this._leaveSelectedAction = window.lookup_action('leave-selected-rooms');
         this._leaveSelectedAction.connect('activate',
                                           Lang.bind(this, this._onLeaveSelectedActivated));
 
-        this._leaveAction = app.lookup_action('leave-room');
+        this._leaveAction = window.lookup_action('leave-room');
         this._leaveAction.connect('activate',
                                   Lang.bind(this, this._onLeaveActivated));
 
         let action;
-        action = app.lookup_action('next-room');
+        action = window.lookup_action('next-room');
         action.connect('activate', Lang.bind(this,
             function() {
                 this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
             }));
-        action = app.lookup_action('previous-room');
+        action = window.lookup_action('previous-room');
         action.connect('activate', Lang.bind(this,
             function() {
                 this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
             }));
-        action = app.lookup_action('first-room');
+        action = window.lookup_action('first-room');
         action.connect('activate', Lang.bind(this,
             function() {
                 this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, -1);
             }));
-        action = app.lookup_action('last-room');
+        action = window.lookup_action('last-room');
         action.connect('activate', Lang.bind(this,
             function() {
                 this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, 1);
@@ -229,7 +228,7 @@ const RoomList = new Lang.Class({
     },
 
     _roomAdded: function(roomManager, room) {
-        let roomRow = new RoomRow(room);
+        let roomRow = new RoomRow(this.window, room);
         this.widget.add(roomRow.widget);
         this._roomRows[room.id] = roomRow;
 

@@ -16,7 +16,8 @@ const TP_CURRENT_TIME = GLib.MAXUINT32;
 const JoinDialog = new Lang.Class({
     Name: 'JoinDialog',
 
-    _init: function() {
+    _init: function(window) {
+        this.window = window
         this._createWidget();
 
         this._accounts = {};
@@ -67,8 +68,7 @@ const JoinDialog = new Lang.Class({
         if (room[0] != '#')
             room = '#' + room;
 
-        let app = Gio.Application.get_default();
-        let action = app.lookup_action('join-room');
+        let action = this.window.lookup_action('join-room');
         action.activate(GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
                                            room,
