@@ -23,6 +23,7 @@ PKG_CHECK_MODULES(POLARI,
                   gio-2.0
                   gobject-introspection-1.0
                   gtk+-3.0
+                  gtksourceview-3.0
                   telepathy-glib);
 
 GJS_CONSOLE=`$PKG_CONFIG --variable=gjs_console gjs-1.0`

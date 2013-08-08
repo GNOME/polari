@@ -1,6 +1,7 @@
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const GtkSource = imports.gi.GtkSource;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -153,9 +154,11 @@ const ChatView = new Lang.Class({
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
         this.widget.resize_mode = Gtk.ResizeMode.QUEUE;
 
-        this._view = new Gtk.TextView({ editable: false, cursor_visible: false,
-                                        margin: 6, visible: true,
-                                        wrap_mode: Gtk.WrapMode.WORD_CHAR });
+        let buffer = new GtkSource.Buffer();
+        this._view = new GtkSource.View({ editable: false, cursor_visible: false,
+                                          margin: 6, visible: true,
+                                          wrap_mode: Gtk.WrapMode.WORD_CHAR,
+                                          buffer: buffer });
         this.widget.add(this._view);
         this.widget.show_all();
 
