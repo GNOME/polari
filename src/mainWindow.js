@@ -13,6 +13,7 @@ const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
+const TabCompletion = imports.tabCompletion;
 const UserList = imports.userList;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
@@ -71,6 +72,7 @@ const MainWindow = new Lang.Class({
         this._entry = builder.get_object('message_entry');
 
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
+        this._completion = new TabCompletion.TabCompletion(this._entry);
 
         let scroll = builder.get_object('room_list_scrollview');
         this._roomList = new RoomList.RoomList();
@@ -259,6 +261,7 @@ const MainWindow = new Lang.Class({
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
             this._room.disconnect(this._topicChangedId);
+            this._room.disconnect(this._membersChangedId);
             this._room.channel.connection.disconnect(this._nicknameChangedId);
         }
         this._displayNameChangedId = 0;
@@ -271,6 +274,7 @@ const MainWindow = new Lang.Class({
         this._updateTitlebar();
         this._updateNick();
         this._updateSensitivity();
+        this._updateCompletions();
 
         if (!this._room)
             return; // finished
@@ -281,6 +285,9 @@ const MainWindow = new Lang.Class({
         this._topicChangedId =
             this._room.connect('notify::topic',
                                Lang.bind(this, this._updateTitlebar));
+        this._membersChangedId =
+            this._room.connect('members-changed',
+                               Lang.bind(this, this._updateCompletions));
         this._nicknameChangedId =
             this._room.channel.connection.connect('notify::self-contact',
                                                   Lang.bind(this,
@@ -329,6 +336,17 @@ const MainWindow = new Lang.Class({
             function(widget) {
                 widget.destroy();
             });
+    },
+
+    _updateCompletions: function() {
+        let nicks = [];
+
+        if (this._room &&
+            this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
+            let members = this._room.channel.group_dup_members_contacts();
+            nicks = members.map(function(member) { return member.alias; });
+        }
+        this._completion.setCompletions(nicks);
     },
 
     _updateTitlebar: function() {

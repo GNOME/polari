@@ -40,6 +40,7 @@ dist_js_DATA = \
 	notify.js \
 	pasteManager.js \
 	roomList.js \
+	tabCompletion.js \
 	userList.js \
 	utils.js \
 	$(NULL)
