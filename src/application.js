@@ -86,6 +86,11 @@ const Application = new Lang.Class({
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accel: '<Primary>w' },
           { name: 'leave-selected-rooms' },
+          { name: 'search',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._searchHook),
+            state: GLib.Variant.new('b', false),
+            accel: '<Primary>F' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._userListCreateHook),
@@ -187,6 +192,10 @@ const Application = new Lang.Class({
         action.enabled = room && room.channel.handle_type == Tp.HandleType.ROOM;
         if (!action.enabled)
             action.change_state(GLib.Variant.new('b', false));
+    },
+
+    _searchHook: function(action) {
+        
     },
 
     _userListCreateHook: function(action) {

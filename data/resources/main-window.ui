@@ -123,7 +123,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkToggleButton" id="button3">
+              <object class="GtkToggleButton" id="search_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
@@ -133,12 +133,36 @@
                      it on the first and last button has the same effect,
                      and spares us from using a custom title widget -->
                 <property name="margin-left">24</property>
+                <property name="action_name">app.search</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="search_image">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">edit-find-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="button4">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
                 <property name="action_name">app.user-list</property>
                 <style>
                   <class name="image-button"/>
                 </style>
                 <child>
-                  <object class="GtkImage" id="image3">
+                  <object class="GtkImage" id="image4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_name">system-users-symbolic</property>
