@@ -2,6 +2,7 @@ const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
@@ -34,6 +35,10 @@ const MainWindow = new Lang.Class({
         overlay.add_overlay(app.commandOutputQueue.widget);
 
         this._ircParser = new IrcParser.IrcParser();
+
+        this._accountsMonitor = new AccountsMonitor.getDefault();
+        this._accountsMonitor.connect('account-status-changed',
+                                      Lang.bind(this, this._accountStatusChanged));
 
         this._roomManager = new ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -107,6 +112,15 @@ const MainWindow = new Lang.Class({
 
         this.window.show_all();
     },
+
+    _accountStatusChanged: function(am, account) {
+        if (account.connection_status != Tp.ConnectionStatus.CONNECTING)
+            return;
+
+        let notification = new AppNotifications.ConnectingNotification(account);
+        this._notifications.addNotification(notification);
+    },
+
 
     _roomAdded: function(roomManager, room) {
         let userList;

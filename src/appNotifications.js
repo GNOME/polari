@@ -1,5 +1,6 @@
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
+const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -88,6 +89,36 @@ const GridOutput = new Lang.Class({
         }
         this.widget.add(grid);
         this.widget.show_all();
+    }
+});
+
+const ConnectingNotification = new Lang.Class({
+    Name: 'ConnectingNotification',
+    Extends: AppNotification,
+
+    _init: function(account) {
+        this.parent();
+
+        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
+                                    column_spacing: 12 });
+
+        this._grid.add(new Gtk.Spinner({ active: true }));
+
+        let text = _("Connecting to %s").format(account.display_name);
+        let label = new Gtk.Label({ label: text });
+        this._grid.add(label);
+
+        this.widget.add(this._grid);
+        this.widget.show_all();
+
+        account.connect('notify::connection-status',
+                        Lang.bind(this, this._onConnectionStatusChanged));
+    },
+
+    _onConnectionStatusChanged: function(account) {
+        if (account.connection_status == Tp.ConnectionStatus.CONNECTING)
+            return;
+        this.close();
     }
 });
 
