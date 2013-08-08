@@ -28,8 +28,6 @@ const UserList = new Lang.Class({
                      Lang.bind(this, this._onMemberRemoved));
         room.connect('member-banned',
                      Lang.bind(this, this._onMemberRemoved));
-        room.connect('member-joined',
-                     Lang.bind(this, this._onMemberRemoved));
         room.connect('member-left',
                      Lang.bind(this, this._onMemberRemoved));
         room.connect('member-joined',
