@@ -171,6 +171,7 @@ const Application = new Lang.Class({
             function() {
                 this._updateAccountAction(action);
             }));
+        this._updateAccountAction(action);
     },
 
     _leaveRoomCreateHook: function(action) {
