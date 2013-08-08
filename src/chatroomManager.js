@@ -43,6 +43,13 @@ const _ChatroomManager = new Lang.Class({
         return this._activeRoom;
     },
 
+    getRoomByName: function(name) {
+        for (let id in this._rooms)
+            if (this._rooms[id].channel.identifier == name)
+                return this._rooms[id];
+        return null;
+    },
+
     get roomCount() {
         return Object.keys(this._rooms).length;
     }

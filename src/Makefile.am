@@ -32,6 +32,7 @@ dist_js_DATA = \
 	chatroomManager.js \
 	chatView.js \
 	connections.js \
+	ircParser.js \
 	main.js \
 	mainWindow.js \
 	roomList.js \

@@ -4,6 +4,7 @@ const Gtk = imports.gi.Gtk;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
+const IrcParser = imports.ircParser;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
@@ -29,6 +30,8 @@ const MainWindow = new Lang.Class({
 
         overlay.add_overlay(app.notificationQueue.widget);
         overlay.add_overlay(app.commandOutputQueue.widget);
+
+        this._ircParser = new IrcParser.IrcParser();
 
         this._roomManager = new ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -73,8 +76,7 @@ const MainWindow = new Lang.Class({
 
         this._sendButton.connect('clicked', Lang.bind(this,
             function() {
-                if (this._entry.text)
-                    this._room.send(this._entry.text);
+                this._ircParser.process(this._entry.text);
                 this._entry.text = '';
             }));
 

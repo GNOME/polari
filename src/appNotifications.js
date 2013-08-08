@@ -42,6 +42,55 @@ const CommandOutputNotification = new Lang.Class({
     }
 });
 
+const SimpleOutput = new Lang.Class({
+    Name: 'SimpleOutput',
+    Extends: CommandOutputNotification,
+
+    _init: function(text) {
+        this.parent();
+
+        let label = new Gtk.Label({ label: text,
+                                    wrap: true,
+                                    wrap_mode: Pango.WrapMode.WORD,
+                                    vexpand: true,
+                                    visible: true });
+        this.widget.add(label);
+        this.widget.show_all();
+    }
+});
+
+const GridOutput = new Lang.Class({
+    Name: 'GridOutput',
+    Extends: CommandOutputNotification,
+
+    _init: function(header, items) {
+        this.parent();
+
+        let numItems = items.length;
+        let numCols = Math.min(numItems, 4);
+        let numRows = Number.toInteger(numItems / numCols) + numItems % numCols;
+
+        let grid = new Gtk.Grid({ column_homogeneous: true,
+                                  row_spacing: 6,
+                                  column_spacing: 18 });
+        grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
+
+        let row = 1;
+        for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+                let item = items[i + j * numRows];
+                if (!item)
+                    continue;
+                let w = new Gtk.Label({ label: item });
+                grid.attach(w, j, row, 1, 1);
+             }
+            row++;
+        }
+        this.widget.add(grid);
+        this.widget.show_all();
+    }
+});
+
 const NotificationQueue = new Lang.Class({
     Name: 'NotificationQueue',
 
