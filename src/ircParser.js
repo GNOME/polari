@@ -127,6 +127,7 @@ const IrcParser = new Lang.Class({
                     }));
                 break;
             }
+            case 'J':
             case 'JOIN': {
                 let room = argv.shift();
                 if (!room) {
