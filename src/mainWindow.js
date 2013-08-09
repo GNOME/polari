@@ -135,7 +135,7 @@ const MainWindow = new Lang.Class({
         }
 
         let position = this._settings.get_value('window-position');
-        if (size.n_children() == 2) {
+        if (position.n_children() == 2) {
             let x = position.get_child_value(0);
             let y = position.get_child_value(1);
             this.window.move(x.get_int32(), y.get_int32());
