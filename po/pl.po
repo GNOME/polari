@@ -1,0 +1,206 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Aviary.pl
+# Jeśli masz jakiekolwiek uwagi odnoszące się do tłumaczenia lub chcesz
+# pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
+# gnomepl@aviary.pl
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Piotr Drąg <piotrdrag@gmail.com>, 2013.
+# Aviary.pl <gnomepl@aviary.pl>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: polari\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-11 01:57+0200\n"
+"PO-Revision-Date: 2013-08-11 01:58+0200\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: Poland\n"
+
+#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/polari.desktop.in.h:2
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Klient IRC dla środowiska GNOME"
+
+#: ../data/polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;czat;pokój;rozmów;rozmowa;konferencja;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Połączenia"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Preferencje"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "O programie Polari"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Zakończ"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "Nowe połączenie"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Anuluj"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "_Utwórz"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "Serwer"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "_Adres"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "_Opis"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "Tożsamość"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "_Pseudonim"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "_Imię i nazwisko"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "opcjonalne"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "Za_mknij"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Dodaj"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Usuń"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "Dołącz do pokoju rozmów"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "_Dołącz"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "Pokój"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "P_ołączenie"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "_Nazwa"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "_Hasło"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Dołącz do pokoju"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Wyślij wiadomość do użytkownika"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "Op_uść"
+
+#: ../src/application.js:324
+msgid "Good Bye"
+msgstr "Do widzenia"
+
+#: ../src/application.js:371
+msgid "translator-credits"
+msgstr ""
+"Piotr Drąg <piotrdrag@gmail.com>, 2013\n"
+"Aviary.pl <gnomepl@aviary.pl>, 2013"
+
+#: ../src/chatView.js:319
+#, c-format
+msgid "%s is now known as %s"
+msgstr "Użytkownik %s jest teraz znany jako %s"
+
+#: ../src/chatView.js:324
+#, c-format
+msgid "%s has disconnected"
+msgstr "Użytkownik %s się rozłączył"
+
+#: ../src/chatView.js:332
+#, c-format
+msgid "%s has been kicked by %s"
+msgstr "Użytkownik %s został wyrzucony przez użytkownika %s"
+
+#: ../src/chatView.js:334
+#, c-format
+msgid "%s has been kicked"
+msgstr "Użytkownik %s został wyrzucony"
+
+#: ../src/chatView.js:340
+#, c-format
+msgid "%s has been banned by %s"
+msgstr "Użytkownik %s został zablokowany przez użytkownika %s"
+
+#: ../src/chatView.js:342
+#, c-format
+msgid "%s has been banned"
+msgstr "Użytkownik %s został zablokowany"
+
+#: ../src/chatView.js:347
+#, c-format
+msgid "%s joined"
+msgstr "Użytkownik %s dołączył do pokoju"
+
+#: ../src/chatView.js:351
+#, c-format
+msgid "%s left"
+msgstr "Użytkownik %s opuścił pokój"
+
+#: ../src/connections.js:227
+msgid "Edit Connection"
+msgstr "Modyfikuj połączenia"
+
+#: ../src/connections.js:228
+msgid "A_pply"
+msgstr "_Zastosuj"
+
+#: ../src/userList.js:99
+msgid "All"
+msgstr "Wszyscy"
