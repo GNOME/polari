@@ -1,0 +1,200 @@
+# Brazilian Portuguese translation for polari.
+# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Enrico Nicoletto <liverig@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-08-09 21:18+0000\n"
+"PO-Revision-Date: 2013-08-10 11:35-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../data/polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/polari.desktop.in.h:2
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
+
+#: ../data/polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;Bate-papo;Bate papo;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Conexões"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Preferências"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "Sobre Polari"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Sair"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "Nova conexão"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "Cr_iar"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "Servidor"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "_Endereço"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "_Descrição"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "Identidade"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "_Apelido"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "Nome _real"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "opcional"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Fechar"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Adicionar"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Remover"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "Entrar na sala de bate-papo"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "En_trar"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "Sala"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "C_onexão"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "_Nome"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "_Senha"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Entrar em uma sala"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Enviar mensagem a um usuário"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "A_bandonar"
+
+#: ../src/application.js:324
+msgid "Good Bye"
+msgstr "Até logo"
+
+#: ../src/application.js:371
+msgid "translator-credits"
+msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
+
+#: ../src/chatView.js:319
+#, c-format
+msgid "%s is now known as %s"
+msgstr "%s é conhecido agora como %s"
+
+#: ../src/chatView.js:324
+#, c-format
+msgid "%s has disconnected"
+msgstr "%s desconectou-se"
+
+#: ../src/chatView.js:332
+#, c-format
+msgid "%s has been kicked by %s"
+msgstr "%s foi retirado do canal por %s"
+
+#: ../src/chatView.js:334
+#, c-format
+msgid "%s has been kicked"
+msgstr "%s foi retirado do canal"
+
+#: ../src/chatView.js:340
+#, c-format
+msgid "%s has been banned by %s"
+msgstr "%s foi banido por %s"
+
+#: ../src/chatView.js:342
+#, c-format
+msgid "%s has been banned"
+msgstr "%s foi banido"
+
+#: ../src/chatView.js:347
+#, c-format
+msgid "%s joined"
+msgstr "%s entrou"
+
+#: ../src/chatView.js:351
+#, c-format
+msgid "%s left"
+msgstr "%s saiu"
+
+#: ../src/connections.js:227
+msgid "Edit Connection"
+msgstr "Editar conexão"
+
+#: ../src/connections.js:228
+msgid "A_pply"
+msgstr "A_plicar"
+
+#: ../src/userList.js:99
+msgid "All"
+msgstr "Todos"
+
