@@ -1,0 +1,201 @@
+# Czech translation for polari.
+# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+#
+# Marek Černocký <marek@manet.cz>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-08-09 21:18+0000\n"
+"PO-Revision-Date: 2013-08-10 15:41+0200\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/polari.desktop.in.h:2
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Komunikační klient IRC pro GNOME"
+
+#: ../data/polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;diskuze;diskuzní;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Připojení"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "O aplikaci Polari"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Ukončit"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "Nové připojení"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "V_ytvořit"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "Server"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "_Adresa"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "_Popis"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "Identita"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "Přez_dívka"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "_Skutečné jméno"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "nepovinné"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Zavřít"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Přidat"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Odebrat"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "Vstup do diskuzní místnosti"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "_Vstoupit"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "Místnost"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "Přip_ojení"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "_Název"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "_Heslo"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Vstoupit do místnosti"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Napsat uživateli"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "_Opustit"
+
+#: ../src/application.js:324
+msgid "Good Bye"
+msgstr "Naviděnou"
+
+#: ../src/application.js:371
+msgid "translator-credits"
+msgstr "Marek Černocký <marek@manet.cz>"
+
+#: ../src/chatView.js:319
+#, c-format
+msgid "%s is now known as %s"
+msgstr "%s je nyní znám jako %s"
+
+#: ../src/chatView.js:324
+#, c-format
+msgid "%s has disconnected"
+msgstr "%s se odpojil"
+
+#: ../src/chatView.js:332
+#, c-format
+msgid "%s has been kicked by %s"
+msgstr "%s byl vykopnut správcem %s"
+
+#: ../src/chatView.js:334
+#, c-format
+msgid "%s has been kicked"
+msgstr "%s byl vykopnut"
+
+#: ../src/chatView.js:340
+#, c-format
+msgid "%s has been banned by %s"
+msgstr "%s byl zablokován správcem %s"
+
+#: ../src/chatView.js:342
+#, c-format
+msgid "%s has been banned"
+msgstr "%s byl zablokován"
+
+#: ../src/chatView.js:347
+#, c-format
+msgid "%s joined"
+msgstr "%s se připojil"
+
+#: ../src/chatView.js:351
+#, c-format
+msgid "%s left"
+msgstr "%s opustil místnost"
+
+#: ../src/connections.js:227
+msgid "Edit Connection"
+msgstr "Úprava připojení"
+
+#: ../src/connections.js:228
+msgid "A_pply"
+msgstr "_Použít"
+
+#: ../src/userList.js:99
+msgid "All"
+msgstr "Vše"
