@@ -1,0 +1,204 @@
+# Slovenian translation for polari.
+# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+#
+# Matej Urbančič <mateju@svn.gnome.org> 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-08-14 12:14+0000\n"
+"PO-Revision-Date: 2013-08-17 15:45+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
+"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: sl_SI\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/polari.desktop.in.h:2
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr ""
+
+#: ../data/polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Klepet;Sobe;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Povezave"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Možnosti"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "O programu"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Končaj"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "Nova povezava"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Prekliči"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "Ustva_ri"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "Strežnik"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "_Naslov"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "_Opis"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "Istovetnost"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "_Vzdevek"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "_Pravo ime"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "dodatno"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Zapri"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Dodaj"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Odstrani"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "Pridruži se klepetalnici"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "_Pridruži se"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "Klepetalnica"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "P_ovezava"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "_Ime"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "_Geslo"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Pridruži se klepetalnici"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Pošlji sporočilo uporabnku"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "Z_apusti"
+
+#: ../src/application.js:324
+#, fuzzy
+msgid "Good Bye"
+msgstr "Zvonec potrditve"
+
+#: ../src/application.js:371
+msgid "translator-credits"
+msgstr "Matej Urbančič <mateju@svn.gnome.org>"
+
+#: ../src/chatView.js:319
+#, fuzzy, c-format
+msgid "%s is now known as %s"
+msgstr "%s je preimenovan v %s"
+
+#: ../src/chatView.js:324
+#, fuzzy, c-format
+msgid "%s has disconnected"
+msgstr "%s je prekinil povezavo"
+
+#: ../src/chatView.js:332
+#, fuzzy, c-format
+msgid "%s has been kicked by %s"
+msgstr "Konec igre! Zmagovalec igre je %s!"
+
+#: ../src/chatView.js:334
+#, fuzzy, c-format
+msgid "%s has been kicked"
+msgstr "%s je bil odklopljen"
+
+#: ../src/chatView.js:340
+#, fuzzy, c-format
+msgid "%s has been banned by %s"
+msgstr "%s je odklopil uporabnik %s."
+
+#: ../src/chatView.js:342
+#, fuzzy, c-format
+msgid "%s has been banned"
+msgstr "%s je bil odklopljen."
+
+#: ../src/chatView.js:347
+#, c-format
+msgid "%s joined"
+msgstr "%s je vstopil v klepetalnico."
+
+#: ../src/chatView.js:351
+#, c-format
+msgid "%s left"
+msgstr "%s preostalo"
+
+#: ../src/connections.js:227
+msgid "Edit Connection"
+msgstr "Uredi povezavo"
+
+#: ../src/connections.js:228
+msgid "A_pply"
+msgstr "_Uveljavi"
+
+#: ../src/userList.js:99
+msgid "All"
+msgstr "Vse"
