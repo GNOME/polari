@@ -262,7 +262,7 @@ const Application = new Lang.Class({
         let account = requestData.account;
 
         let req = Tp.AccountChannelRequest.new_text(account, requestData.time);
-        req.set_target_id(Tp.HandleType.ROOM, requestData.target);
+        req.set_target_id(requestData.targetHandleType, requestData.targetId);
         req.set_delegate_to_preferred_handler(true);
         let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
         req.ensure_channel_async(preferredHandler, null,
@@ -300,7 +300,8 @@ const Application = new Lang.Class({
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
-        this._addSavedChannel(account, requestData.target);
+        if (requestData.targetHandleType == Tp.HandleType.ROOM)
+            this._addSavedChannel(account, requestData.targetId);
     },
 
     _onJoinRoom: function(action, parameter) {
@@ -311,7 +312,8 @@ const Application = new Lang.Class({
 
         let requestData = {
           account: account,
-          target: channelName,
+          targetHandleType: Tp.HandleType.ROOM,
+          targetId: channelName,
           time: time,
           retry: 0,
           originalNick: account.nickname };
