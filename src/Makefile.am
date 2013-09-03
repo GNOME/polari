@@ -45,7 +45,7 @@ dist_js_DATA = \
 	$(NULL)
 
 config.js: config.js.in Makefile
-	$(do_subst) $< > $@
+	$(AM_V_GEN) $(do_subst) $< > $@
 
 nodist_js_DATA = \
 	config.js \
