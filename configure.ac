@@ -1,4 +1,4 @@
-AC_INIT([polari],[0.0.1],[],[polari])
+cAC_INIT([polari],[0.0.1],[],[polari])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
@@ -19,7 +19,7 @@ GLIB_GSETTINGS
 PKG_CHECK_MODULES(POLARI,
                   gio-2.0
                   gobject-introspection-1.0
-                  gtk+-3.0
+                  gtk+-3.0 >= 3.9.12
                   telepathy-glib);
 
 GJS_CONSOLE=`$PKG_CONFIG --variable=gjs_console gjs-1.0`
