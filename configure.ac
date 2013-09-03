@@ -1,4 +1,4 @@
-cAC_INIT([polari],[0.0.1],[],[polari])
+AC_INIT([polari],[0.0.1],[],[polari])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
