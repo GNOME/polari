@@ -29,20 +29,17 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">False</property>
-            <!-- set vpadding to 0 so the separator label extends to the bottom;
-                 other elements are not are center-aligned, so with the other
-                 headerbar's (default) vpadding, they end up just right -->
-            <property name="vpadding">0</property>
-            <!-- the hpadding property confuses left_side_size_group, so we
-                 add it as margin-left to the first button instead -->
-            <property name="hpadding">0</property>
+            <style>
+              <class name="polari-titlebar-left"/>
+            </style>
             <child>
               <object class="GtkMenuButton" id="button1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="margin-left">6</property>
+                <property name="margin-left">5</property>
+                <property name="margin-right">5</property>
                 <property name="menu_model">join_menu</property>
                 <property name="action_name">app.room-menu</property>
                 <style>
@@ -103,13 +100,8 @@
             <property name="visible">True</property>
             <property name="hexpand">True</property>
             <property name="show_close_button">True</property>
-            <!-- 6 should be the default value, but we set it explicitly
-                 to make sure it matches the value used in the left group
-                 (where we move the padding to the first element instead to
-                 not confuse the size group, see comment for titlebar_left -->
-            <property name="hpadding">6</property>
             <style>
-              <class name="polari-titlebar"/>
+              <class name="polari-titlebar-right"/>
             </style>
             <child>
               <object class="GtkLabel" id="label1">
