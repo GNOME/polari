@@ -230,7 +230,7 @@ const IrcParser = new Lang.Class({
                 let account = this._room.channel.connection.get_account();
 
                 let app = Gio.Application.get_default();
-                let action = app.lookup_action('join-room');
+                let action = app.lookup_action('message-user');
                 action.activate(GLib.Variant.new('(ssu)',
                                                  [ account.get_object_path(),
                                                    nick,

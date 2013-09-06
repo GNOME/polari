@@ -78,6 +78,9 @@ const Application = new Lang.Class({
           { name: 'join-room',
             activate: Lang.bind(this, this._onJoinRoom),
             parameter_type: GLib.VariantType.new('(ssu)') },
+          { name: 'message-user',
+            activate: Lang.bind(this, this._onMessageUser),
+            parameter_type: GLib.VariantType.new('(ssu)') },
           { name: 'leave-room',
             activate: Lang.bind(this, this._onLeaveRoom),
             parameter_type: GLib.VariantType.new('s') },
@@ -258,6 +261,22 @@ const Application = new Lang.Class({
         account.update_parameters_vardict_async(asv, [], callback);
     },
 
+    _requestChannel: function(accountPath, targetType, targetId, time) {
+        // have this in AccountMonitor?
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        let requestData = {
+          account: account,
+          targetHandleType: targetType,
+          targetId: targetId,
+          time: time,
+          retry: 0,
+          originalNick: account.nickname };
+
+        this._ensureChannel(requestData);
+    },
+
     _ensureChannel: function(requestData) {
         let account = requestData.account;
 
@@ -306,19 +325,14 @@ const Application = new Lang.Class({
 
     _onJoinRoom: function(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
-        // have this in AccountMonitor?
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        this._requestChannel(accountPath, Tp.HandleType.ROOM,
+                             channelName, time);
+    },
 
-        let requestData = {
-          account: account,
-          targetHandleType: Tp.HandleType.ROOM,
-          targetId: channelName,
-          time: time,
-          retry: 0,
-          originalNick: account.nickname };
-
-        this._ensureChannel(requestData);
+    _onMessageUser: function(action, parameter) {
+        let [accountPath, contactName, time] = parameter.deep_unpack();
+        this._requestChannel(accountPath, Tp.HandleType.CONTACT,
+                             contactName, time);
     },
 
     _onLeaveRoom: function(action, parameter) {
