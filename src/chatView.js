@@ -58,6 +58,9 @@ const ChatView = new Lang.Class({
         this._createWidget();
         this._createTags();
 
+        this.widget.connect('style-updated',
+                            Lang.bind(this, this._onStyleUpdated));
+
         this._room = room;
         this._lastNick = null;
         this._stackNotifyVisibleChildId = 0;
@@ -112,6 +115,28 @@ const ChatView = new Lang.Class({
     },
 
     _createTags: function() {
+        let buffer = this._view.get_buffer();
+        let tagTable = buffer.get_tag_table();
+        let tags = [
+          { name: 'nick',
+            left_margin: 0 },
+          { name: 'message',
+            indent: 0 },
+          { name: 'highlight',
+            weight: Pango.Weight.BOLD },
+          { name: 'status',
+            left_margin: 0,
+            indent: 0 },
+          { name: 'url',
+            underline: Pango.Underline.SINGLE
+          }
+        ];
+        tags.forEach(function(tagProps) {
+            tagTable.add(new Gtk.TextTag(tagProps));
+        });
+    },
+
+    _onStyleUpdated: function() {
         let context = this.widget.get_style_context();
         context.save();
         context.add_class('dim-label');
@@ -128,24 +153,20 @@ const ChatView = new Lang.Class({
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            foreground_rgba: dimColor,
-            left_margin: 0 },
-          { name: 'message',
-            indent: 0 },
-          { name: 'highlight',
-            weight: Pango.Weight.BOLD },
+            foreground_rgba: dimColor },
           { name: 'status',
-            foreground_rgba: dimColor,
-            left_margin: 0,
-            indent: 0 },
+            foreground_rgba: dimColor },
           { name: 'url',
-            foreground_rgba: linkColor,
-            underline: Pango.Underline.SINGLE
-          }
+            foreground_rgba: linkColor }
         ];
         tags.forEach(function(tagProps) {
-                tagTable.add(new Gtk.TextTag(tagProps));
-            });
+            let tag = tagTable.lookup(tagProps.name);
+            for (let prop in tagProps) {
+                if (prop == 'name')
+                    continue;
+                tag[prop] = tagProps[prop];
+            }
+        });
     },
 
     _createWidget: function() {
