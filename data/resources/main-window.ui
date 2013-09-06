@@ -31,6 +31,7 @@
             <property name="hexpand">False</property>
             <style>
               <class name="polari-titlebar-left"/>
+              <class name="titlebar"/>
             </style>
             <child>
               <object class="GtkMenuButton" id="button1">
@@ -102,6 +103,7 @@
             <property name="show_close_button">True</property>
             <style>
               <class name="polari-titlebar-right"/>
+              <class name="titlebar"/>
             </style>
             <child>
               <object class="GtkLabel" id="label1">
