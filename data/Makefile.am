@@ -16,21 +16,17 @@ polari.gresource: polari.gresource.xml $(resource_files)
 resourcedir=$(pkgdatadir)
 resource_DATA=polari.gresource
 
-gsettings_in_files = org.gnome.polari.gschema.xml.in
-gsettings_SCHEMAS = $(gsettings_in_files:.xml.in=.xml)
-
-@INTLTOOL_XML_NOMERGE_RULE@
+gsettings_SCHEMAS = org.gnome.polari.gschema.xml
 @GSETTINGS_RULES@
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
 	polari.gresource.xml \
 	$(resource_files) \
-	$(gsettings_in_files) \
+	$(gsettings_SCHEMAS) \
 	$(NULL)
 
 CLEANFILES = \
 	$(desktop_DATA) \
 	$(resource_DATA) \
-	$(gsettings_SCHEMAS) \
 	$(NULL)

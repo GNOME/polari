@@ -1,3 +1,4 @@
+data/org.gnome.polari.gschema.xml
 data/polari.desktop.in
 [type: gettext/glade]data/resources/app-menu.ui
 [type: gettext/glade]data/resources/connection-details-dialog.ui
