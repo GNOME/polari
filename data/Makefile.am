@@ -1,3 +1,5 @@
+SUBDIRS = icons
+
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 desktop_in_files = polari.desktop.in

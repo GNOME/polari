@@ -384,11 +384,15 @@ const Application = new Lang.Class({
                 'Florian M' + String.fromCharCode(0x00FC) // ü
                             + 'llner <fmuellner@gnome.org>',
             ],
+            artists: [
+                'Sam Hewitt',
+            ],
             translator_credits: _("translator-credits"),
             comments: _('An Internet Relay Chat Client for GNOME'),
             copyright: 'Copyright ' + String.fromCharCode(0x00A9) // ©
                                     + ' 2013 Red Hat, Inc.',
             license_type: Gtk.License.GPL_2_0,
+            logo_icon_name: 'polari',
             wrap_license: true,
             version: Config.PACKAGE_VERSION,
 
