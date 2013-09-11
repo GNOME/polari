@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-11 01:57+0200\n"
-"PO-Revision-Date: 2013-08-11 01:58+0200\n"
+"POT-Creation-Date: 2013-09-12 00:34+0200\n"
+"PO-Revision-Date: 2013-09-12 00:35+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -23,11 +23,43 @@ msgstr ""
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Zapisana lista kanałów"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Lista kanałów do przywrócenia podczas uruchamiania"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Rozmiar okna"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Rozmiar okna (szerokość i wysokość)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Położenie okna"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Położenie okna (na osi X i Y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Zmaksymalizowane okno"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Stan maksymalizacji okna"
+
 #: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2
+#: ../data/polari.desktop.in.h:2 ../src/application.js:391
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -143,53 +175,53 @@ msgstr "Wyślij wiadomość do użytkownika"
 msgid "_Leave"
 msgstr "Op_uść"
 
-#: ../src/application.js:324
+#: ../src/application.js:340
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:371
+#: ../src/application.js:390
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013"
 
-#: ../src/chatView.js:319
-#, c-format
+#: ../src/chatView.js:340
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "Użytkownik %s jest teraz znany jako %s"
 
-#: ../src/chatView.js:324
-#, c-format
+#: ../src/chatView.js:345
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "Użytkownik %s się rozłączył"
 
-#: ../src/chatView.js:332
-#, c-format
+#: ../src/chatView.js:353
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Użytkownik %s został wyrzucony przez użytkownika %s"
 
-#: ../src/chatView.js:334
-#, c-format
+#: ../src/chatView.js:355
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "Użytkownik %s został wyrzucony"
 
-#: ../src/chatView.js:340
-#, c-format
+#: ../src/chatView.js:361
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Użytkownik %s został zablokowany przez użytkownika %s"
 
-#: ../src/chatView.js:342
-#, c-format
+#: ../src/chatView.js:363
+#, javascript-format
 msgid "%s has been banned"
 msgstr "Użytkownik %s został zablokowany"
 
-#: ../src/chatView.js:347
-#, c-format
+#: ../src/chatView.js:368
+#, javascript-format
 msgid "%s joined"
 msgstr "Użytkownik %s dołączył do pokoju"
 
-#: ../src/chatView.js:351
-#, c-format
+#: ../src/chatView.js:372
+#, javascript-format
 msgid "%s left"
 msgstr "Użytkownik %s opuścił pokój"
 
