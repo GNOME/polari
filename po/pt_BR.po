@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-09 21:18+0000\n"
-"PO-Revision-Date: 2013-08-10 11:35-0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-09-12 18:04+0000\n"
+"PO-Revision-Date: 2013-09-12 17:29-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -16,9 +17,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.7\n"
 
-#: ../data/polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Lista de canais salvos"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Lista de canais a serem restaurados na inicialização"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Tamanho da janela"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Tamanho da janela (largura e altura)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Posição da janela"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Posição da janela (x e y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Janela maximizada"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Estado de janela maximizada"
+
+#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
@@ -138,50 +171,50 @@ msgstr "Enviar mensagem a um usuário"
 msgid "_Leave"
 msgstr "A_bandonar"
 
-#: ../src/application.js:324
+#: ../src/application.js:340
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:371
+#: ../src/application.js:390
 msgid "translator-credits"
 msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
 
-#: ../src/chatView.js:319
+#: ../src/chatView.js:340
 #, c-format
 msgid "%s is now known as %s"
 msgstr "%s é conhecido agora como %s"
 
-#: ../src/chatView.js:324
+#: ../src/chatView.js:345
 #, c-format
 msgid "%s has disconnected"
 msgstr "%s desconectou-se"
 
-#: ../src/chatView.js:332
+#: ../src/chatView.js:353
 #, c-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi retirado do canal por %s"
 
-#: ../src/chatView.js:334
+#: ../src/chatView.js:355
 #, c-format
 msgid "%s has been kicked"
 msgstr "%s foi retirado do canal"
 
-#: ../src/chatView.js:340
+#: ../src/chatView.js:361
 #, c-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:342
+#: ../src/chatView.js:363
 #, c-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:347
+#: ../src/chatView.js:368
 #, c-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:351
+#: ../src/chatView.js:372
 #, c-format
 msgid "%s left"
 msgstr "%s saiu"
@@ -197,4 +230,3 @@ msgstr "A_plicar"
 #: ../src/userList.js:99
 msgid "All"
 msgstr "Todos"
-
