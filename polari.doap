@@ -6,7 +6,7 @@
 
   <name xml:lang="en">Polari</name>
   <shortdesc xml:lang="en">An IRC Client for GNOME</shortdesc>
-  <description>Polari is a simple IRC Client that is designed to integrate seemlessly with GNOME 3</description>
+  <description>Polari is a simple IRC Client that is designed to integrate seamlessly with GNOME 3</description>
   <!--
   <homepage rdf:resource="http://live.gnome.org/Polari" />
   -->
