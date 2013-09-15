@@ -388,7 +388,7 @@ const Application = new Lang.Class({
                 'Sam Hewitt',
             ],
             translator_credits: _("translator-credits"),
-            comments: _('An Internet Relay Chat Client for GNOME'),
+            comments: _("An Internet Relay Chat Client for GNOME"),
             copyright: 'Copyright ' + String.fromCharCode(0x00A9) // ©
                                     + ' 2013 Red Hat, Inc.',
             license_type: Gtk.License.GPL_2_0,
