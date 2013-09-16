@@ -8,22 +8,54 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-09 12:37+0300\n"
-"PO-Revision-Date: 2013-08-09 12:40+0200\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"POT-Creation-Date: 2013-09-17 00:01+0300\n"
+"PO-Revision-Date: 2013-09-17 00:01+0300\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 :2;\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Saved channel list"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "List of channels to restore on startup"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Window size"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Window size (width and height)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Window position"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Window position (x and y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Window maximized"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Window maximized state"
 
 #: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2
+#: ../data/polari.desktop.in.h:2 ../src/application.js:391
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
@@ -139,53 +171,55 @@ msgstr "שליחת הודעה למשתמש"
 msgid "_Leave"
 msgstr "_עזיבה"
 
-#: ../src/application.js:324
+#: ../src/application.js:340
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:371
+#: ../src/application.js:390
 msgid "translator-credits"
-msgstr "יוסף אור בוצ׳קו <yoseforb@gmail.com>ירון שהרבני <sh.yaron@gmail.com>"
+msgstr ""
+"יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
+"ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:319
-#, c-format
+#: ../src/chatView.js:340
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:324
-#, c-format
+#: ../src/chatView.js:345
+#, javascript-format
 msgid "%s has disconnected"
-msgstr "%s התנתק"
+msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:332
-#, c-format
+#: ../src/chatView.js:353
+#, javascript-format
 msgid "%s has been kicked by %s"
-msgstr "%s נבעט ע״י %s"
+msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:334
-#, c-format
+#: ../src/chatView.js:355
+#, javascript-format
 msgid "%s has been kicked"
-msgstr "%s נבעט"
+msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:340
-#, c-format
+#: ../src/chatView.js:361
+#, javascript-format
 msgid "%s has been banned by %s"
-msgstr "%s נחסם על ידי %s"
+msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:342
-#, c-format
+#: ../src/chatView.js:363
+#, javascript-format
 msgid "%s has been banned"
-msgstr "%s נחסם"
+msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:347
-#, c-format
+#: ../src/chatView.js:368
+#, javascript-format
 msgid "%s joined"
-msgstr "%s הצטרף"
+msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:351
-#, c-format
+#: ../src/chatView.js:372
+#, javascript-format
 msgid "%s left"
-msgstr "%s עזב"
+msgstr "‏%s עזב"
 
 #: ../src/connections.js:227
 msgid "Edit Connection"
