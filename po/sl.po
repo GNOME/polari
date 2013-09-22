@@ -2,15 +2,15 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 #
-# Matej Urbančič <mateju@svn.gnome.org> 2013.
+# Matej Urbančič <mateju@svn.gnome.org>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-11 22:37+0000\n"
-"PO-Revision-Date: 2013-09-12 19:56+0100\n"
+"POT-Creation-Date: 2013-09-13 02:07+0000\n"
+"PO-Revision-Date: 2013-09-20 23:21+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.7\n"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -28,7 +28,7 @@ msgstr "Shranjen seznam kanalov"
 
 #: ../data/org.gnome.polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
-msgstr ""
+msgstr "Seznam kanalov, ki naj se obnovijo ob zagonu"
 
 #: ../data/org.gnome.polari.gschema.xml.h:3
 msgid "Window size"
@@ -60,7 +60,7 @@ msgstr "Polari"
 
 #: ../data/polari.desktop.in.h:2
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
+msgstr "Odjemalec za IRC za GNOME"
 
 #: ../data/polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
@@ -175,43 +175,42 @@ msgid "_Leave"
 msgstr "Z_apusti"
 
 #: ../src/application.js:340
-#, fuzzy
 msgid "Good Bye"
-msgstr "Zvonec potrditve"
+msgstr "Na svidenje"
 
 #: ../src/application.js:390
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
 #: ../src/chatView.js:340
-#, fuzzy, c-format
+#, c-format
 msgid "%s is now known as %s"
 msgstr "%s je preimenovan v %s"
 
 #: ../src/chatView.js:345
-#, fuzzy, c-format
+#, c-format
 msgid "%s has disconnected"
 msgstr "%s je prekinil povezavo"
 
 #: ../src/chatView.js:353
 #, fuzzy, c-format
 msgid "%s has been kicked by %s"
-msgstr "Konec igre! Zmagovalec igre je %s!"
+msgstr "%s je bil odstranjen s strani %s"
 
 #: ../src/chatView.js:355
 #, fuzzy, c-format
 msgid "%s has been kicked"
-msgstr "%s je bil odklopljen.\n"
+msgstr "%s je bil odstranjen"
 
 #: ../src/chatView.js:361
 #, fuzzy, c-format
 msgid "%s has been banned by %s"
-msgstr "Konec igre! Zmagovalec igre je %s!"
+msgstr "%s je dobil prepoved s strani %s"
 
 #: ../src/chatView.js:363
 #, fuzzy, c-format
 msgid "%s has been banned"
-msgstr "%s je bil odklopljen.\n"
+msgstr "%s je dobil prepoved"
 
 #: ../src/chatView.js:368
 #, c-format
