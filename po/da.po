@@ -58,7 +58,7 @@ msgstr "En Internet Relay Chat-klient for GNOME"
 
 #: ../data/polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Relay;Chat;Snak"
+msgstr "IRC;Internet;Relay;Chat;Snak;"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
