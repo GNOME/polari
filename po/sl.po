@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-13 02:07+0000\n"
-"PO-Revision-Date: 2013-09-20 23:21+0100\n"
+"POT-Creation-Date: 2013-09-22 19:24+0000\n"
+"PO-Revision-Date: 2013-09-27 00:10+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -58,7 +58,7 @@ msgstr "Razpeto stanje okna"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2
+#: ../data/polari.desktop.in.h:2 ../src/application.js:391
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Odjemalec za IRC za GNOME"
 
@@ -193,22 +193,21 @@ msgid "%s has disconnected"
 msgstr "%s je prekinil povezavo"
 
 #: ../src/chatView.js:353
-#, fuzzy, c-format
 msgid "%s has been kicked by %s"
 msgstr "%s je bil odstranjen s strani %s"
 
 #: ../src/chatView.js:355
-#, fuzzy, c-format
+#, c-format
 msgid "%s has been kicked"
 msgstr "%s je bil odstranjen"
 
 #: ../src/chatView.js:361
-#, fuzzy, c-format
+#, c-format
 msgid "%s has been banned by %s"
 msgstr "%s je dobil prepoved s strani %s"
 
 #: ../src/chatView.js:363
-#, fuzzy, c-format
+#, c-format
 msgid "%s has been banned"
 msgstr "%s je dobil prepoved"
 
