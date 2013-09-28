@@ -83,6 +83,8 @@ const _ChatroomManager = new Lang.Class({
         this._handler.register();
         this._observer.register();
 
+        am.connect('account-enabled',
+                   Lang.bind(this, this._restoreSavedChannels));
         this._restoreSavedChannels();
     },
 

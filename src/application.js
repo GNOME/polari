@@ -266,6 +266,9 @@ const Application = new Lang.Class({
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
 
+        if (!account.enabled)
+            return;
+
         let requestData = {
           account: account,
           targetHandleType: targetType,
