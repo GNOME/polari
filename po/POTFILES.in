@@ -5,8 +5,10 @@ data/org.gnome.Polari.desktop.in
 [type: gettext/glade]data/resources/connection-list-dialog.ui
 [type: gettext/glade]data/resources/join-room-dialog.ui
 [type: gettext/glade]data/resources/main-window.ui
+[type: gettext/glade]data/resources/message-user-dialog.ui
 src/application.js
 src/chatView.js
 src/connections.js
 src/mainWindow.js
+src/messageDialog.js
 src/userList.js

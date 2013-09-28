@@ -75,7 +75,9 @@ const Application = new Lang.Class({
             create_hook: Lang.bind(this, this._accountActionsCreateHook),
             accel: '<Primary>n' },
           { name: 'show-message-user-dialog',
-            activate: Lang.bind(this, this._onShowMessageUserDialog) },
+            activate: Lang.bind(this, this._onShowMessageUserDialog),
+            create_hook: Lang.bind(this, this._accountActionsCreateHook),
+            accel: '<Primary>m' },
           { name: 'join-room',
             activate: Lang.bind(this, this._onJoinRoom),
             parameter_type: GLib.VariantType.new('(ssu)') },
@@ -230,7 +232,7 @@ const Application = new Lang.Class({
     },
 
     _onShowMessageUserDialog: function() {
-        log('Activated action "Message user"');
+        this._window.showMessageUserDialog();
     },
 
     _addSavedChannel: function(account, channel) {
