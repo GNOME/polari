@@ -1,15 +1,9 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
-const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
-
-const MAX_RETRIES = 3;
-
-const TP_ERROR_PREFIX = 'org.freedesktop.Telepathy.Error.'
-const TP_ERROR_ALREADY_CONNECTED = TP_ERROR_PREFIX + 'AlreadyConnected';
 
 const TP_CURRENT_TIME = GLib.MAXUINT32;
 
