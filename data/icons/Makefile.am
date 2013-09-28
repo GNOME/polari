@@ -11,6 +11,7 @@ nobase_dist_icon_DATA = \
 	hicolor/32x32/apps/polari.png \
 	hicolor/48x48/apps/polari.png \
 	hicolor/512x512/apps/polari.png \
+	hicolor/scalable/apps/polari.svg \
 	$(NULL)
 
 noinst_DATA = \
