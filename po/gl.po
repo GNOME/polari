@@ -1,0 +1,230 @@
+# Spanish translation for polari.
+# Copyright (C) 2013 Polari developers
+# This file is distributed under the same license as the polari package.
+# Fran Dieguez <frandieguez@gnome.org>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: polari\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-29 02:57+0200\n"
+"PO-Revision-Date: 2013-09-29 03:04+0200\n"
+"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
+"Language-Team: gnome-l10n-gl@gnome.org\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Lista de canles gardada"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Lista de canles para gardar ao inicio"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Tamaño da xanela"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Tamaño da xanela (ancho e alto)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Posición da xanela"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Posición da xanela (x e y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Xanela maximizada"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Estado da xanela maximizada"
+
+#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/polari.desktop.in.h:2 ../src/application.js:391
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Un cliente de Internet Relay Chat para GNOME"
+
+#: ../data/polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Conexións"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "Sobre Polari"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Saír"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "Nova conexión"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "Cr_ear"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "Servidor"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "_Enderezo"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "_Descrición"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "Identidade"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "_Alcume"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "Nome _real"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "opcional"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Pechar"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Engadir"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Eliminar"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "Unirse a unha sala de conversas"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "_Unirse"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "Sala"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "Co_nexión"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "_Nome"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "_Contrasinal"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Unirse a unha sala"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Enviar mensaxe a un usuario"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "Aba_ndonar"
+
+#: ../src/application.js:340
+msgid "Good Bye"
+msgstr "Adeus"
+
+#: ../src/application.js:390
+msgid "translator-credits"
+msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013."
+
+#: ../src/chatView.js:345
+#, c-format
+msgid "%s is now known as %s"
+msgstr "%s é coñecido como %s"
+
+#: ../src/chatView.js:350
+#, c-format
+msgid "%s has disconnected"
+msgstr "%s desconectouse"
+
+#: ../src/chatView.js:358
+#, c-format
+msgid "%s has been kicked by %s"
+msgstr "%s foi expulsado por %s"
+
+#: ../src/chatView.js:360
+#, c-format
+msgid "%s has been kicked"
+msgstr "%s foi expulsado"
+
+#: ../src/chatView.js:366
+#, c-format
+msgid "%s has been banned by %s"
+msgstr "%s foi baneado por %s"
+
+#: ../src/chatView.js:368
+#, c-format
+msgid "%s has been banned"
+msgstr "%s foi baneado"
+
+#: ../src/chatView.js:373
+#, c-format
+msgid "%s joined"
+msgstr "%s uniuse"
+
+#: ../src/chatView.js:377
+#, c-format
+msgid "%s left"
+msgstr "%s saiu"
+
+#: ../src/connections.js:227
+msgid "Edit Connection"
+msgstr "Editar conexión"
+
+#: ../src/connections.js:228
+msgid "A_pply"
+msgstr "_Aplicar"
+
+#: ../src/userList.js:99
+msgid "All"
+msgstr "Todos"
