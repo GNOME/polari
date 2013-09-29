@@ -40,6 +40,7 @@ AC_PATH_PROG(DESKTOP_FILE_VALIDATE, desktop-file-validate)
 AC_CONFIG_FILES([
 Makefile
 data/Makefile
+data/appdata/Makefile
 data/icons/Makefile
 po/Makefile.in
 src/Makefile

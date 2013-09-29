@@ -1,4 +1,4 @@
-SUBDIRS = icons
+SUBDIRS = appdata icons
 
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)

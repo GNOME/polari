@@ -1,3 +1,4 @@
+data/appdata/org.gnome.Polari.appdata.xml.in
 data/org.gnome.polari.gschema.xml
 data/org.gnome.Polari.desktop.in
 [type: gettext/glade]data/resources/app-menu.ui

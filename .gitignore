@@ -14,6 +14,7 @@ aclocal.m4
 autom4te.cache/
 config.*
 configure
+data/appdata/*.appdata.xml
 data/*.desktop
 data/*.gresource
 data/*.gschema.valid

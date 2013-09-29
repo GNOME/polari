@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <id type="desktop">org.gnome.Polari.desktop</id>
+  <licence>CC0</licence>
+  <description>
+    <_p>
+      A simple Internet Relay Chat (IRC) client that is designed to integrate
+      seamlessly with GNOME; it features a simple and beautiful interface which
+      allows you to focus on your conversations.
+    </_p>
+  </description>
+  <screenshots>
+    <screenshot type="default" width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-main.png</screenshot>
+    <screenshot type="default" width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-user-list.png</screenshot>
+    <screenshot type="default" width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-connections.png</screenshot>
+  </screenshots>
+  <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
+  <updatecontact>fmuellner@gnome.org</updatecontact>
+</application>
