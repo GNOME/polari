@@ -83,8 +83,10 @@ const UserList = new Lang.Class({
     _updateHeader: function(row, before) {
         let numMembers = this._list.get_children().length;
 
-        if (before)
+        if (before) {
             row.set_header(null);
+            return;
+        }
 
         let header = this._list.get_row_at_index(0).get_header();
         if (header) {
