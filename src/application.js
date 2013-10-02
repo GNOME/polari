@@ -42,6 +42,7 @@ const Application = new Lang.Class({
 
         window._ = Gettext.gettext;
         window.C_ = Gettext.pgettext;
+        window.ngettext = Gettext.ngettext;
 
         Gtk.init(null);
 

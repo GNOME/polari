@@ -24,6 +24,20 @@
     border-width: 0 0 1px 0;
 }
 
+.polari-user-list .list-row {
+    -GtkWidget-focus-padding: 0;
+}
+
+.polari-user-list .list-row.expanded {
+    background-color: @content_view_bg;
+}
+
+.polari-user-list .list-row GtkFrame {
+    box-shadow: inset 0 2px 4px alpha(@polari_dark_bg_color, 0.8);
+    transition: all 250ms ease-out;
+    border-width: 0;
+}
+
 .polari-selection-toolbar,
 .polari-input-area {
     background-color: @polari_dark_bg_color;
