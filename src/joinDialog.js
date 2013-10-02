@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
@@ -39,6 +40,8 @@ const JoinDialog = new Lang.Class({
         this.widget = builder.get_object('join_room_dialog');
 
         this._connectionCombo = builder.get_object('connection_combo');
+        this._connectionCombo.connect('changed',
+                                      Lang.bind(this, this._onAccountChanged));
         this._connectionCombo.sensitive = false;
 
         this._joinButton = builder.get_object('join_button');
@@ -46,10 +49,40 @@ const JoinDialog = new Lang.Class({
                                  Lang.bind(this, this._onJoinClicked));
         this._joinButton.sensitive = false;
 
+        this._nameCompletion = builder.get_object('name_completion');
         this._nameEntry = builder.get_object('name_entry');
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._updateCanConfirm));
     },
+
+    _onAccountChanged: function() {
+        this._nameEntry.set_text('');
+        this._nameCompletion.model.clear();
+
+        let selected = this._connectionCombo.get_active_text();
+        let account = this._accounts[selected];
+        let logManager = Tpl.LogManager.dup_singleton();
+
+        logManager.get_entities_async(account, Lang.bind(this,
+            function(m, res) {
+                let [, entities] = logManager.get_entities_finish(res);
+                let names = entities.filter(function(e) {
+                    return e.type == Tpl.EntityType.ROOM;
+                }).map(function(e) {
+                    return e.alias;
+                });
+                for (let i = 0; i < names.length; i++) {
+                    let model = this._nameCompletion.model;
+                    let iter = model.append();
+                    model.set_value(iter, 0, names[i]);
+                    if (names[i].startsWith('#')) {
+                        iter = model.append();
+                        model.set_value(iter, 0, names[i].substr(1));
+                    }
+                }
+            }));
+    },
+
 
     _onJoinClicked: function() {
         this.widget.hide();
