@@ -83,7 +83,9 @@ const MainWindow = new Lang.Class({
         this._roomList = new RoomList.RoomList();
         scroll.add(this._roomList.widget);
 
-        this._userListStack = builder.get_object('user_list_stack');
+        let sidebar = builder.get_object('user_list_sidebar');
+        this._userListSidebar = new UserList.UserListSidebar();
+        sidebar.add(this._userListSidebar.widget);
 
         let revealer = builder.get_object('user_list_revealer');
         app.connect('action-state-changed::user-list', Lang.bind(this,
@@ -259,22 +261,14 @@ const MainWindow = new Lang.Class({
 
 
     _roomAdded: function(roomManager, room) {
-        let userList;
         let chatView = new ChatView.ChatView(room);
+        this._rooms[room.id] = chatView;
 
-        if (room.channel.handle_type == Tp.HandleType.ROOM)
-            userList = new UserList.UserList(room);
-        else
-            userList = { widget: new Gtk.Label() };
-
-        this._rooms[room.id] = [chatView, userList];
-
-        this._userListStack.add_named(userList.widget, room.id);
         this._chatStack.add_named(chatView.widget, room.id);
     },
 
     _roomRemoved: function(roomManager, room) {
-        this._rooms[room.id].forEach(function(w) { w.widget.destroy(); });
+        this._rooms[room.id].widget.destroy();
         delete this._rooms[room.id];
     },
 
@@ -315,7 +309,6 @@ const MainWindow = new Lang.Class({
                                                             this._updateNick));
 
         this._chatStack.set_visible_child_name(this._room.id);
-        this._userListStack.set_visible_child_name(this._room.id);
     },
 
     _setNick: function(nick) {

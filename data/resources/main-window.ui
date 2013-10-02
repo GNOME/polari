@@ -351,7 +351,7 @@
                     <property name="hexpand">False</property>
                     <property name="transition_type">slide-left</property>
                     <child>
-                      <object class="PolariFixedSizeFrame" id="frame2">
+                      <object class="PolariFixedSizeFrame" id="user_list_sidebar">
                         <property name="visible">True</property>
                         <property name="hexpand">False</property>
                         <property name="width">200</property>
@@ -361,16 +361,7 @@
                           <class name="polari-user-list"/>
                         </style>
                         <child>
-                          <object class="GtkStack" id="user_list_stack">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="hexpand">True</property>
-                            <property name="halign">fill</property>
-                            <property name="transition_type">crossfade</property>
-                            <child>
-                              <placeholder/>
-                            </child>
-                          </object>
+                          <placeholder/>
                         </child>
                       </object>
                     </child>

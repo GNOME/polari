@@ -1,8 +1,57 @@
 const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
+const Tp = imports.gi.TelepathyGLib;
 
+const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
+
+const UserListSidebar = new Lang.Class({
+    Name: 'UserListSidebar',
+
+    _init: function() {
+        this._createWidget();
+
+        this._rooms = {};
+
+        this._roomManager = new ChatroomManager.getDefault();
+        this._roomManager.connect('room-added',
+                                  Lang.bind(this, this._roomAdded));
+        this._roomManager.connect('room-removed',
+                                  Lang.bind(this, this._roomRemoved));
+        this._roomManager.connect('active-changed',
+                                  Lang.bind(this, this._activeRoomChanged));
+    },
+
+    _createWidget: function() {
+        this.widget = new Gtk.Stack({ hexpand: true, visible: true });
+        this.widget.transition_type = Gtk.StackTransitionType.CROSSFADE;
+    },
+
+    _roomAdded: function(roomManager, room) {
+        if (room.channel.handle_type != Tp.HandleType.ROOM)
+            return;
+
+        let userList = new UserList(room);
+        this._rooms[room.id] = userList;
+
+        this.widget.add_named(userList.widget, room.id);
+    },
+
+    _roomRemoved: function(roomManager, room) {
+        if (!this._rooms[room.id])
+            return;
+        this._rooms[room.id].widget.destroy();
+        delete this._rooms[room.id];
+    },
+
+    _activeRoomChanged: function(manager, room) {
+        if (!room || !this._rooms[room.id])
+            return;
+        this.widget.set_visible_child_name(room.id);
+    },
+
+});
 
 const UserList = new Lang.Class({
     Name: 'UserList',
