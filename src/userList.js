@@ -13,6 +13,7 @@ const UserListSidebar = new Lang.Class({
         this._createWidget();
 
         this._rooms = {};
+        this._room = null;
 
         this._roomManager = new ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -24,8 +25,34 @@ const UserListSidebar = new Lang.Class({
     },
 
     _createWidget: function() {
-        this.widget = new Gtk.Stack({ hexpand: true, visible: true });
-        this.widget.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+
+        this._revealer = new Gtk.Revealer();
+        this.widget.add(this._revealer);
+
+        let frame = new Gtk.Frame();
+        frame.get_style_context().add_class('polari-user-list-search-area');
+        this._revealer.add(frame);
+
+        this._entry = new Gtk.SearchEntry({ margin: 4 });
+        this._entry.connect('search-changed',
+                            Lang.bind(this, this._updateFilter));
+        this._entry.connect_after('key-press-event', Lang.bind(this,
+            function(w, event) {
+                let [, keyval] = event.get_keyval();
+                if (keyval == Gdk.KEY_Escape) {
+                    this._entry.text = '';
+                    return true;
+                }
+                return false;
+            }));
+        frame.add(this._entry);
+
+        this._stack = new Gtk.Stack({ hexpand: true, vexpand: true });
+        this._stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        this.widget.add(this._stack);
+
+        this.widget.show_all();
     },
 
     _roomAdded: function(roomManager, room) {
@@ -35,7 +62,10 @@ const UserListSidebar = new Lang.Class({
         let userList = new UserList(room);
         this._rooms[room.id] = userList;
 
-        this.widget.add_named(userList.widget, room.id);
+        this._stack.add_named(userList.widget, room.id);
+
+        userList.widget.vadjustment.connect('changed',
+                                            Lang.bind(this, this._updateEntryVisibility));
     },
 
     _roomRemoved: function(roomManager, room) {
@@ -46,11 +76,33 @@ const UserListSidebar = new Lang.Class({
     },
 
     _activeRoomChanged: function(manager, room) {
+        this._entry.text = '';
+        this._updateFilter();
+
+        this._room = room;
+
         if (!room || !this._rooms[room.id])
             return;
-        this.widget.set_visible_child_name(room.id);
+
+        this._stack.set_visible_child_name(room.id);
+        this._updateEntryVisibility();
     },
 
+    _updateEntryVisibility: function() {
+        if (!this._room || !this._rooms[this._room.id])
+            return;
+        let userList = this._rooms[this._room.id];
+        let [, natHeight] = userList.widget.get_child().get_preferred_height();
+        let height = this.widget.get_allocated_height();
+        this._revealer.reveal_child = this._entry.text != '' ||
+                                      natHeight > height;
+    },
+
+    _updateFilter: function() {
+        if (!this._room || !this._rooms[this._room.id])
+            return;
+        this._rooms[this._room.id].setFilter(this._entry.text);
+    }
 });
 
 const UserList = new Lang.Class({
@@ -65,6 +117,7 @@ const UserList = new Lang.Class({
 
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
         this._list.set_header_func(Lang.bind(this, this._updateHeader));
+        this._list.set_filter_func(Lang.bind(this, this._filterRows));
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
         this._room = room;
@@ -87,6 +140,11 @@ const UserList = new Lang.Class({
             this._addMember(members[i]);
 
         this.widget.show_all();
+    },
+
+    setFilter: function(filter) {
+        this._filter = filter.toLowerCase();
+        this._list.invalidate_filter();
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -127,6 +185,12 @@ const UserList = new Lang.Class({
 
     _sort: function(row1, row2) {
         return row1._member.alias.localeCompare(row2._member.alias);
+    },
+
+    _filterRows: function(row) {
+        if (!this._filter)
+            return true;
+        return row._member.alias.toLowerCase().indexOf(this._filter) != -1;
     },
 
     _updateHeader: function(row, before) {

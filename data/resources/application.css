@@ -20,6 +20,10 @@
     border-width: 0 0 0 1px;
 }
 
+.polari-user-list-search-area {
+    border-width: 0 0 1px 0;
+}
+
 .polari-selection-toolbar,
 .polari-input-area {
     background-color: @polari_dark_bg_color;
