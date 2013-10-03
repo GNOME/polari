@@ -105,6 +105,27 @@ const UserListSidebar = new Lang.Class({
     }
 });
 
+const UserListRow = new Lang.Class({
+    Name: 'UserListRow',
+
+    _init: function(user) {
+        this._createWidget(user);
+
+        this.widget.user = user;
+    },
+
+    _createWidget: function(user) {
+        this.widget = new Gtk.ListBoxRow();
+        let box = new Gtk.Box({ margin: 4, spacing: 4 });
+        box.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
+        box.add(new Gtk.Label({ label: user.alias,
+                                halign: Gtk.Align.START,
+                                ellipsize: Pango.EllipsizeMode.END }));
+        this.widget.add(box);
+        this.widget.show_all();
+    }
+});
+
 const UserList = new Lang.Class({
     Name: 'UserList',
 
@@ -121,6 +142,7 @@ const UserList = new Lang.Class({
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
         this._room = room;
+        this._rows = {};
 
         room.connect('member-renamed',
                      Lang.bind(this, this._onMemberRenamed));
@@ -161,36 +183,26 @@ const UserList = new Lang.Class({
     },
 
     _addMember: function(member) {
-        let row = new Gtk.ListBoxRow();
-        row._member = member;
-        let box = new Gtk.Box({ margin: 4, spacing: 4 });
-        box.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
-        box.add(new Gtk.Label({ label: member.alias,
-                                halign: Gtk.Align.START,
-                                ellipsize: Pango.EllipsizeMode.END }));
-        row.add(box);
-        row.show_all();
-        this._list.add(row);
+        let row = new UserListRow(member);
+        this._rows[member] = row;
+        this._list.add(row.widget);
     },
 
     _removeMember: function(member) {
-        let rows = this._list.get_children();
-        for (let i = 0; i < rows.length; i++) {
-            if (rows[i]._member != member)
-                continue;
-            this._list.remove(rows[i]);
-            break;
-        }
+        let row = this._rows[member];
+        if (row && row.widget.get_parent())
+            this._list.remove(row.widget);
+        delete this._rows[member];
     },
 
     _sort: function(row1, row2) {
-        return row1._member.alias.localeCompare(row2._member.alias);
+        return row1.user.alias.localeCompare(row2.user.alias);
     },
 
     _filterRows: function(row) {
         if (!this._filter)
             return true;
-        return row._member.alias.toLowerCase().indexOf(this._filter) != -1;
+        return row.user.alias.toLowerCase().indexOf(this._filter) != -1;
     },
 
     _updateHeader: function(row, before) {
