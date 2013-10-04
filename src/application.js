@@ -196,8 +196,14 @@ const Application = new Lang.Class({
                 this._updateUserListAction(action);
             }));
         action.connect('notify::enabled', function() {
-            if (!action.enabled)
+            if (action.enabled) {
+                if (action._previousState)
+                    action.change_state(GLib.Variant.new('b', true));
+                delete action._previousState;
+            } else {
+                action._previousState = action.state.get_boolean();
                 action.change_state(GLib.Variant.new('b', false));
+            }
         });
         this._updateUserListAction(action);
     },
