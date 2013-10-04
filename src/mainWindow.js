@@ -92,6 +92,10 @@ const MainWindow = new Lang.Class({
             function(group, actionName, value) {
                 revealer.reveal_child = value.get_boolean();
             }));
+        revealer.connect('notify::child-revealed', Lang.bind(this,
+            function() {
+                this._userListSidebar.animateEntry = revealer.child_revealed;
+            }));
 
         this._selectionModeAction = app.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',

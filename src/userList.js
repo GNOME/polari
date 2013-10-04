@@ -26,6 +26,10 @@ const UserListSidebar = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
     },
 
+    set animateEntry(animate) {
+        this._revealer.transition_duration = animate ? 250 : 0;
+    },
+
     _createWidget: function() {
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
 
