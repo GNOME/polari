@@ -6,5 +6,6 @@ TryExec=polari
 Icon=polari
 Type=Application
 StartupNotify=true
+DBusActivatable=true
 Categories=GNOME;GTK;Network;IRCClient;
 _Keywords=IRC;Internet;Relay;Chat;
