@@ -188,8 +188,6 @@ const Application = new Lang.Class({
     _updateUserListAction: function(action) {
         let room = this._chatroomManager.getActiveRoom();
         action.enabled = room && room.channel.handle_type == Tp.HandleType.ROOM;
-        if (!action.enabled)
-            action.change_state(GLib.Variant.new('b', false));
     },
 
     _userListCreateHook: function(action) {
@@ -197,13 +195,15 @@ const Application = new Lang.Class({
             function() {
                 this._updateUserListAction(action);
             }));
+        action.connect('notify::enabled', function() {
+            if (!action.enabled)
+                action.change_state(GLib.Variant.new('b', false));
+        });
         this._updateUserListAction(action);
     },
 
     _updateSelectionModeAction: function(action) {
         action.enabled = this._chatroomManager.roomCount > 0;
-        if (!action.enabled)
-            action.change_state(GLib.Variant.new('b', false));
     },
 
     _selectionModeHook: function(action) {
@@ -211,6 +211,10 @@ const Application = new Lang.Class({
             function() {
                 this._updateSelectionModeAction(action);
             }));
+        action.connect('notify::enabled', function() {
+            if (!action.enabled)
+                action.change_state(GLib.Variant.new('b', false));
+        });
         this._updateSelectionModeAction(action);
     },
 
