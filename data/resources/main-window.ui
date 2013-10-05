@@ -179,8 +179,20 @@
                 <!-- we want some margin around title/subtitle - setting
                      it on the first and last button has the same effect,
                      and spares us from using a custom title widget -->
-                <property name="margin-right">24</property>
+                <property name="width-request">24</property>
               </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <!-- we want some margin around title/subtitle - setting
+                     it on the first and last button has the same effect,
+                     and spares us from using a custom title widget -->
+                <property name="width-request">24</property>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
             </child>
             <child>
               <object class="GtkToggleButton" id="show_user_list_button">
@@ -189,10 +201,6 @@
                 <property name="focus_on_click">False</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <!-- we want some margin around title/subtitle - setting
-                     it on the first and last button has the same effect,
-                     and spares us from using a custom title widget -->
-                <property name="margin-left">24</property>
                 <property name="action_name">app.user-list</property>
                 <style>
                   <class name="image-button"/>
