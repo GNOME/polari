@@ -29,6 +29,7 @@ const _ChatroomManager = new Lang.Class({
 
         let factory = this._accountManager.get_factory();
         factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
+        factory.add_contact_features([Tp.ContactFeature.ALIAS]);
 
         this._accountManager.prepare_async(null,
                                            Lang.bind(this, this._onPrepared));
