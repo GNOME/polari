@@ -206,10 +206,25 @@ const RoomList = new Lang.Class({
     _onLeaveActivated: function(action, param) {
         let id = param.deep_unpack();
         let row = this._roomRows[id].widget;
-        let selected = this.widget.get_selected_row();
-        if (selected == row && this.widget.get_children().length > 1) {
-            let count = row.get_index() == 0 ? 1 : -1;
-            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
+
+        let activeRoom = this._roomManager.getActiveRoom();
+        let current = this._roomRows[activeRoom.id].widget;
+
+        if (current == row) {
+            let selected = this.widget.get_selected_row();
+            let newActive = null;
+            let visibleChildren = this.widget.get_children().filter(function(c) {
+                return c.visible;
+            });
+            if (visibleChildren.length > 1) {
+                this.widget.select_row(row);
+                let count = row.get_index() == 0 ? 1 : -1;
+                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
+                newActive = this.widget.get_focus_child().room;
+            }
+            this._roomManager.setActiveRoom(newActive);
+            if (selected != row)
+                this.widget.select_row(selected);
         }
         row.hide();
     },
