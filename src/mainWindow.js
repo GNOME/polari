@@ -248,15 +248,11 @@ const MainWindow = new Lang.Class({
 
         this._userListStack.add_named(userList.widget, room.id);
         this._chatStack.add_named(chatView.widget, room.id);
-
-        this._revealer.reveal_child = roomManager.roomCount > 0;
     },
 
     _roomRemoved: function(roomManager, room) {
         this._rooms[room.id].forEach(function(w) { w.widget.destroy(); });
         delete this._rooms[room.id];
-
-        this._revealer.reveal_child = roomManager.roomCount > 0;
     },
 
     _activeRoomChanged: function(manager, room) {
@@ -270,6 +266,7 @@ const MainWindow = new Lang.Class({
         this._nicknameChangedId = 0;
 
         this._room = room;
+        this._revealer.reveal_child = room != null;
 
         this._updateTitlebar();
         this._updateNick();

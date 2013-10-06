@@ -209,7 +209,7 @@ const Application = new Lang.Class({
     },
 
     _updateSelectionModeAction: function(action) {
-        action.enabled = this._chatroomManager.roomCount > 0;
+        action.enabled = this._chatroomManager.getActiveRoom() != null;
     },
 
     _selectionModeHook: function(action) {
