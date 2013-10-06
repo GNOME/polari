@@ -307,6 +307,9 @@ const Application = new Lang.Class({
 
         try {
             req.ensure_channel_finish(res);
+
+            if (requestData.targetHandleType == Tp.HandleType.ROOM)
+                this._addSavedChannel(account, requestData.targetId);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
             let [error,] = account.dup_detailed_error_vardict();
             if (error != TP_ERROR_ALREADY_CONNECTED)
@@ -332,8 +335,6 @@ const Application = new Lang.Class({
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
-        if (requestData.targetHandleType == Tp.HandleType.ROOM)
-            this._addSavedChannel(account, requestData.targetId);
     },
 
     _onJoinRoom: function(action, parameter) {
