@@ -39,6 +39,7 @@ const Application = new Lang.Class({
         GLib.set_prgname('polari');
         GLib.set_application_name('Polari');
         this._window = null;
+        this._pendingRequests = {};
     },
 
     vfunc_startup: function() {
@@ -146,6 +147,8 @@ const Application = new Lang.Class({
         this._window = new MainWindow.MainWindow(this);
         this._window.window.connect('destroy', Lang.bind(this,
             function() {
+                for (let id in this._pendingRequests)
+                    this._pendingRequests[id].cancellable.cancel();
                 this.emitJS('prepare-shutdown');
             }));
 
@@ -285,13 +288,19 @@ const Application = new Lang.Class({
         if (!account.enabled)
             return;
 
+        let roomId = Polari.create_room_id(account,  targetId, targetType);
+
         let requestData = {
           account: account,
           targetHandleType: targetType,
           targetId: targetId,
+          roomId: roomId,
+          cancellable: new Gio.Cancellable(),
           time: time,
           retry: 0,
           originalNick: account.nickname };
+
+        this._pendingRequests[roomId] = requestData;
 
         this._ensureChannel(requestData);
     },
@@ -303,7 +312,7 @@ const Application = new Lang.Class({
         req.set_target_id(requestData.targetHandleType, requestData.targetId);
         req.set_delegate_to_preferred_handler(true);
         let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_channel_async(preferredHandler, null,
+        req.ensure_channel_async(preferredHandler, requestData.cancellable,
                                  Lang.bind(this,
                                            this._onEnsureChannel, requestData));
     },
@@ -335,12 +344,15 @@ const Application = new Lang.Class({
                     this._ensureChannel(requestData);
                 }));
             return;
+        } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
+            // interrupted by user request, don't log
         } catch (e) {
             logError(e, 'Failed to ensure channel');
         }
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
+        delete this._pendingRequests[requestData.roomId];
     },
 
     _onJoinRoom: function(action, parameter) {
@@ -361,16 +373,20 @@ const Application = new Lang.Class({
         let room = this._chatroomManager.getRoomById(roomId);
         if (!room)
             return;
-        if (!message.length)
-            message = _("Good Bye"); // TODO - our first setting?
-        room.channel.leave_async(reason, message, Lang.bind(this,
-            function(c, res) {
-                try {
-                    c.leave_finish(res);
-                } catch(e) {
-                    logError(e, 'Failed to leave channel');
-                }
-            }));
+        if (this._pendingRequests[roomId]) {
+            this._pendingRequests[roomId].cancellable.cancel();
+        } else {
+            if (!message.length)
+                message = _("Good Bye"); // TODO - our first setting?
+            room.channel.leave_async(reason, message, Lang.bind(this,
+                function(c, res) {
+                    try {
+                        c.leave_finish(res);
+                    } catch(e) {
+                        logError(e, 'Failed to leave channel');
+                    }
+                }));
+        }
         this._removeSavedChannel(room.account, room.channel_name);
     },
 
