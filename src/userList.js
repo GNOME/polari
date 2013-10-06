@@ -77,7 +77,7 @@ const UserList = new Lang.Class({
     },
 
     _sort: function(row1, row2) {
-        return row1.user.alias.localeCompare(row2.user.alias);
+        return row1._member.alias.localeCompare(row2._member.alias);
     },
 
     _updateHeader: function(row, before) {
