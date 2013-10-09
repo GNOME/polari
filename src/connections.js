@@ -154,6 +154,7 @@ const ConnectionsDialog = new Lang.Class({
                                           connection_manager: 'idle',
                                           protocol: 'irc',
                                           display_name: params.name });
+        req.set_enabled(true);
 
         let [details,] = this._detailsFromParams(params, {});
 
