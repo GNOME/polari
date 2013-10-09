@@ -58,6 +58,8 @@ enum
   MEMBER_KICKED,
   MEMBER_BANNED,
 
+  MEMBERS_CHANGED,
+
   LAST_SIGNAL
 };
 
@@ -281,6 +283,8 @@ on_group_contacts_changed (TpChannel  *channel,
                        g_ptr_array_index (added, i));
       break;
     }
+
+  g_signal_emit (user_data, signals[MEMBERS_CHANGED], 0);
 }
 
 static void
@@ -549,6 +553,14 @@ polari_room_class_init (PolariRoomClass *klass)
                   0,
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 2, TP_TYPE_CONTACT, TP_TYPE_CONTACT);
+
+  signals[MEMBERS_CHANGED] =
+    g_signal_new ("members-changed",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 }
 
 static void
