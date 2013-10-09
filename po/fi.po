@@ -1,0 +1,225 @@
+# Finnish translation for polari.
+# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-10-04 20:55+0000\n"
+"PO-Revision-Date: 2013-10-05 19:40+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Tallennettujen kanavien luettelo"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Luettelo kanavista, jotka palautetaan käynnistyksen yhteydessä"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Ikkunan koko"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Ikkunan koko (leveys ja korkeus)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Ikkunan sijainti"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Ikkunan sijainti (x ja y)"
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Ikkuna suurennettu"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Suurennetun ikkunan tila"
+
+#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/polari.desktop.in.h:2 ../src/application.js:404
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "IRC-asiakassovellus Gnomelle"
+
+#: ../data/polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;irkki;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Yhteydet"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Asetukset"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "Tietoja - Polari"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Lopeta"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "Uusi yhteys"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Peru"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "_Luo"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "Palvelin"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "_Osoite"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "_Kuvaus"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "Omat tiedot"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "K_utsumanimi"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "O_ikea nimi"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "valinnainen"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Sulje"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Lisää"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Poista"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "Liity kanavalle"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "_Liity"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "Kanava"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "_Yhteys"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "_Nimi"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "_Salasana"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Liity kanavalle"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Lähetä viesti käyttäjälle"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "_Poistu"
+
+#: ../src/application.js:353
+msgid "Good Bye"
+msgstr "Näkemiin"
+
+#: ../src/application.js:403
+msgid "translator-credits"
+msgstr "Jiri Grönroos"
+
+#: ../src/chatView.js:345
+msgid "%s is now known as %s"
+msgstr "%s vaihto nimekseen %s"
+
+#: ../src/chatView.js:350
+msgid "%s has disconnected"
+msgstr "%s katkaisi yhteyden"
+
+#: ../src/chatView.js:358
+msgid "%s has been kicked by %s"
+msgstr "%s potkaistiin käyttäjän %s toimesta"
+
+#: ../src/chatView.js:360
+msgid "%s has been kicked"
+msgstr "%s potkaistiin"
+
+#: ../src/chatView.js:366
+msgid "%s has been banned by %s"
+msgstr "%s sai bannit käyttäjän %s toimesta"
+
+#: ../src/chatView.js:368
+msgid "%s has been banned"
+msgstr "%s bannattiin"
+
+#: ../src/chatView.js:373
+msgid "%s joined"
+msgstr "%s liittyi"
+
+#: ../src/chatView.js:377
+msgid "%s left"
+msgstr "%s poistui"
+
+#: ../src/connections.js:227
+msgid "Edit Connection"
+msgstr "Muokkaa yhteyttä"
+
+#: ../src/connections.js:228
+msgid "A_pply"
+msgstr "_Toteuta"
+
+#: ../src/userList.js:99
+msgid "All"
+msgstr "Kaikki"
