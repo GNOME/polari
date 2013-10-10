@@ -26,13 +26,13 @@ const RoomRow = new Lang.Class({
                           Lang.bind(this, this._onSelectionModeChanged));
 
         room.channel.connect('message-received',
-                             Lang.bind(this, this._updateCounter));
+                             Lang.bind(this, this._updatePending));
         room.channel.connect('pending-message-removed',
-                             Lang.bind(this, this._updateCounter));
-        room.connect('notify::display-name',
-                     Lang.bind(this, this._updateLabel));
+                             Lang.bind(this, this._updatePending));
+        room.bind_property('display-name', this._roomLabel, 'label',
+                           GObject.BindingFlags.SYNC_CREATE);
 
-        this._updateCounter();
+        this._updatePending();
         this._updateMode();
     },
 
@@ -44,26 +44,21 @@ const RoomRow = new Lang.Class({
             this.selection_button.active = false;
     },
 
-    _updateCounter: function() {
-        let channel = this.widget.room.channel;
-        let numPending = channel.dup_pending_messages().length;
-
-        this._counter.label = numPending.toString();
-        this._counter.opacity = numPending > 0 ? 1. : 0.;
-
-        this._updateLabel();
-    },
-
-    _updateLabel: function() {
+    _updatePending: function() {
         let room = this.widget.room;
 
-        let highlight = false;
         let pending = room.channel.dup_pending_messages();
-        for (let i = 0; i < pending.length && !highlight; i++)
-            highlight = room.should_highlight_message(pending[i]);
+        let numPendingHighlights;
+        if (room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
+            numPendingHighlights = pending.filter(function(m) {
+                return room.should_highlight_message(m);
+            }).length;
+        else
+            numPendingHighlights = pending.length;
 
-        this._roomLabel.label = (highlight ? "<b>%s</b>"
-                                           : "%s").format(room.display_name);
+        this._counter.label = numPendingHighlights.toString();
+        this._counter.opacity = numPendingHighlights > 0 ? 1. : 0.;
+
     },
 
     _onSelectionModeChanged: function() {
