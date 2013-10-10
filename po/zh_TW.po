@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 19:48+0800\n"
+"POT-Creation-Date: 2013-10-10 08:21+0800\n"
 "PO-Revision-Date: 2013-09-28 14:41+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
@@ -49,15 +49,16 @@ msgstr "視窗最大化"
 msgid "Window maximized state"
 msgstr "視窗最大化狀態"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2 ../src/application.js:394
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:405
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME 的網際網路中繼聊天客戶端"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;網際網路;中繼;轉繼;聊天;清談"
 
@@ -169,11 +170,11 @@ msgstr "傳訊給一位使用者"
 msgid "_Leave"
 msgstr "離開(_L)"
 
-#: ../src/application.js:343
+#: ../src/application.js:354
 msgid "Good Bye"
 msgstr "再見"
 
-#: ../src/application.js:393
+#: ../src/application.js:404
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2013."
 
@@ -217,14 +218,14 @@ msgstr "%s 已參與"
 msgid "%s left"
 msgstr "%s 已離開"
 
-#: ../src/connections.js:227
+#: ../src/connections.js:228
 msgid "Edit Connection"
 msgstr "編輯連線"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:229
 msgid "A_pply"
 msgstr "套用(_P)"
 
-#: ../src/userList.js:99
+#: ../src/userList.js:101
 msgid "All"
 msgstr "全部"
