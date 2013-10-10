@@ -147,15 +147,24 @@ const TabCompletion = new Lang.Class({
                 return Gdk.EVENT_STOP;
         }
 
-        if (Gdk.keyval_to_unicode(keyval) != 0) {
-            let popupShown = this._popup.visible;
-            this._stop();
-            // eat keys that would active the entry
-            // when showing the popup
-            return popupShown &&
-                   (keyval == Gdk.KEY_Return ||
-                    keyval == Gdk.KEY_KP_Enter ||
-                    keyval == Gdk.KEY_ISO_Enter);
+        let c = Gdk.keyval_to_unicode(keyval);
+        if (c != 0) {
+            let str = String.fromCharCode(c);
+            if (/[\w|-]/.test(str)) {
+                this._key += str;
+                this._refilter();
+
+                return true;
+            } else {
+                let popupShown = this._popup.visible;
+                this._stop();
+                // eat keys that would active the entry
+                // when showing the popup
+                return popupShown &&
+                       (keyval == Gdk.KEY_Return ||
+                        keyval == Gdk.KEY_KP_Enter ||
+                        keyval == Gdk.KEY_ISO_Enter);
+            }
         }
         return Gdk.EVENT_PROPAGATE;
     },
@@ -214,6 +223,10 @@ const TabCompletion = new Lang.Class({
         let previousCompletion = (this._endPos == this._startPos);
         this._isChained = previousCompletion && !this._isCommand && !this._previousWasCommand;
 
+        this._refilter();
+    },
+
+    _refilter: function() {
         this._list.invalidate_filter();
 
         let visibleRows = this._list.get_children().filter(function(c) {
@@ -221,8 +234,11 @@ const TabCompletion = new Lang.Class({
         });
         let nVisibleRows = visibleRows.length;
 
-        if (nVisibleRows == 0)
+        if (nVisibleRows == 0) {
+            this._insertCompletion(this._key);
+            this._stop();
             return;
+        }
 
         if (this._isChained)
             this._setPreviousCompletionChained(true);
@@ -230,6 +246,8 @@ const TabCompletion = new Lang.Class({
         if (visibleRows.length > 1) {
             this._list.select_row(visibleRows[0]);
             this._showPopup()
+        } else {
+            this._popup.hide();
         }
     },
 
