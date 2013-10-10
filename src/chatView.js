@@ -383,9 +383,8 @@ const ChatView = new Lang.Class({
             tags.push(this._lookupTag('highlight'));
 
             if (!this._toplevelFocus) {
-                let summary = this._lastNick ? '%s: %s'.format(nick, text)
-                                             : text;
-                let notification = new Notify.Notification(summary, '');
+                let summary = '%s %s'.format(this._room.display_name, nick);
+                let notification = new Notify.Notification(summary, text);
                 notification.show();
             }
         }
