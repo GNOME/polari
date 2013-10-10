@@ -41,7 +41,7 @@ const ChatView = new Lang.Class({
         this._joinTime = GLib.DateTime.new_now_utc().to_unix();
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveringLink = false;
-        this._pending = [];
+        this._pending = {};
 
         let adj = this.widget.vadjustment;
         this._scrollBottom = adj.upper - adj.page_size;
@@ -196,6 +196,10 @@ const ChatView = new Lang.Class({
         this._roomSignals = [];
     },
 
+    get _nPending() {
+        return Object.keys(this._pending).length;
+    },
+
     _updateIndent: function() {
         let context = this._view.get_pango_context();
         let metrics = context.get_metrics(null, null);
@@ -229,24 +233,21 @@ const ChatView = new Lang.Class({
 
     _updateScroll: function() {
         let adj = this.widget.vadjustment;
-        if (this._pending.length == 0) {
+        if (this._nPending == 0) {
             if (adj.value == this._scrollBottom)
                 adj.value = adj.upper - adj.page_size;
         } else if (!this._active) {
-            this._view.scroll_mark_onscreen(this._pending[0].mark);
+            let id = Object.keys(this._pending).sort(function(a, b) {
+                return a - b;
+            })[0];
+            this._view.scroll_mark_onscreen(this._pending[id]);
         }
         this._scrollBottom = adj.upper - adj.page_size;
     },
 
     _pendingMessageRemoved: function(channel, message) {
-        for (let i = 0; i < this._pending.length; i++) {
-            if (this._pending[i].message != message)
-                continue;
-
-            this._pending.splice(i, 1);
-            this._updateScroll();
-            break;
-        }
+        let [id,] = message.get_pending_message_id();
+        delete this._pending[id];
     },
 
     _handleLinkClicks: function(view, event) {
@@ -292,20 +293,26 @@ const ChatView = new Lang.Class({
     },
 
     _checkMessages: function() {
-        if (!this._pending.length)
+        if (!this._active || !this._toplevelFocus)
             return;
 
-        if (!this._active || !this._toplevelFocus)
+        let pending = this._room.channel.dup_pending_messages();
+        if (pending.length == 0)
             return;
 
         let rect = this._view.get_visible_rect();
         let buffer = this._view.get_buffer();
-        for (let i = 0; i < this._pending.length; i++) {
-            let pending = this._pending[i];
-            let iter = buffer.get_iter_at_mark(pending.mark);
+        for (let i = 0; i < pending.length; i++) {
+            let [id,] = pending[i].get_pending_message_id();
+            let mark = this._pending[id];
+            if (!mark) {
+                this._room.channel.ack_message_async(pending[i], null);
+                continue;
+            }
+            let iter = buffer.get_iter_at_mark(mark);
             let iterRect = this._view.get_iter_location(iter);
             if (rect.y <= iterRect.y && rect.y + rect.height > iterRect.y)
-                this._room.channel.ack_message_async(pending.message, null);
+                this._room.channel.ack_message_async(pending[i], null);
         }
     },
 
@@ -380,7 +387,8 @@ const ChatView = new Lang.Class({
             tags.push(this._lookupTag('message'));
         }
 
-        if (this._room.should_highlight_message(message)) {
+        let shouldHighlight = this._room.should_highlight_message(message);
+        if (shouldHighlight) {
             tags.push(this._lookupTag('highlight'));
 
             if (!this._toplevelFocus) {
@@ -421,12 +429,13 @@ const ChatView = new Lang.Class({
 
 
         let buffer = this._view.get_buffer();
-        if (message.get_pending_message_id() == 0 /* outgoing */ ||
-            (this._active && this._toplevelFocus && this._pending.length == 0)) {
+        let [id,] = message.get_pending_message_id();
+        if (id == 0 /* outgoing */ ||
+            (this._active && this._toplevelFocus && this._nPending == 0)) {
             this._room.channel.ack_message_async(message, null);
-        } else {
+        } else if (shouldHighlight) {
             let mark = buffer.create_mark(null, buffer.get_end_iter(), true);
-            this._pending.push({ message: message, mark: mark });
+            this._pending[id] = mark;
         }
     },
 
