@@ -1,3 +1,4 @@
+const Gio = imports.gi.Gio;
 const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
@@ -16,6 +17,10 @@ const AccountsMonitor = new Lang.Class({
 
     _init: function() {
         this._accounts = [];
+
+        this._app = Gio.Application.get_default();
+        this._app.connectJS('prepare-shutdown',
+                            Lang.bind(this, this._onPrepareShutdown));
 
         this._accountManager = Tp.AccountManager.dup();
         this._accountManager.prepare_async(null,
@@ -46,6 +51,22 @@ const AccountsMonitor = new Lang.Class({
                    Lang.bind(this, this._accountEnabledChanged));
         am.connect('account-disabled',
                    Lang.bind(this, this._accountEnabledChanged));
+    },
+
+    _onPrepareShutdown: function() {
+        for (let i = 0; i < this._accounts.length; i++) {
+            let account = this._accounts[i];
+
+            let presence = Tp.ConnectionPresenceType.OFFLINE;
+            if (account.requested_presence_type == presence)
+                continue;
+
+            this._app.hold();
+            account.request_presence_async(presence, '', '',
+                Lang.bind(this, function() {
+                    this._app.release();
+                }));
+        }
     },
 
     _shouldMonitorAccount: function(account) {

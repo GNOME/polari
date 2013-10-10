@@ -22,8 +22,6 @@ const _ChatroomManager = new Lang.Class({
         this._activeRoom = null;
 
         this._app = Gio.Application.get_default();
-        this._app.connectJS('prepare-shutdown',
-                            Lang.bind(this, this._onPrepareShutdown));
 
         this._accountManager = Tp.AccountManager.dup();
 
@@ -33,22 +31,6 @@ const _ChatroomManager = new Lang.Class({
 
         this._accountManager.prepare_async(null,
                                            Lang.bind(this, this._onPrepared));
-    },
-
-    _onPrepareShutdown: function() {
-        for (let id in this._rooms) {
-            let room = this._rooms[id];
-
-            if (room.channel.get_invalidated())
-                continue;
-
-            this._app.hold();
-            room.channel.connect('invalidated', Lang.bind(this,
-                function() {
-                    this._app.release();
-                }));
-            room.channel.leave_async(Tp.ChannelGroupChangeReason.NONE, '', null);
-        }
     },
 
     _onPrepared: function(am, res) {
