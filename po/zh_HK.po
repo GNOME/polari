@@ -60,7 +60,7 @@ msgstr "GNOME 的互聯網中繼聊天客戶端"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Relay;Chat;互聯網;中繼;轉繼;聊天;清談"
+msgstr "IRC;Internet;Relay;Chat;互聯網;中繼;轉繼;聊天;清談;"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
