@@ -39,7 +39,6 @@ dist_js_DATA = \
 	main.js \
 	mainWindow.js \
 	messageDialog.js \
-	notify.js \
 	pasteManager.js \
 	roomList.js \
 	roomStack.js \

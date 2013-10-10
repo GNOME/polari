@@ -8,7 +8,6 @@ const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
-const Notify = imports.notify;
 const Utils = imports.utils;
 
 const MAX_NICK_CHARS = 8;
@@ -110,8 +109,8 @@ const ChatView = new Lang.Class({
         let adj = this.widget.vadjustment;
         this._scrollBottom = adj.upper - adj.page_size;
 
-        let app = Gio.Application.get_default();
-        app.pasteManager.addWidget(this._view);
+        this._app = Gio.Application.get_default();
+        this._app.pasteManager.addWidget(this._view);
 
         this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
@@ -640,20 +639,17 @@ const ChatView = new Lang.Class({
 
         if (message.shouldHighlight && !this._toplevelFocus) {
             let summary = '%s %s'.format(this._room.display_name, message.nick);
-            let notification = new Notify.Notification(summary, message.text);
+            let notification = new Gio.Notification();
+            notification.set_title(summary);
+            notification.set_body(message.text);
 
             let account = this._room.account;
             let param = GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
                                            this._room.channel_name,
                                            TP_CURRENT_TIME ]);
-            notification.addAction('default', 'default');
-            notification.connect('action-invoked', function() {
-                let app = Gio.Application.get_default();
-                let action = app.lookup_action('join-room');
-                action.activate(param);
-            });
-            notification.show();
+            notification.set_default_action_and_target('app.join-room', param);
+            this._app.send_notification(null, notification);
         }
 
         let buffer = this._view.get_buffer();
