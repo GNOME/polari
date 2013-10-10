@@ -70,6 +70,9 @@ const ChatView = new Lang.Class({
         this._hoveringLink = false;
         this._pending = [];
 
+        let adj = this.widget.vadjustment;
+        this._scrollBottom = adj.upper - adj.page_size;
+
         let app = Gio.Application.get_default();
         app.pasteManager.addWidget(this._view);
 
@@ -264,10 +267,14 @@ const ChatView = new Lang.Class({
     },
 
     _updateScroll: function() {
-        if (this._pending.length == 0)
-            this.widget.vadjustment.value = this.widget.vadjustment.upper;
-        else if (!this._active)
+        let adj = this.widget.vadjustment;
+        if (this._pending.length == 0) {
+            if (adj.value == this._scrollBottom)
+                adj.value = adj.upper - adj.page_size;
+        } else if (!this._active) {
             this._view.scroll_mark_onscreen(this._pending[0].mark);
+        }
+        this._scrollBottom = adj.upper - adj.page_size;
     },
 
     _pendingMessageRemoved: function(channel, message) {
