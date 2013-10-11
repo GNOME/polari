@@ -59,6 +59,11 @@ const RoomRow = new Lang.Class({
         this._counter.label = numPendingHighlights.toString();
         this._counter.opacity = numPendingHighlights > 0 ? 1. : 0.;
 
+        let context = this.widget.get_style_context();
+        if (pending.length == 0)
+            context.add_class('inactive');
+        else
+            context.remove_class('inactive');
     },
 
     _onSelectionModeChanged: function() {
