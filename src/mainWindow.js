@@ -116,6 +116,7 @@ const MainWindow = new Lang.Class({
         this._nickEntry.connect('focus-out-event', Lang.bind(this,
              function() {
                this._nickEntry.text = '';
+               return false;
             }));
         this._nickEntry.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
