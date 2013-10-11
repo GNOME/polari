@@ -217,10 +217,12 @@ const RoomList = new Lang.Class({
                 return c.visible;
             });
             if (visibleChildren.length > 1) {
+                row.can_focus = false;
                 this.widget.select_row(row);
+                row.can_focus = true;
                 let count = row.get_index() == 0 ? 1 : -1;
                 this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
-                newActive = this.widget.get_focus_child().room;
+                newActive = this.widget.get_selected_row().room;
             }
             this._roomManager.setActiveRoom(newActive);
             if (selected != row)

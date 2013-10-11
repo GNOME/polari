@@ -95,6 +95,17 @@ const MainWindow = new Lang.Class({
                 this._ircParser.process(this._entry.text);
                 this._entry.text = '';
             }));
+        this._entry.connect('notify::is-focus', Lang.bind(this,
+            function() {
+                // HACK: force focus to the entry unless it was
+                //       moved by keynav or moved to another entry
+                if (this.window.get_focus() instanceof Gtk.Entry)
+                    return;
+                let device = Gtk.get_current_event_device();
+                if (!device || device.get_source() == Gdk.InputSource.KEYBOARD)
+                    return;
+                this._entry.grab_focus();
+            }));
 
         this._nickEntry.connect('activate', Lang.bind(this,
             function() {
