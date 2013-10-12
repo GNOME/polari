@@ -95,7 +95,6 @@ const RoomRow = new Lang.Class({
         let icon = new Gtk.Image({ gicon: gicon,
                                    icon_size: Gtk.IconSize.MENU,
                                    valign: Gtk.Align.BASELINE });
-        icon.get_style_context().add_class('dim-label');
         box.add(icon);
 
         this._roomLabel = new Gtk.Label({ hexpand: true,
