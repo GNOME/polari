@@ -98,8 +98,7 @@ const RoomRow = new Lang.Class({
         icon.get_style_context().add_class('dim-label');
         box.add(icon);
 
-        this._roomLabel = new Gtk.Label({ use_markup: true,
-                                          hexpand: true,
+        this._roomLabel = new Gtk.Label({ hexpand: true,
                                           ellipsize: Pango.EllipsizeMode.END,
                                           halign: Gtk.Align.START,
                                           valign: Gtk.Align.BASELINE });
