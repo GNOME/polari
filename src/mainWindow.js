@@ -64,6 +64,9 @@ const MainWindow = new Lang.Class({
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
 
+        this._titleLabel = builder.get_object('title_label');
+        this._subtitleLabel = builder.get_object('subtitle_label');
+
         this._selectionRevealer = builder.get_object('selection_toolbar_revealer');
         this._showUserListButton = builder.get_object('show_user_list_button');
         this._revealer = builder.get_object('room_list_revealer');
@@ -367,8 +370,13 @@ const MainWindow = new Lang.Class({
     },
 
     _updateTitlebar: function() {
-        this._titlebarRight.title = this._room ? this._room.display_name : null;
-        this._titlebarRight.subtitle = this._room ? this._room.topic : null;
+        let subtitle = '';
+        if (this._room && this._room.topic)
+            subtitle = GLib.markup_escape_text(this._room.topic, -1);
+        this._subtitleLabel.label = subtitle;
+        this._subtitleLabel.visible = subtitle.length > 0;
+
+        this._titleLabel.label = this._room ? this._room.display_name : null;
     },
 
     _updateNick: function() {

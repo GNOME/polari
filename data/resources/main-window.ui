@@ -105,6 +105,74 @@
               <class name="polari-titlebar-right"/>
               <class name="titlebar"/>
             </style>
+            <!-- Use a custom title widget to enable markup for subtitles
+                 (for URLs in channel topics); other than that, we want
+                 the default GtkHeaderBar behavior, e.g. the subtitle may
+                 be hidden, but is always included in the size request.
+                 We replicate this by using a stack which will only ever show
+                 its first child, but still consider the second one's size -->
+            <child type="title">
+              <object class="GtkStack" id="stack1">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkBox" id="box5">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkLabel" id="title_label">
+                        <property name="visible">True</property>
+                        <property name="single_line_mode">True</property>
+                        <property name="ellipsize">end</property>
+                        <style>
+                          <class name="title"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="subtitle_label">
+                        <property name="visible">True</property>
+                        <property name="single_line_mode">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="use_markup">True</property>
+                        <style>
+                          <class name="subtitle"/>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="box7">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="label3">
+                        <property name="visible">True</property>
+                        <property name="single_line_mode">True</property>
+                        <property name="ellipsize">end</property>
+                        <style>
+                          <class name="title"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label4">
+                        <property name="visible">True</property>
+                        <property name="single_line_mode">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="use_markup">True</property>
+                        <style>
+                          <class name="subtitle"/>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
