@@ -379,19 +379,18 @@
       </object>
     </child>
   </object>
-    <object class="GtkSizeGroup" id="left_side_size_group">
-        <property name="mode">horizontal</property>
-        <widgets>
-          <widget name="titlebar_left"/>
-          <widget name="frame1"/>
-        </widgets>
-    </object>
-    <object class="GtkSizeGroup" id="bottom_size_group">
-        <property name="mode">vertical</property>
-        <widgets>
-          <widget name="selection_toolbar"/>
-          <widget name="main_input_area"/>
-        </widgets>
-    </object>
-
+  <object class="GtkSizeGroup" id="left_side_size_group">
+      <property name="mode">horizontal</property>
+      <widgets>
+        <widget name="titlebar_left"/>
+        <widget name="frame1"/>
+      </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="bottom_size_group">
+      <property name="mode">vertical</property>
+      <widgets>
+        <widget name="selection_toolbar"/>
+        <widget name="main_input_area"/>
+      </widgets>
+  </object>
 </interface>
