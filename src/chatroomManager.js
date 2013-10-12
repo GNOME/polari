@@ -130,11 +130,14 @@ const _ChatroomManager = new Lang.Class({
 
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
-                // this is an invitation - only add it in handleChannel
-                // if accepted
-                if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP) &&
-                    channel.group_self_contact != null)
-                    return;
+                if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
+                    let [invited, , , ,] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
+                    if (invited)
+                      // this is an invitation - only add it in handleChannel
+                      // if accepted
+                      return;
+                }
+
                 let room = this._ensureRoomForChannel(channel);
                 if (this.roomCount == 1)
                     this.setActiveRoom(room);
