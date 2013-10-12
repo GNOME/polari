@@ -51,6 +51,17 @@ function findUrls(str) {
     return res;
 }
 
+// Workaround for GtkTextView growing horizontally over time when
+// added to a GtkScrolledWindow with horizontal scrolling disabled
+const TextView = new Lang.Class({
+    Name: 'TextView',
+    Extends: Gtk.TextView,
+
+    vfunc_get_preferred_width: function() {
+        return [1, 1];
+    }
+});
+
 const ChatView = new Lang.Class({
     Name: 'ChatView',
 
@@ -177,9 +188,9 @@ const ChatView = new Lang.Class({
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
         this.widget.resize_mode = Gtk.ResizeMode.QUEUE;
 
-        this._view = new Gtk.TextView({ editable: false, cursor_visible: false,
-                                        visible: true,
-                                        wrap_mode: Gtk.WrapMode.WORD_CHAR });
+        this._view = new TextView({ editable: false, cursor_visible: false,
+                                    visible: true,
+                                    wrap_mode: Gtk.WrapMode.WORD_CHAR });
         this._view.set_border_window_size(Gtk.TextWindowType.TOP, 6);
         this._view.set_border_window_size(Gtk.TextWindowType.BOTTOM, 6);
         this._view.set_border_window_size(Gtk.TextWindowType.LEFT, 6);
