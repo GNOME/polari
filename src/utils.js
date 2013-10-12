@@ -28,6 +28,34 @@ const Signals = imports.signals;
 
 const FPASTE_BASEURL = 'http://paste.fedoraproject.org/'
 
+// http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
+const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
+const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
+
+const _urlRegexp = new RegExp(
+    '(^|' + _leadingJunk + ')' +
+    '(' +
+        '(?:' +
+            '(?:http|https|ftp)://' +             // scheme://
+            '|' +
+            'www\\d{0,3}[.]' +                    // www.
+            '|' +
+            '[a-z0-9.\\-]+[.][a-z]{2,4}/' +       // foo.xx/
+        ')' +
+        '(?:' +                                   // one or more:
+            '[^\\s()<>]+' +                       // run of non-space non-()
+            '|' +                                 // or
+            _balancedParens +                     // balanced parens
+        ')+' +
+        '(?:' +                                   // end with:
+            _balancedParens +                     // balanced parens
+            '|' +                                 // or
+            _notTrailingJunk +                    // last non-junk char
+        ')' +
+    ')', 'gi');
+
+
 let debugInit = false;
 let debugEnabled = false;
 
@@ -49,6 +77,21 @@ function addJSSignalMethods(proto) {
     proto.disconnectJS = Signals._disconnect;
     proto.emitJS = Signals._emit;
     proto.disconnectAllJS = Signals._disconnectAll;
+}
+
+// findUrls:
+// @str: string to find URLs in
+//
+// Searches @str for URLs and returns an array of objects with %url
+// properties showing the matched URL string, and %pos properties indicating
+// the position within @str where the URL was found.
+//
+// Return value: the list of match objects, as described above
+function findUrls(str) {
+    let res = [], match;
+    while ((match = _urlRegexp.exec(str)))
+        res.push({ url: match[2], pos: match.index + match[1].length });
+    return res;
 }
 
 function fpaste(text, user, callback) {
