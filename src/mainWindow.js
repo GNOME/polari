@@ -15,6 +15,7 @@ const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
 const TabCompletion = imports.tabCompletion;
 const UserList = imports.userList;
+const Utils = imports.utils;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const CONFIGURE_TIMEOUT = 100; /* ms */
@@ -371,8 +372,19 @@ const MainWindow = new Lang.Class({
 
     _updateTitlebar: function() {
         let subtitle = '';
-        if (this._room && this._room.topic)
-            subtitle = GLib.markup_escape_text(this._room.topic, -1);
+        if (this._room && this._room.topic) {
+            let urls = Utils.findUrls(this._room.topic);
+            let pos = 0;
+            for (let i = 0; i < urls.length; i++) {
+                let url = urls[i];
+                let text = this._room.topic.substr(pos, url.pos - pos);
+                let urlText = GLib.markup_escape_text(url.url, -1);
+                subtitle += GLib.markup_escape_text(text, -1) +
+                            '<a href="%s">%s</a>'.format(urlText, urlText);
+                pos = url.pos + url.url.length;
+            }
+            subtitle += GLib.markup_escape_text(this._room.topic.substr(pos), -1);
+        }
         this._subtitleLabel.label = subtitle;
         this._subtitleLabel.visible = subtitle.length > 0;
 
