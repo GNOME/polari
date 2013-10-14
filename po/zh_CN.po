@@ -1,0 +1,232 @@
+# Chinese (China) translation for polari.
+# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# tuhaihe <1132321739qq@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-10-12 20:46+0000\n"
+"PO-Revision-Date: 2013-10-10 22:56+0800\n"
+"Last-Translator: tuhaihe <1132321739qq@gmail.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "保存的频道列表"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "启动时要恢复的频道列表"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "窗口大小"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "窗口大小(宽和高)。"
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "窗口位置"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "窗口位置(水平和竖直)。"
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "窗口最大化"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "窗口最大化状态"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:405
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOME 下的一款 IRC 客户端"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;网络;聊天;聊天室;"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "连接"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "首选项"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About Polari"
+msgstr "关于 Polari"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "退出"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+msgid "New Connection"
+msgstr "新建连接"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "创建(_E)"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Server"
+msgstr "服务器"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Address"
+msgstr "地址(_A)"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+msgid "_Description"
+msgstr "描述(_D)"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+msgid "Identity"
+msgstr "身份"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+msgid "_Nickname"
+msgstr "昵称(_N)"
+
+#: ../data/resources/connection-details-dialog.ui.h:9
+msgid "_Real Name"
+msgstr "真名(_R)"
+
+#: ../data/resources/connection-details-dialog.ui.h:10
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "可选"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "关闭(_C)"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "添加"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "移除"
+
+#: ../data/resources/join-room-dialog.ui.h:1
+msgid "Join Chat Room"
+msgstr "加入聊天室"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "加入(_J)"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room"
+msgstr "聊天室"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "C_onnection"
+msgstr "连接(_O)"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Name"
+msgstr "名称(_N)"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Password"
+msgstr "密码(_P)"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "加入聊天室"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "给用户发送消息"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "离开(_L)"
+
+#: ../src/application.js:354
+msgid "Good Bye"
+msgstr "再见"
+
+#: ../src/application.js:404
+msgid "translator-credits"
+msgstr "tuhaihe <1132321739qq@gmail.com>, 2013"
+
+#: ../src/chatView.js:352
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s 现在改名为 %s"
+
+#: ../src/chatView.js:357
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s 已断开连接"
+
+#: ../src/chatView.js:365
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s 已被 %s 踢出"
+
+#: ../src/chatView.js:367
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s 已被踢出"
+
+#: ../src/chatView.js:373
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s 已被 %s 禁言"
+
+#: ../src/chatView.js:375
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s 已被禁言"
+
+#: ../src/chatView.js:380
+#, javascript-format
+msgid "%s joined"
+msgstr "%s 已加入"
+
+#: ../src/chatView.js:384
+#, javascript-format
+msgid "%s left"
+msgstr "%s 已离开"
+
+#: ../src/connections.js:228
+msgid "Edit Connection"
+msgstr "编辑连接"
+
+#: ../src/connections.js:229
+msgid "A_pply"
+msgstr "应用(_P)"
+
+#: ../src/userList.js:101
+msgid "All"
+msgstr "全部"
