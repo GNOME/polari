@@ -115,7 +115,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkToggleButton" id="button3">
+              <object class="GtkToggleButton" id="show_user_list_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>

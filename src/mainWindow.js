@@ -65,6 +65,7 @@ const MainWindow = new Lang.Class({
         this._titlebarLeft = builder.get_object('titlebar_left');
 
         this._selectionRevealer = builder.get_object('selection_toolbar_revealer');
+        this._showUserListButton = builder.get_object('show_user_list_button');
         this._revealer = builder.get_object('room_list_revealer');
         this._chatStack = builder.get_object('chat_stack');
         this._inputArea = builder.get_object('main_input_area');
@@ -89,6 +90,8 @@ const MainWindow = new Lang.Class({
         this._selectionModeAction = app.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
                     Lang.bind(this, this._onSelectionModeChanged));
+
+        this._userListAction = app.lookup_action('user-list');
 
         this._entry.connect('activate', Lang.bind(this,
             function() {
@@ -220,6 +223,8 @@ const MainWindow = new Lang.Class({
     _onSelectionModeChanged: function() {
         let enabled = this._selectionModeAction.state.get_boolean();
         this._selectionRevealer.reveal_child = enabled;
+        this._showUserListButton.visible = !enabled;
+        this._userListAction.enabled = !enabled;
 
         if (enabled) {
             this._titlebarLeft.get_style_context().add_class('selection-mode');
