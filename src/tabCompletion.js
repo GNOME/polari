@@ -114,8 +114,9 @@ const TabCompletion = new Lang.Class({
     },
 
     _getRowCompletion: function(row) {
-        return this._startPos == 0 ? row._text + ': '
-                                   : row._text;
+        if (this._startPos == 0 || this._previousCompletion)
+            return row._text + ': ';
+        return row._text;
     },
 
     _onRowSelected: function(w, row) {
@@ -131,9 +132,17 @@ const TabCompletion = new Lang.Class({
 
     _insertCompletion: function(completion) {
         let pos = this._entry.get_position();
+        this._endPos = this._startPos + completion.length;
         this._entry.delete_text(this._startPos, pos);
         this._entry.insert_text(completion, -1, this._startPos);
-        this._entry.set_position(this._startPos + completion.length);
+        this._entry.set_position(this._endPos);
+    },
+
+    _setPreviousCompletionChained: function(chained) {
+        let repl = chained ? ',' : ':';
+        let start = this._startPos - 2;
+        this._entry.delete_text(start, start + 1);
+        this._entry.insert_text(repl, -1, start);
     },
 
     _start: function() {
@@ -143,6 +152,10 @@ const TabCompletion = new Lang.Class({
         let text = this._entry.text.substr(0, this._entry.get_position());
         this._startPos = text.lastIndexOf(' ') + 1;
         this._key = text.toLowerCase().substr(this._startPos);
+
+        if (this._startPos == 0)
+            this._endPos = -1;
+        this._previousCompletion = (this._endPos == this._startPos);
 
         this._list.invalidate_filter();
 
@@ -154,6 +167,8 @@ const TabCompletion = new Lang.Class({
         if (nVisibleRows == 0)
             return;
 
+        if (this._previousCompletion)
+            this._setPreviousCompletionChained(true);
         this._insertCompletion(this._getRowCompletion(visibleRows[0]));
         if (visibleRows.length > 1) {
             this._list.select_row(visibleRows[0]);
@@ -192,6 +207,8 @@ const TabCompletion = new Lang.Class({
     _cancel: function() {
         if (this._key.length == 0)
             return;
+        if (this._previousCompletion)
+            this._setPreviousCompletionChained(false);
         this._insertCompletion('');
         this._stop();
     },
