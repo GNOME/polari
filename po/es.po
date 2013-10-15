@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-11 22:33+0000\n"
-"PO-Revision-Date: 2013-09-13 12:48+0200\n"
+"POT-Creation-Date: 2013-10-14 20:12+0000\n"
+"PO-Revision-Date: 2013-10-15 17:07+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -51,15 +51,16 @@ msgstr "Ventana maximizada"
 msgid "Window maximized state"
 msgstr "Estado maximizado de la ventana"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Chat;"
 
@@ -171,62 +172,103 @@ msgstr "Mensaje a un usuario"
 msgid "_Leave"
 msgstr "_Salir"
 
-#: ../src/application.js:340
+#: ../src/application.js:355
 msgid "Good Bye"
 msgstr "Adiós"
 
-#: ../src/application.js:390
+#: ../src/application.js:405
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
 
-#: ../src/chatView.js:340
-#, c-format
+#: ../src/chatView.js:322
 msgid "%s is now known as %s"
 msgstr "%s ahora se llama %s"
 
-#: ../src/chatView.js:345
-#, c-format
+#: ../src/chatView.js:327
 msgid "%s has disconnected"
 msgstr "%s se ha desconectado"
 
-#: ../src/chatView.js:353
-#, c-format
+#: ../src/chatView.js:335
 msgid "%s has been kicked by %s"
 msgstr "%s ha sido expulsado por %s"
 
-#: ../src/chatView.js:355
-#, c-format
+#: ../src/chatView.js:337
 msgid "%s has been kicked"
 msgstr "%s ha sido expulsado"
 
-#: ../src/chatView.js:361
-#, c-format
+#: ../src/chatView.js:343
 msgid "%s has been banned by %s"
 msgstr "%s ha sido bloqueado por %s"
 
-#: ../src/chatView.js:363
-#, c-format
+#: ../src/chatView.js:345
 msgid "%s has been banned"
 msgstr "%s ha sido bloqueado"
 
-#: ../src/chatView.js:368
-#, c-format
+#: ../src/chatView.js:350
 msgid "%s joined"
 msgstr "%s ha entrado"
 
-#: ../src/chatView.js:372
-#, c-format
+#: ../src/chatView.js:354
 msgid "%s left"
 msgstr "%s se ha ido"
 
-#: ../src/connections.js:227
+#: ../src/connections.js:228
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:229
 msgid "A_pply"
 msgstr "A_plicar"
 
-#: ../src/userList.js:99
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "Cargando detalles"
+
+#: ../src/userList.js:180
+#| msgid "Message a User"
+msgid "Message"
+msgstr "Mensaje"
+
+#: ../src/userList.js:197
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "Hace %d segundo"
+msgstr[1] "Hace %d segundos"
+
+#: ../src/userList.js:202
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "Hace %d minuto"
+msgstr[1] "Hace %d minutos"
+
+#: ../src/userList.js:207
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "Hace %d hora"
+msgstr[1] "Hace %d horas"
+
+#: ../src/userList.js:212
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Hace %d día"
+msgstr[1] "Hace %d días"
+
+#: ../src/userList.js:217
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Hace %d semana"
+msgstr[1] "Hace %d semanas"
+
+#: ../src/userList.js:221
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Hace %d mes"
+msgstr[1] "Hace %d meses"
+
+#: ../src/userList.js:244
+msgid "Last Activity:"
+msgstr "Última actividad:"
+
+#: ../src/userList.js:417
 msgid "All"
 msgstr "Todos"
