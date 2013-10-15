@@ -33,7 +33,6 @@ const ChatView = new Lang.Class({
 
         this._room = room;
         this._lastNick = null;
-        this._stackNotifyVisibleChildId = 0;
         this._active = false;
         this._toplevelFocus = false;
         this._maxNickChars = MAX_NICK_CHARS;
@@ -161,7 +160,8 @@ const ChatView = new Lang.Class({
         this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
         this.widget.connect('screen-changed',
                             Lang.bind(this, this._updateIndent));
-        this.widget.connect('parent-set', Lang.bind(this, this._onParentSet));
+        this.widget.connect('map', Lang.bind(this, this._updateActive));
+        this.widget.connect('unmap', Lang.bind(this, this._updateActive));
         this.widget.connect('state-flags-changed',
                             Lang.bind(this, this._updateToplevel));
         this.widget.vadjustment.connect('value-changed',
@@ -198,22 +198,11 @@ const ChatView = new Lang.Class({
         this._view.left_margin = this._maxNickChars * pixelWidth;
     },
 
-    _onParentSet: function(widget, oldParent) {
-        if (oldParent)
-            oldParent.disconnect(this._stackNotifyVisibleChildId);
-
-        let newParent = this.widget.get_parent();
-        if (!newParent)
-            return;
-
-        this._stackNotifyVisibleChildId =
-            newParent.connect('notify::visible-child',
-                              Lang.bind(this, this._updateActive));
-        this._updateActive();
-    },
-
     _updateActive: function() {
-        this._active = this.widget.get_parent().get_visible_child() == this.widget;
+        let active = this.widget.get_mapped();
+        if (this._active == active)
+            return;
+        this._active = active;
         this._checkMessages();
     },
 
