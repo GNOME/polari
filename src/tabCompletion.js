@@ -37,9 +37,7 @@ const TabCompletion = new Lang.Class({
         let win = this._entry.get_window();
 
         let layout = this._entry.get_layout();
-        let text = this._entry.text.substr(0, this._entry.get_position());
-        let wordIndex = text.lastIndexOf(' ') + 1;
-        let layoutIndex = this._entry.text_index_to_layout_index(wordIndex);
+        let layoutIndex = this._entry.text_index_to_layout_index(this._startPos);
         let wordPos = layout.index_to_pos(layoutIndex);
         let [layoutX,] = this._entry.get_layout_offsets();
 
@@ -115,9 +113,14 @@ const TabCompletion = new Lang.Class({
         return false;
     },
 
+    _getRowCompletion: function(row) {
+        return this._startPos == 0 ? row._text + ': '
+                                   : row._text;
+    },
+
     _onRowSelected: function(w, row) {
         if (row)
-            this._insertCompletion(row._text);
+            this._insertCompletion(this._getRowCompletion(row));
     },
 
     _filter: function(row) {
@@ -128,11 +131,9 @@ const TabCompletion = new Lang.Class({
 
     _insertCompletion: function(completion) {
         let pos = this._entry.get_position();
-        let text = this._entry.text.substr(0, pos);
-        let wordPos = text.lastIndexOf(' ') + 1;
-        this._entry.delete_text(wordPos, pos);
-        this._entry.insert_text(completion, -1, wordPos);
-        this._entry.set_position(wordPos + completion.length);
+        this._entry.delete_text(this._startPos, pos);
+        this._entry.insert_text(completion, -1, this._startPos);
+        this._entry.set_position(this._startPos + completion.length);
     },
 
     _start: function() {
@@ -140,8 +141,8 @@ const TabCompletion = new Lang.Class({
             return;
 
         let text = this._entry.text.substr(0, this._entry.get_position());
-        let wordPos = text.lastIndexOf(' ') + 1;
-        this._key = text.toLowerCase().substr(wordPos);
+        this._startPos = text.lastIndexOf(' ') + 1;
+        this._key = text.toLowerCase().substr(this._startPos);
 
         this._list.invalidate_filter();
 
@@ -153,7 +154,7 @@ const TabCompletion = new Lang.Class({
         if (nVisibleRows == 0)
             return;
 
-        this._insertCompletion(visibleRows[0]._text);
+        this._insertCompletion(this._getRowCompletion(visibleRows[0]));
         if (visibleRows.length > 1) {
             this._list.select_row(visibleRows[0]);
             this._showPopup()
