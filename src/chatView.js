@@ -162,8 +162,8 @@ const ChatView = new Lang.Class({
         this.widget.connect('screen-changed',
                             Lang.bind(this, this._updateIndent));
         this.widget.connect('parent-set', Lang.bind(this, this._onParentSet));
-        this.widget.connect('hierarchy-changed',
-                            Lang.bind(this, this._onHierarchyChanged));
+        this.widget.connect('state-flags-changed',
+                            Lang.bind(this, this._updateToplevel));
         this.widget.vadjustment.connect('value-changed',
                                  Lang.bind(this, this._checkMessages));
         this.widget.vadjustment.connect('changed',
@@ -212,27 +212,17 @@ const ChatView = new Lang.Class({
         this._updateActive();
     },
 
-    _onHierarchyChanged: function(w, oldToplevel) {
-        if (oldToplevel)
-            oldToplevel.disconnect(this._toplevelFocusNotifyId);
-
-        let newToplevel = this.widget.get_toplevel();
-        if (!newToplevel)
-            return;
-
-        this._toplevelFocusNotifyId =
-            newToplevel.connect('notify::has-toplevel-focus',
-                                Lang.bind(this, this._updateToplevel));
-        this._updateToplevel();
-    },
-
     _updateActive: function() {
         this._active = this.widget.get_parent().get_visible_child() == this.widget;
         this._checkMessages();
     },
 
     _updateToplevel: function() {
-        this._toplevelFocus = this.widget.get_toplevel().has_toplevel_focus;
+        let flags = this.widget.get_state_flags();
+        let toplevelFocus = !(flags & Gtk.StateFlags.BACKDROP);
+        if (this._toplevelFocus == toplevelFocus)
+            return;
+        this._toplevelFocus = toplevelFocus;
         this._checkMessages();
     },
 
