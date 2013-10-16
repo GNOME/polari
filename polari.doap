@@ -7,9 +7,7 @@
   <name xml:lang="en">Polari</name>
   <shortdesc xml:lang="en">An IRC Client for GNOME</shortdesc>
   <description>Polari is a simple IRC Client that is designed to integrate seamlessly with GNOME 3</description>
-  <!--
   <homepage rdf:resource="http://wiki.gnome.org/Apps/Polari" />
-  -->
   <download-page rdf:resource="http://download.gnome.org/sources/polari/" />
 
   <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
