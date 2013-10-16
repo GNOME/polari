@@ -56,7 +56,10 @@ const Notification = new Lang.Class({
         _proxy.NotifyRemote('polari', this._id, this._icon, this._summary,
                             this._body, this._actions, this._hints, -1,
             Lang.bind(this, function(result, error) {
-                this._id = result[0];
+                if (error)
+                    logError(error, 'Failed to send notification');
+                else
+                    this._id = result[0];
             }));
     },
 
