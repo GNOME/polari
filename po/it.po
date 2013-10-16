@@ -1,18 +1,14 @@
-# Translation of xchat-gnome into the Italian language
-# Copyright (C) 2004-2009, 2010, 2011, 2012 Free Software Foundation, Inc.
-# This file is distributed under the same license as the xchat-gnome package.
-# Claudio Satriano <satriano@na.infn.it>, 2004, 2005.
-# Gruppo traduzione Italiano di Ubuntu <gruppo-traduzione@ubuntu-it.org>, 2007
-#
-# nickname è stato tradotto con soprannome, anche quando indicato come nick
-# Milo Casagrande <milo@ubuntu.com>, 2007-2009, 2010, 2011, 2012, 2013.
+# Italian translation of polari
+# Copyright (C) 2013 Free Software Foundation, Inc.
+# This file is distributed under the same license as the polari package.
+# Milo Casagrande <milo@ubuntu.com>, 2013.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xchat-gnome\n"
+"Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 09:16+0200\n"
-"PO-Revision-Date: 2013-10-16 09:15+0200\n"
+"POT-Creation-Date: 2013-10-16 09:47+0200\n"
+"PO-Revision-Date: 2013-10-16 09:47+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -37,24 +33,23 @@ msgstr "Dimensione finestra"
 
 #: ../data/org.gnome.polari.gschema.xml.h:4
 msgid "Window size (width and height)."
-msgstr ""
+msgstr "Dimensione finestra (larghezza e altezza)."
 
 #: ../data/org.gnome.polari.gschema.xml.h:5
-#, fuzzy
 msgid "Window position"
-msgstr "Posizione"
+msgstr "Posizione finestra"
 
 #: ../data/org.gnome.polari.gschema.xml.h:6
 msgid "Window position (x and y)."
-msgstr ""
+msgstr "Posizione finestra (x e y)."
 
 #: ../data/org.gnome.polari.gschema.xml.h:7
 msgid "Window maximized"
-msgstr ""
+msgstr "Finestra massimizzata"
 
 #: ../data/org.gnome.polari.gschema.xml.h:8
 msgid "Window maximized state"
-msgstr ""
+msgstr "Lo stato massimizzato della finestra"
 
 #: ../data/org.gnome.Polari.desktop.in.h:1
 #: ../data/resources/main-window.ui.h:3
@@ -196,24 +191,24 @@ msgid "%s has disconnected"
 msgstr "L'utente %s si è disconnesso"
 
 #: ../src/chatView.js:314
-#, fuzzy, c-format
+#, c-format
 msgid "%s has been kicked by %s"
 msgstr "L'utente %s è stato cacciato (kick) da %s"
 
 #: ../src/chatView.js:316
-#, fuzzy, c-format
+#, c-format
 msgid "%s has been kicked"
-msgstr "La persona che ha ricevuto il kick"
+msgstr "L'utente %s è stato cacciato (kick)"
 
 #: ../src/chatView.js:322
 #, c-format
 msgid "%s has been banned by %s"
-msgstr ""
+msgstr "L'utente %s è stato bandito da %s"
 
 #: ../src/chatView.js:324
 #, c-format
 msgid "%s has been banned"
-msgstr ""
+msgstr "L'utente %s è stato bandito"
 
 #: ../src/chatView.js:329
 #, c-format
@@ -221,7 +216,7 @@ msgid "%s joined"
 msgstr "L'utente %s è entrato"
 
 #: ../src/chatView.js:333
-#, fuzzy, c-format
+#, c-format
 msgid "%s left"
 msgstr "L'utente %s se n'è andato"
 
