@@ -1,4 +1,5 @@
 const Gdk = imports.gi.Gdk;
+const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
@@ -9,6 +10,7 @@ const Notify = imports.notify;
 const Utils = imports.utils;
 
 const MAX_NICK_CHARS = 8;
+const IGNORE_STATUS_TIME = 5;
 
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
@@ -35,6 +37,7 @@ const ChatView = new Lang.Class({
         this._lastNick = null;
         this._active = false;
         this._toplevelFocus = false;
+        this._joinTime = GLib.DateTime.new_now_utc().to_unix();
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveringLink = false;
         this._pending = [];
@@ -337,6 +340,9 @@ const ChatView = new Lang.Class({
     },
 
     _insertStatus: function(text) {
+        let time = GLib.DateTime.new_now_utc().to_unix();
+        if (time - this._joinTime < IGNORE_STATUS_TIME)
+            return;
         this._lastNick = null;
         this._ensureNewLine();
         this._insertWithTagName(text, 'status');
