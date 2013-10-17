@@ -28,6 +28,9 @@ struct _PolariRoomPrivate {
   char  *display_name;
   char  *topic;
 
+  char *self_nick;
+
+  guint self_contact_notify_id;
   guint identifier_notify_id;
   guint group_contacts_changed_id;
 
@@ -96,7 +99,7 @@ polari_room_should_highlight_message (PolariRoom *room,
     return FALSE;
 
   text = tp_message_to_text (message, NULL);
-  result = strstr(text, tp_contact_get_alias (self)) != NULL;
+  result = strstr(text, priv->self_nick) != NULL;
   g_free (text);
 
   return result;
@@ -190,6 +193,31 @@ polari_room_compare (PolariRoom *room,
 }
 
 static void
+update_self_nick (PolariRoom *room)
+{
+  TpConnection *conn;
+  TpContact *self;
+  const char *nick;
+  int len;
+
+  PolariRoomPrivate *priv = room->priv;
+
+  g_clear_pointer (&priv->self_nick, g_free);
+
+  conn = tp_channel_get_connection (room->priv->channel);
+  self = tp_connection_get_self_contact (conn);
+
+  nick = tp_contact_get_alias (self);
+  len = strlen (nick);
+  do
+    if (g_ascii_isalnum (nick[len - 1]))
+        break;
+  while (--len > 0);
+
+  priv->self_nick = g_strndup (nick, len);
+}
+
+static void
 update_identifier (PolariRoom *room)
 {
   PolariRoomPrivate *priv = room->priv;
@@ -225,6 +253,14 @@ update_icon (PolariRoom *room)
     }
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ICON]);
+}
+
+static void
+on_self_contact_notify (GObject    *object,
+                        GParamSpec *pspec,
+                        gpointer    user_data)
+{
+  update_self_nick (POLARI_ROOM (user_data));
 }
 
 static void
@@ -349,6 +385,8 @@ polari_room_set_channel (PolariRoom *room,
     {
       g_signal_handler_disconnect (priv->channel, priv->identifier_notify_id);
       g_signal_handler_disconnect (priv->channel, priv->group_contacts_changed_id);
+      g_signal_handler_disconnect (tp_channel_get_connection (priv->channel),
+                                   priv->self_contact_notify_id);
 
       tp_proxy_signal_connection_disconnect (priv->properties_changed_id);
 
@@ -368,6 +406,10 @@ polari_room_set_channel (PolariRoom *room,
                                      room, NULL, NULL);
 
 
+      priv->self_contact_notify_id =
+        g_signal_connect (tp_channel_get_connection (channel),
+                          "notify::self-contact",
+                          G_CALLBACK (on_self_contact_notify), room);
       priv->identifier_notify_id =
         g_signal_connect (channel, "notify::identifier",
                           G_CALLBACK (on_identifier_notify), room);
@@ -383,6 +425,7 @@ polari_room_set_channel (PolariRoom *room,
 
     g_object_freeze_notify (G_OBJECT (room));
 
+    update_self_nick (room);
     update_identifier (room);
     update_icon (room);
 
