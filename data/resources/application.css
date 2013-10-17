@@ -63,11 +63,11 @@
 }
 
 .polari-room-list .list-row.inactive {
-    color: alpha(@theme_text_color, 0.4);
+    color: mix(@theme_text_color, @theme_base_color, 0.3);
 }
 
 .polari-room-list .list-row.inactive:backdrop {
-    color: alpha(@theme_unfocused_text_color, 0.4);
+    color: mix(@theme_unfocused_text_color, @theme_unfocused_base_color, 0.3);
 }
 
 .polari-room-list .list-row .pending-messages-count {
