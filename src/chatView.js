@@ -101,7 +101,10 @@ const ChatView = new Lang.Class({
             weight: Pango.Weight.BOLD },
           { name: 'status',
             left_margin: 0,
+            justification: Gtk.Justification.RIGHT,
             indent: 0 },
+          { name: 'action',
+            left_margin: 0 },
           { name: 'url',
             underline: Pango.Underline.SINGLE
           }
@@ -130,6 +133,8 @@ const ChatView = new Lang.Class({
           { name: 'nick',
             foreground_rgba: dimColor },
           { name: 'status',
+            foreground_rgba: dimColor },
+          { name: 'action',
             foreground_rgba: dimColor },
           { name: 'url',
             foreground_rgba: linkColor }
@@ -363,7 +368,7 @@ const ChatView = new Lang.Class({
         if (message.get_message_type() == Tp.ChannelTextMessageType.ACTION) {
             text = "%s %s".format(nick, text);
             this._lastNick = null;
-            tags.push(this._lookupTag('status'));
+            tags.push(this._lookupTag('action'));
         } else {
             if (this._lastNick != nick)
                 this._insertWithTagName(nick + '\t', 'nick');
