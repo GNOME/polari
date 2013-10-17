@@ -94,6 +94,7 @@ const ChatView = new Lang.Class({
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
+            pixels_above_lines: 10,
             left_margin: 0 },
           { name: 'message',
             indent: 0 },
@@ -104,6 +105,7 @@ const ChatView = new Lang.Class({
             justification: Gtk.Justification.RIGHT,
             indent: 0 },
           { name: 'action',
+            pixels_above_lines: 10,
             left_margin: 0 },
           { name: 'url',
             underline: Pango.Underline.SINGLE
