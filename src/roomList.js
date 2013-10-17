@@ -92,10 +92,12 @@ const RoomRow = new Lang.Class({
                                 margin_top: 2, margin_bottom: 2, spacing: 6 });
         this._eventBox.add(box);
 
-        let icon = new Gtk.Image({ gicon: gicon,
-                                   icon_size: Gtk.IconSize.MENU,
-                                   valign: Gtk.Align.BASELINE });
-        box.add(icon);
+        if (gicon) {
+            let icon = new Gtk.Image({ gicon: gicon,
+                                       icon_size: Gtk.IconSize.MENU,
+                                       valign: Gtk.Align.BASELINE });
+            box.add(icon);
+        }
 
         this._roomLabel = new Gtk.Label({ hexpand: true,
                                           ellipsize: Pango.EllipsizeMode.END,

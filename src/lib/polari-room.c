@@ -240,17 +240,10 @@ update_icon (PolariRoom *room)
 
   g_clear_object (&priv->icon);
 
-  if (priv->channel)
-    {
-      const char *icon_name;
-      gboolean is_private;
-
-      is_private = !tp_proxy_has_interface_by_id (TP_PROXY (priv->channel),
-                                                  TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP);
-      icon_name = is_private ? "avatar-default-symbolic"
-                             : "user-available-symbolic";
-      priv->icon = g_themed_icon_new (icon_name);
-    }
+  if (priv->channel &&
+      !tp_proxy_has_interface_by_id (TP_PROXY (priv->channel),
+                                     TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP))
+    priv->icon = g_themed_icon_new ("avatar-default-symbolic");
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ICON]);
 }
