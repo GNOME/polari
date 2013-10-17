@@ -119,6 +119,7 @@ const ChatView = new Lang.Class({
         context.save();
         context.add_class('dim-label');
         let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
+        let selectedColor = context.get_background_color(Gtk.StateFlags.SELECTED);
         context.restore();
 
         let [found, linkColor] = context.lookup_color("link_color");
@@ -131,7 +132,7 @@ const ChatView = new Lang.Class({
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            foreground_rgba: dimColor },
+            foreground_rgba: selectedColor },
           { name: 'status',
             foreground_rgba: dimColor },
           { name: 'action',
