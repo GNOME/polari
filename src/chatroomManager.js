@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 const Signals = imports.signals;
 
@@ -47,25 +48,13 @@ const _ChatroomManager = new Lang.Class({
 
         this._app = Gio.Application.get_default();
 
-        this._accountManager = Tp.AccountManager.dup();
         this._networkMonitor = Gio.NetworkMonitor.get_default();
-
-        let factory = this._accountManager.get_factory();
-        factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
-        factory.add_channel_features([Tp.Channel.get_feature_quark_contacts()]);
-        factory.add_contact_features([Tp.ContactFeature.ALIAS]);
-
-        this._accountManager.prepare_async(null,
-                                           Lang.bind(this, this._onPrepared));
+        this._accountsMonitor = AccountsMonitor.getDefault();
+        this._accountsMonitor.connect('account-manager-prepared',
+                                      Lang.bind(this, this._onPrepared));
     },
 
-    _onPrepared: function(am, res) {
-        try {
-            am.prepare_finish(res);
-        } catch(e) {
-            this._app.release(); // no point in carrying on
-        }
-
+    _onPrepared: function(mon, am) {
         let joinAction = this._app.lookup_action('join-room');
         joinAction.connect('activate', Lang.bind(this, this._onJoinActivated));
 

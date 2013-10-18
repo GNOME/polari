@@ -23,6 +23,12 @@ const AccountsMonitor = new Lang.Class({
                             Lang.bind(this, this._onPrepareShutdown));
 
         this._accountManager = Tp.AccountManager.dup();
+
+        let factory = this._accountManager.get_factory();
+        factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
+        factory.add_channel_features([Tp.Channel.get_feature_quark_contacts()]);
+        factory.add_contact_features([Tp.ContactFeature.ALIAS]);
+
         this._accountManager.prepare_async(null,
                                            Lang.bind(this, this._onPrepared));
     },
@@ -32,7 +38,12 @@ const AccountsMonitor = new Lang.Class({
     },
 
     _onPrepared: function(am, res) {
-        am.prepare_finish(res);
+        try {
+            am.prepare_finish(res);
+        } catch(e) {
+            this._app.release();
+            return; // no point in carrying on
+        }
 
         am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
 
@@ -51,6 +62,8 @@ const AccountsMonitor = new Lang.Class({
                    Lang.bind(this, this._accountEnabledChanged));
         am.connect('account-disabled',
                    Lang.bind(this, this._accountEnabledChanged));
+
+        this.emit('account-manager-prepared', am);
     },
 
     _onPrepareShutdown: function() {
