@@ -24,6 +24,7 @@ const _ChatroomManager = new Lang.Class({
         this._app = Gio.Application.get_default();
 
         this._accountManager = Tp.AccountManager.dup();
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
 
         let factory = this._accountManager.get_factory();
         factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
@@ -70,6 +71,12 @@ const _ChatroomManager = new Lang.Class({
         am.connect('account-enabled',
                    Lang.bind(this, this._restoreSavedChannels));
         this._restoreSavedChannels();
+
+        this._networkMonitor.connect('notify::network-available', Lang.bind(this,
+            function() {
+                if (this._networkMonitor.network_available)
+                    this._restoreSavedChannels();
+            }));
     },
 
     _restoreSavedChannels: function() {
