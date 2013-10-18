@@ -241,11 +241,15 @@ const UserListRow = new Lang.Class({
         this._detailsGrid.attach(w, 0, row++, 2, 1);
 
         if (last) {
-            w = new Gtk.Label({ label: _("Last Activity:"),
+
+            w = new Gtk.Label({ label: '<small>' + _("Last Activity:") + '</small>',
+                                use_markup: true,
                                 valign: Gtk.Align.START });
             this._detailsGrid.attach(w, 0, row, 1, 1);
 
-            w = new Gtk.Label({ label: this._formatLast(last), wrap: true,
+            w = new Gtk.Label({ label: '<small>' + this._formatLast(last) + '</small>',
+                                use_markup: true,
+                                wrap: true,
                                 hexpand: true });
             this._detailsGrid.attach(w, 1, row++, 1, 1);
         }
