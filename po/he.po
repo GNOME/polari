@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 00:01+0300\n"
-"PO-Revision-Date: 2013-09-17 00:01+0300\n"
+"POT-Creation-Date: 2013-10-20 00:22+0300\n"
+"PO-Revision-Date: 2013-10-20 00:31+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 :2;\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 : 2;\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
@@ -51,15 +51,16 @@ msgstr "Window maximized"
 msgid "Window maximized state"
 msgstr "Window maximized state"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2 ../src/application.js:391
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;אינטרנט;ממסר;צ׳אט;שיחוח;דיונים;"
 
@@ -104,7 +105,7 @@ msgstr "_כתובת"
 
 #: ../data/resources/connection-details-dialog.ui.h:6
 msgid "_Description"
-msgstr "תיאור"
+msgstr "_תיאור"
 
 #: ../data/resources/connection-details-dialog.ui.h:7
 msgid "Identity"
@@ -112,7 +113,7 @@ msgstr "זהות"
 
 #: ../data/resources/connection-details-dialog.ui.h:8
 msgid "_Nickname"
-msgstr "כינוי"
+msgstr "_כינוי"
 
 #: ../data/resources/connection-details-dialog.ui.h:9
 msgid "_Real Name"
@@ -171,64 +172,124 @@ msgstr "שליחת הודעה למשתמש"
 msgid "_Leave"
 msgstr "_עזיבה"
 
-#: ../src/application.js:340
+#: ../src/application.js:355
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:390
+#: ../src/application.js:405
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:340
+#: ../src/chatView.js:312
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:317
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:353
+#: ../src/chatView.js:325
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:355
+#: ../src/chatView.js:327
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:361
+#: ../src/chatView.js:333
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:363
+#: ../src/chatView.js:335
 #, javascript-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:368
+#: ../src/chatView.js:340
 #, javascript-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:372
+#: ../src/chatView.js:344
 #, javascript-format
 msgid "%s left"
 msgstr "‏%s עזב"
 
-#: ../src/connections.js:227
+#: ../src/connections.js:228
 msgid "Edit Connection"
 msgstr "עריכת החיבור"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:229
 msgid "A_pply"
 msgstr "ה_חלה"
 
-#: ../src/userList.js:99
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "פרטים בטעינה"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "שליחת הודעה למשתמש"
+
+#: ../src/userList.js:197
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "לפני שנייה"
+msgstr[1] "לפני %d שניות"
+msgstr[2] "לפני שתי שניות"
+
+#: ../src/userList.js:202
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "לפני דקה"
+msgstr[1] "לפני %d דקות"
+msgstr[2] "לפני שתי דקות"
+
+#: ../src/userList.js:207
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "לפני שעה"
+msgstr[1] "לפני %d שעות"
+msgstr[2] "לפני שעתיים"
+
+#: ../src/userList.js:212
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "לפני יום"
+msgstr[1] "לפני %d ימים"
+msgstr[2] "לפני יומיים"
+
+#: ../src/userList.js:217
+#, c-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "לפני שבוע"
+msgstr[1] "לפני %d שבועות"
+msgstr[2] "לפני שבועיים"
+
+#: ../src/userList.js:221
+#, c-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "לפני חודש"
+msgstr[1] "לפני %d חודשים"
+msgstr[2] "לפני חודשיים"
+
+#: ../src/userList.js:244
+msgid "Last Activity:"
+msgstr "פעילות אחרונה:"
+
+#: ../src/userList.js:417
 msgid "All"
 msgstr "הכול"
