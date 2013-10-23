@@ -48,6 +48,8 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._roomRemoved));
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
+        this._roomManager.connect('active-state-changed',
+                                  Lang.bind(this, this._updateUserListLabel));
 
         this._rooms = {};
         this._entries = {};
@@ -57,6 +59,7 @@ const MainWindow = new Lang.Class({
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
+        this._membersChangedId = 0;
         this._configureId = 0;
 
         this._titlebarRight = builder.get_object('titlebar_right');
@@ -220,7 +223,6 @@ const MainWindow = new Lang.Class({
             });
     },
 
-
     _roomAdded: function(roomManager, room) {
         let chatView = new ChatView.ChatView(room);
         this._rooms[room.id] = chatView;
@@ -245,9 +247,11 @@ const MainWindow = new Lang.Class({
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
             this._room.disconnect(this._topicChangedId);
+            this._room.disconnect(this._membersChangedId);
         }
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
+        this._membersChangedId = 0;
 
         this._room = room;
         this._revealer.reveal_child = room != null;
@@ -256,6 +260,7 @@ const MainWindow = new Lang.Class({
 
         this._inputStack.set_visible_child_name(this._room ? this._room.id
                                                            : 'placeholder');
+        this._updateUserListLabel();
 
         if (!this._room)
             return; // finished
@@ -266,6 +271,9 @@ const MainWindow = new Lang.Class({
         this._topicChangedId =
             this._room.connect('notify::topic',
                                Lang.bind(this, this._updateTitlebar));
+        this._membersChangedId =
+            this._room.connect('members-changed',
+                               Lang.bind(this, this._updateUserListLabel));
 
         this._chatStack.set_visible_child_name(this._room.id);
     },
@@ -288,6 +296,17 @@ const MainWindow = new Lang.Class({
             function(widget) {
                 widget.destroy();
             });
+    },
+
+    _updateUserListLabel: function() {
+        let numMembers = 0;
+
+        if (this._room &&
+            this._room.channel &&
+            this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
+            numMembers = this._room.channel.group_dup_members_contacts().length;
+
+        this._showUserListButton.label = '%d'.format(numMembers);
     },
 
     _updateTitlebar: function() {

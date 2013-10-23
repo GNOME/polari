@@ -187,20 +187,13 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
-                <property name="halign">end</property>
-                <property name="valign">center</property>
                 <property name="action_name">app.user-list</property>
+                <!-- be at least as wide as icon buttons - 16px + padding -->
+                <property name="width-request">32</property>
                 <style>
-                  <class name="image-button"/>
+                  <class name="polari-user-list-button"/>
+                  <class name="text-button"/>
                 </style>
-                <child>
-                  <object class="GtkImage" id="image3">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">system-users-symbolic</property>
-                    <property name="icon_size">1</property>
-                  </object>
-                </child>
               </object>
               <packing>
                 <property name="pack_type">end</property>

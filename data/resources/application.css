@@ -127,3 +127,7 @@
     border-image: none;
     border-color: transparent;
 }
+
+.polari-user-list-button {
+    padding: 0px 4px;
+}
