@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 00:34+0200\n"
-"PO-Revision-Date: 2013-09-12 00:35+0200\n"
+"POT-Creation-Date: 2013-10-23 17:37+0200\n"
+"PO-Revision-Date: 2013-10-23 17:38+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -55,15 +55,16 @@ msgstr "Zmaksymalizowane okno"
 msgid "Window maximized state"
 msgstr "Stan maksymalizacji okna"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2 ../src/application.js:391
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;czat;pokój;rozmów;rozmowa;konferencja;"
 
@@ -175,64 +176,124 @@ msgstr "Wyślij wiadomość do użytkownika"
 msgid "_Leave"
 msgstr "Op_uść"
 
-#: ../src/application.js:340
+#: ../src/application.js:355
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:390
+#: ../src/application.js:405
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013"
 
-#: ../src/chatView.js:340
+#: ../src/chatView.js:312
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Użytkownik %s jest teraz znany jako %s"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:317
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Użytkownik %s się rozłączył"
 
-#: ../src/chatView.js:353
+#: ../src/chatView.js:325
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Użytkownik %s został wyrzucony przez użytkownika %s"
 
-#: ../src/chatView.js:355
+#: ../src/chatView.js:327
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Użytkownik %s został wyrzucony"
 
-#: ../src/chatView.js:361
+#: ../src/chatView.js:333
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Użytkownik %s został zablokowany przez użytkownika %s"
 
-#: ../src/chatView.js:363
+#: ../src/chatView.js:335
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Użytkownik %s został zablokowany"
 
-#: ../src/chatView.js:368
+#: ../src/chatView.js:340
 #, javascript-format
 msgid "%s joined"
 msgstr "Użytkownik %s dołączył do pokoju"
 
-#: ../src/chatView.js:372
+#: ../src/chatView.js:344
 #, javascript-format
 msgid "%s left"
 msgstr "Użytkownik %s opuścił pokój"
 
-#: ../src/connections.js:227
+#: ../src/connections.js:228
 msgid "Edit Connection"
 msgstr "Modyfikuj połączenia"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:229
 msgid "A_pply"
 msgstr "_Zastosuj"
 
-#: ../src/userList.js:99
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "Wczytywanie informacji"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "Wiadomość"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d sekunda temu"
+msgstr[1] "%d sekundy temu"
+msgstr[2] "%d sekund temu"
+
+#: ../src/userList.js:202
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d minuta temu"
+msgstr[1] "%d minuty temu"
+msgstr[2] "%d minut temu"
+
+#: ../src/userList.js:207
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d godzina temu"
+msgstr[1] "%d godziny temu"
+msgstr[2] "%d godzin temu"
+
+#: ../src/userList.js:212
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d dzień temu"
+msgstr[1] "%d dni temu"
+msgstr[2] "%d dni temu"
+
+#: ../src/userList.js:217
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d tydzień temu"
+msgstr[1] "%d tygodnie temu"
+msgstr[2] "%d tygodni temu"
+
+#: ../src/userList.js:221
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d miesiąc temu"
+msgstr[1] "%d miesiące temu"
+msgstr[2] "%d miesięcy temu"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "Ostatnia aktywność:"
+
+#: ../src/userList.js:421
 msgid "All"
 msgstr "Wszyscy"
