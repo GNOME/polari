@@ -38,6 +38,7 @@ var Application = new Lang.Class({
         GLib.set_application_name('Polari');
         GLib.set_prgname('org.gnome.Polari');
         this._retryData = new Map();
+        this._nickTrackData = new Map();
         this._demons = [];
 
         this.add_main_option('start-client', 0,
@@ -80,6 +81,7 @@ var Application = new Lang.Class({
         account.set_nickname_async(nick, (a, res) => {
             account.set_nickname_finish(res);
         });
+        this._untrackNominalNick(account);
     },
 
     _checkService: function(conn, name, opath, iface) {
@@ -439,6 +441,40 @@ var Application = new Lang.Class({
         this._maybePresent(time);
     },
 
+    _trackNominalNick: function(account) {
+        if (this._nickTrackData.has(account))
+            return;
+
+        let nominalNick = this._getTrimmedAccountName(account);
+        let baseNick = Polari.util_get_basenick(nominalNick);
+
+        let tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
+        let contactsChangedId = tracker.connect('contacts-changed::' + baseNick,
+            (t, nick) => {
+                if (nick != nominalNick)
+                    return;
+
+                let contact = tracker.lookupContact(nick);
+                if (contact != null && contact.alias == nick)
+                    return;
+
+                this._untrackNominalNick(account);
+                account.set_nickname_async(nominalNick, (a, res) => {
+                    a.set_nickname_finish(res);
+                });
+            });
+        this._nickTrackData.set(account, { tracker, contactsChangedId });
+    },
+
+    _untrackNominalNick: function(account) {
+        let data = this._nickTrackData.get(account);
+        if (!data)
+            return;
+
+        data.tracker.disconnect(data.contactsChangedId);
+        this._nickTrackData.delete(account);
+    },
+
     _ensureRetryData: function(account) {
         let data = this._retryData.get(account.object_path);
         if (data)
@@ -488,6 +524,8 @@ var Application = new Lang.Class({
 
         if (retryData.retry++ >= MAX_RETRIES)
             return false;
+
+        this._trackNominalNick(account);
 
         let oldParams = account.dup_parameters_vardict().deep_unpack();
         let nick = oldParams['account'].deep_unpack();
