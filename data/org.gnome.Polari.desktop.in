@@ -7,5 +7,6 @@ Icon=polari
 Type=Application
 StartupNotify=true
 DBusActivatable=true
+X-GNOME-UsesNotifications=true
 Categories=GNOME;GTK;Network;IRCClient;
 _Keywords=IRC;Internet;Relay;Chat;
