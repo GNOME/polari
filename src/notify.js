@@ -49,7 +49,7 @@ const Notification = new Lang.Class({
                                             '/org/freedesktop/Notifications');
         this._closedId = _proxy.connectSignal('NotificationClosed',
                                               Lang.bind(this, this._onClosed));
-        this._actionInvokedId = _proxy.connectSignal('ActionInoked',
+        this._actionInvokedId = _proxy.connectSignal('ActionInvoked',
                                                      Lang.bind(this, this._onActionInvoked));
     },
 
