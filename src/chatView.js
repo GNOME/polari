@@ -11,6 +11,7 @@ const Utils = imports.utils;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
+const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
@@ -385,6 +386,18 @@ const ChatView = new Lang.Class({
             if (!this._toplevelFocus) {
                 let summary = '%s %s'.format(this._room.display_name, nick);
                 let notification = new Notify.Notification(summary, text);
+
+                let account = this._room.channel.connection.get_account();
+                let param = GLib.Variant.new('(ssu)',
+                                             [ account.get_object_path(),
+                                               this._room.channel.identifier,
+                                               TP_CURRENT_TIME ]);
+                notification.addAction('default', 'default');
+                notification.connect('action-invoked', function() {
+                    let app = Gio.Application.get_default();
+                    let action = app.lookup_action('join-room');
+                    action.activate(param);
+                });
                 notification.show();
             }
         }
