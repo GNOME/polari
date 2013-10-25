@@ -3,28 +3,29 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Signals = imports.signals;
 
-const NotificationDaemonIface =
-  <interface name="org.freedesktop.Notifications">
-    <method name="Notify">
-      <arg type="s" direction="in"/>
-      <arg type="u" direction="in"/>
-      <arg type="s" direction="in"/>
-      <arg type="s" direction="in"/>
-      <arg type="s" direction="in"/>
-      <arg type="as" direction="in"/>
-      <arg type="a{sv}" direction="in"/>
-      <arg type="i" direction="in"/>
-      <arg type="u" direction="out"/>
-    </method>
-    <signal name="NotificationClosed">
-      <arg type="u"/>
-      <arg type="u"/>
-    </signal>
-    <signal name="ActionInvoked">
-      <arg type="u"/>
-      <arg type="s"/>
-    </signal>
-  </interface>;
+const NotificationDaemonIface = '<node> \
+<interface name="org.freedesktop.Notifications"> \
+    <method name="Notify"> \
+      <arg type="s" direction="in"/> \
+      <arg type="u" direction="in"/> \
+      <arg type="s" direction="in"/> \
+      <arg type="s" direction="in"/> \
+      <arg type="s" direction="in"/> \
+      <arg type="as" direction="in"/> \
+      <arg type="a{sv}" direction="in"/> \
+      <arg type="i" direction="in"/> \
+      <arg type="u" direction="out"/> \
+    </method> \
+    <signal name="NotificationClosed"> \
+      <arg type="u"/> \
+      <arg type="u"/> \
+    </signal> \
+    <signal name="ActionInvoked"> \
+      <arg type="u"/> \
+      <arg type="s"/> \
+    </signal> \
+</interface> \
+</node>';
 
 const NotificationDaemon = Gio.DBusProxy.makeProxyWrapper(NotificationDaemonIface);
 
