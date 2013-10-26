@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-14 20:12+0000\n"
-"PO-Revision-Date: 2013-10-15 10:13-0300\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-10-25 10:27+0000\n"
+"PO-Revision-Date: 2013-10-25 10:12-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -55,8 +56,7 @@ msgstr "Estado de janela maximizada"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2
-#: ../src/application.js:406
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:408
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -87,6 +87,7 @@ msgstr "Nova conexão"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -96,6 +97,7 @@ msgstr "Cr_iar"
 
 #: ../data/resources/connection-details-dialog.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "Server"
 msgstr "Servidor"
 
@@ -149,10 +151,12 @@ msgid "Room"
 msgstr "Sala"
 
 #: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
 msgid "C_onnection"
 msgstr "C_onexão"
 
 #: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/message-user-dialog.ui.h:8
 msgid "_Name"
 msgstr "_Nome"
 
@@ -172,50 +176,66 @@ msgstr "Enviar mensagem a um usuário"
 msgid "_Leave"
 msgstr "A_bandonar"
 
-#: ../src/application.js:355
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Enviar mensagem a usuário"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Message"
+msgstr "_Mensagem"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "User"
+msgstr "Usuário"
+
+#: ../data/resources/message-user-dialog.ui.h:7
+msgid "_Recent"
+msgstr "_Recente"
+
+#: ../src/application.js:357
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:405
+#: ../src/application.js:407
 msgid "translator-credits"
 msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
 
-#: ../src/chatView.js:322
+#: ../src/chatView.js:313
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é conhecido agora como %s"
 
-#: ../src/chatView.js:327
+#: ../src/chatView.js:318
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectou-se"
 
-#: ../src/chatView.js:335
+#: ../src/chatView.js:326
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi retirado do canal por %s"
 
-#: ../src/chatView.js:337
+#: ../src/chatView.js:328
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi retirado do canal"
 
-#: ../src/chatView.js:343
+#: ../src/chatView.js:334
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:336
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:350
+#: ../src/chatView.js:341
 #, javascript-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:354
+#: ../src/chatView.js:345
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
@@ -228,12 +248,15 @@ msgstr "Editar conexão"
 msgid "A_pply"
 msgstr "A_plicar"
 
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Sem usuários recentes"
+
 #: ../src/userList.js:172
 msgid "Loading details"
 msgstr "Carregando detalhes"
 
 #: ../src/userList.js:180
-#| msgid "Message a User"
 msgid "Message"
 msgstr "Mensagem"
 
@@ -279,11 +302,10 @@ msgid_plural "%d months ago"
 msgstr[0] "%d mês atrás"
 msgstr[1] "%d meses atrás"
 
-#: ../src/userList.js:244
+#: ../src/userList.js:245
 msgid "Last Activity:"
 msgstr "Última atividade:"
 
-#: ../src/userList.js:417
+#: ../src/userList.js:421
 msgid "All"
 msgstr "Todos"
-
