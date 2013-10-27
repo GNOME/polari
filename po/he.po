@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 00:22+0300\n"
-"PO-Revision-Date: 2013-10-20 00:31+0300\n"
+"POT-Creation-Date: 2013-10-27 16:22+0200\n"
+"PO-Revision-Date: 2013-10-27 16:32+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -56,7 +56,7 @@ msgstr "Window maximized state"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:408
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
@@ -87,6 +87,7 @@ msgstr "חיבור חדש"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -96,6 +97,7 @@ msgstr "י_צירה"
 
 #: ../data/resources/connection-details-dialog.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "Server"
 msgstr "שרת"
 
@@ -149,10 +151,12 @@ msgid "Room"
 msgstr "חדר"
 
 #: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
 msgid "C_onnection"
 msgstr "_חיבור"
 
 #: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/message-user-dialog.ui.h:8
 msgid "_Name"
 msgstr "_שם"
 
@@ -172,52 +176,68 @@ msgstr "שליחת הודעה למשתמש"
 msgid "_Leave"
 msgstr "_עזיבה"
 
-#: ../src/application.js:355
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "שליחת הודעה למשתמש"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Message"
+msgstr "_שליחת הודעה"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "User"
+msgstr "משתמש"
+
+#: ../data/resources/message-user-dialog.ui.h:7
+msgid "_Recent"
+msgstr "_אחרונים"
+
+#: ../src/application.js:357
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:405
+#: ../src/application.js:407
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:312
+#: ../src/chatView.js:313
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:317
+#: ../src/chatView.js:318
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:325
+#: ../src/chatView.js:326
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:327
+#: ../src/chatView.js:328
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:333
+#: ../src/chatView.js:334
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:335
+#: ../src/chatView.js:336
 #, javascript-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:340
+#: ../src/chatView.js:341
 #, javascript-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:344
+#: ../src/chatView.js:345
 #, javascript-format
 msgid "%s left"
 msgstr "‏%s עזב"
@@ -229,6 +249,10 @@ msgstr "עריכת החיבור"
 #: ../src/connections.js:229
 msgid "A_pply"
 msgstr "ה_חלה"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "אין משתמשים אחרונים"
 
 #: ../src/userList.js:172
 msgid "Loading details"
@@ -286,10 +310,10 @@ msgstr[0] "לפני חודש"
 msgstr[1] "לפני %d חודשים"
 msgstr[2] "לפני חודשיים"
 
-#: ../src/userList.js:244
+#: ../src/userList.js:245
 msgid "Last Activity:"
 msgstr "פעילות אחרונה:"
 
-#: ../src/userList.js:417
+#: ../src/userList.js:421
 msgid "All"
 msgstr "הכול"
