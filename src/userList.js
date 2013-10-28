@@ -340,6 +340,8 @@ const UserList = new Lang.Class({
                      Lang.bind(this, this._onMemberRemoved));
         room.connect('member-joined',
                      Lang.bind(this, this._onMemberJoined));
+        room.connect('members-changed',
+                     Lang.bind(this, this._onMembersChanged));
 
         let members = room.channel.group_dup_members_contacts();
         for (let i = 0; i < members.length; i++)
@@ -364,6 +366,11 @@ const UserList = new Lang.Class({
 
     _onMemberJoined: function(room, member) {
         this._addMember(member);
+    },
+
+    _onMembersChanged: function(room) {
+        let numMembers = room.channel.group_dup_members_contacts().length;
+        this._counterLabel.label = numMembers.toString();
     },
 
     _addMember: function(member) {
@@ -401,18 +408,16 @@ const UserList = new Lang.Class({
     },
 
     _updateHeader: function(row, before) {
-        let numMembers = this._list.get_children().length;
-
         if (before) {
             row.set_header(null);
             return;
         }
 
-        let header = this._list.get_row_at_index(0).get_header();
-        if (header) {
-            header._counterLabel.label = numMembers.toString();
+        if (row.get_header())
             return;
-        }
+
+        let members = this._room.channel.group_dup_members_contacts();
+        let numMembers = members.length;
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                 margin_left: 6,
@@ -422,9 +427,9 @@ const UserList = new Lang.Class({
                                 use_markup: true,
                                 hexpand: true,
                                 halign: Gtk.Align.START }));
-        box._counterLabel = new Gtk.Label({ label: numMembers.toString(),
-                                            halign: Gtk.Align.END });
-        box.add(box._counterLabel);
+        this._counterLabel = new Gtk.Label({ label: numMembers.toString(),
+                                             halign: Gtk.Align.END });
+        box.add(this._counterLabel);
         box.show_all();
 
         row.set_header(box);
