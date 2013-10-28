@@ -51,8 +51,6 @@ const SimpleOutput = new Lang.Class({
         this.parent();
 
         let label = new Gtk.Label({ label: text,
-                                    wrap: true,
-                                    wrap_mode: Pango.WrapMode.WORD,
                                     vexpand: true,
                                     visible: true });
         this.widget.add(label);
