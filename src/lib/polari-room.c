@@ -68,6 +68,8 @@ enum
 
 static guint signals[LAST_SIGNAL];
 
+static GRegex *color_code_regex = NULL;
+
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
 #define tp_properties_changed_cb \
@@ -192,6 +194,14 @@ polari_room_compare (PolariRoom *room,
   return strcmp (room->priv->display_name, other->priv->display_name);
 }
 
+static char *
+strip_color_codes (const char *string) {
+  if (G_UNLIKELY (color_code_regex == NULL))
+    color_code_regex = g_regex_new ("\x03(?:[0-9]{1,2}(?:,[0-9]{1,2})?)?",
+                                    G_REGEX_OPTIMIZE, 0, NULL);
+  return g_regex_replace_literal (color_code_regex, string, -1, 0, "", 0, NULL);
+}
+
 static void
 update_self_nick (PolariRoom *room)
 {
@@ -275,11 +285,15 @@ on_group_contacts_changed (TpChannel  *channel,
                            gpointer    user_data)
 {
   TpChannelGroupChangeReason reason;
-  const char *message;
+  const char *raw_message;
+  char *message = NULL;
   int i;
 
   reason = tp_asv_get_uint32 (details, "change-reason", NULL);
-  message = tp_asv_get_string (details, "message");
+  raw_message = tp_asv_get_string (details, "message");
+
+  if (raw_message)
+    message = strip_color_codes (raw_message);
 
   switch (reason)
     {
@@ -314,6 +328,7 @@ on_group_contacts_changed (TpChannel  *channel,
     }
 
   g_signal_emit (user_data, signals[MEMBERS_CHANGED], 0);
+  g_free (message);
 }
 
 static void
