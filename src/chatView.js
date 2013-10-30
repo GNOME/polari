@@ -13,14 +13,52 @@ const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 const TP_CURRENT_TIME = GLib.MAXUINT32;
 
+const INDICATOR_OFFSET = 5; // TODO: should be based on line spacing
+
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
 const TextView = new Lang.Class({
     Name: 'TextView',
     Extends: Gtk.TextView,
 
+    _init: function(params) {
+        this.parent(params);
+
+        this.buffer.connect('mark-set', Lang.bind(this, this._onMarkSet));
+    },
+
     vfunc_get_preferred_width: function() {
         return [1, 1];
+    },
+
+    vfunc_style_updated: function() {
+        let context = this.get_style_context();
+        context.save();
+        context.add_class('dim-label');
+        this._dimColor = context.get_color(Gtk.StateFlags.NORMAL);
+        context.restore();
+    },
+
+    vfunc_draw: function(cr) {
+        this.parent(cr);
+
+        let mark = this.buffer.get_mark('indicator-line');
+        if (!mark)
+            return;
+
+        let iter = this.buffer.get_iter_at_mark(mark);
+        let location = this.get_iter_location(iter);
+        let [, y] = this.buffer_to_window_coords(Gtk.TextWindowType.TEXT,
+                                                 location.x, location.y);
+
+        Gdk.cairo_set_source_rgba(cr, this._dimColor);
+        cr.rectangle(0, y + INDICATOR_OFFSET, this.get_allocated_width(), 1);
+        cr.fill();
+    },
+
+    _onMarkSet: function(buffer, iter, mark) {
+        if (mark.name == 'indicator-line')
+            this.queue_draw();
     }
 });
 
@@ -41,6 +79,7 @@ const ChatView = new Lang.Class({
         this._joinTime = GLib.DateTime.new_now_utc().to_unix();
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveringLink = false;
+        this._needsIndicator = true;
         this._pending = {};
 
         let adj = this.widget.vadjustment;
@@ -296,6 +335,8 @@ const ChatView = new Lang.Class({
         if (!this._active || !this._toplevelFocus)
             return;
 
+        this._needsIndicator = true;
+
         let pending = this._room.channel.dup_pending_messages();
         if (pending.length == 0)
             return;
@@ -433,9 +474,22 @@ const ChatView = new Lang.Class({
         if (!valid /* outgoing */ ||
             (this._active && this._toplevelFocus && this._nPending == 0)) {
             this._room.channel.ack_message_async(message, null);
-        } else if (shouldHighlight) {
-            let mark = buffer.create_mark(null, buffer.get_end_iter(), true);
-            this._pending[id] = mark;
+        } else if (shouldHighlight || this._needsIndicator) {
+            let iter = buffer.get_end_iter();
+
+            if (shouldHighlight) {
+                let mark = buffer.create_mark(null, iter, true);
+                this._pending[id] = mark;
+            }
+
+            if (this._needsIndicator) {
+                let mark = buffer.get_mark('indicator-line');
+                if (!mark)
+                    buffer.create_mark('indicator-line', iter, true);
+                else
+                    buffer.move_mark(mark, iter);
+                this._needsIndicator = false;
+            }
         }
     },
 
