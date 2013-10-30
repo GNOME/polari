@@ -429,8 +429,8 @@ const ChatView = new Lang.Class({
 
 
         let buffer = this._view.get_buffer();
-        let [id,] = message.get_pending_message_id();
-        if (id == 0 /* outgoing */ ||
+        let [id, valid] = message.get_pending_message_id();
+        if (!valid /* outgoing */ ||
             (this._active && this._toplevelFocus && this._nPending == 0)) {
             this._room.channel.ack_message_async(message, null);
         } else if (shouldHighlight) {
