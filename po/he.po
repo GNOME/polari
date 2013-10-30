@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 16:22+0200\n"
-"PO-Revision-Date: 2013-10-27 16:32+0200\n"
+"POT-Creation-Date: 2013-10-31 01:30+0200\n"
+"PO-Revision-Date: 2013-10-31 01:34+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -18,6 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 : 2;\n"
 "X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"לקוח העברת שיחה באינטרנט (IRC) פשוט המשולב בצורה חלקה עם GNOME; הוא כולל "
+"ממשק פשוט ויפה המאפשר לך להתמקד בשיחות שלך."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -56,7 +65,7 @@ msgstr "Window maximized state"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:408
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
@@ -192,52 +201,52 @@ msgstr "משתמש"
 msgid "_Recent"
 msgstr "_אחרונים"
 
-#: ../src/application.js:357
+#: ../src/application.js:362
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:407
+#: ../src/application.js:409
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:313
+#: ../src/chatView.js:362
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:318
+#: ../src/chatView.js:367
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:326
+#: ../src/chatView.js:375
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:328
+#: ../src/chatView.js:377
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:334
+#: ../src/chatView.js:383
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:336
+#: ../src/chatView.js:385
 #, javascript-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:341
+#: ../src/chatView.js:390
 #, javascript-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:394
 #, javascript-format
 msgid "%s left"
 msgstr "‏%s עזב"
@@ -314,6 +323,6 @@ msgstr[2] "לפני חודשיים"
 msgid "Last Activity:"
 msgstr "פעילות אחרונה:"
 
-#: ../src/userList.js:421
+#: ../src/userList.js:426
 msgid "All"
 msgstr "הכול"
