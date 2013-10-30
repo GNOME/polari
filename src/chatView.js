@@ -54,6 +54,7 @@ const TextView = new Lang.Class({
         Gdk.cairo_set_source_rgba(cr, this._dimColor);
         cr.rectangle(0, y + INDICATOR_OFFSET, this.get_allocated_width(), 1);
         cr.fill();
+        cr.$dispose();
     },
 
     _onMarkSet: function(buffer, iter, mark) {
