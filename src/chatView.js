@@ -484,6 +484,8 @@ const ChatView = new Lang.Class({
             }
 
             if (this._needsIndicator) {
+                iter.set_line_offset(0);
+
                 let mark = buffer.get_mark('indicator-line');
                 if (!mark)
                     buffer.create_mark('indicator-line', iter, true);
