@@ -1,0 +1,22 @@
+3.11.1 - "Peppermint Foot Lotion"
+=================================
+* Initial Polari release
+* Basic support for room/private chats
+* Simple connection editor
+* Nick completion
+* Some support for more advanced /commands
+* Experimental pastebin integration
+
+Contributors:
+  Felipe Borges, Mathieu Bridon, Giovanni Campagna, Ignacio Casal Quinteiro,
+  Cosimo Cecchi, Guillaume Desmottes, Piotr Drąg, Javier Jardón,
+  William Jon McCann, Tim Lunn, Florian Müllner, Volker Sobek, Carlos Soriano,
+  Jasper St. Pierre, Jakub Steiner
+
+Translations:
+  Yaron Shahrabani [he], Marek Černocký [cs], Enrico Nicoletto [pt_BR],
+  Piotr Drąg [pl], Daniel Korostil [uk], Daniel Mustieles [es],
+  Matej Urbančič [sl], Yosef Or Boczko [he], Joe Hansen [da],
+  Martin Srebotnjak [sl], Fran Diéguez [gl], Cheng-Chia Tseng [zh_HK, zh_TW],
+  Timo Jyrinki [fi], malcolmlewis@opensuse.org [zh_HK, zh_TW], tuhaihe [zh_CN],
+  Milo Casagrande [it]

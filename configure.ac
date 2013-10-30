@@ -1,4 +1,4 @@
-AC_INIT([polari],[0.0.1],[],[polari])
+AC_INIT([polari],[3.11.1],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
