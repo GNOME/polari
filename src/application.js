@@ -86,7 +86,7 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('(ssu)') },
           { name: 'leave-room',
             activate: Lang.bind(this, this._onLeaveRoom),
-            parameter_type: GLib.VariantType.new('s') },
+            parameter_type: GLib.VariantType.new('(ss)') },
           { name: 'leave-current-room',
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
@@ -353,11 +353,13 @@ const Application = new Lang.Class({
     },
 
     _onLeaveRoom: function(action, parameter) {
+        let [roomId, message] = parameter.deep_unpack();
         let reason = Tp.ChannelGroupChangeReason.NONE;
-        let message = _("Good Bye"); // TODO - our first setting!
-        let room = this._chatroomManager.getRoomById(parameter.deep_unpack());
+        let room = this._chatroomManager.getRoomById(roomId);
         if (!room)
             return;
+        if (!message.length)
+            message = _("Good Bye"); // TODO - our first setting?
         room.channel.leave_async(reason, message, Lang.bind(this,
             function(c, res) {
                 try {
@@ -375,7 +377,7 @@ const Application = new Lang.Class({
         if (!room)
             return;
         let action = this.lookup_action('leave-room');
-        action.activate(GLib.Variant.new('s', room.id));
+        action.activate(GLib.Variant.new('(ss)', [room.id, '']));
     },
 
     _onToggleAction: function(action) {

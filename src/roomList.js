@@ -198,13 +198,14 @@ const RoomList = new Lang.Class({
         for (let id in this._roomRows)
             if (this._roomRows[id].selection_button.active) {
                 let room = this._roomRows[id].widget.room;
-                this._leaveAction.activate(GLib.Variant.new('s', room.id));
+                let param = GLib.Variant.new('(ss)', [room.id, '']);
+                this._leaveAction.activate(param);
             }
         this._selectionModeAction.change_state(GLib.Variant.new('b', false));
     },
 
     _onLeaveActivated: function(action, param) {
-        let id = param.deep_unpack();
+        let [id, ] = param.deep_unpack();
         let row = this._roomRows[id].widget;
 
         let activeRoom = this._roomManager.getActiveRoom();

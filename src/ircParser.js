@@ -217,7 +217,8 @@ const IrcParser = new Lang.Class({
 
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('leave-room');
-                action.activate(GLib.Variant.new('s', room.id));
+                let param = GLib.Variant.new('(ss)', [room.id, argv.join(' ')]);
+                action.activate(param);
                 break;
             }
             case 'QUERY': {
