@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-14 20:12+0000\n"
-"PO-Revision-Date: 2013-10-18 20:25+0200\n"
+"POT-Creation-Date: 2013-10-25 10:27+0000\n"
+"PO-Revision-Date: 2013-10-30 08:27+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -56,7 +56,7 @@ msgstr "Stav maximalizace okna."
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:408
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Komunikační klient IRC pro GNOME"
 
@@ -87,6 +87,7 @@ msgstr "Nové připojení"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Cancel"
 msgstr "_Zrušit"
 
@@ -96,6 +97,7 @@ msgstr "V_ytvořit"
 
 #: ../data/resources/connection-details-dialog.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "Server"
 msgstr "Server"
 
@@ -149,10 +151,12 @@ msgid "Room"
 msgstr "Místnost"
 
 #: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
 msgid "C_onnection"
 msgstr "Přip_ojení"
 
 #: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/message-user-dialog.ui.h:8
 msgid "_Name"
 msgstr "_Název"
 
@@ -172,43 +176,59 @@ msgstr "Napsat uživateli"
 msgid "_Leave"
 msgstr "_Opustit"
 
-#: ../src/application.js:355
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Zpráva uživateli"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Message"
+msgstr "_Napsat zprávu"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "User"
+msgstr "Uživatel"
+
+#: ../data/resources/message-user-dialog.ui.h:7
+msgid "_Recent"
+msgstr "Ne_dávní"
+
+#: ../src/application.js:357
 msgid "Good Bye"
 msgstr "Naviděnou"
 
-#: ../src/application.js:405
+#: ../src/application.js:407
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
-#: ../src/chatView.js:322
+#: ../src/chatView.js:313
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
-#: ../src/chatView.js:327
+#: ../src/chatView.js:318
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
-#: ../src/chatView.js:335
+#: ../src/chatView.js:326
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
-#: ../src/chatView.js:337
+#: ../src/chatView.js:328
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
-#: ../src/chatView.js:343
+#: ../src/chatView.js:334
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:336
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
-#: ../src/chatView.js:350
+#: ../src/chatView.js:341
 msgid "%s joined"
 msgstr "%s se připojil"
 
-#: ../src/chatView.js:354
+#: ../src/chatView.js:345
 msgid "%s left"
 msgstr "%s opustil místnost"
 
@@ -219,6 +239,10 @@ msgstr "Úprava připojení"
 #: ../src/connections.js:229
 msgid "A_pply"
 msgstr "_Použít"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "žádní nejsou"
 
 #: ../src/userList.js:172
 msgid "Loading details"
@@ -270,10 +294,10 @@ msgstr[0] "před %d měsícem"
 msgstr[1] "před %d měsíci"
 msgstr[2] "před %d měsíci"
 
-#: ../src/userList.js:244
+#: ../src/userList.js:245
 msgid "Last Activity:"
 msgstr "Naposledy aktivní:"
 
-#: ../src/userList.js:417
+#: ../src/userList.js:421
 msgid "All"
 msgstr "Vše"
