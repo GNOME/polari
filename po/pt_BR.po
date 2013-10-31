@@ -2,15 +2,16 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Enrico Nicoletto <liverig@gmail.com>, 2013.
+# Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-25 10:27+0000\n"
-"PO-Revision-Date: 2013-10-25 10:12-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2013-10-31 02:49+0000\n"
+"PO-Revision-Date: 2013-10-31 10:33-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +19,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.7\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Um cliente simples de Internet Relay Chat (IRC) que é projetado para "
+"integrar de forma transparente com o GNOME. Ele possui uma interface simples "
+"e bonita que permite a você se concentrar em suas conversas."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -56,7 +67,7 @@ msgstr "Estado de janela maximizada"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:408
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -192,50 +203,50 @@ msgstr "Usuário"
 msgid "_Recent"
 msgstr "_Recente"
 
-#: ../src/application.js:357
+#: ../src/application.js:362
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:407
+#: ../src/application.js:409
 msgid "translator-credits"
 msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
 
-#: ../src/chatView.js:313
+#: ../src/chatView.js:362
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é conhecido agora como %s"
 
-#: ../src/chatView.js:318
+#: ../src/chatView.js:367
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectou-se"
 
-#: ../src/chatView.js:326
+#: ../src/chatView.js:375
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi retirado do canal por %s"
 
-#: ../src/chatView.js:328
+#: ../src/chatView.js:377
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi retirado do canal"
 
-#: ../src/chatView.js:334
+#: ../src/chatView.js:383
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:336
+#: ../src/chatView.js:385
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:341
+#: ../src/chatView.js:390
 #, javascript-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:394
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
@@ -306,6 +317,6 @@ msgstr[1] "%d meses atrás"
 msgid "Last Activity:"
 msgstr "Última atividade:"
 
-#: ../src/userList.js:421
+#: ../src/userList.js:426
 msgid "All"
 msgstr "Todos"
