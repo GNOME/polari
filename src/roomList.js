@@ -108,10 +108,13 @@ const RoomRow = new Lang.Class({
         this._stack = new Gtk.Stack();
         box.add(this._stack);
 
-        this._counter = new Gtk.Label({ width_chars: 2,
-                                        halign: Gtk.Align.END });
+        let frame = new Gtk.AspectFrame({ obey_child: false,
+                                          shadow_type: Gtk.ShadowType.NONE });
+        this._stack.add_named(frame, 'normal');
+
+        this._counter = new Gtk.Label({ width_chars: 2 });
         this._counter.get_style_context().add_class('pending-messages-count');
-        this._stack.add_named(this._counter, 'normal');
+        frame.add(this._counter);
 
         this.selection_button = new Gtk.CheckButton();
         this._stack.add_named(this.selection_button, 'selection');
