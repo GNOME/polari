@@ -222,6 +222,8 @@ const ChatView = new Lang.Class({
                                  Lang.bind(this, this._updateScroll));
         this._view.connect('button-release-event',
                            Lang.bind(this, this._handleLinkClicks));
+        this._view.connect('button-press-event',
+                           Lang.bind(this, this._handleLinkClicks));
         this._view.connect('motion-notify-event',
                            Lang.bind(this, this._handleLinkHovers));
     },
@@ -295,6 +297,11 @@ const ChatView = new Lang.Class({
         if (button != Gdk.BUTTON_PRIMARY)
             return false;
 
+        let isPress = event.get_event_type() == Gdk.EventType.BUTTON_PRESS;
+
+        if (isPress)
+            this._clickedUrl = null;
+
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
                                                   eventX, eventY);
@@ -304,9 +311,15 @@ const ChatView = new Lang.Class({
         for (let i = 0; i < tags.length; i++) {
             let url = tags[i]._url;
             if (url) {
-                if (url.indexOf(':') == -1)
-                    url = 'http://' + url;
-                Gio.AppInfo.launch_default_for_uri(url, null);
+                if (isPress) {
+                    this._clickedUrl = url;
+                    return true;
+                } else if (this._clickedUrl == url) {
+                    if (url.indexOf(':') == -1)
+                        url = 'http://' + url;
+                    Gio.AppInfo.launch_default_for_uri(url, null);
+                    return true;
+                }
                 break;
             }
         }
