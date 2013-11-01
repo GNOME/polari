@@ -4,6 +4,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
+const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
 const Notify = imports.notify;
@@ -15,6 +16,8 @@ const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
                                 // insert a timestamp
+
+const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
 
 const INDICATOR_OFFSET = 5; // TODO: should be based on line spacing
 
@@ -85,6 +88,20 @@ const ChatView = new Lang.Class({
         this._hoveringLink = false;
         this._needsIndicator = true;
         this._pending = {};
+        this._pendingLogs = [];
+
+        let isRoom = room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP);
+        let account = room.channel.connection.get_account();
+        let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
+                                                   : Tpl.EntityType.CONTACT,
+                                      identifier: room.channel.identifier });
+        let logManager = Tpl.LogManager.dup_singleton();
+        this._logWalker =
+            logManager.walk_filtered_events(account, target,
+                                            Tpl.EventTypeMask.TEXT, null);
+
+        this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
+                                         Lang.bind(this, this._onLogEventsReady));
 
         let adj = this.widget.vadjustment;
         this._scrollBottom = adj.upper - adj.page_size;
@@ -246,6 +263,48 @@ const ChatView = new Lang.Class({
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
+    },
+
+    _onLogEventsReady: function(lw, res) {
+        let [, events] = lw.get_events_finish(res);
+        this._pendingLogs = events.concat(this._pendingLogs);
+        this._insertPendingLogs();
+    },
+
+    _insertPendingLogs: function() {
+        if (this._pendingLogs.length == 0)
+            return;
+
+        let index = -1;
+        let nick = this._pendingLogs[0].sender.alias;
+        let type = this._pendingLogs[0].message_type;
+        if (!this._logWalker.is_end()) {
+            for (let i = 0; i < this._pendingLogs.length; i++)
+                if (this._pendingLogs[i].sender.alias != nick ||
+                    this._pendingLogs[i].message_type != type) {
+                    index = i;
+                    break;
+                }
+        } else {
+            index = 0;
+        }
+
+        if (index < 0)
+            return;
+
+        let pending = this._pendingLogs.splice(index);
+        let state = { lastNick: null, lastTimestamp: 0 };
+        let iter = this._view.buffer.get_start_iter();
+        for (let i = 0; i < pending.length; i++) {
+            let message = { nick: pending[i].sender.alias,
+                            text: pending[i].message,
+                            timestamp: pending[i].timestamp,
+                            messageType: pending[i].get_message_type(),
+                            shouldHighlight: false };
+            this._insertMessage(iter, message, state);
+            if (!iter.is_end() || i < pending.length - 1)
+                this._view.buffer.insert(iter, '\n', -1);
+        }
     },
 
     get _nPending() {
