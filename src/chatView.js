@@ -429,7 +429,8 @@ const ChatView = new Lang.Class({
             return;
         this._lastNick = null;
         this._ensureNewLine();
-        this._insertWithTagName(text, 'status');
+        let iter = this._view.buffer.get_end_iter();
+        this._insertWithTagName(iter, text, 'status');
     },
 
     _formatTimestamp: function(timestamp) {
@@ -487,7 +488,7 @@ const ChatView = new Lang.Class({
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
-            this._insertWithTags(this._formatTimestamp(timestamp), tags);
+            this._insertWithTags(iter, this._formatTimestamp(timestamp), tags);
         }
         this._lastTimestamp = timestamp;
 
@@ -499,6 +500,7 @@ const ChatView = new Lang.Class({
         }
 
         let tags = [];
+        let iter = this._view.buffer.get_end_iter();
         if (isAction) {
             text = "%s %s".format(nick, text);
             this._lastNick = null;
@@ -510,7 +512,7 @@ const ChatView = new Lang.Class({
                 let tags = [this._lookupTag('nick')];
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
-                this._insertWithTags(nick + '\t', tags);
+                this._insertWithTags(iter, nick + '\t', tags);
             }
             this._lastNick = nick;
             tags.push(this._lookupTag('message'));
@@ -543,18 +545,18 @@ const ChatView = new Lang.Class({
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
             let url = urls[i];
-            this._insertWithTags(text.substr(pos, url.pos - pos), tags);
+            this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
 
             let tag = new Gtk.TextTag();
             tag._url = url.url;
             this._view.get_buffer().tag_table.add(tag);
 
-            this._insertWithTags(url.url,
+            this._insertWithTags(iter, url.url,
                                  tags.concat(this._lookupTag('url'), tag));
 
             pos = url.pos + url.url.length;
         }
-        this._insertWithTags(text.substr(pos), tags);
+        this._insertWithTags(iter, text.substr(pos), tags);
 
 
         let buffer = this._view.get_buffer();
@@ -594,13 +596,12 @@ const ChatView = new Lang.Class({
         return this._view.get_buffer().tag_table.lookup(name);
     },
 
-    _insertWithTagName: function(text, name) {
-        this._insertWithTags(text, [this._lookupTag(name)]);
+    _insertWithTagName: function(iter, text, name) {
+        this._insertWithTags(iter, text, [this._lookupTag(name)]);
     },
 
-    _insertWithTags: function(text, tags) {
+    _insertWithTags: function(iter, text, tags) {
         let buffer = this._view.get_buffer();
-        let iter = buffer.get_end_iter();
         let offset = iter.get_offset();
 
         buffer.insert(iter, text, -1);
