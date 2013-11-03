@@ -7,6 +7,7 @@ const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
+const Mainloop = imports.mainloop;
 const Notify = imports.notify;
 const Utils = imports.utils;
 
@@ -18,6 +19,7 @@ const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
                                 // insert a timestamp
 
 const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
+const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
 
 const INDICATOR_OFFSET = 5; // TODO: should be based on line spacing
 
@@ -100,6 +102,7 @@ const ChatView = new Lang.Class({
             logManager.walk_filtered_events(account, target,
                                             Tpl.EventTypeMask.TEXT, null);
 
+        this._fetchingBacklog = true;
         this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
                                          Lang.bind(this, this._onLogEventsReady));
 
@@ -243,6 +246,7 @@ const ChatView = new Lang.Class({
         this.widget.connect('unmap', Lang.bind(this, this._updateActive));
         this.widget.connect('state-flags-changed',
                             Lang.bind(this, this._updateToplevel));
+        this.widget.connect('scroll-event', Lang.bind(this ,this._onScroll));
         this.widget.vadjustment.connect('value-changed',
                                  Lang.bind(this, this._checkMessages));
         this.widget.vadjustment.connect('changed',
@@ -269,6 +273,7 @@ const ChatView = new Lang.Class({
         let [, events] = lw.get_events_finish(res);
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs();
+        this._fetchingBacklog = false;
     },
 
     _insertPendingLogs: function() {
@@ -354,6 +359,25 @@ const ChatView = new Lang.Class({
             this._view.scroll_mark_onscreen(this._pending[id]);
         }
         this._scrollBottom = adj.upper - adj.page_size;
+    },
+
+    _onScroll: function(w, event) {
+        let [, dir] = event.get_scroll_direction();
+
+        if (this._fetchingBacklog ||
+            this.widget.vadjustment.value != 0 ||
+            dir != Gdk.ScrollDirection.UP ||
+            this._logWalker.is_end())
+            return false;
+
+        this._fetchingBacklog = true;
+        Mainloop.timeout_add(500, Lang.bind(this,
+            function() {
+                this._logWalker.get_events_async(NUM_LOG_EVENTS,
+                                                 Lang.bind(this, this._onLogEventsReady));
+                return false;
+            }));
+        return false;
     },
 
     _pendingMessageRemoved: function(channel, message) {
