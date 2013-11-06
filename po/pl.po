@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 14:22+0100\n"
-"PO-Revision-Date: 2013-10-27 14:23+0100\n"
+"POT-Creation-Date: 2013-11-07 00:19+0100\n"
+"PO-Revision-Date: 2013-11-07 00:20+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -22,6 +22,16 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Prosty klient sieci IRC (Internet Relay Chat) integrujący się ze "
+"środowiskiem GNOME. Zawiera on prosty i elegancki interfejs, umożliwiający "
+"skupienie się na rozmowach."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -60,7 +70,7 @@ msgstr "Stan maksymalizacji okna"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:408
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -196,52 +206,52 @@ msgstr "Użytkownik"
 msgid "_Recent"
 msgstr "_Ostatni użytkownicy"
 
-#: ../src/application.js:357
+#: ../src/application.js:362
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:407
+#: ../src/application.js:409
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013"
 
-#: ../src/chatView.js:313
+#: ../src/chatView.js:375
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Użytkownik %s jest teraz znany jako %s"
 
-#: ../src/chatView.js:318
+#: ../src/chatView.js:380
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Użytkownik %s się rozłączył"
 
-#: ../src/chatView.js:326
+#: ../src/chatView.js:388
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Użytkownik %s został wyrzucony przez użytkownika %s"
 
-#: ../src/chatView.js:328
+#: ../src/chatView.js:390
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Użytkownik %s został wyrzucony"
 
-#: ../src/chatView.js:334
+#: ../src/chatView.js:396
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Użytkownik %s został zablokowany przez użytkownika %s"
 
-#: ../src/chatView.js:336
+#: ../src/chatView.js:398
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Użytkownik %s został zablokowany"
 
-#: ../src/chatView.js:341
+#: ../src/chatView.js:403
 #, javascript-format
 msgid "%s joined"
 msgstr "Użytkownik %s dołączył do pokoju"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:407
 #, javascript-format
 msgid "%s left"
 msgstr "Użytkownik %s opuścił pokój"
@@ -318,6 +328,6 @@ msgstr[2] "%d miesięcy temu"
 msgid "Last Activity:"
 msgstr "Ostatnia aktywność:"
 
-#: ../src/userList.js:421
+#: ../src/userList.js:426
 msgid "All"
 msgstr "Wszyscy"
