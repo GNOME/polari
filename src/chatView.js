@@ -143,6 +143,7 @@ const ChatView = new Lang.Class({
             weight: Pango.Weight.BOLD },
           { name: 'status',
             left_margin: 0,
+            indent: 0,
             justification: Gtk.Justification.RIGHT,
             indent: 0 },
           { name: 'action',
