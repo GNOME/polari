@@ -382,6 +382,7 @@ const ChatView = new Lang.Class({
         let [id,] = message.get_pending_message_id();
         if (this._pending[id])
             this._view.buffer.delete_mark(this._pending[id]);
+        this._app.withdraw_notification('pending-message-' + id);
         delete this._pending[id];
     },
 
@@ -649,7 +650,7 @@ const ChatView = new Lang.Class({
                                            this._room.channel_name,
                                            TP_CURRENT_TIME ]);
             notification.set_default_action_and_target('app.join-room', param);
-            this._app.send_notification(null, notification);
+            this._app.send_notification('pending-message-' + id, notification);
         }
 
         let buffer = this._view.get_buffer();
