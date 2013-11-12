@@ -77,8 +77,7 @@ const ChatView = new Lang.Class({
                             Lang.bind(this, this._onStyleUpdated));
 
         this._room = room;
-        this._lastNick = null;
-        this._lastTimestamp = 0;
+        this._state = { lastNick: null, lastTimestamp: 0 };
         this._active = false;
         this._toplevelFocus = false;
         this._joinTime = GLib.DateTime.new_now_utc().to_unix();
@@ -97,9 +96,9 @@ const ChatView = new Lang.Class({
 
         let channelSignals = [
             { name: 'message-received',
-              handler: Lang.bind(this, this._insertMessage) },
+              handler: Lang.bind(this, this._insertTpMessage) },
             { name: 'message-sent',
-              handler: Lang.bind(this, this._insertMessage) },
+              handler: Lang.bind(this, this._insertTpMessage) },
             { name: 'pending-message-removed',
               handler: Lang.bind(this, this._pendingMessageRemoved) }
         ];
@@ -129,7 +128,7 @@ const ChatView = new Lang.Class({
 
         room.channel.dup_pending_messages().forEach(Lang.bind(this,
             function(message) {
-                this._insertMessage(room, message);
+                this._insertTpMessage(room, message);
             }));
         this._checkMessages();
     },
@@ -427,7 +426,7 @@ const ChatView = new Lang.Class({
         let time = GLib.DateTime.new_now_utc().to_unix();
         if (time - this._joinTime < IGNORE_STATUS_TIME)
             return;
-        this._lastNick = null;
+        this._state.lastNick = null;
         this._ensureNewLine();
         let iter = this._view.buffer.get_end_iter();
         this._insertWithTagName(iter, text, 'status');
@@ -469,78 +468,112 @@ const ChatView = new Lang.Class({
         return date.format(format);
     },
 
-    _insertMessage: function(room, message) {
-        let nick = message.sender.alias;
-        let [text, flags] = message.to_text();
+    _insertTpMessage: function(room, tpMessage) {
+        let [text, flags] = tpMessage.to_text();
 
-        let isAction = message.get_message_type() == Tp.ChannelTextMessageType.ACTION;
-        let needsGap = nick != this._lastNick || isAction;
+        let message = { nick: tpMessage.sender.alias,
+                        text: text,
+                        messageType: tpMessage.get_message_type() };
 
-        let timestamp = message.get_sent_timestamp();
+        let timestamp = tpMessage.get_sent_timestamp();
         if (!timestamp)
-            timestamp = message.get_received_timestamp();
+            timestamp = tpMessage.get_received_timestamp();
+        message.timestamp = timestamp;
 
-        if (timestamp - TIMESTAMP_INTERVAL > this._lastTimestamp) {
-            this._ensureNewLine();
+        message.shouldHighlight = this._room.should_highlight_message(tpMessage);
 
-            let iter = this._view.buffer.get_end_iter();
+        this._ensureNewLine();
+
+        let iter = this._view.buffer.get_end_iter();
+        this._insertMessage(iter, message, this._state);
+
+        let [id, valid] = tpMessage.get_pending_message_id();
+
+        if (message.shouldHighlight && !this._toplevelFocus) {
+            let summary = '%s %s'.format(this._room.display_name, message.nick);
+            let notification = new Notify.Notification(summary, message.text);
+
+            let account = this._room.channel.connection.get_account();
+            let param = GLib.Variant.new('(ssu)',
+                                         [ account.get_object_path(),
+                                           this._room.channel.identifier,
+                                           TP_CURRENT_TIME ]);
+            notification.addAction('default', 'default');
+            notification.connect('action-invoked', function() {
+                let app = Gio.Application.get_default();
+                let action = app.lookup_action('join-room');
+                action.activate(param);
+            });
+            notification.show();
+        }
+
+        let buffer = this._view.get_buffer();
+        if (!valid /* outgoing */ ||
+            (this._active && this._toplevelFocus && this._nPending == 0)) {
+            this._room.channel.ack_message_async(tpMessage, null);
+        } else if (message.shouldHighlight || this._needsIndicator) {
+            let iter = buffer.get_end_iter();
+
+            if (message.shouldHighlight) {
+                let mark = buffer.create_mark(null, iter, true);
+                this._pending[id] = mark;
+            }
+
+            if (this._needsIndicator) {
+                iter.set_line_offset(0);
+
+                let mark = buffer.get_mark('indicator-line');
+                if (!mark)
+                    buffer.create_mark('indicator-line', iter, true);
+                else
+                    buffer.move_mark(mark, iter);
+                this._needsIndicator = false;
+            }
+        }
+    },
+
+    _insertMessage: function(iter, message, state) {
+        let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
+        let needsGap = message.nick != state.lastNick || isAction;
+
+        if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
             let tags = [this._lookupTag('timestamp')];
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
-            this._insertWithTags(iter, this._formatTimestamp(timestamp), tags);
+            this._insertWithTags(iter,
+                                 this._formatTimestamp(message.timestamp) + '\n',
+                                 tags);
         }
-        this._lastTimestamp = timestamp;
+        state.lastTimestamp = message.timestamp;
 
-        this._ensureNewLine();
-
-        if (nick.length > this._maxNickChars) {
-            this._maxNickChars = nick.length;
+        if (message.nick.length > this._maxNickChars) {
+            this._maxNickChars = message.nick.length;
             this._updateIndent();
         }
 
         let tags = [];
-        let iter = this._view.buffer.get_end_iter();
         if (isAction) {
-            text = "%s %s".format(nick, text);
-            this._lastNick = null;
+            message.text = "%s %s".format(message.nick, message.text);
+            state.lastNick = null;
             tags.push(this._lookupTag('action'));
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
         } else {
-            if (this._lastNick != nick) {
+            if (state.lastNick != message.nick) {
                 let tags = [this._lookupTag('nick')];
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
-                this._insertWithTags(iter, nick + '\t', tags);
+                this._insertWithTags(iter, message.nick + '\t', tags);
             }
-            this._lastNick = nick;
+            state.lastNick = message.nick;
             tags.push(this._lookupTag('message'));
         }
 
-        let shouldHighlight = this._room.should_highlight_message(message);
-        if (shouldHighlight) {
+        if (message.shouldHighlight)
             tags.push(this._lookupTag('highlight'));
 
-            if (!this._toplevelFocus) {
-                let summary = '%s %s'.format(this._room.display_name, nick);
-                let notification = new Notify.Notification(summary, text);
-
-                let account = this._room.channel.connection.get_account();
-                let param = GLib.Variant.new('(ssu)',
-                                             [ account.get_object_path(),
-                                               this._room.channel.identifier,
-                                               TP_CURRENT_TIME ]);
-                notification.addAction('default', 'default');
-                notification.connect('action-invoked', function() {
-                    let app = Gio.Application.get_default();
-                    let action = app.lookup_action('join-room');
-                    action.activate(param);
-                });
-                notification.show();
-            }
-        }
-
+        let text = message.text;
         let urls = Utils.findUrls(text);
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
@@ -557,32 +590,6 @@ const ChatView = new Lang.Class({
             pos = url.pos + url.url.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
-
-
-        let buffer = this._view.get_buffer();
-        let [id, valid] = message.get_pending_message_id();
-        if (!valid /* outgoing */ ||
-            (this._active && this._toplevelFocus && this._nPending == 0)) {
-            this._room.channel.ack_message_async(message, null);
-        } else if (shouldHighlight || this._needsIndicator) {
-            let iter = buffer.get_end_iter();
-
-            if (shouldHighlight) {
-                let mark = buffer.create_mark(null, iter, true);
-                this._pending[id] = mark;
-            }
-
-            if (this._needsIndicator) {
-                iter.set_line_offset(0);
-
-                let mark = buffer.get_mark('indicator-line');
-                if (!mark)
-                    buffer.create_mark('indicator-line', iter, true);
-                else
-                    buffer.move_mark(mark, iter);
-                this._needsIndicator = false;
-            }
-        }
     },
 
     _ensureNewLine: function() {
