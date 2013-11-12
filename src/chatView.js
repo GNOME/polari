@@ -13,6 +13,9 @@ const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 const TP_CURRENT_TIME = GLib.MAXUINT32;
 
+const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
+                                // insert a timestamp
+
 const INDICATOR_OFFSET = 5; // TODO: should be based on line spacing
 
 // Workaround for GtkTextView growing horizontally over time when
@@ -75,6 +78,7 @@ const ChatView = new Lang.Class({
 
         this._room = room;
         this._lastNick = null;
+        this._lastTimestamp = 0;
         this._active = false;
         this._toplevelFocus = false;
         this._joinTime = GLib.DateTime.new_now_utc().to_unix();
@@ -146,6 +150,11 @@ const ChatView = new Lang.Class({
             left_margin: 0,
             indent: 0,
             justification: Gtk.Justification.RIGHT },
+          { name: 'timestamp',
+            left_margin: 0,
+            indent: 0,
+            weight: Pango.Weight.BOLD,
+            justification: Gtk.Justification.RIGHT },
           { name: 'action',
             left_margin: 0 },
           { name: 'url',
@@ -177,6 +186,8 @@ const ChatView = new Lang.Class({
           { name: 'nick',
             foreground_rgba: selectedColor },
           { name: 'status',
+            foreground_rgba: dimColor },
+          { name: 'timestamp',
             foreground_rgba: dimColor },
           { name: 'action',
             foreground_rgba: dimColor },
@@ -421,12 +432,64 @@ const ChatView = new Lang.Class({
         this._insertWithTagName(text, 'status');
     },
 
+    _formatTimestamp: function(timestamp) {
+        let date = GLib.DateTime.new_from_unix_local(timestamp);
+        let now = GLib.DateTime.new_now_local();
+
+        let daysAgo = now.difference(date) / GLib.TIME_SPAN_DAY;
+
+        let format;
+        // Show only the hour if date is on today
+        if(daysAgo < 1){
+            format = "%H:%M";
+        }
+        // Show the word "Yesterday" and time if date is on yesterday
+        else if(daysAgo <2){
+            /* Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
+            // xgettext:no-c-format
+            format = _("Yesterday, %H:%M");
+        }
+        // Show a week day and time if date is in the last week
+        else if (daysAgo < 7) {
+            /* Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
+            // xgettext:no-c-format
+            format = _("%A, %H:%M");
+
+        } else if (date.get_year() == now.get_year()) {
+            /* Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
+            // xgettext:no-c-format
+            format = _("%B %d, %H:%M");
+        } else {
+            /* Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
+            // xgettext:no-c-format
+            format = _("%B %d %Y, %H:%M");
+        }
+
+        return date.format(format);
+    },
+
     _insertMessage: function(room, message) {
         let nick = message.sender.alias;
         let [text, flags] = message.to_text();
 
         let isAction = message.get_message_type() == Tp.ChannelTextMessageType.ACTION;
         let needsGap = nick != this._lastNick || isAction;
+
+        let timestamp = message.get_sent_timestamp();
+        if (!timestamp)
+            timestamp = message.get_received_timestamp();
+
+        if (timestamp - TIMESTAMP_INTERVAL > this._lastTimestamp) {
+            this._ensureNewLine();
+
+            let iter = this._view.buffer.get_end_iter();
+            let tags = [this._lookupTag('timestamp')];
+            if (needsGap)
+                tags.push(this._lookupTag('gap'));
+            needsGap = false;
+            this._insertWithTags(this._formatTimestamp(timestamp), tags);
+        }
+        this._lastTimestamp = timestamp;
 
         this._ensureNewLine();
 
