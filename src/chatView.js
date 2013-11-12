@@ -135,8 +135,9 @@ const ChatView = new Lang.Class({
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            pixels_above_lines: 10,
             left_margin: 0 },
+          { name: 'gap',
+            pixels_above_lines: 10 },
           { name: 'message',
             indent: 0 },
           { name: 'highlight',
@@ -146,7 +147,6 @@ const ChatView = new Lang.Class({
             indent: 0,
             justification: Gtk.Justification.RIGHT },
           { name: 'action',
-            pixels_above_lines: 10,
             left_margin: 0 },
           { name: 'url',
             underline: Pango.Underline.SINGLE
@@ -425,6 +425,9 @@ const ChatView = new Lang.Class({
         let nick = message.sender.alias;
         let [text, flags] = message.to_text();
 
+        let isAction = message.get_message_type() == Tp.ChannelTextMessageType.ACTION;
+        let needsGap = nick != this._lastNick || isAction;
+
         this._ensureNewLine();
 
         if (nick.length > this._maxNickChars) {
@@ -433,13 +436,19 @@ const ChatView = new Lang.Class({
         }
 
         let tags = [];
-        if (message.get_message_type() == Tp.ChannelTextMessageType.ACTION) {
+        if (isAction) {
             text = "%s %s".format(nick, text);
             this._lastNick = null;
             tags.push(this._lookupTag('action'));
+            if (needsGap)
+                tags.push(this._lookupTag('gap'));
         } else {
-            if (this._lastNick != nick)
-                this._insertWithTagName(nick + '\t', 'nick');
+            if (this._lastNick != nick) {
+                let tags = [this._lookupTag('nick')];
+                if (needsGap)
+                    tags.push(this._lookupTag('gap'));
+                this._insertWithTags(nick + '\t', tags);
+            }
             this._lastNick = nick;
             tags.push(this._lookupTag('message'));
         }
