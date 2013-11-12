@@ -7,14 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-21 12:35+0200\n"
-"PO-Revision-Date: 2013-09-14 12:12+0100\n"
+"POT-Creation-Date: 2013-11-12 19:28+0100\n"
+"PO-Revision-Date: 2013-10-15 12:12+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -48,15 +56,16 @@ msgstr "Vindue maksimeret"
 msgid "Window maximized state"
 msgstr "Vindue maksimeret-tilstand"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2 ../src/application.js:391
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En Internet Relay Chat-klient for GNOME"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;Snak;"
 
@@ -83,6 +92,7 @@ msgstr "Ny forbindelse"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Cancel"
 msgstr "_Afbryd"
 
@@ -92,6 +102,7 @@ msgstr "_Opret"
 
 #: ../data/resources/connection-details-dialog.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "Server"
 msgstr "Server"
 
@@ -145,10 +156,12 @@ msgid "Room"
 msgstr "Rum"
 
 #: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
 msgid "C_onnection"
 msgstr "_Forbindelse"
 
 #: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/message-user-dialog.ui.h:8
 msgid "_Name"
 msgstr "_Navn"
 
@@ -168,11 +181,29 @@ msgstr "Send besked til en bruger"
 msgid "_Leave"
 msgstr "_Forlad"
 
-#: ../src/application.js:340
+#: ../data/resources/message-user-dialog.ui.h:1
+#, fuzzy
+msgid "Message User"
+msgstr "Send besked til en bruger"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+#, fuzzy
+msgid "_Message"
+msgstr "Besked"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "User"
+msgstr ""
+
+#: ../data/resources/message-user-dialog.ui.h:7
+msgid "_Recent"
+msgstr ""
+
+#: ../src/application.js:362
 msgid "Good Bye"
 msgstr "Farvel"
 
-#: ../src/application.js:390
+#: ../src/application.js:409
 msgid "translator-credits"
 msgstr ""
 "Joe Hansen, 2013\n"
@@ -180,54 +211,112 @@ msgstr ""
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
 
-#: ../src/chatView.js:340
+#: ../src/chatView.js:375
 #, c-format
 msgid "%s is now known as %s"
 msgstr "%s er nu kendt som %s"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:380
 #, c-format
 msgid "%s has disconnected"
 msgstr "%s har koblet sig fra"
 
-#: ../src/chatView.js:353
+#: ../src/chatView.js:388
 #, c-format
 msgid "%s has been kicked by %s"
 msgstr "%s er blevet smidt ud af %s"
 
-#: ../src/chatView.js:355
+#: ../src/chatView.js:390
 #, c-format
 msgid "%s has been kicked"
 msgstr "%s er blevet smidt ud"
 
-#: ../src/chatView.js:361
+#: ../src/chatView.js:396
 #, c-format
 msgid "%s has been banned by %s"
 msgstr "%s har fået karantæne af %s"
 
-#: ../src/chatView.js:363
+#: ../src/chatView.js:398
 #, c-format
 msgid "%s has been banned"
 msgstr "%s har fået karantæne"
 
-#: ../src/chatView.js:368
+#: ../src/chatView.js:403
 #, c-format
 msgid "%s joined"
 msgstr "%s er indtrådt"
 
-#: ../src/chatView.js:372
+#: ../src/chatView.js:407
 #, c-format
 msgid "%s left"
 msgstr "%s har forladt"
 
-#: ../src/connections.js:227
+#: ../src/connections.js:228
 msgid "Edit Connection"
 msgstr "Rediger forbindelse"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:229
 msgid "A_pply"
 msgstr "_Anvend"
 
-#: ../src/userList.js:99
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr ""
+
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "Indlæser detaljer"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "Besked"
+
+#: ../src/userList.js:197
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d sekund siden"
+msgstr[1] "%d sekunder siden"
+
+#: ../src/userList.js:202
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d minut siden"
+msgstr[1] "%d minutter siden"
+
+#: ../src/userList.js:207
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d time siden"
+msgstr[1] "%d timer siden"
+
+#: ../src/userList.js:212
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d dag siden"
+msgstr[1] "%d dage siden"
+
+#: ../src/userList.js:217
+#, c-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d uge siden"
+msgstr[1] "%d uger siden"
+
+#: ../src/userList.js:221
+#, c-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d måned siden"
+msgstr[1] "%d måneder siden"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "Sidste aktivitet:"
+
+#: ../src/userList.js:426
 msgid "All"
 msgstr "Alle"
