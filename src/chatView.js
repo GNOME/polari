@@ -535,6 +535,7 @@ const ChatView = new Lang.Class({
 
         let start = buffer.get_iter_at_offset(offset);
 
+        buffer.remove_all_tags(start, iter);
         for (let i = 0; i < tags.length; i++)
             buffer.apply_tag(tags[i], start, iter);
     }
