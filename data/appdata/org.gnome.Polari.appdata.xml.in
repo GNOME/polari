@@ -11,8 +11,8 @@
   </description>
   <screenshots>
     <screenshot type="default" width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-main.png</screenshot>
-    <screenshot type="default" width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-user-list.png</screenshot>
-    <screenshot type="default" width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-connections.png</screenshot>
+    <screenshot width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-user-list.png</screenshot>
+    <screenshot width="1176" height="650">https://git.gnome.org/browse/polari/plain/data/appdata/polari-connections.png</screenshot>
   </screenshots>
   <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
   <updatecontact>fmuellner@gnome.org</updatecontact>
