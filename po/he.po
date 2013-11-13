@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-31 01:30+0200\n"
-"PO-Revision-Date: 2013-10-31 01:34+0200\n"
+"POT-Creation-Date: 2013-11-13 23:26+0200\n"
+"PO-Revision-Date: 2013-11-13 23:31+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -211,45 +211,65 @@ msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:362
+#: ../src/chatView.js:471
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:367
+#: ../src/chatView.js:476
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:375
+#: ../src/chatView.js:484
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:377
+#: ../src/chatView.js:486
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:383
+#: ../src/chatView.js:492
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:385
+#: ../src/chatView.js:494
 #, javascript-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:390
+#: ../src/chatView.js:499
 #, javascript-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:394
+#: ../src/chatView.js:503
 #, javascript-format
 msgid "%s left"
 msgstr "‏%s עזב"
+
+#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
+#: ../src/chatView.js:534
+msgid "Yesterday, %H:%M"
+msgstr "אתמול, %H:%M"
+
+#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
+#: ../src/chatView.js:540
+msgid "%A, %H:%M"
+msgstr "‏%A, %H:%M"
+
+#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
+#: ../src/chatView.js:545
+msgid "%B %d, %H:%M"
+msgstr "ה־%d ב%B, %H:%M"
+
+#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
+#: ../src/chatView.js:549
+msgid "%B %d %Y, %H:%M"
+msgstr "ה־%d ב%B %Y, %H:%M"
 
 #: ../src/connections.js:228
 msgid "Edit Connection"
