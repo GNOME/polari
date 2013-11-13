@@ -289,6 +289,8 @@ const ChatView = new Lang.Class({
 
     _pendingMessageRemoved: function(channel, message) {
         let [id,] = message.get_pending_message_id();
+        if (this._pending[id])
+            this._view.buffer.delete_mark(this._pending[id]);
         delete this._pending[id];
     },
 
