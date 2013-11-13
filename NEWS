@@ -1,3 +1,16 @@
+3.11.2 - "The Oscar-Wilde-Sort"
+===============================
+* Insert timestamps after some time of inactivity [Florian; #712248]
+* Include backlog of previous conversations [Florian; #712249]
+* Misc. bug fixes [Richard, Florian; #709848, #711217]
+
+Contributors:
+  Richard Hughes, Florian Müllner
+
+Translations:
+  Yosef Or Boczko [he], Rafael Ferreira [pt_BR], Jiri Grönroos [fi],
+  Piotr Drąg [pl], Joe Hansen [da]
+
 3.11.1 - "Peppermint Foot Lotion"
 =================================
 * Initial Polari release
