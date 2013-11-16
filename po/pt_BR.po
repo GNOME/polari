@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-31 02:49+0000\n"
-"PO-Revision-Date: 2013-10-31 10:33-0300\n"
+"POT-Creation-Date: 2013-11-13 21:42+0000\n"
+"PO-Revision-Date: 2013-11-14 06:44-0300\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -211,45 +211,65 @@ msgstr "Até logo"
 msgid "translator-credits"
 msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
 
-#: ../src/chatView.js:362
+#: ../src/chatView.js:470
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é conhecido agora como %s"
 
-#: ../src/chatView.js:367
+#: ../src/chatView.js:475
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectou-se"
 
-#: ../src/chatView.js:375
+#: ../src/chatView.js:483
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi retirado do canal por %s"
 
-#: ../src/chatView.js:377
+#: ../src/chatView.js:485
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi retirado do canal"
 
-#: ../src/chatView.js:383
+#: ../src/chatView.js:491
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:385
+#: ../src/chatView.js:493
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:390
+#: ../src/chatView.js:498
 #, javascript-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:394
+#: ../src/chatView.js:502
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
+
+#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
+#: ../src/chatView.js:533
+msgid "Yesterday, %H:%M"
+msgstr "Ontem, %H:%M"
+
+#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
+#: ../src/chatView.js:539
+msgid "%A, %H:%M"
+msgstr "%A, %H:%M"
+
+#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
+#: ../src/chatView.js:544
+msgid "%B %d, %H:%M"
+msgstr "%d de %B, %H:%M"
+
+#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
+#: ../src/chatView.js:548
+msgid "%B %d %Y, %H:%M"
+msgstr "%d de %B de %Y, %H:%M"
 
 #: ../src/connections.js:228
 msgid "Edit Connection"
