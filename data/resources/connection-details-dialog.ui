@@ -16,36 +16,6 @@
           <object class="GtkButtonBox" id="dialog-action_area1">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="cancel_button">
-                <property name="label" translatable="yes">_Cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="confirm_button">
-                <property name="label" translatable="yes">Cr_eate</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -58,26 +28,21 @@
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="halign">center</property>
-            <property name="margin_left">96</property>
-            <property name="margin_right">96</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">48</property>
+            <property name="margin_left">12</property>
+            <property name="margin_right">12</property>
+            <property name="margin_top">36</property>
+            <property name="margin_bottom">0</property>
             <property name="row_spacing">12</property>
             <property name="column_spacing">12</property>
             <child>
-              <object class="GtkLabel" id="label1">
+              <object class="GtkLabel" id="margin">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Server</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
+                <property name="width_request">24</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">2</property>
+                <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
             </child>
@@ -91,8 +56,8 @@
                 <property name="mnemonic_widget">server_entry</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -107,26 +72,9 @@
                 <property name="mnemonic_widget">description_entry</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
                 <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">24</property>
-                <property name="label" translatable="yes">Identity</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
@@ -135,13 +83,14 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
+                <property name="margin_top">24</property>
                 <property name="label" translatable="yes">_Nickname</property>
                 <property name="use_underline">True</property>
                 <property name="mnemonic_widget">nickname_entry</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -156,8 +105,8 @@
                 <property name="mnemonic_widget">realname_entry</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -165,13 +114,14 @@
             <child>
               <object class="GtkEntry" id="realname_entry">
                 <property name="visible">True</property>
+                <property name="hexpand">True</property>
                 <property name="can_focus">True</property>
                 <property name="activates_default">True</property>
                 <property name="placeholder_text" translatable="yes">optional</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">5</property>
+                <property name="left_attach">2</property>
+                <property name="top_attach">3</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -179,13 +129,15 @@
             <child>
               <object class="GtkEntry" id="nickname_entry">
                 <property name="visible">True</property>
+                <property name="hexpand">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
+                <property name="margin_top">24</property>
                 <property name="activates_default">True</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">4</property>
+                <property name="left_attach">2</property>
+                <property name="top_attach">2</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -193,13 +145,14 @@
             <child>
               <object class="GtkEntry" id="description_entry">
                 <property name="visible">True</property>
+                <property name="hexpand">True</property>
                 <property name="can_focus">True</property>
                 <property name="activates_default">True</property>
                 <property name="placeholder_text" translatable="yes">optional</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -207,13 +160,61 @@
             <child>
               <object class="GtkEntry" id="server_entry">
                 <property name="visible">True</property>
+                <property name="hexpand">True</property>
                 <property name="can_focus">True</property>
                 <property name="activates_default">True</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
                 <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButtonBox" id="button_box1">
+                <property name="can_focus">False</property>
+                <property name="visible">True</property>
+                <property name="spacing">12</property>
+                <property name="margin_top">24</property>
+                <property name="vexpand">True</property>
+                <property name="valign">end</property>
+                <property name="layout_style">end</property>
+                <child>
+                  <object class="GtkButton" id="cancel_button">
+                    <property name="label" translatable="yes">_Cancel</property>
+                    <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="confirm_button">
+                    <property name="label" translatable="yes">Cr_eate</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="can_default">True</property>
+                    <property name="has_default">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="top_attach">4</property>
+                <property name="left_attach">1</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
