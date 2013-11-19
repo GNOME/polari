@@ -318,6 +318,7 @@ const MainWindow = new Lang.Class({
     },
 
     _setNick: function(nick) {
+        this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
         this._nickEntry.placeholder_text = nick;
 
         let account = this._room.channel.connection.get_account();
@@ -403,6 +404,8 @@ const MainWindow = new Lang.Class({
     _updateNick: function() {
         let nick = this._room ? this._room.channel.connection.self_contact.alias
                               : '';
+
+        this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
         this._nickEntry.placeholder_text = nick;
     },
 
