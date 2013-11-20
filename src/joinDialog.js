@@ -4,9 +4,15 @@ const Gtk = imports.gi.Gtk;
 const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
+const Connections = imports.connections;
 const Lang = imports.lang;
 
 const TP_CURRENT_TIME = GLib.MAXUINT32;
+
+const DialogPage = {
+    MAIN: 0,
+    CONNECTION: 1
+};
 
 const JoinDialog = new Lang.Class({
     Name: 'JoinDialog',
@@ -52,6 +58,38 @@ const JoinDialog = new Lang.Class({
 
         this.widget = builder.get_object('join_room_dialog');
 
+        this._titlebar = builder.get_object('titlebar');
+
+        this._stack = builder.get_object('stack');
+
+        this._details = new Connections.ConnectionDetails(null);
+        this._stack.add_named(this._details.widget, 'connection');
+
+        this._details.confirmButton.label = "_Save";
+        this._details.setCancelVisible(false);
+
+        this._details.connect('response', Lang.bind(this,
+            function() {
+                this._setPage(DialogPage.MAIN);
+            }));
+
+        this._connectionButton = builder.get_object('add_connection_button');
+        this._connectionButton.connect('clicked', Lang.bind(this,
+            function() {
+                this._setPage(DialogPage.CONNECTION);
+            }));
+        this._backButton = builder.get_object('back_button');
+        this._backButton.connect('clicked', Lang.bind(this,
+            function() {
+                this._setPage(DialogPage.MAIN);
+            }));
+
+        let backIcon = builder.get_object('back_icon');
+        if (backIcon.get_direction() == Gtk.TextDirection.RTL)
+            backIcon.icon_name = 'go-previous-rtl-symbolic';
+        else
+            backIcon.icon_name = 'go-previous-symbolic';
+
         this._connectionCombo = builder.get_object('connection_combo');
         this._connectionCombo.connect('changed',
                                       Lang.bind(this, this._onAccountChanged));
@@ -66,6 +104,8 @@ const JoinDialog = new Lang.Class({
         this._nameEntry = builder.get_object('name_entry');
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._updateCanConfirm));
+
+        this._setPage(DialogPage.MAIN);
     },
 
     _onAccountChanged: function() {
@@ -136,5 +176,22 @@ const JoinDialog = new Lang.Class({
             let sensitive = this._connectionCombo.get_active() > -1  &&
                             this._nameEntry.get_text_length() > 0;
             this._joinButton.sensitive = sensitive;
+    },
+
+    _setPage: function(page) {
+        let isMain = page == DialogPage.MAIN;
+
+        if (isMain) {
+            this._details.reset();
+
+            this._joinButton.grab_default();
+        } else {
+            this._details.confirmButton.grab_default();
+        }
+
+        this._backButton.visible = !isMain;
+        this._titlebar.title = isMain ? _("Join Chat Room")
+                                      : _("Add Connection");
+        this._stack.visible_child_name = isMain ? 'main' : 'connection';
     }
 });
