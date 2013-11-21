@@ -127,9 +127,7 @@ const ConnectionsDialog = new Lang.Class({
     },
 
     _addConnection: function() {
-        this._showConnectionDetailsDialog(null,
-                                          Lang.bind(this,
-                                                    this._createAccount));
+        this._showConnectionDetailsDialog(null);
     },
 
     _removeConnection: function() {
@@ -142,72 +140,15 @@ const ConnectionsDialog = new Lang.Class({
 
     _editConnection: function() {
         let account = this._listBox.get_selected_row()._account;
-        this._showConnectionDetailsDialog(account,
-                                          Lang.bind(this,
-                                                    this._updateAccount,
-                                                    account));
+        this._showConnectionDetailsDialog(account);
     },
 
-    _createAccount: function(params) {
-        let accountManager = Tp.AccountManager.dup();
-        let req = new Tp.AccountRequest({ account_manager: accountManager,
-                                          connection_manager: 'idle',
-                                          protocol: 'irc',
-                                          display_name: params.name });
-        req.set_enabled(true);
-
-        let [details,] = this._detailsFromParams(params, {});
-
-        for (let prop in details)
-            req.set_parameter(prop, details[prop]);
-
-        req.create_account_async(Lang.bind(this,
-            function(r, res) {
-                req.create_account_finish(res); // TODO: Check for errors
-            }));
-    },
-
-    _updateAccount: function(params, account) {
-        let oldDetails = account.dup_parameters_vardict().deep_unpack();
-        let [details, removed] = this._detailsFromParams(params, oldDetails);
-        let vardict = GLib.Variant.new('a{sv}', details);
-
-        account.update_parameters_vardict_async(vardict, removed,
-            Lang.bind(this, function(a, res) {
-                a.update_parameters_vardict_finish(res); // TODO: Check for errors
-            }));
-
-        account.set_display_name_async(params.name, Lang.bind(this,
-            function(a, res) {
-                a.set_display_name_finish(res); // TODO: Check for errors
-            }));
-    },
-
-    _detailsFromParams: function(params, oldDetails) {
-        let details = { account: GLib.Variant.new('s', params.account),
-                        server:  GLib.Variant.new('s', params.server) };
-
-        if (params.port)
-            details.port = GLib.Variant.new('u', params.port);
-        if (params.fullname)
-            details.fullname = GLib.Variant.new('s', params.fullname);
-
-        let removed = Object.keys(oldDetails).filter(
-                function(p) {
-                    return !details.hasOwnProperty(p);
-                });
-
-        return [details, removed];
-    },
-
-    _showConnectionDetailsDialog: function(account, callback) {
+    _showConnectionDetailsDialog: function(account) {
         let dialog = new ConnectionDetailsDialog(account);
         dialog.widget.transient_for = this.widget;
         dialog.widget.show();
         dialog.widget.connect('response',
             function(w, response) {
-                if (response == Gtk.ResponseType.OK)
-                    callback(dialog.getParams());
                 dialog.widget.destroy();
             });
     },
@@ -224,6 +165,8 @@ const ConnectionDetailsDialog = new Lang.Class({
     _init: function(account) {
         this._createWindow();
 
+        this._account = account;
+
         if (account) {
             this.widget.title = _("Edit Connection");
             this._confirmButton.label = _("A_pply");
@@ -232,7 +175,7 @@ const ConnectionDetailsDialog = new Lang.Class({
         }
     },
 
-    getParams: function() {
+    _getParams: function() {
         let serverRegEx = /(.*?)(?::(\d{1,5}))?$/;
         let [, server, port] = this._serverEntry.text.match(serverRegEx);
 
@@ -261,6 +204,12 @@ const ConnectionDetailsDialog = new Lang.Class({
         this._nickEntry = builder.get_object('nickname_entry');
         this._realnameEntry = builder.get_object('realname_entry');
         this._confirmButton = builder.get_object('confirm_button');
+
+        this.widget.connect('response', Lang.bind(this,
+            function(w, response) {
+                if (response == Gtk.ResponseType.OK)
+                    this._onConfirm();
+            }));
 
         this._serverEntry.connect('changed',
                                   Lang.bind(this, this._updateSensitivity));
@@ -294,5 +243,67 @@ const ConnectionDetailsDialog = new Lang.Class({
 
         if (server != account.display_name)
             this._descEntry.text = account.display_name;
+    },
+
+    _onConfirm: function() {
+        if (this._account)
+            this._updateAccount();
+        else
+            this._createAccount();
+    },
+
+    _createAccount: function() {
+        let params = this._getParams();
+        let accountManager = Tp.AccountManager.dup();
+        let req = new Tp.AccountRequest({ account_manager: accountManager,
+                                          connection_manager: 'idle',
+                                          protocol: 'irc',
+                                          display_name: params.name });
+        req.set_enabled(true);
+
+        let [details,] = this._detailsFromParams(params, {});
+
+        for (let prop in details)
+            req.set_parameter(prop, details[prop]);
+
+        req.create_account_async(Lang.bind(this,
+            function(r, res) {
+                req.create_account_finish(res); // TODO: Check for errors
+            }));
+    },
+
+    _updateAccount: function() {
+        let params = this._getParams();
+        let account = this._account;
+        let oldDetails = account.dup_parameters_vardict().deep_unpack();
+        let [details, removed] = this._detailsFromParams(params, oldDetails);
+        let vardict = GLib.Variant.new('a{sv}', details);
+
+        account.update_parameters_vardict_async(vardict, removed,
+            Lang.bind(this, function(a, res) {
+                a.update_parameters_vardict_finish(res); // TODO: Check for errors
+            }));
+
+        account.set_display_name_async(params.name, Lang.bind(this,
+            function(a, res) {
+                a.set_display_name_finish(res); // TODO: Check for errors
+            }));
+    },
+
+    _detailsFromParams: function(params, oldDetails) {
+        let details = { account: GLib.Variant.new('s', params.account),
+                        server:  GLib.Variant.new('s', params.server) };
+
+        if (params.port)
+            details.port = GLib.Variant.new('u', params.port);
+        if (params.fullname)
+            details.fullname = GLib.Variant.new('s', params.fullname);
+
+        let removed = Object.keys(oldDetails).filter(
+                function(p) {
+                    return !details.hasOwnProperty(p);
+                });
+
+        return [details, removed];
     }
 });
