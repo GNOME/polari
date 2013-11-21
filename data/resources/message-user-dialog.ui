@@ -13,12 +13,6 @@
     <property name="text_column">0</property>
     <property name="inline_completion">True</property>
     <property name="popup_single_match">False</property>
-    <child>
-      <object class="GtkCellRendererText" id="cellrenderertext1"/>
-      <attributes>
-        <attribute name="text">0</attribute>
-      </attributes>
-    </child>
   </object>
   <object class="GtkDialog" id="message_user_dialog">
     <property name="can_focus">False</property>
