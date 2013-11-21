@@ -14,22 +14,35 @@ const JoinDialog = new Lang.Class({
     _init: function() {
         this._createWidget();
 
+        this._accountsMonitor = AccountsMonitor.getDefault();
+
         this._accounts = {};
-        AccountsMonitor.getDefault().dupAccounts().forEach(Lang.bind(this,
+        this._accountsMonitor.dupAccounts().forEach(Lang.bind(this,
             function(a) {
                 if (!a.enabled)
                     return;
                 this._accounts[a.display_name] = a;
             }));
-        let names = Object.keys(this._accounts).sort(
-            function(a, b) {
-                // TODO: figure out combo box sorting
-                return (a < b) ? -1 : ((a > b) ? 1 : 0);
-            });
-        for (let i = 0; i < names.length; i++)
-            this._connectionCombo.append_text(names[i]);
-        this._connectionCombo.set_active(0);
-        this._connectionCombo.sensitive = names.length > 1;
+        this._accountAddedId =
+            this._accountsMonitor.connect('account-added', Lang.bind(this,
+                function(am, account) {
+                    this._accounts[account.display_name] = account;
+                    this._updateConnectionCombo();
+                }));
+        this._accountRemovedId =
+            this._accountsMonitor.connect('account-removed', Lang.bind(this,
+                function(am, account) {
+                    delete this._accounts[account.display_name];
+                    this._updateConnectionCombo();
+                }));
+
+        this.widget.connect('destroy', Lang.bind(this,
+            function() {
+                this._accountsMonitor.disconnect(this._accountAddedId);
+                this._accountsMonitor.disconnect(this._accountRemovedId);
+            }));
+
+        this._updateConnectionCombo();
         this._updateCanConfirm();
     },
 
@@ -61,6 +74,8 @@ const JoinDialog = new Lang.Class({
 
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
+        if (!account)
+            return;
         let logManager = Tpl.LogManager.dup_singleton();
 
         logManager.get_entities_async(account, Lang.bind(this,
@@ -101,6 +116,20 @@ const JoinDialog = new Lang.Class({
                                            room,
                                            TP_CURRENT_TIME ]));
         this.widget.response(Gtk.ResponseType.OK);
+    },
+
+    _updateConnectionCombo: function() {
+        this._connectionCombo.remove_all();
+
+        let names = Object.keys(this._accounts).sort(
+            function(a, b) {
+                // TODO: figure out combo box sorting
+                return (a < b) ? -1 : ((a > b) ? 1 : 0);
+            });
+        for (let i = 0; i < names.length; i++)
+            this._connectionCombo.append_text(names[i]);
+        this._connectionCombo.sensitive = names.length > 1;
+        this._connectionCombo.set_active(0);
     },
 
     _updateCanConfirm: function() {
