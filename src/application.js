@@ -68,11 +68,9 @@ const Application = new Lang.Class({
         let actionEntries = [
           { name: 'room-menu',
             activate: Lang.bind(this, this._onToggleAction),
-            create_hook: Lang.bind(this, this._accountActionsCreateHook),
             state: GLib.Variant.new('b', false) },
           { name: 'show-join-dialog',
             activate: Lang.bind(this, this._onShowJoinDialog),
-            create_hook: Lang.bind(this, this._accountActionsCreateHook),
             accel: '<Primary>n' },
           { name: 'show-message-user-dialog',
             activate: Lang.bind(this, this._onShowMessageUserDialog),
