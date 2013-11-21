@@ -7,6 +7,7 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
+const Signals = imports.signals;
 
 const ConnectionsDialog = new Lang.Class({
     Name: 'ConnectionsDialog',
@@ -159,20 +160,16 @@ const ConnectionsDialog = new Lang.Class({
     }
 });
 
-const ConnectionDetailsDialog = new Lang.Class({
-    Name: 'ConnectionDetailsDialog',
+const ConnectionDetails = new Lang.Class({
+    Name: 'ConnectionDetails',
 
     _init: function(account) {
-        this._createWindow();
+        this._createWidget();
 
         this._account = account;
 
-        if (account) {
-            this.widget.title = _("Edit Connection");
-            this._confirmButton.label = _("A_pply");
-
+        if (account)
             this._populateFromAccount(account);
-        }
     },
 
     _getParams: function() {
@@ -193,22 +190,36 @@ const ConnectionDetailsDialog = new Lang.Class({
         return params;
     },
 
-    _createWindow: function() {
+    setCancelVisible: function(visible) {
+        this._cancelButton.visible = visible;
+    },
+
+    reset: function() {
+        this._serverEntry.text = '';
+        this._descEntry.text = '';
+        this._nickEntry.text = '';
+        this._realnameEntry.text = '';
+    },
+
+    _createWidget: function() {
         let builder = new Gtk.Builder();
         builder.add_from_resource('/org/gnome/polari/connection-details-dialog.ui');
 
-        this.widget = builder.get_object('connection_details_dialog');
+        this.widget = builder.get_object('connection_details_content');
+        this.widget.unparent();
 
         this._serverEntry = builder.get_object('server_entry');
         this._descEntry = builder.get_object('description_entry');
         this._nickEntry = builder.get_object('nickname_entry');
         this._realnameEntry = builder.get_object('realname_entry');
-        this._confirmButton = builder.get_object('confirm_button');
+        this.confirmButton = builder.get_object('confirm_button');
+        this._cancelButton = builder.get_object('cancel_button');
 
-        this.widget.connect('response', Lang.bind(this,
-            function(w, response) {
-                if (response == Gtk.ResponseType.OK)
-                    this._onConfirm();
+        this.confirmButton.connect('clicked',
+                                    Lang.bind(this, this._onConfirmClicked));
+        this._cancelButton.connect('clicked', Lang.bind(this,
+            function() {
+                this.emit('response', Gtk.ResponseType.CANCEL);
             }));
 
         this._serverEntry.connect('changed',
@@ -221,7 +232,7 @@ const ConnectionDetailsDialog = new Lang.Class({
     _updateSensitivity: function() {
         let sensitive = this._serverEntry.get_text_length() > 0 &&
                         this._nickEntry.get_text_length() > 0;
-        this._confirmButton.sensitive = sensitive;
+        this.confirmButton.sensitive = sensitive;
     },
 
     _populateFromAccount: function(account) {
@@ -245,11 +256,13 @@ const ConnectionDetailsDialog = new Lang.Class({
             this._descEntry.text = account.display_name;
     },
 
-    _onConfirm: function() {
+    _onConfirmClicked: function() {
         if (this._account)
             this._updateAccount();
         else
             this._createAccount();
+
+        this.emit('response', Gtk.ResponseType.OK);
     },
 
     _createAccount: function() {
@@ -305,5 +318,30 @@ const ConnectionDetailsDialog = new Lang.Class({
                 });
 
         return [details, removed];
+    }
+});
+Signals.addSignalMethods(ConnectionDetails.prototype);
+
+
+const ConnectionDetailsDialog = new Lang.Class({
+    Name: 'ConnectionDetailsDialog',
+
+    _init: function(account) {
+        let title = account ? _("Edit Connection")
+                            : _("New Connection");
+        this.widget = new Gtk.Dialog({ title: title,
+                                       modal: true,
+                                       destroy_with_parent: true });
+
+        this._details = new ConnectionDetails(account);
+        this.widget.get_content_area().add(this._details.widget);
+
+        this._details.confirmButton.label = account ? _("A_pply")
+                                                    : _("Cr_eate");
+
+        this._details.connect('response', Lang.bind(this,
+            function(details, response) {
+                this.widget.response(response);
+            }));
     }
 });
