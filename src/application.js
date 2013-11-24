@@ -386,18 +386,28 @@ const Application = new Lang.Class({
     },
 
     _onListConnections: function() {
-        let dialog = new Connections.ConnectionsDialog();
-        dialog.widget.show();
-        dialog.widget.connect('response',
-            function(widget) {
+        if (this._connectionsDialog) {
+            this._connectionsDialog.widget.present();
+            return;
+        }
+
+        this._connectionsDialog = new Connections.ConnectionsDialog();
+        this._connectionsDialog.widget.show();
+        this._connectionsDialog.widget.connect('response',
+            Lang.bind(this, function(widget) {
                 widget.destroy();
-            });
+                this._connectionsDialog = null;
+            }));
     },
 
     _onShowPreferences: function() {
     },
 
     _onShowAbout: function() {
+        if (this._aboutDialog) {
+            this._aboutDialog.present();
+            return;
+        }
         let aboutParams = {
             authors: [
                 'Florian M' + String.fromCharCode(0x00FC) // ü
@@ -419,11 +429,12 @@ const Application = new Lang.Class({
             modal: true
         };
 
-        let dialog = new Gtk.AboutDialog(aboutParams);
-        dialog.show();
-        dialog.connect('response', function() {
-            dialog.destroy();
-        });
+        this._aboutDialog = new Gtk.AboutDialog(aboutParams);
+        this._aboutDialog.show();
+        this._aboutDialog.connect('response', Lang.bind(this, function() {
+            this._aboutDialog.destroy();
+            this._aboutDialog = null;
+        }));
     },
 
     _onQuit: function() {
