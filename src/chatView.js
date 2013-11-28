@@ -333,14 +333,15 @@ const ChatView = new Lang.Class({
 
     _updateScroll: function() {
         let adj = this.widget.vadjustment;
-        if (this._nPending == 0) {
-            if (adj.value == this._scrollBottom)
+        if (adj.value == this._scrollBottom) {
+            if (this._nPending == 0) {
                 adj.value = adj.upper - adj.page_size;
-        } else if (!this._active) {
-            let id = Object.keys(this._pending).sort(function(a, b) {
-                return a - b;
-            })[0];
-            this._view.scroll_mark_onscreen(this._pending[id]);
+            } else {
+                let id = Object.keys(this._pending).sort(function(a, b) {
+                    return a - b;
+                })[0];
+                this._view.scroll_mark_onscreen(this._pending[id]);
+            }
         }
         this._scrollBottom = adj.upper - adj.page_size;
     },
