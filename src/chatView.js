@@ -15,6 +15,8 @@ const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 const TP_CURRENT_TIME = GLib.MAXUINT32;
 
+const SCROLL_TIMEOUT = 100; // ms
+
 const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
                                 // insert a timestamp
 
@@ -232,7 +234,7 @@ const ChatView = new Lang.Class({
                             Lang.bind(this, this._updateToplevel));
         this.widget.connect('scroll-event', Lang.bind(this ,this._onScroll));
         this.widget.vadjustment.connect('value-changed',
-                                 Lang.bind(this, this._checkMessages));
+                                        Lang.bind(this, this._onValueChanged));
         this.widget.vadjustment.connect('changed',
                                  Lang.bind(this, this._updateScroll));
         this._view.connect('button-release-event',
@@ -363,6 +365,18 @@ const ChatView = new Lang.Class({
                 return false;
             }));
         return false;
+    },
+
+    _onValueChanged: function() {
+        if (this._valueChangedId)
+            return;
+
+        this._valueChangedId = Mainloop.timeout_add(SCROLL_TIMEOUT, Lang.bind(this,
+            function() {
+                this._checkMessages();
+                this._valueChangedId = 0;
+                return false;
+            }));
     },
 
     _pendingMessageRemoved: function(channel, message) {
