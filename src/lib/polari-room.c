@@ -21,14 +21,18 @@
 #include "polari-room.h"
 
 struct _PolariRoomPrivate {
+  TpAccount *account;
   TpChannel *channel;
 
   GIcon *icon;
   char  *id;
+  char  *channel_name;
   char  *display_name;
   char  *topic;
 
   char *self_nick;
+
+  TpHandleType type;
 
   guint self_contact_notify_id;
   guint identifier_notify_id;
@@ -43,6 +47,9 @@ enum
 
   PROP_ID,
   PROP_ICON,
+  PROP_ACCOUNT,
+  PROP_TYPE,
+  PROP_CHANNEL_NAME,
   PROP_CHANNEL,
   PROP_DISPLAY_NAME,
   PROP_TOPIC,
@@ -376,6 +383,62 @@ properties_changed (TpProxy *proxy,
 }
 
 static void
+polari_room_set_account (PolariRoom *room,
+                         TpAccount  *account)
+{
+  PolariRoomPrivate *priv;
+
+  g_return_if_fail (POLARI_IS_ROOM (room));
+  g_return_if_fail (account == NULL || TP_IS_ACCOUNT (account));
+
+  priv = room->priv;
+
+  if (priv->account == account)
+    return;
+
+  if (priv->account)
+    g_object_unref (priv->account);
+  priv->account = g_object_ref (account);
+
+  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ACCOUNT]);
+}
+
+static void
+polari_room_set_type (PolariRoom *room,
+                      int         type)
+{
+  PolariRoomPrivate *priv;
+
+  g_return_if_fail (POLARI_IS_ROOM (room));
+
+  priv = room->priv;
+
+  if (priv->type == type)
+    return;
+
+  priv->type = type;
+
+  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TYPE]);
+}
+
+static void
+polari_room_set_channel_name (PolariRoom *room,
+                              const char *channel_name)
+{
+  PolariRoomPrivate *priv;
+
+  g_return_if_fail (POLARI_IS_ROOM (room));
+
+  priv = room->priv;
+
+  if (priv->channel_name)
+    g_free (priv->channel_name);
+  priv->channel_name = g_strdup (channel_name);
+
+  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_NAME]);
+}
+
+static void
 polari_room_set_channel (PolariRoom *room,
                          TpChannel  *channel)
 {
@@ -403,7 +466,15 @@ polari_room_set_channel (PolariRoom *room,
 
   if (channel)
     {
+      TpConnection *connection = tp_channel_get_connection (channel);
+      TpHandleType type;
+
       priv->channel = g_object_ref (channel);
+
+      tp_channel_get_handle (channel, &type);
+      polari_room_set_type (room, type);
+      polari_room_set_channel_name (room, tp_channel_get_identifier (channel));
+      polari_room_set_account (room, tp_connection_get_account (connection));
 
       if (priv->id == NULL)
         priv->id = g_strdup (tp_proxy_get_object_path (TP_PROXY (channel)));
@@ -429,6 +500,12 @@ polari_room_set_channel (PolariRoom *room,
                                  channel,
                                  (tp_properties_changed_cb) properties_changed,
                                  room, NULL, NULL, NULL);
+    }
+  else
+    {
+      polari_room_set_type (room, TP_HANDLE_TYPE_NONE);
+      polari_room_set_channel_name (room, NULL);
+      polari_room_set_account (room, NULL);
     }
 
   g_object_freeze_notify (G_OBJECT (room));
@@ -457,6 +534,15 @@ polari_room_get_property (GObject    *object,
       break;
     case PROP_ICON:
       g_value_set_object (value, priv->icon);
+      break;
+    case PROP_ACCOUNT:
+      g_value_set_object (value, priv->account);
+      break;
+    case PROP_TYPE:
+      g_value_set_int (value, priv->type);
+      break;
+    case PROP_CHANNEL_NAME:
+      g_value_set_string (value, priv->channel_name);
       break;
     case PROP_CHANNEL:
       g_value_set_object (value, priv->channel);
@@ -495,7 +581,10 @@ polari_room_set_property (GObject      *object,
 static void
 polari_room_dispose (GObject *object)
 {
+  PolariRoomPrivate *priv = POLARI_ROOM (object)->priv;
+
   polari_room_set_channel (POLARI_ROOM (object), NULL);
+  g_clear_object (&priv->account);
   G_OBJECT_CLASS (polari_room_parent_class)->dispose (object);
 }
 
@@ -505,6 +594,7 @@ polari_room_finalize (GObject *object)
   PolariRoomPrivate *priv = POLARI_ROOM (object)->priv;
 
   g_clear_pointer (&priv->id, g_free);
+  g_clear_pointer (&priv->channel_name, g_free);
   g_clear_pointer (&priv->display_name, g_free);
 
   G_OBJECT_CLASS (polari_room_parent_class)->finalize (object);
@@ -546,6 +636,29 @@ polari_room_class_init (PolariRoomClass *klass)
                          "Icon",
                          "Icon",
                          G_TYPE_ICON,
+                         G_PARAM_READABLE);
+
+  props[PROP_ACCOUNT] =
+    g_param_spec_object ("account",
+                         "Account",
+                         "Account",
+                         TP_TYPE_ACCOUNT,
+                         G_PARAM_READABLE);
+
+  props[PROP_TYPE] =
+    g_param_spec_int ("type",
+                       "Type",
+                       "Type",
+                       TP_HANDLE_TYPE_NONE,
+                       TP_HANDLE_TYPE_GROUP,
+                       TP_HANDLE_TYPE_ROOM,
+                       G_PARAM_READABLE);
+
+  props[PROP_CHANNEL_NAME] =
+    g_param_spec_string ("channel-name",
+                         "Channel name",
+                         "Channel name",
+                         NULL,
                          G_PARAM_READABLE);
 
   props[PROP_CHANNEL] =
