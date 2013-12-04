@@ -25,7 +25,6 @@ struct _PolariRoomPrivate {
   TpChannel *channel;
 
   GIcon *icon;
-  char  *id;
   char  *channel_name;
   char  *display_name;
   char  *topic;
@@ -82,6 +81,37 @@ G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
         tp_cli_dbus_properties_signal_callback_properties_changed
 #define tp_properties_get_all_cb \
         tp_cli_dbus_properties_callback_for_get_all
+
+static char *
+polari_create_room_id (TpAccount    *account,
+                       const char   *name,
+                       TpHandleType  type)
+{
+  return g_strdup_printf ("%s/%d/%s",
+                          tp_proxy_get_object_path (TP_PROXY (account)),
+                          type, name);
+}
+
+/**
+ * polari_room_id_from_channel:
+ * @channel: a TpChannel
+ *
+ * Returns: (transfer full): a room ID corresponding to @channel
+ */
+char *
+polari_create_room_id_from_channel (TpChannel *channel)
+{
+  TpAccount *account;
+  TpHandleType type;
+  const char *name;
+
+  g_return_val_if_fail (TP_IS_CHANNEL (channel), NULL);
+
+  account = tp_connection_get_account (tp_channel_get_connection (channel));
+  name = tp_channel_get_identifier (channel);
+  tp_channel_get_handle (channel, &type);
+  return polari_create_room_id (account, name, type);
+}
 
 gboolean
 polari_room_should_highlight_message (PolariRoom *room,
@@ -457,9 +487,6 @@ polari_room_set_channel (PolariRoom *room,
       polari_room_set_channel_name (room, tp_channel_get_identifier (channel));
       polari_room_set_account (room, tp_connection_get_account (connection));
 
-      if (priv->id == NULL)
-        priv->id = g_strdup (tp_proxy_get_object_path (TP_PROXY (channel)));
-
       tp_cli_dbus_properties_call_get_all (channel, -1,
                                      TP_IFACE_CHANNEL_INTERFACE_SUBJECT,
                                      (tp_properties_get_all_cb)subject_get_all,
@@ -507,7 +534,10 @@ polari_room_get_property (GObject    *object,
   switch (prop_id)
     {
     case PROP_ID:
-      g_value_set_string (value, priv->id);
+      g_value_take_string (value,
+                           polari_create_room_id (priv->account,
+                                                  priv->channel_name,
+                                                  priv->type));
       break;
     case PROP_ICON:
       g_value_set_object (value, priv->icon);
@@ -570,7 +600,6 @@ polari_room_finalize (GObject *object)
 {
   PolariRoomPrivate *priv = POLARI_ROOM (object)->priv;
 
-  g_clear_pointer (&priv->id, g_free);
   g_clear_pointer (&priv->channel_name, g_free);
   g_clear_pointer (&priv->display_name, g_free);
 

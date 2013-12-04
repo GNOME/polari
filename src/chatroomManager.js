@@ -101,7 +101,7 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _ensureRoomForChannel: function(channel) {
-        let room = this._rooms[channel.get_object_path()];
+        let room = this._rooms[Polari.create_room_id_from_channel(channel)];
         if (room)
             return room;
 

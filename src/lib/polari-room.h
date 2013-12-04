@@ -58,6 +58,8 @@ void  polari_room_remove_member (PolariRoom *room, TpContact *member);
 
 int   polari_room_compare (PolariRoom *room, PolariRoom *other);
 
+char *polari_create_room_id_from_channel (TpChannel *channel);
+
 G_END_DECLS
 
 #endif /* __POLARI_ROOM_H__ */
