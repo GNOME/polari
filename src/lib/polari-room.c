@@ -35,7 +35,6 @@ struct _PolariRoomPrivate {
   TpHandleType type;
 
   guint self_contact_notify_id;
-  guint identifier_notify_id;
   guint group_contacts_changed_id;
 
   TpProxySignalConnection *properties_changed_id;
@@ -176,27 +175,19 @@ polari_room_compare (PolariRoom *room,
                      PolariRoom *other)
 {
   TpAccount *account1, *account2;
-  TpHandleType type1, type2;
-  TpConnection *conn;
 
   g_return_val_if_fail (POLARI_IS_ROOM (room) && POLARI_IS_ROOM (other), 0);
-  g_return_val_if_fail (room->priv->channel && other->priv->channel, 0);
+  g_return_val_if_fail (room->priv->account && other->priv->account, 0);
 
-  conn = tp_channel_get_connection (room->priv->channel);
-  account1 = tp_connection_get_account (conn);
-
-  conn = tp_channel_get_connection (other->priv->channel);
-  account2 = tp_connection_get_account (conn);
+  account1 = room->priv->account;
+  account2 = other->priv->account;
 
   if (account1 != account2)
     return strcmp (tp_account_get_display_name (account1),
                    tp_account_get_display_name (account2));
 
-  tp_channel_get_handle (room->priv->channel, &type1);
-  tp_channel_get_handle (other->priv->channel, &type2);
-
-  if (type1 != type2)
-    return type1 == TP_HANDLE_TYPE_ROOM ? -1 : 1;
+  if (room->priv->type != other->priv->type)
+    return room->priv->type == TP_HANDLE_TYPE_ROOM ? -1 : 1;
 
   return strcmp (room->priv->display_name, other->priv->display_name);
 }
@@ -238,14 +229,11 @@ static void
 update_identifier (PolariRoom *room)
 {
   PolariRoomPrivate *priv = room->priv;
-  const char *id = NULL;
-
-  if (priv->channel)
-    id = tp_channel_get_identifier (priv->channel);
 
   g_clear_pointer (&priv->display_name, g_free);
-  if (id)
-    priv->display_name = g_strdup (id + (id[0] == '#' ? 1 : 0));
+  if (priv->channel_name)
+    priv->display_name = g_strdup (priv->channel_name +
+                                   (priv->channel_name[0] == '#' ? 1 : 0));
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_DISPLAY_NAME]);
 }
@@ -271,14 +259,6 @@ on_self_contact_notify (GObject    *object,
                         gpointer    user_data)
 {
   update_self_nick (POLARI_ROOM (user_data));
-}
-
-static void
-on_identifier_notify (GObject    *object,
-                      GParamSpec *pspec,
-                      gpointer    user_data)
-{
-  update_identifier (POLARI_ROOM (user_data));
 }
 
 static void
@@ -435,6 +415,8 @@ polari_room_set_channel_name (PolariRoom *room,
     g_free (priv->channel_name);
   priv->channel_name = g_strdup (channel_name);
 
+  update_identifier (room);
+
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_NAME]);
 }
 
@@ -454,7 +436,6 @@ polari_room_set_channel (PolariRoom *room,
 
   if (priv->channel)
     {
-      g_signal_handler_disconnect (priv->channel, priv->identifier_notify_id);
       g_signal_handler_disconnect (priv->channel, priv->group_contacts_changed_id);
       g_signal_handler_disconnect (tp_channel_get_connection (priv->channel),
                                    priv->self_contact_notify_id);
@@ -489,9 +470,6 @@ polari_room_set_channel (PolariRoom *room,
         g_signal_connect (tp_channel_get_connection (channel),
                           "notify::self-contact",
                           G_CALLBACK (on_self_contact_notify), room);
-      priv->identifier_notify_id =
-        g_signal_connect (channel, "notify::identifier",
-                          G_CALLBACK (on_identifier_notify), room);
       priv->group_contacts_changed_id =
         g_signal_connect (channel, "group-contacts-changed",
                           G_CALLBACK (on_group_contacts_changed), room);
@@ -511,7 +489,6 @@ polari_room_set_channel (PolariRoom *room,
   g_object_freeze_notify (G_OBJECT (room));
 
   update_self_nick (room);
-  update_identifier (room);
   update_icon (room);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL]);

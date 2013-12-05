@@ -190,7 +190,7 @@ const Application = new Lang.Class({
 
     _updateUserListAction: function(action) {
         let room = this._chatroomManager.getActiveRoom();
-        action.enabled = room && room.channel.handle_type == Tp.HandleType.ROOM;
+        action.enabled = room && room.type == Tp.HandleType.ROOM;
     },
 
     _userListCreateHook: function(action) {
@@ -368,8 +368,7 @@ const Application = new Lang.Class({
                     logError(e, 'Failed to leave channel');
                 }
             }));
-        this._removeSavedChannel(room.channel.connection.get_account(),
-                                 room.channel.identifier);
+        this._removeSavedChannel(room.account, room.channel_name);
     },
 
     _onLeaveCurrentRoom: function() {

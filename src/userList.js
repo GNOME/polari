@@ -62,7 +62,7 @@ const UserListSidebar = new Lang.Class({
     },
 
     _roomAdded: function(roomManager, room) {
-        if (room.channel.handle_type != Tp.HandleType.ROOM)
+        if (room.type != Tp.HandleType.ROOM)
             return;
 
         let userList = new UserList(room);

@@ -137,8 +137,7 @@ const IrcParser = new Lang.Class({
                 if (argv.length)
                     log('Excess arguments to JOIN command: ' + argv);
 
-                let account = this._room.channel.connection.get_account();
-
+                let account = this._room.account;
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('join-room');
                 action.activate(GLib.Variant.new('(ssu)',
@@ -194,8 +193,7 @@ const IrcParser = new Lang.Class({
                 if (argv.length)
                     log('Excess arguments to NICK command: ' + argv);
 
-                let account = this._room.channel.connection.get_account();
-                account.set_nickname_async(nick, Lang.bind(this,
+                this._room.account.set_nickname_async(nick, Lang.bind(this,
                     function(a, res) {
                         try {
                             a.set_nickname_finish(res);
@@ -228,7 +226,7 @@ const IrcParser = new Lang.Class({
                     break;
                 }
 
-                let account = this._room.channel.connection.get_account();
+                let account = this._room.account;
 
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('message-user');
@@ -239,10 +237,9 @@ const IrcParser = new Lang.Class({
                 break;
             }
             case 'QUIT': {
-                let account = this._room.channel.connection.get_account();
                 let presence = Tp.ConnectionPresenceType.OFFLINE;
                 let message = stripCommand(text);
-                account.request_presence_async(presence, '', message,
+                this._room.account.request_presence_async(presence, '', message,
                     Lang.bind(this, function(a, res) {
                         try {
                             a.request_presence_finish(res);

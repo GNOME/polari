@@ -92,14 +92,13 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
 
-        let isRoom = room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP);
-        let account = room.channel.connection.get_account();
+        let isRoom = room.type == Tp.HandleType.ROOM;
         let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
                                                    : Tpl.EntityType.CONTACT,
-                                      identifier: room.channel.identifier });
+                                      identifier: room.channel_name });
         let logManager = Tpl.LogManager.dup_singleton();
         this._logWalker =
-            logManager.walk_filtered_events(account, target,
+            logManager.walk_filtered_events(room.account, target,
                                             Tpl.EventTypeMask.TEXT, null);
 
         this._fetchingBacklog = true;
@@ -576,10 +575,10 @@ const ChatView = new Lang.Class({
             let summary = '%s %s'.format(this._room.display_name, message.nick);
             let notification = new Notify.Notification(summary, message.text);
 
-            let account = this._room.channel.connection.get_account();
+            let account = this._room.account;
             let param = GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
-                                           this._room.channel.identifier,
+                                           this._room.channel_name,
                                            TP_CURRENT_TIME ]);
             notification.addAction('default', 'default');
             notification.connect('action-invoked', function() {
