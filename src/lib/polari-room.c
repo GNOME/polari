@@ -416,7 +416,7 @@ polari_room_set_account (PolariRoom *room,
   PolariRoomPrivate *priv;
 
   g_return_if_fail (POLARI_IS_ROOM (room));
-  g_return_if_fail (account == NULL || TP_IS_ACCOUNT (account));
+  g_return_if_fail (TP_IS_ACCOUNT (account));
 
   priv = room->priv;
 
@@ -467,6 +467,20 @@ polari_room_set_channel_name (PolariRoom *room,
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_NAME]);
 }
 
+static gboolean
+check_channel (PolariRoom *room,
+               TpChannel  *channel)
+{
+  PolariRoomPrivate *priv = room->priv;
+  TpAccount *account;
+
+  g_return_val_if_fail (priv->account != NULL && priv->channel_name != NULL, FALSE);
+
+  account = tp_connection_get_account (tp_channel_get_connection (channel));
+  return account == priv->account &&
+         g_strcmp0 (tp_channel_get_identifier (channel), priv->channel_name) == 0;
+}
+
 static void
 polari_room_set_channel (PolariRoom *room,
                          TpChannel  *channel)
@@ -493,17 +507,9 @@ polari_room_set_channel (PolariRoom *room,
       g_clear_object (&priv->channel);
     }
 
-  if (channel)
+  if (channel && check_channel (room, channel))
     {
-      TpConnection *connection = tp_channel_get_connection (channel);
-      TpHandleType type;
-
       priv->channel = g_object_ref (channel);
-
-      tp_channel_get_handle (channel, &type);
-      polari_room_set_type (room, type);
-      polari_room_set_channel_name (room, tp_channel_get_identifier (channel));
-      polari_room_set_account (room, tp_connection_get_account (connection));
 
       tp_cli_dbus_properties_call_get_all (channel, -1,
                                      TP_IFACE_CHANNEL_INTERFACE_SUBJECT,
@@ -526,12 +532,6 @@ polari_room_set_channel (PolariRoom *room,
                                  channel,
                                  (tp_properties_changed_cb) properties_changed,
                                  room, NULL, NULL, NULL);
-    }
-  else
-    {
-      polari_room_set_type (room, TP_HANDLE_TYPE_NONE);
-      polari_room_set_channel_name (room, NULL);
-      polari_room_set_account (room, NULL);
     }
 
   g_object_freeze_notify (G_OBJECT (room));
@@ -598,6 +598,15 @@ polari_room_set_property (GObject      *object,
 
   switch (prop_id)
     {
+    case PROP_ACCOUNT:
+      polari_room_set_account (room, g_value_get_object (value));
+      break;
+    case PROP_TYPE:
+      polari_room_set_type (room, g_value_get_int (value));
+      break;
+    case PROP_CHANNEL_NAME:
+      polari_room_set_channel_name (room, g_value_get_string (value));
+      break;
     case PROP_CHANNEL:
       polari_room_set_channel (room, g_value_get_object (value));
       break;
@@ -670,7 +679,7 @@ polari_room_class_init (PolariRoomClass *klass)
                          "Account",
                          "Account",
                          TP_TYPE_ACCOUNT,
-                         G_PARAM_READABLE);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   props[PROP_TYPE] =
     g_param_spec_int ("type",
@@ -679,21 +688,21 @@ polari_room_class_init (PolariRoomClass *klass)
                        TP_HANDLE_TYPE_NONE,
                        TP_HANDLE_TYPE_GROUP,
                        TP_HANDLE_TYPE_ROOM,
-                       G_PARAM_READABLE);
+                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   props[PROP_CHANNEL_NAME] =
     g_param_spec_string ("channel-name",
                          "Channel name",
                          "Channel name",
                          NULL,
-                         G_PARAM_READABLE);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   props[PROP_CHANNEL] =
     g_param_spec_object ("channel",
                          "Channel",
                          "Channel",
                          TP_TYPE_CHANNEL,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_READWRITE);
 
   g_object_class_install_properties (object_class, LAST_PROP, props);
 

@@ -105,7 +105,11 @@ const _ChatroomManager = new Lang.Class({
         if (room)
             return room;
 
-        let room = new Polari.Room({ channel: channel });
+        let account = channel.get_connection().get_account();
+        let room = new Polari.Room({ account: account,
+                                     channel_name: channel.get_identifier(),
+                                     type: channel.handle_type });
+        room.channel = channel;
         room.channel.connect('invalidated', Lang.bind(this,
             function() {
                 this._removeRoom(room);
