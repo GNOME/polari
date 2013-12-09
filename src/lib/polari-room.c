@@ -34,6 +34,7 @@ struct _PolariRoomPrivate {
   TpHandleType type;
 
   guint self_contact_notify_id;
+  guint invalidated_id;
   guint group_contacts_changed_id;
 
   TpProxySignalConnection *properties_changed_id;
@@ -81,6 +82,9 @@ G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
         tp_cli_dbus_properties_signal_callback_properties_changed
 #define tp_properties_get_all_cb \
         tp_cli_dbus_properties_callback_for_get_all
+
+static void polari_room_set_channel (PolariRoom *room, TpChannel *channel);
+
 
 static char *
 polari_create_room_id (TpAccount    *account,
@@ -352,6 +356,16 @@ on_group_contacts_changed (TpChannel  *channel,
 }
 
 static void
+on_channel_invalidated (TpProxy  *channel,
+                        guint     domain,
+                        int       code,
+                        char     *message,
+                        gpointer  user_data)
+{
+  polari_room_set_channel (POLARI_ROOM (user_data), NULL);
+}
+
+static void
 update_subject (PolariRoom *room,
                 GHashTable *properties)
 {
@@ -470,6 +484,7 @@ polari_room_set_channel (PolariRoom *room,
   if (priv->channel)
     {
       g_signal_handler_disconnect (priv->channel, priv->group_contacts_changed_id);
+      g_signal_handler_disconnect( priv->channel, priv->invalidated_id);
       g_signal_handler_disconnect (tp_channel_get_connection (priv->channel),
                                    priv->self_contact_notify_id);
 
@@ -503,6 +518,9 @@ polari_room_set_channel (PolariRoom *room,
       priv->group_contacts_changed_id =
         g_signal_connect (channel, "group-contacts-changed",
                           G_CALLBACK (on_group_contacts_changed), room);
+      priv->invalidated_id =
+        g_signal_connect (channel, "invalidated",
+                          G_CALLBACK (on_channel_invalidated), room);
       priv->properties_changed_id =
         tp_cli_dbus_properties_connect_to_properties_changed (
                                  channel,
