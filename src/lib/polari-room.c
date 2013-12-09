@@ -431,15 +431,15 @@ polari_room_set_channel (PolariRoom *room,
                                  room, NULL, NULL, NULL);
     }
 
-    g_object_freeze_notify (G_OBJECT (room));
+  g_object_freeze_notify (G_OBJECT (room));
 
-    update_self_nick (room);
-    update_identifier (room);
-    update_icon (room);
+  update_self_nick (room);
+  update_identifier (room);
+  update_icon (room);
 
-    g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL]);
+  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL]);
 
-    g_object_thaw_notify (G_OBJECT (room));
+  g_object_thaw_notify (G_OBJECT (room));
 }
 
 static void
