@@ -242,6 +242,9 @@ update_self_nick (PolariRoom *room)
 
   g_clear_pointer (&priv->self_nick, g_free);
 
+  if (!room->priv->channel)
+    return;
+
   conn = tp_channel_get_connection (room->priv->channel);
   self = tp_connection_get_self_contact (conn);
 

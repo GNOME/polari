@@ -113,20 +113,11 @@ const ChatView = new Lang.Class({
 
         this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
-        let channelSignals = [
-            { name: 'message-received',
-              handler: Lang.bind(this, this._insertTpMessage) },
-            { name: 'message-sent',
-              handler: Lang.bind(this, this._insertTpMessage) },
-            { name: 'pending-message-removed',
-              handler: Lang.bind(this, this._pendingMessageRemoved) }
-        ];
         this._channelSignals = [];
-        channelSignals.forEach(Lang.bind(this, function(signal) {
-            this._channelSignals.push(room.channel.connect(signal.name, signal.handler));
-        }));
 
         let roomSignals = [
+            { name: 'notify::channel',
+              handler: Lang.bind(this, this._onChannelChanged) },
             { name: 'member-renamed',
               handler: Lang.bind(this, this._onMemberRenamed) },
             { name: 'member-disconnected',
@@ -144,12 +135,6 @@ const ChatView = new Lang.Class({
         roomSignals.forEach(Lang.bind(this, function(signal) {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
-
-        room.channel.dup_pending_messages().forEach(Lang.bind(this,
-            function(message) {
-                this._insertTpMessage(room, message);
-            }));
-        this._checkMessages();
     },
 
     _createTags: function() {
@@ -440,7 +425,7 @@ const ChatView = new Lang.Class({
     },
 
     _checkMessages: function() {
-        if (!this._active || !this._toplevelFocus)
+        if (!this._active || !this._toplevelFocus || !this._room.channel)
             return;
 
         this._needsIndicator = true;
@@ -463,6 +448,35 @@ const ChatView = new Lang.Class({
             if (rect.y <= iterRect.y && rect.y + rect.height > iterRect.y)
                 this._room.channel.ack_message_async(pending[i], null);
         }
+    },
+
+    _onChannelChanged: function() {
+        if (!this._room.channel) {
+            this._channelSignals = [];
+            return;
+        }
+
+        for (let i = 0; i < this._channelSignals.length; i++)
+            this._room.channel.disconnect(this._channelSignals[i]);
+        this._channelSignals = [];
+
+        let channelSignals = [
+            { name: 'message-received',
+              handler: Lang.bind(this, this._insertTpMessage) },
+            { name: 'message-sent',
+              handler: Lang.bind(this, this._insertTpMessage) },
+            { name: 'pending-message-removed',
+              handler: Lang.bind(this, this._pendingMessageRemoved) }
+        ];
+        channelSignals.forEach(Lang.bind(this, function(signal) {
+            this._channelSignals.push(this._room.channel.connect(signal.name, signal.handler));
+        }));
+
+        this._room.channel.dup_pending_messages().forEach(Lang.bind(this,
+            function(message) {
+                this._insertTpMessage(this._room, message);
+            }));
+        this._checkMessages();
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {

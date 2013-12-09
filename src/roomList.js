@@ -25,10 +25,15 @@ const RoomRow = new Lang.Class({
         this._selectionModeAction.connect('notify::state',
                           Lang.bind(this, this._onSelectionModeChanged));
 
-        room.channel.connect('message-received',
-                             Lang.bind(this, this._updatePending));
-        room.channel.connect('pending-message-removed',
-                             Lang.bind(this, this._updatePending));
+        room.connect('notify::channel', Lang.bind(this,
+            function() {
+                if (!room.channel)
+                    return;
+                room.channel.connect('message-received',
+                                     Lang.bind(this, this._updatePending));
+                room.channel.connect('pending-message-removed',
+                                     Lang.bind(this, this._updatePending));
+            }));
         room.bind_property('display-name', this._roomLabel, 'label',
                            GObject.BindingFlags.SYNC_CREATE);
 
@@ -47,14 +52,21 @@ const RoomRow = new Lang.Class({
     _updatePending: function() {
         let room = this.widget.room;
 
-        let pending = room.channel.dup_pending_messages();
+        let pending;
         let numPendingHighlights;
-        if (room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
-            numPendingHighlights = pending.filter(function(m) {
-                return room.should_highlight_message(m);
-            }).length;
-        else
-            numPendingHighlights = pending.length;
+
+        if (room.channel) {
+            pending = room.channel.dup_pending_messages();
+            if (room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
+                numPendingHighlights = pending.filter(function(m) {
+                    return room.should_highlight_message(m);
+                }).length;
+            else
+                numPendingHighlights = pending.length;
+        } else {
+            pending = [];
+            numPendingHighlights = 0;
+        }
 
         this._counter.label = numPendingHighlights.toString();
         this._counter.opacity = numPendingHighlights > 0 ? 1. : 0.;

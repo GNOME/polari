@@ -25,7 +25,7 @@ const EntryArea = new Lang.Class({
         this._roomManager = new ChatroomManager.getDefault();
         this._activeRoomChangedId =
             this._roomManager.connect('active-changed',
-                                      Lang.bind(this, this._activeRoomChanged));
+                                      Lang.bind(this, this._updateSensitivity));
 
         if (!room)
             return;
@@ -34,11 +34,10 @@ const EntryArea = new Lang.Class({
         this._membersChangedId =
             this._room.connect('members-changed',
                                Lang.bind(this, this._updateCompletions));
-        this._nicknameChangedId =
-            this._room.channel.connection.connect('notify::self-contact',
-                                                  Lang.bind(this,
-                                                            this._updateNick));
-        this._updateCompletions();
+        this._channelChangedId =
+            this._room.connect('notify::channel',
+                               Lang.bind(this, this._onChannelChanged));
+        this._onChannelChanged(room);
         this._updateNick();
     },
 
@@ -107,6 +106,7 @@ const EntryArea = new Lang.Class({
         let nicks = [];
 
         if (this._room &&
+            this._room.channel &&
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
             let members = this._room.channel.group_dup_members_contacts();
             nicks = members.map(function(member) { return member.alias; });
@@ -114,8 +114,9 @@ const EntryArea = new Lang.Class({
         this._completion.setCompletions(nicks);
     },
 
-    _activeRoomChanged: function(manager, room) {
-        this.widget.sensitive = this._room && this._room == room;
+    _updateSensitivity: function() {
+        let room = this._roomManager.getActiveRoom();
+        this.widget.sensitive = this._room && this._room == room && room.channel;
 
         if (!this.widget.sensitive)
             return;
@@ -126,6 +127,19 @@ const EntryArea = new Lang.Class({
                 return false;
             }));
     },
+
+    _onChannelChanged: function(room) {
+        this._updateCompletions();
+        this._updateSensitivity();
+
+        if (room.channel)
+            this._nicknameChangedId =
+                room.channel.connection.connect('notify::self-contact',
+                                                Lang.bind(this, this._updateNick));
+        else
+            this._nicknameChangedId = 0;
+    },
+
 
     _setNick: function(nick) {
         this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
@@ -160,8 +174,9 @@ const EntryArea = new Lang.Class({
     },
 
     _updateNick: function() {
-        let nick = this._room ? this._room.channel.connection.self_contact.alias
-                              : '';
+        let channel = this._room ? this._room.channel : null;
+        let nick = channel ? channel.connection.self_contact.alias
+                           : this._room ? this._room.account.nickname : '';
 
         this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
         this._nickEntry.placeholder_text = nick;
@@ -177,5 +192,8 @@ const EntryArea = new Lang.Class({
         if (this._nicknameChangedId)
             this._room.channel.connection.disconnect(this._nicknameChangedId);
         this._nicknameChangedId = 0;
+        if (this._channelChangedId)
+            this._room.disconnect(this._channelChangedId);
+        this._channelChangedId = 0;
     }
 });

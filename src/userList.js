@@ -342,10 +342,8 @@ const UserList = new Lang.Class({
                      Lang.bind(this, this._onMemberJoined));
         room.connect('members-changed',
                      Lang.bind(this, this._onMembersChanged));
-
-        let members = room.channel.group_dup_members_contacts();
-        for (let i = 0; i < members.length; i++)
-            this._addMember(members[i]);
+        room.connect('notify::channel',
+                     Lang.bind(this, this._onChannelChanged));
 
         this.widget.show_all();
     },
@@ -371,6 +369,18 @@ const UserList = new Lang.Class({
     _onMembersChanged: function(room) {
         let numMembers = room.channel.group_dup_members_contacts().length;
         this._counterLabel.label = numMembers.toString();
+    },
+
+    _onChannelChanged: function(room) {
+        this._list.foreach(function(w) { w.destroy(); });
+        this._rows = {};
+
+        if (!room.channel)
+            return;
+
+        let members = room.channel.group_dup_members_contacts();
+        for (let i = 0; i < members.length; i++)
+            this._addMember(members[i]);
     },
 
     _addMember: function(member) {

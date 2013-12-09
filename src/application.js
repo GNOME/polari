@@ -190,7 +190,7 @@ const Application = new Lang.Class({
 
     _updateUserListAction: function(action) {
         let room = this._chatroomManager.getActiveRoom();
-        action.enabled = room && room.type == Tp.HandleType.ROOM;
+        action.enabled = room && room.type == Tp.HandleType.ROOM && room.channel;
     },
 
     _userListCreateHook: function(action) {
