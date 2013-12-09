@@ -8,17 +8,15 @@ const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
-const IrcParser = imports.ircParser;
+const EntryArea = imports.entryArea;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const MessageDialog = imports.messageDialog;
 const RoomList = imports.roomList;
-const TabCompletion = imports.tabCompletion;
 const UserList = imports.userList;
 const Utils = imports.utils;
 
-const MAX_NICK_UPDATE_TIME = 5; /* s */
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
 
@@ -37,8 +35,6 @@ const MainWindow = new Lang.Class({
         overlay.add_overlay(app.notificationQueue.widget);
         overlay.add_overlay(app.commandOutputQueue.widget);
 
-        this._ircParser = new IrcParser.IrcParser();
-
         this._accountsMonitor = new AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
                                       Lang.bind(this, this._onAccountChanged));
@@ -54,13 +50,13 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
 
         this._rooms = {};
+        this._entries = {};
 
         this._room = null;
         this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
-        this._nicknameChangedId = 0;
         this._configureId = 0;
 
         this._titlebarRight = builder.get_object('titlebar_right');
@@ -73,12 +69,10 @@ const MainWindow = new Lang.Class({
         this._showUserListButton = builder.get_object('show_user_list_button');
         this._revealer = builder.get_object('room_list_revealer');
         this._chatStack = builder.get_object('chat_stack');
-        this._inputArea = builder.get_object('main_input_area');
-        this._nickEntry = builder.get_object('nick_entry');
-        this._entry = builder.get_object('message_entry');
+        this._inputStack = builder.get_object('input_area_stack');
 
-        this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
-        this._completion = new TabCompletion.TabCompletion(this._entry);
+        let placeholderEntry = new EntryArea.EntryArea(null);
+        this._inputStack.add_named(placeholderEntry.widget, 'placeholder');
 
         let scroll = builder.get_object('room_list_scrollview');
         this._roomList = new RoomList.RoomList();
@@ -104,43 +98,6 @@ const MainWindow = new Lang.Class({
 
         this._userListAction = app.lookup_action('user-list');
 
-        this._entry.connect('activate', Lang.bind(this,
-            function() {
-                this._ircParser.process(this._entry.text);
-                this._entry.text = '';
-            }));
-        this._entry.connect('notify::is-focus', Lang.bind(this,
-            function() {
-                // HACK: force focus to the entry unless it was
-                //       moved by keynav or moved to another entry
-                if (this.window.get_focus() instanceof Gtk.Entry)
-                    return;
-                let device = Gtk.get_current_event_device();
-                if (!device || device.get_source() == Gdk.InputSource.KEYBOARD)
-                    return;
-                this._entry.grab_focus();
-            }));
-
-        this._nickEntry.connect('activate', Lang.bind(this,
-            function() {
-               if (this._nickEntry.text)
-                   this._setNick(this._nickEntry.text);
-               this._entry.grab_focus();
-            }));
-        this._nickEntry.connect('focus-out-event', Lang.bind(this,
-             function() {
-               this._nickEntry.text = '';
-               return false;
-            }));
-        this._nickEntry.connect_after('key-press-event', Lang.bind(this,
-            function(w, event) {
-                let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape) {
-                    this._entry.grab_focus();
-                    return true;
-                }
-                return false;
-            }));
         this.window.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
@@ -171,8 +128,6 @@ const MainWindow = new Lang.Class({
 
         if (this._settings.get_boolean('window-maximized'))
             this.window.maximize();
-
-        this._updateSensitivity();
 
         this.window.show_all();
     },
@@ -271,31 +226,36 @@ const MainWindow = new Lang.Class({
         this._rooms[room.id] = chatView;
 
         this._chatStack.add_named(chatView.widget, room.id);
+
+        let entryArea = new EntryArea.EntryArea(room);
+        this._entries[room.id] = entryArea;
+
+        this._inputStack.add_named(entryArea.widget, room.id);
     },
 
     _roomRemoved: function(roomManager, room) {
         this._rooms[room.id].widget.destroy();
         delete this._rooms[room.id];
+
+        this._entries[room.id].widget.destroy();
+        delete this._entries[room.id];
     },
 
     _activeRoomChanged: function(manager, room) {
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
             this._room.disconnect(this._topicChangedId);
-            this._room.disconnect(this._membersChangedId);
-            this._room.channel.connection.disconnect(this._nicknameChangedId);
         }
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
-        this._nicknameChangedId = 0;
 
         this._room = room;
         this._revealer.reveal_child = room != null;
 
         this._updateTitlebar();
-        this._updateNick();
-        this._updateSensitivity();
-        this._updateCompletions();
+
+        this._inputStack.set_visible_child_name(this._room ? this._room.id
+                                                           : 'placeholder');
 
         if (!this._room)
             return; // finished
@@ -306,47 +266,8 @@ const MainWindow = new Lang.Class({
         this._topicChangedId =
             this._room.connect('notify::topic',
                                Lang.bind(this, this._updateTitlebar));
-        this._membersChangedId =
-            this._room.connect('members-changed',
-                               Lang.bind(this, this._updateCompletions));
-        this._nicknameChangedId =
-            this._room.channel.connection.connect('notify::self-contact',
-                                                  Lang.bind(this,
-                                                            this._updateNick));
 
         this._chatStack.set_visible_child_name(this._room.id);
-    },
-
-    _setNick: function(nick) {
-        this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
-        this._nickEntry.placeholder_text = nick;
-
-        let account = this._room.channel.connection.get_account();
-        account.set_nickname_async(nick, Lang.bind(this,
-            function(a, res) {
-                try {
-                    a.set_nickname_finish(res);
-                } catch(e) {
-                    logError(e, "Failed to change nick");
-
-                    this._updateNick();
-                    return;
-                }
-
-                // TpAccount:nickname is a local property which doesn't
-                // necessarily match the externally visible nick; telepathy
-                // doesn't consider failing to sync the two an error, so
-                // we give the server MAX_NICK_UPDATE_TIME seconds until
-                // we assume failure and revert back to the server nick
-                //
-                // (set_aliases() would do what we want, but it's not
-                // introspected)
-                Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME,
-                    Lang.bind(this, function() {
-                        this._updateNick();
-                        return false;
-                    }));
-            }));
     },
 
     showJoinRoomDialog: function() {
@@ -369,17 +290,6 @@ const MainWindow = new Lang.Class({
             });
     },
 
-    _updateCompletions: function() {
-        let nicks = [];
-
-        if (this._room &&
-            this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
-            let members = this._room.channel.group_dup_members_contacts();
-            nicks = members.map(function(member) { return member.alias; });
-        }
-        this._completion.setCompletions(nicks);
-    },
-
     _updateTitlebar: function() {
         let subtitle = '';
         if (this._room && this._room.topic) {
@@ -399,22 +309,5 @@ const MainWindow = new Lang.Class({
         this._subtitleLabel.visible = subtitle.length > 0;
 
         this._titleLabel.label = this._room ? this._room.display_name : null;
-    },
-
-    _updateNick: function() {
-        let nick = this._room ? this._room.channel.connection.self_contact.alias
-                              : '';
-
-        this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
-        this._nickEntry.placeholder_text = nick;
-    },
-
-    _updateSensitivity: function() {
-        this._inputArea.sensitive = this._room != null;
-
-        if (!this._inputArea.sensitive)
-            return;
-
-        this._entry.grab_focus();
     }
 });
