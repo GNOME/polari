@@ -42,6 +42,15 @@ const _ChatroomManager = new Lang.Class({
             this._app.release(); // no point in carrying on
         }
 
+        let joinAction = this._app.lookup_action('join-room');
+        joinAction.connect('activate', Lang.bind(this, this._onJoinActivated));
+
+        let queryAction = this._app.lookup_action('message-user');
+        queryAction.connect('activate', Lang.bind(this, this._onQueryActivated));
+
+        let leaveAction = this._app.lookup_action('leave-room');
+        leaveAction.connect('activate', Lang.bind(this, this._onLeaveActivated));
+
         this._observer = Tp.SimpleObserver.new_with_am(am, true,
             'Polari', true, Lang.bind(this, this._observeChannels));
 
@@ -100,22 +109,52 @@ const _ChatroomManager = new Lang.Class({
         action.activate(parameter);
     },
 
-    _ensureRoomForChannel: function(channel) {
-        let room = this._rooms[Polari.create_room_id_from_channel(channel)];
+    _onJoinActivated: function(action, parameter) {
+        let [accountPath, channelName, ] = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        if (!account.enabled)
+            return;
+
+        this._ensureRoom(account, channelName, Tp.HandleType.ROOM);
+    },
+
+    _onQueryActivated: function(action, parameter) {
+        let [accountPath, channelName, ] = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        if (!account.enabled)
+            return;
+
+        this._ensureRoom(account, channelName, Tp.HandleType.CONTACT);
+    },
+
+    _onLeaveActivated: function(action, parameter) {
+        let [id, ] = parameter.deep_unpack();
+        let room = this._rooms[id];
+        this._removeRoom(room);
+    },
+
+    _ensureRoom: function(account, channelName, type) {
+        let room = this._rooms[Polari.create_room_id(account, channelName, type)];
         if (room)
             return room;
 
-        let account = channel.get_connection().get_account();
         let room = new Polari.Room({ account: account,
-                                     channel_name: channel.get_identifier(),
-                                     type: channel.handle_type });
-        room.channel = channel;
-        room.channel.connect('invalidated', Lang.bind(this,
-            function() {
-                this._removeRoom(room);
-            }));
+                                     channel_name: channelName,
+                                     type: type });
         this._addRoom(room);
 
+        return room;
+    },
+
+    _ensureRoomForChannel: function(channel) {
+        let account = channel.connection.get_account();
+        let channelName = channel.identifier;
+        let room = this._ensureRoom(account, channelName, channel.handle_type);
+        room.channel = channel;
         return room;
     },
 
@@ -178,6 +217,9 @@ const _ChatroomManager = new Lang.Class({
             return;
         this._rooms[room.id] = room;
         this.emit('room-added', room);
+
+        if (this.roomCount == 1)
+            this.setActiveRoom(room);
     },
 
     _removeRoom: function(room) {

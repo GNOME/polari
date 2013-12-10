@@ -86,35 +86,26 @@ G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 static void polari_room_set_channel (PolariRoom *room, TpChannel *channel);
 
 
-static char *
+/**
+ * polari_room_id_from_channel:
+ * @account: a TpAccount
+ * @name: the room name
+ * @type: the room type
+ *
+ * Returns: (transfer full): a room ID corresponding to @account, @name
+ *                           and @type
+ */
+char *
 polari_create_room_id (TpAccount    *account,
                        const char   *name,
                        TpHandleType  type)
 {
+  g_return_val_if_fail (TP_IS_ACCOUNT (account), NULL);
+  g_return_val_if_fail (name != NULL, NULL);
+
   return g_strdup_printf ("%s/%d/%s",
                           tp_proxy_get_object_path (TP_PROXY (account)),
                           type, name);
-}
-
-/**
- * polari_room_id_from_channel:
- * @channel: a TpChannel
- *
- * Returns: (transfer full): a room ID corresponding to @channel
- */
-char *
-polari_create_room_id_from_channel (TpChannel *channel)
-{
-  TpAccount *account;
-  TpHandleType type;
-  const char *name;
-
-  g_return_val_if_fail (TP_IS_CHANNEL (channel), NULL);
-
-  account = tp_connection_get_account (tp_channel_get_connection (channel));
-  name = tp_channel_get_identifier (channel);
-  tp_channel_get_handle (channel, &type);
-  return polari_create_room_id (account, name, type);
 }
 
 gboolean
