@@ -61,6 +61,11 @@ const Application = new Lang.Class({
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
 
+        this._accountsMonitor.connect('account-removed', Lang.bind(this,
+            function(am, account) {
+                this._removeSavedChannelsForAccount(account);
+            }));
+
         this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
 
         this.pasteManager = new PasteManager.PasteManager();
@@ -274,6 +279,17 @@ const Application = new Lang.Class({
                                  GLib.Variant.new('aa{sv}', savedChannels));
     },
 
+    _removeSavedChannelsForAccount: function(account) {
+        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let accountPath = GLib.Variant.new('s', account.get_object_path());
+
+        let savedChannels = savedChannels.filter(function(a) {
+            return !a.account.equal(accountPath);
+        });
+        this._settings.set_value('saved-channel-list',
+                                 GLib.Variant.new('aa{sv}', savedChannels));
+    },
+
     _updateAccountName: function(account, name, callback) {
         let sv = { account: GLib.Variant.new('s', name) };
         let asv = GLib.Variant.new('a{sv}', sv);
@@ -285,8 +301,14 @@ const Application = new Lang.Class({
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
 
-        if (!account.enabled)
+        if (!account.enabled) {
+            // if we are requesting a channel for a disabled account, we
+            // are restoring saved channels; if the account has also never
+            // been online, it was removed since the channel was saved
+            if (!account.has_been_online)
+                this._removeSavedChannelsForAccount(account);
             return;
+        }
 
         let roomId = Polari.create_room_id(account,  targetId, targetType);
 
