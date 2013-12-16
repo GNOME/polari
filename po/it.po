@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 09:47+0200\n"
-"PO-Revision-Date: 2013-10-16 09:47+0200\n"
+"POT-Creation-Date: 2013-12-16 10:08+0100\n"
+"PO-Revision-Date: 2013-12-16 10:08+0100\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -18,6 +18,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Launchpad-Export-Date: 2011-04-18 19:13+0000\n"
 "X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Un client IRC (Internet Relay Chat) semplice e progettato per integrarsi con "
+"GNOME: un'interfaccia grafica esteticamente appagante che consente di "
+"concentrarsi sulle proprie conversazioni."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -56,7 +66,7 @@ msgstr "Lo stato massimizzato della finestra"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un programma IRC per GNOME"
 
@@ -74,8 +84,8 @@ msgid "Preferences"
 msgstr "Preferenze"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
-msgstr "Informazioni su Polari"
+msgid "About"
+msgstr "Informazioni"
 
 #: ../data/resources/app-menu.ui.h:4
 msgid "Quit"
@@ -87,6 +97,7 @@ msgstr "Nuova connessione"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Cancel"
 msgstr "A_nnulla"
 
@@ -96,6 +107,7 @@ msgstr "C_rea"
 
 #: ../data/resources/connection-details-dialog.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "Server"
 msgstr "Server"
 
@@ -149,10 +161,12 @@ msgid "Room"
 msgstr "Stanza"
 
 #: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
 msgid "C_onnection"
 msgstr "C_onnessione"
 
 #: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/message-user-dialog.ui.h:8
 msgid "_Name"
 msgstr "_Nome"
 
@@ -172,53 +186,93 @@ msgstr "Invia messaggio a utente"
 msgid "_Leave"
 msgstr "_Esci"
 
-#: ../src/application.js:355
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Invia messaggio a utente"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Message"
+msgstr "_Messaggio"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "User"
+msgstr "Utente"
+
+#: ../data/resources/message-user-dialog.ui.h:7
+msgid "_Recent"
+msgstr "_Recenti"
+
+#: ../src/application.js:362
 msgid "Good Bye"
 msgstr "Ciao!"
 
-#: ../src/application.js:405
+#: ../src/application.js:418
 msgid "translator-credits"
 msgstr "Milo Casagrande <milo@ubuntu.com>, 2013"
 
-#: ../src/chatView.js:301
+#: ../src/chatView.js:483
 #, c-format
 msgid "%s is now known as %s"
 msgstr "L'utente %s è ora conosciuto come %s"
 
-#: ../src/chatView.js:306
+#: ../src/chatView.js:488
 #, c-format
 msgid "%s has disconnected"
 msgstr "L'utente %s si è disconnesso"
 
-#: ../src/chatView.js:314
+#: ../src/chatView.js:496
 #, c-format
 msgid "%s has been kicked by %s"
 msgstr "L'utente %s è stato cacciato (kick) da %s"
 
-#: ../src/chatView.js:316
+#: ../src/chatView.js:498
 #, c-format
 msgid "%s has been kicked"
 msgstr "L'utente %s è stato cacciato (kick)"
 
-#: ../src/chatView.js:322
+#: ../src/chatView.js:504
 #, c-format
 msgid "%s has been banned by %s"
 msgstr "L'utente %s è stato bandito da %s"
 
-#: ../src/chatView.js:324
+#: ../src/chatView.js:506
 #, c-format
 msgid "%s has been banned"
 msgstr "L'utente %s è stato bandito"
 
-#: ../src/chatView.js:329
+#: ../src/chatView.js:511
 #, c-format
 msgid "%s joined"
 msgstr "L'utente %s è entrato"
 
-#: ../src/chatView.js:333
+#: ../src/chatView.js:515
 #, c-format
 msgid "%s left"
 msgstr "L'utente %s se n'è andato"
+
+#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:546
+#, no-c-format
+msgid "Yesterday, %H:%M"
+msgstr "Ieri, %H.%M"
+
+#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30
+#: ../src/chatView.js:552
+#, no-c-format
+msgid "%A, %H:%M"
+msgstr "%A, %H.%M"
+
+#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"
+#: ../src/chatView.js:557
+#, no-c-format
+msgid "%B %d, %H:%M"
+msgstr "%d %B, %H.%M"
+
+#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:561
+#, no-c-format
+msgid "%B %d %Y, %H:%M"
+msgstr "%d %B %Y, %H.%M"
 
 #: ../src/connections.js:228
 msgid "Edit Connection"
@@ -227,6 +281,10 @@ msgstr "Modifica connessione"
 #: ../src/connections.js:229
 msgid "A_pply"
 msgstr "A_pplica"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Nessun utente recente"
 
 #: ../src/userList.js:172
 msgid "Loading details"
@@ -278,10 +336,10 @@ msgid_plural "%d months ago"
 msgstr[0] "%d mese fa"
 msgstr[1] "%d mesi fa"
 
-#: ../src/userList.js:244
+#: ../src/userList.js:245
 msgid "Last Activity:"
 msgstr "Ultima attività:"
 
-#: ../src/userList.js:417
+#: ../src/userList.js:436
 msgid "All"
 msgstr "Tutto"
