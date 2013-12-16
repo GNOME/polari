@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the polari package.
 # Enrico Nicoletto <liverig@gmail.com>, 2013.
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
+# Adorilson Bezerra <adorilson@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-11-13 21:42+0000\n"
-"PO-Revision-Date: 2013-11-14 06:44-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2013-12-12 12:42+0000\n"
+"PO-Revision-Date: 2013-12-15 12:58-0300\n"
+"Last-Translator: Adorilson Bezerra <adorilson@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +68,7 @@ msgstr "Estado de janela maximizada"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -85,8 +86,8 @@ msgid "Preferences"
 msgstr "Preferências"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
-msgstr "Sobre Polari"
+msgid "About"
+msgstr "Sobre"
 
 #: ../data/resources/app-menu.ui.h:4
 msgid "Quit"
@@ -207,67 +208,67 @@ msgstr "_Recente"
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:409
+#: ../src/application.js:418
 msgid "translator-credits"
 msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
 
-#: ../src/chatView.js:470
+#: ../src/chatView.js:483
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é conhecido agora como %s"
 
-#: ../src/chatView.js:475
+#: ../src/chatView.js:488
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectou-se"
 
-#: ../src/chatView.js:483
+#: ../src/chatView.js:496
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi retirado do canal por %s"
 
-#: ../src/chatView.js:485
+#: ../src/chatView.js:498
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi retirado do canal"
 
-#: ../src/chatView.js:491
+#: ../src/chatView.js:504
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:493
+#: ../src/chatView.js:506
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:498
+#: ../src/chatView.js:511
 #, javascript-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:502
+#: ../src/chatView.js:515
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
 
 #. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:533
+#: ../src/chatView.js:546
 msgid "Yesterday, %H:%M"
 msgstr "Ontem, %H:%M"
 
 #. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:539
+#: ../src/chatView.js:552
 msgid "%A, %H:%M"
 msgstr "%A, %H:%M"
 
 #. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:544
+#: ../src/chatView.js:557
 msgid "%B %d, %H:%M"
 msgstr "%d de %B, %H:%M"
 
 #. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:548
+#: ../src/chatView.js:561
 msgid "%B %d %Y, %H:%M"
 msgstr "%d de %B de %Y, %H:%M"
 
@@ -337,6 +338,9 @@ msgstr[1] "%d meses atrás"
 msgid "Last Activity:"
 msgstr "Última atividade:"
 
-#: ../src/userList.js:426
+#: ../src/userList.js:436
 msgid "All"
 msgstr "Todos"
+
+#~ msgid "About Polari"
+#~ msgstr "Sobre Polari"
