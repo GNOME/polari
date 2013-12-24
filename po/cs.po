@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-11-13 20:51+0000\n"
-"PO-Revision-Date: 2013-12-03 20:50+0100\n"
+"POT-Creation-Date: 2013-12-18 14:52+0000\n"
+"PO-Revision-Date: 2013-12-24 16:58+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -66,7 +66,7 @@ msgstr "Stav maximalizace okna."
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Komunikační klient IRC pro GNOME"
 
@@ -84,8 +84,8 @@ msgid "Preferences"
 msgstr "Předvolby"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
-msgstr "O aplikaci Polari"
+msgid "About"
+msgstr "O aplikaci"
 
 #: ../data/resources/app-menu.ui.h:4
 msgid "Quit"
@@ -206,59 +206,71 @@ msgstr "Ne_dávní"
 msgid "Good Bye"
 msgstr "Naviděnou"
 
-#: ../src/application.js:409
+#: ../src/application.js:418
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
-#: ../src/chatView.js:388
+#: ../src/chatView.js:483
+#, c-format
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
-#: ../src/chatView.js:393
+#: ../src/chatView.js:488
+#, c-format
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
-#: ../src/chatView.js:401
+#: ../src/chatView.js:496
+#, c-format
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
-#: ../src/chatView.js:403
+#: ../src/chatView.js:498
+#, c-format
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
-#: ../src/chatView.js:409
+#: ../src/chatView.js:504
+#, c-format
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
-#: ../src/chatView.js:411
+#: ../src/chatView.js:506
+#, c-format
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
-#: ../src/chatView.js:416
+#: ../src/chatView.js:511
+#, c-format
 msgid "%s joined"
 msgstr "%s se připojil"
 
-#: ../src/chatView.js:420
+#: ../src/chatView.js:515
+#, c-format
 msgid "%s left"
 msgstr "%s opustil místnost"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:450
+#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:546
+#, no-c-format
 msgid "Yesterday, %H:%M"
 msgstr "Včera, %H:%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:456
+#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30
+#: ../src/chatView.js:552
+#, no-c-format
 msgid "%A, %H:%M"
 msgstr "%A, %H:%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:461
+#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"
+#: ../src/chatView.js:557
+#, no-c-format
 msgid "%B %d, %H:%M"
 msgstr "%d. %B, %H:%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:465
+#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:561
+#, no-c-format
 msgid "%B %d %Y, %H:%M"
 msgstr "%d. %B %Y, %H:%M"
 
@@ -283,6 +295,7 @@ msgid "Message"
 msgstr "Zpráva"
 
 #: ../src/userList.js:197
+#, c-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "před %d sekundou"
@@ -290,6 +303,7 @@ msgstr[1] "před %d sekundami"
 msgstr[2] "před %d sekundami"
 
 #: ../src/userList.js:202
+#, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "před %d minutou"
@@ -297,6 +311,7 @@ msgstr[1] "před %d minutami"
 msgstr[2] "před %d minutami"
 
 #: ../src/userList.js:207
+#, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "před %d hodinou"
@@ -304,6 +319,7 @@ msgstr[1] "před %d hodinami"
 msgstr[2] "před %d hodinami"
 
 #: ../src/userList.js:212
+#, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "před %d dnem"
@@ -311,6 +327,7 @@ msgstr[1] "před %d dny"
 msgstr[2] "před %d dny"
 
 #: ../src/userList.js:217
+#, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "před %d týdnem"
@@ -318,6 +335,7 @@ msgstr[1] "před %d týdny"
 msgstr[2] "před %d týdny"
 
 #: ../src/userList.js:221
+#, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "před %d měsícem"
@@ -328,6 +346,6 @@ msgstr[2] "před %d měsíci"
 msgid "Last Activity:"
 msgstr "Naposledy aktivní:"
 
-#: ../src/userList.js:426
+#: ../src/userList.js:436
 msgid "All"
 msgstr "Vše"
