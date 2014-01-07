@@ -60,6 +60,17 @@
               </packing>
             </child>
             <child>
+              <object class="GtkLabel" id="titlebar_separator">
+                <property name="visible">True</property>
+                <style>
+                  <class name="polari-titlebar-separator"/>
+                </style>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkToggleButton" id="button2">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -78,17 +89,6 @@
                     <property name="icon_size">1</property>
                   </object>
                 </child>
-              </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="titlebar_separator">
-                <property name="visible">True</property>
-                <style>
-                  <class name="polari-titlebar-separator"/>
-                </style>
               </object>
               <packing>
                 <property name="pack_type">end</property>
@@ -183,18 +183,6 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="label2">
-                <property name="visible">True</property>
-                <!-- we want some margin around title/subtitle - setting
-                     it on the first and last button has the same effect,
-                     and spares us from using a custom title widget -->
-                <property name="width-request">24</property>
-              </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkToggleButton" id="show_user_list_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -213,6 +201,18 @@
                     <property name="icon_size">1</property>
                   </object>
                 </child>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label2">
+                <property name="visible">True</property>
+                <!-- we want some margin around title/subtitle - setting
+                     it on the first and last button has the same effect,
+                     and spares us from using a custom title widget -->
+                <property name="width-request">24</property>
               </object>
               <packing>
                 <property name="pack_type">end</property>
