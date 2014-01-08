@@ -2,14 +2,14 @@
 # Copyright (C) 2013 THE polari'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # יוסף אור בוצ'קו <yoseforb@gmail.com>, 2013.
-# Yosef Or Boczko <yoseforb@gmail.com>, 2013.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-12 14:38+0200\n"
-"PO-Revision-Date: 2013-12-12 14:39+0200\n"
+"POT-Creation-Date: 2014-01-08 23:05+0200\n"
+"PO-Revision-Date: 2014-01-08 23:06+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -65,7 +65,7 @@ msgstr "Window maximized state"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
@@ -91,49 +91,41 @@ msgid "Quit"
 msgstr "יציאה"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "חיבור חדש"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_ביטול"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "י_צירה"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "שרת"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_כתובת"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_תיאור"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "זהות"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_כינוי"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "שם _אמתי"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "רשות"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_ביטול"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "י_צירה"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -152,26 +144,25 @@ msgid "Join Chat Room"
 msgstr "הצטרפות לחדר צ׳אט"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "ה_צטרפות"
+msgid "_Add Connection"
+msgstr "הו_ספת חיבור"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "חדר"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "_חיבור"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_שם"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_שם אמתי"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_ססמה"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "ה_צטרפות"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -190,22 +181,22 @@ msgid "Message User"
 msgstr "שליחת הודעה למשתמש"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_שליחת הודעה"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "משתמש"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "_אחרונים"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_שם"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_שליחת הודעה"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:418
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
@@ -271,11 +262,11 @@ msgstr "ה־%d ב%B, %H:%M"
 msgid "%B %d %Y, %H:%M"
 msgstr "ה־%d ב%B %Y, %H:%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "עריכת החיבור"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "ה_חלה"
 
@@ -346,6 +337,18 @@ msgstr "פעילות אחרונה:"
 #: ../src/userList.js:436
 msgid "All"
 msgstr "הכול"
+
+#~ msgid "Server"
+#~ msgstr "שרת"
+
+#~ msgid "Identity"
+#~ msgstr "זהות"
+
+#~ msgid "Room"
+#~ msgstr "חדר"
+
+#~ msgid "User"
+#~ msgstr "משתמש"
 
 #~ msgid "About Polari"
 #~ msgstr "על אודות Polari"
