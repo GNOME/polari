@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 23:05+0200\n"
-"PO-Revision-Date: 2014-01-08 23:06+0200\n"
+"POT-Creation-Date: 2014-01-09 17:19+0200\n"
+"PO-Revision-Date: 2014-01-09 20:14+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -139,7 +139,7 @@ msgstr "הוספה"
 msgid "Remove"
 msgstr "הסרה"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "הצטרפות לחדר צ׳אט"
 
@@ -269,6 +269,14 @@ msgstr "עריכת החיבור"
 #: ../src/connections.js:339
 msgid "A_pply"
 msgstr "ה_חלה"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_שמירה"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "הוספת חיבור"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
