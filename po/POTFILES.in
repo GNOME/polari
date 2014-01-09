@@ -10,6 +10,7 @@ data/org.gnome.Polari.desktop.in
 src/application.js
 src/chatView.js
 src/connections.js
+src/joinDialog.js
 src/mainWindow.js
 src/messageDialog.js
 src/userList.js
