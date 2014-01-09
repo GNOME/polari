@@ -65,7 +65,7 @@ const JoinDialog = new Lang.Class({
         this._details = new Connections.ConnectionDetails(null);
         this._stack.add_named(this._details.widget, 'connection');
 
-        this._details.confirmButton.label = "_Save";
+        this._details.confirmButton.label = _("_Save");
         this._details.setCancelVisible(false);
 
         this._details.connect('response', Lang.bind(this,
