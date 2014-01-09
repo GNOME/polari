@@ -28,6 +28,7 @@ const MainWindow = new Lang.Class({
 
         this._room = null;
         this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+        this._gtkSettings = Gtk.Settings.get_default();
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
@@ -55,6 +56,10 @@ const MainWindow = new Lang.Class({
                     Lang.bind(this, this._onSelectionModeChanged));
 
         this._userListAction = app.lookup_action('user-list');
+
+        this._gtkSettings.connect('notify::gtk-decoration-layout',
+                                  Lang.bind(this, this._updateDecorations));
+        this._updateDecorations();
 
         this.window.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
@@ -179,6 +184,22 @@ const MainWindow = new Lang.Class({
                 app.unmark_busy();
 		delete account._connectingNotification;
             });
+    },
+
+    _updateDecorations: function() {
+        let layoutLeft = null;
+        let layoutRight = null;
+
+        let layout = this._gtkSettings.gtk_decoration_layout;
+        if (layout) {
+            let split = layout.split(':');
+
+            layoutLeft = split[0] + ':';
+            layoutRight = ':' + split[1];
+        }
+
+        this._titlebarLeft.set_decoration_layout(layoutLeft);
+        this._titlebarRight.set_decoration_layout(layoutRight);
     },
 
     _activeRoomChanged: function(manager, room) {
