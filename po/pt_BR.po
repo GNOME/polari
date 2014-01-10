@@ -1,7 +1,7 @@
 # Brazilian Portuguese translation for polari.
-# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# Enrico Nicoletto <liverig@gmail.com>, 2013.
+# Enrico Nicoletto <liverig@gmail.com>, 2013, 2014.
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
 # Adorilson Bezerra <adorilson@gmail.com>, 2013.
 #
@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-12 12:42+0000\n"
-"PO-Revision-Date: 2013-12-15 12:58-0300\n"
-"Last-Translator: Adorilson Bezerra <adorilson@gmail.com>\n"
+"POT-Creation-Date: 2014-01-10 16:40+0000\n"
+"PO-Revision-Date: 2014-01-10 15:05-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 msgid ""
@@ -68,7 +68,7 @@ msgstr "Estado de janela maximizada"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -94,49 +94,41 @@ msgid "Quit"
 msgstr "Sair"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Nova conexão"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "Cr_iar"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Servidor"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Endereço"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Descrição"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Identidade"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
-msgstr "_Apelido"
+msgstr "Ape_lido"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "Nome _real"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "opcional"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "Cr_iar"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -150,31 +142,30 @@ msgstr "Adicionar"
 msgid "Remove"
 msgstr "Remover"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Entrar na sala de bate-papo"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "En_trar"
+msgid "_Add Connection"
+msgstr "_Adicionar conexão"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Sala"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "C_onexão"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Nome"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Nome da sala"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Senha"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "En_trar"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -193,24 +184,24 @@ msgid "Message User"
 msgstr "Enviar mensagem a usuário"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_Mensagem"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "Usuário"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "_Recente"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nome"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Mensagem"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:418
+#: ../src/application.js:416
 msgid "translator-credits"
-msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013."
+msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013, 2014."
 
 #: ../src/chatView.js:483
 #, javascript-format
@@ -272,13 +263,21 @@ msgstr "%d de %B, %H:%M"
 msgid "%B %d %Y, %H:%M"
 msgstr "%d de %B de %Y, %H:%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Editar conexão"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "A_plicar"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "Sal_var"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Adicionar conexão"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
@@ -341,6 +340,18 @@ msgstr "Última atividade:"
 #: ../src/userList.js:436
 msgid "All"
 msgstr "Todos"
+
+#~ msgid "Server"
+#~ msgstr "Servidor"
+
+#~ msgid "Identity"
+#~ msgstr "Identidade"
+
+#~ msgid "Room"
+#~ msgstr "Sala"
+
+#~ msgid "User"
+#~ msgstr "Usuário"
 
 #~ msgid "About Polari"
 #~ msgstr "Sobre Polari"
