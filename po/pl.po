@@ -4,14 +4,14 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Piotr Drąg <piotrdrag@gmail.com>, 2013.
-# Aviary.pl <gnomepl@aviary.pl>, 2013.
+# Piotr Drąg <piotrdrag@gmail.com>, 2013-2014.
+# Aviary.pl <gnomepl@aviary.pl>, 2013-2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-18 15:49+0100\n"
-"PO-Revision-Date: 2013-12-18 15:50+0100\n"
+"POT-Creation-Date: 2014-01-10 17:39+0100\n"
+"PO-Revision-Date: 2014-01-10 17:40+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -70,7 +70,7 @@ msgstr "Stan maksymalizacji okna"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -96,49 +96,41 @@ msgid "Quit"
 msgstr "Zakończ"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Nowe połączenie"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Anuluj"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "_Utwórz"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Serwer"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Adres"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Opis"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Tożsamość"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_Pseudonim"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "_Imię i nazwisko"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "opcjonalne"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Anuluj"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "_Utwórz"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -152,31 +144,30 @@ msgstr "Dodaj"
 msgid "Remove"
 msgstr "Usuń"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Dołącz do pokoju rozmów"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Dołącz"
+msgid "_Add Connection"
+msgstr "_Dodaj połączenie"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Pokój"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "P_ołączenie"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Nazwa"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Nazwa pokoju"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Hasło"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Dołącz"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -195,26 +186,26 @@ msgid "Message User"
 msgstr "Wysłanie wiadomości do użytkownika"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_Wiadomość"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "Użytkownik"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "_Ostatni użytkownicy"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nazwa"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Wiadomość"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:418
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr ""
-"Piotr Drąg <piotrdrag@gmail.com>, 2013\n"
-"Aviary.pl <gnomepl@aviary.pl>, 2013"
+"Piotr Drąg <piotrdrag@gmail.com>, 2013-2014\n"
+"Aviary.pl <gnomepl@aviary.pl>, 2013-2014"
 
 #: ../src/chatView.js:483
 #, javascript-format
@@ -276,13 +267,21 @@ msgstr "%d %B, %H∶%M"
 msgid "%B %d %Y, %H:%M"
 msgstr "%d %B %Y, %H∶%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Modyfikuj połączenia"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Zastosuj"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "Zapi_sz"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Dodaj połączenie"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
