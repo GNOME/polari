@@ -2,15 +2,15 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-10 16:37+0000\n"
-"PO-Revision-Date: 2013-12-12 11:34+0100\n"
+"POT-Creation-Date: 2014-01-09 18:20+0000\n"
+"PO-Revision-Date: 2014-01-10 18:24+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -67,7 +67,7 @@ msgstr "Estado maximizado de la ventana"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:420
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -93,49 +93,41 @@ msgid "Quit"
 msgstr "Salir"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Nueva conexión"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "Cr_ear"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Servidor"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Dirección"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Descripción"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Identidad"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_Alias"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "Nombre _real"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "opcional"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "Cr_ear"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -149,31 +141,32 @@ msgstr "Añadir"
 msgid "Remove"
 msgstr "Quitar"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Unirse a la sala de chat"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Unirse"
+#| msgid "Edit Connection"
+msgid "_Add Connection"
+msgstr "_Añadir conexión"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Sala"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "C_onexión"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Nombre"
+#: ../data/resources/join-room-dialog.ui.h:5
+#| msgid "_Name"
+msgid "Room _Name"
+msgstr "_Nombre de la sala"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Contraseña"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Unirse"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -192,84 +185,93 @@ msgid "Message User"
 msgstr "Mensaje a un usuario"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_Mensaje"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "Usuario"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "_Recientes"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nombre"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Mensaje"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Adiós"
 
-#: ../src/application.js:419
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
 
-#: ../src/chatView.js:470
+#: ../src/chatView.js:483
 msgid "%s is now known as %s"
 msgstr "%s ahora se llama %s"
 
-#: ../src/chatView.js:475
+#: ../src/chatView.js:488
 msgid "%s has disconnected"
 msgstr "%s se ha desconectado"
 
-#: ../src/chatView.js:483
+#: ../src/chatView.js:496
 msgid "%s has been kicked by %s"
 msgstr "%s ha sido expulsado por %s"
 
-#: ../src/chatView.js:485
+#: ../src/chatView.js:498
 msgid "%s has been kicked"
 msgstr "%s ha sido expulsado"
 
-#: ../src/chatView.js:491
+#: ../src/chatView.js:504
 msgid "%s has been banned by %s"
 msgstr "%s ha sido bloqueado por %s"
 
-#: ../src/chatView.js:493
+#: ../src/chatView.js:506
 msgid "%s has been banned"
 msgstr "%s ha sido bloqueado"
 
-#: ../src/chatView.js:498
+#: ../src/chatView.js:511
 msgid "%s joined"
 msgstr "%s ha entrado"
 
-#: ../src/chatView.js:502
+#: ../src/chatView.js:515
 msgid "%s left"
 msgstr "%s se ha ido"
 
 #. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:533
+#: ../src/chatView.js:546
 msgid "Yesterday, %H:%M"
 msgstr "Ayer, %H:%M"
 
 #. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:539
+#: ../src/chatView.js:552
 msgid "%A, %H:%M"
 msgstr "%A, %H:%M"
 
 #. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:544
+#: ../src/chatView.js:557
 msgid "%B %d, %H:%M"
 msgstr "%d %B, %H:%M"
 
 #. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:548
+#: ../src/chatView.js:561
 msgid "%B %d %Y, %H:%M"
 msgstr "%d %B %Y, %H:%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "A_plicar"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Guardar"
+
+#: ../src/joinDialog.js:194
+#| msgid "Edit Connection"
+msgid "Add Connection"
+msgstr "Añadir conexión"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
@@ -323,9 +325,21 @@ msgstr[1] "Hace %d meses"
 msgid "Last Activity:"
 msgstr "Última actividad:"
 
-#: ../src/userList.js:426
+#: ../src/userList.js:436
 msgid "All"
 msgstr "Todos"
+
+#~ msgid "Server"
+#~ msgstr "Servidor"
+
+#~ msgid "Identity"
+#~ msgstr "Identidad"
+
+#~ msgid "Room"
+#~ msgstr "Sala"
+
+#~ msgid "User"
+#~ msgstr "Usuario"
 
 #~ msgid "About Polari"
 #~ msgstr "Acerca de Polari"
