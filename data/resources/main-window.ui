@@ -17,6 +17,7 @@
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Polari</property>
     <property name="icon_name">polari</property>
+    <property name="show_menubar">false</property>
     <style>
       <class name="polari-main-window"/>
     </style>
