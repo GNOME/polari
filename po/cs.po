@@ -1,15 +1,15 @@
 # Czech translation for polari.
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# Marek Černocký <marek@manet.cz>, 2013.
+# Marek Černocký <marek@manet.cz>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-18 14:52+0000\n"
-"PO-Revision-Date: 2013-12-24 16:58+0100\n"
+"POT-Creation-Date: 2014-01-09 18:20+0000\n"
+"PO-Revision-Date: 2014-01-12 08:56+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -66,7 +66,7 @@ msgstr "Stav maximalizace okna."
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Komunikační klient IRC pro GNOME"
 
@@ -92,49 +92,41 @@ msgid "Quit"
 msgstr "Ukončit"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Nové připojení"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Zrušit"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "V_ytvořit"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Server"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Adresa"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Popis"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Identita"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "Přez_dívka"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "_Skutečné jméno"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "nepovinné"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "V_ytvořit"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -148,31 +140,30 @@ msgstr "Přidat"
 msgid "Remove"
 msgstr "Odebrat"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Vstup do diskuzní místnosti"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Vstoupit"
+msgid "_Add Connection"
+msgstr "Přid_at připojení"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Místnost"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "Přip_ojení"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Název"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Název místnosti"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Heslo"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Vstoupit"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -191,96 +182,92 @@ msgid "Message User"
 msgstr "Zpráva uživateli"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_Napsat zprávu"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "Uživatel"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "Ne_dávní"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Název"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Napsat zprávu"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Naviděnou"
 
-#: ../src/application.js:418
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
 #: ../src/chatView.js:483
-#, c-format
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
 #: ../src/chatView.js:488
-#, c-format
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
 #: ../src/chatView.js:496
-#, c-format
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
 #: ../src/chatView.js:498
-#, c-format
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
 #: ../src/chatView.js:504
-#, c-format
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
 #: ../src/chatView.js:506
-#, c-format
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
 #: ../src/chatView.js:511
-#, c-format
 msgid "%s joined"
 msgstr "%s se připojil"
 
 #: ../src/chatView.js:515
-#, c-format
 msgid "%s left"
 msgstr "%s opustil místnost"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"
+#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
 #: ../src/chatView.js:546
-#, no-c-format
 msgid "Yesterday, %H:%M"
 msgstr "Včera, %H:%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30
+#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
 #: ../src/chatView.js:552
-#, no-c-format
 msgid "%A, %H:%M"
 msgstr "%A, %H:%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"
+#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
 #: ../src/chatView.js:557
-#, no-c-format
 msgid "%B %d, %H:%M"
 msgstr "%d. %B, %H:%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"
+#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
 #: ../src/chatView.js:561
-#, no-c-format
 msgid "%B %d %Y, %H:%M"
 msgstr "%d. %B %Y, %H:%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Úprava připojení"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Použít"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Uložit"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Přidání připojení"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
@@ -295,7 +282,6 @@ msgid "Message"
 msgstr "Zpráva"
 
 #: ../src/userList.js:197
-#, c-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "před %d sekundou"
@@ -303,7 +289,6 @@ msgstr[1] "před %d sekundami"
 msgstr[2] "před %d sekundami"
 
 #: ../src/userList.js:202
-#, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "před %d minutou"
@@ -311,7 +296,6 @@ msgstr[1] "před %d minutami"
 msgstr[2] "před %d minutami"
 
 #: ../src/userList.js:207
-#, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "před %d hodinou"
@@ -319,7 +303,6 @@ msgstr[1] "před %d hodinami"
 msgstr[2] "před %d hodinami"
 
 #: ../src/userList.js:212
-#, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "před %d dnem"
@@ -327,7 +310,6 @@ msgstr[1] "před %d dny"
 msgstr[2] "před %d dny"
 
 #: ../src/userList.js:217
-#, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "před %d týdnem"
@@ -335,7 +317,6 @@ msgstr[1] "před %d týdny"
 msgstr[2] "před %d týdny"
 
 #: ../src/userList.js:221
-#, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "před %d měsícem"
