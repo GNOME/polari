@@ -92,6 +92,9 @@ const Application = new Lang.Class({
           { name: 'edit-connection',
             activate: Lang.bind(this, this._onEditConnection),
             parameter_type: GLib.VariantType.new('o') },
+          { name: 'help',
+            activate: Lang.bind(this, this._onShowHelp),
+            accels: ['F1'] },
           { name: 'about',
             activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
@@ -590,6 +593,10 @@ const Application = new Lang.Class({
                 w.destroy();
             }));
         dialog.show();
+    },
+
+    _onShowHelp: function() {
+        Utils.openURL('help:org.gnome.Polari', Gtk.get_current_event_time());
     },
 
     _onShowAbout: function() {
