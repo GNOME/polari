@@ -51,11 +51,21 @@ const MainWindow = new Lang.Class({
 
         this._updateUserListLabel();
 
+        this._userListAction = app.lookup_action('user-list');
+
+        app.connect('action-state-changed::user-list', Lang.bind(this,
+            function(group, actionName, value) {
+                this._userListPopover.widget.visible = value.get_boolean();
+            }));
+        this._userListPopover.widget.connect('notify::visible', Lang.bind(this,
+            function() {
+                if (!this._userListPopover.widget.visible)
+                    this._userListAction.change_state(GLib.Variant.new('b', false));
+            }));
+
         this._selectionModeAction = app.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
                     Lang.bind(this, this._onSelectionModeChanged));
-
-        this._userListAction = app.lookup_action('user-list');
 
         this._gtkSettings.connect('notify::gtk-decoration-layout',
                                   Lang.bind(this, this._updateDecorations));
@@ -258,19 +268,8 @@ const MainWindow = new Lang.Class({
         this._roomList = new RoomList.RoomList();
         scroll.add(this._roomList.widget);
 
-        let sidebar = builder.get_object('user_list_sidebar');
-        this._userListSidebar = new UserList.UserListSidebar();
-        sidebar.add(this._userListSidebar.widget);
-
-        let revealer = builder.get_object('user_list_revealer');
-        app.connect('action-state-changed::user-list', Lang.bind(this,
-            function(group, actionName, value) {
-                revealer.reveal_child = value.get_boolean();
-            }));
-        revealer.connect('notify::child-revealed', Lang.bind(this,
-            function() {
-                this._userListSidebar.animateEntry = revealer.child_revealed;
-            }));
+        this._userListPopover = new UserList.UserListPopover();
+        this._userListPopover.widget.relative_to = this._showUserListButton;
     },
 
     showJoinRoomDialog: function() {

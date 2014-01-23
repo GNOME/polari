@@ -8,11 +8,18 @@ const Tp = imports.gi.TelepathyGLib;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 
-const UserListSidebar = new Lang.Class({
-    Name: 'UserListSidebar',
+const UserListPopover = new Lang.Class({
+    Name: 'UserListPopover',
 
     _init: function() {
         this._createWidget();
+
+        this.widget.connect('map', Lang.bind(this, function() {
+            this._revealer.transition_duration = 0;
+        }));
+        this._revealer.connect('notify::child-revealed', Lang.bind(this, function() {
+            this._revealer.transition_duration = 250;
+        }));
 
         this._rooms = {};
         this._room = null;
@@ -26,15 +33,23 @@ const UserListSidebar = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
     },
 
-    set animateEntry(animate) {
-        this._revealer.transition_duration = animate ? 250 : 0;
-    },
-
     _createWidget: function() {
-        this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this.widget = new Gtk.Popover({ modal: true,
+                                        position: Gtk.PositionType.TOP,
+                                        vexpand: true,
+                                        margin_left: 12,
+                                        margin_right: 12,
+                                        margin_bottom: 12 });
+        this.widget.set_border_width(6);
+        this.widget.set_size_request(250, -1);
+
+        this.widget.get_style_context().add_class('polari-user-list');
+
+        this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this.widget.add(this._box);
 
         this._revealer = new Gtk.Revealer();
-        this.widget.add(this._revealer);
+        this._box.add(this._revealer);
 
         let frame = new Gtk.Frame();
         frame.get_style_context().add_class('polari-user-list-search-area');
@@ -43,7 +58,7 @@ const UserListSidebar = new Lang.Class({
         this._entry = new Gtk.SearchEntry({ margin: 4 });
         this._entry.connect('search-changed',
                             Lang.bind(this, this._updateFilter));
-        this._entry.connect_after('key-press-event', Lang.bind(this,
+        this._entry.connect('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
                 if (keyval == Gdk.KEY_Escape) {
@@ -56,9 +71,9 @@ const UserListSidebar = new Lang.Class({
 
         this._stack = new Gtk.Stack({ hexpand: true, vexpand: true });
         this._stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
-        this.widget.add(this._stack);
+        this._box.add(this._stack);
 
-        this.widget.show_all();
+        this._box.show_all();
     },
 
     _roomAdded: function(roomManager, room) {
@@ -99,7 +114,7 @@ const UserListSidebar = new Lang.Class({
             return;
         let userList = this._rooms[this._room.id];
         let [, natHeight] = userList.widget.get_child().get_preferred_height();
-        let height = this.widget.get_allocated_height();
+        let height = userList.widget.get_allocated_height();
         this._revealer.reveal_child = this._entry.text != '' ||
                                       natHeight > height;
     },

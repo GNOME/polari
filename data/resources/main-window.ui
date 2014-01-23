@@ -324,30 +324,6 @@
             <child>
               <placeholder/>
             </child>
-            <child type="overlay">
-              <object class="GtkRevealer" id="user_list_revealer">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="hexpand">False</property>
-                <property name="transition_type">slide-left</property>
-                <child>
-                  <object class="PolariFixedSizeFrame" id="user_list_sidebar">
-                    <property name="visible">True</property>
-                    <property name="hexpand">False</property>
-                    <property name="width">200</property>
-                    <style>
-                      <class name="sidebar"/>
-                      <class name="polari-sidebar"/>
-                      <class name="polari-user-list"/>
-                    </style>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>

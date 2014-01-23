@@ -10,12 +10,10 @@
     border-image: none;
 }
 
-.polari-sidebar.polari-room-list:dir(ltr),
-.polari-sidebar.polari-user-list:dir(rtl) {
+.polari-sidebar.polari-room-list:dir(ltr) {
     border-width: 0 1px 0 0;
 }
 
-.polari-sidebar.polari-user-list:dir(ltr),
 .polari-sidebar.polari-room-list:dir(rtl) {
     border-width: 0 0 0 1px;
 }
