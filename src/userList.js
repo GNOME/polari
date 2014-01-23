@@ -69,10 +69,6 @@ const UserListPopover = new Lang.Class({
             }));
         frame.add(this._entry);
 
-        this._stack = new Gtk.Stack({ hexpand: true, vexpand: true });
-        this._stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
-        this._box.add(this._stack);
-
         this._box.show_all();
     },
 
@@ -82,8 +78,6 @@ const UserListPopover = new Lang.Class({
 
         let userList = new UserList(room);
         this._rooms[room.id] = userList;
-
-        this._stack.add_named(userList.widget, room.id);
 
         userList.widget.vadjustment.connect('changed',
                                             Lang.bind(this, this._updateEntryVisibility));
@@ -100,12 +94,16 @@ const UserListPopover = new Lang.Class({
         this._entry.text = '';
         this._updateFilter();
 
+        let currentList = this._room ? this._rooms[this._room.id] : null;
+        if (currentList)
+            this._box.remove(currentList.widget);
+
         this._room = room;
 
         if (!room || !this._rooms[room.id])
             return;
 
-        this._stack.set_visible_child_name(room.id);
+        this._box.add(this._rooms[room.id].widget);
         this._updateEntryVisibility();
     },
 
@@ -325,7 +323,7 @@ const UserList = new Lang.Class({
     Name: 'UserList',
 
     _init: function(room) {
-        this.widget = new Gtk.ScrolledWindow();
+        this.widget = new Gtk.ScrolledWindow({ hexpand: true, vexpand: true });
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
         this._list = new Gtk.ListBox();
