@@ -239,7 +239,7 @@ const IrcParser = new Lang.Class({
             case 'QUIT': {
                 let presence = Tp.ConnectionPresenceType.OFFLINE;
                 let message = stripCommand(text);
-                this._room.account.request_presence_async(presence, '', message,
+                this._room.account.request_presence_async(presence, 'offline', message,
                     Lang.bind(this, function(a, res) {
                         try {
                             a.request_presence_finish(res);
