@@ -63,7 +63,10 @@ const AccountsMonitor = new Lang.Class({
 
             this._app.hold();
             account.request_presence_async(presence, 'offline', '',
-                Lang.bind(this, function() {
+                Lang.bind(this, function(account, result) {
+                    try {
+                        account.request_presence_finish(result);
+                    } catch(e) { }
                     this._app.release();
                 }));
         }
