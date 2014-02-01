@@ -35,13 +35,13 @@ const MainWindow = new Lang.Class({
         overlay.add_overlay(app.notificationQueue.widget);
         overlay.add_overlay(app.commandOutputQueue.widget);
 
-        this._accountsMonitor = new AccountsMonitor.getDefault();
+        this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
                                       Lang.bind(this, this._onAccountChanged));
         this._accountsMonitor.connect('account-added',
                                       Lang.bind(this, this._onAccountChanged));
 
-        this._roomManager = new ChatroomManager.getDefault();
+        this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
                                   Lang.bind(this, this._roomAdded));
         this._roomManager.connect('room-removed',
