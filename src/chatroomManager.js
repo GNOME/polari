@@ -14,6 +14,30 @@ function getDefault() {
     return _singleton;
 }
 
+const Client = new Lang.Class({
+    Name: 'Client',
+    GTypeName: 'PolariTpClient',
+    Extends: Tp.BaseClient,
+
+    _init: function(am, manager) {
+        this.parent({ account_manager: am,
+                      name: 'Polari',
+                      uniquify_name: false });
+        this.set_handler_bypass_approval(false);
+        this.set_observer_recover(true);
+
+        this._manager = manager;
+    },
+
+    vfunc_observe_channels: function() {
+        this._manager.observeChannels.apply(this._manager, arguments);
+    },
+
+    vfunc_handle_channels: function() {
+        this._manager.handleChannels.apply(this._manager, arguments);
+    }
+});
+
 const _ChatroomManager = new Lang.Class({
     Name: '_ChatroomManager',
 
@@ -51,11 +75,7 @@ const _ChatroomManager = new Lang.Class({
         let leaveAction = this._app.lookup_action('leave-room');
         leaveAction.connect('activate', Lang.bind(this, this._onLeaveActivated));
 
-        this._observer = Tp.SimpleObserver.new_with_am(am, true,
-            'Polari', true, Lang.bind(this, this._observeChannels));
-
-        this._handler = Tp.SimpleHandler.new_with_am(am, false,
-            false, 'Polari', false, Lang.bind(this, this._handleChannels));
+        this._client = new Client(am, this);
 
         let filters = [];
 
@@ -71,11 +91,10 @@ const _ChatroomManager = new Lang.Class({
 
         filters.forEach(Lang.bind(this,
             function(f) {
-                this._handler.add_handler_filter(f);
-                this._observer.add_observer_filter(f);
+                this._client.add_handler_filter(f);
+                this._client.add_observer_filter(f);
             }));
-        this._handler.register();
-        this._observer.register();
+        this._client.register();
 
         am.connect('account-enabled',
                    Lang.bind(this, this._restoreSavedChannels));
@@ -186,8 +205,8 @@ const _ChatroomManager = new Lang.Class({
         context.accept();
     },
 
-    _observeChannels: function() {
-        let [observer, account, connection,
+    observeChannels: function() {
+        let [account, connection,
              channels, op, requests, context] = arguments;
 
         this._processRequest(context, connection, channels, Lang.bind(this,
@@ -206,8 +225,8 @@ const _ChatroomManager = new Lang.Class({
             }));
     },
 
-    _handleChannels: function() {
-        let [handler, account, connection,
+    handleChannels: function() {
+        let [account, connection,
              channels, satisfied, userTime, context] = arguments;
 
         let [present, time] = Tp.user_action_time_should_present(userTime);
