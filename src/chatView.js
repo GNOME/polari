@@ -489,6 +489,9 @@ const ChatView = new Lang.Class({
 
         this._room.channel.dup_pending_messages().forEach(Lang.bind(this,
             function(message) {
+                let [id, ] = message.get_pending_message_id();
+                if (this._pending[id])
+                    return;
                 this._insertTpMessage(this._room, message);
             }));
         this._checkMessages();
