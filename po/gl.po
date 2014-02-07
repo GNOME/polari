@@ -1,13 +1,13 @@
 # Spanish translation for polari.
 # Copyright (C) 2013 Polari developers
 # This file is distributed under the same license as the polari package.
-# Fran Dieguez <frandieguez@gnome.org>, 2013.
+# Fran Dieguez <frandieguez@gnome.org>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-30 02:52+0100\n"
-"PO-Revision-Date: 2013-12-30 02:52+0200\n"
+"POT-Creation-Date: 2014-02-07 01:54+0100\n"
+"PO-Revision-Date: 2014-02-07 01:55+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -64,7 +64,7 @@ msgstr "Estado da xanela maximizada"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:419
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de Internet Relay Chat para GNOME"
 
@@ -90,49 +90,41 @@ msgid "Quit"
 msgstr "Saír"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Nova conexión"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "Cr_ear"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Servidor"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Enderezo"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Descrición"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Identidade"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_Alcume"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "Nome _real"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "opcional"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "Cr_ear"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -146,31 +138,30 @@ msgstr "Engadir"
 msgid "Remove"
 msgstr "Eliminar"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Unirse a unha sala de conversas"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Unirse"
+msgid "_Add Connection"
+msgstr "_Engadir conexión"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Sala"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "Co_nexión"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Nome"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Nome da sala"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Contrasinal"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Unirse"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -189,22 +180,22 @@ msgid "Message User"
 msgstr "Mensaxear usuario"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_Mensaxe"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "Usuario"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "_Recentes"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nome"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Mensaxe"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Adeus"
 
-#: ../src/application.js:418
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013."
 
@@ -272,13 +263,21 @@ msgstr "%d de %B ás %H:%M"
 msgid "%B %d %Y, %H:%M"
 msgstr "%d de %B do %Y ás %H:%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Aplicar"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Gardar"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Engadir conexión"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
@@ -341,6 +340,18 @@ msgstr "Última actividade:"
 #: ../src/userList.js:436
 msgid "All"
 msgstr "Todos"
+
+#~ msgid "Server"
+#~ msgstr "Servidor"
+
+#~ msgid "Identity"
+#~ msgstr "Identidade"
+
+#~ msgid "Room"
+#~ msgstr "Sala"
+
+#~ msgid "User"
+#~ msgstr "Usuario"
 
 #~ msgid "About Polari"
 #~ msgstr "Sobre Polari"
