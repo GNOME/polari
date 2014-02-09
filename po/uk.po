@@ -1,32 +1,74 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Daniel Korostil <ted.korostiled@gmail.com>, 2013.
+# Daniel Korostil <ted.korostiled@gmail.com>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-12 21:29+0300\n"
-"PO-Revision-Date: 2013-08-12 22:02+0300\n"
+"POT-Creation-Date: 2014-02-09 11:30+0200\n"
+"PO-Revision-Date: 2014-02-09 17:47+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Virtaal 0.7.1\n"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Простий клієнт IRC, який розроблено для стільничного середовища GNOME; він "
+"має простий і красивий інтерфейс, який дозволяє зосередитись на розмовах."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Перелік збережених каналів"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Список каналів, які з'являються під час запуску"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Розмір вікна"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Розмір вікна (ширина і висота)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Положення вікна"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Розташування вікна (x та y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Вікно розгорнуто"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Стан розгорнутого вікна"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Балаканина"
 
-#: ../data/polari.desktop.in.h:2 ../src/application.js:372
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Клієнт ретрансляційної інтернетової балачки для GNOME"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Інтернет;Ретрансляція;Балачка;"
 
@@ -40,7 +82,7 @@ msgid "Preferences"
 msgstr "Параметри"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
+msgid "About"
 msgstr "Про програму"
 
 #: ../data/resources/app-menu.ui.h:4
@@ -48,47 +90,41 @@ msgid "Quit"
 msgstr "Вийти"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Створити з'єднання"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Скасувати"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "С_творити"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "Server"
-msgstr "Сервер"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "Ад_реса"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Опис"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Особисті дані"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "Прі_звисько"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "С_правжнє ім'я"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "необов'язково"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "С_творити"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -102,29 +138,30 @@ msgstr "Додати"
 msgid "Remove"
 msgstr "Вилучити"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Увійти до кімнати"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Увійти"
+msgid "_Add Connection"
+msgstr "_Додати з'єднання"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Кімната"
-
-#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "_З'єднання"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Назва"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Назва кімнати"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Пароль"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Увійти"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -138,62 +175,182 @@ msgstr "Написати користувачу"
 msgid "_Leave"
 msgstr "_Покинути"
 
-#: ../src/application.js:324
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Написати користувачу"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "Не_щодавнє"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Назва"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Написати"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Бувай"
 
-#: ../src/application.js:371
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: ../src/chatView.js:319
+#: ../src/chatView.js:483
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s тепер відомо як %s"
 
-#: ../src/chatView.js:324
+#: ../src/chatView.js:488
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s від'єднано"
 
-#: ../src/chatView.js:332
+#: ../src/chatView.js:496
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s викинуто за осудом %s"
 
-#: ../src/chatView.js:334
+#: ../src/chatView.js:498
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s викинуто"
 
-#: ../src/chatView.js:340
+#: ../src/chatView.js:504
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s вигнано за осудом %s"
 
-#: ../src/chatView.js:342
+#: ../src/chatView.js:506
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s вигнано"
 
-#: ../src/chatView.js:347
+#: ../src/chatView.js:511
 #, javascript-format
 msgid "%s joined"
 msgstr "%s долучено"
 
-#: ../src/chatView.js:351
+#: ../src/chatView.js:515
 #, javascript-format
 msgid "%s left"
 msgstr "%s іде геть"
 
-#: ../src/connections.js:227
+#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
+#: ../src/chatView.js:546
+msgid "Yesterday, %H:%M"
+msgstr "Учора, %H:%M"
+
+#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
+#: ../src/chatView.js:552
+msgid "%A, %H:%M"
+msgstr "%A, %H:%M"
+
+#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
+#: ../src/chatView.js:557
+msgid "%B %d, %H:%M"
+msgstr "%B %d, %H:%M"
+
+#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
+#: ../src/chatView.js:561
+msgid "%B %d %Y, %H:%M"
+msgstr "%d %B %Y, %H:%M"
+
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Редагувати з'єднання"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Застосувати"
 
-#: ../src/userList.js:99
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "З_берегти"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Додати з'єднання"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Немає нещодавніх користувачів"
+
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "Завантаження подробиць"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "Написати"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d секунду тому"
+msgstr[1] "%d секунди тому"
+msgstr[2] "%d секунд тому"
+
+#: ../src/userList.js:202
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d хвилину тому"
+msgstr[1] "%d хвилини тому"
+msgstr[2] "%d хвилин тому"
+
+#: ../src/userList.js:207
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d годину тому"
+msgstr[1] "%d години тому"
+msgstr[2] "%d годин тому"
+
+#: ../src/userList.js:212
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d день тому"
+msgstr[1] "%d дні тому"
+msgstr[2] "%d днів тому"
+
+#: ../src/userList.js:217
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d тиждень тому"
+msgstr[1] "%d тижні тому"
+msgstr[2] "%d тижнів тому"
+
+#: ../src/userList.js:221
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d місяць тому"
+msgstr[1] "%d місяці тому"
+msgstr[2] "%d місяців тому"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "Останні дії:"
+
+#: ../src/userList.js:436
 msgid "All"
 msgstr "Всі"
+
+#~ msgid "About Polari"
+#~ msgstr "Про програму"
+
+#~ msgid "Server"
+#~ msgstr "Сервер"
+
+#~ msgid "Identity"
+#~ msgstr "Особисті дані"
+
+#~ msgid "Room"
+#~ msgstr "Кімната"
