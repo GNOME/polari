@@ -1,3 +1,5 @@
+imports.gi.versions.TelepathyGLib = '0.12';
+
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
