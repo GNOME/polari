@@ -197,7 +197,7 @@ const Application = new Lang.Class({
     },
 
     _userListCreateHook: function(action) {
-        this._chatroomManager.connect('active-changed', Lang.bind(this,
+        this._chatroomManager.connect('active-state-changed', Lang.bind(this,
             function() {
                 this._updateUserListAction(action);
             }));
