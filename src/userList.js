@@ -45,17 +45,14 @@ const UserListPopover = new Lang.Class({
 
         this.widget.get_style_context().add_class('polari-user-list');
 
-        this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
+                                  spacing: 6 });
         this.widget.add(this._box);
 
         this._revealer = new Gtk.Revealer();
         this._box.add(this._revealer);
 
-        let frame = new Gtk.Frame();
-        frame.get_style_context().add_class('polari-user-list-search-area');
-        this._revealer.add(frame);
-
-        this._entry = new Gtk.SearchEntry({ margin: 4 });
+        this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed',
                             Lang.bind(this, this._updateFilter));
         this._entry.connect('key-press-event', Lang.bind(this,
@@ -67,7 +64,7 @@ const UserListPopover = new Lang.Class({
                 }
                 return false;
             }));
-        frame.add(this._entry);
+        this._revealer.add(this._entry);
 
         this._box.show_all();
     },
@@ -323,7 +320,8 @@ const UserList = new Lang.Class({
     Name: 'UserList',
 
     _init: function(room) {
-        this.widget = new Gtk.ScrolledWindow({ hexpand: true, vexpand: true });
+        this.widget = new Gtk.ScrolledWindow({ hexpand: true, vexpand: true,
+                                               shadow_type: Gtk.ShadowType.ETCHED_IN });
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
         this._list = new Gtk.ListBox();
