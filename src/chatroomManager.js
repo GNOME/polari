@@ -215,6 +215,13 @@ const _ChatroomManager = new Lang.Class({
     _addRoom: function(room) {
         if (this._rooms[room.id])
             return;
+
+        room._channelChangedId = room.connect('notify::channel', Lang.bind(this,
+            function(room) {
+                if (room == this._activeRoom)
+                    this.emit('active-state-changed');
+            }));
+
         this._rooms[room.id] = room;
         this.emit('room-added', room);
 
@@ -225,6 +232,8 @@ const _ChatroomManager = new Lang.Class({
     _removeRoom: function(room) {
         if (!this._rooms[room.id])
             return;
+        room.disconnect(room._channelChangedId);
+        delete room._channelChangedId;
         delete this._rooms[room.id];
         this.emit('room-removed', room);
     },
@@ -235,6 +244,7 @@ const _ChatroomManager = new Lang.Class({
 
         this._activeRoom = room;
         this.emit('active-changed', room);
+        this.emit('active-state-changed');
     },
 
     getActiveRoom: function(room) {
