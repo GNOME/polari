@@ -124,6 +124,8 @@ polari_room_should_highlight_message (PolariRoom *room,
 
   if (!priv->channel)
     return FALSE;
+  if (priv->type != TP_HANDLE_TYPE_ROOM)
+    return FALSE;
 
   conn = tp_channel_get_connection (room->priv->channel);
   self = tp_connection_get_self_contact (conn);
