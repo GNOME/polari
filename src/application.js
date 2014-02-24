@@ -375,7 +375,7 @@ const Application = new Lang.Class({
             return;
         if (this._pendingRequests[roomId]) {
             this._pendingRequests[roomId].cancellable.cancel();
-        } else {
+        } else if (room.channel) {
             if (!message.length)
                 message = _("Good Bye"); // TODO - our first setting?
             room.channel.leave_async(reason, message, Lang.bind(this,
