@@ -38,7 +38,6 @@ const EntryArea = new Lang.Class({
             this._room.connect('notify::channel',
                                Lang.bind(this, this._onChannelChanged));
         this._onChannelChanged(room);
-        this._updateNick();
     },
 
     _createWidget: function() {
@@ -138,6 +137,7 @@ const EntryArea = new Lang.Class({
                                                 Lang.bind(this, this._updateNick));
         else
             this._nicknameChangedId = 0;
+        this._updateNick();
     },
 
 
