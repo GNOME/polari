@@ -81,6 +81,8 @@ const _ChatroomManager = new Lang.Class({
                    Lang.bind(this, this._restoreSavedChannels));
         am.connect('account-disabled',
                    Lang.bind(this, this._onAccountDisabled));
+        am.connect('account-removed',
+                   Lang.bind(this, this._onAccountDisabled));
         this._restoreSavedChannels();
 
         this._networkMonitor.connect('notify::network-available', Lang.bind(this,
@@ -93,7 +95,7 @@ const _ChatroomManager = new Lang.Class({
     _onAccountDisabled: function(am, account) {
         for (let id in this._rooms) {
             let room = this._rooms[id];
-            if (!room.account.enabled)
+            if (room.account == account)
                 this._removeRoom(room);
         }
     },
