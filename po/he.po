@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 17:19+0200\n"
-"PO-Revision-Date: 2014-01-09 20:14+0200\n"
+"POT-Creation-Date: 2014-02-28 00:34+0200\n"
+"PO-Revision-Date: 2014-02-28 00:35+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -65,13 +65,17 @@ msgstr "Window maximized state"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:438
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;אינטרנט;ממסר;צ׳אט;שיחוח;דיונים;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "הצגת חיבורים"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -192,11 +196,11 @@ msgstr "_שם"
 msgid "_Message"
 msgstr "_שליחת הודעה"
 
-#: ../src/application.js:360
+#: ../src/application.js:380
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:416
+#: ../src/application.js:437
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
