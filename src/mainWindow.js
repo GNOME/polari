@@ -215,10 +215,12 @@ const MainWindow = new Lang.Class({
         let app = Gio.Application.get_default();
         let notification = new AppNotifications.ConnectingNotification(account);
         app.notificationQueue.addNotification(notification);
+        app.mark_busy();
 
         account._connectingNotification = notification;
         notification.widget.connect('destroy',
             function() {
+                app.unmark_busy();
 		delete account._connectingNotification;
             });
     },
