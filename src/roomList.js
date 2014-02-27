@@ -223,27 +223,7 @@ const RoomList = new Lang.Class({
         let [id, ] = param.deep_unpack();
         let row = this._roomRows[id].widget;
 
-        let activeRoom = this._roomManager.getActiveRoom();
-        let current = this._roomRows[activeRoom.id].widget;
-
-        if (current == row) {
-            let selected = this.widget.get_selected_row();
-            let newActive = null;
-            let visibleChildren = this.widget.get_children().filter(function(c) {
-                return c.visible;
-            });
-            if (visibleChildren.length > 1) {
-                row.can_focus = false;
-                this.widget.select_row(row);
-                row.can_focus = true;
-                let count = row.get_index() == 0 ? 1 : -1;
-                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
-                newActive = this.widget.get_selected_row().room;
-            }
-            this._roomManager.setActiveRoom(newActive);
-            if (selected != row)
-                this.widget.select_row(selected);
-        }
+        this._moveSelectionFromRow(row);
         row.hide();
     },
 
@@ -259,6 +239,31 @@ const RoomList = new Lang.Class({
 
         if (focus && focus.get_parent() != this.widget)
             focus.emit('grab-focus');
+    },
+
+    _moveSelectionFromRow: function(row) {
+        let activeRoom = this._roomManager.getActiveRoom();
+        let current = this._roomRows[activeRoom.id].widget;
+
+        if (current != row)
+            return;
+
+        let selected = this.widget.get_selected_row();
+        let newActive = null;
+        let visibleChildren = this.widget.get_children().filter(function(c) {
+            return c.visible;
+        });
+        if (visibleChildren.length > 1) {
+            row.can_focus = false;
+            this.widget.select_row(row);
+            row.can_focus = true;
+            let count = row.get_index() == 0 ? 1 : -1;
+            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
+            newActive = this.widget.get_selected_row().room;
+        }
+        this._roomManager.setActiveRoom(newActive);
+        if (selected != row)
+            this.widget.select_row(selected);
     },
 
     _roomAdded: function(roomManager, room) {
@@ -288,6 +293,7 @@ const RoomList = new Lang.Class({
         if (!roomRow)
             return;
 
+        this._moveSelectionFromRow(roomRow.widget);
         this.widget.remove(roomRow.widget);
         delete this._roomRows[room.id];
     },
