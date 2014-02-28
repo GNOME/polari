@@ -73,14 +73,7 @@ const IrcParser = new Lang.Class({
             return;
 
         if (text[0] != '/') {
-            if (text.split('\n').length > MAX_LINES) {
-                let app = Gio.Application.get_default();
-                app.pasteManager.pasteText(text);
-            } else {
-                let type = Tp.ChannelTextMessageType.NORMAL;
-                let message = Tp.ClientMessage.new_text(type, text);
-                this._sendMessage(message);
-            }
+            this._sendOrPasteText(text);
             return;
         }
 
@@ -254,10 +247,7 @@ const IrcParser = new Lang.Class({
                     output = this._createFeedbackUsage(cmd);
                     break;
                 }
-                let raw = stripCommand(text);
-                let type = Tp.ChannelTextMessageType.NORMAL;
-                let message = Tp.ClientMessage.new_text(type, raw);
-                this._sendMessage(message);
+                this._sendOrPasteText(stripCommand(text));
                 break;
             }
             case 'TOPIC': {
@@ -274,6 +264,17 @@ const IrcParser = new Lang.Class({
 
         if (output)
             this._app.commandOutputQueue.addNotification(output);
+    },
+
+    _sendOrPasteText: function(text) {
+        if (text.split('\n').length > MAX_LINES) {
+            let app = Gio.Application.get_default();
+            app.pasteManager.pasteText(text);
+        } else {
+            let type = Tp.ChannelTextMessageType.NORMAL;
+            let message = Tp.ClientMessage.new_text(type, text);
+            this._sendMessage(message);
+        }
     },
 
     _sendMessage: function(message) {
