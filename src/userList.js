@@ -317,7 +317,8 @@ const UserList = new Lang.Class({
         this.widget.add(this._list);
 
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
-        this._list.set_header_func(Lang.bind(this, this._updateHeader));
+        /* see https://bugzilla.gnome.org/show_bug.cgi?id=725403 */
+        //this._list.set_header_func(Lang.bind(this, this._updateHeader));
         this._list.set_filter_func(Lang.bind(this, this._filterRows));
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
@@ -340,8 +341,11 @@ const UserList = new Lang.Class({
                      Lang.bind(this, this._onMemberRemoved));
         room.connect('member-joined',
                      Lang.bind(this, this._onMemberJoined));
+        /*
+        // see https://bugzilla.gnome.org/show_bug.cgi?id=725403
         room.connect('members-changed',
                      Lang.bind(this, this._onMembersChanged));
+        */
         room.connect('notify::channel',
                      Lang.bind(this, this._onChannelChanged));
 
