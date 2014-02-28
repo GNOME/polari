@@ -1,3 +1,4 @@
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 
 const ChatroomManager = imports.chatroomManager;
@@ -21,6 +22,13 @@ const RoomStack = new Lang.Class({
                                   Lang.bind(this, this._roomRemoved));
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
+        this._roomManager.connect('active-state-changed',
+                                  Lang.bind(this, this._updateSensitivity));
+
+        let app = Gio.Application.get_default();
+        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction.connect('notify::state',
+                                          Lang.bind(this, this._updateSensitivity));
 
         this._rooms = {};
 
@@ -47,6 +55,14 @@ const RoomStack = new Lang.Class({
         this._stack.set_visible_child_name(room ? room.id : 'placeholder');
         this._stack.transition_type = room ? Gtk.StackTransitionType.CROSSFADE
                                            : Gtk.StackTransitionType.NONE;
+    },
+
+    _updateSensitivity: function() {
+        let room = this._roomManager.getActiveRoom();
+        let id = room ? room.id : 'placeholder';
+        let sensitive = room && room.channel &&
+                        !this._selectionModeAction.state.get_boolean();
+        this._rooms[id].inputSensitive = sensitive;
     },
 
     _createWidget: function() {
@@ -87,5 +103,9 @@ const RoomView = new Lang.Class({
         this.inputWidget.add(this._entryArea.widget);
 
         this.widget.show_all();
+    },
+
+    set inputSensitive(sensitive) {
+        this._entryArea.widget.sensitive = sensitive;
     }
 });

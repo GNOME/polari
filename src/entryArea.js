@@ -1,8 +1,6 @@
 const Gdk = imports.gi.Gdk;
-const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 
-const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
 const IrcParser = imports.ircParser;
 const Lang = imports.lang;
@@ -22,16 +20,6 @@ const EntryArea = new Lang.Class({
         this._ircParser = new IrcParser.IrcParser();
 
         this._room = room;
-
-        this._roomManager = new ChatroomManager.getDefault();
-        this._activeRoomChangedId =
-            this._roomManager.connect('active-changed',
-                                      Lang.bind(this, this._updateSensitivity));
-
-        let app = Gio.Application.get_default();
-        this._selectionModeAction = app.lookup_action('selection-mode');
-        this._selectionModeAction.connect('notify::state',
-                                          Lang.bind(this, this._updateSensitivity));
 
         if (!room)
             return;
@@ -53,6 +41,7 @@ const EntryArea = new Lang.Class({
         this.widget.get_style_context().add_class('linked');
 
         this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.widget.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
 
         this._nickEntry = new Gtk.Entry();
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
@@ -119,13 +108,7 @@ const EntryArea = new Lang.Class({
         this._completion.setCompletions(nicks);
     },
 
-    _updateSensitivity: function() {
-        let room = this._roomManager.getActiveRoom();
-        this.widget.sensitive = this._room &&
-                                this._room == room &&
-                                room.channel &&
-                                !this._selectionModeAction.state.get_boolean();
-
+    _onSensitiveChanged: function() {
         if (!this.widget.sensitive)
             return;
 
@@ -138,7 +121,6 @@ const EntryArea = new Lang.Class({
 
     _onChannelChanged: function(room) {
         this._updateCompletions();
-        this._updateSensitivity();
 
         if (room.channel)
             this._nicknameChangedId =
@@ -192,9 +174,6 @@ const EntryArea = new Lang.Class({
     },
 
     _onDestroy: function() {
-        this._roomManager.disconnect(this._activeRoomChangedId);
-        this._activeRoomChangedId = 0;
-
         if (this._membersChangedId)
             this._room.disconnect(this._membersChangedId);
         this._membersChangedId = 0;
