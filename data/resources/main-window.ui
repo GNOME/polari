@@ -34,7 +34,7 @@
               <class name="titlebar"/>
             </style>
             <child>
-              <object class="GtkMenuButton" id="button1">
+              <object class="GtkMenuButton" id="join_menu_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
@@ -230,7 +230,7 @@
               <object class="PolariFixedSizeFrame" id="frame1">
                 <property name="visible">True</property>
                 <property name="hexpand">False</property>
-                <property name="width">200</property>
+                <property name="width">300</property>
                 <style>
                   <class name="sidebar"/>
                   <class name="polari-sidebar"/>
