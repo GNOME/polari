@@ -426,6 +426,9 @@ const UserList = new Lang.Class({
         if (row.get_header())
             return;
 
+        if (!this._room.channel)
+            return;
+
         let members = this._room.channel.group_dup_members_contacts();
         let numMembers = members.length;
 
