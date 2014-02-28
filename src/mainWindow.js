@@ -24,16 +24,18 @@ const MainWindow = new Lang.Class({
     Name: 'MainWindow',
 
     _init: function(app) {
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/polari/main-window.ui');
+        this._rooms = {};
+        this._entries = {};
 
-        this.window = builder.get_object('main_window');
-        this.window.application = app;
+        this._room = null;
+        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
 
-        let overlay = builder.get_object('overlay');
+        this._displayNameChangedId = 0;
+        this._topicChangedId = 0;
+        this._membersChangedId = 0;
+        this._configureId = 0;
 
-        overlay.add_overlay(app.notificationQueue.widget);
-        overlay.add_overlay(app.commandOutputQueue.widget);
+        this._createWidget(app);
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
@@ -50,51 +52,6 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
         this._roomManager.connect('active-state-changed',
                                   Lang.bind(this, this._updateUserListLabel));
-
-        this._rooms = {};
-        this._entries = {};
-
-        this._room = null;
-        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
-
-        this._displayNameChangedId = 0;
-        this._topicChangedId = 0;
-        this._membersChangedId = 0;
-        this._configureId = 0;
-
-        this._titlebarRight = builder.get_object('titlebar_right');
-        this._titlebarLeft = builder.get_object('titlebar_left');
-
-        this._titleLabel = builder.get_object('title_label');
-        this._subtitleLabel = builder.get_object('subtitle_label');
-
-        this._selectionRevealer = builder.get_object('selection_toolbar_revealer');
-        this._joinMenuButton = builder.get_object('join_menu_button');
-        this._showUserListButton = builder.get_object('show_user_list_button');
-        this._revealer = builder.get_object('room_list_revealer');
-        this._chatStack = builder.get_object('chat_stack');
-        this._inputStack = builder.get_object('input_area_stack');
-
-        let placeholderEntry = new EntryArea.EntryArea(null);
-        this._inputStack.add_named(placeholderEntry.widget, 'placeholder');
-
-        let scroll = builder.get_object('room_list_scrollview');
-        this._roomList = new RoomList.RoomList();
-        scroll.add(this._roomList.widget);
-
-        let sidebar = builder.get_object('user_list_sidebar');
-        this._userListSidebar = new UserList.UserListSidebar();
-        sidebar.add(this._userListSidebar.widget);
-
-        let revealer = builder.get_object('user_list_revealer');
-        app.connect('action-state-changed::user-list', Lang.bind(this,
-            function(group, actionName, value) {
-                revealer.reveal_child = value.get_boolean();
-            }));
-        revealer.connect('notify::child-revealed', Lang.bind(this,
-            function() {
-                this._userListSidebar.animateEntry = revealer.child_revealed;
-            }));
 
         this._selectionModeAction = app.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
@@ -280,6 +237,50 @@ const MainWindow = new Lang.Class({
                                Lang.bind(this, this._updateUserListLabel));
 
         this._chatStack.set_visible_child_name(this._room.id);
+    },
+
+    _createWidget: function(app) {
+        let builder = new Gtk.Builder();
+        builder.add_from_resource('/org/gnome/polari/main-window.ui');
+
+        this.window = builder.get_object('main_window');
+        this.window.application = app;
+
+        let overlay = builder.get_object('overlay');
+
+        this._titlebarRight = builder.get_object('titlebar_right');
+        this._titlebarLeft = builder.get_object('titlebar_left');
+
+        this._titleLabel = builder.get_object('title_label');
+        this._subtitleLabel = builder.get_object('subtitle_label');
+
+        this._selectionRevealer = builder.get_object('selection_toolbar_revealer');
+        this._joinMenuButton = builder.get_object('join_menu_button');
+        this._showUserListButton = builder.get_object('show_user_list_button');
+        this._revealer = builder.get_object('room_list_revealer');
+        this._chatStack = builder.get_object('chat_stack');
+        this._inputStack = builder.get_object('input_area_stack');
+
+        let placeholderEntry = new EntryArea.EntryArea(null);
+        this._inputStack.add_named(placeholderEntry.widget, 'placeholder');
+
+        let scroll = builder.get_object('room_list_scrollview');
+        this._roomList = new RoomList.RoomList();
+        scroll.add(this._roomList.widget);
+
+        let sidebar = builder.get_object('user_list_sidebar');
+        this._userListSidebar = new UserList.UserListSidebar();
+        sidebar.add(this._userListSidebar.widget);
+
+        let revealer = builder.get_object('user_list_revealer');
+        app.connect('action-state-changed::user-list', Lang.bind(this,
+            function(group, actionName, value) {
+                revealer.reveal_child = value.get_boolean();
+            }));
+        revealer.connect('notify::child-revealed', Lang.bind(this,
+            function() {
+                this._userListSidebar.animateEntry = revealer.child_revealed;
+            }));
     },
 
     showJoinRoomDialog: function() {
