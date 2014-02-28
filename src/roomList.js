@@ -196,6 +196,16 @@ const RoomList = new Lang.Class({
             function() {
                 this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, 1);
             }));
+        action = app.lookup_action('nth-room');
+        action.connect('activate', Lang.bind(this,
+            function(action, param) {
+                let n = param.get_int32();
+                if (n > this._roomManager.roomCount)
+                    return;
+                this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, -1);
+                if (n > 1)
+                    this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, n - 1);
+            }));
     },
 
     _onSelectionModeChanged: function() {

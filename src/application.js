@@ -126,7 +126,9 @@ const Application = new Lang.Class({
           { name: 'first-room',
             accel: '<Primary>Home' },
           { name: 'last-room',
-            accel: '<Primary>End' }
+            accel: '<Primary>End' },
+          { name: 'nth-room',
+            parameter_type: GLib.VariantType.new('i') }
         ];
         actionEntries.forEach(Lang.bind(this,
             function(actionEntry) {
@@ -148,6 +150,10 @@ const Application = new Lang.Class({
                                          'app.' + actionEntry.name, null);
                 this.add_action(action);
         }));
+
+        for (let i = 1; i < 10; i++)
+            this.add_accelerator('<Alt>' + i, 'app.nth-room',
+                                 GLib.Variant.new('i', i));
 
         this._window = new MainWindow.MainWindow(this);
         this._window.window.connect('destroy', Lang.bind(this,
