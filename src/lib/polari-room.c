@@ -275,9 +275,7 @@ update_icon (PolariRoom *room)
 
   g_clear_object (&priv->icon);
 
-  if (priv->channel &&
-      !tp_proxy_has_interface_by_id (TP_PROXY (priv->channel),
-                                     TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP))
+  if (priv->type == TP_HANDLE_TYPE_CONTACT)
     priv->icon = g_themed_icon_new ("avatar-default-symbolic");
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ICON]);
@@ -438,7 +436,12 @@ polari_room_set_type (PolariRoom *room,
 
   priv->type = type;
 
+  g_object_freeze_notify (G_OBJECT (room));
+
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TYPE]);
+  update_icon (room);
+
+  g_object_thaw_notify (G_OBJECT (room));
 }
 
 static void
@@ -530,7 +533,6 @@ polari_room_set_channel (PolariRoom *room,
   g_object_freeze_notify (G_OBJECT (room));
 
   update_self_nick (room);
-  update_icon (room);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL]);
 
