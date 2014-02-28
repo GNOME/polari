@@ -53,6 +53,8 @@ const MainWindow = new Lang.Class({
         this._roomManager.connect('active-state-changed',
                                   Lang.bind(this, this._updateUserListLabel));
 
+        this._updateUserListLabel();
+
         this._selectionModeAction = app.lookup_action('selection-mode');
         this._selectionModeAction.connect('notify::state',
                     Lang.bind(this, this._onSelectionModeChanged));
@@ -221,7 +223,6 @@ const MainWindow = new Lang.Class({
 
         this._inputStack.set_visible_child_name(this._room ? this._room.id
                                                            : 'placeholder');
-        this._updateUserListLabel();
 
         if (!this._room)
             return; // finished
