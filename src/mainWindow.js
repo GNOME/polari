@@ -7,13 +7,12 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
-const ChatView = imports.chatView;
-const EntryArea = imports.entryArea;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const MessageDialog = imports.messageDialog;
 const RoomList = imports.roomList;
+const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
 
@@ -44,10 +43,6 @@ const MainWindow = new Lang.Class({
                                       Lang.bind(this, this._onAccountChanged));
 
         this._roomManager = ChatroomManager.getDefault();
-        this._roomManager.connect('room-added',
-                                  Lang.bind(this, this._roomAdded));
-        this._roomManager.connect('room-removed',
-                                  Lang.bind(this, this._roomRemoved));
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
         this._roomManager.connect('active-state-changed',
@@ -186,26 +181,6 @@ const MainWindow = new Lang.Class({
             });
     },
 
-    _roomAdded: function(roomManager, room) {
-        let chatView = new ChatView.ChatView(room);
-        this._rooms[room.id] = chatView;
-
-        this._chatStack.add_named(chatView.widget, room.id);
-
-        let entryArea = new EntryArea.EntryArea(room);
-        this._entries[room.id] = entryArea;
-
-        this._inputStack.add_named(entryArea.widget, room.id);
-    },
-
-    _roomRemoved: function(roomManager, room) {
-        this._rooms[room.id].widget.destroy();
-        delete this._rooms[room.id];
-
-        this._entries[room.id].widget.destroy();
-        delete this._entries[room.id];
-    },
-
     _activeRoomChanged: function(manager, room) {
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
@@ -221,9 +196,6 @@ const MainWindow = new Lang.Class({
 
         this._updateTitlebar();
 
-        this._inputStack.set_visible_child_name(this._room ? this._room.id
-                                                           : 'placeholder');
-
         if (!this._room)
             return; // finished
 
@@ -236,8 +208,6 @@ const MainWindow = new Lang.Class({
         this._membersChangedId =
             this._room.connect('members-changed',
                                Lang.bind(this, this._updateUserListLabel));
-
-        this._chatStack.set_visible_child_name(this._room.id);
     },
 
     _createWidget: function(app) {
@@ -248,6 +218,9 @@ const MainWindow = new Lang.Class({
         this.window.application = app;
 
         let overlay = builder.get_object('overlay');
+        let sizeGroup = builder.get_object('bottom_size_group');
+        this._roomStack = new RoomStack.RoomStack(sizeGroup);
+        overlay.add(this._roomStack.widget);
 
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
@@ -259,11 +232,6 @@ const MainWindow = new Lang.Class({
         this._joinMenuButton = builder.get_object('join_menu_button');
         this._showUserListButton = builder.get_object('show_user_list_button');
         this._revealer = builder.get_object('room_list_revealer');
-        this._chatStack = builder.get_object('chat_stack');
-        this._inputStack = builder.get_object('input_area_stack');
-
-        let placeholderEntry = new EntryArea.EntryArea(null);
-        this._inputStack.add_named(placeholderEntry.widget, 'placeholder');
 
         let scroll = builder.get_object('room_list_scrollview');
         this._roomList = new RoomList.RoomList();

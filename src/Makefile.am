@@ -42,6 +42,7 @@ dist_js_DATA = \
 	notify.js \
 	pasteManager.js \
 	roomList.js \
+	roomStack.js \
 	tabCompletion.js \
 	userList.js \
 	utils.js \
