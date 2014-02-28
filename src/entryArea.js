@@ -1,4 +1,5 @@
 const Gdk = imports.gi.Gdk;
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 
 const ChatroomManager = imports.chatroomManager;
@@ -26,6 +27,11 @@ const EntryArea = new Lang.Class({
         this._activeRoomChangedId =
             this._roomManager.connect('active-changed',
                                       Lang.bind(this, this._updateSensitivity));
+
+        let app = Gio.Application.get_default();
+        this._selectionModeAction = app.lookup_action('selection-mode');
+        this._selectionModeAction.connect('notify::state',
+                                          Lang.bind(this, this._updateSensitivity));
 
         if (!room)
             return;
@@ -115,7 +121,10 @@ const EntryArea = new Lang.Class({
 
     _updateSensitivity: function() {
         let room = this._roomManager.getActiveRoom();
-        this.widget.sensitive = this._room && this._room == room && room.channel;
+        this.widget.sensitive = this._room &&
+                                this._room == room &&
+                                room.channel &&
+                                !this._selectionModeAction.state.get_boolean();
 
         if (!this.widget.sensitive)
             return;
