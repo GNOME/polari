@@ -401,6 +401,35 @@ properties_changed (TpProxy *proxy,
 }
 
 static void
+on_contact_info_ready (GObject      *source,
+                       GAsyncResult *res,
+                       gpointer      data)
+{
+  PolariRoom *room = data;
+  PolariRoomPrivate *priv = room->priv;
+  GList *infos, *l;
+
+  infos = tp_contact_dup_contact_info (TP_CONTACT (source));
+  for (l = infos; l; l = l->next)
+    {
+      TpContactInfoField *f = l->data;
+
+      if (strcmp (f->field_name, "fn") != 0)
+        continue;
+
+      if (f->field_value && *f->field_value)
+        {
+          g_free (priv->topic);
+          priv->topic = g_strdup (*f->field_value);
+
+          g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
+        }
+      break;
+    }
+  tp_contact_info_list_free (infos);
+}
+
+static void
 polari_room_set_account (PolariRoom *room,
                          TpAccount  *account)
 {
@@ -505,9 +534,19 @@ polari_room_set_channel (PolariRoom *room,
 
   if (channel && check_channel (room, channel))
     {
+      TpContact *target = tp_channel_get_target_contact (channel);
+
       priv->channel = g_object_ref (channel);
 
-      tp_cli_dbus_properties_call_get_all (channel, -1,
+      /* If we have a target contact, the chat is private; assume that this
+       * is mutually exclusive with subject/topic support and look for the
+       * contact's full name as topic.
+       */
+      if (target)
+        tp_contact_request_contact_info_async (target, NULL,
+                                               on_contact_info_ready, room);
+      else
+        tp_cli_dbus_properties_call_get_all (channel, -1,
                                      TP_IFACE_CHANNEL_INTERFACE_SUBJECT,
                                      (tp_properties_get_all_cb)subject_get_all,
                                      room, NULL, NULL);
