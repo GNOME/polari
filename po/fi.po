@@ -2,15 +2,15 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013-2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-10 16:37+0000\n"
-"PO-Revision-Date: 2013-12-11 20:12+0200\n"
+"POT-Creation-Date: 2014-01-15 13:13+0000\n"
+"PO-Revision-Date: 2014-01-24 22:09+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -66,7 +66,7 @@ msgstr "Suurennetun ikkunan tila"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:420
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -92,49 +92,41 @@ msgid "Quit"
 msgstr "Lopeta"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Uusi yhteys"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Peru"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "_Luo"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Palvelin"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Osoite"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Kuvaus"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Omat tiedot"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "Ni_mimerkki"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "O_ikea nimi"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "valinnainen"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Peru"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "_Luo"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -148,31 +140,32 @@ msgstr "Lisää"
 msgid "Remove"
 msgstr "Poista"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Liity kanavalle"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Liity"
+#| msgid "Edit Connection"
+msgid "_Add Connection"
+msgstr "_Lisää yhteys"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Kanava"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "_Yhteys"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Nimi"
+#: ../data/resources/join-room-dialog.ui.h:5
+#| msgid "_Name"
+msgid "Room _Name"
+msgstr "_Kanavan nimi"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Salasana"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Liity"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -191,84 +184,101 @@ msgid "Message User"
 msgstr "Viesti käyttäjälle"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Message"
-msgstr "_Viesti"
-
-#: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr "Käyttäjä"
-
-#: ../data/resources/message-user-dialog.ui.h:7
 msgid "_Recent"
 msgstr "_Viimeisimmät"
 
-#: ../src/application.js:362
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nimi"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Viesti"
+
+#: ../src/application.js:360
 msgid "Good Bye"
 msgstr "Näkemiin"
 
-#: ../src/application.js:419
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: ../src/chatView.js:470
+#: ../src/chatView.js:483
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s vaihtoi nimekseen %s"
 
-#: ../src/chatView.js:475
+#: ../src/chatView.js:488
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s katkaisi yhteyden"
 
-#: ../src/chatView.js:483
+#: ../src/chatView.js:496
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s potkaistiin käyttäjän %s toimesta"
 
-#: ../src/chatView.js:485
+#: ../src/chatView.js:498
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s potkaistiin"
 
-#: ../src/chatView.js:491
+#: ../src/chatView.js:504
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s sai bannit käyttäjän %s toimesta"
 
-#: ../src/chatView.js:493
+#: ../src/chatView.js:506
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s bannattiin"
 
-#: ../src/chatView.js:498
+#: ../src/chatView.js:511
+#, javascript-format
 msgid "%s joined"
 msgstr "%s liittyi"
 
-#: ../src/chatView.js:502
+#: ../src/chatView.js:515
+#, javascript-format
 msgid "%s left"
 msgstr "%s poistui"
 
 #. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:533
+#: ../src/chatView.js:546
 msgid "Yesterday, %H:%M"
 msgstr "Eilen, %H:%M"
 
 #. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:539
+#: ../src/chatView.js:552
 msgid "%A, %H:%M"
 msgstr "%A, %H:%M"
 
 #. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:544
+#: ../src/chatView.js:557
 msgid "%B %d, %H:%M"
 msgstr "%e. %Bta, %H:%M"
 
 #. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:548
+#: ../src/chatView.js:561
 msgid "%B %d %Y, %H:%M"
 msgstr "%e. %Bta %Y, %H:%M"
 
-#: ../src/connections.js:228
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Muokkaa yhteyttä"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Toteuta"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Tallenna"
+
+#: ../src/joinDialog.js:194
+#| msgid "Edit Connection"
+msgid "Add Connection"
+msgstr "Lisää yhteys"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
@@ -283,36 +293,42 @@ msgid "Message"
 msgstr "Viesti"
 
 #: ../src/userList.js:197
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekunti sitten"
 msgstr[1] "%d sekuntia sitten"
 
 #: ../src/userList.js:202
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minuutti sitten"
 msgstr[1] "%d minuuttia sitten"
 
 #: ../src/userList.js:207
+#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d tunti sitten"
 msgstr[1] "%d tuntia sitten"
 
 #: ../src/userList.js:212
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d päivä sitten"
 msgstr[1] "%d päivää sitten"
 
 #: ../src/userList.js:217
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d viikko sitten"
 msgstr[1] "%d viikkoa sitten"
 
 #: ../src/userList.js:221
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d kuukausi sitten"
@@ -322,9 +338,21 @@ msgstr[1] "%d kuukautta sitten"
 msgid "Last Activity:"
 msgstr "Viimeisin toiminta:"
 
-#: ../src/userList.js:426
+#: ../src/userList.js:436
 msgid "All"
 msgstr "Kaikki"
+
+#~ msgid "Server"
+#~ msgstr "Palvelin"
+
+#~ msgid "Identity"
+#~ msgstr "Omat tiedot"
+
+#~ msgid "Room"
+#~ msgstr "Kanava"
+
+#~ msgid "User"
+#~ msgstr "Käyttäjä"
 
 #~ msgid "About Polari"
 #~ msgstr "Tietoja - Polari"
