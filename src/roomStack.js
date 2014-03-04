@@ -40,7 +40,8 @@ const RoomStack = new Lang.Class({
         this._rooms[id] = view;
 
         this._inputSizeGroup.add_widget(view.inputWidget);
-        this.widget.add_named(view.widget, id);
+        if (!this.widget.visible_child)
+            this.widget.add(view.widget);
     },
 
     _roomAdded: function(roomManager, room) {
@@ -53,9 +54,26 @@ const RoomStack = new Lang.Class({
     },
 
     _activeRoomChanged: function(manager, room) {
-        this.widget.set_visible_child_name(room ? room.id : 'placeholder');
+        let previous = this.widget.visible_child;
+        let next = this._rooms[room ? room.id : 'placeholder'];
+
+        if (!next.widget.get_parent())
+            this.widget.add(next.widget);
+        this.widget.set_visible_child(next.widget);
         this.widget.transition_type = room ? Gtk.StackTransitionType.CROSSFADE
                                            : Gtk.StackTransitionType.NONE;
+
+        if (!previous)
+            return;
+
+        let id = this.widget.connect('notify::transition-running', Lang.bind(this,
+            function() {
+                if (this.widget.transition_running)
+                    return;
+                if (previous.get_parent())
+                    this.widget.remove(previous);
+                this.widget.disconnect(id);
+            }));
     },
 
     _updateSensitivity: function() {
