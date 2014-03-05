@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-28 15:24+0100\n"
-"PO-Revision-Date: 2014-02-28 15:25+0100\n"
+"POT-Creation-Date: 2014-03-05 19:34+0100\n"
+"PO-Revision-Date: 2014-03-05 19:35+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -211,65 +211,107 @@ msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2014\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2014"
 
-#: ../src/chatView.js:484
+#: ../src/chatView.js:498
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Użytkownik %s jest teraz znany jako %s"
 
-#: ../src/chatView.js:489
+#: ../src/chatView.js:503
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Użytkownik %s się rozłączył"
 
-#: ../src/chatView.js:497
+#: ../src/chatView.js:511
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Użytkownik %s został wyrzucony przez użytkownika %s"
 
-#: ../src/chatView.js:499
+#: ../src/chatView.js:513
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Użytkownik %s został wyrzucony"
 
-#: ../src/chatView.js:505
+#: ../src/chatView.js:519
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Użytkownik %s został zablokowany przez użytkownika %s"
 
-#: ../src/chatView.js:507
+#: ../src/chatView.js:521
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Użytkownik %s został zablokowany"
 
-#: ../src/chatView.js:512
+#: ../src/chatView.js:526
 #, javascript-format
 msgid "%s joined"
 msgstr "Użytkownik %s dołączył do pokoju"
 
-#: ../src/chatView.js:516
+#: ../src/chatView.js:530
 #, javascript-format
 msgid "%s left"
 msgstr "Użytkownik %s opuścił pokój"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:547
-msgid "Yesterday, %H:%M"
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+msgid "Yesterday, %H∶%M"
 msgstr "Wczoraj o %H∶%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:553
-msgid "%A, %H:%M"
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:558
-msgid "%B %d, %H:%M"
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:562
-msgid "%B %d %Y, %H:%M"
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+msgid "Yesterday, %l∶%M %p"
+msgstr "Wczoraj o %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %Y, %l∶%M %p"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -351,6 +393,6 @@ msgstr[2] "%d miesięcy temu"
 msgid "Last Activity:"
 msgstr "Ostatnia aktywność:"
 
-#: ../src/userList.js:439
+#: ../src/userList.js:443
 msgid "All"
 msgstr "Wszyscy"
