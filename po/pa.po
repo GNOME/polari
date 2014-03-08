@@ -1,0 +1,386 @@
+# Punjabi translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+#
+# A S Alam <aalam@users.sf.net>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-07 23:24+0000\n"
+"PO-Revision-Date: 2014-03-07 21:32-0600\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "ਸੰਭਾਲੀ ਚੈਨਲ ਸੂਚੀ"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr ""
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "ਵਿੰਡੋ ਆਕਾਰ"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "ਵਿੰਡੋ ਆਕਾਰ (ਚੌੜਾਈ ਅਤੇ ਉਚਾਈ)"
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "ਵਿੰਡੋ ਸਥਿਤੀ"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "ਵਿੰਡੋ ਸਥਿਤੀ (x ਅਤੇ y)"
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਕੀਤੀ"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "ਵਿੰਡੋ ਵੱਧੋ-ਵੱਧ ਆਕਾਰ ਸਥਿਤੀ"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "ਪੋਲਾਰੀ"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr ""
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "ਕੁਨੈਕਸ਼ਨ"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "ਮੇਰੀ ਪਸੰਦ"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "ਇਸ ਬਾਰੇ"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "ਬਾਹਰ"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
+msgid "New Connection"
+msgstr "ਨਵਾਂ ਕੁਨੈਕਸ਼ਨ"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "ਐਡਰੈੱਸ(_A)"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "ਵੇਰਵਾ(_D)"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "ਨਾਂ(_N)"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "ਅਸਲੀ ਨਾਂ(_R)"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "optional"
+msgstr "ਚੋਣਵਾਂ"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "ਰੱਦ ਕਰੋ(_C)"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "ਬਣਾਓ(_e)"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "ਬੰਦ ਕਰੋ(_C)"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "ਸ਼ਾਮਲ"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "ਹਟਾਓ"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+msgid "Join Chat Room"
+msgstr ""
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Add Connection"
+msgstr "ਕੁਨੈਕਸ਼ਨ ਸ਼ਾਮਿਲ(_A)"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "C_onnection"
+msgstr "ਕੁਨੈਕਸ਼ਨ(_n)"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr ""
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "_Password"
+msgstr "ਪਾਸਵਰਡ(_P)"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "ਦਾਖਲ(_J)"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr ""
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr ""
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "ਛੱਡੋ(_L)"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "ਯੂਜ਼ਰ ਨੂੰ ਸੁਨੇਹਾ"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "ਤਾਜ਼ਾ(_R)"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "ਨਾਂ(_N)"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "ਸੁਨੇਹਾ(_M)"
+
+#: ../src/application.js:408
+msgid "Good Bye"
+msgstr "ਅਲਵਿਦਾ"
+
+#: ../src/application.js:465
+msgid "translator-credits"
+msgstr ""
+"ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\n"
+"ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)"
+
+#: ../src/chatView.js:498
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s ਨੂੰ ਹੁਣ %s ਵਜੋਂ ਜਾਣਿਆ ਜਾਵੇਗਾ"
+
+#: ../src/chatView.js:503
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s ਡਿਸ-ਕੁਨੈਕਟ ਹੋ ਗਿਆ ਹੈ"
+
+#: ../src/chatView.js:511
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr ""
+
+#: ../src/chatView.js:513
+#, javascript-format
+msgid "%s has been kicked"
+msgstr ""
+
+#: ../src/chatView.js:519
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr ""
+
+#: ../src/chatView.js:521
+#, javascript-format
+msgid "%s has been banned"
+msgstr ""
+
+#: ../src/chatView.js:526
+#, javascript-format
+msgid "%s joined"
+msgstr ""
+
+#: ../src/chatView.js:530
+#, javascript-format
+msgid "%s left"
+msgstr ""
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+msgid "Yesterday, %H∶%M"
+msgstr "ਕੱਲ੍ਹ, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+msgid "%B %d, %H∶%M"
+msgstr "%d %B %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %Y, %H∶%M"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+msgid "Yesterday, %l∶%M %p"
+msgstr "ਕੱਲ੍ਹ, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B  %Y, %l∶%M %p"
+
+#: ../src/connections.js:330
+msgid "Edit Connection"
+msgstr "ਕੁਨੈਕਸ਼ਨ ਸੋਧ"
+
+#: ../src/connections.js:339
+msgid "A_pply"
+msgstr "ਲਾਗੂ ਕਰੋ(_p)"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "ਸੰਭਾਲੋ(_S)"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "ਕੁਨੈਕਸ਼ਨ ਸ਼ਾਮਿਲ"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "ਕੋਈ ਤਾਜ਼ਾ ਯੂਜ਼ਰ ਨਹੀਂ"
+
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "ਵੇਰਵਾ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "ਸੁਨੇਹਾ"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d ਸਕਿੰਟ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਸਕਿੰਟ ਪਹਿਲਾਂ"
+
+#: ../src/userList.js:202
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d ਮਿੰਟ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਮਿੰਟ ਪਹਿਲਾਂ"
+
+#: ../src/userList.js:207
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d ਘੰਟਾ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਘੰਟੇ ਪਹਿਲਾਂ"
+
+#: ../src/userList.js:212
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d ਦਿਨ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਦਿਨ ਪਹਿਲਾਂ"
+
+#: ../src/userList.js:217
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d ਹਫ਼ਤਾ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਹਫ਼ਤੇ ਪਹਿਲਾਂ"
+
+#: ../src/userList.js:221
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d ਮਹੀਨਾ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਮਹੀਨੇ ਪਹਿਲਾਂ"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "ਆਖਰੀ ਸਰਗਰਮੀ:"
+
+#: ../src/userList.js:443
+msgid "All"
+msgstr "ਸਭ"
+
