@@ -5,9 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 01:54+0100\n"
-"PO-Revision-Date: 2014-02-07 01:55+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari"
+"&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-05 16:37+0000\n"
+"PO-Revision-Date: 2014-03-11 17:24+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -16,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 msgid ""
@@ -64,13 +66,18 @@ msgstr "Estado da xanela maximizada"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de Internet Relay Chat para GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+#| msgid "Connections"
+msgid "Show connections"
+msgstr "Mostrar conexións"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -191,77 +198,123 @@ msgstr "_Nome"
 msgid "_Message"
 msgstr "_Mensaxe"
 
-#: ../src/application.js:360
+#: ../src/application.js:408
 msgid "Good Bye"
 msgstr "Adeus"
 
-#: ../src/application.js:416
+#: ../src/application.js:465
 msgid "translator-credits"
 msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013."
 
-#: ../src/chatView.js:483
-#, c-format
+#: ../src/chatView.js:498
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é coñecido como %s"
 
-#: ../src/chatView.js:488
-#, c-format
+#: ../src/chatView.js:503
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectouse"
 
-#: ../src/chatView.js:496
-#, c-format
+#: ../src/chatView.js:511
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi expulsado por %s"
 
-#: ../src/chatView.js:498
-#, c-format
+#: ../src/chatView.js:513
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi expulsado"
 
-#: ../src/chatView.js:504
-#, c-format
+#: ../src/chatView.js:519
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi baneado por %s"
 
-#: ../src/chatView.js:506
-#, c-format
+#: ../src/chatView.js:521
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi baneado"
 
-#: ../src/chatView.js:511
-#, c-format
+#: ../src/chatView.js:526
+#, javascript-format
 msgid "%s joined"
 msgstr "%s uniuse"
 
-#: ../src/chatView.js:515
-#, c-format
+#: ../src/chatView.js:530
+#, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:546
-#, no-c-format
-msgid "Yesterday, %H:%M"
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+#| msgid "Yesterday, %H:%M"
+msgid "Yesterday, %H∶%M"
 msgstr "Onte ás %H:%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30
-#: ../src/chatView.js:552
-#, no-c-format
-msgid "%A, %H:%M"
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+#| msgid "%A, %H:%M"
+msgid "%A, %H∶%M"
 msgstr "%A ás %H:%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"
-#: ../src/chatView.js:557
-#, no-c-format
-msgid "%B %d, %H:%M"
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+#| msgid "%B %d, %H:%M"
+msgid "%B %d, %H∶%M"
 msgstr "%d de %B ás %H:%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:561
-#, no-c-format
-msgid "%B %d %Y, %H:%M"
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+#| msgid "%B %d %Y, %H:%M"
+msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B do %Y ás %H:%M"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+#| msgid "Yesterday, %H:%M"
+msgid "Yesterday, %l∶%M %p"
+msgstr "Onte ás %H:%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+#| msgid "%A, %H:%M"
+msgid "%A, %l∶%M %p"
+msgstr "%A ás %H:%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+#| msgid "%B %d, %H:%M"
+msgid "%B %d, %l∶%M %p"
+msgstr "%d de %B ás %l:%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+#| msgid "%B %d %Y, %H:%M"
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d de %B do %Y ás %l:%M %p"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -292,42 +345,42 @@ msgid "Message"
 msgstr "Mensaxe"
 
 #: ../src/userList.js:197
-#, c-format
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "hai %d segundo"
 msgstr[1] "hai %d segundos"
 
 #: ../src/userList.js:202
-#, c-format
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "hai %d minuto"
 msgstr[1] "hai %d minutos"
 
 #: ../src/userList.js:207
-#, c-format
+#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "hai %d hora"
 msgstr[1] "hai %d horas"
 
 #: ../src/userList.js:212
-#, c-format
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "hai %d día"
 msgstr[1] "hai %d días"
 
 #: ../src/userList.js:217
-#, c-format
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "hai %d semana"
 msgstr[1] "hai %d semanas"
 
 #: ../src/userList.js:221
-#, c-format
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "hai %d mes"
@@ -337,7 +390,7 @@ msgstr[1] "hai %d meses"
 msgid "Last Activity:"
 msgstr "Última actividade:"
 
-#: ../src/userList.js:436
+#: ../src/userList.js:443
 msgid "All"
 msgstr "Todos"
 
