@@ -586,7 +586,7 @@ const ChatView = new Lang.Class({
             // explicit fall-through
             case '12h':
                 if(daysAgo < 1) { // today
-                    /* Translators: Time in 24h format */
+                    /* Translators: Time in 12h format */
                     format = _("%l\u2236%M %p");
                 } else if(daysAgo <2) { // yesterday
                     /* Translators: this is the word "Yesterday" followed by a
