@@ -2,15 +2,15 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013-2014.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013-2014, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-15 13:13+0000\n"
-"PO-Revision-Date: 2014-01-24 22:09+0200\n"
+"POT-Creation-Date: 2014-03-05 16:37+0000\n"
+"PO-Revision-Date: 2014-03-08 21:50+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -66,13 +66,18 @@ msgstr "Suurennetun ikkunan tila"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;irkki;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+#| msgid "Connections"
+msgid "Show connections"
+msgstr "Näytä yhteydet"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -145,7 +150,6 @@ msgid "Join Chat Room"
 msgstr "Liity kanavalle"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-#| msgid "Edit Connection"
 msgid "_Add Connection"
 msgstr "_Lisää yhteys"
 
@@ -155,7 +159,6 @@ msgid "C_onnection"
 msgstr "_Yhteys"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-#| msgid "_Name"
 msgid "Room _Name"
 msgstr "_Kanavan nimi"
 
@@ -195,72 +198,125 @@ msgstr "_Nimi"
 msgid "_Message"
 msgstr "_Viesti"
 
-#: ../src/application.js:360
+#: ../src/application.js:408
 msgid "Good Bye"
 msgstr "Näkemiin"
 
-#: ../src/application.js:416
+#: ../src/application.js:465
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: ../src/chatView.js:483
+#: ../src/chatView.js:498
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s vaihtoi nimekseen %s"
 
-#: ../src/chatView.js:488
+#: ../src/chatView.js:503
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s katkaisi yhteyden"
 
-#: ../src/chatView.js:496
+#: ../src/chatView.js:511
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s potkaistiin käyttäjän %s toimesta"
 
-#: ../src/chatView.js:498
+#: ../src/chatView.js:513
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s potkaistiin"
 
-#: ../src/chatView.js:504
+#: ../src/chatView.js:519
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s sai bannit käyttäjän %s toimesta"
 
-#: ../src/chatView.js:506
+#: ../src/chatView.js:521
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s bannattiin"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:526
 #, javascript-format
 msgid "%s joined"
 msgstr "%s liittyi"
 
-#: ../src/chatView.js:515
+#: ../src/chatView.js:530
 #, javascript-format
 msgid "%s left"
 msgstr "%s poistui"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:546
-msgid "Yesterday, %H:%M"
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+#| msgid "Yesterday, %H:%M"
+msgid "Yesterday, %H∶%M"
 msgstr "Eilen, %H:%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:552
-msgid "%A, %H:%M"
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+#| msgid "%A, %H:%M"
+msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:557
-msgid "%B %d, %H:%M"
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+#| msgid "%B %d, %H:%M"
+msgid "%B %d, %H∶%M"
 msgstr "%e. %Bta, %H:%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:561
-msgid "%B %d %Y, %H:%M"
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+#| msgid "%B %d %Y, %H:%M"
+msgid "%B %d %Y, %H∶%M"
+msgstr "%e. %Bta %Y, %H:%M"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr ""
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+#, fuzzy
+#| msgid "Yesterday, %H:%M"
+msgid "Yesterday, %l∶%M %p"
+msgstr "Eilen, %H:%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+#, fuzzy
+#| msgid "%A, %H:%M"
+msgid "%A, %l∶%M %p"
+msgstr "%A, %H:%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+#| msgid "%B %d, %H:%M"
+msgid "%B %d, %l∶%M %p"
+msgstr "%e. %Bta, %H:%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+#, fuzzy
+#| msgid "%B %d %Y, %H:%M"
+msgid "%B %d %Y, %l∶%M %p"
 msgstr "%e. %Bta %Y, %H:%M"
 
 #: ../src/connections.js:330
@@ -276,7 +332,6 @@ msgid "_Save"
 msgstr "_Tallenna"
 
 #: ../src/joinDialog.js:194
-#| msgid "Edit Connection"
 msgid "Add Connection"
 msgstr "Lisää yhteys"
 
@@ -338,7 +393,7 @@ msgstr[1] "%d kuukautta sitten"
 msgid "Last Activity:"
 msgstr "Viimeisin toiminta:"
 
-#: ../src/userList.js:436
+#: ../src/userList.js:443
 msgid "All"
 msgstr "Kaikki"
 
