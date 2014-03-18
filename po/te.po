@@ -1,0 +1,386 @@
+# Telugu translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Praveen Illa <mail2ipn@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-18 11:23+0000\n"
+"PO-Revision-Date: 2014-03-18 19:30+0530\n"
+"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
+"Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-Bookmarks: -1,69,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"గ్నోమ్ తోటి ఏకీకరించిన ఒక తేలికైన ఇంటర్నెట్ రిలే ఛాట్ (ఐఆర్‌సి) కక్షిదారు; ఇది తేలికైన మరియు అందమైన "
+"అంతరవర్తితో, మీ సంభాషణలపై దృష్టి కేంద్రీకరించేలా చేస్తూంది."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "భద్రపరిచిన వాహికల జాబితా"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "ఆరంభంలో పునరుద్ధరించాల్సిన వాహికల జాబితా"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "కిటికీ పరిమాణం"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "కిటికీ పరిమాణం (వెడల్పు మరియు ఎత్తు)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "కిటికీ స్థానము"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "కిటికీ స్థానము (x మరియు y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "కిటికీ పెద్దగించబడింది"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "కిటికీ పెద్దగించబడిన స్థితి"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "పొలారి"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "గ్నోమ్ కోసం ఒక ఇంటర్నెట్ రిలే క్లయింట్"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "ఐఆర్‌సి;అంతర్జాలం;రిలే;సంభాషణ;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "అనుసంధానాలను చూపించు"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "అనుసంధానాలు"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "అభిరుచులు"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "గురించి"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "నిష్క్రమించు"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
+msgid "New Connection"
+msgstr "కొత్త అనుసంధానం"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "చిరునామా (_A)"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "వివరణ (_D)"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "ముద్దుపేరు (_N)"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "అసలు పేరు (_R)"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "optional"
+msgstr "ఐచ్ఛికం"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "రద్దుచేయి (_C)"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "సృష్టించు (_e)"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "రద్దుచేయి (_C)"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "జతచేయి"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "తీసివేయి"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+msgid "Join Chat Room"
+msgstr "సంభాషణా గదిలో చేరండి"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Add Connection"
+msgstr "అనుసంధానాన్ని జతచేయి (_A)"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "C_onnection"
+msgstr "అనుసంధానం (_o)"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "గది పేరు (_N)"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "_Password"
+msgstr "సంకేతపదం (_P)"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "చేరండి (_J)"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "ఒక గదిలో చేరండి"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "వాడుకరికి ఒక సందేశమివ్వండి"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "వదిలివెళ్ళండి (_L)"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "వాడుకరికి సందేశమివ్వండి"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "ఇటీవలివి (_R)"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "పేరు (_N)"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "సందేశం (_M)"
+
+#: ../src/application.js:408
+msgid "Good Bye"
+msgstr "ఇక సెలవు"
+
+#: ../src/application.js:465
+msgid "translator-credits"
+msgstr "Praveen Illa <mail2ipn@gmail.com>, 2014."
+
+#: ../src/chatView.js:498
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s ఇప్పుడు %s గా మారారు"
+
+#: ../src/chatView.js:503
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s నిరనుసంధానించారు"
+
+#: ../src/chatView.js:511
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s తన్నబడ్డారు వీరిచే %s"
+
+#: ../src/chatView.js:513
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s తన్నబడ్డారు"
+
+#: ../src/chatView.js:519
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s నిరోధించబడినారు వీరిచే %s"
+
+#: ../src/chatView.js:521
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s నిరోధించబడినారు"
+
+#: ../src/chatView.js:526
+#, javascript-format
+msgid "%s joined"
+msgstr "%s చేరారు"
+
+#: ../src/chatView.js:530
+#, javascript-format
+msgid "%s left"
+msgstr "%s వదిలివెళ్ళారు"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+msgid "Yesterday, %H∶%M"
+msgstr "నిన్న, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+msgid "Yesterday, %l∶%M %p"
+msgstr "నిన్న, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: ../src/connections.js:330
+msgid "Edit Connection"
+msgstr "అనుసంధానాన్ని సవరించు"
+
+#: ../src/connections.js:339
+msgid "A_pply"
+msgstr "అనువర్తించు (_p)"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "భద్రపరుచు (_S)"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "అనుసంధానాన్ని జతచేయి"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "ఇటీవలి వాడుకరులు లేరు"
+
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "వివరాలు లోడవుతున్నాయి"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "సందేశం"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d క్షణం క్రితం"
+msgstr[1] "%d క్షణాల క్రితం"
+
+#: ../src/userList.js:202
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d నిమిషం క్రితం"
+msgstr[1] "%d నిమిషాల క్రితం"
+
+#: ../src/userList.js:207
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d hour ago"
+msgstr[1] "%d hours ago"
+
+#: ../src/userList.js:212
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d రోజు క్రితం"
+msgstr[1] "%d రోజుల క్రితం"
+
+#: ../src/userList.js:217
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d వారం క్రితం"
+msgstr[1] "%d వారాల క్రితం"
+
+#: ../src/userList.js:221
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d నెల క్రితం"
+msgstr[1] "%d నెలల క్రితం"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "చివరి క్రియాశీలత:"
+
+#: ../src/userList.js:443
+msgid "All"
+msgstr "అన్నీ"
