@@ -1,0 +1,380 @@
+# Indonesian translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Andika Triwidada <andika@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-09 05:14+0000\n"
+"PO-Revision-Date: 2014-03-18 10:05+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Suatu klien Internet Relay Chat (IRC) sederhana yang dirancang untuk "
+"terintegrasi secara mulus dengan GNOME; ini memiliki fitur antar muka yang "
+"indah dan sederhana yang memungkinkan Anda fokus ke percakapan Anda."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Daftar kanal tersimpan"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Daftar kanal yang akan dipulihkan saat awal mula"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Ukuran jendela"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Ukuran jendela (lebar dan tinggi)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Posisi jendela"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Posisi jendela (x dan y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Jendela termaksimalkan"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Keadaan termaksimalkan jendela"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Suatu Klien Internet Relay Chat untuk GNOME"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Tampilkan koneksi"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Koneksi"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Preferensi"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "Tentang"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Keluar"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
+msgid "New Connection"
+msgstr "Koneksi Baru"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "_Alamat"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "_Deskripsi"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "_Nama panggilan"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "Nama _Asli"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "optional"
+msgstr "opsional"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Batal"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "_Buat"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Tutup"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Tambah"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Buang"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+msgid "Join Chat Room"
+msgstr "Bergabung Ke Ruang Obrolan"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Add Connection"
+msgstr "T_ambah Koneksi"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "C_onnection"
+msgstr "K_oneksi"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Nama Ruang"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "_Password"
+msgstr "_Sandi"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Gabung"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Bergabung ke suatu Ruang"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Kirim Pesan ke Pengguna"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "Ke_luar"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Pesan Pengguna"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "Ba_ru-baru ini"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nama"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Pesan"
+
+#: ../src/application.js:408
+msgid "Good Bye"
+msgstr "Selamat Tinggal"
+
+#: ../src/application.js:465
+msgid "translator-credits"
+msgstr "Andika Triwidada <andika@gmail.com>, 2014"
+
+#: ../src/chatView.js:498
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s kini dikenal sebagai %s"
+
+#: ../src/chatView.js:503
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s telah terputus"
+
+#: ../src/chatView.js:511
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s telah ditendang oleh %s"
+
+#: ../src/chatView.js:513
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s telah ditendang"
+
+#: ../src/chatView.js:519
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s telah dicekal oleh %s"
+
+#: ../src/chatView.js:521
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s telah dicekal"
+
+#: ../src/chatView.js:526
+#, javascript-format
+msgid "%s joined"
+msgstr "%s bergabung"
+
+#: ../src/chatView.js:530
+#, javascript-format
+msgid "%s left"
+msgstr "%s pergi"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+msgid "Yesterday, %H∶%M"
+msgstr "Kemarin, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+msgid "%B %d, %H∶%M"
+msgstr "%d %B, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %Y, %H∶%M"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+msgid "Yesterday, %l∶%M %p"
+msgstr "Kemarin, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %Y, %l∶%M %p"
+
+#: ../src/connections.js:330
+msgid "Edit Connection"
+msgstr "Sunting Koneksi"
+
+#: ../src/connections.js:339
+msgid "A_pply"
+msgstr "Tera_pkan"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Simpan"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Tambah Koneksi"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Tak ada pengguna terkini"
+
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "Memuat rincian"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "Pesan"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d detik yang lalu"
+
+#: ../src/userList.js:202
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d menit yang lalu"
+
+#: ../src/userList.js:207
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d jam yang lalu"
+
+#: ../src/userList.js:212
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d hari yang lalu"
+
+#: ../src/userList.js:217
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d minggu yang lalu"
+
+#: ../src/userList.js:221
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d bulan yang lalu"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "Aktivitas Terakhir:"
+
+#: ../src/userList.js:443
+msgid "All"
+msgstr "Semua"
