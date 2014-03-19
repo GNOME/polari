@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-07 23:24+0000\n"
-"PO-Revision-Date: 2014-03-07 21:32-0600\n"
+"POT-Creation-Date: 2014-03-08 03:33+0000\n"
+"PO-Revision-Date: 2014-03-18 18:47-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
@@ -25,6 +25,11 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
+"ਇੱਕ ਸਧਾਰਨ ਇੰਟਰਨੈੱਟ ਰਿਲੇਅ ਚੈਟ (IRC) ਕਲਾਂਇਟ ਹੈ, ਗਨੋਮ ਨਾਲ ਡੂੰਘੇ ਰੂਪ ਵਿੱਚ ਜੁੜਿਆ "
+"ਹੈ। "
+"ਇਸ ਦੇ ਫੀਚਰਾਂ ਵਿੱਚ ਸੌਖਾ ਅਤੇ ਖੂਬਸੂਰਤ ਇੰਟਰਫੇਸ ਹੈ, ਜੋ ਕਿ ਤੁਹਾਨੂੰ ਤੁਹਾਡੀ ਗੱਲਬਾਤ "
+"ਉੱਤੇ "
+"ਕੇਂਦਰਿਤ ਰਹਿਣ ਲਈ ਸਹਾਇਕ ਹੈ।"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -32,7 +37,7 @@ msgstr "ਸੰਭਾਲੀ ਚੈਨਲ ਸੂਚੀ"
 
 #: ../data/org.gnome.polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
-msgstr ""
+msgstr "ਸ਼ੁਰੂ ਸਮੇਂ ਮੁੜ-ਸਟੋਰ ਕੀਤੇ ਜਾਣ ਵਾਲੇ ਚੈਨਲਾਂ ਦੀ ਸੂਚੀ"
 
 #: ../data/org.gnome.polari.gschema.xml.h:3
 msgid "Window size"
@@ -65,15 +70,15 @@ msgstr "ਪੋਲਾਰੀ"
 
 #: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
+msgstr "ਗਨੋਮ ਲਈ ਇੰਟਰਨੈੱਟ ਰਿਲੇਅ ਚੈਟ ਕਲਾਇਟ"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr ""
+msgstr "IRC;Internet;Relay;Chat;ਆਈਆਰਸੀ;ਇੰਟਰਨੈੱਟ;ਚੈਟ;"
 
 #: ../data/org.gnome.Polari.desktop.in.h:4
 msgid "Show connections"
-msgstr ""
+msgstr "ਕੁਨੈਕਸ਼ਨ ਵੇਖਾਓ"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -143,7 +148,7 @@ msgstr "ਹਟਾਓ"
 
 #: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
-msgstr ""
+msgstr "ਗੱਲਬਾਤ ਰੂਮ ਜੁਆਇੰਨ ਕਰੋ"
 
 #: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Add Connection"
@@ -156,7 +161,7 @@ msgstr "ਕੁਨੈਕਸ਼ਨ(_n)"
 
 #: ../data/resources/join-room-dialog.ui.h:5
 msgid "Room _Name"
-msgstr ""
+msgstr "ਰੂਮ ਨਾਂ(_N)"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
@@ -168,11 +173,11 @@ msgstr "ਦਾਖਲ(_J)"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
-msgstr ""
+msgstr "ਰੂਮ ਜੁਆਇੰਨ ਕਰੋ"
 
 #: ../data/resources/main-window.ui.h:2
 msgid "Message a User"
-msgstr ""
+msgstr "ਯੂਜ਼ਰ ਨੂੰ ਸੁਨੇਹਾ"
 
 #: ../data/resources/main-window.ui.h:4
 msgid "_Leave"
@@ -217,32 +222,32 @@ msgstr "%s ਡਿਸ-ਕੁਨੈਕਟ ਹੋ ਗਿਆ ਹੈ"
 #: ../src/chatView.js:511
 #, javascript-format
 msgid "%s has been kicked by %s"
-msgstr ""
+msgstr "%s ਨੂੰ %s ਨੇ ਠੁੱਡਾ ਮਾਰਿਆ"
 
 #: ../src/chatView.js:513
 #, javascript-format
 msgid "%s has been kicked"
-msgstr ""
+msgstr "%s ਨੂੰ ਠੁੱਡਾ ਮਾਰਿਆ ਗਿਆ"
 
 #: ../src/chatView.js:519
 #, javascript-format
 msgid "%s has been banned by %s"
-msgstr ""
+msgstr "%s ਉੱਤੇ %s ਨੇ ਪਾਬੰਦੀ ਲਗਾਈ"
 
 #: ../src/chatView.js:521
 #, javascript-format
 msgid "%s has been banned"
-msgstr ""
+msgstr "%s ਉੱਤੇ ਪਾਬੰਦੀ ਲਗਾਈ"
 
 #: ../src/chatView.js:526
 #, javascript-format
 msgid "%s joined"
-msgstr ""
+msgstr "%s ਦਾਖਲ ਹੋਇਆ/ਹੋਈ"
 
 #: ../src/chatView.js:530
 #, javascript-format
 msgid "%s left"
-msgstr ""
+msgstr "%s ਨੇ ਛੱਡਿਆ"
 
 #. Translators: Time in 24h format */
 #: ../src/chatView.js:560
