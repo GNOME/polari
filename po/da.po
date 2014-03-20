@@ -1,15 +1,16 @@
 # Danish translation for polari.
-# Copyright (C) 2013 polari og nedenstående oversættere.
+# Copyright (C) 2013, 2014 polari og nedenstående oversættere.
 # This file is distributed under the same license as the polari package.
-# Joe Hansen <joedalton2@yahoo.dk>, 2013.
 #
+# Joe Hansen <joedalton2@yahoo.dk>, 2013.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 19:28+0100\n"
-"PO-Revision-Date: 2013-10-15 12:12+0100\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2014-03-20 21:10+0100\n"
+"PO-Revision-Date: 2014-03-16 00:33+0100\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -23,6 +24,9 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
+"En simpel klient til Internet Relay Chat (IRC), som er designet til at "
+"integrere gnidningsfrit med GNOME; den tilbyder en simpel og smuk "
+"grænseflade, som lader dig fokusere på dine samtaler."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -61,13 +65,17 @@ msgstr "Vindue maksimeret-tilstand"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:410
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En Internet Relay Chat-klient for GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;Snak;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Vis forbindelser"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -79,57 +87,49 @@ msgid "Preferences"
 msgstr "Præferencer"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
-msgstr "Om Polari"
+msgid "About"
+msgstr "Om"
 
 #: ../data/resources/app-menu.ui.h:4
 msgid "Quit"
 msgstr "Afslut"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Ny forbindelse"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Afbryd"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "_Opret"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "Server"
-msgstr "Server"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Adresse"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Beskrivelse"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Identitet"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_Brugernavn"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "_Navn"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "valgfri"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Afbryd"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "_Opret"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -143,31 +143,30 @@ msgstr "Tilføj"
 msgid "Remove"
 msgstr "Fjern"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Indtræd i snakkerum (chat)"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Indtræd"
+msgid "_Add Connection"
+msgstr "_Tilføj forbindelse"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Rum"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "_Forbindelse"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-#: ../data/resources/message-user-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Navn"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "Rum_navn"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Adgangskode"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Indtræd"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -182,86 +181,174 @@ msgid "_Leave"
 msgstr "_Forlad"
 
 #: ../data/resources/message-user-dialog.ui.h:1
-#, fuzzy
 msgid "Message User"
 msgstr "Send besked til en bruger"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-#, fuzzy
-msgid "_Message"
-msgstr "Besked"
+msgid "_Recent"
+msgstr "_Seneste"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Navn"
 
 #: ../data/resources/message-user-dialog.ui.h:6
-msgid "User"
-msgstr ""
+msgid "_Message"
+msgstr "_Besked"
 
-#: ../data/resources/message-user-dialog.ui.h:7
-msgid "_Recent"
-msgstr ""
-
-#: ../src/application.js:362
+#: ../src/application.js:408
 msgid "Good Bye"
 msgstr "Farvel"
 
-#: ../src/application.js:409
+#: ../src/application.js:465
 msgid "translator-credits"
 msgstr ""
 "Joe Hansen, 2013\n"
+"Ask Hjorth Larsen, 2014\n"
 "\n"
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
 
-#: ../src/chatView.js:375
+#: ../src/chatView.js:498
 #, c-format
 msgid "%s is now known as %s"
 msgstr "%s er nu kendt som %s"
 
-#: ../src/chatView.js:380
+#: ../src/chatView.js:503
 #, c-format
 msgid "%s has disconnected"
 msgstr "%s har koblet sig fra"
 
-#: ../src/chatView.js:388
+#: ../src/chatView.js:511
 #, c-format
 msgid "%s has been kicked by %s"
 msgstr "%s er blevet smidt ud af %s"
 
-#: ../src/chatView.js:390
+#: ../src/chatView.js:513
 #, c-format
 msgid "%s has been kicked"
 msgstr "%s er blevet smidt ud"
 
-#: ../src/chatView.js:396
+#: ../src/chatView.js:519
 #, c-format
 msgid "%s has been banned by %s"
 msgstr "%s har fået karantæne af %s"
 
-#: ../src/chatView.js:398
+#: ../src/chatView.js:521
 #, c-format
 msgid "%s has been banned"
 msgstr "%s har fået karantæne"
 
-#: ../src/chatView.js:403
+#: ../src/chatView.js:526
 #, c-format
 msgid "%s joined"
 msgstr "%s er indtrådt"
 
-#: ../src/chatView.js:407
+#: ../src/chatView.js:530
 #, c-format
 msgid "%s left"
 msgstr "%s har forladt"
 
-#: ../src/connections.js:228
+#. today
+#. Translators: Time in 24h format
+#: ../src/chatView.js:560
+msgid "%H\\u2236%M"
+msgstr ""
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:565
+#, fuzzy, no-c-format
+msgid "Yesterday, %H\\u2236%M"
+msgstr "I går, %H∶%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: ../src/chatView.js:570
+#, fuzzy, no-c-format
+msgid "%A, %H\\u2236%M"
+msgstr "%A, %H∶%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: ../src/chatView.js:576
+#, fuzzy, no-c-format
+msgid "%B %d, %H\\u2236%M"
+msgstr "%d. %B, %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:582
+#, fuzzy, no-c-format
+msgid "%B %d %Y, %H\\u2236%M"
+msgstr "%d. %B %Y, %H∶%M"
+
+#. today
+#. Translators: Time in 12h format
+#: ../src/chatView.js:590
+#, fuzzy
+msgid "%l\\u2236%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: ../src/chatView.js:595
+#, fuzzy, no-c-format
+msgid "Yesterday, %l\\u2236%M %p"
+msgstr "I går, %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: ../src/chatView.js:600
+#, fuzzy, no-c-format
+msgid "%A, %l\\u2236%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: ../src/chatView.js:606
+#, fuzzy, no-c-format
+msgid "%B %d, %l\\u2236%M %p"
+msgstr "%d. %B, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: ../src/chatView.js:612
+#, fuzzy, no-c-format
+msgid "%B %d %Y, %l\\u2236%M %p"
+msgstr "%d. %B %Y, %l∶%M %p"
+
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Rediger forbindelse"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Anvend"
 
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Gem"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Tilføj forbindelse"
+
 #: ../src/messageDialog.js:77
 msgid "No recent users"
-msgstr ""
+msgstr "Ingen brugere for nylig"
 
 #: ../src/userList.js:172
 msgid "Loading details"
@@ -317,6 +404,21 @@ msgstr[1] "%d måneder siden"
 msgid "Last Activity:"
 msgstr "Sidste aktivitet:"
 
-#: ../src/userList.js:426
+#: ../src/userList.js:443
 msgid "All"
 msgstr "Alle"
+
+#~ msgid "%H∶%M"
+#~ msgstr "%H∶%M"
+
+#~ msgid "About Polari"
+#~ msgstr "Om Polari"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "Identity"
+#~ msgstr "Identitet"
+
+#~ msgid "Room"
+#~ msgstr "Rum"
