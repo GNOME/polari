@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2014-03-14 23:19+0000\n"
-"PO-Revision-Date: 2014-03-15 12:16+0300\n"
+"PO-Revision-Date: 2014-03-20 22:08+0300\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -26,6 +26,8 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
+"Простой IRC-клиент для GNOME; имеет простой и лаконичный интерфейс, который "
+"не отвлекает от бесед."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -66,15 +68,15 @@ msgstr "Polari"
 
 #: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
+msgstr "IRC-клиент для GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr ""
+msgstr "IRC;Интернет;Чат;"
 
 #: ../data/org.gnome.Polari.desktop.in.h:4
 msgid "Show connections"
-msgstr ""
+msgstr "Показать подключения"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -117,7 +119,7 @@ msgstr "_Настоящее имя"
 #: ../data/resources/connection-details-dialog.ui.h:6
 #: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
-msgstr ""
+msgstr "если есть"
 
 #: ../data/resources/connection-details-dialog.ui.h:7
 #: ../data/resources/join-room-dialog.ui.h:7
@@ -128,7 +130,7 @@ msgstr "_Отменить"
 #: ../data/resources/connection-details-dialog.ui.h:8
 #: ../src/connections.js:340
 msgid "Cr_eate"
-msgstr ""
+msgstr "Со_здать"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -165,23 +167,23 @@ msgstr "_Пароль"
 
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "_Join"
-msgstr ""
+msgstr "_Войти"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
-msgstr ""
+msgstr "Войти в комнату"
 
 #: ../data/resources/main-window.ui.h:2
 msgid "Message a User"
-msgstr ""
+msgstr "Отправить сообщение"
 
 #: ../data/resources/main-window.ui.h:4
 msgid "_Leave"
-msgstr ""
+msgstr "_Выйти"
 
 #: ../data/resources/message-user-dialog.ui.h:1
 msgid "Message User"
-msgstr ""
+msgstr "Отправить сообщение"
 
 #: ../data/resources/message-user-dialog.ui.h:3
 msgid "_Recent"
@@ -318,9 +320,8 @@ msgid "No recent users"
 msgstr "Нет последних пользователей"
 
 #: ../src/userList.js:172
-#, fuzzy
 msgid "Loading details"
-msgstr "Загрузка подробностей"
+msgstr "Загрузка информации"
 
 #: ../src/userList.js:180
 msgid "Message"
