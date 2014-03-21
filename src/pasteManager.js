@@ -32,6 +32,9 @@ const PasteManager = new Lang.Class({
     },
 
     addWidget: function(widget) {
+        // auto-paste needs some design; disable for now
+        return;
+
         if (this._widgets.indexOf(widget) != -1)
             return;
 

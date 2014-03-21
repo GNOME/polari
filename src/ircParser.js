@@ -267,7 +267,8 @@ const IrcParser = new Lang.Class({
     },
 
     _sendOrPasteText: function(text) {
-        if (text.split('\n').length > MAX_LINES) {
+        // auto-paste needs some design; disable for now
+        if (false && text.split('\n').length > MAX_LINES) {
             let app = Gio.Application.get_default();
             app.pasteManager.pasteText(text);
         } else {
