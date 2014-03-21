@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-15 13:13+0000\n"
-"PO-Revision-Date: 2014-01-19 19:26+0300\n"
+"POT-Creation-Date: 2014-03-20 23:26+0000\n"
+"PO-Revision-Date: 2014-03-21 09:39+0300\n"
 "Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
 "Language-Team: team@lists.gnome.gr\n"
 "Language: el\n"
@@ -66,13 +66,17 @@ msgstr "Κατάσταση μεγιστοποίησης παραθύρου"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ένας πελάτης συνομιλίας μεταγωγής διαδικτύου για το GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;διαδίκτυο;μεταγωγή;συνομιλία;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Παρουσίαση Συνδέσεων"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -121,7 +125,7 @@ msgstr "προαιρετικό"
 #: ../data/resources/join-room-dialog.ui.h:7
 #: ../data/resources/message-user-dialog.ui.h:5
 msgid "_Cancel"
-msgstr "_Άκυρο"
+msgstr "Ά_κυρο"
 
 #: ../data/resources/connection-details-dialog.ui.h:8
 #: ../src/connections.js:340
@@ -193,76 +197,118 @@ msgstr "Ό_νομα"
 msgid "_Message"
 msgstr "_Μήνυμα"
 
-#: ../src/application.js:360
+#: ../src/application.js:408
 msgid "Good Bye"
 msgstr "Αποχαιρετισμός"
 
-#: ../src/application.js:416
+#: ../src/application.js:465
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα του GNOME\n"
 " Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
 "Για περισσότερα δείτε: http://gnome.gr"
 
-#: ../src/chatView.js:483
+#: ../src/chatView.js:498
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Ο %s τώρα είναι γνωστός ως %s"
 
-#: ../src/chatView.js:488
+#: ../src/chatView.js:503
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Ο %s αποσυνδέθηκε"
 
-#: ../src/chatView.js:496
+#: ../src/chatView.js:511
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Ο %s έχει εκδιωχθεί από τον %s"
 
-#: ../src/chatView.js:498
+#: ../src/chatView.js:513
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Ο %s έχει εκδιωχθεί"
 
-#: ../src/chatView.js:504
+#: ../src/chatView.js:519
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Ο %s έχει αποκλειστεί από τον %s"
 
-#: ../src/chatView.js:506
+#: ../src/chatView.js:521
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Ο %s έχει αποκλειστεί"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:526
 #, javascript-format
 msgid "%s joined"
 msgstr "Ο %s συμμετέχει"
 
-#: ../src/chatView.js:515
+#: ../src/chatView.js:530
 #, javascript-format
 msgid "%s left"
 msgstr "Ο %s απέμεινε"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:546
-msgid "Yesterday, %H:%M"
-msgstr "Χθες, στις %H:%M"
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:560
+msgid "%H∶%M"
+msgstr "%H∶%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:552
-msgid "%A, %H:%M"
-msgstr "%A, %H:%M"
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:565
+msgid "Yesterday, %H∶%M"
+msgstr "Χθες, %H∶%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:557
-msgid "%B %d, %H:%M"
-msgstr "%d %B, %H:%M"
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:570
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:561
-msgid "%B %d %Y, %H:%M"
-msgstr "%d %B %Y, %H:%M"
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:576
+msgid "%B %d, %H∶%M"
+msgstr "%d %B, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:582
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+msgid "Yesterday, %l∶%M %p"
+msgstr "Χθες, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %Y, %l∶%M %p"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -338,6 +384,6 @@ msgstr[1] "%d μήνες πριν"
 msgid "Last Activity:"
 msgstr "Τελευταία δραστηριότητα:"
 
-#: ../src/userList.js:436
+#: ../src/userList.js:443
 msgid "All"
 msgstr "Όλα"
