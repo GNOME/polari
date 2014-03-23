@@ -7,9 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-23 23:47+0100\n"
-"PO-Revision-Date: 2014-03-23 23:47+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-20 20:10+0000\n"
+"PO-Revision-Date: 2014-03-23 18:13+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -210,124 +211,106 @@ msgstr ""
 "Mere info: http://www.dansk-gruppen.dk"
 
 #: ../src/chatView.js:498
-#, c-format
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s er nu kendt som %s"
 
 #: ../src/chatView.js:503
-#, c-format
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har koblet sig fra"
 
 #: ../src/chatView.js:511
-#, c-format
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s er blevet smidt ud af %s"
 
 #: ../src/chatView.js:513
-#, c-format
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s er blevet smidt ud"
 
 #: ../src/chatView.js:519
-#, c-format
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s har fået karantæne af %s"
 
 #: ../src/chatView.js:521
-#, c-format
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s har fået karantæne"
 
 #: ../src/chatView.js:526
-#, c-format
+#, javascript-format
 msgid "%s joined"
 msgstr "%s er indtrådt"
 
 #: ../src/chatView.js:530
-#, c-format
+#, javascript-format
 msgid "%s left"
 msgstr "%s har forladt"
 
-#. today
-#. Translators: Time in 24h format
+#. Translators: Time in 24h format */
 #: ../src/chatView.js:560
-msgid "%H\\u2236%M"
-msgstr "%H\\u2236%M"
+msgid "%H∶%M"
+msgstr "%H∶%M"
 
-#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30"
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
 #: ../src/chatView.js:565
-#, no-c-format
-msgid "Yesterday, %H\\u2236%M"
-msgstr "I går, %H\\u2236%M"
+msgid "Yesterday, %H∶%M"
+msgstr "I går, %H∶%M"
 
-#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30"
+#. string in 24h format. i.e. "Monday, 14:30" */
 #: ../src/chatView.js:570
-#, no-c-format
-msgid "%A, %H\\u2236%M"
-msgstr "%A, %H\\u2236%M"
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
 
-#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30"
+#. i.e. "May 25, 14:30" */
 #: ../src/chatView.js:576
-#, no-c-format
-msgid "%B %d, %H\\u2236%M"
-msgstr "%d. %B, %H\\u2236%M"
+msgid "%B %d, %H∶%M"
+msgstr "%d. %B, %H∶%M"
 
-#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30"
+#. i.e. "May 25 2012, 14:30" */
 #: ../src/chatView.js:582
-#, no-c-format
-msgid "%B %d %Y, %H\\u2236%M"
-msgstr "%d. %B %Y, %H\\u2236%M"
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d. %B %Y, %H∶%M"
 
-#. today
-#. Translators: Time in 12h format
+#. Translators: Time in 12h format */
 #: ../src/chatView.js:590
-msgid "%l\\u2236%M %p"
-msgstr "%l\\u2236%M %p"
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
 
-#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
 #: ../src/chatView.js:595
-#, no-c-format
-msgid "Yesterday, %l\\u2236%M %p"
-msgstr "I går, %l\\u2236%M %p"
+msgid "Yesterday, %l∶%M %p"
+msgstr "I går, %l∶%M %p"
 
-#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm"
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
 #: ../src/chatView.js:600
-#, no-c-format
-msgid "%A, %l\\u2236%M %p"
-msgstr "%A, %l\\u2236%M %p"
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
 
-#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm"
+#. i.e. "May 25, 2:30 pm" */
 #: ../src/chatView.js:606
-#, no-c-format
-msgid "%B %d, %l\\u2236%M %p"
-msgstr "%d. %B, %l\\u2236%M %p"
+msgid "%B %d, %l∶%M %p"
+msgstr "%d. %B, %l∶%M %p"
 
-#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"
+#. i.e. "May 25 2012, 2:30 pm"*/
 #: ../src/chatView.js:612
-#, no-c-format
-msgid "%B %d %Y, %l\\u2236%M %p"
-msgstr "%d. %B %Y, %l\\u2236%M %p"
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d. %B %Y, %l∶%M %p"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -358,42 +341,42 @@ msgid "Message"
 msgstr "Besked"
 
 #: ../src/userList.js:197
-#, c-format
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekund siden"
 msgstr[1] "%d sekunder siden"
 
 #: ../src/userList.js:202
-#, c-format
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minut siden"
 msgstr[1] "%d minutter siden"
 
 #: ../src/userList.js:207
-#, c-format
+#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d time siden"
 msgstr[1] "%d timer siden"
 
 #: ../src/userList.js:212
-#, c-format
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag siden"
 msgstr[1] "%d dage siden"
 
 #: ../src/userList.js:217
-#, c-format
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d uge siden"
 msgstr[1] "%d uger siden"
 
 #: ../src/userList.js:221
-#, c-format
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d måned siden"
@@ -406,9 +389,6 @@ msgstr "Sidste aktivitet:"
 #: ../src/userList.js:443
 msgid "All"
 msgstr "Alle"
-
-#~ msgid "%H∶%M"
-#~ msgstr "%H∶%M"
 
 #~ msgid "About Polari"
 #~ msgstr "Om Polari"
