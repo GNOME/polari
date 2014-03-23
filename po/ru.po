@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-14 23:19+0000\n"
-"PO-Revision-Date: 2014-03-20 22:08+0300\n"
-"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"POT-Creation-Date: 2014-03-20 18:09+0000\n"
+"PO-Revision-Date: 2014-03-23 14:26+0400\n"
+"Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.4\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 msgid ""
@@ -187,7 +187,7 @@ msgstr "Отправить сообщение"
 
 #: ../data/resources/message-user-dialog.ui.h:3
 msgid "_Recent"
-msgstr ""
+msgstr "_Последние"
 
 #: ../data/resources/message-user-dialog.ui.h:4
 msgid "_Name"
@@ -206,34 +206,42 @@ msgid "translator-credits"
 msgstr "Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014"
 
 #: ../src/chatView.js:498
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s теперь известен как %s"
 
 #: ../src/chatView.js:503
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s отсоединился"
 
 #: ../src/chatView.js:511
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s был выкинут %s"
 
 #: ../src/chatView.js:513
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s был выкинут"
 
 #: ../src/chatView.js:519
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s был заблокирован %s"
 
 #: ../src/chatView.js:521
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s был заблокирован"
 
 #: ../src/chatView.js:526
+#, javascript-format
 msgid "%s joined"
 msgstr "%s присоединился к чату"
 
 #: ../src/chatView.js:530
+#, javascript-format
 msgid "%s left"
 msgstr "%s покинул чат"
 
@@ -259,45 +267,45 @@ msgstr "%A, %H∶%M"
 #. i.e. "May 25, 14:30" */
 #: ../src/chatView.js:576
 msgid "%B %d, %H∶%M"
-msgstr ""
+msgstr "%d %b, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
 #: ../src/chatView.js:582
 msgid "%B %d %Y, %H∶%M"
-msgstr ""
+msgstr "%d %b %Y, %H∶%M"
 
-#. Translators: Time in 24h format */
+#. Translators: Time in 12h format */
 #: ../src/chatView.js:590
 msgid "%l∶%M %p"
-msgstr ""
+msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
 #: ../src/chatView.js:595
 msgid "Yesterday, %l∶%M %p"
-msgstr ""
+msgstr "Вчера, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
 #: ../src/chatView.js:600
 msgid "%A, %l∶%M %p"
-msgstr ""
+msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
 #: ../src/chatView.js:606
 msgid "%B %d, %l∶%M %p"
-msgstr ""
+msgstr "%d %b, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
 #: ../src/chatView.js:612
 msgid "%B %d %Y, %l∶%M %p"
-msgstr ""
+msgstr "%d %b %Y, %H∶%M"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -328,6 +336,7 @@ msgid "Message"
 msgstr "Сообщение"
 
 #: ../src/userList.js:197
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d секунду назад"
@@ -335,6 +344,7 @@ msgstr[1] "%d секунды назад"
 msgstr[2] "%d секунд назад"
 
 #: ../src/userList.js:202
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d минуту назад"
@@ -342,6 +352,7 @@ msgstr[1] "%d минуты назад"
 msgstr[2] "%d минут назад"
 
 #: ../src/userList.js:207
+#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d час назад"
@@ -349,6 +360,7 @@ msgstr[1] "%d часа назад"
 msgstr[2] "%d часов назад"
 
 #: ../src/userList.js:212
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d день назад"
@@ -356,6 +368,7 @@ msgstr[1] "%d дня назад"
 msgstr[2] "%d дней назад"
 
 #: ../src/userList.js:217
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d неделю назад"
@@ -363,6 +376,7 @@ msgstr[1] "%d недели назад"
 msgstr[2] "%d недель назад"
 
 #: ../src/userList.js:221
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d месяц назад"
