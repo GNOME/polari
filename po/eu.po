@@ -1,4 +1,4 @@
-# French translation for polari.
+# Basque translation for polari.
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
