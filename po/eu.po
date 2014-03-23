@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-23 16:55+0100\n"
-"PO-Revision-Date: 2014-03-23 16:56+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-23 15:58+0000\n"
+"PO-Revision-Date: 2014-03-23 17:21+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
@@ -205,124 +206,114 @@ msgid "translator-credits"
 msgstr "Iñaki Larrañaga Murgoitio <dooteo@zundan.com>"
 
 #: ../src/chatView.js:498
-#, c-format
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s orain honela ezagutzen da: %s"
 
 #: ../src/chatView.js:503
-#, c-format
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s deskonektatu egin da"
 
 #: ../src/chatView.js:511
-#, c-format
+#, javascript-format
+#| msgid "%s has been kicked by %s"
 msgid "%s has been kicked by %s"
-msgstr "%2$s(e)k %1$s kanporatu du"
+msgstr "%s kanporatuta %s(r)engatik"
 
 #: ../src/chatView.js:513
-#, c-format
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kanporatua izan da"
 
 #: ../src/chatView.js:519
-#, c-format
+#, javascript-format
+#| msgid "%s has been banned by %s"
 msgid "%s has been banned by %s"
-msgstr "%2$s(e)k %1$s debekatu du"
+msgstr "%s debekatuta %s(r)engatik"
 
 #: ../src/chatView.js:521
-#, c-format
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s debekatua izan da"
 
 #: ../src/chatView.js:526
-#, c-format
+#, javascript-format
 msgid "%s joined"
 msgstr "%s elkartu da"
 
 #: ../src/chatView.js:530
-#, c-format
+#, javascript-format
 msgid "%s left"
 msgstr "%s(e)k utzi egin du"
 
-#. today
-#. Translators: Time in 24h format
+#. Translators: Time in 24h format */
 #: ../src/chatView.js:560
-msgid "%H\\u2236%M"
-msgstr "%H\\u2236%M"
+msgid "%H∶%M"
+msgstr "%H∶%M"
 
-#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30"
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
 #: ../src/chatView.js:565
-#, no-c-format
-msgid "Yesterday, %H\\u2236%M"
-msgstr "Atzo, %H\\u2236%M"
+#| msgid "Yesterday, %H\\u2236%M"
+msgid "Yesterday, %H∶%M"
+msgstr "Atzo, %H∶%M"
 
-#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30"
+#. string in 24h format. i.e. "Monday, 14:30" */
 #: ../src/chatView.js:570
-#, no-c-format
-msgid "%A, %H\\u2236%M"
-msgstr "%A, %H\\u2236%M"
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
 
-#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30"
+#. i.e. "May 25, 14:30" */
 #: ../src/chatView.js:576
-#, no-c-format
-msgid "%B %d, %H\\u2236%M"
-msgstr "%B %d, %H\\u2236%M"
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
 
-#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30"
+#. i.e. "May 25 2012, 14:30" */
 #: ../src/chatView.js:582
-#, no-c-format
-msgid "%B %d %Y, %H\\u2236%M"
-msgstr "%Y %B %d, %H\\u2236%M"
+#| msgid "%B %d, %H∶%M"
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
 
-#. today
-#. Translators: Time in 12h format
+#. Translators: Time in 12h format */
 #: ../src/chatView.js:590
-msgid "%l\\u2236%M %p"
-msgstr "%l\\u2236%M %p"
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
 
-#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
 #: ../src/chatView.js:595
-#, no-c-format
-msgid "Yesterday, %l\\u2236%M %p"
-msgstr "Atzo, %l\\u2236%M %p"
+#| msgid "Yesterday, %l\\u2236%M %p"
+msgid "Yesterday, %l∶%M %p"
+msgstr "Atzo, %l∶%M %p"
 
-#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm"
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
 #: ../src/chatView.js:600
-#, no-c-format
-msgid "%A, %l\\u2236%M %p"
-msgstr "%A, %l\\u2236%M %p"
+#| msgid "%l∶%M %p"
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
 
-#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm"
+#. i.e. "May 25, 2:30 pm" */
 #: ../src/chatView.js:606
-#, no-c-format
-msgid "%B %d, %l\\u2236%M %p"
-msgstr "%B %d, %l\\u2236%M %p"
+#| msgid "%B %d, %H∶%M"
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
 
-#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"
+#. i.e. "May 25 2012, 2:30 pm"*/
 #: ../src/chatView.js:612
-#, no-c-format
-msgid "%B %d %Y, %l\\u2236%M %p"
-msgstr "%Y %B %d, %l\\u2236%M %p"
+#| msgid "%B %d %Y, %l\\u2236%M %p"
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -353,42 +344,42 @@ msgid "Message"
 msgstr "Mezua"
 
 #: ../src/userList.js:197
-#, c-format
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Duela segundo %d"
 msgstr[1] "Duela %d segundo"
 
 #: ../src/userList.js:202
-#, c-format
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Duela minutu %d"
 msgstr[1] "Duela %d minutu"
 
 #: ../src/userList.js:207
-#, c-format
+#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "Duela ordu %d"
 msgstr[1] "Duela %d ordu"
 
 #: ../src/userList.js:212
-#, c-format
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Duela egun %d"
 msgstr[1] "Duela %d egun"
 
 #: ../src/userList.js:217
-#, c-format
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Duela aste %d"
 msgstr[1] "Duela %d aste"
 
 #: ../src/userList.js:221
-#, c-format
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Duela hilabete %d"
@@ -402,17 +393,23 @@ msgstr "Azken jarduera:"
 msgid "All"
 msgstr "Denak"
 
-#~ msgid "%H∶%M"
-#~ msgstr "%H∶%M"
+#~ msgid "%H\\u2236%M"
+#~ msgstr "%H\\u2236%M"
 
-#~| msgid "%A, %H\\u2236%M"
-#~ msgid "%A, %H∶%M"
-#~ msgstr "%A, %H∶%M"
+#~ msgid "%A, %H\\u2236%M"
+#~ msgstr "%A, %H\\u2236%M"
 
-#~| msgid "%B %d, %H\\u2236%M"
-#~ msgid "%B %d, %H∶%M"
-#~ msgstr "%B %d, %H∶%M"
+#~ msgid "%B %d, %H\\u2236%M"
+#~ msgstr "%B %d, %H\\u2236%M"
 
-#~| msgid "%l\\u2236%M %p"
-#~ msgid "%l∶%M %p"
-#~ msgstr "%l∶%M %p"
+#~ msgid "%B %d %Y, %H\\u2236%M"
+#~ msgstr "%Y %B %d, %H\\u2236%M"
+
+#~ msgid "%l\\u2236%M %p"
+#~ msgstr "%l\\u2236%M %p"
+
+#~ msgid "%A, %l\\u2236%M %p"
+#~ msgstr "%A, %l\\u2236%M %p"
+
+#~ msgid "%B %d, %l\\u2236%M %p"
+#~ msgstr "%B %d, %l\\u2236%M %p"
