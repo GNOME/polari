@@ -1,0 +1,406 @@
+# French translation for polari.
+# Copyright (C) 2013 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-23 16:31+0100\n"
+"PO-Revision-Date: 2014-03-23 16:48+0100\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
+"Language-Team: Basque <librezale@librezale.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"IRCrako (Interneteko berriketa-zerbitzua) bezero xume bat GNOMErekin "
+"bateratuta "
+"egoteko diseinatuta. Interfaze xume eta dotorea du zu berriketetan zentra "
+"zaitezen."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Gordetako kanalen zerrenda"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Kanalen zerrenda abioan leheneratzeko"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Leihoaren tamaina"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Leihoaren tamaina (zabalera eta altuera)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Leihoaren posizioa"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Leihoaren posizioa (x eta y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Leihoa maximizatuta"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Leiho maximizatuaren egoera"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOMEren IRCaren (Interneteko berriketa-zerbitzua) bezero bat"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;internet;zerbitzua;berriketa;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Erakutsi konexioak"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Konexioak"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Hobespenak"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "Honi buruz"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Irten"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
+msgid "New Connection"
+msgstr "Konexio berria"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "_Helbidea"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "_Azalpena"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "_Goitizena"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "_Benetako izena"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "optional"
+msgstr "aukerakoa"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Utzi"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "_Sortu"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Itxi"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Gehitu"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Kendu"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+msgid "Join Chat Room"
+msgstr "Elkartu berriketa gelara"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Add Connection"
+msgstr "_Gehitu konexioa"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "C_onnection"
+msgstr "_Konexioa"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "Gelaren _izena"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "_Password"
+msgstr "_Pasahitza"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Elkartu"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Elkartu gelara"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Bidali mezua erabiltzaile bati"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "I_rten"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Bidali mezua erabiltzaile bati"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "_Azken aldikoak"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Izena"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Mezua"
+
+#: ../src/application.js:408
+msgid "Good Bye"
+msgstr "Agur"
+
+#: ../src/application.js:465
+msgid "translator-credits"
+msgstr "Iñaki Larrañaga Murgoitio <dooteo@zundan.com>"
+
+#: ../src/chatView.js:498
+#, c-format
+msgid "%s is now known as %s"
+msgstr "%s orain honela ezagutzen da: %s"
+
+#: ../src/chatView.js:503
+#, c-format
+msgid "%s has disconnected"
+msgstr "%s deskonektatu egin da"
+
+#: ../src/chatView.js:511
+#, c-format
+msgid "%s has been kicked by %s"
+msgstr "%2$s(e)k %1$s kanporatu du"
+
+#: ../src/chatView.js:513
+#, c-format
+msgid "%s has been kicked"
+msgstr "%s kanporatua izan da"
+
+#: ../src/chatView.js:519
+#, c-format
+msgid "%s has been banned by %s"
+msgstr "%2$s(e)k %1$s debekatu du"
+
+#: ../src/chatView.js:521
+#, c-format
+msgid "%s has been banned"
+msgstr "%s debekatua izan da"
+
+#: ../src/chatView.js:526
+#, c-format
+msgid "%s joined"
+msgstr "%s elkartu da"
+
+#: ../src/chatView.js:530
+#, c-format
+msgid "%s left"
+msgstr "%s(e)k utzi egin du"
+
+#. today
+#. Translators: Time in 24h format
+#: ../src/chatView.js:560
+msgid "%H\\u2236%M"
+msgstr "%H\\u2236%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:565
+#, no-c-format
+msgid "Yesterday, %H\\u2236%M"
+msgstr "Atzo, %H\\u2236%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: ../src/chatView.js:570
+#, no-c-format
+msgid "%A, %H\\u2236%M"
+msgstr "%A, %H\\u2236%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: ../src/chatView.js:576
+#, no-c-format
+msgid "%B %d, %H\\u2236%M"
+msgstr "%B %d, %H\\u2236%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:582
+#, no-c-format
+msgid "%B %d %Y, %H\\u2236%M"
+msgstr "%y %B %d, %H\\u2236%M"
+
+#. today
+#. Translators: Time in 12h format
+#: ../src/chatView.js:590
+msgid "%l\\u2236%M %p"
+msgstr "%l\\u2236%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: ../src/chatView.js:595
+#, no-c-format
+msgid "Yesterday, %l\\u2236%M %p"
+msgstr "Atzo, %l\\u2236%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: ../src/chatView.js:600
+#, no-c-format
+msgid "%A, %l\\u2236%M %p"
+msgstr "%A, %l\\u2236%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: ../src/chatView.js:606
+#, no-c-format
+msgid "%B %d, %l\\u2236%M %p"
+msgstr "%B %d, %l\\u2236%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: ../src/chatView.js:612
+#, no-c-format
+msgid "%B %d %Y, %l\\u2236%M %p"
+msgstr "%y %B %d, %l\\u2236%M %p"
+
+#: ../src/connections.js:330
+msgid "Edit Connection"
+msgstr "Editatu konexioa"
+
+#: ../src/connections.js:339
+msgid "A_pply"
+msgstr "_Aplikatu"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Gorde"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Gehitu konexioa"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Ez dago azken aldiko erabiltzailerik"
+
+#: ../src/userList.js:172
+msgid "Loading details"
+msgstr "Xehetasunak kargatzen"
+
+#: ../src/userList.js:180
+msgid "Message"
+msgstr "Mezua"
+
+#: ../src/userList.js:197
+#, c-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "Duela segundo %d"
+msgstr[1] "Duela %d segundo"
+
+#: ../src/userList.js:202
+#, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "Duela minutu %d"
+msgstr[1] "Duela %d minutu"
+
+#: ../src/userList.js:207
+#, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "Duela ordu %d"
+msgstr[1] "Duela %d ordu"
+
+#: ../src/userList.js:212
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Duela egun %d"
+msgstr[1] "Duela %d egun"
+
+#: ../src/userList.js:217
+#, c-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Duela aste %d"
+msgstr[1] "Duela %d aste"
+
+#: ../src/userList.js:221
+#, c-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Duela hilabete %d"
+msgstr[1] "Duela %d hilabete"
+
+#: ../src/userList.js:245
+msgid "Last Activity:"
+msgstr "Azken jarduera:"
+
+#: ../src/userList.js:443
+msgid "All"
+msgstr "Denak"
+
