@@ -1,4 +1,5 @@
 const Gdk = imports.gi.Gdk;
+const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 
 const ChatView = imports.chatView;
@@ -42,6 +43,12 @@ const EntryArea = new Lang.Class({
 
         this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
         this.widget.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
+        this.widget.connect('realize', Lang.bind(this,
+            function() {
+                let toplevel = this.widget.get_toplevel();
+                toplevel.connect('key-press-event',
+                                       Lang.bind(this, this._onKeyPressEvent));
+            }));
 
         this._nickEntry = new Gtk.Entry();
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
@@ -78,20 +85,6 @@ const EntryArea = new Lang.Class({
                 this._ircParser.process(this._entry.text);
                 this._entry.text = '';
             }));
-        this._entry.connect('notify::is-focus', Lang.bind(this,
-            function() {
-                if (!this.widget.sensitive)
-                    return;
-                // HACK: force focus to the entry unless it was
-                //       moved by keynav or moved to another entry
-                if (this.widget.get_toplevel().get_focus() instanceof Gtk.Entry)
-                    return;
-                let device = Gtk.get_current_event_device();
-                if (!device || device.get_source() == Gdk.InputSource.KEYBOARD)
-                    return;
-                this._entry.grab_focus();
-            }));
-
 
         this.widget.show_all();
     },
@@ -106,6 +99,31 @@ const EntryArea = new Lang.Class({
             nicks = members.map(function(member) { return member.alias; });
         }
         this._completion.setCompletions(nicks);
+    },
+
+    _onKeyPressEvent: function(w, event) {
+        if (!this._entry.get_mapped())
+            return false;
+
+        if (this._entry.has_focus)
+            return false;
+
+        if (this._entry.get_toplevel().get_focus() instanceof Gtk.Entry)
+            return false;
+
+        let [, keyval] = event.get_keyval();
+        if (Gdk.keyval_to_unicode(keyval) == 0)
+            return false;
+
+        let [, state] = event.get_state();
+        if (state != 0)
+            return false;
+
+        this._entry.editable = false;
+        this._entry.grab_focus();
+        this._entry.editable = true;
+        this._entry.event(event);
+        return true;
     },
 
     _onSensitiveChanged: function() {
