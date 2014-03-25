@@ -1,3 +1,39 @@
+3.12.0 - "The Really Hard Red Bull Test"
+========================================
+* Stop ellipsizing nick [Carlos; #711853]
+* Do not open multiple dialogs if already opened [Sebastien; #715076]
+* Standardize Help/About/Quit app menu items [Michael; #720151]
+* Keep chat log around when offline or disconnected [Florian; #710271]
+* Fix headerbar item positions after GTK+ changes [Yosef; #721736]
+* Allow to set up new connections from join dialog [Florian; #711833]
+* Don't highlight messages in private chats [Giovanni; #725065]
+* Add 256x256 application icon [Giovanni; #723429]
+* Show number of channel members in headerbar [Florian; #710705]
+* Add keyboard shortcuts for directly switching to a room [Florian; #709983]
+* Show real name as subtitle for private chats [Florian; #710819]
+* Respect time format settings for timestamps [Carlos; #712626]
+* Move user list into a popover [Florian; #727039]
+* Misc. bug fixes and cleanups [Giovanni, Ryan, Florian, Carlos; #723432,
+  #722532, #712217, #721703, #724902, #722728, #725064, #715025, #719526,
+  #720706, #725403, #725688, #721889]
+
+Contributors:
+  Giovanni Campagna, Michael Catanzaro, Sebastien Lafargue, Ryan Lortie,
+  Florian Müllner, Yosef Or Boczko, Frédéric Péters, Carlos Soriano
+
+Translations:
+  Rafael Ferreira [pt_BR], Daniel Mustieles [es], Marek Černocký [cs],
+  Piotr Drąg [pl], Yosef Or Boczko [he], Adorilson Bezerra [pt_BR],
+  Milo Casagrande [it], Fran Diéguez [gl], Enrico Nicoletto [pt_BR],
+  Jiri Grönroos [fi], Dimitris Spingos [el], Daniel Korostil [uk],
+  Ville-Pekka Vainio [fi], Changwoo Ryu [ko], A S Alam [pa],
+  Sphinx Jiang [zh_CN], Rūdolfs Mazurs [lv], Aurimas Černius [lt],
+  Cheng-Chia Tseng [zh_TW], Gabor Kelemen [hu], Yuri Myasoedov [ru],
+  Alexandre Franke [fr], Pau Iranzo [ca], Andika Triwidada [id],
+  Praveen Illa [te], Duarte Loreto [pt], Gábor Kelemen [hu],
+  Ask H. Larsen [da], maria thukididu [el], Inaki Larranaga Murgoitio [eu],
+  Мирослав Николић [sr, sr@latin], Kjartan Maraas [nb], Kenneth Nielsen [da]
+
 3.11.2 - "The Oscar-Wilde-Sort"
 ===============================
 * Insert timestamps after some time of inactivity [Florian; #712248]
