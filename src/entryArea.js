@@ -45,9 +45,9 @@ const EntryArea = new Lang.Class({
         this.widget.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
         this.widget.connect('realize', Lang.bind(this,
             function() {
-                let toplevel = this.widget.get_toplevel();
-                toplevel.connect('key-press-event',
-                                       Lang.bind(this, this._onKeyPressEvent));
+                this._toplevel = this.widget.get_toplevel();
+                this._keyPressId = this._toplevel.connect('key-press-event',
+                                                          Lang.bind(this, this._onKeyPressEvent));
             }));
 
         this._nickEntry = new Gtk.Entry();
@@ -201,5 +201,8 @@ const EntryArea = new Lang.Class({
         if (this._channelChangedId)
             this._room.disconnect(this._channelChangedId);
         this._channelChangedId = 0;
+        if (this._keyPressId)
+            this._toplevel.disconnect(this._keyPressId);
+        this._keyPressId = 0;
     }
 });
