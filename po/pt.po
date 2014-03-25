@@ -71,7 +71,7 @@ msgstr "Um Cliente de Internet Relay Chat (IRC) para o GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Relay;Chat;Diálogo"
+msgstr "IRC;Internet;Relay;Chat;Diálogo;"
 
 #: ../data/org.gnome.Polari.desktop.in.h:4
 msgid "Show connections"
