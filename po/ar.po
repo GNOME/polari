@@ -1,0 +1,412 @@
+# Arabic translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Ibrahim Saed <ibraheem5000@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-28 11:52+0000\n"
+"PO-Revision-Date: 2014-03-30 21:07+0100\n"
+"Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"عميل بسيط للمحادثة المنقولة بالإنترنت (IRC) والمُصمم للتكامل بسلاسة مع جنوم.\n"
+"يتميز التطبيق بالواجهة البسيطة والجذابة والتي تتيح لك التركيز على محادثاتك."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "قائمة القنوات المحفوظة"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "قائمة بالقنوات التي ترغب باستعادتها عند بدء البرنامج"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "حجم النافذة"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "حجم النافذة (العرض والارتفاع)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "موضع النافذة"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "موضع النافذة (س و ص)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr ""
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "عميل المحادثة المنقولة بالإنترنت (IRC) لجنوم"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "عميل محادثة منقولة;آي آر سي;اي ار سي;محادثة;منقولة;إنترنت;انترنت;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "اعرض الاتصالات"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "الاتصالات"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "التفضيلات"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "عن"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "أنهِ"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
+msgid "New Connection"
+msgstr "اتصال جديد"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "ال_عنوان"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "ال_وصف"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "ال_كُنية:"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "الاسم ال_حقيقي"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "optional"
+msgstr "اختياري"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "أ_لغِ"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "أن_شئ"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "أ_غلق"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "أضف"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "أزِل"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+msgid "Join Chat Room"
+msgstr "انضم لغرفة محادثة"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Add Connection"
+msgstr "أض_ف اتصالا"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "C_onnection"
+msgstr "الات_صال"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "ا_سم الغرفة"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "_Password"
+msgstr "كلمة ال_سر"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "ان_ضم"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "انضم لغرفة"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "راسل مستخدما"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "_غادر"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr ""
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr ""
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "الا_سم"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "ال_رسالة"
+
+#: ../src/application.js:402
+msgid "Good Bye"
+msgstr "إلى اللقاء"
+
+#: ../src/application.js:459
+msgid "translator-credits"
+msgstr ""
+"فريق عربآيز للترجمة http://www.arabeyes.org :\n"
+"إبراهيم سعيد\t<ibraheem5000@gmail.com>"
+
+#: ../src/chatView.js:501
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr ""
+
+#: ../src/chatView.js:506
+#, javascript-format
+msgid "%s has disconnected"
+msgstr ""
+
+#: ../src/chatView.js:514
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr ""
+
+#: ../src/chatView.js:516
+#, javascript-format
+msgid "%s has been kicked"
+msgstr ""
+
+#: ../src/chatView.js:522
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr ""
+
+#: ../src/chatView.js:524
+#, javascript-format
+msgid "%s has been banned"
+msgstr ""
+
+#: ../src/chatView.js:529
+#, javascript-format
+msgid "%s joined"
+msgstr "انضم %s"
+
+#: ../src/chatView.js:533
+#, javascript-format
+msgid "%s left"
+msgstr ""
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:563
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:568
+msgid "Yesterday, %H∶%M"
+msgstr "أمس، %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:573
+msgid "%A, %H∶%M"
+msgstr "%A، %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:579
+msgid "%B %d, %H∶%M"
+msgstr "%d %B، %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:585
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %Y، %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:593
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:598
+msgid "Yesterday, %l∶%M %p"
+msgstr "أمس، %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:603
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:609
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B، %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:615
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %Y، %l∶%M %p"
+
+#: ../src/connections.js:330
+msgid "Edit Connection"
+msgstr "تعديل الاتصال"
+
+#: ../src/connections.js:339
+msgid "A_pply"
+msgstr "_طبّق"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "ا_حفظ"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "أضف اتصالا"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr ""
+
+#: ../src/userList.js:182
+msgid "Loading details"
+msgstr ""
+
+#: ../src/userList.js:190
+msgid "Message"
+msgstr "رسالة"
+
+#: ../src/userList.js:207
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "منذ %d ثوان"
+msgstr[1] "منذ ثانية واحدة (%d)"
+msgstr[2] "منذ ثانيتين (%d)"
+msgstr[3] "منذ %d ثوان"
+msgstr[4] "منذ %d ثانية"
+msgstr[5] "منذ %d ثانية"
+
+#: ../src/userList.js:212
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "منذ %d دقيقة"
+msgstr[1] "منذ دقيقة واحدة (%d)"
+msgstr[2] "منذ دقيقتين (%d)"
+msgstr[3] "منذ %d دقائق"
+msgstr[4] "منذ %d دقيقة"
+msgstr[5] "منذ %d دقيقة"
+
+#: ../src/userList.js:217
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "منذ %d ساعة"
+msgstr[1] "منذ ساعة واحدة (%d)"
+msgstr[2] "منذ ساعتين (%d)"
+msgstr[3] "منذ %d ساعات"
+msgstr[4] "منذ %d ساعة"
+msgstr[5] "منذ %d ساعة"
+
+#: ../src/userList.js:222
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "منذ %d أيام"
+msgstr[1] "منذ يوم واحد (%d)"
+msgstr[2] "منذ يومين (%d)"
+msgstr[3] "منذ %d أيام"
+msgstr[4] "منذ %d يومًا"
+msgstr[5] "منذ %d يوم"
+
+#: ../src/userList.js:227
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "منذ %d أسبوعًا"
+msgstr[1] "منذ أسبوع واحد (%d)"
+msgstr[2] "منذ أسبوعين (%d)"
+msgstr[3] "منذ %d أسابيع"
+msgstr[4] "منذ %d أسبوعًا"
+msgstr[5] "منذ %d أسبوع"
+
+#: ../src/userList.js:231
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "منذ %d شهرًا"
+msgstr[1] "منذ شهر واحد (%d)"
+msgstr[2] "منذ شهرين (%d)"
+msgstr[3] "منذ %d شهور"
+msgstr[4] "منذ %d شهرًا"
+msgstr[5] "منذ %d شهر"
+
+#: ../src/userList.js:255
+msgid "Last Activity:"
+msgstr "النشاط الأخير:"
+
+#: ../src/userList.js:454
+msgid "All"
+msgstr "الكل"
