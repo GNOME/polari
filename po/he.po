@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-05 18:47+0200\n"
-"PO-Revision-Date: 2014-03-05 18:53+0200\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
+"POT-Creation-Date: 2014-03-28 11:22+0300\n"
+"PO-Revision-Date: 2014-03-28 11:23+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -20,13 +20,8 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-msgid ""
-"A simple Internet Relay Chat (IRC) client that is designed to integrate "
-"seamlessly with GNOME; it features a simple and beautiful interface which "
-"allows you to focus on your conversations."
-msgstr ""
-"לקוח העברת שיחה באינטרנט (IRC) פשוט המשולב בצורה חלקה עם GNOME; הוא כולל "
-"ממשק פשוט ויפה המאפשר לך להתמקד בשיחות שלך."
+msgid "A simple Internet Relay Chat (IRC) client that is designed to integrate seamlessly with GNOME; it features a simple and beautiful interface which allows you to focus on your conversations."
+msgstr "לקוח העברת שיחה באינטרנט (IRC) פשוט המשולב בצורה חלקה עם GNOME; הוא כולל ממשק פשוט ויפה המאפשר לך להתמקד בשיחות שלך."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -65,7 +60,8 @@ msgstr "Window maximized state"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+#: ../data/org.gnome.Polari.desktop.in.h:2
+#: ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
@@ -143,7 +139,8 @@ msgstr "הוספה"
 msgid "Remove"
 msgstr "הסרה"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+#: ../data/resources/join-room-dialog.ui.h:1
+#: ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "הצטרפות לחדר צ׳אט"
 
@@ -196,117 +193,135 @@ msgstr "_שם"
 msgid "_Message"
 msgstr "_שליחת הודעה"
 
-#: ../src/application.js:408
+#: ../src/application.js:402
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:465
+#: ../src/application.js:459
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:499
-#, javascript-format
+#: ../src/chatView.js:501
+#, c-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:504
-#, javascript-format
+#: ../src/chatView.js:506
+#, c-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:512
-#, javascript-format
+#: ../src/chatView.js:514
+#, c-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:514
-#, javascript-format
+#: ../src/chatView.js:516
+#, c-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:520
-#, javascript-format
+#: ../src/chatView.js:522
+#, c-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:522
-#, javascript-format
+#: ../src/chatView.js:524
+#, c-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:527
-#, javascript-format
+#: ../src/chatView.js:529
+#, c-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:531
-#, javascript-format
+#: ../src/chatView.js:533
+#, c-format
 msgid "%s left"
 msgstr "‏%s עזב"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:561
-msgid "%H∶%M"
-msgstr "%H∶%M"
+#. today
+#. Translators: Time in 24h format
+#: ../src/chatView.js:563
+msgid "%H\\u2236%M"
+msgstr "%H\\u2236%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:566
-msgid "Yesterday, %H∶%M"
-msgstr "אתמול, %H:%M"
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:568
+#, no-c-format
+msgid "Yesterday, %H\\u2236%M"
+msgstr "אתמול ב־%H\\u2236%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:571
-msgid "%A, %H∶%M"
-msgstr "%A, %H:%M"
+#. string in 24h format. i.e. "Monday, 14:30"
+#: ../src/chatView.js:573
+#, no-c-format
+msgid "%A, %H\\u2236%M"
+msgstr "%A, %H\\u2236%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:577
-msgid "%B %d, %H∶%M"
-msgstr "%d ב%B, %H:%M"
+#. i.e. "May 25, 14:30"
+#: ../src/chatView.js:579
+#, no-c-format
+msgid "%B %d, %H\\u2236%M"
+msgstr "%d ב%B, %H\\u2236%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:583
-msgid "%B %d %Y, %H∶%M"
-msgstr "%d ב%B %Y, %H:%M"
+#. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:585
+#, no-c-format
+msgid "%B %d %Y, %H\\u2236%M"
+msgstr "%d ב%B %Y, %H\\u2236%M"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:591
-msgid "%l∶%M %p"
-msgstr "%l∶%M %p"
+#. today
+#. Translators: Time in 12h format
+#: ../src/chatView.js:593
+msgid "%l\\u2236%M %p"
+msgstr "%l\\u2236%M %p"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:596
-msgid "Yesterday, %l∶%M %p"
-msgstr "אתמול, %l:%M %p"
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: ../src/chatView.js:598
+#, no-c-format
+msgid "Yesterday, %l\\u2236%M %p"
+msgstr "אתמול ב־%l\\u2236%M %p"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:601
-msgid "%A, %l∶%M %p"
-msgstr "%A, %l:%M %p"
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: ../src/chatView.js:603
+#, no-c-format
+msgid "%A, %l\\u2236%M %p"
+msgstr "%A, %l\\u2236%M %p"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:607
-msgid "%B %d, %l∶%M %p"
-msgstr "%d ב%B, %l:%M %p"
+#. i.e. "May 25, 2:30 pm"
+#: ../src/chatView.js:609
+#, no-c-format
+msgid "%B %d, %l\\u2236%M %p"
+msgstr "%d ב%B, %l\\u2236%M %p"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:613
-msgid "%B %d %Y, %l∶%M %p"
-msgstr "%d ב%B %Y, %l:%M %p"
+#. i.e. "May 25 2012, 2:30 pm"
+#: ../src/chatView.js:615
+#, no-c-format
+msgid "%B %d %Y, %l\\u2236%M %p"
+msgstr "%d ב%B %Y, %l\\u2236%M %p"
 
 #: ../src/connections.js:330
 msgid "Edit Connection"
@@ -328,15 +343,15 @@ msgstr "הוספת חיבור"
 msgid "No recent users"
 msgstr "אין משתמשים אחרונים"
 
-#: ../src/userList.js:172
+#: ../src/userList.js:182
 msgid "Loading details"
 msgstr "פרטים בטעינה"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:190
 msgid "Message"
 msgstr "שליחת הודעה למשתמש"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:207
 #, c-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -344,7 +359,7 @@ msgstr[0] "לפני שנייה"
 msgstr[1] "לפני %d שניות"
 msgstr[2] "לפני שתי שניות"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:212
 #, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -352,7 +367,7 @@ msgstr[0] "לפני דקה"
 msgstr[1] "לפני %d דקות"
 msgstr[2] "לפני שתי דקות"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:217
 #, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -360,7 +375,7 @@ msgstr[0] "לפני שעה"
 msgstr[1] "לפני %d שעות"
 msgstr[2] "לפני שעתיים"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:222
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -368,7 +383,7 @@ msgstr[0] "לפני יום"
 msgstr[1] "לפני %d ימים"
 msgstr[2] "לפני יומיים"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:227
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -376,7 +391,7 @@ msgstr[0] "לפני שבוע"
 msgstr[1] "לפני %d שבועות"
 msgstr[2] "לפני שבועיים"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:231
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -384,13 +399,16 @@ msgstr[0] "לפני חודש"
 msgstr[1] "לפני %d חודשים"
 msgstr[2] "לפני חודשיים"
 
-#: ../src/userList.js:245
+#: ../src/userList.js:255
 msgid "Last Activity:"
 msgstr "פעילות אחרונה:"
 
-#: ../src/userList.js:443
+#: ../src/userList.js:454
 msgid "All"
 msgstr "הכול"
+
+#~ msgid "%H∶%M"
+#~ msgstr "%H∶%M"
 
 #~ msgid "Server"
 #~ msgstr "שרת"
