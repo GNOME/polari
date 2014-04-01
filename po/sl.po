@@ -2,15 +2,15 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2013.
+# Matej Urbančič <mateju@svn.gnome.org>, 2013-2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-14 20:12+0000\n"
-"PO-Revision-Date: 2013-10-14 23:26+0100\n"
+"POT-Creation-Date: 2014-04-01 10:46+0000\n"
+"PO-Revision-Date: 2014-04-01 22:39+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -21,6 +21,15 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Poedit 1.5.4\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Enostaven odjemalec IRC, zasnovan za okolje GNOME. Program ima enostaven in "
+"pregleden vmesnikč"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -59,13 +68,17 @@ msgstr "Razpeto stanje okna"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:406
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Odjemalec za IRC za GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Klepet;Sobe;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Pokaži povezave"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -77,7 +90,7 @@ msgid "Preferences"
 msgstr "Možnosti"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
+msgid "About"
 msgstr "O programu"
 
 #: ../data/resources/app-menu.ui.h:4
@@ -85,47 +98,41 @@ msgid "Quit"
 msgstr "Končaj"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Nova povezava"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Prekliči"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "Ustva_ri"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "Server"
-msgstr "Strežnik"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "_Naslov"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Opis"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Istovetnost"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_Vzdevek"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "_Pravo ime"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "dodatno"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Prekliči"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "Ustva_ri"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -139,29 +146,30 @@ msgstr "Dodaj"
 msgid "Remove"
 msgstr "Odstrani"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Pridruži se klepetalnici"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Pridruži se"
+msgid "_Add Connection"
+msgstr "_Dodaj povezavo"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Klepetalnica"
-
-#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "P_ovezava"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Ime"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "Ime _sobe"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Geslo"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Pridruži se"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -175,63 +183,162 @@ msgstr "Pošlji sporočilo uporabnku"
 msgid "_Leave"
 msgstr "Z_apusti"
 
-#: ../src/application.js:355
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Uporabnk sporočila"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "_Nedavno"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Ime"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Sporočilo"
+
+#: ../src/application.js:402
 msgid "Good Bye"
 msgstr "Na svidenje"
 
-#: ../src/application.js:405
+#: ../src/application.js:459
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
-#: ../src/chatView.js:322
+#: ../src/chatView.js:501
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je preimenovan v %s"
 
-#: ../src/chatView.js:327
+#: ../src/chatView.js:506
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s je prekinil povezavo"
 
-#: ../src/chatView.js:335
+#: ../src/chatView.js:514
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s je bil odstranjen s strani %s"
 
-#: ../src/chatView.js:337
+#: ../src/chatView.js:516
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s je bil odstranjen"
 
-#: ../src/chatView.js:343
+#: ../src/chatView.js:522
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s je dobil prepoved s strani %s"
 
-#: ../src/chatView.js:345
+#: ../src/chatView.js:524
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s je dobil prepoved"
 
-#: ../src/chatView.js:350
+#: ../src/chatView.js:529
+#, javascript-format
 msgid "%s joined"
 msgstr "%s je vstopil v klepetalnico."
 
-#: ../src/chatView.js:354
+#: ../src/chatView.js:533
+#, javascript-format
 msgid "%s left"
 msgstr "%s preostalo"
 
-#: ../src/connections.js:228
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:563
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:568
+msgid "Yesterday, %H∶%M"
+msgstr "Včeraj, %H:%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:573
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:579
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:585
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:593
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:598
+msgid "Yesterday, %l∶%M %p"
+msgstr "Včeraj, %l:%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:603
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:609
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:615
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Uredi povezavo"
 
-#: ../src/connections.js:229
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Uveljavi"
 
-#: ../src/userList.js:172
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Shrani"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Dodaj povezavo"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Ni nedavnih uporabnikov"
+
+#: ../src/userList.js:182
 msgid "Loading details"
 msgstr "Nalaganje podrobnosti"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:190
 msgid "Message"
 msgstr "Sporočilo"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:207
+#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Pred %d sekundami"
@@ -239,7 +346,8 @@ msgstr[1] "Pred %d sekundo"
 msgstr[2] "Pred %d sekundama"
 msgstr[3] "Pred %d sekundami"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:212
+#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Pred %d minutami"
@@ -247,7 +355,8 @@ msgstr[1] "Pred %d minuto"
 msgstr[2] "Pred %d minutama"
 msgstr[3] "Pred %d minutami"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:217
+#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "Pred %d urami"
@@ -255,7 +364,8 @@ msgstr[1] "Pred %d uro"
 msgstr[2] "Pred %d urama"
 msgstr[3] "Pred %d urami"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:222
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Pred %d dnevi"
@@ -263,7 +373,8 @@ msgstr[1] "Pred %d dnevom"
 msgstr[2] "Pred %d dnevoma"
 msgstr[3] "Pred %d dnevi"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:227
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Pred %d tedni"
@@ -271,7 +382,8 @@ msgstr[1] "Pred %d tednom"
 msgstr[2] "Pred %d tednoma"
 msgstr[3] "Pred %d tedni"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:231
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Pred %d meseci"
@@ -279,10 +391,22 @@ msgstr[1] "Pred %d mesecem"
 msgstr[2] "Pred %d mesecema"
 msgstr[3] "Pred %d meseci"
 
-#: ../src/userList.js:244
+#: ../src/userList.js:255
 msgid "Last Activity:"
 msgstr "Zadnja dejavnost:"
 
-#: ../src/userList.js:417
+#: ../src/userList.js:454
 msgid "All"
 msgstr "Vse"
+
+#~ msgid "About Polari"
+#~ msgstr "O programu"
+
+#~ msgid "Server"
+#~ msgstr "Strežnik"
+
+#~ msgid "Identity"
+#~ msgstr "Istovetnost"
+
+#~ msgid "Room"
+#~ msgstr "Klepetalnica"
