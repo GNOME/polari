@@ -354,16 +354,16 @@ const ChatView = new Lang.Class({
             this.widget.vadjustment.value != 0 ||
             dir != Gdk.ScrollDirection.UP ||
             this._logWalker.is_end())
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         this._fetchingBacklog = true;
         Mainloop.timeout_add(500, Lang.bind(this,
             function() {
                 this._logWalker.get_events_async(NUM_LOG_EVENTS,
                                                  Lang.bind(this, this._onLogEventsReady));
-                return false;
+                return GLib.SOURCE_REMOVE;
             }));
-        return false;
+        return Gdk.EVENT_PROPAGATE;
     },
 
     _onValueChanged: function() {
@@ -374,7 +374,7 @@ const ChatView = new Lang.Class({
             function() {
                 this._checkMessages();
                 this._valueChangedId = 0;
-                return false;
+                return GLib.SOURCE_REMOVE;
             }));
     },
 
@@ -389,7 +389,7 @@ const ChatView = new Lang.Class({
     _handleLinkClicks: function(view, event) {
         let [, button] = event.get_button();
         if (button != Gdk.BUTTON_PRIMARY)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         let isPress = event.get_event_type() == Gdk.EventType.BUTTON_PRESS;
 
@@ -407,17 +407,17 @@ const ChatView = new Lang.Class({
             if (url) {
                 if (isPress) {
                     this._clickedUrl = url;
-                    return true;
+                    return Gdk.EVENT_STOP;
                 } else if (this._clickedUrl == url) {
                     if (url.indexOf(':') == -1)
                         url = 'http://' + url;
                     Gio.AppInfo.launch_default_for_uri(url, null);
-                    return true;
+                    return Gdk.EVENT_STOP;
                 }
                 break;
             }
         }
-        return false;
+        return Gdk.EVENT_PROPAGATE;
     },
 
     _handleLinkHovers: function(view, event) {
@@ -436,7 +436,7 @@ const ChatView = new Lang.Class({
             let cursor = this._hoveringLink ? this._linkCursor : null;
             this._view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor);
         }
-        return false;
+        return Gdk.EVENT_PROPAGATE;
     },
 
     _checkMessages: function() {

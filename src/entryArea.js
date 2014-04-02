@@ -62,18 +62,18 @@ const EntryArea = new Lang.Class({
                this._entry.grab_focus();
             }));
         this._nickEntry.connect('focus-out-event', Lang.bind(this,
-             function() {
-               this._nickEntry.text = '';
-               return false;
+            function() {
+                this._nickEntry.text = '';
+                return Gdk.EVENT_PROPAGATE;
             }));
         this._nickEntry.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
                 if (keyval == Gdk.KEY_Escape) {
                     this._entry.grab_focus();
-                    return true;
+                    return Gdk.EVENT_STOP;
                 }
-                return false;
+                return Gdk.EVENT_PROPAGATE;
             }));
 
         this._entry = new Gtk.Entry({ hexpand: true,
@@ -103,27 +103,27 @@ const EntryArea = new Lang.Class({
 
     _onKeyPressEvent: function(w, event) {
         if (!this._entry.get_mapped())
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         if (this._entry.has_focus)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         if (this._entry.get_toplevel().get_focus() instanceof Gtk.Entry)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         let [, keyval] = event.get_keyval();
         if (Gdk.keyval_to_unicode(keyval) == 0)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         let [, state] = event.get_state();
         if (state != 0)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         this._entry.editable = false;
         this._entry.grab_focus();
         this._entry.editable = true;
         this._entry.event(event);
-        return true;
+        return Gdk.EVENT_STOP;
     },
 
     _onSensitiveChanged: function() {
@@ -133,7 +133,7 @@ const EntryArea = new Lang.Class({
         Mainloop.idle_add(Lang.bind(this,
             function() {
                 this._entry.grab_focus();
-                return false;
+                return GLib.SOURCE_REMOVE;
             }));
     },
 
@@ -177,7 +177,7 @@ const EntryArea = new Lang.Class({
                 Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME,
                     Lang.bind(this, function() {
                         this._updateNick();
-                        return false;
+                        return GLib.SOURCE_REMOVE;
                     }));
             }));
     },

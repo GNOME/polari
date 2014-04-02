@@ -107,10 +107,10 @@ const PasteManager = new Lang.Class({
 
     _onDragDrop: function(widget, context, x, y, time) {
         if (!Polari.drag_dest_supports_target(widget, context, null))
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         Polari.drag_dest_request_data(widget, context, time);
-        return true;
+        return Gdk.EVENT_STOP;
     },
 
     _onDragLeave: function(widget, context, time) {
@@ -122,7 +122,7 @@ const PasteManager = new Lang.Class({
 
     _onDragMotion: function(widget, context, x, y, time) {
         if (!Polari.drag_dest_supports_target(widget, context, null))
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         let info = Polari.drag_dest_find_target(widget, context);
         switch (info) {
@@ -145,7 +145,7 @@ const PasteManager = new Lang.Class({
                 }
                 break;
             default:
-                return false;
+                return Gdk.EVENT_PROPAGATE;
         }
 
         if (!this._dragHighlight) {
@@ -153,7 +153,7 @@ const PasteManager = new Lang.Class({
             widget.drag_highlight();
         }
 
-        return true;
+        return Gdk.EVENT_STOP;
     },
 
 

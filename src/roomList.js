@@ -86,11 +86,11 @@ const RoomRow = new Lang.Class({
     _onButtonRelease: function(w, event) {
         let [, button] = event.get_button();
         if (button != Gdk.BUTTON_SECONDARY)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
 
         this.selection_button.active = !this.selection_button.active;
 
-        return true;
+        return Gdk.EVENT_STOP;
     },
 
     _createWidget: function(gicon) {

@@ -60,9 +60,9 @@ const UserListPopover = new Lang.Class({
                 let [, keyval] = event.get_keyval();
                 if (keyval == Gdk.KEY_Escape) {
                     this._entry.text = '';
-                    return true;
+                    return Gdk.EVENT_STOP;
                 }
-                return false;
+                return Gdk.EVENT_PROPAGATE;
             }));
         this._revealer.add(this._entry);
 

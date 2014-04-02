@@ -81,23 +81,23 @@ const TabCompletion = new Lang.Class({
         if (this._key.length == 0) {
             if (keyval == Gdk.KEY_Tab) {
                 this._start();
-                return true;
+                return Gdk.EVENT_STOP;
             }
-            return false;
+            return Gdk.EVENT_PROPAGATE;
         }
 
         switch (keyval) {
             case Gdk.KEY_Tab:
             case Gdk.KEY_Down:
                 this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
-                return true;
+                return Gdk.EVENT_STOP;
             case Gdk.KEY_ISO_Left_Tab:
             case Gdk.KEY_Up:
                 this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
-                return true;
+                return Gdk.EVENT_STOP;
             case Gdk.KEY_Escape:
                 this._cancel();
-                return true;
+                return Gdk.EVENT_STOP;
         }
 
         if (Gdk.keyval_to_unicode(keyval) != 0) {
@@ -110,7 +110,7 @@ const TabCompletion = new Lang.Class({
                     keyval == Gdk.KEY_KP_Enter ||
                     keyval == Gdk.KEY_ISO_Enter);
         }
-        return false;
+        return Gdk.EVENT_PROPAGATE;
     },
 
     _getRowCompletion: function(row) {
@@ -178,12 +178,12 @@ const TabCompletion = new Lang.Class({
 
     _onKeynavFailed: function(w, dir) {
         if (this._inHandler)
-            return false;
+            return Gdk.EVENT_PROPAGATE;
         let count = dir == Gtk.DirectionType.DOWN ? -1 : 1;
         this._inHandler = true;
         this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, count);
         this._inHandler = false;
-        return true;
+        return Gdk.EVENT_STOP;
     },
 
     _moveSelection: function(movement, count) {

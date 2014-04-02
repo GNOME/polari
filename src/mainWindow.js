@@ -147,7 +147,7 @@ const MainWindow = new Lang.Class({
             Lang.bind(this, function() {
                 this._saveGeometry();
                 this._configureId = 0;
-                return false;
+                return GLib.SOURCE_REMOVE;
             }));
     },
 
