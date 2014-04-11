@@ -115,6 +115,7 @@ const ChatView = new Lang.Class({
         this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
         this._channelSignals = [];
+        this._channel = null;
 
         let roomSignals = [
             { name: 'notify::channel',
@@ -136,6 +137,7 @@ const ChatView = new Lang.Class({
         roomSignals.forEach(Lang.bind(this, function(signal) {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
+        this._onChannelChanged();
     },
 
     _createTags: function() {
@@ -466,14 +468,20 @@ const ChatView = new Lang.Class({
     },
 
     _onChannelChanged: function() {
-        if (!this._room.channel) {
-            this._channelSignals = [];
+        if (this._channel == this._room.channel)
             return;
+
+        if (this._channel) {
+            for (let i = 0; i < this._channelSignals.length; i++)
+                this._channel.disconnect(this._channelSignals[i]);
+            this._channelSignals = [];
         }
 
-        for (let i = 0; i < this._channelSignals.length; i++)
-            this._room.channel.disconnect(this._channelSignals[i]);
-        this._channelSignals = [];
+        this._channel = this._room.channel;
+
+        if (!this._channel)
+            return;
+
 
         let channelSignals = [
             { name: 'message-received',
@@ -489,9 +497,6 @@ const ChatView = new Lang.Class({
 
         this._room.channel.dup_pending_messages().forEach(Lang.bind(this,
             function(message) {
-                let [id, ] = message.get_pending_message_id();
-                if (this._pending[id])
-                    return;
                 this._insertTpMessage(this._room, message);
             }));
         this._checkMessages();
