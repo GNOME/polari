@@ -14,6 +14,9 @@ const UserListPopover = new Lang.Class({
     _init: function() {
         this._createWidget();
 
+        this.widget.connect('closed', Lang.bind(this, function() {
+            this._entry.text = '';
+        }));
         this.widget.connect('map', Lang.bind(this, function() {
             this._revealer.transition_duration = 0;
         }));
