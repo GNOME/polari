@@ -6,28 +6,77 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-21 15:42+0200\n"
-"PO-Revision-Date: 2013-07-21 15:17+0200\n"
-"Last-Translator: Florian Müllner <fmuellner@gnome.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-04-11 15:49+0000\n"
+"PO-Revision-Date: 2014-04-11 22:12+0100\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: ../data/polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Ein einfaches Programm für Internet Relay Chat (IRC), dass entworfen wurde, "
+"um sich nahtlos in GNOME einzubinden. Es bietet eine einfache und schicke "
+"Oberfläche mit dem Ziel, sich auf Ihre Unterhaltungen zu konzentrieren."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Liste gespeicherte Kanäle"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Liste der Kanäle, die beim Start wiederhergestellt werden sollen"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Fenstergröße"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Fenstergröße (Breite und Höhe)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Fensterposition"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Fensterposition (x und y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Fenster maximiert"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Maximierungszustand des Fensters"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/polari.desktop.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ein IRC Client für GNOME"
 
-#: ../data/polari.desktop.in.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Chat;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Verbindungen anzeigen"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -39,55 +88,49 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 #: ../data/resources/app-menu.ui.h:3
-msgid "About Polari"
-msgstr "Über Polari"
+msgid "About"
+msgstr "Info"
 
 #: ../data/resources/app-menu.ui.h:4
 msgid "Quit"
 msgstr "Beenden"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
 msgid "New Connection"
 msgstr "Neue Verbindung"
 
 #: ../data/resources/connection-details-dialog.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Abbrechen"
-
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "_Erstellen"
-
-#: ../data/resources/connection-details-dialog.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "Server"
-msgstr "Server"
-
-#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Address"
 msgstr "A_ddresse"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details-dialog.ui.h:3
 msgid "_Description"
 msgstr "_Beschreibung"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-msgid "Identity"
-msgstr "Identität"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../data/resources/connection-details-dialog.ui.h:4
 msgid "_Nickname"
 msgstr "_Spitzname"
 
-#: ../data/resources/connection-details-dialog.ui.h:9
+#: ../data/resources/connection-details-dialog.ui.h:5
 msgid "_Real Name"
 msgstr "_Realname"
 
-#: ../data/resources/connection-details-dialog.ui.h:10
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
 msgid "optional"
 msgstr "optional"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Abbrechen"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "_Erstellen"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "_Close"
@@ -101,29 +144,30 @@ msgstr "Hinzufügen"
 msgid "Remove"
 msgstr "Entfernen"
 
-#: ../data/resources/join-room-dialog.ui.h:1
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
 msgid "Join Chat Room"
 msgstr "Raum beitreten"
 
 #: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Beitreten"
+msgid "_Add Connection"
+msgstr "Verbindung _hinzufügen"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room"
-msgstr "Raum"
-
-#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "C_onnection"
 msgstr "_Verbindung"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Name"
-msgstr "_Name"
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Raumname:"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "_Password"
 msgstr "_Passwort"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Beitreten"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -134,61 +178,224 @@ msgid "Message a User"
 msgstr "Nachricht senden"
 
 #: ../data/resources/main-window.ui.h:4
-msgid "Send"
-msgstr "Senden"
+msgid "_Leave"
+msgstr "_Verlassen"
 
-#: ../src/application.js:196
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Nachricht senden"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "_Zuletzt verwendet"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Name"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Nachricht"
+
+#: ../src/application.js:402
+msgid "Good Bye"
+msgstr "Auf Wiedersehen"
+
+#: ../src/application.js:459
 msgid "translator-credits"
-msgstr ""
+msgstr "Christian Kirbach <christian.kirbach@gmail.com>"
 
-#: ../src/chatView.js:172
-#, c-format
+#: ../src/chatView.js:501
+#, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s ist jetzt bekannt als %s"
 
-#: ../src/chatView.js:177
-#, c-format
+#: ../src/chatView.js:506
+#, javascript-format
 msgid "%s has disconnected"
 msgstr "%s hat sich abgemeldet"
 
-#: ../src/chatView.js:182
-#, c-format
+#: ../src/chatView.js:514
+#, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s wurde von %s rausgeworfen"
 
-#: ../src/chatView.js:184
-#, c-format
+#: ../src/chatView.js:516
+#, javascript-format
 msgid "%s has been kicked"
 msgstr "%s wurde rausgeworfen"
 
-#: ../src/chatView.js:190
-#, c-format
+#: ../src/chatView.js:522
+#, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s wurde von %s gebannt"
 
-#: ../src/chatView.js:192
-#, c-format
+#: ../src/chatView.js:524
+#, javascript-format
 msgid "%s has been banned"
 msgstr "%s wurde gebannt"
 
-#: ../src/chatView.js:197
-#, c-format
+#: ../src/chatView.js:529
+#, javascript-format
 msgid "%s joined"
 msgstr "%s hat den Raum betreten"
 
-#: ../src/chatView.js:201
-#, c-format
+#: ../src/chatView.js:533
+#, javascript-format
 msgid "%s left"
 msgstr "%s hat den Raum verlassen"
 
-#: ../src/connections.js:211
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:563
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:568
+msgid "Yesterday, %H∶%M"
+msgstr "Gestern, %H:%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:573
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:579
+msgid "%B %d, %H∶%M"
+msgstr "%e. %B, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:585
+msgid "%B %d %Y, %H∶%M"
+msgstr "%e. %B %Y, %H:%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:590
+msgid "%l∶%M %p"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:595
+msgid "Yesterday, %l∶%M %p"
+msgstr "Gestern, %H:%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "%A, %l∶%M %p"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:606
+msgid "%B %d, %l∶%M %p"
+msgstr "%e. %B, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:612
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%e. %B %Y, %H:%M"
+
+#: ../src/connections.js:330
 msgid "Edit Connection"
 msgstr "Verbindung bearbeiten"
 
-#: ../src/connections.js:212
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "Über_nehmen"
 
-#: ../src/userList.js:106
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "_Speichern"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Verbindung hinzufügen"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Keine vorherigen Benutzer"
+
+#: ../src/userList.js:185
+msgid "Loading details"
+msgstr "Details werden geladen"
+
+#: ../src/userList.js:193
+msgid "Message"
+msgstr "Nachricht"
+
+#: ../src/userList.js:210
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "Vor %d Sekunde"
+msgstr[1] "Vor %d Sekunden"
+
+#: ../src/userList.js:215
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "Vor %d Minute"
+msgstr[1] "Vor %d Minuten"
+
+#: ../src/userList.js:220
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "Vor %d Stunde"
+msgstr[1] "Vor %d Stunden"
+
+#: ../src/userList.js:225
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "vor %d Tag"
+msgstr[1] "vor %d Tagen"
+
+#: ../src/userList.js:230
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "vor %d Woche"
+msgstr[1] "vor %d Wochen"
+
+#: ../src/userList.js:234
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "vor %d Monat"
+msgstr[1] "vor %d Monaten"
+
+#: ../src/userList.js:258
+msgid "Last Activity:"
+msgstr "Letzte Aktivität:"
+
+#: ../src/userList.js:457
 msgid "All"
 msgstr "Alle"
+
+#~ msgid "About Polari"
+#~ msgstr "Über Polari"
+
+#~ msgid "Server"
+#~ msgstr "Server"
+
+#~ msgid "Identity"
+#~ msgstr "Identität"
+
+#~ msgid "Room"
+#~ msgstr "Raum"
+
+#~ msgid "Send"
+#~ msgstr "Senden"
