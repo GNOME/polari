@@ -248,7 +248,7 @@ const ChatView = new Lang.Class({
 
     _onDestroy: function() {
         for (let i = 0; i < this._channelSignals.length; i++)
-            this._room.channel.disconnect(this._channelSignals[i]);
+            this._channel.disconnect(this._channelSignals[i]);
         this._channelSignals = [];
 
         for (let i = 0; i < this._roomSignals.length; i++)
@@ -442,12 +442,12 @@ const ChatView = new Lang.Class({
     },
 
     _checkMessages: function() {
-        if (!this._active || !this._toplevelFocus || !this._room.channel)
+        if (!this._active || !this._toplevelFocus || !this._channel)
             return;
 
         this._needsIndicator = true;
 
-        let pending = this._room.channel.dup_pending_messages();
+        let pending = this._channel.dup_pending_messages();
         if (pending.length == 0)
             return;
 
@@ -457,13 +457,13 @@ const ChatView = new Lang.Class({
             let [id,] = pending[i].get_pending_message_id();
             let mark = this._pending[id];
             if (!mark) {
-                this._room.channel.ack_message_async(pending[i], null);
+                this._channel.ack_message_async(pending[i], null);
                 continue;
             }
             let iter = buffer.get_iter_at_mark(mark);
             let iterRect = this._view.get_iter_location(iter);
             if (rect.y <= iterRect.y && rect.y + rect.height > iterRect.y)
-                this._room.channel.ack_message_async(pending[i], null);
+                this._channel.ack_message_async(pending[i], null);
         }
     },
 
@@ -492,10 +492,10 @@ const ChatView = new Lang.Class({
               handler: Lang.bind(this, this._pendingMessageRemoved) }
         ];
         channelSignals.forEach(Lang.bind(this, function(signal) {
-            this._channelSignals.push(this._room.channel.connect(signal.name, signal.handler));
+            this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
         }));
 
-        this._room.channel.dup_pending_messages().forEach(Lang.bind(this,
+        this._channel.dup_pending_messages().forEach(Lang.bind(this,
             function(message) {
                 this._insertTpMessage(this._room, message);
             }));
@@ -660,7 +660,7 @@ const ChatView = new Lang.Class({
         let buffer = this._view.get_buffer();
         if (!valid /* outgoing */ ||
             (this._active && this._toplevelFocus && this._nPending == 0)) {
-            this._room.channel.ack_message_async(tpMessage, null);
+            this._channel.ack_message_async(tpMessage, null);
         } else if (message.shouldHighlight || this._needsIndicator) {
             let iter = buffer.get_end_iter();
 
