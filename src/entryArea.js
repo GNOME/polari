@@ -119,6 +119,15 @@ const EntryArea = new Lang.Class({
         if (state != 0)
             return Gdk.EVENT_PROPAGATE;
 
+        let activationKeys = [
+            Gdk.KEY_Tab,
+            Gdk.KEY_Return,
+            Gdk.KEY_ISO_Enter,
+            Gdk.KEY_space
+        ];
+        if (activationKeys.indexOf(keyval) != -1)
+            return Gdk.EVENT_PROPAGATE;
+
         this._entry.editable = false;
         this._entry.grab_focus();
         this._entry.editable = true;
