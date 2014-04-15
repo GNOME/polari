@@ -1,3 +1,14 @@
+3.12.1 - "Itty Bitty Titty Committee"
+=====================================
+* Misc. fixes [Florian, Piotr]
+
+Contributors:
+  Piotr Drąg, Florian Müllner
+
+Translations:
+  Yaron Shahrabani [he], Peter Vágner [sk], Ibrahim Saed [ar],
+  Matej Urbančič [sl], Christian Kirbach [de]
+
 3.12.0 - "The Really Hard Red Bull Test"
 ========================================
 * Stop ellipsizing nick [Carlos; #711853]
