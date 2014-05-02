@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Florian Müllner <fmuellner@gnome.org> -->
 <application>
   <id type="desktop">org.gnome.Polari.desktop</id>
-  <licence>CC0</licence>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+ and LGPL-2.1+</project_license>
   <description>
     <_p>
       A simple Internet Relay Chat (IRC) client that is designed to integrate
