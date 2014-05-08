@@ -642,7 +642,8 @@ const ChatView = new Lang.Class({
 
         let [id, valid] = tpMessage.get_pending_message_id();
 
-        if (message.shouldHighlight && !this._toplevelFocus) {
+        if (message.shouldHighlight &&
+            !(this._toplevelFocus && this._active)) {
             let summary = '%s %s'.format(this._room.display_name, message.nick);
             let notification = new Gio.Notification();
             notification.set_title(summary);
