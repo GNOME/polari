@@ -1,0 +1,384 @@
+# Catalan translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Pau Iranzo <paugnu@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-09 01:09+0200\n"
+"PO-Revision-Date: 2014-03-11 13:43+0100\n"
+"Last-Translator: Pau Iranzo <pau.iranzo@softcatala.org>\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"Language: ca-XV\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Un client d'IRC (Internet Relay Chat) senzill dissenyat per integrar-se "
+"sense problemes amb el GNOME. Inclou una interfície bonica i senzilla que "
+"vos permet centrar-vos en les vostres converses."
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Llista de canals guardats"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Llista de canals que s'han de restaurar en iniciar-se"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Mida de la finestra"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Mida de la finestra (amplada i alçada)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Posició de la finestra"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Posició de la finestra (x i y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Finestra maximitzada"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Estat de maximització de la finestra"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Un client d'IRC per al GNOME"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relé;Xat;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Mostra les connexions"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Connexions"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Preferències"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "Quant a"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Ix"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:331
+msgid "New Connection"
+msgstr "Connexió nova"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "_Adreça"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "_Descripció"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "_Sobrenom"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "_Nom real"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "optional"
+msgstr "opcional"
+
+#: ../data/resources/connection-details-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Cancel"
+msgstr "_Cancel·la"
+
+#: ../data/resources/connection-details-dialog.ui.h:8
+#: ../src/connections.js:340
+msgid "Cr_eate"
+msgstr "Cr_ea"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "_Close"
+msgstr "_Tanca"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "Afig"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "Suprimeix"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+msgid "Join Chat Room"
+msgstr "Entra a la sala de xat"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Add Connection"
+msgstr "_Afig una connexió"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "C_onnection"
+msgstr "C_onnexió"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "Room _Name"
+msgstr "_Nom de la sala"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "_Password"
+msgstr "_Contrasenya"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Join"
+msgstr "_Entra"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Entra a una sala"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Envia un missatge a un usuari"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "I_x"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Envia un missatge a un usuari"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Recent"
+msgstr "_Recent"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Name"
+msgstr "_Nom"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Message"
+msgstr "_Missatge"
+
+#: ../src/application.js:402
+msgid "Good Bye"
+msgstr "Adéu"
+
+#: ../src/application.js:459
+msgid "translator-credits"
+msgstr "Pau Iranzo <pau.iranzo@softcatala.org>, 2014"
+
+#: ../src/chatView.js:506
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s ara se'l coneix com %s"
+
+#: ../src/chatView.js:511
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s s'ha desconnectat"
+
+#: ../src/chatView.js:519
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s ha estat expulsat per %s"
+
+#: ../src/chatView.js:521
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "S'ha expulsat a %s"
+
+#: ../src/chatView.js:527
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s ha estat bandejat per %s"
+
+#: ../src/chatView.js:529
+#, javascript-format
+msgid "%s has been banned"
+msgstr "S'ha bandejat a %s"
+
+#: ../src/chatView.js:534
+#, javascript-format
+msgid "%s joined"
+msgstr "%s s'ha unit"
+
+#: ../src/chatView.js:538
+#, javascript-format
+msgid "%s left"
+msgstr "%s ha eixit"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:568
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:573
+msgid "Yesterday, %H∶%M"
+msgstr "Ahir, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:578
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:584
+msgid "%B %d, %H∶%M"
+msgstr "%d de %B, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:590
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d de %B de %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:595
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "Yesterday, %l∶%M %p"
+msgstr "Ahir, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:605
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:611
+msgid "%B %d, %l∶%M %p"
+msgstr "%d de %B, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:617
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d de %B de %Y, %l∶%M %p"
+
+#: ../src/connections.js:330
+msgid "Edit Connection"
+msgstr "Edita la connexió"
+
+#: ../src/connections.js:339
+msgid "A_pply"
+msgstr "A_plica"
+
+#: ../src/joinDialog.js:68
+msgid "_Save"
+msgstr "Al_ça"
+
+#: ../src/joinDialog.js:194
+msgid "Add Connection"
+msgstr "Afig una connexió"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr "Cap usuari recent"
+
+#: ../src/userList.js:185
+msgid "Loading details"
+msgstr "S'estan carregant els detalls"
+
+#: ../src/userList.js:193
+msgid "Message"
+msgstr "Missatge"
+
+#: ../src/userList.js:210
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "Fa %d segon"
+msgstr[1] "Fa %d segons"
+
+#: ../src/userList.js:215
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "Fa %d minut"
+msgstr[1] "Fa %d minuts"
+
+#: ../src/userList.js:220
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "Fa %d hora"
+msgstr[1] "Fa %d hores"
+
+#: ../src/userList.js:225
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Fa %d dia"
+msgstr[1] "Fa %d dies"
+
+#: ../src/userList.js:230
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Fa %d setmana"
+msgstr[1] "Fa %d setmanes"
+
+#: ../src/userList.js:234
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Fa %d mes"
+msgstr[1] "Fa %d mesos"
+
+#: ../src/userList.js:258
+msgid "Last Activity:"
+msgstr "Darrera activitat:"
+
+#: ../src/userList.js:457
+msgid "All"
+msgstr "Tot"
