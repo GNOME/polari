@@ -1,3 +1,13 @@
+3.12.2 - "Small is Small"
+=========================
+* Increase default size of connections dialog [Florian; #728643]
+
+Contributors:
+  Florian Müllner
+
+Translations:
+  Carles Ferrando [ca@valencia]
+
 3.12.1 - "Itty Bitty Titty Committee"
 =====================================
 * Misc. fixes [Florian, Piotr]
