@@ -190,10 +190,6 @@ const ConnectionDetails = new Lang.Class({
         return params;
     },
 
-    setCancelVisible: function(visible) {
-        this._cancelButton.visible = visible;
-    },
-
     reset: function() {
         this._serverEntry.text = '';
         this._descEntry.text = '';
@@ -212,27 +208,15 @@ const ConnectionDetails = new Lang.Class({
         this._descEntry = builder.get_object('description_entry');
         this._nickEntry = builder.get_object('nickname_entry');
         this._realnameEntry = builder.get_object('realname_entry');
-        this.confirmButton = builder.get_object('confirm_button');
-        this._cancelButton = builder.get_object('cancel_button');
-
-        this.confirmButton.connect('clicked',
-                                    Lang.bind(this, this._onConfirmClicked));
-        this._cancelButton.connect('clicked', Lang.bind(this,
-            function() {
-                this.emit('response', Gtk.ResponseType.CANCEL);
-            }));
 
         this._serverEntry.connect('changed',
-                                  Lang.bind(this, this._updateSensitivity));
+                                  Lang.bind(this, this._onCanConfirmChanged));
         this._nickEntry.connect('changed',
-                                Lang.bind(this, this._updateSensitivity));
-        this._updateSensitivity();
+                                Lang.bind(this, this._onCanConfirmChanged));
     },
 
-    _updateSensitivity: function() {
-        let sensitive = this._serverEntry.get_text_length() > 0 &&
-                        this._nickEntry.get_text_length() > 0;
-        this.confirmButton.sensitive = sensitive;
+    _onCanConfirmChanged: function() {
+        this.emit('can-confirm-changed');
     },
 
     _populateFromAccount: function(account) {
@@ -256,13 +240,19 @@ const ConnectionDetails = new Lang.Class({
             this._descEntry.text = account.display_name;
     },
 
-    _onConfirmClicked: function() {
+    get canConfirm() {
+        return this._serverEntry.get_text_length() > 0 &&
+               this._nickEntry.get_text_length() > 0;
+    },
+
+    save: function() {
+        if (!this.canConfirm)
+            return;
+
         if (this._account)
             this._updateAccount();
         else
             this._createAccount();
-
-        this.emit('response', Gtk.ResponseType.OK);
     },
 
     _createAccount: function() {
@@ -331,17 +321,29 @@ const ConnectionDetailsDialog = new Lang.Class({
                             : _("New Connection");
         this.widget = new Gtk.Dialog({ title: title,
                                        modal: true,
-                                       destroy_with_parent: true });
+                                       destroy_with_parent: true,
+                                       use_header_bar: true });
+        this.widget.connect('response', Lang.bind(this,
+            function(w, response) {
+                if (response == Gtk.ResponseType.OK)
+                    this._details.save();
+            }));
+
+        this.widget.add_button(_("_Cancel"), Gtk.ResponseType.CANCEL);
+
+        let confirmLabel = account ? _("A_pply") : _("Cr_eate");
+        this._confirmButton = this.widget.add_button(confirmLabel,
+                                                     Gtk.ResponseType.OK);
+        this._confirmButton.get_style_context().add_class('suggested-action');
 
         this._details = new ConnectionDetails(account);
+        this._details.connect('can-confirm-changed',
+                              Lang.bind(this, this._updateCanConfirm));
         this.widget.get_content_area().add(this._details.widget);
+        this._updateCanConfirm();
+    },
 
-        this._details.confirmButton.label = account ? _("A_pply")
-                                                    : _("Cr_eate");
-
-        this._details.connect('response', Lang.bind(this,
-            function(details, response) {
-                this.widget.response(response);
-            }));
+    _updateCanConfirm: function() {
+        this._confirmButton.sensitive = this._details.canConfirm;
     }
 });

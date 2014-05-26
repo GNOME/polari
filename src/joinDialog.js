@@ -64,14 +64,8 @@ const JoinDialog = new Lang.Class({
 
         this._details = new Connections.ConnectionDetails(null);
         this._stack.add_named(this._details.widget, 'connection');
-
-        this._details.confirmButton.label = _("_Save");
-        this._details.setCancelVisible(false);
-
-        this._details.connect('response', Lang.bind(this,
-            function() {
-                this._setPage(DialogPage.MAIN);
-            }));
+        this._details.connect('can-confirm-changed',
+                              Lang.bind(this, this._updateCanConfirm));
 
         this._connectionButton = builder.get_object('add_connection_button');
         this._connectionButton.connect('clicked', Lang.bind(this,
@@ -95,10 +89,11 @@ const JoinDialog = new Lang.Class({
                                       Lang.bind(this, this._onAccountChanged));
         this._connectionCombo.sensitive = false;
 
-        this._joinButton = builder.get_object('join_button');
-        this._joinButton.connect('clicked',
-                                 Lang.bind(this, this._onJoinClicked));
-        this._joinButton.sensitive = false;
+        this._confirmButton = builder.get_object('confirm_button');
+        this._confirmButton.connect('clicked',
+                                    Lang.bind(this, this._onConfirmClicked));
+
+        this._cancelButton = builder.get_object('cancel_button');
 
         this._nameCompletion = builder.get_object('name_completion');
         this._nameEntry = builder.get_object('name_entry');
@@ -138,8 +133,17 @@ const JoinDialog = new Lang.Class({
             }));
     },
 
+    _onConfirmClicked: function() {
+        if (this._page == DialogPage.MAIN) {
+            this._joinRoom();
+            this.widget.response(Gtk.ResponseType.OK);
+        } else {
+            this._details.save();
+            this._setPage(DialogPage.MAIN);
+        }
+    },
 
-    _onJoinClicked: function() {
+    _joinRoom: function() {
         this.widget.hide();
 
         let selected = this._connectionCombo.get_active_text();
@@ -155,7 +159,6 @@ const JoinDialog = new Lang.Class({
                                          [ account.get_object_path(),
                                            room,
                                            TP_CURRENT_TIME ]));
-        this.widget.response(Gtk.ResponseType.OK);
     },
 
     _updateConnectionCombo: function() {
@@ -173,25 +176,37 @@ const JoinDialog = new Lang.Class({
     },
 
     _updateCanConfirm: function() {
+        if (this._page == DialogPage.MAIN) {
             let sensitive = this._connectionCombo.get_active() > -1  &&
                             this._nameEntry.get_text_length() > 0;
-            this._joinButton.sensitive = sensitive;
+            this._confirmButton.sensitive = sensitive;
+        } else {
+            this._confirmButton.sensitive = this._details.canConfirm;
+        }
+    },
+
+    get _page() {
+        if (this._stack.visible_child_name == 'connection')
+            return DialogPage.CONNECTION;
+        else
+            return DialogPage.MAIN;
     },
 
     _setPage: function(page) {
         let isMain = page == DialogPage.MAIN;
 
-        if (isMain) {
+        if (isMain)
             this._details.reset();
 
-            this._joinButton.grab_default();
-        } else {
-            this._details.confirmButton.grab_default();
-        }
+        this._confirmButton.grab_default();
 
         this._backButton.visible = !isMain;
+        this._cancelButton.visible = isMain;
         this._titlebar.title = isMain ? _("Join Chat Room")
                                       : _("Add Connection");
+        this._confirmButton.label = isMain ? _("_Join")
+                                           : _("_Save");
         this._stack.visible_child_name = isMain ? 'main' : 'connection';
+        this._updateCanConfirm();
     }
 });
