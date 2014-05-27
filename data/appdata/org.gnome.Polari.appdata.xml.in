@@ -10,6 +10,13 @@
       seamlessly with GNOME; it features a simple and beautiful interface which
       allows you to focus on your conversations.
     </_p>
+    <_p>
+      You can use Polari to publicly chat with people in a channel, and to
+      have private one-to-one conversations. Notifications make sure that
+      you never miss an important message - for private conversations,
+      they even allow you to reply instantly without switching back to the
+      application!
+    </_p>
   </description>
   <screenshots>
     <screenshot type="default" width="1200" height="675">https://git.gnome.org/browse/polari/plain/data/appdata/polari-main.png</screenshot>
