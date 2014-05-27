@@ -1,3 +1,16 @@
+3.13.2 - "Traveled down the road and back again"
+================================================
+* Subclass TpBaseClient instead of using two simple clients
+  [Giovanni; #723440]
+* Move dialog controls into the header [Florian; #730776]
+* Always show notifications for highlights in other channels
+
+Contributors:
+  Giovanni Campagna, Florian Müllner
+
+Translations:
+  Carles Ferrando [ca@valencia]
+
 3.13.1 - "Small is Small"
 =========================
 * Increase default size of connections dialog [Florian; #728643]
