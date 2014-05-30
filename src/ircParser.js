@@ -10,7 +10,7 @@ const Lang = imports.lang;
 const Signals = imports.signals;
 const Utils = imports.utils;
 
-const _ = imports.gettext.gettext;
+const N_ = function(s) { return s; };
 
 const MAX_LINES = 5;
 const TP_CURRENT_TIME = GLib.MAXUINT32;
@@ -18,29 +18,29 @@ const TP_CURRENT_TIME = GLib.MAXUINT32;
 const knownCommands = {
     /* commands that would be nice to support: */
     /*
-    AWAY: _("/AWAY [<message>] - sets or unsets away message"),
-    LIST: _("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+    AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+    LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
     MODE: "/MODE <mode> <nick|channel> - ",
-    NOTICE: _("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
-    OP: _("/OP <nick> - gives channel operator status to <nick>"),
-    WHOIS: _("/WHOIS <nick> - requests information on <nick>"),
+    NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+    OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+    WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
     */
 
-    HELP: _("/HELP [<command>] - displays help for <command>, or a list of available commands"),
-    INVITE: _("/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"),
-    JOIN: _("/JOIN <channel> - joins <channel>"),
-    KICK: _("/KICK <nick> - kicks <nick> from current channel"),
-    ME: _("/ME <action> - sends <action> to the current channel"),
-    NAMES: _("/NAMES - lists users on the current channel"),
-    NICK: _("/NICK <nickname> - sets your nick to <nickname>"),
-    PART: _("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
-    QUERY: _("</QUERY <nick> - opens a private conversation with <nick>"),
-    QUIT: _("</QUIT [<reason>] - disconnects from the current server"),
-    SAY: _("</SAY <text> - sends <text> to the current room/contact"),
-    TOPIC: _("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
+    HELP: N_("/HELP [<command>] - displays help for <command>, or a list of available commands"),
+    INVITE: N_("/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"),
+    JOIN: N_("/JOIN <channel> - joins <channel>"),
+    KICK: N_("/KICK <nick> - kicks <nick> from current channel"),
+    ME: N_("/ME <action> - sends <action> to the current channel"),
+    NAMES: N_("/NAMES - lists users on the current channel"),
+    NICK: N_("/NICK <nickname> - sets your nick to <nickname>"),
+    PART: N_("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
+    QUERY: N_("</QUERY <nick> - opens a private conversation with <nick>"),
+    QUIT: N_("</QUIT [<reason>] - disconnects from the current server"),
+    SAY: N_("</SAY <text> - sends <text> to the current room/contact"),
+    TOPIC: N_("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
 };
 const UNKNOWN_COMMAND_MESSAGE =
-    _("Unknown command - try /HELP for a list of available commands");
+    N_("Unknown command - try /HELP for a list of available commands");
 
 const IrcParser = new Lang.Class({
     Name: 'IrcParser',
@@ -61,7 +61,7 @@ const IrcParser = new Lang.Class({
     },
 
     _createFeedbackUsage: function(cmd) {
-        return this._createFeedbackLabel(_("Usage: %s").format(knownCommands[cmd]));
+        return this._createFeedbackLabel(_("Usage: %s").format(_(knownCommands[cmd])));
     },
 
     _createFeedbackGrid: function(header, items) {
