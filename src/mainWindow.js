@@ -256,6 +256,17 @@ const MainWindow = new Lang.Class({
         overlay.add_overlay(app.notificationQueue.widget);
         overlay.add_overlay(app.commandOutputQueue.widget);
 
+        // command output notifications should not pop up over
+        // the input area, but appear to emerge from it, so
+        // set up an appropriate margin - this relies on the
+        // last widget added to the size group at this point
+        // is the room stack's placeholder entry, which will
+        // never be destroyed
+        sizeGroup.get_widgets()[0].connect('size-allocate',
+            function(w, rect) {
+                app.commandOutputQueue.widget.margin_bottom = rect.height - 1;
+            });
+
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
 
