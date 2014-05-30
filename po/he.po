@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-30 16:59+0300\n"
-"PO-Revision-Date: 2014-05-30 17:24+0300\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
+"POT-Creation-Date: 2014-05-30 17:28+0300\n"
+"PO-Revision-Date: 2014-05-30 17:29+0300\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -207,105 +207,110 @@ msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
 "ירון שהרבני <sh.yaron@gmail.com>"
 
-#: ../src/chatView.js:506
+#: ../src/appNotifications.js:105
+#, c-format
+msgid "Connecting to %s"
+msgstr "בהתחברות ל־%s"
+
+#: ../src/chatView.js:507
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:512
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:520
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:522
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:527
+#: ../src/chatView.js:528
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:529
+#: ../src/chatView.js:530
 #, javascript-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:534
+#: ../src/chatView.js:535
 #, javascript-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:538
+#: ../src/chatView.js:539
 #, javascript-format
 msgid "%s left"
 msgstr "‏%s עזב"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:568
+#: ../src/chatView.js:569
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:573
+#: ../src/chatView.js:574
 msgid "Yesterday, %H∶%M"
 msgstr "אתמול ב־%H\\:%M‎"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:578
+#: ../src/chatView.js:579
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M‎"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:584
+#: ../src/chatView.js:585
 msgid "%B %d, %H∶%M"
 msgstr "%d ב%B, %H:%M‎"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:590
+#: ../src/chatView.js:591
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d ב%B %Y, %H:%M‎"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:595
+#: ../src/chatView.js:596
 msgid "%l∶%M %p"
 msgstr "%l:%M %p‎"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:600
+#: ../src/chatView.js:601
 msgid "Yesterday, %l∶%M %p"
 msgstr "אתמול ב־%l:%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:605
+#: ../src/chatView.js:606
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l:%M %p‎"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:611
+#: ../src/chatView.js:612
 msgid "%B %d, %l∶%M %p"
 msgstr "%d ב%B, %l:%M‎ %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:617
+#: ../src/chatView.js:618
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d ב%B %Y, %l:%M‎ %p"
 
