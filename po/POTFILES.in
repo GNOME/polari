@@ -8,6 +8,7 @@ data/org.gnome.Polari.desktop.in
 [type: gettext/glade]data/resources/main-window.ui
 [type: gettext/glade]data/resources/message-user-dialog.ui
 src/application.js
+src/appNotifications.js
 src/chatView.js
 src/connections.js
 src/ircParser.js
