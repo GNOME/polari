@@ -253,6 +253,9 @@ const MainWindow = new Lang.Class({
         this._roomStack = new RoomStack.RoomStack(sizeGroup);
         overlay.add(this._roomStack.widget);
 
+        overlay.add_overlay(app.notificationQueue.widget);
+        overlay.add_overlay(app.commandOutputQueue.widget);
+
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
 
