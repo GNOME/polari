@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-30 17:28+0300\n"
-"PO-Revision-Date: 2014-05-30 17:29+0300\n"
+"PO-Revision-Date: 2014-05-30 17:31+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -403,7 +403,7 @@ msgstr "פקודות ידועות:"
 #: ../src/ircParser.js:176
 #, javascript-format
 msgid "Users on %s:"
-msgstr "משתמשים על %s:"
+msgstr "משתמשים על %s‎:"
 
 #: ../src/ircParser.js:257
 msgid "No topic set"
