@@ -34,9 +34,9 @@ const knownCommands = {
     NAMES: N_("/NAMES - lists users on the current channel"),
     NICK: N_("/NICK <nickname> - sets your nick to <nickname>"),
     PART: N_("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
-    QUERY: N_("</QUERY <nick> - opens a private conversation with <nick>"),
-    QUIT: N_("</QUIT [<reason>] - disconnects from the current server"),
-    SAY: N_("</SAY <text> - sends <text> to the current room/contact"),
+    QUERY: N_("/QUERY <nick> - opens a private conversation with <nick>"),
+    QUIT: N_("/QUIT [<reason>] - disconnects from the current server"),
+    SAY: N_("/SAY <text> - sends <text> to the current room/contact"),
     TOPIC: N_("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
 };
 const UNKNOWN_COMMAND_MESSAGE =
