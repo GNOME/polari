@@ -94,7 +94,7 @@ const IrcParser = new Lang.Class({
                 if (command && knownCommands[command])
                     output = this._createFeedbackUsage(command);
                 else if (command)
-                    output = this._createFeedbackLabel(UNKNOWN_COMMAND_MESSAGE);
+                    output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
                 else
                     output = this._createFeedbackGrid(_("Known commands:"),
                                                         Object.keys(knownCommands));
@@ -258,7 +258,7 @@ const IrcParser = new Lang.Class({
                 break;
             }
             default:
-                output = this._createFeedbackLabel(UNKNOWN_COMMAND_MESSAGE);
+                output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
                 break;
         }
 
