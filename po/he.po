@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-30 17:28+0300\n"
-"PO-Revision-Date: 2014-05-30 17:31+0300\n"
+"POT-Creation-Date: 2014-06-05 09:24+0300\n"
+"PO-Revision-Date: 2014-06-05 09:25+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -208,7 +208,7 @@ msgstr ""
 "ירון שהרבני <sh.yaron@gmail.com>"
 
 #: ../src/appNotifications.js:105
-#, c-format
+#, javascript-format
 msgid "Connecting to %s"
 msgstr "בהתחברות ל־%s"
 
@@ -328,12 +328,12 @@ msgstr "י_צירה"
 
 #. commands that would be nice to support: */
 #.
-#. AWAY: _("/AWAY [<message>] - sets or unsets away message"),
-#. LIST: _("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
 #. MODE: "/MODE <mode> <nick|channel> - ",
-#. NOTICE: _("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
-#. OP: _("/OP <nick> - gives channel operator status to <nick>"),
-#. WHOIS: _("/WHOIS <nick> - requests information on <nick>"),
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #. */
 #: ../src/ircParser.js:29
 msgid ""
@@ -372,20 +372,20 @@ msgid ""
 msgstr "‏‎/NICK [<ערוץ>] [<סיבה>] - עזיבת <ערוץ>, הערוץ הנוכחי כברירת מחדל"
 
 #: ../src/ircParser.js:37
-msgid "</QUERY <nick> - opens a private conversation with <nick>"
-msgstr "‏‎</QUERY ‏<כינוי> - פתיחת שיחה פרטית עם <כינוי>"
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr "‏‎/QUERY ‏<כינוי> - פתיחת שיחה פרטית עם <כינוי>"
 
 #: ../src/ircParser.js:38
-msgid "</QUIT [<reason>] - disconnects from the current server"
-msgstr "‏‎</QUIT ‏[<סיבה>] - התנתקות מהשרת הנוכחי"
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "‏‎/QUIT ‏[<סיבה>] - התנתקות מהשרת הנוכחי"
 
 #: ../src/ircParser.js:39
-msgid "</SAY <text> - sends <text> to the current room/contact"
-msgstr "‏‎</SAY ‏<טקסט> - שליחת ‏<טקסט> לערוץ/קשר הנוכחי"
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "‏‎/SAY ‏<טקסט> - שליחת ‏<טקסט> לערוץ/קשר הנוכחי"
 
 #: ../src/ircParser.js:40
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
-msgstr "‏‎</TOPIC ‏<נושא> - הגדרת הנושא לנושא ‏<נושא>, או הצגת זה הנוכחי"
+msgstr "‏‎/TOPIC ‏<נושא> - הגדרת הנושא לנושא ‏<נושא>, או הצגת זה הנוכחי"
 
 #: ../src/ircParser.js:43
 msgid "Unknown command - try /HELP for a list of available commands"
