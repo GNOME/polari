@@ -685,28 +685,28 @@ polari_room_class_init (PolariRoomClass *klass)
                          "Id",
                          "Room identifier",
                          NULL,
-                         G_PARAM_READABLE);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
 
   props[PROP_DISPLAY_NAME] =
     g_param_spec_string ("display-name",
                          "Display name",
                          "Display name",
                          NULL,
-                         G_PARAM_READABLE);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
 
   props[PROP_TOPIC] =
     g_param_spec_string ("topic",
                          "Topic",
                          "Topic",
                          NULL,
-                         G_PARAM_READABLE);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
 
   props[PROP_ICON] =
     g_param_spec_object ("icon",
                          "Icon",
                          "Icon",
                          G_TYPE_ICON,
-                         G_PARAM_READABLE);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
 
   props[PROP_ACCOUNT] =
     g_param_spec_object ("account",
@@ -736,7 +736,7 @@ polari_room_class_init (PolariRoomClass *klass)
                          "Channel",
                          "Channel",
                          TP_TYPE_CHANNEL,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, LAST_PROP, props);
 
