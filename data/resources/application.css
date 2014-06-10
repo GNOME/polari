@@ -32,8 +32,9 @@
     border-width: 0;
 }
 
-.polari-selection-toolbar,
+.polari-room-list .action-bar,
 .polari-input-area {
+    background-image: none;
     background-color: @polari_dark_bg_color;
     border-color: @borders;
     border-style: solid;

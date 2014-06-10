@@ -162,7 +162,7 @@ const MainWindow = new Lang.Class({
 
     _onSelectionModeChanged: function() {
         let enabled = this._selectionModeAction.state.get_boolean();
-        this._selectionRevealer.reveal_child = enabled;
+        this._selectionActionBar.visible = enabled;
         this._joinMenuButton.visible = !enabled;
         this._showUserListButton.visible = !enabled;
         this._userListAction.enabled = !enabled;
@@ -273,7 +273,12 @@ const MainWindow = new Lang.Class({
         this._titleLabel = builder.get_object('title_label');
         this._subtitleLabel = builder.get_object('subtitle_label');
 
-        this._selectionRevealer = builder.get_object('selection_toolbar_revealer');
+        this._selectionActionBar = builder.get_object('selection_action_bar');
+
+        // slightly hackish:
+        // add the content of the internal revealer to size group
+        sizeGroup.add_widget(this._selectionActionBar.get_child().get_child());
+
         this._joinMenuButton = builder.get_object('join_menu_button');
         this._showUserListButton = builder.get_object('show_user_list_button');
         this._revealer = builder.get_object('room_list_revealer');
