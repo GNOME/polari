@@ -47,7 +47,7 @@
 }
 
 .polari-room-list .list-row.inactive {
-    color: mix(@theme_text_color, @theme_base_color, 0.3);
+    color: mix(@theme_fg_color, @theme_base_color, 0.3);
 }
 
 .polari-room-list .list-row.inactive:selected {
@@ -55,7 +55,7 @@
 }
 
 .polari-room-list .list-row.inactive:backdrop {
-    color: mix(@theme_unfocused_text_color, @theme_unfocused_base_color, 0.3);
+    color: mix(@theme_unfocused_fg_color, @theme_unfocused_base_color, 0.3);
 }
 
 .polari-room-list .list-row.inactive:selected:backdrop {
