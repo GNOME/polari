@@ -1,0 +1,466 @@
+# Turkish translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Muhammet Kara <muhammetk@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-06-13 10:31+0000\n"
+"PO-Revision-Date: 2014-06-13 22:21+0000\n"
+"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "Kanal listesi kaydedildi"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "Açılışta geri yüklenecek kanallar listesi"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Pencere boyutu"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Pencere boyutu (genişlik ve yükseklik)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "Pencere konumu"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "Pencere konumu (x ve y)."
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "Pemcere ekranı kapladı"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "Pencere ekranı kaplamış durumda"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOME için İnternet Aktarmalı Sohbet İstemcisi"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;İnternet;Anlık;Anında;Sohbet;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Bağlantıları göster"
+
+#: ../data/resources/app-menu.ui.h:1
+#: ../data/resources/connection-list-dialog.ui.h:1
+msgid "Connections"
+msgstr "Bağlantılar"
+
+#: ../data/resources/app-menu.ui.h:2
+msgid "Preferences"
+msgstr "Tercihler"
+
+#: ../data/resources/app-menu.ui.h:3
+msgid "About"
+msgstr "Hakkında"
+
+#: ../data/resources/app-menu.ui.h:4
+msgid "Quit"
+msgstr "Çıkış"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:321
+msgid "New Connection"
+msgstr "Yeni Bağlantı"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "_Adres"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "A_çıklama"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "_Takma Ad"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "_Gerçek İsim"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "isteğe bağlı"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Add"
+msgstr "Ekle"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Remove"
+msgstr "Kaldır"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
+msgid "Join Chat Room"
+msgstr "Sohbet Odasına Katıl"
+
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "_İptal"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
+msgid "_Join"
+msgstr "_Katıl"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "Bağlantı _Ekle"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "C_onnection"
+msgstr "Ba_ğlantı"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr "Oda _Adı"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "_Parola"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "Odaya Katıl"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "Kullanıcıya İleti Gönder"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "_Ayrıl"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "Kullanıcıya İleti Gönder"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Message"
+msgstr "_İleti"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr ""
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "_İsim"
+
+#: ../src/application.js:402
+msgid "Good Bye"
+msgstr "Hoşça Kal"
+
+#: ../src/application.js:459
+msgid "translator-credits"
+msgstr "Muhammet Kara <muhammetk@gmail.com>"
+
+#: ../src/appNotifications.js:105
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "%s'e bağlanılıyor..."
+
+#: ../src/chatView.js:506
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s şimdi %s olarak biliniyor"
+
+#: ../src/chatView.js:511
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s bağlantısını kesti"
+
+#: ../src/chatView.js:519
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s, %s tarafından kanaldan atıldı"
+
+#: ../src/chatView.js:521
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s kanaldan atıldı"
+
+#: ../src/chatView.js:527
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s, %s tarafından yasaklandı"
+
+#: ../src/chatView.js:529
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s yasaklandı"
+
+#: ../src/chatView.js:534
+#, javascript-format
+msgid "%s joined"
+msgstr "%s odaya katıldı"
+
+#: ../src/chatView.js:538
+#, javascript-format
+msgid "%s left"
+msgstr "%s odadan ayrıldı"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:568
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:573
+msgid "Yesterday, %H∶%M"
+msgstr "Dün, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:578
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:584
+msgid "%B %d, %H∶%M"
+msgstr "%d %B, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:590
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:595
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:600
+msgid "Yesterday, %l∶%M %p"
+msgstr "Dün, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:605
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:611
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:617
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %Y, %l∶%M %p"
+
+#: ../src/connections.js:320
+msgid "Edit Connection"
+msgstr "Bağlantıyı Düzenle"
+
+#: ../src/connections.js:334
+msgid "A_pply"
+msgstr "U_ygula"
+
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "Ol_uştur"
+
+#. commands that would be nice to support: */
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on
+#. the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to
+#. <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr ""
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr ""
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr ""
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr ""
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr ""
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr ""
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr ""
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr ""
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Kullanım: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "Bilinen komutlar:"
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "%s üzerindeki kullanıcılar:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "Konu ayarlanmamış"
+
+#: ../src/joinDialog.js:206
+msgid "Add Connection"
+msgstr "Bağlantı Ekle"
+
+#: ../src/joinDialog.js:208
+msgid "_Save"
+msgstr "_Kaydet"
+
+#: ../src/messageDialog.js:77
+msgid "No recent users"
+msgstr ""
+
+#: ../src/userList.js:185
+msgid "Loading details"
+msgstr "Ayrıntılar yükleniyor"
+
+#: ../src/userList.js:193
+msgid "Message"
+msgstr "İleti"
+
+#: ../src/userList.js:210
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d saniye önce"
+
+#: ../src/userList.js:215
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d dakika önce"
+
+#: ../src/userList.js:220
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d saat önce"
+
+#: ../src/userList.js:225
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d gün önce"
+
+#: ../src/userList.js:230
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d hafta önce"
+
+#: ../src/userList.js:234
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d ay önce"
+
+#: ../src/userList.js:258
+msgid "Last Activity:"
+msgstr "Son Etkinlik:"
+
+#: ../src/userList.js:457
+msgid "All"
+msgstr "Tümü"
