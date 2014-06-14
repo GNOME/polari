@@ -177,6 +177,10 @@ const ChatView = new Lang.Class({
         context.save();
         context.add_class('dim-label');
         let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
+        context.restore();
+
+        context.save();
+        context.add_class('view');
         let selectedColor = context.get_background_color(Gtk.StateFlags.SELECTED);
         context.restore();
 
