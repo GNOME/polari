@@ -2,13 +2,14 @@
 # Copyright (C) 2014 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Muhammet Kara <muhammetk@gmail.com>, 2014.
+# sabri ünal <yakushabb@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-13 10:31+0000\n"
-"PO-Revision-Date: 2014-06-13 22:21+0000\n"
+"POT-Creation-Date: 2014-06-18 22:06+0000\n"
+"PO-Revision-Date: 2014-06-19 11:18+0000\n"
 "Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -22,7 +23,7 @@ msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
-msgstr ""
+msgstr "GNOME ile sorunsuz bir şekilde bütünleşecek şekilde tasarlanmış basit bir İnternet Aktarımlı Sohbet (IRC) istemcisi; konuşmalarınıza odaklanmanıza olanak veren basit ve güzel bir arayüze sahiptir."
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
 msgid ""
@@ -30,7 +31,7 @@ msgid ""
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message - for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
-msgstr ""
+msgstr "Polari'yi, genele açık şekilde sohbet etmek ve diğer kişilerle özel konuşmalar gerçekleştirmek için kullanabilirsiniz. Bildirimler, önemli bir iletiyi asla kaçırmayacağınızdan emin olmanızı sağlar - ayrıca özel konuşmalarda, uygulamaya geri dönmeden anında cevap yazmanıza olanak tanır!"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -184,7 +185,7 @@ msgstr "_İleti"
 
 #: ../data/resources/message-user-dialog.ui.h:5
 msgid "_Recent"
-msgstr ""
+msgstr "Son kayıtlar"
 
 #: ../data/resources/message-user-dialog.ui.h:6
 msgid "_Name"
@@ -331,57 +332,57 @@ msgstr "Ol_uştur"
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
-msgstr ""
+msgstr "/HELP [<command>] - <command> için yardımı ya da kullanılabilir komutların listesini gösterir"
 
 #: ../src/ircParser.js:30
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
-msgstr ""
+msgstr "/INVITE <nick> [<channel>] - <nick> adlı kullanıcıyı <channel> kanalına ya da geçerli kanala davet eder"
 
 #: ../src/ircParser.js:31
 msgid "/JOIN <channel> - joins <channel>"
-msgstr ""
+msgstr "/JOIN <channel> - <channel> kanalına katılır"
 
 #: ../src/ircParser.js:32
 msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr ""
+msgstr "/KICK <nick> - <nick> adlı kullanıcıyı geçerli kanaldan atar"
 
 #: ../src/ircParser.js:33
 msgid "/ME <action> - sends <action> to the current channel"
-msgstr ""
+msgstr "/ME <action> - <action> eylemini geçerli kanala gönderir"
 
 #: ../src/ircParser.js:34
 msgid "/NAMES - lists users on the current channel"
-msgstr ""
+msgstr "/NAMES - geçerli kanaldaki kullanıcıları listeler"
 
 #: ../src/ircParser.js:35
 msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr ""
+msgstr "/NICK <nickname> - takma adınızı <nickname> olarak belirler"
 
 #: ../src/ircParser.js:36
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
-msgstr ""
+msgstr "/PART [<channel>] [<reason>] - <channel> kanalından, öntanımlı olarak geçerli kanaldan, ayrılır"
 
 #: ../src/ircParser.js:37
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
-msgstr ""
+msgstr "/QUERY <nick> - <nick> ile özel konuşma başlatır"
 
 #: ../src/ircParser.js:38
 msgid "/QUIT [<reason>] - disconnects from the current server"
-msgstr ""
+msgstr "/QUIT [<reason>] - geçerli sunucu ile bağlantınızı keser"
 
 #: ../src/ircParser.js:39
 msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr ""
+msgstr "/SAY <text> - <text> metnini geçerli odaya/kişiye gönderir"
 
 #: ../src/ircParser.js:40
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
-msgstr ""
+msgstr "/TOPIC <topic> - konuyu <topic> olarak belirler ya da geçerli konuyu gösterir"
 
 #: ../src/ircParser.js:43
 msgid "Unknown command - try /HELP for a list of available commands"
-msgstr ""
+msgstr "Bilinmeyen komut - kullanılabilir komutların listesi için /HELP komutunu deneyiniz"
 
 #: ../src/ircParser.js:64
 #, javascript-format
@@ -411,7 +412,7 @@ msgstr "_Kaydet"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
-msgstr ""
+msgstr "Güncel kayıt yok"
 
 #: ../src/userList.js:185
 msgid "Loading details"
