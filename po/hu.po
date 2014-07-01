@@ -3,21 +3,24 @@
 # This file is distributed under the same license as the polari package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2014.
+# Balázs Meskó <meskobalazs at gmail dot com>, 2014.
+# Balázs Úr <urbalazs at gmail dot com>, 2014.
+# Balázs Úr <urbalazs@gmail.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-11 03:44+0000\n"
-"PO-Revision-Date: 2014-03-19 23:59+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
+"POT-Creation-Date: 2014-06-03 16:52+0000\n"
+"PO-Revision-Date: 2014-07-01 22:25+0200\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 msgid ""
@@ -28,6 +31,19 @@ msgstr ""
 "Egyszerű IRC kliens, amelyet a GNOME-ba való tökéletes integrációra "
 "terveztek. Egyszerű és gyönyörű felülete van, amely lehetővé teszi a "
 "beszélgetésekre való koncentrálást."
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"A Polarit arra használhatja, hogy nyilvánosan csevegjen emberekkel egy "
+"közös csatornán, vagy privát csevegést folytasson másokkal. Az értesítések "
+"gondoskodnak arról, hogy sose maradjon le egyetlen fontos üzenetről sem - a "
+"privát csevegések esetén pedig arra is lehetősége van, hogy azonnal "
+"válaszoljon anélkül, hogy vissza kellene váltania az alkalmazáshoz."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -66,7 +82,7 @@ msgstr "Az ablak maximalizált állapota"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Interneten továbbított csevegés (IRC) kliens a GNOME-hoz"
 
@@ -96,7 +112,7 @@ msgid "Quit"
 msgstr "Kilépés"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:331
+#: ../src/connections.js:321
 msgid "New Connection"
 msgstr "Új kapcsolat"
 
@@ -117,57 +133,47 @@ msgid "_Real Name"
 msgstr "Való_di név"
 
 #: ../data/resources/connection-details-dialog.ui.h:6
-#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "opcionális"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Cancel"
-msgstr "Mé_gse"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
-#: ../src/connections.js:340
-msgid "Cr_eate"
-msgstr "_Létrehozás"
-
 #: ../data/resources/connection-list-dialog.ui.h:2
-msgid "_Close"
-msgstr "_Bezárás"
-
-#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
 msgid "Join Chat Room"
 msgstr "Csatlakozás csevegőszobához"
 
-#: ../data/resources/join-room-dialog.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "Mé_gse"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
+msgid "_Join"
+msgstr "_Csatlakozás"
+
+#: ../data/resources/join-room-dialog.ui.h:5
 msgid "_Add Connection"
 msgstr "_Kapcsolat hozzáadása"
 
-#: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "C_onnection"
 msgstr "_Kapcsolat"
 
-#: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:7
 msgid "Room _Name"
 msgstr "Szoba_név"
 
-#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Jelszó"
-
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Join"
-msgstr "_Csatlakozás"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -186,210 +192,308 @@ msgid "Message User"
 msgstr "Üzenet felhasználónak"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Recent"
-msgstr "Leg_utóbbi"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Name"
-msgstr "_Név"
-
-#: ../data/resources/message-user-dialog.ui.h:6
 msgid "_Message"
 msgstr "Üz_enet"
 
-#: ../src/application.js:408
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr "Leg_utóbbi"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "_Név"
+
+#: ../src/application.js:402
 msgid "Good Bye"
 msgstr "Viszlát"
 
-#: ../src/application.js:465
+#: ../src/application.js:459
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
 
-#: ../src/chatView.js:498
+#: ../src/appNotifications.js:105
+#, javascript-format
+#| msgid "Connections"
+msgid "Connecting to %s"
+msgstr "Kapcsolódás a következőhöz: %s"
+
+#: ../src/chatView.js:506
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s mostantól %s néven ismert"
 
-#: ../src/chatView.js:503
+#: ../src/chatView.js:511
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s kilépett"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:519
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s kirúgva %s által"
 
-#: ../src/chatView.js:513
+#: ../src/chatView.js:521
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kirúgva"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:527
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s kitiltva %s által"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:529
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s kitiltva"
 
-#: ../src/chatView.js:526
+#: ../src/chatView.js:534
 #, javascript-format
 msgid "%s joined"
 msgstr "%s csatlakozott"
 
-#: ../src/chatView.js:530
+#: ../src/chatView.js:538
 #, javascript-format
 msgid "%s left"
 msgstr "%s kilépett"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:560
+#: ../src/chatView.js:568
 msgid "%H∶%M"
 msgstr "%k.%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:565
-#| msgid "Yesterday, %H:%M"
+#: ../src/chatView.js:573
 msgid "Yesterday, %H∶%M"
 msgstr "Tegnap, %k.%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:570
-#| msgid "%A, %H:%M"
+#: ../src/chatView.js:578
 msgid "%A, %H∶%M"
 msgstr "%A, %k.%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:576
-#| msgid "%B %d, %H:%M"
+#: ../src/chatView.js:584
 msgid "%B %d, %H∶%M"
 msgstr "%B %d., %k.%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:582
-#| msgid "%B %d %Y, %H:%M"
+#: ../src/chatView.js:590
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y. %B %d., %k.%M"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:590
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:595
 msgid "%l∶%M %p"
 msgstr "%l.%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:595
-#| msgid "Yesterday, %H:%M"
+#: ../src/chatView.js:600
 msgid "Yesterday, %l∶%M %p"
 msgstr "Tegnap, %l.%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:600
-#| msgid "%A, %H:%M"
+#: ../src/chatView.js:605
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l.%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:606
-#| msgid "%B %d, %H:%M"
+#: ../src/chatView.js:611
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d., %l.%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:612
-#| msgid "%B %d %Y, %H:%M"
+#: ../src/chatView.js:617
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y. %B %d., %l.%M %p"
 
-#: ../src/connections.js:330
+#: ../src/connections.js:320
 msgid "Edit Connection"
 msgstr "Kapcsolat szerkesztése"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:334
 msgid "A_pply"
 msgstr "_Alkalmazás"
 
-#: ../src/joinDialog.js:68
-msgid "_Save"
-msgstr "M_entés"
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "_Létrehozás"
 
-#: ../src/joinDialog.js:194
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<parancs>] - megjeleníti a súgót a <parancshoz>, vagy listázza az "
+"elérhető parancsokat"
+
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <becenév> [<csatorna>] - meghívja a <becenév> nevű partnert a "
+"megadott vagy az aktuális <csatornába>"
+
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <csatorna> - belép a <csatornába>"
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr ""
+"/KICK <becenév> - kirúgja a <becenév> nevű partnert az aktuális csatornából"
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <cselekvés> - elküldi a <cselekvést> az aktuális csatornának"
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - kilistázza az aktuális csatorna felhasználóit"
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <becenév> - beállítja a megjelenítendő <becenevet>"
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<csatorna>] [<indoklás>] - elhagyja a <csatornát> (alapesetben az "
+"aktuálisat) valamilyen indokkal"
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+"/QUERY <becenév> - privát beszélgetést nyit a <becenév> nevű partnerrel"
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<indoklás>] - bontja a kapcsolatot az aktuális kiszolgálóval"
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <szöveg> - elküldi a <szöveget> az aktuális szobának/partnernek"
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr ""
+"/TOPIC <téma> - beállítja a témát <témára>, vagy megjeleníti a jelenlegit"
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+"Ismeretlen parancs - próbálja ki a /HELP parancsot az elérhető parancsok "
+"listázásához"
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Használat: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "Ismert parancsok:"
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Felhasználók ezen: %s:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "Nincs téma beállítva"
+
+#: ../src/joinDialog.js:206
 msgid "Add Connection"
 msgstr "Kapcsolat hozzáadása"
+
+#: ../src/joinDialog.js:208
+msgid "_Save"
+msgstr "M_entés"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
 msgstr "Nincsenek legutóbbi felhasználók"
 
-#: ../src/userList.js:172
+#: ../src/userList.js:185
 msgid "Loading details"
 msgstr "Részletek betöltése"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:193
 msgid "Message"
 msgstr "Üzenet"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:210
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d másodperce"
 msgstr[1] "%d másodperce"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:215
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d perce"
 msgstr[1] "%d perce"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:220
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d órája"
 msgstr[1] "%d órája"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:225
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d napja"
 msgstr[1] "%d napja"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:230
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hete"
 msgstr[1] "%d hete"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:234
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d hónapja"
 msgstr[1] "%d hónapja"
 
-#: ../src/userList.js:245
+#: ../src/userList.js:258
 msgid "Last Activity:"
 msgstr "Utolsó esemény:"
 
-#: ../src/userList.js:443
+#: ../src/userList.js:457
 msgid "All"
 msgstr "Összes"
 
+#~ msgid "_Close"
+#~ msgstr "_Bezárás"
