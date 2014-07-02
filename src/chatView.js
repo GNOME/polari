@@ -559,7 +559,16 @@ const ChatView = new Lang.Class({
         let date = GLib.DateTime.new_from_unix_local(timestamp);
         let now = GLib.DateTime.new_now_local();
 
-        let daysAgo = now.difference(date) / GLib.TIME_SPAN_DAY;
+        // 00:01 actually, just to be safe
+        let todayMidnight = GLib.DateTime.new_local(now.get_year(),
+                                                    now.get_month(),
+                                                    now.get_day_of_month(),
+                                                    0, 1, 0);
+        let dateMidnight = GLib.DateTime.new_local(date.get_year(),
+                                                   date.get_month(),
+                                                   date.get_day_of_month(),
+                                                   0, 1, 0);
+        let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
 
         let format;
         let desktopSettings = new Gio.Settings({ schema: 'org.gnome.desktop.interface' });
