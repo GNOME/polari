@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
+const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
@@ -392,12 +393,35 @@ const ChatView = new Lang.Class({
         delete this._pending[id];
     },
 
-    _handleLinkClicks: function(view, event) {
-        let [, button] = event.get_button();
-        if (button != Gdk.BUTTON_PRIMARY)
-            return Gdk.EVENT_PROPAGATE;
+    _showUrlContextMenu: function(url, button, time) {
+        let menu = new Gtk.Menu();
 
+        let item = new Gtk.MenuItem({ label: _("Open Link") });
+        item.connect('activate',
+            function() {
+                Gio.AppInfo.launch_default_for_uri(url, null);
+            });
+        menu.append(item);
+
+        item = new Gtk.MenuItem({ label: _("Copy Link Address") });
+        item.connect('activate',
+            function() {
+                let clipboard = Polari.util_get_clipboard_for_widget(item);
+                clipboard.set_text(url, -1);
+            });
+        menu.append(item);
+
+        menu.show_all();
+        menu.popup(null, null, null, button, time);
+    },
+
+    _handleLinkClicks: function(view, event) {
         let isPress = event.get_event_type() == Gdk.EventType.BUTTON_PRESS;
+
+        let [, button] = event.get_button();
+        if (button != Gdk.BUTTON_PRIMARY &&
+            (button != Gdk.BUTTON_SECONDARY || !isPress))
+            return Gdk.EVENT_PROPAGATE;
 
         if (isPress)
             this._clickedUrl = null;
@@ -411,12 +435,16 @@ const ChatView = new Lang.Class({
         for (let i = 0; i < tags.length; i++) {
             let url = tags[i]._url;
             if (url) {
+                if (url.indexOf(':') == -1)
+                    url = 'http://' + url;
+
                 if (isPress) {
-                    this._clickedUrl = url;
+                    if (button == Gdk.BUTTON_PRIMARY)
+                        this._clickedUrl = url;
+                    else
+                        this._showUrlContextMenu(url, button, event.get_time());
                     return Gdk.EVENT_STOP;
                 } else if (this._clickedUrl == url) {
-                    if (url.indexOf(':') == -1)
-                        url = 'http://' + url;
                     Gio.AppInfo.launch_default_for_uri(url, null);
                     return Gdk.EVENT_STOP;
                 }
