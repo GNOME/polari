@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.";
  */
 
-#ifndef __POLARI_UTILS_H__
-#define __POLARI_UTILS_H__
+#ifndef __POLARI_DRAG_HELPER_H__
+#define __POLARI_DRAG_HELPER_H__
 
 #include <gtk/gtk.h>
 
@@ -35,4 +35,4 @@ guint    polari_drag_dest_find_target (GtkWidget      *widget,
 
 G_END_DECLS
 
-#endif /* __POLARI_UTILS_H__ */
+#endif /* __POLARI_DRAG_HELPER_H__ */
