@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-03 16:52+0000\n"
-"PO-Revision-Date: 2014-06-17 18:32+0200\n"
+"POT-Creation-Date: 2014-07-03 22:16+0000\n"
+"PO-Revision-Date: 2014-07-04 11:21+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -210,109 +210,116 @@ msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
 
 #: ../src/appNotifications.js:105
 #, javascript-format
-#| msgid "Connections"
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
 
-#: ../src/chatView.js:506
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "Abrir enlace"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "Copiar la dirección del enlace"
+
+#: ../src/chatView.js:538
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s ahora se llama %s"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:543
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s se ha desconectado"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:551
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s ha sido expulsado por %s"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:553
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s ha sido expulsado"
 
-#: ../src/chatView.js:527
+#: ../src/chatView.js:559
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s ha sido bloqueado por %s"
 
-#: ../src/chatView.js:529
+#: ../src/chatView.js:561
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s ha sido bloqueado"
 
-#: ../src/chatView.js:534
+#: ../src/chatView.js:566
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ha entrado"
 
-#: ../src/chatView.js:538
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s left"
 msgstr "%s se ha ido"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:568
+#: ../src/chatView.js:609
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:573
+#: ../src/chatView.js:614
 msgid "Yesterday, %H∶%M"
 msgstr "Ayer a las %H:%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:578
+#: ../src/chatView.js:619
 msgid "%A, %H∶%M"
 msgstr "%A a las %H:%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:584
+#: ../src/chatView.js:625
 msgid "%B %d, %H∶%M"
 msgstr "%d de %B a las %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:590
+#: ../src/chatView.js:631
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B de %Y a las %H:%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:595
+#: ../src/chatView.js:636
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:600
+#: ../src/chatView.js:641
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ayer a las %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:605
+#: ../src/chatView.js:646
 msgid "%A, %l∶%M %p"
 msgstr "%A a las %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:611
+#: ../src/chatView.js:652
 msgid "%B %d, %l∶%M %p"
 msgstr "%d de %B a las %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:617
+#: ../src/chatView.js:658
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B de %Y a las %H:%M"
 
