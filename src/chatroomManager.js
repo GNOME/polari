@@ -86,18 +86,26 @@ const _ChatroomManager = new Lang.Class({
         this._client.register();
 
         am.connect('account-enabled',
-                   Lang.bind(this, this._restoreSavedChannels));
+                   Lang.bind(this, this._onAccountEnabled));
         am.connect('account-disabled',
                    Lang.bind(this, this._onAccountDisabled));
         am.connect('account-removed',
                    Lang.bind(this, this._onAccountDisabled));
-        this._restoreSavedChannels();
+        this._accountsMonitor.connect('account-status-changed', Lang.bind(this, function(monitor, account) {
+            if (account.connection_status == Tp.ConnectionStatus.CONNECTED)
+                this._restoreSavedChannels(account);
+        }));
+        this._restoreSavedChannels(null);
 
         this._networkMonitor.connect('notify::network-available', Lang.bind(this,
             function() {
                 if (this._networkMonitor.network_available)
-                    this._restoreSavedChannels();
+                    this._restoreSavedChannels(null);
             }));
+    },
+
+    _onAccountEnabled: function(am, account) {
+        this._restoreSavedChannels(account);
     },
 
     _onAccountDisabled: function(am, account) {
@@ -108,7 +116,7 @@ const _ChatroomManager = new Lang.Class({
         }
     },
 
-    _restoreSavedChannels: function() {
+    _restoreSavedChannels: function(account) {
         let settings = new Gio.Settings({ schema: 'org.gnome.polari' });
         let savedChannels = settings.get_value('saved-channel-list').deep_unpack();
         for (let i = 0; i < savedChannels.length; i++) {
@@ -116,7 +124,8 @@ const _ChatroomManager = new Lang.Class({
             for (let prop in serializedChannel)
                 serializedChannel[prop] = serializedChannel[prop].deep_unpack();
 
-            this._restoreChannel(serializedChannel);
+            if (account == null || serializedChannel.account == account.object_path)
+                this._restoreChannel(serializedChannel);
         }
     },
 
