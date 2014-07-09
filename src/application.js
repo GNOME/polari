@@ -43,6 +43,9 @@ const Application = new Lang.Class({
     },
 
     vfunc_startup: function() {
+        let resource = Gio.Resource.load(Config.RESOURCE_DIR + '/polari.gresource');
+        resource._register();
+
         this.parent();
         String.prototype.format = Format.format;
 
@@ -54,9 +57,6 @@ const Application = new Lang.Class({
 
         let w = new Polari.FixedSizeFrame(); // register gtype
         w.destroy();
-
-        let resource = Gio.Resource.load(Config.RESOURCE_DIR + '/polari.gresource');
-        resource._register();
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -71,10 +71,6 @@ const Application = new Lang.Class({
         this.pasteManager = new PasteManager.PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
-
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/app-menu.ui');
-        this.set_app_menu(builder.get_object('app-menu'));
 
         let actionEntries = [
           { name: 'room-menu',
