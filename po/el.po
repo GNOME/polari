@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-20 23:26+0000\n"
-"PO-Revision-Date: 2014-03-21 09:39+0300\n"
-"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"POT-Creation-Date: 2014-07-06 22:14+0000\n"
+"PO-Revision-Date: 2014-07-10 02:34+0200\n"
+"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: team@lists.gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.0\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
@@ -28,6 +28,19 @@ msgstr ""
 "Ένας απλός πελάτης μεταγωγής συνομιλίας διαδικτύου (IRC) που σχεδιάστηκε για "
 "αδιάλειπτη ενσωμάτωση με το GNOME· χαρακτηρίζεται από μια απλή και όμορφη "
 "διεπαφή που σας επιτρέπει να εστιάσετε στις συζητήσεις σας."
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"Μπορείτε να χρησιμοποιήσετε το Polari για να συνομιλήσετε δημόσια με "
+"ανθρώπους σε ένα κανάλι, και να έχετε ιδιωτικές συνομιλίες ένας προς έναν. "
+"Οι ειδοποιήσεις φροντίζουν ώστε να μην χάσετε ποτέ ένα σημαντικό μήνυμα - "
+"για ιδιωτικές συζητήσεις, σας επιτρέπουν επίσης να απαντήσετε απευθείας, "
+"χωρίς να κάνετε εναλλαγή στην εφαρμογή!"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -66,17 +79,17 @@ msgstr "Κατάσταση μεγιστοποίησης παραθύρου"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ένας πελάτης συνομιλίας μεταγωγής διαδικτύου για το GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;διαδίκτυο;μεταγωγή;συνομιλία;"
+msgstr "IRC;διαδίκτυο;μεταγωγή;συνομιλία;Internet;Relay;Chat;"
 
 #: ../data/org.gnome.Polari.desktop.in.h:4
 msgid "Show connections"
-msgstr "Παρουσίαση Συνδέσεων"
+msgstr "Εμφάνιση συνδέσεων"
 
 #: ../data/resources/app-menu.ui.h:1
 #: ../data/resources/connection-list-dialog.ui.h:1
@@ -96,7 +109,7 @@ msgid "Quit"
 msgstr "Έξοδος"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:331
+#: ../src/connections.js:321
 msgid "New Connection"
 msgstr "Νέα σύνδεση"
 
@@ -117,61 +130,51 @@ msgid "_Real Name"
 msgstr "Π_ραγματικό όνομα"
 
 #: ../data/resources/connection-details-dialog.ui.h:6
-#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "προαιρετικό"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Cancel"
-msgstr "Ά_κυρο"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
-#: ../src/connections.js:340
-msgid "Cr_eate"
-msgstr "Δη_μιουργία"
-
 #: ../data/resources/connection-list-dialog.ui.h:2
-msgid "_Close"
-msgstr "_Κλείσιμο"
-
-#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Προσθήκη"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
 msgid "Join Chat Room"
-msgstr "Συμμετοχή με την αίθουσα συνομιλιών"
+msgstr "Συμμετοχή σε δωμάτιο συνομιλιών"
 
-#: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Add Connection"
-msgstr "Πρ_οσθήκη σύνδεσης"
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "Ά_κυρο"
 
-#: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "C_onnection"
-msgstr "Σύν_δεση"
-
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "Room _Name"
-msgstr "Ό_νομα αίθουσας"
-
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "_Password"
-msgstr "Κ_ωδικός πρόσβασης"
-
-#: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
 msgid "_Join"
 msgstr "_Συμμετοχή"
 
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "Πρ_οσθήκη σύνδεσης"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "C_onnection"
+msgstr "Σύν_δεση"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr "Ό_νομα δωματίου"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "Κ_ωδικός πρόσβασης"
+
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
-msgstr "Συμμετοχή σε αίθουσα"
+msgstr "Συμμετοχή σε δωμάτιο"
 
 #: ../data/resources/main-window.ui.h:2
 msgid "Message a User"
@@ -186,204 +189,316 @@ msgid "Message User"
 msgstr "Μήνυμα σε χρήστη"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Recent"
-msgstr "Πρόσ_φατα"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Name"
-msgstr "Ό_νομα"
-
-#: ../data/resources/message-user-dialog.ui.h:6
 msgid "_Message"
 msgstr "_Μήνυμα"
 
-#: ../src/application.js:408
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr "Πρόσ_φατα"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "Ό_νομα"
+
+#: ../src/application.js:402
 msgid "Good Bye"
 msgstr "Αποχαιρετισμός"
 
-#: ../src/application.js:465
+#: ../src/application.js:459
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα του GNOME\n"
 " Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
+" Μαρία Μαυρίδου <mavridou@gmail.com>\n"
 "Για περισσότερα δείτε: http://gnome.gr"
 
-#: ../src/chatView.js:498
+#: ../src/appNotifications.js:105
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "Σύνδεση στο %s"
+
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "Άνοιγμα συνδέσμου"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "Αντιγραφή διεύθυνσης συνδέσμου"
+
+#: ../src/chatView.js:538
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Ο %s τώρα είναι γνωστός ως %s"
 
-#: ../src/chatView.js:503
+#: ../src/chatView.js:543
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Ο %s αποσυνδέθηκε"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:551
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Ο %s έχει εκδιωχθεί από τον %s"
 
-#: ../src/chatView.js:513
+#: ../src/chatView.js:553
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Ο %s έχει εκδιωχθεί"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:559
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Ο %s έχει αποκλειστεί από τον %s"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:561
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Ο %s έχει αποκλειστεί"
 
-#: ../src/chatView.js:526
+#: ../src/chatView.js:566
 #, javascript-format
 msgid "%s joined"
 msgstr "Ο %s συμμετέχει"
 
-#: ../src/chatView.js:530
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s left"
 msgstr "Ο %s απέμεινε"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:560
+#: ../src/chatView.js:609
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:565
+#: ../src/chatView.js:614
 msgid "Yesterday, %H∶%M"
 msgstr "Χθες, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:570
+#: ../src/chatView.js:619
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:576
+#: ../src/chatView.js:625
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:582
+#: ../src/chatView.js:631
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:590
+#: ../src/chatView.js:636
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:595
+#: ../src/chatView.js:641
 msgid "Yesterday, %l∶%M %p"
 msgstr "Χθες, %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:600
+#: ../src/chatView.js:646
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:606
+#: ../src/chatView.js:652
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:612
+#: ../src/chatView.js:658
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:330
+#: ../src/connections.js:320
 msgid "Edit Connection"
 msgstr "Επεξεργασία σύνδεσης"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:334
 msgid "A_pply"
 msgstr "Ε_φαρμογή"
 
-#: ../src/joinDialog.js:68
-msgid "_Save"
-msgstr "Απο_θήκευση"
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "Δη_μιουργία"
 
-#: ../src/joinDialog.js:194
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<command>] - εμφανίζει βοήθεια για την εντολή <command>, ή μια λίστα "
+"από διαθέσιμες εντολές"
+
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <nick> [<channel>] - προσκαλεί το ψευδώνυμο <nick> σε κανάλι "
+"<channel>, ή στο τρέχον"
+
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <channel> - συμμετέχει στο κανάλι <channel>"
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "/KICK <nick> - διώχνει το ψευδώνυμο <nick> από το τρέχον κανάλι "
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <action> - στέλνει μια ενέργεια <action> στο τρέχον κανάλι"
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - απαριθμεί τους χρήστες στο τρέχον κανάλι"
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <nickname> - ορίζει το ψευδώνυμό σας σε <nickname>"
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<channel>] [<reason>] - αφήνει το κανάλι <channel>, από προεπιλογή το "
+"τρέχον"
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+"/QUERY <nick> - ανοίγει μια ιδιωτική συνομιλία με τον χρήστη με ψευδώνυμο "
+"<nick>"
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<reason>] - αποσυνδέεται από τον τρέχοντα διακομιστή"
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <text> - στέλνει κείμενο <text> στο τρέχον δωμάτιο/επαφή"
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <topic> - ορίζει το θέμα σε <topic>, ή εμφανίζει το τρέχον"
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr "Άγνωστη εντολή - δοκιμάστε /HELP για μια λίστα με διαθέσιμες εντολές"
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Χρήση: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "Γνωστές εντολές:"
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Χρήστες στο %s:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "Δεν έχει οριστεί θέμα"
+
+#: ../src/joinDialog.js:206
 msgid "Add Connection"
 msgstr "Προσθήκη σύνδεσης"
+
+#: ../src/joinDialog.js:208
+msgid "_Save"
+msgstr "Απο_θήκευση"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
 msgstr "Χωρίς πρόσφατους χρήστες"
 
-#: ../src/userList.js:172
+#: ../src/userList.js:185
 msgid "Loading details"
 msgstr "Φόρτωση λεπτομερειών"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:193
 msgid "Message"
 msgstr "Μήνυμα"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:210
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d δευτερόλεπτο πριν"
 msgstr[1] "%d δευτερόλεπτα πριν"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:215
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d λεπτό πριν"
 msgstr[1] "%d λεπτά πριν"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:220
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d ώρα πριν"
 msgstr[1] "%d ώρες πριν"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:225
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d ημέρα πριν"
 msgstr[1] "%d ημέρες πριν"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:230
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d εβδομάδα πριν"
 msgstr[1] "%d εβδομάδες πριν"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:234
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d μήνα πριν"
 msgstr[1] "%d μήνες πριν"
 
-#: ../src/userList.js:245
+#: ../src/userList.js:258
 msgid "Last Activity:"
 msgstr "Τελευταία δραστηριότητα:"
 
-#: ../src/userList.js:443
+#: ../src/userList.js:457
 msgid "All"
 msgstr "Όλα"
+
+#~ msgid "_Close"
+#~ msgstr "_Κλείσιμο"
