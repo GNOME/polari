@@ -34,7 +34,7 @@ const ConnectionsDialog = new Lang.Class({
         let app = Gio.Application.get_default();
 
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/polari/connection-list-dialog.ui');
+        builder.add_from_resource('/org/gnome/Polari/connection-list-dialog.ui');
 
         this.widget = builder.get_object('connection_list_dialog');
         this.widget.transient_for = app.get_active_window();
@@ -199,7 +199,7 @@ const ConnectionDetails = new Lang.Class({
 
     _createWidget: function() {
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/polari/connection-details-dialog.ui');
+        builder.add_from_resource('/org/gnome/Polari/connection-details-dialog.ui');
 
         this.widget = builder.get_object('connection_details_content');
         this.widget.unparent();

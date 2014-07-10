@@ -73,7 +73,7 @@ const Application = new Lang.Class({
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/polari/app-menu.ui');
+        builder.add_from_resource('/org/gnome/Polari/app-menu.ui');
         this.set_app_menu(builder.get_object('app-menu'));
 
         let actionEntries = [
@@ -164,7 +164,7 @@ const Application = new Lang.Class({
             }));
 
         let provider = new Gtk.CssProvider();
-        let uri = 'resource:///org/gnome/polari/application.css';
+        let uri = 'resource:///org/gnome/Polari/application.css';
         let file = Gio.File.new_for_uri(uri);
         try {
             provider.load_from_file(Gio.File.new_for_uri(uri));

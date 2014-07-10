@@ -243,7 +243,7 @@ const MainWindow = new Lang.Class({
 
     _createWidget: function(app) {
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/polari/main-window.ui');
+        builder.add_from_resource('/org/gnome/Polari/main-window.ui');
 
         this.window = builder.get_object('main_window');
         this.window.application = app;
