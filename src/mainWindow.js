@@ -192,7 +192,7 @@ const MainWindow = new Lang.Class({
         notification.widget.connect('destroy',
             function() {
                 app.unmark_busy();
-		delete account._connectingNotification;
+                delete account._connectingNotification;
             });
     },
 
