@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-03 16:52+0000\n"
-"PO-Revision-Date: 2014-06-03 14:16-0300\n"
+"POT-Creation-Date: 2014-07-18 10:19+0000\n"
+"PO-Revision-Date: 2014-07-18 09:55-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -43,6 +43,23 @@ msgstr ""
 "que você jamais se esqueça de uma mensagem importante - para conversas "
 "particulares, elas ainda permitem que você responda instantaneamente sem "
 "retornar ao aplicativo!"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:456
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;Bate-papo;Bate papo;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Mostra conexões"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -76,40 +93,6 @@ msgstr "Janela maximizada"
 msgid "Window maximized state"
 msgstr "Estado de janela maximizada"
 
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
-
-#: ../data/org.gnome.Polari.desktop.in.h:3
-msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Relay;Chat;Bate-papo;Bate papo;"
-
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Mostra conexões"
-
-#: ../data/resources/app-menu.ui.h:1
-#: ../data/resources/connection-list-dialog.ui.h:1
-msgid "Connections"
-msgstr "Conexões"
-
-#: ../data/resources/app-menu.ui.h:2
-msgid "Preferences"
-msgstr "Preferências"
-
-#: ../data/resources/app-menu.ui.h:3
-msgid "About"
-msgstr "Sobre"
-
-#: ../data/resources/app-menu.ui.h:4
-msgid "Quit"
-msgstr "Sair"
-
 #: ../data/resources/connection-details-dialog.ui.h:1
 #: ../src/connections.js:321
 msgid "New Connection"
@@ -135,6 +118,11 @@ msgstr "Nome _real"
 #: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "opcional"
+
+#: ../data/resources/connection-list-dialog.ui.h:1
+#: ../data/resources/menus.ui.h:1
+msgid "Connections"
+msgstr "Conexões"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "Add"
@@ -186,6 +174,18 @@ msgstr "Enviar mensagem a um usuário"
 msgid "_Leave"
 msgstr "A_bandonar"
 
+#: ../data/resources/menus.ui.h:2
+msgid "Preferences"
+msgstr "Preferências"
+
+#: ../data/resources/menus.ui.h:3
+msgid "About"
+msgstr "Sobre"
+
+#: ../data/resources/menus.ui.h:4
+msgid "Quit"
+msgstr "Sair"
+
 #: ../data/resources/message-user-dialog.ui.h:1
 msgid "Message User"
 msgstr "Enviar mensagem a usuário"
@@ -202,11 +202,11 @@ msgstr "_Recente"
 msgid "_Name"
 msgstr "_Nome"
 
-#: ../src/application.js:402
+#: ../src/application.js:398
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:459
+#: ../src/application.js:455
 msgid "translator-credits"
 msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013, 2014."
 
@@ -215,105 +215,113 @@ msgstr "Enrico Nicoletto <liverig@gmail.com>, 2013, 2014."
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
 
-#: ../src/chatView.js:506
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "Abrir link"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "Copiar endereço do link"
+
+#: ../src/chatView.js:538
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é conhecido agora como %s"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:543
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectou-se"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:551
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi retirado do canal por %s"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:553
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi retirado do canal"
 
-#: ../src/chatView.js:527
+#: ../src/chatView.js:559
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:529
+#: ../src/chatView.js:561
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:534
+#: ../src/chatView.js:566
 #, javascript-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:538
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:568
+#: ../src/chatView.js:609
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:573
+#: ../src/chatView.js:614
 msgid "Yesterday, %H∶%M"
 msgstr "Ontem, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:578
+#: ../src/chatView.js:619
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:584
+#: ../src/chatView.js:625
 msgid "%B %d, %H∶%M"
 msgstr "%d de %B, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:590
+#: ../src/chatView.js:631
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B de %Y, %H∶%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:595
+#: ../src/chatView.js:636
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:600
+#: ../src/chatView.js:641
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ontem, %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:605
+#: ../src/chatView.js:646
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:611
+#: ../src/chatView.js:652
 msgid "%B %d, %l∶%M %p"
 msgstr "%d de %B, %l∶%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:617
+#: ../src/chatView.js:658
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B de %Y, %l∶%M %p"
 
@@ -379,17 +387,14 @@ msgid ""
 msgstr "/PART [<canal>] [<motivo>] - deixa o <canal>, por padrão o canal atual"
 
 #: ../src/ircParser.js:37
-#| msgid "</QUERY <nick> - opens a private conversation with <nick>"
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <apelido> - abre uma conversa particular com <apelido>"
 
 #: ../src/ircParser.js:38
-#| msgid "</QUIT [<reason>] - disconnects from the current server"
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<motivo>] - desconecta-se do servidor atual"
 
 #: ../src/ircParser.js:39
-#| msgid "</SAY <text> - sends <text> to the current room/contact"
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <texto> - envia <texto> para a sala ou contato atual"
 
