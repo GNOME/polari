@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: polari\n"
+"Project-Id-Version: polari 3.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-23 19:32+0100\n"
-"PO-Revision-Date: 2014-03-23 19:38+0100\n"
+"POT-Creation-Date: 2014-07-23 11:13+0200\n"
+"PO-Revision-Date: 2014-07-23 11:19+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -26,6 +26,31 @@ msgid ""
 "allows you to focus on your conversations."
 msgstr ""
 
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:456
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internett;Relay;Chat;Prat;Lynmeldinger;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Vis tilkoblinger"
+
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
 msgstr "Lagret kanalliste"
@@ -36,7 +61,7 @@ msgstr ""
 
 #: ../data/org.gnome.polari.gschema.xml.h:3
 msgid "Window size"
-msgstr ""
+msgstr "Vindustørrelse"
 
 #: ../data/org.gnome.polari.gschema.xml.h:4
 msgid "Window size (width and height)."
@@ -58,38 +83,8 @@ msgstr ""
 msgid "Window maximized state"
 msgstr ""
 
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
-
-#: ../data/org.gnome.Polari.desktop.in.h:3
-msgid "IRC;Internet;Relay;Chat;"
-msgstr ""
-
-#: ../data/resources/app-menu.ui.h:1
-#: ../data/resources/connection-list-dialog.ui.h:1
-msgid "Connections"
-msgstr "Tilkoblinger"
-
-#: ../data/resources/app-menu.ui.h:2
-msgid "Preferences"
-msgstr "Brukervalg"
-
-#: ../data/resources/app-menu.ui.h:3
-msgid "About"
-msgstr "Om"
-
-#: ../data/resources/app-menu.ui.h:4
-msgid "Quit"
-msgstr "Avslutt"
-
 #: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:331
+#: ../src/connections.js:321
 msgid "New Connection"
 msgstr "Ny tilkobling"
 
@@ -110,237 +105,398 @@ msgid "_Real Name"
 msgstr "Vi_rkelig navn"
 
 #: ../data/resources/connection-details-dialog.ui.h:6
-#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "valgfri"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Cancel"
-msgstr "_Avbryt"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
-#: ../src/connections.js:340
-msgid "Cr_eate"
-msgstr ""
+#: ../data/resources/connection-list-dialog.ui.h:1
+#: ../data/resources/menus.ui.h:1
+msgid "Connections"
+msgstr "Tilkoblinger"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
-msgid "_Close"
-msgstr "_Lukk"
-
-#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr ""
 
-#: ../data/resources/connection-list-dialog.ui.h:4
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Remove"
 msgstr ""
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
 msgid "Join Chat Room"
 msgstr ""
 
-#: ../data/resources/join-room-dialog.ui.h:3
-#, fuzzy
-msgid "_Add Connection"
-msgstr "Koble til"
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "_Avbryt"
 
-#: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:2
-#, fuzzy
-msgid "C_onnection"
-msgstr "K_oble til"
-
-#: ../data/resources/join-room-dialog.ui.h:5
-#, fuzzy
-msgid "Room _Name"
-msgstr "_Navn:"
-
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "_Password"
-msgstr "_Passord"
-
-#: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
 msgid "_Join"
 msgstr "_Bli med"
 
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "_Legg til tilkobling"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "C_onnection"
+msgstr "Tilk_obling"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr "_Navn på rom"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "_Passord"
+
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
-msgstr ""
+msgstr "Bli med i et rom"
 
 #: ../data/resources/main-window.ui.h:2
-#, fuzzy
 msgid "Message a User"
-msgstr "Melding i %s"
+msgstr "Send melding til en bruker"
 
 #: ../data/resources/main-window.ui.h:4
 msgid "_Leave"
 msgstr "_Forlat kanal"
 
+#: ../data/resources/menus.ui.h:2
+msgid "Preferences"
+msgstr "Brukervalg"
+
+#: ../data/resources/menus.ui.h:3
+msgid "About"
+msgstr "Om"
+
+#: ../data/resources/menus.ui.h:4
+msgid "Quit"
+msgstr "Avslutt"
+
 #: ../data/resources/message-user-dialog.ui.h:1
-#, fuzzy
 msgid "Message User"
-msgstr "Melding"
+msgstr "Send melding til en bruker"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-#, fuzzy
-msgid "_Recent"
-msgstr "Koble til på _nytt"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Name"
-msgstr "_Navn"
-
-#: ../data/resources/message-user-dialog.ui.h:6
 msgid "_Message"
 msgstr "_Melding"
 
-#: ../src/application.js:360
-msgid "Good Bye"
-msgstr ""
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr "_Nylig"
 
-#: ../src/application.js:416
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "_Navn"
+
+#: ../src/application.js:398
+msgid "Good Bye"
+msgstr "Ha det bra"
+
+#: ../src/application.js:455
 msgid "translator-credits"
 msgstr ""
 "Øivind Hoel <ohoel@cvs.gnome.org>\n"
 "Ingar Saltvik <ingar@saltvik.org>\n"
 "Kjartan Maraas <kmaraas@gnome.org>"
 
-#: ../src/chatView.js:483
-#, fuzzy, javascript-format
+#: ../src/appNotifications.js:105
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "Kobler til %s"
+
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "Åpne lenke"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "Kopier lenkeadresse"
+
+#: ../src/chatView.js:538
+#, javascript-format
 msgid "%s is now known as %s"
-msgstr "-%C10-%C11-%O$t$1 er nå kjent som $2"
+msgstr "%s er nå kjent som %s"
 
-#: ../src/chatView.js:488
-#, fuzzy, javascript-format
+#: ../src/chatView.js:543
+#, javascript-format
 msgid "%s has disconnected"
-msgstr "_Koble fra"
+msgstr "%s har koblet fra"
 
-#: ../src/chatView.js:496
+#: ../src/chatView.js:551
 #, javascript-format
 msgid "%s has been kicked by %s"
-msgstr ""
+msgstr "%s har blitt sparket ut av %s"
 
-#: ../src/chatView.js:498
-#, fuzzy, javascript-format
+#: ../src/chatView.js:553
+#, javascript-format
 msgid "%s has been kicked"
-msgstr "Personen som sparkes ut"
+msgstr "%s har blitt sparket ut"
 
-#: ../src/chatView.js:504
+#: ../src/chatView.js:559
 #, javascript-format
 msgid "%s has been banned by %s"
-msgstr ""
+msgstr "%s har blitt bannlyst av %s"
 
-#: ../src/chatView.js:506
+#: ../src/chatView.js:561
 #, javascript-format
 msgid "%s has been banned"
-msgstr ""
+msgstr "%s har blitt bannlyst"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:566
 #, javascript-format
 msgid "%s joined"
-msgstr ""
+msgstr "%s ble med"
 
-#: ../src/chatView.js:515
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s left"
-msgstr ""
+msgstr "%s gikk ut"
 
-#. Translators: this is the word "Yesterday" followed by a time string. i.e. "Yesterday, 14:30"*/
-#: ../src/chatView.js:546
-msgid "Yesterday, %H:%M"
-msgstr ""
+#. today
+#. Translators: Time in 24h format
+#: ../src/chatView.js:609
+msgid "%H∶%M"
+msgstr "%H.%M"
 
-#. Translators: this is the week day name followed by a time string. i.e. "Monday, 14:30*/
-#: ../src/chatView.js:552
-msgid "%A, %H:%M"
-msgstr ""
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:614
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "I går, %H.%M"
 
-#. Translators: this is the month name and day number followed by a time string. i.e. "May 25, 14:30"*/
-#: ../src/chatView.js:557
-msgid "%B %d, %H:%M"
-msgstr ""
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: ../src/chatView.js:619
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A, %H.%M"
 
-#. Translators: this is the month name, day number, year number followed by a time string. i.e. "May 25 2012, 14:30"*/
-#: ../src/chatView.js:561
-msgid "%B %d %Y, %H:%M"
-msgstr ""
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: ../src/chatView.js:625
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%d %B, %H.%M"
 
-#: ../src/connections.js:330
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:631
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %Y, %H.%M"
+
+#. today
+#. Translators: Time in 12h format
+#: ../src/chatView.js:636
+msgid "%l∶%M %p"
+msgstr "%H.%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: ../src/chatView.js:641
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "I går, %H.%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: ../src/chatView.js:646
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %H.%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: ../src/chatView.js:652
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B, %H.%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: ../src/chatView.js:658
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %Y, %H.%M"
+
+#: ../src/connections.js:320
 msgid "Edit Connection"
 msgstr "Rediger tilkobling"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:334
 msgid "A_pply"
+msgstr "_Bruk"
+
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "_Lag"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#.
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
 msgstr ""
 
-#: ../src/joinDialog.js:68
-msgid "_Save"
-msgstr "_Lagre"
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
 
-#: ../src/joinDialog.js:194
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr ""
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr ""
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr ""
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr ""
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr ""
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr ""
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr ""
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr ""
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Bruk: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "Kjente kommandoer:"
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Brukere på %s:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "Emne er ikke satt"
+
+#: ../src/joinDialog.js:206
 msgid "Add Connection"
 msgstr "Legg til tilkobling"
+
+#: ../src/joinDialog.js:208
+msgid "_Save"
+msgstr "_Lagre"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
 msgstr ""
 
-#: ../src/userList.js:172
+#: ../src/userList.js:185
 msgid "Loading details"
-msgstr ""
+msgstr "Laster detaljer"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:193
 msgid "Message"
 msgstr "Melding"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:210
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d sekund siden"
+msgstr[1] "%d sekunder siden"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:215
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minutt siden"
+msgstr[1] "%d minutter siden"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:220
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d time siden"
+msgstr[1] "%d timer siden"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:225
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d dag siden"
+msgstr[1] "%d dager siden"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:230
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d uke siden"
+msgstr[1] "%d uker siden"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:234
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d måned siden"
+msgstr[1] "%d måneder siden"
 
-#: ../src/userList.js:245
+#: ../src/userList.js:258
 msgid "Last Activity:"
-msgstr ""
+msgstr "Siste aktivitet:"
 
-#: ../src/userList.js:436
+#: ../src/userList.js:457
 msgid "All"
-msgstr ""
+msgstr "Alle"
