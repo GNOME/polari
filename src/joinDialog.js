@@ -63,8 +63,6 @@ const JoinDialog = new Lang.Class({
 
         this.widget = builder.get_object('join_room_dialog');
 
-        this._titlebar = builder.get_object('titlebar');
-
         this._stack = builder.get_object('stack');
 
         this._details = new Connections.ConnectionDetails(null);
@@ -219,8 +217,8 @@ const JoinDialog = new Lang.Class({
 
         this._backButton.visible = !isMain;
         this._cancelButton.visible = isMain;
-        this._titlebar.title = isMain ? _("Join Chat Room")
-                                      : _("Add Connection");
+        this.widget.title = isMain ? _("Join Chat Room")
+                                   : _("Add Connection");
         this._confirmButton.label = isMain ? _("_Join")
                                            : _("_Save");
         this._stack.visible_child_name = isMain ? 'main' : 'connection';

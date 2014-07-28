@@ -19,33 +19,24 @@
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="titlebar">
+    <child type="action">
+      <object class="GtkButton" id="cancel_button">
+        <property name="label" translatable="yes">_Cancel</property>
         <property name="visible">True</property>
-        <property name="title" translatable="yes">Message User</property>
-        <child>
-          <object class="GtkButton" id="cancel_button">
-            <property name="label" translatable="yes">_Cancel</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_underline">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="message_button">
-            <property name="label" translatable="yes">_Message</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="can_default">True</property>
-            <property name="has_default">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_underline">True</property>
-          </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
-        </child>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="use_underline">True</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="message_button">
+        <property name="label" translatable="yes">_Message</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="can_default">True</property>
+        <property name="has_default">True</property>
+        <property name="receives_default">True</property>
+        <property name="use_underline">True</property>
       </object>
     </child>
     <child internal-child="vbox">
@@ -187,7 +178,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">cancel_button</action-widget>
+      <action-widget response="cancel">cancel_button</action-widget>
+      <action-widget response="confirm">message_button</action-widget>
     </action-widgets>
   </object>
 </interface>

@@ -296,8 +296,9 @@ const MainWindow = new Lang.Class({
         dialog.widget.transient_for = this.window;
         dialog.widget.show();
         dialog.widget.connect('response',
-            function(widget) {
-                widget.destroy();
+            function(widget, response) {
+                if (response != Gtk.ResponseType.HELP)
+                    widget.destroy();
             });
     },
 
