@@ -176,13 +176,18 @@ const JoinDialog = new Lang.Class({
     },
 
     _updateCanConfirm: function() {
+        let sensitive;
+
         if (this._page == DialogPage.MAIN) {
-            let sensitive = this._connectionCombo.get_active() > -1  &&
-                            this._nameEntry.get_text_length() > 0;
-            this._confirmButton.sensitive = sensitive;
+            sensitive = this._connectionCombo.get_active() > -1  &&
+                        this._nameEntry.get_text_length() > 0;
         } else {
-            this._confirmButton.sensitive = this._details.canConfirm;
+            sensitive = this._details.canConfirm;
         }
+
+        this._confirmButton.sensitive = sensitive;
+        this.widget.set_default_response(sensitive ? Gtk.ResponseType.OK
+                                                   : Gtk.ResponseType.NONE);
     },
 
     get _page() {
@@ -197,8 +202,6 @@ const JoinDialog = new Lang.Class({
 
         if (isMain)
             this._details.reset();
-
-        this._confirmButton.grab_default();
 
         this._backButton.visible = !isMain;
         this._cancelButton.visible = isMain;

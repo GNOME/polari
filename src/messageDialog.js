@@ -167,5 +167,7 @@ const MessageDialog = new Lang.Class({
             let sensitive = this._connectionCombo.get_active() > -1  &&
                             this._nameEntry.get_text_length() > 0;
             this._messageButton.sensitive = sensitive;
+            this.widget.set_default_response(sensitive ? Gtk.ResponseType.OK
+                                                       : Gtk.ResponseType.NONE);
     }
 });
