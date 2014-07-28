@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
+const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
@@ -19,6 +20,8 @@ const JoinDialog = new Lang.Class({
 
     _init: function() {
         this._createWidget();
+
+        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
 
         this._accountsMonitor = AccountsMonitor.getDefault();
 
@@ -149,6 +152,9 @@ const JoinDialog = new Lang.Class({
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
 
+        this._settings.set_string('last-used-account',
+                                  account.get_object_path());
+
         let room = this._nameEntry.get_text();
         if (room[0] != '#')
             room = '#' + room;
@@ -172,7 +178,11 @@ const JoinDialog = new Lang.Class({
         for (let i = 0; i < names.length; i++)
             this._connectionCombo.append_text(names[i]);
         this._connectionCombo.sensitive = names.length > 1;
-        this._connectionCombo.set_active(0);
+
+        let factory = Tp.AccountManager.dup().get_factory();
+        let lastUsed = factory.ensure_account(this._settings.get_string('last-used-account'), []);
+        let activeIndex = lastUsed ? names.indexOf(lastUsed.display_name) : 0;
+        this._connectionCombo.set_active(activeIndex);
     },
 
     _updateCanConfirm: function() {

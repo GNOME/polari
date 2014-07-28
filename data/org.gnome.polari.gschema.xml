@@ -6,6 +6,9 @@
       <summary>Saved channel list</summary>
       <description>List of channels to restore on startup</description>
     </key>
+    <key type="s" name="last-used-account">
+      <default>''</default>
+    </key>
     <key type="ai" name="window-size">
       <default>[800,500]</default>
       <summary>Window size</summary>

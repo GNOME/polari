@@ -16,6 +16,8 @@ const MessageDialog = new Lang.Class({
     _init: function() {
         this._createWidget();
 
+        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+
         this._accounts = {};
         AccountsMonitor.getDefault().dupAccounts().forEach(Lang.bind(this,
             function(a) {
@@ -30,8 +32,13 @@ const MessageDialog = new Lang.Class({
             });
         for (let i = 0; i < names.length; i++)
             this._connectionCombo.append_text(names[i]);
-        this._connectionCombo.set_active(0);
         this._connectionCombo.sensitive = names.length > 1;
+
+        let factory = Tp.AccountManager.dup().get_factory();
+        let lastUsed = factory.ensure_account(this._settings.get_string('last-used-account'), []);
+        let activeIndex = lastUsed ? names.indexOf(lastUsed.display_name) : 0;
+        this._connectionCombo.set_active(activeIndex);
+
         this._updateCanConfirm();
         this._updateRecentList([]);
     },
@@ -151,6 +158,9 @@ const MessageDialog = new Lang.Class({
 
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
+
+        this._settings.set_string('last-used-account',
+                                  account.get_object_path());
 
         let user = this._nameEntry.get_text();
 
