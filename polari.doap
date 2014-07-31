@@ -12,6 +12,8 @@
   <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=polari" />
 
   <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
+  <programming-language>JavaScript</programming-language>
+  <programming-language>C</programming-language>
 
   <maintainer>
     <foaf:Person>
