@@ -1,0 +1,502 @@
+# Assamese translation for polari.
+# Copyright (C) 2014 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+#
+# ngoswami <ngoswami@redhat.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-08-20 10:18+0000\n"
+"PO-Revision-Date: 2014-08-20 20:22+0530\n"
+"Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
+"Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
+"Language: as\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"এটা সাধাৰণ ইন্টাৰনেট ৰিলে চেট (IRC) ক্লাএন্ট যাক GNOME ৰ সৈতে সহজভাৱে অনুকলন "
+"কৰিবলে "
+"ৰূপাঙ্কণ কৰা হৈছে; ইয়াৰ এটা সাধাৰণ আৰু ধূনীয়া আন্তঃপৃষ্ঠ আছে যি আপোনাক আপোনাৰ "
+"কথোপকথনৰ "
+"ওপৰত মনোনিবেষ কৰায়।"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"আপুনি Polari ব্যৱহাৰ কৰি এটা চেনেলৰ মানুহৰ সৈতে ৰাজহুৱাভাৱে চেট, আৰু "
+"ব্যক্তিগত "
+"কথোপকথনো কৰিব পাৰিব। অধিসূচনাসমূহে সুনিশ্চিত কৰে যে আপোনাৰ এটা গুৰুত্বপূৰ্ণ "
+"বাৰ্তা "
+"বাদ নাযায় - বিশেষকৈ ব্যক্তিগত কথোপকথনৰ বাবে, ই আপোনাক এপ্লিকেচনলৈ উভতি "
+"নহোৱাকৈ "
+"তৎক্ষনাত উত্তৰ দিয়াৰ সুবিধা দিয়ে।"
+
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:456
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOME ৰ বাবে এটা ইন্টাৰনেট ৰিলে চেট ক্লাএন্ট"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;ইন্টাৰনেট;ৰিলে;চেট;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "সংযোগসমূহ দেখুৱাওক"
+
+#: ../data/org.gnome.polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "সংৰক্ষিত চেনেল তালিকা"
+
+#: ../data/org.gnome.polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "আৰম্ভণিত পুনৰুদ্ধাৰ কৰিবলে চেনেলসমূহৰ তালিকা"
+
+#: ../data/org.gnome.polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "উইন্ডোৰ আকাৰ"
+
+#: ../data/org.gnome.polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "উইন্ডোৰ আকাৰ (প্ৰস্থ আৰু উচ্চতা)।"
+
+#: ../data/org.gnome.polari.gschema.xml.h:5
+msgid "Window position"
+msgstr "উইন্ডোৰ অৱস্থান"
+
+#: ../data/org.gnome.polari.gschema.xml.h:6
+msgid "Window position (x and y)."
+msgstr "উইন্ডোৰ অৱস্থান (x আৰু y)।"
+
+#: ../data/org.gnome.polari.gschema.xml.h:7
+msgid "Window maximized"
+msgstr "উইন্ডোৰ সৰ্বাধিক আকাৰ"
+
+#: ../data/org.gnome.polari.gschema.xml.h:8
+msgid "Window maximized state"
+msgstr "উইন্ডোৰ সৰ্বাধিক আকাৰ।"
+
+#: ../data/resources/connection-details-dialog.ui.h:1
+#: ../src/connections.js:321
+msgid "New Connection"
+msgstr "নতুন সংযোগ"
+
+#: ../data/resources/connection-details-dialog.ui.h:2
+msgid "_Address"
+msgstr "ঠিকনা (_A)"
+
+#: ../data/resources/connection-details-dialog.ui.h:3
+msgid "_Description"
+msgstr "বিবৰণ (_D)"
+
+#: ../data/resources/connection-details-dialog.ui.h:4
+msgid "_Nickname"
+msgstr "উপনাম (_N)"
+
+#: ../data/resources/connection-details-dialog.ui.h:5
+msgid "_Real Name"
+msgstr "প্ৰকৃত নাম (_R)"
+
+#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "বৈকল্পিক"
+
+#: ../data/resources/connection-list-dialog.ui.h:1
+#: ../data/resources/menus.ui.h:1
+msgid "Connections"
+msgstr "সংযোগসমূহ"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Add"
+msgstr "যোগ কৰক"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Remove"
+msgstr "আতৰাওক"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:220
+msgid "Join Chat Room"
+msgstr "চেট ৰুমত যোগ দিয়ক"
+
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "বাতিল কৰক (_C)"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:222
+msgid "_Join"
+msgstr "যোগ কৰক (_J)"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "সংযোগ যোগ কৰক (_A)"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "C_onnection"
+msgstr "সংযোগ (_o)"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr "ৰুমৰ নাম (_N)"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "পাছৱাৰ্ড (_P)"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "এটা ৰুমত যোগ দিয়ক"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "এজন ব্যৱহাৰকাৰীক বাৰ্তা পঠাওক"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "_Leave"
+msgstr "প্ৰস্থান কৰক (_L)"
+
+#: ../data/resources/menus.ui.h:2
+msgid "Preferences"
+msgstr "পছন্দসমূহ"
+
+#: ../data/resources/menus.ui.h:3
+msgid "About"
+msgstr "বিষয়ে"
+
+#: ../data/resources/menus.ui.h:4
+msgid "Quit"
+msgstr "প্ৰস্থান কৰক"
+
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "Message User"
+msgstr "ব্যৱহাৰকাৰীক বাৰ্তা পঠাওক"
+
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "_Message"
+msgstr "বাৰ্তা (_M)"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr "শেহতীয়া (_R)"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "নাম (_N)"
+
+#: ../src/application.js:398
+msgid "Good Bye"
+msgstr "বিদায়"
+
+#: ../src/application.js:455
+msgid "translator-credits"
+msgstr "নীলমদ্যুতি গোস্বামী (ngoswami@redhat.com)"
+
+#: ../src/appNotifications.js:105
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "%s ৰ সৈতে সংযোগ কৰা হৈছে"
+
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "লিঙ্ক খোলক"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "লিঙ্ক ঠিকনা কপি কৰক"
+
+#: ../src/chatView.js:538
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s ৰ নাম এতিয়া %s"
+
+#: ../src/chatView.js:543
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s এ সংযোগ বিচ্ছিন্ন কৰিছে"
+
+#: ../src/chatView.js:551
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s ক %s এ কিক কৰিছে"
+
+#: ../src/chatView.js:553
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s ক কিক কৰা হৈছে"
+
+#: ../src/chatView.js:559
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s ক %s এ বহিস্কাৰ কৰিছে"
+
+#: ../src/chatView.js:561
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s ক বহিস্কাৰ কৰা হৈছে"
+
+#: ../src/chatView.js:566
+#, javascript-format
+msgid "%s joined"
+msgstr "%s এ যোগ দিছে"
+
+#: ../src/chatView.js:570
+#, javascript-format
+msgid "%s left"
+msgstr "%s এ প্ৰস্থান কৰিছে"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:609
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:614
+msgid "Yesterday, %H∶%M"
+msgstr "যোৱাকালী, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:619
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:625
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:631
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:636
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:641
+msgid "Yesterday, %l∶%M %p"
+msgstr "যোৱাকালী, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:646
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:652
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:658
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: ../src/connections.js:320
+msgid "Edit Connection"
+msgstr "সংযোগ সম্পাদন কৰক"
+
+#: ../src/connections.js:334
+msgid "A_pply"
+msgstr "প্ৰয়োগ কৰক (_p)"
+
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "সৃষ্টি কৰক (_e)"
+
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<command>] - এ <command> ৰ বাবে সহায়, অথবা উপলব্ধ কমান্ডসমূহৰ এটা "
+"তালিকা "
+"প্ৰদৰ্শন কৰে"
+
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <nick> [<channel>] - এ <nick> ক <channel> লৈ, অথবা বৰ্তমান চেনেললৈ "
+"আমন্ত্ৰণ জনায়"
+
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <channel> - এ <channel> ত যোগ দিয়ে"
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "/KICK <nick> - এ <nick> ক বৰ্তমান চেনেলৰ পৰা কিক কৰে"
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <action> - এ <action> ক বৰ্তমান চেনেললৈ পঠায়"
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - বৰ্তমান চেনেলৰ ব্যৱহাৰকাৰীসকলক দেখুৱায়"
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <nickname> - এ আপোনাৰ উপনামক <nickname> লৈ সংহতি কৰে"
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<channel>] [<reason>] - এ <channel> ক প্ৰস্থান কৰে, অবিকল্পিতভাৱে "
+"বৰ্তমান চেনেল"
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr "/QUERY <nick> - এ <nick> ৰ সৈতে এটা ব্যক্তিগত কথোপকথন খোলে"
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<reason>] - ৰ বৰ্তমান চাৰ্ভাৰৰ পৰা বিচ্ছিন্ন কৰে"
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <text> - এ বৰ্তমান ৰুম/পৰিচয় লৈ <text> পঠায়"
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <topic> - বিষয়ক <topic> লৈ সংহতি কৰে, অথবা বৰ্তমান বিষয় দেখুৱায়"
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+"অজ্ঞাত কমান্ড - উপলব্ধ কমান্ডসমূহৰ এটা তালিকাৰ বাবে /HELP চেষ্টা কৰি চাওক"
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "ব্যৱহাৰ: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "জ্ঞাত কমান্ডসমূহ:"
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "%s ত ব্যৱহাৰকাৰীসকল:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "কোনো বিষয়ে সংহতি কৰা হোৱা নাই"
+
+#: ../src/joinDialog.js:221
+msgid "Add Connection"
+msgstr "সংযোগ যোগ কৰক"
+
+#: ../src/joinDialog.js:223
+msgid "_Save"
+msgstr "সংৰক্ষণ কৰক (_S)"
+
+#: ../src/messageDialog.js:86
+msgid "No recent users"
+msgstr "কোনো শেহতীয়া ব্যৱহাৰকাৰী নাই"
+
+#: ../src/userList.js:185
+msgid "Loading details"
+msgstr "বিৱৰণসমূহ ল'ড কৰা হৈছে"
+
+#: ../src/userList.js:193
+msgid "Message"
+msgstr "বাৰ্তা"
+
+#: ../src/userList.js:210
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d ছেকেণ্ড আগত"
+msgstr[1] "%d ছেকেণ্ড আগত"
+
+#: ../src/userList.js:215
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d মিনিট আগত"
+msgstr[1] "%d মিনিট আগত"
+
+#: ../src/userList.js:220
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d ঘন্টা আগত"
+msgstr[1] "%d ঘন্টা আগত"
+
+#: ../src/userList.js:225
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d দিন আগত"
+msgstr[1] "%d দিন আগত"
+
+#: ../src/userList.js:230
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d সপ্তাহ আগত"
+msgstr[1] "%d সপ্তাহ আগত"
+
+#: ../src/userList.js:234
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d মাহ আগত"
+msgstr[1] "%d মাহ আগত"
+
+#: ../src/userList.js:258
+msgid "Last Activity:"
+msgstr "সৰ্বশেষ কাৰ্য্য:"
+
+#: ../src/userList.js:457
+msgid "All"
+msgstr "সকলো"
+
