@@ -41,6 +41,8 @@ const MessageDialog = new Lang.Class({
 
         this._updateCanConfirm();
         this._updateRecentList([]);
+
+        this._nameEntry.grab_focus();
     },
 
     _createWidget: function() {

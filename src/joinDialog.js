@@ -53,6 +53,8 @@ const JoinDialog = new Lang.Class({
 
         this._updateConnectionCombo();
         this._updateCanConfirm();
+
+        this._nameEntry.grab_focus();
     },
 
     _createWidget: function() {
