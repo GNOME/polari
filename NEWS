@@ -1,3 +1,24 @@
+3.13.90 - "Our Notting Hill Moment"
+===================================
+* Fix in-app notifications [Florian; #730964]
+* Fix timestamp formatting [Giovanni; #732611]
+* Add context menu to URLs [Florian; #712163]
+* Restore saved channels when an account is reconnected
+  [Giovanni, Florian; #732905]
+* Remember last selected account in join/message dialogs [Florian; #711833]
+* Adjust to GTK+/Adwaita changes
+
+Contributors:
+  Giovanni Campagna, Piotr Drąg, Richard Hughes, Florian Müllner,
+  Yosef Or Boczko, Olav Vitters
+
+Translations:
+  Enrico Nicoletto [pt_BR], Yosef Or Boczko [he], Aurimas Černius [lt],
+  Muhammet Kara [tr], Daniel Mustieles [es], Cheng-Chia Tseng [zh_TW],
+  Yuri Myasoedov [ru], Fran Diéguez [gl], Balázs Úr [hu], MarMav [el],
+  Kjartan Maraas [nb], Daniel Korostil [uk], Inaki Larranaga Murgoitio [eu],
+  Daniel Șerbănescu [ro]
+
 3.13.2 - "Traveled down the road and back again"
 ================================================
 * Subclass TpBaseClient instead of using two simple clients
