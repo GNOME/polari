@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 3.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 11:13+0200\n"
-"PO-Revision-Date: 2014-07-23 11:19+0200\n"
+"POT-Creation-Date: 2014-08-23 11:56+0200\n"
+"PO-Revision-Date: 2014-08-23 11:58+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -24,7 +24,7 @@ msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
-msgstr ""
+msgstr "En enkel klient for Internet Relay Chat (IRC) som er laget for å integrere sømløst med GNOME. Den har et enkelt og vakkert grensesnitt som lar deg fokusere på dine samtaler."
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
 msgid ""
@@ -41,7 +41,7 @@ msgstr "Polari"
 
 #: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:456
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
+msgstr "En klient for Internet Relay Chat for GNOME"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
@@ -57,7 +57,7 @@ msgstr "Lagret kanalliste"
 
 #: ../data/org.gnome.polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
-msgstr ""
+msgstr "Liste med kanaler som skal gjenopprettes ved oppstart"
 
 #: ../data/org.gnome.polari.gschema.xml.h:3
 msgid "Window size"
@@ -65,7 +65,7 @@ msgstr "Vindustørrelse"
 
 #: ../data/org.gnome.polari.gschema.xml.h:4
 msgid "Window size (width and height)."
-msgstr ""
+msgstr "Vindustørrelse (bredde og høyde)."
 
 #: ../data/org.gnome.polari.gschema.xml.h:5
 msgid "Window position"
@@ -116,22 +116,22 @@ msgstr "Tilkoblinger"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "Add"
-msgstr ""
+msgstr "Legg til"
 
 #: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:220
 msgid "Join Chat Room"
-msgstr ""
+msgstr "Bli med i praterom"
 
 #: ../data/resources/join-room-dialog.ui.h:2
 #: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:222
 msgid "_Join"
 msgstr "_Bli med"
 
@@ -431,15 +431,15 @@ msgstr "Brukere på %s:"
 msgid "No topic set"
 msgstr "Emne er ikke satt"
 
-#: ../src/joinDialog.js:206
+#: ../src/joinDialog.js:221
 msgid "Add Connection"
 msgstr "Legg til tilkobling"
 
-#: ../src/joinDialog.js:208
+#: ../src/joinDialog.js:223
 msgid "_Save"
 msgstr "_Lagre"
 
-#: ../src/messageDialog.js:77
+#: ../src/messageDialog.js:86
 msgid "No recent users"
 msgstr ""
 
