@@ -116,6 +116,8 @@
             <child type="title">
               <object class="GtkStack" id="stack1">
                 <property name="visible">True</property>
+                <property name="margin-left">24</property>
+                <property name="margin-right">24</property>
                 <child>
                   <object class="GtkBox" id="box5">
                     <property name="visible">True</property>
@@ -176,15 +178,6 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="label1">
-                <property name="visible">True</property>
-                <!-- we want some margin around title/subtitle - setting
-                     it on the first and last button has the same effect,
-                     and spares us from using a custom title widget -->
-                <property name="width-request">24</property>
-              </object>
-            </child>
-            <child>
               <object class="GtkToggleButton" id="show_user_list_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -196,18 +189,6 @@
                   <class name="polari-user-list-button"/>
                   <class name="text-button"/>
                 </style>
-              </object>
-              <packing>
-                <property name="pack_type">end</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label2">
-                <property name="visible">True</property>
-                <!-- we want some margin around title/subtitle - setting
-                     it on the first and last button has the same effect,
-                     and spares us from using a custom title widget -->
-                <property name="width-request">24</property>
               </object>
               <packing>
                 <property name="pack_type">end</property>
