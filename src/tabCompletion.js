@@ -1,5 +1,4 @@
 const Gdk = imports.gi.Gdk;
-const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 

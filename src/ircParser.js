@@ -1,14 +1,11 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Signals = imports.signals;
-const Utils = imports.utils;
 
 const N_ = function(s) { return s; };
 

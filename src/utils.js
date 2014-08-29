@@ -21,7 +21,6 @@
  */
 
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
 const Soup = imports.gi.Soup;
 
 const Signals = imports.signals;

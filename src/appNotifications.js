@@ -1,5 +1,4 @@
 const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
