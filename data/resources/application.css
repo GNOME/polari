@@ -86,6 +86,7 @@
 }
 
 .irc-feedback {
+    color: @theme_fg_color;
     background-color: @theme_bg_color;
     border-style: solid;
     border-color: @borders;
