@@ -41,8 +41,8 @@
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="margin-left">5</property>
-                <property name="margin-right">5</property>
+                <property name="margin-start">5</property>
+                <property name="margin-end">5</property>
                 <property name="menu_model">join_menu</property>
                 <property name="action_name">app.room-menu</property>
                 <style>
@@ -116,8 +116,8 @@
             <child type="title">
               <object class="GtkStack" id="stack1">
                 <property name="visible">True</property>
-                <property name="margin-left">24</property>
-                <property name="margin-right">24</property>
+                <property name="margin-start">24</property>
+                <property name="margin-end">24</property>
                 <child>
                   <object class="GtkBox" id="box5">
                     <property name="visible">True</property>

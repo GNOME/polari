@@ -67,8 +67,8 @@ const TabCompletion = new Lang.Class({
             row._casefoldedText = row._text.toLowerCase();
             row.add(new Gtk.Label({ label: row._text,
                                     halign: Gtk.Align.START,
-                                    margin_left: 6,
-                                    margin_right: 6 }));
+                                    margin_start: 6,
+                                    margin_end: 6 }));
             this._list.add(row);
         }
         this._canComplete = completions.length > 0;

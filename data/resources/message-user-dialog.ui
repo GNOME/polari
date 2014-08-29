@@ -57,8 +57,8 @@
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">24</property>
-            <property name="margin_right">24</property>
+            <property name="margin_start">24</property>
+            <property name="margin_end">24</property>
             <property name="margin_top">24</property>
             <property name="margin_bottom">24</property>
             <property name="row_spacing">12</property>

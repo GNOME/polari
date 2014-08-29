@@ -40,8 +40,8 @@ const UserListPopover = new Lang.Class({
         this.widget = new Gtk.Popover({ modal: true,
                                         position: Gtk.PositionType.TOP,
                                         vexpand: true,
-                                        margin_left: 12,
-                                        margin_right: 12,
+                                        margin_start: 12,
+                                        margin_end: 12,
                                         margin_bottom: 12 });
         this.widget.set_border_width(6);
         this.widget.set_size_request(250, -1);
@@ -451,8 +451,8 @@ const UserList = new Lang.Class({
         let numMembers = members.length;
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                margin_left: 6,
-                                margin_right: 6,
+                                margin_start: 6,
+                                margin_end: 6,
                                 spacing: 6 });
         box.add(new Gtk.Label({ label: '<b>' + _("All") + '</b>',
                                 use_markup: true,

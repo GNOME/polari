@@ -100,7 +100,7 @@ const RoomRow = new Lang.Class({
         this.widget.add(this._eventBox);
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                margin_left: 8, margin_right: 8,
+                                margin_start: 8, margin_end: 8,
                                 margin_top: 2, margin_bottom: 2, spacing: 6 });
         this._eventBox.add(box);
 
