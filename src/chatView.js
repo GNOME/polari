@@ -599,7 +599,7 @@ const ChatView = new Lang.Class({
         let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
 
         let format;
-        let desktopSettings = new Gio.Settings({ schema: 'org.gnome.desktop.interface' });
+        let desktopSettings = new Gio.Settings({ schema_id: 'org.gnome.desktop.interface' });
         let clockFormat = desktopSettings.get_string('clock-format');
         let hasAmPm = date.format('%p') != '';
 

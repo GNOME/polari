@@ -66,7 +66,7 @@ const Application = new Lang.Class({
                 this._removeSavedChannelsForAccount(account);
             }));
 
-        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.polari' });
 
         this.pasteManager = new PasteManager.PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();

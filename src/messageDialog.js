@@ -16,7 +16,7 @@ const MessageDialog = new Lang.Class({
     _init: function() {
         this._createWidget();
 
-        this._settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.polari' });
 
         this._accounts = {};
         AccountsMonitor.getDefault().dupAccounts().forEach(Lang.bind(this,

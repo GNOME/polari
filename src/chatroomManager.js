@@ -117,7 +117,7 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _restoreSavedChannels: function(account) {
-        let settings = new Gio.Settings({ schema: 'org.gnome.polari' });
+        let settings = new Gio.Settings({ schema_id: 'org.gnome.polari' });
         let savedChannels = settings.get_value('saved-channel-list').deep_unpack();
         for (let i = 0; i < savedChannels.length; i++) {
             let serializedChannel = savedChannels[i];
