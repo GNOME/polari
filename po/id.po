@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-09 05:14+0000\n"
-"PO-Revision-Date: 2014-03-18 10:05+0700\n"
+"POT-Creation-Date: 2014-07-03 13:41+0000\n"
+"PO-Revision-Date: 2014-09-03 15:28+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.9\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 msgid ""
@@ -28,6 +28,19 @@ msgstr ""
 "Suatu klien Internet Relay Chat (IRC) sederhana yang dirancang untuk "
 "terintegrasi secara mulus dengan GNOME; ini memiliki fitur antar muka yang "
 "indah dan sederhana yang memungkinkan Anda fokus ke percakapan Anda."
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"Anda dapat memakai Polari untuk mengobrol secara publik dengan orang-orang "
+"dalam suatu kanal, dan untuk menjalankan percakapan satu-ke-satu yang "
+"pribadi. Pemberitahuan memastikan bahwa Anda tak pernah melewatkan suatu "
+"pesan penting - untuk percakapan pribadi, bahkan dimungkinkan untuk menjawab "
+"seketika tanpa bertukar balik ke aplikasi!"
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -66,7 +79,7 @@ msgstr "Keadaan termaksimalkan jendela"
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Suatu Klien Internet Relay Chat untuk GNOME"
 
@@ -96,7 +109,7 @@ msgid "Quit"
 msgstr "Keluar"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:331
+#: ../src/connections.js:321
 msgid "New Connection"
 msgstr "Koneksi Baru"
 
@@ -117,57 +130,47 @@ msgid "_Real Name"
 msgstr "Nama _Asli"
 
 #: ../data/resources/connection-details-dialog.ui.h:6
-#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "opsional"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Cancel"
-msgstr "_Batal"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
-#: ../src/connections.js:340
-msgid "Cr_eate"
-msgstr "_Buat"
-
 #: ../data/resources/connection-list-dialog.ui.h:2
-msgid "_Close"
-msgstr "_Tutup"
-
-#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Tambah"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Remove"
 msgstr "Buang"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
 msgid "Join Chat Room"
 msgstr "Bergabung Ke Ruang Obrolan"
 
-#: ../data/resources/join-room-dialog.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "_Batal"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
+msgid "_Join"
+msgstr "_Gabung"
+
+#: ../data/resources/join-room-dialog.ui.h:5
 msgid "_Add Connection"
 msgstr "T_ambah Koneksi"
 
-#: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "C_onnection"
 msgstr "K_oneksi"
 
-#: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:7
 msgid "Room _Name"
 msgstr "_Nama Ruang"
 
-#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:8
 msgid "_Password"
 msgstr "_Sandi"
-
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Join"
-msgstr "_Gabung"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -186,195 +189,304 @@ msgid "Message User"
 msgstr "Pesan Pengguna"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Recent"
-msgstr "Ba_ru-baru ini"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Name"
-msgstr "_Nama"
-
-#: ../data/resources/message-user-dialog.ui.h:6
 msgid "_Message"
 msgstr "_Pesan"
 
-#: ../src/application.js:408
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr "Ba_ru-baru ini"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "_Nama"
+
+#: ../src/application.js:402
 msgid "Good Bye"
 msgstr "Selamat Tinggal"
 
-#: ../src/application.js:465
+#: ../src/application.js:459
 msgid "translator-credits"
 msgstr "Andika Triwidada <andika@gmail.com>, 2014"
 
-#: ../src/chatView.js:498
+#: ../src/appNotifications.js:105
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "Menyambung ke %s"
+
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "Buka Tautan"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "Salin Alamat Tautan"
+
+#: ../src/chatView.js:538
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s kini dikenal sebagai %s"
 
-#: ../src/chatView.js:503
+#: ../src/chatView.js:543
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s telah terputus"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:551
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s telah ditendang oleh %s"
 
-#: ../src/chatView.js:513
+#: ../src/chatView.js:553
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s telah ditendang"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:559
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s telah dicekal oleh %s"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:561
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s telah dicekal"
 
-#: ../src/chatView.js:526
+#: ../src/chatView.js:566
 #, javascript-format
 msgid "%s joined"
 msgstr "%s bergabung"
 
-#: ../src/chatView.js:530
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s left"
 msgstr "%s pergi"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:560
+#: ../src/chatView.js:609
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:565
+#: ../src/chatView.js:614
 msgid "Yesterday, %H∶%M"
 msgstr "Kemarin, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:570
+#: ../src/chatView.js:619
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:576
+#: ../src/chatView.js:625
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:582
+#: ../src/chatView.js:631
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:590
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:636
 msgid "%l∶%M %p"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:595
+#: ../src/chatView.js:641
 msgid "Yesterday, %l∶%M %p"
 msgstr "Kemarin, %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:600
+#: ../src/chatView.js:646
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:606
+#: ../src/chatView.js:652
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:612
+#: ../src/chatView.js:658
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:330
+#: ../src/connections.js:320
 msgid "Edit Connection"
 msgstr "Sunting Koneksi"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:334
 msgid "A_pply"
 msgstr "Tera_pkan"
 
-#: ../src/joinDialog.js:68
-msgid "_Save"
-msgstr "_Simpan"
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "_Buat"
 
-#: ../src/joinDialog.js:194
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<perintah>] - menampilkan bantuan untuk <perintah>, atau daftar "
+"perintah yang tersedia"
+
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <panggilan> [<kanal>] - mengundang <panggilan> ke <kanal>, atau yang "
+"saat ini"
+
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <kanall> - bergabung ke <kanal>"
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "/KICK <panggilan> - menendang <panggilan> dari kanal saat ini"
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <aksi> - mengirim <aksi> ke kanal saat ini"
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - menampilkan daftar pengguna pada kanal saat ini"
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <namapanggilan> - menata nama Anda menjadi <namapanggilan>"
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<kanal>] [<alasan>] - meninggalkan <kanal>, secara baku adalah yang "
+"saat ini"
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+"/QUERY <panggilan> - membuka suatu percakapan pribadi dengan <panggilan>"
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<alasan>] - memutus dari server saat ini"
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <teks> - mengirim <teks> ke ruang/kontak saat ini"
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr ""
+"/TOPIC <topik> - menata topik menjadi <topik>, atau menampilkan yang saat ini"
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+"Perintah tak dikenal - cobalah /HELP untuk daftar perintah yang tersedia"
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Cara pakai: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "Perintah yang dikenal: "
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Pengguna pada %s:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "Topik tak ditata"
+
+#: ../src/joinDialog.js:206
 msgid "Add Connection"
 msgstr "Tambah Koneksi"
+
+#: ../src/joinDialog.js:208
+msgid "_Save"
+msgstr "_Simpan"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
 msgstr "Tak ada pengguna terkini"
 
-#: ../src/userList.js:172
+#: ../src/userList.js:185
 msgid "Loading details"
 msgstr "Memuat rincian"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:193
 msgid "Message"
 msgstr "Pesan"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:210
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d detik yang lalu"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:215
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d menit yang lalu"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:220
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d jam yang lalu"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:225
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari yang lalu"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:230
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d minggu yang lalu"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:234
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan yang lalu"
 
-#: ../src/userList.js:245
+#: ../src/userList.js:258
 msgid "Last Activity:"
 msgstr "Aktivitas Terakhir:"
 
-#: ../src/userList.js:443
+#: ../src/userList.js:457
 msgid "All"
 msgstr "Semua"
