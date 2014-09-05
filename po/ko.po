@@ -8,9 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-07 17:15+0000\n"
-"PO-Revision-Date: 2014-03-08 06:03+0900\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-07-03 13:41+0000\n"
+"PO-Revision-Date: 2014-09-06 07:02+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -24,7 +25,18 @@ msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
-msgstr "간단한 IRC 클라이언트로 그놈 데스크톱과 매끄럽게 통합됩니다. 인터페이스가 간단하고 아름다워 대화에 집중할 수 있습니다."
+msgstr ""
+"간단한 IRC 클라이언트로 그놈 데스크톱과 매끄럽게 통합됩니다. 인터페이스가 간"
+"단하고 아름다워 대화에 집중할 수 있습니다."
+
+# 주의: "사람들"은 필요한 표현
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr "폴라리를 사용해 채널의 사람들과 대화할 수 있고, 개인적으로 일대일 대화를 할 수도 있습니다. 알림 기능을 이용해 중요한 메시지를 놓치지 않게 할 수 잇습니다. 개인 대화의 경우에는 폴라리 프로그램으로 전환하지 않고 알림 창에서 즉시 대답을 할 수 있습니다."
 
 #: ../data/org.gnome.polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -40,7 +52,7 @@ msgstr "창 크기"
 
 #: ../data/org.gnome.polari.gschema.xml.h:4
 msgid "Window size (width and height)."
-msgstr "창 크기(너비와 높이)."
+msgstr "창 크기(너비 및 높이)."
 
 #: ../data/org.gnome.polari.gschema.xml.h:5
 msgid "Window position"
@@ -48,7 +60,7 @@ msgstr "창 위치"
 
 #: ../data/org.gnome.polari.gschema.xml.h:6
 msgid "Window position (x and y)."
-msgstr "창 위치(가로와 세로)."
+msgstr "창 위치(가로 및 세로)."
 
 #: ../data/org.gnome.polari.gschema.xml.h:7
 msgid "Window maximized"
@@ -63,13 +75,13 @@ msgstr "창 최대화 상태"
 msgid "Polari"
 msgstr "폴라리"
 
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:466
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:460
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "그놈 데스크톱 IRC 클라이언트"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Relay;Chat;채팅;"
+msgstr "IRC;아이알씨;Internet;Relay;Chat;채팅;수다;대화;"
 
 #: ../data/org.gnome.Polari.desktop.in.h:4
 msgid "Show connections"
@@ -93,7 +105,7 @@ msgid "Quit"
 msgstr "끝내기"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:331
+#: ../src/connections.js:321
 msgid "New Connection"
 msgstr "새 연결"
 
@@ -114,57 +126,47 @@ msgid "_Real Name"
 msgstr "실명(_R)"
 
 #: ../data/resources/connection-details-dialog.ui.h:6
-#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "옵션"
 
-#: ../data/resources/connection-details-dialog.ui.h:7
-#: ../data/resources/join-room-dialog.ui.h:7
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Cancel"
-msgstr "취소(_C)"
-
-#: ../data/resources/connection-details-dialog.ui.h:8
-#: ../src/connections.js:340
-msgid "Cr_eate"
-msgstr "만들기(_E)"
-
 #: ../data/resources/connection-list-dialog.ui.h:2
-msgid "_Close"
-msgstr "닫기(_C)"
-
-#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "추가"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Remove"
 msgstr "제거"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:193
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:205
 msgid "Join Chat Room"
 msgstr "대화방 입장"
 
-#: ../data/resources/join-room-dialog.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+msgid "_Cancel"
+msgstr "취소(_C)"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:207
+msgid "_Join"
+msgstr "입장(_J)"
+
+#: ../data/resources/join-room-dialog.ui.h:5
 msgid "_Add Connection"
 msgstr "연결 추가(_A)"
 
-#: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:2
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "C_onnection"
 msgstr "연결(_O)"
 
-#: ../data/resources/join-room-dialog.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:7
 msgid "Room _Name"
 msgstr "대화방 이름(_N)"
 
-#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/join-room-dialog.ui.h:8
 msgid "_Password"
 msgstr "암호(_P)"
-
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Join"
-msgstr "입장(_J)"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -183,195 +185,298 @@ msgid "Message User"
 msgstr "사용자 메시지 보내기"
 
 #: ../data/resources/message-user-dialog.ui.h:3
-msgid "_Recent"
-msgstr "최근(_R)"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Name"
-msgstr "이름(_N)"
-
-#: ../data/resources/message-user-dialog.ui.h:6
 msgid "_Message"
 msgstr "메시지(_M)"
 
-#: ../src/application.js:408
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Recent"
+msgstr "최근(_R)"
+
+#: ../data/resources/message-user-dialog.ui.h:6
+msgid "_Name"
+msgstr "이름(_N)"
+
+#: ../src/application.js:402
 msgid "Good Bye"
 msgstr "안녕히 가세요"
 
-#: ../src/application.js:465
+#: ../src/application.js:459
 msgid "translator-credits"
 msgstr "류창우"
 
-#: ../src/chatView.js:498
+#: ../src/appNotifications.js:105
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "%s에 연결하는 중"
+
+#: ../src/chatView.js:399
+msgid "Open Link"
+msgstr "링크 열기"
+
+#: ../src/chatView.js:406
+msgid "Copy Link Address"
+msgstr "링크 주소 복사"
+
+#: ../src/chatView.js:538
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s님은 이제 %s입니다"
 
-#: ../src/chatView.js:503
+#: ../src/chatView.js:543
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s님이 연결을 끊었습니다"
 
-#: ../src/chatView.js:511
+#: ../src/chatView.js:551
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s님을 %s님이 강제 퇴장시켰습니다"
 
-#: ../src/chatView.js:513
+#: ../src/chatView.js:553
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s님이 강제 퇴장되었습니다"
 
-#: ../src/chatView.js:519
+#: ../src/chatView.js:559
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s님을 %s님이 입장 금지했습니다"
 
-#: ../src/chatView.js:521
+#: ../src/chatView.js:561
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s님이 입장 금지되었습니다"
 
-#: ../src/chatView.js:526
+#: ../src/chatView.js:566
 #, javascript-format
 msgid "%s joined"
 msgstr "%s님이 입장했습니다"
 
-#: ../src/chatView.js:530
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s left"
 msgstr "%s 남음"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:560
+#: ../src/chatView.js:609
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:565
+#: ../src/chatView.js:614
 msgid "Yesterday, %H∶%M"
 msgstr "어제, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:570
+#: ../src/chatView.js:619
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:576
+#: ../src/chatView.js:625
 msgid "%B %d, %H∶%M"
 msgstr "%B %d일, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:582
+#: ../src/chatView.js:631
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y년 %B %d일, %H∶%M"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:590
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:636
 msgid "%l∶%M %p"
 msgstr "%p %l∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:595
+#: ../src/chatView.js:641
 msgid "Yesterday, %l∶%M %p"
 msgstr "어제, %p %l∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:600
+#: ../src/chatView.js:646
 msgid "%A, %l∶%M %p"
 msgstr "%A, %p %l∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:606
+#: ../src/chatView.js:652
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d일, %p %l∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:612
+#: ../src/chatView.js:658
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y년 %B %d일, %p %l∶%M"
 
-#: ../src/connections.js:330
+#: ../src/connections.js:320
 msgid "Edit Connection"
 msgstr "연결 편집"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:334
 msgid "A_pply"
 msgstr "적용(_P)"
 
-#: ../src/joinDialog.js:68
-msgid "_Save"
-msgstr "저장(_S)"
+#: ../src/connections.js:334
+msgid "Cr_eate"
+msgstr "만들기(_E)"
 
-#: ../src/joinDialog.js:194
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:29
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr "/HELP [<명령>] - <명령>의 도움말을 표시하고, 명령을 안 쓰면 명령어 목록을 표시합니다"
+
+#: ../src/ircParser.js:30
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr "/INVITE <별명> [<채널>] - <별명>을 <채널>에 초대하고, 채널을 안 쓰면 현재 채널에 초대합니다"
+
+#: ../src/ircParser.js:31
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <채널> - <channel>에 참여합니다"
+
+#: ../src/ircParser.js:32
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "/KICK <별명> - <별명>을 현재 채널에서 강제 퇴장시킵니다"
+
+#: ../src/ircParser.js:33
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <동작> - 현재 채널에 <동작>을 보냅니다"
+
+#: ../src/ircParser.js:34
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - 현재 채널의 사용자 목록을 표시합니다"
+
+#: ../src/ircParser.js:35
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <별명> - 자기 별명을 <별명>으로 설정합니다"
+
+#: ../src/ircParser.js:36
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr "/PART [<채널>] [<이유>] - <채널>을 나갑니다, 채널을 쓰지 않으면 현재 채널이 기본값입니다"
+
+#: ../src/ircParser.js:37
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr "/QUERY <별명> - <별명>과 개인 대화를 엽니다"
+
+#: ../src/ircParser.js:38
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<이유>] - 현재 서버에서 연결을 끊습니다"
+
+#: ../src/ircParser.js:39
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <글> - 현재 대화방 또는 상대에게 <글>을 보냅니다"
+
+#: ../src/ircParser.js:40
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <방제목> - 방 제목을 <방제목>으로 설정하고, 제목을 쓰지 않으면 현재 제목을 표시합니다"
+
+#: ../src/ircParser.js:43
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr "알 수 없는 명령 - 명령어 목록을 보려면 /HELP 명령을 사용하십시오"
+
+#: ../src/ircParser.js:64
+#, javascript-format
+msgid "Usage: %s"
+msgstr "사용법: %s"
+
+#: ../src/ircParser.js:99
+msgid "Known commands:"
+msgstr "알려진 명령어:"
+
+#: ../src/ircParser.js:176
+#, javascript-format
+msgid "Users on %s:"
+msgstr "%s에 있는 사용자:"
+
+#: ../src/ircParser.js:257
+msgid "No topic set"
+msgstr "방 제목을 설정하지 않았습니다"
+
+#: ../src/joinDialog.js:206
 msgid "Add Connection"
 msgstr "연결 추가"
+
+#: ../src/joinDialog.js:208
+msgid "_Save"
+msgstr "저장(_S)"
 
 #: ../src/messageDialog.js:77
 msgid "No recent users"
 msgstr "최근 사용자 없음"
 
-#: ../src/userList.js:172
+#: ../src/userList.js:185
 msgid "Loading details"
 msgstr "자세한 정보 읽어들이는 중"
 
-#: ../src/userList.js:180
+#: ../src/userList.js:193
 msgid "Message"
 msgstr "메시지"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:210
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d초 전"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:215
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d분 전"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:220
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d시간 전"
 
-#: ../src/userList.js:212
+#: ../src/userList.js:225
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d일 전"
 
-#: ../src/userList.js:217
+#: ../src/userList.js:230
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d주 전"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:234
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d달 전"
 
-#: ../src/userList.js:245
+#: ../src/userList.js:258
 msgid "Last Activity:"
 msgstr "최근 활동:"
 
-#: ../src/userList.js:443
+#: ../src/userList.js:457
 msgid "All"
 msgstr "모두"
+
+#~ msgid "_Close"
+#~ msgstr "닫기(_C)"
