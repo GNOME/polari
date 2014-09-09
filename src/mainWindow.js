@@ -37,6 +37,20 @@ const MainWindow = new Lang.Class({
 
         this._createWidget(app);
 
+        let provider = new Gtk.CssProvider();
+        let uri = 'resource:///org/gnome/Polari/application.css';
+        let file = Gio.File.new_for_uri(uri);
+        try {
+            provider.load_from_file(Gio.File.new_for_uri(uri));
+        } catch(e) {
+            logError(e, "Failed to add application style");
+        }
+        Gtk.StyleContext.add_provider_for_screen(
+            this.window.get_screen(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        );
+
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
                                       Lang.bind(this, this._onAccountChanged));

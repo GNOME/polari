@@ -149,32 +149,20 @@ const Application = new Lang.Class({
 
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
-
-        this._window = new MainWindow.MainWindow(this);
-        this._window.window.connect('destroy', Lang.bind(this,
-            function() {
-                for (let id in this._pendingRequests)
-                    this._pendingRequests[id].cancellable.cancel();
-                this.emitJS('prepare-shutdown');
-            }));
-
-        let provider = new Gtk.CssProvider();
-        let uri = 'resource:///org/gnome/Polari/application.css';
-        let file = Gio.File.new_for_uri(uri);
-        try {
-            provider.load_from_file(Gio.File.new_for_uri(uri));
-        } catch(e) {
-            logError(e, "Failed to add application style");
-        }
-        Gtk.StyleContext.add_provider_for_screen(this._window.window.get_screen(),
-                                                 provider, 600);
-
-        this._window.window.show_all();
     },
 
     vfunc_activate: function() {
-        if (this._window)
-            this._window.window.present();
+        if (!this._window) {
+            this._window = new MainWindow.MainWindow(this);
+            this._window.window.connect('destroy', Lang.bind(this,
+                function() {
+                    for (let id in this._pendingRequests)
+                        this._pendingRequests[id].cancellable.cancel();
+                    this.emitJS('prepare-shutdown');
+            }));
+            this._window.window.show_all();
+        }
+        this._window.window.present();
     },
 
     _updateAccountAction: function(action) {
