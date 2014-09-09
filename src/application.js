@@ -36,7 +36,7 @@ const Application = new Lang.Class({
 
         Gettext.bindtextdomain('polari', Config.LOCALE_DIR);
         Gettext.textdomain('polari');
-        GLib.set_prgname('polari');
+        GLib.set_prgname('org.gnome.Polari');
         GLib.set_application_name('Polari');
         this._window = null;
         this._pendingRequests = {};
