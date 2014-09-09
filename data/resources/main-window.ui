@@ -245,6 +245,9 @@
                             <property name="receives_default">True</property>
                             <property name="action_name">app.leave-selected-rooms</property>
                             <property name="use_underline">True</property>
+                            <style>
+                              <class name="destructive-action"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="pack_type">end</property>
