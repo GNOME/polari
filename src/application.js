@@ -78,11 +78,11 @@ const Application = new Lang.Class({
             state: GLib.Variant.new('b', false) },
           { name: 'show-join-dialog',
             activate: Lang.bind(this, this._onShowJoinDialog),
-            accel: '<Primary>n' },
+            accels: ['<Primary>n'] },
           { name: 'show-message-user-dialog',
             activate: Lang.bind(this, this._onShowMessageUserDialog),
             create_hook: Lang.bind(this, this._accountActionsCreateHook),
-            accel: '<Primary>m' },
+            accels: ['<Primary>m'] },
           { name: 'join-room',
             activate: Lang.bind(this, this._onJoinRoom),
             parameter_type: GLib.VariantType.new('(ssu)') },
@@ -95,13 +95,13 @@ const Application = new Lang.Class({
           { name: 'leave-current-room',
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
-            accel: '<Primary>w' },
+            accels: ['<Primary>w'] },
           { name: 'leave-selected-rooms' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
-            accel: 'F9' },
+            accels: ['F9'] },
           { name: 'selection-mode',
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._selectionModeHook),
@@ -114,15 +114,15 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
             activate: Lang.bind(this, this._onQuit),
-            accel: '<Primary>q' },
+            accels: ['<Primary>q'] },
           { name: 'next-room',
-            accel: '<Primary>Page_Down' },
+            accels: ['<Primary>Page_Down'] },
           { name: 'previous-room',
-            accel: '<Primary>Page_Up' },
+            accels: ['<Primary>Page_Up'] },
           { name: 'first-room',
-            accel: '<Primary>Home' },
+            accels: ['<Primary>Home'] },
           { name: 'last-room',
-            accel: '<Primary>End' },
+            accels: ['<Primary>End'] },
           { name: 'nth-room',
             parameter_type: GLib.VariantType.new('i') }
         ];
@@ -141,15 +141,14 @@ const Application = new Lang.Class({
                     action.connect('activate', actionEntry.activate);
                 if (actionEntry.change_state)
                     action.connect('change-state', actionEntry.change_state);
-                if (actionEntry.accel)
-                    this.add_accelerator(actionEntry.accel,
-                                         'app.' + actionEntry.name, null);
+                if (actionEntry.accels)
+                    this.set_accels_for_action('app.' + actionEntry.name,
+                                               actionEntry.accels);
                 this.add_action(action);
         }));
 
         for (let i = 1; i < 10; i++)
-            this.add_accelerator('<Alt>' + i, 'app.nth-room',
-                                 GLib.Variant.new('i', i));
+            this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
 
         this._window = new MainWindow.MainWindow(this);
         this._window.window.connect('destroy', Lang.bind(this,
