@@ -1,9 +1,5 @@
 @define-color polari_dark_bg_color shade(@theme_bg_color, 0.95);
 
-.polari-main-window.background {
-    background-color: @polari_dark_bg_color;
-}
-
 .polari-sidebar {
     border-style: solid;
     border-color: @borders;
