@@ -76,12 +76,11 @@
     background-color: mix(@theme_unfocused_selected_bg_color, @theme_unfocused_selected_fg_color, 0.1);
 }
 
-.polari-chat-stack {
+.polari-chat-log {
     background-color: @theme_base_color;
-    border-width: 0;
 }
 
-.polari-chat-stack:backdrop {
+.polari-chat-log:backdrop {
     background-color: @theme_unfocused_base_color;
 }
 

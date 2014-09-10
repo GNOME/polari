@@ -226,6 +226,7 @@ const ChatView = new Lang.Class({
                                     visible: true,
                                     wrap_mode: Gtk.WrapMode.WORD_CHAR,
                                     border_width: 6 });
+        this._view.get_style_context().add_class('polari-chat-log');
 
         this.widget.add(this._view);
         this.widget.show_all();

@@ -12,7 +12,8 @@ const RoomStack = new Lang.Class({
     _init: function(inputSizeGroup) {
         this._inputSizeGroup = inputSizeGroup;
 
-        this._createWidget();
+        this.widget = new Gtk.Stack();
+        this.widget.show_all();
 
         this._roomManager = ChatroomManager.getDefault();
 
@@ -39,7 +40,7 @@ const RoomStack = new Lang.Class({
         this._rooms[id] = view;
 
         this._inputSizeGroup.add_widget(view.inputWidget);
-        this._stack.add_named(view.widget, id);
+        this.widget.add_named(view.widget, id);
     },
 
     _roomAdded: function(roomManager, room) {
@@ -52,8 +53,8 @@ const RoomStack = new Lang.Class({
     },
 
     _activeRoomChanged: function(manager, room) {
-        this._stack.set_visible_child_name(room ? room.id : 'placeholder');
-        this._stack.transition_type = room ? Gtk.StackTransitionType.CROSSFADE
+        this.widget.set_visible_child_name(room ? room.id : 'placeholder');
+        this.widget.transition_type = room ? Gtk.StackTransitionType.CROSSFADE
                                            : Gtk.StackTransitionType.NONE;
     },
 
@@ -63,16 +64,6 @@ const RoomStack = new Lang.Class({
         let sensitive = room && room.channel &&
                         !this._selectionModeAction.state.get_boolean();
         this._rooms[id].inputSensitive = sensitive;
-    },
-
-    _createWidget: function() {
-        this.widget = new Gtk.Frame();
-        this.widget.get_style_context().add_class('polari-chat-stack');
-
-        this._stack = new Gtk.Stack();
-        this.widget.add(this._stack);
-
-        this.widget.show_all();
     }
 });
 
