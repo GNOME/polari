@@ -36,7 +36,9 @@ const MessageDialog = new Lang.Class({
 
         let factory = Tp.AccountManager.dup().get_factory();
         let lastUsed = factory.ensure_account(this._settings.get_string('last-used-account'), []);
-        let activeIndex = lastUsed ? names.indexOf(lastUsed.display_name) : 0;
+        let activeIndex = 0;
+        if (lastUsed)
+            activeIndex = Math.max(names.indexOf(lastUsed.display_name), 0);
         this._connectionCombo.set_active(activeIndex);
 
         this._updateCanConfirm();
