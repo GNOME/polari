@@ -24,8 +24,10 @@ const Utils = imports.utils;
 
 const MAX_RETRIES = 3;
 
-const TP_ERROR_PREFIX = 'org.freedesktop.Telepathy.Error.'
-const TP_ERROR_ALREADY_CONNECTED = TP_ERROR_PREFIX + 'AlreadyConnected';
+const ConnectionError = {
+    CANCELLED: Tp.error_get_dbus_name(Tp.Error.CANCELLED),
+    ALREADY_CONNECTED: Tp.error_get_dbus_name(Tp.Error.ALREADY_CONNECTED)
+};
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -320,6 +322,19 @@ const Application = new Lang.Class({
                                            this._onEnsureChannel, requestData));
     },
 
+    _retryRequest: function(requestData) {
+        let account = requestData.account;
+
+        // Try again with a different nick
+        let params = account.dup_parameters_vardict().deep_unpack();
+        let oldNick = params['account'].deep_unpack();
+        let nick = oldNick + '_';
+        this._updateAccountName(account, nick, Lang.bind(this,
+            function() {
+                this._ensureChannel(requestData);
+            }));
+    },
+
     _onEnsureChannel: function(req, res, requestData) {
         let account = req.account;
 
@@ -329,24 +344,15 @@ const Application = new Lang.Class({
             if (requestData.targetHandleType == Tp.HandleType.ROOM)
                 this._addSavedChannel(account, requestData.targetId);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
-            let [error,] = account.dup_detailed_error_vardict();
-            if (error != TP_ERROR_ALREADY_CONNECTED)
-                throw(e);
-
-            if (++requestData.retry >= MAX_RETRIES) {
-                throw(e);
-                return;
+            let error = account.connection_error;
+            if (error == ConnectionError.ALREADY_CONNECTED &&
+                requestData.retry++ < MAX_RETRIES) {
+                    this._retryRequest(requestData);
+                    return;
             }
 
-            // Try again with a different nick
-            let params = account.dup_parameters_vardict().deep_unpack();
-            let oldNick = params['account'].deep_unpack();
-            let nick = oldNick + '_';
-            this._updateAccountName(account, nick, Lang.bind(this,
-                function() {
-                    this._ensureChannel(requestData);
-                }));
-            return;
+            if (error && error != ConnectionError.CANCELLED)
+                logError(e);
         } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
             // interrupted by user request, don't log
         } catch (e) {
