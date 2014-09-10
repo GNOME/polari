@@ -47,6 +47,8 @@ const TextView = new Lang.Class({
         context.add_class('dim-label');
         this._dimColor = context.get_color(Gtk.StateFlags.NORMAL);
         context.restore();
+
+        this.parent();
     },
 
     vfunc_draw: function(cr) {
