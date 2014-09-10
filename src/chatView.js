@@ -224,11 +224,8 @@ const ChatView = new Lang.Class({
 
         this._view = new TextView({ editable: false, cursor_visible: false,
                                     visible: true,
-                                    wrap_mode: Gtk.WrapMode.WORD_CHAR });
-        this._view.set_border_window_size(Gtk.TextWindowType.TOP, 6);
-        this._view.set_border_window_size(Gtk.TextWindowType.BOTTOM, 6);
-        this._view.set_border_window_size(Gtk.TextWindowType.LEFT, 6);
-        this._view.set_border_window_size(Gtk.TextWindowType.RIGHT, 6);
+                                    wrap_mode: Gtk.WrapMode.WORD_CHAR,
+                                    border_width: 6 });
 
         this.widget.add(this._view);
         this.widget.show_all();
