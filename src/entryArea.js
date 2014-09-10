@@ -52,7 +52,7 @@ const EntryArea = new Lang.Class({
 
         this._nickEntry = new Gtk.Entry();
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
-        this._nickEntry.get_style_context().add_class('dim-label');
+        this._nickEntry.get_style_context().add_class('polari-nick-entry');
         this.widget.add(this._nickEntry);
 
         this._nickEntry.connect('activate', Lang.bind(this,
