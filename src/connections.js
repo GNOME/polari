@@ -92,19 +92,20 @@ const ConnectionsDialog = new Lang.Class({
 
         account.bind_property('display-name', label, 'label',
                               GObject.BindingFlags.SYNC_CREATE);
-        account.bind_property('enabled', sw, 'active',
+        account.bind_property('enabled', sw, 'state',
                               GObject.BindingFlags.SYNC_CREATE);
         account.connect('notify::display-name',
             function() {
                 row.changed();
             });
 
-        sw.connect('notify::active',
-            function() {
-                account.set_enabled_async(sw.active, Lang.bind(this,
+        sw.connect('state-set',
+            function(w, state) {
+                account.set_enabled_async(state, Lang.bind(this,
                     function(a, res) {
                         a.set_enabled_finish(res);
                     }));
+                return true;
             });
 
         row.connect('key-press-event', Lang.bind(this,
