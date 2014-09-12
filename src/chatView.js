@@ -25,6 +25,8 @@ const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
 
 const INDICATOR_OFFSET = 5; // TODO: should be based on line spacing
 
+const MARGIN = 6;
+
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
 const TextView = new Lang.Class({
@@ -150,7 +152,7 @@ const ChatView = new Lang.Class({
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            left_margin: 0 },
+            left_margin: MARGIN },
           { name: 'gap',
             pixels_above_lines: 10 },
           { name: 'message',
@@ -158,16 +160,16 @@ const ChatView = new Lang.Class({
           { name: 'highlight',
             weight: Pango.Weight.BOLD },
           { name: 'status',
-            left_margin: 0,
+            left_margin: MARGIN,
             indent: 0,
             justification: Gtk.Justification.RIGHT },
           { name: 'timestamp',
-            left_margin: 0,
+            left_margin: MARGIN,
             indent: 0,
             weight: Pango.Weight.BOLD,
             justification: Gtk.Justification.RIGHT },
           { name: 'action',
-            left_margin: 0 },
+            left_margin: MARGIN },
           { name: 'url',
             underline: Pango.Underline.SINGLE
           }
@@ -227,8 +229,7 @@ const ChatView = new Lang.Class({
         this._view = new TextView({ editable: false, cursor_visible: false,
                                     visible: true,
                                     wrap_mode: Gtk.WrapMode.WORD_CHAR,
-                                    border_width: 6 });
-        this._view.get_style_context().add_class('polari-chat-log');
+                                    right_margin: MARGIN });
 
         this.widget.add(this._view);
         this.widget.show_all();
@@ -321,7 +322,7 @@ const ChatView = new Lang.Class({
         tabs.set_tab(0, Pango.TabAlign.LEFT, this._maxNickChars * pixelWidth);
         this._view.tabs = tabs;
         this._view.indent = -this._maxNickChars * pixelWidth;
-        this._view.left_margin = this._maxNickChars * pixelWidth;
+        this._view.left_margin = MARGIN + this._maxNickChars * pixelWidth;
     },
 
     _updateActive: function() {
