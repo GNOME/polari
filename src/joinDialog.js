@@ -81,12 +81,6 @@ const JoinDialog = new Lang.Class({
                 this._setPage(DialogPage.MAIN);
             }));
 
-        let backIcon = builder.get_object('back_icon');
-        if (backIcon.get_direction() == Gtk.TextDirection.RTL)
-            backIcon.icon_name = 'go-previous-rtl-symbolic';
-        else
-            backIcon.icon_name = 'go-previous-symbolic';
-
         this._connectionCombo = builder.get_object('connection_combo');
         this._connectionCombo.connect('changed',
                                       Lang.bind(this, this._onAccountChanged));
