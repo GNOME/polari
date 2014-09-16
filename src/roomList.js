@@ -179,22 +179,27 @@ const RoomList = new Lang.Class({
         action = app.lookup_action('next-room');
         action.connect('activate', Lang.bind(this,
             function() {
-                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
+                this._moveSelection(Gtk.DirectionType.DOWN);
             }));
         action = app.lookup_action('previous-room');
         action.connect('activate', Lang.bind(this,
             function() {
-                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
+                this._moveSelection(Gtk.DirectionType.UP);
             }));
         action = app.lookup_action('first-room');
         action.connect('activate', Lang.bind(this,
             function() {
-                this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, -1);
+                let row = this.widget.get_row_at_index(0);
+                if (row)
+                    this.widget.select_row(row);
             }));
         action = app.lookup_action('last-room');
         action.connect('activate', Lang.bind(this,
             function() {
-                this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, 1);
+                let nRows = this._roomManager.roomCount;
+                let row = this.widget.get_row_at_index(nRows - 1);
+                if (row)
+                    this.widget.select_row(row);
             }));
         action = app.lookup_action('nth-room');
         action.connect('activate', Lang.bind(this,
@@ -202,9 +207,7 @@ const RoomList = new Lang.Class({
                 let n = param.get_int32();
                 if (n > this._roomManager.roomCount)
                     return;
-                this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, -1);
-                if (n > 1)
-                    this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, n - 1);
+                this.widget.select_row(this.widget.get_row_at_index(n - 1));
             }));
     },
 
@@ -237,18 +240,14 @@ const RoomList = new Lang.Class({
         row.hide();
     },
 
-    _moveSelection: function(movement, count) {
-        let toplevel = this.widget.get_toplevel();
-        let focus = toplevel.get_focus();
-
-        this.widget.emit('move-cursor', movement, count);
-
-        let newFocus = this.widget.get_focus_child();
-        if (newFocus)
-            this.widget.select_row(newFocus);
-
-        if (focus && focus.get_parent() != this.widget)
-            focus.emit('grab-focus');
+    _moveSelection: function(direction) {
+        let current = this.widget.get_selected_row();
+        if (!current)
+            return;
+        let inc = direction == Gtk.DirectionType.UP ? -1 : 1;
+        let row = this.widget.get_row_at_index(current.get_index() + inc);
+        if (row)
+            this.widget.select_row(row);
     },
 
     _moveSelectionFromRow: function(row) {
@@ -260,18 +259,16 @@ const RoomList = new Lang.Class({
 
         let selected = this.widget.get_selected_row();
         let newActive = null;
-        let visibleChildren = this.widget.get_children().filter(function(c) {
-            return c.visible;
-        });
-        if (visibleChildren.length > 1) {
-            row.can_focus = false;
-            this.widget.select_row(row);
-            row.can_focus = true;
-            let count = row.get_index() == 0 ? 1 : -1;
-            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, count);
-            newActive = this.widget.get_selected_row().room;
-        }
+
+        this.widget.select_row(row);
+        this._moveSelection(row.get_index() == 0 ? Gtk.DirectionType.DOWN
+                                                 : Gtk.DirectionType.UP);
+
+        let newSelected = this.widget.get_selected_row();
+        if (newSelected != row)
+            newActive = newSelected.room;
         this._roomManager.setActiveRoom(newActive);
+
         if (selected != row)
             this.widget.select_row(selected);
     },
