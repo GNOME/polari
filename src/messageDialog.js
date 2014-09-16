@@ -45,6 +45,12 @@ const MessageDialog = new Lang.Class({
         this._updateRecentList([]);
 
         this._nameEntry.grab_focus();
+
+        this.widget.connect('response', Lang.bind(this,
+            function(w, response) {
+                if (response == Gtk.ResponseType.OK)
+                    this._onMessageClicked();
+            }));
     },
 
     _createWidget: function() {
@@ -66,8 +72,6 @@ const MessageDialog = new Lang.Class({
         this._nameCompletion = builder.get_object('name_completion');
 
         this._messageButton = builder.get_object('message_button');
-        this._messageButton.connect('clicked',
-                                 Lang.bind(this, this._onMessageClicked));
         this._messageButton.sensitive = false;
 
         this._nameEntry = builder.get_object('name_entry');
@@ -174,7 +178,6 @@ const MessageDialog = new Lang.Class({
                                          [ account.get_object_path(),
                                            user,
                                            TP_CURRENT_TIME ]));
-        this.widget.response(Gtk.ResponseType.OK);
     },
 
     _updateCanConfirm: function() {

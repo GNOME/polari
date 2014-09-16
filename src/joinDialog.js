@@ -45,6 +45,11 @@ const JoinDialog = new Lang.Class({
                     this._updateConnectionCombo();
                 }));
 
+        this.widget.connect('response', Lang.bind(this,
+            function(w, response) {
+                if (response == Gtk.ResponseType.OK)
+                    this._onConfirmClicked();
+            }));
         this.widget.connect('destroy', Lang.bind(this,
             function() {
                 this._accountsMonitor.disconnect(this._accountAddedId);
@@ -87,9 +92,6 @@ const JoinDialog = new Lang.Class({
         this._connectionCombo.sensitive = false;
 
         this._confirmButton = builder.get_object('confirm_button');
-        this._confirmButton.connect('clicked',
-                                    Lang.bind(this, this._onConfirmClicked));
-
         this._cancelButton = builder.get_object('cancel_button');
 
         this._nameCompletion = builder.get_object('name_completion');
@@ -133,7 +135,6 @@ const JoinDialog = new Lang.Class({
     _onConfirmClicked: function() {
         if (this._page == DialogPage.MAIN) {
             this._joinRoom();
-            this.widget.response(Gtk.ResponseType.OK);
         } else {
             this._details.save();
             this._setPage(DialogPage.MAIN);

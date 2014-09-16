@@ -179,7 +179,7 @@
     </child>
     <action-widgets>
       <action-widget response="cancel">cancel_button</action-widget>
-      <action-widget response="confirm">message_button</action-widget>
+      <action-widget response="ok">message_button</action-widget>
     </action-widgets>
   </object>
 </interface>
