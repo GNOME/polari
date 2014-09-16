@@ -53,8 +53,6 @@ const Application = new Lang.Class({
         window.C_ = Gettext.pgettext;
         window.ngettext = Gettext.ngettext;
 
-        Gtk.init(null);
-
         let w = new Polari.FixedSizeFrame(); // register gtype
         w.destroy();
 
