@@ -21,23 +21,6 @@
     <property name="default_width">500</property>
     <property name="use_header_bar">1</property>
     <child type="action">
-      <object class="GtkButton" id="back_button">
-        <property name="visible">False</property>
-        <property name="can_focus">True</property>
-        <property name="valign">center</property>
-        <style>
-          <class name="image-button"/>
-        </style>
-        <child>
-          <object class="GtkImage" id="back_icon">
-            <property name="visible">True</property>
-            <property name="icon_name">go-previous-symbolic</property>
-            <property name="icon_size">1</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child type="action">
       <object class="GtkButton" id="cancel_button">
         <property name="label" translatable="yes">_Cancel</property>
         <property name="visible">True</property>
@@ -247,7 +230,6 @@
     <action-widgets>
       <action-widget response="cancel">cancel_button</action-widget>
       <action-widget response="ok">confirm_button</action-widget>
-      <action-widget response="help">back_button</action-widget>
     </action-widgets>
   </object>
 </interface>

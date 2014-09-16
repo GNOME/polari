@@ -80,11 +80,14 @@ const JoinDialog = new Lang.Class({
             function() {
                 this._setPage(DialogPage.CONNECTION);
             }));
-        this._backButton = builder.get_object('back_button');
+
+        let icon = new Gtk.Image({ icon_name: 'go-previous-symbolic' });
+        this._backButton = new Gtk.Button({ image: icon });
         this._backButton.connect('clicked', Lang.bind(this,
             function() {
                 this._setPage(DialogPage.MAIN);
             }));
+        this.widget.get_header_bar().pack_start(this._backButton);
 
         this._connectionCombo = builder.get_object('connection_combo');
         this._connectionCombo.connect('changed',
