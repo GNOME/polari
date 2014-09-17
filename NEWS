@@ -1,3 +1,18 @@
+3.13.92 - "Orange?"
+===================
+* Provide some xchat-gnome compatibility shortcuts [Florian; #710053]
+* Adjust to GTK+/Adwaita changes
+
+Contributors:
+  Florian Müllner, Yosef Or Boczko
+
+Translations:
+  ngoswami [as], Cheng-Chia Tseng [zh_TW], Kjartan Maraas [nb],
+  Marek Černocký [cs], Andika Triwidada [id], Fran Diéguez [gl],
+  Changwoo Ryu [ko], Gil Forcada [ca], Carles Ferrando [ca@valencia],
+  Piotr Drąg [pl], Yuri Myasoedov [ru], Ville-Pekka Vainio [fi],
+  Guillaume Bernard [fr], Balázs Úr [hu]
+
 3.13.90 - "Our Notting Hill Moment"
 ===================================
 * Fix in-app notifications [Florian; #730964]
