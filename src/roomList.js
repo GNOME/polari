@@ -251,6 +251,9 @@ const RoomList = new Lang.Class({
     },
 
     _moveSelectionFromRow: function(row) {
+        if (this._roomManager.roomCount == 0)
+            return;
+
         let activeRoom = this._roomManager.getActiveRoom();
         let current = this._roomRows[activeRoom.id].widget;
 
