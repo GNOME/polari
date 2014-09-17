@@ -225,7 +225,6 @@ const ChatView = new Lang.Class({
     _createWidget: function() {
         this.widget = new Gtk.ScrolledWindow({ vexpand: true });
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
-        this.widget.resize_mode = Gtk.ResizeMode.QUEUE;
 
         this._view = new TextView({ editable: false, cursor_visible: false,
                                     visible: true,
