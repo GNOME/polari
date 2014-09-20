@@ -88,6 +88,7 @@ const ChatView = new Lang.Class({
 
         this.widget.connect('style-updated',
                             Lang.bind(this, this._onStyleUpdated));
+        this._onStyleUpdated();
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0 };
