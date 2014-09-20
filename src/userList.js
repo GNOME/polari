@@ -129,6 +129,7 @@ const UserListRow = new Lang.Class({
     },
 
     set expand(expand) {
+        this._ensureDetails();
         this._revealer.reveal_child = expand;
     },
 
@@ -152,8 +153,14 @@ const UserListRow = new Lang.Class({
         this._revealer = new Gtk.Revealer({ reveal_child: false });
         vbox.add(this._revealer);
 
+        this.widget.show_all();
+    },
+
+    _ensureDetails: function() {
+        if (this._revealer.get_child())
+            return;
+
         let frame = new Gtk.Frame({ hexpand: true });
-        this._revealer.add(frame);
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
                                 spacing: 6, margin: 6 });
@@ -171,6 +178,7 @@ const UserListRow = new Lang.Class({
                                            hexpand: true });
         box.add(this._detailsGrid);
 
+        let user = this.widget.user;
         if (user != user.connection.self_contact) {
             let button = new Gtk.Button({ label: _("Message"),
                                           margin_top: 12,
@@ -184,7 +192,8 @@ const UserListRow = new Lang.Class({
             box.add(button);
         }
 
-        this.widget.show_all();
+        this._revealer.add(frame);
+        frame.show_all();
     },
 
     _formatLast: function(seconds) {
