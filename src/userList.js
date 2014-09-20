@@ -19,6 +19,7 @@ const UserListPopover = new Lang.Class({
         }));
         this.widget.connect('map', Lang.bind(this, function() {
             this._revealer.transition_duration = 0;
+            this._ensureUserList();
         }));
         this._revealer.connect('notify::child-revealed', Lang.bind(this, function() {
             this._revealer.transition_duration = 250;
@@ -71,7 +72,13 @@ const UserListPopover = new Lang.Class({
         if (this._userList)
             this._userList.widget.destroy();
         this._userList = null;
+    },
 
+    _ensureUserList: function() {
+        if (this._userList)
+            return;
+
+        let room = this._roomManager.getActiveRoom();
         if (!room || room.type != Tp.HandleType.ROOM)
             return;
 
