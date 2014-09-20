@@ -24,14 +24,7 @@ const UserListPopover = new Lang.Class({
             this._revealer.transition_duration = 250;
         }));
 
-        this._rooms = {};
-        this._room = null;
-
         this._roomManager = new ChatroomManager.getDefault();
-        this._roomManager.connect('room-added',
-                                  Lang.bind(this, this._roomAdded));
-        this._roomManager.connect('room-removed',
-                                  Lang.bind(this, this._roomRemoved));
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
     },
@@ -72,55 +65,37 @@ const UserListPopover = new Lang.Class({
         this._box.show_all();
     },
 
-    _roomAdded: function(roomManager, room) {
-        if (room.type != Tp.HandleType.ROOM)
-            return;
-
-        let userList = new UserList(room);
-        this._rooms[room.id] = userList;
-
-        userList.widget.vadjustment.connect('changed',
-                                            Lang.bind(this, this._updateEntryVisibility));
-    },
-
-    _roomRemoved: function(roomManager, room) {
-        if (!this._rooms[room.id])
-            return;
-        this._rooms[room.id].widget.destroy();
-        delete this._rooms[room.id];
-    },
-
     _activeRoomChanged: function(manager, room) {
         this._entry.text = '';
-        this._updateFilter();
 
-        let currentList = this._room ? this._rooms[this._room.id] : null;
-        if (currentList)
-            this._box.remove(currentList.widget);
+        if (this._userList)
+            this._userList.widget.destroy();
+        this._userList = null;
 
-        this._room = room;
-
-        if (!room || !this._rooms[room.id])
+        if (!room || room.type != Tp.HandleType.ROOM)
             return;
 
-        this._box.add(this._rooms[room.id].widget);
+        this._userList = new UserList(room);
+        this._box.add(this._userList.widget);
+
+        this._userList.widget.vadjustment.connect('changed',
+                                                  Lang.bind(this, this._updateEntryVisibility));
         this._updateEntryVisibility();
     },
 
     _updateEntryVisibility: function() {
-        if (!this._room || !this._rooms[this._room.id])
+        if (!this._userList)
             return;
-        let userList = this._rooms[this._room.id];
-        let [, natHeight] = userList.widget.get_child().get_preferred_height();
-        let height = userList.widget.get_allocated_height();
+        let [, natHeight] = this._userList.widget.get_child().get_preferred_height();
+        let height = this._userList.widget.get_allocated_height();
         this._revealer.reveal_child = this._entry.text != '' ||
                                       natHeight > height;
     },
 
     _updateFilter: function() {
-        if (!this._room || !this._rooms[this._room.id])
+        if (!this._userList)
             return;
-        this._rooms[this._room.id].setFilter(this._entry.text);
+        this._userList.setFilter(this._entry.text);
     }
 });
 
@@ -362,6 +337,7 @@ const UserList = new Lang.Class({
         */
         room.connect('notify::channel',
                      Lang.bind(this, this._onChannelChanged));
+        this._onChannelChanged(room);
 
         this.widget.show_all();
     },
