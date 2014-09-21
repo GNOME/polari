@@ -239,6 +239,8 @@ const UserListRow = new Lang.Class({
         if (!fn)
             fn = this.widget.user.alias;
 
+        this._detailsGrid.foreach(function(w) { w.destroy(); });
+
         let row = 0;
         let w = new Gtk.Label({ label: fn, ellipsize: Pango.EllipsizeMode.END,
                                 halign: Gtk.Align.START });
@@ -288,10 +290,9 @@ const UserListRow = new Lang.Class({
             this.widget.get_style_context().add_class('expanded');
             this._arrow.arrow_type = Gtk.ArrowType.DOWN;
 
-            this._spinnerBox.show();
+            let prevDetails = this._detailsGrid.get_children().length > 0;
+            this._spinnerBox.visible = !prevDetails;
             this._spinner.start();
-
-            this._detailsGrid.foreach(function(w) { w.destroy(); });
 
             this._cancellable = new Gio.Cancellable();
             this.widget.user.request_contact_info_async(this._cancellable,
