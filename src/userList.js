@@ -416,8 +416,8 @@ const UserList = new Lang.Class({
 
     _removeMember: function(member) {
         let row = this._rows[member];
-        if (row && row.widget.get_parent())
-            this._list.remove(row.widget);
+        if (row)
+            row.widget.destroy();
         delete this._rows[member];
     },
 

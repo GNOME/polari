@@ -304,7 +304,7 @@ const RoomList = new Lang.Class({
             return;
 
         this._moveSelectionFromRow(roomRow.widget);
-        this.widget.remove(roomRow.widget);
+        roomRow.widget.destroy();
         delete this._roomRows[room.id];
     },
 
