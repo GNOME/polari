@@ -329,33 +329,47 @@ const UserList = new Lang.Class({
 
         this._list.connect('row-activated',
                            Lang.bind(this, this._onRowActivated));
+        this.widget.connect('destroy',
+                            Lang.bind(this, this._onDestroy));
 
         this._room = room;
         this._rows = {};
         this._activeRow = null;
 
-        room.connect('member-renamed',
-                     Lang.bind(this, this._onMemberRenamed));
-        room.connect('member-disconnected',
-                     Lang.bind(this, this._onMemberRemoved));
-        room.connect('member-kicked',
-                     Lang.bind(this, this._onMemberRemoved));
-        room.connect('member-banned',
-                     Lang.bind(this, this._onMemberRemoved));
-        room.connect('member-left',
-                     Lang.bind(this, this._onMemberRemoved));
-        room.connect('member-joined',
-                     Lang.bind(this, this._onMemberJoined));
-        /*
-        // see https://bugzilla.gnome.org/show_bug.cgi?id=725403
-        room.connect('members-changed',
-                     Lang.bind(this, this._onMembersChanged));
-        */
-        room.connect('notify::channel',
-                     Lang.bind(this, this._onChannelChanged));
+        let roomSignals = [
+            { name: 'member-renamed',
+              handler: Lang.bind(this, this._onMemberRenamed) },
+            { name: 'member-disconnected',
+              handler: Lang.bind(this, this._onMemberRemoved) },
+            { name: 'member-kicked',
+              handler: Lang.bind(this, this._onMemberRemoved) },
+            { name: 'member-banned',
+              handler: Lang.bind(this, this._onMemberRemoved) },
+            { name: 'member-left',
+              handler: Lang.bind(this, this._onMemberRemoved) },
+            { name: 'member-joined',
+              handler: Lang.bind(this, this._onMemberJoined) },
+            /*
+            // see https://bugzilla.gnome.org/show_bug.cgi?id=725403
+            { name: 'members-changed',
+              handler: Lang.bind(this, this._onMembersChanged) },
+            */
+            { name: 'notify::channel',
+              handler: Lang.bind(this, this._onChannelChanged) }
+        ];
+        this._roomSignals = [];
+        roomSignals.forEach(Lang.bind(this, function(signal) {
+            this._roomSignals.push(room.connect(signal.name, signal.handler));
+        }));
         this._onChannelChanged(room);
 
         this.widget.show_all();
+    },
+
+    _onDestroy: function() {
+        for (let i = 0; i < this._roomSignals.length; i++)
+            this._room.disconnect(this._roomSignals[i]);
+        this._roomSignals = [];
     },
 
     setFilter: function(filter) {
