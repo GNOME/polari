@@ -94,7 +94,7 @@ const ChatView = new Lang.Class({
         this._state = { lastNick: null, lastTimestamp: 0 };
         this._active = false;
         this._toplevelFocus = false;
-        this._joinTime = GLib.DateTime.new_now_utc().to_unix();
+        this._joinTime = 0;
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveringLink = false;
         this._needsIndicator = true;
@@ -518,6 +518,7 @@ const ChatView = new Lang.Class({
         if (!this._channel)
             return;
 
+        this._joinTime = GLib.DateTime.new_now_utc().to_unix();
 
         let channelSignals = [
             { name: 'message-received',
