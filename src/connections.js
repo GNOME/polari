@@ -94,9 +94,13 @@ const ConnectionsDialog = new Lang.Class({
                               GObject.BindingFlags.SYNC_CREATE);
         account.bind_property('enabled', sw, 'state',
                               GObject.BindingFlags.SYNC_CREATE);
-        account.connect('notify::display-name',
+        let id = account.connect('notify::display-name',
             function() {
                 row.changed();
+            });
+        row.connect('destroy',
+            function() {
+                account.disconnect(id);
             });
 
         sw.connect('state-set',

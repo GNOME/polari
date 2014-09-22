@@ -108,8 +108,12 @@ const ConnectingNotification = new Lang.Class({
         this.widget.add(this._grid);
         this.widget.show_all();
 
-        account.connect('notify::connection-status',
-                        Lang.bind(this, this._onConnectionStatusChanged));
+        let id = account.connect('notify::connection-status',
+                                 Lang.bind(this, this._onConnectionStatusChanged));
+        this.widget.connect('destroy',
+            function() {
+                account.disconnect(id);
+            });
     },
 
     _onConnectionStatusChanged: function(account) {
