@@ -24,6 +24,8 @@ const TabCompletion = new Lang.Class({
         this._list.connect('row-activated', Lang.bind(this, this._stop));
         this._list.connect('keynav-failed', Lang.bind(this, this._onKeynavFailed));
         this._popup.add(this._list);
+
+        this._widgetMap = {};
     },
 
     _showPopup: function() {
@@ -59,16 +61,34 @@ const TabCompletion = new Lang.Class({
             return;
         }
 
+        let widgetMap = {};
+
+        for (let i = 0; i < completions.length; i++) {
+            let nick = completions[i];
+            let row = this._widgetMap[nick];
+
+            if (row) {
+                widgetMap[nick] = row;
+                this._list.remove(row);
+            } else {
+                row = new Gtk.ListBoxRow();
+                row._text = nick;
+                row._casefoldedText = row._text.toLowerCase();
+                row.add(new Gtk.Label({ label: row._text,
+                                        halign: Gtk.Align.START,
+                                        margin_start: 6,
+                                        margin_end: 6 }));
+                widgetMap[nick] = row;
+            }
+        }
+
+        this._widgetMap = widgetMap;
+
+        // All remaining rows are going unused
         this._list.foreach(function(r) { r.destroy(); });
 
         for (let i = 0; i < completions.length; i++) {
-            let row = new Gtk.ListBoxRow();
-            row._text = completions[i];
-            row._casefoldedText = row._text.toLowerCase();
-            row.add(new Gtk.Label({ label: row._text,
-                                    halign: Gtk.Align.START,
-                                    margin_start: 6,
-                                    margin_end: 6 }));
+            let row = this._widgetMap[completions[i]];
             this._list.add(row);
         }
         this._canComplete = completions.length > 0;
