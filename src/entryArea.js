@@ -33,6 +33,9 @@ const EntryArea = new Lang.Class({
             this._room.connect('notify::channel',
                                Lang.bind(this, this._onChannelChanged));
         this._onChannelChanged(room);
+
+        this._entry.connect('map', Lang.bind(this, this._updateCompletions));
+        this._entry.connect('unmap', Lang.bind(this, this._updateCompletions));
     },
 
     _createWidget: function() {
@@ -92,7 +95,8 @@ const EntryArea = new Lang.Class({
     _updateCompletions: function() {
         let nicks = [];
 
-        if (this._room &&
+        if (this._entry.get_mapped() &&
+            this._room &&
             this._room.channel &&
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
             let members = this._room.channel.group_dup_members_contacts();
