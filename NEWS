@@ -1,3 +1,16 @@
+3.14.1 - "Baby Bottles of Booze"
+================================
+* Improve performance [Florian, Carlos; #732290]
+* Reset join time to prevent status message flood [Florian; #736349]
+* Keep previously fetched user details around [Florian; #737136]
+
+Contributors:
+  Carlos Garnacho, Florian Müllner
+
+Translations:
+  Iris Gou [zh_CN], Мирослав Николић [sr, sr@latin], Kjartan Maraas [nb],
+  Milo Casagrande [it], Kristoffer Grundström [sv], Rūdolfs Mazurs [lv]
+
 3.14.0 - "The Goldfish Speach"
 ==============================
 
