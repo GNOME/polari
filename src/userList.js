@@ -7,6 +7,9 @@ const Tp = imports.gi.TelepathyGLib;
 
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+
+const MAX_USERS_SHOWN = 8;
 
 const UserListPopover = new Lang.Class({
     Name: 'UserListPopover',
@@ -32,11 +35,8 @@ const UserListPopover = new Lang.Class({
 
     _createWidget: function() {
         this.widget = new Gtk.Popover({ modal: true,
-                                        position: Gtk.PositionType.TOP,
-                                        vexpand: true,
-                                        margin_start: 12,
-                                        margin_end: 12,
-                                        margin_bottom: 12 });
+                                        position: Gtk.PositionType.TOP });
+
         this.widget.set_border_width(6);
         this.widget.set_size_request(250, -1);
 
@@ -315,12 +315,16 @@ const UserList = new Lang.Class({
     Name: 'UserList',
 
     _init: function(room) {
-        this.widget = new Gtk.ScrolledWindow({ hexpand: true, vexpand: true,
+        this.widget = new Gtk.ScrolledWindow({ hexpand: true,
                                                shadow_type: Gtk.ShadowType.ETCHED_IN });
         this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
-        this._list = new Gtk.ListBox();
+        this._list = new Gtk.ListBox({ vexpand: true });
         this.widget.add(this._list);
+
+        this._updateHeightId = 0;
+        this._list.connect('size-allocate',
+                           Lang.bind(this, this._updateContentHeight));
 
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
         /* see https://bugzilla.gnome.org/show_bug.cgi?id=725403 */
@@ -367,6 +371,10 @@ const UserList = new Lang.Class({
         this.widget.show_all();
     },
 
+    get numRows() {
+        return Object.keys(this._rows).length;
+    },
+
     _onDestroy: function() {
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
@@ -376,6 +384,23 @@ const UserList = new Lang.Class({
     setFilter: function(filter) {
         this._filter = filter.toLowerCase();
         this._list.invalidate_filter();
+    },
+
+    _updateContentHeight: function() {
+        if (this._updateHeightId != 0)
+            return;
+
+        this._updateHeightId = Mainloop.idle_add(Lang.bind(this, function() {
+            let membersShown = Math.min(this.numRows, MAX_USERS_SHOWN);
+            let height = 0;
+
+            for (let i = 0; i < membersShown; i++)
+                height += this._list.get_row_at_index(i).get_allocated_height();
+
+            this.widget.min_content_height = height;
+            this._updateHeightId = 0;
+            return GLib.SOURCE_REMOVE;
+        }));
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -392,8 +417,7 @@ const UserList = new Lang.Class({
     },
 
     _onMembersChanged: function(room) {
-        let numMembers = room.channel.group_dup_members_contacts().length;
-        this._counterLabel.label = numMembers.toString();
+        this._counterLabel.label = this.numRows.toString();
     },
 
     _onChannelChanged: function(room) {
@@ -454,9 +478,6 @@ const UserList = new Lang.Class({
         if (!this._room.channel)
             return;
 
-        let members = this._room.channel.group_dup_members_contacts();
-        let numMembers = members.length;
-
         let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                 margin_start: 6,
                                 margin_end: 6,
@@ -465,7 +486,7 @@ const UserList = new Lang.Class({
                                 use_markup: true,
                                 hexpand: true,
                                 halign: Gtk.Align.START }));
-        this._counterLabel = new Gtk.Label({ label: numMembers.toString(),
+        this._counterLabel = new Gtk.Label({ label: this.numRows.toString(),
                                              halign: Gtk.Align.END });
         box.add(this._counterLabel);
         box.show_all();
