@@ -93,10 +93,10 @@ const UserListPopover = new Lang.Class({
     _updateEntryVisibility: function() {
         if (!this._userList)
             return;
-        let [, natHeight] = this._userList.widget.get_child().get_preferred_height();
-        let height = this._userList.widget.get_allocated_height();
-        this._revealer.reveal_child = this._entry.text != '' ||
-                                      natHeight > height;
+
+        let reveal = this._entry.text != '' ||
+                     this._userList.numRows > MAX_USERS_SHOWN;
+        this._revealer.reveal_child = reveal;
     },
 
     _updateFilter: function() {
