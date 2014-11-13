@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: polari 3.13.x\n"
+"Project-Id-Version: polari 3.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-03 21:23+0200\n"
-"PO-Revision-Date: 2014-10-03 21:26+0200\n"
+"POT-Creation-Date: 2014-11-13 20:42+0100\n"
+"PO-Revision-Date: 2014-11-13 20:42+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -35,7 +35,11 @@ msgid ""
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message - for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
-msgstr "Du kan brukue Polari til å prate offentlig med andre i en kanal, og ha private samtaler med andre. Varslinger sikrer at du aldri går glipp av en viktig melding.  For private samtaler lar de deg også svare med det samme uten å gå tilbake til programmet."
+msgstr ""
+"Du kan brukue Polari til å prate offentlig med andre i en kanal, og ha "
+"private samtaler med andre. Varslinger sikrer at du aldri går glipp av en "
+"viktig melding.  For private samtaler lar de deg også svare med det samme "
+"uten å gå tilbake til programmet."
 
 #: ../data/org.gnome.Polari.desktop.in.h:1
 #: ../data/resources/main-window.ui.h:3
@@ -87,7 +91,7 @@ msgid "Window maximized state"
 msgstr "Vinduets maksimeringstilstand"
 
 #: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:322
+#: ../src/connections.js:326
 msgid "New Connection"
 msgstr "Ny tilkobling"
 
@@ -130,7 +134,7 @@ msgid "Join Chat Room"
 msgstr "Bli med i praterom"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:333
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:337
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -207,64 +211,64 @@ msgstr ""
 msgid "Connecting to %s"
 msgstr "Kobler til %s"
 
-#: ../src/chatView.js:403
+#: ../src/chatView.js:402
 msgid "Open Link"
 msgstr "Åpne lenke"
 
-#: ../src/chatView.js:410
+#: ../src/chatView.js:409
 msgid "Copy Link Address"
 msgstr "Kopier lenkeadresse"
 
-#: ../src/chatView.js:543
+#: ../src/chatView.js:542
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s er nå kjent som %s"
 
-#: ../src/chatView.js:548
+#: ../src/chatView.js:547
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har koblet fra"
 
-#: ../src/chatView.js:556
+#: ../src/chatView.js:555
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s har blitt sparket ut av %s"
 
-#: ../src/chatView.js:558
+#: ../src/chatView.js:557
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s har blitt sparket ut"
 
-#: ../src/chatView.js:564
+#: ../src/chatView.js:563
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s har blitt bannlyst av %s"
 
-#: ../src/chatView.js:566
+#: ../src/chatView.js:565
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s har blitt bannlyst"
 
-#: ../src/chatView.js:571
+#: ../src/chatView.js:570
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ble med"
 
-#: ../src/chatView.js:575
+#: ../src/chatView.js:574
 #, javascript-format
 msgid "%s left"
 msgstr "%s gikk ut"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:614
+#: ../src/chatView.js:613
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:619
+#: ../src/chatView.js:618
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "I går, %H.%M"
@@ -272,7 +276,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:624
+#: ../src/chatView.js:623
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
@@ -281,7 +285,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:630
+#: ../src/chatView.js:629
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H.%M"
@@ -290,21 +294,21 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:636
+#: ../src/chatView.js:635
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H.%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:641
+#: ../src/chatView.js:640
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:646
+#: ../src/chatView.js:645
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "I går, %H.%M"
@@ -312,7 +316,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:651
+#: ../src/chatView.js:650
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
@@ -321,7 +325,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:657
+#: ../src/chatView.js:656
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %H.%M"
@@ -330,20 +334,20 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:663
+#: ../src/chatView.js:662
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %H.%M"
 
-#: ../src/connections.js:321
+#: ../src/connections.js:325
 msgid "Edit Connection"
 msgstr "Rediger tilkobling"
 
-#: ../src/connections.js:335
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Bruk"
 
-#: ../src/connections.js:335
+#: ../src/connections.js:339
 msgid "Cr_eate"
 msgstr "_Lag"
 
@@ -410,7 +414,8 @@ msgstr ""
 
 #: ../src/ircParser.js:40
 msgid "Unknown command - try /HELP for a list of available commands"
-msgstr "Ukjent kommando - prøv /HELP for å vise en liste med tilgjengelige kommandoer"
+msgstr ""
+"Ukjent kommando - prøv /HELP for å vise en liste med tilgjengelige kommandoer"
 
 #: ../src/ircParser.js:61
 #, javascript-format
@@ -496,6 +501,6 @@ msgstr[1] "%d måneder siden"
 msgid "Last Activity:"
 msgstr "Siste aktivitet:"
 
-#: ../src/userList.js:464
+#: ../src/userList.js:485
 msgid "All"
 msgstr "Alle"
