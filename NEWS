@@ -1,3 +1,13 @@
+3.15.2 - "Tack-a-rama"
+======================
+* Limit height of userlist popover [Jonas; #738518]
+
+Contributors:
+  Jonas Danielsson, Florian Müllner
+
+Translations:
+  Muhammet Kara [tr], Kjartan Maraas [nb]
+
 3.14.1 - "Baby Bottles of Booze"
 ================================
 * Improve performance [Florian, Carlos; #732290]
