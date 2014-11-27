@@ -4,6 +4,8 @@
   <id type="desktop">org.gnome.Polari.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+ and LGPL-2.1+</project_license>
+  <_name>Polari</_name>
+  <_summary>An Internet Relay Chat Client for GNOME</_summary>
   <description>
     <_p>
       A simple Internet Relay Chat (IRC) client that is designed to integrate
