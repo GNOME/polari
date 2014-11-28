@@ -109,6 +109,9 @@ const EntryArea = new Lang.Class({
         if (!this._entry.get_mapped())
             return Gdk.EVENT_PROPAGATE;
 
+        if (!this.widget.sensitive)
+            return Gdk.EVENT_PROPAGATE;
+
         if (this._entry.has_focus)
             return Gdk.EVENT_PROPAGATE;
 
