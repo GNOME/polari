@@ -123,7 +123,7 @@ const EntryArea = new Lang.Class({
             return Gdk.EVENT_PROPAGATE;
 
         let [, state] = event.get_state();
-        if (state != 0)
+        if (state != 0 && state != Gdk.ModifierType.SHIFT_MASK)
             return Gdk.EVENT_PROPAGATE;
 
         let activationKeys = [
