@@ -88,9 +88,9 @@ const MainWindow = new Lang.Class({
         this.window.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape) {
+                if (keyval == Gdk.KEY_Escape)
                     this._selectionModeAction.change_state(GLib.Variant.new('b', false));
-                }
+                return Gdk.EVENT_STOP;
             }));
         this.window.connect('window-state-event',
                             Lang.bind(this, this._onWindowStateEvent));
