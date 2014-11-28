@@ -358,11 +358,16 @@ const ChatView = new Lang.Class({
     },
 
     _onScroll: function(w, event) {
-        let [, dir] = event.get_scroll_direction();
+        let [hasDir, dir] = event.get_scroll_direction();
+        if (hasDir && dir != Gtk.ScrollDirection.UP)
+            return Gdk.EVENT_PROPAGATE;
+
+        let [hasDeltas, dx, dy] = event.get_scroll_deltas();
+        if (hasDeltas && dy >= 0)
+            return Gdk.EVENT_PROPAGATE;
 
         if (this._fetchingBacklog ||
             this.widget.vadjustment.value != 0 ||
-            dir != Gdk.ScrollDirection.UP ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
 
