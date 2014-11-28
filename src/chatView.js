@@ -366,10 +366,12 @@ const ChatView = new Lang.Class({
         if (hasDeltas && dy >= 0)
             return Gdk.EVENT_PROPAGATE;
 
-        if (this._fetchingBacklog ||
-            this.widget.vadjustment.value != 0 ||
+        if (this.widget.vadjustment.value != 0 ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
+
+        if (this._fetchingBacklog)
+            return Gdk.EVENT_STOP;
 
         this._fetchingBacklog = true;
         Mainloop.timeout_add(500, Lang.bind(this,
@@ -378,7 +380,7 @@ const ChatView = new Lang.Class({
                                                  Lang.bind(this, this._onLogEventsReady));
                 return GLib.SOURCE_REMOVE;
             }));
-        return Gdk.EVENT_PROPAGATE;
+        return Gdk.EVENT_STOP;
     },
 
     _onValueChanged: function() {
