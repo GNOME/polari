@@ -172,8 +172,9 @@ const ChatView = new Lang.Class({
           { name: 'action',
             left_margin: MARGIN },
           { name: 'url',
-            underline: Pango.Underline.SINGLE
-          }
+            underline: Pango.Underline.SINGLE },
+          { name: 'loading',
+            justification: Gtk.Justification.CENTER }
         ];
         tags.forEach(function(tagProps) {
             tagTable.add(new Gtk.TextTag(tagProps));
@@ -265,6 +266,8 @@ const ChatView = new Lang.Class({
     },
 
     _onLogEventsReady: function(lw, res) {
+        this._hideLoadingIndicator();
+
         let [, events] = lw.get_events_finish(res);
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs();
@@ -374,6 +377,7 @@ const ChatView = new Lang.Class({
             return Gdk.EVENT_STOP;
 
         this._fetchingBacklog = true;
+        this._showLoadingIndicator();
         Mainloop.timeout_add(500, Lang.bind(this,
             function() {
                 this._logWalker.get_events_async(NUM_LOG_EVENTS,
@@ -481,6 +485,32 @@ const ChatView = new Lang.Class({
             this._view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor);
         }
         return Gdk.EVENT_PROPAGATE;
+    },
+
+    _showLoadingIndicator: function() {
+        let indicator = new Gtk.Image({ icon_name: 'content-loading-symbolic',
+                                        visible: true });
+
+        let buffer = this._view.buffer;
+        let iter = buffer.get_start_iter();
+        let anchor = buffer.create_child_anchor(iter);
+        this._view.add_child_at_anchor(indicator, anchor);
+        buffer.insert(iter, '\n', -1);
+
+        let start = buffer.get_start_iter();
+        buffer.remove_all_tags(start, iter);
+        buffer.apply_tag(this._lookupTag('loading'), start, iter);
+    },
+
+    _hideLoadingIndicator: function() {
+        let buffer = this._view.buffer;
+        let iter = buffer.get_start_iter();
+
+        if (!iter.get_child_anchor())
+            return;
+
+        iter.forward_line();
+        buffer.delete(buffer.get_start_iter(), iter);
     },
 
     _checkMessages: function() {
