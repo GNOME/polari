@@ -5,7 +5,7 @@ AC_CONFIG_AUX_DIR([build-aux])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign])
+AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign subdir-objects])
 AM_MAINTAINER_MODE([enable])
 
 GETTEXT_PACKAGE=AC_PACKAGE_NAME
@@ -15,6 +15,7 @@ IT_PROG_INTLTOOL([0.50.0])
 GOBJECT_INTROSPECTION_REQUIRE([0.9.6])
 
 # Initialize libtool
+AM_PROG_AR
 LT_PREREQ([2.2])
 LT_INIT([disable-static])
 
