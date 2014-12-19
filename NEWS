@@ -1,3 +1,11 @@
+3.15.3 - "A desert holiday"
+===========================
+* Suppress overshoot indicator when loading backlog [Florian; #740132]
+* Fix some corner-cases in type-ahead [Florian; #741756]
+
+Contributors:
+  Florian Müllner
+
 3.15.2 - "Tack-a-rama"
 ======================
 * Limit height of userlist popover [Jonas; #738518]
