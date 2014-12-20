@@ -448,14 +448,8 @@ polari_room_set_account (PolariRoom *room,
 
   priv = room->priv;
 
-  if (priv->account == account)
-    return;
-
-  if (priv->account)
-    g_object_unref (priv->account);
-  priv->account = g_object_ref (account);
-
-  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ACCOUNT]);
+  if (g_set_object (&priv->account, account))
+    g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ACCOUNT]);
 }
 
 static void
