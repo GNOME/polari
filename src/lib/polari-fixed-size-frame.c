@@ -18,6 +18,14 @@
 
 #include "polari-fixed-size-frame.h"
 
+typedef struct _PolariFixedSizeFramePrivate PolariFixedSizeFramePrivate;
+
+struct _PolariFixedSizeFrame {
+  GtkFrame parent_instance;
+
+  PolariFixedSizeFramePrivate *priv;
+};
+
 struct _PolariFixedSizeFramePrivate {
   int width;
   int height;

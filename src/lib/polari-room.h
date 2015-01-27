@@ -25,28 +25,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PolariRoom        PolariRoom;
-typedef struct _PolariRoomClass   PolariRoomClass;
-typedef struct _PolariRoomPrivate PolariRoomPrivate;
-
 #define POLARI_TYPE_ROOM            (polari_room_get_type())
-#define POLARI_ROOM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), POLARI_TYPE_ROOM, PolariRoom))
-#define POLARI_ROOM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), POLARI_TYPE_ROOM, PolariRoomClass))
-#define POLARI_IS_ROOM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), POLARI_TYPE_ROOM))
-#define POLARI_IS_ROOM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), POLARI_TYPE_ROOM))
-#define POLARI_ROOM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), POLARI_TYPE_ROOM, PolariRoomClass))
-
-struct _PolariRoom {
-    GObject parent_instance;
-
-    PolariRoomPrivate *priv;
-};
-
-struct _PolariRoomClass {
-    GObjectClass parent_class;
-};
-
-GType polari_room_get_type (void) G_GNUC_CONST;
+G_DECLARE_FINAL_TYPE (PolariRoom, polari_room, POLARI, ROOM, GObject)
 
 gboolean polari_room_should_highlight_message (PolariRoom *room,
                                                TpMessage *message);

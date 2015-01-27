@@ -20,6 +20,14 @@
 
 #include "polari-room.h"
 
+typedef struct _PolariRoomPrivate PolariRoomPrivate;
+
+struct _PolariRoom {
+    GObject parent_instance;
+
+    PolariRoomPrivate *priv;
+};
+
 struct _PolariRoomPrivate {
   TpAccount *account;
   TpChannel *channel;
