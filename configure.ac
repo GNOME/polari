@@ -24,7 +24,7 @@ GLIB_GSETTINGS
 PKG_CHECK_MODULES(POLARI,
                   gio-2.0 >= 2.43.4
                   gobject-introspection-1.0
-                  gtk+-3.0 >= 3.13.4
+                  gtk+-3.0 >= 3.15.6
                   telepathy-glib);
 
 AC_PATH_PROG([GJS_CONSOLE],[gjs-console],[no])

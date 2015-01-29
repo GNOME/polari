@@ -3,7 +3,6 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
-const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
@@ -420,7 +419,7 @@ const ChatView = new Lang.Class({
         item = new Gtk.MenuItem({ label: _("Copy Link Address") });
         item.connect('activate',
             function() {
-                let clipboard = Polari.util_get_clipboard_for_widget(item);
+                let clipboard = Gtk.Clipboard.get_default(item.get_display());
                 clipboard.set_text(url, -1);
             });
         menu.append(item);
