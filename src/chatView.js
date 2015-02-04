@@ -192,11 +192,7 @@ const ChatView = new Lang.Class({
         let selectedColor = context.get_background_color(Gtk.StateFlags.SELECTED);
         context.restore();
 
-        let [found, linkColor] = context.lookup_color("link_color");
-        if (!found) {
-            linkColor = new Gdk.RGBA();
-            linkColor.parse('blue');
-        }
+        let linkColor = context.get_color(Gtk.StateFlags.LINK);
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
