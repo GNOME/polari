@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2015-02-16 11:38+0000\n"
-"PO-Revision-Date: 2015-02-16 21:08+0100\n"
+"PO-Revision-Date: 2015-02-16 21:48+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -39,6 +39,9 @@ msgid ""
 "miss an important message - for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
+"Polari je program za klepetanje in sporočanje z zasebnimi sporočili. "
+"Opomniki obveščajo o pomembnih dogodkih in omogočajo hitro odgovarjanje "
+"preko obvestilnega polja programa."
 
 #: ../data/org.gnome.Polari.desktop.in.h:1
 #: ../data/resources/main-window.ui.h:3
