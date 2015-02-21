@@ -301,6 +301,8 @@ const MainWindow = new Lang.Class({
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
             numMembers = this._room.channel.group_dup_members_contacts().length;
 
+        let accessibleName = _("%d users".format(numMembers));
+        this._showUserListButton.get_accessible().set_name(accessibleName);
         this._showUserListButton.label = '%d'.format(numMembers);
     },
 
