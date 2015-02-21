@@ -77,16 +77,11 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accels: ['<Primary>w'] },
-          { name: 'leave-selected-rooms' },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
-          { name: 'selection-mode',
-            activate: Lang.bind(this, this._onToggleAction),
-            create_hook: Lang.bind(this, this._selectionModeHook),
-            state: GLib.Variant.new('b', false) },
           { name: 'connections',
             activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
@@ -184,22 +179,6 @@ const Application = new Lang.Class({
                 action.change_state(GLib.Variant.new('b', false));
         });
         this._updateUserListAction(action);
-    },
-
-    _updateSelectionModeAction: function(action) {
-        action.enabled = this._chatroomManager.getActiveRoom() != null;
-    },
-
-    _selectionModeHook: function(action) {
-        this._chatroomManager.connect('active-changed', Lang.bind(this,
-            function() {
-                this._updateSelectionModeAction(action);
-            }));
-        action.connect('notify::enabled', function() {
-            if (!action.enabled)
-                action.change_state(GLib.Variant.new('b', false));
-        });
-        this._updateSelectionModeAction(action);
     },
 
     _onShowJoinDialog: function() {

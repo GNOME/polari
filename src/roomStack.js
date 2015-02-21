@@ -26,11 +26,6 @@ const RoomStack = new Lang.Class({
         this._roomManager.connect('active-state-changed',
                                   Lang.bind(this, this._updateSensitivity));
 
-        let app = Gio.Application.get_default();
-        this._selectionModeAction = app.lookup_action('selection-mode');
-        this._selectionModeAction.connect('notify::state',
-                                          Lang.bind(this, this._updateSensitivity));
-
         this._rooms = {};
 
         this._addView('placeholder', new RoomView(null));
@@ -79,8 +74,7 @@ const RoomStack = new Lang.Class({
     _updateSensitivity: function() {
         let room = this._roomManager.getActiveRoom();
         let id = room ? room.id : 'placeholder';
-        let sensitive = room && room.channel &&
-                        !this._selectionModeAction.state.get_boolean();
+        let sensitive = room && room.channel;
         this._rooms[id].inputSensitive = sensitive;
     }
 });

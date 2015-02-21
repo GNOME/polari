@@ -28,10 +28,6 @@ const RoomRow = new Lang.Class({
         this._eventBox.connect('button-release-event',
                             Lang.bind(this, this._onButtonRelease));
 
-        this._selectionModeAction = app.lookup_action('selection-mode');
-        this._selectionModeAction.connect('notify::state',
-                          Lang.bind(this, this._onSelectionModeChanged));
-
         room.connect('notify::channel', Lang.bind(this,
             function() {
                 if (!room.channel)
@@ -45,15 +41,6 @@ const RoomRow = new Lang.Class({
                            GObject.BindingFlags.SYNC_CREATE);
 
         this._updatePending();
-        this._updateMode();
-    },
-
-    _updateMode: function() {
-        let selectionMode = this._selectionModeAction.state.get_boolean();
-        this._stack.set_visible_child_name(selectionMode ? 'selection'
-                                                         : 'normal');
-        if (!selectionMode)
-            this.selection_button.active = false;
     },
 
     _updatePending: function() {
@@ -83,11 +70,6 @@ const RoomRow = new Lang.Class({
             context.add_class('inactive');
         else
             context.remove_class('inactive');
-    },
-
-    _onSelectionModeChanged: function() {
-        let selectionMode = this._selectionModeAction.state.get_boolean();
-        this._updateMode();
     },
 
     _onButtonRelease: function(w, event) {
@@ -124,19 +106,13 @@ const RoomRow = new Lang.Class({
                                           valign: Gtk.Align.BASELINE });
         box.add(this._roomLabel);
 
-        this._stack = new Gtk.Stack();
-        box.add(this._stack);
-
         let frame = new Gtk.AspectFrame({ obey_child: false,
                                           shadow_type: Gtk.ShadowType.NONE });
-        this._stack.add_named(frame, 'normal');
+        box.add(frame);
 
         this._counter = new Gtk.Label({ width_chars: 2 });
         this._counter.get_style_context().add_class('pending-messages-count');
         frame.add(this._counter);
-
-        this.selection_button = new Gtk.CheckButton();
-        this._stack.add_named(this.selection_button, 'selection');
 
         this.widget.show_all();
     }
@@ -158,8 +134,6 @@ const RoomList = new Lang.Class({
 
         this.widget.connect('row-selected',
                             Lang.bind(this, this._onRowSelected));
-        this.widget.connect('row-activated',
-                            Lang.bind(this, this._onRowActivated));
 
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -170,14 +144,6 @@ const RoomList = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
 
         let app = Gio.Application.get_default();
-        this._selectionModeAction = app.lookup_action('selection-mode');
-        this._selectionModeAction.connect('notify::state', Lang.bind(this,
-                                          this._onSelectionModeChanged));
-
-        this._leaveSelectedAction = app.lookup_action('leave-selected-rooms');
-        this._leaveSelectedAction.connect('activate',
-                                          Lang.bind(this, this._onLeaveSelectedActivated));
-
         this._leaveAction = app.lookup_action('leave-room');
         this._leaveAction.connect('activate',
                                   Lang.bind(this, this._onLeaveActivated));
@@ -216,27 +182,6 @@ const RoomList = new Lang.Class({
                     return;
                 this.widget.select_row(this.widget.get_row_at_index(n - 1));
             }));
-    },
-
-    _onSelectionModeChanged: function() {
-        this._selectionMode = this._selectionModeAction.state.get_boolean();
-        this._leaveSelectedAction.enabled = this._selectedRows > 0;
-
-        if (this._selectionMode)
-            this.widget.get_selected_row().grab_focus();
-        else
-            this._activeRoomChanged(this._roomManager,
-                                    this._roomManager.getActiveRoom());
-    },
-
-    _onLeaveSelectedActivated: function() {
-        for (let id in this._roomRows)
-            if (this._roomRows[id].selection_button.active) {
-                let room = this._roomRows[id].widget.room;
-                let param = GLib.Variant.new('(ss)', [room.id, '']);
-                this._leaveAction.activate(param);
-            }
-        this._selectionModeAction.change_state(GLib.Variant.new('b', false));
     },
 
     _onLeaveActivated: function(action, param) {
@@ -292,17 +237,6 @@ const RoomList = new Lang.Class({
             function(w) {
                 delete this._roomRows[w.room.id];
             }));
-        roomRow.selection_button.connect('toggled', Lang.bind(this,
-            function(button) {
-                if (button.active)
-                    this._selectedRows++;
-                else
-                    this._selectedRows--;
-                this._leaveSelectedAction.enabled = this._selectedRows > 0;
-
-                if (button.active)
-                    this._selectionModeAction.change_state(GLib.Variant.new('b', true));
-            }));
     },
 
     _roomRemoved: function(roomManager, room) {
@@ -329,16 +263,7 @@ const RoomList = new Lang.Class({
     },
 
     _onRowSelected: function(w, row) {
-        if (this._selectionMode)
-            return;
         this._roomManager.setActiveRoom(row ? row.room : null);
-    },
-
-    _onRowActivated: function(w, row) {
-        if (!this._selectionMode || !row)
-            return;
-        let toggle = this._roomRows[row.room.id].selection_button;
-        toggle.set_active(!toggle.active);
     },
 
     _updateHeader: function(row, before) {

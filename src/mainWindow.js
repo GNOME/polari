@@ -77,21 +77,10 @@ const MainWindow = new Lang.Class({
                     this._userListAction.change_state(GLib.Variant.new('b', false));
             }));
 
-        this._selectionModeAction = app.lookup_action('selection-mode');
-        this._selectionModeAction.connect('notify::state',
-                    Lang.bind(this, this._onSelectionModeChanged));
-
         this._gtkSettings.connect('notify::gtk-decoration-layout',
                                   Lang.bind(this, this._updateDecorations));
         this._updateDecorations();
 
-        this.window.connect_after('key-press-event', Lang.bind(this,
-            function(w, event) {
-                let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape)
-                    this._selectionModeAction.change_state(GLib.Variant.new('b', false));
-                return Gdk.EVENT_STOP;
-            }));
         this.window.connect('window-state-event',
                             Lang.bind(this, this._onWindowStateEvent));
         this.window.connect('configure-event',
@@ -172,22 +161,6 @@ const MainWindow = new Lang.Class({
         }
 
         this._saveGeometry();
-    },
-
-    _onSelectionModeChanged: function() {
-        let enabled = this._selectionModeAction.state.get_boolean();
-        this._selectionActionBar.visible = enabled;
-        this._joinMenuButton.visible = !enabled;
-        this._showUserListButton.visible = !enabled;
-        this._userListAction.enabled = !enabled;
-
-        if (enabled) {
-            this._titlebarLeft.get_style_context().add_class('selection-mode');
-            this._titlebarRight.get_style_context().add_class('selection-mode');
-        } else {
-            this._titlebarLeft.get_style_context().remove_class('selection-mode');
-            this._titlebarRight.get_style_context().remove_class('selection-mode');
-        }
     },
 
     _onAccountChanged: function(am, account) {
@@ -286,12 +259,6 @@ const MainWindow = new Lang.Class({
 
         this._titleLabel = builder.get_object('title_label');
         this._subtitleLabel = builder.get_object('subtitle_label');
-
-        this._selectionActionBar = builder.get_object('selection_action_bar');
-
-        // slightly hackish:
-        // add the content of the internal revealer to size group
-        sizeGroup.add_widget(this._selectionActionBar.get_child().get_child());
 
         this._joinMenuButton = builder.get_object('join_menu_button');
         this._showUserListButton = builder.get_object('show_user_list_button');
