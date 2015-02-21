@@ -18,6 +18,13 @@ const RoomRow = new Lang.Class({
         let app = Gio.Application.get_default();
         this.widget.room = room;
 
+        let menu = new Gio.Menu();
+        menu.append(room.type == Tp.HandleType.ROOM ? _("Leave chatroom")
+                                                    : _("End conversation"),
+                    'app.leave-room(("%s", ""))'.format(this.widget.room.id));
+
+        this._popover = Gtk.Popover.new_from_model(this.widget, menu);
+        this._popover.position = Gtk.PositionType.BOTTOM;
         this._eventBox.connect('button-release-event',
                             Lang.bind(this, this._onButtonRelease));
 
@@ -88,7 +95,7 @@ const RoomRow = new Lang.Class({
         if (button != Gdk.BUTTON_SECONDARY)
             return Gdk.EVENT_PROPAGATE;
 
-        this.selection_button.active = !this.selection_button.active;
+        this._popover.show();
 
         return Gdk.EVENT_STOP;
     },
