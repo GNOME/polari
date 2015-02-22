@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export GJS_PATH="@pkgdatadir@/js${GJS_PATH:+:$GJS_PATH}"
+export GJS_PATH="@pkgdatadir@${GJS_PATH:+:$GJS_PATH}"
 export GI_TYPELIB_PATH="@pkglibdir@/girepository-1.0${GI_TYPELIB_PATH:+:$GI_TYPELIB_PATH}"
 export LD_LIBRARY_PATH="@pkglibdir@${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
@@ -17,4 +17,4 @@ if test x"$POLARI_RUN_DEBUG" != x; then
     DEBUG_COMMAND="gdb --args"
 fi
 
-exec $DEBUG_COMMAND @GJS_CONSOLE@ -I @pkgdatadir@/js -c "const Main = imports.main; Main.start();" "$@"
+exec $DEBUG_COMMAND @GJS_CONSOLE@ -I @pkgdatadir@ -c "const Main = imports.main; Main.start();" "$@"

@@ -25,7 +25,7 @@ bin_SCRIPTS = polari
 polari: polari.in
 	$(AM_V_GEN) $(do_subst) $< > $@
 
-jsdir = $(pkgdatadir)/js/
+jsdir = $(pkgdatadir)/
 dist_js_DATA = \
 	accountsMonitor.js \
 	application.js \
