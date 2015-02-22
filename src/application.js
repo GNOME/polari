@@ -12,7 +12,6 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
-const Config = imports.config;
 const Connections = imports.connections;
 const Format = imports.format;
 const Gettext = imports.gettext;
@@ -36,7 +35,7 @@ const Application = new Lang.Class({
     _init: function() {
         this.parent({ application_id: 'org.gnome.Polari' });
 
-        Gettext.bindtextdomain('polari', Config.LOCALE_DIR);
+        Gettext.bindtextdomain('polari', pkg.localedir);
         Gettext.textdomain('polari');
         GLib.set_prgname('org.gnome.Polari');
         GLib.set_application_name('Polari');
@@ -45,7 +44,7 @@ const Application = new Lang.Class({
     },
 
     vfunc_startup: function() {
-        let resource = Gio.Resource.load(Config.RESOURCE_DIR + '/polari.gresource');
+        let resource = Gio.Resource.load(pkg.pkgdatadir + '/polari.gresource');
         resource._register();
 
         this.parent();
@@ -455,7 +454,7 @@ const Application = new Lang.Class({
             license_type: Gtk.License.GPL_2_0,
             logo_icon_name: 'polari',
             wrap_license: true,
-            version: Config.PACKAGE_VERSION,
+            version: pkg.version,
 
             transient_for: this._window.window,
             modal: true
