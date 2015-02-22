@@ -16,12 +16,12 @@ $(APP_ID).service: $(APP_ID).service.in Makefile
 check-local:
 	$(DESKTOP_FILE_VALIDATE) $(desktop_DATA)
 
-resource_files=$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/polari.gresource.xml)
-polari.gresource: polari.gresource.xml $(resource_files)
+resource_files=$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$(APP_ID).data.gresource.xml)
+$(APP_ID).data.gresource: $(APP_ID).data.gresource.xml $(resource_files)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) $<
 
 resourcedir=$(pkgdatadir)
-resource_DATA=polari.gresource
+resource_DATA=$(APP_ID).data.gresource
 
 gsettings_SCHEMAS = $(APP_ID).gschema.xml
 @GSETTINGS_RULES@
@@ -29,7 +29,7 @@ gsettings_SCHEMAS = $(APP_ID).gschema.xml
 EXTRA_DIST = \
 	$(desktop_in_files) \
 	$(service_in_files) \
-	polari.gresource.xml \
+	$(APP_ID).data.gresource.xml \
 	$(resource_files) \
 	$(gsettings_SCHEMAS) \
 	$(NULL)

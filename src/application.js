@@ -34,9 +34,6 @@ const Application = new Lang.Class({
     },
 
     vfunc_startup: function() {
-        let resource = Gio.Resource.load(pkg.pkgdatadir + '/polari.gresource');
-        resource._register();
-
         this.parent();
 
         let w = new Polari.FixedSizeFrame(); // register gtype
