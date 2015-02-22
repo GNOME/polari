@@ -53,6 +53,12 @@
                     <property name="icon_size">1</property>
                   </object>
                 </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject" id="menubutton1-atkobject">
+                    <property name="AtkObject::accessible-name"
+                              translatable="yes">Join room</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="pack_type">start</property>
