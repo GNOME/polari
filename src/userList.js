@@ -1,6 +1,7 @@
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
@@ -8,6 +9,8 @@ const Tp = imports.gi.TelepathyGLib;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+
+const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 
 const MAX_USERS_SHOWN = 8;
 
@@ -106,94 +109,74 @@ const UserListPopover = new Lang.Class({
     }
 });
 
-const UserListRow = new Lang.Class({
-    Name: 'UserListRow',
+const UserListDetails = new Lang.Class({
+    Name: 'UserListDetails',
+    Extends: Gtk.Frame,
+    Template: 'resource:///org/gnome/Polari/user-list-details.ui',
+    InternalChildren: ['spinnerBox',
+                       'spinner',
+                       'detailsGrid',
+                       'fullnameLabel',
+                       'lastHeader',
+                       'lastLabel',
+                       'messageButton'],
+    Properties: { 'expanded': GObject.ParamSpec.boolean('expanded',
+                                                        'expanded',
+                                                        'expanded',
+                                                        READWRITE,
+                                                        false)},
 
-    _init: function(user) {
-        this._createWidget(user);
+    _init: function(params) {
+        this._user = params.user;
+        delete params.user;
 
-        this.widget.user = user;
+        this._expanded = false;
 
-        this.widget.connect('unmap', Lang.bind(this, function() {
-            this._revealer.reveal_child = false;
-        }));
-        this.widget.connect('state-flags-changed',
-                            Lang.bind(this, this._updateArrowVisibility));
+        this.parent(params);
 
-        this._revealer.connect('notify::reveal-child',
-                               Lang.bind(this, this._onExpandedChanged));
+        this._messageButton.connect('clicked',
+                                    Lang.bind(this, this._onButtonClicked));
+        this._user.connection.connect('notify::self-contact',
+                                      Lang.bind(this, this._updateButtonVisibility));
+        this._updateButtonVisibility();
+        this._detailsGrid.hide();
     },
 
-    get expand() {
-        return this._revealer.reveal_child;
+    get expanded() {
+        return this._expanded;
     },
 
-    set expand(expand) {
-        this._ensureDetails();
-        this._revealer.reveal_child = expand;
-    },
-
-    _createWidget: function(user) {
-        this.widget = new Gtk.ListBoxRow();
-
-        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.widget.add(vbox);
-
-        let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
-        this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
-                                      no_show_all: true });
-        hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
-        hbox.add(new Gtk.Label({ label: user.alias,
-                                 halign: Gtk.Align.START,
-                                 hexpand: true,
-                                 ellipsize: Pango.EllipsizeMode.END }));
-        hbox.add(this._arrow);
-        vbox.add(hbox);
-
-        this._revealer = new Gtk.Revealer({ reveal_child: false });
-        vbox.add(this._revealer);
-
-        this.widget.show_all();
-    },
-
-    _ensureDetails: function() {
-        if (this._revealer.get_child())
+    set expanded(v) {
+        if (v == this._expanded)
             return;
 
-        let frame = new Gtk.Frame({ hexpand: true });
+        this._expanded = v;
 
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
-                                spacing: 6, margin: 6 });
-        frame.add(box);
+        if (this._expanded)
+            this._expand();
+        else
+            this._unexpand();
 
-        this._spinnerBox = new Gtk.Box({ spacing: 6, margin: 12,
-                                         hexpand: true,
-                                         halign: Gtk.Align.CENTER });
-        this._spinner = new Gtk.Spinner();
-        this._spinnerBox.add(this._spinner);
-        this._spinnerBox.add(new Gtk.Label({ label: _("Loading details") }));
-        box.add(this._spinnerBox);
+        this.notify('expanded');
+    },
 
-        this._detailsGrid = new Gtk.Grid({ row_spacing: 6, column_spacing: 6,
-                                           hexpand: true });
-        box.add(this._detailsGrid);
+    _expand: function() {
+        let prevDetails = this._fullnameLabel.label != '';
+        this._detailsGrid.visible = prevDetails;
+        this._spinnerBox.visible = !prevDetails;
+        this._spinner.start();
 
-        let user = this.widget.user;
-        if (user != user.connection.self_contact) {
-            let button = new Gtk.Button({ label: _("Message"),
-                                          margin_top: 12,
-                                          hexpand: true,
-                                          halign: Gtk.Align.END });
-            button.connect('clicked', Lang.bind(this, this._onButtonClicked));
-            user.connection.connect('notify::self-contact', function() {
-                if (user == user.connection.self_contact)
-                    button.destroy();
-            });
-            box.add(button);
-        }
+        this._cancellable = new Gio.Cancellable();
+        this._user.request_contact_info_async(this._cancellable,
+                                              Lang.bind(this, this._onContactInfoReady));
+    },
 
-        this._revealer.add(frame);
-        frame.show_all();
+    _unexpand: function() {
+        this._spinner.stop();
+
+        if (this._cancellable)
+            this._cancellable.cancel();
+        this._cancellable = null;
     },
 
     _formatLast: function(seconds) {
@@ -228,7 +211,7 @@ const UserListRow = new Lang.Class({
 
     _onContactInfoReady: function(c, res) {
         let fn, last;
-        let info = this.widget.user.get_contact_info();
+        let info = this._user.get_contact_info();
         for (let i = 0; i < info.length; i++) {
             if (info[i].field_name == 'fn')
                 fn = info[i].field_value[0];
@@ -237,45 +220,103 @@ const UserListRow = new Lang.Class({
         }
 
         if (!fn)
-            fn = this.widget.user.alias;
+            fn = this._user.alias;
 
-        this._detailsGrid.foreach(function(w) { w.destroy(); });
-
-        let row = 0;
-        let w = new Gtk.Label({ label: fn, ellipsize: Pango.EllipsizeMode.END,
-                                halign: Gtk.Align.START });
-        this._detailsGrid.attach(w, 0, row++, 2, 1);
+        this._fullnameLabel.label = fn;
 
         if (last) {
+            this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+            this._lastHeader.show();
 
-            w = new Gtk.Label({ label: '<small>' + _("Last Activity:") + '</small>',
-                                use_markup: true,
-                                valign: Gtk.Align.START });
-            this._detailsGrid.attach(w, 0, row, 1, 1);
-
-            w = new Gtk.Label({ label: '<small>' + this._formatLast(last) + '</small>',
-                                use_markup: true,
-                                wrap: true,
-                                hexpand: true });
-            this._detailsGrid.attach(w, 1, row++, 1, 1);
+            this._lastLabel.label = '<small>' + this._formatLast(last) + '</small>';
+            this._lastLabel.show();
+        } else {
+            this._lastHeader.hide();
+            this._lastLabel.hide();
         }
-
-        this._detailsGrid.show_all();
 
         this._spinner.stop();
         this._spinnerBox.hide();
+        this._detailsGrid.show();
     },
 
     _onButtonClicked: function() {
-        let account = this.widget.user.connection.get_account();
+        let account = this._user.connection.get_account();
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('message-user');
         let time = Gtk.get_current_event().get_time();
         action.activate(GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
-                                           this.widget.user.alias,
+                                           this._user.alias,
                                            time ]));
+    },
+
+    _updateButtonVisibility: function() {
+        let visible = this._user != this._user.connection.self_contact;
+        this._messageButton.visible = visible;
+    }
+});
+
+const UserListRow = new Lang.Class({
+    Name: 'UserListRow',
+
+    _init: function(user) {
+        this._createWidget(user);
+
+        this.widget.user = user;
+
+        this.widget.connect('unmap', Lang.bind(this, function() {
+            this._revealer.reveal_child = false;
+        }));
+        this.widget.connect('state-flags-changed',
+                            Lang.bind(this, this._updateArrowVisibility));
+
+        this._revealer.connect('notify::reveal-child',
+                               Lang.bind(this, this._onExpandedChanged));
+    },
+
+    get expand() {
+        return this._revealer.reveal_child;
+    },
+
+    set expand(expand) {
+        if (expand)
+            this._ensureDetails();
+        this._revealer.reveal_child = expand;
+    },
+
+    _createWidget: function(user) {
+        this.widget = new Gtk.ListBoxRow();
+
+        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this.widget.add(vbox);
+
+        let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
+        this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
+                                      no_show_all: true });
+        hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
+        hbox.add(new Gtk.Label({ label: user.alias,
+                                 halign: Gtk.Align.START,
+                                 hexpand: true,
+                                 ellipsize: Pango.EllipsizeMode.END }));
+        hbox.add(this._arrow);
+        vbox.add(hbox);
+
+        this._revealer = new Gtk.Revealer({ reveal_child: false });
+        vbox.add(this._revealer);
+
+        this.widget.show_all();
+    },
+
+    _ensureDetails: function() {
+        if (this._revealer.get_child())
+            return;
+
+        let details = new UserListDetails({ user: this.widget.user })
+        this._revealer.bind_property('reveal-child', details, 'expanded', 0);
+
+        this._revealer.add(details);
     },
 
     _updateArrowVisibility: function() {
@@ -289,24 +330,10 @@ const UserListRow = new Lang.Class({
         if (this._revealer.reveal_child) {
             this.widget.get_style_context().add_class('expanded');
             this._arrow.arrow_type = Gtk.ArrowType.DOWN;
-
-            let prevDetails = this._detailsGrid.get_children().length > 0;
-            this._spinnerBox.visible = !prevDetails;
-            this._spinner.start();
-
-            this._cancellable = new Gio.Cancellable();
-            this.widget.user.request_contact_info_async(this._cancellable,
-                                                        Lang.bind(this, this._onContactInfoReady));
         } else {
             this.widget.get_style_context().remove_class('expanded');
             this._arrow.arrow_type = Gtk.ArrowType.RIGHT;
             this._updateArrowVisibility();
-
-            this._spinner.stop();
-
-            if (this._cancellable)
-                this._cancellable.cancel();
-            this._cancellable = null;
         }
     }
 });
