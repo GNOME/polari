@@ -437,11 +437,16 @@ const Application = new Lang.Class({
         }
         let aboutParams = {
             authors: [
-                'Florian M' + String.fromCharCode(0x00FC) // ü
-                            + 'llner <fmuellner@gnome.org>',
+                'Florian Müllner <fmuellner@gnome.org>',
+                'William Jon McCann <william.jon.mccann@gmail.com>',
+                'Carlos Soriano <carlos.soriano89@gmail.com>',
+                'Giovanni Campagna <gcampagna@src.gnome.org>',
+                'Carlos Garnacho <carlosg@gnome.org>',
+                'Jonas Danielsson <jonas.danielsson@threetimestwo.org>'
             ],
             artists: [
                 'Sam Hewitt',
+                'Jakub Steiner <jimmac@gmail.com>'
             ],
             translator_credits: _("translator-credits"),
             comments: _("An Internet Relay Chat Client for GNOME"),
