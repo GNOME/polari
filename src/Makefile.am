@@ -15,8 +15,10 @@ CLEANFILES += $(gir_DATA) $(typelib_DATA)
 
 do_subst = sed -e 's|@localedir[@]|$(localedir)|g' \
                -e 's|@pkgdatadir[@]|$(pkgdatadir)|g' \
-               -e 's|@pkglibdir[@]|$(pkglibdir)|g' \
+               -e 's|@prefix[@]|$(prefix)|g' \
+               -e 's|@libdir[@]|$(libdir)|g' \
                -e 's|@GJS_CONSOLE[@]|$(GJS_CONSOLE)|g' \
+               -e 's|@PACKAGE_NAME[@]|$(PACKAGE_NAME)|g' \
                -e 's|@PACKAGE_VERSION[@]|$(PACKAGE_VERSION)|g' \
                $(NULL)
 

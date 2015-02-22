@@ -1,10 +1,6 @@
 const Application = imports.application;
 const GLib = imports.gi.GLib;
 
-function start() {
-    main(ARGV);
-}
-
 function main(args) {
     let application = new Application.Application();
     if (GLib.getenv('POLARI_PERSIST'))
