@@ -1,4 +1,6 @@
 pkg.initFormat();
+pkg.initGettext();
+window.ngettext = imports.gettext.ngettext;
 
 const Application = imports.application;
 const GLib = imports.gi.GLib;

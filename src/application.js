@@ -13,7 +13,6 @@ const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Connections = imports.connections;
-const Gettext = imports.gettext;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
@@ -34,8 +33,6 @@ const Application = new Lang.Class({
     _init: function() {
         this.parent({ application_id: 'org.gnome.Polari' });
 
-        Gettext.bindtextdomain('polari', pkg.localedir);
-        Gettext.textdomain('polari');
         GLib.set_prgname('org.gnome.Polari');
         GLib.set_application_name('Polari');
         this._window = null;
@@ -47,9 +44,6 @@ const Application = new Lang.Class({
         resource._register();
 
         this.parent();
-        window._ = Gettext.gettext;
-        window.C_ = Gettext.pgettext;
-        window.ngettext = Gettext.ngettext;
 
         let w = new Polari.FixedSizeFrame(); // register gtype
         w.destroy();
