@@ -2,15 +2,15 @@ SUBDIRS = appdata icons
 
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-desktop_in_files = org.gnome.Polari.desktop.in
+desktop_in_files = $(APP_ID).desktop.in
 
 @INTLTOOL_DESKTOP_RULE@
 
 servicedir = $(datadir)/dbus-1/services
 service_DATA = $(service_in_files:.service.in=.service)
-service_in_files = org.gnome.Polari.service.in
+service_in_files = $(APP_ID).service.in
 
-org.gnome.Polari.service: org.gnome.Polari.service.in Makefile
+$(APP_ID).service: $(APP_ID).service.in Makefile
 	$(AM_V_GEN) sed -e "s|\@bindir\@|$(bindir)|" $< > $@
 
 check-local:

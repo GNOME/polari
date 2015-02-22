@@ -1,5 +1,7 @@
 AC_INIT([polari],[3.15.3],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
 
+AC_SUBST([APP_ID],[org.gnome.Polari])
+
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
