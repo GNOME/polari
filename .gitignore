@@ -40,4 +40,4 @@ po/Rules-quot
 po/polari.pot
 po/stamp-it
 src/config.js
-src/polari
+src/org.gnome.Polari

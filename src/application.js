@@ -28,7 +28,6 @@ const Application = new Lang.Class({
     _init: function() {
         this.parent({ application_id: 'org.gnome.Polari' });
 
-        GLib.set_prgname('org.gnome.Polari');
         GLib.set_application_name('Polari');
         this._window = null;
         this._pendingRequests = {};

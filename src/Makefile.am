@@ -1,3 +1,4 @@
+EXTRA_SCRIPTS =
 EXTRA_DIST =
 CLEANFILES =
 INTROSPECTION_GIRS =
@@ -20,9 +21,10 @@ do_subst = sed -e 's|@prefix[@]|$(prefix)|g' \
                -e 's|@PACKAGE_VERSION[@]|$(PACKAGE_VERSION)|g' \
                $(NULL)
 
-bin_SCRIPTS = polari
+appdir = $(pkgdatadir)
+nodist_app_SCRIPTS = $(APP_ID)
 
-polari: polari.in
+$(APP_ID): $(APP_ID).in
 	$(AM_V_GEN) $(do_subst) $< > $@
 
 jsdir = $(pkgdatadir)/
@@ -48,9 +50,16 @@ dist_js_DATA = \
 	$(NULL)
 
 EXTRA_DIST += \
-	polari.in \
+	$(APP_ID).in \
 	$(NULL)
 
 CLEANFILES += \
-	polari \
+	$(APP_ID) \
 	$(NULL)
+
+install-exec-hook:
+	$(MKDIR_P) $(DESTDIR)$(bindir)
+	-rm -f $(DESTDIR)$(bindir)/$(PACKAGE_NAME)
+	$(LN_S) $(appdir)/$(APP_ID) $(DESTDIR)$(bindir)/$(PACKAGE_NAME)
+uninstall-hook:
+	-rm -f $(DESTDIR)$(bindir)/$(PACKAGE_NAME)
