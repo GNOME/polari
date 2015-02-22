@@ -1,3 +1,5 @@
+pkg.initFormat();
+
 const Application = imports.application;
 const GLib = imports.gi.GLib;
 

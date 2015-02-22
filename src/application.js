@@ -13,7 +13,6 @@ const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Connections = imports.connections;
-const Format = imports.format;
 const Gettext = imports.gettext;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
@@ -48,8 +47,6 @@ const Application = new Lang.Class({
         resource._register();
 
         this.parent();
-        String.prototype.format = Format.format;
-
         window._ = Gettext.gettext;
         window.C_ = Gettext.pgettext;
         window.ngettext = Gettext.ngettext;
