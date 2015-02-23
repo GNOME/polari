@@ -23,7 +23,7 @@ polari.gresource: polari.gresource.xml $(resource_files)
 resourcedir=$(pkgdatadir)
 resource_DATA=polari.gresource
 
-gsettings_SCHEMAS = org.gnome.polari.gschema.xml
+gsettings_SCHEMAS = $(APP_ID).gschema.xml
 @GSETTINGS_RULES@
 
 EXTRA_DIST = \
