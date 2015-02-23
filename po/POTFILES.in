@@ -16,4 +16,6 @@ src/ircParser.js
 src/joinDialog.js
 src/mainWindow.js
 src/messageDialog.js
+src/pasteManager.js
+src/roomList.js
 src/userList.js
