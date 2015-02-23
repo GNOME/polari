@@ -39,5 +39,6 @@ po/POTFILES
 po/Rules-quot
 po/polari.pot
 po/stamp-it
+src/*.gresource
 src/config.js
 src/org.gnome.Polari

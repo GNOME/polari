@@ -27,34 +27,22 @@ nodist_app_SCRIPTS = $(APP_ID)
 $(APP_ID): $(APP_ID).in
 	$(AM_V_GEN) $(do_subst) $< > $@
 
-jsdir = $(pkgdatadir)/
-dist_js_DATA = \
-	accountsMonitor.js \
-	application.js \
-	appNotifications.js \
-	chatroomManager.js \
-	chatView.js \
-	connections.js \
-	entryArea.js \
-	ircParser.js \
-	joinDialog.js \
-	main.js \
-	mainWindow.js \
-	messageDialog.js \
-	pasteManager.js \
-	roomList.js \
-	roomStack.js \
-	tabCompletion.js \
-	userList.js \
-	utils.js \
-	$(NULL)
+resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$(APP_ID).src.gresource.xml)
+$(APP_ID).src.gresource: $(APP_ID).src.gresource.xml $(resource_files)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) $<
+
+resourcedir = $(pkgdatadir)
+resource_DATA = $(APP_ID).src.gresource
 
 EXTRA_DIST += \
 	$(APP_ID).in \
+	$(APP_ID).src.gresource.xml \
+	$(resource_files) \
 	$(NULL)
 
 CLEANFILES += \
 	$(APP_ID) \
+	$(APP_ID).src.gresource \
 	$(NULL)
 
 install-exec-hook:
