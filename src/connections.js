@@ -167,14 +167,33 @@ const ConnectionsDialog = new Lang.Class({
 
 const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
+    Extends: Gtk.Grid,
+    Template: 'resource:///org/gnome/Polari/connection-details.ui',
+    InternalChildren: ['serverEntry',
+                       'descEntry',
+                       'nickEntry',
+                       'realnameEntry'],
+    Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
+                                                           'can-confirm',
+                                                           'can-confirm',
+                                                           GObject.ParamFlags.READABLE,
+                                                           false)},
 
-    _init: function(account) {
-        this._createWidget();
+    _init: function(params) {
+        if (params) {
+            this._account = params.account;
+            delete params.account;
+        }
 
-        this._account = account;
+        this.parent(params);
 
-        if (account)
-            this._populateFromAccount(account);
+        this._serverEntry.connect('changed',
+                                  Lang.bind(this, this._onCanConfirmChanged));
+        this._nickEntry.connect('changed',
+                                Lang.bind(this, this._onCanConfirmChanged));
+
+        if (this._account)
+            this._populateFromAccount(this._account);
     },
 
     _getParams: function() {
@@ -202,26 +221,8 @@ const ConnectionDetails = new Lang.Class({
         this._realnameEntry.text = '';
     },
 
-    _createWidget: function() {
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/connection-details-dialog.ui');
-
-        this.widget = builder.get_object('connection_details_content');
-        this.widget.unparent();
-
-        this._serverEntry = builder.get_object('server_entry');
-        this._descEntry = builder.get_object('description_entry');
-        this._nickEntry = builder.get_object('nickname_entry');
-        this._realnameEntry = builder.get_object('realname_entry');
-
-        this._serverEntry.connect('changed',
-                                  Lang.bind(this, this._onCanConfirmChanged));
-        this._nickEntry.connect('changed',
-                                Lang.bind(this, this._onCanConfirmChanged));
-    },
-
     _onCanConfirmChanged: function() {
-        this.emit('can-confirm-changed');
+        this.notify('can-confirm');
     },
 
     _populateFromAccount: function(account) {
@@ -315,7 +316,6 @@ const ConnectionDetails = new Lang.Class({
         return [details, removed];
     }
 });
-Signals.addSignalMethods(ConnectionDetails.prototype);
 
 
 const ConnectionDetailsDialog = new Lang.Class({
@@ -341,14 +341,10 @@ const ConnectionDetailsDialog = new Lang.Class({
                                                      Gtk.ResponseType.OK);
         this._confirmButton.get_style_context().add_class('suggested-action');
 
-        this._details = new ConnectionDetails(account);
-        this._details.connect('can-confirm-changed',
-                              Lang.bind(this, this._updateCanConfirm));
-        this.widget.get_content_area().add(this._details.widget);
-        this._updateCanConfirm();
-    },
-
-    _updateCanConfirm: function() {
-        this._confirmButton.sensitive = this._details.canConfirm;
+        this._details = new ConnectionDetails({ account: account });
+        this._details.bind_property('can-confirm',
+                                    this._confirmButton, 'sensitive',
+                                    GObject.BindingFlags.SYNC_CREATE);
+        this.widget.get_content_area().add(this._details);
     }
 });

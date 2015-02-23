@@ -70,9 +70,9 @@ const JoinDialog = new Lang.Class({
 
         this._stack = builder.get_object('stack');
 
-        this._details = new Connections.ConnectionDetails(null);
-        this._stack.add_named(this._details.widget, 'connection');
-        this._details.connect('can-confirm-changed',
+        this._details = new Connections.ConnectionDetails();
+        this._stack.add_named(this._details, 'connection');
+        this._details.connect('notify::can-confirm',
                               Lang.bind(this, this._updateCanConfirm));
 
         this._connectionButton = builder.get_object('add_connection_button');
