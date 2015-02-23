@@ -1,4 +1,4 @@
-AC_INIT([polari],[3.15.3],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
+AC_INIT([polari],[3.15.90],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
 
 AC_SUBST([APP_ID],[org.gnome.Polari])
 

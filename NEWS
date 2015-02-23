@@ -1,3 +1,17 @@
+3.15.90 - "Plenty of meat, only one potato"
+===========================================
+* Add high-contrast application icon [Jakub; #735670]
+* Fix picking up hyperlink color from theme [Florian; #743944]
+* Drop selection mode [Florian; #736481]
+* Improve a11y support [Florian; #743384]
+
+Contributors:
+  Matthias Clasen, Florian Müllner, Jakub Steiner
+
+Translations:
+  Inaki Larranaga Murgoitio [eu], Kjartan Maraas [nb], Kristjan SCHMIDT [eo],
+  Matej Urbančič [sl], Milo Casagrande [it]
+
 3.15.3 - "A desert holiday"
 ===========================
 * Suppress overshoot indicator when loading backlog [Florian; #740132]
