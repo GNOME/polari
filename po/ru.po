@@ -2,25 +2,37 @@
 # Copyright (C) 2014 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Yuri Myasoedov <ymyasoedov@yandex.ru>, 2014.
+# Stas Solovey <whats_up@tut.by>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-06 22:25+0000\n"
-"PO-Revision-Date: 2014-09-07 10:24+0300\n"
-"Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
-"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"POT-Creation-Date: 2015-02-23 23:40+0000\n"
+"PO-Revision-Date: 2015-02-24 14:48+0300\n"
+"Last-Translator: Stas Solovey <whats_up@tut.by>\n"
+"Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.4\n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:412
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "IRC-клиент для GNOME"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -29,7 +41,7 @@ msgstr ""
 "Простой IRC-клиент для GNOME; имеет простой и лаконичный интерфейс, который "
 "не отвлекает от бесед."
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -40,15 +52,6 @@ msgstr ""
 "чат-каналах. Благодаря уведомлениям вы никогда не пропустите важного "
 "сообщения, а для личных бесед можно ответить собеседнику прямо в уведомлении!"
 
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:456
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "IRC-клиент для GNOME"
-
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Интернет;Чат;"
@@ -57,60 +60,55 @@ msgstr "IRC;Интернет;Чат;"
 msgid "Show connections"
 msgstr "Показать подключения"
 
-#: ../data/org.gnome.polari.gschema.xml.h:1
+#: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
 msgstr "Сохранённый список каналов"
 
-#: ../data/org.gnome.polari.gschema.xml.h:2
+#: ../data/org.gnome.Polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
 msgstr "Список каналов, восстанавливаемых при запуске"
 
-#: ../data/org.gnome.polari.gschema.xml.h:3
+#: ../data/org.gnome.Polari.gschema.xml.h:3
 msgid "Window size"
 msgstr "Размеры окна"
 
-#: ../data/org.gnome.polari.gschema.xml.h:4
+#: ../data/org.gnome.Polari.gschema.xml.h:4
 msgid "Window size (width and height)."
 msgstr "Размеры окна (ширина и высота)."
 
-#: ../data/org.gnome.polari.gschema.xml.h:5
+#: ../data/org.gnome.Polari.gschema.xml.h:5
 msgid "Window position"
 msgstr "Положение окна"
 
-#: ../data/org.gnome.polari.gschema.xml.h:6
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window position (x and y)."
 msgstr "Положение окна (x, y)."
 
-#: ../data/org.gnome.polari.gschema.xml.h:7
+#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "Окно максимального размера"
 
-#: ../data/org.gnome.polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:8
 msgid "Window maximized state"
 msgstr "Окно максимального размера"
 
-#: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:321
-msgid "New Connection"
-msgstr "Создать подключение"
-
-#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/connection-details.ui.h:1
 msgid "_Address"
 msgstr "_Адрес"
 
-#: ../data/resources/connection-details-dialog.ui.h:3
+#: ../data/resources/connection-details.ui.h:2
 msgid "_Description"
 msgstr "_Описание"
 
-#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/connection-details.ui.h:3
 msgid "_Nickname"
 msgstr "_Псевдоним"
 
-#: ../data/resources/connection-details-dialog.ui.h:5
+#: ../data/resources/connection-details.ui.h:4
 msgid "_Real Name"
 msgstr "_Настоящее имя"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details.ui.h:5
 #: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "если есть"
@@ -128,16 +126,16 @@ msgstr "Добавить"
 msgid "Remove"
 msgstr "Удалить"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:220
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
 msgid "Join Chat Room"
 msgstr "Войти в комнату"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:2 ../src/connections.js:332
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:337
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:222
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
 msgid "_Join"
 msgstr "_Войти"
 
@@ -146,7 +144,7 @@ msgid "_Add Connection"
 msgstr "_Добавить подключение"
 
 #: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "_Подключение"
 
@@ -167,8 +165,9 @@ msgid "Message a User"
 msgstr "Отправить сообщение"
 
 #: ../data/resources/main-window.ui.h:4
-msgid "_Leave"
-msgstr "_Выйти"
+#| msgid "Join a Room"
+msgid "Join room"
+msgstr "Присоединиться к комнате"
 
 #: ../data/resources/menus.ui.h:2
 msgid "Preferences"
@@ -182,154 +181,172 @@ msgstr "О приложении"
 msgid "Quit"
 msgstr "Закончить"
 
-#: ../data/resources/message-user-dialog.ui.h:1
-msgid "Message User"
-msgstr "Отправить сообщение"
-
-#: ../data/resources/message-user-dialog.ui.h:3
+#: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
 msgstr "_Сообщение"
 
-#: ../data/resources/message-user-dialog.ui.h:5
+#: ../data/resources/message-user-dialog.ui.h:4
 msgid "_Recent"
 msgstr "_Последние"
 
-#: ../data/resources/message-user-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:5
 msgid "_Name"
 msgstr "_Имя"
 
-#: ../src/application.js:398
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "Загрузка информации"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+msgid "Last Activity:"
+msgstr "Последняя активность:"
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "Сообщение"
+
+#: ../src/application.js:349
 msgid "Good Bye"
 msgstr "Пока"
 
-#: ../src/application.js:455
+#: ../src/application.js:411
 msgid "translator-credits"
-msgstr "Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014"
+msgstr ""
+"Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014.\n"
+"Станислав Соловей <whats_up@tut.by>, 2015."
 
 #: ../src/appNotifications.js:104
 #, javascript-format
 msgid "Connecting to %s"
 msgstr "Подключение к %s"
 
-#: ../src/chatView.js:399
+#: ../src/chatView.js:408
 msgid "Open Link"
 msgstr "Открыть ссылку"
 
-#: ../src/chatView.js:406
+#: ../src/chatView.js:415
 msgid "Copy Link Address"
 msgstr "Копировать адрес ссылки"
 
-#: ../src/chatView.js:538
+#: ../src/chatView.js:574
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s теперь известен как %s"
 
-#: ../src/chatView.js:543
+#: ../src/chatView.js:579
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s отсоединился"
 
-#: ../src/chatView.js:551
+#: ../src/chatView.js:587
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s был выкинут %s"
 
-#: ../src/chatView.js:553
+#: ../src/chatView.js:589
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s был выкинут"
 
-#: ../src/chatView.js:559
+#: ../src/chatView.js:595
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s был заблокирован %s"
 
-#: ../src/chatView.js:561
+#: ../src/chatView.js:597
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s был заблокирован"
 
-#: ../src/chatView.js:566
+#: ../src/chatView.js:602
 #, javascript-format
 msgid "%s joined"
 msgstr "%s присоединился к чату"
 
-#: ../src/chatView.js:570
+#: ../src/chatView.js:606
 #, javascript-format
 msgid "%s left"
 msgstr "%s покинул чат"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:609
+#: ../src/chatView.js:645
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:614
+#: ../src/chatView.js:650
 msgid "Yesterday, %H∶%M"
 msgstr "Вчера, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:619
+#: ../src/chatView.js:655
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:625
+#: ../src/chatView.js:661
 msgid "%B %d, %H∶%M"
-msgstr "%d %b, %H∶%M"
+msgstr "%d %b., %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:631
+#: ../src/chatView.js:667
 msgid "%B %d %Y, %H∶%M"
-msgstr "%d %b %Y, %H∶%M"
+msgstr "%d %b. %Y, %H∶%M"
 
+# Нельзя заменять %l∶%M %p на %H∶%M, потому что при переключении в основных настройках системы времени на 12-часовой формат в программе ничего не измениться, время по прежнему будет в 24-часовом формате. Для 24-часового формата есть отдельные строки перевода.
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:636
+#: ../src/chatView.js:672
 msgid "%l∶%M %p"
-msgstr "%H∶%M"
+msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:641
+#: ../src/chatView.js:677
 msgid "Yesterday, %l∶%M %p"
-msgstr "Вчера, %H∶%M"
+msgstr "Вчера, %l∶%M %p"
 
+# Нельзя заменять %l∶%M %p на %H∶%M, потому что при переключении в основных настройках системы времени на 12-часовой формат в программе ничего не измениться, время по прежнему будет в 24-часовом формате. Для 24-часового формата есть отдельные строки перевода.
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:646
+#: ../src/chatView.js:682
 msgid "%A, %l∶%M %p"
-msgstr "%A, %H∶%M"
+msgstr "%A, %l∶%M %p"
 
+# Нельзя заменять %l∶%M %p на %H∶%M, потому что при переключении в основных настройках системы времени на 12-часовой формат в программе ничего не измениться, время по прежнему будет в 24-часовом формате. Для 24-часового формата есть отдельные строки перевода.
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:652
+#: ../src/chatView.js:688
 msgid "%B %d, %l∶%M %p"
-msgstr "%d %b, %H∶%M"
+msgstr "%d %b., %l∶%M %p"
 
+# Нельзя заменять %l∶%M %p на %H∶%M, потому что при переключении в основных настройках системы времени на 12-часовой формат в программе ничего не измениться, время по прежнему будет в 24-часовом формате. Для 24-часового формата есть отдельные строки перевода.
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:658
+#: ../src/chatView.js:694
 msgid "%B %d %Y, %l∶%M %p"
-msgstr "%d %b %Y, %H∶%M"
+msgstr "%d %b. %Y, %l∶%M %p"
 
-#: ../src/connections.js:320
+#: ../src/connections.js:325
 msgid "Edit Connection"
 msgstr "Изменить подключение"
 
-#: ../src/connections.js:334
+#: ../src/connections.js:326
+msgid "New Connection"
+msgstr "Создать подключение"
+
+#: ../src/connections.js:339
 msgid "A_pply"
 msgstr "_Применить"
 
-#: ../src/connections.js:334
+#: ../src/connections.js:339
 msgid "Cr_eate"
 msgstr "Со_здать"
 
@@ -424,27 +441,38 @@ msgstr "Пользователи на канале %s:"
 msgid "No topic set"
 msgstr "Тема не установлена"
 
-#: ../src/joinDialog.js:221
+#: ../src/joinDialog.js:219
 msgid "Add Connection"
 msgstr "Добавить подключение"
 
-#: ../src/joinDialog.js:223
+#: ../src/joinDialog.js:221
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../src/messageDialog.js:86
+#: ../src/mainWindow.js:304
+#, javascript-format
+msgid "%d users"
+msgstr "%d пользователей"
+
+#: ../src/messageDialog.js:92
 msgid "No recent users"
 msgstr "Нет последних пользователей"
 
-#: ../src/userList.js:185
-msgid "Loading details"
-msgstr "Загрузка информации"
+#: ../src/pasteManager.js:291
+#, javascript-format
+msgid "Uploading %s"
+msgstr "Отправка %s"
 
-#: ../src/userList.js:193
-msgid "Message"
-msgstr "Сообщение"
+#: ../src/roomList.js:22
+msgid "Leave chatroom"
+msgstr "Покинуть чат"
 
-#: ../src/userList.js:210
+#: ../src/roomList.js:23
+#| msgid "Edit Connection"
+msgid "End conversation"
+msgstr "Завершить переписку"
+
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -452,7 +480,7 @@ msgstr[0] "%d секунду назад"
 msgstr[1] "%d секунды назад"
 msgstr[2] "%d секунд назад"
 
-#: ../src/userList.js:215
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -460,7 +488,7 @@ msgstr[0] "%d минуту назад"
 msgstr[1] "%d минуты назад"
 msgstr[2] "%d минут назад"
 
-#: ../src/userList.js:220
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -468,7 +496,7 @@ msgstr[0] "%d час назад"
 msgstr[1] "%d часа назад"
 msgstr[2] "%d часов назад"
 
-#: ../src/userList.js:225
+#: ../src/userList.js:199
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -476,7 +504,7 @@ msgstr[0] "%d день назад"
 msgstr[1] "%d дня назад"
 msgstr[2] "%d дней назад"
 
-#: ../src/userList.js:230
+#: ../src/userList.js:204
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -484,7 +512,7 @@ msgstr[0] "%d неделю назад"
 msgstr[1] "%d недели назад"
 msgstr[2] "%d недель назад"
 
-#: ../src/userList.js:234
+#: ../src/userList.js:208
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -492,10 +520,12 @@ msgstr[0] "%d месяц назад"
 msgstr[1] "%d месяца назад"
 msgstr[2] "%d месяцев назад"
 
-#: ../src/userList.js:258
-msgid "Last Activity:"
-msgstr "Последняя активность:"
-
-#: ../src/userList.js:457
+#: ../src/userList.js:514
 msgid "All"
 msgstr "Все"
+
+#~ msgid "_Leave"
+#~ msgstr "_Выйти"
+
+#~ msgid "Message User"
+#~ msgstr "Отправить сообщение"
