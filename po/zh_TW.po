@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-24 11:41+0000\n"
-"PO-Revision-Date: 2015-02-24 23:08+0800\n"
+"POT-Creation-Date: 2015-02-26 11:53+0000\n"
+"PO-Revision-Date: 2015-02-26 22:08+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
@@ -433,8 +433,9 @@ msgstr "儲存(_S)"
 
 #: ../src/mainWindow.js:304
 #, javascript-format
-msgid "%d users"
-msgstr "%d 位使用者"
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d 位使用者"
 
 #: ../src/messageDialog.js:92
 msgid "No recent users"
