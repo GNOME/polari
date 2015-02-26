@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-25 23:40+0000\n"
-"PO-Revision-Date: 2015-02-26 12:28+0100\n"
+"POT-Creation-Date: 2015-02-26 11:53+0000\n"
+"PO-Revision-Date: 2015-02-26 12:54+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -458,8 +458,11 @@ msgstr "_Uložiť"
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=745203
 #: ../src/mainWindow.js:304
 #, javascript-format
-msgid "%d users"
-msgstr "%d používateľov"
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d používateľov"
+msgstr[1] "%d používateľ"
+msgstr[2] "%d používatelia"
 
 #: ../src/messageDialog.js:92
 msgid "No recent users"
