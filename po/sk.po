@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-26 11:53+0000\n"
-"PO-Revision-Date: 2015-02-26 12:54+0100\n"
+"POT-Creation-Date: 2015-02-27 23:43+0000\n"
+"PO-Revision-Date: 2015-02-28 11:13+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -111,7 +111,7 @@ msgstr "Skutočné _meno"
 #: ../data/resources/connection-details.ui.h:5
 #: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
-msgstr "volitelné"
+msgstr "voliteľné"
 
 #: ../data/resources/connection-list-dialog.ui.h:1
 #: ../data/resources/menus.ui.h:1
@@ -360,40 +360,40 @@ msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
 msgstr ""
-"/HELP [<príkaz>] - Zobrazí pomocníka pre príkaz zadaný ako argument "
+"/HELP [<príkaz>] - zobrazí pomocníka pre príkaz zadaný ako argument "
 "<príkaz>, alebo zobrazí zoznam dostupných príkazov"
 
 #: ../src/ircParser.js:27
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <prezývka> [<kanál>] - Pošle účastníkovi zadanému ako argument "
+"/INVITE <prezývka> [<kanál>] - pošle účastníkovi zadanému ako argument "
 "<prezývka> pozvánku do kanála zadanému ako argument <kanál>, alebo pošle "
 "pozvánku do aktuálneho kanála"
 
 #: ../src/ircParser.js:28
 msgid "/JOIN <channel> - joins <channel>"
-msgstr "/JOIN <kanál> - Vstúpi do kanála zadaného ako argument <kanál>"
+msgstr "/JOIN <kanál> - vstúpi do kanála zadaného ako argument <kanál>"
 
 #: ../src/ircParser.js:29
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr ""
-"/KICK <prezývka> - Vykopne účastníka zadaného ako argument <prezývka> z "
+"/KICK <prezývka> - vykopne účastníka zadaného ako argument <prezývka> z "
 "aktuálneho kanála"
 
 #: ../src/ircParser.js:30
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr ""
-"/ME <akcia> - Odošle akciu zadanú ako argument <akcia> do aktuálneho kanála"
+"/ME <akcia> - odošle akciu zadanú ako argument <akcia> do aktuálneho kanála"
 
 #: ../src/ircParser.js:31
 msgid "/NAMES - lists users on the current channel"
-msgstr "/NAMES - Zobrazí zoznam používateľov v aktuálnom kanále"
+msgstr "/NAMES - zobrazí zoznam používateľov v aktuálnom kanále"
 
 #: ../src/ircParser.js:32
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr ""
-"/NICK <prezývka> - Nastaví vašu novú prezývku zadanú ako argument <prezývka>"
+"/NICK <prezývka> - nastaví vašu novú prezývku zadanú ako argument <prezývka>"
 
 #: ../src/ircParser.js:33
 msgid ""
@@ -405,7 +405,7 @@ msgstr ""
 #: ../src/ircParser.js:34
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr ""
-"/QUERY <prezývka> - Otvorí okno s rozhovorom s účastníkom zadaným ako "
+"/QUERY <prezývka> - otvorí okno s rozhovorom s účastníkom zadaným ako "
 "argument <prezývka>"
 
 #: ../src/ircParser.js:35
@@ -415,19 +415,19 @@ msgstr "/QUIT [<dôvod>] - odpojí sa z aktuálneho servera"
 #: ../src/ircParser.js:36
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr ""
-"/SAY <text> - Odošle text zadaný ako argument <text> do aktuálnej miestnosti/"
+"/SAY <text> - odošle text zadaný ako argument <text> do aktuálnej miestnosti/"
 "aktuálnemu kontaktu"
 
 #: ../src/ircParser.js:37
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
-"/TOPIC <téma> - Nastaví tému zadanú ako argument <topic>, alebo zobrazí "
+"/TOPIC <téma> - nastaví tému zadanú ako argument <topic>, alebo zobrazí "
 "aktuálnu tému"
 
 #: ../src/ircParser.js:40
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
-"Neznámy príkaz - Zoznam dostupných príkazov získate napísaním príkazu /HELP"
+"Neznámy príkaz - zoznam dostupných príkazov získate napísaním príkazu /HELP"
 
 #: ../src/ircParser.js:61
 #, javascript-format
