@@ -197,19 +197,22 @@ const ConnectionDetails = new Lang.Class({
     },
 
     _getParams: function() {
+        let serverText = this._serverEntry.text.trim();
+        let descText = this._descEntry.text.trim();
+
         let serverRegEx = /(.*?)(?::(\d{1,5}))?$/;
-        let [, server, port] = this._serverEntry.text.match(serverRegEx);
+        let [, server, port] = serverText.match(serverRegEx);
 
         let params = {
-            name: this._descEntry.text.length ? this._descEntry.text : server,
+            name: descText.length ? descText : server,
             server: server,
-            account: this._nickEntry.text
+            account: this._nickEntry.text.trim()
         };
 
         if (port)
             params.port = port;
         if (this._realnameEntry.text)
-            params.fullname = this._realnameEntry.text;
+            params.fullname = this._realnameEntry.text.trim();
 
         return params;
     },
