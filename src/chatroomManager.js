@@ -231,14 +231,18 @@ const _ChatroomManager = new Lang.Class({
 
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
+                if (!this._app.get_active_window())
+                    this._app.activate();
+
                 let room = this._ensureRoomForChannel(channel);
                 //channel.join_async('', null);
 
                 if (present || this.roomCount == 1)
                     this.setActiveRoom(room);
+
+                if (present)
+                    this._app.get_active_window().present_with_time(time);
             }));
-        if (present)
-            this._app.get_active_window().present_with_time(time);
     },
 
     _addRoom: function(room) {
