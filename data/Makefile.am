@@ -8,9 +8,10 @@ desktop_in_files = $(APP_ID).desktop.in
 
 servicedir = $(datadir)/dbus-1/services
 service_DATA = $(service_in_files:.service.in=.service)
-service_in_files = $(APP_ID).service.in
+service_in_files = $(APP_ID).service.in \
+	org.freedesktop.Telepathy.Client.Polari.service.in
 
-$(APP_ID).service: $(APP_ID).service.in Makefile
+%.service: %.service.in Makefile
 	$(AM_V_GEN) sed -e "s|\@bindir\@|$(bindir)|" $< > $@
 
 check-local:
@@ -25,6 +26,9 @@ resource_DATA=$(APP_ID).data.gresource
 
 gsettings_SCHEMAS = $(APP_ID).gschema.xml
 @GSETTINGS_RULES@
+
+clientdir=$(datadir)/telepathy/clients
+dist_client_DATA = Polari.client
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
