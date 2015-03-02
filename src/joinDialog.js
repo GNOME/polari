@@ -192,7 +192,7 @@ const JoinDialog = new Lang.Class({
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._nameEntry.get_text_length() > 0;
         } else {
-            sensitive = this._details.canConfirm;
+            sensitive = this._details.can_confirm;
         }
 
         this._confirmButton.sensitive = sensitive;

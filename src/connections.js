@@ -246,13 +246,13 @@ const ConnectionDetails = new Lang.Class({
             this._descEntry.text = account.display_name;
     },
 
-    get canConfirm() {
+    get can_confirm() {
         return this._serverEntry.get_text_length() > 0 &&
                this._nickEntry.get_text_length() > 0;
     },
 
     save: function() {
-        if (!this.canConfirm)
+        if (!this.can_confirm)
             return;
 
         if (this._account)
