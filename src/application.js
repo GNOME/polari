@@ -378,12 +378,14 @@ const Application = new Lang.Class({
             return;
         }
 
+        this.hold();
         this._connectionsDialog = new Connections.ConnectionsDialog();
         this._connectionsDialog.widget.show();
         this._connectionsDialog.widget.connect('response',
             Lang.bind(this, function(widget) {
                 widget.destroy();
                 this._connectionsDialog = null;
+                this.release();
             }));
     },
 
