@@ -137,6 +137,8 @@ const Application = new Lang.Class({
                     this.emitJS('prepare-shutdown');
             }));
             this._window.window.show_all();
+
+            this._chatroomManager.lateInit();
         }
         this._window.window.present();
     },

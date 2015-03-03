@@ -37,6 +37,10 @@ const AccountsMonitor = new Lang.Class({
         return this._accounts.slice();
     },
 
+    get accountManager() {
+        return this._accountManager;
+    },
+
     _onPrepared: function(am, res) {
         try {
             am.prepare_finish(res);

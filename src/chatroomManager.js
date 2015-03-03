@@ -52,6 +52,7 @@ const _ChatroomManager = new Lang.Class({
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-manager-prepared',
                                       Lang.bind(this, this._onPrepared));
+        this._amIsPrepared = false;
     },
 
     _onPrepared: function(mon, am) {
@@ -84,6 +85,17 @@ const _ChatroomManager = new Lang.Class({
                 this._client.add_observer_filter(f);
             }));
         this._client.register();
+
+        this._amIsPrepared = true;
+        this.lateInit();
+    },
+
+    lateInit: function() {
+        let am = this._accountsMonitor.accountManager;
+        let ready = this._amIsPrepared &&
+            this._app.get_active_window() != null;
+        if (!ready)
+            return;
 
         am.connect('account-enabled',
                    Lang.bind(this, this._onAccountEnabled));
