@@ -448,7 +448,7 @@ msgid_plural "%d users"
 msgstr[0] "%d korisnik"
 msgstr[1] "%d korisnika"
 msgstr[2] "%d korisnika"
-msgstr[3] "jedan korisnik"
+msgstr[3] "%d korisnik"
 
 #: ../src/messageDialog.js:92
 msgid "No recent users"
