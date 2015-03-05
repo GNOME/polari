@@ -88,12 +88,9 @@ const MainWindow = new Lang.Class({
         this.window.connect('delete-event',
                             Lang.bind(this, this._onDelete));
 
-        let size = this._settings.get_value('window-size');
-        if (size.n_children() == 2) {
-            let width = size.get_child_value(0);
-            let height = size.get_child_value(1);
-            this.window.set_default_size(width.get_int32(), height.get_int32());
-        }
+        let size = this._settings.get_value('window-size').deep_unpack();
+        if (size.length == 2)
+            this.window.set_default_size.apply(this.window, size);
 
         let position = this._settings.get_value('window-position');
         if (position.n_children() == 2) {
