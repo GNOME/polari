@@ -92,13 +92,6 @@ const MainWindow = new Lang.Class({
         if (size.length == 2)
             this.window.set_default_size.apply(this.window, size);
 
-        let position = this._settings.get_value('window-position');
-        if (position.n_children() == 2) {
-            let x = position.get_child_value(0);
-            let y = position.get_child_value(1);
-            this.window.move(x.get_int32(), y.get_int32());
-        }
-
         if (this._settings.get_boolean('window-maximized'))
             this.window.maximize();
 
@@ -125,10 +118,6 @@ const MainWindow = new Lang.Class({
 
         let size = this.window.get_size();
         this._settings.set_value('window-size', GLib.Variant.new('ai', size));
-
-        let position = this.window.get_position();
-        this._settings.set_value('window-position',
-                                 GLib.Variant.new('ai', position));
     },
 
     _onConfigureEvent: function(widget, event) {
