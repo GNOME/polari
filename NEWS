@@ -1,3 +1,20 @@
+3.15.91 - "I'm buying him a beer"
+=================================
+* Register telepathy service to enable use as default channel handler
+  [Giovanni; #745418, #745499]
+* Misc. bug fixes [Florian; #745203, #743988]
+
+Contributors:
+  Giovanni Campagna, Florian Müllner
+
+Translations:
+  Yosef Or Boczko [he], Stas Solovey [ru], Cheng-Chia Tseng [zh_TW],
+  Daniel Mustieles [es], Tom Tryfonidis [el], Dušan Kazik [sk],
+  Rafael Ferreira [pt_BR], Efstathios Iosifidis [el], Daniel Korostil [uk],
+  Balázs Úr [hu], Matej Urbančič [sl], Alexandre Franke [fr],
+  Fran Dieguez [gl], Milo Casagrande [it], Marek Černocký [cs],
+  Мирослав Николић [sr, sr@latin], Piotr Drąg [pl]
+
 3.15.90 - "Plenty of meat, only one potato"
 ===========================================
 * Add high-contrast application icon [Jakub; #735670]
