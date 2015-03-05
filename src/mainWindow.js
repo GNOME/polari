@@ -33,7 +33,6 @@ const MainWindow = new Lang.Class({
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
         this._membersChangedId = 0;
-        this._configureId = 0;
 
         this._currentSize = [-1, -1];
         this._isMaximized = false;
@@ -87,8 +86,8 @@ const MainWindow = new Lang.Class({
 
         this.window.connect('window-state-event',
                             Lang.bind(this, this._onWindowStateEvent));
-        this.window.connect('configure-event',
-                            Lang.bind(this, this._onConfigureEvent));
+        this.window.connect('size-allocate',
+                            Lang.bind(this, this._onSizeAllocate));
         this.window.connect('delete-event',
                             Lang.bind(this, this._onDelete));
 
@@ -109,29 +108,12 @@ const MainWindow = new Lang.Class({
         this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
     },
 
-    _onConfigureEvent: function(widget, event) {
-        if (this._isFullscreen || this._isMaximized)
-            return;
-
-        if (this._configureId != 0) {
-            Mainloop.source_remove(this._configureId);
-            this._configureId = 0;
-        }
-
-        this._configureId = Mainloop.timeout_add(CONFIGURE_TIMEOUT,
-            Lang.bind(this, function() {
-                this._currentSize = this.window.get_size();
-                this._configureId = 0;
-                return GLib.SOURCE_REMOVE;
-            }));
+    _onSizeAllocate: function(widget, allocation) {
+        if (!this._isFullscreen && !this._isMaximized)
+            this._currentSize = [allocation.width, allocation.height];
     },
 
     _onDelete: function(widget, event) {
-        if (this._configureId != 0) {
-            Mainloop.source_remove(this._configureId);
-            this._configureId = 0;
-        }
-
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
                                  GLib.Variant.new('ai', this._currentSize));
