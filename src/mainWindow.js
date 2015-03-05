@@ -35,6 +35,10 @@ const MainWindow = new Lang.Class({
         this._membersChangedId = 0;
         this._configureId = 0;
 
+        this._currentSize = [-1, -1];
+        this._isMaximized = false;
+        this._isFullscreen = false;
+
         this._createWidget(app);
 
         let provider = new Gtk.CssProvider();
@@ -99,32 +103,14 @@ const MainWindow = new Lang.Class({
     },
 
     _onWindowStateEvent: function(widget, event) {
-        let window = widget.get_window();
-        let state = window.get_state();
+        let state = event.get_window().get_state();
 
-        if (state & Gdk.WindowState.FULLSCREEN)
-            return;
-
-        let maximized = (state & Gdk.WindowState.MAXIMIZED);
-        this._settings.set_boolean('window-maximized', maximized);
-    },
-
-    _saveGeometry: function() {
-        let window = this.window.get_window();
-        let state = window.get_state();
-
-        if (state & Gdk.WindowState.MAXIMIZED)
-            return;
-
-        let size = this.window.get_size();
-        this._settings.set_value('window-size', GLib.Variant.new('ai', size));
+        this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
+        this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
     },
 
     _onConfigureEvent: function(widget, event) {
-        let window = widget.get_window();
-        let state = window.get_state();
-
-        if (state & Gdk.WindowState.FULLSCREEN)
+        if (this._isFullscreen || this._isMaximized)
             return;
 
         if (this._configureId != 0) {
@@ -134,7 +120,7 @@ const MainWindow = new Lang.Class({
 
         this._configureId = Mainloop.timeout_add(CONFIGURE_TIMEOUT,
             Lang.bind(this, function() {
-                this._saveGeometry();
+                this._currentSize = this.window.get_size();
                 this._configureId = 0;
                 return GLib.SOURCE_REMOVE;
             }));
@@ -146,7 +132,9 @@ const MainWindow = new Lang.Class({
             this._configureId = 0;
         }
 
-        this._saveGeometry();
+        this._settings.set_boolean ('window-maximized', this._isMaximized);
+        this._settings.set_value('window-size',
+                                 GLib.Variant.new('ai', this._currentSize));
     },
 
     _onAccountChanged: function(am, account) {
