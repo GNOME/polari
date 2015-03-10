@@ -1,16 +1,16 @@
 # Swedish translation for polari.
-# Copyright © 2014 polari's COPYRIGHT HOLDER
+# Copyright © 2014, 2015 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>, 2014.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-30 10:38+0000\n"
-"PO-Revision-Date: 2014-09-30 18:33+0100\n"
+"POT-Creation-Date: 2015-03-06 03:00+0000\n"
+"PO-Revision-Date: 2015-03-08 21:48+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@lists.tp-sv.se>\n"
 "Language: sv\n"
@@ -18,9 +18,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.3\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:416
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "En IRC-chattklient för GNOME"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -30,7 +41,7 @@ msgstr ""
 "integrera sömlöst med GNOME. Den har ett vackert, enkelt gränssnitt som "
 "tillåter dig att fokusera dig på dina konversationer."
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -42,15 +53,6 @@ msgstr ""
 "viktigt meddelande - för privata konversationer tillåter de dig till och med "
 "att svara omedelbart utan att växla tillbaka till programmet!"
 
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:447
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "En IRC-chattklient för GNOME"
-
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Chatt;"
@@ -59,60 +61,47 @@ msgstr "IRC;Internet;Chatt;"
 msgid "Show connections"
 msgstr "Visa anslutningar"
 
-#: ../data/org.gnome.polari.gschema.xml.h:1
+#: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
 msgstr "Sparad kanallista"
 
-#: ../data/org.gnome.polari.gschema.xml.h:2
+#: ../data/org.gnome.Polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
 msgstr "Lista över kanaler som ska återställas vid uppstart"
 
-#: ../data/org.gnome.polari.gschema.xml.h:3
+#: ../data/org.gnome.Polari.gschema.xml.h:3
 msgid "Window size"
 msgstr "Fönsterstorlek"
 
-#: ../data/org.gnome.polari.gschema.xml.h:4
+#: ../data/org.gnome.Polari.gschema.xml.h:4
 msgid "Window size (width and height)."
 msgstr "Fönsterstorlek (bredd och höjd)."
 
-#: ../data/org.gnome.polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "Fönsterposition"
-
-#: ../data/org.gnome.polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "Fönsterposition (x och y)."
-
-#: ../data/org.gnome.polari.gschema.xml.h:7
+#: ../data/org.gnome.Polari.gschema.xml.h:5
 msgid "Window maximized"
 msgstr "Fönster maximerat"
 
-#: ../data/org.gnome.polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Maximerat tillstånd för fönster"
 
-#: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:322
-msgid "New Connection"
-msgstr "Ny anslutning"
-
-#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/connection-details.ui.h:1
 msgid "_Address"
 msgstr "_Adress"
 
-#: ../data/resources/connection-details-dialog.ui.h:3
+#: ../data/resources/connection-details.ui.h:2
 msgid "_Description"
 msgstr "_Beskrivning"
 
-#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/connection-details.ui.h:3
 msgid "_Nickname"
 msgstr "_Smeknamn"
 
-#: ../data/resources/connection-details-dialog.ui.h:5
+#: ../data/resources/connection-details.ui.h:4
 msgid "_Real Name"
 msgstr "_Fullständigt namn"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details.ui.h:5
 #: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "valfri"
@@ -135,7 +124,7 @@ msgid "Join Chat Room"
 msgstr "Gå in i chattrummet"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:333
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -169,8 +158,8 @@ msgid "Message a User"
 msgstr "Meddela en användare"
 
 #: ../data/resources/main-window.ui.h:4
-msgid "_Leave"
-msgstr "_Lämna"
+msgid "Join room"
+msgstr "Gå in i rum"
 
 #: ../data/resources/menus.ui.h:2
 msgid "Preferences"
@@ -196,11 +185,23 @@ msgstr "_Senaste"
 msgid "_Name"
 msgstr "_Namn"
 
-#: ../src/application.js:389
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "Läser in detaljer"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+msgid "Last Activity:"
+msgstr "Senaste aktivitet:"
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "Meddelande"
+
+#: ../src/application.js:351
 msgid "Good Bye"
 msgstr "Hejdå"
 
-#: ../src/application.js:446
+#: ../src/application.js:415
 msgid "translator-credits"
 msgstr ""
 "Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
@@ -214,125 +215,129 @@ msgstr ""
 msgid "Connecting to %s"
 msgstr "Ansluter till %s"
 
-#: ../src/chatView.js:403
+#: ../src/chatView.js:408
 msgid "Open Link"
 msgstr "Öppna länk"
 
-#: ../src/chatView.js:410
+#: ../src/chatView.js:415
 msgid "Copy Link Address"
 msgstr "Kopiera länkadress"
 
-#: ../src/chatView.js:543
+#: ../src/chatView.js:574
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s är nu känd som %s"
 
-#: ../src/chatView.js:548
+#: ../src/chatView.js:579
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har kopplat ner"
 
-#: ../src/chatView.js:556
+#: ../src/chatView.js:587
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s har sparkats ut av %s"
 
-#: ../src/chatView.js:558
+#: ../src/chatView.js:589
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s har sparkats ut"
 
-#: ../src/chatView.js:564
+#: ../src/chatView.js:595
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s har blivit bannlyst av %s"
 
-#: ../src/chatView.js:566
+#: ../src/chatView.js:597
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s har blivit bannlyst"
 
-#: ../src/chatView.js:571
+#: ../src/chatView.js:602
 #, javascript-format
 msgid "%s joined"
 msgstr "%s anslöt"
 
-#: ../src/chatView.js:575
+#: ../src/chatView.js:606
 #, javascript-format
 msgid "%s left"
 msgstr "%s lämnade"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:614
+#: ../src/chatView.js:645
 msgid "%H∶%M"
 msgstr "%H:%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:619
+#: ../src/chatView.js:650
 msgid "Yesterday, %H∶%M"
 msgstr "Igår, %H:%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:624
+#: ../src/chatView.js:655
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:630
+#: ../src/chatView.js:661
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:636
+#: ../src/chatView.js:667
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:641
+#: ../src/chatView.js:672
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:646
+#: ../src/chatView.js:677
 msgid "Yesterday, %l∶%M %p"
 msgstr "Igår, %I:%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:651
+#: ../src/chatView.js:682
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:657
+#: ../src/chatView.js:688
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:663
+#: ../src/chatView.js:694
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:321
+#: ../src/connections.js:328
 msgid "Edit Connection"
 msgstr "Redigera anslutningen"
 
-#: ../src/connections.js:335
+#: ../src/connections.js:329
+msgid "New Connection"
+msgstr "Ny anslutning"
+
+#: ../src/connections.js:342
 msgid "A_pply"
 msgstr "V_erkställ"
 
-#: ../src/connections.js:335
+#: ../src/connections.js:342
 msgid "Cr_eate"
 msgstr "Sk_apa"
 
@@ -437,67 +442,72 @@ msgstr "Lägg till en anslutning"
 msgid "_Save"
 msgstr "_Spara"
 
+#: ../src/mainWindow.js:260
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d användare"
+msgstr[1] "%d användare"
+
 #: ../src/messageDialog.js:92
 msgid "No recent users"
 msgstr "Inga användare på senaste tiden"
 
-#: ../src/userList.js:174
-msgid "Loading details"
-msgstr "Läser in detaljer"
+#: ../src/pasteManager.js:291
+#, javascript-format
+msgid "Uploading %s"
+msgstr "Skickar %s"
 
-#: ../src/userList.js:183
-msgid "Message"
-msgstr "Meddelande"
+#: ../src/roomList.js:22
+msgid "Leave chatroom"
+msgstr "Lämna chattrum"
 
-#: ../src/userList.js:201
+#: ../src/roomList.js:23
+msgid "End conversation"
+msgstr "Avsluta konversation"
+
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekund sedan"
 msgstr[1] "%d sekunder sedan"
 
-#: ../src/userList.js:206
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minut sedan"
 msgstr[1] "%d minuter sedan"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d timme sedan"
 msgstr[1] "%d timmar sedan"
 
-#: ../src/userList.js:216
+#: ../src/userList.js:199
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag sedan"
 msgstr[1] "%d dagar sedan"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:204
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d vecka sedan"
 msgstr[1] "%d veckor sedan"
 
-#: ../src/userList.js:225
+#: ../src/userList.js:208
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d månad sedan"
 msgstr[1] "%d månader sedan"
 
-#: ../src/userList.js:251
-msgid "Last Activity:"
-msgstr "Senaste aktivitet:"
-
-#: ../src/userList.js:464
+#: ../src/userList.js:514
 msgid "All"
 msgstr "Alla"
-
-#~ msgid "Message User"
-#~ msgstr "Meddela användaren"
