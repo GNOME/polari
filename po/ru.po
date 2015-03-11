@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-23 23:40+0000\n"
-"PO-Revision-Date: 2015-02-24 14:48+0300\n"
+"POT-Creation-Date: 2015-03-11 11:46+0000\n"
+"PO-Revision-Date: 2015-03-12 01:15+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:412
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:416
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-клиент для GNOME"
 
@@ -77,18 +77,10 @@ msgid "Window size (width and height)."
 msgstr "Размеры окна (ширина и высота)."
 
 #: ../data/org.gnome.Polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "Положение окна"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "Положение окна (x, y)."
-
-#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "Окно максимального размера"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Окно максимального размера"
 
@@ -131,7 +123,7 @@ msgid "Join Chat Room"
 msgstr "Войти в комнату"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:337
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -165,7 +157,6 @@ msgid "Message a User"
 msgstr "Отправить сообщение"
 
 #: ../data/resources/main-window.ui.h:4
-#| msgid "Join a Room"
 msgid "Join room"
 msgstr "Присоединиться к комнате"
 
@@ -179,7 +170,7 @@ msgstr "О приложении"
 
 #: ../data/resources/menus.ui.h:4
 msgid "Quit"
-msgstr "Закончить"
+msgstr "Завершить"
 
 #: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
@@ -205,11 +196,11 @@ msgstr "Последняя активность:"
 msgid "Message"
 msgstr "Сообщение"
 
-#: ../src/application.js:349
+#: ../src/application.js:351
 msgid "Good Bye"
 msgstr "Пока"
 
-#: ../src/application.js:411
+#: ../src/application.js:415
 msgid "translator-credits"
 msgstr ""
 "Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014.\n"
@@ -334,19 +325,19 @@ msgstr "%d %b., %l∶%M %p"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %b. %Y, %l∶%M %p"
 
-#: ../src/connections.js:325
+#: ../src/connections.js:328
 msgid "Edit Connection"
 msgstr "Изменить подключение"
 
-#: ../src/connections.js:326
+#: ../src/connections.js:329
 msgid "New Connection"
 msgstr "Создать подключение"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:342
 msgid "A_pply"
 msgstr "_Применить"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:342
 msgid "Cr_eate"
 msgstr "Со_здать"
 
@@ -449,10 +440,14 @@ msgstr "Добавить подключение"
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../src/mainWindow.js:304
+#: ../src/mainWindow.js:260
 #, javascript-format
-msgid "%d users"
-msgstr "%d пользователей"
+#| msgid "%d users"
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d пользователь"
+msgstr[1] "%d пользователя"
+msgstr[2] "%d пользователей"
 
 #: ../src/messageDialog.js:92
 msgid "No recent users"
@@ -468,7 +463,6 @@ msgid "Leave chatroom"
 msgstr "Покинуть чат"
 
 #: ../src/roomList.js:23
-#| msgid "Edit Connection"
 msgid "End conversation"
 msgstr "Завершить переписку"
 
@@ -523,6 +517,12 @@ msgstr[2] "%d месяцев назад"
 #: ../src/userList.js:514
 msgid "All"
 msgstr "Все"
+
+#~ msgid "Window position"
+#~ msgstr "Положение окна"
+
+#~ msgid "Window position (x and y)."
+#~ msgstr "Положение окна (x, y)."
 
 #~ msgid "_Leave"
 #~ msgstr "_Выйти"
