@@ -24,7 +24,7 @@ do_subst = sed -e 's|@prefix[@]|$(prefix)|g' \
 appdir = $(pkgdatadir)
 nodist_app_SCRIPTS = $(APP_ID)
 
-$(APP_ID): $(APP_ID).in
+$(APP_ID): $(APP_ID).in $(top_srcdir)/configure.ac
 	$(AM_V_GEN) $(do_subst) $< > $@
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$(APP_ID).src.gresource.xml)
