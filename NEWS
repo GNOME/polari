@@ -1,3 +1,15 @@
+3.15.92 - "God, I miss Disco!"
+==============================
+* Follow best practices for window state saving [Florian; #745717]
+
+Contributors:
+  Florian Müllner
+
+Translations:
+  Changwoo Ryu [ko], Aurimas Černius [lt], Kjartan Maraas [nb],
+  Anders Jonsson [sv], Jiri Grönroos [fi], Stas Solovey [ru], Samir Ribic [bs],
+  Ask Hjorth Larsen [da], Josef Andersson [sv]
+
 3.15.91 - "I'm buying him a beer"
 =================================
 * Register telepathy service to enable use as default channel handler
