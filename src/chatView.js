@@ -235,6 +235,8 @@ const ChatView = new Lang.Class({
                             Lang.bind(this, this._updateIndent));
         this.widget.connect('map', Lang.bind(this, this._updateActive));
         this.widget.connect('unmap', Lang.bind(this, this._updateActive));
+        this.widget.connect('parent-set',
+                            Lang.bind(this, this._updateToplevel));
         this.widget.connect('state-flags-changed',
                             Lang.bind(this, this._updateToplevel));
         this.widget.connect('scroll-event', Lang.bind(this ,this._onScroll));
