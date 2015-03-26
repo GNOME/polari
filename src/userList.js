@@ -296,10 +296,12 @@ const UserListRow = new Lang.Class({
         this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
                                       no_show_all: true });
         hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
-        hbox.add(new Gtk.Label({ label: user.alias,
-                                 halign: Gtk.Align.START,
-                                 hexpand: true,
-                                 ellipsize: Pango.EllipsizeMode.END }));
+        this._label = new Gtk.Label({ label: user.alias,
+                                      halign: Gtk.Align.START,
+                                      hexpand: true,
+                                      use_markup: true,
+                                      ellipsize: Pango.EllipsizeMode.END });
+        hbox.add(this._label);
         hbox.add(this._arrow);
         vbox.add(hbox);
 
@@ -317,6 +319,30 @@ const UserListRow = new Lang.Class({
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
+    },
+
+    shouldShow: function() {
+        return this.widget.user.alias.toLowerCase().indexOf(this._filter) != -1;
+    },
+
+    setFilter: function(filter) {
+        this._filter = filter.toLowerCase();
+        this._updateLabel();
+    },
+
+    _updateLabel: function() {
+        let filterIndex = -1;
+        if (this._filter)
+            filterIndex = this.widget.user.alias.toLowerCase().indexOf(this._filter);
+
+        if (filterIndex < 0) {
+            this._label.label = this.widget.user.alias;
+        } else {
+            let preMatch = this.widget.user.alias.substring(0, filterIndex);
+            let theMatch = this.widget.user.alias.substring(filterIndex, filterIndex + this._filter.length);
+            let postMatch = this.widget.user.alias.substring(filterIndex + this._filter.length);
+            this._label.label = preMatch + '<b>' + theMatch + '</b>' + postMatch;
+        }
     },
 
     _updateArrowVisibility: function() {
@@ -356,6 +382,7 @@ const UserList = new Lang.Class({
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
         /* see https://bugzilla.gnome.org/show_bug.cgi?id=725403 */
         //this._list.set_header_func(Lang.bind(this, this._updateHeader));
+        this._filter = '';
         this._list.set_filter_func(Lang.bind(this, this._filterRows));
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
@@ -409,7 +436,7 @@ const UserList = new Lang.Class({
     },
 
     setFilter: function(filter) {
-        this._filter = filter.toLowerCase();
+        this._filter = filter;
         this._list.invalidate_filter();
     },
 
@@ -493,10 +520,10 @@ const UserList = new Lang.Class({
         return row1.user.alias.localeCompare(row2.user.alias);
     },
 
-    _filterRows: function(row) {
-        if (!this._filter)
-            return true;
-        return row.user.alias.toLowerCase().indexOf(this._filter) != -1;
+    _filterRows: function(rowWidget) {
+        let row = this._rows[rowWidget.user];
+        row.setFilter(this._filter);
+        return row.shouldShow();
     },
 
     _updateHeader: function(row, before) {
