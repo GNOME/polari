@@ -420,7 +420,11 @@ const UserList = new Lang.Class({
         this._updateHeightId = Mainloop.idle_add(Lang.bind(this, function() {
             let topRow = this._list.get_row_at_y(this.widget.vadjustment.value);
             let membersShown = Math.min(this.numRows, MAX_USERS_SHOWN);
-            let index = Math.min(topRow.get_index(), this.numRows - membersShown);
+            // topRow is unset when all rows are hidden due to filtering,
+            // base height on the first membersShown rows in that case
+            let index = 0;
+            if (topRow)
+                index = Math.min(topRow.get_index(), this.numRows - membersShown);
             let height = 0;
 
             for (let i = 0; i < membersShown; i++)
