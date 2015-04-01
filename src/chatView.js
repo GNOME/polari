@@ -22,8 +22,6 @@ const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
 const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
 const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
 
-const INDICATOR_OFFSET = 5; // TODO: should be based on line spacing
-
 const MARGIN = 6;
 
 // Workaround for GtkTextView growing horizontally over time when
@@ -65,8 +63,10 @@ const TextView = new Lang.Class({
                                                  location.x, location.y);
         let border = this.border_width;
 
+        let lineSpace = (this.get_pixels_above_lines(this) +
+                         this.get_pixels_below_lines(this)) / 2;
         Gdk.cairo_set_source_rgba(cr, this._dimColor);
-        cr.rectangle(border, y + INDICATOR_OFFSET,
+        cr.rectangle(border, y - lineSpace,
                      this.get_allocated_width() - 2 * border, 1);
         cr.fill();
         cr.$dispose();
