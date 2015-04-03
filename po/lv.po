@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-10 15:51+0000\n"
-"PO-Revision-Date: 2014-10-12 16:44+0300\n"
+"POT-Creation-Date: 2015-04-03 11:04+0000\n"
+"PO-Revision-Date: 2015-04-03 20:28+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -20,6 +20,17 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:416
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Internet Relay Chat klients GNOME videi"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -29,25 +40,17 @@ msgstr ""
 "ar GNOME. Tajā ir vienkārša un skaista saskarne, kas jums ļauj koncentrēties "
 "uz sarunām."
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message - for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"Jūs varat izmantot Polari, lai publiski tērzētu ar cilvēkiem \"istabās\", vai "
-"arī privātās sarunās. Paziņojumi palīdz nepalaist garām svarīgus ziņojumus — "
-"privātās sarunās varat atbildēt uzreiz, nepārslēdzoties atpakaļ uz lietotni."
-
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:455
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "Internet Relay Chat klients GNOME videi"
+"Jūs varat izmantot Polari, lai publiski tērzētu ar cilvēkiem \"istabās\", "
+"vai arī privātās sarunās. Paziņojumi palīdz nepalaist garām svarīgus "
+"ziņojumus — privātās sarunās varat atbildēt uzreiz, nepārslēdzoties atpakaļ "
+"uz lietotni."
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
@@ -57,60 +60,47 @@ msgstr "IRC;Internets;Relay;Tērzēšana;"
 msgid "Show connections"
 msgstr "Rādīt savienojumus"
 
-#: ../data/org.gnome.polari.gschema.xml.h:1
+#: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
 msgstr "Saglabāto kanālu saraksts"
 
-#: ../data/org.gnome.polari.gschema.xml.h:2
+#: ../data/org.gnome.Polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
 msgstr "Saraksts ar kanāliem, ko atjaunot palaižoties"
 
-#: ../data/org.gnome.polari.gschema.xml.h:3
+#: ../data/org.gnome.Polari.gschema.xml.h:3
 msgid "Window size"
 msgstr "Loga izmērs"
 
-#: ../data/org.gnome.polari.gschema.xml.h:4
+#: ../data/org.gnome.Polari.gschema.xml.h:4
 msgid "Window size (width and height)."
 msgstr "Loga izmērs (platums un augstums)."
 
-#: ../data/org.gnome.polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "Loga novietojums"
-
-#: ../data/org.gnome.polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "Loga novietojums (x un y)."
-
-#: ../data/org.gnome.polari.gschema.xml.h:7
+#: ../data/org.gnome.Polari.gschema.xml.h:5
 msgid "Window maximized"
 msgstr "Logs maksimizēts"
 
-#: ../data/org.gnome.polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Loga stāvoklis — maksimizēts"
 
-#: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:321
-msgid "New Connection"
-msgstr "Pievienot savienojumu"
-
-#: ../data/resources/connection-details-dialog.ui.h:2
+#: ../data/resources/connection-details.ui.h:1
 msgid "_Address"
 msgstr "_Adrese"
 
-#: ../data/resources/connection-details-dialog.ui.h:3
+#: ../data/resources/connection-details.ui.h:2
 msgid "_Description"
 msgstr "A_praksts"
 
-#: ../data/resources/connection-details-dialog.ui.h:4
+#: ../data/resources/connection-details.ui.h:3
 msgid "_Nickname"
 msgstr "_Segvārds"
 
-#: ../data/resources/connection-details-dialog.ui.h:5
+#: ../data/resources/connection-details.ui.h:4
 msgid "_Real Name"
 msgstr "Ī_stais vārds"
 
-#: ../data/resources/connection-details-dialog.ui.h:6
+#: ../data/resources/connection-details.ui.h:5
 #: ../data/resources/join-room-dialog.ui.h:4
 msgid "optional"
 msgstr "neobligāts"
@@ -128,16 +118,16 @@ msgstr "Pievienot"
 msgid "Remove"
 msgstr "Izņemt"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:220
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
 msgid "Join Chat Room"
 msgstr "Pievienoties sarunu kanālam"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:332
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
 msgid "_Cancel"
 msgstr "At_celt"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:222
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
 msgid "_Join"
 msgstr "_Pievienoties"
 
@@ -167,8 +157,9 @@ msgid "Message a User"
 msgstr "Rakstīt ziņojumu lietotājam"
 
 #: ../data/resources/main-window.ui.h:4
-msgid "_Leave"
-msgstr "_Pamest"
+#| msgid "Join a Room"
+msgid "Join room"
+msgstr "Pievienojies istabai"
 
 #: ../data/resources/menus.ui.h:2
 msgid "Preferences"
@@ -194,139 +185,154 @@ msgstr "_Nesenie"
 msgid "_Name"
 msgstr "_Vārds"
 
-#: ../src/application.js:397
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "Ielādē informāciju"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+msgid "Last Activity:"
+msgstr "Pēdējā aktivitāte:"
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "Ziņojums"
+
+#: ../src/application.js:351
 msgid "Good Bye"
 msgstr "Visu labu"
 
-#: ../src/application.js:454
+#: ../src/application.js:415
 msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
 #: ../src/appNotifications.js:104
 #, javascript-format
-#| msgid "Connections"
 msgid "Connecting to %s"
 msgstr "Savienojas ar %s"
 
-#: ../src/chatView.js:399
+#: ../src/chatView.js:410
 msgid "Open Link"
 msgstr "Atvērt saiti"
 
-#: ../src/chatView.js:406
+#: ../src/chatView.js:417
 msgid "Copy Link Address"
 msgstr "Kopēt saites adresi"
 
-#: ../src/chatView.js:538
+#: ../src/chatView.js:576
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s tagad saucas %s"
 
-#: ../src/chatView.js:543
+#: ../src/chatView.js:581
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s ir izgājis"
 
-#: ../src/chatView.js:551
+#: ../src/chatView.js:589
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Dalībnieku %s ņēma un izspēra %s"
 
-#: ../src/chatView.js:553
+#: ../src/chatView.js:591
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s ņēma un izspēra"
 
-#: ../src/chatView.js:559
+#: ../src/chatView.js:597
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Dalībnieku %s bloķēja %s"
 
-#: ../src/chatView.js:561
+#: ../src/chatView.js:599
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s tika bloķēts bloķēja"
 
-#: ../src/chatView.js:566
+#: ../src/chatView.js:604
 #, javascript-format
 msgid "%s joined"
 msgstr "%s pievienojās"
 
-#: ../src/chatView.js:570
+#: ../src/chatView.js:608
 #, javascript-format
 msgid "%s left"
 msgstr "%s aizgāja"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:609
+#: ../src/chatView.js:647
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:614
+#: ../src/chatView.js:652
 msgid "Yesterday, %H∶%M"
 msgstr "Vakar, %H.%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:619
+#: ../src/chatView.js:657
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:625
+#: ../src/chatView.js:663
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H.%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:631
+#: ../src/chatView.js:669
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B, %Y. %H.%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:636
+#: ../src/chatView.js:674
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:641
+#: ../src/chatView.js:679
 msgid "Yesterday, %l∶%M %p"
 msgstr "Vakar %H.%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:646
+#: ../src/chatView.js:684
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:652
+#: ../src/chatView.js:690
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %H.%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:658
+#: ../src/chatView.js:696
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B, %Y. %H.%M"
 
-#: ../src/connections.js:320
+#: ../src/connections.js:328
 msgid "Edit Connection"
 msgstr "Rediģēt savienojumu"
 
-#: ../src/connections.js:334
+#: ../src/connections.js:329
+msgid "New Connection"
+msgstr "Pievienot savienojumu"
+
+#: ../src/connections.js:342
 msgid "A_pply"
 msgstr "_Pielietot"
 
-#: ../src/connections.js:334
+#: ../src/connections.js:342
 msgid "Cr_eate"
 msgstr "Izv_eidot"
 
@@ -419,27 +425,41 @@ msgstr "%s lietotāji:"
 msgid "No topic set"
 msgstr "Temats nav iestatīts"
 
-#: ../src/joinDialog.js:221
+#: ../src/joinDialog.js:219
 msgid "Add Connection"
 msgstr "Pievienot savienojumu"
 
-#: ../src/joinDialog.js:223
+#: ../src/joinDialog.js:221
 msgid "_Save"
 msgstr "_Saglabāt"
 
-#: ../src/messageDialog.js:88
+#: ../src/mainWindow.js:260
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d lietotājs"
+msgstr[1] "%d lietotāji"
+msgstr[2] "%d lietotāju"
+
+#: ../src/messageDialog.js:92
 msgid "No recent users"
 msgstr "Nav neseno lietotāju"
 
-#: ../src/userList.js:185
-msgid "Loading details"
-msgstr "Ielādē informāciju"
+#: ../src/pasteManager.js:291
+#, javascript-format
+msgid "Uploading %s"
+msgstr "Augšupielādē “%s”"
 
-#: ../src/userList.js:193
-msgid "Message"
-msgstr "Ziņojums"
+#: ../src/roomList.js:22
+msgid "Leave chatroom"
+msgstr "Pamest istabu"
 
-#: ../src/userList.js:210
+#: ../src/roomList.js:23
+#| msgid "Edit Connection"
+msgid "End conversation"
+msgstr "Beigt sarunu"
+
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -447,7 +467,7 @@ msgstr[0] "Pirms %d sekundes"
 msgstr[1] "Pirms %d sekundēm"
 msgstr[2] "Pirms %d sekundēm"
 
-#: ../src/userList.js:215
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -455,7 +475,7 @@ msgstr[0] "Pirms %d minūtes"
 msgstr[1] "Pirms %d minūtēm"
 msgstr[2] "Pirms %d minūtēm"
 
-#: ../src/userList.js:220
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -463,7 +483,7 @@ msgstr[0] "Pirms %d stundas"
 msgstr[1] "Pirms %d stundām"
 msgstr[2] "Pirms %d stundām"
 
-#: ../src/userList.js:225
+#: ../src/userList.js:199
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -471,7 +491,7 @@ msgstr[0] "Pirms %d dienas"
 msgstr[1] "Pirms %d dienām"
 msgstr[2] "Pirms %d dienām"
 
-#: ../src/userList.js:230
+#: ../src/userList.js:204
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -479,7 +499,7 @@ msgstr[0] "Pirms %d nedēļas"
 msgstr[1] "Pirms %d nedēļām"
 msgstr[2] "Pirms %d nedēļām"
 
-#: ../src/userList.js:234
+#: ../src/userList.js:208
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -487,16 +507,7 @@ msgstr[0] "Pirms %d mēneša"
 msgstr[1] "Pirms %d mēnešiem"
 msgstr[2] "Pirms %d mēnešiem"
 
-#: ../src/userList.js:258
-msgid "Last Activity:"
-msgstr "Pēdējā aktivitāte:"
-
-#: ../src/userList.js:457
+#: ../src/userList.js:545
 msgid "All"
 msgstr "Visi"
 
-#~ msgid "_Close"
-#~ msgstr "_Aizvērt"
-
-#~ msgid "Message User"
-#~ msgstr "Rakstīt ziņojumu lietotājam"
