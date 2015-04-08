@@ -24,6 +24,8 @@ const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
 
 const MARGIN = 6;
 
+const NICKTAG_PREFIX = 'nick';
+
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
 const TextView = new Lang.Class({
@@ -188,12 +190,19 @@ const ChatView = new Lang.Class({
         context.restore();
 
         let linkColor = context.get_color(Gtk.StateFlags.LINK);
+        this._activeNickColor = context.get_color(Gtk.StateFlags.LINK);
+
+        let desaturatedNickColor = (this._activeNickColor.red +
+                                    this._activeNickColor.blue +
+                                    this._activeNickColor.green) / 3;
+        this._inactiveNickColor = new Gdk.RGBA ({ red: desaturatedNickColor,
+                                                  green: desaturatedNickColor,
+                                                  blue: desaturatedNickColor,
+                                                  alpha: 1.0 });
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
-          { name: 'nick',
-            foreground_rgba: linkColor },
           { name: 'status',
             foreground_rgba: dimColor },
           { name: 'timestamp',
@@ -211,6 +220,12 @@ const ChatView = new Lang.Class({
                 tag[prop] = tagProps[prop];
             }
         });
+
+        let offset = NICKTAG_PREFIX.length;
+        tagTable.foreach(Lang.bind(this, function(tag) {
+            if (tag._status)
+                this._setNickStatus(tag.name.substring(offset), tag._status);
+        }));
     },
 
     _createWidget: function() {
@@ -297,8 +312,17 @@ const ChatView = new Lang.Class({
                             messageType: pending[i].get_message_type(),
                             shouldHighlight: false };
             this._insertMessage(iter, message, state);
+            this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
+
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
+        }
+
+        if (this._channel != null) {
+            let members = this._channel.group_dup_members_contacts();
+            for (let j = 0; j < members.length; j++)
+                this._setNickStatus(members[j].get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
         }
     },
 
@@ -531,6 +555,19 @@ const ChatView = new Lang.Class({
         }
     },
 
+    _setNickStatus: function(nick, status) {
+        let nickTag = this._lookupTag('nick' + nick);
+        if (!nickTag)
+           return;
+
+        if (status == Tp.ConnectionPresenceType.AVAILABLE)
+           nickTag.foreground_rgba = this._activeNickColor;
+        else
+           nickTag.foreground_rgba = this._inactiveNickColor;
+
+        nickTag._status = status;
+    },
+
     _onChannelChanged: function() {
         if (this._channel == this._room.channel)
             return;
@@ -565,11 +602,17 @@ const ChatView = new Lang.Class({
                 this._insertTpMessage(this._room, message);
             }));
         this._checkMessages();
+
+        let members = this._channel.group_dup_members_contacts();
+        for (let j = 0; j < members.length; j++)
+            this._setNickStatus(members[j].get_alias(), Tp.ConnectionPresenceType.AVAILABLE);
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
         this._insertStatus(_("%s is now known as %s").format(oldMember.alias,
                                                              newMember.alias));
+        this._setNickStatus(oldMember.alias, Tp.ConnectionPresenceType.OFFLINE);
+        this._setNickStatus(newMember.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -577,6 +620,7 @@ const ChatView = new Lang.Class({
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text);
+        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _onMemberKicked: function(room, member, actor) {
@@ -585,6 +629,7 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been kicked").format(member.alias);
         this._insertStatus(message);
+        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _onMemberBanned: function(room, member, actor) {
@@ -593,10 +638,12 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been banned").format(member.alias)
         this._insertStatus(message);
+        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _onMemberJoined: function(room, member) {
         this._insertStatus(_("%s joined").format(member.alias));
+        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -604,6 +651,7 @@ const ChatView = new Lang.Class({
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text);
+        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _insertStatus: function(text) {
@@ -713,6 +761,7 @@ const ChatView = new Lang.Class({
 
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
+        this._setNickStatus(message.nick, Tp.ConnectionPresenceType.AVAILABLE);
 
         let [id, valid] = tpMessage.get_pending_message_id();
 
@@ -787,6 +836,13 @@ const ChatView = new Lang.Class({
         } else {
             if (state.lastNick != message.nick) {
                 let tags = [this._lookupTag('nick')];
+                let nickTag = this._lookupTag(NICKTAG_PREFIX + message.nick);
+
+                if (!nickTag) {
+                    nickTag = new Gtk.TextTag({ name: NICKTAG_PREFIX + message.nick });
+                    this._view.get_buffer().get_tag_table().add(nickTag);
+                }
+                tags.push(nickTag);
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
                 this._insertWithTags(iter, message.nick + '\t', tags);
