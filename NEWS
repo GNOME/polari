@@ -1,3 +1,16 @@
+3.16.1 - "Lars, Lars and Lars"
+==============================
+* Fixes messages not getting acknowledged due to confused toplevel state
+  [Giovanni; #746508]
+* Highlight matches in user list search [Bastian; #745743]
+* Make line indicator dependent on line spacing [Bastian; #738671]
+
+Contributors:
+  Giovanni Campagna, Bastian Ilso, Bastian Ilsø, Florian Müllner
+
+Translations:
+  Inaki Larranaga Murgoitio [eu], Bernd Homuth [de], Rūdolfs Mazurs [lv]
+
 3.16.0 - "Se você roubasse um beijo de alguém"
 ==============================================
 
