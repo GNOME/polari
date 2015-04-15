@@ -406,7 +406,8 @@ const Application = new Lang.Class({
                 'Carlos Soriano <carlos.soriano89@gmail.com>',
                 'Giovanni Campagna <gcampagna@src.gnome.org>',
                 'Carlos Garnacho <carlosg@gnome.org>',
-                'Jonas Danielsson <jonas.danielsson@threetimestwo.org>'
+                'Jonas Danielsson <jonas.danielsson@threetimestwo.org>',
+                'Bastian Ilsø <bastianilso@gnome.org>'
             ],
             artists: [
                 'Sam Hewitt',
