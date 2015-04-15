@@ -187,18 +187,13 @@ const ChatView = new Lang.Class({
         let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
         context.restore();
 
-        context.save();
-        context.add_class('view');
-        let selectedColor = context.get_background_color(Gtk.StateFlags.SELECTED);
-        context.restore();
-
         let linkColor = context.get_color(Gtk.StateFlags.LINK);
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            foreground_rgba: selectedColor },
+            foreground_rgba: linkColor },
           { name: 'status',
             foreground_rgba: dimColor },
           { name: 'timestamp',
