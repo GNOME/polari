@@ -55,14 +55,6 @@
     color: mix(@theme_selected_fg_color, @theme_base_color, 0.3);
 }
 
-.polari-room-list .list-row.inactive:backdrop {
-    color: mix(@theme_unfocused_fg_color, @theme_unfocused_base_color, 0.3);
-}
-
-.polari-room-list .list-row.inactive:selected:backdrop {
-    color: @theme_unfocused_selected_fg_color;
-}
-
 .polari-room-list .list-row .pending-messages-count {
     color: @theme_selected_fg_color;
     background-color: mix(@theme_selected_bg_color, @theme_selected_fg_color, 0.3);
