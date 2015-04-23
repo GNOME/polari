@@ -46,12 +46,22 @@
     padding: 2px 6px;
 }
 
-.polari-room-list .list-row.inactive {
+.polari-room-list .list-row.inactive,
+.polari-room-list .list-row.inactive:backdrop {
     color: mix(@theme_fg_color, @theme_base_color, 0.3);
 }
 
-.polari-room-list .list-row.inactive:selected {
+.polari-room-list .list-row.inactive:selected,
+.polari-room-list .list-row.inactive:selected:backdrop {
     color: mix(@theme_selected_fg_color, @theme_base_color, 0.3);
+}
+
+.polari-room-list .list-row:backdrop {
+    color: @theme_fg_color;
+}
+
+.polari-room-list .list-row:backdrop:selected {
+    color: @theme_selected_fg_color;
 }
 
 .polari-room-list .list-row .pending-messages-count {
