@@ -1,3 +1,13 @@
+
+3.17.1 - "The Texas Chainsaw Mascara"
+=====================================
+* Improve readability of room list in backdrop state [Jakub, Florian; #711854]
+* Distinguish offline nick names in chat log [Bastian; #710792]
+* Misc. bug fixes and cleanups [Bastian; #747942]
+
+Contributors:
+  Bastian Ilsø, Florian Müllner, Jakub Steiner
+
 3.16.1 - "Lars, Lars and Lars"
 ==============================
 * Fixes messages not getting acknowledged due to confused toplevel state
