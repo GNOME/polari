@@ -318,10 +318,18 @@ const ChatView = new Lang.Class({
                 this._view.buffer.insert(iter, '\n', -1);
         }
 
-        if (this._channel != null) {
+        if (!this._channel)
+            return;
+
+        if (this._room.type == Tp.HandleType.ROOM) {
             let members = this._channel.group_dup_members_contacts();
             for (let j = 0; j < members.length; j++)
                 this._setNickStatus(members[j].get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+        } else {
+                this._setNickStatus(this._channel.connection.self_contact.get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._setNickStatus(this._channel.target_contact.get_alias(),
                                     Tp.ConnectionPresenceType.AVAILABLE);
         }
     },
@@ -603,9 +611,17 @@ const ChatView = new Lang.Class({
             }));
         this._checkMessages();
 
-        let members = this._channel.group_dup_members_contacts();
-        for (let j = 0; j < members.length; j++)
-            this._setNickStatus(members[j].get_alias(), Tp.ConnectionPresenceType.AVAILABLE);
+        if (this._room.type == Tp.HandleType.ROOM) {
+            let members = this._channel.group_dup_members_contacts();
+            for (let j = 0; j < members.length; j++)
+                this._setNickStatus(members[j].get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+        } else {
+                this._setNickStatus(this._channel.connection.self_contact.get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._setNickStatus(this._channel.target_contact.get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+        }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
