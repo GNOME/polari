@@ -1,0 +1,490 @@
+# Tajik translation for polari.
+# Copyright (C) 2015 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-06-01 23:19+0000\n"
+"PO-Revision-Date: 2015-06-02 10:38+0500\n"
+"Language-Team: Tajik <tg@li.org>\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
+"X-Generator: Poedit 1.7.5\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr ""
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr ""
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "Намоиш додани пайвастҳо"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr ""
+
+#: ../data/org.gnome.Polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr ""
+
+#: ../data/org.gnome.Polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "Андозаи равзана"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "Андозаи равзана (бар ва баландӣ)."
+
+#: ../data/org.gnome.Polari.gschema.xml.h:5
+msgid "Window maximized"
+msgstr ""
+
+#: ../data/org.gnome.Polari.gschema.xml.h:6
+msgid "Window maximized state"
+msgstr ""
+
+#: ../data/resources/connection-details.ui.h:1
+msgid "_Address"
+msgstr "_Суроға"
+
+#: ../data/resources/connection-details.ui.h:2
+msgid "_Description"
+msgstr "_Тафсилот"
+
+#: ../data/resources/connection-details.ui.h:3
+msgid "_Nickname"
+msgstr "_Тахаллус"
+
+#: ../data/resources/connection-details.ui.h:4
+msgid "_Real Name"
+msgstr "_Номи ҳақиқӣ"
+
+#: ../data/resources/connection-details.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "интихобӣ"
+
+#: ../data/resources/connection-list-dialog.ui.h:1
+#: ../data/resources/menus.ui.h:1
+msgid "Connections"
+msgstr "Пайвастҳо"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Add"
+msgstr "Илова кардан"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Remove"
+msgstr "Тоза кардан"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
+msgid "Join Chat Room"
+msgstr ""
+
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
+msgid "_Cancel"
+msgstr "_Бекор кардан"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
+msgid "_Join"
+msgstr "_Пайвастан"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "_Илова кардани пайваст"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "C_onnection"
+msgstr "_Пайваст"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr ""
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "_Парол"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr ""
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr ""
+
+#: ../data/resources/main-window.ui.h:4
+msgid "Join room"
+msgstr ""
+
+#: ../data/resources/menus.ui.h:2
+msgid "Preferences"
+msgstr "Хусусиятҳо"
+
+#: ../data/resources/menus.ui.h:3
+msgid "About"
+msgstr "Дар бораи барнома"
+
+#: ../data/resources/menus.ui.h:4
+msgid "Quit"
+msgstr "Пӯшидан"
+
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "_Message"
+msgstr "_Паём"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Recent"
+msgstr "_Қаблӣ"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "_Ном"
+
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "Боркунии тафсилот"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+msgid "Last Activity:"
+msgstr "Фаъолияти охирин:"
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "Паём"
+
+#: ../src/application.js:351
+msgid "Good Bye"
+msgstr "Хайр"
+
+#: ../src/application.js:416
+msgid "translator-credits"
+msgstr "Victor Ibragimov, victor.ibragimov@gmail.com"
+
+#: ../src/appNotifications.js:104
+#, javascript-format
+msgid "Connecting to %s"
+msgstr "Дар ҳоли пайваст ба %s"
+
+#: ../src/chatView.js:429
+msgid "Open Link"
+msgstr "Кушодани пайванд"
+
+#: ../src/chatView.js:436
+msgid "Copy Link Address"
+msgstr "Нусха бардоштани суроғаи пайванд"
+
+#: ../src/chatView.js:612
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr ""
+
+#: ../src/chatView.js:619
+#, javascript-format
+msgid "%s has disconnected"
+msgstr ""
+
+#: ../src/chatView.js:628
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr ""
+
+#: ../src/chatView.js:630
+#, javascript-format
+msgid "%s has been kicked"
+msgstr ""
+
+#: ../src/chatView.js:637
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr ""
+
+#: ../src/chatView.js:639
+#, javascript-format
+msgid "%s has been banned"
+msgstr ""
+
+#: ../src/chatView.js:645
+#, javascript-format
+msgid "%s joined"
+msgstr ""
+
+#: ../src/chatView.js:650
+#, javascript-format
+msgid "%s left"
+msgstr ""
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:690
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:695
+msgid "Yesterday, %H∶%M"
+msgstr "Дирӯз, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:700
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:706
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:712
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:717
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:722
+msgid "Yesterday, %l∶%M %p"
+msgstr "Дирӯз, %l∶%M %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:727
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:733
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:739
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: ../src/connections.js:328
+msgid "Edit Connection"
+msgstr "Таҳрир кардани пайваст"
+
+#: ../src/connections.js:329
+msgid "New Connection"
+msgstr "Пайвасти нав"
+
+#: ../src/connections.js:342
+msgid "A_pply"
+msgstr "_Татбиқ кардан"
+
+#: ../src/connections.js:342
+msgid "Cr_eate"
+msgstr "_Эҷод кардан"
+
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:26
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+
+#: ../src/ircParser.js:27
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+
+#: ../src/ircParser.js:28
+msgid "/JOIN <channel> - joins <channel>"
+msgstr ""
+
+#: ../src/ircParser.js:29
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr ""
+
+#: ../src/ircParser.js:30
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr ""
+
+#: ../src/ircParser.js:31
+msgid "/NAMES - lists users on the current channel"
+msgstr ""
+
+#: ../src/ircParser.js:32
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr ""
+
+#: ../src/ircParser.js:33
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+
+#: ../src/ircParser.js:34
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+
+#: ../src/ircParser.js:35
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr ""
+
+#: ../src/ircParser.js:36
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr ""
+
+#: ../src/ircParser.js:37
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr ""
+
+#: ../src/ircParser.js:40
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+
+#: ../src/ircParser.js:61
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Истифода: %s"
+
+#: ../src/ircParser.js:96
+msgid "Known commands:"
+msgstr "Фармонҳои маълум:"
+
+#: ../src/ircParser.js:173
+#, javascript-format
+msgid "Users on %s:"
+msgstr ""
+
+#: ../src/ircParser.js:254
+msgid "No topic set"
+msgstr ""
+
+#: ../src/joinDialog.js:219
+msgid "Add Connection"
+msgstr ""
+
+#: ../src/joinDialog.js:221
+msgid "_Save"
+msgstr "_Захира кардан"
+
+#: ../src/mainWindow.js:260
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/messageDialog.js:92
+msgid "No recent users"
+msgstr ""
+
+#: ../src/pasteManager.js:291
+#, javascript-format
+msgid "Uploading %s"
+msgstr ""
+
+#: ../src/roomList.js:22
+msgid "Leave chatroom"
+msgstr ""
+
+#: ../src/roomList.js:23
+msgid "End conversation"
+msgstr ""
+
+#: ../src/userList.js:184
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d сония пеш"
+msgstr[1] "%d сония пеш"
+
+#: ../src/userList.js:189
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d дақиқа пеш"
+msgstr[1] "%d дақиқа пеш"
+
+#: ../src/userList.js:194
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d соат пеш"
+msgstr[1] "%d соат пеш"
+
+#: ../src/userList.js:199
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d рӯз пеш"
+msgstr[1] "%d рӯз пеш"
+
+#: ../src/userList.js:204
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d ҳафта пеш"
+msgstr[1] "%d ҳафта пеш"
+
+#: ../src/userList.js:208
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d моҳ пеш"
+msgstr[1] "%d моҳ пеш"
+
+#: ../src/userList.js:545
+msgid "All"
+msgstr "Ҳама"
