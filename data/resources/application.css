@@ -119,3 +119,15 @@
 .polari-user-list-button {
     padding: 0px 4px;
 }
+
+.polari-background {
+    opacity: 0.5;
+}
+
+.polari-background-title {
+    font-size: 250%;
+}
+
+.polari-background-description {
+    font-size: larger;
+}
