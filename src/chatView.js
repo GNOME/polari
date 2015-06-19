@@ -189,8 +189,10 @@ const ChatView = new Lang.Class({
         let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
         context.restore();
 
+        context.save();
         let linkColor = context.get_color(Gtk.StateFlags.LINK);
         this._activeNickColor = context.get_color(Gtk.StateFlags.LINK);
+        context.restore();
 
         let desaturatedNickColor = (this._activeNickColor.red +
                                     this._activeNickColor.blue +
