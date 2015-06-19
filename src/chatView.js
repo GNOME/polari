@@ -187,7 +187,9 @@ const ChatView = new Lang.Class({
         let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
         context.restore();
 
+        context.save();
         let linkColor = context.get_color(Gtk.StateFlags.LINK);
+        context.restore();
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
