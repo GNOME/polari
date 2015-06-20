@@ -82,6 +82,10 @@ const Application = new Lang.Class({
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
+          { name: 'room-options',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._roomOptionsCreateHook),
+            state: GLib.Variant.new('b', false) },
           { name: 'connections',
             activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
@@ -164,6 +168,23 @@ const Application = new Lang.Class({
                 action.enabled = this._chatroomManager.getActiveRoom() != null;
             }));
         action.enabled = this._chatroomManager.getActiveRoom() != null;
+    },
+
+    _updateRoomOptionsAction: function(action) {
+        let room = this._chatroomManager.getActiveRoom();
+        action.enabled = room && room.channel;
+    },
+
+    _roomOptionsCreateHook: function(action) {
+        this._chatroomManager.connect('active-state-changed', Lang.bind(this,
+            function() {
+                this._updateRoomOptionsAction(action);
+            }));
+        action.connect('notify::enabled', function() {
+            if (!action.enabled)
+                action.change_state(GLib.Variant.new('b', false));
+        });
+        this._updateRoomOptionsAction(action);
     },
 
     _updateUserListAction: function(action) {

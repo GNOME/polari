@@ -157,6 +157,28 @@
               </object>
             </child>
             <child>
+              <object class="GtkToggleButton" id="show_room_options_button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
+                <property name="action_name">app.room-options</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage" id="image2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">room-options-symbolic</property>
+                    <property name="icon_size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack_type">end</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkToggleButton" id="show_user_list_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>

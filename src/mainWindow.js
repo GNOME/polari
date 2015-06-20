@@ -12,6 +12,7 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const MessageDialog = imports.messageDialog;
 const RoomList = imports.roomList;
+const RoomOptions = imports.roomOptions;
 const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
@@ -78,6 +79,17 @@ const MainWindow = new Lang.Class({
             function() {
                 if (!this._userListPopover.widget.visible)
                     this._userListAction.change_state(GLib.Variant.new('b', false));
+            }));
+
+        this._roomOptionsAction = app.lookup_action('room-options');
+        app.connect('action-state-changed::room-options', Lang.bind(this,
+            function(group, actionName, value) {
+                this._roomOptionsPopover.widget.visible = value.get_boolean();
+            }));
+        this._roomOptionsPopover.widget.connect('notify::visible', Lang.bind(this,
+            function() {
+                if (!this._roomOptionsPopover.widget.visible)
+                    this._roomOptionsAction.change_state(GLib.Variant.new('b', false));
             }));
 
         this._gtkSettings.connect('notify::gtk-decoration-layout',
@@ -218,6 +230,7 @@ const MainWindow = new Lang.Class({
 
         this._joinMenuButton = builder.get_object('join_menu_button');
         this._showUserListButton = builder.get_object('show_user_list_button');
+        this._showRoomOptionsButton = builder.get_object('show_room_options_button');
         this._revealer = builder.get_object('room_list_revealer');
 
         let scroll = builder.get_object('room_list_scrollview');
@@ -227,6 +240,10 @@ const MainWindow = new Lang.Class({
         this._userListPopover = new UserList.UserListPopover();
         this._userListPopover.widget.relative_to = this._showUserListButton;
         this._userListPopover.widget.position = Gtk.PositionType.BOTTOM;
+
+        this._roomOptionsPopover = new RoomOptions.RoomOptionsPopover();
+        this._roomOptionsPopover.widget.relative_to = this._showRoomOptionsButton;
+        this._roomOptionsPopover.widget.position = Gtk.PositionType.BOTTOM;
     },
 
     showJoinRoomDialog: function() {
