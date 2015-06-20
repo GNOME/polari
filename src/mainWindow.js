@@ -84,11 +84,11 @@ const MainWindow = new Lang.Class({
         this._roomOptionsAction = app.lookup_action('room-options');
         app.connect('action-state-changed::room-options', Lang.bind(this,
             function(group, actionName, value) {
-                this._roomOptionsPopover.widget.visible = value.get_boolean();
+                this._roomOptionsPopover.visible = value.get_boolean();
             }));
-        this._roomOptionsPopover.widget.connect('notify::visible', Lang.bind(this,
+        this._roomOptionsPopover.connect('notify::visible', Lang.bind(this,
             function() {
-                if (!this._roomOptionsPopover.widget.visible)
+                if (!this._roomOptionsPopover.visible)
                     this._roomOptionsAction.change_state(GLib.Variant.new('b', false));
             }));
 
@@ -241,9 +241,9 @@ const MainWindow = new Lang.Class({
         this._userListPopover.widget.relative_to = this._showUserListButton;
         this._userListPopover.widget.position = Gtk.PositionType.BOTTOM;
 
-        this._roomOptionsPopover = new RoomOptions.RoomOptionsPopover();
-        this._roomOptionsPopover.widget.relative_to = this._showRoomOptionsButton;
-        this._roomOptionsPopover.widget.position = Gtk.PositionType.BOTTOM;
+        this._roomOptionsPopover = new RoomOptions.RoomOptions();
+        this._roomOptionsPopover.relative_to = this._showRoomOptionsButton;
+        this._roomOptionsPopover.position = Gtk.PositionType.BOTTOM;
     },
 
     showJoinRoomDialog: function() {

@@ -119,3 +119,11 @@
 .polari-user-list-button {
     padding: 0px 4px;
 }
+
+.topic-text-view:not(:selected) {
+    background-color: transparent;
+}
+
+.topic-scrolled-window {
+    border-color: transparent;
+}

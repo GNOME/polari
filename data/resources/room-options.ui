@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="Gjs_RoomOptions" parent="GtkPopover">
+    <property name="modal">True</property>
+    <property name="position">top</property>
+    <property name="border_width">12</property>
+    <child>
+      <object class="GtkBox" id="box">
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkRevealer" id="revealer">
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="roomLabelBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkImage" id="userIcon">
+                <property name="icon_name">polari-symbolic</property>
+                <property name="icon_size">1</property>
+                <property name="valign">baseline</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="roomLabel">
+                <property name="use_markup">True</property>
+                <property name="hexpand">True</property>
+                <property name="halign">start</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="groupOptionsBox">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="topicLabel">
+                <property name="label">Topic:</property>
+                <property name="hexpand">True</property>
+                <property name="halign">start</property>
+                <property name="margin_bottom">6</property>
+                <property name="margin_top">12</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox" id="topicBox">
+              <property name="spacing">0</property>
+              <property name="margin">0</property>
+              <style>
+                <class name="entry"/>
+              </style>
+              <child>
+                <object class="GtkScrolledWindow" id="scrolledWindow">
+                  <property name="height_request">70</property>
+                  <property name="hexpand">True</property>
+                  <property name="hscrollbar_policy">never</property>
+                  <property name="shadow_type">out</property> /*workaround for gtk scrolledWindow space allocation*/
+                  <style>
+                    <class name="topic-scrolled-window"/>
+                  </style>
+                  <child>
+                    <object class="GtkTextView" id="textView">
+                      <property name="editable">True</property>
+                      <property name="cursor_visible">True</property>
+                      <property name="visible">True</property>
+                      <property name="left_margin">8</property>
+                      <property name="right_margin">8</property>
+                      <property name="pixels_above_lines">3</property>
+                      <style>
+                        <class name="topic-text-view"/>
+                      </style>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="leaveButton">
+            <property name="label">Leave Room</property>
+            <property name="margin_top">12</property>
+            <property name="halign">end</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
