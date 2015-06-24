@@ -22,6 +22,7 @@ const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
 
 const INACTIVITY_THRESHOLD = 300; // a threshold in seconds used to control
                                   // the visibility of status messages
+const STATUS_NOISE_MAXIMUM = 4;
 
 const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
 const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
@@ -140,7 +141,7 @@ const ChatView = new Lang.Class({
         this._onStyleUpdated();
 
         this._room = room;
-        this._state = { lastNick: null, lastTimestamp: 0 };
+        this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
         this._active = false;
         this._toplevelFocus = false;
         this._joinTime = 0;
@@ -149,6 +150,7 @@ const ChatView = new Lang.Class({
         this._needsIndicator = true;
         this._pending = {};
         this._pendingLogs = [];
+        this._statusCount = { left: 0, joined: 0, total: 0 };
 
         let isRoom = room.type == Tp.HandleType.ROOM;
         let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
@@ -542,6 +544,12 @@ const ChatView = new Lang.Class({
                     return Gdk.EVENT_STOP;
                 }
                 break;
+            } else if (tags[i].name.startsWith('status-compressed')) {
+                if (isPress && button == Gdk.BUTTON_PRIMARY) {
+                    let statusTag = this._lookupTag('status' + tags[i].name.slice(17)); // 'status-compressed'.length
+                    statusTag.invisible = !statusTag.invisible;
+                }
+                return Gdk.EVENT_STOP;
             }
         }
         return Gdk.EVENT_PROPAGATE;
@@ -555,7 +563,7 @@ const ChatView = new Lang.Class({
         let tags = iter.get_tags();
         let hovering = false;
         for (let i = 0; i < tags.length && !hovering; i++)
-            if (tags[i]._url)
+            if (tags[i]._url || tags[i].name.startsWith('status-compressed'))
                 hovering = true;
 
         if (this._hoveringLink != hovering) {
@@ -656,7 +664,7 @@ const ChatView = new Lang.Class({
             { name: 'message-received',
               handler: Lang.bind(this, this._onMessageReceived) },
             { name: 'message-sent',
-              handler: Lang.bind(this, this._insertTpMessage) },
+              handler: Lang.bind(this, this._onMessageSent) },
             { name: 'pending-message-removed',
               handler: Lang.bind(this, this._pendingMessageRemoved) }
         ];
@@ -685,7 +693,7 @@ const ChatView = new Lang.Class({
 
     _onMemberRenamed: function(room, oldMember, newMember) {
         let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
-        this._insertStatus(text, oldMember.alias);
+        this._insertStatus(text, oldMember.alias, 'renamed');
         this._setNickStatus(oldMember.alias, Tp.ConnectionPresenceType.OFFLINE);
         this._setNickStatus(newMember.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
@@ -694,7 +702,7 @@ const ChatView = new Lang.Class({
         let text = _("%s has disconnected").format(member.alias);
         if (message)
             text += ' (%s)'.format(message);
-        this._insertStatus(text, member.alias);
+        this._insertStatus(text, member.alias, 'left');
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
@@ -703,7 +711,7 @@ const ChatView = new Lang.Class({
             actor ? _("%s has been kicked by %s").format(member.alias,
                                                          actor.alias)
                   : _("%s has been kicked").format(member.alias);
-        this._insertStatus(message, member.alias);
+        this._insertStatus(message, member.alias, 'left');
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
@@ -712,33 +720,49 @@ const ChatView = new Lang.Class({
             actor ? _("%s has been banned by %s").format(member.alias,
                                                          actor.alias)
                   : _("%s has been banned").format(member.alias)
-        this._insertStatus(message, member.alias);
+        this._insertStatus(message, member.alias, 'left');
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _onMemberJoined: function(room, member) {
         let text = _("%s joined").format(member.alias);
-        this._insertStatus(text, member.alias);
+        this._insertStatus(text, member.alias, 'joined');
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
     _onMemberLeft: function(room, member, message) {
         let text = _("%s left").format(member.alias);
+
         if (message)
             text += ' (%s)'.format(message);
-        this._insertStatus(text, member.alias);
+
+        this._insertStatus(text, member.alias, 'left');
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _onMessageReceived: function(room, tpMessage) {
         this._insertTpMessage(room, tpMessage);
-
+        this._resetStatusCompressed();
         let nick = tpMessage.sender.alias;
         let nickTag = this._lookupTag('nick' + nick);
         if (!nickTag)
            return;
         nickTag._lastActivity = GLib.get_monotonic_time();
+    },
 
+    _onMessageSent: function(room, tpMessage) {
+        this._insertTpMessage(room, tpMessage);
+        this._resetStatusCompressed();
+    },
+
+    _resetStatusCompressed: function() {
+        let markStart = this._view.buffer.get_mark('idle-status-start');
+        if (!markStart)
+            return;
+
+        this._view.buffer.delete_mark(markStart);
+        this._statusCount =  { left: 0, joined: 0, total: 0 };
+        this._state.lastStatusGroup++;
     },
 
     _shouldShowStatus: function(nick) {
@@ -751,18 +775,80 @@ const ChatView = new Lang.Class({
         return (time - nickTag._lastActivity) / (1000 * 1000) < INACTIVITY_THRESHOLD;
     },
 
-    _insertStatus: function(text, member) {
+    _updateStatusHeader: function() {
+        let buffer = this._view.buffer;
+        let headerMark = buffer.get_mark('idle-status-start');
+
+        let headerTagName = 'status-compressed' + this._state.lastStatusGroup;
+        let groupTagName = 'status' + this._state.lastStatusGroup;
+
+        let headerTag, groupTag;
+        if (!headerMark) {
+            // we are starting a new group
+            headerTag = new Gtk.TextTag({ name: headerTagName, invisible: true });
+            groupTag = new Gtk.TextTag({ name: groupTagName });
+            buffer.tag_table.add(headerTag);
+            buffer.tag_table.add(groupTag);
+
+            this._ensureNewLine();
+            headerMark = buffer.create_mark('idle-status-start', buffer.get_end_iter(), true);
+        } else {
+            headerTag = this._lookupTag(headerTagName);
+            groupTag = this._lookupTag(groupTagName);
+
+            let start = buffer.get_iter_at_mark(headerMark);
+            let end = start.copy();
+            end.forward_to_tag_toggle(headerTag);
+            buffer.delete(start, end);
+        }
+
+        // we passed the threshold, show the header and collapse the group
+        if (this._statusCount.total > STATUS_NOISE_MAXIMUM && headerTag.invisible) {
+            headerTag.invisible = false;
+            groupTag.invisible = true;
+        }
+
+        let stats = [];
+        if (this._statusCount.joined > 0)
+            stats.push(ngettext("%d user joined",
+                                "%d users joined", this._statusCount.joined).format(this._statusCount.joined));
+        if (this._statusCount.left > 0)
+            stats.push(ngettext("%d user left",
+                                "%d users left", this._statusCount.left).format(this._statusCount.left));
+        this._insertWithTags(buffer.get_iter_at_mark(headerMark),
+                             stats.join(", ") + ' (\u2026)',
+                             [this._lookupTag('status'), headerTag]);
+    },
+
+    _insertStatus: function(text, member, type) {
         let time = GLib.DateTime.new_now_utc().to_unix();
         if (time - this._joinTime < IGNORE_STATUS_TIME)
             return;
 
-        if (!this._shouldShowStatus(member))
+        let grouped = time - this._state.lastTimestamp > INACTIVITY_THRESHOLD;
+        if (!grouped && !this._shouldShowStatus(member))
             return;
 
         this._state.lastNick = null;
+
+        let tags = [this._lookupTag('status')];
+        let groupTag = null;
+        if (grouped) {
+            if (this._statusCount.hasOwnProperty(type)) {
+                this._statusCount[type]++;
+                this._statusCount.total++;
+            }
+            this._updateStatusHeader();
+
+            groupTag = this._lookupTag('status' + this._state.lastStatusGroup);
+            tags.push(groupTag);
+        } else {
+            this._resetStatusCompressed();
+        }
+
         this._ensureNewLine();
         let iter = this._view.buffer.get_end_iter();
-        this._insertWithTagName(iter, text, 'status');
+        this._insertWithTags(iter, text, tags);
     },
 
     _formatTimestamp: function(timestamp) {
@@ -986,8 +1072,15 @@ const ChatView = new Lang.Class({
     _ensureNewLine: function() {
         let buffer = this._view.get_buffer();
         let iter = buffer.get_end_iter();
+        let tags = [];
+        let groupTag = this._lookupTag('status' + this._state.lastStatusGroup);
+        if (groupTag && iter.ends_tag(groupTag))
+            tags.push(groupTag);
+        let headerTag = this._lookupTag('status-compressed' + this._state.lastStatusGroup);
+        if (headerTag && iter.ends_tag(headerTag))
+            tags.push(headerTag);
         if (iter.get_line_offset() != 0)
-            buffer.insert(iter, '\n', -1);
+            this._insertWithTags(iter, '\n', tags);
     },
 
     _getLineIters: function(iter) {
