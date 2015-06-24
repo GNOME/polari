@@ -20,6 +20,9 @@ const SCROLL_TIMEOUT = 100; // ms
 const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
                                 // insert a timestamp
 
+const INACTIVITY_THRESHOLD = 300; // a threshold in seconds used to control
+                                  // the visibility of status messages
+
 const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
 const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
 
@@ -651,7 +654,7 @@ const ChatView = new Lang.Class({
 
         let channelSignals = [
             { name: 'message-received',
-              handler: Lang.bind(this, this._insertTpMessage) },
+              handler: Lang.bind(this, this._onMessageReceived) },
             { name: 'message-sent',
               handler: Lang.bind(this, this._insertTpMessage) },
             { name: 'pending-message-removed',
@@ -681,8 +684,8 @@ const ChatView = new Lang.Class({
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
-        this._insertStatus(_("%s is now known as %s").format(oldMember.alias,
-                                                             newMember.alias));
+        let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
+        this._insertStatus(text, oldMember.alias);
         this._setNickStatus(oldMember.alias, Tp.ConnectionPresenceType.OFFLINE);
         this._setNickStatus(newMember.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
@@ -691,7 +694,7 @@ const ChatView = new Lang.Class({
         let text = _("%s has disconnected").format(member.alias);
         if (message)
             text += ' (%s)'.format(message);
-        this._insertStatus(text);
+        this._insertStatus(text, member.alias);
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
@@ -700,7 +703,7 @@ const ChatView = new Lang.Class({
             actor ? _("%s has been kicked by %s").format(member.alias,
                                                          actor.alias)
                   : _("%s has been kicked").format(member.alias);
-        this._insertStatus(message);
+        this._insertStatus(message, member.alias);
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
@@ -709,12 +712,13 @@ const ChatView = new Lang.Class({
             actor ? _("%s has been banned by %s").format(member.alias,
                                                          actor.alias)
                   : _("%s has been banned").format(member.alias)
-        this._insertStatus(message);
+        this._insertStatus(message, member.alias);
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
     _onMemberJoined: function(room, member) {
-        this._insertStatus(_("%s joined").format(member.alias));
+        let text = _("%s joined").format(member.alias);
+        this._insertStatus(text, member.alias);
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
@@ -722,14 +726,39 @@ const ChatView = new Lang.Class({
         let text = _("%s left").format(member.alias);
         if (message)
             text += ' (%s)'.format(message);
-        this._insertStatus(text);
+        this._insertStatus(text, member.alias);
         this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
     },
 
-    _insertStatus: function(text) {
+    _onMessageReceived: function(room, tpMessage) {
+        this._insertTpMessage(room, tpMessage);
+
+        let nick = tpMessage.sender.alias;
+        let nickTag = this._lookupTag('nick' + nick);
+        if (!nickTag)
+           return;
+        nickTag._lastActivity = GLib.get_monotonic_time();
+
+    },
+
+    _shouldShowStatus: function(nick) {
+        let nickTag = this._lookupTag('nick' + nick);
+
+        if (!nickTag)
+            return false;
+
+        let time = GLib.get_monotonic_time();
+        return (time - nickTag._lastActivity) / (1000 * 1000) < INACTIVITY_THRESHOLD;
+    },
+
+    _insertStatus: function(text, member) {
         let time = GLib.DateTime.new_now_utc().to_unix();
         if (time - this._joinTime < IGNORE_STATUS_TIME)
             return;
+
+        if (!this._shouldShowStatus(member))
+            return;
+
         this._state.lastNick = null;
         this._ensureNewLine();
         let iter = this._view.buffer.get_end_iter();
