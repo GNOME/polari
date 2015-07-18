@@ -40,8 +40,8 @@ const ConnectionsDialog = new Lang.Class({
         this.widget.transient_for = app.get_active_window();
 
         this._listBox = builder.get_object('accounts_list');
-        this._stack = builder.get_object('stack');
-
+        this._listBox.connect('add', Lang.bind(this, this._syncVisibility));
+        this._listBox.connect('remove', Lang.bind(this, this._syncVisibility));
         this._listBox.set_sort_func(function(row1, row2) {
             return row1._account.display_name < row2._account.display_name ? -1 : 1;
         });
@@ -50,9 +50,11 @@ const ConnectionsDialog = new Lang.Class({
         let context = toolbar.get_style_context();
         context.set_junction_sides(Gtk.JunctionSides.TOP);
 
-        let scrolledwindow = builder.get_object('scrolledwindow');
-        context = scrolledwindow.get_style_context();
+        this._scrolledWindow = builder.get_object('scrolledwindow');
+        context = this._scrolledWindow.get_style_context();
         context.set_junction_sides(Gtk.JunctionSides.BOTTOM);
+
+        this._emptyState = builder.get_object('empty_state');
 
         let addButton = builder.get_object('add_button');
         addButton.connect('clicked', Lang.bind(this, this._addConnection));
@@ -128,7 +130,7 @@ const ConnectionsDialog = new Lang.Class({
         for (let i = 0; i < rows.length; i++)
             if (rows[i]._account == account) {
                 rows[i].destroy();
-                return;
+                break;
             }
     },
 
@@ -157,6 +159,12 @@ const ConnectionsDialog = new Lang.Class({
             function(w, response) {
                 dialog.widget.destroy();
             });
+    },
+
+    _syncVisibility: function() {
+      let isEmpty = this._listBox.get_children() == 0;
+      this._emptyState.visible = isEmpty;
+      this._scrolledWindow.visible = !isEmpty;
     },
 
     _onDestroy: function() {
