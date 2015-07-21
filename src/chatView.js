@@ -61,7 +61,6 @@ const TextView = new Lang.Class({
         let location = this.get_iter_location(iter);
         let [, y] = this.buffer_to_window_coords(Gtk.TextWindowType.TEXT,
                                                  location.x, location.y);
-        let border = this.border_width;
 
         let lineSpace = (this.get_pixels_above_lines(this) +
                          this.get_pixels_below_lines(this)) / 2;
@@ -75,8 +74,8 @@ const TextView = new Lang.Class({
             return;
 
         Gdk.cairo_set_source_rgba(cr, this._dimColor);
-        cr.rectangle(border, y - lineSpace,
-                     this.get_allocated_width() - 2 * border, 1);
+        cr.rectangle(MARGIN, y - lineSpace,
+                     this.get_allocated_width() - 2 * MARGIN, 1);
         cr.fill();
         cr.$dispose();
     },
