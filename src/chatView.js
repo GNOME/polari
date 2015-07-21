@@ -3,6 +3,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
+const PangoCairo = imports.gi.PangoCairo;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
@@ -36,6 +37,7 @@ const TextView = new Lang.Class({
         this.parent(params);
 
         this.buffer.connect('mark-set', Lang.bind(this, this._onMarkSet));
+        this.connect('screen-changed', Lang.bind(this, this._updateLayout));
     },
 
     vfunc_get_preferred_width: function() {
@@ -66,18 +68,45 @@ const TextView = new Lang.Class({
         let [, y] = this.buffer_to_window_coords(Gtk.TextWindowType.TEXT,
                                                  location.x, location.y);
 
-        let lineSpace = (this.get_pixels_above_lines(this) +
-                         this.get_pixels_below_lines(this)) / 2;
+        let tags = iter.get_tags();
+        let pixelsAbove = tags.reduce(function(prev, current) {
+                return Math.max(prev, current.pixels_above_lines);
+            }, this.get_pixels_above_lines());
+        let pixelsBelow = tags.reduce(function(prev, current) {
+                return Math.max(prev, current.pixels_below_lines);
+            }, this.get_pixels_below_lines());
+
+        let lineSpace = Math.floor((pixelsAbove + pixelsBelow) / 2);
+        y = y - lineSpace + 0.5;
+
+        let width = this.get_allocated_width() - 2 * MARGIN;
+
+        let [, extents] = this._layout.get_pixel_extents();
+        let layoutWidth = extents.width + 0.5;
+        let layoutX = extents.x + Math.floor((width - extents.width) / 2) + 0.5;
+        let layoutHeight = extents.height;
+        let baseline = Math.floor(this._layout.get_baseline() / Pango.SCALE);
+        let layoutY = y - baseline + Math.floor((layoutHeight - baseline) / 2) + 0.5;
 
         let [hasClip, clip] = Gdk.cairo_get_clip_rectangle(cr);
         if (hasClip &&
-            clip.y <= y - lineSpace &&
-            clip.y + clip.height >= y - lineSpace + 1) {
+            clip.y <= layoutY + layoutHeight &&
+            clip.y + clip.height >= layoutY) {
 
             Gdk.cairo_set_source_rgba(cr, this._dimColor);
-            cr.rectangle(MARGIN, y - lineSpace,
-                         this.get_allocated_width() - 2 * MARGIN, 1);
-            cr.fill();
+
+            cr.moveTo(layoutX, layoutY);
+            PangoCairo.show_layout(cr, this._layout);
+
+            let [, color] = this.get_style_context().lookup_color('borders');
+            Gdk.cairo_set_source_rgba(cr, color);
+
+            cr.setLineWidth(1);
+            cr.moveTo(MARGIN, y);
+            cr.lineTo(layoutX - MARGIN, y);
+            cr.moveTo(layoutX + layoutWidth + MARGIN, y);
+            cr.lineTo(MARGIN + width, y);
+            cr.stroke();
         }
         cr.$dispose();
 
@@ -87,6 +116,11 @@ const TextView = new Lang.Class({
     _onMarkSet: function(buffer, iter, mark) {
         if (mark.name == 'indicator-line')
             this.queue_draw();
+    },
+
+    _updateLayout: function() {
+        this._layout = this.create_pango_layout(null);
+        this._layout.set_markup('<small><b>%s</b></small>'.format(_("New Messages")), -1);
     }
 });
 
@@ -184,6 +218,8 @@ const ChatView = new Lang.Class({
             left_margin: MARGIN },
           { name: 'url',
             underline: Pango.Underline.SINGLE },
+          { name: 'indicator-line',
+            pixels_above_lines: 24 },
           { name: 'loading',
             justification: Gtk.Justification.CENTER }
         ];
@@ -827,10 +863,18 @@ const ChatView = new Lang.Class({
                 iter.set_line_offset(0);
 
                 let mark = buffer.get_mark('indicator-line');
-                if (!mark)
-                    buffer.create_mark('indicator-line', iter, true);
-                else
+                if (mark) {
+                    let [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
+                    buffer.remove_tag(this._lookupTag('indicator-line'), start, end);
+
                     buffer.move_mark(mark, iter);
+                } else {
+                    buffer.create_mark('indicator-line', iter, true);
+                }
+
+                let [start, end] = this._getLineIters(iter);
+                buffer.apply_tag(this._lookupTag('indicator-line'), start, end);
+
                 this._needsIndicator = false;
             }
         }
@@ -908,6 +952,17 @@ const ChatView = new Lang.Class({
         let iter = buffer.get_end_iter();
         if (iter.get_line_offset() != 0)
             buffer.insert(iter, '\n', -1);
+    },
+
+    _getLineIters: function(iter) {
+        let start = iter.copy();
+        start.backward_line();
+        start.forward_to_line_end();
+
+        let end = iter.copy();
+        end.forward_to_line_end();
+
+        return [start, end];
     },
 
     _lookupTag: function(name) {
