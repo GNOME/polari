@@ -67,6 +67,15 @@ const TextView = new Lang.Class({
 
         let lineSpace = (this.get_pixels_above_lines(this) +
                          this.get_pixels_below_lines(this)) / 2;
+
+        let [hasClip, clip] = Gdk.cairo_get_clip_rectangle(cr);
+        if (!hasClip)
+            return;
+
+        if (clip.y > y - lineSpace + 1 ||
+            clip.y + clip.height < y - lineSpace)
+            return;
+
         Gdk.cairo_set_source_rgba(cr, this._dimColor);
         cr.rectangle(border, y - lineSpace,
                      this.get_allocated_width() - 2 * border, 1);
