@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-24 13:00+0200\n"
-"PO-Revision-Date: 2015-02-24 13:03+0200\n"
+"POT-Creation-Date: 2015-07-23 20:43+0300\n"
+"PO-Revision-Date: 2015-07-23 20:44+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -20,13 +20,12 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:412
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "לקוח IRC לסביבת GNOME"
 
@@ -75,18 +74,10 @@ msgid "Window size (width and height)."
 msgstr "Window size (width and height)."
 
 #: ../data/org.gnome.Polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "Window position"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "Window position (x and y)."
-
-#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "Window maximized"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Window maximized state"
 
@@ -117,10 +108,14 @@ msgid "Connections"
 msgstr "חיבורים"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "יש להשתמש בכפתור ה־+ להוספת התחברות חדשה."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "הוספה"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "הסרה"
 
@@ -129,7 +124,7 @@ msgid "Join Chat Room"
 msgstr "הצטרפות לחדר צ׳אט"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:337
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:348
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -202,11 +197,11 @@ msgstr "פעילות אחרונה:"
 msgid "Message"
 msgstr "שליחת הודעה למשתמש"
 
-#: ../src/application.js:349
+#: ../src/application.js:351
 msgid "Good Bye"
 msgstr "להתראות"
 
-#: ../src/application.js:411
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
@@ -217,64 +212,64 @@ msgstr ""
 msgid "Connecting to %s"
 msgstr "בהתחברות ל־%s"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:447
 msgid "Open Link"
 msgstr "פתיחת קישור"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:454
 msgid "Copy Link Address"
 msgstr "העתקת כתובת הקישור"
 
-#: ../src/chatView.js:574
+#: ../src/chatView.js:638
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "הכינוי של %s הוחלף ל־%s"
 
-#: ../src/chatView.js:579
+#: ../src/chatView.js:645
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "‏%s התנתק"
 
-#: ../src/chatView.js:587
+#: ../src/chatView.js:654
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "‏%s נבעט ע״י %s"
 
-#: ../src/chatView.js:589
+#: ../src/chatView.js:656
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "‏%s נבעט"
 
-#: ../src/chatView.js:595
+#: ../src/chatView.js:663
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "‏%s נחסם על ידי %s"
 
-#: ../src/chatView.js:597
+#: ../src/chatView.js:665
 #, javascript-format
 msgid "%s has been banned"
 msgstr "‏%s נחסם"
 
-#: ../src/chatView.js:602
+#: ../src/chatView.js:671
 #, javascript-format
 msgid "%s joined"
 msgstr "‏%s הצטרף"
 
-#: ../src/chatView.js:606
+#: ../src/chatView.js:676
 #, javascript-format
 msgid "%s left"
 msgstr "‏%s עזב"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:645
+#: ../src/chatView.js:716
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:650
+#: ../src/chatView.js:721
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "אתמול ב־%H\\:%M‎"
@@ -282,7 +277,7 @@ msgstr "אתמול ב־%H\\:%M‎"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:655
+#: ../src/chatView.js:726
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M‎"
@@ -291,7 +286,7 @@ msgstr "%A, %H∶%M‎"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:661
+#: ../src/chatView.js:732
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d ב%B, %H:%M‎"
@@ -300,21 +295,21 @@ msgstr "%d ב%B, %H:%M‎"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:667
+#: ../src/chatView.js:738
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d ב%B %Y, %H:%M‎"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:672
+#: ../src/chatView.js:743
 msgid "%l∶%M %p"
 msgstr "%l:%M %p‎"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:677
+#: ../src/chatView.js:748
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "אתמול ב־%l:%M %p"
@@ -322,7 +317,7 @@ msgstr "אתמול ב־%l:%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:682
+#: ../src/chatView.js:753
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l:%M %p‎"
@@ -331,7 +326,7 @@ msgstr "%A, %l:%M %p‎"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:688
+#: ../src/chatView.js:759
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d ב%B, %l:%M‎ %p"
@@ -340,24 +335,24 @@ msgstr "%d ב%B, %l:%M‎ %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:694
+#: ../src/chatView.js:765
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d ב%B %Y, %l:%M‎ %p"
 
-#: ../src/connections.js:325
+#: ../src/connections.js:336
 msgid "Edit Connection"
 msgstr "עריכת החיבור"
 
-#: ../src/connections.js:326
+#: ../src/connections.js:337
 msgid "New Connection"
 msgstr "חיבור חדש"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:350
 msgid "A_pply"
 msgstr "ה_חלה"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:350
 msgid "Cr_eate"
 msgstr "י_צירה"
 
@@ -452,10 +447,13 @@ msgstr "הוספת חיבור"
 msgid "_Save"
 msgstr "_שמירה"
 
-#: ../src/mainWindow.js:304
-#, javascript-format
-msgid "%d users"
-msgstr "%d משתמשים"
+#: ../src/mainWindow.js:260
+#, c-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d משתמשים"
+msgstr[1] "%d משתמשים"
+msgstr[2] "%d משתמשים"
 
 #: ../src/messageDialog.js:92
 msgid "No recent users"
@@ -522,9 +520,15 @@ msgstr[0] "לפני חודש"
 msgstr[1] "לפני %d חודשים"
 msgstr[2] "לפני חודשיים"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:545
 msgid "All"
 msgstr "הכול"
+
+#~ msgid "Window position"
+#~ msgstr "Window position"
+
+#~ msgid "Window position (x and y)."
+#~ msgstr "Window position (x and y)."
 
 #~ msgid "_Leave"
 #~ msgstr "_עזיבה"
