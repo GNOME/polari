@@ -1,18 +1,19 @@
 # polari's Portuguese translation.
 # Copyright © 2014 polari
 # This file is distributed under the same license as the polari package.
-# 
-# Duarte Loreto <happyguy_pt@hotmail.com>, 2014., 2015.
+#
+# Duarte Loreto <happyguy_pt@hotmail.com>, 2014.
+# Pedro Albuquerque <palbuquerque73@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.12\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-06 03:00+0000\n"
-"PO-Revision-Date: 2015-06-16 18:31+0100\n"
-"Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
+"POT-Creation-Date: 2015-07-23 23:23+0000\n"
+"PO-Revision-Date: 2015-07-24 08:26+0100\n"
+"Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
+"Language-Team: Português <palbuquerque73@gmail.com>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:416
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de Internet Relay Chat (IRC) para o GNOME"
 
@@ -112,10 +113,14 @@ msgid "Connections"
 msgstr "Ligações"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "Use o botão + para adicionar uma nova ligação."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Adicionar"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "Remover"
 
@@ -124,7 +129,7 @@ msgid "Join Chat Room"
 msgstr "Entrar em sala de chat"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:348
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -158,7 +163,6 @@ msgid "Message a User"
 msgstr "Enviar mensagem a utilizador"
 
 #: ../data/resources/main-window.ui.h:4
-#| msgid "Join a Room"
 msgid "Join room"
 msgstr "Entrar numa sala"
 
@@ -202,7 +206,7 @@ msgstr "Mensagem"
 msgid "Good Bye"
 msgstr "Adeus"
 
-#: ../src/application.js:415
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr ""
 "Duarte Loreto <happyguy_pt@hotmail.com>\n"
@@ -210,133 +214,132 @@ msgstr ""
 
 #: ../src/appNotifications.js:104
 #, javascript-format
-#| msgid "Connections"
 msgid "Connecting to %s"
 msgstr "A ligar a %s"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:447
 msgid "Open Link"
 msgstr "Abrir ligação"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:454
 msgid "Copy Link Address"
 msgstr "Copiar endereço da ligação"
 
-#: ../src/chatView.js:574
+#: ../src/chatView.js:638
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é agora conhecido como %s"
 
-#: ../src/chatView.js:579
+#: ../src/chatView.js:645
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s terminou a sessão"
 
-#: ../src/chatView.js:587
+#: ../src/chatView.js:654
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi expulso por %s"
 
-#: ../src/chatView.js:589
+#: ../src/chatView.js:656
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi expulso"
 
-#: ../src/chatView.js:595
+#: ../src/chatView.js:663
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi banido por %s"
 
-#: ../src/chatView.js:597
+#: ../src/chatView.js:665
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi banido"
 
-#: ../src/chatView.js:602
+#: ../src/chatView.js:671
 #, javascript-format
 msgid "%s joined"
 msgstr "%s entrou"
 
-#: ../src/chatView.js:606
+#: ../src/chatView.js:676
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:645
+#: ../src/chatView.js:716
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:650
+#: ../src/chatView.js:721
 msgid "Yesterday, %H∶%M"
 msgstr "Ontem, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:655
+#: ../src/chatView.js:726
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:661
+#: ../src/chatView.js:732
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:667
+#: ../src/chatView.js:738
 msgid "%B %d %Y, %H∶%M"
 msgstr "%B %d %Y, %H∶%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:672
+#: ../src/chatView.js:743
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:677
+#: ../src/chatView.js:748
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ontem, %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:682
+#: ../src/chatView.js:753
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:688
+#: ../src/chatView.js:759
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:694
+#: ../src/chatView.js:765
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
 
-#: ../src/connections.js:328
+#: ../src/connections.js:336
 msgid "Edit Connection"
 msgstr "Editar ligação"
 
-#: ../src/connections.js:329
+#: ../src/connections.js:337
 msgid "New Connection"
 msgstr "Nova ligação"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:350
 msgid "A_pply"
 msgstr "A_Plicar"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:350
 msgid "Cr_eate"
 msgstr "Cr_Iar"
 
@@ -456,7 +459,6 @@ msgid "Leave chatroom"
 msgstr "Sair da sala"
 
 #: ../src/roomList.js:23
-#| msgid "Edit Connection"
 msgid "End conversation"
 msgstr "Terminar conversa"
 
@@ -502,7 +504,7 @@ msgid_plural "%d months ago"
 msgstr[0] "há %d mês atrás"
 msgstr[1] "há %d meses atrás"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:545
 msgid "All"
 msgstr "Tudo"
 
