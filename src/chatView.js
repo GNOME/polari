@@ -211,6 +211,8 @@ const ChatView = new Lang.Class({
                                                   green: desaturatedNickColor,
                                                   blue: desaturatedNickColor,
                                                   alpha: 1.0 });
+        if (this._activeNickColor.equal(this._inactiveNickColor))
+            this._inactiveNickColor.alpha = 0.5;
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
