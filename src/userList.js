@@ -52,6 +52,9 @@ const UserListPopover = new Lang.Class({
         this._revealer = new Gtk.Revealer();
         this._box.add(this._revealer);
 
+        this._userListBin = new Gtk.Frame({ shadow_type: Gtk.ShadowType.NONE });
+        this._box.add(this._userListBin);
+
         this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed',
                             Lang.bind(this, this._updateFilter));
@@ -86,7 +89,7 @@ const UserListPopover = new Lang.Class({
             return;
 
         this._userList = new UserList(room);
-        this._box.add(this._userList.widget);
+        this._userListBin.add(this._userList.widget);
 
         this._userList.widget.vadjustment.connect('changed',
                                                   Lang.bind(this, this._updateEntryVisibility));
