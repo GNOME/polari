@@ -56,8 +56,10 @@ const TextView = new Lang.Class({
         this.parent(cr);
 
         let mark = this.buffer.get_mark('indicator-line');
-        if (!mark)
+        if (!mark) {
+            cr.$dispose();
             return Gdk.EVENT_PROPAGATE;
+        }
 
         let iter = this.buffer.get_iter_at_mark(mark);
         let location = this.get_iter_location(iter);
@@ -68,17 +70,15 @@ const TextView = new Lang.Class({
                          this.get_pixels_below_lines(this)) / 2;
 
         let [hasClip, clip] = Gdk.cairo_get_clip_rectangle(cr);
-        if (!hasClip)
-            return Gdk.EVENT_PROPAGATE;
+        if (hasClip &&
+            clip.y <= y - lineSpace &&
+            clip.y + clip.height >= y - lineSpace + 1) {
 
-        if (clip.y > y - lineSpace + 1 ||
-            clip.y + clip.height < y - lineSpace)
-            return Gdk.EVENT_PROPAGATE;
-
-        Gdk.cairo_set_source_rgba(cr, this._dimColor);
-        cr.rectangle(MARGIN, y - lineSpace,
-                     this.get_allocated_width() - 2 * MARGIN, 1);
-        cr.fill();
+            Gdk.cairo_set_source_rgba(cr, this._dimColor);
+            cr.rectangle(MARGIN, y - lineSpace,
+                         this.get_allocated_width() - 2 * MARGIN, 1);
+            cr.fill();
+        }
         cr.$dispose();
 
         return Gdk.EVENT_PROPAGATE;
