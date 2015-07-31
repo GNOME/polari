@@ -220,6 +220,12 @@ const MainWindow = new Lang.Class({
         this._showUserListButton = builder.get_object('show_user_list_button');
         this._revealer = builder.get_object('room_list_revealer');
 
+        // Make sure user-list button is at least as wide as icon buttons
+        this._joinMenuButton.connect('size-allocate', Lang.bind(this,
+            function(w, rect) {
+                this._showUserListButton.width_request = rect.width;
+            }));
+
         let scroll = builder.get_object('room_list_scrollview');
         this._roomList = new RoomList.RoomList();
         scroll.add(this._roomList.widget);

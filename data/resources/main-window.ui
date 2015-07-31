@@ -162,8 +162,6 @@
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
                 <property name="action_name">app.user-list</property>
-                <!-- be at least as wide as icon buttons - 16px + padding -->
-                <property name="width-request">32</property>
                 <style>
                   <class name="polari-user-list-button"/>
                   <class name="text-button"/>
