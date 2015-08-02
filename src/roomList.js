@@ -138,6 +138,154 @@ const RoomRow = new Lang.Class({
     }
 });
 
+const RoomListHeader = new Lang.Class({
+    Name: 'RoomListHeader',
+
+    _init: function(account) {
+        this._account = account;
+
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
+
+        this._app = Gio.Application.get_default();
+
+        this.widget = new Gtk.Button({ sensitive: false, margin_bottom: 4,
+                                       hexpand: true, focus_on_click: false })
+        this.widget.get_style_context().remove_class('button');
+        this.widget.get_style_context().add_class('room-list-header');
+        this.widget.connect('clicked', Lang.bind(this, function () {
+            this._popover.show_all();
+        }));
+
+        let headerBox = new Gtk.Box({ spacing: 2, hexpand: true,
+                                      orientation: Gtk.Orientation.HORIZONTAL });
+        this.widget.add(headerBox);
+        let label = new Gtk.Label({ xalign: 0, hexpand: true, max_width_chars: 15,
+                                    ellipsize: Pango.EllipsizeMode.END });
+        this.widget.get_style_context().remove_class('button');
+        account.bind_property('display-name', label, 'label',
+                              GObject.BindingFlags.SYNC_CREATE);
+        headerBox.add(label);
+
+        this._iconStack = new Gtk.Stack({ vhomogeneous: true, valign: Gtk.Align.CENTER,
+                                          margin_end: 4 });
+        this._iconStack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+
+        let errorIcon = new Gtk.Image({ icon_name: 'dialog-error-symbolic',
+                                        halign: Gtk.Align.END });
+
+        this._popover = new Gtk.Popover({ modal: true,
+                                          position: Gtk.PositionType.BOTTOM });
+        let popoverBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
+                                       margin: 12, spacing: 3 });
+        this._popoverLabel = new Gtk.Label({ wrap: true, max_width_chars: 30,
+                                             halign: Gtk.Align.START, xalign: 0 });
+        this._popoverTitle = new Gtk.Label({ wrap: true, max_width_chars: 30,
+                                             use_markup: true, xalign: 0,
+                                             halign: Gtk.Align.START });
+        this._popoverTitle.label = '<b>' + _("Connection Error") + '</b>';
+        this._popoverButton = new Gtk.Button({ valign: Gtk.Align.CENTER, hexpand: true,
+                                               margin_top: 15, halign: Gtk.Align.END });
+        this._popoverButton.connect('clicked', Lang.bind(this,
+            function() {
+                this._popover.hide();
+            }));
+        popoverBox.add(this._popoverTitle);
+        popoverBox.add(this._popoverLabel);
+        popoverBox.add(this._popoverButton);
+        this._popover.add(popoverBox);
+        this._popover.relative_to = errorIcon;
+
+        this._iconStack.add_named(errorIcon, 'error');
+
+        let connecting = new Gtk.Spinner({ active: true, halign: Gtk.Align.START });
+        this._iconStack.add_named(connecting, 'connecting');
+
+        this._iconStack.add_named(new Gtk.Box(), 'none');
+
+        this._account.connect('notify::connection-status', Lang.bind(this, this._updateConnectionStatusIcon));
+        headerBox.add(this._iconStack);
+        this.widget.show_all();
+
+        this._updateConnectionStatusIcon();
+
+    },
+
+    _updateConnectionStatusIcon: function() {
+        let status = this._account.connection_status;
+        let reason = this._account.connection_status_reason;
+        let isError = (status == Tp.ConnectionStatus.DISCONNECTED &&
+                       reason != Tp.ConnectionStatusReason.REQUESTED);
+
+        let child = 'none';
+        if (status == Tp.ConnectionStatus.CONNECTING) {
+            if (this._networkMonitor.network_available)
+                child = 'connecting';
+        } else if (isError) {
+            child = 'error';
+            switch (this._account.connection_error) {
+
+                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
+                case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR): {
+                    this._popoverLabel.label = _("Please check your connection details.")
+
+                    this._popoverButton.label =  _("Edit Connection");
+                    this._popoverButton.action_name = 'app.edit-connection';
+                    this._popoverButton.action_target = new GLib.Variant('o', this._account.get_object_path());
+                    break;
+                }
+
+                case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_INSECURE):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_LIMIT_EXCEEDED):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_INVALID):
+                case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_ERROR):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_PROVIDED):
+                case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_NOT_AVAILABLE):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_UNTRUSTED):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_EXPIRED):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_ACTIVATED):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
+                case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED): {
+                    this._popoverLabel.label = _("Could not make connection in a safe way.");
+                    this._popoverButton.label =  _("Edit Connection");
+                    this._popoverButton.action_name = 'app.edit-connection';
+                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
+                    break;
+                }
+
+                case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED): {
+                    this._popoverLabel.label = _("Authentication failed.");
+                    this._popoverButton.label = _("Try again");
+                    this._popoverButton.action_name = 'app.reconnect-account';
+                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
+                    break;
+                }
+
+                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
+                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
+                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
+                case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY): {
+                    this._popoverLabel.label = _("The server is busy.");
+                    this._popoverButton.label = _("Try again");
+                    this._popoverButton.action_name = 'app.reconnect-account';
+                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
+                    break;
+                }
+
+                default:
+                    this._popoverLabel.label = _("Failed to connect for an unknown reason.");
+                    this._popoverButton.label = _("Try again");
+                    this._popoverButton.action_name = 'app.reconnect-account';
+                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
+                    break;
+            }
+        }
+        this.widget.sensitive = isError;
+        this._iconStack.visible_child_name = child;
+    },
+});
+
 const RoomList = new Lang.Class({
     Name: 'RoomList',
 
@@ -303,14 +451,8 @@ const RoomList = new Lang.Class({
         if (row.get_header())
             return;
 
-        let label = new Gtk.Label({ margin_bottom: 4, xalign: 0,
-                                    max_width_chars: 15,
-                                    ellipsize: Pango.EllipsizeMode.END });
-        label.get_style_context().add_class('room-list-header');
-
-        account.bind_property('display-name', label, 'label',
-                              GObject.BindingFlags.SYNC_CREATE);
-        row.set_header(label);
+        let roomListHeader = new RoomListHeader(account);
+        row.set_header(roomListHeader.widget);
     },
 
     _sort: function(row1, row2) {

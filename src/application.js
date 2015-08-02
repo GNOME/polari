@@ -13,7 +13,6 @@ const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
 const Utils = imports.utils;
 
-
 const MAX_RETRIES = 3;
 
 const ConnectionError = {
@@ -78,11 +77,16 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accels: ['<Primary>w'] },
+          { name: 'reconnect-account',
+            parameter_type: GLib.VariantType.new('o') },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
+          { name: 'edit-connection',
+            activate: Lang.bind(this, this._onEditConnection),
+            parameter_type: GLib.VariantType.new('o') },
           { name: 'connections',
             activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
@@ -399,6 +403,19 @@ const Application = new Lang.Class({
                 this._connectionsDialog = null;
                 this.release();
             }));
+    },
+
+    _onEditConnection: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+        let dialog = new Connections.ConnectionDetailsDialog(account);
+        dialog.widget.transient_for = this._window.window;
+        dialog.widget.connect('response', Lang.bind(this,
+            function(w, response) {
+                w.destroy();
+            }));
+        dialog.widget.show();
     },
 
     _onShowPreferences: function() {

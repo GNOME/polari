@@ -89,40 +89,6 @@ const GridOutput = new Lang.Class({
     }
 });
 
-const ConnectingNotification = new Lang.Class({
-    Name: 'ConnectingNotification',
-    Extends: AppNotification,
-
-    _init: function(account) {
-        this.parent();
-
-        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
-                                    column_spacing: 12 });
-
-        this._grid.add(new Gtk.Spinner({ active: true }));
-
-        let text = _("Connecting to %s").format(account.display_name);
-        let label = new Gtk.Label({ label: text });
-        this._grid.add(label);
-
-        this.widget.add(this._grid);
-        this.widget.show_all();
-
-        let id = account.connect('notify::connection-status',
-                                 Lang.bind(this, this._onConnectionStatusChanged));
-        this.widget.connect('destroy',
-            function() {
-                account.disconnect(id);
-            });
-    },
-
-    _onConnectionStatusChanged: function(account) {
-        if (account.connection_status == Tp.ConnectionStatus.CONNECTING)
-            return;
-        this.close();
-    }
-});
-
 const NotificationQueue = new Lang.Class({
     Name: 'NotificationQueue',
 

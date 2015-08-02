@@ -65,6 +65,9 @@ const _ChatroomManager = new Lang.Class({
         let leaveAction = this._app.lookup_action('leave-room');
         leaveAction.connect('activate', Lang.bind(this, this._onLeaveActivated));
 
+        let reconnectAction = this._app.lookup_action('reconnect-account');
+        reconnectAction.connect('activate', Lang.bind(this, this._onReconnectAccountActivated));
+
         this._client = new Client(am, this);
 
         let filters = [];
@@ -148,6 +151,13 @@ const _ChatroomManager = new Lang.Class({
                                          serializedChannel.channel,
                                          0]);
         action.activate(parameter);
+    },
+
+    _onReconnectAccountActivated: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+        this._restoreSavedChannels(account);
     },
 
     _onJoinActivated: function(action, parameter) {

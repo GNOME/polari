@@ -54,12 +54,6 @@ const MainWindow = new Lang.Class({
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
 
-        this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('account-status-changed',
-                                      Lang.bind(this, this._onAccountChanged));
-        this._accountsMonitor.connect('account-added',
-                                      Lang.bind(this, this._onAccountChanged));
-
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
@@ -117,24 +111,6 @@ const MainWindow = new Lang.Class({
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
                                  GLib.Variant.new('ai', this._currentSize));
-    },
-
-    _onAccountChanged: function(am, account) {
-        if (account.connection_status != Tp.ConnectionStatus.CONNECTING)
-            return;
-
-        if (account._connectingNotification)
-            return;
-
-        let app = Gio.Application.get_default();
-        let notification = new AppNotifications.ConnectingNotification(account);
-        app.notificationQueue.addNotification(notification);
-
-        account._connectingNotification = notification;
-        notification.widget.connect('destroy',
-            function() {
-                delete account._connectingNotification;
-            });
     },
 
     _updateDecorations: function() {
