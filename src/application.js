@@ -308,6 +308,11 @@ const Application = new Lang.Class({
             req.ensure_channel_finish(res);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
             let error = account.connection_error;
+            // If we receive a disconnect error and the network is unavailable,
+            // then the error is not specific to polari and polari will
+            // just be in offline state.
+            if (!this._networkMonitor.network_available)
+                return;
             if (error == ConnectionError.ALREADY_CONNECTED &&
                 requestData.retry++ < MAX_RETRIES) {
                     this._retryRequest(requestData);
