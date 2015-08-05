@@ -1,3 +1,16 @@
+3.17.4 - "A Face like a Cat's Arse"
+===================================
+* Add empty state to assist with initial setup [Bastian; #711832]
+* Fix observing channels from other handlers [Florian; #752422]
+* Update new-message indicator to clarify its purpose [Florian; #751542]
+* Misc. bug fixes [Florian; #733327, #752968, #750689]
+
+Contributors:
+  Bastian Ilsø, Florian Müllner
+
+Translations:
+  Yosef Or Boczko [he], Pedro Albuquerque [pt], Marek Černocký [cs]
+
 3.17.3 - "It's nice... in a Hideous Sort of Way"
 ================================================
 * Color contact availability in private chats [Bastian; #748703]
