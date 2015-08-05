@@ -1,3 +1,15 @@
+3.16.2
+======
+* Fix observing channels from other handlers [Florian; #752422]
+* Fix major memory leak [Florian; #733327]
+* Misc. bug fixes [Bastian, Florian; #747942, #750689]
+
+Contributors:
+  Bastian Ilso, Bastian Ilsø, Florian Müllner
+
+Translations:
+  Ikhsan Noor Rosyidin [id], Cédric Valmary [oc], Pedro Albuquerque [pt]
+
 3.16.1 - "Lars, Lars and Lars"
 ==============================
 * Fixes messages not getting acknowledged due to confused toplevel state
