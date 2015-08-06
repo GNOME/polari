@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-07-24 23:28+0000\n"
-"PO-Revision-Date: 2015-07-25 03:24+0200\n"
+"POT-Creation-Date: 2015-08-05 23:27+0000\n"
+"PO-Revision-Date: 2015-08-06 11:34+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -192,7 +192,7 @@ msgstr "_Název"
 msgid "Loading details"
 msgstr "Načítají se podrobnosti"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
 msgid "Last Activity:"
 msgstr "Naposledy aktivní:"
 
@@ -213,113 +213,117 @@ msgstr "Marek Černocký <marek@manet.cz>"
 msgid "Connecting to %s"
 msgstr "Připojuje se k %s"
 
-#: ../src/chatView.js:447
+#: ../src/chatView.js:123
+msgid "New Messages"
+msgstr "Nové zprávy"
+
+#: ../src/chatView.js:487
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
-#: ../src/chatView.js:454
+#: ../src/chatView.js:494
 msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
-#: ../src/chatView.js:638
+#: ../src/chatView.js:678
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
-#: ../src/chatView.js:645
+#: ../src/chatView.js:685
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
-#: ../src/chatView.js:654
+#: ../src/chatView.js:694
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
-#: ../src/chatView.js:656
+#: ../src/chatView.js:696
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
-#: ../src/chatView.js:663
+#: ../src/chatView.js:703
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
-#: ../src/chatView.js:665
+#: ../src/chatView.js:705
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
-#: ../src/chatView.js:671
+#: ../src/chatView.js:711
 #, javascript-format
 msgid "%s joined"
 msgstr "%s se připojil"
 
-#: ../src/chatView.js:676
+#: ../src/chatView.js:716
 #, javascript-format
 msgid "%s left"
 msgstr "%s opustil místnost"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:716
+#: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:721
+#: ../src/chatView.js:761
 msgid "Yesterday, %H∶%M"
 msgstr "Včera, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:726
+#: ../src/chatView.js:766
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:732
+#: ../src/chatView.js:772
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:738
+#: ../src/chatView.js:778
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:743
+#: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:748
+#: ../src/chatView.js:788
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včera, %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:753
+#: ../src/chatView.js:793
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:759
+#: ../src/chatView.js:799
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l∶%M %p"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:765
+#: ../src/chatView.js:805
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l∶%M %p"
 
@@ -435,7 +439,7 @@ msgstr "Přidání připojení"
 msgid "_Save"
 msgstr "_Uložit"
 
-#: ../src/mainWindow.js:260
+#: ../src/mainWindow.js:264
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -460,7 +464,7 @@ msgstr "Opustit diskuzní místnost"
 msgid "End conversation"
 msgstr "Ukončit konverzaci"
 
-#: ../src/userList.js:184
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -468,7 +472,7 @@ msgstr[0] "před %d sekundou"
 msgstr[1] "před %d sekundami"
 msgstr[2] "před %d sekundami"
 
-#: ../src/userList.js:189
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -476,7 +480,7 @@ msgstr[0] "před %d minutou"
 msgstr[1] "před %d minutami"
 msgstr[2] "před %d minutami"
 
-#: ../src/userList.js:194
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -484,7 +488,7 @@ msgstr[0] "před %d hodinou"
 msgstr[1] "před %d hodinami"
 msgstr[2] "před %d hodinami"
 
-#: ../src/userList.js:199
+#: ../src/userList.js:202
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -492,7 +496,7 @@ msgstr[0] "před %d dnem"
 msgstr[1] "před %d dny"
 msgstr[2] "před %d dny"
 
-#: ../src/userList.js:204
+#: ../src/userList.js:207
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -500,7 +504,7 @@ msgstr[0] "před %d týdnem"
 msgstr[1] "před %d týdny"
 msgstr[2] "před %d týdny"
 
-#: ../src/userList.js:208
+#: ../src/userList.js:211
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -508,12 +512,6 @@ msgstr[0] "před %d měsícem"
 msgstr[1] "před %d měsíci"
 msgstr[2] "před %d měsíci"
 
-#: ../src/userList.js:545
+#: ../src/userList.js:548
 msgid "All"
 msgstr "Vše"
-
-#~ msgid "Window position"
-#~ msgstr "Umístění okna"
-
-#~ msgid "Window position (x and y)."
-#~ msgstr "Umístění okna (x a y)."
