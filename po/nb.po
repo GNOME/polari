@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: polari 3.15.x\n"
+"Project-Id-Version: polari 3.17.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-09 20:15+0100\n"
-"PO-Revision-Date: 2015-03-09 20:16+0100\n"
-"Last-Translator: Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>\n"
+"POT-Creation-Date: 2015-08-06 16:09+0200\n"
+"PO-Revision-Date: 2015-08-06 16:10+0200\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:416
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En Internet Relay Chat-klient for GNOME"
 
@@ -111,10 +111,14 @@ msgid "Connections"
 msgstr "Tilkoblinger"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "Bruk +-knappen for å legge til en ny tilkobling."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Legg til"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "Fjern"
 
@@ -123,7 +127,7 @@ msgid "Join Chat Room"
 msgstr "Bli med i praterom"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:348
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -188,7 +192,7 @@ msgstr "_Navn"
 msgid "Loading details"
 msgstr "Laster inn detaljer"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
 msgid "Last Activity:"
 msgstr "Siste aktivitet:"
 
@@ -200,7 +204,7 @@ msgstr "Melding"
 msgid "Good Bye"
 msgstr "Ha det bra"
 
-#: ../src/application.js:415
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr ""
 "Øivind Hoel <ohoel@cvs.gnome.org>\n"
@@ -213,64 +217,68 @@ msgstr ""
 msgid "Connecting to %s"
 msgstr "Kobler til %s"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:123
+msgid "New Messages"
+msgstr "Nye meldinger"
+
+#: ../src/chatView.js:487
 msgid "Open Link"
 msgstr "Åpne lenke"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:494
 msgid "Copy Link Address"
 msgstr "Kopier lenkeadresse"
 
-#: ../src/chatView.js:574
+#: ../src/chatView.js:678
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s er nå kjent som %s"
 
-#: ../src/chatView.js:579
+#: ../src/chatView.js:685
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har koblet fra"
 
-#: ../src/chatView.js:587
+#: ../src/chatView.js:694
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s er kastet ut av %s"
 
-#: ../src/chatView.js:589
+#: ../src/chatView.js:696
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s er kastet ut"
 
-#: ../src/chatView.js:595
+#: ../src/chatView.js:703
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s er nå utestengt av %s"
 
-#: ../src/chatView.js:597
+#: ../src/chatView.js:705
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s er nå utestengt"
 
-#: ../src/chatView.js:602
+#: ../src/chatView.js:711
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ble med"
 
-#: ../src/chatView.js:606
+#: ../src/chatView.js:716
 #, javascript-format
 msgid "%s left"
 msgstr "%s gikk ut"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:645
+#: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:650
+#: ../src/chatView.js:761
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "I går, %H.%M"
@@ -278,7 +286,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:655
+#: ../src/chatView.js:766
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
@@ -287,7 +295,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:661
+#: ../src/chatView.js:772
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H.%M"
@@ -296,21 +304,21 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:667
+#: ../src/chatView.js:778
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H.%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:672
+#: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:677
+#: ../src/chatView.js:788
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "I går, %H.%M"
@@ -318,7 +326,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:682
+#: ../src/chatView.js:793
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
@@ -327,7 +335,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:688
+#: ../src/chatView.js:799
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %H.%M"
@@ -336,24 +344,24 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:694
+#: ../src/chatView.js:805
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %H.%M"
 
-#: ../src/connections.js:328
+#: ../src/connections.js:336
 msgid "Edit Connection"
 msgstr "Rediger tilkobling"
 
-#: ../src/connections.js:329
+#: ../src/connections.js:337
 msgid "New Connection"
 msgstr "Ny tilkobling"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:350
 msgid "A_pply"
 msgstr "_Bruk"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:350
 msgid "Cr_eate"
 msgstr "_Lag"
 
@@ -456,7 +464,7 @@ msgstr "Legg til tilkobling"
 msgid "_Save"
 msgstr "_Lagre"
 
-#: ../src/mainWindow.js:260
+#: ../src/mainWindow.js:264
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -480,48 +488,48 @@ msgstr "Forlat praterom"
 msgid "End conversation"
 msgstr "Avslutt samtale"
 
-#: ../src/userList.js:184
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekund siden"
 msgstr[1] "%d sekunder siden"
 
-#: ../src/userList.js:189
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minutt siden"
 msgstr[1] "%d minutter siden"
 
-#: ../src/userList.js:194
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d time siden"
 msgstr[1] "%d timer siden"
 
-#: ../src/userList.js:199
+#: ../src/userList.js:202
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag siden"
 msgstr[1] "%d dager siden"
 
-#: ../src/userList.js:204
+#: ../src/userList.js:207
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d uke siden"
 msgstr[1] "%d uker siden"
 
-#: ../src/userList.js:208
+#: ../src/userList.js:211
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d måned siden"
 msgstr[1] "%d måneder siden"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:548
 msgid "All"
 msgstr "Alle"
