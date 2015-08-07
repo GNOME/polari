@@ -27,6 +27,8 @@ const RoomRow = new Lang.Class({
         this._popover.position = Gtk.PositionType.BOTTOM;
         this._eventBox.connect('button-release-event',
                             Lang.bind(this, this._onButtonRelease));
+        this.widget.connect('key-press-event',
+                            Lang.bind(this, this._onKeyPress));
 
         room.connect('notify::channel', Lang.bind(this,
             function() {
@@ -75,6 +77,19 @@ const RoomRow = new Lang.Class({
     _onButtonRelease: function(w, event) {
         let [, button] = event.get_button();
         if (button != Gdk.BUTTON_SECONDARY)
+            return Gdk.EVENT_PROPAGATE;
+
+        this._popover.show();
+
+        return Gdk.EVENT_STOP;
+    },
+
+    _onKeyPress: function(w, event) {
+        let [, keyval] = event.get_keyval();
+        let [, mods] = event.get_state();
+        if (keyval != Gdk.KEY_Menu &&
+            !(keyval == Gdk.KEY_F10 &&
+              mods & Gdk.ModifierType.SHIFT_MASK))
             return Gdk.EVENT_PROPAGATE;
 
         this._popover.show();
