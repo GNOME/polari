@@ -45,6 +45,11 @@ const RoomRow = new Lang.Class({
         this._updatePending();
     },
 
+    selected: function() {
+        if (!this.widget.room.channel)
+            this._updatePending();
+    },
+
     _updatePending: function() {
         let room = this.widget.room;
 
@@ -279,6 +284,8 @@ const RoomList = new Lang.Class({
 
     _onRowSelected: function(w, row) {
         this._roomManager.setActiveRoom(row ? row.room : null);
+        if (row)
+            this._roomRows[row.room.id].selected();
     },
 
     _updateHeader: function(row, before) {
