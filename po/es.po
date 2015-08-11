@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-26 11:53+0000\n"
-"PO-Revision-Date: 2015-02-26 18:56+0100\n"
+"POT-Creation-Date: 2015-07-29 11:28+0000\n"
+"PO-Revision-Date: 2015-08-03 \n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
+"Language-Team: Spanish <gnome-es-list@gnome.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:412
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -78,18 +78,10 @@ msgid "Window size (width and height)."
 msgstr "Tamaño de la ventana (anchura y altura)."
 
 #: ../data/org.gnome.Polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "Posición de la ventana"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "Posición de la ventana (X e Y)."
-
-#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "Ventana maximizada"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Estado maximizado de la ventana"
 
@@ -120,10 +112,14 @@ msgid "Connections"
 msgstr "Conexiones"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "Use el botón + para añadir una conexión nueva."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Añadir"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "Quitar"
 
@@ -132,7 +128,7 @@ msgid "Join Chat Room"
 msgstr "Unirse a la sala de chat"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:337
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:348
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -205,142 +201,133 @@ msgstr "Última actividad:"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../src/application.js:349
+#: ../src/application.js:351
 msgid "Good Bye"
 msgstr "Adiós"
 
-#: ../src/application.js:411
+#: ../src/application.js:416
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
 
 #: ../src/appNotifications.js:104
-#, javascript-format
 msgid "Connecting to %s"
 msgstr "Conectando a %s"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:447
 msgid "Open Link"
 msgstr "Abrir enlace"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:454
 msgid "Copy Link Address"
 msgstr "Copiar la dirección del enlace"
 
-#: ../src/chatView.js:574
-#, javascript-format
+#: ../src/chatView.js:638
 msgid "%s is now known as %s"
 msgstr "%s ahora se llama %s"
 
-#: ../src/chatView.js:579
-#, javascript-format
+#: ../src/chatView.js:645
 msgid "%s has disconnected"
 msgstr "%s se ha desconectado"
 
-#: ../src/chatView.js:587
-#, javascript-format
+#: ../src/chatView.js:654
 msgid "%s has been kicked by %s"
 msgstr "%s ha sido expulsado por %s"
 
-#: ../src/chatView.js:589
-#, javascript-format
+#: ../src/chatView.js:656
 msgid "%s has been kicked"
 msgstr "%s ha sido expulsado"
 
-#: ../src/chatView.js:595
-#, javascript-format
+#: ../src/chatView.js:663
 msgid "%s has been banned by %s"
 msgstr "%s ha sido bloqueado por %s"
 
-#: ../src/chatView.js:597
-#, javascript-format
+#: ../src/chatView.js:665
 msgid "%s has been banned"
 msgstr "%s ha sido bloqueado"
 
-#: ../src/chatView.js:602
-#, javascript-format
+#: ../src/chatView.js:671
 msgid "%s joined"
 msgstr "%s ha entrado"
 
-#: ../src/chatView.js:606
-#, javascript-format
+#: ../src/chatView.js:676
 msgid "%s left"
 msgstr "%s se ha ido"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:645
+#: ../src/chatView.js:716
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:650
+#: ../src/chatView.js:721
 msgid "Yesterday, %H∶%M"
 msgstr "Ayer a las %H:%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:655
+#: ../src/chatView.js:726
 msgid "%A, %H∶%M"
 msgstr "%A a las %H:%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:661
+#: ../src/chatView.js:732
 msgid "%B %d, %H∶%M"
 msgstr "%d de %B a las %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:667
+#: ../src/chatView.js:738
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B de %Y a las %H:%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:672
+#: ../src/chatView.js:743
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:677
+#: ../src/chatView.js:748
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ayer a las %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:682
+#: ../src/chatView.js:753
 msgid "%A, %l∶%M %p"
 msgstr "%A a las %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:688
+#: ../src/chatView.js:759
 msgid "%B %d, %l∶%M %p"
 msgstr "%d de %B a las %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:694
+#: ../src/chatView.js:765
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B de %Y a las %H:%M"
 
-#: ../src/connections.js:325
+#: ../src/connections.js:336
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
-#: ../src/connections.js:326
+#: ../src/connections.js:337
 msgid "New Connection"
 msgstr "Nueva conexión"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:350
 msgid "A_pply"
 msgstr "A_plicar"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:350
 msgid "Cr_eate"
 msgstr "Cr_ear"
 
@@ -417,7 +404,6 @@ msgstr ""
 "disponibles"
 
 #: ../src/ircParser.js:61
-#, javascript-format
 msgid "Usage: %s"
 msgstr "Uso: %s"
 
@@ -426,7 +412,6 @@ msgid "Known commands:"
 msgstr "Comandos conocidos:"
 
 #: ../src/ircParser.js:173
-#, javascript-format
 msgid "Users on %s:"
 msgstr "Usuarios en %s:"
 
@@ -442,9 +427,7 @@ msgstr "Añadir conexión"
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/mainWindow.js:304
-#, javascript-format
-#| msgid "%d users"
+#: ../src/mainWindow.js:260
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d usuario"
@@ -455,7 +438,6 @@ msgid "No recent users"
 msgstr "No hay usuarios recientes"
 
 #: ../src/pasteManager.js:291
-#, javascript-format
 msgid "Uploading %s"
 msgstr "Subiendo %s"
 
@@ -468,50 +450,50 @@ msgid "End conversation"
 msgstr "Terminar conversación"
 
 #: ../src/userList.js:184
-#, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Hace %d segundo"
 msgstr[1] "Hace %d segundos"
 
 #: ../src/userList.js:189
-#, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Hace %d minuto"
 msgstr[1] "Hace %d minutos"
 
 #: ../src/userList.js:194
-#, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "Hace %d hora"
 msgstr[1] "Hace %d horas"
 
 #: ../src/userList.js:199
-#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Hace %d día"
 msgstr[1] "Hace %d días"
 
 #: ../src/userList.js:204
-#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Hace %d semana"
 msgstr[1] "Hace %d semanas"
 
 #: ../src/userList.js:208
-#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Hace %d mes"
 msgstr[1] "Hace %d meses"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:545
 msgid "All"
 msgstr "Todos"
+
+#~ msgid "Window position"
+#~ msgstr "Posición de la ventana"
+
+#~ msgid "Window position (x and y)."
+#~ msgstr "Posición de la ventana (X e Y)."
 
 #~ msgid "_Leave"
 #~ msgstr "_Salir"
