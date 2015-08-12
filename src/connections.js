@@ -175,12 +175,15 @@ const ConnectionsDialog = new Lang.Class({
 
 const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
-    Extends: Gtk.Grid,
+    Extends: Gtk.Box,
     Template: 'resource:///org/gnome/Polari/connection-details.ui',
     InternalChildren: ['serverEntry',
                        'descEntry',
                        'nickEntry',
-                       'realnameEntry'],
+                       'realnameEntry',
+                       'errorBox',
+                       'errorIcon',
+                       'errorLabel'],
     Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
                                                            'can-confirm',
                                                            'can-confirm',
@@ -200,8 +203,31 @@ const ConnectionDetails = new Lang.Class({
         this._nickEntry.connect('changed',
                                 Lang.bind(this, this._onCanConfirmChanged));
 
-        if (this._account)
-            this._populateFromAccount(this._account);
+        if (!this._account)
+            return;
+
+        this._populateFromAccount(this._account);
+
+        this._account.connect('notify::connection-status', Lang.bind(this, this._syncErrorMessage));
+        this._syncErrorMessage();
+    },
+
+    _syncErrorMessage: function() {
+        let status = this._account.connection_status;
+        let reason = this._account.connection_status_reason;
+
+        if (status == Tp.ConnectionStatus.DISCONNECTED &&
+            reason != Tp.ConnectionStatusReason.REQUESTED) {
+            switch (this._account.connection_error) {
+                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
+                case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR): {
+                    this._errorLabel.label = _("Polari disconnected due to a network error. Please check if the address field is correct.");
+                    this._serverEntry.get_style_context().add_class('error');
+                    this._errorBox.visible = true;
+                    break;
+                }
+            }
+        }
     },
 
     _getParams: function() {
@@ -339,6 +365,9 @@ const ConnectionDetailsDialog = new Lang.Class({
                                        modal: true,
                                        destroy_with_parent: true,
                                        use_header_bar: true });
+
+        this.widget.get_content_area().border_width = 0;
+
         this.widget.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)

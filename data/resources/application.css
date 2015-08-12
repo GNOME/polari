@@ -131,3 +131,14 @@
 .polari-background-description {
     font-size: larger;
 }
+
+.polari-error-information {
+    background-color: @polari_dark_bg_color;
+    border-style: solid;
+    border-color: @borders;
+    border-width: 1px 0 0 0;
+}
+.polari-error-information GtkLabel {
+    color: @theme_fg_color;
+    font-size: smaller;
+}
