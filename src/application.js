@@ -302,9 +302,6 @@ const Application = new Lang.Class({
 
         try {
             req.ensure_channel_finish(res);
-
-            if (requestData.targetHandleType == Tp.HandleType.ROOM)
-                this._addSavedChannel(account, requestData.targetId);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
             let error = account.connection_error;
             if (error == ConnectionError.ALREADY_CONNECTED &&
@@ -330,6 +327,10 @@ const Application = new Lang.Class({
         let [accountPath, channelName, time] = parameter.deep_unpack();
         this._requestChannel(accountPath, Tp.HandleType.ROOM,
                              channelName, time);
+
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+        this._addSavedChannel(account, channelName);
     },
 
     _onMessageUser: function(action, parameter) {
