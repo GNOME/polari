@@ -151,25 +151,31 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _onJoinActivated: function(action, parameter) {
-        let [accountPath, channelName, ] = parameter.deep_unpack();
+        let [accountPath, channelName, time] = parameter.deep_unpack();
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
 
         if (!account.enabled)
             return;
 
-        this._ensureRoom(account, channelName, Tp.HandleType.ROOM);
+        let room = this._ensureRoom(account, channelName, Tp.HandleType.ROOM);
+        let [present, ] = Tp.user_action_time_should_present(time);
+        if (present)
+            this.setActiveRoom(room);
     },
 
     _onQueryActivated: function(action, parameter) {
-        let [accountPath, channelName, ] = parameter.deep_unpack();
+        let [accountPath, channelName, time] = parameter.deep_unpack();
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
 
         if (!account.enabled)
             return;
 
-        this._ensureRoom(account, channelName, Tp.HandleType.CONTACT);
+        let room = this._ensureRoom(account, channelName, Tp.HandleType.CONTACT);
+        let [present, ] = Tp.user_action_time_should_present(time);
+        if (present)
+            this.setActiveRoom(room);
     },
 
     _onLeaveActivated: function(action, parameter) {
