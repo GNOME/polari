@@ -293,6 +293,8 @@ const Application = new Lang.Class({
         req.ensure_channel_async(preferredHandler, requestData.cancellable,
                                  Lang.bind(this,
                                            this._onEnsureChannel, requestData));
+        requestData.status = 'connecting';
+        this.emitJS('room-status-changed', requestData);
     },
 
     _retryRequest: function(requestData) {
@@ -331,8 +333,24 @@ const Application = new Lang.Class({
         } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
             // interrupted by user request, don't log
         } catch (e) {
+            requestData.status = 'disconnected';
+            this.emitJS('room-status-changed', requestData);
             logError(e, 'Failed to ensure channel');
+        } finally {
+            log('requestDatas target id is: ' + requestData.targetId);
+            if (requestData.targetId == '#nautilus') {
+                log('setting error to Tp.Error.Channel.Is.Full');
+                requestData.status = 'disconnected';
+                requestData.error = Tp.error_get_dbus_name(Tp.Error.CHANNEL_FULL);
+                this.emitJS('room-status-changed', requestData);
+            }
         }
+
+        if (requestData.targetId == '#nautilus')
+            return;
+
+        requestData.status = 'connected';
+        this.emitJS('room-status-changed', requestData);
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);

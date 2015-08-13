@@ -1,11 +1,15 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Tp = imports.gi.TelepathyGLib;
+const GLib = imports.gi.GLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
 const EntryArea = imports.entryArea;
 const Lang = imports.lang;
+
+const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const RoomStack = new Lang.Class({
     Name: 'RoomStack',
@@ -26,6 +30,17 @@ const RoomStack = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
         this._roomManager.connect('active-state-changed',
                                   Lang.bind(this, this._updateSensitivity));
+        let app = Gio.Application.get_default();
+        app.connectJS('room-status-changed', Lang.bind(this,
+            function(app, requestData) {
+                let id = requestData.roomId;
+                if (!this._rooms[id])
+                    return;
+                if (requestData.status == 'disconnected')
+                    this._rooms[id].showError(requestData.error);
+                else
+                    this._rooms[id].hideError();
+            }));
 
         this._rooms = {};
 
@@ -155,6 +170,26 @@ const RoomView = new Lang.Class({
         this._entryArea = new EntryArea.EntryArea(room);
 
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+
+        this._revealer = new Gtk.Revealer({ transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN });
+        this._infobar = new Gtk.InfoBar({ message_type: Gtk.MessageType.ERROR });
+        this._errorLabel = new Gtk.Label({ halign: Gtk.Align.START });
+        this._button = new Gtk.Button({ label: _("Retry") });
+        this._button.connect('clicked', Lang.bind(this,
+            function() {
+                let app = Gio.Application.get_default();
+                let action = app.lookup_action('join-room');
+                action.activate(GLib.Variant.new('(ssu)',
+                                                [ this._room.account.get_object_path(),
+                                                  '#' + this._room.display_name,
+                                                  TP_CURRENT_TIME ]));
+            }));
+        this._infobar.get_content_area().add(new Gtk.Image({ icon_name: 'dialog-error-symbolic' }));
+        this._infobar.get_content_area().add(this._errorLabel);
+        this._infobar.get_action_area().add(this._button);
+        this._revealer.add(this._infobar);
+        this.widget.add(this._revealer);
+
         this.widget.add(this._view.widget);
 
         this.inputWidget = new Gtk.Frame();
@@ -162,11 +197,33 @@ const RoomView = new Lang.Class({
         this.widget.add(this.inputWidget);
 
         this.inputWidget.add(this._entryArea.widget);
-
+        this._room = room;
         this.widget.show_all();
     },
 
     set inputSensitive(sensitive) {
         this._entryArea.widget.sensitive = sensitive;
-    }
+    },
+
+    showError: function(error) {
+        this._errorLabel.label = this._getMessageFromError(error);
+        this._revealer.reveal_child = true;
+
+    },
+
+    _getMessageFromError: function (error) {
+        log(error);
+        if (error == Tp.error_get_dbus_name(Tp.Error.CHANNEL_BANNED))
+            return _("You are banned from this room.");
+        else if (error == Tp.error_get_dbus_name(Tp.Error.CHANNEL_FULL))
+            return _("The room is full.");
+        else if (error == Tp.error_get_dbus_name(Tp.Error.CHANNEL_INVITE_ONLY))
+            return _("The room is invite-only.");
+        else
+            return _("Failed to connect for an unknown reason.");
+    },
+
+    hideError: function() {
+        this._revealer.reveal_child = false;
+    },
 });

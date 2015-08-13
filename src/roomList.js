@@ -102,6 +102,28 @@ const RoomRow = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
+    updateRoomStatus: function(requestData) {
+        this._status = requestData.status;
+        let child = 'messages';
+
+        if (requestData.status == 'connecting') {
+            // Only show spinner if it takes more than 3 seconds to join the room
+            // and if we are waiting for the room itself (not the connection).
+            Mainloop.timeout_add(3000, Lang.bind(this,
+                function() {
+                    if (requestData.account.connection_status != Tp.ConnectionStatus.CONNECTED)
+                        return GLib.SOURCE_CONTINUE;
+                    else if (this._status == 'connecting')
+                        this._stack.visible_child_name = 'connecting';
+                    return GLib.SOURCE_REMOVE;
+                }));
+        } else if (requestData.status == 'disconnected') {
+            child = 'error';
+        }
+
+        this._stack.visible_child_name = child;
+    },
+
     _createWidget: function(gicon) {
         this.widget = new Gtk.ListBoxRow({ margin_bottom: 4 });
 
@@ -130,11 +152,19 @@ const RoomRow = new Lang.Class({
                                           shadow_type: Gtk.ShadowType.NONE });
         box.add(frame);
 
+        this._stack = new Gtk.Stack({ vhomogeneous: true, valign: Gtk.Align.CENTER });
+        this._stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
+        let error = new Gtk.Image({icon_name: 'dialog-error-symbolic', halign: Gtk.Align.START });
+        this._stack.add_named(error, 'error');
         this._counter = new Gtk.Label({ width_chars: 2 });
         this._counter.get_style_context().add_class('pending-messages-count');
-        frame.add(this._counter);
+        this._stack.add_named(this._counter, 'messages');
+        let connecting = new Gtk.Spinner({active: true, halign: Gtk.Align.START });
+        this._stack.add_named(connecting, 'connecting');
+        frame.add(this._stack);
 
         this.widget.show_all();
+        this._stack.visible_child_name = 'messages';
     }
 });
 
@@ -317,6 +347,13 @@ const RoomList = new Lang.Class({
         this._leaveAction = app.lookup_action('leave-room');
         this._leaveAction.connect('activate',
                                   Lang.bind(this, this._onLeaveActivated));
+
+        app.connectJS('room-status-changed', Lang.bind(this,
+            function(app, requestData) {
+                let roomRow = this._roomRows[requestData.roomId];
+                if (roomRow)
+                    this._roomRows[requestData.roomId].updateRoomStatus(requestData);
+            }));
 
         let action;
         action = app.lookup_action('next-room');
