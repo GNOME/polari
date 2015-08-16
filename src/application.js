@@ -41,6 +41,7 @@ const Application = new Lang.Class({
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
             function(am, account) {
@@ -254,6 +255,9 @@ const Application = new Lang.Class({
                 this._removeSavedChannelsForAccount(account);
             return;
         }
+
+        if (!this._networkMonitor.network_available)
+            return;
 
         let roomId = Polari.create_room_id(account,  targetId, targetType);
 
