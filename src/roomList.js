@@ -249,8 +249,9 @@ const RoomListHeader = new Lang.Class({
                 case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
                 case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED): {
                     this._popoverLabel.label = _("Could not make connection in a safe way.");
-                    this._popoverButton.label =  _("Edit Connection");
-                    this._popoverButton.action_name = 'app.edit-connection';
+                    this._popoverButton.label =  _("Continue Anyway");
+                    this._popoverButton.action_name = 'app.reconnect-without-encryption';
+                    this._popoverLabel.label = _("The connection is not safe.");
                     this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
                     break;
                 }

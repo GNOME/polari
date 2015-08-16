@@ -84,6 +84,9 @@ const Application = new Lang.Class({
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
+          { name: 'reconnect-without-encryption',
+            activate: Lang.bind(this, this._onReconnectWithoutEncryption),
+            parameter_type: GLib.VariantType.new('o') },
           { name: 'edit-connection',
             activate: Lang.bind(this, this._onEditConnection),
             parameter_type: GLib.VariantType.new('o') },
@@ -416,6 +419,20 @@ const Application = new Lang.Class({
                 w.destroy();
             }));
         dialog.widget.show();
+    },
+
+    _onReconnectWithoutEncryption: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        let sv = { port: GLib.Variant.new('u', 6667) };
+        sv['use-ssl'] = GLib.Variant.new('b', false);
+        let asv = GLib.Variant.new('a{sv}', sv);
+        account.update_parameters_vardict_async(asv, [],
+            Lang.bind(this, function(a, res) {
+                a.update_parameters_vardict_finish(res);
+            }));
     },
 
     _onShowPreferences: function() {
