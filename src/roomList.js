@@ -149,6 +149,7 @@ const RoomListHeader = new Lang.Class({
         this._app = Gio.Application.get_default();
 
         this.widget = new Gtk.Button({ sensitive: false, margin_bottom: 4,
+                                       margin_start: 7, margin_end: 7,
                                        hexpand: true, focus_on_click: false })
         this.widget.get_style_context().remove_class('button');
         this.widget.get_style_context().add_class('room-list-header');

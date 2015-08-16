@@ -41,9 +41,13 @@
 }
 
 .polari-room-list .room-list-header {
-    background-color: @polari_dark_bg_color;
     font-size: smaller;
-    padding: 2px 6px;
+    padding: 8px 6px 1px 8px;
+    border-bottom: 1px solid alpha(@borders, 0.55);
+}
+
+.polari-room-list .list-row {
+    padding-left: 8px;
 }
 
 .polari-room-list .list-row.inactive,
