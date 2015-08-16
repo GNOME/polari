@@ -6,6 +6,27 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Utils = imports.utils;
+
+const SASLAuthenticationIface = '<node> \
+<interface name="org.freedesktop.Telepathy.Channel.Interface.SASLAuthentication"> \
+<method name="StartMechanismWithData"> \
+    <arg type="s" direction="in" name="mechanism" /> \
+    <arg type="ay" direction="in" name="data" /> \
+</method> \
+<method name="AcceptSASL"/> \
+<method name="AbortSASL"> \
+    <arg type="u" direction="in" name="reason"/> \
+    <arg type="s" direction="in" name="debug-message"/> \
+</method> \
+<signal name="SASLStatusChanged"> \
+    <arg name="status" type="u" /> \
+    <arg name="reason" type="s" /> \
+    <arg name="details" type="a{sv}" /> \
+</signal> \
+</interface> \
+</node>';
+let SASLAuthProxy = Gio.DBusProxy.makeProxyWrapper(SASLAuthenticationIface);
 
 let _singleton = null;
 
@@ -14,6 +35,87 @@ function getDefault() {
         _singleton = new _ChatroomManager();
     return _singleton;
 }
+
+const SASLStatus = {
+    NOT_STARTED: 0,
+    IN_PROGRESS: 1,
+    SERVER_SUCCEEDED: 2,
+    CLIENT_ACCEPTED: 3,
+    SUCCEEDED: 4,
+    SERVER_FAILED: 5,
+    CLIENT_FAILED: 6
+};
+
+const SASLAbortReason = {
+    INVALID_CHALLENGE: 0,
+    USER_ABORT: 1
+};
+
+const SASLAuthHandler = new Lang.Class({
+    Name: 'SASLAuthHandler',
+
+    _init: function(channel) {
+        this._channel = channel;
+        this._proxy = new SASLAuthProxy(Gio.DBus.session,
+                                        channel.bus_name,
+                                        channel.object_path,
+                                        Lang.bind(this, this._onProxyReady));
+    },
+
+    _onProxyReady: function(proxy) {
+        this._proxy.connectSignal('SASLStatusChanged',
+                                  Lang.bind(this, this._onSASLStatusChanged));
+
+        let account = this._channel.connection.get_account();
+        Utils.lookupAccountPassword(account,
+                                    Lang.bind(this, this._onPasswordReady));
+    },
+
+    _onPasswordReady: function(password) {
+        if (password)
+            this._proxy.StartMechanismWithDataRemote('X-TELEPATHY-PASSWORD',
+                                                     password);
+        else
+            this._proxy.AbortSASLRemote(SASLAbortReason.USER_ABORT,
+                                        'Password not available',
+                                        Lang.bind(this, this._resetPrompt));
+    },
+
+    _onSASLStatusChanged: function(proxy, sender, [status]) {
+        let name = this._channel.connection.get_account().display_name;
+        let statusString = (Object.keys(SASLStatus))[status];
+        Utils.debug('Auth status for server "%s": %s'.format(name, statusString));
+
+        switch(status) {
+            case SASLStatus.NOT_STARTED:
+            case SASLStatus.IN_PROGRESS:
+            case SASLStatus.CLIENT_ACCEPTED:
+                break;
+
+            case SASLStatus.SERVER_SUCCEEDED:
+                this._proxy.AcceptSASLRemote();
+                break;
+
+            case SASLStatus.SUCCEEDED:
+            case SASLStatus.SERVER_FAILED:
+            case SASLStatus.CLIENT_FAILED:
+                this._channel.close_async(null);
+                break;
+        }
+    },
+
+    _resetPrompt: function() {
+        let account = this._channel.connection.get_account();
+        let prompt = new GLib.Variant('b', false);
+        let params = new GLib.Variant('a{sv}', { 'password-prompt': prompt });
+        account.update_parameters_vardict_async(params, [], Lang.bind(this,
+            function(a, res) {
+                a.update_parameters_vardict_finish(res);
+                account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
+                                               'available', '', null);
+            }));
+    }
+});
 
 const Client = new Lang.Class({
     Name: 'Client',
@@ -81,6 +183,11 @@ const _ChatroomManager = new Lang.Class({
         contactFilter[Tp.PROP_CHANNEL_CHANNEL_TYPE] = Tp.IFACE_CHANNEL_TYPE_TEXT;
         contactFilter[Tp.PROP_CHANNEL_TARGET_HANDLE_TYPE] = Tp.HandleType.CONTACT;
         filters.push(contactFilter);
+
+        let authFilter = {};
+        authFilter[Tp.PROP_CHANNEL_CHANNEL_TYPE] = Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
+        authFilter[Tp.PROP_CHANNEL_TYPE_SERVER_AUTHENTICATION_AUTHENTICATION_METHOD] = Tp.IFACE_CHANNEL_INTERFACE_SASL_AUTHENTICATION;
+        filters.push(authFilter);
 
         filters.forEach(Lang.bind(this,
             function(f) {
@@ -217,10 +324,21 @@ const _ChatroomManager = new Lang.Class({
         return room;
     },
 
+    _isAuthChannel: function(channel) {
+        return channel.channel_type == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
+    },
+
     _processRequest: function(context, connection, channels, processChannel) {
         if (connection.protocol_name != 'irc') {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({ code: Tp.Error.NOT_IMPLEMENTED,
+                                        message: message }));
+            return;
+        }
+
+        if (this._isAuthChannel(channels[0]) && channels.length > 1) {
+            let message = 'Only one authentication channel per connection allowed';
+            context.fail(new Tp.Error({ code: Tp.Error.INVALID_ARGUMENT,
                                         message: message }));
             return;
         }
@@ -239,6 +357,9 @@ const _ChatroomManager = new Lang.Class({
 
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
+                if (this._isAuthChannel(channel))
+                    return;
+
                 if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
                     let [invited, , , ,] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
                     if (invited)
@@ -261,6 +382,11 @@ const _ChatroomManager = new Lang.Class({
 
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
+                if (this._isAuthChannel(channel)) {
+                    let authHandler = new SASLAuthHandler(channel);
+                    return;
+                }
+
                 if (!this._app.get_active_window())
                     this._app.activate();
 

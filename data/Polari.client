@@ -9,6 +9,10 @@ org.freedesktop.Telepathy.Channel.TargetHandleType u=1
 org.freedesktop.Telepathy.Channel.ChannelType s=org.freedesktop.Telepathy.Channel.Type.Text
 org.freedesktop.Telepathy.Channel.TargetHandleType u=2
 
+[org.freedesktop.Telepathy.Client.Handler.HandlerChannelFilter 2]
+org.freedesktop.Telepathy.Channel.ChannelType s=org.freedesktop.Telepathy.Channel.Type.ServerAuthentication
+org.freedesktop.Telepathy.Channel.Type.ServerAuthentication.AuthenticationMethod s=org.freedesktop.Telepathy.Channel.Interface.SASLAuthentication
+
 [org.freedesktop.Telepathy.Client.Observer.ObserverChannelFilter 0]
 org.freedesktop.Telepathy.Channel.ChannelType s=org.freedesktop.Telepathy.Channel.Type.Text
 org.freedesktop.Telepathy.Channel.TargetHandleType u=1
@@ -16,3 +20,7 @@ org.freedesktop.Telepathy.Channel.TargetHandleType u=1
 [org.freedesktop.Telepathy.Client.Observer.ObserverChannelFilter 1]
 org.freedesktop.Telepathy.Channel.ChannelType s=org.freedesktop.Telepathy.Channel.Type.Text
 org.freedesktop.Telepathy.Channel.TargetHandleType u=2
+
+[org.freedesktop.Telepathy.Client.Handler.ObserverChannelFilter 2]
+org.freedesktop.Telepathy.Channel.ChannelType s=org.freedesktop.Telepathy.Channel.Type.ServerAuthentication
+org.freedesktop.Telepathy.Channel.Type.ServerAuthentication.AuthenticationMethod s=org.freedesktop.Telepathy.Channel.Interface.SASLAuthentication
