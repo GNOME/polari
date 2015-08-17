@@ -70,6 +70,9 @@ const Application = new Lang.Class({
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser),
             parameter_type: GLib.VariantType.new('(ssu)') },
+          { name: 'paste-text',
+            activate: Lang.bind(this, this._onPasteText),
+            parameter_type: GLib.VariantType.new('s') },
           { name: 'leave-room',
             activate: Lang.bind(this, this._onLeaveRoom),
             parameter_type: GLib.VariantType.new('(ss)') },
@@ -350,6 +353,11 @@ const Application = new Lang.Class({
         let [accountPath, contactName, time] = parameter.deep_unpack();
         this._requestChannel(accountPath, Tp.HandleType.CONTACT,
                              contactName, time);
+    },
+
+    _onPasteText: function(action, parameter) {
+        let text = parameter.deep_unpack();
+        this.pasteManager.pasteText(text);
     },
 
     _onLeaveRoom: function(action, parameter) {
