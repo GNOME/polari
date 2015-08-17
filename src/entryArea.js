@@ -10,6 +10,7 @@ const TabCompletion = imports.tabCompletion;
 const Tp = imports.gi.TelepathyGLib;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
+const MAX_LINES = 5;
 
 
 const EntryArea = new Lang.Class({
@@ -39,10 +40,9 @@ const EntryArea = new Lang.Class({
     },
 
     _createWidget: function() {
-        this.widget = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                    sensitive: false,
-                                    margin: 6 });
-        this.widget.get_style_context().add_class('linked');
+        this.widget = new Gtk.Stack({ transition_type: Gtk.StackTransitionType.CROSSFADE,
+                                      sensitive: false,
+                                      margin: 6 });
 
         this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
         this.widget.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
@@ -53,10 +53,13 @@ const EntryArea = new Lang.Class({
                                                           Lang.bind(this, this._onKeyPressEvent));
             }));
 
+        let chatBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+        chatBox.get_style_context().add_class('linked');
+
         this._nickEntry = new Gtk.Entry();
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
         this._nickEntry.get_style_context().add_class('polari-nick-entry');
-        this.widget.add(this._nickEntry);
+        chatBox.add(this._nickEntry);
 
         this._nickEntry.connect('activate', Lang.bind(this,
             function() {
@@ -81,7 +84,8 @@ const EntryArea = new Lang.Class({
 
         this._entry = new Gtk.Entry({ hexpand: true,
                                       activates_default: true });
-        this.widget.add(this._entry);
+        this._entry.connect('changed', Lang.bind(this, this._onEntryChanged));
+        chatBox.add(this._entry);
 
         this._entry.connect('activate', Lang.bind(this,
             function() {
@@ -89,6 +93,39 @@ const EntryArea = new Lang.Class({
                 this._entry.text = '';
             }));
 
+        this.widget.add_named(chatBox, 'default');
+
+        let multiLineBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                         spacing: 6 });
+
+        this._multiLinelabel = new Gtk.Label({ halign: Gtk.Align.START,
+                                               xalign: 0, hexpand: true });
+        multiLineBox.add(this._multiLinelabel);
+
+        let cancelButton = new Gtk.Button({ label: _("_Cancel"),
+                                            use_underline: true });
+        cancelButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
+        multiLineBox.add(cancelButton);
+
+        this._pasteButton = new Gtk.Button({ label: _("_Paste"),
+                                             use_underline: true,
+                                             action_name: 'app.paste-text' });
+        this._pasteButton.get_style_context().add_class('suggested-action');
+        this._pasteButton.connect('clicked',
+                                  Lang.bind(this, this._onButtonClicked));
+        multiLineBox.add(this._pasteButton);
+
+        multiLineBox.connect_after('key-press-event', Lang.bind(this,
+            function(w, event) {
+                let [, keyval] = event.get_keyval();
+                if (keyval == Gdk.KEY_Escape) {
+                    cancelButton.clicked();
+                    return Gdk.EVENT_STOP;
+                }
+                return Gdk.EVENT_PROPAGATE;
+            }));
+
+        this.widget.add_named(multiLineBox, 'multiline');
         this.widget.show_all();
     },
 
@@ -140,6 +177,26 @@ const EntryArea = new Lang.Class({
         this._entry.editable = true;
         this._entry.event(event);
         return Gdk.EVENT_STOP;
+    },
+
+    _onEntryChanged: function() {
+        let nLines = this._entry.text.split('\n').length;
+
+        if (nLines < MAX_LINES)
+            return;
+
+        this._multiLinelabel.label =
+            ngettext("Paste %s line of text to public paste service?",
+                     "Paste %s lines of text to public paste service?",
+                     nLines).format(nLines);
+        this._pasteButton.action_target = new GLib.Variant('s', this._entry.text);
+        this.widget.visible_child_name = 'multiline';
+        this._pasteButton.grab_focus();
+    },
+
+    _onButtonClicked: function() {
+            this._entry.text = '';
+            this.widget.visible_child_name = 'default';
     },
 
     _onSensitiveChanged: function() {

@@ -9,7 +9,6 @@ const Signals = imports.signals;
 
 const N_ = function(s) { return s; };
 
-const MAX_LINES = 5;
 const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const knownCommands = {
@@ -70,7 +69,7 @@ const IrcParser = new Lang.Class({
             return;
 
         if (text[0] != '/') {
-            this._sendOrPasteText(text);
+            this._sendText(text);
             return;
         }
 
@@ -244,7 +243,7 @@ const IrcParser = new Lang.Class({
                     output = this._createFeedbackUsage(cmd);
                     break;
                 }
-                this._sendOrPasteText(stripCommand(text));
+                this._sendText(stripCommand(text));
                 break;
             }
             case 'TOPIC': {
@@ -263,16 +262,10 @@ const IrcParser = new Lang.Class({
             this._app.commandOutputQueue.addNotification(output);
     },
 
-    _sendOrPasteText: function(text) {
-        // auto-paste needs some design; disable for now
-        if (false && text.split('\n').length > MAX_LINES) {
-            let app = Gio.Application.get_default();
-            app.pasteManager.pasteText(text);
-        } else {
-            let type = Tp.ChannelTextMessageType.NORMAL;
-            let message = Tp.ClientMessage.new_text(type, text);
-            this._sendMessage(message);
-        }
+    _sendText: function(text) {
+        let type = Tp.ChannelTextMessageType.NORMAL;
+        let message = Tp.ClientMessage.new_text(type, text);
+        this._sendMessage(message);
     },
 
     _sendMessage: function(message) {
