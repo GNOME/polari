@@ -135,7 +135,7 @@ const ChatView = new Lang.Class({
                             Lang.bind(this, this._onStyleUpdated));
         this._onStyleUpdated();
 
-        this._room = room;
+        this.room = room;
         this._state = { lastNick: null, lastTimestamp: 0 };
         this._active = false;
         this._toplevelFocus = false;
@@ -161,9 +161,6 @@ const ChatView = new Lang.Class({
 
         let adj = this.widget.vadjustment;
         this._scrollBottom = adj.upper - adj.page_size;
-
-        this._app = Gio.Application.get_default();
-        this._app.pasteManager.addWidget(this._view);
 
         this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
@@ -318,7 +315,7 @@ const ChatView = new Lang.Class({
         this._channelSignals = [];
 
         for (let i = 0; i < this._roomSignals.length; i++)
-            this._room.disconnect(this._roomSignals[i]);
+            this.room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
     },
 
@@ -371,7 +368,7 @@ const ChatView = new Lang.Class({
         if (!this._channel)
             return;
 
-        if (this._room.type == Tp.HandleType.ROOM) {
+        if (this.room.type == Tp.HandleType.ROOM) {
             let members = this._channel.group_dup_members_contacts();
             for (let j = 0; j < members.length; j++)
                 this._setNickStatus(members[j].get_alias(),
@@ -627,7 +624,7 @@ const ChatView = new Lang.Class({
     },
 
     _onChannelChanged: function() {
-        if (this._channel == this._room.channel)
+        if (this._channel == this.room.channel)
             return;
 
         if (this._channel) {
@@ -636,7 +633,7 @@ const ChatView = new Lang.Class({
             this._channelSignals = [];
         }
 
-        this._channel = this._room.channel;
+        this._channel = this.room.channel;
 
         if (!this._channel)
             return;
@@ -657,11 +654,11 @@ const ChatView = new Lang.Class({
 
         this._channel.dup_pending_messages().forEach(Lang.bind(this,
             function(message) {
-                this._insertTpMessage(this._room, message);
+                this._insertTpMessage(this.room, message);
             }));
         this._checkMessages();
 
-        if (this._room.type == Tp.HandleType.ROOM) {
+        if (this.room.type == Tp.HandleType.ROOM) {
             let members = this._channel.group_dup_members_contacts();
             for (let j = 0; j < members.length; j++)
                 this._setNickStatus(members[j].get_alias(),
@@ -821,7 +818,7 @@ const ChatView = new Lang.Class({
             timestamp = tpMessage.get_received_timestamp();
         message.timestamp = timestamp;
 
-        message.shouldHighlight = this._room.should_highlight_message(tpMessage);
+        message.shouldHighlight = this.room.should_highlight_message(tpMessage);
 
         this._ensureNewLine();
 
@@ -833,15 +830,15 @@ const ChatView = new Lang.Class({
 
         if (message.shouldHighlight &&
             !(this._toplevelFocus && this._active)) {
-            let summary = '%s %s'.format(this._room.display_name, message.nick);
+            let summary = '%s %s'.format(this.room.display_name, message.nick);
             let notification = new Gio.Notification();
             notification.set_title(summary);
             notification.set_body(message.text);
 
-            let account = this._room.account;
+            let account = this.room.account;
             let param = GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
-                                           this._room.channel_name,
+                                           this.room.channel_name,
                                            TP_CURRENT_TIME ]);
             notification.set_default_action_and_target('app.join-room', param);
             this._app.send_notification('pending-message-' + id, notification);

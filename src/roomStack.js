@@ -34,6 +34,7 @@ const RoomStack = new Lang.Class({
 
     _addView: function(id, view) {
         this._rooms[id] = view;
+        this._app.pasteManager.addWidget(view);
 
         this._inputSizeGroup.add_widget(view.inputWidget);
         if (!this.widget.visible_child)
@@ -152,6 +153,9 @@ const RoomView = new Lang.Class({
         this._view = room ? new ChatView.ChatView(room)
                           : new ChatPlaceholder();
 
+        this._app = Gio.Application.get_default();
+        this._app.pasteManager.addWidget(this._view);
+
         this._entryArea = new EntryArea.EntryArea(room);
 
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
@@ -160,8 +164,6 @@ const RoomView = new Lang.Class({
         this.inputWidget = new Gtk.Frame();
         this.inputWidget.get_style_context().add_class('polari-input-area');
         this.widget.add(this.inputWidget);
-
-        this.inputWidget.add(this._entryArea.widget);
 
         this.widget.show_all();
     },

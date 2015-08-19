@@ -31,9 +31,9 @@ const PasteManager = new Lang.Class({
         this._roomManager = ChatroomManager.getDefault();
     },
 
-    addWidget: function(widget) {
-        // auto-paste needs some design; disable for now
-        return;
+    addWidget: function(area) {
+        this._area = area;
+        let widget = this._area.widget;
 
         if (this._widgets.indexOf(widget) != -1)
             return;
@@ -202,7 +202,8 @@ const PasteManager = new Lang.Class({
             let success = false;
             switch(info) {
                 case DndTargetType.TEXT:
-                    this.pasteText(data.get_text());
+                    //this.pasteText(data.get_text());
+                    this._area.inputWidget.text = data.get_text();
                     success = true;
                     break;
                 case DndTargetType.IMAGE:
@@ -257,7 +258,8 @@ const PasteManager = new Lang.Class({
             file.load_contents_async(null, Lang.bind(this,
                 function(f, res) {
                     let [, contents, ,] = f.load_contents_finish(res);
-                    this._pasteText(contents.toString(), n);
+                    //this._pasteText(contents.toString(), n);
+                    this._area.inputWidget.text = contents.toString();
                 }));
         } else if (type == DndTargetType.IMAGE) {
             file.read_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this,

@@ -74,6 +74,7 @@ const EntryArea = new Lang.Class({
         this._nickEntry.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
+                log(keyval);
                 if (keyval == Gdk.KEY_Escape) {
                     this._entry.grab_focus();
                     return Gdk.EVENT_STOP;
@@ -103,34 +104,35 @@ const EntryArea = new Lang.Class({
                                                xalign: 0, hexpand: true });
         multiLineBox.add(this._multiLinelabel);
 
-        this._pasteButton = new Gtk.Button({ label: _("Paste"), has_focus: true,
-                                             action_name: 'app.paste-text' });
-        this._pasteButton.get_style_context().add_class('suggested-action');
-        this._pasteButton.connect('clicked', Lang.bind(this, function() {
-                this._entry.text = '';
-                this.stack.visible_child_name = 'default';
-            }));
-        multiLineBox.add(this._pasteButton);
-
         let cancelButton = new Gtk.Button({ label: _("Cancel") });
-        cancelButton.connect('clicked', Lang.bind(this, function() {
-                this._entry.text = '';
-                this.stack.visible_child_name = 'default';
-            }));
+        cancelButton.connect('clicked', Lang.bind(this, this._resetEntry));
         multiLineBox.add(cancelButton);
         multiLineBox.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape) {
-                    cancelButton.clicked();
+                let [, mods] = event.get_state();
+                if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
+                    keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
+                    this._resetEntry();
                     return Gdk.EVENT_STOP;
                 }
                 return Gdk.EVENT_PROPAGATE;
             }));
 
+        this._pasteButton = new Gtk.Button({ label: _("Paste"), has_focus: true,
+                                             action_name: 'app.paste-text' });
+        this._pasteButton.get_style_context().add_class('suggested-action');
+        this._pasteButton.connect('clicked', Lang.bind(this, this._resetEntry));
+        multiLineBox.add(this._pasteButton);
+
         this.stack.add_named(multiLineBox, 'multiline');
         this.widget.add(this.stack);
         this.widget.show_all();
+    },
+
+    _resetEntry: function() {
+        this._entry.text = '';
+        this.stack.visible_child_name = 'default';
     },
 
     _updateCompletions: function() {
