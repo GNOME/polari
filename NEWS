@@ -1,3 +1,17 @@
+3.17.90 - "Like Kissing the Body Shop"
+======================================
+* Clear pending messages indication while offline [Florian; #753050]
+* Indicate account errors in room list [Bastian]
+* Re-enable updated paste service integration [Bastian; #725088]
+* Misc. bug fixes and cleanups [Florian; #753335]
+
+Contributors:
+  Bastian Ilsø, Florian Müllner
+
+Translations:
+  Marek Černocký [cs], Kjartan Maraas [nb], Pedro Albuquerque [pt],
+  Daniel Mustieles [es], Dušan Kazik [sk]
+
 3.17.4 - "A Face like a Cat's Arse"
 ===================================
 * Add empty state to assist with initial setup [Bastian; #711832]
