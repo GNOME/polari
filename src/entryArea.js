@@ -118,7 +118,10 @@ const EntryArea = new Lang.Class({
         multiLineBox.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape) {
+                let [, mods] = event.get_state();
+                if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
+                    keyval == Gdk.KEY_Delete ||
+                    keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
                     cancelButton.clicked();
                     return Gdk.EVENT_STOP;
                 }
