@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-26 11:53+0000\n"
-"PO-Revision-Date: 2015-02-26 22:08+0800\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"POT-Creation-Date: 2015-08-24 23:34+0000\n"
+"PO-Revision-Date: 2015-08-25 15:17+0800\n"
+"Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.1\n"
+"X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:412
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME 的網際網路中繼聊天客戶端"
 
@@ -74,18 +74,10 @@ msgid "Window size (width and height)."
 msgstr "視窗大小 (寬度和高度)。"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "視窗位置"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "視窗位置 (x 與 y)。"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "視窗最大化"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "視窗最大化狀態"
 
@@ -116,10 +108,14 @@ msgid "Connections"
 msgstr "連線"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "使用 + 按鈕來加入新連線。"
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "加入"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "移除"
 
@@ -128,7 +124,7 @@ msgid "Join Chat Room"
 msgstr "參與聊天室"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:337
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -193,7 +189,7 @@ msgstr "名稱(_N)"
 msgid "Loading details"
 msgstr "正載入細節"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
 msgid "Last Activity:"
 msgstr "上次活動："
 
@@ -201,142 +197,147 @@ msgstr "上次活動："
 msgid "Message"
 msgstr "訊息"
 
-#: ../src/application.js:349
+#: ../src/application.js:373
 msgid "Good Bye"
 msgstr "再見"
 
-#: ../src/application.js:411
+#: ../src/application.js:451
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2013-15."
 
-#: ../src/appNotifications.js:104
-#, javascript-format
-msgid "Connecting to %s"
-msgstr "正連接到 %s"
+#: ../src/chatView.js:123
+msgid "New Messages"
+msgstr "新訊息"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:487
 msgid "Open Link"
 msgstr "開啟連結"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:494
 msgid "Copy Link Address"
 msgstr "複製連結位址"
 
-#: ../src/chatView.js:574
+#: ../src/chatView.js:678
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s 現在改以 %s 為名"
 
-#: ../src/chatView.js:579
+#: ../src/chatView.js:685
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s 已失去連線"
 
-#: ../src/chatView.js:587
+#: ../src/chatView.js:694
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s 已被 %s 踢出"
 
-#: ../src/chatView.js:589
+#: ../src/chatView.js:696
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s 已被踢出"
 
-#: ../src/chatView.js:595
+#: ../src/chatView.js:703
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s 已被 %s 禁言"
 
-#: ../src/chatView.js:597
+#: ../src/chatView.js:705
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s 已被禁言"
 
-#: ../src/chatView.js:602
+#: ../src/chatView.js:711
 #, javascript-format
 msgid "%s joined"
 msgstr "%s 已參與"
 
-#: ../src/chatView.js:606
+#: ../src/chatView.js:716
 #, javascript-format
 msgid "%s left"
 msgstr "%s 已離開"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:645
+#: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:650
+#: ../src/chatView.js:761
 msgid "Yesterday, %H∶%M"
 msgstr "昨日 %H:%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:655
+#: ../src/chatView.js:766
 msgid "%A, %H∶%M"
 msgstr "%A %H:%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:661
+#: ../src/chatView.js:772
 msgid "%B %d, %H∶%M"
 msgstr "%m月%d日 %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:667
+#: ../src/chatView.js:778
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y年%m月%d日 %H:%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:672
+#: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%p %l∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:677
+#: ../src/chatView.js:788
 msgid "Yesterday, %l∶%M %p"
 msgstr "昨日%p %l∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:682
+#: ../src/chatView.js:793
 msgid "%A, %l∶%M %p"
 msgstr "%A%p %l:%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:688
+#: ../src/chatView.js:799
 msgid "%B %d, %l∶%M %p"
 msgstr "%m月%d日%p %l:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:694
+#: ../src/chatView.js:805
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y年%m月%d日%p %l:%M"
 
-#: ../src/connections.js:325
+#: ../src/connections.js:226
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr "Polari 由於網路錯誤而斷線。請檢查位址欄位是否正確。"
+
+#: ../src/connections.js:364 ../src/roomList.js:232 ../src/roomList.js:252
 msgid "Edit Connection"
 msgstr "編輯連線"
 
-#: ../src/connections.js:326
+#: ../src/connections.js:365
 msgid "New Connection"
 msgstr "新增連線"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:381
 msgid "A_pply"
 msgstr "套用(_P)"
 
-#: ../src/connections.js:339
+#: ../src/connections.js:381
 msgid "Cr_eate"
 msgstr "建立(_E)"
 
@@ -349,77 +350,77 @@ msgstr "建立(_E)"
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #. */
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
 msgstr "/HELP [<指令>] - 顯示 <指令> 說明，或是可用的指令清單"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr "/INVITE <暱稱> [<頻道>] - 邀請 <暱稱> 參與 <頻道>，或是目前的頻道"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <頻道> - 參與 <頻道>"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <暱稱> - 將 <暱稱> 從目前頻道中踢除"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <動作>：送出 <動作> 訊息到目前的頻道中"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - 列出目前頻道中的使用者"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <暱稱> - 將您的暱稱設為 <暱稱>"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr "/PART [<頻道>] [<原因>] - 離開 <頻道>，預設為目前的聊天室"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:33
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <暱稱> - 開啟與 <暱稱> 的私人對話"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:34
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<原因>] - 與目前的伺服器中斷連接"
 
-#: ../src/ircParser.js:36
+#: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <文字> - 傳送 <文字> 給目前的聊天室/聯絡人"
 
-#: ../src/ircParser.js:37
+#: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <主題> - 將討論主題設為 <主題>，或是顯示目前的主題"
 
-#: ../src/ircParser.js:40
+#: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr "未知指令 - 請輸入 /HELP 取得可用指令清單"
 
-#: ../src/ircParser.js:61
+#: ../src/ircParser.js:60
 #, javascript-format
 msgid "Usage: %s"
 msgstr "用法：%s"
 
-#: ../src/ircParser.js:96
+#: ../src/ircParser.js:95
 msgid "Known commands:"
 msgstr "未知指令："
 
-#: ../src/ircParser.js:173
+#: ../src/ircParser.js:172
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s 上的使用者："
 
-#: ../src/ircParser.js:254
+#: ../src/ircParser.js:253
 msgid "No topic set"
 msgstr "尚未設定主題"
 
@@ -431,7 +432,7 @@ msgstr "加入連線"
 msgid "_Save"
 msgstr "儲存(_S)"
 
-#: ../src/mainWindow.js:304
+#: ../src/mainWindow.js:240
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -454,45 +455,82 @@ msgstr "離開聊天室"
 msgid "End conversation"
 msgstr "結束對話"
 
-#: ../src/userList.js:184
+#: ../src/roomList.js:186
+msgid "Connection Error"
+msgstr "連線錯誤"
+
+#: ../src/roomList.js:230
+msgid "Please check your connection details."
+msgstr "請檢查您的網路連線詳細資料。"
+
+#: ../src/roomList.js:251
+msgid "Could not make connection in a safe way."
+msgstr "無法以安全方式進行連線。"
+
+#: ../src/roomList.js:259
+msgid "Authentication failed."
+msgstr "核對失敗。"
+
+#: ../src/roomList.js:260 ../src/roomList.js:271 ../src/roomList.js:279
+msgid "Try again"
+msgstr "再試一次"
+
+#: ../src/roomList.js:270
+msgid "The server is busy."
+msgstr "伺服器忙碌中。"
+
+#: ../src/roomList.js:278
+msgid "Failed to connect for an unknown reason."
+msgstr "因不明的原因無法連線。"
+
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d 秒前"
 
-#: ../src/userList.js:189
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d 分鐘前"
 
-#: ../src/userList.js:194
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d 小時前"
 
-#: ../src/userList.js:199
+#: ../src/userList.js:202
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 天前"
 
-#: ../src/userList.js:204
+#: ../src/userList.js:207
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d 週前"
 
-#: ../src/userList.js:208
+#: ../src/userList.js:211
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d 個月前"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:548
 msgid "All"
 msgstr "全部"
+
+#~ msgid "Window position"
+#~ msgstr "視窗位置"
+
+#~ msgid "Window position (x and y)."
+#~ msgstr "視窗位置 (x 與 y)。"
+
+#~ msgid "Connecting to %s"
+#~ msgstr "正連接到 %s"
 
 #~ msgid "_Leave"
 #~ msgstr "離開(_L)"
