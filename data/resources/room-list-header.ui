@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="Gjs_RoomListHeader" parent="GtkMenuButton">
+    <property name="popover">errorPopover</property>
+    <property name="margin-bottom">4</property>
+    <property name="margin-start">7</property>
+    <property name="margin-end">7</property>
+    <property name="focus-on-click">False</property>
+    <property name="visible">True</property>
+    <style>
+      <class name="room-list-header"/>
+    </style>
+    <child>
+      <object class="GtkBox">
+        <property name="spacing">2</property>
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel" id="label">
+            <property name="xalign">0</property>
+            <property name="hexpand">True</property>
+            <property name="max-width-chars">15</property>
+            <property name="ellipsize">end</property>
+            <property name="visible">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="iconStack">
+            <property name="transition-type">crossfade</property>
+            <property name="margin-end">4</property>
+            <property name="valign">center</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon_name">dialog-error-symbolic</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="name">error</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinner">
+                <property name="active">True</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="name">connecting</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="name">none</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkPopover" id="errorPopover">
+    <property name="position">bottom</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="margin">12</property>
+        <property name="spacing">3</property>
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Connection Error</property>
+            <property name="wrap">True</property>
+            <property name="max-width-chars">30</property>
+            <property name="xalign">0</property>
+            <property name="visible">True</property>
+            <attributes>
+              <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="popoverLabel">
+            <property name="wrap">True</property>
+            <property name="max-width-chars">30</property>
+            <property name="xalign">0</property>
+            <property name="visible">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="popoverButton">
+            <property name="margin-top">15</property>
+            <property name="halign">end</property>
+            <property name="visible">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

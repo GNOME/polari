@@ -140,75 +140,36 @@ const RoomRow = new Lang.Class({
 
 const RoomListHeader = new Lang.Class({
     Name: 'RoomListHeader',
+    Extends: Gtk.MenuButton,
+    Template: 'resource:///org/gnome/Polari/room-list-header.ui',
+    InternalChildren: ['label',
+                       'iconStack',
+                       'errorPopover',
+                       'popoverLabel',
+                       'popoverButton'],
 
-    _init: function(account) {
-        this._account = account;
+    _init: function(params) {
+        this._account = params.account;
+        delete params.account;
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
-
         this._app = Gio.Application.get_default();
 
-        this.widget = new Gtk.Button({ sensitive: false, margin_bottom: 4,
-                                       margin_start: 7, margin_end: 7,
-                                       hexpand: true, focus_on_click: false })
-        this.widget.get_style_context().remove_class('button');
-        this.widget.get_style_context().add_class('room-list-header');
-        this.widget.connect('clicked', Lang.bind(this, function () {
-            this._popover.show_all();
-        }));
+        this.parent(params);
 
-        let headerBox = new Gtk.Box({ spacing: 2, hexpand: true,
-                                      orientation: Gtk.Orientation.HORIZONTAL });
-        this.widget.add(headerBox);
-        let label = new Gtk.Label({ xalign: 0, hexpand: true, max_width_chars: 15,
-                                    ellipsize: Pango.EllipsizeMode.END });
-        this.widget.get_style_context().remove_class('button');
-        account.bind_property('display-name', label, 'label',
-                              GObject.BindingFlags.SYNC_CREATE);
-        headerBox.add(label);
+        this.get_style_context().remove_class('button');
 
-        this._iconStack = new Gtk.Stack({ vhomogeneous: true, valign: Gtk.Align.CENTER,
-                                          margin_end: 4 });
-        this._iconStack.transition_type = Gtk.StackTransitionType.CROSSFADE;
-
-        let errorIcon = new Gtk.Image({ icon_name: 'dialog-error-symbolic',
-                                        halign: Gtk.Align.END });
-
-        this._popover = new Gtk.Popover({ modal: true,
-                                          position: Gtk.PositionType.BOTTOM });
-        let popoverBox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
-                                       margin: 12, spacing: 3 });
-        this._popoverLabel = new Gtk.Label({ wrap: true, max_width_chars: 30,
-                                             halign: Gtk.Align.START, xalign: 0 });
-        this._popoverTitle = new Gtk.Label({ wrap: true, max_width_chars: 30,
-                                             use_markup: true, xalign: 0,
-                                             halign: Gtk.Align.START });
-        this._popoverTitle.label = '<b>' + _("Connection Error") + '</b>';
-        this._popoverButton = new Gtk.Button({ valign: Gtk.Align.CENTER, hexpand: true,
-                                               margin_top: 15, halign: Gtk.Align.END });
+        this._errorPopover.relative_to = this._iconStack;
         this._popoverButton.connect('clicked', Lang.bind(this,
             function() {
-                this._popover.hide();
+                this._errorPopover.hide();
             }));
-        popoverBox.add(this._popoverTitle);
-        popoverBox.add(this._popoverLabel);
-        popoverBox.add(this._popoverButton);
-        this._popover.add(popoverBox);
-        this._popover.relative_to = errorIcon;
 
-        this._iconStack.add_named(errorIcon, 'error');
-
-        let connecting = new Gtk.Spinner({ active: true, halign: Gtk.Align.START });
-        this._iconStack.add_named(connecting, 'connecting');
-
-        this._iconStack.add_named(new Gtk.Box(), 'none');
-
-        this._account.connect('notify::connection-status', Lang.bind(this, this._updateConnectionStatusIcon));
-        headerBox.add(this._iconStack);
-        this.widget.show_all();
-
+        this._account.bind_property('display-name', this._label, 'label',
+                                    GObject.BindingFlags.SYNC_CREATE);
+        this._account.connect('notify::connection-status',
+                              Lang.bind(this, this._updateConnectionStatusIcon));
         this._updateConnectionStatusIcon();
-
     },
 
     _updateConnectionStatusIcon: function() {
@@ -282,7 +243,7 @@ const RoomListHeader = new Lang.Class({
                     break;
             }
         }
-        this.widget.sensitive = isError;
+        this.sensitive = isError;
         this._iconStack.visible_child_name = child;
     },
 });
@@ -452,8 +413,8 @@ const RoomList = new Lang.Class({
         if (row.get_header())
             return;
 
-        let roomListHeader = new RoomListHeader(account);
-        row.set_header(roomListHeader.widget);
+        let roomListHeader = new RoomListHeader({ account: account });
+        row.set_header(roomListHeader);
     },
 
     _sort: function(row1, row2) {

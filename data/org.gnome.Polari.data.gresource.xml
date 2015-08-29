@@ -7,6 +7,7 @@
     <file alias="join-room-dialog.ui" preprocess="xml-stripblanks">resources/join-room-dialog.ui</file>
     <file alias="main-window.ui" preprocess="xml-stripblanks">resources/main-window.ui</file>
     <file alias="message-user-dialog.ui" preprocess="xml-stripblanks">resources/message-user-dialog.ui</file>
+    <file alias="room-list-header.ui" preprocess="xml-stripblanks">resources/room-list-header.ui</file>
     <file alias="user-list-details.ui" preprocess="xml-stripblanks">resources/user-list-details.ui</file>
     <file alias="application.css">resources/application.css</file>
   </gresource>
