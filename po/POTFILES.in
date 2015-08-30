@@ -7,6 +7,7 @@ data/org.gnome.Polari.gschema.xml
 [type: gettext/glade]data/resources/main-window.ui
 [type: gettext/glade]data/resources/menus.ui
 [type: gettext/glade]data/resources/message-user-dialog.ui
+[type: gettext/glade]data/resources/room-list-header.ui
 [type: gettext/glade]data/resources/user-list-details.ui
 src/application.js
 src/appNotifications.js
