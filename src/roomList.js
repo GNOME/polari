@@ -176,8 +176,8 @@ const RoomListHeader = new Lang.Class({
         this._updateConnectionStatusIcon();
 
         this.connect('destroy', Lang.bind(this, function() {
-            this._account.disconnect(displaynameChangedId);
-            this._account.disconnect(connectionstatusChangedId);
+            this._account.disconnect(displayNameChangedId);
+            this._account.disconnect(connectionStatusChangedId);
         }));
     },
 
