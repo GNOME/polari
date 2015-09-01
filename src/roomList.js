@@ -165,11 +165,19 @@ const RoomListHeader = new Lang.Class({
                 this._errorPopover.hide();
             }));
 
-        this._account.bind_property('display-name', this._label, 'label',
-                                    GObject.BindingFlags.SYNC_CREATE);
+        this._account.connect('notify::display-name',
+                              Lang.bind(this, this._onDisplayNameChanged));
+        this._onDisplayNameChanged();
+
         this._account.connect('notify::connection-status',
                               Lang.bind(this, this._updateConnectionStatusIcon));
         this._updateConnectionStatusIcon();
+    },
+
+    _onDisplayNameChanged: function() {
+        this._label.label = this._account.display_name;
+        let accessibleName = _("Connection %s has an error").format(this._account.display_name);
+        this.get_accessible().set_name(accessibleName);
     },
 
     _updateConnectionStatusIcon: function() {
