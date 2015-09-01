@@ -165,13 +165,20 @@ const RoomListHeader = new Lang.Class({
                 this._errorPopover.hide();
             }));
 
-        this._account.connect('notify::display-name',
-                              Lang.bind(this, this._onDisplayNameChanged));
+        let displayNameChangedId =
+            this._account.connect('notify::display-name',
+                                  Lang.bind(this, this._onDisplayNameChanged));
         this._onDisplayNameChanged();
 
-        this._account.connect('notify::connection-status',
-                              Lang.bind(this, this._updateConnectionStatusIcon));
+        let connectionStatusChangedId =
+            this._account.connect('notify::connection-status',
+                                  Lang.bind(this, this._updateConnectionStatusIcon));
         this._updateConnectionStatusIcon();
+
+        this.connect('destroy', Lang.bind(this, function() {
+            this._account.disconnect(displaynameChangedId);
+            this._account.disconnect(connectionstatusChangedId);
+        }));
     },
 
     _onDisplayNameChanged: function() {
