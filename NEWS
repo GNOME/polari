@@ -1,3 +1,15 @@
+3.17.91 - "Wicked"
+==================
+* Misc. bug fixes and cleanups [Bastian, Florian]
+
+Contributors:
+  Bastian Ilsø, Florian Müllner
+
+Translations:
+  Piotr Drąg [pl], Pedro Albuquerque [pt], Chao-Hsiung Liao [zh_TW],
+  Fran Dieguez [gl], Tom Tryfonidis [el], Yosef Or Boczko [he],
+  Alexandre Franke [fr], Balázs Meskó [hu]
+
 3.17.90 - "Like Kissing the Body Shop"
 ======================================
 * Clear pending messages indication while offline [Florian; #753050]
