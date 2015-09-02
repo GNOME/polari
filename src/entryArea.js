@@ -175,9 +175,7 @@ const EntryArea = new Lang.Class({
         if (activationKeys.indexOf(keyval) != -1)
             return Gdk.EVENT_PROPAGATE;
 
-        this._entry.editable = false;
-        this._entry.grab_focus();
-        this._entry.editable = true;
+        this._entry.grab_focus_without_selecting();
         this._entry.event(event);
         return Gdk.EVENT_STOP;
     },
