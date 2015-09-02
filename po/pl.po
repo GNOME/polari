@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-24 21:25+0200\n"
-"PO-Revision-Date: 2015-08-24 21:27+0200\n"
+"POT-Creation-Date: 2015-09-02 03:47+0200\n"
+"PO-Revision-Date: 2015-09-02 03:48+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -192,6 +192,10 @@ msgstr "_Ostatni użytkownicy"
 msgid "_Name"
 msgstr "_Nazwa"
 
+#: ../data/resources/room-list-header.ui.h:1
+msgid "Connection Error"
+msgstr "Błąd połączenia"
+
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Wczytywanie informacji"
@@ -354,7 +358,7 @@ msgstr ""
 "Program Polari został rozłączony z powodu błędu sieci. Proszę sprawdzić, czy "
 "pole adresu jest poprawne."
 
-#: ../src/connections.js:364 ../src/roomList.js:232 ../src/roomList.js:252
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
 msgstr "Modyfikuj połączenie"
 
@@ -495,30 +499,31 @@ msgid "End conversation"
 msgstr "Zakończ rozmowę"
 
 #: ../src/roomList.js:186
-msgid "Connection Error"
-msgstr "Błąd połączenia"
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "Błąd połączenia %s"
 
-#: ../src/roomList.js:230
+#: ../src/roomList.js:206
 msgid "Please check your connection details."
 msgstr "Proszę sprawdzić informacje o połączeniu."
 
-#: ../src/roomList.js:251
+#: ../src/roomList.js:227
 msgid "Could not make connection in a safe way."
 msgstr "Nie można wykonać bezpiecznego połączenia."
 
-#: ../src/roomList.js:259
+#: ../src/roomList.js:235
 msgid "Authentication failed."
 msgstr "Uwierzytelnienie się nie powiodło."
 
-#: ../src/roomList.js:260 ../src/roomList.js:271 ../src/roomList.js:279
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
 msgid "Try again"
 msgstr "Spróbuj ponownie"
 
-#: ../src/roomList.js:270
+#: ../src/roomList.js:246
 msgid "The server is busy."
 msgstr "Serwer jest zajęty."
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Połączenie się nie powiodło z nieznanego powodu."
 
