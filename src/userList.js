@@ -58,15 +58,6 @@ const UserListPopover = new Lang.Class({
         this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed',
                             Lang.bind(this, this._updateFilter));
-        this._entry.connect('key-press-event', Lang.bind(this,
-            function(w, event) {
-                let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape) {
-                    this._entry.text = '';
-                    return Gdk.EVENT_STOP;
-                }
-                return Gdk.EVENT_PROPAGATE;
-            }));
         this._revealer.add(this._entry);
 
         this._box.show_all();
