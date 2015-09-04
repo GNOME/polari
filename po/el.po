@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-08-21 23:32+0000\n"
-"PO-Revision-Date: 2015-08-22 12:12+0300\n"
+"POT-Creation-Date: 2015-09-04 11:34+0000\n"
+"PO-Revision-Date: 2015-09-04 16:53+0300\n"
 "Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: Greek, Modern (1453-) <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
@@ -22,8 +22,7 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
 msgid "Polari"
 msgstr "Polari"
 
@@ -191,11 +190,15 @@ msgstr "Πρόσ_φατα"
 msgid "_Name"
 msgstr "Ό_νομα"
 
+#: ../data/resources/room-list-header.ui.h:1
+msgid "Connection Error"
+msgstr "Σφάλμα σύνδεσης"
+
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Φόρτωση λεπτομερειών"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
 msgid "Last Activity:"
 msgstr "Τελευταία δραστηριότητα:"
 
@@ -339,7 +342,7 @@ msgstr ""
 "Το Polari αποσυνδέθηκε λόγω σφάλματος δικτύου. Παρακαλούμε ελέγξτε αν είναι "
 "σωστό το πεδίο της διεύθυνσης."
 
-#: ../src/connections.js:364 ../src/roomList.js:232 ../src/roomList.js:252
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
 msgstr "Επεξεργασία σύνδεσης"
 
@@ -479,76 +482,77 @@ msgid "End conversation"
 msgstr "Τερματισμός συνομιλίας"
 
 #: ../src/roomList.js:186
-msgid "Connection Error"
-msgstr "Σφάλμα σύνδεσης"
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "Η σύνδεση %s έχει σφάλμα"
 
-#: ../src/roomList.js:230
+#: ../src/roomList.js:206
 msgid "Please check your connection details."
 msgstr "Παρακαλούμε ελέγξτε τις ρυθμίσεις της σύνδεσης σας."
 
-#: ../src/roomList.js:251
+#: ../src/roomList.js:227
 msgid "Could not make connection in a safe way."
 msgstr "Αποτυχία δημιουργίας σύνδεσης με ασφαλή τρόπο."
 
-#: ../src/roomList.js:259
+#: ../src/roomList.js:235
 msgid "Authentication failed."
 msgstr "Αποτυχία πιστοποίησης."
 
-#: ../src/roomList.js:260 ../src/roomList.js:271 ../src/roomList.js:279
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
 msgid "Try again"
 msgstr "Προσπαθήστε ξανά"
 
-#: ../src/roomList.js:270
+#: ../src/roomList.js:246
 msgid "The server is busy."
 msgstr "Ο διακομιστής είναι απασχολημένος."
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Αποτυχία σύνδεσης για άγνωστο λόγο."
 
-#: ../src/userList.js:187
+#: ../src/userList.js:178
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d δευτερόλεπτο πριν"
 msgstr[1] "%d δευτερόλεπτα πριν"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:183
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d λεπτό πριν"
 msgstr[1] "%d λεπτά πριν"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:188
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d ώρα πριν"
 msgstr[1] "%d ώρες πριν"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:193
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d ημέρα πριν"
 msgstr[1] "%d ημέρες πριν"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d εβδομάδα πριν"
 msgstr[1] "%d εβδομάδες πριν"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:202
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d μήνα πριν"
 msgstr[1] "%d μήνες πριν"
 
-#: ../src/userList.js:548
+#: ../src/userList.js:539
 msgid "All"
 msgstr "Όλα"
 
