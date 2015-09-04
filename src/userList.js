@@ -37,8 +37,7 @@ const UserListPopover = new Lang.Class({
     },
 
     _createWidget: function() {
-        this.widget = new Gtk.Popover({ modal: true,
-                                        position: Gtk.PositionType.TOP });
+        this.widget = new Gtk.Popover({ position: Gtk.PositionType.BOTTOM });
 
         this.widget.set_border_width(6);
         this.widget.set_size_request(250, -1);

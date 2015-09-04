@@ -206,7 +206,6 @@ const MainWindow = new Lang.Class({
 
         this._userListPopover = new UserList.UserListPopover();
         this._userListPopover.widget.relative_to = this._showUserListButton;
-        this._userListPopover.widget.position = Gtk.PositionType.BOTTOM;
     },
 
     showJoinRoomDialog: function() {
