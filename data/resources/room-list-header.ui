@@ -27,6 +27,7 @@
           <object class="GtkStack" id="iconStack">
             <property name="transition-type">crossfade</property>
             <property name="margin-end">4</property>
+            <property name="margin-start">4</property>
             <property name="valign">center</property>
             <property name="visible">True</property>
             <child>
