@@ -308,7 +308,7 @@ const _ChatroomManager = new Lang.Class({
         this.emit('active-state-changed');
     },
 
-    getActiveRoom: function(room) {
+    getActiveRoom: function() {
         return this._activeRoom;
     },
 
