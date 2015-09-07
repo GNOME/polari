@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-08-24 11:34+0000\n"
-"PO-Revision-Date: 2015-08-24 17:54+0200\n"
+"POT-Creation-Date: 2015-09-07 11:35+0000\n"
+"PO-Revision-Date: 2015-09-07 14:07+0200\n"
 "Last-Translator: Guillaume Bernard <>\n"
 "Language-Team: français <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -190,11 +190,15 @@ msgstr "_Récent"
 msgid "_Name"
 msgstr "_Nom"
 
+#: ../data/resources/room-list-header.ui.h:1
+msgid "Connection Error"
+msgstr "Erreur de connexion"
+
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Chargement des informations"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "Dernière activité :"
 
@@ -331,9 +335,10 @@ msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr ""
-"Polari s'est déconnecté suite à une erreur réseau. Veuillez vérifier si le champ adresse est correct."
+"Polari s'est déconnecté suite à une erreur réseau. Veuillez vérifier si le "
+"champ adresse est correct."
 
-#: ../src/connections.js:364 ../src/roomList.js:232 ../src/roomList.js:252
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
 msgstr "Modification de la connexion"
 
@@ -447,7 +452,7 @@ msgstr "Ajout d'une connexion"
 msgid "_Save"
 msgstr "_Enregistrer"
 
-#: ../src/mainWindow.js:240
+#: ../src/mainWindow.js:239
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -472,76 +477,77 @@ msgid "End conversation"
 msgstr "Mettre fin à la conversation"
 
 #: ../src/roomList.js:186
-msgid "Connection Error"
-msgstr "Erreur de connexion"
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "Erreur pour la connexion %s"
 
-#: ../src/roomList.js:230
+#: ../src/roomList.js:206
 msgid "Please check your connection details."
 msgstr "Veuillez vérifier vos informations de connexion."
 
-#: ../src/roomList.js:251
+#: ../src/roomList.js:227
 msgid "Could not make connection in a safe way."
 msgstr "Impossible de se connecter de manière sûre."
 
-#: ../src/roomList.js:259
+#: ../src/roomList.js:235
 msgid "Authentication failed."
 msgstr "L'authentification a échoué."
 
-#: ../src/roomList.js:260 ../src/roomList.js:271 ../src/roomList.js:279
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
 msgid "Try again"
 msgstr "Réessayer"
 
-#: ../src/roomList.js:270
+#: ../src/roomList.js:246
 msgid "The server is busy."
 msgstr "Le serveur est occupé."
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Échec de la connexion pour une raison inconnue."
 
-#: ../src/userList.js:187
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Il y a %d seconde"
 msgstr[1] "Il y a %d secondes"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Il y a %d minute"
 msgstr[1] "Il y a %d minutes"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "Il y a %d heure"
 msgstr[1] "Il y a %d heures"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Il y a %d jour"
 msgstr[1] "Il y a %d jours"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Il y a %d semaine"
 msgstr[1] "Il y a %d semaines"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Il y a %d mois"
 msgstr[1] "Il y a %d mois"
 
-#: ../src/userList.js:548
+#: ../src/userList.js:538
 msgid "All"
 msgstr "Tous"
 
