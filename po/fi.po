@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-03 11:43+0000\n"
-"PO-Revision-Date: 2015-03-03 20:39+0200\n"
+"POT-Creation-Date: 2015-09-05 11:32+0000\n"
+"PO-Revision-Date: 2015-09-05 15:02+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:414
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -78,18 +78,10 @@ msgid "Window size (width and height)."
 msgstr "Ikkunan koko (leveys ja korkeus)."
 
 #: ../data/org.gnome.Polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "Ikkunan sijainti"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "Ikkunan sijainti (x ja y)"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "Ikkuna suurennettu"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Suurennetun ikkunan tila"
 
@@ -120,10 +112,14 @@ msgid "Connections"
 msgstr "Yhteydet"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "Napsauta + lisätäksesi uuden yhteyden."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Lisää"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "Poista"
 
@@ -132,7 +128,7 @@ msgid "Join Chat Room"
 msgstr "Liity kanavalle"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
 msgid "_Cancel"
 msgstr "_Peru"
 
@@ -166,7 +162,6 @@ msgid "Message a User"
 msgstr "Lähetä viesti käyttäjälle"
 
 #: ../data/resources/main-window.ui.h:4
-#| msgid "Join a Room"
 msgid "Join room"
 msgstr "Liity kanavalle"
 
@@ -194,11 +189,16 @@ msgstr "_Viimeisimmät"
 msgid "_Name"
 msgstr "_Nimi"
 
+#: ../data/resources/room-list-header.ui.h:1
+#| msgid "Connections"
+msgid "Connection Error"
+msgstr "Yhteysvirhe"
+
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Ladataan tietoja"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "Viimeisin toiminta:"
 
@@ -206,144 +206,150 @@ msgstr "Viimeisin toiminta:"
 msgid "Message"
 msgstr "Viesti"
 
-#: ../src/application.js:349
+#: ../src/application.js:373
 msgid "Good Bye"
 msgstr "Näkemiin"
 
-#: ../src/application.js:413
+#: ../src/application.js:451
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: ../src/appNotifications.js:104
-#, javascript-format
-msgid "Connecting to %s"
-msgstr "Yhdistetään kohteeseen %s"
+#: ../src/chatView.js:123
+#| msgid "Message"
+msgid "New Messages"
+msgstr "Uudet viestit"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:487
 msgid "Open Link"
 msgstr "Avaa linkki"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:494
 msgid "Copy Link Address"
 msgstr "Kopioi linkin osoite"
 
-#: ../src/chatView.js:574
+#: ../src/chatView.js:678
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s vaihtoi nimekseen %s"
 
-#: ../src/chatView.js:579
+#: ../src/chatView.js:685
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s katkaisi yhteyden"
 
-#: ../src/chatView.js:587
+#: ../src/chatView.js:694
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s potkaistiin käyttäjän %s toimesta"
 
-#: ../src/chatView.js:589
+#: ../src/chatView.js:696
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s potkaistiin"
 
-#: ../src/chatView.js:595
+#: ../src/chatView.js:703
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s sai bannit käyttäjän %s toimesta"
 
-#: ../src/chatView.js:597
+#: ../src/chatView.js:705
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s bannattiin"
 
-#: ../src/chatView.js:602
+#: ../src/chatView.js:711
 #, javascript-format
 msgid "%s joined"
 msgstr "%s liittyi"
 
-#: ../src/chatView.js:606
+#: ../src/chatView.js:716
 #, javascript-format
 msgid "%s left"
 msgstr "%s poistui"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:645
+#: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:650
+#: ../src/chatView.js:761
 msgid "Yesterday, %H∶%M"
 msgstr "Eilen, %H:%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:655
+#: ../src/chatView.js:766
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:661
+#: ../src/chatView.js:772
 msgid "%B %d, %H∶%M"
 msgstr "%e. %Bta, %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:667
+#: ../src/chatView.js:778
 msgid "%B %d %Y, %H∶%M"
 msgstr "%e. %Bta %Y, %H:%M"
 
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:672
+#: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:677
+#: ../src/chatView.js:788
 msgid "Yesterday, %l∶%M %p"
 msgstr "Eilen, %l∶%M %p"
 
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:682
-#| msgid "%A, %H:%M"
+#: ../src/chatView.js:793
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:688
+#: ../src/chatView.js:799
 msgid "%B %d, %l∶%M %p"
 msgstr "%e. %Bta, %H:%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:694
-#| msgid "%B %d %Y, %H:%M"
+#: ../src/chatView.js:805
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
 
-#: ../src/connections.js:328
+#: ../src/connections.js:226
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari katkaisi yhteyden yhteysvirheen vuoksi. Tarkista, että osoitekentän "
+"sisältö on oikein."
+
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
 msgstr "Muokkaa yhteyttä"
 
-#: ../src/connections.js:329
+#: ../src/connections.js:365
 msgid "New Connection"
 msgstr "Uusi yhteys"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:381
 msgid "A_pply"
 msgstr "_Toteuta"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:381
 msgid "Cr_eate"
 msgstr "_Luo"
 
@@ -356,7 +362,7 @@ msgstr "_Luo"
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #. */
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
@@ -364,84 +370,84 @@ msgstr ""
 "/HELP [<komento>] - näyttää ohjeen komennolle <komento>, tai listaa kaikki "
 "käytettävissä olevat komennot"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <nimimerkki> [<kanava>] - kutsuu käyttäjän nimeltä <nimimerkki> "
 "kanavalle <kanava>, tai nykyiselle kanavalle"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <kanava> - liittyy kanavalle <kanava>"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr ""
 "/KICK <nimimerkki> - potkii käyttäjän nimeltä <nimimerkki> nykyiseltä "
 "kanavalta"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <toiminto> - lähettää tekstin <toiminto> nykyiselle kanavalle"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - listaa nykyisen kanavan käyttäjät"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <nimimerkki> - asettaa nimimerkiksesi <nimimerkki>"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanava>] [<syy>] - poistuu kanavalta <kanava>, oletuksena nykyinen "
 "kanava"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:33
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr ""
 "/QUERY <nimimerkki> - avaa yksityisen keskustelun käyttäjän nimeltä "
 "<nimimerkki> kanssa"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:34
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<syy>] - katkaisee yhteyden nykyiseen palvelimeen"
 
-#: ../src/ircParser.js:36
+#: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr ""
 "/SAY <teksti> - lähettää tekstin <teksti> nykyiselle kanavalle tai "
 "käyttäjälle"
 
-#: ../src/ircParser.js:37
+#: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <otsikko> - asettaa otsikoksi <otsikko>, tai näyttää nykyisen otsikon"
 
-#: ../src/ircParser.js:40
+#: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Tuntematon komento - anna komento /HELP listataksesi kaikki käytettävissä "
 "olevat komennot"
 
-#: ../src/ircParser.js:61
+#: ../src/ircParser.js:60
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Käyttö: %s"
 
-#: ../src/ircParser.js:96
+#: ../src/ircParser.js:95
 msgid "Known commands:"
 msgstr "Tunnetut komennot:"
 
-#: ../src/ircParser.js:173
+#: ../src/ircParser.js:172
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Käyttäjät kanavalla %s:"
 
-#: ../src/ircParser.js:254
+#: ../src/ircParser.js:253
 msgid "No topic set"
 msgstr "Kanavan otsikkoa ei ole asetettu"
 
@@ -453,7 +459,7 @@ msgstr "Lisää yhteys"
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: ../src/mainWindow.js:304
+#: ../src/mainWindow.js:239
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -474,55 +480,92 @@ msgid "Leave chatroom"
 msgstr "Poistu kanavalta"
 
 #: ../src/roomList.js:23
-#| msgid "Edit Connection"
 msgid "End conversation"
 msgstr "Lopeta keskustelu"
 
-#: ../src/userList.js:184
+#: ../src/roomList.js:186
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "Yhteydessä %s on virhe"
+
+#: ../src/roomList.js:206
+msgid "Please check your connection details."
+msgstr "Tarkista yhteytesi tiedot."
+
+#: ../src/roomList.js:227
+msgid "Could not make connection in a safe way."
+msgstr "Yhteydeyn muodostaminen turvallisesti ei onnistunut."
+
+#: ../src/roomList.js:235
+msgid "Authentication failed."
+msgstr "Tunnistautuminen epäonnistui."
+
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
+msgid "Try again"
+msgstr "Yritä uudelleen"
+
+#: ../src/roomList.js:246
+msgid "The server is busy."
+msgstr "Palvelin on varattu."
+
+#: ../src/roomList.js:254
+msgid "Failed to connect for an unknown reason."
+msgstr "Yhdistäminen epäonnistui tuntemattomasta syystä."
+
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekunti sitten"
 msgstr[1] "%d sekuntia sitten"
 
-#: ../src/userList.js:189
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minuutti sitten"
 msgstr[1] "%d minuuttia sitten"
 
-#: ../src/userList.js:194
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d tunti sitten"
 msgstr[1] "%d tuntia sitten"
 
-#: ../src/userList.js:199
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d päivä sitten"
 msgstr[1] "%d päivää sitten"
 
-#: ../src/userList.js:204
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d viikko sitten"
 msgstr[1] "%d viikkoa sitten"
 
-#: ../src/userList.js:208
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d kuukausi sitten"
 msgstr[1] "%d kuukautta sitten"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:538
 msgid "All"
 msgstr "Kaikki"
+
+#~ msgid "Window position"
+#~ msgstr "Ikkunan sijainti"
+
+#~ msgid "Window position (x and y)."
+#~ msgstr "Ikkunan sijainti (x ja y)"
+
+#~ msgid "Connecting to %s"
+#~ msgstr "Yhdistetään kohteeseen %s"
 
 #~ msgid "_Leave"
 #~ msgstr "_Poistu"
