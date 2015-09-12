@@ -19,4 +19,5 @@ src/mainWindow.js
 src/messageDialog.js
 src/pasteManager.js
 src/roomList.js
+src/roomStack.js
 src/userList.js
