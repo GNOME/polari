@@ -93,7 +93,7 @@ const ChatPlaceholder = new Lang.Class({
 
         let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
                                       margin_start: 14 });
-        title.label = '<span letter_spacing="4500">Polari</span>';
+        title.label = '<span letter_spacing="4500">%s</span>'.format(_("Polari"));
         title.get_style_context().add_class('polari-background-title');
 
         this._description = new Gtk.Label({ halign: Gtk.Align.CENTER, wrap: true,
