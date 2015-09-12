@@ -127,7 +127,7 @@ const ChatPlaceholder = new Lang.Class({
     _checkAccounts: function() {
         let accounts = this._accountsMonitor.dupAccounts();
         if (accounts.length == 0) {
-            this._description.label = "Begin chatting by adding a new connection.";
+            this._description.label = _("Begin chatting by adding a new connection.");
             /* translators: This will be used in the phrase: "Open Connections in the application menu" */
             let href = '<a href="connections">%s</a>'.format(_("Connections"));
             this._instruction.label = _("Open %s in the application menu.").format(href);
@@ -137,7 +137,7 @@ const ChatPlaceholder = new Lang.Class({
             this._instruction.label = '';
 
         } else {
-            this._description.label = "Your connections are disabled.";
+            this._description.label = _("Your connections are disabled.");
             /* translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
             let href = '<a href="connections">%s</a>'.format(_("Connections"));
             this._instruction.label = _("Enable them by opening %s in the application menu.").format(href);
