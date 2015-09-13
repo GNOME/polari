@@ -1,0 +1,519 @@
+# Japanese translation for polari.
+# Copyright (C) 2015 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Kentaro KAZUHAMA <kazken3@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-09-05 00:29+0000\n"
+"PO-Revision-Date: 2015-03-25 21:47+0900\n"
+"Last-Translator: Kentaro KAZUHAMA <kazken3@gmail.com>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOME用インターネットリレーチャットクライアント"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
+msgid "A simple Internet Relay Chat (IRC) client that is designed to integrate seamlessly with GNOME; it features a simple and beautiful interface which allows you to focus on your conversations."
+msgstr "シンプルなインターネットリレーチャット(IRC)クライアントです。GNOME とシームレスに統合するように設計されています。会話に集中しやすいシンプルできれいなインターフェースを特長としています。"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
+msgid "You can use Polari to publicly chat with people in a channel, and to have private one-to-one conversations. Notifications make sure that you never miss an important message - for private conversations, they even allow you to reply instantly without switching back to the application!"
+msgstr "Polariを使うとチャネル内の人々との公開チャットやプライベートな1対1の会話を行えます。重要なメッセージ (プライベートな会話など) を見逃さないように通知機能をサポートしており、しかもアプリケーションに画面を切り替えることなく、通知メッセージからすぐ返事することもできます。"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;インターネット;リレー;チャット;インターネットリレーチャット;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "接続を表示"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "保存したチャネルリスト"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "開始時に復元するチャネルの一覧"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "ウィンドウサイズ"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "ウィンドウサイズ (幅と高さ)"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:5
+msgid "Window maximized"
+msgstr "ウィンドウの最大化"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:6
+msgid "Window maximized state"
+msgstr "ウィンドウの最大化状態"
+
+#: ../data/resources/connection-details.ui.h:1
+msgid "_Address"
+msgstr "アドレス(_A)"
+
+#: ../data/resources/connection-details.ui.h:2
+msgid "_Description"
+msgstr "説明(_D)"
+
+#: ../data/resources/connection-details.ui.h:3
+msgid "_Nickname"
+msgstr "ニックネーム(_N)"
+
+#: ../data/resources/connection-details.ui.h:4
+msgid "_Real Name"
+msgstr "本名(_R)"
+
+#: ../data/resources/connection-details.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "オプション"
+
+#: ../data/resources/connection-list-dialog.ui.h:1
+#: ../data/resources/menus.ui.h:1
+msgid "Connections"
+msgstr "接続"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr ""
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "追加"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "削除"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
+msgid "Join Chat Room"
+msgstr "チャットルームに参加"
+
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
+msgid "_Join"
+msgstr "参加(_J)"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "接続を追加(_A)"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "C_onnection"
+msgstr "接続(_O)"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr "ルーム名(_N)"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "パスワード(_P)"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "ルームに参加する"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "ユーザーにメッセージ"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "Join room"
+msgstr "ルームに参加する"
+
+#: ../data/resources/menus.ui.h:2
+msgid "Preferences"
+msgstr "設定"
+
+#: ../data/resources/menus.ui.h:3
+msgid "About"
+msgstr "このアプリケーションについて"
+
+#: ../data/resources/menus.ui.h:4
+msgid "Quit"
+msgstr "終了"
+
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "_Message"
+msgstr "メッセージ(_M)"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Recent"
+msgstr "最近(_R)"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "名前(_N)"
+
+#: ../data/resources/room-list-header.ui.h:1
+#, fuzzy
+#| msgid "Connections"
+msgid "Connection Error"
+msgstr "接続"
+
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "詳細を読み込み中"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
+msgid "Last Activity:"
+msgstr "最後のアクティビティ:"
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "メッセージ"
+
+#: ../src/application.js:373
+msgid "Good Bye"
+msgstr "Good Bye"
+
+#: ../src/application.js:451
+msgid "translator-credits"
+msgstr ""
+"Kentaro KAZUHAMA <kazken3@gmail.com>\n"
+"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
+
+#: ../src/chatView.js:123
+#, fuzzy
+#| msgid "Message"
+msgid "New Messages"
+msgstr "メッセージ"
+
+#: ../src/chatView.js:487
+msgid "Open Link"
+msgstr "リンクを開く"
+
+#: ../src/chatView.js:494
+msgid "Copy Link Address"
+msgstr "リンクアドレスをコピー"
+
+#: ../src/chatView.js:678
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%sは%sとなりました"
+
+#: ../src/chatView.js:685
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s は切断しました"
+
+#: ../src/chatView.js:694
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s は %s にキックされました"
+
+#: ../src/chatView.js:696
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s はキックされました"
+
+#: ../src/chatView.js:703
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s は %s にBANされました"
+
+#: ../src/chatView.js:705
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s はBANされました"
+
+#: ../src/chatView.js:711
+#, javascript-format
+msgid "%s joined"
+msgstr "%s が参加しました"
+
+#: ../src/chatView.js:716
+#, javascript-format
+msgid "%s left"
+msgstr "%s は離れました"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:756
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:761
+msgid "Yesterday, %H∶%M"
+msgstr "昨日, %H∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:766
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:772
+msgid "%B %d, %H∶%M"
+msgstr "%m月%d日, %H∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:778
+msgid "%B %d %Y, %H∶%M"
+msgstr "%Y年%m月%d日, %H∶%M"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:783
+msgid "%l∶%M %p"
+msgstr "%p%I∶%M"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:788
+msgid "Yesterday, %l∶%M %p"
+msgstr "昨日, %p%I∶%M"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:793
+msgid "%A, %l∶%M %p"
+msgstr "%A, %p%I∶%M"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:799
+msgid "%B %d, %l∶%M %p"
+msgstr "%m月%d日, %p%I∶%M"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:805
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%Y年%m月%d日, %p%I∶%M"
+
+#: ../src/connections.js:226
+msgid "Polari disconnected due to a network error. Please check if the address field is correct."
+msgstr ""
+
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
+msgid "Edit Connection"
+msgstr "接続の編集"
+
+#: ../src/connections.js:365
+msgid "New Connection"
+msgstr "新しい接続"
+
+#: ../src/connections.js:381
+msgid "A_pply"
+msgstr "適用(_P)"
+
+#: ../src/connections.js:381
+msgid "Cr_eate"
+msgstr "作成(_E)"
+
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:25
+msgid "/HELP [<command>] - displays help for <command>, or a list of available commands"
+msgstr "/HELP [<command>] -  <command>のヘルプ、もしくは利用可能なコマンドの一覧を表示する"
+
+#: ../src/ircParser.js:26
+msgid "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr "/INVITE <nick> [<channel>] - <nick> を <channel> 、もしくは現在のチャネルに招待する"
+
+#: ../src/ircParser.js:27
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <channel> - <channel>に参加する"
+
+#: ../src/ircParser.js:28
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "/KICK <nick> - <nick>を現在のチャネルから排除する"
+
+#: ../src/ircParser.js:29
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <action> - 現在のチャネルに <action> を送信する"
+
+#: ../src/ircParser.js:30
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - 現在のチャネル上のユーザーを一覧表示する"
+
+#: ../src/ircParser.js:31
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <nickname> - あなたのニックネームを<nickname>に設定します"
+
+#: ../src/ircParser.js:32
+msgid "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr "/PART [<channel>] [<reason>] - <channel>を離れます。デフォルトは現在のチャネルです"
+
+#: ../src/ircParser.js:33
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr "/QUERY <nick> - <nick>とのプライベートな会話を開きます"
+
+#: ../src/ircParser.js:34
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<reason>] - 現在のサーバーから切断します"
+
+#: ../src/ircParser.js:35
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <text> - 現在のチャットルーム/コンタクトに<text>を送ります"
+
+#: ../src/ircParser.js:36
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <topic> - <topic>をトピックに設定、もしくは現在のチャネルに表示します"
+
+#: ../src/ircParser.js:39
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr "不明なコマンド - /HELP を実行して使用可能なコマンド一覧を確認してください。"
+
+#: ../src/ircParser.js:60
+#, javascript-format
+msgid "Usage: %s"
+msgstr "使用方法: %s"
+
+#: ../src/ircParser.js:95
+msgid "Known commands:"
+msgstr "使用可能なコマンド:"
+
+#: ../src/ircParser.js:172
+#, javascript-format
+msgid "Users on %s:"
+msgstr "%s上のユーザー:"
+
+#: ../src/ircParser.js:253
+msgid "No topic set"
+msgstr "トピックが設定されていません"
+
+#: ../src/joinDialog.js:219
+msgid "Add Connection"
+msgstr "接続の追加"
+
+#: ../src/joinDialog.js:221
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: ../src/mainWindow.js:239
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d ユーザー"
+
+#: ../src/messageDialog.js:92
+msgid "No recent users"
+msgstr "最近のユーザーなし"
+
+#: ../src/pasteManager.js:291
+#, javascript-format
+msgid "Uploading %s"
+msgstr "%s をアップロード中"
+
+#: ../src/roomList.js:22
+msgid "Leave chatroom"
+msgstr "チャットルームを離れる"
+
+#: ../src/roomList.js:23
+msgid "End conversation"
+msgstr "会話の終了"
+
+#: ../src/roomList.js:186
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr ""
+
+#: ../src/roomList.js:206
+msgid "Please check your connection details."
+msgstr ""
+
+#: ../src/roomList.js:227
+msgid "Could not make connection in a safe way."
+msgstr ""
+
+#: ../src/roomList.js:235
+msgid "Authentication failed."
+msgstr ""
+
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
+msgid "Try again"
+msgstr ""
+
+#: ../src/roomList.js:246
+msgid "The server is busy."
+msgstr ""
+
+#: ../src/roomList.js:254
+msgid "Failed to connect for an unknown reason."
+msgstr ""
+
+#: ../src/userList.js:177
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d 秒前"
+
+#: ../src/userList.js:182
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d 分前"
+
+#: ../src/userList.js:187
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d 時間前"
+
+#: ../src/userList.js:192
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d 日前"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d 週前"
+
+#: ../src/userList.js:201
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d ヶ月前"
+
+#: ../src/userList.js:538
+msgid "All"
+msgstr "すべて"
+
+#~ msgid "Connecting to %s"
+#~ msgstr "%sへ接続中"
