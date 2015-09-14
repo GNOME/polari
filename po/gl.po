@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 17:28+0200\n"
-"PO-Revision-Date: 2015-08-25 17:30+0200\n"
+"POT-Creation-Date: 2015-09-14 16:28+0200\n"
+"PO-Revision-Date: 2015-09-14 16:29+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -186,11 +186,15 @@ msgstr "_Recentes"
 msgid "_Name"
 msgstr "_Nome"
 
+#: ../data/resources/room-list-header.ui.h:1
+msgid "Connection Error"
+msgstr "Erro de conexión"
+
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Cargando detalles"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "Última actividade:"
 
@@ -346,7 +350,7 @@ msgstr ""
 "Polari desconectouse debido a un erro de rede. Comprobe se o campo de "
 "enderezo é correcto."
 
-#: ../src/connections.js:364 ../src/roomList.js:232 ../src/roomList.js:252
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
@@ -457,7 +461,7 @@ msgstr "Engadir conexión"
 msgid "_Save"
 msgstr "_Gardar"
 
-#: ../src/mainWindow.js:240
+#: ../src/mainWindow.js:239
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -482,76 +486,77 @@ msgid "End conversation"
 msgstr "Finalizar conversa"
 
 #: ../src/roomList.js:186
-msgid "Connection Error"
-msgstr "Erro de conexión"
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "A conexión %s ten un erro"
 
-#: ../src/roomList.js:230
+#: ../src/roomList.js:206
 msgid "Please check your connection details."
 msgstr "Comprobe a información da súa conexión"
 
-#: ../src/roomList.js:251
+#: ../src/roomList.js:227
 msgid "Could not make connection in a safe way."
 msgstr "Non foi posíbel conectarse dunha forma segura."
 
-#: ../src/roomList.js:259
+#: ../src/roomList.js:235
 msgid "Authentication failed."
 msgstr "A autenticación fallou."
 
-#: ../src/roomList.js:260 ../src/roomList.js:271 ../src/roomList.js:279
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
 msgid "Try again"
 msgstr "Tentar de novo"
 
-#: ../src/roomList.js:270
+#: ../src/roomList.js:246
 msgid "The server is busy."
 msgstr "O servidor está ocupado."
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Produciuse un fallo ao conectarse por unha razón descoñecida."
 
-#: ../src/userList.js:187
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "hai %d segundo"
 msgstr[1] "hai %d segundos"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "hai %d minuto"
 msgstr[1] "hai %d minutos"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "hai %d hora"
 msgstr[1] "hai %d horas"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "hai %d día"
 msgstr[1] "hai %d días"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "hai %d semana"
 msgstr[1] "hai %d semanas"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "hai %d mes"
 msgstr[1] "hai %d meses"
 
-#: ../src/userList.js:548
+#: ../src/userList.js:538
 msgid "All"
 msgstr "Todos"
 
