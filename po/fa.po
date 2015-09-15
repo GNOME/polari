@@ -1,0 +1,545 @@
+# Persian translation for polari.
+# Copyright (C) 2015 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Arash Mousavi <mousavi.arash@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-09-11 11:43+0000\n"
+"PO-Revision-Date: 2015-09-16 01:17+0430\n"
+"Language-Team: Persian <fa@li.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3
+msgid "Polari"
+msgstr "پولاری"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "یک کارگیر بازپخش اینترنت (IRC) برای گنوم"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"یک کارگیر ساده بازپخش اینترنت (IRC) که برای یکپارچگی با گنوم طراحی شده است؛ "
+"شامل یک واسط ساده و زیبا است که به شما اجازه می‌دهد تا بر روی گفت‌وگوهای خود "
+"تمرکز کنید."
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message - for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"شما می‌توانید از پولاری برای گپ عمومی در یک کانال استفاده کنید و یا "
+"گفت‌وگوهای خصوصی یک-به-یک داشته باشید. اعلان باعث می‌شوند تا هیچ‌وقت یک پیام "
+"مهم را - برای گفت‌وگوهای خصوصی - از دست ندهید، آنها حتی به شما اجازه می‌دهد "
+"تا بدون باز کردن برنامه به آنها پاسخ دهید!"
+
+#: ../data/org.gnome.Polari.desktop.in.h:3
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;اینترنت;گپ;"
+
+#: ../data/org.gnome.Polari.desktop.in.h:4
+msgid "Show connections"
+msgstr "نمایش اتصال‌ها"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:1
+msgid "Saved channel list"
+msgstr "فهرست کانال‌های ذخیره شده"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:2
+msgid "List of channels to restore on startup"
+msgstr "فهرست کانال‌ها جهت بازگردانی در هنگام شروع"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:3
+msgid "Window size"
+msgstr "اندازه پنجره"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:4
+msgid "Window size (width and height)."
+msgstr "اندازه پنجره (عرض و ارتقاع)."
+
+#: ../data/org.gnome.Polari.gschema.xml.h:5
+msgid "Window maximized"
+msgstr "پنجره بیشینه شد"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:6
+msgid "Window maximized state"
+msgstr "وضعیت بیشینه پنجره"
+
+#: ../data/resources/connection-details.ui.h:1
+msgid "_Address"
+msgstr "_آدرس"
+
+#: ../data/resources/connection-details.ui.h:2
+msgid "_Description"
+msgstr "_توضیحات"
+
+#: ../data/resources/connection-details.ui.h:3
+msgid "_Nickname"
+msgstr "_نام مستعار"
+
+#: ../data/resources/connection-details.ui.h:4
+msgid "_Real Name"
+msgstr "نام _واقعی"
+
+#: ../data/resources/connection-details.ui.h:5
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "optional"
+msgstr "اختیاری"
+
+#: ../data/resources/connection-list-dialog.ui.h:1
+#: ../data/resources/menus.ui.h:1
+msgid "Connections"
+msgstr "اتصال‌ها"
+
+#: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "از دکمه + برای اضافه کردن اتصال جدید استفاده کنید."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
+msgid "Add"
+msgstr "اضافه کردن"
+
+#: ../data/resources/connection-list-dialog.ui.h:4
+msgid "Remove"
+msgstr "حذف"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
+msgid "Join Chat Room"
+msgstr "پیوستن به اتاق گپ"
+
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
+msgid "_Cancel"
+msgstr "_لغو"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
+msgid "_Join"
+msgstr "_پیوستن"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Connection"
+msgstr "ا_ضافه کردن اتصال"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "C_onnection"
+msgstr "_اتصال"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "Room _Name"
+msgstr "_نام اتاق"
+
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "_Password"
+msgstr "_گذرواژه"
+
+#: ../data/resources/main-window.ui.h:1
+msgid "Join a Room"
+msgstr "پیوستن به یک اتاق"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Message a User"
+msgstr "پیام دادن به یک کاربر"
+
+#: ../data/resources/main-window.ui.h:4
+msgid "Join room"
+msgstr "پیوستن به اتاق"
+
+#: ../data/resources/menus.ui.h:2
+msgid "Preferences"
+msgstr "ترجیحات"
+
+#: ../data/resources/menus.ui.h:3
+msgid "About"
+msgstr "درباره"
+
+#: ../data/resources/menus.ui.h:4
+msgid "Quit"
+msgstr "خروج"
+
+#: ../data/resources/message-user-dialog.ui.h:2
+msgid "_Message"
+msgstr "_پیام"
+
+#: ../data/resources/message-user-dialog.ui.h:4
+msgid "_Recent"
+msgstr "_اخیر"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "_نام"
+
+#: ../data/resources/room-list-header.ui.h:1
+msgid "Connection Error"
+msgstr "خطا اتصال"
+
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "بارگیری جزئیات"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
+msgid "Last Activity:"
+msgstr "آخرین فعالیت:"
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "پیام"
+
+#: ../src/application.js:373
+msgid "Good Bye"
+msgstr "خداحافظ"
+
+#: ../src/application.js:451
+msgid "translator-credits"
+msgstr "آرش موسوی <mousavi.arash@gmail.com>"
+
+#: ../src/chatView.js:123
+msgid "New Messages"
+msgstr "پیام جدید"
+
+#: ../src/chatView.js:487
+msgid "Open Link"
+msgstr "بازکردن پیوند"
+
+#: ../src/chatView.js:494
+msgid "Copy Link Address"
+msgstr "رونوشت آدرس پیوند"
+
+#: ../src/chatView.js:678
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s بعوان %s شناخته می‌شود"
+
+#: ../src/chatView.js:685
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "اتصال %s قطع شد"
+
+#: ../src/chatView.js:694
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s توسط %s اخراج شد"
+
+#: ../src/chatView.js:696
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s اخراج شده است"
+
+#: ../src/chatView.js:703
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "دسترسی %s توسط %s مسدود شد"
+
+#: ../src/chatView.js:705
+#, javascript-format
+msgid "%s has been banned"
+msgstr "دسترسی %s مسدود شده است"
+
+#: ../src/chatView.js:711
+#, javascript-format
+msgid "%s joined"
+msgstr "%s به کانال ملحق شد"
+
+#: ../src/chatView.js:716
+#, javascript-format
+msgid "%s left"
+msgstr "%s کانال را ترک کرد"
+
+#. Translators: Time in 24h format */
+#: ../src/chatView.js:756
+msgid "%H∶%M"
+msgstr "%OH∶%OM"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#: ../src/chatView.js:761
+msgid "Yesterday, %H∶%M"
+msgstr "دیروز، %OH∶%OM"
+
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30" */
+#: ../src/chatView.js:766
+msgid "%A, %H∶%M"
+msgstr "%A، %OH∶%OM"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30" */
+#: ../src/chatView.js:772
+msgid "%B %d, %H∶%M"
+msgstr "%Od %B, %OH∶%OM"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30" */
+#: ../src/chatView.js:778
+msgid "%B %d %Y, %H∶%M"
+msgstr "%Od %B %OY, %OH∶%OM"
+
+#. Translators: Time in 12h format */
+#: ../src/chatView.js:783
+msgid "%l∶%M %p"
+msgstr "%Ol∶%OM %p"
+
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#: ../src/chatView.js:788
+msgid "Yesterday, %l∶%M %p"
+msgstr "دیروز، %Ol∶%OM %p"
+
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#: ../src/chatView.js:793
+msgid "%A, %l∶%M %p"
+msgstr "%A, %Ol∶%OM %p"
+
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm" */
+#: ../src/chatView.js:799
+msgid "%B %d, %l∶%M %p"
+msgstr "%Id %B, %Ol∶%OM %p"
+
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"*/
+#: ../src/chatView.js:805
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%Od %B %OY, %Ol∶%OM %p"
+
+#: ../src/connections.js:226
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"اتصال پولاری به دلیل یک خطا در شبکه قطع شده است. لطفا بررسی کنید که فیلد "
+"آدرس صحیح باشد."
+
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
+msgid "Edit Connection"
+msgstr "ویرایش اتصال"
+
+#: ../src/connections.js:365
+msgid "New Connection"
+msgstr "اتصال جدید"
+
+#: ../src/connections.js:381
+msgid "A_pply"
+msgstr "_اعمال"
+
+#: ../src/connections.js:381
+msgid "Cr_eate"
+msgstr "ا_یجاد"
+
+#. commands that would be nice to support: */
+#.
+#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> - ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. */
+#: ../src/ircParser.js:25
+msgid ""
+"/HELP [<command>] - displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"فرمان /HELP [<فرمان>] - راهنما را برای <فرمان> یا یک فهرست از فرمان‌های "
+"موجود را نمایش می‌دهد"
+
+#: ../src/ircParser.js:26
+msgid ""
+"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+msgstr ""
+"فرمان INVITE <نام مستعار> [<کانال>] - <نام مستعار> را به <کانال> یا کانال "
+"فعلی دعوت می‌کند"
+
+#: ../src/ircParser.js:27
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "فرمان /JOIN <کانال> - به <کانال> ملحق می‌شوید"
+
+#: ../src/ircParser.js:28
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "فرمان /KICK <نام مستعار> - <نام مستعار> را از کانال اخراج می‌کند"
+
+#: ../src/ircParser.js:29
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "فرمان /ME <کنش> - <کنش> را به کانال ارسال می‌کند"
+
+#: ../src/ircParser.js:30
+msgid "/NAMES - lists users on the current channel"
+msgstr "فرمان /NAMES - فهرست اعضا فعلی کانال را نشان می‌دهد"
+
+#: ../src/ircParser.js:31
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr ""
+"فرمان /NICK <نام مستعار> - نام مستعار شما را به <نام مستعار> تغییر می‌دهد"
+
+#: ../src/ircParser.js:32
+msgid ""
+"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+msgstr ""
+"فرمان /PART [<کانال>] [<دلیل>] - <کانال> را ترک می‌کند، بصورت پیش‌فرض کانال "
+"فعلی"
+
+#: ../src/ircParser.js:33
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr ""
+"فرمان /QUERY <نام مستعار> - یک گفت‌وگو خصوصی را با <نام مستعار> باز می‌کند"
+
+#: ../src/ircParser.js:34
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "فرمان /QUIT [<دلیل>] - از کارگزار فعلی قطع می‌شود"
+
+#: ../src/ircParser.js:35
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "فرمان /SAY <متن> - <متن> را به اتاق/مشترک فعلی ارسال می‌کند"
+
+#: ../src/ircParser.js:36
+msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgstr ""
+"فرمان /TOPIC <سرفصل> - سرفصل را به <سرفصل> تغییر می‌دهد یا سرفصل فعلی را "
+"نمایش می‌دهد"
+
+#: ../src/ircParser.js:39
+msgid "Unknown command - try /HELP for a list of available commands"
+msgstr ""
+"فرمان ناشناس - برای نمایش یک فهرست از فرمان‌های ممکن Help/ را وارد کنید"
+
+#: ../src/ircParser.js:60
+#, javascript-format
+msgid "Usage: %s"
+msgstr "استفاده: %s"
+
+#: ../src/ircParser.js:95
+msgid "Known commands:"
+msgstr "دستورات شناخته شده:"
+
+#: ../src/ircParser.js:172
+#, javascript-format
+msgid "Users on %s:"
+msgstr "کاربران %s"
+
+#: ../src/ircParser.js:253
+msgid "No topic set"
+msgstr "هیچ سرفصلی تنظیم نشده"
+
+#: ../src/joinDialog.js:219
+msgid "Add Connection"
+msgstr "اضافه کردن اتصال"
+
+#: ../src/joinDialog.js:221
+msgid "_Save"
+msgstr "_ذخیره"
+
+#: ../src/mainWindow.js:239
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%Id کاربر"
+
+#: ../src/messageDialog.js:92
+msgid "No recent users"
+msgstr "هیچ کاربری اخیرا نبوده است"
+
+#: ../src/pasteManager.js:291
+#, javascript-format
+msgid "Uploading %s"
+msgstr "بارگذاری %s"
+
+#: ../src/roomList.js:22
+msgid "Leave chatroom"
+msgstr "ترک کردن اتاق گپ"
+
+#: ../src/roomList.js:23
+msgid "End conversation"
+msgstr "ویرایش گفت‌وگو"
+
+#: ../src/roomList.js:186
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "اتصال %s خطایی دارد"
+
+#: ../src/roomList.js:206
+msgid "Please check your connection details."
+msgstr "لطفا جزئیات اتصال خود را بررسی کنید."
+
+#: ../src/roomList.js:227
+msgid "Could not make connection in a safe way."
+msgstr "امکان برقرار اتصال به شکل ایمن نبود."
+
+#: ../src/roomList.js:235
+msgid "Authentication failed."
+msgstr "تصدیق هویت شکست خورد"
+
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
+msgid "Try again"
+msgstr "تلاش مجدد"
+
+#: ../src/roomList.js:246
+msgid "The server is busy."
+msgstr "کارگزار مشغول است."
+
+#: ../src/roomList.js:254
+msgid "Failed to connect for an unknown reason."
+msgstr "اتصال به دلایل نامعلومی شکست خورد."
+
+#: ../src/userList.js:177
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%Id ثانیه قبل"
+
+#: ../src/userList.js:182
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%Id دقیقه قبل"
+
+#: ../src/userList.js:187
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%Id ساعت قبل"
+
+#: ../src/userList.js:192
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%Id روز قبل"
+
+#: ../src/userList.js:197
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%Id هفته قبل"
+
+#: ../src/userList.js:201
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%Id ماه قبل"
+
+#: ../src/userList.js:538
+msgid "All"
+msgstr "همه"
