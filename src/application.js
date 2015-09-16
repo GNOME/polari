@@ -454,7 +454,6 @@ const Application = new Lang.Class({
                                     + ' 2013 Red Hat, Inc.',
             license_type: Gtk.License.GPL_2_0,
             logo_icon_name: 'polari',
-            wrap_license: true,
             version: pkg.version,
 
             transient_for: this._window.window,
