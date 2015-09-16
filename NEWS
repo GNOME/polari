@@ -1,3 +1,18 @@
+3.17.92 - "Bottom Shy"
+======================
+* Misc. fixes [Jiro; #754916]
+
+Contributors:
+  Arijit Chatterjee, Jiro Matsuzawa, Florian Müllner
+
+Translations:
+  Piotr Drąg [pl], Dušan Kazik [sk], Pedro Albuquerque [pt],
+  Milo Casagrande [it], Baurzhan Muftakhidinov [kk], Tom Tryfonidis [el],
+  Changwoo Ryu [ko], Aurimas Černius [lt], Alexandre Franke [fr],
+  Kjartan Maraas [nb], Jiri Grönroos [fi], Anders Jonsson [sv],
+  Kentaro KAZUHAMA [ja], Fran Dieguez [gl], Bernd Homuth [de],
+  Daniel Mustieles [es], Arash Mousavi [fa], Rūdolfs Mazurs [lv]
+
 3.17.91 - "Wicked"
 ==================
 * Misc. bug fixes and cleanups [Bastian, Florian]
