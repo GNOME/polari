@@ -455,6 +455,7 @@ const Application = new Lang.Class({
             license_type: Gtk.License.GPL_2_0,
             logo_icon_name: 'polari',
             version: pkg.version,
+            website: 'https://wiki.gnome.org/Apps/Polari',
 
             transient_for: this._window.window,
             modal: true
