@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-02 03:47+0200\n"
-"PO-Revision-Date: 2015-09-02 03:48+0200\n"
+"POT-Creation-Date: 2015-09-16 19:48+0200\n"
+"PO-Revision-Date: 2015-09-16 19:49+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -24,8 +24,8 @@ msgstr ""
 "X-Poedit-Country: Poland\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -109,14 +109,17 @@ msgstr "_Imię i nazwisko"
 msgid "optional"
 msgstr "opcjonalne"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu"
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Połączenia"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "Use the + button to add a new connection."
-msgstr "Przycisk + dodaje nowe połączenie."
+msgstr "Przycisk „+” dodaje nowe połączenie."
 
 #: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
@@ -186,7 +189,7 @@ msgstr "_Wiadomość"
 
 #: ../data/resources/message-user-dialog.ui.h:4
 msgid "_Recent"
-msgstr "_Ostatni użytkownicy"
+msgstr "Ostatni _użytkownicy"
 
 #: ../data/resources/message-user-dialog.ui.h:5
 msgid "_Name"
@@ -200,7 +203,7 @@ msgstr "Błąd połączenia"
 msgid "Loading details"
 msgstr "Wczytywanie informacji"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "Ostatnia aktywność:"
 
@@ -418,7 +421,7 @@ msgstr "/NAMES — wyświetla listę użytkowników w bieżącym kanale"
 
 #: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <psudonim> — ustawia <pseudonim>"
+msgstr "/NICK <pseudonim> — ustawia <pseudonim>"
 
 #: ../src/ircParser.js:32
 msgid ""
@@ -473,7 +476,7 @@ msgstr "Dodaj połączenie"
 msgid "_Save"
 msgstr "Zapi_sz"
 
-#: ../src/mainWindow.js:240
+#: ../src/mainWindow.js:239
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -527,7 +530,29 @@ msgstr "Serwer jest zajęty."
 msgid "Failed to connect for an unknown reason."
 msgstr "Połączenie się nie powiodło z nieznanego powodu."
 
-#: ../src/userList.js:187
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Dodanie nowego połączenia umożliwi rozpoczęcie rozmów."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Należy otworzyć „%s” w menu programu."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Przycisk „+” umożliwia dołączenie do pokoju."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Połączenia są wyłączone."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Można je włączyć otwierając „%s” w menu programu."
+
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -535,7 +560,7 @@ msgstr[0] "%d sekunda temu"
 msgstr[1] "%d sekundy temu"
 msgstr[2] "%d sekund temu"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -543,7 +568,7 @@ msgstr[0] "%d minuta temu"
 msgstr[1] "%d minuty temu"
 msgstr[2] "%d minut temu"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -551,7 +576,7 @@ msgstr[0] "%d godzina temu"
 msgstr[1] "%d godziny temu"
 msgstr[2] "%d godzin temu"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -559,7 +584,7 @@ msgstr[0] "%d dzień temu"
 msgstr[1] "%d dni temu"
 msgstr[2] "%d dni temu"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -567,7 +592,7 @@ msgstr[0] "%d tydzień temu"
 msgstr[1] "%d tygodnie temu"
 msgstr[2] "%d tygodni temu"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -575,6 +600,6 @@ msgstr[0] "%d miesiąc temu"
 msgstr[1] "%d miesiące temu"
 msgstr[2] "%d miesięcy temu"
 
-#: ../src/userList.js:548
+#: ../src/userList.js:538
 msgid "All"
 msgstr "Wszyscy"
