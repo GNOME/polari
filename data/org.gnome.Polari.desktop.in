@@ -1,8 +1,7 @@
 [Desktop Entry]
 _Name=Polari
 _Comment=An Internet Relay Chat Client for GNOME
-Exec=polari
-TryExec=polari
+Exec=gapplication launch org.gnome.Polari
 Icon=polari
 Type=Application
 StartupNotify=true
