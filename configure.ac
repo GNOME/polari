@@ -1,13 +1,14 @@
 AC_INIT([polari],[3.17.91],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
+AX_IS_RELEASE([git-directory])
 
 AC_SUBST([APP_ID],[org.gnome.Polari])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+AM_INIT_AUTOMAKE([1.11 check-news dist-xz no-dist-gzip tar-ustar foreign subdir-objects])
 
-AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign subdir-objects])
+AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE([enable])
 
 GETTEXT_PACKAGE=AC_PACKAGE_NAME
@@ -45,12 +46,12 @@ AC_PATH_PROG(DESKTOP_FILE_VALIDATE, desktop-file-validate)
 APPSTREAM_XML
 
 AC_CONFIG_FILES([
-Makefile
-data/Makefile
-data/appdata/Makefile
-data/icons/Makefile
-po/Makefile.in
-src/Makefile
+  Makefile
+  data/Makefile
+  data/appdata/Makefile
+  data/icons/Makefile
+  po/Makefile.in
+  src/Makefile
 ])
 
 AC_OUTPUT
