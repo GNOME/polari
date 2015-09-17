@@ -637,9 +637,12 @@ polari_room_set_property (GObject      *object,
                           const GValue *value,
                           GParamSpec   *pspec)
 {
+  PolariRoom *room;
+
   g_return_if_fail (POLARI_IS_ROOM (object));
   g_return_if_fail (G_IS_OBJECT (object));
-  PolariRoom *room = POLARI_ROOM(object);
+
+  room = POLARI_ROOM(object);
 
   switch (prop_id)
     {
