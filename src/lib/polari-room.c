@@ -122,7 +122,7 @@ polari_room_should_highlight_message (PolariRoom *room,
 {
   PolariRoomPrivate *priv;
   TpConnection *conn;
-  TpContact *sender, *self;
+  TpContact *self;
   char *text;
   gboolean result;
 
