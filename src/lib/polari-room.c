@@ -348,6 +348,15 @@ on_group_contacts_changed (TpChannel  *channel,
         g_signal_emit (user_data, signals[MEMBER_JOINED], 0,
                        g_ptr_array_index (added, i));
       break;
+    case TP_CHANNEL_GROUP_CHANGE_REASON_BUSY:
+    case TP_CHANNEL_GROUP_CHANGE_REASON_ERROR:
+    case TP_CHANNEL_GROUP_CHANGE_REASON_INVALID_CONTACT:
+    case TP_CHANNEL_GROUP_CHANGE_REASON_INVITED:
+    case TP_CHANNEL_GROUP_CHANGE_REASON_NO_ANSWER:
+    case TP_CHANNEL_GROUP_CHANGE_REASON_PERMISSION_DENIED:
+    case TP_CHANNEL_GROUP_CHANGE_REASON_SEPARATED:
+    default:
+      break; /* no special handling */
     }
 
   g_signal_emit (user_data, signals[MEMBERS_CHANGED], 0);
