@@ -613,8 +613,12 @@ const ChatView = new Lang.Class({
         }
     },
 
+    _getNickTagName: function(nick) {
+        return NICKTAG_PREFIX + nick;
+    },
+
     _setNickStatus: function(nick, status) {
-        let nickTag = this._lookupTag('nick' + nick);
+        let nickTag = this._lookupTag(this._getNickTagName(nick));
         if (!nickTag)
            return;
 
@@ -910,10 +914,11 @@ const ChatView = new Lang.Class({
         } else {
             if (state.lastNick != message.nick) {
                 let tags = [this._lookupTag('nick')];
-                let nickTag = this._lookupTag(NICKTAG_PREFIX + message.nick);
+                let nickTagName = this._getNickTagName(message.nick);
+                let nickTag = this._lookupTag(nickTagName);
 
                 if (!nickTag) {
-                    nickTag = new Gtk.TextTag({ name: NICKTAG_PREFIX + message.nick });
+                    nickTag = new Gtk.TextTag({ name: nickTagName });
                     this._view.get_buffer().get_tag_table().add(nickTag);
                 }
                 tags.push(nickTag);
