@@ -463,7 +463,7 @@ polari_room_set_account (PolariRoom *room,
 
 static void
 polari_room_set_type (PolariRoom *room,
-                      int         type)
+                      guint       type)
 {
   PolariRoomPrivate *priv;
 
@@ -612,7 +612,7 @@ polari_room_get_property (GObject    *object,
       g_value_set_object (value, priv->account);
       break;
     case PROP_TYPE:
-      g_value_set_int (value, priv->type);
+      g_value_set_uint (value, priv->type);
       break;
     case PROP_CHANNEL_NAME:
       g_value_set_string (value, priv->channel_name);
@@ -650,7 +650,7 @@ polari_room_set_property (GObject      *object,
       polari_room_set_account (room, g_value_get_object (value));
       break;
     case PROP_TYPE:
-      polari_room_set_type (room, g_value_get_int (value));
+      polari_room_set_type (room, g_value_get_uint (value));
       break;
     case PROP_CHANNEL_NAME:
       polari_room_set_channel_name (room, g_value_get_string (value));
@@ -730,7 +730,7 @@ polari_room_class_init (PolariRoomClass *klass)
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   props[PROP_TYPE] =
-    g_param_spec_int ("type",
+    g_param_spec_uint ("type",
                        "Type",
                        "Type",
                        TP_HANDLE_TYPE_NONE,
