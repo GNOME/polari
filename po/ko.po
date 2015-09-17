@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-04 23:31+0000\n"
-"PO-Revision-Date: 2015-09-05 18:46+0900\n"
+"POT-Creation-Date: 2015-09-16 23:46+0000\n"
+"PO-Revision-Date: 2015-09-17 09:25+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
 msgid "Polari"
 msgstr "폴라리"
 
@@ -47,7 +47,11 @@ msgid ""
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message - for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
-msgstr "폴라리를 사용해 채널의 사람들과 대화할 수 있고, 개인적으로 일대일 대화를 할 수도 있습니다. 알림 기능을 이용해 중요한 메시지를 놓치지 않을 수 있습니다. 개인 대화의 경우에는 폴라리 프로그램으로 전환하지 않고 알림 창에서 즉시 대답을 할 수 있습니다."
+msgstr ""
+"폴라리를 사용해 채널의 사람들과 대화할 수 있고, 개인적으로 일대일 대화를 할 "
+"수도 있습니다. 알림 기능을 이용해 중요한 메시지를 놓치지 않을 수 있습니다. 개"
+"인 대화의 경우에는 폴라리 프로그램으로 전환하지 않고 알림 창에서 즉시 대답을 "
+"할 수 있습니다."
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
@@ -102,8 +106,11 @@ msgstr "실명(_R)"
 msgid "optional"
 msgstr "옵션"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "연결"
 
@@ -193,7 +200,7 @@ msgstr "연결 오류"
 msgid "Loading details"
 msgstr "자세한 정보 읽어들이는 중"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "최근 활동:"
 
@@ -327,7 +334,9 @@ msgstr "%Y년 %B %d일, %p %l∶%M"
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
-msgstr "폴라리의 연결이 네트워크 오류 때문에 끊겼습니다. 주소 입력이 올바른지 확인해 보십시오."
+msgstr ""
+"폴라리의 연결이 네트워크 오류 때문에 끊겼습니다. 주소 입력이 올바른지 확인해 "
+"보십시오."
 
 #: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
@@ -444,7 +453,7 @@ msgstr "연결 추가"
 msgid "_Save"
 msgstr "저장(_S)"
 
-#: ../src/mainWindow.js:240
+#: ../src/mainWindow.js:239
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -496,45 +505,64 @@ msgstr "서버가 혼잡해 사용할 수 없습니다."
 msgid "Failed to connect for an unknown reason."
 msgstr "알 수 없는 이유로 연결이 실패했습니다."
 
-#: ../src/userList.js:178
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "연결을 추가해 대화를 시작하십시오."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "프로그램 메뉴에서 %s을(를) 여십시오."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "+ 단추를 이용해 대화방에 입장하십시오."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "연결을 사용할 수 없습니다."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "프로그램 메뉴에서 %s을(를) 열어 연결을 사용하십시오."
+
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d초 전"
 
-#: ../src/userList.js:183
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d분 전"
 
-#: ../src/userList.js:188
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d시간 전"
 
-#: ../src/userList.js:193
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d일 전"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d주 전"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d달 전"
 
-#: ../src/userList.js:539
+#: ../src/userList.js:538
 msgid "All"
 msgstr "모두"
-
-#~ msgid "Connecting to %s"
-#~ msgstr "%s에 연결하는 중"
