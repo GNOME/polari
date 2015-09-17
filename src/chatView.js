@@ -4,6 +4,7 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
+const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
@@ -614,7 +615,7 @@ const ChatView = new Lang.Class({
     },
 
     _getNickTagName: function(nick) {
-        return NICKTAG_PREFIX + nick;
+        return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
     _setNickStatus: function(nick, status) {
