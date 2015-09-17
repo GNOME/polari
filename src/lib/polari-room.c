@@ -271,13 +271,13 @@ update_self_nick (PolariRoom *room)
   self = tp_connection_get_self_contact (conn);
 
   nick = tp_contact_get_alias (self);
-  len = strlen (nick);
-  do
-    if (g_ascii_isalnum (nick[len - 1]))
-        break;
-  while (--len > 0);
+  for (len = 0; g_ascii_isalnum(nick[len]); len++)
+    ;
 
-  priv->self_nick = g_strndup (nick, len);
+  if (len > 0)
+    priv->self_nick = g_strndup (nick, len);
+  else
+    priv->self_nick = g_strdup (nick);
 }
 
 static void
