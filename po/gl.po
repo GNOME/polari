@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-14 16:28+0200\n"
-"PO-Revision-Date: 2015-09-14 16:29+0200\n"
+"POT-Creation-Date: 2015-09-17 10:11+0200\n"
+"PO-Revision-Date: 2015-09-17 10:13+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -20,6 +20,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -103,8 +104,11 @@ msgstr "Nome _real"
 msgid "optional"
 msgstr "opcional"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu"
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Conexións"
 
@@ -513,6 +517,28 @@ msgstr "O servidor está ocupado."
 #: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Produciuse un fallo ao conectarse por unha razón descoñecida."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Comece a chatear engadindo unha nova conexión."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Abra %s no menú da aplicación."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Únase a unha sala usando o botón +."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "As súas conexións están desactivadas."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Actíveas abrindo %s desde o menú de aplicación."
 
 #: ../src/userList.js:177
 #, javascript-format
