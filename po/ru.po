@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-11 11:46+0000\n"
-"PO-Revision-Date: 2015-03-12 01:15+0300\n"
+"POT-Creation-Date: 2015-09-17 11:48+0000\n"
+"PO-Revision-Date: 2015-09-17 15:50+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -19,16 +19,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:416
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-клиент для GNOME"
 
@@ -105,16 +105,23 @@ msgstr "_Настоящее имя"
 msgid "optional"
 msgstr "если есть"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Подключения"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
+msgid "Use the + button to add a new connection."
+msgstr "Используйте клавишу +, чтобы добавить новое подключение."
+
+#: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
 msgstr "Добавить"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
+#: ../data/resources/connection-list-dialog.ui.h:4
 msgid "Remove"
 msgstr "Удалить"
 
@@ -123,7 +130,7 @@ msgid "Join Chat Room"
 msgstr "Войти в комнату"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -184,11 +191,16 @@ msgstr "_Последние"
 msgid "_Name"
 msgstr "_Имя"
 
+#: ../data/resources/room-list-header.ui.h:1
+#| msgid "Connections"
+msgid "Connection Error"
+msgstr "Ошибка подключения"
+
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Загрузка информации"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "Последняя активность:"
 
@@ -196,116 +208,116 @@ msgstr "Последняя активность:"
 msgid "Message"
 msgstr "Сообщение"
 
-#: ../src/application.js:351
+#: ../src/application.js:373
 msgid "Good Bye"
 msgstr "Пока"
 
-#: ../src/application.js:415
+#: ../src/application.js:451
 msgid "translator-credits"
 msgstr ""
 "Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014.\n"
 "Станислав Соловей <whats_up@tut.by>, 2015."
 
-#: ../src/appNotifications.js:104
-#, javascript-format
-msgid "Connecting to %s"
-msgstr "Подключение к %s"
+#: ../src/chatView.js:123
+#| msgid "Message"
+msgid "New Messages"
+msgstr "Новые сообщения"
 
-#: ../src/chatView.js:408
+#: ../src/chatView.js:487
 msgid "Open Link"
 msgstr "Открыть ссылку"
 
-#: ../src/chatView.js:415
+#: ../src/chatView.js:494
 msgid "Copy Link Address"
 msgstr "Копировать адрес ссылки"
 
-#: ../src/chatView.js:574
+#: ../src/chatView.js:678
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s теперь известен как %s"
 
-#: ../src/chatView.js:579
+#: ../src/chatView.js:685
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s отсоединился"
 
-#: ../src/chatView.js:587
+#: ../src/chatView.js:694
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s был выкинут %s"
 
-#: ../src/chatView.js:589
+#: ../src/chatView.js:696
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s был выкинут"
 
-#: ../src/chatView.js:595
+#: ../src/chatView.js:703
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s был заблокирован %s"
 
-#: ../src/chatView.js:597
+#: ../src/chatView.js:705
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s был заблокирован"
 
-#: ../src/chatView.js:602
+#: ../src/chatView.js:711
 #, javascript-format
 msgid "%s joined"
 msgstr "%s присоединился к чату"
 
-#: ../src/chatView.js:606
+#: ../src/chatView.js:716
 #, javascript-format
 msgid "%s left"
 msgstr "%s покинул чат"
 
 #. Translators: Time in 24h format */
-#: ../src/chatView.js:645
+#: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:650
+#: ../src/chatView.js:761
 msgid "Yesterday, %H∶%M"
 msgstr "Вчера, %H∶%M"
 
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:655
+#: ../src/chatView.js:766
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:661
+#: ../src/chatView.js:772
 msgid "%B %d, %H∶%M"
 msgstr "%d %b., %H∶%M"
 
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:667
+#: ../src/chatView.js:778
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %b. %Y, %H∶%M"
 
 # Нельзя заменять %l∶%M %p на %H∶%M, потому что при переключении в основных настройках системы времени на 12-часовой формат в программе ничего не измениться, время по прежнему будет в 24-часовом формате. Для 24-часового формата есть отдельные строки перевода.
 #. Translators: Time in 12h format */
-#: ../src/chatView.js:672
+#: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:677
+#: ../src/chatView.js:788
 msgid "Yesterday, %l∶%M %p"
 msgstr "Вчера, %l∶%M %p"
 
 # Нельзя заменять %l∶%M %p на %H∶%M, потому что при переключении в основных настройках системы времени на 12-часовой формат в программе ничего не измениться, время по прежнему будет в 24-часовом формате. Для 24-часового формата есть отдельные строки перевода.
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:682
+#: ../src/chatView.js:793
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
@@ -313,7 +325,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:688
+#: ../src/chatView.js:799
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %b., %l∶%M %p"
 
@@ -321,23 +333,30 @@ msgstr "%d %b., %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:694
+#: ../src/chatView.js:805
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %b. %Y, %l∶%M %p"
 
-#: ../src/connections.js:328
+#: ../src/connections.js:226
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari отключён из-за ошибки сети. Проверьте правильно ли введён адрес."
+
+#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
 msgstr "Изменить подключение"
 
-#: ../src/connections.js:329
+#: ../src/connections.js:365
 msgid "New Connection"
 msgstr "Создать подключение"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:381
 msgid "A_pply"
 msgstr "_Применить"
 
-#: ../src/connections.js:342
+#: ../src/connections.js:381
 msgid "Cr_eate"
 msgstr "Со_здать"
 
@@ -350,85 +369,85 @@ msgstr "Со_здать"
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #. */
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
 msgstr ""
 "/HELP [<команда>] — показать справку по <команде> или список доступных команд"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <псевдоним> [<канал>] — пригласить <псевдоним> на <канал> или на "
 "текущий канал"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <канал> — зайти на <канал>"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <псевдоним> — выкинуть <псевдоним> с текущего канала"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <действие> — отправить <действие> на текущий канал"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES ­— вывести список пользователей текущего канала"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <псевдоним> — установить <псевдоним>"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr "/PART [<канал>] [<причина>] — покинуть <канал>, по умолчанию — текущий"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:33
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <псевдоним> — открыть приватную беседу с <псевдоним>"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:34
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<причина>] — отключиться от текущего сервера"
 
-#: ../src/ircParser.js:36
+#: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr ""
 "/SAY <текст> — отправить <текст> в текущей комнате или текущему контакту"
 
-#: ../src/ircParser.js:37
+#: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <тема> — установить тему <тема> или показать текущую установленную "
 "тему"
 
-#: ../src/ircParser.js:40
+#: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Неизвестная команда — используйте /HELP, чтобы показать список доступных "
 "команд"
 
-#: ../src/ircParser.js:61
+#: ../src/ircParser.js:60
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Использование: %s"
 
-#: ../src/ircParser.js:96
+#: ../src/ircParser.js:95
 msgid "Known commands:"
 msgstr "Известные команды:"
 
-#: ../src/ircParser.js:173
+#: ../src/ircParser.js:172
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Пользователи на канале %s:"
 
-#: ../src/ircParser.js:254
+#: ../src/ircParser.js:253
 msgid "No topic set"
 msgstr "Тема не установлена"
 
@@ -440,9 +459,8 @@ msgstr "Добавить подключение"
 msgid "_Save"
 msgstr "_Сохранить"
 
-#: ../src/mainWindow.js:260
+#: ../src/mainWindow.js:239
 #, javascript-format
-#| msgid "%d users"
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d пользователь"
@@ -466,7 +484,58 @@ msgstr "Покинуть чат"
 msgid "End conversation"
 msgstr "Завершить переписку"
 
-#: ../src/userList.js:184
+#: ../src/roomList.js:186
+#, javascript-format
+msgid "Connection %s has an error"
+msgstr "В подключении %s возникла ошибка"
+
+#: ../src/roomList.js:206
+msgid "Please check your connection details."
+msgstr "Проверьте данные подключения."
+
+#: ../src/roomList.js:227
+msgid "Could not make connection in a safe way."
+msgstr "Не удалось установить безопасное соединение"
+
+#: ../src/roomList.js:235
+msgid "Authentication failed."
+msgstr "Не удалось выполнить аутентификацию."
+
+#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
+msgid "Try again"
+msgstr "Попробуйте снова"
+
+#: ../src/roomList.js:246
+msgid "The server is busy."
+msgstr "Сервер занят."
+
+#: ../src/roomList.js:254
+msgid "Failed to connect for an unknown reason."
+msgstr "Не удалось подключиться по неизвестной причине."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Начните обмен сообщениями, добавив новое соединение."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Откройте %s в меню приложения."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Присоединитесь к комнате используя клавишу +."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Ваши соединения отключены."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Включите их открыв %s в меню приложения."
+
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -474,7 +543,7 @@ msgstr[0] "%d секунду назад"
 msgstr[1] "%d секунды назад"
 msgstr[2] "%d секунд назад"
 
-#: ../src/userList.js:189
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -482,7 +551,7 @@ msgstr[0] "%d минуту назад"
 msgstr[1] "%d минуты назад"
 msgstr[2] "%d минут назад"
 
-#: ../src/userList.js:194
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -490,7 +559,7 @@ msgstr[0] "%d час назад"
 msgstr[1] "%d часа назад"
 msgstr[2] "%d часов назад"
 
-#: ../src/userList.js:199
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -498,7 +567,7 @@ msgstr[0] "%d день назад"
 msgstr[1] "%d дня назад"
 msgstr[2] "%d дней назад"
 
-#: ../src/userList.js:204
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -506,7 +575,7 @@ msgstr[0] "%d неделю назад"
 msgstr[1] "%d недели назад"
 msgstr[2] "%d недель назад"
 
-#: ../src/userList.js:208
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -514,9 +583,12 @@ msgstr[0] "%d месяц назад"
 msgstr[1] "%d месяца назад"
 msgstr[2] "%d месяцев назад"
 
-#: ../src/userList.js:514
+#: ../src/userList.js:538
 msgid "All"
 msgstr "Все"
+
+#~ msgid "Connecting to %s"
+#~ msgstr "Подключение к %s"
 
 #~ msgid "Window position"
 #~ msgstr "Положение окна"
