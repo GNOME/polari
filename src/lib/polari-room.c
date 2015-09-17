@@ -310,7 +310,7 @@ on_group_contacts_changed (TpChannel  *channel,
   TpChannelGroupChangeReason reason;
   const char *raw_message;
   char *message = NULL;
-  int i;
+  guint i;
 
   reason = tp_asv_get_uint32 (details, "change-reason", NULL);
   raw_message = tp_asv_get_string (details, "message");
