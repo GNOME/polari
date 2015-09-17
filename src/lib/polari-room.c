@@ -123,8 +123,9 @@ polari_room_should_highlight_message (PolariRoom *room,
   PolariRoomPrivate *priv;
   TpConnection *conn;
   TpContact *self;
-  char *text;
-  gboolean result;
+  char *text, *match;
+  gboolean result = FALSE;
+  int len;
 
   g_return_val_if_fail (POLARI_IS_ROOM (room), FALSE);
 
@@ -142,7 +143,23 @@ polari_room_should_highlight_message (PolariRoom *room,
     return FALSE;
 
   text = tp_message_to_text (message, NULL);
-  result = strstr(text, priv->self_nick) != NULL;
+  len = strlen (priv->self_nick);
+  match = strstr (text, priv->self_nick);
+
+  while (match != NULL)
+    {
+      gboolean starts_word, ends_word;
+
+      /* assume ASCII nicknames, so no complex pango-style breaks */
+      starts_word = (match == text || g_ascii_isspace (*(match - 1)));
+      ends_word = !g_ascii_isalnum (*(match + len));
+
+      result = starts_word && ends_word;
+      if (result)
+        break;
+      match = strstr (match + len, priv->self_nick);
+    }
+
   g_free (text);
 
   return result;
