@@ -19,6 +19,7 @@
 #include <string.h>
 
 #include "polari-room.h"
+#include "polari-util.h"
 
 typedef struct _PolariRoomPrivate PolariRoomPrivate;
 
@@ -257,8 +258,6 @@ update_self_nick (PolariRoom *room)
 {
   TpConnection *conn;
   TpContact *self;
-  const char *nick;
-  int len;
 
   PolariRoomPrivate *priv = room->priv;
 
@@ -270,14 +269,7 @@ update_self_nick (PolariRoom *room)
   conn = tp_channel_get_connection (room->priv->channel);
   self = tp_connection_get_self_contact (conn);
 
-  nick = tp_contact_get_alias (self);
-  for (len = 0; g_ascii_isalnum(nick[len]); len++)
-    ;
-
-  if (len > 0)
-    priv->self_nick = g_strndup (nick, len);
-  else
-    priv->self_nick = g_strdup (nick);
+  priv->self_nick = polari_util_get_basenick (tp_contact_get_alias (self));
 }
 
 static void
