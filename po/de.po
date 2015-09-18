@@ -2,27 +2,28 @@
 # Copyright (C) 2013 Florian Müllner <fmuellner@gnome.org>.
 # This file is distributed under the same license as the Polari package.
 # Florian Müllner <fmuellner@gnome.org>, 2013
-# Bernd Homuth <dev@hmt.im>, 2015.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2015.
+# Bernd Homuth <dev@hmt.im>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-07 18:29+0000\n"
-"PO-Revision-Date: 2015-09-14 18:12+0200\n"
-"Last-Translator: Wolfgang Stoeggl <c72578@yahoo.de>\n"
+"POT-Creation-Date: 2015-09-17 17:27+0000\n"
+"PO-Revision-Date: 2015-09-18 13:08+0100\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -107,14 +108,17 @@ msgstr "_Realname"
 msgid "optional"
 msgstr "optional"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Verbindungen"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "Use the + button to add a new connection."
-msgstr "Nutzen Sie den +-Knopf, um eine neue Verbindung zu erstellen."
+msgstr "Verwenden Sie den »+«-Knopf, um eine neue Verbindung zu erstellen."
 
 #: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
@@ -508,6 +512,29 @@ msgstr "Der Server ist belegt."
 msgid "Failed to connect for an unknown reason."
 msgstr ""
 "Die Verbindung konnte aus unbekannten Gründen nicht hergestellt werden."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr ""
+"Beginnen Sie eine neue Unterhaltung durch Erstellen einer neuen Verbindung."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "%s im Anwendungsmenü öffnen."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Nutzen Sie den +-Knopf, um einen Raum zu betreten."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Ihre Verbindungen sind nicht verfügbar."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Machen Sie diese verfügbar durch Öffnen von %s im Anwendungsmenü."
 
 #: ../src/userList.js:177
 #, javascript-format
