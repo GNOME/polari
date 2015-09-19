@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-07 11:35+0000\n"
+"POT-Creation-Date: 2015-09-17 23:47+0000\n"
 "PO-Revision-Date: 2015-09-07 14:07+0200\n"
 "Last-Translator: Guillaume Bernard <>\n"
 "Language-Team: français <gnomefr@traduc.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -107,8 +107,11 @@ msgstr "Nom _réel"
 msgid "optional"
 msgstr "optionnel"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Connexions"
 
@@ -504,6 +507,28 @@ msgstr "Le serveur est occupé."
 #: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Échec de la connexion pour une raison inconnue."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Commencer la discussion en ajoutant une nouvelle connexion."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Ouvrir %s dans le menu de l'application"
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Rejoindre un salon avec le bouton +."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Vos connexions sont désactivées."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Les activer en ouvrant %s dans le menu de l'application."
 
 #: ../src/userList.js:177
 #, javascript-format
