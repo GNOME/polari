@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: 3.12\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-01 23:30+0000\n"
-"PO-Revision-Date: 2015-09-02 07:50+0100\n"
+"POT-Creation-Date: 2015-09-18 23:44+0000\n"
+"PO-Revision-Date: 2015-09-19 08:18+0100\n"
 "Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Language-Team: Português <palbuquerque73@gmail.com>\n"
 "Language: pt\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -107,8 +107,11 @@ msgstr "Nome _Verdadeiro"
 msgid "optional"
 msgstr "opcional"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Ligações"
 
@@ -198,7 +201,7 @@ msgstr "Erro de ligação"
 msgid "Loading details"
 msgstr "A carregar detalhes"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:231
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
 msgid "Last Activity:"
 msgstr "Última atividade:"
 
@@ -449,7 +452,7 @@ msgstr "Adicionar ligação"
 msgid "_Save"
 msgstr "_Gravar"
 
-#: ../src/mainWindow.js:240
+#: ../src/mainWindow.js:239
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -475,7 +478,6 @@ msgstr "Terminar conversa"
 
 #: ../src/roomList.js:186
 #, javascript-format
-#| msgid "Connection Error"
 msgid "Connection %s has an error"
 msgstr "A ligação %s tem um erro"
 
@@ -503,49 +505,72 @@ msgstr "O servidor está ocupado."
 msgid "Failed to connect for an unknown reason."
 msgstr "Falha ao ligar por motivo desconhecido."
 
-#: ../src/userList.js:187
+#: ../src/roomStack.js:130
+#| msgid "Use the + button to add a new connection."
+msgid "Begin chatting by adding a new connection."
+msgstr "Comece o chat adicionando uma nova ligação."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Abrir %s no menu da aplicação."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Junte-se a uma sala usando o botão +."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "As suas ligações estão desativadas."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Ative-as, abrindo %s no menu da aplicação."
+
+#: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "há %d segundo atrás"
 msgstr[1] "há %d segundos atrás"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "há %d minuto atrás"
 msgstr[1] "há %d minutos atrás"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "há %d hora atrás"
 msgstr[1] "há %d horas atrás"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "há %d dia atrás"
 msgstr[1] "há %d dias atrás"
 
-#: ../src/userList.js:207
+#: ../src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "há %d semana atrás"
 msgstr[1] "há %d semanas atrás"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "há %d mês atrás"
 msgstr[1] "há %d meses atrás"
 
-#: ../src/userList.js:548
+#: ../src/userList.js:538
 msgid "All"
 msgstr "Tudo"
 
