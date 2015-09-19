@@ -2,14 +2,15 @@
 # Copyright (C) 2015 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Kentaro KAZUHAMA <kazken3@gmail.com>, 2015.
+# Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-05 00:29+0000\n"
-"PO-Revision-Date: 2015-03-25 21:47+0900\n"
-"Last-Translator: Kentaro KAZUHAMA <kazken3@gmail.com>\n"
+"POT-Creation-Date: 2015-09-17 23:47+0000\n"
+"PO-Revision-Date: 2015-09-19 22:45+0900\n"
+"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -89,14 +90,17 @@ msgstr "本名(_R)"
 msgid "optional"
 msgstr "オプション"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "接続"
 
 #: ../data/resources/connection-list-dialog.ui.h:2
 msgid "Use the + button to add a new connection."
-msgstr ""
+msgstr "+ ボタンを押して新しい接続を追加してください。"
 
 #: ../data/resources/connection-list-dialog.ui.h:3
 msgid "Add"
@@ -142,7 +146,7 @@ msgstr "ルームに参加する"
 
 #: ../data/resources/main-window.ui.h:2
 msgid "Message a User"
-msgstr "ユーザーにメッセージ"
+msgstr "ユーザーにメッセージを送る"
 
 #: ../data/resources/main-window.ui.h:4
 msgid "Join room"
@@ -173,10 +177,8 @@ msgid "_Name"
 msgstr "名前(_N)"
 
 #: ../data/resources/room-list-header.ui.h:1
-#, fuzzy
-#| msgid "Connections"
 msgid "Connection Error"
-msgstr "接続"
+msgstr "接続エラー"
 
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
@@ -198,13 +200,12 @@ msgstr "Good Bye"
 msgid "translator-credits"
 msgstr ""
 "Kentaro KAZUHAMA <kazken3@gmail.com>\n"
+"松澤 二郎 <jmatsuzawa@gnome.org>\n"
 "日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
 
 #: ../src/chatView.js:123
-#, fuzzy
-#| msgid "Message"
 msgid "New Messages"
-msgstr "メッセージ"
+msgstr "新しいメッセージ"
 
 #: ../src/chatView.js:487
 msgid "Open Link"
@@ -318,7 +319,7 @@ msgstr "%Y年%m月%d日, %p%I∶%M"
 
 #: ../src/connections.js:226
 msgid "Polari disconnected due to a network error. Please check if the address field is correct."
-msgstr ""
+msgstr "ネットワークエラーにより切断しました。アドレスが正しいことを確認してください。"
 
 #: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
@@ -449,31 +450,53 @@ msgstr "会話の終了"
 #: ../src/roomList.js:186
 #, javascript-format
 msgid "Connection %s has an error"
-msgstr ""
+msgstr "接続 %s でエラーが発生しました"
 
 #: ../src/roomList.js:206
 msgid "Please check your connection details."
-msgstr ""
+msgstr "接続情報の詳細を確認してください。"
 
 #: ../src/roomList.js:227
 msgid "Could not make connection in a safe way."
-msgstr ""
+msgstr "安全な接続を確立できませんでした。"
 
 #: ../src/roomList.js:235
 msgid "Authentication failed."
-msgstr ""
+msgstr "認証に失敗しました。"
 
 #: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
 msgid "Try again"
-msgstr ""
+msgstr "再試行"
 
 #: ../src/roomList.js:246
 msgid "The server is busy."
-msgstr ""
+msgstr "サーバーがビジーです。"
 
 #: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
-msgstr ""
+msgstr "接続に失敗しました (原因不明)。"
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "新しい接続を追加してチャットを始めましょう。"
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "アプリケーションメニューから%sを開いてください。"
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "+ ボタンを押してチャットルームに参加してください。"
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "接続が無効化されています。"
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "アプリケーションメニューから%sを開いて有効化してください。"
 
 #: ../src/userList.js:177
 #, javascript-format
