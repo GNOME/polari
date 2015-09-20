@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-08 23:34+0000\n"
-"PO-Revision-Date: 2015-09-10 13:18+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-20 20:33+0200\n"
+"PO-Revision-Date: 2015-09-20 18:31+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -23,7 +23,8 @@ msgstr ""
 "X-Source-Language: C\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -39,8 +40,8 @@ msgid ""
 "allows you to focus on your conversations."
 msgstr ""
 "En simpel klient til Internet Relay Chat (IRC), som er designet til at "
-"integrere gnidningsfrit med GNOME; den har en simpel og smuk "
-"brugerflade, så du kan fokusere på dine samtaler."
+"integrere gnidningsfrit med GNOME; den har en simpel og smuk brugerflade, så "
+"du kan fokusere på dine samtaler."
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
 msgid ""
@@ -51,8 +52,8 @@ msgid ""
 msgstr ""
 "Du kan bruge Polari til offentligt at chatte med folk i en kanal, samt til "
 "private samtaler. Påmindelser sikrer dig at du aldrig går glip af en vigtig "
-"meddelelse - for private samtaler, lader de dig endda svare omgående uden at du "
-"skal skifte tilbage til programmet!"
+"meddelelse - for private samtaler, lader de dig endda svare omgående uden at "
+"du skal skifte tilbage til programmet!"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
@@ -107,8 +108,11 @@ msgstr "_Rigtige navn"
 msgid "optional"
 msgstr "valgfri"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu"
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Forbindelser"
 
@@ -191,7 +195,6 @@ msgid "_Name"
 msgstr "_Navn"
 
 #: ../data/resources/room-list-header.ui.h:1
-#| msgid "Connections"
 msgid "Connection Error"
 msgstr "Forbindelsesfejl"
 
@@ -223,7 +226,6 @@ msgstr ""
 "Mere info: http://www.dansk-gruppen.dk"
 
 #: ../src/chatView.js:123
-#| msgid "Message"
 msgid "New Messages"
 msgstr "Nye meddelelser"
 
@@ -275,65 +277,83 @@ msgstr "%s deltager"
 msgid "%s left"
 msgstr "%s har forladt"
 
-#. Translators: Time in 24h format */
+#. today
+#. Translators: Time in 24h format
 #: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#. time string in 24h format. i.e. "Yesterday, 14:30"
 #: ../src/chatView.js:761
+#, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "I går, %H∶%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30" */
+#. string in 24h format. i.e. "Monday, 14:30"
 #: ../src/chatView.js:766
+#, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30" */
+#. i.e. "May 25, 14:30"
 #: ../src/chatView.js:772
+#, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H∶%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30" */
+#. i.e. "May 25 2012, 14:30"
 #: ../src/chatView.js:778
+#, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
 
-#. Translators: Time in 12h format */
+#. today
+#. Translators: Time in 12h format
 #: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
 #: ../src/chatView.js:788
+#, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "I går, %l∶%M %p"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#. string in 12h format. i.e. "Monday, 2:30 pm"
 #: ../src/chatView.js:793
+#, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm" */
+#. i.e. "May 25, 2:30 pm"
 #: ../src/chatView.js:799
+#, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l∶%M %p"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"*/
+#. i.e. "May 25 2012, 2:30 pm"
 #: ../src/chatView.js:805
+#, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l∶%M %p"
 
@@ -361,7 +381,7 @@ msgstr "_Anvend"
 msgid "Cr_eate"
 msgstr "_Opret"
 
-#. commands that would be nice to support: */
+#. commands that would be nice to support:
 #.
 #. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
 #. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
@@ -369,7 +389,7 @@ msgstr "_Opret"
 #. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
-#. */
+#.
 #: ../src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
@@ -382,7 +402,8 @@ msgstr ""
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <kaldenavn> [<kanal>] - inviterer <kaldenavn> til <kanal>, eller den nuværende kanal"
+"/INVITE <kaldenavn> [<kanal>] - inviterer <kaldenavn> til <kanal>, eller den "
+"nuværende kanal"
 
 #: ../src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
@@ -511,6 +532,28 @@ msgstr "Serveren er optaget."
 #: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Forbindelsen mislykkedes af ukendte årsager."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Kom i gang med at chatte ved at filføje en ny forbindelse."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Åbn %s i programmenuen."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Deltag i et rum med +-knappen."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Dine forbindelser er deaktiverede."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Slå dem til ved at åbne %s i programmenuen."
 
 #: ../src/userList.js:177
 #, javascript-format
