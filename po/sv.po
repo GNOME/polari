@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-05 00:29+0000\n"
-"PO-Revision-Date: 2015-09-10 00:31+0200\n"
+"POT-Creation-Date: 2015-09-18 11:50+0000\n"
+"PO-Revision-Date: 2015-09-19 00:44+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -18,10 +18,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.3\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -105,8 +106,11 @@ msgstr "_Fullständigt namn"
 msgid "optional"
 msgstr "valfri"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu" */
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Anslutningar"
 
@@ -508,6 +512,28 @@ msgstr "Servern är upptagen."
 #: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Misslyckades med att ansluta av en okänd anledning."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Börja chatta genom att lägga till en ny anslutning."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Öppna %s i programmenyn."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Gå in i ett rum med +-knappen."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Dina anslutningar är inaktiverade."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Aktivera dem genom att öppna %s i programmenyn."
 
 #: ../src/userList.js:177
 #, javascript-format
