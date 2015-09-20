@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-15 23:46+0000\n"
-"PO-Revision-Date: 2015-09-16 19:31+0300\n"
+"POT-Creation-Date: 2015-09-20 11:47+0000\n"
+"PO-Revision-Date: 2015-09-20 18:38+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -105,8 +105,11 @@ msgstr "Ī_stais vārds"
 msgid "optional"
 msgstr "neobligāts"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu"
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Savienojumi"
 
@@ -189,7 +192,6 @@ msgid "_Name"
 msgstr "_Vārds"
 
 #: ../data/resources/room-list-header.ui.h:1
-#| msgid "Connections"
 msgid "Connection Error"
 msgstr "Savienojuma kļūda"
 
@@ -214,7 +216,6 @@ msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
 #: ../src/chatView.js:123
-#| msgid "Message"
 msgid "New Messages"
 msgstr "Jauni ziņojumi"
 
@@ -266,65 +267,83 @@ msgstr "%s pievienojās"
 msgid "%s left"
 msgstr "%s aizgāja"
 
-#. Translators: Time in 24h format */
+#. today
+#. Translators: Time in 24h format
 #: ../src/chatView.js:756
 msgid "%H∶%M"
 msgstr "%H.%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30" */
+#. time string in 24h format. i.e. "Yesterday, 14:30"
 #: ../src/chatView.js:761
+#, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Vakar, %H.%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30" */
+#. string in 24h format. i.e. "Monday, 14:30"
 #: ../src/chatView.js:766
+#, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30" */
+#. i.e. "May 25, 14:30"
 #: ../src/chatView.js:772
+#, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H.%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30" */
+#. i.e. "May 25 2012, 14:30"
 #: ../src/chatView.js:778
+#, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B, %Y. %H.%M"
 
-#. Translators: Time in 12h format */
+#. today
+#. Translators: Time in 12h format
 #: ../src/chatView.js:783
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
 #: ../src/chatView.js:788
+#, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Vakar %H.%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm" */
+#. string in 12h format. i.e. "Monday, 2:30 pm"
 #: ../src/chatView.js:793
+#, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm" */
+#. i.e. "May 25, 2:30 pm"
 #: ../src/chatView.js:799
+#, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %H.%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"*/
+#. i.e. "May 25 2012, 2:30 pm"
 #: ../src/chatView.js:805
+#, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B, %Y. %H.%M"
 
@@ -352,7 +371,7 @@ msgstr "_Pielietot"
 msgid "Cr_eate"
 msgstr "Izv_eidot"
 
-#. commands that would be nice to support: */
+#. commands that would be nice to support:
 #.
 #. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
 #. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
@@ -360,7 +379,7 @@ msgstr "Izv_eidot"
 #. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
-#. */
+#.
 #: ../src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
@@ -503,6 +522,29 @@ msgstr "Serveris ir aizņemts."
 msgid "Failed to connect for an unknown reason."
 msgstr "Neizdevās savienoties nezināma iemesla dēļ."
 
+#: ../src/roomStack.js:130
+#| msgid "Use the + button to add a new connection."
+msgid "Begin chatting by adding a new connection."
+msgstr "Lai sāktu tērzēt, pievienojiet jaunu savienojumu."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Atvērt %s lietotnes izvēlnē."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Pievienojies istabai, izmantojot pogu “+”."
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Jūsu savienojumi ir izslēgti."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Varat tos ieslēgt, lietotnes izvēlnē atverot %s."
+
 #: ../src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
@@ -554,3 +596,4 @@ msgstr[2] "Pirms %d mēnešiem"
 #: ../src/userList.js:538
 msgid "All"
 msgstr "Visi"
+
