@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 3.17.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-07 20:27+0200\n"
-"PO-Revision-Date: 2015-09-07 20:28+0200\n"
+"POT-Creation-Date: 2015-09-20 12:38+0200\n"
+"PO-Revision-Date: 2015-09-20 12:40+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -21,6 +21,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:96
 msgid "Polari"
 msgstr "Polari"
 
@@ -104,8 +105,11 @@ msgstr "Vi_rkelig navn"
 msgid "optional"
 msgstr "valgfri"
 
+#. translators: This will be used in the phrase: "Open Connections in the application menu"
+#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
+#: ../src/roomStack.js:142
 msgid "Connections"
 msgstr "Tilkoblinger"
 
@@ -351,7 +355,9 @@ msgstr "%d %B %Y, %H.%M"
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
-msgstr "Polari er koblet fra på grunn av en nettverksfeil. Vennligst sjekk om adressefeltet er korrekt."
+msgstr ""
+"Polari er koblet fra på grunn av en nettverksfeil. Vennligst sjekk om "
+"adressefeltet er korrekt."
 
 #: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
 msgid "Edit Connection"
@@ -520,6 +526,28 @@ msgstr "Tjeneren er opptatt."
 #: ../src/roomList.js:254
 msgid "Failed to connect for an unknown reason."
 msgstr "Klarte ikke å koble til av ukjent grunn."
+
+#: ../src/roomStack.js:130
+msgid "Begin chatting by adding a new connection."
+msgstr "Start samtale ved å legge til en ny tilkobling."
+
+#: ../src/roomStack.js:133
+#, javascript-format
+msgid "Open %s in the application menu."
+msgstr "Åpne %s i programmenyen."
+
+#: ../src/roomStack.js:136
+msgid "Join a room using the + button."
+msgstr "Bli med i et samtalerom ved å bruke +-knappen"
+
+#: ../src/roomStack.js:140
+msgid "Your connections are disabled."
+msgstr "Tilkoblingene dine er slått av."
+
+#: ../src/roomStack.js:143
+#, javascript-format
+msgid "Enable them by opening %s in the application menu."
+msgstr "Slå dem på ved å åpne %s i programmenyen."
 
 #: ../src/userList.js:177
 #, javascript-format
