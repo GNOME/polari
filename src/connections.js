@@ -205,6 +205,18 @@ const ConnectionDetails = new Lang.Class({
         this._nickEntry.connect('changed',
                                 Lang.bind(this, this._onCanConfirmChanged));
 
+        this._nickEntry.text = GLib.get_user_name();
+
+        let realnameStore = new Gtk.ListStore();
+        realnameStore.set_column_types([GObject.TYPE_STRING]);
+        realnameStore.insert_with_valuesv(-1, [0], [GLib.get_real_name()]);
+
+        let completion = new Gtk.EntryCompletion({ model: realnameStore,
+                                                   text_column: 0,
+                                                   inline_completion: true,
+                                                   popup_completion: false });
+        this._realnameEntry.set_completion(completion);
+
         if (!this._account)
             return;
 
@@ -256,7 +268,7 @@ const ConnectionDetails = new Lang.Class({
     reset: function() {
         this._serverEntry.text = '';
         this._descEntry.text = '';
-        this._nickEntry.text = '';
+        this._nickEntry.text = GLib.get_user_name();
         this._realnameEntry.text = '';
     },
 
