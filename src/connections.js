@@ -400,5 +400,6 @@ const ConnectionDetailsDialog = new Lang.Class({
                                     this._confirmButton, 'sensitive',
                                     GObject.BindingFlags.SYNC_CREATE);
         this.widget.get_content_area().add(this._details);
+        this.widget.set_default_response(Gtk.ResponseType.OK);
     }
 });
