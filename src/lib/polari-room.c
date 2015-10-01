@@ -109,12 +109,18 @@ polari_create_room_id (TpAccount    *account,
                        const char   *name,
                        TpHandleType  type)
 {
+  char *id, *folded_name;
+
   g_return_val_if_fail (TP_IS_ACCOUNT (account), NULL);
   g_return_val_if_fail (name != NULL, NULL);
 
-  return g_strdup_printf ("%s/%d/%s",
-                          tp_proxy_get_object_path (TP_PROXY (account)),
-                          type, name);
+  folded_name = g_utf8_strdown (name, -1);
+  id = g_strdup_printf ("%s/%d/%s",
+                        tp_proxy_get_object_path (TP_PROXY (account)),
+                        type, folded_name);
+
+  g_free (folded_name);
+  return id;
 }
 
 gboolean
@@ -503,12 +509,25 @@ polari_room_set_channel_name (PolariRoom *room,
   priv = room->priv;
 
   g_free (priv->channel_name);
-  priv->channel_name = g_strdup (channel_name);
 
   if (channel_name)
-    set_display_name (room, channel_name + (channel_name[0] == '#' ? 1 : 0));
+    {
+      /* Tp enforces lower-case for all channel names[0], so we need to either
+       * convert the name to lower-case once here or each time we compare it to
+       * a channel identifier in check_channel(); case isn't relevant for the
+       * display name on the other hand, so we can use the original string which
+       * matches what the user requested.
+       *
+       * [0] http://cgit.freedesktop.org/telepathy/telepathy-idle/tree/src/idle-handles.c#n158
+       */
+      priv->channel_name = g_utf8_strdown (channel_name, -1);
+      set_display_name (room, channel_name + (channel_name[0] == '#' ? 1 : 0));
+    }
   else
-    set_display_name (room, NULL);
+    {
+      priv->channel_name = NULL;
+      set_display_name (room, NULL);
+    }
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_NAME]);
 }
