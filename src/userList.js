@@ -13,6 +13,7 @@ const Mainloop = imports.mainloop;
 const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 
 const MAX_USERS_SHOWN = 8;
+const MAX_USERS_WIDTH_CHARS = 17;
 
 const UserListPopover = new Lang.Class({
     Name: 'UserListPopover',
@@ -293,7 +294,8 @@ const UserListRow = new Lang.Class({
                                       halign: Gtk.Align.START,
                                       hexpand: true,
                                       use_markup: true,
-                                      ellipsize: Pango.EllipsizeMode.END });
+                                      ellipsize: Pango.EllipsizeMode.END,
+                                      max_width_chars: MAX_USERS_WIDTH_CHARS });
         hbox.add(this._label);
         hbox.add(this._arrow);
         vbox.add(hbox);
