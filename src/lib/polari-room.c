@@ -273,14 +273,13 @@ update_self_nick (PolariRoom *room)
 }
 
 static void
-update_identifier (PolariRoom *room)
+set_display_name (PolariRoom *room,
+                  const char *display_name)
 {
   PolariRoomPrivate *priv = room->priv;
 
-  g_clear_pointer (&priv->display_name, g_free);
-  if (priv->channel_name)
-    priv->display_name = g_strdup (priv->channel_name +
-                                   (priv->channel_name[0] == '#' ? 1 : 0));
+  g_free (priv->display_name);
+  priv->display_name = g_strdup (display_name);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_DISPLAY_NAME]);
 }
@@ -506,7 +505,10 @@ polari_room_set_channel_name (PolariRoom *room,
   g_free (priv->channel_name);
   priv->channel_name = g_strdup (channel_name);
 
-  update_identifier (room);
+  if (channel_name)
+    set_display_name (room, channel_name + (channel_name[0] == '#' ? 1 : 0));
+  else
+    set_display_name (room, NULL);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_NAME]);
 }
