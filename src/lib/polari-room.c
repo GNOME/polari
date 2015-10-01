@@ -523,7 +523,7 @@ check_channel (PolariRoom *room,
 
   account = tp_connection_get_account (tp_channel_get_connection (channel));
   return account == priv->account &&
-         g_strcmp0 (tp_channel_get_identifier (channel), priv->channel_name) == 0;
+         strcmp (tp_channel_get_identifier (channel), priv->channel_name) == 0;
 }
 
 static void
