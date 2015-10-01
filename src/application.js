@@ -199,35 +199,33 @@ const Application = new Lang.Class({
         this._window.showMessageUserDialog();
     },
 
+    _savedChannelIndex: function(savedChannels, account, channel) {
+        let accountPath = account.get_object_path();
+        for (let i = 0; i < savedChannels.length; i++)
+            if (savedChannels[i].account.deep_unpack() == accountPath &&
+                savedChannels[i].channel.deep_unpack() == channel)
+                return i;
+        return -1;
+    },
+
     _addSavedChannel: function(account, channel) {
         let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-        let savedChannel = {
+        if (this._savedChannelIndex(savedChannels, account, channel) != -1)
+            return;
+        savedChannels.push({
             account: GLib.Variant.new('s', account.get_object_path()),
             channel: GLib.Variant.new('s', channel)
-        };
-        for (let i = 0; i < savedChannels.length; i++)
-            if (savedChannels[i].account.equal(savedChannel.account) &&
-                savedChannels[i].channel.equal(savedChannel.channel))
-                return;
-        savedChannels.push(savedChannel);
+        });
         this._settings.set_value('saved-channel-list',
                                  GLib.Variant.new('aa{sv}', savedChannels));
     },
 
     _removeSavedChannel: function(account, channel) {
         let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-        let savedChannel = {
-            account: GLib.Variant.new('s', account.get_object_path()),
-            channel: GLib.Variant.new('s', channel)
-        };
-        let i;
-        for (i = 0; i < savedChannels.length; i++)
-            if (savedChannels[i].account.equal(savedChannel.account) &&
-                savedChannels[i].channel.equal(savedChannel.channel))
-                break;
-        if (!savedChannels[i])
+        let pos = this._savedChannelIndex(savedChannels, account, channel);
+        if (pos < 0)
             return;
-        savedChannels.splice(i, 1);
+        savedChannels.splice(pos, 1);
         this._settings.set_value('saved-channel-list',
                                  GLib.Variant.new('aa{sv}', savedChannels));
     },
