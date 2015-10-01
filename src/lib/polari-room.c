@@ -503,8 +503,7 @@ polari_room_set_channel_name (PolariRoom *room,
 
   priv = room->priv;
 
-  if (priv->channel_name)
-    g_free (priv->channel_name);
+  g_free (priv->channel_name);
   priv->channel_name = g_strdup (channel_name);
 
   update_identifier (room);
