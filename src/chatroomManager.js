@@ -209,7 +209,9 @@ const _ChatroomManager = new Lang.Class({
 
     _ensureRoomForChannel: function(channel) {
         let account = channel.connection.get_account();
-        let channelName = channel.identifier;
+        let targetContact = channel.target_contact;
+        let channelName = targetContact ? targetContact.alias
+                                        : channel.identifier;
         let room = this._ensureRoom(account, channelName, channel.handle_type);
         room.channel = channel;
         return room;
