@@ -21,7 +21,9 @@
  */
 
 const GLib = imports.gi.GLib;
+const Gtk = imports.gi.Gtk;
 const Soup = imports.gi.Soup;
+const Tp = imports.gi.TelepathyGLib;
 
 const Signals = imports.signals;
 
@@ -76,6 +78,13 @@ function addJSSignalMethods(proto) {
     proto.disconnectJS = Signals._disconnect;
     proto.emitJS = Signals._emit;
     proto.disconnectAllJS = Signals._disconnectAll;
+}
+
+function getTpEventTime() {
+    let time = Gtk.get_current_event_time ();
+    if (time == 0)
+      return GLib.MAXUINT32;
+    return Tp.user_action_time_from_x11 (time);
 }
 
 // findUrls:

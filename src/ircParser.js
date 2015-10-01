@@ -6,10 +6,9 @@ const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Utils = imports.utils;
 
 const N_ = function(s) { return s; };
-
-const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const knownCommands = {
     /* commands that would be nice to support: */
@@ -132,7 +131,7 @@ const IrcParser = new Lang.Class({
                 action.activate(GLib.Variant.new('(ssu)',
                                                  [ account.get_object_path(),
                                                    room,
-                                                   TP_CURRENT_TIME ]));
+                                                   Utils.getTpEventTime() ]));
                 break;
             }
             case 'KICK': {
@@ -222,7 +221,7 @@ const IrcParser = new Lang.Class({
                 action.activate(GLib.Variant.new('(ssu)',
                                                  [ account.get_object_path(),
                                                    nick,
-                                                   TP_CURRENT_TIME ]));
+                                                   Utils.getTpEventTime() ]));
                 break;
             }
             case 'QUIT': {

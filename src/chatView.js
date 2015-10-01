@@ -14,7 +14,6 @@ const Utils = imports.utils;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
-const TP_CURRENT_TIME = GLib.MAXUINT32;
 
 const SCROLL_TIMEOUT = 100; // ms
 
@@ -847,7 +846,7 @@ const ChatView = new Lang.Class({
             let param = GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
                                            this._room.channel_name,
-                                           TP_CURRENT_TIME ]);
+                                           Utils.getTpEventTime() ]);
             notification.set_default_action_and_target('app.join-room', param);
             this._app.send_notification('pending-message-' + id, notification);
         }

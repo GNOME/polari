@@ -7,8 +7,7 @@ const Tpl = imports.gi.TelepathyLogger;
 const AccountsMonitor = imports.accountsMonitor;
 const Connections = imports.connections;
 const Lang = imports.lang;
-
-const TP_CURRENT_TIME = GLib.MAXUINT32;
+const Utils = imports.utils;
 
 const DialogPage = {
     MAIN: 0,
@@ -162,7 +161,7 @@ const JoinDialog = new Lang.Class({
         action.activate(GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
                                            room,
-                                           TP_CURRENT_TIME ]));
+                                           Utils.getTpEventTime() ]));
     },
 
     _updateConnectionCombo: function() {

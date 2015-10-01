@@ -6,8 +6,8 @@ const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
+const Utils = imports.utils;
 
-const TP_CURRENT_TIME = GLib.MAXUINT32;
 const MAX_RECENT_USERS = 5;
 
 const MessageDialog = new Lang.Class({
@@ -177,7 +177,7 @@ const MessageDialog = new Lang.Class({
         action.activate(GLib.Variant.new('(ssu)',
                                          [ account.get_object_path(),
                                            user,
-                                           TP_CURRENT_TIME ]));
+                                           Utils.getTpEventTime() ]));
     },
 
     _updateCanConfirm: function() {
