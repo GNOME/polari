@@ -201,9 +201,10 @@ const Application = new Lang.Class({
 
     _savedChannelIndex: function(savedChannels, account, channel) {
         let accountPath = account.get_object_path();
+        let matchChannel = channel.toLowerCase();
         for (let i = 0; i < savedChannels.length; i++)
             if (savedChannels[i].account.deep_unpack() == accountPath &&
-                savedChannels[i].channel.deep_unpack() == channel)
+                savedChannels[i].channel.deep_unpack().toLowerCase() == matchChannel)
                 return i;
         return -1;
     },
