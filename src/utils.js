@@ -102,8 +102,9 @@ function findUrls(str) {
     return res;
 }
 
-function gpaste(text, user, callback) {
+function gpaste(text, title, callback) {
     let params = {
+        title: title,
         data: text,
         language: 'text'
     };

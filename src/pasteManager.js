@@ -83,8 +83,14 @@ const PasteManager = new Lang.Class({
             return;
         }
 
+        let title;
         let nick = room.channel.connection.self_contact.alias;
-        Utils.gpaste(text, nick, Lang.bind(this,
+        if (room.type == Tp.HandleType.ROOM)
+            title = _("Paste from %s in #%s").format(nick, room.display_name);
+        else
+            title = _("Paste from %s").format(nick);
+
+        Utils.gpaste(text, title, Lang.bind(this,
             function(url) {
                 if (!url) {
                     notification.close();
