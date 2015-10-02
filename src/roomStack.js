@@ -13,7 +13,8 @@ const RoomStack = new Lang.Class({
     _init: function(inputSizeGroup) {
         this._inputSizeGroup = inputSizeGroup;
 
-        this.widget = new Gtk.Stack();
+        this.widget = new Gtk.Stack({ homogeneous: true,
+                                      transition_type: Gtk.StackTransitionType.CROSSFADE });
         this.widget.show_all();
 
         this._roomManager = ChatroomManager.getDefault();
@@ -36,8 +37,7 @@ const RoomStack = new Lang.Class({
         this._rooms[id] = view;
 
         this._inputSizeGroup.add_widget(view.inputWidget);
-        if (!this.widget.visible_child)
-            this.widget.add(view.widget);
+        this.widget.add_named(view.widget, id);
     },
 
     _roomAdded: function(roomManager, room) {
@@ -50,26 +50,7 @@ const RoomStack = new Lang.Class({
     },
 
     _activeRoomChanged: function(manager, room) {
-        let previous = this.widget.visible_child;
-        let next = this._rooms[room ? room.id : 'placeholder'];
-
-        if (!next.widget.get_parent())
-            this.widget.add(next.widget);
-        this.widget.set_visible_child(next.widget);
-        this.widget.transition_type = room ? Gtk.StackTransitionType.CROSSFADE
-                                           : Gtk.StackTransitionType.NONE;
-
-        if (!previous)
-            return;
-
-        let id = this.widget.connect('notify::transition-running', Lang.bind(this,
-            function() {
-                if (this.widget.transition_running)
-                    return;
-                if (previous.get_parent())
-                    this.widget.remove(previous);
-                this.widget.disconnect(id);
-            }));
+        this.widget.set_visible_child_name(room ? room.id : 'placeholder');
     },
 
     _updateSensitivity: function() {
