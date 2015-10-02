@@ -25,7 +25,7 @@ const Soup = imports.gi.Soup;
 
 const Signals = imports.signals;
 
-const FPASTE_BASEURL = 'http://paste.fedoraproject.org/'
+const GPASTE_BASEURL = 'https://paste.gnome.org/'
 
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
 const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
@@ -93,51 +93,15 @@ function findUrls(str) {
     return res;
 }
 
-function fpaste(text, user, callback) {
-    let getUrl = function(session, id) {
-        let longUrl = FPASTE_BASEURL + id;
-        session.queue_message(Soup.Message.new('POST', longUrl + '/json'),
-            function(session, message) {
-                if (message.status_code != Soup.KnownStatusCode.OK) {
-                    callback(null);
-                    return;
-                }
-
-                // workaround: the response contains the pasted data
-                // unescaped (e.g. newlines), which is not legal json;
-                // just grab the property we're interested in
-                let lines = message.response_body.data.split('\n');
-                let shortUrl = null;
-                for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].indexOf('short_url') > -1) {
-                        shortUrl = lines[i];
-                        break;
-                    }
-                }
-
-                let info = {};
-                try {
-                    if (shortUrl)
-                        info = JSON.parse('{ %s }'.format(shortUrl));
-                } catch(e) {
-                    log(e.message);
-                }
-                if (info.short_url)
-                    callback(info.short_url);
-                else
-                    callback(longUrl);
-            });
-    };
+function gpaste(text, user, callback) {
     let params = {
-        paste_data: text,
-        paste_lang: 'text',
-        paste_user: user,
-        api_submit: '1',
-        mode: 'json'
+        data: text,
+        language: 'text'
     };
 
     let session = new Soup.Session();
-    let message = Soup.form_request_new_from_hash('POST', FPASTE_BASEURL, params);
+    let createUrl = GPASTE_BASEURL + 'api/json/create';
+    let message = Soup.form_request_new_from_hash('POST', createUrl, params);
     session.queue_message(message,
         function(session, message) {
             if (message.status_code != Soup.KnownStatusCode.OK) {
@@ -152,7 +116,7 @@ function fpaste(text, user, callback) {
                 log(e.message);
             }
             if (info.result && info.result.id)
-                getUrl(session, info.result.id);
+                callback(GPASTE_BASEURL + info.result.id);
             else
                 callback(null);
         });
