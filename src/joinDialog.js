@@ -5,6 +5,7 @@ const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
+const ChatroomManager = imports.chatroomManager;
 const Connections = imports.connections;
 const Lang = imports.lang;
 const Utils = imports.utils;
@@ -23,6 +24,7 @@ const JoinDialog = new Lang.Class({
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
 
         this._accountsMonitor = AccountsMonitor.getDefault();
+        this._roomManager = ChatroomManager.getDefault();
 
         this._accounts = {};
         this._accountsMonitor.dupAccounts().forEach(Lang.bind(this,
@@ -149,9 +151,6 @@ const JoinDialog = new Lang.Class({
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
 
-        this._settings.set_string('last-used-account',
-                                  account.get_object_path());
-
         let room = this._nameEntry.get_text();
         if (room[0] != '#')
             room = '#' + room;
@@ -176,11 +175,10 @@ const JoinDialog = new Lang.Class({
             this._connectionCombo.append_text(names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
-        let factory = Tp.AccountManager.dup().get_factory();
-        let lastUsed = factory.ensure_account(this._settings.get_string('last-used-account'), []);
+        let activeRoom = this._roomManager.getActiveRoom();
         let activeIndex = 0;
-        if (lastUsed)
-            activeIndex = Math.max(names.indexOf(lastUsed.display_name), 0);
+        if(activeRoom)
+            activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
         this._connectionCombo.set_active(activeIndex);
     },
 
