@@ -40,8 +40,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSpinner">
-                <property name="active">True</property>
+              <object class="GtkSpinner" id="spinner">
                 <property name="visible">True</property>
               </object>
               <packing>

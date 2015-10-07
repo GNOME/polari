@@ -146,7 +146,8 @@ const RoomListHeader = new Lang.Class({
                        'iconStack',
                        'errorPopover',
                        'popoverLabel',
-                       'popoverButton'],
+                       'popoverButton',
+                       'spinner'],
 
     _init: function(params) {
         this._account = params.account;
@@ -260,6 +261,7 @@ const RoomListHeader = new Lang.Class({
         }
         this.sensitive = isError;
         this._iconStack.visible_child_name = child;
+        this._spinner.active = (child == 'connecting');
     },
 });
 
