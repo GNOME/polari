@@ -184,6 +184,15 @@ const RoomListHeader = new Lang.Class({
 
     _onDisplayNameChanged: function() {
         this._label.label = this._account.display_name;
+
+        let parent;
+        do
+          parent = this.get_parent();
+        while (parent && !(parent instanceof Gtk.ListBox));
+
+        if (parent)
+          parent.invalidate_sort();
+
         let accessibleName = _("Connection %s has an error").format(this._account.display_name);
         this.get_accessible().set_name(accessibleName);
     },
