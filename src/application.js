@@ -449,8 +449,7 @@ const Application = new Lang.Class({
             ],
             translator_credits: _("translator-credits"),
             comments: _("An Internet Relay Chat Client for GNOME"),
-            copyright: 'Copyright ' + String.fromCharCode(0x00A9) // ©
-                                    + ' 2013 Red Hat, Inc.',
+            copyright: 'Copyright © 2013-2015 The Polari authors',
             license_type: Gtk.License.GPL_2_0,
             logo_icon_name: 'polari',
             version: pkg.version,
