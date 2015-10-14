@@ -1,3 +1,23 @@
+3.18.1 - "It's Yoghurt. It's French."
+=====================================
+* Don't highlight nickname matches inside words [Florian; #755166]
+* Base nick highlighting and online status on "basenick" [Florian; #755133]
+* Suggest default values for new connections [Kunaal; #709980]
+* Improve handling of channel names with capital letters [Florian; #755722]
+* Fix ellipsization in user list [Jurijs; #755477]
+* Use paste.gnome.org as paste service [Florian; #726053]
+* Default to account of the currently active room in dialogs [Kunaal; #755771]
+* Fix room list ordering on account name changes [Cody; #756319]
+* Highlight room list header on hover if sensitive [Cody; #755158]
+* Misc. bug fixes [Florian; #753420, #756359]
+
+Contributors:
+  Kunaal Jain, Jurijs KolomijecS, Florian Müllner, Cody Welsh
+
+Translations:
+  Милош Поповић [sr], Милош Поповић [sr@latin], Daniel Mustieles [es],
+  Jiri Grönroos [fi], Fabio Tomat [fur]
+
 3.18.0 - "What's the Japanese for 'slut'?"
 ==========================================
 
