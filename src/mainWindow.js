@@ -212,20 +212,12 @@ const MainWindow = new Lang.Class({
         let dialog = new JoinDialog.JoinDialog();
         dialog.widget.transient_for = this.window;
         dialog.widget.show();
-        dialog.widget.connect('response',
-            function(widget) {
-                widget.destroy();
-            });
     },
 
     showMessageUserDialog: function() {
         let dialog = new MessageDialog.MessageDialog();
         dialog.widget.transient_for = this.window;
         dialog.widget.show();
-        dialog.widget.connect('response',
-            function(widget) {
-                widget.destroy();
-            });
     },
 
     _updateUserListLabel: function() {

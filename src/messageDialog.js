@@ -52,6 +52,7 @@ const MessageDialog = new Lang.Class({
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
                     this._onMessageClicked();
+                this.widget.destroy();
             }));
     },
 
