@@ -77,6 +77,10 @@ const JoinDialog = new Lang.Class({
         this._stack.add_named(this._details, 'connection');
         this._details.connect('notify::can-confirm',
                               Lang.bind(this, this._updateCanConfirm));
+        this._details.connect('account-created', Lang.bind(this,
+            function(details, account) {
+                this._connectionCombo.set_active_id(account.display_name);
+            }));
 
         this._connectionButton = builder.get_object('add_connection_button');
         this._connectionButton.connect('clicked', Lang.bind(this,
@@ -175,7 +179,7 @@ const JoinDialog = new Lang.Class({
                 return (a < b) ? -1 : ((a > b) ? 1 : 0);
             });
         for (let i = 0; i < names.length; i++)
-            this._connectionCombo.append_text(names[i]);
+            this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
         let activeRoom = this._roomManager.getActiveRoom();
