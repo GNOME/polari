@@ -1,5 +1,6 @@
 const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 
 const ChatView = imports.chatView;
@@ -12,6 +13,40 @@ const Tp = imports.gi.TelepathyGLib;
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
 
+
+const ChatEntry = new Lang.Class({
+    Name: 'ChatEntry',
+    Extends: Gtk.Entry,
+    Signals: { 'text-pasted': { param_types: [GObject.TYPE_STRING,
+                                              GObject.TYPE_INT] } },
+
+    _init: function(params) {
+        this.parent(params);
+
+        this._useDefaultHandler = false;
+    },
+
+    vfunc_paste_clipboard: function(entry) {
+        if (!this.editable || this._useDefaultHandler) {
+            this.parent();
+            return;
+        }
+
+        let clipboard = Gtk.Clipboard.get_default(this.get_display());
+        clipboard.request_text(Lang.bind(this,
+            function(clipboard, text) {
+                let nLines = text.split('\n').length;
+                if (nLines >= MAX_LINES) {
+                    this.emit('text-pasted', text, nLines);
+                    return;
+                }
+
+                this._useDefaultHandler = true;
+                this.emit('paste-clipboard');
+                this._useDefaultHandler = false;
+            }));
+    },
+});
 
 const EntryArea = new Lang.Class({
     Name: 'EntryArea',
@@ -82,8 +117,8 @@ const EntryArea = new Lang.Class({
                 return Gdk.EVENT_PROPAGATE;
             }));
 
-        this._entry = new Gtk.Entry({ hexpand: true,
-                                      activates_default: true });
+        this._entry = new ChatEntry({ hexpand: true, activates_default: true });
+        this._entry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
         this._entry.connect('changed', Lang.bind(this, this._onEntryChanged));
         chatBox.add(this._entry);
 
@@ -186,16 +221,14 @@ const EntryArea = new Lang.Class({
 
     _onEntryChanged: function() {
         this._entry.get_style_context().remove_class('error');
-        let nLines = this._entry.text.split('\n').length;
+    },
 
-        if (nLines < MAX_LINES)
-            return;
-
+    _onTextPasted: function(entry, text, nLines) {
         this._multiLinelabel.label =
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
-        this._pasteButton.action_target = new GLib.Variant('s', this._entry.text);
+        this._pasteButton.action_target = new GLib.Variant('s', text);
         this.widget.visible_child_name = 'multiline';
         this._pasteButton.grab_focus();
     },
