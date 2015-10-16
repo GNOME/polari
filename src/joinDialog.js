@@ -50,6 +50,8 @@ const JoinDialog = new Lang.Class({
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
                     this._onConfirmClicked();
+                else
+                    this.widget.destroy();
             }));
         this.widget.connect('destroy', Lang.bind(this,
             function() {
@@ -139,6 +141,7 @@ const JoinDialog = new Lang.Class({
     _onConfirmClicked: function() {
         if (this._page == DialogPage.MAIN) {
             this._joinRoom();
+            this.widget.destroy();
         } else {
             this._details.save();
             this._setPage(DialogPage.MAIN);
