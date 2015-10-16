@@ -191,6 +191,7 @@ const ConnectionDetails = new Lang.Class({
                                                            'can-confirm',
                                                            GObject.ParamFlags.READABLE,
                                                            false)},
+    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
 
     _init: function(params) {
         if (params) {
@@ -328,7 +329,9 @@ const ConnectionDetails = new Lang.Class({
 
         req.create_account_async(Lang.bind(this,
             function(r, res) {
-                req.create_account_finish(res); // TODO: Check for errors
+                let account = req.create_account_finish(res);
+                if (account) // TODO: Handle errors
+                    this.emit('account-created', account);
             }));
     },
 
