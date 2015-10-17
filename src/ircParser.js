@@ -65,16 +65,18 @@ const IrcParser = new Lang.Class({
 
     process: function(text) {
         if (!this._room || !this._room.channel || !text.length)
-            return;
+            return true;
 
         if (text[0] != '/') {
             this._sendText(text);
-            return;
+            return true;
         }
 
         let stripCommand = function(text) {
             return text.substr(text.indexOf(' ')).trimLeft();
         }
+
+        let retval = true;
 
         let argv = text.substr(1).split(/ +/);
         let cmd = argv.shift().toUpperCase();
@@ -85,21 +87,22 @@ const IrcParser = new Lang.Class({
                 if (command)
                     command = command.toUpperCase();
 
-                let help;
-                if (command && knownCommands[command])
-                    output = this._createFeedbackUsage(command);
-                else if (command)
+                retval = (command == null || knownCommands[command] != null);
+
+                if (!retval) //error
                     output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
+                else if (command)
+                    output = this._createFeedbackUsage(command);
                 else
                     output = this._createFeedbackGrid(_("Known commands:"),
                                                         Object.keys(knownCommands));
-
                 break;
             }
             case 'INVITE': {
                 let nick = argv.shift();
                 if (!nick) {
                     this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
                 this._room.channel.connection.dup_contact_by_id_async(nick, [],
@@ -120,6 +123,7 @@ const IrcParser = new Lang.Class({
                 let room = argv.shift();
                 if (!room) {
                     output = this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
                 if (argv.length)
@@ -138,6 +142,7 @@ const IrcParser = new Lang.Class({
                 let nick = argv.shift();
                 if (!nick) {
                     output = this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
                 this._room.channel.connection.dup_contact_by_id_async(nick, [],
@@ -156,6 +161,7 @@ const IrcParser = new Lang.Class({
             case 'ME': {
                 if (!argv.length) {
                     output = this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
                 let action = stripCommand(text);
@@ -176,6 +182,7 @@ const IrcParser = new Lang.Class({
                 let nick = argv.shift();
                 if (!nick) {
                     output = this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
                 if (argv.length)
@@ -211,6 +218,7 @@ const IrcParser = new Lang.Class({
                 let nick = argv.shift();
                 if (!nick) {
                     output = this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
 
@@ -240,6 +248,7 @@ const IrcParser = new Lang.Class({
             case 'SAY': {
                 if (!argv.length) {
                     output = this._createFeedbackUsage(cmd);
+                    retval = false;
                     break;
                 }
                 this._sendText(stripCommand(text));
@@ -254,11 +263,13 @@ const IrcParser = new Lang.Class({
             }
             default:
                 output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
+                retval = false;
                 break;
         }
 
         if (output)
             this._app.commandOutputQueue.addNotification(output);
+        return retval;
     },
 
     _sendText: function(text) {

@@ -89,8 +89,12 @@ const EntryArea = new Lang.Class({
 
         this._entry.connect('activate', Lang.bind(this,
             function() {
-                this._ircParser.process(this._entry.text);
-                this._entry.text = '';
+                if (this._ircParser.process(this._entry.text)) {
+                    this._entry.text = '';
+                } else {
+                    this._entry.get_style_context().add_class('error');
+                    this._entry.grab_focus(); // select text
+                }
             }));
 
         this.widget.add_named(chatBox, 'default');
@@ -181,6 +185,7 @@ const EntryArea = new Lang.Class({
     },
 
     _onEntryChanged: function() {
+        this._entry.get_style_context().remove_class('error');
         let nLines = this._entry.text.split('\n').length;
 
         if (nLines < MAX_LINES)
