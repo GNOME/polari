@@ -158,7 +158,7 @@ polari_room_should_highlight_message (PolariRoom *room,
       gboolean starts_word, ends_word;
 
       /* assume ASCII nicknames, so no complex pango-style breaks */
-      starts_word = (match == text || g_ascii_isspace (*(match - 1)));
+      starts_word = (match == text || !g_ascii_isalnum (*(match - 1)));
       ends_word = !g_ascii_isalnum (*(match + len));
 
       result = starts_word && ends_word;
