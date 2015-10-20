@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 13:49+0200\n"
+"POT-Creation-Date: 2015-10-20 10:51+0200\n"
 "PO-Revision-Date: 2015-10-09 23:02+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <Basque <librezale@librezale.org>>\n"
@@ -215,6 +215,10 @@ msgstr "Agur"
 #: ../src/application.js:451
 msgid "translator-credits"
 msgstr "Iñaki Larrañaga Murgoitio <dooteo@zundan.com>"
+
+#: ../src/application.js:457
+msgid "Learn more about Polari"
+msgstr ""
 
 #: ../src/chatView.js:123
 msgid "New Messages"
@@ -448,16 +452,16 @@ msgstr ""
 msgid "Usage: %s"
 msgstr "Erabilera: %s"
 
-#: ../src/ircParser.js:94
+#: ../src/ircParser.js:97
 msgid "Known commands:"
 msgstr "Komando ezagunak:"
 
-#: ../src/ircParser.js:171
+#: ../src/ircParser.js:177
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Erabiltzaileak %s(e)n:"
 
-#: ../src/ircParser.js:252
+#: ../src/ircParser.js:261
 msgid "No topic set"
 msgstr "Ez da gairik ezarri"
 
@@ -483,12 +487,12 @@ msgstr "Ez dago azken aldiko erabiltzailerik"
 #: ../src/pasteManager.js:89
 #, javascript-format
 msgid "Paste from %s in #%s"
-msgstr "Itsatsi '%s'(e)ndik %s.an"
+msgstr ""
 
 #: ../src/pasteManager.js:91
 #, javascript-format
 msgid "Paste from %s"
-msgstr "Itsatsi '%s'(e)ndik"
+msgstr ""
 
 #: ../src/pasteManager.js:297
 #, javascript-format
