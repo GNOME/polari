@@ -24,6 +24,14 @@ const RoomRow = new Lang.Class({
                     'app.leave-room(("%s", ""))'.format(this.widget.room.id));
 
         this._popover = Gtk.Popover.new_from_model(this.widget, menu);
+        this._popover.connect('notify::visible', Lang.bind(this,
+            function() {
+                let roomContext = this.widget.get_style_context();
+                if (this._popover.visible)
+                    roomContext.add_class('has-open-popup');
+                else
+                    roomContext.remove_class('has-open-popup');
+            }));
         this._popover.position = Gtk.PositionType.BOTTOM;
         this._eventBox.connect('button-release-event',
                             Lang.bind(this, this._onButtonRelease));
