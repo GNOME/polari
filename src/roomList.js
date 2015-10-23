@@ -18,21 +18,8 @@ const RoomRow = new Lang.Class({
         let app = Gio.Application.get_default();
         this.widget.room = room;
 
-        let menu = new Gio.Menu();
-        menu.append(room.type == Tp.HandleType.ROOM ? _("Leave chatroom")
-                                                    : _("End conversation"),
-                    'app.leave-room(("%s", ""))'.format(this.widget.room.id));
+        this._popover = null;
 
-        this._popover = Gtk.Popover.new_from_model(this.widget, menu);
-        this._popover.connect('notify::visible', Lang.bind(this,
-            function() {
-                let roomContext = this.widget.get_style_context();
-                if (this._popover.visible)
-                    roomContext.add_class('has-open-popup');
-                else
-                    roomContext.remove_class('has-open-popup');
-            }));
-        this._popover.position = Gtk.PositionType.BOTTOM;
         this._eventBox.connect('button-release-event',
                             Lang.bind(this, this._onButtonRelease));
         this.widget.connect('key-press-event',
@@ -92,7 +79,7 @@ const RoomRow = new Lang.Class({
         if (button != Gdk.BUTTON_SECONDARY)
             return Gdk.EVENT_PROPAGATE;
 
-        this._popover.show();
+        this._showPopover();
 
         return Gdk.EVENT_STOP;
     },
@@ -105,9 +92,31 @@ const RoomRow = new Lang.Class({
               mods & Gdk.ModifierType.SHIFT_MASK))
             return Gdk.EVENT_PROPAGATE;
 
-        this._popover.show();
+        this._showPopover();
 
         return Gdk.EVENT_STOP;
+    },
+
+    _showPopover: function() {
+        if (!this._popover) {
+            let room = this.widget.room;
+            let menu = new Gio.Menu();
+            menu.append(room.type == Tp.HandleType.ROOM ? _("Leave chatroom")
+                                                        : _("End conversation"),
+                        'app.leave-room(("%s", ""))'.format(room.id));
+
+            this._popover = Gtk.Popover.new_from_model(this.widget, menu);
+            this._popover.connect('notify::visible', Lang.bind(this,
+                function() {
+                    let roomContext = this.widget.get_style_context();
+                    if (this._popover.visible)
+                        roomContext.add_class('has-open-popup');
+                    else
+                        roomContext.remove_class('has-open-popup');
+                }));
+            this._popover.position = Gtk.PositionType.BOTTOM;
+        }
+        this._popover.show();
     },
 
     _createWidget: function(gicon) {
