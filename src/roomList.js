@@ -120,7 +120,8 @@ const RoomRow = new Lang.Class({
     },
 
     _createWidget: function(gicon) {
-        this.widget = new Gtk.ListBoxRow({ margin_bottom: 4 });
+        this.widget = new Gtk.ListBoxRow({ margin_bottom: 4,
+                                           focus_on_click: false });
 
         this._eventBox = new Gtk.EventBox();
         this.widget.add(this._eventBox);
