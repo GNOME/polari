@@ -370,6 +370,20 @@ const UserList = new Lang.Class({
         this._list = new Gtk.ListBox({ vexpand: true });
         this.widget.add(this._list);
 
+        let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
+                                        valign: Gtk.Align.CENTER,
+                                        orientation: Gtk.Orientation.VERTICAL,
+                                        visible: true });
+        placeholder.add(new Gtk.Image({ icon_name: 'edit-find-symbolic',
+                                        pixel_size: 64,
+                                        visible: true }));
+        placeholder.add(new Gtk.Label({ label: _("No results"),
+                                        visible: true }));
+
+        placeholder.get_style_context().add_class('dim-label');
+
+        this._list.set_placeholder(placeholder);
+
         this._updateHeightId = 0;
         this._list.connect('size-allocate',
                            Lang.bind(this, this._updateContentHeight));
