@@ -91,7 +91,8 @@ const PasteManager = new Lang.Class({
         let title;
         let nick = room.channel.connection.self_contact.alias;
         if (room.type == Tp.HandleType.ROOM)
-            title = _("Paste from %s in #%s").format(nick, room.display_name);
+            /* translators: %s is a nick, #%s a channel */
+            title = _("%s in #%s").format(nick, room.display_name);
         else
             title = _("Paste from %s").format(nick);
 
