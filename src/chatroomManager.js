@@ -170,6 +170,9 @@ const _ChatroomManager = new Lang.Class({
         let reconnectAction = this._app.lookup_action('reconnect-account');
         reconnectAction.connect('activate', Lang.bind(this, this._onReconnectAccountActivated));
 
+        let authAction = this._app.lookup_action('authenticate-account');
+        authAction.connect('activate', Lang.bind(this, this._onAuthenticateAccountActivated));
+
         this._client = new Client(am, this);
 
         let filters = [];
@@ -265,6 +268,23 @@ const _ChatroomManager = new Lang.Class({
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
         this._restoreSavedChannels(account);
+    },
+
+    _onAuthenticateAccountActivated: function(action, parameter) {
+        let [accountPath, password] = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+
+        let prompt = new GLib.Variant('b', password.length > 0);
+        let params = GLib.Variant.new('a{sv}', { 'password-prompt': prompt });
+        account.update_parameters_vardict_async(params, [],
+            Lang.bind(this, function(a, res) {
+                a.update_parameters_vardict_finish(res);
+                Utils.storeAccountPassword(a, password, Lang.bind(this,
+                    function() {
+                        a.reconnect_async(null);
+                    }));
+            }));
     },
 
     _onJoinActivated: function(action, parameter) {

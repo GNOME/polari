@@ -77,6 +77,8 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
             create_hook: Lang.bind(this, this._leaveRoomCreateHook),
             accels: ['<Primary>w'] },
+          { name: 'authenticate-account',
+            parameter_type: GLib.VariantType.new('(os)') },
           { name: 'reconnect-account',
             parameter_type: GLib.VariantType.new('o') },
           { name: 'user-list',

@@ -142,6 +142,7 @@ const RoomListHeader = new Lang.Class({
                        'iconStack',
                        'popoverStatus',
                        'popoverTitle',
+                       'popoverPassword',
                        'popoverReconnect',
                        'popoverRemove',
                        'popoverProperties',
@@ -156,12 +157,27 @@ const RoomListHeader = new Lang.Class({
 
         this.parent(params);
 
+        this.popover.set_default_widget(this._popoverPassword);
         this.popover.connect('notify::visible', _onPopoverVisibleChanged);
+        this.popover.connect('closed', Lang.bind(this,
+            function() {
+                this._popoverPassword.text = '';
+            }));
 
         let target = new GLib.Variant('o', this._account.get_object_path());
         this._popoverReconnect.action_target = target;
         this._popoverRemove.action_target = target;
         this._popoverProperties.action_target = target;
+
+        this._popoverPassword.connect('activate', Lang.bind(this,
+            function() {
+                let action = this._app.lookup_action('authenticate-account');
+                let password = this._popoverPassword.text;
+                let accountPath = this._account.get_object_path();
+                let param = new GLib.Variant('(os)', [accountPath, password]);
+                action.activate(param);
+                this.popover.hide();
+            }));
 
         let displayNameChangedId =
             this._account.connect('notify::display-name',
@@ -210,17 +226,22 @@ const RoomListHeader = new Lang.Class({
     _onConnectionStatusChanged: function() {
         let status = this._account.connection_status;
         let reason = this._account.connection_status_reason;
+        let authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
         let isError = (status == Tp.ConnectionStatus.DISCONNECTED &&
                        reason != Tp.ConnectionStatusReason.REQUESTED);
+        let isAuth = isError && this._account.connection_error == authError;
+
         let child = 'none';
         if (status == Tp.ConnectionStatus.CONNECTING) {
             if (this._networkMonitor.network_available)
                 child = 'connecting';
         } else if (isError) {
-            child = 'error';
+            child = isAuth ? 'auth' : 'error';
         }
+
         this._iconStack.visible_child_name = child;
         this._spinner.active = (child == 'connecting');
+        this._popoverTitle.visible = !isAuth;
 
         this._popoverTitle.use_markup = isError;
         this._popoverStatus.use_markup = !isError;
@@ -279,7 +300,7 @@ const RoomListHeader = new Lang.Class({
                 return _("Could not connect to %s in a safe way.").format(this._account.display_name);
 
             case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED):
-                return _("Could not connect to %s. Authentication failed.").format(this._account.display_name);
+                return _("%s requires a password.").format(this._account.display_name);
 
             case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
             case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
