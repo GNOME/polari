@@ -145,7 +145,7 @@ const JoinDialog = new Lang.Class({
     _onConfirmClicked: function() {
         if (this._page == DialogPage.MAIN) {
             this._joinRoom();
-            this._widget.destroy();
+            this.widget.destroy();
         } else {
             this._details.save();
             this._setPage(DialogPage.MAIN);
