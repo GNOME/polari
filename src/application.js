@@ -442,7 +442,9 @@ const Application = new Lang.Class({
                 'Carlos Garnacho <carlosg@gnome.org>',
                 'Jonas Danielsson <jonas.danielsson@threetimestwo.org>',
                 'Bastian Ilsø <bastianilso@gnome.org>',
-                'Kunaal Jain <kunaalus@gmail.com>'
+                'Kunaal Jain <kunaalus@gmail.com>',
+                'Cody Welsh <codyw@protonmail.com>',
+                'Isabella Ribeiro <belinhacbr@gmail.com>'
             ],
             artists: [
                 'Sam Hewitt',
