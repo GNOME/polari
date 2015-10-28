@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-12 00:21+0000\n"
-"PO-Revision-Date: 2015-10-12 11:43+0200\n"
+"POT-Creation-Date: 2015-10-28 14:05+0000\n"
+"PO-Revision-Date: 2015-10-28 16:24+0100\n"
+"Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "X-Generator: Poedit 1.8.5\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:451
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un program IRC par GNOME"
 
@@ -125,16 +125,64 @@ msgstr "Zonte"
 msgid "Remove"
 msgstr "Gjave"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:215
+#: ../data/resources/help-overlay.ui.h:1
+msgid "General"
+msgstr "Gjenerâl"
+
+#: ../data/resources/help-overlay.ui.h:2
+msgid "Join Room"
+msgstr "Jentre te stanzie"
+
+#: ../data/resources/help-overlay.ui.h:3
+msgid "Message User"
+msgstr "Invie messaç a utent"
+
+#: ../data/resources/help-overlay.ui.h:4
+msgid "Leave Room"
+msgstr "Jes de stanzie"
+
+#: ../data/resources/help-overlay.ui.h:5
+msgid "Show Userlist"
+msgstr "Mostre liste utents"
+
+#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:5
+msgid "Quit"
+msgstr "Jes"
+
+#: ../data/resources/help-overlay.ui.h:7
+msgid "Navigation"
+msgstr "Navigazion"
+
+#: ../data/resources/help-overlay.ui.h:8
+msgid "Next Room"
+msgstr "Prossime stanzie"
+
+#: ../data/resources/help-overlay.ui.h:9
+msgid "Previous Room"
+msgstr "Stanzie precedent"
+
+#: ../data/resources/help-overlay.ui.h:10
+msgid "First Room"
+msgstr "Prime stanzie"
+
+#: ../data/resources/help-overlay.ui.h:11
+msgid "Last Room"
+msgstr "Ultime stanzie"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgid "First - Ninth Room"
+msgstr "Prime - None stanzie"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:222
 msgid "Join Chat Room"
 msgstr "Jentre te stanzie di conversazion"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:391
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:394
 msgid "_Cancel"
 msgstr "_Anule"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:217
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:224
 msgid "_Join"
 msgstr "_Jentre"
 
@@ -172,12 +220,12 @@ msgid "Preferences"
 msgstr "Preferencis"
 
 #: ../data/resources/menus.ui.h:3
-msgid "About"
-msgstr "Informazions"
+msgid "Keyboard Shortcuts"
+msgstr "Scurte di tastiere"
 
 #: ../data/resources/menus.ui.h:4
-msgid "Quit"
-msgstr "Jes"
+msgid "About"
+msgstr "Informazions"
 
 #: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
@@ -211,9 +259,13 @@ msgstr "Messaç"
 msgid "Good Bye"
 msgstr "Mandi!"
 
-#: ../src/application.js:450
+#: ../src/application.js:451
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>"
+
+#: ../src/application.js:457
+msgid "Learn more about Polari"
+msgstr "Plui informazions su Polari"
 
 #: ../src/chatView.js:123
 msgid "New Messages"
@@ -347,25 +399,25 @@ msgstr "%d %B, %I∶%M %p"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %I∶%M %p"
 
-#: ../src/connections.js:238
+#: ../src/connections.js:239
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr ""
 
-#: ../src/connections.js:376 ../src/roomList.js:209 ../src/roomList.js:229
+#: ../src/connections.js:379 ../src/roomList.js:218 ../src/roomList.js:238
 msgid "Edit Connection"
 msgstr "Modifiche conession"
 
-#: ../src/connections.js:377
+#: ../src/connections.js:380
 msgid "New Connection"
 msgstr "Gnove conession"
 
-#: ../src/connections.js:393
+#: ../src/connections.js:396
 msgid "A_pply"
 msgstr "A_pliche"
 
-#: ../src/connections.js:393
+#: ../src/connections.js:396
 msgid "Cr_eate"
 msgstr "C_ree"
 
@@ -444,39 +496,50 @@ msgstr "Comant no cognossût - prove /HELP pe liste dai comants disponibii"
 msgid "Usage: %s"
 msgstr "Ûs: %s"
 
-#: ../src/ircParser.js:94
+#: ../src/ircParser.js:97
 msgid "Known commands:"
 msgstr "Comants cognossûts:"
 
-#: ../src/ircParser.js:171
+#: ../src/ircParser.js:177
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Utents in %s:"
 
-#: ../src/ircParser.js:252
+#: ../src/ircParser.js:261
 msgid "No topic set"
 msgstr "Nissun argoment impostât"
 
-#: ../src/joinDialog.js:216
+#: ../src/joinDialog.js:223
 msgid "Add Connection"
 msgstr "Zonte conession"
 
-#: ../src/joinDialog.js:218
+#: ../src/joinDialog.js:225
 msgid "_Save"
 msgstr "_Salve"
 
-#: ../src/mainWindow.js:239
+#: ../src/mainWindow.js:231
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d utent"
 msgstr[1] "%d utents"
 
-#: ../src/messageDialog.js:94
+#: ../src/messageDialog.js:95
 msgid "No recent users"
 msgstr "Nissun utent recent"
 
-#: ../src/pasteManager.js:291
+#. translators: %s is a nick, #%s a channel
+#: ../src/pasteManager.js:95
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s in #%s"
+
+#: ../src/pasteManager.js:97
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Tache da %s"
+
+#: ../src/pasteManager.js:306
 #, javascript-format
 msgid "Uploading %s"
 msgstr "Cjariament di %s"
@@ -489,32 +552,32 @@ msgstr "Jes de stanzie"
 msgid "End conversation"
 msgstr "Termine conversazion"
 
-#: ../src/roomList.js:187
+#: ../src/roomList.js:196
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "La conversazion %s a presente un erôr"
 
-#: ../src/roomList.js:207
+#: ../src/roomList.js:216
 msgid "Please check your connection details."
 msgstr "Verificâ i detais de conession."
 
-#: ../src/roomList.js:228
+#: ../src/roomList.js:237
 msgid "Could not make connection in a safe way."
 msgstr "Impussibil stabilî une conession in mût sigûr."
 
-#: ../src/roomList.js:236
+#: ../src/roomList.js:245
 msgid "Authentication failed."
 msgstr "Autenticazion falide."
 
-#: ../src/roomList.js:237 ../src/roomList.js:248 ../src/roomList.js:256
+#: ../src/roomList.js:246 ../src/roomList.js:257 ../src/roomList.js:265
 msgid "Try again"
 msgstr "Riprove"
 
-#: ../src/roomList.js:247
+#: ../src/roomList.js:256
 msgid "The server is busy."
 msgstr "Il server al è ocupât."
 
-#: ../src/roomList.js:255
+#: ../src/roomList.js:264
 msgid "Failed to connect for an unknown reason."
 msgstr "Conession falide par colpe di un erôr no cognossût."
 
@@ -582,6 +645,10 @@ msgid_plural "%d months ago"
 msgstr[0] "%d mês indaûr"
 msgstr[1] "%d mês indaûr"
 
-#: ../src/userList.js:540
+#: ../src/userList.js:380
+msgid "No results"
+msgstr "Nissun risultât"
+
+#: ../src/userList.js:554
 msgid "All"
 msgstr "Dut"
