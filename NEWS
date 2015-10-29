@@ -1,3 +1,19 @@
+3.19.1 - "ABBA Turd"
+====================
+* Allow users to edit message after /command errors [Kunaal; #756363]
+* Add help overlay for keyboard shortcuts [Florian; #756981]
+* Indicate no matches when filtering userList [Cody; #756831]
+* Highlight room rows while showing the context popover [Isabella; #756325]
+* Misc. bug fixes [Florian, Kunaal; #755970, #755158, #756761, #756848,
+  #756702]
+
+Contributors:
+  Kunaal Jain, Florian Müllner, Isabella Ribeiro, Cody Welsh
+
+Translations:
+  Dušan Kazik [sk], Inaki Larranaga Murgoitio [eu], Daniel Korostil [uk],
+  Jiri Grönroos [fi], Marek Černocký [cs], Fabio Tomat [fur]
+
 3.18.1 - "It's Yoghurt. It's French."
 =====================================
 * Don't highlight nickname matches inside words [Florian; #755166]
