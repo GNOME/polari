@@ -197,7 +197,11 @@ const MainWindow = new Lang.Class({
         // Make sure user-list button is at least as wide as icon buttons
         this._joinMenuButton.connect('size-allocate', Lang.bind(this,
             function(w, rect) {
-                this._showUserListButton.width_request = rect.width;
+                let width = rect.width;
+                Mainloop.idle_add(Lang.bind(this, function() {
+                    this._showUserListButton.width_request = width;
+                    return GLib.SOURCE_REMOVE;
+                }));
             }));
 
         let scroll = builder.get_object('room_list_scrollview');
