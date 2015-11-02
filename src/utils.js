@@ -20,11 +20,14 @@
  *
  */
 
+const Gdk = imports.gi.Gdk;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Soup = imports.gi.Soup;
 const Tp = imports.gi.TelepathyGLib;
 
+const AppNotifications = imports.appNotifications;
 const Signals = imports.signals;
 
 const GPASTE_BASEURL = 'https://paste.gnome.org/'
@@ -100,6 +103,19 @@ function findUrls(str) {
     while ((match = _urlRegexp.exec(str)))
         res.push({ url: match[2], pos: match.index + match[1].length });
     return res;
+}
+
+function openURL(url, timestamp) {
+    let ctx = Gdk.Display.get_default().get_app_launch_context();
+    ctx.set_timestamp(timestamp);
+    try {
+        Gio.AppInfo.launch_default_for_uri(url, ctx);
+    } catch(e) {
+        let n = new AppNotifications.SimpleOutput(_("Failed to open link"));
+        let app = Gio.Application.get_default();
+        app.notificationQueue.addNotification(n);
+        debug("failed to open %s: %s".format(url, e.message));
+    }
 }
 
 function gpaste(text, title, callback) {

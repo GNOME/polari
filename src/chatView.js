@@ -485,10 +485,9 @@ const ChatView = new Lang.Class({
         let menu = new Gtk.Menu();
 
         let item = new Gtk.MenuItem({ label: _("Open Link") });
-        item.connect('activate',
-            function() {
-                Gio.AppInfo.launch_default_for_uri(url, null);
-            });
+        item.connect('activate', function() {
+            Utils.openURL(url, Gtk.get_current_event_time());
+        });
         menu.append(item);
 
         item = new Gtk.MenuItem({ label: _("Copy Link Address") });
@@ -533,7 +532,7 @@ const ChatView = new Lang.Class({
                         this._showUrlContextMenu(url, button, event.get_time());
                     return Gdk.EVENT_STOP;
                 } else if (this._clickedUrl == url) {
-                    Gio.AppInfo.launch_default_for_uri(url, null);
+                    Utils.openURL(url, event.get_time());
                     return Gdk.EVENT_STOP;
                 }
                 break;
