@@ -36,12 +36,13 @@ const GPASTE_BASEURL = 'https://paste.gnome.org/'
 const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
 const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
 const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
+const _uriList = getURISchemes();
 
 const _urlRegexp = new RegExp(
     '(^|' + _leadingJunk + ')' +
     '(' +
         '(?:' +
-            '(?:http|https|ftp)://' +             // scheme://
+            '(?:' + _uriList.join('|') + '):' +   // scheme:
             '|' +
             'www\\d{0,3}[.]' +                    // www.
             '|' +
@@ -74,6 +75,24 @@ function debug(str) {
 
     if (debugEnabled)
         log('DEBUG: ' + str);
+}
+
+function getURISchemes() {
+    let apps = Gio.AppInfo.get_all();
+    let prefix = 'x-scheme-handler/';
+    let schemes = [];
+
+    apps.forEach(function(app) {
+        let types = app.get_supported_types();
+        if (!types)
+            return;
+
+        types.forEach(function(type) {
+            if (type.startsWith(prefix))
+                schemes.push(type.replace(prefix, ''));
+        });
+    });
+    return schemes;
 }
 
 function addJSSignalMethods(proto) {
