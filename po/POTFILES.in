@@ -22,3 +22,4 @@ src/pasteManager.js
 src/roomList.js
 src/roomStack.js
 src/userList.js
+src/utils.js
