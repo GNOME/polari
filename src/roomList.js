@@ -297,6 +297,7 @@ const RoomList = new Lang.Class({
 
     _init: function() {
         this.widget = new Gtk.ListBox({ hexpand: false });
+        this.widget.get_style_context().add_class('sidebar');
 
         this.widget.set_selection_mode(Gtk.SelectionMode.BROWSE);
         this.widget.set_header_func(Lang.bind(this, this._updateHeader));
