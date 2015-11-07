@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-25 00:58+0000\n"
-"PO-Revision-Date: 2015-10-25 12:22+0200\n"
+"POT-Creation-Date: 2015-11-07 02:05+0000\n"
+"PO-Revision-Date: 2015-11-07 15:17+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:455
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -131,7 +131,6 @@ msgid "General"
 msgstr "Yleiset"
 
 #: ../data/resources/help-overlay.ui.h:2
-#| msgid "Join a Room"
 msgid "Join Room"
 msgstr "Liity kanavalle"
 
@@ -140,7 +139,6 @@ msgid "Message User"
 msgstr "Viesti käyttäjälle"
 
 #: ../data/resources/help-overlay.ui.h:4
-#| msgid "Leave chatroom"
 msgid "Leave Room"
 msgstr "Poistu kanavalta"
 
@@ -157,7 +155,6 @@ msgid "Navigation"
 msgstr "Navigointi"
 
 #: ../data/resources/help-overlay.ui.h:8
-#| msgid "Room"
 msgid "Next Room"
 msgstr "Seuraava kanava"
 
@@ -170,7 +167,6 @@ msgid "First Room"
 msgstr "Ensimmäinen kanava"
 
 #: ../data/resources/help-overlay.ui.h:11
-#| msgid "Room"
 msgid "Last Room"
 msgstr "Viimeinen kanava"
 
@@ -264,12 +260,11 @@ msgstr "Viesti"
 msgid "Good Bye"
 msgstr "Näkemiin"
 
-#: ../src/application.js:451
+#: ../src/application.js:454
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: ../src/application.js:457
-#| msgid "About Polari"
+#: ../src/application.js:460
 msgid "Learn more about Polari"
 msgstr "Tietoja - Polari"
 
@@ -281,60 +276,60 @@ msgstr "Uudet viestit"
 msgid "Open Link"
 msgstr "Avaa linkki"
 
-#: ../src/chatView.js:494
+#: ../src/chatView.js:493
 msgid "Copy Link Address"
 msgstr "Kopioi linkin osoite"
 
-#: ../src/chatView.js:682
+#: ../src/chatView.js:681
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s vaihtoi nimekseen %s"
 
-#: ../src/chatView.js:689
+#: ../src/chatView.js:688
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s katkaisi yhteyden"
 
-#: ../src/chatView.js:698
+#: ../src/chatView.js:697
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s potkaistiin käyttäjän %s toimesta"
 
-#: ../src/chatView.js:700
+#: ../src/chatView.js:699
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s potkaistiin"
 
-#: ../src/chatView.js:707
+#: ../src/chatView.js:706
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s sai bannit käyttäjän %s toimesta"
 
-#: ../src/chatView.js:709
+#: ../src/chatView.js:708
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s bannattiin"
 
-#: ../src/chatView.js:715
+#: ../src/chatView.js:714
 #, javascript-format
 msgid "%s joined"
 msgstr "%s liittyi"
 
-#: ../src/chatView.js:720
+#: ../src/chatView.js:719
 #, javascript-format
 msgid "%s left"
 msgstr "%s poistui"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:760
+#: ../src/chatView.js:759
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:765
+#: ../src/chatView.js:764
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Eilen, %H:%M"
@@ -342,7 +337,7 @@ msgstr "Eilen, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:770
+#: ../src/chatView.js:769
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
@@ -351,7 +346,7 @@ msgstr "%A, %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:776
+#: ../src/chatView.js:775
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%e. %Bta, %H:%M"
@@ -360,21 +355,21 @@ msgstr "%e. %Bta, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:782
+#: ../src/chatView.js:781
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%e. %Bta %Y, %H:%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:787
+#: ../src/chatView.js:786
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:792
+#: ../src/chatView.js:791
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Eilen, %l∶%M %p"
@@ -382,7 +377,7 @@ msgstr "Eilen, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:797
+#: ../src/chatView.js:796
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -391,7 +386,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:803
+#: ../src/chatView.js:802
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%e. %Bta, %H:%M"
@@ -400,7 +395,7 @@ msgstr "%e. %Bta, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:809
+#: ../src/chatView.js:808
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
@@ -413,7 +408,7 @@ msgstr ""
 "Polari katkaisi yhteyden yhteysvirheen vuoksi. Tarkista, että osoitekentän "
 "sisältö on oikein."
 
-#: ../src/connections.js:379 ../src/roomList.js:218 ../src/roomList.js:238
+#: ../src/connections.js:379 ../src/roomList.js:236 ../src/roomList.js:256
 msgid "Edit Connection"
 msgstr "Muokkaa yhteyttä"
 
@@ -535,7 +530,7 @@ msgstr "Lisää yhteys"
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: ../src/mainWindow.js:231
+#: ../src/mainWindow.js:235
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -562,40 +557,40 @@ msgstr ""
 msgid "Uploading %s"
 msgstr "Lähetetään %s"
 
-#: ../src/roomList.js:22
+#: ../src/roomList.js:104
 msgid "Leave chatroom"
 msgstr "Poistu kanavalta"
 
-#: ../src/roomList.js:23
+#: ../src/roomList.js:105
 msgid "End conversation"
 msgstr "Lopeta keskustelu"
 
-#: ../src/roomList.js:196
+#: ../src/roomList.js:214
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "Yhteydessä %s on virhe"
 
-#: ../src/roomList.js:216
+#: ../src/roomList.js:234
 msgid "Please check your connection details."
 msgstr "Tarkista yhteytesi tiedot."
 
-#: ../src/roomList.js:237
+#: ../src/roomList.js:255
 msgid "Could not make connection in a safe way."
 msgstr "Yhteydeyn muodostaminen turvallisesti ei onnistunut."
 
-#: ../src/roomList.js:245
+#: ../src/roomList.js:263
 msgid "Authentication failed."
 msgstr "Tunnistautuminen epäonnistui."
 
-#: ../src/roomList.js:246 ../src/roomList.js:257 ../src/roomList.js:265
+#: ../src/roomList.js:264 ../src/roomList.js:275 ../src/roomList.js:283
 msgid "Try again"
 msgstr "Yritä uudelleen"
 
-#: ../src/roomList.js:256
+#: ../src/roomList.js:274
 msgid "The server is busy."
 msgstr "Palvelin on varattu."
 
-#: ../src/roomList.js:264
+#: ../src/roomList.js:282
 msgid "Failed to connect for an unknown reason."
 msgstr "Yhdistäminen epäonnistui tuntemattomasta syystä."
 
@@ -670,6 +665,10 @@ msgstr "Ei tuloksia"
 #: ../src/userList.js:554
 msgid "All"
 msgstr "Kaikki"
+
+#: ../src/utils.js:133
+msgid "Failed to open link"
+msgstr "Linkin avaaminen epäonnistui"
 
 #~ msgid "Window position"
 #~ msgstr "Ikkunan sijainti"
