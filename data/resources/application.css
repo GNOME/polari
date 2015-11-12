@@ -14,15 +14,15 @@
     border-width: 0 0 0 1px;
 }
 
-.polari-user-list .list-row {
+.polari-user-list row {
     -GtkWidget-focus-padding: 0;
 }
 
-.polari-user-list .list-row.expanded {
+.polari-user-list row.expanded {
     background-color: @content_view_bg;
 }
 
-.polari-user-list .list-row GtkFrame {
+.polari-user-list row frame {
     box-shadow: inset 0 2px 4px alpha(@polari_dark_bg_color, 0.8);
     transition: all 250ms ease-out;
     border-width: 0;
@@ -50,29 +50,29 @@
     background-color: @polari_dark_bg_color;
 }
 
-.polari-room-list .list-row {
+.polari-room-list row {
     padding-left: 8px;
 }
 
-.polari-room-list .list-row.inactive,
-.polari-room-list .list-row.inactive:backdrop {
+.polari-room-list row.inactive,
+.polari-room-list row.inactive:backdrop {
     color: mix(@theme_fg_color, @theme_base_color, 0.3);
 }
 
-.polari-room-list .list-row.inactive:selected,
-.polari-room-list .list-row.inactive:selected:backdrop {
+.polari-room-list row.inactive:selected,
+.polari-room-list row.inactive:selected:backdrop {
     color: mix(@theme_selected_fg_color, @theme_base_color, 0.3);
 }
 
-.polari-room-list .list-row:backdrop {
+.polari-room-list row:backdrop {
     color: @theme_fg_color;
 }
 
-.polari-room-list .list-row:backdrop:selected {
+.polari-room-list row:backdrop:selected {
     color: @theme_selected_fg_color;
 }
 
-.polari-room-list .list-row .pending-messages-count {
+.polari-room-list row .pending-messages-count {
     color: @theme_selected_fg_color;
     background-color: mix(@theme_selected_bg_color, @theme_selected_fg_color, 0.3);
     font-size: smaller;
@@ -80,7 +80,7 @@
     padding: 0px 4px;
 }
 
-.polari-room-list .list-row .pending-messages-count:backdrop {
+.polari-room-list row .pending-messages-count:backdrop {
     color: @theme_unfocused_selected_fg_color;
     background-color: mix(@theme_unfocused_selected_bg_color, @theme_unfocused_selected_fg_color, 0.1);
 }
