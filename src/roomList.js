@@ -159,6 +159,7 @@ const RoomRow = new Lang.Class({
 const RoomListHeader = new Lang.Class({
     Name: 'RoomListHeader',
     Extends: Gtk.MenuButton,
+    CssName: 'row',
     Template: 'resource:///org/gnome/Polari/room-list-header.ui',
     InternalChildren: ['label',
                        'iconStack',
@@ -175,8 +176,6 @@ const RoomListHeader = new Lang.Class({
         this._app = Gio.Application.get_default();
 
         this.parent(params);
-
-        this.get_style_context().remove_class('button');
 
         this._errorPopover.relative_to = this._iconStack;
         this._popoverButton.connect('clicked', Lang.bind(this,

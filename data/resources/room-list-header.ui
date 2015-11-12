@@ -9,7 +9,6 @@
     <property name="visible">True</property>
     <style>
       <class name="room-list-header"/>
-      <class name="list-row" />
       <class name="activatable" />
     </style>
     <child>
