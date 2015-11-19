@@ -28,12 +28,14 @@
     border-width: 0;
 }
 
-.polari-input-area {
-    background-image: none;
-    background-color: @polari_dark_bg_color;
-    border-color: @borders;
-    border-style: solid;
-    border-width: 1px 0 0 0;
+.polari-paste-confirmation {
+    border: 0 solid @borders;
+    border-top-width: 1px;
+}
+
+.polari-nick-button {
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .polari-nick-entry {

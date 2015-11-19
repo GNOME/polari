@@ -53,7 +53,11 @@ const EntryArea = new Lang.Class({
     Extends: Gtk.Stack,
     Template: 'resource:///org/gnome/Polari/entry-area.ui',
     InternalChildren: ['chatEntry',
+                       'nickButton',
+                       'nickLabel',
+                       'nickPopover',
                        'nickEntry',
+                       'changeButton',
                        'multiLineBox',
                        'multiLineLabel',
                        'cancelButton',
@@ -76,27 +80,16 @@ const EntryArea = new Lang.Class({
                                                           Lang.bind(this, this._onKeyPressEvent));
             }));
 
-        this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
-        this._nickEntry.connect('activate', Lang.bind(this,
+        this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
+        this._nickLabel.width_chars = ChatView.MAX_NICK_CHARS
+
+        this._changeButton.connect('clicked', Lang.bind(this,
             function() {
                if (this._nickEntry.text)
                    this._setNick(this._nickEntry.text);
-               this._chatEntry.grab_focus();
+               this._nickButton.active = false;
             }));
-        this._nickEntry.connect('focus-out-event', Lang.bind(this,
-            function() {
-                this._nickEntry.text = '';
-                return Gdk.EVENT_PROPAGATE;
-            }));
-        this._nickEntry.connect_after('key-press-event', Lang.bind(this,
-            function(w, event) {
-                let [, keyval] = event.get_keyval();
-                if (keyval == Gdk.KEY_Escape) {
-                    this._chatEntry.grab_focus();
-                    return Gdk.EVENT_STOP;
-                }
-                return Gdk.EVENT_PROPAGATE;
-            }));
+        this._nickPopover.set_default_widget(this._changeButton);
 
         this._chatEntry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
         this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
@@ -235,8 +228,8 @@ const EntryArea = new Lang.Class({
 
 
     _setNick: function(nick) {
-        this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
-        this._nickEntry.placeholder_text = nick;
+        this._nickLabel.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS);
+        this._nickLabel.label = nick;
 
         let account = this._room.account;
         account.set_nickname_async(nick, Lang.bind(this,
@@ -271,8 +264,11 @@ const EntryArea = new Lang.Class({
         let nick = channel ? channel.connection.self_contact.alias
                            : this._room ? this._room.account.nickname : '';
 
-        this._nickEntry.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS)
-        this._nickEntry.placeholder_text = nick;
+        this._nickLabel.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS);
+        this._nickLabel.label = nick;
+
+        if (!this._nickEntry.is_focus)
+            this._nickEntry.text = nick;
     },
 
     _onDestroy: function() {

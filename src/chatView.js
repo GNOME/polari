@@ -28,7 +28,10 @@ const STATUS_NOISE_MAXIMUM = 4;
 const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
 const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
 
-const MARGIN = 6;
+const MARGIN = 14;
+const NICK_SPACING = 14; // space after nicks, matching the following elements
+                         // of the nick button in the entry area:
+                         // 8px padding + 6px spacing
 
 const NICKTAG_PREFIX = 'nick';
 
@@ -497,11 +500,13 @@ const ChatView = new Lang.Class({
                                  metrics.get_approximate_digit_width());
         let pixelWidth = Pango.units_to_double(charWidth);
 
+        let totalWidth = this._maxNickChars * pixelWidth + NICK_SPACING;
+
         let tabs = Pango.TabArray.new(1, true);
-        tabs.set_tab(0, Pango.TabAlign.LEFT, this._maxNickChars * pixelWidth);
+        tabs.set_tab(0, Pango.TabAlign.LEFT, totalWidth);
         this._view.tabs = tabs;
-        this._view.indent = -this._maxNickChars * pixelWidth;
-        this._view.left_margin = MARGIN + this._maxNickChars * pixelWidth;
+        this._view.indent = -totalWidth;
+        this._view.left_margin = MARGIN + totalWidth;
     },
 
     _updateActive: function() {
