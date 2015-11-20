@@ -48,7 +48,8 @@ const TextView = new Lang.Class({
         let context = this.get_style_context();
         context.save();
         context.add_class('dim-label');
-        this._dimColor = context.get_color(Gtk.StateFlags.NORMAL);
+        context.set_state(Gtk.StateFlags.NORMAL);
+        this._dimColor = context.get_color(context.get_state());
         context.restore();
 
         this.parent();
@@ -232,12 +233,14 @@ const ChatView = new Lang.Class({
         let context = this.widget.get_style_context();
         context.save();
         context.add_class('dim-label');
-        let dimColor = context.get_color(Gtk.StateFlags.NORMAL);
+        context.set_state(Gtk.StateFlags.NORMAL);
+        let dimColor = context.get_color(context.get_state());
         context.restore();
 
         context.save();
-        let linkColor = context.get_color(Gtk.StateFlags.LINK);
-        this._activeNickColor = context.get_color(Gtk.StateFlags.LINK);
+        context.set_state(Gtk.StateFlags.LINK);
+        let linkColor = context.get_color(context.get_state());
+        this._activeNickColor = context.get_color(context.get_state());
         context.restore();
 
         let desaturatedNickColor = (this._activeNickColor.red +
