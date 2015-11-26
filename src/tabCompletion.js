@@ -15,15 +15,26 @@ const TabCompletion = new Lang.Class({
         this._entry.connect('key-press-event', Lang.bind(this, this._onKeyPress));
         this._entry.connect('focus-out-event', Lang.bind(this, this._cancel));
         this._entry.connect('unmap', Lang.bind(this, this._cancel));
+        this._entry.connect('realize', Lang.bind(this,
+            function() {
+                this._popup.set_transient_for(this._entry.get_toplevel());
+            }));
 
         this._popup = new Gtk.Window({ type: Gtk.WindowType.POPUP });
+
+        // HACK: tooltips are the only popup windows that don't require a
+        //       grab on wayland
+        this._popup.set_type_hint(Gdk.WindowTypeHint.TOOLTIP);
+
+        let frame = new Gtk.Frame({ visible: true });
+        this._popup.add(frame);
 
         this._list = new Gtk.ListBox({ selection_mode: Gtk.SelectionMode.SINGLE });
         this._list.set_filter_func(Lang.bind(this, this._filter));
         this._list.connect('row-selected', Lang.bind(this, this._onRowSelected));
         this._list.connect('row-activated', Lang.bind(this, this._stop));
         this._list.connect('keynav-failed', Lang.bind(this, this._onKeynavFailed));
-        this._popup.add(this._list);
+        frame.add(this._list);
 
         this._widgetMap = {};
     },
