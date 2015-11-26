@@ -1,3 +1,16 @@
+3.19.2 - "It was 12 Noon... of Course I was Drunk"
+==================================================
+* Linkify all supported URI schemes [Jonas; #755563]
+* Misc. bug fixes [Florian, Jonas; #756323, #757493, #758476]
+
+Contributors:
+  Jonas Danielsson, Florian Müllner
+
+Translations:
+  Pedro Albuquerque [pt], Jiri Grönroos [fi], Balázs Meskó [hu],
+  Marek Černocký [cs], Yosef Or Boczko [he], Kjartan Maraas [nb],
+  Daniel Mustieles [es]
+
 3.19.1 - "ABBA Turd"
 ====================
 * Allow users to edit message after /command errors [Kunaal; #756363]
