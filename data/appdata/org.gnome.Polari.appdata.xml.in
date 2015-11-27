@@ -27,4 +27,11 @@
   </screenshots>
   <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
   <updatecontact>fmuellner@gnome.org</updatecontact>
+  <kudos>
+    <kudo>AppMenu</kudo>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>HighContast</kudo>
+    <kudo>ModernToolkit</kudo>
+    <kudo>Notifications</kudo>
+  </kudos>
 </application>
