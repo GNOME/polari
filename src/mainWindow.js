@@ -175,7 +175,7 @@ const MainWindow = new Lang.Class({
 
     _onSizeAllocate: function(widget, allocation) {
         if (!this._isFullscreen && !this._isMaximized)
-            this._currentSize = [allocation.width, allocation.height];
+            this._currentSize = this.window.get_size(this);
     },
 
     _onDelete: function(widget, event) {
