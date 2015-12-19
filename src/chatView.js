@@ -1,6 +1,7 @@
 const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
@@ -129,6 +130,86 @@ const TextView = new Lang.Class({
     }
 });
 
+const ButtonTag = new Lang.Class({
+    Name: 'ButtonTag',
+    Extends: Gtk.TextTag,
+    Properties: {
+        'hover': GObject.ParamSpec.boolean('hover',
+                                           'hover',
+                                           'hover',
+                                           GObject.ParamFlags.READWRITE,
+                                           false)
+    },
+    Signals: {
+        'button-press-event': {
+            flags: GObject.SignalFlags.RUN_LAST,
+            param_types: [Gdk.Event.$gtype],
+            return_type: GObject.TYPE_BOOLEAN,
+            accumulator: GObject.AccumulatorType.TRUE_HANDLED
+        },
+        'button-release-event': {
+            flags: GObject.SignalFlags.RUN_LAST,
+            param_types: [Gdk.Event.$gtype],
+            return_type: GObject.TYPE_BOOLEAN,
+            accumulator: GObject.AccumulatorType.TRUE_HANDLED
+        },
+        'clicked': { }
+    },
+
+    _init: function(params) {
+        this.parent(params);
+
+        this._hover = false;
+        this._pressed = false;
+    },
+
+    get hover() {
+        return this._hover;
+    },
+
+    set hover(hover) {
+        if (this._hover == hover)
+            return;
+
+        this._hover = hover;
+        this.notify('hover');
+    },
+
+    on_notify: function(pspec) {
+        if (pspec.name == 'hover' && !this.hover)
+            this._pressed = false;
+    },
+
+    'on_button-press-event': function(event) {
+        let [, button] = event.get_button();
+        this._pressed = button == Gdk.BUTTON_PRIMARY;
+
+        return Gdk.EVENT_STOP;
+    },
+
+    'on_button-release-event': function(event) {
+        let [, button] = event.get_button();
+        if (!(button == Gdk.BUTTON_PRIMARY && this._pressed))
+            return Gdk.EVENT_PROPAGATE;
+
+        this._pressed = false;
+        this.emit('clicked');
+        return Gdk.EVENT_STOP;
+    },
+
+    vfunc_event: function(object, event, iter) {
+        let type = event.get_event_type();
+
+        if (type != Gdk.EventType.BUTTON_PRESS &&
+            type != Gdk.EventType.BUTTON_RELEASE)
+            return Gdk.EVENT_PROPAGATE;
+
+        let isPress = type == Gdk.EventType.BUTTON_PRESS;
+        return this.emit(isPress ? 'button-press-event'
+                                 : 'button-release-event', event);
+    }
+});
+
 const ChatView = new Lang.Class({
     Name: 'ChatView',
 
@@ -146,7 +227,7 @@ const ChatView = new Lang.Class({
         this._toplevelFocus = false;
         this._joinTime = 0;
         this._maxNickChars = MAX_NICK_CHARS;
-        this._hoveringLink = false;
+        this._hoveredButtonTags = [];
         this._needsIndicator = true;
         this._pending = {};
         this._pendingLogs = [];
@@ -171,7 +252,7 @@ const ChatView = new Lang.Class({
         this._app = Gio.Application.get_default();
         this._app.pasteManager.addWidget(this._view);
 
-        this._linkCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
+        this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
         this._channelSignals = [];
         this._channel = null;
@@ -313,12 +394,8 @@ const ChatView = new Lang.Class({
         this.widget.vadjustment.connect('changed',
                                  Lang.bind(this, this._updateScroll));
         this._view.connect('key-press-event', Lang.bind(this, this._onKeyPress));
-        this._view.connect('button-release-event',
-                           Lang.bind(this, this._handleLinkClicks));
-        this._view.connect('button-press-event',
-                           Lang.bind(this, this._handleLinkClicks));
         this._view.connect('motion-notify-event',
-                           Lang.bind(this, this._handleLinkHovers));
+                           Lang.bind(this, this._handleButtonTagsHover));
     },
 
     _onDestroy: function() {
@@ -527,67 +604,36 @@ const ChatView = new Lang.Class({
         menu.popup(null, null, null, button, time);
     },
 
-    _handleLinkClicks: function(view, event) {
-        let isPress = event.get_event_type() == Gdk.EventType.BUTTON_PRESS;
-
-        let [, button] = event.get_button();
-        if (button != Gdk.BUTTON_PRIMARY &&
-            (button != Gdk.BUTTON_SECONDARY || !isPress))
-            return Gdk.EVENT_PROPAGATE;
-
-        if (isPress)
-            this._clickedUrl = null;
-
-        let [, eventX, eventY] = event.get_coords();
-        let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
-                                                  eventX, eventY);
-
-        let iter = view.get_iter_at_location(x, y);
-        let tags = iter.get_tags();
-        for (let i = 0; i < tags.length; i++) {
-            let url = tags[i]._url;
-            if (url) {
-                if (url.indexOf(':') == -1)
-                    url = 'http://' + url;
-
-                if (isPress) {
-                    if (button == Gdk.BUTTON_PRIMARY)
-                        this._clickedUrl = url;
-                    else
-                        this._showUrlContextMenu(url, button, event.get_time());
-                    return Gdk.EVENT_STOP;
-                } else if (this._clickedUrl == url) {
-                    Utils.openURL(url, event.get_time());
-                    return Gdk.EVENT_STOP;
-                }
-                break;
-            } else if (tags[i].name.startsWith('status-compressed')) {
-                if (isPress && button == Gdk.BUTTON_PRIMARY) {
-                    let statusTag = this._lookupTag('status' + tags[i].name.slice(17)); // 'status-compressed'.length
-                    statusTag.invisible = !statusTag.invisible;
-                }
-                return Gdk.EVENT_STOP;
-            }
-        }
-        return Gdk.EVENT_PROPAGATE;
-    },
-
-    _handleLinkHovers: function(view, event) {
+    _handleButtonTagsHover: function(view, event) {
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
                                                   eventX, eventY);
         let iter = view.get_iter_at_location(x, y);
-        let tags = iter.get_tags();
-        let hovering = false;
-        for (let i = 0; i < tags.length && !hovering; i++)
-            if (tags[i]._url || tags[i].name.startsWith('status-compressed'))
-                hovering = true;
 
-        if (this._hoveringLink != hovering) {
-            this._hoveringLink = hovering;
-            let cursor = this._hoveringLink ? this._linkCursor : null;
+        let hoveredButtonTags = iter.get_tags().filter(
+            function(t) {
+                return t instanceof ButtonTag;
+            });
+
+        hoveredButtonTags.forEach(
+            function(t) {
+                t.hover = true;
+            });
+        this._hoveredButtonTags.forEach(
+            function(t) {
+                t.hover = hoveredButtonTags.indexOf(t) >= 0;
+            });
+
+        let isHovering = hoveredButtonTags.length > 0;
+        let wasHovering = this._hoveredButtonTags.length > 0;
+
+        if (isHovering != wasHovering) {
+            let cursor = isHovering ? this._hoverCursor : null;
             this._view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor);
         }
+
+        this._hoveredButtonTags = hoveredButtonTags;
+
         return Gdk.EVENT_PROPAGATE;
     },
 
@@ -802,10 +848,15 @@ const ChatView = new Lang.Class({
         let headerTag, groupTag;
         if (!headerMark) {
             // we are starting a new group
-            headerTag = new Gtk.TextTag({ name: headerTagName, invisible: true });
+            headerTag = new ButtonTag({ name: headerTagName, invisible: true });
             groupTag = new Gtk.TextTag({ name: groupTagName });
             buffer.tag_table.add(headerTag);
             buffer.tag_table.add(groupTag);
+
+            headerTag.connect('clicked',
+                function() {
+                    groupTag.invisible = !groupTag.invisible;
+                });
 
             this._ensureNewLine();
             headerMark = buffer.create_mark('idle-status-start', buffer.get_end_iter(), true);
@@ -1074,8 +1125,7 @@ const ChatView = new Lang.Class({
             let url = urls[i];
             this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
 
-            let tag = new Gtk.TextTag();
-            tag._url = url.url;
+            let tag = this._createUrlTag(url.url);
             this._view.get_buffer().tag_table.add(tag);
 
             this._insertWithTags(iter, url.url,
@@ -1084,6 +1134,27 @@ const ChatView = new Lang.Class({
             pos = url.pos + url.url.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
+    },
+
+    _createUrlTag: function(url) {
+        if (url.indexOf(':') == -1)
+            url = 'http://' + url;
+
+        let tag = new ButtonTag();
+        tag.connect('clicked',
+            function() {
+                Utils.openURL(url, Gtk.get_current_event_time());
+            });
+        tag.connect('button-press-event', Lang.bind(this,
+            function(tag, event) {
+                let [, button] = event.get_button();
+                if (button != Gdk.BUTTON_SECONDARY)
+                    return Gdk.EVENT_PROPAGATE;
+
+                this._showUrlContextMenu(url, button, event.get_time());
+                return Gdk.EVENT_STOP;
+            }));
+        return tag;
     },
 
     _ensureNewLine: function() {
