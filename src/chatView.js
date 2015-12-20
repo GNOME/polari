@@ -325,8 +325,11 @@ const ChatView = new Lang.Class({
 
         context.save();
         context.set_state(Gtk.StateFlags.LINK);
-        let linkColor = context.get_color(context.get_state());
+        this._linkColor = context.get_color(context.get_state());
         this._activeNickColor = context.get_color(context.get_state());
+
+        context.set_state(Gtk.StateFlags.LINK | Gtk.StateFlags.PRELIGHT);
+        this._hoveredLinkColor = context.get_color(context.get_state());
         context.restore();
 
         let desaturatedNickColor = (this._activeNickColor.red +
@@ -349,7 +352,7 @@ const ChatView = new Lang.Class({
           { name: 'action',
             foreground_rgba: dimColor },
           { name: 'url',
-            foreground_rgba: linkColor }
+            foreground_rgba: this._linkColor }
         ];
         tags.forEach(function(tagProps) {
             let tag = tagTable.lookup(tagProps.name);
@@ -1141,6 +1144,13 @@ const ChatView = new Lang.Class({
             url = 'http://' + url;
 
         let tag = new ButtonTag();
+        tag.connect('notify::hover', Lang.bind(this,
+            function() {
+                if (tag.hover)
+                    tag.foreground_rgba = this._hoveredLinkColor;
+                else
+                    tag.foreground_rgba = this._linkColor;
+            }));
         tag.connect('clicked',
             function() {
                 Utils.openURL(url, Gtk.get_current_event_time());
