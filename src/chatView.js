@@ -312,6 +312,7 @@ const ChatView = new Lang.Class({
                                         Lang.bind(this, this._onValueChanged));
         this.widget.vadjustment.connect('changed',
                                  Lang.bind(this, this._updateScroll));
+        this._view.connect('key-press-event', Lang.bind(this, this._onKeyPress));
         this._view.connect('button-release-event',
                            Lang.bind(this, this._handleLinkClicks));
         this._view.connect('button-press-event',
@@ -451,6 +452,21 @@ const ChatView = new Lang.Class({
         if (hasDeltas && dy >= 0)
             return Gdk.EVENT_PROPAGATE;
 
+        return this._fetchBacklog();
+    },
+
+    _onKeyPress: function(w, event) {
+        let [, keyval] = event.get_keyval();
+        if (keyval != Gdk.KEY_Up &&
+            keyval != Gdk.KEY_KP_Up &&
+            keyval != Gdk.KEY_Page_Up &&
+            keyval != Gdk.KEY_KP_Page_Up)
+            return Gdk.EVENT_PROPAGATE;
+
+        return this._fetchBacklog();
+    },
+
+    _fetchBacklog: function() {
         if (this.widget.vadjustment.value != 0 ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
