@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-20 23:48+0000\n"
-"PO-Revision-Date: 2015-09-21 07:42+0300\n"
+"POT-Creation-Date: 2015-12-22 02:19+0000\n"
+"PO-Revision-Date: 2015-12-22 06:51+0200\n"
 "Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr_TR\n"
@@ -21,13 +21,13 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:96
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../src/roomStack.js:77
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:455
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME için İnternet Aktarmalı Sohbet İstemcisi"
 
@@ -109,8 +109,8 @@ msgstr "isteğe bağlı"
 #. translators: This will be used in the phrase: "Open Connections in the application menu"
 #. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
 #: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
-#: ../src/roomStack.js:142
+#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:113
+#: ../src/roomStack.js:123
 msgid "Connections"
 msgstr "Bağlantılar"
 
@@ -126,16 +126,68 @@ msgstr "Ekle"
 msgid "Remove"
 msgstr "Kaldır"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
+#: ../data/resources/help-overlay.ui.h:1
+msgid "General"
+msgstr "Genel"
+
+#: ../data/resources/help-overlay.ui.h:2
+#| msgid "Join a Room"
+msgid "Join Room"
+msgstr "Odaya Katıl"
+
+#: ../data/resources/help-overlay.ui.h:3
+#| msgid "Message a User"
+msgid "Message User"
+msgstr "Kullanıcıya İleti Gönder"
+
+#: ../data/resources/help-overlay.ui.h:4
+#| msgid "Leave chatroom"
+msgid "Leave Room"
+msgstr "Odadan Ayrıl"
+
+#: ../data/resources/help-overlay.ui.h:5
+msgid "Show Userlist"
+msgstr "Kullanıcı Listesini Göster"
+
+#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:5
+msgid "Quit"
+msgstr "Çıkış"
+
+#: ../data/resources/help-overlay.ui.h:7
+msgid "Navigation"
+msgstr "Gezinti"
+
+#: ../data/resources/help-overlay.ui.h:8
+msgid "Next Room"
+msgstr "Sonraki Oda"
+
+#: ../data/resources/help-overlay.ui.h:9
+msgid "Previous Room"
+msgstr "Önceki Oda"
+
+#: ../data/resources/help-overlay.ui.h:10
+msgid "First Room"
+msgstr "İlk Oda"
+
+#: ../data/resources/help-overlay.ui.h:11
+#| msgid "Join Chat Room"
+msgid "Last Room"
+msgstr "Son Oda"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgid "First - Ninth Room"
+msgstr "İlk - Dokuzuncu Oda"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:222
 msgid "Join Chat Room"
 msgstr "Sohbet Odasına Katıl"
 
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:394
 msgid "_Cancel"
 msgstr "_İptal"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:224
 msgid "_Join"
 msgstr "_Katıl"
 
@@ -173,12 +225,12 @@ msgid "Preferences"
 msgstr "Tercihler"
 
 #: ../data/resources/menus.ui.h:3
-msgid "About"
-msgstr "Hakkında"
+msgid "Keyboard Shortcuts"
+msgstr ""
 
 #: ../data/resources/menus.ui.h:4
-msgid "Quit"
-msgstr "Çıkış"
+msgid "About"
+msgstr "Hakkında"
 
 #: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
@@ -193,7 +245,6 @@ msgid "_Name"
 msgstr "_İsim"
 
 #: ../data/resources/room-list-header.ui.h:1
-#| msgid "Connections"
 msgid "Connection Error"
 msgstr "Bağlantı Hatası"
 
@@ -201,7 +252,7 @@ msgstr "Bağlantı Hatası"
 msgid "Loading details"
 msgstr "Ayrıntılar yükleniyor"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
 msgid "Last Activity:"
 msgstr "Son Etkinlik:"
 
@@ -209,77 +260,95 @@ msgstr "Son Etkinlik:"
 msgid "Message"
 msgstr "İleti"
 
-#: ../src/application.js:373
+#: ../src/application.js:372
 msgid "Good Bye"
 msgstr "Hoşça Kal"
 
-#: ../src/application.js:451
+#: ../src/application.js:454
 msgid "translator-credits"
 msgstr "Muhammet Kara <muhammetk@gmail.com>"
 
-#: ../src/chatView.js:123
-#| msgid "Message"
+#: ../src/application.js:460
+msgid "Learn more about Polari"
+msgstr ""
+
+#: ../src/chatView.js:128
 msgid "New Messages"
 msgstr "Yeni İletiler"
 
-#: ../src/chatView.js:487
+#: ../src/chatView.js:511
 msgid "Open Link"
 msgstr "Bağlantıyı Aç"
 
-#: ../src/chatView.js:494
+#: ../src/chatView.js:517
 msgid "Copy Link Address"
 msgstr "Bağlantı Adresini Kopyala"
 
-#: ../src/chatView.js:678
+#: ../src/chatView.js:711
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s şimdi %s olarak biliniyor"
 
-#: ../src/chatView.js:685
+#: ../src/chatView.js:718
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s bağlantısını kesti"
 
-#: ../src/chatView.js:694
+#: ../src/chatView.js:727
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s, %s tarafından kanaldan atıldı"
 
-#: ../src/chatView.js:696
+#: ../src/chatView.js:729
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kanaldan atıldı"
 
-#: ../src/chatView.js:703
+#: ../src/chatView.js:736
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s, %s tarafından yasaklandı"
 
-#: ../src/chatView.js:705
+#: ../src/chatView.js:738
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s yasaklandı"
 
-#: ../src/chatView.js:711
+#: ../src/chatView.js:744
 #, javascript-format
 msgid "%s joined"
 msgstr "%s odaya katıldı"
 
-#: ../src/chatView.js:716
+#: ../src/chatView.js:750
 #, javascript-format
 msgid "%s left"
 msgstr "%s odadan ayrıldı"
 
+#: ../src/chatView.js:829
+#, javascript-format
+#| msgid "%s joined"
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d kullanıcı katıldı"
+
+#: ../src/chatView.js:832
+#, javascript-format
+#| msgid "%d user"
+#| msgid_plural "%d users"
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d kullanıcı ayrıldı"
+
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:756
+#: ../src/chatView.js:893
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:761
+#: ../src/chatView.js:898
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Dün, %H∶%M"
@@ -287,7 +356,7 @@ msgstr "Dün, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:766
+#: ../src/chatView.js:903
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -296,7 +365,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:772
+#: ../src/chatView.js:909
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
@@ -305,21 +374,21 @@ msgstr "%d %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:778
+#: ../src/chatView.js:915
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:783
+#: ../src/chatView.js:920
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:788
+#: ../src/chatView.js:925
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Dün, %l∶%M %p"
@@ -327,7 +396,7 @@ msgstr "Dün, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:793
+#: ../src/chatView.js:930
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -336,7 +405,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:799
+#: ../src/chatView.js:936
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
@@ -345,12 +414,12 @@ msgstr "%d %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:805
+#: ../src/chatView.js:942
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:226
+#: ../src/connections.js:239
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -358,19 +427,19 @@ msgstr ""
 "Bir ağ hatası nedeniyle Polari'nin bağlantısı kesildi. Lütfen adres "
 "alanındaki bilgilerin doğru olup olmadığını kontrol edin."
 
-#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
+#: ../src/connections.js:379 ../src/roomList.js:235 ../src/roomList.js:255
 msgid "Edit Connection"
 msgstr "Bağlantıyı Düzenle"
 
-#: ../src/connections.js:365
+#: ../src/connections.js:380
 msgid "New Connection"
 msgstr "Yeni Bağlantı"
 
-#: ../src/connections.js:381
+#: ../src/connections.js:396
 msgid "A_pply"
 msgstr "U_ygula"
 
-#: ../src/connections.js:381
+#: ../src/connections.js:396
 msgid "Cr_eate"
 msgstr "Ol_uştur"
 
@@ -383,7 +452,7 @@ msgstr "Ol_uştur"
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
-#: ../src/ircParser.js:25
+#: ../src/ircParser.js:24
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
@@ -391,202 +460,221 @@ msgstr ""
 "/HELP [<command>] - <command> için yardımı ya da kullanılabilir komutların "
 "listesini gösterir"
 
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:25
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <nick> [<channel>] - <nick> adlı kullanıcıyı <channel> kanalına ya "
 "da geçerli kanala davet eder"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:26
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <channel> - <channel> kanalına katılır"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:27
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <nick> - <nick> adlı kullanıcıyı geçerli kanaldan atar"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:28
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <action> - <action> eylemini geçerli kanala gönderir"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:29
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - geçerli kanaldaki kullanıcıları listeler"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:30
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <nickname> - takma adınızı <nickname> olarak belirler"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:31
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<channel>] [<reason>] - <channel> kanalından, öntanımlı olarak "
 "geçerli kanaldan, ayrılır"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:32
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <nick> - <nick> ile özel konuşma başlatır"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:33
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<reason>] - geçerli sunucu ile bağlantınızı keser"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:34
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <text> - <text> metnini geçerli odaya/kişiye gönderir"
 
-#: ../src/ircParser.js:36
+#: ../src/ircParser.js:35
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <topic> - konuyu <topic> olarak belirler ya da geçerli konuyu gösterir"
 
-#: ../src/ircParser.js:39
+#: ../src/ircParser.js:38
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Bilinmeyen komut - kullanılabilir komutların listesi için /HELP komutunu "
 "deneyiniz"
 
-#: ../src/ircParser.js:60
+#: ../src/ircParser.js:59
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Kullanım: %s"
 
-#: ../src/ircParser.js:95
+#: ../src/ircParser.js:97
 msgid "Known commands:"
 msgstr "Bilinen komutlar:"
 
-#: ../src/ircParser.js:172
+#: ../src/ircParser.js:177
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s üzerindeki kullanıcılar:"
 
-#: ../src/ircParser.js:253
+#: ../src/ircParser.js:261
 msgid "No topic set"
 msgstr "Konu ayarlanmamış"
 
-#: ../src/joinDialog.js:219
+#: ../src/joinDialog.js:223
 msgid "Add Connection"
 msgstr "Bağlantı Ekle"
 
-#: ../src/joinDialog.js:221
+#: ../src/joinDialog.js:225
 msgid "_Save"
 msgstr "_Kaydet"
 
-#: ../src/mainWindow.js:239
+#: ../src/mainWindow.js:235
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d kullanıcı"
 
-#: ../src/messageDialog.js:92
+#: ../src/messageDialog.js:95
 msgid "No recent users"
 msgstr "Hiç yeni kullanıcı yok"
 
-#: ../src/pasteManager.js:291
+#. translators: %s is a nick, #%s a channel
+#: ../src/pasteManager.js:95
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s, #%s'de"
+
+#: ../src/pasteManager.js:97
+#, javascript-format
+msgid "Paste from %s"
+msgstr "%s'den yapıştır"
+
+#: ../src/pasteManager.js:306
 #, javascript-format
 msgid "Uploading %s"
 msgstr "%s karşıya yükleniyor"
 
-#: ../src/roomList.js:22
+#: ../src/roomList.js:104
 msgid "Leave chatroom"
 msgstr "Sohbet odasından ayrıl"
 
-#: ../src/roomList.js:23
+#: ../src/roomList.js:105
 msgid "End conversation"
 msgstr "Konuşmayı sonlandır"
 
-#: ../src/roomList.js:186
+#: ../src/roomList.js:213
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "%s bağlantısında bir hata oluştu"
 
-#: ../src/roomList.js:206
+#: ../src/roomList.js:233
 msgid "Please check your connection details."
 msgstr "Lütfen bağlantı ayrıntılarınızı kontrol edin."
 
-#: ../src/roomList.js:227
+#: ../src/roomList.js:254
 msgid "Could not make connection in a safe way."
 msgstr "Güvenli bir şekilde bağlantı kurulamadı."
 
-#: ../src/roomList.js:235
+#: ../src/roomList.js:262
 msgid "Authentication failed."
 msgstr "Kimlik doğrulama başarısız oldu."
 
-#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
+#: ../src/roomList.js:263 ../src/roomList.js:274 ../src/roomList.js:282
 msgid "Try again"
 msgstr "Tekrar deneyin"
 
-#: ../src/roomList.js:246
+#: ../src/roomList.js:273
 msgid "The server is busy."
 msgstr "Sunucu meşgul."
 
-#: ../src/roomList.js:254
+#: ../src/roomList.js:281
 msgid "Failed to connect for an unknown reason."
 msgstr "Bağlantı, bilinmeyen bir nedenle başarısız oldu."
 
-#: ../src/roomStack.js:130
+#: ../src/roomStack.js:111
 msgid "Begin chatting by adding a new connection."
 msgstr "Yeni bir bağlantı ekleyerek sohbet etmeye başlayın."
 
-#: ../src/roomStack.js:133
+#: ../src/roomStack.js:114
 #, javascript-format
 msgid "Open %s in the application menu."
 msgstr "Uygulama menüsünden %s'i açın."
 
-#: ../src/roomStack.js:136
+#: ../src/roomStack.js:117
 msgid "Join a room using the + button."
 msgstr "+ düğmesini kullanarak bir odaya katılın."
 
-#: ../src/roomStack.js:140
+#: ../src/roomStack.js:121
 msgid "Your connections are disabled."
 msgstr "Bağlantılarınız devre dışı."
 
-#: ../src/roomStack.js:143
+#: ../src/roomStack.js:124
 #, javascript-format
 msgid "Enable them by opening %s in the application menu."
 msgstr "Uygulama menüsünden %s'i açarak bunları etkinleştirin."
 
-#: ../src/userList.js:177
+#: ../src/userList.js:178
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d saniye önce"
 
-#: ../src/userList.js:182
+#: ../src/userList.js:183
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d dakika önce"
 
-#: ../src/userList.js:187
+#: ../src/userList.js:188
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d saat önce"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:193
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d gün önce"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hafta önce"
 
-#: ../src/userList.js:201
+#: ../src/userList.js:202
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ay önce"
 
-#: ../src/userList.js:538
+#: ../src/userList.js:380
+msgid "No results"
+msgstr "Sonuç yok"
+
+#: ../src/userList.js:554
 msgid "All"
 msgstr "Tümü"
+
+#: ../src/utils.js:133
+msgid "Failed to open link"
+msgstr "Bağlantıyı açma başarısız oldu"
 
 #~ msgid "Connecting to %s"
 #~ msgstr "%s'e bağlanılıyor..."
