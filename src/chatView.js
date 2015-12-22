@@ -432,7 +432,8 @@ const ChatView = new Lang.Class({
         let adj = this.widget.vadjustment;
         if (adj.value == this._scrollBottom) {
             if (this._nPending == 0) {
-                adj.value = adj.upper - adj.page_size;
+                this._view.emit('move-cursor',
+                                Gtk.MovementStep.BUFFER_ENDS, 1, false);
             } else {
                 let id = Object.keys(this._pending).sort(function(a, b) {
                     return a - b;
