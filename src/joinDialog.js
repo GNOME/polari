@@ -89,7 +89,8 @@ const JoinDialog = new Lang.Class({
             }));
 
         let icon = new Gtk.Image({ icon_name: 'go-previous-symbolic' });
-        this._backButton = new Gtk.Button({ image: icon });
+        this._backButton = new Gtk.Button({ image: icon,
+                                            valign: Gtk.Align.CENTER });
         this._backButton.connect('clicked', Lang.bind(this,
             function() {
                 this._setPage(DialogPage.MAIN);
