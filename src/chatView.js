@@ -379,6 +379,9 @@ const ChatView = new Lang.Class({
                                     wrap_mode: Gtk.WrapMode.WORD_CHAR,
                                     right_margin: MARGIN });
 
+        this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK);
+        this._view.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK);
+
         this.widget.add(this._view);
         this.widget.show_all();
 
@@ -398,6 +401,10 @@ const ChatView = new Lang.Class({
                                  Lang.bind(this, this._updateScroll));
         this._view.connect('key-press-event', Lang.bind(this, this._onKeyPress));
         this._view.connect('motion-notify-event',
+                           Lang.bind(this, this._handleButtonTagsHover));
+        this._view.connect('enter-notify-event',
+                           Lang.bind(this, this._handleButtonTagsHover));
+        this._view.connect('leave-notify-event',
                            Lang.bind(this, this._handleButtonTagsHover));
     },
 
