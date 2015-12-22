@@ -342,6 +342,12 @@ const ChatView = new Lang.Class({
         if (this._activeNickColor.equal(this._inactiveNickColor))
             this._inactiveNickColor.alpha = 0.5;
 
+        context.save();
+        context.add_class('view');
+        context.set_state(Gtk.StateFlags.NORMAL);
+        this._statusHeaderHoverColor = context.get_color(context.get_state());
+        context.restore();
+
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
@@ -867,6 +873,11 @@ const ChatView = new Lang.Class({
                 function() {
                     groupTag.invisible = !groupTag.invisible;
                 });
+
+            headerTag.connect('notify::hover', Lang.bind(this,
+                function() {
+                    headerTag.foreground_rgba = headerTag.hover ? this._statusHeaderHoverColor : null;
+                }));
 
             this._ensureNewLine();
             headerMark = buffer.create_mark('idle-status-start', buffer.get_end_iter(), true);
