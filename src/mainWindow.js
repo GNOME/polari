@@ -1,6 +1,7 @@
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -18,6 +19,76 @@ const Utils = imports.utils;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
+
+const FixedSizeFrame = new Lang.Class({
+    Name: 'FixedSizeFrame',
+    Extends: Gtk.Frame,
+    Properties: {
+        height: GObject.ParamSpec.int('height',
+                                      'height',
+                                      'height',
+                                      GObject.ParamFlags.READWRITE,
+                                      -1, GLib.MAXINT32, -1),
+        width: GObject.ParamSpec.int('width',
+                                     'width',
+                                     'width',
+                                     GObject.ParamFlags.READWRITE,
+                                     -1, GLib.MAXINT32, -1)
+    },
+
+    _init: function(params) {
+        this._height = -1;
+        this._width = -1;
+
+        this.parent(params);
+    },
+
+    _queueRedraw: function() {
+        let child = this.get_child();
+        if (child)
+            child.queue_resize();
+        this.queue_draw();
+    },
+
+    get height() {
+        return this._height;
+    },
+
+    set height(height) {
+        if (height == this._height)
+            return;
+        this._height = height;
+        this.notify('height');
+        this._queueRedraw();
+    },
+
+    get width() {
+        return this._width;
+    },
+
+    set width(width) {
+        if (width == this._width)
+            return;
+
+        this._width = width;
+        this.notify('width');
+        this._queueRedraw();
+    },
+
+    vfunc_get_preferred_width_for_height: function(forHeight) {
+        if (this._width < 0)
+            return this.parent(forHeight);
+        else
+            return [this._width, this._width];
+    },
+
+    vfunc_get_preferred_height_for_width: function(forWidth) {
+        if (this._height < 0)
+            return this.parent(forWidth);
+        else
+            return [this._height, this._height];
+    }
+});
 
 const MainWindow = new Lang.Class({
     Name: 'MainWindow',

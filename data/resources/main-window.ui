@@ -186,7 +186,7 @@
             <property name="hexpand">False</property>
             <property name="transition_type">slide-right</property>
             <child>
-              <object class="PolariFixedSizeFrame" id="frame1">
+              <object class="Gjs_FixedSizeFrame" id="frame1">
                 <property name="visible">True</property>
                 <property name="hexpand">False</property>
                 <property name="width">200</property>

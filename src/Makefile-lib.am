@@ -2,14 +2,12 @@ pkglib_LTLIBRARIES = libpolari-1.0.la
 
 libpolari_headers = \
 	lib/polari-drag-helper.h \
-	lib/polari-fixed-size-frame.h \
 	lib/polari-room.h \
 	lib/polari-util.h \
 	$(NULL)
 
 libpolari_sources = \
 	lib/polari-drag-helper.c \
-	lib/polari-fixed-size-frame.c \
 	lib/polari-room.c \
 	lib/polari-util.c \
 	$(NULL)

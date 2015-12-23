@@ -35,7 +35,7 @@ const Application = new Lang.Class({
     vfunc_startup: function() {
         this.parent();
 
-        let w = new Polari.FixedSizeFrame(); // register gtype
+        let w = new MainWindow.FixedSizeFrame(); // register gtype
         w.destroy();
 
         this._chatroomManager = ChatroomManager.getDefault();
