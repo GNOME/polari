@@ -137,15 +137,16 @@ polari_fixed_size_frame_get_property (GObject    *object,
 }
 
 static void
-polari_fixed_size_frame_get_preferred_width (GtkWidget *widget,
-                                                 int       *minimum_size,
-                                                 int       *natural_size)
+polari_fixed_size_frame_get_preferred_width_for_height (GtkWidget *widget,
+                                                        int        for_height,
+                                                        int       *minimum_size,
+                                                        int       *natural_size)
 {
   PolariFixedSizeFrame *self = POLARI_FIXED_SIZE_FRAME (widget);
 
   if (self->priv->width == -1)
     {
-      GTK_WIDGET_CLASS (polari_fixed_size_frame_parent_class)->get_preferred_width (widget, minimum_size, natural_size);
+      GTK_WIDGET_CLASS (polari_fixed_size_frame_parent_class)->get_preferred_width_for_height (widget, for_height, minimum_size, natural_size);
     }
   else
     {
@@ -154,9 +155,10 @@ polari_fixed_size_frame_get_preferred_width (GtkWidget *widget,
 }
 
 static void
-polari_fixed_size_frame_get_preferred_height (GtkWidget *widget,
-                                                  int       *minimum_size,
-                                                  int       *natural_size)
+polari_fixed_size_frame_get_preferred_height_for_width (GtkWidget *widget,
+                                                        int        for_width,
+                                                        int       *minimum_size,
+                                                        int       *natural_size)
 {
   PolariFixedSizeFrame *self = POLARI_FIXED_SIZE_FRAME (widget);
 
@@ -179,10 +181,10 @@ polari_fixed_size_frame_class_init (PolariFixedSizeFrameClass *klass)
 
   object_class->get_property = polari_fixed_size_frame_get_property;
   object_class->set_property = polari_fixed_size_frame_set_property;
-  widget_class->get_preferred_width =
-    polari_fixed_size_frame_get_preferred_width;
-  widget_class->get_preferred_height =
-    polari_fixed_size_frame_get_preferred_height;
+  widget_class->get_preferred_width_for_height =
+    polari_fixed_size_frame_get_preferred_width_for_height;
+  widget_class->get_preferred_height_for_width =
+    polari_fixed_size_frame_get_preferred_height_for_width;
   gtk_container_class_handle_border_width (container_class);
 
   props[PROP_WIDTH] =
