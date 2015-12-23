@@ -102,7 +102,8 @@
     padding: 6px;
 }
 
-.polari-titlebar-left {
+.titlebar headerbar:dir(ltr):first-child,
+.titlebar headerbar:dir(rtl):last-child {
     /* the horizontal padding confuses left_side_size_group, so we
        add it as margin-left to the first button instead (in mainWindow.ui);
        also set the vertical padding to 0 so the separator extends to the

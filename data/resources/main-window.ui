@@ -20,9 +20,6 @@
             <property name="visible">True</property>
             <property name="hexpand">False</property>
             <property name="show-close-button">True</property>
-            <style>
-              <class name="polari-titlebar-left"/>
-            </style>
             <child>
               <object class="GtkButton" id="joinButton">
                 <property name="visible">True</property>
@@ -70,9 +67,6 @@
             <property name="visible">True</property>
             <property name="hexpand">True</property>
             <property name="show-close-button">True</property>
-            <style>
-              <class name="polari-titlebar-right"/>
-            </style>
             <!-- Use a custom title widget to enable markup for subtitles
                  (for URLs in channel topics); other than that, we want
                  the default GtkHeaderBar behavior, e.g. the subtitle may
