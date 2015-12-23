@@ -30,7 +30,6 @@
             <property name="show_close_button">True</property>
             <style>
               <class name="polari-titlebar-left"/>
-              <class name="titlebar"/>
             </style>
             <child>
               <object class="GtkMenuButton" id="join_menu_button">
@@ -84,7 +83,6 @@
             <property name="show_close_button">True</property>
             <style>
               <class name="polari-titlebar-right"/>
-              <class name="titlebar"/>
             </style>
             <!-- Use a custom title widget to enable markup for subtitles
                  (for URLs in channel topics); other than that, we want
