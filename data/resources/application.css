@@ -1,16 +1,16 @@
 @define-color polari_dark_bg_color shade(@theme_bg_color, 0.95);
 
-.polari-sidebar {
+.polari-room-list .sidebar {
     border-style: solid;
     border-color: @borders;
     border-image: none;
 }
 
-.polari-sidebar.polari-room-list:dir(ltr) {
+.polari-room-list .sidebar:dir(ltr) {
     border-width: 0 1px 0 0;
 }
 
-.polari-sidebar.polari-room-list:dir(rtl) {
+.polari-room-list .sidebar:dir(rtl) {
     border-width: 0 0 0 1px;
 }
 

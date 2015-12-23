@@ -138,7 +138,7 @@ const RoomView = new Lang.Class({
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.widget.add(this._view.widget);
 
-        this.inputWidget = new Gtk.Frame();
+        this.inputWidget = new Gtk.Frame({ shadow_type: Gtk.ShadowType.NONE });
         this.inputWidget.get_style_context().add_class('polari-input-area');
         this.widget.add(this.inputWidget);
 
