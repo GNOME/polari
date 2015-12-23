@@ -1,3 +1,16 @@
+3.19.3 - "Lucy Diamond"
+=======================
+* Compress status messages on idle channels [Bastian; #711542]
+* Also load history when scrolling via keyboard [Isabella; #755547]
+* Misc. bug fixes [Florian, Kunaal; #759772, #759677, #759032]
+
+Contributors:
+  Bastian Ilsø, Kunaal Jain, Florian Müllner, Isabella Ribeiro
+
+Translations:
+  Pedro Albuquerque [pt], Jiri Grönroos [fi], Daniel Mustieles [es],
+  Muhammet Kara [tr]
+
 3.19.2 - "It was 12 Noon... of Course I was Drunk"
 ==================================================
 * Linkify all supported URI schemes [Jonas; #755563]
