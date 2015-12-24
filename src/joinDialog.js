@@ -3,12 +3,12 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
-const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 const Connections = imports.connections;
 const Lang = imports.lang;
+const LogManager = imports.logManager;
 const Utils = imports.utils;
 
 const DialogPage = {
@@ -176,16 +176,13 @@ const JoinDialog = new Lang.Class({
         let account = this._accounts[selected];
         if (!account)
             return;
-        let logManager = Tpl.LogManager.dup_singleton();
 
-        logManager.get_entities_async(account, Lang.bind(this,
-            function(m, res) {
-                let [, entities] = logManager.get_entities_finish(res);
-                let names = entities.filter(function(e) {
-                    return e.type == Tpl.EntityType.ROOM;
-                }).map(function(e) {
-                    return e.alias;
-                });
+        let logManager = LogManager.getDefault();
+
+        let sparql = 'select distinct nie:title(?chan) as ?title ' +
+                     '{ ?chan a nmo:PermanentChannel } order by ?title';
+        logManager.query(sparql, null, Lang.bind(this,
+            function(names) {
                 for (let i = 0; i < names.length; i++) {
                     let model = this._nameCompletion.model;
                     let iter = model.append();
