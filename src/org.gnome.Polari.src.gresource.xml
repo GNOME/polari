@@ -17,6 +17,7 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
     <file>initialSetup.js</file>
     <file>ircParser.js</file>
     <file>joinDialog.js</file>
+    <file>logger.js</file>
     <file>main.js</file>
     <file>mainWindow.js</file>
     <file>networksManager.js</file>

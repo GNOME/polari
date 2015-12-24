@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2015 Carlos Garnacho <carlosg@gnome.org>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+# Inputs: channel, lastTime
+# Outputs: text, senderNick, time, isAction, isSelf
+SELECT
+  ?text
+  ?senderNick
+  ?time
+  ?isAction
+  ?isSelf
+{
+  GRAPH polari:irc {
+    ?msg a polari:Message;
+      polari:time ?time;
+      polari:sender ?sender;
+      polari:text ?text;
+      polari:channel ~channel.
+
+    ?sender polari:nick ?senderNick .
+
+    OPTIONAL { ?msg polari:isAction ?isAction }.
+    BIND (EXISTS { ?sender a polari:SelfContact } AS ?isSelf).
+    # Provide a lower boundary for the queried time range, 1y worth of time
+    BIND (~lastTime^^xsd:dateTime - (60 * 60 * 24 * 365) AS ?after).
+    FILTER (?time < ~lastTime^^xsd:dateTime && ?time > ?after).
+  }
+}
+ORDER BY DESC(?time) DESC(tracker:id(?msg))
