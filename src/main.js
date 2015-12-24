@@ -9,7 +9,8 @@ pkg.require({ 'GdkPixbuf': '2.0',
               'Secret': '1',
               'Soup': '2.4',
               'TelepathyGLib': '0.12',
-              'TelepathyLogger': '0.2' });
+              'TelepathyLogger': '0.2',
+              'Tracker': '2.0' });
 pkg.requireSymbol('Gio', '2.0', 'Application.send_notification');
 pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Gspell', '1', 'Entry');
