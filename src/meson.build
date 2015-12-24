@@ -33,6 +33,7 @@ js_sources = [
   'initialSetup.js',
   'ircParser.js',
   'joinDialog.js',
+  'logger.js',
   'main.js',
   'mainWindow.js',
   'networksManager.js',
