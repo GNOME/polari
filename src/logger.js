@@ -4,14 +4,18 @@ const Polari = imports.gi.Polari;
 const Tracker = imports.gi.Tracker;
 
 var GenericQuery  = class {
-    constructor() {
+    constructor(limit = -1) {
         this._connection = Polari.util_get_tracker_connection();
         this._results = [];
+        this._limit = limit;
+        this._count = 0;
+        this._closed = false;
+        this._cursor = null;
         this._task = null;
     }
 
-    run(sparql, cancellable, callback) {
-        this._task = Gio.Task.new(this._connection, cancellable, (o, res) => {
+    _createTask(cancellable, callback) {
+        return Gio.Task.new(this._connection, cancellable, (o, res) => {
             let success = false;
             try {
                 success = this._task.propagate_boolean();
@@ -22,6 +26,10 @@ var GenericQuery  = class {
             callback(success ? this._results : []);
             this._task = null;
         });
+    }
+
+    run(sparql, cancellable, callback) {
+        this._task = this._createTask(cancellable, callback);
 
         this._connection.query_async(sparql, cancellable, (c, res) => {
             let cursor;
@@ -32,9 +40,26 @@ var GenericQuery  = class {
                 return;
             }
 
+            this._cursor = cursor;
             cursor.next_async(cancellable,
                               Lang.bind(this, this._onCursorNext));
         });
+    }
+
+    next(limit, cancellable, callback) {
+        if (this._task)
+            return false;
+
+        this._results = [];
+        this._count = 0;
+        this._limit = limit;
+        this._task = this._createTask(cancellable, callback);
+        this._cursor.next_async(cancellable, Lang.bind(this, this._onCursorNext));
+        return true;
+    }
+
+    isClosed() {
+        return this._closed;
     }
 
     _onCursorNext(cursor, res) {
@@ -47,12 +72,19 @@ var GenericQuery  = class {
 
         if (valid) {
             this._pushResult(cursor);
-            cursor.next_async(this._task.get_cancellable(),
-                              Lang.bind(this, this._onCursorNext));
+            this._count++;
+
+            if (this._limit <= 0 || this._count < this._limit) {
+                cursor.next_async(this._task.get_cancellable(),
+                                  Lang.bind(this, this._onCursorNext));
+            } else {
+                this._task.return_boolean(true);
+            }
         } else {
             cursor.close();
             if (!this._task.had_error())
                 this._task.return_boolean(true);
+            this._closed = true;
         }
     }
 
