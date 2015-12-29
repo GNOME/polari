@@ -13,14 +13,18 @@ function getDefault() {
 const GenericQuery = new Lang.Class({
     Name: 'GenericQuery',
 
-    _init: function(connection) {
+    _init: function(connection, limit = -1) {
         this._connection = connection;
         this._results = [];
+        this._limit = limit;
+        this._count = 0;
+        this._closed = false;
+        this._cursor = null;
         this._task = null;
     },
 
-    run: function(sparql, cancellable, callback) {
-        this._task = Gio.Task.new(this._connection, cancellable, Lang.bind(this,
+    _createTask: function(cancellable, callback) {
+        return Gio.Task.new(this._connection, cancellable, Lang.bind(this,
             function(o, res) {
                 let success = false;
                 try {
@@ -32,6 +36,10 @@ const GenericQuery = new Lang.Class({
                 callback(success ? this._results : []);
                 this._task = null;
             }));
+    },
+
+    run: function(sparql, cancellable, callback) {
+        this._task = this._createTask(cancellable, callback);
 
         this._connection.query_async(sparql, cancellable, Lang.bind(this,
             function(c, res) {
@@ -43,9 +51,26 @@ const GenericQuery = new Lang.Class({
                     return;
                 }
 
+                this._cursor = cursor;
                 cursor.next_async(cancellable,
                                   Lang.bind(this, this._onCursorNext));
             }));
+    },
+
+    next: function (limit, cancellable, callback) {
+        if (this._task)
+            return false;
+
+        this._results = [];
+        this._count = 0;
+        this._limit = limit;
+        this._task = this._createTask(cancellable, callback);
+        this._cursor.next_async(cancellable, Lang.bind(this, this._onCursorNext));
+        return true;
+    },
+
+    isClosed: function () {
+        return this._closed;
     },
 
     _onCursorNext: function(cursor, res) {
@@ -58,12 +83,19 @@ const GenericQuery = new Lang.Class({
 
         if (valid) {
             this._pushResult(cursor);
-            cursor.next_async(this._task.get_cancellable(),
-                              Lang.bind(this, this._onCursorNext));
+            this._count++;
+
+            if (this._limit <= 0 || this._count < this._limit) {
+                cursor.next_async(this._task.get_cancellable(),
+                                  Lang.bind(this, this._onCursorNext));
+            } else {
+                this._task.return_boolean(true);
+            }
         } else {
             cursor.close();
             if (!this._task.had_error())
                 this._task.return_boolean(true);
+            this._closed = true;
         }
     },
 
