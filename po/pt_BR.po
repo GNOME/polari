@@ -12,19 +12,19 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2015-12-23 20:52+0000\n"
-"PO-Revision-Date: 2015-11-13 17:05-0300\n"
-"Last-Translator: Gustavo Marques <gutodisse@gmail.com>\n"
+"PO-Revision-Date: 2015-12-31 16:04-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.7.3\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
-#: ../src/roomStack.js:77
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:77
 msgid "Polari"
 msgstr "Polari"
 
@@ -178,9 +178,8 @@ msgid "Last Room"
 msgstr "Última sala"
 
 #: ../data/resources/help-overlay.ui.h:13
-#, fuzzy
 msgid "First - Ninth Room"
-msgstr "Primeira nona sala"
+msgstr "Primeira - nona sala"
 
 #: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:223
 msgid "Join Chat Room"
@@ -327,21 +326,18 @@ msgid "%s left"
 msgstr "%s saiu"
 
 #: ../src/chatView.js:902
-#, fuzzy, javascript-format
-#| msgid "%s joined"
+#, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
-msgstr[0] "%s entrou"
-msgstr[1] "%s entrou"
+msgstr[0] "%d usuário entrou"
+msgstr[1] "%d usuários entraram"
 
 #: ../src/chatView.js:905
-#, fuzzy, javascript-format
-#| msgid "%d user"
-#| msgid_plural "%d users"
+#, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
-msgstr[0] "%d usuário"
-msgstr[1] "%d usuários"
+msgstr[0] "%d usuário saiu"
+msgstr[1] "%d usuários saíram"
 
 #. today
 #. Translators: Time in 24h format
