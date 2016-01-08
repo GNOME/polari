@@ -14,16 +14,13 @@ import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
-import Tpl from 'gi://TelepathyLogger';
 
 import {DropTargetIface} from './pasteManager.js';
+import {LogWalker} from './logger.js';
 import {UserPopover} from './userList.js';
 import UserStatusMonitor from './userTracker.js';
 import URLPreview from './urlPreview.js';
 import * as Utils from './utils.js';
-
-Gio._promisify(Tpl.LogWalker.prototype,
-    'get_events_async', 'get_events_finish');
 
 export const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -404,15 +401,7 @@ class ChatView extends Gtk.ScrolledWindow {
         });
         this._updateMaxNickChars(this._room.account.nickname.length);
 
-        let isRoom = room.type === Tp.HandleType.ROOM;
-        let target = new Tpl.Entity({
-            type: isRoom ? Tpl.EntityType.ROOM : Tpl.EntityType.CONTACT,
-            identifier: room.channel_name,
-        });
-        let logManager = Tpl.LogManager.dup_singleton();
-        this._logWalker = logManager.walk_filtered_events(
-            room.account, target,
-            Tpl.EventTypeMask.TEXT, null);
+        this._logWalker = new LogWalker(this._room);
 
         this._fetchingBacklog = true;
         this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
@@ -579,19 +568,21 @@ class ChatView extends Gtk.ScrolledWindow {
         this._nickStatusChangedId = 0;
         this._userTracker = null;
 
-        this._logWalker.run_dispose();
         this._logWalker = null;
     }
 
     async _getLogEvents(num) {
-        const [events] = await this._logWalker.get_events_async(num);
+        try {
+            const events = await this._logWalker.getEvents(num);
 
-        this._hideLoadingIndicator();
-        this._fetchingBacklog = false;
+            this._hideLoadingIndicator();
+            this._fetchingBacklog = false;
 
-        let messages = events.map(e => this._createMessage(e));
-        this._pendingLogs = messages.concat(this._pendingLogs);
-        this._insertPendingLogs();
+            this._pendingLogs = events.concat(this._pendingLogs);
+            this._insertPendingLogs();
+        } catch (e) {
+            console.debug(e);
+        }
     }
 
     _createMessage(source) {
@@ -600,17 +591,13 @@ class ChatView extends Gtk.ScrolledWindow {
             const msg = Polari.Message.new_from_tp_message(source);
             msg.pendingId = valid ? id : undefined;
             return msg;
-        } else if (source instanceof Tpl.Event) {
-            const msg = Polari.Message.new_from_tpl_event(source);
-            msg.pendingId = undefined;
-            return msg;
         }
 
         throw new Error(`Cannot create message from source ${source}`);
     }
 
     _getReadyLogs() {
-        if (this._logWalker.is_end())
+        if (this._logWalker.isEnd())
             return this._pendingLogs.splice(0);
 
         const nick = this._pendingLogs[0].get_sender();
@@ -741,7 +728,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
     _fetchBacklog() {
         if (this.vadjustment.value !== 0 ||
-            this._logWalker.is_end())
+            this._logWalker.isEnd())
             return Gdk.EVENT_PROPAGATE;
 
         if (this._fetchingBacklog)
