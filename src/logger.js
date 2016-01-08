@@ -1,3 +1,4 @@
+const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Polari = imports.gi.Polari;
@@ -131,5 +132,53 @@ var GenericQuery = new Lang.Class({
         } catch(e) {
             log("Error fetching result: " + e.toString());
         }
+    }
+});
+
+var LogWalker = new Lang.Class({
+    Name: 'LogWalker',
+
+    _init: function(room) {
+        this._room = room;
+        this._query = null;
+    },
+
+    getEvents: function(numEvents, callback) {
+        let returnFunc = r => {
+            callback(r.reverse().map(m => {
+                let { text, sender, isAction, isSelf } = m;
+                let timestamp = new Date(m.time).toLocaleFormat('%s');
+                let dt = GLib.DateTime.new_from_unix_utc(timestamp);
+                return new Polari.Message(text, sender, dt, isAction, isSelf);
+            }));
+        };
+
+        if (!this._query) {
+            this._query = new GenericQuery(numEvents);
+
+            let sparql = `
+                select polari:text(?msg) as ?text
+                       polari:nick(?sender) as ?sender
+                       polari:time(?msg) as ?time
+                       (exists { ?msg a polari:ActionMessage }) as ?isAction
+                       (exists { ?sender a polari:SelfContact }) as ?isSelf
+                { ?msg a polari:Message;
+                       polari:sender ?sender;
+                       polari:channel ?chan .
+                  ?chan polari:account ?account;
+                        polari:name "${this._room.channel_name}" .
+                  ?account polari:id "${this._room.account.get_path_suffix()}"
+                } order by desc(?time) desc(tracker:id(?msg))
+            `
+            this._query.run(sparql, null, returnFunc);
+        } else {
+            this._query.next(numEvents, null, returnFunc);
+        }
+    },
+
+    isEnd: function() {
+        if (this._query)
+            return this._query.isClosed();
+        return false;
     }
 });
