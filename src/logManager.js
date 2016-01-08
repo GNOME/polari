@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Tracker = imports.gi.Tracker;
+const Tp = imports.gi.TelepathyGLib;
 
 let _logManager = null;
 
@@ -141,6 +142,49 @@ const GenericQuery = new Lang.Class({
     }
 });
 
+const LogWalker = new Lang.Class({
+    Name: 'LogWalker',
+
+    _init: function(connection, account, channelName) {
+        this._connection = connection;
+        this._account = account;
+        this._channelName = channelName;
+        this._query = null;
+    },
+
+    getEvents: function(numEvents, callback) {
+        if (!this._query) {
+            this._query = new GenericQuery(this._connection, numEvents);
+
+            let sparql = (
+                'select nie:plainTextContent(?msg) as ?message ' +
+                '       if (nmo:from(?msg) = nco:default-contact-me,' +
+                '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
+                // FIXME: how do we handle the "real" message type?
+                '       %d as ?messageType ' +
+                '       ?timestamp ' +
+                '{ ?msg a nmo:IMMessage; ' +
+                '       nie:contentCreated ?timestamp; ' +
+                '       nmo:communicationChannel ?chan . ' +
+                // FIXME: filter by account
+                '  filter (nie:title (?chan) = "%s") ' +
+                '} order by desc (?timestamp)'
+            ).format(this._account.nickname,
+                     Tp.ChannelTextMessageType.NORMAL,
+                     this._channelName);
+            this._query.run(sparql, null, r => callback(r.reverse()))
+        } else {
+            this._query.next(numEvents, null, r => callback(r.reverse()));
+        }
+    },
+
+    isEnd: function() {
+        if (this._query)
+            return this._query.isClosed();
+        return false;
+    }
+});
+
 const _LogManager = new Lang.Class({
     Name: 'LogManager',
 
@@ -151,5 +195,9 @@ const _LogManager = new Lang.Class({
     query: function(sparql, cancellable, callback) {
         let query = new GenericQuery(this._connection);
         query.run(sparql, cancellable, callback);
+     },
+
+     walkEvents: function(account, channel) {
+         return new LogWalker(this._connection, account, channel);
      }
 });
