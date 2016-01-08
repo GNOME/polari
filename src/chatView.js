@@ -10,6 +10,7 @@ const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
+const LogManager = imports.logManager;
 const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
@@ -294,18 +295,12 @@ const ChatView = new Lang.Class({
             }));
         this._updateMaxNickChars(this._room.account.nickname.length);
 
-        let isRoom = room.type == Tp.HandleType.ROOM;
-        let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
-                                                   : Tpl.EntityType.CONTACT,
-                                      identifier: room.channel_name });
-        let logManager = Tpl.LogManager.dup_singleton();
-        this._logWalker =
-            logManager.walk_filtered_events(room.account, target,
-                                            Tpl.EventTypeMask.TEXT, null);
+        let logManager = LogManager.getDefault();
+        this._logWalker = logManager.walkEvents(room.account, room.channel_name);
 
         this._fetchingBacklog = true;
-        this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
-                                         Lang.bind(this, this._onLogEventsReady));
+        this._logWalker.getEvents(NUM_INITIAL_LOG_EVENTS,
+                                  Lang.bind(this, this._onLogEventsReady));
 
         let adj = this.vadjustment;
         this._scrollBottom = adj.upper - adj.page_size;
@@ -449,10 +444,9 @@ const ChatView = new Lang.Class({
         this._roomSignals = [];
     },
 
-    _onLogEventsReady: function(lw, res) {
+    _onLogEventsReady: function(events) {
         this._hideLoadingIndicator();
 
-        let [, events] = lw.get_events_finish(res);
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs();
         this._fetchingBacklog = false;
@@ -463,12 +457,12 @@ const ChatView = new Lang.Class({
             return;
 
         let index = -1;
-        let nick = this._pendingLogs[0].sender.alias;
-        let type = this._pendingLogs[0].message_type;
-        if (!this._logWalker.is_end()) {
+        let nick = this._pendingLogs[0].sender;
+        let type = this._pendingLogs[0].messageType;
+        if (!this._logWalker.isEnd()) {
             for (let i = 0; i < this._pendingLogs.length; i++)
-                if (this._pendingLogs[i].sender.alias != nick ||
-                    this._pendingLogs[i].message_type != type) {
+                if (this._pendingLogs[i].sender != nick ||
+                    this._pendingLogs[i].messageType != type) {
                     index = i;
                     break;
                 }
@@ -483,10 +477,10 @@ const ChatView = new Lang.Class({
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
         for (let i = 0; i < pending.length; i++) {
-            let message = { nick: pending[i].sender.alias,
+            let message = { nick: pending[i].sender,
                             text: pending[i].message,
                             timestamp: pending[i].timestamp,
-                            messageType: pending[i].get_message_type(),
+                            messageType: pending[i].messageType,
                             shouldHighlight: false };
             this._insertMessage(iter, message, state);
             this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
@@ -606,7 +600,7 @@ const ChatView = new Lang.Class({
 
     _fetchBacklog: function() {
         if (this.vadjustment.value != 0 ||
-            this._logWalker.is_end())
+            this._logWalker.isEnd())
             return Gdk.EVENT_PROPAGATE;
 
         if (this._fetchingBacklog)
@@ -616,8 +610,8 @@ const ChatView = new Lang.Class({
         this._showLoadingIndicator();
         Mainloop.timeout_add(500, Lang.bind(this,
             function() {
-                this._logWalker.get_events_async(NUM_LOG_EVENTS,
-                                                 Lang.bind(this, this._onLogEventsReady));
+                this._logWalker.getEvents(NUM_LOG_EVENTS,
+                                          Lang.bind(this, this._onLogEventsReady));
                 return GLib.SOURCE_REMOVE;
             }));
         return Gdk.EVENT_STOP;
