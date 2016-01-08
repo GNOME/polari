@@ -1,4 +1,4 @@
-/* exported GenericQuery, LogWalker */
+export { LogWalker };
 
 const { Gio, GLib, Polari, Tracker } = imports.gi;
 

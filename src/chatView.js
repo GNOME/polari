@@ -9,9 +9,9 @@ import Pango from 'gi://Pango';
 import PangoCairo from 'gi://PangoCairo';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
-import Tpl from 'gi://TelepathyLogger';
 
 import { DropTargetIface } from './pasteManager.js';
+import { LogWalker } from './logger.js';
 import { UserPopover } from './userList.js';
 import { UserStatusMonitor } from './userTracker.js';
 import { URLPreview } from './urlPreview.js';
@@ -359,18 +359,11 @@ const ChatView = GObject.registerClass({
         });
         this._updateMaxNickChars(this._room.account.nickname.length);
 
-        let isRoom = room.type === Tp.HandleType.ROOM;
-        let target = new Tpl.Entity({
-            type: isRoom ? Tpl.EntityType.ROOM : Tpl.EntityType.CONTACT,
-            identifier: room.channel_name,
-        });
-        let logManager = Tpl.LogManager.dup_singleton();
-        this._logWalker = logManager.walk_filtered_events(
-            room.account, target,
-            Tpl.EventTypeMask.TEXT, null);
+        this._logWalker = new LogWalker(this._room);
 
         this._fetchingBacklog = true;
-        this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
+        this._logWalker.getEvents(
+	    NUM_INITIAL_LOG_EVENTS, this._onLogEventsReady.bind(this));
 
         this._autoscroll = true;
         this._originalUpper = this.vadjustment.get_upper();
@@ -556,18 +549,14 @@ const ChatView = GObject.registerClass({
         this._nickStatusChangedId = 0;
         this._userTracker = null;
 
-        this._logWalker.run_dispose();
         this._logWalker = null;
     }
 
-    async _getLogEvents(num) {
-        const [events] = await this._logWalker.get_events_async(num);
-
+    _onLogEventsReady(events) {
         this._hideLoadingIndicator();
         this._fetchingBacklog = false;
 
-        let messages = events.map(e => this._createMessage(e));
-        this._pendingLogs = messages.concat(this._pendingLogs);
+        this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs();
     }
 
@@ -577,17 +566,13 @@ const ChatView = GObject.registerClass({
             let msg = Polari.Message.new_from_tp_message(source);
             msg.pendingId = valid ? id : undefined;
             return msg;
-        } else if (source instanceof Tpl.Event) {
-            let msg = Polari.Message.new_from_tpl_event(source);
-            msg.pendingId = undefined;
-            return msg;
         }
 
         throw new Error(`Cannot create message from source ${source}`);
     }
 
     _getReadyLogs() {
-        if (this._logWalker.is_end())
+        if (this._logWalker.isEnd())
             return this._pendingLogs.splice(0);
 
         let nick = this._pendingLogs[0].get_sender();
@@ -743,7 +728,7 @@ const ChatView = GObject.registerClass({
 
     _fetchBacklog() {
         if (this.vadjustment.value !== 0 ||
-            this._logWalker.is_end())
+            this._logWalker.isEnd())
             return Gdk.EVENT_PROPAGATE;
 
         if (this._fetchingBacklog)
@@ -752,7 +737,8 @@ const ChatView = GObject.registerClass({
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
         this._backlogTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
-            this._getLogEvents(NUM_LOG_EVENTS);
+            this._logWalker.getEvents(
+		NUM_LOG_EVENTS, this._onLogEventsReady.bind(this));
             this._backlogTimeoutId = 0;
             return GLib.SOURCE_REMOVE;
         });
