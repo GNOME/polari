@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Tracker = imports.gi.Tracker;
+const Tp = imports.gi.TelepathyGLib;
 
 let _logManager = null;
 
@@ -141,6 +142,55 @@ const GenericQuery = new Lang.Class({
     }
 });
 
+const LogWalker = new Lang.Class({
+    Name: 'LogWalker',
+
+    _init: function(connection, room) {
+        this._connection = connection;
+        this._room = room;
+        this._query = null;
+    },
+
+    getEvents: function(numEvents, callback) {
+        if (!this._query) {
+            this._query = new GenericQuery(this._connection, numEvents);
+
+            let roomFilter;
+            if (this._room.type == Tp.HandleType.ROOM)
+                roomFilter = '  filter (nie:title (?chan) = "%s") ';
+            else
+                roomFilter = '?chan nmo:hasParticipant ?participant .' +
+                             '?participant fts:match "%s"';
+
+            let sparql = (
+                'select nie:plainTextContent(?msg) as ?message ' +
+                '       if (nmo:from(?msg) = nco:default-contact-me,' +
+                '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
+                // FIXME: how do we handle the "real" message type?
+                '       %d as ?messageType ' +
+                '       ?timestamp ' +
+                '{ ?msg a nmo:IMMessage; ' +
+                '       nie:contentCreated ?timestamp; ' +
+                '       nmo:communicationChannel ?chan . ' +
+                // FIXME: filter by account
+                roomFilter +
+                '} order by desc (?timestamp)'
+            ).format(this._room.account.nickname,
+                     Tp.ChannelTextMessageType.NORMAL,
+                     this._room.channel_name);
+            this._query.run(sparql, null, r => callback(r.reverse()))
+        } else {
+            this._query.next(numEvents, null, r => callback(r.reverse()));
+        }
+    },
+
+    isEnd: function() {
+        if (this._query)
+            return this._query.isClosed();
+        return false;
+    }
+});
+
 const _LogManager = new Lang.Class({
     Name: 'LogManager',
 
@@ -151,5 +201,9 @@ const _LogManager = new Lang.Class({
     query: function(sparql, cancellable, callback) {
         let query = new GenericQuery(this._connection);
         query.run(sparql, cancellable, callback);
+     },
+
+     walkEvents: function(room) {
+         return new LogWalker(this._connection, room);
      }
 });
