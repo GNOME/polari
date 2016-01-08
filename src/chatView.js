@@ -7,9 +7,9 @@ const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
-const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
+const LogManager = imports.logManager;
 const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
@@ -307,18 +307,12 @@ const ChatView = new Lang.Class({
             }));
         this._updateMaxNickChars(this._room.account.nickname.length);
 
-        let isRoom = room.type == Tp.HandleType.ROOM;
-        let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
-                                                   : Tpl.EntityType.CONTACT,
-                                      identifier: room.channel_name });
-        let logManager = Tpl.LogManager.dup_singleton();
-        this._logWalker =
-            logManager.walk_filtered_events(room.account, target,
-                                            Tpl.EventTypeMask.TEXT, null);
+        let logManager = LogManager.getDefault();
+        this._logWalker = logManager.walkEvents(room);
 
         this._fetchingBacklog = true;
-        this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
-                                         Lang.bind(this, this._onLogEventsReady));
+        this._logWalker.getEvents(NUM_INITIAL_LOG_EVENTS,
+                                  Lang.bind(this, this._onLogEventsReady));
 
         this._autoscroll = true;
 
@@ -469,11 +463,10 @@ const ChatView = new Lang.Class({
         this._roomSignals = [];
     },
 
-    _onLogEventsReady: function(lw, res) {
+    _onLogEventsReady: function(events) {
         this._hideLoadingIndicator();
         this._fetchingBacklog = false;
 
-        let [, events] = lw.get_events_finish(res);
         let messages = events.map(e => this._createMessage(e));
         this._pendingLogs = messages.concat(this._pendingLogs);
         this._insertPendingLogs();
@@ -489,18 +482,18 @@ const ChatView = new Lang.Class({
                                 source.get_received_timestamp(),
                      messageType: source.get_message_type(),
                      pendingId: valid ? id : undefined };
-        } else if (source instanceof Tpl.Event) {
-            return { nick: source.sender.alias,
+        } else {
+            return { nick: source.sender,
                      text: source.message,
                      timestamp: source.timestamp,
-                     messageType: source.get_message_type() };
+                     messageType: source.messageType };
         }
 
         throw new Error('Cannot create message from source ' + source);
     },
 
     _getReadyLogs: function() {
-        if (this._logWalker.is_end())
+        if (this._logWalker.isEnd())
             return this._pendingLogs.splice(0);
 
         let nick = this._pendingLogs[0].nick;
@@ -678,7 +671,7 @@ const ChatView = new Lang.Class({
 
     _fetchBacklog: function() {
         if (this.vadjustment.value != 0 ||
-            this._logWalker.is_end())
+            this._logWalker.isEnd())
             return Gdk.EVENT_PROPAGATE;
 
         if (this._fetchingBacklog)
@@ -688,8 +681,8 @@ const ChatView = new Lang.Class({
         this._showLoadingIndicator();
         Mainloop.timeout_add(500, Lang.bind(this,
             function() {
-                this._logWalker.get_events_async(NUM_LOG_EVENTS,
-                                                 Lang.bind(this, this._onLogEventsReady));
+                this._logWalker.getEvents(NUM_LOG_EVENTS,
+                                          Lang.bind(this, this._onLogEventsReady));
                 return GLib.SOURCE_REMOVE;
             }));
         return Gdk.EVENT_STOP;
