@@ -50,57 +50,38 @@ const ChatEntry = new Lang.Class({
 
 const EntryArea = new Lang.Class({
     Name: 'EntryArea',
+    Extends: Gtk.Stack,
+    Template: 'resource:///org/gnome/Polari/entry-area.ui',
+    InternalChildren: ['chatEntry',
+                       'nickEntry',
+                       'multiLineBox',
+                       'multiLineLabel',
+                       'cancelButton',
+                       'pasteButton'],
 
-    _init: function(room) {
-        this._createWidget();
+    _init: function(params) {
+        this._room = params.room;
+        delete params.room;
 
         this._ircParser = new IrcParser.IrcParser();
 
-        this._room = room;
+        this.parent(params);
 
-        if (!room)
-            return;
-
-        this._completion = new TabCompletion.TabCompletion(this._entry);
-        this._membersChangedId =
-            this._room.connect('members-changed',
-                               Lang.bind(this, this._updateCompletions));
-        this._channelChangedId =
-            this._room.connect('notify::channel',
-                               Lang.bind(this, this._onChannelChanged));
-        this._onChannelChanged(room);
-
-        this._entry.connect('map', Lang.bind(this, this._updateCompletions));
-        this._entry.connect('unmap', Lang.bind(this, this._updateCompletions));
-    },
-
-    _createWidget: function() {
-        this.widget = new Gtk.Stack({ transition_type: Gtk.StackTransitionType.CROSSFADE,
-                                      sensitive: false,
-                                      margin: 6 });
-
-        this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
-        this.widget.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
-        this.widget.connect('realize', Lang.bind(this,
+        this.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
+        this.connect('realize', Lang.bind(this,
             function() {
-                this._toplevel = this.widget.get_toplevel();
+                this._toplevel = this.get_toplevel();
                 this._keyPressId = this._toplevel.connect('key-press-event',
                                                           Lang.bind(this, this._onKeyPressEvent));
             }));
 
-        let chatBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
-        chatBox.get_style_context().add_class('linked');
-
-        this._nickEntry = new Gtk.Entry();
         this._nickEntry.width_chars = ChatView.MAX_NICK_CHARS
-        this._nickEntry.get_style_context().add_class('polari-nick-entry');
-        chatBox.add(this._nickEntry);
-
         this._nickEntry.connect('activate', Lang.bind(this,
             function() {
                if (this._nickEntry.text)
                    this._setNick(this._nickEntry.text);
-               this._entry.grab_focus();
+               this._chatEntry.grab_focus();
             }));
         this._nickEntry.connect('focus-out-event', Lang.bind(this,
             function() {
@@ -111,70 +92,61 @@ const EntryArea = new Lang.Class({
             function(w, event) {
                 let [, keyval] = event.get_keyval();
                 if (keyval == Gdk.KEY_Escape) {
-                    this._entry.grab_focus();
+                    this._chatEntry.grab_focus();
                     return Gdk.EVENT_STOP;
                 }
                 return Gdk.EVENT_PROPAGATE;
             }));
 
-        this._entry = new ChatEntry({ hexpand: true, activates_default: true });
-        this._entry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
-        this._entry.connect('changed', Lang.bind(this, this._onEntryChanged));
-        chatBox.add(this._entry);
+        this._chatEntry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
+        this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
 
-        this._entry.connect('activate', Lang.bind(this,
+        this._chatEntry.connect('activate', Lang.bind(this,
             function() {
-                if (this._ircParser.process(this._entry.text)) {
-                    this._entry.text = '';
+                if (this._ircParser.process(this._chatEntry.text)) {
+                    this._chatEntry.text = '';
                 } else {
-                    this._entry.get_style_context().add_class('error');
-                    this._entry.grab_focus(); // select text
+                    this._chatEntry.get_style_context().add_class('error');
+                    this._chatEntry.grab_focus(); // select text
                 }
             }));
 
-        this.widget.add_named(chatBox, 'default');
+        this._cancelButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
+        this._pasteButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
 
-        let multiLineBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                         spacing: 6 });
-
-        this._multiLinelabel = new Gtk.Label({ halign: Gtk.Align.START,
-                                               xalign: 0, hexpand: true });
-        multiLineBox.add(this._multiLinelabel);
-
-        let cancelButton = new Gtk.Button({ label: _("_Cancel"),
-                                            use_underline: true });
-        cancelButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
-        multiLineBox.add(cancelButton);
-
-        this._pasteButton = new Gtk.Button({ label: _("_Paste"),
-                                             use_underline: true,
-                                             action_name: 'app.paste-text' });
-        this._pasteButton.get_style_context().add_class('suggested-action');
-        this._pasteButton.connect('clicked',
-                                  Lang.bind(this, this._onButtonClicked));
-        multiLineBox.add(this._pasteButton);
-
-        multiLineBox.connect_after('key-press-event', Lang.bind(this,
+        this._multiLineBox.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
                 let [, mods] = event.get_state();
                 if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
                     keyval == Gdk.KEY_Delete ||
                     keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
-                    cancelButton.clicked();
+                    this._cancelButton.clicked();
                     return Gdk.EVENT_STOP;
                 }
                 return Gdk.EVENT_PROPAGATE;
             }));
 
-        this.widget.add_named(multiLineBox, 'multiline');
-        this.widget.show_all();
+        if (!this._room)
+            return;
+
+        this._completion = new TabCompletion.TabCompletion(this._chatEntry);
+        this._membersChangedId =
+            this._room.connect('members-changed',
+                               Lang.bind(this, this._updateCompletions));
+        this._channelChangedId =
+            this._room.connect('notify::channel',
+                               Lang.bind(this, this._onChannelChanged));
+        this._onChannelChanged(this._room);
+
+        this._chatEntry.connect('map', Lang.bind(this, this._updateCompletions));
+        this._chatEntry.connect('unmap', Lang.bind(this, this._updateCompletions));
     },
 
     _updateCompletions: function() {
         let nicks = [];
 
-        if (this._entry.get_mapped() &&
+        if (this._chatEntry.get_mapped() &&
             this._room &&
             this._room.channel &&
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
@@ -185,16 +157,16 @@ const EntryArea = new Lang.Class({
     },
 
     _onKeyPressEvent: function(w, event) {
-        if (!this._entry.get_mapped())
+        if (!this._chatEntry.get_mapped())
             return Gdk.EVENT_PROPAGATE;
 
-        if (!this.widget.sensitive)
+        if (!this.sensitive)
             return Gdk.EVENT_PROPAGATE;
 
-        if (this._entry.has_focus)
+        if (this._chatEntry.has_focus)
             return Gdk.EVENT_PROPAGATE;
 
-        if (this._entry.get_toplevel().get_focus() instanceof Gtk.Entry)
+        if (this._chatEntry.get_toplevel().get_focus() instanceof Gtk.Entry)
             return Gdk.EVENT_PROPAGATE;
 
         let [, keyval] = event.get_keyval();
@@ -214,37 +186,37 @@ const EntryArea = new Lang.Class({
         if (activationKeys.indexOf(keyval) != -1)
             return Gdk.EVENT_PROPAGATE;
 
-        this._entry.grab_focus_without_selecting();
-        this._entry.event(event);
+        this._chatEntry.grab_focus_without_selecting();
+        this._chatEntry.event(event);
         return Gdk.EVENT_STOP;
     },
 
     _onEntryChanged: function() {
-        this._entry.get_style_context().remove_class('error');
+        this._chatEntry.get_style_context().remove_class('error');
     },
 
     _onTextPasted: function(entry, text, nLines) {
-        this._multiLinelabel.label =
+        this._multiLineLabel.label =
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
         this._pasteButton.action_target = new GLib.Variant('s', text);
-        this.widget.visible_child_name = 'multiline';
+        this.visible_child_name = 'multiline';
         this._pasteButton.grab_focus();
     },
 
     _onButtonClicked: function() {
-            this._entry.text = '';
-            this.widget.visible_child_name = 'default';
+            this._chatEntry.text = '';
+            this.visible_child_name = 'default';
     },
 
     _onSensitiveChanged: function() {
-        if (!this.widget.sensitive)
+        if (!this.sensitive)
             return;
 
         Mainloop.idle_add(Lang.bind(this,
             function() {
-                this._entry.grab_focus();
+                this._chatEntry.grab_focus();
                 return GLib.SOURCE_REMOVE;
             }));
     },

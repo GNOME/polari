@@ -133,7 +133,8 @@ const RoomView = new Lang.Class({
         this._view = room ? new ChatView.ChatView(room)
                           : new ChatPlaceholder();
 
-        this._entryArea = new EntryArea.EntryArea(room);
+        this._entryArea = new EntryArea.EntryArea({ room: room,
+                                                    sensitive: false });
 
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.widget.add(this._view.widget);
@@ -142,12 +143,12 @@ const RoomView = new Lang.Class({
         this.inputWidget.get_style_context().add_class('polari-input-area');
         this.widget.add(this.inputWidget);
 
-        this.inputWidget.add(this._entryArea.widget);
+        this.inputWidget.add(this._entryArea);
 
         this.widget.show_all();
     },
 
     set inputSensitive(sensitive) {
-        this._entryArea.widget.sensitive = sensitive;
+        this._entryArea.sensitive = sensitive;
     }
 });
