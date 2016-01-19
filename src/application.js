@@ -35,9 +35,6 @@ const Application = new Lang.Class({
     vfunc_startup: function() {
         this.parent();
 
-        let w = new MainWindow.FixedSizeFrame(); // register gtype
-        w.destroy();
-
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networkMonitor = Gio.NetworkMonitor.get_default();
