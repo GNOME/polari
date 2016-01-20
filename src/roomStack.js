@@ -94,7 +94,7 @@ const ChatPlaceholder = new Lang.Class({
             }));
 
         this.widget = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
-                                     column_spacing: 18, vexpand: true,
+                                     column_spacing: 18, hexpand: true, vexpand: true,
                                      valign: Gtk.Align.CENTER });
         this.widget.get_style_context().add_class('polari-background');
         this.widget.attach(image, 0, 0, 1, 1);
@@ -142,8 +142,9 @@ const RoomView = new Lang.Class({
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.widget.add(this._view.widget);
 
-        this.inputWidget = new EntryArea.EntryArea({ room: room,
-                                                     sensitive: false });
+        this.inputWidget = room ? new EntryArea.EntryArea({ room: room,
+                                                            sensitive: false })
+                                : new Gtk.Box();
         this.widget.add(this.inputWidget);
 
         this.widget.show_all();
