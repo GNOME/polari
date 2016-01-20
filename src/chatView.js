@@ -11,6 +11,7 @@ const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Signals = imports.signals;
 const Utils = imports.utils;
 
 const MAX_NICK_CHARS = 8;
@@ -235,6 +236,12 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
+
+        this._room.account.connect('notify::nickname', Lang.bind(this,
+            function() {
+                this._updateMaxNickChars(this._room.account.nickname.length);
+            }));
+        this._updateMaxNickChars(this._room.account.nickname.length);
 
         let isRoom = room.type == Tp.HandleType.ROOM;
         let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
@@ -493,6 +500,19 @@ const ChatView = new Lang.Class({
         return Object.keys(this._pending).length;
     },
 
+    get maxNickChars() {
+        return this._maxNickChars;
+    },
+
+    _updateMaxNickChars: function(length) {
+        if (length <= this._maxNickChars)
+            return;
+
+        this._maxNickChars = length;
+        this.emit('max-nick-chars-changed');
+        this._updateIndent();
+    },
+
     _updateIndent: function() {
         let context = this._view.get_pango_context();
         let metrics = context.get_metrics(null, null);
@@ -738,6 +758,10 @@ const ChatView = new Lang.Class({
         }
 
         this._channel = this._room.channel;
+
+        let nick = this._channel ? this._channel.connection.self_contact.alias
+                                 : this._room.account.nickname;
+        this._updateMaxNickChars(nick.length);
 
         if (!this._channel)
             return;
@@ -1110,10 +1134,7 @@ const ChatView = new Lang.Class({
         }
         state.lastTimestamp = message.timestamp;
 
-        if (message.nick.length > this._maxNickChars) {
-            this._maxNickChars = message.nick.length;
-            this._updateIndent();
-        }
+        this._updateMaxNickChars(message.nick.length);
 
         let tags = [];
         if (isAction) {
@@ -1233,3 +1254,4 @@ const ChatView = new Lang.Class({
             buffer.apply_tag(tags[i], start, iter);
     }
 });
+Signals.addSignalMethods(ChatView.prototype);

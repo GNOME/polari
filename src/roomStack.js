@@ -6,6 +6,7 @@ const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
 const EntryArea = imports.entryArea;
 const Lang = imports.lang;
+const Signals = imports.signals;
 
 const RoomStack = new Lang.Class({
     Name: 'RoomStack',
@@ -125,6 +126,7 @@ const ChatPlaceholder = new Lang.Class({
         }
     },
 });
+Signals.addSignalMethods(ChatPlaceholder.prototype);
 
 const RoomView = new Lang.Class({
     Name: 'RoomView',
@@ -132,6 +134,10 @@ const RoomView = new Lang.Class({
     _init: function(room) {
         this._view = room ? new ChatView.ChatView(room)
                           : new ChatPlaceholder();
+        this._view.connect('max-nick-chars-changed', Lang.bind(this,
+            function() {
+                this.inputWidget.maxNickChars = this._view.maxNickChars;
+            }));
 
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.widget.add(this._view.widget);

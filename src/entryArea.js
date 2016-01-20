@@ -68,6 +68,7 @@ const EntryArea = new Lang.Class({
         delete params.room;
 
         this._ircParser = new IrcParser.IrcParser();
+        this._maxNickChars = ChatView.MAX_NICK_CHARS;
 
         this.parent(params);
 
@@ -81,7 +82,7 @@ const EntryArea = new Lang.Class({
             }));
 
         this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
-        this._nickLabel.width_chars = ChatView.MAX_NICK_CHARS
+        this._nickLabel.width_chars = this._maxNickChars;
 
         this._changeButton.connect('clicked', Lang.bind(this,
             function() {
@@ -134,6 +135,11 @@ const EntryArea = new Lang.Class({
 
         this._chatEntry.connect('map', Lang.bind(this, this._updateCompletions));
         this._chatEntry.connect('unmap', Lang.bind(this, this._updateCompletions));
+    },
+
+    set maxNickChars(maxChars) {
+        this._maxNickChars = maxChars;
+        this._updateNick();
     },
 
     _updateCompletions: function() {
@@ -228,7 +234,7 @@ const EntryArea = new Lang.Class({
 
 
     _setNick: function(nick) {
-        this._nickLabel.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS);
+        this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
         let account = this._room.account;
@@ -264,7 +270,7 @@ const EntryArea = new Lang.Class({
         let nick = channel ? channel.connection.self_contact.alias
                            : this._room ? this._room.account.nickname : '';
 
-        this._nickLabel.width_chars = Math.max(nick.length, ChatView.MAX_NICK_CHARS);
+        this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
         if (!this._nickEntry.is_focus)
