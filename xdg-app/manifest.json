@@ -1,0 +1,73 @@
+{
+  "app-id": "org.gnome.Polari",
+  "version": "master",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "master",
+  "sdk": "org.gnome.Sdk",
+  "command": "polari",
+  "finish-args": [
+    /* X11 + XShm access */
+    "--share=ipc", "--socket=x11",
+    /* Wayland access */
+    "--socket=wayland",
+    /* Needs network, obviously */
+    "--share=network",
+    /* Our client name */
+    "--own-name=org.freedesktop.Telepathy.Client.Polari",
+    /* Telepathy */
+    "--talk-name=org.freedesktop.Telepathy.AccountManager",
+    "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
+    "--talk-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
+    /* Notifications */
+    "--talk-name=org.gtk.Notifications",
+    "--talk-name=org.freedesktop.Notifications",
+    /* Keyring */
+    "--talk-name=org.freedesktop.secrets",
+    /* log files written by tp-logger outside the sandbox */
+    "--filesystem=~/.local/share/TpLogger:ro",
+    "--env=TPL_LOG_DIR=.local/share",
+    /* dconf */
+    "--filesystem=~/.config/dconf:ro", "--talk-name=ca.desrt.dconf",
+    "--env=DCONF_USER_CONFIG_DIR=.config/dconf"],
+  "build-options": {
+    "cflags": "-O2 -g",
+    "env": {
+      "V": "1"
+    }
+  },
+  "cleanup": ["/include","/libexec","/lib/*.la","/lib/*.a",
+              "/lib/pkgconfig","/lib/polari/*.la",
+              "/share/aclocal", "/share/gir-1.0", "/share/gtk-doc"],
+  "modules": [
+    { "name": "telepathy-glib",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
+          "sha256": "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
+        }
+      ]
+    },
+    { "name": "telepathy-logger",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2",
+          "sha256": "8fcad534d653b1b365132c5b158adae947810ffbae9843f72dd1797966415dae"
+        },{
+          "type": "patch",
+          "path": "tpl-override-basedir.patch"
+        }
+      ]
+    },
+    { "name": "polari",
+      "sources": [
+        {
+          "type": "git",
+          "url": "git://git.gnome.org/polari",
+          "branch": "wip/fmuellner/design-review"
+        }
+      ]
+    }
+  ]
+}

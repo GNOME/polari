@@ -61,6 +61,7 @@ AC_CONFIG_FILES([
   data/icons/Makefile
   po/Makefile.in
   src/Makefile
+  xdg-app/Makefile
 ])
 
 AC_OUTPUT
