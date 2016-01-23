@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2014 Florian Müllner <fmuellner@gnome.org> -->
-<application>
-  <id type="desktop">org.gnome.Polari.desktop</id>
+<component type="desktop">
+  <id>org.gnome.Polari.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+ and LGPL-2.1+</project_license>
   <_name>Polari</_name>
@@ -21,12 +21,21 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot type="default">https://git.gnome.org/browse/polari/plain/data/appdata/polari-main.png</screenshot>
-    <screenshot>https://git.gnome.org/browse/polari/plain/data/appdata/polari-user-list.png</screenshot>
-    <screenshot>https://git.gnome.org/browse/polari/plain/data/appdata/polari-connections.png</screenshot>
+    <screenshot type="default">
+      <image>https://git.gnome.org/browse/polari/plain/data/appdata/polari-main.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://git.gnome.org/browse/polari/plain/data/appdata/polari-user-list.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://git.gnome.org/browse/polari/plain/data/appdata/polari-connections.png</image>
+    </screenshot>
   </screenshots>
   <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
-  <updatecontact>fmuellner@gnome.org</updatecontact>
+  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=polari</url>
+  <url type="donation">http://www.gnome.org/friends/</url>
+  <update_contact>fmuellner@gnome.org</update_contact>
+  <project_group>GNOME</project_group>
   <kudos>
     <kudo>AppMenu</kudo>
     <kudo>HiDpiIcon</kudo>
@@ -34,4 +43,4 @@
     <kudo>ModernToolkit</kudo>
     <kudo>Notifications</kudo>
   </kudos>
-</application>
+</component>
