@@ -488,6 +488,18 @@ const RoomList = new Lang.Class({
     },
 
     _sort: function(row1, row2) {
-        return row1.room.compare(row2.room);
+        let room1 = row1.room;
+        let room2 = row2.room;
+
+        let account1 = room1.account;
+        let account2 = room2.account;
+
+        if (account1 != account2)
+            return account1.display_name.localeCompare(account2.display_name);
+
+        if (room1.type != room2.type)
+            return room1.type == Tp.HandleType.ROOM ? -1 : 1;
+
+        return room1.display_name.localeCompare(room2.display_name);
     }
 });

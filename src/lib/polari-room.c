@@ -229,28 +229,6 @@ polari_room_remove_member (PolariRoom *room,
   }
 }
 
-int
-polari_room_compare (PolariRoom *room,
-                     PolariRoom *other)
-{
-  TpAccount *account1, *account2;
-
-  g_return_val_if_fail (POLARI_IS_ROOM (room) && POLARI_IS_ROOM (other), 0);
-  g_return_val_if_fail (room->priv->account && other->priv->account, 0);
-
-  account1 = room->priv->account;
-  account2 = other->priv->account;
-
-  if (account1 != account2)
-    return strcmp (tp_account_get_display_name (account1),
-                   tp_account_get_display_name (account2));
-
-  if (room->priv->type != other->priv->type)
-    return room->priv->type == TP_HANDLE_TYPE_ROOM ? -1 : 1;
-
-  return strcmp (room->priv->display_name, other->priv->display_name);
-}
-
 static char *
 strip_color_codes (const char *string) {
   if (G_UNLIKELY (color_code_regex == NULL))

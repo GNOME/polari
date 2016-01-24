@@ -36,8 +36,6 @@ void  polari_room_set_topic (PolariRoom *room, const char *topic);
 void  polari_room_add_member    (PolariRoom *room, TpContact *member);
 void  polari_room_remove_member (PolariRoom *room, TpContact *member);
 
-int   polari_room_compare (PolariRoom *room, PolariRoom *other);
-
 char *polari_create_room_id (TpAccount    *account,
                              const char   *name,
                              TpHandleType  type);
