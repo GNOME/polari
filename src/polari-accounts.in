@@ -1,0 +1,114 @@
+#!@GJS_CONSOLE@
+const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
+const Gtk = imports.gi.Gtk;
+const Pango = imports.gi.Pango;
+const Tp = imports.gi.TelepathyGLib;
+
+const Lang = imports.lang;
+
+const AccountsWindow = new Lang.Class({
+    Name: 'AccountsWindow',
+    Extends: Gtk.ApplicationWindow,
+
+    _init: function(params) {
+        this.parent(params);
+
+        let scrolled = new Gtk.ScrolledWindow({ hscrollbar_policy: Gtk.PolicyType.NEVER,
+                                                shadow_type: Gtk.ShadowType.NONE });
+        this.add(scrolled);
+
+        this._list = new Gtk.ListBox();
+        this._list.set_sort_func(function(row1, row2) {
+            return row1.account.display_name.localeCompare(row2.account.display_name);
+        });
+        this._list.set_header_func(function(row, before) {
+            let header = row.get_header();
+
+            if (!before)
+                row.set_header(null);
+            else if (!header)
+                row.set_header(new Gtk.Separator({ orientation: Gtk.Orientation.HORIZONTAL }));
+        });
+        this._list.connect('row-activated', function(l, row) {
+            row.account.set_enabled_async(!row.account.enabled, null);
+        });
+        scrolled.add(this._list);
+        scrolled.show_all();
+
+        let am = Tp.AccountManager.dup();
+        am.prepare_async(null, Lang.bind(this, this._onPrepared));
+    },
+
+    _onPrepared: function(am) {
+        am.connect('account-validity-changed', Lang.bind(this,
+            function(am, account, valid) {
+                if (valid)
+                    this._addAccount(account);
+                else
+                    this._removeAccount(account);
+            }));
+        am.connect('account-removed', Lang.bind(this,
+            function(am, account) {
+                this._removeAccount(account);
+            }));
+        am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
+    },
+
+    _addAccount: function(account) {
+        if (account.protocol_name != 'irc')
+            return;
+
+        let row = new Gtk.ListBoxRow();
+        row.account = account;
+
+        let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                spacing: 6, margin: 6 });
+        row.add(box);
+
+        let label = new Gtk.Label({ hexpand: true, halign: Gtk.Align.START,
+                                    ellipsize: Pango.EllipsizeMode.END });
+        box.add(label);
+
+        let sw = new Gtk.Switch();
+        box.add(sw);
+
+        this._list.add(row);
+        row.show_all();
+
+        account.bind_property('display-name', label, 'label',
+                              GObject.BindingFlags.SYNC_CREATE);
+        account.bind_property('enabled', sw, 'state',
+                              GObject.BindingFlags.SYNC_CREATE);
+        account.connect('notify::display-name', function() {
+            row.changed();
+        });
+
+        sw.connect('state-set', function(w, state) {
+            account.set_enabled_async(state, null);
+            return true;
+        });
+    },
+
+    _removeAccount: function(account) {
+        let rows = this._list.get_children();
+        for (let i = 0; i < rows.length; i++)
+            if (rows[i].account == account) {
+                rows[i].destroy();
+                break;
+            }
+    }
+});
+
+GLib.set_application_name("Polari Accounts");
+
+let app = new Gtk.Application({ application_id: 'org.gnome.Polari.Accounts' });
+app.connect('activate', function() {
+    let window = app.active_window;
+    if (!window)
+        window = new AccountsWindow({ application: app,
+                                      default_width: 400,
+                                      default_height: 300 });
+    window.present();
+});
+app.run(null);

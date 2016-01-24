@@ -41,4 +41,5 @@ po/polari.pot
 po/stamp-it
 src/*.gresource
 src/config.js
+src/polari-accounts
 src/org.gnome.Polari

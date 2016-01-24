@@ -6,11 +6,6 @@ Icon=polari
 Type=Application
 StartupNotify=true
 DBusActivatable=true
-Actions=connections;
 X-GNOME-UsesNotifications=true
 Categories=GNOME;GTK;Network;IRCClient;
 _Keywords=IRC;Internet;Relay;Chat;
-
-[Desktop Action connections]
-_Name=Show connections
-Exec=gapplication action org.gnome.Polari connections

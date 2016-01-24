@@ -27,6 +27,11 @@ nodist_app_SCRIPTS = $(APP_ID)
 $(APP_ID): $(APP_ID).in $(top_srcdir)/configure.ac
 	$(AM_V_GEN) $(do_subst) $< > $@
 
+nodist_noinst_SCRIPTS = polari-accounts
+
+polari-accounts: polari-accounts.in
+	$(AM_V_GEN) $(do_subst) $< > $@ && chmod +x $@
+
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$(APP_ID).src.gresource.xml)
 $(APP_ID).src.gresource: $(APP_ID).src.gresource.xml $(resource_files)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) $<
@@ -37,12 +42,14 @@ resource_DATA = $(APP_ID).src.gresource
 EXTRA_DIST += \
 	$(APP_ID).in \
 	$(APP_ID).src.gresource.xml \
+	polari-accounts.in \
 	$(resource_files) \
 	$(NULL)
 
 CLEANFILES += \
 	$(APP_ID) \
 	$(APP_ID).src.gresource \
+        polari-accounts \
 	$(NULL)
 
 install-exec-hook:

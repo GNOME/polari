@@ -90,8 +90,6 @@ const Application = new Lang.Class({
           { name: 'edit-connection',
             activate: Lang.bind(this, this._onEditConnection),
             parameter_type: GLib.VariantType.new('o') },
-          { name: 'connections',
-            activate: Lang.bind(this, this._onListConnections) },
           { name: 'preferences',
             activate: Lang.bind(this, this._onShowPreferences) },
           { name: 'about',
@@ -415,23 +413,6 @@ const Application = new Lang.Class({
     _onToggleAction: function(action) {
         let state = action.get_state();
         action.change_state(GLib.Variant.new('b', !state.get_boolean()));
-    },
-
-    _onListConnections: function() {
-        if (this._connectionsDialog) {
-            this._connectionsDialog.widget.present();
-            return;
-        }
-
-        this.hold();
-        this._connectionsDialog = new Connections.ConnectionsDialog();
-        this._connectionsDialog.widget.show();
-        this._connectionsDialog.widget.connect('response',
-            Lang.bind(this, function(widget) {
-                widget.destroy();
-                this._connectionsDialog = null;
-                this.release();
-            }));
     },
 
     _onRemoveConnection: function(action, parameter){
