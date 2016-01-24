@@ -44,12 +44,21 @@
 
 .polari-room-list .room-list-header {
     font-size: smaller;
-    padding: 8px 6px 1px 8px;
-    border-bottom: 1px solid alpha(@borders, 0.55);
+    padding: 8px 7px 0;
 }
 
-.polari-room-list .room-list-header:checked {
-    background-color: @polari_dark_bg_color;
+.polari-room-list .room-list-header label:dir(ltr),
+.polari-room-list .room-list-header stack:dir(rtl) {
+    padding-left: 8px;
+}
+
+.polari-room-list .room-list-header stack:dir(ltr),
+.polari-room-list .room-list-header label:dir(rtl) {
+    padding-right: 8px;
+}
+
+.polari-room-list .room-list-header separator {
+    background-color: alpha(@borders, 0.55);
 }
 
 .polari-room-list row {

@@ -9,6 +9,14 @@ const Tp = imports.gi.TelepathyGLib;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 
+function _onPopoverVisibleChanged(popover) {
+    let context = popover.relative_to.get_style_context();
+    if (popover.visible)
+        context.add_class('has-open-popup');
+    else
+        context.remove_class('has-open-popup');
+}
+
 const RoomRow = new Lang.Class({
     Name: 'RoomRow',
 
@@ -106,14 +114,7 @@ const RoomRow = new Lang.Class({
                         'app.leave-room(("%s", ""))'.format(room.id));
 
             this._popover = Gtk.Popover.new_from_model(this.widget, menu);
-            this._popover.connect('notify::visible', Lang.bind(this,
-                function() {
-                    let roomContext = this.widget.get_style_context();
-                    if (this._popover.visible)
-                        roomContext.add_class('has-open-popup');
-                    else
-                        roomContext.remove_class('has-open-popup');
-                }));
+            this._popover.connect('notify::visible', _onPopoverVisibleChanged);
             this._popover.position = Gtk.PositionType.BOTTOM;
         }
         this._popover.show();
@@ -178,6 +179,9 @@ const RoomListHeader = new Lang.Class({
         this._app = Gio.Application.get_default();
 
         this.parent(params);
+
+        this.popover.connect('notify::visible', _onPopoverVisibleChanged);
+
         let target = new GLib.Variant('o', this._account.get_object_path());
         this._popoverReconnect.action_target = target;
         this._popoverRemove.action_target = target;
