@@ -84,6 +84,9 @@ const Application = new Lang.Class({
             create_hook: Lang.bind(this, this._userListCreateHook),
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
+          { name: 'remove-connection',
+            activate: Lang.bind(this, this._onRemoveConnection),
+            parameter_type: GLib.VariantType.new('o') },
           { name: 'edit-connection',
             activate: Lang.bind(this, this._onEditConnection),
             parameter_type: GLib.VariantType.new('o') },
@@ -428,6 +431,16 @@ const Application = new Lang.Class({
                 widget.destroy();
                 this._connectionsDialog = null;
                 this.release();
+            }));
+    },
+
+    _onRemoveConnection: function(action, parameter){
+        let accountPath = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+        account.remove_async(Lang.bind(this,
+            function(a, res) {
+                a.remove_finish(res); // TODO: Check for errors
             }));
     },
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="Gjs_RoomListHeader" parent="GtkMenuButton">
-    <property name="popover">errorPopover</property>
+    <property name="popover">connectionPopover</property>
     <property name="margin-bottom">4</property>
     <property name="margin-start">7</property>
     <property name="margin-end">7</property>
@@ -10,6 +10,7 @@
     <style>
       <class name="room-list-header"/>
       <class name="activatable" />
+      <class name="dim-label" />
     </style>
     <child>
       <object class="GtkBox">
@@ -61,39 +62,63 @@
       </object>
     </child>
   </template>
-  <object class="GtkPopover" id="errorPopover">
+  <object class="GtkPopoverMenu" id="connectionPopover">
     <property name="position">bottom</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <property name="margin">12</property>
-        <property name="spacing">3</property>
         <property name="visible">True</property>
         <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Connection Error</property>
+          <object class="GtkLabel" id="popoverTitle">
+            <property name="wrap">True</property>
+            <property name="max-width-chars">30</property>
+            <property name="width-chars">15</property>
+            <property name="xalign">0</property>
+            <property name="visible">True</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="popoverStatus">
             <property name="wrap">True</property>
             <property name="max-width-chars">30</property>
             <property name="xalign">0</property>
             <property name="visible">True</property>
-            <attributes>
-              <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-            </attributes>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
           </object>
         </child>
         <child>
-          <object class="GtkLabel" id="popoverLabel">
-            <property name="wrap">True</property>
-            <property name="max-width-chars">30</property>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="popoverReconnect">
             <property name="xalign">0</property>
             <property name="visible">True</property>
+            <property name="action-name">app.reconnect-account</property>
+            <property name="text" translatable="yes">Reconnect</property>
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="popoverButton">
-            <property name="margin-top">15</property>
-            <property name="halign">end</property>
+          <object class="GtkModelButton" id="popoverRemove">
+            <property name="xalign">0</property>
             <property name="visible">True</property>
+            <property name="action-name">app.remove-connection</property>
+            <property name="text" translatable="yes">Remove</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="popoverProperties">
+            <property name="xalign">0</property>
+            <property name="visible">True</property>
+            <property name="action-name">app.edit-connection</property>
+            <property name="text" translatable="yes">Properties</property>
           </object>
         </child>
       </object>

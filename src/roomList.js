@@ -163,9 +163,11 @@ const RoomListHeader = new Lang.Class({
     Template: 'resource:///org/gnome/Polari/room-list-header.ui',
     InternalChildren: ['label',
                        'iconStack',
-                       'errorPopover',
-                       'popoverLabel',
-                       'popoverButton',
+                       'popoverStatus',
+                       'popoverTitle',
+                       'popoverReconnect',
+                       'popoverRemove',
+                       'popoverProperties',
                        'spinner'],
 
     _init: function(params) {
@@ -176,12 +178,10 @@ const RoomListHeader = new Lang.Class({
         this._app = Gio.Application.get_default();
 
         this.parent(params);
-
-        this._errorPopover.relative_to = this._iconStack;
-        this._popoverButton.connect('clicked', Lang.bind(this,
-            function() {
-                this._errorPopover.hide();
-            }));
+        let target = new GLib.Variant('o', this._account.get_object_path());
+        this._popoverReconnect.action_target = target;
+        this._popoverRemove.action_target = target;
+        this._popoverProperties.action_target = target;
 
         let displayNameChangedId =
             this._account.connect('notify::display-name',
@@ -190,8 +190,8 @@ const RoomListHeader = new Lang.Class({
 
         let connectionStatusChangedId =
             this._account.connect('notify::connection-status',
-                                  Lang.bind(this, this._updateConnectionStatusIcon));
-        this._updateConnectionStatusIcon();
+                                  Lang.bind(this, this._onConnectionStatusChanged));
+        this._onConnectionStatusChanged();
 
         this.connect('destroy', Lang.bind(this, function() {
             this._account.disconnect(displayNameChangedId);
@@ -214,80 +214,89 @@ const RoomListHeader = new Lang.Class({
         this.get_accessible().set_name(accessibleName);
     },
 
-    _updateConnectionStatusIcon: function() {
+    _onConnectionStatusChanged: function() {
         let status = this._account.connection_status;
         let reason = this._account.connection_status_reason;
         let isError = (status == Tp.ConnectionStatus.DISCONNECTED &&
                        reason != Tp.ConnectionStatusReason.REQUESTED);
-
         let child = 'none';
         if (status == Tp.ConnectionStatus.CONNECTING) {
             if (this._networkMonitor.network_available)
                 child = 'connecting';
         } else if (isError) {
             child = 'error';
-            switch (this._account.connection_error) {
-
-                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
-                case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR): {
-                    this._popoverLabel.label = _("Please check your connection details.")
-
-                    this._popoverButton.label =  _("Edit Connection");
-                    this._popoverButton.action_name = 'app.edit-connection';
-                    this._popoverButton.action_target = new GLib.Variant('o', this._account.get_object_path());
-                    break;
-                }
-
-                case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_INSECURE):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_LIMIT_EXCEEDED):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_INVALID):
-                case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_ERROR):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_PROVIDED):
-                case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_NOT_AVAILABLE):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_UNTRUSTED):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_EXPIRED):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_ACTIVATED):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
-                case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED): {
-                    this._popoverLabel.label = _("Could not make connection in a safe way.");
-                    this._popoverButton.label =  _("Edit Connection");
-                    this._popoverButton.action_name = 'app.edit-connection';
-                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
-                    break;
-                }
-
-                case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED): {
-                    this._popoverLabel.label = _("Authentication failed.");
-                    this._popoverButton.label = _("Try again");
-                    this._popoverButton.action_name = 'app.reconnect-account';
-                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
-                    break;
-                }
-
-                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
-                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
-                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
-                case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY): {
-                    this._popoverLabel.label = _("The server is busy.");
-                    this._popoverButton.label = _("Try again");
-                    this._popoverButton.action_name = 'app.reconnect-account';
-                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
-                    break;
-                }
-
-                default:
-                    this._popoverLabel.label = _("Failed to connect for an unknown reason.");
-                    this._popoverButton.label = _("Try again");
-                    this._popoverButton.action_name = 'app.reconnect-account';
-                    this._popoverButton.action_target = GLib.Variant.new('o', this._account.get_object_path());
-                    break;
-            }
         }
-        this.sensitive = isError;
         this._iconStack.visible_child_name = child;
         this._spinner.active = (child == 'connecting');
+
+        this._popoverTitle.use_markup = isError;
+        this._popoverStatus.use_markup = !isError;
+
+        if (!isError) {
+            let styleContext = this._popoverStatus.get_style_context();
+            styleContext.add_class('dim-label');
+
+            let params = this._account.dup_parameters_vardict().deep_unpack();
+            let server = params['server'].deep_unpack();
+            let accountName = this._account.display_name;
+
+            /* Translators: This is an account name followed by a
+               server address, e.g. "GNOME (irc.gnome.org)" */
+            let fullTitle = _("%s (%s)").format(accountName, server);
+            this._popoverTitle.label = (accountName == server) ? accountName : fullTitle;
+            this._popoverStatus.label = '<sup>' + this._getStatusLabel() + '</sup>';
+        } else {
+            let styleContext = this._popoverStatus.get_style_context();
+            styleContext.remove_class('dim-label');
+
+            this._popoverTitle.label = '<b>' + _("Connection Problem") + '</b>';
+            this._popoverStatus.label = this._getErrorLabel();
+        }
+    },
+
+    _getStatusLabel: function() {
+        switch (this._account.connection_status) {
+            case Tp.ConnectionStatus.CONNECTED:
+                return _("Connected");
+            case Tp.ConnectionStatus.CONNECTING:
+                return _("Connecting...");
+            case Tp.ConnectionStatus.DISCONNECTED:
+                return _("Offline");
+            default:
+                return _("Unknown");
+        }
+    },
+
+    _getErrorLabel: function() {
+        switch (this._account.connection_error) {
+
+            case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_INSECURE):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_LIMIT_EXCEEDED):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_INVALID):
+            case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_ERROR):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_PROVIDED):
+            case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_NOT_AVAILABLE):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_UNTRUSTED):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_EXPIRED):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_ACTIVATED):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
+            case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED):
+                return _("Could not connect to %s in a safe way.").format(this._account.display_name);
+
+            case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED):
+                return _("Could not connect to %s. Authentication failed.").format(this._account.display_name);
+
+            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
+            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
+            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
+            case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY):
+                return _("Could not connect to %s. The server is busy.").format(this._account.display_name);
+
+            default:
+                return _("Could not connect to %s.").format(this._account.display_name);
+        }
     },
 });
 
