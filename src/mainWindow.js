@@ -125,6 +125,15 @@ const MainWindow = new Lang.Class({
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
 
+        this._accountsMonitor = AccountsMonitor.getDefault();
+        this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
+            function(am) {
+                let accounts = am.dupAccounts();
+                this._revealer.reveal_child = accounts.some(function(a) {
+                    return a.enabled;
+                });
+            }));
+
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('active-changed',
                                   Lang.bind(this, this._activeRoomChanged));
@@ -211,7 +220,6 @@ const MainWindow = new Lang.Class({
         this._membersChangedId = 0;
 
         this._room = room;
-        this._revealer.reveal_child = room != null;
 
         this._updateTitlebar();
 

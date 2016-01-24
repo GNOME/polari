@@ -6,6 +6,7 @@ const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 
@@ -25,6 +26,7 @@ const RoomRow = new Lang.Class({
 
         let app = Gio.Application.get_default();
         this.widget.room = room;
+        this.widget.account = room.account;
 
         this._popover = null;
 
@@ -328,12 +330,34 @@ const RoomList = new Lang.Class({
         this.widget.set_header_func(Lang.bind(this, this._updateHeader));
         this.widget.set_sort_func(Lang.bind(this, this._sort));
 
+        this._placeholders = {};
         this._roomRows = {};
         this._selectedRows = 0;
         this._selectionMode = false;
 
         this.widget.connect('row-selected',
                             Lang.bind(this, this._onRowSelected));
+
+        this._accountsMonitor = AccountsMonitor.getDefault();
+        this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
+            function(mon, am) {
+                let accounts = this._accountsMonitor.dupAccounts();
+                for (let i = 0; i < accounts.length; i++)
+                    this._accountAdded(mon, accounts[i]);
+
+                am.connect('account-enabled', Lang.bind(this,
+                    function(am, account) {
+                        this._updatePlaceholderVisibility(account);
+                    }));
+                am.connect('account-disabled', Lang.bind(this,
+                    function(am, account) {
+                        this._updatePlaceholderVisibility(account);
+                    }));
+            }));
+        this._accountsMonitor.connect('account-added',
+                                      Lang.bind(this, this._accountAdded));
+        this._accountsMonitor.connect('account-removed',
+                                      Lang.bind(this, this._accountRemoved));
 
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
@@ -397,7 +421,12 @@ const RoomList = new Lang.Class({
         if (!current)
             return;
         let inc = direction == Gtk.DirectionType.UP ? -1 : 1;
-        let row = this.widget.get_row_at_index(current.get_index() + inc);
+        let index = current.get_index();
+        let row;
+        do {
+            index += inc;
+            row = this.widget.get_row_at_index(index);
+        } while (row && !row.room);
         if (row)
             this.widget.select_row(row);
     },
@@ -428,6 +457,30 @@ const RoomList = new Lang.Class({
             this.widget.select_row(selected);
     },
 
+    _accountAdded: function(am, account) {
+        if (this._placeholders[account])
+            return;
+
+        let placeholder = new Gtk.ListBoxRow({ selectable: false,
+                                               activatable: false });
+        placeholder.account = account;
+
+        this._placeholders[account] = placeholder;
+        this.widget.add(placeholder);
+
+        this._updatePlaceholderVisibility(account);
+    },
+
+    _accountRemoved: function(am, account) {
+        let placeholder = this._placeholders[account];
+
+        if (!placeholder)
+            return;
+
+        delete this._placeholders[account];
+        placeholder.destroy();
+    },
+
     _roomAdded: function(roomManager, room) {
         let roomRow = new RoomRow(room);
         this.widget.add(roomRow.widget);
@@ -437,6 +490,7 @@ const RoomList = new Lang.Class({
             function(w) {
                 delete this._roomRows[w.room.id];
             }));
+        this._placeholders[room.account].hide();
     },
 
     _roomRemoved: function(roomManager, room) {
@@ -447,6 +501,21 @@ const RoomList = new Lang.Class({
         this._moveSelectionFromRow(roomRow.widget);
         roomRow.widget.destroy();
         delete this._roomRows[room.id];
+        this._updatePlaceholderVisibility(room.account);
+    },
+
+    _updatePlaceholderVisibility: function(account) {
+        if (!account.enabled) {
+            this._placeholders[account].hide();
+            return;
+        }
+
+        let ids = Object.keys(this._roomRows);
+        let hasRooms = ids.some(Lang.bind(this,
+            function(id) {
+                return this._roomRows[id].widget.account == account;
+            }));
+        this._placeholders[account].visible = !hasRooms;
     },
 
     _activeRoomChanged: function(roomManager, room) {
@@ -470,7 +539,7 @@ const RoomList = new Lang.Class({
 
     _updateHeader: function(row, before) {
         let getAccount = function(row) {
-            return row ? row.room.account : null;
+            return row ? row.account : null;
         };
         let beforeAccount = getAccount(before);
         let account = getAccount(row);
@@ -488,14 +557,20 @@ const RoomList = new Lang.Class({
     },
 
     _sort: function(row1, row2) {
-        let room1 = row1.room;
-        let room2 = row2.room;
-
-        let account1 = room1.account;
-        let account2 = room2.account;
+        let account1 = row1.account;
+        let account2 = row2.account;
 
         if (account1 != account2)
             return account1.display_name.localeCompare(account2.display_name);
+
+        let room1 = row1.room;
+        let room2 = row2.room;
+
+        if (!room1)
+            return -1;
+
+        if (!room2)
+            return 1;
 
         if (room1.type != room2.type)
             return room1.type == Tp.HandleType.ROOM ? -1 : 1;
