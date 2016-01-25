@@ -468,6 +468,11 @@ const RoomList = new Lang.Class({
         this._placeholders[account] = placeholder;
         this.widget.add(placeholder);
 
+        placeholder.connect('notify::visible', Lang.bind(this,
+            function() {
+                this.widget.invalidate_sort();
+            }));
+
         this._updatePlaceholderVisibility(account);
     },
 
@@ -559,6 +564,12 @@ const RoomList = new Lang.Class({
     _sort: function(row1, row2) {
         let account1 = row1.account;
         let account2 = row2.account;
+
+        let hasRooms1 = !this._placeholders[account1].visible;
+        let hasRooms2 = !this._placeholders[account2].visible;
+
+        if (hasRooms1 != hasRooms2)
+            return hasRooms1 ? -1 : 1;
 
         if (account1 != account2)
             return account1.display_name.localeCompare(account2.display_name);
