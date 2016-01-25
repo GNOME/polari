@@ -43,4 +43,5 @@
     <kudo>ModernToolkit</kudo>
     <kudo>Notifications</kudo>
   </kudos>
+  <translation type="gettext">polari</translation>
 </component>
