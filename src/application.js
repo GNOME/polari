@@ -245,7 +245,7 @@ const Application = new Lang.Class({
         account.update_parameters_vardict_async(asv, [], callback);
     },
 
-    _requestChannel: function(accountPath, targetType, targetId, time) {
+    _requestChannel: function(accountPath, targetType, targetId, time, callback) {
         // have this in AccountMonitor?
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
@@ -272,7 +272,8 @@ const Application = new Lang.Class({
           cancellable: new Gio.Cancellable(),
           time: time,
           retry: 0,
-          originalNick: account.nickname };
+          originalNick: account.nickname,
+          callback: callback };
 
         this._pendingRequests[roomId] = requestData;
 
@@ -286,7 +287,7 @@ const Application = new Lang.Class({
         req.set_target_id(requestData.targetHandleType, requestData.targetId);
         req.set_delegate_to_preferred_handler(true);
         let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_channel_async(preferredHandler, requestData.cancellable,
+        req.ensure_and_observe_channel_async(preferredHandler, requestData.cancellable,
                                  Lang.bind(this,
                                            this._onEnsureChannel, requestData));
     },
@@ -306,9 +307,10 @@ const Application = new Lang.Class({
 
     _onEnsureChannel: function(req, res, requestData) {
         let account = req.account;
+        let channel = null;
 
         try {
-            req.ensure_channel_finish(res);
+            channel = req.ensure_and_observe_channel_finish(res);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
             let error = account.connection_error;
             // If we receive a disconnect error and the network is unavailable,
@@ -329,6 +331,9 @@ const Application = new Lang.Class({
         } catch (e) {
             logError(e, 'Failed to ensure channel');
         }
+
+        if (requestData.callback)
+            requestData.callback(channel);
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
