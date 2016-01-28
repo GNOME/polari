@@ -14,6 +14,7 @@ src/application.js
 src/appNotifications.js
 src/chatView.js
 src/connections.js
+src/entryArea.js
 src/ircParser.js
 src/joinDialog.js
 src/mainWindow.js
