@@ -438,9 +438,22 @@ const Application = new Lang.Class({
         let accountPath = parameter.deep_unpack();
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
-        account.remove_async(Lang.bind(this,
-            function(a, res) {
-                a.remove_finish(res); // TODO: Check for errors
+        account.set_enabled_async(false, Lang.bind(this,
+            function() {
+                let label = _("%s removed.").format(account.display_name);
+                let n = new AppNotifications.UndoNotification(label);
+                this.notificationQueue.addNotification(n);
+
+                n.connect('closed', function() {
+                    account.remove_async(function(a, res) {
+                        a.remove_finish(res); // TODO: Check for errors
+                    });
+                });
+                n.connect('undo', function() {
+                    account.set_enabled_async(true, function(a, res) {
+                        a.set_enabled_finish(res); // TODO: Check for errors
+                    });
+                });
             }));
     },
 

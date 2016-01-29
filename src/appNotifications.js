@@ -1,9 +1,12 @@
 const Gtk = imports.gi.Gtk;
+const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Signals = imports.signals;
 
+const UNDO_TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
 const AppNotification = new Lang.Class({
@@ -27,6 +30,44 @@ const AppNotification = new Lang.Class({
             this.widget.destroy();
     }
 });
+
+const UndoNotification = new Lang.Class({
+    Name: 'UndoNotification',
+    Extends: AppNotification,
+
+    _init: function(label) {
+        this.parent();
+
+        this._undo = false;
+
+        Mainloop.timeout_add_seconds(UNDO_TIMEOUT, Lang.bind(this, this.close));
+
+        let box = new Gtk.Box({ spacing: 12 });
+        box.add(new Gtk.Label({ label: label, hexpand: true,
+                                ellipsize: Pango.EllipsizeMode.END }));
+
+        let undoButton = new Gtk.Button({ label: _("Undo") });
+        undoButton.connect('clicked', Lang.bind(this, function() {
+            this._undo = true;
+            this.close();
+        }));
+        box.add(undoButton);
+
+        let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
+        closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic' });
+        closeButton.connect('clicked', Lang.bind(this, this.close));
+        box.add(closeButton);
+
+        this.widget.add(box);
+        this.widget.show_all();
+    },
+
+    close: function() {
+        this.emit(this._undo ? 'undo' : 'closed');
+        this.parent();
+    }
+});
+Signals.addSignalMethods(UndoNotification.prototype);
 
 const CommandOutputNotification = new Lang.Class({
     Name: 'CommandOutputNotification',
