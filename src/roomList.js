@@ -218,6 +218,19 @@ const RoomListHeader = new Lang.Class({
         this.get_accessible().set_name(accessibleName);
     },
 
+    /* hack: Handle primary and secondary button interchangeably */
+    vfunc_button_press_event: function(event) {
+        if (event.button == Gdk.BUTTON_SECONDARY)
+            event.button = Gdk.BUTTON_PRIMARY;
+        return this.parent(event);
+    },
+
+    vfunc_button_release_event: function(event) {
+        if (event.button == Gdk.BUTTON_SECONDARY)
+            event.button = Gdk.BUTTON_PRIMARY;
+        return this.parent(event);
+    },
+
     _onConnectionStatusChanged: function() {
         let status = this._account.connection_status;
         let reason = this._account.connection_status_reason;
