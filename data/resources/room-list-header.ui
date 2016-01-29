@@ -10,12 +10,14 @@
     <style>
       <class name="room-list-header"/>
       <class name="activatable" />
-      <class name="dim-label" />
     </style>
     <child>
       <object class="GtkBox">
         <property name="spacing">2</property>
         <property name="visible">True</property>
+        <style>
+          <class name="dim-label" />
+        </style>
         <child>
           <object class="GtkLabel" id="label">
             <property name="xalign">0</property>
