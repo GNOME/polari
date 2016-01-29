@@ -384,7 +384,7 @@ const RoomList = new Lang.Class({
         action = app.lookup_action('first-room');
         action.connect('activate', Lang.bind(this,
             function() {
-                let row = this.widget.get_row_at_index(0);
+                let row = this._getRoomRowAtIndex(0);
                 if (row)
                     this.widget.select_row(row);
             }));
@@ -392,7 +392,7 @@ const RoomList = new Lang.Class({
         action.connect('activate', Lang.bind(this,
             function() {
                 let nRows = this._roomManager.roomCount;
-                let row = this.widget.get_row_at_index(nRows - 1);
+                let row = this._getRoomRowAtIndex(nRows - 1);
                 if (row)
                     this.widget.select_row(row);
             }));
@@ -402,7 +402,7 @@ const RoomList = new Lang.Class({
                 let n = param.get_int32();
                 if (n > this._roomManager.roomCount)
                     return;
-                this.widget.select_row(this.widget.get_row_at_index(n - 1));
+                this.widget.select_row(this._getRoomRowAtIndex(n - 1));
             }));
     },
 
@@ -414,17 +414,35 @@ const RoomList = new Lang.Class({
         row.hide();
     },
 
+    _rowToRoomIndex: function(index) {
+        let nPlaceholders = Object.keys(this._placeholders).filter(
+            Lang.bind(this, function(a) {
+                return this._placeholders[a].get_index() < index;
+            })).length;
+        return index - nPlaceholders;
+    },
+
+    _roomToRowIndex: function(index) {
+        let roomRows = this.widget.get_children().filter(
+            function(r) {
+                return r.room != null;
+            }).sort(function(r1, r2) {
+                return r1.get_index() - r2.get_index();
+            });
+        return roomRows[index].get_index();
+    },
+
+    _getRoomRowAtIndex: function(index) {
+        return this.widget.get_row_at_index(this._roomToRowIndex(index));
+    },
+
     _moveSelection: function(direction) {
         let current = this.widget.get_selected_row();
         if (!current)
             return;
         let inc = direction == Gtk.DirectionType.UP ? -1 : 1;
-        let index = current.get_index();
-        let row;
-        do {
-            index += inc;
-            row = this.widget.get_row_at_index(index);
-        } while (row && !row.room);
+        let index = this._rowToRoomIndex(current.get_index());
+        let row = this._getRoomRowAtIndex(index + inc);
         if (row)
             this.widget.select_row(row);
     },
@@ -442,9 +460,10 @@ const RoomList = new Lang.Class({
         let selected = this.widget.get_selected_row();
         let newActive = null;
 
+        let index = this._rowToRoomIndex(row.get_index());
         this.widget.select_row(row);
-        this._moveSelection(row.get_index() == 0 ? Gtk.DirectionType.DOWN
-                                                 : Gtk.DirectionType.UP);
+        this._moveSelection(index == 0 ? Gtk.DirectionType.DOWN
+                                       : Gtk.DirectionType.UP);
 
         let newSelected = this.widget.get_selected_row();
         if (newSelected != row)
