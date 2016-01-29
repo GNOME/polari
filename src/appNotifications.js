@@ -95,6 +95,8 @@ const NotificationQueue = new Lang.Class({
     _init: function() {
         this.widget = new Gtk.Frame({ valign: Gtk.Align.START,
                                       halign: Gtk.Align.CENTER,
+                                      margin_start: 24,
+                                      margin_end: 24,
                                       no_show_all: true });
         this.widget.get_style_context().add_class('app-notification');
 
