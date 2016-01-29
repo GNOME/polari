@@ -240,9 +240,10 @@ const UserListDetails = new Lang.Class({
         let app = Gio.Application.get_default();
         let action = app.lookup_action('message-user');
         let time = Gtk.get_current_event().get_time();
-        action.activate(GLib.Variant.new('(ssu)',
+        action.activate(GLib.Variant.new('(sssu)',
                                          [ account.get_object_path(),
                                            this._user.alias,
+                                           '',
                                            time ]));
     },
 

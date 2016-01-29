@@ -174,9 +174,10 @@ const MessageDialog = new Lang.Class({
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('message-user');
-        action.activate(GLib.Variant.new('(ssu)',
+        action.activate(GLib.Variant.new('(sssu)',
                                          [ account.get_object_path(),
                                            user,
+                                           '',
                                            Utils.getTpEventTime() ]));
     },
 

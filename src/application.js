@@ -66,7 +66,7 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('(ssu)') },
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser),
-            parameter_type: GLib.VariantType.new('(ssu)') },
+            parameter_type: GLib.VariantType.new('(sssu)') },
           { name: 'paste-text',
             activate: Lang.bind(this, this._onPasteText),
             parameter_type: GLib.VariantType.new('s') },
@@ -351,9 +351,26 @@ const Application = new Lang.Class({
     },
 
     _onMessageUser: function(action, parameter) {
-        let [accountPath, contactName, time] = parameter.deep_unpack();
+        let [accountPath, contactName, message, time] = parameter.deep_unpack();
         this._requestChannel(accountPath, Tp.HandleType.CONTACT,
-                             contactName, time);
+                             contactName, time, Lang.bind(this, this._sendMessage, message));
+    },
+
+    _sendMessage: function(channel, message) {
+        if (!message || !channel)
+            return;
+
+        let TpMessage = Tp.ClientMessage.new_text(Tp.ChannelTextMessageType.NORMAL,
+                                                  message);
+        channel.send_message_async(TpMessage, 0, Lang.bind(this,
+            function(c, res) {
+            try {
+                c.send_message_finish(res);
+            } catch(e) {
+                // TODO: propagate to user
+                logError(e, 'Failed to send message')
+            }
+        }));
     },
 
     _onPasteText: function(action, parameter) {

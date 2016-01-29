@@ -26,6 +26,7 @@ const knownCommands = {
     JOIN: N_("/JOIN <channel> - joins <channel>"),
     KICK: N_("/KICK <nick> - kicks <nick> from current channel"),
     ME: N_("/ME <action> - sends <action> to the current channel"),
+    MSG: N_("/MSG <nick> [<message>] - sends a private message to <nick>"),
     NAMES: N_("/NAMES - lists users on the current channel"),
     NICK: N_("/NICK <nickname> - sets your nick to <nickname>"),
     PART: N_("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
@@ -170,6 +171,26 @@ const IrcParser = new Lang.Class({
                 this._sendMessage(message);
                 break;
             }
+            case 'MSG': {
+                let nick = argv.shift();
+                let message = argv.join(' ');
+                if (!nick || !message) {
+                    output = this._createFeedbackUsage(cmd);
+                    retval = false;
+                    break;
+                }
+
+                let account = this._room.account;
+
+                let app = Gio.Application.get_default();
+                let action = app.lookup_action('message-user');
+                action.activate(GLib.Variant.new('(sssu)',
+                                                 [ account.get_object_path(),
+                                                   nick,
+                                                   message,
+                                                   Tp.USER_ACTION_TIME_NOT_USER_ACTION ]));
+                break;
+            }
             case 'NAMES': {
                 let channel = this._room.channel;
                 let members = channel.group_dup_members_contacts().map(
@@ -226,9 +247,10 @@ const IrcParser = new Lang.Class({
 
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('message-user');
-                action.activate(GLib.Variant.new('(ssu)',
+                action.activate(GLib.Variant.new('(sssu)',
                                                  [ account.get_object_path(),
                                                    nick,
+                                                   '',
                                                    Utils.getTpEventTime() ]));
                 break;
             }

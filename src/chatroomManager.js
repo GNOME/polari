@@ -175,7 +175,7 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _onQueryActivated: function(action, parameter) {
-        let [accountPath, channelName, time] = parameter.deep_unpack();
+        let [accountPath, channelName, message, time] = parameter.deep_unpack();
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
 
