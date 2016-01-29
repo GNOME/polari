@@ -423,13 +423,11 @@ const RoomList = new Lang.Class({
     },
 
     _roomToRowIndex: function(index) {
-        let roomRows = this.widget.get_children().filter(
-            function(r) {
-                return r.room != null;
-            }).sort(function(r1, r2) {
-                return r1.get_index() - r2.get_index();
-            });
-        return roomRows[index].get_index();
+        let nChildren = this.widget.get_children().length;
+        for (let i = 0, roomIndex = 0; i < nChildren; i++)
+            if (this.widget.get_row_at_index(i).room && roomIndex++ == index)
+                return i;
+        return -1;
     },
 
     _getRoomRowAtIndex: function(index) {
