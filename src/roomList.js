@@ -332,8 +332,6 @@ const RoomList = new Lang.Class({
 
         this._placeholders = {};
         this._roomRows = {};
-        this._selectedRows = 0;
-        this._selectionMode = false;
 
         this.widget.connect('row-selected',
                             Lang.bind(this, this._onRowSelected));
