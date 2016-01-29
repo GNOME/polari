@@ -1,3 +1,21 @@
+3.19.4 - "Super-size THIS"
+==========================
+* Use popover to change nickname [Florian; #760872]
+* Implement /msg command [Kunaal; #724592]
+* Implement connection management in room list [Isabella; #761057]
+* Allow to undo connection removal [Florian; #761281]
+* Remove Connections dialog [Florian; #709984]
+* Misc. bug fixes [Hashem, Florian; #760653, #761269, #761288]
+
+Contributors:
+  Olivier Fourdan, Richard Hughes, Kunaal Jain, Florian Müllner,
+  Hashem Nasarat, Isabella Ribeiro
+
+Translations:
+  Marek Černocký [cs], GNOME Translation Robot [de], Gustavo Marques [pt_BR],
+  Enrico Nicoletto [pt_BR], Tom Tryfonidis [el], Kjartan Maraas [nb],
+  Dušan Kazik [sk], Aurimas Černius [lt], Balázs Meskó [hu], Fabio Tomat [fur]
+
 3.19.3 - "Lucy Diamond"
 =======================
 * Compress status messages on idle channels [Bastian; #711542]
