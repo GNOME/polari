@@ -8,7 +8,6 @@ data/org.gnome.Polari.gschema.xml
 [type: gettext/glade]data/resources/join-room-dialog.ui
 [type: gettext/glade]data/resources/main-window.ui
 [type: gettext/glade]data/resources/menus.ui
-[type: gettext/glade]data/resources/message-user-dialog.ui
 [type: gettext/glade]data/resources/room-list-header.ui
 [type: gettext/glade]data/resources/user-list-details.ui
 src/application.js
@@ -19,7 +18,6 @@ src/entryArea.js
 src/ircParser.js
 src/joinDialog.js
 src/mainWindow.js
-src/messageDialog.js
 src/pasteManager.js
 src/roomList.js
 src/roomStack.js

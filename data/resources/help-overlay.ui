@@ -21,12 +21,6 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">Message User</property>
-                <property name="accelerator">&lt;Primary&gt;m</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
                 <property name="title" translatable="yes" context="shortcut window">Leave Room</property>
                 <property name="accelerator">&lt;Primary&gt;w</property>

@@ -6,10 +6,6 @@
         <attribute name="label" translatable="yes">Join a Room</attribute>
         <attribute name="action">app.show-join-dialog</attribute>
       </item>
-      <item>
-        <attribute name="label" translatable="yes">Message a User</attribute>
-        <attribute name="action">app.show-message-user-dialog</attribute>
-      </item>
     </section>
   </menu>
   <object class="Gjs_UserListPopover" id="userListPopover">

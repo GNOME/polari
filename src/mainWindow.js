@@ -11,7 +11,6 @@ const ChatroomManager = imports.chatroomManager;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
-const MessageDialog = imports.messageDialog;
 const RoomList = imports.roomList;
 const RoomStack = imports.roomStack;
 const UserList = imports.userList;
@@ -296,11 +295,6 @@ const MainWindow = new Lang.Class({
 
     showJoinRoomDialog: function() {
         let dialog = new JoinDialog.JoinDialog({ transient_for: this });
-        dialog.show();
-    },
-
-    showMessageUserDialog: function() {
-        let dialog = new MessageDialog.MessageDialog({ transient_for: this });
         dialog.show();
     },
 

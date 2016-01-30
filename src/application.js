@@ -58,10 +58,6 @@ const Application = new Lang.Class({
           { name: 'show-join-dialog',
             activate: Lang.bind(this, this._onShowJoinDialog),
             accels: ['<Primary>n'] },
-          { name: 'show-message-user-dialog',
-            activate: Lang.bind(this, this._onShowMessageUserDialog),
-            create_hook: Lang.bind(this, this._accountActionsCreateHook),
-            accels: ['<Primary>m'] },
           { name: 'join-room',
             activate: Lang.bind(this, this._onJoinRoom),
             parameter_type: GLib.VariantType.new('(ssu)') },
@@ -160,14 +156,6 @@ const Application = new Lang.Class({
             }).length > 0;
     },
 
-    _accountActionsCreateHook: function(action) {
-        this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
-            function() {
-                this._updateAccountAction(action);
-            }));
-        this._updateAccountAction(action);
-    },
-
     _leaveRoomCreateHook: function(action) {
         this._chatroomManager.connect('active-changed', Lang.bind(this,
             function() {
@@ -195,10 +183,6 @@ const Application = new Lang.Class({
 
     _onShowJoinDialog: function() {
         this._window.showJoinRoomDialog();
-    },
-
-    _onShowMessageUserDialog: function() {
-        this._window.showMessageUserDialog();
     },
 
     _savedChannelIndex: function(savedChannels, account, channel) {
