@@ -3,9 +3,11 @@
 *.lo
 *.o
 *.sw?
+*.tar.xz
 *.typelib
 *~
 .deps
+.dirstamp
 .libs
 ABOUT-NLS
 Makefile
