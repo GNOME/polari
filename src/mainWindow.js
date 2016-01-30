@@ -95,7 +95,7 @@ const MainWindow = new Lang.Class({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
     InternalChildren: ['titlebarRight',
                        'titlebarLeft',
-                       'joinMenuButton',
+                       'joinButton',
                        'showUserListButton',
                        'userListPopover',
                        'roomListRevealer',
@@ -148,7 +148,7 @@ const MainWindow = new Lang.Class({
                                       GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
-        this._joinMenuButton.connect('size-allocate', Lang.bind(this,
+        this._joinButton.connect('size-allocate', Lang.bind(this,
             function(w, rect) {
                 let width = rect.width;
                 Mainloop.idle_add(Lang.bind(this, function() {

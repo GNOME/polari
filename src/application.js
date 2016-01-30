@@ -52,9 +52,6 @@ const Application = new Lang.Class({
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         let actionEntries = [
-          { name: 'room-menu',
-            activate: Lang.bind(this, this._onToggleAction),
-            state: GLib.Variant.new('b', false) },
           { name: 'show-join-dialog',
             activate: Lang.bind(this, this._onShowJoinDialog),
             accels: ['<Primary>n'] },

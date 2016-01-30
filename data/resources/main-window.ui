@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <menu id="join_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Join a Room</attribute>
-        <attribute name="action">app.show-join-dialog</attribute>
-      </item>
-    </section>
-  </menu>
   <object class="Gjs_UserListPopover" id="userListPopover">
     <property name="position">bottom</property>
     <property name="border-width">6</property>
@@ -33,14 +25,13 @@
               <class name="polari-titlebar-left"/>
             </style>
             <child>
-              <object class="GtkMenuButton" id="joinMenuButton">
+              <object class="GtkButton" id="joinButton">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="margin-start">5</property>
                 <property name="margin-end">5</property>
-                <property name="menu-model">join_menu</property>
-                <property name="action-name">app.room-menu</property>
+                <property name="action_name">app.show-join-dialog</property>
                 <style>
                   <class name="image-button"/>
                 </style>
@@ -54,7 +45,7 @@
                 <child internal-child="accessible">
                   <object class="AtkObject">
                     <property name="AtkObject::accessible-name"
-                              translatable="yes">Join room</property>
+                              translatable="yes">Add rooms and networks</property>
                   </object>
                 </child>
               </object>
