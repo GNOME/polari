@@ -1,33 +1,34 @@
 # Swedish translation for polari.
-# Copyright © 2014, 2015 polari's COPYRIGHT HOLDER
+# Copyright © 2014-2016 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>, 2014.
 # Anders Jonsson <anders.jonsson@norsjovallen.se>, 2014, 2015.
+# Sebastian Rasmussen <sebras@gmail.com>, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-09-18 11:50+0000\n"
-"PO-Revision-Date: 2015-09-19 00:44+0200\n"
-"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
+"POT-Creation-Date: 2016-01-29 15:35+0000\n"
+"PO-Revision-Date: 2016-01-30 13:58+0100\n"
+"Last-Translator: Sebastian Rasmussen <sebras@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
-#: ../src/roomStack.js:96
+#: ../src/roomStack.js:77
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:481
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En IRC-chattklient för GNOME"
 
@@ -56,10 +57,6 @@ msgstr ""
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Chatt;"
-
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Visa anslutningar"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -106,36 +103,85 @@ msgstr "_Fullständigt namn"
 msgid "optional"
 msgstr "valfri"
 
-#. translators: This will be used in the phrase: "Open Connections in the application menu" */
-#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu" */
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:132
-#: ../src/roomStack.js:142
-msgid "Connections"
-msgstr "Anslutningar"
+#: ../data/resources/entry-area.ui.h:1
+msgid "Change nickname:"
+msgstr "Ändra smeknamn:"
 
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Use the + button to add a new connection."
-msgstr "Använd +-knappen för att lägga till en ny anslutning."
+#: ../data/resources/entry-area.ui.h:2
+msgid "_Change"
+msgstr "_Ändra"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Add"
-msgstr "Lägg till"
+#: ../data/resources/entry-area.ui.h:3
+msgid "Change nickname"
+msgstr "Ändra smeknamn"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
-msgid "Remove"
-msgstr "Ta bort"
-
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
-msgid "Join Chat Room"
-msgstr "Gå in i chattrummet"
-
+#: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:379
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:225
 msgid "_Cancel"
 msgstr "_Avbryt"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
+#: ../data/resources/entry-area.ui.h:5
+msgid "_Paste"
+msgstr "Klistra _in"
+
+#: ../data/resources/help-overlay.ui.h:1
+msgid "General"
+msgstr "Allmänt"
+
+#: ../data/resources/help-overlay.ui.h:2
+msgid "Join Room"
+msgstr "Gå in i rum"
+
+#: ../data/resources/help-overlay.ui.h:3
+msgid "Message User"
+msgstr "Meddela användare"
+
+#: ../data/resources/help-overlay.ui.h:4
+msgid "Leave Room"
+msgstr "Lämna rum"
+
+#: ../data/resources/help-overlay.ui.h:5
+msgid "Show Userlist"
+msgstr "Visa användarlista"
+
+#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:3
+msgid "Quit"
+msgstr "Avsluta"
+
+#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:1
+msgid "Keyboard Shortcuts"
+msgstr "Tangentbordsgenvägar"
+
+#: ../data/resources/help-overlay.ui.h:8
+msgid "Navigation"
+msgstr "Navigering"
+
+#: ../data/resources/help-overlay.ui.h:9
+msgid "Next Room"
+msgstr "Nästa rum"
+
+#: ../data/resources/help-overlay.ui.h:10
+msgid "Previous Room"
+msgstr "Föregående rum"
+
+#: ../data/resources/help-overlay.ui.h:11
+msgid "First Room"
+msgstr "Första rummet"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgid "Last Room"
+msgstr "Senaste rummet"
+
+#: ../data/resources/help-overlay.ui.h:13
+msgid "First - Ninth Room"
+msgstr "Första - nionde rummet"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:223
+msgid "Join Chat Room"
+msgstr "Gå in i chattrummet"
+
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:225
 msgid "_Join"
 msgstr "_Anslut"
 
@@ -169,16 +215,8 @@ msgid "Join room"
 msgstr "Gå in i rum"
 
 #: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Inställningar"
-
-#: ../data/resources/menus.ui.h:3
 msgid "About"
 msgstr "Om"
-
-#: ../data/resources/menus.ui.h:4
-msgid "Quit"
-msgstr "Avsluta"
 
 #: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
@@ -193,14 +231,22 @@ msgid "_Name"
 msgstr "_Namn"
 
 #: ../data/resources/room-list-header.ui.h:1
-msgid "Connection Error"
-msgstr "Anslutningsfel"
+msgid "Reconnect"
+msgstr "Återanslut"
+
+#: ../data/resources/room-list-header.ui.h:2
+msgid "Remove"
+msgstr "Ta bort"
+
+#: ../data/resources/room-list-header.ui.h:3
+msgid "Properties"
+msgstr "Egenskaper"
 
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Läser in detaljer"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:221
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
 msgid "Last Activity:"
 msgstr "Senaste aktivitet:"
 
@@ -208,11 +254,16 @@ msgstr "Senaste aktivitet:"
 msgid "Message"
 msgstr "Meddelande"
 
-#: ../src/application.js:373
+#: ../src/application.js:392
 msgid "Good Bye"
 msgstr "Hejdå"
 
-#: ../src/application.js:451
+#: ../src/application.js:424
+#, javascript-format
+msgid "%s removed."
+msgstr "%s borttagen."
+
+#: ../src/application.js:480
 msgid "translator-credits"
 msgstr ""
 "Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
@@ -221,121 +272,161 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../src/chatView.js:123
+#: ../src/application.js:486
+msgid "Learn more about Polari"
+msgstr "Lär dig mer om Polari"
+
+#: ../src/appNotifications.js:49
+msgid "Undo"
+msgstr "Ångra"
+
+#: ../src/chatView.js:133
 msgid "New Messages"
 msgstr "Nya meddelanden"
 
-#: ../src/chatView.js:487
+#: ../src/chatView.js:630
 msgid "Open Link"
 msgstr "Öppna länk"
 
-#: ../src/chatView.js:494
+#: ../src/chatView.js:636
 msgid "Copy Link Address"
 msgstr "Kopiera länkadress"
 
-#: ../src/chatView.js:678
+#: ../src/chatView.js:803
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s är nu känd som %s"
 
-#: ../src/chatView.js:685
+#: ../src/chatView.js:810
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har kopplat ner"
 
-#: ../src/chatView.js:694
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s har sparkats ut av %s"
 
-#: ../src/chatView.js:696
+#: ../src/chatView.js:821
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s har sparkats ut"
 
-#: ../src/chatView.js:703
+#: ../src/chatView.js:828
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s har blivit bannlyst av %s"
 
-#: ../src/chatView.js:705
+#: ../src/chatView.js:830
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s har blivit bannlyst"
 
-#: ../src/chatView.js:711
+#: ../src/chatView.js:836
 #, javascript-format
 msgid "%s joined"
 msgstr "%s anslöt"
 
-#: ../src/chatView.js:716
+#: ../src/chatView.js:842
 #, javascript-format
 msgid "%s left"
 msgstr "%s lämnade"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:756
+#: ../src/chatView.js:931
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d användare anslöt"
+msgstr[1] "%d användare anslöt"
+
+#: ../src/chatView.js:934
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d användare lämnade"
+msgstr[1] "%d användare lämnade"
+
+#. today
+#. Translators: Time in 24h format
+#: ../src/chatView.js:995
 msgid "%H∶%M"
 msgstr "%H:%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:761
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:1000
+#, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Igår, %H:%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:766
+#. string in 24h format. i.e. "Monday, 14:30"
+#: ../src/chatView.js:1005
+#, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:772
+#. i.e. "May 25, 14:30"
+#: ../src/chatView.js:1011
+#, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:778
+#. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:1017
+#, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
-#. Translators: Time in 12h format */
-#: ../src/chatView.js:783
+#. today
+#. Translators: Time in 12h format
+#: ../src/chatView.js:1022
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:788
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: ../src/chatView.js:1027
+#, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Igår, %I:%M %p"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:793
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: ../src/chatView.js:1032
+#, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:799
+#. i.e. "May 25, 2:30 pm"
+#: ../src/chatView.js:1038
+#, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:805
+#. i.e. "May 25 2012, 2:30 pm"
+#: ../src/chatView.js:1044
+#, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:226
+#: ../src/connections.js:70
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -343,23 +434,30 @@ msgstr ""
 "Polari kopplade från på grund av ett nätverksfel. Kontrollera om "
 "adressfältet stämmer."
 
-#: ../src/connections.js:364 ../src/roomList.js:208 ../src/roomList.js:228
+#: ../src/connections.js:210
 msgid "Edit Connection"
 msgstr "Redigera anslutningen"
 
-#: ../src/connections.js:365
+#: ../src/connections.js:211
 msgid "New Connection"
 msgstr "Ny anslutning"
 
-#: ../src/connections.js:381
+#: ../src/connections.js:227
 msgid "A_pply"
 msgstr "V_erkställ"
 
-#: ../src/connections.js:381
+#: ../src/connections.js:227
 msgid "Cr_eate"
 msgstr "Sk_apa"
 
-#. commands that would be nice to support: */
+#: ../src/entryArea.js:199
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Klistra in %s rad text i en publik inklistringstjänst?"
+msgstr[1] "Klistra in %s rader text i en publik inklistringstjänst?"
+
+#. commands that would be nice to support:
 #.
 #. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
 #. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
@@ -367,8 +465,8 @@ msgstr "Sk_apa"
 #. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
-#. */
-#: ../src/ircParser.js:25
+#.
+#: ../src/ircParser.js:24
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
@@ -376,24 +474,30 @@ msgstr ""
 "/HELP [<kommando>] - visar hjälp för <kommando>, eller en lista över "
 "tillgängliga kommandon"
 
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:25
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <smeknamn> [<kanal>] - bjuder in <smeknamn> till <kanal>, eller den "
 "nuvarande"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:26
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <kanal> - ansluter till <kanal>"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:27
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <smeknamn> - sparkar ut <smeknamn> från den nuvarande kanalen"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:28
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <händelse> - skickar <händelse> till den nuvarande kanalen"
+
+#: ../src/ircParser.js:29
+msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
+msgstr ""
+"/MSG <smeknamn> [<meddelande>] - skickar ett privat meddelande till "
+"<smeknamn>"
 
 #: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
@@ -439,147 +543,207 @@ msgstr ""
 msgid "Usage: %s"
 msgstr "Användning: %s"
 
-#: ../src/ircParser.js:95
+#: ../src/ircParser.js:98
 msgid "Known commands:"
 msgstr "Kända kommandon:"
 
-#: ../src/ircParser.js:172
+#: ../src/ircParser.js:198
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Användare på %s:"
 
-#: ../src/ircParser.js:253
+#: ../src/ircParser.js:283
 msgid "No topic set"
 msgstr "Inget ämne är inställt"
 
-#: ../src/joinDialog.js:219
+#: ../src/joinDialog.js:224
 msgid "Add Connection"
 msgstr "Lägg till en anslutning"
 
-#: ../src/joinDialog.js:221
+#: ../src/joinDialog.js:226
 msgid "_Save"
 msgstr "_Spara"
 
-#: ../src/mainWindow.js:239
+#: ../src/mainWindow.js:314
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d användare"
 msgstr[1] "%d användare"
 
-#: ../src/messageDialog.js:92
+#: ../src/messageDialog.js:95
 msgid "No recent users"
 msgstr "Inga användare på senaste tiden"
 
-#: ../src/pasteManager.js:291
+#. translators: %s is a nick, #%s a channel
+#: ../src/pasteManager.js:95
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s i #%s"
+
+#: ../src/pasteManager.js:97
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Inklistring från %s"
+
+#: ../src/pasteManager.js:306
 #, javascript-format
 msgid "Uploading %s"
 msgstr "Skickar %s"
 
-#: ../src/roomList.js:22
+#: ../src/roomList.js:114
 msgid "Leave chatroom"
 msgstr "Lämna chattrum"
 
-#: ../src/roomList.js:23
+#: ../src/roomList.js:115
 msgid "End conversation"
 msgstr "Avsluta konversation"
 
-#: ../src/roomList.js:186
+#: ../src/roomList.js:219
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "Anslutningen %s har ett fel"
 
-#: ../src/roomList.js:206
-msgid "Please check your connection details."
-msgstr "Kontrollera dina anslutningsdetaljer."
-
-#: ../src/roomList.js:227
-msgid "Could not make connection in a safe way."
-msgstr "Kunde inte ansluta på ett säkert sätt."
-
-#: ../src/roomList.js:235
-msgid "Authentication failed."
-msgstr "Autentisering misslyckades."
-
-#: ../src/roomList.js:236 ../src/roomList.js:247 ../src/roomList.js:255
-msgid "Try again"
-msgstr "Försök igen"
-
-#: ../src/roomList.js:246
-msgid "The server is busy."
-msgstr "Servern är upptagen."
-
-#: ../src/roomList.js:254
-msgid "Failed to connect for an unknown reason."
-msgstr "Misslyckades med att ansluta av en okänd anledning."
-
-#: ../src/roomStack.js:130
-msgid "Begin chatting by adding a new connection."
-msgstr "Börja chatta genom att lägga till en ny anslutning."
-
-#: ../src/roomStack.js:133
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: ../src/roomList.js:264
 #, javascript-format
-msgid "Open %s in the application menu."
-msgstr "Öppna %s i programmenyn."
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
-#: ../src/roomStack.js:136
+#: ../src/roomList.js:271
+msgid "Connection Problem"
+msgstr "Anslutningsproblem"
+
+#: ../src/roomList.js:279
+msgid "Connected"
+msgstr "Ansluten"
+
+#: ../src/roomList.js:281
+msgid "Connecting..."
+msgstr "Ansluter…"
+
+#: ../src/roomList.js:283
+msgid "Offline"
+msgstr "Frånkopplad"
+
+#: ../src/roomList.js:285
+msgid "Unknown"
+msgstr "Okänd"
+
+#: ../src/roomList.js:305
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "Kunde inte ansluta till %s på ett säkert sätt."
+
+#: ../src/roomList.js:308
+#, javascript-format
+msgid "Could not connect to %s. Authentication failed."
+msgstr "Kunde inte ansluta till %s. Autentisering misslyckades."
+
+#: ../src/roomList.js:314
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Kunde inte ansluta till %s. Servern är upptagen."
+
+#: ../src/roomList.js:317
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Kunde inte ansluta till %s."
+
+#: ../src/roomStack.js:80
 msgid "Join a room using the + button."
 msgstr "Gå in i ett rum med +-knappen."
 
-#: ../src/roomStack.js:140
-msgid "Your connections are disabled."
-msgstr "Dina anslutningar är inaktiverade."
-
-#: ../src/roomStack.js:143
-#, javascript-format
-msgid "Enable them by opening %s in the application menu."
-msgstr "Aktivera dem genom att öppna %s i programmenyn."
-
-#: ../src/userList.js:177
+#: ../src/userList.js:178
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekund sedan"
 msgstr[1] "%d sekunder sedan"
 
-#: ../src/userList.js:182
+#: ../src/userList.js:183
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minut sedan"
 msgstr[1] "%d minuter sedan"
 
-#: ../src/userList.js:187
+#: ../src/userList.js:188
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d timme sedan"
 msgstr[1] "%d timmar sedan"
 
-#: ../src/userList.js:192
+#: ../src/userList.js:193
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag sedan"
 msgstr[1] "%d dagar sedan"
 
-#: ../src/userList.js:197
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d vecka sedan"
 msgstr[1] "%d veckor sedan"
 
-#: ../src/userList.js:201
+#: ../src/userList.js:202
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d månad sedan"
 msgstr[1] "%d månader sedan"
 
-#: ../src/userList.js:538
+#: ../src/userList.js:381
+msgid "No results"
+msgstr "Inga resultat"
+
+#: ../src/userList.js:555
 msgid "All"
 msgstr "Alla"
+
+#: ../src/utils.js:133
+msgid "Failed to open link"
+msgstr "Misslyckades med att öppna länk"
+
+#~ msgid "Show connections"
+#~ msgstr "Visa anslutningar"
+
+#~ msgid "Use the + button to add a new connection."
+#~ msgstr "Använd +-knappen för att lägga till en ny anslutning."
+
+#~ msgid "Add"
+#~ msgstr "Lägg till"
+
+#~ msgid "Preferences"
+#~ msgstr "Inställningar"
+
+#~ msgid "Please check your connection details."
+#~ msgstr "Kontrollera dina anslutningsdetaljer."
+
+#~ msgid "Try again"
+#~ msgstr "Försök igen"
+
+#~ msgid "The server is busy."
+#~ msgstr "Servern är upptagen."
+
+#~ msgid "Failed to connect for an unknown reason."
+#~ msgstr "Misslyckades med att ansluta av en okänd anledning."
+
+#~ msgid "Begin chatting by adding a new connection."
+#~ msgstr "Börja chatta genom att lägga till en ny anslutning."
+
+#~ msgid "Open %s in the application menu."
+#~ msgstr "Öppna %s i programmenyn."
+
+#~ msgid "Your connections are disabled."
+#~ msgstr "Dina anslutningar är inaktiverade."
+
+#~ msgid "Enable them by opening %s in the application menu."
+#~ msgstr "Aktivera dem genom att öppna %s i programmenyn."
 
 #~ msgid "Connecting to %s"
 #~ msgstr "Ansluter till %s"
