@@ -9,46 +9,46 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>
-            <property name="title" translatable="yes">General</property>
+            <property name="title" translatable="yes" context="shortcut window">General</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Join Room</property>
+                <property name="title" translatable="yes" context="shortcut window">Join Room</property>
                 <property name="accelerator">&lt;Primary&gt;n</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Message User</property>
+                <property name="title" translatable="yes" context="shortcut window">Message User</property>
                 <property name="accelerator">&lt;Primary&gt;m</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Leave Room</property>
+                <property name="title" translatable="yes" context="shortcut window">Leave Room</property>
                 <property name="accelerator">&lt;Primary&gt;w</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Show Userlist</property>
+                <property name="title" translatable="yes" context="shortcut window">Show Userlist</property>
                 <property name="accelerator">F9</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Quit</property>
+                <property name="title" translatable="yes" context="shortcut window">Quit</property>
                 <property name="accelerator">&lt;Primary&gt;q</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Keyboard Shortcuts</property>
+                <property name="title" translatable="yes" context="shortcut window">Keyboard Shortcuts</property>
                 <property name="accelerator">&lt;Primary&gt;question &lt;Primary&gt;F1</property>
               </object>
             </child>
@@ -57,39 +57,39 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>
-            <property name="title" translatable="yes">Navigation</property>
+            <property name="title" translatable="yes" context="shortcut window">Navigation</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Next Room</property>
+                <property name="title" translatable="yes" context="shortcut window">Next Room</property>
                 <property name="accelerator">&lt;Primary&gt;Page_Down</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Previous Room</property>
+                <property name="title" translatable="yes" context="shortcut window">Previous Room</property>
                 <property name="accelerator">&lt;Primary&gt;Page_Up</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">First Room</property>
+                <property name="title" translatable="yes" context="shortcut window">First Room</property>
                 <property name="accelerator">&lt;Primary&gt;Home</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Last Room</property>
+                <property name="title" translatable="yes" context="shortcut window">Last Room</property>
                 <property name="accelerator">&lt;Primary&gt;End</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">First - Ninth Room</property>
+                <property name="title" translatable="yes" context="shortcut window">First - Ninth Room</property>
                 <property name="accelerator">&lt;Alt&gt;1...9</property>
               </object>
             </child>
