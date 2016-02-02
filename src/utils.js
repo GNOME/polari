@@ -25,10 +25,16 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Soup = imports.gi.Soup;
+const Secret = imports.gi.Secret;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
 const Signals = imports.signals;
+
+const SECRET_SCHEMA = new Secret.Schema(
+    'org.gnome.Polari.Account', Secret.SchemaFlags.NONE,
+    { 'account-id': Secret.SchemaAttributeType.STRING }
+);
 
 const GPASTE_BASEURL = 'https://paste.gnome.org/'
 
@@ -107,6 +113,38 @@ function getTpEventTime() {
     if (time == 0)
       return GLib.MAXUINT32;
     return Tp.user_action_time_from_x11 (time);
+}
+
+function storeAccountPassword(account, password, callback) {
+    let attr = { 'account-id': account.get_path_suffix() };
+    let label = _("Polari server password for %s").format(account.display_name);
+    Secret.password_store(SECRET_SCHEMA, attr, Secret.COLLECTION_DEFAULT,
+                          label, password, null,
+        function(o, res) {
+            try {
+                let success = Secret.password_store_finish(res);
+                callback(success);
+            } catch(e) {
+                log('Failed to store password for account "%s": %s'.format(
+                    account.display_name, e.message));
+                callback(false);
+            }
+        });
+}
+
+function lookupAccountPassword(account, callback) {
+    let attr = { 'account-id': account.get_path_suffix() };
+    Secret.password_lookup(SECRET_SCHEMA, attr, null,
+        function(o, res) {
+            try {
+                let password = Secret.password_lookup_finish(res);
+                callback(password);
+            } catch(e) {
+                log('Failed to lookup password for account "%s": %s'.format(
+                    account.display_name, e.message));
+                callback(null);
+            }
+        });
 }
 
 // findUrls:
