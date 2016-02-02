@@ -422,6 +422,11 @@ const ChatView = new Lang.Class({
                            Lang.bind(this, this._handleButtonTagsHover));
         this._view.connect('leave-notify-event',
                            Lang.bind(this, this._handleButtonTagsHover));
+        /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
+           the default handler calls pango_cairo_context_set_resolution(), so
+           update the indent after that */
+        this._view.connect_after('style-updated',
+                                 Lang.bind(this, this._updateIndent));
     },
 
     _onDestroy: function() {
