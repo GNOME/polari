@@ -164,17 +164,16 @@ const EntryArea = new Lang.Class({
         this._completion.setCompletions(nicks);
     },
 
+    _canFocusChatEntry: function() {
+        let toplevelFocus = this._chatEntry.get_toplevel().get_focus();
+        return this.sensitive &&
+               this._chatEntry.get_mapped() &&
+               !this._chatEntry.has_focus &&
+               !(toplevelFocus instanceof Gtk.Entry);
+    },
+
     _onKeyPressEvent: function(w, event) {
-        if (!this._chatEntry.get_mapped())
-            return Gdk.EVENT_PROPAGATE;
-
-        if (!this.sensitive)
-            return Gdk.EVENT_PROPAGATE;
-
-        if (this._chatEntry.has_focus)
-            return Gdk.EVENT_PROPAGATE;
-
-        if (this._chatEntry.get_toplevel().get_focus() instanceof Gtk.Entry)
+        if (!this._canFocusChatEntry())
             return Gdk.EVENT_PROPAGATE;
 
         let [, keyval] = event.get_keyval();
@@ -219,14 +218,8 @@ const EntryArea = new Lang.Class({
     },
 
     _onSensitiveChanged: function() {
-        if (!this.sensitive)
-            return;
-
-        Mainloop.idle_add(Lang.bind(this,
-            function() {
-                this._chatEntry.grab_focus();
-                return GLib.SOURCE_REMOVE;
-            }));
+        if (this._canFocusChatEntry())
+            this._chatEntry.grab_focus();
     },
 
     _onChannelChanged: function(room) {
