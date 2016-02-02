@@ -35,6 +35,8 @@ const ChatEntry = new Lang.Class({
         let clipboard = Gtk.Clipboard.get_default(this.get_display());
         clipboard.request_text(Lang.bind(this,
             function(clipboard, text) {
+            	text = text.trim();
+
                 let nLines = text.split('\n').length;
                 if (nLines >= MAX_LINES) {
                     this.emit('text-pasted', text, nLines);
