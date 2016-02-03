@@ -205,15 +205,18 @@ const ConnectionDetails = new Lang.Class({
 });
 
 
-const ConnectionDetailsDialog = new Lang.Class({
-    Name: 'ConnectionDetailsDialog',
+const ConnectionProperties = new Lang.Class({
+    Name: 'ConnectionProperties',
     Extends: Gtk.Dialog,
 
     _init: function(account) {
-        this.parent({ title: _("Edit Connection"),
+        /* Translators: %s is a connection name */
+        let title = _("“%s” Properties").format(account.display_name);
+        this.parent({ title: title,
                       modal: true,
                       destroy_with_parent: true,
-                      use_header_bar: 1 });
+                      use_header_bar: 1,
+                      default_width: 450 });
 
         this.get_content_area().border_width = 0;
 

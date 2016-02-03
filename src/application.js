@@ -444,7 +444,7 @@ const Application = new Lang.Class({
         let accountPath = parameter.deep_unpack();
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
-        let dialog = new Connections.ConnectionDetailsDialog(account);
+        let dialog = new Connections.ConnectionProperties(account);
         dialog.transient_for = this._window;
         dialog.connect('response', Lang.bind(this,
             function(w, response) {
