@@ -24,11 +24,6 @@ const ConnectionDetails = new Lang.Class({
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
 
     _init: function(params) {
-        if (params) {
-            this._account = params.account;
-            delete params.account;
-        }
-
         this.parent(params);
 
         this._nameEntry.connect('changed',
@@ -51,14 +46,6 @@ const ConnectionDetails = new Lang.Class({
         this._realnameEntry.set_completion(completion);
 
         this.reset();
-
-        if (!this._account)
-            return;
-
-        this._populateFromAccount(this._account);
-
-        this._account.connect('notify::connection-status', Lang.bind(this, this._syncErrorMessage));
-        this._syncErrorMessage();
     },
 
     _syncErrorMessage: function() {
@@ -149,6 +136,25 @@ const ConnectionDetails = new Lang.Class({
         return this._serverEntry.get_text_length() > 0 &&
                this._nickEntry.get_text_length() > 0 &&
                paramsChanged;
+    },
+
+    set account(account) {
+        if (this._connectionStatusChangedId)
+            this._account.disconnect(this._connectionStatusChangedId);
+        this._connectionStatusChangedId = 0;
+
+        this._account = account;
+
+        this.reset();
+
+        if (this._account) {
+            this._populateFromAccount(this._account);
+
+            this._connectionStatusChangedId =
+                this._account.connect('notify::connection-status',
+                                      Lang.bind(this, this._syncErrorMessage));
+            this._syncErrorMessage();
+        }
     },
 
     save: function() {
@@ -246,7 +252,8 @@ const ConnectionProperties = new Lang.Class({
         this._confirmButton = this.add_button(_("A_pply"), Gtk.ResponseType.OK);
         this._confirmButton.get_style_context().add_class('suggested-action');
 
-        this._details = new ConnectionDetails({ account: account });
+        this._details = new ConnectionDetails();
+        this._details.account = account;
         this._details.bind_property('can-confirm',
                                     this._confirmButton, 'sensitive',
                                     GObject.BindingFlags.SYNC_CREATE);
