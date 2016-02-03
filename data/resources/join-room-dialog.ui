@@ -52,7 +52,7 @@
               <object class="GtkGrid">
                 <property name="visible">True</property>
                 <property name="margin">24</property>
-                <property name="row-spacing">12</property>
+                <property name="row-spacing">6</property>
                 <property name="column-spacing">12</property>
                 <child>
                   <object class="GtkLabel" id="margin">

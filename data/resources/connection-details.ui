@@ -7,22 +7,37 @@
       <object class="GtkGrid" id="grid">
         <property name="visible">True</property>
         <property name="margin">24</property>
-        <property name="row-spacing">12</property>
+        <property name="row-spacing">6</property>
         <property name="column-spacing">12</property>
         <child>
-          <object class="GtkLabel" id="margin">
+          <object class="GtkLabel" id="name_label">
             <property name="visible">True</property>
-            <property name="width-request">24</property>
+            <property name="halign">end</property>
+            <property name="label" translatable="yes">_Name</property>
+            <property name="use-underline">True</property>
+            <property name="mnemonic-widget">nameEntry</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="nameEntry">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="activates-default">True</property>
+            <property name="placeholder-text" translatable="yes">optional</property>
           </object>
         </child>
         <child>
           <object class="GtkLabel" id="server_label">
             <property name="visible">True</property>
             <property name="halign">end</property>
-            <property name="label" translatable="yes">_Address</property>
+            <property name="label" translatable="yes">_Server</property>
             <property name="use-underline">True</property>
             <property name="mnemonic-widget">serverEntry</property>
           </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+          </packing>
         </child>
         <child>
           <object class="GtkEntry" id="serverEntry">
@@ -30,29 +45,8 @@
             <property name="hexpand">True</property>
             <property name="activates-default">True</property>
           </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="description_label">
-            <property name="visible">True</property>
-            <property name="halign">end</property>
-            <property name="label" translatable="yes">_Description</property>
-            <property name="use-underline">True</property>
-            <property name="mnemonic-widget">descEntry</property>
-          </object>
           <packing>
             <property name="left-attach">1</property>
-            <property name="top-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="descEntry">
-            <property name="visible">True</property>
-            <property name="hexpand">True</property>
-            <property name="activates-default">True</property>
-            <property name="placeholder-text" translatable="yes">optional</property>
-          </object>
-          <packing>
-            <property name="left-attach">2</property>
             <property name="top-attach">1</property>
           </packing>
         </child>
@@ -66,7 +60,7 @@
             <property name="mnemonic-widget">nickEntry</property>
           </object>
           <packing>
-            <property name="left-attach">1</property>
+            <property name="left-attach">0</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
@@ -79,7 +73,7 @@
             <property name="activates-default">True</property>
           </object>
           <packing>
-            <property name="left-attach">2</property>
+            <property name="left-attach">1</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
@@ -92,7 +86,7 @@
             <property name="mnemonic-widget">realnameEntry</property>
           </object>
           <packing>
-            <property name="left-attach">1</property>
+            <property name="left-attach">0</property>
             <property name="top-attach">3</property>
           </packing>
         </child>
@@ -101,10 +95,11 @@
             <property name="visible">True</property>
             <property name="hexpand">True</property>
             <property name="activates-default">True</property>
+            <property name="width-chars">30</property>
             <property name="placeholder-text" translatable="yes">optional</property>
           </object>
           <packing>
-            <property name="left-attach">2</property>
+            <property name="left-attach">1</property>
             <property name="top-attach">3</property>
           </packing>
         </child>
@@ -114,7 +109,6 @@
       <object class="GtkBox" id="errorBox">
         <property name="visible">False</property>
         <property name="orientation">horizontal</property>
-        <property name="spacing">12</property>
         <property name="sensitive">False</property>
         <property name="vexpand">True</property>
         <style>
@@ -126,6 +120,7 @@
             <property name="icon-name">dialog-error-symbolic</property>
             <property name="icon-size">5</property>
             <property name="margin">12</property>
+            <property name="margin-start">24</property>
           </object>
         </child>
         <child>
@@ -135,6 +130,7 @@
             <property name="wrap">true</property>
             <property name="vexpand">true</property>
             <property name="margin">12</property>
+            <property name="margin-end">24</property>
           </object>
         </child>
       </object>

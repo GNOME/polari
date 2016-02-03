@@ -10,8 +10,8 @@ const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
     Extends: Gtk.Box,
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
-    InternalChildren: ['serverEntry',
-                       'descEntry',
+    InternalChildren: ['nameEntry',
+                       'serverEntry',
                        'nickEntry',
                        'realnameEntry',
                        'errorBox',
@@ -77,14 +77,14 @@ const ConnectionDetails = new Lang.Class({
     },
 
     _getParams: function() {
+        let nameText = this._nameEntry.text.trim();
         let serverText = this._serverEntry.text.trim();
-        let descText = this._descEntry.text.trim();
 
         let serverRegEx = /(.*?)(?::(\d{1,5}))?$/;
         let [, server, port] = serverText.match(serverRegEx);
 
         let params = {
-            name: descText.length ? descText : server,
+            name: nameText.length ? nameText : server,
             server: server,
             account: this._nickEntry.text.trim()
         };
@@ -98,8 +98,8 @@ const ConnectionDetails = new Lang.Class({
     },
 
     reset: function() {
+        this._nameEntry.text = '';
         this._serverEntry.text = '';
-        this._descEntry.text = '';
         this._nickEntry.text = GLib.get_user_name();
         this._realnameEntry.text = '';
 
@@ -128,7 +128,7 @@ const ConnectionDetails = new Lang.Class({
         this._realnameEntry.text = realname;
 
         if (server != account.display_name)
-            this._descEntry.text = account.display_name;
+            this._nameEntry.text = account.display_name;
     },
 
     get can_confirm() {
