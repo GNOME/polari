@@ -8,6 +8,9 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const NetworksManager = imports.networksManager;
 
+const DEFAULT_PORT = 6667;
+const DEFAULT_SSL_PORT = 6697;
+
 const ErrorHint = {
     NONE: 0,
     SERVER: 1,
@@ -174,7 +177,8 @@ const ConnectionDetails = new Lang.Class({
     InternalChildren: ['nameEntry',
                        'serverEntry',
                        'nickEntry',
-                       'realnameEntry'],
+                       'realnameEntry',
+                       'sslCheckbox'],
     Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
                                                            'can-confirm',
                                                            'can-confirm',
@@ -204,6 +208,8 @@ const ConnectionDetails = new Lang.Class({
                                 Lang.bind(this, this._onCanConfirmChanged));
         this._realnameEntry.connect('changed',
                                     Lang.bind(this, this._onCanConfirmChanged));
+        this._sslCheckbox.connect('toggled',
+                                  Lang.bind(this, this._onCanConfirmChanged));
 
         let realnameStore = new Gtk.ListStore();
         realnameStore.set_column_types([GObject.TYPE_STRING]);
@@ -247,6 +253,8 @@ const ConnectionDetails = new Lang.Class({
             params.port = port;
         if (this._realnameEntry.text)
             params.fullname = this._realnameEntry.text.trim();
+        if (this._sslCheckbox.active)
+            params.use_ssl = true;
 
         return params;
     },
@@ -256,11 +264,13 @@ const ConnectionDetails = new Lang.Class({
         this._savedServer = '';
         this._savedNick = GLib.get_user_name();
         this._savedRealname = '';
+        this._savedSSL = false;
 
         this._nameEntry.text = this._savedName;
         this._serverEntry.text = this._savedServer;
         this._nickEntry.text = this._savedNick;
         this._realnameEntry.text = this._savedRealname;
+        this._sslCheckbox.active = this._savedSSL;
 
         if (this._serverEntry.visible)
             this._serverEntry.grab_focus();
@@ -277,8 +287,10 @@ const ConnectionDetails = new Lang.Class({
         for (let p in params)
             params[p] = params[p].deep_unpack();
 
+        this._savedSSL = params['use-ssl'] || false;
+        let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
         this._savedServer = params.server || '';
-        let port = params.port || 6667;
+        let port = params.port || defaultPort;
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
 
@@ -292,13 +304,15 @@ const ConnectionDetails = new Lang.Class({
         this._nickEntry.text = this._savedNick;
         this._realnameEntry.text = this._savedRealname;
         this._nameEntry.text = this._savedName;
+        this._sslCheckbox.active = this._savedSSL;
     },
 
     get can_confirm() {
         let paramsChanged = this._nameEntry.text != this._savedName ||
                             this._serverEntry.text != this._savedServer ||
                             this._nickEntry.text != this._savedNick ||
-                            this._realnameEntry.text != this._savedRealname;
+                            this._realnameEntry.text != this._savedRealname ||
+                            this._sslCheckbox.active != this._savedSSL;
 
         return this._serverEntry.get_text_length() > 0 &&
                this._nickEntry.get_text_length() > 0 &&
@@ -376,6 +390,8 @@ const ConnectionDetails = new Lang.Class({
             details.port = GLib.Variant.new('u', params.port);
         if (params.fullname)
             details.fullname = GLib.Variant.new('s', params.fullname);
+        if (params.use_ssl)
+            details['use-ssl'] = GLib.Variant.new('b', params.use_ssl);
 
         let removed = Object.keys(oldDetails).filter(
                 function(p) {

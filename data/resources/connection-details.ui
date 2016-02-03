@@ -31,7 +31,6 @@
                   bind-property="has-service"
                   bind-flags="invert-boolean|sync-create"/>
         <property name="halign">end</property>
-        <property name="margin-bottom">24</property>
         <property name="label" translatable="yes">_Server</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">serverEntry</property>
@@ -47,12 +46,27 @@
                   bind-property="has-service"
                   bind-flags="invert-boolean|sync-create"/>
         <property name="hexpand">True</property>
-        <property name="margin-bottom">24</property>
         <property name="activates-default">True</property>
       </object>
       <packing>
         <property name="left-attach">1</property>
         <property name="top-attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="sslCheckbox">
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
+        <property name="label" translatable="yes">Use secure c_onnection</property>
+        <property name="margin-bottom">24</property>
+        <property name="xalign">0</property>
+        <property name="draw-indicator">True</property>
+        <property name="use-underline">True</property>
+      </object>
+      <packing>
+        <property name="left-attach">1</property>
+        <property name="top-attach">2</property>
       </packing>
     </child>
     <child>
@@ -65,7 +79,7 @@
       </object>
       <packing>
         <property name="left-attach">0</property>
-        <property name="top-attach">2</property>
+        <property name="top-attach">3</property>
       </packing>
     </child>
     <child>
@@ -77,7 +91,7 @@
       </object>
       <packing>
         <property name="left-attach">1</property>
-        <property name="top-attach">2</property>
+        <property name="top-attach">3</property>
       </packing>
     </child>
     <child>
@@ -90,7 +104,7 @@
       </object>
       <packing>
         <property name="left-attach">0</property>
-        <property name="top-attach">3</property>
+        <property name="top-attach">4</property>
       </packing>
     </child>
     <child>
@@ -103,7 +117,7 @@
       </object>
       <packing>
         <property name="left-attach">1</property>
-        <property name="top-attach">3</property>
+        <property name="top-attach">4</property>
       </packing>
     </child>
   </template>
