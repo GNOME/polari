@@ -229,35 +229,22 @@ const ConnectionDetails = new Lang.Class({
 const ConnectionProperties = new Lang.Class({
     Name: 'ConnectionProperties',
     Extends: Gtk.Dialog,
+    Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
+    InternalChildren: ['details'],
 
     _init: function(account) {
         /* Translators: %s is a connection name */
         let title = _("“%s” Properties").format(account.display_name);
         this.parent({ title: title,
-                      modal: true,
-                      destroy_with_parent: true,
-                      use_header_bar: 1,
-                      default_width: 450 });
+                      use_header_bar: 1 });
 
-        this.get_content_area().border_width = 0;
+        this._details.account = account;
 
         this.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
                     this._details.save();
             }));
-
-        this.add_button(_("_Cancel"), Gtk.ResponseType.CANCEL);
-
-        this._confirmButton = this.add_button(_("A_pply"), Gtk.ResponseType.OK);
-        this._confirmButton.get_style_context().add_class('suggested-action');
-
-        this._details = new ConnectionDetails();
-        this._details.account = account;
-        this._details.bind_property('can-confirm',
-                                    this._confirmButton, 'sensitive',
-                                    GObject.BindingFlags.SYNC_CREATE);
-        this.get_content_area().add(this._details);
         this.set_default_response(Gtk.ResponseType.OK);
     }
 });

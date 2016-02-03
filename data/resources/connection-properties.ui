@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="Gjs_ConnectionProperties" parent="GtkDialog">
+    <property name="modal">True</property>
+    <property name="destroy-with-parent">True</property>
+    <property name="default-width">450</property>
+    <child type="action">
+      <object class="GtkButton" id="cancelButton">
+        <property name="label" translatable="yes">_Cancel</property>
+        <property name="visible">True</property>
+        <property name="receives-default">True</property>
+        <property name="use-underline">True</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="applyButton">
+        <property name="label" translatable="yes">_Apply</property>
+        <property name="visible">True</property>
+        <property name="can-default">True</property>
+        <property name="receives-default">True</property>
+        <property name="use-underline">True</property>
+        <property name="sensitive" bind-source="details"
+                  bind-property="can-confirm" bind-flags="sync-create"/>
+      </object>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="border-width">0</property>
+        <child>
+          <object class="Gjs_ConnectionDetails" id="details">
+            <property name="visible">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel">cancelButton</action-widget>
+      <action-widget response="ok">applyButton</action-widget>
+    </action-widgets>
+  </template>
+</interface>

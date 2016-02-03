@@ -2,6 +2,7 @@ data/appdata/org.gnome.Polari.appdata.xml.in
 data/org.gnome.Polari.desktop.in
 data/org.gnome.Polari.gschema.xml
 [type: gettext/glade]data/resources/connection-details.ui
+[type: gettext/glade]data/resources/connection-properties.ui
 [type: gettext/glade]data/resources/entry-area.ui
 [type: gettext/glade]data/resources/help-overlay.ui
 [type: gettext/glade]data/resources/join-room-dialog.ui
