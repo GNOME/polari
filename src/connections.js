@@ -207,9 +207,7 @@ const ConnectionDetailsDialog = new Lang.Class({
     Name: 'ConnectionDetailsDialog',
 
     _init: function(account) {
-        let title = account ? _("Edit Connection")
-                            : _("New Connection");
-        this.widget = new Gtk.Dialog({ title: title,
+        this.widget = new Gtk.Dialog({ title: _("Edit Connection"),
                                        modal: true,
                                        destroy_with_parent: true,
                                        use_header_bar: true });
@@ -224,8 +222,7 @@ const ConnectionDetailsDialog = new Lang.Class({
 
         this.widget.add_button(_("_Cancel"), Gtk.ResponseType.CANCEL);
 
-        let confirmLabel = account ? _("A_pply") : _("Cr_eate");
-        this._confirmButton = this.widget.add_button(confirmLabel,
+        this._confirmButton = this.widget.add_button(_("A_pply"),
                                                      Gtk.ResponseType.OK);
         this._confirmButton.get_style_context().add_class('suggested-action');
 
