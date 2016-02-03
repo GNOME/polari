@@ -167,6 +167,7 @@
               <object class="Gjs_ConnectionDetails" id="details">
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
+                <property name="margin">24</property>
               </object>
               <packing>
                 <property name="name">connection</property>

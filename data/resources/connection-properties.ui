@@ -27,10 +27,39 @@
       <object class="GtkBox">
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">24</property>
         <property name="border-width">0</property>
         <child>
           <object class="Gjs_ConnectionDetails" id="details">
             <property name="visible">True</property>
+            <property name="margin">24</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="errorBox">
+            <property name="visible">True</property>
+            <style>
+              <class name="polari-error-information"/>
+            </style>
+            <child>
+              <object class="GtkImage" id="image1">
+                <property name="visible">True</property>
+                <property name="icon-name">dialog-error-symbolic</property>
+                <property name="icon-size">5</property>
+                <property name="margin">12</property>
+                <property name="margin-start">24</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="errorLabel">
+                <property name="visible">True</property>
+                <property name="vexpand">True</property>
+                <property name="wrap">True</property>
+                <property name="xalign">0</property>
+                <property name="margin">12</property>
+                <property name="margin-end">24</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

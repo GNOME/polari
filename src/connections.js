@@ -5,17 +5,20 @@ const Lang = imports.lang;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
+const ErrorHint = {
+    NONE: 0,
+    SERVER: 1,
+    NICK: 2
+};
+
 const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
-    Extends: Gtk.Box,
+    Extends: Gtk.Grid,
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
     InternalChildren: ['nameEntry',
                        'serverEntry',
                        'nickEntry',
-                       'realnameEntry',
-                       'errorBox',
-                       'errorIcon',
-                       'errorLabel'],
+                       'realnameEntry'],
     Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
                                                            'can-confirm',
                                                            'can-confirm',
@@ -48,22 +51,16 @@ const ConnectionDetails = new Lang.Class({
         this.reset();
     },
 
-    _syncErrorMessage: function() {
-        let status = this._account.connection_status;
-        let reason = this._account.connection_status_reason;
+    setErrorHint: function(hint) {
+        if (hint == ErrorHint.SERVER)
+            this._serverEntry.get_style_context().add_class('error');
+        else
+            this._serverEntry.get_style_context().remove_class('error');
 
-        if (status == Tp.ConnectionStatus.DISCONNECTED &&
-            reason != Tp.ConnectionStatusReason.REQUESTED) {
-            switch (this._account.connection_error) {
-                case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
-                case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR): {
-                    this._errorLabel.label = _("Polari disconnected due to a network error. Please check if the address field is correct.");
-                    this._serverEntry.get_style_context().add_class('error');
-                    this._errorBox.visible = true;
-                    break;
-                }
-            }
-        }
+        if (hint == ErrorHint.NICK)
+            this._nickEntry.get_style_context().add_class('error');
+        else
+            this._nickEntry.get_style_context().remove_class('error');
     },
 
     _getParams: function() {
@@ -139,22 +136,11 @@ const ConnectionDetails = new Lang.Class({
     },
 
     set account(account) {
-        if (this._connectionStatusChangedId)
-            this._account.disconnect(this._connectionStatusChangedId);
-        this._connectionStatusChangedId = 0;
-
         this._account = account;
 
         this.reset();
-
-        if (this._account) {
+        if (this._account)
             this._populateFromAccount(this._account);
-
-            this._connectionStatusChangedId =
-                this._account.connect('notify::connection-status',
-                                      Lang.bind(this, this._syncErrorMessage));
-            this._syncErrorMessage();
-        }
     },
 
     save: function() {
@@ -230,7 +216,9 @@ const ConnectionProperties = new Lang.Class({
     Name: 'ConnectionProperties',
     Extends: Gtk.Dialog,
     Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
-    InternalChildren: ['details'],
+    InternalChildren: ['details',
+                       'errorBox',
+                       'errorLabel'],
 
     _init: function(account) {
         /* Translators: %s is a connection name */
@@ -246,5 +234,30 @@ const ConnectionProperties = new Lang.Class({
                     this._details.save();
             }));
         this.set_default_response(Gtk.ResponseType.OK);
+
+        account.connect('notify::connection-status',
+                        Lang.bind(this, this._syncErrorMessage));
+        this._syncErrorMessage(account);
+    },
+
+    _syncErrorMessage: function(account) {
+        let status = account.connection_status;
+        let reason = account.connection_status_reason;
+
+        this._errorBox.hide();
+        this._details.setErrorHint(ErrorHint.NONE);
+
+        if (status != Tp.ConnectionStatus.DISCONNECTED ||
+            reason == Tp.ConnectionStatusReason.REQUESTED)
+            return;
+
+        switch (account.connection_error) {
+            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
+            case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR):
+                this._errorBox.show();
+                this._errorLabel.label = _("Polari disconnected due to a network error. Please check if the address field is correct.");
+                this._details.setErrorHint(ErrorHint.SERVER);
+                break;
+        }
     }
 });
