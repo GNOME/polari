@@ -21,13 +21,17 @@ const JoinDialog = new Lang.Class({
     Extends: Gtk.Dialog,
     Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
     InternalChildren: ['cancelButton',
-                       'confirmButton',
-                       'stack',
+                       'joinButton',
+                       'mainStack',
                        'connectionCombo',
                        'connectionButton',
                        'nameEntry',
                        'nameCompletion',
-                       'details'],
+                       'connectionStack',
+                       'connectionsList',
+                       'details',
+                       'addButton',
+                       'customToggle'],
 
     _init: function(params) {
         params['use-header-bar'] = 1;
@@ -80,9 +84,8 @@ const JoinDialog = new Lang.Class({
         this.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
-                    this._onConfirmClicked();
-                else
-                    this.destroy();
+                    this._joinRoom();
+                this.destroy();
             }));
         this.connect('destroy', Lang.bind(this,
             function() {
@@ -91,7 +94,7 @@ const JoinDialog = new Lang.Class({
             }));
 
         this._updateConnectionCombo();
-        this._updateCanConfirm();
+        this._updateCanJoin();
     },
 
     _setupMainPage: function() {
@@ -105,7 +108,7 @@ const JoinDialog = new Lang.Class({
         this._connectionCombo.sensitive = false;
 
         this._nameEntry.connect('changed',
-                                Lang.bind(this, this._updateCanConfirm));
+                                Lang.bind(this, this._updateCanJoin));
     },
 
     _setupConnectionPage: function() {
@@ -113,14 +116,31 @@ const JoinDialog = new Lang.Class({
             function() {
                 this._setPage(DialogPage.MAIN);
             }));
-
-        this._details.connect('account-created', Lang.bind(this,
-            function(details, account) {
-                this._connectionCombo.set_active_id(account.display_name);
+        this._connectionsList.connect('account-selected', Lang.bind(this,
+            function() {
+                this._setPage(DialogPage.MAIN);
+            }));
+        this._addButton.connect('clicked', Lang.bind(this,
+            function() {
+                this._details.save();
+                this._setPage(DialogPage.MAIN);
             }));
 
-        this._details.connect('notify::can-confirm',
-                              Lang.bind(this, this._updateCanConfirm));
+        this._connectionsList.connect('account-created',
+                                      Lang.bind(this, this._onAccountCreated));
+        this._details.connect('account-created',
+                              Lang.bind(this, this._onAccountCreated));
+
+        this._customToggle.connect('notify::active', Lang.bind(this,
+            function() {
+                let isCustom = this._customToggle.active;
+                this._connectionStack.visible_child_name = isCustom ? 'custom'
+                                                                    : 'predefined';
+                if (isCustom) {
+                    this._addButton.grab_default();
+                    this._details.reset();
+                }
+            }));
     },
 
     _onAccountChanged: function() {
@@ -153,14 +173,8 @@ const JoinDialog = new Lang.Class({
             }));
     },
 
-    _onConfirmClicked: function() {
-        if (this._page == DialogPage.MAIN) {
-            this._joinRoom();
-            this.destroy();
-        } else {
-            this._details.save();
-            this._setPage(DialogPage.MAIN);
-        }
+    _onAccountCreated: function(w, account) {
+        this._connectionCombo.set_active_id(account.display_name);
     },
 
     _joinRoom: function() {
@@ -200,23 +214,19 @@ const JoinDialog = new Lang.Class({
         this._connectionCombo.set_active(activeIndex);
     },
 
-    _updateCanConfirm: function() {
-        let sensitive;
-
-        if (this._page == DialogPage.MAIN) {
+    _updateCanJoin: function() {
+        let sensitive = false;
+        if (this._page == DialogPage.MAIN)
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._nameEntry.get_text_length() > 0;
-        } else {
-            sensitive = this._details.can_confirm;
-        }
 
-        this._confirmButton.sensitive = sensitive;
+        this._joinButton.sensitive = sensitive;
         this.set_default_response(sensitive ? Gtk.ResponseType.OK
                                             : Gtk.ResponseType.NONE);
     },
 
     get _page() {
-        if (this._stack.visible_child_name == 'connection')
+        if (this._mainStack.visible_child_name == 'connection')
             return DialogPage.CONNECTION;
         else
             return DialogPage.MAIN;
@@ -228,15 +238,14 @@ const JoinDialog = new Lang.Class({
         if (isMain)
             this._nameEntry.grab_focus();
         else
-            this._details.reset();
+            this._customToggle.active = false;
 
         this._backButton.visible = !isMain;
+        this._joinButton.visible = isMain;
         this._cancelButton.visible = isMain;
         this.title = isMain ? _("Join Chat Room")
                             : _("Add Connection");
-        this._confirmButton.label = isMain ? _("_Join")
-                                           : _("_Save");
-        this._stack.visible_child_name = isMain ? 'main' : 'connection';
-        this._updateCanConfirm();
+        this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
+        this._updateCanJoin();
     }
 });
