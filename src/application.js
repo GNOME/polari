@@ -326,11 +326,13 @@ const Application = new Lang.Class({
             }
 
             if (error && error != ConnectionError.CANCELLED)
-                logError(e);
+                Utils.debug('Account %s disconnected with error %s'.format(
+                            account.get_path_suffix(),
+                            error.replace(Tp.ERROR_PREFIX + '.', '')));
         } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
             // interrupted by user request, don't log
         } catch (e) {
-            logError(e, 'Failed to ensure channel');
+            Utils.debug('Failed to ensure channel: ' + e.message);
         }
 
         if (requestData.callback)
