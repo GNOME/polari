@@ -279,9 +279,8 @@ const MainWindow = new Lang.Class({
     },
 
     showJoinRoomDialog: function() {
-        let dialog = new JoinDialog.JoinDialog();
-        dialog.widget.transient_for = this.window;
-        dialog.widget.show();
+        let dialog = new JoinDialog.JoinDialog({ transient_for: this.window });
+        dialog.show();
     },
 
     showMessageUserDialog: function() {

@@ -17,9 +17,31 @@ const DialogPage = {
 
 const JoinDialog = new Lang.Class({
     Name: 'JoinDialog',
+    Extends: Gtk.Dialog,
+    Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
+    InternalChildren: ['cancelButton',
+                       'confirmButton',
+                       'stack',
+                       'connectionCombo',
+                       'connectionButton',
+                       'nameEntry',
+                       'nameCompletion',
+                       'details'],
 
-    _init: function() {
-        this._createWidget();
+    _init: function(params) {
+        params['use-header-bar'] = 1;
+        this.parent(params);
+
+        // TODO: Is there really no way to do this in the template?
+        let icon = new Gtk.Image({ icon_name: 'go-previous-symbolic' });
+        this._backButton = new Gtk.Button({ image: icon,
+                                            valign: Gtk.Align.CENTER });
+        this.get_header_bar().pack_start(this._backButton);
+
+        this._setupMainPage();
+        this._setupConnectionPage();
+
+        this._setPage(DialogPage.MAIN);
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._roomManager = ChatroomManager.getDefault();
@@ -44,14 +66,14 @@ const JoinDialog = new Lang.Class({
                     this._updateConnectionCombo();
                 }));
 
-        this.widget.connect('response', Lang.bind(this,
+        this.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
                     this._onConfirmClicked();
                 else
-                    this.widget.destroy();
+                    this.destroy();
             }));
-        this.widget.connect('destroy', Lang.bind(this,
+        this.connect('destroy', Lang.bind(this,
             function() {
                 this._accountsMonitor.disconnect(this._accountAddedId);
                 this._accountsMonitor.disconnect(this._accountRemovedId);
@@ -63,52 +85,33 @@ const JoinDialog = new Lang.Class({
         this._nameEntry.grab_focus();
     },
 
-    _createWidget: function() {
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/ui/join-room-dialog.ui');
-
-        this.widget = builder.get_object('join_room_dialog');
-
-        this._stack = builder.get_object('stack');
-
-        this._details = new Connections.ConnectionDetails();
-        this._stack.add_named(this._details, 'connection');
-        this._details.connect('notify::can-confirm',
-                              Lang.bind(this, this._updateCanConfirm));
-        this._details.connect('account-created', Lang.bind(this,
-            function(details, account) {
-                this._connectionCombo.set_active_id(account.display_name);
-            }));
-
-        this._connectionButton = builder.get_object('add_connection_button');
+    _setupMainPage: function() {
         this._connectionButton.connect('clicked', Lang.bind(this,
             function() {
                 this._setPage(DialogPage.CONNECTION);
             }));
 
-        let icon = new Gtk.Image({ icon_name: 'go-previous-symbolic' });
-        this._backButton = new Gtk.Button({ image: icon,
-                                            valign: Gtk.Align.CENTER });
-        this._backButton.connect('clicked', Lang.bind(this,
-            function() {
-                this._setPage(DialogPage.MAIN);
-            }));
-        this.widget.get_header_bar().pack_start(this._backButton);
-
-        this._connectionCombo = builder.get_object('connection_combo');
         this._connectionCombo.connect('changed',
                                       Lang.bind(this, this._onAccountChanged));
         this._connectionCombo.sensitive = false;
 
-        this._confirmButton = builder.get_object('confirm_button');
-        this._cancelButton = builder.get_object('cancel_button');
-
-        this._nameCompletion = builder.get_object('name_completion');
-        this._nameEntry = builder.get_object('name_entry');
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._updateCanConfirm));
+    },
 
-        this._setPage(DialogPage.MAIN);
+    _setupConnectionPage: function() {
+        this._backButton.connect('clicked', Lang.bind(this,
+            function() {
+                this._setPage(DialogPage.MAIN);
+            }));
+
+        this._details.connect('account-created', Lang.bind(this,
+            function(details, account) {
+                this._connectionCombo.set_active_id(account.display_name);
+            }));
+
+        this._details.connect('notify::can-confirm',
+                              Lang.bind(this, this._updateCanConfirm));
     },
 
     _onAccountChanged: function() {
@@ -144,7 +147,7 @@ const JoinDialog = new Lang.Class({
     _onConfirmClicked: function() {
         if (this._page == DialogPage.MAIN) {
             this._joinRoom();
-            this.widget.destroy();
+            this.destroy();
         } else {
             this._details.save();
             this._setPage(DialogPage.MAIN);
@@ -152,7 +155,7 @@ const JoinDialog = new Lang.Class({
     },
 
     _joinRoom: function() {
-        this.widget.hide();
+        this.hide();
 
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
@@ -199,8 +202,8 @@ const JoinDialog = new Lang.Class({
         }
 
         this._confirmButton.sensitive = sensitive;
-        this.widget.set_default_response(sensitive ? Gtk.ResponseType.OK
-                                                   : Gtk.ResponseType.NONE);
+        this.set_default_response(sensitive ? Gtk.ResponseType.OK
+                                            : Gtk.ResponseType.NONE);
     },
 
     get _page() {
@@ -218,8 +221,8 @@ const JoinDialog = new Lang.Class({
 
         this._backButton.visible = !isMain;
         this._cancelButton.visible = isMain;
-        this.widget.title = isMain ? _("Join Chat Room")
-                                   : _("Add Connection");
+        this.title = isMain ? _("Join Chat Room")
+                            : _("Add Connection");
         this._confirmButton.label = isMain ? _("_Join")
                                            : _("_Save");
         this._stack.visible_child_name = isMain ? 'main' : 'connection';
