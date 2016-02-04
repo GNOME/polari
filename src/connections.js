@@ -179,10 +179,21 @@ const ConnectionDetails = new Lang.Class({
                                                            'can-confirm',
                                                            'can-confirm',
                                                            GObject.ParamFlags.READABLE,
+                                                           false),
+                  'has-serivce': GObject.ParamSpec.boolean('has-service',
+                                                           'has-service',
+                                                           'has-service',
+                                                           GObject.ParamFlags.READABLE,
                                                            false)},
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
 
     _init: function(params) {
+        this._networksManager = NetworksManager.getDefault();
+        this._networksManager.connect('changed', Lang.bind(this,
+            function() {
+                this.notify('has-service');
+            }));
+
         this.parent(params);
 
         this._nameEntry.connect('changed',
@@ -251,7 +262,10 @@ const ConnectionDetails = new Lang.Class({
         this._nickEntry.text = this._savedNick;
         this._realnameEntry.text = this._savedRealname;
 
-        this._serverEntry.grab_focus();
+        if (this._serverEntry.visible)
+            this._serverEntry.grab_focus();
+        else
+            this._nickEntry.grab_focus();
     },
 
     _onCanConfirmChanged: function() {
@@ -291,8 +305,13 @@ const ConnectionDetails = new Lang.Class({
                paramsChanged;
     },
 
+    get has_service() {
+        return this._networksManager.getAccountIsPredefined(this._account);
+    },
+
     set account(account) {
         this._account = account;
+        this.notify('has-service');
 
         this.reset();
         if (this._account)
@@ -383,6 +402,17 @@ const ConnectionProperties = new Lang.Class({
                       use_header_bar: 1 });
 
         this._details.account = account;
+
+        this._details.connect('notify::has-service', Lang.bind(this,
+            function() {
+                /* HACK:
+                 * Shrink back to minimum height when the visibility of
+                 * some elements in Details could have changed; this
+                 * assumes that this only happens before the user could
+                 * resize the dialog herself
+                 */
+                this.resize(this.default_width, 1);
+            }));
 
         this.connect('response', Lang.bind(this,
             function(w, response) {

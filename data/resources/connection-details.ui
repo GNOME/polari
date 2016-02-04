@@ -6,7 +6,9 @@
     <property name="column-spacing">12</property>
     <child>
       <object class="GtkLabel" id="name_label">
-        <property name="visible">True</property>
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
         <property name="halign">end</property>
         <property name="label" translatable="yes">_Name</property>
         <property name="use-underline">True</property>
@@ -15,7 +17,9 @@
     </child>
     <child>
       <object class="GtkEntry" id="nameEntry">
-        <property name="visible">True</property>
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
         <property name="hexpand">True</property>
         <property name="activates-default">True</property>
         <property name="placeholder-text" translatable="yes">optional</property>
@@ -23,8 +27,11 @@
     </child>
     <child>
       <object class="GtkLabel" id="server_label">
-        <property name="visible">True</property>
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
         <property name="halign">end</property>
+        <property name="margin-bottom">24</property>
         <property name="label" translatable="yes">_Server</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">serverEntry</property>
@@ -36,8 +43,11 @@
     </child>
     <child>
       <object class="GtkEntry" id="serverEntry">
-        <property name="visible">True</property>
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
         <property name="hexpand">True</property>
+        <property name="margin-bottom">24</property>
         <property name="activates-default">True</property>
       </object>
       <packing>
@@ -49,7 +59,6 @@
       <object class="GtkLabel" id="nickname_label">
         <property name="visible">True</property>
         <property name="halign">end</property>
-        <property name="margin-top">24</property>
         <property name="label" translatable="yes">_Nickname</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">nickEntry</property>
@@ -64,7 +73,6 @@
         <property name="visible">True</property>
         <property name="hexpand">True</property>
         <property name="can-default">True</property>
-        <property name="margin-top">24</property>
         <property name="activates-default">True</property>
       </object>
       <packing>
