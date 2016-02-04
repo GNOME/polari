@@ -295,20 +295,16 @@ const RoomListHeader = new Lang.Class({
 
 const RoomList = new Lang.Class({
     Name: 'RoomList',
+    Extends: Gtk.ListBox,
 
-    _init: function() {
-        this.widget = new Gtk.ListBox({ hexpand: false });
-        this.widget.get_style_context().add_class('sidebar');
+    _init: function(params) {
+        this.parent(params);
 
-        this.widget.set_selection_mode(Gtk.SelectionMode.BROWSE);
-        this.widget.set_header_func(Lang.bind(this, this._updateHeader));
-        this.widget.set_sort_func(Lang.bind(this, this._sort));
+        this.set_header_func(Lang.bind(this, this._updateHeader));
+        this.set_sort_func(Lang.bind(this, this._sort));
 
         this._placeholders = {};
         this._roomRows = {};
-
-        this.widget.connect('row-selected',
-                            Lang.bind(this, this._onRowSelected));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
@@ -360,7 +356,7 @@ const RoomList = new Lang.Class({
             function() {
                 let row = this._getRoomRowAtIndex(0);
                 if (row)
-                    this.widget.select_row(row);
+                    this.select_row(row);
             }));
         action = app.lookup_action('last-room');
         action.connect('activate', Lang.bind(this,
@@ -368,7 +364,7 @@ const RoomList = new Lang.Class({
                 let nRows = this._roomManager.roomCount;
                 let row = this._getRoomRowAtIndex(nRows - 1);
                 if (row)
-                    this.widget.select_row(row);
+                    this.select_row(row);
             }));
         action = app.lookup_action('nth-room');
         action.connect('activate', Lang.bind(this,
@@ -376,7 +372,7 @@ const RoomList = new Lang.Class({
                 let n = param.get_int32();
                 if (n > this._roomManager.roomCount)
                     return;
-                this.widget.select_row(this._getRoomRowAtIndex(n - 1));
+                this.select_row(this._getRoomRowAtIndex(n - 1));
             }));
     },
 
@@ -397,26 +393,26 @@ const RoomList = new Lang.Class({
     },
 
     _roomToRowIndex: function(index) {
-        let nChildren = this.widget.get_children().length;
+        let nChildren = this.get_children().length;
         for (let i = 0, roomIndex = 0; i < nChildren; i++)
-            if (this.widget.get_row_at_index(i).room && roomIndex++ == index)
+            if (this.get_row_at_index(i).room && roomIndex++ == index)
                 return i;
         return -1;
     },
 
     _getRoomRowAtIndex: function(index) {
-        return this.widget.get_row_at_index(this._roomToRowIndex(index));
+        return this.get_row_at_index(this._roomToRowIndex(index));
     },
 
     _moveSelection: function(direction) {
-        let current = this.widget.get_selected_row();
+        let current = this.get_selected_row();
         if (!current)
             return;
         let inc = direction == Gtk.DirectionType.UP ? -1 : 1;
         let index = this._rowToRoomIndex(current.get_index());
         let row = this._getRoomRowAtIndex(index + inc);
         if (row)
-            this.widget.select_row(row);
+            this.select_row(row);
     },
 
     _moveSelectionFromRow: function(row) {
@@ -429,21 +425,21 @@ const RoomList = new Lang.Class({
         if (current != row)
             return;
 
-        let selected = this.widget.get_selected_row();
+        let selected = this.get_selected_row();
         let newActive = null;
 
         let index = this._rowToRoomIndex(row.get_index());
-        this.widget.select_row(row);
+        this.select_row(row);
         this._moveSelection(index == 0 ? Gtk.DirectionType.DOWN
                                        : Gtk.DirectionType.UP);
 
-        let newSelected = this.widget.get_selected_row();
+        let newSelected = this.get_selected_row();
         if (newSelected != row)
             newActive = newSelected.room;
         this._roomManager.setActiveRoom(newActive);
 
         if (selected != row)
-            this.widget.select_row(selected);
+            this.select_row(selected);
     },
 
     _accountAdded: function(am, account) {
@@ -455,11 +451,11 @@ const RoomList = new Lang.Class({
         placeholder.account = account;
 
         this._placeholders[account] = placeholder;
-        this.widget.add(placeholder);
+        this.add(placeholder);
 
         placeholder.connect('notify::visible', Lang.bind(this,
             function() {
-                this.widget.invalidate_sort();
+                this.invalidate_sort();
             }));
 
         this._updatePlaceholderVisibility(account);
@@ -477,7 +473,7 @@ const RoomList = new Lang.Class({
 
     _roomAdded: function(roomManager, room) {
         let row = new RoomRow(room);
-        this.widget.add(row);
+        this.add(row);
         this._roomRows[room.id] = row;
 
         row.connect('destroy', Lang.bind(this,
@@ -520,11 +516,11 @@ const RoomList = new Lang.Class({
             return;
 
         row.can_focus = false;
-        this.widget.select_row(row);
+        this.select_row(row);
         row.can_focus = true;
     },
 
-    _onRowSelected: function(w, row) {
+    vfunc_row_selected: function(row) {
         this._roomManager.setActiveRoom(row ? row.room : null);
         if (row)
             row.selected();

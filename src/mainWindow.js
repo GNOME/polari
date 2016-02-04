@@ -283,10 +283,6 @@ const MainWindow = new Lang.Class({
                 }));
             }));
 
-        let scroll = builder.get_object('room_list_scrollview');
-        this._roomList = new RoomList.RoomList();
-        scroll.add(this._roomList.widget);
-
         this._userListPopover = new UserList.UserListPopover();
         this._userListPopover.widget.relative_to = this._showUserListButton;
     },
