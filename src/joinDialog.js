@@ -67,7 +67,7 @@ const JoinDialog = new Lang.Class({
 
     _createWidget: function() {
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/join-room-dialog.ui');
+        builder.add_from_resource('/org/gnome/Polari/ui/join-room-dialog.ui');
 
         this.widget = builder.get_object('join_room_dialog');
 

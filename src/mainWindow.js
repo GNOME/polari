@@ -112,7 +112,7 @@ const MainWindow = new Lang.Class({
         this._createWidget(app);
 
         let provider = new Gtk.CssProvider();
-        let uri = 'resource:///org/gnome/Polari/application.css';
+        let uri = 'resource:///org/gnome/Polari/css/application.css';
         let file = Gio.File.new_for_uri(uri);
         try {
             provider.load_from_file(Gio.File.new_for_uri(uri));
@@ -239,7 +239,7 @@ const MainWindow = new Lang.Class({
 
     _createWidget: function(app) {
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/main-window.ui');
+        builder.add_from_resource('/org/gnome/Polari/ui/main-window.ui');
 
         this.window = builder.get_object('main_window');
         this.window.application = app;

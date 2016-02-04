@@ -9,7 +9,7 @@ const Signals = imports.signals;
 const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
     Extends: Gtk.Box,
-    Template: 'resource:///org/gnome/Polari/connection-details.ui',
+    Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
     InternalChildren: ['serverEntry',
                        'descEntry',
                        'nickEntry',

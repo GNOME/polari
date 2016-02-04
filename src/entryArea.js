@@ -51,7 +51,7 @@ const ChatEntry = new Lang.Class({
 const EntryArea = new Lang.Class({
     Name: 'EntryArea',
     Extends: Gtk.Stack,
-    Template: 'resource:///org/gnome/Polari/entry-area.ui',
+    Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
     InternalChildren: ['chatEntry',
                        'nickButton',
                        'nickLabel',

@@ -163,7 +163,7 @@ const RoomListHeader = new Lang.Class({
     Name: 'RoomListHeader',
     Extends: Gtk.MenuButton,
     CssName: 'row',
-    Template: 'resource:///org/gnome/Polari/room-list-header.ui',
+    Template: 'resource:///org/gnome/Polari/ui/room-list-header.ui',
     InternalChildren: ['label',
                        'iconStack',
                        'popoverStatus',

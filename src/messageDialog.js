@@ -58,7 +58,7 @@ const MessageDialog = new Lang.Class({
 
     _createWidget: function() {
         let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/message-user-dialog.ui');
+        builder.add_from_resource('/org/gnome/Polari/ui/message-user-dialog.ui');
 
         this.widget = builder.get_object('message_user_dialog');
 
