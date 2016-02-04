@@ -13,6 +13,7 @@
     <file>main.js</file>
     <file>mainWindow.js</file>
     <file>messageDialog.js</file>
+    <file>networksManager.js</file>
     <file>pasteManager.js</file>
     <file>roomList.js</file>
     <file>roomStack.js</file>

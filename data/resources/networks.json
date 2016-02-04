@@ -1,0 +1,701 @@
+[
+  {
+    "name": "2600net",
+    "id": "a2600net",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.2600.net" }
+    ]
+  },
+  {
+    "name": "AccessIRC",
+    "id": "accessirc",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.accessirc.net" },
+      { "ssl": false, "port": 6667, "address": "eu.accessirc.net" }
+    ]
+  },
+  {
+    "name": "AfterNET",
+    "id": "afternet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.afternet.org" },
+      { "ssl": false, "port": 6667, "address": "us.afternet.org" },
+      { "ssl": false, "port": 6667, "address": "eu.afternet.org" }
+    ]
+  },
+  {
+    "name": "Aitvaras",
+    "id": "aitvaras",
+    "servers": [
+      { "ssl": true, "port": 6668, "address": "irc.data.lt" },
+      { "ssl": true, "port": 6668, "address": "irc-ssl.omnitel.net" },
+      { "ssl": true, "port": 9999, "address": "irc-ssl.le.lt" },
+      { "ssl": false, "port": 6667, "address": "irc.data.lt" },
+      { "ssl": false, "port": 6667, "address": "irc.omnitel.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ktu.lt" },
+      { "ssl": false, "port": 6667, "address": "irc.le.lt" },
+      { "ssl": false, "port": 6667, "address": "irc.takas.lt" },
+      { "ssl": false, "port": 6667, "address": "irc.5ci.net" },
+      { "ssl": false, "port": 6667, "address": "irc.kis.lt" }
+    ]
+  },
+  {
+    "name": "AmigaNet",
+    "id": "amiganet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.amiganet.org" },
+      { "ssl": false, "port": 6667, "address": "us.amiganet.org" },
+      { "ssl": false, "port": 6667, "address": "uk.amiganet.org" }
+    ]
+  },
+  {
+    "name": "ARCNet",
+    "id": "arcnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "se1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "us1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "us2.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "us3.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "ca1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "de1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "de3.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "ch1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "be1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "nl3.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "uk1.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "uk2.arcnet.vapor.com" },
+      { "ssl": false, "port": 6667, "address": "fr1.arcnet.vapor.com" }
+    ]
+  },
+  {
+    "name": "AstroLink",
+    "id": "astrolink",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.astrolink.org" }
+    ]
+  },
+  {
+    "name": "AustNet",
+    "id": "austnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "au.austnet.org" },
+      { "ssl": false, "port": 6667, "address": "us.austnet.org" },
+      { "ssl": false, "port": 6667, "address": "ca.austnet.org" }
+    ]
+  },
+  {
+    "name": "AzzurraNet",
+    "id": "azzurranet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.azzurra.org" },
+      { "ssl": false, "port": 6667, "address": "crypto.azzurra.org" }
+    ]
+  },
+  {
+    "name": "Beirut",
+    "id": "beirut",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.beirut.com" }
+    ]
+  },
+  {
+    "name": "ChatJunkies",
+    "id": "chatjunkies",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.chatjunkies.org" },
+      { "ssl": false, "port": 6667, "address": "nl.chatjunkies.org" }
+    ]
+  },
+  {
+    "name": "ChatNet",
+    "id": "chatnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "US.ChatNet.Org" },
+      { "ssl": false, "port": 6667, "address": "EU.ChatNet.Org" }
+    ]
+  },
+  {
+    "name": "ChatSociety",
+    "id": "chatsociety",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "us.chatsociety.net" },
+      { "ssl": false, "port": 6667, "address": "eu.chatsociety.net" }
+    ]
+  },
+  {
+    "name": "ChatSpike",
+    "id": "chatspike",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.chatspike.net" }
+    ]
+  },
+  {
+    "name": "ChillFactory",
+    "id": "chillfactory",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.chillfactory.net" }
+    ]
+  },
+  {
+    "name": "CoolChat",
+    "id": "coolchat",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.coolchat.net" }
+    ]
+  },
+  {
+    "name": "Criten",
+    "id": "criten",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.criten.net" },
+      { "ssl": false, "port": 6667, "address": "irc.eu.criten.net" }
+    ]
+  },
+  {
+    "name": "DALnet",
+    "id": "dalnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.dal.net" },
+      { "ssl": false, "port": 6667, "address": "irc.eu.dal.net" }
+    ]
+  },
+  {
+    "name": "Dark-Tou-Net",
+    "id": "dark-tou-net",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.d-t-net.de" },
+      { "ssl": false, "port": 6667, "address": "bw.d-t-net.de" },
+      { "ssl": false, "port": 6667, "address": "nc.d-t-net.de" },
+      { "ssl": false, "port": 6667, "address": "wakka.d-t-net.de" }
+    ]
+  },
+  {
+    "name": "DarkMyst",
+    "id": "darkmyst",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.darkmyst.org" }
+    ]
+  },
+  {
+    "name": "Debian Servers",
+    "id": "debian_servers",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.debian.org" }
+    ]
+  },
+  {
+    "name": "DeepIRC",
+    "id": "deepirc",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.deepirc.net" }
+    ]
+  },
+  {
+    "name": "DeltaAnime",
+    "id": "deltaanime",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.deltaanime.net" }
+    ]
+  },
+  {
+    "name": "EFnet",
+    "id": "efnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.blackened.com" },
+      { "ssl": false, "port": 6667, "address": "irc.Prison.NET" },
+      { "ssl": false, "port": 6667, "address": "irc.Qeast.net" },
+      { "ssl": false, "port": 6667, "address": "irc.efnet.pl" },
+      { "ssl": false, "port": 6667, "address": "efnet.demon.co.uk" },
+      { "ssl": false, "port": 6667, "address": "irc.lightning.net" },
+      { "ssl": false, "port": 6667, "address": "irc.mindspring.com" },
+      { "ssl": false, "port": 6667, "address": "irc.easynews.com" },
+      { "ssl": false, "port": 6667, "address": "irc.servercentral.net" }
+    ]
+  },
+  {
+    "name": "EnterTheGame",
+    "id": "enterthegame",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "IRC.EnterTheGame.Com" }
+    ]
+  },
+  {
+    "name": "EUIrc",
+    "id": "euirc",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ham.de.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ber.de.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ffm.de.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.bre.de.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.hes.de.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.vie.at.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.inn.at.euirc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.bas.ch.euirc.net" }
+    ]
+  },
+  {
+    "name": "EuropNet",
+    "id": "europnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.europnet.org" }
+    ]
+  },
+  {
+    "name": "EU-IRC",
+    "id": "eu-irc",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.eu-irc.net" }
+    ]
+  },
+  {
+    "name": "FDFNet",
+    "id": "fdfnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.fdfnet.net" },
+      { "ssl": false, "port": 6667, "address": "irc.eu.fdfnet.net" }
+    ]
+  },
+  {
+    "name": "FEFNet",
+    "id": "fefnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.fef.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ggn.net" },
+      { "ssl": false, "port": 6667, "address": "irc.vendetta.com" }
+    ]
+  },
+  {
+    "name": "Freenode",
+    "id": "freenode",
+    "servers": [
+      { "ssl": true, "port": 6697, "address": "chat.freenode.net" },
+      { "ssl": true, "port": 7000, "address": "chat.freenode.net" },
+      { "ssl": true, "port": 7070, "address": "chat.freenode.net" },
+      { "ssl": false, "port": 6665, "address": "chat.freenode.net" },
+      { "ssl": false, "port": 6666, "address": "chat.freenode.net" },
+      { "ssl": false, "port": 6667, "address": "chat.freenode.net" },
+      { "ssl": false, "port": 8000, "address": "chat.freenode.net" },
+      { "ssl": false, "port": 8001, "address": "chat.freenode.net" },
+      { "ssl": false, "port": 8002, "address": "chat.freenode.net" }
+    ]
+  },
+  {
+    "name": "GalaxyNet",
+    "id": "galaxynet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.galaxynet.org" }
+    ]
+  },
+  {
+    "name": "GamesNET",
+    "id": "gamesnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.gamesnet.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ca.gamesnet.net" },
+      { "ssl": false, "port": 6667, "address": "irc.eu.gamesnet.net" }
+    ]
+  },
+  {
+    "name": "German-Elite",
+    "id": "german-elite",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "dominion.german-elite.net" },
+      { "ssl": false, "port": 6667, "address": "komatu.german-elite.net" }
+    ]
+  },
+  {
+    "name": "GNOME",
+    "id": "gimpnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.gnome.org" },
+      { "ssl": false, "port": 6667, "address": "irc.gimp.org" },
+      { "ssl": false, "port": 6667, "address": "irc.us.gimp.org" },
+      { "ssl": true, "port": 6697, "address": "irc.eagle.y.se" },
+      { "ssl": true, "port": 6697, "address": "irc.acc.umu.se" },
+      { "ssl": true, "port": 6697, "address": "irc.gimp.ca" },
+      { "ssl": true, "port": 6697, "address": "irc.poop.nl" }
+    ]
+  },
+  {
+    "name": "HabberNet",
+    "id": "habbernet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.habber.net" }
+    ]
+  },
+  {
+    "name": "Hashmark",
+    "id": "hashmark",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.hashmark.net" }
+    ]
+  },
+  {
+    "name": "IdleMonkeys",
+    "id": "idlemonkeys",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.idlemonkeys.net" }
+    ]
+  },
+  {
+    "name": "insiderZ.DE",
+    "id": "insiderz.de",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.insiderz.de" },
+      { "ssl": false, "port": 6666, "address": "irc.insiderz.de" }
+    ]
+  },
+  {
+    "name": "IrcLink",
+    "id": "irclink",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.irclink.net" },
+      { "ssl": false, "port": 6667, "address": "Alesund.no.eu.irclink.net" },
+      { "ssl": false, "port": 6667, "address": "Oslo.no.eu.irclink.net" },
+      { "ssl": false, "port": 6667, "address": "frogn.no.eu.irclink.net" },
+      { "ssl": false, "port": 6667, "address": "tonsberg.no.eu.irclink.net" }
+    ]
+  },
+  {
+    "name": "IRCNet",
+    "id": "ircnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.ircnet.com" },
+      { "ssl": false, "port": 6668, "address": "irc.stealth.net" },
+      { "ssl": false, "port": 6667, "address": "ircnet.demon.co.uk" },
+      { "ssl": false, "port": 6667, "address": "irc.datacomm.ch" },
+      { "ssl": false, "port": 6667, "address": "random.ircd.de" },
+      { "ssl": false, "port": 6667, "address": "ircnet.netvision.net.il" },
+      { "ssl": false, "port": 6667, "address": "irc.cs.hut.fi" }
+    ]
+  },
+  {
+    "name": "Irctoo.net",
+    "id": "irctoo.net",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.irctoo.net" }
+    ]
+  },
+  {
+    "name": "Krstarica",
+    "id": "krstarica",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.krstarica.com" }
+    ]
+  },
+  {
+    "name": "Librenet",
+    "id": "librenet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.librenet.net" },
+      { "ssl": false, "port": 6667, "address": "ielf.fr.librenet.net" }
+    ]
+  },
+  {
+    "name": "LinkNet",
+    "id": "linknet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.link-net.org" },
+      { "ssl": false, "port": 6667, "address": "irc.no.link-net.org" },
+      { "ssl": false, "port": 6667, "address": "irc.bahnhof.se" }
+    ]
+  },
+  {
+    "name": "MagicStar",
+    "id": "magicstar",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.magicstar.net" }
+    ]
+  },
+  {
+    "name": "Majistic",
+    "id": "majistic",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.majistic.net" }
+    ]
+  },
+  {
+    "name": "MindForge",
+    "id": "mindforge",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.mindforge.org" }
+    ]
+  },
+  {
+    "name": "MIXXnet",
+    "id": "mixxnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.mixxnet.net" }
+    ]
+  },
+  {
+    "name": "NeverNET",
+    "id": "nevernet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.nevernet.net" },
+      { "ssl": false, "port": 6667, "address": "imagine.nevernet.net" },
+      { "ssl": false, "port": 6667, "address": "dimension.nevernet.net" },
+      { "ssl": false, "port": 6667, "address": "universe.nevernet.net" },
+      { "ssl": false, "port": 6667, "address": "wayland.nevernet.net" },
+      { "ssl": false, "port": 6667, "address": "forte.nevernet.net" }
+    ]
+  },
+  {
+    "name": "NixHelpNet",
+    "id": "nixhelpnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "us.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "uk.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "uk2.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "uk3.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "nl.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "ca.ld.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "us.co.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "us.ca.nixhelp.org" },
+      { "ssl": false, "port": 6667, "address": "us.pa.nixhelp.org" }
+    ]
+  },
+  {
+    "name": "NullusNet",
+    "id": "nullusnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.nullus.net" }
+    ]
+  },
+  {
+    "name": "Oceanius",
+    "id": "oceanius",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.oceanius.com" }
+    ]
+  },
+  {
+    "name": "OFTC",
+    "id": "oftc",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.oftc.net" }
+    ]
+  },
+  {
+    "name": "OtherNet",
+    "id": "othernet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.othernet.org" }
+    ]
+  },
+  {
+    "name": "Oz.org",
+    "id": "oz.org",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.oz.org" },
+      { "ssl": false, "port": 6667, "address": "germany.oz.org" },
+      { "ssl": false, "port": 6667, "address": "sandiego.oz.org" },
+      { "ssl": false, "port": 6667, "address": "us.oz.org" },
+      { "ssl": false, "port": 6667, "address": "au.oz.org" },
+      { "ssl": false, "port": 6667, "address": "rockhampton.oz.org" },
+      { "ssl": false, "port": 6667, "address": "wollongong.oz.org" },
+      { "ssl": false, "port": 6667, "address": "waix.oz.org" }
+    ]
+  },
+  {
+    "name": "PTlink",
+    "id": "ptlink",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.PTlink.net" },
+      { "ssl": false, "port": 6667, "address": "aaia.PTlink.net" }
+    ]
+  },
+  {
+    "name": "PTNe",
+    "id": "ptne",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.PTNet.org" },
+      { "ssl": false, "port": 6667, "address": "rccn.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "uevora.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "umoderna.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "ist.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "aaum.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "uc.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "ualg.ptnet.org" },
+      { "ssl": false, "port": 6667, "address": "madinfo.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "ua.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "ipg.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "isec.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "utad.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "iscte.PTnet.org" },
+      { "ssl": false, "port": 6667, "address": "ubi.PTnet.org" }
+    ]
+  },
+  {
+    "name": "QuakeNet",
+    "id": "quakenet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.se.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.dk.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.no.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.fi.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.be.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.uk.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.de.quakenet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.it.quakenet.org" }
+    ]
+  },
+  {
+    "name": "RebelChat",
+    "id": "rebelchat",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.rebelchat.org" }
+    ]
+  },
+  {
+    "name": "RizeNET",
+    "id": "rizenet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.rizenet.org" },
+      { "ssl": false, "port": 6667, "address": "omega.rizenet.org" },
+      { "ssl": false, "port": 6667, "address": "evelance.rizenet.org" },
+      { "ssl": false, "port": 6667, "address": "lisa.rizenet.org" },
+      { "ssl": false, "port": 6667, "address": "scott.rizenet.org" }
+    ]
+  },
+  {
+    "name": "RusNet",
+    "id": "rusnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.tomsk.net" },
+      { "ssl": false, "port": 6667, "address": "irc.rinet.ru" },
+      { "ssl": false, "port": 6667, "address": "irc.run.net" },
+      { "ssl": false, "port": 6667, "address": "irc.ru" },
+      { "ssl": false, "port": 6667, "address": "irc.lucky.net" }
+    ]
+  },
+  {
+    "name": "SceneNet",
+    "id": "scenenet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.scene.org" },
+      { "ssl": false, "port": 6667, "address": "irc.eu.scene.org" },
+      { "ssl": false, "port": 6667, "address": "irc.us.scene.org" }
+    ]
+  },
+  {
+    "name": "SlashNET",
+    "id": "slashnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.slashnet.org" },
+      { "ssl": false, "port": 6667, "address": "area51.slashnet.org" },
+      { "ssl": false, "port": 6667, "address": "moo.slashnet.org" },
+      { "ssl": false, "port": 6667, "address": "radon.slashnet.org" }
+    ]
+  },
+  {
+    "name": "Sohbet.Net",
+    "id": "sohbet.net",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.sohbet.net" }
+    ]
+  },
+  {
+    "name": "SolidIRC",
+    "id": "solidirc",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.solidirc.com" }
+    ]
+  },
+  {
+    "name": "SorceryNet",
+    "id": "sorcerynet",
+    "servers": [
+      { "ssl": false, "port": 9000, "address": "irc.sorcery.net" },
+      { "ssl": false, "port": 9000, "address": "irc.us.sorcery.net" },
+      { "ssl": false, "port": 9000, "address": "irc.eu.sorcery.net" }
+    ]
+  },
+  {
+    "name": "Spidernet",
+    "id": "spidernet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "us.spidernet.org" },
+      { "ssl": false, "port": 6667, "address": "eu.spidernet.org" },
+      { "ssl": false, "port": 6667, "address": "irc.spidernet.org" }
+    ]
+  },
+  {
+    "name": "StarChat",
+    "id": "starchat",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.starchat.net" },
+      { "ssl": false, "port": 6667, "address": "gainesville.starchat.net" },
+      { "ssl": false, "port": 6667, "address": "freebsd.starchat.net" },
+      { "ssl": false, "port": 6667, "address": "sunset.starchat.net" },
+      { "ssl": false, "port": 6667, "address": "revenge.starchat.net" },
+      { "ssl": false, "port": 6667, "address": "tahoma.starchat.net" },
+      { "ssl": false, "port": 6667, "address": "neo.starchat.net" }
+    ]
+  },
+  {
+    "name": "TNI3",
+    "id": "tni3",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.tni3.com" }
+    ]
+  },
+  {
+    "name": "UnderNet",
+    "id": "undernet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "us.undernet.org" },
+      { "ssl": false, "port": 6667, "address": "eu.undernet.org" }
+    ]
+  },
+  {
+    "name": "UniBG",
+    "id": "unibg",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.lirex.com" },
+      { "ssl": false, "port": 6667, "address": "irc.naturella.com" },
+      { "ssl": false, "port": 6667, "address": "irc.spnet.net" },
+      { "ssl": false, "port": 6667, "address": "irc.techno-link.com" },
+      { "ssl": false, "port": 6667, "address": "irc.telecoms.bg" },
+      { "ssl": false, "port": 6667, "address": "irc.tu-varna.edu" }
+    ]
+  },
+  {
+    "name": "Whiffle",
+    "id": "whiffle",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.whiffle.org" }
+    ]
+  },
+  {
+    "name": "Worldnet",
+    "id": "worldnet",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.worldnet.net" },
+      { "ssl": false, "port": 6667, "address": "irc.fr.worldnet.net" }
+    ]
+  },
+  {
+    "name": "Xentonix.net",
+    "id": "xentonix.net",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.ffm.de.eu.xentonix.net" },
+      { "ssl": false, "port": 6667, "address": "irc.kar.de.eu.xentonix.net" },
+      { "ssl": false, "port": 6667, "address": "irc.vie.at.eu.xentonix.net" }
+    ]
+  },
+  {
+    "name": "XWorld",
+    "id": "xworld",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "Buffalo.NY.US.XWorld.org" },
+      { "ssl": false, "port": 6667, "address": "Minneapolis.MN.US.Xworld.Org" },
+      { "ssl": false, "port": 6667, "address": "Rochester.NY.US.XWorld.org" },
+      { "ssl": false, "port": 6667, "address": "Bayern.DE.EU.XWorld.Org" },
+      { "ssl": false, "port": 6667, "address": "Chicago.IL.US.XWorld.Org" }
+    ]
+  }
+]
