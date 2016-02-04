@@ -146,11 +146,11 @@ const MainWindow = new Lang.Class({
 
         app.connect('action-state-changed::user-list', Lang.bind(this,
             function(group, actionName, value) {
-                this._userListPopover.widget.visible = value.get_boolean();
+                this._userListPopover.visible = value.get_boolean();
             }));
-        this._userListPopover.widget.connect('notify::visible', Lang.bind(this,
+        this._userListPopover.connect('notify::visible', Lang.bind(this,
             function() {
-                if (!this._userListPopover.widget.visible)
+                if (!this._userListPopover.visible)
                     this._userListAction.change_state(GLib.Variant.new('b', false));
             }));
 
@@ -271,6 +271,7 @@ const MainWindow = new Lang.Class({
 
         this._joinMenuButton = builder.get_object('join_menu_button');
         this._showUserListButton = builder.get_object('show_user_list_button');
+        this._userListPopover = builder.get_object('user_list_popover');
         this._revealer = builder.get_object('room_list_revealer');
 
         // Make sure user-list button is at least as wide as icon buttons
@@ -282,9 +283,6 @@ const MainWindow = new Lang.Class({
                     return GLib.SOURCE_REMOVE;
                 }));
             }));
-
-        this._userListPopover = new UserList.UserListPopover();
-        this._userListPopover.widget.relative_to = this._showUserListButton;
     },
 
     showJoinRoomDialog: function() {

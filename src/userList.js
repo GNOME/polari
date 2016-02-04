@@ -17,14 +17,17 @@ const MAX_USERS_WIDTH_CHARS = 17;
 
 const UserListPopover = new Lang.Class({
     Name: 'UserListPopover',
+    Extends: Gtk.Popover,
 
-    _init: function() {
+    _init: function(params) {
+        this.parent(params);
+
         this._createWidget();
 
-        this.widget.connect('closed', Lang.bind(this, function() {
+        this.connect('closed', Lang.bind(this, function() {
             this._entry.text = '';
         }));
-        this.widget.connect('map', Lang.bind(this, function() {
+        this.connect('map', Lang.bind(this, function() {
             this._revealer.transition_duration = 0;
             this._ensureUserList();
         }));
@@ -38,16 +41,9 @@ const UserListPopover = new Lang.Class({
     },
 
     _createWidget: function() {
-        this.widget = new Gtk.Popover({ position: Gtk.PositionType.BOTTOM });
-
-        this.widget.set_border_width(6);
-        this.widget.set_size_request(250, -1);
-
-        this.widget.get_style_context().add_class('polari-user-list');
-
         this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
                                   spacing: 6 });
-        this.widget.add(this._box);
+        this.add(this._box);
 
         this._revealer = new Gtk.Revealer();
         this._box.add(this._revealer);
@@ -67,7 +63,7 @@ const UserListPopover = new Lang.Class({
         this._entry.text = '';
 
         if (this._userList)
-            this._userList.widget.destroy();
+            this._userList.destroy();
         this._userList = null;
     },
 
@@ -80,10 +76,10 @@ const UserListPopover = new Lang.Class({
             return;
 
         this._userList = new UserList(room);
-        this._userListBin.add(this._userList.widget);
+        this._userListBin.add(this._userList);
 
-        this._userList.widget.vadjustment.connect('changed',
-                                                  Lang.bind(this, this._updateEntryVisibility));
+        this._userList.vadjustment.connect('changed',
+                                           Lang.bind(this, this._updateEntryVisibility));
         this._updateEntryVisibility();
     },
 
@@ -255,20 +251,27 @@ const UserListDetails = new Lang.Class({
 
 const UserListRow = new Lang.Class({
     Name: 'UserListRow',
+    Extends: Gtk.ListBoxRow,
 
     _init: function(user) {
-        this._createWidget(user);
+        this._user = user;
 
-        this.widget.user = user;
+        this.parent();
 
-        this.widget.connect('unmap', Lang.bind(this, function() {
+        this._createWidget();
+
+        this.connect('unmap', Lang.bind(this, function() {
             this._revealer.reveal_child = false;
         }));
-        this.widget.connect('state-flags-changed',
-                            Lang.bind(this, this._updateArrowVisibility));
+        this.connect('state-flags-changed',
+                     Lang.bind(this, this._updateArrowVisibility));
 
         this._revealer.connect('notify::reveal-child',
                                Lang.bind(this, this._onExpandedChanged));
+    },
+
+    get user() {
+        return this._user;
     },
 
     get expand() {
@@ -281,17 +284,15 @@ const UserListRow = new Lang.Class({
         this._revealer.reveal_child = expand;
     },
 
-    _createWidget: function(user) {
-        this.widget = new Gtk.ListBoxRow();
-
+    _createWidget: function() {
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.widget.add(vbox);
+        this.add(vbox);
 
         let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
         this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
                                       no_show_all: true });
         hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
-        this._label = new Gtk.Label({ label: user.alias,
+        this._label = new Gtk.Label({ label: this._user.alias,
                                       halign: Gtk.Align.START,
                                       hexpand: true,
                                       use_markup: true,
@@ -304,21 +305,21 @@ const UserListRow = new Lang.Class({
         this._revealer = new Gtk.Revealer({ reveal_child: false });
         vbox.add(this._revealer);
 
-        this.widget.show_all();
+        this.show_all();
     },
 
     _ensureDetails: function() {
         if (this._revealer.get_child())
             return;
 
-        let details = new UserListDetails({ user: this.widget.user })
+        let details = new UserListDetails({ user: this._user })
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
     },
 
     shouldShow: function() {
-        return this.widget.user.alias.toLowerCase().indexOf(this._filter) != -1;
+        return this._user.alias.toLowerCase().indexOf(this._filter) != -1;
     },
 
     setFilter: function(filter) {
@@ -329,20 +330,20 @@ const UserListRow = new Lang.Class({
     _updateLabel: function() {
         let filterIndex = -1;
         if (this._filter)
-            filterIndex = this.widget.user.alias.toLowerCase().indexOf(this._filter);
+            filterIndex = this._user.alias.toLowerCase().indexOf(this._filter);
 
         if (filterIndex < 0) {
-            this._label.label = this.widget.user.alias;
+            this._label.label = this._user.alias;
         } else {
-            let preMatch = this.widget.user.alias.substring(0, filterIndex);
-            let theMatch = this.widget.user.alias.substring(filterIndex, filterIndex + this._filter.length);
-            let postMatch = this.widget.user.alias.substring(filterIndex + this._filter.length);
+            let preMatch = this._user.alias.substring(0, filterIndex);
+            let theMatch = this._user.alias.substring(filterIndex, filterIndex + this._filter.length);
+            let postMatch = this._user.alias.substring(filterIndex + this._filter.length);
             this._label.label = preMatch + '<b>' + theMatch + '</b>' + postMatch;
         }
     },
 
     _updateArrowVisibility: function() {
-        let flags = this.widget.get_state_flags();
+        let flags = this.get_state_flags();
         this._arrow.visible = this.expand ||
                               flags & Gtk.StateFlags.PRELIGHT ||
                               flags & Gtk.StateFlags.FOCUSED;
@@ -350,10 +351,10 @@ const UserListRow = new Lang.Class({
 
     _onExpandedChanged: function() {
         if (this._revealer.reveal_child) {
-            this.widget.get_style_context().add_class('expanded');
+            this.get_style_context().add_class('expanded');
             this._arrow.arrow_type = Gtk.ArrowType.DOWN;
         } else {
-            this.widget.get_style_context().remove_class('expanded');
+            this.get_style_context().remove_class('expanded');
             this._arrow.arrow_type = Gtk.ArrowType.RIGHT;
             this._updateArrowVisibility();
         }
@@ -362,14 +363,15 @@ const UserListRow = new Lang.Class({
 
 const UserList = new Lang.Class({
     Name: 'UserList',
+    Extends: Gtk.ScrolledWindow,
 
     _init: function(room) {
-        this.widget = new Gtk.ScrolledWindow({ hexpand: true,
-                                               shadow_type: Gtk.ShadowType.ETCHED_IN });
-        this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        this.parent({ hexpand: true,
+                      shadow_type: Gtk.ShadowType.ETCHED_IN,
+                      hscrollbar_policy: Gtk.PolicyType.NEVER });
 
         this._list = new Gtk.ListBox({ vexpand: true });
-        this.widget.add(this._list);
+        this.add(this._list);
 
         let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
                                         valign: Gtk.Align.CENTER,
@@ -398,8 +400,8 @@ const UserList = new Lang.Class({
 
         this._list.connect('row-activated',
                            Lang.bind(this, this._onRowActivated));
-        this.widget.connect('destroy',
-                            Lang.bind(this, this._onDestroy));
+        this.connect('destroy',
+                     Lang.bind(this, this._onDestroy));
 
         this._room = room;
         this._rows = {};
@@ -432,7 +434,7 @@ const UserList = new Lang.Class({
         }));
         this._onChannelChanged(room);
 
-        this.widget.show_all();
+        this.show_all();
     },
 
     get numRows() {
@@ -455,7 +457,7 @@ const UserList = new Lang.Class({
             return;
 
         this._updateHeightId = Mainloop.idle_add(Lang.bind(this, function() {
-            let topRow = this._list.get_row_at_y(this.widget.vadjustment.value);
+            let topRow = this._list.get_row_at_y(this.vadjustment.value);
             let membersShown = Math.min(this.numRows, MAX_USERS_SHOWN);
             // topRow is unset when all rows are hidden due to filtering,
             // base height on the first membersShown rows in that case
@@ -467,7 +469,7 @@ const UserList = new Lang.Class({
             for (let i = 0; i < membersShown; i++)
                 height += this._list.get_row_at_index(index + i).get_allocated_height();
 
-            this.widget.min_content_height = height;
+            this.min_content_height = height;
             this._updateHeightId = 0;
             return GLib.SOURCE_REMOVE;
         }));
@@ -505,13 +507,13 @@ const UserList = new Lang.Class({
     _addMember: function(member) {
         let row = new UserListRow(member);
         this._rows[member] = row;
-        this._list.add(row.widget);
+        this._list.add(row);
     },
 
     _removeMember: function(member) {
         let row = this._rows[member];
         if (row)
-            row.widget.destroy();
+            row.destroy();
         delete this._rows[member];
     },
 
@@ -522,7 +524,7 @@ const UserList = new Lang.Class({
     },
 
     _onRowActivated: function(list, row) {
-        this._setActiveRow(this._rows[row.user]);
+        this._setActiveRow(row);
         this._activeRow.expand = !this._activeRow.expand;
     },
 
@@ -530,8 +532,7 @@ const UserList = new Lang.Class({
         return row1.user.alias.localeCompare(row2.user.alias);
     },
 
-    _filterRows: function(rowWidget) {
-        let row = this._rows[rowWidget.user];
+    _filterRows: function(row) {
         row.setFilter(this._filter);
         return row.shouldShow();
     },

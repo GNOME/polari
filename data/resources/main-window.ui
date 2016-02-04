@@ -12,6 +12,15 @@
       </item>
     </section>
   </menu>
+  <object class="Gjs_UserListPopover" id="user_list_popover">
+    <property name="position">bottom</property>
+    <property name="border-width">6</property>
+    <property name="width-request">250</property>
+    <property name="relative-to">show_user_list_button</property>
+    <style>
+      <class name="polari-user-list"/>
+    </style>
+  </object>
   <object class="GtkApplicationWindow" id="main_window">
     <property name="title" translatable="yes">Polari</property>
     <property name="icon-name">polari</property>
