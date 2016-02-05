@@ -17,6 +17,7 @@ const NetworksManager = new Lang.Class({
 
     _init: function() {
         this._networks = [];
+        this._networksById = new Map();
 
         let uri = 'resource:///org/gnome/Polari/data/networks.json';
         let file = Gio.File.new_for_uri(uri);
@@ -41,11 +42,46 @@ const NetworksManager = new Lang.Class({
         }
 
         this._networks = networks;
+        this._networks.forEach(Lang.bind(this,
+            function(network) {
+                this._networksById.set(network.id, network);
+            }));
         this.emit('changed');
+    },
+
+    _lookupNetwork: function(id) {
+        let network = this._networksById.get(id);
+        if (!network)
+            throw new Error('Invalid network ID');
+        return network;
     },
 
     get networks() {
         return this._networks;
+    },
+
+    getAccountIsPredefined: function(account) {
+        return account && this._networksById.get(account.service) != null;
+    },
+
+    getNetworkName: function(id) {
+        return this._lookupNetwork(id).name;
+    },
+
+    getNetworkDetails: function(id) {
+        let network = this._lookupNetwork(id);
+        if (!network.servers || !network.servers.length)
+            throw new Error('No servers for network ' + id);
+
+        let sslServers = network.servers.filter(s => s.ssl);
+        let server = sslServers.length > 0 ? sslServers[0]
+                                           : network.servers[0];
+        return {
+            'account': new GLib.Variant('s', GLib.get_user_name()),
+            'server': new GLib.Variant('s', server.address),
+            'port': new GLib.Variant('u', server.port),
+            'use-ssl': new GLib.Variant('b', server.ssl)
+        };
     }
 });
 Signals.addSignalMethods(NetworksManager.prototype);

@@ -5,11 +5,147 @@ const Lang = imports.lang;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
+const AccountsMonitor = imports.accountsMonitor;
+const NetworksManager = imports.networksManager;
+
 const ErrorHint = {
     NONE: 0,
     SERVER: 1,
     NICK: 2
 };
+
+const ConnectionRow = new Lang.Class({
+    Name: 'ConnectionRow',
+    Extends: Gtk.ListBoxRow,
+
+    _init: function(params) {
+        if (!params || !params.id)
+            throw new Error('No id in parameters');
+
+        this._id = params.id;
+        delete params.id;
+
+        this.parent(params);
+
+        this.bind_property('sensitive', this, 'activatable',
+                           GObject.BindingFlags.SYNC_CREATE);
+
+        let box = new Gtk.Box({ spacing: 12, margin: 12 });
+        this.add(box);
+
+        let name = NetworksManager.getDefault().getNetworkName(this._id);
+        box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
+
+        let insensitiveDesc = new Gtk.Label({ label: _("Already added"),
+                                              hexpand: true,
+                                              halign: Gtk.Align.END });
+        box.add(insensitiveDesc);
+
+        this.show_all();
+
+        this.bind_property('sensitive', insensitiveDesc, 'visible',
+                           GObject.BindingFlags.SYNC_CREATE |
+                           GObject.BindingFlags.INVERT_BOOLEAN);
+    },
+
+    get id() {
+        return this._id;
+    }
+});
+
+const ConnectionsList = new Lang.Class({
+    Name: 'ConnectionsList',
+    Extends: Gtk.ScrolledWindow,
+    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
+               'account-selected': {}},
+
+    _init: function(params) {
+        this.parent(params);
+
+        this.hscrollbar_policy = Gtk.PolicyType.NEVER;
+
+        this._list = new Gtk.ListBox({ visible: true });
+        this._list.connect('row-activated',
+                           Lang.bind(this, this._onRowActivated));
+        this.add(this._list);
+
+        this._rows = new Map();
+
+        this._list.set_header_func(Lang.bind(this, this._updateHeader));
+
+        this._accountsMonitor = AccountsMonitor.getDefault();
+        this._accountsMonitor.connect('account-added', Lang.bind(this,
+            function(mon, account) {
+                this._setAccountRowSensitive(account, false);
+            }));
+        this._accountsMonitor.connect('account-removed', Lang.bind(this,
+            function(mon, account) {
+                this._setAccountRowSensitive(account, true);
+            }));
+
+        this._networksManager = NetworksManager.getDefault();
+        this._networksManager.connect('changed',
+                                      Lang.bind(this, this._networksChanged));
+        this._networksChanged();
+    },
+
+    _updateHeader: function(row, before) {
+        if (!before)
+            row.set_header(null);
+        else if (!row.get_header())
+            row.set_header(new Gtk.Separator());
+    },
+
+    _networksChanged: function() {
+        this._list.foreach(function(w) { w.destroy(); });
+
+        let accounts = this._accountsMonitor.dupAccounts();
+        let usedNetworks = accounts.filter(Lang.bind(this, function(a) {
+            return this._networksManager.getAccountIsPredefined(a);
+        })).map(function(a) {
+            return a.service;
+        });
+
+        this._networksManager.networks.forEach(Lang.bind(this,
+            function(network) {
+                let sensitive = usedNetworks.indexOf(network.id) < 0;
+                this._rows.set(network.id,
+                               new ConnectionRow({ id: network.id,
+                                                   sensitive: sensitive }));
+                this._list.add(this._rows.get(network.id));
+            }));
+    },
+
+    _onRowActivated: function(list, row) {
+        let name = this._networksManager.getNetworkName(row.id);
+        let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
+                                          connection_manager: 'idle',
+                                          protocol: 'irc',
+                                          display_name: name });
+        req.set_service(row.id);
+        req.set_enabled(true);
+
+        let details = this._networksManager.getNetworkDetails(row.id);
+
+        for (let prop in details)
+            req.set_parameter(prop, details[prop]);
+
+        req.create_account_async(Lang.bind(this,
+            function(r, res) {
+                let account = req.create_account_finish(res);
+                if (account) // TODO: Handle errors
+                    this.emit('account-created', account);
+            }));
+        this.emit('account-selected');
+    },
+
+    _setAccountRowSensitive: function(account, sensitive) {
+        if (!this._networksManager.getAccountIsPredefined(account))
+            return;
+
+        this._rows.get(account.service).sensitive = sensitive;
+    }
+});
 
 const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
