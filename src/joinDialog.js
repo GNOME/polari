@@ -92,8 +92,6 @@ const JoinDialog = new Lang.Class({
 
         this._updateConnectionCombo();
         this._updateCanConfirm();
-
-        this._nameEntry.grab_focus();
     },
 
     _setupMainPage: function() {
@@ -228,6 +226,8 @@ const JoinDialog = new Lang.Class({
         let isMain = page == DialogPage.MAIN;
 
         if (isMain)
+            this._nameEntry.grab_focus();
+        else
             this._details.reset();
 
         this._backButton.visible = !isMain;
