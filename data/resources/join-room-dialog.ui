@@ -115,6 +115,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="focus-on-click">False</property>
                     <child>
                       <object class="GtkBox" id="box1">
                         <property name="visible">True</property>
