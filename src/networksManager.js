@@ -82,6 +82,15 @@ const NetworksManager = new Lang.Class({
             'port': new GLib.Variant('u', server.port),
             'use-ssl': new GLib.Variant('b', server.ssl)
         };
+    },
+
+    getNetworkMatchTerms: function(id) {
+        let network = this._lookupNetwork(id);
+        let servers = network.servers.map(function(s) {
+            return s.address.toLowerCase();
+        });
+        return [network.name.toLowerCase(),
+                network.id.toLowerCase()].concat(servers);
     }
 });
 Signals.addSignalMethods(NetworksManager.prototype);

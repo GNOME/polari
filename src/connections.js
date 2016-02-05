@@ -71,6 +71,8 @@ const ConnectionsList = new Lang.Class({
 
         this._rows = new Map();
 
+        this._filterTerms = [];
+        this._list.set_filter_func(Lang.bind(this, this._filterRows));
         this._list.set_header_func(Lang.bind(this, this._updateHeader));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -87,6 +89,24 @@ const ConnectionsList = new Lang.Class({
         this._networksManager.connect('changed',
                                       Lang.bind(this, this._networksChanged));
         this._networksChanged();
+    },
+
+    setFilter: function(filter) {
+        this._filterTerms = filter.trim().toLowerCase().replace(/\s+/g, ' ').split(' ');
+        this._list.invalidate_filter();
+    },
+
+    activateFirst: function() {
+        let row = this._list.get_row_at_y(0);
+        if (row)
+            row.activate();
+    },
+
+    _filterRows: function(row) {
+        let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
+        return this._filterTerms.every(function(term) {
+            return matchTerms.some(function(s) { return s.indexOf(term) != -1; });
+        });
     },
 
     _updateHeader: function(row, before) {

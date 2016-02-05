@@ -177,9 +177,36 @@
                     <property name="vexpand">True</property>
                     <property name="transition-type">crossfade</property>
                     <child>
-                      <object class="Gjs_ConnectionsList" id="connectionsList">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
-                        <property name="shadow-type">in</property>
+                        <property name="orientation">vertical</property>
+                        <style>
+                          <class name="linked"/>
+                          <class name="frame"/>
+                        </style>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <style>
+                              <class name="polari-listbox-filterbar"/>
+                            </style>
+                            <child>
+                              <object class="GtkSearchEntry" id="filterEntry">
+                                <property name="visible">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="margin">60</property>
+                                <property name="margin-top">6</property>
+                                <property name="margin-bottom">6</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="Gjs_ConnectionsList" id="connectionsList">
+                            <property name="visible">True</property>
+                            <property name="vexpand">True</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="name">predefined</property>

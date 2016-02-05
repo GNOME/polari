@@ -151,3 +151,8 @@
     color: @theme_fg_color;
     font-size: smaller;
 }
+
+.polari-listbox-filterbar {
+    border: solid @borders;
+    border-width: 0 0 1px;
+}

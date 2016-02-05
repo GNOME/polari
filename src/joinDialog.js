@@ -28,6 +28,7 @@ const JoinDialog = new Lang.Class({
                        'nameEntry',
                        'nameCompletion',
                        'connectionStack',
+                       'filterEntry',
                        'connectionsList',
                        'details',
                        'addButton',
@@ -140,6 +141,23 @@ const JoinDialog = new Lang.Class({
                     this._addButton.grab_default();
                     this._details.reset();
                 }
+            }));
+
+        this._filterEntry.connect('search-changed', Lang.bind(this,
+            function() {
+                this._connectionsList.setFilter(this._filterEntry.text);
+            }));
+        this._filterEntry.connect('stop-search', Lang.bind(this,
+            function() {
+                if (this._filterEntry.text.length > 0)
+                    this._filterEntry.text = '';
+                else
+                    this.response(Gtk.ResponseType.CANCEL);
+            }));
+        this._filterEntry.connect('activate', Lang.bind(this,
+            function() {
+                if (this._filterEntry.text.length > 0)
+                    this._connectionsList.activateFirst();
             }));
     },
 
