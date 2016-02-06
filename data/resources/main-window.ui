@@ -12,16 +12,16 @@
       </item>
     </section>
   </menu>
-  <object class="Gjs_UserListPopover" id="user_list_popover">
+  <object class="Gjs_UserListPopover" id="userListPopover">
     <property name="position">bottom</property>
     <property name="border-width">6</property>
     <property name="width-request">250</property>
-    <property name="relative-to">show_user_list_button</property>
+    <property name="relative-to">showUserListButton</property>
     <style>
       <class name="polari-user-list"/>
     </style>
   </object>
-  <object class="GtkApplicationWindow" id="main_window">
+  <template class="Gjs_MainWindow">
     <property name="title" translatable="yes">Polari</property>
     <property name="icon-name">polari</property>
     <property name="show-menubar">false</property>
@@ -29,7 +29,7 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <child>
-          <object class="GtkHeaderBar" id="titlebar_left">
+          <object class="GtkHeaderBar" id="titlebarLeft">
             <property name="visible">True</property>
             <property name="hexpand">False</property>
             <property name="show-close-button">True</property>
@@ -37,7 +37,7 @@
               <class name="polari-titlebar-left"/>
             </style>
             <child>
-              <object class="GtkMenuButton" id="join_menu_button">
+              <object class="GtkMenuButton" id="joinMenuButton">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
@@ -67,7 +67,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="titlebar_separator">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <style>
                   <class name="polari-titlebar-separator"/>
@@ -80,7 +80,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkHeaderBar" id="titlebar_right">
+          <object class="GtkHeaderBar" id="titlebarRight">
             <property name="visible">True</property>
             <property name="hexpand">True</property>
             <property name="show-close-button">True</property>
@@ -94,31 +94,37 @@
                  We replicate this by using a stack which will only ever show
                  its first child, but still consider the second one's size -->
             <child type="title">
-              <object class="GtkStack" id="stack1">
+              <object class="GtkStack">
                 <property name="visible">True</property>
                 <property name="margin-start">24</property>
                 <property name="margin-end">24</property>
                 <child>
-                  <object class="GtkBox" id="box5">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <property name="valign">center</property>
                     <child>
-                      <object class="GtkLabel" id="title_label">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="single-line-mode">True</property>
                         <property name="ellipsize">end</property>
+                        <property name="label" bind-source="Gjs_MainWindow"
+                                  bind-property="title" bind-flags="sync-create"/>
                         <style>
                           <class name="title"/>
                         </style>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="subtitle_label">
-                        <property name="visible">True</property>
+                      <object class="GtkLabel">
+                        <property name="visible" bind-source="Gjs_MainWindow"
+                                  bind-property="subtitle-visible"
+                                  bind-flags="sync-create"/>
                         <property name="single-line-mode">True</property>
                         <property name="ellipsize">end</property>
                         <property name="use-markup">True</property>
+                        <property name="label" bind-source="Gjs_MainWindow"
+                                  bind-property="subtitle" bind-flags="sync-create"/>
                         <style>
                           <class name="subtitle"/>
                           <class name="dim-label"/>
@@ -158,7 +164,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkToggleButton" id="show_user_list_button">
+              <object class="GtkToggleButton" id="showUserListButton">
                 <property name="visible">True</property>
                 <property name="focus-on-click">False</property>
                 <property name="action-name">app.user-list</property>
@@ -179,12 +185,12 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <child>
-          <object class="GtkRevealer" id="room_list_revealer">
+          <object class="GtkRevealer" id="roomListRevealer">
             <property name="visible">True</property>
             <property name="hexpand">False</property>
             <property name="transition-type">slide-right</property>
             <child>
-              <object class="Gjs_FixedSizeFrame" id="room_sidebar">
+              <object class="Gjs_FixedSizeFrame" id="roomSidebar">
                 <property name="visible">True</property>
                 <property name="hexpand">False</property>
                 <property name="width">200</property>
@@ -218,7 +224,7 @@
             <property name="visible">True</property>
             <property name="vexpand">True</property>
             <child>
-              <object class="Gjs_RoomStack" id="room_stack">
+              <object class="Gjs_RoomStack" id="roomStack">
                 <property name="visible">True</property>
                 <property name="homogeneous">True</property>
                 <property name="transition-type">crossfade</property>
@@ -228,12 +234,11 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkSizeGroup" id="left_side_size_group">
-      <property name="mode">horizontal</property>
+  </template>
+  <object class="GtkSizeGroup">
       <widgets>
-        <widget name="titlebar_left"/>
-        <widget name="room_sidebar"/>
+        <widget name="titlebarLeft"/>
+        <widget name="roomSidebar"/>
       </widgets>
   </object>
 </interface>

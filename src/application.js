@@ -135,18 +135,18 @@ const Application = new Lang.Class({
 
     vfunc_activate: function() {
         if (!this._window) {
-            this._window = new MainWindow.MainWindow(this);
-            this._window.window.connect('destroy', Lang.bind(this,
+            this._window = new MainWindow.MainWindow({ application: this });
+            this._window.connect('destroy', Lang.bind(this,
                 function() {
                     for (let id in this._pendingRequests)
                         this._pendingRequests[id].cancellable.cancel();
                     this.emitJS('prepare-shutdown');
             }));
-            this._window.window.show_all();
+            this._window.show_all();
 
             this._chatroomManager.lateInit();
         }
-        this._window.window.present();
+        this._window.present();
     },
 
     _updateAccountAction: function(action) {
@@ -445,7 +445,7 @@ const Application = new Lang.Class({
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
         let dialog = new Connections.ConnectionDetailsDialog(account);
-        dialog.transient_for = this._window.window;
+        dialog.transient_for = this._window;
         dialog.connect('response', Lang.bind(this,
             function(w, response) {
                 w.destroy();
@@ -488,7 +488,7 @@ const Application = new Lang.Class({
             website_label: _("Learn more about Polari"),
             website: 'https://wiki.gnome.org/Apps/Polari',
 
-            transient_for: this._window.window,
+            transient_for: this._window,
             modal: true
         };
 
@@ -501,7 +501,7 @@ const Application = new Lang.Class({
     },
 
     _onQuit: function() {
-        this._window.window.destroy();
+        this._window.destroy();
     }
 });
 Utils.addJSSignalMethods(Application.prototype);

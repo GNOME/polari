@@ -92,8 +92,36 @@ const FixedSizeFrame = new Lang.Class({
 
 const MainWindow = new Lang.Class({
     Name: 'MainWindow',
+    Extends: Gtk.ApplicationWindow,
+    Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
+    InternalChildren: ['titlebarRight',
+                       'titlebarLeft',
+                       'joinMenuButton',
+                       'showUserListButton',
+                       'userListPopover',
+                       'roomListRevealer',
+                       'overlay',
+                       'roomStack'],
+    Properties: {
+        subtitle: GObject.ParamSpec.string('subtitle',
+                                           'subtitle',
+                                           'subtitle',
+                                           GObject.ParamFlags.READABLE,
+                                           null),
+        'subtitle-visible': GObject.ParamSpec.boolean('subtitle-visible',
+                                                      'subtitle-visible',
+                                                      'subtitle-visible',
+                                                      GObject.ParamFlags.READABLE,
+                                                      false)
+    },
 
-    _init: function(app) {
+    _init: function(params) {
+        this._subtitle = '';
+
+        this.parent(params);
+
+        this._addApplicationStyle();
+
         this._rooms = {};
         this._entries = {};
 
@@ -109,27 +137,32 @@ const MainWindow = new Lang.Class({
         this._isMaximized = false;
         this._isFullscreen = false;
 
-        this._createWidget(app);
+        let app = this.application;
+        this._overlay.add_overlay(app.notificationQueue);
+        this._overlay.add_overlay(app.commandOutputQueue);
 
-        let provider = new Gtk.CssProvider();
-        let uri = 'resource:///org/gnome/Polari/css/application.css';
-        let file = Gio.File.new_for_uri(uri);
-        try {
-            provider.load_from_file(Gio.File.new_for_uri(uri));
-        } catch(e) {
-            logError(e, "Failed to add application style");
-        }
-        Gtk.StyleContext.add_provider_for_screen(
-            this.window.get_screen(),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        );
+        // command output notifications should not pop up over
+        // the input area, but appear to emerge from it, so
+        // set up an appropriate margin
+        this._roomStack.bind_property('entry-area-height',
+                                      app.commandOutputQueue, 'margin-bottom',
+                                      GObject.BindingFlags.SYNC_CREATE);
+
+        // Make sure user-list button is at least as wide as icon buttons
+        this._joinMenuButton.connect('size-allocate', Lang.bind(this,
+            function(w, rect) {
+                let width = rect.width;
+                Mainloop.idle_add(Lang.bind(this, function() {
+                    this._showUserListButton.width_request = width;
+                    return GLib.SOURCE_REMOVE;
+                }));
+            }));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
             function(am) {
                 let accounts = am.dupAccounts();
-                this._revealer.reveal_child = accounts.some(function(a) {
+                this._roomListRevealer.reveal_child = accounts.some(function(a) {
                     return a.enabled;
                 });
             }));
@@ -158,21 +191,29 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._updateDecorations));
         this._updateDecorations();
 
-        this.window.connect('window-state-event',
+        this.connect('window-state-event',
                             Lang.bind(this, this._onWindowStateEvent));
-        this.window.connect('size-allocate',
+        this.connect('size-allocate',
                             Lang.bind(this, this._onSizeAllocate));
-        this.window.connect('delete-event',
+        this.connect('delete-event',
                             Lang.bind(this, this._onDelete));
 
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
-            this.window.set_default_size.apply(this.window, size);
+            this.set_default_size.apply(this, size);
 
         if (this._settings.get_boolean('window-maximized'))
-            this.window.maximize();
+            this.maximize();
 
-        this.window.show_all();
+        this.show_all();
+    },
+
+    get subtitle() {
+        return this._subtitle;
+    },
+
+    get subtitle_visible() {
+        return this._subtitle.length > 0;
     },
 
     _onWindowStateEvent: function(widget, event) {
@@ -184,7 +225,7 @@ const MainWindow = new Lang.Class({
 
     _onSizeAllocate: function(widget, allocation) {
         if (!this._isFullscreen && !this._isMaximized)
-            this._currentSize = this.window.get_size(this);
+            this._currentSize = this.get_size(this);
     },
 
     _onDelete: function(widget, event) {
@@ -237,54 +278,29 @@ const MainWindow = new Lang.Class({
                                Lang.bind(this, this._updateUserListLabel));
     },
 
-    _createWidget: function(app) {
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/ui/main-window.ui');
-
-        this.window = builder.get_object('main_window');
-        this.window.application = app;
-
-        let overlay = builder.get_object('overlay');
-        overlay.add_overlay(app.notificationQueue);
-        overlay.add_overlay(app.commandOutputQueue);
-
-        this._titlebarRight = builder.get_object('titlebar_right');
-        this._titlebarLeft = builder.get_object('titlebar_left');
-
-        this._titleLabel = builder.get_object('title_label');
-        this._subtitleLabel = builder.get_object('subtitle_label');
-
-        this._joinMenuButton = builder.get_object('join_menu_button');
-        this._showUserListButton = builder.get_object('show_user_list_button');
-        this._userListPopover = builder.get_object('user_list_popover');
-        this._revealer = builder.get_object('room_list_revealer');
-
-        // command output notifications should not pop up over
-        // the input area, but appear to emerge from it, so
-        // set up an appropriate margin
-        let roomStack = builder.get_object('room_stack');
-        roomStack.bind_property('entry-area-height',
-                                app.commandOutputQueue, 'margin-bottom',
-                                GObject.BindingFlags.SYNC_CREATE);
-
-        // Make sure user-list button is at least as wide as icon buttons
-        this._joinMenuButton.connect('size-allocate', Lang.bind(this,
-            function(w, rect) {
-                let width = rect.width;
-                Mainloop.idle_add(Lang.bind(this, function() {
-                    this._showUserListButton.width_request = width;
-                    return GLib.SOURCE_REMOVE;
-                }));
-            }));
+    _addApplicationStyle: function() {
+        let provider = new Gtk.CssProvider();
+        let uri = 'resource:///org/gnome/Polari/css/application.css';
+        let file = Gio.File.new_for_uri(uri);
+        try {
+            provider.load_from_file(Gio.File.new_for_uri(uri));
+        } catch(e) {
+            logError(e, "Failed to add application style");
+        }
+        Gtk.StyleContext.add_provider_for_screen(
+            this.get_screen(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        );
     },
 
     showJoinRoomDialog: function() {
-        let dialog = new JoinDialog.JoinDialog({ transient_for: this.window });
+        let dialog = new JoinDialog.JoinDialog({ transient_for: this });
         dialog.show();
     },
 
     showMessageUserDialog: function() {
-        let dialog = new MessageDialog.MessageDialog({ transient_for: this.window });
+        let dialog = new MessageDialog.MessageDialog({ transient_for: this });
         dialog.show();
     },
 
@@ -317,9 +333,13 @@ const MainWindow = new Lang.Class({
             }
             subtitle += GLib.markup_escape_text(this._room.topic.substr(pos), -1);
         }
-        this._subtitleLabel.label = subtitle;
-        this._subtitleLabel.visible = subtitle.length > 0;
 
-        this._titleLabel.label = this._room ? this._room.display_name : null;
+        if (this._subtitle != subtitle) {
+            this._subtitle = subtitle;
+            this.notify('subtitle');
+            this.notify('subtitle-visible');
+        }
+
+        this.title = this._room ? this._room.display_name : null;
     }
 });
