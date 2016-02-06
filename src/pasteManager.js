@@ -306,7 +306,7 @@ const UploadNotification = new Lang.Class({
         let label = new Gtk.Label({ label: _("Uploading %s").format(content) });
         this._grid.add(label);
 
-        this.widget.add(this._grid);
-        this.widget.show_all();
+        this.add(this._grid);
+        this.show_all();
     }
 });

@@ -4,7 +4,6 @@ const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
-const Signals = imports.signals;
 
 const UNDO_TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
@@ -12,28 +11,29 @@ const COMMAND_OUTPUT_REVEAL_TIME = 3;
 const AppNotification = new Lang.Class({
     Name: 'AppNotification',
     Abstract: true,
+    Extends: Gtk.Revealer,
 
     _init: function() {
-        this.widget = new Gtk.Revealer({ reveal_child: true });
-        this.widget.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
-
-        this.widget.connect('notify::child-revealed',
-                            Lang.bind(this, this._onChildRevealed));
+        this.parent({ reveal_child: true,
+                      transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN });
+        this.connect('notify::child-revealed',
+                     Lang.bind(this, this._onChildRevealed));
     },
 
     close: function() {
-        this.widget.reveal_child = false;
+        this.reveal_child = false;
     },
 
     _onChildRevealed: function() {
-        if (!this.widget.child_revealed)
-            this.widget.destroy();
+        if (!this.child_revealed)
+            this.destroy();
     }
 });
 
 const UndoNotification = new Lang.Class({
     Name: 'UndoNotification',
     Extends: AppNotification,
+    Signals: { undo: {}, closed: {} },
 
     _init: function(label) {
         this.parent();
@@ -58,8 +58,8 @@ const UndoNotification = new Lang.Class({
         closeButton.connect('clicked', Lang.bind(this, this.close));
         box.add(closeButton);
 
-        this.widget.add(box);
-        this.widget.show_all();
+        this.add(box);
+        this.show_all();
     },
 
     close: function() {
@@ -67,7 +67,6 @@ const UndoNotification = new Lang.Class({
         this.parent();
     }
 });
-Signals.addSignalMethods(UndoNotification.prototype);
 
 const CommandOutputNotification = new Lang.Class({
     Name: 'CommandOutputNotification',
@@ -77,7 +76,7 @@ const CommandOutputNotification = new Lang.Class({
     _init: function() {
         this.parent();
 
-        this.widget.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+        this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         Mainloop.timeout_add_seconds(COMMAND_OUTPUT_REVEAL_TIME,
                                      Lang.bind(this, this.close));
     }
@@ -93,8 +92,8 @@ const SimpleOutput = new Lang.Class({
         let label = new Gtk.Label({ label: text,
                                     vexpand: true,
                                     visible: true });
-        this.widget.add(label);
-        this.widget.show_all();
+        this.add(label);
+        this.show_all();
     }
 });
 
@@ -125,38 +124,37 @@ const GridOutput = new Lang.Class({
              }
             row++;
         }
-        this.widget.add(grid);
-        this.widget.show_all();
+        this.add(grid);
+        this.show_all();
     }
 });
 
 const NotificationQueue = new Lang.Class({
     Name: 'NotificationQueue',
+    Extends: Gtk.Frame,
 
     _init: function() {
-        this.widget = new Gtk.Frame({ valign: Gtk.Align.START,
-                                      halign: Gtk.Align.CENTER,
-                                      margin_start: 24,
-                                      margin_end: 24,
-                                      no_show_all: true });
-        this.widget.get_style_context().add_class('app-notification');
+        this.parent({ valign: Gtk.Align.START,
+                      halign: Gtk.Align.CENTER,
+                      margin_start: 24, margin_end: 24,
+                      no_show_all: true });
+        this.get_style_context().add_class('app-notification');
 
         this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                     row_spacing: 6, visible: true });
-        this.widget.add(this._grid);
+        this.add(this._grid);
     },
 
     addNotification: function(notification) {
-        this._grid.add(notification.widget);
+        this._grid.add(notification);
 
-        notification.widget.connect('destroy',
-                                    Lang.bind(this, this._onChildDestroy));
-        this.widget.show();
+        notification.connect('destroy', Lang.bind(this, this._onChildDestroy));
+        this.show();
     },
 
     _onChildDestroy: function() {
         if (this._grid.get_children().length == 0)
-           this.widget.hide();
+           this.hide();
     }
 });
 
@@ -167,7 +165,7 @@ const CommandOutputQueue = new Lang.Class({
     _init: function() {
         this.parent();
 
-        this.widget.valign = Gtk.Align.END;
-        this.widget.get_style_context().add_class('irc-feedback');
+        this.valign = Gtk.Align.END;
+        this.get_style_context().add_class('irc-feedback');
     }
 });

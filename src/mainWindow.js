@@ -245,8 +245,8 @@ const MainWindow = new Lang.Class({
         this.window.application = app;
 
         let overlay = builder.get_object('overlay');
-        overlay.add_overlay(app.notificationQueue.widget);
-        overlay.add_overlay(app.commandOutputQueue.widget);
+        overlay.add_overlay(app.notificationQueue);
+        overlay.add_overlay(app.commandOutputQueue);
 
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
@@ -264,7 +264,7 @@ const MainWindow = new Lang.Class({
         // set up an appropriate margin
         let roomStack = builder.get_object('room_stack');
         roomStack.bind_property('entry-area-height',
-                                app.commandOutputQueue.widget, 'margin-bottom',
+                                app.commandOutputQueue, 'margin-bottom',
                                 GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
