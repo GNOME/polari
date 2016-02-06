@@ -62,6 +62,13 @@ const EntryArea = new Lang.Class({
                        'multiLineLabel',
                        'cancelButton',
                        'pasteButton'],
+    Properties: {
+        'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
+                                                 'max-nick-chars',
+                                                 'max-nick-chars',
+                                                 GObject.ParamFlags.WRITABLE,
+                                                 0, GLib.MAXUINT32, 0)
+    },
 
     _init: function(params) {
         this._room = params.room;
@@ -137,7 +144,7 @@ const EntryArea = new Lang.Class({
         this._chatEntry.connect('unmap', Lang.bind(this, this._updateCompletions));
     },
 
-    set maxNickChars(maxChars) {
+    set max_nick_chars(maxChars) {
         this._maxNickChars = maxChars;
         this._updateNick();
     },

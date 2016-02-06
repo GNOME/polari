@@ -216,14 +216,59 @@ const ButtonTag = new Lang.Class({
 
 const ChatView = new Lang.Class({
     Name: 'ChatView',
+    Extends: Gtk.ScrolledWindow,
+    Properties: {
+        'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
+                                                 'max-nick-chars',
+                                                 'max-nick-chars',
+                                                 GObject.ParamFlags.READABLE,
+                                                 0, GLib.MAXUINT32, 0)
+    },
 
     _init: function(room) {
-        this._createWidget();
+        this.parent({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
+
+        this._view = new TextView({ editable: false, cursor_visible: false,
+                                    wrap_mode: Gtk.WrapMode.WORD_CHAR,
+                                    right_margin: MARGIN });
+        this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
+                              Gdk.EventMask.ENTER_NOTIFY_MASK);
+        this.add(this._view);
+        this.show_all();
+
         this._createTags();
 
-        this.widget.connect('style-updated',
-                            Lang.bind(this, this._onStyleUpdated));
+        this.connect('style-updated',
+                     Lang.bind(this, this._onStyleUpdated));
         this._onStyleUpdated();
+
+        this.connect('screen-changed',
+                     Lang.bind(this, this._updateIndent));
+        this.connect('map', Lang.bind(this, this._updateActive));
+        this.connect('unmap', Lang.bind(this, this._updateActive));
+        this.connect('parent-set',
+                     Lang.bind(this, this._updateToplevel));
+        this.connect('state-flags-changed',
+                     Lang.bind(this, this._updateToplevel));
+        this.connect('scroll-event', Lang.bind(this, this._onScroll));
+
+        this.vadjustment.connect('value-changed',
+                                 Lang.bind(this, this._onValueChanged));
+        this.vadjustment.connect('changed',
+                                 Lang.bind(this, this._updateScroll));
+
+        this._view.connect('key-press-event', Lang.bind(this, this._onKeyPress));
+        this._view.connect('motion-notify-event',
+                           Lang.bind(this, this._handleButtonTagsHover));
+        this._view.connect('enter-notify-event',
+                           Lang.bind(this, this._handleButtonTagsHover));
+        this._view.connect('leave-notify-event',
+                           Lang.bind(this, this._handleButtonTagsHover));
+        /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
+           the default handler calls pango_cairo_context_set_resolution(), so
+           update the indent after that */
+        this._view.connect_after('style-updated',
+                                 Lang.bind(this, this._updateIndent));
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
@@ -256,7 +301,7 @@ const ChatView = new Lang.Class({
         this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
                                          Lang.bind(this, this._onLogEventsReady));
 
-        let adj = this.widget.vadjustment;
+        let adj = this.vadjustment;
         this._scrollBottom = adj.upper - adj.page_size;
 
         this._app = Gio.Application.get_default();
@@ -326,7 +371,7 @@ const ChatView = new Lang.Class({
     },
 
     _onStyleUpdated: function() {
-        let context = this.widget.get_style_context();
+        let context = this.get_style_context();
         context.save();
         context.add_class('dim-label');
         context.set_state(Gtk.StateFlags.NORMAL);
@@ -386,50 +431,9 @@ const ChatView = new Lang.Class({
         }));
     },
 
-    _createWidget: function() {
-        this.widget = new Gtk.ScrolledWindow({ vexpand: true });
-        this.widget.hscrollbar_policy = Gtk.PolicyType.NEVER;
+    vfunc_destroy: function() {
+        this.parent();
 
-        this._view = new TextView({ editable: false, cursor_visible: false,
-                                    visible: true,
-                                    wrap_mode: Gtk.WrapMode.WORD_CHAR,
-                                    right_margin: MARGIN });
-
-        this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK);
-        this._view.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK);
-
-        this.widget.add(this._view);
-        this.widget.show_all();
-
-        this.widget.connect('destroy', Lang.bind(this, this._onDestroy));
-        this.widget.connect('screen-changed',
-                            Lang.bind(this, this._updateIndent));
-        this.widget.connect('map', Lang.bind(this, this._updateActive));
-        this.widget.connect('unmap', Lang.bind(this, this._updateActive));
-        this.widget.connect('parent-set',
-                            Lang.bind(this, this._updateToplevel));
-        this.widget.connect('state-flags-changed',
-                            Lang.bind(this, this._updateToplevel));
-        this.widget.connect('scroll-event', Lang.bind(this ,this._onScroll));
-        this.widget.vadjustment.connect('value-changed',
-                                        Lang.bind(this, this._onValueChanged));
-        this.widget.vadjustment.connect('changed',
-                                 Lang.bind(this, this._updateScroll));
-        this._view.connect('key-press-event', Lang.bind(this, this._onKeyPress));
-        this._view.connect('motion-notify-event',
-                           Lang.bind(this, this._handleButtonTagsHover));
-        this._view.connect('enter-notify-event',
-                           Lang.bind(this, this._handleButtonTagsHover));
-        this._view.connect('leave-notify-event',
-                           Lang.bind(this, this._handleButtonTagsHover));
-        /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
-           the default handler calls pango_cairo_context_set_resolution(), so
-           update the indent after that */
-        this._view.connect_after('style-updated',
-                                 Lang.bind(this, this._updateIndent));
-    },
-
-    _onDestroy: function() {
         for (let i = 0; i < this._channelSignals.length; i++)
             this._channel.disconnect(this._channelSignals[i]);
         this._channelSignals = [];
@@ -505,7 +509,7 @@ const ChatView = new Lang.Class({
         return Object.keys(this._pending).length;
     },
 
-    get maxNickChars() {
+    get max_nick_chars() {
         return this._maxNickChars;
     },
 
@@ -514,7 +518,7 @@ const ChatView = new Lang.Class({
             return;
 
         this._maxNickChars = length;
-        this.emit('max-nick-chars-changed');
+        this.notify('max-nick-chars');
         this._updateIndent();
     },
 
@@ -535,7 +539,7 @@ const ChatView = new Lang.Class({
     },
 
     _updateActive: function() {
-        let active = this.widget.get_mapped();
+        let active = this.get_mapped();
         if (this._active == active)
             return;
         this._active = active;
@@ -543,7 +547,7 @@ const ChatView = new Lang.Class({
     },
 
     _updateToplevel: function() {
-        let flags = this.widget.get_state_flags();
+        let flags = this.get_state_flags();
         let toplevelFocus = !(flags & Gtk.StateFlags.BACKDROP);
         if (this._toplevelFocus == toplevelFocus)
             return;
@@ -552,7 +556,7 @@ const ChatView = new Lang.Class({
     },
 
     _updateScroll: function() {
-        let adj = this.widget.vadjustment;
+        let adj = this.vadjustment;
         if (adj.value == this._scrollBottom) {
             if (this._nPending == 0) {
                 this._view.emit('move-cursor',
@@ -591,7 +595,7 @@ const ChatView = new Lang.Class({
     },
 
     _fetchBacklog: function() {
-        if (this.widget.vadjustment.value != 0 ||
+        if (this.vadjustment.value != 0 ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
 
@@ -1259,4 +1263,3 @@ const ChatView = new Lang.Class({
             buffer.apply_tag(tags[i], start, iter);
     }
 });
-Signals.addSignalMethods(ChatView.prototype);

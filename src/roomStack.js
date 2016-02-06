@@ -90,7 +90,7 @@ const ChatPlaceholder = new Lang.Class({
                                       margin_end: 14 });
 
         let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
-                                      margin_start: 14 });
+                                    margin_start: 14 });
         title.label = '<span letter_spacing="4500">%s</span>'.format(_("Polari"));
         title.get_style_context().add_class('polari-background-title');
 
@@ -124,16 +124,15 @@ const RoomView = new Lang.Class({
         this.parent({ orientation: Gtk.Orientation.VERTICAL });
 
         this._view = new ChatView.ChatView(room);
-        this.add(this._view.widget);
+        this.add(this._view);
 
         this._entryArea = new EntryArea.EntryArea({ room: room,
                                                     sensitive: false });
         this.add(this._entryArea);
 
-        this._view.connect('max-nick-chars-changed', Lang.bind(this,
-            function() {
-                this._entryArea.maxNickChars = this._view.maxNickChars;
-            }));
+        this._view.bind_property('max-nick-chars',
+                                 this._entryArea, 'max-nick-chars',
+                                 GObject.BindingFlags.SYNC_CREATE);
         sizeGroup.add_widget(this._entryArea);
 
         this.show_all();
