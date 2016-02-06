@@ -284,9 +284,8 @@ const MainWindow = new Lang.Class({
     },
 
     showMessageUserDialog: function() {
-        let dialog = new MessageDialog.MessageDialog();
-        dialog.widget.transient_for = this.window;
-        dialog.widget.show();
+        let dialog = new MessageDialog.MessageDialog({ transient_for: this.window });
+        dialog.show();
     },
 
     _updateUserListLabel: function() {

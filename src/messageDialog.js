@@ -13,9 +13,18 @@ const MAX_RECENT_USERS = 5;
 
 const MessageDialog = new Lang.Class({
     Name: 'MessageDialog',
+    Extends: Gtk.Dialog,
+    Template: 'resource:///org/gnome/Polari/ui/message-user-dialog.ui',
 
-    _init: function() {
-        this._createWidget();
+    InternalChildren: ['messageButton',
+                       'connectionCombo',
+                       'recentList',
+                       'nameEntry',
+                       'nameCompletion'],
+
+    _init: function(params) {
+        params['use-header-bar'] = 1;
+        this.parent(params);
 
         this._accounts = {};
         this._roomManager = ChatroomManager.getDefault();
@@ -35,6 +44,17 @@ const MessageDialog = new Lang.Class({
             this._connectionCombo.append_text(names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
+        this._connectionCombo.connect('changed',
+                                      Lang.bind(this, this._onAccountChanged));
+
+        this._recentList.connect('row-activated', Lang.bind(this,
+            function(w, row) {
+                this._nameEntry.text = row.name;
+            }));
+
+        this._nameEntry.connect('changed',
+                                Lang.bind(this, this._updateCanConfirm));
+
         let activeRoom = this._roomManager.getActiveRoom();
         let activeIndex = 0;
         if(activeRoom)
@@ -46,38 +66,12 @@ const MessageDialog = new Lang.Class({
 
         this._nameEntry.grab_focus();
 
-        this.widget.connect('response', Lang.bind(this,
+        this.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
                     this._onMessageClicked();
-                this.widget.destroy();
+                this.destroy();
             }));
-    },
-
-    _createWidget: function() {
-        let builder = new Gtk.Builder();
-        builder.add_from_resource('/org/gnome/Polari/ui/message-user-dialog.ui');
-
-        this.widget = builder.get_object('message_user_dialog');
-
-        this._connectionCombo = builder.get_object('connection_combo');
-        this._connectionCombo.connect('changed',
-                                      Lang.bind(this, this._onAccountChanged));
-        this._connectionCombo.sensitive = false;
-
-        this._recentList = builder.get_object('recent_list');
-        this._recentList.connect('row-activated', Lang.bind(this,
-            function(w, row) {
-                this._nameEntry.text = row.name;
-            }));
-        this._nameCompletion = builder.get_object('name_completion');
-
-        this._messageButton = builder.get_object('message_button');
-        this._messageButton.sensitive = false;
-
-        this._nameEntry = builder.get_object('name_entry');
-        this._nameEntry.connect('changed',
-                                Lang.bind(this, this._updateCanConfirm));
     },
 
     _updateRecentList: function(names) {
@@ -163,7 +157,7 @@ const MessageDialog = new Lang.Class({
     },
 
     _onMessageClicked: function() {
-        this.widget.hide();
+        this.hide();
 
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
@@ -183,7 +177,7 @@ const MessageDialog = new Lang.Class({
             let sensitive = this._connectionCombo.get_active() > -1  &&
                             this._nameEntry.get_text_length() > 0;
             this._messageButton.sensitive = sensitive;
-            this.widget.set_default_response(sensitive ? Gtk.ResponseType.OK
-                                                       : Gtk.ResponseType.NONE);
+            this.set_default_response(sensitive ? Gtk.ResponseType.OK
+                                                : Gtk.ResponseType.NONE);
     }
 });

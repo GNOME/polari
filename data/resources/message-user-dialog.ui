@@ -6,7 +6,7 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkEntryCompletion" id="name_completion">
+  <object class="GtkEntryCompletion" id="nameCompletion">
     <property name="model">liststore</property>
     <property name="text-column">0</property>
     <property name="inline-completion">True</property>
@@ -18,11 +18,10 @@
       </attributes>
     </child>
   </object>
-  <object class="GtkDialog" id="message_user_dialog">
+  <template class="Gjs_MessageDialog">
     <property name="modal">True</property>
-    <property name="use-header-bar">1</property>
     <child type="action">
-      <object class="GtkButton" id="cancel_button">
+      <object class="GtkButton" id="cancelButton">
         <property name="label" translatable="yes">_Cancel</property>
         <property name="visible">True</property>
         <property name="receives-default">True</property>
@@ -30,13 +29,14 @@
       </object>
     </child>
     <child type="action">
-      <object class="GtkButton" id="message_button">
+      <object class="GtkButton" id="messageButton">
         <property name="label" translatable="yes">_Message</property>
         <property name="visible">True</property>
         <property name="can-default">True</property>
         <property name="has-default">True</property>
         <property name="receives-default">True</property>
         <property name="use-underline">True</property>
+        <property name="sensitive">False</property>
       </object>
     </child>
     <child internal-child="vbox">
@@ -56,29 +56,30 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="connection_label">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">C_onnection</property>
                 <property name="use-underline">True</property>
-                <property name="mnemonic-widget">connection_combo</property>
+                <property name="mnemonic-widget">connectionCombo</property>
               </object>
             </child>
             <child>
-              <object class="GtkComboBoxText" id="connection_combo">
+              <object class="GtkComboBoxText" id="connectionCombo">
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
+                <property name="sensitive">False</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="recent_label">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="margin-top">24</property>
                 <property name="label" translatable="yes">_Recent</property>
                 <property name="use-underline">True</property>
-                <property name="mnemonic-widget">recent_list</property>
+                <property name="mnemonic-widget">recentList</property>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -91,7 +92,7 @@
                 <property name="margin-top">24</property>
                 <property name="shadow-type">in</property>
                 <child>
-                  <object class="GtkListBox" id="recent_list">
+                  <object class="GtkListBox" id="recentList">
                     <property name="visible">True</property>
                     <property name="selection-mode">none</property>
                   </object>
@@ -103,12 +104,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="name_label">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="label" translatable="yes">_Name</property>
                 <property name="use-underline">True</property>
-                <property name="mnemonic-widget">name_entry</property>
+                <property name="mnemonic-widget">nameEntry</property>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -116,10 +117,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="name_entry">
+              <object class="GtkEntry" id="nameEntry">
                 <property name="visible">True</property>
                 <property name="activates-default">True</property>
-                <property name="completion">name_completion</property>
+                <property name="completion">nameCompletion</property>
               </object>
               <packing>
                 <property name="left-attach">2</property>
@@ -131,8 +132,8 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="cancel">cancel_button</action-widget>
-      <action-widget response="ok">message_button</action-widget>
+      <action-widget response="cancel">cancelButton</action-widget>
+      <action-widget response="ok">messageButton</action-widget>
     </action-widgets>
-  </object>
+  </template>
 </interface>
