@@ -21,8 +21,6 @@ const JoinDialog = new Lang.Class({
     _init: function() {
         this._createWidget();
 
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._roomManager = ChatroomManager.getDefault();
 
