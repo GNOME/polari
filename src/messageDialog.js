@@ -17,8 +17,6 @@ const MessageDialog = new Lang.Class({
     _init: function() {
         this._createWidget();
 
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-
         this._accounts = {};
         this._roomManager = ChatroomManager.getDefault();
 
