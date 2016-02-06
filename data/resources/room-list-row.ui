@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="Gjs_RoomRow" parent="GtkListBoxRow">
+    <property name="visible">True</property>
+    <property name="margin-bottom">4</property>
+    <property name="focus-on-click">False</property>
+    <child>
+      <object class="GtkEventBox" id="eventBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="margin-start">8</property>
+            <property name="margin-end">8</property>
+            <property name="margin-top">2</property>
+            <property name="margin-bottom">2</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkImage" id="icon">
+                <property name="visible">True</property>
+                <property name="valign">baseline</property>
+                <property name="icon-size">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="roomLabel">
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+                <property name="valign">baseline</property>
+                <property name="hexpand">True</property>
+                <property name="ellipsize">end</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkAspectFrame">
+                <property name="visible">True</property>
+                <property name="shadow-type">none</property>
+                <property name="obey-child">False</property>
+                <child>
+                  <object class="GtkLabel" id="counter">
+                    <property name="visible">True</property>
+                    <property name="width-chars">2</property>
+                    <style>
+                      <class name="pending-messages-count"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

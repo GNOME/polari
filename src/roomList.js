@@ -20,20 +20,23 @@ function _onPopoverVisibleChanged(popover) {
 
 const RoomRow = new Lang.Class({
     Name: 'RoomRow',
+    Extends: Gtk.ListBoxRow,
+    Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
+    InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter'],
 
     _init: function(room) {
-        this._createWidget(room.icon);
+        this.parent();
 
-        let app = Gio.Application.get_default();
-        this.widget.room = room;
-        this.widget.account = room.account;
-
+        this._room = room;
         this._popover = null;
 
+        this._icon.gicon = room.icon;
+        this._icon.visible = room.icon != null;
+
         this._eventBox.connect('button-release-event',
-                            Lang.bind(this, this._onButtonRelease));
-        this.widget.connect('key-press-event',
-                            Lang.bind(this, this._onKeyPress));
+                               Lang.bind(this, this._onButtonRelease));
+        this.connect('key-press-event',
+                     Lang.bind(this, this._onKeyPress));
 
         room.connect('notify::channel', Lang.bind(this,
             function() {
@@ -50,13 +53,21 @@ const RoomRow = new Lang.Class({
         this._updatePending();
     },
 
+    get room() {
+        return this._room;
+    },
+
+    get account() {
+        return this._room.account;
+    },
+
     selected: function() {
-        if (!this.widget.room.channel)
+        if (!this._room.channel)
             this._updatePending();
     },
 
     _updatePending: function() {
-        let room = this.widget.room;
+        let room = this._room;
 
         let pending;
         let numPendingHighlights;
@@ -77,7 +88,7 @@ const RoomRow = new Lang.Class({
         this._counter.label = numPendingHighlights.toString();
         this._counter.opacity = numPendingHighlights > 0 ? 1. : 0.;
 
-        let context = this.widget.get_style_context();
+        let context = this.get_style_context();
         if (pending.length == 0)
             context.add_class('inactive');
         else
@@ -109,53 +120,16 @@ const RoomRow = new Lang.Class({
 
     _showPopover: function() {
         if (!this._popover) {
-            let room = this.widget.room;
             let menu = new Gio.Menu();
-            menu.append(room.type == Tp.HandleType.ROOM ? _("Leave chatroom")
-                                                        : _("End conversation"),
-                        'app.leave-room(("%s", ""))'.format(room.id));
+            let isRoom = this._room.type == Tp.HandleType.ROOM;
+            menu.append(isRoom ? _("Leave chatroom") : _("End conversation"),
+                        'app.leave-room(("%s", ""))'.format(this._room.id));
 
-            this._popover = Gtk.Popover.new_from_model(this.widget, menu);
+            this._popover = Gtk.Popover.new_from_model(this, menu);
             this._popover.connect('notify::visible', _onPopoverVisibleChanged);
             this._popover.position = Gtk.PositionType.BOTTOM;
         }
         this._popover.show();
-    },
-
-    _createWidget: function(gicon) {
-        this.widget = new Gtk.ListBoxRow({ margin_bottom: 4,
-                                           focus_on_click: false });
-
-        this._eventBox = new Gtk.EventBox();
-        this.widget.add(this._eventBox);
-
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                margin_start: 8, margin_end: 8,
-                                margin_top: 2, margin_bottom: 2, spacing: 6 });
-        this._eventBox.add(box);
-
-        if (gicon) {
-            let icon = new Gtk.Image({ gicon: gicon,
-                                       icon_size: Gtk.IconSize.MENU,
-                                       valign: Gtk.Align.BASELINE });
-            box.add(icon);
-        }
-
-        this._roomLabel = new Gtk.Label({ hexpand: true,
-                                          ellipsize: Pango.EllipsizeMode.END,
-                                          halign: Gtk.Align.START,
-                                          valign: Gtk.Align.BASELINE });
-        box.add(this._roomLabel);
-
-        let frame = new Gtk.AspectFrame({ obey_child: false,
-                                          shadow_type: Gtk.ShadowType.NONE });
-        box.add(frame);
-
-        this._counter = new Gtk.Label({ width_chars: 2 });
-        this._counter.get_style_context().add_class('pending-messages-count');
-        frame.add(this._counter);
-
-        this.widget.show_all();
     }
 });
 
@@ -408,7 +382,7 @@ const RoomList = new Lang.Class({
 
     _onLeaveActivated: function(action, param) {
         let [id, ] = param.deep_unpack();
-        let row = this._roomRows[id].widget;
+        let row = this._roomRows[id];
 
         this._moveSelectionFromRow(row);
         row.hide();
@@ -450,7 +424,7 @@ const RoomList = new Lang.Class({
             return;
 
         let activeRoom = this._roomManager.getActiveRoom();
-        let current = this._roomRows[activeRoom.id].widget;
+        let current = this._roomRows[activeRoom.id];
 
         if (current != row)
             return;
@@ -502,11 +476,11 @@ const RoomList = new Lang.Class({
     },
 
     _roomAdded: function(roomManager, room) {
-        let roomRow = new RoomRow(room);
-        this.widget.add(roomRow.widget);
-        this._roomRows[room.id] = roomRow;
+        let row = new RoomRow(room);
+        this.widget.add(row);
+        this._roomRows[room.id] = row;
 
-        roomRow.widget.connect('destroy', Lang.bind(this,
+        row.connect('destroy', Lang.bind(this,
             function(w) {
                 delete this._roomRows[w.room.id];
             }));
@@ -514,12 +488,12 @@ const RoomList = new Lang.Class({
     },
 
     _roomRemoved: function(roomManager, room) {
-        let roomRow = this._roomRows[room.id];
-        if (!roomRow)
+        let row = this._roomRows[room.id];
+        if (!row)
             return;
 
-        this._moveSelectionFromRow(roomRow.widget);
-        roomRow.widget.destroy();
+        this._moveSelectionFromRow(row);
+        row.destroy();
         delete this._roomRows[room.id];
         this._updatePlaceholderVisibility(room.account);
     },
@@ -533,7 +507,7 @@ const RoomList = new Lang.Class({
         let ids = Object.keys(this._roomRows);
         let hasRooms = ids.some(Lang.bind(this,
             function(id) {
-                return this._roomRows[id].widget.account == account;
+                return this._roomRows[id].account == account;
             }));
         this._placeholders[account].visible = !hasRooms;
     },
@@ -541,11 +515,10 @@ const RoomList = new Lang.Class({
     _activeRoomChanged: function(roomManager, room) {
         if (!room)
             return;
-        let roomRow = this._roomRows[room.id];
-        if (!roomRow)
+        let row = this._roomRows[room.id];
+        if (!row)
             return;
 
-        let row = roomRow.widget;
         row.can_focus = false;
         this.widget.select_row(row);
         row.can_focus = true;
@@ -554,7 +527,7 @@ const RoomList = new Lang.Class({
     _onRowSelected: function(w, row) {
         this._roomManager.setActiveRoom(row ? row.room : null);
         if (row)
-            this._roomRows[row.room.id].selected();
+            row.selected();
     },
 
     _updateHeader: function(row, before) {
