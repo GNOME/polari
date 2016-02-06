@@ -218,7 +218,11 @@
             <property name="visible">True</property>
             <property name="vexpand">True</property>
             <child>
-              <placeholder/>
+              <object class="Gjs_RoomStack" id="room_stack">
+                <property name="visible">True</property>
+                <property name="homogeneous">True</property>
+                <property name="transition-type">crossfade</property>
+              </object>
             </child>
           </object>
         </child>
@@ -230,11 +234,6 @@
       <widgets>
         <widget name="titlebar_left"/>
         <widget name="room_sidebar"/>
-      </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="bottom_size_group">
-      <property name="mode">vertical</property>
-      <widgets>
       </widgets>
   </object>
 </interface>

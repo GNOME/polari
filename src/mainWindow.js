@@ -245,23 +245,8 @@ const MainWindow = new Lang.Class({
         this.window.application = app;
 
         let overlay = builder.get_object('overlay');
-        let sizeGroup = builder.get_object('bottom_size_group');
-        this._roomStack = new RoomStack.RoomStack(sizeGroup);
-        overlay.add(this._roomStack.widget);
-
         overlay.add_overlay(app.notificationQueue.widget);
         overlay.add_overlay(app.commandOutputQueue.widget);
-
-        // command output notifications should not pop up over
-        // the input area, but appear to emerge from it, so
-        // set up an appropriate margin - this relies on the
-        // last widget added to the size group at this point
-        // is the room stack's placeholder entry, which will
-        // never be destroyed
-        sizeGroup.get_widgets()[0].connect('size-allocate',
-            function(w, rect) {
-                app.commandOutputQueue.widget.margin_bottom = rect.height - 1;
-            });
 
         this._titlebarRight = builder.get_object('titlebar_right');
         this._titlebarLeft = builder.get_object('titlebar_left');
@@ -273,6 +258,14 @@ const MainWindow = new Lang.Class({
         this._showUserListButton = builder.get_object('show_user_list_button');
         this._userListPopover = builder.get_object('user_list_popover');
         this._revealer = builder.get_object('room_list_revealer');
+
+        // command output notifications should not pop up over
+        // the input area, but appear to emerge from it, so
+        // set up an appropriate margin
+        let roomStack = builder.get_object('room_stack');
+        roomStack.bind_property('entry-area-height',
+                                app.commandOutputQueue.widget, 'margin-bottom',
+                                GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
         this._joinMenuButton.connect('size-allocate', Lang.bind(this,

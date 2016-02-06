@@ -1,4 +1,6 @@
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 
 const AccountsMonitor = imports.accountsMonitor;
@@ -9,13 +11,20 @@ const Lang = imports.lang;
 
 const RoomStack = new Lang.Class({
     Name: 'RoomStack',
+    Extends: Gtk.Stack,
+    Properties: {
+        'entry-area-height': GObject.ParamSpec.uint('entry-area-height',
+                                                    'entry-area-height',
+                                                    'entry-area-height',
+                                                    GObject.ParamFlags.READABLE,
+                                                    0, GLib.MAXUINT32, 0)
+    },
 
-    _init: function(inputSizeGroup) {
-        this._inputSizeGroup = inputSizeGroup;
+    _init: function(params) {
+        this.parent(params);
 
-        this.widget = new Gtk.Stack({ homogeneous: true,
-                                      transition_type: Gtk.StackTransitionType.CROSSFADE });
-        this.widget.show_all();
+        this._sizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.VERTICAL });
+        this._rooms = {};
 
         this._roomManager = ChatroomManager.getDefault();
 
@@ -28,30 +37,36 @@ const RoomStack = new Lang.Class({
         this._roomManager.connect('active-state-changed',
                                   Lang.bind(this, this._updateSensitivity));
 
-        this._rooms = {};
+        this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
 
-        let placeholder = new ChatPlaceholder(inputSizeGroup);
-        this.widget.add_named(placeholder.widget, 'placeholder');
+        this._entryAreaHeight = 0;
+        this._sizeGroup.get_widgets()[0].connect('size-allocate', Lang.bind(this,
+            function(w, rect) {
+                this._entryAreaHeight = rect.height - 1;
+                this.notify('entry-area-height');
+            }));
+    },
+
+    get entry_area_height() {
+        return this._entryAreaHeight;
     },
 
     _addView: function(id, view) {
         this._rooms[id] = view;
-
-        this._inputSizeGroup.add_widget(view.inputWidget);
-        this.widget.add_named(view.widget, id);
+        this.add_named(view, id);
     },
 
     _roomAdded: function(roomManager, room) {
-        this._addView(room.id, new RoomView(room));
+        this._addView(room.id, new RoomView(room, this._sizeGroup));
     },
 
     _roomRemoved: function(roomManager, room) {
-        this._rooms[room.id].widget.destroy();
+        this._rooms[room.id].destroy();
         delete this._rooms[room.id];
     },
 
     _activeRoomChanged: function(manager, room) {
-        this.widget.set_visible_child_name(room ? room.id : 'placeholder');
+        this.set_visible_child_name(room ? room.id : 'placeholder');
     },
 
     _updateSensitivity: function() {
@@ -65,6 +80,7 @@ const RoomStack = new Lang.Class({
 
 const ChatPlaceholder = new Lang.Class({
     Name: 'ChatPlaceholder',
+    Extends: Gtk.Overlay,
 
     _init: function(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -86,7 +102,7 @@ const ChatPlaceholder = new Lang.Class({
         let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
         sizeGroup.add_widget(inputPlaceholder);
 
-        this.widget = new Gtk.Overlay();
+        this.parent();
         let grid = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
                                   column_spacing: 18, hexpand: true, vexpand: true,
                                   valign: Gtk.Align.CENTER });
@@ -94,33 +110,36 @@ const ChatPlaceholder = new Lang.Class({
         grid.attach(image, 0, 0, 1, 1);
         grid.attach(title, 1, 0, 1, 1);
         grid.attach(description, 0, 1, 2, 1);
-        this.widget.add(grid);
-        this.widget.add_overlay(inputPlaceholder);
-        this.widget.show_all();
+        this.add(grid);
+        this.add_overlay(inputPlaceholder);
+        this.show_all();
     }
 });
 
 const RoomView = new Lang.Class({
     Name: 'RoomView',
+    Extends: Gtk.Box,
 
-    _init: function(room) {
+    _init: function(room, sizeGroup) {
+        this.parent({ orientation: Gtk.Orientation.VERTICAL });
+
         this._view = new ChatView.ChatView(room);
+        this.add(this._view.widget);
+
+        this._entryArea = new EntryArea.EntryArea({ room: room,
+                                                    sensitive: false });
+        this.add(this._entryArea);
+
         this._view.connect('max-nick-chars-changed', Lang.bind(this,
             function() {
-                this.inputWidget.maxNickChars = this._view.maxNickChars;
+                this._entryArea.maxNickChars = this._view.maxNickChars;
             }));
+        sizeGroup.add_widget(this._entryArea);
 
-        this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.widget.add(this._view.widget);
-
-        this.inputWidget = new EntryArea.EntryArea({ room: room,
-                                                     sensitive: false });
-        this.widget.add(this.inputWidget);
-
-        this.widget.show_all();
+        this.show_all();
     },
 
     set inputSensitive(sensitive) {
-        this.inputWidget.sensitive = sensitive;
+        this._entryArea.sensitive = sensitive;
     }
 });
