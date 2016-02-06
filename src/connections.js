@@ -205,32 +205,32 @@ const ConnectionDetails = new Lang.Class({
 
 const ConnectionDetailsDialog = new Lang.Class({
     Name: 'ConnectionDetailsDialog',
+    Extends: Gtk.Dialog,
 
     _init: function(account) {
-        this.widget = new Gtk.Dialog({ title: _("Edit Connection"),
-                                       modal: true,
-                                       destroy_with_parent: true,
-                                       use_header_bar: true });
+        this.parent({ title: _("Edit Connection"),
+                      modal: true,
+                      destroy_with_parent: true,
+                      use_header_bar: 1 });
 
-        this.widget.get_content_area().border_width = 0;
+        this.get_content_area().border_width = 0;
 
-        this.widget.connect('response', Lang.bind(this,
+        this.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
                     this._details.save();
             }));
 
-        this.widget.add_button(_("_Cancel"), Gtk.ResponseType.CANCEL);
+        this.add_button(_("_Cancel"), Gtk.ResponseType.CANCEL);
 
-        this._confirmButton = this.widget.add_button(_("A_pply"),
-                                                     Gtk.ResponseType.OK);
+        this._confirmButton = this.add_button(_("A_pply"), Gtk.ResponseType.OK);
         this._confirmButton.get_style_context().add_class('suggested-action');
 
         this._details = new ConnectionDetails({ account: account });
         this._details.bind_property('can-confirm',
                                     this._confirmButton, 'sensitive',
                                     GObject.BindingFlags.SYNC_CREATE);
-        this.widget.get_content_area().add(this._details);
-        this.widget.set_default_response(Gtk.ResponseType.OK);
+        this.get_content_area().add(this._details);
+        this.set_default_response(Gtk.ResponseType.OK);
     }
 });
