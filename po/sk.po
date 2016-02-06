@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-06 13:51+0000\n"
-"PO-Revision-Date: 2016-02-06 14:57+0100\n"
+"POT-Creation-Date: 2016-02-06 13:58+0000\n"
+"PO-Revision-Date: 2016-02-06 15:00+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -216,7 +216,7 @@ msgstr "_Heslo"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
-msgstr "Vstupiť do miestnosti"
+msgstr "Vstúpiť do miestnosti"
 
 #: ../data/resources/main-window.ui.h:2
 msgid "Message a User"
@@ -512,7 +512,6 @@ msgstr ""
 "/ME <akcia> - odošle akciu zadanú ako argument <akcia> do aktuálneho kanála"
 
 #: ../src/ircParser.js:29
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgstr ""
 "/MSG <prezývka> [<správa>] - odošle súkromnú správu účastníkovi <prezývka>"
@@ -644,7 +643,6 @@ msgid "Connected"
 msgstr "Pripojené"
 
 #: ../src/roomList.js:281
-#| msgid "Connections"
 msgid "Connecting..."
 msgstr "Pripája sa..."
 
@@ -678,7 +676,7 @@ msgstr "Nepodarilo pripojiť k účtu %s."
 
 #: ../src/roomStack.js:80
 msgid "Join a room using the + button."
-msgstr "Použitím tlačidla + vstúpite do miestnosti."
+msgstr "Pomocou tlačidla + vstúpite do miestnosti."
 
 #: ../src/userList.js:178
 #, javascript-format
