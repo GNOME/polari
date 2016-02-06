@@ -564,12 +564,15 @@ const RoomList = new Lang.Class({
         let beforeAccount = getAccount(before);
         let account = getAccount(row);
 
+        let oldHeader = row.get_header();
+
         if (beforeAccount == account) {
-            row.set_header(null);
+            if (oldHeader)
+                oldHeader.destroy();
             return;
         }
 
-        if (row.get_header())
+        if (oldHeader)
             return;
 
         let roomListHeader = new RoomListHeader({ account: account });
