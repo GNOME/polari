@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-06 20:39+0100\n"
-"PO-Revision-Date: 2016-02-06 20:40+0100\n"
+"PO-Revision-Date: 2016-02-06 20:44+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -356,9 +356,9 @@ msgstr "Użytkownik %s opuścił pokój"
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
-msgstr[0] "%s użytkownik dołączył do pokoju"
-msgstr[1] "%s użytkowników dołączyło do pokoju"
-msgstr[2] "%s użytkowników dołączyło do pokoju"
+msgstr[0] "%d użytkownik dołączył do pokoju"
+msgstr[1] "%d użytkowników dołączyło do pokoju"
+msgstr[2] "%d użytkowników dołączyło do pokoju"
 
 #: ../src/chatView.js:939
 #, javascript-format
