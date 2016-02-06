@@ -2,153 +2,110 @@
 <interface>
   <template class="Gjs_ConnectionDetails" parent="GtkBox">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkGrid" id="grid">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_start">24</property>
-        <property name="margin_end">24</property>
-        <property name="margin_top">24</property>
-        <property name="margin_bottom">24</property>
-        <property name="row_spacing">12</property>
-        <property name="column_spacing">12</property>
+        <property name="margin">24</property>
+        <property name="row-spacing">12</property>
+        <property name="column-spacing">12</property>
         <child>
           <object class="GtkLabel" id="margin">
             <property name="visible">True</property>
-            <property name="width_request">24</property>
+            <property name="width-request">24</property>
           </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
         </child>
         <child>
           <object class="GtkLabel" id="server_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="halign">end</property>
             <property name="label" translatable="yes">_Address</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">serverEntry</property>
+            <property name="use-underline">True</property>
+            <property name="mnemonic-widget">serverEntry</property>
           </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">0</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="serverEntry">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="activates-default">True</property>
+          </object>
         </child>
         <child>
           <object class="GtkLabel" id="description_label">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="halign">end</property>
             <property name="label" translatable="yes">_Description</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">descEntry</property>
+            <property name="use-underline">True</property>
+            <property name="mnemonic-widget">descEntry</property>
           </object>
           <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">1</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="nickname_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="margin_top">24</property>
-            <property name="label" translatable="yes">_Nickname</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">nickEntry</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="realname_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="label" translatable="yes">_Real Name</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">realnameEntry</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="realnameEntry">
-            <property name="visible">True</property>
-            <property name="hexpand">True</property>
-            <property name="can_focus">True</property>
-            <property name="activates_default">True</property>
-            <property name="placeholder_text" translatable="yes">optional</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">3</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="nickEntry">
-            <property name="visible">True</property>
-            <property name="hexpand">True</property>
-            <property name="can_focus">True</property>
-            <property name="can_default">True</property>
-            <property name="margin_top">24</property>
-            <property name="activates_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
+            <property name="left-attach">1</property>
+            <property name="top-attach">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkEntry" id="descEntry">
             <property name="visible">True</property>
             <property name="hexpand">True</property>
-            <property name="can_focus">True</property>
-            <property name="activates_default">True</property>
-            <property name="placeholder_text" translatable="yes">optional</property>
+            <property name="activates-default">True</property>
+            <property name="placeholder-text" translatable="yes">optional</property>
           </object>
           <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">1</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
+            <property name="left-attach">2</property>
+            <property name="top-attach">1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="serverEntry">
+          <object class="GtkLabel" id="nickname_label">
             <property name="visible">True</property>
-            <property name="hexpand">True</property>
-            <property name="can_focus">True</property>
-            <property name="activates_default">True</property>
+            <property name="halign">end</property>
+            <property name="margin-top">24</property>
+            <property name="label" translatable="yes">_Nickname</property>
+            <property name="use-underline">True</property>
+            <property name="mnemonic-widget">nickEntry</property>
           </object>
           <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">0</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
+            <property name="left-attach">1</property>
+            <property name="top-attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="nickEntry">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="can-default">True</property>
+            <property name="margin-top">24</property>
+            <property name="activates-default">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="realname_label">
+            <property name="visible">True</property>
+            <property name="halign">end</property>
+            <property name="label" translatable="yes">_Real Name</property>
+            <property name="use-underline">True</property>
+            <property name="mnemonic-widget">realnameEntry</property>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="realnameEntry">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="activates-default">True</property>
+            <property name="placeholder-text" translatable="yes">optional</property>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">3</property>
           </packing>
         </child>
       </object>
@@ -156,7 +113,6 @@
     <child>
       <object class="GtkBox" id="errorBox">
         <property name="visible">False</property>
-        <property name="can_focus">False</property>
         <property name="orientation">horizontal</property>
         <property name="spacing">12</property>
         <property name="sensitive">False</property>
@@ -167,16 +123,14 @@
         <child>
           <object class="GtkImage" id="errorIcon">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="icon_name">dialog-error-symbolic</property>
-            <property name="icon_size">5</property>
+            <property name="icon-name">dialog-error-symbolic</property>
+            <property name="icon-size">5</property>
             <property name="margin">12</property>
           </object>
         </child>
         <child>
           <object class="GtkLabel" id="errorLabel">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="xalign">0</property>
             <property name="wrap">true</property>
             <property name="vexpand">true</property>
