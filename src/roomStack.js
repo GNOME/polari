@@ -6,7 +6,6 @@ const ChatroomManager = imports.chatroomManager;
 const ChatView = imports.chatView;
 const EntryArea = imports.entryArea;
 const Lang = imports.lang;
-const Signals = imports.signals;
 
 const RoomStack = new Lang.Class({
     Name: 'RoomStack',
@@ -31,7 +30,8 @@ const RoomStack = new Lang.Class({
 
         this._rooms = {};
 
-        this._addView('placeholder', new RoomView(null));
+        let placeholder = new ChatPlaceholder(inputSizeGroup);
+        this.widget.add_named(placeholder.widget, 'placeholder');
     },
 
     _addView: function(id, view) {
@@ -56,16 +56,17 @@ const RoomStack = new Lang.Class({
 
     _updateSensitivity: function() {
         let room = this._roomManager.getActiveRoom();
-        let id = room ? room.id : 'placeholder';
+        if (!room)
+            return;
         let sensitive = room && room.channel;
-        this._rooms[id].inputSensitive = sensitive;
+        this._rooms[room.id].inputSensitive = sensitive;
     }
 });
 
 const ChatPlaceholder = new Lang.Class({
     Name: 'ChatPlaceholder',
 
-    _init: function() {
+    _init: function(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         let image = new Gtk.Image({ icon_name: 'polari-symbolic',
@@ -82,24 +83,28 @@ const ChatPlaceholder = new Lang.Class({
                                           margin_top: 24, use_markup: true });
         description.get_style_context().add_class('polari-background-description');
 
-        this.widget = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
-                                     column_spacing: 18, hexpand: true, vexpand: true,
-                                     valign: Gtk.Align.CENTER });
-        this.widget.get_style_context().add_class('polari-background');
-        this.widget.attach(image, 0, 0, 1, 1);
-        this.widget.attach(title, 1, 0, 1, 1);
-        this.widget.attach(description, 0, 1, 2, 1);
+        let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
+        sizeGroup.add_widget(inputPlaceholder);
+
+        this.widget = new Gtk.Overlay();
+        let grid = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
+                                  column_spacing: 18, hexpand: true, vexpand: true,
+                                  valign: Gtk.Align.CENTER });
+        grid.get_style_context().add_class('polari-background');
+        grid.attach(image, 0, 0, 1, 1);
+        grid.attach(title, 1, 0, 1, 1);
+        grid.attach(description, 0, 1, 2, 1);
+        this.widget.add(grid);
+        this.widget.add_overlay(inputPlaceholder);
         this.widget.show_all();
     }
 });
-Signals.addSignalMethods(ChatPlaceholder.prototype);
 
 const RoomView = new Lang.Class({
     Name: 'RoomView',
 
     _init: function(room) {
-        this._view = room ? new ChatView.ChatView(room)
-                          : new ChatPlaceholder();
+        this._view = new ChatView.ChatView(room);
         this._view.connect('max-nick-chars-changed', Lang.bind(this,
             function() {
                 this.inputWidget.maxNickChars = this._view.maxNickChars;
@@ -108,9 +113,8 @@ const RoomView = new Lang.Class({
         this.widget = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.widget.add(this._view.widget);
 
-        this.inputWidget = room ? new EntryArea.EntryArea({ room: room,
-                                                            sensitive: false })
-                                : new Gtk.Box();
+        this.inputWidget = new EntryArea.EntryArea({ room: room,
+                                                     sensitive: false });
         this.widget.add(this.inputWidget);
 
         this.widget.show_all();
