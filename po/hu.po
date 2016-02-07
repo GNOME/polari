@@ -10,25 +10,25 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-29 15:35+0000\n"
-"PO-Revision-Date: 2016-01-29 20:38+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng at ubuntu dot com>\n"
+"POT-Creation-Date: 2016-02-05 14:24+0000\n"
+"PO-Revision-Date: 2016-02-05 19:50+0100\n"
+"Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 1.8.5\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
-#: ../src/roomStack.js:77
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:77
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:481
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Interneten továbbított csevegés (IRC) kliens a GNOME-hoz"
 
@@ -127,54 +127,67 @@ msgid "_Paste"
 msgstr "_Beillesztés"
 
 #: ../data/resources/help-overlay.ui.h:1
+msgctxt "shortcut window"
 msgid "General"
 msgstr "Általános"
 
 #: ../data/resources/help-overlay.ui.h:2
+msgctxt "shortcut window"
 msgid "Join Room"
 msgstr "Csatlakozás szobához"
 
 #: ../data/resources/help-overlay.ui.h:3
+msgctxt "shortcut window"
 msgid "Message User"
 msgstr "Üzenet felhasználónak"
 
 #: ../data/resources/help-overlay.ui.h:4
+msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Szoba elhagyása"
 
 #: ../data/resources/help-overlay.ui.h:5
+msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Felhasználólista megjelenítése"
 
-#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:3
+#: ../data/resources/help-overlay.ui.h:6
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:1
+#: ../data/resources/help-overlay.ui.h:7
+msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
 #: ../data/resources/help-overlay.ui.h:8
+msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigáció"
 
 #: ../data/resources/help-overlay.ui.h:9
+msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Következő szoba"
 
 #: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Előző szoba"
 
 #: ../data/resources/help-overlay.ui.h:11
+msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Első szoba"
 
 #: ../data/resources/help-overlay.ui.h:12
+msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Utolsó szoba"
 
 #: ../data/resources/help-overlay.ui.h:13
+msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Első - kilencedik szoba"
 
@@ -215,9 +228,17 @@ msgstr "Üzenetküldés egy felhasználónak"
 msgid "Join room"
 msgstr "Csatlakozás szobához"
 
+#: ../data/resources/menus.ui.h:1
+msgid "Keyboard Shortcuts"
+msgstr "Gyorsbillentyűk"
+
 #: ../data/resources/menus.ui.h:2
 msgid "About"
 msgstr "Névjegy"
+
+#: ../data/resources/menus.ui.h:3
+msgid "Quit"
+msgstr "Kilépés"
 
 #: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
@@ -255,22 +276,22 @@ msgstr "Utolsó esemény:"
 msgid "Message"
 msgstr "Üzenet"
 
-#: ../src/application.js:392
+#: ../src/application.js:394
 msgid "Good Bye"
 msgstr "Viszlát"
 
-#: ../src/application.js:424
+#: ../src/application.js:426
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eltávolítva."
 
-#: ../src/application.js:480
+#: ../src/application.js:482
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng at ubuntu dot com>\n"
 "Meskó Balázs <meskobalazs at gmail dot com>"
 
-#: ../src/application.js:486
+#: ../src/application.js:488
 msgid "Learn more about Polari"
 msgstr "Tudjon meg többet a Polari-ról"
 
@@ -282,62 +303,62 @@ msgstr "Visszavonás"
 msgid "New Messages"
 msgstr "Új üzenetek"
 
-#: ../src/chatView.js:630
+#: ../src/chatView.js:635
 msgid "Open Link"
 msgstr "Hivatkozás megnyitása"
 
-#: ../src/chatView.js:636
+#: ../src/chatView.js:641
 msgid "Copy Link Address"
 msgstr "Hivatkozás címének másolása"
 
-#: ../src/chatView.js:803
+#: ../src/chatView.js:808
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s mostantól %s néven ismert"
 
-#: ../src/chatView.js:810
+#: ../src/chatView.js:815
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s kilépett"
 
-#: ../src/chatView.js:819
+#: ../src/chatView.js:824
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s kirúgva %s által"
 
-#: ../src/chatView.js:821
+#: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kirúgva"
 
-#: ../src/chatView.js:828
+#: ../src/chatView.js:833
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s kitiltva %s által"
 
-#: ../src/chatView.js:830
+#: ../src/chatView.js:835
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s kitiltva"
 
-#: ../src/chatView.js:836
+#: ../src/chatView.js:841
 #, javascript-format
 msgid "%s joined"
 msgstr "%s csatlakozott"
 
-#: ../src/chatView.js:842
+#: ../src/chatView.js:847
 #, javascript-format
 msgid "%s left"
 msgstr "%s kilépett"
 
-#: ../src/chatView.js:931
+#: ../src/chatView.js:936
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d felhasználó csatlakozott"
 msgstr[1] "%d felhasználó csatlakozott"
 
-#: ../src/chatView.js:934
+#: ../src/chatView.js:939
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -346,14 +367,14 @@ msgstr[1] "%d felhasználó kilépett"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:995
+#: ../src/chatView.js:1000
 msgid "%H∶%M"
 msgstr "%k.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1000
+#: ../src/chatView.js:1005
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Tegnap, %k.%M"
@@ -361,7 +382,7 @@ msgstr "Tegnap, %k.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1005
+#: ../src/chatView.js:1010
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %k.%M"
@@ -370,7 +391,7 @@ msgstr "%A, %k.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1011
+#: ../src/chatView.js:1016
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d., %k.%M"
@@ -379,21 +400,21 @@ msgstr "%B %d., %k.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1017
+#: ../src/chatView.js:1022
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y. %B %d., %k.%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1022
+#: ../src/chatView.js:1027
 msgid "%l∶%M %p"
 msgstr "%l.%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1027
+#: ../src/chatView.js:1032
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Tegnap, %l.%M %p"
@@ -401,7 +422,7 @@ msgstr "Tegnap, %l.%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1032
+#: ../src/chatView.js:1037
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l.%M %p"
@@ -410,7 +431,7 @@ msgstr "%A, %l.%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1038
+#: ../src/chatView.js:1043
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d., %l.%M %p"
@@ -419,7 +440,7 @@ msgstr "%B %d., %l.%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1044
+#: ../src/chatView.js:1049
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y. %B %d., %l.%M %p"
