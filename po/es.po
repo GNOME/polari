@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-29 09:05+0000\n"
-"PO-Revision-Date: 2016-01-29 10:25+0100\n"
+"POT-Creation-Date: 2016-02-01 02:22+0000\n"
+"PO-Revision-Date: 2016-02-01 15:44+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -23,12 +23,12 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:78
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:77
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:487
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:481
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -57,10 +57,6 @@ msgstr ""
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Chat;"
-
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Mostrar conexiones"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -107,27 +103,6 @@ msgstr "Nombre _real"
 msgid "optional"
 msgstr "opcional"
 
-#. translators: This will be used in the phrase: "Open Connections in the application menu"
-#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:114
-#: ../src/roomStack.js:124
-msgid "Connections"
-msgstr "Conexiones"
-
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Use the + button to add a new connection."
-msgstr "Use el botón + para añadir una conexión nueva."
-
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Add"
-msgstr "Añadir"
-
-#: ../data/resources/connection-list-dialog.ui.h:4
-#: ../data/resources/room-list-header.ui.h:2
-msgid "Remove"
-msgstr "Quitar"
-
 #: ../data/resources/entry-area.ui.h:1
 msgid "Change nickname:"
 msgstr "Cambiar alias:"
@@ -142,7 +117,7 @@ msgstr "Cambiar alias"
 
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:394
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:225
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -170,11 +145,11 @@ msgstr "Salir de la sala"
 msgid "Show Userlist"
 msgstr "Mostrar lista de usuarios"
 
-#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:5
+#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Salir"
 
-#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:3
+#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
 msgstr "Atajos del teclado"
 
@@ -240,10 +215,6 @@ msgid "Join room"
 msgstr "Unirse a una sala"
 
 #: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Preferencias"
-
-#: ../data/resources/menus.ui.h:4
 msgid "About"
 msgstr "Acerca de"
 
@@ -260,9 +231,12 @@ msgid "_Name"
 msgstr "_Nombre"
 
 #: ../data/resources/room-list-header.ui.h:1
-#| msgid "New Connection"
 msgid "Reconnect"
 msgstr "Volver a conectar"
+
+#: ../data/resources/room-list-header.ui.h:2
+msgid "Remove"
+msgstr "Quitar"
 
 #: ../data/resources/room-list-header.ui.h:3
 msgid "Properties"
@@ -280,17 +254,26 @@ msgstr "Última actividad:"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../src/application.js:394
+#: ../src/application.js:392
 msgid "Good Bye"
 msgstr "Adiós"
 
-#: ../src/application.js:486
+#: ../src/application.js:424
+#, javascript-format
+msgid "%s removed."
+msgstr "%s eliminado."
+
+#: ../src/application.js:480
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2016"
 
-#: ../src/application.js:492
+#: ../src/application.js:486
 msgid "Learn more about Polari"
 msgstr "Aber más acerca de Polari"
+
+#: ../src/appNotifications.js:49
+msgid "Undo"
+msgstr "Deshacer"
 
 #: ../src/chatView.js:133
 msgid "New Messages"
@@ -438,7 +421,7 @@ msgstr "%d de %B a las %H:%M"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B de %Y a las %H:%M"
 
-#: ../src/connections.js:239
+#: ../src/connections.js:70
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -446,19 +429,19 @@ msgstr ""
 "Polari se ha desconectado por un error de la red. Compruebe si el campo de "
 "dirección es correcto."
 
-#: ../src/connections.js:379
+#: ../src/connections.js:210
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
-#: ../src/connections.js:380
+#: ../src/connections.js:211
 msgid "New Connection"
 msgstr "Nueva conexión"
 
-#: ../src/connections.js:396
+#: ../src/connections.js:227
 msgid "A_pply"
 msgstr "A_plicar"
 
-#: ../src/connections.js:396
+#: ../src/connections.js:227
 msgid "Cr_eate"
 msgstr "Cr_ear"
 
@@ -505,7 +488,6 @@ msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <acción> - envía <acción> al canal actual"
 
 #: ../src/ircParser.js:29
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgstr "/MSG <alias> [<mensaje>] - envía un mensaje privado a <alias>"
 
@@ -572,7 +554,7 @@ msgstr "Añadir conexión"
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/mainWindow.js:306
+#: ../src/mainWindow.js:314
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -599,94 +581,69 @@ msgstr "Pegar desde %s"
 msgid "Uploading %s"
 msgstr "Subiendo %s"
 
-#: ../src/roomList.js:104
+#: ../src/roomList.js:114
 msgid "Leave chatroom"
 msgstr "Salir de la sala de chat"
 
-#: ../src/roomList.js:105
+#: ../src/roomList.js:115
 msgid "End conversation"
 msgstr "Terminar conversación"
 
-#: ../src/roomList.js:213
+#: ../src/roomList.js:219
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "La conexión %s tiene un error"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:245
+#: ../src/roomList.js:264
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:252
-#| msgid "Connection Error"
+#: ../src/roomList.js:271
 msgid "Connection Problem"
 msgstr "Problema de conexión"
 
-#: ../src/roomList.js:260
-#| msgid "Connections"
+#: ../src/roomList.js:279
 msgid "Connected"
 msgstr "Conectado"
 
-#: ../src/roomList.js:262
-#| msgid "Connections"
+#: ../src/roomList.js:281
 msgid "Connecting..."
 msgstr "Conectando…"
 
-#: ../src/roomList.js:264
+#: ../src/roomList.js:283
 msgid "Offline"
 msgstr "Desconectado"
 
-#: ../src/roomList.js:266
+#: ../src/roomList.js:285
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../src/roomList.js:286
+#: ../src/roomList.js:305
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s in a safe way."
 msgstr "No se pudo conectar a %s de manera segura."
 
-#: ../src/roomList.js:289
+#: ../src/roomList.js:308
 #, javascript-format
-#| msgid "Authentication failed."
 msgid "Could not connect to %s. Authentication failed."
 msgstr "No se pudo conectar a %s. Falló la autenticación."
 
-#: ../src/roomList.js:295
+#: ../src/roomList.js:314
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s. The server is busy."
 msgstr "No se pudo conectar a %s. El servidor está ocupado"
 
-#: ../src/roomList.js:298
+#: ../src/roomList.js:317
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s."
 msgstr "No se pudo conectar a %s."
 
-#: ../src/roomStack.js:112
-msgid "Begin chatting by adding a new connection."
-msgstr "Empiece a chatear añadiendo una conexión nueva."
-
-#: ../src/roomStack.js:115
-#, javascript-format
-msgid "Open %s in the application menu."
-msgstr "Abra %s en el menú de aplicaciones"
-
-#: ../src/roomStack.js:118
+#: ../src/roomStack.js:80
 msgid "Join a room using the + button."
 msgstr "Únase a una sala pulsando el botón +."
-
-#: ../src/roomStack.js:122
-msgid "Your connections are disabled."
-msgstr "Sus conexiones están desactivadas."
-
-#: ../src/roomStack.js:125
-#, javascript-format
-msgid "Enable them by opening %s in the application menu."
-msgstr "Actívelas abriendo %s en el menú de aplicaciones."
 
 #: ../src/userList.js:178
 #, javascript-format
@@ -741,6 +698,33 @@ msgstr "Todos"
 #: ../src/utils.js:133
 msgid "Failed to open link"
 msgstr "Falló al abrir el enlace"
+
+#~ msgid "Show connections"
+#~ msgstr "Mostrar conexiones"
+
+#~ msgid "Connections"
+#~ msgstr "Conexiones"
+
+#~ msgid "Use the + button to add a new connection."
+#~ msgstr "Use el botón + para añadir una conexión nueva."
+
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "Preferences"
+#~ msgstr "Preferencias"
+
+#~ msgid "Begin chatting by adding a new connection."
+#~ msgstr "Empiece a chatear añadiendo una conexión nueva."
+
+#~ msgid "Open %s in the application menu."
+#~ msgstr "Abra %s en el menú de aplicaciones"
+
+#~ msgid "Your connections are disabled."
+#~ msgstr "Sus conexiones están desactivadas."
+
+#~ msgid "Enable them by opening %s in the application menu."
+#~ msgstr "Actívelas abriendo %s en el menú de aplicaciones."
 
 #~ msgid "Please check your connection details."
 #~ msgstr "Revise los detalles de su conexión."
