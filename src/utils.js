@@ -73,6 +73,7 @@ const _urlRegexp = new RegExp(
         ')' +
     ')', 'gi');
 
+const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)','g');
 
 let debugInit = false;
 let debugEnabled = false;
@@ -159,6 +160,15 @@ function findUrls(str) {
     let res = [], match;
     while ((match = _urlRegexp.exec(str)))
         res.push({ url: match[2], pos: match.index + match[1].length });
+    return res;
+}
+
+function findChannels(str, server) {
+    let res = [], match;
+    while ((match = _channelRegexp.exec(str)))
+        res.push({ url: 'irc://%s/%s'.format(server, match[2]),
+                   name: '#' + match[2],
+                   pos: match.index + match[1].length });
     return res;
 }
 

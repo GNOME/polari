@@ -1194,8 +1194,12 @@ const ChatView = new Lang.Class({
         if (message.shouldHighlight)
             tags.push(this._lookupTag('highlight'));
 
+        let params = this._room.account.dup_parameters_vardict().deep_unpack();
+        let server = params.server.deep_unpack();
+
         let text = message.text;
-        let urls = Utils.findUrls(text);
+        let channels = Utils.findChannels(text, server);
+        let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
             let url = urls[i];
@@ -1204,10 +1208,11 @@ const ChatView = new Lang.Class({
             let tag = this._createUrlTag(url.url);
             this._view.get_buffer().tag_table.add(tag);
 
-            this._insertWithTags(iter, url.url,
+            let name = url.name ? url.name : url.url;
+            this._insertWithTags(iter, name,
                                  tags.concat(this._lookupTag('url'), tag));
 
-            pos = url.pos + url.url.length;
+            pos = url.pos + name.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
     },
