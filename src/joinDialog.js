@@ -1,3 +1,4 @@
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -38,6 +39,15 @@ const JoinDialog = new Lang.Class({
                                             valign: Gtk.Align.CENTER,
                                             focus_on_click: false });
         this.get_header_bar().pack_start(this._backButton);
+
+        let accelGroup = new Gtk.AccelGroup();
+        this._connectionButton.add_accelerator('clicked', accelGroup,
+                                               Gdk.KEY_n,
+                                               Gdk.ModifierType.CONTROL_MASK, 0);
+        this._backButton.add_accelerator('clicked', accelGroup,
+                                         Gdk.KEY_Left,
+                                         Gdk.ModifierType.MOD1_MASK, 0);
+        this.add_accel_group(accelGroup);
 
         this._setupMainPage();
         this._setupConnectionPage();
