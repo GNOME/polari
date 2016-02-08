@@ -897,15 +897,21 @@ const ChatView = new Lang.Class({
         let headerMark = buffer.get_mark('idle-status-start');
 
         let headerTagName = 'status-compressed' + this._state.lastStatusGroup;
+        let headerArrowTagName = 'status-arrow-compressed' + this._state.lastStatusGroup;
         let groupTagName = 'status' + this._state.lastStatusGroup;
 
-        let headerTag, groupTag;
+        let headerTag, headerArrowTag, groupTag;
         if (!headerMark) {
             // we are starting a new group
             headerTag = new ButtonTag({ name: headerTagName, invisible: true });
+            headerArrowTag = new Gtk.TextTag({ name: headerArrowTagName, invisible: true });
             groupTag = new Gtk.TextTag({ name: groupTagName });
             buffer.tag_table.add(headerTag);
+            buffer.tag_table.add(headerArrowTag);
             buffer.tag_table.add(groupTag);
+
+            groupTag.bind_property('invisible', headerArrowTag, 'invisible',
+                                    GObject.BindingFlags.INVERT_BOOLEAN);
 
             headerTag.connect('clicked',
                 function() {
@@ -921,6 +927,7 @@ const ChatView = new Lang.Class({
             headerMark = buffer.create_mark('idle-status-start', buffer.get_end_iter(), true);
         } else {
             headerTag = this._lookupTag(headerTagName);
+            headerArrowTag = this._lookupTag(headerArrowTagName);
             groupTag = this._lookupTag(groupTagName);
 
             let start = buffer.get_iter_at_mark(headerMark);
@@ -942,9 +949,15 @@ const ChatView = new Lang.Class({
         if (this._statusCount.left > 0)
             stats.push(ngettext("%d user left",
                                 "%d users left", this._statusCount.left).format(this._statusCount.left));
-        this._insertWithTags(buffer.get_iter_at_mark(headerMark),
-                             stats.join(", ") + ' (\u2026)',
-                             [this._lookupTag('status'), headerTag]);
+        // TODO: How do we update the arrow direction when text direction change?
+        let iter = buffer.get_iter_at_mark(headerMark);
+        let tags = [this._lookupTag('status'), headerTag];
+        let headerText = stats.join(', ');
+        let baseDir = Pango.find_base_dir(headerText, -1);
+        this._insertWithTags(iter, headerText, tags);
+        this._insertWithTags(iter, baseDir == Pango.Direction.LTR ? '\u25B6' : '\u25C0',
+                             tags.concat(headerArrowTag));
+        this._insertWithTags(iter, '\u25BC', tags.concat(groupTag));
     },
 
     _insertStatus: function(text, member, type) {
