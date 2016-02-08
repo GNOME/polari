@@ -37,7 +37,7 @@ polari_util_get_basenick (const char *nick)
     ;
 
   if (len > 0)
-    return g_strndup (nick, len);
+    return g_utf8_casefold (nick, len);
   else
-    return g_strdup (nick);
+    return g_utf8_casefold (nick, -1);
 }
