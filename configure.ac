@@ -18,6 +18,7 @@ IT_PROG_INTLTOOL([0.50.0])
 GOBJECT_INTROSPECTION_REQUIRE([0.9.6])
 
 AX_CHECK_ENABLE_DEBUG([yes])
+AC_USE_SYSTEM_EXTENSIONS
 AX_COMPILER_FLAGS()
 
 AC_PROG_CC
@@ -34,6 +35,8 @@ PKG_CHECK_MODULES(POLARI,
                   gobject-introspection-1.0
                   gtk+-3.0 >= 3.15.6
                   telepathy-glib);
+
+AC_CHECK_FUNCS([strcasestr])
 
 AC_PATH_PROG([GJS_CONSOLE],[gjs-console],[no])
 

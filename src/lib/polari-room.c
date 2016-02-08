@@ -118,6 +118,19 @@ polari_create_room_id (TpAccount    *account,
   return id;
 }
 
+#ifdef HAVE_STRCASESTR
+#  define MATCHFUNC(haystick,needle) strcasestr (haystick, needle)
+#  define MESSAGE_TO_TEXT(message) tp_message_to_text (message, NULL)
+#else
+   static inline char *
+   message_to_casefolded_text (TpMessage *message) {
+     g_autofree char *tmp = tp_message_to_text (message, NULL);
+     return g_utf8_casefold (tmp, -1);
+   }
+#  define MATCHFUNC(haystick,needle) strstr (haystick, needle)
+#  define MESSAGE_TO_TEXT(message) message_to_casefolded_text (message)
+#endif
+
 gboolean
 polari_room_should_highlight_message (PolariRoom *room,
                                       TpMessage *message)
@@ -144,9 +157,9 @@ polari_room_should_highlight_message (PolariRoom *room,
   if (tp_signalled_message_get_sender (message) == self)
     return FALSE;
 
-  text = tp_message_to_text (message, NULL);
+  text = MESSAGE_TO_TEXT (message);
   len = strlen (priv->self_nick);
-  match = strstr (text, priv->self_nick);
+  match = MATCHFUNC (text, priv->self_nick);
 
   while (match != NULL)
     {
@@ -159,7 +172,7 @@ polari_room_should_highlight_message (PolariRoom *room,
       result = starts_word && ends_word;
       if (result)
         break;
-      match = strstr (match + len, priv->self_nick);
+      match = MATCHFUNC (match + len, priv->self_nick);
     }
 
   g_free (text);
