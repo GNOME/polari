@@ -365,14 +365,23 @@ update_subject (PolariRoom *room,
                 GHashTable *properties)
 {
   PolariRoomPrivate *priv = room->priv;
-  const char *subject;
+  const char *raw_subject;
+  char *subject = NULL;
 
-  subject = tp_asv_get_string (properties, "Subject");
-  if (subject == NULL || g_strcmp0 (priv->topic, subject) == 0)
+  raw_subject = tp_asv_get_string (properties, "Subject");
+
+  if (raw_subject == NULL)
     return;
 
+  subject = strip_color_codes (raw_subject);
+  if (g_strcmp0 (priv->topic, subject) == 0)
+    {
+      g_free (subject);
+      return;
+    }
+
   g_free (priv->topic);
-  priv->topic = *subject ? g_strdup (subject) : NULL;
+  priv->topic = subject;
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
 }
