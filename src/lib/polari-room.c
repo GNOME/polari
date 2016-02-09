@@ -87,11 +87,6 @@ static GRegex *color_code_regex = NULL;
 
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
-#define tp_properties_changed_cb \
-        tp_cli_dbus_properties_signal_callback_properties_changed
-#define tp_properties_get_all_cb \
-        tp_cli_dbus_properties_callback_for_get_all
-
 static void polari_room_set_channel (PolariRoom *room, TpChannel *channel);
 
 
@@ -383,11 +378,11 @@ update_subject (PolariRoom *room,
 }
 
 static void
-subject_get_all (TpProxy *proxy,
-                 GHashTable *properties,
-                 GError     *error,
-                 gpointer    user_data,
-                 GObject    *object)
+subject_get_all (TpProxy      *proxy,
+                 GHashTable   *properties,
+                 const GError *error,
+                 gpointer      user_data,
+                 GObject      *object)
 {
   if (error)
     return;
@@ -396,11 +391,11 @@ subject_get_all (TpProxy *proxy,
 }
 
 static void
-properties_changed (TpProxy *proxy,
-                    const char *iface_name,
-                    GHashTable *changed,
-                    const char *invalidated,
-                    gpointer    data,
+properties_changed (TpProxy     *proxy,
+                    const char  *iface_name,
+                    GHashTable  *changed,
+                    const char **invalidated,
+                    gpointer     data,
                     GObject    *weak_ref)
 {
   if (strcmp (iface_name, TP_IFACE_CHANNEL_INTERFACE_SUBJECT) != 0)
@@ -566,8 +561,7 @@ polari_room_set_channel (PolariRoom *room,
       else
         tp_cli_dbus_properties_call_get_all (channel, -1,
                                      TP_IFACE_CHANNEL_INTERFACE_SUBJECT,
-                                     (tp_properties_get_all_cb)subject_get_all,
-                                     room, NULL, NULL);
+                                     subject_get_all, room, NULL, NULL);
 
 
       priv->self_contact_notify_id =
@@ -582,8 +576,7 @@ polari_room_set_channel (PolariRoom *room,
                           G_CALLBACK (on_channel_invalidated), room);
       priv->properties_changed_id =
         tp_cli_dbus_properties_connect_to_properties_changed (
-                                 channel,
-                                 (tp_properties_changed_cb) properties_changed,
+                                 channel, properties_changed,
                                  room, NULL, NULL, NULL);
     }
 
