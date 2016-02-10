@@ -204,6 +204,9 @@ const ButtonTag = new Lang.Class({
     vfunc_event: function(object, event, iter) {
         let type = event.get_event_type();
 
+        if (!this._hover)
+            return Gdk.EVENT_PROPAGATE;
+
         if (type != Gdk.EventType.BUTTON_PRESS &&
             type != Gdk.EventType.BUTTON_RELEASE)
             return Gdk.EVENT_PROPAGATE;
@@ -658,12 +661,16 @@ const ChatView = new Lang.Class({
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
                                                   eventX, eventY);
-        let iter = view.get_iter_at_location(x, y);
+        let [inside, iter] = view.get_iter_at_location(x, y);
 
-        let hoveredButtonTags = iter.get_tags().filter(
-            function(t) {
-                return t instanceof ButtonTag;
-            });
+        let hoveredButtonTags;
+        if (inside)
+            hoveredButtonTags = iter.get_tags().filter(
+                function(t) {
+                    return t instanceof ButtonTag;
+                });
+        else
+            hoveredButtonTags = [];
 
         hoveredButtonTags.forEach(
             function(t) {
