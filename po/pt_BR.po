@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-08 01:19+0000\n"
-"PO-Revision-Date: 2016-02-02 18:20-0300\n"
-"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
+"POT-Creation-Date: 2016-02-10 14:27+0000\n"
+"PO-Revision-Date: 2016-02-10 14:31-0200\n"
+"Last-Translator: Rafael Fontenelle <rffontenelle@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
@@ -85,17 +85,18 @@ msgid "Window maximized state"
 msgstr "Estado de janela maximizada"
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Endereço"
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "_Nome"
 
 #: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "_Descrição"
-
-#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "opcional"
+
+#: ../data/resources/connection-details.ui.h:3
+msgid "_Server"
+msgstr "_Servidor"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "_Nickname"
@@ -119,7 +120,7 @@ msgstr "Mudar apelido"
 
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:224
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:229
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -249,10 +250,6 @@ msgstr "_Mensagem"
 msgid "_Recent"
 msgstr "_Recente"
 
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nome"
-
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
 msgstr "Reconectar"
@@ -353,14 +350,14 @@ msgstr "%s entrou"
 msgid "%s left"
 msgstr "%s saiu"
 
-#: ../src/chatView.js:940
+#: ../src/chatView.js:947
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d usuário entrou"
 msgstr[1] "%d usuários entraram"
 
-#: ../src/chatView.js:943
+#: ../src/chatView.js:950
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -369,14 +366,14 @@ msgstr[1] "%d usuários saíram"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:1004
+#: ../src/chatView.js:1017
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1009
+#: ../src/chatView.js:1022
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Ontem, %H∶%M"
@@ -384,7 +381,7 @@ msgstr "Ontem, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1014
+#: ../src/chatView.js:1027
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -393,7 +390,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1020
+#: ../src/chatView.js:1033
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d de %B, %H∶%M"
@@ -402,21 +399,21 @@ msgstr "%d de %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1026
+#: ../src/chatView.js:1039
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B de %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1031
+#: ../src/chatView.js:1044
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1036
+#: ../src/chatView.js:1049
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ontem, %l∶%M %p"
@@ -424,7 +421,7 @@ msgstr "Ontem, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1041
+#: ../src/chatView.js:1054
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -433,7 +430,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1047
+#: ../src/chatView.js:1060
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d de %B, %l∶%M %p"
@@ -442,7 +439,7 @@ msgstr "%d de %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1053
+#: ../src/chatView.js:1066
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B de %Y, %l∶%M %p"
@@ -455,15 +452,17 @@ msgstr ""
 "Polari foi desconectado devido a um erro de rede. Por favor, verifique se o "
 "campo de endereço está correto."
 
-#: ../src/connections.js:211
-msgid "Edit Connection"
-msgstr "Editar conexão"
+#. Translators: %s is a connection name
+#: ../src/connections.js:214
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Propriedades de \"%s\""
 
-#: ../src/connections.js:226
+#: ../src/connections.js:231
 msgid "A_pply"
 msgstr "A_plicar"
 
-#: ../src/entryArea.js:206
+#: ../src/entryArea.js:208
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -717,6 +716,15 @@ msgstr "Todos"
 msgid "Failed to open link"
 msgstr "Ocorreu falha ao abrir o link"
 
+#~ msgid "_Address"
+#~ msgstr "_Endereço"
+
+#~ msgid "_Description"
+#~ msgstr "_Descrição"
+
+#~ msgid "Edit Connection"
+#~ msgstr "Editar conexão"
+
 #~ msgid "New Connection"
 #~ msgstr "Nova conexão"
 
@@ -773,9 +781,6 @@ msgstr "Ocorreu falha ao abrir o link"
 
 #~ msgid "_Close"
 #~ msgstr "_Fechar"
-
-#~ msgid "Server"
-#~ msgstr "Servidor"
 
 #~ msgid "Identity"
 #~ msgstr "Identidade"
