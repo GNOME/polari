@@ -15,6 +15,8 @@ const Utils = imports.utils;
 
 const MAX_RETRIES = 3;
 
+const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+)/i;
+
 const ConnectionError = {
     CANCELLED: Tp.error_get_dbus_name(Tp.Error.CANCELLED),
     ALREADY_CONNECTED: Tp.error_get_dbus_name(Tp.Error.ALREADY_CONNECTED)
@@ -26,7 +28,8 @@ const Application = new Lang.Class({
     Signals: { 'prepare-shutdown': {} },
 
     _init: function() {
-        this.parent({ application_id: 'org.gnome.Polari' });
+        this.parent({ application_id: 'org.gnome.Polari',
+                      flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
         GLib.set_application_name('Polari');
         this._window = null;
@@ -144,6 +147,69 @@ const Application = new Lang.Class({
             this._chatroomManager.lateInit();
         }
         this._window.present();
+    },
+
+    vfunc_open: function(files) {
+        this.activate();
+
+        let time = Utils.getTpEventTime();
+        let uris = files.map(function(f) { return f.get_uri(); });
+
+        let quark = Tp.AccountManager.get_feature_quark_core();
+        if (this._accountsMonitor.accountManager.is_prepared(quark))
+            this._openURIs(uris, time);
+        else
+            this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
+                function(mon) {
+                    this._openURIs(uris, time);
+                }));
+    },
+
+    _openURIs: function(uris, time) {
+        let map = {};
+
+        this._accountsMonitor.dupAccounts().forEach(function(a) {
+            if (!a.enabled)
+                return;
+
+            let params = a.dup_parameters_vardict().deep_unpack();
+            map[a.get_object_path()] = params.server.deep_unpack();
+        });
+
+        let joinAction = this.lookup_action('join-room');
+        uris.forEach(Lang.bind(this, function(uri) {
+            let [success, server, port, room] = this._parseURI(uri);
+            if (!success)
+                return;
+
+            let matches = Object.keys(map).filter(function(a) {
+                return GLib.ascii_strcasecmp(map[a], server) == 0;
+            });
+
+            if (!matches.length) {
+                log("No matching account");
+                return;
+            }
+
+            joinAction.activate(new GLib.Variant('(ssu)',
+                            [matches[0], '#' + room, time]));
+        }));
+    },
+
+    _parseURI: function(uri) {
+        let server, port, room;
+        let success = false;
+        try {
+            [,, server, port, room] = uri.match(IRC_SCHEMA_REGEX);
+            success = true;
+        } catch(e) {
+            let label = _("Failed to open link");
+            let n = new AppNotifications.MessageNotification(label,
+                                                             'dialog-error-symbolic');
+            this.notificationQueue.addNotification(n);
+        }
+
+        return [success, server, port, room];
     },
 
     _updateAccountAction: function(action) {
