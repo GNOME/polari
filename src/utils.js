@@ -38,6 +38,11 @@ const SECRET_SCHEMA = new Secret.Schema(
 
 const GPASTE_BASEURL = 'https://paste.gnome.org/';
 
+// Silly paste.gnome.org limitation:
+// http://sayakb.github.io/sticky-notes/pages/api/#create-return-values-on-error
+// The visible title is even more limited than the 30-character hard limit ...
+const MAX_PASTE_TITLE_LENGTH = 25;
+
 const IMGUR_CLIENT_ID = '4109e59177ec95e';
 
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
@@ -178,6 +183,9 @@ function openURL(url, timestamp) {
 }
 
 function gpaste(text, title, callback) {
+    if (title.length > MAX_PASTE_TITLE_LENGTH)
+        title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
+
     let params = {
         title: title,
         data: text,

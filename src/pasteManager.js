@@ -18,11 +18,6 @@ const DndTargetType = {
     IMAGE: 3,
 };
 
-// Silly paste.gnome.org limitation:
-// http://sayakb.github.io/sticky-notes/pages/api/#create-return-values-on-error
-// The visible title is even more limited than the 30-character hard limit ...
-const MAX_PASTE_TITLE_LENGTH = 25;
-
 const PasteManager = new Lang.Class({
     Name: 'PasteManager',
 
@@ -103,9 +98,6 @@ const PasteManager = new Lang.Class({
             title = _("%s in #%s").format(nick, room.display_name);
         else
             title = _("Paste from %s").format(nick);
-
-        if (title.length > MAX_PASTE_TITLE_LENGTH)
-            title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
 
         Utils.gpaste(text, title, Lang.bind(this,
             function(url) {
