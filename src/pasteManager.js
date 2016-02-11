@@ -69,27 +69,9 @@ const PasteManager = new Lang.Class({
     },
 
     pasteText: function(text) {
-        let app = Gio.Application.get_default();
-        let n = new UploadNotification("text");
-        app.notificationQueue.addNotification(n);
-
-        this._pasteText(text, n);
-    },
-
-    pasteImage: function(data) {
-        let app = Gio.Application.get_default();
-        let n = new UploadNotification("image");
-        app.notificationQueue.addNotification(n);
-
-        this._pasteImage(data, n);
-    },
-
-    _pasteText: function(text, notification) {
         let room = this._roomManager.getActiveRoom();
-        if (!room) {
-            notification.close();
+        if (!room)
             return;
-        }
 
         let title;
         let nick = room.channel.connection.self_contact.alias;
@@ -101,10 +83,8 @@ const PasteManager = new Lang.Class({
 
         Utils.gpaste(text, title, Lang.bind(this,
             function(url) {
-                if (!url) {
-                    notification.close();
+                if (!url)
                     return;
-                }
 
                 let type = Tp.ChannelTextMessageType.NORMAL;
                 let message = Tp.ClientMessage.new_text(type, url);
@@ -115,17 +95,14 @@ const PasteManager = new Lang.Class({
                         } catch(e) {
                              logError(e, 'Failed to send message')
                         }
-                        notification.close();
                     }));
             }));
     },
 
-    _pasteImage: function(data, notification) {
+    pasteImage: function(data) {
         let room = this._roomManager.getActiveRoom();
-        if (!room) {
-            notification.close();
+        if (!room)
             return;
-        }
 
         let title;
         let nick = room.channel.connection.self_contact.alias;
@@ -137,10 +114,8 @@ const PasteManager = new Lang.Class({
 
         Utils.imgurPaste(data, title, Lang.bind(this,
             function(url) {
-                if (!url) {
-                    notification.close();
+                if (!url)
                     return;
-                }
 
                 let type = Tp.ChannelTextMessageType.NORMAL;
                 let message = Tp.ClientMessage.new_text(type, url);
@@ -151,7 +126,6 @@ const PasteManager = new Lang.Class({
                         } catch(e) {
                              logError(e, 'Failed to send message')
                         }
-                        notification.close();
                     }));
             }));
     },
@@ -324,25 +298,5 @@ const PasteManager = new Lang.Class({
             log('Unhandled type');
             n.close();
         }
-    }
-});
-
-const UploadNotification = new Lang.Class({
-    Name: 'UploadNotification',
-    Extends: AppNotifications.AppNotification,
-
-    _init: function(content) {
-        this.parent();
-
-        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
-                                    column_spacing: 12 });
-
-        this._grid.add(new Gtk.Spinner({ active: true }));
-
-        let label = new Gtk.Label({ label: _("Uploading %s").format(content) });
-        this._grid.add(label);
-
-        this.add(this._grid);
-        this.show_all();
     }
 });
