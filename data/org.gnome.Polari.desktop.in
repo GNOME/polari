@@ -4,6 +4,7 @@ _Comment=An Internet Relay Chat Client for GNOME
 Exec=gapplication launch org.gnome.Polari
 Icon=org.gnome.Polari
 Type=Application
+MimeType=x-scheme-handler/irc;
 StartupNotify=true
 DBusActivatable=true
 X-GNOME-UsesNotifications=true
