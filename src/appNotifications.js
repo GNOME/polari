@@ -68,6 +68,36 @@ const UndoNotification = new Lang.Class({
     }
 });
 
+const CloseNotification = new Lang.Class({
+    Name: 'CloseNotification',
+    Extends: AppNotification,
+    Signals: { closed: {} },
+
+    _init: function(label, icon_name) {
+        this.parent();
+
+        Mainloop.timeout_add_seconds(TIMEOUT, Lang.bind(this, this.close));
+
+        let box = new Gtk.Box({ spacing: 12 });
+        box.add(new Gtk.Image({ icon_name: icon_name }));
+        box.add(new Gtk.Label({ label: label, hexpand: true,
+                                ellipsize: Pango.EllipsizeMode.END }));
+
+        let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
+        closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic' });
+        closeButton.connect('clicked', Lang.bind(this, this.close));
+        box.add(closeButton);
+
+        this.add(box);
+        this.show_all();
+    },
+
+    close: function() {
+        this.emit(this._undo ? 'undo' : 'closed');
+        this.parent();
+    }
+});
+
 const CommandOutputNotification = new Lang.Class({
     Name: 'CommandOutputNotification',
     Extends: AppNotification,
