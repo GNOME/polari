@@ -1,5 +1,6 @@
 const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
+const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
@@ -224,7 +225,6 @@ const EntryArea = new Lang.Class({
             this._pasteButton.grab_focus();
         } else {
             this.visible_child_name = 'default';
-            this._chatEntry.text = '';
             this._chatEntry.grab_focus_without_selecting();
         }
     },
@@ -255,27 +255,16 @@ const EntryArea = new Lang.Class({
         try {
             app.pasteManager.pasteContent(this._pasteContent, title,
                 Lang.bind(this, function(url) {
-                    if (!url)
-                        return;
-
-                    let type = Tp.ChannelTextMessageType.NORMAL;
-                    let message = Tp.ClientMessage.new_text(type, url);
-                    this._room.channel.send_message_async(message, 0,
-                        Lang.bind(this, function(c, res) {
-                            try {
-                                 c.send_message_finish(res);
-                            } catch(e) {
-                                 logError(e, 'Failed to send message')
-                            }
-                        }));
+                    // TODO: handle errors
+                    this._setPasteContent(null);
+                    if (url)
+                        this._chatEntry.emit('insert-at-cursor', url);
                 }));
         } catch(e) {
             let type = typeof this._pasteContent;
             Utils.debug('Failed to paste content of type ' +
                         (type == 'object' ? this._pasteContent.toString() : type));
         }
-
-        this._setPasteContent(null);
     },
 
     _onCancelClicked: function() {
