@@ -123,7 +123,7 @@
                 <property name="label" translatable="yes">_Paste</property>
                 <property name="visible">True</property>
                 <property name="receives-default">True</property>
-                <property name="action-name">app.paste-text</property>
+                <property name="action-name">app.paste-content</property>
                 <property name="use-underline">True</property>
                 <style>
                   <class name="suggested-action"/>

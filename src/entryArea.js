@@ -9,6 +9,7 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const TabCompletion = imports.tabCompletion;
 const Tp = imports.gi.TelepathyGLib;
+const PasteManager = imports.pasteManager;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -209,7 +210,7 @@ const EntryArea = new Lang.Class({
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
-        this._pasteButton.action_target = new GLib.Variant('s', text);
+        this._pasteButton.action_target = new GLib.Variant('(ayi)', [text, PasteManager.DndTargetType.TEXT]);
         this.visible_child_name = 'multiline';
         this._pasteButton.grab_focus();
     },
