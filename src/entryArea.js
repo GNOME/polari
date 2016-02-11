@@ -72,8 +72,8 @@ const EntryArea = new Lang.Class({
                        'nickPopover',
                        'nickEntry',
                        'changeButton',
-                       'multiLineBox',
-                       'multiLineLabel',
+                       'pasteBox',
+                       'confirmLabel',
                        'cancelButton',
                        'pasteButton'],
     Properties: {
@@ -130,7 +130,7 @@ const EntryArea = new Lang.Class({
         this._cancelButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
         this._pasteButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
 
-        this._multiLineBox.connect_after('key-press-event', Lang.bind(this,
+        this._pasteBox.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
                 let [, keyval] = event.get_keyval();
                 let [, mods] = event.get_state();
@@ -216,24 +216,24 @@ const EntryArea = new Lang.Class({
     },
 
     _onTextPasted: function(entry, text, nLines) {
-        this._multiLineLabel.label =
+        this._confirmLabel.label =
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
         this._pasteButton.action_target = new GLib.Variant('(ayi)', [text, PasteManager.DndTargetType.TEXT]);
-        this.visible_child_name = 'multiline';
+        this.visible_child_name = 'paste-confirmation';
         this._pasteButton.grab_focus();
     },
 
     _onImagePasted: function(entry, data) {
-        this._multiLineLabel.label = _("Upload image to public paste service?");
+        this._confirmLabel.label = _("Upload image to public paste service?");
 
         let [success, buffer] = data.save_to_bufferv('png',[],[]);
         if (!success)
             return;
 
         this._pasteButton.action_target = new GLib.Variant('(ayi)', [buffer, PasteManager.DndTargetType.IMAGE]);
-        this.visible_child_name = 'multiline';
+        this.visible_child_name = 'paste-confirmation';
         this._pasteButton.grab_focus();
     },
 

@@ -96,13 +96,13 @@
           <class name="polari-paste-confirmation"/>
         </style>
         <child>
-          <object class="GtkBox" id="multiLineBox">
+          <object class="GtkBox" id="pasteBox">
             <property name="visible">True</property>
             <property name="spacing">6</property>
             <property name="margin">6</property>
             <property name="margin-end">14</property>
             <child>
-              <object class="GtkLabel" id="multiLineLabel">
+              <object class="GtkLabel" id="confirmLabel">
                 <property name="visible">True</property>
                 <property name="halign">start</property>
                 <property name="hexpand">True</property>
@@ -134,7 +134,7 @@
         </child>
       </object>
       <packing>
-        <property name="name">multiline</property>
+        <property name="name">paste-confirmation</property>
       </packing>
     </child>
   </template>
