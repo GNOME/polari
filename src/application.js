@@ -26,7 +26,8 @@ const Application = new Lang.Class({
     Signals: { 'prepare-shutdown': {} },
 
     _init: function() {
-        this.parent({ application_id: 'org.gnome.Polari' });
+        this.parent({ application_id: 'org.gnome.Polari',
+                      flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
         GLib.set_application_name('Polari');
         this._window = null;
@@ -144,6 +145,63 @@ const Application = new Lang.Class({
             this._chatroomManager.lateInit();
         }
         this._window.present();
+    },
+
+    vfunc_open: function(files) {
+        this.activate();
+
+        let time = Utils.getTpEventTime();
+        let uris = files.map(function(f) { return f.get_uri(); });
+
+        let quark = Tp.AccountManager.get_feature_quark_core();
+        if (this._accountsMonitor.accountManager.is_prepared(quark))
+            this._openURIs(uris, time);
+        else
+            this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
+                function(mon) {
+                    this._openURIs(uris, time);
+                }));
+    },
+
+    _openURIs: function(uris, time) {
+        let map = {};
+
+        this._accountsMonitor.dupAccounts().forEach(function(a) {
+            if (!a.enabled)
+                return;
+
+            let params = a.dup_parameters_vardict().deep_unpack();
+            map[a.get_object_path()] = params.server.deep_unpack();
+        });
+
+        let action = this.lookup_action('join-room');
+        uris.forEach(Lang.bind(this, function(uri) {
+            let uriRegEx = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w \. \+-]*)/;
+            let server, port, room;
+            try {
+                [,, server, port, room] = uri.match(uriRegEx);
+                if (!room) throw new Error('No Room');
+            } catch(e) {
+                let label = _("Could not open the link.");
+                let n = new AppNotifications.CloseNotification(label,
+                                                               'dialog-error-symbolic');
+                this.notificationQueue.addNotification(n);
+                log("Invalid URI");
+                return;
+            }
+
+            let matches = Object.keys(map).filter(function(a) {
+                return map[a] == server;
+            });
+
+            if (!matches.length) {
+                log("No matching account");
+                return;
+            }
+
+            action.activate(new GLib.Variant('(ssu)',
+                            [matches[0], '#' + room, time]));
+        }));
     },
 
     _updateAccountAction: function(action) {
