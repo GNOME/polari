@@ -5,7 +5,7 @@ const Tp = imports.gi.TelepathyGLib;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
-const UNDO_TIMEOUT = 7;
+const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
 const AppNotification = new Lang.Class({
@@ -30,36 +30,59 @@ const AppNotification = new Lang.Class({
     }
 });
 
-const UndoNotification = new Lang.Class({
-    Name: 'UndoNotification',
+const MessageNotification = new Lang.Class({
+    Name: 'MessageNotification',
     Extends: AppNotification,
-    Signals: { undo: {}, closed: {} },
 
-    _init: function(label) {
+    _init: function(label, iconName) {
         this.parent();
 
-        this._undo = false;
+        Mainloop.timeout_add_seconds(TIMEOUT, Lang.bind(this, this.close));
 
-        Mainloop.timeout_add_seconds(UNDO_TIMEOUT, Lang.bind(this, this.close));
+        this._box = new Gtk.Box({ spacing: 12 });
 
-        let box = new Gtk.Box({ spacing: 12 });
-        box.add(new Gtk.Label({ label: label, hexpand: true,
-                                ellipsize: Pango.EllipsizeMode.END }));
+        if (iconName)
+            this._box.add(new Gtk.Image({ icon_name: iconName }));
 
-        let undoButton = new Gtk.Button({ label: _("Undo") });
-        undoButton.connect('clicked', Lang.bind(this, function() {
-            this._undo = true;
-            this.close();
-        }));
-        box.add(undoButton);
+        this._box.add(new Gtk.Label({ label: label, hexpand: true,
+                                      ellipsize: Pango.EllipsizeMode.END }));
 
         let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
         closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic' });
         closeButton.connect('clicked', Lang.bind(this, this.close));
-        box.add(closeButton);
+        this._box.pack_end(closeButton, false, false, 0);
 
-        this.add(box);
+        this.add(this._box);
         this.show_all();
+    },
+
+
+    addButton: function(label, callback) {
+        let button = new Gtk.Button({ label: label, visible: true });
+        button.connect('clicked', Lang.bind(this, function() {
+            if (callback)
+                callback();
+            this.close();
+        }));
+
+        this._box.add(button);
+    }
+});
+
+const UndoNotification = new Lang.Class({
+    Name: 'UndoNotification',
+    Extends: MessageNotification,
+    Signals: { closed: {}, undo: {} },
+
+    _init: function(label) {
+        this.parent(label);
+
+        this._undo = false;
+
+        this.addButton(_("Undo"), Lang.bind(this, function() {
+            this._undo = true;
+        }));
+
     },
 
     close: function() {
