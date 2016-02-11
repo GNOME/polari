@@ -36,7 +36,9 @@ const SECRET_SCHEMA = new Secret.Schema(
     { 'account-id': Secret.SchemaAttributeType.STRING }
 );
 
-const GPASTE_BASEURL = 'https://paste.gnome.org/'
+const GPASTE_BASEURL = 'https://paste.gnome.org/';
+
+const IMGUR_CLIENT_ID = '4109e59177ec95e';
 
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
 const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
@@ -200,6 +202,40 @@ function gpaste(text, title, callback) {
             }
             if (info.result && info.result.id)
                 callback(GPASTE_BASEURL + info.result.id);
+            else
+                callback(null);
+        });
+}
+
+function imgurPaste(data, title, callback) {
+    let base64EncodedBuffer = GLib.base64_encode(data);
+
+    let params = {
+        title: title,
+        image: base64EncodedBuffer
+    };
+
+    let session = new Soup.Session();
+    let createUrl = 'https://api.imgur.com/3/image';
+    let message = Soup.form_request_new_from_hash('POST', createUrl, params);
+
+    let requestHeaders = message.request_headers;
+    requestHeaders.append('Authorization', 'Client-ID ' + IMGUR_CLIENT_ID);
+    session.queue_message(message,
+        function(session, message) {
+            if (message.status_code != Soup.KnownStatusCode.OK) {
+                callback(null);
+                return;
+            }
+
+            let info = {};
+            try {
+                info = JSON.parse(message.response_body.data);
+            } catch(e) {
+                log(e.message);
+            }
+            if (info.success)
+                callback(info.data.link);
             else
                 callback(null);
         });

@@ -385,6 +385,9 @@ const Application = new Lang.Class({
                 let text = data.toString();
                 this.pasteManager.pasteText(text);
                 break;
+            case PasteManager.DndTargetType.IMAGE:
+                this.pasteManager.pasteImage(data);
+                break;
             default:
                 log('Unhandled paste content of type %d'.format(type));
         }

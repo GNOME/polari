@@ -1,4 +1,5 @@
 const Gdk = imports.gi.Gdk;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
@@ -19,7 +20,8 @@ const ChatEntry = new Lang.Class({
     Name: 'ChatEntry',
     Extends: Gtk.Entry,
     Signals: { 'text-pasted': { param_types: [GObject.TYPE_STRING,
-                                              GObject.TYPE_INT] } },
+                                              GObject.TYPE_INT] },
+               'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] } },
 
     _init: function(params) {
         this.parent(params);
@@ -49,6 +51,13 @@ const ChatEntry = new Lang.Class({
                 this._useDefaultHandler = true;
                 this.emit('paste-clipboard');
                 this._useDefaultHandler = false;
+            }));
+
+        clipboard.request_image(Lang.bind(this,
+            function(clipboard, pixbuf) {
+                if (pixbuf == null)
+                    return;
+                this.emit('image-pasted', pixbuf);
             }));
     },
 });
@@ -105,6 +114,7 @@ const EntryArea = new Lang.Class({
         this._nickPopover.set_default_widget(this._changeButton);
 
         this._chatEntry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
+        this._chatEntry.connect('image-pasted', Lang.bind(this, this._onImagePasted));
         this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
 
         this._chatEntry.connect('activate', Lang.bind(this,
@@ -211,6 +221,18 @@ const EntryArea = new Lang.Class({
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
         this._pasteButton.action_target = new GLib.Variant('(ayi)', [text, PasteManager.DndTargetType.TEXT]);
+        this.visible_child_name = 'multiline';
+        this._pasteButton.grab_focus();
+    },
+
+    _onImagePasted: function(entry, data) {
+        this._multiLineLabel.label = _("Upload image to public paste service?");
+
+        let [success, buffer] = data.save_to_bufferv('png',[],[]);
+        if (!success)
+            return;
+
+        this._pasteButton.action_target = new GLib.Variant('(ayi)', [buffer, PasteManager.DndTargetType.IMAGE]);
         this.visible_child_name = 'multiline';
         this._pasteButton.grab_focus();
     },

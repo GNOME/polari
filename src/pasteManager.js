@@ -81,6 +81,14 @@ const PasteManager = new Lang.Class({
         this._pasteText(text, n);
     },
 
+    pasteImage: function(data) {
+        let app = Gio.Application.get_default();
+        let n = new UploadNotification("image");
+        app.notificationQueue.addNotification(n);
+
+        this._pasteImage(data, n);
+    },
+
     _pasteText: function(text, notification) {
         let room = this._roomManager.getActiveRoom();
         if (!room) {
@@ -100,6 +108,42 @@ const PasteManager = new Lang.Class({
             title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
 
         Utils.gpaste(text, title, Lang.bind(this,
+            function(url) {
+                if (!url) {
+                    notification.close();
+                    return;
+                }
+
+                let type = Tp.ChannelTextMessageType.NORMAL;
+                let message = Tp.ClientMessage.new_text(type, url);
+                room.channel.send_message_async(message, 0, Lang.bind(this,
+                    function(c, res) {
+                        try {
+                             c.send_message_finish(res);
+                        } catch(e) {
+                             logError(e, 'Failed to send message')
+                        }
+                        notification.close();
+                    }));
+            }));
+    },
+
+    _pasteImage: function(data, notification) {
+        let room = this._roomManager.getActiveRoom();
+        if (!room) {
+            notification.close();
+            return;
+        }
+
+        let title;
+        let nick = room.channel.connection.self_contact.alias;
+        if (room.type == Tp.HandleType.ROOM)
+            /* translators: %s is a nick, #%s a channel */
+            title = _("%s in #%s").format(nick, room.display_name);
+        else
+            title = _("Paste from %s").format(nick);
+
+        Utils.imgurPaste(data, title, Lang.bind(this,
             function(url) {
                 if (!url) {
                     notification.close();
