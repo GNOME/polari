@@ -12,6 +12,7 @@ const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
 const Utils = imports.utils;
+const NetworksManager = imports.networksManager;
 
 const MAX_RETRIES = 3;
 
@@ -42,6 +43,7 @@ const Application = new Lang.Class({
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._networksManager = NetworksManager.getDefault();
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
             function(am, account) {
@@ -173,7 +175,10 @@ const Application = new Lang.Class({
                 return;
 
             let params = a.dup_parameters_vardict().deep_unpack();
-            map[a.get_object_path()] = params.server.deep_unpack();
+            map[a.get_object_path()] = {
+                server: params.server.deep_unpack(),
+                service: a.service
+            };
         });
 
         let joinAction = this.lookup_action('join-room');
@@ -182,17 +187,27 @@ const Application = new Lang.Class({
             if (!success)
                 return;
 
+            // When launching Polari via a URL, there is a potential race
+            // condition between networksManager and AccountsManager here. If
+            // AccountsManager finishes first, networksManager's list of
+            // servers would be empty and hence no matches would be found.
+            let matchedId = this._networksManager.findByServer(server);
             let matches = Object.keys(map).filter(function(a) {
-                return GLib.ascii_strcasecmp(map[a], server) == 0;
+                return GLib.ascii_strcasecmp(map[a].server, server) == 0 ||
+                       map[a].service == matchedId;
             });
 
-            if (!matches.length) {
-                log("No matching account");
-                return;
-            }
-
-            joinAction.activate(new GLib.Variant('(ssu)',
-                            [matches[0], '#' + room, time]));
+            if (matches.length)
+                joinAction.activate(new GLib.Variant('(ssu)',
+                                [matches[0], '#' + room, time]));
+            else
+                this._createAccount(matchedId, server, port,
+                    function(a) {
+                        if (a)
+                            joinAction.activate(new GLib.Variant('(ssu)',
+                                            [a.get_object_path(),
+                                             '#' + room, time]));
+                    });
         }));
     },
 
@@ -210,6 +225,41 @@ const Application = new Lang.Class({
         }
 
         return [success, server, port, room];
+    },
+
+    _createAccount: function(id, server, port, callback) {
+        let params, name;
+
+        if (id) {
+            params = this._networksManager.getNetworkDetails(id);
+            name = this._networksManager.getNetworkName(id);
+        } else {
+            params = {
+                'account': new GLib.Variant('s', GLib.get_user_name()),
+                'server': new GLib.Variant('s', server),
+                'port': new GLib.Variant('u', port ? port : 6667),
+                'use-ssl': new GLib.Variant('b', (port == 6697)),
+            };
+            name = server;
+        }
+
+        let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
+                                          connection_manager: 'idle',
+                                          protocol: 'irc',
+                                          display_name: name });
+        req.set_enabled(true);
+
+        if (id)
+            req.set_service(id);
+
+        for (let prop in params)
+            req.set_parameter(prop, params[prop]);
+
+        req.create_account_async(Lang.bind(this,
+            function(r, res) {
+                let account = req.create_account_finish(res);
+                callback(account);
+            }));
     },
 
     _updateAccountAction: function(action) {
