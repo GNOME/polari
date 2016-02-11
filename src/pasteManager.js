@@ -68,76 +68,14 @@ const PasteManager = new Lang.Class({
         this._widgets.push(widget);
     },
 
-    pasteContent: function(content) {
+    pasteContent: function(content, title, callback) {
         if (typeof content == 'string') {
-            this.pasteText(content);
+            Utils.gpaste(content, title, callback);
         } else if (content instanceof GdkPixbuf.Pixbuf) {
-            this.pasteImage(content);
+            Utils.imgurPaste(content, title, callback);
         } else {
             throw new Error('Unhandled content type');
         }
-    },
-
-    pasteText: function(text) {
-        let room = this._roomManager.getActiveRoom();
-        if (!room)
-            return;
-
-        let title;
-        let nick = room.channel.connection.self_contact.alias;
-        if (room.type == Tp.HandleType.ROOM)
-            /* translators: %s is a nick, #%s a channel */
-            title = _("%s in #%s").format(nick, room.display_name);
-        else
-            title = _("Paste from %s").format(nick);
-
-        Utils.gpaste(text, title, Lang.bind(this,
-            function(url) {
-                if (!url)
-                    return;
-
-                let type = Tp.ChannelTextMessageType.NORMAL;
-                let message = Tp.ClientMessage.new_text(type, url);
-                room.channel.send_message_async(message, 0, Lang.bind(this,
-                    function(c, res) {
-                        try {
-                             c.send_message_finish(res);
-                        } catch(e) {
-                             logError(e, 'Failed to send message')
-                        }
-                    }));
-            }));
-    },
-
-    pasteImage: function(pixbuf) {
-        let room = this._roomManager.getActiveRoom();
-        if (!room)
-            return;
-
-        let title;
-        let nick = room.channel.connection.self_contact.alias;
-        if (room.type == Tp.HandleType.ROOM)
-            /* translators: %s is a nick, #%s a channel */
-            title = _("%s in #%s").format(nick, room.display_name);
-        else
-            title = _("Paste from %s").format(nick);
-
-        Utils.imgurPaste(pixbuf, title, Lang.bind(this,
-            function(url) {
-                if (!url)
-                    return;
-
-                let type = Tp.ChannelTextMessageType.NORMAL;
-                let message = Tp.ClientMessage.new_text(type, url);
-                room.channel.send_message_async(message, 0, Lang.bind(this,
-                    function(c, res) {
-                        try {
-                             c.send_message_finish(res);
-                        } catch(e) {
-                             logError(e, 'Failed to send message')
-                        }
-                    }));
-            }));
     },
 
     _onDragDrop: function(widget, context, x, y, time) {

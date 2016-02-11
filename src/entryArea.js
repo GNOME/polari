@@ -11,6 +11,7 @@ const Mainloop = imports.mainloop;
 const TabCompletion = imports.tabCompletion;
 const Tp = imports.gi.TelepathyGLib;
 const PasteManager = imports.pasteManager;
+const Utils = imports.utils;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -242,14 +243,38 @@ const EntryArea = new Lang.Class({
     },
 
     _onPasteClicked: function() {
+        let title;
+        let nick = this._room.channel.connection.self_contact.alias;
+        if (this._room.type == Tp.HandleType.ROOM)
+            /* translators: %s is a nick, #%s a channel */
+            title = _("%s in #%s").format(nick, this._room.display_name);
+        else
+            title = _("Paste from %s").format(nick);
+
         let app = Gio.Application.get_default();
         try {
-            app.pasteManager.pasteContent(this._pasteContent);
+            app.pasteManager.pasteContent(this._pasteContent, title,
+                Lang.bind(this, function(url) {
+                    if (!url)
+                        return;
+
+                    let type = Tp.ChannelTextMessageType.NORMAL;
+                    let message = Tp.ClientMessage.new_text(type, url);
+                    this._room.channel.send_message_async(message, 0,
+                        Lang.bind(this, function(c, res) {
+                            try {
+                                 c.send_message_finish(res);
+                            } catch(e) {
+                                 logError(e, 'Failed to send message')
+                            }
+                        }));
+                }));
         } catch(e) {
             let type = typeof this._pasteContent;
             Utils.debug('Failed to paste content of type ' +
                         (type == 'object' ? this._pasteContent.toString() : type));
         }
+
         this._setPasteContent(null);
     },
 
