@@ -91,6 +91,13 @@ const NetworksManager = new Lang.Class({
         });
         return [network.name.toLowerCase(),
                 network.id.toLowerCase()].concat(servers);
+    },
+
+    findByServer: function(server) {
+        for (let n of this._networks)
+           if (n.servers.some(s => s.address == server))
+               return n.id;
+        return null;
     }
 });
 Signals.addSignalMethods(NetworksManager.prototype);
