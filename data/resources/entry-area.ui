@@ -100,10 +100,19 @@
             <property name="visible">True</property>
             <property name="spacing">6</property>
             <property name="margin">6</property>
-            <property name="margin-end">14</property>
+            <property name="margin-end">0</property>
             <child>
-              <object class="GtkLabel" id="confirmLabel">
+              <object class="GtkSpinner">
                 <property name="visible">True</property>
+                <property name="active" bind-source="uploadLabel"
+                          bind-property="visible" bind-flags="sync-create" />
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="uploadLabel">
+                <property name="visible" bind-source="confirmLabel"
+                          bind-property="visible"
+                          bind-flags="sync-create|invert-boolean" />
                 <property name="halign">start</property>
                 <property name="hexpand">True</property>
                 <property name="ellipsize">end</property>
@@ -111,22 +120,49 @@
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="cancelButton">
-                <property name="label" translatable="yes">_Cancel</property>
-                <property name="visible">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-underline">True</property>
+              <object class="GtkLabel" id="confirmLabel">
+                <property name="halign">start</property>
+                <property name="hexpand">True</property>
+                <property name="ellipsize">end</property>
+                <property name="xalign">0</property>
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="pasteButton">
-                <property name="label" translatable="yes">_Paste</property>
+              <object class="GtkRevealer">
                 <property name="visible">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-underline">True</property>
-                <style>
-                  <class name="suggested-action"/>
-                </style>
+                <property name="transition-type">slide-left</property>
+                <property name="reveal-child" bind-source="confirmLabel"
+                          bind-property="visible" bind-flags="sync-create" />
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="spacing">6</property>
+                    <property name="margin-end">14</property>
+                    <child>
+                      <object class="GtkButton" id="cancelButton">
+                        <property name="label" translatable="yes">_Cancel</property>
+                        <property name="visible">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="sensitive" bind-source="confirmLabel"
+                                  bind-property="visible" bind-flags="sync-create" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="pasteButton">
+                        <property name="label" translatable="yes">_Paste</property>
+                        <property name="visible">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="sensitive" bind-source="confirmLabel"
+                                  bind-property="visible" bind-flags="sync-create" />
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

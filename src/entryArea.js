@@ -76,6 +76,7 @@ const EntryArea = new Lang.Class({
                        'changeButton',
                        'pasteBox',
                        'confirmLabel',
+                       'uploadLabel',
                        'cancelButton',
                        'pasteButton'],
     Properties: {
@@ -221,6 +222,7 @@ const EntryArea = new Lang.Class({
         this._pasteContent = content;
 
         if (content) {
+            this._confirmLabel.show();
             this.visible_child_name = 'paste-confirmation';
             this._pasteButton.grab_focus();
         } else {
@@ -234,11 +236,16 @@ const EntryArea = new Lang.Class({
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
+        this._uploadLabel.label =
+            ngettext("Uploading %s line of text to public paste service …",
+                     "Uploading %s lines of text to public paste service …",
+                     nLines).format(nLines);
         this._setPasteContent(text);
     },
 
     _onImagePasted: function(entry, pixbuf) {
         this._confirmLabel.label = _("Upload image to public paste service?");
+        this._uploadLabel.label = _("Uploading image to public paste service …");
         this._setPasteContent(pixbuf);
     },
 
@@ -265,6 +272,7 @@ const EntryArea = new Lang.Class({
             Utils.debug('Failed to paste content of type ' +
                         (type == 'object' ? this._pasteContent.toString() : type));
         }
+        this._confirmLabel.hide();
     },
 
     _onCancelClicked: function() {
