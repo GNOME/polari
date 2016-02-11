@@ -5,7 +5,7 @@ const Tp = imports.gi.TelepathyGLib;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
-const UNDO_TIMEOUT = 7;
+const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
 const AppNotification = new Lang.Class({
@@ -40,7 +40,7 @@ const UndoNotification = new Lang.Class({
 
         this._undo = false;
 
-        Mainloop.timeout_add_seconds(UNDO_TIMEOUT, Lang.bind(this, this.close));
+        Mainloop.timeout_add_seconds(TIMEOUT, Lang.bind(this, this.close));
 
         let box = new Gtk.Box({ spacing: 12 });
         box.add(new Gtk.Label({ label: label, hexpand: true,
