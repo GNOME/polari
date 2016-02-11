@@ -67,9 +67,6 @@ const Application = new Lang.Class({
           { name: 'message-user',
             activate: Lang.bind(this, this._onMessageUser),
             parameter_type: GLib.VariantType.new('(sssu)') },
-          { name: 'paste-content',
-            activate: Lang.bind(this, this._onPasteContent),
-            parameter_type: GLib.VariantType.new('(ayi)') },
           { name: 'leave-room',
             activate: Lang.bind(this, this._onLeaveRoom),
             parameter_type: GLib.VariantType.new('(ss)') },
@@ -380,21 +377,6 @@ const Application = new Lang.Class({
                 logError(e, 'Failed to send message')
             }
         }));
-    },
-
-    _onPasteContent: function(action, parameter) {
-        let [data, type] = parameter.deep_unpack();
-        switch (type) {
-            case PasteManager.DndTargetType.TEXT:
-                let text = data.toString();
-                this.pasteManager.pasteText(text);
-                break;
-            case PasteManager.DndTargetType.IMAGE:
-                this.pasteManager.pasteImage(data);
-                break;
-            default:
-                log('Unhandled paste content of type %d'.format(type));
-        }
     },
 
     _onLeaveRoom: function(action, parameter) {

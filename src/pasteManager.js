@@ -68,6 +68,19 @@ const PasteManager = new Lang.Class({
         this._widgets.push(widget);
     },
 
+    pasteContent: function(content) {
+        if (typeof content == 'string') {
+            this.pasteText(content);
+        } else if (content instanceof GdkPixbuf.Pixbuf) {
+            let [success, buffer] = content.save_to_bufferv('png', [], []);
+            if (!success)
+                return;
+            this.pasteImage(buffer);
+        } else {
+            throw new Error('Unhandled content type');
+        }
+    },
+
     pasteText: function(text) {
         let room = this._roomManager.getActiveRoom();
         if (!room)

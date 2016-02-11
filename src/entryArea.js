@@ -127,8 +127,8 @@ const EntryArea = new Lang.Class({
                 }
             }));
 
-        this._cancelButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
-        this._pasteButton.connect('clicked', Lang.bind(this, this._onButtonClicked));
+        this._cancelButton.connect('clicked', Lang.bind(this, this._onCancelClicked));
+        this._pasteButton.connect('clicked', Lang.bind(this, this._onPasteClicked));
 
         this._pasteBox.connect_after('key-press-event', Lang.bind(this,
             function(w, event) {
@@ -216,7 +216,7 @@ const EntryArea = new Lang.Class({
     },
 
     _setPasteContent: function(content) {
-        this._pasteButton.action_target = content;
+        this._pasteContent = content;
 
         if (content) {
             this.visible_child_name = 'paste-confirmation';
@@ -233,20 +233,27 @@ const EntryArea = new Lang.Class({
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
-        this._setPasteContent(new GLib.Variant('(ayi)', [text, PasteManager.DndTargetType.TEXT]));
+        this._setPasteContent(text);
     },
 
-    _onImagePasted: function(entry, data) {
+    _onImagePasted: function(entry, pixbuf) {
         this._confirmLabel.label = _("Upload image to public paste service?");
-
-        let [success, buffer] = data.save_to_bufferv('png',[],[]);
-        if (!success)
-            return;
-
-        this._setPasteContent(new GLib.Variant('(ayi)', [buffer, PasteManager.DndTargetType.IMAGE]));
+        this._setPasteContent(pixbuf);
     },
 
-    _onButtonClicked: function() {
+    _onPasteClicked: function() {
+        let app = Gio.Application.get_default();
+        try {
+            app.pasteManager.pasteContent(this._pasteContent);
+        } catch(e) {
+            let type = typeof this._pasteContent;
+            Utils.debug('Failed to paste content of type ' +
+                        (type == 'object' ? this._pasteContent.toString() : type));
+        }
+        this._setPasteContent(null);
+    },
+
+    _onCancelClicked: function() {
         this._setPasteContent(null);
     },
 
