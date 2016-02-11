@@ -135,6 +135,19 @@ const RoomView = new Lang.Class({
                                  GObject.BindingFlags.SYNC_CREATE);
         sizeGroup.add_widget(this._entryArea);
 
+        this._view.connect('text-dropped', Lang.bind(this,
+            function(view, text) {
+               this._entryArea.pasteText(text, text.split('\n').length);
+            }));
+        this._view.connect('image-dropped', Lang.bind(this,
+            function(view, image) {
+               this._entryArea.pasteImage(image);
+            }));
+        this._view.connect('file-dropped', Lang.bind(this,
+            function(view, file) {
+               this._entryArea.pasteFile(file);
+            }));
+
         this.show_all();
     },
 

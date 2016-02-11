@@ -35,11 +35,6 @@ const PasteManager = new Lang.Class({
     _init: function() {
     },
 
-    addWidget: function(widget) {
-        // auto-paste needs some design; disable for now
-        return;
-    },
-
     pasteContent: function(content, title, callback) {
         if (typeof content == 'string') {
             Utils.gpaste(content, title, callback);

@@ -11,6 +11,7 @@ const Tpl = imports.gi.TelepathyLogger;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 
@@ -220,7 +221,9 @@ const ButtonTag = new Lang.Class({
 const ChatView = new Lang.Class({
     Name: 'ChatView',
     Extends: Gtk.ScrolledWindow,
+    Implements: [PasteManager.DropTargetIface],
     Properties: {
+        'can-drop': GObject.ParamSpec.override('can-drop', PasteManager.DropTargetIface),
         'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
                                                  'max-nick-chars',
                                                  'max-nick-chars',
@@ -308,7 +311,7 @@ const ChatView = new Lang.Class({
         this._scrollBottom = adj.upper - adj.page_size;
 
         this._app = Gio.Application.get_default();
-        this._app.pasteManager.addWidget(this._view);
+        PasteManager.DropTargetIface.addTargets(this, this._view);
 
         this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
@@ -514,6 +517,10 @@ const ChatView = new Lang.Class({
 
     get max_nick_chars() {
         return this._maxNickChars;
+    },
+
+    get can_drop() {
+        return this._channel != null;
     },
 
     _updateMaxNickChars: function(length) {
