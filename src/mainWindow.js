@@ -107,7 +107,7 @@ const MainWindow = new Lang.Class({
                                            'subtitle',
                                            'subtitle',
                                            GObject.ParamFlags.READABLE,
-                                           null),
+                                           ''),
         'subtitle-visible': GObject.ParamSpec.boolean('subtitle-visible',
                                                       'subtitle-visible',
                                                       'subtitle-visible',
