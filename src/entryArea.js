@@ -215,14 +215,25 @@ const EntryArea = new Lang.Class({
         this._chatEntry.get_style_context().remove_class('error');
     },
 
+    _setPasteContent: function(content) {
+        this._pasteButton.action_target = content;
+
+        if (content) {
+            this.visible_child_name = 'paste-confirmation';
+            this._pasteButton.grab_focus();
+        } else {
+            this.visible_child_name = 'default';
+            this._chatEntry.text = '';
+            this._chatEntry.grab_focus_without_selecting();
+        }
+    },
+
     _onTextPasted: function(entry, text, nLines) {
         this._confirmLabel.label =
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
                      nLines).format(nLines);
-        this._pasteButton.action_target = new GLib.Variant('(ayi)', [text, PasteManager.DndTargetType.TEXT]);
-        this.visible_child_name = 'paste-confirmation';
-        this._pasteButton.grab_focus();
+        this._setPasteContent(new GLib.Variant('(ayi)', [text, PasteManager.DndTargetType.TEXT]));
     },
 
     _onImagePasted: function(entry, data) {
@@ -232,14 +243,11 @@ const EntryArea = new Lang.Class({
         if (!success)
             return;
 
-        this._pasteButton.action_target = new GLib.Variant('(ayi)', [buffer, PasteManager.DndTargetType.IMAGE]);
-        this.visible_child_name = 'paste-confirmation';
-        this._pasteButton.grab_focus();
+        this._setPasteContent(new GLib.Variant('(ayi)', [buffer, PasteManager.DndTargetType.IMAGE]));
     },
 
     _onButtonClicked: function() {
-            this._chatEntry.text = '';
-            this.visible_child_name = 'default';
+        this._setPasteContent(null);
     },
 
     _onSensitiveChanged: function() {
