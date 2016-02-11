@@ -12,6 +12,7 @@ const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
 const Utils = imports.utils;
+const NetworksManager = imports.networksManager;
 
 const MAX_RETRIES = 3;
 
@@ -40,6 +41,7 @@ const Application = new Lang.Class({
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._networksManager = NetworksManager.getDefault();
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
             function(am, account) {
@@ -166,13 +168,24 @@ const Application = new Lang.Class({
     _openURIs: function(uris, time) {
         let map = {};
 
-        this._accountsMonitor.dupAccounts().forEach(function(a) {
+        this._accountsMonitor.dupAccounts().forEach(Lang.bind(this, function(a) {
             if (!a.enabled)
                 return;
 
-            let params = a.dup_parameters_vardict().deep_unpack();
-            map[a.get_object_path()] = params.server.deep_unpack();
-        });
+            let servers = [];
+
+            let predefined = this._networksManager.getAccountIsPredefined(a);
+            if (predefined) {
+                this._networksManager.getServers(a).forEach(function(s) {
+                    servers.push(s.address);
+                });
+            } else {
+                let params = a.dup_parameters_vardict().deep_unpack();
+                servers = [params.server.deep_unpack()];
+            }
+
+            map[a.get_object_path()] = servers;
+        }));
 
         let action = this.lookup_action('join-room');
         uris.forEach(Lang.bind(this, function(uri) {
@@ -191,16 +204,71 @@ const Application = new Lang.Class({
             }
 
             let matches = Object.keys(map).filter(function(a) {
-                return map[a] == server;
+                let result = false;
+                map[a].forEach(function(s) {
+                    if (s == server)
+                        result = true;
+                        return;
+                });
+                return result;
             });
 
-            if (!matches.length) {
-                log("No matching account");
-                return;
-            }
+            if (matches.length) {
+                action.activate(new GLib.Variant('(ssu)',
+                                [matches[0], '#' + room, time]));
+            } else {
+                let networks = this._networksManager.networks;
+                let id, name, params;
+                for (let n of networks) {
+                    for (let s of n.servers) {
+                        log("checking " + s.address + " vs. " + server);
+                        if (s.address == server) {
+                            id = n.id;
+                            break;
+                        }
+                    }
+                    if (id) {
+                        name = n.name;
+                        params = this._networksManager.getNetworkDetails(id);
+                        break;
+                    }
+                }
 
-            action.activate(new GLib.Variant('(ssu)',
-                            [matches[0], '#' + room, time]));
+                if (!id) {
+                    let ssl = (port == 6697);
+                    params = {
+                        'account': new GLib.Variant('s', GLib.get_user_name()),
+                        'server': new GLib.Variant('s', server),
+                        'port': new GLib.Variant('u', port ? port : 6667),
+                        'use-ssl': new GLib.Variant('b', ssl),
+                    };
+                    name = server;
+                }
+
+                let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
+                                                  connection_manager: 'idle',
+                                                  protocol: 'irc',
+                                                  display_name: name });
+                req.set_enabled(true);
+
+                for (let prop in params)
+                    req.set_parameter(prop, params[prop]);
+
+                req.create_account_async(Lang.bind(this,
+                    function(r, res) {
+                        let account = req.create_account_finish(res);
+
+                        if (!account)
+                            return;
+                            // TODO: Handle errors
+
+                        let action = this.lookup_action('join-room');
+                        action.activate(GLib.Variant.new('(ssu)',
+                                                         [ account.get_object_path(),
+                                                           '#' + room,
+                                                           Utils.getTpEventTime() ]));
+                    }));
+            }
         }));
     },
 

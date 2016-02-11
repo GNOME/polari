@@ -91,6 +91,13 @@ const NetworksManager = new Lang.Class({
         });
         return [network.name.toLowerCase(),
                 network.id.toLowerCase()].concat(servers);
+    },
+
+    getServers: function(account) {
+        if (!account)
+            throw new Error('Missing account argument');
+        return this._lookupNetwork(account.service).servers;
     }
+
 });
 Signals.addSignalMethods(NetworksManager.prototype);
