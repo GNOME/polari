@@ -215,12 +215,16 @@ function gpaste(text, title, callback) {
         });
 }
 
-function imgurPaste(data, title, callback) {
-    let base64EncodedBuffer = GLib.base64_encode(data);
+function imgurPaste(pixbuf, title, callback) {
+    let [success, buffer] = pixbuf.save_to_bufferv('png', [], []);
+    if (!success) {
+        callback(null);
+        return;
+    }
 
     let params = {
         title: title,
-        image: base64EncodedBuffer
+        image: GLib.base64_encode(buffer)
     };
 
     let session = new Soup.Session();

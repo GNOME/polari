@@ -72,10 +72,7 @@ const PasteManager = new Lang.Class({
         if (typeof content == 'string') {
             this.pasteText(content);
         } else if (content instanceof GdkPixbuf.Pixbuf) {
-            let [success, buffer] = content.save_to_bufferv('png', [], []);
-            if (!success)
-                return;
-            this.pasteImage(buffer);
+            this.pasteImage(content);
         } else {
             throw new Error('Unhandled content type');
         }
@@ -112,7 +109,7 @@ const PasteManager = new Lang.Class({
             }));
     },
 
-    pasteImage: function(data) {
+    pasteImage: function(pixbuf) {
         let room = this._roomManager.getActiveRoom();
         if (!room)
             return;
@@ -125,7 +122,7 @@ const PasteManager = new Lang.Class({
         else
             title = _("Paste from %s").format(nick);
 
-        Utils.imgurPaste(data, title, Lang.bind(this,
+        Utils.imgurPaste(pixbuf, title, Lang.bind(this,
             function(url) {
                 if (!url)
                     return;
