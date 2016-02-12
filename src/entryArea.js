@@ -124,9 +124,18 @@ const EntryArea = new Lang.Class({
             }));
         this._nickPopover.set_default_widget(this._changeButton);
 
-        this._chatEntry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
-        this._chatEntry.connect('image-pasted', Lang.bind(this, this._onImagePasted));
-        this._chatEntry.connect('file-pasted', Lang.bind(this, this._onFilePasted));
+        this._chatEntry.connect('text-pasted', Lang.bind(this,
+            function(entry, text, nLines) {
+                this.pasteText(text, nLines);
+            }));
+        this._chatEntry.connect('image-pasted', Lang.bind(this,
+            function(entry, image) {
+                this.pasteImage(image);
+            }));
+        this._chatEntry.connect('file-pasted', Lang.bind(this,
+            function(entry, file) {
+                this.pasteFile(file);
+            }));
         this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
 
         this._chatEntry.connect('activate', Lang.bind(this,
@@ -240,7 +249,7 @@ const EntryArea = new Lang.Class({
         }
     },
 
-    _onTextPasted: function(entry, text, nLines) {
+    pasteText: function(text, nLines) {
         this._confirmLabel.label =
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
@@ -252,13 +261,13 @@ const EntryArea = new Lang.Class({
         this._setPasteContent(text);
     },
 
-    _onImagePasted: function(entry, pixbuf) {
+    pasteImage: function(pixbuf) {
         this._confirmLabel.label = _("Upload image to public paste service?");
         this._uploadLabel.label = _("Uploading image to public paste service…");
         this._setPasteContent(pixbuf);
     },
 
-    _onFilePasted: function(entry, file) {
+    pasteFile: function(file) {
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                               Gio.FileQueryInfoFlags.NONE,
                               GLib.PRIORITY_DEFAULT, null,
