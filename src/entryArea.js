@@ -23,7 +23,8 @@ const ChatEntry = new Lang.Class({
     Extends: Gtk.Entry,
     Signals: { 'text-pasted': { param_types: [GObject.TYPE_STRING,
                                               GObject.TYPE_INT] },
-               'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] } },
+               'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
+               'file-pasted': { param_types: [Gio.File.$gtype] } },
 
     _init: function(params) {
         this.parent(params);
@@ -38,21 +39,12 @@ const ChatEntry = new Lang.Class({
         }
 
         let clipboard = Gtk.Clipboard.get_default(this.get_display());
-        clipboard.request_text(Lang.bind(this,
-            function(clipboard, text) {
-                if (text == null)
-                    return;
-            	text = text.trim();
-
-                let nLines = text.split('\n').length;
-                if (nLines >= MAX_LINES) {
-                    this.emit('text-pasted', text, nLines);
-                    return;
-                }
-
-                this._useDefaultHandler = true;
-                this.emit('paste-clipboard');
-                this._useDefaultHandler = false;
+        clipboard.request_uris(Lang.bind(this,
+            function(clipboard, uris) {
+                if (uris && uris.length)
+                    this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
+                else
+                    clipboard.request_text(Lang.bind(this, this._onTextReceived));
             }));
 
         clipboard.request_image(Lang.bind(this,
@@ -62,6 +54,22 @@ const ChatEntry = new Lang.Class({
                 this.emit('image-pasted', pixbuf);
             }));
     },
+
+    _onTextReceived: function(clipboard, text) {
+        if (text == null)
+            return;
+        text = text.trim();
+
+        let nLines = text.split('\n').length;
+        if (nLines >= MAX_LINES) {
+            this.emit('text-pasted', text, nLines);
+            return;
+        }
+
+        this._useDefaultHandler = true;
+        this.emit('paste-clipboard');
+        this._useDefaultHandler = false;
+    }
 });
 
 const EntryArea = new Lang.Class({
@@ -118,6 +126,7 @@ const EntryArea = new Lang.Class({
 
         this._chatEntry.connect('text-pasted', Lang.bind(this, this._onTextPasted));
         this._chatEntry.connect('image-pasted', Lang.bind(this, this._onImagePasted));
+        this._chatEntry.connect('file-pasted', Lang.bind(this, this._onFilePasted));
         this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
 
         this._chatEntry.connect('activate', Lang.bind(this,
@@ -247,6 +256,29 @@ const EntryArea = new Lang.Class({
         this._confirmLabel.label = _("Upload image to public paste service?");
         this._uploadLabel.label = _("Uploading image to public paste service…");
         this._setPasteContent(pixbuf);
+    },
+
+    _onFilePasted: function(entry, file) {
+        file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+                              Gio.FileQueryInfoFlags.NONE,
+                              GLib.PRIORITY_DEFAULT, null,
+                              Lang.bind(this, this._onFileInfoReady));
+    },
+
+    _onFileInfoReady: function(file, res) {
+        let fileInfo = null;
+        try {
+            fileInfo = file.query_info_finish(res);
+        } catch(e) {
+            return;
+        }
+
+        let name = fileInfo.get_display_name();
+        /* Translators: %s is a filename */
+        this._confirmLabel.label = _("Upload “%s” to public paste service?").format(name);
+        /* Translators: %s is a filename */
+        this._uploadLabel.label = _("Uploading “%s” to public paste service …").format(name);
+        this._setPasteContent(file);
     },
 
     _onPasteClicked: function() {

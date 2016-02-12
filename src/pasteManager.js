@@ -73,9 +73,49 @@ const PasteManager = new Lang.Class({
             Utils.gpaste(content, title, callback);
         } else if (content instanceof GdkPixbuf.Pixbuf) {
             Utils.imgurPaste(content, title, callback);
+        } else if (content.query_info_async) {
+            this._pasteFile(content, title, callback);
         } else {
             throw new Error('Unhandled content type');
         }
+    },
+
+    _pasteFile: function(file, title, callback) {
+        file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                              Gio.FileQueryInfoFlags.NONE,
+                              GLib.PRIORITY_DEFAULT, null,
+                              Lang.bind(this, this._onFileQueryFinish, title, callback));
+    },
+
+    _onFileQueryFinish: function(file, res, title, callback) {
+        let fileInfo = null;
+        try {
+            fileInfo = file.query_info_finish(res);
+        } catch(e) {
+            callback(null);
+        }
+
+        let contentType = fileInfo.get_content_type();
+        let targetType = this._getTargetForContentType(contentType);
+
+        if (targetType == DndTargetType.TEXT)
+            file.load_contents_async(null, Lang.bind(this,
+                function(f, res) {
+                    let [, contents, ,] = f.load_contents_finish(res);
+                    Utils.gpaste(contents.toString(), title, callback);
+                }));
+        else if (targetType == DndTargetType.IMAGE)
+            file.read_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
+                function(f, res) {
+                    let stream = f.read_finish(res);
+                    GdkPixbuf.Pixbuf.new_from_stream_async(stream, null,
+                        Lang.bind(this, function(stream, res) {
+                            let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(res);
+                            Utils.imgurPaste(pixbuf, title, callback);
+                        }));
+                }));
+        else
+            callback(null);
     },
 
     _onDragDrop: function(widget, context, x, y, time) {
