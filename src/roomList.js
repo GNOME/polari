@@ -579,8 +579,20 @@ const RoomList = new Lang.Class({
         if (hasRooms1 != hasRooms2)
             return hasRooms1 ? -1 : 1;
 
-        if (account1 != account2)
-            return account1.display_name.localeCompare(account2.display_name);
+
+        if (account1 != account2) {
+            let displayName1 = account1.display_name;
+            let displayName2 = account2.display_name;
+
+            if (displayName1 != displayName2)
+                return displayName1.localeCompare(displayName2);
+
+            // Different account with the same display name :-(
+            // Fall back to the object path to guarantee a stable sort order
+            let accountPath1 = account1.get_path_suffix();
+            let accountPath2 = account2.get_path_suffix();
+            return accountPath1.localeCompare(accountPath2);
+        }
 
         let room1 = row1.room;
         let room2 = row2.room;
