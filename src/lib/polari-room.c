@@ -40,6 +40,7 @@ struct _PolariRoomPrivate {
   char  *topic;
 
   char *self_nick;
+  char *self_user;
 
   TpHandleType type;
 
@@ -298,6 +299,7 @@ update_self_nick (PolariRoom *room)
 {
   PolariRoomPrivate *priv = room->priv;
   const char *nick;
+  char *basenick;
 
   g_clear_pointer (&priv->self_nick, g_free);
 
@@ -316,7 +318,52 @@ update_self_nick (PolariRoom *room)
       nick = tp_account_get_nickname (priv->account);
     }
 
-  priv->self_nick = polari_util_get_basenick (nick);
+  basenick = polari_util_get_basenick (nick);
+
+  /*
+      - we want highlights for 'nick-away'/'nick' and vice-versa
+      - we don't want highlights for 'the-nick'/'the'
+
+     To tell those cases apart, match against the account's username
+     instead of the basenick if:
+
+     (1) basenick matches at the start of the username
+     (2) the username matches at the start of the nickname
+     ==> basenick <= username <= nickname
+
+     Using the username for highlighting should not produce false
+     negatives in that case, and may prevent false positives in
+     case the regular nickname contains non-alnums
+   */
+  if (strstr (priv->self_user, basenick) == priv->self_user &&
+      strstr (nick, priv->self_user) == nick)
+    priv->self_nick = g_strdup (priv->self_user);
+  else
+    priv->self_nick = g_strdup (basenick);
+
+  g_free (basenick);
+}
+
+static void
+update_self_user (PolariRoom *room)
+{
+  PolariRoomPrivate *priv = room->priv;
+  const GHashTable *parameters;
+  const char *username;
+  int len;
+
+  g_clear_pointer (&priv->self_user, g_free);
+
+  parameters = tp_account_get_parameters (priv->account);
+  username = tp_asv_get_string (parameters, "account");
+
+  len = strlen (username);
+  do
+    if (g_ascii_isalnum (username[len - 1]))
+      break;
+  while (--len > 0);
+
+  priv->self_user = g_utf8_casefold (username, len);
 }
 
 static void
@@ -553,6 +600,7 @@ polari_room_set_account (PolariRoom *room,
   if (g_set_object (&priv->account, account))
     g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ACCOUNT]);
 
+  update_self_user (room);
   update_self_nick (room);
 }
 
@@ -790,6 +838,7 @@ polari_room_finalize (GObject *object)
   g_clear_pointer (&priv->channel_name, g_free);
   g_clear_pointer (&priv->display_name, g_free);
   g_clear_pointer (&priv->self_nick, g_free);
+  g_clear_pointer (&priv->self_user, g_free);
 
   G_OBJECT_CLASS (polari_room_parent_class)->finalize (object);
 }
