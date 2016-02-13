@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-01 02:22+0000\n"
-"PO-Revision-Date: 2016-02-01 15:44+0100\n"
+"POT-Creation-Date: 2016-02-08 02:23+0000\n"
+"PO-Revision-Date: 2016-02-12 09:17+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -23,12 +23,12 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:77
+#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:481
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -91,17 +91,17 @@ msgid "_Description"
 msgstr "_Descripción"
 
 #: ../data/resources/connection-details.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "optional"
+msgstr "opcional"
+
+#: ../data/resources/connection-details.ui.h:4
 msgid "_Nickname"
 msgstr "_Alias"
 
-#: ../data/resources/connection-details.ui.h:4
+#: ../data/resources/connection-details.ui.h:5
 msgid "_Real Name"
 msgstr "Nombre _real"
-
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
-msgid "optional"
-msgstr "opcional"
 
 #: ../data/resources/entry-area.ui.h:1
 msgid "Change nickname:"
@@ -117,7 +117,7 @@ msgstr "Cambiar alias"
 
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:225
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:224
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -126,79 +126,105 @@ msgid "_Paste"
 msgstr "_Pegar"
 
 #: ../data/resources/help-overlay.ui.h:1
+#| msgid "General"
+msgctxt "shortcut window"
 msgid "General"
 msgstr "General"
 
 #: ../data/resources/help-overlay.ui.h:2
+#| msgid "Join Room"
+msgctxt "shortcut window"
 msgid "Join Room"
 msgstr "Unirse a la sala"
 
 #: ../data/resources/help-overlay.ui.h:3
+#| msgid "Message User"
+msgctxt "shortcut window"
 msgid "Message User"
 msgstr "Mensaje a un usuario"
 
 #: ../data/resources/help-overlay.ui.h:4
+#| msgid "Leave Room"
+msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Salir de la sala"
 
 #: ../data/resources/help-overlay.ui.h:5
+#| msgid "Show Userlist"
+msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Mostrar lista de usuarios"
 
-#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:3
+#: ../data/resources/help-overlay.ui.h:6
+#| msgid "Quit"
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Salir"
 
-#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:1
+#: ../data/resources/help-overlay.ui.h:7
+#| msgid "Keyboard Shortcuts"
+msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Atajos del teclado"
 
 #: ../data/resources/help-overlay.ui.h:8
+#| msgid "Navigation"
+msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navegación"
 
 #: ../data/resources/help-overlay.ui.h:9
+#| msgid "Next Room"
+msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Siguiente sala"
 
 #: ../data/resources/help-overlay.ui.h:10
+#| msgid "Previous Room"
+msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Sala anterior"
 
 #: ../data/resources/help-overlay.ui.h:11
+#| msgid "First Room"
+msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Primera sala"
 
 #: ../data/resources/help-overlay.ui.h:12
+#| msgid "Last Room"
+msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Última sala"
 
 #: ../data/resources/help-overlay.ui.h:13
+#| msgid "First - Ninth Room"
+msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Primera - novena sala"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:223
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:235
 msgid "Join Chat Room"
 msgstr "Unirse a la sala de chat"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:225
+#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:237
 msgid "_Join"
 msgstr "_Unirse"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/message-user-dialog.ui.h:3
+msgid "C_onnection"
+msgstr "C_onexión"
 
 #: ../data/resources/join-room-dialog.ui.h:5
 msgid "_Add Connection"
 msgstr "_Añadir conexión"
 
 #: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
-msgid "C_onnection"
-msgstr "C_onexión"
-
-#: ../data/resources/join-room-dialog.ui.h:7
 msgid "Room _Name"
 msgstr "_Nombre de la sala"
 
-#: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/join-room-dialog.ui.h:7
 msgid "_Password"
 msgstr "_Contraseña"
 
@@ -214,9 +240,17 @@ msgstr "Mensaje a un usuario"
 msgid "Join room"
 msgstr "Unirse a una sala"
 
+#: ../data/resources/menus.ui.h:1
+msgid "Keyboard Shortcuts"
+msgstr "Atajos del teclado"
+
 #: ../data/resources/menus.ui.h:2
 msgid "About"
 msgstr "Acerca de"
+
+#: ../data/resources/menus.ui.h:3
+msgid "Quit"
+msgstr "Salir"
 
 #: ../data/resources/message-user-dialog.ui.h:2
 msgid "_Message"
@@ -246,7 +280,7 @@ msgstr "Propiedades"
 msgid "Loading details"
 msgstr "Cargando detalles"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
 msgid "Last Activity:"
 msgstr "Última actividad:"
 
@@ -254,20 +288,20 @@ msgstr "Última actividad:"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../src/application.js:392
+#: ../src/application.js:394
 msgid "Good Bye"
 msgstr "Adiós"
 
-#: ../src/application.js:424
+#: ../src/application.js:426
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eliminado."
 
-#: ../src/application.js:480
+#: ../src/application.js:482
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2016"
 
-#: ../src/application.js:486
+#: ../src/application.js:488
 msgid "Learn more about Polari"
 msgstr "Aber más acerca de Polari"
 
@@ -279,62 +313,62 @@ msgstr "Deshacer"
 msgid "New Messages"
 msgstr "Mensajes nuevos"
 
-#: ../src/chatView.js:630
+#: ../src/chatView.js:639
 msgid "Open Link"
 msgstr "Abrir enlace"
 
-#: ../src/chatView.js:636
+#: ../src/chatView.js:645
 msgid "Copy Link Address"
 msgstr "Copiar la dirección del enlace"
 
-#: ../src/chatView.js:803
+#: ../src/chatView.js:812
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s ahora se llama %s"
 
-#: ../src/chatView.js:810
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s se ha desconectado"
 
-#: ../src/chatView.js:819
+#: ../src/chatView.js:828
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s ha sido expulsado por %s"
 
-#: ../src/chatView.js:821
+#: ../src/chatView.js:830
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s ha sido expulsado"
 
-#: ../src/chatView.js:828
+#: ../src/chatView.js:837
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s ha sido bloqueado por %s"
 
-#: ../src/chatView.js:830
+#: ../src/chatView.js:839
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s ha sido bloqueado"
 
-#: ../src/chatView.js:836
+#: ../src/chatView.js:845
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ha entrado"
 
-#: ../src/chatView.js:842
+#: ../src/chatView.js:851
 #, javascript-format
 msgid "%s left"
 msgstr "%s se ha ido"
 
-#: ../src/chatView.js:931
+#: ../src/chatView.js:940
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "ha entrado %d usuario"
 msgstr[1] "han entrado %d usuarios"
 
-#: ../src/chatView.js:934
+#: ../src/chatView.js:943
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -343,14 +377,14 @@ msgstr[1] "han salido %d usuarios"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:995
+#: ../src/chatView.js:1004
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1000
+#: ../src/chatView.js:1009
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Ayer a las %H:%M"
@@ -358,7 +392,7 @@ msgstr "Ayer a las %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1005
+#: ../src/chatView.js:1014
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A a las %H:%M"
@@ -367,7 +401,7 @@ msgstr "%A a las %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1011
+#: ../src/chatView.js:1020
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d de %B a las %H:%M"
@@ -376,21 +410,21 @@ msgstr "%d de %B a las %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1017
+#: ../src/chatView.js:1026
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B de %Y a las %H:%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1022
+#: ../src/chatView.js:1031
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1027
+#: ../src/chatView.js:1036
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ayer a las %l∶%M %p"
@@ -398,7 +432,7 @@ msgstr "Ayer a las %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1032
+#: ../src/chatView.js:1041
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A a las %l∶%M %p"
@@ -407,7 +441,7 @@ msgstr "%A a las %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1038
+#: ../src/chatView.js:1047
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d de %B a las %H:%M"
@@ -416,7 +450,7 @@ msgstr "%d de %B a las %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1044
+#: ../src/chatView.js:1053
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B de %Y a las %H:%M"
@@ -429,23 +463,15 @@ msgstr ""
 "Polari se ha desconectado por un error de la red. Compruebe si el campo de "
 "dirección es correcto."
 
-#: ../src/connections.js:210
+#: ../src/connections.js:211
 msgid "Edit Connection"
 msgstr "Editar conexión"
 
-#: ../src/connections.js:211
-msgid "New Connection"
-msgstr "Nueva conexión"
-
-#: ../src/connections.js:227
+#: ../src/connections.js:226
 msgid "A_pply"
 msgstr "A_plicar"
 
-#: ../src/connections.js:227
-msgid "Cr_eate"
-msgstr "Cr_ear"
-
-#: ../src/entryArea.js:199
+#: ../src/entryArea.js:206
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -546,22 +572,22 @@ msgstr "Usuarios en %s:"
 msgid "No topic set"
 msgstr "No hay ningún tema establecido"
 
-#: ../src/joinDialog.js:224
+#: ../src/joinDialog.js:236
 msgid "Add Connection"
 msgstr "Añadir conexión"
 
-#: ../src/joinDialog.js:226
+#: ../src/joinDialog.js:238
 msgid "_Save"
 msgstr "_Guardar"
 
-#: ../src/mainWindow.js:314
+#: ../src/mainWindow.js:315
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d usuario"
 msgstr[1] "%d usuarios"
 
-#: ../src/messageDialog.js:95
+#: ../src/messageDialog.js:87
 msgid "No recent users"
 msgstr "No hay usuarios recientes"
 
@@ -581,123 +607,129 @@ msgstr "Pegar desde %s"
 msgid "Uploading %s"
 msgstr "Subiendo %s"
 
-#: ../src/roomList.js:114
+#: ../src/roomList.js:125
 msgid "Leave chatroom"
 msgstr "Salir de la sala de chat"
 
-#: ../src/roomList.js:115
+#: ../src/roomList.js:125
 msgid "End conversation"
 msgstr "Terminar conversación"
 
-#: ../src/roomList.js:219
+#: ../src/roomList.js:193
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "La conexión %s tiene un error"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:264
+#: ../src/roomList.js:238
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:271
+#: ../src/roomList.js:245
 msgid "Connection Problem"
 msgstr "Problema de conexión"
 
-#: ../src/roomList.js:279
+#: ../src/roomList.js:253
 msgid "Connected"
 msgstr "Conectado"
 
-#: ../src/roomList.js:281
+#: ../src/roomList.js:255
 msgid "Connecting..."
 msgstr "Conectando…"
 
-#: ../src/roomList.js:283
+#: ../src/roomList.js:257
 msgid "Offline"
 msgstr "Desconectado"
 
-#: ../src/roomList.js:285
+#: ../src/roomList.js:259
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: ../src/roomList.js:305
+#: ../src/roomList.js:279
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "No se pudo conectar a %s de manera segura."
 
-#: ../src/roomList.js:308
+#: ../src/roomList.js:282
 #, javascript-format
 msgid "Could not connect to %s. Authentication failed."
 msgstr "No se pudo conectar a %s. Falló la autenticación."
 
-#: ../src/roomList.js:314
+#: ../src/roomList.js:288
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "No se pudo conectar a %s. El servidor está ocupado"
 
-#: ../src/roomList.js:317
+#: ../src/roomList.js:291
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "No se pudo conectar a %s."
 
-#: ../src/roomStack.js:80
+#: ../src/roomStack.js:97
 msgid "Join a room using the + button."
 msgstr "Únase a una sala pulsando el botón +."
 
-#: ../src/userList.js:178
+#: ../src/userList.js:174
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Hace %d segundo"
 msgstr[1] "Hace %d segundos"
 
-#: ../src/userList.js:183
+#: ../src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Hace %d minuto"
 msgstr[1] "Hace %d minutos"
 
-#: ../src/userList.js:188
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "Hace %d hora"
 msgstr[1] "Hace %d horas"
 
-#: ../src/userList.js:193
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Hace %d día"
 msgstr[1] "Hace %d días"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Hace %d semana"
 msgstr[1] "Hace %d semanas"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Hace %d mes"
 msgstr[1] "Hace %d meses"
 
-#: ../src/userList.js:381
+#: ../src/userList.js:383
 msgid "No results"
 msgstr "No hay resultados"
 
-#: ../src/userList.js:555
+#: ../src/userList.js:556
 msgid "All"
 msgstr "Todos"
 
 #: ../src/utils.js:133
 msgid "Failed to open link"
 msgstr "Falló al abrir el enlace"
+
+#~ msgid "New Connection"
+#~ msgstr "Nueva conexión"
+
+#~ msgid "Cr_eate"
+#~ msgstr "Cr_ear"
 
 #~ msgid "Show connections"
 #~ msgstr "Mostrar conexiones"
