@@ -231,7 +231,7 @@ const RoomListHeader = new Lang.Class({
                        reason != Tp.ConnectionStatusReason.REQUESTED);
         let isAuth = isError && this._account.connection_error == authError;
 
-        let child = 'none';
+        let child = 'default';
         if (status == Tp.ConnectionStatus.CONNECTING) {
             if (this._networkMonitor.network_available)
                 child = 'connecting';

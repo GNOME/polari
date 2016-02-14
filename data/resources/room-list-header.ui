@@ -59,11 +59,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkImage">
+                <property name="icon-name">pan-down-symbolic</property>
                 <property name="visible">True</property>
               </object>
               <packing>
-                <property name="name">none</property>
+                <property name="name">default</property>
               </packing>
             </child>
           </object>
