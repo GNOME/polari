@@ -2,6 +2,7 @@ const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 
+const IrcParser = imports.ircParser;
 const Lang = imports.lang;
 
 const TabCompletion = new Lang.Class({
@@ -37,6 +38,19 @@ const TabCompletion = new Lang.Class({
         frame.add(this._list);
 
         this._widgetMap = {};
+        this._previousWasCommand = false;
+
+        let commands = Object.keys(IrcParser.knownCommands);
+        for (let i = 0; i < commands.length; i++) {
+            let row = new Gtk.ListBoxRow();
+            row._text = '/' + commands[i];
+            row._casefoldedText = row._text.toLowerCase();
+            row.add(new Gtk.Label({ label: row._text,
+                                    halign: Gtk.Align.START,
+                                    margin_start: 6,
+                                    margin_end: 6 }));
+            this._list.add(row);
+        }
     },
 
     _showPopup: function() {
@@ -95,8 +109,11 @@ const TabCompletion = new Lang.Class({
 
         this._widgetMap = widgetMap;
 
-        // All remaining rows are going unused
-        this._list.foreach(function(r) { r.destroy(); });
+        // All remaining rows except those with IRC commands are going unused
+        this._list.foreach(function(r) {
+            if (!r._text.startsWith('/'))
+                r.destroy();
+        });
 
         for (let i = 0; i < completions.length; i++) {
             let row = this._widgetMap[completions[i]];
@@ -144,6 +161,10 @@ const TabCompletion = new Lang.Class({
     },
 
     _getRowCompletion: function(row) {
+        this._previousWasCommand = this._isIRCCommand;
+
+        if (this._isIRCCommand)
+            return row._text + ' ';
         if (this._startPos == 0 || this._previousCompletion)
             return row._text + ': ';
         return row._text;
@@ -183,9 +204,13 @@ const TabCompletion = new Lang.Class({
         this._startPos = text.lastIndexOf(' ') + 1;
         this._key = text.toLowerCase().substr(this._startPos);
 
+        this._isIRCCommand = this._key.startsWith('/');
+
         if (this._startPos == 0)
             this._endPos = -1;
-        this._previousCompletion = (this._endPos == this._startPos);
+
+        // In case the last completion was for IRC Command, don't chain.
+        this._previousCompletion = (this._endPos == this._startPos) && !this._previousWasCommand;
 
         this._list.invalidate_filter();
 
