@@ -32,10 +32,14 @@ const ConnectionDetails = new Lang.Class({
 
         this.parent(params);
 
+        this._nameEntry.connect('changed',
+                                Lang.bind(this, this._onCanConfirmChanged));
         this._serverEntry.connect('changed',
                                   Lang.bind(this, this._onCanConfirmChanged));
         this._nickEntry.connect('changed',
                                 Lang.bind(this, this._onCanConfirmChanged));
+        this._realnameEntry.connect('changed',
+                                    Lang.bind(this, this._onCanConfirmChanged));
 
         let realnameStore = new Gtk.ListStore();
         realnameStore.set_column_types([GObject.TYPE_STRING]);
@@ -98,10 +102,15 @@ const ConnectionDetails = new Lang.Class({
     },
 
     reset: function() {
-        this._nameEntry.text = '';
-        this._serverEntry.text = '';
-        this._nickEntry.text = GLib.get_user_name();
-        this._realnameEntry.text = '';
+        this._savedName = '';
+        this._savedServer = '';
+        this._savedNick = GLib.get_user_name();
+        this._savedRealname = '';
+
+        this._nameEntry.text = this._savedName;
+        this._serverEntry.text = this._savedServer;
+        this._nickEntry.text = this._savedNick;
+        this._realnameEntry.text = this._savedRealname;
 
         this._serverEntry.grab_focus();
     },
@@ -115,25 +124,32 @@ const ConnectionDetails = new Lang.Class({
         for (let p in params)
             params[p] = params[p].deep_unpack();
 
-        let server = params.server || '';
+        this._savedServer = params.server || '';
         let port = params.port || 6667;
-        let nick = params.account || '';
-        let realname = params.fullname || '';
+        this._savedNick = params.account || '';
+        this._savedRealname = params.fullname || '';
 
         if (port != 6667)
-            server += ':%d'.format(port);
+            this._savedServer += ':%d'.format(port);
 
-        this._serverEntry.text = server;
-        this._nickEntry.text = nick;
-        this._realnameEntry.text = realname;
+        if (this._savedServer != account.display_name)
+            this._savedName = account.display_name;
 
-        if (server != account.display_name)
-            this._nameEntry.text = account.display_name;
+        this._serverEntry.text = this._savedServer;
+        this._nickEntry.text = this._savedNick;
+        this._realnameEntry.text = this._savedRealname;
+        this._nameEntry.text = this._savedName;
     },
 
     get can_confirm() {
+        let paramsChanged = this._nameEntry.text != this._savedName ||
+                            this._serverEntry.text != this._savedServer ||
+                            this._nickEntry.text != this._savedNick ||
+                            this._realnameEntry.text != this._savedRealname;
+
         return this._serverEntry.get_text_length() > 0 &&
-               this._nickEntry.get_text_length() > 0;
+               this._nickEntry.get_text_length() > 0 &&
+               paramsChanged;
     },
 
     save: function() {
