@@ -267,7 +267,10 @@ const _ChatroomManager = new Lang.Class({
         let accountPath = parameter.deep_unpack();
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
-        this._restoreSavedChannels(account);
+        account.reconnect_async(Lang.bind(this,
+            function (a, res){
+                a.reconnect_finish(res);
+            }));
     },
 
     _onAuthenticateAccountActivated: function(action, parameter) {
