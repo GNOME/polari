@@ -5,6 +5,7 @@
     <child>
       <object class="GtkShortcutsSection">
         <property name="visible">True</property>
+        <property name="max-height">14</property>
         <!--property name="section-name">shortcuts</property-->
         <child>
           <object class="GtkShortcutsGroup">
@@ -70,6 +71,20 @@
                 <property name="visible">True</property>
                 <property name="title" translatable="yes" context="shortcut window">Previous Room</property>
                 <property name="accelerator">&lt;Primary&gt;Page_Up</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Next Room with Unread Messages</property>
+                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;Page_Down</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes" context="shortcut window">Previous Room with Unread Messages</property>
+                <property name="accelerator">&lt;Primary&gt;&lt;Shift&gt;Page_Up</property>
               </object>
             </child>
             <child>

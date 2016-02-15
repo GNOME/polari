@@ -61,6 +61,10 @@ const RoomRow = new Lang.Class({
         return this._room.account;
     },
 
+    get hasPending() {
+        return !this.get_style_context().has_class('inactive');
+    },
+
     selected: function() {
         if (!this._room.channel)
             this._updatePending();
@@ -395,6 +399,18 @@ const RoomList = new Lang.Class({
                     return;
                 this.select_row(this._getRoomRowAtIndex(n - 1));
             }));
+        action = app.lookup_action('next-pending-room');
+        action.connect('activate', Lang.bind(this,
+            function() {
+                this._moveSelectionFull(Gtk.DirectionType.DOWN,
+                                        (row) => { return row.hasPending; });
+            }));
+        action = app.lookup_action('previous-pending-room');
+        action.connect('activate', Lang.bind(this,
+            function() {
+                this._moveSelectionFull(Gtk.DirectionType.UP,
+                                        (row) => { return row.hasPending; });
+            }));
     },
 
     _onLeaveActivated: function(action, param) {
@@ -426,12 +442,24 @@ const RoomList = new Lang.Class({
     },
 
     _moveSelection: function(direction) {
+        this._moveSelectionFull(direction, () => { return true; });
+    },
+
+    _moveSelectionFull: function(direction, testFunction){
         let current = this.get_selected_row();
         if (!current)
             return;
+
         let inc = direction == Gtk.DirectionType.UP ? -1 : 1;
         let index = this._rowToRoomIndex(current.get_index());
-        let row = this._getRoomRowAtIndex(index + inc);
+
+        let row = current;
+
+        do {
+            index += inc;
+            row = this._getRoomRowAtIndex(index);
+        } while (row && !testFunction(row));
+
         if (row)
             this.select_row(row);
     },
