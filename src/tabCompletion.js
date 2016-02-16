@@ -161,9 +161,9 @@ const TabCompletion = new Lang.Class({
     },
 
     _getRowCompletion: function(row) {
-        this._previousWasCommand = this._isIRCCommand;
+        this._previousWasCommand = this._isCommand;
 
-        if (this._isIRCCommand)
+        if (this._isCommand)
             return row._text + ' ';
         if (this._startPos == 0 || this._isChained)
             return row._text + ': ';
@@ -204,7 +204,7 @@ const TabCompletion = new Lang.Class({
         this._startPos = text.lastIndexOf(' ') + 1;
         this._key = text.toLowerCase().substr(this._startPos);
 
-        this._isIRCCommand = this._key.startsWith('/');
+        this._isCommand = this._key.startsWith('/');
 
         if (this._startPos == 0)
             this._endPos = -1;
@@ -212,7 +212,7 @@ const TabCompletion = new Lang.Class({
         // Chain completions if the current completion directly follows a previous one,
         // except when one of them was for an IRC command
         let previousCompletion = (this._endPos == this._startPos);
-        this._isChained = previousCompletion && !this._isIRCCommand && !this._previousWasCommand;
+        this._isChained = previousCompletion && !this._isCommand && !this._previousWasCommand;
 
         this._list.invalidate_filter();
 
