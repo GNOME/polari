@@ -489,7 +489,8 @@ const Application = new Lang.Class({
                 'Kunaal Jain <kunaalus@gmail.com>',
                 'Cody Welsh <codyw@protonmail.com>',
                 'Isabella Ribeiro <belinhacbr@gmail.com>',
-                'Jonas Danielsson <jonas@threetimestwo.org>'
+                'Jonas Danielsson <jonas@threetimestwo.org>',
+                'Rares Visalom <rares.visalom@gmail.com>'
             ],
             artists: [
                 'Sam Hewitt',
