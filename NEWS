@@ -1,3 +1,34 @@
+3.19.90 - "It's Like Stealing Money for Free"
+=============================================
+* Replace ellipsis with expander arrows in status summaries [Kunaal; #759120]
+* Strip color codes from topics [Kunaal; #747415]
+* Offer users to enter server password on authentication failures
+  [Florian; #709824]
+* Add support for pasting images to public image service [Kunaal; #760346]
+* Connection Properties: Only make "Apply" sensitive when there are changes
+  [Isabella; #762015]
+* Provide tab-completion for implemented IRC commands [Kunaal; #761304]
+* Make "Reconnect" action work when already connected [Isabella; #761276]
+* Add shortcuts to switch to rooms with unread messages [Rares; #761290]
+* Allow to set up new connections from predefined networks [Florian; #761859]
+* Add TLS setting where we cannot turn it on automatically [Florian; #730892]
+* Overhaul paste confirmation to allow entering text around links
+  [Florian; #760315]
+* Misc. bug fixes [Rares, Florian, Isabella, Daniel; #760497, #760842,
+  #762015, #761723, #761859]
+
+Contributors:
+  Rares Visalom, Piotr Drąg, Kunaal Jain, Daniel Landau, Florian Müllner,
+  Isabella Ribeiro
+
+Translations:
+  Balázs Meskó [hu], Sebastian Rasmussen [sv], Daniel Mustieles [es],
+  Fabio Tomat [fur], Mario Blättermann [de], Rūdolfs Mazurs [lv],
+  Dušan Kazik [sk], Piotr Drąg [pl], Fábio Nogueira [pt_BR],
+  Jiri Grönroos [fi], Baurzhan Muftakhidinov [kk], Rafael Fontenelle [pt_BR],
+  Bernd Homuth [de], Chao-Hsiung Liao [zh_TW], Мирослав Николић [sr, sr@latin],
+  Reinout van Schouwen [nl]
+
 3.19.4 - "Super-size THIS"
 ==========================
 * Use popover to change nickname [Florian; #760872]
