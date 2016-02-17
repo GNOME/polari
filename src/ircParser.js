@@ -79,7 +79,7 @@ const IrcParser = new Lang.Class({
 
         let retval = true;
 
-        let argv = text.substr(1).split(/ +/);
+        let argv = text.trimRight().substr(1).split(/ +/);
         let cmd = argv.shift().toUpperCase();
         let output = null;
         switch (cmd) {
