@@ -1,10 +1,9 @@
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Tp = imports.gi.TelepathyGLib;
-
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Tp = imports.gi.TelepathyGLib;
 
 const ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
