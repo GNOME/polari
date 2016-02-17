@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-14 18:48+0100\n"
-"PO-Revision-Date: 2016-02-14 18:49+0100\n"
+"POT-Creation-Date: 2016-02-17 23:34+0100\n"
+"PO-Revision-Date: 2016-02-17 23:35+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:495
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:500
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -120,7 +120,7 @@ msgstr "Zmiana pseudonimu"
 
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:229
+#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:245
 msgid "_Cancel"
 msgstr "_Anuluj"
 
@@ -180,15 +180,25 @@ msgstr "Poprzedni pokój"
 
 #: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Następny pokój z nieprzeczytanymi wiadomościami"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Poprzedni pokój z nieprzeczytanymi wiadomościami"
+
+#: ../data/resources/help-overlay.ui.h:13
+msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Pierwszy pokój"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Ostatni pokój"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:15
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Pierwszy — dziewiąty pokój"
@@ -274,22 +284,22 @@ msgstr "Ostatnia aktywność:"
 msgid "Message"
 msgstr "Wiadomość"
 
-#: ../src/application.js:406
+#: ../src/application.js:410
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:438
+#: ../src/application.js:442
 #, javascript-format
 msgid "%s removed."
 msgstr "Usunięto %s."
 
-#: ../src/application.js:494
+#: ../src/application.js:499
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2016"
 
-#: ../src/application.js:500
+#: ../src/application.js:505
 msgid "Learn more about Polari"
 msgstr "Więcej informacji o programie Polari"
 
@@ -445,7 +455,7 @@ msgstr "%d %B, %l∶%M %p"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:70
+#: ../src/connections.js:74
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -454,12 +464,12 @@ msgstr ""
 "pole adresu jest poprawne."
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:214
+#: ../src/connections.js:230
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Właściwości połączenia „%s”"
 
-#: ../src/connections.js:231
+#: ../src/connections.js:247
 msgid "A_pply"
 msgstr "_Zastosuj"
 
@@ -608,62 +618,62 @@ msgstr "Tekst od użytkownika %s"
 msgid "Uploading %s"
 msgstr "Wysyłanie %s"
 
-#: ../src/roomList.js:125
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Opuść pokój rozmów"
 
-#: ../src/roomList.js:125
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Zakończ rozmowę"
 
-#: ../src/roomList.js:209
+#: ../src/roomList.js:213
 #, javascript-format
 msgid "Connection %s has an error"
 msgstr "Błąd połączenia %s"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:259
+#: ../src/roomList.js:263
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:266
+#: ../src/roomList.js:270
 msgid "Connection Problem"
 msgstr "Problem z połączeniem"
 
-#: ../src/roomList.js:274
+#: ../src/roomList.js:278
 msgid "Connected"
 msgstr "Połączono"
 
-#: ../src/roomList.js:276
+#: ../src/roomList.js:280
 msgid "Connecting..."
 msgstr "Łączenie…"
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:282
 msgid "Offline"
 msgstr "Offline"
 
-#: ../src/roomList.js:280
+#: ../src/roomList.js:284
 msgid "Unknown"
 msgstr "Nieznane"
 
-#: ../src/roomList.js:300
+#: ../src/roomList.js:304
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nie można wykonać bezpiecznego połączenia z %s."
 
-#: ../src/roomList.js:303
+#: ../src/roomList.js:307
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s wymaga hasła."
 
-#: ../src/roomList.js:309
+#: ../src/roomList.js:313
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nie można połączyć z %s. Serwer jest zajęty."
 
-#: ../src/roomList.js:312
+#: ../src/roomList.js:316
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nie można połączyć z %s."
