@@ -512,7 +512,7 @@ msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "Otpremam %s red teksta na javnu uslugu ubacivanja…"
 msgstr[1] "Otpremam %s reda teksta na javnu uslugu ubacivanja…"
 msgstr[2] "Otpremam %s redova teksta na javnu uslugu ubacivanja…"
-msgstr[3] "Otpremam jedan red teksta na javnu uslugu ubacivanja"
+msgstr[3] "Otpremam %s red teksta na javnu uslugu ubacivanja"
 
 #: ../src/entryArea.js:247
 msgid "Upload image to public paste service?"
