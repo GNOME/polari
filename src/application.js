@@ -45,17 +45,24 @@ var Application = GObject.registerClass({
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Start Telepathy client"), null);
+        this.add_main_option('test-instance', 0,
+                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+                             _("Allow running alongside another instance"), null);
         this.add_main_option('version', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Print version and exit"), null);
         this.connect('handle-local-options', (o, dict) => {
+            let v = dict.lookup_value('test-instance', null);
+            if (v && v.get_boolean())
+                this._maybeMakeNonUnique();
+
             try {
                 this.register(null);
             } catch(e) {
                 return 1;
             }
 
-            let v = dict.lookup_value('start-client', null);
+            v = dict.lookup_value('start-client', null);
             if (v && v.get_boolean()) {
                 this.activate_action('start-client', null);
                 return 0;
@@ -114,6 +121,28 @@ var Application = GObject.registerClass({
         } catch(e) {
             log('Failed to launch %s: %s'.format(command, e.message));
         }
+    }
+
+    _maybeMakeNonUnique() {
+        let bus = Gio.BusType.SESSION;
+        let name = this.application_id;
+        let flags = Gio.BusNameWatcherFlags.NONE;
+
+        let handled = false;
+        let id = Gio.bus_watch_name(bus, name, flags, () => {
+                debug('Running as test instance alongside primary instance');
+                this.set_flags(this.flags | Gio.ApplicationFlags.NON_UNIQUE);
+                handled = true;
+        }, () => {
+            debug('No primary instance found, running normally');
+            handled = true;
+        });
+
+        // Evil-ish ...
+        let main = GLib.MainContext.default();
+        while (!handled)
+            main.iteration(true);
+        Gio.bus_unwatch_name(id);
     }
 
     vfunc_dbus_register(conn, path) {
@@ -462,6 +491,10 @@ var Application = GObject.registerClass({
         return savedRooms.n_children() == 0;
     }
 
+    get isTestInstance() {
+        return this.flags & Gio.ApplicationFlags.NON_UNIQUE;
+    }
+
     _updateUserListAction() {
         let room = this.active_window.active_room;
         let action = this.lookup_action('user-list');
@@ -734,7 +767,7 @@ var Application = GObject.registerClass({
         let params = {
             name: 'Polari',
             account_manager: this._accountsMonitor.accountManager,
-            uniquify_name: false
+            uniquify_name: this.isTestInstance
         };
         this._telepathyClient = new TelepathyClient(params);
     }
