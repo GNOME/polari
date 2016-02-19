@@ -4,6 +4,7 @@
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "command": "polari",
+    "x-run-args": ["--debug"],
     "tags": ["nightly"],
     "desktop-file-name-prefix": "(Nightly) ",
     "finish-args": [
@@ -15,6 +16,7 @@
         "--share=network",
         /* Our client name */
         "--own-name=org.freedesktop.Telepathy.Client.Polari",
+        "--own-name=org.freedesktop.Telepathy.Client.Polari.Debug",
         /* Telepathy */
         "--talk-name=org.freedesktop.Telepathy.AccountManager",
         "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
