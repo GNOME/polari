@@ -19,8 +19,8 @@ const AccountsMonitor = new Lang.Class({
         this._accounts = [];
 
         this._app = Gio.Application.get_default();
-        this._app.connectJS('prepare-shutdown',
-                            Lang.bind(this, this._onPrepareShutdown));
+        this._app.connect('prepare-shutdown',
+                          Lang.bind(this, this._onPrepareShutdown));
 
         this._accountManager = Tp.AccountManager.dup();
 

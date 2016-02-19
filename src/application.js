@@ -23,6 +23,7 @@ const ConnectionError = {
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
+    Signals: { 'prepare-shutdown': {} },
 
     _init: function() {
         this.parent({ application_id: 'org.gnome.Polari' });
@@ -143,7 +144,7 @@ const Application = new Lang.Class({
                 function() {
                     for (let id in this._pendingRequests)
                         this._pendingRequests[id].cancellable.cancel();
-                    this.emitJS('prepare-shutdown');
+                    this.emit('prepare-shutdown');
             }));
             this._window.show_all();
 
@@ -503,4 +504,3 @@ const Application = new Lang.Class({
         this._window.destroy();
     }
 });
-Utils.addJSSignalMethods(Application.prototype);

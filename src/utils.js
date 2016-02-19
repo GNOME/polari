@@ -108,13 +108,6 @@ function getURISchemes() {
     return schemes;
 }
 
-function addJSSignalMethods(proto) {
-    proto.connectJS = Signals._connect;
-    proto.disconnectJS = Signals._disconnect;
-    proto.emitJS = Signals._emit;
-    proto.disconnectAllJS = Signals._disconnectAll;
-}
-
 function getTpEventTime() {
     let time = Gtk.get_current_event_time ();
     if (time == 0)
