@@ -45,17 +45,26 @@ var Application = GObject.registerClass({
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Start Telepathy client"), null);
+        this.add_main_option('debug', 0,
+                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+                             _("Run in debug mode"), null);
         this.add_main_option('version', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Print version and exit"), null);
         this.connect('handle-local-options', (o, dict) => {
+            let v = dict.lookup_value('debug', null);
+            if (v && v.get_boolean()) {
+                this.set_flags(this.flags | Gio.ApplicationFlags.NON_UNIQUE);
+
+            }
+
             try {
                 this.register(null);
             } catch(e) {
                 return 1;
             }
 
-            let v = dict.lookup_value('start-client', null);
+            v = dict.lookup_value('start-client', null);
             if (v && v.get_boolean()) {
                 this.activate_action('start-client', null);
                 return 0;
@@ -457,6 +466,10 @@ var Application = GObject.registerClass({
         return savedRooms.n_children() == 0;
     }
 
+    get isDebugInstance() {
+        return this.flags & Gio.ApplicationFlags.NON_UNIQUE;
+    }
+
     _updateUserListAction() {
         let room = this.active_window.active_room;
         let action = this.lookup_action('user-list');
@@ -721,8 +734,9 @@ var Application = GObject.registerClass({
         if (this._telepathyClient)
             return;
 
+        let suffix = this.isDebugInstance ? '.Debug' : '';
         let params = {
-            name: 'Polari',
+            name: 'Polari' + suffix,
             account_manager: this._accountsMonitor.accountManager,
             uniquify_name: false
         };
