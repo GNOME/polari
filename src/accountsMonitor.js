@@ -14,8 +14,10 @@ var AccountsMonitor = class {
         this._accountSettings = new Map();
 
         this._app = Gio.Application.get_default();
-        this._app.connect('prepare-shutdown',
-                          this._onPrepareShutdown.bind(this));
+
+        if (!this._app.isDebugInstance)
+            this._app.connect('prepare-shutdown',
+                              this._onPrepareShutdown.bind(this));
 
         this._accountManager = Tp.AccountManager.dup();
 
