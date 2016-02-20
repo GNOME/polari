@@ -93,7 +93,7 @@ function debug(str) {
 function getURISchemes() {
     let apps = Gio.AppInfo.get_all();
     let prefix = 'x-scheme-handler/';
-    let schemes = [];
+    let schemes = ['http','https'];
 
     apps.forEach(function(app) {
         let types = app.get_supported_types();
