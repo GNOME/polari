@@ -262,7 +262,7 @@ const JoinDialog = new Lang.Class({
         this._joinButton.visible = isMain;
         this._cancelButton.visible = isMain;
         this.title = isMain ? _("Join Chat Room")
-                            : _("Add Connection");
+                            : _("Add Network");
         this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
         this._updateCanJoin();
     }

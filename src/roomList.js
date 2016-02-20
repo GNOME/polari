@@ -210,7 +210,7 @@ const RoomListHeader = new Lang.Class({
         if (parent)
           parent.invalidate_sort();
 
-        let accessibleName = _("Connection %s has an error").format(this._account.display_name);
+        let accessibleName = _("Network %s has an error").format(this._account.display_name);
         this.get_accessible().set_name(accessibleName);
     },
 
