@@ -53,13 +53,12 @@ const IMGUR_CLIENT_ID = '4109e59177ec95e';
 const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
 const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
 const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
-const _uriList = getURISchemes();
 
 const _urlRegexp = new RegExp(
     '(^|' + _leadingJunk + ')' +
     '(' +
         '(?:' +
-            '(?:' + _uriList.join('|') + '):' +   // scheme:
+            '(?:[a-z]+):' +                       // scheme:
             '|' +
             'www\\d{0,3}[.]' +                    // www.
             '|' +
@@ -78,24 +77,6 @@ const _urlRegexp = new RegExp(
     ')', 'gi');
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)','g');
-
-function getURISchemes() {
-    let apps = Gio.AppInfo.get_all();
-    let prefix = 'x-scheme-handler/';
-    let schemes = [];
-
-    apps.forEach(function(app) {
-        let types = app.get_supported_types();
-        if (!types)
-            return;
-
-        types.forEach(function(type) {
-            if (type.startsWith(prefix))
-                schemes.push(type.replace(prefix, ''));
-        });
-    });
-    return schemes;
-}
 
 function getTpEventTime() {
     let time = Gtk.get_current_event_time ();
