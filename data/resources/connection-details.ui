@@ -10,7 +10,7 @@
                   bind-property="has-service"
                   bind-flags="invert-boolean|sync-create"/>
         <property name="halign">end</property>
-        <property name="label" translatable="yes">_Name</property>
+        <property name="label" translatable="yes">_Connection Name</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">nameEntry</property>
       </object>
@@ -31,7 +31,7 @@
                   bind-property="has-service"
                   bind-flags="invert-boolean|sync-create"/>
         <property name="halign">end</property>
-        <property name="label" translatable="yes">_Server</property>
+        <property name="label" translatable="yes">_Server Address</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">serverEntry</property>
       </object>
