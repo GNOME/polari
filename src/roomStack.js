@@ -85,7 +85,7 @@ const ChatPlaceholder = new Lang.Class({
     _init: function(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
-        let image = new Gtk.Image({ icon_name: 'polari-symbolic',
+        let image = new Gtk.Image({ icon_name: 'org.gnome.Polari-symbolic',
                                       pixel_size: 96, halign: Gtk.Align.END,
                                       margin_end: 14 });
 

@@ -5,14 +5,14 @@ public_icons_themes = \
 icondir = $(datadir)/icons/
 
 nobase_dist_icon_DATA = \
-	hicolor/16x16/apps/polari.png \
-	hicolor/22x22/apps/polari.png \
-	hicolor/24x24/apps/polari.png \
-	hicolor/32x32/apps/polari.png \
-	hicolor/48x48/apps/polari.png \
-	hicolor/256x256/apps/polari.png \
-	hicolor/512x512/apps/polari.png \
-	hicolor/scalable/apps/polari-symbolic.svg \
+	hicolor/16x16/apps/org.gnome.Polari.png \
+	hicolor/22x22/apps/org.gnome.Polari.png \
+	hicolor/24x24/apps/org.gnome.Polari.png \
+	hicolor/32x32/apps/org.gnome.Polari.png \
+	hicolor/48x48/apps/org.gnome.Polari.png \
+	hicolor/256x256/apps/org.gnome.Polari.png \
+	hicolor/512x512/apps/org.gnome.Polari.png \
+	hicolor/scalable/apps/org.gnome.Polari-symbolic.svg \
 	$(NULL)
 
 noinst_DATA = \

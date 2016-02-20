@@ -464,7 +464,7 @@ const Application = new Lang.Class({
             comments: _("An Internet Relay Chat Client for GNOME"),
             copyright: 'Copyright © 2013-2015 The Polari authors',
             license_type: Gtk.License.GPL_2_0,
-            logo_icon_name: 'polari',
+            logo_icon_name: 'org.gnome.Polari',
             version: pkg.version,
             website_label: _("Learn more about Polari"),
             website: 'https://wiki.gnome.org/Apps/Polari',
