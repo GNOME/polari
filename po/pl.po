@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-17 23:34+0100\n"
-"PO-Revision-Date: 2016-02-17 23:35+0100\n"
+"POT-Creation-Date: 2016-02-20 16:17+0100\n"
+"PO-Revision-Date: 2016-02-20 16:18+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:500
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -99,12 +99,27 @@ msgid "_Server"
 msgstr "_Serwer"
 
 #: ../data/resources/connection-details.ui.h:4
+msgid "Use secure c_onnection"
+msgstr "Zabezpieczone p_ołączenie"
+
+#: ../data/resources/connection-details.ui.h:5
 msgid "_Nickname"
 msgstr "_Pseudonim"
 
-#: ../data/resources/connection-details.ui.h:5
+#: ../data/resources/connection-details.ui.h:6
 msgid "_Real Name"
 msgstr "_Imię i nazwisko"
+
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:2
+#: ../data/resources/message-user-dialog.ui.h:1
+msgid "_Cancel"
+msgstr "_Anuluj"
+
+#: ../data/resources/connection-properties.ui.h:2
+msgid "_Apply"
+msgstr "_Zastosuj"
 
 #: ../data/resources/entry-area.ui.h:1
 msgid "Change nickname:"
@@ -117,12 +132,6 @@ msgstr "_Zmień"
 #: ../data/resources/entry-area.ui.h:3
 msgid "Change nickname"
 msgstr "Zmiana pseudonimu"
-
-#: ../data/resources/entry-area.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:245
-msgid "_Cancel"
-msgstr "_Anuluj"
 
 #: ../data/resources/entry-area.ui.h:5
 msgid "_Paste"
@@ -203,11 +212,11 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Pierwszy — dziewiąty pokój"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:235
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
 msgid "Join Chat Room"
 msgstr "Dołącz do pokoju rozmów"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:237
+#: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
 msgstr "Dołą_cz"
 
@@ -227,6 +236,14 @@ msgstr "_Nazwa pokoju"
 #: ../data/resources/join-room-dialog.ui.h:7
 msgid "_Password"
 msgstr "_Hasło"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Add"
+msgstr "_Dodaj"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Connection"
+msgstr "_Inne połączenie"
 
 #: ../data/resources/main-window.ui.h:1
 msgid "Join a Room"
@@ -284,22 +301,22 @@ msgstr "Ostatnia aktywność:"
 msgid "Message"
 msgstr "Wiadomość"
 
-#: ../src/application.js:410
+#: ../src/application.js:393
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:442
+#: ../src/application.js:425
 #, javascript-format
 msgid "%s removed."
 msgstr "Usunięto %s."
 
-#: ../src/application.js:499
+#: ../src/application.js:482
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2016"
 
-#: ../src/application.js:505
+#: ../src/application.js:488
 msgid "Learn more about Polari"
 msgstr "Więcej informacji o programie Polari"
 
@@ -455,7 +472,17 @@ msgstr "%d %B, %l∶%M %p"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:74
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Już dodano"
+
+#. Translators: %s is a connection name
+#: ../src/connections.js:416
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Właściwości połączenia „%s”"
+
+#: ../src/connections.js:460
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -463,17 +490,7 @@ msgstr ""
 "Program Polari został rozłączony z powodu błędu sieci. Proszę sprawdzić, czy "
 "pole adresu jest poprawne."
 
-#. Translators: %s is a connection name
-#: ../src/connections.js:230
-#, javascript-format
-msgid "“%s” Properties"
-msgstr "Właściwości połączenia „%s”"
-
-#: ../src/connections.js:247
-msgid "A_pply"
-msgstr "_Zastosuj"
-
-#: ../src/entryArea.js:220
+#: ../src/entryArea.js:236
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -481,9 +498,32 @@ msgstr[0] "Wkleić %s wiersz tekstu do publicznego serwisu?"
 msgstr[1] "Wkleić %s wiersze tekstu do publicznego serwisu?"
 msgstr[2] "Wkleić %s wierszy tekstu do publicznego serwisu?"
 
-#: ../src/entryArea.js:229
+#: ../src/entryArea.js:240
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Wysyłanie %s wierszu tekstu do publicznego serwisu…"
+msgstr[1] "Wysyłanie %s wierszy tekstu do publicznego serwisu…"
+msgstr[2] "Wysyłanie %s wierszy tekstu do publicznego serwisu…"
+
+#: ../src/entryArea.js:247
 msgid "Upload image to public paste service?"
 msgstr "Wysłać obraz do publicznego serwisu?"
+
+#: ../src/entryArea.js:248
+msgid "Uploading image to public paste service…"
+msgstr "Wysyłanie obrazu do publicznego serwisu…"
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "Użytkownik %s w pokoju #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Tekst od użytkownika %s"
 
 #. commands that would be nice to support:
 #.
@@ -582,13 +622,9 @@ msgstr "Użytkownicy w kanale %s:"
 msgid "No topic set"
 msgstr "Nie ustawiono tematu"
 
-#: ../src/joinDialog.js:236
+#: ../src/joinDialog.js:265
 msgid "Add Connection"
 msgstr "Dodaj połączenie"
-
-#: ../src/joinDialog.js:238
-msgid "_Save"
-msgstr "Zapi_sz"
 
 #: ../src/mainWindow.js:315
 #, javascript-format
@@ -601,22 +637,6 @@ msgstr[2] "%d użytkowników"
 #: ../src/messageDialog.js:87
 msgid "No recent users"
 msgstr "Brak ostatnich użytkowników"
-
-#. translators: %s is a nick, #%s a channel
-#: ../src/pasteManager.js:98 ../src/pasteManager.js:134
-#, javascript-format
-msgid "%s in #%s"
-msgstr "Użytkownik %s w pokoju #%s"
-
-#: ../src/pasteManager.js:100 ../src/pasteManager.js:136
-#, javascript-format
-msgid "Paste from %s"
-msgstr "Tekst od użytkownika %s"
-
-#: ../src/pasteManager.js:342
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Wysyłanie %s"
 
 #: ../src/roomList.js:129
 msgid "Leave chatroom"
@@ -738,11 +758,11 @@ msgstr "Brak wyników"
 msgid "All"
 msgstr "Wszyscy"
 
-#: ../src/utils.js:127
+#: ../src/utils.js:120
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Hasło serwera Polari dla %s"
 
-#: ../src/utils.js:178
+#: ../src/utils.js:171
 msgid "Failed to open link"
 msgstr "Otwarcie odnośnika się nie powiodło"
