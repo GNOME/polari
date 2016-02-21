@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-20 16:17+0100\n"
-"PO-Revision-Date: 2016-02-20 16:18+0100\n"
+"POT-Creation-Date: 2016-02-21 16:50+0100\n"
+"PO-Revision-Date: 2016-02-21 16:52+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -85,9 +85,8 @@ msgid "Window maximized state"
 msgstr "Stan maksymalizacji okna"
 
 #: ../data/resources/connection-details.ui.h:1
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nazwa"
+msgid "_Connection Name"
+msgstr "_Nazwa połączenia"
 
 #: ../data/resources/connection-details.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:8
@@ -95,8 +94,8 @@ msgid "optional"
 msgstr "opcjonalne"
 
 #: ../data/resources/connection-details.ui.h:3
-msgid "_Server"
-msgstr "_Serwer"
+msgid "_Server Address"
+msgstr "Adres _serwera"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "Use secure c_onnection"
@@ -276,6 +275,10 @@ msgstr "_Wiadomość"
 #: ../data/resources/message-user-dialog.ui.h:4
 msgid "_Recent"
 msgstr "Ostatni _użytkownicy"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "_Nazwa"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
