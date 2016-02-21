@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-18 14:23+0000\n"
-"PO-Revision-Date: 2016-02-18 17:18-0300\n"
+"POT-Creation-Date: 2016-02-21 14:25+0000\n"
+"PO-Revision-Date: 2016-02-21 13:11-0300\n"
 "Last-Translator: Artur de Aquino Morais <artur.morais93@outlook.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:482
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -86,9 +86,8 @@ msgid "Window maximized state"
 msgstr "Estado de janela maximizada"
 
 #: ../data/resources/connection-details.ui.h:1
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nome"
+msgid "_Connection Name"
+msgstr "_Nome da conexão"
 
 #: ../data/resources/connection-details.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:8
@@ -96,8 +95,8 @@ msgid "optional"
 msgstr "opcional"
 
 #: ../data/resources/connection-details.ui.h:3
-msgid "_Server"
-msgstr "_Servidor"
+msgid "_Server Address"
+msgstr "_Endereço do servidor"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "Use secure c_onnection"
@@ -278,6 +277,10 @@ msgstr "_Mensagem"
 msgid "_Recent"
 msgstr "_Recente"
 
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "_Nome"
+
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
 msgstr "Reconectar"
@@ -302,23 +305,23 @@ msgstr "Última atividade:"
 msgid "Message"
 msgstr "Mensagem"
 
-#: ../src/application.js:392
+#: ../src/application.js:393
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:424
+#: ../src/application.js:425
 #, javascript-format
 msgid "%s removed."
 msgstr "%s removido."
 
-#: ../src/application.js:481
+#: ../src/application.js:482
 msgid "translator-credits"
 msgstr ""
 "Enrico Nicoletto <liverig@gmail.com>, 2013, 2014, 2015\n"
 "Gustavo Marques<gutodisse@gmail.com>, 2015.\n"
 "Fábio Nogueira <fnogueira@gnome.org>, 2016."
 
-#: ../src/application.js:487
+#: ../src/application.js:488
 msgid "Learn more about Polari"
 msgstr "Aprenda mais sobre o Polari"
 
@@ -746,12 +749,12 @@ msgstr "Sem resultado(s)"
 msgid "All"
 msgstr "Todos"
 
-#: ../src/utils.js:127
+#: ../src/utils.js:120
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Senha do servidor Polari para %s"
 
-#: ../src/utils.js:178
+#: ../src/utils.js:171
 msgid "Failed to open link"
 msgstr "Ocorreu falha ao abrir o link"
 
