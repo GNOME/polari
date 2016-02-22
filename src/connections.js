@@ -439,10 +439,8 @@ const ConnectionProperties = new Lang.Class({
 
         this.connect('response', Lang.bind(this,
             function(w, response) {
-                if (response == Gtk.ResponseType.OK)
-                    this._details.save();
+                this._details.save();
             }));
-        this.set_default_response(Gtk.ResponseType.OK);
 
         account.connect('notify::connection-status',
                         Lang.bind(this, this._syncErrorMessage));
