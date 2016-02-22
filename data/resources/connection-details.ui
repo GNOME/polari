@@ -4,6 +4,26 @@
     <property name="visible">True</property>
     <property name="row-spacing">6</property>
     <property name="column-spacing">12</property>
+        <child>
+      <object class="GtkLabel" id="server_label">
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
+        <property name="halign">end</property>
+        <property name="label" translatable="yes">_Server Address</property>
+        <property name="use-underline">True</property>
+        <property name="mnemonic-widget">serverEntry</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="serverEntry">
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
+        <property name="hexpand">True</property>
+        <property name="activates-default">True</property>
+      </object>
+    </child>
     <child>
       <object class="GtkLabel" id="name_label">
         <property name="visible" bind-source="Gjs_ConnectionDetails"
@@ -14,6 +34,10 @@
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">nameEntry</property>
       </object>
+      <packing>
+        <property name="left-attach">0</property>
+        <property name="top-attach">1</property>
+      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="nameEntry">
@@ -23,30 +47,6 @@
         <property name="hexpand">True</property>
         <property name="activates-default">True</property>
         <property name="placeholder-text" translatable="yes">optional</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="server_label">
-        <property name="visible" bind-source="Gjs_ConnectionDetails"
-                  bind-property="has-service"
-                  bind-flags="invert-boolean|sync-create"/>
-        <property name="halign">end</property>
-        <property name="label" translatable="yes">_Server Address</property>
-        <property name="use-underline">True</property>
-        <property name="mnemonic-widget">serverEntry</property>
-      </object>
-      <packing>
-        <property name="left-attach">0</property>
-        <property name="top-attach">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkEntry" id="serverEntry">
-        <property name="visible" bind-source="Gjs_ConnectionDetails"
-                  bind-property="has-service"
-                  bind-flags="invert-boolean|sync-create"/>
-        <property name="hexpand">True</property>
-        <property name="activates-default">True</property>
       </object>
       <packing>
         <property name="left-attach">1</property>
