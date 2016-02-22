@@ -321,9 +321,17 @@ on_group_contacts_changed (TpChannel  *channel,
   switch (reason)
     {
     case TP_CHANNEL_GROUP_CHANGE_REASON_RENAMED:
-      g_signal_emit (user_data, signals[MEMBER_RENAMED], 0,
-                     g_ptr_array_index (removed, 0),
-                     g_ptr_array_index (added, 0));
+
+      if (removed->len != 1 || added->len != 1) {
+        const char *removed_alias = removed->len > 0 ? tp_contact_get_alias (g_ptr_array_index (removed, 0)) : "undefined";
+        const char *added_alias = added->len > 0 ? tp_contact_get_alias (g_ptr_array_index (added, 0)) : "undefined";
+        g_warning ("Renamed '%s' to '%s'. Expected to have 1 removed and 1 added, but got %u removed and %u added",
+                   removed_alias, added_alias, removed->len, added->len);
+      } else {
+        g_signal_emit (user_data, signals[MEMBER_RENAMED], 0,
+                       g_ptr_array_index (removed, 0),
+                       g_ptr_array_index (added, 0));
+      }
       break;
     case TP_CHANNEL_GROUP_CHANGE_REASON_OFFLINE:
       for (i = 0; i < removed->len; i++)
