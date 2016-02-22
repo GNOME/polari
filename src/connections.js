@@ -383,8 +383,9 @@ const ConnectionDetails = new Lang.Class({
     },
 
     _detailsFromParams: function(params, oldDetails) {
-        let details = { account: GLib.Variant.new('s', params.account),
-                        server:  GLib.Variant.new('s', params.server) };
+        let details = { account:  GLib.Variant.new('s', params.account),
+                        username: GLib.Variant.new('s', params.account),
+                        server:   GLib.Variant.new('s', params.server) };
 
         if (params.port)
             details.port = GLib.Variant.new('u', params.port);
