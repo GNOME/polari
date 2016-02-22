@@ -365,9 +365,16 @@ const ConnectionDetails = new Lang.Class({
     },
 
     _updateAccount: function() {
-        let params = this._getParams();
         let account = this._account;
         let oldDetails = account.dup_parameters_vardict().deep_unpack();
+
+        // Don't allow removing non-optional parameters
+        let params = this._getParams();
+        if (!params.server)
+            params.server = this._savedServer;
+        if (!params.account)
+            params.account = this._savedNick;
+
         let [details, removed] = this._detailsFromParams(params, oldDetails);
         let vardict = GLib.Variant.new('a{sv}', details);
 
