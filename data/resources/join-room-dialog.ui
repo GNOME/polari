@@ -33,7 +33,6 @@
     </child>
     <child type="action">
       <object class="GtkButton" id="joinButton">
-        <property name="label" translatable="yes">_Join</property>
         <property name="visible">True</property>
         <property name="can-default">True</property>
         <property name="has-default">True</property>
@@ -193,6 +192,7 @@
                             <child>
                               <object class="GtkSearchEntry" id="filterEntry">
                                 <property name="visible">True</property>
+                                <property name="activates-default">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="margin">60</property>
                                 <property name="margin-top">6</property>
@@ -220,18 +220,6 @@
                         <child>
                           <object class="Gjs_ConnectionDetails" id="details">
                             <property name="visible">True</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="addButton">
-                            <property name="label" translatable="yes">_Add</property>
-                            <property name="visible">True</property>
-                            <property name="halign">end</property>
-                            <property name="can-default">True</property>
-                            <property name="receives-default">True</property>
-                            <property name="use-underline">True</property>
-                            <property name="sensitive" bind-source="details"
-                                      bind-property="can-confirm" bind-flags="sync-create"/>
                           </object>
                         </child>
                       </object>

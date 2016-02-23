@@ -30,7 +30,7 @@ const ConnectionRow = new Lang.Class({
 
         this.parent(params);
 
-        this.bind_property('sensitive', this, 'activatable',
+        this.bind_property('sensitive', this, 'selectable',
                            GObject.BindingFlags.SYNC_CREATE);
 
         let box = new Gtk.Box({ spacing: 12, margin: 12 });
@@ -59,8 +59,12 @@ const ConnectionRow = new Lang.Class({
 const ConnectionsList = new Lang.Class({
     Name: 'ConnectionsList',
     Extends: Gtk.ScrolledWindow,
-    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
-               'account-selected': {}},
+    Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
+                                                           'can-confirm',
+                                                           'can-confirm',
+                                                           GObject.ParamFlags.READABLE,
+                                                           false)},
+    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
 
     _init: function(params) {
         this.parent(params);
@@ -68,8 +72,8 @@ const ConnectionsList = new Lang.Class({
         this.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
         this._list = new Gtk.ListBox({ visible: true });
-        this._list.connect('row-activated',
-                           Lang.bind(this, this._onRowActivated));
+        this._list.connect('row-selected',
+                           Lang.bind(this, this._onCanConfirmChanged));
         this.add(this._list);
 
         this._rows = new Map();
@@ -94,15 +98,23 @@ const ConnectionsList = new Lang.Class({
         this._networksChanged();
     },
 
+    get can_confirm() {
+        return this._list.get_selected_row() != null;
+    },
+
+    _onCanConfirmChanged: function() {
+        this.notify('can-confirm');
+    },
+
     setFilter: function(filter) {
+        this._list.select_row(null);
         this._filterTerms = filter.trim().toLowerCase().replace(/\s+/g, ' ').split(' ');
         this._list.invalidate_filter();
     },
 
     activateFirst: function() {
         let row = this._list.get_row_at_y(0);
-        if (row)
-            row.activate();
+        this._list.select_row(row);
     },
 
     _filterRows: function(row) {
@@ -139,7 +151,11 @@ const ConnectionsList = new Lang.Class({
             }));
     },
 
-    _onRowActivated: function(list, row) {
+    save: function() {
+        if (!this.can_confirm)
+            return
+
+        let row = this._list.get_selected_row();
         let name = this._networksManager.getNetworkName(row.id);
         let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
                                           connection_manager: 'idle',
@@ -159,7 +175,6 @@ const ConnectionsList = new Lang.Class({
                 if (account) // TODO: Handle errors
                     this.emit('account-created', account);
             }));
-        this.emit('account-selected');
     },
 
     _setAccountRowSensitive: function(account, sensitive) {
