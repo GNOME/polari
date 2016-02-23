@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&"
 "keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-19 16:42+0000\n"
-"PO-Revision-Date: 2016-02-19 21:18+0200\n"
+"POT-Creation-Date: 2016-02-22 02:25+0000\n"
+"PO-Revision-Date: 2016-02-23 09:00+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -82,9 +82,9 @@ msgid "Window maximized state"
 msgstr "Stanje uvećanog prozora"
 
 #: ../data/resources/connection-details.ui.h:1
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Ime"
+#| msgid "C_onnection"
+msgid "_Connection Name"
+msgstr "_Naziv veze"
 
 #: ../data/resources/connection-details.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:8
@@ -92,11 +92,11 @@ msgid "optional"
 msgstr "izborno"
 
 #: ../data/resources/connection-details.ui.h:3
-msgid "_Server"
-msgstr "_Server"
+#| msgid "_Server"
+msgid "_Server Address"
+msgstr "_Adresa servera"
 
 #: ../data/resources/connection-details.ui.h:4
-#| msgid "C_onnection"
 msgid "Use secure c_onnection"
 msgstr "Koristi bezbednu _vezu"
 
@@ -116,7 +116,6 @@ msgid "_Cancel"
 msgstr "_Otkaži"
 
 #: ../data/resources/connection-properties.ui.h:2
-#| msgid "A_pply"
 msgid "_Apply"
 msgstr "_Primeni"
 
@@ -241,7 +240,6 @@ msgid "_Add"
 msgstr "_Dodaj"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-#| msgid "_Add Connection"
 msgid "_Custom Connection"
 msgstr "_Proizvoljna veza"
 
@@ -276,6 +274,10 @@ msgstr "_Poruka"
 #: ../data/resources/message-user-dialog.ui.h:4
 msgid "_Recent"
 msgstr "_Skorašnje"
+
+#: ../data/resources/message-user-dialog.ui.h:5
+msgid "_Name"
+msgstr "_Ime"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -313,7 +315,6 @@ msgstr "„%s“ je uklonjeno."
 #: ../src/application.js:482
 msgid "translator-credits"
 msgstr ""
-"Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Marko M. Kostić (Marko M. Kostić) <marko.m.kostic@gmail.com>\n"
 "\n"
 "http://prevod.org — prevod na srpski jezik"
@@ -505,8 +506,6 @@ msgstr[3] "Da ubacim %s red teksta na javnu uslugu ubacivanja"
 
 #: ../src/entryArea.js:240
 #, javascript-format
-#| msgid "Paste %s line of text to public paste service?"
-#| msgid_plural "Paste %s lines of text to public paste service?"
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "Otpremam %s red teksta na javnu uslugu ubacivanja…"
@@ -519,7 +518,6 @@ msgid "Upload image to public paste service?"
 msgstr "Da otpremim sliku na javnu uslugu ubacivanja?"
 
 #: ../src/entryArea.js:248
-#| msgid "Upload image to public paste service?"
 msgid "Uploading image to public paste service…"
 msgstr "Otpremam sliku na javnu uslugu ubacivanja…"
 
