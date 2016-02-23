@@ -57,8 +57,6 @@ const JoinDialog = new Lang.Class({
         this._setupMainPage();
         this._setupConnectionPage();
 
-        this._setPage(DialogPage.MAIN);
-
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._roomManager = ChatroomManager.getDefault();
 
@@ -94,8 +92,17 @@ const JoinDialog = new Lang.Class({
                 this._accountsMonitor.disconnect(this._accountRemovedId);
             }));
 
+        if (this._hasAccounts)
+            this._setPage(DialogPage.MAIN);
+        else
+            this._setPage(DialogPage.CONNECTION);
+
         this._updateConnectionCombo();
         this._updateCanJoin();
+    },
+
+    get _hasAccounts() {
+      return Object.keys(this._accounts).length > 0;
     },
 
     _setupMainPage: function() {
@@ -252,15 +259,16 @@ const JoinDialog = new Lang.Class({
 
     _setPage: function(page) {
         let isMain = page == DialogPage.MAIN;
+        let isAccountsEmpty = !this._hasAccounts;
 
         if (isMain)
             this._nameEntry.grab_focus();
         else
             this._customToggle.active = false;
 
-        this._backButton.visible = !isMain;
         this._joinButton.visible = isMain;
-        this._cancelButton.visible = isMain;
+        this._cancelButton.visible = isMain || isAccountsEmpty;
+        this._backButton.visible = !(isMain || isAccountsEmpty);
         this.title = isMain ? _("Join Chat Room")
                             : _("Add Network");
         this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
