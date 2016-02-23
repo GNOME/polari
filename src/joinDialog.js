@@ -31,7 +31,6 @@ const JoinDialog = new Lang.Class({
                        'filterEntry',
                        'connectionsList',
                        'details',
-                       'addButton',
                        'customToggle'],
 
     _init: function(params) {
@@ -83,8 +82,9 @@ const JoinDialog = new Lang.Class({
         this.connect('response', Lang.bind(this,
             function(w, response) {
                 if (response == Gtk.ResponseType.OK)
-                    this._joinRoom();
-                this.destroy();
+                    this._onConfirmClicked();
+                else
+                    this.destroy();
             }));
         this.connect('destroy', Lang.bind(this,
             function() {
@@ -124,30 +124,24 @@ const JoinDialog = new Lang.Class({
             function() {
                 this._setPage(DialogPage.MAIN);
             }));
-        this._connectionsList.connect('account-selected', Lang.bind(this,
-            function() {
-                this._setPage(DialogPage.MAIN);
-            }));
-        this._addButton.connect('clicked', Lang.bind(this,
-            function() {
-                this._details.save();
-                this._setPage(DialogPage.MAIN);
-            }));
 
         this._connectionsList.connect('account-created',
                                       Lang.bind(this, this._onAccountCreated));
         this._details.connect('account-created',
                               Lang.bind(this, this._onAccountCreated));
+        this._connectionsList.connect('notify::can-confirm',
+                                      Lang.bind(this, this._updateCanJoin));
+        this._details.connect('notify::can-confirm',
+                              Lang.bind(this, this._updateCanJoin));
 
         this._customToggle.connect('notify::active', Lang.bind(this,
             function() {
                 let isCustom = this._customToggle.active;
                 this._connectionStack.visible_child_name = isCustom ? 'custom'
                                                                     : 'predefined';
-                if (isCustom) {
-                    this._addButton.grab_default();
+                if (isCustom)
                     this._details.reset();
-                }
+                this._updateCanJoin();
             }));
 
         this._filterEntry.connect('search-changed', Lang.bind(this,
@@ -198,6 +192,19 @@ const JoinDialog = new Lang.Class({
             }));
     },
 
+    _onConfirmClicked: function() {
+        if (this._page == DialogPage.MAIN) {
+            this._joinRoom();
+            this.destroy();
+        } else {
+            if (this._customToggle.active)
+                this._details.save();
+            else
+                this._connectionsList.save();
+            this._setPage(DialogPage.MAIN);
+        }
+    },
+
     _onAccountCreated: function(w, account) {
         this._connectionCombo.set_active_id(account.display_name);
     },
@@ -244,6 +251,9 @@ const JoinDialog = new Lang.Class({
         if (this._page == DialogPage.MAIN)
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._nameEntry.get_text_length() > 0;
+        else
+            sensitive = this._customToggle.active ? this._details.can_confirm
+                                                  : this._connectionsList.can_confirm;
 
         this._joinButton.sensitive = sensitive;
         this.set_default_response(sensitive ? Gtk.ResponseType.OK
@@ -266,11 +276,12 @@ const JoinDialog = new Lang.Class({
         else
             this._customToggle.active = false;
 
-        this._joinButton.visible = isMain;
         this._cancelButton.visible = isMain || isAccountsEmpty;
         this._backButton.visible = !(isMain || isAccountsEmpty);
         this.title = isMain ? _("Join Chat Room")
                             : _("Add Network");
+        this._joinButton.label = isMain ? _("_Join")
+                                        : _("_Connect");
         this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
         this._updateCanJoin();
     }
