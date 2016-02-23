@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-21 16:50+0100\n"
-"PO-Revision-Date: 2016-02-21 16:52+0100\n"
+"POT-Creation-Date: 2016-02-23 19:59+0100\n"
+"PO-Revision-Date: 2016-02-23 20:00+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -24,13 +24,13 @@ msgstr ""
 "X-Poedit-Country: Poland\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
 #: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -85,17 +85,17 @@ msgid "Window maximized state"
 msgstr "Stan maksymalizacji okna"
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Connection Name"
-msgstr "_Nazwa połączenia"
+msgid "_Server Address"
+msgstr "Adres _serwera"
 
 #: ../data/resources/connection-details.ui.h:2
+msgid "Net_work Name"
+msgstr "_Nazwa sieci"
+
+#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "opcjonalne"
-
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Server Address"
-msgstr "Adres _serwera"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "Use secure c_onnection"
@@ -112,7 +112,6 @@ msgstr "_Imię i nazwisko"
 #: ../data/resources/connection-properties.ui.h:1
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1
 msgid "_Cancel"
 msgstr "_Anuluj"
 
@@ -148,85 +147,79 @@ msgstr "Dołączenie do pokoju"
 
 #: ../data/resources/help-overlay.ui.h:3
 msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Wysłanie wiadomości do użytkownika"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Opuszczenie pokoju"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Wyświetlenie listy użytkowników"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Zakończenie działania"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Skróty klawiszowe"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Nawigacja"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Następny pokój"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Poprzedni pokój"
 
-#: ../data/resources/help-overlay.ui.h:11
+#: ../data/resources/help-overlay.ui.h:10
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Następny pokój z nieprzeczytanymi wiadomościami"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Poprzedni pokój z nieprzeczytanymi wiadomościami"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Pierwszy pokój"
 
-#: ../data/resources/help-overlay.ui.h:14
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Ostatni pokój"
 
-#: ../data/resources/help-overlay.ui.h:15
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Pierwszy — dziewiąty pokój"
 
 #: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
 msgid "Join Chat Room"
-msgstr "Dołącz do pokoju rozmów"
+msgstr "Dołączenie do pokoju rozmów"
 
 #: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
 msgstr "Dołą_cz"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "P_ołączenie"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Dodaj połączenie"
+msgid "_Add Network"
+msgstr "_Dodaj sieć"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -241,20 +234,12 @@ msgid "_Add"
 msgstr "_Dodaj"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-msgid "_Custom Connection"
-msgstr "_Inne połączenie"
-
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Dołącz do pokoju"
+msgid "_Custom Network"
+msgstr "_Inna sieć"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Wyślij wiadomość do użytkownika"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Dołącz do pokoju"
+msgid "Add rooms and networks"
+msgstr "Dodawanie pokojów i sieci"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -267,18 +252,6 @@ msgstr "O programie"
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Zakończ"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Wiadomość"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "Ostatni _użytkownicy"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nazwa"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -304,22 +277,22 @@ msgstr "Ostatnia aktywność:"
 msgid "Message"
 msgstr "Wiadomość"
 
-#: ../src/application.js:393
+#: ../src/application.js:374
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:425
+#: ../src/application.js:406
 #, javascript-format
 msgid "%s removed."
 msgstr "Usunięto %s."
 
-#: ../src/application.js:482
+#: ../src/application.js:463
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2016"
 
-#: ../src/application.js:488
+#: ../src/application.js:469
 msgid "Learn more about Polari"
 msgstr "Więcej informacji o programie Polari"
 
@@ -626,20 +599,16 @@ msgid "No topic set"
 msgstr "Nie ustawiono tematu"
 
 #: ../src/joinDialog.js:265
-msgid "Add Connection"
-msgstr "Dodaj połączenie"
+msgid "Add Network"
+msgstr "Dodanie sieci"
 
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:309
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d użytkownik"
 msgstr[1] "%d użytkowników"
 msgstr[2] "%d użytkowników"
-
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Brak ostatnich użytkowników"
 
 #: ../src/roomList.js:129
 msgid "Leave chatroom"
@@ -651,8 +620,8 @@ msgstr "Zakończ rozmowę"
 
 #: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Błąd połączenia %s"
+msgid "Network %s has an error"
+msgstr "Błąd sieci %s"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
