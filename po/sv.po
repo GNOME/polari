@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-20 19:01+0000\n"
-"PO-Revision-Date: 2016-02-20 21:38+0100\n"
+"POT-Creation-Date: 2016-02-23 17:08+0000\n"
+"PO-Revision-Date: 2016-02-24 11:24+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -22,13 +22,13 @@ msgstr ""
 "X-Generator: Poedit 1.8.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
 #: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En IRC-chattklient för GNOME"
 
@@ -83,8 +83,8 @@ msgid "Window maximized state"
 msgstr "Maximerat tillstånd för fönster"
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Connection Name"
-msgstr "A_nslutningsnamn"
+msgid "Net_work Name"
+msgstr "Nät_verksnamn"
 
 #: ../data/resources/connection-details.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:8
@@ -110,7 +110,6 @@ msgstr "_Fullständigt namn"
 #: ../data/resources/connection-properties.ui.h:1
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1
 msgid "_Cancel"
 msgstr "_Avbryt"
 
@@ -146,65 +145,60 @@ msgstr "Gå in i rum"
 
 #: ../data/resources/help-overlay.ui.h:3
 msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Meddela användare"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Lämna rum"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Visa användarlista"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Tangentbordsgenvägar"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigering"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Nästa rum"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Föregående rum"
 
-#: ../data/resources/help-overlay.ui.h:11
+#: ../data/resources/help-overlay.ui.h:10
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Nästa rum med olästa meddelanden"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Föregående rum med olästa meddelanden"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Första rummet"
 
-#: ../data/resources/help-overlay.ui.h:14
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Senaste rummet"
 
-#: ../data/resources/help-overlay.ui.h:15
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Första - nionde rummet"
@@ -218,13 +212,12 @@ msgid "_Join"
 msgstr "_Anslut"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "An_slutning"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Lägg till en anslutning"
+msgid "_Add Network"
+msgstr "_Lägg till nätverk"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -239,20 +232,12 @@ msgid "_Add"
 msgstr "Lägg _till"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-msgid "_Custom Connection"
-msgstr "An_passad anslutning"
-
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Gå in i ett rum"
+msgid "_Custom Network"
+msgstr "An_passat nätverk"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Meddela en användare"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Gå in i rum"
+msgid "Add rooms and networks"
+msgstr "Lägg till rum och nätverk"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -265,18 +250,6 @@ msgstr "Om"
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Avsluta"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Meddelande"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Senaste"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Namn"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -302,16 +275,16 @@ msgstr "Senaste aktivitet:"
 msgid "Message"
 msgstr "Meddelande"
 
-#: ../src/application.js:393
+#: ../src/application.js:374
 msgid "Good Bye"
 msgstr "Hejdå"
 
-#: ../src/application.js:425
+#: ../src/application.js:406
 #, javascript-format
 msgid "%s removed."
 msgstr "%s borttagen."
 
-#: ../src/application.js:482
+#: ../src/application.js:463
 msgid "translator-credits"
 msgstr ""
 "Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
@@ -320,7 +293,7 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../src/application.js:488
+#: ../src/application.js:469
 msgid "Learn more about Polari"
 msgstr "Lär dig mer om Polari"
 
@@ -625,19 +598,15 @@ msgid "No topic set"
 msgstr "Inget ämne är inställt"
 
 #: ../src/joinDialog.js:265
-msgid "Add Connection"
-msgstr "Lägg till en anslutning"
+msgid "Add Network"
+msgstr "Lägg till nätverk"
 
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:309
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d användare"
 msgstr[1] "%d användare"
-
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Inga användare på senaste tiden"
 
 #: ../src/roomList.js:129
 msgid "Leave chatroom"
@@ -649,8 +618,8 @@ msgstr "Avsluta konversation"
 
 #: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Anslutningen %s har ett fel"
+msgid "Network %s has an error"
+msgstr "Nätverket %s har ett fel"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
@@ -761,6 +730,40 @@ msgstr "Polari-serverlösenord för %s"
 #: ../src/utils.js:171
 msgid "Failed to open link"
 msgstr "Misslyckades med att öppna länk"
+
+#~ msgid "_Connection Name"
+#~ msgstr "A_nslutningsnamn"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Meddela användare"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Lägg till en anslutning"
+
+#~ msgid "Join a Room"
+#~ msgstr "Gå in i ett rum"
+
+#~ msgid "Message a User"
+#~ msgstr "Meddela en användare"
+
+#~ msgid "Join room"
+#~ msgstr "Gå in i rum"
+
+#~ msgid "_Message"
+#~ msgstr "_Meddelande"
+
+#~ msgid "_Recent"
+#~ msgstr "_Senaste"
+
+#~ msgid "_Name"
+#~ msgstr "_Namn"
+
+#~ msgid "Add Connection"
+#~ msgstr "Lägg till en anslutning"
+
+#~ msgid "No recent users"
+#~ msgstr "Inga användare på senaste tiden"
 
 #~ msgid "_Save"
 #~ msgstr "_Spara"
