@@ -58,6 +58,7 @@ const FixedSizeFrame = new Lang.Class({
             return;
         this._height = height;
         this.notify('height');
+        this.set_size_request(this._width, this._height);
         this._queueRedraw();
     },
 
@@ -71,21 +72,18 @@ const FixedSizeFrame = new Lang.Class({
 
         this._width = width;
         this.notify('width');
+        this.set_size_request(this._width, this._height);
         this._queueRedraw();
     },
 
     vfunc_get_preferred_width_for_height: function(forHeight) {
-        if (this._width < 0)
-            return this.parent(forHeight);
-        else
-            return [this._width, this._width];
+        let [min, nat] = this.parent(forHeight);
+        return [min, this._width < 0 ? nat : this._width];
     },
 
     vfunc_get_preferred_height_for_width: function(forWidth) {
-        if (this._height < 0)
-            return this.parent(forWidth);
-        else
-            return [this._height, this._height];
+        let [min, nat] = this.parent(forWidth);
+        return [min, this._height < 0 ? nat : this._height];
     }
 });
 
