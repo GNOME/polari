@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-21 14:25+0000\n"
-"PO-Revision-Date: 2016-02-21 13:11-0300\n"
+"POT-Creation-Date: 2016-02-23 17:08+0000\n"
+"PO-Revision-Date: 2016-02-23 20:13-0300\n"
 "Last-Translator: Artur de Aquino Morais <artur.morais93@outlook.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -25,12 +25,12 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:94
+#: ../data/resources/main-window.ui.h:1 ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -86,8 +86,8 @@ msgid "Window maximized state"
 msgstr "Estado de janela maximizada"
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Connection Name"
-msgstr "_Nome da conexão"
+msgid "Net_work Name"
+msgstr "Nome da re_de"
 
 #: ../data/resources/connection-details.ui.h:2
 #: ../data/resources/join-room-dialog.ui.h:8
@@ -113,7 +113,6 @@ msgstr "Nome _real"
 #: ../data/resources/connection-properties.ui.h:1
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -149,65 +148,60 @@ msgstr "Entrar na sala"
 
 #: ../data/resources/help-overlay.ui.h:3
 msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Enviar mensagem a usuário"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Deixar a sala"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Mostrar lista de usuário(s)"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Sair"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos do teclado"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navegação"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Próxima sala"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Sala anterior"
 
-#: ../data/resources/help-overlay.ui.h:11
+#: ../data/resources/help-overlay.ui.h:10
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Próxima sala com mensagens não lidas"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Sala anterior com mensagens não lidas"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Primeira sala"
 
-#: ../data/resources/help-overlay.ui.h:14
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Última sala"
 
-#: ../data/resources/help-overlay.ui.h:15
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Primeira - Nona sala"
@@ -221,13 +215,12 @@ msgid "_Join"
 msgstr "En_trar"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "C_onexão"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Adicionar conexão"
+msgid "_Add Network"
+msgstr "_Adicionar rede"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -242,20 +235,12 @@ msgid "_Add"
 msgstr "_Adicionar"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-msgid "_Custom Connection"
-msgstr "_Conexão personalizada"
-
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Entrar em uma sala"
+msgid "_Custom Network"
+msgstr "_Rede personalizada"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Enviar mensagem a um usuário"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Entrar na sala"
+msgid "Add rooms and networks"
+msgstr "Adicionar salas e redes"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -268,18 +253,6 @@ msgstr "Sobre"
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Sair"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Mensagem"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Recente"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nome"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -305,23 +278,23 @@ msgstr "Última atividade:"
 msgid "Message"
 msgstr "Mensagem"
 
-#: ../src/application.js:393
+#: ../src/application.js:374
 msgid "Good Bye"
 msgstr "Até logo"
 
-#: ../src/application.js:425
+#: ../src/application.js:406
 #, javascript-format
 msgid "%s removed."
 msgstr "%s removido."
 
-#: ../src/application.js:482
+#: ../src/application.js:463
 msgid "translator-credits"
 msgstr ""
 "Enrico Nicoletto <liverig@gmail.com>, 2013, 2014, 2015\n"
 "Gustavo Marques<gutodisse@gmail.com>, 2015.\n"
 "Fábio Nogueira <fnogueira@gnome.org>, 2016."
 
-#: ../src/application.js:488
+#: ../src/application.js:469
 msgid "Learn more about Polari"
 msgstr "Aprenda mais sobre o Polari"
 
@@ -621,19 +594,15 @@ msgid "No topic set"
 msgstr "Nenhum tópico definido"
 
 #: ../src/joinDialog.js:265
-msgid "Add Connection"
-msgstr "Adicionar conexão"
+msgid "Add Network"
+msgstr "Adicionar rede"
 
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:309
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d usuário"
 msgstr[1] "%d usuários"
-
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Sem usuários recentes"
 
 #: ../src/roomList.js:129
 msgid "Leave chatroom"
@@ -645,8 +614,8 @@ msgstr "Finalizar conversa"
 
 #: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "A conexão %s possui um erro"
+msgid "Network %s has an error"
+msgstr "A rede %s possui um erro"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
@@ -757,6 +726,40 @@ msgstr "Senha do servidor Polari para %s"
 #: ../src/utils.js:171
 msgid "Failed to open link"
 msgstr "Ocorreu falha ao abrir o link"
+
+#~ msgid "_Connection Name"
+#~ msgstr "_Nome da conexão"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Enviar mensagem a usuário"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Adicionar conexão"
+
+#~ msgid "Join a Room"
+#~ msgstr "Entrar em uma sala"
+
+#~ msgid "Message a User"
+#~ msgstr "Enviar mensagem a um usuário"
+
+#~ msgid "Join room"
+#~ msgstr "Entrar na sala"
+
+#~ msgid "_Message"
+#~ msgstr "_Mensagem"
+
+#~ msgid "_Recent"
+#~ msgstr "_Recente"
+
+#~ msgid "_Name"
+#~ msgstr "_Nome"
+
+#~ msgid "Add Connection"
+#~ msgstr "Adicionar conexão"
+
+#~ msgid "No recent users"
+#~ msgstr "Sem usuários recentes"
 
 #~ msgid "_Save"
 #~ msgstr "Sal_var"
