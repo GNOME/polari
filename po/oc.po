@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&"
 "keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2016-02-18 00:39+0000\n"
-"PO-Revision-Date: 2016-02-24 21:26+0200\n"
+"PO-Revision-Date: 2016-02-24 21:28+0200\n"
 "Last-Translator: Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -290,7 +290,7 @@ msgstr "_Recent"
 #: ../data/resources/room-list-header.ui.h:1
 #| msgid "New Connection"
 msgid "Reconnect"
-msgstr "Reconnectqr"
+msgstr "Reconnectar"
 
 #: ../data/resources/room-list-header.ui.h:2
 msgid "Remove"
@@ -298,7 +298,7 @@ msgstr "Suprimir"
 
 #: ../data/resources/room-list-header.ui.h:3
 msgid "Properties"
-msgstr ""
+msgstr "Proprietats"
 
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
@@ -319,7 +319,7 @@ msgstr "Al reveire"
 #: ../src/application.js:424
 #, javascript-format
 msgid "%s removed."
-msgstr ""
+msgstr "%s suprimit."
 
 #: ../src/application.js:481
 msgid "translator-credits"
@@ -332,7 +332,7 @@ msgstr "A prepaus de Polari"
 
 #: ../src/appNotifications.js:49
 msgid "Undo"
-msgstr ""
+msgstr "Anullar"
 
 #: ../src/chatView.js:133
 #| msgid "Message"
