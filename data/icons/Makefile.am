@@ -12,7 +12,7 @@ nobase_dist_icon_DATA = \
 	hicolor/48x48/apps/org.gnome.Polari.png \
 	hicolor/256x256/apps/org.gnome.Polari.png \
 	hicolor/512x512/apps/org.gnome.Polari.png \
-	hicolor/scalable/apps/org.gnome.Polari-symbolic.svg \
+	hicolor/symbolic/apps/org.gnome.Polari-symbolic.svg \
 	$(NULL)
 
 noinst_DATA = \
