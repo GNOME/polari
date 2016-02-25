@@ -281,7 +281,8 @@ const JoinDialog = new Lang.Class({
         this.title = isMain ? _("Join Chat Room")
                             : _("Add Network");
         this._joinButton.label = isMain ? _("_Join")
-                                        : _("_Connect");
+                                        : isAccountsEmpty ? _("_Next")
+                                                          : _("_Connect");
         this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
         this._updateCanJoin();
     }
