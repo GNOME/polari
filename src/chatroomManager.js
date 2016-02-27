@@ -155,6 +155,13 @@ const _ChatroomManager = new Lang.Class({
         this._accountsMonitor.connect('account-manager-prepared',
                                       Lang.bind(this, this._onPrepared));
         this._amIsPrepared = false;
+
+        this._app.connect('prepare-shutdown',
+                          Lang.bind(this, this._onPrepareShutdown));
+
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+
+        this._lastActiveRoom = null;
     },
 
     _onPrepared: function(mon, am) {
@@ -220,6 +227,15 @@ const _ChatroomManager = new Lang.Class({
             if (account.connection_status == Tp.ConnectionStatus.CONNECTED)
                 this._restoreSavedChannels(account);
         }));
+
+        let selectedChannel = this._settings.get_value('last-selected-channel').deep_unpack();
+
+        for (let prop in selectedChannel)
+            selectedChannel[prop] = selectedChannel[prop].deep_unpack();
+
+        if (selectedChannel.account && selectedChannel.channel)
+             this._restoreChannel(selectedChannel);
+
         this._restoreSavedChannels(null);
 
         this._networkMonitor.connect('notify::network-available', Lang.bind(this,
@@ -242,8 +258,7 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _restoreSavedChannels: function(account) {
-        let settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-        let savedChannels = settings.get_value('saved-channel-list').deep_unpack();
+        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
         for (let i = 0; i < savedChannels.length; i++) {
             let serializedChannel = savedChannels[i];
             for (let prop in serializedChannel)
@@ -444,15 +459,33 @@ const _ChatroomManager = new Lang.Class({
     _removeRoom: function(room) {
         if (!this._rooms[room.id])
             return;
+
+        if (room == this._lastActiveRoom)
+            this._lastActiveRoom = null;
+
         room.disconnect(room._channelChangedId);
         delete room._channelChangedId;
         delete this._rooms[room.id];
         this.emit('room-removed', room);
     },
 
+    _onPrepareShutdown: function() {
+        if (this._lastActiveRoom) {
+            let serializedChannel = { account: GLib.Variant.new('s', this._lastActiveRoom.account.get_object_path()),
+                                      channel: GLib.Variant.new('s', this._lastActiveRoom.channel_name) };
+
+            this._settings.set_value('last-selected-channel', GLib.Variant.new('a{sv}', serializedChannel));
+        } else {
+            this._settings.reset('last-selected-channel');
+        }
+    },
+
     setActiveRoom: function(room) {
         if (room == this._activeRoom)
             return;
+
+        if (room && room.type == Tp.HandleType.ROOM)
+            this._lastActiveRoom = room;
 
         this._activeRoom = room;
         this.emit('active-changed', room);

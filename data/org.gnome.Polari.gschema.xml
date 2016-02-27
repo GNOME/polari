@@ -16,5 +16,10 @@
       <summary>Window maximized</summary>
       <description>Window maximized state</description>
     </key>
+    <key type="a{sv}" name="last-selected-channel">
+      <default>{}</default>
+      <summary>Last active channel</summary>
+      <description>Last active (selected) channel</description>
+    </key>
   </schema>
 </schemalist>
