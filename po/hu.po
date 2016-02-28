@@ -10,25 +10,25 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-12 14:25+0000\n"
-"PO-Revision-Date: 2016-02-12 15:50+0100\n"
-"Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2016-02-27 02:19+0000\n"
+"PO-Revision-Date: 2016-02-28 15:20+0100\n"
+"Last-Translator: Gabor Kelemen <kelemeng at ubuntu dot com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:94
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
+#: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:495
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Interneten továbbított csevegés (IRC) kliens a GNOME-hoz"
 
@@ -84,26 +84,42 @@ msgid "Window maximized state"
 msgstr "Az ablak maximalizált állapota"
 
 #: ../data/resources/connection-details.ui.h:1
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Név"
+#| msgid "_Address"
+msgid "_Server Address"
+msgstr "Kiszolgáló _címe"
 
 #: ../data/resources/connection-details.ui.h:2
+msgid "Net_work Name"
+msgstr "_Hálózat neve"
+
+#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "opcionális"
 
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Server"
-msgstr "_Kiszolgáló"
-
 #: ../data/resources/connection-details.ui.h:4
+#| msgid "New Connection"
+msgid "Use secure c_onnection"
+msgstr "_Biztonságos kapcsolat használata"
+
+#: ../data/resources/connection-details.ui.h:5
 msgid "_Nickname"
 msgstr "_Becenév"
 
-#: ../data/resources/connection-details.ui.h:5
+#: ../data/resources/connection-details.ui.h:6
 msgid "_Real Name"
 msgstr "Való_di név"
+
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "Mé_gse"
+
+#: ../data/resources/connection-properties.ui.h:2
+#| msgid "A_pply"
+msgid "_Apply"
+msgstr "_Alkalmaz"
 
 #: ../data/resources/entry-area.ui.h:1
 msgid "Change nickname:"
@@ -116,12 +132,6 @@ msgstr "_Módosítás"
 #: ../data/resources/entry-area.ui.h:3
 msgid "Change nickname"
 msgstr "Becenév módosítása"
-
-#: ../data/resources/entry-area.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:229
-msgid "_Cancel"
-msgstr "Mé_gse"
 
 #: ../data/resources/entry-area.ui.h:5
 msgid "_Paste"
@@ -139,75 +149,79 @@ msgstr "Csatlakozás szobához"
 
 #: ../data/resources/help-overlay.ui.h:3
 msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Üzenet felhasználónak"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Szoba elhagyása"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Felhasználólista megjelenítése"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigáció"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Következő szoba"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Előző szoba"
 
+#: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Következő szoba olvasatlan üzenetekkel"
+
 #: ../data/resources/help-overlay.ui.h:11
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Előző szoba olvasatlan üzenetekkel"
+
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Első szoba"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Utolsó szoba"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Első - kilencedik szoba"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:235
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Csatlakozás csevegőszobához"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:237
+#: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
 msgstr "_Csatlakozás"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "_Kapcsolat"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Kapcsolat hozzáadása"
+msgid "_Add Network"
+msgstr "_Hálózat hozzáadása"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -217,17 +231,18 @@ msgstr "Szoba_név"
 msgid "_Password"
 msgstr "_Jelszó"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Csatlakozás szobához"
+#: ../data/resources/join-room-dialog.ui.h:9
+#| msgid "_Address"
+msgid "_Add"
+msgstr "Hozzá_adás"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Network"
+msgstr "_Egyéni hálózat"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Üzenetküldés egy felhasználónak"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Csatlakozás szobához"
+msgid "Add rooms and networks"
+msgstr "Szobák és hálózatok hozzáadása"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -240,14 +255,6 @@ msgstr "Névjegy"
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Kilépés"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "Üz_enet"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "Leg_utóbbi"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -273,26 +280,30 @@ msgstr "Utolsó esemény:"
 msgid "Message"
 msgstr "Üzenet"
 
-#: ../src/application.js:406
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "A hivatkozás megnyitása nem sikerült"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Viszlát"
 
-#: ../src/application.js:438
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eltávolítva."
 
-#: ../src/application.js:494
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng at ubuntu dot com>\n"
 "Meskó Balázs <meskobalazs at gmail dot com>"
 
-#: ../src/application.js:500
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Tudjon meg többet a Polari-ról"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Visszavonás"
 
@@ -442,7 +453,17 @@ msgstr "%B %d., %l.%M %p"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y. %B %d., %l.%M %p"
 
-#: ../src/connections.js:70
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Már fel van véve"
+
+#. Translators: %s is a connection name
+#: ../src/connections.js:416
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "„%s” tulajdonságai"
+
+#: ../src/connections.js:460
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -450,26 +471,41 @@ msgstr ""
 "A Polari egy hálózati hiba miatt bontotta a kapcsolatot. Kérem ellenőrizze, "
 "hogy a cím mező helyes-e."
 
-#. Translators: %s is a connection name
-#: ../src/connections.js:214
-#, javascript-format
-msgid "“%s” Properties"
-msgstr "„%s” tulajdonságai"
-
-#: ../src/connections.js:231
-msgid "A_pply"
-msgstr "_Alkalmazás"
-
-#: ../src/entryArea.js:220
+#: ../src/entryArea.js:236
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Beilleszt %s szövegsort egy nyilvános beillesztési szolgáltatásba?"
 msgstr[1] "Beilleszt %s szövegsort egy nyilvános beillesztési szolgáltatásba?"
 
-#: ../src/entryArea.js:229
+#: ../src/entryArea.js:240
+#, javascript-format
+#| msgid "Paste %s line of text to public paste service?"
+#| msgid_plural "Paste %s lines of text to public paste service?"
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "%s szövegsor feltöltése egy nyilvános beillesztési szolgáltatásba…"
+msgstr[1] "%s szövegsor feltöltése egy nyilvános beillesztési szolgáltatásba…"
+
+#: ../src/entryArea.js:247
 msgid "Upload image to public paste service?"
 msgstr "Feltölti a képet egy nyilvános beillesztési szolgáltatásba?"
+
+#: ../src/entryArea.js:248
+#| msgid "Upload image to public paste service?"
+msgid "Uploading image to public paste service…"
+msgstr "Kép feltöltése egy nyilvános beillesztési szolgáltatásba…"
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s itt: #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Beillesztés innen: %s"
 
 #. commands that would be nice to support:
 #.
@@ -570,97 +606,74 @@ msgstr "Felhasználók ezen: %s:"
 msgid "No topic set"
 msgstr "Nincs téma beállítva"
 
-#: ../src/joinDialog.js:236
-msgid "Add Connection"
-msgstr "Kapcsolat hozzáadása"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Hálózat hozzáadása"
 
-#: ../src/joinDialog.js:238
-msgid "_Save"
-msgstr "M_entés"
-
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d felhasználó"
 msgstr[1] "%d felhasználó"
 
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Nincsenek legutóbbi felhasználók"
-
-#. translators: %s is a nick, #%s a channel
-#: ../src/pasteManager.js:103 ../src/pasteManager.js:142
-#, javascript-format
-msgid "%s in #%s"
-msgstr "%s itt: #%s"
-
-#: ../src/pasteManager.js:105 ../src/pasteManager.js:144
-#, javascript-format
-msgid "Paste from %s"
-msgstr "Beillesztés innen: %s"
-
-#: ../src/pasteManager.js:350
-#, javascript-format
-msgid "Uploading %s"
-msgstr "%s feltöltése"
-
-#: ../src/roomList.js:125
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Csevegőszoba elhagyása"
 
-#: ../src/roomList.js:125
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Beszélgetés befejezése"
 
-#: ../src/roomList.js:209
+#: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "A(z) %s kapcsolat hibára futott"
+#| msgid "Connection %s has an error"
+msgid "Network %s has an error"
+msgstr "A(z) %s hálózattal probléma van"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:259
+#: ../src/roomList.js:263
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:266
+#: ../src/roomList.js:270
 msgid "Connection Problem"
 msgstr "Kapcsolódási probléma"
 
-#: ../src/roomList.js:274
+#: ../src/roomList.js:278
 msgid "Connected"
 msgstr "Kapcsolódva"
 
-#: ../src/roomList.js:276
+#: ../src/roomList.js:280
 msgid "Connecting..."
 msgstr "Kapcsolódás…"
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:282
 msgid "Offline"
 msgstr "Nem érhető el"
 
-#: ../src/roomList.js:280
+#: ../src/roomList.js:284
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../src/roomList.js:300
+#: ../src/roomList.js:304
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nem sikerült biztonságos módon kapcsolódni ide: %s."
 
-#: ../src/roomList.js:303
+#: ../src/roomList.js:307
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Ehhez jelszó szükséges: %s."
 
-#: ../src/roomList.js:309
+#: ../src/roomList.js:313
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nem sikerült kapcsolódni ide: %s. A kiszolgáló elfoglalt."
 
-#: ../src/roomList.js:312
+#: ../src/roomList.js:316
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nem sikerült kapcsolódni ide: %s."
@@ -719,29 +732,59 @@ msgstr "Nincs találat"
 msgid "All"
 msgstr "Összes"
 
-#: ../src/utils.js:122
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari kiszolgáló jelszó ehhez: %s"
 
-#: ../src/utils.js:173
-msgid "Failed to open link"
-msgstr "A hivatkozás megnyitása nem sikerült"
+#~ msgid "_Name"
+#~ msgstr "_Név"
+
+#~ msgid "_Server"
+#~ msgstr "_Kiszolgáló"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Üzenet felhasználónak"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Kapcsolat hozzáadása"
+
+#~ msgid "Join a Room"
+#~ msgstr "Csatlakozás szobához"
+
+#~ msgid "Message a User"
+#~ msgstr "Üzenetküldés egy felhasználónak"
+
+#~ msgid "Join room"
+#~ msgstr "Csatlakozás szobához"
+
+#~ msgid "_Message"
+#~ msgstr "Üz_enet"
+
+#~ msgid "_Recent"
+#~ msgstr "Leg_utóbbi"
+
+#~ msgid "Add Connection"
+#~ msgstr "Kapcsolat hozzáadása"
+
+#~ msgid "_Save"
+#~ msgstr "M_entés"
+
+#~ msgid "No recent users"
+#~ msgstr "Nincsenek legutóbbi felhasználók"
+
+#~ msgid "Uploading %s"
+#~ msgstr "%s feltöltése"
 
 #~ msgid "Could not connect to %s. Authentication failed."
 #~ msgstr "Nem sikerült kapcsolódni ide: %s. Hitelesítés sikertelen."
-
-#~ msgid "_Address"
-#~ msgstr "_Cím"
 
 #~ msgid "_Description"
 #~ msgstr "_Leírás"
 
 #~ msgid "Edit Connection"
 #~ msgstr "Kapcsolat szerkesztése"
-
-#~ msgid "New Connection"
-#~ msgstr "Új kapcsolat"
 
 #~ msgid "Cr_eate"
 #~ msgstr "_Létrehozás"
