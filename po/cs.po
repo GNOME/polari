@@ -1,15 +1,15 @@
 # Czech translation for polari.
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# Marek Černocký <marek@manet.cz>, 2013, 2014, 2015.
+# Marek Černocký <marek@manet.cz>, 2013, 2014, 2015, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-12-24 02:17+0000\n"
-"PO-Revision-Date: 2015-12-24 13:03+0100\n"
+"POT-Creation-Date: 2016-02-28 02:21+0000\n"
+"PO-Revision-Date: 2016-02-28 12:01+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
-#: ../src/roomStack.js:77
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
+#: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:455
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Komunikační klient IRC pro GNOME"
 
@@ -56,10 +56,6 @@ msgstr ""
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;diskuze;diskuzní;komunikace;"
 
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Zobrazit připojení"
-
 #: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
 msgstr "Seznam uložených kanálů"
@@ -85,169 +81,191 @@ msgid "Window maximized state"
 msgstr "Stav maximalizace okna."
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Adresa"
+msgid "_Server Address"
+msgstr "_Adresa serveru"
 
 #: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "_Popis"
+msgid "Net_work Name"
+msgstr "Náze_v sítě"
 
 #: ../data/resources/connection-details.ui.h:3
-msgid "_Nickname"
-msgstr "Přez_dívka"
-
-#: ../data/resources/connection-details.ui.h:4
-msgid "_Real Name"
-msgstr "_Skutečné jméno"
-
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "nepovinné"
 
-#. translators: This will be used in the phrase: "Open Connections in the application menu"
-#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:113
-#: ../src/roomStack.js:123
-msgid "Connections"
-msgstr "Připojení"
+#: ../data/resources/connection-details.ui.h:4
+msgid "Use secure c_onnection"
+msgstr "Použít zabezpečené přip_ojení"
 
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Use the + button to add a new connection."
-msgstr "K přidání nového připojení použijte tlačítko +."
+#: ../data/resources/connection-details.ui.h:5
+msgid "_Nickname"
+msgstr "Přez_dívka"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Add"
-msgstr "Přidat"
+#: ../data/resources/connection-details.ui.h:6
+msgid "_Real Name"
+msgstr "_Skutečné jméno"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
-msgid "Remove"
-msgstr "Odebrat"
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: ../data/resources/connection-properties.ui.h:2
+msgid "_Apply"
+msgstr "_Použít"
+
+#: ../data/resources/entry-area.ui.h:1
+msgid "Change nickname:"
+msgstr "Změnit přezdívku:"
+
+#: ../data/resources/entry-area.ui.h:2
+msgid "_Change"
+msgstr "Z_měnit"
+
+#: ../data/resources/entry-area.ui.h:3
+msgid "Change nickname"
+msgstr "Změnit přezdívku"
+
+#: ../data/resources/entry-area.ui.h:5
+msgid "_Paste"
+msgstr "V_ložit"
 
 #: ../data/resources/help-overlay.ui.h:1
+msgctxt "shortcut window"
 msgid "General"
 msgstr "Obecné"
 
 #: ../data/resources/help-overlay.ui.h:2
+msgctxt "shortcut window"
 msgid "Join Room"
 msgstr "Vstoupit do místnosti"
 
 #: ../data/resources/help-overlay.ui.h:3
-msgid "Message User"
-msgstr "Napsat uživateli"
-
-#: ../data/resources/help-overlay.ui.h:4
+msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Opustit místnost"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
+msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Zobrazit seznam uživatelů"
 
-#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:5
+#: ../data/resources/help-overlay.ui.h:5
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:3
+#: ../data/resources/help-overlay.ui.h:6
+msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
+msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigace"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
+msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Následující místnost"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
+msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Předchozí místnost"
 
+#: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Následující místnost s nepřečtenými zprávami"
+
 #: ../data/resources/help-overlay.ui.h:11
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Předchozí místnost s nepřečtenými zprávami"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgctxt "shortcut window"
 msgid "First Room"
 msgstr "První místnost"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:13
+msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Poslední místnost"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:14
+msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "První – devátá místnost"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:223
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Vstup do diskuzní místnosti"
 
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:394
-msgid "_Cancel"
-msgstr "_Zrušit"
-
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:225
+#: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
 msgstr "_Vstoupit"
 
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "Přid_at připojení"
-
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "C_onnection"
 msgstr "Přip_ojení"
 
-#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Network"
+msgstr "Přid_at síť"
+
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
 msgstr "_Název místnosti"
 
-#: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/join-room-dialog.ui.h:7
 msgid "_Password"
 msgstr "_Heslo"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Vstoupit do místnosti"
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Add"
+msgstr "Přid_at"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Network"
+msgstr "_Vlastní síť"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Napsat uživateli"
+msgid "Add rooms and networks"
+msgstr "Přidat místnosti a sítě"
 
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Vstoupit do místnosti"
+#: ../data/resources/menus.ui.h:1
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové zkratky"
 
 #: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Předvolby"
-
-#: ../data/resources/menus.ui.h:4
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Napsat zprávu"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "Ne_dávní"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Název"
+#: ../data/resources/menus.ui.h:3
+msgid "Quit"
+msgstr "Ukončit"
 
 #: ../data/resources/room-list-header.ui.h:1
-msgid "Connection Error"
-msgstr "Chyba připojení"
+msgid "Reconnect"
+msgstr "Znovu připojit"
+
+#: ../data/resources/room-list-header.ui.h:2
+msgid "Remove"
+msgstr "Odebrat"
+
+#: ../data/resources/room-list-header.ui.h:3
+msgid "Properties"
+msgstr "Vlastnosti"
 
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Načítají se podrobnosti"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
 msgid "Last Activity:"
 msgstr "Naposledy aktivní:"
 
@@ -255,71 +273,84 @@ msgstr "Naposledy aktivní:"
 msgid "Message"
 msgstr "Zpráva"
 
-#: ../src/application.js:372
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Selhalo otevření odkazu"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Naviděnou"
 
-#: ../src/application.js:454
+#: ../src/application.js:522
+#, javascript-format
+msgid "%s removed."
+msgstr "Účet %s byl odstraněn."
+
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
-#: ../src/application.js:460
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Dozvědět se více o Polari"
 
-#: ../src/chatView.js:129
+#: ../src/appNotifications.js:82
+msgid "Undo"
+msgstr "Zpět"
+
+#: ../src/chatView.js:133
 msgid "New Messages"
 msgstr "Nové zprávy"
 
-#: ../src/chatView.js:605
+#: ../src/chatView.js:642
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
-#: ../src/chatView.js:611
+#: ../src/chatView.js:648
 msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
-#: ../src/chatView.js:774
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
-#: ../src/chatView.js:781
+#: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
-#: ../src/chatView.js:790
+#: ../src/chatView.js:835
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
-#: ../src/chatView.js:792
+#: ../src/chatView.js:837
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
-#: ../src/chatView.js:799
+#: ../src/chatView.js:844
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
-#: ../src/chatView.js:801
+#: ../src/chatView.js:846
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
-#: ../src/chatView.js:807
+#: ../src/chatView.js:852
 #, javascript-format
 msgid "%s joined"
 msgstr "%s se připojil"
 
-#: ../src/chatView.js:813
+#: ../src/chatView.js:858
 #, javascript-format
 msgid "%s left"
 msgstr "%s opustil místnost"
 
-#: ../src/chatView.js:902
+#: ../src/chatView.js:954
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -327,7 +358,7 @@ msgstr[0] "Je připojen %d uživatel"
 msgstr[1] "Jsou připojeni %d uživatelé"
 msgstr[2] "Je připojeno %d uživatelů"
 
-#: ../src/chatView.js:905
+#: ../src/chatView.js:957
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -337,14 +368,14 @@ msgstr[2] "%d uživatelů opustilo místnost"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:966
+#: ../src/chatView.js:1024
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:971
+#: ../src/chatView.js:1029
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včera, %H∶%M"
@@ -352,7 +383,7 @@ msgstr "Včera, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:976
+#: ../src/chatView.js:1034
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -361,7 +392,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:982
+#: ../src/chatView.js:1040
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H∶%M"
@@ -370,21 +401,21 @@ msgstr "%d. %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:988
+#: ../src/chatView.js:1046
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:993
+#: ../src/chatView.js:1051
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:998
+#: ../src/chatView.js:1056
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včera, %l∶%M %p"
@@ -392,7 +423,7 @@ msgstr "Včera, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1003
+#: ../src/chatView.js:1061
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -401,7 +432,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1009
+#: ../src/chatView.js:1067
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l∶%M %p"
@@ -410,12 +441,22 @@ msgstr "%d. %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1015
+#: ../src/chatView.js:1073
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:239
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Již bylo přidáno"
+
+#. Translators: %s is a connection name
+#: ../src/connections.js:417
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Vlastnosti připojení „%s“"
+
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -423,21 +464,40 @@ msgstr ""
 "Polari se odpojilo kvůli chybě sítě. Zkontrolujte prosím, jestli je pole s "
 "adresou správné."
 
-#: ../src/connections.js:379 ../src/roomList.js:235 ../src/roomList.js:255
-msgid "Edit Connection"
-msgstr "Úprava připojení"
+#: ../src/entryArea.js:236
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Vložit %s řádek textu do veřejně přístupné služby?"
+msgstr[1] "Vložit %s řádky textu do veřejně přístupné služby?"
+msgstr[2] "Vložit %s řádků textu do veřejně přístupné služby?"
 
-#: ../src/connections.js:380
-msgid "New Connection"
-msgstr "Nové připojení"
+#: ../src/entryArea.js:240
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Nahrává se %s řádek textu do veřejně přístupné služby…"
+msgstr[1] "Nahrávají se %s řádky textu do veřejně přístupné služby…"
+msgstr[2] "Nahrává se %s řádků textu do veřejně přístupné služby…"
 
-#: ../src/connections.js:396
-msgid "A_pply"
-msgstr "_Použít"
+#: ../src/entryArea.js:247
+msgid "Upload image to public paste service?"
+msgstr "Nahrát obrázek do veřejně přístupné služby?"
 
-#: ../src/connections.js:396
-msgid "Cr_eate"
-msgstr "V_ytvořit"
+#: ../src/entryArea.js:248
+msgid "Uploading image to public paste service…"
+msgstr "Nahrává se obrázek do veřejně přístupné služby…"
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s na kanále #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Vložit od uživatele %s"
 
 #. commands that would be nice to support:
 #.
@@ -476,66 +536,67 @@ msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <akce> – poslat <akci> na aktuální kanál"
 
 #: ../src/ircParser.js:29
+msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
+msgstr ""
+"/MSG <přezdívka> [<zpráva>] – odeslat soukromou zprávu uživateli <přezdívka>"
+
+#: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES – vypsat uživatele na aktuálním kanále"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <přezdívka> – nastavat vaši přezdívku na <přezdívka>"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr "/PART [<kanál>] [<důvod>] – opustit <kanál>, standardně ten aktuální"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:33
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr ""
 "/QUERY <přezdívka> – otevřít soukromou konverzaci s uživatelem <přezdívka>"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:34
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<důvod>] – odpojit se od aktuálního serveru"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <text> – poslat <text> do aktuální místnosti/aktuálnímu kontaktu"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <téma> – nastavit téma na <téma> nebo zobrazit aktuální téma"
 
-#: ../src/ircParser.js:38
+#: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr "Neznámý příkaz – zkuste /HELP pro zobrazení seznamu dostupných příkazů"
 
-#: ../src/ircParser.js:59
+#: ../src/ircParser.js:60
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Použití: %s"
 
-#: ../src/ircParser.js:97
+#: ../src/ircParser.js:98
 msgid "Known commands:"
 msgstr "Známé příkazy:"
 
-#: ../src/ircParser.js:177
+#: ../src/ircParser.js:198
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Uživatelé na kanále %s:"
 
-#: ../src/ircParser.js:261
+#: ../src/ircParser.js:283
 msgid "No topic set"
 msgstr "Není nastaveno žádné téma"
 
-#: ../src/joinDialog.js:224
-msgid "Add Connection"
-msgstr "Přidání připojení"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Přidání sítě"
 
-#: ../src/joinDialog.js:226
-msgid "_Save"
-msgstr "_Uložit"
-
-#: ../src/mainWindow.js:306
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -543,86 +604,71 @@ msgstr[0] "%d uživatel"
 msgstr[1] "%d uživatelé"
 msgstr[2] "%d uživatelů"
 
-#: ../src/messageDialog.js:95
-msgid "No recent users"
-msgstr "žádní nejsou"
-
-#. translators: %s is a nick, #%s a channel
-#: ../src/pasteManager.js:95
-#, javascript-format
-msgid "%s in #%s"
-msgstr "%s na kanále #%s"
-
-#: ../src/pasteManager.js:97
-#, javascript-format
-msgid "Paste from %s"
-msgstr "Vložit od uživatele %s"
-
-#: ../src/pasteManager.js:306
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Nahrává se %s"
-
-#: ../src/roomList.js:104
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Opustit diskuzní místnost"
 
-#: ../src/roomList.js:105
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Ukončit konverzaci"
 
 #: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Přípojení %s má chybu"
+msgid "Network %s has an error"
+msgstr "Síť %s má chybu"
 
-#: ../src/roomList.js:233
-msgid "Please check your connection details."
-msgstr "Podívejte se prosím na podrobnosti připojení."
-
-#: ../src/roomList.js:254
-msgid "Could not make connection in a safe way."
-msgstr "Nelze vytvořit připojení bezpečným způsobem."
-
-#: ../src/roomList.js:262
-msgid "Authentication failed."
-msgstr "Selhalo ověření."
-
-#: ../src/roomList.js:263 ../src/roomList.js:274 ../src/roomList.js:282
-msgid "Try again"
-msgstr "Zkusit znovu"
-
-#: ../src/roomList.js:273
-msgid "The server is busy."
-msgstr "Server je zaneprázdněn."
-
-#: ../src/roomList.js:281
-msgid "Failed to connect for an unknown reason."
-msgstr "Selhalo připojení z neznámého důvodu."
-
-#: ../src/roomStack.js:111
-msgid "Begin chatting by adding a new connection."
-msgstr "Začněte komunikaci přidáním nového připojení."
-
-#: ../src/roomStack.js:114
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: ../src/roomList.js:263
 #, javascript-format
-msgid "Open %s in the application menu."
-msgstr "Otevřít %s v aplikační nabídce."
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
-#: ../src/roomStack.js:117
+#: ../src/roomList.js:270
+msgid "Connection Problem"
+msgstr "Problém s připojením"
+
+#: ../src/roomList.js:278
+msgid "Connected"
+msgstr "Připojeno"
+
+#: ../src/roomList.js:280
+msgid "Connecting..."
+msgstr "Připojuje se…"
+
+#: ../src/roomList.js:282
+msgid "Offline"
+msgstr "Odpojeno"
+
+#: ../src/roomList.js:284
+msgid "Unknown"
+msgstr "Neznámo"
+
+#: ../src/roomList.js:304
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "K účtu %s se nelze připojit zabezpečeným způsobem."
+
+#: ../src/roomList.js:307
+#, javascript-format
+msgid "%s requires a password."
+msgstr "Účet %s požaduje heslo."
+
+#: ../src/roomList.js:313
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Nelze se připojit k účtu %s. Server je zaneprázdněn."
+
+#: ../src/roomList.js:316
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Nelze se připojit k účtu %s."
+
+#: ../src/roomStack.js:97
 msgid "Join a room using the + button."
 msgstr "Vstupte do místnosti pomocí tlačítka +."
 
-#: ../src/roomStack.js:121
-msgid "Your connections are disabled."
-msgstr "Vaše připojení jsou zákázána."
-
-#: ../src/roomStack.js:124
-#, javascript-format
-msgid "Enable them by opening %s in the application menu."
-msgstr "Povolte je otevřením %s v aplikační nabídce."
-
-#: ../src/userList.js:178
+#: ../src/userList.js:174
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -630,7 +676,7 @@ msgstr[0] "před %d sekundou"
 msgstr[1] "před %d sekundami"
 msgstr[2] "před %d sekundami"
 
-#: ../src/userList.js:183
+#: ../src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -638,7 +684,7 @@ msgstr[0] "před %d minutou"
 msgstr[1] "před %d minutami"
 msgstr[2] "před %d minutami"
 
-#: ../src/userList.js:188
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -646,7 +692,7 @@ msgstr[0] "před %d hodinou"
 msgstr[1] "před %d hodinami"
 msgstr[2] "před %d hodinami"
 
-#: ../src/userList.js:193
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -654,7 +700,7 @@ msgstr[0] "před %d dnem"
 msgstr[1] "před %d dny"
 msgstr[2] "před %d dny"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -662,7 +708,7 @@ msgstr[0] "před %d týdnem"
 msgstr[1] "před %d týdny"
 msgstr[2] "před %d týdny"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -670,14 +716,99 @@ msgstr[0] "před %d měsícem"
 msgstr[1] "před %d měsíci"
 msgstr[2] "před %d měsíci"
 
-#: ../src/userList.js:380
+#: ../src/userList.js:383
 msgid "No results"
 msgstr "Žádné výsledky"
 
-#: ../src/userList.js:554
+#: ../src/userList.js:556
 msgid "All"
 msgstr "Vše"
 
-#: ../src/utils.js:133
-msgid "Failed to open link"
-msgstr "Selhalo otevření odkazu"
+#: ../src/utils.js:121
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Heslo serveru Polari pro účet %s"
+
+#~ msgid "Show connections"
+#~ msgstr "Zobrazit připojení"
+
+#~ msgid "_Description"
+#~ msgstr "_Popis"
+
+#~ msgid "Use the + button to add a new connection."
+#~ msgstr "K přidání nového připojení použijte tlačítko +."
+
+#~ msgid "Add"
+#~ msgstr "Přidat"
+
+#~ msgid "Message User"
+#~ msgstr "Napsat uživateli"
+
+#~ msgid "_Add Connection"
+#~ msgstr "Přid_at připojení"
+
+#~ msgid "Join a Room"
+#~ msgstr "Vstoupit do místnosti"
+
+#~ msgid "Message a User"
+#~ msgstr "Napsat uživateli"
+
+#~ msgid "Join room"
+#~ msgstr "Vstoupit do místnosti"
+
+#~ msgid "Preferences"
+#~ msgstr "Předvolby"
+
+#~ msgid "_Message"
+#~ msgstr "_Napsat zprávu"
+
+#~ msgid "_Recent"
+#~ msgstr "Ne_dávní"
+
+#~ msgid "_Name"
+#~ msgstr "_Název"
+
+#~ msgid "Edit Connection"
+#~ msgstr "Úprava připojení"
+
+#~ msgid "Cr_eate"
+#~ msgstr "V_ytvořit"
+
+#~ msgid "Add Connection"
+#~ msgstr "Přidání připojení"
+
+#~ msgid "_Save"
+#~ msgstr "_Uložit"
+
+#~ msgid "No recent users"
+#~ msgstr "žádní nejsou"
+
+#~ msgid "Uploading %s"
+#~ msgstr "Nahrává se %s"
+
+#~ msgid "Please check your connection details."
+#~ msgstr "Podívejte se prosím na podrobnosti připojení."
+
+#~ msgid "Authentication failed."
+#~ msgstr "Selhalo ověření."
+
+#~ msgid "Try again"
+#~ msgstr "Zkusit znovu"
+
+#~ msgid "The server is busy."
+#~ msgstr "Server je zaneprázdněn."
+
+#~ msgid "Failed to connect for an unknown reason."
+#~ msgstr "Selhalo připojení z neznámého důvodu."
+
+#~ msgid "Begin chatting by adding a new connection."
+#~ msgstr "Začněte komunikaci přidáním nového připojení."
+
+#~ msgid "Open %s in the application menu."
+#~ msgstr "Otevřít %s v aplikační nabídce."
+
+#~ msgid "Your connections are disabled."
+#~ msgstr "Vaše připojení jsou zákázána."
+
+#~ msgid "Enable them by opening %s in the application menu."
+#~ msgstr "Povolte je otevřením %s v aplikační nabídce."
