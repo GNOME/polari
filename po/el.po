@@ -9,26 +9,26 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-22 02:25+0000\n"
-"PO-Revision-Date: 2016-02-22 15:48+0200\n"
-"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
+"POT-Creation-Date: 2016-03-01 02:25+0000\n"
+"PO-Revision-Date: 2016-03-01 15:57+0200\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
 "Language-Team: Greek, Modern (1453-) <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
 #: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ένας πελάτης συνομιλίας μεταγωγής διαδικτύου για το GNOME"
 
@@ -84,17 +84,17 @@ msgid "Window maximized state"
 msgstr "Κατάσταση μεγιστοποίησης παραθύρου"
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Connection Name"
-msgstr "Ό_νομα σύνδεσης"
+msgid "_Server Address"
+msgstr "Διεύθυνση διακομι_στή"
 
 #: ../data/resources/connection-details.ui.h:2
+msgid "Net_work Name"
+msgstr "Όνομα δι_κτύου"
+
+#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "προαιρετικό"
-
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Server Address"
-msgstr "Διεύθυνση διακομι_στή"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "Use secure c_onnection"
@@ -111,7 +111,6 @@ msgstr "Π_ραγματικό όνομα"
 #: ../data/resources/connection-properties.ui.h:1
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1
 msgid "_Cancel"
 msgstr "Ά_κυρο"
 
@@ -147,70 +146,65 @@ msgstr "Είσοδος στο δωμάτιο"
 
 #: ../data/resources/help-overlay.ui.h:3
 msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Μήνυμα σε χρήστη"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Εγκατάλειψη δωματίου"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Εμφάνιση λίστας χρηστών"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Περιήγηση"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Επόμενο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Προηγούμενο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:11
+#: ../data/resources/help-overlay.ui.h:10
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Επόμενο δωμάτιο με μη αναγνωσμένα μηνύματα"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Προηγούμενο δωμάτιο με μη αναγνωσμένα μηνύματα"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Πρώτο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:14
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Τελευταίο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:15
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Πρώτο - ένατο δωμάτιο"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Συμμετοχή σε δωμάτιο συνομιλιών"
 
@@ -219,13 +213,12 @@ msgid "_Join"
 msgstr "_Συμμετοχή"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "Σύν_δεση"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "Πρ_οσθήκη σύνδεσης"
+msgid "_Add Network"
+msgstr "_Προσθήκη δικτύου"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -240,20 +233,13 @@ msgid "_Add"
 msgstr "_Προσθήκη"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-msgid "_Custom Connection"
-msgstr "Π_ροσαρμοσμένη σύνδεση"
-
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Συμμετοχή σε δωμάτιο"
+#| msgid "_Custom Connection"
+msgid "_Custom Network"
+msgstr "Π_ροσαρμοσμένα δίκτυα"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Μήνυμα σε χρήστη"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Είσοδος στο δωμάτιο"
+msgid "Add rooms and networks"
+msgstr "Προσθήκη δωματίων και δικτύων"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -266,18 +252,6 @@ msgstr "Περί"
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Έξοδος"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Μήνυμα"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "Πρόσ_φατα"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "Ό_νομα"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -303,16 +277,20 @@ msgstr "Τελευταία δραστηριότητα:"
 msgid "Message"
 msgstr "Μήνυμα"
 
-#: ../src/application.js:393
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Αδυναμία ανοίγματος συνδέσμου"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Αποχαιρετισμός"
 
-#: ../src/application.js:425
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "Αφαιρέθηκε το %s."
 
-#: ../src/application.js:482
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα του GNOME\n"
@@ -322,11 +300,11 @@ msgstr ""
 "Για περισσότερες πληροφορίες, επισκεφθείτε τη σελίδα\n"
 "http://gnome.gr/"
 
-#: ../src/application.js:488
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Μάθετε περισσότερα για το Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Αναίρεση"
 
@@ -481,12 +459,12 @@ msgid "Already added"
 msgstr "Η διεύθυνση έχει ήδη προστεθεί "
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Ιδιότητες “%s”"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -630,20 +608,16 @@ msgstr "Χρήστες στο %s:"
 msgid "No topic set"
 msgstr "Δεν έχει οριστεί θέμα"
 
-#: ../src/joinDialog.js:265
-msgid "Add Connection"
-msgstr "Προσθήκη σύνδεσης"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Προσθήκη δικτύου"
 
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d χρήστης"
 msgstr[1] "%d χρήστες"
-
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Χωρίς πρόσφατους χρήστες"
 
 #: ../src/roomList.js:129
 msgid "Leave chatroom"
@@ -655,8 +629,9 @@ msgstr "Τερματισμός συνομιλίας"
 
 #: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Η σύνδεση %s έχει σφάλμα"
+#| msgid "Connection %s has an error"
+msgid "Network %s has an error"
+msgstr "Το δίκτυο %s έχει σφάλμα"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
@@ -759,14 +734,44 @@ msgstr "Δε βρέθηκαν αποτελέσματα"
 msgid "All"
 msgstr "Όλα"
 
-#: ../src/utils.js:120
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Κωδικός πρόσβασης διακομιστή Polari για το %s"
 
-#: ../src/utils.js:171
-msgid "Failed to open link"
-msgstr "Αδυναμία ανοίγματος συνδέσμου"
+#~ msgid "_Connection Name"
+#~ msgstr "Ό_νομα σύνδεσης"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Μήνυμα σε χρήστη"
+
+#~ msgid "_Add Connection"
+#~ msgstr "Πρ_οσθήκη σύνδεσης"
+
+#~ msgid "Join a Room"
+#~ msgstr "Συμμετοχή σε δωμάτιο"
+
+#~ msgid "Message a User"
+#~ msgstr "Μήνυμα σε χρήστη"
+
+#~ msgid "Join room"
+#~ msgstr "Είσοδος στο δωμάτιο"
+
+#~ msgid "_Message"
+#~ msgstr "_Μήνυμα"
+
+#~ msgid "_Recent"
+#~ msgstr "Πρόσ_φατα"
+
+#~ msgid "_Name"
+#~ msgstr "Ό_νομα"
+
+#~ msgid "Add Connection"
+#~ msgstr "Προσθήκη σύνδεσης"
+
+#~ msgid "No recent users"
+#~ msgstr "Χωρίς πρόσφατους χρήστες"
 
 #~ msgid "_Server"
 #~ msgstr "Διακομι_στής"
