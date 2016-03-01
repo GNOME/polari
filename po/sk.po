@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-06 13:58+0000\n"
-"PO-Revision-Date: 2016-02-06 15:00+0100\n"
+"POT-Creation-Date: 2016-03-01 14:25+0000\n"
+"PO-Revision-Date: 2016-03-01 20:34+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
-#: ../src/roomStack.js:77
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
+#: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:483
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient rozhovorov v službe IRC prostredia GNOME"
 
@@ -82,25 +82,39 @@ msgid "Window maximized state"
 msgstr "Stav maximalizácie okna"
 
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Adresa"
+msgid "_Server Address"
+msgstr "Adresa _servera"
 
 #: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "P_opis"
+msgid "Net_work Name"
+msgstr "Názov s_iete"
 
 #: ../data/resources/connection-details.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "optional"
+msgstr "voliteľné"
+
+#: ../data/resources/connection-details.ui.h:4
+msgid "Use secure c_onnection"
+msgstr "Použiť _bezpečné pripojenie"
+
+#: ../data/resources/connection-details.ui.h:5
 msgid "_Nickname"
 msgstr "_Prezývka"
 
-#: ../data/resources/connection-details.ui.h:4
+#: ../data/resources/connection-details.ui.h:6
 msgid "_Real Name"
 msgstr "Skutočné _meno"
 
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
-msgid "optional"
-msgstr "voliteľné"
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "_Zrušiť"
+
+#: ../data/resources/connection-properties.ui.h:2
+msgid "_Apply"
+msgstr "_Použiť"
 
 #: ../data/resources/entry-area.ui.h:1
 msgid "Change nickname:"
@@ -113,12 +127,6 @@ msgstr "Z_meniť"
 #: ../data/resources/entry-area.ui.h:3
 msgid "Change nickname"
 msgstr "Zmeniť prezývku"
-
-#: ../data/resources/entry-area.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:223
-msgid "_Cancel"
-msgstr "_Zrušiť"
 
 #: ../data/resources/entry-area.ui.h:5
 msgid "_Paste"
@@ -136,95 +144,99 @@ msgstr "Vstúpenie do miestnosti"
 
 #: ../data/resources/help-overlay.ui.h:3
 msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Správa účastníkovi"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Opustenie miestnosti"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Zobrazenie zoznamu účastníkov"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončenie"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové skratky"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigácia"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Nasledujúca miestnosť"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Predchádzajúca miestnosť"
 
+#: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Nasledujúca miestnosť s neprečítanými správami"
+
 #: ../data/resources/help-overlay.ui.h:11
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Predchádzajúca miestnosť s neprečítanými správami"
+
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Prvá miestnosť"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Posledná miestnosť"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Prvá až deviata miestnosť"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:223
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Vstup do miestnosti s rozhovorom"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:225
+#: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
 msgstr "_Vstúpiť"
 
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Pridať pripojenie"
-
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:4
 msgid "C_onnection"
 msgstr "Prip_ojenie"
 
-#: ../data/resources/join-room-dialog.ui.h:7
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Network"
+msgstr "_Pridať sieť"
+
+#: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
 msgstr "_Názov miestnosti"
 
-#: ../data/resources/join-room-dialog.ui.h:8
+#: ../data/resources/join-room-dialog.ui.h:7
 msgid "_Password"
 msgstr "_Heslo"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Vstúpiť do miestnosti"
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Add"
+msgstr "P_ridať"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Network"
+msgstr "V_lastná sieť"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Poslať správu účastníkovi"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Vstúpiť do miestnosti"
+msgid "Add rooms and networks"
+msgstr "Pridať miestnosti a siete"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -237,19 +249,6 @@ msgstr "O programe"
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Ukončiť"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Poslať"
-
-# * https://bugzilla.gnome.org/show_bug.cgi?id=727271
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Nedávni"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Meno"
 
 #: ../data/resources/room-list-header.ui.h:1
 msgid "Reconnect"
@@ -267,7 +266,7 @@ msgstr "Vlastnosti"
 msgid "Loading details"
 msgstr "Načítavajú sa podrobnosti"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
 msgid "Last Activity:"
 msgstr "Posledná aktivita:"
 
@@ -275,26 +274,30 @@ msgstr "Posledná aktivita:"
 msgid "Message"
 msgstr "Správa"
 
-#: ../src/application.js:394
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Zlyhalo otvorenie odkazu"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Dovidenia"
 
-#: ../src/application.js:426
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "Účet %s odstránený."
 
-#: ../src/application.js:482
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr ""
 "Peter Vágner <pvdeejay@gmail.com>\n"
 "Dušan Kazik <prescott66@gmail.com>"
 
-#: ../src/application.js:488
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Zistite viac o aplikácii Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Vrátiť späť"
 
@@ -302,55 +305,55 @@ msgstr "Vrátiť späť"
 msgid "New Messages"
 msgstr "Nové správy"
 
-#: ../src/chatView.js:635
+#: ../src/chatView.js:642
 msgid "Open Link"
 msgstr "Otvoriť odkaz"
 
-#: ../src/chatView.js:641
+#: ../src/chatView.js:648
 msgid "Copy Link Address"
 msgstr "Kopírovať adresu odkazu"
 
-#: ../src/chatView.js:808
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Účastník %s teraz vystupuje ako %s"
 
-#: ../src/chatView.js:815
+#: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Účastník %s sa odpojil"
 
-#: ../src/chatView.js:824
+#: ../src/chatView.js:835
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Účastník %s bol vykopnutý účastníkom %s"
 
-#: ../src/chatView.js:826
+#: ../src/chatView.js:837
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Účastník %s bol vykopnutý"
 
-#: ../src/chatView.js:833
+#: ../src/chatView.js:844
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Účastníkovi %s bol zakázaný prístup od účastníka %s"
 
-#: ../src/chatView.js:835
+#: ../src/chatView.js:846
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Účastníkovi %s bol zakázaný prístup"
 
-#: ../src/chatView.js:841
+#: ../src/chatView.js:852
 #, javascript-format
 msgid "%s joined"
 msgstr "Účastník %s prišiel"
 
-#: ../src/chatView.js:847
+#: ../src/chatView.js:858
 #, javascript-format
 msgid "%s left"
 msgstr "Účastník %s odišiel"
 
-#: ../src/chatView.js:936
+#: ../src/chatView.js:954
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -359,7 +362,7 @@ msgstr[1] "%d účastník vstúpil do miestnosti"
 msgstr[2] "%d účastníci vstúpili do miestnosti"
 
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=745203
-#: ../src/chatView.js:939
+#: ../src/chatView.js:957
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -369,14 +372,14 @@ msgstr[2] "%d účastníci opustili miestnosť"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:1000
+#: ../src/chatView.js:1024
 msgid "%H∶%M"
 msgstr "%H:%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1005
+#: ../src/chatView.js:1029
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včera, %H:%M"
@@ -384,7 +387,7 @@ msgstr "Včera, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1010
+#: ../src/chatView.js:1034
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
@@ -393,7 +396,7 @@ msgstr "%A, %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1016
+#: ../src/chatView.js:1040
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H:%M"
@@ -402,21 +405,21 @@ msgstr "%d. %B, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1022
+#: ../src/chatView.js:1046
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1027
+#: ../src/chatView.js:1051
 msgid "%l∶%M %p"
 msgstr "%l:%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1032
+#: ../src/chatView.js:1056
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včera, %l:%M %p"
@@ -424,7 +427,7 @@ msgstr "Včera, %l:%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1037
+#: ../src/chatView.js:1061
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l:%M %p"
@@ -433,7 +436,7 @@ msgstr "%A, %l:%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1043
+#: ../src/chatView.js:1067
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l:%M %p"
@@ -442,12 +445,22 @@ msgstr "%d. %B, %l:%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1049
+#: ../src/chatView.js:1073
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l:%M %p"
 
-#: ../src/connections.js:70
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Už pridané"
+
+#. Translators: %s is a connection name
+#: ../src/connections.js:417
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Vlastnosti pripojenia „%s“"
+
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -455,21 +468,44 @@ msgstr ""
 "Aplikácia Polari je odpojená kvôli sieťovej chybe. Prosím, skontrolujte, či "
 "je pole s adresou správne."
 
-#: ../src/connections.js:210
-msgid "Edit Connection"
-msgstr "Úprava pripojenia"
-
-#: ../src/connections.js:225
-msgid "A_pply"
-msgstr "_Použiť"
-
-#: ../src/entryArea.js:199
+#: ../src/entryArea.js:236
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
-msgstr[0] "Vložiť %s riadkov textu do verejnej vkladacej služby?"
-msgstr[1] "Vložiť %s riadok textu do verejnej vkladacej služby?"
-msgstr[2] "Vložiť %s riadky textu do verejnej vkladacej služby?"
+msgstr[0] "Vložiť %s riadkov textu do verejnej úložnej služby?"
+msgstr[1] "Vložiť %s riadok textu do verejnej úložnej služby?"
+msgstr[2] "Vložiť %s riadky textu do verejnej úložnej služby?"
+
+#: ../src/entryArea.js:240
+#, javascript-format
+#| msgid "Paste %s line of text to public paste service?"
+#| msgid_plural "Paste %s lines of text to public paste service?"
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Odovzdáva sa %s riadkov textu do verejnej úložnej služby…"
+msgstr[1] "Odovzdáva sa %s riadok textu do verejnej úložnej služby…"
+msgstr[2] "Odovzdávajú sa %s riadky textu do verejnej úložnej služby…"
+
+#: ../src/entryArea.js:247
+msgid "Upload image to public paste service?"
+msgstr "Odovzdať obrázok do verejnej úložnej služby?"
+
+#: ../src/entryArea.js:248
+#| msgid "Paste %s line of text to public paste service?"
+#| msgid_plural "Paste %s lines of text to public paste service?"
+msgid "Uploading image to public paste service…"
+msgstr "Odovzdávaj sa obrázok do verejnej úložnej služby…"
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s v #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Vložiť od %s"
 
 #. commands that would be nice to support:
 #.
@@ -577,16 +613,12 @@ msgstr "Účastníci v miestnosti s názvom %s"
 msgid "No topic set"
 msgstr "Nie je nastavená téma"
 
-#: ../src/joinDialog.js:224
-msgid "Add Connection"
-msgstr "Pridanie pripojenia"
-
-#: ../src/joinDialog.js:226
-msgid "_Save"
-msgstr "_Uložiť"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Pridanie siete"
 
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=745203
-#: ../src/mainWindow.js:314
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -594,91 +626,71 @@ msgstr[0] "%d účastníkov"
 msgstr[1] "%d účastník"
 msgstr[2] "%d účastníci"
 
-#: ../src/messageDialog.js:95
-msgid "No recent users"
-msgstr "Žiadni nedávni účastníci"
-
-#. translators: %s is a nick, #%s a channel
-#: ../src/pasteManager.js:95
-#, javascript-format
-msgid "%s in #%s"
-msgstr "%s v #%s"
-
-#: ../src/pasteManager.js:97
-#, javascript-format
-msgid "Paste from %s"
-msgstr "Vložiť od %s"
-
-#: ../src/pasteManager.js:306
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Odovzdáva sa %s"
-
-#: ../src/roomList.js:114
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Opustiť miestnosť s rozhovorom"
 
-#: ../src/roomList.js:115
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Ukončiť rozhovor"
 
-#: ../src/roomList.js:219
+#: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Pripojenie %s je chybné"
+msgid "Network %s has an error"
+msgstr "Sieť %s je chybná"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:264
+#: ../src/roomList.js:263
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:271
+#: ../src/roomList.js:270
 msgid "Connection Problem"
 msgstr "Problém s pripojením"
 
-#: ../src/roomList.js:279
+#: ../src/roomList.js:278
 msgid "Connected"
 msgstr "Pripojené"
 
-#: ../src/roomList.js:281
+#: ../src/roomList.js:280
 msgid "Connecting..."
 msgstr "Pripája sa..."
 
-#: ../src/roomList.js:283
+#: ../src/roomList.js:282
 msgid "Offline"
 msgstr "Odpojené"
 
-#: ../src/roomList.js:285
+#: ../src/roomList.js:284
 msgid "Unknown"
 msgstr "Neznámy stav"
 
-#: ../src/roomList.js:305
+#: ../src/roomList.js:304
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nepodarilo pripojiť k účtu %s bezpečným spôsobom."
 
-#: ../src/roomList.js:308
+#: ../src/roomList.js:307
 #, javascript-format
-msgid "Could not connect to %s. Authentication failed."
-msgstr "Nepodarilo sa pripojiť k účtu %s. Overenie totožnosti zlyhalo."
+msgid "%s requires a password."
+msgstr "%s vyžaduje heslo."
 
-#: ../src/roomList.js:314
+#: ../src/roomList.js:313
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nepodarilo sa pripojiť k účtu %s. Server je zaneprázdnený."
 
-#: ../src/roomList.js:317
+#: ../src/roomList.js:316
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nepodarilo pripojiť k účtu %s."
 
-#: ../src/roomStack.js:80
+#: ../src/roomStack.js:97
 msgid "Join a room using the + button."
 msgstr "Pomocou tlačidla + vstúpite do miestnosti."
 
-#: ../src/userList.js:178
+#: ../src/userList.js:174
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -686,7 +698,7 @@ msgstr[0] "Pred %d sekundami"
 msgstr[1] "Pred %d sekundou"
 msgstr[2] "Pred %d sekundami"
 
-#: ../src/userList.js:183
+#: ../src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -694,7 +706,7 @@ msgstr[0] "Pred %d minútami"
 msgstr[1] "Pred %d minútou"
 msgstr[2] "Pred %d minútami"
 
-#: ../src/userList.js:188
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -702,7 +714,7 @@ msgstr[0] "Pred %d hodinami"
 msgstr[1] "Pred %d hodinou"
 msgstr[2] "Pred %d hodinami"
 
-#: ../src/userList.js:193
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -710,7 +722,7 @@ msgstr[0] "Pred %d dňami"
 msgstr[1] "Pred %d dňom"
 msgstr[2] "Pred %d dňami"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -718,7 +730,7 @@ msgstr[0] "Pred %d týždňami"
 msgstr[1] "Pred %d týždňom"
 msgstr[2] "Pred %d týždňami"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -726,17 +738,65 @@ msgstr[0] "Pred %d mesiacmi"
 msgstr[1] "Pred %d mesiacom"
 msgstr[2] "Pred %d mesiacmi"
 
-#: ../src/userList.js:381
+#: ../src/userList.js:383
 msgid "No results"
 msgstr "Žiadne výsledky"
 
-#: ../src/userList.js:555
+#: ../src/userList.js:556
 msgid "All"
 msgstr "Všetci"
 
-#: ../src/utils.js:133
-msgid "Failed to open link"
-msgstr "Zlyhalo otvorenie odkazu"
+#: ../src/utils.js:121
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Heslo servera Polari pre %s"
+
+#~ msgid "_Description"
+#~ msgstr "P_opis"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Správa účastníkovi"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Pridať pripojenie"
+
+#~ msgid "Join a Room"
+#~ msgstr "Vstúpiť do miestnosti"
+
+#~ msgid "Message a User"
+#~ msgstr "Poslať správu účastníkovi"
+
+#~ msgid "Join room"
+#~ msgstr "Vstúpiť do miestnosti"
+
+#~ msgid "_Message"
+#~ msgstr "_Poslať"
+
+# * https://bugzilla.gnome.org/show_bug.cgi?id=727271
+#~ msgid "_Recent"
+#~ msgstr "_Nedávni"
+
+#~ msgid "_Name"
+#~ msgstr "_Meno"
+
+#~ msgid "Edit Connection"
+#~ msgstr "Úprava pripojenia"
+
+#~ msgid "Add Connection"
+#~ msgstr "Pridanie pripojenia"
+
+#~ msgid "_Save"
+#~ msgstr "_Uložiť"
+
+#~ msgid "No recent users"
+#~ msgstr "Žiadni nedávni účastníci"
+
+#~ msgid "Uploading %s"
+#~ msgstr "Odovzdáva sa %s"
+
+#~ msgid "Could not connect to %s. Authentication failed."
+#~ msgstr "Nepodarilo sa pripojiť k účtu %s. Overenie totožnosti zlyhalo."
 
 #~ msgid "Show connections"
 #~ msgstr "Zobraziť pripojenia"
@@ -752,9 +812,6 @@ msgstr "Zlyhalo otvorenie odkazu"
 
 #~ msgid "Cr_eate"
 #~ msgstr "Vy_tvoriť"
-
-#~ msgid "Please check your connection details."
-#~ msgstr "Prosím, skontrolujte podrobnosti vášho pripojenia."
 
 #~ msgid "Try again"
 #~ msgstr "Skúsiť znova"
