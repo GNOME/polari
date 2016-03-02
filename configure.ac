@@ -1,4 +1,4 @@
-AC_INIT([polari],[3.19.90],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
+AC_INIT([polari],[3.19.91],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
 AX_IS_RELEASE([git-directory])
 
 AC_SUBST([APP_ID],[org.gnome.Polari])

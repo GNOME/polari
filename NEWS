@@ -1,3 +1,25 @@
+3.19.91 - "Dr. Perfect?"
+========================
+* With no networks, open join-dialog on networks page [Kunaal; #762488]
+* Handle irc:// URIs [Bastian; #728593]
+* Linkify channel names [Florian; #762673]
+* Remember the last selected room [Rares; #759812]
+* Misc. bug fixes [Isabella, Florian, Daniel; #762374, #762390, #762424,
+  #762590, #762481, #762490]
+
+Contributors:
+  Piotr Drąg, Bastian Ilsø, Kunaal Jain, Daniel Landau, Florian Müllner,
+  Isabella Ribeiro, Rares Visalom
+
+Translations:
+  Mario Blättermann [de], Artur de Aquino Morais [pt_BR],
+  Мирослав Николић [sr, sr@latin], Piotr Drąg [pl], Anders Jonsson [sv],
+  Tom Tryfonidis [el], Daniel Mustieles [es], Chao-Hsiung Liao [zh_TW],
+  Daniel Korostil [uk], Fran Dieguez [gl], Cédric Valmary [oc],
+  Adrian Perez [es], Marek Černocký [cs], Gábor Kelemen [hu], Jordi Mas [ca],
+  Efstathios Iosifidis [el], Rūdolfs Mazurs [lv], Dušan Kazik [sk],
+  Yosef Or Boczko [he], Fabio Tomat [fur], Jiri Grönroos [fi]
+
 3.19.90 - "It's Like Stealing Money for Free"
 =============================================
 * Replace ellipsis with expander arrows in status summaries [Kunaal; #759120]
