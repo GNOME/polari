@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 19:59+0100\n"
-"PO-Revision-Date: 2016-02-23 20:00+0100\n"
+"POT-Creation-Date: 2016-03-03 17:03+0100\n"
+"PO-Revision-Date: 2016-03-03 17:04+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -83,6 +83,14 @@ msgstr "Zmaksymalizowane okno"
 #: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Stan maksymalizacji okna"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Ostatni aktywny kanał"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Ostatni aktywny (wybrany) kanał"
 
 #: ../data/resources/connection-details.ui.h:1
 msgid "_Server Address"
@@ -205,7 +213,7 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Pierwszy — dziewiąty pokój"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Dołączenie do pokoju rozmów"
 
@@ -277,26 +285,30 @@ msgstr "Ostatnia aktywność:"
 msgid "Message"
 msgstr "Wiadomość"
 
-#: ../src/application.js:374
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Otwarcie odnośnika się nie powiodło"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Do widzenia"
 
-#: ../src/application.js:406
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "Usunięto %s."
 
-#: ../src/application.js:463
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2016"
 
-#: ../src/application.js:469
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Więcej informacji o programie Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Cofnij"
 
@@ -453,12 +465,12 @@ msgid "Already added"
 msgstr "Już dodano"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Właściwości połączenia „%s”"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -598,11 +610,11 @@ msgstr "Użytkownicy w kanale %s:"
 msgid "No topic set"
 msgstr "Nie ustawiono tematu"
 
-#: ../src/joinDialog.js:265
+#: ../src/joinDialog.js:273
 msgid "Add Network"
 msgstr "Dodanie sieci"
 
-#: ../src/mainWindow.js:309
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -730,11 +742,7 @@ msgstr "Brak wyników"
 msgid "All"
 msgstr "Wszyscy"
 
-#: ../src/utils.js:120
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Hasło serwera Polari dla %s"
-
-#: ../src/utils.js:171
-msgid "Failed to open link"
-msgstr "Otwarcie odnośnika się nie powiodło"
