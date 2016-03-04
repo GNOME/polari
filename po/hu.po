@@ -1,25 +1,25 @@
 # Hungarian translation of polari
-# Copyright (C) 2014. Free Software Foundation, Inc.
+# Copyright (C) 2014-2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the polari package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2014, 2016.
 # Balázs Meskó <meskobalazs at gmail dot com>, 2014.
-# Balázs Úr <urbalazs at gmail dot com>, 2014, 2015.
+# Balázs Úr <urbalazs at gmail dot com>, 2014, 2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-27 02:19+0000\n"
-"PO-Revision-Date: 2016-02-28 15:20+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng at ubuntu dot com>\n"
+"POT-Creation-Date: 2016-03-04 14:25+0000\n"
+"PO-Revision-Date: 2016-03-04 19:59+0100\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
@@ -83,8 +83,15 @@ msgstr "Ablak teljes méretű"
 msgid "Window maximized state"
 msgstr "Az ablak maximalizált állapota"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Utolsó aktív csatorna"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Utolsó aktív (kiválasztott) csatorna"
+
 #: ../data/resources/connection-details.ui.h:1
-#| msgid "_Address"
 msgid "_Server Address"
 msgstr "Kiszolgáló _címe"
 
@@ -98,7 +105,6 @@ msgid "optional"
 msgstr "opcionális"
 
 #: ../data/resources/connection-details.ui.h:4
-#| msgid "New Connection"
 msgid "Use secure c_onnection"
 msgstr "_Biztonságos kapcsolat használata"
 
@@ -117,7 +123,6 @@ msgid "_Cancel"
 msgstr "Mé_gse"
 
 #: ../data/resources/connection-properties.ui.h:2
-#| msgid "A_pply"
 msgid "_Apply"
 msgstr "_Alkalmaz"
 
@@ -232,7 +237,6 @@ msgid "_Password"
 msgstr "_Jelszó"
 
 #: ../data/resources/join-room-dialog.ui.h:9
-#| msgid "_Address"
 msgid "_Add"
 msgstr "Hozzá_adás"
 
@@ -458,12 +462,12 @@ msgid "Already added"
 msgstr "Már fel van véve"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "„%s” tulajdonságai"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -480,8 +484,6 @@ msgstr[1] "Beilleszt %s szövegsort egy nyilvános beillesztési szolgáltatásb
 
 #: ../src/entryArea.js:240
 #, javascript-format
-#| msgid "Paste %s line of text to public paste service?"
-#| msgid_plural "Paste %s lines of text to public paste service?"
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "%s szövegsor feltöltése egy nyilvános beillesztési szolgáltatásba…"
@@ -492,7 +494,6 @@ msgid "Upload image to public paste service?"
 msgstr "Feltölti a képet egy nyilvános beillesztési szolgáltatásba?"
 
 #: ../src/entryArea.js:248
-#| msgid "Upload image to public paste service?"
 msgid "Uploading image to public paste service…"
 msgstr "Kép feltöltése egy nyilvános beillesztési szolgáltatásba…"
 
@@ -627,7 +628,6 @@ msgstr "Beszélgetés befejezése"
 
 #: ../src/roomList.js:213
 #, javascript-format
-#| msgid "Connection %s has an error"
 msgid "Network %s has an error"
 msgstr "A(z) %s hálózattal probléma van"
 
