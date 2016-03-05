@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-23 17:08+0000\n"
-"PO-Revision-Date: 2016-02-24 11:24+0100\n"
+"POT-Creation-Date: 2016-03-05 02:24+0000\n"
+"PO-Revision-Date: 2016-03-05 10:24+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
 #: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En IRC-chattklient för GNOME"
 
@@ -82,18 +82,26 @@ msgstr "Fönster maximerat"
 msgid "Window maximized state"
 msgstr "Maximerat tillstånd för fönster"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Senast aktiva kanal"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Senast aktiva (valda) kanal"
+
 #: ../data/resources/connection-details.ui.h:1
+msgid "_Server Address"
+msgstr "S_erveradress"
+
+#: ../data/resources/connection-details.ui.h:2
 msgid "Net_work Name"
 msgstr "Nät_verksnamn"
 
-#: ../data/resources/connection-details.ui.h:2
+#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "valfri"
-
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Server Address"
-msgstr "S_erveradress"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "Use secure c_onnection"
@@ -203,7 +211,7 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Första - nionde rummet"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Gå in i chattrummet"
 
@@ -275,16 +283,20 @@ msgstr "Senaste aktivitet:"
 msgid "Message"
 msgstr "Meddelande"
 
-#: ../src/application.js:374
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Misslyckades med att öppna länk"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Hejdå"
 
-#: ../src/application.js:406
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "%s borttagen."
 
-#: ../src/application.js:463
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr ""
 "Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
@@ -293,11 +305,11 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../src/application.js:469
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Lär dig mer om Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Ångra"
 
@@ -452,12 +464,12 @@ msgid "Already added"
 msgstr "Redan tillagd"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Egenskaper för ”%s”"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -597,11 +609,11 @@ msgstr "Användare på %s:"
 msgid "No topic set"
 msgstr "Inget ämne är inställt"
 
-#: ../src/joinDialog.js:265
+#: ../src/joinDialog.js:273
 msgid "Add Network"
 msgstr "Lägg till nätverk"
 
-#: ../src/mainWindow.js:309
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -722,14 +734,10 @@ msgstr "Inga resultat"
 msgid "All"
 msgstr "Alla"
 
-#: ../src/utils.js:120
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari-serverlösenord för %s"
-
-#: ../src/utils.js:171
-msgid "Failed to open link"
-msgstr "Misslyckades med att öppna länk"
 
 #~ msgid "_Connection Name"
 #~ msgstr "A_nslutningsnamn"
