@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&"
 "keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-01 14:25+0000\n"
-"PO-Revision-Date: 2016-03-01 21:24+0200\n"
+"POT-Creation-Date: 2016-03-05 02:24+0000\n"
+"PO-Revision-Date: 2016-03-05 15:46+0200\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -80,8 +80,15 @@ msgstr "Logs maksimizēts"
 msgid "Window maximized state"
 msgstr "Loga stāvoklis — maksimizēts"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Pēdējais aktīvais kanāls"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Pēdējais aktīvais (izvēlētais) kanāls"
+
 #: ../data/resources/connection-details.ui.h:1
-#| msgid "_Address"
 msgid "_Server Address"
 msgstr "_Servera adrese"
 
@@ -95,7 +102,6 @@ msgid "optional"
 msgstr "neobligāts"
 
 #: ../data/resources/connection-details.ui.h:4
-#| msgid "New Connection"
 msgid "Use secure c_onnection"
 msgstr "Liet_ot drošu savienojumu"
 
@@ -114,7 +120,6 @@ msgid "_Cancel"
 msgstr "At_celt"
 
 #: ../data/resources/connection-properties.ui.h:2
-#| msgid "A_pply"
 msgid "_Apply"
 msgstr "_Pielietot"
 
@@ -229,7 +234,6 @@ msgid "_Password"
 msgstr "_Parole"
 
 #: ../data/resources/join-room-dialog.ui.h:9
-#| msgid "_Address"
 msgid "_Add"
 msgstr "_Pievienot"
 
@@ -457,7 +461,6 @@ msgstr "Jau pievienots"
 #. Translators: %s is a connection name
 #: ../src/connections.js:417
 #, javascript-format
-#| msgid "Properties"
 msgid "“%s” Properties"
 msgstr "“%s” īpašības"
 
@@ -479,8 +482,6 @@ msgstr[2] "Ielīmēt %s teksta rindu uz publisko ielīmēšanas pakalpojumu?"
 
 #: ../src/entryArea.js:240
 #, javascript-format
-#| msgid "Paste %s line of text to public paste service?"
-#| msgid_plural "Paste %s lines of text to public paste service?"
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "Augšupielādēt %s teksta rindu uz publisko ielīmēšanas pakalpojumu?"
@@ -488,14 +489,10 @@ msgstr[1] "Augšupielādēt %s teksta rindas uz publisko ielīmēšanas pakalpoj
 msgstr[2] "Augšupielādēt %s teksta rindu uz publisko ielīmēšanas pakalpojumu?"
 
 #: ../src/entryArea.js:247
-#| msgid "Paste %s line of text to public paste service?"
-#| msgid_plural "Paste %s lines of text to public paste service?"
 msgid "Upload image to public paste service?"
 msgstr "Augšupielādēt attēlu uz publisku ielīmēšanas pakalpojumu?"
 
 #: ../src/entryArea.js:248
-#| msgid "Paste %s line of text to public paste service?"
-#| msgid_plural "Paste %s lines of text to public paste service?"
 msgid "Uploading image to public paste service…"
 msgstr "Augšupielādē attēlu uz publisku ielīmēšanas pakalpojumu…"
 
@@ -625,7 +622,6 @@ msgstr "Beigt sarunu"
 
 #: ../src/roomList.js:213
 #, javascript-format
-#| msgid "Connection %s has an error"
 msgid "Network %s has an error"
 msgstr "Tīklam %s ir kļūda"
 
@@ -740,3 +736,4 @@ msgstr "Visi"
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari servera parole priekš %s"
+
