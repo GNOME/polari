@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-23 17:08+0000\n"
-"PO-Revision-Date: 2016-02-25 09:05+0100\n"
+"POT-Creation-Date: 2016-03-03 02:27+0000\n"
+"PO-Revision-Date: 2016-03-03 10:15+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -83,18 +83,26 @@ msgstr "Ventana maximizada"
 msgid "Window maximized state"
 msgstr "Estado maximizado de la ventana"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Último canal activo"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Último canal activo (seleccionado)"
+
 #: ../data/resources/connection-details.ui.h:1
+msgid "_Server Address"
+msgstr "Dirección del _servidor"
+
+#: ../data/resources/connection-details.ui.h:2
 msgid "Net_work Name"
 msgstr "Nombre de r_ed"
 
-#: ../data/resources/connection-details.ui.h:2
+#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "opcional"
-
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Server Address"
-msgstr "Dirección del _servidor"
 
 #: ../data/resources/connection-details.ui.h:4
 msgid "Use secure c_onnection"
@@ -204,7 +212,7 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Primera - novena sala"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Unirse a la sala de chat"
 
@@ -233,7 +241,6 @@ msgid "_Add"
 msgstr "_Añadir"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-#| msgid "_Custom Connection"
 msgid "_Custom Network"
 msgstr "Red _personalizada"
 
@@ -277,24 +284,28 @@ msgstr "Última actividad:"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../src/application.js:374
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Falló al abrir el enlace"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Adiós"
 
-#: ../src/application.js:406
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eliminado."
 
-#: ../src/application.js:463
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2016"
 
-#: ../src/application.js:469
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Saber más acerca de Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Deshacer"
 
@@ -449,12 +460,12 @@ msgid "Already added"
 msgstr "Ya añadido"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Propiedades de «%s»"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -589,11 +600,11 @@ msgstr "Usuarios en %s:"
 msgid "No topic set"
 msgstr "No hay ningún tema establecido"
 
-#: ../src/joinDialog.js:265
+#: ../src/joinDialog.js:273
 msgid "Add Network"
 msgstr "Añadir red"
 
-#: ../src/mainWindow.js:309
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -610,7 +621,6 @@ msgstr "Terminar conversación"
 
 #: ../src/roomList.js:213
 #, javascript-format
-#| msgid "Connection %s has an error"
 msgid "Network %s has an error"
 msgstr "La red %s tiene un error"
 
@@ -715,14 +725,10 @@ msgstr "No hay resultados"
 msgid "All"
 msgstr "Todos"
 
-#: ../src/utils.js:120
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Contraseña del servidor Polari para %s"
-
-#: ../src/utils.js:171
-msgid "Failed to open link"
-msgstr "Falló al abrir el enlace"
 
 #~| msgid "Connections"
 #~ msgid "_Connection Name"
