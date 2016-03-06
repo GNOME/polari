@@ -2,7 +2,6 @@
 # Copyright (C) 2015 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Room: ruimte
-# Moet tekst tussen <> wel of niet vertaald worden? Hannie mrt 2016
 # Nathan Follens <nthn@unseen.is>, 2015-2016.
 # Justin van Steijn <justin50@live.nl>, 2015.
 # Reinout van Schouwen <reinouts@gnome.org>, 2016.
