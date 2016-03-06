@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-02 14:28+0000\n"
-"PO-Revision-Date: 2016-03-02 18:50+0100\n"
+"POT-Creation-Date: 2016-03-06 14:18+0000\n"
+"PO-Revision-Date: 2016-03-06 21:47+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -79,6 +79,14 @@ msgstr "Barcon slargjât"
 #: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Stât dal barcon slargjât"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Ultin canâl atîf"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Ultin canâl (selezionât) atîf"
 
 #: ../data/resources/connection-details.ui.h:1
 msgid "_Server Address"
