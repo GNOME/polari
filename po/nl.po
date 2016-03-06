@@ -2,34 +2,36 @@
 # Copyright (C) 2015 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Room: ruimte
-# Nathan Follens <nathan@anche.no>, 2015.
+# Moet tekst tussen <> wel of niet vertaald worden? Hannie mrt 2016
+# Nathan Follens <nthn@unseen.is>, 2015-2016.
 # Justin van Steijn <justin50@live.nl>, 2015.
 # Reinout van Schouwen <reinouts@gnome.org>, 2016.
+# Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari"
-"&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-16 13:14+0000\n"
-"PO-Revision-Date: 2016-02-17 21:21+0200\n"
-"Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-03-02 22:22+0000\n"
+"PO-Revision-Date: 2016-03-06 09:32+0100\n"
+"Last-Translator: Hannie Dumoleyn <hannie@ubuntu-nl.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Lokalize 1.5\n"
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
 #: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:495
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Een Internet Relay Chat-client voor Gnome"
 
@@ -40,8 +42,8 @@ msgid ""
 "allows you to focus on your conversations."
 msgstr ""
 "Een eenvoudige Internet Relay Chat (IRC)-client gemaakt om zonder problemen "
-"met Gnome te integreren; het heeft een eenvoudige en mooie interface die ervoor "
-"zorgt dat u zich kunt concentreren op uw gesprekken."
+"met Gnome te integreren; het heeft een eenvoudige en mooie interface die "
+"ervoor zorgt dat u zich kunt concentreren op uw gesprekken."
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
 msgid ""
@@ -51,10 +53,10 @@ msgid ""
 "to reply instantly without switching back to the application!"
 msgstr ""
 "U kunt Polari gebruiken om een publiek gesprek te voeren met mensen in een "
-"kanaal en om private een-op-een-gesprekken te voeren. Meldingen zorgen "
-"ervoor dat u nooit een belangrijk bericht zal missen - voor privégesprekken "
-"is het zelfs mogelijk om onmiddellijk te antwoorden zonder terug te wisselen "
-"naar de applicatie!"
+"kanaal en om één-op-één-privégesprekken te voeren. Meldingen zorgen ervoor "
+"dat u nooit een belangrijk bericht zult missen - voor privégesprekken is het "
+"zelfs mogelijk om onmiddellijk te antwoorden zonder terug te keren naar de "
+"toepassing!"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
@@ -85,27 +87,48 @@ msgstr "Venster gemaximaliseerd"
 msgid "Window maximized state"
 msgstr "Venster in gemaximaliseerde vorm"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Laatste actieve kanaal"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Laatste actieve (geselecteerde) kanaal"
+
 #: ../data/resources/connection-details.ui.h:1
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Naam"
+msgid "_Server Address"
+msgstr "_Server-adres"
 
 #: ../data/resources/connection-details.ui.h:2
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "optional"
-msgstr "facultatief"
+msgid "Net_work Name"
+msgstr "_Netwerknaam"
 
 #: ../data/resources/connection-details.ui.h:3
-msgid "_Server"
-msgstr "_Server"
+#: ../data/resources/join-room-dialog.ui.h:8
+msgid "optional"
+msgstr "optioneel"
 
 #: ../data/resources/connection-details.ui.h:4
+msgid "Use secure c_onnection"
+msgstr "Beveilig_de verbinding gebruiken"
+
+#: ../data/resources/connection-details.ui.h:5
 msgid "_Nickname"
 msgstr "Bij_naam"
 
-#: ../data/resources/connection-details.ui.h:5
+#: ../data/resources/connection-details.ui.h:6
 msgid "_Real Name"
 msgstr "_Echte naam"
+
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:2
+msgid "_Cancel"
+msgstr "Annu_leren"
+
+#: ../data/resources/connection-properties.ui.h:2
+msgid "_Apply"
+msgstr "_Toepassen"
 
 #: ../data/resources/entry-area.ui.h:1
 msgid "Change nickname:"
@@ -119,155 +142,131 @@ msgstr "_Wijzigen"
 msgid "Change nickname"
 msgstr "Bijnaam wijzigen"
 
-#: ../data/resources/entry-area.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:245
-msgid "_Cancel"
-msgstr "Annu_leren"
-
 #: ../data/resources/entry-area.ui.h:5
 msgid "_Paste"
 msgstr "_Plakken"
 
 #: ../data/resources/help-overlay.ui.h:1
-#| msgid "General"
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Algemeen"
 
 #: ../data/resources/help-overlay.ui.h:2
-#| msgid "Join Room"
 msgctxt "shortcut window"
 msgid "Join Room"
 msgstr "Ruimte binnengaan"
 
 #: ../data/resources/help-overlay.ui.h:3
-#| msgid "Message User"
-msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Gebruiker een direct bericht sturen"
-
-#: ../data/resources/help-overlay.ui.h:4
-#| msgid "Leave Room"
 msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Ruimte verlaten"
 
-#: ../data/resources/help-overlay.ui.h:5
-#| msgid "Show Userlist"
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Gebruikerslijst tonen"
 
-#: ../data/resources/help-overlay.ui.h:6
-#| msgid "Quit"
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: ../data/resources/help-overlay.ui.h:7
-#| msgid "Keyboard Shortcuts"
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: ../data/resources/help-overlay.ui.h:8
-#| msgid "Navigation"
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigatie"
 
-#: ../data/resources/help-overlay.ui.h:9
-#| msgid "Next Room"
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Volgende ruimte"
 
-#: ../data/resources/help-overlay.ui.h:10
-#| msgid "Previous Room"
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Vorige ruimte"
 
+#: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Volgende ruimte met ongelezen berichten"
+
 #: ../data/resources/help-overlay.ui.h:11
-#| msgid "First Room"
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Vorige ruimte met ongelezen berichten"
+
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Eerste ruimte"
 
-#: ../data/resources/help-overlay.ui.h:12
-#| msgid "Last Room"
+#: ../data/resources/help-overlay.ui.h:13
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Laatste ruimte"
 
-#: ../data/resources/help-overlay.ui.h:13
-#| msgid "First - Ninth Room"
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Eerste - negende ruimte"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:235
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Gespreksruimte binnengaan"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:237
+#: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
 msgstr "_Binnengaan"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "Verbin_ding"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "Verbinding _toevoegen"
+msgid "_Add Network"
+msgstr "_Netwerk toevoegen"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
-msgstr "Ruimte_naam"
+msgstr "_Naam van ruimte"
 
 #: ../data/resources/join-room-dialog.ui.h:7
 msgid "_Password"
 msgstr "_Wachtwoord"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Een ruimte binnengaan"
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Add"
+msgstr "_Toevoegen"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Network"
+msgstr "_Aangepast netwerk"
 
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Een gebruiker een direct bericht sturen"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Ruimte binnengaan"
+msgid "Add rooms and networks"
+msgstr "Ruimtes en netwerken toevoegen"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
-msgstr "Toetsenbordsnelkoppelingen"
+msgstr "Sneltoetsen"
 
 #: ../data/resources/menus.ui.h:2
 msgid "About"
-msgstr "Over"
+msgstr "Info"
 
 #: ../data/resources/menus.ui.h:3
 msgid "Quit"
 msgstr "Sluiten"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Bericht"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Recent"
-
 #: ../data/resources/room-list-header.ui.h:1
-#| msgid "New Connection"
 msgid "Reconnect"
-msgstr "Herverbinden"
+msgstr "Opnieuw verbinden"
 
 #: ../data/resources/room-list-header.ui.h:2
 msgid "Remove"
@@ -289,29 +288,35 @@ msgstr "Laatste activiteit:"
 msgid "Message"
 msgstr "Bericht"
 
-#: ../src/application.js:406
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Koppeling openen mislukt"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Tot ziens"
 
-#: ../src/application.js:438
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "%s verwijderd."
 
-#: ../src/application.js:494
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr ""
-"Gnome-NL\n"
-"\n"
 "Nathan Follens\n"
 "Justin van Steijn\n"
-"Reinout van Schouwen"
+"Reinout van Schouwen\n"
+"Justin van Steijn\n"
+"Hannie Dumoleyn\n"
+"\n"
+"Klik voor meer info op http://nl.gnome.org/"
 
-#: ../src/application.js:500
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Kom meer te weten over Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Ongedaan maken"
 
@@ -360,7 +365,7 @@ msgstr "%s is verbannen"
 #: ../src/chatView.js:852
 #, javascript-format
 msgid "%s joined"
-msgstr "%s is de ruimte toegetreden"
+msgstr "%s is toegetreden tot de ruimte"
 
 #: ../src/chatView.js:858
 #, javascript-format
@@ -371,8 +376,8 @@ msgstr "%s heeft de ruimte verlaten"
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
-msgstr[0] "%d gebruiker is de ruimte toegetreden"
-msgstr[1] "%d gebruikers hebben de ruimte toegetreden"
+msgstr[0] "%d gebruiker is toegetreden tot de ruimte"
+msgstr[1] "%d gebruikers zijn toegetreden tot de ruimte"
 
 #: ../src/chatView.js:957
 #, javascript-format
@@ -461,34 +466,56 @@ msgstr "%d %B, %lu%M %p"
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %lu%M %p"
 
-#: ../src/connections.js:74
-msgid ""
-"Polari disconnected due to a network error. Please check if the address "
-"field is correct."
-msgstr ""
-"Polari heeft de verbinding verbroken door een netwerkfout. Controleer "
-"alstublieft of het adresveld correct is."
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Reeds toegevoegd"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:230
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "‘%s’-eigenschappen"
 
-#: ../src/connections.js:247
-msgid "A_pply"
-msgstr "Toe_passen"
+#: ../src/connections.js:461
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari heeft de verbinding verbroken vanwege een netwerkfout. Gelieve te "
+"controleren of het adresveld correct is."
 
-#: ../src/entryArea.js:220
+#: ../src/entryArea.js:236
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "%s regel tekst plakken in publieke paste-service?"
 msgstr[1] "%s regels tekst plakken in publieke paste-service?"
 
-#: ../src/entryArea.js:229
+#: ../src/entryArea.js:240
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "%s regel tekst uploaden naar publieke paste-service…"
+msgstr[1] "%s regels tekst uploaden naar publieke paste-service…"
+
+#: ../src/entryArea.js:247
 msgid "Upload image to public paste service?"
 msgstr "Afbeelding uploaden naar publieke paste-service?"
+
+#: ../src/entryArea.js:248
+msgid "Uploading image to public paste service…"
+msgstr "Afbeelding uploaden naar publieke paste-service…"
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s in #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Plakken van %s"
 
 #. commands that would be nice to support:
 #.
@@ -504,32 +531,32 @@ msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
 msgstr ""
-"/HELP [<commando>] - toont hulp voor <commando>, of een lijst van "
-"beschikbare commando's"
+"/HELP [<command>] - toont hulp voor <command>, of een lijst van beschikbare "
+"commando's"
 
+# Ik denk niet dat wat tussen <> staat vertaald moet worden, maar ik weet het niet zeker.
 #: ../src/ircParser.js:25
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <bijnaam> [<kanaal>] - nodigt <bijnaam> uit in <kanaal>, of het "
-"huidige kanaal"
+"/INVITE <nick> [<channel>] - nodigt <nick> uit in <channel>, of het huidige "
+"kanaal"
 
 #: ../src/ircParser.js:26
 msgid "/JOIN <channel> - joins <channel>"
-msgstr "/JOIN <kanaal> - treedt toe tot <kanaal>"
+msgstr "/JOIN <channel> - treedt toe tot <channel>"
 
 #: ../src/ircParser.js:27
 msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr "/KICK <bijnaam> - schopt <nick> bijnaam uit het huidige kanaal"
+msgstr "/KICK <nick> - schopt <nick> bijnaam uit het huidige kanaal"
 
 #: ../src/ircParser.js:28
 msgid "/ME <action> - sends <action> to the current channel"
-msgstr "/ME <actie> - stuurt <actie> naar het huidige kanaal"
+msgstr "/ME <action> - stuurt <action> naar het huidige kanaal"
 
 #: ../src/ircParser.js:29
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
-msgstr "/MSG <nick> [<message>] - stuurt een privébericht naar <bijnaam>"
+msgstr "/MSG <nick> [<message>] - stuurt een privébericht naar <nick>"
 
 #: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
@@ -537,32 +564,31 @@ msgstr "/NAMES - toont een lijst van gebruikers op het huidige kanaal"
 
 #: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <bijnaam> - stelt uw bijnaam in als <bijnaam>"
+msgstr "/NICK <nick> - stelt uw bijnaam in als <nick>"
 
 #: ../src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
-"/PART [<kanaal>] [<reden>] - verlaat <kanaal>, standaard het huidige kanaal"
+"/PART [<channel>] [<reason>] - verlaat <channel>, standaard het huidige kanaal"
 
 #: ../src/ircParser.js:33
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
-msgstr "/QUERY <bijnaam> - opent een privégesprek met <bijnaam>"
+msgstr "/QUERY <nick> - opent een privégesprek met <nick>"
 
 #: ../src/ircParser.js:34
 msgid "/QUIT [<reason>] - disconnects from the current server"
-msgstr "/QUIT [<reden>] - verbreekt verbinding met huidige server"
+msgstr "/QUIT [<reason>] - verbreekt verbinding met huidige server"
 
 #: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr ""
-"/SAY <tekst> - stuurt <tekst> naar de huidige ruimte/het huidige contact"
+msgstr "/SAY <text> - stuurt <text> naar de huidige ruimte/het huidige contact"
 
 #: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
-"/TOPIC <onderwerp> - stelt het onderwerp in als <onderwerp>, of toont het "
-"huidige onderwerp"
+"/TOPIC <topic> - stelt het onderwerp in als <topic>, of toont het huidige "
+"onderwerp"
 
 #: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
@@ -576,7 +602,7 @@ msgstr "Gebruik: %s"
 
 #: ../src/ircParser.js:98
 msgid "Known commands:"
-msgstr "Gekende commando's:"
+msgstr "Bekende commando's:"
 
 #: ../src/ircParser.js:198
 #, javascript-format
@@ -587,106 +613,76 @@ msgstr "Gebruikers op %s:"
 msgid "No topic set"
 msgstr "Geen onderwerp ingesteld"
 
-#: ../src/joinDialog.js:236
-msgid "Add Connection"
-msgstr "Verbinding toevoegen"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Netwerk toevoegen"
 
-#: ../src/joinDialog.js:238
-msgid "_Save"
-msgstr "Op_slaan"
-
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:307
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d gebruiker"
 msgstr[1] "%d gebruikers"
 
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Geen recente gebruikers"
-
-#. translators: %s is a nick, #%s a channel
-#: ../src/pasteManager.js:98 ../src/pasteManager.js:134
-#, javascript-format
-msgid "%s in #%s"
-msgstr "%s in #%s"
-
-#: ../src/pasteManager.js:100 ../src/pasteManager.js:136
-#, javascript-format
-msgid "Paste from %s"
-msgstr "Plakken van %s"
-
-#: ../src/pasteManager.js:342
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Uploaden van %s"
-
-#: ../src/roomList.js:125
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Gespreksruimte verlaten"
 
-#: ../src/roomList.js:125
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Gesprek beëindigen"
 
-#: ../src/roomList.js:209
+#: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Verbinding %s heeft een fout"
+msgid "Network %s has an error"
+msgstr "Netwerk %s heeft een fout"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:259
+#: ../src/roomList.js:263
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:266
-#| msgid "Connection Error"
+#: ../src/roomList.js:270
 msgid "Connection Problem"
 msgstr "Verbindingsfout"
 
-#: ../src/roomList.js:274
-#| msgid "Connections"
+#: ../src/roomList.js:278
 msgid "Connected"
 msgstr "Verbonden"
 
-#: ../src/roomList.js:276
-#| msgid "Connections"
+#: ../src/roomList.js:280
 msgid "Connecting..."
 msgstr "Verbinden…"
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:282
 msgid "Offline"
 msgstr "Off-line"
 
-#: ../src/roomList.js:280
+#: ../src/roomList.js:284
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: ../src/roomList.js:300
+#: ../src/roomList.js:304
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s in a safe way."
-msgstr "Kan niet op een veilige manier met %s verbinden."
+msgstr "Op een veilige manier verbinden met %s is mislukt."
 
-#: ../src/roomList.js:303
+#: ../src/roomList.js:307
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s vereist een wachtwoord."
 
-#: ../src/roomList.js:309
+#: ../src/roomList.js:313
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s. The server is busy."
-msgstr "Kan geen verbinding maken met %s. De server is bezet."
+msgstr "Verbinding maken met %s is mislukt. De server is bezet."
 
-#: ../src/roomList.js:312
+#: ../src/roomList.js:316
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s."
-msgstr "Kan niet verbinden met %s."
+msgstr "Verbinden met %s is mislukt."
 
 #: ../src/roomStack.js:97
 msgid "Join a room using the + button."
@@ -742,20 +738,53 @@ msgstr "Geen resultaten"
 msgid "All"
 msgstr "Alles"
 
-#: ../src/utils.js:127
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari-serverwachtwoord voor %s"
 
-#: ../src/utils.js:178
-msgid "Failed to open link"
-msgstr "Koppeling openen mislukt"
+#~ msgid "_Connection Name"
+#~ msgstr "Verbin_dingsnaam"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Gebruiker een direct bericht sturen"
+
+#~ msgid "_Add Connection"
+#~ msgstr "Verbinding _toevoegen"
+
+#~ msgid "Join a Room"
+#~ msgstr "Een ruimte binnengaan"
+
+#~ msgid "Message a User"
+#~ msgstr "Een gebruiker een direct bericht sturen"
+
+#~ msgid "Join room"
+#~ msgstr "Ruimte binnengaan"
+
+#~ msgid "_Message"
+#~ msgstr "_Bericht"
+
+#~ msgid "_Recent"
+#~ msgstr "_Recent"
+
+#~ msgid "_Name"
+#~ msgstr "_Naam"
+
+#~ msgid "Add Connection"
+#~ msgstr "Verbinding toevoegen"
+
+#~ msgid "No recent users"
+#~ msgstr "Geen recente gebruikers"
+
+#~ msgid "_Save"
+#~ msgstr "Op_slaan"
+
+#~ msgid "Uploading %s"
+#~ msgstr "Uploaden van %s"
 
 #~ msgid "Show connections"
 #~ msgstr "Verbindingen tonen"
-
-#~ msgid "_Address"
-#~ msgstr "_Adres"
 
 #~ msgid "_Description"
 #~ msgstr "_Beschrijving"
@@ -774,9 +803,6 @@ msgstr "Koppeling openen mislukt"
 
 #~ msgid "Cr_eate"
 #~ msgstr "Aanmak_en"
-
-#~ msgid "Please check your connection details."
-#~ msgstr "Controleer alstublieft uw verbindingsdetails."
 
 #~ msgid "Authentication failed."
 #~ msgstr "Authentificatie mislukt."
