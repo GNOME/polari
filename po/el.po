@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-01 02:25+0000\n"
-"PO-Revision-Date: 2016-03-01 15:57+0200\n"
+"POT-Creation-Date: 2016-03-04 14:25+0000\n"
+"PO-Revision-Date: 2016-03-05 01:57+0200\n"
 "Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
 "Language-Team: Greek, Modern (1453-) <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
@@ -82,6 +82,14 @@ msgstr "Μεγιστοποιημένο παράθυρο"
 #: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Κατάσταση μεγιστοποίησης παραθύρου"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Τελευταίο ενεργό κανάλι"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Τελευταίο ενεργό (επιλεγμένο) κανάλι"
 
 #: ../data/resources/connection-details.ui.h:1
 msgid "_Server Address"
@@ -233,7 +241,6 @@ msgid "_Add"
 msgstr "_Προσθήκη"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-#| msgid "_Custom Connection"
 msgid "_Custom Network"
 msgstr "Π_ροσαρμοσμένα δίκτυα"
 
@@ -629,7 +636,6 @@ msgstr "Τερματισμός συνομιλίας"
 
 #: ../src/roomList.js:213
 #, javascript-format
-#| msgid "Connection %s has an error"
 msgid "Network %s has an error"
 msgstr "Το δίκτυο %s έχει σφάλμα"
 
