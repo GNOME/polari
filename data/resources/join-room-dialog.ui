@@ -131,34 +131,6 @@
                     <property name="width">2</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkLabel" id="passwordLabel">
-                    <property name="visible">True</property>
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">_Password</property>
-                    <property name="use-underline">True</property>
-                    <property name="mnemonic-widget">passwordEntry</property>
-                  </object>
-                  <packing>
-                    <property name="left-attach">1</property>
-                    <property name="top-attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkEntry" id="passwordEntry">
-                    <property name="visible">True</property>
-                    <property name="hexpand">True</property>
-                    <property name="visibility">False</property>
-                    <property name="activates-default">True</property>
-                    <property name="placeholder-text" translatable="yes">optional</property>
-                    <property name="input-purpose">password</property>
-                  </object>
-                  <packing>
-                    <property name="left-attach">2</property>
-                    <property name="top-attach">2</property>
-                    <property name="width">2</property>
-                  </packing>
-                </child>
               </object>
               <packing>
                 <property name="name">main</property>
