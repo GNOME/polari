@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-28 02:21+0000\n"
-"PO-Revision-Date: 2016-02-28 12:01+0100\n"
+"POT-Creation-Date: 2016-03-08 14:22+0000\n"
+"PO-Revision-Date: 2016-03-08 18:08+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
-#: ../src/roomStack.js:94
+#: ../data/org.gnome.Polari.desktop.in.h:1
+#: ../data/resources/main-window.ui.h:1 ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
@@ -79,6 +79,14 @@ msgstr "Maximalizace okna"
 #: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Stav maximalizace okna."
+
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Poslední aktivní kanál"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Poslední aktivní (vybraný) kanál."
 
 #: ../data/resources/connection-details.ui.h:1
 msgid "_Server Address"
@@ -728,87 +736,3 @@ msgstr "Vše"
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Heslo serveru Polari pro účet %s"
-
-#~ msgid "Show connections"
-#~ msgstr "Zobrazit připojení"
-
-#~ msgid "_Description"
-#~ msgstr "_Popis"
-
-#~ msgid "Use the + button to add a new connection."
-#~ msgstr "K přidání nového připojení použijte tlačítko +."
-
-#~ msgid "Add"
-#~ msgstr "Přidat"
-
-#~ msgid "Message User"
-#~ msgstr "Napsat uživateli"
-
-#~ msgid "_Add Connection"
-#~ msgstr "Přid_at připojení"
-
-#~ msgid "Join a Room"
-#~ msgstr "Vstoupit do místnosti"
-
-#~ msgid "Message a User"
-#~ msgstr "Napsat uživateli"
-
-#~ msgid "Join room"
-#~ msgstr "Vstoupit do místnosti"
-
-#~ msgid "Preferences"
-#~ msgstr "Předvolby"
-
-#~ msgid "_Message"
-#~ msgstr "_Napsat zprávu"
-
-#~ msgid "_Recent"
-#~ msgstr "Ne_dávní"
-
-#~ msgid "_Name"
-#~ msgstr "_Název"
-
-#~ msgid "Edit Connection"
-#~ msgstr "Úprava připojení"
-
-#~ msgid "Cr_eate"
-#~ msgstr "V_ytvořit"
-
-#~ msgid "Add Connection"
-#~ msgstr "Přidání připojení"
-
-#~ msgid "_Save"
-#~ msgstr "_Uložit"
-
-#~ msgid "No recent users"
-#~ msgstr "žádní nejsou"
-
-#~ msgid "Uploading %s"
-#~ msgstr "Nahrává se %s"
-
-#~ msgid "Please check your connection details."
-#~ msgstr "Podívejte se prosím na podrobnosti připojení."
-
-#~ msgid "Authentication failed."
-#~ msgstr "Selhalo ověření."
-
-#~ msgid "Try again"
-#~ msgstr "Zkusit znovu"
-
-#~ msgid "The server is busy."
-#~ msgstr "Server je zaneprázdněn."
-
-#~ msgid "Failed to connect for an unknown reason."
-#~ msgstr "Selhalo připojení z neznámého důvodu."
-
-#~ msgid "Begin chatting by adding a new connection."
-#~ msgstr "Začněte komunikaci přidáním nového připojení."
-
-#~ msgid "Open %s in the application menu."
-#~ msgstr "Otevřít %s v aplikační nabídce."
-
-#~ msgid "Your connections are disabled."
-#~ msgstr "Vaše připojení jsou zákázána."
-
-#~ msgid "Enable them by opening %s in the application menu."
-#~ msgstr "Povolte je otevřením %s v aplikační nabídce."
