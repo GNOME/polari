@@ -21,6 +21,7 @@ const knownCommands = {
     WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
     */
 
+    CLOSE: N_("/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"),
     HELP: N_("/HELP [<command>] - displays help for <command>, or a list of available commands"),
     INVITE: N_("/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"),
     JOIN: N_("/JOIN <channel> - joins <channel>"),
@@ -219,7 +220,8 @@ const IrcParser = new Lang.Class({
                     }));
                 break;
             }
-            case 'PART': {
+            case 'PART':
+            case 'CLOSE': {
                 let room = null;;
                 let name = argv[0];
                 if (name)
