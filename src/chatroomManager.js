@@ -498,7 +498,7 @@ const _ChatroomManager = new Lang.Class({
 
     getRoomByName: function(name) {
         for (let id in this._rooms)
-            if (this._rooms[id].channel.identifier == name)
+            if (this._rooms[id].channel_name == name)
                 return this._rooms[id];
         return null;
     },
