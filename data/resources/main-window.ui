@@ -12,7 +12,6 @@
   <template class="Gjs_MainWindow">
     <property name="title" translatable="yes">Polari</property>
     <property name="icon-name">org.gnome.Polari</property>
-    <property name="show-menubar">false</property>
     <child type="titlebar">
       <object class="GtkBox">
         <property name="visible">True</property>

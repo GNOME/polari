@@ -114,6 +114,7 @@ const MainWindow = new Lang.Class({
 
     _init: function(params) {
         this._subtitle = '';
+        params.show_menubar = false;
 
         this.parent(params);
 
