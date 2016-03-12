@@ -362,9 +362,9 @@ msgstr "%s opustil místnost"
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
-msgstr[0] "Je připojen %d uživatel"
-msgstr[1] "Jsou připojeni %d uživatelé"
-msgstr[2] "Je připojeno %d uživatelů"
+msgstr[0] "%d uživatel se připojil"
+msgstr[1] "%d uživatelé se připojili"
+msgstr[2] "%d uživatelů se připojilo"
 
 #: ../src/chatView.js:957
 #, javascript-format
