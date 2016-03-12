@@ -2,20 +2,21 @@
 # Copyright (C) 2013 Polari developers
 # This file is distributed under the same license as the polari package.
 # Fran Dieguez <frandieguez@gnome.org>, 2013, 2014, 2015, 2016.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-24 14:47+0100\n"
-"PO-Revision-Date: 2016-02-24 14:53+0200\n"
+"POT-Creation-Date: 2016-03-12 13:52+0100\n"
+"PO-Revision-Date: 2016-03-12 13:52+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: gnome-l10n-gl@gnome.org\n"
+"Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Gtranslator 2.91.7\n"
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
@@ -25,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:464
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de Internet Relay Chat para GNOME"
 
@@ -78,6 +79,14 @@ msgstr "Xanela maximizada"
 #: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "Estado da xanela maximizada"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Última canle activa"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Última canle (seleccionada) activa"
 
 #: ../data/resources/connection-details.ui.h:1
 msgid "_Server Address"
@@ -200,7 +209,7 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Primeira - Novena sala"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Unirse a unha sala de conversas"
 
@@ -272,24 +281,28 @@ msgstr "Última actividade:"
 msgid "Message"
 msgstr "Mensaxe"
 
-#: ../src/application.js:374
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Produciuse un fallo ao abrir a ligazón"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Adeus"
 
-#: ../src/application.js:406
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "%s quitado."
 
-#: ../src/application.js:463
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013."
 
-#: ../src/application.js:469
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "Aprender máis sobre Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:82
 msgid "Undo"
 msgstr "Desfacer"
 
@@ -444,12 +457,12 @@ msgid "Already added"
 msgstr "Xa engadido"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:417
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "“%s” Properties"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -581,7 +594,7 @@ msgstr "Usuarios en %s:"
 msgid "No topic set"
 msgstr "Non hai ningún asunto estabelecido"
 
-#: ../src/joinDialog.js:265
+#: ../src/joinDialog.js:273
 msgid "Add Network"
 msgstr "Engadir rede"
 
@@ -706,14 +719,10 @@ msgstr "Sen resultados"
 msgid "All"
 msgstr "Todos"
 
-#: ../src/utils.js:120
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Contrasinal de Polari para o servidor %s"
-
-#: ../src/utils.js:171
-msgid "Failed to open link"
-msgstr "Produciuse un fallo ao abrir a ligazón"
 
 #~ msgid "Show connections"
 #~ msgstr "Mostrar conexións"
