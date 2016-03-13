@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-02 14:28+0000\n"
-"PO-Revision-Date: 2016-03-02 22:32+0200\n"
+"POT-Creation-Date: 2016-03-13 02:19+0000\n"
+"PO-Revision-Date: 2016-03-13 12:55+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
@@ -21,8 +21,8 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:1 ../src/roomStack.js:94
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
+#: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
@@ -81,8 +81,15 @@ msgstr "Ikkuna suurennettu"
 msgid "Window maximized state"
 msgstr "Suurennetun ikkunan tila"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Viimeinen aktiivinen kanava"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Viimeinen aktiivinen (valittu) kanava"
+
 #: ../data/resources/connection-details.ui.h:1
-#| msgid "_Address"
 msgid "_Server Address"
 msgstr "_Palvelimen osoite"
 
@@ -96,7 +103,6 @@ msgid "optional"
 msgstr "valinnainen"
 
 #: ../data/resources/connection-details.ui.h:4
-#| msgid "Please check your connection details."
 msgid "Use secure c_onnection"
 msgstr "K_äytä salattua yhteyttä"
 
@@ -115,7 +121,6 @@ msgid "_Cancel"
 msgstr "_Peru"
 
 #: ../data/resources/connection-properties.ui.h:2
-#| msgid "A_pply"
 msgid "_Apply"
 msgstr "_Toteuta"
 
@@ -230,7 +235,6 @@ msgid "_Password"
 msgstr "_Salasana"
 
 #: ../data/resources/join-room-dialog.ui.h:9
-#| msgid "_Address"
 msgid "_Add"
 msgstr "_Lisää"
 
@@ -456,7 +460,6 @@ msgstr "Lisätty jo"
 #. Translators: %s is a connection name
 #: ../src/connections.js:417
 #, javascript-format
-#| msgid "Properties"
 msgid "“%s” Properties"
 msgstr "“%s” - ominaisuudet"
 
@@ -540,7 +543,6 @@ msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <toiminto> - lähettää tekstin <toiminto> nykyiselle kanavalle"
 
 #: ../src/ircParser.js:29
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgstr ""
 "/MSG <nimimerkki> [<viesti>] - lähettää yksityisviestin käyttäjälle "
@@ -627,7 +629,6 @@ msgstr "Lopeta keskustelu"
 
 #: ../src/roomList.js:213
 #, javascript-format
-#| msgid "Connection %s has an error"
 msgid "Network %s has an error"
 msgstr "Verkossa %s on virhe"
 
@@ -660,7 +661,6 @@ msgstr "Tuntematon"
 
 #: ../src/roomList.js:304
 #, javascript-format
-#| msgid "Could not make connection in a safe way."
 msgid "Could not connect to %s in a safe way."
 msgstr "Yhteydeyn muodostaminen kohteeseen %s ei onnistunut turvallisesti."
 
