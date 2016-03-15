@@ -78,8 +78,6 @@ const ConnectionsList = new Lang.Class({
 
         this._rows = new Map();
 
-        this._filterTerms = [];
-        this._list.set_filter_func(Lang.bind(this, this._filterRows));
         this._list.set_header_func(Lang.bind(this, this._updateHeader));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -107,21 +105,23 @@ const ConnectionsList = new Lang.Class({
     },
 
     setFilter: function(filter) {
-        this._list.select_row(null);
-        this._filterTerms = filter.trim().toLowerCase().replace(/\s+/g, ' ').split(' ');
-        this._list.invalidate_filter();
-    },
+        let trimmedFilter = filter.trim().toLowerCase().replace(/\s+/g, ' ');
+        let filterTerms = trimmedFilter.split(' ');
+        this._list.foreach(Lang.bind(this, function(r) {
+            let matchTerms = this._networksManager.getNetworkMatchTerms(r.id);
+            r.visible = filterTerms.every(t => {
+                return matchTerms.some(s => s.indexOf(t) != -1);
+            });
+        }));
 
-    activateFirst: function() {
-        let row = this._list.get_row_at_y(0);
-        this._list.select_row(row);
-    },
-
-    _filterRows: function(row) {
-        let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
-        return this._filterTerms.every(function(term) {
-            return matchTerms.some(function(s) { return s.indexOf(term) != -1; });
-        });
+        let id = this._list.connect('draw', Lang.bind(this, function() {
+            let row = trimmedFilter ? this._list.get_row_at_y(0) : null;
+            if (row && row.selectable)
+                this._list.select_row(row);
+            else
+                this._list.unselect_all();
+            this._list.disconnect(id);
+        }));
     },
 
     _updateHeader: function(row, before) {

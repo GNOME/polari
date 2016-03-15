@@ -155,11 +155,6 @@ const JoinDialog = new Lang.Class({
                 else
                     this.response(Gtk.ResponseType.CANCEL);
             }));
-        this._filterEntry.connect_after('activate', Lang.bind(this,
-            function() {
-                if (this._filterEntry.text.length > 0)
-                    this._connectionsList.activateFirst();
-            }));
     },
 
     _onAccountChanged: function() {
