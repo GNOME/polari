@@ -1,3 +1,19 @@
+3.19.92 - "Like a Trailer Park Husband"
+=======================================
+* Misc. bug fixes and cleanups [Florian, Claudio; #763385, #763623]
+
+Contributors:
+  Claudio André, Florian Müllner
+
+Translations:
+  Enrico Nicoletto [pt_BR], Piotr Drąg [pl], Dušan Kazik [sk], Balázs Úr [hu],
+  Baurzhan Muftakhidinov [kk], Rūdolfs Mazurs [lv], Aurimas Černius [lt],
+  Matej Urbančič [sl], Anders Jonsson [sv], hanniedu [nl],
+  Hannie Dumoleyn [nl], Efstathios Iosifidis [el], Daniel Mustieles [es],
+  Fabio Tomat [fur], Mario Blättermann [de], Marek Černocký [cs],
+  Марко Костић [sr], Милош Поповић [sr@latin], Fran Dieguez [gl],
+  Changwoo Ryu [ko], Jiri Grönroos [fi]
+
 3.19.91 - "Dr. Perfect?"
 ========================
 * With no networks, open join-dialog on networks page [Kunaal; #762488]
