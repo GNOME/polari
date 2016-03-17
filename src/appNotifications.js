@@ -1,3 +1,4 @@
+const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
@@ -79,15 +80,26 @@ const UndoNotification = new Lang.Class({
 
         this._undo = false;
 
+        this.connect('destroy', Lang.bind(this, this._onDestroy));
+
         this.addButton(_("Undo"), Lang.bind(this, function() {
             this._undo = true;
         }));
 
+        this._app = Gio.Application.get_default();
+        this._shutdownId = this._app.connect('prepare-shutdown',
+                                             Lang.bind(this, this.close));
     },
 
     close: function() {
         this.emit(this._undo ? 'undo' : 'closed');
         this.parent();
+    },
+
+    _onDestroy: function() {
+        if (this._shutdownId)
+            this._app.disconnect(this._shutdownId);
+        this._shutdownId = 0;
     }
 });
 
