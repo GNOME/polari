@@ -2,15 +2,15 @@
 # Copyright (C) 2013-2016 polari og nedenstående oversættere.
 # This file is distributed under the same license as the polari package.
 # Joe Hansen <joedalton2@yahoo.dk>, 2013.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014, 2015.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014, 2015, 2016.
 # scootergrisen, 2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-19 04:09+0100\n"
-"PO-Revision-Date: 2016-03-19 04:09+0100\n"
-"Last-Translator: scootergrisen\n"
+"POT-Creation-Date: 2016-03-20 23:30+0100\n"
+"PO-Revision-Date: 2016-03-20 02:47+0100\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -85,20 +85,19 @@ msgstr "Vindue maksimeret-tilstand"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Last active channel"
-msgstr ""
+msgstr "Sidste aktive kanal"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:8
 msgid "Last active (selected) channel"
-msgstr ""
+msgstr "Sidste aktive (valgte) kanal"
 
 #: ../data/resources/connection-details.ui.h:1
-#, fuzzy
 msgid "_Server Address"
-msgstr "_Adresse"
+msgstr "_Serveradresse"
 
 #: ../data/resources/connection-details.ui.h:2
 msgid "Net_work Name"
-msgstr ""
+msgstr "Net_værksnavn"
 
 #: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
@@ -106,9 +105,8 @@ msgid "optional"
 msgstr "valgfri"
 
 #: ../data/resources/connection-details.ui.h:4
-#, fuzzy
 msgid "Use secure c_onnection"
-msgstr "Ny forbindelse"
+msgstr "Brug sikker _forbindelse"
 
 #: ../data/resources/connection-details.ui.h:5
 msgid "_Nickname"
@@ -125,7 +123,6 @@ msgid "_Cancel"
 msgstr "_Annullér"
 
 #: ../data/resources/connection-properties.ui.h:2
-#, fuzzy
 msgid "_Apply"
 msgstr "_Anvend"
 
@@ -193,12 +190,12 @@ msgstr "Forrige rum"
 #: ../data/resources/help-overlay.ui.h:10
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
-msgstr ""
+msgstr "Næste rum med ulæste meddelelser"
 
 #: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
-msgstr ""
+msgstr "Forrige rum med ulæste meddelelser"
 
 #: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
@@ -213,7 +210,7 @@ msgstr "Sidste rum"
 #: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
-msgstr ""
+msgstr "Første - niende rum"
 
 #: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
@@ -229,7 +226,7 @@ msgstr "_Forbindelse"
 
 #: ../data/resources/join-room-dialog.ui.h:5
 msgid "_Add Network"
-msgstr ""
+msgstr "_Tilføj netværk"
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -240,17 +237,16 @@ msgid "_Password"
 msgstr "_Adgangskode"
 
 #: ../data/resources/join-room-dialog.ui.h:9
-#, fuzzy
 msgid "_Add"
-msgstr "_Adresse"
+msgstr "_Tilføj"
 
 #: ../data/resources/join-room-dialog.ui.h:10
 msgid "_Custom Network"
-msgstr ""
+msgstr "_Brugertilpasset netværk"
 
 #: ../data/resources/main-window.ui.h:2
 msgid "Add rooms and networks"
-msgstr ""
+msgstr "Tilføj rum og netværk"
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -468,7 +464,7 @@ msgstr "%d. %B %Y, %l∶%M %p"
 
 #: ../src/connections.js:42
 msgid "Already added"
-msgstr ""
+msgstr "Allerede tilføjet"
 
 #. Translators: %s is a connection name
 #: ../src/connections.js:417
@@ -495,16 +491,16 @@ msgstr[1] "Indsæt %s linjer tekst til offentlig tekstdelingstjeneste?"
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Sender %s linje tekst til offentlig tekstdelingstjeneste…"
+msgstr[1] "Sender %s linjer tekst til offentlig tekstdelingstjeneste…"
 
 #: ../src/entryArea.js:247
 msgid "Upload image to public paste service?"
-msgstr ""
+msgstr "Send billede til offentlig delingstjeneste?"
 
 #: ../src/entryArea.js:248
 msgid "Uploading image to public paste service…"
-msgstr ""
+msgstr "Sender billede til offentlig delingstjeneste…"
 
 #. translators: %s is a nick, #%s a channel
 #: ../src/entryArea.js:257
@@ -615,7 +611,7 @@ msgstr "Intet emne givet"
 
 #: ../src/joinDialog.js:273
 msgid "Add Network"
-msgstr ""
+msgstr "Tilføj netværk"
 
 #: ../src/mainWindow.js:307
 #, javascript-format
@@ -633,9 +629,9 @@ msgid "End conversation"
 msgstr "Afslut samtale"
 
 #: ../src/roomList.js:213
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Network %s has an error"
-msgstr "Forbindelsen %s har en fejl"
+msgstr "Netværket %s har en fejl"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
@@ -672,7 +668,7 @@ msgstr "Kunne ikke oprette forbindelse til %s på en sikker måde."
 #: ../src/roomList.js:307
 #, javascript-format
 msgid "%s requires a password."
-msgstr ""
+msgstr "%s kræver en adgangskode."
 
 #: ../src/roomList.js:313
 #, javascript-format
@@ -741,7 +737,7 @@ msgstr "Alle"
 #: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
-msgstr ""
+msgstr "Polari-serveradgangskode for %s"
 
 #~ msgid "Show connections"
 #~ msgstr "Vis forbindelser"
