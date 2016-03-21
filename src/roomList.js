@@ -202,6 +202,9 @@ const RoomListHeader = new Lang.Class({
     _onDisplayNameChanged: function() {
         this._label.label = this._account.display_name;
 
+	/* update pop-over status label */
+	this._onConnectionStatusChanged();
+
         let parent;
         do
           parent = this.get_parent();
