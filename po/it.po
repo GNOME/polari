@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2016-03-02 22:22+0000\n"
-"PO-Revision-Date: 2016-03-15 11:23+0100\n"
+"PO-Revision-Date: 2016-03-22 08:34+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -144,7 +144,7 @@ msgstr "_Incolla"
 #: ../data/resources/help-overlay.ui.h:1
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Genrale"
+msgstr "Generale"
 
 #: ../data/resources/help-overlay.ui.h:2
 msgctxt "shortcut window"
@@ -209,11 +209,11 @@ msgstr "Ultima stanza"
 #: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
-msgstr "Prima/N-esima stanza"
+msgstr "Prima/Nona stanza"
 
 #: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
-msgstr "Entra stanza di conversazione"
+msgstr "Entra in stanza di conversazione"
 
 #: ../data/resources/join-room-dialog.ui.h:3
 msgid "_Join"
@@ -310,7 +310,7 @@ msgstr "Annulla"
 
 #: ../src/chatView.js:133
 msgid "New Messages"
-msgstr "Nuovo messaggio"
+msgstr "Nuovi messaggi"
 
 #: ../src/chatView.js:642
 msgid "Open Link"
@@ -488,7 +488,7 @@ msgstr[1] "Caricamento di %s righe di testo al servizio di «paste» pubblico…
 
 #: ../src/entryArea.js:247
 msgid "Upload image to public paste service?"
-msgstr "Incollare l'immagine nel servizio di «paste» pubblico?"
+msgstr "Caricare l'immagine nel servizio di «paste» pubblico?"
 
 #: ../src/entryArea.js:248
 msgid "Uploading image to public paste service…"
@@ -526,7 +526,7 @@ msgstr ""
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <soprannome> [<canale>] - Invita <soprannome> in <canale> o il "
+"/INVITE <soprannome> [<canale>] - Invita <soprannome> in <canale> o nel "
 "canale corrente"
 
 #: ../src/ircParser.js:26
@@ -535,7 +535,7 @@ msgstr "/JOIN <canale> - Entra in <canale>"
 
 #: ../src/ircParser.js:27
 msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr "/KICK <soprannome> - Espelle <soprannome> dal canale corrente"
+msgstr "/KICK <soprannome> - Caccia <soprannome> dal canale corrente"
 
 #: ../src/ircParser.js:28
 msgid "/ME <action> - sends <action> to the current channel"
@@ -571,7 +571,7 @@ msgstr "/QUIT [<motivo>] - Disconnette dal server corrente"
 
 #: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr "/SAY <testo> - Invia <testo> al canale/contatto corrente"
+msgstr "/SAY <testo> - Invia <testo> nella stanza o al contatto corrente"
 
 #: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
