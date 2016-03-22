@@ -1,3 +1,14 @@
+3.20.0 - "The Chicken has landed"
+=================================
+* Misc. bug fixes [Florian; #763872, #763873]
+
+Contributors:
+  Florian Müllner
+
+Translations:
+  Milo Casagrande [it], Ask Hjorth Larsen [da], Yuri Myasoedov [ru],
+  Jiro Matsuzawa [ja], Guillaume Bernard [fr]
+
 3.19.92 - "Like a Trailer Park Husband"
 =======================================
 * Misc. bug fixes and cleanups [Florian, Claudio; #763385, #763623]
