@@ -3,30 +3,30 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 #
-# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014, 2015.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014, 2015, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 10:51+0200\n"
-"PO-Revision-Date: 2015-10-09 23:02+0200\n"
-"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
-"Language-Team: Basque <Basque <librezale@librezale.org>>\n"
+"POT-Creation-Date: 2016-03-23 15:40+0100\n"
+"PO-Revision-Date: 2016-03-23 16:01+0100\n"
+"Last-Translator: dooteo <dooteo@zundan.com>\n"
+"Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:77
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
+#: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:452
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOMEren IRCaren (Interneteko berriketa-zerbitzua) bezero bat"
 
@@ -57,10 +57,6 @@ msgstr ""
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;internet;zerbitzua;berriketa;"
 
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Erakutsi konexioak"
-
 #: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
 msgstr "Gordetako kanalen zerrenda"
@@ -85,122 +81,200 @@ msgstr "Leihoa maximizatuta"
 msgid "Window maximized state"
 msgstr "Leiho maximizatuaren egoera"
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Azken kanal aktiboa"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Azken (hautatutako) kanal aktiboa"
+
 #: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Helbidea"
+msgid "_Server Address"
+msgstr "_Zerbitzariaren helbidea"
 
 #: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "_Azalpena"
+msgid "Net_work Name"
+msgstr "_Sarearen izena"
 
 #: ../data/resources/connection-details.ui.h:3
-msgid "_Nickname"
-msgstr "_Goitizena"
-
-#: ../data/resources/connection-details.ui.h:4
-msgid "_Real Name"
-msgstr "_Benetako izena"
-
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "aukerakoa"
 
-#. translators: This will be used in the phrase: "Open Connections in the application menu"
-#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:113
-#: ../src/roomStack.js:123
-msgid "Connections"
-msgstr "Konexioak"
+#: ../data/resources/connection-details.ui.h:4
+msgid "Use secure c_onnection"
+msgstr "E_rabili konexio segurua"
 
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Use the + button to add a new connection."
-msgstr "Erabili + botoia konexio berria gehitzeko."
+#: ../data/resources/connection-details.ui.h:5
+msgid "_Nickname"
+msgstr "_Goitizena"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Add"
-msgstr "Gehitu"
+#: ../data/resources/connection-details.ui.h:6
+msgid "_Real Name"
+msgstr "_Benetako izena"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
-msgid "Remove"
-msgstr "Kendu"
-
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:215
-msgid "Join Chat Room"
-msgstr "Elkartu berriketa gelara"
-
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:391
 msgid "_Cancel"
 msgstr "_Utzi"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:217
-msgid "_Join"
-msgstr "_Elkartu"
+#: ../data/resources/connection-properties.ui.h:2
+msgid "_Apply"
+msgstr "_Aplikatu"
 
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Gehitu konexioa"
+#: ../data/resources/entry-area.ui.h:1
+msgid "Change nickname:"
+msgstr "Aldatu _goitizena:"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
-msgid "C_onnection"
-msgstr "_Konexioa"
+#: ../data/resources/entry-area.ui.h:2
+msgid "_Change"
+msgstr "_Aldatu"
 
-#: ../data/resources/join-room-dialog.ui.h:7
-msgid "Room _Name"
-msgstr "Gelaren _izena"
+#: ../data/resources/entry-area.ui.h:3
+msgid "Change nickname"
+msgstr "Aldatu goitizena"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Password"
-msgstr "_Pasahitza"
+#: ../data/resources/entry-area.ui.h:5
+msgid "_Paste"
+msgstr "_Itsatsi"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
+#: ../data/resources/help-overlay.ui.h:1
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Orokorra"
+
+#: ../data/resources/help-overlay.ui.h:2
+msgctxt "shortcut window"
+msgid "Join Room"
 msgstr "Elkartu gelara"
 
-#: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Bidali mezua erabiltzaile bati"
+#: ../data/resources/help-overlay.ui.h:3
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "Irten gelatik"
 
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Elkartu gelara"
+#: ../data/resources/help-overlay.ui.h:4
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "Erakutsi erabiltzaileen zerrenda"
 
-#: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Hobespenak"
-
-#: ../data/resources/menus.ui.h:3
-msgid "About"
-msgstr "Honi buruz"
-
-#: ../data/resources/menus.ui.h:4
+#: ../data/resources/help-overlay.ui.h:5
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Irten"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Mezua"
+#: ../data/resources/help-overlay.ui.h:6
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Laster-teklak"
 
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Azken aldikoak"
+#: ../data/resources/help-overlay.ui.h:7
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Nabigazioa"
 
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Izena"
+#: ../data/resources/help-overlay.ui.h:8
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "Hurrengo gela"
+
+#: ../data/resources/help-overlay.ui.h:9
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "Aurreko gela"
+
+#: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Hurrengo gela irakurri gabeko mezuekin"
+
+#: ../data/resources/help-overlay.ui.h:11
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Aurreko gela irakurri gabeko mezuekin"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "Lehenengo gela"
+
+#: ../data/resources/help-overlay.ui.h:13
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "Azken gela"
+
+#: ../data/resources/help-overlay.ui.h:14
+msgctxt "shortcut window"
+msgid "First - Ninth Room"
+msgstr "Aurrenekoa  - 9. gela"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
+msgid "Join Chat Room"
+msgstr "Elkartu berriketa gelara"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "_Elkartu"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "C_onnection"
+msgstr "_Konexioa"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Network"
+msgstr "_Gehitu sarea"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room _Name"
+msgstr "Gelaren _izena"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "_Password"
+msgstr "_Pasahitza"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Add"
+msgstr "_Gehitu"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Network"
+msgstr "Sare _pertsonalizatua"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Add rooms and networks"
+msgstr "Gehitu gelak eta sareak"
+
+#: ../data/resources/menus.ui.h:1
+msgid "Keyboard Shortcuts"
+msgstr "Laster-teklak"
+
+#: ../data/resources/menus.ui.h:2
+msgid "About"
+msgstr "Honi buruz"
+
+#: ../data/resources/menus.ui.h:3
+msgid "Quit"
+msgstr "Irten"
 
 #: ../data/resources/room-list-header.ui.h:1
-msgid "Connection Error"
-msgstr "Konexio-errorea"
+msgid "Reconnect"
+msgstr "Konektatu berriro"
+
+#: ../data/resources/room-list-header.ui.h:2
+msgid "Remove"
+msgstr "Kendu"
+
+#: ../data/resources/room-list-header.ui.h:3
+msgid "Properties"
+msgstr "Propietateak"
 
 #: ../data/resources/user-list-details.ui.h:1
 msgid "Loading details"
 msgstr "Xehetasunak kargatzen"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
 msgid "Last Activity:"
 msgstr "Azken jarduera:"
 
@@ -208,80 +282,107 @@ msgstr "Azken jarduera:"
 msgid "Message"
 msgstr "Mezua"
 
-#: ../src/application.js:372
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Huts egin du esteka irekitzean"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Agur"
 
-#: ../src/application.js:451
+#: ../src/application.js:522
+#, javascript-format
+msgid "%s removed."
+msgstr "\"%s\" kenduta."
+
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr "Iñaki Larrañaga Murgoitio <dooteo@zundan.com>"
 
-#: ../src/application.js:457
+#: ../src/application.js:585
 msgid "Learn more about Polari"
-msgstr ""
+msgstr "Ikasi gehiago Polari-ri buruz"
 
-#: ../src/chatView.js:123
+#: ../src/appNotifications.js:85
+msgid "Undo"
+msgstr "Desegin"
+
+#: ../src/chatView.js:133
 msgid "New Messages"
 msgstr "Mezu berriak"
 
-#: ../src/chatView.js:487
+#: ../src/chatView.js:642
 msgid "Open Link"
 msgstr "Ireki esteka"
 
-#: ../src/chatView.js:494
+#: ../src/chatView.js:648
 msgid "Copy Link Address"
 msgstr "Kopiatu estekaren helbidea"
 
-#: ../src/chatView.js:682
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s orain honela ezagutzen da: %s"
 
-#: ../src/chatView.js:689
+#: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s deskonektatu egin da"
 
-#: ../src/chatView.js:698
+#: ../src/chatView.js:835
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s kanporatuta %s(r)engatik"
 
-#: ../src/chatView.js:700
+#: ../src/chatView.js:837
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kanporatua izan da"
 
-#: ../src/chatView.js:707
+#: ../src/chatView.js:844
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s debekatuta %s(r)engatik"
 
-#: ../src/chatView.js:709
+#: ../src/chatView.js:846
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s debekatua izan da"
 
-#: ../src/chatView.js:715
+#: ../src/chatView.js:852
 #, javascript-format
 msgid "%s joined"
 msgstr "%s elkartu da"
 
-#: ../src/chatView.js:720
+#: ../src/chatView.js:858
 #, javascript-format
 msgid "%s left"
-msgstr "%s(e)k utzi egin du"
+msgstr "%s irten da"
+
+#: ../src/chatView.js:954
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "Erabiltzaile %d elkartu da"
+msgstr[1] "%d erabiltzaile elkartu dira"
+
+#: ../src/chatView.js:957
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "Erabiltzaile %d irten da"
+msgstr[1] "%d erabiltzaile irten dira"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:760
+#: ../src/chatView.js:1024
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:765
+#: ../src/chatView.js:1029
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Atzo, %H∶%M"
@@ -289,7 +390,7 @@ msgstr "Atzo, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:770
+#: ../src/chatView.js:1034
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -298,7 +399,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:776
+#: ../src/chatView.js:1040
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
@@ -307,21 +408,21 @@ msgstr "%B %d, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:782
+#: ../src/chatView.js:1046
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%B %d %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:787
+#: ../src/chatView.js:1051
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:792
+#: ../src/chatView.js:1056
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Atzo, %l∶%M %p"
@@ -329,7 +430,7 @@ msgstr "Atzo, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:797
+#: ../src/chatView.js:1061
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -338,7 +439,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:803
+#: ../src/chatView.js:1067
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
@@ -347,12 +448,22 @@ msgstr "%B %d, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:809
+#: ../src/chatView.js:1073
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
 
-#: ../src/connections.js:238
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Jadanik gehituta"
+
+#. Translators: %s is a connection name
+#: ../src/connections.js:417
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "'%s' - Propietateak"
+
+#: ../src/connections.js:461
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -360,21 +471,38 @@ msgstr ""
 "Polari deskonektatuta sareko errore bat dela eta. Egiaztatu helbidearen "
 "eremua zuzena dela."
 
-#: ../src/connections.js:376 ../src/roomList.js:218 ../src/roomList.js:238
-msgid "Edit Connection"
-msgstr "Editatu konexioa"
+#: ../src/entryArea.js:236
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Testuaren lerro %s itsasteko zerbitzu publikora igo?"
+msgstr[1] "Testuaren %s lerro itsasteko zerbitzu publikora igo?"
 
-#: ../src/connections.js:377
-msgid "New Connection"
-msgstr "Konexio berria"
+#: ../src/entryArea.js:240
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Testuaren lerro %s itsasteko zerbitzu publikora igotzen..."
+msgstr[1] "Testuaren %s lerro itsasteko zerbitzu publikora igotzen..."
 
-#: ../src/connections.js:393
-msgid "A_pply"
-msgstr "_Aplikatu"
+#: ../src/entryArea.js:247
+msgid "Upload image to public paste service?"
+msgstr "Irudia itsasteko zerbitzu publikora igo?"
 
-#: ../src/connections.js:393
-msgid "Cr_eate"
-msgstr "_Sortu"
+#: ../src/entryArea.js:248
+msgid "Uploading image to public paste service…"
+msgstr "Irudia itsasteko zerbitzu publikora igotzen..."
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s #%s(e)n"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Itsatsi %s(e)ndik"
 
 #. commands that would be nice to support:
 #.
@@ -413,196 +541,269 @@ msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <ekintza> - <ekintza> bidaltzen du uneko kanalera"
 
 #: ../src/ircParser.js:29
+msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
+msgstr "/MSG <goitizena> [<mezua>] - bidali mezu pribatua <goitizenari>"
+
+#: ../src/ircParser.js:30
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - uneko kanaleko erabiltzaileak zerrendatzen ditu"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <goitizena> - zure ezizena <goitizena> bezala ezartzen du"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanala>] [<zergatia>] - <kanala> uzten du, unekoa lehenetsi gisa"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:33
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <goitizena> - <goitizenarekin> berriketa pribatua irekitzen du"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:34
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<zergatia>] - uneko zerbitzaritik deskonektatzen da"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:35
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <testua> - <testua> bidaltzen du uneko gelara/kontaktuari"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <gaia> - gaia <gaia> gisa ezartzen du, edo unekoa erakusten du"
 
-#: ../src/ircParser.js:38
+#: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Komando ezezaguna - probatu /HELP komando erabilgarrien zerrenda bistaratzeko"
 
-#: ../src/ircParser.js:59
+#: ../src/ircParser.js:60
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Erabilera: %s"
 
-#: ../src/ircParser.js:97
+#: ../src/ircParser.js:98
 msgid "Known commands:"
 msgstr "Komando ezagunak:"
 
-#: ../src/ircParser.js:177
+#: ../src/ircParser.js:198
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Erabiltzaileak %s(e)n:"
 
-#: ../src/ircParser.js:261
+#: ../src/ircParser.js:283
 msgid "No topic set"
 msgstr "Ez da gairik ezarri"
 
-#: ../src/joinDialog.js:216
-msgid "Add Connection"
-msgstr "Gehitu konexioa"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Gehitu sarea"
 
-#: ../src/joinDialog.js:218
-msgid "_Save"
-msgstr "_Gorde"
-
-#: ../src/mainWindow.js:239
+#: ../src/mainWindow.js:308
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "Erabiltzaile %d"
 msgstr[1] "%d erabiltzaile"
 
-#: ../src/messageDialog.js:94
-msgid "No recent users"
-msgstr "Ez dago azken aldiko erabiltzailerik"
-
-#: ../src/pasteManager.js:89
-#, javascript-format
-msgid "Paste from %s in #%s"
-msgstr ""
-
-#: ../src/pasteManager.js:91
-#, javascript-format
-msgid "Paste from %s"
-msgstr ""
-
-#: ../src/pasteManager.js:297
-#, javascript-format
-msgid "Uploading %s"
-msgstr "'%s' eguneratzen"
-
-#: ../src/roomList.js:22
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Irten berriketa-gelatik"
 
-#: ../src/roomList.js:23
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Amaitu berriketa"
 
-#: ../src/roomList.js:196
+#: ../src/roomList.js:213
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "'%s' konexioak errore bat dauka"
+msgid "Network %s has an error"
+msgstr "'%s' sareak errore bat dauka"
 
-#: ../src/roomList.js:216
-msgid "Please check your connection details."
-msgstr "Egiaztatu konexioaren xehetasunak."
-
-#: ../src/roomList.js:237
-msgid "Could not make connection in a safe way."
-msgstr "Ezin izan da konexioa modu seguru batean sortu."
-
-#: ../src/roomList.js:245
-msgid "Authentication failed."
-msgstr "Autentifikazioak huts egin du."
-
-#: ../src/roomList.js:246 ../src/roomList.js:257 ../src/roomList.js:265
-msgid "Try again"
-msgstr "Saiatu berriro"
-
-#: ../src/roomList.js:256
-msgid "The server is busy."
-msgstr "Zerbitzaria lanpetuta dago."
-
-#: ../src/roomList.js:264
-msgid "Failed to connect for an unknown reason."
-msgstr "Konexioak huts egin du arrazoi ezezagunagatik."
-
-#: ../src/roomStack.js:111
-msgid "Begin chatting by adding a new connection."
-msgstr "Hasi berriketan konexio berri bat gehituz."
-
-#: ../src/roomStack.js:114
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: ../src/roomList.js:263
 #, javascript-format
-msgid "Open %s in the application menu."
-msgstr "Ireki '%s' aplikazioaren menuan."
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
-#: ../src/roomStack.js:117
+#: ../src/roomList.js:270
+msgid "Connection Problem"
+msgstr "Konexio-arazoa"
+
+#: ../src/roomList.js:278
+msgid "Connected"
+msgstr "Konektatuta"
+
+#: ../src/roomList.js:280
+msgid "Connecting..."
+msgstr "Konektatzen..."
+
+#: ../src/roomList.js:282
+msgid "Offline"
+msgstr "Lineaz kanpo"
+
+#: ../src/roomList.js:284
+msgid "Unknown"
+msgstr "Ezezaguna"
+
+#: ../src/roomList.js:304
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "Ezin izan da \"%s\"(r)ekin modu seguruan konektatu."
+
+#: ../src/roomList.js:307
+#, javascript-format
+msgid "%s requires a password."
+msgstr "\"%s\"(e)k pasahitza eskatzen du."
+
+#: ../src/roomList.js:313
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Ezin izan da \"%s\"(r)ekin konektatu. Zerbitzaria lanpetuta dago."
+
+#: ../src/roomList.js:316
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Ezin izan da \"%s\"(r)ekin konektatu."
+
+#: ../src/roomStack.js:97
 msgid "Join a room using the + button."
 msgstr "Elkartu gelara + botoia erabiliz."
 
-#: ../src/roomStack.js:121
-msgid "Your connections are disabled."
-msgstr "Zure konexioak desgaituta daude."
-
-#: ../src/roomStack.js:124
-#, javascript-format
-msgid "Enable them by opening %s in the application menu."
-msgstr "Gaitu itzazu '%s' irekiz aplikazioaren menuan."
-
-#: ../src/userList.js:178
+#: ../src/userList.js:174
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Duela segundo %d"
 msgstr[1] "Duela %d segundo"
 
-#: ../src/userList.js:183
+#: ../src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Duela minutu %d"
 msgstr[1] "Duela %d minutu"
 
-#: ../src/userList.js:188
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "Duela ordu %d"
 msgstr[1] "Duela %d ordu"
 
-#: ../src/userList.js:193
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Duela egun %d"
 msgstr[1] "Duela %d egun"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Duela aste %d"
 msgstr[1] "Duela %d aste"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Duela hilabete %d"
 msgstr[1] "Duela %d hilabete"
 
-#: ../src/userList.js:540
+#: ../src/userList.js:383
+msgid "No results"
+msgstr "Emaitzarik ez"
+
+#: ../src/userList.js:556
 msgid "All"
 msgstr "Denak"
+
+#: ../src/utils.js:121
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Polari zerbitzariaren pasahitza %s(r)entzako"
+
+#~ msgid "Show connections"
+#~ msgstr "Erakutsi konexioak"
+
+#~ msgid "_Description"
+#~ msgstr "_Azalpena"
+
+#~ msgid "Use the + button to add a new connection."
+#~ msgstr "Erabili + botoia konexio berria gehitzeko."
+
+#~ msgid "Add"
+#~ msgstr "Gehitu"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Gehitu konexioa"
+
+#~ msgid "Message a User"
+#~ msgstr "Bidali mezua erabiltzaile bati"
+
+#~ msgid "Join room"
+#~ msgstr "Elkartu gelara"
+
+#~ msgid "Preferences"
+#~ msgstr "Hobespenak"
+
+#~ msgid "_Message"
+#~ msgstr "_Mezua"
+
+#~ msgid "_Recent"
+#~ msgstr "_Azken aldikoak"
+
+#~ msgid "_Name"
+#~ msgstr "_Izena"
+
+#~ msgid "Edit Connection"
+#~ msgstr "Editatu konexioa"
+
+#~ msgid "Cr_eate"
+#~ msgstr "_Sortu"
+
+#~ msgid "Add Connection"
+#~ msgstr "Gehitu konexioa"
+
+#~ msgid "_Save"
+#~ msgstr "_Gorde"
+
+#~ msgid "No recent users"
+#~ msgstr "Ez dago azken aldiko erabiltzailerik"
+
+#~ msgid "Uploading %s"
+#~ msgstr "'%s' eguneratzen"
+
+#~ msgid "Please check your connection details."
+#~ msgstr "Egiaztatu konexioaren xehetasunak."
+
+#~ msgid "Authentication failed."
+#~ msgstr "Autentifikazioak huts egin du."
+
+#~ msgid "Try again"
+#~ msgstr "Saiatu berriro"
+
+#~ msgid "The server is busy."
+#~ msgstr "Zerbitzaria lanpetuta dago."
+
+#~ msgid "Failed to connect for an unknown reason."
+#~ msgstr "Konexioak huts egin du arrazoi ezezagunagatik."
+
+#~ msgid "Begin chatting by adding a new connection."
+#~ msgstr "Hasi berriketan konexio berri bat gehituz."
+
+#~ msgid "Open %s in the application menu."
+#~ msgstr "Ireki '%s' aplikazioaren menuan."
+
+#~ msgid "Your connections are disabled."
+#~ msgstr "Zure konexioak desgaituta daude."
+
+#~ msgid "Enable them by opening %s in the application menu."
+#~ msgstr "Gaitu itzazu '%s' irekiz aplikazioaren menuan."
 
 #~ msgid "Connecting to %s"
 #~ msgstr "%s(r)ekin konektatzen"
