@@ -4,6 +4,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
+const GObject = imports.gi.GObject;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Connections = imports.connections;
@@ -24,11 +25,13 @@ const JoinDialog = new Lang.Class({
                        'mainStack',
                        'connectionCombo',
                        'connectionButton',
-                       'nameEntry',
                        'nameCompletion',
                        'connectionStack',
                        'filterEntry',
                        'connectionsList',
+                       'serverRoomList',
+                       'nameEntry',
+                       'spinner',
                        'details',
                        'addButton',
                        'customToggle'],
@@ -112,6 +115,10 @@ const JoinDialog = new Lang.Class({
 
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._updateCanJoin));
+        this._serverRoomList.connect('notify::can-join',
+                                     Lang.bind(this, this._updateCanJoin));
+        this._serverRoomList.bind_property('loading', this._spinner, 'active',
+                                            GObject.BindingFlags.SYNC_CREATE);
     },
 
     _setupConnectionPage: function() {
@@ -191,6 +198,8 @@ const JoinDialog = new Lang.Class({
                     }
                 }
             }));
+
+       this._serverRoomList.setAccount(account);
     },
 
     _onAccountCreated: function(w, account) {
@@ -203,16 +212,21 @@ const JoinDialog = new Lang.Class({
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
 
-        let room = this._nameEntry.get_text();
-        if (room[0] != '#')
-            room = '#' + room;
+        let toJoinRooms = this._serverRoomList.selectedRooms;
+        if (this._nameEntry.get_text_length() > 0)
+            toJoinRooms.push(this._nameEntry.get_text());
 
-        let app = Gio.Application.get_default();
-        let action = app.lookup_action('join-room');
-        action.activate(GLib.Variant.new('(ssu)',
-                                         [ account.get_object_path(),
-                                           room,
-                                           Utils.getTpEventTime() ]));
+        toJoinRooms.forEach(function(room) {
+            if (room[0] != '#')
+                room = '#' + room;
+
+            let app = Gio.Application.get_default();
+            let action = app.lookup_action('join-room');
+            action.activate(GLib.Variant.new('(ssu)',
+                                             [ account.get_object_path(),
+                                             room,
+                                             Utils.getTpEventTime() ]));
+        });
     },
 
     _updateConnectionCombo: function() {
@@ -237,9 +251,11 @@ const JoinDialog = new Lang.Class({
 
     _updateCanJoin: function() {
         let sensitive = false;
+
         if (this._page == DialogPage.MAIN)
             sensitive = this._connectionCombo.get_active() > -1  &&
-                        this._nameEntry.get_text_length() > 0;
+                        (this._nameEntry.get_text_length() > 0 ||
+                        this._serverRoomList.can_join);
 
         this._joinButton.sensitive = sensitive;
         this.set_default_response(sensitive ? Gtk.ResponseType.OK
