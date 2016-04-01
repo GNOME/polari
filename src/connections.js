@@ -294,7 +294,7 @@ const ConnectionDetails = new Lang.Class({
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
 
-        if (port != 6667)
+        if (port != defaultPort)
             this._savedServer += ':%d'.format(port);
 
         if (this._savedServer != account.display_name)
