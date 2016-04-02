@@ -84,6 +84,13 @@ const NetworksManager = new Lang.Class({
         };
     },
 
+    getNetworkServers: function(id) {
+        let network = this._lookupNetwork(id);
+        let sslServers = network.servers.filter(s => s.ssl);
+        return sslServers.length > 0 ? sslServers
+                                     : network.servers;
+    },
+
     getNetworkMatchTerms: function(id) {
         let network = this._lookupNetwork(id);
         let servers = network.servers.map(function(s) {

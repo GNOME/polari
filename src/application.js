@@ -347,10 +347,22 @@ const Application = new Lang.Class({
         account.update_parameters_vardict_async(asv, [], callback);
     },
 
+    _updateAccountServer: function(account, server, callback) {
+        let sv = { server: GLib.Variant.new('s', server.address),
+                   port: GLib.Variant.new('u', server.port) };
+        let asv = GLib.Variant.new('a{sv}', sv);
+        account.update_parameters_vardict_async(asv, [], callback);
+    },
+
     _requestChannel: function(accountPath, targetType, targetId, time, callback) {
         // have this in AccountMonitor?
         let factory = Tp.AccountManager.dup().get_factory();
         let account = factory.ensure_account(accountPath, []);
+        let alternateServers = [];
+
+        // If predefined network, get alternate servers list
+        if (this._networksManager.getAccountIsPredefined(account))
+            alternateServers = this._networksManager.getNetworkServers(account.service);
 
         if (!account.enabled) {
             // if we are requesting a channel for a disabled account, we
@@ -375,7 +387,10 @@ const Application = new Lang.Class({
           time: time,
           retry: 0,
           originalNick: account.nickname,
-          callback: callback };
+          callback: callback,
+          alternateServers: alternateServers,
+          currentServerId: 0
+        };
 
         this._pendingRequests[roomId] = requestData;
 
@@ -394,7 +409,7 @@ const Application = new Lang.Class({
                                            this._onEnsureChannel, requestData));
     },
 
-    _retryRequest: function(requestData) {
+    _retryNickRequest: function(requestData) {
         let account = requestData.account;
 
         // Try again with a different nick
@@ -402,6 +417,17 @@ const Application = new Lang.Class({
         let oldNick = params['account'].deep_unpack();
         let nick = oldNick + '_';
         this._updateAccountName(account, nick, Lang.bind(this,
+            function() {
+                this._ensureChannel(requestData);
+            }));
+    },
+
+    _retryServerRequest: function(requestData) {
+        let account = requestData.account;
+
+        // Try again with a alternate server
+        let server = requestData.alternateServers[requestData.currentServerId];
+        this._updateAccountServer(account, server, Lang.bind(this,
             function() {
                 this._ensureChannel(requestData);
             }));
@@ -422,14 +448,20 @@ const Application = new Lang.Class({
                 return;
             if (error == ConnectionError.ALREADY_CONNECTED &&
                 requestData.retry++ < MAX_RETRIES) {
-                    this._retryRequest(requestData);
+                    this._retryNickRequest(requestData);
                     return;
             }
 
-            if (error && error != ConnectionError.CANCELLED)
-                Utils.debug('Account %s disconnected with error %s'.format(
-                            account.get_path_suffix(),
-                            error.replace(Tp.ERROR_PREFIX + '.', '')));
+            if (error && error != ConnectionError.CANCELLED) {
+                if (++requestData.currentServerId < requestData.alternateServers.length) {
+                    this._retryServerRequest(requestData);
+                    return;
+                } else {
+                    Utils.debug('Account %s disconnected with error %s'.format(
+                                account.get_path_suffix(),
+                                error.replace(Tp.ERROR_PREFIX + '.', '')));
+                }
+            }
         } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
             // interrupted by user request, don't log
         } catch (e) {
