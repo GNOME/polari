@@ -20,7 +20,11 @@ const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+
 
 const ConnectionError = {
     CANCELLED: Tp.error_get_dbus_name(Tp.Error.CANCELLED),
-    ALREADY_CONNECTED: Tp.error_get_dbus_name(Tp.Error.ALREADY_CONNECTED)
+    ALREADY_CONNECTED: Tp.error_get_dbus_name(Tp.Error.ALREADY_CONNECTED),
+    DISCONNECTED: Tp.error_get_dbus_name(Tp.Error.DISCONNECTED),
+    NETWORK_ERROR: Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR),
+    NOT_AVAILABLE: Tp.error_get_dbus_name(Tp.Error.NOT_AVAILABLE),
+    SERVICE_BUSY: Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY)
 };
 
 const Application = new Lang.Class({
@@ -347,6 +351,13 @@ const Application = new Lang.Class({
         account.update_parameters_vardict_async(asv, [], callback);
     },
 
+    _updateAccountServer: function(account, server, callback) {
+        let sv = { server: GLib.Variant.new('s', server.address),
+                   port: GLib.Variant.new('u', server.port) };
+        let asv = GLib.Variant.new('a{sv}', sv);
+        account.update_parameters_vardict_async(asv, [], callback);
+    },
+
     _requestChannel: function(accountPath, targetType, targetId, time, callback) {
         // have this in AccountMonitor?
         let factory = Tp.AccountManager.dup().get_factory();
@@ -366,6 +377,14 @@ const Application = new Lang.Class({
 
         let roomId = Polari.create_room_id(account,  targetId, targetType);
 
+        let params = account.dup_parameters_vardict().deep_unpack();
+        let server = params['server'].deep_unpack();
+        let accountServers = [];
+
+        // If predefined network, get alternate servers list
+        if (this._networksManager.getAccountIsPredefined(account))
+            accountServers = this._networksManager.getNetworkServers(account.service);
+
         let requestData = {
           account: account,
           targetHandleType: targetType,
@@ -375,7 +394,9 @@ const Application = new Lang.Class({
           time: time,
           retry: 0,
           originalNick: account.nickname,
-          callback: callback };
+          callback: callback,
+          alternateServers: accountServers.filter(s => s != server)
+        };
 
         this._pendingRequests[roomId] = requestData;
 
@@ -394,7 +415,7 @@ const Application = new Lang.Class({
                                            this._onEnsureChannel, requestData));
     },
 
-    _retryRequest: function(requestData) {
+    _retryNickRequest: function(requestData) {
         let account = requestData.account;
 
         // Try again with a different nick
@@ -407,6 +428,17 @@ const Application = new Lang.Class({
             }));
     },
 
+    _retryServerRequest: function(requestData) {
+        let account = requestData.account;
+
+        // Try again with a alternate server
+        let server = requestData.alternateServers.shift();
+        this._updateAccountServer(account, server, Lang.bind(this,
+            function() {
+                this._ensureChannel(requestData);
+            }));
+    },
+
     _onEnsureChannel: function(req, res, requestData) {
         let account = req.account;
         let channel = null;
@@ -414,22 +446,35 @@ const Application = new Lang.Class({
         try {
             channel = req.ensure_and_observe_channel_finish(res);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
-            let error = account.connection_error;
             // If we receive a disconnect error and the network is unavailable,
             // then the error is not specific to polari and polari will
             // just be in offline state.
             if (!this._networkMonitor.network_available)
                 return;
-            if (error == ConnectionError.ALREADY_CONNECTED &&
-                requestData.retry++ < MAX_RETRIES) {
-                    this._retryRequest(requestData);
-                    return;
-            }
 
-            if (error && error != ConnectionError.CANCELLED)
-                Utils.debug('Account %s disconnected with error %s'.format(
-                            account.get_path_suffix(),
-                            error.replace(Tp.ERROR_PREFIX + '.', '')));
+            let error = account.connection_error;
+            switch (error) {
+                case ConnectionError.CANCELLED:
+                    break; // disconnected due to user request, ignore
+                case ConnectionError.ALREADY_CONNECTED:
+                    if (requestData.retry++ < MAX_RETRIES) {
+                        this._retryNickRequest(requestData);
+                        return;
+                    }
+                    break;
+                case ConnectionError.NETWORK_ERROR:
+                case ConnectionError.NOT_AVAILABLE:
+                case ConnectionError.DISCONNECTED:
+                case ConnectionError.SERVICE_BUSY:
+                    if (requestData.alternateServers.length > 0) {
+                        this._retryServerRequest(requestData);
+                        return;
+                    }
+                default:
+                    Utils.debug('Account %s disconnected with error %s'.format(
+                                account.get_path_suffix(),
+                                error.replace(Tp.ERROR_PREFIX + '.', '')));
+            }
         } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
             // interrupted by user request, don't log
         } catch (e) {

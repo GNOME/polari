@@ -82,15 +82,20 @@ const NetworksManager = new Lang.Class({
         if (!network.servers || !network.servers.length)
             throw new Error('No servers for network ' + id);
 
-        let sslServers = network.servers.filter(s => s.ssl);
-        let server = sslServers.length > 0 ? sslServers[0]
-                                           : network.servers[0];
+        let server = this.getNetworkServers(id)[0];
         return {
             'account': new GLib.Variant('s', GLib.get_user_name()),
             'server': new GLib.Variant('s', server.address),
             'port': new GLib.Variant('u', server.port),
             'use-ssl': new GLib.Variant('b', server.ssl)
         };
+    },
+
+    getNetworkServers: function(id) {
+        let network = this._lookupNetwork(id);
+        let sslServers = network.servers.filter(s => s.ssl);
+        return sslServers.length > 0 ? sslServers
+                                     : network.servers.slice();
     },
 
     getNetworkMatchTerms: function(id) {
