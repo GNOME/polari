@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-06 14:18+0000\n"
-"PO-Revision-Date: 2016-03-06 21:47+0100\n"
+"POT-Creation-Date: 2016-04-05 01:48+0000\n"
+"PO-Revision-Date: 2016-04-05 13:24+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -302,7 +302,7 @@ msgstr "Fabio Tomat <f.t.public@gmail.com>"
 msgid "Learn more about Polari"
 msgstr "Plui informazions su Polari"
 
-#: ../src/appNotifications.js:82
+#: ../src/appNotifications.js:85
 msgid "Undo"
 msgstr "Anule"
 
@@ -550,7 +550,7 @@ msgstr "/NAMES - liste i utents presints tal canâl atuâl"
 
 #: ../src/ircParser.js:31
 msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <sorenon> - Imposte il propri sorenon a <sorenon>"
+msgstr "/NICK <sorenon> - Al met il propri sorenon a <sorenon>"
 
 #: ../src/ircParser.js:32
 msgid ""
@@ -572,8 +572,7 @@ msgstr "/SAY <test> - Invie un <test> al canâl/contat atuâl"
 
 #: ../src/ircParser.js:36
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
-msgstr ""
-"/TOPIC <argoment> - Imposte l'argoment ad <argoment> o mostre chel atuâl"
+msgstr "/TOPIC <argoment> - Al met l'argoment a <argoment> o mostre chel atuâl"
 
 #: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
@@ -595,13 +594,13 @@ msgstr "Utents in %s:"
 
 #: ../src/ircParser.js:283
 msgid "No topic set"
-msgstr "Nissun argoment impostât"
+msgstr "Nissun argoment impuestât"
 
 #: ../src/joinDialog.js:273
 msgid "Add Network"
 msgstr "Zonte rêt"
 
-#: ../src/mainWindow.js:307
+#: ../src/mainWindow.js:308
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -616,54 +615,54 @@ msgstr "Jes de stanzie"
 msgid "End conversation"
 msgstr "Termine conversazion"
 
-#: ../src/roomList.js:213
+#: ../src/roomList.js:216
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "La rêt %s a presente un erôr"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:263
+#: ../src/roomList.js:266
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:270
+#: ../src/roomList.js:273
 msgid "Connection Problem"
 msgstr "Probleme di conession"
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:281
 msgid "Connected"
 msgstr "Conetût"
 
-#: ../src/roomList.js:280
+#: ../src/roomList.js:283
 msgid "Connecting..."
 msgstr "Daûr a coneti..."
 
-#: ../src/roomList.js:282
+#: ../src/roomList.js:285
 msgid "Offline"
 msgstr "Fûr rêt"
 
-#: ../src/roomList.js:284
+#: ../src/roomList.js:287
 msgid "Unknown"
 msgstr "No cognossût"
 
-#: ../src/roomList.js:304
+#: ../src/roomList.js:307
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Impussibil conetisi a %s in mût sigûr."
 
-#: ../src/roomList.js:307
+#: ../src/roomList.js:310
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s al à dibisugne di une password."
 
-#: ../src/roomList.js:313
+#: ../src/roomList.js:316
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Impussibil conetisi a %s. Il servidôr al è ocupât."
 
-#: ../src/roomList.js:316
+#: ../src/roomList.js:319
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Impussibil conetisi a %s."
