@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-04-05 01:48+0000\n"
-"PO-Revision-Date: 2016-04-05 13:24+0200\n"
+"POT-Creation-Date: 2016-04-07 13:58+0000\n"
+"PO-Revision-Date: 2016-04-08 01:19+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -37,7 +37,7 @@ msgid ""
 "allows you to focus on your conversations."
 msgstr ""
 "Un client IRC (Internet Relay Chat) sempliç e progjetât par integrâsi cun "
-"GNOME: une interface grafiche gratificant in estetiche che a permet di "
+"GNOME: une interface grafiche gratificant in estetiche che e permet di "
 "concentrâsi su lis propris conversazions."
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
@@ -326,7 +326,7 @@ msgstr "L'utent %s al è cognossût cumò come %s"
 #: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has disconnected"
-msgstr "L'utent %s a si è disconetût"
+msgstr "L'utent %s si è disconetût"
 
 #: ../src/chatView.js:835
 #, javascript-format
@@ -401,7 +401,7 @@ msgstr "%A, %H∶%M"
 #: ../src/chatView.js:1040
 #, no-c-format
 msgid "%B %d, %H∶%M"
-msgstr "%d %B, %H∶%M"
+msgstr "%d di %B, %H∶%M"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -410,7 +410,7 @@ msgstr "%d %B, %H∶%M"
 #: ../src/chatView.js:1046
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
-msgstr "%d %B %Y, %H∶%M"
+msgstr "%d di %B dal %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
@@ -441,7 +441,7 @@ msgstr "%A, %I∶%M %p"
 #: ../src/chatView.js:1067
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
-msgstr "%d %B, %I∶%M %p"
+msgstr "%d di %B, %I∶%M %p"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -450,7 +450,7 @@ msgstr "%d %B, %I∶%M %p"
 #: ../src/chatView.js:1073
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
-msgstr "%d %B %Y, %I∶%M %p"
+msgstr "%d di %B dal %Y, %I∶%M %p"
 
 #: ../src/connections.js:42
 msgid "Already added"
@@ -467,7 +467,7 @@ msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr ""
-"Polari a si è disconetût par vie di un erôr di rêt. Par plasê controle se il "
+"Polari si è disconetût par vie di un erôr di rêt. Par plasê controle se il "
 "cjamp direzion al è coret."
 
 #: ../src/entryArea.js:236
@@ -618,7 +618,7 @@ msgstr "Termine conversazion"
 #: ../src/roomList.js:216
 #, javascript-format
 msgid "Network %s has an error"
-msgstr "La rêt %s a presente un erôr"
+msgstr "La rêt %s e presente un erôr"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
