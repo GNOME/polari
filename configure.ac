@@ -33,7 +33,7 @@ GLIB_GSETTINGS
 PKG_CHECK_MODULES(POLARI,
                   gio-2.0 >= 2.43.4
                   gobject-introspection-1.0
-                  gtk+-3.0 >= 3.15.6
+                  gtk+-3.0 >= 3.19.12
                   telepathy-glib);
 
 AC_CHECK_FUNCS([strcasestr])
