@@ -77,6 +77,7 @@ const ConnectionsList = new Lang.Class({
         this._filterTerms = [];
         this._list.set_filter_func(Lang.bind(this, this._filterRows));
         this._list.set_header_func(Lang.bind(this, this._updateHeader));
+        this._list.set_sort_func(Lang.bind(this, this._sort));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-added', Lang.bind(this,
@@ -167,6 +168,13 @@ const ConnectionsList = new Lang.Class({
             return;
 
         this._rows.get(account.service).sensitive = sensitive;
+    },
+
+    _sort: function(row1, row2) {
+        let name1 = this._networksManager.getNetworkName(row1.id);
+        let name2 = this._networksManager.getNetworkName(row2.id);
+
+        return name1.localeCompare(name2);
     }
 });
 
