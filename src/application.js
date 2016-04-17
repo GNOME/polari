@@ -438,6 +438,7 @@ const Application = new Lang.Class({
         let channel = null;
 
         try {
+            Utils.debug("trying channel");
             channel = req.ensure_and_observe_channel_finish(res);
         } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
             let error = account.connection_error;
@@ -448,6 +449,7 @@ const Application = new Lang.Class({
                 return;
             if (error == ConnectionError.ALREADY_CONNECTED &&
                 requestData.retry++ < MAX_RETRIES) {
+                    Utils.debug(requestData.retry);
                     this._retryNickRequest(requestData);
                     return;
             }
@@ -473,6 +475,10 @@ const Application = new Lang.Class({
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
+
+        print("Here");
+        print(channel);
+
         delete this._pendingRequests[requestData.roomId];
     },
 

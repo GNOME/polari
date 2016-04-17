@@ -1,0 +1,26 @@
+From 3c70c7366b2d03094e25103090a6d541ce53763a Mon Sep 17 00:00:00 2001
+From: Kunaal Jain <kunaalus@gmail.com>
+Date: Sat, 16 Apr 2016 02:20:30 +0530
+Subject: [PATCH] configure: bump gtk+ version
+
+https://bugzilla.gnome.org/show_bug.cgi?id=765124
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index e53aab8..f1dbb0a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -33,7 +33,7 @@ GLIB_GSETTINGS
+ PKG_CHECK_MODULES(POLARI,
+                   gio-2.0 >= 2.43.4
+                   gobject-introspection-1.0
+-                  gtk+-3.0 >= 3.15.6
++                  gtk+-3.0 >= 3.19.12
+                   telepathy-glib);
+ 
+ AC_CHECK_FUNCS([strcasestr])
+-- 
+2.5.5
+
