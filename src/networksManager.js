@@ -68,6 +68,15 @@ const NetworksManager = new Lang.Class({
         return this._lookupNetwork(id).name;
     },
 
+    getNetworkIsFavorite: function(id) {
+        let network = this._lookupNetwork(id);
+
+        if (network.hasOwnProperty('favorite'))
+            return network['favorite'];
+
+        return false;
+    },
+
     getNetworkDetails: function(id) {
         let network = this._lookupNetwork(id);
         if (!network.servers || !network.servers.length)

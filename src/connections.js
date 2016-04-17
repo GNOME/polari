@@ -171,6 +171,12 @@ const ConnectionsList = new Lang.Class({
     },
 
     _sort: function(row1, row2) {
+        let isFavorite1 = this._networksManager.getNetworkIsFavorite(row1.id);
+        let isFavorite2 = this._networksManager.getNetworkIsFavorite(row2.id);
+
+        if (isFavorite1 != isFavorite2)
+            return isFavorite1 ? -1 : 1;
+
         let name1 = this._networksManager.getNetworkName(row1.id);
         let name2 = this._networksManager.getNetworkName(row2.id);
 

@@ -268,6 +268,7 @@
   {
     "name": "Freenode",
     "id": "freenode",
+    "favorite": true,
     "servers": [
       { "ssl": true, "port": 6697, "address": "chat.freenode.net" },
       { "ssl": true, "port": 7000, "address": "chat.freenode.net" },
@@ -307,6 +308,7 @@
   {
     "name": "GNOME",
     "id": "gimpnet",
+    "favorite": true,
     "servers": [
       { "ssl": false, "port": 6667, "address": "irc.gnome.org" },
       { "ssl": false, "port": 6667, "address": "irc.gimp.net" },
