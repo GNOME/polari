@@ -257,6 +257,10 @@ const ChatView = new Lang.Class({
         this.connect('state-flags-changed',
                      Lang.bind(this, this._updateToplevel));
         this.connect('scroll-event', Lang.bind(this, this._onScroll));
+        this.connect('edge-reached', (w, pos) => {
+            if (pos == Gtk.PositionType.BOTTOM)
+                this._autoscroll = true;
+        });
 
         this.vadjustment.connect('value-changed',
                                  Lang.bind(this, this._onValueChanged));
@@ -307,8 +311,7 @@ const ChatView = new Lang.Class({
         this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
                                          Lang.bind(this, this._onLogEventsReady));
 
-        let adj = this.vadjustment;
-        this._scrollBottom = adj.upper - adj.page_size;
+        this._autoscroll = true;
 
         this._app = Gio.Application.get_default();
         PasteManager.DropTargetIface.addTargets(this, this._view);
@@ -566,19 +569,19 @@ const ChatView = new Lang.Class({
     },
 
     _updateScroll: function() {
-        let adj = this.vadjustment;
-        if (adj.value == this._scrollBottom) {
-            if (this._nPending == 0) {
-                this._view.emit('move-cursor',
-                                Gtk.MovementStep.BUFFER_ENDS, 1, false);
-            } else {
-                let id = Object.keys(this._pending).sort(function(a, b) {
-                    return a - b;
-                })[0];
-                this._view.scroll_mark_onscreen(this._pending[id]);
-            }
+        if (!this._autoscroll)
+            return;
+
+        if (this._nPending == 0) {
+            this._view.emit('move-cursor',
+                            Gtk.MovementStep.BUFFER_ENDS, 1, false);
+        } else {
+            let id = Object.keys(this._pending).sort(function(a, b) {
+                return a - b;
+            })[0];
+            this._autoscroll = false;
+            this._view.scroll_mark_onscreen(this._pending[id]);
         }
-        this._scrollBottom = adj.upper - adj.page_size;
     },
 
     _onScroll: function(w, event) {
@@ -590,6 +593,8 @@ const ChatView = new Lang.Class({
         if (hasDeltas && dy >= 0)
             return Gdk.EVENT_PROPAGATE;
 
+        this._autoscroll = false;
+
         return this._fetchBacklog();
     },
 
@@ -600,6 +605,8 @@ const ChatView = new Lang.Class({
             keyval != Gdk.KEY_Page_Up &&
             keyval != Gdk.KEY_KP_Page_Up)
             return Gdk.EVENT_PROPAGATE;
+
+        this._autoscroll = false;
 
         return this._fetchBacklog();
     },
