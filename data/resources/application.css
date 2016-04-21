@@ -61,21 +61,21 @@
     padding-left: 8px;
 }
 
-.polari-room-list row.inactive,
-.polari-room-list row.inactive:backdrop {
+.polari-room-list row.inactive *,
+.polari-room-list row.inactive:backdrop * {
     color: mix(@theme_fg_color, @theme_base_color, 0.3);
 }
 
-.polari-room-list row.inactive:selected,
-.polari-room-list row.inactive:selected:backdrop {
+.polari-room-list row.inactive:selected *,
+.polari-room-list row.inactive:selected:backdrop * {
     color: mix(@theme_selected_fg_color, @theme_base_color, 0.3);
 }
 
-.polari-room-list row:backdrop {
+.polari-room-list row:backdrop * {
     color: @theme_fg_color;
 }
 
-.polari-room-list row:backdrop:selected {
+.polari-room-list row:backdrop:selected * {
     color: @theme_selected_fg_color;
 }
 
