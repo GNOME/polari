@@ -4,7 +4,8 @@ desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 desktop_in_files = $(APP_ID).desktop.in
 
-@INTLTOOL_DESKTOP_RULE@
+%.desktop: %.desktop.in Makefile
+	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 servicedir = $(datadir)/dbus-1/services
 service_DATA = $(service_in_files:.service.in=.service)

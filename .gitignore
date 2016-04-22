@@ -34,13 +34,12 @@ po/*.gmo
 po/*.header
 po/*.sed
 po/*.sin
-po/.intltool-merge-cache
 po/Makefile.in.in
 po/Makevars.template
 po/POTFILES
 po/Rules-quot
 po/polari.pot
-po/stamp-it
+po/stamp-po
 src/*.gresource
 src/config.js
 src/polari-accounts
