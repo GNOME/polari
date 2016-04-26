@@ -3,333 +3,504 @@
 # This file is distributed under the same license as the polari package.
 # tuhaihe <1132321739qq@gmail.com>, 2013.
 # Sphinx Jiang <yishanj13@gmail.com>, 2014.
+# Jeff Bai <jeffbai@aosc.xyz>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-22 18:37+0000\n"
-"PO-Revision-Date: 2014-09-23 22:48+0800\n"
-"Last-Translator: Yunqiang Su <wzssyqa@gmail.com>\n"
+"POT-Creation-Date: 2016-04-17 21:32+0000\n"
+"PO-Revision-Date: 2016-04-26 17:35+0800\n"
+"Last-Translator: Jeff Bai <jeffbai@aosc.xyz>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
+#: ../src/roomStack.js:94
+msgid "Polari"
+msgstr "Polari"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOME 的 IRC 客户端"
+
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"一款简单的网络中继聊天(IRC)客户端，与 GNOME 无缝整合；它的特性是界面简洁美"
+"一款简单的网络中继聊天（IRC）客户端，与 GNOME 无缝整合；它的特性是界面简洁美"
 "观，使您可以专注于聊天。"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message - for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"你可以使用Polari在频道里与公众交谈，也可以进行一对一的私人谈话。通知会确保你"
-"不会漏掉任何重要的消息-对于私人的谈话，它们甚至允许你不用切换回应用就可以及时"
-"的回复消息。"
-
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:447
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "GNOME 下的一款 IRC 客户端"
+"你可以使用 Polari 在聊天室里与大家交谈，也可以进行一对一的私人谈话。通知推送"
+"确保你不会漏掉任何重要的消息 — 你甚至可以不切换回 Polari 即可及时回复私人信"
+"息！"
 
 #: ../data/org.gnome.Polari.desktop.in.h:3
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;网络;聊天;聊天室;"
 
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "显示连接"
-
-#: ../data/org.gnome.polari.gschema.xml.h:1
+#: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
-msgstr "保存的频道列表"
+msgstr "保存的聊天室列表"
 
-#: ../data/org.gnome.polari.gschema.xml.h:2
+#: ../data/org.gnome.Polari.gschema.xml.h:2
 msgid "List of channels to restore on startup"
-msgstr "启动时要恢复的频道列表"
+msgstr "启动时要恢复聊天室列表"
 
-#: ../data/org.gnome.polari.gschema.xml.h:3
+#: ../data/org.gnome.Polari.gschema.xml.h:3
 msgid "Window size"
 msgstr "窗口大小"
 
-#: ../data/org.gnome.polari.gschema.xml.h:4
+#: ../data/org.gnome.Polari.gschema.xml.h:4
 msgid "Window size (width and height)."
-msgstr "窗口大小(宽和高)。"
+msgstr "窗口大小（宽和高）。"
 
-#: ../data/org.gnome.polari.gschema.xml.h:5
-msgid "Window position"
-msgstr "窗口位置"
-
-#: ../data/org.gnome.polari.gschema.xml.h:6
-msgid "Window position (x and y)."
-msgstr "窗口位置(水平和竖直)。"
-
-#: ../data/org.gnome.polari.gschema.xml.h:7
+#: ../data/org.gnome.Polari.gschema.xml.h:5
 msgid "Window maximized"
 msgstr "窗口最大化"
 
-#: ../data/org.gnome.polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window maximized state"
 msgstr "窗口最大化状态"
 
-#: ../data/resources/connection-details-dialog.ui.h:1
-#: ../src/connections.js:322
-msgid "New Connection"
-msgstr "新建连接"
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr ""
 
-#: ../data/resources/connection-details-dialog.ui.h:2
-msgid "_Address"
-msgstr "地址(_A)"
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr ""
 
-#: ../data/resources/connection-details-dialog.ui.h:3
-msgid "_Description"
-msgstr "描述(_D)"
+#: ../data/resources/connection-details.ui.h:1
+msgid "_Server Address"
+msgstr "服务器地址(_S)"
 
-#: ../data/resources/connection-details-dialog.ui.h:4
-msgid "_Nickname"
-msgstr "昵称(_N)"
+#: ../data/resources/connection-details.ui.h:2
+msgid "Net_work Name"
+msgstr "网络名称(_W)"
 
-#: ../data/resources/connection-details-dialog.ui.h:5
-msgid "_Real Name"
-msgstr "真名(_R)"
-
-#: ../data/resources/connection-details-dialog.ui.h:6
-#: ../data/resources/join-room-dialog.ui.h:4
+#: ../data/resources/connection-details.ui.h:3
+#: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "可选"
 
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
-msgid "Connections"
-msgstr "连接"
+#: ../data/resources/connection-details.ui.h:4
+msgid "Use secure c_onnection"
+msgstr "使用安全连接(_O)"
 
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Add"
-msgstr "添加"
+#: ../data/resources/connection-details.ui.h:5
+msgid "_Nickname"
+msgstr "昵称(_N)"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Remove"
-msgstr "移除"
+#: ../data/resources/connection-details.ui.h:6
+msgid "_Real Name"
+msgstr "真名(_R)"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
-msgid "Join Chat Room"
-msgstr "加入聊天室"
-
+#: ../data/resources/connection-properties.ui.h:1
+#: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:333
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
-msgid "_Join"
-msgstr "加入(_J)"
+#: ../data/resources/connection-properties.ui.h:2
+msgid "_Apply"
+msgstr "应用(_A)"
 
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "添加连接(_A)"
+#: ../data/resources/entry-area.ui.h:1
+msgid "Change nickname:"
+msgstr "更改昵称："
 
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
-msgid "C_onnection"
-msgstr "连接(_O)"
+#: ../data/resources/entry-area.ui.h:2
+msgid "_Change"
+msgstr "更改(_C)"
 
-#: ../data/resources/join-room-dialog.ui.h:7
-msgid "Room _Name"
-msgstr "聊天室名称(_N)"
+#: ../data/resources/entry-area.ui.h:3
+msgid "Change nickname"
+msgstr "更改昵称"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Password"
-msgstr "密码(_P)"
+#: ../data/resources/entry-area.ui.h:5
+msgid "_Paste"
+msgstr "粘贴(_P)"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
+#: ../data/resources/help-overlay.ui.h:1
+msgctxt "shortcut window"
+msgid "General"
+msgstr "常规"
+
+#: ../data/resources/help-overlay.ui.h:2
+msgctxt "shortcut window"
+msgid "Join Room"
 msgstr "加入聊天室"
 
-#: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "给用户发送消息"
+#: ../data/resources/help-overlay.ui.h:3
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "离开聊天室"
 
-#: ../data/resources/main-window.ui.h:4
-msgid "_Leave"
-msgstr "离开(_L)"
+#: ../data/resources/help-overlay.ui.h:4
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "显示用户列表"
 
-#: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "首选项"
-
-#: ../data/resources/menus.ui.h:3
-msgid "About"
-msgstr "关于"
-
-#: ../data/resources/menus.ui.h:4
+#: ../data/resources/help-overlay.ui.h:5
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "消息(_M)"
+#: ../data/resources/help-overlay.ui.h:6
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
 
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "最近联系(_R)"
+#: ../data/resources/help-overlay.ui.h:7
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "导航"
 
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "名称(_N)"
+#: ../data/resources/help-overlay.ui.h:8
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "下一个聊天室"
 
-#: ../src/application.js:389
+#: ../data/resources/help-overlay.ui.h:9
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "上一个聊天室"
+
+#: ../data/resources/help-overlay.ui.h:10
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "下一个有未读消息的聊天室"
+
+#: ../data/resources/help-overlay.ui.h:11
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "上一个有未读消息的聊天室"
+
+#: ../data/resources/help-overlay.ui.h:12
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "第一个聊天室"
+
+#: ../data/resources/help-overlay.ui.h:13
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "最后一个聊天室"
+
+#: ../data/resources/help-overlay.ui.h:14
+msgctxt "shortcut window"
+msgid "First - Ninth Room"
+msgstr "前九个聊天室"
+
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
+msgid "Join Chat Room"
+msgstr "加入聊天室"
+
+#: ../data/resources/join-room-dialog.ui.h:3
+msgid "_Join"
+msgstr "加入(_J)"
+
+#: ../data/resources/join-room-dialog.ui.h:4
+msgid "C_onnection"
+msgstr "连接(_O)"
+
+#: ../data/resources/join-room-dialog.ui.h:5
+msgid "_Add Network"
+msgstr "添加网络(_A)"
+
+#: ../data/resources/join-room-dialog.ui.h:6
+msgid "Room _Name"
+msgstr "聊天室名称(_N)"
+
+#: ../data/resources/join-room-dialog.ui.h:7
+msgid "_Password"
+msgstr "密码(_P)"
+
+#: ../data/resources/join-room-dialog.ui.h:9
+msgid "_Add"
+msgstr "添加(_A)"
+
+#: ../data/resources/join-room-dialog.ui.h:10
+msgid "_Custom Network"
+msgstr "自定义网络(_C)"
+
+#: ../data/resources/main-window.ui.h:2
+msgid "Add rooms and networks"
+msgstr "添加聊天室和网络"
+
+#: ../data/resources/menus.ui.h:1
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
+
+#: ../data/resources/menus.ui.h:2
+msgid "About"
+msgstr "关于"
+
+#: ../data/resources/menus.ui.h:3
+msgid "Quit"
+msgstr "退出"
+
+#: ../data/resources/room-list-header.ui.h:1
+msgid "Reconnect"
+msgstr "重新连接"
+
+#: ../data/resources/room-list-header.ui.h:2
+msgid "Remove"
+msgstr "移除"
+
+#: ../data/resources/room-list-header.ui.h:3
+msgid "Properties"
+msgstr "属性"
+
+#: ../data/resources/user-list-details.ui.h:1
+msgid "Loading details"
+msgstr "正在加载详情"
+
+#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
+msgid "Last Activity:"
+msgstr "最近活动："
+
+#: ../data/resources/user-list-details.ui.h:3
+msgid "Message"
+msgstr "消息"
+
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "无法打开链接"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "再见"
 
-#: ../src/application.js:446
-msgid "translator-credits"
-msgstr "tuhaihe <1132321739qq@gmail.com>, 2013"
-
-#: ../src/appNotifications.js:104
+#: ../src/application.js:522
 #, javascript-format
-msgid "Connecting to %s"
-msgstr "连接到 %s"
+msgid "%s removed."
+msgstr "%s 已移除。"
 
-#: ../src/chatView.js:403
+#: ../src/application.js:579
+msgid "translator-credits"
+msgstr ""
+"tuhaihe <1132321739qq@gmail.com>, 2013\n"
+"Sphinx Jiang <yishanj13@gmail.com>, 2014.\n"
+"Jeff Bai <jeffbai@aosc.xyz>, 2016"
+
+#: ../src/application.js:585
+msgid "Learn more about Polari"
+msgstr "了解更多关于 Polari 的详情"
+
+#: ../src/appNotifications.js:85
+msgid "Undo"
+msgstr "撤销"
+
+#: ../src/chatView.js:133
+msgid "New Messages"
+msgstr "新消息"
+
+#: ../src/chatView.js:642
 msgid "Open Link"
 msgstr "打开链接"
 
-#: ../src/chatView.js:410
+#: ../src/chatView.js:648
 msgid "Copy Link Address"
 msgstr "复制链接地址"
 
-#: ../src/chatView.js:543
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s is now known as %s"
-msgstr "%s 现在改名为 %s"
+msgstr "%s 现在已改名为 %s"
 
-#: ../src/chatView.js:548
+#: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s 已断开连接"
 
-#: ../src/chatView.js:556
+#: ../src/chatView.js:835
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s 已被 %s 踢出"
 
-#: ../src/chatView.js:558
+#: ../src/chatView.js:837
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s 已被踢出"
 
-#: ../src/chatView.js:564
+#: ../src/chatView.js:844
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s 已被 %s 禁言"
 
-#: ../src/chatView.js:566
+#: ../src/chatView.js:846
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s 已被禁言"
 
-#: ../src/chatView.js:571
+#: ../src/chatView.js:852
 #, javascript-format
 msgid "%s joined"
 msgstr "%s 已加入"
 
-#: ../src/chatView.js:575
+#: ../src/chatView.js:858
 #, javascript-format
 msgid "%s left"
 msgstr "%s 已离开"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:614
+#: ../src/chatView.js:954
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d 个用户已加入"
+
+#: ../src/chatView.js:957
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d 个用户已离开"
+
+#. today
+#. Translators: Time in 24h format
+#: ../src/chatView.js:1024
 msgid "%H∶%M"
-msgstr "%H∶%M"
+msgstr "%H:%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:619
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: ../src/chatView.js:1029
+#, no-c-format
 msgid "Yesterday, %H∶%M"
-msgstr "昨天，%H∶%M"
+msgstr "昨天，%H:%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:624
+#. string in 24h format. i.e. "Monday, 14:30"
+#: ../src/chatView.js:1034
+#, no-c-format
 msgid "%A, %H∶%M"
-msgstr "%A，%H∶%M"
+msgstr "%A，%H:%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:630
+#. i.e. "May 25, 14:30"
+#: ../src/chatView.js:1040
+#, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%m月%d日，%H:%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:636
+#. i.e. "May 25 2012, 14:30"
+#: ../src/chatView.js:1046
+#, no-c-format
 msgid "%B %d %Y, %H∶%M"
-msgstr "%Y年%m月%d日，%H:%M"
+msgstr "%Y 年 %m 月 %d 日，%H:%M"
 
-#. Translators: Time in 12h format */
-#: ../src/chatView.js:641
+#. today
+#. Translators: Time in 12h format
+#: ../src/chatView.js:1051
 msgid "%l∶%M %p"
-msgstr "%p %l∶%M"
+msgstr "%p %l:%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:646
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: ../src/chatView.js:1056
+#, no-c-format
 msgid "Yesterday, %l∶%M %p"
-msgstr "昨天%p, %l∶%M"
+msgstr "昨天%p %l:%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:651
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: ../src/chatView.js:1061
+#, no-c-format
 msgid "%A, %l∶%M %p"
-msgstr "%A%p, %l∶%M"
+msgstr "%A%p %l:%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:657
+#. i.e. "May 25, 2:30 pm"
+#: ../src/chatView.js:1067
+#, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%m月%d日，%p %l:%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:663
+#. i.e. "May 25 2012, 2:30 pm"
+#: ../src/chatView.js:1073
+#, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y年%m月%d日，%p %l:%M"
 
-#: ../src/connections.js:321
-msgid "Edit Connection"
-msgstr "编辑连接"
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "已经加入"
 
-#: ../src/connections.js:335
-msgid "A_pply"
-msgstr "应用(_P)"
+#. Translators: %s is a connection name
+#: ../src/connections.js:431
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "“%s”属性"
 
-#: ../src/connections.js:335
-msgid "Cr_eate"
-msgstr "创建(_E)"
+#: ../src/connections.js:475
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr "Polari 因网络错误断开了连接。请检查是否正确填入了地址。"
 
-#. commands that would be nice to support: */
+#: ../src/entryArea.js:236
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "要将 %s 行文本上传到公共剪贴板服务吗？"
+
+#: ../src/entryArea.js:240
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "正在将 %s 行文本上传到公共剪贴板服务…"
+
+#: ../src/entryArea.js:247
+msgid "Upload image to public paste service?"
+msgstr "要将图像上传到公共剪贴板服务吗？"
+
+#: ../src/entryArea.js:248
+msgid "Uploading image to public paste service…"
+msgstr "正在将图像上传到公共剪贴板服务…"
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "用户 %s 在聊天室 #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "从 %s 粘贴"
+
+#. commands that would be nice to support:
 #.
 #. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
 #. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
@@ -337,159 +508,309 @@ msgstr "创建(_E)"
 #. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
-#. */
-#: ../src/ircParser.js:26
+#.
+#: ../src/ircParser.js:24
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
-msgstr "/HELP [<命令>] -显示<命令>的帮助，或是一串可用的命令。"
+msgstr "/HELP [<命令>] - 显示 <命令> 的帮助，或是一系列可用的命令。"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:25
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
-msgstr "/INVITE <昵称> [<【频道>] -邀请<昵称>到 <频道>，或是当前的频道。"
+msgstr "/INVITE <昵称> [<聊天室>] - 邀请 <昵称> 到 <聊天室> 或当前的聊天室。"
+
+#: ../src/ircParser.js:26
+msgid "/JOIN <channel> - joins <channel>"
+msgstr "/JOIN <聊天室> - 加入 <聊天室>"
+
+#: ../src/ircParser.js:27
+msgid "/KICK <nick> - kicks <nick> from current channel"
+msgstr "/KICK <昵称> - 将 <昵称> 从当前聊天室踢出"
 
 #: ../src/ircParser.js:28
-msgid "/JOIN <channel> - joins <channel>"
-msgstr "/JOIN <频道> -加入<频道>"
+msgid "/ME <action> - sends <action> to the current channel"
+msgstr "/ME <动作> - 发送 <动作> 到当前的聊天室"
 
 #: ../src/ircParser.js:29
-msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr "/KICK <昵称> -把<昵称>从当前频道踢出"
+msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
+msgstr "/MSG <昵称> [<消息>] - 向 <昵称> 发送一条私人消息"
 
 #: ../src/ircParser.js:30
-msgid "/ME <action> - sends <action> to the current channel"
-msgstr "/ME <动作> -发送<动作>到当前的频道"
+msgid "/NAMES - lists users on the current channel"
+msgstr "/NAMES - 列出当前聊天室的用户"
 
 #: ../src/ircParser.js:31
-msgid "/NAMES - lists users on the current channel"
-msgstr "/NAMES -列出当前频道的用户"
+msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgstr "/NICK <昵称> - 将你的昵称设为 <昵称>"
 
 #: ../src/ircParser.js:32
-msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <昵称> -设置你的昵称到<昵称>"
-
-#: ../src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
-msgstr "/PART [<频道>] [<原因>] -离开<频道>, 默认到当前的。"
+msgstr "/PART [<聊天室>] [<原因>] - 离开 <聊天室>，默认为当前聊天室"
+
+#: ../src/ircParser.js:33
+msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgstr "/QUERY <昵称> - 开启一个和 <昵称> 的私人对话"
 
 #: ../src/ircParser.js:34
-msgid "/QUERY <nick> - opens a private conversation with <nick>"
-msgstr "/QUERY <昵称> -打开一个和<昵称>私人对话"
+msgid "/QUIT [<reason>] - disconnects from the current server"
+msgstr "/QUIT [<原因>] - 从当前服务器断开连接"
 
 #: ../src/ircParser.js:35
-msgid "/QUIT [<reason>] - disconnects from the current server"
-msgstr "/QUIT [<原因>] -与当前服务器断开 "
+msgid "/SAY <text> - sends <text> to the current room/contact"
+msgstr "/SAY <文本> - 发送 <文本> 到当前的聊天室/联系人。"
 
 #: ../src/ircParser.js:36
-msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr "/SAY <文本> - 发送<文本>到当前的房间/联系人。"
-
-#: ../src/ircParser.js:37
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
-msgstr "/TOPIC <话题> - 设置话题到 <话题>, 或是显示当前的话题。"
+msgstr "/TOPIC <话题> - 设置话题到 <话题> 或显示当前的话题。"
 
-#: ../src/ircParser.js:40
+#: ../src/ircParser.js:39
 msgid "Unknown command - try /HELP for a list of available commands"
-msgstr "未知的命令 - 尝试使用 /HELP 列出可用的命令"
+msgstr "未知命令 - 使用 /HELP 列出可用的命令"
 
-#: ../src/ircParser.js:61
+#: ../src/ircParser.js:60
 #, javascript-format
 msgid "Usage: %s"
 msgstr "用法: %s"
 
-#: ../src/ircParser.js:96
+#: ../src/ircParser.js:98
 msgid "Known commands:"
-msgstr "已知的命令："
+msgstr "已知命令："
 
-#: ../src/ircParser.js:173
+#: ../src/ircParser.js:198
 #, javascript-format
 msgid "Users on %s:"
-msgstr "%s 上的用户"
+msgstr "%s 上的用户："
 
-#: ../src/ircParser.js:254
+#: ../src/ircParser.js:283
 msgid "No topic set"
 msgstr "未设置话题"
 
-#: ../src/joinDialog.js:219
-msgid "Add Connection"
-msgstr "添加连接"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "添加网络"
 
-#: ../src/joinDialog.js:221
-msgid "_Save"
-msgstr "保存(_S)"
+#: ../src/mainWindow.js:308
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d 个用户"
 
-#: ../src/messageDialog.js:92
-msgid "No recent users"
-msgstr "无最近用户"
+#: ../src/roomList.js:129
+msgid "Leave chatroom"
+msgstr "离开聊天室"
+
+#: ../src/roomList.js:129
+msgid "End conversation"
+msgstr "结束对话"
+
+#: ../src/roomList.js:216
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "连接 %s 存在错误"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: ../src/roomList.js:266
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: ../src/roomList.js:273
+msgid "Connection Problem"
+msgstr "连接问题"
+
+#: ../src/roomList.js:281
+msgid "Connected"
+msgstr "已连接"
+
+#: ../src/roomList.js:283
+msgid "Connecting..."
+msgstr "正在连接…"
+
+#: ../src/roomList.js:285
+msgid "Offline"
+msgstr "离线"
+
+#: ../src/roomList.js:287
+msgid "Unknown"
+msgstr "未知"
+
+#: ../src/roomList.js:307
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "无法建立到 %s 的安全连接。"
+
+#: ../src/roomList.js:310
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s 需要密码。"
+
+#: ../src/roomList.js:316
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "无法建立到 %s 的连接。服务器忙。"
+
+#: ../src/roomList.js:319
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "无法连接到 %s。"
+
+#: ../src/roomStack.js:97
+msgid "Join a room using the + button."
+msgstr "使用 + 按钮加入聊天室"
 
 #: ../src/userList.js:174
-msgid "Loading details"
-msgstr "正在加载详情"
-
-#: ../src/userList.js:183
-msgid "Message"
-msgstr "消息"
-
-#: ../src/userList.js:201
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d 秒前"
 
-#: ../src/userList.js:206
+#: ../src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d 分钟前"
 
-#: ../src/userList.js:211
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
-msgstr[0] "%d 个小时前"
+msgstr[0] "%d 小时前"
 
-#: ../src/userList.js:216
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d 天前"
 
-#: ../src/userList.js:221
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d 周前"
 
-#: ../src/userList.js:225
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d 个月前"
 
-#: ../src/userList.js:251
-msgid "Last Activity:"
-msgstr "最近活动："
+#: ../src/userList.js:383
+msgid "No results"
+msgstr "无结果"
 
-#: ../src/userList.js:464
+#: ../src/userList.js:556
 msgid "All"
 msgstr "全部"
+
+#: ../src/utils.js:121
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "%s 的 Polari 服务器密码"
+
+#~ msgid "Show connections"
+#~ msgstr "显示连接"
+
+#~ msgid "_Description"
+#~ msgstr "描述(_D)"
+
+#~ msgid "Use the + button to add a new connection."
+#~ msgstr "使用 + 按钮来添加一个新的连接。"
+
+#~ msgid "Add"
+#~ msgstr "添加"
 
 #~ msgid "Message User"
 #~ msgstr "给用户发送消息"
 
+#~ msgid "_Add Connection"
+#~ msgstr "添加连接(_A)"
+
+#~ msgid "Join a Room"
+#~ msgstr "加入聊天室"
+
+#~ msgid "Message a User"
+#~ msgstr "给用户发送消息"
+
+#~ msgid "Join room"
+#~ msgstr "加入聊天室"
+
+#~ msgid "Preferences"
+#~ msgstr "首选项"
+
+#~ msgid "_Message"
+#~ msgstr "消息(_M)"
+
+#~ msgid "_Recent"
+#~ msgstr "最近联系(_R)"
+
+#~ msgid "_Name"
+#~ msgstr "名称(_N)"
+
+#~ msgid "Edit Connection"
+#~ msgstr "编辑连接"
+
+#~ msgid "Cr_eate"
+#~ msgstr "创建(_E)"
+
+#~ msgid "Add Connection"
+#~ msgstr "添加连接"
+
+#~ msgid "_Save"
+#~ msgstr "保存(_S)"
+
+#~ msgid "No recent users"
+#~ msgstr "无最近用户"
+
+#~ msgid "Uploading %s"
+#~ msgstr "正在上传 %s"
+
+#~ msgid "Please check your connection details."
+#~ msgstr "请检查您的连接细节。"
+
+#~ msgid "Authentication failed."
+#~ msgstr "认证失败。"
+
+#~ msgid "Try again"
+#~ msgstr "重试"
+
+#~ msgid "The server is busy."
+#~ msgstr "服务器繁忙。"
+
+#~ msgid "Failed to connect for an unknown reason."
+#~ msgstr "因为未知的原因连接失败。"
+
+#~ msgid "Begin chatting by adding a new connection."
+#~ msgstr "添加新连接来开始聊天"
+
+#~ msgid "Open %s in the application menu."
+#~ msgstr "在应用菜单打开 %s"
+
+#~ msgid "Your connections are disabled."
+#~ msgstr "您的连接已被禁用。"
+
+#~ msgid "Enable them by opening %s in the application menu."
+#~ msgstr "从应用菜单中打开 %s 来启用他们。"
+
+#~ msgid "Window position"
+#~ msgstr "窗口位置"
+
+#~ msgid "Window position (x and y)."
+#~ msgstr "窗口位置(水平和竖直)。"
+
+#~ msgid "_Leave"
+#~ msgstr "离开(_L)"
+
+#~ msgid "Connecting to %s"
+#~ msgstr "连接到 %s"
+
 #~ msgid "_Close"
 #~ msgstr "关闭(_C)"
-
-#~ msgid "About Polari"
-#~ msgstr "关于 Polari"
 
 #~ msgid "Server"
 #~ msgstr "服务器"
 
 #~ msgid "Identity"
 #~ msgstr "身份"
-
-#~ msgid "Room"
-#~ msgstr "聊天室"
