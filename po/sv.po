@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-05 02:24+0000\n"
-"PO-Revision-Date: 2016-03-05 10:24+0100\n"
+"POT-Creation-Date: 2016-04-29 17:11+0000\n"
+"PO-Revision-Date: 2016-04-29 20:45+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -20,43 +20,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
-#: ../src/roomStack.js:94
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "En IRC-chattklient för GNOME"
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
-msgid ""
-"A simple Internet Relay Chat (IRC) client that is designed to integrate "
-"seamlessly with GNOME; it features a simple and beautiful interface which "
-"allows you to focus on your conversations."
-msgstr ""
-"En enkel klient för IRC (Internet Relay Chat) som är designad för att "
-"integrera sömlöst med GNOME. Den har ett vackert, enkelt gränssnitt som "
-"tillåter dig att fokusera dig på dina konversationer."
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
-msgid ""
-"You can use Polari to publicly chat with people in a channel, and to have "
-"private one-to-one conversations. Notifications make sure that you never "
-"miss an important message - for private conversations, they even allow you "
-"to reply instantly without switching back to the application!"
-msgstr ""
-"Du kan använda Polari för att chatta publikt med personer i en kanal, och ha "
-"privata enskilda samtal. Aviseringar garanterar dig att aldrig missa ett "
-"viktigt meddelande - för privata konversationer tillåter de dig till och med "
-"att svara omedelbart utan att växla tillbaka till programmet!"
-
-#: ../data/org.gnome.Polari.desktop.in.h:3
-msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Chatt;"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -90,213 +53,20 @@ msgstr "Senast aktiva kanal"
 msgid "Last active (selected) channel"
 msgstr "Senast aktiva (valda) kanal"
 
-#: ../data/resources/connection-details.ui.h:1
-msgid "_Server Address"
-msgstr "S_erveradress"
-
-#: ../data/resources/connection-details.ui.h:2
-msgid "Net_work Name"
-msgstr "Nät_verksnamn"
-
-#: ../data/resources/connection-details.ui.h:3
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "optional"
-msgstr "valfri"
-
-#: ../data/resources/connection-details.ui.h:4
-msgid "Use secure c_onnection"
-msgstr "Använd sä_ker anslutning"
-
-#: ../data/resources/connection-details.ui.h:5
-msgid "_Nickname"
-msgstr "_Smeknamn"
-
-#: ../data/resources/connection-details.ui.h:6
-msgid "_Real Name"
-msgstr "_Fullständigt namn"
-
-#: ../data/resources/connection-properties.ui.h:1
-#: ../data/resources/entry-area.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:2
-msgid "_Cancel"
-msgstr "_Avbryt"
-
-#: ../data/resources/connection-properties.ui.h:2
-msgid "_Apply"
-msgstr "V_erkställ"
-
-#: ../data/resources/entry-area.ui.h:1
-msgid "Change nickname:"
-msgstr "Ändra smeknamn:"
-
-#: ../data/resources/entry-area.ui.h:2
-msgid "_Change"
-msgstr "_Ändra"
-
-#: ../data/resources/entry-area.ui.h:3
-msgid "Change nickname"
-msgstr "Ändra smeknamn"
-
-#: ../data/resources/entry-area.ui.h:5
-msgid "_Paste"
-msgstr "Klistra _in"
-
-#: ../data/resources/help-overlay.ui.h:1
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Allmänt"
-
-#: ../data/resources/help-overlay.ui.h:2
-msgctxt "shortcut window"
-msgid "Join Room"
-msgstr "Gå in i rum"
-
-#: ../data/resources/help-overlay.ui.h:3
-msgctxt "shortcut window"
-msgid "Leave Room"
-msgstr "Lämna rum"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgctxt "shortcut window"
-msgid "Show Userlist"
-msgstr "Visa användarlista"
-
-#: ../data/resources/help-overlay.ui.h:5
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Avsluta"
-
-#: ../data/resources/help-overlay.ui.h:6
-msgctxt "shortcut window"
-msgid "Keyboard Shortcuts"
-msgstr "Tangentbordsgenvägar"
-
-#: ../data/resources/help-overlay.ui.h:7
-msgctxt "shortcut window"
-msgid "Navigation"
-msgstr "Navigering"
-
-#: ../data/resources/help-overlay.ui.h:8
-msgctxt "shortcut window"
-msgid "Next Room"
-msgstr "Nästa rum"
-
-#: ../data/resources/help-overlay.ui.h:9
-msgctxt "shortcut window"
-msgid "Previous Room"
-msgstr "Föregående rum"
-
-#: ../data/resources/help-overlay.ui.h:10
-msgctxt "shortcut window"
-msgid "Next Room with Unread Messages"
-msgstr "Nästa rum med olästa meddelanden"
-
-#: ../data/resources/help-overlay.ui.h:11
-msgctxt "shortcut window"
-msgid "Previous Room with Unread Messages"
-msgstr "Föregående rum med olästa meddelanden"
-
-#: ../data/resources/help-overlay.ui.h:12
-msgctxt "shortcut window"
-msgid "First Room"
-msgstr "Första rummet"
-
-#: ../data/resources/help-overlay.ui.h:13
-msgctxt "shortcut window"
-msgid "Last Room"
-msgstr "Senaste rummet"
-
-#: ../data/resources/help-overlay.ui.h:14
-msgctxt "shortcut window"
-msgid "First - Ninth Room"
-msgstr "Första - nionde rummet"
-
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
-msgid "Join Chat Room"
-msgstr "Gå in i chattrummet"
-
-#: ../data/resources/join-room-dialog.ui.h:3
-msgid "_Join"
-msgstr "_Anslut"
-
-#: ../data/resources/join-room-dialog.ui.h:4
-msgid "C_onnection"
-msgstr "An_slutning"
-
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Network"
-msgstr "_Lägg till nätverk"
-
-#: ../data/resources/join-room-dialog.ui.h:6
-msgid "Room _Name"
-msgstr "Rums_namn"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-msgid "_Password"
-msgstr "Lö_senord"
-
-#: ../data/resources/join-room-dialog.ui.h:9
-msgid "_Add"
-msgstr "Lägg _till"
-
-#: ../data/resources/join-room-dialog.ui.h:10
-msgid "_Custom Network"
-msgstr "An_passat nätverk"
-
-#: ../data/resources/main-window.ui.h:2
-msgid "Add rooms and networks"
-msgstr "Lägg till rum och nätverk"
-
-#: ../data/resources/menus.ui.h:1
-msgid "Keyboard Shortcuts"
-msgstr "Tangentbordsgenvägar"
-
-#: ../data/resources/menus.ui.h:2
-msgid "About"
-msgstr "Om"
-
-#: ../data/resources/menus.ui.h:3
-msgid "Quit"
-msgstr "Avsluta"
-
-#: ../data/resources/room-list-header.ui.h:1
-msgid "Reconnect"
-msgstr "Återanslut"
-
-#: ../data/resources/room-list-header.ui.h:2
-msgid "Remove"
-msgstr "Ta bort"
-
-#: ../data/resources/room-list-header.ui.h:3
-msgid "Properties"
-msgstr "Egenskaper"
-
-#: ../data/resources/user-list-details.ui.h:1
-msgid "Loading details"
-msgstr "Läser in detaljer"
-
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
-msgid "Last Activity:"
-msgstr "Senaste aktivitet:"
-
-#: ../data/resources/user-list-details.ui.h:3
-msgid "Message"
-msgstr "Meddelande"
-
-#: ../src/application.js:221 ../src/utils.js:181
+#: ../src/application.js:225 ../src/utils.js:181
 msgid "Failed to open link"
 msgstr "Misslyckades med att öppna länk"
 
-#: ../src/application.js:490
+#: ../src/application.js:535
 msgid "Good Bye"
 msgstr "Hejdå"
 
-#: ../src/application.js:522
+#: ../src/application.js:567
 #, javascript-format
 msgid "%s removed."
 msgstr "%s borttagen."
 
-#: ../src/application.js:579
+#: ../src/application.js:624
 msgid "translator-credits"
 msgstr ""
 "Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
@@ -305,11 +75,15 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../src/application.js:585
+#: ../src/application.js:625
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "En IRC-chattklient för GNOME"
+
+#: ../src/application.js:630
 msgid "Learn more about Polari"
 msgstr "Lär dig mer om Polari"
 
-#: ../src/appNotifications.js:82
+#: ../src/appNotifications.js:85
 msgid "Undo"
 msgstr "Ångra"
 
@@ -464,12 +238,12 @@ msgid "Already added"
 msgstr "Redan tillagd"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:417
+#: ../src/connections.js:431
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Egenskaper för ”%s”"
 
-#: ../src/connections.js:461
+#: ../src/connections.js:475
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -521,99 +295,110 @@ msgstr "Inklistring från %s"
 #.
 #: ../src/ircParser.js:24
 msgid ""
+"/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<kanal>] [<orsak>] - stänger <kanal>, som standard den nuvarande "
+"kanalen"
+
+#: ../src/ircParser.js:25
+msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
 msgstr ""
 "/HELP [<kommando>] - visar hjälp för <kommando>, eller en lista över "
 "tillgängliga kommandon"
 
-#: ../src/ircParser.js:25
+#: ../src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <smeknamn> [<kanal>] - bjuder in <smeknamn> till <kanal>, eller den "
 "nuvarande"
 
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <kanal> - ansluter till <kanal>"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <smeknamn> - sparkar ut <smeknamn> från den nuvarande kanalen"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <händelse> - skickar <händelse> till den nuvarande kanalen"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:30
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgstr ""
 "/MSG <smeknamn> [<meddelande>] - skickar ett privat meddelande till "
 "<smeknamn>"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:31
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - listar användare i den nuvarande kanalen"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:32
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <smeknamn> - byter ditt smeknamn till <smeknamn>"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanal>] [<orsak>] - lämnar <kanal>, som standard den nuvarande "
 "kanalen"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:34
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <smeknamn> - öppnar en privat konversation med <smeknamn>"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:35
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<orsak>] - kopplar ner från den nuvarande servern"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:36
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr ""
 "/SAY <text> - skickar <text> till det nuvarande rummet/den nuvarande "
 "kontakten"
 
-#: ../src/ircParser.js:36
+#: ../src/ircParser.js:37
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <ämne> - ställer in ämnet till <ämne> eller visar det nuvarande ämnet"
 
-#: ../src/ircParser.js:39
+#: ../src/ircParser.js:40
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Okänt kommando - försök med /HELP för en lista över tillgängliga kommandon"
 
-#: ../src/ircParser.js:60
+#: ../src/ircParser.js:61
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Användning: %s"
 
-#: ../src/ircParser.js:98
+#: ../src/ircParser.js:99
 msgid "Known commands:"
 msgstr "Kända kommandon:"
 
-#: ../src/ircParser.js:198
+#: ../src/ircParser.js:199
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Användare på %s:"
 
-#: ../src/ircParser.js:283
+#: ../src/ircParser.js:285
 msgid "No topic set"
 msgstr "Inget ämne är inställt"
+
+#: ../src/joinDialog.js:272
+msgid "Join Chat Room"
+msgstr "Gå in i chattrummet"
 
 #: ../src/joinDialog.js:273
 msgid "Add Network"
 msgstr "Lägg till nätverk"
 
-#: ../src/mainWindow.js:307
+#: ../src/mainWindow.js:308
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -628,57 +413,61 @@ msgstr "Lämna chattrum"
 msgid "End conversation"
 msgstr "Avsluta konversation"
 
-#: ../src/roomList.js:213
+#: ../src/roomList.js:216
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Nätverket %s har ett fel"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:263
+#: ../src/roomList.js:266
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:270
+#: ../src/roomList.js:273
 msgid "Connection Problem"
 msgstr "Anslutningsproblem"
 
-#: ../src/roomList.js:278
+#: ../src/roomList.js:281
 msgid "Connected"
 msgstr "Ansluten"
 
-#: ../src/roomList.js:280
+#: ../src/roomList.js:283
 msgid "Connecting..."
 msgstr "Ansluter…"
 
-#: ../src/roomList.js:282
+#: ../src/roomList.js:285
 msgid "Offline"
 msgstr "Frånkopplad"
 
-#: ../src/roomList.js:284
+#: ../src/roomList.js:287
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../src/roomList.js:304
+#: ../src/roomList.js:307
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Kunde inte ansluta till %s på ett säkert sätt."
 
-#: ../src/roomList.js:307
+#: ../src/roomList.js:310
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s kräver ett lösenord."
 
-#: ../src/roomList.js:313
+#: ../src/roomList.js:316
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Kunde inte ansluta till %s. Servern är upptagen."
 
-#: ../src/roomList.js:316
+#: ../src/roomList.js:319
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Kunde inte ansluta till %s."
+
+#: ../src/roomStack.js:94
+msgid "Polari"
+msgstr "Polari"
 
 #: ../src/roomStack.js:97
 msgid "Join a room using the + button."
@@ -726,6 +515,10 @@ msgid_plural "%d months ago"
 msgstr[0] "%d månad sedan"
 msgstr[1] "%d månader sedan"
 
+#: ../src/userList.js:218
+msgid "Last Activity:"
+msgstr "Senaste aktivitet:"
+
 #: ../src/userList.js:383
 msgid "No results"
 msgstr "Inga resultat"
@@ -738,6 +531,169 @@ msgstr "Alla"
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari-serverlösenord för %s"
+
+#~ msgid ""
+#~ "A simple Internet Relay Chat (IRC) client that is designed to integrate "
+#~ "seamlessly with GNOME; it features a simple and beautiful interface which "
+#~ "allows you to focus on your conversations."
+#~ msgstr ""
+#~ "En enkel klient för IRC (Internet Relay Chat) som är designad för att "
+#~ "integrera sömlöst med GNOME. Den har ett vackert, enkelt gränssnitt som "
+#~ "tillåter dig att fokusera dig på dina konversationer."
+
+#~ msgid ""
+#~ "You can use Polari to publicly chat with people in a channel, and to have "
+#~ "private one-to-one conversations. Notifications make sure that you never "
+#~ "miss an important message - for private conversations, they even allow "
+#~ "you to reply instantly without switching back to the application!"
+#~ msgstr ""
+#~ "Du kan använda Polari för att chatta publikt med personer i en kanal, och "
+#~ "ha privata enskilda samtal. Aviseringar garanterar dig att aldrig missa "
+#~ "ett viktigt meddelande - för privata konversationer tillåter de dig till "
+#~ "och med att svara omedelbart utan att växla tillbaka till programmet!"
+
+#~ msgid "IRC;Internet;Relay;Chat;"
+#~ msgstr "IRC;Internet;Chatt;"
+
+#~ msgid "_Server Address"
+#~ msgstr "S_erveradress"
+
+#~ msgid "Net_work Name"
+#~ msgstr "Nät_verksnamn"
+
+#~ msgid "optional"
+#~ msgstr "valfri"
+
+#~ msgid "Use secure c_onnection"
+#~ msgstr "Använd sä_ker anslutning"
+
+#~ msgid "_Nickname"
+#~ msgstr "_Smeknamn"
+
+#~ msgid "_Real Name"
+#~ msgstr "_Fullständigt namn"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Avbryt"
+
+#~ msgid "_Apply"
+#~ msgstr "V_erkställ"
+
+#~ msgid "Change nickname:"
+#~ msgstr "Ändra smeknamn:"
+
+#~ msgid "_Change"
+#~ msgstr "_Ändra"
+
+#~ msgid "Change nickname"
+#~ msgstr "Ändra smeknamn"
+
+#~ msgid "_Paste"
+#~ msgstr "Klistra _in"
+
+#~ msgctxt "shortcut window"
+#~ msgid "General"
+#~ msgstr "Allmänt"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Join Room"
+#~ msgstr "Gå in i rum"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Leave Room"
+#~ msgstr "Lämna rum"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Show Userlist"
+#~ msgstr "Visa användarlista"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Quit"
+#~ msgstr "Avsluta"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Tangentbordsgenvägar"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Navigation"
+#~ msgstr "Navigering"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Next Room"
+#~ msgstr "Nästa rum"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Previous Room"
+#~ msgstr "Föregående rum"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Next Room with Unread Messages"
+#~ msgstr "Nästa rum med olästa meddelanden"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Previous Room with Unread Messages"
+#~ msgstr "Föregående rum med olästa meddelanden"
+
+#~ msgctxt "shortcut window"
+#~ msgid "First Room"
+#~ msgstr "Första rummet"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Last Room"
+#~ msgstr "Senaste rummet"
+
+#~ msgctxt "shortcut window"
+#~ msgid "First - Ninth Room"
+#~ msgstr "Första - nionde rummet"
+
+#~ msgid "_Join"
+#~ msgstr "_Anslut"
+
+#~ msgid "C_onnection"
+#~ msgstr "An_slutning"
+
+#~ msgid "_Add Network"
+#~ msgstr "_Lägg till nätverk"
+
+#~ msgid "Room _Name"
+#~ msgstr "Rums_namn"
+
+#~ msgid "_Password"
+#~ msgstr "Lö_senord"
+
+#~ msgid "_Add"
+#~ msgstr "Lägg _till"
+
+#~ msgid "_Custom Network"
+#~ msgstr "An_passat nätverk"
+
+#~ msgid "Add rooms and networks"
+#~ msgstr "Lägg till rum och nätverk"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Tangentbordsgenvägar"
+
+#~ msgid "About"
+#~ msgstr "Om"
+
+#~ msgid "Quit"
+#~ msgstr "Avsluta"
+
+#~ msgid "Reconnect"
+#~ msgstr "Återanslut"
+
+#~ msgid "Remove"
+#~ msgstr "Ta bort"
+
+#~ msgid "Properties"
+#~ msgstr "Egenskaper"
+
+#~ msgid "Loading details"
+#~ msgstr "Läser in detaljer"
+
+#~ msgid "Message"
+#~ msgstr "Meddelande"
 
 #~ msgid "_Connection Name"
 #~ msgstr "A_nslutningsnamn"
