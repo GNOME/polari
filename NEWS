@@ -1,3 +1,18 @@
+3.21.1 - "Judy Stays"
+=====================
+* Update roomList header popover on name changes [Sankaranarayanan; #763178]
+* Prioritize popular networks [Rares; #762733]
+* Fall back to alternative servers on connection failures [Kunaal; #762335]
+* Misc. bug fixes [Kunaal; #765124]
+
+Contributors:
+  Kunaal Jain, Florian Müllner, Rares Visalom, Sankaranarayanan Viswanathan
+
+Translations:
+  Daniel Korostil [uk], Inaki Larranaga Murgoitio [eu],
+  Cheng-Chia Tseng [zh_TW], Fabio Tomat [fur], Arash Mousavi [fa],
+  Jeff Bai [zh_CN], Khaled Hosny [ar]
+
 3.20.0 - "The Chicken has landed"
 =================================
 * Misc. bug fixes [Florian; #763872, #763873]
