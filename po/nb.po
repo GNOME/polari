@@ -6,10 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: polari 3.19.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-10 20:40+0100\n"
-"PO-Revision-Date: 2016-01-10 20:41+0100\n"
+"Project-Id-Version: polari 3.20.x\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-05-01 15:24+0200\n"
+"PO-Revision-Date: 2016-05-01 15:24+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -18,47 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Rosetta-Export-Date: 2007-02-25 00:08+0000\n"
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
-#: ../src/roomStack.js:77
-msgid "Polari"
-msgstr "Polari"
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:455
-msgid "An Internet Relay Chat Client for GNOME"
-msgstr "En Internet Relay Chat-klient for GNOME"
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
-msgid ""
-"A simple Internet Relay Chat (IRC) client that is designed to integrate "
-"seamlessly with GNOME; it features a simple and beautiful interface which "
-"allows you to focus on your conversations."
-msgstr ""
-"En enkel Internet Relay Chat (IRC)-klient som er laget for å fungere sømløst "
-"med GNOME. Den har et enkelt og vakkert grensesnitt som lar deg fokusere på "
-"samtaler."
-
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
-msgid ""
-"You can use Polari to publicly chat with people in a channel, and to have "
-"private one-to-one conversations. Notifications make sure that you never "
-"miss an important message - for private conversations, they even allow you "
-"to reply instantly without switching back to the application!"
-msgstr ""
-"Polari kan brukes til å prate offentlig med andre i en kanal, og ha private "
-"samtaler med andre. Skrivebordsvarsling sikrer at du aldri går glipp av en "
-"viktig melding. Private samtaler kan besvares med det samme uten måtte åpne "
-"hele grensesnittet."
-
-#: ../data/org.gnome.Polari.desktop.in.h:3
-msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internett;Relay;Chat;Prat;Lynmeldinger;"
-
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Vis tilkoblinger"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:1
 msgid "Saved channel list"
@@ -84,182 +44,28 @@ msgstr "Vindu er maksimert"
 msgid "Window maximized state"
 msgstr "Vinduets maksimeringstilstand"
 
-#: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Adresse"
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr "Sist aktive kanal"
 
-#: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "_Beskrivelse"
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr "Sist aktive (valgte) kanal"
 
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Nickname"
-msgstr "Kalle_navn"
+#: ../src/application.js:225 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Klarte ikke å åpne lenke"
 
-#: ../data/resources/connection-details.ui.h:4
-msgid "_Real Name"
-msgstr "Vi_rkelig navn"
-
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
-msgid "optional"
-msgstr "valgfri"
-
-#. translators: This will be used in the phrase: "Open Connections in the application menu"
-#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:113
-#: ../src/roomStack.js:123
-msgid "Connections"
-msgstr "Tilkoblinger"
-
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Use the + button to add a new connection."
-msgstr "Bruk +-knappen for å legge til en ny tilkobling."
-
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Add"
-msgstr "Legg til"
-
-#: ../data/resources/connection-list-dialog.ui.h:4
-msgid "Remove"
-msgstr "Fjern"
-
-#: ../data/resources/help-overlay.ui.h:1
-msgid "General"
-msgstr "Generelt"
-
-#: ../data/resources/help-overlay.ui.h:2
-msgid "Join Room"
-msgstr "Bli med i rom"
-
-#: ../data/resources/help-overlay.ui.h:3
-msgid "Message User"
-msgstr "Send melding til bruker"
-
-#: ../data/resources/help-overlay.ui.h:4
-msgid "Leave Room"
-msgstr "Forlat praterom"
-
-#: ../data/resources/help-overlay.ui.h:5
-msgid "Show Userlist"
-msgstr "Vis brukerliste"
-
-#: ../data/resources/help-overlay.ui.h:6 ../data/resources/menus.ui.h:5
-msgid "Quit"
-msgstr "Avslutt"
-
-#: ../data/resources/help-overlay.ui.h:7 ../data/resources/menus.ui.h:3
-msgid "Keyboard Shortcuts"
-msgstr "Tastatursnarveier"
-
-#: ../data/resources/help-overlay.ui.h:8
-msgid "Navigation"
-msgstr "Navigasjon"
-
-#: ../data/resources/help-overlay.ui.h:9
-msgid "Next Room"
-msgstr "Neste rom"
-
-#: ../data/resources/help-overlay.ui.h:10
-msgid "Previous Room"
-msgstr "Forrige rom"
-
-#: ../data/resources/help-overlay.ui.h:11
-msgid "First Room"
-msgstr "Første rom"
-
-#: ../data/resources/help-overlay.ui.h:12
-msgid "Last Room"
-msgstr "Siste rom"
-
-#: ../data/resources/help-overlay.ui.h:13
-msgid "First - Ninth Room"
-msgstr "Første - niende rom"
-
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:223
-msgid "Join Chat Room"
-msgstr "Bli med i praterom"
-
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:394
-msgid "_Cancel"
-msgstr "_Avbryt"
-
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:225
-msgid "_Join"
-msgstr "_Bli med"
-
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Legg til tilkobling"
-
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
-msgid "C_onnection"
-msgstr "Tilk_obling"
-
-#: ../data/resources/join-room-dialog.ui.h:7
-msgid "Room _Name"
-msgstr "_Navn på rom"
-
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Password"
-msgstr "_Passord"
-
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Bli med i et rom"
-
-#: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Send melding til en bruker"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Bli med i et rom"
-
-#: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Brukervalg"
-
-#: ../data/resources/menus.ui.h:4
-msgid "About"
-msgstr "Om"
-
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Melding"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Nylig"
-
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Navn"
-
-#: ../data/resources/room-list-header.ui.h:1
-msgid "Connection Error"
-msgstr "Feil ved tilkobling"
-
-#: ../data/resources/user-list-details.ui.h:1
-msgid "Loading details"
-msgstr "Laster inn detaljer"
-
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
-msgid "Last Activity:"
-msgstr "Siste aktivitet:"
-
-#: ../data/resources/user-list-details.ui.h:3
-msgid "Message"
-msgstr "Melding"
-
-#: ../src/application.js:372
+#: ../src/application.js:535
 msgid "Good Bye"
 msgstr "Ha det bra"
 
-#: ../src/application.js:454
+#: ../src/application.js:567
+#, javascript-format
+msgid "%s removed."
+msgstr "%s fjernet."
+
+#: ../src/application.js:624
 msgid "translator-credits"
 msgstr ""
 "Øivind Hoel <ohoel@cvs.gnome.org>\n"
@@ -267,70 +73,78 @@ msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>"
 
-#: ../src/application.js:460
+#: ../src/application.js:625
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "En Internet Relay Chat-klient for GNOME"
+
+#: ../src/application.js:630
 msgid "Learn more about Polari"
 msgstr "Lær mer om Polari"
 
-#: ../src/chatView.js:129
+#: ../src/appNotifications.js:85
+msgid "Undo"
+msgstr "Angre"
+
+#: ../src/chatView.js:133
 msgid "New Messages"
 msgstr "Nye meldinger"
 
-#: ../src/chatView.js:605
+#: ../src/chatView.js:642
 msgid "Open Link"
 msgstr "Åpne lenke"
 
-#: ../src/chatView.js:611
+#: ../src/chatView.js:648
 msgid "Copy Link Address"
 msgstr "Kopier lenkeadresse"
 
-#: ../src/chatView.js:774
+#: ../src/chatView.js:819
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s er nå kjent som %s"
 
-#: ../src/chatView.js:781
+#: ../src/chatView.js:826
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har koblet fra"
 
-#: ../src/chatView.js:790
+#: ../src/chatView.js:835
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s er kastet ut av %s"
 
-#: ../src/chatView.js:792
+#: ../src/chatView.js:837
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s er kastet ut"
 
-#: ../src/chatView.js:799
+#: ../src/chatView.js:844
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s er nå utestengt av %s"
 
-#: ../src/chatView.js:801
+#: ../src/chatView.js:846
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s er nå utestengt"
 
-#: ../src/chatView.js:807
+#: ../src/chatView.js:852
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ble med"
 
-#: ../src/chatView.js:813
+#: ../src/chatView.js:858
 #, javascript-format
 msgid "%s left"
 msgstr "%s gikk ut"
 
-#: ../src/chatView.js:902
+#: ../src/chatView.js:954
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d bruker ble med"
 msgstr[1] "%d brukere ble med"
 
-#: ../src/chatView.js:905
+#: ../src/chatView.js:957
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -339,14 +153,14 @@ msgstr[1] "%d brukere igjen"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:966
+#: ../src/chatView.js:1024
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:971
+#: ../src/chatView.js:1029
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "I går, %H.%M"
@@ -354,7 +168,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:976
+#: ../src/chatView.js:1034
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
@@ -363,7 +177,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:982
+#: ../src/chatView.js:1040
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H.%M"
@@ -372,21 +186,21 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:988
+#: ../src/chatView.js:1046
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H.%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:993
+#: ../src/chatView.js:1051
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:998
+#: ../src/chatView.js:1056
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "I går, %H.%M"
@@ -394,7 +208,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1003
+#: ../src/chatView.js:1061
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
@@ -403,7 +217,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1009
+#: ../src/chatView.js:1067
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %H.%M"
@@ -412,12 +226,22 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1015
+#: ../src/chatView.js:1073
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %H.%M"
 
-#: ../src/connections.js:239
+#: ../src/connections.js:42
+msgid "Already added"
+msgstr "Allerede lagt til"
+
+#. Translators: %s is a connection name
+#: ../src/connections.js:431
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Egenskaper for «%s»"
+
+#: ../src/connections.js:475
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -425,21 +249,38 @@ msgstr ""
 "Polari er koblet fra på grunn av en nettverksfeil. Vennligst sjekk om "
 "adressefeltet er korrekt."
 
-#: ../src/connections.js:379 ../src/roomList.js:235 ../src/roomList.js:255
-msgid "Edit Connection"
-msgstr "Rediger tilkobling"
+#: ../src/entryArea.js:236
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Lim inn %s tekstlinje på offentlig utklippstavle?"
+msgstr[1] "Lim inn %s tekstlinjer på offentlig utklippstavle?"
 
-#: ../src/connections.js:380
-msgid "New Connection"
-msgstr "Ny tilkobling"
+#: ../src/entryArea.js:240
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../src/connections.js:396
-msgid "A_pply"
-msgstr "_Bruk"
+#: ../src/entryArea.js:247
+msgid "Upload image to public paste service?"
+msgstr ""
 
-#: ../src/connections.js:396
-msgid "Cr_eate"
-msgstr "_Lag"
+#: ../src/entryArea.js:248
+msgid "Uploading image to public paste service…"
+msgstr ""
+
+#. translators: %s is a nick, #%s a channel
+#: ../src/entryArea.js:257
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s i #%s"
+
+#: ../src/entryArea.js:259
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Lim inn fra %s"
 
 #. commands that would be nice to support:
 #.
@@ -451,6 +292,14 @@ msgstr "_Lag"
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
 #: ../src/ircParser.js:24
+#, fuzzy
+msgid ""
+"/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
+msgstr ""
+"/PART [<kanal>] [<grunn>] - forlater <kanal>, eller gjeldende kanal hvis du "
+"ikke velger noe"
+
+#: ../src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
@@ -458,224 +307,385 @@ msgstr ""
 "/HELP [<kommando>] - viser hjelpetekst for <kommando>, eller en liste over "
 "tilgjengelige kommandoer"
 
-#: ../src/ircParser.js:25
+#: ../src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <kallenavn> [<kanal>] - inviterer <kallenavn> til <kanal>, evt. "
 "gjeldende kanal"
 
-#: ../src/ircParser.js:26
+#: ../src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <kanal> - blir med i <kanal>"
 
-#: ../src/ircParser.js:27
+#: ../src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <kallenavn> - kaster ut <kallenavn> fra gjeldende kanal"
 
-#: ../src/ircParser.js:28
+#: ../src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <handling> - sender <handling> til gjeldende kanal"
 
-#: ../src/ircParser.js:29
+#: ../src/ircParser.js:30
+msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
+msgstr "/MSG <kallenavn> - sender en privat melding til <kallenavn>"
+
+#: ../src/ircParser.js:31
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - viser brukere i gjeldende kanal"
 
-#: ../src/ircParser.js:30
+#: ../src/ircParser.js:32
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <kallenavn> - endrer eget kallenavn til <kallenavn>"
 
-#: ../src/ircParser.js:31
+#: ../src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanal>] [<grunn>] - forlater <kanal>, eller gjeldende kanal hvis du "
 "ikke velger noe"
 
-#: ../src/ircParser.js:32
+#: ../src/ircParser.js:34
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr "/QUERY <kallenavn> - åpner en privat samtale med <kallenavn>"
 
-#: ../src/ircParser.js:33
+#: ../src/ircParser.js:35
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<grunn>] - kobler fra gjeldende tjener"
 
-#: ../src/ircParser.js:34
+#: ../src/ircParser.js:36
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <tekst> - sender <tekst> til gjeldende rom/kontakt"
 
-#: ../src/ircParser.js:35
+#: ../src/ircParser.js:37
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <tema> - endrer kanaltema til <tema>, eller viser gjeldende tema"
 
-#: ../src/ircParser.js:38
+#: ../src/ircParser.js:40
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Ukjent kommando. Prøv /HELP for å se en liste over tilgjengelige kommandoer"
 
-#: ../src/ircParser.js:59
+#: ../src/ircParser.js:61
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Bruk: %s"
 
-#: ../src/ircParser.js:97
+#: ../src/ircParser.js:99
 msgid "Known commands:"
 msgstr "Kjente kommandoer:"
 
-#: ../src/ircParser.js:177
+#: ../src/ircParser.js:199
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Brukere på %s:"
 
-#: ../src/ircParser.js:261
+#: ../src/ircParser.js:285
 msgid "No topic set"
 msgstr "Emne er ikke valgt"
 
-#: ../src/joinDialog.js:224
-msgid "Add Connection"
-msgstr "Legg til tilkobling"
+#: ../src/joinDialog.js:272
+msgid "Join Chat Room"
+msgstr "Bli med i praterom"
 
-#: ../src/joinDialog.js:226
-msgid "_Save"
-msgstr "_Lagre"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Legg til nettverk"
 
-#: ../src/mainWindow.js:306
+#: ../src/mainWindow.js:308
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d bruker"
 msgstr[1] "%d brukere"
 
-#: ../src/messageDialog.js:95
-msgid "No recent users"
-msgstr "Ingen nylige brukere"
-
-#. translators: %s is a nick, #%s a channel
-#: ../src/pasteManager.js:95
-#, javascript-format
-msgid "%s in #%s"
-msgstr "%s i #%s"
-
-#: ../src/pasteManager.js:97
-#, javascript-format
-msgid "Paste from %s"
-msgstr "Lim inn fra %s"
-
-#: ../src/pasteManager.js:306
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Laster opp %s"
-
-#: ../src/roomList.js:104
+#: ../src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Forlat praterom"
 
-#: ../src/roomList.js:105
+#: ../src/roomList.js:129
 msgid "End conversation"
 msgstr "Avslutt samtale"
 
-#: ../src/roomList.js:213
+#: ../src/roomList.js:216
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Tilkobling %s har en feil"
+msgid "Network %s has an error"
+msgstr "Nettverk %s har en feil"
 
-#: ../src/roomList.js:233
-msgid "Please check your connection details."
-msgstr "Vennligst sjekk tilkoblingsdetaljene."
-
-#: ../src/roomList.js:254
-msgid "Could not make connection in a safe way."
-msgstr "Kunne ikke koble til på en sikker måte."
-
-#: ../src/roomList.js:262
-msgid "Authentication failed."
-msgstr "Autentisering feilet."
-
-#: ../src/roomList.js:263 ../src/roomList.js:274 ../src/roomList.js:282
-msgid "Try again"
-msgstr "Prøv igjen"
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: ../src/roomList.js:266
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
 #: ../src/roomList.js:273
-msgid "The server is busy."
-msgstr "Tjeneren er opptatt."
+msgid "Connection Problem"
+msgstr "Feil ved tilkobling"
 
 #: ../src/roomList.js:281
-msgid "Failed to connect for an unknown reason."
-msgstr "Klarte ikke å koble til av ukjent grunn."
+msgid "Connected"
+msgstr "Koblet til"
 
-#: ../src/roomStack.js:111
-msgid "Begin chatting by adding a new connection."
-msgstr "Start samtale ved å legge til en ny tilkobling."
+#: ../src/roomList.js:283
+msgid "Connecting..."
+msgstr "Kobler til …"
 
-#: ../src/roomStack.js:114
+#: ../src/roomList.js:285
+msgid "Offline"
+msgstr "Frakoblet"
+
+#: ../src/roomList.js:287
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: ../src/roomList.js:307
 #, javascript-format
-msgid "Open %s in the application menu."
-msgstr "Åpne %s i programmenyen."
+msgid "Could not connect to %s in a safe way."
+msgstr "Kunne ikke koble til %s på en sikker måte."
 
-#: ../src/roomStack.js:117
+#: ../src/roomList.js:310
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s krever et passord."
+
+#: ../src/roomList.js:316
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Kunne ikke koble til %s. Tjeneren er opptatt."
+
+#: ../src/roomList.js:319
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Kunne ikke koble til %s."
+
+#: ../src/roomStack.js:94
+msgid "Polari"
+msgstr "Polari"
+
+#: ../src/roomStack.js:97
 msgid "Join a room using the + button."
 msgstr "Bli med i et samtalerom ved å bruke +-knappen"
 
-#: ../src/roomStack.js:121
-msgid "Your connections are disabled."
-msgstr "Tilkoblingene dine er slått av."
-
-#: ../src/roomStack.js:124
-#, javascript-format
-msgid "Enable them by opening %s in the application menu."
-msgstr "Slå dem på ved å åpne %s i programmenyen."
-
-#: ../src/userList.js:178
+#: ../src/userList.js:174
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekund siden"
 msgstr[1] "%d sekunder siden"
 
-#: ../src/userList.js:183
+#: ../src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minutt siden"
 msgstr[1] "%d minutter siden"
 
-#: ../src/userList.js:188
+#: ../src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d time siden"
 msgstr[1] "%d timer siden"
 
-#: ../src/userList.js:193
+#: ../src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag siden"
 msgstr[1] "%d dager siden"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d uke siden"
 msgstr[1] "%d uker siden"
 
-#: ../src/userList.js:202
+#: ../src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d måned siden"
 msgstr[1] "%d måneder siden"
 
-#: ../src/userList.js:380
+#: ../src/userList.js:218
+msgid "Last Activity:"
+msgstr "Siste aktivitet:"
+
+#: ../src/userList.js:383
 msgid "No results"
 msgstr "Ingen resultater"
 
-#: ../src/userList.js:554
+#: ../src/userList.js:556
 msgid "All"
 msgstr "Alle"
 
-#: ../src/utils.js:133
-msgid "Failed to open link"
-msgstr "Klarte ikke å åpne lenke"
+#: ../src/utils.js:121
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Passord tjener for %s"
+
+#~ msgid ""
+#~ "A simple Internet Relay Chat (IRC) client that is designed to integrate "
+#~ "seamlessly with GNOME; it features a simple and beautiful interface which "
+#~ "allows you to focus on your conversations."
+#~ msgstr ""
+#~ "En enkel Internet Relay Chat (IRC)-klient som er laget for å fungere "
+#~ "sømløst med GNOME. Den har et enkelt og vakkert grensesnitt som lar deg "
+#~ "fokusere på samtaler."
+
+#~ msgid ""
+#~ "You can use Polari to publicly chat with people in a channel, and to have "
+#~ "private one-to-one conversations. Notifications make sure that you never "
+#~ "miss an important message - for private conversations, they even allow "
+#~ "you to reply instantly without switching back to the application!"
+#~ msgstr ""
+#~ "Polari kan brukes til å prate offentlig med andre i en kanal, og ha "
+#~ "private samtaler med andre. Skrivebordsvarsling sikrer at du aldri går "
+#~ "glipp av en viktig melding. Private samtaler kan besvares med det samme "
+#~ "uten måtte åpne hele grensesnittet."
+
+#~ msgid "IRC;Internet;Relay;Chat;"
+#~ msgstr "IRC;Internett;Relay;Chat;Prat;Lynmeldinger;"
+
+#~ msgid "_Server Address"
+#~ msgstr "_Tjeneradresse"
+
+#~ msgid "Net_work Name"
+#~ msgstr "Nett_verksnavn"
+
+#~ msgid "optional"
+#~ msgstr "valgfri"
+
+#~ msgid "Use secure c_onnection"
+#~ msgstr "Bruk sikker tilk_obling"
+
+#~ msgid "_Nickname"
+#~ msgstr "Kalle_navn"
+
+#~ msgid "_Real Name"
+#~ msgstr "Vi_rkelig navn"
+
+#~ msgid "_Cancel"
+#~ msgstr "_Avbryt"
+
+#~ msgid "_Apply"
+#~ msgstr "_Bruk"
+
+#~ msgid "Change nickname:"
+#~ msgstr "Endre kallenavn:"
+
+#~ msgid "_Change"
+#~ msgstr "_Endre"
+
+#~ msgid "Change nickname"
+#~ msgstr "Endre kallenavn"
+
+#~ msgid "_Paste"
+#~ msgstr "_Lim inn"
+
+#~ msgctxt "shortcut window"
+#~ msgid "General"
+#~ msgstr "Generelt"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Join Room"
+#~ msgstr "Bli med i rom"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Leave Room"
+#~ msgstr "Forlat rom"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Show Userlist"
+#~ msgstr "Vis brukerliste"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Quit"
+#~ msgstr "Avslutt"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Tastatursnarveier"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Navigation"
+#~ msgstr "Navigasjon"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Next Room"
+#~ msgstr "Neste rom"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Previous Room"
+#~ msgstr "Forrige rom"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Next Room with Unread Messages"
+#~ msgstr "Neste rom med uleste meldinger"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Previous Room with Unread Messages"
+#~ msgstr "Forrige rom med uleste meldinger"
+
+#~ msgctxt "shortcut window"
+#~ msgid "First Room"
+#~ msgstr "Første rom"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Last Room"
+#~ msgstr "Siste rom"
+
+#~ msgctxt "shortcut window"
+#~ msgid "First - Ninth Room"
+#~ msgstr "Første - niende rom"
+
+#~ msgid "_Join"
+#~ msgstr "_Bli med"
+
+#~ msgid "C_onnection"
+#~ msgstr "Tilk_obling"
+
+#~ msgid "_Add Network"
+#~ msgstr "_Legg til nettverk"
+
+#~ msgid "Room _Name"
+#~ msgstr "_Navn på rom"
+
+#~ msgid "_Password"
+#~ msgstr "_Passord"
+
+#~ msgid "_Add"
+#~ msgstr "_Legg til"
+
+#~ msgid "_Custom Network"
+#~ msgstr "_Egendefinert nettverk"
+
+#~ msgid "Add rooms and networks"
+#~ msgstr "Legg til rom og nettverk"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Tastatursnarveier"
+
+#~ msgid "About"
+#~ msgstr "Om"
+
+#~ msgid "Quit"
+#~ msgstr "Avslutt"
+
+#~ msgid "Reconnect"
+#~ msgstr "Koble til på nytt"
+
+#~ msgid "Remove"
+#~ msgstr "Fjern"
+
+#~ msgid "Properties"
+#~ msgstr "Egenskaper"
+
+#~ msgid "Loading details"
+#~ msgstr "Laster inn detaljer"
+
+#~ msgid "Message"
+#~ msgstr "Melding"
