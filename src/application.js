@@ -92,8 +92,6 @@ const Application = new Lang.Class({
           { name: 'edit-connection',
             activate: Lang.bind(this, this._onEditConnection),
             parameter_type: GLib.VariantType.new('o') },
-          { name: 'preferences',
-            activate: Lang.bind(this, this._onShowPreferences) },
           { name: 'about',
             activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
@@ -592,9 +590,6 @@ const Application = new Lang.Class({
                 w.destroy();
             }));
         dialog.show();
-    },
-
-    _onShowPreferences: function() {
     },
 
     _onShowAbout: function() {
