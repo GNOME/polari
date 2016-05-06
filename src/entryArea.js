@@ -21,6 +21,10 @@ const MAX_LINES = 5;
 const ChatEntry = new Lang.Class({
     Name: 'ChatEntry',
     Extends: Gtk.Entry,
+    Implements: [PasteManager.DropTargetIface],
+    Properties: {
+        'can-drop': GObject.ParamSpec.override('can-drop', PasteManager.DropTargetIface),
+    },
     Signals: { 'text-pasted': { param_types: [GObject.TYPE_STRING,
                                               GObject.TYPE_INT] },
                'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
@@ -29,7 +33,23 @@ const ChatEntry = new Lang.Class({
     _init: function(params) {
         this.parent(params);
 
+        PasteManager.DropTargetIface.addTargets(this, this);
+
         this._useDefaultHandler = false;
+    },
+
+    get can_drop() {
+        return true;
+    },
+
+    vfunc_drag_data_received: function(context, x, y, data, info, time) {
+        let str = data.get_text();
+        if (!str || str.split('\n').length >= MAX_LINES)
+            // Disable GtkEntry's built-in drop target support
+            return;
+
+         GObject.signal_stop_emission_by_name(this, 'drag-data-received');
+        this.parent(context, x, y, data, info, time);
     },
 
     vfunc_paste_clipboard: function(entry) {
@@ -128,14 +148,29 @@ const EntryArea = new Lang.Class({
             function(entry, text, nLines) {
                 this.pasteText(text, nLines);
             }));
+        this._chatEntry.connect('text-dropped', Lang.bind(this,
+            function(entry, text) {
+                this.pasteText(text, text.split('\n').length);
+            }));
+
         this._chatEntry.connect('image-pasted', Lang.bind(this,
             function(entry, image) {
                 this.pasteImage(image);
             }));
+        this._chatEntry.connect('image-dropped', Lang.bind(this,
+            function(entry, image) {
+                this.pasteImage(image);
+            }));
+
         this._chatEntry.connect('file-pasted', Lang.bind(this,
             function(entry, file) {
                 this.pasteFile(file);
             }));
+        this._chatEntry.connect('file-dropped', Lang.bind(this,
+            function(entry, file) {
+                this.pasteFile(file);
+            }));
+
         this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
 
         this._chatEntry.connect('activate', Lang.bind(this,
