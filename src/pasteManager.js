@@ -78,8 +78,8 @@ const DropTargetIface = new Lang.Interface({
         widget.connect('drag-drop', Lang.bind(this, this._onDragDrop));
         widget.connect('drag-leave', Lang.bind(this, this._onDragLeave));
         widget.connect('drag-motion', Lang.bind(this, this._onDragMotion));
-        widget.connect('drag-data-received',
-                       Lang.bind(this, this._onDragDataReceived));
+        widget.connect_after('drag-data-received',
+                             Lang.bind(this, this._onDragDataReceived));
     },
 
     _onDragDrop: function(widget, context, x, y, time) {
