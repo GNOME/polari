@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&"
 "keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-18 00:39+0000\n"
-"PO-Revision-Date: 2016-02-24 21:28+0200\n"
+"POT-Creation-Date: 2016-04-29 14:03+0000\n"
+"PO-Revision-Date: 2016-05-08 18:50+0200\n"
 "Last-Translator: Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -21,13 +21,13 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:3
+#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
 #: ../src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
 #: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:482
+#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un client IRC per GNOME"
 
@@ -37,7 +37,7 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"Un client IRC simple qu'es concebut per s'integrar perfièchament amb GNOME. "
+"Un client IRC simple qu'es concebut per s'integrar perfèitament amb GNOME. "
 "Dispausa d'una interfàcia simpla e polida que permet de vos concentrer sus "
 "vòstras conversacions."
 
@@ -82,23 +82,29 @@ msgstr "Fenèstra maximizada"
 msgid "Window maximized state"
 msgstr "Estat maximizat de la fenèstra "
 
+#: ../data/org.gnome.Polari.gschema.xml.h:7
+msgid "Last active channel"
+msgstr ""
+
+#: ../data/org.gnome.Polari.gschema.xml.h:8
+msgid "Last active (selected) channel"
+msgstr ""
+
 #: ../data/resources/connection-details.ui.h:1
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nom"
+#| msgid "_Server"
+msgid "_Server Address"
+msgstr "Adreça del _servidor"
 
 #: ../data/resources/connection-details.ui.h:2
+msgid "Net_work Name"
+msgstr ""
+
+#: ../data/resources/connection-details.ui.h:3
 #: ../data/resources/join-room-dialog.ui.h:8
 msgid "optional"
 msgstr "opcional"
 
-#: ../data/resources/connection-details.ui.h:3
-#| msgid "Server"
-msgid "_Server"
-msgstr "_Servidor"
-
 #: ../data/resources/connection-details.ui.h:4
-#| msgid "New Connection"
 msgid "Use secure c_onnection"
 msgstr "Utilizar una c_onnexion securizada"
 
@@ -113,12 +119,10 @@ msgstr "Nom ve_rtadièr"
 #: ../data/resources/connection-properties.ui.h:1
 #: ../data/resources/entry-area.ui.h:4
 #: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1
 msgid "_Cancel"
 msgstr "A_nullar"
 
 #: ../data/resources/connection-properties.ui.h:2
-#| msgid "A_pply"
 msgid "_Apply"
 msgstr "_Aplicar"
 
@@ -144,83 +148,72 @@ msgid "General"
 msgstr "General"
 
 #: ../data/resources/help-overlay.ui.h:2
-#| msgid "Join a Room"
 msgctxt "shortcut window"
 msgid "Join Room"
 msgstr "Rejónher un salon"
 
 #: ../data/resources/help-overlay.ui.h:3
-#| msgid "Message User"
-msgctxt "shortcut window"
-msgid "Message User"
-msgstr "Message a un utilizaire"
-
-#: ../data/resources/help-overlay.ui.h:4
-#| msgid "Leave chatroom"
 msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Quitar lo salon"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: ../data/resources/help-overlay.ui.h:4
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr ""
 
-#: ../data/resources/help-overlay.ui.h:6
-#| msgid "Quit"
+#: ../data/resources/help-overlay.ui.h:5
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Quitar"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: ../data/resources/help-overlay.ui.h:6
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Acorchis de clavièr"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: ../data/resources/help-overlay.ui.h:7
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigacion"
 
-#: ../data/resources/help-overlay.ui.h:9
-#| msgid "Room"
+#: ../data/resources/help-overlay.ui.h:8
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Salon seguent"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: ../data/resources/help-overlay.ui.h:9
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Salon precedent"
 
-#: ../data/resources/help-overlay.ui.h:11
+#: ../data/resources/help-overlay.ui.h:10
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr ""
 
-#: ../data/resources/help-overlay.ui.h:12
+#: ../data/resources/help-overlay.ui.h:11
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr ""
 
-#: ../data/resources/help-overlay.ui.h:13
+#: ../data/resources/help-overlay.ui.h:12
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Primièr salon"
 
-#: ../data/resources/help-overlay.ui.h:14
-#, fuzzy
+#: ../data/resources/help-overlay.ui.h:13
 #| msgid "Room"
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Darrièr salon"
 
-#: ../data/resources/help-overlay.ui.h:15
+#: ../data/resources/help-overlay.ui.h:14
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Primièr - Noven salon"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:264
+#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
 msgid "Join Chat Room"
 msgstr "Rejónher un salon de discussion"
 
@@ -229,13 +222,12 @@ msgid "_Join"
 msgstr "Re_jónher"
 
 #: ../data/resources/join-room-dialog.ui.h:4
-#: ../data/resources/message-user-dialog.ui.h:3
 msgid "C_onnection"
 msgstr "C_onnexion"
 
 #: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Apondre una connexion"
+msgid "_Add Network"
+msgstr ""
 
 #: ../data/resources/join-room-dialog.ui.h:6
 msgid "Room _Name"
@@ -246,26 +238,17 @@ msgid "_Password"
 msgstr "Sen_hal"
 
 #: ../data/resources/join-room-dialog.ui.h:9
-#| msgid "_Address"
 msgid "_Add"
 msgstr "_Apondre"
 
 #: ../data/resources/join-room-dialog.ui.h:10
-#| msgid "_Add Connection"
-msgid "_Custom Connection"
+#| msgid "_Custom Connection"
+msgid "_Custom Network"
 msgstr "_Personalizar la connexion"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Rejónher un salon"
-
 #: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Mandadís d'un messatge a un utilizaire"
-
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Rejónher lo salon"
+msgid "Add rooms and networks"
+msgstr ""
 
 #: ../data/resources/menus.ui.h:1
 msgid "Keyboard Shortcuts"
@@ -279,16 +262,7 @@ msgstr "A prepaus"
 msgid "Quit"
 msgstr "Quitar"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Mandar un messatge"
-
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Recent"
-
 #: ../data/resources/room-list-header.ui.h:1
-#| msgid "New Connection"
 msgid "Reconnect"
 msgstr "Reconnectar"
 
@@ -312,30 +286,32 @@ msgstr "Darrièra activitat :"
 msgid "Message"
 msgstr "Messatge"
 
-#: ../src/application.js:392
+#: ../src/application.js:221 ../src/utils.js:181
+msgid "Failed to open link"
+msgstr "Fracàs a la dobertura del ligam"
+
+#: ../src/application.js:490
 msgid "Good Bye"
 msgstr "Al reveire"
 
-#: ../src/application.js:424
+#: ../src/application.js:522
 #, javascript-format
 msgid "%s removed."
 msgstr "%s suprimit."
 
-#: ../src/application.js:481
+#: ../src/application.js:579
 msgid "translator-credits"
 msgstr "Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>, 2015"
 
-#: ../src/application.js:487
-#| msgid "About Polari"
+#: ../src/application.js:585
 msgid "Learn more about Polari"
 msgstr "A prepaus de Polari"
 
-#: ../src/appNotifications.js:49
+#: ../src/appNotifications.js:85
 msgid "Undo"
 msgstr "Anullar"
 
 #: ../src/chatView.js:133
-#| msgid "Message"
 msgid "New Messages"
 msgstr "Messatges novèls"
 
@@ -389,7 +365,6 @@ msgstr "%s es partit"
 
 #: ../src/chatView.js:954
 #, javascript-format
-#| msgid "%s joined"
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d utilizaire es arribat"
@@ -397,8 +372,6 @@ msgstr[1] "%d utilizaires son arribats"
 
 #: ../src/chatView.js:957
 #, javascript-format
-#| msgid "%d user"
-#| msgid_plural "%d users"
 msgid "%d user left"
 msgid_plural "%d users left"
 msgstr[0] "%d utilizaire es partit"
@@ -489,12 +462,12 @@ msgid "Already added"
 msgstr "Ja apondut"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:416
+#: ../src/connections.js:431
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Proprietats de “%s”"
 
-#: ../src/connections.js:460
+#: ../src/connections.js:475
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -569,7 +542,6 @@ msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <accion> - manda <accion> al salon actual"
 
 #: ../src/ircParser.js:29
-#, fuzzy
 #| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgstr "/MSG <nick> [<messatge>] - manda un messatge privat a <escais>"
@@ -630,20 +602,16 @@ msgstr "Utilizaires sus %s :"
 msgid "No topic set"
 msgstr "Cap de subjècte pas definit"
 
-#: ../src/joinDialog.js:265
-msgid "Add Connection"
-msgstr "Apondon d'una connexion"
+#: ../src/joinDialog.js:273
+msgid "Add Network"
+msgstr ""
 
-#: ../src/mainWindow.js:315
+#: ../src/mainWindow.js:308
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d utilizaire"
 msgstr[1] "%d utilizaires"
-
-#: ../src/messageDialog.js:87
-msgid "No recent users"
-msgstr "Pas d'utilizaires recents"
 
 #: ../src/roomList.js:129
 msgid "Leave chatroom"
@@ -653,59 +621,55 @@ msgstr "Quitar lo salon"
 msgid "End conversation"
 msgstr "Metre fin a la conversacion"
 
-#: ../src/roomList.js:213
+#: ../src/roomList.js:216
 #, javascript-format
-msgid "Connection %s has an error"
+msgid "Network %s has an error"
 msgstr ""
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:263
+#: ../src/roomList.js:266
 #, javascript-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
-#: ../src/roomList.js:270
-#| msgid "Connections"
+#: ../src/roomList.js:273
 msgid "Connection Problem"
 msgstr "Problèma de connexion"
 
-#: ../src/roomList.js:278
-#| msgid "Connections"
+#: ../src/roomList.js:281
 msgid "Connected"
 msgstr "Connectat"
 
-#: ../src/roomList.js:280
-#| msgid "Connections"
+#: ../src/roomList.js:283
 msgid "Connecting..."
 msgstr "Connexion..."
 
-#: ../src/roomList.js:282
+#: ../src/roomList.js:285
 msgid "Offline"
 msgstr "Fòra linha"
 
-#: ../src/roomList.js:284
+#: ../src/roomList.js:287
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../src/roomList.js:304
+#: ../src/roomList.js:307
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr ""
 
-#: ../src/roomList.js:307
+#: ../src/roomList.js:310
 #, javascript-format
 msgid "%s requires a password."
 msgstr ""
 
-#: ../src/roomList.js:313
+#: ../src/roomList.js:316
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr ""
 
-#: ../src/roomList.js:316
+#: ../src/roomList.js:319
 #, javascript-format
-#| msgid "Connecting to %s"
 msgid "Could not connect to %s."
 msgstr "Connexion impossibla a %s"
 
@@ -763,14 +727,42 @@ msgstr "Pas cap de rsultat"
 msgid "All"
 msgstr "Totes"
 
-#: ../src/utils.js:127
+#: ../src/utils.js:121
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Senhal del servidor Polari per %s"
 
-#: ../src/utils.js:178
-msgid "Failed to open link"
-msgstr "Fracàs a la dobertura del ligam"
+#~ msgid "_Name"
+#~ msgstr "_Nom"
+
+#~| msgid "Message User"
+#~ msgctxt "shortcut window"
+#~ msgid "Message User"
+#~ msgstr "Message a un utilizaire"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Apondre una connexion"
+
+#~ msgid "Join a Room"
+#~ msgstr "Rejónher un salon"
+
+#~ msgid "Message a User"
+#~ msgstr "Mandadís d'un messatge a un utilizaire"
+
+#~ msgid "Join room"
+#~ msgstr "Rejónher lo salon"
+
+#~ msgid "_Message"
+#~ msgstr "_Mandar un messatge"
+
+#~ msgid "_Recent"
+#~ msgstr "_Recent"
+
+#~ msgid "Add Connection"
+#~ msgstr "Apondon d'una connexion"
+
+#~ msgid "No recent users"
+#~ msgstr "Pas d'utilizaires recents"
 
 #~ msgid "Show connections"
 #~ msgstr "Afichar las connexions"
