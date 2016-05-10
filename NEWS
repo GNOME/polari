@@ -1,3 +1,14 @@
+3.20.2 - "Screw Maximilian"
+===========================
+* Support pasting text/image content from files [Florian; #766066]
+* Enable text/image uploads via drag and drop [Florian; #766068]
+
+Contributors:
+  Florian Müllner
+
+Translations:
+  Kjartan Maraas [nb]
+
 3.20.1 - "Judy Stays"
 =====================
 * Update roomList header popover on name changes [Sankaranarayanan; #763178]
