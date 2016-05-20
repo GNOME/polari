@@ -123,6 +123,10 @@ const RoomView = new Lang.Class({
     _init: function(room, sizeGroup) {
         this.parent({ orientation: Gtk.Orientation.VERTICAL });
 
+        // Delay mapping until shown, see
+        // https://bugzilla.gnome.org/show_bug.cgi?id=766737
+        this.set_child_visible(false);
+
         this._view = new ChatView.ChatView(room);
         this.add(this._view);
 
