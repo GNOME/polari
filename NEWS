@@ -1,3 +1,19 @@
+3.21.2 - "Still Dead"
+=====================
+* Support /close command [Florian; #763385]
+* Support pasting text/image content from files [Florian; #766066]
+* Enable text/image uploads via drag and drop [Florian; #766068]
+* Add help entry to app menu [Baptiste; #723024]
+* Misc. bug fixes [Florian, Emmanuele, Abderrahim; #765445, #765841]
+
+Contributors:
+  Baptiste Mille-Mathias, Florian Müllner
+
+Translations:
+  Anders Jonsson [sv], Kjartan Maraas [nb], Daniel Mustieles [es],
+  Abderrahim Kitouni [ar], Cédric Valmary [oc], Flo H [de],
+  Fábio Nogueira [pt_BR], Muhammet Kara [tr], Tiago Santos [pt]
+
 3.21.1 - "Judy Stays"
 =====================
 * Update roomList header popover on name changes [Sankaranarayanan; #763178]
