@@ -598,6 +598,21 @@ const ChatView = new Lang.Class({
 
     _onKeyPress: function(w, event) {
         let [, keyval] = event.get_keyval();
+
+        if (keyval === Gdk.KEY_Home ||
+            keyval === Gdk.KEY_KP_Home) {
+            this._view.emit('move-cursor',
+                            Gtk.MovementStep.BUFFER_ENDS,
+                            -1, false);
+            return Gdk.EVENT_STOP;
+        } else if (keyval === Gdk.KEY_End ||
+                   keyval === Gdk.KEY_KP_End) {
+            this._view.emit('move-cursor',
+                            Gtk.MovementStep.BUFFER_ENDS,
+                            1, false);
+            return Gdk.EVENT_STOP;
+        }
+
         if (keyval != Gdk.KEY_Up &&
             keyval != Gdk.KEY_KP_Up &&
             keyval != Gdk.KEY_Page_Up &&
