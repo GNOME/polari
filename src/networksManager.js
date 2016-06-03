@@ -25,7 +25,7 @@ const NetworksManager = new Lang.Class({
     },
 
     _onContentsReady: function(f, res) {
-        let data;
+        let success, data;
         try {
             [success, data, ] = f.load_contents_finish(res);
         } catch(e) {
