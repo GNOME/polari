@@ -21,7 +21,13 @@ const NetworksManager = new Lang.Class({
 
         let uri = 'resource:///org/gnome/Polari/data/networks.json';
         let file = Gio.File.new_for_uri(uri);
-        file.load_contents_async(null, Lang.bind(this, this._onContentsReady));
+        let success, data;
+        try {
+            [success, data, ] = file.load_contents(null);
+            this._parseNetworks(data);
+        } catch(e) {
+            log('Failed to load network list: ' + e.message);
+        }
     },
 
     _onContentsReady: function(f, res) {
