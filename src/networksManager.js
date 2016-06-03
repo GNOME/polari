@@ -32,21 +32,26 @@ const NetworksManager = new Lang.Class({
             log('Failed to load network list: ' + e.message);
             return;
         }
+        if (this._parseNetworks(data))
+            this.emit('changed');
+    },
 
+    _parseNetworks: function(data) {
         let networks;
         try {
             networks = JSON.parse(data);
         } catch(e) {
             log('Failed to parse network list: ' + e.message);
-            return;
+            return false;
         }
 
+        this._networksById.clear();
         this._networks = networks;
         this._networks.forEach(Lang.bind(this,
             function(network) {
                 this._networksById.set(network.id, network);
             }));
-        this.emit('changed');
+        return true;
     },
 
     _lookupNetwork: function(id) {
