@@ -194,10 +194,6 @@ const Application = new Lang.Class({
             if (!success)
                 return;
 
-            // When launching Polari via a URL, there is a potential race
-            // condition between networksManager and AccountsManager here. If
-            // AccountsManager finishes first, networksManager's list of
-            // servers would be empty and hence no matches would be found.
             let matchedId = this._networksManager.findByServer(server);
             let matches = Object.keys(map).filter(function(a) {
                 return GLib.ascii_strcasecmp(map[a].server, server) == 0 ||
