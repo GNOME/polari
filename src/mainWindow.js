@@ -94,6 +94,9 @@ const MainWindow = new Lang.Class({
     InternalChildren: ['titlebarRight',
                        'titlebarLeft',
                        'joinButton',
+                       'search-active-button',
+                        'search-bar',
+                        'search-entry',
                        'showUserListButton',
                        'userListPopover',
                        'roomListRevealer',
@@ -109,7 +112,10 @@ const MainWindow = new Lang.Class({
                                                       'subtitle-visible',
                                                       'subtitle-visible',
                                                       GObject.ParamFlags.READABLE,
-                                                      false)
+                                                      false),
+        'search-active': GObject.ParamSpec.boolean(
+            'search-active', '', '',
+            GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE, false)
     },
 
     _init: function(params) {
@@ -119,6 +125,8 @@ const MainWindow = new Lang.Class({
         this.parent(params);
 
         this._addApplicationStyle();
+
+        this._searchActive = false;
 
         this._room = null;
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
@@ -192,6 +200,26 @@ const MainWindow = new Lang.Class({
                             Lang.bind(this, this._onSizeAllocate));
         this.connect('delete-event',
                             Lang.bind(this, this._onDelete));
+        // this.connect('key-press-event', Lang.bind(this, this._handleKeyPress));
+
+        // search start
+        Utils.initActions(this,
+                         [
+                          { name: 'search-active',
+                            activate: this._toggleSearch,
+                            parameter_type: new GLib.VariantType('b'),
+                            state: new GLib.Variant('b', false) }
+                         ]);
+        this.bind_property('search-active', this._search_active_button, 'active',
+                           GObject.BindingFlags.SYNC_CREATE |
+                           GObject.BindingFlags.BIDIRECTIONAL);
+        this.bind_property('search-active',
+                           this._search_bar,
+                           'search-mode-enabled',
+                           GObject.BindingFlags.SYNC_CREATE |
+                           GObject.BindingFlags.BIDIRECTIONAL);
+        this._search_bar.connect_entry(this._search_entry);
+        // search end
 
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
@@ -216,6 +244,10 @@ const MainWindow = new Lang.Class({
 
         this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
         this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
+    },
+
+    _handleKeyPress: function(self, event) {
+        return this._search_bar.handle_event(event);
     },
 
     _onSizeAllocate: function(widget, allocation) {
