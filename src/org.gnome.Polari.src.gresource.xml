@@ -15,8 +15,11 @@
     <file>mainWindow.js</file>
     <file>networksManager.js</file>
     <file>pasteManager.js</file>
+    <file>resultList.js</file>
+    <file>resultView.js</file>
     <file>roomList.js</file>
     <file>roomStack.js</file>
+    <file>resultStack.js</file>
     <file>tabCompletion.js</file>
     <file>userList.js</file>
     <file>utils.js</file>

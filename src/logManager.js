@@ -103,6 +103,7 @@ const GenericQuery = new Lang.Class({
     _getColumnsValue: function(cursor, col) {
         switch(cursor.get_value_type(col)) {
             case Tracker.SparqlValueType.STRING:
+            case Tracker.SparqlValueType.URI:
                 return cursor.get_string(col)[0];
             case Tracker.SparqlValueType.INTEGER:
                 return cursor.get_integer(col);

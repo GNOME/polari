@@ -8,6 +8,7 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
+const LogManager = imports.logManager;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -15,9 +16,15 @@ const RoomList = imports.roomList;
 const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
+const Pango = imports.gi.Pango;
+const ChatView = imports.chatView;
+const ResultList = imports.resultList;
+const ResultView = imports.resultView;
+const ResultStack = imports.resultStack;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
+const MIN_SEARCH_WIDTH = 0;
 
 const FixedSizeFrame = new Lang.Class({
     Name: 'FixedSizeFrame',
@@ -94,6 +101,8 @@ const MainWindow = new Lang.Class({
     InternalChildren: ['titlebarRight',
                        'titlebarLeft',
                        'joinButton',
+                       'searchBar',
+                       'searchEntry',
                        'showUserListButton',
                        'userListPopover',
                        'roomListRevealer',
@@ -109,11 +118,17 @@ const MainWindow = new Lang.Class({
                                                       'subtitle-visible',
                                                       'subtitle-visible',
                                                       GObject.ParamFlags.READABLE,
-                                                      false)
+                                                      false),
+        'mode' : GObject.ParamSpec.string('mode',
+                                          'mode',
+                                          'mode',
+                                          GObject.ParamFlags.READABLE,
+                                          'chat')
     },
 
     _init: function(params) {
         this._subtitle = '';
+        this._mode = 'chat';
         params.show_menubar = false;
 
         this.parent(params);
@@ -196,6 +211,18 @@ const MainWindow = new Lang.Class({
         this.connect('delete-event',
                             Lang.bind(this, this._onDelete));
 
+        // search start
+        this._keywords = [];
+
+        this._searchBar.connect_entry(this._searchEntry);
+        this._searchBar.connect('notify::search-mode-enabled',
+                                Lang.bind(this, this._updateMode));
+        this._searchEntry.connect('search-changed',
+                                   Lang.bind(this, this._handleSearchChanged));
+
+        this._logManager = LogManager.getDefault();
+        // search end
+
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
             this.set_default_size.apply(this, size);
@@ -214,11 +241,44 @@ const MainWindow = new Lang.Class({
         return this._subtitle.length > 0;
     },
 
+    get mode() {
+        return this._mode;
+    },
+
+    _updateMode: function() {
+        let mode;
+        if (this._mode == 'search') {
+            mode = this._searchBar.search_mode_enabled ? 'search' : 'chat';
+        } else {
+            let state = this.application.get_action_state('search-terms');
+            let [terms, ] = state.get_string();
+            mode = terms.length > 0 ? 'search' : 'chat';
+        }
+
+        if (mode == this._mode)
+            return;
+
+        this._mode = mode;
+        this.notify('mode');
+    },
+
+    _handleSearchChanged: function(entry) {
+        let text = entry.get_text().replace(/^\s+|\s+$/g, '');
+        let terms = new GLib.Variant('s',
+                                     text.length < MIN_SEARCH_WIDTH ? '' : text);
+        this.application.change_action_state('search-terms', terms);
+        this._updateMode();
+    },
+
     _onWindowStateEvent: function(widget, event) {
         let state = event.get_window().get_state();
 
         this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
         this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
+    },
+
+    _handleKeyPress: function(self, event) {
+        return this._searchBar.handle_event(event);
     },
 
     _onSizeAllocate: function(widget, allocation) {

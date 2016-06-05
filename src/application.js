@@ -113,7 +113,16 @@ const Application = new Lang.Class({
           { name: 'next-pending-room',
             accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']},
           { name: 'previous-pending-room',
-            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
+            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']},
+          { name: 'toggle-search',
+            activate: Lang.bind(this, this._onToggleAction),
+            state: GLib.Variant.new('b', false),
+            accels: ['<Primary>f','<Primary>s'] },
+          { name: 'search-terms',
+            parameter_type: GLib.VariantType.new('s'),
+            state: GLib.Variant.new('s', '') },
+          { name: 'active-result-changed',
+            parameter_type: GLib.VariantType.new('(sussu)') }
         ];
         actionEntries.forEach(Lang.bind(this,
             function(actionEntry) {
