@@ -376,6 +376,11 @@ const ChatView = new Lang.Class({
         });
     },
 
+    _resetNickTag: function(nickTag) {
+        nickTag._contacts = [];
+        this._updateTagStatus(nickTag);
+    },
+
     _onStyleUpdated: function() {
         let context = this.get_style_context();
         context.save();
@@ -430,10 +435,9 @@ const ChatView = new Lang.Class({
             }
         });
 
-        let offset = NICKTAG_PREFIX.length;
         tagTable.foreach(Lang.bind(this, function(tag) {
-            if (tag._status)
-                this._setNickStatus(tag.name.substring(offset), tag._status);
+            if (tag._contacts)
+                this._updateTagStatus(tag);
         }));
     },
 
@@ -489,7 +493,6 @@ const ChatView = new Lang.Class({
                             messageType: pending[i].get_message_type(),
                             shouldHighlight: false };
             this._insertMessage(iter, message, state);
-            this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
 
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
@@ -501,13 +504,10 @@ const ChatView = new Lang.Class({
         if (this._room.type == Tp.HandleType.ROOM) {
             let members = this._channel.group_dup_members_contacts();
             for (let j = 0; j < members.length; j++)
-                this._setNickStatus(members[j].get_alias(),
-                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._trackContact(members[j]);
         } else {
-                this._setNickStatus(this._channel.connection.self_contact.get_alias(),
-                                    Tp.ConnectionPresenceType.AVAILABLE);
-                this._setNickStatus(this._channel.target_contact.get_alias(),
-                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._trackContact(this._channel.connection.self_contact);
+                this._trackContact(this._channel.target_contact);
         }
     },
 
@@ -772,17 +772,38 @@ const ChatView = new Lang.Class({
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
-    _setNickStatus: function(nick, status) {
-        let nickTag = this._lookupTag(this._getNickTagName(nick));
+    _trackContact: function(contact) {
+        let nickTag = this._lookupTag(this._getNickTagName(contact.alias));
         if (!nickTag)
            return;
 
-        if (status == Tp.ConnectionPresenceType.AVAILABLE)
-           nickTag.foreground_rgba = this._activeNickColor;
-        else
-           nickTag.foreground_rgba = this._inactiveNickColor;
+        let alreadyTracked = nickTag._contacts.some(c => c.alias == contact.alias);
 
-        nickTag._status = status;
+        if (!alreadyTracked)
+            nickTag._contacts.push(contact);
+
+        this._updateTagStatus(nickTag);
+    },
+
+    _untrackContact: function(contact) {
+        let nickTag = this._lookupTag(this._getNickTagName(contact.alias));
+        if (!nickTag)
+            return;
+
+        let indexToDelete = nickTag._contacts.map(c => c.alias).indexOf(contact.alias);
+
+        if (indexToDelete > -1) {
+            nickTag._contacts.splice(indexToDelete, 1);
+
+            this._updateTagStatus(nickTag);
+        }
+    },
+
+    _updateTagStatus: function(tag) {
+        if (tag._contacts.length == 0)
+            tag.foreground_rgba = this._inactiveNickColor;
+        else
+            tag.foreground_rgba = this._activeNickColor;
     },
 
     _onChannelChanged: function() {
@@ -827,21 +848,18 @@ const ChatView = new Lang.Class({
         if (this._room.type == Tp.HandleType.ROOM) {
             let members = this._channel.group_dup_members_contacts();
             for (let j = 0; j < members.length; j++)
-                this._setNickStatus(members[j].get_alias(),
-                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._trackContact(members[j]);
         } else {
-                this._setNickStatus(this._channel.connection.self_contact.get_alias(),
-                                    Tp.ConnectionPresenceType.AVAILABLE);
-                this._setNickStatus(this._channel.target_contact.get_alias(),
-                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._trackContact(this._channel.connection.self_contact);
+                this._trackContact(this._channel.target_contact);
         }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
         let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
-        this._setNickStatus(oldMember.alias, Tp.ConnectionPresenceType.OFFLINE);
-        this._setNickStatus(newMember.alias, Tp.ConnectionPresenceType.AVAILABLE);
+        this._untrackContact(oldMember);
+        this._trackContact(newMember);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -849,7 +867,7 @@ const ChatView = new Lang.Class({
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text, member.alias, 'left');
-        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+        this._untrackContact(member);
     },
 
     _onMemberKicked: function(room, member, actor) {
@@ -858,7 +876,7 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been kicked").format(member.alias);
         this._insertStatus(message, member.alias, 'left');
-        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+        this._untrackContact(member);
     },
 
     _onMemberBanned: function(room, member, actor) {
@@ -867,13 +885,13 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been banned").format(member.alias)
         this._insertStatus(message, member.alias, 'left');
-        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+        this._untrackContact(member);
     },
 
     _onMemberJoined: function(room, member) {
         let text = _("%s joined").format(member.alias);
         this._insertStatus(text, member.alias, 'joined');
-        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+        this._trackContact(member);
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -883,7 +901,7 @@ const ChatView = new Lang.Class({
             text += ' (%s)'.format(message);
 
         this._insertStatus(text, member.alias, 'left');
-        this._setNickStatus(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+        this._untrackContact(member);
     },
 
     _onMessageReceived: function(room, tpMessage) {
@@ -1117,7 +1135,7 @@ const ChatView = new Lang.Class({
 
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
-        this._setNickStatus(message.nick, Tp.ConnectionPresenceType.AVAILABLE);
+        this._trackContact(tpMessage.sender);
 
         let [id, valid] = tpMessage.get_pending_message_id();
 
@@ -1203,6 +1221,8 @@ const ChatView = new Lang.Class({
                 if (!nickTag) {
                     nickTag = new Gtk.TextTag({ name: nickTagName });
                     this._view.get_buffer().get_tag_table().add(nickTag);
+
+                    this._resetNickTag(nickTag);
                 }
                 tags.push(nickTag);
                 if (needsGap)
