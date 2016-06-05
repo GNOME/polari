@@ -109,6 +109,23 @@ function getURISchemes() {
     return schemes;
 }
 
+function initActions(actionMap, simpleActionEntries, context) {
+    simpleActionEntries.forEach(function(actionEntry) {
+        let props = {};
+                ['name', 'state', 'parameter_type'].forEach(
+                    function(prop) {
+                        if (actionEntry[prop])
+                            props[prop] = actionEntry[prop];
+                    });
+                let action = new Gio.SimpleAction(props);
+                if (actionEntry.create_hook)
+                    actionEntry.create_hook(action);
+                if (actionEntry.activate)
+                    action.connect('activate', actionEntry.activate);
+    });
+}
+
+
 function getTpEventTime() {
     let time = Gtk.get_current_event_time ();
     if (time == 0)

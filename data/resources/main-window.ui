@@ -60,6 +60,34 @@
                 <property name="pack-type">end</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkToggleButton" id="search-active-button">
+                <property name="visible">True</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="margin-start">5</property>
+                <property name="margin-end">5</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">edit-find-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+                <child internal-child="accessible">
+                  <object class="AtkObject">
+                    <property name="AtkObject::accessible-name"
+                              translatable="yes">Add rooms and networks</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
           </object>
         </child>
         <child>
@@ -170,6 +198,25 @@
             <property name="hexpand">False</property>
             <property name="transition-type">slide-right</property>
             <child>
+         <object class="GtkGrid" id="sidebar-grid">
+            <property name="can_focus">False</property>
+            <property name="visible">True</property>
+            <property name="hexpand">False</property>
+            <property name="vexpand">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+      <object class="GtkSearchBar" id="search-bar">
+        <property name="visible">True</property>
+        <property name="halign">fill</property>
+        <child>
+          <object class="GtkSearchEntry" id="search-entry">
+      <property name="can_focus">True</property>
+      <property name="halign">fill</property>
+          </object>
+        </child>
+      </object>
+    </child>
+            <child>
               <object class="Gjs_FixedSizeFrame" id="roomSidebar">
                 <property name="visible">True</property>
                 <property name="hexpand">False</property>
@@ -197,6 +244,8 @@
                 </child>
               </object>
             </child>
+          </object>
+        </child>
           </object>
         </child>
         <child>
