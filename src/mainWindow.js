@@ -8,6 +8,7 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const ChatroomManager = imports.chatroomManager;
+const LogManager = imports.logManager;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -222,6 +223,14 @@ const MainWindow = new Lang.Class({
                            GObject.BindingFlags.SYNC_CREATE |
                            GObject.BindingFlags.BIDIRECTIONAL);
         this._search_bar.connect_entry(this._search_entry);
+
+        //test
+        let logManager = LogManager.getDefault();
+        let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
+        let query1 = "select ?nick as ?name ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname ?nick }"
+        logManager.query(query1,null,Lang.bind(this, this._Log));
+        log("hello");
+        //test
         // search end
 
         let size = this._settings.get_value('window-size').deep_unpack();
@@ -232,6 +241,12 @@ const MainWindow = new Lang.Class({
             this.maximize();
 
         this.show_all();
+    },
+
+    _Log: function(events) {
+        log(events);
+        for (let i = 0; i < events.length; i++)
+            log(events[i].mms);
     },
 
     get subtitle() {
