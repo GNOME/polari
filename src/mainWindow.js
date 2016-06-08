@@ -16,6 +16,7 @@ const RoomList = imports.roomList;
 const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
+const Pango = imports.gi.Pango;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
@@ -103,7 +104,8 @@ const MainWindow = new Lang.Class({
                        'roomListRevealer',
                        'overlay',
                        'roomStack',
-                       'mainStack'],
+                       'mainStack',
+                       'results'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -254,8 +256,19 @@ const MainWindow = new Lang.Class({
 
     _Log: function(events) {
         log(events);
-        for (let i = 0; i < events.length; i++)
+        for (let i = 0; i < events.length; i++) {
             log(events[i].mms);
+            let row = new Gtk.ListBoxRow({visible: true});
+            let label = new Gtk.Label({ label: events[i].mms,
+                                        halign: Gtk.Align.START,
+                                        margin_start: 6,
+                                        margin_end: 6,
+                                        visible: true,
+                                        ellipsize: Pango.EllipsizeMode.END,
+                                        max_width_chars: 18  });
+            row.add(label);
+            this._results.add(row);
+        }
     },
 
     get subtitle() {

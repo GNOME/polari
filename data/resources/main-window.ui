@@ -241,10 +241,12 @@
               </packing>
                     </child>
                     <child>
-                  <object class="GtkImage">
+                  <object class="GtkListBox" id="results">
                     <property name="visible">True</property>
-                    <property name="icon-name">list-add-symbolic</property>
-                    <property name="icon-size">1</property>
+                    <property name="selection-mode">browse</property>
+                        <style>
+                          <class name="sidebar"/>
+                        </style>
                   </object>
                   <packing>
                 <property name="name">image</property>
