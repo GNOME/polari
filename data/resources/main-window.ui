@@ -225,6 +225,10 @@
                     <property name="vexpand">True</property>
                     <property name="hexpand">True</property>
                     <child>
+          <object class="GtkStack" id="mainStack">
+            <property name="visible">True</property>
+            <property name="transition-type">slide-left-right</property>
+                    <child>
                       <object class="Gjs_RoomList">
                         <property name="visible">True</property>
                         <property name="selection-mode">browse</property>
@@ -232,7 +236,22 @@
                           <class name="sidebar"/>
                         </style>
                       </object>
+                      <packing>
+                <property name="name">roomList</property>
+              </packing>
                     </child>
+                    <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">list-add-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                  <packing>
+                <property name="name">image</property>
+              </packing>
+                </child>
+                  </object>
+                </child>
                   </object>
                 </child>
               </object>

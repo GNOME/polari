@@ -102,7 +102,8 @@ const MainWindow = new Lang.Class({
                        'userListPopover',
                        'roomListRevealer',
                        'overlay',
-                       'roomStack'],
+                       'roomStack',
+                       'mainStack'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -221,6 +222,15 @@ const MainWindow = new Lang.Class({
                            GObject.BindingFlags.BIDIRECTIONAL);
         this._search_bar.connect_entry(this._search_entry);
 
+        this._search_active_button.connect(
+            'toggled',
+            Lang.bind(this, function() {
+                if (this._mainStack.visible_child_name == 'image')
+                    this._mainStack.visible_child_name = 'roomList';
+                else
+                    this._mainStack.visible_child_name = 'image';
+            }));
+
         //test
         let logManager = LogManager.getDefault();
         let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
@@ -236,6 +246,8 @@ const MainWindow = new Lang.Class({
 
         if (this._settings.get_boolean('window-maximized'))
             this.maximize();
+
+        this._mainStack.visible_child_name = 'roomList';
 
         this.show_all();
     },
