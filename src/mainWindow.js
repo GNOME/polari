@@ -226,6 +226,8 @@ const MainWindow = new Lang.Class({
                            GObject.BindingFlags.SYNC_CREATE |
                            GObject.BindingFlags.BIDIRECTIONAL);
         this._search_bar.connect_entry(this._search_entry);
+        this._search_entry.connect('search-changed',
+                                   Lang.bind(this, this._handleSearchChanged));
 
         this._search_active_button.connect(
             'toggled',
@@ -237,10 +239,10 @@ const MainWindow = new Lang.Class({
             }));
 
         //test
-        let logManager = LogManager.getDefault();
+        this._logManager = LogManager.getDefault();
         let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
         let query1 = "select ?nick as ?name ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname ?nick }"
-        logManager.query(query1,null,Lang.bind(this, this._Log));
+        this._logManager.query(query1,null,Lang.bind(this, this._Log));
         log("hello");
         //test
         // search end
@@ -274,12 +276,25 @@ const MainWindow = new Lang.Class({
         }
     },
 
+    _Log1: function() {
+        this._results.foreach(r => { r.destroy(); })
+    },
+
     get subtitle() {
         return this._subtitle;
     },
 
     get subtitle_visible() {
         return this._subtitle.length > 0;
+    },
+
+    _handleSearchChanged: function(entry) {
+        this._Log1();
+        let text = entry.get_text().replace(/^\s+|\s+$/g, '');
+        log(text);
+        let query1 = ("select ?text as ?mms ?text as ?id where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' }").format(text);
+        log(query1);
+        this._logManager.query(query1,null,Lang.bind(this, this._Log));
     },
 
     _onWindowStateEvent: function(widget, event) {
