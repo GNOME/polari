@@ -211,7 +211,7 @@ const MainWindow = new Lang.Class({
 
         // search start
         this._cancellable  = new Gio.Cancellable();
-
+        this._widgetMap = {};
         Utils.initActions(this,
                          [
                           { name: 'search-active',
@@ -263,19 +263,38 @@ const MainWindow = new Lang.Class({
 
     _Log: function(events) {
         log(events);
+        let widgetMap = {};
         for (let i = 0; i < events.length; i++) {
-            log(events[i].mms);
-            let row = new Gtk.ListBoxRow({visible: true});
-            let label = new Gtk.Label({ label: events[i].mms,
-                                        halign: Gtk.Align.START,
-                                        margin_start: 6,
-                                        margin_end: 6,
-                                        visible: true,
-                                        ellipsize: Pango.EllipsizeMode.END,
-                                        max_width_chars: 18  });
-            row.add(label);
-            row.uid = events[i].id;
-            print(row.uid);
+            let message = events[i].mms;
+            let uid = events[i].id;
+
+            let row = this._widgetMap[uid];
+
+            if (row) {
+                log("REUSING!!!");
+                widgetMap[uid] = row;
+                this._results.remove(row);
+            } else {
+                let row = new Gtk.ListBoxRow({visible: true});
+                let label = new Gtk.Label({ label: events[i].mms,
+                                            halign: Gtk.Align.START,
+                                            margin_start: 6,
+                                            margin_end: 6,
+                                            visible: true,
+                                            ellipsize: Pango.EllipsizeMode.END,
+                                            max_width_chars: 18  });
+                row.add(label);
+                row.uid = events[i].id;
+                widgetMap[uid] = row;
+            }
+        }
+
+        this._widgetMap = widgetMap;
+
+        this._results.foreach(r => { r.destroy(); })
+
+        for (let i = 0; i < events.length; i++) {
+            let row = this._widgetMap[events[i].id];
             this._results.add(row);
         }
     },
@@ -295,7 +314,6 @@ const MainWindow = new Lang.Class({
     _handleSearchChanged: function(entry) {
         this._cancellable.cancel();
         this._cancellable.reset();
-        this._Log1();
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
         log(text);
         let query1 = ("select ?text as ?mms ?msg as ?id where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' }").format(text);
