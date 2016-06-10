@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: polari gnome-3-18\n"
+"Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-05-05 14:20+0000\n"
-"PO-Revision-Date: 2016-06-08 11:51+0700\n"
+"POT-Creation-Date: 2016-06-08 04:55+0000\n"
+"PO-Revision-Date: 2016-06-10 20:01+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -20,18 +20,18 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.6.10\n"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3 ../src/roomStack.js:77
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:13
+#: src/roomStack.js:94
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:453
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:627
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Suatu Klien Internet Relay Chat untuk GNOME"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -41,7 +41,7 @@ msgstr ""
 "terintegrasi secara mulus dengan GNOME; ini memiliki fitur antar muka yang "
 "indah dan sederhana yang memungkinkan Anda fokus ke percakapan Anda."
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -54,233 +54,344 @@ msgstr ""
 "pesan penting - untuk percakapan pribadi, bahkan dimungkinkan untuk menjawab "
 "seketika tanpa bertukar balik ke aplikasi!"
 
-#: ../data/org.gnome.Polari.desktop.in.h:3
+#: data/org.gnome.Polari.desktop.in:6
+msgid "org.gnome.Polari"
+msgstr "org.gnome.Polari"
+
+#: data/org.gnome.Polari.desktop.in:13
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;"
 
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Tampilkan koneksi"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:1
+#: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
 msgstr "Daftar kanal tersimpan"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:2
+#: data/org.gnome.Polari.gschema.xml:7
 msgid "List of channels to restore on startup"
 msgstr "Daftar kanal yang akan dipulihkan saat awal mula"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:3
+#: data/org.gnome.Polari.gschema.xml:11
 msgid "Window size"
 msgstr "Ukuran jendela"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:4
+#: data/org.gnome.Polari.gschema.xml:12
 msgid "Window size (width and height)."
 msgstr "Ukuran jendela (lebar dan tinggi)."
 
-#: ../data/org.gnome.Polari.gschema.xml.h:5
+#: data/org.gnome.Polari.gschema.xml:16
 msgid "Window maximized"
 msgstr "Jendela termaksimalkan"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:6
+#: data/org.gnome.Polari.gschema.xml:17
 msgid "Window maximized state"
 msgstr "Keadaan termaksimalkan jendela"
 
-#: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Alamat"
+#: data/org.gnome.Polari.gschema.xml:21
+msgid "Last active channel"
+msgstr "Kanal aktif terakhir"
 
-#: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "_Deskripsi"
+#: data/org.gnome.Polari.gschema.xml:22
+msgid "Last active (selected) channel"
+msgstr "Kanal yang terakhir aktif (dipilih)"
 
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Nickname"
-msgstr "_Nama panggilan"
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "Alamat _Server"
 
-#: ../data/resources/connection-details.ui.h:4
-msgid "_Real Name"
-msgstr "Na_ma Asli"
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "Nama Jarin_gan"
 
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
+#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:116
+#: data/resources/join-room-dialog.ui:153
 msgid "optional"
 msgstr "opsional"
 
-#. translators: This will be used in the phrase: "Open Connections in the application menu"
-#. translators: This will be used in the phrase: "Enable them by opening Connections in the application menu"
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1 ../src/roomStack.js:113
-#: ../src/roomStack.js:123
-msgid "Connections"
-msgstr "Koneksi"
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "Gunakan k_oneksi aman"
 
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Use the + button to add a new connection."
-msgstr "Gunakan tombol + untuk menambah sambungan baru."
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "_Nama panggilan"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Add"
-msgstr "Tambah"
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "Na_ma Asli"
 
-#: ../data/resources/connection-list-dialog.ui.h:4
-msgid "Remove"
-msgstr "Buang"
-
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:222
-msgid "Join Chat Room"
-msgstr "Bergabung Ke Ruang Obrolan"
-
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:394
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:143
+#: data/resources/join-room-dialog.ui:28
 msgid "_Cancel"
 msgstr "_Batal"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:224
-msgid "_Join"
-msgstr "_Gabung"
+#: data/resources/connection-properties.ui:17
+msgid "_Apply"
+msgstr "Ter_apkan"
 
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "T_ambah Koneksi"
+#: data/resources/entry-area.ui:16
+msgid "Change nickname:"
+msgstr "Ubah nama panggilan:"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
-msgid "C_onnection"
-msgstr "K_oneksi"
+#: data/resources/entry-area.ui:27
+msgid "_Change"
+msgstr "U_bah"
 
-#: ../data/resources/join-room-dialog.ui.h:7
-msgid "Room _Name"
-msgstr "_Nama Ruang"
+#: data/resources/entry-area.ui:73
+msgid "Change nickname"
+msgstr "Ubah nama panggilan"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Password"
-msgstr "_Sandi"
+#: data/resources/entry-area.ui:153
+msgid "_Paste"
+msgstr "Tem_pel"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Bergabung ke suatu Ruang"
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Umum"
 
-#: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Kirim Pesan ke Pengguna"
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "Gabung ke Ruang"
 
-#: ../data/resources/main-window.ui.h:4
-msgid "Join room"
-msgstr "Bergabung ke ruang"
+#: data/resources/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "Tinggalkan Ruang"
 
-#: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Preferensi"
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "Tampilkan Daftar Pengguna"
 
-#: ../data/resources/menus.ui.h:3
-msgid "About"
-msgstr "Tentang"
-
-#: ../data/resources/menus.ui.h:4
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Keluar"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Pesan"
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Tik"
 
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "Ba_ru-baru ini"
+#: data/resources/help-overlay.ui:57
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Navigasi"
 
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nama"
+#: data/resources/help-overlay.ui:61
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "Ruang Selanjutnya"
 
-#: ../data/resources/room-list-header.ui.h:1
-msgid "Connection Error"
-msgstr "Kesalahan Koneksi"
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "Ruang Sebelumnya"
 
-#: ../data/resources/user-list-details.ui.h:1
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Ruang Selanjutnya dengan Pesan Belum Dibaca"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Ruang Sebelumnya dengan Pesan Belum Dibaca"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "Ruang Pertama"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "Ruang Terakhir"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "First - Ninth Room"
+msgstr "Ruang Pertama - Ke Sembilan"
+
+#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:272
+msgid "Join Chat Room"
+msgstr "Bergabung Ke Ruang Obrolan"
+
+#: data/resources/join-room-dialog.ui:36
+msgid "_Join"
+msgstr "_Gabung"
+
+#: data/resources/join-room-dialog.ui:68
+msgid "C_onnection"
+msgstr "K_oneksi"
+
+#: data/resources/join-room-dialog.ui:97
+msgid "_Add Network"
+msgstr "T_ambah Jaringan"
+
+#: data/resources/join-room-dialog.ui:111
+msgid "Room _Name"
+msgstr "_Nama Ruang"
+
+#: data/resources/join-room-dialog.ui:138
+msgid "_Password"
+msgstr "_Sandi"
+
+#: data/resources/join-room-dialog.ui:227
+msgid "_Add"
+msgstr "T_ambah"
+
+#: data/resources/join-room-dialog.ui:246
+msgid "_Custom Network"
+msgstr "Jaringan _Ubahan"
+
+#: data/resources/main-window.ui:43
+msgid "Add rooms and networks"
+msgstr "Tambah ruang dan jaringan"
+
+#: data/resources/menus.ui:6
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Tik"
+
+#: data/resources/menus.ui:10
+msgid "Help"
+msgstr "Bantuan"
+
+#: data/resources/menus.ui:14
+msgid "About"
+msgstr "Tentang"
+
+#: data/resources/menus.ui:18
+msgid "Quit"
+msgstr "Keluar"
+
+#: data/resources/room-list-header.ui:137
+msgid "Reconnect"
+msgstr "Sambungkan kembali"
+
+#: data/resources/room-list-header.ui:145
+msgid "Remove"
+msgstr "Buang"
+
+#: data/resources/room-list-header.ui:153
+msgid "Properties"
+msgstr "Properti"
+
+#: data/resources/user-list-details.ui:26
 msgid "Loading details"
 msgstr "Memuat rincian"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:222
+#: data/resources/user-list-details.ui:52 src/userList.js:218
 msgid "Last Activity:"
 msgstr "Aktivitas Terakhir:"
 
-#: ../data/resources/user-list-details.ui.h:3
+#: data/resources/user-list-details.ui:79
 msgid "Message"
 msgstr "Pesan"
 
-#: ../src/application.js:372
+#: src/application.js:226 src/utils.js:181
+msgid "Failed to open link"
+msgstr "Gagal membuka taut"
+
+#: src/application.js:536
 msgid "Good Bye"
 msgstr "Selamat Tinggal"
 
-#: ../src/application.js:452
+#: src/application.js:568
+#, javascript-format
+msgid "%s removed."
+msgstr "%s dihapus."
+
+#: src/application.js:626
 msgid "translator-credits"
 msgstr ""
 "Andika Triwidada <andika@gmail.com>, 2014, 2016\n"
 "Sendy Aditya Suryana <sendzation@gmail.com>, 2015"
 
-#: ../src/chatView.js:123
+#: src/application.js:632
+msgid "Learn more about Polari"
+msgstr "Pelajari lebih lanjut tentang Polari"
+
+#: src/appNotifications.js:85
+msgid "Undo"
+msgstr "Tak Jadi"
+
+#: src/chatView.js:134
 msgid "New Messages"
 msgstr "Pesan Baru"
 
-#: ../src/chatView.js:487
+#: src/chatView.js:664
 msgid "Open Link"
 msgstr "Buka Tautan"
 
-#: ../src/chatView.js:494
+#: src/chatView.js:670
 msgid "Copy Link Address"
 msgstr "Salin Alamat Tautan"
 
-#: ../src/chatView.js:682
+#: src/chatView.js:841
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s kini dikenal sebagai %s"
 
-#: ../src/chatView.js:689
+#: src/chatView.js:848
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s telah terputus"
 
-#: ../src/chatView.js:698
+#: src/chatView.js:857
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s telah ditendang oleh %s"
 
-#: ../src/chatView.js:700
+#: src/chatView.js:859
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s telah ditendang"
 
-#: ../src/chatView.js:707
+#: src/chatView.js:866
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s telah dicekal oleh %s"
 
-#: ../src/chatView.js:709
+#: src/chatView.js:868
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s telah dicekal"
 
-#: ../src/chatView.js:715
+#: src/chatView.js:874
 #, javascript-format
 msgid "%s joined"
 msgstr "%s bergabung"
 
-#: ../src/chatView.js:720
+#: src/chatView.js:880
 #, javascript-format
 msgid "%s left"
 msgstr "%s pergi"
 
+#: src/chatView.js:976
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d pengguna bergabung"
+
+#: src/chatView.js:979
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d pengguna pergi"
+
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:760
+#: src/chatView.js:1046
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:765
+#: src/chatView.js:1051
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Kemarin, %H∶%M"
@@ -288,7 +399,7 @@ msgstr "Kemarin, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:770
+#: src/chatView.js:1056
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -297,7 +408,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:776
+#: src/chatView.js:1062
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
@@ -306,21 +417,21 @@ msgstr "%d %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:782
+#: src/chatView.js:1068
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:787
+#: src/chatView.js:1073
 msgid "%l∶%M %p"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:792
+#: src/chatView.js:1078
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Kemarin, %l∶%M %p"
@@ -328,7 +439,7 @@ msgstr "Kemarin, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:797
+#: src/chatView.js:1083
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -337,7 +448,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:803
+#: src/chatView.js:1089
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
@@ -346,12 +457,22 @@ msgstr "%d %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:809
+#: src/chatView.js:1095
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:239
+#: src/connections.js:42
+msgid "Already added"
+msgstr "Telah ditambahkan"
+
+#. Translators: %s is a connection name
+#: src/connections.js:431
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Properti \"%s\""
+
+#: src/connections.js:475
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -359,21 +480,48 @@ msgstr ""
 "Polari terputus karena galat jaringan. Harap periksa kembali alamat yang "
 "benar."
 
-#: ../src/connections.js:379 ../src/roomList.js:226 ../src/roomList.js:246
-msgid "Edit Connection"
-msgstr "Sunting Koneksi"
+#: src/entryArea.js:289
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Tempel %s baris teks ke layanan tempel publik?"
 
-#: ../src/connections.js:380
-msgid "New Connection"
-msgstr "Koneksi Baru"
+#: src/entryArea.js:293
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Sedang mengunggah %s baris teks ke layanan tempel publik..."
 
-#: ../src/connections.js:396
-msgid "A_pply"
-msgstr "Tera_pkan"
+#: src/entryArea.js:300
+msgid "Upload image to public paste service?"
+msgstr "Unggah citra ke layanan tempel publik?"
 
-#: ../src/connections.js:396
-msgid "Cr_eate"
-msgstr "_Buat"
+#: src/entryArea.js:301
+msgid "Uploading image to public paste service…"
+msgstr "Sedang mengunggah citra ke layanan tempel publik..."
+
+#. Translators: %s is a filename
+#: src/entryArea.js:322
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Unggah \"%s\" ke layanan tempel publik?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:324
+#, javascript-format
+msgid "Uploading “%s” to public paste service …"
+msgstr "Sedang mengunggah \"%s\" ke layanan tempel publik..."
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:333
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s dalam #%s"
+
+#: src/entryArea.js:335
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Tempel dari %s"
 
 #. commands that would be nice to support:
 #.
@@ -384,7 +532,14 @@ msgstr "_Buat"
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
-#: ../src/ircParser.js:24
+#: src/ircParser.js:24
+msgid ""
+"/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<kanal>] [<alasan>] - menutup <kanal>, secara baku adalah yang saat "
+"ini"
+
+#: src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
@@ -392,199 +547,204 @@ msgstr ""
 "/HELP [<perintah>] - menampilkan bantuan untuk <perintah>, atau daftar "
 "perintah yang tersedia"
 
-#: ../src/ircParser.js:25
+#: src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <panggilan> [<kanal>] - mengundang <panggilan> ke <kanal>, atau yang "
 "saat ini"
 
-#: ../src/ircParser.js:26
+#: src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <kanall> - bergabung ke <kanal>"
 
-#: ../src/ircParser.js:27
+#: src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <panggilan> - menendang <panggilan> dari kanal saat ini"
 
-#: ../src/ircParser.js:28
+#: src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <aksi> - mengirim <aksi> ke kanal saat ini"
 
-#: ../src/ircParser.js:29
+#: src/ircParser.js:30
+msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
+msgstr "/MSG <panggilan> [<pesan>] - mengirim pesan pribadi ke <panggilan>"
+
+#: src/ircParser.js:31
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - menampilkan daftar pengguna pada kanal saat ini"
 
-#: ../src/ircParser.js:30
+#: src/ircParser.js:32
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <namapanggilan> - menata nama Anda menjadi <namapanggilan>"
 
-#: ../src/ircParser.js:31
+#: src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanal>] [<alasan>] - meninggalkan <kanal>, secara baku adalah yang "
 "saat ini"
 
-#: ../src/ircParser.js:32
+#: src/ircParser.js:34
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr ""
 "/QUERY <panggilan> - membuka suatu percakapan pribadi dengan <panggilan>"
 
-#: ../src/ircParser.js:33
+#: src/ircParser.js:35
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<alasan>] - memutus dari server saat ini"
 
-#: ../src/ircParser.js:34
+#: src/ircParser.js:36
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <teks> - mengirim <teks> ke ruang/kontak saat ini"
 
-#: ../src/ircParser.js:35
+#: src/ircParser.js:37
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <topik> - menata topik menjadi <topik>, atau menampilkan yang saat ini"
 
-#: ../src/ircParser.js:38
+#: src/ircParser.js:40
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Perintah tak dikenal - cobalah /HELP untuk daftar perintah yang tersedia"
 
-#: ../src/ircParser.js:59
+#: src/ircParser.js:61
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Cara pakai: %s"
 
-#: ../src/ircParser.js:94
+#: src/ircParser.js:99
 msgid "Known commands:"
 msgstr "Perintah yang dikenal: "
 
-#: ../src/ircParser.js:171
+#: src/ircParser.js:199
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Pengguna pada %s:"
 
-#: ../src/ircParser.js:252
+#: src/ircParser.js:285
 msgid "No topic set"
 msgstr "Topik tak ditata"
 
-#: ../src/joinDialog.js:223
-msgid "Add Connection"
-msgstr "Tambah Koneksi"
+#: src/joinDialog.js:273
+msgid "Add Network"
+msgstr "Tambah Jaringan"
 
-#: ../src/joinDialog.js:225
-msgid "_Save"
-msgstr "_Simpan"
-
-#: ../src/mainWindow.js:231
+#: src/mainWindow.js:308
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d pengguna"
 
-#: ../src/messageDialog.js:95
-msgid "No recent users"
-msgstr "Tak ada pengguna terkini"
-
-#: ../src/pasteManager.js:291
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Mengunggah %s"
-
-#: ../src/roomList.js:22
+#: src/roomList.js:129
 msgid "Leave chatroom"
 msgstr "Tinggalkan ruangan"
 
-#: ../src/roomList.js:23
+#: src/roomList.js:129
 msgid "End conversation"
 msgstr "Akhiri percakapan"
 
-#: ../src/roomList.js:204
+#: src/roomList.js:216
 #, javascript-format
-msgid "Connection %s has an error"
-msgstr "Koneksi %s punya kesalahan"
+msgid "Network %s has an error"
+msgstr "Jaringan %s punya kesalahan"
 
-#: ../src/roomList.js:224
-msgid "Please check your connection details."
-msgstr "Harap periksa sambungan jaringan."
-
-#: ../src/roomList.js:245
-msgid "Could not make connection in a safe way."
-msgstr "Tidak bisa menyambung dengan cara aman."
-
-#: ../src/roomList.js:253
-msgid "Authentication failed."
-msgstr "Otentikasi gagal."
-
-#: ../src/roomList.js:254 ../src/roomList.js:265 ../src/roomList.js:273
-msgid "Try again"
-msgstr "Coba lagi"
-
-#: ../src/roomList.js:264
-msgid "The server is busy."
-msgstr "Server sedang sibuk."
-
-#: ../src/roomList.js:272
-msgid "Failed to connect for an unknown reason."
-msgstr "Galat tak dikenal saat menghubungkan."
-
-#: ../src/roomStack.js:111
-msgid "Begin chatting by adding a new connection."
-msgstr "Mulailah mengobrol dengan menambah sambungan baru."
-
-#: ../src/roomStack.js:114
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:266
 #, javascript-format
-msgid "Open %s in the application menu."
-msgstr "Buka %s dalam menu aplikasi."
+msgid "%s (%s)"
+msgstr "%s (%s)"
 
-#: ../src/roomStack.js:117
+#: src/roomList.js:273
+msgid "Connection Problem"
+msgstr "Masalah Koneksi"
+
+#: src/roomList.js:281
+msgid "Connected"
+msgstr "Tersambung"
+
+#: src/roomList.js:283
+msgid "Connecting..."
+msgstr "Menyambung..."
+
+#: src/roomList.js:285
+msgid "Offline"
+msgstr "Luring"
+
+#: src/roomList.js:287
+msgid "Unknown"
+msgstr "Tak dikenal"
+
+#: src/roomList.js:307
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "Tidak bisa menyambung ke %s dengan cara aman."
+
+#: src/roomList.js:310
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s memerlukan sandi."
+
+#: src/roomList.js:316
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Tidak bisa menyambung ke %s. Server sibuk."
+
+#: src/roomList.js:319
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Tidak bisa menyambung ke %s."
+
+#: src/roomStack.js:97
 msgid "Join a room using the + button."
 msgstr "Bergabung ke suatu ruang memakai tombol +."
 
-#: ../src/roomStack.js:121
-msgid "Your connections are disabled."
-msgstr "Koneksi Anda dimatikan."
-
-#: ../src/roomStack.js:124
-#, javascript-format
-msgid "Enable them by opening %s in the application menu."
-msgstr "Fungsikan mereka dengan membuka %s dalam menu aplikasi."
-
-#: ../src/userList.js:178
+#: src/userList.js:174
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d detik yang lalu"
 
-#: ../src/userList.js:183
+#: src/userList.js:179
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d menit yang lalu"
 
-#: ../src/userList.js:188
+#: src/userList.js:184
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d jam yang lalu"
 
-#: ../src/userList.js:193
+#: src/userList.js:189
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari yang lalu"
 
-#: ../src/userList.js:198
+#: src/userList.js:194
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d minggu yang lalu"
 
-#: ../src/userList.js:202
+#: src/userList.js:198
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan yang lalu"
 
-#: ../src/userList.js:540
+#: src/userList.js:383
+msgid "No results"
+msgstr "Tidak ada hasil"
+
+#: src/userList.js:556
 msgid "All"
 msgstr "Semua"
+
+#: src/utils.js:121
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Sandi server Polari untuk %s"
