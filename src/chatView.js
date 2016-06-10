@@ -376,6 +376,14 @@ const ChatView = new Lang.Class({
         });
     },
 
+    _foreachNickTag: function(func) {
+        let tagTable = this._view.get_buffer().get_tag_table();
+        tagTable.foreach(function(tag) {
+            if (tag._contacts)
+                func(tag);
+        });
+    },
+
     _resetNickTag: function(nickTag) {
         nickTag._contacts = [];
         this._updateTagStatus(nickTag);
@@ -435,10 +443,7 @@ const ChatView = new Lang.Class({
             }
         });
 
-        tagTable.foreach(Lang.bind(this, function(tag) {
-            if (tag._contacts)
-                this._updateTagStatus(tag);
-        }));
+        this._foreachNickTag(t => { this._updateTagStatus(t); });
     },
 
     vfunc_destroy: function() {
@@ -822,6 +827,19 @@ const ChatView = new Lang.Class({
                                  : this._room.account.nickname;
         this._updateMaxNickChars(nick.length);
 
+        if (this._channel) {
+            if (this._room.type == Tp.HandleType.ROOM) {
+                let members = this._channel.group_dup_members_contacts();
+                for (let j = 0; j < members.length; j++)
+                    this._trackContact(members[j]);
+            } else {
+                this._trackContact(this._channel.connection.self_contact);
+                this._trackContact(this._channel.target_contact);
+            }
+        } else {
+            this._foreachNickTag(t => { this._resetNickTag(t); });
+        }
+
         if (!this._channel)
             return;
 
@@ -844,15 +862,6 @@ const ChatView = new Lang.Class({
                 this._insertTpMessage(this._room, message);
             }));
         this._checkMessages();
-
-        if (this._room.type == Tp.HandleType.ROOM) {
-            let members = this._channel.group_dup_members_contacts();
-            for (let j = 0; j < members.length; j++)
-                this._trackContact(members[j]);
-        } else {
-                this._trackContact(this._channel.connection.self_contact);
-                this._trackContact(this._channel.target_contact);
-        }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
