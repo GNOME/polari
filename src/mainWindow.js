@@ -207,6 +207,8 @@ const MainWindow = new Lang.Class({
         // this.connect('key-press-event', Lang.bind(this, this._handleKeyPress));
 
         // search start
+        this._cancellable  = new Gio.Cancellable();
+
         Utils.initActions(this,
                          [
                           { name: 'search-active',
@@ -238,7 +240,7 @@ const MainWindow = new Lang.Class({
         //test
         this._logManager = LogManager.getDefault();
         let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
-        let query1 = "select ?nick as ?name ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname ?nick }"
+        let query1 = "select ?msg as ?id ?nick as ?name ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname ?nick }"
         this._logManager.query(query1,null,Lang.bind(this, this._Log));
         log("hello");
         //test
@@ -269,6 +271,8 @@ const MainWindow = new Lang.Class({
                                         ellipsize: Pango.EllipsizeMode.END,
                                         max_width_chars: 18  });
             row.add(label);
+            row.uid = events[i].id;
+            print(row.uid);
             this._results.add(row);
         }
     },
@@ -286,12 +290,14 @@ const MainWindow = new Lang.Class({
     },
 
     _handleSearchChanged: function(entry) {
+        this._cancellable.cancel();
+        this._cancellable.reset();
         this._Log1();
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
         log(text);
-        let query1 = ("select ?text as ?mms ?text as ?id where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' }").format(text);
+        let query1 = ("select ?text as ?mms ?msg as ?id where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' }").format(text);
         log(query1);
-        this._logManager.query(query1,null,Lang.bind(this, this._Log));
+        this._logManager.query(query1,this._cancellable,Lang.bind(this, this._Log));
     },
 
     _onWindowStateEvent: function(widget, event) {
