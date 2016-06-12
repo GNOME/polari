@@ -210,6 +210,7 @@ const MainWindow = new Lang.Class({
         // this.connect('key-press-event', Lang.bind(this, this._handleKeyPress));
 
         // search start
+        this._keywords = [];
         this._cancellable  = new Gio.Cancellable();
         this._widgetMap = {};
         Utils.initActions(this,
@@ -244,7 +245,7 @@ const MainWindow = new Lang.Class({
         this._logManager = LogManager.getDefault();
         let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
         let query1 = "select ?msg as ?id ?nick as ?name ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname ?nick }"
-        this._logManager.query(query1,null,Lang.bind(this, this._Log));
+        //this._logManager.query(query1,null,Lang.bind(this, this._Log));
         log("hello");
         //test
         // search end
@@ -269,6 +270,12 @@ const MainWindow = new Lang.Class({
             let uid = events[i].id;
 
             let row = this._widgetMap[uid];
+            for (let j = 0; j < this._keywords.length; j++) {
+                log(this._keywords[j]);
+                print(message.indexOf(this._keywords[j]));
+                message = message.replace(this._keywords[j],"<span font_weight='bold'>"+this._keywords[j]+"</span>");
+                print(message);
+            }
 
             if (row) {
                 log("REUSING!!!");
@@ -276,13 +283,14 @@ const MainWindow = new Lang.Class({
                 this._results.remove(row);
             } else {
                 let row = new Gtk.ListBoxRow({visible: true});
-                let label = new Gtk.Label({ label: events[i].mms,
+                let label = new Gtk.Label({ label: message,
                                             halign: Gtk.Align.START,
                                             margin_start: 6,
                                             margin_end: 6,
                                             visible: true,
                                             ellipsize: Pango.EllipsizeMode.END,
-                                            max_width_chars: 18  });
+                                            max_width_chars: 18,
+                                            use_markup: true });
                 row.add(label);
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
@@ -315,6 +323,7 @@ const MainWindow = new Lang.Class({
         this._cancellable.cancel();
         this._cancellable.reset();
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
+        this._keywords = text == '' ? [] : text.split(/\s+/);
         log(text);
         let query1 = ("select ?text as ?mms ?msg as ?id where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' }").format(text);
         log(query1);
