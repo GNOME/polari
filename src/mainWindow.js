@@ -266,7 +266,7 @@ const MainWindow = new Lang.Class({
         for (let i = 0; i < events.length; i++) {
             let message = events[i].mms;
             let uid = events[i].id;
-            let index = 0;
+            let index = message.indexOf(this._keywords[0] - 5);
             let row = this._widgetMap[uid];
             for (let j = 0; j < this._keywords.length; j++) {
                 // log(this._keywords[j]);
@@ -293,7 +293,7 @@ const MainWindow = new Lang.Class({
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
-            widgetMap[uid].get_children()[0].label = message;
+            widgetMap[uid].get_children()[0].label = message.substring(index - 2);
         }
 
         this._widgetMap = widgetMap;
