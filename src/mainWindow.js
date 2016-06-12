@@ -262,16 +262,17 @@ const MainWindow = new Lang.Class({
     _Log: function(events) {
         log(events);
         let widgetMap = {};
+        let markup_message = '';
         for (let i = 0; i < events.length; i++) {
             let message = events[i].mms;
             let uid = events[i].id;
-
+            let index = 0;
             let row = this._widgetMap[uid];
             for (let j = 0; j < this._keywords.length; j++) {
-                log(this._keywords[j]);
-                print(message.indexOf(this._keywords[j]));
-                message = message.replace(this._keywords[j],"<span font_weight='bold'>"+this._keywords[j]+"</span>");
-                print(message);
+                // log(this._keywords[j]);
+                index = message.indexOf(this._keywords[j]);
+                message = message.replace( new RegExp( "(" + this._keywords[j] + ")" , 'gi' ),"<span font_weight='bold'>$1</span>");
+                // print(message);
             }
 
             if (row) {
@@ -292,6 +293,7 @@ const MainWindow = new Lang.Class({
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
+            widgetMap[uid].get_children()[0].label = message;
         }
 
         this._widgetMap = widgetMap;
@@ -300,6 +302,7 @@ const MainWindow = new Lang.Class({
 
         for (let i = 0; i < events.length; i++) {
             let row = this._widgetMap[events[i].id];
+            // row.get_children()[0].label = markup_message;
             this._results.add(row);
         }
     },
