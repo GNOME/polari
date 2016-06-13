@@ -266,11 +266,11 @@ const MainWindow = new Lang.Class({
         for (let i = 0; i < events.length; i++) {
             let message = events[i].mms;
             let uid = events[i].id;
-            let index = message.indexOf(this._keywords[0] - 5);
+            let index = message.indexOf(this._keywords[0]);
             let row = this._widgetMap[uid];
             for (let j = 0; j < this._keywords.length; j++) {
                 // log(this._keywords[j]);
-                index = message.indexOf(this._keywords[j]);
+                index = Math.min(index, message.indexOf(this._keywords[j]));
                 message = message.replace( new RegExp( "(" + this._keywords[j] + ")" , 'gi' ),"<span font_weight='bold'>$1</span>");
                 // print(message);
             }
@@ -293,7 +293,7 @@ const MainWindow = new Lang.Class({
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
-            widgetMap[uid].get_children()[0].label = message.substring(index - 2);
+            widgetMap[uid].get_children()[0].label = "..." + message.substring(index - 6);
         }
 
         this._widgetMap = widgetMap;
