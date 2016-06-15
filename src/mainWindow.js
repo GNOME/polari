@@ -229,6 +229,8 @@ const MainWindow = new Lang.Class({
         this._search_entry.connect('search-changed',
                                    Lang.bind(this, this._handleSearchChanged));
 
+        this._searchisActive = false;
+
         this._search_active_button.connect(
             'toggled',
             Lang.bind(this, function() {
@@ -236,6 +238,7 @@ const MainWindow = new Lang.Class({
                     this._mainStack.visible_child_name = 'roomList';
                 else
                     this._mainStack.visible_child_name = 'image';
+                this._searchisActive = !this._searchisActive;
             }));
 
         //test
@@ -281,6 +284,11 @@ const MainWindow = new Lang.Class({
                 this._results.remove(row);
             } else {
                 let row = new Gtk.ListBoxRow({visible: true});
+                let box = new Gtk.Box({
+                orientation: Gtk.Orientation.VERTICAL,
+            	homogeneous: false,
+            	spacing: 0,
+                visible: true});
                 let label = new Gtk.Label({ label: message,
                                             halign: Gtk.Align.START,
                                             margin_start: 6,
@@ -289,11 +297,21 @@ const MainWindow = new Lang.Class({
                                             ellipsize: Pango.EllipsizeMode.END,
                                             max_width_chars: 18,
                                             use_markup: true });
-                row.add(label);
+                let label1 = new Gtk.Label({ label: "Contact Name",
+                                            halign: Gtk.Align.START,
+                                            margin_start: 6,
+                                            margin_end: 6,
+                                            visible: true,
+                                            ellipsize: Pango.EllipsizeMode.END,
+                                            max_width_chars: 18,
+                                            use_markup: true });
+                box.pack_start(label1, false, true, 0);
+                box.pack_start(label, false, true, 0);
+                row.add(box);
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
-            widgetMap[uid].get_children()[0].label = "..." + message.substring(index - 6);
+            // widgetMap[uid].get_children()[0].label = "..." + message.substring(index - 6);
         }
 
         this._widgetMap = widgetMap;
@@ -322,6 +340,12 @@ const MainWindow = new Lang.Class({
     _handleSearchChanged: function(entry) {
         this._cancellable.cancel();
         this._cancellable.reset();
+//         if(text!='' && this._searchActive) {
+//                         this._mainStack.visible_child_name = 'image';
+// }
+// else {
+//     this._mainStack.visible_child_name = 'roomList';
+// }
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
         this._keywords = text == '' ? [] : text.split(/\s+/);
         log(text);
