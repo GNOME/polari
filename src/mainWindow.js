@@ -285,9 +285,14 @@ const MainWindow = new Lang.Class({
             } else {
                 let row = new Gtk.ListBoxRow({visible: true});
                 let box = new Gtk.Box({
-                orientation: Gtk.Orientation.VERTICAL,
+                orientation: Gtk.Orientation.HORIZONTAL,
             	homogeneous: false,
             	spacing: 0,
+                visible: true});
+                let box1 = new Gtk.Box({
+                orientation: Gtk.Orientation.VERTICAL,
+                homogeneous: false,
+                spacing: 0,
                 visible: true});
                 let label = new Gtk.Label({ label: message,
                                             halign: Gtk.Align.START,
@@ -305,9 +310,19 @@ const MainWindow = new Lang.Class({
                                             ellipsize: Pango.EllipsizeMode.END,
                                             max_width_chars: 18,
                                             use_markup: true });
+                let label2 = new Gtk.Label({ label: "TIMESTAMP",
+                                            halign: Gtk.Align.START,
+                                            margin_start: 6,
+                                            margin_end: 6,
+                                            visible: true,
+                                            ellipsize: Pango.EllipsizeMode.END,
+                                            max_width_chars: 18,
+                                            use_markup: true });
                 box.pack_start(label1, false, true, 0);
-                box.pack_start(label, false, true, 0);
-                row.add(box);
+                box.pack_start(label2, false, true, 0);
+                box1.pack_start(box, false, true, 0);
+                box1.pack_start(label, false, true, 0);
+                row.add(box1);
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
