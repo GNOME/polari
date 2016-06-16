@@ -17,6 +17,7 @@ const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
 const Pango = imports.gi.Pango;
+const ChatView = imports.chatView;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
@@ -267,6 +268,8 @@ const MainWindow = new Lang.Class({
         let widgetMap = {};
         let markup_message = '';
         for (let i = 0; i < events.length; i++) {
+            let time = events[i].timestamp;
+            let channel = events[i].chan;
             let message = events[i].mms;
             let uid = events[i].id;
             let index = message.indexOf(this._keywords[0]);
@@ -302,7 +305,7 @@ const MainWindow = new Lang.Class({
                                             ellipsize: Pango.EllipsizeMode.END,
                                             max_width_chars: 18,
                                             use_markup: true });
-                let label1 = new Gtk.Label({ label: "Contact Name",
+                let label1 = new Gtk.Label({ label: channel.substring(1),
                                             halign: Gtk.Align.START,
                                             margin_start: 6,
                                             margin_end: 6,
@@ -310,7 +313,7 @@ const MainWindow = new Lang.Class({
                                             ellipsize: Pango.EllipsizeMode.END,
                                             max_width_chars: 18,
                                             use_markup: true });
-                let label2 = new Gtk.Label({ label: "TIMESTAMP",
+                let label2 = new Gtk.Label({ label: String(this._formatTimestamp(time)),
                                             halign: Gtk.Align.START,
                                             margin_start: 6,
                                             margin_end: 6,
@@ -364,9 +367,88 @@ const MainWindow = new Lang.Class({
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
         this._keywords = text == '' ? [] : text.split(/\s+/);
         log(text);
-        let query1 = ("select ?text as ?mms ?msg as ?id where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' }").format(text);
+        let query1 = ("select ?text as ?mms ?msg as ?id ?chan as ?chan ?timestamp as ?timestamp where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' . ?msg nmo:communicationChannel ?channel. ?channel nie:title ?chan. ?msg nie:contentCreated ?timestamp }").format(text);
         log(query1);
         this._logManager.query(query1,this._cancellable,Lang.bind(this, this._Log));
+    },
+
+    _formatTimestamp: function(timestamp) {
+        let date = GLib.DateTime.new_from_unix_local(timestamp);
+        let now = GLib.DateTime.new_now_local();
+
+        // 00:01 actually, just to be safe
+        let todayMidnight = GLib.DateTime.new_local(now.get_year(),
+                                                    now.get_month(),
+                                                    now.get_day_of_month(),
+                                                    0, 1, 0);
+        let dateMidnight = GLib.DateTime.new_local(date.get_year(),
+                                                   date.get_month(),
+                                                   date.get_day_of_month(),
+                                                   0, 1, 0);
+        let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
+
+        let format;
+        let desktopSettings = new Gio.Settings({ schema_id: 'org.gnome.desktop.interface' });
+        let clockFormat = desktopSettings.get_string('clock-format');
+        let hasAmPm = date.format('%p') != '';
+
+        if (clockFormat == '24h' || !hasAmPm) {
+            if(daysAgo < 1) { // today
+                /* Translators: Time in 24h format */
+                format = _("%H\u2236%M");
+            } else if(daysAgo <2) { // yesterday
+                /* Translators: this is the word "Yesterday" followed by a
+                 time string in 24h format. i.e. "Yesterday, 14:30" */
+                // xgettext:no-c-format
+                format = _("Yesterday, %H\u2236%M");
+            } else if (daysAgo < 7) { // this week
+                /* Translators: this is the week day name followed by a time
+                 string in 24h format. i.e. "Monday, 14:30" */
+                // xgettext:no-c-format
+                format = _("%A, %H\u2236%M");
+            } else if (date.get_year() == now.get_year()) { // this year
+                /* Translators: this is the month name and day number
+                 followed by a time string in 24h format.
+                 i.e. "May 25, 14:30" */
+                // xgettext:no-c-format
+                format = _("%B %d, %H\u2236%M");
+            } else { // before this year
+                /* Translators: this is the month name, day number, year
+                 number followed by a time string in 24h format.
+                 i.e. "May 25 2012, 14:30" */
+                // xgettext:no-c-format
+                format = _("%B %d %Y, %H\u2236%M");
+            }
+        } else {
+            if(daysAgo < 1) { // today
+                /* Translators: Time in 12h format */
+                format = _("%l\u2236%M %p");
+            } else if(daysAgo <2) { // yesterday
+                /* Translators: this is the word "Yesterday" followed by a
+                 time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+                // xgettext:no-c-format
+                format = _("Yesterday, %l\u2236%M %p");
+            } else if (daysAgo < 7) { // this week
+                /* Translators: this is the week day name followed by a time
+                 string in 12h format. i.e. "Monday, 2:30 pm" */
+                // xgettext:no-c-format
+                format = _("%A, %l\u2236%M %p");
+            } else if (date.get_year() == now.get_year()) { // this year
+                /* Translators: this is the month name and day number
+                 followed by a time string in 12h format.
+                 i.e. "May 25, 2:30 pm" */
+                // xgettext:no-c-format
+                format = _("%B %d, %l\u2236%M %p");
+            } else { // before this year
+                /* Translators: this is the month name, day number, year
+                 number followed by a time string in 12h format.
+                 i.e. "May 25 2012, 2:30 pm"*/
+                // xgettext:no-c-format
+                format = _("%B %d %Y, %l\u2236%M %p");
+            }
+        }
+
+        return date.format(format);
     },
 
     _onWindowStateEvent: function(widget, event) {
