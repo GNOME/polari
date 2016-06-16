@@ -416,7 +416,7 @@ const _ChatroomManager = new Lang.Class({
         let [account, connection,
              channels, satisfied, userTime, context] = arguments;
 
-        let [present, time] = Tp.user_action_time_should_present(userTime);
+        let [present, ] = Tp.user_action_time_should_present(userTime);
 
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
@@ -435,7 +435,7 @@ const _ChatroomManager = new Lang.Class({
                     this.setActiveRoom(room);
 
                 if (present)
-                    this._app.get_active_window().present_with_time(time);
+                    this._app.activate();
             }));
     },
 
