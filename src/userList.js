@@ -469,7 +469,7 @@ const UserList = new Lang.Class({
             for (let i = 0; i < membersShown; i++)
                 height += this._list.get_row_at_index(index + i).get_allocated_height();
 
-            this.min_content_height = height;
+            this.max_content_height = height;
             this._updateHeightId = 0;
             return GLib.SOURCE_REMOVE;
         }));
