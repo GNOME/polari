@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="Gjs_ResultRow" parent="GtkListBoxRow">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkEventBox" id="eventBox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLabel" id="roomLabel">
+                <property name="visible">True</property>
+                <property name="ellipsize">end</property>
+                <property name="use-markup">true</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

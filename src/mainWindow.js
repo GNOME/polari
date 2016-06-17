@@ -18,6 +18,7 @@ const UserList = imports.userList;
 const Utils = imports.utils;
 const Pango = imports.gi.Pango;
 const ChatView = imports.chatView;
+const ResultList = imports.resultList;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
@@ -286,46 +287,8 @@ const MainWindow = new Lang.Class({
                 widgetMap[uid] = row;
                 this._results.remove(row);
             } else {
-                let row = new Gtk.ListBoxRow({visible: true});
-                let box = new Gtk.Box({
-                orientation: Gtk.Orientation.HORIZONTAL,
-            	homogeneous: false,
-            	spacing: 0,
-                visible: true});
-                let box1 = new Gtk.Box({
-                orientation: Gtk.Orientation.VERTICAL,
-                homogeneous: false,
-                spacing: 0,
-                visible: true});
-                let label = new Gtk.Label({ label: message,
-                                            halign: Gtk.Align.START,
-                                            margin_start: 6,
-                                            margin_end: 6,
-                                            visible: true,
-                                            ellipsize: Pango.EllipsizeMode.END,
-                                            max_width_chars: 18,
-                                            use_markup: true });
-                let label1 = new Gtk.Label({ label: channel.substring(1),
-                                            halign: Gtk.Align.START,
-                                            margin_start: 6,
-                                            margin_end: 6,
-                                            visible: true,
-                                            ellipsize: Pango.EllipsizeMode.END,
-                                            max_width_chars: 18,
-                                            use_markup: true });
-                let label2 = new Gtk.Label({ label: String(this._formatTimestamp(time)),
-                                            halign: Gtk.Align.START,
-                                            margin_start: 6,
-                                            margin_end: 6,
-                                            visible: true,
-                                            ellipsize: Pango.EllipsizeMode.END,
-                                            max_width_chars: 18,
-                                            use_markup: true });
-                box.pack_start(label1, false, true, 0);
-                box.pack_start(label2, false, true, 0);
-                box1.pack_start(box, false, true, 0);
-                box1.pack_start(label, false, true, 0);
-                row.add(box1);
+                let row = new ResultList.ResultRow();
+                row._roomLabel.label = message;
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
