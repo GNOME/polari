@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="Gjs_UserListDetails" parent="GtkFrame">
+  <template class="Gjs_UserDetails" parent="GtkFrame">
     <property name="visible">True</property>
     <property name="hexpand">True</property>
     <child>
@@ -36,13 +36,13 @@
             <property name="hexpand">True</property>
             <property name="visible">True</property>
             <child>
-              <object class="GtkLabel" id="fullnameLabel">
-                <property name="ellipsize">end</property>
-                <property name="halign">start</property>
+              <object class="GtkImage">
+                <property name="icon-name">document-open-recent-symbolic</property>
                 <property name="visible">True</property>
+                <property name="halign">start</property>
               </object>
               <packing>
-                <property name="width">2</property>
+                <property name="width">1</property>
                 <property name="top-attach">0</property>
                 <property name="left-attach">0</property>
               </packing>
@@ -51,11 +51,13 @@
               <object class="GtkLabel" id="lastHeader">
                 <property name="label" translatable="yes">Last Activity:</property>
                 <property name="valign">start</property>
+                <property name="halign">start</property>
                 <property name="use-markup">True</property>
                 <property name="visible">True</property>
+                <property name="margin-start">17</property>
               </object>
               <packing>
-                <property name="top-attach">1</property>
+                <property name="top-attach">0</property>
                 <property name="left-attach">0</property>
               </packing>
             </child>
@@ -68,17 +70,56 @@
                 <property name="visible">True</property>
               </object>
               <packing>
-                <property name="top-attach">1</property>
+                <property name="top-attach">0</property>
                 <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">avatar-default-symbolic</property>
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+              </object>
+              <packing>
+                <property name="width">1</property>
+                <property name="top-attach">1</property>
+                <property name="left-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="fullnameLabel">
+                <property name="ellipsize">end</property>
+                <property name="halign">start</property>
+                <property name="visible">True</property>
+                <property name="margin-start">17</property>
+              </object>
+              <packing>
+                <property name="width">2</property>
+                <property name="top-attach">1</property>
+                <property name="left-attach">0</property>
               </packing>
             </child>
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="messageButton">
+          <object class="GtkSeparator" id="separator">
+            <property name="visible">True</property>
+            <property name="margin-top">10</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="messageButton">
             <property name="label" translatable="yes">Message</property>
-            <property name="margin-top">12</property>
-            <property name="halign">end</property>
+            <property name="halign">start</property>
+            <property name="hexpand">True</property>
+            <property name="visible">True</property>
+            <property name="no-show-all">False</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton" id="pastActivityButton">
+            <property name="label" translatable="yes">View Past Activity</property>
+            <property name="halign">start</property>
             <property name="hexpand">True</property>
             <property name="visible">True</property>
           </object>
