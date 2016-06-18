@@ -99,17 +99,19 @@ const UserListPopover = new Lang.Class({
     }
 });
 
-const UserListDetails = new Lang.Class({
-    Name: 'UserListDetails',
+const UserDetails = new Lang.Class({
+    Name: 'UserDetails',
     Extends: Gtk.Frame,
-    Template: 'resource:///org/gnome/Polari/ui/user-list-details.ui',
+    Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
     InternalChildren: ['spinnerBox',
                        'spinner',
                        'detailsGrid',
                        'fullnameLabel',
                        'lastHeader',
                        'lastLabel',
-                       'messageButton'],
+                       'separator',
+                       'messageButton',
+                       'pastActivityButton'],
     Properties: { 'expanded': GObject.ParamSpec.boolean('expanded',
                                                         'expanded',
                                                         'expanded',
@@ -117,19 +119,29 @@ const UserListDetails = new Lang.Class({
                                                         false)},
 
     _init: function(params) {
-        this._user = params.user;
-        delete params.user;
-
         this._expanded = false;
 
-        this.parent(params);
+        this.parent();
 
         this._messageButton.connect('clicked',
-                                    Lang.bind(this, this._onButtonClicked));
+                                    Lang.bind(this, this._onMessageButtonClicked));
+        //this._user.connection.connect('notify::self-contact',
+        //                              Lang.bind(this, this._updateButtonVisibility));
+        this._updateButtonVisibility();
+        this._detailsGrid.hide();
+    },
+
+    set user(user) {
+        this._user = user;
         this._user.connection.connect('notify::self-contact',
                                       Lang.bind(this, this._updateButtonVisibility));
         this._updateButtonVisibility();
-        this._detailsGrid.hide();
+    },
+
+    set fallbackNick(fallbackNick) {
+        this._fallbackNick = fallbackNick;
+
+        this._updateButtonVisibility();
     },
 
     get expanded() {
@@ -157,8 +169,11 @@ const UserListDetails = new Lang.Class({
         this._spinner.start();
 
         this._cancellable = new Gio.Cancellable();
-        this._user.request_contact_info_async(this._cancellable,
+
+        if (this._user)
+            this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
+        //TODO: else use this._falbackNick to quert tracker
     },
 
     _unexpand: function() {
@@ -230,7 +245,7 @@ const UserListDetails = new Lang.Class({
         this._detailsGrid.show();
     },
 
-    _onButtonClicked: function() {
+    _onMessageButtonClicked: function() {
         let account = this._user.connection.get_account();
 
         let app = Gio.Application.get_default();
@@ -244,8 +259,71 @@ const UserListDetails = new Lang.Class({
     },
 
     _updateButtonVisibility: function() {
+        if (!this._user) {
+            this._messageButton.visible = false;
+
+            return;
+        }
+
         let visible = this._user != this._user.connection.self_contact;
         this._messageButton.visible = visible;
+    }
+});
+
+const UserPopover = new Lang.Class({
+    Name: 'UserPopover',
+    Extends: Gtk.Popover,
+
+    _init: function(params) {
+        this.parent(params);
+
+        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5 });
+        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5 });
+        //this._userDetails = new UserDetails();
+
+        this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this._vbox.add(this._nickLabel);
+        this._vbox.add(this._statusLabel);
+        //this._vbox.add(this._userDetails);
+
+        this.add(this._vbox);
+    },
+
+    set user(user) {
+        this._user  = user;
+
+        this._populateUserPopover();
+    },
+
+    get user() {
+        return this._user;
+    },
+
+    set fallbackNick(fallbackNick) {
+        this._fallbackNick = fallbackNick;
+
+        this._populateUserPopover();
+    },
+
+    _populateUserPopover: function() {
+        this._nickLabel.set_label(this._user ? this._user.alias : this._fallbackNick);
+        this._statusLabel.set_label(this._user ? "ONLINE" : "OFFLINE");
+
+
+        if (this._userDetails)
+            this._userDetails.destroy();
+
+        this._userDetails = new UserDetails();
+
+        if (this._user) {
+            this._userDetails.user = this._user;
+        }
+
+        this._userDetails.fallbackNick = this._fallbackNick;
+
+        this.bind_property('visible', this._userDetails, 'expanded', 0);
+
+        this._vbox.add(this._userDetails);
     }
 });
 
@@ -291,7 +369,7 @@ const UserListRow = new Lang.Class({
         let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
         this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
                                       no_show_all: true });
-        hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
+        //hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
         this._label = new Gtk.Label({ label: this._user.alias,
                                       halign: Gtk.Align.START,
                                       hexpand: true,
@@ -312,7 +390,10 @@ const UserListRow = new Lang.Class({
         if (this._revealer.get_child())
             return;
 
-        let details = new UserListDetails({ user: this._user })
+        //let details = new UserDetails({ user: this._user });
+        let details = new UserDetails();
+        details.user = this._user;
+
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
