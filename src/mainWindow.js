@@ -288,7 +288,9 @@ const MainWindow = new Lang.Class({
                 this._results.remove(row);
             } else {
                 let row = new ResultList.ResultRow();
-                row._roomLabel.label = message;
+                row._content_label.label = message;
+                row._source_name.label = channel;
+                row._short_time_label.label = this._formatTimestamp(time);
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
