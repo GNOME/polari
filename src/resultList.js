@@ -10,25 +10,16 @@ const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 
-function _onPopoverVisibleChanged(popover) {
-    let context = popover.relative_to.get_style_context();
-    if (popover.visible)
-        context.add_class('has-open-popup');
-    else
-        context.remove_class('has-open-popup');
-}
-
 const ResultRow = new Lang.Class({
     Name: 'ResultRow',
     Extends: Gtk.ListBoxRow,
     Template: 'resource:///org/gnome/Polari/ui/result-list-row.ui',
-    InternalChildren: ['eventBox', 'roomLabel'],
+    InternalChildren: ['box1', 'source_name', 'short_time_label', 'content_label'],
 
     _init: function(message, uid) {
         this.parent();
 
         this._uid = uid;
-        this._popover = null;
 
         // this._icon.gicon = room.icon;
         // this._icon.visible = room.icon != null;
