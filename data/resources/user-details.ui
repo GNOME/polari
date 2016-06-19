@@ -3,11 +3,12 @@
   <template class="Gjs_UserDetails" parent="GtkFrame">
     <property name="visible">True</property>
     <property name="hexpand">True</property>
+    <property name="shadow-type">none</property>
     <child>
       <object class="GtkBox" id="box">
         <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
-        <property name="margin">6</property>
+        <property name="spacing">2</property>
+        <property name="margin">5</property>
         <property name="visible">True</property>
         <child>
           <object class="GtkBox" id="spinnerBox">
@@ -40,6 +41,7 @@
                 <property name="icon-name">document-open-recent-symbolic</property>
                 <property name="visible">True</property>
                 <property name="halign">start</property>
+                <property name="margin-left">0</property>
               </object>
               <packing>
                 <property name="width">1</property>
@@ -54,7 +56,7 @@
                 <property name="halign">start</property>
                 <property name="use-markup">True</property>
                 <property name="visible">True</property>
-                <property name="margin-start">17</property>
+                <property name="margin-start">20</property>
               </object>
               <packing>
                 <property name="top-attach">0</property>
@@ -68,6 +70,7 @@
                 <property name="wrap">True</property>
                 <property name="hexpand">True</property>
                 <property name="visible">True</property>
+                <property name="hexpand">True</property>
               </object>
               <packing>
                 <property name="top-attach">0</property>
@@ -79,6 +82,7 @@
                 <property name="icon-name">avatar-default-symbolic</property>
                 <property name="visible">True</property>
                 <property name="halign">start</property>
+                <property name="margin-left">0</property>
               </object>
               <packing>
                 <property name="width">1</property>
@@ -91,7 +95,8 @@
                 <property name="ellipsize">end</property>
                 <property name="halign">start</property>
                 <property name="visible">True</property>
-                <property name="margin-start">17</property>
+                <property name="margin-start">20</property>
+                <property name="hexpand">True</property>
               </object>
               <packing>
                 <property name="width">2</property>
@@ -104,24 +109,25 @@
         <child>
           <object class="GtkSeparator" id="separator">
             <property name="visible">True</property>
-            <property name="margin-top">10</property>
+            <property name="margin-top">7</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton" id="messageButton">
-            <property name="label" translatable="yes">Message</property>
-            <property name="halign">start</property>
+            <property name="text" translatable="yes">Message</property>
+            <property name="halign">fill</property>
             <property name="hexpand">True</property>
             <property name="visible">True</property>
-            <property name="no-show-all">False</property>
+            <property name="no-show-all">True</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton" id="pastActivityButton">
-            <property name="label" translatable="yes">View Past Activity</property>
-            <property name="halign">start</property>
+            <property name="text" translatable="yes">View Past Activity</property>
+            <property name="halign">fill</property>
             <property name="hexpand">True</property>
             <property name="visible">True</property>
+            <property name="no-show-all">True</property>
           </object>
         </child>
       </object>

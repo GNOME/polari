@@ -121,20 +121,29 @@ const UserDetails = new Lang.Class({
     _init: function(params) {
         this._expanded = false;
 
-        this.parent();
+        this.parent(params);
 
         this._messageButton.connect('clicked',
                                     Lang.bind(this, this._onMessageButtonClicked));
-        //this._user.connection.connect('notify::self-contact',
-        //                              Lang.bind(this, this._updateButtonVisibility));
+
         this._updateButtonVisibility();
         this._detailsGrid.hide();
     },
 
     set user(user) {
+        if (this._user == user)
+            return;
+
+        if (this._user)
+            this._user.connection.disconnect(this._selfContactChangedId);
+        this._selfContactChangedId = 0;
+
         this._user = user;
-        this._user.connection.connect('notify::self-contact',
-                                      Lang.bind(this, this._updateButtonVisibility));
+
+        if (this._user)
+            this._selfContactChangedId = this._user.connection.connect('notify::self-contact',
+                                                    Lang.bind(this, this._updateButtonVisibility));
+
         this._updateButtonVisibility();
     },
 
@@ -162,6 +171,12 @@ const UserDetails = new Lang.Class({
         this.notify('expanded');
     },
 
+    clearPrevUserAndDetails: function() {
+        this.user = null;
+        this._fullnameLabel.label = '';
+        this._lastLabel.label = '';
+    },
+
     _expand: function() {
         let prevDetails = this._fullnameLabel.label != '';
         this._detailsGrid.visible = prevDetails;
@@ -173,7 +188,7 @@ const UserDetails = new Lang.Class({
         if (this._user)
             this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
-        //TODO: else use this._falbackNick to quert tracker
+        //TODO: else use this._falbackNick to query tracker
     },
 
     _unexpand: function() {
@@ -260,13 +275,13 @@ const UserDetails = new Lang.Class({
 
     _updateButtonVisibility: function() {
         if (!this._user) {
-            this._messageButton.visible = false;
+            this._messageButton.sensitive = false;
 
             return;
         }
 
-        let visible = this._user != this._user.connection.self_contact;
-        this._messageButton.visible = visible;
+        let active = this._user != this._user.connection.self_contact;
+        this._messageButton.sensitive = active;
     }
 });
 
@@ -278,21 +293,24 @@ const UserPopover = new Lang.Class({
         this.parent(params);
 
         this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5 });
-        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5 });
-        //this._userDetails = new UserDetails();
+        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5, margin_bottom: 3 });
+        this._userDetails = new UserDetails();
+        this.bind_property('visible', this._userDetails, 'expanded', 0);
 
         this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._vbox.add(this._nickLabel);
         this._vbox.add(this._statusLabel);
-        //this._vbox.add(this._userDetails);
+        this._vbox.add(this._userDetails);
 
         this.add(this._vbox);
+
+        this._vbox.show_all();
     },
 
     set user(user) {
-        this._user  = user;
+        this._user = user;
 
-        this._populateUserPopover();
+        this._updateContents();
     },
 
     get user() {
@@ -302,28 +320,32 @@ const UserPopover = new Lang.Class({
     set fallbackNick(fallbackNick) {
         this._fallbackNick = fallbackNick;
 
-        this._populateUserPopover();
+        this._updateContents();
     },
 
-    _populateUserPopover: function() {
-        this._nickLabel.set_label(this._user ? this._user.alias : this._fallbackNick);
-        this._statusLabel.set_label(this._user ? "ONLINE" : "OFFLINE");
+    _updateContents: function() {
+        //this._nickLabel.set_label(this._user ? this._user.alias : this._fallbackNick);
+        this._nickLabel.set_label(this._fallbackNick);
+        this._statusLabel.set_label(this._user ? "Online" : "Offline");
 
-
-        if (this._userDetails)
-            this._userDetails.destroy();
-
-        this._userDetails = new UserDetails();
+        if (this._user) {
+            let context = this._statusLabel.get_style_context();
+            context.set_state(Gtk.StateFlags.LINK);
+            context.save();
+            this._statusLabel.sensitive = true;
+        }
+        else {
+            this._statusLabel.sensitive = false;
+        }
 
         if (this._user) {
             this._userDetails.user = this._user;
         }
+        else {
+            this._userDetails.clearPrevUserAndDetails();
+        }
 
         this._userDetails.fallbackNick = this._fallbackNick;
-
-        this.bind_property('visible', this._userDetails, 'expanded', 0);
-
-        this._vbox.add(this._userDetails);
     }
 });
 
