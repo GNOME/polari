@@ -274,7 +274,8 @@ const MainWindow = new Lang.Class({
             let message = events[i].mms;
             let uid = events[i].id;
             let index = message.indexOf(this._keywords[0]);
-            let row = this._widgetMap[uid];
+            let row;
+            row = this._widgetMap[uid];
             for (let j = 0; j < this._keywords.length; j++) {
                 // log(this._keywords[j]);
                 index = Math.min(index, message.indexOf(this._keywords[j]));
@@ -287,13 +288,13 @@ const MainWindow = new Lang.Class({
                 widgetMap[uid] = row;
                 this._results.remove(row);
             } else {
-                let row = new ResultList.ResultRow();
-                row._content_label.label = message;
-                row._source_name.label = channel;
+                row = new ResultList.ResultRow();
+                row._source_name.label = channel.substring(1);
                 row._short_time_label.label = this._formatTimestamp(time);
                 row.uid = events[i].id;
                 widgetMap[uid] = row;
             }
+            row._content_label.label = message;
             // widgetMap[uid].get_children()[0].label = "..." + message.substring(index - 6);
         }
 
