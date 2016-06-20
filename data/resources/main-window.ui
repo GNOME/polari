@@ -225,16 +225,23 @@
                 <style>
                   <class name="polari-room-list"/>
                 </style>
+                    <child>
+          <object class="GtkStack" id="mainStack">
+            <property name="visible">True</property>
+            <property name="transition-type">slide-left-right</property>
+            <property name="hexpand">false</property>
+            <child>
+              <object class="Gjs_FixedSizeFrame">
+                <property name="visible">True</property>
+                <property name="hexpand">False</property>
+                <property name="width">200</property>
+                <property name="shadow-type">none</property>
                 <child>
                   <object class="GtkScrolledWindow">
                     <property name="visible">True</property>
                     <property name="hscrollbar-policy">never</property>
                     <property name="vexpand">True</property>
                     <property name="hexpand">True</property>
-                    <child>
-          <object class="GtkStack" id="mainStack">
-            <property name="visible">True</property>
-            <property name="transition-type">slide-left-right</property>
                     <child>
                       <object class="Gjs_RoomList">
                         <property name="visible">True</property>
@@ -243,10 +250,27 @@
                           <class name="sidebar"/>
                         </style>
                       </object>
-                      <packing>
-                <property name="name">roomList</property>
-              </packing>
+
                     </child>
+                </object>
+            </child>
+                </object>
+                <packing>
+          <property name="name">roomList</property>
+        </packing>
+            </child>
+            <child>
+              <object class="Gjs_FixedSizeFrame">
+                <property name="visible">True</property>
+                <property name="hexpand">False</property>
+                <property name="width">200</property>
+                <property name="shadow-type">none</property>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="visible">True</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="vexpand">True</property>
+                    <property name="hexpand">True</property>
                     <child>
                   <object class="GtkListBox" id="results">
                     <property name="visible">True</property>
@@ -255,12 +279,15 @@
                           <class name="sidebar"/>
                         </style>
                   </object>
-                  <packing>
-                <property name="name">image</property>
-              </packing>
+
                 </child>
-                  </object>
-                </child>
+            </object>
+        </child>
+            </object>
+            <packing>
+          <property name="name">image</property>
+        </packing>
+        </child>
                   </object>
                 </child>
               </object>
