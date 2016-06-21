@@ -1,3 +1,15 @@
+3.21.3 - "Ben Dover"
+====================
+* Add shortcuts to jump to top/bottom of the chat log [Danny; #755549]
+* Track users to fix wrong online status in chat log [Rares; #763868]
+
+Contributors:
+  Anders Jonsson, Christian Kirbach, Danny Mølgaard, Florian Müllner,
+  Rares Visalom
+
+Translations:
+  Daniel Mustieles [es], Tiago Santos [pt], Andika Triwidada [id]
+
 3.21.2 - "Still Dead"
 =====================
 * Support /close command [Florian; #763385]
