@@ -106,6 +106,7 @@ const UserDetails = new Lang.Class({
     InternalChildren: ['spinnerBox',
                        'spinner',
                        'detailsGrid',
+                       'userIcon',
                        'fullnameLabel',
                        'lastHeader',
                        'lastLabel',
@@ -143,6 +144,11 @@ const UserDetails = new Lang.Class({
         if (this._user)
             this._selfContactChangedId = this._user.connection.connect('notify::self-contact',
                                                     Lang.bind(this, this._updateButtonVisibility));
+
+        if (this.expanded) {
+            this.expanded = false;
+            this.expanded = true;
+        }
 
         this._updateButtonVisibility();
     },
@@ -189,6 +195,8 @@ const UserDetails = new Lang.Class({
             this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
         //TODO: else use this._falbackNick to query tracker
+        else
+            this._trackFallbackNick(this._fallbackNick);
     },
 
     _unexpand: function() {
@@ -243,6 +251,7 @@ const UserDetails = new Lang.Class({
             fn = this._user.alias;
 
         this._fullnameLabel.label = fn;
+        this._userIcon.visible = true;
 
         if (last) {
             this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
@@ -255,6 +264,19 @@ const UserDetails = new Lang.Class({
             this._lastLabel.hide();
         }
 
+        this._revealDetails();
+    },
+
+    _trackFallbackNick: function(fallbackNick) {
+        this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+        this._lastHeader.show();
+
+        this._userIcon.visible = false;
+
+        this._revealDetails();
+    },
+
+    _revealDetails: function() {
         this._spinner.stop();
         this._spinnerBox.hide();
         this._detailsGrid.show();
@@ -280,8 +302,15 @@ const UserDetails = new Lang.Class({
             return;
         }
 
-        let active = this._user != this._user.connection.self_contact;
-        this._messageButton.sensitive = active;
+        //let active = this._user != this._user.connection.self_contact;
+        //this._messageButton.sensitive = active;
+        if (this._user == this._user.connection.self_contact) {
+            this._messageButton.visible = false;
+            this._messageButton.sensitive = true; //does this even make sense?
+        } else {
+            this._messageButton.visible = true;
+            this._messageButton.sensitive = true;
+        }
     }
 });
 
@@ -292,10 +321,14 @@ const UserPopover = new Lang.Class({
     _init: function(params) {
         this.parent(params);
 
-        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5 });
-        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 5, margin_bottom: 3 });
+        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 9 });
+        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 9, margin_bottom: 3 });
         this._userDetails = new UserDetails();
         this.bind_property('visible', this._userDetails, 'expanded', 0);
+
+        let context = this._statusLabel.get_style_context();
+        context.add_class('subtitle');
+        //context.save();
 
         this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._vbox.add(this._nickLabel);
@@ -323,8 +356,11 @@ const UserPopover = new Lang.Class({
         this._updateContents();
     },
 
+    get fallbackNick() {
+        return this._fallbackNick;
+    },
+
     _updateContents: function() {
-        //this._nickLabel.set_label(this._user ? this._user.alias : this._fallbackNick);
         this._nickLabel.set_label(this._fallbackNick);
         this._statusLabel.set_label(this._user ? "Online" : "Offline");
 
@@ -412,7 +448,6 @@ const UserListRow = new Lang.Class({
         if (this._revealer.get_child())
             return;
 
-        //let details = new UserDetails({ user: this._user });
         let details = new UserDetails();
         details.user = this._user;
 

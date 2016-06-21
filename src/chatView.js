@@ -1281,10 +1281,11 @@ const ChatView = new Lang.Class({
         let rect1 = view.get_iter_location(start);
         let rect2 = view.get_iter_location(end);
 
+        [rect1.y, rect1.height] = view.get_line_yrange(start);
+
         [rect1.x, rect1.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect1.x, rect1.y);
         [rect2.x, rect2.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect2.x, rect2.y);
         rect1.width = rect2.x - rect1.x;
-        rect1.height = rect2.y - rect1.y;
 
         //TODO: special chars?
         let actualNickName = view.get_buffer().get_slice(start, end, false);
@@ -1304,11 +1305,14 @@ const ChatView = new Lang.Class({
                     contactFound = true;
                     break;
                 }
+                else if (tag._popover.user == tag._contacts[i]) {
+                    contactFound = true;
+                    break;
+                }
             }
         }
 
         if (!contactFound) {
-            //tag._popover.user = null;
             if (tag._contacts[0]) {
                 tag._popover.user = tag._contacts[0];
             }
