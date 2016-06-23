@@ -16,6 +16,7 @@ const Signals = imports.signals;
 const Utils = imports.utils;
 const UserTracker = imports.userTracker;
 const UserList = imports.userList;
+const ChatroomManager = imports.chatroomManager;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -297,6 +298,7 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
+        this._chatroomManager = ChatroomManager.getDefault();
 
         this._userTracker = new UserTracker.UserTracker(this._room);
         this._userTracker.connect('status-changed', Lang.bind(this, this._onNickStatusChanged));
@@ -1220,7 +1222,7 @@ const ChatView = new Lang.Class({
 
     _createNickTag: function(name) {
         let tag = new ButtonTag({ name: name });
-        tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0 });
+        tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room });
         tag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
         return tag;
     },

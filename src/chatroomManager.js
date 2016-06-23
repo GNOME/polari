@@ -162,6 +162,8 @@ const _ChatroomManager = new Lang.Class({
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
 
         this._lastActiveRoom = null;
+
+        this._watchlist = [];
     },
 
     _onPrepared: function(mon, am) {
@@ -509,6 +511,37 @@ const _ChatroomManager = new Lang.Class({
 
     get roomCount() {
         return Object.keys(this._rooms).length;
+    },
+
+    addToWatchlist: function(user, network) {
+        this._watchlist.push([user, network]);
+    },
+
+    isUserWatched: function (user, network) {
+        for (var i = 0; i < this._watchlist.length; i++) {
+            if (this._watchlist[i][0] == user && this._watchlist[i][1] == network) {
+                return true;
+            }
+        }
+
+        return false;
+    },
+
+    popUserFromWatchlist: function (user, network) {
+        let indexToDelete = -1;
+        for (var i = 0; i < this._watchlist.length; i++) {
+            if (this._watchlist[i][0] == user && this._watchlist[i][1] == network) {
+                indexToDelete = i;
+            }
+        }
+
+        if (indexToDelete != -1)
+            this._watchlist.splice(indexToDelete, 1);
+    },
+
+    emitWatchedUserNotification: function (notification) {
+        log("notification in chatroom manager");
+        this._app.send_notification('watched-user-notification', notification);
     }
 });
 Signals.addSignalMethods(_ChatroomManager.prototype);

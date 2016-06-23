@@ -319,10 +319,29 @@ const UserPopover = new Lang.Class({
     Extends: Gtk.Popover,
 
     _init: function(params) {
+        this._room = params.room;
+        delete params.room;
+
         this.parent(params);
 
-        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 9 });
-        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_left: 9, margin_bottom: 3 });
+        this._chatroomManager = ChatroomManager.getDefault();
+
+        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0 });
+        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0 });
+
+        this._headervbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, halign: Gtk.Align.FILL });
+        this._headervbox.add(this._nickLabel);
+        this._headervbox.add(this._statusLabel);
+
+        this._hbox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, halign: Gtk.Align.FILL, margin: 9 });
+        this._hbox.add(this._headervbox);
+
+        this._notifyButton = new Gtk.Button({ image: new Gtk.Image({ icon_name: 'alarm-symbolic' }), halign: Gtk.Align.END, hexpand: true });
+        this._notifyButton.connect('clicked',
+                                    Lang.bind(this, this._onNotifyButtonClicked));
+        this._hbox.add(this._notifyButton);
+
+
         this._userDetails = new UserDetails();
         this.bind_property('visible', this._userDetails, 'expanded', 0);
 
@@ -331,8 +350,9 @@ const UserPopover = new Lang.Class({
         //context.save();
 
         this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this._vbox.add(this._nickLabel);
-        this._vbox.add(this._statusLabel);
+        //this._vbox.add(this._nickLabel);
+        //this._vbox.add(this._statusLabel);
+        this._vbox.add(this._hbox);
         this._vbox.add(this._userDetails);
 
         this.add(this._vbox);
@@ -365,23 +385,60 @@ const UserPopover = new Lang.Class({
         this._statusLabel.set_label(this._user ? "Online" : "Offline");
 
         if (this._user) {
+            this._userDetails.user = this._user;
+
             let context = this._statusLabel.get_style_context();
             context.set_state(Gtk.StateFlags.LINK);
             context.save();
-            this._statusLabel.sensitive = true;
-        }
-        else {
-            this._statusLabel.sensitive = false;
-        }
 
-        if (this._user) {
-            this._userDetails.user = this._user;
+            this._statusLabel.sensitive = true;
+            //this._notifyButton.visible = false;
+            //this._updateNotifyButton();
         }
         else {
             this._userDetails.clearPrevUserAndDetails();
+
+            this._statusLabel.sensitive = false;
+
+            /*if (!this._chatroomManager.isUserWatched(this._fallbackNick, this._room.account.get_display_name()))
+                this._notifyButton.visible = true;
+            else
+                this._notifyButton.sensitive = false;*/
+            //this._updateNotifyButton();
         }
 
+        this._updateNotifyButton();
+
         this._userDetails.fallbackNick = this._fallbackNick;
+    },
+
+    _onNotifyButtonClicked: function() {
+        if (!this._chatroomManager.isUserWatched(this._fallbackNick, this._room.account.get_display_name())) {
+            this._chatroomManager.addToWatchlist(this._fallbackNick, this._room.account.get_display_name());
+            //this._notifyButton.sensitive = false;
+            this._updateNotifyButton();
+        }
+    },
+
+    _updateNotifyButton: function() {
+        if (!this._chatroomManager.isUserWatched(this._fallbackNick, this._room.account.get_display_name()))
+            if (this._user) {
+                this._notifyButton.visible = false;
+                this._notifyButton.sensitive = true;
+            }
+            else {
+                this._notifyButton.visible = true;
+                this._notifyButton.sensitive = true;
+            }
+        else
+            if (this._user) {
+                this._notifyButton.visible = false;
+                this._notifyButton.sensitive = true;
+            }
+            else {
+                this._notifyButton.visibile = true;
+                this._notifyButton.sensitive = false;
+            }
     }
 });
 
