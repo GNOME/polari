@@ -21,6 +21,9 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+)/i;
 
+const AUTOSTART_DIR = GLib.get_user_config_dir() + '/autostart';
+const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
+
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
@@ -149,6 +152,14 @@ const Application = new Lang.Class({
                 this.add_action(action);
         }));
 
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+        let action = this._settings.create_action('run-in-background');
+        this.add_action(action);
+
+        this._settings.connect('changed::run-in-background',
+                               Lang.bind(this, this._onRunInBackgroundChanged));
+        this._onRunInBackgroundChanged();
+
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
 
@@ -184,8 +195,11 @@ const Application = new Lang.Class({
 
         if (!this.active_window) {
             let window = new MainWindow.MainWindow({ application: this });
-            window.connect('destroy',
-                           () => { this.emit('prepare-shutdown'); });
+            window.connect('destroy', () => {
+                if (this._settings.get_boolean('run-in-background'))
+                    return;
+                this.emit('prepare-shutdown');
+            });
             window.connect('notify::active-room',
                            () => { this.emit('room-focus-changed'); });
             window.connect('notify::is-active',
@@ -500,6 +514,35 @@ const Application = new Lang.Class({
         dialog.show();
     },
 
+    _createLink: function(file, target) {
+        try {
+            file.get_parent().make_directory_with_parents(null);
+        } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+            // not an error, carry on
+        }
+
+        file.make_symbolic_link(target, null);
+    },
+
+    _onRunInBackgroundChanged: function() {
+        let file = Gio.File.new_for_path(AUTOSTART_DIR + AUTOSTART_FILE);
+
+        if (this._settings.get_boolean('run-in-background'))
+            try {
+                this._createLink(file, pkg.pkgdatadir + AUTOSTART_FILE);
+            } catch(e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                    log('Failed to create autostart link: ' + e.message);
+            }
+        else
+            try {
+                file.delete(null);
+            } catch(e) {
+                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
+                    log('Failed to remove autostart link: ' + e.message);
+            }
+    },
+
     _onStartClient: function() {
         if (this._telepathyClient)
             return;
@@ -564,5 +607,6 @@ const Application = new Lang.Class({
 
     _onQuit: function() {
         this.get_windows().reverse().forEach(w => { w.destroy(); });
+        this.emit('prepare-shutdown');
     }
 });

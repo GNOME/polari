@@ -6,6 +6,11 @@
       <summary>Saved channel list</summary>
       <description>List of channels to restore on startup</description>
     </key>
+    <key type="b" name="run-in-background">
+      <default>false</default>
+      <summary>Run in Background</summary>
+      <description>Keep running in background when closed.</description>
+    </key>
     <key type="ai" name="window-size">
       <default>[800,500]</default>
       <summary>Window size</summary>

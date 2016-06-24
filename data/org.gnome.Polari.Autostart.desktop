@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Exec=gapplication action org.gnome.Polari start-client
+NoDisplay=True
