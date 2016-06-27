@@ -14,6 +14,7 @@ const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
+const UserTracker = imports.userTracker;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -339,6 +340,11 @@ const ChatView = new Lang.Class({
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
         this._onChannelChanged();
+
+        this._userTracker = new UserTracker.UserTracker({ room: this._room });
+        this._userTracker.connect('status-changed', Lang.bind(this, function(tracker, nick, room, status){
+            log("status-changed signal received in chatView. User " + nick + " has status: " + status);
+        }));
     },
 
     _createTags: function() {
