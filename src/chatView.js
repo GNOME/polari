@@ -14,6 +14,7 @@ const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
+const UserTracker = imports.userTracker;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -303,6 +304,9 @@ const ChatView = new Lang.Class({
         this._statusCount = { left: 0, joined: 0, total: 0 };
         this._logWalker = null;
 
+        this._userTracker = new UserTracker.UserTracker(this._room);
+        this._userTracker.connect('status-changed', Lang.bind(this, this._onNickStatusChanged));
+
         this._room.account.connect('notify::nickname', Lang.bind(this,
             function() {
                 this._updateMaxNickChars(this._room.account.nickname.length);
@@ -378,19 +382,6 @@ const ChatView = new Lang.Class({
         });
     },
 
-    _foreachNickTag: function(func) {
-        let tagTable = this._view.get_buffer().get_tag_table();
-        tagTable.foreach(function(tag) {
-            if (tag._contacts)
-                func(tag);
-        });
-    },
-
-    _resetNickTag: function(nickTag) {
-        nickTag._contacts = [];
-        this._updateTagStatus(nickTag);
-    },
-
     _onStyleUpdated: function() {
         let context = this.get_style_context();
         context.save();
@@ -442,8 +433,6 @@ const ChatView = new Lang.Class({
                 tag[prop] = tagProps[prop];
             }
         });
-
-        this._foreachNickTag(t => { this._updateTagStatus(t); });
     },
 
     vfunc_destroy: function() {
@@ -547,15 +536,6 @@ const ChatView = new Lang.Class({
 
         if (!this._channel)
             return;
-
-        if (this._room.type == Tp.HandleType.ROOM) {
-            let members = this._channel.group_dup_members_contacts();
-            for (let j = 0; j < members.length; j++)
-                this._trackContact(members[j]);
-        } else {
-                this._trackContact(this._channel.connection.self_contact);
-                this._trackContact(this._channel.target_contact);
-        }
     },
 
     get max_nick_chars() {
@@ -856,38 +836,13 @@ const ChatView = new Lang.Class({
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
-    _trackContact: function(contact) {
-        let nickTag = this._lookupTag(this._getNickTagName(contact.alias));
-        if (!nickTag)
-           return;
+    _onNickStatusChanged: function(tracker, nickName, status) {
+        let nickTag = this._lookupTag(this._getNickTagName(nickName));
 
-        let alreadyTracked = nickTag._contacts.some(c => c.alias == contact.alias);
-
-        if (!alreadyTracked)
-            nickTag._contacts.push(contact);
-
-        this._updateTagStatus(nickTag);
-    },
-
-    _untrackContact: function(contact) {
-        let nickTag = this._lookupTag(this._getNickTagName(contact.alias));
         if (!nickTag)
             return;
 
-        let indexToDelete = nickTag._contacts.map(c => c.alias).indexOf(contact.alias);
-
-        if (indexToDelete > -1) {
-            nickTag._contacts.splice(indexToDelete, 1);
-
-            this._updateTagStatus(nickTag);
-        }
-    },
-
-    _updateTagStatus: function(tag) {
-        if (tag._contacts.length == 0)
-            tag.foreground_rgba = this._inactiveNickColor;
-        else
-            tag.foreground_rgba = this._activeNickColor;
+        this._updateNickTag(nickTag, status);
     },
 
     _onChannelChanged: function() {
@@ -905,19 +860,6 @@ const ChatView = new Lang.Class({
         let nick = this._channel ? this._channel.connection.self_contact.alias
                                  : this._room.account.nickname;
         this._updateMaxNickChars(nick.length);
-
-        if (this._channel) {
-            if (this._room.type == Tp.HandleType.ROOM) {
-                let members = this._channel.group_dup_members_contacts();
-                for (let j = 0; j < members.length; j++)
-                    this._trackContact(members[j]);
-            } else {
-                this._trackContact(this._channel.connection.self_contact);
-                this._trackContact(this._channel.target_contact);
-            }
-        } else {
-            this._foreachNickTag(t => { this._resetNickTag(t); });
-        }
 
         if (!this._channel)
             return;
@@ -943,8 +885,6 @@ const ChatView = new Lang.Class({
     _onMemberRenamed: function(room, oldMember, newMember) {
         let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
-        this._untrackContact(oldMember);
-        this._trackContact(newMember);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -952,7 +892,6 @@ const ChatView = new Lang.Class({
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text, member.alias, 'left');
-        this._untrackContact(member);
     },
 
     _onMemberKicked: function(room, member, actor) {
@@ -961,7 +900,6 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been kicked").format(member.alias);
         this._insertStatus(message, member.alias, 'left');
-        this._untrackContact(member);
     },
 
     _onMemberBanned: function(room, member, actor) {
@@ -970,13 +908,11 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been banned").format(member.alias)
         this._insertStatus(message, member.alias, 'left');
-        this._untrackContact(member);
     },
 
     _onMemberJoined: function(room, member) {
         let text = _("%s joined").format(member.alias);
         this._insertStatus(text, member.alias, 'joined');
-        this._trackContact(member);
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -986,7 +922,6 @@ const ChatView = new Lang.Class({
             text += ' (%s)'.format(message);
 
         this._insertStatus(text, member.alias, 'left');
-        this._untrackContact(member);
     },
 
     _onMessageReceived: function(channel, tpMessage) {
@@ -1211,7 +1146,6 @@ const ChatView = new Lang.Class({
 
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
-        this._trackContact(tpMessage.sender);
 
         if (shouldHighlight &&
             !(this._toplevelFocus && this._active)) {
@@ -1270,10 +1204,8 @@ const ChatView = new Lang.Class({
                 let nickTag = this._lookupTag(nickTagName);
 
                 if (!nickTag) {
-                    nickTag = new Gtk.TextTag({ name: nickTagName });
+                    nickTag = this._createNickTag(message.nick);
                     this._view.get_buffer().get_tag_table().add(nickTag);
-
-                    this._resetNickTag(nickTag);
                 }
                 tags.push(nickTag);
                 if (needsGap)
@@ -1312,6 +1244,22 @@ const ChatView = new Lang.Class({
         if (highlight && message.pendingId)
             this._pending.set(message.pendingId,
                               this._view.buffer.create_mark(null, iter, true));
+    },
+
+    _createNickTag: function(nickName) {
+        let nickTagName = this._getNickTagName(nickName);
+
+        let tag = new Gtk.TextTag({ name: nickTagName });
+        this._updateNickTag(tag, this._userTracker.getNickStatus(nickName));
+
+        return tag;
+    },
+
+    _updateNickTag: function(tag, status) {
+        if (status == Tp.ConnectionPresenceType.AVAILABLE)
+            tag.foreground_rgba = this._activeNickColor;
+        else
+            tag.foreground_rgba = this._inactiveNickColor;
     },
 
     _createUrlTag: function(url) {
