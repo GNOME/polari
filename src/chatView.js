@@ -380,14 +380,6 @@ const ChatView = new Lang.Class({
         });
     },
 
-    _foreachNickTag: function(func) {
-        let tagTable = this._view.get_buffer().get_tag_table();
-        tagTable.foreach(function(tag) {
-            if (tag._contacts)
-                func(tag);
-        });
-    },
-
     _onStyleUpdated: function() {
         let context = this.get_style_context();
         context.save();
@@ -771,10 +763,7 @@ const ChatView = new Lang.Class({
         if (!nickTag)
             return;
 
-        if (status == Tp.ConnectionPresenceType.AVAILABLE)
-            nickTag.foreground_rgba = this._activeNickColor;
-        else
-            nickTag.foreground_rgba = this._inactiveNickColor;
+        this._updateNickTag(nickTag, status);
     },
 
     _onChannelChanged: function() {
@@ -1215,9 +1204,16 @@ const ChatView = new Lang.Class({
         let nickTagName = this._getNickTagName(nickName);
 
         let tag = new Gtk.TextTag({ name: nickTagName });
-        tag.foreground_rgba = this._inactiveNickColor
+        this._updateNickTag(tag, this._userTracker.getNickStatus(nickName));
 
         return tag;
+    },
+
+    _updateNickTag: function(tag, status) {
+        if (status == Tp.ConnectionPresenceType.AVAILABLE)
+            tag.foreground_rgba = this._activeNickColor;
+        else
+            tag.foreground_rgba = this._inactiveNickColor;
     },
 
     _createUrlTag: function(url) {
