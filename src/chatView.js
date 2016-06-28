@@ -289,8 +289,8 @@ const ChatView = new Lang.Class({
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
-        this._userTracker = new UserTracker.UserTracker({ room: this._room });
-        this._userTracker.connect('status-changed', Lang.bind(this, function(tracker, nick, room, status){
+        this._userTracker = new UserTracker.UserTracker(this._room);
+        this._userTracker.connect('status-changed', Lang.bind(this, function(tracker, nick, status){
             //log("status-changed signal received in chatView. User " + nick + " has status: " + status);
             this._updateTagStatus(nick);
         }));
@@ -818,8 +818,6 @@ const ChatView = new Lang.Class({
                 this._updateTagStatus(this._channel.connection.self_contact.alias);
                 this._updateTagStatus(this._channel.target_contact.alias);
             }
-        } else {
-            this._userTracker.resetTracker();
         }
 
         if (!this._channel)
