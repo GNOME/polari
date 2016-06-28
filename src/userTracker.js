@@ -8,21 +8,21 @@ const UserTracker = new Lang.Class({
     Name: 'UserTracker',
 
     _init: function(room) {
+        if (!room)
+            throw new Error('UserTracker instance has no specified room!');
+
         this._contactMapping = new Map();
+        this._room = room;
 
-        if (room) {
-            this._room = room;
+        this._room.connect('notify::channel', Lang.bind(this, this._onChannelChanged));
+        this._room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
+        this._room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
+        this._room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
+        this._room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
+        this._room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
+        this._room.connect('member-left', Lang.bind(this, this._onMemberLeft));
 
-            this._room.connect('notify::channel', Lang.bind(this, this._onChannelChanged));
-            this._room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
-            this._room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
-            this._room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
-            this._room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
-            this._room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
-            this._room.connect('member-left', Lang.bind(this, this._onMemberLeft));
-
-            this._onChannelChanged();
-        }
+        this._onChannelChanged();
     },
 
     _onChannelChanged: function() {
@@ -85,26 +85,15 @@ const UserTracker = new Lang.Class({
     _untrackMember: function(member) {
         let baseNick = Polari.util_get_basenick(member.alias);
 
-        if (this._contactMapping.has(baseNick)) {
-            let indexToDelete = this._contactMapping.get(baseNick).map(c => c.alias).indexOf(member.alias);
+        let contacts = this._contactMapping.get(baseNick) || [];
+        let indexToDelete = contacts.map(c => c.alias).indexOf(member.alias);
 
-            if (indexToDelete > -1) {
-                this._contactMapping.get(baseNick).splice(indexToDelete, 1);
+        if (indexToDelete > -1) {
+            contacts.splice(indexToDelete, 1);
 
-                if (this._contactMapping.get(baseNick).length == 0)
-                    this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.OFFLINE);
-            }
-        }
-    },
-
-    _updateStatus: function(member) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-
-        if (this._contactMapping.has(baseNick))
-            if (this._contactMapping.get(baseNick).length == 0)
+            if (contacts.length == 0)
                 this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.OFFLINE);
-            else
-                this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+        }
     },
 
     getNickStatus: function(nickName) {

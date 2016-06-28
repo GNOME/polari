@@ -290,10 +290,7 @@ const ChatView = new Lang.Class({
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
         this._userTracker = new UserTracker.UserTracker(this._room);
-        this._userTracker.connect('status-changed', Lang.bind(this, function(tracker, nick, status){
-            //log("status-changed signal received in chatView. User " + nick + " has status: " + status);
-            this._updateTagStatus(nick);
-        }));
+        this._userTracker.connect('status-changed', Lang.bind(this, this._onNickStatusChanged));
 
         this._room.account.connect('notify::nickname', Lang.bind(this,
             function() {
@@ -444,8 +441,6 @@ const ChatView = new Lang.Class({
                 tag[prop] = tagProps[prop];
             }
         });
-
-        //this._foreachNickTag(t => { this._updateTagStatus(t); });
     },
 
     vfunc_destroy: function() {
@@ -507,15 +502,6 @@ const ChatView = new Lang.Class({
 
         if (!this._channel)
             return;
-
-        if (this._room.type == Tp.HandleType.ROOM) {
-            let members = this._channel.group_dup_members_contacts();
-            for (let j = 0; j < members.length; j++)
-                this._updateTagStatus(members[j].alias);
-        } else {
-                this._updateTagStatus(this._channel.connection.self_contact.alias);
-                this._updateTagStatus(this._channel.target_contact.alias);
-        }
     },
 
     get _nPending() {
@@ -779,15 +765,13 @@ const ChatView = new Lang.Class({
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
-    _updateTagStatus: function(nickName) {
+    _onNickStatusChanged: function(tracker, nickName, status) {
         let nickTag = this._lookupTag(this._getNickTagName(nickName));
 
-        if (!nickTag) {
-            //log("!!!:" + nickName);
+        if (!nickTag)
             return;
-        }
 
-        if (this._userTracker.getNickStatus(nickName) == Tp.ConnectionPresenceType.AVAILABLE)
+        if (status == Tp.ConnectionPresenceType.AVAILABLE)
             nickTag.foreground_rgba = this._activeNickColor;
         else
             nickTag.foreground_rgba = this._inactiveNickColor;
@@ -808,17 +792,6 @@ const ChatView = new Lang.Class({
         let nick = this._channel ? this._channel.connection.self_contact.alias
                                  : this._room.account.nickname;
         this._updateMaxNickChars(nick.length);
-
-        if (this._channel) {
-            if (this._room.type == Tp.HandleType.ROOM) {
-                let members = this._channel.group_dup_members_contacts();
-                for (let j = 0; j < members.length; j++)
-                    this._updateTagStatus(members[j].alias);
-            } else {
-                this._updateTagStatus(this._channel.connection.self_contact.alias);
-                this._updateTagStatus(this._channel.target_contact.alias);
-            }
-        }
 
         if (!this._channel)
             return;
@@ -847,8 +820,6 @@ const ChatView = new Lang.Class({
     _onMemberRenamed: function(room, oldMember, newMember) {
         let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
-        //this._updateTagStatus(oldMember.alias);
-        //this._updateTagStatus(newMember.alias);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -856,7 +827,6 @@ const ChatView = new Lang.Class({
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text, member.alias, 'left');
-        //this._updateTagStatus(member.alias);
     },
 
     _onMemberKicked: function(room, member, actor) {
@@ -865,7 +835,6 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been kicked").format(member.alias);
         this._insertStatus(message, member.alias, 'left');
-        //this._updateTagStatus(member.alias);
     },
 
     _onMemberBanned: function(room, member, actor) {
@@ -874,13 +843,11 @@ const ChatView = new Lang.Class({
                                                          actor.alias)
                   : _("%s has been banned").format(member.alias)
         this._insertStatus(message, member.alias, 'left');
-        //this._updateTagStatus(member.alias);
     },
 
     _onMemberJoined: function(room, member) {
         let text = _("%s joined").format(member.alias);
         this._insertStatus(text, member.alias, 'joined');
-        //this._updateTagStatus(member.alias)
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -890,7 +857,6 @@ const ChatView = new Lang.Class({
             text += ' (%s)'.format(message);
 
         this._insertStatus(text, member.alias, 'left');
-        //this._updateTagStatus(member.alias);
     },
 
     _onMessageReceived: function(room, tpMessage) {
@@ -1124,7 +1090,6 @@ const ChatView = new Lang.Class({
 
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
-        //this._updateTagStatus(tpMessage.sender.alias);
 
         let [id, valid] = tpMessage.get_pending_message_id();
 
@@ -1208,11 +1173,8 @@ const ChatView = new Lang.Class({
                 let nickTag = this._lookupTag(nickTagName);
 
                 if (!nickTag) {
-                    nickTag = new Gtk.TextTag({ name: nickTagName });
+                    nickTag = this._createNickTag(message.nick);
                     this._view.get_buffer().get_tag_table().add(nickTag);
-
-                    this._updateTagStatus(message.nick);
-                    //log("add " + nickTagName);
                 }
                 tags.push(nickTag);
                 if (needsGap)
@@ -1247,6 +1209,15 @@ const ChatView = new Lang.Class({
             pos = url.pos + name.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
+    },
+
+    _createNickTag: function(nickName) {
+        let nickTagName = this._getNickTagName(nickName);
+
+        let tag = new Gtk.TextTag({ name: nickTagName });
+        tag.foreground_rgba = this._inactiveNickColor
+
+        return tag;
     },
 
     _createUrlTag: function(url) {
