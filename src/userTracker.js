@@ -10,6 +10,7 @@ const UserTracker = new Lang.Class({
     Name: 'UserTracker',
 
     _init: function(params) {
+        this._contactMapping = new Map();
         if (params.room) {
             this._room = params.room;
             this._room.connect('notify::channel', Lang.bind(this, this._onChannelChanged));
@@ -27,7 +28,6 @@ const UserTracker = new Lang.Class({
                 let members = this._room.channel.group_dup_members_contacts();
 
                 //this._contactMapping = this._buildMapping(members);
-                this._contactMapping = new Map();
 
                 for (var i = 0; i < members.length; i++)
                     this._trackMember(members[i]);
@@ -132,7 +132,7 @@ const UserTracker = new Lang.Class({
     },
 
     getNickStatus: function(nickName) {
-        let baseNick = Polari.util_get_basenick(member.alias);
+        let baseNick = Polari.util_get_basenick(nickName);
 
         if (this._contactMapping.has(baseNick)) {
             if (this._contactMapping.get(baseNick).length == 0) {
@@ -142,6 +142,31 @@ const UserTracker = new Lang.Class({
             }
         } else {
             return Tp.ConnectionPresenceType.OFFLINE;
+        }
+    },
+
+    resetTracker: function() {
+        if (this._contactMapping) {
+            this._contactMapping.forEach(function(value, key, map){
+                let basenickContacts = value;
+
+                basenickContacts.forEach(function(member){
+                    this._untrackMember(member);
+                });
+            });
+
+            this._contactMapping.clear();
+
+        }
+    },
+
+    resetBasenickMembers: function(basenick) {
+        if (this._contactMapping.has(basenick)) {
+            let basenickContacts = this._contactMapping.get(basenick);
+
+            basenickContacts.forEach(function(member){
+                    this._untrackMember(member);
+            });
         }
     }
 });
