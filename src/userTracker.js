@@ -2,27 +2,59 @@ const Polari = imports.gi.Polari;
 const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 const Signals = imports.signals;
+const ChatroomManager = imports.chatroomManager;
 
 
 const UserTracker = new Lang.Class({
     Name: 'UserTracker',
 
     _init: function(room) {
-        if (!room)
-            throw new Error('UserTracker instance has no specified room!');
+        /*is this 'split' ok?*/
+        if (room == null) {
+            //throw new Error('UserTracker instance has no specified room!');
+            //global case
+            log("global user tracker created");
+            this._contactMapping = new Map();
+            this._chatroomManager = ChatroomManager.getDefault();
 
-        this._contactMapping = new Map();
-        this._room = room;
+            /*room-removed was not yet implemented*/
+            this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
+        } else {
+            this._contactMapping = new Map();
+            this._room = room;
 
-        this._room.connect('notify::channel', Lang.bind(this, this._onChannelChanged));
-        this._room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
-        this._room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
-        this._room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
-        this._room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
-        this._room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
-        this._room.connect('member-left', Lang.bind(this, this._onMemberLeft));
+            this._room.connect('notify::channel', Lang.bind(this, this._onChannelChanged));
+            this._room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
+            this._room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
+            this._room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
+            this._room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
+            this._room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
+            this._room.connect('member-left', Lang.bind(this, this._onMemberLeft));
 
-        this._onChannelChanged();
+            this._onChannelChanged();
+        }
+    },
+
+    _onRoomAdded: function(roomManager , room) {
+        log("[UserTracker] global room added signal handled for room " + room.channelName);
+
+        room.connect('notify::channel', Lang.bind(this, function(){
+            log("[UserTracker] globally tracked room channel changed for room " + room.channelName);
+
+            /*different handler for the notify::channel signal*/
+            room.connect('notify::channel', Lang.bind(this, function(){
+                log("[UserTracker] channel changed for globally tracker room " + room.channelName);
+            }));
+
+            /*here we use the same handlers for both local and global UserTracker
+            is it safe?*/
+            room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
+            room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
+            room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
+            room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
+            room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
+            room.connect('member-left', Lang.bind(this, this._onMemberLeft));
+        }));
     },
 
     _onChannelChanged: function() {
