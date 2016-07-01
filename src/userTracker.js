@@ -9,96 +9,108 @@ const UserTracker = new Lang.Class({
     Name: 'UserTracker',
 
     _init: function(room) {
-        /*is this 'split' ok?*/
-        if (room == null) {
-            //throw new Error('UserTracker instance has no specified room!');
-            //global case
+        this._referenceRoomSignals = [
+            { name: 'notify::channel',
+              handler: Lang.bind(this, this._onChannelChanged) },
+            { name: 'member-renamed',
+              handler: Lang.bind(this, this._onMemberRenamed) },
+            { name: 'member-disconnected',
+              handler: Lang.bind(this, this._onMemberDisconnected) },
+            { name: 'member-kicked',
+              handler: Lang.bind(this, this._onMemberKicked) },
+            { name: 'member-banned',
+              handler: Lang.bind(this, this._onMemberBanned) },
+            { name: 'member-joined',
+              handler: Lang.bind(this, this._onMemberJoined) },
+            { name: 'member-left',
+              handler: Lang.bind(this, this._onMemberLeft) }
+        ];
+
+        this._contactMapping = new Map();
+
+        if (!room) {
             log("global user tracker created");
-            this._contactMapping = new Map();
             this._chatroomManager = ChatroomManager.getDefault();
 
-            /*room-removed was not yet implemented*/
             this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
+            this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
         } else {
-            this._contactMapping = new Map();
             this._room = room;
 
-            this._room.connect('notify::channel', Lang.bind(this, this._onChannelChanged));
-            this._room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
-            this._room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
-            this._room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
-            this._room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
-            this._room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
-            this._room.connect('member-left', Lang.bind(this, this._onMemberLeft));
-
+            this._onRoomAdded(null, this._room);
             this._onChannelChanged();
         }
     },
 
     _onRoomAdded: function(roomManager , room) {
-        log("[UserTracker] global room added signal handled for room " + room.channelName);
-
-        room.connect('notify::channel', Lang.bind(this, function(){
-            log("[UserTracker] globally tracked room channel changed for room " + room.channelName);
-
-            /*different handler for the notify::channel signal*/
-            room.connect('notify::channel', Lang.bind(this, function(){
-                log("[UserTracker] channel changed for globally tracker room " + room.channelName);
-            }));
-
-            /*here we use the same handlers for both local and global UserTracker
-            is it safe?*/
-            room.connect('member-renamed', Lang.bind(this, this._onMemberRenamed));
-            room.connect('member-disconnected', Lang.bind(this, this._onMemberDisconnected));
-            room.connect('member-kicked', Lang.bind(this, this._onMemberKicked));
-            room.connect('member-banned', Lang.bind(this, this._onMemberBanned));
-            room.connect('member-joined', Lang.bind(this, this._onMemberJoined));
-            room.connect('member-left', Lang.bind(this, this._onMemberLeft));
+        this._roomSignals = [];
+        this._referenceRoomSignals.forEach(Lang.bind(this, function(signal) {
+            this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
     },
 
-    _onChannelChanged: function() {
-        if (this._room.channel) {
+    _onRoomRemoved: function(roomManager, room) {
+        for (let i = 0; i < this._roomSignals.length; i++)
+            room.disconnect(this._roomSignals[i]);
+        this._roomSignals = [];
+    },
+
+    _onChannelChanged: function(emittingRoom) {
+        if (!emittingRoom)
+            return;
+
+        if (emittingRoom.channel) {
             let members;
-            if (this._room.type == Tp.HandleType.ROOM)
-                members = this._room.channel.group_dup_members_contacts();
+            if (emittingRoom.type == Tp.HandleType.ROOM)
+                members = emittingRoom.channel.group_dup_members_contacts();
             else
-                members = [this._room.channel.connection.self_contact, this._room.channel.target_contact];
+                members = [emittingRoom.channel.connection.self_contact, emittingRoom.channel.target_contact];
 
-            members.forEach(m => { this._trackMember(m); });
+            members.forEach(m => {
+                m._room = emittingRoom;
+                this._trackMember(m);
+            });
         } else {
-            for ([, basenickContacts] of this._contactMapping) {
+            for ([baseNick, basenickContacts] of this._contactMapping) {
                 basenickContacts.forEach(Lang.bind(this, function(member) {
-                    this._untrackMember(member);
+                    if (member._room == emittingRoom)
+                        this._untrackMember(member);
                 }));
-            }
 
-            this._contactMapping.clear();
+                this._contactMapping.delete(baseNick);
+            }
         }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
+        oldMember._room = room;
+        newMember._room = room;
         this._untrackMember(oldMember);
         this._trackMember(newMember);
     },
 
     _onMemberDisconnected: function(room, member, message) {
+        member._room = room;
         this._untrackMember(member);
     },
 
     _onMemberKicked: function(room, member, actor) {
+        member._room = room;
         this._untrackMember(member);
     },
 
     _onMemberBanned: function(room, member, actor) {
+        member._room = room;
         this._untrackMember(member);
     },
 
     _onMemberJoined: function(room, member) {
+        member._room = room;
         this._trackMember(member);
     },
 
     _onMemberLeft: function(room, member, message) {
+        member._room = room;
         this._untrackMember(member);
     },
 
