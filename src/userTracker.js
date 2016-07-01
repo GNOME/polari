@@ -38,7 +38,7 @@ const UserTracker = new Lang.Class({
             this._room = room;
 
             this._onRoomAdded(null, this._room);
-            this._onChannelChanged();
+            this._onChannelChanged(this._room);
         }
     },
 
@@ -56,9 +56,6 @@ const UserTracker = new Lang.Class({
     },
 
     _onChannelChanged: function(emittingRoom) {
-        if (!emittingRoom)
-            return;
-
         if (emittingRoom.channel) {
             let members;
             if (emittingRoom.type == Tp.HandleType.ROOM)
