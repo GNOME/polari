@@ -1204,7 +1204,7 @@ const ChatView = new Lang.Class({
         let nickTagName = this._getNickTagName(nickName);
 
         let tag = new Gtk.TextTag({ name: nickTagName });
-        this._updateNickTag(tag, this._userTracker.getNickStatus(nickName));
+        this._updateNickTag(tag, this._userTracker.getNickGlobalStatus(nickName));
 
         return tag;
     },
