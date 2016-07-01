@@ -48,13 +48,8 @@ const Application = new Lang.Class({
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._userStatusMonitor = UserTracker.getUserStatusMonitor();
         this._networksManager = NetworksManager.getDefault();
-        /*created here as i couldn't make it work if it was created in the chatroomManager
-        (it didn't receive the room-added signal for the channels restored from the previous session)*/
-        /*this._globalUserTracker = new UserTracker.UserTracker(null);
-        this._globalUserTracker.connect('status-changed', Lang.bind(this, function(tracker, nick, status){
-            log("[Application] nick " + nick + " global status changed to " + status );
-        }));*/
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
             function(am, account) {
