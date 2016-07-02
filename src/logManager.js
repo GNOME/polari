@@ -156,7 +156,7 @@ const LogWalker = new Lang.Class({
     getEvents: function(numEvents, callback) {
         if (!this._query) {
             this._query = new GenericQuery(this._connection, numEvents);
-
+            print(this._account.nickname);
             let sparql = (
                 'select nie:plainTextContent(?msg) as ?message ' +
                 '       if (nmo:from(?msg) = nco:default-contact-me,' +

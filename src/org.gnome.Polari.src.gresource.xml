@@ -18,6 +18,7 @@
     <file>resultList.js</file>
     <file>roomList.js</file>
     <file>roomStack.js</file>
+    <file>resultStack.js</file>
     <file>tabCompletion.js</file>
     <file>userList.js</file>
     <file>utils.js</file>
