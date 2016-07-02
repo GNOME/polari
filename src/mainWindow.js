@@ -14,6 +14,7 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
 const RoomStack = imports.roomStack;
+//const ResultStack = imports.resultStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
 const Pango = imports.gi.Pango;
@@ -107,7 +108,9 @@ const MainWindow = new Lang.Class({
                        'overlay',
                        'roomStack',
                        'mainStack',
-                       'results'],
+                       'results',
+                       'mainStack1',
+                       'resultStack'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -236,12 +239,18 @@ const MainWindow = new Lang.Class({
         this._search_active_button.connect(
             'toggled',
             Lang.bind(this, function() {
-                if (this._mainStack.visible_child_name == 'image')
+                if (this._mainStack.visible_child_name == 'image') {
                     this._mainStack.visible_child_name = 'roomList';
-                else
+                    this._mainStack1.visible_child_name = 'room';
+                }
+                else {
                     this._mainStack.visible_child_name = 'image';
+                    this._mainStack1.visible_child_name = 'result';
+                }
                 this._searchisActive = !this._searchisActive;
             }));
+
+        this._results.connect('row-activated', Lang.bind(this, this._rowactivated));
 
         //test
         this._logManager = LogManager.getDefault();
@@ -262,6 +271,29 @@ const MainWindow = new Lang.Class({
         this._mainStack.visible_child_name = 'roomList';
 
         this.show_all();
+    },
+
+    _rowactivated: function(box, row) {
+        let logManager = LogManager.getDefault();
+        this._logWalker = logManager.walkEvents(row,
+                                                row.channel);
+
+        this._fetchingBacklog = true;
+        this._logWalker.getEvents(10,
+                                  Lang.bind(this, this._onLogEventsReady));
+        let buffer = this._resultStack.get_buffer();
+        let iter = buffer.get_end_iter();
+        //this._resultStack.buffer.insert(iter,row._content_label.label, -1);
+        // this._resultStack.label = row._content_label.label;
+    },
+
+    _onLogEventsReady: function(events) {
+        for (let i = 0; i < events.length; i++) {
+            let buffer = this._resultStack.get_buffer();
+            let iter = buffer.get_end_iter();
+            this._resultStack.buffer.insert(iter,events[i].message, -1);
+            this._resultStack.buffer.insert(iter,'\n', -1);
+        }
     },
 
     _Log: function(events) {
@@ -292,6 +324,8 @@ const MainWindow = new Lang.Class({
                 row._source_name.label = channel.substring(1);
                 row._short_time_label.label = this._formatTimestamp(time);
                 row.uid = events[i].id;
+                row.channel = channel;
+                row.nickname = channel;
                 widgetMap[uid] = row;
             }
             row._content_label.label = message;
