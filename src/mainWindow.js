@@ -274,13 +274,54 @@ const MainWindow = new Lang.Class({
     },
 
     _rowactivated: function(box, row) {
-        let logManager = LogManager.getDefault();
-        this._logWalker = logManager.walkEvents(row,
-                                                row.channel);
-
-        this._fetchingBacklog = true;
-        this._logWalker.getEvents(10,
-                                  Lang.bind(this, this._onLogEventsReady));
+        this._cancellable.cancel();
+        this._cancellable.reset();
+        let sparql = (
+            'select nie:plainTextContent(?msg) as ?message ' +
+            '       if (nmo:from(?msg) = nco:default-contact-me,' +
+            '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
+            // FIXME: how do we handle the "real" message type?
+            '       %d as ?messageType ' +
+            '       ?timestamp ' +
+            '{ ?msg a nmo:IMMessage; ' +
+            '       nie:contentCreated ?timestamp; ' +
+            '       nmo:communicationChannel ?chan . ' +
+            'BIND( ?timestamp - %s as ?timediff ) . ' +
+            // FIXME: filter by account
+            '  filter (nie:title (?chan) = "%s" && ?timediff >= 0) ' +
+            '} order by asc (?timestamp) LIMIT 10'
+        ).format(row.nickname,
+                 Tp.ChannelTextMessageType.NORMAL,
+                 row.timestamp,
+                 row.channel);
+        log(sparql);
+        let sparql1 = (
+            'select nie:plainTextContent(?msg) as ?message ' +
+            '       if (nmo:from(?msg) = nco:default-contact-me,' +
+            '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
+            // FIXME: how do we handle the "real" message type?
+            '       %d as ?messageType ' +
+            '       ?timestamp ' +
+            '{ ?msg a nmo:IMMessage; ' +
+            '       nie:contentCreated ?timestamp; ' +
+            '       nmo:communicationChannel ?chan . ' +
+            'BIND( %s - ?timestamp as ?timediff ) . ' +
+            // FIXME: filter by account
+            '  filter (nie:title (?chan) = "%s" && ?timediff > 0) ' +
+            '} order by asc (?timestamp) LIMIT 10'
+        ).format(row.nickname,
+                 Tp.ChannelTextMessageType.NORMAL,
+                 row.timestamp,
+                 row.channel);
+        // let logManager = LogManager.getDefault();
+        // this._logWalker = logManager.walkEvents(row,
+        //                                         row.channel);
+        //
+        // this._fetchingBacklog = true;
+        // this._logWalker.getEvents(10,
+        //                           Lang.bind(this, this._onLogEventsReady));
+        this._logManager.query(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+        this._logManager.query(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
         let buffer = this._resultStack.get_buffer();
         let iter = buffer.get_end_iter();
         //this._resultStack.buffer.insert(iter,row._content_label.label, -1);
@@ -288,13 +329,28 @@ const MainWindow = new Lang.Class({
     },
 
     _onLogEventsReady: function(events) {
+        let buffer = this._resultStack.get_buffer();
+        buffer.set_text("",-1);
         for (let i = 0; i < events.length; i++) {
-            let buffer = this._resultStack.get_buffer();
+
             let iter = buffer.get_end_iter();
-            this._resultStack.buffer.insert(iter,events[i].message, -1);
+            this._resultStack.buffer.insert(iter,events[i].timestamp + "\t\t\t" + events[i].sender + " : " + events[i].message, -1);
             this._resultStack.buffer.insert(iter,'\n', -1);
         }
     },
+
+    _onLogEventsReady1: function(events) {
+        let buffer = this._resultStack.get_buffer();
+        // buffer.set_text("",-1);
+        let iter = buffer.get_start_iter();
+        // this._resultStack.buffer.insert(iter,'\n', -1);
+        iter = buffer.get_start_iter();
+        for (let i = 0; i < events.length; i++) {
+            this._resultStack.buffer.insert(iter,events[i].timestamp + "\t\t\t" + events[i].sender + " : " + events[i].message, -1);
+            this._resultStack.buffer.insert(iter,'\n', -1);
+        }
+    },
+
 
     _Log: function(events) {
         log(events);
@@ -326,6 +382,7 @@ const MainWindow = new Lang.Class({
                 row.uid = events[i].id;
                 row.channel = channel;
                 row.nickname = channel;
+                row.timestamp = time;
                 widgetMap[uid] = row;
             }
             row._content_label.label = message;
