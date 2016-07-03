@@ -2,154 +2,62 @@ const Polari = imports.gi.Polari;
 const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 const Signals = imports.signals;
+
+const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 
-/*left the old tracker here in order to compare the versions*/
-/*const UserTracker = new Lang.Class({
-    Name: 'UserTracker',
+let _singleton = null;
 
-    _init: function(room) {
-        this._referenceRoomSignals = [
-            { name: 'notify::channel',
-              handler: Lang.bind(this, this._onChannelChanged) },
-            { name: 'member-renamed',
-              handler: Lang.bind(this, this._onMemberRenamed) },
-            { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberDisconnected) },
-            { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberKicked) },
-            { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberBanned) },
-            { name: 'member-joined',
-              handler: Lang.bind(this, this._onMemberJoined) },
-            { name: 'member-left',
-              handler: Lang.bind(this, this._onMemberLeft) }
-        ];
+function getUserStatusMonitor() {
+    if (_singleton == null)
+        _singleton = new UserStatusMonitor();
+    return _singleton;
+}
 
-        this._contactMapping = new Map();
+const UserStatusMonitor = new Lang.Class({
+    Name: 'UserStatusMonitor',
 
-        if (!room) {
-            log("global user tracker created");
-            this._chatroomManager = ChatroomManager.getDefault();
+    _init: function() {
+        this._userTrackersMaping = new Map();
+        this._accountsMonitor = AccountsMonitor.getDefault();
 
-            this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
-            this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
-        } else {
-            this._room = room;
-
-            this._onRoomAdded(null, this._room);
-            this._onChannelChanged(this._room);
-        }
+        this._accountsMonitor.connect('account-added', Lang.bind(this, this._onAccountAdded));
+        this._accountsMonitor.connect('account-removed', Lang.bind(this, this._onAccountRemoved));
     },
 
-    _onRoomAdded: function(roomManager , room) {
-        this._roomSignals = [];
-        this._referenceRoomSignals.forEach(Lang.bind(this, function(signal) {
-            this._roomSignals.push(room.connect(signal.name, signal.handler));
-        }));
+    _onAccountAdded: function(accountsMonitor, account) {
+        this._addUserTrackerForAccount(account);
     },
 
-    _onRoomRemoved: function(roomManager, room) {
-        for (let i = 0; i < this._roomSignals.length; i++)
-            room.disconnect(this._roomSignals[i]);
-        this._roomSignals = [];
+    _onAccountRemoved: function(accountsMonitor, account) {
+        this._removeUserTrackerForAccount(account);
     },
 
-    _onChannelChanged: function(emittingRoom) {
-        if (emittingRoom.channel) {
-            let members;
-            if (emittingRoom.type == Tp.HandleType.ROOM)
-                members = emittingRoom.channel.group_dup_members_contacts();
-            else
-                members = [emittingRoom.channel.connection.self_contact, emittingRoom.channel.target_contact];
+    _addUserTrackerForAccount: function(account) {
+        if (this._userTrackersMaping.has(account))
+            return;
 
-            members.forEach(m => {
-                m._room = emittingRoom;
-                this._trackMember(m);
-            });
-        } else {
-            for ([baseNick, basenickContacts] of this._contactMapping) {
-                basenickContacts.forEach(Lang.bind(this, function(member) {
-                    if (member._room == emittingRoom)
-                        this._untrackMember(member);
-                }));
-
-                this._contactMapping.delete(baseNick);
-            }
-        }
+        this._userTrackersMaping.set(account, new UserTracker(account));
     },
 
-    _onMemberRenamed: function(room, oldMember, newMember) {
-        oldMember._room = room;
-        newMember._room = room;
-        this._untrackMember(oldMember);
-        this._trackMember(newMember);
+    _removeUserTrackerForAccount: function(account) {
+        if (!this._userTrackersMaping.has(account))
+            return;
+
+        this._userTrackersMaping.delete(account);
     },
 
-    _onMemberDisconnected: function(room, member, message) {
-        member._room = room;
-        this._untrackMember(member);
-    },
+    getUserTrackerForAccount: function(account) {
+        if (this._userTrackersMaping.has(account))
+            return this._userTrackersMaping.get(account);
+    }
+});
 
-    _onMemberKicked: function(room, member, actor) {
-        member._room = room;
-        this._untrackMember(member);
-    },
-
-    _onMemberBanned: function(room, member, actor) {
-        member._room = room;
-        this._untrackMember(member);
-    },
-
-    _onMemberJoined: function(room, member) {
-        member._room = room;
-        this._trackMember(member);
-    },
-
-    _onMemberLeft: function(room, member, message) {
-        member._room = room;
-        this._untrackMember(member);
-    },
-
-    _trackMember: function(member) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-
-        if (this._contactMapping.has(baseNick))
-            this._contactMapping.get(baseNick).push(member);
-        else
-            this._contactMapping.set(baseNick, [member]);
-
-        if (this._contactMapping.get(baseNick).length == 1)
-            this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.AVAILABLE);
-    },
-
-    _untrackMember: function(member) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-
-        let contacts = this._contactMapping.get(baseNick) || [];
-        let indexToDelete = contacts.map(c => c.alias).indexOf(member.alias);
-
-        if (indexToDelete > -1) {
-            contacts.splice(indexToDelete, 1);
-
-            if (contacts.length == 0)
-                this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.OFFLINE);
-        }
-    },
-
-    getNickStatus: function(nickName) {
-        let baseNick = Polari.util_get_basenick(nickName);
-
-        let contacts = this._contactMapping.get(baseNick) || [];
-        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
-                                    : Tp.ConnectionPresenceType.AVAILABLE;
-    },
-});*/
 
 const UserTracker = new Lang.Class({
     Name: 'UserTracker',
 
-    _init: function() {
+    _init: function(account) {
         this._referenceRoomSignals = [
             { name: 'notify::channel',
               handler: Lang.bind(this, this._onChannelChanged) },
@@ -166,6 +74,8 @@ const UserTracker = new Lang.Class({
             { name: 'member-left',
               handler: Lang.bind(this, this._onMemberLeft) }
         ];
+
+        this._account = account;
 
         this._globalContactMapping = new Map();
         this._roomMapping = new Map();
@@ -176,11 +86,13 @@ const UserTracker = new Lang.Class({
     },
 
     _onRoomAdded: function(roomManager, room) {
-        this._connectRoomSignalsForRoom(room);
+        if (room.account == this._account)
+            this._connectRoomSignalsForRoom(room);
     },
 
     _onRoomRemoved: function(roomManager, room) {
-        this._disconnectRoomSignalsForRoom(room);
+        if (room.account == this._account)
+            this._disconnectRoomSignalsForRoom(room);
     },
 
     _connectRoomSignalsForRoom: function(room) {
@@ -303,9 +215,9 @@ const UserTracker = new Lang.Class({
 
         if (map.get(baseNick).length == 1)
             if (map == this._globalContactMapping)
-                log("[Global UserTracker] User " + member.alias + " is now globally available");
+                log("[Global UserTracker] User " + member.alias + " is now globally available on " + this._account.get_display_name());
             else
-                log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName);
+                log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
     },
 
     _untrackMember: function(map, member) {
@@ -320,9 +232,9 @@ const UserTracker = new Lang.Class({
 
             if (contacts.length == 0)
                 if (map == this._globalContactMapping)
-                    log("[Global UserTracker] User " + member.alias + " is now globally offline");
+                    log("[Global UserTracker] User " + member.alias + " is now globally offline on " + this._account.get_display_name());
                 else
-                    log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName);
+                    log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
         }
     },
 
