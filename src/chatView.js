@@ -37,6 +37,12 @@ const NICK_SPACING = 14; // space after nicks, matching the following elements
 
 const NICKTAG_PREFIX = 'nick';
 
+function _getColor(context) {
+    let color = context.get_color(context.get_state());
+    color.alpha *= context.get_property('opacity', context.get_state());
+    return color;
+}
+
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
 const TextView = new Lang.Class({
@@ -59,7 +65,7 @@ const TextView = new Lang.Class({
         context.save();
         context.add_class('dim-label');
         context.set_state(Gtk.StateFlags.NORMAL);
-        this._dimColor = context.get_color(context.get_state());
+        this._dimColor = _getColor(context);
         context.restore();
 
         this.parent();
@@ -396,16 +402,16 @@ const ChatView = new Lang.Class({
         context.save();
         context.add_class('dim-label');
         context.set_state(Gtk.StateFlags.NORMAL);
-        let dimColor = context.get_color(context.get_state());
+        let dimColor = _getColor(context);
         context.restore();
 
         context.save();
         context.set_state(Gtk.StateFlags.LINK);
-        let linkColor = context.get_color(context.get_state());
-        this._activeNickColor = context.get_color(context.get_state());
+        let linkColor = _getColor(context);
+        this._activeNickColor = _getColor(context);
 
         context.set_state(Gtk.StateFlags.LINK | Gtk.StateFlags.PRELIGHT);
-        this._hoveredLinkColor = context.get_color(context.get_state());
+        this._hoveredLinkColor = _getColor(context);
         context.restore();
 
         let desaturatedNickColor = (this._activeNickColor.red +
@@ -421,7 +427,7 @@ const ChatView = new Lang.Class({
         context.save();
         context.add_class('view');
         context.set_state(Gtk.StateFlags.NORMAL);
-        this._statusHeaderHoverColor = context.get_color(context.get_state());
+        this._statusHeaderHoverColor = _getColor(context);
         context.restore();
 
         let buffer = this._view.get_buffer();
