@@ -14,6 +14,7 @@ const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
+const UserTracker = imports.userTracker;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -287,6 +288,7 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
+        this._userStatusMonitor = UserTracker.getUserStatusMonitor();
 
         this._room.account.connect('notify::nickname', Lang.bind(this,
             function() {

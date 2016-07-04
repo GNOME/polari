@@ -50,6 +50,20 @@ const UserStatusMonitor = new Lang.Class({
     getUserTrackerForAccount: function(account) {
         if (this._userTrackersMaping.has(account))
             return this._userTrackersMaping.get(account);
+        return null;
+    },
+
+    watchUser: function(room, nickName, callback) {
+        let baseNick = Polari.util_get_basenick(nickName);
+        let contactList = this.getUserTrackerForAccount(room.account)._roomMapping.get(room)._contactMapping.get(baseNick) || [];
+
+        for (let i = 0; i < contactList.length; i++) {
+            if (nickName == contactList[i].alias) {
+                contactList[i]._onStatusChangedCallback = callback;
+
+                contactList[i]._onStatusChangedCallback(nickName, Tp.ConnectionPresenceType.AVAILABLE);
+            }
+        }
     }
 });
 
@@ -79,6 +93,8 @@ const UserTracker = new Lang.Class({
 
         this._globalContactMapping = new Map();
         this._roomMapping = new Map();
+
+        this._userStatusMonitor = getUserStatusMonitor();
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
@@ -135,6 +151,8 @@ const UserTracker = new Lang.Class({
                 m._room = emittingRoom;
                 this._trackMember(this._roomMapping.get(emittingRoom)._contactMapping, m);
                 this._trackMember(this._globalContactMapping, m);
+
+                this._userStatusMonitor.watchUser(emittingRoom, m.alias, Lang.bind(this, this._onLocalStatusChanged));
             });
         } else {
             /*handle the absence of a channel for the global case*/
@@ -168,6 +186,8 @@ const UserTracker = new Lang.Class({
         this._untrackMember(this._globalContactMapping, oldMember);
         this._trackMember(this._roomMapping.get(room)._contactMapping, newMember);
         this._trackMember(this._globalContactMapping, newMember);
+
+        this._userStatusMonitor.watchUser(room, newMember.alias, Lang.bind(this, this._onLocalStatusChanged));
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -196,6 +216,8 @@ const UserTracker = new Lang.Class({
 
         this._trackMember(this._roomMapping.get(room)._contactMapping, member);
         this._trackMember(this._globalContactMapping, member);
+
+        this._userStatusMonitor.watchUser(room, member.alias, Lang.bind(this, this._onLocalStatusChanged));
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -215,7 +237,7 @@ const UserTracker = new Lang.Class({
 
         if (map.get(baseNick).length == 1)
             if (map == this._globalContactMapping)
-                log("[Global UserTracker] User " + member.alias + " is now globally available on " + this._account.get_display_name());
+                this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.AVAILABLE);
             else
                 log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
     },
@@ -228,14 +250,22 @@ const UserTracker = new Lang.Class({
         let indexToDelete = contacts.map(c => c.alias + "|" + c._room.channelName).indexOf(member.alias + "|" + member._room.channelName);
 
         if (indexToDelete > -1) {
-            contacts.splice(indexToDelete, 1);
+            let removedMember = contacts.splice(indexToDelete, 1)[0];
 
             if (contacts.length == 0)
                 if (map == this._globalContactMapping)
-                    log("[Global UserTracker] User " + member.alias + " is now globally offline on " + this._account.get_display_name());
+                    this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.OFFLINE);
                 else
-                    log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
+                    //log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
+                    if (removedMember._onStatusChangedCallback)
+                        removedMember._onStatusChangedCallback(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                    else
+                        log("does not have callback");
         }
+    },
+
+    _onLocalStatusChanged: function(nickName, status) {
+        log("LOCAL STATUS CHANGED FOR " + nickName + " to " + status);
     },
 
     getNickGlobalStatus: function(nickName) {
