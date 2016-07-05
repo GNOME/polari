@@ -234,6 +234,8 @@ const ChatView = new Lang.Class({
     _init: function(room) {
         this.parent({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
 
+        this.get_style_context().add_class('polari-chat-view');
+
         this._view = new TextView({ editable: false, cursor_visible: false,
                                     wrap_mode: Gtk.WrapMode.WORD_CHAR,
                                     right_margin: MARGIN });

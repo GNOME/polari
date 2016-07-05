@@ -153,3 +153,6 @@
     border: solid @borders;
     border-width: 0 0 1px;
 }
+
+/* the following adds a border on top of the inputbar when users scroll up */
+.polari-chat-view > undershoot.bottom { border-bottom: 1px solid @borders; }
