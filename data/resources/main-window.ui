@@ -25,8 +25,6 @@
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="margin-start">5</property>
-                <property name="margin-end">5</property>
                 <property name="action_name">app.show-join-dialog</property>
                 <style>
                   <class name="image-button"/>
@@ -49,17 +47,12 @@
                 <property name="pack-type">start</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <style>
-                  <class name="polari-titlebar-separator"/>
-                </style>
-              </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
-            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="orientation">vertical</property>
           </object>
         </child>
         <child>
