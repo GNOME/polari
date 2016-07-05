@@ -341,6 +341,9 @@ const ChatView = new Lang.Class({
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
         this._onChannelChanged();
+
+        /*where should we unwatch? int onChannelChanged when we don't have a channel?*/
+        this._roomWatchHandler = this._userStatusMonitor.getUserTrackerForAccount(this._room.account).watchUser(this._room, null, Lang.bind(this, this._onStatusChangedCallback));
     },
 
     _createTags: function() {
@@ -376,6 +379,10 @@ const ChatView = new Lang.Class({
         tags.forEach(function(tagProps) {
             tagTable.add(new Gtk.TextTag(tagProps));
         });
+    },
+
+    _onStatusChangedCallback: function(nick, status) {
+        log("Nick " + nick + " has local status " + status);
     },
 
     _onStyleUpdated: function() {

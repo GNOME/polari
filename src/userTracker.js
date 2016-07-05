@@ -51,19 +51,6 @@ const UserStatusMonitor = new Lang.Class({
         if (this._userTrackersMaping.has(account))
             return this._userTrackersMaping.get(account);
         return null;
-    },
-
-    watchUser: function(room, nickName, callback) {
-        let baseNick = Polari.util_get_basenick(nickName);
-        let contactList = this.getUserTrackerForAccount(room.account)._roomMapping.get(room)._contactMapping.get(baseNick) || [];
-
-        for (let i = 0; i < contactList.length; i++) {
-            if (nickName == contactList[i].alias) {
-                contactList[i]._onStatusChangedCallback = callback;
-
-                contactList[i]._onStatusChangedCallback(nickName, Tp.ConnectionPresenceType.AVAILABLE);
-            }
-        }
     }
 });
 
@@ -93,6 +80,7 @@ const UserTracker = new Lang.Class({
 
         this._globalContactMapping = new Map();
         this._roomMapping = new Map();
+        this._handlerCounter = 0;
 
         this._userStatusMonitor = getUserStatusMonitor();
 
@@ -112,8 +100,7 @@ const UserTracker = new Lang.Class({
     },
 
     _connectRoomSignalsForRoom: function(room) {
-        if (!this._roomMapping.get(room))
-            this._roomMapping.set(room, {});
+        this._ensureRoomMappingForRoom(room);
 
         let roomData = this._roomMapping.get(room);
 
@@ -140,19 +127,23 @@ const UserTracker = new Lang.Class({
             else
                 members = [emittingRoom.channel.connection.self_contact, emittingRoom.channel.target_contact];
 
+            /*is this needed here?*/
+            this._ensureRoomMappingForRoom(emittingRoom);
+
             /*if there is no map keeping track of the users in the emittingRoom
             create it*/
             if (!this._roomMapping.get(emittingRoom)._contactMapping)
                 this._roomMapping.get(emittingRoom)._contactMapping = new Map();
 
+            /*if there is no map keeping track of the local status change handlers*/
+            this._ensureHandlerMappingForRoom(emittingRoom);
+
             /*keep track of initial members in the emittingRoom, both locally and
             globally*/
             members.forEach(m => {
                 m._room = emittingRoom;
-                this._trackMember(this._roomMapping.get(emittingRoom)._contactMapping, m);
-                this._trackMember(this._globalContactMapping, m);
-
-                this._userStatusMonitor.watchUser(emittingRoom, m.alias, Lang.bind(this, this._onLocalStatusChanged));
+                this._trackMember(this._roomMapping.get(emittingRoom)._contactMapping, m, emittingRoom);
+                this._trackMember(this._globalContactMapping, m, emittingRoom);
             });
         } else {
             /*handle the absence of a channel for the global case*/
@@ -160,7 +151,7 @@ const UserTracker = new Lang.Class({
                 basenickContacts.forEach(Lang.bind(this, function(member) {
                     if (member._room == emittingRoom)
                         /*safe to delete while iterating?*/
-                        this._untrackMember(this._globalContactMapping, member);
+                        this._untrackMember(this._globalContactMapping, member, emittingRoom);
                 }));
 
                 this._globalContactMapping.delete(baseNick);
@@ -170,11 +161,29 @@ const UserTracker = new Lang.Class({
                 basenickContacts.forEach(Lang.bind(this, function(member) {
                     if (member._room == emittingRoom)
                         /*safe to delete while iterating?*/
-                        this._untrackMember(this._roomMapping.get(emittingRoom)._contactMapping, member);
+                        this._untrackMember(this._roomMapping.get(emittingRoom)._contactMapping, member, emittingRoom);
                 }));
 
                 this._roomMapping.get(emittingRoom)._contactMapping.delete(baseNick);
             }
+
+            /*since we have no channel, all users must be locally marked offline. so call the callbacks*/
+            for ([handlerID, handlerInfo] of this._roomMapping.get(emittingRoom)._handlerMapping) {
+                handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
+            }
+        }
+    },
+
+    _ensureRoomMappingForRoom: function(room) {
+        if (!this._roomMapping.has(room))
+            this._roomMapping.set(room, {});
+    },
+
+    _ensureHandlerMappingForRoom: function(room) {
+        /*if there is no map keeping track of the local status change handlers*/
+        if (!this._roomMapping.get(room)._handlerMapping) {
+            this._roomMapping.get(room)._handlerMapping = new Map();
+            this._handlerCounter = 0;
         }
     },
 
@@ -182,52 +191,48 @@ const UserTracker = new Lang.Class({
         oldMember._room = room;
         newMember._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, oldMember);
-        this._untrackMember(this._globalContactMapping, oldMember);
-        this._trackMember(this._roomMapping.get(room)._contactMapping, newMember);
-        this._trackMember(this._globalContactMapping, newMember);
-
-        this._userStatusMonitor.watchUser(room, newMember.alias, Lang.bind(this, this._onLocalStatusChanged));
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, oldMember, room);
+        this._untrackMember(this._globalContactMapping, oldMember, room);
+        this._trackMember(this._roomMapping.get(room)._contactMapping, newMember, room);
+        this._trackMember(this._globalContactMapping, newMember, room);
     },
 
     _onMemberDisconnected: function(room, member, message) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member);
-        this._untrackMember(this._globalContactMapping, member);
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
     },
 
     _onMemberKicked: function(room, member, actor) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member);
-        this._untrackMember(this._globalContactMapping, member);
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
     },
 
     _onMemberBanned: function(room, member, actor) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member);
-        this._untrackMember(this._globalContactMapping, member);
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
     },
 
     _onMemberJoined: function(room, member) {
         member._room = room;
 
-        this._trackMember(this._roomMapping.get(room)._contactMapping, member);
-        this._trackMember(this._globalContactMapping, member);
-
-        this._userStatusMonitor.watchUser(room, member.alias, Lang.bind(this, this._onLocalStatusChanged));
+        this._trackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._trackMember(this._globalContactMapping, member, room);
     },
 
     _onMemberLeft: function(room, member, message) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member);
-        this._untrackMember(this._globalContactMapping, member);
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
     },
 
-    _trackMember: function(map, member) {
+    _trackMember: function(map, member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
 
         if (map.has(baseNick))
@@ -239,14 +244,19 @@ const UserTracker = new Lang.Class({
             if (map == this._globalContactMapping)
                 this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.AVAILABLE);
             else
-                log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
+                //log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
+                for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
+                    if (handlerInfo.nickName == member.alias)
+                        handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.AVAILABLE);
+                    else if (!handlerInfo.nickName)
+                        handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
-    _untrackMember: function(map, member) {
+    _untrackMember: function(map, member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
 
         let contacts = map.get(baseNick) || [];
-        /*i really don;t like this search. maybe use a for loop?*/
+        /*i really don't like this search. maybe use a for loop?*/
         let indexToDelete = contacts.map(c => c.alias + "|" + c._room.channelName).indexOf(member.alias + "|" + member._room.channelName);
 
         if (indexToDelete > -1) {
@@ -257,15 +267,12 @@ const UserTracker = new Lang.Class({
                     this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.OFFLINE);
                 else
                     //log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
-                    if (removedMember._onStatusChangedCallback)
-                        removedMember._onStatusChangedCallback(member.alias, Tp.ConnectionPresenceType.OFFLINE);
-                    else
-                        log("does not have callback");
+                    for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
+                        if (handlerInfo.nickName == member.alias)
+                            handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
+                        else if (!handlerInfo.nickName)
+                            handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.OFFLINE);
         }
-    },
-
-    _onLocalStatusChanged: function(nickName, status) {
-        log("LOCAL STATUS CHANGED FOR " + nickName + " to " + status);
     },
 
     getNickGlobalStatus: function(nickName) {
@@ -274,6 +281,34 @@ const UserTracker = new Lang.Class({
         let contacts = this._globalContactMapping.get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
                                     : Tp.ConnectionPresenceType.AVAILABLE;
+    },
+
+    watchUser: function(room, nick, callback) {
+        this._ensureRoomMappingForRoom(room);
+        this._ensureHandlerMappingForRoom(room);
+
+        this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
+            nickName: nick,
+            handler: callback
+        });
+
+        this._handlerCounter++;
+
+        return this._handlerCounter - 1;
+    }
+
+    unwatchUser: function(room, nick, callback) {
+        /*would it make sense to call _ensure() here?*/
+        if (!this._roomMapping)
+            return;
+
+        if (!this._roomMapping.has(room))
+            return;
+
+        if (!this._roomMapping.get(room)._handlerMapping)
+            return;
+
+
     }
 });
 Signals.addSignalMethods(UserTracker.prototype);
