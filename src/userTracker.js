@@ -295,10 +295,10 @@ const UserTracker = new Lang.Class({
         this._handlerCounter++;
 
         return this._handlerCounter - 1;
-    }
+    },
 
-    unwatchUser: function(room, nick, callback) {
-        /*would it make sense to call _ensure() here?*/
+    unwatchUser: function(room, nick, handlerID) {
+        /*it wouldn't make sense to call _ensure() here, right?*/
         if (!this._roomMapping)
             return;
 
@@ -308,7 +308,7 @@ const UserTracker = new Lang.Class({
         if (!this._roomMapping.get(room)._handlerMapping)
             return;
 
-
+        this._roomMapping.get(room)._handlerMapping.delete(handlerID);
     }
 });
 Signals.addSignalMethods(UserTracker.prototype);
