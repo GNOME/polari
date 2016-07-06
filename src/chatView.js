@@ -381,10 +381,6 @@ const ChatView = new Lang.Class({
         });
     },
 
-    _onStatusChangedCallback: function(nick, status) {
-        log("Nick " + nick + " has local status " + status);
-    },
-
     _onStyleUpdated: function() {
         let context = this.get_style_context();
         context.save();
@@ -1209,9 +1205,22 @@ const ChatView = new Lang.Class({
         let nickTagName = this._getNickTagName(nickName);
 
         let tag = new Gtk.TextTag({ name: nickTagName });
-        //this._updateNickTag(tag, this._userTracker.getNickGlobalStatus(nickName));
+        //this._updateNickTag(tag, this._userStatusMonitor.getUserTrackerForAccount(this._room.account).getNickRoomStatus(nickName, this._room));
+        this._updateNickTag(tag, Tp.ConnectionPresenceType.OFFLINE);
 
         return tag;
+    },
+
+    _onStatusChangedCallback: function(nick, status) {
+        log("Nick " + nick + " has local status " + status);
+
+        let nickTagName = this._getNickTagName(nick);
+        let nickTag = this._lookupTag(nickTagName);
+
+        if (!nickTag)
+            return;
+
+        this._updateNickTag(nickTag, status);
     },
 
     _updateNickTag: function(tag, status) {
