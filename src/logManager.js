@@ -169,7 +169,6 @@ const LogWalker = new Lang.Class({
                 roomFilter = '?chan nmo:hasParticipant ?participant .' +
                              '?participant fts:match "%s"';
 
-            print(this._room.account.nickname);
             let sparql = (
                 'select nie:plainTextContent(?msg) as ?message ' +
                 '       if (nmo:from(?msg) = nco:default-contact-me,' +

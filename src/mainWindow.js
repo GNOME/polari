@@ -110,7 +110,8 @@ const MainWindow = new Lang.Class({
                        'mainStack',
                        'results',
                        'mainStack1',
-                       'resultStack'],
+                       'resultStack',
+                       'resultscroll'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -252,6 +253,8 @@ const MainWindow = new Lang.Class({
 
         this._results.connect('row-activated', Lang.bind(this, this._rowactivated));
 
+        this._resultscroll.connect('edge-reached', Lang.bind(this, this._onScroll));
+
         //test
         this._logManager = LogManager.getDefault();
         let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
@@ -289,7 +292,7 @@ const MainWindow = new Lang.Class({
             'BIND( ?timestamp - %s as ?timediff ) . ' +
             // FIXME: filter by account
             '  filter (nie:title (?chan) = "%s" && ?timediff >= 0) ' +
-            '} order by asc (?timestamp) LIMIT 10'
+            '} order by asc (?timediff)'
         ).format(row.nickname,
                  Tp.ChannelTextMessageType.NORMAL,
                  row.timestamp,
@@ -308,7 +311,7 @@ const MainWindow = new Lang.Class({
             'BIND( %s - ?timestamp as ?timediff ) . ' +
             // FIXME: filter by account
             '  filter (nie:title (?chan) = "%s" && ?timediff > 0) ' +
-            '} order by asc (?timestamp) LIMIT 10'
+            '} order by asc (?timediff)'
         ).format(row.nickname,
                  Tp.ChannelTextMessageType.NORMAL,
                  row.timestamp,
@@ -320,17 +323,36 @@ const MainWindow = new Lang.Class({
         // this._fetchingBacklog = true;
         // this._logWalker.getEvents(10,
         //                           Lang.bind(this, this._onLogEventsReady));
-        this._logManager.query(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
-        this._logManager.query(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        // this._logManager.query(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+        // this._logManager.query(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
         let buffer = this._resultStack.get_buffer();
         let iter = buffer.get_end_iter();
+        buffer.set_text("",-1);
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+        log("!");
+        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 40);
+        // Mainloop.timeout_add(500, Lang.bind(this,
+        //     function() {
+        //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        //         return GLib.SOURCE_REMOVE;
+        //     }));
+        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        print(this._endQuery.isClosed());
+
+        // Mainloop.timeout_add(5000, Lang.bind(this,
+        //     function() {
+        //         query.next(200,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        //     }));
+        // query.next(20,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+
         //this._resultStack.buffer.insert(iter,row._content_label.label, -1);
         // this._resultStack.label = row._content_label.label;
     },
 
     _onLogEventsReady: function(events) {
         let buffer = this._resultStack.get_buffer();
-        buffer.set_text("",-1);
+        //buffer.set_text("",-1);
         for (let i = 0; i < events.length; i++) {
 
             let iter = buffer.get_end_iter();
@@ -340,26 +362,30 @@ const MainWindow = new Lang.Class({
     },
 
     _onLogEventsReady1: function(events) {
+        log("HERE");
         let buffer = this._resultStack.get_buffer();
         // buffer.set_text("",-1);
         let iter = buffer.get_start_iter();
         // this._resultStack.buffer.insert(iter,'\n', -1);
         iter = buffer.get_start_iter();
         for (let i = 0; i < events.length; i++) {
-            this._resultStack.buffer.insert(iter,events[i].timestamp + "\t\t\t" + events[i].sender + " : " + events[i].message, -1);
+            iter = buffer.get_start_iter();
             this._resultStack.buffer.insert(iter,'\n', -1);
+            iter = buffer.get_start_iter();
+            this._resultStack.buffer.insert(iter,events[i].timestamp + "\t\t\t" + events[i].sender + " : " + events[i].message, -1);
         }
     },
 
 
     _Log: function(events) {
-        log(events);
+        log(events.length);
         let widgetMap = {};
         let markup_message = '';
         for (let i = 0; i < events.length; i++) {
             let time = events[i].timestamp;
             let channel = events[i].chan;
-            let message = events[i].mms;
+            let message = GLib.markup_escape_text(events[i].mms, -1);
+            let rawmessage = events[i].mms;
             let uid = events[i].id;
             let index = message.indexOf(this._keywords[0]);
             let row;
@@ -367,7 +393,7 @@ const MainWindow = new Lang.Class({
             for (let j = 0; j < this._keywords.length; j++) {
                 // log(this._keywords[j]);
                 index = Math.min(index, message.indexOf(this._keywords[j]));
-                message = message.replace( new RegExp( "(" + this._keywords[j] + ")" , 'gi' ),"<span font_weight='bold'>$1</span>");
+            //    message = message.replace( new RegExp( "(" + this._keywords[j] + ")" , 'gi' ),"<span font_weight='bold'>$1</span>");
                 // print(message);
             }
 
@@ -383,6 +409,7 @@ const MainWindow = new Lang.Class({
                 row.channel = channel;
                 row.nickname = channel;
                 row.timestamp = time;
+                row.rawmessage = rawmessage;
                 widgetMap[uid] = row;
             }
             row._content_label.label = message;
@@ -402,6 +429,25 @@ const MainWindow = new Lang.Class({
 
     _Log1: function() {
         this._results.foreach(r => { r.destroy(); })
+    },
+
+    _onScroll: function(w, pos) {
+        log(pos);
+        if(pos==Gtk.PositionType.TOP) {
+            print("called top");
+            Mainloop.timeout_add(500, Lang.bind(this,
+                function() {
+                    this._startQuery.next(1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+                }));
+            return;
+        }
+        if(pos==Gtk.PositionType.BOTTOM) {
+            print("called bottom");
+            Mainloop.timeout_add(500, Lang.bind(this,
+                function() {
+                    this._endQuery.next(1,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+                }));
+        }
     },
 
     get subtitle() {
