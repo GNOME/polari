@@ -97,6 +97,9 @@ const UserTracker = new Lang.Class({
     _onRoomRemoved: function(roomManager, room) {
         if (room.account == this._account)
             this._disconnectRoomSignalsForRoom(room);
+
+        this._clearUsersFromRoom(this._globalContactMapping, room);
+        this._clearUsersFromRoom(this._roomMapping.get(room)._contactMapping, room);
     },
 
     _connectRoomSignalsForRoom: function(room) {
@@ -147,30 +150,26 @@ const UserTracker = new Lang.Class({
             });
         } else {
             /*handle the absence of a channel for the global case*/
-            for ([baseNick, basenickContacts] of this._globalContactMapping) {
-                basenickContacts.forEach(Lang.bind(this, function(member) {
-                    if (member._room == emittingRoom)
-                        /*safe to delete while iterating?*/
-                        this._untrackMember(this._globalContactMapping, member, emittingRoom);
-                }));
-
-                this._globalContactMapping.delete(baseNick);
-            }
+            this._clearUsersFromRoom(this._globalContactMapping, emittingRoom);
             /*handle the absence of a channel for the local case*/
-            for ([baseNick, basenickContacts] of this._roomMapping.get(emittingRoom)._contactMapping) {
-                basenickContacts.forEach(Lang.bind(this, function(member) {
-                    if (member._room == emittingRoom)
-                        /*safe to delete while iterating?*/
-                        this._untrackMember(this._roomMapping.get(emittingRoom)._contactMapping, member, emittingRoom);
-                }));
-
-                this._roomMapping.get(emittingRoom)._contactMapping.delete(baseNick);
-            }
+            this._clearUsersFromRoom(this._roomMapping.get(emittingRoom)._contactMapping, emittingRoom);
 
             /*since we have no channel, all users must be locally marked offline. so call the callbacks*/
             for ([handlerID, handlerInfo] of this._roomMapping.get(emittingRoom)._handlerMapping) {
                 handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
             }
+        }
+    },
+
+    _clearUsersFromRoom: function(mapping, room) {
+        for ([baseNick, basenickContacts] of mapping) {
+            basenickContacts.forEach(Lang.bind(this, function(member) {
+                if (member._room == room)
+                    /*safe to delete while iterating?*/
+                    this._untrackMember(mapping, member, room);
+            }));
+
+            mapping.delete(baseNick);
         }
     },
 
@@ -240,9 +239,12 @@ const UserTracker = new Lang.Class({
         else
             map.set(baseNick, [member]);
 
+        if (map == this._globalContactMapping)log("length: " + this._globalContactMapping.get(baseNick).length)
+
         if (map.get(baseNick).length == 1)
             if (map == this._globalContactMapping)
-                this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+                //this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+                log("[global status] user " + member.alias + " is globally online");
             else
                 //log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
                 for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
@@ -264,7 +266,8 @@ const UserTracker = new Lang.Class({
 
             if (contacts.length == 0)
                 if (map == this._globalContactMapping)
-                    this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                    //this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                    log("[global status] user " + member.alias + " is globally offline");
                 else
                     //log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
                     for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
@@ -299,6 +302,8 @@ const UserTracker = new Lang.Class({
 
     unwatchUser: function(room, nick, handlerID) {
         /*it wouldn't make sense to call _ensure() here, right?*/
+
+        /*rewrite into a single conditional?*/
         if (!this._roomMapping)
             return;
 
