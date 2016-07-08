@@ -136,6 +136,18 @@ const EntryArea = new Lang.Class({
         this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
         this._nickLabel.width_chars = this._maxNickChars;
 
+        /* HACK: We don't want the button to look different when the toplevel
+                 is unfocused, so filter out the BACKDROP state */
+        this._nickButton.connect('state-flags-changed', Lang.bind(this,
+            function(w) {
+                let state = w.get_state_flags();
+                if (!(state & Gtk.StateFlags.BACKDROP))
+                    return; // avoid indefinite recursion
+
+                state &= ~Gtk.StateFlags.BACKDROP;
+                w.set_state_flags (state, true);
+            }));
+
         this._changeButton.connect('clicked', Lang.bind(this,
             function() {
                if (this._nickEntry.text)
