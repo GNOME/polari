@@ -364,24 +364,12 @@ const UserPopover = new Lang.Class({
         this._vbox.show_all();
     },
 
-    set user(user) {
-        this._user = user;
-
-        this._updateContents();
-    },
-
-    get user() {
-        return this._user;
-    },
-
     set nickname(nickname) {
         this._nickname = nickname;
 
         let baseNick = Polari.util_get_basenick(nickname);
 
         this._userTracker.connect("status-changed::" + baseNick, Lang.bind(this, this._onNickStatusChanged));
-
-        this.user = this._userTracker.getBestMatchingContact(this._nickname);
 
         this._updateContents();
     },
@@ -391,11 +379,13 @@ const UserPopover = new Lang.Class({
     },
 
     _updateContents: function() {
-        this._nickLabel.set_label(this._nickname);
-        this._statusLabel.set_label(this._user ? "Online" : "Offline");
+        let bestMatchingContact = this._userTracker.getBestMatchingContact(this._nickname);
 
-        if (this._user) {
-            this._userDetails.user = this._user;
+        this._nickLabel.set_label(this._nickname);
+        this._statusLabel.set_label(bestMatchingContact ? "Online" : "Offline");
+
+        if (bestMatchingContact) {
+            this._userDetails.user = bestMatchingContact;
 
             let context = this._statusLabel.get_style_context();
             context.set_state(Gtk.StateFlags.LINK);
@@ -451,7 +441,7 @@ const UserPopover = new Lang.Class({
             }
     },
 
-    _onNickStatusChanged: function(tracker, nickName, status) { log("da");
+    _onNickStatusChanged: function(tracker, nickName, status) {
         this.user = this._userTracker.getBestMatchingContact(this._nickname);
     }
 });
