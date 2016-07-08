@@ -5,6 +5,7 @@ const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
+const Polari = imports.gi.Polari;
 
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
@@ -153,8 +154,8 @@ const UserDetails = new Lang.Class({
         this._updateButtonVisibility();
     },
 
-    set fallbackNick(fallbackNick) {
-        this._fallbackNick = fallbackNick;
+    set nickname(nickname) {
+        this._nickname = nickname;
 
         this._updateButtonVisibility();
     },
@@ -196,7 +197,7 @@ const UserDetails = new Lang.Class({
                                               Lang.bind(this, this._onContactInfoReady));
         //TODO: else use this._falbackNick to query tracker
         else
-            this._trackFallbackNick(this._fallbackNick);
+            this._trackFallbackNick(this._nickname);
     },
 
     _unexpand: function() {
@@ -267,7 +268,7 @@ const UserDetails = new Lang.Class({
         this._revealDetails();
     },
 
-    _trackFallbackNick: function(fallbackNick) {
+    _trackFallbackNick: function(nickname) {
         this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
         this._lastHeader.show();
 
@@ -322,6 +323,9 @@ const UserPopover = new Lang.Class({
         this._room = params.room;
         delete params.room;
 
+        this._userTracker = params.userTracker;
+        delete params.userTracker;
+
         this.parent(params);
 
         this._chatroomManager = ChatroomManager.getDefault();
@@ -370,18 +374,24 @@ const UserPopover = new Lang.Class({
         return this._user;
     },
 
-    set fallbackNick(fallbackNick) {
-        this._fallbackNick = fallbackNick;
+    set nickname(nickname) {
+        this._nickname = nickname;
+
+        let baseNick = Polari.util_get_basenick(nickname);
+
+        this._userTracker.connect("status-changed::" + baseNick, Lang.bind(this, this._onNickStatusChanged));
+
+        this.user = this._userTracker.getBestMatchingContact(this._nickname);
 
         this._updateContents();
     },
 
-    get fallbackNick() {
-        return this._fallbackNick;
+    get nickname() {
+        return this._nickname;
     },
 
     _updateContents: function() {
-        this._nickLabel.set_label(this._fallbackNick);
+        this._nickLabel.set_label(this._nickname);
         this._statusLabel.set_label(this._user ? "Online" : "Offline");
 
         if (this._user) {
@@ -400,7 +410,7 @@ const UserPopover = new Lang.Class({
 
             this._statusLabel.sensitive = false;
 
-            /*if (!this._chatroomManager.isUserWatched(this._fallbackNick, this._room.account.get_display_name()))
+            /*if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name()))
                 this._notifyButton.visible = true;
             else
                 this._notifyButton.sensitive = false;*/
@@ -409,19 +419,19 @@ const UserPopover = new Lang.Class({
 
         this._updateNotifyButton();
 
-        this._userDetails.fallbackNick = this._fallbackNick;
+        this._userDetails.nickname = this._nickname;
     },
 
     _onNotifyButtonClicked: function() {
-        if (!this._chatroomManager.isUserWatched(this._fallbackNick, this._room.account.get_display_name())) {
-            this._chatroomManager.addToWatchlist(this._fallbackNick, this._room.account.get_display_name());
+        if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name())) {
+            this._chatroomManager.addToWatchlist(this._nickname, this._room.account.get_display_name());
             //this._notifyButton.sensitive = false;
             this._updateNotifyButton();
         }
     },
 
     _updateNotifyButton: function() {
-        if (!this._chatroomManager.isUserWatched(this._fallbackNick, this._room.account.get_display_name()))
+        if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name()))
             if (this._user) {
                 this._notifyButton.visible = false;
                 this._notifyButton.sensitive = true;
@@ -439,6 +449,10 @@ const UserPopover = new Lang.Class({
                 this._notifyButton.visibile = true;
                 this._notifyButton.sensitive = false;
             }
+    },
+
+    _onNickStatusChanged: function(tracker, nickName, status) { log("da");
+        this.user = this._userTracker.getBestMatchingContact(this._nickname);
     }
 });
 
