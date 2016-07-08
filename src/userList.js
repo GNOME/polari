@@ -303,8 +303,6 @@ const UserDetails = new Lang.Class({
             return;
         }
 
-        //let active = this._user != this._user.connection.self_contact;
-        //this._messageButton.sensitive = active;
         if (this._user == this._user.connection.self_contact) {
             this._messageButton.visible = false;
             this._messageButton.sensitive = true; //does this even make sense?
@@ -351,11 +349,8 @@ const UserPopover = new Lang.Class({
 
         let context = this._statusLabel.get_style_context();
         context.add_class('nick-popover-status');
-        //context.save();
 
         this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        //this._vbox.add(this._nickLabel);
-        //this._vbox.add(this._statusLabel);
         this._vbox.add(this._hbox);
         this._vbox.add(this._userDetails);
 
@@ -392,19 +387,11 @@ const UserPopover = new Lang.Class({
             context.save();
 
             this._statusLabel.sensitive = true;
-            //this._notifyButton.visible = false;
-            //this._updateNotifyButton();
         }
         else {
             this._userDetails.clearPrevUserAndDetails();
 
             this._statusLabel.sensitive = false;
-
-            /*if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name()))
-                this._notifyButton.visible = true;
-            else
-                this._notifyButton.sensitive = false;*/
-            //this._updateNotifyButton();
         }
 
         this._updateNotifyButton();
@@ -415,7 +402,6 @@ const UserPopover = new Lang.Class({
     _onNotifyButtonClicked: function() {
         if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name())) {
             this._chatroomManager.addToWatchlist(this._nickname, this._room.account.get_display_name());
-            //this._notifyButton.sensitive = false;
             this._updateNotifyButton();
         }
     },
