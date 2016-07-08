@@ -66,6 +66,9 @@
               <object class="GtkLabel" id="nickLabel">
                 <property name="visible">True</property>
                 <property name="xalign">0</property>
+                <attributes>
+                  <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+                </attributes>
               </object>
             </child>
             <child internal-child="accessible">

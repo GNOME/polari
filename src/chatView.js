@@ -354,7 +354,8 @@ const ChatView = new Lang.Class({
         let tagTable = buffer.get_tag_table();
         let tags = [
           { name: 'nick',
-            left_margin: MARGIN },
+            left_margin: MARGIN,
+            weight: Pango.Weight.BOLD },
           { name: 'gap',
             pixels_above_lines: 10 },
           { name: 'message',
@@ -368,10 +369,10 @@ const ChatView = new Lang.Class({
           { name: 'timestamp',
             left_margin: MARGIN,
             indent: 0,
-            weight: Pango.Weight.BOLD,
             justification: Gtk.Justification.RIGHT },
           { name: 'action',
-            left_margin: MARGIN },
+            left_margin: MARGIN,
+            style: Pango.Style.ITALIC },
           { name: 'url',
             underline: Pango.Underline.SINGLE },
           { name: 'indicator-line',
@@ -436,8 +437,6 @@ const ChatView = new Lang.Class({
           { name: 'status',
             foreground_rgba: dimColor },
           { name: 'timestamp',
-            foreground_rgba: dimColor },
-          { name: 'action',
             foreground_rgba: dimColor },
           { name: 'url',
             foreground_rgba: linkColor }
