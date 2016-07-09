@@ -20,6 +20,7 @@ const Utils = imports.utils;
 const Pango = imports.gi.Pango;
 const ChatView = imports.chatView;
 const ResultList = imports.resultList;
+const ResultView = imports.resultView;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
@@ -110,7 +111,6 @@ const MainWindow = new Lang.Class({
                        'mainStack',
                        'results',
                        'mainStack1',
-                       'resultStack',
                        'resultscroll'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
@@ -255,7 +255,9 @@ const MainWindow = new Lang.Class({
             }));
 
         this._results.connect('row-activated', Lang.bind(this, this._rowactivated));
-
+        this._resultStack = this._resultscroll._view;
+        print(this._resultStack);
+        print(this._resultscroll);
         this._resultscroll.connect('edge-reached', Lang.bind(this, this._onScroll));
 
         //test
