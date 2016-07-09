@@ -866,7 +866,7 @@ const ChatView = new Lang.Class({
 
         this._channel.dup_pending_messages().forEach(Lang.bind(this,
             function(message) {
-                this._insertTpMessage(this._room, message);
+                this._insertTpMessage(message);
             }));
         this._checkMessages();
     },
@@ -920,8 +920,8 @@ const ChatView = new Lang.Class({
         this._untrackContact(member);
     },
 
-    _onMessageReceived: function(room, tpMessage) {
-        this._insertTpMessage(room, tpMessage);
+    _onMessageReceived: function(channel, tpMessage) {
+        this._insertTpMessage(tpMessage);
         this._resetStatusCompressed();
         let nick = tpMessage.sender.alias;
         let nickTag = this._lookupTag('nick' + nick);
@@ -930,8 +930,8 @@ const ChatView = new Lang.Class({
         nickTag._lastActivity = GLib.get_monotonic_time();
     },
 
-    _onMessageSent: function(room, tpMessage) {
-        this._insertTpMessage(room, tpMessage);
+    _onMessageSent: function(channel, tpMessage) {
+        this._insertTpMessage(tpMessage);
         this._resetStatusCompressed();
     },
 
@@ -1133,7 +1133,7 @@ const ChatView = new Lang.Class({
         return date.format(format);
     },
 
-    _insertTpMessage: function(room, tpMessage) {
+    _insertTpMessage: function(tpMessage) {
         let [text, flags] = tpMessage.to_text();
 
         let message = { nick: tpMessage.sender.alias,
