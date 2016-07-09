@@ -131,33 +131,15 @@ polari_create_room_id (TpAccount    *account,
 #  define MESSAGE_TO_TEXT(message) message_to_casefolded_text (message)
 #endif
 
-gboolean
-polari_room_should_highlight_message (PolariRoom *room,
-                                      TpMessage *message)
+static gboolean
+match_self_nick (PolariRoom *room,
+                 const char *text)
 {
-  PolariRoomPrivate *priv;
-  TpConnection *conn;
-  TpContact *self;
-  char *text, *match;
+  PolariRoomPrivate *priv = room->priv;
+  char *match;
   gboolean result = FALSE;
   int len;
 
-  g_return_val_if_fail (POLARI_IS_ROOM (room), FALSE);
-
-  priv = room->priv;
-
-  if (!priv->channel)
-    return FALSE;
-  if (priv->type != TP_HANDLE_TYPE_ROOM)
-    return FALSE;
-
-  conn = tp_channel_get_connection (room->priv->channel);
-  self = tp_connection_get_self_contact (conn);
-
-  if (tp_signalled_message_get_sender (message) == self)
-    return FALSE;
-
-  text = MESSAGE_TO_TEXT (message);
   len = strlen (priv->self_nick);
   match = MATCHFUNC (text, priv->self_nick);
 
@@ -175,6 +157,36 @@ polari_room_should_highlight_message (PolariRoom *room,
       match = MATCHFUNC (match + len, priv->self_nick);
     }
 
+  return result;
+}
+
+gboolean
+polari_room_should_highlight_message (PolariRoom *room,
+                                      TpMessage *message)
+{
+  PolariRoomPrivate *priv;
+  TpConnection *conn;
+  TpContact *self;
+  char *text;
+  gboolean result = FALSE;
+
+  g_return_val_if_fail (POLARI_IS_ROOM (room), FALSE);
+
+  priv = room->priv;
+
+  if (!priv->channel)
+    return FALSE;
+  if (priv->type != TP_HANDLE_TYPE_ROOM)
+    return FALSE;
+
+  conn = tp_channel_get_connection (room->priv->channel);
+  self = tp_connection_get_self_contact (conn);
+
+  if (tp_signalled_message_get_sender (message) == self)
+    return FALSE;
+
+  text = MESSAGE_TO_TEXT (message);
+  result = match_self_nick (room, text);
   g_free (text);
 
   return result;
