@@ -119,16 +119,13 @@ polari_create_room_id (TpAccount    *account,
 }
 
 #ifdef HAVE_STRCASESTR
+#  define FOLDFUNC(text) ((char *)(text))
 #  define MATCHFUNC(haystick,needle) strcasestr (haystick, needle)
-#  define MESSAGE_TO_TEXT(message) tp_message_to_text (message, NULL)
+#  define FREEFUNC(text)
 #else
-   static inline char *
-   message_to_casefolded_text (TpMessage *message) {
-     g_autofree char *tmp = tp_message_to_text (message, NULL);
-     return g_utf8_casefold (tmp, -1);
-   }
+#  define FOLDFUNC(text) g_utf8_casefold (text, -1)
 #  define MATCHFUNC(haystick,needle) strstr (haystick, needle)
-#  define MESSAGE_TO_TEXT(message) message_to_casefolded_text (message)
+#  define FREEFUNC(text) g_free(text)
 #endif
 
 static gboolean
@@ -136,19 +133,20 @@ match_self_nick (PolariRoom *room,
                  const char *text)
 {
   PolariRoomPrivate *priv = room->priv;
-  char *match;
+  char *folded_text, *match;
   gboolean result = FALSE;
   int len;
 
+  folded_text = FOLDFUNC (text);
   len = strlen (priv->self_nick);
-  match = MATCHFUNC (text, priv->self_nick);
+  match = MATCHFUNC (folded_text, priv->self_nick);
 
   while (match != NULL)
     {
       gboolean starts_word, ends_word;
 
       /* assume ASCII nicknames, so no complex pango-style breaks */
-      starts_word = (match == text || !g_ascii_isalnum (*(match - 1)));
+      starts_word = (match == folded_text || !g_ascii_isalnum (*(match - 1)));
       ends_word = !g_ascii_isalnum (*(match + len));
 
       result = starts_word && ends_word;
@@ -156,6 +154,8 @@ match_self_nick (PolariRoom *room,
         break;
       match = MATCHFUNC (match + len, priv->self_nick);
     }
+
+  FREEFUNC (folded_text);
 
   return result;
 }
@@ -185,7 +185,7 @@ polari_room_should_highlight_message (PolariRoom *room,
   if (tp_signalled_message_get_sender (message) == self)
     return FALSE;
 
-  text = MESSAGE_TO_TEXT (message);
+  text = tp_message_to_text (message, NULL);
   result = match_self_nick (room, text);
   g_free (text);
 
