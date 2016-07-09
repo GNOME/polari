@@ -248,20 +248,27 @@ strip_color_codes (const char *string) {
 static void
 update_self_nick (PolariRoom *room)
 {
-  TpConnection *conn;
-  TpContact *self;
-
   PolariRoomPrivate *priv = room->priv;
+  const char *nick;
 
   g_clear_pointer (&priv->self_nick, g_free);
 
-  if (!room->priv->channel)
-    return;
+  if (priv->channel)
+    {
+      TpConnection *conn;
+      TpContact *self;
 
-  conn = tp_channel_get_connection (room->priv->channel);
-  self = tp_connection_get_self_contact (conn);
+      conn = tp_channel_get_connection (priv->channel);
+      self = tp_connection_get_self_contact (conn);
 
-  priv->self_nick = polari_util_get_basenick (tp_contact_get_alias (self));
+      nick = tp_contact_get_alias (self);
+    }
+  else
+    {
+      nick = tp_account_get_nickname (priv->account);
+    }
+
+  priv->self_nick = polari_util_get_basenick (nick);
 }
 
 static void
@@ -476,6 +483,8 @@ polari_room_set_account (PolariRoom *room,
 
   if (g_set_object (&priv->account, account))
     g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ACCOUNT]);
+
+  update_self_nick (room);
 }
 
 static void
