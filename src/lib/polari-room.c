@@ -165,8 +165,7 @@ polari_room_should_highlight_message (PolariRoom *room,
                                       TpMessage *message)
 {
   PolariRoomPrivate *priv;
-  TpConnection *conn;
-  TpContact *self;
+  TpContact *sender;
   char *text;
   gboolean result = FALSE;
 
@@ -174,15 +173,11 @@ polari_room_should_highlight_message (PolariRoom *room,
 
   priv = room->priv;
 
-  if (!priv->channel)
-    return FALSE;
   if (priv->type != TP_HANDLE_TYPE_ROOM)
     return FALSE;
 
-  conn = tp_channel_get_connection (room->priv->channel);
-  self = tp_connection_get_self_contact (conn);
-
-  if (tp_signalled_message_get_sender (message) == self)
+  sender = tp_signalled_message_get_sender (message);
+  if (match_self_nick (room, tp_contact_get_alias (sender)))
     return FALSE;
 
   text = tp_message_to_text (message, NULL);
