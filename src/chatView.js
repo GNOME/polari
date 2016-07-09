@@ -1157,7 +1157,7 @@ const ChatView = new Lang.Class({
             timestamp = tpMessage.get_received_timestamp();
         message.timestamp = timestamp;
 
-        message.shouldHighlight = this._room.should_highlight_message(tpMessage);
+        message.shouldHighlight = this._room.should_highlight_message(message.nick, text);
 
         this._ensureNewLine();
 

@@ -80,7 +80,8 @@ const RoomRow = new Lang.Class({
             pending = room.channel.dup_pending_messages();
             if (room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
                 numPendingHighlights = pending.filter(function(m) {
-                    return room.should_highlight_message(m);
+                    let [text, ] = m.to_text();
+                    return room.should_highlight_message(m.sender.alias, text);
                 }).length;
             else
                 numPendingHighlights = pending.length;

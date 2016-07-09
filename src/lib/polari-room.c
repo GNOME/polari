@@ -162,12 +162,10 @@ match_self_nick (PolariRoom *room,
 
 gboolean
 polari_room_should_highlight_message (PolariRoom *room,
-                                      TpMessage *message)
+                                      const char *sender,
+                                      const char *message)
 {
   PolariRoomPrivate *priv;
-  TpContact *sender;
-  char *text;
-  gboolean result = FALSE;
 
   g_return_val_if_fail (POLARI_IS_ROOM (room), FALSE);
 
@@ -176,15 +174,10 @@ polari_room_should_highlight_message (PolariRoom *room,
   if (priv->type != TP_HANDLE_TYPE_ROOM)
     return FALSE;
 
-  sender = tp_signalled_message_get_sender (message);
-  if (match_self_nick (room, tp_contact_get_alias (sender)))
+  if (match_self_nick (room, sender))
     return FALSE;
 
-  text = tp_message_to_text (message, NULL);
-  result = match_self_nick (room, text);
-  g_free (text);
-
-  return result;
+  return match_self_nick (room, message);
 }
 
 void

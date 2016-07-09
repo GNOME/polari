@@ -29,7 +29,8 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PolariRoom, polari_room, POLARI, ROOM, GObject)
 
 gboolean polari_room_should_highlight_message (PolariRoom *room,
-                                               TpMessage *message);
+                                               const char *sender,
+                                               const char *message);
 
 void  polari_room_set_topic (PolariRoom *room, const char *topic);
 
