@@ -291,10 +291,22 @@ const ResultView = new Lang.Class({
     },
 
     _onLogEventsReady: function(events) {
+        print(events);
+        events = events.reverse();
         this._hideLoadingIndicator();
 
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs();
+        this._fetchingBacklog = false;
+    },
+
+    _onLogEventsReady1: function(events) {
+        print(events);
+        //events = events.reverse();
+        this._hideLoadingIndicator();
+
+        this._pendingLogs = events.concat(this._pendingLogs);
+        this._insertPendingLogs1();
         this._fetchingBacklog = false;
     },
 
@@ -305,7 +317,7 @@ const ResultView = new Lang.Class({
         let index = -1;
         let nick = this._pendingLogs[0].sender;
         let type = this._pendingLogs[0].messageType;
-        if (!this._logWalker.isEnd()) {
+    /*    if (!this._query.isClosed()) {
             for (let i = 0; i < this._pendingLogs.length; i++)
                 if (this._pendingLogs[i].sender != nick ||
                     this._pendingLogs[i].messageType != type) {
@@ -317,9 +329,12 @@ const ResultView = new Lang.Class({
         }
 
         if (index < 0)
-            return;
-
+            return;*/
+            index = 0;
+        print(this._pendingLogs);
         let pending = this._pendingLogs.splice(index);
+        print(this._pendingLogs);
+        print(pending);
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
         for (let i = 0; i < pending.length; i++) {
@@ -332,6 +347,62 @@ const ResultView = new Lang.Class({
             this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
 
             if (!iter.is_end() || i < pending.length - 1)
+                this._view.buffer.insert(iter, '\n', -1);
+        }
+
+        if (!this._channel)
+            return;
+
+        if (this._room.type == Tp.HandleType.ROOM) {
+            let members = this._channel.group_dup_members_contacts();
+            for (let j = 0; j < members.length; j++)
+                this._setNickStatus(members[j].get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+        } else {
+                this._setNickStatus(this._channel.connection.self_contact.get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+                this._setNickStatus(this._channel.target_contact.get_alias(),
+                                    Tp.ConnectionPresenceType.AVAILABLE);
+        }
+    },
+
+    _insertPendingLogs1: function() {
+        if (this._pendingLogs.length == 0)
+            return;
+
+        let index = -1;
+        let nick = this._pendingLogs[0].sender;
+        let type = this._pendingLogs[0].messageType;
+    /*    if (!this._query.isClosed()) {
+            for (let i = 0; i < this._pendingLogs.length; i++)
+                if (this._pendingLogs[i].sender != nick ||
+                    this._pendingLogs[i].messageType != type) {
+                    index = i;
+                    break;
+                }
+        } else {
+            index = 0;
+        }
+
+        if (index < 0)
+            return;*/
+            index = 0;
+        print(this._pendingLogs);
+        let pending = this._pendingLogs.splice(index);
+        print(this._pendingLogs);
+        print(pending);
+        let state = { lastNick: null, lastTimestamp: 0 };
+        let iter = this._view.buffer.get_end_iter();
+        for (let i = 0; i < pending.length; i++) {
+            let message = { nick: pending[i].sender,
+                            text: pending[i].message,
+                            timestamp: pending[i].timestamp,
+                            messageType: pending[i].messageType,
+                            shouldHighlight: false };
+            this._insertMessage(iter, message, state);
+            this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
+
+            //if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
         }
 
@@ -598,7 +669,7 @@ const ResultView = new Lang.Class({
         }
         state.lastTimestamp = message.timestamp;
 
-        this._updateMaxNickChars(message.nick.length);
+//        this._updateMaxNickChars(message.nick.length);
 
         let tags = [];
         if (isAction) {
@@ -629,26 +700,26 @@ const ResultView = new Lang.Class({
         if (message.shouldHighlight)
             tags.push(this._lookupTag('highlight'));
 
-        let params = this._room.account.dup_parameters_vardict().deep_unpack();
-        let server = params.server.deep_unpack();
+        // let params = this._room.account.dup_parameters_vardict().deep_unpack();
+        // let server = params.server.deep_unpack();
 
         let text = message.text;
-        let channels = Utils.findChannels(text, server);
-        let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
+        // let channels = Utils.findChannels(text, server);
+        // let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
         let pos = 0;
-        for (let i = 0; i < urls.length; i++) {
-            let url = urls[i];
-            this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
-
-            let tag = this._createUrlTag(url.url);
-            this._view.get_buffer().tag_table.add(tag);
-
-            let name = url.name ? url.name : url.url;
-            this._insertWithTags(iter, name,
-                                 tags.concat(this._lookupTag('url'), tag));
-
-            pos = url.pos + name.length;
-        }
+        // for (let i = 0; i < urls.length; i++) {
+        //     let url = urls[i];
+        //     this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
+        //
+        //     let tag = this._createUrlTag(url.url);
+        //     this._view.get_buffer().tag_table.add(tag);
+        //
+        //     let name = url.name ? url.name : url.url;
+        //     this._insertWithTags(iter, name,
+        //                          tags.concat(this._lookupTag('url'), tag));
+        //
+        //     pos = url.pos + name.length;
+        // }
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 
@@ -721,5 +792,22 @@ const ResultView = new Lang.Class({
         buffer.remove_all_tags(start, iter);
         for (let i = 0; i < tags.length; i++)
             buffer.apply_tag(tags[i], start, iter);
+    },
+
+    _getNickTagName: function(nick) {
+        return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
+    },
+
+    _setNickStatus: function(nick, status) {
+        let nickTag = this._lookupTag(this._getNickTagName(nick));
+        if (!nickTag)
+           return;
+
+        if (status == Tp.ConnectionPresenceType.AVAILABLE)
+           nickTag.foreground_rgba = this._activeNickColor;
+        else
+           nickTag.foreground_rgba = this._inactiveNickColor;
+
+        nickTag._status = status;
     }
 });

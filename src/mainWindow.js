@@ -330,17 +330,17 @@ const MainWindow = new Lang.Class({
         let buffer = this._resultStack.get_buffer();
         let iter = buffer.get_end_iter();
         buffer.set_text("",-1);
-        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 25);
         this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
         log("!");
-        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 40);
+        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 25);
         // Mainloop.timeout_add(500, Lang.bind(this,
         //     function() {
         //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
         //         return GLib.SOURCE_REMOVE;
         //     }));
         this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        print(this._endQuery.isClosed());
+        //print(this._endQuery.isClosed());
 
         // Mainloop.timeout_add(5000, Lang.bind(this,
         //     function() {
@@ -353,6 +353,9 @@ const MainWindow = new Lang.Class({
     },
 
     _onLogEventsReady: function(events) {
+        this._resultscroll._query = this._endQuery;
+        this._resultscroll._onLogEventsReady1(events);
+        return;
         let buffer = this._resultStack.get_buffer();
         //buffer.set_text("",-1);
         for (let i = 0; i < events.length; i++) {
@@ -364,6 +367,9 @@ const MainWindow = new Lang.Class({
     },
 
     _onLogEventsReady1: function(events) {
+        this._resultscroll._query = this._startQuery;
+        this._resultscroll._onLogEventsReady(events);
+        return;
         log("HERE");
         let buffer = this._resultStack.get_buffer();
         // buffer.set_text("",-1);
@@ -439,7 +445,7 @@ const MainWindow = new Lang.Class({
             print("called top");
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
-                    this._startQuery.next(1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+                    this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
                 }));
             return;
         }
@@ -447,7 +453,7 @@ const MainWindow = new Lang.Class({
             print("called bottom");
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
-                    this._endQuery.next(1,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+                    this._endQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady));
                 }));
         }
     },
