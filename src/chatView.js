@@ -505,8 +505,7 @@ const ChatView = new Lang.Class({
             let message = { nick: pending[i].sender.alias,
                             text: pending[i].message,
                             timestamp: pending[i].timestamp,
-                            messageType: pending[i].get_message_type(),
-                            shouldHighlight: false };
+                            messageType: pending[i].get_message_type() };
             this._insertMessage(iter, message, state);
 
             if (!iter.is_end() || i < pending.length - 1)
@@ -1157,7 +1156,7 @@ const ChatView = new Lang.Class({
             timestamp = tpMessage.get_received_timestamp();
         message.timestamp = timestamp;
 
-        message.shouldHighlight = this._room.should_highlight_message(message.nick, text);
+        let shouldHighlight = this._room.should_highlight_message(message.nick, text);
 
         this._ensureNewLine();
 
@@ -1167,7 +1166,7 @@ const ChatView = new Lang.Class({
 
         let [id, valid] = tpMessage.get_pending_message_id();
 
-        if (message.shouldHighlight &&
+        if (shouldHighlight &&
             !(this._toplevelFocus && this._active)) {
             let summary = '%s %s'.format(this._room.display_name, message.nick);
             let notification = new Gio.Notification();
@@ -1187,10 +1186,10 @@ const ChatView = new Lang.Class({
         if (!valid /* outgoing */ ||
             (this._active && this._toplevelFocus && this._nPending == 0)) {
             this._channel.ack_message_async(tpMessage, null);
-        } else if (message.shouldHighlight || this._needsIndicator) {
+        } else if (shouldHighlight || this._needsIndicator) {
             let iter = buffer.get_end_iter();
 
-            if (message.shouldHighlight) {
+            if (shouldHighlight) {
                 let mark = buffer.create_mark(null, iter, true);
                 this._pending[id] = mark;
             }
@@ -1261,7 +1260,7 @@ const ChatView = new Lang.Class({
             tags.push(this._lookupTag('message'));
         }
 
-        if (message.shouldHighlight)
+        if (this._room.should_highlight_message(message.nick, message.text))
             tags.push(this._lookupTag('highlight'));
 
         let params = this._room.account.dup_parameters_vardict().deep_unpack();
