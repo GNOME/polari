@@ -402,35 +402,47 @@ const UserPopover = new Lang.Class({
             this._userTracker.addToWatchlist(this._nickname, this._room.account.get_display_name());
             this._updateNotifyButton();
         }
+        else {
+            this._userTracker.popUserFromWatchlist(this._nickname, this._room.account.get_display_name());
+            this._updateNotifyButton();
+        }
     },
 
     _updateNotifyButton: function() {
+        let isUserGloballyOnline = this._userTracker.getNickStatus(this._nickname) == Tp.ConnectionPresenceType.AVAILABLE ? true : false;
+
+        /*TODO: too many conditionals*/
         if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name()))
-            if (this._user) {
+            if (this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname)) {
                 this._notifyButton.visible = false;
-                //this._notifyButton.sensitive = true;
-                this._notifyButton.set_active(true);
+                this._notifyButton.set_active(false);
             }
             else {
-                this._notifyButton.visible = true;
-                //this._notifyButton.sensitive = true;
-                this._notifyButton.set_active(true);
+                //this._notifyButton.visible = true;
+                if (isUserGloballyOnline)
+                    this._notifyButton.visible = false;
+                else
+                    this._notifyButton.visible = true;
+
+                this._notifyButton.set_active(false);
             }
         else
-            if (this._user) {
+            if (this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname)) {
                 this._notifyButton.visible = false;
-                //this._notifyButton.sensitive = true;
                 this._notifyButton.set_active(true);
             }
             else {
-                this._notifyButton.visibile = true;
-                //this._notifyButton.sensitive = false;
-                this._notifyButton.set_active(false);
+                //this._notifyButton.visibile = true;
+                if (isUserGloballyOnline)
+                    this._notifyButton.visible = false;
+                else
+                    this._notifyButton.visibile = true;
+
+                this._notifyButton.set_active(true);
             }
     },
 
     _onNickStatusChanged: function(nickName, status) {
-        //this.user = this._userTracker.getBestMatchingContact(this._nickname);
         this._updateContents();
     }
 });
