@@ -671,8 +671,13 @@ const ChatView = new Lang.Class({
 
     _pendingMessageRemoved: function(channel, message) {
         let [id,] = message.get_pending_message_id();
-        if (this._pending[id])
-            this._view.buffer.delete_mark(this._pending[id]);
+        let mark = this._pending[id];
+        if (!mark)
+            return;
+        // Re-enable auto-scrolling if this is the most recent message
+        if (this._view.buffer.get_iter_at_mark(mark).is_end())
+            this._autoscroll = true;
+        this._view.buffer.delete_mark(mark);
         this._app.withdraw_notification('pending-message-' + id);
         delete this._pending[id];
     },
