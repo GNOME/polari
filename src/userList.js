@@ -326,8 +326,6 @@ const UserPopover = new Lang.Class({
 
         this.parent(params);
 
-        this._chatroomManager = ChatroomManager.getDefault();
-
         this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0 });
         this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0 });
 
@@ -338,7 +336,7 @@ const UserPopover = new Lang.Class({
         this._hbox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, halign: Gtk.Align.FILL, margin: 9 });
         this._hbox.add(this._headervbox);
 
-        this._notifyButton = new Gtk.Button({ image: new Gtk.Image({ icon_name: 'alarm-symbolic' }), halign: Gtk.Align.END, hexpand: true });
+        this._notifyButton = new Gtk.ToggleButton({ image: new Gtk.Image({ icon_name: 'alarm-symbolic' }), halign: Gtk.Align.END, hexpand: true });
         this._notifyButton.connect('clicked',
                                     Lang.bind(this, this._onNotifyButtonClicked));
         this._hbox.add(this._notifyButton);
@@ -364,7 +362,7 @@ const UserPopover = new Lang.Class({
 
         let baseNick = Polari.util_get_basenick(nickname);
 
-        this._userTracker.connect("status-changed::" + baseNick, Lang.bind(this, this._onNickStatusChanged));
+        this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
 
         this._updateContents();
     },
@@ -374,7 +372,7 @@ const UserPopover = new Lang.Class({
     },
 
     _updateContents: function() {
-        let bestMatchingContact = this._userTracker.getBestMatchingContact(this._nickname);
+        let bestMatchingContact = this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname);
 
         this._nickLabel.set_label(this._nickname);
         this._statusLabel.set_label(bestMatchingContact ? "Online" : "Offline");
@@ -400,35 +398,40 @@ const UserPopover = new Lang.Class({
     },
 
     _onNotifyButtonClicked: function() {
-        if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name())) {
-            this._chatroomManager.addToWatchlist(this._nickname, this._room.account.get_display_name());
+        if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name())) {
+            this._userTracker.addToWatchlist(this._nickname, this._room.account.get_display_name());
             this._updateNotifyButton();
         }
     },
 
     _updateNotifyButton: function() {
-        if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name()))
+        if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name()))
             if (this._user) {
                 this._notifyButton.visible = false;
-                this._notifyButton.sensitive = true;
+                //this._notifyButton.sensitive = true;
+                this._notifyButton.set_active(true);
             }
             else {
                 this._notifyButton.visible = true;
-                this._notifyButton.sensitive = true;
+                //this._notifyButton.sensitive = true;
+                this._notifyButton.set_active(true);
             }
         else
             if (this._user) {
                 this._notifyButton.visible = false;
-                this._notifyButton.sensitive = true;
+                //this._notifyButton.sensitive = true;
+                this._notifyButton.set_active(true);
             }
             else {
                 this._notifyButton.visibile = true;
-                this._notifyButton.sensitive = false;
+                //this._notifyButton.sensitive = false;
+                this._notifyButton.set_active(false);
             }
     },
 
-    _onNickStatusChanged: function(tracker, nickName, status) {
-        this.user = this._userTracker.getBestMatchingContact(this._nickname);
+    _onNickStatusChanged: function(nickName, status) {
+        //this.user = this._userTracker.getBestMatchingContact(this._nickname);
+        this._updateContents();
     }
 });
 
