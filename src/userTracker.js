@@ -151,8 +151,7 @@ const UserTracker = new Lang.Class({
 
             /*if there is no map keeping track of the users in the emittingRoom
             create it*/
-            if (!this._roomMapping.get(emittingRoom)._contactMapping)
-                this._roomMapping.get(emittingRoom)._contactMapping = new Map();
+            this._ensureContactMappingForRoom(emittingRoom);
 
             /*if there is no map keeping track of the local status change handlers*/
             this._ensureHandlerMappingForRoom(emittingRoom);
@@ -193,6 +192,11 @@ const UserTracker = new Lang.Class({
     _ensureRoomMappingForRoom: function(room) {
         if (!this._roomMapping.has(room))
             this._roomMapping.set(room, {});
+    },
+
+    _ensureContactMappingForRoom: function(room) {
+        if (!this._roomMapping.get(room)._contactMapping)
+            this._roomMapping.get(room)._contactMapping = new Map();
     },
 
     _ensureHandlerMappingForRoom: function(room) {
@@ -312,6 +316,9 @@ const UserTracker = new Lang.Class({
 
     getBestMatchingContactInRoom: function(room, nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
+
+        this._ensureContactMappingForRoom(room);
+
         let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
 
         /*TODO: even possible?*/
