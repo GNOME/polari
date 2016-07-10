@@ -362,7 +362,9 @@ const UserPopover = new Lang.Class({
 
         let baseNick = Polari.util_get_basenick(nickname);
 
+        /*TODO: these need to be disconnected when not used anymore*/
         this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
+        this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
 
         this._updateContents();
     },
@@ -375,7 +377,17 @@ const UserPopover = new Lang.Class({
         let bestMatchingContact = this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname);
 
         this._nickLabel.set_label(this._nickname);
-        this._statusLabel.set_label(bestMatchingContact ? "Online" : "Offline");
+
+        let labelStatus = "";
+        if (bestMatchingContact)
+            labelStatus = "Online";
+        else
+            if (this._userTracker.getNickStatus(this._nickname) == Tp.ConnectionPresenceType.OFFLINE)
+                labelStatus = "Offline";
+            else
+                labelStatus = "Available in another room.";
+
+        this._statusLabel.set_label(labelStatus);
 
         if (bestMatchingContact) {
             this._userDetails.user = bestMatchingContact;
