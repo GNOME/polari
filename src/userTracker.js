@@ -3,6 +3,9 @@ const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 const Signals = imports.signals;
 const GObject = imports.gi.GObject;
+const Utils = imports.utils;
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
@@ -91,8 +94,11 @@ const UserTracker = new Lang.Class({
         this._globalContactMapping = new Map();
         this._roomMapping = new Map();
         this._handlerCounter = 0;
+        this._app = Gio.Application.get_default();
 
         this._userStatusMonitor = getUserStatusMonitor();
+
+        this._watchlist = [];
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
@@ -205,6 +211,10 @@ const UserTracker = new Lang.Class({
         this._untrackMember(this._globalContactMapping, oldMember, room);
         this._trackMember(this._roomMapping.get(room)._contactMapping, newMember, room);
         this._trackMember(this._globalContactMapping, newMember, room);
+
+        /*TODO: is this needed here?*/
+        if (this.isUserWatched(newMember.alias, newMember.get_account().get_display_name()))
+            this.emitWatchedUserNotification(room, newMember);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -233,6 +243,9 @@ const UserTracker = new Lang.Class({
 
         this._trackMember(this._roomMapping.get(room)._contactMapping, member, room);
         this._trackMember(this._globalContactMapping, member, room);
+
+        if (this.isUserWatched(member.alias, member.get_account().get_display_name()))
+            this.emitWatchedUserNotification(room, member);
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -253,11 +266,10 @@ const UserTracker = new Lang.Class({
         //was on HEAD
         /*if (this._contactMapping.get(baseNick).length == 1)
             this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);*/
-        if (map == this._globalContactMapping)log("length: " + this._globalContactMapping.get(baseNick).length)
 
         if (map.get(baseNick).length == 1)
             if (map == this._globalContactMapping) {
-                this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+                this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
                 log("[global status] user " + member.alias + " is globally online");
             }
             else
@@ -283,7 +295,7 @@ const UserTracker = new Lang.Class({
                 //was on HEAD
                 /*this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);*/
                 if (map == this._globalContactMapping) {
-                    this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                    this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
                     log("[global status] user " + member.alias + " is globally offline");
                 }
                 else
@@ -304,9 +316,10 @@ const UserTracker = new Lang.Class({
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
-    getBestMatchingContact: function(nickName) {
+    getBestMatchingContactInRoom: function(room, nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
-        let contacts = this._contactMapping.get(baseNick) || [];
+        //let contacts = this._globalContactMapping.get(baseNick) || [];
+        let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
 
         /*even possible?*/
         if (contacts.length == 0)
@@ -355,5 +368,47 @@ const UserTracker = new Lang.Class({
             return;
 
         this._roomMapping.get(room)._handlerMapping.delete(handlerID);
+    },
+
+    addToWatchlist: function(user, network) {
+        this._watchlist.push([user, network]);
+    },
+
+    isUserWatched: function (user, network) {
+        for (var i = 0; i < this._watchlist.length; i++) {
+            if (this._watchlist[i][0] == user && this._watchlist[i][1] == network) {
+                return true;
+            }
+        }
+
+        return false;
+    },
+
+    popUserFromWatchlist: function (user, network) {
+        let indexToDelete = -1;
+        for (var i = 0; i < this._watchlist.length; i++) {
+            if (this._watchlist[i][0] == user && this._watchlist[i][1] == network) {
+                indexToDelete = i;
+            }
+        }
+
+        if (indexToDelete != -1)
+            this._watchlist.splice(indexToDelete, 1);
+    },
+
+    emitWatchedUserNotification: function (room, member) {
+        let notification = new Gio.Notification();
+        notification.set_title("User is online");
+        notification.set_body("User " + member.alias + " is online.");
+
+        let param = GLib.Variant.new('(ssu)',
+                                     [ this._account.get_object_path(),
+                                       room.channel_name,
+                                       Utils.getTpEventTime() ]);
+        notification.set_default_action_and_target('app.join-room', param);
+
+        this._app.send_notification('watched-user-notification', notification);
+
+        this.popUserFromWatchlist(member.alias, member.get_account().get_display_name());
     }
 });

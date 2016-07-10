@@ -1254,7 +1254,7 @@ const ChatView = new Lang.Class({
                               this._view.buffer.create_mark(null, iter, true));
     },
 
-    _createNickTag: function(nickName) {
+    /*_createNickTag: function(nickName) {
         let nickTagName = this._getNickTagName(nickName);
 
         let tag = new Gtk.TextTag({ name: nickTagName });
@@ -1262,7 +1262,7 @@ const ChatView = new Lang.Class({
         this._updateNickTag(tag, Tp.ConnectionPresenceType.OFFLINE);
 
         return tag;
-    },
+    },*/
 
     _onStatusChangedCallback: function(nick, status) {
         log("Nick " + nick + " has local status " + status);
