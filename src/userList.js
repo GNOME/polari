@@ -327,7 +327,7 @@ const UserPopover = new Lang.Class({
         this.parent(params);
 
         this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0 });
-        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0 });
+        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0, use_markup: true });
 
         this._headervbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, halign: Gtk.Align.FILL });
         this._headervbox.add(this._nickLabel);
@@ -377,12 +377,12 @@ const UserPopover = new Lang.Class({
 
         let labelStatus = "";
         if (bestMatchingContact)
-            labelStatus = "Online";
+            labelStatus = "<small>Online</small>";
         else
             if (this._userTracker.getNickStatus(this._nickname) == Tp.ConnectionPresenceType.OFFLINE)
-                labelStatus = "Offline";
+                labelStatus = "<small>Offline</small>";
             else
-                labelStatus = "Available in another room.";
+                labelStatus = "<small>Available in another room.</small>";
 
         this._statusLabel.set_label(labelStatus);
 
