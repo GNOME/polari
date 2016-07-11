@@ -42,6 +42,9 @@
                 <property name="visible">True</property>
                 <property name="halign">start</property>
                 <property name="margin-left">0</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
               </object>
               <packing>
                 <property name="width">1</property>
@@ -54,7 +57,6 @@
                 <property name="label" translatable="yes">Last Activity:</property>
                 <property name="valign">start</property>
                 <property name="halign">start</property>
-                <property name="use-markup">True</property>
                 <property name="visible">True</property>
                 <property name="margin-start">20</property>
                 <style>
@@ -74,6 +76,7 @@
                 <property name="hexpand">True</property>
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
+                <property name="halign">start</property>
                 <style>
                   <class name="dim-label" />
                 </style>
@@ -89,6 +92,9 @@
                 <property name="visible">True</property>
                 <property name="halign">start</property>
                 <property name="margin-left">0</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
               </object>
               <packing>
                 <property name="width">1</property>
@@ -103,6 +109,42 @@
                 <property name="visible">True</property>
                 <property name="margin-start">20</property>
                 <property name="hexpand">True</property>
+                <property name="use-markup">True</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+              <packing>
+                <property name="width">2</property>
+                <property name="top-attach">1</property>
+                <property name="left-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="notificationIcon">
+                <property name="icon-name">alarm-symbolic</property>
+                <property name="visible">False</property>
+                <property name="halign">start</property>
+                <property name="margin-left">0</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+              <packing>
+                <property name="width">1</property>
+                <property name="top-attach">1</property>
+                <property name="left-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="notificationLabel">
+                <property name="ellipsize">end</property>
+                <property name="halign">start</property>
+                <property name="visible">False</property>
+                <property name="margin-start">20</property>
+                <property name="hexpand">True</property>
+                <property name="use-markup">True</property>
+                <property name="label" translatable="yes">Will notify if user appears online.</property>
                 <style>
                   <class name="dim-label" />
                 </style>

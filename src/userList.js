@@ -111,6 +111,8 @@ const UserDetails = new Lang.Class({
                        'fullnameLabel',
                        'lastHeader',
                        'lastLabel',
+                       'notificationIcon',
+                       'notificationLabel',
                        'separator',
                        'messageButton',
                        'pastActivityButton'],
@@ -118,7 +120,12 @@ const UserDetails = new Lang.Class({
                                                         'expanded',
                                                         'expanded',
                                                         READWRITE,
-                                                        false)},
+                                                        false),
+                  'notifications-enabled': GObject.ParamSpec.boolean('notifications-enabled',
+                                                             'notifications-enabled',
+                                                             'notifications-enabled',
+                                                             READWRITE,
+                                                             false)},
 
     _init: function(params) {
         this._expanded = false;
@@ -130,6 +137,14 @@ const UserDetails = new Lang.Class({
 
         this._updateButtonVisibility();
         this._detailsGrid.hide();
+
+        this._notificationIcon.no_show_all = true;
+        this._notificationLabel.no_show_all = true;
+
+        this.bind_property('notifications-enabled', this._notificationIcon, 'visible', GObject.BindingFlags.SYNC_CREATE);
+        this.bind_property('notifications-enabled', this._notificationLabel, 'visible', GObject.BindingFlags.SYNC_CREATE);
+
+        this._fullnameLabel.max_width_chars = 50;
     },
 
     set user(user) {
@@ -255,10 +270,10 @@ const UserDetails = new Lang.Class({
         this._userIcon.visible = true;
 
         if (last) {
-            this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+            this._lastHeader.label = _("Last Activity:");
             this._lastHeader.show();
 
-            this._lastLabel.label = '<small>' + this._formatLast(last) + '</small>';
+            this._lastLabel.label = this._formatLast(last);
             this._lastLabel.show();
         } else {
             this._lastHeader.hide();
@@ -269,7 +284,7 @@ const UserDetails = new Lang.Class({
     },
 
     _trackFallbackNick: function(nickname) {
-        this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+        this._lastHeader.label = _("Last Activity:");
         this._lastHeader.show();
 
         this._userIcon.visible = false;
@@ -305,7 +320,7 @@ const UserDetails = new Lang.Class({
 
         if (this._user == this._user.connection.self_contact) {
             this._messageButton.visible = false;
-            this._messageButton.sensitive = true; //does this even make sense?
+            this._messageButton.sensitive = true;
         } else {
             this._messageButton.visible = true;
             this._messageButton.sensitive = true;
