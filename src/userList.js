@@ -251,7 +251,7 @@ const UserDetails = new Lang.Class({
         if (!fn)
             fn = this._user.alias;
 
-        this._fullnameLabel.label = fn;
+        this._fullnameLabel.label = '<small>' + fn + '</small>';
         this._userIcon.visible = true;
 
         if (last) {
