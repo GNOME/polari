@@ -345,9 +345,6 @@ const UserPopover = new Lang.Class({
         this._userDetails = new UserDetails();
         this.bind_property('visible', this._userDetails, 'expanded', 0);
 
-        let context = this._statusLabel.get_style_context();
-        context.add_class('nick-popover-status');
-
         this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._vbox.add(this._hbox);
         this._vbox.add(this._userDetails);
