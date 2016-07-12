@@ -111,6 +111,8 @@ const UserDetails = new Lang.Class({
                        'fullnameLabel',
                        'lastHeader',
                        'lastLabel',
+                       'notificationIcon',
+                       'notificationLabel',
                        'separator',
                        'messageButton',
                        'pastActivityButton'],
@@ -265,6 +267,9 @@ const UserDetails = new Lang.Class({
             this._lastLabel.hide();
         }
 
+        this._notificationIcon.hide();
+        this._notificationLabel.hide();
+
         this._revealDetails();
     },
 
@@ -305,7 +310,7 @@ const UserDetails = new Lang.Class({
 
         if (this._user == this._user.connection.self_contact) {
             this._messageButton.visible = false;
-            this._messageButton.sensitive = true; //does this even make sense?
+            this._messageButton.sensitive = true; //TODO: does this even make sense?
         } else {
             this._messageButton.visible = true;
             this._messageButton.sensitive = true;
