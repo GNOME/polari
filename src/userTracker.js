@@ -70,6 +70,9 @@ const UserTracker = new Lang.Class({
         },
         'contacts-changed': {
             flags: GObject.SignalFlags.DETAILED
+        },
+        'notification-emitted': {
+            flags: GObject.SignalFlags.DETAILED,
         }
     },
 
@@ -377,12 +380,20 @@ const UserTracker = new Lang.Class({
     },
 
     addToWatchlist: function(user, network) {
-        this._watchlist.push([user, network]);
+        let baseNick = Polari.util_get_basenick(user);
+
+        let isAlreadyWatched = this._watchlist.indexOf([baseNick, network]) != -1;
+
+        if (!isAlreadyWatched)
+            this._watchlist.push([baseNick, network]);
+        //this._watchlist.push([user, network]);
     },
 
     isUserWatched: function (user, network) {
+        let baseNick = Polari.util_get_basenick(user);
+
         for (var i = 0; i < this._watchlist.length; i++) {
-            if (this._watchlist[i][0] == user && this._watchlist[i][1] == network) {
+            if (this._watchlist[i][0] == baseNick && this._watchlist[i][1] == network) {
                 return true;
             }
         }
@@ -391,9 +402,11 @@ const UserTracker = new Lang.Class({
     },
 
     popUserFromWatchlist: function (user, network) {
+        let baseNick = Polari.util_get_basenick(user);
+
         let indexToDelete = -1;
         for (var i = 0; i < this._watchlist.length; i++) {
-            if (this._watchlist[i][0] == user && this._watchlist[i][1] == network) {
+            if (this._watchlist[i][0] == baseNick && this._watchlist[i][1] == network) {
                 indexToDelete = i;
             }
         }
@@ -416,5 +429,8 @@ const UserTracker = new Lang.Class({
         this._app.send_notification('watched-user-notification', notification);
 
         this.popUserFromWatchlist(member.alias, member.get_account().get_display_name());
+
+        let baseNick = Polari.util_get_basenick(member.alias);
+        this.emit("notification-emitted::" + baseNick);
     }
 });
