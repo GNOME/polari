@@ -381,6 +381,7 @@ const UserPopover = new Lang.Class({
         /*TODO: these need to be disconnected when not used anymore*/
         this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
         this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
+        this._userTracker.connect("notification-emitted::" + baseNick, Lang.bind(this, this._onNotificationEmitted))
 
         this._updateContents();
 
@@ -452,35 +453,37 @@ const UserPopover = new Lang.Class({
         if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name()))
             if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE) {
                 this._notifyButton.visible = false;
-                this._notifyButton.set_active(false);
+                //this._notifyButton.set_active(false);
             }
             else {
-                //this._notifyButton.visible = true;
                 if (isUserGloballyOnline)
                     this._notifyButton.visible = false;
                 else
                     this._notifyButton.visible = true;
 
-                this._notifyButton.set_active(false);
+                //this._notifyButton.set_active(false);
             }
         else
             if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE) {
                 this._notifyButton.visible = false;
-                this._notifyButton.set_active(true);
+                //this._notifyButton.set_active(true);
             }
             else {
-                //this._notifyButton.visibile = true;
                 if (isUserGloballyOnline)
                     this._notifyButton.visible = false;
                 else
                     this._notifyButton.visibile = true;
 
-                this._notifyButton.set_active(true);
+                //this._notifyButton.set_active(true);
             }
     },
 
     _onNickStatusChanged: function(nickName, status) {
         this._updateContents();
+    },
+
+    _onNotificationEmitted: function() {
+        this._notifyButton.set_active(false);
     }
 });
 
