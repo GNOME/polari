@@ -120,7 +120,12 @@ const UserDetails = new Lang.Class({
                                                         'expanded',
                                                         'expanded',
                                                         READWRITE,
-                                                        false)},
+                                                        false),
+                  'isUserWatched': GObject.ParamSpec.boolean('isUserWatched',
+                                                             'isUserWatched',
+                                                             'isUserWatched',
+                                                             READWRITE,
+                                                             false)},
 
     _init: function(params) {
         this._expanded = false;
@@ -132,6 +137,13 @@ const UserDetails = new Lang.Class({
 
         this._updateButtonVisibility();
         this._detailsGrid.hide();
+
+        this._notificationLabel.set_text("Will notify if user appears online.");
+
+        this.bind_property('isUserWatched', this._notificationIcon, 'visible', GObject.BindingFlags.SYNC_CREATE);
+        this.bind_property('isUserWatched', this._notificationLabel, 'visible', GObject.BindingFlags.SYNC_CREATE);
+
+        this._fullnameLabel.ellipsize = Pango.EllipsizeMode.END;
     },
 
     set user(user) {
@@ -267,8 +279,8 @@ const UserDetails = new Lang.Class({
             this._lastLabel.hide();
         }
 
-        this._notificationIcon.hide();
-        this._notificationLabel.hide();
+        //this._notificationIcon.hide();
+        //this._notificationLabel.hide();
 
         this._revealDetails();
     },
@@ -357,6 +369,8 @@ const UserPopover = new Lang.Class({
         this.add(this._vbox);
 
         this._vbox.show_all();
+
+        this._notifyButton.bind_property('active', this._userDetails, 'isUserWatched', GObject.BindingFlags.SYNC_CREATE);
     },
 
     set nickname(nickname) {
@@ -369,6 +383,15 @@ const UserPopover = new Lang.Class({
         this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
 
         this._updateContents();
+
+        /*TODO: disconnect when not needed anymore*/
+
+        if (this._contactsChangedSignal)
+            this._userTracker.disconnect(this._contactsChangedSignal);
+
+        this._contactsChangedSignal = this._userTracker.connect("contacts-changed::" + baseNick, () => {
+            this._userDetails.user = this._userTracker.lookupContact(this._nickname);
+        });
     },
 
     get nickname() {
@@ -376,16 +399,16 @@ const UserPopover = new Lang.Class({
     },
 
     _updateContents: function() {
-        let bestMatchingContact = this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname);
+        let bestMatchingContact = this._userTracker.lookupContact(this._nickname);
 
         this._nickLabel.set_label(this._nickname);
 
         let labelStatus = "";
-        if (bestMatchingContact)
-            labelStatus = "<small>Online</small>";
+        if (!bestMatchingContact)
+            labelStatus = "<small>Offline</small>";
         else
-            if (this._userTracker.getNickStatus(this._nickname) == Tp.ConnectionPresenceType.OFFLINE)
-                labelStatus = "<small>Offline</small>";
+            if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE)
+                labelStatus = "<small>Online</small>";
             else
                 labelStatus = "<small>Available in another room.</small>";
 
@@ -427,7 +450,7 @@ const UserPopover = new Lang.Class({
 
         /*TODO: too many conditionals*/
         if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name()))
-            if (this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname)) {
+            if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE) {
                 this._notifyButton.visible = false;
                 this._notifyButton.set_active(false);
             }
@@ -441,7 +464,7 @@ const UserPopover = new Lang.Class({
                 this._notifyButton.set_active(false);
             }
         else
-            if (this._userTracker.getBestMatchingContactInRoom(this._room, this._nickname)) {
+            if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE) {
                 this._notifyButton.visible = false;
                 this._notifyButton.set_active(true);
             }

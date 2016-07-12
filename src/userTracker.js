@@ -68,6 +68,9 @@ const UserTracker = new Lang.Class({
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]
         },
+        'contacts-changed': {
+            flags: GObject.SignalFlags.DETAILED
+        }
     },
 
     _init: function(account) {
@@ -267,7 +270,7 @@ const UserTracker = new Lang.Class({
         else
             map.set(baseNick, [member]);
 
-        if (map.get(baseNick).length == 1)
+        if (map.get(baseNick).length == 1) {
             if (map == this._globalContactMapping) {
                 this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
                 //log("[global status] user " + member.alias + " is globally online");
@@ -279,30 +282,34 @@ const UserTracker = new Lang.Class({
                         handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.AVAILABLE);
                     else if (!handlerInfo.nickName)
                         handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+
+            if (this._globalContactMapping == map)
+                this.emit("contacts-changed::" + baseNick);
+        }
     },
 
     _untrackMember: function(map, member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
 
         let contacts = map.get(baseNick) || [];
-        /*i really don't like this search. maybe use a for loop?*/
+        /*TODO: i really don't like this search. maybe use a for loop?*/
         let indexToDelete = contacts.map(c => c.alias + "|" + c._room.channelName).indexOf(member.alias + "|" + member._room.channelName);
 
         if (indexToDelete > -1) {
             let removedMember = contacts.splice(indexToDelete, 1)[0];
 
             if (contacts.length == 0)
-                if (map == this._globalContactMapping) {
+                if (map == this._globalContactMapping)
                     this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
-                    //log("[global status] user " + member.alias + " is globally offline");
-                }
                 else
-                    //log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
                     for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
                         if (handlerInfo.nickName == member.alias)
                             handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
                         else if (!handlerInfo.nickName)
                             handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+
+            if (this._globalContactMapping == map)
+                this.emit("contacts-changed::" + baseNick);
         }
     },
 
@@ -314,14 +321,11 @@ const UserTracker = new Lang.Class({
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
-    getBestMatchingContactInRoom: function(room, nickName) {
+    lookupContact: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
-        this._ensureContactMappingForRoom(room);
+        let contacts = this._globalContactMapping.get(baseNick) || [];
 
-        let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
-
-        /*TODO: even possible?*/
         if (contacts.length == 0)
             return null;
 
@@ -334,6 +338,8 @@ const UserTracker = new Lang.Class({
 
     getNickRoomStatus: function(nickName, room) {
         let baseNick = Polari.util_get_basenick(nickName);
+
+        this._ensureContactMappingForRoom(room);
 
         let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
