@@ -54,7 +54,7 @@ const UserListPopover = new Lang.Class({
         this._userListBin = new Gtk.Frame({ shadow_type: Gtk.ShadowType.NONE });
         this._box.add(this._userListBin);
 
-        this._entry = new Gtk.SearchEntry();
+        this._entry = new Gtk.SearchEntry({ primary_icon_name: 'avatar-default-symbolic' });
         this._entry.connect('search-changed',
                             Lang.bind(this, this._updateFilter));
         this._revealer.add(this._entry);
