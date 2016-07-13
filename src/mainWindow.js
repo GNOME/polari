@@ -196,8 +196,6 @@ const MainWindow = new Lang.Class({
 
         if (this._settings.get_boolean('window-maximized'))
             this.maximize();
-
-        this.show_all();
     },
 
     get subtitle() {
