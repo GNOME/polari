@@ -144,6 +144,7 @@ const UserDetails = new Lang.Class({
         this.bind_property('isUserWatched', this._notificationLabel, 'visible', GObject.BindingFlags.SYNC_CREATE);
 
         this._fullnameLabel.ellipsize = Pango.EllipsizeMode.END;
+        this._fullnameLabel.max_width_chars = MAX_USERS_WIDTH_CHARS;
     },
 
     set user(user) {
@@ -343,7 +344,7 @@ const UserPopover = new Lang.Class({
 
         this.parent(params);
 
-        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0 });
+        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0, ellipsize: Pango.EllipsizeMode.END, max_width_chars: MAX_USERS_WIDTH_CHARS });
         this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0, use_markup: true });
 
         this._headervbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, halign: Gtk.Align.FILL });
