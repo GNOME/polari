@@ -380,56 +380,34 @@ const RoomList = new Lang.Class({
                                   Lang.bind(this, this._activeRoomChanged));
 
         let app = Gio.Application.get_default();
-        this._leaveAction = app.lookup_action('leave-room');
-        this._leaveAction.connect('activate',
-                                  Lang.bind(this, this._onLeaveActivated));
-
-        let action;
-        action = app.lookup_action('next-room');
-        action.connect('activate', Lang.bind(this,
-            function() {
-                this._moveSelection(Gtk.DirectionType.DOWN);
-            }));
-        action = app.lookup_action('previous-room');
-        action.connect('activate', Lang.bind(this,
-            function() {
-                this._moveSelection(Gtk.DirectionType.UP);
-            }));
-        action = app.lookup_action('first-room');
-        action.connect('activate', Lang.bind(this,
-            function() {
-                let row = this._getRoomRowAtIndex(0);
-                if (row)
-                    this.select_row(row);
-            }));
-        action = app.lookup_action('last-room');
-        action.connect('activate', Lang.bind(this,
-            function() {
-                let nRows = this._roomManager.roomCount;
-                let row = this._getRoomRowAtIndex(nRows - 1);
-                if (row)
-                    this.select_row(row);
-            }));
-        action = app.lookup_action('nth-room');
-        action.connect('activate', Lang.bind(this,
-            function(action, param) {
-                let n = param.get_int32();
-                if (n > this._roomManager.roomCount)
-                    return;
-                this.select_row(this._getRoomRowAtIndex(n - 1));
-            }));
-        action = app.lookup_action('next-pending-room');
-        action.connect('activate', Lang.bind(this,
-            function() {
-                this._moveSelectionFull(Gtk.DirectionType.DOWN,
-                                        (row) => { return row.hasPending; });
-            }));
-        action = app.lookup_action('previous-pending-room');
-        action.connect('activate', Lang.bind(this,
-            function() {
-                this._moveSelectionFull(Gtk.DirectionType.UP,
-                                        (row) => { return row.hasPending; });
-            }));
+        let actions = [
+            { name: 'leave-room',
+              handler: Lang.bind(this, this._onLeaveActivated) },
+            { name: 'next-room',
+              handler: () => { this._moveSelection(Gtk.DirectionType.DOWN); } },
+            { name: 'previous-room',
+              handler: () => { this._moveSelection(Gtk.DirectionType.UP); } },
+            { name: 'first-room',
+              handler: () => { this._selectRoomAtIndex(0); } },
+            { name: 'last-room',
+              handler: () => {
+                  let nRows = this._roomManager.roomCount;
+                  this._selectRoomAtIndex(nRows - 1);
+              } },
+            { name: 'nth-room',
+              handler: (a, param) => {
+                  this._selectRoomAtIndex(param.get_int32() - 1);
+              } },
+            { name: 'next-pending-room',
+              handler: () => { this._moveSelectionFull(Gtk.DirectionType.DOWN,
+                                                       row => row.hasPending); } },
+            { name: 'previous-pending-room',
+              handler: () => { this._moveSelectionFull(Gtk.DirectionType.UP,
+                                                       row => row.hasPending); } }
+        ];
+        actions.forEach(a => {
+            app.lookup_action(a.name).connect('activate', a.handler);
+        });
     },
 
     _onLeaveActivated: function(action, param) {
@@ -458,6 +436,12 @@ const RoomList = new Lang.Class({
 
     _getRoomRowAtIndex: function(index) {
         return this.get_row_at_index(this._roomToRowIndex(index));
+    },
+
+    _selectRoomAtIndex: function(index) {
+        let row = this._getRoomRowAtIndex(index);
+        if (row)
+            this.select_row(row);
     },
 
     _moveSelection: function(direction) {
