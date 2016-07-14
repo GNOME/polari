@@ -160,10 +160,7 @@ const UserTracker = new Lang.Class({
 
             /*keep track of initial members in the emittingRoom, both locally and
             globally*/
-            members.forEach(m => {
-                m._room = emittingRoom;
-                this._trackMember(m, emittingRoom);
-            });
+            members.forEach(m => { this._trackMember(m, emittingRoom); });
         } else {
             this._clearUsersFromRoom(emittingRoom);
 
@@ -201,40 +198,27 @@ const UserTracker = new Lang.Class({
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
-        oldMember._room = room;
-        newMember._room = room;
-
         this._untrackMember(oldMember, room);
         this._trackMember(newMember, room);
     },
 
     _onMemberDisconnected: function(room, member, message) {
-        member._room = room;
-
         this._untrackMember(member, room);
     },
 
     _onMemberKicked: function(room, member, actor) {
-        member._room = room;
-
         this._untrackMember(member, room);
     },
 
     _onMemberBanned: function(room, member, actor) {
-        member._room = room;
-
         this._untrackMember(member, room);
     },
 
     _onMemberJoined: function(room, member) {
-        member._room = room;
-
         this._trackMember(member, room);
     },
 
     _onMemberLeft: function(room, member, message) {
-        member._room = room;
-
         this._untrackMember(member, room);
     },
 
