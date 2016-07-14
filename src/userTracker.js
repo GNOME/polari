@@ -255,6 +255,13 @@ const UserTracker = new Lang.Class({
         this._untrackMember(this._globalContactMapping, member, room);
     },
 
+    _runHandlers: function(room, member, status) {
+        let baseNick = Polari.util_get_basenick(member.alias);
+        for ([id, info] of this._roomMapping.get(room)._contactMapping)
+            if (!info.nickName || info.nickName == baseNick)
+                info.handler(member.alias, status);
+    },
+
     _pushMember: function(map, baseNick, member) {
         if (!map.has(baseNick))
             map.set(baseNick, []);
@@ -280,14 +287,9 @@ const UserTracker = new Lang.Class({
                 }
 
                 notifyAction.enabled = false;
+            } else {
+                this._runHandlers(room, member, Tp.ConnectionPresenceType.AVAILABLE);
             }
-            else
-                //log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
-                for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
-                    if (handlerInfo.nickName == member.alias)
-                        handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.AVAILABLE);
-                    else if (!handlerInfo.nickName)
-                        handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
         }
 
         if (this._globalContactMapping == map)
@@ -308,11 +310,7 @@ const UserTracker = new Lang.Class({
                 if (map == this._globalContactMapping)
                     this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
                 else
-                    for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
-                        if (handlerInfo.nickName == member.alias)
-                            handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
-                        else if (!handlerInfo.nickName)
-                            handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                    this._runHandlers(room, member, Tp.ConnectionPresenceType.OFFLINE);
 
                 let notifyActionName = this.getNotifyActionName(member.alias);
                 let notifyAction = this._app.lookup_action(notifyActionName);
