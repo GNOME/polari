@@ -1244,7 +1244,7 @@ const ChatView = new Lang.Class({
 
     _createNickTag: function(name) {
         let tag = new ButtonTag({ name: name });
-        tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userStatusMonitor.getUserTrackerForAccount(this._room.account), width_request: 280 });
+        //tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userStatusMonitor.getUserTrackerForAccount(this._room.account), width_request: 280 });
         tag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
         return tag;
     },
@@ -1275,6 +1275,9 @@ const ChatView = new Lang.Class({
 
         //TODO: special chars?
         let actualNickName = view.get_buffer().get_slice(start, end, false);
+
+        if (!tag._popover)
+            tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userStatusMonitor.getUserTrackerForAccount(this._room.account), width_request: 280 });
 
         tag._popover.nickname = actualNickName;
 
