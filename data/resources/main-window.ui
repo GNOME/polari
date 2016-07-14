@@ -51,7 +51,7 @@
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <property name="action_name">app.show-join-dialog</property>
+                <property name="action_name">win.show-join-dialog</property>
                 <style>
                   <class name="image-button"/>
                 </style>
@@ -166,7 +166,7 @@
               <object class="GtkToggleButton" id="showUserListButton">
                 <property name="visible">True</property>
                 <property name="focus-on-click">False</property>
-                <property name="action-name">app.user-list</property>
+                <property name="action-name">win.user-list</property>
                 <style>
                   <class name="polari-user-list-button"/>
                   <class name="text-button"/>

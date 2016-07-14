@@ -178,18 +178,44 @@ const MainWindow = new Lang.Class({
 
         this._updateUserListLabel();
 
-        let app = this.application;
-        this._userListAction = app.lookup_action('user-list');
+        let actionEntries = [
+          { name: 'show-join-dialog',
+            activate: Lang.bind(this, this._onShowJoinDialog),
+            accels: ['<Primary>n'] },
+          { name: 'leave-current-room',
+            activate: Lang.bind(this, this._onLeaveCurrentRoom),
+            create_hook: Lang.bind(this, this._leaveRoomCreateHook),
+            accels: ['<Primary>w'] },
+          { name: 'user-list',
+            activate: Lang.bind(this, this._onToggleAction),
+            create_hook: Lang.bind(this, this._userListCreateHook),
+            state: GLib.Variant.new('b', false),
+            accels: ['F9', '<Primary>u'] },
+          { name: 'next-room',
+            accels: ['<Primary>Page_Down', '<Alt>Down'] },
+          { name: 'previous-room',
+            accels: ['<Primary>Page_Up', '<Alt>Up'] },
+          { name: 'first-room',
+            accels: ['<Primary>Home'] },
+          { name: 'last-room',
+            accels: ['<Primary>End'] },
+          { name: 'nth-room',
+            parameter_type: GLib.VariantType.new('i') },
+          { name: 'next-pending-room',
+            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']},
+          { name: 'previous-pending-room',
+            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
+        ];
+        Utils.addActionEntries(this, 'win', actionEntries);
 
-        app.connect('action-state-changed::user-list', Lang.bind(this,
-            function(group, actionName, value) {
-                this._userListPopover.visible = value.get_boolean();
-            }));
-        this._userListPopover.connect('notify::visible', Lang.bind(this,
-            function() {
-                if (!this._userListPopover.visible)
-                    this._userListAction.change_state(GLib.Variant.new('b', false));
-            }));
+        let action = this.lookup_action('user-list');
+        this.connect('action-state-changed::user-list', (w, name, value) => {
+            this._userListPopover.visible = value.get_boolean();
+        });
+        this._userListPopover.connect('notify::visible', () => {
+            if (!this._userListPopover.visible)
+                action.change_state(GLib.Variant.new('b', false));
+        });
 
         this._gtkSettings.connect('notify::gtk-decoration-layout',
                                   Lang.bind(this, this._updateDecorations));
@@ -375,9 +401,46 @@ const MainWindow = new Lang.Class({
             this._lastActiveRoom = null;
     },
 
-    showJoinRoomDialog: function() {
+    _onShowJoinDialog: function() {
         let dialog = new JoinDialog.JoinDialog({ transient_for: this });
         dialog.show();
+    },
+
+    _onLeaveCurrentRoom: function() {
+        if (!this._room)
+            return;
+        let action = this.application.lookup_action('leave-room');
+        action.activate(GLib.Variant.new('(ss)', [this._room.id, '']));
+    },
+
+    _leaveRoomCreateHook: function(action) {
+        this.connect('notify::active-room', () => {
+            action.enabled = this._room != null;
+        });
+        action.enabled = this._room != null;
+    },
+
+    _onToggleAction: function(action) {
+        let state = action.get_state();
+        action.change_state(GLib.Variant.new('b', !state.get_boolean()));
+    },
+
+
+    _updateUserListAction: function(action) {
+        action.enabled = this._room &&
+                         this._room.type == Tp.HandleType.ROOM &&
+                         this._room.channel;
+    },
+
+    _userListCreateHook: function(action) {
+        this.connect('active-room-state-changed', () => {
+            this._updateUserListAction(action);
+        });
+        action.connect('notify::enabled', () => {
+            if (!action.enabled)
+                action.change_state(GLib.Variant.new('b', false));
+        });
+        this._updateUserListAction(action);
     },
 
     _updateUserListLabel: function() {

@@ -384,7 +384,14 @@ const RoomList = new Lang.Class({
                                   Lang.bind(this, this._roomRemoved));
         this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
 
-        let app = Gio.Application.get_default();
+        let action = Gio.Application.get_default().lookup_action('leave-room');
+        action.connect('activate', Lang.bind(this, this._onLeaveActivated));
+    },
+
+    vfunc_realize: function() {
+        this.parent();
+
+        let toplevel = this.get_toplevel();
         let actions = [
             { name: 'next-room',
               handler: () => { this._moveSelection(Gtk.DirectionType.DOWN); } },
@@ -409,7 +416,7 @@ const RoomList = new Lang.Class({
                                                        row => row.hasPending); } }
         ];
         actions.forEach(a => {
-            app.lookup_action(a.name).connect('activate', a.handler);
+            toplevel.lookup_action(a.name).connect('activate', a.handler);
         });
     },
 

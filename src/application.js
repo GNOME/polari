@@ -130,9 +130,6 @@ const Application = new Lang.Class({
         this.parent();
 
         let actionEntries = [
-          { name: 'show-join-dialog',
-            activate: Lang.bind(this, this._onShowJoinDialog),
-            accels: ['<Primary>n'] },
           { name: 'join-room',
             activate: Lang.bind(this, this._onJoinRoom),
             parameter_type: GLib.VariantType.new('(ssu)') },
@@ -141,10 +138,6 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('(sssu)') },
           { name: 'leave-room',
             parameter_type: GLib.VariantType.new('(ss)') },
-          { name: 'leave-current-room',
-            activate: Lang.bind(this, this._onLeaveCurrentRoom),
-            create_hook: (a) => { a.enabled = false; },
-            accels: ['<Primary>w'] },
           { name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)') },
           { name: 'connect-account',
@@ -153,11 +146,6 @@ const Application = new Lang.Class({
           { name: 'reconnect-account',
             activate: Lang.bind(this, this._onConnectAccount),
             parameter_type: GLib.VariantType.new('o') },
-          { name: 'user-list',
-            activate: Lang.bind(this, this._onToggleAction),
-            create_hook: Lang.bind(this, this._userListCreateHook),
-            state: GLib.Variant.new('b', false),
-            accels: ['F9', '<Primary>u'] },
           { name: 'remove-connection',
             activate: Lang.bind(this, this._onRemoveConnection),
             parameter_type: GLib.VariantType.new('o') },
@@ -177,21 +165,7 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onShowAbout) },
           { name: 'quit',
             activate: Lang.bind(this, this._onQuit),
-            accels: ['<Primary>q'] },
-          { name: 'next-room',
-            accels: ['<Primary>Page_Down', '<Alt>Down'] },
-          { name: 'previous-room',
-            accels: ['<Primary>Page_Up', '<Alt>Up'] },
-          { name: 'first-room',
-            accels: ['<Primary>Home'] },
-          { name: 'last-room',
-            accels: ['<Primary>End'] },
-          { name: 'nth-room',
-            parameter_type: GLib.VariantType.new('i') },
-          { name: 'next-pending-room',
-            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']},
-          { name: 'previous-pending-room',
-            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
+            accels: ['<Primary>q'] }
         ];
         Utils.addActionEntries(this, 'app', actionEntries);
 
@@ -204,7 +178,7 @@ const Application = new Lang.Class({
         this._onRunInBackgroundChanged();
 
         for (let i = 1; i < 10; i++)
-            this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
+            this.set_accels_for_action('win.nth-room(%d)'.format(i), ['<Alt>' + i]);
 
         this._telepathyClient = null;
 
@@ -244,20 +218,6 @@ const Application = new Lang.Class({
             window.show_all();
         }
         this.active_window.present();
-    },
-
-    vfunc_window_added: function(window) {
-        this.parent(window);
-
-        let action = this.lookup_action('leave-current-room');
-        window.connect('notify::active-room', () => {
-            action.enabled = window.active_room != null;
-        });
-        action.enabled = window.active_room != null;
-
-        window.connect('active-room-state-changed',
-                       Lang.bind(this, this._updateUserListAction));
-        this._updateUserListAction();
     },
 
     vfunc_window_removed: function(window) {
@@ -365,24 +325,6 @@ const Application = new Lang.Class({
                 let account = req.create_account_finish(res);
                 callback(account);
             }));
-    },
-
-    _updateUserListAction: function() {
-        let room = this.active_window.active_room;
-        let action = this.lookup_action('user-list');
-        action.enabled = room && room.type == Tp.HandleType.ROOM && room.channel;
-    },
-
-    _userListCreateHook: function(action) {
-        action.connect('notify::enabled', function() {
-            if (!action.enabled)
-                action.change_state(GLib.Variant.new('b', false));
-        });
-        action.enabled = false;
-    },
-
-    _onShowJoinDialog: function() {
-        this.active_window.showJoinRoomDialog();
     },
 
     _maybePresent: function(time) {
@@ -504,25 +446,12 @@ const Application = new Lang.Class({
         this._restoreAccountName(account);
     },
 
-    _onLeaveCurrentRoom: function() {
-        let room = this.active_window.active_room;
-        if (!room)
-            return;
-        let action = this.lookup_action('leave-room');
-        action.activate(GLib.Variant.new('(ss)', [room.id, '']));
-    },
-
     _onConnectAccount: function(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         if (account)
             this._restoreAccountName(account);
         this._retryData.delete(accountPath);
-    },
-
-    _onToggleAction: function(action) {
-        let state = action.get_state();
-        action.change_state(GLib.Variant.new('b', !state.get_boolean()));
     },
 
     _onRemoveConnection: function(action, parameter){
