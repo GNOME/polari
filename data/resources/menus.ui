@@ -2,6 +2,10 @@
   <menu id="app-menu">
     <section>
       <item>
+        <attribute name="action">app.new-window</attribute>
+        <attribute name="label" translatable="yes">New Window</attribute>
+      </item>
+      <item>
         <attribute name="action">app.run-in-background</attribute>
         <attribute name="label" translatable="yes">Run in Background</attribute>
       </item>

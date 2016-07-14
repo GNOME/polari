@@ -158,6 +158,8 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('o') },
           { name: 'start-client',
             activate: Lang.bind(this, this._onStartClient) },
+          { name: 'new-window',
+            activate: Lang.bind(this, this._onNewWindow) },
           { name: 'help',
             activate: Lang.bind(this, this._onShowHelp),
             accels: ['F1'] },
@@ -486,6 +488,13 @@ const Application = new Lang.Class({
                 w.destroy();
             }));
         dialog.show();
+    },
+
+    _onNewWindow: function() {
+        let activeRoom = this.active_window.active_room;
+        let window = new MainWindow.MainWindow({ application: this,
+                                                 active_room: activeRoom });
+        window.present();
     },
 
     _createLink: function(file, target) {
