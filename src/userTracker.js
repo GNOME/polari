@@ -297,8 +297,8 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
 
         let contacts = map.get(baseNick) || [];
-        /*TODO: maybe use a for loop?*/
-        let indexToDelete = contacts.map(c => c.alias + "|" + c._room.channelName).indexOf(member.alias + "|" + member._room.channelName);
+        /*TODO: i really don't like this search. maybe use a for loop?*/
+        let indexToDelete = contacts.map(c => c.alias.indexOf(member.alias);
 
         if (indexToDelete > -1) {
             let removedMember = contacts.splice(indexToDelete, 1)[0];
