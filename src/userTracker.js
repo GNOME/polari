@@ -117,8 +117,7 @@ const UserTracker = new Lang.Class({
         if (room.account == this._account)
             this._disconnectRoomSignalsForRoom(room);
 
-        this._clearUsersFromRoom(this._globalContactMapping, room);
-        this._clearUsersFromRoom(this._roomMapping.get(room)._contactMapping, room);
+        this._clearUsersFromRoom(room);
     },
 
     _connectRoomSignalsForRoom: function(room) {
@@ -166,10 +165,7 @@ const UserTracker = new Lang.Class({
                 this._trackMember(m, emittingRoom);
             });
         } else {
-            /*handle the absence of a channel for the global case*/
-            this._clearUsersFromRoom(this._globalContactMapping, emittingRoom);
-            /*handle the absence of a channel for the local case*/
-            this._clearUsersFromRoom(this._roomMapping.get(emittingRoom)._contactMapping, emittingRoom);
+            this._clearUsersFromRoom(emittingRoom);
 
             /*since we have no channel, all users must be locally marked offline. so call the callbacks*/
             for ([handlerID, handlerInfo] of this._roomMapping.get(emittingRoom)._handlerMapping) {
@@ -179,16 +175,14 @@ const UserTracker = new Lang.Class({
         }
     },
 
-    _clearUsersFromRoom: function(mapping, room) {
-        for ([baseNick, basenickContacts] of mapping) {
-            basenickContacts.forEach(Lang.bind(this, function(member) {
-                if (member._room == room)
-                    /*safe to delete while iterating?*/
-                    this._untrackMember(mapping, member, room);
-            }));
-
-            mapping.delete(baseNick);
-        }
+    _clearUsersFromRoom: function(room) {
+        let map = this._roomMapping.get(room)._contactMapping;
+        for ([baseNick, contacts] of map)
+            contacts.forEach((m) => {
+                this._untrackMember(map, m, room);
+                this._untrackMember(this._globalContactMapping, m, room);
+            });
+        this._roomMapping.delete(room);
     },
 
     _ensureRoomMappingForRoom: function(room) {
