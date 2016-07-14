@@ -432,5 +432,9 @@ const UserTracker = new Lang.Class({
 
         let baseNick = Polari.util_get_basenick(member.alias);
         this.emit("notification-emitted::" + baseNick);
+    },
+
+    getNotifyActionName: function(nickName) {
+        return 'notify-user-' + this.account.get_path_suffix() + '-' + Polari.util_get_basenick(nickName);
     }
 });
