@@ -151,13 +151,6 @@ const UserTracker = new Lang.Class({
             /*TODO: is this needed here?*/
             this._ensureRoomMappingForRoom(emittingRoom);
 
-            /*if there is no map keeping track of the users in the emittingRoom
-            create it*/
-            this._ensureContactMappingForRoom(emittingRoom);
-
-            /*if there is no map keeping track of the local status change handlers*/
-            this._ensureHandlerMappingForRoom(emittingRoom);
-
             /*keep track of initial members in the emittingRoom, both locally and
             globally*/
             members.forEach(m => { this._trackMember(m, emittingRoom); });
@@ -181,18 +174,8 @@ const UserTracker = new Lang.Class({
 
     _ensureRoomMappingForRoom: function(room) {
         if (!this._roomMapping.has(room))
-            this._roomMapping.set(room, {});
-    },
-
-    _ensureContactMappingForRoom: function(room) {
-        if (!this._roomMapping.get(room)._contactMapping)
-            this._roomMapping.get(room)._contactMapping = new Map();
-    },
-
-    _ensureHandlerMappingForRoom: function(room) {
-        /*if there is no map keeping track of the local status change handlers*/
-        if (!this._roomMapping.get(room)._handlerMapping)
-            this._roomMapping.get(room)._handlerMapping = new Map();
+            this._roomMapping.set(room, { _contactMapping: new Map(),
+                                          _handlerMapping: new Map() });
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -308,7 +291,7 @@ const UserTracker = new Lang.Class({
     getNickRoomStatus: function(nickName, room) {
         let baseNick = Polari.util_get_basenick(nickName);
 
-        this._ensureContactMappingForRoom(room);
+        this._ensureRoomMappingForRoom(room);
 
         let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
@@ -317,7 +300,6 @@ const UserTracker = new Lang.Class({
 
     watchUser: function(room, nick, callback) {
         this._ensureRoomMappingForRoom(room);
-        this._ensureHandlerMappingForRoom(room);
 
         this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
             nickName: Polari.util_get_basenick(nick),
