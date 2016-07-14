@@ -191,10 +191,8 @@ const UserTracker = new Lang.Class({
 
     _ensureHandlerMappingForRoom: function(room) {
         /*if there is no map keeping track of the local status change handlers*/
-        if (!this._roomMapping.get(room)._handlerMapping) {
+        if (!this._roomMapping.get(room)._handlerMapping)
             this._roomMapping.get(room)._handlerMapping = new Map();
-            this._handlerCounter = 0;
-        }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
