@@ -361,7 +361,7 @@ const UserTracker = new Lang.Class({
         this._ensureHandlerMappingForRoom(room);
 
         this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
-            nickName: nick,
+            nickName: Polari.util_get_basenick(nick),
             handler: callback
         });
 
