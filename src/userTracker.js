@@ -255,15 +255,17 @@ const UserTracker = new Lang.Class({
         this._untrackMember(this._globalContactMapping, member, room);
     },
 
+    _pushMember: function(map, baseNick, member) {
+        if (!map.has(baseNick))
+            map.set(baseNick, []);
+        let contacts = map.get(baseNick);
+        return contacts.push(member);
+    },
+
     _trackMember: function(map, member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
 
-        if (map.has(baseNick))
-            map.get(baseNick).push(member);
-        else
-            map.set(baseNick, [member]);
-
-        if (map.get(baseNick).length == 1) {
+        if (this._pushMember(map, baseNick, member) == 1) {
             if (map == this._globalContactMapping) {
                 this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
                 //log("[global status] user " + member.alias + " is globally online");
