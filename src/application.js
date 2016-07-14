@@ -193,26 +193,7 @@ const Application = new Lang.Class({
           { name: 'previous-pending-room',
             accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
         ];
-        actionEntries.forEach(Lang.bind(this,
-            function(actionEntry) {
-                let props = {};
-                ['name', 'state', 'parameter_type'].forEach(
-                    function(prop) {
-                        if (actionEntry[prop])
-                            props[prop] = actionEntry[prop];
-                    });
-                let action = new Gio.SimpleAction(props);
-                if (actionEntry.create_hook)
-                    actionEntry.create_hook(action);
-                if (actionEntry.activate)
-                    action.connect('activate', actionEntry.activate);
-                if (actionEntry.change_state)
-                    action.connect('change-state', actionEntry.change_state);
-                if (actionEntry.accels)
-                    this.set_accels_for_action('app.' + actionEntry.name,
-                                               actionEntry.accels);
-                this.add_action(action);
-        }));
+        Utils.addActionEntries(this, 'app', actionEntries);
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         let action = this._settings.create_action('run-in-background');

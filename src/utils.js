@@ -202,6 +202,27 @@ function updateTerms(terms, str) {
     return changed;
 }
 
+function addActionEntries(map, prefix, entries) {
+    let app = Gio.Application.get_default();
+    entries.forEach(entry => {
+        let props = {};
+        for (let prop of ['name', 'state', 'parameter_type'])
+            if (entry[prop])
+                props[prop] = entry[prop];
+
+        let action = new Gio.SimpleAction(props);
+        if (entry.create_hook)
+            entry.create_hook(action);
+        if (entry.activate)
+            action.connect('activate', entry.activate);
+        if (entry.change_state)
+            action.connect('change-state', entry.change_state);
+        if (entry.accels)
+            app.set_accels_for_action(prefix + '.' + entry.name, entry.accels);
+        map.add_action(action);
+    });
+}
+
 function gpaste(text, title, callback) {
     if (title.length > MAX_PASTE_TITLE_LENGTH)
         title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
