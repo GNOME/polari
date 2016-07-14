@@ -69,7 +69,7 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('(ss)') },
           { name: 'leave-current-room',
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
-            create_hook: Lang.bind(this, this._leaveRoomCreateHook),
+            create_hook: (a) => { a.enabled = false; },
             accels: ['<Primary>w'] },
           { name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)') },
@@ -152,6 +152,20 @@ const Application = new Lang.Class({
             this._chatroomManager.lateInit();
         }
         this._window.present();
+    },
+
+    vfunc_window_added: function(window) {
+        this.parent(window);
+
+        let action = this.lookup_action('leave-current-room');
+        window.connect('notify::active-room', () => {
+            action.enabled = window.active_room != null;
+        });
+        action.enabled = window.active_room != null;
+
+        window.connect('active-room-state-changed',
+                       Lang.bind(this, this._updateUserListAction));
+        this._updateUserListAction();
     },
 
     vfunc_open: function(files) {
@@ -253,29 +267,18 @@ const Application = new Lang.Class({
             }));
     },
 
-    _leaveRoomCreateHook: function(action) {
-        this._chatroomManager.connect('active-changed', Lang.bind(this,
-            function() {
-                action.enabled = this._chatroomManager.getActiveRoom() != null;
-            }));
-        action.enabled = this._chatroomManager.getActiveRoom() != null;
-    },
-
-    _updateUserListAction: function(action) {
-        let room = this._chatroomManager.getActiveRoom();
+    _updateUserListAction: function() {
+        let room = this.active_window.active_room;
+        let action = this.lookup_action('user-list');
         action.enabled = room && room.type == Tp.HandleType.ROOM && room.channel;
     },
 
     _userListCreateHook: function(action) {
-        this._chatroomManager.connect('active-state-changed', Lang.bind(this,
-            function() {
-                this._updateUserListAction(action);
-            }));
         action.connect('notify::enabled', function() {
             if (!action.enabled)
                 action.change_state(GLib.Variant.new('b', false));
         });
-        this._updateUserListAction(action);
+        action.enabled = false;
     },
 
     _onShowJoinDialog: function() {
@@ -531,7 +534,7 @@ const Application = new Lang.Class({
     },
 
     _onLeaveCurrentRoom: function() {
-        let room = this._chatroomManager.getActiveRoom();
+        let room = this._window.active_room;
         if (!room)
             return;
         let action = this.lookup_action('leave-room');

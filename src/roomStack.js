@@ -32,10 +32,6 @@ const RoomStack = new Lang.Class({
                                   Lang.bind(this, this._roomAdded));
         this._roomManager.connect('room-removed',
                                   Lang.bind(this, this._roomRemoved));
-        this._roomManager.connect('active-changed',
-                                  Lang.bind(this, this._activeRoomChanged));
-        this._roomManager.connect('active-state-changed',
-                                  Lang.bind(this, this._updateSensitivity));
 
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
 
@@ -45,6 +41,19 @@ const RoomStack = new Lang.Class({
                 this._entryAreaHeight = rect.height - 1;
                 this.notify('entry-area-height');
             }));
+    },
+
+    vfunc_realize: function() {
+        this.parent();
+
+        let toplevel = this.get_toplevel();
+
+        toplevel.connect('notify::active-room',
+                         Lang.bind(this, this._activeRoomChanged));
+        toplevel.connect('active-room-state-changed',
+                         Lang.bind(this, this._updateSensitivity));
+        this._activeRoomChanged();
+        this._updateSensitivity();
     },
 
     get entry_area_height() {
@@ -65,12 +74,13 @@ const RoomStack = new Lang.Class({
         this._rooms.delete(room.id);
     },
 
-    _activeRoomChanged: function(manager, room) {
+    _activeRoomChanged: function() {
+        let room = this.get_toplevel().active_room;
         this.set_visible_child_name(room ? room.id : 'placeholder');
     },
 
     _updateSensitivity: function() {
-        let room = this._roomManager.getActiveRoom();
+        let room = this.get_toplevel().active_room;
         if (!room)
             return;
         let sensitive = room && room.channel;

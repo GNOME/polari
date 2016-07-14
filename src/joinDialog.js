@@ -6,7 +6,6 @@ const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
 const AccountsMonitor = imports.accountsMonitor;
-const ChatroomManager = imports.chatroomManager;
 const Connections = imports.connections;
 const Lang = imports.lang;
 const Utils = imports.utils;
@@ -58,7 +57,6 @@ const JoinDialog = new Lang.Class({
         this._setupConnectionPage();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._roomManager = ChatroomManager.getDefault();
 
         this._accounts = {};
         this._accountsMonitor.enabledAccounts.forEach(a => {
@@ -229,7 +227,8 @@ const JoinDialog = new Lang.Class({
             this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
-        let activeRoom = this._roomManager.getActiveRoom();
+        let activeRoom = this.transient_for ? this.transient_for.active_room
+                                            : null;
         let activeIndex = 0;
         if(activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);

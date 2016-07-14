@@ -146,7 +146,6 @@ const _ChatroomManager = new Lang.Class({
 
     _init: function() {
         this._rooms = {};
-        this._activeRoom = null;
 
         this._app = Gio.Application.get_default();
 
@@ -157,6 +156,10 @@ const _ChatroomManager = new Lang.Class({
 
         this._app.connect('prepare-shutdown',
                           Lang.bind(this, this._onPrepareShutdown));
+        this._app.connect('window-added', (a, w) => {
+            w.connect('notify::active-room',
+                      Lang.bind(this, this._onActiveRoomChanged));
+        });
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
 
@@ -320,7 +323,7 @@ const _ChatroomManager = new Lang.Class({
         let room = this._ensureRoom(account, channelName, Tp.HandleType.ROOM);
         let [present, ] = Tp.user_action_time_should_present(time);
         if (present)
-            this.setActiveRoom(room);
+            this._setActiveRoom(room);
     },
 
     _onQueryActivated: function(action, parameter) {
@@ -333,7 +336,7 @@ const _ChatroomManager = new Lang.Class({
         let room = this._ensureRoom(account, channelName, Tp.HandleType.CONTACT);
         let [present, ] = Tp.user_action_time_should_present(time);
         if (present)
-            this.setActiveRoom(room);
+            this._setActiveRoom(room);
     },
 
     _onLeaveActivated: function(action, parameter) {
@@ -411,7 +414,7 @@ const _ChatroomManager = new Lang.Class({
 
                 let room = this._ensureRoomForChannel(channel);
                 if (this.roomCount == 1)
-                    this.setActiveRoom(room);
+                    this._setActiveRoom(room);
             }));
     },
 
@@ -432,7 +435,7 @@ const _ChatroomManager = new Lang.Class({
                 //channel.join_async('', null);
 
                 if (present || this.roomCount == 1)
-                    this.setActiveRoom(room);
+                    this._setActiveRoom(room);
 
                 if (present)
                     this._app.activate();
@@ -443,17 +446,11 @@ const _ChatroomManager = new Lang.Class({
         if (this._rooms[room.id])
             return;
 
-        room._channelChangedId = room.connect('notify::channel', Lang.bind(this,
-            function(room) {
-                if (room == this._activeRoom)
-                    this.emit('active-state-changed');
-            }));
-
         this._rooms[room.id] = room;
         this.emit('room-added', room);
 
         if (this.roomCount == 1)
-            this.setActiveRoom(room);
+            this._setActiveRoom(room);
     },
 
     _removeRoom: function(room) {
@@ -463,8 +460,6 @@ const _ChatroomManager = new Lang.Class({
         if (room == this._lastActiveRoom)
             this._lastActiveRoom = null;
 
-        room.disconnect(room._channelChangedId);
-        delete room._channelChangedId;
         delete this._rooms[room.id];
         this.emit('room-removed', room);
     },
@@ -480,20 +475,15 @@ const _ChatroomManager = new Lang.Class({
         }
     },
 
-    setActiveRoom: function(room) {
-        if (room == this._activeRoom)
-            return;
+    _onActiveRoomChanged: function(window) {
+        let room = window.active_room;
 
         if (room && room.type == Tp.HandleType.ROOM)
             this._lastActiveRoom = room;
-
-        this._activeRoom = room;
-        this.emit('active-changed', room);
-        this.emit('active-state-changed');
     },
 
-    getActiveRoom: function() {
-        return this._activeRoom;
+    _setActiveRoom: function(room) {
+        this._app.active_window.active_room = room;
     },
 
     getRoomByName: function(name) {

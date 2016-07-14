@@ -6,7 +6,6 @@ const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
-const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
@@ -34,10 +33,14 @@ const UserListPopover = new Lang.Class({
         this._revealer.connect('notify::child-revealed', Lang.bind(this, function() {
             this._revealer.transition_duration = 250;
         }));
+    },
 
-        this._roomManager = new ChatroomManager.getDefault();
-        this._roomManager.connect('active-changed',
-                                  Lang.bind(this, this._activeRoomChanged));
+    vfunc_realize: function() {
+        this.parent();
+
+        let toplevel = this.get_toplevel();
+        toplevel.connect('notify::active-room',
+                         Lang.bind(this, this._activeRoomChanged));
     },
 
     _createWidget: function() {
@@ -59,7 +62,7 @@ const UserListPopover = new Lang.Class({
         this._box.show_all();
     },
 
-    _activeRoomChanged: function(manager, room) {
+    _activeRoomChanged: function() {
         this._entry.text = '';
 
         if (this._userList)
@@ -71,7 +74,7 @@ const UserListPopover = new Lang.Class({
         if (this._userList)
             return;
 
-        let room = this._roomManager.getActiveRoom();
+        let room = this.get_toplevel().active_room;
         if (!room || room.type != Tp.HandleType.ROOM)
             return;
 

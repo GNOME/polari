@@ -3,11 +3,11 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
-const ChatroomManager = imports.chatroomManager;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -109,24 +109,32 @@ const MainWindow = new Lang.Class({
                                                       'subtitle-visible',
                                                       'subtitle-visible',
                                                       GObject.ParamFlags.READABLE,
-                                                      false)
+                                                      false),
+        'active-room': GObject.ParamSpec.object('active-room',
+                                                'active-room',
+                                                'active-room',
+                                                GObject.ParamFlags.READWRITE,
+                                                Polari.Room.$gtype)
     },
+    Signals: { 'active-room-state-changed': {} },
 
     _init: function(params) {
         this._subtitle = '';
         params.show_menubar = false;
 
-        this.parent(params);
-
-        this._addApplicationStyle();
-
         this._room = null;
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-        this._gtkSettings = Gtk.Settings.get_default();
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
         this._membersChangedId = 0;
+        this._channelChangedId = 0;
+
+        this.parent(params);
+
+        this._addApplicationStyle();
+
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+        this._gtkSettings = Gtk.Settings.get_default();
 
         this._currentSize = [-1, -1];
         this._isMaximized = false;
@@ -158,12 +166,6 @@ const MainWindow = new Lang.Class({
                                       Lang.bind(this, this._onAccountsChanged));
         this._onAccountsChanged(this._accountsMonitor);
 
-        this._roomManager = ChatroomManager.getDefault();
-        this._roomManager.connect('active-changed',
-                                  Lang.bind(this, this._activeRoomChanged));
-        this._roomManager.connect('active-state-changed',
-                                  Lang.bind(this, this._updateUserListLabel));
-
         this._updateUserListLabel();
 
         this._userListAction = app.lookup_action('user-list');
@@ -185,6 +187,9 @@ const MainWindow = new Lang.Class({
         this.connect('window-state-event', Lang.bind(this, this._onWindowStateEvent));
         this.connect('size-allocate', Lang.bind(this, this._onSizeAllocate));
         this.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.connect('notify::active-room', () => {
+            this._updateUserListLabel();
+        });
 
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
@@ -241,19 +246,31 @@ const MainWindow = new Lang.Class({
         this._titlebarRight.set_decoration_layout(layoutRight);
     },
 
-    _activeRoomChanged: function(manager, room) {
+    get active_room() {
+        return this._room;
+    },
+
+    set active_room(room) {
+        if (room == this._room)
+            return;
+
         if (this._room) {
             this._room.disconnect(this._displayNameChangedId);
             this._room.disconnect(this._topicChangedId);
             this._room.disconnect(this._membersChangedId);
+            this._room.disconnect(this._channelChangedId);
         }
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
         this._membersChangedId = 0;
+        this._channelChangedId = 0;
 
         this._room = room;
 
         this._updateTitlebar();
+
+        this.notify('active-room');
+        this.emit('active-room-state-changed');
 
         if (!this._room)
             return; // finished
@@ -267,6 +284,11 @@ const MainWindow = new Lang.Class({
         this._membersChangedId =
             this._room.connect('members-changed',
                                Lang.bind(this, this._updateUserListLabel));
+        this._channelChangedId =
+            this._room.connect('notify::channel', () => {
+                this._updateUserListLabel();
+                this.emit('active-room-state-changed');
+            });
     },
 
     _addApplicationStyle: function() {
