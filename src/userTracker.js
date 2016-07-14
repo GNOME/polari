@@ -156,12 +156,6 @@ const UserTracker = new Lang.Class({
             members.forEach(m => { this._trackMember(m, emittingRoom); });
         } else {
             this._clearUsersFromRoom(emittingRoom);
-
-            /*since we have no channel, all users must be locally marked offline. so call the callbacks*/
-            for ([handlerID, handlerInfo] of this._roomMapping.get(emittingRoom)._handlerMapping) {
-                if (handlerInfo.nickName)
-                    handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
-            }
         }
     },
 
