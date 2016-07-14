@@ -258,11 +258,6 @@ const Application = new Lang.Class({
 
         if (!this.active_window) {
             let window = new MainWindow.MainWindow({ application: this });
-            window.connect('destroy', () => {
-                if (this._settings.get_boolean('run-in-background'))
-                    return;
-                this.emit('prepare-shutdown');
-            });
             window.connect('notify::active-room',
                            () => { this.emit('room-focus-changed'); });
             window.connect('notify::is-active',
@@ -284,6 +279,14 @@ const Application = new Lang.Class({
         window.connect('active-room-state-changed',
                        Lang.bind(this, this._updateUserListAction));
         this._updateUserListAction();
+    },
+
+    vfunc_window_removed: function(window) {
+        this.parent(window);
+
+        if (this._settings.get_boolean('run-in-background'))
+            return;
+        this.emit('prepare-shutdown');
     },
 
     vfunc_open: function(files) {
