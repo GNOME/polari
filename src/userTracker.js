@@ -178,10 +178,7 @@ const UserTracker = new Lang.Class({
     _clearUsersFromRoom: function(room) {
         let map = this._roomMapping.get(room)._contactMapping;
         for ([baseNick, contacts] of map)
-            contacts.forEach((m) => {
-                this._untrackMember(map, m, room);
-                this._untrackMember(this._globalContactMapping, m, room);
-            });
+            contacts.forEach((m) => { this._untrackMember(m, room); });
         this._roomMapping.delete(room);
     },
 
@@ -207,30 +204,26 @@ const UserTracker = new Lang.Class({
         oldMember._room = room;
         newMember._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, oldMember, room);
-        this._untrackMember(this._globalContactMapping, oldMember, room);
+        this._untrackMember(oldMember, room);
         this._trackMember(newMember, room);
     },
 
     _onMemberDisconnected: function(room, member, message) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
-        this._untrackMember(this._globalContactMapping, member, room);
+        this._untrackMember(member, room);
     },
 
     _onMemberKicked: function(room, member, actor) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
-        this._untrackMember(this._globalContactMapping, member, room);
+        this._untrackMember(member, room);
     },
 
     _onMemberBanned: function(room, member, actor) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
-        this._untrackMember(this._globalContactMapping, member, room);
+        this._untrackMember(member, room);
     },
 
     _onMemberJoined: function(room, member) {
@@ -242,8 +235,7 @@ const UserTracker = new Lang.Class({
     _onMemberLeft: function(room, member, message) {
         member._room = room;
 
-        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
-        this._untrackMember(this._globalContactMapping, member, room);
+        this._untrackMember(member, room);
     },
 
     _runHandlers: function(room, member, status) {
@@ -287,31 +279,37 @@ const UserTracker = new Lang.Class({
         this.emit("contacts-changed::" + baseNick);
     },
 
-    _untrackMember: function(map, member, room) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-
+    _popMember: function(map, baseNick, member) {
         let contacts = map.get(baseNick) || [];
-        /*TODO: i really don't like this search. maybe use a for loop?*/
-        let indexToDelete = contacts.map(c => c.alias.indexOf(member.alias);
+        let index = contacts.map(c => c.alias).indexOf(member.alias);
+        if (index < 0)
+            return [false, contacts.length];
+        contacts.splice(index, 1);
+        return [true, contacts.length];
+    },
 
-        if (indexToDelete > -1) {
-            let removedMember = contacts.splice(indexToDelete, 1)[0];
+    _untrackMember: function(member, room) {
+        let baseNick = Polari.util_get_basenick(member.alias);
+        let status = Tp.ConnectionPresenceType.OFFLINE;
 
-            if (contacts.length == 0) {
-                if (map == this._globalContactMapping)
-                    this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
-                else
-                    this._runHandlers(room, member, Tp.ConnectionPresenceType.OFFLINE);
-
-                let notifyActionName = this.getNotifyActionName(member.alias);
-                let notifyAction = this._app.lookup_action(notifyActionName);
-
-                notifyAction.enabled = true;
+        let map = this._globalContactMapping;
+        let [found, nContacts] = this._popMember(map, baseNick, member);
+        if (found) {
+            if (nContacts == 0) {
+                this.emit("status-changed::" + baseNick, member.alias, status);
             }
+            this.emit("contacts-changed::" + baseNick);
 
-            if (this._globalContactMapping == map)
-                this.emit("contacts-changed::" + baseNick);
+            let notifyActionName = this.getNotifyActionName(member.alias);
+            let notifyAction = this._app.lookup_action(notifyActionName);
+
+            notifyAction.enabled = true;
         }
+
+        let roomMap = this._roomMapping.get(room)._contactMapping;
+        [found, nContacts] = this._popMember(roomMap, baseNick, member);
+        if (found && nContacts == 0)
+            this._runHandlers(room, member, status);
     },
 
     getNickStatus: function(nickName) {
