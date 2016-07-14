@@ -31,7 +31,6 @@ const Application = new Lang.Class({
                       flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
         GLib.set_application_name('Polari');
-        this._window = null;
         this._retryData = new Map();
     },
 
@@ -155,17 +154,17 @@ const Application = new Lang.Class({
             this._telepathyClient = new TelepathyClient.TelepathyClient(params);
         }
 
-        if (!this._window) {
-            this._window = new MainWindow.MainWindow({ application: this });
-            this._window.connect('destroy',
-                                 () => { this.emit('prepare-shutdown'); });
-            this._window.connect('notify::active-room',
-                                 () => { this.emit('room-focus-changed'); });
-            this._window.connect('notify::is-active',
-                                 () => { this.emit('room-focus-changed'); });
-            this._window.show_all();
+        if (!this.active_window) {
+            let window = new MainWindow.MainWindow({ application: this });
+            window.connect('destroy',
+                           () => { this.emit('prepare-shutdown'); });
+            window.connect('notify::active-room',
+                           () => { this.emit('room-focus-changed'); });
+            window.connect('notify::is-active',
+                           () => { this.emit('room-focus-changed'); });
+            window.show_all();
         }
-        this._window.present();
+        this.active_window.present();
     },
 
     vfunc_window_added: function(window) {
@@ -296,13 +295,13 @@ const Application = new Lang.Class({
     },
 
     _onShowJoinDialog: function() {
-        this._window.showJoinRoomDialog();
+        this.active_window.showJoinRoomDialog();
     },
 
     _maybePresent: function(time) {
         let [present, ] = Tp.user_action_time_should_present(time);
 
-        if (!this._window || present)
+        if (!this.active_window || present)
             this.activate();
     },
 
@@ -419,7 +418,7 @@ const Application = new Lang.Class({
     },
 
     _onLeaveCurrentRoom: function() {
-        let room = this._window.active_room;
+        let room = this.active_window.active_room;
         if (!room)
             return;
         let action = this.lookup_action('leave-room');
@@ -465,7 +464,7 @@ const Application = new Lang.Class({
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         let dialog = new Connections.ConnectionProperties(account);
-        dialog.transient_for = this._window;
+        dialog.transient_for = this.active_window;
         dialog.connect('response', Lang.bind(this,
             function(w, response) {
                 w.destroy();
@@ -511,7 +510,7 @@ const Application = new Lang.Class({
             website_label: _("Learn more about Polari"),
             website: 'https://wiki.gnome.org/Apps/Polari',
 
-            transient_for: this._window,
+            transient_for: this.active_window,
             modal: true
         };
 
@@ -524,6 +523,6 @@ const Application = new Lang.Class({
     },
 
     _onQuit: function() {
-        this._window.destroy();
+        this.get_windows().reverse().forEach(w => { w.destroy(); });
     }
 });
