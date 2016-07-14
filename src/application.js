@@ -284,7 +284,7 @@ const Application = new Lang.Class({
     vfunc_window_removed: function(window) {
         this.parent(window);
 
-        if (this._settings.get_boolean('run-in-background'))
+        if (this._settings.get_boolean('run-in-background') || this.active_window)
             return;
         this.emit('prepare-shutdown');
     },
