@@ -42,15 +42,10 @@ const UNKNOWN_COMMAND_MESSAGE =
 const IrcParser = new Lang.Class({
     Name: 'IrcParser',
 
-    _init: function() {
+    _init: function(room) {
         this._app = Gio.Application.get_default();
         this._roomManager = ChatroomManager.getDefault();
-
-        this._roomManager.connect('active-changed', Lang.bind(this,
-            function(manager, room) {
-                this._room = room;
-            }));
-        this._room = null;
+        this._room = room;
     },
 
     _createFeedbackLabel: function(text) {

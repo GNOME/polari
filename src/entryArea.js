@@ -119,7 +119,7 @@ const EntryArea = new Lang.Class({
         this._room = params.room;
         delete params.room;
 
-        this._ircParser = new IrcParser.IrcParser();
+        this._ircParser = new IrcParser.IrcParser(this._room);
         this._maxNickChars = ChatView.MAX_NICK_CHARS;
 
         this.parent(params);
