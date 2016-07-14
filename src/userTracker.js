@@ -81,11 +81,11 @@ const UserTracker = new Lang.Class({
             { name: 'member-renamed',
               handler: Lang.bind(this, this._onMemberRenamed) },
             { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberDisconnected) },
+              handler: Lang.bind(this, this._onMemberLeft) },
             { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberKicked) },
+              handler: Lang.bind(this, this._onMemberLeft) },
             { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberBanned) },
+              handler: Lang.bind(this, this._onMemberLeft) },
             { name: 'member-joined',
               handler: Lang.bind(this, this._onMemberJoined) },
             { name: 'member-left',
@@ -202,23 +202,11 @@ const UserTracker = new Lang.Class({
         this._trackMember(newMember, room);
     },
 
-    _onMemberDisconnected: function(room, member, message) {
-        this._untrackMember(member, room);
-    },
-
-    _onMemberKicked: function(room, member, actor) {
-        this._untrackMember(member, room);
-    },
-
-    _onMemberBanned: function(room, member, actor) {
-        this._untrackMember(member, room);
-    },
-
     _onMemberJoined: function(room, member) {
         this._trackMember(member, room);
     },
 
-    _onMemberLeft: function(room, member, message) {
+    _onMemberLeft: function(room, member) {
         this._untrackMember(member, room);
     },
 
