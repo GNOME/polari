@@ -163,8 +163,7 @@ const UserTracker = new Lang.Class({
             globally*/
             members.forEach(m => {
                 m._room = emittingRoom;
-                this._trackMember(this._roomMapping.get(emittingRoom)._contactMapping, m, emittingRoom);
-                this._trackMember(this._globalContactMapping, m, emittingRoom);
+                this._trackMember(m, emittingRoom);
             });
         } else {
             /*handle the absence of a channel for the global case*/
@@ -216,8 +215,7 @@ const UserTracker = new Lang.Class({
 
         this._untrackMember(this._roomMapping.get(room)._contactMapping, oldMember, room);
         this._untrackMember(this._globalContactMapping, oldMember, room);
-        this._trackMember(this._roomMapping.get(room)._contactMapping, newMember, room);
-        this._trackMember(this._globalContactMapping, newMember, room);
+        this._trackMember(newMember, room);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -244,8 +242,7 @@ const UserTracker = new Lang.Class({
     _onMemberJoined: function(room, member) {
         member._room = room;
 
-        this._trackMember(this._roomMapping.get(room)._contactMapping, member, room);
-        this._trackMember(this._globalContactMapping, member, room);
+        this._trackMember(member, room);
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -269,31 +266,31 @@ const UserTracker = new Lang.Class({
         return contacts.push(member);
     },
 
-    _trackMember: function(map, member, room) {
+    _trackMember: function(member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
+        let status = Tp.ConnectionPresenceType.AVAILABLE;
 
+        let map = this._globalContactMapping;
         if (this._pushMember(map, baseNick, member) == 1) {
-            if (map == this._globalContactMapping) {
-                this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
-                //log("[global status] user " + member.alias + " is globally online");
+            this.emit("status-changed::" + baseNick, member.alias, status);
 
-                let notifyActionName = this.getNotifyActionName(member.alias);
-                let notifyAction = this._app.lookup_action(notifyActionName);
+            let notifyActionName = this.getNotifyActionName(member.alias);
+            let notifyAction = this._app.lookup_action(notifyActionName);
 
-                if (notifyAction.get_state().get_boolean()) {
-                    this.emitWatchedUserNotification(room, member);
-                    /*change state so that the button is not pressed if it reappears again*/
-                    notifyAction.change_state(GLib.Variant.new('b', false));
-                }
-
-                notifyAction.enabled = false;
-            } else {
-                this._runHandlers(room, member, Tp.ConnectionPresenceType.AVAILABLE);
+            if (notifyAction.get_state().get_boolean()) {
+                this.emitWatchedUserNotification(room, member);
+                /*change state so that the button is not pressed if it reappears again*/
+                notifyAction.change_state(GLib.Variant.new('b', false));
             }
+
+            notifyAction.enabled = false;
         }
 
-        if (this._globalContactMapping == map)
-            this.emit("contacts-changed::" + baseNick);
+        let roomMap = this._roomMapping.get(room)._contactMapping;
+        if (this._pushMember(roomMap, baseNick, member) == 1)
+            this._runHandlers(room, member, status);
+
+        this.emit("contacts-changed::" + baseNick);
     },
 
     _untrackMember: function(map, member, room) {
