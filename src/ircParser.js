@@ -287,7 +287,7 @@ const IrcParser = new Lang.Class({
         }
 
         if (output)
-            this._app.commandOutputQueue.addNotification(output);
+            this._app.active_window.commandOutputQueue.addNotification(output);
         return retval;
     },
 

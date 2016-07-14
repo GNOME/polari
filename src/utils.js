@@ -183,7 +183,7 @@ function openURL(url, timestamp) {
             Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
     } catch(e) {
         let n = new AppNotifications.SimpleOutput(_("Failed to open link"));
-        app.notificationQueue.addNotification(n);
+        app.active_window.notificationQueue.addNotification(n);
         debug("failed to open %s: %s".format(url, e.message));
     }
 }

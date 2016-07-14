@@ -237,8 +237,6 @@ const Application = new Lang.Class({
                                       Lang.bind(this, this._onAccountStatusChanged));
 
         this.pasteManager = new PasteManager.PasteManager();
-        this.notificationQueue = new AppNotifications.NotificationQueue();
-        this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         let provider = new Gtk.CssProvider();
         let uri = 'resource:///org/gnome/Polari/css/application.css';
@@ -347,7 +345,7 @@ const Application = new Lang.Class({
             let label = _("Failed to open link");
             let n = new AppNotifications.MessageNotification(label,
                                                              'dialog-error-symbolic');
-            this.notificationQueue.addNotification(n);
+            this.active_window.notificationQueue.addNotification(n);
         }
 
         return [success, server, port, room];
@@ -553,7 +551,7 @@ const Application = new Lang.Class({
             function() {
                 let label = _("%s removed.").format(account.display_name);
                 let n = new AppNotifications.UndoNotification(label);
-                this.notificationQueue.addNotification(n);
+                this.active_window.notificationQueue.addNotification(n);
 
                 n.connect('closed', function() {
                     account.remove_async(function(a, res) {

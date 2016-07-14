@@ -141,15 +141,17 @@ const MainWindow = new Lang.Class({
         this._isMaximized = false;
         this._isFullscreen = false;
 
-        let app = this.application;
-        this._overlay.add_overlay(app.notificationQueue);
-        this._overlay.add_overlay(app.commandOutputQueue);
+        this.notificationQueue = new AppNotifications.NotificationQueue();
+        this._overlay.add_overlay(this.notificationQueue);
+
+        this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
+        this._overlay.add_overlay(this.commandOutputQueue);
 
         // command output notifications should not pop up over
         // the input area, but appear to emerge from it, so
         // set up an appropriate margin
         this._roomStack.bind_property('entry-area-height',
-                                      app.commandOutputQueue, 'margin-bottom',
+                                      this.commandOutputQueue, 'margin-bottom',
                                       GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
@@ -176,6 +178,7 @@ const MainWindow = new Lang.Class({
 
         this._updateUserListLabel();
 
+        let app = this.application;
         this._userListAction = app.lookup_action('user-list');
 
         app.connect('action-state-changed::user-list', Lang.bind(this,
