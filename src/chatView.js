@@ -296,7 +296,7 @@ const ChatView = new Lang.Class({
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveredButtonTags = [];
         this._needsIndicator = true;
-        this._pending = {};
+        this._pending = new Map();
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
@@ -527,10 +527,6 @@ const ChatView = new Lang.Class({
         }
     },
 
-    get _nPending() {
-        return Object.keys(this._pending).length;
-    },
-
     get max_nick_chars() {
         return this._maxNickChars;
     },
@@ -585,15 +581,13 @@ const ChatView = new Lang.Class({
         if (!this._autoscroll)
             return;
 
-        if (this._nPending == 0) {
+        if (this._pending.size == 0) {
             this._view.emit('move-cursor',
                             Gtk.MovementStep.BUFFER_ENDS, 1, false);
         } else {
-            let id = Object.keys(this._pending).sort(function(a, b) {
-                return a - b;
-            })[0];
             this._autoscroll = false;
-            this._view.scroll_mark_onscreen(this._pending[id]);
+            let mark = [...this._pending.values()].shift();
+            this._view.scroll_mark_onscreen(mark);
         }
     },
 
@@ -672,7 +666,7 @@ const ChatView = new Lang.Class({
 
     _pendingMessageRemoved: function(channel, message) {
         let [id,] = message.get_pending_message_id();
-        let mark = this._pending[id];
+        let mark = this._pending.get(id);
         if (!mark)
             return;
         // Re-enable auto-scrolling if this is the most recent message
@@ -680,7 +674,7 @@ const ChatView = new Lang.Class({
             this._autoscroll = true;
         this._view.buffer.delete_mark(mark);
         this._app.withdraw_notification('pending-message-' + id);
-        delete this._pending[id];
+        this._pending.delete(id);
     },
 
     _showUrlContextMenu: function(url, button, time) {
@@ -781,7 +775,7 @@ const ChatView = new Lang.Class({
         let buffer = this._view.get_buffer();
         for (let i = 0; i < pending.length; i++) {
             let [id,] = pending[i].get_pending_message_id();
-            let mark = this._pending[id];
+            let mark = this._pending.get(id);
             if (!mark) {
                 this._channel.ack_message_async(pending[i], null);
                 continue;
@@ -1186,14 +1180,14 @@ const ChatView = new Lang.Class({
 
         let buffer = this._view.get_buffer();
         if (!valid /* outgoing */ ||
-            (this._active && this._toplevelFocus && this._nPending == 0)) {
+            (this._active && this._toplevelFocus && this._pending.size == 0)) {
             this._channel.ack_message_async(tpMessage, null);
         } else if (shouldHighlight || this._needsIndicator) {
             let iter = buffer.get_end_iter();
 
             if (shouldHighlight) {
                 let mark = buffer.create_mark(null, iter, true);
-                this._pending[id] = mark;
+                this._pending.set(id, mark);
             }
 
             if (this._needsIndicator) {
