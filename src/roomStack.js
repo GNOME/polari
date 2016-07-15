@@ -51,11 +51,11 @@ const RoomStack = new Lang.Class({
 
         let toplevel = this.get_toplevel();
 
-        toplevel.connect('notify::active-room',
-                         Lang.bind(this, this._activeRoomChanged));
+        toplevel.connect('notify::active-room-id',
+                         Lang.bind(this, this._activeRoomIdChanged));
         toplevel.connect('active-room-state-changed',
                          Lang.bind(this, this._updateSensitivity));
-        this._activeRoomChanged();
+        this._activeRoomIdChanged();
         this._updateSensitivity();
     },
 
@@ -77,9 +77,9 @@ const RoomStack = new Lang.Class({
         this._rooms.delete(room.id);
     },
 
-    _activeRoomChanged: function() {
-        let room = this.get_toplevel().active_room;
-        this.set_visible_child_name(room ? room.id : 'placeholder');
+    _activeRoomIdChanged: function() {
+        let toplevel = this.get_toplevel();
+        this.set_visible_child_name(toplevel.active_room_id || 'placeholder');
     },
 
     _updateSensitivity: function() {

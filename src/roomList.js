@@ -424,9 +424,9 @@ const RoomList = new Lang.Class({
         this.parent();
 
         let toplevel = this.get_toplevel();
-        toplevel.connect('notify::active-room',
-                         Lang.bind(this, this._activeRoomChanged));
-        this._activeRoomChanged();
+        toplevel.connect('notify::active-room-id',
+                         Lang.bind(this, this._activeRoomIdChanged));
+        this._activeRoomIdChanged();
     },
 
     _rowToRoomIndex: function(index) {
@@ -481,7 +481,7 @@ const RoomList = new Lang.Class({
             return;
 
         let toplevel = this.get_toplevel();
-        let current = this._roomRows.get(toplevel.active_room.id);
+        let current = this._roomRows.get(toplevel.active_room_id);
 
         if (current != row)
             return;
@@ -567,11 +567,8 @@ const RoomList = new Lang.Class({
         this._placeholders.get(account).visible = !hasRooms;
     },
 
-    _activeRoomChanged: function() {
-        let room = this.get_toplevel().active_room;
-        if (!room)
-            return;
-        let row = this._roomRows.get(room.id);
+    _activeRoomIdChanged: function() {
+        let row = this._roomRows.get(this.get_toplevel().active_room_id);
         if (!row)
             return;
 
