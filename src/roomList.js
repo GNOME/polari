@@ -70,31 +70,30 @@ const RoomRow = new Lang.Class({
             this._updatePending();
     },
 
+    _getNumPending: function() {
+        if (!this._room.channel)
+            return [0, 0];
+
+        let pending = this._room.channel.dup_pending_messages();
+        let nPending = pending.length;
+        if (!this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
+            return [nPending, nPending];
+
+        let highlights = pending.filter(m => {
+            let [text, ] = m.to_text();
+            return this._room.should_highlight_message(m.sender.alias, text);
+        });
+        return [nPending, highlights.length];
+    },
+
     _updatePending: function() {
-        let room = this._room;
+        let [nPending, nHighlights] = this._getNumPending();
 
-        let pending;
-        let numPendingHighlights;
-
-        if (room.channel) {
-            pending = room.channel.dup_pending_messages();
-            if (room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
-                numPendingHighlights = pending.filter(function(m) {
-                    let [text, ] = m.to_text();
-                    return room.should_highlight_message(m.sender.alias, text);
-                }).length;
-            else
-                numPendingHighlights = pending.length;
-        } else {
-            pending = [];
-            numPendingHighlights = 0;
-        }
-
-        this._counter.label = numPendingHighlights.toString();
-        this._counter.opacity = numPendingHighlights > 0 ? 1. : 0.;
+        this._counter.label = nHighlights.toString();
+        this._counter.opacity = nHighlights > 0 ? 1. : 0.;
 
         let context = this.get_style_context();
-        if (pending.length == 0)
+        if (nPending == 0)
             context.add_class('inactive');
         else
             context.remove_class('inactive');
