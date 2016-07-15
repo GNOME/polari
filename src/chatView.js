@@ -298,6 +298,7 @@ const ChatView = new Lang.Class({
         this._needsIndicator = true;
         this._pending = new Map();
         this._pendingLogs = [];
+        this._initialPending = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
         this._room.account.connect('notify::nickname', Lang.bind(this,
@@ -504,11 +505,29 @@ const ChatView = new Lang.Class({
 
         let nick = this._pendingLogs[0].nick;
         let type = this._pendingLogs[0].messageType;
-        for (let i = 0; i < this._pendingLogs.length; i++)
+        let maxNum = this._pendingLogs.length - this._initialPending.length;
+        for (let i = 0; i < maxNum; i++)
             if (this._pendingLogs[i].nick != nick ||
                 this._pendingLogs[i].messageType != type)
                 return this._pendingLogs.splice(i);
         return [];
+    },
+
+    _appendInitialPending: function(logs) {
+        let pending = this._initialPending.splice(0);
+        let firstPending = pending[0];
+
+        let numLogs = logs.length;
+        let pos;
+        for (pos = numLogs - pending.length; pos < numLogs; pos++)
+            if (logs[pos].nick == firstPending.nick &&
+                logs[pos].text == firstPending.text &&
+                logs[pos].timestamp == firstPending.timestamp &&
+                logs[pos].messageType == firstPending.messageType)
+                break;
+        // Remove entries that are also in pending (if any), then
+        // add the entries from pending
+        logs.splice.apply(logs, [pos, numLogs, ...pending]);
     },
 
     _insertPendingLogs: function() {
@@ -519,10 +538,20 @@ const ChatView = new Lang.Class({
             return;
         }
 
+        let numInitialPending = this._initialPending.length;
+        if (numInitialPending)
+            this._appendInitialPending(pending);
+
+        let indicatorIndex = pending.length - numInitialPending;
+
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
+
         for (let i = 0; i < pending.length; i++) {
             this._insertMessage(iter, pending[i], state);
+
+            if (i == indicatorIndex)
+                this._setIndicatorMark(iter);
 
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
@@ -906,11 +935,8 @@ const ChatView = new Lang.Class({
             this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
         }));
 
-        this._channel.dup_pending_messages().forEach(Lang.bind(this,
-            function(message) {
-                this._insertTpMessage(message);
-            }));
-        this._checkMessages();
+        let pending = this._channel.dup_pending_messages();
+        this._initialPending = pending.map(p => this._createMessage(p));
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
