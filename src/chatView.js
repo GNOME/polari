@@ -470,11 +470,11 @@ const ChatView = new Lang.Class({
 
     _onLogEventsReady: function(lw, res) {
         this._hideLoadingIndicator();
+        this._fetchingBacklog = false;
 
         let [, events] = lw.get_events_finish(res);
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs();
-        this._fetchingBacklog = false;
     },
 
     _insertPendingLogs: function() {
@@ -495,8 +495,10 @@ const ChatView = new Lang.Class({
             index = 0;
         }
 
-        if (index < 0)
+        if (index < 0) {
+            this._fetchBacklog();
             return;
+        }
 
         let pending = this._pendingLogs.splice(index);
         let state = { lastNick: null, lastTimestamp: 0 };
