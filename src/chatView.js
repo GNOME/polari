@@ -776,6 +776,27 @@ const ChatView = new Lang.Class({
         buffer.delete(buffer.get_start_iter(), iter);
     },
 
+    _setIndicatorMark: function(iter) {
+        let lineStart = iter.copy();
+        lineStart.set_line_offset(0);
+
+        let buffer = this._view.buffer;
+        let mark = buffer.get_mark('indicator-line');
+        if (mark) {
+            let [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
+            buffer.remove_tag(this._lookupTag('indicator-line'), start, end);
+
+            buffer.move_mark(mark, lineStart);
+        } else {
+            buffer.create_mark('indicator-line', lineStart, true);
+        }
+
+        let [start, end] = this._getLineIters(lineStart);
+        buffer.apply_tag(this._lookupTag('indicator-line'), start, end);
+
+        this._needsIndicator = false;
+    },
+
     _checkMessages: function() {
         if (!this._active || !this._toplevelFocus || !this._channel)
             return;
@@ -1196,24 +1217,8 @@ const ChatView = new Lang.Class({
                 this._pending.set(id, mark);
             }
 
-            if (this._needsIndicator) {
-                iter.set_line_offset(0);
-
-                let mark = buffer.get_mark('indicator-line');
-                if (mark) {
-                    let [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
-                    buffer.remove_tag(this._lookupTag('indicator-line'), start, end);
-
-                    buffer.move_mark(mark, iter);
-                } else {
-                    buffer.create_mark('indicator-line', iter, true);
-                }
-
-                let [start, end] = this._getLineIters(iter);
-                buffer.apply_tag(this._lookupTag('indicator-line'), start, end);
-
-                this._needsIndicator = false;
-            }
+            if (this._needsIndicator)
+                this._setIndicatorMark(buffer.get_end_iter());
         }
     },
 
