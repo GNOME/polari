@@ -38,19 +38,13 @@ const RoomRow = new Lang.Class({
         this.connect('key-press-event',
                      Lang.bind(this, this._onKeyPress));
 
-        room.connect('notify::channel', Lang.bind(this,
-            function() {
-                if (!room.channel)
-                    return;
-                room.channel.connect('message-received',
-                                     Lang.bind(this, this._updatePending));
-                room.channel.connect('pending-message-removed',
-                                     Lang.bind(this, this._updatePending));
-            }));
+        room.connect('notify::channel',
+                     Lang.bind(this, this._onChannelChanged));
         room.bind_property('display-name', this._roomLabel, 'label',
                            GObject.BindingFlags.SYNC_CREATE);
 
         this._updatePending();
+        this._onChannelChanged();
     },
 
     get room() {
@@ -96,6 +90,16 @@ const RoomRow = new Lang.Class({
             context.add_class('inactive');
         else
             context.remove_class('inactive');
+    },
+
+    _onChannelChanged: function() {
+        if (!this._room.channel)
+            return;
+        this._room.channel.connect('message-received',
+                                   Lang.bind(this, this._updatePending));
+        this._room.channel.connect('pending-message-removed',
+                                   Lang.bind(this, this._updatePending));
+        this._updatePending();
     },
 
     _onButtonRelease: function(w, event) {
