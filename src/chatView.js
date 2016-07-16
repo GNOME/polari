@@ -480,11 +480,13 @@ const ChatView = new Lang.Class({
     _createMessage: function(source) {
         if (source instanceof Tp.Message) {
             let [text, ] = source.to_text();
+            let [id, valid] = source.get_pending_message_id();
             return { nick: source.sender.alias,
                      text: text,
                      timestamp: source.get_sent_timestamp() ||
                                 source.get_received_timestamp(),
-                     messageType: source.get_message_type() };
+                     messageType: source.get_message_type(),
+                     pendingId: valid ? id : undefined };
         } else if (source instanceof Tpl.Event) {
             return { nick: source.sender.alias,
                      text: source.message,
@@ -1187,8 +1189,6 @@ const ChatView = new Lang.Class({
         this._insertMessage(iter, message, this._state);
         this._trackContact(tpMessage.sender);
 
-        let [id, valid] = tpMessage.get_pending_message_id();
-
         if (shouldHighlight &&
             !(this._toplevelFocus && this._active)) {
             let summary = '%s %s'.format(this._room.display_name, message.nick);
@@ -1202,29 +1202,22 @@ const ChatView = new Lang.Class({
                                            this._room.channel_name,
                                            Utils.getTpEventTime() ]);
             notification.set_default_action_and_target('app.join-room', param);
-            this._app.send_notification('pending-message-' + id, notification);
+            this._app.send_notification('pending-message-' + message.pendingId,
+                                        notification);
         }
 
-        let buffer = this._view.get_buffer();
-        if (!valid /* outgoing */ ||
-            (this._active && this._toplevelFocus && this._pending.size == 0)) {
+        if (!message.pendingId /* outgoing */ ||
+            (this._active && this._toplevelFocus && this._pending.size == 0))
             this._channel.ack_message_async(tpMessage, null);
-        } else if (shouldHighlight || this._needsIndicator) {
-            let iter = buffer.get_end_iter();
-
-            if (shouldHighlight) {
-                let mark = buffer.create_mark(null, iter, true);
-                this._pending.set(id, mark);
-            }
-
-            if (this._needsIndicator)
-                this._setIndicatorMark(buffer.get_end_iter());
-        }
+        else if (this._needsIndicator)
+            this._setIndicatorMark(this._view.buffer.get_end_iter());
     },
 
     _insertMessage: function(iter, message, state) {
         let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
         let needsGap = message.nick != state.lastNick || isAction;
+        let highlight = this._room.should_highlight_message(message.nick,
+                                                            message.text);
 
         if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
             let tags = [this._lookupTag('timestamp')];
@@ -1267,7 +1260,7 @@ const ChatView = new Lang.Class({
             tags.push(this._lookupTag('message'));
         }
 
-        if (this._room.should_highlight_message(message.nick, message.text))
+        if (highlight)
             tags.push(this._lookupTag('highlight'));
 
         let params = this._room.account.dup_parameters_vardict().deep_unpack();
@@ -1291,6 +1284,10 @@ const ChatView = new Lang.Class({
             pos = url.pos + name.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
+
+        if (highlight && message.pendingId)
+            this._pending.set(message.pendingId,
+                              this._view.buffer.create_mark(null, iter, true));
     },
 
     _createUrlTag: function(url) {
