@@ -121,9 +121,9 @@ const UserDetails = new Lang.Class({
                                                         'expanded',
                                                         READWRITE,
                                                         false),
-                  'isUserWatched': GObject.ParamSpec.boolean('isUserWatched',
-                                                             'isUserWatched',
-                                                             'isUserWatched',
+                  'notifications-enabled': GObject.ParamSpec.boolean('notifications-enabled',
+                                                             'notifications-enabled',
+                                                             'notifications-enabled',
                                                              READWRITE,
                                                              false)},
 
@@ -140,8 +140,11 @@ const UserDetails = new Lang.Class({
 
         this._notificationLabel.set_text("Will notify if user appears online.");
 
-        this.bind_property('isUserWatched', this._notificationIcon, 'visible', GObject.BindingFlags.SYNC_CREATE);
-        this.bind_property('isUserWatched', this._notificationLabel, 'visible', GObject.BindingFlags.SYNC_CREATE);
+        this._notificationIcon.no_show_all = true;
+        this._notificationLabel.no_show_all = true;
+
+        this.bind_property('notifications-enabled', this._notificationIcon, 'visible', GObject.BindingFlags.SYNC_CREATE);
+        this.bind_property('notifications-enabled', this._notificationLabel, 'visible', GObject.BindingFlags.SYNC_CREATE);
 
         this._fullnameLabel.ellipsize = Pango.EllipsizeMode.END;
         this._fullnameLabel.max_width_chars = MAX_USERS_WIDTH_CHARS;
@@ -280,9 +283,6 @@ const UserDetails = new Lang.Class({
             this._lastLabel.hide();
         }
 
-        //this._notificationIcon.hide();
-        //this._notificationLabel.hide();
-
         this._revealDetails();
     },
 
@@ -344,6 +344,8 @@ const UserPopover = new Lang.Class({
 
         this.parent(params);
 
+        this._app = Gio.Application.get_default();
+
         this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0, ellipsize: Pango.EllipsizeMode.END, max_width_chars: MAX_USERS_WIDTH_CHARS });
         this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0, use_markup: true });
 
@@ -355,13 +357,14 @@ const UserPopover = new Lang.Class({
         this._hbox.add(this._headervbox);
 
         this._notifyButton = new Gtk.ToggleButton({ image: new Gtk.Image({ icon_name: 'alarm-symbolic' }), halign: Gtk.Align.END, hexpand: true });
-        this._notifyButton.connect('clicked',
-                                    Lang.bind(this, this._onNotifyButtonClicked));
+        this._notifyButton.bind_property('sensitive', this._notifyButton, 'visible', 0);
+
         this._hbox.add(this._notifyButton);
 
 
         this._userDetails = new UserDetails();
         this.bind_property('visible', this._userDetails, 'expanded', 0);
+        this._notifyButton.bind_property('active', this._userDetails, 'notifications-enabled', GObject.BindingFlags.SYNC_CREATE);
 
         this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._vbox.add(this._hbox);
@@ -370,14 +373,17 @@ const UserPopover = new Lang.Class({
         this.add(this._vbox);
 
         this._vbox.show_all();
-
-        this._notifyButton.bind_property('active', this._userDetails, 'isUserWatched', GObject.BindingFlags.SYNC_CREATE);
     },
 
     set nickname(nickname) {
         this._nickname = nickname;
 
         let baseNick = Polari.util_get_basenick(nickname);
+
+        let notifyActionName  = this._userTracker.getNotifyActionName(this._nickname);
+        let notifyAction = this._app.lookup_action(notifyActionName);
+
+        this._notifyButton.action_name = 'app.' + notifyActionName;
 
         /*TODO: these need to be disconnected when not used anymore*/
         this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
@@ -387,7 +393,6 @@ const UserPopover = new Lang.Class({
         this._updateContents();
 
         /*TODO: disconnect when not needed anymore*/
-
         if (this._contactsChangedSignal)
             this._userTracker.disconnect(this._contactsChangedSignal);
 
@@ -431,52 +436,7 @@ const UserPopover = new Lang.Class({
             this._statusLabel.sensitive = false;
         }
 
-        this._updateNotifyButton();
-
         this._userDetails.nickname = this._nickname;
-    },
-
-    _onNotifyButtonClicked: function() {
-        if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name())) {
-            this._userTracker.addToWatchlist(this._nickname, this._room.account.get_display_name());
-            this._updateNotifyButton();
-        }
-        else {
-            this._userTracker.popUserFromWatchlist(this._nickname, this._room.account.get_display_name());
-            this._updateNotifyButton();
-        }
-    },
-
-    _updateNotifyButton: function() {
-        let isUserGloballyOnline = this._userTracker.getNickStatus(this._nickname) == Tp.ConnectionPresenceType.AVAILABLE ? true : false;
-
-        /*TODO: too many conditionals*/
-        if (!this._userTracker.isUserWatched(this._nickname, this._room.account.get_display_name()))
-            if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE) {
-                this._notifyButton.visible = false;
-                //this._notifyButton.set_active(false);
-            }
-            else {
-                if (isUserGloballyOnline)
-                    this._notifyButton.visible = false;
-                else
-                    this._notifyButton.visible = true;
-
-                //this._notifyButton.set_active(false);
-            }
-        else
-            if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE) {
-                this._notifyButton.visible = false;
-                //this._notifyButton.set_active(true);
-            }
-            else {
-                if (isUserGloballyOnline)
-                    this._notifyButton.visible = false;
-                else
-                    this._notifyButton.visibile = true;
-
-                //this._notifyButton.set_active(true);
-            }
     },
 
     _onNickStatusChanged: function(nickName, status) {
