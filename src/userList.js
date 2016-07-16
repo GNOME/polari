@@ -138,8 +138,6 @@ const UserDetails = new Lang.Class({
         this._updateButtonVisibility();
         this._detailsGrid.hide();
 
-        this._notificationLabel.set_text("Will notify if user appears online.");
-
         this._notificationIcon.no_show_all = true;
         this._notificationLabel.no_show_all = true;
 
@@ -354,9 +352,9 @@ const UserPopover = new Lang.Class({
 
         this._app = Gio.Application.get_default();
 
-        this._notifyButton.bind_property('sensitive', this._notifyButton, 'visible', 0);
-
         this.bind_property('visible', this._userDetails, 'expanded', 0);
+
+        this._notifyButton.bind_property('sensitive', this._notifyButton, 'visible', 0);
         this._notifyButton.bind_property('active', this._userDetails, 'notifications-enabled', GObject.BindingFlags.SYNC_CREATE);
 
         this.show_all();
@@ -372,17 +370,20 @@ const UserPopover = new Lang.Class({
 
         this._notifyButton.action_name = 'app.' + notifyActionName;
 
-        /*TODO: these need to be disconnected when not used anymore*/
-        this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
-        this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
-        this._userTracker.connect("notification-emitted::" + baseNick, Lang.bind(this, this._onNotificationEmitted))
+        /*these need to be disconnected when not used anymore*/
+        if (this._localStatusChangedSignal)
+            this._userTracker.unwatchUser(this._room, this._localStatusChangedSignal);
+        this._localStatusChangedSignal = this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
+
+        if (this._globalStatusChangedSignal)
+            this._userTracker.disconnect(this._globalStatusChangedSignal);
+        this._globalStatusChangedSignal = this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
 
         this._updateContents();
 
-        /*TODO: disconnect when not needed anymore*/
+        /*disconnect when not needed anymore*/
         if (this._contactsChangedSignal)
             this._userTracker.disconnect(this._contactsChangedSignal);
-
         this._contactsChangedSignal = this._userTracker.connect("contacts-changed::" + baseNick, () => {
             this._userDetails.user = this._userTracker.lookupContact(this._nickname);
         });
@@ -428,10 +429,6 @@ const UserPopover = new Lang.Class({
 
     _onNickStatusChanged: function(nickName, status) {
         this._updateContents();
-    },
-
-    _onNotificationEmitted: function() {
-        this._notifyButton.set_active(false);
     }
 });
 
