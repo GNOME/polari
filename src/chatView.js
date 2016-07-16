@@ -473,7 +473,8 @@ const ChatView = new Lang.Class({
         this._fetchingBacklog = false;
 
         let [, events] = lw.get_events_finish(res);
-        this._pendingLogs = events.concat(this._pendingLogs);
+        let messages = events.map(e => this._createMessage(e));
+        this._pendingLogs = messages.concat(this._pendingLogs);
         this._insertPendingLogs();
     },
 
@@ -502,12 +503,12 @@ const ChatView = new Lang.Class({
             return;
 
         let index = -1;
-        let nick = this._pendingLogs[0].sender.alias;
-        let type = this._pendingLogs[0].message_type;
+        let nick = this._pendingLogs[0].nick;
+        let type = this._pendingLogs[0].messageType;
         if (!this._logWalker.is_end()) {
             for (let i = 0; i < this._pendingLogs.length; i++)
-                if (this._pendingLogs[i].sender.alias != nick ||
-                    this._pendingLogs[i].message_type != type) {
+                if (this._pendingLogs[i].nick != nick ||
+                    this._pendingLogs[i].messageType != type) {
                     index = i;
                     break;
                 }
@@ -524,8 +525,7 @@ const ChatView = new Lang.Class({
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
         for (let i = 0; i < pending.length; i++) {
-            let message = this._createMessage(pending[i]);
-            this._insertMessage(iter, message, state);
+            this._insertMessage(iter, pending[i], state);
 
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
