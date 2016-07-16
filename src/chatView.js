@@ -477,6 +477,24 @@ const ChatView = new Lang.Class({
         this._insertPendingLogs();
     },
 
+    _createMessage: function(source) {
+        if (source instanceof Tp.Message) {
+            let [text, ] = source.to_text();
+            return { nick: source.sender.alias,
+                     text: text,
+                     timestamp: source.get_sent_timestamp() ||
+                                source.get_received_timestamp(),
+                     messageType: source.get_message_type() };
+        } else if (source instanceof Tpl.Event) {
+            return { nick: source.sender.alias,
+                     text: source.message,
+                     timestamp: source.timestamp,
+                     messageType: source.get_message_type() };
+        }
+
+        throw new Error('Cannot create message from source ' + source);
+    },
+
     _insertPendingLogs: function() {
         if (this._pendingLogs.length == 0)
             return;
@@ -504,10 +522,7 @@ const ChatView = new Lang.Class({
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
         for (let i = 0; i < pending.length; i++) {
-            let message = { nick: pending[i].sender.alias,
-                            text: pending[i].message,
-                            timestamp: pending[i].timestamp,
-                            messageType: pending[i].get_message_type() };
+            let message = this._createMessage(pending[i]);
             this._insertMessage(iter, message, state);
 
             if (!iter.is_end() || i < pending.length - 1)
@@ -1141,18 +1156,9 @@ const ChatView = new Lang.Class({
     },
 
     _insertTpMessage: function(tpMessage) {
-        let [text, flags] = tpMessage.to_text();
-
-        let message = { nick: tpMessage.sender.alias,
-                        text: text,
-                        messageType: tpMessage.get_message_type() };
-
-        let timestamp = tpMessage.get_sent_timestamp();
-        if (!timestamp)
-            timestamp = tpMessage.get_received_timestamp();
-        message.timestamp = timestamp;
-
-        let shouldHighlight = this._room.should_highlight_message(message.nick, text);
+        let message = this._createMessage(tpMessage);
+        let shouldHighlight = this._room.should_highlight_message(message.nick,
+                                                                  message.text);
 
         this._ensureNewLine();
 
