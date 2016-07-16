@@ -334,6 +334,14 @@ const UserDetails = new Lang.Class({
 const UserPopover = new Lang.Class({
     Name: 'UserPopover',
     Extends: Gtk.Popover,
+    Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
+    InternalChildren: ['userPopoverVBox',
+                       'userPopoverHeaderHBox',
+                       'userPopoverInfoVBox',
+                       'nickLabel',
+                       'statusLabel',
+                       'notifyButton',
+                       'userDetails'],
 
     _init: function(params) {
         this._room = params.room;
@@ -346,33 +354,12 @@ const UserPopover = new Lang.Class({
 
         this._app = Gio.Application.get_default();
 
-        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0, ellipsize: Pango.EllipsizeMode.END, max_width_chars: MAX_USERS_WIDTH_CHARS });
-        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0, use_markup: true });
-
-        this._headervbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, halign: Gtk.Align.FILL });
-        this._headervbox.add(this._nickLabel);
-        this._headervbox.add(this._statusLabel);
-
-        this._hbox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, halign: Gtk.Align.FILL, margin: 9 });
-        this._hbox.add(this._headervbox);
-
-        this._notifyButton = new Gtk.ToggleButton({ image: new Gtk.Image({ icon_name: 'alarm-symbolic' }), halign: Gtk.Align.END, hexpand: true });
         this._notifyButton.bind_property('sensitive', this._notifyButton, 'visible', 0);
 
-        this._hbox.add(this._notifyButton);
-
-
-        this._userDetails = new UserDetails();
         this.bind_property('visible', this._userDetails, 'expanded', 0);
         this._notifyButton.bind_property('active', this._userDetails, 'notifications-enabled', GObject.BindingFlags.SYNC_CREATE);
 
-        this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this._vbox.add(this._hbox);
-        this._vbox.add(this._userDetails);
-
-        this.add(this._vbox);
-
-        this._vbox.show_all();
+        this.show_all();
     },
 
     set nickname(nickname) {
