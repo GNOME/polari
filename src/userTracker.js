@@ -221,10 +221,6 @@ const UserTracker = new Lang.Class({
         this._untrackMember(this._globalContactMapping, oldMember, room);
         this._trackMember(this._roomMapping.get(room)._contactMapping, newMember, room);
         this._trackMember(this._globalContactMapping, newMember, room);
-
-        /*TODO: is this needed here?*/
-        if (this.isUserWatched(newMember.alias, newMember.get_account().get_display_name()))
-            this.emitWatchedUserNotification(room, newMember);
     },
 
     _onMemberDisconnected: function(room, member, message) {
@@ -253,9 +249,6 @@ const UserTracker = new Lang.Class({
 
         this._trackMember(this._roomMapping.get(room)._contactMapping, member, room);
         this._trackMember(this._globalContactMapping, member, room);
-
-        if (this.isUserWatched(member.alias, member.get_account().get_display_name()))
-            this.emitWatchedUserNotification(room, member);
     },
 
     _onMemberLeft: function(room, member, message) {
@@ -277,6 +270,13 @@ const UserTracker = new Lang.Class({
             if (map == this._globalContactMapping) {
                 this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
                 //log("[global status] user " + member.alias + " is globally online");
+
+                let notifyActionName = this.getNotifyActionName(member.alias);
+                let notifyAction = this._app.lookup_action(notifyActionName);
+                if (notifyAction.get_state().get_boolean()) {
+                    this.emitWatchedUserNotification(room, member);
+                    notifyAction.enabled = false;
+                }
             }
             else
                 //log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
@@ -285,10 +285,10 @@ const UserTracker = new Lang.Class({
                         handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.AVAILABLE);
                     else if (!handlerInfo.nickName)
                         handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
-
-            if (this._globalContactMapping == map)
-                this.emit("contacts-changed::" + baseNick);
         }
+
+        if (this._globalContactMapping == map)
+            this.emit("contacts-changed::" + baseNick);
     },
 
     _untrackMember: function(map, member, room) {
@@ -301,7 +301,7 @@ const UserTracker = new Lang.Class({
         if (indexToDelete > -1) {
             let removedMember = contacts.splice(indexToDelete, 1)[0];
 
-            if (contacts.length == 0)
+            if (contacts.length == 0) {
                 if (map == this._globalContactMapping)
                     this.emit("status-changed::" + baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
                 else
@@ -310,6 +310,13 @@ const UserTracker = new Lang.Class({
                             handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
                         else if (!handlerInfo.nickName)
                             handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.OFFLINE);
+
+                let notifyActionName = this.getNotifyActionName(member.alias);
+                let notifyAction = this._app.lookup_action(notifyActionName);
+                if (!notifyAction.get_state().get_boolean()) {
+                    notifyAction.enabled = true;
+                }
+            }
 
             if (this._globalContactMapping == map)
                 this.emit("contacts-changed::" + baseNick);
@@ -379,42 +386,6 @@ const UserTracker = new Lang.Class({
         this._roomMapping.get(room)._handlerMapping.delete(handlerID);
     },
 
-    addToWatchlist: function(user, network) {
-        let baseNick = Polari.util_get_basenick(user);
-
-        let isAlreadyWatched = this._watchlist.indexOf([baseNick, network]) != -1;
-
-        if (!isAlreadyWatched)
-            this._watchlist.push([baseNick, network]);
-        //this._watchlist.push([user, network]);
-    },
-
-    isUserWatched: function (user, network) {
-        let baseNick = Polari.util_get_basenick(user);
-
-        for (var i = 0; i < this._watchlist.length; i++) {
-            if (this._watchlist[i][0] == baseNick && this._watchlist[i][1] == network) {
-                return true;
-            }
-        }
-
-        return false;
-    },
-
-    popUserFromWatchlist: function (user, network) {
-        let baseNick = Polari.util_get_basenick(user);
-
-        let indexToDelete = -1;
-        for (var i = 0; i < this._watchlist.length; i++) {
-            if (this._watchlist[i][0] == baseNick && this._watchlist[i][1] == network) {
-                indexToDelete = i;
-            }
-        }
-
-        if (indexToDelete != -1)
-            this._watchlist.splice(indexToDelete, 1);
-    },
-
     emitWatchedUserNotification: function (room, member) {
         let notification = new Gio.Notification();
         notification.set_title("User is online");
@@ -428,13 +399,24 @@ const UserTracker = new Lang.Class({
 
         this._app.send_notification('watched-user-notification', notification);
 
-        this.popUserFromWatchlist(member.alias, member.get_account().get_display_name());
-
         let baseNick = Polari.util_get_basenick(member.alias);
         this.emit("notification-emitted::" + baseNick);
     },
 
     getNotifyActionName: function(nickName) {
-        return 'notify-user-' + this.account.get_path_suffix() + '-' + Polari.util_get_basenick(nickName);
+        let notifyActionName = 'notify-user-' + this._account.get_path_suffix() + '-' + Polari.util_get_basenick(nickName);
+
+        if (!this._app.lookup_action(notifyActionName)) {
+            let newNotifyActionProps = {
+                name: notifyActionName,
+                state: GLib.Variant.new('b', false)
+            };
+
+            let newNotifyAction = new Gio.SimpleAction(newNotifyActionProps);
+
+            this._app.add_action(newNotifyAction);
+        }
+
+        return notifyActionName;
     }
 });

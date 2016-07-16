@@ -123,7 +123,7 @@
             <child>
               <object class="GtkImage" id="notificationIcon">
                 <property name="icon-name">alarm-symbolic</property>
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="halign">start</property>
                 <property name="margin-left">0</property>
                 <style>
@@ -140,7 +140,7 @@
               <object class="GtkLabel" id="notificationLabel">
                 <property name="ellipsize">end</property>
                 <property name="halign">start</property>
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="margin-start">20</property>
                 <property name="hexpand">True</property>
                 <property name="use-markup">True</property>
