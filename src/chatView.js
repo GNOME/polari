@@ -498,30 +498,27 @@ const ChatView = new Lang.Class({
         throw new Error('Cannot create message from source ' + source);
     },
 
-    _insertPendingLogs: function() {
-        if (this._pendingLogs.length == 0)
-            return;
+    _getReadyLogs: function() {
+        if (this._logWalker.is_end())
+            return this._pendingLogs.splice(0);
 
-        let index = -1;
         let nick = this._pendingLogs[0].nick;
         let type = this._pendingLogs[0].messageType;
-        if (!this._logWalker.is_end()) {
-            for (let i = 0; i < this._pendingLogs.length; i++)
-                if (this._pendingLogs[i].nick != nick ||
-                    this._pendingLogs[i].messageType != type) {
-                    index = i;
-                    break;
-                }
-        } else {
-            index = 0;
-        }
+        for (let i = 0; i < this._pendingLogs.length; i++)
+            if (this._pendingLogs[i].nick != nick ||
+                this._pendingLogs[i].messageType != type)
+                return this._pendingLogs.splice(i);
+        return [];
+    },
 
-        if (index < 0) {
+    _insertPendingLogs: function() {
+        let pending = this._getReadyLogs();
+
+        if (!pending.length) {
             this._fetchBacklog();
             return;
         }
 
-        let pending = this._pendingLogs.splice(index);
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
         for (let i = 0; i < pending.length; i++) {
