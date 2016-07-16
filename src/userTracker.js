@@ -70,9 +70,6 @@ const UserTracker = new Lang.Class({
         },
         'contacts-changed': {
             flags: GObject.SignalFlags.DETAILED
-        },
-        'notification-emitted': {
-            flags: GObject.SignalFlags.DETAILED,
         }
     },
 
@@ -273,10 +270,14 @@ const UserTracker = new Lang.Class({
 
                 let notifyActionName = this.getNotifyActionName(member.alias);
                 let notifyAction = this._app.lookup_action(notifyActionName);
+
                 if (notifyAction.get_state().get_boolean()) {
                     this.emitWatchedUserNotification(room, member);
-                    notifyAction.enabled = false;
+                    /*change state so that the button is not pressed if it reappears again*/
+                    notifyAction.change_state(GLib.Variant.new('b', false));
                 }
+
+                notifyAction.enabled = false;
             }
             else
                 //log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
@@ -295,7 +296,7 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
 
         let contacts = map.get(baseNick) || [];
-        /*TODO: i really don't like this search. maybe use a for loop?*/
+        /*TODO: maybe use a for loop?*/
         let indexToDelete = contacts.map(c => c.alias + "|" + c._room.channelName).indexOf(member.alias + "|" + member._room.channelName);
 
         if (indexToDelete > -1) {
@@ -313,9 +314,8 @@ const UserTracker = new Lang.Class({
 
                 let notifyActionName = this.getNotifyActionName(member.alias);
                 let notifyAction = this._app.lookup_action(notifyActionName);
-                if (!notifyAction.get_state().get_boolean()) {
-                    notifyAction.enabled = true;
-                }
+
+                notifyAction.enabled = true;
             }
 
             if (this._globalContactMapping == map)
@@ -370,7 +370,7 @@ const UserTracker = new Lang.Class({
         return this._handlerCounter - 1;
     },
 
-    unwatchUser: function(room, nick, handlerID) {
+    unwatchUser: function(room, handlerID) {
         /*TODO: it wouldn't make sense to call _ensure() here, right?*/
 
         /*TODO: rewrite into a single conditional?*/
@@ -400,11 +400,12 @@ const UserTracker = new Lang.Class({
         this._app.send_notification('watched-user-notification', notification);
 
         let baseNick = Polari.util_get_basenick(member.alias);
-        this.emit("notification-emitted::" + baseNick);
     },
 
     getNotifyActionName: function(nickName) {
         let notifyActionName = 'notify-user-' + this._account.get_path_suffix() + '-' + Polari.util_get_basenick(nickName);
+
+        let isUserGloballyOnline = this.getNickStatus(nickName) == Tp.ConnectionPresenceType.AVAILABLE;
 
         if (!this._app.lookup_action(notifyActionName)) {
             let newNotifyActionProps = {
