@@ -321,7 +321,7 @@ const UserDetails = new Lang.Class({
 
         if (this._user == this._user.connection.self_contact) {
             this._messageButton.visible = false;
-            this._messageButton.sensitive = true; //TODO: does this even make sense?
+            this._messageButton.sensitive = true;
         } else {
             this._messageButton.visible = true;
             this._messageButton.sensitive = true;
@@ -400,12 +400,12 @@ const UserPopover = new Lang.Class({
 
         let labelStatus = "";
         if (!bestMatchingContact)
-            labelStatus = "<small>Offline</small>";
+            labelStatus = '<small>' + _("Offline") + '</small>';
         else
             if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE)
-                labelStatus = "<small>Online</small>";
+                labelStatus = '<small>' + _("Online") + '</small>';
             else
-                labelStatus = "<small>Available in another room.</small>";
+                labelStatus = '<small>' + _("Available in another room.") + '</small>';
 
         this._statusLabel.set_label(labelStatus);
 
