@@ -371,8 +371,6 @@ const UserTracker = new Lang.Class({
     },
 
     unwatchUser: function(room, handlerID) {
-        /*TODO: it wouldn't make sense to call _ensure() here, right?*/
-
         /*TODO: rewrite into a single conditional?*/
         if (!this._roomMapping)
             return;
