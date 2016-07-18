@@ -40,13 +40,15 @@ class ConnectionRow extends Gtk.ListBoxRow {
 
         super._init(params);
 
+        let name = NetworksManager.getDefault().getNetworkName(this._id);
+        this.name = `ConnectionRow ${name}`;
+
         this.bind_property('sensitive', this, 'activatable',
                            GObject.BindingFlags.SYNC_CREATE);
 
         let box = new Gtk.Box({ spacing: 12, margin: 12 });
         this.add(box);
 
-        let name = NetworksManager.getDefault().getNetworkName(this._id);
         box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
 
         let insensitiveDesc = new Gtk.Label({ label: _("Already added"),
