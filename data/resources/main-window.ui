@@ -272,7 +272,7 @@
                     <property name="vexpand">True</property>
                     <property name="hexpand">True</property>
                     <child>
-                  <object class="GtkListBox" id="results">
+                  <object class="Gjs_ResultList" id="results">
                     <property name="visible">True</property>
                     <property name="selection-mode">browse</property>
                         <style>
