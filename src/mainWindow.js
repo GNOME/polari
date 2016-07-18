@@ -216,13 +216,13 @@ const MainWindow = new Lang.Class({
         this._keywords = [];
         this._cancellable  = new Gio.Cancellable();
         this._widgetMap = {};
-        Utils.initActions(this,
-                         [
-                          { name: 'search-active',
-                            activate: this._toggleSearch,
-                            parameter_type: new GLib.VariantType('b'),
-                            state: new GLib.Variant('b', false) }
-                         ]);
+        // Utils.initActions(this,
+        //                  [
+        //                   { name: 'search-active',
+        //                     activate: this._toggleSearch,
+        //                     parameter_type: new GLib.VariantType('b'),
+        //                     state: new GLib.Variant('b', false) }
+        //                  ]);
         this.bind_property('search-active', this._search_active_button, 'active',
                            GObject.BindingFlags.SYNC_CREATE |
                            GObject.BindingFlags.BIDIRECTIONAL);
@@ -330,10 +330,10 @@ const MainWindow = new Lang.Class({
         let buffer = this._resultStack.get_buffer();
         let iter = buffer.get_end_iter();
         buffer.set_text("",-1);
-        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 25);
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 10);
         this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
         log("!");
-        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 25);
+        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 15);
         // Mainloop.timeout_add(500, Lang.bind(this,
         //     function() {
         //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
@@ -467,6 +467,11 @@ const MainWindow = new Lang.Class({
     },
 
     _handleSearchChanged: function(entry) {
+        let text = entry.get_text().replace(/^\s+|\s+$/g, '');
+        let app = this.application;
+        let action = app.lookup_action('search-terms');
+        action.change_state(GLib.Variant.new('s', text));
+        return;
         this._cancellable.cancel();
         this._cancellable.reset();
 //         if(text!='' && this._searchActive) {
