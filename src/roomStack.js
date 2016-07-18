@@ -188,7 +188,7 @@ class ChatPlaceholder extends Gtk.Overlay {
 var RoomView = GObject.registerClass(
 class RoomView extends Gtk.Overlay {
     _init(room, sizeGroup) {
-        super._init();
+        super._init({ name: `RoomView ${room.display_name}` });
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add(box);

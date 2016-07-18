@@ -23,7 +23,7 @@ var RoomRow = GObject.registerClass({
     InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter'],
 }, class RoomRow extends Gtk.ListBoxRow {
     _init(room) {
-        super._init();
+        super._init({ name: `RoomRow ${room.display_name}` });
 
         this._room = room;
         this._popover = null;
@@ -157,9 +157,13 @@ var RoomListHeader = GObject.registerClass({
         this._account = params.account;
         delete params.account;
 
+        params.name = `RoomListHeader ${this._account.display_name}`;
+
         this._app = Gio.Application.get_default();
 
         super._init(params);
+
+        this.popover.name = `ConnectionPopover ${this._account.display_name}`;
 
         this.popover.set_default_widget(this._popoverPassword);
         this.popover.connect('notify::visible', _onPopoverVisibleChanged);
