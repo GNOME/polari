@@ -433,7 +433,7 @@ class UserListRow extends Gtk.ListBoxRow {
     _init(user) {
         this._user = user;
 
-        super._init();
+        super._init({ name: `UserListRow ${user.alias}` });
 
         this._createWidget();
 
