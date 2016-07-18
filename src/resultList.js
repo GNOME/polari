@@ -170,6 +170,14 @@ const ResultList = new Lang.Class({
         this._cancellable  = new Gio.Cancellable();
     },
 
+    vfunc_row_selected: function(row) {
+        if(!row) return;
+        let rowSelectedAction = this._app.lookup_action('active-result-changed');
+        rowSelectedAction.activate(new GLib.Variant('(sus)', [row.uid, row.timestamp, row.channel]));
+        // if (row)
+        //     row.selected();
+    },
+
     _handleSearchChanged: function(group, actionName, value) {
         let text = value.deep_unpack();
 
@@ -200,7 +208,7 @@ const ResultList = new Lang.Class({
             row = this._widgetMap[uid];
             for (let j = 0; j < this._keywords.length; j++) {
                 // log(this._keywords[j]);
-                index = Math.min(index, message.indexOf(this._keywords[j]));
+            //    index = Math.min(index, message.indexOf(this._keywords[j]));
             //    message = message.replace( new RegExp( "(" + this._keywords[j] + ")" , 'gi' ),"<span font_weight='bold'>$1</span>");
                 // print(message);
             }
