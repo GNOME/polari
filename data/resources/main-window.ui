@@ -309,7 +309,7 @@
                       </packing>
                     </child>
                     <child>
-                        <object class="Gjs_ResultView" id="resultscroll">
+                        <object class="Gjs_ResultStack" id="resultscroll">
                             <property name="visible">True</property>
                         </object>
                         <packing>

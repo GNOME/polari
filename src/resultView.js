@@ -139,7 +139,7 @@ const ResultView = new Lang.Class({
     Name: 'ResultView',
     Extends: Gtk.ScrolledWindow,
 
-    _init: function() {
+    _init: function(uid, timestamp, channel) {
         //this.parent();
         print("HELLO");
         this.parent({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
@@ -152,6 +152,9 @@ const ResultView = new Lang.Class({
                               Gdk.EventMask.ENTER_NOTIFY_MASK);
         this.add(this._view);
         this.show_all();
+
+        this._logManager = LogManager.getDefault();
+        this._cancellable  = new Gio.Cancellable();
 
         this._active = false;
         this._toplevelFocus = false;
@@ -172,6 +175,7 @@ const ResultView = new Lang.Class({
         this.connect('screen-changed',
                      Lang.bind(this, this._updateIndent));
         this.connect('scroll-event', Lang.bind(this, this._onScroll));
+        // this.connect('edge-reached', Lang.bind(this, this._onEdgeReached));
 
         this.vadjustment.connect('changed',
                                  Lang.bind(this, this._updateScroll));
@@ -187,7 +191,81 @@ const ResultView = new Lang.Class({
         this._scrollBottom = adj.upper - adj.page_size;
 
         this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
+        this._rowactivated(channel, timestamp);
+    },
 
+    _rowactivated: function(channel, timestamp) {
+        this._cancellable.cancel();
+        this._cancellable.reset();
+        let sparql = (
+            'select nie:plainTextContent(?msg) as ?message ' +
+            '       if (nmo:from(?msg) = nco:default-contact-me,' +
+            '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
+            // FIXME: how do we handle the "real" message type?
+            '       %d as ?messageType ' +
+            '       ?timestamp ' +
+            '{ ?msg a nmo:IMMessage; ' +
+            '       nie:contentCreated ?timestamp; ' +
+            '       nmo:communicationChannel ?chan . ' +
+            'BIND( ?timestamp - %s as ?timediff ) . ' +
+            // FIXME: filter by account
+            '  filter (nie:title (?chan) = "%s" && ?timediff >= 0) ' +
+            '} order by asc (?timediff)'
+        ).format(channel,
+                 Tp.ChannelTextMessageType.NORMAL,
+                 timestamp,
+                 channel);
+        log(sparql);
+        let sparql1 = (
+            'select nie:plainTextContent(?msg) as ?message ' +
+            '       if (nmo:from(?msg) = nco:default-contact-me,' +
+            '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
+            // FIXME: how do we handle the "real" message type?
+            '       %d as ?messageType ' +
+            '       ?timestamp ' +
+            '{ ?msg a nmo:IMMessage; ' +
+            '       nie:contentCreated ?timestamp; ' +
+            '       nmo:communicationChannel ?chan . ' +
+            'BIND( %s - ?timestamp as ?timediff ) . ' +
+            // FIXME: filter by account
+            '  filter (nie:title (?chan) = "%s" && ?timediff > 0) ' +
+            '} order by asc (?timediff)'
+        ).format(channel,
+                 Tp.ChannelTextMessageType.NORMAL,
+                 timestamp,
+                 channel);
+        // let logManager = LogManager.getDefault();
+        // this._logWalker = logManager.walkEvents(row,
+        //                                         row.channel);
+        //
+        // this._fetchingBacklog = true;
+        // this._logWalker.getEvents(10,
+        //                           Lang.bind(this, this._onLogEventsReady));
+        // this._logManager.query(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+        // this._logManager.query(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        let buffer = this._view.get_buffer();
+        let iter = buffer.get_end_iter();
+        buffer.set_text("",-1);
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        log("!");
+        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        // Mainloop.timeout_add(500, Lang.bind(this,
+        //     function() {
+        //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        //         return GLib.SOURCE_REMOVE;
+        //     }));
+        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+        //print(this._endQuery.isClosed());
+
+        // Mainloop.timeout_add(5000, Lang.bind(this,
+        //     function() {
+        //         query.next(200,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        //     }));
+        // query.next(20,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+
+        //this._resultStack.buffer.insert(iter,row._content_label.label, -1);
+        // this._resultStack.label = row._content_label.label;
     },
 
     _createTags: function() {
@@ -473,14 +551,19 @@ const ResultView = new Lang.Class({
 
     _onScroll: function(w, event) {
         let [hasDir, dir] = event.get_scroll_direction();
-        if (hasDir && dir != Gdk.ScrollDirection.UP)
+        if (hasDir && (dir != Gdk.ScrollDirection.UP || dir != Gdk.ScrollDirection.DOWN) )
             return Gdk.EVENT_PROPAGATE;
 
         let [hasDeltas, dx, dy] = event.get_scroll_deltas();
-        if (hasDeltas && dy >= 0)
-            return Gdk.EVENT_PROPAGATE;
+        // print(dx, dy);
+        if (hasDeltas)
+            this._fetchBacklog();
+        // if (dir == Gdk.ScrollDirection.UP )
+        //     print("UP");
+        // else if (dir == Gdk.ScrollDirection.DOWN)
+        //     print("DOWN");
 
-        return this._fetchBacklog();
+        //return this._fetchBacklog();
     },
 
     _onKeyPress: function(w, event) {
@@ -510,8 +593,8 @@ const ResultView = new Lang.Class({
     },
 
     _fetchBacklog: function() {
-        if (this.vadjustment.value != 0 ||
-            this._logWalker.isEnd())
+        if (this.vadjustment.value != 0 &&
+            this.vadjustment.value != this._scrollBottom)
             return Gdk.EVENT_PROPAGATE;
 
         if (this._fetchingBacklog)
@@ -519,12 +602,17 @@ const ResultView = new Lang.Class({
 
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
-        Mainloop.timeout_add(500, Lang.bind(this,
-            function() {
-                this._logWalker.getEvents(NUM_LOG_EVENTS,
-                                          Lang.bind(this, this._onLogEventsReady));
-                return GLib.SOURCE_REMOVE;
-            }));
+
+        if (this.vadjustment.value == 0)
+            Mainloop.timeout_add(500, Lang.bind(this,
+                function() {
+                    this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+                }));
+        else
+            Mainloop.timeout_add(500, Lang.bind(this,
+                function() {
+                    this._endQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+                }));
         return Gdk.EVENT_STOP;
     },
 

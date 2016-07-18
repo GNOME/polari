@@ -118,7 +118,9 @@ const Application = new Lang.Class({
             accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']},
           { name: 'search-terms',
             parameter_type: GLib.VariantType.new('s'),
-            state: GLib.Variant.new('s', '') }
+            state: GLib.Variant.new('s', '') },
+          { name: 'active-result-changed',
+            parameter_type: GLib.VariantType.new('(sus)') }
         ];
         actionEntries.forEach(Lang.bind(this,
             function(actionEntry) {
