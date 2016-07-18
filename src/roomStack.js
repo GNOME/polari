@@ -24,7 +24,7 @@ const RoomStack = new Lang.Class({
         this.parent(params);
 
         this._sizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.VERTICAL });
-        this._rooms = {};
+        this._rooms = new Map();
 
         this._roomManager = ChatroomManager.getDefault();
 
@@ -52,7 +52,7 @@ const RoomStack = new Lang.Class({
     },
 
     _addView: function(id, view) {
-        this._rooms[id] = view;
+        this._rooms.set(id, view);
         this.add_named(view, id);
     },
 
@@ -61,8 +61,8 @@ const RoomStack = new Lang.Class({
     },
 
     _roomRemoved: function(roomManager, room) {
-        this._rooms[room.id].destroy();
-        delete this._rooms[room.id];
+        this._rooms.get(room.id).destroy();
+        this._rooms.delete(room.id);
     },
 
     _activeRoomChanged: function(manager, room) {
@@ -74,7 +74,7 @@ const RoomStack = new Lang.Class({
         if (!room)
             return;
         let sensitive = room && room.channel;
-        this._rooms[room.id].inputSensitive = sensitive;
+        this._rooms.get(room.id).inputSensitive = sensitive;
     }
 });
 
