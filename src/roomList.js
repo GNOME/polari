@@ -350,8 +350,8 @@ const RoomList = new Lang.Class({
         this.set_header_func(Lang.bind(this, this._updateHeader));
         this.set_sort_func(Lang.bind(this, this._sort));
 
-        this._placeholders = {};
-        this._roomRows = {};
+        this._placeholders = new Map();
+        this._roomRows = new Map();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
@@ -412,18 +412,16 @@ const RoomList = new Lang.Class({
 
     _onLeaveActivated: function(action, param) {
         let [id, ] = param.deep_unpack();
-        let row = this._roomRows[id];
+        let row = this._roomRows.get(id);
 
         this._moveSelectionFromRow(row);
         row.hide();
     },
 
     _rowToRoomIndex: function(index) {
-        let nPlaceholders = Object.keys(this._placeholders).filter(
-            Lang.bind(this, function(a) {
-                return this._placeholders[a].get_index() < index;
-            })).length;
-        return index - nPlaceholders;
+        let placeholders = [...this._placeholders.values()];
+        let nBefore = placeholders.filter(p => p.get_index() < index).length;
+        return index - nBefore;
     },
 
     _roomToRowIndex: function(index) {
@@ -472,7 +470,7 @@ const RoomList = new Lang.Class({
             return;
 
         let activeRoom = this._roomManager.getActiveRoom();
-        let current = this._roomRows[activeRoom.id];
+        let current = this._roomRows.get(activeRoom.id);
 
         if (current != row)
             return;
@@ -495,14 +493,14 @@ const RoomList = new Lang.Class({
     },
 
     _accountAdded: function(am, account) {
-        if (this._placeholders[account])
+        if (this._placeholders.has(account))
             return;
 
         let placeholder = new Gtk.ListBoxRow({ selectable: false,
                                                activatable: false });
         placeholder.account = account;
 
-        this._placeholders[account] = placeholder;
+        this._placeholders.set(account, placeholder);
         this.add(placeholder);
 
         placeholder.connect('notify::visible', Lang.bind(this,
@@ -514,56 +512,53 @@ const RoomList = new Lang.Class({
     },
 
     _accountRemoved: function(am, account) {
-        let placeholder = this._placeholders[account];
+        let placeholder = this._placeholders.get(account);
 
         if (!placeholder)
             return;
 
-        delete this._placeholders[account];
+        this._placeholders.delete(account);
         placeholder.destroy();
     },
 
     _roomAdded: function(roomManager, room) {
+        if (this._roomRows.has(room.id))
+            return;
+
         let row = new RoomRow(room);
         this.add(row);
-        this._roomRows[room.id] = row;
+        this._roomRows.set(room.id, row);
 
-        row.connect('destroy', Lang.bind(this,
-            function(w) {
-                delete this._roomRows[w.room.id];
-            }));
-        this._placeholders[room.account].hide();
+        row.connect('destroy', w => { this._roomRows.delete(w.room.id); });
+        this._placeholders.get(room.account).hide();
     },
 
     _roomRemoved: function(roomManager, room) {
-        let row = this._roomRows[room.id];
+        let row = this._roomRows.get(room.id);
         if (!row)
             return;
 
         this._moveSelectionFromRow(row);
         row.destroy();
-        delete this._roomRows[room.id];
+        this._roomRows.delete(room.id);
         this._updatePlaceholderVisibility(room.account);
     },
 
     _updatePlaceholderVisibility: function(account) {
         if (!account.enabled) {
-            this._placeholders[account].hide();
+            this._placeholders.get(account).hide();
             return;
         }
 
-        let ids = Object.keys(this._roomRows);
-        let hasRooms = ids.some(Lang.bind(this,
-            function(id) {
-                return this._roomRows[id].account == account;
-            }));
-        this._placeholders[account].visible = !hasRooms;
+        let rows = [...this._roomRows.values()];
+        let hasRooms = rows.some(r => r.account == account);
+        this._placeholders.get(account).visible = !hasRooms;
     },
 
     _activeRoomChanged: function(roomManager, room) {
         if (!room)
             return;
-        let row = this._roomRows[room.id];
+        let row = this._roomRows.get(room.id);
         if (!row)
             return;
 
@@ -604,8 +599,8 @@ const RoomList = new Lang.Class({
         let account1 = row1.account;
         let account2 = row2.account;
 
-        let hasRooms1 = !this._placeholders[account1].visible;
-        let hasRooms2 = !this._placeholders[account2].visible;
+        let hasRooms1 = !this._placeholders.get(account1).visible;
+        let hasRooms2 = !this._placeholders.get(account2).visible;
 
         if (hasRooms1 != hasRooms2)
             return hasRooms1 ? -1 : 1;
