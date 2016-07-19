@@ -347,12 +347,12 @@ const ChatView = new Lang.Class({
         }));
         this._onChannelChanged();
 
-        this._roomStatusChangedId =
+        this._nickStatusChangedId =
             this._userTracker.watchUser(this._room, null,
-                                        Lang.bind(this, this._onStatusChanged));
+                                        Lang.bind(this, this._onNickStatusChanged));
 
         this.connect('destroy', () => {
-            this._userTracker.unwatchUser(this._room, this._roomStatusChangedId);
+            this._userTracker.unwatchUser(this._room, this._nickStatusChangedId);
             this._userTracker = null;
         });
     },
@@ -1262,7 +1262,7 @@ const ChatView = new Lang.Class({
                               this._view.buffer.create_mark(null, iter, true));
     },
 
-    _onStatusChanged: function(nick, status) {
+    _onNickStatusChanged: function(nick, status) {
         let nickTagName = this._getNickTagName(nick);
         let nickTag = this._lookupTag(nickTagName);
 
