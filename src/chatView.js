@@ -1276,10 +1276,8 @@ const ChatView = new Lang.Class({
 
         if (!tag._popover)
             tag._popover = new UserList.UserPopover({ relative_to: this._view,
-                                                      margin: 0,
-                                                      room: this._room,
                                                       userTracker: this._userTracker,
-                                                      width_request: 280 });
+                                                      room: this._room });
 
         tag._popover.nickname = actualNickName;
 
