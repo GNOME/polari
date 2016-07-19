@@ -220,7 +220,7 @@ const ResultView = new Lang.Class({
                  Tp.ChannelTextMessageType.NORMAL,
                  timestamp,
                  channel);
-        log(sparql);
+        // log(sparql);
         let sparql1 = (
             'select nie:plainTextContent(?msg) as ?message ' +
             '?msg as ?id ' +
@@ -254,7 +254,7 @@ const ResultView = new Lang.Class({
         buffer.set_text("",-1);
         this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
         this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        log("!");
+        // log("!");
         this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
         // Mainloop.timeout_add(500, Lang.bind(this,
         //     function() {
@@ -375,7 +375,7 @@ const ResultView = new Lang.Class({
     },
 
     _onLogEventsReady: function(events) {
-        print(events);
+        // print(events);
         events = events.reverse();
         this._hideLoadingIndicator();
 
@@ -385,9 +385,9 @@ const ResultView = new Lang.Class({
     },
 
     _onLogEventsReady1: function(events) {
-        print(events);
+        // print(events);
         //events = events.reverse();
-        this._hideLoadingIndicator();
+        this._hideLoadingIndicator1();
 
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs1();
@@ -418,9 +418,9 @@ const ResultView = new Lang.Class({
         if (index < 0)
             return;*/
             index = 0;
-        print(this._pendingLogs);
+        // print(this._pendingLogs);
         let pending = this._pendingLogs.splice(index);
-        print(this._pendingLogs);
+        // print(this._pendingLogs);
         print(pending);
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_start_iter();
@@ -475,10 +475,10 @@ const ResultView = new Lang.Class({
         if (index < 0)
             return;*/
             index = 0;
-        print(this._pendingLogs);
+        // print(this._pendingLogs);
         let pending = this._pendingLogs.splice(index);
-        print(this._pendingLogs);
-        print(pending);
+        // print(this._pendingLogs);
+        // print(pending);
         let state = { lastNick: null, lastTimestamp: 0 };
         let iter = this._view.buffer.get_end_iter();
         for (let i = 0; i < pending.length; i++) {
@@ -612,18 +612,20 @@ const ResultView = new Lang.Class({
             return Gdk.EVENT_STOP;
 
         this._fetchingBacklog = true;
-        this._showLoadingIndicator();
 
-        if (this.vadjustment.value == 0)
+        if (this.vadjustment.value == 0) {
+            this._showLoadingIndicator();
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
                     this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady));
                 }));
-        else
+        } else {
+            this._showLoadingIndicator1();
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
                     this._endQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
                 }));
+        }
         return Gdk.EVENT_STOP;
     },
 
@@ -672,6 +674,32 @@ const ResultView = new Lang.Class({
 
         iter.forward_line();
         buffer.delete(buffer.get_start_iter(), iter);
+    },
+
+    _showLoadingIndicator1: function() {
+        let indicator = new Gtk.Image({ icon_name: 'content-loading-symbolic',
+                                        visible: true });
+
+        let buffer = this._view.buffer;
+        let iter = buffer.get_end_iter();
+        buffer.insert(iter, '\n', -1);
+        let anchor = buffer.create_child_anchor(iter);
+        this._view.add_child_at_anchor(indicator, anchor);
+
+        let end = buffer.get_end_iter();
+        iter.backward_line();
+        buffer.remove_all_tags(iter, end);
+        buffer.apply_tag(this._lookupTag('loading'), iter, end);
+    },
+
+    _hideLoadingIndicator1: function() {
+        let buffer = this._view.buffer;
+        let iter = buffer.get_end_iter();
+        // if (!iter.get_child_anchor())
+        //     return;
+
+        iter.backward_line();
+        buffer.delete(iter, buffer.get_end_iter());
     },
 
     _formatTimestamp: function(timestamp) {
@@ -756,7 +784,6 @@ const ResultView = new Lang.Class({
     _insertMessage: function(iter, message, state) {
         let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
         let needsGap = message.nick != state.lastNick || isAction;
-        print(message.id == this._uid);
         let isCentre = message.id == this._uid;
 
         if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
