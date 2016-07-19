@@ -139,7 +139,7 @@ const ResultView = new Lang.Class({
     Name: 'ResultView',
     Extends: Gtk.ScrolledWindow,
 
-    _init: function(uid, timestamp, channel) {
+    _init: function(uid, timestamp, channel, keywordsText) {
         //this.parent();
         print("HELLO");
         this.parent({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
@@ -156,6 +156,9 @@ const ResultView = new Lang.Class({
         this._logManager = LogManager.getDefault();
         this._cancellable  = new Gio.Cancellable();
 
+        this._keywords = keywordsText == '' ? [] : keywordsText.split(/\s+/);
+        this._keyregExp = new RegExp( '(' + this._keywords.join('|')+ ')', 'gi');
+        print(this._keyregExp);
         this._active = false;
         this._toplevelFocus = false;
         this._fetchingBacklog = false;
@@ -191,14 +194,16 @@ const ResultView = new Lang.Class({
         this._scrollBottom = adj.upper - adj.page_size;
 
         this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
-        this._rowactivated(channel, timestamp);
+        this._rowactivated(uid, channel, timestamp);
     },
 
-    _rowactivated: function(channel, timestamp) {
+    _rowactivated: function(uid, channel, timestamp) {
+        this._uid = uid;
         this._cancellable.cancel();
         this._cancellable.reset();
         let sparql = (
             'select nie:plainTextContent(?msg) as ?message ' +
+            '?msg as ?id ' +
             '       if (nmo:from(?msg) = nco:default-contact-me,' +
             '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
             // FIXME: how do we handle the "real" message type?
@@ -218,6 +223,7 @@ const ResultView = new Lang.Class({
         log(sparql);
         let sparql1 = (
             'select nie:plainTextContent(?msg) as ?message ' +
+            '?msg as ?id ' +
             '       if (nmo:from(?msg) = nco:default-contact-me,' +
             '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
             // FIXME: how do we handle the "real" message type?
@@ -385,6 +391,9 @@ const ResultView = new Lang.Class({
 
         this._pendingLogs = events.concat(this._pendingLogs);
         this._insertPendingLogs1();
+        let buffer = this._view.get_buffer();
+        let mark = buffer.get_mark('centre');
+        this._view.scroll_to_mark(mark, 0.0, true, 0, 0.5);
         this._fetchingBacklog = false;
     },
 
@@ -420,7 +429,8 @@ const ResultView = new Lang.Class({
                             text: pending[i].message,
                             timestamp: pending[i].timestamp,
                             messageType: pending[i].messageType,
-                            shouldHighlight: false };
+                            shouldHighlight: false,
+                            id: pending[i].id};
             this._insertMessage(iter, message, state);
             this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
 
@@ -476,7 +486,8 @@ const ResultView = new Lang.Class({
                             text: pending[i].message,
                             timestamp: pending[i].timestamp,
                             messageType: pending[i].messageType,
-                            shouldHighlight: false };
+                            shouldHighlight: false,
+                            id: pending[i].id};
             this._insertMessage(iter, message, state);
             this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
 
@@ -745,6 +756,8 @@ const ResultView = new Lang.Class({
     _insertMessage: function(iter, message, state) {
         let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
         let needsGap = message.nick != state.lastNick || isAction;
+        print(message.id == this._uid);
+        let isCentre = message.id == this._uid;
 
         if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
             let tags = [this._lookupTag('timestamp')];
@@ -788,26 +801,36 @@ const ResultView = new Lang.Class({
         if (message.shouldHighlight)
             tags.push(this._lookupTag('highlight'));
 
+        if (isCentre) {
+            let buffer = this._view.get_buffer();
+            buffer.create_mark('centre', iter, true);
+        }
+
+
         // let params = this._room.account.dup_parameters_vardict().deep_unpack();
         // let server = params.server.deep_unpack();
 
         let text = message.text;
+        let res = [], match;
+        while ((match = this._keyregExp.exec(text))){
+            res.push({ keyword: match[0], pos: match.index});
+        }
         // let channels = Utils.findChannels(text, server);
         // let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
         let pos = 0;
-        // for (let i = 0; i < urls.length; i++) {
-        //     let url = urls[i];
-        //     this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
-        //
-        //     let tag = this._createUrlTag(url.url);
-        //     this._view.get_buffer().tag_table.add(tag);
-        //
-        //     let name = url.name ? url.name : url.url;
-        //     this._insertWithTags(iter, name,
-        //                          tags.concat(this._lookupTag('url'), tag));
-        //
-        //     pos = url.pos + name.length;
-        // }
+         for (let i = 0; i < res.length; i++) {
+            let cur = res[i];
+            this._insertWithTags(iter, text.substr(pos, cur.pos - pos), tags);
+
+            // let tag = this._createUrlTag(url.url);
+            // this._view.get_buffer().tag_table.add(tag);
+
+            // let name = url.name ? url.name : url.url;
+            this._insertWithTags(iter, cur.keyword,
+                                 tags.concat(this._lookupTag('highlight')));
+
+            pos = cur.pos + cur.keyword.length;
+        }
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 

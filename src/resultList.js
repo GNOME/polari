@@ -167,13 +167,14 @@ const ResultList = new Lang.Class({
                           this._handleSearchChanged));
 
         this._keywords = [];
+        this._keywordsText = '';
         this._cancellable  = new Gio.Cancellable();
     },
 
     vfunc_row_selected: function(row) {
         if(!row) return;
         let rowSelectedAction = this._app.lookup_action('active-result-changed');
-        rowSelectedAction.activate(new GLib.Variant('(sus)', [row.uid, row.timestamp, row.channel]));
+        rowSelectedAction.activate(new GLib.Variant('(suss)', [row.uid, row.timestamp, row.channel, this._keywordsText]));
         // if (row)
         //     row.selected();
     },
@@ -186,6 +187,7 @@ const ResultList = new Lang.Class({
         this._cancellable.cancel();
         this._cancellable.reset();
 
+        this._keywordsText = text;
         this._keywords = text == '' ? [] : text.split(/\s+/);
         log(text);
         let query = ('select ?text as ?mms ?msg as ?id ?chan as ?chan ?timestamp as ?timestamp ' +
