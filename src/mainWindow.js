@@ -192,6 +192,7 @@ const MainWindow = new Lang.Class({
 
         let actionEntries = [
           { name: 'show-join-dialog',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             activate: Lang.bind(this, this._onShowJoinDialog),
             accels: ['<Primary>n'] },
           { name: 'leave-current-room',

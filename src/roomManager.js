@@ -184,7 +184,7 @@ const _RoomManager = new Lang.Class({
 
         let [present, ] = Tp.user_action_time_should_present(time);
         if (present && this._app.active_window)
-            this._app.active_window.active_room = room;
+            this._app.active_main_window.active_room = room;
 
         return room;
     },

@@ -126,6 +126,10 @@ const Application = new Lang.Class({
         this._demons = [];
     },
 
+    get active_main_window() {
+        return this.get_windows().filter(w => !w.single_room).shift();
+    },
+
     vfunc_startup: function() {
         this.parent();
 
