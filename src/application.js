@@ -120,7 +120,7 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('s'),
             state: GLib.Variant.new('s', '') },
           { name: 'active-result-changed',
-            parameter_type: GLib.VariantType.new('(sus)') }
+            parameter_type: GLib.VariantType.new('(suss)') }
         ];
         actionEntries.forEach(Lang.bind(this,
             function(actionEntry) {
