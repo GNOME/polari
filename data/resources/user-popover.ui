@@ -2,6 +2,8 @@
 <interface>
   <template class="Gjs_UserPopover" parent="GtkPopover">
     <property name="hexpand">False</property>
+    <property name="margin">0</property><!-- isn't this the default? -->
+    <property name="width-request">280</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
