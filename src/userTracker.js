@@ -328,19 +328,14 @@ const UserTracker = new Lang.Class({
     },
 
     getNotifyActionName: function(nickName) {
-        let notifyActionName = 'notify-user-' + this._account.get_path_suffix() + '-' + Polari.util_get_basenick(nickName);
+        let name = 'notify-user-' +
+                   this._account.get_path_suffix() + '-' +
+                   Polari.util_get_basenick(nickName);
 
-        let isUserGloballyOnline = this.getNickStatus(nickName) == Tp.ConnectionPresenceType.AVAILABLE;
-
-        if (!this._app.lookup_action(notifyActionName)) {
-            let newNotifyActionProps = {
-                name: notifyActionName,
-                state: GLib.Variant.new('b', false)
-            };
-
-            let newNotifyAction = new Gio.SimpleAction(newNotifyActionProps);
-
-            this._app.add_action(newNotifyAction);
+        if (!this._app.lookup_action(name)) {
+            let state = new GLib.Variant('b', false);
+            let action = new Gio.SimpleAction({ name: name, state: state });
+            this._app.add_action(action);
         }
 
         return notifyActionName;
