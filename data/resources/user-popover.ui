@@ -3,17 +3,17 @@
   <template class="Gjs_UserPopover" parent="GtkPopover">
     <property name="hexpand">False</property>
     <child>
-      <object class="GtkBox" id="userPopoverVBox">
+      <object class="GtkBox">
         <property name="orientation">vertical</property>
         <property name="visible">True</property>
         <child>
-          <object class="GtkBox" id="userPopoverHeaderHBox">
+          <object class="GtkBox">
             <property name="orientation">horizontal</property>
             <property name="visible">True</property>
             <property name="halign">fill</property>
             <property name="margin">9</property>
             <child>
-              <object class="GtkBox" id="userPopoverInfoVBox">
+              <object class="GtkBox">
                 <property name="orientation">vertical</property>
                 <property name="visible">True</property>
                 <property name="halign">fill</property>
