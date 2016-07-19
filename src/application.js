@@ -160,6 +160,9 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onStartClient) },
           { name: 'new-window',
             activate: Lang.bind(this, this._onNewWindow) },
+          { name: 'open-in-window',
+            parameter_type: GLib.VariantType.new('s'),
+            activate: Lang.bind(this, this._onOpenInWindow) },
           { name: 'help',
             activate: Lang.bind(this, this._onShowHelp),
             accels: ['F1'] },
@@ -536,6 +539,17 @@ const Application = new Lang.Class({
             uniquify_name: false
         };
         this._telepathyClient = new TelepathyClient.TelepathyClient(params);
+    },
+
+    _onOpenInWindow: function(action, param) {
+        let [roomId] = param.get_string();
+        let room = this._chatroomManager.getRoomById(roomId);
+        if (!room)
+            return;
+        let window = new MainWindow.MainWindow({ application: this,
+                                                 active_room: room,
+                                                 single_room: true });
+        window.present();
     },
 
     _onShowHelp: function() {

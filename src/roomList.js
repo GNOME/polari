@@ -132,6 +132,8 @@ const RoomRow = new Lang.Class({
             let isRoom = this._room.type == Tp.HandleType.ROOM;
             menu.append(isRoom ? _("Leave chatroom") : _("End conversation"),
                         'app.leave-room(("%s", ""))'.format(this._room.id));
+            menu.append(_("Open in Window"),
+                        'app.open-in-window("%s")'.format(this._room.id));
 
             this._popover = Gtk.Popover.new_from_model(this, menu);
             this._popover.connect('notify::visible', _onPopoverVisibleChanged);
