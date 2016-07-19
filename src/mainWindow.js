@@ -120,9 +120,6 @@ const MainWindow = new Lang.Class({
 
         this._addApplicationStyle();
 
-        this._rooms = {};
-        this._entries = {};
-
         this._room = null;
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         this._gtkSettings = Gtk.Settings.get_default();
