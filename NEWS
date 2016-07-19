@@ -1,3 +1,17 @@
+3.21.4 - "With a Little Dignity"
+================================
+* Improve text styling in chat log [Florian; #768381]
+* Fix auto-scrolling to bottom [Florian; #765129]
+* Restore highlights in messages loaded from logs [Florian; #768613]
+* Fix rooms in sidebar not updating their read/unread style [Florian; #768909]
+* Improve handling of initial pending messages [Florian; #768907]
+
+Contributors:
+  Lapo Calamandrei, Florian Müllner
+
+Translations:
+  Daniel Mustieles [es], Fabio Tomat [fur]
+
 3.21.3 - "Ben Dover"
 ====================
 * Add shortcuts to jump to top/bottom of the chat log [Danny; #755549]
