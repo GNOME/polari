@@ -121,7 +121,13 @@ const MainWindow = new Lang.Class({
                                                    'active-room-id',
                                                    'active-room-id',
                                                    GObject.ParamFlags.READABLE,
-                                                   '')
+                                                   ''),
+        'single-room': GObject.ParamSpec.boolean('single-room',
+                                                 'single-room',
+                                                 'single-room',
+                                                 GObject.ParamFlags.READWRITE |
+                                                 GObject.ParamFlags.CONSTRUCT_ONLY,
+                                                 false)
     },
     Signals: { 'active-room-state-changed': {} },
 
@@ -131,6 +137,7 @@ const MainWindow = new Lang.Class({
 
         this._room = null;
         this._lastActiveRoom = null;
+        this._singleRoom = false;
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
@@ -197,18 +204,25 @@ const MainWindow = new Lang.Class({
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
           { name: 'next-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             accels: ['<Primary>Page_Down', '<Alt>Down'] },
           { name: 'previous-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             accels: ['<Primary>Page_Up', '<Alt>Up'] },
           { name: 'first-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             accels: ['<Primary>Home'] },
           { name: 'last-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             accels: ['<Primary>End'] },
           { name: 'nth-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             parameter_type: GLib.VariantType.new('i') },
           { name: 'next-pending-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']},
           { name: 'previous-pending-room',
+            create_hook: Lang.bind(this, this._roomNavCreateHook),
             accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
         ];
         Utils.addActionEntries(this, 'win', actionEntries);
@@ -257,6 +271,18 @@ const MainWindow = new Lang.Class({
 
     get subtitle_visible() {
         return this._subtitle.length > 0;
+    },
+
+    get single_room() {
+        return this._singleRoom;
+    },
+
+    set single_room(value) {
+        if (this._singleRoom == value)
+            return;
+
+        this._singleRoom = value;
+        this.notify('single-room');
     },
 
     _onWindowStateEvent: function(widget, event) {
@@ -317,7 +343,7 @@ const MainWindow = new Lang.Class({
 
     _onAccountsChanged: function(am) {
         let hasAccounts = this._accountsMonitor.enabledAccounts.length > 0;
-        this._roomListRevealer.reveal_child = hasAccounts;
+        this._roomListRevealer.reveal_child = !this._singleRoom && hasAccounts;
     },
 
     _updateDecorations: function() {
@@ -451,6 +477,10 @@ const MainWindow = new Lang.Class({
                 action.change_state(GLib.Variant.new('b', false));
         });
         this._updateUserListAction(action);
+    },
+
+    _roomNavCreateHook: function(action) {
+        action.enabled = !this._singleRoom;
     },
 
     _updateUserListLabel: function() {
