@@ -30,21 +30,13 @@ const UserStatusMonitor = new Lang.Class({
     },
 
     _onAccountAdded: function(accountsMonitor, account) {
-        this._addUserTrackerForAccount(account);
-    },
-
-    _onAccountRemoved: function(accountsMonitor, account) {
-        this._removeUserTrackerForAccount(account);
-    },
-
-    _addUserTrackerForAccount: function(account) {
         if (this._userTrackersMaping.has(account))
             return;
 
         this._userTrackersMaping.set(account, new UserTracker(account));
     },
 
-    _removeUserTrackerForAccount: function(account) {
+    _onAccountRemoved: function(accountsMonitor, account) {
         if (!this._userTrackersMaping.has(account))
             return;
 
