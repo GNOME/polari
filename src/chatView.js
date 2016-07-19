@@ -298,7 +298,9 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
-        this._userStatusMonitor = UserTracker.getUserStatusMonitor();
+
+        let statusMonitor = UserTracker.getUserStatusMonitor();
+        this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
 
         this._room.account.connect('notify::nickname', Lang.bind(this,
             function() {
@@ -352,8 +354,14 @@ const ChatView = new Lang.Class({
         }));
         this._onChannelChanged();
 
-        /*where should we unwatch? int onChannelChanged when we don't have a channel?*/
-        this._roomWatchHandler = this._userStatusMonitor.getUserTrackerForAccount(this._room.account).watchUser(this._room, null, Lang.bind(this, this._onStatusChangedCallback));
+        this._roomStatusChangedId =
+            this._userTracker.watchUser(this._room, null,
+                                        Lang.bind(this, this._onStatusChanged));
+
+        this.connect('destroy', () => {
+            this._userTracker.unwatchUser(this._room, this._roomStatusChangedId);
+            this._userTracker = null;
+        });
     },
 
     _createTags: function() {
@@ -1177,7 +1185,8 @@ const ChatView = new Lang.Class({
                     nickTag = this._createNickTag(nickTagName);
                     buffer.get_tag_table().add(nickTag);
 
-                    this._updateNickTag(nickTag, this._userStatusMonitor.getUserTrackerForAccount(this._room.account).getNickStatus(message.nick));
+                    let status = this._userTracker.getNickStatus(message.nick));
+                    this._updateNickTag(nickTag, status);
                 }
                 tags.push(nickTag);
                 if (needsGap)
@@ -1215,17 +1224,7 @@ const ChatView = new Lang.Class({
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 
-    /*_createNickTag: function(nickName) {
-        let nickTagName = this._getNickTagName(nickName);
-
-        let tag = new Gtk.TextTag({ name: nickTagName });
-        //this._updateNickTag(tag, this._userStatusMonitor.getUserTrackerForAccount(this._room.account).getNickRoomStatus(nickName, this._room));
-        this._updateNickTag(tag, Tp.ConnectionPresenceType.OFFLINE);
-
-        return tag;
-    },*/
-
-    _onStatusChangedCallback: function(nick, status) {
+    _onStatusChanged: function(nick, status) {
         let nickTagName = this._getNickTagName(nick);
         let nickTag = this._lookupTag(nickTagName);
 
@@ -1244,7 +1243,6 @@ const ChatView = new Lang.Class({
 
     _createNickTag: function(name) {
         let tag = new ButtonTag({ name: name });
-        //tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userStatusMonitor.getUserTrackerForAccount(this._room.account), width_request: 280 });
         tag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
         return tag;
     },
@@ -1277,7 +1275,11 @@ const ChatView = new Lang.Class({
         let actualNickName = view.get_buffer().get_slice(start, end, false);
 
         if (!tag._popover)
-            tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userStatusMonitor.getUserTrackerForAccount(this._room.account), width_request: 280 });
+            tag._popover = new UserList.UserPopover({ relative_to: this._view,
+                                                      margin: 0,
+                                                      room: this._room,
+                                                      userTracker: this._userTracker,
+                                                      width_request: 280 });
 
         tag._popover.nickname = actualNickName;
 
