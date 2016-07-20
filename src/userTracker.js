@@ -75,7 +75,7 @@ const UserTracker = new Lang.Class({
         this.parent();
 
         /* not sure what "reference" in the name refers to, but it's weird
-         * to have that as a property if it's just used in one place 
+         * to have that as a property if it's just used in one place
          * somewhere else */
         this._referenceRoomSignals = [
             { name: 'notify::channel',
@@ -116,12 +116,6 @@ const UserTracker = new Lang.Class({
         this._roomMapping = new Map();
         this._handlerCounter = 0;
         this._app = Gio.Application.get_default();
-
-        /* Why would we need this? It doesn't appear to be used currently */
-        this._userStatusMonitor = getUserStatusMonitor();
-
-        /* Unused as well */
-        this._watchlist = [];
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
@@ -219,7 +213,7 @@ const UserTracker = new Lang.Class({
 
     _runHandlers: function(room, member, status) {
         let baseNick = Polari.util_get_basenick(member.alias);
-        for ([id, info] of this._roomMapping.get(room)._contactMapping)
+        for ([id, info] of this._roomMapping.get(room)._handlerMapping)
             if (!info.nickName || info.nickName == baseNick)
                 info.handler(member.alias, status);
     },
@@ -334,7 +328,7 @@ const UserTracker = new Lang.Class({
         this._ensureRoomMappingForRoom(room);
 
         this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
-            nickName: Polari.util_get_basenick(nick),
+            nickName: nick ? Polari.util_get_basenick(nick) : undefined,
             handler: callback
         });
 
@@ -401,6 +395,6 @@ const UserTracker = new Lang.Class({
             this._app.add_action(action);
         }
 
-        return notifyActionName;
+        return name;
     }
 });
