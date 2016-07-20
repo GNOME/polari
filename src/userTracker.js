@@ -73,26 +73,6 @@ const UserTracker = new Lang.Class({
     _init: function(account) {
         this.parent();
 
-        /* not sure what "reference" in the name refers to, but it's weird
-         * to have that as a property if it's just used in one place
-         * somewhere else */
-        this._referenceRoomSignals = [
-            { name: 'notify::channel',
-              handler: Lang.bind(this, this._onChannelChanged) },
-            { name: 'member-renamed',
-              handler: Lang.bind(this, this._onMemberRenamed) },
-            { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberLeft) },
-            { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberLeft) },
-            { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberLeft) },
-            { name: 'member-joined',
-              handler: Lang.bind(this, this._onMemberJoined) },
-            { name: 'member-left',
-              handler: Lang.bind(this, this._onMemberLeft) }
-        ];
-
         this._account = account;
 
         /* 'mapping' doesn't really add much if it's unclear what the
@@ -138,8 +118,25 @@ const UserTracker = new Lang.Class({
 
         let roomData = this._roomMapping.get(room);
 
+        let roomSignals = [
+            { name: 'notify::channel',
+              handler: Lang.bind(this, this._onChannelChanged) },
+            { name: 'member-renamed',
+              handler: Lang.bind(this, this._onMemberRenamed) },
+            { name: 'member-disconnected',
+              handler: Lang.bind(this, this._onMemberLeft) },
+            { name: 'member-kicked',
+              handler: Lang.bind(this, this._onMemberLeft) },
+            { name: 'member-banned',
+              handler: Lang.bind(this, this._onMemberLeft) },
+            { name: 'member-joined',
+              handler: Lang.bind(this, this._onMemberJoined) },
+            { name: 'member-left',
+              handler: Lang.bind(this, this._onMemberLeft) }
+        ];
+
         roomData._roomSignals = [];
-        this._referenceRoomSignals.forEach(Lang.bind(this, function(signal) {
+        roomSignals.forEach(Lang.bind(this, function(signal) {
             roomData._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
     },
