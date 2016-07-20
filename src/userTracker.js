@@ -22,9 +22,7 @@ const UserStatusMonitor = new Lang.Class({
     Name: 'UserStatusMonitor',
 
     _init: function() {
-        /* Typo: maping
-         * Though I'd just call it this._userTrackers */
-        this._userTrackersMaping = new Map();
+        this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._accountsMonitor.connect('account-added', Lang.bind(this, this._onAccountAdded));
@@ -32,22 +30,22 @@ const UserStatusMonitor = new Lang.Class({
     },
 
     _onAccountAdded: function(accountsMonitor, account) {
-        if (this._userTrackersMaping.has(account))
+        if (this._userTrackers.has(account))
             return;
 
-        this._userTrackersMaping.set(account, new UserTracker(account));
+        this._userTrackers.set(account, new UserTracker(account));
     },
 
     _onAccountRemoved: function(accountsMonitor, account) {
-        if (!this._userTrackersMaping.has(account))
+        if (!this._userTrackers.has(account))
             return;
 
-        this._userTrackersMaping.delete(account);
+        this._userTrackers.delete(account);
     },
 
     getUserTrackerForAccount: function(account) {
-        if (this._userTrackersMaping.has(account))
-            return this._userTrackersMaping.get(account);
+        if (this._userTrackers.has(account))
+            return this._userTrackers.get(account);
         return null;
     }
 });
