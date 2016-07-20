@@ -60,10 +60,6 @@ const UserTracker = new Lang.Class({
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]
         },
-        /* By convention, detailed signals should also pass whatever
-         * its detail is in the params (we're stretching it a bit
-         * by using the baseNick in details but passing the actual
-         * nick) */
         'contacts-changed': {
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING]
@@ -75,11 +71,7 @@ const UserTracker = new Lang.Class({
 
         this._account = account;
 
-        /* 'mapping' doesn't really add much if it's unclear what the
-         * map actually is (the name is just the 'value' part of the
-         * key => value nature of maps).
-         * Maybe this._baseNickContacts? */
-        this._globalContactMapping = new Map();
+        this._baseNickContacts = new Map();
         /* This one's trickier, as the content is a bit random, and
          * _roomStuff isn't a great name :-)
          * IMHO we need to figure something out though, as the current
@@ -225,7 +217,7 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
         let status = Tp.ConnectionPresenceType.AVAILABLE;
 
-        let map = this._globalContactMapping;
+        let map = this._baseNickContacts;
         if (this._pushMember(map, baseNick, member) == 1) {
             this.emit("status-changed::" + baseNick, member.alias, status);
 
@@ -261,7 +253,7 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
         let status = Tp.ConnectionPresenceType.OFFLINE;
 
-        let map = this._globalContactMapping;
+        let map = this._baseNickContacts;
         let [found, nContacts] = this._popMember(map, baseNick, member);
         if (found) {
             if (nContacts == 0) {
@@ -284,7 +276,7 @@ const UserTracker = new Lang.Class({
     getNickStatus: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
-        let contacts = this._globalContactMapping.get(baseNick) || [];
+        let contacts = this._baseNickContacts.get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
@@ -292,7 +284,7 @@ const UserTracker = new Lang.Class({
     lookupContact: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
-        let contacts = this._globalContactMapping.get(baseNick) || [];
+        let contacts = this._baseNickContacts.get(baseNick) || [];
 
         if (contacts.length == 0)
             return null;
