@@ -269,6 +269,16 @@ const UserTracker = new Lang.Class({
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
+    getNickRoomStatus: function(nickName, room) {
+        let baseNick = Polari.util_get_basenick(nickName);
+
+        this._ensureRoomMappingForRoom(room);
+
+        let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
+        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
+                                    : Tp.ConnectionPresenceType.AVAILABLE;
+    },
+
     lookupContact: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
@@ -282,17 +292,6 @@ const UserTracker = new Lang.Class({
                 return contacts[i];
 
         return contacts[0];
-    },
-
-    /* Nit: It would make sense to move that up right below getNickStatus() */
-    getNickRoomStatus: function(nickName, room) {
-        let baseNick = Polari.util_get_basenick(nickName);
-
-        this._ensureRoomMappingForRoom(room);
-
-        let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
-        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
-                                    : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
     /* Not sure about that name, it sounds a bit googley/big brother;
