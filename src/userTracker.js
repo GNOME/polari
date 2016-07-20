@@ -142,11 +142,7 @@ const UserTracker = new Lang.Class({
         roomData._roomSignals = [];
     },
 
-    /* personally I find over-specific variable names like "emittingRoom"
-     * more distracting than helpful - "oh, it's not just called 'room',
-     * what is special about it?". Calling it roomThatEmittedNotifyChannelSignal
-     * would clarify that, but meh ... */
-    _onChannelChanged: function(emittingRoom) {
+    _onChannelChanged: function(room) {
         /* You can save one level of indentation by doing:
 
         if (!room.channel) {
@@ -155,21 +151,21 @@ const UserTracker = new Lang.Class({
         }
         */
 
-        if (emittingRoom.channel) {
+        if (room.channel) {
             let members;
-            if (emittingRoom.type == Tp.HandleType.ROOM)
-                members = emittingRoom.channel.group_dup_members_contacts();
+            if (room.type == Tp.HandleType.ROOM)
+                members = room.channel.group_dup_members_contacts();
             else
-                members = [emittingRoom.channel.connection.self_contact, emittingRoom.channel.target_contact];
+                members = [room.channel.connection.self_contact, room.channel.target_contact];
 
             /*TODO: is this needed here?*/
-            this._ensureRoomMappingForRoom(emittingRoom);
+            this._ensureRoomMappingForRoom(room);
 
-            /*keep track of initial members in the emittingRoom, both locally and
+            /*keep track of initial members in the room, both locally and
             globally*/
-            members.forEach(m => { this._trackMember(m, emittingRoom); });
+            members.forEach(m => { this._trackMember(m, room); });
         } else {
-            this._clearUsersFromRoom(emittingRoom);
+            this._clearUsersFromRoom(room);
         }
     },
 
