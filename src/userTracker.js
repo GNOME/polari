@@ -294,12 +294,7 @@ const UserTracker = new Lang.Class({
         return contacts[0];
     },
 
-    /* Not sure about that name, it sounds a bit googley/big brother;
-     * maybe watchUserStatus()? But then, the user is optional and the
-     * room is not afaics, so maybe use watchRoomStatus() instead?
-     * (Side note: If a method is called watchUser(), I'd expect the
-     *  user parameter to be the first one) */
-    watchUser: function(room, nick, callback) {
+    watchRoomStatus: function(room, nick, callback) {
         this._ensureRoomMappingForRoom(room);
 
         this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
@@ -318,7 +313,7 @@ const UserTracker = new Lang.Class({
         return this._handlerCounter - 1;
     },
 
-    unwatchUser: function(room, handlerID) {
+    unwatchRoomStatus: function(room, handlerID) {
         /*TODO: rewrite into a single conditional?*/
         if (!this._roomMapping)
             return;
