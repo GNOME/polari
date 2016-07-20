@@ -65,7 +65,8 @@ const UserTracker = new Lang.Class({
          * by using the baseNick in details but passing the actual
          * nick) */
         'contacts-changed': {
-            flags: GObject.SignalFlags.DETAILED
+            flags: GObject.SignalFlags.DETAILED,
+            param_types: [GObject.TYPE_STRING]
         }
     },
 
@@ -247,7 +248,7 @@ const UserTracker = new Lang.Class({
         if (this._pushMember(roomMap, baseNick, member) == 1)
             this._runHandlers(room, member, status);
 
-        this.emit("contacts-changed::" + baseNick);
+        this.emit("contacts-changed::" + baseNick, member.alias);
     },
 
     _popMember: function(map, baseNick, member) {
@@ -269,7 +270,7 @@ const UserTracker = new Lang.Class({
             if (nContacts == 0) {
                 this.emit("status-changed::" + baseNick, member.alias, status);
             }
-            this.emit("contacts-changed::" + baseNick);
+            this.emit("contacts-changed::" + baseNick, member.alias);
 
             let notifyActionName = this.getNotifyActionName(member.alias);
             let notifyAction = this._app.lookup_action(notifyActionName);
