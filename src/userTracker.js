@@ -143,30 +143,22 @@ const UserTracker = new Lang.Class({
     },
 
     _onChannelChanged: function(room) {
-        /* You can save one level of indentation by doing:
-
         if (!room.channel) {
             this._clearUsersFromRoom(room);
             return;
         }
-        */
 
-        if (room.channel) {
-            let members;
-            if (room.type == Tp.HandleType.ROOM)
-                members = room.channel.group_dup_members_contacts();
-            else
-                members = [room.channel.connection.self_contact, room.channel.target_contact];
+        let members;
+        if (room.type == Tp.HandleType.ROOM)
+            members = room.channel.group_dup_members_contacts();
+        else
+            members = [room.channel.connection.self_contact, room.channel.target_contact];
 
-            /*TODO: is this needed here?*/
-            this._ensureRoomMappingForRoom(room);
+        this._ensureRoomMappingForRoom(room);
 
-            /*keep track of initial members in the room, both locally and
-            globally*/
-            members.forEach(m => { this._trackMember(m, room); });
-        } else {
-            this._clearUsersFromRoom(room);
-        }
+        /*keep track of initial members in the room, both locally and
+        globally*/
+        members.forEach(m => { this._trackMember(m, room); });
     },
 
     _clearUsersFromRoom: function(room) {
