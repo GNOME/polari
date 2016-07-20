@@ -399,13 +399,13 @@ const UserPopover = new Lang.Class({
          *  - Convention is to use 'id', not 'signal'
          *  - maybe this._roomStatusChangedId is clearer? */
         if (this._localStatusChangedSignal)
-            this._userTracker.unwatchUser(this._room, this._localStatusChangedSignal);
+            this._userTracker.unwatchRoomStatus(this._room, this._localStatusChangedSignal);
         /* this desparately needs line breaks, sth like
         this._localStatusChangedId =
-            this._userTracker.watchUser(this._room, this._nickname,
+            this._userTracker.watchRoomStatus(this._room, this._nickname,
                                         Lang.bind(this, this._onNickStatusChanged));
         */
-        this._localStatusChangedSignal = this._userTracker.watchUser(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
+        this._localStatusChangedSignal = this._userTracker.watchRoomStatus(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
 
         /* Dto. */
         if (this._globalStatusChangedSignal)

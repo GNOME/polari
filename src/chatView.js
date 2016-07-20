@@ -348,11 +348,11 @@ const ChatView = new Lang.Class({
         this._onChannelChanged();
 
         this._nickStatusChangedId =
-            this._userTracker.watchUser(this._room, null,
+            this._userTracker.watchRoomStatus(this._room, null,
                                         Lang.bind(this, this._onNickStatusChanged));
 
         this.connect('destroy', () => {
-            this._userTracker.unwatchUser(this._room, this._nickStatusChangedId);
+            this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
             this._userTracker = null;
         });
     },
