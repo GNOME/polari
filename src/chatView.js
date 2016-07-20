@@ -776,15 +776,6 @@ const ChatView = new Lang.Class({
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
-    _onNickStatusChanged: function(tracker, nickName, status) {
-        let nickTag = this._lookupTag(this._getNickTagName(nickName));
-
-        if (!nickTag)
-            return;
-
-        this._updateNickTag(nickTag, status);
-    },
-
     _onChannelChanged: function() {
         if (this._channel == this._room.channel)
             return;
@@ -1185,7 +1176,7 @@ const ChatView = new Lang.Class({
                     nickTag = this._createNickTag(nickTagName);
                     buffer.get_tag_table().add(nickTag);
 
-                    let status = this._userTracker.getNickStatus(message.nick));
+                    let status = this._userTracker.getNickStatus(message.nick);
                     this._updateNickTag(nickTag, status);
                 }
                 tags.push(nickTag);
