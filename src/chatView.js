@@ -359,7 +359,10 @@ const ChatView = new Lang.Class({
                                         Lang.bind(this, this._onNickStatusChanged));
 
         this.connect('destroy', () => {
-            this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
+            if (this._nickStatusChangedId > 0)
+                this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
+            this._nickStatusChangedId = 0;
+
             this._userTracker = null;
         });
     },

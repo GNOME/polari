@@ -297,12 +297,10 @@ const UserTracker = new Lang.Class({
     watchRoomStatus: function(room, nick, callback) {
         this._ensureRoomMappingForRoom(room);
 
-        this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
+        this._roomMapping.get(room)._handlerMapping.set(++this._handlerCounter, {
             nickName: nick ? Polari.util_get_basenick(nick) : undefined,
             handler: callback
         });
-
-        this._handlerCounter++;
 
         /* it would be good to follow gsignal semantics and not use 0 as
          * a valid handler ID - see the pattern of
@@ -310,7 +308,7 @@ const UserTracker = new Lang.Class({
                    this._someObject.disconnect(this._someSignalId);
                this._someSignalId = 0;
          * used all over the place */
-        return this._handlerCounter - 1;
+        return this._handlerCounter;
     },
 
     unwatchRoomStatus: function(room, handlerID) {
