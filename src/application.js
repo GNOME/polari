@@ -28,7 +28,9 @@ const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
-    Signals: { 'prepare-shutdown': {},
+    Signals: { 'room-attached': { param_types: [Polari.Room.$gtype] },
+               'room-detached': { param_types: [Polari.Room.$gtype] },
+               'prepare-shutdown': {},
                'room-focus-changed': {} },
 
     _init: function() {
@@ -553,6 +555,9 @@ const Application = new Lang.Class({
         let window = new MainWindow.MainWindow({ application: this,
                                                  active_room: room,
                                                  single_room: true });
+        window.connect('destroy', () => { this.emit('room-attached', room); });
+        this.emit('room-detached', room);
+
         window.present();
     },
 
