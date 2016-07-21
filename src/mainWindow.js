@@ -126,11 +126,17 @@ const MainWindow = new Lang.Class({
                                                       false),
         'search-active': GObject.ParamSpec.boolean(
             'search-active', '', '',
-            GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE, false)
+            GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE, false),
+        'mode' : GObject.ParamSpec.string('mode',
+                                          'mode',
+                                          'mode',
+                                          GObject.ParamFlags.READABLE,
+                                          'chat')
     },
 
     _init: function(params) {
         this._subtitle = '';
+        this._mode = 'chat';
         params.show_menubar = false;
 
         this.parent(params);
@@ -241,14 +247,14 @@ const MainWindow = new Lang.Class({
         this._search_active_button.connect(
             'toggled',
             Lang.bind(this, function() {
-                if (this._mainStack.visible_child_name == 'image') {
-                    this._mainStack.visible_child_name = 'roomList';
-                    this._mainStack1.visible_child_name = 'room';
-                }
-                else {
-                    this._mainStack.visible_child_name = 'image';
-                    this._mainStack1.visible_child_name = 'result';
-                }
+                // if (this._mainStack.visible_child_name == 'image') {
+                //     this._mainStack.visible_child_name = 'roomList';
+                //     this._mainStack1.visible_child_name = 'room';
+                // }
+                // else {
+                //     this._mainStack.visible_child_name = 'image';
+                //     this._mainStack1.visible_child_name = 'result';
+                // }
                 this._searchisActive = !this._searchisActive;
             }));
 
@@ -467,11 +473,21 @@ const MainWindow = new Lang.Class({
         return this._subtitle.length > 0;
     },
 
+    get mode() {
+        return this._mode;
+    },
+
     _handleSearchChanged: function(entry) {
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
         let app = this.application;
         let action = app.lookup_action('search-terms');
         action.change_state(GLib.Variant.new('s', text));
+        if(text!='') {
+            this._mode='search';
+        } else {
+            this._mode='chat';
+        }
+        this.notify('mode');
         return;
         this._cancellable.cancel();
         this._cancellable.reset();
