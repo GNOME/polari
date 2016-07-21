@@ -41,6 +41,7 @@
               <object class="GtkToggleButton" id="notifyButton">
                 <property name="hexpand">True</property>
                 <property name="halign">end</property>
+                <property name="valign">center</property>
                 <child>
                   <object class="GtkImage">
                     <property name="icon-name">alarm-symbolic</property>
