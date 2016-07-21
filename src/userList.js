@@ -483,7 +483,7 @@ const UserPopover = new Lang.Class({
         this._userDetails.nickname = this._nickname;
     },
 
-    _onNickStatusChanged: function(nickName, status) {
+    _onNickStatusChanged: function(baseNick, status) {
         this._updateContents();
     }
 });

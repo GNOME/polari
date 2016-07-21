@@ -191,7 +191,7 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
         for ([id, info] of this._roomMapping.get(room)._handlerMapping)
             if (!info.nickName || info.nickName == baseNick)
-                info.handler(member.alias, status);
+                info.handler(baseNick, status);
     },
 
     _pushMember: function(map, baseNick, member) {
@@ -207,7 +207,7 @@ const UserTracker = new Lang.Class({
 
         let map = this._baseNickContacts;
         if (this._pushMember(map, baseNick, member) == 1) {
-            this.emit("status-changed::" + baseNick, member.alias, status);
+            this.emit("status-changed::" + baseNick, baseNick, status);
 
             let notifyAction = this._app.lookup_action(this._getNotifyActionName(member.alias));
 
@@ -289,11 +289,11 @@ const UserTracker = new Lang.Class({
         return contacts[0];
     },
 
-    watchRoomStatus: function(room, nick, callback) {
+    watchRoomStatus: function(room, baseNick, callback) {
         this._ensureRoomMappingForRoom(room);
 
         this._roomMapping.get(room)._handlerMapping.set(++this._handlerCounter, {
-            nickName: nick ? Polari.util_get_basenick(nick) : undefined,
+            nickName: baseNick,
             handler: callback
         });
 

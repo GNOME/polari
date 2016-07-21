@@ -1215,8 +1215,8 @@ const ChatView = new Lang.Class({
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 
-    _onNickStatusChanged: function(nick, status) {
-        let nickTagName = this._getNickTagName(nick);
+    _onNickStatusChanged: function(baseNick, status) {
+        let nickTagName = this._getNickTagName(baseNick);
         let nickTag = this._lookupTag(nickTagName);
 
         if (!nickTag)
