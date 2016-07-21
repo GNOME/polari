@@ -200,10 +200,12 @@ const ResultList = new Lang.Class({
         let query = ('select ?text as ?mms ?msg as ?id ?chan as ?chan ?timestamp as ?timestamp ' +
                       'where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match "%s*" . ' +
                       '?msg nmo:communicationChannel ?channel. ?channel nie:title ?chan. ' +
-                      '?msg nie:contentCreated ?timestamp }'
+                      '?msg nie:contentCreated ?timestamp } order by desc (?timestamp)'
                      ).format(text);
         log(query);
-        this._logManager.query(query,this._cancellable,Lang.bind(this, this._handleResults));
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        this._endQuery.run(query,this._cancellable,Lang.bind(this, this._handleResults));
+        // this._logManager.query(query,this._cancellable,Lang.bind(this, this._handleResults));
     },
 
     _handleResults: function(events) {

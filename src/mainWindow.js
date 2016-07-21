@@ -25,6 +25,7 @@ const ResultStack = imports.resultStack;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
+const MIN_SEARCH_WIDTH = 4;
 
 const FixedSizeFrame = new Lang.Class({
     Name: 'FixedSizeFrame',
@@ -482,15 +483,18 @@ const MainWindow = new Lang.Class({
 
     _handleSearchChanged: function(entry) {
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
-        let app = this.application;
-        let action = app.lookup_action('search-terms');
-        action.change_state(GLib.Variant.new('s', text));
         if(text!='') {
             this._mode='search';
         } else {
             this._mode='chat';
         }
         this.notify('mode');
+        if (text.length < MIN_SEARCH_WIDTH) {
+            return;
+        }
+        let app = this.application;
+        let action = app.lookup_action('search-terms');
+        action.change_state(GLib.Variant.new('s', text));
         return;
         this._cancellable.cancel();
         this._cancellable.reset();
