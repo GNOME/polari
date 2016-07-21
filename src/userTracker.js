@@ -213,7 +213,7 @@ const UserTracker = new Lang.Class({
             let notifyAction = this._app.lookup_action(notifyActionName);
 
             if (notifyAction.get_state().get_boolean()) {
-                this.emitWatchedUserNotification(room, member);
+                this._emitNotification(room, member);
                 /*change state so that the button is not pressed if it reappears again*/
                 notifyAction.change_state(GLib.Variant.new('b', false));
             }
@@ -302,12 +302,6 @@ const UserTracker = new Lang.Class({
             handler: callback
         });
 
-        /* it would be good to follow gsignal semantics and not use 0 as
-         * a valid handler ID - see the pattern of
-               if (this._someSignalId > 0)
-                   this._someObject.disconnect(this._someSignalId);
-               this._someSignalId = 0;
-         * used all over the place */
         return this._handlerCounter;
     },
 
@@ -325,8 +319,7 @@ const UserTracker = new Lang.Class({
         this._roomMapping.get(room)._handlerMapping.delete(handlerID);
     },
 
-    /* overly long name again, should at the very least be private */
-    emitWatchedUserNotification: function (room, member) {
+    _emitNotification: function (room, member) {
         let notification = new Gio.Notification();
         notification.set_title(_("User is online"));
         notification.set_body(_("User %s is now online.").format(member.alias));

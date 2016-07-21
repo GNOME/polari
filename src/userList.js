@@ -362,6 +362,14 @@ const UserPopover = new Lang.Class({
                                          this._userDetails, 'notifications-enabled',
                                          GObject.BindingFlags.SYNC_CREATE);
 
+        this._roomStatusChangedId = 0;
+        this._globalStatusChangedId = 0;
+        this._contactsChangedId = 0;
+
+        this.connect('destroy', () => {
+            this.nickname = null;
+        });
+
         /* Noooo - this opens the popover!
          * Assuming all widgets in the .ui have
          *    <property name="visible">true</property>
@@ -370,10 +378,18 @@ const UserPopover = new Lang.Class({
     },
 
     set nickname(nickname) {
-        /* probably worth including a quick:
-              if (this._nickname == nickname)
-                  return;
-         */
+        if (this._nickname == nickname)
+            return;
+
+        if (this._nickname) {
+            this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
+            this._userTracker.disconnect(this._globalStatusChangedId);
+            this._userTracker.disconnect(this._contactsChangedId);
+        }
+
+        if (nickname == null)
+            return;
+
         this._nickname = nickname;
 
         let baseNick = Polari.util_get_basenick(nickname);
@@ -381,9 +397,7 @@ const UserPopover = new Lang.Class({
         /* Seeing this code, I think getNotifyActionName() should maybe
          * return the full name - it's a bit of an implementation detail
          * that the action is added to the application ... */
-        let notifyActionName  = this._userTracker.getNotifyActionName(this._nickname);
-        /* unused */
-        let notifyAction = this._app.lookup_action(notifyActionName);
+        let actionName  = this._userTracker.getNotifyActionName(this._nickname);
 
         /* As I generally try to keep lines within the 80 character limit,
          * I'll throw in:
@@ -391,43 +405,19 @@ const UserPopover = new Lang.Class({
         this._notifyButton.action_name = actionName;
          * as suggestion - the button property and tracker method name already
          * have 'notify' in there, no need to repeat that over and over */
-        this._notifyButton.action_name = 'app.' + notifyActionName;
+        this._notifyButton.action_name = 'app.' + actionName;
 
-        /* pointless comment */
-        /*these need to be disconnected when not used anymore*/
-        /* Nits:
-         *  - Convention is to use 'id', not 'signal'
-         *  - maybe this._roomStatusChangedId is clearer? */
-        if (this._localStatusChangedSignal > 0)
-            this._userTracker.unwatchRoomStatus(this._room, this._localStatusChangedSignal);
-        /* this desparately needs line breaks, sth like
-        this._localStatusChangedId =
+        this._roomStatusChangedId =
             this._userTracker.watchRoomStatus(this._room, this._nickname,
                                         Lang.bind(this, this._onNickStatusChanged));
-        */
-        this._localStatusChangedSignal = this._userTracker.watchRoomStatus(this._room, this._nickname, Lang.bind(this, this._onNickStatusChanged));
 
-        /* Dto. */
-        if (this._globalStatusChangedSignal)
-            this._userTracker.disconnect(this._globalStatusChangedSignal);
-        this._globalStatusChangedSignal = this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
+        this._globalStatusChangedId = this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
 
         this._updateContents();
 
-        /*disconnect when not needed anymore*/
-        if (this._contactsChangedSignal)
-            this._userTracker.disconnect(this._contactsChangedSignal);
-        this._contactsChangedSignal = this._userTracker.connect("contacts-changed::" + baseNick, () => {
+        this._contactsChangedId = this._userTracker.connect("contacts-changed::" + baseNick, () => {
             this._userDetails.user = this._userTracker.lookupContact(this._nickname);
         });
-
-        /* Another comment on signal handlers:
-         * It is good practice to initialize them to 0 in _init(), and - more
-         * importantly - you need to disconnect the handlers when the popover
-         * is destroyed, or else the handler will keep running while the
-         * user tracker still exists (it's per account, so if you just leave
-         * a room instead of closing polari altogether, that's the expcted
-         * case */
     },
 
     get nickname() {
