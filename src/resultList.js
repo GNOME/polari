@@ -11,6 +11,8 @@ const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 
+const MIN_SEARCH_WIDTH = 4;
+
 const ResultRow = new Lang.Class({
     Name: 'ResultRow',
     Extends: Gtk.ListBoxRow,
@@ -180,17 +182,21 @@ const ResultList = new Lang.Class({
     },
 
     _clearList: function() {
-        this.foreach(r => { r.destroy(); });
+        this.foreach(r => { r.hide(); });
+    },
+
+    _showList: function() {
+        this.foreach(r => { r.show(); });
     },
 
     _handleSearchChanged: function(group, actionName, value) {
         this._cancellable.cancel();
-        this._cancellable.reset();
-
+        // this._cancellable.reset();
+        this._cancellable  = new Gio.Cancellable();
         let text = value.deep_unpack();
+        this._clearList();
 
-        if(text == '') {
-            this._clearList();
+        if(text.length < MIN_SEARCH_WIDTH) {
             return;
         }
 
@@ -242,6 +248,8 @@ const ResultList = new Lang.Class({
             let row = this._widgetMap[events[i].id];
             this.add(row);
         }
+
+        this._showList();
     },
 
     _formatTimestamp: function(timestamp) {
