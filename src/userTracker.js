@@ -209,16 +209,12 @@ const UserTracker = new Lang.Class({
         if (this._pushMember(map, baseNick, member) == 1) {
             this.emit("status-changed::" + baseNick, member.alias, status);
 
-            let notifyActionName = this.getNotifyActionName(member.alias);
-            let notifyAction = this._app.lookup_action(notifyActionName);
+            let notifyAction = this._app.lookup_action(this._getNotifyActionName(member.alias));
 
-            if (notifyAction.get_state().get_boolean()) {
+            if (this._shouldNotifyNick(member.alias))
                 this._emitNotification(room, member);
-                /*change state so that the button is not pressed if it reappears again*/
-                notifyAction.change_state(GLib.Variant.new('b', false));
-            }
 
-            notifyAction.enabled = false;
+            this._setNotifyActionEnabled(member.alias, false);
         }
 
         let roomMap = this._roomMapping.get(room)._contactMapping;
@@ -249,10 +245,9 @@ const UserTracker = new Lang.Class({
             }
             this.emit("contacts-changed::" + baseNick, member.alias);
 
-            let notifyActionName = this.getNotifyActionName(member.alias);
-            let notifyAction = this._app.lookup_action(notifyActionName);
+            let notifyAction = this._app.lookup_action(this._getNotifyActionName(member.alias));
 
-            notifyAction.enabled = true;
+            this._setNotifyActionEnabled(member.alias, true);
         }
 
         let roomMap = this._roomMapping.get(room)._contactMapping;
@@ -345,17 +340,41 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
     },
 
+    _shouldNotifyNick: function(nickName) {
+        let actionName = this._getNotifyActionName(nickName);
+        let state = this._app.get_action_state(actionName);
+        return state ? state.get_boolean()
+                     : false;
+    },
+
+    _setNotifyActionEnabled: function(nickName, enabled) {
+        let name = this._getNotifyActionName(nickName);
+        let action = this._app.lookup_action(name);
+        if (action)
+            action.enabled = enabled;
+    },
+
+    _getNotifyActionName: function(nickName) {
+        return 'notify-user-' +
+               this._account.get_path_suffix() + '-' +
+               Polari.util_get_basenick(nickName);
+    },
+
     getNotifyActionName: function(nickName) {
-        let name = 'notify-user-' +
-                   this._account.get_path_suffix() + '-' +
-                   Polari.util_get_basenick(nickName);
+        let name = this._getNotifyActionName(nickName);
 
         if (!this._app.lookup_action(name)) {
             let state = new GLib.Variant('b', false);
             let action = new Gio.SimpleAction({ name: name, state: state });
+
+            action.connect('notify::enabled', () => {
+                if (!action.enabled)
+                    action.change_state(GLib.Variant.new('b', false));
+            });
+
             this._app.add_action(action);
         }
 
-        return name;
+        return 'app.' + name;
     }
 });

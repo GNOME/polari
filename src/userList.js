@@ -394,24 +394,14 @@ const UserPopover = new Lang.Class({
 
         let baseNick = Polari.util_get_basenick(nickname);
 
-        /* Seeing this code, I think getNotifyActionName() should maybe
-         * return the full name - it's a bit of an implementation detail
-         * that the action is added to the application ... */
-        let actionName  = this._userTracker.getNotifyActionName(this._nickname);
-
-        /* As I generally try to keep lines within the 80 character limit,
-         * I'll throw in:
         let actionName = this._userTracker.getNotifyActionName(this._nickname);
         this._notifyButton.action_name = actionName;
-         * as suggestion - the button property and tracker method name already
-         * have 'notify' in there, no need to repeat that over and over */
-        this._notifyButton.action_name = 'app.' + actionName;
 
         this._roomStatusChangedId =
             this._userTracker.watchRoomStatus(this._room, this._nickname,
                                         Lang.bind(this, this._onNickStatusChanged));
 
-        this._globalStatusChangedId = this._userTracker.connect("status-changed::"+this._nickname, Lang.bind(this, this._updateContents));
+        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + baseNick, Lang.bind(this, this._updateContents));
 
         this._updateContents();
 
