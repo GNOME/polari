@@ -102,18 +102,14 @@ const MainWindow = new Lang.Class({
     InternalChildren: ['titlebarRight',
                        'titlebarLeft',
                        'joinButton',
-                       'search-active-button',
-                        'search-bar',
-                        'search-entry',
+                       'searchButton',
+                       'searchBar',
+                       'searchEntry',
                        'showUserListButton',
                        'userListPopover',
                        'roomListRevealer',
                        'overlay',
-                       'roomStack',
-                       'mainStack',
-                       'results',
-                       'mainStack1',
-                       'resultscroll'],
+                       'roomStack'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -125,9 +121,12 @@ const MainWindow = new Lang.Class({
                                                       'subtitle-visible',
                                                       GObject.ParamFlags.READABLE,
                                                       false),
-        'search-active': GObject.ParamSpec.boolean(
-            'search-active', '', '',
-            GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE, false),
+        'search-active': GObject.ParamSpec.boolean('search-active',
+                                                   'search-active',
+                                                   'search-active',
+                                                   GObject.ParamFlags.READABLE |
+                                                   GObject.ParamFlags.WRITABLE,
+                                                   false),
         'mode' : GObject.ParamSpec.string('mode',
                                           'mode',
                                           'mode',
@@ -143,8 +142,6 @@ const MainWindow = new Lang.Class({
         this.parent(params);
 
         this._addApplicationStyle();
-
-        this._searchActive = false;
 
         this._room = null;
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
@@ -222,56 +219,23 @@ const MainWindow = new Lang.Class({
 
         // search start
         this._keywords = [];
-        this._cancellable  = new Gio.Cancellable();
-        this._widgetMap = {};
-        // Utils.initActions(this,
-        //                  [
-        //                   { name: 'search-active',
-        //                     activate: this._toggleSearch,
-        //                     parameter_type: new GLib.VariantType('b'),
-        //                     state: new GLib.Variant('b', false) }
-        //                  ]);
-        this.bind_property('search-active', this._search_active_button, 'active',
+
+        this.bind_property('search-active',
+                           this._searchButton,
+                           'active',
                            GObject.BindingFlags.SYNC_CREATE |
                            GObject.BindingFlags.BIDIRECTIONAL);
         this.bind_property('search-active',
-                           this._search_bar,
+                           this._searchBar,
                            'search-mode-enabled',
                            GObject.BindingFlags.SYNC_CREATE |
                            GObject.BindingFlags.BIDIRECTIONAL);
-        this._search_bar.connect_entry(this._search_entry);
-        this._search_entry.connect('search-changed',
+
+        this._searchBar.connect_entry(this._searchEntry);
+        this._searchEntry.connect('search-changed',
                                    Lang.bind(this, this._handleSearchChanged));
 
-        this._searchisActive = false;
-
-        this._search_active_button.connect(
-            'toggled',
-            Lang.bind(this, function() {
-                // if (this._mainStack.visible_child_name == 'image') {
-                //     this._mainStack.visible_child_name = 'roomList';
-                //     this._mainStack1.visible_child_name = 'room';
-                // }
-                // else {
-                //     this._mainStack.visible_child_name = 'image';
-                //     this._mainStack1.visible_child_name = 'result';
-                // }
-                this._searchisActive = !this._searchisActive;
-            }));
-
-        // this._results.connect('row-activated', Lang.bind(this, this._rowactivated));
-        this._resultStack = this._resultscroll._view;
-        print(this._resultStack);
-        print(this._resultscroll);
-        // this._resultscroll.connect('edge-reached', Lang.bind(this, this._onScroll));
-
-        //test
         this._logManager = LogManager.getDefault();
-        let query = "select ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname 'bijan' . ?msg fts:match 'wonderful' }"
-        let query1 = "select ?msg as ?id ?nick as ?name ?text as ?mms where { ?msg a nmo:IMMessage; nie:plainTextContent ?text. ?msg nmo:communicationChannel ?channel. ?channel nie:title '#tracker'. ?msg nmo:from ?contact. ?contact nco:nickname ?nick }"
-        //this._logManager.query(query1,null,Lang.bind(this, this._Log));
-        log("hello");
-        //test
         // search end
 
         let size = this._settings.get_value('window-size').deep_unpack();
@@ -281,189 +245,7 @@ const MainWindow = new Lang.Class({
         if (this._settings.get_boolean('window-maximized'))
             this.maximize();
 
-        this._mainStack.visible_child_name = 'roomList';
-
         this.show_all();
-    },
-
-    _rowactivated: function(box, row) {
-        this._cancellable.cancel();
-        this._cancellable.reset();
-        let sparql = (
-            'select nie:plainTextContent(?msg) as ?message ' +
-            '       if (nmo:from(?msg) = nco:default-contact-me,' +
-            '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
-            // FIXME: how do we handle the "real" message type?
-            '       %d as ?messageType ' +
-            '       ?timestamp ' +
-            '{ ?msg a nmo:IMMessage; ' +
-            '       nie:contentCreated ?timestamp; ' +
-            '       nmo:communicationChannel ?chan . ' +
-            'BIND( ?timestamp - %s as ?timediff ) . ' +
-            // FIXME: filter by account
-            '  filter (nie:title (?chan) = "%s" && ?timediff >= 0) ' +
-            '} order by asc (?timediff)'
-        ).format(row.nickname,
-                 Tp.ChannelTextMessageType.NORMAL,
-                 row.timestamp,
-                 row.channel);
-        log(sparql);
-        let sparql1 = (
-            'select nie:plainTextContent(?msg) as ?message ' +
-            '       if (nmo:from(?msg) = nco:default-contact-me,' +
-            '           "%s", nco:nickname(nmo:from(?msg))) as ?sender ' +
-            // FIXME: how do we handle the "real" message type?
-            '       %d as ?messageType ' +
-            '       ?timestamp ' +
-            '{ ?msg a nmo:IMMessage; ' +
-            '       nie:contentCreated ?timestamp; ' +
-            '       nmo:communicationChannel ?chan . ' +
-            'BIND( %s - ?timestamp as ?timediff ) . ' +
-            // FIXME: filter by account
-            '  filter (nie:title (?chan) = "%s" && ?timediff > 0) ' +
-            '} order by asc (?timediff)'
-        ).format(row.nickname,
-                 Tp.ChannelTextMessageType.NORMAL,
-                 row.timestamp,
-                 row.channel);
-        // let logManager = LogManager.getDefault();
-        // this._logWalker = logManager.walkEvents(row,
-        //                                         row.channel);
-        //
-        // this._fetchingBacklog = true;
-        // this._logWalker.getEvents(10,
-        //                           Lang.bind(this, this._onLogEventsReady));
-        // this._logManager.query(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
-        // this._logManager.query(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        let buffer = this._resultStack.get_buffer();
-        let iter = buffer.get_end_iter();
-        buffer.set_text("",-1);
-        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 10);
-        this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
-        log("!");
-        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 15);
-        // Mainloop.timeout_add(500, Lang.bind(this,
-        //     function() {
-        //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        //         return GLib.SOURCE_REMOVE;
-        //     }));
-        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        //print(this._endQuery.isClosed());
-
-        // Mainloop.timeout_add(5000, Lang.bind(this,
-        //     function() {
-        //         query.next(200,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        //     }));
-        // query.next(20,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-
-        //this._resultStack.buffer.insert(iter,row._content_label.label, -1);
-        // this._resultStack.label = row._content_label.label;
-    },
-
-    _onLogEventsReady: function(events) {
-        this._resultscroll._query = this._endQuery;
-        this._resultscroll._onLogEventsReady1(events);
-        return;
-        let buffer = this._resultStack.get_buffer();
-        //buffer.set_text("",-1);
-        for (let i = 0; i < events.length; i++) {
-
-            let iter = buffer.get_end_iter();
-            this._resultStack.buffer.insert(iter,events[i].timestamp + "\t\t\t" + events[i].sender + " : " + events[i].message, -1);
-            this._resultStack.buffer.insert(iter,'\n', -1);
-        }
-    },
-
-    _onLogEventsReady1: function(events) {
-        this._resultscroll._query = this._startQuery;
-        this._resultscroll._onLogEventsReady(events);
-        return;
-        log("HERE");
-        let buffer = this._resultStack.get_buffer();
-        // buffer.set_text("",-1);
-        let iter = buffer.get_start_iter();
-        // this._resultStack.buffer.insert(iter,'\n', -1);
-        iter = buffer.get_start_iter();
-        for (let i = 0; i < events.length; i++) {
-            iter = buffer.get_start_iter();
-            this._resultStack.buffer.insert(iter,'\n', -1);
-            iter = buffer.get_start_iter();
-            this._resultStack.buffer.insert(iter,events[i].timestamp + "\t\t\t" + events[i].sender + " : " + events[i].message, -1);
-        }
-    },
-
-
-    _Log: function(events) {
-        log(events.length);
-        let widgetMap = {};
-        let markup_message = '';
-        for (let i = 0; i < events.length; i++) {
-            let time = events[i].timestamp;
-            let channel = events[i].chan;
-            let message = GLib.markup_escape_text(events[i].mms, -1);
-            let rawmessage = events[i].mms;
-            let uid = events[i].id;
-            let index = message.indexOf(this._keywords[0]);
-            let row;
-            row = this._widgetMap[uid];
-            for (let j = 0; j < this._keywords.length; j++) {
-                // log(this._keywords[j]);
-                index = Math.min(index, message.indexOf(this._keywords[j]));
-            //    message = message.replace( new RegExp( "(" + this._keywords[j] + ")" , 'gi' ),"<span font_weight='bold'>$1</span>");
-                // print(message);
-            }
-
-            if (row) {
-                log("REUSING!!!");
-                widgetMap[uid] = row;
-                this._results.remove(row);
-            } else {
-                row = new ResultList.ResultRow();
-                row._source_name.label = channel.substring(1);
-                row._short_time_label.label = this._formatTimestamp(time);
-                row.uid = events[i].id;
-                row.channel = channel;
-                row.nickname = channel;
-                row.timestamp = time;
-                row.rawmessage = rawmessage;
-                widgetMap[uid] = row;
-            }
-            row._content_label.label = message;
-            // widgetMap[uid].get_children()[0].label = "..." + message.substring(index - 6);
-        }
-
-        this._widgetMap = widgetMap;
-
-        this._results.foreach(r => { r.destroy(); })
-
-        for (let i = 0; i < events.length; i++) {
-            let row = this._widgetMap[events[i].id];
-            // row.get_children()[0].label = markup_message;
-            this._results.add(row);
-        }
-    },
-
-    _Log1: function() {
-        this._results.foreach(r => { r.destroy(); })
-    },
-
-    _onScroll: function(w, pos) {
-        log(pos);
-        if(pos==Gtk.PositionType.TOP) {
-            print("called top");
-            Mainloop.timeout_add(500, Lang.bind(this,
-                function() {
-                    this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-                }));
-            return;
-        }
-        if(pos==Gtk.PositionType.BOTTOM) {
-            print("called bottom");
-            Mainloop.timeout_add(500, Lang.bind(this,
-                function() {
-                    this._endQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady));
-                }));
-        }
     },
 
     get subtitle() {
@@ -489,100 +271,6 @@ const MainWindow = new Lang.Class({
             this._mode='chat';
         }
         this.notify('mode');
-        return;
-        this._cancellable.cancel();
-        this._cancellable.reset();
-//         if(text!='' && this._searchActive) {
-//                         this._mainStack.visible_child_name = 'image';
-// }
-// else {
-//     this._mainStack.visible_child_name = 'roomList';
-// }
-        let text = entry.get_text().replace(/^\s+|\s+$/g, '');
-        this._keywords = text == '' ? [] : text.split(/\s+/);
-        log(text);
-        let query1 = ("select ?text as ?mms ?msg as ?id ?chan as ?chan ?timestamp as ?timestamp where { ?msg a nmo:IMMessage . ?msg nie:plainTextContent ?text . ?msg fts:match '%s*' . ?msg nmo:communicationChannel ?channel. ?channel nie:title ?chan. ?msg nie:contentCreated ?timestamp }").format(text);
-        log(query1);
-        this._logManager.query(query1,this._cancellable,Lang.bind(this, this._Log));
-    },
-
-    _formatTimestamp: function(timestamp) {
-        let date = GLib.DateTime.new_from_unix_local(timestamp);
-        let now = GLib.DateTime.new_now_local();
-
-        // 00:01 actually, just to be safe
-        let todayMidnight = GLib.DateTime.new_local(now.get_year(),
-                                                    now.get_month(),
-                                                    now.get_day_of_month(),
-                                                    0, 1, 0);
-        let dateMidnight = GLib.DateTime.new_local(date.get_year(),
-                                                   date.get_month(),
-                                                   date.get_day_of_month(),
-                                                   0, 1, 0);
-        let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
-
-        let format;
-        let desktopSettings = new Gio.Settings({ schema_id: 'org.gnome.desktop.interface' });
-        let clockFormat = desktopSettings.get_string('clock-format');
-        let hasAmPm = date.format('%p') != '';
-
-        if (clockFormat == '24h' || !hasAmPm) {
-            if(daysAgo < 1) { // today
-                /* Translators: Time in 24h format */
-                format = _("%H\u2236%M");
-            } else if(daysAgo <2) { // yesterday
-                /* Translators: this is the word "Yesterday" followed by a
-                 time string in 24h format. i.e. "Yesterday, 14:30" */
-                // xgettext:no-c-format
-                format = _("Yesterday, %H\u2236%M");
-            } else if (daysAgo < 7) { // this week
-                /* Translators: this is the week day name followed by a time
-                 string in 24h format. i.e. "Monday, 14:30" */
-                // xgettext:no-c-format
-                format = _("%A, %H\u2236%M");
-            } else if (date.get_year() == now.get_year()) { // this year
-                /* Translators: this is the month name and day number
-                 followed by a time string in 24h format.
-                 i.e. "May 25, 14:30" */
-                // xgettext:no-c-format
-                format = _("%B %d, %H\u2236%M");
-            } else { // before this year
-                /* Translators: this is the month name, day number, year
-                 number followed by a time string in 24h format.
-                 i.e. "May 25 2012, 14:30" */
-                // xgettext:no-c-format
-                format = _("%B %d %Y, %H\u2236%M");
-            }
-        } else {
-            if(daysAgo < 1) { // today
-                /* Translators: Time in 12h format */
-                format = _("%l\u2236%M %p");
-            } else if(daysAgo <2) { // yesterday
-                /* Translators: this is the word "Yesterday" followed by a
-                 time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-                // xgettext:no-c-format
-                format = _("Yesterday, %l\u2236%M %p");
-            } else if (daysAgo < 7) { // this week
-                /* Translators: this is the week day name followed by a time
-                 string in 12h format. i.e. "Monday, 2:30 pm" */
-                // xgettext:no-c-format
-                format = _("%A, %l\u2236%M %p");
-            } else if (date.get_year() == now.get_year()) { // this year
-                /* Translators: this is the month name and day number
-                 followed by a time string in 12h format.
-                 i.e. "May 25, 2:30 pm" */
-                // xgettext:no-c-format
-                format = _("%B %d, %l\u2236%M %p");
-            } else { // before this year
-                /* Translators: this is the month name, day number, year
-                 number followed by a time string in 12h format.
-                 i.e. "May 25 2012, 2:30 pm"*/
-                // xgettext:no-c-format
-                format = _("%B %d %Y, %l\u2236%M %p");
-            }
-        }
-
-        return date.format(format);
     },
 
     _onWindowStateEvent: function(widget, event) {
@@ -593,7 +281,7 @@ const MainWindow = new Lang.Class({
     },
 
     _handleKeyPress: function(self, event) {
-        return this._search_bar.handle_event(event);
+        return this._searchBar.handle_event(event);
     },
 
     _onSizeAllocate: function(widget, allocation) {

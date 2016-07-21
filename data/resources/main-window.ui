@@ -48,7 +48,7 @@
                             </packing>
                         </child>
                         <child>
-                            <object class="GtkToggleButton" id="search-active-button">
+                            <object class="GtkToggleButton" id="searchButton">
                                 <property name="visible">True</property>
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
@@ -198,11 +198,11 @@
                                 <property name="vexpand">True</property>
                                 <property name="orientation">vertical</property>
                                 <child>
-                                    <object class="GtkSearchBar" id="search-bar">
+                                    <object class="GtkSearchBar" id="searchBar">
                                         <property name="visible">True</property>
                                         <property name="halign">fill</property>
                                         <child>
-                                            <object class="GtkSearchEntry" id="search-entry">
+                                            <object class="GtkSearchEntry" id="searchEntry">
                                                 <property name="can_focus">True</property>
                                                 <property name="halign">fill</property>
                                             </object>
@@ -213,16 +213,17 @@
                                     <object class="Gjs_FixedSizeFrame" id="roomSidebar">
                                         <property name="visible">True</property>
                                         <property name="hexpand">False</property>
-                                        <!-- <property name="width">200</property> -->
+                                        <property name="width">200</property>
                                         <property name="shadow-type">none</property>
                                         <style>
                                             <class name="polari-room-list"/>
                                         </style>
                                         <child>
-                                            <object class="GtkStack" id="mainStack">
+                                            <object class="GtkStack" id="leftStack">
                                                 <property name="visible">True</property>
                                                 <property name="transition-type">slide-left-right</property>
-                                                <property name="hexpand">false</property>
+                                                <property name="hexpand">true</property>
+                                                <property name="resize-mode">queue</property>
                                                 <property name="visible-child-name" bind-source="Gjs_MainWindow"
                                                     bind-property="mode" bind-flags="sync-create"/>
                                                 <child>
@@ -252,7 +253,7 @@
                                                         <property name="vexpand">True</property>
                                                         <property name="hexpand">True</property>
                                                         <child>
-                                                            <object class="Gjs_ResultList" id="results">
+                                                            <object class="Gjs_ResultList">
                                                                 <property name="visible">True</property>
                                                                 <property name="selection-mode">browse</property>
                                                                 <style>
@@ -279,7 +280,7 @@
                         <property name="visible">True</property>
                         <property name="vexpand">True</property>
                         <child>
-                            <object class="GtkStack" id="mainStack1">
+                            <object class="GtkStack" id="rightStack">
                                 <property name="visible">True</property>
                                 <property name="transition-type">slide-left-right</property>
                                 <property name="hexpand">true</property>
@@ -296,7 +297,7 @@
                                     </packing>
                                 </child>
                                 <child>
-                                    <object class="Gjs_ResultStack" id="resultscroll">
+                                    <object class="Gjs_ResultStack" id="resultStack">
                                         <property name="visible">True</property>
                                     </object>
                                     <packing>
