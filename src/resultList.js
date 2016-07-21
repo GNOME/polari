@@ -129,7 +129,7 @@ const ResultRow = new Lang.Class({
             } else if (daysAgo < 7) { // this week
                 /* Translators: this is the week day name followed by a time
                  string in 12h format. i.e. "Monday, 2:30 pm" */
-                // xgettext:no-c-format
+                // xgetmainStack1text:no-c-format
                 format = _("%A, %l\u2236%M %p");
             } else if (date.get_year() == now.get_year()) { // this year
                 /* Translators: this is the month name and day number
@@ -179,13 +179,20 @@ const ResultList = new Lang.Class({
         //     row.selected();
     },
 
+    _clearList: function() {
+        this.foreach(r => { r.destroy(); });
+    },
+
     _handleSearchChanged: function(group, actionName, value) {
-        let text = value.deep_unpack();
-
-        if(text == '') return;
-
         this._cancellable.cancel();
         this._cancellable.reset();
+
+        let text = value.deep_unpack();
+
+        if(text == '') {
+            this._clearList();
+            return;
+        }
 
         this._keywordsText = text;
         this._keywords = text == '' ? [] : text.split(/\s+/);
