@@ -235,6 +235,8 @@ const MainWindow = new Lang.Class({
                            GObject.BindingFlags.BIDIRECTIONAL);
 
         this._searchBar.connect_entry(this._searchEntry);
+        this._searchBar.connect('notify::search-mode-enabled',
+                                Lang.bind(this, this._updateMode));
         this._searchEntry.connect('search-changed',
                                    Lang.bind(this, this._handleSearchChanged));
 
@@ -263,17 +265,29 @@ const MainWindow = new Lang.Class({
         return this._mode;
     },
 
+    _updateMode: function() {
+        let mode;
+        if (this._mode == 'search') {
+            mode = this._searchBar.search_mode_enabled ? 'search' : 'chat';
+        } else {
+            let state = this.application.get_action_state('search-terms');
+            let [terms, ] = state.get_string();
+            mode = terms.length > 0 ? 'search' : 'chat';
+        }
+
+        if (mode == this._mode)
+            return;
+
+        this._mode = mode;
+        this.notify('mode');
+    },
+
     _handleSearchChanged: function(entry) {
         let text = entry.get_text().replace(/^\s+|\s+$/g, '');
-        let app = this.application;
-        let action = app.lookup_action('search-terms');
-        action.change_state(GLib.Variant.new('s', text));
-        if(text!='') {
-            this._mode='search';
-        } else {
-            this._mode='chat';
-        }
-        this.notify('mode');
+        let terms = new GLib.Variant('s',
+                                     text.length < MIN_SEARCH_WIDTH ? '' : text);
+        this.application.change_action_state('search-terms', terms);
+        this._updateMode();
     },
 
     _onWindowStateEvent: function(widget, event) {

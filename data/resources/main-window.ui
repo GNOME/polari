@@ -228,7 +228,7 @@
                                         <child>
                                             <object class="GtkStack" id="leftStack">
                                                 <property name="visible">True</property>
-                                                <property name="transition-type">slide-left-right</property>
+                                                <property name="transition-type">crossfade</property>
                                                 <property name="hexpand">true</property>
                                                 <!-- <property name="resize-mode">queue</property> -->
                                                 <property name="visible-child-name" bind-source="Gjs_MainWindow"
@@ -289,7 +289,7 @@
                         <child>
                             <object class="GtkStack" id="rightStack">
                                 <property name="visible">True</property>
-                                <property name="transition-type">slide-left-right</property>
+                                <property name="transition-type">crossfade</property>
                                 <property name="hexpand">true</property>
                                 <property name="visible-child-name" bind-source="Gjs_MainWindow"
                                     bind-property="mode" bind-flags="sync-create"/>
