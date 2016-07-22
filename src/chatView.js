@@ -562,6 +562,9 @@ var ChatView = new Lang.Class({
         if (this._logWalker.isEnd())
             return this._pendingLogs.splice(0);
 
+        if (this._pendingLogs.length == 0)
+            return [];
+
         let nick = this._pendingLogs[0].get_sender();
         let isAction = this._pendingLogs[0].is_action();
         let maxNum = this._pendingLogs.length - this._initialPending.length;
