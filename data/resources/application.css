@@ -66,6 +66,11 @@
     color: mix(@theme_fg_color, @theme_base_color, 0.3);
 }
 
+.content-label {
+    color: mix(@theme_fg_color, @theme_base_color, 0.3);
+    font-size: small;
+}
+
 .polari-room-list row.inactive:selected *,
 .polari-room-list row.inactive:selected:backdrop * {
     color: mix(@theme_selected_fg_color, @theme_base_color, 0.3);

@@ -57,6 +57,9 @@
                         <property name="max-width-chars">30</property>
                         <property name="use-markup">true</property>
                         <property name="lines">2</property>
+                        <style>
+                            <class name="content-label"/>
+                        </style>
                     </object>
                     <packing>
                         <property name="left_attach">1</property>
