@@ -120,12 +120,6 @@ const MainWindow = new Lang.Class({
                                                       'subtitle-visible',
                                                       GObject.ParamFlags.READABLE,
                                                       false),
-        'search-active': GObject.ParamSpec.boolean('search-active',
-                                                   'search-active',
-                                                   'search-active',
-                                                   GObject.ParamFlags.READABLE |
-                                                   GObject.ParamFlags.WRITABLE,
-                                                   false),
         'mode' : GObject.ParamSpec.string('mode',
                                           'mode',
                                           'mode',
