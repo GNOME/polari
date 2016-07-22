@@ -191,39 +191,39 @@
                         <property name="hexpand">False</property>
                         <property name="transition-type">slide-right</property>
                         <child>
-                            <object class="GtkGrid" id="sidebar-grid">
-                                <property name="can_focus">False</property>
+                            <object class="Gjs_FixedSizeFrame" id="roomSidebar">
                                 <property name="visible">True</property>
                                 <property name="hexpand">False</property>
-                                <property name="vexpand">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="width">200</property>
+                                <property name="shadow-type">none</property>
+                                <style>
+                                    <class name="polari-room-list"/>
+                                </style>
                                 <child>
-                                    <object class="GtkSearchBar" id="searchBar">
-                                        <property name="visible">True</property>
-                                        <property name="halign">fill</property>
-                                        <child>
-                                            <object class="GtkSearchEntry" id="searchEntry">
-                                                <property name="can_focus">True</property>
-                                                <property name="halign">fill</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                                <child>
-                                    <object class="Gjs_FixedSizeFrame" id="roomSidebar">
+                                    <object class="GtkGrid" id="sidebar-grid">
+                                        <property name="can_focus">False</property>
                                         <property name="visible">True</property>
                                         <property name="hexpand">False</property>
-                                        <property name="width">200</property>
-                                        <property name="shadow-type">none</property>
-                                        <style>
-                                            <class name="polari-room-list"/>
-                                        </style>
+                                        <property name="vexpand">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                            <object class="GtkSearchBar" id="searchBar">
+                                                <property name="visible">True</property>
+                                                <property name="halign">fill</property>
+                                                <child>
+                                                    <object class="GtkSearchEntry" id="searchEntry">
+                                                        <property name="can_focus">True</property>
+                                                        <property name="halign">fill</property>
+                                                    </object>
+                                                </child>
+                                            </object>
+                                        </child>
                                         <child>
                                             <object class="GtkStack" id="leftStack">
                                                 <property name="visible">True</property>
                                                 <property name="transition-type">slide-left-right</property>
                                                 <property name="hexpand">true</property>
-                                                <property name="resize-mode">queue</property>
+                                                <!-- <property name="resize-mode">queue</property> -->
                                                 <property name="visible-child-name" bind-source="Gjs_MainWindow"
                                                     bind-property="mode" bind-flags="sync-create"/>
                                                 <child>
