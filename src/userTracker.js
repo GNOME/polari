@@ -209,8 +209,6 @@ const UserTracker = new Lang.Class({
         if (this._pushMember(map, baseNick, member) == 1) {
             this.emit("status-changed::" + baseNick, baseNick, status);
 
-            let notifyAction = this._app.lookup_action(this._getNotifyActionName(member.alias));
-
             if (this._shouldNotifyNick(member.alias))
                 this._emitNotification(room, member);
 
@@ -242,12 +240,9 @@ const UserTracker = new Lang.Class({
         if (found) {
             if (nContacts == 0) {
                 this.emit("status-changed::" + baseNick, member.alias, status);
+                this._setNotifyActionEnabled(member.alias, true);
             }
             this.emit("contacts-changed::" + baseNick, member.alias);
-
-            let notifyAction = this._app.lookup_action(this._getNotifyActionName(member.alias));
-
-            this._setNotifyActionEnabled(member.alias, true);
         }
 
         let roomMap = this._roomMapping.get(room)._contactMapping;
@@ -301,7 +296,6 @@ const UserTracker = new Lang.Class({
     },
 
     unwatchRoomStatus: function(room, handlerID) {
-        /*TODO: rewrite into a single conditional?*/
         if (!this._roomMapping)
             return;
 
@@ -364,8 +358,13 @@ const UserTracker = new Lang.Class({
         let name = this._getNotifyActionName(nickName);
 
         if (!this._app.lookup_action(name)) {
+            let status = this.getNickStatus(nickName);
+            let enabled = status == Tp.ConnectionPresenceType.OFFLINE;
+
             let state = new GLib.Variant('b', false);
-            let action = new Gio.SimpleAction({ name: name, state: state });
+            let action = new Gio.SimpleAction({ name: name,
+                                                enabled: enabled,
+                                                state: state });
 
             action.connect('notify::enabled', () => {
                 if (!action.enabled)

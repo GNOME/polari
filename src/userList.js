@@ -347,6 +347,8 @@ const UserPopover = new Lang.Class({
 
         this.parent(params);
 
+        this._statusLabel.set_state_flags(Gtk.StateFlags.LINK, false);
+
         this._app = Gio.Application.get_default();
 
         /* Mmmh, is there a reason to do this? Instead of just having
@@ -357,7 +359,7 @@ const UserPopover = new Lang.Class({
         /* In any case, you could set up those bindings in the template as
          * well \o/ */
         this._notifyButton.bind_property('sensitive',
-                                         this._notifyButton, 'visible', 0);
+                                         this._notifyButton, 'visible', GObject.BindingFlags.SYNC_CREATE);
         this._notifyButton.bind_property('active',
                                          this._userDetails, 'notifications-enabled',
                                          GObject.BindingFlags.SYNC_CREATE);
@@ -370,78 +372,57 @@ const UserPopover = new Lang.Class({
             this.nickname = null;
         });
 
-        /* Noooo - this opens the popover!
-         * Assuming all widgets in the .ui have
-         *    <property name="visible">true</property>
-         * this shouldn't actually be needed ... */
-        this.show_all();
+        this.show();
     },
 
     set nickname(nickname) {
         if (this._nickname == nickname)
             return;
 
-        if (this._nickname) {
-            this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
-            this._userTracker.disconnect(this._globalStatusChangedId);
-            this._userTracker.disconnect(this._contactsChangedId);
-        }
-
         if (nickname == null)
             return;
 
         this._nickname = nickname;
-
-        let baseNick = Polari.util_get_basenick(nickname);
+        this._nickLabel.label = this._nickname;
+        this._userDetails.nickname = nickname;
 
         let actionName = this._userTracker.getNotifyActionName(this._nickname);
         this._notifyButton.action_name = actionName;
 
+        this._setBasenick(Polari.util_get_basenick(nickname));
+    },
+
+    _setBasenick: function(basenick) {
+        if (this._basenick == basenick)
+            return;
+
+        this._basenick = basenick;
+
+        if (this._roomStatusChangedId > 0)
+            this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
         this._roomStatusChangedId =
-            this._userTracker.watchRoomStatus(this._room, this._nickname,
+            this._userTracker.watchRoomStatus(this._room, this._basenick,
                                         Lang.bind(this, this._onNickStatusChanged));
 
-        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + baseNick, Lang.bind(this, this._updateContents));
+        if (this._globalStatusChangedId > 0)
+            this._userTracker.disconnect(this._globalStatusChangedId);
+        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + basenick, Lang.bind(this, this._updateStatusLabel));
 
-        this._updateContents();
-
-        this._contactsChangedId = this._userTracker.connect("contacts-changed::" + baseNick, () => {
+        if (this._contactsChangedId > 0)
+            this._userTracker.disconnect(this._contactsChangedId);
+        this._contactsChangedId = this._userTracker.connect("contacts-changed::" + basenick, () => {
             this._userDetails.user = this._userTracker.lookupContact(this._nickname);
         });
+
+        this._updateStatusLabel();
+        this._updateDetailsContact();
     },
 
     get nickname() {
         return this._nickname;
     },
 
-    /* I think this should be renamed to _updateStatusLabel() or something;
-     * The detail's :user property is already updated via ::contacts-changed,
-     * so no need to set that herer; the detail's :nickname property can
-     * just be set directly from the popover's own nickname setter, because
-     * that's the only place that changes. That leaves just the status label
-     * updates from the global/local status change handlers ... (well,
-     * and the nickname setter as well) */
-    _updateContents: function() {
-        /* You can use status if you don't actually need the contact; also
-         * "bestMatching" is leaking an implementation detail, lookup()
-         * could just as well return the first/last/last-active one ... */
-        let bestMatchingContact = this._userTracker.lookupContact(this._nickname);
-
-        /* can only change from the nickname setter => move there;
-         * alternatively if you make the nickname a "proper" gobject property,
-         * you can bind it to the label's :label property ... */
-        this._nickLabel.set_label(this._nickname);
-
-        let labelStatus = "";
-        if (!bestMatchingContact)
-            labelStatus = '<small>' + _("Offline") + '</small>';
-        else
-            /* hard to read like this, use a local roomStatus variable */
-            if (this._userTracker.getNickRoomStatus(this._nickname, this._room) == Tp.ConnectionPresenceType.AVAILABLE)
-                labelStatus = '<small>' + _("Online") + '</small>';
-            else
-                labelStatus = '<small>' + _("Available in another room.") + '</small>';
-        /* Maybe something like:
+    _updateStatusLabel: function() {
         let status = this._userTracker.getNickStatus(this._nickname);
         let roomStatus = this._userTracker.getNickRoomStatus(this._nickname,
                                                              this._room);
@@ -454,37 +435,16 @@ const UserPopover = new Lang.Class({
         else
             label = _("Offline");
         this._statusLabel.label = label;
-        */
 
-        this._statusLabel.set_label(labelStatus);
-
-        if (bestMatchingContact) {
-            this._userDetails.user = bestMatchingContact;
-
-            /* It should work to do this just once, not every time a
-             * contact is online (you are not removing it anywhere,
-             * but rely on the theme to not use color when insensitive */
-            let context = this._statusLabel.get_style_context();
-            context.set_state(Gtk.StateFlags.LINK);
-            context.save();
-
-            this._statusLabel.sensitive = true;
-        }
-        else {
-            /* I don't like this - if you must have a public method for this,
-             * it shouldn't leak details like this and just be called clear();
-             * However why not clear everything automatically in UserDetails
-             * if :user is set to null? */
-            this._userDetails.clearPrevUserAndDetails();
-
-            this._statusLabel.sensitive = false;
-        }
-
-        this._userDetails.nickname = this._nickname;
+        this._statusLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
     },
 
+    _updateDetailsContact: function() {
+        this._userDetails.user = this._userTracker.lookupContact(this._nickname);
+     },
+
     _onNickStatusChanged: function(baseNick, status) {
-        this._updateContents();
+        this._updateStatusLabel();
     }
 });
 
