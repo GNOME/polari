@@ -54,6 +54,8 @@
                                 <property name="valign">center</property>
                                 <property name="margin-start">5</property>
                                 <property name="margin-end">5</property>
+                                <property name="active" bind-source="searchBar"
+                                          bind-property="search-mode-enabled" bind-flags="sync-create|bidirectional"/>
                                 <style>
                                     <class name="image-button"/>
                                 </style>
