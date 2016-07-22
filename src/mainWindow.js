@@ -102,7 +102,6 @@ const MainWindow = new Lang.Class({
     InternalChildren: ['titlebarRight',
                        'titlebarLeft',
                        'joinButton',
-                       'searchButton',
                        'searchBar',
                        'searchEntry',
                        'showUserListButton',
@@ -222,17 +221,6 @@ const MainWindow = new Lang.Class({
 
         // search start
         this._keywords = [];
-
-        this.bind_property('search-active',
-                           this._searchButton,
-                           'active',
-                           GObject.BindingFlags.SYNC_CREATE |
-                           GObject.BindingFlags.BIDIRECTIONAL);
-        this.bind_property('search-active',
-                           this._searchBar,
-                           'search-mode-enabled',
-                           GObject.BindingFlags.SYNC_CREATE |
-                           GObject.BindingFlags.BIDIRECTIONAL);
 
         this._searchBar.connect_entry(this._searchEntry);
         this._searchBar.connect('notify::search-mode-enabled',
