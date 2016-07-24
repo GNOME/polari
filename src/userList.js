@@ -351,19 +351,6 @@ const UserPopover = new Lang.Class({
 
         this._app = Gio.Application.get_default();
 
-        /* Mmmh, is there a reason to do this? Instead of just having
-              <property name="expanded">True</property>
-         * in the template ... */
-        this.bind_property('visible', this._userDetails, 'expanded', 0);
-
-        /* In any case, you could set up those bindings in the template as
-         * well \o/ */
-        this._notifyButton.bind_property('sensitive',
-                                         this._notifyButton, 'visible', GObject.BindingFlags.SYNC_CREATE);
-        this._notifyButton.bind_property('active',
-                                         this._userDetails, 'notifications-enabled',
-                                         GObject.BindingFlags.SYNC_CREATE);
-
         this._roomStatusChangedId = 0;
         this._globalStatusChangedId = 0;
         this._contactsChangedId = 0;
