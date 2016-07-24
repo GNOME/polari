@@ -72,25 +72,48 @@ const UserTracker = new Lang.Class({
         this._account = account;
 
         this._baseNickContacts = new Map();
-        /* This one's trickier, as the content is a bit random, and
-         * _roomStuff isn't a great name :-)
-         * IMHO we need to figure something out though, as the current
-         * code is very hard to comprehend. Maybe the best we can do
-         * is call this _roomData, then have some methods we use to
-         * access the content elsewhere:
-
-           _getRoomContacts(room) { return this._roomData.get(room).contacts; },
-           _getRoomHandlers(room) { return this._roomData.get(room).handlers; },
-           _getRoomSignals(room) { return this._roomData.get(room).signals; },
-
-         */
-        this._roomMapping = new Map();
+        this._roomData = new Map();
         this._handlerCounter = 0;
         this._app = Gio.Application.get_default();
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
         this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
+    },
+
+    _getRoomContacts: function(room) {
+        return this._roomData.get(room)._contactMapping;
+    },
+
+    _getRoomHandlers: function(room) {
+        return this._roomData.get(room)._handlerMapping;
+    },
+
+    _getRoomSignals: function(room) {
+        return this._roomData.get(room)._roomSignals;
+    },
+
+    _insertRoomData: function(room, data) {
+        this._roomData.set(room, data);
+    },
+
+    _deleteRoomData: function(room) {
+        if (this._roomData.has(room))
+            this._roomData.delete(room);
+    },
+
+    _deleteRoomDataHandler: function(room, handlerID) {
+        if (!this._isRoomData(room))
+            return;
+
+        if (!this._getRoomHandlers(room))
+            return;
+
+        this._getRoomHandlers(room).delete(handlerID);
+    },
+
+    _isRoomData: function(room) {
+        return this._roomData.has(room);
     },
 
     _onRoomAdded: function(roomManager, room) {
@@ -108,7 +131,7 @@ const UserTracker = new Lang.Class({
     _connectRoomSignalsForRoom: function(room) {
         this._ensureRoomMappingForRoom(room);
 
-        let roomData = this._roomMapping.get(room);
+        let currentRoomSignals = this._getRoomSignals(room);
 
         let roomSignals = [
             { name: 'notify::channel',
@@ -127,19 +150,18 @@ const UserTracker = new Lang.Class({
               handler: Lang.bind(this, this._onMemberLeft) }
         ];
 
-        roomData._roomSignals = [];
         roomSignals.forEach(Lang.bind(this, function(signal) {
-            roomData._roomSignals.push(room.connect(signal.name, signal.handler));
+            currentRoomSignals.push(room.connect(signal.name, signal.handler));
         }));
     },
 
     _disconnectRoomSignalsForRoom: function(room) {
-        let roomData = this._roomMapping.get(room);
+        let currentRoomSignals = this._getRoomSignals(room);
 
-        for (let i = 0; i < roomData._roomSignals.length; i++) {
-            room.disconnect(roomData._roomSignals[i]);
+        for (let i = 0; i < currentRoomSignals.length; i++) {
+            room.disconnect(currentRoomSignals[i]);
         }
-        roomData._roomSignals = [];
+        currentRoomSignals = [];
     },
 
     _onChannelChanged: function(room) {
@@ -162,16 +184,17 @@ const UserTracker = new Lang.Class({
     },
 
     _clearUsersFromRoom: function(room) {
-        let map = this._roomMapping.get(room)._contactMapping;
+        let map = this._getRoomContacts(room);
         for ([baseNick, contacts] of map)
             contacts.forEach((m) => { this._untrackMember(m, room); });
-        this._roomMapping.delete(room);
+        this._deleteRoomData(room);
     },
 
     _ensureRoomMappingForRoom: function(room) {
-        if (!this._roomMapping.has(room))
-            this._roomMapping.set(room, { _contactMapping: new Map(),
-                                          _handlerMapping: new Map() });
+        if (!this._isRoomData(room))
+            this._insertRoomData(room, { _contactMapping: new Map(),
+                                         _handlerMapping: new Map(),
+                                         _roomSignals: [] });
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -189,7 +212,8 @@ const UserTracker = new Lang.Class({
 
     _runHandlers: function(room, member, status) {
         let baseNick = Polari.util_get_basenick(member.alias);
-        for ([id, info] of this._roomMapping.get(room)._handlerMapping)
+        let roomHandlers = this._getRoomHandlers(room);
+        for ([id, info] of roomHandlers)
             if (!info.nickName || info.nickName == baseNick)
                 info.handler(baseNick, status);
     },
@@ -215,7 +239,7 @@ const UserTracker = new Lang.Class({
             this._setNotifyActionEnabled(member.alias, false);
         }
 
-        let roomMap = this._roomMapping.get(room)._contactMapping;
+        let roomMap = this._getRoomContacts(room);
         if (this._pushMember(roomMap, baseNick, member) == 1)
             this._runHandlers(room, member, status);
 
@@ -245,7 +269,7 @@ const UserTracker = new Lang.Class({
             this.emit("contacts-changed::" + baseNick, member.alias);
         }
 
-        let roomMap = this._roomMapping.get(room)._contactMapping;
+        let roomMap = this._getRoomContacts(room);
         [found, nContacts] = this._popMember(roomMap, baseNick, member);
         if (found && nContacts == 0)
             this._runHandlers(room, member, status);
@@ -264,7 +288,7 @@ const UserTracker = new Lang.Class({
 
         this._ensureRoomMappingForRoom(room);
 
-        let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
+        let contacts = this._getRoomContacts(room).get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
@@ -287,7 +311,7 @@ const UserTracker = new Lang.Class({
     watchRoomStatus: function(room, baseNick, callback) {
         this._ensureRoomMappingForRoom(room);
 
-        this._roomMapping.get(room)._handlerMapping.set(++this._handlerCounter, {
+        this._getRoomHandlers(room).set(++this._handlerCounter, {
             nickName: baseNick,
             handler: callback
         });
@@ -296,16 +320,7 @@ const UserTracker = new Lang.Class({
     },
 
     unwatchRoomStatus: function(room, handlerID) {
-        if (!this._roomMapping)
-            return;
-
-        if (!this._roomMapping.has(room))
-            return;
-
-        if (!this._roomMapping.get(room)._handlerMapping)
-            return;
-
-        this._roomMapping.get(room)._handlerMapping.delete(handlerID);
+        this._deleteRoomDataHandler(room, handlerID);
     },
 
     _emitNotification: function (room, member) {
