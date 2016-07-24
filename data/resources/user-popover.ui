@@ -44,6 +44,9 @@
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="visible">True</property>
+                <property name="visible" bind-source="notifyButton"
+                          bind-property="sensitive"
+                          bind-flags="sync-create"/>
                 <child>
                   <object class="GtkImage">
                     <property name="icon-name">alarm-symbolic</property>
@@ -59,6 +62,10 @@
         <child>
           <object class="Gjs_UserDetails" id="userDetails">
             <property name="visible">True</property>
+            <property name="expanded">True</property>
+            <property name="notifications-enabled" bind-source="notifyButton"
+                      bind-property="active"
+                      bind-flags="sync-create"/>
           </object>
         </child>
       </object>
