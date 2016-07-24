@@ -334,17 +334,7 @@ const UserTracker = new Lang.Class({
                                        Utils.getTpEventTime() ]);
         notification.set_default_action_and_target('app.join-room', param);
 
-        /* Passing an ID of null would be better than a common one:
-         * If two watched users come online roughly at the same time, the
-         * first notification is dismissed and replaced by the second.
-         *
-         * But then maybe it makes sense to withdraw a notification if a
-         * watched user disconnects again? In that case, using something
-         * unique similar to getNotifyActionName() should work (maybe just
-         * split out a private _getNotifyActionName() that is shared between
-         * the public method and the notification ID, i.e. the name part
-         * only without the side-effect of creating an action */
-        this._app.send_notification('watched-user-notification', notification);
+        this._app.send_notification(this._getNotifyActionName(member.alias), notification);
 
         let baseNick = Polari.util_get_basenick(member.alias);
     },
