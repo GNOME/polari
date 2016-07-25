@@ -57,7 +57,6 @@
                 <property name="label" translatable="yes">Last Activity:</property>
                 <property name="valign">start</property>
                 <property name="halign">start</property>
-                <property name="use-markup">True</property>
                 <property name="visible">True</property>
                 <property name="margin-start">20</property>
                 <style>
@@ -77,6 +76,7 @@
                 <property name="hexpand">True</property>
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
+                <property name="halign">start</property>
                 <style>
                   <class name="dim-label" />
                 </style>

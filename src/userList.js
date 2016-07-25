@@ -267,14 +267,14 @@ const UserDetails = new Lang.Class({
         if (!fn)
             fn = this._user.alias;
 
-        this._fullnameLabel.label = '<small>' + fn + '</small>';
+        this._fullnameLabel.label = fn;
         this._userIcon.visible = true;
 
         if (last) {
-            this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+            this._lastHeader.label = _("Last Activity:");
             this._lastHeader.show();
 
-            this._lastLabel.label = '<small>' + this._formatLast(last) + '</small>';
+            this._lastLabel.label = this._formatLast(last);
             this._lastLabel.show();
         } else {
             this._lastHeader.hide();
@@ -285,7 +285,7 @@ const UserDetails = new Lang.Class({
     },
 
     _trackFallbackNick: function(nickname) {
-        this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+        this._lastHeader.label = _("Last Activity:");
         this._lastHeader.show();
 
         this._userIcon.visible = false;
