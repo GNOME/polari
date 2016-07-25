@@ -62,9 +62,11 @@
         <child>
           <object class="Gjs_UserDetails" id="userDetails">
             <property name="visible">True</property>
-            <property name="expanded">True</property>
             <property name="notifications-enabled" bind-source="notifyButton"
                       bind-property="active"
+                      bind-flags="sync-create"/>
+            <property name="expanded" bind-source="Gjs_UserPopover"
+                      bind-property="visible"
                       bind-flags="sync-create"/>
           </object>
         </child>
