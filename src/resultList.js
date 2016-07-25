@@ -10,8 +10,10 @@ const LogManager = imports.logManager;
 const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
+const Signals = imports.signals;
+const Mainloop = imports.mainloop;
 
-const MIN_SEARCH_WIDTH = 4;
+const MIN_SEARCH_WIDTH = 0;
 
 const ResultRow = new Lang.Class({
     Name: 'ResultRow',
@@ -158,16 +160,20 @@ const ResultList = new Lang.Class({
 
     _init: function(params) {
         this.parent(params);
+        print("XXXXXXXXXXXXXXXXXXX\n");
         this._app = Gio.Application.get_default();
         this._logManager = LogManager.getDefault();
 
         //this.connect('row-activated', Lang.bind(this, this._rowactivated));
-        this._resultRows = {};
+        this._results = [];
         this._widgetMap = {};
         //this._keywordsAction = app.lookup_action('search-terms');
         this._app.connect('action-state-changed::search-terms', Lang.bind(this,
                           this._handleSearchChanged));
 
+        this.connect('scroll-bottom-reached', Lang.bind(this, this._loadNextResults));
+
+        this._fetchingResults = false;
         this._keywords = [];
         this._keywordsText = '';
         this._cancellable  = new Gio.Cancellable();
@@ -195,6 +201,7 @@ const ResultList = new Lang.Class({
         this._cancellable  = new Gio.Cancellable();
         let text = value.deep_unpack();
         this._clearList();
+        this._results = [];
 
         if(text.length < MIN_SEARCH_WIDTH) {
             return;
@@ -209,9 +216,23 @@ const ResultList = new Lang.Class({
                       '?msg nie:contentCreated ?timestamp } order by desc (?timestamp)'
                      ).format(text);
         log(query);
+        this._fetchingResults = true;
         this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
         this._endQuery.run(query,this._cancellable,Lang.bind(this, this._handleResults));
         // this._logManager.query(query,this._cancellable,Lang.bind(this, this._handleResults));
+    },
+
+    _loadNextResults: function() {
+        print("here");
+        if (this._fetchingResults)
+            return;
+        print("and here");
+        this._fetchingResults = true;
+
+        Mainloop.timeout_add(500, Lang.bind(this,
+            function() {
+                this._endQuery.next(10,this._cancellable,Lang.bind(this, this._handleResults1));
+            }));
     },
 
     _handleResults: function(events) {
@@ -250,6 +271,23 @@ const ResultList = new Lang.Class({
         }
 
         this._showList();
+        this._fetchingResults = false;
+    },
+
+    _handleResults1: function(events){
+        log(events.length);
+        for (let i = 0; i < events.length; i++) {
+            let message = GLib.markup_escape_text(events[i].mms, -1);
+            let uid = events[i].id;
+            let row;
+            row = new ResultRow(events[i]);
+            this._widgetMap[uid] = row;
+            row._content_label.label = message;
+            this.add(row);
+        }
+
+        this._showList();
+        this._fetchingResults = false;
     },
 
     _formatTimestamp: function(timestamp) {
@@ -331,3 +369,54 @@ const ResultList = new Lang.Class({
         return date.format(format);
     }
 });
+
+const ResultWindow = new Lang.Class({
+    Name: 'ResultWindow',
+    Extends: Gtk.ScrolledWindow,
+
+    _init: function(params) {
+        this.parent(params);
+
+        this._list = new ResultList({ visible: true, selection_mode: Gtk.SelectionMode.BROWSE });
+
+        this.add(this._list);
+        this.show_all();
+
+        this._cancellable  = new Gio.Cancellable();
+
+        this.connect('scroll-event', Lang.bind(this, this._onScroll));
+
+        this.vadjustment.connect('changed',
+                                 Lang.bind(this, this._updateScroll));
+
+        let adj = this.vadjustment;
+        this._scrollBottom = adj.upper - adj.page_size;
+        print(this._scrollBottom);
+        this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
+    },
+
+    _updateScroll: function() {
+        let adj = this.vadjustment;
+        this._scrollBottom = adj.upper - adj.page_size;
+    },
+
+    _onScroll: function(w, event) {
+        let [hasDir, dir] = event.get_scroll_direction();
+        if (hasDir && (dir != Gdk.ScrollDirection.UP || dir != Gdk.ScrollDirection.DOWN) )
+            return Gdk.EVENT_PROPAGATE;
+
+        let [hasDeltas, dx, dy] = event.get_scroll_deltas();
+        if (hasDeltas)
+            this._fetchMoreResults();
+    },
+
+    _fetchMoreResults: function() {
+        if (this.vadjustment.value != this._scrollBottom )
+            return Gdk.EVENT_PROPAGATE;
+
+        this._list.emit('scroll-bottom-reached');
+
+        return Gdk.EVENT_STOP;
+    },
+});
+Signals.addSignalMethods(ResultList.prototype);
