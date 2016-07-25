@@ -3,6 +3,7 @@
   <template class="Gjs_UserPopover" parent="GtkPopover">
     <property name="hexpand">False</property>
     <property name="width-request">280</property>
+    <property name="height-request">220</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
