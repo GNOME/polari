@@ -25,7 +25,7 @@ const ResultStack = imports.resultStack;
 
 const CONFIGURE_TIMEOUT = 100; /* ms */
 
-const MIN_SEARCH_WIDTH = 4;
+const MIN_SEARCH_WIDTH = 0;
 
 const FixedSizeFrame = new Lang.Class({
     Name: 'FixedSizeFrame',

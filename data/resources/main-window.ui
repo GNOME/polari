@@ -257,12 +257,12 @@
                                                     </packing>
                                                 </child>
                                                 <child>
-                                                    <object class="GtkScrolledWindow">
+                                                    <object class="Gjs_ResultWindow">
                                                         <property name="visible">True</property>
                                                         <property name="hscrollbar-policy">never</property>
                                                         <property name="vexpand">True</property>
                                                         <property name="hexpand">True</property>
-                                                        <child>
+                                                        <!-- <child>
                                                             <object class="Gjs_ResultList">
                                                                 <property name="visible">True</property>
                                                                 <property name="selection-mode">browse</property>
@@ -271,7 +271,7 @@
                                                                 </style>
                                                             </object>
 
-                                                        </child>
+                                                        </child> -->
                                                     </object>
                                                     <packing>
                                                         <property name="name">search</property>
