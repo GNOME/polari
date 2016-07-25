@@ -144,8 +144,7 @@ const UserDetails = new Lang.Class({
         this.bind_property('notifications-enabled', this._notificationIcon, 'visible', GObject.BindingFlags.SYNC_CREATE);
         this.bind_property('notifications-enabled', this._notificationLabel, 'visible', GObject.BindingFlags.SYNC_CREATE);
 
-        this._fullnameLabel.ellipsize = Pango.EllipsizeMode.END;
-        this._fullnameLabel.max_width_chars = MAX_USERS_WIDTH_CHARS;
+        this._fullnameLabel.max_width_chars = 50;
     },
 
     set user(user) {
