@@ -267,7 +267,6 @@ const UserDetails = new Lang.Class({
             fn = this._user.alias;
 
         this._fullnameLabel.label = fn;
-        this._fullnameLabel.visible = true;
         this._userIcon.visible = true;
 
         if (last) {
@@ -289,7 +288,7 @@ const UserDetails = new Lang.Class({
         this._lastHeader.show();
 
         this._userIcon.visible = false;
-        this._fullnameLabel.visible = false;
+        this._fullnameLabel.label = "";
 
         this._revealDetails();
     },
