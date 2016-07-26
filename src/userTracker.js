@@ -117,7 +117,7 @@ const UserTracker = new Lang.Class({
     },
 
     _onRoomRemoved: function(roomManager, room) {
-        if (room.account != this._account)
+        if (!this._roomData.has(room))
             return;
 
         this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
