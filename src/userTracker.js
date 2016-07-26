@@ -176,8 +176,7 @@ const UserTracker = new Lang.Class({
     _clearUsersFromRoom: function(room) {
         let map = this._getRoomContacts(room);
         for ([baseNick, contacts] of map)
-            while (contacts.length > 0)
-                this._untrackMember(contacts[0], room);
+            contacts.slice().forEach((m) => { this._untrackMember(m, room); });
     },
 
     _ensureRoomMappingForRoom: function(room) {
