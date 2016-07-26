@@ -199,7 +199,7 @@ const UserTracker = new Lang.Class({
             this.emit("status-changed::" + baseNick, baseNick, status);
 
             if (this._shouldNotifyNick(member.alias))
-                this._emitNotification(room, member);
+                this._notifyNickAvailable(member, room);
 
             this._setNotifyActionEnabled(member.alias, false);
         }
@@ -290,7 +290,7 @@ const UserTracker = new Lang.Class({
         this._getRoomHandlers(room).delete(handlerID);
     },
 
-    _emitNotification: function (room, member) {
+    _notifyNickAvailable: function (member, room) {
         let notification = new Gio.Notification();
         notification.set_title(_("User is online"));
         notification.set_body(_("User %s is now online.").format(member.alias));
