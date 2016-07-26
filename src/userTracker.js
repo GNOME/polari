@@ -127,6 +127,7 @@ const UserTracker = new Lang.Class({
 
         this._disconnectRoomSignalsForRoom(room);
         this._clearUsersFromRoom(room);
+        this._deleteRoomData(room);
     },
 
     _connectRoomSignalsForRoom: function(room) {
@@ -188,7 +189,6 @@ const UserTracker = new Lang.Class({
         let map = this._getRoomContacts(room);
         for ([baseNick, contacts] of map)
             contacts.forEach((m) => { this._untrackMember(m, room); });
-        this._deleteRoomData(room);
     },
 
     _ensureRoomMappingForRoom: function(room) {
