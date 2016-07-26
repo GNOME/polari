@@ -93,24 +93,6 @@ const UserTracker = new Lang.Class({
         return this._roomData.get(room)._roomSignals;
     },
 
-    _insertRoomData: function(room, data) {
-        this._roomData.set(room, data);
-    },
-
-    _deleteRoomDataHandler: function(room, handlerID) {
-        if (!this._isRoomData(room))
-            return;
-
-        if (!this._getRoomHandlers(room))
-            return;
-
-        this._getRoomHandlers(room).delete(handlerID);
-    },
-
-    _isRoomData: function(room) {
-        return this._roomData.has(room);
-    },
-
     _onRoomAdded: function(roomManager, room) {
         if (room.account != this._account)
             return;
@@ -175,10 +157,11 @@ const UserTracker = new Lang.Class({
     },
 
     _ensureRoomMappingForRoom: function(room) {
-        if (!this._isRoomData(room))
-            this._insertRoomData(room, { _contactMapping: new Map(),
-                                         _handlerMapping: new Map(),
-                                         _roomSignals: [] });
+        if (this._roomData.has(room))
+            return;
+        this._roomData.set(room, { _contactMapping: new Map(),
+                                   _handlerMapping: new Map(),
+                                   _roomSignals: [] });
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -304,7 +287,9 @@ const UserTracker = new Lang.Class({
     },
 
     unwatchRoomStatus: function(room, handlerID) {
-        this._deleteRoomDataHandler(room, handlerID);
+        if (!this._roomData.has(room))
+            return;
+        this._getRoomHandlers(room).delete(handlerID);
     },
 
     _emitNotification: function (room, member) {
