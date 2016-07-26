@@ -97,11 +97,6 @@ const UserTracker = new Lang.Class({
         this._roomData.set(room, data);
     },
 
-    _deleteRoomData: function(room) {
-        if (this._roomData.has(room))
-            this._roomData.delete(room);
-    },
-
     _deleteRoomDataHandler: function(room, handlerID) {
         if (!this._isRoomData(room))
             return;
@@ -127,7 +122,9 @@ const UserTracker = new Lang.Class({
 
         this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
         this._clearUsersFromRoom(room);
-        this._deleteRoomData(room);
+        this._roomData.delete(room);
+    },
+
     },
 
     _connectRoomSignalsForRoom: function(room) {
