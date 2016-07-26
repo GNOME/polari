@@ -79,6 +79,8 @@ const Application = new Lang.Class({
             accels: ['<Primary>w'] },
           { name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)') },
+          { name: 'connect-account',
+            parameter_type: GLib.VariantType.new('o') },
           { name: 'reconnect-account',
             parameter_type: GLib.VariantType.new('o') },
           { name: 'user-list',

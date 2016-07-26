@@ -151,6 +151,7 @@ const RoomListHeader = new Lang.Class({
                        'popoverStatus',
                        'popoverTitle',
                        'popoverPassword',
+                       'popoverConnect',
                        'popoverReconnect',
                        'popoverRemove',
                        'popoverProperties',
@@ -173,6 +174,7 @@ const RoomListHeader = new Lang.Class({
             }));
 
         let target = new GLib.Variant('o', this._account.get_object_path());
+        this._popoverConnect.action_target = target;
         this._popoverReconnect.action_target = target;
         this._popoverRemove.action_target = target;
         this._popoverProperties.action_target = target;
@@ -197,9 +199,15 @@ const RoomListHeader = new Lang.Class({
                                   Lang.bind(this, this._onConnectionStatusChanged));
         this._onConnectionStatusChanged();
 
+        let presenceChangedId =
+            this._account.connect('notify::requested-presence-type',
+                                  Lang.bind(this, this._onRequestedPresenceChanged));
+        this._onRequestedPresenceChanged();
+
         this.connect('destroy', Lang.bind(this, function() {
             this._account.disconnect(displayNameChangedId);
             this._account.disconnect(connectionStatusChangedId);
+            this._account.disconnect(presenceChangedId);
         }));
     },
 
@@ -277,6 +285,13 @@ const RoomListHeader = new Lang.Class({
             this._popoverTitle.label = '<b>' + _("Connection Problem") + '</b>';
             this._popoverStatus.label = this._getErrorLabel();
         }
+    },
+
+    _onRequestedPresenceChanged: function() {
+        let presence = this._account.requested_presence_type;
+        let offline = presence == Tp.ConnectionPresenceType.OFFLINE;
+        this._popoverConnect.visible = offline;
+        this._popoverReconnect.visible = !offline;
     },
 
     _getStatusLabel: function() {

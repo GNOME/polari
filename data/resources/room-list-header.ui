@@ -130,6 +130,14 @@
           </object>
         </child>
         <child>
+          <object class="GtkModelButton" id="popoverConnect">
+            <property name="xalign">0</property>
+            <property name="visible">True</property>
+            <property name="action-name">app.connect-account</property>
+            <property name="text" translatable="yes">Connect</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkModelButton" id="popoverReconnect">
             <property name="xalign">0</property>
             <property name="visible">True</property>

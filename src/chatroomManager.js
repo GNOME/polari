@@ -174,6 +174,9 @@ const _ChatroomManager = new Lang.Class({
         let leaveAction = this._app.lookup_action('leave-room');
         leaveAction.connect('activate', Lang.bind(this, this._onLeaveActivated));
 
+        let connectAction = this._app.lookup_action('connect-account');
+        connectAction.connect('activate', Lang.bind(this, this._onConnectAccountActivated));
+
         let reconnectAction = this._app.lookup_action('reconnect-account');
         reconnectAction.connect('activate', Lang.bind(this, this._onReconnectAccountActivated));
 
@@ -276,6 +279,16 @@ const _ChatroomManager = new Lang.Class({
                                          serializedChannel.channel,
                                          0]);
         action.activate(parameter);
+    },
+
+    _onConnectAccountActivated: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let factory = Tp.AccountManager.dup().get_factory();
+        let account = factory.ensure_account(accountPath, []);
+        account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
+                                       'available',
+                                       account.requested_status_message,
+                                       null);
     },
 
     _onReconnectAccountActivated: function(action, parameter) {
