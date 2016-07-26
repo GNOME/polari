@@ -82,15 +82,15 @@ const UserTracker = new Lang.Class({
     },
 
     _getRoomContacts: function(room) {
-        return this._roomData.get(room)._contactMapping;
+        return this._roomData.get(room).contactMapping;
     },
 
     _getRoomHandlers: function(room) {
-        return this._roomData.get(room)._handlerMapping;
+        return this._roomData.get(room).handlerMapping;
     },
 
     _getRoomSignals: function(room) {
-        return this._roomData.get(room)._roomSignals;
+        return this._roomData.get(room).roomSignals;
     },
 
     _onRoomAdded: function(roomManager, room) {
@@ -157,9 +157,9 @@ const UserTracker = new Lang.Class({
     _ensureRoomMappingForRoom: function(room) {
         if (this._roomData.has(room))
             return;
-        this._roomData.set(room, { _contactMapping: new Map(),
-                                   _handlerMapping: new Map(),
-                                   _roomSignals: [] });
+        this._roomData.set(room, { contactMapping: new Map(),
+                                   handlerMapping: new Map(),
+                                   roomSignals: [] });
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
