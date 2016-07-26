@@ -122,9 +122,10 @@ const UserTracker = new Lang.Class({
     },
 
     _onRoomRemoved: function(roomManager, room) {
-        if (room.account == this._account)
-            this._disconnectRoomSignalsForRoom(room);
+        if (room.account != this._account)
+            return;
 
+        this._disconnectRoomSignalsForRoom(room);
         this._clearUsersFromRoom(room);
     },
 
