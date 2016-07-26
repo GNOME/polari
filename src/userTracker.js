@@ -112,25 +112,10 @@ const UserTracker = new Lang.Class({
     },
 
     _onRoomAdded: function(roomManager, room) {
-        if (room.account == this._account)
-            this._connectRoomSignalsForRoom(room);
-    },
-
-    _onRoomRemoved: function(roomManager, room) {
-        if (!this._roomData.has(room))
+        if (room.account != this._account)
             return;
 
-        this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
-        this._clearUsersFromRoom(room);
-        this._roomData.delete(room);
-    },
-
-    },
-
-    _connectRoomSignalsForRoom: function(room) {
         this._ensureRoomMappingForRoom(room);
-
-        let currentRoomSignals = this._getRoomSignals(room);
 
         let roomSignals = [
             { name: 'notify::channel',
@@ -149,9 +134,19 @@ const UserTracker = new Lang.Class({
               handler: Lang.bind(this, this._onMemberLeft) }
         ];
 
-        roomSignals.forEach(Lang.bind(this, function(signal) {
-            currentRoomSignals.push(room.connect(signal.name, signal.handler));
-        }));
+        let signalIds = this._getRoomSignals(room);
+        roomSignals.forEach(signal => {
+            signalIds.push(room.connect(signal.name, signal.handler));
+        });
+    },
+
+    _onRoomRemoved: function(roomManager, room) {
+        if (!this._roomData.has(room))
+            return;
+
+        this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
+        this._clearUsersFromRoom(room);
+        this._roomData.delete(room);
     },
 
     _onChannelChanged: function(room) {
