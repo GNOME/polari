@@ -301,33 +301,33 @@ const UserTracker = new Lang.Class({
                                        Utils.getTpEventTime() ]);
         notification.set_default_action_and_target('app.join-room', param);
 
-        this._app.send_notification(this._getNotifyActionName(member.alias), notification);
+        this._app.send_notification(this._getNotifyActionNameInternal(member.alias), notification);
 
         let baseNick = Polari.util_get_basenick(member.alias);
     },
 
     _shouldNotifyNick: function(nickName) {
-        let actionName = this._getNotifyActionName(nickName);
+        let actionName = this._getNotifyActionNameInternal(nickName);
         let state = this._app.get_action_state(actionName);
         return state ? state.get_boolean()
                      : false;
     },
 
     _setNotifyActionEnabled: function(nickName, enabled) {
-        let name = this._getNotifyActionName(nickName);
+        let name = this._getNotifyActionNameInternal(nickName);
         let action = this._app.lookup_action(name);
         if (action)
             action.enabled = enabled;
     },
 
-    _getNotifyActionName: function(nickName) {
+    _getNotifyActionNameInternal: function(nickName) {
         return 'notify-user-' +
                this._account.get_path_suffix() + '-' +
                Polari.util_get_basenick(nickName);
     },
 
     getNotifyActionName: function(nickName) {
-        let name = this._getNotifyActionName(nickName);
+        let name = this._getNotifyActionNameInternal(nickName);
 
         if (!this._app.lookup_action(name)) {
             let status = this.getNickStatus(nickName);
