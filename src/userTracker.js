@@ -125,7 +125,7 @@ const UserTracker = new Lang.Class({
         if (room.account != this._account)
             return;
 
-        this._disconnectRoomSignalsForRoom(room);
+        this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
         this._clearUsersFromRoom(room);
         this._deleteRoomData(room);
     },
@@ -155,15 +155,6 @@ const UserTracker = new Lang.Class({
         roomSignals.forEach(Lang.bind(this, function(signal) {
             currentRoomSignals.push(room.connect(signal.name, signal.handler));
         }));
-    },
-
-    _disconnectRoomSignalsForRoom: function(room) {
-        let currentRoomSignals = this._getRoomSignals(room);
-
-        for (let i = 0; i < currentRoomSignals.length; i++) {
-            room.disconnect(currentRoomSignals[i]);
-        }
-        currentRoomSignals = [];
     },
 
     _onChannelChanged: function(room) {
