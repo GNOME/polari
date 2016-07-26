@@ -143,8 +143,6 @@ const UserTracker = new Lang.Class({
         else
             members = [room.channel.connection.self_contact, room.channel.target_contact];
 
-        this._ensureRoomMappingForRoom(room);
-
         /*keep track of initial members in the room, both locally and
         globally*/
         members.forEach(m => { this._trackMember(m, room); });
