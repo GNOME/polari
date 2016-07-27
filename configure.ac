@@ -40,12 +40,7 @@ PKG_CHECK_MODULES(POLARI,
 
 AC_CHECK_FUNCS([strcasestr])
 
-AC_PATH_PROG([GJS_CONSOLE],[gjs-console],[no])
-
-if test "$GJS_CONSOLE" = "no"; then
-  AC_MSG_ERROR([gjs is required to build Polari])
-fi
-
+AX_PROG_GJS
 AC_PROG_LN_S
 
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable=glib_compile_resources gio-2.0`

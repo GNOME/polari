@@ -16,7 +16,7 @@ CLEANFILES += $(gir_DATA) $(typelib_DATA)
 
 do_subst = sed -e 's|@prefix[@]|$(prefix)|g' \
                -e 's|@libdir[@]|$(libdir)|g' \
-               -e 's|@GJS_CONSOLE[@]|$(GJS_CONSOLE)|g' \
+               -e 's|@GJS[@]|$(GJS)|g' \
                -e 's|@PACKAGE_NAME[@]|$(PACKAGE_NAME)|g' \
                -e 's|@PACKAGE_VERSION[@]|$(PACKAGE_VERSION)|g' \
                $(NULL)
