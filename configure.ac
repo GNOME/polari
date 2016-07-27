@@ -41,6 +41,19 @@ PKG_CHECK_MODULES(POLARI,
 AC_CHECK_FUNCS([strcasestr])
 
 AX_PROG_GJS
+AX_CHECK_GIRS_GJS([Gdk], [3.0])
+AX_CHECK_GIRS_GJS([GdkPixbuf], [2.0])
+AX_CHECK_GIR_SYMBOLS_GJS([Gio], [2.0], [Application.send_notification])
+AX_CHECK_GIRS_GJS([GLib], [2.0])
+AX_CHECK_GIRS_GJS([GObject], [2.0])
+AX_CHECK_GIR_SYMBOLS_GJS([Gtk], [3.0], [ScrolledWindow.set_max_content_height])
+AX_CHECK_GIRS_GJS([Pango], [1.0])
+AX_CHECK_GIRS_GJS([PangoCairo], [1.0])
+AX_CHECK_GIRS_GJS([Secret], [1])
+AX_CHECK_GIRS_GJS([Soup], [2.4])
+AX_CHECK_GIRS_GJS([TelepathyGLib], [0.12])
+AX_CHECK_GIRS_GJS([TelepathyLogger], [0.2])
+
 AC_PROG_LN_S
 
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable=glib_compile_resources gio-2.0`
