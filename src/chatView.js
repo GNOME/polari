@@ -225,6 +225,71 @@ const ButtonTag = new Lang.Class({
     }
 });
 
+const HoverFilterTag = new Lang.Class({
+    Name: 'HoverFilterTag',
+    Extends: ButtonTag,
+    Properties: {
+        'filtered-tag': GObject.ParamSpec.object('filtered-tag',
+                                                 'filtered-tag',
+                                                 'filtered-tag',
+                                                 GObject.ParamFlags.READWRITE |
+                                                 GObject.ParamFlags.CONSTRUCT_ONLY,
+                                                 Gtk.TextTag.$gtype),
+        'hover-opacity': GObject.ParamSpec.double('hover-opacity',
+                                                  'hover-opacity',
+                                                  'hover-opacity',
+                                                  GObject.ParamFlags.READWRITE,
+                                                  0.0, 1.0, 1.0)
+    },
+
+    _init: function(params) {
+        this._filteredTag = null;
+        this._hoverOpacity = 1.;
+
+        this.parent(params);
+
+        this.connect('notify::hover', () => { this._updateColor(); });
+    },
+
+    _updateColor: function() {
+        if (!this._filteredTag)
+            return;
+
+        let color = this._filteredTag.foreground_rgba;
+        if (this.hover)
+            color.alpha *= this._hoverOpacity;
+        this.foreground_rgba = color;
+    },
+
+    set filtered_tag(value) {
+        this._filteredTag = value;
+        this.notify('filtered-tag');
+
+        this._filteredTag.connect('notify::foreground-rgba', () => {
+            this._updateColor();
+        });
+        this._updateColor();
+    },
+
+    get filtered_tag() {
+        return this._filteredTag;
+    },
+
+    set hover_opacity(value) {
+        if (this._hoverOpacity == value)
+            return;
+        this._hoverOpacity = value;
+        this.notify('hover-opacity');
+
+        if (this.hover)
+            this._updateColor();
+    },
+
+    get hover_opacity() {
+        return this._hoverOpacity;
+    }
+});
+
 const ChatView = new Lang.Class({
     Name: 'ChatView',
     Extends: Gtk.ScrolledWindow,
