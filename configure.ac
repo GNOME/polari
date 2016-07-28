@@ -53,6 +53,7 @@ AX_CHECK_GIRS_GJS([Secret], [1])
 AX_CHECK_GIRS_GJS([Soup], [2.4])
 AX_CHECK_GIRS_GJS([TelepathyGLib], [0.12])
 AX_CHECK_GIRS_GJS([Tracker], [1.0])
+AX_CHECK_GIRS_GJS([TrackerControl], [1.0])
 
 AC_PROG_LN_S
 

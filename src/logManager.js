@@ -1,7 +1,13 @@
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Tracker = imports.gi.Tracker;
+const TrackerControl = imports.gi.TrackerControl;
 const Tp = imports.gi.TelepathyGLib;
+
+const Utils = imports.utils;
+
+const CHATLOG_MINER_NAME = Tracker.DBUS_SERVICE + '.Miner.Chatlog';
+const CHATLOG_MINER_PATH = '/' + CHATLOG_MINER_NAME.replace('.', '/', 'g');
 
 let _logManager = null;
 
@@ -195,7 +201,38 @@ const _LogManager = new Lang.Class({
     Name: 'LogManager',
 
     _init: function() {
+        this._ensureChatlogMiner();
         this._connection = Tracker.SparqlConnection.get(null);
+    },
+
+    _ensureChatlogMiner: function() {
+        let running = false;
+        try {
+            let manager = TrackerControl.MinerManager.new_full(false);
+            [running,] = manager.get_status(CHATLOG_MINER_NAME);
+        } catch(e) {
+            Utils.debug('Unable to create MinerManager: ' + e.message);
+        }
+
+        if (running) {
+            Utils.debug('Detected running chatlog miner.');
+            return;
+        }
+
+       let flags = Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
+                   Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS;
+       Gio.DBusProxy.new_for_bus(Gio.BusType.SESSION, flags, null,
+                                 CHATLOG_MINER_NAME, CHATLOG_MINER_PATH,
+                                 Tracker.DBUS_SERVICE + '.Miner',
+                                 null, (o, res) => {
+           let miner = null;
+           try {
+               miner = Gio.DBusProxy.new_for_bus_finish(res);
+               Utils.debug('Started chatlog miner.');
+           } catch(e) {
+               log('Failed to start chatlog miner: ' + e.message);
+           }
+       });
     },
 
     query: function(sparql, cancellable, callback) {
