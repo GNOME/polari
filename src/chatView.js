@@ -231,8 +231,6 @@ const HoverFilterTag = new Lang.Class({
     Name: 'HoverFilterTag',
     Extends: ButtonTag,
     Properties: {
-        'foreground-rgba': GObject.ParamSpec.override('foreground-rgba',
-                                                      Gtk.TextTag),
         'filtered-tag': GObject.ParamSpec.object('filtered-tag',
                                                  'filtered-tag',
                                                  'filtered-tag',
@@ -252,26 +250,17 @@ const HoverFilterTag = new Lang.Class({
 
         this.parent(params);
 
-        this.connect('notify::hover', () => { this._foregroundChanged(); });
+        this.connect('notify::hover', () => { this._updateColor(); });
     },
 
-    _foregroundChanged: function() {
-        this.notify('foreground-rgba');
-        this.changed(false);
-    },
-
-    set foreground_rgba(value) {
-        throw new Error('Trying to set computed color directly');
-    },
-
-    get foreground_rgba() {
+    _updateColor: function() {
         if (!this._filteredTag)
-            throw new Error('No tag to apply filter to');
+            return;
 
         let color = this._filteredTag.foreground_rgba;
         if (this.hover)
             color.alpha *= this._hoverOpacity;
-        return color;
+        this.foreground_rgba = color;
     },
 
     set filtered_tag(value) {
@@ -279,8 +268,9 @@ const HoverFilterTag = new Lang.Class({
         this.notify('filtered-tag');
 
         this._filteredTag.connect('notify::foreground-rgba', () => {
-            this._foregroundChanged();
+            this._updateColor();
         });
+        this._updateColor();
     },
 
     get filtered_tag() {
@@ -294,7 +284,7 @@ const HoverFilterTag = new Lang.Class({
         this.notify('hover-opacity');
 
         if (this.hover)
-            this._foregroundChanged();
+            this._updateColor();
     },
 
     get hover_opacity() {
@@ -1255,6 +1245,13 @@ const ChatView = new Lang.Class({
                     this._updateNickTag(nickTag, status);
                 }
                 tags.push(nickTag);
+
+                let hoverTag = new HoverFilterTag({ filtered_tag: nickTag,
+                                                    hover_opacity: 0.8 });
+                buffer.get_tag_table().add(hoverTag);
+
+                tags.push(hoverTag);
+
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
                 this._insertWithTags(iter, message.nick, tags);
