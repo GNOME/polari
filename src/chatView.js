@@ -1279,6 +1279,13 @@ const ChatView = new Lang.Class({
                     this._updateNickTag(nickTag, status);
                 }
                 tags.push(nickTag);
+
+                let hoverTag = new HoverFilterTag({ filtered_tag: nickTag,
+                                                    hover_opacity: 0.8 });
+                buffer.get_tag_table().add(hoverTag);
+
+                tags.push(hoverTag);
+
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
                 this._insertWithTags(iter, message.nick, tags);
