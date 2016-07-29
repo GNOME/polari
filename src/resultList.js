@@ -160,7 +160,6 @@ const ResultList = new Lang.Class({
 
     _init: function(params) {
         this.parent(params);
-        print("XXXXXXXXXXXXXXXXXXX\n");
         this._app = Gio.Application.get_default();
         this._logManager = LogManager.getDefault();
 
@@ -202,6 +201,7 @@ const ResultList = new Lang.Class({
         let text = value.deep_unpack();
         this._clearList();
         this._results = [];
+        this.set_placeholder(null);
 
         if(text.length < MIN_SEARCH_WIDTH) {
             return;
@@ -219,6 +219,25 @@ const ResultList = new Lang.Class({
         this._fetchingResults = true;
         this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
         this._endQuery.run(query,this._cancellable,Lang.bind(this, this._handleResults));
+        Mainloop.timeout_add(3000, Lang.bind(this,
+            function() {
+                if(this._fetchingResults) {
+                    let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
+                                                    valign: Gtk.Align.CENTER,
+                                                    orientation: Gtk.Orientation.HORIZONTAL,
+                                                    visible: true });
+                    let spinner = new Gtk.Spinner({ visible: true });
+                    spinner.start();
+                    placeholder.add(spinner);
+                    placeholder.add(new Gtk.Label({ label: _(" Searching.."),
+                                                    visible: true }));
+
+                    placeholder.get_style_context().add_class('dim-label');
+                    this.set_placeholder(placeholder);
+                }
+                // else this.set_placeholder(null);
+                return GLib.SOURCE_REMOVE;
+            }));
         // this._logManager.query(query,this._cancellable,Lang.bind(this, this._handleResults));
     },
 
@@ -233,10 +252,25 @@ const ResultList = new Lang.Class({
             function() {
                 this._endQuery.next(10,this._cancellable,Lang.bind(this, this._handleResults1));
             }));
+
     },
 
     _handleResults: function(events) {
         log(events.length);
+        if(events.length == 0) {
+            let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
+                                            valign: Gtk.Align.CENTER,
+                                            orientation: Gtk.Orientation.VERTICAL,
+                                            visible: true });
+            placeholder.add(new Gtk.Image({ icon_name: 'edit-find-symbolic',
+                                            pixel_size: 64,
+                                            visible: true }));
+            placeholder.add(new Gtk.Label({ label: _("No results"),
+                                            visible: true }));
+
+            placeholder.get_style_context().add_class('dim-label');
+            this.set_placeholder(placeholder);
+        }
         let widgetMap = {};
         let markup_message = '';
         for (let i = 0; i < events.length; i++) {
@@ -378,7 +412,7 @@ const ResultWindow = new Lang.Class({
         this.parent(params);
 
         this._list = new ResultList({ visible: true, selection_mode: Gtk.SelectionMode.BROWSE });
-
+        // this._list.set_placeholder(new ResultPlaceholder());
         this.add(this._list);
         this.show_all();
 
@@ -419,4 +453,79 @@ const ResultWindow = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 });
+
+const ResultPlaceholder = new Lang.Class({
+    Name: 'ResultPlaceholder',
+    Extends: Gtk.Overlay,
+
+    _init: function() {
+        let image = new Gtk.Image({ icon_name: 'org.gnome.Polari-symbolic',
+                                      pixel_size: 96, halign: Gtk.Align.END,
+                                      margin_end: 14 });
+
+        let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
+                                    margin_start: 14 });
+        title.label = '<span letter_spacing="4500">%s</span>'.format(_("Polari"));
+        title.get_style_context().add_class('polari-background-title');
+
+        let description = new Gtk.Label({ label: _("Join a room using the + button."),
+                                          halign: Gtk.Align.CENTER, wrap: true,
+                                          margin_top: 24, use_markup: true });
+        description.get_style_context().add_class('polari-background-description');
+
+        let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
+        //sizeGroup.add_widget(inputPlaceholder);
+
+        this.parent();
+        let grid = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
+                                  column_spacing: 18, hexpand: true, vexpand: true,
+                                  valign: Gtk.Align.CENTER });
+        grid.get_style_context().add_class('polari-background');
+        grid.attach(image, 0, 0, 1, 1);
+        grid.attach(title, 1, 0, 1, 1);
+        grid.attach(description, 0, 1, 2, 1);
+        this.add(grid);
+        this.add_overlay(inputPlaceholder);
+        this.show_all();
+    }
+});
+
+const LoadPlaceholder = new Lang.Class({
+    Name: 'LoadPlaceholder',
+    Extends: Gtk.Overlay,
+
+    _init: function() {
+        let image = new Gtk.Image({ icon_name: 'org.gnome.Polari-symbolic',
+                                      pixel_size: 96, halign: Gtk.Align.END,
+                                      margin_end: 14 });
+
+        let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
+                                    margin_start: 14 });
+        title.label = '<span letter_spacing="4500">%s</span>'.format(_("Loading"));
+        title.get_style_context().add_class('polari-background-title');
+
+        let description = new Gtk.Label({ label: _("Join a room using the + button."),
+                                          halign: Gtk.Align.CENTER, wrap: true,
+                                          margin_top: 24, use_markup: true });
+        description.get_style_context().add_class('polari-background-description');
+
+        let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
+        //sizeGroup.add_widget(inputPlaceholder);
+
+        this.parent();
+        let grid = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
+                                  column_spacing: 18, hexpand: true, vexpand: true,
+                                  valign: Gtk.Align.CENTER });
+        grid.get_style_context().add_class('polari-background');
+        let spinner = new Gtk.Spinner({visible: true, active: true});
+        spinner.start();
+        grid.attach(spinner, 0, 0, 1, 1);
+        grid.attach(title, 1, 0, 1, 1);
+        // grid.attach(description, 0, 1, 2, 1);
+        this.add(grid);
+        this.add_overlay(inputPlaceholder);
+        this.show_all();
+    }
+});
+
 Signals.addSignalMethods(ResultList.prototype);
