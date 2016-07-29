@@ -304,6 +304,11 @@ const ResultList = new Lang.Class({
             this.add(row);
         }
 
+        if(events.length > 0) {
+            let row = this._widgetMap[events[0].id];
+            this.select_row(row);
+        }
+
         this._showList();
         this._fetchingResults = false;
     },
