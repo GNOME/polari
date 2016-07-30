@@ -29,6 +29,7 @@ const AccountsMonitor = new Lang.Class({
         factory.add_channel_features([Tp.Channel.get_feature_quark_contacts()]);
         factory.add_contact_features([Tp.ContactFeature.ALIAS]);
 
+        this._preparedCallbacks = [];
         this._accountManager.prepare_async(null,
                                            Lang.bind(this, this._onPrepared));
     },
@@ -47,6 +48,14 @@ const AccountsMonitor = new Lang.Class({
 
     lookupAccount: function(accountPath) {
         return this._accounts.get(accountPath);
+    },
+
+    prepare: function(callback) {
+        let quark = Tp.AccountManager.get_feature_quark_core();
+        if (this._accountManager.is_prepared(quark))
+            callback();
+        else
+            this._preparedCallbacks.push(callback);
     },
 
     _onPrepared: function(am, res) {
@@ -75,7 +84,7 @@ const AccountsMonitor = new Lang.Class({
         am.connect('account-disabled',
                    Lang.bind(this, this._accountEnabledChanged));
 
-        this.emit('account-manager-prepared', am);
+        this._preparedCallbacks.forEach(callback => { callback(); });
     },
 
     _onPrepareShutdown: function() {

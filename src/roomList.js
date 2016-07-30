@@ -354,12 +354,6 @@ const RoomList = new Lang.Class({
         this._roomRows = new Map();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
-            function(mon, am) {
-                let accounts = this._accountsMonitor.accounts;
-                for (let i = 0; i < accounts.length; i++)
-                    this._accountAdded(mon, accounts[i]);
-            }));
         this._accountsMonitor.connect('account-added',
                                       Lang.bind(this, this._accountAdded));
         this._accountsMonitor.connect('account-removed',
@@ -369,6 +363,11 @@ const RoomList = new Lang.Class({
         });
         this._accountsMonitor.connect('account-disabled', (mon, account) => {
             this._updatePlaceholderVisibility(account);
+        });
+        this._accountsMonitor.prepare(() => {
+            this._accountsMonitor.accounts.forEach(account => {
+                this._accountAdded(this._accountsMonitor, account);
+            });
         });
 
         this._roomManager = ChatroomManager.getDefault();

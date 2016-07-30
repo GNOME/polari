@@ -160,14 +160,9 @@ const Application = new Lang.Class({
         let time = Utils.getTpEventTime();
         let uris = files.map(function(f) { return f.get_uri(); });
 
-        let quark = Tp.AccountManager.get_feature_quark_core();
-        if (this._accountsMonitor.accountManager.is_prepared(quark))
+        this._accountsMonitor.prepare(() => {
             this._openURIs(uris, time);
-        else
-            this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
-                function(mon) {
-                    this._openURIs(uris, time);
-                }));
+        });
     },
 
     _openURIs: function(uris, time) {

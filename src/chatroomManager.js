@@ -152,9 +152,8 @@ const _ChatroomManager = new Lang.Class({
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('account-manager-prepared',
-                                      Lang.bind(this, this._onPrepared));
         this._amIsPrepared = false;
+        this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
 
         this._app.connect('prepare-shutdown',
                           Lang.bind(this, this._onPrepareShutdown));
@@ -164,7 +163,7 @@ const _ChatroomManager = new Lang.Class({
         this._lastActiveRoom = null;
     },
 
-    _onPrepared: function(mon, am) {
+    _onPrepared: function() {
         let actions = [
             { name: 'join-room',
               handler: Lang.bind(this, this._onJoinActivated) },
@@ -183,7 +182,7 @@ const _ChatroomManager = new Lang.Class({
             this._app.lookup_action(a.name).connect('activate', a.handler);
         });
 
-        this._client = new Client(am, this);
+        this._client = new Client(this._accountsMonitor.accountManager, this);
 
         let filters = [];
 
@@ -214,7 +213,6 @@ const _ChatroomManager = new Lang.Class({
     },
 
     lateInit: function() {
-        let am = this._accountsMonitor.accountManager;
         let ready = this._amIsPrepared &&
             this._app.get_active_window() != null;
         if (!ready)
