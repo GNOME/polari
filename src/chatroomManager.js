@@ -428,9 +428,6 @@ const _ChatroomManager = new Lang.Class({
                     return;
                 }
 
-                if (!this._app.get_active_window())
-                    this._app.activate();
-
                 let room = this._ensureRoomForChannel(channel);
                 //channel.join_async('', null);
 

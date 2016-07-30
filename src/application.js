@@ -325,6 +325,11 @@ const Application = new Lang.Class({
     },
 
     _requestChannel: function(accountPath, targetType, targetId, time, callback) {
+        let [present, ] = Tp.user_action_time_should_present(time);
+
+        if (!this._window || present)
+            this.activate();
+
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
         if (!account || !account.enabled) {
