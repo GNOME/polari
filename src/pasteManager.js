@@ -8,7 +8,6 @@ const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
-const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
 const Utils = imports.utils;
 
