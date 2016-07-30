@@ -118,8 +118,9 @@ const Application = new Lang.Class({
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
 
+        this._telepathyClient = null;
+
         this._roomManager = RoomManager.getDefault();
-        this._client = TelepathyClient.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networksManager = NetworksManager.getDefault();
 
@@ -132,13 +133,20 @@ const Application = new Lang.Class({
     },
 
     vfunc_activate: function() {
+        if (!this._telepathyClient) {
+            let params = {
+                name: 'Polari',
+                account_manager: this._accountsMonitor.accountManager,
+                uniquify_name: false
+            };
+            this._telepathyClient = new TelepathyClient.TelepathyClient(params);
+        }
+
         if (!this._window) {
             this._window = new MainWindow.MainWindow({ application: this });
             this._window.connect('destroy',
                                  () => { this.emit('prepare-shutdown'); });
             this._window.show_all();
-
-            this._client.lateInit();
         }
         this._window.present();
     },

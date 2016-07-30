@@ -29,14 +29,6 @@ const SASLAuthenticationIface = '<node> \
 </node>';
 let SASLAuthProxy = Gio.DBusProxy.makeProxyWrapper(SASLAuthenticationIface);
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new _TelepathyClient();
-    return _singleton;
-}
-
 const SASLStatus = {
     NOT_STARTED: 0,
     IN_PROGRESS: 1,
@@ -118,34 +110,11 @@ const SASLAuthHandler = new Lang.Class({
     }
 });
 
-const Client = new Lang.Class({
-    Name: 'Client',
-    GTypeName: 'PolariTpClient',
+const TelepathyClient = new Lang.Class({
+    Name: 'TelepathyClient',
     Extends: Tp.BaseClient,
 
-    _init: function(am, manager) {
-        this.parent({ account_manager: am,
-                      name: 'Polari',
-                      uniquify_name: false });
-        this.set_handler_bypass_approval(false);
-        this.set_observer_recover(true);
-
-        this._manager = manager;
-    },
-
-    vfunc_observe_channels: function() {
-        this._manager.observeChannels.apply(this._manager, arguments);
-    },
-
-    vfunc_handle_channels: function() {
-        this._manager.handleChannels.apply(this._manager, arguments);
-    }
-});
-
-const _TelepathyClient = new Lang.Class({
-    Name: '_TelepathyClient',
-
-    _init: function() {
+    _init: function(params) {
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
@@ -153,13 +122,17 @@ const _TelepathyClient = new Lang.Class({
 
         this._pendingRequests = new Map();
 
+        this.parent(params);
+
+        this.set_handler_bypass_approval(false);
+        this.set_observer_recover(true);
+
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._roomManager = RoomManager.getDefault();
         this._roomManager.connect('room-added', (mgr, room) => {
             this._connectRoom(room);
         });
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._amIsPrepared = false;
         this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
     },
 
@@ -180,8 +153,6 @@ const _TelepathyClient = new Lang.Class({
             this._app.lookup_action(a.name).connect('activate', a.handler);
         });
 
-        this._client = new Client(this._accountsMonitor.accountManager, this);
-
         let filters = [];
 
         let roomFilter = {};
@@ -199,22 +170,11 @@ const _TelepathyClient = new Lang.Class({
         authFilter[Tp.PROP_CHANNEL_TYPE_SERVER_AUTHENTICATION_AUTHENTICATION_METHOD] = Tp.IFACE_CHANNEL_INTERFACE_SASL_AUTHENTICATION;
         filters.push(authFilter);
 
-        filters.forEach(Lang.bind(this,
-            function(f) {
-                this._client.add_handler_filter(f);
-                this._client.add_observer_filter(f);
-            }));
-        this._client.register();
-
-        this._amIsPrepared = true;
-        this.lateInit();
-    },
-
-    lateInit: function() {
-        let ready = this._amIsPrepared &&
-            this._app.get_active_window() != null;
-        if (!ready)
-            return;
+        filters.forEach(f => {
+            this.add_handler_filter(f);
+            this.add_observer_filter(f);
+        });
+        this.register();
 
         this._accountsMonitor.connect('account-enabled',
                                       Lang.bind(this, this._onAccountEnabled));
@@ -387,7 +347,7 @@ const _TelepathyClient = new Lang.Class({
         context.accept();
     },
 
-    observeChannels: function() {
+    vfunc_observe_channels: function() {
         let [account, connection,
              channels, op, requests, context] = arguments;
 
@@ -408,7 +368,7 @@ const _TelepathyClient = new Lang.Class({
             }));
     },
 
-    handleChannels: function() {
+    vfunc_handle_channels: function() {
         let [account, connection,
              channels, satisfied, userTime, context] = arguments;
 
