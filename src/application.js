@@ -470,19 +470,24 @@ const Application = new Lang.Class({
 
     _onJoinRoom: function(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
-        if (!account)
-            return;
 
-        this._requestChannel(accountPath, Tp.HandleType.ROOM,
-                             channelName, time);
-        this._addSavedChannel(account, channelName);
+        this._accountsMonitor.prepare(() => {
+            let account = this._accountsMonitor.lookupAccount(accountPath);
+            if (!account)
+                return;
+
+            this._requestChannel(accountPath, Tp.HandleType.ROOM,
+                                 channelName, time);
+            this._addSavedChannel(account, channelName);
+        });
     },
 
     _onMessageUser: function(action, parameter) {
         let [accountPath, contactName, message, time] = parameter.deep_unpack();
-        this._requestChannel(accountPath, Tp.HandleType.CONTACT,
-                             contactName, time, Lang.bind(this, this._sendMessage, message));
+        this._accountsMonitor.prepare(() => {
+            this._requestChannel(accountPath, Tp.HandleType.CONTACT,
+                                 contactName, time, Lang.bind(this, this._sendMessage, message));
+        });
     },
 
     _sendMessage: function(channel, message) {
