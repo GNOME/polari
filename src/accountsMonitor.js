@@ -16,7 +16,7 @@ const AccountsMonitor = new Lang.Class({
     Name: 'AccountsMonitor',
 
     _init: function() {
-        this._accounts = [];
+        this._accounts = new Map();
 
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown',
@@ -34,7 +34,7 @@ const AccountsMonitor = new Lang.Class({
     },
 
     dupAccounts: function() {
-        return this._accounts.slice();
+        return [...this._accounts.values()];
     },
 
     get accountManager() {
@@ -71,9 +71,7 @@ const AccountsMonitor = new Lang.Class({
     },
 
     _onPrepareShutdown: function() {
-        for (let i = 0; i < this._accounts.length; i++) {
-            let account = this._accounts[i];
-
+        for (let account of this._accounts.values()) {
             let presence = Tp.ConnectionPresenceType.OFFLINE;
             if (account.requested_presence_type == presence)
                 continue;
@@ -97,33 +95,33 @@ const AccountsMonitor = new Lang.Class({
         if (!this._shouldMonitorAccount(account))
             return;
 
+        if (this._accounts.has(account.object_path))
+            return;
+
         account._statusNotifyId =
             account.connect('notify::connection-status', Lang.bind(this,
                 function() {
                     this.emit('account-status-changed', account);
                 }));
-        this._accounts.push(account);
+        this._accounts.set(account.object_path, account);
 
         this.emit('account-added', account);
         this.emit('accounts-changed');
     },
 
     _removeAccount: function(account) {
-        let index = this._accounts.indexOf(account);
-
-        if (index == -1)
+        if (!this._accounts.delete(account.object_path))
             return;
 
         account.disconnect(account._statusNotifyId);
         delete account._statusNotifyId;
-        this._accounts.splice(index, 1);
 
         this.emit('account-removed', account);
         this.emit('accounts-changed');
     },
 
     _accountEnabledChanged: function(am, account) {
-        if (this._accounts.indexOf(account) == -1)
+        if (!this._accounts.has(account.object_path))
             return;
         this.emit('accounts-changed');
     }
