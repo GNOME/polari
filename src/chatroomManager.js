@@ -283,8 +283,7 @@ const _ChatroomManager = new Lang.Class({
 
     _onConnectAccountActivated: function(action, parameter) {
         let accountPath = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
         account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
                                        'available',
                                        account.requested_status_message,
@@ -293,18 +292,13 @@ const _ChatroomManager = new Lang.Class({
 
     _onReconnectAccountActivated: function(action, parameter) {
         let accountPath = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
-        account.reconnect_async(Lang.bind(this,
-            function (a, res){
-                a.reconnect_finish(res);
-            }));
+        let account = this._accountsMonitor.lookupAccount(accountPath);
+        account.reconnect_async((a, res) => { a.reconnect_finish(res); });
     },
 
     _onAuthenticateAccountActivated: function(action, parameter) {
         let [accountPath, password] = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
 
         let prompt = new GLib.Variant('b', password.length > 0);
         let params = GLib.Variant.new('a{sv}', { 'password-prompt': prompt });
@@ -320,10 +314,9 @@ const _ChatroomManager = new Lang.Class({
 
     _onJoinActivated: function(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
 
-        if (!account.enabled)
+        if (!account || !account.enabled)
             return;
 
         let room = this._ensureRoom(account, channelName, Tp.HandleType.ROOM);
@@ -334,10 +327,9 @@ const _ChatroomManager = new Lang.Class({
 
     _onQueryActivated: function(action, parameter) {
         let [accountPath, channelName, message, time] = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
 
-        if (!account.enabled)
+        if (!account || !account.enabled)
             return;
 
         let room = this._ensureRoom(account, channelName, Tp.HandleType.CONTACT);

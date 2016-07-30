@@ -51,7 +51,7 @@ const Application = new Lang.Class({
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
             function(am, account) {
-                this._removeSavedChannelsForAccount(account);
+                this._removeSavedChannelsForAccount(account.object_path);
             }));
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
@@ -323,9 +323,8 @@ const Application = new Lang.Class({
                                  GLib.Variant.new('aa{sv}', savedChannels));
     },
 
-    _removeSavedChannelsForAccount: function(account) {
+    _removeSavedChannelsForAccount: function(accountPath) {
         let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-        let accountPath = GLib.Variant.new('s', account.get_object_path());
 
         let savedChannels = savedChannels.filter(function(a) {
             return !a.account.equal(accountPath);
@@ -350,16 +349,12 @@ const Application = new Lang.Class({
     },
 
     _requestChannel: function(accountPath, targetType, targetId, time, callback) {
-        // have this in AccountMonitor?
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
 
-        if (!account.enabled) {
-            // if we are requesting a channel for a disabled account, we
-            // are restoring saved channels; if the account has also never
-            // been online, it was removed since the channel was saved
-            if (!account.has_been_online)
-                this._removeSavedChannelsForAccount(account);
+        if (!account || !account.enabled) {
+            // the account was removed since the channel was saved
+            if (!account)
+                this._removeSavedChannelsForAccount(accountPath);
             return;
         }
 
@@ -482,11 +477,12 @@ const Application = new Lang.Class({
 
     _onJoinRoom: function(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
+        let account = this._accountsMonitor.lookupAccount(accountPath);
+        if (!account)
+            return;
+
         this._requestChannel(accountPath, Tp.HandleType.ROOM,
                              channelName, time);
-
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
         this._addSavedChannel(account, channelName);
     },
 
@@ -551,8 +547,7 @@ const Application = new Lang.Class({
 
     _onRemoveConnection: function(action, parameter){
         let accountPath = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
         account.set_enabled_async(false, Lang.bind(this,
             function() {
                 let label = _("%s removed.").format(account.display_name);
@@ -574,8 +569,7 @@ const Application = new Lang.Class({
 
     _onEditConnection: function(action, parameter) {
         let accountPath = parameter.deep_unpack();
-        let factory = Tp.AccountManager.dup().get_factory();
-        let account = factory.ensure_account(accountPath, []);
+        let account = this._accountsMonitor.lookupAccount(accountPath);
         let dialog = new Connections.ConnectionProperties(account);
         dialog.transient_for = this._window;
         dialog.connect('response', Lang.bind(this,

@@ -45,6 +45,10 @@ const AccountsMonitor = new Lang.Class({
         return this._accountManager;
     },
 
+    lookupAccount: function(accountPath) {
+        return this._accounts.get(accountPath);
+    },
+
     _onPrepared: function(am, res) {
         try {
             am.prepare_finish(res);
