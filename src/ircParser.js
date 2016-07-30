@@ -3,8 +3,8 @@ const GLib = imports.gi.GLib;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
-const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
+const RoomManager = imports.roomManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 
@@ -44,7 +44,7 @@ const IrcParser = new Lang.Class({
 
     _init: function(room) {
         this._app = Gio.Application.get_default();
-        this._roomManager = ChatroomManager.getDefault();
+        this._roomManager = RoomManager.getDefault();
         this._room = room;
     },
 
@@ -220,7 +220,7 @@ const IrcParser = new Lang.Class({
                 let room = null;;
                 let name = argv[0];
                 if (name)
-                    room = this._roomManager.getRoomByName(name);
+                    room = this._roomManager.lookupRoomByName(name);
                 if (room)
                     argv.shift(); // first arg was a room name
                 else

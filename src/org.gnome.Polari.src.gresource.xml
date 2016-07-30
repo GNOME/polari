@@ -15,6 +15,7 @@
     <file>networksManager.js</file>
     <file>pasteManager.js</file>
     <file>roomList.js</file>
+    <file>roomManager.js</file>
     <file>roomStack.js</file>
     <file>tabCompletion.js</file>
     <file>userList.js</file>

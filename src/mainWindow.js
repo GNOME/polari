@@ -8,11 +8,11 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
-const ChatroomManager = imports.chatroomManager;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomList = imports.roomList;
+const RoomManager = imports.roomManager;
 const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
@@ -168,11 +168,12 @@ const MainWindow = new Lang.Class({
                                       Lang.bind(this, this._onAccountsChanged));
         this._onAccountsChanged(this._accountsMonitor);
 
-        this._roomManager = ChatroomManager.getDefault();
-        this._roomManager.connect('room-added',
-                                  Lang.bind(this, this._onRoomAdded));
+        this._roomManager = RoomManager.getDefault();
+        this._roomManager.connect('rooms-loaded',
+                                  Lang.bind(this, this._onRoomsLoaded));
         this._roomManager.connect('room-removed',
                                   Lang.bind(this, this._onRoomRemoved));
+        this._onRoomsLoaded();
 
         this._updateUserListLabel();
 
@@ -329,10 +330,22 @@ const MainWindow = new Lang.Class({
         );
     },
 
-    _onRoomAdded: function(mgr, room) {
+    _onRoomsLoaded: function(mgr) {
         if (this.active_room)
             return;
-        this.active_room = room;
+
+        let selectedRoom = this._settings.get_value('last-selected-channel').deep_unpack();
+        for (let prop in selectedRoom)
+            selectedRoom[prop] = selectedRoom[prop].deep_unpack();
+
+        let roomId = null;
+        let account = this._accountsMonitor.lookupAccount(selectedRoom.account);
+        let channelName = selectedRoom.channel;
+        if (account && account.enabled && channelName)
+            roomId = Polari.create_room_id(account, channelName, Tp.HandleType.ROOM);
+
+        this.active_room = this._roomManager.lookupRoom(roomId) ||
+                           this._roomManager.rooms.shift();
     },
 
     _onRoomRemoved: function(mgr, room) {

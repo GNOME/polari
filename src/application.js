@@ -11,6 +11,7 @@ const Connections = imports.connections;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
+const RoomManager = imports.roomManager;
 const Utils = imports.utils;
 const NetworksManager = imports.networksManager;
 
@@ -35,8 +36,6 @@ const Application = new Lang.Class({
     vfunc_startup: function() {
         this.parent();
 
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-
         let actionEntries = [
           { name: 'show-join-dialog',
             activate: Lang.bind(this, this._onShowJoinDialog),
@@ -48,7 +47,6 @@ const Application = new Lang.Class({
             activate: Lang.bind(this, this._onMessageUser),
             parameter_type: GLib.VariantType.new('(sssu)') },
           { name: 'leave-room',
-            activate: Lang.bind(this, this._onLeaveRoom),
             parameter_type: GLib.VariantType.new('(ss)') },
           { name: 'leave-current-room',
             activate: Lang.bind(this, this._onLeaveCurrentRoom),
@@ -120,14 +118,11 @@ const Application = new Lang.Class({
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
 
+        this._roomManager = RoomManager.getDefault();
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networksManager = NetworksManager.getDefault();
 
-        this._accountsMonitor.connect('account-removed', Lang.bind(this,
-            function(am, account) {
-                this._removeSavedChannelsForAccount(account.object_path);
-            }));
         this._accountsMonitor.connect('account-status-changed',
                                       Lang.bind(this, this._onAccountStatusChanged));
 
@@ -279,78 +274,21 @@ const Application = new Lang.Class({
         this._window.showJoinRoomDialog();
     },
 
-    _savedChannelIndex: function(savedChannels, account, channel) {
-        let accountPath = account.get_object_path();
-        let matchChannel = channel.toLowerCase();
-        for (let i = 0; i < savedChannels.length; i++)
-            if (savedChannels[i].account.deep_unpack() == accountPath &&
-                savedChannels[i].channel.deep_unpack().toLowerCase() == matchChannel)
-                return i;
-        return -1;
-    },
-
-    _addSavedChannel: function(account, channel) {
-        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-        if (this._savedChannelIndex(savedChannels, account, channel) != -1)
-            return;
-        savedChannels.push({
-            account: GLib.Variant.new('s', account.get_object_path()),
-            channel: GLib.Variant.new('s', channel)
-        });
-        this._settings.set_value('saved-channel-list',
-                                 GLib.Variant.new('aa{sv}', savedChannels));
-    },
-
-    _removeSavedChannel: function(account, channel) {
-        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-        let pos = this._savedChannelIndex(savedChannels, account, channel);
-        if (pos < 0)
-            return;
-        savedChannels.splice(pos, 1);
-        this._settings.set_value('saved-channel-list',
-                                 GLib.Variant.new('aa{sv}', savedChannels));
-    },
-
-    _removeSavedChannelsForAccount: function(accountPath) {
-        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-
-        let savedChannels = savedChannels.filter(function(a) {
-            return !a.account.equal(accountPath);
-        });
-        this._settings.set_value('saved-channel-list',
-                                 GLib.Variant.new('aa{sv}', savedChannels));
-    },
-
-    _handleJoinQueryAction: function(accountPath, time) {
+    _maybePresent: function(time) {
         let [present, ] = Tp.user_action_time_should_present(time);
 
         if (!this._window || present)
             this.activate();
-
-        let account = this._accountsMonitor.lookupAccount(accountPath);
-
-        // the account was removed since the channel was saved
-        if (!account)
-            this._removeSavedChannelsForAccount(accountPath);
     },
 
     _onJoinRoom: function(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
-        this._accountsMonitor.prepare(() => {
-            let account = this._accountsMonitor.lookupAccount(accountPath);
-            if (!account)
-                return;
-
-            this._handleJoinQueryAction(accountPath, time);
-            this._addSavedChannel(account, channelName);
-        });
+        this._maybePresent(time);
     },
 
     _onMessageUser: function(action, parameter) {
         let [accountPath, contactName, message, time] = parameter.deep_unpack();
-        this._accountsMonitor.prepare(() => {
-            this._handleJoinQueryAction(accountPath, time);
-        });
+        this._maybePresent(time);
     },
 
     _ensureRetryData: function(account) {
@@ -451,10 +389,6 @@ const Application = new Lang.Class({
         }
 
         this._restoreAccountName(account);
-    },
-
-    _onLeaveRoom: function(action, parameter) {
-        this._removeSavedChannel(room.account, room.channel_name);
     },
 
     _onLeaveCurrentRoom: function() {

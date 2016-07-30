@@ -1,0 +1,206 @@
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
+const Polari = imports.gi.Polari;
+const Tp = imports.gi.TelepathyGLib;
+
+const AccountsMonitor = imports.accountsMonitor;
+const Lang = imports.lang;
+const Signals = imports.signals;
+
+let _singleton = null;
+
+function getDefault() {
+    if (_singleton == null)
+        _singleton = new _RoomManager();
+    return _singleton;
+}
+
+const _RoomManager = new Lang.Class({
+    Name: '_RoomManager',
+
+    _init: function() {
+        this._rooms = new Map();
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' })
+
+        this._accountsMonitor = AccountsMonitor.getDefault();
+
+        this._app = Gio.Application.get_default();
+        let actions = [
+            { name: 'join-room',
+              handler: Lang.bind(this, this._onJoinActivated) },
+            { name: 'message-user',
+              handler: Lang.bind(this, this._onQueryActivated) },
+            { name: 'leave-room',
+              after: true,
+              handler: Lang.bind(this, this._onLeaveActivated) }
+        ];
+        actions.forEach(a => {
+            if (a.after)
+                this._app.lookup_action(a.name).connect_after('activate', a.handler);
+            else
+                this._app.lookup_action(a.name).connect('activate', a.handler);
+        });
+
+        this._accountsMonitor.connect('account-enabled', (mon, account) => {
+            this._restoreRooms(account.object_path);
+        });
+        this._accountsMonitor.connect('account-disabled', (mon, account) => {
+            this._removeRooms(account.object_path);
+        });
+        this._accountsMonitor.connect('account-removed', (mon, account) => {
+            this._removeRooms(account.object_path);
+            this._removeSavedChannelsForAccount(account.object_path);
+        });
+        this._accountsMonitor.prepare(() => { this._restoreRooms(); });
+    },
+
+    lookupRoom: function(id) {
+        return this._rooms.get(id);
+    },
+
+    lookupRoomByName: function(name) {
+        for (let room of this._rooms.values())
+            if (room.channel_name == name)
+                return room;
+        return null;
+    },
+
+    lookupRoomByChannel: function(channel) {
+        let account = channel.connection.get_account();
+        let channelName = channel.identifier;
+        let id = Polari.create_room_id(account, channelName, channel.handle_type);
+        return this._rooms.get(id);
+    },
+
+    get roomCount() {
+        return this._rooms.size;
+    },
+
+    get rooms() {
+        return [...this._rooms.values()];
+    },
+
+    _onJoinActivated: function(action, parameter) {
+        let [accountPath, channelName, time] = parameter.deep_unpack();
+        this._addSavedChannel(accountPath, channelName);
+
+        this._accountsMonitor.prepare(() => {
+            this._ensureRoom(accountPath, channelName, Tp.HandleType.ROOM, time);
+        });
+    },
+
+    _onQueryActivated: function(action, parameter) {
+        let [accountPath, channelName, , time] = parameter.deep_unpack();
+
+        this._accountsMonitor.prepare(() => {
+            this._ensureRoom(accountPath, channelName, Tp.HandleType.CONTACT, time);
+        });
+    },
+
+    _onLeaveActivated: function(action, parameter) {
+        let [id, ] = parameter.deep_unpack();
+        let room = this._rooms.get(id);
+
+        this._removeSavedChannel(room.account.object_path, room.channel_name);
+        this._removeRoom(room);
+    },
+
+    _restoreRooms: function(accountPath) {
+        this._settings.get_value('saved-channel-list').deep_unpack().forEach(c => {
+            for (let prop in c)
+                c[prop] = c[prop].deep_unpack();
+            if (accountPath == null || c.account == accountPath)
+                this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0)
+        });
+        this.emit('rooms-loaded');
+    },
+
+    _removeRooms: function(accountPath) {
+        for (let room of this._rooms.values())
+            if (accountPath == null || room.account.object_path == accountPath)
+                this._removeRoom(room);
+    },
+
+    _findChannelIndex: function(channels, accountPath, channelName) {
+        let matchName = channelName.toLowerCase();
+        for (let i = 0; i < channels.length; i++)
+            if (channels[i].account.deep_unpack() == accountPath &&
+                channels[i].channel.deep_unpack().toLowerCase() == matchName)
+            return i;
+        return -1;
+    },
+
+    _addSavedChannel: function(accountPath, channelName) {
+        let channels = this._settings.get_value('saved-channel-list').deep_unpack();
+        if (this._findChannelIndex(channels, accountPath, channelName) != -1)
+            return;
+        channels.push({
+            account: new GLib.Variant('s', accountPath),
+            channel: new GLib.Variant('s', channelName)
+        });
+        this._settings.set_value('saved-channel-list',
+                                 new GLib.Variant('aa{sv}', channels));
+    },
+
+    _removeSavedChannel: function(accountPath, channelName) {
+        let channels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let pos = this._findChannelIndex(channels, accountPath, channelName);
+        if (pos < 0)
+            return;
+        channels.splice(pos, 1);
+        this._settings.set_value('saved-channel-list',
+                                 new GLib.Variant('aa{sv}', channels));
+    },
+
+    _removeSavedChannelsForAccount: function(accountPath) {
+        let channels = this._settings.get_value('saved-channel-list').deep_unpack();
+        let account = new GLib.Variant('s', accountPath);
+
+        channels = channels.filter(c => !c.account.equal(account));
+        this._settings.set_value('saved-channel-list',
+                                 new GLib.Variant('aa{sv}', channels));
+    },
+
+    _ensureRoom: function(accountPath, channelName, type, time) {
+        let account = this._accountsMonitor.lookupAccount(accountPath);
+
+        if (!account) {
+            this._removeSavedChannelsForAccount(accountPath);
+            return null;
+        }
+
+        if (!account.enabled)
+            return null;
+
+        let id = Polari.create_room_id(account, channelName, type);
+        let room = this._rooms.get(id);
+        if (!room) {
+            room = new Polari.Room({ account: account,
+                                     channel_name: channelName,
+                                     type: type });
+            this._rooms.set(room.id, room);
+            this.emit('room-added', room);
+        }
+
+        let [present, ] = Tp.user_action_time_should_present(time);
+        if (present && this._app.active_window)
+            this._app.active_window.active_room = room;
+
+        return room;
+    },
+
+    ensureRoomForChannel: function(channel, time) {
+        let accountPath = channel.connection.get_account().object_path;
+        let targetContact = channel.target_contact;
+        let channelName = targetContact ? targetContact.alias
+                                        : channel.identifier;
+        let room = this._ensureRoom(accountPath, channelName, channel.handle_type, time);
+        room.channel = channel;
+    },
+
+    _removeRoom: function(room) {
+        if (this._rooms.delete(room.id))
+            this.emit('room-removed', room);
+    }
+});
+Signals.addSignalMethods(_RoomManager.prototype);

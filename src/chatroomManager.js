@@ -5,6 +5,7 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
+const RoomManager = imports.roomManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 
@@ -145,8 +146,6 @@ const _ChatroomManager = new Lang.Class({
     Name: '_ChatroomManager',
 
     _init: function() {
-        this._rooms = {};
-
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
@@ -155,17 +154,17 @@ const _ChatroomManager = new Lang.Class({
         this._pendingRequests = new Map();
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._roomManager = RoomManager.getDefault();
+        this._roomManager.connect('room-added', (mgr, room) => {
+            this._connectRoom(room);
+        });
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._amIsPrepared = false;
         this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
-
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
     },
 
     _onPrepared: function() {
         let actions = [
-            { name: 'join-room',
-              handler: Lang.bind(this, this._onJoinActivated) },
             { name: 'message-user',
               handler: Lang.bind(this, this._onQueryActivated) },
             { name: 'leave-room',
@@ -219,63 +218,33 @@ const _ChatroomManager = new Lang.Class({
 
         this._accountsMonitor.connect('account-enabled',
                                       Lang.bind(this, this._onAccountEnabled));
-        this._accountsMonitor.connect('account-disabled',
-                                      Lang.bind(this, this._onAccountDisabled));
-        this._accountsMonitor.connect('account-removed',
-                                      Lang.bind(this, this._onAccountDisabled));
         this._accountsMonitor.connect('account-status-changed', Lang.bind(this, function(monitor, account) {
             if (account.connection_status == Tp.ConnectionStatus.CONNECTED)
-                this._restoreSavedChannels(account);
+                this._connectRooms(account);
         }));
 
-        let selectedChannel = this._settings.get_value('last-selected-channel').deep_unpack();
-
-        for (let prop in selectedChannel)
-            selectedChannel[prop] = selectedChannel[prop].deep_unpack();
-
-        if (selectedChannel.account && selectedChannel.channel)
-             this._restoreChannel(selectedChannel);
-
-        this._restoreSavedChannels(null);
+        this._connectRooms(null);
 
         this._networkMonitor.connect('notify::network-available', Lang.bind(this,
             function() {
                 if (this._networkMonitor.network_available)
-                    this._restoreSavedChannels(null);
+                    this._connectRooms(null);
             }));
     },
 
     _onAccountEnabled: function(mon, account) {
-        this._restoreSavedChannels(account);
+        this._connectRooms(account);
     },
 
-    _onAccountDisabled: function(mon, account) {
-        for (let id in this._rooms) {
-            let room = this._rooms[id];
-            if (room.account == account)
-                this._removeRoom(room);
-        }
+    _connectRooms: function(account) {
+        this._roomManager.rooms.forEach(room => {
+            if (account == null || room.account == account)
+                this._connectRoom(room);
+        });
     },
 
-    _restoreSavedChannels: function(account) {
-        let savedChannels = this._settings.get_value('saved-channel-list').deep_unpack();
-        for (let i = 0; i < savedChannels.length; i++) {
-            let serializedChannel = savedChannels[i];
-            for (let prop in serializedChannel)
-                serializedChannel[prop] = serializedChannel[prop].deep_unpack();
-
-            if (account == null || serializedChannel.account == account.object_path)
-                this._restoreChannel(serializedChannel);
-        }
-    },
-
-    _restoreChannel: function(serializedChannel) {
-        let action = this._app.lookup_action('join-room');
-        let parameter = GLib.Variant.new('(ssu)',
-                                        [serializedChannel.account,
-                                         serializedChannel.channel,
-                                         0]);
-        action.activate(parameter);
+    _connectRoom: function(room) {
+        this._requestChannel(room.account, room.type, room.channel_name, null);
     },
 
     _requestChannel: function(account, targetType, targetId, callback) {
@@ -358,21 +327,6 @@ const _ChatroomManager = new Lang.Class({
             }));
     },
 
-    _onJoinActivated: function(action, parameter) {
-        let [accountPath, channelName, time] = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
-
-        if (!account || !account.enabled)
-            return;
-
-        let room = this._ensureRoom(account, channelName, Tp.HandleType.ROOM);
-        let [present, ] = Tp.user_action_time_should_present(time);
-        if (present)
-            this._setActiveRoom(room);
-
-        this._requestChannel(account, Tp.HandleType.ROOM, channelName, null);
-    },
-
     _onQueryActivated: function(action, parameter) {
         let [accountPath, channelName, message, time] = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
@@ -380,24 +334,18 @@ const _ChatroomManager = new Lang.Class({
         if (!account || !account.enabled)
             return;
 
-        let room = this._ensureRoom(account, channelName, Tp.HandleType.CONTACT);
-        let [present, ] = Tp.user_action_time_should_present(time);
-        if (present)
-            this._setActiveRoom(room);
-
         this._requestChannel(account, Tp.HandleType.CONTACT, channelName,
                              Lang.bind(this, this._sendMessage, message));
     },
 
     _onLeaveActivated: function(action, parameter) {
         let [id, message] = parameter.deep_unpack();
-        let room = this._rooms[id];
-        this._removeRoom(room);
 
         let request = this._pendingRequests.get(id);
         if (request)
             request.cancel();
 
+        let room = this._roomManager.lookupRoom(id);
         if (!room.channel)
             return;
 
@@ -410,29 +358,6 @@ const _ChatroomManager = new Lang.Class({
                 log('Failed to leave channel: ' + e.message);
             }
         });
-    },
-
-    _ensureRoom: function(account, channelName, type) {
-        let room = this._rooms[Polari.create_room_id(account, channelName, type)];
-        if (room)
-            return room;
-
-        let room = new Polari.Room({ account: account,
-                                     channel_name: channelName,
-                                     type: type });
-        this._addRoom(room);
-
-        return room;
-    },
-
-    _ensureRoomForChannel: function(channel) {
-        let account = channel.connection.get_account();
-        let targetContact = channel.target_contact;
-        let channelName = targetContact ? targetContact.alias
-                                        : channel.identifier;
-        let room = this._ensureRoom(account, channelName, channel.handle_type);
-        room.channel = channel;
-        return room;
     },
 
     _isAuthChannel: function(channel) {
@@ -479,7 +404,7 @@ const _ChatroomManager = new Lang.Class({
                       return;
                 }
 
-                let room = this._ensureRoomForChannel(channel);
+                this._roomManager.ensureRoomForChannel(channel, 0);
             }));
     },
 
@@ -496,52 +421,11 @@ const _ChatroomManager = new Lang.Class({
                     return;
                 }
 
-                let room = this._ensureRoomForChannel(channel);
-                //channel.join_async('', null);
-
-                if (present) {
+                if (present)
                     this._app.activate();
-                    this._setActiveRoom(room);
-                }
+
+                this._roomManager.ensureRoomForChannel(channel, userTime);
+                //channel.join_async('', null);
             }));
-    },
-
-    _addRoom: function(room) {
-        if (this._rooms[room.id])
-            return;
-
-        this._rooms[room.id] = room;
-        this.emit('room-added', room);
-    },
-
-    _removeRoom: function(room) {
-        if (!this._rooms[room.id])
-            return;
-
-        if (room == this._lastActiveRoom)
-            this._lastActiveRoom = null;
-
-        delete this._rooms[room.id];
-        this.emit('room-removed', room);
-    },
-
-    _setActiveRoom: function(room) {
-        this._app.active_window.active_room = room;
-    },
-
-    getRoomByName: function(name) {
-        for (let id in this._rooms)
-            if (this._rooms[id].channel_name == name)
-                return this._rooms[id];
-        return null;
-    },
-
-    getRoomById: function(id) {
-        return this._rooms[id];
-    },
-
-    get roomCount() {
-        return Object.keys(this._rooms).length;
     }
 });
-Signals.addSignalMethods(_ChatroomManager.prototype);

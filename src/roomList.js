@@ -7,8 +7,8 @@ const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const ChatroomManager = imports.chatroomManager;
 const Lang = imports.lang;
+const RoomManager = imports.roomManager;
 
 function _onPopoverVisibleChanged(popover) {
     let context = popover.relative_to.get_style_context();
@@ -370,16 +370,15 @@ const RoomList = new Lang.Class({
             });
         });
 
-        this._roomManager = ChatroomManager.getDefault();
+        this._roomManager = RoomManager.getDefault();
         this._roomManager.connect('room-added',
                                   Lang.bind(this, this._roomAdded));
         this._roomManager.connect('room-removed',
                                   Lang.bind(this, this._roomRemoved));
+        this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
 
         let app = Gio.Application.get_default();
         let actions = [
-            { name: 'leave-room',
-              handler: Lang.bind(this, this._onLeaveActivated) },
             { name: 'next-room',
               handler: () => { this._moveSelection(Gtk.DirectionType.DOWN); } },
             { name: 'previous-room',
@@ -414,14 +413,6 @@ const RoomList = new Lang.Class({
         toplevel.connect('notify::active-room',
                          Lang.bind(this, this._activeRoomChanged));
         this._activeRoomChanged();
-    },
-
-    _onLeaveActivated: function(action, param) {
-        let [id, ] = param.deep_unpack();
-        let row = this._roomRows.get(id);
-
-        this._moveSelectionFromRow(row);
-        row.hide();
     },
 
     _rowToRoomIndex: function(index) {
