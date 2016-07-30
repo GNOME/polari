@@ -165,23 +165,23 @@ const _ChatroomManager = new Lang.Class({
     },
 
     _onPrepared: function(mon, am) {
-        let joinAction = this._app.lookup_action('join-room');
-        joinAction.connect('activate', Lang.bind(this, this._onJoinActivated));
-
-        let queryAction = this._app.lookup_action('message-user');
-        queryAction.connect('activate', Lang.bind(this, this._onQueryActivated));
-
-        let leaveAction = this._app.lookup_action('leave-room');
-        leaveAction.connect('activate', Lang.bind(this, this._onLeaveActivated));
-
-        let connectAction = this._app.lookup_action('connect-account');
-        connectAction.connect('activate', Lang.bind(this, this._onConnectAccountActivated));
-
-        let reconnectAction = this._app.lookup_action('reconnect-account');
-        reconnectAction.connect('activate', Lang.bind(this, this._onReconnectAccountActivated));
-
-        let authAction = this._app.lookup_action('authenticate-account');
-        authAction.connect('activate', Lang.bind(this, this._onAuthenticateAccountActivated));
+        let actions = [
+            { name: 'join-room',
+              handler: Lang.bind(this, this._onJoinActivated) },
+            { name: 'message-user',
+              handler: Lang.bind(this, this._onQueryActivated) },
+            { name: 'leave-room',
+              handler: Lang.bind(this, this._onLeaveActivated) },
+            { name: 'connect-account',
+              handler: Lang.bind(this, this._onConnectAccountActivated) },
+            { name: 'reconnect-account',
+              handler: Lang.bind(this, this._onReconnectAccountActivated) },
+            { name: 'authenticate-account',
+              handler: Lang.bind(this, this._onAuthenticateAccountActivated) },
+        ];
+        actions.forEach(a => {
+            this._app.lookup_action(a.name).connect('activate', a.handler);
+        });
 
         this._client = new Client(am, this);
 
