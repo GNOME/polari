@@ -364,6 +364,11 @@ const TelepathyClient = new Lang.Class({
                       return;
                 }
 
+                channel.connect('message-received',
+                                Lang.bind(this, this._onMessageReceived));
+                channel.connect('pending-message-removed',
+                                Lang.bind(this, this._onPendingMessageRemoved));
+
                 this._roomManager.ensureRoomForChannel(channel, 0);
             }));
     },
@@ -387,5 +392,51 @@ const TelepathyClient = new Lang.Class({
                 this._roomManager.ensureRoomForChannel(channel, userTime);
                 //channel.join_async('', null);
             }));
+    },
+
+    _getPendingNotificationID: function(room, id) {
+        return 'pending-message-%s-%d'.format(room.id, id);
+    },
+
+    _createNotification: function(room, summary, body) {
+        let notification = new Gio.Notification();
+        notification.set_title(summary);
+        notification.set_body(body);
+
+        let param = GLib.Variant.new('(ssu)',
+                                     [ room.account.object_path,
+                                       room.channel_name,
+                                       Utils.getTpEventTime() ]);
+        notification.set_default_action_and_target('app.join-room', param);
+        return notification;
+    },
+
+    _onMessageReceived: function(channel, msg) {
+        let [id, ] = msg.get_pending_message_id();
+        let room = this._roomManager.lookupRoomByChannel(channel);
+
+        // Rooms are removed instantly when the user requests it, but closing
+        // the corresponding channel may take a bit; it would be surprising
+        // to get notifications for a "closed" room, so just bail out
+        if (!room || this._app.isRoomFocused(room))
+            return;
+
+        let [text, ] = msg.to_text();
+        let nick = msg.sender.alias;
+        if (!room.should_highlight_message(nick, text))
+            return;
+
+        let summary = '%s %s'.format(room.display_name, nick);
+        let notification = this._createNotification(room, summary, text);
+        this._app.send_notification(this._getPendingNotificationID(room, id), notification);
+    },
+
+    _onPendingMessageRemoved: function(channel, msg) {
+        let [id, valid] = msg.get_pending_message_id();
+        if (!valid)
+            return;
+
+        let room = this._roomManager.lookupRoomByChannel(channel);
+        this._app.withdraw_notification(this._getPendingNotificationID(room, id));
     }
 });

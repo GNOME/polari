@@ -685,16 +685,11 @@ const ChatView = new Lang.Class({
             }));
     },
 
-    _getNotificationID: function(id) {
-        return 'pending-message-%s-%d'.format(this._room.id, id);
-    },
-
     _pendingMessageRemoved: function(channel, message) {
         let [id, valid] = message.get_pending_message_id();
         if (!valid || !this._pending.has(id))
             return;
         this._removePendingMark(id);
-        this._app.withdraw_notification(this._getNotificationID(id));
     },
 
     _removePendingMark: function(id) {
@@ -1194,31 +1189,12 @@ const ChatView = new Lang.Class({
 
     _insertTpMessage: function(tpMessage) {
         let message = this._createMessage(tpMessage);
-        let shouldHighlight = this._room.should_highlight_message(message.nick,
-                                                                  message.text);
 
         this._ensureNewLine();
 
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
         this._trackContact(tpMessage.sender);
-
-        if (shouldHighlight &&
-            !(this._toplevelFocus && this._active)) {
-            let summary = '%s %s'.format(this._room.display_name, message.nick);
-            let notification = new Gio.Notification();
-            notification.set_title(summary);
-            notification.set_body(message.text);
-
-            let account = this._room.account;
-            let param = GLib.Variant.new('(ssu)',
-                                         [ account.get_object_path(),
-                                           this._room.channel_name,
-                                           Utils.getTpEventTime() ]);
-            notification.set_default_action_and_target('app.join-room', param);
-            this._app.send_notification(this._getNotificationID(message.pendingId),
-                                        notification);
-        }
 
         if (message.pendingId == undefined /* outgoing */ ||
             (this._app.isRoomFocused(this._room) && this._pending.size == 0))
