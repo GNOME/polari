@@ -359,20 +359,17 @@ const RoomList = new Lang.Class({
                 let accounts = this._accountsMonitor.accounts;
                 for (let i = 0; i < accounts.length; i++)
                     this._accountAdded(mon, accounts[i]);
-
-                am.connect('account-enabled', Lang.bind(this,
-                    function(am, account) {
-                        this._updatePlaceholderVisibility(account);
-                    }));
-                am.connect('account-disabled', Lang.bind(this,
-                    function(am, account) {
-                        this._updatePlaceholderVisibility(account);
-                    }));
             }));
         this._accountsMonitor.connect('account-added',
                                       Lang.bind(this, this._accountAdded));
         this._accountsMonitor.connect('account-removed',
                                       Lang.bind(this, this._accountRemoved));
+        this._accountsMonitor.connect('account-enabled', (mon, account) => {
+            this._updatePlaceholderVisibility(account);
+        });
+        this._accountsMonitor.connect('account-disabled', (mon, account) => {
+            this._updatePlaceholderVisibility(account);
+        });
 
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('room-added',

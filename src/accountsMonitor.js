@@ -131,6 +131,8 @@ const AccountsMonitor = new Lang.Class({
     _accountEnabledChanged: function(am, account) {
         if (!this._accounts.has(account.object_path))
             return;
+        this.emit(account.enabled ? 'account-enabled'
+                                  : 'account-disabled', account);
         this.emit('accounts-changed');
     }
 });

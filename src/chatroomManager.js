@@ -220,12 +220,12 @@ const _ChatroomManager = new Lang.Class({
         if (!ready)
             return;
 
-        am.connect('account-enabled',
-                   Lang.bind(this, this._onAccountEnabled));
-        am.connect('account-disabled',
-                   Lang.bind(this, this._onAccountDisabled));
-        am.connect('account-removed',
-                   Lang.bind(this, this._onAccountDisabled));
+        this._accountsMonitor.connect('account-enabled',
+                                      Lang.bind(this, this._onAccountEnabled));
+        this._accountsMonitor.connect('account-disabled',
+                                      Lang.bind(this, this._onAccountDisabled));
+        this._accountsMonitor.connect('account-removed',
+                                      Lang.bind(this, this._onAccountDisabled));
         this._accountsMonitor.connect('account-status-changed', Lang.bind(this, function(monitor, account) {
             if (account.connection_status == Tp.ConnectionStatus.CONNECTED)
                 this._restoreSavedChannels(account);
@@ -248,11 +248,11 @@ const _ChatroomManager = new Lang.Class({
             }));
     },
 
-    _onAccountEnabled: function(am, account) {
+    _onAccountEnabled: function(mon, account) {
         this._restoreSavedChannels(account);
     },
 
-    _onAccountDisabled: function(am, account) {
+    _onAccountDisabled: function(mon, account) {
         for (let id in this._rooms) {
             let room = this._rooms[id];
             if (room.account == account)
