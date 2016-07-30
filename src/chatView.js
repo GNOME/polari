@@ -1229,7 +1229,7 @@ const ChatView = new Lang.Class({
                                         notification);
         }
 
-        if (!message.pendingId /* outgoing */ ||
+        if (message.pendingId == undefined /* outgoing */ ||
             (this._active && this._toplevelFocus && this._pending.size == 0))
             this._channel.ack_message_async(tpMessage, null);
         else if (this._needsIndicator)
