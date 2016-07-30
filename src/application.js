@@ -35,22 +35,7 @@ const Application = new Lang.Class({
     vfunc_startup: function() {
         this.parent();
 
-        this._chatroomManager = ChatroomManager.getDefault();
-        this._accountsMonitor = AccountsMonitor.getDefault();
-        this._networksManager = NetworksManager.getDefault();
-
-        this._accountsMonitor.connect('account-removed', Lang.bind(this,
-            function(am, account) {
-                this._removeSavedChannelsForAccount(account.object_path);
-            }));
-        this._accountsMonitor.connect('account-status-changed',
-                                      Lang.bind(this, this._onAccountStatusChanged));
-
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-
-        this.pasteManager = new PasteManager.PasteManager();
-        this.notificationQueue = new AppNotifications.NotificationQueue();
-        this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         let actionEntries = [
           { name: 'show-join-dialog',
@@ -134,6 +119,21 @@ const Application = new Lang.Class({
 
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
+
+        this._chatroomManager = ChatroomManager.getDefault();
+        this._accountsMonitor = AccountsMonitor.getDefault();
+        this._networksManager = NetworksManager.getDefault();
+
+        this._accountsMonitor.connect('account-removed', Lang.bind(this,
+            function(am, account) {
+                this._removeSavedChannelsForAccount(account.object_path);
+            }));
+        this._accountsMonitor.connect('account-status-changed',
+                                      Lang.bind(this, this._onAccountStatusChanged));
+
+        this.pasteManager = new PasteManager.PasteManager();
+        this.notificationQueue = new AppNotifications.NotificationQueue();
+        this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
     },
 
     vfunc_activate: function() {
