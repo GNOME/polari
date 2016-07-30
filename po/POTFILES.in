@@ -12,7 +12,6 @@ data/resources/room-list-header.ui
 data/resources/user-list-details.ui
 src/application.js
 src/appNotifications.js
-src/chatroomManager.js
 src/chatView.js
 src/connections.js
 src/entryArea.js
@@ -22,5 +21,6 @@ src/mainWindow.js
 src/pasteManager.js
 src/roomList.js
 src/roomStack.js
+src/telepathyClient.js
 src/userList.js
 src/utils.js

@@ -4,7 +4,6 @@
     <file>accountsMonitor.js</file>
     <file>application.js</file>
     <file>appNotifications.js</file>
-    <file>chatroomManager.js</file>
     <file>chatView.js</file>
     <file>connections.js</file>
     <file>entryArea.js</file>
@@ -18,6 +17,7 @@
     <file>roomManager.js</file>
     <file>roomStack.js</file>
     <file>tabCompletion.js</file>
+    <file>telepathyClient.js</file>
     <file>userList.js</file>
     <file>utils.js</file>
   </gresource>

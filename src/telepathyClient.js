@@ -33,7 +33,7 @@ let _singleton = null;
 
 function getDefault() {
     if (_singleton == null)
-        _singleton = new _ChatroomManager();
+        _singleton = new _TelepathyClient();
     return _singleton;
 }
 
@@ -142,8 +142,8 @@ const Client = new Lang.Class({
     }
 });
 
-const _ChatroomManager = new Lang.Class({
-    Name: '_ChatroomManager',
+const _TelepathyClient = new Lang.Class({
+    Name: '_TelepathyClient',
 
     _init: function() {
         this._app = Gio.Application.get_default();

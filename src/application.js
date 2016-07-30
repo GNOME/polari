@@ -6,12 +6,12 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
-const ChatroomManager = imports.chatroomManager;
 const Connections = imports.connections;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
 const RoomManager = imports.roomManager;
+const TelepathyClient = imports.telepathyClient;
 const Utils = imports.utils;
 const NetworksManager = imports.networksManager;
 
@@ -119,7 +119,7 @@ const Application = new Lang.Class({
             this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
 
         this._roomManager = RoomManager.getDefault();
-        this._chatroomManager = ChatroomManager.getDefault();
+        this._client = TelepathyClient.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networksManager = NetworksManager.getDefault();
 
@@ -138,7 +138,7 @@ const Application = new Lang.Class({
                                  () => { this.emit('prepare-shutdown'); });
             this._window.show_all();
 
-            this._chatroomManager.lateInit();
+            this._client.lateInit();
         }
         this._window.present();
     },
