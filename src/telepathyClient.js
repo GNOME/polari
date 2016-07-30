@@ -130,7 +130,8 @@ const TelepathyClient = new Lang.Class({
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._roomManager = RoomManager.getDefault();
         this._roomManager.connect('room-added', (mgr, room) => {
-            this._connectRoom(room);
+            if (room.account.connection)
+                this._connectRoom(room);
         });
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
@@ -176,24 +177,41 @@ const TelepathyClient = new Lang.Class({
         });
         this.register();
 
-        this._accountsMonitor.connect('account-enabled',
-                                      Lang.bind(this, this._onAccountEnabled));
         this._accountsMonitor.connect('account-status-changed', Lang.bind(this, function(monitor, account) {
             if (account.connection_status == Tp.ConnectionStatus.CONNECTED)
                 this._connectRooms(account);
         }));
+        this._accountsMonitor.connect('account-added', (mon, account) => {
+            this._connectAccount(account);
+        });
+        this._accountsMonitor.connect('account-enabled', (mon, account) => {
+            this._connectAccount(account);
+        });
+        this._accountsMonitor.enabledAccounts.forEach(a => {
+            if (a.connection)
+                this._connectRooms(a);
+            else
+                this._connectAccount(a);
+        });
 
-        this._connectRooms(null);
+        this._networkMonitor.connect('notify::network-available', () => {
+            if (!this._networkMonitor.network_available)
+                return;
 
-        this._networkMonitor.connect('notify::network-available', Lang.bind(this,
-            function() {
-                if (this._networkMonitor.network_available)
-                    this._connectRooms(null);
-            }));
+            this._accountsMonitor.enabledAccounts.forEach(this._connectAccount);
+        });
     },
 
-    _onAccountEnabled: function(mon, account) {
-        this._connectRooms(account);
+    _connectAccount: function(account) {
+        let presence = Tp.ConnectionPresenceType.AVAILABLE;
+        let msg = account.requested_status_message;
+        account.request_presence_async(presence, 'available', msg, (o, res) => {
+            try {
+                account.request_presence_finish(res);
+            } catch(e) {
+                log('Connection failed: ' + e.message);
+            }
+        });
     },
 
     _connectRooms: function(account) {
@@ -259,10 +277,7 @@ const TelepathyClient = new Lang.Class({
     _onConnectAccountActivated: function(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
-        account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
-                                       'available',
-                                       account.requested_status_message,
-                                       null);
+        this._connectAccount(account);
     },
 
     _onReconnectAccountActivated: function(action, parameter) {
