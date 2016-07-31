@@ -379,7 +379,7 @@ const Application = new Lang.Class({
           cancellable: new Gio.Cancellable(),
           time: time,
           retry: 0,
-          originalNick: account.nickname,
+          originalAccountName: params['account'].deep_unpack(),
           callback: callback,
           alternateServers: accountServers.filter(s => s.address != server)
         };
@@ -471,7 +471,7 @@ const Application = new Lang.Class({
             requestData.callback(channel);
 
         if (requestData.retry > 0)
-            this._updateAccountName(account, requestData.originalNick, null);
+            this._updateAccountName(account, requestData.originalAccountName, null);
         this._pendingRequests.delete(requestData.roomId);
     },
 
