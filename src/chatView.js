@@ -712,10 +712,10 @@ const ChatView = new Lang.Class({
     },
 
     _pendingMessageRemoved: function(channel, message) {
-        let [id,] = message.get_pending_message_id();
-        let mark = this._pending.get(id);
-        if (!mark)
+        let [id, valid] = message.get_pending_message_id();
+        if (!valid || !this._pending.has(id))
             return;
+        let mark = this._pending.get(id);
         // Re-enable auto-scrolling if this is the most recent message
         if (this._view.buffer.get_iter_at_mark(mark).is_end())
             this._autoscroll = true;
