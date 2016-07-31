@@ -154,16 +154,7 @@ const _ChatroomManager = new Lang.Class({
         this._amIsPrepared = false;
         this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
 
-        this._app.connect('prepare-shutdown',
-                          Lang.bind(this, this._onPrepareShutdown));
-        this._app.connect('window-added', (a, w) => {
-            w.connect('notify::active-room',
-                      Lang.bind(this, this._onActiveRoomChanged));
-        });
-
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-
-        this._lastActiveRoom = null;
     },
 
     _onPrepared: function() {
@@ -456,24 +447,6 @@ const _ChatroomManager = new Lang.Class({
 
         delete this._rooms[room.id];
         this.emit('room-removed', room);
-    },
-
-    _onPrepareShutdown: function() {
-        if (this._lastActiveRoom) {
-            let serializedChannel = { account: GLib.Variant.new('s', this._lastActiveRoom.account.get_object_path()),
-                                      channel: GLib.Variant.new('s', this._lastActiveRoom.channel_name) };
-
-            this._settings.set_value('last-selected-channel', GLib.Variant.new('a{sv}', serializedChannel));
-        } else {
-            this._settings.reset('last-selected-channel');
-        }
-    },
-
-    _onActiveRoomChanged: function(window) {
-        let room = window.active_room;
-
-        if (room && room.type == Tp.HandleType.ROOM)
-            this._lastActiveRoom = room;
     },
 
     _setActiveRoom: function(room) {

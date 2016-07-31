@@ -124,6 +124,7 @@ const MainWindow = new Lang.Class({
         params.show_menubar = false;
 
         this._room = null;
+        this._lastActiveRoom = null;
 
         this._displayNameChangedId = 0;
         this._topicChangedId = 0;
@@ -170,6 +171,8 @@ const MainWindow = new Lang.Class({
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('room-added',
                                   Lang.bind(this, this._onRoomAdded));
+        this._roomManager.connect('room-removed',
+                                  Lang.bind(this, this._onRoomRemoved));
 
         this._updateUserListLabel();
 
@@ -228,6 +231,18 @@ const MainWindow = new Lang.Class({
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
                                  GLib.Variant.new('ai', this._currentSize));
+
+        let serializedChannel = null;
+        if (this._lastActiveRoom)
+            serializedChannel = new GLib.Variant('a{sv}', {
+                account: new GLib.Variant('s', this._lastActiveRoom.account.object_path),
+                channel: new GLib.Variant('s', this._lastActiveRoom.channel_name)
+            });
+
+        if (serializedChannel)
+            this._settings.set_value('last-selected-channel', serializedChannel);
+        else
+            this._settings.reset('last-selected-channel');
     },
 
     _onAccountsChanged: function(am) {
@@ -270,6 +285,8 @@ const MainWindow = new Lang.Class({
         this._membersChangedId = 0;
         this._channelChangedId = 0;
 
+        if (room && room.type == Tp.HandleType.ROOM)
+            this._lastActiveRoom = room;
         this._room = room;
 
         this._updateTitlebar();
@@ -316,6 +333,11 @@ const MainWindow = new Lang.Class({
         if (this.active_room)
             return;
         this.active_room = room;
+    },
+
+    _onRoomRemoved: function(mgr, room) {
+        if (room == this._lastActiveRoom)
+            this._lastActiveRoom = null;
     },
 
     showJoinRoomDialog: function() {
