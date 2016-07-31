@@ -707,6 +707,10 @@ const ChatView = new Lang.Class({
             }));
     },
 
+    _getNotificationID: function(id) {
+        return 'pending-message-%s-%d'.format(this._room.id, id);
+    },
+
     _pendingMessageRemoved: function(channel, message) {
         let [id,] = message.get_pending_message_id();
         let mark = this._pending.get(id);
@@ -716,7 +720,7 @@ const ChatView = new Lang.Class({
         if (this._view.buffer.get_iter_at_mark(mark).is_end())
             this._autoscroll = true;
         this._view.buffer.delete_mark(mark);
-        this._app.withdraw_notification('pending-message-' + id);
+        this._app.withdraw_notification(this._getNotificationID(id));
         this._pending.delete(id);
     },
 
@@ -1225,7 +1229,7 @@ const ChatView = new Lang.Class({
                                            this._room.channel_name,
                                            Utils.getTpEventTime() ]);
             notification.set_default_action_and_target('app.join-room', param);
-            this._app.send_notification('pending-message-' + message.pendingId,
+            this._app.send_notification(this._getNotificationID(message.pendingId),
                                         notification);
         }
 
