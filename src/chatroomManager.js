@@ -413,8 +413,6 @@ const _ChatroomManager = new Lang.Class({
                 }
 
                 let room = this._ensureRoomForChannel(channel);
-                if (this.roomCount == 1)
-                    this._setActiveRoom(room);
             }));
     },
 
@@ -434,11 +432,10 @@ const _ChatroomManager = new Lang.Class({
                 let room = this._ensureRoomForChannel(channel);
                 //channel.join_async('', null);
 
-                if (present || this.roomCount == 1)
-                    this._setActiveRoom(room);
-
-                if (present)
+                if (present) {
                     this._app.activate();
+                    this._setActiveRoom(room);
+                }
             }));
     },
 
@@ -448,9 +445,6 @@ const _ChatroomManager = new Lang.Class({
 
         this._rooms[room.id] = room;
         this.emit('room-added', room);
-
-        if (this.roomCount == 1)
-            this._setActiveRoom(room);
     },
 
     _removeRoom: function(room) {

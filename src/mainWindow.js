@@ -8,6 +8,7 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
+const ChatroomManager = imports.chatroomManager;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -166,6 +167,10 @@ const MainWindow = new Lang.Class({
                                       Lang.bind(this, this._onAccountsChanged));
         this._onAccountsChanged(this._accountsMonitor);
 
+        this._roomManager = ChatroomManager.getDefault();
+        this._roomManager.connect('room-added',
+                                  Lang.bind(this, this._onRoomAdded));
+
         this._updateUserListLabel();
 
         this._userListAction = app.lookup_action('user-list');
@@ -305,6 +310,12 @@ const MainWindow = new Lang.Class({
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
+    },
+
+    _onRoomAdded: function(mgr, room) {
+        if (this.active_room)
+            return;
+        this.active_room = room;
     },
 
     showJoinRoomDialog: function() {
