@@ -31,8 +31,12 @@ const Tp = imports.gi.TelepathyGLib;
 const AppNotifications = imports.appNotifications;
 const Signals = imports.signals;
 
-const SECRET_SCHEMA = new Secret.Schema(
+const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account', Secret.SchemaFlags.NONE,
+    { 'account-id': Secret.SchemaAttributeType.STRING }
+);
+const SECRET_SCHEMA_IDENTIFY = new Secret.Schema(
+    'org.gnome.Polari.Identify', Secret.SchemaFlags.NONE,
     { 'account-id': Secret.SchemaAttributeType.STRING }
 );
 
@@ -117,9 +121,18 @@ function getTpEventTime() {
 }
 
 function storeAccountPassword(account, password, callback) {
-    let attr = { 'account-id': account.get_path_suffix() };
     let label = _("Polari server password for %s").format(account.display_name);
-    Secret.password_store(SECRET_SCHEMA, attr, Secret.COLLECTION_DEFAULT,
+    _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password, callback);
+}
+
+function storeIdentifyPassword(account, password, callback) {
+    let label = _("Polari NickServ password for %s").format(account.display_name);
+    _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password, callback);
+}
+
+function _storePassword(schema, label, account, password, callback) {
+    let attr = { 'account-id': account.get_path_suffix() };
+    Secret.password_store(schema, attr, Secret.COLLECTION_DEFAULT,
                           label, password, null,
         function(o, res) {
             try {
@@ -134,8 +147,16 @@ function storeAccountPassword(account, password, callback) {
 }
 
 function lookupAccountPassword(account, callback) {
+    _lookupPassword(SECRET_SCHEMA_ACCOUNT, account, callback);
+}
+
+function lookupIdentifyPassword(account, callback) {
+    _lookupPassword(SECRET_SCHEMA_IDENTIFY, account, callback);
+}
+
+function _lookupPassword(schema, account, callback) {
     let attr = { 'account-id': account.get_path_suffix() };
-    Secret.password_lookup(SECRET_SCHEMA, attr, null,
+    Secret.password_lookup(schema, attr, null,
         function(o, res) {
             try {
                 let password = Secret.password_lookup_finish(res);
