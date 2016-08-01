@@ -192,18 +192,24 @@ const TelepathyClient = new Lang.Class({
         this._accountsMonitor.connect('account-enabled', (mon, account) => {
             this._connectAccount(account);
         });
+
+        this._networkMonitor.connect('notify::network-available',
+                                     Lang.bind(this, this._onNetworkAvailableChanged));
+        this._onNetworkAvailableChanged();
+    },
+
+    _onNetworkAvailableChanged: function() {
+        let connected = this._networkMonitor.network_available;
+        let presence = connected ? Tp.ConnectionPresenceType.AVAILABLE
+                                 : Tp.ConnectionPresenceType.OFFLINE;
+        Utils.debug('Network changed to %s'.format(connected ? 'available'
+                                                             : 'unavailable'));
+
         this._accountsMonitor.enabledAccounts.forEach(a => {
             if (a.connection)
                 this._onAccountStatusChanged(this._accountsMonitor, a);
             else
-                this._connectAccount(a);
-        });
-
-        this._networkMonitor.connect('notify::network-available', () => {
-            if (!this._networkMonitor.network_available)
-                return;
-
-            this._accountsMonitor.enabledAccounts.forEach(this._connectAccount);
+                this._setAccountPresence(a, presence);
         });
     },
 
@@ -220,9 +226,20 @@ const TelepathyClient = new Lang.Class({
     },
 
     _connectAccount: function(account) {
-        let presence = Tp.ConnectionPresenceType.AVAILABLE;
+        this._setAccountPresence(account, Tp.ConnectionPresenceType.AVAILABLE);
+    },
+
+    _setAccountPresence: function(account, presence) {
+        let statuses = Object.keys(Tp.ConnectionPresenceType).map(s =>
+            s.replace('_', '-', 'g').toLowerCase()
+        );
+        let status = statuses[presence];
         let msg = account.requested_status_message;
-        account.request_presence_async(presence, 'available', msg, (o, res) => {
+        let accountName = account.display_name;
+
+        Utils.debug('Setting presence of account "%s" to %s'.format(accountName,
+                                                                    status));
+        account.request_presence_async(presence, status, msg, (o, res) => {
             try {
                 account.request_presence_finish(res);
             } catch(e) {
