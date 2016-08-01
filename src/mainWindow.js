@@ -186,12 +186,9 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._updateDecorations));
         this._updateDecorations();
 
-        this.connect('window-state-event',
-                            Lang.bind(this, this._onWindowStateEvent));
-        this.connect('size-allocate',
-                            Lang.bind(this, this._onSizeAllocate));
-        this.connect('delete-event',
-                            Lang.bind(this, this._onDelete));
+        this.connect('window-state-event', Lang.bind(this, this._onWindowStateEvent));
+        this.connect('size-allocate', Lang.bind(this, this._onSizeAllocate));
+        this.connect('delete-event', Lang.bind(this, this._onDelete));
 
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
