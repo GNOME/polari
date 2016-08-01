@@ -18,15 +18,6 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+)/i;
 
-const ConnectionError = {
-    CANCELLED: Tp.error_get_dbus_name(Tp.Error.CANCELLED),
-    ALREADY_CONNECTED: Tp.error_get_dbus_name(Tp.Error.ALREADY_CONNECTED),
-    DISCONNECTED: Tp.error_get_dbus_name(Tp.Error.DISCONNECTED),
-    NETWORK_ERROR: Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR),
-    NOT_AVAILABLE: Tp.error_get_dbus_name(Tp.Error.NOT_AVAILABLE),
-    SERVICE_BUSY: Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY)
-};
-
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
@@ -39,6 +30,7 @@ const Application = new Lang.Class({
         GLib.set_application_name('Polari');
         this._window = null;
         this._pendingRequests = new Map();
+        this._retryData = new Map();
     },
 
     vfunc_startup: function() {
@@ -53,6 +45,8 @@ const Application = new Lang.Class({
             function(am, account) {
                 this._removeSavedChannelsForAccount(account.object_path);
             }));
+        this._accountsMonitor.connect('account-status-changed',
+                                      Lang.bind(this, this._onAccountStatusChanged));
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
 
@@ -80,8 +74,10 @@ const Application = new Lang.Class({
           { name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)') },
           { name: 'connect-account',
+            activate: Lang.bind(this, this._onConnectAccount),
             parameter_type: GLib.VariantType.new('o') },
           { name: 'reconnect-account',
+            activate: Lang.bind(this, this._onConnectAccount),
             parameter_type: GLib.VariantType.new('o') },
           { name: 'user-list',
             activate: Lang.bind(this, this._onToggleAction),
@@ -333,21 +329,6 @@ const Application = new Lang.Class({
                                  GLib.Variant.new('aa{sv}', savedChannels));
     },
 
-    _updateAccountName: function(account, name, callback) {
-        let sv = { account: GLib.Variant.new('s', name) };
-        let asv = GLib.Variant.new('a{sv}', sv);
-        account.update_parameters_vardict_async(asv, [], callback);
-    },
-
-    _updateAccountServer: function(account, server, callback) {
-        let sv = { server: GLib.Variant.new('s', server.address),
-                   port: GLib.Variant.new('u', server.port),
-                   'use-ssl': GLib.Variant.new('b', server.ssl)
-                    };
-        let asv = GLib.Variant.new('a{sv}', sv);
-        account.update_parameters_vardict_async(asv, [], callback);
-    },
-
     _requestChannel: function(accountPath, targetType, targetId, time, callback) {
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
@@ -362,117 +343,126 @@ const Application = new Lang.Class({
             return;
 
         let roomId = Polari.create_room_id(account,  targetId, targetType);
+        let cancellable = new Gio.Cancellable();
+        this._pendingRequests.set(roomId, cancellable);
+
+        let req = Tp.AccountChannelRequest.new_text(account, time);
+        req.set_target_id(targetType, targetId);
+        req.set_delegate_to_preferred_handler(true);
+        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        req.ensure_and_observe_channel_async(preferredHandler, cancellable,
+            (o, res) => {
+                let channel = null;
+                try {
+                    channel = req.ensure_and_observe_channel_finish(res);
+                } catch(e) {
+                    Utils.debug('Failed to ensure channel: ' + e.message);
+                }
+
+                if (callback)
+                    callback(channel);
+                delete this._pendingRequests[roomId];
+            });
+    },
+
+    _ensureRetryData: function(account) {
+        let data = this._retryData.get(account.object_path);
+        if (data)
+            return data;
 
         let params = account.dup_parameters_vardict().deep_unpack();
         let server = params['server'].deep_unpack();
-        let accountServers = [];
+        let accountName = params['account'].deep_unpack();
+        Utils.debug('Failed to connect to %s with username %s'.format(server, accountName));
 
-        // If predefined network, get alternate servers list
+        let accountServers = [];
         if (this._networksManager.getAccountIsPredefined(account))
             accountServers = this._networksManager.getNetworkServers(account.service);
 
-        let requestData = {
-          account: account,
-          targetHandleType: targetType,
-          targetId: targetId,
-          roomId: roomId,
-          cancellable: new Gio.Cancellable(),
-          time: time,
-          retry: 0,
-          originalAccountName: params['account'].deep_unpack(),
-          callback: callback,
-          alternateServers: accountServers.filter(s => s.address != server)
+        data = {
+            retry: 0,
+            originalAccountName: accountName,
+            alternateServers: accountServers.filter(s => s.address != server)
         };
-
-        this._pendingRequests.set(roomId, requestData.cancellable);
-
-        this._ensureChannel(requestData);
+        this._retryData.set(account.object_path, data);
+        return data;
     },
 
-    _ensureChannel: function(requestData) {
-        let account = requestData.account;
+    _restoreAccountName: function(account) {
+        let data = this._retryData.get(account.object_path);
+        if (!data || !data.retry || !data.originalAccountName)
+            return;
 
-        let req = Tp.AccountChannelRequest.new_text(account, requestData.time);
-        req.set_target_id(requestData.targetHandleType, requestData.targetId);
-        req.set_delegate_to_preferred_handler(true);
-        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_and_observe_channel_async(preferredHandler, requestData.cancellable,
-                                 Lang.bind(this,
-                                           this._onEnsureChannel, requestData));
+        let params = { account: new GLib.Variant('s', data.originalAccountName) };
+        let asv = new GLib.Variant('a{sv}', params);
+        account.update_parameters_vardict_async(asv, [], null);
+        delete data.originalAccountName;
     },
 
-    _retryNickRequest: function(requestData) {
-        let account = requestData.account;
-
-        // Try again with a different nick
-        let params = account.dup_parameters_vardict().deep_unpack();
-        let oldNick = params['account'].deep_unpack();
-        let nick = oldNick + '_';
-        this._updateAccountName(account, nick, Lang.bind(this,
-            function() {
-                this._ensureChannel(requestData);
-            }));
+    _retryWithParams: function(account, params) {
+        account.update_parameters_vardict_async(params, [], () => {
+            let presence = Tp.ConnectionPresenceType.AVAILABLE;
+            let msg = account.requested_status_message;
+            account.request_presence_async(presence, 'available', msg, null);
+        });
     },
 
-    _retryServerRequest: function(requestData) {
-        let account = requestData.account;
+    _retryNickRequest: function(account) {
+        let retryData = this._ensureRetryData(account);
 
-        // Try again with a alternate server
-        let server = requestData.alternateServers.shift();
-        this._updateAccountServer(account, server, Lang.bind(this,
-            function() {
-                this._ensureChannel(requestData);
-            }));
+        if (retryData.retry++ >= MAX_RETRIES)
+            return false;
+
+        let oldParams = account.dup_parameters_vardict().deep_unpack();
+        let nick = oldParams['account'].deep_unpack();
+
+        Utils.debug('Retrying with nickname %s'.format(nick + '_'));
+        let params = { account: new GLib.Variant('s', nick + '_') };
+        this._retryWithParams(account, new GLib.Variant('a{sv}', params));
+        return true;
     },
 
-    _onEnsureChannel: function(req, res, requestData) {
-        let account = req.account;
-        let channel = null;
+    _retryServerRequest: function(account) {
+        let retryData = this._ensureRetryData(account);
 
-        try {
-            channel = req.ensure_and_observe_channel_finish(res);
-        } catch (e if e.matches(Tp.Error, Tp.Error.DISCONNECTED)) {
-            // If we receive a disconnect error and the network is unavailable,
-            // then the error is not specific to polari and polari will
-            // just be in offline state.
-            if (!this._networkMonitor.network_available)
-                return;
+        let server = retryData.alternateServers.shift();
+        if (!server)
+            return false;
 
-            let error = account.connection_error;
-            switch (error) {
-                case ConnectionError.CANCELLED:
-                    break; // disconnected due to user request, ignore
-                case ConnectionError.ALREADY_CONNECTED:
-                    if (requestData.retry++ < MAX_RETRIES) {
-                        this._retryNickRequest(requestData);
-                        return;
-                    }
-                    break;
-                case ConnectionError.NETWORK_ERROR:
-                case ConnectionError.NOT_AVAILABLE:
-                case ConnectionError.DISCONNECTED:
-                case ConnectionError.SERVICE_BUSY:
-                    if (requestData.alternateServers.length > 0) {
-                        this._retryServerRequest(requestData);
-                        return;
-                    }
-                default:
-                    Utils.debug('Account %s disconnected with error %s'.format(
-                                account.get_path_suffix(),
-                                error.replace(Tp.ERROR_PREFIX + '.', '')));
+        Utils.debug('Retrying with %s:%d'.format(server.address, server.port));
+        let params = { server: new GLib.Variant('s', server.address),
+                       port: new GLib.Variant('u', server.port),
+                       'use-ssl': new GLib.Variant('b', server.ssl) };
+        this._retryWithParams(account, new GLib.Variant('a{sv}', params));
+        return true;
+    },
+
+    _onAccountStatusChanged: function(mon, account) {
+        let status = account.connection_status;
+
+        if (status == Tp.ConnectionStatus.CONNECTING)
+            return;
+
+        if (status == Tp.ConnectionStatus.DISCONNECTED) {
+            let reason = account.connection_status_reason;
+
+            if (reason == Tp.ConnectionStatusReason.NAME_IN_USE)
+                if (this._retryNickRequest(account))
+                    return;
+
+            if (reason == Tp.ConnectionStatusReason.NETWORK_ERROR ||
+                reason == Tp.ConnectionStatusReason.NONE_SPECIFIED)
+                if (this._retryServerRequest(account))
+                    return;
+
+            if (reason != Tp.ConnectionStatusReason.REQUESTED) {
+                let strReasons = Object.keys(Tp.ConnectionStatusReason);
+                Utils.debug('Account %s disconnected with reason %s'.format(
+                            account.display_name, strReasons[reason]));
             }
-        } catch (e if e.matches(Tp.Error, Tp.Error.CANCELLED)) {
-            // interrupted by user request, don't log
-        } catch (e) {
-            Utils.debug('Failed to ensure channel: ' + e.message);
         }
 
-        if (requestData.callback)
-            requestData.callback(channel);
-
-        if (requestData.retry > 0)
-            this._updateAccountName(account, requestData.originalAccountName, null);
-        this._pendingRequests.delete(requestData.roomId);
+        this._restoreAccountName(account);
     },
 
     _onJoinRoom: function(action, parameter) {
@@ -538,6 +528,14 @@ const Application = new Lang.Class({
             return;
         let action = this.lookup_action('leave-room');
         action.activate(GLib.Variant.new('(ss)', [room.id, '']));
+    },
+
+    _onConnectAccount: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let account = this._accountsMonitor.lookupAccount(accountPath);
+        if (account)
+            this._restoreAccountName(account);
+        this._retryData.delete(accountPath);
     },
 
     _onToggleAction: function(action) {
