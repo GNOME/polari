@@ -38,7 +38,7 @@ const Application = new Lang.Class({
 
         GLib.set_application_name('Polari');
         this._window = null;
-        this._pendingRequests = {};
+        this._pendingRequests = new Map();
     },
 
     vfunc_startup: function() {
@@ -147,8 +147,8 @@ const Application = new Lang.Class({
             this._window = new MainWindow.MainWindow({ application: this });
             this._window.connect('destroy', Lang.bind(this,
                 function() {
-                    for (let id in this._pendingRequests)
-                        this._pendingRequests[id].cancellable.cancel();
+                    for (let request of this._pendingRequests.values())
+                        request.cancel();
                     this.emit('prepare-shutdown');
             }));
             this._window.show_all();
@@ -384,7 +384,7 @@ const Application = new Lang.Class({
           alternateServers: accountServers.filter(s => s.address != server)
         };
 
-        this._pendingRequests[roomId] = requestData;
+        this._pendingRequests.set(roomId, requestData.cancellable);
 
         this._ensureChannel(requestData);
     },
@@ -472,7 +472,7 @@ const Application = new Lang.Class({
 
         if (requestData.retry > 0)
             this._updateAccountName(account, requestData.originalNick, null);
-        delete this._pendingRequests[requestData.roomId];
+        this._pendingRequests.delete(requestData.roomId);
     },
 
     _onJoinRoom: function(action, parameter) {
@@ -515,8 +515,8 @@ const Application = new Lang.Class({
         let room = this._chatroomManager.getRoomById(roomId);
         if (!room)
             return;
-        if (this._pendingRequests[roomId]) {
-            this._pendingRequests[roomId].cancellable.cancel();
+        if (this._pendingRequests.has(roomId)) {
+            this._pendingRequests.get(roomId).cancel();
         } else if (room.channel) {
             if (!message.length)
                 message = _("Good Bye"); // TODO - our first setting?
