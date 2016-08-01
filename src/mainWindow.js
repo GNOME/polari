@@ -188,7 +188,7 @@ const MainWindow = new Lang.Class({
 
         this.connect('window-state-event', Lang.bind(this, this._onWindowStateEvent));
         this.connect('size-allocate', Lang.bind(this, this._onSizeAllocate));
-        this.connect('delete-event', Lang.bind(this, this._onDelete));
+        this.connect('destroy', Lang.bind(this, this._onDestroy));
 
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
@@ -220,7 +220,7 @@ const MainWindow = new Lang.Class({
             this._currentSize = this.get_size(this);
     },
 
-    _onDelete: function(widget, event) {
+    _onDestroy: function(widget) {
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
                                  GLib.Variant.new('ai', this._currentSize));
