@@ -184,10 +184,8 @@ const TelepathyClient = new Lang.Class({
         });
         this.register();
 
-        this._accountsMonitor.connect('account-status-changed', Lang.bind(this, function(monitor, account) {
-            if (account.connection_status == Tp.ConnectionStatus.CONNECTED)
-                this._connectRooms(account);
-        }));
+        this._accountsMonitor.connect('account-status-changed',
+                                      Lang.bind(this ,this._onAccountStatusChanged));
         this._accountsMonitor.connect('account-added', (mon, account) => {
             this._connectAccount(account);
         });
@@ -196,7 +194,7 @@ const TelepathyClient = new Lang.Class({
         });
         this._accountsMonitor.enabledAccounts.forEach(a => {
             if (a.connection)
-                this._connectRooms(a);
+                this._onAccountStatusChanged(this._accountsMonitor, a);
             else
                 this._connectAccount(a);
         });
@@ -206,6 +204,18 @@ const TelepathyClient = new Lang.Class({
                 return;
 
             this._accountsMonitor.enabledAccounts.forEach(this._connectAccount);
+        });
+    },
+
+    _onAccountStatusChanged: function(mon, account) {
+        if (account.connection_status != Tp.ConnectionStatus.CONNECTED)
+            return;
+
+        Utils.lookupIdentifyPassword(account, (password) => {
+            if (password)
+                this._sendIdentify(account, password);
+            else
+                this._connectRooms(account);
         });
     },
 
@@ -263,6 +273,30 @@ const TelepathyClient = new Lang.Class({
                 if (callback)
                     callback(channel);
                 this._pendingRequests.delete(roomId);
+            });
+    },
+
+    _sendIdentify: function(account, password) {
+        let settings = this._accountsMonitor.getAccountSettings(account);
+
+        let params = account.dup_parameters_vardict().deep_unpack();
+        let username = settings.get_string('identify-username') ||
+                       params.username.deep_unpack();
+        let contactName = settings.get_string('identify-botname');
+        this._requestChannel(account, Tp.HandleType.CONTACT, contactName,
+            (channel) => {
+                if (!channel)
+                    return;
+
+                let room = this._roomManager.lookupRoomByChannel(channel);
+                room.send_identify_message_async(username, password, (r, res) => {
+                    try {
+                        r.send_identify_message_finish(res);
+                    } catch(e) {
+                        log('Failed to send identify message: ' + e.message);
+                    }
+                    this._connectRooms(account);
+                });
             });
     },
 
