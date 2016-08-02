@@ -349,7 +349,9 @@ const Application = new Lang.Class({
 
     _updateAccountServer: function(account, server, callback) {
         let sv = { server: GLib.Variant.new('s', server.address),
-                   port: GLib.Variant.new('u', server.port) };
+                   port: GLib.Variant.new('u', server.port),
+                   'use-ssl': GLib.Variant.new('b', server.ssl)
+                    };
         let asv = GLib.Variant.new('a{sv}', sv);
         account.update_parameters_vardict_async(asv, [], callback);
     },
