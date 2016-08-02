@@ -394,7 +394,7 @@ const Application = new Lang.Class({
           retry: 0,
           originalNick: account.nickname,
           callback: callback,
-          alternateServers: accountServers.filter(s => s != server)
+          alternateServers: accountServers.filter(s => s.address != server)
         };
 
         this._pendingRequests[roomId] = requestData;
