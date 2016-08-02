@@ -3,9 +3,6 @@ const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 const Signals = imports.signals;
 const GObject = imports.gi.GObject;
-const Utils = imports.utils;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
@@ -22,32 +19,38 @@ const UserStatusMonitor = new Lang.Class({
     Name: 'UserStatusMonitor',
 
     _init: function() {
-        this._userTrackers = new Map();
+        this._userTrackersMaping = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._accountsMonitor.connect('account-added', Lang.bind(this, this._onAccountAdded));
         this._accountsMonitor.connect('account-removed', Lang.bind(this, this._onAccountRemoved));
-
-        this._accountsMonitor.dupAccounts().forEach(a => { this._onAccountAdded(this._accountsMonitor, a); });
     },
 
     _onAccountAdded: function(accountsMonitor, account) {
-        if (this._userTrackers.has(account))
-            return;
-
-        this._userTrackers.set(account, new UserTracker(account));
+        this._addUserTrackerForAccount(account);
     },
 
     _onAccountRemoved: function(accountsMonitor, account) {
-        if (!this._userTrackers.has(account))
+        this._removeUserTrackerForAccount(account);
+    },
+
+    _addUserTrackerForAccount: function(account) {
+        if (this._userTrackersMaping.has(account))
             return;
 
-        this._userTrackers.delete(account);
+        this._userTrackersMaping.set(account, new UserTracker(account));
+    },
+
+    _removeUserTrackerForAccount: function(account) {
+        if (!this._userTrackersMaping.has(account))
+            return;
+
+        this._userTrackersMaping.delete(account);
     },
 
     getUserTrackerForAccount: function(account) {
-        if (this._userTrackers.has(account))
-            return this._userTrackers.get(account);
+        if (this._userTrackersMaping.has(account))
+            return this._userTrackersMaping.get(account);
         return null;
     }
 });
@@ -62,200 +65,250 @@ const UserTracker = new Lang.Class({
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]
         },
-        'contacts-changed': {
-            flags: GObject.SignalFlags.DETAILED,
-            param_types: [GObject.TYPE_STRING]
-        }
     },
 
     _init: function(account) {
         this.parent();
-
-        this._account = account;
-
-        this._baseNickContacts = new Map();
-        this._roomData = new Map();
-        this._handlerCounter = 0;
-
-        this._chatroomManager = ChatroomManager.getDefault();
-        this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
-        this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
-    },
-
-    _getRoomContacts: function(room) {
-        return this._roomData.get(room).contactMapping;
-    },
-
-    _getRoomHandlers: function(room) {
-        return this._roomData.get(room).handlerMapping;
-    },
-
-    _getRoomSignals: function(room) {
-        return this._roomData.get(room).roomSignals;
-    },
-
-    _onRoomAdded: function(roomManager, room) {
-        if (room.account != this._account)
-            return;
-
-        this._ensureRoomMappingForRoom(room);
-
-        let roomSignals = [
+        this._referenceRoomSignals = [
             { name: 'notify::channel',
               handler: Lang.bind(this, this._onChannelChanged) },
             { name: 'member-renamed',
               handler: Lang.bind(this, this._onMemberRenamed) },
             { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberLeft) },
+              handler: Lang.bind(this, this._onMemberDisconnected) },
             { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberLeft) },
+              handler: Lang.bind(this, this._onMemberKicked) },
             { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberLeft) },
+              handler: Lang.bind(this, this._onMemberBanned) },
             { name: 'member-joined',
               handler: Lang.bind(this, this._onMemberJoined) },
             { name: 'member-left',
               handler: Lang.bind(this, this._onMemberLeft) }
         ];
 
-        let signalIds = this._getRoomSignals(room);
-        roomSignals.forEach(signal => {
-            signalIds.push(room.connect(signal.name, signal.handler));
-        });
+        this._account = account;
+
+        this._globalContactMapping = new Map();
+        this._roomMapping = new Map();
+        this._handlerCounter = 0;
+
+        this._userStatusMonitor = getUserStatusMonitor();
+
+        this._chatroomManager = ChatroomManager.getDefault();
+        this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
+        this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
+    },
+
+    _onRoomAdded: function(roomManager, room) {
+        if (room.account == this._account)
+            this._connectRoomSignalsForRoom(room);
     },
 
     _onRoomRemoved: function(roomManager, room) {
-        if (!this._roomData.has(room))
-            return;
+        if (room.account == this._account)
+            this._disconnectRoomSignalsForRoom(room);
 
-        this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
-        this._clearUsersFromRoom(room);
-        this._roomData.delete(room);
+        this._clearUsersFromRoom(this._globalContactMapping, room);
+        this._clearUsersFromRoom(this._roomMapping.get(room)._contactMapping, room);
     },
 
-    _onChannelChanged: function(room) {
-        if (!room.channel) {
-            this._clearUsersFromRoom(room);
-            return;
+    _connectRoomSignalsForRoom: function(room) {
+        this._ensureRoomMappingForRoom(room);
+
+        let roomData = this._roomMapping.get(room);
+
+        roomData._roomSignals = [];
+        this._referenceRoomSignals.forEach(Lang.bind(this, function(signal) {
+            roomData._roomSignals.push(room.connect(signal.name, signal.handler));
+        }));
+    },
+
+    _disconnectRoomSignalsForRoom: function(room) {
+        let roomData = this._roomMapping.get(room);
+
+        for (let i = 0; i < roomData._roomSignals.length; i++) {
+            room.disconnect(roomData._roomSignals[i]);
         }
-
-        let members;
-        if (room.type == Tp.HandleType.ROOM)
-            members = room.channel.group_dup_members_contacts();
-        else
-            members = [room.channel.connection.self_contact, room.channel.target_contact];
-
-        /*keep track of initial members in the room, both locally and
-        globally*/
-        members.forEach(m => { this._trackMember(m, room); });
+        roomData._roomSignals = [];
     },
 
-    _clearUsersFromRoom: function(room) {
-        let map = this._getRoomContacts(room);
-        for ([baseNick, contacts] of map)
-            contacts.slice().forEach((m) => { this._untrackMember(m, room); });
+    _onChannelChanged: function(emittingRoom) {
+        if (emittingRoom.channel) {
+            let members;
+            if (emittingRoom.type == Tp.HandleType.ROOM)
+                members = emittingRoom.channel.group_dup_members_contacts();
+            else
+                members = [emittingRoom.channel.connection.self_contact, emittingRoom.channel.target_contact];
+
+            /*is this needed here?*/
+            this._ensureRoomMappingForRoom(emittingRoom);
+
+            /*if there is no map keeping track of the users in the emittingRoom
+            create it*/
+            if (!this._roomMapping.get(emittingRoom)._contactMapping)
+                this._roomMapping.get(emittingRoom)._contactMapping = new Map();
+
+            /*if there is no map keeping track of the local status change handlers*/
+            this._ensureHandlerMappingForRoom(emittingRoom);
+
+            /*keep track of initial members in the emittingRoom, both locally and
+            globally*/
+            members.forEach(m => {
+                m._room = emittingRoom;
+                this._trackMember(this._roomMapping.get(emittingRoom)._contactMapping, m, emittingRoom);
+                this._trackMember(this._globalContactMapping, m, emittingRoom);
+            });
+        } else {
+            /*handle the absence of a channel for the global case*/
+            this._clearUsersFromRoom(this._globalContactMapping, emittingRoom);
+            /*handle the absence of a channel for the local case*/
+            this._clearUsersFromRoom(this._roomMapping.get(emittingRoom)._contactMapping, emittingRoom);
+
+            /*since we have no channel, all users must be locally marked offline. so call the callbacks*/
+            for ([handlerID, handlerInfo] of this._roomMapping.get(emittingRoom)._handlerMapping) {
+                if (handlerInfo.nickName)
+                    handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
+            }
+        }
+    },
+
+    _clearUsersFromRoom: function(mapping, room) {
+        for ([baseNick, basenickContacts] of mapping) {
+            basenickContacts.forEach(Lang.bind(this, function(member) {
+                if (member._room == room)
+                    /*safe to delete while iterating?*/
+                    this._untrackMember(mapping, member, room);
+            }));
+
+            mapping.delete(baseNick);
+        }
     },
 
     _ensureRoomMappingForRoom: function(room) {
-        if (this._roomData.has(room))
-            return;
-        this._roomData.set(room, { contactMapping: new Map(),
-                                   handlerMapping: new Map(),
-                                   roomSignals: [] });
+        if (!this._roomMapping.has(room))
+            this._roomMapping.set(room, {});
+    },
+
+    _ensureHandlerMappingForRoom: function(room) {
+        /*if there is no map keeping track of the local status change handlers*/
+        if (!this._roomMapping.get(room)._handlerMapping) {
+            this._roomMapping.get(room)._handlerMapping = new Map();
+            this._handlerCounter = 0;
+        }
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
-        this._untrackMember(oldMember, room);
-        this._trackMember(newMember, room);
+        oldMember._room = room;
+        newMember._room = room;
+
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, oldMember, room);
+        this._untrackMember(this._globalContactMapping, oldMember, room);
+        this._trackMember(this._roomMapping.get(room)._contactMapping, newMember, room);
+        this._trackMember(this._globalContactMapping, newMember, room);
+    },
+
+    _onMemberDisconnected: function(room, member, message) {
+        member._room = room;
+
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
+    },
+
+    _onMemberKicked: function(room, member, actor) {
+        member._room = room;
+
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
+    },
+
+    _onMemberBanned: function(room, member, actor) {
+        member._room = room;
+
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
     },
 
     _onMemberJoined: function(room, member) {
-        this._trackMember(member, room);
+        member._room = room;
+
+        this._trackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._trackMember(this._globalContactMapping, member, room);
     },
 
-    _onMemberLeft: function(room, member) {
-        this._untrackMember(member, room);
+    _onMemberLeft: function(room, member, message) {
+        member._room = room;
+
+        this._untrackMember(this._roomMapping.get(room)._contactMapping, member, room);
+        this._untrackMember(this._globalContactMapping, member, room);
     },
 
-    _runHandlers: function(room, member, status) {
+    _trackMember: function(map, member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
-        let roomHandlers = this._getRoomHandlers(room);
-        for ([id, info] of roomHandlers)
-            if (!info.nickName || info.nickName == baseNick)
-                info.handler(baseNick, status);
+
+        if (map.has(baseNick))
+            map.get(baseNick).push(member);
+        else
+            map.set(baseNick, [member]);
+
+        //was on HEAD
+        /*if (this._contactMapping.get(baseNick).length == 1)
+            this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);*/
+        if (map == this._globalContactMapping)log("length: " + this._globalContactMapping.get(baseNick).length)
+
+        if (map.get(baseNick).length == 1)
+            if (map == this._globalContactMapping) {
+                this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+                log("[global status] user " + member.alias + " is globally online");
+            }
+            else
+                //log("[Local UserTracker] User " + member.alias + " is now available in room " + member._room.channelName + " on " + this._account.get_display_name());
+                for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
+                    if (handlerInfo.nickName == member.alias)
+                        handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.AVAILABLE);
+                    else if (!handlerInfo.nickName)
+                        handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
-    _pushMember: function(map, baseNick, member) {
-        if (!map.has(baseNick))
-            map.set(baseNick, []);
-        let contacts = map.get(baseNick);
-        return contacts.push(member);
-    },
-
-    _trackMember: function(member, room) {
+    _untrackMember: function(map, member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
-        let status = Tp.ConnectionPresenceType.AVAILABLE;
 
-        let map = this._baseNickContacts;
-        if (this._pushMember(map, baseNick, member) == 1)
-            this.emit("status-changed::" + baseNick, baseNick, status);
-
-        let roomMap = this._getRoomContacts(room);
-        if (this._pushMember(roomMap, baseNick, member) == 1)
-            this._runHandlers(room, member, status);
-
-        this.emit("contacts-changed::" + baseNick, member.alias);
-    },
-
-    _popMember: function(map, baseNick, member) {
         let contacts = map.get(baseNick) || [];
-        let index = contacts.map(c => c.alias).indexOf(member.alias);
-        if (index < 0)
-            return [false, contacts.length];
-        contacts.splice(index, 1);
-        return [true, contacts.length];
-    },
+        /*i really don't like this search. maybe use a for loop?*/
+        let indexToDelete = contacts.map(c => c.alias + "|" + c._room.channelName).indexOf(member.alias + "|" + member._room.channelName);
 
-    _untrackMember: function(member, room) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-        let status = Tp.ConnectionPresenceType.OFFLINE;
+        if (indexToDelete > -1) {
+            let removedMember = contacts.splice(indexToDelete, 1)[0];
 
-        let map = this._baseNickContacts;
-        let [found, nContacts] = this._popMember(map, baseNick, member);
-        if (found) {
-            if (nContacts == 0)
-                this.emit("status-changed::" + baseNick, member.alias, status);
-            this.emit("contacts-changed::" + baseNick, member.alias);
+            if (contacts.length == 0)
+                //was on HEAD
+                /*this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);*/
+                if (map == this._globalContactMapping) {
+                    this.emit("global-status-changed::" + member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                    log("[global status] user " + member.alias + " is globally offline");
+                }
+                else
+                    //log("[Local UserTracker] User " + member.alias + " is now offline in room " + member._room.channelName + " on " + this._account.get_display_name());
+                    for ([handlerID, handlerInfo] of this._roomMapping.get(room)._handlerMapping)
+                        if (handlerInfo.nickName == member.alias)
+                            handlerInfo.handler(handlerInfo.nickName, Tp.ConnectionPresenceType.OFFLINE);
+                        else if (!handlerInfo.nickName)
+                            handlerInfo.handler(member.alias, Tp.ConnectionPresenceType.OFFLINE);
         }
-
-        let roomMap = this._getRoomContacts(room);
-        [found, nContacts] = this._popMember(roomMap, baseNick, member);
-        if (found && nContacts == 0)
-            this._runHandlers(room, member, status);
     },
 
     getNickStatus: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
-        let contacts = this._baseNickContacts.get(baseNick) || [];
+        let contacts = this._globalContactMapping.get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
-    getNickRoomStatus: function(nickName, room) {
+    getBestMatchingContact: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
+        let contacts = this._contactMapping.get(baseNick) || [];
 
-        this._ensureRoomMappingForRoom(room);
-
-        let contacts = this._getRoomContacts(room).get(baseNick) || [];
-        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
-                                    : Tp.ConnectionPresenceType.AVAILABLE;
-    },
-
-    lookupContact: function(nickName) {
-        let baseNick = Polari.util_get_basenick(nickName);
-
-        let contacts = this._baseNickContacts.get(baseNick) || [];
-
+        /*even possible?*/
         if (contacts.length == 0)
             return null;
 
@@ -266,20 +319,41 @@ const UserTracker = new Lang.Class({
         return contacts[0];
     },
 
-    watchRoomStatus: function(room, baseNick, callback) {
-        this._ensureRoomMappingForRoom(room);
+    getNickRoomStatus: function(nickName, room) {
+        let baseNick = Polari.util_get_basenick(nickName);
 
-        this._getRoomHandlers(room).set(++this._handlerCounter, {
-            nickName: baseNick,
+        let contacts = this._roomMapping.get(room)._contactMapping.get(baseNick) || [];
+        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
+                                    : Tp.ConnectionPresenceType.AVAILABLE;
+    },
+
+    watchUser: function(room, nick, callback) {
+        this._ensureRoomMappingForRoom(room);
+        this._ensureHandlerMappingForRoom(room);
+
+        this._roomMapping.get(room)._handlerMapping.set(this._handlerCounter, {
+            nickName: nick,
             handler: callback
         });
 
-        return this._handlerCounter;
+        this._handlerCounter++;
+
+        return this._handlerCounter - 1;
     },
 
-    unwatchRoomStatus: function(room, handlerID) {
-        if (!this._roomData.has(room))
+    unwatchUser: function(room, nick, handlerID) {
+        /*it wouldn't make sense to call _ensure() here, right?*/
+
+        /*rewrite into a single conditional?*/
+        if (!this._roomMapping)
             return;
-        this._getRoomHandlers(room).delete(handlerID);
+
+        if (!this._roomMapping.has(room))
+            return;
+
+        if (!this._roomMapping.get(room)._handlerMapping)
+            return;
+
+        this._roomMapping.get(room)._handlerMapping.delete(handlerID);
     }
 });
