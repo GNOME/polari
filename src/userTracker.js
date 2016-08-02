@@ -206,8 +206,14 @@ const UserTracker = new Lang.Class({
             this._runHandlers(room, member, status);
 
         let map = this._baseNickContacts;
-        if (this._pushMember(map, baseNick, member) == 1)
+        if (this._pushMember(map, baseNick, member) == 1) {
             this.emit("status-changed::" + baseNick, baseNick, status);
+
+            if (this._shouldNotifyNick(member.alias))
+                this._notifyNickAvailable(member, room);
+
+            this._setNotifyActionEnabled(member.alias, false);
+        }
 
         this.emit("contacts-changed::" + baseNick, member.alias);
     },
@@ -233,8 +239,12 @@ const UserTracker = new Lang.Class({
         let map = this._baseNickContacts;
         let [found, nContacts] = this._popMember(map, baseNick, member);
         if (found) {
-            if (nContacts == 0)
+            if (nContacts == 0) {
                 this.emit("status-changed::" + baseNick, member.alias, status);
+                this._setNotifyActionEnabled(member.alias, true);
+
+                this._app.withdraw_notification(this._getNotifyActionNameInternal(member.alias));
+            }
             this.emit("contacts-changed::" + baseNick, member.alias);
         }
     },
@@ -284,5 +294,64 @@ const UserTracker = new Lang.Class({
         if (!this._roomData.has(room))
             return;
         this._getRoomHandlers(room).delete(handlerID);
+    },
+
+    _notifyNickAvailable: function (member, room) {
+        let notification = new Gio.Notification();
+        notification.set_title(_("User is online"));
+        notification.set_body(_("User %s is now online.").format(member.alias));
+
+        let param = GLib.Variant.new('(ssu)',
+                                     [ this._account.get_object_path(),
+                                       room.channel_name,
+                                       Utils.getTpEventTime() ]);
+        notification.set_default_action_and_target('app.join-room', param);
+
+        this._app.send_notification(this._getNotifyActionNameInternal(member.alias), notification);
+
+        let baseNick = Polari.util_get_basenick(member.alias);
+    },
+
+    _shouldNotifyNick: function(nickName) {
+        let actionName = this._getNotifyActionNameInternal(nickName);
+        let state = this._app.get_action_state(actionName);
+        return state ? state.get_boolean()
+                     : false;
+    },
+
+    _setNotifyActionEnabled: function(nickName, enabled) {
+        let name = this._getNotifyActionNameInternal(nickName);
+        let action = this._app.lookup_action(name);
+        if (action)
+            action.enabled = enabled;
+    },
+
+    _getNotifyActionNameInternal: function(nickName) {
+        return 'notify-user-' +
+               this._account.get_path_suffix() + '-' +
+               Polari.util_get_basenick(nickName);
+    },
+
+    getNotifyActionName: function(nickName) {
+        let name = this._getNotifyActionNameInternal(nickName);
+
+        if (!this._app.lookup_action(name)) {
+            let status = this.getNickStatus(nickName);
+            let enabled = status == Tp.ConnectionPresenceType.OFFLINE;
+
+            let state = new GLib.Variant('b', false);
+            let action = new Gio.SimpleAction({ name: name,
+                                                enabled: enabled,
+                                                state: state });
+
+            action.connect('notify::enabled', () => {
+                if (!action.enabled)
+                    action.change_state(GLib.Variant.new('b', false));
+            });
+
+            this._app.add_action(action);
+        }
+
+        return 'app.' + name;
     }
 });
