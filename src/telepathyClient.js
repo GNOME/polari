@@ -378,6 +378,7 @@ const TelepathyClient = new Lang.Class({
 
     _discardIdentifyPassword: function(accountPath) {
         this._pendingBotPasswords.delete(accountPath);
+        this._app.withdraw_notification(this._getIdentifyNotificationID(accountPath));
     },
 
 
@@ -459,16 +460,31 @@ const TelepathyClient = new Lang.Class({
         return 'pending-message-%s-%d'.format(room.id, id);
     },
 
+    _getIdentifyNotificationID: function(accountPath) {
+        return 'identify-password-%s'.format(accountPath);
+    },
+
     _createNotification: function(room, summary, body) {
         let notification = new Gio.Notification();
         notification.set_title(summary);
         notification.set_body(body);
 
-        let param = GLib.Variant.new('(ssu)',
-                                     [ room.account.object_path,
-                                       room.channel_name,
-                                       Utils.getTpEventTime() ]);
-        notification.set_default_action_and_target('app.join-room', param);
+        let params = [room.account.object_path,
+                      room.channel_name,
+                      Utils.getTpEventTime()];
+
+        let actionName, paramFormat;
+        if (room.type == Tp.HandleType.ROOM) {
+            actionName = 'app.join-room';
+            paramFormat = '(ssu)';
+        } else {
+            actionName = 'app.message-user';
+            paramFormat = '(sssu)';
+            params.splice(2, 0, '');
+        }
+
+        let param = GLib.Variant.new(paramFormat, params);
+        notification.set_default_action_and_target(actionName, param);
         return notification;
     },
 
@@ -481,6 +497,21 @@ const TelepathyClient = new Lang.Class({
             password: password
         };
         this._pendingBotPasswords.set(accountPath, data);
+
+        if (this._app.isRoomFocused(room))
+            return;
+
+        let accountName = room.account.display_name;
+        /* Translators: Those are a botname and an accountName, e.g.
+           "Save NickServ password for GNOME" */
+        let summary = _("Save %s password for %s?").format(data.botname, accountName);
+        let text = _("Identification will happen automatically the next time you connect to %s").format(accountName);
+        let notification = this._createNotification(room, summary, text);
+
+        notification.add_button_with_target(_("Save"), 'app.save-identify-password',
+                                            new GLib.Variant('o', accountPath));
+
+        this._app.send_notification(this._getIdentifyNotificationID(accountPath), notification);
     },
 
     _onMessageReceived: function(channel, msg) {
