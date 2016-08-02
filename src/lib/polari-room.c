@@ -45,6 +45,7 @@ struct _PolariRoomPrivate {
   guint self_contact_notify_id;
   guint invalidated_id;
   guint group_contacts_changed_id;
+  guint message_sent_id;
 
   TpProxySignalConnection *properties_changed_id;
 };
@@ -78,12 +79,16 @@ enum
 
   MEMBERS_CHANGED,
 
+  IDENTIFY_SENT,
+
   LAST_SIGNAL
 };
 
 static guint signals[LAST_SIGNAL];
 
 static GRegex *color_code_regex = NULL;
+
+static GRegex *identify_message_regex = NULL;
 
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
@@ -379,6 +384,42 @@ on_group_contacts_changed (TpChannel  *channel,
 }
 
 static void
+on_message_sent (TpTextChannel      *channel,
+                 TpSignalledMessage *message,
+                 guint               flags,
+                 char               *token,
+                 gpointer            user_data)
+{
+  PolariRoom *room = user_data;
+  PolariRoomPrivate *priv = room->priv;
+  GMatchInfo *match;
+  char *text, *stripped_text;
+
+  if (priv->type != TP_HANDLE_TYPE_CONTACT)
+    return;
+
+  text = tp_message_to_text (TP_MESSAGE (message), NULL);
+  stripped_text = g_strstrip (text);
+
+  if (G_UNLIKELY (identify_message_regex == NULL))
+    identify_message_regex = g_regex_new ("^identify (?:(\\w+) )?(\\S+)$",
+                                                G_REGEX_OPTIMIZE, 0, NULL);
+  if (g_regex_match (identify_message_regex, stripped_text, 0, &match))
+    {
+      char *username = g_match_info_fetch (match, 1);
+      char *password = g_match_info_fetch (match, 2);
+
+      g_signal_emit (room, signals[IDENTIFY_SENT], 0, username, password);
+
+      g_free (username);
+      g_free (password);
+    }
+
+  g_match_info_free (match);
+  g_free (text);
+}
+
+static void
 on_channel_invalidated (TpProxy  *channel,
                         guint     domain,
                         int       code,
@@ -575,6 +616,7 @@ polari_room_set_channel (PolariRoom *room,
   if (priv->channel)
     {
       g_signal_handler_disconnect (priv->channel, priv->group_contacts_changed_id);
+      g_signal_handler_disconnect (priv->channel, priv->message_sent_id);
       g_signal_handler_disconnect( priv->channel, priv->invalidated_id);
       g_signal_handler_disconnect (tp_channel_get_connection (priv->channel),
                                    priv->self_contact_notify_id);
@@ -610,6 +652,9 @@ polari_room_set_channel (PolariRoom *room,
       priv->group_contacts_changed_id =
         g_signal_connect (channel, "group-contacts-changed",
                           G_CALLBACK (on_group_contacts_changed), room);
+      priv->message_sent_id =
+        g_signal_connect ( channel, "message-sent",
+                          G_CALLBACK (on_message_sent), room);
       priv->invalidated_id =
         g_signal_connect (channel, "invalidated",
                           G_CALLBACK (on_channel_invalidated), room);
@@ -848,6 +893,14 @@ polari_room_class_init (PolariRoomClass *klass)
                   0,
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
+
+  signals[IDENTIFY_SENT] =
+    g_signal_new ("identify-sent",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_STRING);
 }
 
 static void
