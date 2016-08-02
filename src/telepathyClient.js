@@ -120,6 +120,7 @@ const TelepathyClient = new Lang.Class({
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
         });
 
+        this._pendingBotPasswords = new Map();
         this._pendingRequests = new Map();
 
         this.parent(params);
@@ -132,6 +133,7 @@ const TelepathyClient = new Lang.Class({
         this._roomManager.connect('room-added', (mgr, room) => {
             if (room.account.connection)
                 this._connectRoom(room);
+            room.connect('identify-sent', Lang.bind(this, this._onIdentifySent));
         });
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
@@ -424,6 +426,17 @@ const TelepathyClient = new Lang.Class({
                                        Utils.getTpEventTime() ]);
         notification.set_default_action_and_target('app.join-room', param);
         return notification;
+    },
+
+    _onIdentifySent: function(room, username, password) {
+        let accountPath = room.account.object_path;
+
+        let data = {
+            botname: room.channel.target_contact.alias,
+            username: username || room.channel.connection.self_contact.alias,
+            password: password
+        };
+        this._pendingBotPasswords.set(accountPath, data);
     },
 
     _onMessageReceived: function(channel, msg) {
