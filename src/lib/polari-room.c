@@ -47,6 +47,8 @@ struct _PolariRoomPrivate {
   guint group_contacts_changed_id;
   guint message_sent_id;
 
+  gboolean ignore_identify;
+
   TpProxySignalConnection *properties_changed_id;
 };
 
@@ -242,6 +244,80 @@ polari_room_remove_member (PolariRoom *room,
   }
 }
 
+static void
+on_identify_message_sent (GObject      *source,
+                          GAsyncResult *result,
+                          gpointer      user_data)
+{
+  TpTextChannel *channel = TP_TEXT_CHANNEL (source);
+  GTask *task = user_data;
+  PolariRoom *room = g_task_get_source_object (task);
+  GError *error = NULL;
+
+  if (!tp_text_channel_send_message_finish (channel, result, NULL, &error))
+    {
+      room->priv->ignore_identify = FALSE;
+
+      g_task_return_error (task, error);
+      g_object_unref (task);
+      return;
+    }
+
+  g_task_return_boolean (task, TRUE);
+  g_object_unref (task);
+}
+
+void
+polari_room_send_identify_message_async (PolariRoom          *room,
+                                         const char          *username,
+                                         const char          *password,
+                                         GAsyncReadyCallback  callback,
+                                         gpointer             user_data)
+{
+  PolariRoomPrivate *priv;
+  TpMessage *message;
+  GTask *task;
+  char *text;
+
+  g_return_if_fail (POLARI_IS_ROOM (room));
+  g_return_if_fail (username != NULL && password != NULL);
+
+  priv = room->priv;
+
+  task = g_task_new (room, NULL, callback, user_data);
+
+  if (priv->channel == NULL)
+    {
+      g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_NOT_CONNECTED,
+                               "The room is disconnected.");
+      g_object_unref (task);
+      return;
+    }
+
+  /* Don't emit ::identify-sent for our own identify message */
+  room->priv->ignore_identify = TRUE;
+
+  text = g_strdup_printf ("identify %s %s", username, password);
+  message = tp_client_message_new_text (TP_CHANNEL_TEXT_MESSAGE_TYPE_NORMAL, text);
+
+  tp_text_channel_send_message_async (TP_TEXT_CHANNEL (priv->channel), message,
+                                      0, on_identify_message_sent, task);
+
+  g_object_unref (message);
+  g_free (text);
+}
+
+gboolean
+polari_room_send_identify_message_finish (PolariRoom    *room,
+                                          GAsyncResult  *result,
+                                          GError       **error)
+{
+  g_return_val_if_fail (POLARI_IS_ROOM (room), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, room), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (result), error);
+}
+
 static char *
 strip_color_codes (const char *string) {
   if (G_UNLIKELY (color_code_regex == NULL))
@@ -409,7 +485,10 @@ on_message_sent (TpTextChannel      *channel,
       char *username = g_match_info_fetch (match, 1);
       char *password = g_match_info_fetch (match, 2);
 
-      g_signal_emit (room, signals[IDENTIFY_SENT], 0, username, password);
+      if (!priv->ignore_identify)
+        g_signal_emit (room, signals[IDENTIFY_SENT], 0, username, password);
+
+      priv->ignore_identify = FALSE;
 
       g_free (username);
       g_free (password);
