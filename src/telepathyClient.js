@@ -151,6 +151,8 @@ const TelepathyClient = new Lang.Class({
               handler: Lang.bind(this, this._onReconnectAccountActivated) },
             { name: 'authenticate-account',
               handler: Lang.bind(this, this._onAuthenticateAccountActivated) },
+            { name: 'save-identify-password',
+              handler: Lang.bind(this, this._onSaveIdentifyPasswordActivated) }
         ];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
@@ -335,6 +337,35 @@ const TelepathyClient = new Lang.Class({
                 log('Failed to leave channel: ' + e.message);
             }
         });
+    },
+
+    _onSaveIdentifyPasswordActivated: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let account = this._accountsMonitor.lookupAccount(accountPath);
+        if (!account)
+            return;
+
+        let data = this._pendingBotPasswords.get(account.object_path);
+        if (!data)
+            return;
+
+        Utils.storeIdentifyPassword(account, data.password, (res) => {
+            if (res)
+                this._saveIdentifySettings(account, data);
+
+            this._pendingBotPasswords.delete(account.object_path);
+        });
+    },
+
+    _saveIdentifySettings: function(account, data) {
+        let settings = this._accountsMonitor.getAccountSettings(account);
+
+        if (data.botname == 'NickServ')
+            settings.reset('identify-botname');
+        else
+            settings.set_string('identify-botname', data.botname);
+
+        settings.set_string('identify-username', data.username);
     },
 
     _isAuthChannel: function(channel) {
