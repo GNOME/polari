@@ -17,6 +17,7 @@ const AccountsMonitor = new Lang.Class({
 
     _init: function() {
         this._accounts = new Map();
+        this._accountSettings = new Map();
 
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown',
@@ -48,6 +49,19 @@ const AccountsMonitor = new Lang.Class({
 
     lookupAccount: function(accountPath) {
         return this._accounts.get(accountPath);
+    },
+
+    getAccountSettings: function(account) {
+        let accountPath = account.object_path;
+        let settings = this._accountSettings.get(accountPath);
+        if (settings)
+            return settings;
+
+        let path = '/org/gnome/Polari/Accounts/%s/'.format(account.get_path_suffix());
+        settings = new Gio.Settings({ schema_id: 'org.gnome.Polari.Account',
+                                      path: path });
+        this._accountSettings.set(accountPath, settings);
+        return settings;
     },
 
     prepare: function(callback) {

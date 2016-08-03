@@ -22,4 +22,17 @@
       <description>Last active (selected) channel</description>
     </key>
   </schema>
+
+  <schema id="org.gnome.Polari.Account">
+    <key type="s" name="identify-botname">
+      <default>"NickServ"</default>
+      <summary>Identify botname</summary>
+      <description>Nickname of the bot to identify with</description>
+    </key>
+    <key type="s" name="identify-username">
+      <default>""</default>
+      <summary>Identify username</summary>
+      <description>Username to use in identify command</description>
+    </key>
+  </schema>
 </schemalist>
