@@ -195,6 +195,8 @@ const UserDetails = new Lang.Class({
             this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
         //TODO: else use this._falbackNick to query tracker
+        else
+            this._trackFallbackNick(this._fallbackNick);
     },
 
     _unexpand: function() {
@@ -261,6 +263,15 @@ const UserDetails = new Lang.Class({
             this._lastHeader.hide();
             this._lastLabel.hide();
         }
+
+        this._revealDetails();
+    },
+
+    _trackFallbackNick: function(fallbackNick) {
+        this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
+        this._lastHeader.show();
+
+        this._userIcon.visible = false;
 
         this._revealDetails();
     },
