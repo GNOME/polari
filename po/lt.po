@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-10 13:03+0000\n"
-"PO-Revision-Date: 2016-07-24 17:18+0300\n"
+"POT-Creation-Date: 2016-07-26 23:11+0000\n"
+"PO-Revision-Date: 2016-08-03 21:50+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:627
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:630
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME internetinio perdavimo pokalbių klientas"
 
@@ -120,7 +120,7 @@ msgstr "_Slapyvardis"
 msgid "_Real Name"
 msgstr "_Tikras vardas"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:143
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:146
 #: data/resources/join-room-dialog.ui:28
 msgid "_Cancel"
 msgstr "_Atsisakyti"
@@ -137,11 +137,11 @@ msgstr "Keisti slapyvardį:"
 msgid "_Change"
 msgstr "_Keisti"
 
-#: data/resources/entry-area.ui:73
+#: data/resources/entry-area.ui:76
 msgid "Change nickname"
 msgstr "Keisti slapyvardį"
 
-#: data/resources/entry-area.ui:153
+#: data/resources/entry-area.ui:156
 msgid "_Paste"
 msgstr "Į_dėti"
 
@@ -247,7 +247,7 @@ msgstr "_Pridėti"
 msgid "_Custom Network"
 msgstr "_Pasirinktinis tinklas"
 
-#: data/resources/main-window.ui:43
+#: data/resources/main-window.ui:41
 msgid "Add rooms and networks"
 msgstr "Pridėti kambarius bei tinklus"
 
@@ -268,14 +268,19 @@ msgid "Quit"
 msgstr "Išeiti"
 
 #: data/resources/room-list-header.ui:137
+#| msgid "Connected"
+msgid "Connect"
+msgstr "Prisijungti"
+
+#: data/resources/room-list-header.ui:145
 msgid "Reconnect"
 msgstr "Jungtis iš naujo"
 
-#: data/resources/room-list-header.ui:145
+#: data/resources/room-list-header.ui:153
 msgid "Remove"
 msgstr "Pašalinti"
 
-#: data/resources/room-list-header.ui:153
+#: data/resources/room-list-header.ui:161
 msgid "Properties"
 msgstr "Savybės"
 
@@ -291,26 +296,26 @@ msgstr "Paskutinė veikla:"
 msgid "Message"
 msgstr "Pranešimas"
 
-#: src/application.js:226 src/utils.js:181
+#: src/application.js:228 src/utils.js:181
 msgid "Failed to open link"
 msgstr "Nepavyko atverti saito"
 
-#: src/application.js:536
+#: src/application.js:538
 msgid "Good Bye"
 msgstr "Viso gero"
 
-#: src/application.js:568
+#: src/application.js:570
 #, javascript-format
 msgid "%s removed."
 msgstr "%s pašalinta."
 
-#: src/application.js:626
+#: src/application.js:629
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
 "Aurimas Černius <aurisc4@gmail.com>"
 
-#: src/application.js:632
+#: src/application.js:635
 msgid "Learn more about Polari"
 msgstr "Sužinokite daugiau apie Polari"
 
@@ -318,59 +323,59 @@ msgstr "Sužinokite daugiau apie Polari"
 msgid "Undo"
 msgstr "Atšaukti"
 
-#: src/chatView.js:134
+#: src/chatView.js:140
 msgid "New Messages"
 msgstr "Nauji pranešimai"
 
-#: src/chatView.js:664
+#: src/chatView.js:726
 msgid "Open Link"
 msgstr "Atverti saitą"
 
-#: src/chatView.js:670
+#: src/chatView.js:732
 msgid "Copy Link Address"
 msgstr "Kopijuoti saito adresą"
 
-#: src/chatView.js:841
+#: src/chatView.js:943
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s dabar žinomas kaip %s"
 
-#: src/chatView.js:848
+#: src/chatView.js:950
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s atsijungė"
 
-#: src/chatView.js:857
+#: src/chatView.js:959
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s buvo išspirtas %s"
 
-#: src/chatView.js:859
+#: src/chatView.js:961
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s buvo išspirtas"
 
-#: src/chatView.js:866
+#: src/chatView.js:968
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s buvo užblokuotas %s"
 
-#: src/chatView.js:868
+#: src/chatView.js:970
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s buvo užblokuotas"
 
-#: src/chatView.js:874
+#: src/chatView.js:976
 #, javascript-format
 msgid "%s joined"
 msgstr "%s prisijungė"
 
-#: src/chatView.js:880
+#: src/chatView.js:982
 #, javascript-format
 msgid "%s left"
 msgstr "%s išėjo"
 
-#: src/chatView.js:976
+#: src/chatView.js:1078
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -378,7 +383,7 @@ msgstr[0] "Prisijungė %d naudotojas"
 msgstr[1] "Prisijungė %d naudotojai"
 msgstr[2] "Prisijungė %d naudotojų"
 
-#: src/chatView.js:979
+#: src/chatView.js:1081
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -388,14 +393,14 @@ msgstr[2] "Išėjo %d naudotojų"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1046
+#: src/chatView.js:1148
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1051
+#: src/chatView.js:1153
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Vakar, %H:%M"
@@ -403,7 +408,7 @@ msgstr "Vakar, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1056
+#: src/chatView.js:1158
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -412,7 +417,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1062
+#: src/chatView.js:1164
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
@@ -421,21 +426,21 @@ msgstr "%B %d, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1068
+#: src/chatView.js:1170
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y %B %d, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1073
+#: src/chatView.js:1175
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1078
+#: src/chatView.js:1180
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Vakar, %l∶%M %p"
@@ -443,7 +448,7 @@ msgstr "Vakar, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1083
+#: src/chatView.js:1185
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -452,7 +457,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1089
+#: src/chatView.js:1191
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
@@ -461,7 +466,7 @@ msgstr "%B %d, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1095
+#: src/chatView.js:1197
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y %B %d, %l∶%M %p"
@@ -484,7 +489,7 @@ msgstr ""
 "Polari atsijungė dėl tinklo klaidos. Patikrinkite, ar adreso laukas yra "
 "teisingas."
 
-#: src/entryArea.js:289
+#: src/entryArea.js:301
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -492,7 +497,7 @@ msgstr[0] "Įdėti %s teksto eilutę į viešąją įklijavimo paslaugą?"
 msgstr[1] "Įdėti %s teksto eilutes į viešąją įklijavimo paslaugą?"
 msgstr[2] "Įdėti %s teksto eilučių į viešąją įklijavimo paslaugą?"
 
-#: src/entryArea.js:293
+#: src/entryArea.js:305
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -500,35 +505,33 @@ msgstr[0] "Įdedama %s teksto eilutė į viešąją įklijavimo paslaugą…"
 msgstr[1] "Įdedamos %s teksto eilutės į viešąją įklijavimo paslaugą…"
 msgstr[2] "Įdedama %s teksto eilučių į viešąją įklijavimo paslaugą…"
 
-#: src/entryArea.js:300
+#: src/entryArea.js:312
 msgid "Upload image to public paste service?"
 msgstr "Nusiųsti paveikslėlį į viešąją įklijavimo paslaugą?"
 
-#: src/entryArea.js:301
+#: src/entryArea.js:313
 msgid "Uploading image to public paste service…"
 msgstr "Siunčiamas paveikslėlis į viešąją įklijavimo paslaugą?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:322
+#: src/entryArea.js:334
 #, javascript-format
-#| msgid "Upload image to public paste service?"
 msgid "Upload “%s” to public paste service?"
 msgstr "Nusiųsti paveikslėlį „%s“ į viešąją įklijavimo paslaugą?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:324
+#: src/entryArea.js:336
 #, javascript-format
-#| msgid "Uploading image to public paste service…"
 msgid "Uploading “%s” to public paste service …"
 msgstr "Siunčiamas paveikslėlis „%s“ į viešąją įklijavimo paslaugą…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:333
+#: src/entryArea.js:345
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s #%s"
 
-#: src/entryArea.js:335
+#: src/entryArea.js:347
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Įdėti iš %s"
@@ -543,9 +546,6 @@ msgstr "Įdėti iš %s"
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
 #: src/ircParser.js:24
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
 msgstr ""
@@ -639,7 +639,7 @@ msgstr "Tema nenustatyta"
 msgid "Add Network"
 msgstr "Pridėti tinklą"
 
-#: src/mainWindow.js:308
+#: src/mainWindow.js:305
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -647,62 +647,62 @@ msgstr[0] "%d naudotojas"
 msgstr[1] "%d naudotojai"
 msgstr[2] "%d naudotojų"
 
-#: src/roomList.js:129
+#: src/roomList.js:133
 msgid "Leave chatroom"
 msgstr "Palikti pokalbių kambarį"
 
-#: src/roomList.js:129
+#: src/roomList.js:133
 msgid "End conversation"
 msgstr "Baigti pokalbį"
 
-#: src/roomList.js:216
+#: src/roomList.js:228
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Tinkle %s įvyko klaida"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:266
+#: src/roomList.js:278
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:273
+#: src/roomList.js:285
 msgid "Connection Problem"
 msgstr "Ryšio klaida"
 
-#: src/roomList.js:281
+#: src/roomList.js:300
 msgid "Connected"
 msgstr "Prisijungta"
 
-#: src/roomList.js:283
+#: src/roomList.js:302
 msgid "Connecting..."
 msgstr "Jungiamasi..."
 
-#: src/roomList.js:285
+#: src/roomList.js:304
 msgid "Offline"
 msgstr "Atsijungęs"
 
-#: src/roomList.js:287
+#: src/roomList.js:306
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: src/roomList.js:307
+#: src/roomList.js:326
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nepavyko saugiai prisijungti prie %s."
 
-#: src/roomList.js:310
+#: src/roomList.js:329
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s reikia slaptažodžio."
 
-#: src/roomList.js:316
+#: src/roomList.js:335
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nepavyko prisijungti prie %s. Serveris užimtas."
 
-#: src/roomList.js:319
+#: src/roomList.js:338
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nepavyko prisijungti prie %s."
