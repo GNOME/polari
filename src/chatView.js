@@ -258,12 +258,6 @@ const ChatView = new Lang.Class({
 
         this.connect('screen-changed',
                      Lang.bind(this, this._updateIndent));
-        this.connect('map', Lang.bind(this, this._updateActive));
-        this.connect('unmap', Lang.bind(this, this._updateActive));
-        this.connect('parent-set',
-                     Lang.bind(this, this._updateToplevel));
-        this.connect('state-flags-changed',
-                     Lang.bind(this, this._updateToplevel));
         this.connect('scroll-event', Lang.bind(this, this._onScroll));
         this.connect('edge-reached', (w, pos) => {
             if (pos == Gtk.PositionType.BOTTOM)
@@ -290,8 +284,6 @@ const ChatView = new Lang.Class({
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
-        this._active = false;
-        this._toplevelFocus = false;
         this._joinTime = 0;
         this._maxNickChars = MAX_NICK_CHARS;
         this._hoveredButtonTags = [];
@@ -324,6 +316,9 @@ const ChatView = new Lang.Class({
 
         this._app = Gio.Application.get_default();
         PasteManager.DropTargetIface.addTargets(this, this._view);
+
+        this._app.connect('room-focus-changed',
+                          Lang.bind(this, this._checkMessages));
 
         this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
 
@@ -603,23 +598,6 @@ const ChatView = new Lang.Class({
         this._view.left_margin = MARGIN + totalWidth;
     },
 
-    _updateActive: function() {
-        let active = this.get_mapped();
-        if (this._active == active)
-            return;
-        this._active = active;
-        this._checkMessages();
-    },
-
-    _updateToplevel: function() {
-        let flags = this.get_state_flags();
-        let toplevelFocus = !(flags & Gtk.StateFlags.BACKDROP);
-        if (this._toplevelFocus == toplevelFocus)
-            return;
-        this._toplevelFocus = toplevelFocus;
-        this._checkMessages();
-    },
-
     _updateScroll: function() {
         if (!this._autoscroll)
             return;
@@ -834,7 +812,7 @@ const ChatView = new Lang.Class({
     },
 
     _checkMessages: function() {
-        if (!this._active || !this._toplevelFocus || !this._channel)
+        if (!this._app.isRoomFocused(this._room) || !this._channel)
             return;
 
         this._needsIndicator = true;
@@ -1243,7 +1221,7 @@ const ChatView = new Lang.Class({
         }
 
         if (message.pendingId == undefined /* outgoing */ ||
-            (this._active && this._toplevelFocus && this._pending.size == 0))
+            (this._app.isRoomFocused(this._room) && this._pending.size == 0))
             this._channel.ack_message_async(tpMessage, null);
         else if (this._needsIndicator)
             this._setIndicatorMark(this._view.buffer.get_end_iter());

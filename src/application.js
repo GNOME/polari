@@ -22,7 +22,8 @@ const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
-    Signals: { 'prepare-shutdown': {} },
+    Signals: { 'prepare-shutdown': {},
+               'room-focus-changed': {} },
 
     _init: function() {
         this.parent({ application_id: 'org.gnome.Polari',
@@ -31,6 +32,12 @@ const Application = new Lang.Class({
         GLib.set_application_name('Polari');
         this._window = null;
         this._retryData = new Map();
+    },
+
+    isRoomFocused: function(room) {
+        return this.active_window &&
+               this.active_window.is_active &&
+               this.active_window.active_room == room;
     },
 
     vfunc_startup: function() {
@@ -146,6 +153,10 @@ const Application = new Lang.Class({
             this._window = new MainWindow.MainWindow({ application: this });
             this._window.connect('destroy',
                                  () => { this.emit('prepare-shutdown'); });
+            this._window.connect('notify::active-room',
+                                 () => { this.emit('room-focus-changed'); });
+            this._window.connect('notify::is-active',
+                                 () => { this.emit('room-focus-changed'); });
             this._window.show_all();
         }
         this._window.present();
