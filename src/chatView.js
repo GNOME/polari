@@ -15,6 +15,7 @@ const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 const UserTracker = imports.userTracker;
+const userList = imports.userList;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -1168,15 +1169,17 @@ const ChatView = new Lang.Class({
                 let tags = [this._lookupTag('nick')];
                 let nickTagName = this._getNickTagName(message.nick);
                 let nickTag = this._lookupTag(nickTagName);
+                let buffer = this._view.get_buffer();
 
                 if (!nickTag) {
-                    nickTag = this._createNickTag(message.nick);
-                    this._view.get_buffer().get_tag_table().add(nickTag);
+                    nickTag = this._createNickTag(nickTagName);
+                    buffer.get_tag_table().add(nickTag);
                 }
                 tags.push(nickTag);
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
-                this._insertWithTags(iter, message.nick + '\t', tags);
+                this._insertWithTags(iter, message.nick, tags);
+                buffer.insert(iter, '\t', -1);
             }
             state.lastNick = message.nick;
             tags.push(this._lookupTag('message'));
@@ -1208,20 +1211,60 @@ const ChatView = new Lang.Class({
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 
-    _createNickTag: function(nickName) {
-        let nickTagName = this._getNickTagName(nickName);
-
-        let tag = new Gtk.TextTag({ name: nickTagName });
-        this._updateNickTag(tag, this._userTracker.getNickStatus(nickName));
-
-        return tag;
-    },
-
     _updateNickTag: function(tag, status) {
         if (status == Tp.ConnectionPresenceType.AVAILABLE)
             tag.foreground_rgba = this._activeNickColor;
         else
             tag.foreground_rgba = this._inactiveNickColor;
+    },
+
+    _createNickTag: function(name) {
+        let tag = new ButtonTag({ name: name });
+        tag._popover = new userList.UserPopover({ relative_to: this._view });
+        tag.connect('clicked', Lang.bind(this,
+            function() {
+                let view = this._view;
+                let event = Gtk.get_current_event();
+                let [, eventX, eventY] = event.get_coords();
+                let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
+                                                          eventX, eventY);
+                let [inside, start] = view.get_iter_at_location(x, y);
+                let end = start.copy();
+
+                start.backward_to_tag_toggle(tag);
+                end.forward_to_tag_toggle(tag);
+
+                //log(view.get_buffer().get_slice(start, end, false));
+
+                let rect1 = view.get_iter_location(start);
+                let rect2 = view.get_iter_location(end);
+
+                [rect1.x, rect1.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect1.x, rect1.y);
+                [rect2.x, rect2.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect2.x, rect2.y);
+                rect1.width = rect2.x - rect1.x;
+                rect1.height = rect2.y - rect1.y;
+
+                //TODO: special chars?
+                let actualNickName = view.get_buffer().get_slice(start, end, false);
+
+                tag._popover.fallbackNick = actualNickName;
+
+                for (let i = 0; i < tag._contacts.length; i++) {
+                    //log(tag._contacts[i].alias);
+                    if (actualNickName == tag._contacts[i].alias) {
+                        if (!tag._popover.user) {
+                            tag._popover.user = tag._contacts[i];
+                        }
+                        else if (tag._popover.user != tag._contacts[i]) {
+                            tag._popover.user = tag._contacts[i];
+                        }
+                    }
+                }
+
+                tag._popover.pointing_to = rect1;
+                tag._popover.show_all();
+            }));
+        return tag;
     },
 
     _createUrlTag: function(url) {
