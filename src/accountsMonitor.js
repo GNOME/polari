@@ -37,6 +37,10 @@ const AccountsMonitor = new Lang.Class({
         return [...this._accounts.values()];
     },
 
+    get enabledAccounts() {
+        return [...this._accounts.values()].filter(a => a.enabled);
+    },
+
     get accountManager() {
         return this._accountManager;
     },

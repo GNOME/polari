@@ -154,13 +154,10 @@ const MainWindow = new Lang.Class({
             }));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
-            function(am) {
-                let accounts = am.accounts;
-                this._roomListRevealer.reveal_child = accounts.some(function(a) {
-                    return a.enabled;
-                });
-            }));
+        this._accountsMonitor.connect('accounts-changed', () => {
+            let hasAccounts = this._accountsMonitor.enabledAccounts.length > 0;
+            this._roomListRevealer.reveal_child = hasAccounts;
+        });
 
         this._roomManager = ChatroomManager.getDefault();
         this._roomManager.connect('active-changed',

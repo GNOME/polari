@@ -177,10 +177,7 @@ const Application = new Lang.Class({
     _openURIs: function(uris, time) {
         let map = {};
 
-        this._accountsMonitor.accounts.forEach(function(a) {
-            if (!a.enabled)
-                return;
-
+        this._accountsMonitor.enabledAccounts.forEach(a => {
             let params = a.dup_parameters_vardict().deep_unpack();
             map[a.get_object_path()] = {
                 server: params.server.deep_unpack(),

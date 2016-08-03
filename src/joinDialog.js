@@ -61,12 +61,9 @@ const JoinDialog = new Lang.Class({
         this._roomManager = ChatroomManager.getDefault();
 
         this._accounts = {};
-        this._accountsMonitor.accounts.forEach(Lang.bind(this,
-            function(a) {
-                if (!a.enabled)
-                    return;
-                this._accounts[a.display_name] = a;
-            }));
+        this._accountsMonitor.enabledAccounts.forEach(a => {
+            this._accounts[a.display_name] = a;
+        });
         this._accountAddedId =
             this._accountsMonitor.connect('account-added', Lang.bind(this,
                 function(am, account) {
