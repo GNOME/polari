@@ -2,13 +2,25 @@ const Polari = imports.gi.Polari;
 const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 const Signals = imports.signals;
+const GObject = imports.gi.GObject;
+
 const ChatroomManager = imports.chatroomManager;
 
 
 const UserTracker = new Lang.Class({
     Name: 'UserTracker',
+    Extends: GObject.Object,
+
+    Signals: {
+        'status-changed': {
+            flags: GObject.SignalFlags.DETAILED,
+            param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]
+        },
+    },
 
     _init: function(room) {
+        this.parent();
+
         this._referenceRoomSignals = [
             { name: 'notify::channel',
               handler: Lang.bind(this, this._onChannelChanged) },
@@ -120,7 +132,7 @@ const UserTracker = new Lang.Class({
             this._contactMapping.set(baseNick, [member]);
 
         if (this._contactMapping.get(baseNick).length == 1)
-            this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+            this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
     _untrackMember: function(member) {
@@ -133,7 +145,7 @@ const UserTracker = new Lang.Class({
             contacts.splice(indexToDelete, 1);
 
             if (contacts.length == 0)
-                this.emit('status-changed', member.alias, Tp.ConnectionPresenceType.OFFLINE);
+                this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
         }
     },
 
@@ -144,5 +156,19 @@ const UserTracker = new Lang.Class({
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
+
+    getBestMatchingContact: function(nickName) {
+        let baseNick = Polari.util_get_basenick(nickName);
+        let contacts = this._contactMapping.get(baseNick) || [];
+
+        /*even possible?*/
+        if (contacts.length == 0)
+            return null;
+
+        for (let i = 0; i < contacts.length; i++)
+            if (contacts[i].alias == nickName)
+                return contacts[i];
+
+        return contacts[0];
+    }
 });
-Signals.addSignalMethods(UserTracker.prototype);
