@@ -153,8 +153,8 @@ const UserDetails = new Lang.Class({
         this._updateButtonVisibility();
     },
 
-    set fallbackNick(fallbackNick) {
-        this._fallbackNick = fallbackNick;
+    set nickname(nickname) {
+        this._nickname = nickname;
 
         this._updateButtonVisibility();
     },
@@ -196,7 +196,7 @@ const UserDetails = new Lang.Class({
                                               Lang.bind(this, this._onContactInfoReady));
         //TODO: else use this._falbackNick to query tracker
         else
-            this._trackFallbackNick(this._fallbackNick);
+            this._trackFallbackNick(this._nickname);
     },
 
     _unexpand: function() {
@@ -267,7 +267,7 @@ const UserDetails = new Lang.Class({
         this._revealDetails();
     },
 
-    _trackFallbackNick: function(fallbackNick) {
+    _trackFallbackNick: function(nickname) {
         this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
         this._lastHeader.show();
 
