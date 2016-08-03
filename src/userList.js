@@ -505,7 +505,6 @@ const UserListRow = new Lang.Class({
         if (this._revealer.get_child())
             return;
 
-        //let details = new UserDetails({ user: this._user });
         let details = new UserDetails();
         details.user = this._user;
 
