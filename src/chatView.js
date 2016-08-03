@@ -16,6 +16,7 @@ const Signals = imports.signals;
 const Utils = imports.utils;
 const UserTracker = imports.userTracker;
 const UserList = imports.userList;
+const ChatroomManager = imports.chatroomManager;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -297,6 +298,7 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
+        this._chatroomManager = ChatroomManager.getDefault();
 
         this._userTracker = new UserTracker.UserTracker(this._room);
         this._userTracker.connect('status-changed', Lang.bind(this, this._onNickStatusChanged));
@@ -1174,6 +1176,8 @@ const ChatView = new Lang.Class({
                 if (!nickTag) {
                     nickTag = this._createNickTag(nickTagName);
                     buffer.get_tag_table().add(nickTag);
+
+                    this._updateNickTag(nickTag, this._userTracker.getNickStatus(message.nick));
                 }
                 tags.push(nickTag);
                 if (needsGap)
@@ -1220,7 +1224,7 @@ const ChatView = new Lang.Class({
 
     _createNickTag: function(name) {
         let tag = new ButtonTag({ name: name });
-        tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0 });
+        tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userTracker });
         tag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
         return tag;
     },
@@ -1252,33 +1256,9 @@ const ChatView = new Lang.Class({
         //TODO: special chars?
         let actualNickName = view.get_buffer().get_slice(start, end, false);
 
-        tag._popover.fallbackNick = actualNickName;
+        tag._popover.nickname = actualNickName;
 
-        let contactFound = false;
-        for (let i = 0; i < tag._contacts.length; i++) {
-            if (actualNickName == tag._contacts[i].alias) {
-                if (!tag._popover.user) {
-                    tag._popover.user = tag._contacts[i];
-                    contactFound = true;
-                    break;
-                }
-                else if (tag._popover.user != tag._contacts[i]) {
-                    tag._popover.user = tag._contacts[i];
-                    contactFound = true;
-                    break;
-                }
-                else if (tag._popover.user == tag._contacts[i]) {
-                    contactFound = true;
-                    break;
-                }
-            }
-        }
-
-        if (!contactFound) {
-            if (tag._contacts[0]) {
-                tag._popover.user = tag._contacts[0];
-            }
-        }
+        //tag._popover.user = this._userTracker.getBestMatchingContact(actualNickName);
 
         tag._popover.pointing_to = rect1;
         tag._popover.show();
