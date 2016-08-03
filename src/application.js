@@ -11,6 +11,7 @@ const Connections = imports.connections;
 const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
+const UserTracker = imports.userTracker;
 const Utils = imports.utils;
 const NetworksManager = imports.networksManager;
 
@@ -47,6 +48,7 @@ const Application = new Lang.Class({
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._userStatusMonitor = UserTracker.getUserStatusMonitor();
         this._networksManager = NetworksManager.getDefault();
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
