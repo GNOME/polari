@@ -3,8 +3,54 @@ const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 const Signals = imports.signals;
 const GObject = imports.gi.GObject;
+const Utils = imports.utils;
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 
+const AccountsMonitor = imports.accountsMonitor;
 const ChatroomManager = imports.chatroomManager;
+
+let _singleton = null;
+
+function getUserStatusMonitor() {
+    if (_singleton == null)
+        _singleton = new UserStatusMonitor();
+    return _singleton;
+}
+
+const UserStatusMonitor = new Lang.Class({
+    Name: 'UserStatusMonitor',
+
+    _init: function() {
+        this._userTrackers = new Map();
+        this._accountsMonitor = AccountsMonitor.getDefault();
+
+        this._accountsMonitor.connect('account-added', Lang.bind(this, this._onAccountAdded));
+        this._accountsMonitor.connect('account-removed', Lang.bind(this, this._onAccountRemoved));
+
+        this._accountsMonitor.dupAccounts().forEach(a => { this._onAccountAdded(this._accountsMonitor, a); });
+    },
+
+    _onAccountAdded: function(accountsMonitor, account) {
+        if (this._userTrackers.has(account))
+            return;
+
+        this._userTrackers.set(account, new UserTracker(account));
+    },
+
+    _onAccountRemoved: function(accountsMonitor, account) {
+        if (!this._userTrackers.has(account))
+            return;
+
+        this._userTrackers.delete(account);
+    },
+
+    getUserTrackerForAccount: function(account) {
+        if (this._userTrackers.has(account))
+            return this._userTrackers.get(account);
+        return null;
+    }
+});
 
 
 const UserTracker = new Lang.Class({
@@ -16,152 +62,200 @@ const UserTracker = new Lang.Class({
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]
         },
+        'contacts-changed': {
+            flags: GObject.SignalFlags.DETAILED,
+            param_types: [GObject.TYPE_STRING]
+        }
     },
 
-    _init: function(room) {
+    _init: function(account) {
         this.parent();
 
-        this._referenceRoomSignals = [
+        this._account = account;
+
+        this._baseNickContacts = new Map();
+        this._roomData = new Map();
+        this._handlerCounter = 0;
+
+        this._chatroomManager = ChatroomManager.getDefault();
+        this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
+        this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
+    },
+
+    _getRoomContacts: function(room) {
+        return this._roomData.get(room).contactMapping;
+    },
+
+    _getRoomHandlers: function(room) {
+        return this._roomData.get(room).handlerMapping;
+    },
+
+    _getRoomSignals: function(room) {
+        return this._roomData.get(room).roomSignals;
+    },
+
+    _onRoomAdded: function(roomManager, room) {
+        if (room.account != this._account)
+            return;
+
+        this._ensureRoomMappingForRoom(room);
+
+        let roomSignals = [
             { name: 'notify::channel',
               handler: Lang.bind(this, this._onChannelChanged) },
             { name: 'member-renamed',
               handler: Lang.bind(this, this._onMemberRenamed) },
             { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberDisconnected) },
+              handler: Lang.bind(this, this._onMemberLeft) },
             { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberKicked) },
+              handler: Lang.bind(this, this._onMemberLeft) },
             { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberBanned) },
+              handler: Lang.bind(this, this._onMemberLeft) },
             { name: 'member-joined',
               handler: Lang.bind(this, this._onMemberJoined) },
             { name: 'member-left',
               handler: Lang.bind(this, this._onMemberLeft) }
         ];
 
-        this._contactMapping = new Map();
-
-        if (!room) {
-            log("global user tracker created");
-            this._chatroomManager = ChatroomManager.getDefault();
-
-            this._chatroomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
-            this._chatroomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
-        } else {
-            this._room = room;
-
-            this._onRoomAdded(null, this._room);
-            this._onChannelChanged(this._room);
-        }
-    },
-
-    _onRoomAdded: function(roomManager , room) {
-        this._roomSignals = [];
-        this._referenceRoomSignals.forEach(Lang.bind(this, function(signal) {
-            this._roomSignals.push(room.connect(signal.name, signal.handler));
-        }));
+        let signalIds = this._getRoomSignals(room);
+        roomSignals.forEach(signal => {
+            signalIds.push(room.connect(signal.name, signal.handler));
+        });
     },
 
     _onRoomRemoved: function(roomManager, room) {
-        for (let i = 0; i < this._roomSignals.length; i++)
-            room.disconnect(this._roomSignals[i]);
-        this._roomSignals = [];
+        if (!this._roomData.has(room))
+            return;
+
+        this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
+        this._clearUsersFromRoom(room);
+        this._roomData.delete(room);
     },
 
-    _onChannelChanged: function(emittingRoom) {
-        if (emittingRoom.channel) {
-            let members;
-            if (emittingRoom.type == Tp.HandleType.ROOM)
-                members = emittingRoom.channel.group_dup_members_contacts();
-            else
-                members = [emittingRoom.channel.connection.self_contact, emittingRoom.channel.target_contact];
-
-            members.forEach(m => {
-                m._room = emittingRoom;
-                this._trackMember(m);
-            });
-        } else {
-            for ([baseNick, basenickContacts] of this._contactMapping) {
-                basenickContacts.forEach(Lang.bind(this, function(member) {
-                    if (member._room == emittingRoom)
-                        this._untrackMember(member);
-                }));
-
-                this._contactMapping.delete(baseNick);
-            }
+    _onChannelChanged: function(room) {
+        if (!room.channel) {
+            this._clearUsersFromRoom(room);
+            return;
         }
+
+        let members;
+        if (room.type == Tp.HandleType.ROOM)
+            members = room.channel.group_dup_members_contacts();
+        else
+            members = [room.channel.connection.self_contact, room.channel.target_contact];
+
+        /*keep track of initial members in the room, both locally and
+        globally*/
+        members.forEach(m => { this._trackMember(m, room); });
+    },
+
+    _clearUsersFromRoom: function(room) {
+        let map = this._getRoomContacts(room);
+        for ([baseNick, contacts] of map)
+            contacts.slice().forEach((m) => { this._untrackMember(m, room); });
+    },
+
+    _ensureRoomMappingForRoom: function(room) {
+        if (this._roomData.has(room))
+            return;
+        this._roomData.set(room, { contactMapping: new Map(),
+                                   handlerMapping: new Map(),
+                                   roomSignals: [] });
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
-        oldMember._room = room;
-        newMember._room = room;
-        this._untrackMember(oldMember);
-        this._trackMember(newMember);
-    },
-
-    _onMemberDisconnected: function(room, member, message) {
-        member._room = room;
-        this._untrackMember(member);
-    },
-
-    _onMemberKicked: function(room, member, actor) {
-        member._room = room;
-        this._untrackMember(member);
-    },
-
-    _onMemberBanned: function(room, member, actor) {
-        member._room = room;
-        this._untrackMember(member);
+        this._untrackMember(oldMember, room);
+        this._trackMember(newMember, room);
     },
 
     _onMemberJoined: function(room, member) {
-        member._room = room;
-        this._trackMember(member);
+        this._trackMember(member, room);
     },
 
-    _onMemberLeft: function(room, member, message) {
-        member._room = room;
-        this._untrackMember(member);
+    _onMemberLeft: function(room, member) {
+        this._untrackMember(member, room);
     },
 
-    _trackMember: function(member) {
+    _runHandlers: function(room, member, status) {
         let baseNick = Polari.util_get_basenick(member.alias);
-
-        if (this._contactMapping.has(baseNick))
-            this._contactMapping.get(baseNick).push(member);
-        else
-            this._contactMapping.set(baseNick, [member]);
-
-        if (this._contactMapping.get(baseNick).length == 1)
-            this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.AVAILABLE);
+        let roomHandlers = this._getRoomHandlers(room);
+        for ([id, info] of roomHandlers)
+            if (!info.nickName || info.nickName == baseNick)
+                info.handler(baseNick, status);
     },
 
-    _untrackMember: function(member) {
+    _pushMember: function(map, baseNick, member) {
+        if (!map.has(baseNick))
+            map.set(baseNick, []);
+        let contacts = map.get(baseNick);
+        return contacts.push(member);
+    },
+
+    _trackMember: function(member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
+        let status = Tp.ConnectionPresenceType.AVAILABLE;
 
-        let contacts = this._contactMapping.get(baseNick) || [];
-        let indexToDelete = contacts.map(c => c.alias).indexOf(member.alias);
+        let map = this._baseNickContacts;
+        if (this._pushMember(map, baseNick, member) == 1)
+            this.emit("status-changed::" + baseNick, baseNick, status);
 
-        if (indexToDelete > -1) {
-            contacts.splice(indexToDelete, 1);
+        let roomMap = this._getRoomContacts(room);
+        if (this._pushMember(roomMap, baseNick, member) == 1)
+            this._runHandlers(room, member, status);
 
-            if (contacts.length == 0)
-                this.emit("status-changed::"+baseNick, member.alias, Tp.ConnectionPresenceType.OFFLINE);
+        this.emit("contacts-changed::" + baseNick, member.alias);
+    },
+
+    _popMember: function(map, baseNick, member) {
+        let contacts = map.get(baseNick) || [];
+        let index = contacts.map(c => c.alias).indexOf(member.alias);
+        if (index < 0)
+            return [false, contacts.length];
+        contacts.splice(index, 1);
+        return [true, contacts.length];
+    },
+
+    _untrackMember: function(member, room) {
+        let baseNick = Polari.util_get_basenick(member.alias);
+        let status = Tp.ConnectionPresenceType.OFFLINE;
+
+        let map = this._baseNickContacts;
+        let [found, nContacts] = this._popMember(map, baseNick, member);
+        if (found) {
+            if (nContacts == 0)
+                this.emit("status-changed::" + baseNick, member.alias, status);
+            this.emit("contacts-changed::" + baseNick, member.alias);
         }
+
+        let roomMap = this._getRoomContacts(room);
+        [found, nContacts] = this._popMember(roomMap, baseNick, member);
+        if (found && nContacts == 0)
+            this._runHandlers(room, member, status);
     },
 
     getNickStatus: function(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
-        let contacts = this._contactMapping.get(baseNick) || [];
+        let contacts = this._baseNickContacts.get(baseNick) || [];
         return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
-    getBestMatchingContact: function(nickName) {
+    getNickRoomStatus: function(nickName, room) {
         let baseNick = Polari.util_get_basenick(nickName);
-        let contacts = this._contactMapping.get(baseNick) || [];
 
-        /*even possible?*/
+        this._ensureRoomMappingForRoom(room);
+
+        let contacts = this._getRoomContacts(room).get(baseNick) || [];
+        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
+                                    : Tp.ConnectionPresenceType.AVAILABLE;
+    },
+
+    lookupContact: function(nickName) {
+        let baseNick = Polari.util_get_basenick(nickName);
+
+        let contacts = this._baseNickContacts.get(baseNick) || [];
+
         if (contacts.length == 0)
             return null;
 
@@ -170,5 +264,22 @@ const UserTracker = new Lang.Class({
                 return contacts[i];
 
         return contacts[0];
+    },
+
+    watchRoomStatus: function(room, baseNick, callback) {
+        this._ensureRoomMappingForRoom(room);
+
+        this._getRoomHandlers(room).set(++this._handlerCounter, {
+            nickName: baseNick,
+            handler: callback
+        });
+
+        return this._handlerCounter;
+    },
+
+    unwatchRoomStatus: function(room, handlerID) {
+        if (!this._roomData.has(room))
+            return;
+        this._getRoomHandlers(room).delete(handlerID);
     }
 });
