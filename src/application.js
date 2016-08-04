@@ -29,7 +29,6 @@ const Application = new Lang.Class({
 
         GLib.set_application_name('Polari');
         this._window = null;
-        this._pendingRequests = new Map();
         this._retryData = new Map();
     },
 
@@ -38,7 +37,6 @@ const Application = new Lang.Class({
 
         this._chatroomManager = ChatroomManager.getDefault();
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._networksManager = NetworksManager.getDefault();
 
         this._accountsMonitor.connect('account-removed', Lang.bind(this,
@@ -141,12 +139,8 @@ const Application = new Lang.Class({
     vfunc_activate: function() {
         if (!this._window) {
             this._window = new MainWindow.MainWindow({ application: this });
-            this._window.connect('destroy', Lang.bind(this,
-                function() {
-                    for (let request of this._pendingRequests.values())
-                        request.cancel();
-                    this.emit('prepare-shutdown');
-            }));
+            this._window.connect('destroy',
+                                 () => { this.emit('prepare-shutdown'); });
             this._window.show_all();
 
             this._chatroomManager.lateInit();
@@ -327,7 +321,7 @@ const Application = new Lang.Class({
                                  GLib.Variant.new('aa{sv}', savedChannels));
     },
 
-    _requestChannel: function(accountPath, targetType, targetId, time, callback) {
+    _handleJoinQueryAction: function(accountPath, time) {
         let [present, ] = Tp.user_action_time_should_present(time);
 
         if (!this._window || present)
@@ -335,40 +329,28 @@ const Application = new Lang.Class({
 
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
-        if (!account || !account.enabled) {
-            // the account was removed since the channel was saved
+        // the account was removed since the channel was saved
+        if (!account)
+            this._removeSavedChannelsForAccount(accountPath);
+    },
+
+    _onJoinRoom: function(action, parameter) {
+        let [accountPath, channelName, time] = parameter.deep_unpack();
+        this._accountsMonitor.prepare(() => {
+            let account = this._accountsMonitor.lookupAccount(accountPath);
             if (!account)
-                this._removeSavedChannelsForAccount(accountPath);
-            return;
-        }
+                return;
 
-        if (!this._networkMonitor.network_available)
-            return;
+            this._handleJoinQueryAction(accountPath, time);
+            this._addSavedChannel(account, channelName);
+        });
+    },
 
-        let roomId = Polari.create_room_id(account,  targetId, targetType);
-        let cancellable = new Gio.Cancellable();
-        this._pendingRequests.set(roomId, cancellable);
-
-        // We already focused the room, so passing on the time to telepathy
-        // would have no effect at best, but could steal the focus when the
-        // user switched to a different room before the request completes
-        let req = Tp.AccountChannelRequest.new_text(account, 0);
-        req.set_target_id(targetType, targetId);
-        req.set_delegate_to_preferred_handler(true);
-        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
-        req.ensure_and_observe_channel_async(preferredHandler, cancellable,
-            (o, res) => {
-                let channel = null;
-                try {
-                    channel = req.ensure_and_observe_channel_finish(res);
-                } catch(e) {
-                    Utils.debug('Failed to ensure channel: ' + e.message);
-                }
-
-                if (callback)
-                    callback(channel);
-                delete this._pendingRequests[roomId];
-            });
+    _onMessageUser: function(action, parameter) {
+        let [accountPath, contactName, message, time] = parameter.deep_unpack();
+        this._accountsMonitor.prepare(() => {
+            this._handleJoinQueryAction(accountPath, time);
+        });
     },
 
     _ensureRetryData: function(account) {
@@ -471,65 +453,7 @@ const Application = new Lang.Class({
         this._restoreAccountName(account);
     },
 
-    _onJoinRoom: function(action, parameter) {
-        let [accountPath, channelName, time] = parameter.deep_unpack();
-
-        this._accountsMonitor.prepare(() => {
-            let account = this._accountsMonitor.lookupAccount(accountPath);
-            if (!account)
-                return;
-
-            this._requestChannel(accountPath, Tp.HandleType.ROOM,
-                                 channelName, time);
-            this._addSavedChannel(account, channelName);
-        });
-    },
-
-    _onMessageUser: function(action, parameter) {
-        let [accountPath, contactName, message, time] = parameter.deep_unpack();
-        this._accountsMonitor.prepare(() => {
-            this._requestChannel(accountPath, Tp.HandleType.CONTACT,
-                                 contactName, time, Lang.bind(this, this._sendMessage, message));
-        });
-    },
-
-    _sendMessage: function(channel, message) {
-        if (!message || !channel)
-            return;
-
-        let TpMessage = Tp.ClientMessage.new_text(Tp.ChannelTextMessageType.NORMAL,
-                                                  message);
-        channel.send_message_async(TpMessage, 0, Lang.bind(this,
-            function(c, res) {
-            try {
-                c.send_message_finish(res);
-            } catch(e) {
-                // TODO: propagate to user
-                logError(e, 'Failed to send message')
-            }
-        }));
-    },
-
     _onLeaveRoom: function(action, parameter) {
-        let [roomId, message] = parameter.deep_unpack();
-        let reason = Tp.ChannelGroupChangeReason.NONE;
-        let room = this._chatroomManager.getRoomById(roomId);
-        if (!room)
-            return;
-        if (this._pendingRequests.has(roomId)) {
-            this._pendingRequests.get(roomId).cancel();
-        } else if (room.channel) {
-            if (!message.length)
-                message = _("Good Bye"); // TODO - our first setting?
-            room.channel.leave_async(reason, message, Lang.bind(this,
-                function(c, res) {
-                    try {
-                        c.leave_finish(res);
-                    } catch(e) {
-                        logError(e, 'Failed to leave channel');
-                    }
-                }));
-        }
         this._removeSavedChannel(room.account, room.channel_name);
     },
 

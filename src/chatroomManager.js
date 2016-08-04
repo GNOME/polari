@@ -148,6 +148,11 @@ const _ChatroomManager = new Lang.Class({
         this._rooms = {};
 
         this._app = Gio.Application.get_default();
+        this._app.connect('prepare-shutdown', () => {
+            [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
+        });
+
+        this._pendingRequests = new Map();
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -273,6 +278,55 @@ const _ChatroomManager = new Lang.Class({
         action.activate(parameter);
     },
 
+    _requestChannel: function(account, targetType, targetId, callback) {
+        if (!account || !account.enabled)
+            return;
+
+        let roomId = Polari.create_room_id(account,  targetId, targetType);
+
+        let cancellable = new Gio.Cancellable();
+        this._pendingRequests.set(roomId, cancellable);
+
+        // Always use a timestamp of 0 for channels we request - rooms that
+        // the users requests are focused when handling the corresponding
+        // action, so presenting the room after the requests completes has
+        // no effect at best, but could steal the focus when the user switched
+        // to a different room in the meantime
+        let req = Tp.AccountChannelRequest.new_text(account, 0);
+        req.set_target_id(targetType, targetId);
+        req.set_delegate_to_preferred_handler(true);
+
+        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        req.ensure_and_observe_channel_async(preferredHandler, cancellable,
+            (o, res) => {
+                let channel = null;
+                try {
+                    channel = req.ensure_and_observe_channel_finish(res);
+                } catch(e) {
+                    Utils.debug('Failed to ensure channel: ' + e.message);
+                }
+
+                if (callback)
+                    callback(channel);
+                this._pendingRequests.delete(roomId);
+            });
+    },
+
+    _sendMessage: function(channel, message) {
+        if (!message || !channel)
+            return;
+
+        let type = Tp.ChannelTextMessageType.NORMAL;
+        channel.send_message_async(Tp.ClientMessage.new_text(type, message), 0,
+            (c, res) => {
+                try {
+                    c.send_message_finish(res);
+                } catch(e) {
+                    log('Failed to send message: ' + e.message);
+                }
+            });
+    },
+
     _onConnectAccountActivated: function(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
@@ -315,6 +369,8 @@ const _ChatroomManager = new Lang.Class({
         let [present, ] = Tp.user_action_time_should_present(time);
         if (present)
             this._setActiveRoom(room);
+
+        this._requestChannel(account, Tp.HandleType.ROOM, channelName, null);
     },
 
     _onQueryActivated: function(action, parameter) {
@@ -328,12 +384,32 @@ const _ChatroomManager = new Lang.Class({
         let [present, ] = Tp.user_action_time_should_present(time);
         if (present)
             this._setActiveRoom(room);
+
+        this._requestChannel(account, Tp.HandleType.CONTACT, channelName,
+                             Lang.bind(this, this._sendMessage, message));
     },
 
     _onLeaveActivated: function(action, parameter) {
-        let [id, ] = parameter.deep_unpack();
+        let [id, message] = parameter.deep_unpack();
         let room = this._rooms[id];
         this._removeRoom(room);
+
+        let request = this._pendingRequests.get(id);
+        if (request)
+            request.cancel();
+
+        if (!room.channel)
+            return;
+
+        let reason = Tp.ChannelGroupChangeReason.NONE;
+        message = message || _("Good Bye");
+        room.channel.leave_async(reason, message, (c, res) => {
+            try {
+                c.leave_finish(res);
+            } catch(e) {
+                log('Failed to leave channel: ' + e.message);
+            }
+        });
     },
 
     _ensureRoom: function(account, channelName, type) {

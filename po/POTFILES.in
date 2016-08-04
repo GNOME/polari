@@ -12,6 +12,7 @@ data/resources/room-list-header.ui
 data/resources/user-list-details.ui
 src/application.js
 src/appNotifications.js
+src/chatroomManager.js
 src/chatView.js
 src/connections.js
 src/entryArea.js
