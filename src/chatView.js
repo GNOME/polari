@@ -227,6 +227,71 @@ const ButtonTag = new Lang.Class({
     }
 });
 
+const HoverFilterTag = new Lang.Class({
+    Name: 'HoverFilterTag',
+    Extends: ButtonTag,
+    Properties: {
+        'filtered-tag': GObject.ParamSpec.object('filtered-tag',
+                                                 'filtered-tag',
+                                                 'filtered-tag',
+                                                 GObject.ParamFlags.READWRITE |
+                                                 GObject.ParamFlags.CONSTRUCT_ONLY,
+                                                 Gtk.TextTag.$gtype),
+        'hover-opacity': GObject.ParamSpec.double('hover-opacity',
+                                                  'hover-opacity',
+                                                  'hover-opacity',
+                                                  GObject.ParamFlags.READWRITE,
+                                                  0.0, 1.0, 1.0)
+    },
+
+    _init: function(params) {
+        this._filteredTag = null;
+        this._hoverOpacity = 1.;
+
+        this.parent(params);
+
+        this.connect('notify::hover', () => { this._updateColor(); });
+    },
+
+    _updateColor: function() {
+        if (!this._filteredTag)
+            return;
+
+        let color = this._filteredTag.foreground_rgba;
+        if (this.hover)
+            color.alpha *= this._hoverOpacity;
+        this.foreground_rgba = color;
+    },
+
+    set filtered_tag(value) {
+        this._filteredTag = value;
+        this.notify('filtered-tag');
+
+        this._filteredTag.connect('notify::foreground-rgba', () => {
+            this._updateColor();
+        });
+        this._updateColor();
+    },
+
+    get filtered_tag() {
+        return this._filteredTag;
+    },
+
+    set hover_opacity(value) {
+        if (this._hoverOpacity == value)
+            return;
+        this._hoverOpacity = value;
+        this.notify('hover-opacity');
+
+        if (this.hover)
+            this._updateColor();
+    },
+
+    get hover_opacity() {
+        return this._hoverOpacity;
+    }
+});
+
 const ChatView = new Lang.Class({
     Name: 'ChatView',
     Extends: Gtk.ScrolledWindow,
@@ -298,7 +363,9 @@ const ChatView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
-        this._userStatusMonitor = UserTracker.getUserStatusMonitor();
+
+        let statusMonitor = UserTracker.getUserStatusMonitor();
+        this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
 
         this._room.account.connect('notify::nickname', Lang.bind(this,
             function() {
@@ -352,8 +419,14 @@ const ChatView = new Lang.Class({
         }));
         this._onChannelChanged();
 
-        /*where should we unwatch? int onChannelChanged when we don't have a channel?*/
-        this._roomWatchHandler = this._userStatusMonitor.getUserTrackerForAccount(this._room.account).watchUser(this._room, null, Lang.bind(this, this._onStatusChangedCallback));
+        this._nickStatusChangedId =
+            this._userTracker.watchRoomStatus(this._room, null,
+                                        Lang.bind(this, this._onNickStatusChanged));
+
+        this.connect('destroy', () => {
+            this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
+            this._userTracker = null;
+        });
     },
 
     _createTags: function() {
@@ -768,15 +841,6 @@ const ChatView = new Lang.Class({
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
-    _onNickStatusChanged: function(tracker, nickName, status) {
-        let nickTag = this._lookupTag(this._getNickTagName(nickName));
-
-        if (!nickTag)
-            return;
-
-        this._updateNickTag(nickTag, status);
-    },
-
     _onChannelChanged: function() {
         if (this._channel == this._room.channel)
             return;
@@ -1177,9 +1241,17 @@ const ChatView = new Lang.Class({
                     nickTag = this._createNickTag(nickTagName);
                     buffer.get_tag_table().add(nickTag);
 
-                    this._updateNickTag(nickTag, this._userStatusMonitor.getUserTrackerForAccount(this._room.account).getNickStatus(message.nick));
+                    let status = this._userTracker.getNickStatus(message.nick);
+                    this._updateNickTag(nickTag, status);
                 }
                 tags.push(nickTag);
+
+                let hoverTag = new HoverFilterTag({ filtered_tag: nickTag,
+                                                    hover_opacity: 0.8 });
+                buffer.get_tag_table().add(hoverTag);
+
+                tags.push(hoverTag);
+
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
                 this._insertWithTags(iter, message.nick, tags);
@@ -1215,18 +1287,8 @@ const ChatView = new Lang.Class({
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 
-    _createNickTag: function(nickName) {
-        let nickTagName = this._getNickTagName(nickName);
-
-        let tag = new Gtk.TextTag({ name: nickTagName });
-        //this._updateNickTag(tag, this._userStatusMonitor.getUserTrackerForAccount(this._room.account).getNickRoomStatus(nickName, this._room));
-        this._updateNickTag(tag, Tp.ConnectionPresenceType.OFFLINE);
-
-        return tag;
-    },
-
-    _onStatusChangedCallback: function(nick, status) {
-        let nickTagName = this._getNickTagName(nick);
+    _onNickStatusChanged: function(baseNick, status) {
+        let nickTagName = this._getNickTagName(baseNick);
         let nickTag = this._lookupTag(nickTagName);
 
         if (!nickTag)
@@ -1244,7 +1306,6 @@ const ChatView = new Lang.Class({
 
     _createNickTag: function(name) {
         let tag = new ButtonTag({ name: name });
-        tag._popover = new UserList.UserPopover({ relative_to: this._view, margin: 0, room: this._room, userTracker: this._userStatusMonitor.getUserTrackerForAccount(this._room.account) });
         tag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
         return tag;
     },
@@ -1275,6 +1336,11 @@ const ChatView = new Lang.Class({
 
         //TODO: special chars?
         let actualNickName = view.get_buffer().get_slice(start, end, false);
+
+        if (!tag._popover)
+            tag._popover = new UserList.UserPopover({ relative_to: this._view,
+                                                      userTracker: this._userTracker,
+                                                      room: this._room });
 
         tag._popover.nickname = actualNickName;
 
