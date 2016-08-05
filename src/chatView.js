@@ -1226,8 +1226,6 @@ const ChatView = new Lang.Class({
     },
 
     _onStatusChangedCallback: function(nick, status) {
-        log("Nick " + nick + " has local status " + status);
-
         let nickTagName = this._getNickTagName(nick);
         let nickTag = this._lookupTag(nickTagName);
 

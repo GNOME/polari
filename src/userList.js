@@ -288,6 +288,7 @@ const UserDetails = new Lang.Class({
         this._lastHeader.show();
 
         this._userIcon.visible = false;
+        this._fullnameLabel.label = "";
 
         this._revealDetails();
     },
@@ -331,6 +332,11 @@ const UserDetails = new Lang.Class({
 const UserPopover = new Lang.Class({
     Name: 'UserPopover',
     Extends: Gtk.Popover,
+    Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
+    InternalChildren: ['nickLabel',
+                       'statusLabel',
+                       'notifyButton',
+                       'userDetails'],
 
     _init: function(params) {
         this._room = params.room;
@@ -341,109 +347,91 @@ const UserPopover = new Lang.Class({
 
         this.parent(params);
 
-        this._chatroomManager = ChatroomManager.getDefault();
+        this._statusLabel.set_state_flags(Gtk.StateFlags.LINK, false);
 
-        this._nickLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_top: 0 });
-        this._statusLabel = new Gtk.Label({ halign: Gtk.Align.START, margin_bottom: 0 });
+        this._app = Gio.Application.get_default();
 
-        this._headervbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, halign: Gtk.Align.FILL });
-        this._headervbox.add(this._nickLabel);
-        this._headervbox.add(this._statusLabel);
+        this._roomStatusChangedId = 0;
+        this._globalStatusChangedId = 0;
+        this._contactsChangedId = 0;
 
-        this._hbox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, halign: Gtk.Align.FILL, margin: 9 });
-        this._hbox.add(this._headervbox);
+        this.connect('destroy', () => {
+            this.nickname = null;
+        });
 
-        this._notifyButton = new Gtk.Button({ image: new Gtk.Image({ icon_name: 'alarm-symbolic' }), halign: Gtk.Align.END, hexpand: true });
-        this._notifyButton.connect('clicked',
-                                    Lang.bind(this, this._onNotifyButtonClicked));
-        this._hbox.add(this._notifyButton);
-
-
-        this._userDetails = new UserDetails();
-        this.bind_property('visible', this._userDetails, 'expanded', 0);
-
-        let context = this._statusLabel.get_style_context();
-        context.add_class('nick-popover-status');
-
-        this._vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this._vbox.add(this._hbox);
-        this._vbox.add(this._userDetails);
-
-        this.add(this._vbox);
-
-        this._vbox.show_all();
+        this.show();
     },
 
     set nickname(nickname) {
+        if (this._nickname == nickname)
+            return;
+
+        if (nickname == null)
+            return;
+
         this._nickname = nickname;
+        this._nickLabel.label = this._nickname;
+        this._userDetails.nickname = nickname;
 
-        let baseNick = Polari.util_get_basenick(nickname);
+        let actionName = this._userTracker.getNotifyActionName(this._nickname);
+        this._notifyButton.action_name = actionName;
 
-        this._userTracker.connect("status-changed::" + baseNick, Lang.bind(this, this._onNickStatusChanged));
+        this._setBasenick(Polari.util_get_basenick(nickname));
+    },
 
-        this._updateContents();
+    _setBasenick: function(basenick) {
+        if (this._basenick == basenick)
+            return;
+
+        this._basenick = basenick;
+
+        if (this._roomStatusChangedId > 0)
+            this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
+        this._roomStatusChangedId =
+            this._userTracker.watchRoomStatus(this._room, this._basenick,
+                                        Lang.bind(this, this._onNickStatusChanged));
+
+        if (this._globalStatusChangedId > 0)
+            this._userTracker.disconnect(this._globalStatusChangedId);
+        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + basenick, Lang.bind(this, this._updateStatusLabel));
+
+        if (this._contactsChangedId > 0)
+            this._userTracker.disconnect(this._contactsChangedId);
+        this._contactsChangedId = this._userTracker.connect("contacts-changed::" + basenick, () => {
+            this._userDetails.user = this._userTracker.lookupContact(this._nickname);
+        });
+
+        this._updateStatusLabel();
+        this._updateDetailsContact();
     },
 
     get nickname() {
         return this._nickname;
     },
 
-    _updateContents: function() {
-        let bestMatchingContact = this._userTracker.getBestMatchingContact(this._nickname);
+    _updateStatusLabel: function() {
+        let status = this._userTracker.getNickStatus(this._nickname);
+        let roomStatus = this._userTracker.getNickRoomStatus(this._nickname,
+                                                             this._room);
 
-        this._nickLabel.set_label(this._nickname);
-        this._statusLabel.set_label(bestMatchingContact ? "Online" : "Offline");
-
-        if (bestMatchingContact) {
-            this._userDetails.user = bestMatchingContact;
-
-            let context = this._statusLabel.get_style_context();
-            context.set_state(Gtk.StateFlags.LINK);
-            context.save();
-
-            this._statusLabel.sensitive = true;
-        }
-        else {
-            this._userDetails.clearPrevUserAndDetails();
-
-            this._statusLabel.sensitive = false;
-        }
-
-        this._updateNotifyButton();
-
-        this._userDetails.nickname = this._nickname;
-    },
-
-    _onNotifyButtonClicked: function() {
-        if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name())) {
-            this._chatroomManager.addToWatchlist(this._nickname, this._room.account.get_display_name());
-            this._updateNotifyButton();
-        }
-    },
-
-    _updateNotifyButton: function() {
-        if (!this._chatroomManager.isUserWatched(this._nickname, this._room.account.get_display_name()))
-            if (this._user) {
-                this._notifyButton.visible = false;
-                this._notifyButton.sensitive = true;
-            }
-            else {
-                this._notifyButton.visible = true;
-                this._notifyButton.sensitive = true;
-            }
+        let label;
+        if (status != roomStatus)
+            label = _("Available in another room.");
+        else if (status == Tp.ConnectionPresenceType.AVAILABLE)
+            label = _("Online");
         else
-            if (this._user) {
-                this._notifyButton.visible = false;
-                this._notifyButton.sensitive = true;
-            }
-            else {
-                this._notifyButton.visibile = true;
-                this._notifyButton.sensitive = false;
-            }
+            label = _("Offline");
+        this._statusLabel.label = label;
+
+        this._statusLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
     },
 
-    _onNickStatusChanged: function(tracker, nickName, status) {
-        this.user = this._userTracker.getBestMatchingContact(this._nickname);
+    _updateDetailsContact: function() {
+        this._userDetails.user = this._userTracker.lookupContact(this._nickname);
+     },
+
+    _onNickStatusChanged: function(baseNick, status) {
+        this._updateStatusLabel();
     }
 });
 
