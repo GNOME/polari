@@ -346,7 +346,10 @@ const Application = new Lang.Class({
         let cancellable = new Gio.Cancellable();
         this._pendingRequests.set(roomId, cancellable);
 
-        let req = Tp.AccountChannelRequest.new_text(account, time);
+        // We already focused the room, so passing on the time to telepathy
+        // would have no effect at best, but could steal the focus when the
+        // user switched to a different room before the request completes
+        let req = Tp.AccountChannelRequest.new_text(account, 0);
         req.set_target_id(targetType, targetId);
         req.set_delegate_to_preferred_handler(true);
         let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
