@@ -177,7 +177,7 @@ const Application = new Lang.Class({
     _openURIs: function(uris, time) {
         let map = {};
 
-        this._accountsMonitor.dupAccounts().forEach(function(a) {
+        this._accountsMonitor.accounts.forEach(function(a) {
             if (!a.enabled)
                 return;
 

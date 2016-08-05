@@ -123,7 +123,7 @@ const ConnectionsList = new Lang.Class({
     _networksChanged: function() {
         this._list.foreach(function(w) { w.destroy(); });
 
-        let accounts = this._accountsMonitor.dupAccounts();
+        let accounts = this._accountsMonitor.accounts;
         let usedNetworks = accounts.filter(Lang.bind(this, function(a) {
             return this._networksManager.getAccountIsPredefined(a);
         })).map(function(a) {

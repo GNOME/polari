@@ -356,7 +356,7 @@ const RoomList = new Lang.Class({
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-manager-prepared', Lang.bind(this,
             function(mon, am) {
-                let accounts = this._accountsMonitor.dupAccounts();
+                let accounts = this._accountsMonitor.accounts;
                 for (let i = 0; i < accounts.length; i++)
                     this._accountAdded(mon, accounts[i]);
 

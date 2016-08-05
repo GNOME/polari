@@ -156,7 +156,7 @@ const MainWindow = new Lang.Class({
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('accounts-changed', Lang.bind(this,
             function(am) {
-                let accounts = am.dupAccounts();
+                let accounts = am.accounts;
                 this._roomListRevealer.reveal_child = accounts.some(function(a) {
                     return a.enabled;
                 });

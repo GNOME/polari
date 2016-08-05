@@ -33,7 +33,7 @@ const AccountsMonitor = new Lang.Class({
                                            Lang.bind(this, this._onPrepared));
     },
 
-    dupAccounts: function() {
+    get accounts() {
         return [...this._accounts.values()];
     },
 

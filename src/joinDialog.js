@@ -61,7 +61,7 @@ const JoinDialog = new Lang.Class({
         this._roomManager = ChatroomManager.getDefault();
 
         this._accounts = {};
-        this._accountsMonitor.dupAccounts().forEach(Lang.bind(this,
+        this._accountsMonitor.accounts.forEach(Lang.bind(this,
             function(a) {
                 if (!a.enabled)
                     return;
