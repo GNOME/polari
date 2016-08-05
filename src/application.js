@@ -265,13 +265,6 @@ const Application = new Lang.Class({
             }));
     },
 
-    _updateAccountAction: function(action) {
-        action.enabled = this._accountsMonitor.dupAccounts().filter(
-            function(a) {
-                return a.enabled;
-            }).length > 0;
-    },
-
     _leaveRoomCreateHook: function(action) {
         this._chatroomManager.connect('active-changed', Lang.bind(this,
             function() {
