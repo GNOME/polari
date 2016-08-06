@@ -496,7 +496,8 @@ const RoomList = new Lang.Class({
             return;
 
         let placeholder = new Gtk.ListBoxRow({ selectable: false,
-                                               activatable: false });
+                                               activatable: false,
+                                               no_show_all: true });
         placeholder.account = account;
 
         this._placeholders.set(account, placeholder);
