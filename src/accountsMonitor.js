@@ -79,20 +79,16 @@ const AccountsMonitor = new Lang.Class({
     },
 
     _onPrepareShutdown: function() {
-        for (let account of this._accounts.values()) {
-            let presence = Tp.ConnectionPresenceType.OFFLINE;
-            if (account.requested_presence_type == presence)
-                continue;
-
+        let presence = Tp.ConnectionPresenceType.OFFLINE;
+        this.accounts.filter(a => a.requested_presence != presence).forEach(a => {
             this._app.hold();
-            account.request_presence_async(presence, 'offline', '',
-                Lang.bind(this, function(account, result) {
-                    try {
-                        account.request_presence_finish(result);
-                    } catch(e) { }
-                    this._app.release();
-                }));
-        }
+            a.request_presence_async(presence, 'offline', '', (a, res) => {
+                try {
+                    a.request_presence_finish(result);
+                } catch(e) { }
+                this._app.release();
+            });
+        });
     },
 
     _shouldMonitorAccount: function(account) {
