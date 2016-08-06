@@ -119,7 +119,9 @@ const TelepathyClient = new Lang.Class({
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
             [...this._pendingBotPasswords.keys()].forEach(a => { this._discardIdentifyPassword(a); });
+            this._app.release();
         });
+        this._app.hold();
 
         this._pendingBotPasswords = new Map();
         this._pendingRequests = new Map();
