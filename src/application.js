@@ -32,6 +32,25 @@ const Application = new Lang.Class({
 
         GLib.set_application_name('Polari');
         this._retryData = new Map();
+
+        this.add_main_option('start-client', 0,
+                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+                             _("Start Telephathy client"), null);
+        this.connect('handle-local-options', (o, dict) => {
+            try {
+                this.register(null);
+            } catch(e) {
+                return 1;
+            }
+
+            let v = dict.lookup_value('start-client', null);
+            if (v && v.get_boolean()) {
+                this.activate_action('start-client', null);
+                return 0;
+            }
+
+            return -1;
+        });
     },
 
     isRoomFocused: function(room) {
