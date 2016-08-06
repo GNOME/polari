@@ -139,7 +139,7 @@ const ResultView = new Lang.Class({
     Name: 'ResultView',
     Extends: Gtk.ScrolledWindow,
 
-    _init: function(uid, timestamp, channel, keywordsText) {
+    _init: function(channel) {
         //this.parent();
         print("HELLO");
         this.parent({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
@@ -156,9 +156,9 @@ const ResultView = new Lang.Class({
         this._logManager = LogManager.getDefault();
         this._cancellable  = new Gio.Cancellable();
 
-        this._keywords = keywordsText == '' ? [] : keywordsText.split(/\s+/);
-        this._keyregExp = new RegExp( '(' + this._keywords.join('|')+ ')', 'gi');
-        print(this._keyregExp);
+        // this._keywords = keywordsText == '' ? [] : keywordsText.split(/\s+/);
+        // this._keyregExp = new RegExp( '(' + this._keywords.join('|')+ ')', 'gi');
+        // print(this._keyregExp);
         this._active = false;
         this._toplevelFocus = false;
         this._fetchingBacklog = false;
@@ -168,6 +168,9 @@ const ResultView = new Lang.Class({
         this._pending = {};
         this._pendingLogs = [];
         this._logWalker = null;
+
+        this._channelName = channel;
+        this._resultsAvailable = [];
 
         this._createTags();
 
@@ -194,10 +197,68 @@ const ResultView = new Lang.Class({
         this._scrollBottom = adj.upper - adj.page_size;
 
         this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
-        this._rowactivated(uid, channel, timestamp);
+        // this._rowactivated(uid, channel, timestamp);
     },
 
-    _rowactivated: function(uid, channel, timestamp) {
+    _insertView: function(uid, timestamp, rank) {
+        let found = false;
+        let exists = false;
+        let startIndex = 0;
+        print(this._resultsAvailable.length);
+        for(let i = 0; i < this._resultsAvailable.length; i++) {
+            print(this._resultsAvailable[i].rank);
+            print(rank);
+            if(this._resultsAvailable[i].rank > rank) {
+                found = true;
+                startIndex = i;
+            } else if(this._resultsAvailable[i].rank == rank) {
+                exists = true;
+                startIndex = i;
+            }
+        }
+
+        print(startIndex);
+
+        let buffer = this._view.buffer;
+        let iter = buffer.get_start_iter();
+        if(exists) {
+            let lastMark = buffer.get_mark('view-start' + this._resultsAvailable[startIndex].rank);
+            iter = buffer.get_iter_at_mark(lastMark);
+        } else if(found) {
+            let lastMark = buffer.get_mark('view-end' + this._resultsAvailable[startIndex].rank);
+            iter = buffer.get_iter_at_mark(lastMark);
+        }
+        // if(!exists)
+
+        if(!exists) {
+            buffer.create_mark('view-start' + rank, iter, false);
+            let obj = { top_query: null,
+                        bottom_query: null,
+                        rank: rank };
+            // print(this._resultsAvailable.push(obj));
+            // print(this._resultsAvailable.toString());
+            // print(this._resultsAvailable.splice(startIndex, 0, obj).toString());
+            this._resultsAvailable.splice(startIndex + 1, 0, obj);
+            print(this._resultsAvailable.length);
+        }
+        // buffer.insert(iter, String(rank), -1);
+        // buffer.insert(iter, '\n', -1);
+        if(exists)
+            buffer.move_mark_by_name('view-end'+rank, iter);
+        else
+            buffer.create_mark('view-end' + rank, iter, true);
+
+        let index;
+        for(let i = 0; i < this._resultsAvailable.length; i++) {
+            if(this._resultsAvailable[i].rank == rank) {
+                index = i;
+                break;
+            }
+        }
+        this._rowactivated(uid, this._channelName, timestamp, index);
+    },
+
+    _rowactivated: function(uid, channel, timestamp, index) {
         this._uid = uid;
         this._cancellable.cancel();
         this._cancellable.reset();
@@ -249,19 +310,19 @@ const ResultView = new Lang.Class({
         //                           Lang.bind(this, this._onLogEventsReady));
         // this._logManager.query(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady));
         // this._logManager.query(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
-        let buffer = this._view.get_buffer();
-        let iter = buffer.get_end_iter();
-        buffer.set_text("",-1);
-        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
-        this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+        // let buffer = this._view.get_buffer();
+        // let iter = buffer.get_end_iter();
+        // buffer.set_text("",-1);
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 2);
+        // this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady1, index));
         // log("!");
-        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 2);
         // Mainloop.timeout_add(500, Lang.bind(this,
         //     function() {
         //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
         //         return GLib.SOURCE_REMOVE;
         //     }));
-        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady, index));
         //print(this._endQuery.isClosed());
 
         // Mainloop.timeout_add(5000, Lang.bind(this,
@@ -374,34 +435,34 @@ const ResultView = new Lang.Class({
         this.parent();
     },
 
-    _onLogEventsReady: function(events) {
-        // print(events);
+    _onLogEventsReady: function(events, index) {
+        print("AA"+index);
         events = events.reverse();
         this._hideLoadingIndicator();
 
         this._pendingLogs = events.concat(this._pendingLogs);
-        this._insertPendingLogs();
+        this._insertPendingLogs(index);
         this._fetchingBacklog = false;
     },
 
-    _onLogEventsReady1: function(events) {
+    _onLogEventsReady1: function(events, parent, index) {
         // print(events);
         //events = events.reverse();
         this._hideLoadingIndicator1();
 
         this._pendingLogs = events.concat(this._pendingLogs);
-        this._insertPendingLogs1();
+        this._insertPendingLogs1(index);
         let buffer = this._view.get_buffer();
         let mark = buffer.get_mark('centre');
         this._view.scroll_to_mark(mark, 0.0, true, 0, 0.5);
         this._fetchingBacklog = false;
     },
 
-    _insertPendingLogs: function() {
+    _insertPendingLogs: function(index) {
         if (this._pendingLogs.length == 0)
             return;
 
-        let index = -1;
+        // let index = -1;
         let nick = this._pendingLogs[0].sender;
         let type = this._pendingLogs[0].messageType;
     /*    if (!this._query.isClosed()) {
@@ -417,13 +478,16 @@ const ResultView = new Lang.Class({
 
         if (index < 0)
             return;*/
-            index = 0;
+            // index = 0;
         // print(this._pendingLogs);
-        let pending = this._pendingLogs.splice(index);
+        let pending = this._pendingLogs.splice(0);
         // print(this._pendingLogs);
-        print(pending);
+        // print(pending);
+        let buffer = this._view.buffer;
+        let startMark = buffer.get_mark('view-start' + this._resultsAvailable[index].rank);
+        let iter = buffer.get_iter_at_mark(startMark);
         let state = { lastNick: null, lastTimestamp: 0 };
-        let iter = this._view.buffer.get_start_iter();
+        // let iter = this._view.buffer.get_start_iter();
         for (let i = 0; i < pending.length; i++) {
             let message = { nick: pending[i].sender,
                             text: pending[i].message,
@@ -437,6 +501,7 @@ const ResultView = new Lang.Class({
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
         }
+        buffer.move_mark_by_name('view-end'+this._resultsAvailable[index].rank, iter);
 
         if (!this._channel)
             return;
@@ -839,9 +904,9 @@ const ResultView = new Lang.Class({
 
         let text = message.text;
         let res = [], match;
-        while ((match = this._keyregExp.exec(text))){
-            res.push({ keyword: match[0], pos: match.index});
-        }
+        // while ((match = this._keyregExp.exec(text))){
+        //     res.push({ keyword: match[0], pos: match.index});
+        // }
         // let channels = Utils.findChannels(text, server);
         // let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
         let pos = 0;

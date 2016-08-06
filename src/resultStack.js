@@ -24,13 +24,13 @@ const ResultStack = new Lang.Class({
 
     },
 
-    _addView: function(id, view) {
-        this._results[id] = view;
-        this.add_named(view, id);
+    _addView: function(channel, view) {
+        this._results[channel] = view;
+        this.add_named(view, channel);
     },
 
-    _resultAdded: function(uid, timestamp, channel, keywords) {
-        this._addView(uid, new ResultView.ResultView(uid, timestamp, channel, keywords));
+    _resultAdded: function(channel) {
+        this._addView(channel, new ResultView.ResultView(channel));
     },
 
     _resultRemoved: function(row) {
@@ -39,10 +39,11 @@ const ResultStack = new Lang.Class({
     },
 
     _activeResultChanged: function(action, parameter) {
-        let [uid, timestamp, channel, keywords] = parameter.deep_unpack();
-        print(uid);
-        if(!this._results[uid])
-            this._resultAdded(uid, timestamp, channel, keywords);
-        this.set_visible_child_name(uid);
+        let [uid, timestamp, channel, keywords, rank] = parameter.deep_unpack();
+        print(channel);
+        if(!this._results[channel])
+            this._resultAdded(channel);
+        this._results[channel]._insertView(uid, timestamp, rank);
+        this.set_visible_child_name(channel);
     }
 });

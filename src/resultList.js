@@ -166,6 +166,7 @@ const ResultList = new Lang.Class({
         //this.connect('row-activated', Lang.bind(this, this._rowactivated));
         this._results = [];
         this._widgetMap = {};
+        this._channelMap = {};
         //this._keywordsAction = app.lookup_action('search-terms');
         this._app.connect('action-state-changed::search-terms', Lang.bind(this,
                           this._handleSearchChanged));
@@ -181,7 +182,7 @@ const ResultList = new Lang.Class({
     vfunc_row_selected: function(row) {
         if(!row) return;
         let rowSelectedAction = this._app.lookup_action('active-result-changed');
-        rowSelectedAction.activate(new GLib.Variant('(suss)', [row.uid, row.timestamp, row.channel, this._keywordsText]));
+        rowSelectedAction.activate(new GLib.Variant('(sussu)', [row.uid, row.timestamp, row.channel, this._keywordsText, row.rank]));
         // if (row)
         //     row.selected();
     },
@@ -292,6 +293,15 @@ const ResultList = new Lang.Class({
                 row = new ResultRow(events[i]);
                 widgetMap[uid] = row;
             }
+            print(events[i].chan);
+            print(this._channelMap[events[i].chan]);
+            if( this._channelMap[events[i].chan] != null ) {
+                print("XXXXXXXXX");
+                this._channelMap[events[i].chan]++;
+            } else {
+                this._channelMap[events[i].chan] = 0;
+            }
+            row.rank = this._channelMap[events[i].chan];
             row._content_label.label = message;
         }
 
@@ -321,6 +331,14 @@ const ResultList = new Lang.Class({
             let row;
             row = new ResultRow(events[i]);
             this._widgetMap[uid] = row;
+
+            if( this._channelMap[events[i].chan] ) {
+                this._channelMap[events[i].chan]++;
+            } else {
+                this._channelMap[events[i].chan] = 0;
+            }
+            row.rank = this._channelMap[events[i].chan];
+
             row._content_label.label = message;
             this.add(row);
         }
