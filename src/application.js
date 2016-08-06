@@ -82,6 +82,8 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('o') },
           { name: 'discard-identify-password',
             parameter_type: GLib.VariantType.new('o') },
+          { name: 'start-client',
+            activate: Lang.bind(this, this._onStartClient) },
           { name: 'help',
             activate: Lang.bind(this, this._onShowHelp),
             accels: ['F1'] },
@@ -145,14 +147,7 @@ const Application = new Lang.Class({
     },
 
     vfunc_activate: function() {
-        if (!this._telepathyClient) {
-            let params = {
-                name: 'Polari',
-                account_manager: this._accountsMonitor.accountManager,
-                uniquify_name: false
-            };
-            this._telepathyClient = new TelepathyClient.TelepathyClient(params);
-        }
+        this.activate_action('start-client', null);
 
         if (!this.active_window) {
             let window = new MainWindow.MainWindow({ application: this });
@@ -470,6 +465,18 @@ const Application = new Lang.Class({
                 w.destroy();
             }));
         dialog.show();
+    },
+
+    _onStartClient: function() {
+        if (this._telepathyClient)
+            return;
+
+        let params = {
+            name: 'Polari',
+            account_manager: this._accountsMonitor.accountManager,
+            uniquify_name: false
+        };
+        this._telepathyClient = new TelepathyClient.TelepathyClient(params);
     },
 
     _onShowHelp: function() {
