@@ -80,6 +80,8 @@ const Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('o') },
           { name: 'save-identify-password',
             parameter_type: GLib.VariantType.new('o') },
+          { name: 'discard-identify-password',
+            parameter_type: GLib.VariantType.new('o') },
           { name: 'help',
             activate: Lang.bind(this, this._onShowHelp),
             accels: ['F1'] },

@@ -118,6 +118,7 @@ const TelepathyClient = new Lang.Class({
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
+            [...this._pendingBotPasswords.keys()].forEach(a => { this._discardIdentifyPassword(a); });
         });
 
         this._pendingBotPasswords = new Map();
@@ -152,7 +153,9 @@ const TelepathyClient = new Lang.Class({
             { name: 'authenticate-account',
               handler: Lang.bind(this, this._onAuthenticateAccountActivated) },
             { name: 'save-identify-password',
-              handler: Lang.bind(this, this._onSaveIdentifyPasswordActivated) }
+              handler: Lang.bind(this, this._onSaveIdentifyPasswordActivated) },
+            { name: 'discard-identify-password',
+              handler: Lang.bind(this, this._onDiscardIdentifyPasswordActivated) }
         ];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
@@ -367,6 +370,16 @@ const TelepathyClient = new Lang.Class({
 
         settings.set_string('identify-username', data.username);
     },
+
+    _onDiscardIdentifyPasswordActivated: function(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        this._discardIdentifyPassword(accountPath);
+    },
+
+    _discardIdentifyPassword: function(accountPath) {
+        this._pendingBotPasswords.delete(accountPath);
+    },
+
 
     _isAuthChannel: function(channel) {
         return channel.channel_type == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
