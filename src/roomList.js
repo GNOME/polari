@@ -197,7 +197,6 @@ const RoomListHeader = new Lang.Class({
         let connectionStatusChangedId =
             this._account.connect('notify::connection-status',
                                   Lang.bind(this, this._onConnectionStatusChanged));
-        this._onConnectionStatusChanged();
 
         let presenceChangedId =
             this._account.connect('notify::requested-presence-type',
@@ -242,8 +241,15 @@ const RoomListHeader = new Lang.Class({
         return this.parent(event);
     },
 
+    _getConnectionStatus: function() {
+        let presence = this._account.requested_presence_type;
+        if (presence == Tp.ConnectionPresenceType.OFFLINE)
+            return Tp.ConnectionStatus.DISCONNECTED;
+        return this._account.connection_status;
+    },
+
     _onConnectionStatusChanged: function() {
-        let status = this._account.connection_status;
+        let status = this._getConnectionStatus();
         let reason = this._account.connection_status_reason;
         let authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
         let isError = (status == Tp.ConnectionStatus.DISCONNECTED &&
@@ -251,12 +257,10 @@ const RoomListHeader = new Lang.Class({
         let isAuth = isError && this._account.connection_error == authError;
 
         let child = 'default';
-        if (status == Tp.ConnectionStatus.CONNECTING) {
-            if (this._networkMonitor.network_available)
-                child = 'connecting';
-        } else if (isError) {
+        if (status == Tp.ConnectionStatus.CONNECTING)
+            child = 'connecting';
+        else if (isError)
             child = isAuth ? 'auth' : 'error';
-        }
 
         this._iconStack.visible_child_name = child;
         this._spinner.active = (child == 'connecting');
@@ -292,10 +296,11 @@ const RoomListHeader = new Lang.Class({
         let offline = presence == Tp.ConnectionPresenceType.OFFLINE;
         this._popoverConnect.visible = offline;
         this._popoverReconnect.visible = !offline;
+        this._onConnectionStatusChanged();
     },
 
     _getStatusLabel: function() {
-        switch (this._account.connection_status) {
+        switch (this._getConnectionStatus()) {
             case Tp.ConnectionStatus.CONNECTED:
                 return _("Connected");
             case Tp.ConnectionStatus.CONNECTING:
