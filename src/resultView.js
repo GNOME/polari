@@ -231,7 +231,8 @@ const ResultView = new Lang.Class({
         // if(!exists)
 
         if(!exists) {
-            buffer.create_mark('view-start' + rank, iter, false);
+            buffer.insert(iter, '\n', -1);
+            buffer.create_mark('view-start' + rank, iter, true);
             let obj = { top_query: null,
                         bottom_query: null,
                         rank: rank };
@@ -246,7 +247,7 @@ const ResultView = new Lang.Class({
         if(exists)
             buffer.move_mark_by_name('view-end'+rank, iter);
         else
-            buffer.create_mark('view-end' + rank, iter, true);
+            buffer.create_mark('view-end' + rank, iter, false);
 
         let index;
         for(let i = 0; i < this._resultsAvailable.length; i++) {
@@ -255,6 +256,7 @@ const ResultView = new Lang.Class({
                 break;
             }
         }
+        this._rank = rank;
         this._rowactivated(uid, this._channelName, timestamp, rank);
     },
 
@@ -626,6 +628,7 @@ const ResultView = new Lang.Class({
     },
 
     _onScroll: function(w, event) {
+        print("was onscroll" +this.vadjustment.value);
         let [hasDir, dir] = event.get_scroll_direction();
         if (hasDir && (dir != Gdk.ScrollDirection.UP || dir != Gdk.ScrollDirection.DOWN) )
             return Gdk.EVENT_PROPAGATE;
@@ -669,6 +672,7 @@ const ResultView = new Lang.Class({
     },
 
     _fetchBacklog: function() {
+        print("was at backlog" + this.vadjustment.value + this._fetchingBacklog);
         if (this.vadjustment.value != 0 &&
             this.vadjustment.value != this._scrollBottom)
             return Gdk.EVENT_PROPAGATE;
@@ -682,9 +686,11 @@ const ResultView = new Lang.Class({
             this._showLoadingIndicator();
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
-                    this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady));
+                    this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady, this._rank));
                 }));
         } else {
+            this._fetchingBacklog = false;
+            return Gdk.EVENT_STOP;
             this._showLoadingIndicator1();
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
