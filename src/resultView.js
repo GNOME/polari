@@ -255,10 +255,10 @@ const ResultView = new Lang.Class({
                 break;
             }
         }
-        this._rowactivated(uid, this._channelName, timestamp, index);
+        this._rowactivated(uid, this._channelName, timestamp, rank);
     },
 
-    _rowactivated: function(uid, channel, timestamp, index) {
+    _rowactivated: function(uid, channel, timestamp, rank) {
         this._uid = uid;
         this._cancellable.cancel();
         this._cancellable.reset();
@@ -322,7 +322,7 @@ const ResultView = new Lang.Class({
         //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
         //         return GLib.SOURCE_REMOVE;
         //     }));
-        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady, index));
+        this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady, rank));
         //print(this._endQuery.isClosed());
 
         // Mainloop.timeout_add(5000, Lang.bind(this,
@@ -435,13 +435,13 @@ const ResultView = new Lang.Class({
         this.parent();
     },
 
-    _onLogEventsReady: function(events, index) {
-        print("AA"+index);
+    _onLogEventsReady: function(events, rank) {
+        print("AA"+rank);
         events = events.reverse();
         this._hideLoadingIndicator();
 
         this._pendingLogs = events.concat(this._pendingLogs);
-        this._insertPendingLogs(index);
+        this._insertPendingLogs(rank);
         this._fetchingBacklog = false;
     },
 
@@ -458,7 +458,7 @@ const ResultView = new Lang.Class({
         this._fetchingBacklog = false;
     },
 
-    _insertPendingLogs: function(index) {
+    _insertPendingLogs: function(rank) {
         if (this._pendingLogs.length == 0)
             return;
 
@@ -484,7 +484,7 @@ const ResultView = new Lang.Class({
         // print(this._pendingLogs);
         // print(pending);
         let buffer = this._view.buffer;
-        let startMark = buffer.get_mark('view-start' + this._resultsAvailable[index].rank);
+        let startMark = buffer.get_mark('view-start' + rank);
         let iter = buffer.get_iter_at_mark(startMark);
         let state = { lastNick: null, lastTimestamp: 0 };
         // let iter = this._view.buffer.get_start_iter();
@@ -501,7 +501,7 @@ const ResultView = new Lang.Class({
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
         }
-        buffer.move_mark_by_name('view-end'+this._resultsAvailable[index].rank, iter);
+        buffer.move_mark_by_name('view-end'+rank, iter);
 
         if (!this._channel)
             return;
