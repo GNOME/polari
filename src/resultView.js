@@ -257,7 +257,7 @@ const ResultView = new Lang.Class({
             }
         }
         this._rank = rank;
-        this._rowactivated(uid, this._channelName, timestamp, rank);
+        if(!exists) this._rowactivated(uid, this._channelName, timestamp, rank);
     },
 
     _rowactivated: function(uid, channel, timestamp, rank) {
