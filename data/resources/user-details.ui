@@ -116,6 +116,7 @@
                 <property name="margin-start">20</property>
                 <property name="hexpand">True</property>
                 <property name="use-markup">True</property>
+                <property name="max-width-chars">25</property>
                 <style>
                   <class name="dim-label" />
                 </style>
