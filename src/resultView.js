@@ -231,7 +231,8 @@ const ResultView = new Lang.Class({
         // if(!exists)
 
         if(!exists) {
-            buffer.insert(iter, '\n', -1);
+            let tags = [this._lookupTag('separator')];
+            this._insertWithTags(iter,'\n',tags);
             buffer.create_mark('view-start' + rank, iter, true);
             let obj = { top_query: null,
                         bottom_query: null,
@@ -241,6 +242,9 @@ const ResultView = new Lang.Class({
             // print(this._resultsAvailable.splice(startIndex, 0, obj).toString());
             this._resultsAvailable.splice(startIndex + 1, 0, obj);
             print(this._resultsAvailable.length);
+
+            let rankTag = new Gtk.TextTag({ name: 'result'+rank, invisible: true });
+            this._view.get_buffer().get_tag_table().add(rankTag);
         }
         // buffer.insert(iter, String(rank), -1);
         // buffer.insert(iter, '\n', -1);
@@ -253,11 +257,20 @@ const ResultView = new Lang.Class({
         for(let i = 0; i < this._resultsAvailable.length; i++) {
             if(this._resultsAvailable[i].rank == rank) {
                 index = i;
-                break;
+                // break;
+                rankTag = this._lookupTag('result'+this._resultsAvailable[i].rank);
+                rankTag.invisible = false;
+            } else {
+                rankTag = this._lookupTag('result'+this._resultsAvailable[i].rank);
+                rankTag.invisible = true;
             }
         }
         this._rank = rank;
         if(!exists) this._rowactivated(uid, this._channelName, timestamp, rank);
+        else {
+            this._startQuery = this._resultsAvailable[index].top_query;
+            this._endQuery = this._resultsAvailable[index].bottom_query;
+        }
     },
 
     _rowactivated: function(uid, channel, timestamp, rank) {
@@ -315,16 +328,24 @@ const ResultView = new Lang.Class({
         // let buffer = this._view.get_buffer();
         // let iter = buffer.get_end_iter();
         // buffer.set_text("",-1);
-        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 2);
-        // this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady1, index));
+        this._endQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
+        this._endQuery.run(sparql,this._cancellable,Lang.bind(this, this._onLogEventsReady1, rank));
         // log("!");
-        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 2);
+        this._startQuery = new LogManager.GenericQuery(this._logManager._connection, 20);
         // Mainloop.timeout_add(500, Lang.bind(this,
         //     function() {
         //         query.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
         //         return GLib.SOURCE_REMOVE;
         //     }));
         this._startQuery.run(sparql1,this._cancellable,Lang.bind(this, this._onLogEventsReady, rank));
+        for(let i = 0; i < this._resultsAvailable.length; i++) {
+            if(this._resultsAvailable[i].rank == rank) {
+                index = i;
+                break;
+            }
+        }
+        this._resultsAvailable[index].top_query = this._startQuery;
+        this._resultsAvailable[index].top_query = this._endQuery;
         //print(this._endQuery.isClosed());
 
         // Mainloop.timeout_add(5000, Lang.bind(this,
@@ -365,7 +386,9 @@ const ResultView = new Lang.Class({
           { name: 'indicator-line',
             pixels_above_lines: 24 },
           { name: 'loading',
-            justification: Gtk.Justification.CENTER }
+            justification: Gtk.Justification.CENTER },
+          { name: 'separator',
+            invisible: true }
         ];
         tags.forEach(function(tagProps) {
             tagTable.add(new Gtk.TextTag(tagProps));
@@ -447,13 +470,13 @@ const ResultView = new Lang.Class({
         this._fetchingBacklog = false;
     },
 
-    _onLogEventsReady1: function(events, parent, index) {
+    _onLogEventsReady1: function(events, rank) {
         // print(events);
         //events = events.reverse();
         this._hideLoadingIndicator1();
 
         this._pendingLogs = events.concat(this._pendingLogs);
-        this._insertPendingLogs1(index);
+        this._insertPendingLogs1(rank);
         let buffer = this._view.get_buffer();
         let mark = buffer.get_mark('centre');
         this._view.scroll_to_mark(mark, 0.0, true, 0, 0.5);
@@ -496,14 +519,17 @@ const ResultView = new Lang.Class({
                             timestamp: pending[i].timestamp,
                             messageType: pending[i].messageType,
                             shouldHighlight: false,
-                            id: pending[i].id};
+                            id: pending[i].id,
+                            rank: rank};
             this._insertMessage(iter, message, state);
             this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
 
-            if (!iter.is_end() || i < pending.length - 1)
-                this._view.buffer.insert(iter, '\n', -1);
+            if (!iter.is_end() || i < pending.length - 1) {
+                let tags = [this._lookupTag('result'+rank)];
+                this._insertWithTags(iter,'\n',tags);
+            }
         }
-        buffer.move_mark_by_name('view-end'+rank, iter);
+        // buffer.move_mark_by_name('view-end'+rank, iter);
 
         if (!this._channel)
             return;
@@ -521,7 +547,7 @@ const ResultView = new Lang.Class({
         }
     },
 
-    _insertPendingLogs1: function() {
+    _insertPendingLogs1: function(rank) {
         if (this._pendingLogs.length == 0)
             return;
 
@@ -547,19 +573,23 @@ const ResultView = new Lang.Class({
         // print(this._pendingLogs);
         // print(pending);
         let state = { lastNick: null, lastTimestamp: 0 };
-        let iter = this._view.buffer.get_end_iter();
+        let buffer = this._view.buffer;
+        let endMark = buffer.get_mark('view-end' + rank);
+        let iter = buffer.get_iter_at_mark(endMark);
         for (let i = 0; i < pending.length; i++) {
             let message = { nick: pending[i].sender,
                             text: pending[i].message,
                             timestamp: pending[i].timestamp,
                             messageType: pending[i].messageType,
                             shouldHighlight: false,
-                            id: pending[i].id};
+                            id: pending[i].id,
+                            rank: rank};
             this._insertMessage(iter, message, state);
             this._setNickStatus(message.nick, Tp.ConnectionPresenceType.OFFLINE);
 
             //if (!iter.is_end() || i < pending.length - 1)
-                this._view.buffer.insert(iter, '\n', -1);
+            let tags = [this._lookupTag('result'+rank)];
+            this._insertWithTags(iter,'\n',tags);
         }
 
         if (!this._channel)
@@ -689,12 +719,12 @@ const ResultView = new Lang.Class({
                     this._startQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady, this._rank));
                 }));
         } else {
-            this._fetchingBacklog = false;
-            return Gdk.EVENT_STOP;
+            // this._fetchingBacklog = false;
+            // return Gdk.EVENT_STOP;
             this._showLoadingIndicator1();
             Mainloop.timeout_add(500, Lang.bind(this,
                 function() {
-                    this._endQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady1));
+                    this._endQuery.next(10,this._cancellable,Lang.bind(this, this._onLogEventsReady1, this._rank));
                 }));
         }
         return Gdk.EVENT_STOP;
@@ -856,9 +886,11 @@ const ResultView = new Lang.Class({
         let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
         let needsGap = message.nick != state.lastNick || isAction;
         let isCentre = message.id == this._uid;
+        let rank = message.rank;
 
         if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
             let tags = [this._lookupTag('timestamp')];
+            tags.push(this._lookupTag('result'+rank));
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
@@ -871,6 +903,7 @@ const ResultView = new Lang.Class({
 //        this._updateMaxNickChars(message.nick.length);
 
         let tags = [];
+        tags.push(this._lookupTag('result'+rank));
         if (isAction) {
             message.text = "%s %s".format(message.nick, message.text);
             state.lastNick = null;
@@ -880,6 +913,7 @@ const ResultView = new Lang.Class({
         } else {
             if (state.lastNick != message.nick) {
                 let tags = [this._lookupTag('nick')];
+                tags.push(this._lookupTag('result'+rank));
                 let nickTagName = this._getNickTagName(message.nick);
                 let nickTag = this._lookupTag(nickTagName);
 
