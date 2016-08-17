@@ -261,6 +261,8 @@ const RoomListHeader = new Lang.Class({
             child = 'connecting';
         else if (isError)
             child = isAuth ? 'auth' : 'error';
+        else if (status == Tp.ConnectionStatus.DISCONNECTED)
+            child = 'disconnected';
 
         this._iconStack.visible_child_name = child;
         this._spinner.active = (child == 'connecting');

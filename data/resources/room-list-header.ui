@@ -34,6 +34,15 @@
             <property name="visible">True</property>
             <child>
               <object class="GtkImage">
+                <property name="icon-name">network-offline-symbolic</property>
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="name">disconnected</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
                 <property name="icon_name">dialog-error-symbolic</property>
                 <property name="visible">True</property>
               </object>
