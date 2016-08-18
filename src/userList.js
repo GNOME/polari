@@ -189,6 +189,9 @@ const UserDetails = new Lang.Class({
         if (this._user)
             this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
+        //TODO: else use this._nickname to query tracker
+        else
+            this._revealDetails();
     },
 
     _unexpand: function() {
@@ -276,6 +279,12 @@ const UserDetails = new Lang.Class({
     },
 
     _updateButtonVisibility: function() {
+        if (!this._user) {
+            this._messageButton.sensitive = false;
+
+            return;
+        }
+
         if (this._user == this._user.connection.self_contact) {
             this._messageButton.visible = false;
             this._messageButton.sensitive = true;
