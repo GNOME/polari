@@ -298,8 +298,8 @@ const ChatView = new Lang.Class({
         this._pendingLogs = [];
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
-        this._userTracker = new UserTracker.UserTracker(this._room);
-        this._userTracker.connect('status-changed', Lang.bind(this, this._onNickStatusChanged));
+        let statusMonitor = UserTracker.getUserStatusMonitor();
+        this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
 
         this._room.account.connect('notify::nickname', Lang.bind(this,
             function() {
@@ -352,6 +352,15 @@ const ChatView = new Lang.Class({
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         }));
         this._onChannelChanged();
+
+        this._nickStatusChangedId =
+            this._userTracker.watchRoomStatus(this._room, null,
+                                        Lang.bind(this, this._onNickStatusChanged));
+
+        this.connect('destroy', () => {
+            this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
+            this._userTracker = null;
+        });
     },
 
     _createTags: function() {
@@ -1166,9 +1175,11 @@ const ChatView = new Lang.Class({
                     nickTag = this._createNickTag(nickTagName);
                     buffer.get_tag_table().add(nickTag);
 
-                    this._updateNickTag(nickTag, this._userTracker.getNickStatus(message.nick));
+                    let status = this._userTracker.getNickStatus(message.nick);
+                    this._updateNickTag(nickTag, status);
                 }
                 tags.push(nickTag);
+
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
                 this._insertWithTags(iter, message.nick, tags);
@@ -1204,8 +1215,9 @@ const ChatView = new Lang.Class({
         this._insertWithTags(iter, text.substr(pos), tags);
     },
 
-    _onNickStatusChanged: function(tracker, nickName, status) {
-        let nickTag = this._lookupTag(this._getNickTagName(nickName));
+    _onNickStatusChanged: function(baseNick, status) {
+        let nickTagName = this._getNickTagName(baseNick);
+        let nickTag = this._lookupTag(nickTagName);
 
         if (!nickTag)
             return;
