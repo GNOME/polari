@@ -127,6 +127,46 @@
                 <property name="left-attach">0</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">polari-user-notify-symbolic</property>
+                <property name="visible" bind-source="notificationLabel"
+                          bind-property="visible" bind-flags="sync-create"/>
+                <property name="opacity" bind-source="notificationLabel"
+                          bind-property="opacity" bind-flags="sync-create"/>
+                <property name="no-show-all">True</property>
+                <property name="halign">start</property>
+                <property name="margin-left">0</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+              <packing>
+                <property name="width">1</property>
+                <property name="top-attach">2</property>
+                <property name="left-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="notificationLabel">
+                <property name="ellipsize">end</property>
+                <property name="halign">start</property>
+                <property name="margin-start">20</property>
+                <property name="hexpand">True</property>
+                <property name="no-show-all">True</property>
+                <property name="visible">True</property>
+                <property name="use-markup">True</property>
+                <property name="label" translatable="yes">Will notify if user appears online.</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+              <packing>
+                <property name="width">2</property>
+                <property name="top-attach">2</property>
+                <property name="left-attach">0</property>
+              </packing>
+            </child>
           </object>
         </child>
         <child>
