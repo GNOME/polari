@@ -324,6 +324,7 @@ const UserPopover = new Lang.Class({
     Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
     InternalChildren: ['nickLabel',
                        'statusLabel',
+                       'notifyButton',
                        'userDetails'],
 
     _init: function(params) {
@@ -360,6 +361,9 @@ const UserPopover = new Lang.Class({
         this._nickname = nickname;
         this._nickLabel.label = this._nickname;
         this._userDetails.nickname = nickname;
+
+        let actionName = this._userTracker.getNotifyActionName(this._nickname);
+        this._notifyButton.action_name = actionName;
 
         this._setBasenick(Polari.util_get_basenick(nickname));
     },
