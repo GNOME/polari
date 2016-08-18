@@ -466,7 +466,6 @@ const UserListRow = new Lang.Class({
         let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
         this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
                                       no_show_all: true });
-        hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
         this._label = new Gtk.Label({ label: this._user.alias,
                                       halign: Gtk.Align.START,
                                       hexpand: true,
@@ -487,7 +486,9 @@ const UserListRow = new Lang.Class({
         if (this._revealer.get_child())
             return;
 
-        let details = new UserListDetails({ user: this._user })
+        let details = new UserDetails();
+        details.user = this._user;
+
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
