@@ -5,6 +5,7 @@
     <file alias="data/networks.json">resources/networks.json</file>
     <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">resources/help-overlay.ui</file>
     <file alias="gtk/menus.ui" preprocess="xml-stripblanks">resources/menus.ui</file>
+    <file alias="icons/polari-user-notify-symbolic.svg" preprocess="xml-stripblanks">resources/polari-user-notify-symbolic.svg</file>
     <file alias="ui/connection-details.ui" preprocess="xml-stripblanks">resources/connection-details.ui</file>
     <file alias="ui/connection-properties.ui" preprocess="xml-stripblanks">resources/connection-properties.ui</file>
     <file alias="ui/entry-area.ui" preprocess="xml-stripblanks">resources/entry-area.ui</file>
