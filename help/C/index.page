@@ -4,11 +4,21 @@
       id="index">
 
   <info>
+    <title type="text">Polari</title>
     <revision pkgversion="3.20" date="2016-05-06" status="stub" />
 
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+    <desc><app>Polari</app> is a clean, simple, and minimal irc client which completely integrates with the gnome desktop. Learn more about Polari.</desc>
   </info>
 
-  <title>Polari</title>
+  <title>
+	<media type="image" mime="image/png" its:translate="no" src="images/Polari.png"/>
+	Polari
+  </title>
+  
+  <section id="start" style="2column">
+	<title>Getting Started</title>
+  </section>
+	
 
 </page>

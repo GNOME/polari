@@ -1,0 +1,21 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="guide" style="task"
+      id="start">
+
+  <info>
+  	<revision pkgversion="3.20" date="2016-05-06" status="stub" />
+	<credit type="author copyright">
+        	<name>Ankit R Gadiya</name>
+        	<email its:translate="no">ankit4922@gmail.com</email>
+        	<years>2016</years>
+        </credit>
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  </info>
+
+  <title>Get Started</title>
+
+  
+
+</page>

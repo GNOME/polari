@@ -1,0 +1,47 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="network-connect-preconfigured">
+
+  <info>
+    <link type="guide" xref="index#start" group="#first"/>
+    <revision pkgversion="3.20" date="2016-05-06" status="stub" />
+
+    <credit type="author copyright">
+      <name>Ankit R Gadiya</name>
+      <email its:translate="no">ankit4922@gmail.com</email>
+      <years>2016</years>
+    </credit>
+    
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+    <desc>How to connect to a preconfigured network.</desc>
+	
+  </info>
+  <title>Connect to preconfigured network</title>
+  <p>Its really easy to connect to a network.</p>
+  <steps>
+	<item>
+		<p>Open Polari</p>
+	</item>
+	<item>
+		<p>Click on the <key>+</key>on the top left corner.</p>
+		<media type="image" mime="image/png" its:translate="no" src="images/main.png"/>
+	</item>
+	<item>
+		<p>In Add network window select the preconfigured network.</p>
+		<media type="image" mime="image/png" its:translate="no" src="images/add-network.png"/>
+	</item>
+	<item>
+		<p>In Join room window, type the room name and password(password is optional)</p>
+		<media type="image" mime="image/png" its:translate="no" src="images/join-room.png"/>
+	</item>
+	<item>
+		<p>Click the <key>Join</key> button on the top right.</p>
+	</item>
+	<item>
+		<p>Done!</p>
+		<media type="image" mime="image/png" its:translate="no" src="images/in-network.png"/>
+	</item>
+  </steps>
+</page>

@@ -1,0 +1,34 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="introduction">
+
+  <info>
+  	<link type="guide" xref="index"/>
+  	<revision pkgversion="3.20" date="2016-05-06" status="stub" />
+
+  	<credit type="author copyright">
+    		<name>Ankit R Gadiya</name>
+        	<email its:translate="no">ankit4922@gmail.com</email>
+        	<years>2016</years>
+  	</credit>
+
+        <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+
+  	<desc>An introduction to <app>Polari</app>, a clean, minimal irc client.</desc>
+  </info>
+
+  <title>Introduction</title>
+
+  <p>
+	<app>Polari</app> is a simple irc client which integrates perfectly with gnome desktop and provides you distraction free window.
+  </p>
+
+  <media type="image" mime="image/png" src="images/main.png">
+	<p>A screenshot of main window of Polari(not connected to any network)</p>
+  </media>
+  <media type="image" mime="image/png" src="images/main-dark.png">
+	<p>A screenshot of main windo of Polari(not connected to any network) when global dark theme is enabled</p>
+  </media>
+
+</page>
