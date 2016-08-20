@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="Gjs_UserListDetails" parent="GtkFrame">
+  <template class="Gjs_UserDetails" parent="GtkFrame">
     <property name="visible">True</property>
     <property name="hexpand">True</property>
     <property name="shadow-type">none</property>
