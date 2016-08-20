@@ -5,7 +5,7 @@
 
   <info>
   	<link type="guide" xref="index"/>
-  	<revision pkgversion="3.20" date="2016-05-06" status="stub" />
+  	<revision pkgversion="3.20" date="2016-08-06" status="stub" />
 
   	<credit type="author copyright">
     		<name>Ankit R Gadiya</name>
@@ -15,20 +15,20 @@
 
         <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
 
-  	<desc>An introduction to <app>Polari</app>, a clean, minimal irc client.</desc>
+  	<desc>An introduction to <app>Polari</app>, a clean, minimal IRC client.</desc>
   </info>
 
   <title>Introduction</title>
 
   <p>
-	<app>Polari</app> is a simple irc client which integrates perfectly with gnome desktop and provides you distraction free window.
+	<app>Polari</app> is a simple IRC client which perfectly integrates with the GNOME desktop, and enables you to chat with people around world through large chatrooms or via private messaging.
   </p>
 
   <media type="image" mime="image/png" src="images/main.png">
-	<p>A screenshot of main window of Polari(not connected to any network)</p>
+	<p>A screenshot of the main window of Polari (not connected to any network)</p>
   </media>
   <media type="image" mime="image/png" src="images/main-dark.png">
-	<p>A screenshot of main windo of Polari(not connected to any network) when global dark theme is enabled</p>
+	<p>A screenshot of the main window of Polari (not connected to any network) when the global dark theme is enabled</p>
   </media>
 
 </page>

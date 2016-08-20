@@ -4,36 +4,33 @@
       id="network-connect-preconfigured">
 
   <info>
-    <link type="guide" xref="index#start" group="#first"/>
-    <revision pkgversion="3.20" date="2016-05-06" status="stub" />
-
-    <credit type="author copyright">
-      <name>Ankit R Gadiya</name>
-      <email its:translate="no">ankit4922@gmail.com</email>
-      <years>2016</years>
-    </credit>
-    
-    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
-
-    <desc>How to connect to a preconfigured network.</desc>
-	
+  	<link type="guide" xref="index#start" group="#first"/>
+  	<link type="seealso" xref="network-connect-preconfigured"/>
+  	<revision pkgversion="3.20" date="2016-08-06" status="stub" />
+	<credit type="author copyright">
+      		<name>Ankit R Gadiya</name>
+      		<email its:translate="no">ankit4922@gmail.com</email>
+      		<years>2016</years>
+    	</credit>
+    	<include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+	<desc>How to connect to a preconfigured network.</desc>
   </info>
-  <title>Connect to preconfigured network</title>
-  <p>Its really easy to connect to a network.</p>
+  
+  <title>Connect to a preconfigured network</title>
   <steps>
 	<item>
-		<p>Open Polari</p>
+		<p>Open <app>Polari</app></p>
 	</item>
 	<item>
-		<p>Click on the <key>+</key>on the top left corner.</p>
+		<p>Click on the <key>+</key> in the top left corner.</p>
 		<media type="image" mime="image/png" its:translate="no" src="images/main.png"/>
 	</item>
 	<item>
 		<p>In Add network window select the preconfigured network.</p>
-		<media type="image" mime="image/png" its:translate="no" src="images/add-network.png"/>
+		<media type="image" mime="image/png" its:translate="no" src="images/add-predefined-network.png"/>
 	</item>
 	<item>
-		<p>In Join room window, type the room name and password(password is optional)</p>
+		<p>In Join room window, type the <em>Room name</em> and <em>Password</em> (Optional)</p>
 		<media type="image" mime="image/png" its:translate="no" src="images/join-room.png"/>
 	</item>
 	<item>
@@ -41,7 +38,7 @@
 	</item>
 	<item>
 		<p>Done!</p>
-		<media type="image" mime="image/png" its:translate="no" src="images/in-network.png"/>
+		<media type="image" mime="image/png" its:translate="no" src="images/connected.png"/>
 	</item>
   </steps>
 </page>
