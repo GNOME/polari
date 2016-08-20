@@ -15,6 +15,7 @@ const PasteManager = imports.pasteManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 const UserTracker = imports.userTracker;
+const UserList = imports.userList;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -1255,7 +1256,8 @@ const ChatView = new Lang.Class({
                 let buffer = this._view.get_buffer();
 
                 if (!nickTag) {
-                    nickTag = new Gtk.TextTag({ name: nickTagName });
+                    nickTag = new ButtonTag({ name: nickTagName });
+                    nickTag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
 
                     let status = this._userTracker.getNickRoomStatus(message.nick, this._room);
                     this._updateNickTag(nickTag, status);
@@ -1263,6 +1265,13 @@ const ChatView = new Lang.Class({
                     buffer.get_tag_table().add(nickTag);
                 }
                 tags.push(nickTag);
+
+                let hoverTag = new HoverFilterTag({ filtered_tag: nickTag,
+                                                    hover_opacity: 0.8 });
+                buffer.get_tag_table().add(hoverTag);
+
+                tags.push(hoverTag);
+
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
                 this._insertWithTags(iter, message.nick, tags);
@@ -1317,6 +1326,43 @@ const ChatView = new Lang.Class({
             tag.foreground_rgba = this._activeNickColor;
         else
             tag.foreground_rgba = this._inactiveNickColor;
+    },
+
+    _onNickTagClicked: function(tag) {
+        let view = this._view;
+        let event = Gtk.get_current_event();
+        let [, eventX, eventY] = event.get_coords();
+        let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
+                                                          eventX, eventY);
+        let [inside, start] = view.get_iter_at_location(x, y);
+        let end = start.copy();
+
+        if (!start.starts_tag(tag))
+            start.backward_to_tag_toggle(tag);
+
+        if (!end.ends_tag(tag))
+            end.forward_to_tag_toggle(tag);
+
+        let rect1 = view.get_iter_location(start);
+        let rect2 = view.get_iter_location(end);
+
+        [rect1.y, rect1.height] = view.get_line_yrange(start);
+
+        [rect1.x, rect1.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect1.x, rect1.y);
+        [rect2.x, rect2.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect2.x, rect2.y);
+        rect1.width = rect2.x - rect1.x;
+
+        let actualNickName = view.get_buffer().get_slice(start, end, false);
+
+        if (!tag._popover)
+            tag._popover = new UserList.UserPopover({ relative_to: this._view,
+                                                      userTracker: this._userTracker,
+                                                      room: this._room });
+
+        tag._popover.nickname = actualNickName;
+
+        tag._popover.pointing_to = rect1;
+        tag._popover.show();
     },
 
     _createUrlTag: function(url) {
