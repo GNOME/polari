@@ -1171,7 +1171,8 @@ const ChatView = new Lang.Class({
                 tags.push(nickTag);
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
-                this._insertWithTags(iter, message.nick + '\t', tags);
+                this._insertWithTags(iter, message.nick, tags);
+                buffer.insert(iter, '\t', -1);
             }
             state.lastNick = message.nick;
             tags.push(this._lookupTag('message'));
