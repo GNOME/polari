@@ -102,10 +102,10 @@ const UserListPopover = new Lang.Class({
     }
 });
 
-const UserListDetails = new Lang.Class({
-    Name: 'UserListDetails',
+const UserDetails = new Lang.Class({
+    Name: 'UserDetails',
     Extends: Gtk.Frame,
-    Template: 'resource:///org/gnome/Polari/ui/user-list-details.ui',
+    Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
     InternalChildren: ['spinnerBox',
                        'spinner',
                        'detailsGrid',
@@ -309,7 +309,7 @@ const UserListRow = new Lang.Class({
         if (this._revealer.get_child())
             return;
 
-        let details = new UserListDetails({ user: this._user })
+        let details = new UserDetails({ user: this._user });
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
