@@ -227,6 +227,7 @@ const ResultView = new Lang.Class({
         } else if(found) {
             let lastMark = buffer.get_mark('view-end' + this._resultsAvailable[startIndex].rank);
             iter = buffer.get_iter_at_mark(lastMark);
+            buffer.delete_mark(lastMark);
         }
         // if(!exists)
 
@@ -246,11 +247,17 @@ const ResultView = new Lang.Class({
             let rankTag = new Gtk.TextTag({ name: 'result'+rank, invisible: true });
             this._view.get_buffer().get_tag_table().add(rankTag);
         }
+
+        if(found && !exists) {
+            iter.backward_line();
+            buffer.create_mark('view-end' + this._resultsAvailable[startIndex].rank, iter, false);
+        }
         // buffer.insert(iter, String(rank), -1);
         // buffer.insert(iter, '\n', -1);
-        if(exists)
-            buffer.move_mark_by_name('view-end'+rank, iter);
-        else
+        // if(exists)
+        //     buffer.move_mark_by_name('view-end'+rank, iter);
+        // else
+        if(!exists)
             buffer.create_mark('view-end' + rank, iter, false);
 
         let index;
@@ -345,7 +352,7 @@ const ResultView = new Lang.Class({
             }
         }
         this._resultsAvailable[index].top_query = this._startQuery;
-        this._resultsAvailable[index].top_query = this._endQuery;
+        this._resultsAvailable[index].bottom_query = this._endQuery;
         //print(this._endQuery.isClosed());
 
         // Mainloop.timeout_add(5000, Lang.bind(this,
