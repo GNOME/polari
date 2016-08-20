@@ -289,7 +289,6 @@ const UserListRow = new Lang.Class({
         let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
         this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
                                       no_show_all: true });
-        hbox.add(new Gtk.Image({ icon_name: 'avatar-default-symbolic' }));
         this._label = new Gtk.Label({ label: this._user.alias,
                                       halign: Gtk.Align.START,
                                       hexpand: true,
