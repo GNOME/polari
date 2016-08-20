@@ -13,5 +13,6 @@
     <file alias="ui/room-list-header.ui" preprocess="xml-stripblanks">resources/room-list-header.ui</file>
     <file alias="ui/room-list-row.ui" preprocess="xml-stripblanks">resources/room-list-row.ui</file>
     <file alias="ui/user-details.ui" preprocess="xml-stripblanks">resources/user-details.ui</file>
+    <file alias="ui/user-popover.ui" preprocess="xml-stripblanks">resources/user-popover.ui</file>
   </gresource>
 </gresources>
