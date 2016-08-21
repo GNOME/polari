@@ -131,6 +131,27 @@ const UserDetails = new Lang.Class({
         this._detailsGrid.hide();
     },
 
+    set user(user) {
+        if (this._user == user)
+            return;
+
+        if (this._user)
+            this._user.connection.disconnect(this._selfContactChangedId);
+        this._selfContactChangedId = 0;
+
+        this._user = user;
+
+        if (this._user)
+            this._selfContactChangedId = this._user.connection.connect('notify::self-contact',
+                                                    Lang.bind(this, this._updateButtonVisibility));
+
+        if (this.expanded)
+            this._expand();
+
+        this._updateButtonVisibility();
+        this._lastLabel.visible = this._user != null;
+    },
+
     set nickname(nickname) {
         this._nickname = nickname;
 
@@ -169,6 +190,9 @@ const UserDetails = new Lang.Class({
         if (this._user)
             this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
+        //TODO: else use this._nickname to query tracker
+        else
+            this._revealDetails();
     },
 
     _unexpand: function() {
@@ -233,6 +257,10 @@ const UserDetails = new Lang.Class({
             this._lastLabel.hide();
         }
 
+        this._revealDetails();
+    },
+
+    _revealDetails: function() {
         this._spinner.stop();
         this._spinnerBox.hide();
         this._detailsGrid.show();
@@ -252,7 +280,13 @@ const UserDetails = new Lang.Class({
     },
 
     _updateButtonVisibility: function() {
-        if (!this._user || this._user == this._user.connection.self_contact) {
+        if (!this._user) {
+            this._messageButton.sensitive = false;
+
+            return;
+        }
+
+        if (this._user == this._user.connection.self_contact) {
             this._messageButton.visible = false;
             this._messageButton.sensitive = true;
         } else {
@@ -325,7 +359,9 @@ const UserListRow = new Lang.Class({
         if (this._revealer.get_child())
             return;
 
-        let details = new UserListDetails({ user: this._user })
+        let details = new UserDetails();
+        details.user = this._user;
+
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
