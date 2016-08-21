@@ -20,5 +20,6 @@
     <file>telepathyClient.js</file>
     <file>userList.js</file>
     <file>utils.js</file>
+    <file>userTracker.js</file>
   </gresource>
 </gresources>
