@@ -107,7 +107,6 @@ const UserDetails = new Lang.Class({
                        'spinner',
                        'detailsGrid',
                        'fullnameLabel',
-                       'lastHeader',
                        'lastLabel',
                        'messageButton'],
     Properties: { 'expanded': GObject.ParamSpec.boolean('expanded',
@@ -121,15 +120,25 @@ const UserDetails = new Lang.Class({
         delete params.user;
 
         this._expanded = false;
+        this._initialDetailsLoaded = false;
 
         this.parent(params);
 
         this._messageButton.connect('clicked',
-                                    Lang.bind(this, this._onButtonClicked));
-        this._user.connection.connect('notify::self-contact',
-                                      Lang.bind(this, this._updateButtonVisibility));
+                                    Lang.bind(this, this._onMessageButtonClicked));
+
         this._updateButtonVisibility();
         this._detailsGrid.hide();
+    },
+
+    set nickname(nickname) {
+        this._nickname = nickname;
+
+        if (!this._fullnameLabel.label)
+            this._fullnameLabel.label = this._nickname || '';
+
+
+        this._updateButtonVisibility();
     },
 
     get expanded() {
@@ -151,13 +160,14 @@ const UserDetails = new Lang.Class({
     },
 
     _expand: function() {
-        let prevDetails = this._fullnameLabel.label != '';
-        this._detailsGrid.visible = prevDetails;
-        this._spinnerBox.visible = !prevDetails;
+        this._detailsGrid.visible = this._initialDetailsLoaded;
+        this._spinnerBox.visible = !this._initialDetailsLoaded;
         this._spinner.start();
 
         this._cancellable = new Gio.Cancellable();
-        this._user.request_contact_info_async(this._cancellable,
+
+        if (this._user)
+            this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
     },
 
@@ -200,6 +210,8 @@ const UserDetails = new Lang.Class({
     },
 
     _onContactInfoReady: function(c, res) {
+        this._initialDetailsLoaded = true;
+
         let fn, last;
         let info = this._user.get_contact_info();
         for (let i = 0; i < info.length; i++) {
@@ -215,13 +227,9 @@ const UserDetails = new Lang.Class({
         this._fullnameLabel.label = fn;
 
         if (last) {
-            this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
-            this._lastHeader.show();
-
-            this._lastLabel.label = '<small>' + this._formatLast(last) + '</small>';
+            this._lastLabel.label = this._formatLast(last);
             this._lastLabel.show();
         } else {
-            this._lastHeader.hide();
             this._lastLabel.hide();
         }
 
@@ -230,7 +238,7 @@ const UserDetails = new Lang.Class({
         this._detailsGrid.show();
     },
 
-    _onButtonClicked: function() {
+    _onMessageButtonClicked: function() {
         let account = this._user.connection.get_account();
 
         let app = Gio.Application.get_default();
@@ -244,8 +252,13 @@ const UserDetails = new Lang.Class({
     },
 
     _updateButtonVisibility: function() {
-        let visible = this._user != this._user.connection.self_contact;
-        this._messageButton.visible = visible;
+        if (!this._user || this._user == this._user.connection.self_contact) {
+            this._messageButton.visible = false;
+            this._messageButton.sensitive = true;
+        } else {
+            this._messageButton.visible = true;
+            this._messageButton.sensitive = true;
+        }
     }
 });
 
