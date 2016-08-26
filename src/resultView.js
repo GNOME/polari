@@ -171,6 +171,7 @@ const ResultView = new Lang.Class({
 
         this._channelName = channel;
         this._resultsAvailable = [];
+        this._seenMessages = {};
 
         this._createTags();
 
