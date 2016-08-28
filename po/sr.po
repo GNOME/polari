@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&"
-"keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-22 16:07+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-08-28 09:24+0000\n"
 "PO-Revision-Date: 2016-08-28 11:20+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -268,7 +268,6 @@ msgid "Quit"
 msgstr "Изађи"
 
 #: data/resources/room-list-header.ui:137
-#| msgid "Connected"
 msgid "Connect"
 msgstr "Повежи"
 
@@ -500,7 +499,7 @@ msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Да убацим %s линију текста у јавни сервис за убацивање?"
 msgstr[1] "Да убацим %s линије текста у јавни сервис за убацивање?"
 msgstr[2] "Да убацим %s линија текста у јавни сервис за убацивање?"
-msgstr[3] "Да убацим линију текста у јавни сервис за убацивање?"
+msgstr[3] "Да убацим %s линију текста у јавни сервис за убацивање?"
 
 #: src/entryArea.js:305
 #, javascript-format
@@ -522,14 +521,12 @@ msgstr "Отпремам слику на јавни сервис за убаци
 #. Translators: %s is a filename
 #: src/entryArea.js:334
 #, javascript-format
-#| msgid "Upload image to public paste service?"
 msgid "Upload “%s” to public paste service?"
 msgstr "Да отпремим „%s“ на јавни сервис за убацивање?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:336
 #, javascript-format
-#| msgid "Uploading image to public paste service…"
 msgid "Uploading “%s” to public paste service …"
 msgstr "Отпремам „%s“ на јавни сервис за убацивање…"
 
@@ -554,9 +551,6 @@ msgstr "Убаци са %s"
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
 #: src/ircParser.js:24
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
 msgstr "/CLOSE [<канал>] [<разлог>] — затвара <канал>, по основи се тренутни"
