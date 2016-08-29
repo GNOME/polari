@@ -1,3 +1,25 @@
+3.21.91 - "Women in Rubber Flirting"
+====================================
+* Add "Connect" item to room list header menu [Florian; #769192]
+* Fix connection issues with predefined networks [Florian; #766935]
+* Only switch channels immediately after a user action [Florian; #769584]
+* Fix launching through persistent notifications [Florian; #769592]
+* Support externally configured channels (aka autojoin) [Florian; #751575]
+* Support NickServ passwords [Florian; #709982]
+* Misc. bug fixes and cleanups [Florian; #769280, #769339, #769355, #769582,
+  #769583, #769655, #769656]
+
+Contributors:
+  Piotr Drąg, Florian Müllner, Daniel Mustieles, Balázs Úr
+
+Translations:
+  Aurimas Černius [lt], Flo H [de], Tiago Santos [pt], Daniel Mustieles [es],
+  Fabio Tomat [fur], Dušan Kazik [sk], Yosef Or Boczko [he], Jiri Grönroos [fi],
+  Marek Černocký [cs], David King [en_GB], Balázs Úr [hu],
+  Mario Blättermann [de], Alexandre Franke [fr], Andika Triwidada [id],
+  Piotr Drąg [pl], Enrico Nicoletto [pt_BR], Matej Urbančič [sl],
+  Мирослав Николић [sr, sr@latin], Peter Vágner [sk]
+
 3.21.4 - "With a Little Dignity"
 ================================
 * Improve text styling in chat log [Florian; #768381]
