@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-07-26 23:11+0000\n"
+"POT-Creation-Date: 2016-08-26 20:56+0000\n"
 "PO-Revision-Date: 2016-08-08 15:00+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:630
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:621
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient rozhovorov v službe IRC prostredia GNOME"
 
@@ -53,11 +53,13 @@ msgstr ""
 "dokonca môžete z lišty správ ihneď odpovedať na rozhovory bez toho, že by "
 "ste otvárali aplikačné okno."
 
-#: data/org.gnome.Polari.desktop.in:6
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
 msgid "org.gnome.Polari"
 msgstr "org.gnome.Polari"
 
-#: data/org.gnome.Polari.desktop.in:13
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;rozhovor;"
 
@@ -294,26 +296,26 @@ msgstr "Posledná aktivita:"
 msgid "Message"
 msgstr "Správa"
 
-#: src/application.js:228 src/utils.js:181
+#: src/application.js:224 src/utils.js:181
 msgid "Failed to open link"
 msgstr "Zlyhalo otvorenie odkazu"
 
-#: src/application.js:538
+#: src/application.js:529
 msgid "Good Bye"
 msgstr "Dovidenia"
 
-#: src/application.js:570
+#: src/application.js:561
 #, javascript-format
 msgid "%s removed."
 msgstr "Účet %s odstránený."
 
-#: src/application.js:629
+#: src/application.js:620
 msgid "translator-credits"
 msgstr ""
 "Peter Vágner <pvdeejay@gmail.com>\n"
 "Dušan Kazik <prescott66@gmail.com>"
 
-#: src/application.js:635
+#: src/application.js:626
 msgid "Learn more about Polari"
 msgstr "Zistite viac o aplikácii Polari"
 
@@ -325,55 +327,55 @@ msgstr "Vrátiť späť"
 msgid "New Messages"
 msgstr "Nové správy"
 
-#: src/chatView.js:726
+#: src/chatView.js:734
 msgid "Open Link"
 msgstr "Otvoriť odkaz"
 
-#: src/chatView.js:732
+#: src/chatView.js:740
 msgid "Copy Link Address"
 msgstr "Kopírovať adresu odkazu"
 
-#: src/chatView.js:943
+#: src/chatView.js:956
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Účastník %s teraz vystupuje ako %s"
 
-#: src/chatView.js:950
+#: src/chatView.js:963
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Účastník %s sa odpojil"
 
-#: src/chatView.js:959
+#: src/chatView.js:972
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Účastník %s bol vykopnutý účastníkom %s"
 
-#: src/chatView.js:961
+#: src/chatView.js:974
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Účastník %s bol vykopnutý"
 
-#: src/chatView.js:968
+#: src/chatView.js:981
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Účastníkovi %s bol zakázaný prístup od účastníka %s"
 
-#: src/chatView.js:970
+#: src/chatView.js:983
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Účastníkovi %s bol zakázaný prístup"
 
-#: src/chatView.js:976
+#: src/chatView.js:989
 #, javascript-format
 msgid "%s joined"
 msgstr "Účastník %s prišiel"
 
-#: src/chatView.js:982
+#: src/chatView.js:995
 #, javascript-format
 msgid "%s left"
 msgstr "Účastník %s odišiel"
 
-#: src/chatView.js:1078
+#: src/chatView.js:1091
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -382,7 +384,7 @@ msgstr[1] "%d účastník vstúpil do miestnosti"
 msgstr[2] "%d účastníci vstúpili do miestnosti"
 
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=745203
-#: src/chatView.js:1081
+#: src/chatView.js:1094
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -392,14 +394,14 @@ msgstr[2] "%d účastníci opustili miestnosť"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1148
+#: src/chatView.js:1161
 msgid "%H∶%M"
 msgstr "%H:%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1153
+#: src/chatView.js:1166
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včera, %H:%M"
@@ -407,7 +409,7 @@ msgstr "Včera, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1158
+#: src/chatView.js:1171
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
@@ -416,7 +418,7 @@ msgstr "%A, %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1164
+#: src/chatView.js:1177
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H:%M"
@@ -425,21 +427,21 @@ msgstr "%d. %B, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1170
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1175
+#: src/chatView.js:1188
 msgid "%l∶%M %p"
 msgstr "%l:%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1180
+#: src/chatView.js:1193
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včera, %l:%M %p"
@@ -447,7 +449,7 @@ msgstr "Včera, %l:%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1185
+#: src/chatView.js:1198
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l:%M %p"
@@ -456,7 +458,7 @@ msgstr "%A, %l:%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1191
+#: src/chatView.js:1204
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l:%M %p"
@@ -465,7 +467,7 @@ msgstr "%d. %B, %l:%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1197
+#: src/chatView.js:1210
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l:%M %p"
@@ -545,11 +547,10 @@ msgstr "Vložiť od %s"
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
 #: src/ircParser.js:24
-#, fuzzy
 msgid ""
 "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
 msgstr ""
-"/CLOSE [<kanál>] [<dôvod>] - zavrie kanál zadaný ako argument <kanál>, "
+"/CLOSE [<kanál>] [<dôvod>] - zavrie kanál zadaný ako argument <kanál>, predvolene súčasný"
 
 #: src/ircParser.js:25
 msgid ""
@@ -630,21 +631,21 @@ msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Neznámy príkaz - zoznam dostupných príkazov získate napísaním príkazu /HELP"
 
-#: src/ircParser.js:61
+#: src/ircParser.js:56
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Použitie: %s"
 
-#: src/ircParser.js:99
+#: src/ircParser.js:94
 msgid "Known commands:"
 msgstr "Známe príkazy:"
 
-#: src/ircParser.js:199
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Účastníci v miestnosti s názvom %s"
 
-#: src/ircParser.js:285
+#: src/ircParser.js:280
 msgid "No topic set"
 msgstr "Nie je nastavená téma"
 
@@ -653,7 +654,7 @@ msgid "Add Network"
 msgstr "Pridanie siete"
 
 # DK: https://bugzilla.gnome.org/show_bug.cgi?id=745203
-#: src/mainWindow.js:305
+#: src/mainWindow.js:300
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
