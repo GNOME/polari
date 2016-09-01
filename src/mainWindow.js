@@ -99,7 +99,8 @@ const MainWindow = new Lang.Class({
                        'userListPopover',
                        'roomListRevealer',
                        'overlay',
-                       'roomStack'],
+                       'roomStack',
+                       'closeConfirmationDialog'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -191,9 +192,19 @@ const MainWindow = new Lang.Class({
                                   Lang.bind(this, this._updateDecorations));
         this._updateDecorations();
 
+        this._closeConfirmationDialog.transient_for = this;
+        this._closeConfirmationDialog.connect('response', (w, r) => {
+            if (r == Gtk.ResponseType.DELETE_EVENT)
+                return;
+
+            this._settings.set_boolean('run-in-background', r == Gtk.ResponseType.ACCEPT);
+            this.destroy();
+        });
+
         this.connect('window-state-event', Lang.bind(this, this._onWindowStateEvent));
         this.connect('size-allocate', Lang.bind(this, this._onSizeAllocate));
         this.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.connect('delete-event', Lang.bind(this, this._onDeleteEvent));
         this.connect('notify::active-room', () => {
             this._updateUserListLabel();
         });
@@ -242,6 +253,32 @@ const MainWindow = new Lang.Class({
             this._settings.set_value('last-selected-channel', serializedChannel);
         else
             this._settings.reset('last-selected-channel');
+    },
+
+    _touchFile: function(file) {
+        try {
+            file.get_parent().make_directory_with_parents(null);
+        } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+            // not an error, carry on
+        }
+
+        let stream = file.create(0, null);
+        stream.close(null);
+    },
+
+    _onDeleteEvent: function() {
+        let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
+                                      '/polari/close-confirmation-shown');
+        try {
+            this._touchFile(f);
+        } catch(e) {
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                return Gdk.EVENT_PROPAGATE; // the dialog has been shown
+            log('Failed to mark confirmation dialog as shown: ' + e.message);
+        }
+
+        this._closeConfirmationDialog.show();
+        return Gdk.EVENT_STOP;
     },
 
     _onAccountsChanged: function(am) {

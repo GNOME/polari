@@ -9,6 +9,32 @@
       <class name="polari-user-list"/>
     </style>
   </object>
+  <object class="GtkMessageDialog" id="closeConfirmationDialog">
+    <property name="message-type">question</property>
+    <property name="text" translatable="yes">Run Polari in the Background?</property>
+    <property name="secondary-text" translatable="yes">Polari will continue to run when closed and will be automatically started on login.</property>
+    <property name="destroy-with-parent">true</property>
+    <property name="modal">true</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
+    <child type="action">
+      <object class="GtkButton" id="quitButton">
+        <property name="label" translatable="yes">_Quit</property>
+        <property name="visible">true</property>
+        <property name="use-underline">true</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="backgroundButton">
+        <property name="label" translatable="yes">_Run in background</property>
+        <property name="visible">true</property>
+        <property name="use-underline">true</property>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="close">quitButton</action-widget>
+      <action-widget response="accept">backgroundButton</action-widget>
+    </action-widgets>
+  </object>
   <template class="Gjs_MainWindow">
     <property name="title" translatable="yes">Polari</property>
     <property name="icon-name">org.gnome.Polari</property>
