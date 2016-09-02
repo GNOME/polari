@@ -365,6 +365,10 @@ const TelepathyClient = new Lang.Class({
         if (!room.channel)
             return;
 
+        // This is a user action, so acknowledge messages to prevent
+        // mission-control from popping up the channel again
+        room.channel.ack_all_pending_messages(null);
+
         let reason = Tp.ChannelGroupChangeReason.NONE;
         message = message || _("Good Bye");
         room.channel.leave_async(reason, message, (c, res) => {
