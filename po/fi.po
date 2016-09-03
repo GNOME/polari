@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-07-26 23:11+0000\n"
-"PO-Revision-Date: 2016-08-12 15:15+0300\n"
+"POT-Creation-Date: 2016-08-29 23:26+0000\n"
+"PO-Revision-Date: 2016-09-03 11:40+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -22,12 +22,12 @@ msgstr ""
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:13
-#: src/roomStack.js:94
+#: src/roomStack.js:170
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:630
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:502
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -53,11 +53,13 @@ msgstr ""
 "keskusteluihin suoraan ilmoituksen kautta vaihtamatta itse sovelluksen "
 "ikkunaan!"
 
-#: data/org.gnome.Polari.desktop.in:6
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
 msgid "org.gnome.Polari"
 msgstr "org.gnome.Polari"
 
-#: data/org.gnome.Polari.desktop.in:13
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;irkki;"
 
@@ -92,6 +94,22 @@ msgstr "Viimeinen aktiivinen kanava"
 #: data/org.gnome.Polari.gschema.xml:22
 msgid "Last active (selected) channel"
 msgstr "Viimeinen aktiivinen (valittu) kanava"
+
+#: data/org.gnome.Polari.gschema.xml:29
+msgid "Identify botname"
+msgstr "Tunnistaudu bottinimelle"
+
+#: data/org.gnome.Polari.gschema.xml:30
+msgid "Nickname of the bot to identify with"
+msgstr "Botin nimimerkki, jolle tunnistaudutaan"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify username"
+msgstr "Tunnistautumisen käyttäjänimi"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Username to use in identify command"
+msgstr "Käyttäjänimi, jota käytetään tunnistautumiskomennossa"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -214,7 +232,7 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Ensimmäinen - yhdeksäs kanava"
 
-#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:272
+#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:268
 msgid "Join Chat Room"
 msgstr "Liity kanavalle"
 
@@ -267,7 +285,6 @@ msgid "Quit"
 msgstr "Lopeta"
 
 #: data/resources/room-list-header.ui:137
-#| msgid "Connected"
 msgid "Connect"
 msgstr "Yhdistä"
 
@@ -287,7 +304,7 @@ msgstr "Ominaisuudet"
 msgid "Loading details"
 msgstr "Ladataan tietoja"
 
-#: data/resources/user-list-details.ui:52 src/userList.js:218
+#: data/resources/user-list-details.ui:52 src/userList.js:221
 msgid "Last Activity:"
 msgstr "Viimeisin toiminta:"
 
@@ -295,24 +312,20 @@ msgstr "Viimeisin toiminta:"
 msgid "Message"
 msgstr "Viesti"
 
-#: src/application.js:228 src/utils.js:181
+#: src/application.js:238 src/utils.js:202
 msgid "Failed to open link"
 msgstr "Linkin avaaminen epäonnistui"
 
-#: src/application.js:538
-msgid "Good Bye"
-msgstr "Näkemiin"
-
-#: src/application.js:570
+#: src/application.js:443
 #, javascript-format
 msgid "%s removed."
 msgstr "%s poistettiin."
 
-#: src/application.js:629
+#: src/application.js:501
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: src/application.js:635
+#: src/application.js:507
 msgid "Learn more about Polari"
 msgstr "Tietoja - Polari"
 
@@ -324,62 +337,62 @@ msgstr "Kumoa"
 msgid "New Messages"
 msgstr "Uudet viestit"
 
-#: src/chatView.js:726
+#: src/chatView.js:707
 msgid "Open Link"
 msgstr "Avaa linkki"
 
-#: src/chatView.js:732
+#: src/chatView.js:713
 msgid "Copy Link Address"
 msgstr "Kopioi linkin osoite"
 
-#: src/chatView.js:943
+#: src/chatView.js:929
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s vaihtoi nimekseen %s"
 
-#: src/chatView.js:950
+#: src/chatView.js:936
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s katkaisi yhteyden"
 
-#: src/chatView.js:959
+#: src/chatView.js:945
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s potkaistiin käyttäjän %s toimesta"
 
-#: src/chatView.js:961
+#: src/chatView.js:947
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s potkaistiin"
 
-#: src/chatView.js:968
+#: src/chatView.js:954
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s sai bannit käyttäjän %s toimesta"
 
-#: src/chatView.js:970
+#: src/chatView.js:956
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s bannattiin"
 
-#: src/chatView.js:976
+#: src/chatView.js:962
 #, javascript-format
 msgid "%s joined"
 msgstr "%s liittyi"
 
-#: src/chatView.js:982
+#: src/chatView.js:968
 #, javascript-format
 msgid "%s left"
 msgstr "%s poistui"
 
-#: src/chatView.js:1078
+#: src/chatView.js:1064
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d käyttäjä liittyi"
 msgstr[1] "%d käyttäjää liittyi"
 
-#: src/chatView.js:1081
+#: src/chatView.js:1067
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -388,14 +401,14 @@ msgstr[1] "%d käyttäjää lähti"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1148
+#: src/chatView.js:1134
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1153
+#: src/chatView.js:1139
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Eilen, %H:%M"
@@ -403,7 +416,7 @@ msgstr "Eilen, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1158
+#: src/chatView.js:1144
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
@@ -412,7 +425,7 @@ msgstr "%A, %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1164
+#: src/chatView.js:1150
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%e. %Bta, %H:%M"
@@ -421,21 +434,21 @@ msgstr "%e. %Bta, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1170
+#: src/chatView.js:1156
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%e. %Bta %Y, %H:%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1175
+#: src/chatView.js:1161
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1180
+#: src/chatView.js:1166
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Eilen, %l∶%M %p"
@@ -443,7 +456,7 @@ msgstr "Eilen, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1185
+#: src/chatView.js:1171
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -452,7 +465,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1191
+#: src/chatView.js:1177
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%e. %Bta, %H:%M"
@@ -461,7 +474,7 @@ msgstr "%e. %Bta, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1197
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
@@ -509,14 +522,12 @@ msgstr "Lähetetään kuvaa julkiseen liittämispalveluun…"
 #. Translators: %s is a filename
 #: src/entryArea.js:334
 #, javascript-format
-#| msgid "Upload image to public paste service?"
 msgid "Upload “%s” to public paste service?"
 msgstr "Lähetetäänkö “%s” julkiseen liittämispalveluun?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:336
 #, javascript-format
-#| msgid "Uploading image to public paste service…"
 msgid "Uploading “%s” to public paste service …"
 msgstr "Lähetetään “%s” julkiseen liittämispalveluun…"
 
@@ -541,9 +552,6 @@ msgstr ""
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
 #: src/ircParser.js:24
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
 msgstr ""
@@ -626,29 +634,29 @@ msgstr ""
 "Tuntematon komento - anna komento /HELP listataksesi kaikki käytettävissä "
 "olevat komennot"
 
-#: src/ircParser.js:61
+#: src/ircParser.js:56
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Käyttö: %s"
 
-#: src/ircParser.js:99
+#: src/ircParser.js:94
 msgid "Known commands:"
 msgstr "Tunnetut komennot:"
 
-#: src/ircParser.js:199
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Käyttäjät kanavalla %s:"
 
-#: src/ircParser.js:285
+#: src/ircParser.js:280
 msgid "No topic set"
 msgstr "Kanavan otsikkoa ei ole asetettu"
 
-#: src/joinDialog.js:273
+#: src/joinDialog.js:269
 msgid "Add Network"
 msgstr "Lisää verkko"
 
-#: src/mainWindow.js:305
+#: src/mainWindow.js:369
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -715,64 +723,104 @@ msgstr "Yhteys kohteeseen %s epäonnistui. Palvelin on varattu."
 msgid "Could not connect to %s."
 msgstr "Yhteys kohteeseen %s epäonnistui."
 
-#: src/roomStack.js:97
+#: src/roomStack.js:123
+#| msgid "_Password"
+msgid "_Save Password"
+msgstr "_Tallenna salasana"
+
+#: src/roomStack.js:132
+msgid "Should the password be saved?"
+msgstr "Tallennetaanko salasana?"
+
+#: src/roomStack.js:140 src/telepathyClient.js:542
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr ""
+"Tunnistautuminen tapahtuu automaattisesti seuraavalla kerralla, kun "
+"muodostat yhteyden verkkoon %s"
+
+#: src/roomStack.js:173
 msgid "Join a room using the + button."
 msgstr "Liity kanavalle painamalla +."
 
-#: src/userList.js:174
+#: src/telepathyClient.js:369
+msgid "Good Bye"
+msgstr "Näkemiin"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:541
+#, javascript-format
+#| msgid "Polari server password for %s"
+msgid "Save %s password for %s?"
+msgstr "Tallennetaanko \"%s\"-salasana tilille %s?"
+
+#: src/telepathyClient.js:545
+#| msgid "_Save"
+msgid "Save"
+msgstr "Tallenna"
+
+#: src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekunti sitten"
 msgstr[1] "%d sekuntia sitten"
 
-#: src/userList.js:179
+#: src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minuutti sitten"
 msgstr[1] "%d minuuttia sitten"
 
-#: src/userList.js:184
+#: src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d tunti sitten"
 msgstr[1] "%d tuntia sitten"
 
-#: src/userList.js:189
+#: src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d päivä sitten"
 msgstr[1] "%d päivää sitten"
 
-#: src/userList.js:194
+#: src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d viikko sitten"
 msgstr[1] "%d viikkoa sitten"
 
-#: src/userList.js:198
+#: src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d kuukausi sitten"
 msgstr[1] "%d kuukautta sitten"
 
-#: src/userList.js:383
+#: src/userList.js:386
 msgid "No results"
 msgstr "Ei tuloksia"
 
-#: src/userList.js:556
+#: src/userList.js:559
 msgid "All"
 msgstr "Kaikki"
 
-#: src/utils.js:121
+#: src/utils.js:124
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari-palvelimen salasana kohteelle %s"
+
+#: src/utils.js:129
+#, javascript-format
+#| msgid "Polari server password for %s"
+msgid "Polari NickServ password for %s"
+msgstr "Polarin NickServ-salasana kohteelle %s"
 
 #~ msgid "_Description"
 #~ msgstr "_Kuvaus"
@@ -809,9 +857,6 @@ msgstr "Polari-palvelimen salasana kohteelle %s"
 
 #~ msgid "Add Connection"
 #~ msgstr "Lisää yhteys"
-
-#~ msgid "_Save"
-#~ msgstr "_Tallenna"
 
 #~ msgid "No recent users"
 #~ msgstr "Ei viimeisimpiä käyttäjiä"
