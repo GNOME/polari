@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2016-08-29 23:26+0000\n"
-"PO-Revision-Date: 2016-09-03 22:51+0900\n"
+"PO-Revision-Date: 2016-09-03 23:42+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -526,13 +526,13 @@ msgstr "이미지를 공개 페이스트 서비스에 업로드하는 중…"
 #: src/entryArea.js:334
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
-msgstr "\"%s\" 파일을 공개 페이스트 서비스에 업로드하시겠습니까?"
+msgstr "“%s” 파일을 공개 페이스트 서비스에 업로드하시겠습니까?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:336
 #, javascript-format
 msgid "Uploading “%s” to public paste service …"
-msgstr "\"%s\" 파일을 공개 페이스트 서비스에 업로드하는 중…"
+msgstr "“%s” 파일을 공개 페이스트 서비스에 업로드하는 중…"
 
 #. translators: %s is a nick, #%s a channel
 #: src/entryArea.js:345
@@ -743,7 +743,7 @@ msgstr "안녕히 가세요"
 #: src/telepathyClient.js:541
 #, javascript-format
 msgid "Save %s password for %s?"
-msgstr "%2$s에 대한 %1$s 암호를 저장합니까?"
+msgstr "%s 암호를 (%s에 대해) 저장합니까?"
 
 #: src/telepathyClient.js:545
 msgid "Save"
