@@ -6,4 +6,4 @@ HELP_FILES = \
 	index.page \
 	legal.xml
 
-HELP_LINGUAS = de es hu sv
+HELP_LINGUAS = cs de es hu sv

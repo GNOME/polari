@@ -1,0 +1,50 @@
+# Czech translation for polari.
+# Copyright (C) 2016 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Marek Černocký <marek@manet.cz>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"POT-Creation-Date: 2016-09-04 12:01+0000\n"
+"PO-Revision-Date: 2016-09-04 22:59+0200\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
+"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Marek Černocký <marek@manet.cz>"
+
+#. (itstool) path: page/title
+#: C/index.page:12
+msgid "Polari"
+msgstr "Polari"
+
+#. (itstool) path: p/link
+#: C/legal.xml:5
+msgid "Creative Commons Attribution-ShareAlike 4.0 International"
+msgstr "Creative Commons Attribution-ShareAlike 4.0 International"
+
+#. (itstool) path: license/p
+#: C/legal.xml:4
+msgid "This work is licensed under a <_:link-1/> license."
+msgstr "Toto dílo je licencováno pod <_:link-1/>."
+
+#. (itstool) path: license/p
+#: C/legal.xml:8
+msgid ""
+"As a special exception, the copyright holders give you permission to copy, "
+"modify, and distribute the example code contained in this documentation "
+"under the terms of your choosing, without restriction."
+msgstr ""
+"Jako zvláštní výjimka se vám držitelem autorských práv uděluje svolení "
+"kopírovat, upravovat a šířit ukázkový kód obsažený v tomto dokumentu za "
+"podmínek, které si zvolíte, bez dalších omezení."
