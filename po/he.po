@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-09-06 14:40+0300\n"
-"PO-Revision-Date: 2016-09-06 12:16+0300\n"
+"POT-Creation-Date: 2016-09-06 14:44+0300\n"
+"PO-Revision-Date: 2016-09-06 16:13+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -251,9 +251,8 @@ msgid "Room _Name"
 msgstr "_שם אמתי"
 
 #: data/resources/join-room-dialog.ui:138
-#, fuzzy
 msgid "_Password"
-msgstr "_שמירת ססמה"
+msgstr "_ססמה"
 
 #: data/resources/join-room-dialog.ui:227
 msgid "_Add"
@@ -398,9 +397,9 @@ msgstr[2] "שני משתמשים הצטרפו"
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
-msgstr[0] "נותר משתמש אחד"
-msgstr[1] "%d משתמשים נותרו"
-msgstr[2] "נותרו שני משתמשים"
+msgstr[0] "משתמש אחד עזב"
+msgstr[1] "%d משתמשים עזבו"
+msgstr[2] "שני משתמשים עזבו"
 
 #. today
 #. Translators: Time in 24h format
@@ -734,7 +733,7 @@ msgstr "להתראות"
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
 #: src/telepathyClient.js:541
-#, fuzzy, javascript-format
+#, c-format
 msgid "Save %s password for %s?"
 msgstr "שמירת ססמת %s עבור %s?"
 
