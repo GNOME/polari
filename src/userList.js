@@ -110,7 +110,6 @@ const UserListDetails = new Lang.Class({
                        'spinner',
                        'detailsGrid',
                        'fullnameLabel',
-                       'lastHeader',
                        'lastLabel',
                        'messageButton'],
     Properties: { 'expanded': GObject.ParamSpec.boolean('expanded',
@@ -218,13 +217,9 @@ const UserListDetails = new Lang.Class({
         this._fullnameLabel.label = fn;
 
         if (last) {
-            this._lastHeader.label = '<small>' + _("Last Activity:") + '</small>';
-            this._lastHeader.show();
-
-            this._lastLabel.label = '<small>' + this._formatLast(last) + '</small>';
+            this._lastLabel.label = this._formatLast(last);
             this._lastLabel.show();
         } else {
-            this._lastHeader.hide();
             this._lastLabel.hide();
         }
 
