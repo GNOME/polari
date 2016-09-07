@@ -118,20 +118,53 @@ const UserDetails = new Lang.Class({
                                                         READWRITE,
                                                         false)},
 
-    _init: function(params) {
-        this._user = params.user;
+    _init: function(params = {}) {
+        let user = params.user;
         delete params.user;
 
         this._expanded = false;
+        this._initialDetailsLoaded = false;
 
         this.parent(params);
 
+        this.user = user;
+
         this._messageButton.connect('clicked',
-                                    Lang.bind(this, this._onButtonClicked));
-        this._user.connection.connect('notify::self-contact',
-                                      Lang.bind(this, this._updateButtonVisibility));
+                                    Lang.bind(this, this._onMessageButtonClicked));
+
         this._updateButtonVisibility();
         this._detailsGrid.hide();
+    },
+
+    set user(user) {
+        if (this._user == user)
+            return;
+
+        if (this._user)
+            this._user.connection.disconnect(this._selfContactChangedId);
+        this._selfContactChangedId = 0;
+
+        this._user = user;
+
+        if (this._user)
+            this._selfContactChangedId = this._user.connection.connect('notify::self-contact',
+                                                    Lang.bind(this, this._updateButtonVisibility));
+
+        if (this.expanded)
+            this._expand();
+
+        this._updateButtonVisibility();
+        this._lastLabel.visible = this._user != null;
+    },
+
+    set nickname(nickname) {
+        this._nickname = nickname;
+
+        if (!this._fullnameLabel.label)
+            this._fullnameLabel.label = this._nickname || '';
+
+
+        this._updateButtonVisibility();
     },
 
     get expanded() {
@@ -153,14 +186,18 @@ const UserDetails = new Lang.Class({
     },
 
     _expand: function() {
-        let prevDetails = this._fullnameLabel.label != '';
-        this._detailsGrid.visible = prevDetails;
-        this._spinnerBox.visible = !prevDetails;
+        this._detailsGrid.visible = this._initialDetailsLoaded;
+        this._spinnerBox.visible = !this._initialDetailsLoaded;
         this._spinner.start();
 
         this._cancellable = new Gio.Cancellable();
-        this._user.request_contact_info_async(this._cancellable,
+
+        if (this._user)
+            this._user.request_contact_info_async(this._cancellable,
                                               Lang.bind(this, this._onContactInfoReady));
+        //TODO: else use this._nickname to query tracker
+        else
+            this._revealDetails();
     },
 
     _unexpand: function() {
@@ -202,6 +239,8 @@ const UserDetails = new Lang.Class({
     },
 
     _onContactInfoReady: function(c, res) {
+        this._initialDetailsLoaded = true;
+
         let fn, last;
         let info = this._user.get_contact_info();
         for (let i = 0; i < info.length; i++) {
@@ -223,12 +262,16 @@ const UserDetails = new Lang.Class({
             this._lastLabel.hide();
         }
 
+        this._revealDetails();
+    },
+
+    _revealDetails: function() {
         this._spinner.stop();
         this._spinnerBox.hide();
         this._detailsGrid.show();
     },
 
-    _onButtonClicked: function() {
+    _onMessageButtonClicked: function() {
         let account = this._user.connection.get_account();
 
         let app = Gio.Application.get_default();
@@ -242,8 +285,19 @@ const UserDetails = new Lang.Class({
     },
 
     _updateButtonVisibility: function() {
-        let visible = this._user != this._user.connection.self_contact;
-        this._messageButton.visible = visible;
+        if (!this._user) {
+            this._messageButton.sensitive = false;
+
+            return;
+        }
+
+        if (this._user == this._user.connection.self_contact) {
+            this._messageButton.visible = false;
+            this._messageButton.sensitive = true;
+        } else {
+            this._messageButton.visible = true;
+            this._messageButton.sensitive = true;
+        }
     }
 });
 
@@ -310,6 +364,7 @@ const UserListRow = new Lang.Class({
             return;
 
         let details = new UserDetails({ user: this._user });
+
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
