@@ -3,11 +3,12 @@
   <template class="Gjs_UserListDetails" parent="GtkFrame">
     <property name="visible">True</property>
     <property name="hexpand">True</property>
+    <property name="shadow-type">none</property>
     <child>
       <object class="GtkBox" id="box">
         <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
-        <property name="margin">6</property>
+        <property name="spacing">2</property>
+        <property name="margin">9</property>
         <property name="visible">True</property>
         <child>
           <object class="GtkBox" id="spinnerBox">
@@ -33,30 +34,42 @@
           <object class="GtkGrid" id="detailsGrid">
             <property name="row-spacing">6</property>
             <property name="column-spacing">6</property>
+            <property name="margin-end">18</property>
             <property name="hexpand">True</property>
             <property name="visible">True</property>
             <child>
-              <object class="GtkLabel" id="fullnameLabel">
-                <property name="ellipsize">end</property>
+              <object class="GtkImage">
+                <property name="icon-name">document-open-recent-symbolic</property>
+                <property name="visible" bind-source="lastLabel"
+                          bind-property="visible" bind-flags="sync-create"/>
+                <property name="no-show-all">True</property>
                 <property name="halign">start</property>
-                <property name="visible">True</property>
-                <property name="max-width-chars">25</property>
+                <property name="margin-left">0</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
               </object>
               <packing>
-                <property name="width">2</property>
+                <property name="width">1</property>
                 <property name="top-attach">0</property>
                 <property name="left-attach">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="lastHeader">
+              <object class="GtkLabel">
                 <property name="label" translatable="yes">Last Activity:</property>
                 <property name="valign">start</property>
-                <property name="use-markup">True</property>
-                <property name="visible">True</property>
+                <property name="halign">start</property>
+                <property name="no-show-all">True</property>
+                <property name="visible" bind-source="lastLabel"
+                          bind-property="visible" bind-flags="sync-create"/>
+                <property name="margin-start">20</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
               </object>
               <packing>
-                <property name="top-attach">1</property>
+                <property name="top-attach">0</property>
                 <property name="left-attach">0</property>
               </packing>
             </child>
@@ -66,24 +79,81 @@
                 <property name="use-markup">True</property>
                 <property name="wrap">True</property>
                 <property name="hexpand">True</property>
-                <property name="visible">True</property>
+                <property name="visible">False</property>
+                <property name="no-show-all">True</property>
+                <property name="hexpand">True</property>
+                <property name="halign">start</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
               </object>
               <packing>
-                <property name="top-attach">1</property>
+                <property name="top-attach">0</property>
                 <property name="left-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">avatar-default-symbolic</property>
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+                <property name="margin-left">0</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+              <packing>
+                <property name="width">1</property>
+                <property name="top-attach">1</property>
+                <property name="left-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="fullnameLabel">
+                <property name="ellipsize">end</property>
+                <property name="halign">start</property>
+                <property name="visible">True</property>
+                <property name="margin-start">20</property>
+                <property name="hexpand">True</property>
+                <property name="use-markup">True</property>
+                <property name="max-width-chars">25</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+              <packing>
+                <property name="width">2</property>
+                <property name="top-attach">1</property>
+                <property name="left-attach">0</property>
               </packing>
             </child>
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="messageButton">
-            <property name="label" translatable="yes">Message</property>
-            <property name="margin-top">12</property>
-            <property name="halign">end</property>
-            <property name="hexpand">True</property>
-            <property name="visible">True</property>
+          <object class="GtkSeparator">
+            <property name="visible" bind-source="messageButton"
+                      bind-property="visible" bind-flags="sync-create"/>
+            <property name="margin-top">7</property>
           </object>
         </child>
+        <child>
+          <object class="GtkModelButton" id="messageButton">
+            <property name="text" translatable="yes">Message</property>
+            <property name="halign">fill</property>
+            <property name="hexpand">True</property>
+            <property name="visible">True</property>
+            <property name="no-show-all">True</property>
+          </object>
+        </child>
+        <!-- <child>
+          <object class="GtkModelButton" id="pastActivityButton">
+            <property name="text" translatable="yes">View Past Activity</property>
+            <property name="halign">fill</property>
+            <property name="hexpand">True</property>
+            <property name="visible">True</property>
+            <property name="no-show-all">True</property>
+          </object>
+        </child> -->
       </object>
     </child>
   </template>
