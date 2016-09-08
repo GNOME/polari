@@ -206,7 +206,8 @@ const TelepathyClient = new Lang.Class({
                                                              : 'unavailable'));
 
         this._accountsMonitor.enabledAccounts.forEach(a => {
-            if (a.connection)
+            if (a.presence_type == Tp.ConnectionPresenceType.AVAILABLE &&
+                a.connection_status == Tp.ConnectionStatus.CONNECTED)
                 this._onAccountStatusChanged(this._accountsMonitor, a);
             else
                 this._setAccountPresence(a, presence);
