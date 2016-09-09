@@ -375,8 +375,10 @@ const Application = new Lang.Class({
 
         let roomId = Polari.create_room_id(account,  targetId, targetType);
 
-        let params = account.dup_parameters_vardict().deep_unpack();
-        let server = params['server'].deep_unpack();
+        let params = Connections.getAccountParams(account);
+        let server = params['server'];
+        let port = params['port'];
+
         let accountServers = [];
 
         // If predefined network, get alternate servers list
@@ -393,7 +395,8 @@ const Application = new Lang.Class({
           retry: 0,
           originalNick: account.nickname,
           callback: callback,
-          alternateServers: accountServers.filter(s => s.address != server)
+          alternateServers: accountServers.filter(s => s.address != server ||
+                                                       s.port != port)
         };
 
         this._pendingRequests[roomId] = requestData;
