@@ -367,7 +367,13 @@ const TelepathyClient = new Lang.Class({
 
         // This is a user action, so acknowledge messages to prevent
         // mission-control from popping up the channel again
-        room.channel.ack_all_pending_messages(null);
+        room.channel.dup_pending_messages().forEach(m => {
+            // The room is about to be removed and will gone when the
+            // ::pending-message-removed signal is emitted, so just
+            // withdraw pending notifications now
+            this._onPendingMessageRemoved(room.channel, m);
+            room.channel.ack_message_async(m, null);
+        });
 
         let reason = Tp.ChannelGroupChangeReason.NONE;
         message = message || _("Good Bye");
@@ -578,6 +584,9 @@ const TelepathyClient = new Lang.Class({
             return;
 
         let room = this._roomManager.lookupRoomByChannel(channel);
+        if (!room)
+            return;
+
         this._app.withdraw_notification(this._getPendingNotificationID(room, id));
     }
 });
