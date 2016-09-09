@@ -17,6 +17,17 @@ const ErrorHint = {
     NICK: 2
 };
 
+function getAccountParams(account) {
+    let params = account.dup_parameters_vardict().deep_unpack();
+    for (let p in params)
+        params[p] = params[p].deep_unpack();
+
+    params['use-ssl'] = !!params['use-ssl'];
+    params['port'] = params['port'] || params['use-ssl'] ? DEFAULT_SSL_PORT
+                                                         : DEFAULT_PORT;
+    return params;
+};
+
 const ConnectionRow = new Lang.Class({
     Name: 'ConnectionRow',
     Extends: Gtk.ListBoxRow,
@@ -299,14 +310,12 @@ const ConnectionDetails = new Lang.Class({
     },
 
     _populateFromAccount: function(account) {
-        let params = account.dup_parameters_vardict().deep_unpack();
-        for (let p in params)
-            params[p] = params[p].deep_unpack();
+        let params = getAccountParams(account);
 
-        this._savedSSL = params['use-ssl'] || false;
+        this._savedSSL = params['use-ssl'];
         let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
         this._savedServer = params.server || '';
-        let port = params.port || defaultPort;
+        let port = params.port;
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
 
