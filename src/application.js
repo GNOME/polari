@@ -319,9 +319,10 @@ const Application = new Lang.Class({
         if (data)
             return data;
 
-        let params = account.dup_parameters_vardict().deep_unpack();
-        let server = params['server'].deep_unpack();
-        let accountName = params['account'].deep_unpack();
+        let params = Connections.getAccountParams(account);
+        let server = params['server'];
+        let accountName = params['account'];
+        let port = params['port'];
         Utils.debug('Failed to connect to %s with username %s'.format(server, accountName));
 
         let accountServers = [];
@@ -331,7 +332,8 @@ const Application = new Lang.Class({
         data = {
             retry: 0,
             originalAccountName: accountName,
-            alternateServers: accountServers.filter(s => s.address != server)
+            alternateServers: accountServers.filter(s => s.address != server ||
+                                                         s.port != port)
         };
         this._retryData.set(account.object_path, data);
         return data;
