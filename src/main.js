@@ -36,6 +36,10 @@ window.critical = _makeLogFunction(GLib.LogLevelFlags.LEVEL_CRITICAL);
 window.error    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_ERROR);
 
 function main(args) {
+    // Log all messages when connected to the journal
+    if (GLib.log_writer_is_journald(2))
+        GLib.setenv('G_MESSAGES_DEBUG', LOG_DOMAIN, false);
+
     let application = new Application.Application();
     if (GLib.getenv('POLARI_PERSIST'))
         application.hold();
