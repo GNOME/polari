@@ -263,12 +263,14 @@ const ConnectionDetails = new Lang.Class({
             account: this._nickEntry.text.trim()
         };
 
-        if (port)
-            params.port = port;
         if (this._realnameEntry.text)
             params.fullname = this._realnameEntry.text.trim();
         if (this._sslCheckbox.active)
             params.use_ssl = true;
+        if (port)
+            params.port = port;
+        else if (params.use_ssl)
+            params.port = DEFAULT_SSL_PORT;
 
         return params;
     },
