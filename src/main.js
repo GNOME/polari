@@ -10,7 +10,30 @@ pkg.require({ 'Gio': '2.0',
 const Application = imports.application;
 const GLib = imports.gi.GLib;
 
-window.debug = imports.utils.debug;
+const LOG_DOMAIN = 'Polari';
+
+function _makeLogFunction(level) {
+    return message => {
+        let stack = (new Error()).stack;
+        let caller = stack.split('\n')[1];
+
+        let [, func, file, line] = new RegExp('(.+)?@(.+):(\\d+)').exec(caller);
+        GLib.log_variant(LOG_DOMAIN, level, new GLib.Variant('a{sv}', {
+            'MESSAGE': new GLib.Variant('s', message),
+            'SYSLOG_IDENTIFIER': new GLib.Variant('s', 'org.gnome.Polari'),
+            'CODE_FILE': new GLib.Variant('s', file),
+            'CODE_FUNC': new GLib.Variant('s', func),
+            'CODE_LINE': new GLib.Variant('s', line)
+        }));
+    };
+}
+
+window.log      = _makeLogFunction(GLib.LogLevelFlags.LEVEL_MESSAGE);
+window.debug    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_DEBUG);
+window.info     = _makeLogFunction(GLib.LogLevelFlags.LEVEL_INFO);
+window.warning  = _makeLogFunction(GLib.LogLevelFlags.LEVEL_WARNING);
+window.critical = _makeLogFunction(GLib.LogLevelFlags.LEVEL_CRITICAL);
+window.error    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_ERROR);
 
 function main(args) {
     let application = new Application.Application();

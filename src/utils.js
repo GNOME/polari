@@ -79,22 +79,6 @@ const _urlRegexp = new RegExp(
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)','g');
 
-let debugInit = false;
-let debugEnabled = false;
-
-function debug(str) {
-    if (!debugInit) {
-        let env = GLib.getenv('POLARI_DEBUG');
-        if (env)
-            debugEnabled = true;
-
-        debugInit = true;
-    }
-
-    if (debugEnabled)
-        log('DEBUG: ' + str);
-}
-
 function getURISchemes() {
     let apps = Gio.AppInfo.get_all();
     let prefix = 'x-scheme-handler/';
