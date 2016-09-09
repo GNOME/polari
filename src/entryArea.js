@@ -12,7 +12,6 @@ const Mainloop = imports.mainloop;
 const TabCompletion = imports.tabCompletion;
 const Tp = imports.gi.TelepathyGLib;
 const PasteManager = imports.pasteManager;
-const Utils = imports.utils;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -357,8 +356,8 @@ const EntryArea = new Lang.Class({
                 }));
         } catch(e) {
             let type = typeof this._pasteContent;
-            Utils.debug('Failed to paste content of type ' +
-                        (type == 'object' ? this._pasteContent.toString() : type));
+            debug('Failed to paste content of type ' +
+                  (type == 'object' ? this._pasteContent.toString() : type));
         }
         this._confirmLabel.hide();
     },

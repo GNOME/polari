@@ -10,6 +10,8 @@ pkg.require({ 'Gio': '2.0',
 const Application = imports.application;
 const GLib = imports.gi.GLib;
 
+window.debug = imports.utils.debug;
+
 function main(args) {
     let application = new Application.Application();
     if (GLib.getenv('POLARI_PERSIST'))

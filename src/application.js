@@ -323,7 +323,7 @@ const Application = new Lang.Class({
         let server = params['server'];
         let accountName = params['account'];
         let port = params['port'];
-        Utils.debug('Failed to connect to %s with username %s'.format(server, accountName));
+        debug('Failed to connect to %s with username %s'.format(server, accountName));
 
         let accountServers = [];
         if (this._networksManager.getAccountIsPredefined(account))
@@ -367,7 +367,7 @@ const Application = new Lang.Class({
         let oldParams = account.dup_parameters_vardict().deep_unpack();
         let nick = oldParams['account'].deep_unpack();
 
-        Utils.debug('Retrying with nickname %s'.format(nick + '_'));
+        debug('Retrying with nickname %s'.format(nick + '_'));
         let params = { account: new GLib.Variant('s', nick + '_') };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
@@ -380,7 +380,7 @@ const Application = new Lang.Class({
         if (!server)
             return false;
 
-        Utils.debug('Retrying with %s:%d'.format(server.address, server.port));
+        debug('Retrying with %s:%d'.format(server.address, server.port));
         let params = { server: new GLib.Variant('s', server.address),
                        port: new GLib.Variant('u', server.port),
                        'use-ssl': new GLib.Variant('b', server.ssl) };
@@ -408,8 +408,8 @@ const Application = new Lang.Class({
 
             if (reason != Tp.ConnectionStatusReason.REQUESTED) {
                 let strReasons = Object.keys(Tp.ConnectionStatusReason);
-                Utils.debug('Account %s disconnected with reason %s'.format(
-                            account.display_name, strReasons[reason]));
+                debug('Account %s disconnected with reason %s'.format(
+                      account.display_name, strReasons[reason]));
             }
         }
 

@@ -77,7 +77,7 @@ const SASLAuthHandler = new Lang.Class({
     _onSASLStatusChanged: function(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
         let statusString = (Object.keys(SASLStatus))[status];
-        Utils.debug('Auth status for server "%s": %s'.format(name, statusString));
+        debug('Auth status for server "%s": %s'.format(name, statusString));
 
         switch(status) {
             case SASLStatus.NOT_STARTED:
@@ -202,8 +202,8 @@ const TelepathyClient = new Lang.Class({
         let connected = this._networkMonitor.network_available;
         let presence = connected ? Tp.ConnectionPresenceType.AVAILABLE
                                  : Tp.ConnectionPresenceType.OFFLINE;
-        Utils.debug('Network changed to %s'.format(connected ? 'available'
-                                                             : 'unavailable'));
+        debug('Network changed to %s'.format(connected ? 'available'
+                                                       : 'unavailable'));
 
         this._accountsMonitor.enabledAccounts.forEach(a => {
             if (a.presence_type == Tp.ConnectionPresenceType.AVAILABLE &&
@@ -238,8 +238,8 @@ const TelepathyClient = new Lang.Class({
         let msg = account.requested_status_message;
         let accountName = account.display_name;
 
-        Utils.debug('Setting presence of account "%s" to %s'.format(accountName,
-                                                                    status));
+        debug('Setting presence of account "%s" to %s'.format(accountName,
+                                                              status));
         account.request_presence_async(presence, status, msg, (o, res) => {
             try {
                 account.request_presence_finish(res);
@@ -285,7 +285,7 @@ const TelepathyClient = new Lang.Class({
                 try {
                     channel = req.ensure_and_observe_channel_finish(res);
                 } catch(e) {
-                    Utils.debug('Failed to ensure channel: ' + e.message);
+                    debug('Failed to ensure channel: ' + e.message);
                 }
 
                 if (callback)
