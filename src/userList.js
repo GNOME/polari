@@ -371,7 +371,9 @@ const UserList = new Lang.Class({
     _init: function(room) {
         this.parent({ hexpand: true,
                       shadow_type: Gtk.ShadowType.ETCHED_IN,
-                      hscrollbar_policy: Gtk.PolicyType.NEVER });
+                      hscrollbar_policy: Gtk.PolicyType.NEVER,
+                      propagate_natural_width: true,
+                      propagate_natural_height: true });
 
         this._list = new Gtk.ListBox({ vexpand: true });
         this.add(this._list);
