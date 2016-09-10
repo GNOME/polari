@@ -15,7 +15,8 @@ libpolari_sources = \
 libpolari_1_0_la_SOURCES = $(libpolari_headers) $(libpolari_sources)
 
 libpolari_1_0_la_LIBADD = $(POLARI_LIBS)
-libpolari_1_0_la_CFLAGS = $(POLARI_CFLAGS) $(WARN_CFLAGS)
+libpolari_1_0_la_CFLAGS = $(POLARI_CFLAGS) $(WARN_CFLAGS) \
+	-DG_LOG_USE_STRUCTURED -DG_LOG_DOMAIN=\"Polari\"
 libpolari_1_0_la_LDFLAGS = -avoid-version $(WARN_LDFLAGS)
 
 INTROSPECTION_GIRS += Polari-1.0.gir
