@@ -9,30 +9,30 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-04 14:25+0000\n"
-"PO-Revision-Date: 2016-03-05 01:57+0200\n"
-"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
+"POT-Creation-Date: 2016-09-11 20:19+0000\n"
+"PO-Revision-Date: 2016-09-12 00:30+0300\n"
+"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: Greek, Modern (1453-) <opensuse-translation-el@opensuse.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Project-Style: gnome\n"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1 ../data/resources/main-window.ui.h:1
-#: ../src/roomStack.js:94
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:13
+#: src/roomStack.js:170
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:580
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:502
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ένας πελάτης συνομιλίας μεταγωγής διαδικτύου για το GNOME"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -42,7 +42,7 @@ msgstr ""
 "αδιάλειπτη ενσωμάτωση με το GNOME· χαρακτηρίζεται από μια απλή και όμορφη "
 "διεπαφή που σας επιτρέπει να εστιάσετε στις συζητήσεις σας."
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -55,326 +55,353 @@ msgstr ""
 "για ιδιωτικές συζητήσεις, σας επιτρέπουν επίσης να απαντήσετε απευθείας, "
 "χωρίς να κάνετε εναλλαγή στην εφαρμογή!"
 
-#: ../data/org.gnome.Polari.desktop.in.h:3
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
+msgid "org.gnome.Polari"
+msgstr "org.gnome.Polari"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;διαδίκτυο;μεταγωγή;συνομιλία;Internet;Relay;Chat;"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:1
+#: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
 msgstr "Αποθηκευμένος κατάλογος καναλιών"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:2
+#: data/org.gnome.Polari.gschema.xml:7
 msgid "List of channels to restore on startup"
 msgstr "Κατάλογος καναλιών για επαναφορά κατά την έναρξη"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:3
+#: data/org.gnome.Polari.gschema.xml:11
 msgid "Window size"
 msgstr "Μέγεθος παραθύρου"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:4
+#: data/org.gnome.Polari.gschema.xml:12
 msgid "Window size (width and height)."
 msgstr "Μέγεθος παραθύρου (πλάτος και ύψος)."
 
-#: ../data/org.gnome.Polari.gschema.xml.h:5
+#: data/org.gnome.Polari.gschema.xml:16
 msgid "Window maximized"
 msgstr "Μεγιστοποιημένο παράθυρο"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:6
+#: data/org.gnome.Polari.gschema.xml:17
 msgid "Window maximized state"
 msgstr "Κατάσταση μεγιστοποίησης παραθύρου"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:7
+#: data/org.gnome.Polari.gschema.xml:21
 msgid "Last active channel"
 msgstr "Τελευταίο ενεργό κανάλι"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: data/org.gnome.Polari.gschema.xml:22
 msgid "Last active (selected) channel"
 msgstr "Τελευταίο ενεργό (επιλεγμένο) κανάλι"
 
-#: ../data/resources/connection-details.ui.h:1
+#: data/org.gnome.Polari.gschema.xml:29
+msgid "Identify botname"
+msgstr "Ταυτοποίηση ονόματος bot"
+
+#: data/org.gnome.Polari.gschema.xml:30
+msgid "Nickname of the bot to identify with"
+msgstr "Το ψευδώνυμο του bot που θα ταυτοποιηθεί"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify username"
+msgstr "Ταυτοποίηση ονόματος χρήστη"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Username to use in identify command"
+msgstr "Το όνομα χρήστη που θα χρησιμοποιηθεί στην εντολή ταυτοποίησης"
+
+#: data/resources/connection-details.ui:13
 msgid "_Server Address"
 msgstr "Διεύθυνση διακομι_στή"
 
-#: ../data/resources/connection-details.ui.h:2
+#: data/resources/connection-details.ui:33
 msgid "Net_work Name"
 msgstr "Όνομα δι_κτύου"
 
-#: ../data/resources/connection-details.ui.h:3
-#: ../data/resources/join-room-dialog.ui.h:8
+#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:116
+#: data/resources/join-room-dialog.ui:153
 msgid "optional"
 msgstr "προαιρετικό"
 
-#: ../data/resources/connection-details.ui.h:4
+#: data/resources/connection-details.ui:61
 msgid "Use secure c_onnection"
 msgstr "Χρήση ασφαλούς _σύνδεσης"
 
-#: ../data/resources/connection-details.ui.h:5
+#: data/resources/connection-details.ui:76
 msgid "_Nickname"
 msgstr "_Ψευδώνυμο"
 
-#: ../data/resources/connection-details.ui.h:6
+#: data/resources/connection-details.ui:101
 msgid "_Real Name"
 msgstr "Π_ραγματικό όνομα"
 
-#: ../data/resources/connection-properties.ui.h:1
-#: ../data/resources/entry-area.ui.h:4
-#: ../data/resources/join-room-dialog.ui.h:2
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:146
+#: data/resources/join-room-dialog.ui:28
 msgid "_Cancel"
 msgstr "Ά_κυρο"
 
-#: ../data/resources/connection-properties.ui.h:2
+#: data/resources/connection-properties.ui:17
 msgid "_Apply"
 msgstr "Ε_φαρμογή"
 
-#: ../data/resources/entry-area.ui.h:1
+#: data/resources/entry-area.ui:16
 msgid "Change nickname:"
 msgstr "Αλλαγή ψευδωνύμου:"
 
-#: ../data/resources/entry-area.ui.h:2
+#: data/resources/entry-area.ui:27
 msgid "_Change"
 msgstr "Α_λλαγή"
 
-#: ../data/resources/entry-area.ui.h:3
+#: data/resources/entry-area.ui:77
 msgid "Change nickname"
 msgstr "Αλλαγή ψευδωνύμου"
 
-#: ../data/resources/entry-area.ui.h:5
+#: data/resources/entry-area.ui:156
 msgid "_Paste"
 msgstr "Ε_πικόλληση"
 
-#: ../data/resources/help-overlay.ui.h:1
+#: data/resources/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Γενικά"
 
-#: ../data/resources/help-overlay.ui.h:2
+#: data/resources/help-overlay.ui:19
 msgctxt "shortcut window"
 msgid "Join Room"
 msgstr "Είσοδος στο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:3
+#: data/resources/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Leave Room"
 msgstr "Εγκατάλειψη δωματίου"
 
-#: ../data/resources/help-overlay.ui.h:4
+#: data/resources/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Show Userlist"
 msgstr "Εμφάνιση λίστας χρηστών"
 
-#: ../data/resources/help-overlay.ui.h:5
+#: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: ../data/resources/help-overlay.ui.h:6
+#: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: ../data/resources/help-overlay.ui.h:7
+#: data/resources/help-overlay.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Περιήγηση"
 
-#: ../data/resources/help-overlay.ui.h:8
+#: data/resources/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Επόμενο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:9
+#: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Προηγούμενο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:10
+#: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Επόμενο δωμάτιο με μη αναγνωσμένα μηνύματα"
 
-#: ../data/resources/help-overlay.ui.h:11
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Προηγούμενο δωμάτιο με μη αναγνωσμένα μηνύματα"
 
-#: ../data/resources/help-overlay.ui.h:12
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Πρώτο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:13
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Τελευταίο δωμάτιο"
 
-#: ../data/resources/help-overlay.ui.h:14
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Πρώτο - ένατο δωμάτιο"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:272
+#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:268
 msgid "Join Chat Room"
 msgstr "Συμμετοχή σε δωμάτιο συνομιλιών"
 
-#: ../data/resources/join-room-dialog.ui.h:3
+#: data/resources/join-room-dialog.ui:36
 msgid "_Join"
 msgstr "_Συμμετοχή"
 
-#: ../data/resources/join-room-dialog.ui.h:4
+#: data/resources/join-room-dialog.ui:68
 msgid "C_onnection"
 msgstr "Σύν_δεση"
 
-#: ../data/resources/join-room-dialog.ui.h:5
+#: data/resources/join-room-dialog.ui:97
 msgid "_Add Network"
 msgstr "_Προσθήκη δικτύου"
 
-#: ../data/resources/join-room-dialog.ui.h:6
+#: data/resources/join-room-dialog.ui:111
 msgid "Room _Name"
 msgstr "Ό_νομα δωματίου"
 
-#: ../data/resources/join-room-dialog.ui.h:7
+#: data/resources/join-room-dialog.ui:138
 msgid "_Password"
 msgstr "Κ_ωδικός πρόσβασης"
 
-#: ../data/resources/join-room-dialog.ui.h:9
+#: data/resources/join-room-dialog.ui:227
 msgid "_Add"
 msgstr "_Προσθήκη"
 
-#: ../data/resources/join-room-dialog.ui.h:10
+#: data/resources/join-room-dialog.ui:246
 msgid "_Custom Network"
 msgstr "Π_ροσαρμοσμένα δίκτυα"
 
-#: ../data/resources/main-window.ui.h:2
+#: data/resources/main-window.ui:42
 msgid "Add rooms and networks"
 msgstr "Προσθήκη δωματίων και δικτύων"
 
-#: ../data/resources/menus.ui.h:1
+#: data/resources/menus.ui:6
 msgid "Keyboard Shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: ../data/resources/menus.ui.h:2
+#: data/resources/menus.ui:10
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: data/resources/menus.ui:14
 msgid "About"
 msgstr "Περί"
 
-#: ../data/resources/menus.ui.h:3
+#: data/resources/menus.ui:18
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: ../data/resources/room-list-header.ui.h:1
+#: data/resources/room-list-header.ui:146
+msgid "Connect"
+msgstr "Σύνδεση"
+
+#: data/resources/room-list-header.ui:154
 msgid "Reconnect"
 msgstr "Επανασύνδεση"
 
-#: ../data/resources/room-list-header.ui.h:2
+#: data/resources/room-list-header.ui:162
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: ../data/resources/room-list-header.ui.h:3
+#: data/resources/room-list-header.ui:170
 msgid "Properties"
 msgstr "Ιδιότητες"
 
-#: ../data/resources/user-list-details.ui.h:1
+#: data/resources/user-list-details.ui:26
 msgid "Loading details"
 msgstr "Φόρτωση λεπτομερειών"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:218
+#: data/resources/user-list-details.ui:52 src/userList.js:221
 msgid "Last Activity:"
 msgstr "Τελευταία δραστηριότητα:"
 
-#: ../data/resources/user-list-details.ui.h:3
+#: data/resources/user-list-details.ui:79
 msgid "Message"
 msgstr "Μήνυμα"
 
-#: ../src/application.js:221 ../src/utils.js:181
+#: src/application.js:238 src/utils.js:202
 msgid "Failed to open link"
 msgstr "Αδυναμία ανοίγματος συνδέσμου"
 
-#: ../src/application.js:490
-msgid "Good Bye"
-msgstr "Αποχαιρετισμός"
-
-#: ../src/application.js:522
+#: src/application.js:443
 #, javascript-format
 msgid "%s removed."
 msgstr "Αφαιρέθηκε το %s."
 
-#: ../src/application.js:579
+#: src/application.js:501
 msgid "translator-credits"
 msgstr ""
 "Ελληνική μεταφραστική ομάδα του GNOME\n"
 "Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
 "Μαρία Μαυρίδου <mavridou@gmail.com>\n"
+"Θάνος Τρυφωνίδης <tomtryf@gnome.org>\n"
 "\n"
 "Για περισσότερες πληροφορίες, επισκεφθείτε τη σελίδα\n"
 "http://gnome.gr/"
 
-#: ../src/application.js:585
+#: src/application.js:507
 msgid "Learn more about Polari"
 msgstr "Μάθετε περισσότερα για το Polari"
 
-#: ../src/appNotifications.js:82
+#: src/appNotifications.js:85
 msgid "Undo"
 msgstr "Αναίρεση"
 
-#: ../src/chatView.js:133
+#: src/chatView.js:140
 msgid "New Messages"
 msgstr "Νέα μηνύματα"
 
-#: ../src/chatView.js:642
+#: src/chatView.js:707
 msgid "Open Link"
 msgstr "Άνοιγμα συνδέσμου"
 
-#: ../src/chatView.js:648
+#: src/chatView.js:713
 msgid "Copy Link Address"
 msgstr "Αντιγραφή διεύθυνσης συνδέσμου"
 
-#: ../src/chatView.js:819
+#: src/chatView.js:929
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "Ο %s τώρα είναι γνωστός ως %s"
 
-#: ../src/chatView.js:826
+#: src/chatView.js:936
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "Ο %s αποσυνδέθηκε"
 
-#: ../src/chatView.js:835
+#: src/chatView.js:945
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Ο %s έχει εκδιωχθεί από τον %s"
 
-#: ../src/chatView.js:837
+#: src/chatView.js:947
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "Ο %s έχει εκδιωχθεί"
 
-#: ../src/chatView.js:844
+#: src/chatView.js:954
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Ο %s έχει αποκλειστεί από τον %s"
 
-#: ../src/chatView.js:846
+#: src/chatView.js:956
 #, javascript-format
 msgid "%s has been banned"
 msgstr "Ο %s έχει αποκλειστεί"
 
-#: ../src/chatView.js:852
+#: src/chatView.js:962
 #, javascript-format
 msgid "%s joined"
 msgstr "Ο %s συμμετέχει"
 
-#: ../src/chatView.js:858
+#: src/chatView.js:968
 #, javascript-format
 msgid "%s left"
 msgstr "Ο %s αποχώρησε"
 
-#: ../src/chatView.js:954
+#: src/chatView.js:1064
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d χρήστης συμμετάσχει"
 msgstr[1] "%d χρήστες συμμετάσχουν"
 
-#: ../src/chatView.js:957
+#: src/chatView.js:1067
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -383,14 +410,14 @@ msgstr[1] "%d χρήστες αποχώρησαν"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:1024
+#: src/chatView.js:1134
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1029
+#: src/chatView.js:1139
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Χθες, %H∶%M"
@@ -398,7 +425,7 @@ msgstr "Χθες, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1034
+#: src/chatView.js:1144
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -407,7 +434,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1040
+#: src/chatView.js:1150
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
@@ -416,21 +443,21 @@ msgstr "%d %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1046
+#: src/chatView.js:1156
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1051
+#: src/chatView.js:1161
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1056
+#: src/chatView.js:1166
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Χθες, %l∶%M %p"
@@ -438,7 +465,7 @@ msgstr "Χθες, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1061
+#: src/chatView.js:1171
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -447,7 +474,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1067
+#: src/chatView.js:1177
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
@@ -456,22 +483,22 @@ msgstr "%d %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1073
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:42
+#: src/connections.js:42
 msgid "Already added"
 msgstr "Η διεύθυνση έχει ήδη προστεθεί "
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:417
+#: src/connections.js:431
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Ιδιότητες “%s”"
 
-#: ../src/connections.js:461
+#: src/connections.js:475
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -479,7 +506,7 @@ msgstr ""
 "Το Polari αποσυνδέθηκε λόγω σφάλματος δικτύου. Παρακαλούμε, ελέγξτε αν είναι "
 "σωστό το πεδίο της διεύθυνσης."
 
-#: ../src/entryArea.js:236
+#: src/entryArea.js:301
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -488,7 +515,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Επικόλληση %s γραμμών κειμένου στη δημόσια υπηρεσία επικόλλησης δεδομένων;"
 
-#: ../src/entryArea.js:240
+#: src/entryArea.js:305
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -499,22 +526,34 @@ msgstr[1] ""
 "Γίνεται αποστολή %s γραμμών κειμένου στη δημόσια υπηρεσία επικόλλησης "
 "δεδομένων;"
 
-#: ../src/entryArea.js:247
+#: src/entryArea.js:312
 msgid "Upload image to public paste service?"
 msgstr "Αποστολή εικόνας στη δημόσια υπηρεσία επικόλλησης δεδομένων;"
 
-#: ../src/entryArea.js:248
+#: src/entryArea.js:313
 msgid "Uploading image to public paste service…"
 msgstr ""
 "Γίνεται αποστολή της εικόνας στη δημόσια υπηρεσία επικόλλησης δεδομένων…"
 
+#. Translators: %s is a filename
+#: src/entryArea.js:334
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Αποστολή του “%s” στη δημόσια υπηρεσία επικόλλησης δεδομένων;"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:336
+#, javascript-format
+msgid "Uploading “%s” to public paste service …"
+msgstr "Γίνεται αποστολή του “%s” στη δημόσια υπηρεσία επικόλλησης δεδομένων…"
+
 #. translators: %s is a nick, #%s a channel
-#: ../src/entryArea.js:257
+#: src/entryArea.js:345
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s στο #%s"
 
-#: ../src/entryArea.js:259
+#: src/entryArea.js:347
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Επικόλληση από %s"
@@ -528,7 +567,14 @@ msgstr "Επικόλληση από %s"
 #. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
-#: ../src/ircParser.js:24
+#: src/ircParser.js:24
+msgid ""
+"/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<channel>] [<reason>] - κλείνει το κανάλι <channel>, από προεπιλογή "
+"το τρέχον"
+
+#: src/ircParser.js:25
 msgid ""
 "/HELP [<command>] - displays help for <command>, or a list of available "
 "commands"
@@ -536,214 +582,251 @@ msgstr ""
 "/HELP [<command>] - εμφανίζει βοήθεια για την εντολή <command>, ή μια λίστα "
 "από διαθέσιμες εντολές"
 
-#: ../src/ircParser.js:25
+#: src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <nick> [<channel>] - προσκαλεί το ψευδώνυμο <nick> σε κανάλι "
 "<channel>, ή στο τρέχον"
 
-#: ../src/ircParser.js:26
+#: src/ircParser.js:27
 msgid "/JOIN <channel> - joins <channel>"
 msgstr "/JOIN <channel> - συμμετέχει στο κανάλι <channel>"
 
-#: ../src/ircParser.js:27
+#: src/ircParser.js:28
 msgid "/KICK <nick> - kicks <nick> from current channel"
 msgstr "/KICK <nick> - διώχνει το ψευδώνυμο <nick> από το τρέχον κανάλι "
 
-#: ../src/ircParser.js:28
+#: src/ircParser.js:29
 msgid "/ME <action> - sends <action> to the current channel"
 msgstr "/ME <action> - στέλνει μια ενέργεια <action> στο τρέχον κανάλι"
 
-#: ../src/ircParser.js:29
+#: src/ircParser.js:30
 msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgstr ""
 "/MSG <nick> [<message>] - στέλνει ένα προσωπικό μήνυμα στο ψευδώνυμο <nick>"
 
-#: ../src/ircParser.js:30
+#: src/ircParser.js:31
 msgid "/NAMES - lists users on the current channel"
 msgstr "/NAMES - απαριθμεί τους χρήστες στο τρέχον κανάλι"
 
-#: ../src/ircParser.js:31
+#: src/ircParser.js:32
 msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgstr "/NICK <nickname> - ορίζει το ψευδώνυμό σας σε <nickname>"
 
-#: ../src/ircParser.js:32
+#: src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<channel>] [<reason>] - αφήνει το κανάλι <channel>, από προεπιλογή το "
 "τρέχον"
 
-#: ../src/ircParser.js:33
+#: src/ircParser.js:34
 msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgstr ""
 "/QUERY <nick> - ανοίγει μια ιδιωτική συνομιλία με τον χρήστη με ψευδώνυμο "
 "<nick>"
 
-#: ../src/ircParser.js:34
+#: src/ircParser.js:35
 msgid "/QUIT [<reason>] - disconnects from the current server"
 msgstr "/QUIT [<reason>] - αποσυνδέεται από τον τρέχοντα διακομιστή"
 
-#: ../src/ircParser.js:35
+#: src/ircParser.js:36
 msgid "/SAY <text> - sends <text> to the current room/contact"
 msgstr "/SAY <text> - στέλνει κείμενο <text> στο τρέχον δωμάτιο/επαφή"
 
-#: ../src/ircParser.js:36
+#: src/ircParser.js:37
 msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <topic> - ορίζει το θέμα σε <topic>, ή εμφανίζει το τρέχον"
 
-#: ../src/ircParser.js:39
+#: src/ircParser.js:40
 msgid "Unknown command - try /HELP for a list of available commands"
 msgstr "Άγνωστη εντολή - δοκιμάστε /HELP για μια λίστα με διαθέσιμες εντολές"
 
-#: ../src/ircParser.js:60
+#: src/ircParser.js:56
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Χρήση: %s"
 
-#: ../src/ircParser.js:98
+#: src/ircParser.js:94
 msgid "Known commands:"
 msgstr "Γνωστές εντολές:"
 
-#: ../src/ircParser.js:198
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Χρήστες στο %s:"
 
-#: ../src/ircParser.js:283
+#: src/ircParser.js:280
 msgid "No topic set"
 msgstr "Δεν έχει οριστεί θέμα"
 
-#: ../src/joinDialog.js:273
+#: src/joinDialog.js:269
 msgid "Add Network"
 msgstr "Προσθήκη δικτύου"
 
-#: ../src/mainWindow.js:307
+#: src/mainWindow.js:369
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d χρήστης"
 msgstr[1] "%d χρήστες"
 
-#: ../src/roomList.js:129
+#: src/roomList.js:133
 msgid "Leave chatroom"
 msgstr "Αποχώρηση από το δωμάτιο συνομιλιών"
 
-#: ../src/roomList.js:129
+#: src/roomList.js:133
 msgid "End conversation"
 msgstr "Τερματισμός συνομιλίας"
 
-#: ../src/roomList.js:213
+#: src/roomList.js:227
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Το δίκτυο %s έχει σφάλμα"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:263
+#: src/roomList.js:284
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:270
+#: src/roomList.js:291
 msgid "Connection Problem"
 msgstr "Πρόβλημα σύνδεσης"
 
-#: ../src/roomList.js:278
+#: src/roomList.js:307
 msgid "Connected"
 msgstr "Συνδέθηκε"
 
-#: ../src/roomList.js:280
+#: src/roomList.js:309
 msgid "Connecting..."
 msgstr "Γίνεται σύνδεση..."
 
-#: ../src/roomList.js:282
+#: src/roomList.js:311
 msgid "Offline"
 msgstr "Χωρίς σύνδεση"
 
-#: ../src/roomList.js:284
+#: src/roomList.js:313
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: ../src/roomList.js:304
+#: src/roomList.js:333
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Αδυναμία σύνδεσης στο %s με ασφαλή τρόπο."
 
-#: ../src/roomList.js:307
+#: src/roomList.js:336
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Το %s απαιτεί κωδικό πρόσβασης."
 
-#: ../src/roomList.js:313
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Αδυναμία σύνδεσης στο %s. Ο διακομιστής είναι απασχολημένος."
 
-#: ../src/roomList.js:316
+#: src/roomList.js:345
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Αδυναμία σύνδεσης στο %s."
 
-#: ../src/roomStack.js:97
+#: src/roomStack.js:123
+msgid "_Save Password"
+msgstr "_Αποθήκευση κωδικού πρόσβασης"
+
+#: src/roomStack.js:132
+msgid "Should the password be saved?"
+msgstr "Να αποθηκευτεί ο κωδικός πρόσβασης;"
+
+#: src/roomStack.js:140 src/telepathyClient.js:570
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr ""
+"Η ταυτοποίηση θα εκτελεστεί αυτόματα την επόμενη φορά που θα συνδεθείτε στο "
+"%s"
+
+#: src/roomStack.js:173
 msgid "Join a room using the + button."
 msgstr "Συνδεθείτε σε ένα δωμάτιο χρησιμοποιώντας το κουμπί +"
 
-#: ../src/userList.js:174
+#: src/telepathyClient.js:397
+msgid "Good Bye"
+msgstr "Αποχαιρετισμός"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:569
+#, javascript-format
+#| msgid "Polari server password for %s"
+msgid "Save %s password for %s?"
+msgstr "Αποθήκευση κωδικού πρόσβασης του %s για το %s;"
+
+#: src/telepathyClient.js:573
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d δευτερόλεπτο πριν"
 msgstr[1] "%d δευτερόλεπτα πριν"
 
-#: ../src/userList.js:179
+#: src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d λεπτό πριν"
 msgstr[1] "%d λεπτά πριν"
 
-#: ../src/userList.js:184
+#: src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d ώρα πριν"
 msgstr[1] "%d ώρες πριν"
 
-#: ../src/userList.js:189
+#: src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d ημέρα πριν"
 msgstr[1] "%d ημέρες πριν"
 
-#: ../src/userList.js:194
+#: src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d εβδομάδα πριν"
 msgstr[1] "%d εβδομάδες πριν"
 
-#: ../src/userList.js:198
+#: src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d μήνα πριν"
 msgstr[1] "%d μήνες πριν"
 
-#: ../src/userList.js:383
+#: src/userList.js:388
 msgid "No results"
 msgstr "Δε βρέθηκαν αποτελέσματα"
 
-#: ../src/userList.js:556
+#: src/userList.js:561
 msgid "All"
 msgstr "Όλα"
 
-#: ../src/utils.js:121
+#: src/utils.js:124
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Κωδικός πρόσβασης διακομιστή Polari για το %s"
+
+#: src/utils.js:129
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Κωδικός πρόσβασης διακομιστή NickServ για το %s"
 
 #~ msgid "_Connection Name"
 #~ msgstr "Ό_νομα σύνδεσης"
@@ -796,9 +879,6 @@ msgstr "Κωδικός πρόσβασης διακομιστή Polari για τ�
 
 #~ msgid "Cr_eate"
 #~ msgstr "Δη_μιουργία"
-
-#~ msgid "_Save"
-#~ msgstr "Απο_θήκευση"
 
 #~ msgid "Uploading %s"
 #~ msgstr "Αποστολή του %s"
