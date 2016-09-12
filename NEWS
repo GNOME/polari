@@ -1,3 +1,21 @@
+3.21.92 - "Sweet as F***ing Pie"
+================================
+* Improve connectivity handling [Florian; #770751]
+* Misc. bug fixes [Florian; #768611]
+
+Contributors:
+  Marek Černocký, Rafael Fontenelle, Florian Müllner
+
+Translations:
+  Gábor Kelemen [hu], Rafael Fontenelle [pt_BR], Piotr Drąg [pl],
+  Fabio Tomat [fur], Dušan Kazik [sk], Daniel Mustieles [es],
+  Марко Костић [sr], Милош Поповић [sr@latin], Bernd Homuth [de],
+  Jiri Grönroos [fi], Changwoo Ryu [ko], Baurzhan Muftakhidinov [kk],
+  Marek Černocký [cs], David King [en_GB], Aurimas Černius [lt],
+  Yosef Or Boczko [he], Hannie Dumoleyn [nl], Fran Dieguez [gl],
+  Rūdolfs Mazurs [lv], Arash Mousavi [fa], Anders Jonsson [sv],
+  Tom Tryfonidis [el], Mathieu Stumpf Guntz [fr]
+
 3.21.91 - "Women in Rubber Flirting"
 ====================================
 * Add "Connect" item to room list header menu [Florian; #769192]
