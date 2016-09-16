@@ -742,7 +742,7 @@ msgstr "Agur"
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
 #: src/telepathyClient.js:569
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Gorde '%2$s' kontuko '%1$s'(e)n pasahitza?"
 
