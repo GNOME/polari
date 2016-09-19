@@ -1,4 +1,4 @@
-AC_INIT([polari],[3.21.92],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
+AC_INIT([polari],[3.22.0],[https://bugzilla.gnome.org/enter_bug.cgi?product=polari],[polari])
 AX_IS_RELEASE([git-directory])
 
 AC_SUBST([APP_ID],[org.gnome.Polari])
@@ -35,7 +35,7 @@ GLIB_GSETTINGS
 PKG_CHECK_MODULES(POLARI,
                   gio-2.0 >= 2.43.4
                   gobject-introspection-1.0
-                  gtk+-3.0 >= 3.19.12
+                  gtk+-3.0 >= 3.21.6
                   telepathy-glib);
 
 AC_CHECK_FUNCS([strcasestr])
