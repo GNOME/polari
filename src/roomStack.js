@@ -100,6 +100,8 @@ const SavePasswordConfirmationBar = new Lang.Class({
 
         this.parent({ valign: Gtk.Align.START });
 
+        this.connect('destroy', Lang.bind(this, this._onDestroy));
+
         this._createWidget();
 
         this._identifySentId = this._room.connect('identify-sent', () => {
@@ -145,12 +147,10 @@ const SavePasswordConfirmationBar = new Lang.Class({
         this._infoBar.show_all();
     },
 
-    vfunc_destroy: function() {
+    _onDestroy: function() {
         if (this._identifySentId)
             this._room.disconnect(this._identifySentId);
         this._identifySentId = 0;
-
-        this.parent();
     }
 });
 

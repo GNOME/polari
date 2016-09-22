@@ -256,6 +256,7 @@ const ChatView = new Lang.Class({
                      Lang.bind(this, this._onStyleUpdated));
         this._onStyleUpdated();
 
+        this.connect('destroy', Lang.bind(this, this._onDestroy));
         this.connect('screen-changed',
                      Lang.bind(this, this._updateIndent));
         this.connect('scroll-event', Lang.bind(this, this._onScroll));
@@ -452,9 +453,7 @@ const ChatView = new Lang.Class({
         this._foreachNickTag(t => { this._updateTagStatus(t); });
     },
 
-    vfunc_destroy: function() {
-        this.parent();
-
+    _onDestroy: function() {
         for (let i = 0; i < this._channelSignals.length; i++)
             this._channel.disconnect(this._channelSignals[i]);
         this._channelSignals = [];
