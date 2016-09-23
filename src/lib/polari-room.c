@@ -479,7 +479,8 @@ on_message_sent (TpTextChannel      *channel,
 
   if (G_UNLIKELY (identify_message_regex == NULL))
     identify_message_regex = g_regex_new ("^identify (?:(\\w+) )?(\\S+)$",
-                                                G_REGEX_OPTIMIZE, 0, NULL);
+                                          G_REGEX_OPTIMIZE | G_REGEX_CASELESS,
+                                          0, NULL);
   if (g_regex_match (identify_message_regex, stripped_text, 0, &match))
     {
       char *username = g_match_info_fetch (match, 1);
