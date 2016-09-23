@@ -41,3 +41,46 @@ polari_util_get_basenick (const char *nick)
   else
     return g_utf8_casefold (nick, -1);
 }
+
+/**
+ * polari_util_match_identify_message:
+ * @message: a text message
+ * @username: (optional) (out): the parsed name if the @message is an
+ *                              identify command
+ * @password: (optional) (out): the parsed password if the @message is an
+ *                              identify command
+ *
+ * Returns: %TRUE if @message is an identify command
+ */
+gboolean
+polari_util_match_identify_message (const char  *message,
+                                    char       **username,
+                                    char       **password)
+{
+  static GRegex *identify_message_regex = NULL;
+  GMatchInfo *match;
+  char *text, *stripped_text;
+  gboolean matched;
+
+  text = g_strdup (message);
+  stripped_text = g_strstrip (text);
+
+  if (G_UNLIKELY (identify_message_regex == NULL))
+    identify_message_regex = g_regex_new ("^identify (?:(\\w+) )?(\\S+)$",
+                                          G_REGEX_OPTIMIZE | G_REGEX_CASELESS,
+                                          0, NULL);
+
+  matched = g_regex_match (identify_message_regex, stripped_text, 0, &match);
+  if (matched)
+    {
+      if (username)
+        *username = g_match_info_fetch (match, 1);
+      if (password)
+        *password = g_match_info_fetch (match, 2);
+    }
+
+  g_match_info_free (match);
+  g_free (text);
+
+  return matched;
+}

@@ -90,8 +90,6 @@ static guint signals[LAST_SIGNAL];
 
 static GRegex *color_code_regex = NULL;
 
-static GRegex *identify_message_regex = NULL;
-
 G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
 static void polari_room_set_channel (PolariRoom *room, TpChannel *channel);
@@ -468,24 +466,15 @@ on_message_sent (TpTextChannel      *channel,
 {
   PolariRoom *room = user_data;
   PolariRoomPrivate *priv = room->priv;
-  GMatchInfo *match;
-  char *text, *stripped_text;
+  char *username, *password, *text;
 
   if (priv->type != TP_HANDLE_TYPE_CONTACT)
     return;
 
   text = tp_message_to_text (TP_MESSAGE (message), NULL);
-  stripped_text = g_strstrip (text);
 
-  if (G_UNLIKELY (identify_message_regex == NULL))
-    identify_message_regex = g_regex_new ("^identify (?:(\\w+) )?(\\S+)$",
-                                          G_REGEX_OPTIMIZE | G_REGEX_CASELESS,
-                                          0, NULL);
-  if (g_regex_match (identify_message_regex, stripped_text, 0, &match))
+  if (polari_util_match_identify_message (text, &username, &password))
     {
-      char *username = g_match_info_fetch (match, 1);
-      char *password = g_match_info_fetch (match, 2);
-
       if (!priv->ignore_identify)
         g_signal_emit (room, signals[IDENTIFY_SENT], 0, username, password);
 
@@ -495,7 +484,6 @@ on_message_sent (TpTextChannel      *channel,
       g_free (password);
     }
 
-  g_match_info_free (match);
   g_free (text);
 }
 

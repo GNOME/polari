@@ -19,6 +19,12 @@
 #ifndef __POLARI_UTIL_H__
 #define __POLARI_UTIL_H__
 
+#include <glib.h>
+
 char *polari_util_get_basenick (const char *nick);
+
+gboolean polari_util_match_identify_message (const char  *message,
+                                             char       **username,
+                                             char       **password);
 
 #endif /* __POLARI_UTIL_H__ */
