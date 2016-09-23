@@ -1257,6 +1257,16 @@ const ChatView = new Lang.Class({
         let server = params.server.deep_unpack();
 
         let text = message.text;
+
+        // mask identify passwords in private chats
+        if (this._room.type == Tp.HandleType.CONTACT) {
+            let [isIdentify, username, password] =
+                Polari.util_match_identify_message(text);
+
+            if (isIdentify)
+                text = text.replace(password, (p) => p.replace(/./g, '●'));
+        }
+
         let channels = Utils.findChannels(text, server);
         let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
         let pos = 0;
