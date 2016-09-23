@@ -126,7 +126,8 @@ const SimpleOutput = new Lang.Class({
 
         let label = new Gtk.Label({ label: text,
                                     vexpand: true,
-                                    visible: true });
+                                    visible: true,
+                                    wrap: true });
         this.add(label);
         this.show_all();
     }
