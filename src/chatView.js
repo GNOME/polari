@@ -321,7 +321,8 @@ const ChatView = new Lang.Class({
         this._app.connect('room-focus-changed',
                           Lang.bind(this, this._checkMessages));
 
-        this._hoverCursor = Gdk.Cursor.new(Gdk.CursorType.HAND1);
+        this._hoverCursor = Gdk.Cursor.new_from_name(this.get_display(),
+                                                     'pointer');
 
         this._channelSignals = [];
         this._channel = null;
