@@ -1331,6 +1331,13 @@ const ChatView = new Lang.Class({
     },
 
     _onNickStatusChanged: function(baseNick, status) {
+        if (this._room.type == Tp.HandleType.CONTACT &&
+            status == Tp.ConnectionPresenceType.OFFLINE &&
+            this._room.channel)
+            this._room.channel.ack_all_pending_messages_async(() => {
+                this._room.channel.close_async(null);
+            });
+
         let nickTagName = this._getNickTagName(baseNick);
         let nickTag = this._lookupTag(nickTagName);
 
