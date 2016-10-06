@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-20 12:57+0000\n"
-"PO-Revision-Date: 2016-08-22 17:34+0700\n"
+"POT-Creation-Date: 2016-10-03 09:12+0000\n"
+"PO-Revision-Date: 2016-10-06 08:23+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -22,12 +22,12 @@ msgstr ""
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:13
-#: src/roomStack.js:94
+#: src/roomStack.js:170
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:621
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:504
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Suatu Klien Internet Relay Chat untuk GNOME"
 
@@ -96,6 +96,22 @@ msgstr "Kanal aktif terakhir"
 msgid "Last active (selected) channel"
 msgstr "Kanal yang terakhir aktif (dipilih)"
 
+#: data/org.gnome.Polari.gschema.xml:29
+msgid "Identify botname"
+msgstr "Nama bot identifikasi"
+
+#: data/org.gnome.Polari.gschema.xml:30
+msgid "Nickname of the bot to identify with"
+msgstr "Nama panggilan bot yang melayani identifikasi"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify username"
+msgstr "Nama pengguna identifikasi"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Username to use in identify command"
+msgstr "Nama pengguna yang dipakai dalam perintah identifikasi"
+
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
 msgstr "Alamat _Server"
@@ -139,7 +155,7 @@ msgstr "Ubah nama panggilan:"
 msgid "_Change"
 msgstr "U_bah"
 
-#: data/resources/entry-area.ui:76
+#: data/resources/entry-area.ui:77
 msgid "Change nickname"
 msgstr "Ubah nama panggilan"
 
@@ -217,7 +233,7 @@ msgctxt "shortcut window"
 msgid "First - Ninth Room"
 msgstr "Ruang Pertama - Ke Sembilan"
 
-#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:272
+#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:268
 msgid "Join Chat Room"
 msgstr "Bergabung Ke Ruang Obrolan"
 
@@ -249,7 +265,7 @@ msgstr "T_ambah"
 msgid "_Custom Network"
 msgstr "Jaringan _Ubahan"
 
-#: data/resources/main-window.ui:41
+#: data/resources/main-window.ui:42
 msgid "Add rooms and networks"
 msgstr "Tambah ruang dan jaringan"
 
@@ -269,19 +285,19 @@ msgstr "Tentang"
 msgid "Quit"
 msgstr "Keluar"
 
-#: data/resources/room-list-header.ui:137
+#: data/resources/room-list-header.ui:146
 msgid "Connect"
 msgstr "Sambung"
 
-#: data/resources/room-list-header.ui:145
+#: data/resources/room-list-header.ui:154
 msgid "Reconnect"
 msgstr "Sambungkan kembali"
 
-#: data/resources/room-list-header.ui:153
+#: data/resources/room-list-header.ui:162
 msgid "Remove"
 msgstr "Buang"
 
-#: data/resources/room-list-header.ui:161
+#: data/resources/room-list-header.ui:170
 msgid "Properties"
 msgstr "Properti"
 
@@ -289,7 +305,7 @@ msgstr "Properti"
 msgid "Loading details"
 msgstr "Memuat rincian"
 
-#: data/resources/user-list-details.ui:52 src/userList.js:218
+#: data/resources/user-list-details.ui:52 src/userList.js:221
 msgid "Last Activity:"
 msgstr "Aktivitas Terakhir:"
 
@@ -297,26 +313,22 @@ msgstr "Aktivitas Terakhir:"
 msgid "Message"
 msgstr "Pesan"
 
-#: src/application.js:224 src/utils.js:181
+#: src/application.js:238 src/utils.js:202
 msgid "Failed to open link"
 msgstr "Gagal membuka taut"
 
-#: src/application.js:529
-msgid "Good Bye"
-msgstr "Selamat Tinggal"
-
-#: src/application.js:561
+#: src/application.js:445
 #, javascript-format
 msgid "%s removed."
 msgstr "%s dihapus."
 
-#: src/application.js:620
+#: src/application.js:503
 msgid "translator-credits"
 msgstr ""
 "Andika Triwidada <andika@gmail.com>, 2014, 2016\n"
 "Sendy Aditya Suryana <sendzation@gmail.com>, 2015"
 
-#: src/application.js:626
+#: src/application.js:509
 msgid "Learn more about Polari"
 msgstr "Pelajari lebih lanjut tentang Polari"
 
@@ -328,61 +340,61 @@ msgstr "Tak Jadi"
 msgid "New Messages"
 msgstr "Pesan Baru"
 
-#: src/chatView.js:734
+#: src/chatView.js:707
 msgid "Open Link"
 msgstr "Buka Tautan"
 
-#: src/chatView.js:740
+#: src/chatView.js:713
 msgid "Copy Link Address"
 msgstr "Salin Alamat Tautan"
 
-#: src/chatView.js:956
+#: src/chatView.js:929
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s kini dikenal sebagai %s"
 
-#: src/chatView.js:963
+#: src/chatView.js:936
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s telah terputus"
 
-#: src/chatView.js:972
+#: src/chatView.js:945
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s telah ditendang oleh %s"
 
-#: src/chatView.js:974
+#: src/chatView.js:947
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s telah ditendang"
 
-#: src/chatView.js:981
+#: src/chatView.js:954
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s telah dicekal oleh %s"
 
-#: src/chatView.js:983
+#: src/chatView.js:956
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s telah dicekal"
 
-#: src/chatView.js:989
+#: src/chatView.js:962
 #, javascript-format
 msgid "%s joined"
 msgstr "%s bergabung"
 
-#: src/chatView.js:995
+#: src/chatView.js:968
 #, javascript-format
 msgid "%s left"
 msgstr "%s pergi"
 
-#: src/chatView.js:1091
+#: src/chatView.js:1064
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d pengguna bergabung"
 
-#: src/chatView.js:1094
+#: src/chatView.js:1067
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -390,14 +402,14 @@ msgstr[0] "%d pengguna pergi"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1161
+#: src/chatView.js:1134
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1166
+#: src/chatView.js:1139
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Kemarin, %H∶%M"
@@ -405,7 +417,7 @@ msgstr "Kemarin, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1171
+#: src/chatView.js:1144
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -414,7 +426,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1177
+#: src/chatView.js:1150
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
@@ -423,21 +435,21 @@ msgstr "%d %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1183
+#: src/chatView.js:1156
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1188
+#: src/chatView.js:1161
 msgid "%l∶%M %p"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1193
+#: src/chatView.js:1166
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Kemarin, %l∶%M %p"
@@ -445,7 +457,7 @@ msgstr "Kemarin, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1198
+#: src/chatView.js:1171
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -454,7 +466,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1204
+#: src/chatView.js:1177
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
@@ -463,22 +475,22 @@ msgstr "%d %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1210
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: src/connections.js:42
+#: src/connections.js:53
 msgid "Already added"
 msgstr "Telah ditambahkan"
 
 #. Translators: %s is a connection name
-#: src/connections.js:431
+#: src/connections.js:442
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Properti \"%s\""
 
-#: src/connections.js:475
+#: src/connections.js:486
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -632,11 +644,11 @@ msgstr "Pengguna pada %s:"
 msgid "No topic set"
 msgstr "Topik tak ditata"
 
-#: src/joinDialog.js:273
+#: src/joinDialog.js:269
 msgid "Add Network"
 msgstr "Tambah Jaringan"
 
-#: src/mainWindow.js:300
+#: src/mainWindow.js:369
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -650,107 +662,143 @@ msgstr "Tinggalkan ruangan"
 msgid "End conversation"
 msgstr "Akhiri percakapan"
 
-#: src/roomList.js:228
+#: src/roomList.js:227
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Jaringan %s punya kesalahan"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:278
+#: src/roomList.js:284
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:285
+#: src/roomList.js:291
 msgid "Connection Problem"
 msgstr "Masalah Koneksi"
 
-#: src/roomList.js:300
+#: src/roomList.js:307
 msgid "Connected"
 msgstr "Tersambung"
 
-#: src/roomList.js:302
+#: src/roomList.js:309
 msgid "Connecting..."
 msgstr "Menyambung..."
 
-#: src/roomList.js:304
+#: src/roomList.js:311
 msgid "Offline"
 msgstr "Luring"
 
-#: src/roomList.js:306
+#: src/roomList.js:313
 msgid "Unknown"
 msgstr "Tak dikenal"
 
-#: src/roomList.js:326
+#: src/roomList.js:333
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Tidak bisa menyambung ke %s dengan cara aman."
 
-#: src/roomList.js:329
+#: src/roomList.js:336
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s memerlukan sandi."
 
-#: src/roomList.js:335
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Tidak bisa menyambung ke %s. Server sibuk."
 
-#: src/roomList.js:338
+#: src/roomList.js:345
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Tidak bisa menyambung ke %s."
 
-#: src/roomStack.js:97
+#: src/roomStack.js:125
+msgid "_Save Password"
+msgstr "_Simpan Sandi"
+
+#: src/roomStack.js:134
+msgid "Should the password be saved?"
+msgstr "Apakah kata sandi mesti disimpan?"
+
+#: src/roomStack.js:142 src/telepathyClient.js:570
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr ""
+"Identifikasi akan terjadi secara otomatis saat berikutnya Anda menyambung ke "
+"%s"
+
+#: src/roomStack.js:173
 msgid "Join a room using the + button."
 msgstr "Bergabung ke suatu ruang memakai tombol +."
 
-#: src/userList.js:174
+#: src/telepathyClient.js:397
+msgid "Good Bye"
+msgstr "Selamat Tinggal"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:569
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Simpan sandi %s untuk %s?"
+
+#: src/telepathyClient.js:573
+msgid "Save"
+msgstr "Simpan"
+
+#: src/userList.js:177
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d detik yang lalu"
 
-#: src/userList.js:179
+#: src/userList.js:182
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d menit yang lalu"
 
-#: src/userList.js:184
+#: src/userList.js:187
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d jam yang lalu"
 
-#: src/userList.js:189
+#: src/userList.js:192
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari yang lalu"
 
-#: src/userList.js:194
+#: src/userList.js:197
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d minggu yang lalu"
 
-#: src/userList.js:198
+#: src/userList.js:201
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan yang lalu"
 
-#: src/userList.js:383
+#: src/userList.js:388
 msgid "No results"
 msgstr "Tidak ada hasil"
 
-#: src/userList.js:556
+#: src/userList.js:561
 msgid "All"
 msgstr "Semua"
 
-#: src/utils.js:121
+#: src/utils.js:124
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Sandi server Polari untuk %s"
+
+#: src/utils.js:129
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Sandi NickServ Polari untuk %s"
