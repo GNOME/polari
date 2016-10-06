@@ -205,14 +205,20 @@ const UserTracker = new Lang.Class({
         if (this._pushMember(roomMap, baseNick, member) == 1)
             this._runHandlers(room, member, status);
 
-        let map = this._baseNickContacts;
-        if (this._pushMember(map, baseNick, member) == 1) {
-            this.emit("status-changed::" + baseNick, baseNick, status);
+        // HACK: Telepathy doesn't notify on member changes for private chats,
+        //       so approximate the online status in this case by not adding
+        //       the contact to the global map, and removing it from the room
+        //       map when the global count drops to 0 (see _untrackMember)
+        if (room.type == Tp.HandleType.ROOM) {
+            let map = this._baseNickContacts;
+            if (this._pushMember(map, baseNick, member) == 1) {
+                this.emit("status-changed::" + baseNick, baseNick, status);
 
-            if (this._shouldNotifyNick(member.alias))
-                this._notifyNickAvailable(member, room);
+                if (this._shouldNotifyNick(member.alias))
+                    this._notifyNickAvailable(member, room);
 
-            this._setNotifyActionEnabled(member.alias, false);
+                this._setNotifyActionEnabled(member.alias, false);
+            }
         }
 
         this.emit("contacts-changed::" + baseNick, member.alias);
@@ -244,6 +250,12 @@ const UserTracker = new Lang.Class({
                 this._setNotifyActionEnabled(member.alias, true);
 
                 this._app.withdraw_notification(this._getNotifyActionNameInternal(member.alias));
+
+                // HACK: The member is no longer joined any public rooms, so
+                //       assume they disconnected and remove them from all
+                //       private chats as well
+                for (let r of this._roomData.keys())
+                    this._untrackMember(member, r);
             }
             this.emit("contacts-changed::" + baseNick, member.alias);
         }
