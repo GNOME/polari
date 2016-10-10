@@ -372,8 +372,7 @@ const UserList = new Lang.Class({
         this.parent({ hexpand: true,
                       shadow_type: Gtk.ShadowType.ETCHED_IN,
                       hscrollbar_policy: Gtk.PolicyType.NEVER,
-                      propagate_natural_width: true,
-                      propagate_natural_height: true });
+                      propagate_natural_width: true });
 
         this._list = new Gtk.ListBox({ vexpand: true });
         this.add(this._list);
@@ -475,6 +474,7 @@ const UserList = new Lang.Class({
                 height += this._list.get_row_at_index(index + i).get_allocated_height();
 
             this.max_content_height = height;
+            this.propagate_natural_height = true;
             this._updateHeightId = 0;
             return GLib.SOURCE_REMOVE;
         }));
