@@ -1,3 +1,16 @@
+3.22.1 - "Copped Off"
+=====================
+* Line-wrap app notifications [Efe; #721763]
+* Use structured logging [Florian; #771218]
+* Fix URL linkification under flatpak [Florian; #772655]
+* Misc. bug fixes [Florian; #771217, #772068, #771888, #771728]
+
+Contributors:
+  Efe Gürkan YALAMAN, Florian Müllner
+
+Translations:
+  Milo Casagrande [it], Andika Triwidada [id], Cheng-Chia Tseng [zh_TW]
+
 3.22.0 - "We All Feign a Laugh"
 ===============================
 
