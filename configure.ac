@@ -36,6 +36,10 @@ PKG_CHECK_MODULES(LIBPOLARI,
                   gio-2.0 >= 2.43.4
                   gtk+-3.0 >= 3.21.6
                   telepathy-glib);
+PKG_CHECK_MODULES(POLARI,
+                  gio-2.0
+                  gobject-introspection-1.0
+                  gjs-1.0)
 
 AC_CHECK_FUNCS([strcasestr])
 

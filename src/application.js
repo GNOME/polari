@@ -31,6 +31,7 @@ const Application = new Lang.Class({
                       flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
         GLib.set_application_name('Polari');
+        GLib.set_prgname('org.gnome.Polari');
         this._retryData = new Map();
 
         this.add_main_option('start-client', 0,

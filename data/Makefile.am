@@ -18,13 +18,6 @@ service_in_files = $(APP_ID).service.in \
 check-local:
 	$(DESKTOP_FILE_VALIDATE) $(desktop_DATA)
 
-resource_files=$(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/$(APP_ID).data.gresource.xml)
-$(APP_ID).data.gresource: $(APP_ID).data.gresource.xml $(resource_files)
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) $<
-
-resourcedir=$(pkgdatadir)
-resource_DATA=$(APP_ID).data.gresource
-
 gsettings_SCHEMAS = $(APP_ID).gschema.xml
 @GSETTINGS_RULES@
 
@@ -35,12 +28,10 @@ EXTRA_DIST = \
 	$(desktop_in_files) \
 	$(service_in_files) \
 	$(APP_ID).data.gresource.xml \
-	$(resource_files) \
 	$(gsettings_SCHEMAS) \
 	$(NULL)
 
 CLEANFILES = \
 	$(desktop_DATA) \
 	$(service_DATA) \
-	$(resource_DATA) \
 	$(NULL)
