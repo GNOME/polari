@@ -17,6 +17,7 @@ aclocal.m4
 autom4te.cache/
 build-aux/*
 !build-aux/flatpak
+!build-aux/meson
 config.*
 configure
 data/appdata/*.appdata.valid
