@@ -516,7 +516,7 @@ msgstr "Ha det bra"
 #: ../src/telepathyClient.js:571
 #, javascript-format
 msgid "Save %s password for %s?"
-msgstr "Lagre passord for %s?"
+msgstr "Lagre %s-passord for %s?"
 
 #: ../src/telepathyClient.js:575
 msgid "Save"
