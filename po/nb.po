@@ -6,11 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: polari 3.20.x\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-05-01 15:24+0200\n"
-"PO-Revision-Date: 2016-05-01 15:24+0200\n"
+"Project-Id-Version: polari 3.23.x\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-10-15 14:50+0200\n"
+"PO-Revision-Date: 2016-10-15 14:50+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -52,20 +51,36 @@ msgstr "Sist aktive kanal"
 msgid "Last active (selected) channel"
 msgstr "Sist aktive (valgte) kanal"
 
-#: ../src/application.js:225 ../src/utils.js:181
+#: ../data/org.gnome.Polari.gschema.xml.h:9
+msgid "Identify botname"
+msgstr "Identifiser navn på bot"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:10
+msgid "Nickname of the bot to identify with"
+msgstr "Kallenavn på bot for identifisering"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:11
+msgid "Identify username"
+msgstr "Brukernavn for identifisering"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:12
+msgid "Username to use in identify command"
+msgstr "Brukernavn som skal brukes i identifiseringskommando"
+
+#: ../src/application.js:38
+msgid "Start Telephathy client"
+msgstr "Start Telepathy-klient"
+
+#: ../src/application.js:253 ../src/utils.js:167
 msgid "Failed to open link"
 msgstr "Klarte ikke å åpne lenke"
 
-#: ../src/application.js:535
-msgid "Good Bye"
-msgstr "Ha det bra"
-
-#: ../src/application.js:567
+#: ../src/application.js:460
 #, javascript-format
 msgid "%s removed."
 msgstr "%s fjernet."
 
-#: ../src/application.js:624
+#: ../src/application.js:530
 msgid "translator-credits"
 msgstr ""
 "Øivind Hoel <ohoel@cvs.gnome.org>\n"
@@ -73,11 +88,11 @@ msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>"
 
-#: ../src/application.js:625
+#: ../src/application.js:531
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En Internet Relay Chat-klient for GNOME"
 
-#: ../src/application.js:630
+#: ../src/application.js:536
 msgid "Learn more about Polari"
 msgstr "Lær mer om Polari"
 
@@ -85,66 +100,66 @@ msgstr "Lær mer om Polari"
 msgid "Undo"
 msgstr "Angre"
 
-#: ../src/chatView.js:133
+#: ../src/chatView.js:142
 msgid "New Messages"
 msgstr "Nye meldinger"
 
-#: ../src/chatView.js:642
+#: ../src/chatView.js:775
 msgid "Open Link"
 msgstr "Åpne lenke"
 
-#: ../src/chatView.js:648
+#: ../src/chatView.js:781
 msgid "Copy Link Address"
 msgstr "Kopier lenkeadresse"
 
-#: ../src/chatView.js:819
+#: ../src/chatView.js:956
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s er nå kjent som %s"
 
-#: ../src/chatView.js:826
+#: ../src/chatView.js:961
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har koblet fra"
 
-#: ../src/chatView.js:835
+#: ../src/chatView.js:969
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s er kastet ut av %s"
 
-#: ../src/chatView.js:837
+#: ../src/chatView.js:971
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s er kastet ut"
 
-#: ../src/chatView.js:844
+#: ../src/chatView.js:977
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s er nå utestengt av %s"
 
-#: ../src/chatView.js:846
+#: ../src/chatView.js:979
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s er nå utestengt"
 
-#: ../src/chatView.js:852
+#: ../src/chatView.js:984
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ble med"
 
-#: ../src/chatView.js:858
+#: ../src/chatView.js:989
 #, javascript-format
 msgid "%s left"
 msgstr "%s gikk ut"
 
-#: ../src/chatView.js:954
+#: ../src/chatView.js:1084
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d bruker ble med"
 msgstr[1] "%d brukere ble med"
 
-#: ../src/chatView.js:957
+#: ../src/chatView.js:1087
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -153,14 +168,14 @@ msgstr[1] "%d brukere igjen"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:1024
+#: ../src/chatView.js:1154
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1029
+#: ../src/chatView.js:1159
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "I går, %H.%M"
@@ -168,7 +183,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1034
+#: ../src/chatView.js:1164
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
@@ -177,7 +192,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1040
+#: ../src/chatView.js:1170
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H.%M"
@@ -186,21 +201,21 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1046
+#: ../src/chatView.js:1176
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H.%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1051
+#: ../src/chatView.js:1181
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1056
+#: ../src/chatView.js:1186
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "I går, %H.%M"
@@ -208,7 +223,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1061
+#: ../src/chatView.js:1191
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
@@ -217,7 +232,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1067
+#: ../src/chatView.js:1197
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %H.%M"
@@ -226,22 +241,22 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1073
+#: ../src/chatView.js:1203
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %H.%M"
 
-#: ../src/connections.js:42
+#: ../src/connections.js:53
 msgid "Already added"
 msgstr "Allerede lagt til"
 
 #. Translators: %s is a connection name
-#: ../src/connections.js:431
+#: ../src/connections.js:442
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Egenskaper for «%s»"
 
-#: ../src/connections.js:475
+#: ../src/connections.js:486
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -249,35 +264,47 @@ msgstr ""
 "Polari er koblet fra på grunn av en nettverksfeil. Vennligst sjekk om "
 "adressefeltet er korrekt."
 
-#: ../src/entryArea.js:236
+#: ../src/entryArea.js:300
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
-msgstr[0] "Lim inn %s tekstlinje på offentlig utklippstavle?"
-msgstr[1] "Lim inn %s tekstlinjer på offentlig utklippstavle?"
+msgstr[0] "Lim inn %s tekstlinje på offentlig utklippstjeneste?"
+msgstr[1] "Lim inn %s tekstlinjer på offentlig utklippstjeneste?"
 
-#: ../src/entryArea.js:240
+#: ../src/entryArea.js:304
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Laster opp %s linje med tekst til offentlig utklippstjeneste …"
+msgstr[1] "Laster opp %s linjer med tekst til offentlig utklippstjeneste …"
 
-#: ../src/entryArea.js:247
+#: ../src/entryArea.js:311
 msgid "Upload image to public paste service?"
-msgstr ""
+msgstr "Last opp bilde til offentlig utklippstjeneste?"
 
-#: ../src/entryArea.js:248
+#: ../src/entryArea.js:312
 msgid "Uploading image to public paste service…"
-msgstr ""
+msgstr "Laster opp bilde til offentlig utklippstjeneste …"
+
+#. Translators: %s is a filename
+#: ../src/entryArea.js:333
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Lim inn «%s» på offentlig utklippstavle?"
+
+#. Translators: %s is a filename
+#: ../src/entryArea.js:335
+#, javascript-format
+msgid "Uploading “%s” to public paste service …"
+msgstr "LAster opp «%s» på offentlig utklippstavle …"
 
 #. translators: %s is a nick, #%s a channel
-#: ../src/entryArea.js:257
+#: ../src/entryArea.js:344
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s i #%s"
 
-#: ../src/entryArea.js:259
+#: ../src/entryArea.js:346
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Lim inn fra %s"
@@ -292,12 +319,10 @@ msgstr "Lim inn fra %s"
 #. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
 #.
 #: ../src/ircParser.js:24
-#, fuzzy
 msgid ""
 "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
 msgstr ""
-"/PART [<kanal>] [<grunn>] - forlater <kanal>, eller gjeldende kanal hvis du "
-"ikke velger noe"
+"/CLOSE [<kanal>] [<grunn>] - lukker <kanal>, forvalg er gjeldende kanal"
 
 #: ../src/ircParser.js:25
 msgid ""
@@ -367,165 +392,206 @@ msgid "Unknown command - try /HELP for a list of available commands"
 msgstr ""
 "Ukjent kommando. Prøv /HELP for å se en liste over tilgjengelige kommandoer"
 
-#: ../src/ircParser.js:61
+#: ../src/ircParser.js:56
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Bruk: %s"
 
-#: ../src/ircParser.js:99
+#: ../src/ircParser.js:94
 msgid "Known commands:"
 msgstr "Kjente kommandoer:"
 
-#: ../src/ircParser.js:199
+#: ../src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Brukere på %s:"
 
-#: ../src/ircParser.js:285
+#: ../src/ircParser.js:280
 msgid "No topic set"
 msgstr "Emne er ikke valgt"
 
-#: ../src/joinDialog.js:272
+#: ../src/joinDialog.js:268
 msgid "Join Chat Room"
 msgstr "Bli med i praterom"
 
-#: ../src/joinDialog.js:273
+#: ../src/joinDialog.js:269
 msgid "Add Network"
 msgstr "Legg til nettverk"
 
-#: ../src/mainWindow.js:308
+#: ../src/mainWindow.js:369
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d bruker"
 msgstr[1] "%d brukere"
 
-#: ../src/roomList.js:129
+#: ../src/roomList.js:133
 msgid "Leave chatroom"
 msgstr "Forlat praterom"
 
-#: ../src/roomList.js:129
+#: ../src/roomList.js:133
 msgid "End conversation"
 msgstr "Avslutt samtale"
 
-#: ../src/roomList.js:216
+#: ../src/roomList.js:227
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Nettverk %s har en feil"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: ../src/roomList.js:266
+#: ../src/roomList.js:284
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../src/roomList.js:273
+#: ../src/roomList.js:291
 msgid "Connection Problem"
 msgstr "Feil ved tilkobling"
 
-#: ../src/roomList.js:281
+#: ../src/roomList.js:307
 msgid "Connected"
 msgstr "Koblet til"
 
-#: ../src/roomList.js:283
+#: ../src/roomList.js:309
 msgid "Connecting..."
 msgstr "Kobler til …"
 
-#: ../src/roomList.js:285
+#: ../src/roomList.js:311 ../src/userList.js:418
 msgid "Offline"
 msgstr "Frakoblet"
 
-#: ../src/roomList.js:287
+#: ../src/roomList.js:313
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: ../src/roomList.js:307
+#: ../src/roomList.js:333
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Kunne ikke koble til %s på en sikker måte."
 
-#: ../src/roomList.js:310
+#: ../src/roomList.js:336
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s krever et passord."
 
-#: ../src/roomList.js:316
+#: ../src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Kunne ikke koble til %s. Tjeneren er opptatt."
 
-#: ../src/roomList.js:319
+#: ../src/roomList.js:345
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Kunne ikke koble til %s."
 
-#: ../src/roomStack.js:94
+#: ../src/roomStack.js:125
+msgid "_Save Password"
+msgstr "_Lagre passord"
+
+#: ../src/roomStack.js:134
+msgid "Should the password be saved?"
+msgstr "Skal passordet lagres?"
+
+#: ../src/roomStack.js:142 ../src/telepathyClient.js:572
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr "Identifisering vil skje automatisk neste gang du kobler til %s"
+
+#: ../src/roomStack.js:170
 msgid "Polari"
 msgstr "Polari"
 
-#: ../src/roomStack.js:97
+#: ../src/roomStack.js:173
 msgid "Join a room using the + button."
 msgstr "Bli med i et samtalerom ved å bruke +-knappen"
 
-#: ../src/userList.js:174
+#: ../src/telepathyClient.js:399
+msgid "Good Bye"
+msgstr "Ha det bra"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: ../src/telepathyClient.js:571
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Lagre passord for %s?"
+
+#: ../src/telepathyClient.js:575
+msgid "Save"
+msgstr "Lagre"
+
+#: ../src/userList.js:236
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekund siden"
 msgstr[1] "%d sekunder siden"
 
-#: ../src/userList.js:179
+#: ../src/userList.js:241
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minutt siden"
 msgstr[1] "%d minutter siden"
 
-#: ../src/userList.js:184
+#: ../src/userList.js:246
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d time siden"
 msgstr[1] "%d timer siden"
 
-#: ../src/userList.js:189
+#: ../src/userList.js:251
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag siden"
 msgstr[1] "%d dager siden"
 
-#: ../src/userList.js:194
+#: ../src/userList.js:256
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d uke siden"
 msgstr[1] "%d uker siden"
 
-#: ../src/userList.js:198
+#: ../src/userList.js:260
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d måned siden"
 msgstr[1] "%d måneder siden"
 
-#: ../src/userList.js:218
-msgid "Last Activity:"
-msgstr "Siste aktivitet:"
+#: ../src/userList.js:414
+msgid "Available in another room."
+msgstr "Tilgjengelig i et annet rom."
 
-#: ../src/userList.js:383
+#: ../src/userList.js:416
+msgid "Online"
+msgstr "Tilkoblet"
+
+#: ../src/userList.js:565
 msgid "No results"
 msgstr "Ingen resultater"
 
-#: ../src/userList.js:556
+#: ../src/userList.js:739
 msgid "All"
 msgstr "Alle"
 
-#: ../src/utils.js:121
+#: ../src/utils.js:89
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Passord tjener for %s"
+
+#: ../src/utils.js:94
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Passord NickServ-passord for %s"
+
+#~ msgid "Last Activity:"
+#~ msgstr "Siste aktivitet:"
 
 #~ msgid ""
 #~ "A simple Internet Relay Chat (IRC) client that is designed to integrate "
@@ -653,9 +719,6 @@ msgstr "Passord tjener for %s"
 
 #~ msgid "Room _Name"
 #~ msgstr "_Navn på rom"
-
-#~ msgid "_Password"
-#~ msgstr "_Passord"
 
 #~ msgid "_Add"
 #~ msgstr "_Legg til"
