@@ -7,8 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari 3.22.x\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-15 14:45+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-10-15 15:02+0200\n"
 "PO-Revision-Date: 2016-10-15 14:49+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -317,7 +318,8 @@ msgstr "Lim inn fra %s"
 #: ../src/ircParser.js:24
 msgid ""
 "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
-msgstr "/CLOSE [<kanal>] [<grunn>] - lukker <kanal>, forvalg er gjeldende kanal"
+msgstr ""
+"/CLOSE [<kanal>] [<grunn>] - lukker <kanal>, forvalg er gjeldende kanal"
 
 #: ../src/ircParser.js:25
 msgid ""
@@ -511,7 +513,7 @@ msgstr "Ha det bra"
 #: ../src/telepathyClient.js:569
 #, javascript-format
 msgid "Save %s password for %s?"
-msgstr "Lagre passord for %s?"
+msgstr "Lagre %s-passord for %s?"
 
 #: ../src/telepathyClient.js:573
 msgid "Save"
