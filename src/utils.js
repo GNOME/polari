@@ -159,11 +159,14 @@ function findChannels(str, server) {
 }
 
 function openURL(url, timestamp) {
+    let app = Gio.Application.get_default();
     try {
-        Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
+        if (app.active_window)
+            Gtk.show_uri_on_window (app.active_window, url, timestamp)
+        else
+            Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
     } catch(e) {
         let n = new AppNotifications.SimpleOutput(_("Failed to open link"));
-        let app = Gio.Application.get_default();
         app.notificationQueue.addNotification(n);
         debug("failed to open %s: %s".format(url, e.message));
     }
