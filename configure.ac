@@ -34,7 +34,6 @@ GLIB_GSETTINGS
 
 PKG_CHECK_MODULES(POLARI,
                   gio-2.0 >= 2.43.4
-                  gobject-introspection-1.0
                   gtk+-3.0 >= 3.21.6
                   telepathy-glib);
 
