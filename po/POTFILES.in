@@ -1,3 +1,5 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
 data/appdata/org.gnome.Polari.appdata.xml.in
 data/org.gnome.Polari.desktop.in
 data/org.gnome.Polari.gschema.xml
@@ -23,4 +25,5 @@ src/roomList.js
 src/roomStack.js
 src/telepathyClient.js
 src/userList.js
+src/userTracker.js
 src/utils.js
