@@ -58,7 +58,7 @@ msgstr ""
 
 #: data/org.gnome.Polari.desktop.in:6
 msgid "org.gnome.Polari"
-msgstr "org.gnome.polari"
+msgstr "org.gnome.Polari"
 
 #: data/org.gnome.Polari.desktop.in:13
 msgid "IRC;Internet;Relay;Chat;"
