@@ -33,7 +33,6 @@ LT_INIT([disable-static])
 GLIB_GSETTINGS
 
 PKG_CHECK_MODULES(LIBPOLARI,
-                  gio-2.0 >= 2.43.4
                   gtk+-3.0 >= 3.21.6
                   telepathy-glib);
 PKG_CHECK_MODULES(POLARI,
