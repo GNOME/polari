@@ -1,3 +1,20 @@
+3.23.1 - "Birth and Death in the same Episode"
+==============================================
+* Line-wrap app notifications [Efe; #721763]
+* Mask identify passwords in private chats [Florian; #771888]
+* Use structured logging [Florian; #771218]
+* Fix URL linkification under flatpak [Florian; #772655]
+* Add a contextual popover to nicks in chat log [Rares; #760853]
+* Misc. bug fixes [Florian; #771217, #772068, #771728, #771557,
+  #770749, #773293]
+
+Contributors:
+  Efe Gürkan YALAMAN, Florian Müllner, Rares Visalom
+
+Translations:
+  Milo Casagrande [it], Andika Triwidada [id], Cheng-Chia Tseng [zh_TW],
+  Kjartan Maraas [nb], Marek Černocký [cs], Fabio Tomat [fur]
+
 3.22.0 - "We All Feign a Laugh"
 ===============================
 
