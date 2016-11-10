@@ -12,6 +12,7 @@ const Lang = imports.lang;
 const MainWindow = imports.mainWindow;
 const PasteManager = imports.pasteManager;
 const RoomManager = imports.roomManager;
+const ServerRoomManager = imports.serverRoomManager;
 const TelepathyClient = imports.telepathyClient;
 const UserTracker = imports.userTracker;
 const Utils = imports.utils;
@@ -169,6 +170,7 @@ const Application = new Lang.Class({
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._userStatusMonitor = UserTracker.getUserStatusMonitor();
         this._networksManager = NetworksManager.getDefault();
+        this._serverRoomManager = ServerRoomManager.getDefault();
 
         this._accountsMonitor.connect('account-status-changed',
                                       Lang.bind(this, this._onAccountStatusChanged));

@@ -16,6 +16,7 @@
     <file>roomList.js</file>
     <file>roomManager.js</file>
     <file>roomStack.js</file>
+    <file>serverRoomManager.js</file>
     <file>tabCompletion.js</file>
     <file>telepathyClient.js</file>
     <file>userList.js</file>
