@@ -1,3 +1,14 @@
+3.22.2 - "Hugh Janus"
+=====================
+* Fix glitch when opening user list [Florian; #771557]
+* Fix launching through mission control [Florian; #770749]
+
+Contributors:
+  Florian Müllner
+
+Translations:
+  Kjartan Maraas [nb]
+
 3.22.1 - "Copped Off"
 =====================
 * Line-wrap app notifications [Efe; #721763]
