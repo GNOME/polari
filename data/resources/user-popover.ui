@@ -25,6 +25,9 @@
                     <property name="ellipsize">end</property>
                     <property name="max-width-chars">17</property>
                     <property name="visible">True</property>
+                    <style>
+                      <class name="polari-user-popover-nick" />
+                    </style>
                   </object>
                 </child>
                 <child>
@@ -33,6 +36,9 @@
                     <property name="margin-bottom">0</property>
                     <property name="use-markup">True</property>
                     <property name="visible">True</property>
+                    <style>
+                      <class name="polari-user-popover-status" />
+                    </style>
                   </object>
                 </child>
               </object>

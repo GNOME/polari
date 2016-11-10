@@ -142,3 +142,7 @@
 
 /* the following adds a border on top of the inputbar when users scroll up */
 .polari-chat-view > undershoot.bottom { border-bottom: 1px solid @borders; }
+
+/* tweak labels in the user popover */
+.polari-user-popover-nick { font-weight: bold; }
+.polari-user-popover-status { font-size: smaller; }
