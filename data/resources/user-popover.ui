@@ -38,6 +38,7 @@
                     <property name="visible">True</property>
                     <style>
                       <class name="polari-user-popover-status" />
+                      <class name="dim-label" />
                     </style>
                   </object>
                 </child>

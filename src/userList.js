@@ -342,7 +342,7 @@ const UserPopover = new Lang.Class({
 
         this.parent(params);
 
-        this._statusLabel.set_state_flags(Gtk.StateFlags.LINK, false);
+        this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
 
         this._app = Gio.Application.get_default();
 
@@ -388,7 +388,7 @@ const UserPopover = new Lang.Class({
 
         if (this._globalStatusChangedId > 0)
             this._userTracker.disconnect(this._globalStatusChangedId);
-        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + basenick, Lang.bind(this, this._updateStatusLabel));
+        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + basenick, Lang.bind(this, this._onStatusChanged));
 
         if (this._contactsChangedId > 0)
             this._userTracker.disconnect(this._contactsChangedId);
@@ -396,7 +396,7 @@ const UserPopover = new Lang.Class({
             this._userDetails.user = this._userTracker.lookupContact(this._nickname);
         });
 
-        this._updateStatusLabel();
+        this._onStatusChanged();
         this._updateDetailsContact();
     },
 
@@ -404,7 +404,7 @@ const UserPopover = new Lang.Class({
         return this._nickname;
     },
 
-    _updateStatusLabel: function() {
+    _onStatusChanged: function() {
         let status = this._userTracker.getNickStatus(this._nickname);
         let roomStatus = this._userTracker.getNickRoomStatus(this._nickname,
                                                              this._room);
@@ -418,7 +418,7 @@ const UserPopover = new Lang.Class({
             label = _("Offline");
         this._statusLabel.label = label;
 
-        this._statusLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
+        this._nickLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
     },
 
     _updateDetailsContact: function() {
@@ -426,7 +426,7 @@ const UserPopover = new Lang.Class({
      },
 
     _onNickStatusChanged: function(baseNick, status) {
-        this._updateStatusLabel();
+        this._onStatusChanged();
     }
 });
 
