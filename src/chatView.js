@@ -359,6 +359,7 @@ const ChatView = new Lang.Class({
         this._pending = new Map();
         this._pendingLogs = [];
         this._initialPending = [];
+        this._backlogTimeoutId = 0;
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
         let statusMonitor = UserTracker.getUserStatusMonitor();
@@ -539,6 +540,13 @@ const ChatView = new Lang.Class({
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
+
+        if (this._backlogTimeoutId)
+            Mainloop.source_remove(this._backlogTimeoutId);
+        this._backlogTimeoutId = 0;
+
+        this._logWalker.run_dispose();
+        this._logWalker = null;
     },
 
     _onLogEventsReady: function(lw, res) {
@@ -732,10 +740,11 @@ const ChatView = new Lang.Class({
 
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
-        Mainloop.timeout_add(500, Lang.bind(this,
+        this._backlogTimeoutId = Mainloop.timeout_add(500, Lang.bind(this,
             function() {
                 this._logWalker.get_events_async(NUM_LOG_EVENTS,
                                                  Lang.bind(this, this._onLogEventsReady));
+                this._backlogTimeoutId = 0;
                 return GLib.SOURCE_REMOVE;
             }));
         return Gdk.EVENT_STOP;
