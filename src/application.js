@@ -1,3 +1,4 @@
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -164,6 +165,18 @@ const Application = new Lang.Class({
         this.pasteManager = new PasteManager.PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
+
+        let provider = new Gtk.CssProvider();
+        let uri = 'resource:///org/gnome/Polari/css/application.css';
+        let file = Gio.File.new_for_uri(uri);
+        try {
+            provider.load_from_file(Gio.File.new_for_uri(uri));
+        } catch(e) {
+            logError(e, "Failed to add application style");
+        }
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+                                                 provider,
+                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     },
 
     vfunc_activate: function() {

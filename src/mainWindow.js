@@ -133,8 +133,6 @@ const MainWindow = new Lang.Class({
 
         this.parent(params);
 
-        this._addApplicationStyle();
-
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         this._gtkSettings = Gtk.Settings.get_default();
 
@@ -312,22 +310,6 @@ const MainWindow = new Lang.Class({
                 this._updateUserListLabel();
                 this.emit('active-room-state-changed');
             });
-    },
-
-    _addApplicationStyle: function() {
-        let provider = new Gtk.CssProvider();
-        let uri = 'resource:///org/gnome/Polari/css/application.css';
-        let file = Gio.File.new_for_uri(uri);
-        try {
-            provider.load_from_file(Gio.File.new_for_uri(uri));
-        } catch(e) {
-            logError(e, "Failed to add application style");
-        }
-        Gtk.StyleContext.add_provider_for_screen(
-            this.get_screen(),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        );
     },
 
     _onRoomsLoaded: function(mgr) {
