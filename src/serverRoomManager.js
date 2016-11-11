@@ -5,7 +5,10 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
+const Mainloop = imports.mainloop;
 const Signals = imports.signals;
+
+const LIST_CHUNK_SIZE = 100;
 
 let _singleton = null;
 
@@ -110,6 +113,7 @@ const ServerRoomList = new Lang.Class({
 
     _init: function(params) {
         this._account = null;
+        this._pendingInfos = [];
 
         this.parent(params);
 
@@ -133,7 +137,8 @@ const ServerRoomList = new Lang.Class({
     },
 
     get loading() {
-        return this._account && this._manager.isLoading(this._account);
+        return this._pendingInfos.length ||
+               (this._account && this._manager.isLoading(this._account));
     },
 
     _onRowActivated: function(list, row) {
@@ -150,6 +155,8 @@ const ServerRoomList = new Lang.Class({
             return;
 
         this._account = account;
+        this._pendingInfos = [];
+        this._list.foreach(function(w) { w.destroy(); });
         this._onLoadingChanged(this._manager, account);
     },
 
@@ -171,6 +178,9 @@ const ServerRoomList = new Lang.Class({
 
         this._list.foreach(function(w) { w.destroy(); });
 
+        if (this._idleId)
+            Mainloop.source_remove(this._idleId);
+
         if (!account)
             return;
 
@@ -182,10 +192,22 @@ const ServerRoomList = new Lang.Class({
                 return count2 - count1;
             return info1.get_name().localeCompare(info2.get_name());
         });
-        roomInfos.forEach(roomInfo => {
-            let row = new ServerRoomRow({ info: roomInfo });
-            row.connect('notify::checked', () => { this.notify('can-join'); });
-            this._list.add(row);
+        this._pendingInfos = roomInfos;
+
+        this.notify('loading');
+
+        this._idleId = Mainloop.idle_add(() => {
+            this._pendingInfos.splice(0, LIST_CHUNK_SIZE).forEach(roomInfo => {
+                let row = new ServerRoomRow({ info: roomInfo });
+                row.connect('notify::checked', () => { this.notify('can-join'); });
+                this._list.add(row);
+            });
+            if (this._pendingInfos.length)
+                return GLib.SOURCE_CONTINUE;
+
+            this._idleId = 0;
+            this.notify('loading');
+            return GLib.SOURCE_REMOVE;
         });
     }
 });
