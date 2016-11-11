@@ -306,7 +306,7 @@ const RoomListHeader = new Lang.Class({
             case Tp.ConnectionStatus.CONNECTED:
                 return _("Connected");
             case Tp.ConnectionStatus.CONNECTING:
-                return _("Connecting...");
+                return _("Connecting…");
             case Tp.ConnectionStatus.DISCONNECTED:
                 return _("Offline");
             default:

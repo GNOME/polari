@@ -100,7 +100,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes" context="shortcut window">First - Ninth Room</property>
+                <property name="title" translatable="yes" context="shortcut window">First – Ninth Room</property>
                 <property name="accelerator">&lt;Alt&gt;1...9</property>
               </object>
             </child>

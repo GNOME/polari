@@ -13,31 +13,31 @@ const N_ = function(s) { return s; };
 const knownCommands = {
     /* commands that would be nice to support: */
     /*
-    AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
-    LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
-    MODE: "/MODE <mode> <nick|channel> - ",
-    NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
-    OP: N_("/OP <nick> - gives channel operator status to <nick>"),
-    WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+    AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+    LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+    MODE: "/MODE <mode> <nick|channel> — ",
+    NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+    OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+    WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
     */
 
-    CLOSE: N_("/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"),
-    HELP: N_("/HELP [<command>] - displays help for <command>, or a list of available commands"),
-    INVITE: N_("/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"),
-    JOIN: N_("/JOIN <channel> - joins <channel>"),
-    KICK: N_("/KICK <nick> - kicks <nick> from current channel"),
-    ME: N_("/ME <action> - sends <action> to the current channel"),
-    MSG: N_("/MSG <nick> [<message>] - sends a private message to <nick>"),
-    NAMES: N_("/NAMES - lists users on the current channel"),
-    NICK: N_("/NICK <nickname> - sets your nick to <nickname>"),
-    PART: N_("/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"),
-    QUERY: N_("/QUERY <nick> - opens a private conversation with <nick>"),
-    QUIT: N_("/QUIT [<reason>] - disconnects from the current server"),
-    SAY: N_("/SAY <text> - sends <text> to the current room/contact"),
-    TOPIC: N_("/TOPIC <topic> - sets the topic to <topic>, or shows the current one"),
+    CLOSE: N_("/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"),
+    HELP: N_("/HELP [<command>] — displays help for <command>, or a list of available commands"),
+    INVITE: N_("/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"),
+    JOIN: N_("/JOIN <channel> — joins <channel>"),
+    KICK: N_("/KICK <nick> — kicks <nick> from current channel"),
+    ME: N_("/ME <action> — sends <action> to the current channel"),
+    MSG: N_("/MSG <nick> [<message>] — sends a private message to <nick>"),
+    NAMES: N_("/NAMES — lists users on the current channel"),
+    NICK: N_("/NICK <nickname> — sets your nick to <nickname>"),
+    PART: N_("/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"),
+    QUERY: N_("/QUERY <nick> — opens a private conversation with <nick>"),
+    QUIT: N_("/QUIT [<reason>] — disconnects from the current server"),
+    SAY: N_("/SAY <text> — sends <text> to the current room/contact"),
+    TOPIC: N_("/TOPIC <topic> — sets the topic to <topic>, or shows the current one"),
 };
 const UNKNOWN_COMMAND_MESSAGE =
-    N_("Unknown command - try /HELP for a list of available commands");
+    N_("Unknown command — try /HELP for a list of available commands");
 
 const IrcParser = new Lang.Class({
     Name: 'IrcParser',
