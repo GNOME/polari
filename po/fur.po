@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-21 12:29+0000\n"
-"PO-Revision-Date: 2016-10-28 22:05+0200\n"
+"POT-Creation-Date: 2016-11-11 17:28+0000\n"
+"PO-Revision-Date: 2016-11-11 20:24+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:531
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:532
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un program IRC par GNOME"
 
@@ -44,13 +44,14 @@ msgstr ""
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
-"miss an important message - for private conversations, they even allow you "
+"miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"Al è pussibil doprâ Polari par cjacarâ cun altris personis intun canâl e vê "
-"conversazions privadis. Lis notifichis a permetin di no pierdi mai nissun "
-"messaç impuartant: tes conversazions privadis al è pussibil rispuindi "
-"subite, lì de notifiche, cence vê di doprâ par fuarce l'aplicazion."
+"Al è pussibil doprâ Polari par cjacarâ in public cun altris personis intun "
+"canâl e vê conversazions privadis. Lis notifichis a permetin di no pierdi "
+"mai nissun messaç impuartant — pes conversazions privadis al è pussibil "
+"rispuindi subite, lì de notifiche, cence vê di doprâ par fuarce la "
+"aplicazion!"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
@@ -112,7 +113,7 @@ msgstr "Non utent di doprâ tal comant di identificazion"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
-msgstr "Direzion _Server"
+msgstr "Direzion _Servidôr"
 
 #: data/resources/connection-details.ui:33
 msgid "Net_work Name"
@@ -228,8 +229,8 @@ msgstr "Ultime stanzie"
 
 #: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
-msgid "First - Ninth Room"
-msgstr "Prime - None stanzie"
+msgid "First – Ninth Room"
+msgstr "Prime – None stanzie"
 
 #: data/resources/join-room-dialog.ui:21 src/joinDialog.js:268
 msgid "Join Chat Room"
@@ -315,24 +316,24 @@ msgstr "Al notificarà se l'utent al ven fûr in rêt."
 msgid "Message"
 msgstr "Messaç"
 
-#: src/application.js:38
-msgid "Start Telephathy client"
+#: src/application.js:39
+msgid "Start Telepathy client"
 msgstr "Invie il client Telephathy"
 
-#: src/application.js:253 src/utils.js:167
+#: src/application.js:254 src/utils.js:169
 msgid "Failed to open link"
 msgstr "Impussibil vierzi il link"
 
-#: src/application.js:460
+#: src/application.js:461
 #, javascript-format
 msgid "%s removed."
 msgstr "%s gjavât."
 
-#: src/application.js:530
+#: src/application.js:531
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>"
 
-#: src/application.js:536
+#: src/application.js:537
 msgid "Learn more about Polari"
 msgstr "Plui informazions su Polari"
 
@@ -537,8 +538,8 @@ msgstr "Cjariâ \"%s\" suntun servizi public par incolâ?"
 #. Translators: %s is a filename
 #: src/entryArea.js:335
 #, javascript-format
-msgid "Uploading “%s” to public paste service …"
-msgstr "Daûr a cjariâ \"%s\" suntun servizi public par incolâ robis..."
+msgid "Uploading “%s” to public paste service…"
+msgstr "Daûr a cjariâ “%s” suntun servizi public par incolâ robis..."
 
 #. translators: %s is a nick, #%s a channel
 #: src/entryArea.js:344
@@ -553,82 +554,82 @@ msgstr "Tache da %s"
 
 #. commands that would be nice to support:
 #.
-#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
-#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
-#. MODE: "/MODE <mode> <nick|channel> - ",
-#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
-#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
 #: src/ircParser.js:24
 msgid ""
-"/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
-"/CLOSE [<canâl>] [<motîf>] - Al siere <canâl>, se no specificât, chel atuâl"
+"/CLOSE [<canâl>] [<motîf>] — Al siere <canâl>, se no specificât, chel atuâl"
 
 #: src/ircParser.js:25
 msgid ""
-"/HELP [<command>] - displays help for <command>, or a list of available "
+"/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr ""
-"/HELP [<comant>] - Mostre il jutori par <comant> o une liste di comants "
+"/HELP [<comant>] — Mostre il jutori par <comant> o une liste di comants "
 "disponibii"
 
 #: src/ircParser.js:26
 msgid ""
-"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <sorenon> [<canâl>] - invite <sorenon> tal <canâl> o tal canâl atuâl"
+"/INVITE <sorenon> [<canâl>] — invite <sorenon> tal <canâl> o tal canâl atuâl"
 
 #: src/ircParser.js:27
-msgid "/JOIN <channel> - joins <channel>"
-msgstr "/JOIN <canâl> - Jentre tal <canâl>"
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <canâl> — Jentre tal <canâl>"
 
 #: src/ircParser.js:28
-msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr "/KICK <sorenon> - Pare fûr <sorenon> dal canâl atuâl"
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <sorenon> — Pare fûr <sorenon> dal canâl atuâl"
 
 #: src/ircParser.js:29
-msgid "/ME <action> - sends <action> to the current channel"
-msgstr "/ME <azion> - invie <azion> al canâl atuâl"
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <azion> — invie <azion> al canâl atuâl"
 
 #: src/ircParser.js:30
-msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
-msgstr "/MSG <sorenon> [<messaç>] - invie un messaç privât a <sorenon>"
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <sorenon> [<messaç>] — invie un messaç privât a <sorenon>"
 
 #: src/ircParser.js:31
-msgid "/NAMES - lists users on the current channel"
-msgstr "/NAMES - liste i utents presints tal canâl atuâl"
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — liste i utents presints tal canâl atuâl"
 
 #: src/ircParser.js:32
-msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <sorenon> - Al met il propri sorenon a <sorenon>"
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <sorenon> — Al met il propri sorenon a <sorenon>"
 
 #: src/ircParser.js:33
 msgid ""
-"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
-"/PART [<canâl>] [<motîf>] - Jes dal <canâl>, se no specificât, chel atuâl"
+"/PART [<canâl>] [<motîf>] — Jes dal <canâl>, se no specificât, chel atuâl"
 
 #: src/ircParser.js:34
-msgid "/QUERY <nick> - opens a private conversation with <nick>"
-msgstr "/QUERY <sorenon> - vierç une conversazion privade cun <sorenon>"
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <sorenon> — vierç une conversazion privade cun <sorenon>"
 
 #: src/ircParser.js:35
-msgid "/QUIT [<reason>] - disconnects from the current server"
-msgstr "/QUIT [<motîf>] - Disconeti dal server atuâl"
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<motîf>] — Disconeti dal servidôr atuâl"
 
 #: src/ircParser.js:36
-msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr "/SAY <test> - Invie un <test> al canâl/contat atuâl"
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <test> — Invie un <test> al canâl/contat atuâl"
 
 #: src/ircParser.js:37
-msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
-msgstr "/TOPIC <argoment> - Al met l'argoment a <argoment> o mostre chel atuâl"
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <argoment> — Al met l'argoment a <argoment> o mostre chel atuâl"
 
 #: src/ircParser.js:40
-msgid "Unknown command - try /HELP for a list of available commands"
-msgstr "Comant no cognossût - prove /HELP pe liste dai comants disponibii"
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "Comant no cognossût — prove /HELP pe liste dai comants disponibii"
 
 #: src/ircParser.js:56
 #, javascript-format
@@ -688,7 +689,7 @@ msgid "Connected"
 msgstr "Conetût"
 
 #: src/roomList.js:309
-msgid "Connecting..."
+msgid "Connecting…"
 msgstr "Daûr a coneti..."
 
 #: src/roomList.js:311 src/userList.js:418
