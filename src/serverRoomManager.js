@@ -6,6 +6,7 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const RoomManager = imports.roomManager;
 const Signals = imports.signals;
 
 const LIST_CHUNK_SIZE = 100;
@@ -133,7 +134,7 @@ const ServerRoomList = new Lang.Class({
     },
 
     get can_join() {
-        return this._list.get_children().some(r => r.checked);
+        return this._list.get_children().some(r => r.sensitive && r.checked);
     },
 
     get loading() {
@@ -231,6 +232,9 @@ const ServerRoomRow = new Lang.Class({
 
         this.parent(params);
 
+        let room = RoomManager.getDefault().lookupRoomByName(this._info.get_name());
+        this.sensitive = !room;
+
         let name = this._info.get_name();
         if (name[0] == '#')
            name = name.substr(1, name.length);
@@ -238,7 +242,7 @@ const ServerRoomRow = new Lang.Class({
         let box = new Gtk.Box({ spacing: 12, margin: 12 });
         this.add(box);
 
-        this._checkbox = new Gtk.CheckButton();
+        this._checkbox = new Gtk.CheckButton({ active: !this.sensitive });
         this._checkbox.connect('toggled', Lang.bind(this,
             function() {
                 this.notify('checked');
