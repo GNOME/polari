@@ -36,7 +36,7 @@ const Application = new Lang.Class({
 
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _("Start Telephathy client"), null);
+                             _("Start Telepathy client"), null);
         this.connect('handle-local-options', (o, dict) => {
             try {
                 this.register(null);

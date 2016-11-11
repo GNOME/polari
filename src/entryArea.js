@@ -332,7 +332,7 @@ const EntryArea = new Lang.Class({
         /* Translators: %s is a filename */
         this._confirmLabel.label = _("Upload “%s” to public paste service?").format(name);
         /* Translators: %s is a filename */
-        this._uploadLabel.label = _("Uploading “%s” to public paste service …").format(name);
+        this._uploadLabel.label = _("Uploading “%s” to public paste service…").format(name);
         this._setPasteContent(file);
     },
 
