@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-11-11 17:28+0000\n"
-"PO-Revision-Date: 2016-11-11 20:24+0100\n"
+"POT-Creation-Date: 2016-11-18 12:48+0000\n"
+"PO-Revision-Date: 2016-11-20 07:04+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:13
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
 #: src/roomStack.js:170
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:532
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:588
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un program IRC par GNOME"
 
@@ -71,43 +71,51 @@ msgstr "Liste di canâi salvâts"
 msgid "List of channels to restore on startup"
 msgstr "Liste di canâi di ripristinâ tal inviament"
 
-#: data/org.gnome.Polari.gschema.xml:11
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+msgid "Run in Background"
+msgstr "Zire in fonts"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "Continue a eseguî in fonts cuant che si siere."
+
+#: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
 msgstr "Dimension barcon"
 
-#: data/org.gnome.Polari.gschema.xml:12
+#: data/org.gnome.Polari.gschema.xml:17
 msgid "Window size (width and height)."
 msgstr "Dimension barcon (largjece e altece)."
 
-#: data/org.gnome.Polari.gschema.xml:16
+#: data/org.gnome.Polari.gschema.xml:21
 msgid "Window maximized"
 msgstr "Barcon slargjât"
 
-#: data/org.gnome.Polari.gschema.xml:17
+#: data/org.gnome.Polari.gschema.xml:22
 msgid "Window maximized state"
 msgstr "Stât dal barcon slargjât"
 
-#: data/org.gnome.Polari.gschema.xml:21
+#: data/org.gnome.Polari.gschema.xml:26
 msgid "Last active channel"
 msgstr "Ultin canâl atîf"
 
-#: data/org.gnome.Polari.gschema.xml:22
+#: data/org.gnome.Polari.gschema.xml:27
 msgid "Last active (selected) channel"
 msgstr "Ultin canâl (selezionât) atîf"
 
-#: data/org.gnome.Polari.gschema.xml:29
+#: data/org.gnome.Polari.gschema.xml:34
 msgid "Identify botname"
 msgstr "non dal bot di identificazion"
 
-#: data/org.gnome.Polari.gschema.xml:30
+#: data/org.gnome.Polari.gschema.xml:35
 msgid "Nickname of the bot to identify with"
 msgstr "Sorenon dal bot cul cuâl identificâsi"
 
-#: data/org.gnome.Polari.gschema.xml:34
+#: data/org.gnome.Polari.gschema.xml:39
 msgid "Identify username"
 msgstr "non utent di identificazion"
 
-#: data/org.gnome.Polari.gschema.xml:35
+#: data/org.gnome.Polari.gschema.xml:40
 msgid "Username to use in identify command"
 msgstr "Non utent di doprâ tal comant di identificazion"
 
@@ -137,7 +145,7 @@ msgstr "Sore_non"
 msgid "_Real Name"
 msgstr "Non _reâl"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:146
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:147
 #: data/resources/join-room-dialog.ui:28
 msgid "_Cancel"
 msgstr "_Anule"
@@ -158,7 +166,7 @@ msgstr "_Cambie"
 msgid "Change nickname"
 msgstr "Cambie sorenon"
 
-#: data/resources/entry-area.ui:156
+#: data/resources/entry-area.ui:157
 msgid "_Paste"
 msgstr "_Tache"
 
@@ -264,23 +272,43 @@ msgstr "_Zonte"
 msgid "_Custom Network"
 msgstr "Rêt _personalizade"
 
-#: data/resources/main-window.ui:42
+#: data/resources/main-window.ui:14
+msgid "Run Polari in the Background?"
+msgstr "Eseguî Polari in fonts (background)"
+
+#: data/resources/main-window.ui:15
+msgid ""
+"Polari will continue to run when closed and will be automatically started on "
+"login."
+msgstr ""
+"Cuant che tu sieris Polari al continuarà a zirâ e si inviarà in automatic al "
+"acès."
+
+#: data/resources/main-window.ui:21
+msgid "_Quit"
+msgstr "_Jes"
+
+#: data/resources/main-window.ui:28
+msgid "_Run in background"
+msgstr "_Eseguìs in fonts (background)"
+
+#: data/resources/main-window.ui:68
 msgid "Add rooms and networks"
 msgstr "Zonte stanziis e rêts"
 
-#: data/resources/menus.ui:6
+#: data/resources/menus.ui:12
 msgid "Keyboard Shortcuts"
 msgstr "Scurte di tastiere"
 
-#: data/resources/menus.ui:10
+#: data/resources/menus.ui:16
 msgid "Help"
 msgstr "Jutori"
 
-#: data/resources/menus.ui:14
+#: data/resources/menus.ui:20
 msgid "About"
 msgstr "Informazions"
 
-#: data/resources/menus.ui:18
+#: data/resources/menus.ui:24
 msgid "Quit"
 msgstr "Jes"
 
@@ -316,24 +344,24 @@ msgstr "Al notificarà se l'utent al ven fûr in rêt."
 msgid "Message"
 msgstr "Messaç"
 
-#: src/application.js:39
+#: src/application.js:43
 msgid "Start Telepathy client"
 msgstr "Invie il client Telephathy"
 
-#: src/application.js:254 src/utils.js:169
+#: src/application.js:281 src/utils.js:169
 msgid "Failed to open link"
 msgstr "Impussibil vierzi il link"
 
-#: src/application.js:461
+#: src/application.js:488
 #, javascript-format
 msgid "%s removed."
 msgstr "%s gjavât."
 
-#: src/application.js:531
+#: src/application.js:587
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>"
 
-#: src/application.js:537
+#: src/application.js:593
 msgid "Learn more about Polari"
 msgstr "Plui informazions su Polari"
 
@@ -345,62 +373,62 @@ msgstr "Anule"
 msgid "New Messages"
 msgstr "Gnûf messaç"
 
-#: src/chatView.js:775
+#: src/chatView.js:784
 msgid "Open Link"
 msgstr "Vierç Link"
 
-#: src/chatView.js:781
+#: src/chatView.js:790
 msgid "Copy Link Address"
 msgstr "Copie direzion link"
 
-#: src/chatView.js:956
+#: src/chatView.js:965
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "L'utent %s al è cognossût cumò come %s"
 
-#: src/chatView.js:961
+#: src/chatView.js:970
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "L'utent %s si è disconetût"
 
-#: src/chatView.js:969
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "L'utent %s al è stât parât fûr (kick) di %s"
 
-#: src/chatView.js:971
+#: src/chatView.js:980
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "L'utent %s al è stât parât fûr"
 
-#: src/chatView.js:977
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "L'utent %s al è stât bandît di %s"
 
-#: src/chatView.js:979
+#: src/chatView.js:988
 #, javascript-format
 msgid "%s has been banned"
 msgstr "L'utent %s al è stât bandît"
 
-#: src/chatView.js:984
+#: src/chatView.js:993
 #, javascript-format
 msgid "%s joined"
 msgstr "L'utent %s al è jentrât"
 
-#: src/chatView.js:989
+#: src/chatView.js:998
 #, javascript-format
 msgid "%s left"
 msgstr "L'utent %s al è lât vie"
 
-#: src/chatView.js:1084
+#: src/chatView.js:1093
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "L'utent %d al è jentrât"
 msgstr[1] "I utents %d a son jentrâts"
 
-#: src/chatView.js:1087
+#: src/chatView.js:1096
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -409,14 +437,14 @@ msgstr[1] "%d utents jessûts"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1154
+#: src/chatView.js:1163
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1159
+#: src/chatView.js:1168
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Îr, %H∶%M"
@@ -424,7 +452,7 @@ msgstr "Îr, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1164
+#: src/chatView.js:1173
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -433,7 +461,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1170
+#: src/chatView.js:1179
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d di %B, %H∶%M"
@@ -442,21 +470,21 @@ msgstr "%d di %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1176
+#: src/chatView.js:1185
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d di %B dal %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1181
+#: src/chatView.js:1190
 msgid "%l∶%M %p"
 msgstr "%I∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1186
+#: src/chatView.js:1195
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Îr, %I∶%M %p"
@@ -464,7 +492,7 @@ msgstr "Îr, %I∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1191
+#: src/chatView.js:1200
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %I∶%M %p"
@@ -473,7 +501,7 @@ msgstr "%A, %I∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1197
+#: src/chatView.js:1206
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d di %B, %I∶%M %p"
@@ -482,7 +510,7 @@ msgstr "%d di %B, %I∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1203
+#: src/chatView.js:1212
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d di %B dal %Y, %I∶%M %p"
@@ -653,7 +681,7 @@ msgstr "Nissun argoment impuestât"
 msgid "Add Network"
 msgstr "Zonte rêt"
 
-#: src/mainWindow.js:369
+#: src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
