@@ -7,9 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari 3.23.x\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-15 14:50+0200\n"
-"PO-Revision-Date: 2016-10-15 14:50+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-11-20 22:55+0100\n"
+"PO-Revision-Date: 2016-11-20 22:58+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -28,59 +29,67 @@ msgid "List of channels to restore on startup"
 msgstr "Liste med kanaler som skal gjenopprettes ved oppstart"
 
 #: ../data/org.gnome.Polari.gschema.xml.h:3
+msgid "Run in Background"
+msgstr "Kjør i bakgrunnen"
+
+#: ../data/org.gnome.Polari.gschema.xml.h:4
+msgid "Keep running in background when closed."
+msgstr "Fortsett å kjøre i bakgrunnen når vinduet lukkes."
+
+#: ../data/org.gnome.Polari.gschema.xml.h:5
 msgid "Window size"
 msgstr "Vindustørrelse"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:4
+#: ../data/org.gnome.Polari.gschema.xml.h:6
 msgid "Window size (width and height)."
 msgstr "Vindustørrelse (bredde og høyde)."
 
-#: ../data/org.gnome.Polari.gschema.xml.h:5
+#: ../data/org.gnome.Polari.gschema.xml.h:7
 msgid "Window maximized"
 msgstr "Vindu er maksimert"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:6
+#: ../data/org.gnome.Polari.gschema.xml.h:8
 msgid "Window maximized state"
 msgstr "Vinduets maksimeringstilstand"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:7
+#: ../data/org.gnome.Polari.gschema.xml.h:9
 msgid "Last active channel"
 msgstr "Sist aktive kanal"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:8
+#: ../data/org.gnome.Polari.gschema.xml.h:10
 msgid "Last active (selected) channel"
 msgstr "Sist aktive (valgte) kanal"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:9
+#: ../data/org.gnome.Polari.gschema.xml.h:11
 msgid "Identify botname"
 msgstr "Identifiser navn på bot"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:10
+#: ../data/org.gnome.Polari.gschema.xml.h:12
 msgid "Nickname of the bot to identify with"
 msgstr "Kallenavn på bot for identifisering"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:11
+#: ../data/org.gnome.Polari.gschema.xml.h:13
 msgid "Identify username"
 msgstr "Brukernavn for identifisering"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:12
+#: ../data/org.gnome.Polari.gschema.xml.h:14
 msgid "Username to use in identify command"
 msgstr "Brukernavn som skal brukes i identifiseringskommando"
 
-#: ../src/application.js:38
-msgid "Start Telephathy client"
+#: ../src/application.js:43
+msgid "Start Telepathy client"
 msgstr "Start Telepathy-klient"
 
-#: ../src/application.js:253 ../src/utils.js:167
+#: ../src/application.js:281 ../src/utils.js:169
 msgid "Failed to open link"
 msgstr "Klarte ikke å åpne lenke"
 
-#: ../src/application.js:460
+#: ../src/application.js:488
 #, javascript-format
 msgid "%s removed."
 msgstr "%s fjernet."
 
-#: ../src/application.js:530
+#: ../src/application.js:587
 msgid "translator-credits"
 msgstr ""
 "Øivind Hoel <ohoel@cvs.gnome.org>\n"
@@ -88,11 +97,11 @@ msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Åka Sikrom <a4NOSPAMPLEASETHANKYOU@hush.com>"
 
-#: ../src/application.js:531
+#: ../src/application.js:588
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En Internet Relay Chat-klient for GNOME"
 
-#: ../src/application.js:536
+#: ../src/application.js:593
 msgid "Learn more about Polari"
 msgstr "Lær mer om Polari"
 
@@ -104,62 +113,62 @@ msgstr "Angre"
 msgid "New Messages"
 msgstr "Nye meldinger"
 
-#: ../src/chatView.js:775
+#: ../src/chatView.js:784
 msgid "Open Link"
 msgstr "Åpne lenke"
 
-#: ../src/chatView.js:781
+#: ../src/chatView.js:790
 msgid "Copy Link Address"
 msgstr "Kopier lenkeadresse"
 
-#: ../src/chatView.js:956
+#: ../src/chatView.js:965
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s er nå kjent som %s"
 
-#: ../src/chatView.js:961
+#: ../src/chatView.js:970
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s har koblet fra"
 
-#: ../src/chatView.js:969
+#: ../src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s er kastet ut av %s"
 
-#: ../src/chatView.js:971
+#: ../src/chatView.js:980
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s er kastet ut"
 
-#: ../src/chatView.js:977
+#: ../src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s er nå utestengt av %s"
 
-#: ../src/chatView.js:979
+#: ../src/chatView.js:988
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s er nå utestengt"
 
-#: ../src/chatView.js:984
+#: ../src/chatView.js:993
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ble med"
 
-#: ../src/chatView.js:989
+#: ../src/chatView.js:998
 #, javascript-format
 msgid "%s left"
 msgstr "%s gikk ut"
 
-#: ../src/chatView.js:1084
+#: ../src/chatView.js:1093
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d bruker ble med"
 msgstr[1] "%d brukere ble med"
 
-#: ../src/chatView.js:1087
+#: ../src/chatView.js:1096
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -168,14 +177,14 @@ msgstr[1] "%d brukere igjen"
 
 #. today
 #. Translators: Time in 24h format
-#: ../src/chatView.js:1154
+#: ../src/chatView.js:1163
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: ../src/chatView.js:1159
+#: ../src/chatView.js:1168
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "I går, %H.%M"
@@ -183,7 +192,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: ../src/chatView.js:1164
+#: ../src/chatView.js:1173
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
@@ -192,7 +201,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: ../src/chatView.js:1170
+#: ../src/chatView.js:1179
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H.%M"
@@ -201,21 +210,21 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: ../src/chatView.js:1176
+#: ../src/chatView.js:1185
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H.%M"
 
 #. today
 #. Translators: Time in 12h format
-#: ../src/chatView.js:1181
+#: ../src/chatView.js:1190
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: ../src/chatView.js:1186
+#: ../src/chatView.js:1195
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "I går, %H.%M"
@@ -223,7 +232,7 @@ msgstr "I går, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: ../src/chatView.js:1191
+#: ../src/chatView.js:1200
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
@@ -232,7 +241,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: ../src/chatView.js:1197
+#: ../src/chatView.js:1206
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %H.%M"
@@ -241,7 +250,7 @@ msgstr "%d %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: ../src/chatView.js:1203
+#: ../src/chatView.js:1212
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %H.%M"
@@ -295,8 +304,8 @@ msgstr "Lim inn «%s» på offentlig utklippstavle?"
 #. Translators: %s is a filename
 #: ../src/entryArea.js:335
 #, javascript-format
-msgid "Uploading “%s” to public paste service …"
-msgstr "LAster opp «%s» på offentlig utklippstavle …"
+msgid "Uploading “%s” to public paste service…"
+msgstr "Laster opp «%s» på offentlig utklippstavle …"
 
 #. translators: %s is a nick, #%s a channel
 #: ../src/entryArea.js:344
@@ -311,86 +320,77 @@ msgstr "Lim inn fra %s"
 
 #. commands that would be nice to support:
 #.
-#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
-#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
-#. MODE: "/MODE <mode> <nick|channel> - ",
-#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
-#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
 #: ../src/ircParser.js:24
 msgid ""
-"/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current one"
-msgstr ""
-"/CLOSE [<kanal>] [<grunn>] - lukker <kanal>, forvalg er gjeldende kanal"
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr "/CLOSE [<kanal>] [<grunn>] – lukker <kanal>, forvalg er gjeldende kanal"
 
 #: ../src/ircParser.js:25
 msgid ""
-"/HELP [<command>] - displays help for <command>, or a list of available "
+"/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
-msgstr ""
-"/HELP [<kommando>] - viser hjelpetekst for <kommando>, eller en liste over "
-"tilgjengelige kommandoer"
+msgstr "/HELP [<kommando>] – viser hjelpetekst for <kommando>, eller en liste over tilgjengelige kommandoer"
 
 #: ../src/ircParser.js:26
 msgid ""
-"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
-msgstr ""
-"/INVITE <kallenavn> [<kanal>] - inviterer <kallenavn> til <kanal>, evt. "
-"gjeldende kanal"
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr "/INVITE <kallenavn> [<kanal>] – inviterer <kallenavn> til <kanal>, evt. gjeldende kanal"
 
 #: ../src/ircParser.js:27
-msgid "/JOIN <channel> - joins <channel>"
-msgstr "/JOIN <kanal> - blir med i <kanal>"
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <kanal> – blir med i <kanal>"
 
 #: ../src/ircParser.js:28
-msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr "/KICK <kallenavn> - kaster ut <kallenavn> fra gjeldende kanal"
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <kallenavn> – kaster ut <kallenavn> fra gjeldende kanal"
 
 #: ../src/ircParser.js:29
-msgid "/ME <action> - sends <action> to the current channel"
-msgstr "/ME <handling> - sender <handling> til gjeldende kanal"
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <handling> – sender <handling> til gjeldende kanal"
 
 #: ../src/ircParser.js:30
-msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
-msgstr "/MSG <kallenavn> - sender en privat melding til <kallenavn>"
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <kallenavn> – sender en privat melding til <kallenavn>"
 
 #: ../src/ircParser.js:31
-msgid "/NAMES - lists users on the current channel"
-msgstr "/NAMES - viser brukere i gjeldende kanal"
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES – viser brukere i gjeldende kanal"
 
 #: ../src/ircParser.js:32
-msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <kallenavn> - endrer eget kallenavn til <kallenavn>"
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <kallenavn> – endrer eget kallenavn til <kallenavn>"
 
 #: ../src/ircParser.js:33
 msgid ""
-"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
-msgstr ""
-"/PART [<kanal>] [<grunn>] - forlater <kanal>, eller gjeldende kanal hvis du "
-"ikke velger noe"
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr "/PART [<kanal>] [<grunn>] – forlater <kanal>, eller gjeldende kanal hvis du ikke velger noe"
 
 #: ../src/ircParser.js:34
-msgid "/QUERY <nick> - opens a private conversation with <nick>"
-msgstr "/QUERY <kallenavn> - åpner en privat samtale med <kallenavn>"
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <kallenavn> – åpner en privat samtale med <kallenavn>"
 
 #: ../src/ircParser.js:35
-msgid "/QUIT [<reason>] - disconnects from the current server"
-msgstr "/QUIT [<grunn>] - kobler fra gjeldende tjener"
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<grunn>] – kobler fra gjeldende tjener"
 
 #: ../src/ircParser.js:36
-msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr "/SAY <tekst> - sender <tekst> til gjeldende rom/kontakt"
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <tekst> – sender <tekst> til gjeldende rom/kontakt"
 
 #: ../src/ircParser.js:37
-msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
-msgstr ""
-"/TOPIC <tema> - endrer kanaltema til <tema>, eller viser gjeldende tema"
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <tema> – endrer kanaltema til <tema>, eller viser gjeldende tema"
 
 #: ../src/ircParser.js:40
-msgid "Unknown command - try /HELP for a list of available commands"
-msgstr ""
-"Ukjent kommando. Prøv /HELP for å se en liste over tilgjengelige kommandoer"
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "Ukjent kommando – prøv /HELP for å se en liste over tilgjengelige kommandoer"
 
 #: ../src/ircParser.js:56
 #, javascript-format
@@ -418,7 +418,7 @@ msgstr "Bli med i praterom"
 msgid "Add Network"
 msgstr "Legg til nettverk"
 
-#: ../src/mainWindow.js:369
+#: ../src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -454,7 +454,7 @@ msgid "Connected"
 msgstr "Koblet til"
 
 #: ../src/roomList.js:309
-msgid "Connecting..."
+msgid "Connecting…"
 msgstr "Kobler til …"
 
 #: ../src/roomList.js:311 ../src/userList.js:418
@@ -580,6 +580,15 @@ msgstr "Ingen resultater"
 msgid "All"
 msgstr "Alle"
 
+#: ../src/userTracker.js:301
+msgid "User is online"
+msgstr "Bruker er tilkoblet"
+
+#: ../src/userTracker.js:302
+#, javascript-format
+msgid "User %s is now online."
+msgstr "Bruker %s er nå tilkoblet."
+
 #: ../src/utils.js:89
 #, javascript-format
 msgid "Polari server password for %s"
@@ -589,9 +598,6 @@ msgstr "Passord tjener for %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Passord NickServ-passord for %s"
-
-#~ msgid "Last Activity:"
-#~ msgstr "Siste aktivitet:"
 
 #~ msgid ""
 #~ "A simple Internet Relay Chat (IRC) client that is designed to integrate "
