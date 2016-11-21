@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-11-11 17:28+0000\n"
-"PO-Revision-Date: 2016-11-42 11:43+0100\n"
+"POT-Creation-Date: 2016-11-18 12:48+0000\n"
+"PO-Revision-Date: 2016-11-21 10:37+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
-"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
+"Language-Team: čeština <gnome-cs-list@gnome.org>>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:13
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
 #: src/roomStack.js:170
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:532
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:588
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Komunikační klient IRC pro GNOME"
 
@@ -70,43 +70,51 @@ msgstr "Seznam uložených kanálů"
 msgid "List of channels to restore on startup"
 msgstr "Seznam kanálů, které se mají obnovit po spuštění."
 
-#: data/org.gnome.Polari.gschema.xml:11
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+msgid "Run in Background"
+msgstr "Běžet na pozadí"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "Po zavření aplikace ji nechat běžet na pozadí."
+
+#: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
 msgstr "Velikost okna"
 
-#: data/org.gnome.Polari.gschema.xml:12
+#: data/org.gnome.Polari.gschema.xml:17
 msgid "Window size (width and height)."
 msgstr "Velikost okna (šířka a výška)."
 
-#: data/org.gnome.Polari.gschema.xml:16
+#: data/org.gnome.Polari.gschema.xml:21
 msgid "Window maximized"
 msgstr "Maximalizace okna"
 
-#: data/org.gnome.Polari.gschema.xml:17
+#: data/org.gnome.Polari.gschema.xml:22
 msgid "Window maximized state"
 msgstr "Stav maximalizace okna."
 
-#: data/org.gnome.Polari.gschema.xml:21
+#: data/org.gnome.Polari.gschema.xml:26
 msgid "Last active channel"
 msgstr "Poslední aktivní kanál"
 
-#: data/org.gnome.Polari.gschema.xml:22
+#: data/org.gnome.Polari.gschema.xml:27
 msgid "Last active (selected) channel"
 msgstr "Poslední aktivní (vybraný) kanál."
 
-#: data/org.gnome.Polari.gschema.xml:29
+#: data/org.gnome.Polari.gschema.xml:34
 msgid "Identify botname"
 msgstr "Identifikační robot"
 
-#: data/org.gnome.Polari.gschema.xml:30
+#: data/org.gnome.Polari.gschema.xml:35
 msgid "Nickname of the bot to identify with"
 msgstr "Přezdívka robota, pomocí kterého se uživatel identifikuje."
 
-#: data/org.gnome.Polari.gschema.xml:34
+#: data/org.gnome.Polari.gschema.xml:39
 msgid "Identify username"
 msgstr "Uživatelské jméno pro identifikaci"
 
-#: data/org.gnome.Polari.gschema.xml:35
+#: data/org.gnome.Polari.gschema.xml:40
 msgid "Username to use in identify command"
 msgstr "Uživatelské jméno pro identifikační příkaz."
 
@@ -136,7 +144,7 @@ msgstr "Přez_dívka"
 msgid "_Real Name"
 msgstr "_Skutečné jméno"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:146
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:147
 #: data/resources/join-room-dialog.ui:28
 msgid "_Cancel"
 msgstr "_Zrušit"
@@ -157,7 +165,7 @@ msgstr "Z_měnit"
 msgid "Change nickname"
 msgstr "Změnit přezdívku"
 
-#: data/resources/entry-area.ui:156
+#: data/resources/entry-area.ui:157
 msgid "_Paste"
 msgstr "V_ložit"
 
@@ -263,23 +271,43 @@ msgstr "Přid_at"
 msgid "_Custom Network"
 msgstr "_Vlastní síť"
 
-#: data/resources/main-window.ui:42
+#: data/resources/main-window.ui:14
+msgid "Run Polari in the Background?"
+msgstr "Nechat Polari běžet na pozadí?"
+
+#: data/resources/main-window.ui:15
+msgid ""
+"Polari will continue to run when closed and will be automatically started on "
+"login."
+msgstr ""
+"Polari zůstane skrytě běžet, i když jej zavřete a automaticky se spustí po "
+"vašem přihlášení."
+
+#: data/resources/main-window.ui:21
+msgid "_Quit"
+msgstr "U_končit"
+
+#: data/resources/main-window.ui:28
+msgid "_Run in background"
+msgstr "Běžet na _pozadí"
+
+#: data/resources/main-window.ui:68
 msgid "Add rooms and networks"
 msgstr "Přidat místnosti a sítě"
 
-#: data/resources/menus.ui:6
+#: data/resources/menus.ui:12
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: data/resources/menus.ui:10
+#: data/resources/menus.ui:16
 msgid "Help"
 msgstr "Nápověda"
 
-#: data/resources/menus.ui:14
+#: data/resources/menus.ui:20
 msgid "About"
 msgstr "O aplikaci"
 
-#: data/resources/menus.ui:18
+#: data/resources/menus.ui:24
 msgid "Quit"
 msgstr "Ukončit"
 
@@ -315,24 +343,24 @@ msgstr "Budete upozorněni, kdy se uživatel připojí."
 msgid "Message"
 msgstr "Zpráva"
 
-#: src/application.js:39
+#: src/application.js:43
 msgid "Start Telepathy client"
 msgstr "Spustit klienta Telepathy"
 
-#: src/application.js:254 src/utils.js:169
+#: src/application.js:281 src/utils.js:169
 msgid "Failed to open link"
 msgstr "Selhalo otevření odkazu"
 
-#: src/application.js:461
+#: src/application.js:488
 #, javascript-format
 msgid "%s removed."
 msgstr "Účet %s byl odstraněn."
 
-#: src/application.js:531
+#: src/application.js:587
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
-#: src/application.js:537
+#: src/application.js:593
 msgid "Learn more about Polari"
 msgstr "Dozvědět se více o Polari"
 
@@ -344,55 +372,55 @@ msgstr "Zpět"
 msgid "New Messages"
 msgstr "Nové zprávy"
 
-#: src/chatView.js:775
+#: src/chatView.js:784
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
-#: src/chatView.js:781
+#: src/chatView.js:790
 msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
-#: src/chatView.js:956
+#: src/chatView.js:965
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
-#: src/chatView.js:961
+#: src/chatView.js:970
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
-#: src/chatView.js:969
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
-#: src/chatView.js:971
+#: src/chatView.js:980
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
-#: src/chatView.js:977
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
-#: src/chatView.js:979
+#: src/chatView.js:988
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
-#: src/chatView.js:984
+#: src/chatView.js:993
 #, javascript-format
 msgid "%s joined"
 msgstr "%s se připojil"
 
-#: src/chatView.js:989
+#: src/chatView.js:998
 #, javascript-format
 msgid "%s left"
 msgstr "%s opustil místnost"
 
-#: src/chatView.js:1084
+#: src/chatView.js:1093
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -400,7 +428,7 @@ msgstr[0] "%d uživatel se připojil"
 msgstr[1] "%d uživatelé se připojili"
 msgstr[2] "%d uživatelů se připojilo"
 
-#: src/chatView.js:1087
+#: src/chatView.js:1096
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -410,14 +438,14 @@ msgstr[2] "%d uživatelů opustilo místnost"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1154
+#: src/chatView.js:1163
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1159
+#: src/chatView.js:1168
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včera, %H∶%M"
@@ -425,7 +453,7 @@ msgstr "Včera, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1164
+#: src/chatView.js:1173
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -434,7 +462,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1170
+#: src/chatView.js:1179
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H∶%M"
@@ -443,21 +471,21 @@ msgstr "%d. %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1176
+#: src/chatView.js:1185
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1181
+#: src/chatView.js:1190
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1186
+#: src/chatView.js:1195
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včera, %l∶%M %p"
@@ -465,7 +493,7 @@ msgstr "Včera, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1191
+#: src/chatView.js:1200
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -474,7 +502,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1197
+#: src/chatView.js:1206
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l∶%M %p"
@@ -483,7 +511,7 @@ msgstr "%d. %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1203
+#: src/chatView.js:1212
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l∶%M %p"
@@ -655,7 +683,7 @@ msgstr "Není nastaveno žádné téma"
 msgid "Add Network"
 msgstr "Přidání sítě"
 
-#: src/mainWindow.js:369
+#: src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
