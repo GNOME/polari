@@ -1,3 +1,16 @@
+3.23.2 - "You Don't F*** With the Icon Lady"
+============================================
+* Allow to run polari in the background [Florian; #770750]
+* Misc. bug fixes [Piotr; #774283]
+
+Contributors:
+  Lapo Calamandrei, Piotr Drąg, Alexandre Franke, Bastian Ilsø, Florian Müllner
+
+Translations:
+  Balázs Meskó [hu], Fabio Tomat [fur], Mario Blättermann [de],
+  Marek Černocký [cs], Daniel Mustieles [es], Kjartan Maraas [nb],
+  Marek Cernocky [cs]
+
 3.23.1 - "Birth and Death in the same Episode"
 ==============================================
 * Line-wrap app notifications [Efe; #721763]
