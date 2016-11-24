@@ -40,6 +40,7 @@ const _RoomManager = new Lang.Class({
             else
                 this._app.lookup_action(a.name).connect('activate', a.handler);
         });
+        this._app.connect('prepare-shutdown', Lang.bind(this, this._validateInitialSetup));
 
         this._accountsMonitor.connect('account-enabled', (mon, account) => {
             this._restoreRooms(account.object_path);
@@ -52,6 +53,21 @@ const _RoomManager = new Lang.Class({
             this._removeSavedChannelsForAccount(account.object_path);
         });
         this._accountsMonitor.prepare(() => { this._restoreRooms(); });
+
+        this.isFirstRun = false;
+        let file = Gio.File.new_for_path(GLib.get_user_cache_dir() + '/polari/is-first-run');
+
+        try {
+            let stream = file.create(0, null);
+            stream.close(null);
+            this.isFirstRun = true;
+        }
+        catch (e){
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                this.isFirstRun = false;
+        }
+
+        this.isRoomAdded = false;
     },
 
     lookupRoom: function(id) {
@@ -186,6 +202,8 @@ const _RoomManager = new Lang.Class({
         if (present && this._app.active_window)
             this._app.active_window.active_room = room;
 
+        this.isRoomAdded = true;
+
         return room;
     },
 
@@ -201,6 +219,19 @@ const _RoomManager = new Lang.Class({
     _removeRoom: function(room) {
         if (this._rooms.delete(room.id))
             this.emit('room-removed', room);
+    },
+
+    _validateInitialSetup: function() {
+        if (this.isFirstRun && !this.isRoomAdded) {
+            let file = Gio.File.new_for_path(GLib.get_user_cache_dir() + '/polari/is-first-run');
+
+            try {
+                file.delete(null);
+            }
+            catch (e) {
+                log("Failed to remove is-first-run file: " + e.message);
+            }
+        }
     }
 });
 Signals.addSignalMethods(_RoomManager.prototype);
