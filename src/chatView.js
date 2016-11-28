@@ -8,6 +8,7 @@ const PangoCairo = imports.gi.PangoCairo;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -16,6 +17,7 @@ const Signals = imports.signals;
 const Utils = imports.utils;
 const UserTracker = imports.userTracker;
 const UserList = imports.userList;
+const RoomManager = imports.roomManager;
 
 const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
@@ -350,6 +352,8 @@ const ChatView = new Lang.Class({
         this._view.connect_after('style-updated',
                                  Lang.bind(this, this._updateIndent));
 
+        this._roomManager = RoomManager.getDefault();
+
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
         this._joinTime = 0;
@@ -361,6 +365,12 @@ const ChatView = new Lang.Class({
         this._initialPending = [];
         this._backlogTimeoutId = 0;
         this._statusCount = { left: 0, joined: 0, total: 0 };
+        this._canBlankStateBeInserted = false;
+        this._isBlankStateInserted = false;
+
+        this._room.connect("notify::topic", () => {
+                                    this._canBlankStateBeInserted = true;
+                                    this._tryToInsertBlankState(); });
 
         let statusMonitor = UserTracker.getUserStatusMonitor();
         this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
@@ -459,7 +469,27 @@ const ChatView = new Lang.Class({
           { name: 'indicator-line',
             pixels_above_lines: 24 },
           { name: 'loading',
-            justification: Gtk.Justification.CENTER }
+            justification: Gtk.Justification.CENTER },
+          {
+            name: 'blank-state-header',
+            left_margin: MARGIN,
+            size: 18000
+          },
+          {
+            name: 'blank-state-topic',
+            left_margin: MARGIN,
+            size: 13000
+          },
+          {
+            name: 'blank-state-tips-image',
+            left_margin: MARGIN,
+            size: 10000
+          },
+          {
+            name: 'blank-state-tips',
+            left_margin: MARGIN,
+            size: 10000
+          }
         ];
         tags.forEach(function(tagProps) {
             tagTable.add(new Gtk.TextTag(tagProps));
@@ -505,6 +535,14 @@ const ChatView = new Lang.Class({
           { name: 'status',
             foreground_rgba: dimColor },
           { name: 'timestamp',
+            foreground_rgba: dimColor },
+          { name: 'blank-state-header',
+            foreground_rgba: dimColor },
+          { name: 'blank-state-topic',
+            foreground_rgba: dimColor },
+          { name: 'blank-state-tips-image',
+            foreground_rgba: dimColor },
+          { name: 'blank-state-tips',
             foreground_rgba: dimColor },
           { name: 'url',
             foreground_rgba: linkColor }
@@ -731,6 +769,8 @@ const ChatView = new Lang.Class({
     },
 
     _fetchBacklog: function() {
+        this._tryToInsertBlankState();
+
         if (this.vadjustment.value != 0 ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
@@ -748,6 +788,100 @@ const ChatView = new Lang.Class({
                 return GLib.SOURCE_REMOVE;
             }));
         return Gdk.EVENT_STOP;
+    },
+
+    _tryToInsertBlankState: function() {
+        if (this._logWalker.is_end() && !this._isBlankStateInserted && this._canBlankStateBeInserted) {
+            this._insertBlankState();
+            this._isBlankStateInserted = true;
+        }
+    },
+
+    _insertBlankState: function () {
+        let buffer = this._view.get_buffer();
+
+        let blankStateMark = this._view.buffer.create_mark('blank-state-mark',
+                                                           this._view.buffer.get_start_iter(),
+                                                           false);
+
+        let header = "";
+        let topic = "";
+        let image1 = "";
+        let image2 = "";
+        let image3 = "";
+        let tip1 = "";
+        let tip2 = "";
+        let tip3 = "";
+
+        if (this._room.type == Tp.HandleType.CONTACT) {
+            header = 'Conversations with ' + this._room.channel_name + ' start here.\n';
+            topic = 'The following applies to all messages sent here:\n';
+
+            image1 = 'avatar-default-symbolic';
+            image2 = 'polari-room-hidden';
+            image3 = 'polari-paste-warning';
+
+            tip1 = "This is a one-to-one conversation between you and " + this._room.channel_name + ".\n";
+            tip2 = "The conversation is only visible to you and your recipient.\n";
+            tip3 = "This room is private. Use public paste services with care.\n";
+        }
+        else {
+            header = 'Conversations in ' + this._room.channel_name + ' start here.\n';
+            topic = 'The topic of ' + this._room.channel_name + ' is: ' + this._room.topic + '\n';
+
+            image1 = 'polari-user-notify-symbolic';
+            image2 = 'edit-paste-symbolic';
+            image3 = 'emote-love-symbolic';
+
+            tip1 = "Notify other users of your message by including their nickname.\n";
+            tip2 = "Share text and images by pasting them into the text field.\n";
+            tip3 = "If this is your first time using IRC, we recommend glacing over the IRC netiquette.\n";
+        }
+
+        let tags = [this._lookupTag('blank-state-header')];
+        this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark), header, tags);
+
+        tags = [this._lookupTag('blank-state-topic')];
+        this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark),
+                         topic,
+                         tags);
+
+        tags = [this._lookupTag('blank-state-tips')];
+        let imageTags = [this._lookupTag('blank-state-tips-image')];
+        if (this._roomManager.isFirstRun) {
+            this._insertImageAtMarkWithTags(image1, blankStateMark, imageTags);
+            this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark),
+                                 tip1,
+                                 tags);
+
+            this._insertImageAtMarkWithTags(image2, blankStateMark, imageTags);
+            this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark),
+                                 tip2,
+                                 tags);
+
+            this._insertImageAtMarkWithTags(image3, blankStateMark, imageTags);
+            this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark),
+                                 tip3,
+                                 tags);
+        }
+    },
+
+    _insertImageAtMarkWithTags: function(imageName, mark, tags) {
+        let image1 = new Gtk.Image({ icon_name: imageName,
+                                     margin_right: 10,
+                                     visible: true });
+
+        let iter = this._view.buffer.get_iter_at_mark(mark);
+        let offset = iter.get_offset();
+
+        let anchor = this._view.buffer.create_child_anchor(iter);
+        this._view.add_child_at_anchor(image1, anchor);
+
+        let start = this._view.buffer.get_iter_at_offset(offset);
+
+        this._view.buffer.remove_all_tags(start, iter);
+        for (let i = 0; i < tags.length; i++)
+            this._view.buffer.apply_tag(tags[i], start, iter);
     },
 
     _onValueChanged: function() {
