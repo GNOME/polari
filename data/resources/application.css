@@ -202,3 +202,7 @@ treeview.polari-server-room-list {
 /* tweak labels in the user popover */
 .polari-user-popover-nick { font-weight: bold; }
 .polari-user-popover-status { font-size: smaller; }
+
+.polari-room-loading {
+    opacity: 0.3;
+}
