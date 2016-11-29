@@ -3,6 +3,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 
 const {AccountsMonitor} = imports.accountsMonitor;
@@ -18,7 +19,7 @@ function _onPopoverVisibleChanged(popover) {
 
 var RoomRow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
-    InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter'],
+    InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter', 'eventStack'],
 }, class RoomRow extends Gtk.ListBoxRow {
     _init(room) {
         super._init({ name: `RoomRow ${room.display_name}` });
@@ -37,8 +38,20 @@ var RoomRow = GObject.registerClass({
         room.bind_property('display-name', this._roomLabel, 'label',
                            GObject.BindingFlags.SYNC_CREATE);
 
+        if (this._room.type == Tp.HandleType.ROOM) {
+            let connectionStatusChangedId =
+                this.account.connect('notify::connection-status',
+                                     this._onConnectionStatusChanged.bind(this));
+            this._onConnectionStatusChanged();
+
+            this.connect('destroy', () => {
+                this.account.disconnect(connectionStatusChangedId);
+            });
+        }
+
         this._updatePending();
         this._onChannelChanged();
+        this._eventStack.visible_child_name = 'messages';
     }
 
     get room() {
@@ -74,6 +87,27 @@ var RoomRow = GObject.registerClass({
         return [nPending, highlights.length];
     }
 
+    _getConnectionStatus() {
+        let presence = this.account.requested_presence_type;
+        if (presence == Tp.ConnectionPresenceType.OFFLINE)
+            return Tp.ConnectionStatus.DISCONNECTED;
+        return this.account.connection_status;
+    }
+
+    _onConnectionStatusChanged() {
+        let status = this._getConnectionStatus();
+        // Show loading indicator if joining a room takes more than 3 seconds
+        if (status == Tp.ConnectionStatus.CONNECTED && !this._room.channel)
+            Mainloop.timeout_add_seconds(3, () => {
+                if (this._room.channel)
+                    return GLib.SOURCE_REMOVE;
+                this._eventStack.visible_child_name = 'connecting';
+                return GLib.SOURCE_REMOVE;
+            });
+        else
+            this._eventStack.visible_child_name = 'messages';
+    }
+
     _updatePending() {
         let [nPending, nHighlights] = this._getNumPending();
 
@@ -90,6 +124,7 @@ var RoomRow = GObject.registerClass({
     _onChannelChanged() {
         if (!this._room.channel)
             return;
+        this._eventStack.visible_child_name = 'messages';
         this._room.channel.connect('message-received',
                                    this._updatePending.bind(this));
         this._room.channel.connect('pending-message-removed',
