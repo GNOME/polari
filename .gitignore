@@ -5,6 +5,7 @@
 *.sw?
 *.tar.xz
 *.typelib
+.flatpak-builder
 *~
 .deps
 .dirstamp
