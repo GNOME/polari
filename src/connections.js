@@ -98,6 +98,20 @@ var ConnectionsList = GObject.registerClass({
         this._list.set_header_func(Lang.bind(this, this._updateHeader));
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
+        let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
+                                        valign: Gtk.Align.CENTER,
+                                        orientation: Gtk.Orientation.VERTICAL,
+                                        visible: true });
+        placeholder.add(new Gtk.Image({ icon_name: 'edit-find-symbolic',
+                                        pixel_size : 115,
+                                        visible : true }));
+        placeholder.add(new Gtk.Label({ label : _("No results."),
+                                        visible : true}));
+
+        placeholder.get_style_context().add_class('dim-label');
+
+        this._list.set_placeholder(placeholder);
+
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-added', (mon, account) => {
             this._setAccountRowSensitive(account, false);
