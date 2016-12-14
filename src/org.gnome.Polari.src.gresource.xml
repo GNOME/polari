@@ -22,5 +22,6 @@
     <file>userList.js</file>
     <file>utils.js</file>
     <file>userTracker.js</file>
+    <file>initialSetup.js</file>
   </gresource>
 </gresources>

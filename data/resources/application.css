@@ -128,6 +128,14 @@ treeview.polari-server-room-list {
     font-size: larger;
 }
 
+.polari-setup-page {
+    padding: 48px 156px;
+}
+
+.polari-setup-title {
+    font-size: 175%;
+}
+
 .polari-error-information {
     background-color: @polari_dark_bg_color;
     border-style: solid;

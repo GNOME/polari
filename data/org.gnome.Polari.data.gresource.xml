@@ -16,5 +16,6 @@
     <file alias="ui/server-room-list.ui" preprocess="xml-stripblanks">resources/server-room-list.ui</file>
     <file alias="ui/user-details.ui" preprocess="xml-stripblanks">resources/user-details.ui</file>
     <file alias="ui/user-popover.ui" preprocess="xml-stripblanks">resources/user-popover.ui</file>
+    <file alias="ui/initial-setup-window.ui" preprocess="xml-stripblanks">resources/initial-setup-window.ui</file>
   </gresource>
 </gresources>

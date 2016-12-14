@@ -7,6 +7,7 @@ data/resources/connection-details.ui
 data/resources/connection-properties.ui
 data/resources/entry-area.ui
 data/resources/help-overlay.ui
+data/resources/initial-setup-window.ui
 data/resources/join-room-dialog.ui
 data/resources/main-window.ui
 data/resources/menus.ui
@@ -18,6 +19,7 @@ src/appNotifications.js
 src/chatView.js
 src/connections.js
 src/entryArea.js
+src/initialSetup.js
 src/ircParser.js
 src/joinDialog.js
 src/mainWindow.js

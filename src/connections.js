@@ -139,6 +139,12 @@ var ConnectionsList = new Lang.Class({
             row.activate();
     },
 
+    activateSelected: function() {
+        let row = this._list.get_selected_row();
+        if (row)
+            row.activate();
+    },
+
     _filterRows: function(row) {
         let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
         return this._filterTerms.every(term => {
