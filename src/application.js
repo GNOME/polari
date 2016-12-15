@@ -581,7 +581,7 @@ const Application = new Lang.Class({
                 'Danny Mølgaard <moelgaard.dmp@gmail.com>'
             ],
             artists: [
-                'Sam Hewitt',
+                'Sam Hewitt <hewittsamuel@gmail.com>',
                 'Jakub Steiner <jimmac@gmail.com>'
             ],
             translator_credits: _("translator-credits"),
