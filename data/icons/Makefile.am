@@ -15,7 +15,7 @@ nobase_dist_icon_DATA = \
 	$(NULL)
 
 noinst_DATA = \
-	polari.svg \
+	org.gnome.Polari.svg \
 	$(NULL)
 
 EXTRA_DIST = \
