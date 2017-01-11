@@ -33,9 +33,20 @@
     },
     "cleanup": ["/include","/libexec","/lib/*.la","/lib/*.a",
                 "/lib/pkgconfig","/lib/polari/*.la",
-                "/share/aclocal", "/share/gir-1.0", "/share/gtk-doc"
+                "/share/aclocal", "/share/autoconf-archive",
+                "/share/gir-1.0", "/share/gtk-doc"
     ],
     "modules": [
+        {
+            "name": "autoconf-archive",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://ftpmirror.gnu.org/autoconf-archive/autoconf-archive-2016.09.16.tar.xz",
+                    "sha256": "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
+                }
+            ]
+        },
         {
             "name": "telepathy-glib",
             "sources": [
