@@ -17,6 +17,7 @@ const TelepathyClient = imports.telepathyClient;
 const UserTracker = imports.userTracker;
 const Utils = imports.utils;
 const NetworksManager = imports.networksManager;
+const InitialSetup = imports.initialSetup;
 
 const MAX_RETRIES = 3;
 
@@ -280,23 +281,34 @@ var Application = new Lang.Class({
         this.activate_action('start-client', null);
 
         if (!this.active_window) {
-            let window = new MainWindow.MainWindow({ application: this });
-            window.connect('destroy', () => {
-                if (this._settings.get_boolean('run-in-background'))
-                    return;
-                this.emit('prepare-shutdown');
-            });
-            window.connect('notify::active-room',
-                           () => { this.emit('room-focus-changed'); });
-            window.connect('notify::is-active',
-                           () => { this.emit('room-focus-changed'); });
-            window.show_all();
+            if (this._needsInitialSetup()) {
+                let setupDialog = new InitialSetup.InitialSetupWindow({ application: this });
+                let id = this.connect('window-removed', () => {
+                    this.disconnect(id);
+                    this.activate();
+                });
+            } else {
+                let window = new MainWindow.MainWindow({ application: this });
+                window.connect('destroy', () => {
+                    if (this._settings.get_boolean('run-in-background'))
+                        return;
+                    this.emit('prepare-shutdown');
+                });
+                window.connect('notify::active-room',
+                               () => { this.emit('room-focus-changed'); });
+                window.connect('notify::is-active',
+                               () => { this.emit('room-focus-changed'); });
+            }
         }
+
         this.active_window.present();
     },
 
     vfunc_window_added: function(window) {
         this.parent(window);
+
+        if (!(window instanceof MainWindow.MainWindow))
+            return;
 
         let action = this.lookup_action('leave-current-room');
         window.connect('notify::active-room', () => {
@@ -404,6 +416,32 @@ var Application = new Lang.Class({
             let account = req.create_account_finish(res);
             callback(account);
         });
+    },
+
+    _touchFile: function(file) {
+        try {
+            file.get_parent().make_directory_with_parents(null);
+        } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
+            // not an error, carry on
+        }
+
+        let stream = file.create(0, null);
+        stream.close(null);
+    },
+
+    _needsInitialSetup: function() {
+        let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
+                                      '/polari/initial-setup-completed');
+        try {
+            this._touchFile(f);
+        } catch(e) {
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                return false; // initial setup has completed
+            log('Failed to mark initial setup as completed: ' + e.message);
+        }
+
+        let savedRooms = this._settings.get_value('saved-channel-list');
+        return savedRooms.n_children() == 0;
     },
 
     _updateUserListAction: function() {
