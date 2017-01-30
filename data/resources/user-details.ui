@@ -178,7 +178,7 @@
         </child>
         <child>
           <object class="GtkModelButton" id="messageButton">
-            <property name="text" translatable="yes">Message</property>
+            <property name="text" translatable="yes">Start Conversation</property>
             <property name="halign">fill</property>
             <property name="hexpand">True</property>
             <property name="visible">True</property>
