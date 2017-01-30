@@ -3,6 +3,7 @@ const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
+const Gspell = imports.gi.Gspell;
 const Gtk = imports.gi.Gtk;
 
 const ChatView = imports.chatView;
@@ -33,6 +34,9 @@ const ChatEntry = new Lang.Class({
         this.parent(params);
 
         PasteManager.DropTargetIface.addTargets(this, this);
+
+        let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
+        spellEntry.basic_setup();
 
         this._useDefaultHandler = false;
     },

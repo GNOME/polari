@@ -72,6 +72,15 @@
             ]
         },
         {
+            "name": "gspell",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gspell"
+                }
+            ]
+        },
+        {
             "name": "polari",
             "sources": [
                 {
