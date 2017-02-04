@@ -2,17 +2,17 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013-2014, 2014, 2015, 2016.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013-2014, 2014, 2015, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-11-18 12:48+0000\n"
-"PO-Revision-Date: 2016-12-25 15:03+0200\n"
+"POT-Creation-Date: 2017-01-18 22:24+0000\n"
+"PO-Revision-Date: 2017-02-04 19:43+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
-"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
+"Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,11 +41,6 @@ msgstr ""
 "käyttöliittymä ei vie huomiota tärkeimmästä, eli keskusteluista."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
-#| msgid ""
-#| "You can use Polari to publicly chat with people in a channel, and to have "
-#| "private one-to-one conversations. Notifications make sure that you never "
-#| "miss an important message - for private conversations, they even allow "
-#| "you to reply instantly without switching back to the application!"
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -241,8 +236,6 @@ msgid "Last Room"
 msgstr "Viimeinen kanava"
 
 #: data/resources/help-overlay.ui:103
-#| msgctxt "shortcut window"
-#| msgid "First - Ninth Room"
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Ensimmäinen — yhdeksäs kanava"
@@ -292,7 +285,6 @@ msgstr ""
 "automaattisesti sisäänkirjautumisen yhteydessä."
 
 #: data/resources/main-window.ui:21
-#| msgid "Quit"
 msgid "_Quit"
 msgstr "_Lopeta"
 
@@ -571,7 +563,7 @@ msgstr "Lähetetäänkö “%s” julkiseen liittämispalveluun?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:335
-#, fuzzy, javascript-format
+#, javascript-format
 #| msgid "Uploading “%s” to public paste service …"
 msgid "Uploading “%s” to public paste service…"
 msgstr "Lähetetään “%s” julkiseen liittämispalveluun…"
@@ -597,18 +589,12 @@ msgstr ""
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
 #: src/ircParser.js:24
-#| msgid ""
-#| "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current "
-#| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/CLOSE [<kanava>] <syy>] — sulkee kanavan <kanava>, oletuksena nykyisen"
 
 #: src/ircParser.js:25
-#| msgid ""
-#| "/HELP [<command>] - displays help for <command>, or a list of available "
-#| "commands"
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -617,9 +603,6 @@ msgstr ""
 "käytettävissä olevat komennot"
 
 #: src/ircParser.js:26
-#| msgid ""
-#| "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current "
-#| "one"
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
@@ -627,43 +610,34 @@ msgstr ""
 "kanavalle <kanava>, tai nykyiselle kanavalle"
 
 #: src/ircParser.js:27
-#| msgid "/JOIN <channel> - joins <channel>"
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <kanava> — liittyy kanavalle <kanava>"
 
 #: src/ircParser.js:28
-#| msgid "/KICK <nick> - kicks <nick> from current channel"
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr ""
 "/KICK <nimimerkki> — potkii käyttäjän nimeltä <nimimerkki> nykyiseltä "
 "kanavalta"
 
 #: src/ircParser.js:29
-#| msgid "/ME <action> - sends <action> to the current channel"
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <toiminto> — lähettää tekstin <toiminto> nykyiselle kanavalle"
 
 #: src/ircParser.js:30
-#| msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr ""
 "/MSG <nimimerkki> [<viesti>] — lähettää yksityisviestin käyttäjälle "
 "<nimimerkki>"
 
 #: src/ircParser.js:31
-#| msgid "/NAMES - lists users on the current channel"
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — listaa nykyisen kanavan käyttäjät"
 
 #: src/ircParser.js:32
-#| msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <nimimerkki> — asettaa nimimerkiksesi <nimimerkki>"
 
 #: src/ircParser.js:33
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
@@ -671,32 +645,27 @@ msgstr ""
 "kanava"
 
 #: src/ircParser.js:34
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr ""
 "/QUERY <nimimerkki> — avaa yksityisen keskustelun käyttäjän nimeltä "
 "<nimimerkki> kanssa"
 
 #: src/ircParser.js:35
-#| msgid "/QUIT [<reason>] - disconnects from the current server"
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<syy>] — katkaisee yhteyden nykyiseen palvelimeen"
 
 #: src/ircParser.js:36
-#| msgid "/SAY <text> - sends <text> to the current room/contact"
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr ""
 "/SAY <teksti> — lähettää tekstin <teksti> nykyiselle kanavalle tai "
 "käyttäjälle"
 
 #: src/ircParser.js:37
-#| msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <otsikko> — asettaa otsikoksi <otsikko>, tai näyttää nykyisen otsikon"
 
 #: src/ircParser.js:40
-#| msgid "Unknown command - try /HELP for a list of available commands"
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "Tuntematon komento — anna komento /HELP listataksesi kaikki käytettävissä "
@@ -760,7 +729,6 @@ msgid "Connected"
 msgstr "Yhdistetty"
 
 #: src/roomList.js:309
-#| msgid "Connecting..."
 msgid "Connecting…"
 msgstr "Yhdistetään…"
 
@@ -874,7 +842,6 @@ msgid "Available in another room."
 msgstr "Saatailla toisella kanavalla."
 
 #: src/userList.js:416
-#| msgid "Offline"
 msgid "Online"
 msgstr "Linjoilla"
 
@@ -887,7 +854,6 @@ msgid "All"
 msgstr "Kaikki"
 
 #: src/userTracker.js:301
-#| msgid "Users on %s:"
 msgid "User is online"
 msgstr "Käyttäjä on linjoilla"
 
