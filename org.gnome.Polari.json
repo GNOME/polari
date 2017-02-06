@@ -20,6 +20,13 @@
         "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
         "--talk-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
         "--own-name=org.freedesktop.Telepathy.Client.TpGLibRequestAndHandle.*",
+        /* Telepathy names owned by bundled services */
+        "--own-name=org.freedesktop.Telepathy.AccountManager",
+        "--own-name=org.freedesktop.Telepathy.ChannelDispatcher",
+        "--own-name=org.freedesktop.Telepathy.MissionControl5",
+        "--own-name=org.freedesktop.Telepathy.ConnectionManager.idle",
+        "--own-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
+        "--own-name=org.freedesktop.Telepathy.Client.Logger",
         /* Keyring */
         "--talk-name=org.freedesktop.secrets",
         /* log files written by tp-logger outside the sandbox */
@@ -32,11 +39,11 @@
     "build-options": {
         "cflags": "-O2 -g"
     },
-    "cleanup": ["/include","/libexec","/lib/*.la","/lib/*.a",
+    "cleanup": ["/bin/mc*","/include","/lib/*.la","/lib/*.a",
                 "/lib/pkgconfig","/lib/polari/*.la",
                 "/share/aclocal", "/share/autoconf-archive",
                 "/share/gir-1.0", "/share/gtk-doc",
-                "/share/info"
+                "/share/info", "/share/man"
     ],
     "modules": [
         {
@@ -60,6 +67,26 @@
                 {
                     "type": "patch",
                     "path": "build-aux/flatpak/tp-change-uniquify.patch"
+                }
+            ]
+        },
+        {
+            "name": "telepathy-mission-control",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://telepathy.freedesktop.org/releases/telepathy-mission-control/telepathy-mission-control-5.16.4.tar.gz",
+                    "sha256": "9769ddac7ad8aad21f6db854016792162b57e6fa0b0aed8d823d76a71fe7e6cb"
+                }
+            ]
+        },
+        {
+            "name": "telepathy-idle",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://telepathy.freedesktop.org/releases/telepathy-idle/telepathy-idle-0.2.0.tar.gz",
+                    "sha256": "3013ad4b38d14ee630b8cc8ada5e95ccaa849b9a6fe15d2eaf6d0717d76f2fab"
                 }
             ]
         },
