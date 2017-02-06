@@ -78,6 +78,14 @@ const _urlRegexp = new RegExp(
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)','g');
 
+let _inFlatpakSandbox = undefined;
+
+function isFlatpakSandbox() {
+    if (_inFlatpakSandbox === undefined)
+        _inFlatpakSandbox = GLib.file_test('/.flatpak-info', GLib.FileTest.EXISTS);
+    return _inFlatpakSandbox;
+}
+
 function getTpEventTime() {
     let time = Gtk.get_current_event_time ();
     if (time == 0)

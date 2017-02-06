@@ -38,6 +38,7 @@ const Application = new Lang.Class({
         GLib.set_application_name('Polari');
         GLib.set_prgname('org.gnome.Polari');
         this._retryData = new Map();
+        this._demons = [];
 
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
@@ -63,6 +64,66 @@ const Application = new Lang.Class({
         return this.active_window &&
                this.active_window.is_active &&
                this.active_window.active_room == room;
+    },
+
+    _checkService: function(conn, name, opath, iface) {
+        let flags = Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
+                    Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS;
+        let proxy = null;
+
+        try {
+            proxy = Gio.DBusProxy.new_sync(conn, flags, null,
+                                           name, opath, iface, null);
+        } catch(e) {}
+
+        return proxy != null && proxy.get_name_owner() != null;
+    },
+
+    _ensureService: function(conn, name, opath, iface, command) {
+        debug('Trying to ensure service %s'.format(name));
+
+        if (this._checkService(conn, name, opath, iface))
+            return;
+
+        log('Failed to activate service %s, starting manually'.format(name));
+
+        let proc = new Gio.Subprocess({ argv: [command] });
+
+        try {
+            proc.init(null);
+            this._demons.push(proc);
+        } catch(e) {
+            log('Failed to launch %s: %s'.format(command, e.message));
+        }
+    },
+
+    vfunc_dbus_register: function(conn, path) {
+        if (!Utils.isFlatpakSandbox())
+            return true;
+
+        GLib.setenv('IDLE_PERSIST', '1', false);
+        this._ensureService(conn,
+                            Tp.ACCOUNT_MANAGER_BUS_NAME,
+                            Tp.ACCOUNT_MANAGER_OBJECT_PATH,
+                            Tp.ACCOUNT_MANAGER_BUS_NAME,
+                            '/app/libexec/mission-control-5');
+        this._ensureService(conn,
+                            Tp.CM_BUS_NAME_BASE + 'idle',
+                            Tp.CM_OBJECT_PATH_BASE + 'idle',
+                            'org.freedesktop.Telepathy.ConnectionManager',
+                            '/app/libexec/telepathy-idle');
+        this._ensureService(conn,
+                            Tp.CLIENT_BUS_NAME_BASE + 'Logger',
+                            Tp.CLIENT_OBJECT_PATH_BASE + 'Logger',
+                            Tp.IFACE_CLIENT,
+                            '/app/libexec/telepathy-logger');
+        return true;
+    },
+
+    vfunc_dbus_unregister: function(conn, path) {
+        for (let proc of this._demons)
+            proc.force_exit();
+        this._demons = [];
     },
 
     vfunc_startup: function() {
