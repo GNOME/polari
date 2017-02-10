@@ -473,7 +473,11 @@ var UserListRow = new Lang.Class({
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add(vbox);
 
-        let hbox = new Gtk.Box({ margin: 4, spacing: 4 });
+        let hbox = new Gtk.Box({ margin_end: 12,
+                                 margin_start: 4,
+                                 margin_top: 4,
+                                 margin_bottom: 4,
+                                 spacing: 4 });
         this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
                                       no_show_all: true });
         this._label = new Gtk.Label({ label: this._user.alias,
