@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <object class="GtkListStore" id="liststore">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkEntryCompletion" id="nameCompletion">
-    <property name="model">liststore</property>
-    <property name="text-column">0</property>
-    <property name="inline-completion">True</property>
-    <child>
-      <object class="GtkCellRendererText"/>
-      <attributes>
-        <attribute name="text">0</attribute>
-      </attributes>
-    </child>
-  </object>
   <template class="Gjs_JoinDialog" parent="GtkDialog">
     <property name="title" translatable="yes">Join Chat Room</property>
     <property name="modal">True</property>

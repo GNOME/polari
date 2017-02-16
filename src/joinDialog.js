@@ -3,7 +3,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Tp = imports.gi.TelepathyGLib;
-const Tpl = imports.gi.TelepathyLogger;
 const GObject = imports.gi.GObject;
 
 const AccountsMonitor = imports.accountsMonitor;
@@ -25,7 +24,6 @@ const JoinDialog = new Lang.Class({
                        'mainStack',
                        'connectionCombo',
                        'connectionButton',
-                       'nameCompletion',
                        'connectionStack',
                        'filterEntry',
                        'connectionsList',
@@ -172,32 +170,11 @@ const JoinDialog = new Lang.Class({
 
     _onAccountChanged: function() {
         this._nameEntry.set_text('');
-        this._nameCompletion.model.clear();
 
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
         if (!account)
             return;
-        let logManager = Tpl.LogManager.dup_singleton();
-
-        logManager.get_entities_async(account, Lang.bind(this,
-            function(m, res) {
-                let [, entities] = logManager.get_entities_finish(res);
-                let names = entities.filter(function(e) {
-                    return e.type == Tpl.EntityType.ROOM;
-                }).map(function(e) {
-                    return e.alias;
-                });
-                for (let i = 0; i < names.length; i++) {
-                    let model = this._nameCompletion.model;
-                    let iter = model.append();
-                    model.set_value(iter, 0, names[i]);
-                    if (names[i].startsWith('#')) {
-                        iter = model.append();
-                        model.set_value(iter, 0, names[i].substr(1));
-                    }
-                }
-            }));
 
        this._serverRoomList.setAccount(account);
     },
