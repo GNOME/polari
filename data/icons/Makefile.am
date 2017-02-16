@@ -19,7 +19,7 @@ noinst_DATA = \
 	$(NULL)
 
 EXTRA_DIST = \
-	polari.svg \
+	org.gnome.Polari.svg \
 	$(NULL)
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t
