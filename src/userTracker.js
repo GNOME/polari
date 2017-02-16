@@ -271,6 +271,8 @@ const UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(nickName);
 
         let contacts = this._baseNickContacts.get(baseNick) || [];
+        if (!contacts.length)
+            return null;
 
         for (let i = 0; i < contacts.length; i++)
             if (contacts[i].alias == nickName)
