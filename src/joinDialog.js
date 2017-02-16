@@ -113,6 +113,13 @@ const JoinDialog = new Lang.Class({
 
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._updateCanJoin));
+        this._nameEntry.connect('stop-search', Lang.bind(this,
+            function() {
+                if (this._nameEntry.text.length > 0)
+                    this._nameEntry.text = '';
+                else
+                    this.response(Gtk.ResponseType.CANCEL);
+            }));
         this._serverRoomList.connect('notify::can-join',
                                      Lang.bind(this, this._updateCanJoin));
         this._serverRoomList.bind_property('loading', this._spinner, 'active',
