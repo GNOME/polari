@@ -131,6 +131,7 @@ const UserDetails = new Lang.Class({
 
         this._expanded = false;
         this._initialDetailsLoaded = false;
+        this._user = null;
 
         this.parent(params);
 
@@ -339,6 +340,9 @@ const UserPopover = new Lang.Class({
 
         this._userTracker = params.userTracker;
         delete params.userTracker;
+
+        this._nickname = null;
+        this._basenick = null;
 
         this.parent(params);
 

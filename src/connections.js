@@ -223,6 +223,8 @@ const ConnectionDetails = new Lang.Class({
                 this.notify('has-service');
             }));
 
+        this._account = null;
+
         this.parent(params);
 
         this._nameEntry.connect('changed',

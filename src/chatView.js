@@ -170,10 +170,10 @@ const ButtonTag = new Lang.Class({
     },
 
     _init: function(params) {
-        this.parent(params);
-
         this._hover = false;
         this._pressed = false;
+
+        this.parent(params);
     },
 
     get hover() {
