@@ -13,16 +13,16 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-11 21:09+0000\n"
-"PO-Revision-Date: 2017-01-21 21:41+0100\n"
-"Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
+"POT-Creation-Date: 2017-02-16 01:08+0000\n"
+"PO-Revision-Date: 2017-02-16 22:29+0100\n"
+"Last-Translator: Bernd Homuth <dev@hmt.im>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -31,7 +31,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:588
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:590
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ein IRC-Client für GNOME"
 
@@ -134,7 +134,6 @@ msgstr "Netz_werkname"
 
 #: data/resources/connection-details.ui:49
 #: data/resources/connection-details.ui:116
-#: data/resources/join-room-dialog.ui:153
 msgid "optional"
 msgstr "optional"
 
@@ -245,7 +244,7 @@ msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Erster bis neunter Raum"
 
-#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:268
+#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:284
 msgid "Join Chat Room"
 msgstr "Raum beitreten"
 
@@ -253,27 +252,23 @@ msgstr "Raum beitreten"
 msgid "_Join"
 msgstr "_Beitreten"
 
-#: data/resources/join-room-dialog.ui:68
+#: data/resources/join-room-dialog.ui:63
 msgid "C_onnection"
 msgstr "_Verbindung"
 
-#: data/resources/join-room-dialog.ui:97
+#: data/resources/join-room-dialog.ui:92
 msgid "_Add Network"
 msgstr "Netzwerk hin_zufügen"
 
-#: data/resources/join-room-dialog.ui:111
-msgid "Room _Name"
-msgstr "_Raumname"
+#: data/resources/join-room-dialog.ui:128
+msgid "Enter room name to add"
+msgstr "Zum Hinzufügen einen Raumnamen eingeben"
 
-#: data/resources/join-room-dialog.ui:138
-msgid "_Password"
-msgstr "_Passwort"
-
-#: data/resources/join-room-dialog.ui:227
+#: data/resources/join-room-dialog.ui:220
 msgid "_Add"
 msgstr "_Hinzufügen"
 
-#: data/resources/join-room-dialog.ui:246
+#: data/resources/join-room-dialog.ui:239
 msgid "_Custom Network"
 msgstr "Ben_utzerdefiniertes Netzwerk"
 
@@ -349,20 +344,20 @@ msgstr "Benachrichtigung wird gesendet, wenn sich der Benutzer angemeldet hat."
 msgid "Message"
 msgstr "Nachricht"
 
-#: src/application.js:43
+#: src/application.js:44
 msgid "Start Telepathy client"
 msgstr "Telepathy-Client starten"
 
-#: src/application.js:281 src/utils.js:169
+#: src/application.js:283 src/utils.js:169
 msgid "Failed to open link"
 msgstr "Fehler beim Öffnen des Links"
 
-#: src/application.js:488
+#: src/application.js:490
 #, javascript-format
 msgid "%s removed."
 msgstr "%s wurde entfernt."
 
-#: src/application.js:587
+#: src/application.js:589
 msgid "translator-credits"
 msgstr ""
 "Christian Kirbach <christian.kirbach@gmail.com>\n"
@@ -370,7 +365,7 @@ msgstr ""
 "J.M. Ruetter <jm@jublo.net>\n"
 "Mario Blättermann <mario.blaettermann@gmail.com>"
 
-#: src/application.js:593
+#: src/application.js:595
 msgid "Learn more about Polari"
 msgstr "Mehr über Polari erfahren"
 
@@ -542,14 +537,14 @@ msgstr ""
 "Polari wurde auf Grund eines Netzwerkfehlers getrennt. Bitte überprüfen Sie "
 "das Adressfeld."
 
-#: src/entryArea.js:300
+#: src/entryArea.js:304
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "%s Textzeile in öffentlichem Textspeicherdienst speichern?"
 msgstr[1] "%s Textzeilen in öffentlichem Textspeicherdienst speichern?"
 
-#: src/entryArea.js:304
+#: src/entryArea.js:308
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -557,33 +552,33 @@ msgstr[0] "%s Textzeile wird in öffentlichem Textspeicherdienst gespeichert …
 msgstr[1] ""
 "%s Textzeilen werden in öffentlichem Textspeicherdienst gespeichert …"
 
-#: src/entryArea.js:311
+#: src/entryArea.js:315
 msgid "Upload image to public paste service?"
 msgstr "Bild in öffentlichem Speicherdienst speichern?"
 
-#: src/entryArea.js:312
+#: src/entryArea.js:316
 msgid "Uploading image to public paste service…"
 msgstr "Bild wird zu öffentlichem Speicherdienst übertragen …"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:333
+#: src/entryArea.js:337
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Datei »%s« in öffentlichem Speicherdienst speichern?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:335
+#: src/entryArea.js:339
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Datei »%s« wird zu öffentlichem Speicherdienst übertragen …"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:344
+#: src/entryArea.js:348
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s in #%s"
 
-#: src/entryArea.js:346
+#: src/entryArea.js:350
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Von %s einfügen"
@@ -692,7 +687,7 @@ msgstr "Benutzer in %s:"
 msgid "No topic set"
 msgstr "Kein Thema angegeben"
 
-#: src/joinDialog.js:269
+#: src/joinDialog.js:285
 msgid "Add Network"
 msgstr "Netzwerk hinzufügen"
 
@@ -875,6 +870,12 @@ msgstr "Polari-Server-Passwort für %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polari NickServ-Passwort für %s"
+
+#~ msgid "Room _Name"
+#~ msgstr "_Raumname"
+
+#~ msgid "_Password"
+#~ msgstr "_Passwort"
 
 #~ msgid "_Name"
 #~ msgstr "_Name"
