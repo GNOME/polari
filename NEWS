@@ -1,3 +1,18 @@
+3.23.90 - "Get a Room!"
+=======================
+* Add spell check support to entry [Florian; #709956]
+* Add room list to join dialog [Florian, Isabella; #763200]
+
+Contributors:
+  Christian Hergert, Sam Hewitt, Matthew Leeds, Florian Müllner,
+  Isabella Ribeiro
+
+Translations:
+  Baurzhan Muftakhidinov [kk], Jiri Grönroos [fi], Fábio Nogueira [pt_BR],
+  Piotr Drąg [pl], Dušan Kazik [sk], Benjamin Steinwender [de],
+  Mandy Wang [zh_CN], Efstathios Iosifidis [el],
+  Inaki Larranaga Murgoitio [eu], Kukuh Syafaat [id], Kjartan Maraas [nb]
+
 3.23.2 - "You Don't F*** With the Icon Lady"
 ============================================
 * Allow to run polari in the background [Florian; #770750]
