@@ -473,10 +473,8 @@ const TelepathyClient = new Lang.Class({
         context.accept();
     },
 
-    vfunc_observe_channels: function() {
-        let [account, connection,
-             channels, op, requests, context] = arguments;
-
+    vfunc_observe_channels: function(account, connection, channels,
+                                     op, requests, context) {
         this._processRequest(context, connection, channels, Lang.bind(this,
             function(channel) {
                 if (this._isAuthChannel(channel))
@@ -499,10 +497,8 @@ const TelepathyClient = new Lang.Class({
             }));
     },
 
-    vfunc_handle_channels: function() {
-        let [account, connection,
-             channels, satisfied, userTime, context] = arguments;
-
+    vfunc_handle_channels: function(account, connection, channels,
+                                    satisfied, userTime, context) {
         let [present, ] = Tp.user_action_time_should_present(userTime);
 
         this._processRequest(context, connection, channels, Lang.bind(this,
