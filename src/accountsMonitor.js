@@ -103,7 +103,7 @@ const AccountsMonitor = new Lang.Class({
 
     _onPrepareShutdown: function() {
         let presence = Tp.ConnectionPresenceType.OFFLINE;
-        this.accounts.filter(a => a.requested_presence != presence).forEach(a => {
+        this.accounts.filter(a => a.requested_presence_type != presence).forEach(a => {
             this._app.hold();
             a.request_presence_async(presence, 'offline', '', (a, res) => {
                 try {
