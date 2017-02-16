@@ -1031,7 +1031,7 @@ const ChatView = new Lang.Class({
     _shouldShowStatus: function(nick) {
         let nickTag = this._lookupTag('nick' + nick);
 
-        if (!nickTag)
+        if (!nickTag || !nickTag._lastActivity)
             return false;
 
         let time = GLib.get_monotonic_time();
