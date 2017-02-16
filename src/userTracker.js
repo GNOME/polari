@@ -232,12 +232,12 @@ const UserTracker = new Lang.Class({
         let status = Tp.ConnectionPresenceType.OFFLINE;
 
         let roomMap = this._getRoomContacts(room);
-        [found, nContacts] = this._popMember(roomMap, baseNick, member);
+        let [found, nContacts] = this._popMember(roomMap, baseNick, member);
         if (found && nContacts == 0)
             this._runHandlers(room, member, status);
 
         let map = this._baseNickContacts;
-        let [found, nContacts] = this._popMember(map, baseNick, member);
+        [found, nContacts] = this._popMember(map, baseNick, member);
         if (found) {
             if (nContacts == 0) {
                 this.emit("status-changed::" + baseNick, member.alias, status);
