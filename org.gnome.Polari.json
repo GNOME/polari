@@ -19,6 +19,7 @@
         "--talk-name=org.freedesktop.Telepathy.AccountManager",
         "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
         "--talk-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
+        "--own-name=org.freedesktop.Telepathy.Client.TpGLibRequestAndHandle.*",
         /* Keyring */
         "--talk-name=org.freedesktop.secrets",
         /* log files written by tp-logger outside the sandbox */
@@ -55,6 +56,10 @@
                     "type": "archive",
                     "url": "http://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
                     "sha256": "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
+                },
+                {
+                    "type": "patch",
+                    "path": "build-aux/flatpak/tp-change-uniquify.patch"
                 }
             ]
         },
