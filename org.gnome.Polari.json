@@ -34,7 +34,8 @@
     "cleanup": ["/include","/libexec","/lib/*.la","/lib/*.a",
                 "/lib/pkgconfig","/lib/polari/*.la",
                 "/share/aclocal", "/share/autoconf-archive",
-                "/share/gir-1.0", "/share/gtk-doc"
+                "/share/gir-1.0", "/share/gtk-doc",
+                "/share/info"
     ],
     "modules": [
         {
