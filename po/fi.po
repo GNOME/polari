@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-01-18 22:24+0000\n"
-"PO-Revision-Date: 2017-02-04 19:43+0200\n"
+"POT-Creation-Date: 2017-02-16 01:08+0000\n"
+"PO-Revision-Date: 2017-02-18 20:00+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:588
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:590
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -129,7 +129,6 @@ msgstr "_Verkon nimi"
 
 #: data/resources/connection-details.ui:49
 #: data/resources/connection-details.ui:116
-#: data/resources/join-room-dialog.ui:153
 msgid "optional"
 msgstr "valinnainen"
 
@@ -240,7 +239,7 @@ msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Ensimmäinen — yhdeksäs kanava"
 
-#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:268
+#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:284
 msgid "Join Chat Room"
 msgstr "Liity kanavalle"
 
@@ -248,27 +247,23 @@ msgstr "Liity kanavalle"
 msgid "_Join"
 msgstr "_Liity"
 
-#: data/resources/join-room-dialog.ui:68
+#: data/resources/join-room-dialog.ui:63
 msgid "C_onnection"
 msgstr "_Yhteys"
 
-#: data/resources/join-room-dialog.ui:97
+#: data/resources/join-room-dialog.ui:92
 msgid "_Add Network"
 msgstr "_Lisää verkko"
 
-#: data/resources/join-room-dialog.ui:111
-msgid "Room _Name"
-msgstr "_Kanavan nimi"
+#: data/resources/join-room-dialog.ui:128
+msgid "Enter room name to add"
+msgstr "Anna lisättävän kanavan nimi"
 
-#: data/resources/join-room-dialog.ui:138
-msgid "_Password"
-msgstr "_Salasana"
-
-#: data/resources/join-room-dialog.ui:227
+#: data/resources/join-room-dialog.ui:220
 msgid "_Add"
 msgstr "_Lisää"
 
-#: data/resources/join-room-dialog.ui:246
+#: data/resources/join-room-dialog.ui:239
 msgid "_Custom Network"
 msgstr "_Omavalintainen verkko"
 
@@ -344,24 +339,24 @@ msgstr "Ilmoitetaan jos käyttäjä ilmestyy linjoille."
 msgid "Message"
 msgstr "Viesti"
 
-#: src/application.js:43
+#: src/application.js:44
 msgid "Start Telepathy client"
 msgstr "Käynnistä Telepathy-asiakas"
 
-#: src/application.js:281 src/utils.js:169
+#: src/application.js:283 src/utils.js:169
 msgid "Failed to open link"
 msgstr "Linkin avaaminen epäonnistui"
 
-#: src/application.js:488
+#: src/application.js:490
 #, javascript-format
 msgid "%s removed."
 msgstr "%s poistettiin."
 
-#: src/application.js:587
+#: src/application.js:589
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: src/application.js:593
+#: src/application.js:595
 msgid "Learn more about Polari"
 msgstr "Tietoja - Polari"
 
@@ -533,48 +528,47 @@ msgstr ""
 "Polari katkaisi yhteyden yhteysvirheen vuoksi. Tarkista, että osoitekentän "
 "sisältö on oikein."
 
-#: src/entryArea.js:300
+#: src/entryArea.js:304
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Liitetäänkö %s rivi tekstiä julkiseen liittämispalveluun?"
 msgstr[1] "Liitetäänkö %s riviä tekstiä julkiseen liittämispalveluun?"
 
-#: src/entryArea.js:304
+#: src/entryArea.js:308
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "Lähetetään %s rivi tekstiä julkiseen liittämispalveluun…"
 msgstr[1] "Lähetetään %s riviä tekstiä julkiseen liittämispalveluun…"
 
-#: src/entryArea.js:311
+#: src/entryArea.js:315
 msgid "Upload image to public paste service?"
 msgstr "Lähetetäänkö kuva julkiseen liittämispalveluun?"
 
-#: src/entryArea.js:312
+#: src/entryArea.js:316
 msgid "Uploading image to public paste service…"
 msgstr "Lähetetään kuvaa julkiseen liittämispalveluun…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:333
+#: src/entryArea.js:337
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Lähetetäänkö “%s” julkiseen liittämispalveluun?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:335
+#: src/entryArea.js:339
 #, javascript-format
-#| msgid "Uploading “%s” to public paste service …"
 msgid "Uploading “%s” to public paste service…"
 msgstr "Lähetetään “%s” julkiseen liittämispalveluun…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:344
+#: src/entryArea.js:348
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s kanavalla #%s"
 
-#: src/entryArea.js:346
+#: src/entryArea.js:350
 #, javascript-format
 msgid "Paste from %s"
 msgstr ""
@@ -689,7 +683,7 @@ msgstr "Käyttäjät kanavalla %s:"
 msgid "No topic set"
 msgstr "Kanavan otsikkoa ei ole asetettu"
 
-#: src/joinDialog.js:269
+#: src/joinDialog.js:285
 msgid "Add Network"
 msgstr "Lisää verkko"
 
@@ -871,6 +865,12 @@ msgstr "Polari-palvelimen salasana kohteelle %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polarin NickServ-salasana kohteelle %s"
+
+#~ msgid "Room _Name"
+#~ msgstr "_Kanavan nimi"
+
+#~ msgid "_Password"
+#~ msgstr "_Salasana"
 
 #~ msgid "_Description"
 #~ msgstr "_Kuvaus"
