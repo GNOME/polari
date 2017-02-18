@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-16 01:08+0000\n"
-"PO-Revision-Date: 2017-02-18 20:00+0200\n"
+"POT-Creation-Date: 2017-02-18 18:00+0000\n"
+"PO-Revision-Date: 2017-02-18 20:01+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -145,7 +145,7 @@ msgid "_Real Name"
 msgstr "O_ikea nimi"
 
 #: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:147
-#: data/resources/join-room-dialog.ui:28
+#: data/resources/join-room-dialog.ui:11
 msgid "_Cancel"
 msgstr "_Peru"
 
@@ -239,31 +239,31 @@ msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Ensimmäinen — yhdeksäs kanava"
 
-#: data/resources/join-room-dialog.ui:21 src/joinDialog.js:284
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:261
 msgid "Join Chat Room"
 msgstr "Liity kanavalle"
 
-#: data/resources/join-room-dialog.ui:36
+#: data/resources/join-room-dialog.ui:19
 msgid "_Join"
 msgstr "_Liity"
 
-#: data/resources/join-room-dialog.ui:63
+#: data/resources/join-room-dialog.ui:46
 msgid "C_onnection"
 msgstr "_Yhteys"
 
-#: data/resources/join-room-dialog.ui:92
+#: data/resources/join-room-dialog.ui:75
 msgid "_Add Network"
 msgstr "_Lisää verkko"
 
-#: data/resources/join-room-dialog.ui:128
+#: data/resources/join-room-dialog.ui:111
 msgid "Enter room name to add"
 msgstr "Anna lisättävän kanavan nimi"
 
-#: data/resources/join-room-dialog.ui:220
+#: data/resources/join-room-dialog.ui:203
 msgid "_Add"
 msgstr "_Lisää"
 
-#: data/resources/join-room-dialog.ui:239
+#: data/resources/join-room-dialog.ui:222
 msgid "_Custom Network"
 msgstr "_Omavalintainen verkko"
 
@@ -515,12 +515,12 @@ msgid "Already added"
 msgstr "Lisätty jo"
 
 #. Translators: %s is a connection name
-#: src/connections.js:442
+#: src/connections.js:444
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "“%s” - ominaisuudet"
 
-#: src/connections.js:486
+#: src/connections.js:488
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -683,7 +683,7 @@ msgstr "Käyttäjät kanavalla %s:"
 msgid "No topic set"
 msgstr "Kanavan otsikkoa ei ole asetettu"
 
-#: src/joinDialog.js:285
+#: src/joinDialog.js:262
 msgid "Add Network"
 msgstr "Lisää verkko"
 
@@ -726,7 +726,7 @@ msgstr "Yhdistetty"
 msgid "Connecting…"
 msgstr "Yhdistetään…"
 
-#: src/roomList.js:311 src/userList.js:418
+#: src/roomList.js:311 src/userList.js:422
 msgid "Offline"
 msgstr "Ei verkossa"
 
@@ -762,7 +762,7 @@ msgstr "_Tallenna salasana"
 msgid "Should the password be saved?"
 msgstr "Tallennetaanko salasana?"
 
-#: src/roomStack.js:142 src/telepathyClient.js:572
+#: src/roomStack.js:142 src/telepathyClient.js:568
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -780,78 +780,78 @@ msgstr "Näkemiin"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:571
+#: src/telepathyClient.js:567
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Tallennetaanko \"%s\"-salasana tilille %s?"
 
-#: src/telepathyClient.js:575
+#: src/telepathyClient.js:571
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/userList.js:236
+#: src/userList.js:237
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d sekunti sitten"
 msgstr[1] "%d sekuntia sitten"
 
-#: src/userList.js:241
+#: src/userList.js:242
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minuutti sitten"
 msgstr[1] "%d minuuttia sitten"
 
-#: src/userList.js:246
+#: src/userList.js:247
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d tunti sitten"
 msgstr[1] "%d tuntia sitten"
 
-#: src/userList.js:251
+#: src/userList.js:252
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d päivä sitten"
 msgstr[1] "%d päivää sitten"
 
-#: src/userList.js:256
+#: src/userList.js:257
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d viikko sitten"
 msgstr[1] "%d viikkoa sitten"
 
-#: src/userList.js:260
+#: src/userList.js:261
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d kuukausi sitten"
 msgstr[1] "%d kuukautta sitten"
 
-#: src/userList.js:414
+#: src/userList.js:418
 msgid "Available in another room."
-msgstr "Saatailla toisella kanavalla."
+msgstr "Saatavilla toisella kanavalla."
 
-#: src/userList.js:416
+#: src/userList.js:420
 msgid "Online"
 msgstr "Linjoilla"
 
-#: src/userList.js:565
+#: src/userList.js:569
 msgid "No results"
 msgstr "Ei tuloksia"
 
-#: src/userList.js:739
+#: src/userList.js:743
 msgid "All"
 msgstr "Kaikki"
 
-#: src/userTracker.js:301
+#: src/userTracker.js:303
 msgid "User is online"
 msgstr "Käyttäjä on linjoilla"
 
-#: src/userTracker.js:302
+#: src/userTracker.js:304
 #, javascript-format
 msgid "User %s is now online."
 msgstr "Käyttäjä %s on nyt linjoilla."
