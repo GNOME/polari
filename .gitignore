@@ -26,6 +26,10 @@ data/*.gschema.valid
 data/*.gschema.xml
 data/*.service
 depcomp
+help/*/*.mo
+help/*/*.page
+help/*/*.stamp
+help/*/*.xml
 install-sh
 libtool
 ltmain.sh
@@ -41,7 +45,8 @@ po/POTFILES
 po/Rules-quot
 po/polari.pot
 po/stamp-po
-src/*.gresource
 src/config.js
+src/data-resources.*
+src/polari
 src/polari-accounts
-src/org.gnome.Polari
+src/src-resources.*
