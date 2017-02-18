@@ -73,6 +73,7 @@
         },
         {
             "name": "gspell",
+            "config-opts": ["--disable-vala"],
             "sources": [
                 {
                     "type": "git",
