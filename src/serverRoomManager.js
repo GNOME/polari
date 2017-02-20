@@ -155,9 +155,6 @@ const ServerRoomList = new Lang.Class({
         this._list.append_column(column);
 
         renderer = new Gtk.CellRendererToggle();
-        renderer.connect('toggled', (cell, pathStr) => {
-            this._toggleChecked(Gtk.TreePath.new_from_string(pathString));
-        });
 
         column.pack_start(renderer, false);
         column.add_attribute(renderer, 'active', RoomListColumn.CHECKED);
