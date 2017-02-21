@@ -131,6 +131,7 @@ const UserDetails = new Lang.Class({
 
         this._expanded = false;
         this._initialDetailsLoaded = false;
+        this._notificationsEnabled = false;
         this._user = null;
 
         this.parent(params);
