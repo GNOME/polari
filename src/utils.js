@@ -54,11 +54,19 @@ const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
 const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
 const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
 
+// schemes that only use a colon cannot be matched generically without producing
+// a lot of false positives, so whitelist some useful ones and hope nobody complains :-)
+const _schemeWhitelist = ['geo', 'mailto', 'man', 'info', 'ghelp', 'help'];
+
 const _urlRegexp = new RegExp(
     '(^|' + _leadingJunk + ')' +
     '(' +
         '(?:' +
-            '(?:[a-z]+):' +                       // scheme:
+            '(?:[a-z]+)://' +                     // scheme://
+            '|' +
+            '(?:' +
+                _schemeWhitelist.join('|') +      // scheme:
+            '):' +
             '|' +
             'www\\d{0,3}[.]' +                    // www.
             '|' +
