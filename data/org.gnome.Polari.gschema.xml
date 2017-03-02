@@ -34,6 +34,11 @@
       <summary>Identify botname</summary>
       <description>Nickname of the bot to identify with</description>
     </key>
+    <key type="s" name="identify-command">
+      <default>"identify"</default>
+      <summary>Identify command</summary>
+      <description>Command used to identify with bot</description>
+    </key>
     <key type="s" name="identify-username">
       <default>""</default>
       <summary>Identify username</summary>

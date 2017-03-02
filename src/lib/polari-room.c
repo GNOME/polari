@@ -267,6 +267,7 @@ on_identify_message_sent (GObject      *source,
 
 void
 polari_room_send_identify_message_async (PolariRoom          *room,
+                                         const char          *command,
                                          const char          *username,
                                          const char          *password,
                                          GAsyncReadyCallback  callback,
@@ -278,7 +279,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   char *text;
 
   g_return_if_fail (POLARI_IS_ROOM (room));
-  g_return_if_fail (username != NULL && password != NULL);
+  g_return_if_fail (command != NULL && username != NULL && password != NULL);
 
   priv = room->priv;
 
@@ -295,7 +296,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   /* Don't emit ::identify-sent for our own identify message */
   room->priv->ignore_identify = TRUE;
 
-  text = g_strdup_printf ("identify %s %s", username, password);
+  text = g_strdup_printf ("%s %s %s", command, username, password);
   message = tp_client_message_new_text (TP_CHANNEL_TEXT_MESSAGE_TYPE_NORMAL, text);
 
   tp_text_channel_send_message_async (TP_TEXT_CHANNEL (priv->channel), message,
@@ -466,20 +467,21 @@ on_message_sent (TpTextChannel      *channel,
 {
   PolariRoom *room = user_data;
   PolariRoomPrivate *priv = room->priv;
-  char *username, *password, *text;
+  char *command, *username, *password, *text;
 
   if (priv->type != TP_HANDLE_TYPE_CONTACT)
     return;
 
   text = tp_message_to_text (TP_MESSAGE (message), NULL);
 
-  if (polari_util_match_identify_message (text, &username, &password))
+  if (polari_util_match_identify_message (text, &command, &username, &password))
     {
       if (!priv->ignore_identify)
-        g_signal_emit (room, signals[IDENTIFY_SENT], 0, username, password);
+        g_signal_emit (room, signals[IDENTIFY_SENT], 0, command, username, password);
 
       priv->ignore_identify = FALSE;
 
+      g_free (command);
       g_free (username);
       g_free (password);
     }
@@ -968,7 +970,7 @@ polari_room_class_init (PolariRoomClass *klass)
                   G_SIGNAL_RUN_LAST,
                   0,
                   NULL, NULL, NULL,
-                  G_TYPE_NONE, 2, G_TYPE_STRING, G_TYPE_STRING);
+                  G_TYPE_NONE, 3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 }
 
 static void

@@ -1300,7 +1300,7 @@ const ChatView = new Lang.Class({
 
         // mask identify passwords in private chats
         if (this._room.type == Tp.HandleType.CONTACT) {
-            let [isIdentify, username, password] =
+            let [isIdentify, command, username, password] =
                 Polari.util_match_identify_message(text);
 
             if (isIdentify)

@@ -45,6 +45,8 @@ polari_util_get_basenick (const char *nick)
 /**
  * polari_util_match_identify_message:
  * @message: a text message
+ * @command: (optional) (out): the parsed command if the @message is an
+ *                             identify command
  * @username: (optional) (out): the parsed name if the @message is an
  *                              identify command
  * @password: (optional) (out): the parsed password if the @message is an
@@ -54,6 +56,7 @@ polari_util_get_basenick (const char *nick)
  */
 gboolean
 polari_util_match_identify_message (const char  *message,
+                                    char       **command,
                                     char       **username,
                                     char       **password)
 {
@@ -66,17 +69,19 @@ polari_util_match_identify_message (const char  *message,
   stripped_text = g_strstrip (text);
 
   if (G_UNLIKELY (identify_message_regex == NULL))
-    identify_message_regex = g_regex_new ("^identify (?:(\\w+) )?(\\S+)$",
+    identify_message_regex = g_regex_new ("^(identify|login) (?:(\\w+) )?(\\S+)$",
                                           G_REGEX_OPTIMIZE | G_REGEX_CASELESS,
                                           0, NULL);
 
   matched = g_regex_match (identify_message_regex, stripped_text, 0, &match);
   if (matched)
     {
+      if (command)
+        *command = g_match_info_fetch (match, 1);
       if (username)
-        *username = g_match_info_fetch (match, 1);
+        *username = g_match_info_fetch (match, 2);
       if (password)
-        *password = g_match_info_fetch (match, 2);
+        *password = g_match_info_fetch (match, 3);
     }
 
   g_match_info_free (match);

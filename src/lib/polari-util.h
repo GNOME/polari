@@ -24,6 +24,7 @@
 char *polari_util_get_basenick (const char *nick);
 
 gboolean polari_util_match_identify_message (const char  *message,
+                                             char       **command,
                                              char       **username,
                                              char       **password);
 

@@ -38,6 +38,7 @@ void  polari_room_add_member    (PolariRoom *room, TpContact *member);
 void  polari_room_remove_member (PolariRoom *room, TpContact *member);
 
 void polari_room_send_identify_message_async (PolariRoom          *room,
+                                              const char          *command,
                                               const char          *username,
                                               const char          *password,
                                               GAsyncReadyCallback  callback,

@@ -303,13 +303,14 @@ const TelepathyClient = new Lang.Class({
         let username = settings.get_string('identify-username') ||
                        params.username.deep_unpack();
         let contactName = settings.get_string('identify-botname');
+        let command = settings.get_string('identify-command');
         this._requestChannel(account, Tp.HandleType.CONTACT, contactName,
             (channel) => {
                 if (!channel)
                     return;
 
                 let room = this._roomManager.lookupRoomByChannel(channel);
-                room.send_identify_message_async(username, password, (r, res) => {
+                room.send_identify_message_async(command, username, password, (r, res) => {
                     try {
                         r.send_identify_message_finish(res);
                     } catch(e) {
@@ -432,6 +433,11 @@ const TelepathyClient = new Lang.Class({
         else
             settings.set_string('identify-botname', data.botname);
 
+        if (data.command == 'identify')
+            settings.reset('identify-command');
+        else
+            settings.set_string('identify-command', data.command);
+
         settings.set_string('identify-username', data.username);
     },
 
@@ -548,11 +554,12 @@ const TelepathyClient = new Lang.Class({
         return notification;
     },
 
-    _onIdentifySent: function(room, username, password) {
+    _onIdentifySent: function(room, command, username, password) {
         let accountPath = room.account.object_path;
 
         let data = {
             botname: room.channel.target_contact.alias,
+            command: command,
             username: username || room.channel.connection.self_contact.alias,
             password: password
         };
