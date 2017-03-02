@@ -1,3 +1,21 @@
+3.23.91 - "That's a Good-Looking Gun"
+=====================================
+* Bundle required Telepathy services in flatpak [Florian; #777705]
+* Support auth bots that use "login" instead of "identify" [Florian; #778841]
+* Misc. bug fixes [Florian, Alexander; #778793, #778797, #778850, #779449,
+  #771888]
+
+Contributors:
+  Alexander Alzate Olaya, Florian Müllner
+
+Translations:
+  Daniel Korostil [uk], Ask Hjorth Larsen [da], Bernd Homuth [de],
+  Chao-Hsiung Liao [zh_TW], Jiri Grönroos [fi], Anders Jonsson [sv],
+  Kukuh Syafaat [id], Piotr Drąg [pl], Milo Casagrande [it],
+  Rafael Fontenelle [pt_BR], Fran Dieguez [gl],
+  Мирослав Николић [sr, sr@latin], Balázs Meskó [hu], Aurimas Černius [lt],
+  Daniel Mustieles [es], Inaki Larranaga Murgoitio [eu]
+
 3.23.90 - "Get a Room!"
 =======================
 * Add spell check support to entry [Florian; #709956]
