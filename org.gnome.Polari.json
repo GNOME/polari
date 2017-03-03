@@ -40,8 +40,8 @@
     "build-options": {
         "cflags": "-O2 -g"
     },
-    "cleanup": ["/bin/mc*","/include","/lib/*.la","/lib/*.a",
-                "/lib/pkgconfig","/lib/polari/*.la",
+    "cleanup": ["/bin/m*","/bin/wraptool","/include","/lib/*.la","/lib/*.a",
+                "/lib/pkgconfig","/lib/polari/*.la","/lib/python*",
                 "/share/aclocal", "/share/autoconf-archive",
                 "/share/dbus-1/services/org.freedesktop*", "/share/gir-1.0",
                 "/share/gtk-doc", "/share/info", "/share/man",
@@ -55,6 +55,22 @@
                     "type": "archive",
                     "url": "http://ftpmirror.gnu.org/autoconf-archive/autoconf-archive-2016.09.16.tar.xz",
                     "sha256": "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
+                }
+            ]
+        },
+        {
+            "name": "meson",
+            "no-autogen": true,
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/mesonbuild/meson/releases/download/0.38.1/meson-0.38.1.tar.gz",
+                    "sha256": "dcb05349b32427924fa2a258a5e23e40e09c1bf9dd09919198c3a2ae1c38ba53"
+                },
+                {
+                    "type": "file",
+                    "path": "build-aux/flatpak/setuptools-makefile",
+                    "dest-filename": "Makefile"
                 }
             ]
         },
@@ -118,6 +134,9 @@
         },
         {
             "name": "polari",
+            "buildsystem": "meson",
+            "builddir": true,
+            "config-opts": ["--libdir=lib"],
             "sources": [
                 {
                     "type": "git",
