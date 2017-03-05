@@ -25,6 +25,7 @@
         "--own-name=org.freedesktop.Telepathy.ConnectionManager.idle",
         "--own-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
         "--own-name=org.freedesktop.Telepathy.Client.Logger",
+        "--own-name=org.freedesktop.Telepathy.Logger",
         /* Keyring */
         "--talk-name=org.freedesktop.secrets",
         /* log files written by tp-logger outside the sandbox */
