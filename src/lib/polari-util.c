@@ -69,7 +69,7 @@ polari_util_match_identify_message (const char  *message,
   stripped_text = g_strstrip (text);
 
   if (G_UNLIKELY (identify_message_regex == NULL))
-    identify_message_regex = g_regex_new ("^(identify|login) (?:(\\w+) )?(\\S+)$",
+    identify_message_regex = g_regex_new ("^(identify|login) (?:(\\S+) )?(\\S+)$",
                                           G_REGEX_OPTIMIZE | G_REGEX_CASELESS,
                                           0, NULL);
 
