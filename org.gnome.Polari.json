@@ -42,8 +42,9 @@
     "cleanup": ["/bin/mc*","/include","/lib/*.la","/lib/*.a",
                 "/lib/pkgconfig","/lib/polari/*.la",
                 "/share/aclocal", "/share/autoconf-archive",
-                "/share/gir-1.0", "/share/gtk-doc",
-                "/share/info", "/share/man"
+                "/share/dbus-1/services/org.freedesktop*", "/share/gir-1.0",
+                "/share/gtk-doc", "/share/info", "/share/man",
+                "/share/polari", "/share/telepathy"
     ],
     "modules": [
         {
