@@ -4,8 +4,8 @@
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "command": "polari",
-    "tags": ["devel"],
-    "desktop-file-name-prefix": "(Development) ",
+    "tags": ["nightly"],
+    "desktop-file-name-prefix": "(Nightly) ",
     "finish-args": [
         /* X11 + XShm access */
         "--share=ipc", "--socket=x11",
