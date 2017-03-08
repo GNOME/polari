@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-24 00:47+0000\n"
-"PO-Revision-Date: 2017-02-24 18:09+0100\n"
+"POT-Creation-Date: 2017-03-05 19:18+0000\n"
+"PO-Revision-Date: 2017-03-08 14:28+0100\n"
 "Last-Translator: Meskó Balázs <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:590
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:651
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Interneten továbbított csevegés (IRC) kliens a GNOME-hoz"
 
@@ -114,12 +114,20 @@ msgid "Nickname of the bot to identify with"
 msgstr "Azonosítás ennél a botnál"
 
 #: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "Azonosítási parancs"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Parancs a botnál történő azonosításhoz"
+
+#: data/org.gnome.Polari.gschema.xml:44
 msgid "Identify username"
 msgstr "Felhasználónév azonosításhoz"
 
-#: data/org.gnome.Polari.gschema.xml:40
+#: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
-msgstr "Az identify paranccsal használandó felhasználónév"
+msgstr "Azonosítási parancsnál használandó felhasználónév"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -341,26 +349,26 @@ msgstr "Értesíteni fog, ha a felhasználó elérhető lesz."
 msgid "Message"
 msgstr "Üzenet"
 
-#: src/application.js:44
+#: src/application.js:45
 msgid "Start Telepathy client"
 msgstr "Telepathy ügyfél indítása"
 
-#: src/application.js:283 src/utils.js:169
+#: src/application.js:344 src/utils.js:185
 msgid "Failed to open link"
 msgstr "A hivatkozás megnyitása nem sikerült"
 
-#: src/application.js:490
+#: src/application.js:551
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eltávolítva."
 
-#: src/application.js:589
+#: src/application.js:650
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng at ubuntu dot com>\n"
 "Meskó Balázs <meskobalazs at gmail dot com>"
 
-#: src/application.js:595
+#: src/application.js:656
 msgid "Learn more about Polari"
 msgstr "Tudjon meg többet a Polari-ról"
 
@@ -726,7 +734,7 @@ msgstr "Kapcsolódva"
 msgid "Connecting…"
 msgstr "Kapcsolódás…"
 
-#: src/roomList.js:311 src/userList.js:422
+#: src/roomList.js:311 src/userList.js:423
 msgid "Offline"
 msgstr "Nem érhető el"
 
@@ -762,7 +770,7 @@ msgstr "_Jelszó mentése"
 msgid "Should the password be saved?"
 msgstr "A jelszó mentendő?"
 
-#: src/roomStack.js:142 src/telepathyClient.js:568
+#: src/roomStack.js:142 src/telepathyClient.js:575
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -773,76 +781,76 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Csatlakozás egy szobához a + gomb használatával."
 
-#: src/telepathyClient.js:399
+#: src/telepathyClient.js:400
 msgid "Good Bye"
 msgstr "Viszlát"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:567
+#: src/telepathyClient.js:574
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Menti a(z) %s jelszót ehhez: %s?"
 
-#: src/telepathyClient.js:571
+#: src/telepathyClient.js:578
 msgid "Save"
 msgstr "Mentés"
 
-#: src/userList.js:237
+#: src/userList.js:238
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d másodperce"
 msgstr[1] "%d másodperce"
 
-#: src/userList.js:242
+#: src/userList.js:243
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d perce"
 msgstr[1] "%d perce"
 
-#: src/userList.js:247
+#: src/userList.js:248
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d órája"
 msgstr[1] "%d órája"
 
-#: src/userList.js:252
+#: src/userList.js:253
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d napja"
 msgstr[1] "%d napja"
 
-#: src/userList.js:257
+#: src/userList.js:258
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hete"
 msgstr[1] "%d hete"
 
-#: src/userList.js:261
+#: src/userList.js:262
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d hónapja"
 msgstr[1] "%d hónapja"
 
-#: src/userList.js:418
+#: src/userList.js:419
 msgid "Available in another room."
 msgstr "Egy másik szobában elérhető."
 
-#: src/userList.js:420
+#: src/userList.js:421
 msgid "Online"
 msgstr "Elérhető"
 
-#: src/userList.js:569
+#: src/userList.js:570
 msgid "No results"
 msgstr "Nincs találat"
 
-#: src/userList.js:743
+#: src/userList.js:744
 msgid "All"
 msgstr "Összes"
 
@@ -855,12 +863,12 @@ msgstr "A felhasználó elérhető"
 msgid "User %s is now online."
 msgstr "A(z) %s felhasználó most elérhető."
 
-#: src/utils.js:89
+#: src/utils.js:105
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari kiszolgáló jelszó ehhez: %s"
 
-#: src/utils.js:94
+#: src/utils.js:110
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polari NickServ jelszó ehhez: %s"
