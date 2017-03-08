@@ -835,7 +835,7 @@ const ChatView = new Lang.Class({
 
             tip1 = "Notify other users of your message by including their nickname.\n";
             tip2 = "Share text and images by pasting them into the text field.\n";
-            tip3 = "If this is your first time using IRC, we recommend glacing over the IRC netiquette.\n";
+            tip3 = "If this is your first time using IRC, we recommend glacing over the https://wiki.gnome.org/Community/GettingInTouch/IRC.\n";
         }
 
         let tags = [this._lookupTag('blank-state-header')];
@@ -860,9 +860,10 @@ const ChatView = new Lang.Class({
                                  tags);
 
             this._insertImageAtMarkWithTags(image3, blankStateMark, imageTags);
-            this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark),
-                                 tip3,
-                                 tags);
+            let urls = Utils.findUrls(tip3).sort((u1,u2) => u1.pos - u2.pos);
+            if (urls && urls[0])
+                urls[0].name = "IRC netiquette";
+            this._insertTextWithURLs(buffer, this._view.buffer.get_iter_at_mark(blankStateMark), tip3, urls, tags);
         }
     },
 
@@ -1443,25 +1444,29 @@ const ChatView = new Lang.Class({
 
         let channels = Utils.findChannels(text, server);
         let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
+        this._insertTextWithURLs(this._view.get_buffer(), iter, text, urls, tags);
+
+        if (highlight && message.pendingId)
+            this._pending.set(message.pendingId,
+                              this._view.buffer.create_mark(null, iter, true));
+    },
+
+    _insertTextWithURLs: function(buffer, iter, text, urls, tags) {
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
             let url = urls[i];
             this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
 
             let tag = this._createUrlTag(url.url);
-            this._view.get_buffer().tag_table.add(tag);
+            buffer.tag_table.add(tag);
 
             let name = url.name ? url.name : url.url;
             this._insertWithTags(iter, name,
                                  tags.concat(this._lookupTag('url'), tag));
 
-            pos = url.pos + name.length;
+            pos = url.pos + url.url.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
-
-        if (highlight && message.pendingId)
-            this._pending.set(message.pendingId,
-                              this._view.buffer.create_mark(null, iter, true));
     },
 
     _onNickStatusChanged: function(baseNick, status) {
