@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-18 21:08+0000\n"
-"PO-Revision-Date: 2017-02-21 19:07+0100\n"
+"POT-Creation-Date: 2017-03-05 19:18+0000\n"
+"PO-Revision-Date: 2017-03-09 23:26+0100\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:590
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:651
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un programma IRC per GNOME"
 
@@ -113,10 +113,18 @@ msgid "Nickname of the bot to identify with"
 msgstr "Soprannome del bot con cui identificarsi"
 
 #: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "Comando d'identificazione"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Comando usato per identificarsi col bot"
+
+#: data/org.gnome.Polari.gschema.xml:44
 msgid "Identify username"
 msgstr "Nome utente d'identificazione"
 
-#: data/org.gnome.Polari.gschema.xml:40
+#: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
 msgstr "Nome utente da usare con il comando di identificazione"
 
@@ -340,24 +348,24 @@ msgstr "Invia una notifica se l'utente appare online."
 msgid "Message"
 msgstr "Messaggio"
 
-#: src/application.js:44
+#: src/application.js:45
 msgid "Start Telepathy client"
 msgstr "Avvia client Telepathy"
 
-#: src/application.js:283 src/utils.js:169
+#: src/application.js:344 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Apertura del collegamento non riuscita"
 
-#: src/application.js:490
+#: src/application.js:551
 #, javascript-format
 msgid "%s removed."
 msgstr "%s rimosso."
 
-#: src/application.js:589
+#: src/application.js:650
 msgid "translator-credits"
 msgstr "Milo Casagrande <milo@milo.name>, 2013-2016"
 
-#: src/application.js:595
+#: src/application.js:656
 msgid "Learn more about Polari"
 msgstr "Maggiori informazioni su Polari"
 
@@ -721,7 +729,7 @@ msgstr "Connessi"
 msgid "Connecting…"
 msgstr "Connessione…"
 
-#: src/roomList.js:311 src/userList.js:422
+#: src/roomList.js:311 src/userList.js:423
 msgid "Offline"
 msgstr "Offline"
 
@@ -757,7 +765,7 @@ msgstr "Salva pass_word"
 msgid "Should the password be saved?"
 msgstr "Salvare la password?"
 
-#: src/roomStack.js:142 src/telepathyClient.js:568
+#: src/roomStack.js:142 src/telepathyClient.js:575
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -768,76 +776,76 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Entrare in una stanza utilizzando il pulsante +"
 
-#: src/telepathyClient.js:399
+#: src/telepathyClient.js:400
 msgid "Good Bye"
 msgstr "Ciao!"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:567
+#: src/telepathyClient.js:574
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Salvare la password di %s per %s?"
 
-#: src/telepathyClient.js:571
+#: src/telepathyClient.js:578
 msgid "Save"
 msgstr "Salva"
 
-#: src/userList.js:237
+#: src/userList.js:238
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d secondo fa"
 msgstr[1] "%d secondi fa"
 
-#: src/userList.js:242
+#: src/userList.js:243
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minuto fa"
 msgstr[1] "%d minuti fa"
 
-#: src/userList.js:247
+#: src/userList.js:248
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d ora fa"
 msgstr[1] "%d ore fa"
 
-#: src/userList.js:252
+#: src/userList.js:253
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d giorno fa"
 msgstr[1] "%d giorni fa"
 
-#: src/userList.js:257
+#: src/userList.js:258
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d settimana fa"
 msgstr[1] "%d settimane fa"
 
-#: src/userList.js:261
+#: src/userList.js:262
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d mese fa"
 msgstr[1] "%d mesi fa"
 
-#: src/userList.js:418
+#: src/userList.js:419
 msgid "Available in another room."
 msgstr "Disponibile in un'altra stanza."
 
-#: src/userList.js:420
+#: src/userList.js:421
 msgid "Online"
 msgstr "Online"
 
-#: src/userList.js:569
+#: src/userList.js:570
 msgid "No results"
 msgstr "Nessun risultato"
 
-#: src/userList.js:743
+#: src/userList.js:744
 msgid "All"
 msgstr "Tutto"
 
@@ -850,12 +858,12 @@ msgstr "L'utente è online"
 msgid "User %s is now online."
 msgstr "L'utente %s è ora online."
 
-#: src/utils.js:89
+#: src/utils.js:105
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Password del server per %s"
 
-#: src/utils.js:94
+#: src/utils.js:110
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Password del NickServ per %s"
