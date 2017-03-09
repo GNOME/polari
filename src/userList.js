@@ -143,6 +143,7 @@ const UserDetails = new Lang.Class({
 
         this._updateButtonVisibility();
         this._detailsGrid.hide();
+        this._notificationLabel.opacity = this.notifications_enabled ? 1. : 0.;
     },
 
     get notifications_enabled() {
