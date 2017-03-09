@@ -50,4 +50,24 @@
     <kudo>Notifications</kudo>
   </kudos>
   <translation type="gettext">polari</translation>
+  <releases>
+    <release version="3.24.0" date="2017-03-20">
+      <description>
+        <p>
+           This release is part of the GNOME 3.24 update. Highlights include:
+        </p>
+        <ul>
+          <li>Nicks in the chat log have a contextual popover with
+              useful information and actions</li>
+          <li>The join dialog now shows existing rooms that can be joined
+              by selecting one or more</li>
+          <li>Polari can now keep running in the background when the
+              window is closed</li>
+          <li>Typed messages are now spell-checked</li>
+          <li>The Polari Flatpak now works without installing additional
+              packages on the system</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
 </component>
