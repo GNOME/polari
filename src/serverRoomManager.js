@@ -9,6 +9,7 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const RoomManager = imports.roomManager;
 const Signals = imports.signals;
+const Utils = imports.utils;
 
 const LIST_CHUNK_SIZE = 100;
 
@@ -126,6 +127,7 @@ const ServerRoomList = new Lang.Class({
     _init: function(params) {
         this._account = null;
         this._pendingInfos = [];
+        this._filterTerms = [];
 
         this.parent(params);
 
@@ -133,7 +135,21 @@ const ServerRoomList = new Lang.Class({
             this.setAccount(null);
         });
 
+        this._list.model.set_visible_func((model, iter) => {
+            let name = model.get_value(iter, RoomListColumn.NAME);
+            if (!name)
+                return false;
+
+            return this._filterTerms.every((term) => name.indexOf(term) != -1);
+        });
+
         this._filterEntry.connect('changed', () => { this.notify('can-join'); });
+        this._filterEntry.connect('search-changed', () => {
+            if (!Utils.updateTerms(this._filterTerms, this._filterEntry.text))
+                return;
+
+            this._list.model.refilter();
+        });
         this._filterEntry.connect('stop-search', () => {
             if (this._filterEntry.get_text_length() > 0)
                 this._filterEntry.set_text('');
