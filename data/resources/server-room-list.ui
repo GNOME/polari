@@ -12,6 +12,9 @@
       <column type="gboolean"/>
     </columns>
   </object>
+  <object class="GtkTreeModelFilter" id="modelFilter">
+    <property name="child-model">store</property>
+  </object>
   <template class="Gjs_ServerRoomList" parent="GtkBox">
     <property name="orientation">vertical</property>
     <style>
@@ -52,7 +55,7 @@
         <child>
           <object class="GtkTreeView" id="list">
             <property name="visible">True</property>
-            <property name="model">store</property>
+            <property name="model">modelFilter</property>
             <property name="activate-on-single-click">True</property>
             <property name="enable-grid-lines">horizontal</property>
             <property name="headers-visible">False</property>
@@ -62,7 +65,7 @@
             <child>
               <object class="GtkTreeViewColumn">
                 <child>
-                  <object class="GtkCellRendererToggle"/>
+                  <object class="GtkCellRendererToggle" id="toggleRenderer"/>
                   <attributes>
                     <attribute name="active">0</attribute>
                     <attribute name="sensitive">3</attribute>

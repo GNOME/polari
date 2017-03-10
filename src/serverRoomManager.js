@@ -113,7 +113,9 @@ const ServerRoomList = new Lang.Class({
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
     InternalChildren: ['filterEntry',
                        'list',
-                       'spinner'],
+                       'spinner',
+                       'store',
+                       'toggleRenderer'],
     Properties: { 'can-join': GObject.ParamSpec.boolean('can-join',
                                                         'can-join',
                                                         'can-join',
@@ -143,6 +145,10 @@ const ServerRoomList = new Lang.Class({
             this._toggleChecked(path);
         });
 
+        this._toggleRenderer.connect('toggled', (cell, pathStr) => {
+            this._toggleChecked(Gtk.TreePath.new_from_string(pathStr));
+        });
+
         this._manager = getDefault();
         this._manager.connect('loading-changed',
                               Lang.bind(this, this._onLoadingChanged));
@@ -153,7 +159,7 @@ const ServerRoomList = new Lang.Class({
             return true;
 
         let canJoin = false;
-        this._list.model.foreach((model, path, iter) => {
+        this._store.foreach((model, path, iter) => {
             canJoin = model.get_value(iter, RoomListColumn.SENSITIVE) &&
                       model.get_value(iter, RoomListColumn.CHECKED);
             return canJoin;
@@ -167,12 +173,12 @@ const ServerRoomList = new Lang.Class({
         if (this._filterEntry.get_text_length() > 0)
             rooms.push(this._filterEntry.get_text());
 
-        let [valid, iter] = this._list.model.get_iter_first();
-        for (; valid; valid = this._list.model.iter_next(iter)) {
-            if (!this._list.model.get_value(iter, RoomListColumn.SENSITIVE) ||
-                !this._list.model.get_value(iter, RoomListColumn.CHECKED))
+        let [valid, iter] = this._store.get_iter_first();
+        for (; valid; valid = this._store.iter_next(iter)) {
+            if (!this._store.get_value(iter, RoomListColumn.SENSITIVE) ||
+                !this._store.get_value(iter, RoomListColumn.CHECKED))
                 continue;
-            rooms.push(this._list.model.get_value(iter, RoomListColumn.NAME));
+            rooms.push(this._store.get_value(iter, RoomListColumn.NAME));
         }
         return rooms;
     },
@@ -183,7 +189,7 @@ const ServerRoomList = new Lang.Class({
 
         this._account = account;
         this._pendingInfos = [];
-        this._list.model.clear();
+        this._store.clear();
         this._filterEntry.set_text('');
         this._onLoadingChanged(this._manager, account);
     },
@@ -201,7 +207,7 @@ const ServerRoomList = new Lang.Class({
         if (this.loading)
             return;
 
-        this._list.model.clear();
+        this._store.clear();
 
         if (this._idleId)
             Mainloop.source_remove(this._idleId);
@@ -225,7 +231,7 @@ const ServerRoomList = new Lang.Class({
 
         this._idleId = Mainloop.idle_add(() => {
             this._pendingInfos.splice(0, LIST_CHUNK_SIZE).forEach(roomInfo => {
-                let store = this._list.model;
+                let store = this._store;
 
                 let name = roomInfo.get_name();
                 if (name[0] == '#')
@@ -259,11 +265,12 @@ const ServerRoomList = new Lang.Class({
     },
 
     _toggleChecked: function(path) {
-        let [valid, iter] = this._list.model.get_iter(path);
-        if (!this._list.model.get_value(iter, RoomListColumn.SENSITIVE))
+        let childPath = this._list.model.convert_path_to_child_path(path);
+        let [valid, iter] = this._store.get_iter(childPath);
+        if (!this._store.get_value(iter, RoomListColumn.SENSITIVE))
             return;
-        let checked = this._list.model.get_value(iter, RoomListColumn.CHECKED);
-        this._list.model.set_value(iter, RoomListColumn.CHECKED, !checked);
+        let checked = this._store.get_value(iter, RoomListColumn.CHECKED);
+        this._store.set_value(iter, RoomListColumn.CHECKED, !checked);
 
         this.notify('can-join');
     }
