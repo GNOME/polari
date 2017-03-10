@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-02-24 00:47+0000\n"
-"PO-Revision-Date: 2017-02-26 14:23+0200\n"
-"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
+"POT-Creation-Date: 2017-03-10 00:00+0000\n"
+"PO-Revision-Date: 2017-03-06 23:26+0200\n"
+"Last-Translator: Moo\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:590
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:651
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME internetinio perdavimo pokalbių klientas"
 
@@ -43,11 +43,6 @@ msgstr ""
 "leidžia susitelkti ties pokalbiais."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
-#| msgid ""
-#| "You can use Polari to publicly chat with people in a channel, and to have "
-#| "private one-to-one conversations. Notifications make sure that you never "
-#| "miss an important message - for private conversations, they even allow "
-#| "you to reply instantly without switching back to the application!"
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -118,10 +113,18 @@ msgid "Nickname of the bot to identify with"
 msgstr "Roboto slapyvardis, kurį identifikuoti"
 
 #: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "Identifikavimo komanda"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Komanda, naudojama identifikavimui su robotu"
+
+#: data/org.gnome.Polari.gschema.xml:44
 msgid "Identify username"
 msgstr "Identifikuoti naudotoją"
 
-#: data/org.gnome.Polari.gschema.xml:40
+#: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
 msgstr "Naudotojo vardas identifikavimo komandai"
 
@@ -241,8 +244,6 @@ msgid "Last Room"
 msgstr "Paskutinis kambarys"
 
 #: data/resources/help-overlay.ui:103
-#| msgctxt "shortcut window"
-#| msgid "First - Ninth Room"
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Pirmas – devintas kambarys"
@@ -286,7 +287,6 @@ msgid ""
 msgstr "Polari užvėrus toliau veiks ir bus automatiškai paleista prisijungus."
 
 #: data/resources/main-window.ui:21
-#| msgid "Quit"
 msgid "_Quit"
 msgstr "_Išeiti"
 
@@ -346,26 +346,26 @@ msgstr "Praneš, jei naudotojas pasirodys internete."
 msgid "Message"
 msgstr "Pranešimas"
 
-#: src/application.js:44
+#: src/application.js:45
 msgid "Start Telepathy client"
 msgstr "Paleisti Telepathy klientą"
 
-#: src/application.js:283 src/utils.js:169
+#: src/application.js:344 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Nepavyko atverti saito"
 
-#: src/application.js:490
+#: src/application.js:551
 #, javascript-format
 msgid "%s removed."
 msgstr "%s pašalinta."
 
-#: src/application.js:589
+#: src/application.js:650
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
 "Aurimas Černius <aurisc4@gmail.com>"
 
-#: src/application.js:595
+#: src/application.js:656
 msgid "Learn more about Polari"
 msgstr "Sužinokite daugiau apie Polari"
 
@@ -572,7 +572,6 @@ msgstr "Nusiųsti paveikslėlį „%s“ į viešąją įklijavimo paslaugą?"
 #. Translators: %s is a filename
 #: src/entryArea.js:339
 #, javascript-format
-#| msgid "Uploading “%s” to public paste service …"
 msgid "Uploading “%s” to public paste service…"
 msgstr "Siunčiamas paveikslėlis „%s“ į viešąją įklijavimo paslaugą…"
 
@@ -597,18 +596,12 @@ msgstr "Įdėti iš %s"
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
 #: src/ircParser.js:24
-#| msgid ""
-#| "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current "
-#| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/CLOSE [<kanalas>] [<priežastis>] – užveria <kanalą>, numatytai dabartinį"
 
 #: src/ircParser.js:25
-#| msgid ""
-#| "/HELP [<command>] - displays help for <command>, or a list of available "
-#| "commands"
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -617,9 +610,6 @@ msgstr ""
 "komandas"
 
 #: src/ircParser.js:26
-#| msgid ""
-#| "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current "
-#| "one"
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
@@ -627,67 +617,53 @@ msgstr ""
 "į dabartinį"
 
 #: src/ircParser.js:27
-#| msgid "/JOIN <channel> - joins <channel>"
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <kanalas> – prisijungia prie kanalo"
 
 #: src/ircParser.js:28
-#| msgid "/KICK <nick> - kicks <nick> from current channel"
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <slapyvardis> – išspiria <slapyvardis> iš dabartinio kanalo"
 
 #: src/ircParser.js:29
-#| msgid "/ME <action> - sends <action> to the current channel"
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <veiksmas> – siunčia <veiksmas> į dabartinį kanalą"
 
 #: src/ircParser.js:30
-#| msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr ""
 "/MSG <slapyvardis> [<pranešimas>] – siunčia privatų pranešimą <slapyvardžiui>"
 
 #: src/ircParser.js:31
-#| msgid "/NAMES - lists users on the current channel"
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES – išvardina dabartinio kanalo naudotojus"
 
 #: src/ircParser.js:32
-#| msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <slapyvardis> – nustato slapyvardį į <slapyvardis>"
 
 #: src/ircParser.js:33
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr "/PART [<kanalas>] [<priežastis>] – išeina iš kanalo, numatytai esamojo"
 
 #: src/ircParser.js:34
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <slapyvardis> – atverčia privatų pokalbį su <slapyvardis>"
 
 #: src/ircParser.js:35
-#| msgid "/QUIT [<reason>] - disconnects from the current server"
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<priežastis>] – atsijungia nuo dabartinio serverio"
 
 #: src/ircParser.js:36
-#| msgid "/SAY <text> - sends <text> to the current room/contact"
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr ""
 "/SAY <tekstas> – siunčia tekstą į dabartinį kambarį/dabartiniam kontaktui"
 
 #: src/ircParser.js:37
-#| msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <tema> – nustato temą arba parodo dabartinę"
 
 #: src/ircParser.js:40
-#| msgid "Unknown command - try /HELP for a list of available commands"
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr "Nežinoma komanda – bandykite /HELP galimų komandų sąrašui gauti"
 
@@ -750,11 +726,10 @@ msgid "Connected"
 msgstr "Prisijungta"
 
 #: src/roomList.js:309
-#| msgid "Connecting..."
 msgid "Connecting…"
 msgstr "Jungiamasi…"
 
-#: src/roomList.js:311 src/userList.js:422
+#: src/roomList.js:311 src/userList.js:424
 msgid "Offline"
 msgstr "Atsijungęs"
 
@@ -790,7 +765,7 @@ msgstr "Į_rašyti slaptažodis"
 msgid "Should the password be saved?"
 msgstr "Ar įrašyti slaptažodį?"
 
-#: src/roomStack.js:142 src/telepathyClient.js:568
+#: src/roomStack.js:142 src/telepathyClient.js:575
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -800,22 +775,22 @@ msgstr "Identifikavimas įvyks automatiškai kitą kartą prisijungiant prie %s"
 msgid "Join a room using the + button."
 msgstr "Prisijunkite prie kambario paspausdami mygtuką +."
 
-#: src/telepathyClient.js:399
+#: src/telepathyClient.js:400
 msgid "Good Bye"
 msgstr "Viso gero"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:567
+#: src/telepathyClient.js:574
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Įrašyti %s %s slaptažodį?"
 
-#: src/telepathyClient.js:571
+#: src/telepathyClient.js:578
 msgid "Save"
 msgstr "Įrašyti"
 
-#: src/userList.js:237
+#: src/userList.js:239
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -823,7 +798,7 @@ msgstr[0] "Prieš %d sekundę"
 msgstr[1] "Prieš %d sekundes"
 msgstr[2] "Prieš %d sekundžių"
 
-#: src/userList.js:242
+#: src/userList.js:244
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -831,7 +806,7 @@ msgstr[0] "Prieš %d minutę"
 msgstr[1] "Prieš %d minutes"
 msgstr[2] "Prieš %d minučių"
 
-#: src/userList.js:247
+#: src/userList.js:249
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -839,7 +814,7 @@ msgstr[0] "Prieš %d valandą"
 msgstr[1] "Prieš %d valandas"
 msgstr[2] "Prieš %d valandų"
 
-#: src/userList.js:252
+#: src/userList.js:254
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -847,7 +822,7 @@ msgstr[0] "Prieš %d dieną"
 msgstr[1] "Prieš %d dienas"
 msgstr[2] "Prieš %d dienų"
 
-#: src/userList.js:257
+#: src/userList.js:259
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -855,7 +830,7 @@ msgstr[0] "Prieš %d savaitę"
 msgstr[1] "Prieš %d savaites"
 msgstr[2] "Prieš %d savaičių"
 
-#: src/userList.js:261
+#: src/userList.js:263
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -863,25 +838,23 @@ msgstr[0] "Prieš %d mėnesį"
 msgstr[1] "Prieš %d mėnesius"
 msgstr[2] "Prieš %d mėnesių"
 
-#: src/userList.js:418
+#: src/userList.js:420
 msgid "Available in another room."
 msgstr "Pasiekiamas kitame kambaryje."
 
-#: src/userList.js:420
-#| msgid "Offline"
+#: src/userList.js:422
 msgid "Online"
 msgstr "Prisijungęs"
 
-#: src/userList.js:569
+#: src/userList.js:571
 msgid "No results"
 msgstr "Nėra rezultatų"
 
-#: src/userList.js:743
+#: src/userList.js:745
 msgid "All"
 msgstr "Viskas"
 
 #: src/userTracker.js:303
-#| msgid "Users on %s:"
 msgid "User is online"
 msgstr "Naudotojas yra prisijungęs"
 
@@ -890,12 +863,12 @@ msgstr "Naudotojas yra prisijungęs"
 msgid "User %s is now online."
 msgstr "Naudotojas %s prisijungė."
 
-#: src/utils.js:89
+#: src/utils.js:105
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari %s serverio slaptažodis"
 
-#: src/utils.js:94
+#: src/utils.js:110
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polari %s NickServ slaptažodis"
