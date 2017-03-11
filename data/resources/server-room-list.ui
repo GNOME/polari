@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkListStore" id="store">
+    <columns>
+      <!-- column-name checked -->
+      <column type="gboolean"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name count -->
+      <column type="gchararray"/>
+      <!-- column-name sensitive -->
+      <column type="gboolean"/>
+    </columns>
+  </object>
+  <template class="Gjs_ServerRoomList" parent="GtkScrolledWindow">
+    <property name="vexpand">True</property>
+    <property name="hscrollbar-policy">never</property>
+      <child>
+        <object class="GtkTreeView" id="list">
+          <property name="visible">True</property>
+          <property name="model">store</property>
+          <property name="activate-on-single-click">True</property>
+          <property name="enable-grid-lines">horizontal</property>
+          <property name="headers-visible">False</property>
+          <style>
+            <class name="polari-server-room-list"/>
+          </style>
+          <child>
+            <object class="GtkTreeViewColumn">
+              <child>
+                <object class="GtkCellRendererToggle"/>
+                <attributes>
+                  <attribute name="active">0</attribute>
+                  <attribute name="sensitive">3</attribute>
+                </attributes>
+                <cell-packing>
+                  <property name="expand">False</property>
+                </cell-packing>
+              </child>
+              <child>
+                <object class="GtkCellRendererText">
+                  <property name="ellipsize">end</property>
+                </object>
+                <attributes>
+                  <attribute name="text">1</attribute>
+                  <attribute name="sensitive">3</attribute>
+                </attributes>
+                <cell-packing>
+                  <property name="expand">True</property>
+                </cell-packing>
+              </child>
+              <child>
+                <object class="GtkCellRendererText">
+                  <property name="xalign">1.0</property>
+                </object>
+                <attributes>
+                  <attribute name="text">2</attribute>
+                  <attribute name="sensitive">3</attribute>
+                </attributes>
+                <cell-packing>
+                  <property name="expand">False</property>
+                </cell-packing>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+  </template>
+</interface>

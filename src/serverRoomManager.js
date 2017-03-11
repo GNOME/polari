@@ -110,6 +110,8 @@ const RoomListColumn = {
 const ServerRoomList = new Lang.Class({
     Name: 'ServerRoomList',
     Extends: Gtk.ScrolledWindow,
+    Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
+    InternalChildren: ['list'],
     Properties: { 'can-join': GObject.ParamSpec.boolean('can-join',
                                                         'can-join',
                                                         'can-join',
@@ -132,45 +134,9 @@ const ServerRoomList = new Lang.Class({
             this.setAccount(null);
         });
 
-        let store = new Gtk.ListStore();
-        store.set_column_types([GObject.TYPE_BOOLEAN,
-                                GObject.TYPE_STRING,
-                                GObject.TYPE_STRING,
-                                GObject.TYPE_BOOLEAN]);
-
-        this._list = new Gtk.TreeView({ model: store,
-                                        activate_on_single_click: true,
-                                        enable_grid_lines: Gtk.TreeViewGridLines.HORIZONTAL,
-                                        headers_visible: false,
-                                        visible: true });
-        this._list.get_style_context().add_class('polari-server-room-list');
         this._list.connect('row-activated', (view, path, column) => {
             this._toggleChecked(path);
         });
-        this.add(this._list);
-
-        let renderer;
-
-        let column = new Gtk.TreeViewColumn();
-        this._list.append_column(column);
-
-        renderer = new Gtk.CellRendererToggle();
-
-        column.pack_start(renderer, false);
-        column.add_attribute(renderer, 'active', RoomListColumn.CHECKED);
-        column.add_attribute(renderer, 'sensitive', RoomListColumn.SENSITIVE);
-
-        renderer = new Gtk.CellRendererText({ ellipsize: Pango.EllipsizeMode.END });
-
-        column.pack_start(renderer, true);
-        column.add_attribute(renderer, 'text', RoomListColumn.NAME);
-        column.add_attribute(renderer, 'sensitive', RoomListColumn.SENSITIVE);
-
-        renderer = new Gtk.CellRendererText({ xalign: 1.0 });
-
-        column.pack_start(renderer, false);
-        column.add_attribute(renderer, 'text', RoomListColumn.COUNT);
-        column.add_attribute(renderer, 'sensitive', RoomListColumn.SENSITIVE);
 
         this._manager = getDefault();
         this._manager.connect('loading-changed',
