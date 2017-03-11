@@ -253,7 +253,7 @@ const ServerRoomList = new Lang.Class({
                 if (name[0] == '#')
                     name = name.substr(1, name.length);
 
-                let room = roomManager.lookupRoomByName(roomInfo.get_name());
+                let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
                 let sensitive = room == null;
                 let checked = !sensitive;
                 let count = '%d'.format(roomInfo.get_members_count(null));

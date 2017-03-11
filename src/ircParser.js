@@ -220,7 +220,7 @@ const IrcParser = new Lang.Class({
                 let room = null;;
                 let name = argv[0];
                 if (name)
-                    room = this._roomManager.lookupRoomByName(name);
+                    room = this._roomManager.lookupRoomByName(name, this._room.account);
                 if (room)
                     argv.shift(); // first arg was a room name
                 else

@@ -58,9 +58,9 @@ const _RoomManager = new Lang.Class({
         return this._rooms.get(id);
     },
 
-    lookupRoomByName: function(name) {
+    lookupRoomByName: function(name, account) {
         for (let room of this._rooms.values())
-            if (room.channel_name == name)
+            if (room.channel_name == name && room.account == account)
                 return room;
         return null;
     },
