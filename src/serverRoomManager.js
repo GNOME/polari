@@ -166,7 +166,7 @@ const ServerRoomList = new Lang.Class({
         column.add_attribute(renderer, 'text', RoomListColumn.NAME);
         column.add_attribute(renderer, 'sensitive', RoomListColumn.SENSITIVE);
 
-        renderer = new Gtk.CellRendererText();
+        renderer = new Gtk.CellRendererText({ xalign: 1.0 });
 
         column.pack_start(renderer, false);
         column.add_attribute(renderer, 'text', RoomListColumn.COUNT);
