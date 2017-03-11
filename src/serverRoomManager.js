@@ -140,9 +140,18 @@ const ServerRoomList = new Lang.Class({
             if (!name)
                 return false;
 
+            if (this._isCustomRoomItem(iter))
+                return true;
+
             return this._filterTerms.every((term) => name.indexOf(term) != -1);
         });
 
+        [, this._customRoomItem] = this._store.get_iter_first();
+        this._list.model.refilter();
+
+        this._filterEntry.connect('changed', () => {
+            this._updateCustomRoomName();
+        });
         this._filterEntry.connect('search-changed', () => {
             if (!Utils.updateTerms(this._filterTerms, this._filterEntry.text))
                 return;
@@ -197,13 +206,36 @@ const ServerRoomList = new Lang.Class({
 
         this._account = account;
         this._pendingInfos = [];
-        this._store.clear();
+        this._clearList();
         this._filterEntry.set_text('');
         this._onLoadingChanged(this._manager, account);
     },
 
     focusEntry: function() {
         this._filterEntry.grab_focus();
+    },
+
+    _isCustomRoomItem: function(iter) {
+        let path = this._store.get_path(iter);
+        let customPath = this._store.get_path(this._customRoomItem);
+        return path.compare(customPath) == 0;
+    },
+
+    _updateCustomRoomName: function() {
+        let newName = this._filterEntry.text.trim();
+        if (newName.search(/\s/) != -1)
+            newName = '';
+
+        this._store.set_value(this._customRoomItem, RoomListColumn.NAME, newName);
+    },
+
+    _clearList: function() {
+        let [valid, iter] = this._store.get_iter_first();
+        if (this._isCustomRoomItem(iter))
+            return;
+        this._store.move_before(this._customRoomItem, iter);
+        while (this._store.remove(iter))
+            ;
     },
 
     _onLoadingChanged: function(mgr, account) {
@@ -215,7 +247,7 @@ const ServerRoomList = new Lang.Class({
         if (this.loading)
             return;
 
-        this._store.clear();
+        this._clearList();
 
         if (this._idleId)
             Mainloop.source_remove(this._idleId);
@@ -250,12 +282,13 @@ const ServerRoomList = new Lang.Class({
                 let checked = !sensitive;
                 let count = '%d'.format(roomInfo.get_members_count(null));
 
-                store.insert_with_valuesv(-1,
-                                          [RoomListColumn.CHECKED,
-                                           RoomListColumn.NAME,
-                                           RoomListColumn.COUNT,
-                                           RoomListColumn.SENSITIVE],
-                                          [checked, name, count, sensitive]);
+                let iter = store.insert_with_valuesv(-1,
+                                                     [RoomListColumn.CHECKED,
+                                                      RoomListColumn.NAME,
+                                                      RoomListColumn.COUNT,
+                                                      RoomListColumn.SENSITIVE],
+                                                     [checked, name, count, sensitive]);
+                store.move_before(iter, this._customRoomItem);
             });
             if (this._pendingInfos.length)
                 return GLib.SOURCE_CONTINUE;

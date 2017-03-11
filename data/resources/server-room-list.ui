@@ -11,6 +11,12 @@
       <!-- column-name sensitive -->
       <column type="gboolean"/>
     </columns>
+    <data>
+      <row>
+        <col id="2">+</col>
+        <col id="3">True</col>
+      </row>
+    </data>
   </object>
   <object class="GtkTreeModelFilter" id="modelFilter">
     <property name="child-model">store</property>
