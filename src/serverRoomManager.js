@@ -155,18 +155,28 @@ const ServerRoomList = new Lang.Class({
 
         this._filterEntry.connect('changed', () => {
             this._updateCustomRoomName();
+            this._updateSelection();
         });
         this._filterEntry.connect('search-changed', () => {
             if (!Utils.updateTerms(this._filterTerms, this._filterEntry.text))
                 return;
 
             this._list.model.refilter();
+            this._updateSelection();
         });
         this._filterEntry.connect('stop-search', () => {
             if (this._filterEntry.get_text_length() > 0)
                 this._filterEntry.set_text('');
             else if (this.get_toplevel() instanceof Gtk.Dialog)
                 this.get_toplevel().response(Gtk.ResponseType.CANCEL);
+        });
+        this._filterEntry.connect('activate', () => {
+            if (this._filterEntry.text.trim().length == 0)
+                return;
+
+            let [selected, model, iter] = this._list.get_selection().get_selected();
+            if (selected)
+                this._toggleChecked(this._list.model.get_path(iter));
         });
 
         this._list.connect('row-activated', (view, path, column) => {
@@ -245,6 +255,19 @@ const ServerRoomList = new Lang.Class({
         }
 
         this._store.set_value(this._customRoomItem, RoomListColumn.NAME, newName);
+    },
+
+    _updateSelection: function() {
+        if (this._filterEntry.text.trim().length == 0)
+            return;
+
+        let model = this._list.model;
+        let [valid, iter] = model.get_iter_first();
+        if (!valid)
+            return;
+
+        this._list.get_selection().select_iter(iter);
+        this._list.scroll_to_cell(model.get_path(iter), null, true, 0.0, 0.0);
     },
 
     _clearList: function() {
