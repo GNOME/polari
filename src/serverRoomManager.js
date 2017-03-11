@@ -143,7 +143,6 @@ const ServerRoomList = new Lang.Class({
             return this._filterTerms.every((term) => name.indexOf(term) != -1);
         });
 
-        this._filterEntry.connect('changed', () => { this.notify('can-join'); });
         this._filterEntry.connect('search-changed', () => {
             if (!Utils.updateTerms(this._filterTerms, this._filterEntry.text))
                 return;
@@ -171,9 +170,6 @@ const ServerRoomList = new Lang.Class({
     },
 
     get can_join() {
-        if (this._filterEntry.get_text_length() > 0)
-            return true;
-
         let canJoin = false;
         this._store.foreach((model, path, iter) => {
             canJoin = model.get_value(iter, RoomListColumn.SENSITIVE) &&
@@ -185,10 +181,6 @@ const ServerRoomList = new Lang.Class({
 
     get selectedRooms() {
         let rooms = [];
-
-        if (this._filterEntry.get_text_length() > 0)
-            rooms.push(this._filterEntry.get_text());
-
         let [valid, iter] = this._store.get_iter_first();
         for (; valid; valid = this._store.iter_next(iter)) {
             if (!this._store.get_value(iter, RoomListColumn.SENSITIVE) ||
