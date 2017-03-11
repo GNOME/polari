@@ -12,58 +12,94 @@
       <column type="gboolean"/>
     </columns>
   </object>
-  <template class="Gjs_ServerRoomList" parent="GtkScrolledWindow">
-    <property name="vexpand">True</property>
-    <property name="hscrollbar-policy">never</property>
-      <child>
-        <object class="GtkTreeView" id="list">
-          <property name="visible">True</property>
-          <property name="model">store</property>
-          <property name="activate-on-single-click">True</property>
-          <property name="enable-grid-lines">horizontal</property>
-          <property name="headers-visible">False</property>
-          <style>
-            <class name="polari-server-room-list"/>
-          </style>
-          <child>
-            <object class="GtkTreeViewColumn">
-              <child>
-                <object class="GtkCellRendererToggle"/>
-                <attributes>
-                  <attribute name="active">0</attribute>
-                  <attribute name="sensitive">3</attribute>
-                </attributes>
-                <cell-packing>
-                  <property name="expand">False</property>
-                </cell-packing>
-              </child>
-              <child>
-                <object class="GtkCellRendererText">
-                  <property name="ellipsize">end</property>
-                </object>
-                <attributes>
-                  <attribute name="text">1</attribute>
-                  <attribute name="sensitive">3</attribute>
-                </attributes>
-                <cell-packing>
-                  <property name="expand">True</property>
-                </cell-packing>
-              </child>
-              <child>
-                <object class="GtkCellRendererText">
-                  <property name="xalign">1.0</property>
-                </object>
-                <attributes>
-                  <attribute name="text">2</attribute>
-                  <attribute name="sensitive">3</attribute>
-                </attributes>
-                <cell-packing>
-                  <property name="expand">False</property>
-                </cell-packing>
-              </child>
-            </object>
-          </child>
-        </object>
-      </child>
+  <template class="Gjs_ServerRoomList" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <style>
+      <class name="linked"/>
+      <class name="frame"/>
+    </style>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <style>
+          <class name="polari-listbox-filterbar"/>
+        </style>
+        <child>
+          <object class="GtkSearchEntry" id="filterEntry">
+            <property name="visible">True</property>
+            <property name="hexpand">True</property>
+            <property name="margin">60</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <property name="margin-end">22</property>
+            <property name="activates-default">True</property>
+            <property name="placeholder-text" translatable="yes">Enter room name to add</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSpinner" id="spinner">
+            <property name="visible">True</property>
+            <property name="margin-end">22</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="vexpand">True</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="GtkTreeView" id="list">
+            <property name="visible">True</property>
+            <property name="model">store</property>
+            <property name="activate-on-single-click">True</property>
+            <property name="enable-grid-lines">horizontal</property>
+            <property name="headers-visible">False</property>
+            <style>
+              <class name="polari-server-room-list"/>
+            </style>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <child>
+                  <object class="GtkCellRendererToggle"/>
+                  <attributes>
+                    <attribute name="active">0</attribute>
+                    <attribute name="sensitive">3</attribute>
+                  </attributes>
+                  <cell-packing>
+                    <property name="expand">False</property>
+                  </cell-packing>
+                </child>
+                <child>
+                  <object class="GtkCellRendererText">
+                    <property name="ellipsize">end</property>
+                  </object>
+                  <attributes>
+                    <attribute name="text">1</attribute>
+                    <attribute name="sensitive">3</attribute>
+                  </attributes>
+                  <cell-packing>
+                    <property name="expand">True</property>
+                  </cell-packing>
+                </child>
+                <child>
+                  <object class="GtkCellRendererText">
+                    <property name="xalign">1.0</property>
+                  </object>
+                  <attributes>
+                    <attribute name="text">2</attribute>
+                    <attribute name="sensitive">3</attribute>
+                  </attributes>
+                  <cell-packing>
+                    <property name="expand">False</property>
+                  </cell-packing>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </template>
 </interface>

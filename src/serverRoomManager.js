@@ -109,9 +109,11 @@ const RoomListColumn = {
 
 const ServerRoomList = new Lang.Class({
     Name: 'ServerRoomList',
-    Extends: Gtk.ScrolledWindow,
+    Extends: Gtk.Box,
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
-    InternalChildren: ['list'],
+    InternalChildren: ['filterEntry',
+                       'list',
+                       'spinner'],
     Properties: { 'can-join': GObject.ParamSpec.boolean('can-join',
                                                         'can-join',
                                                         'can-join',
@@ -134,9 +136,20 @@ const ServerRoomList = new Lang.Class({
             this.setAccount(null);
         });
 
+        this._filterEntry.connect('changed', () => { this.notify('can-join'); });
+        this._filterEntry.connect('stop-search', () => {
+            if (this._filterEntry.get_text_length() > 0)
+                this._filterEntry.set_text('');
+            else if (this.get_toplevel() instanceof Gtk.Dialog)
+                this.get_toplevel().response(Gtk.ResponseType.CANCEL);
+        });
+
         this._list.connect('row-activated', (view, path, column) => {
             this._toggleChecked(path);
         });
+
+        this.bind_property('loading', this._spinner, 'active',
+                           GObject.BindingFlags.SYNC_CREATE);
 
         this._manager = getDefault();
         this._manager.connect('loading-changed',
@@ -144,6 +157,9 @@ const ServerRoomList = new Lang.Class({
     },
 
     get can_join() {
+        if (this._filterEntry.get_text_length() > 0)
+            return true;
+
         let canJoin = false;
         this._list.model.foreach((model, path, iter) => {
             canJoin = model.get_value(iter, RoomListColumn.SENSITIVE) &&
@@ -160,6 +176,10 @@ const ServerRoomList = new Lang.Class({
 
     get selectedRooms() {
         let rooms = [];
+
+        if (this._filterEntry.get_text_length() > 0)
+            rooms.push(this._filterEntry.get_text());
+
         let [valid, iter] = this._list.model.get_iter_first();
         for (; valid; valid = this._list.model.iter_next(iter)) {
             if (!this._list.model.get_value(iter, RoomListColumn.SENSITIVE) ||
@@ -177,7 +197,12 @@ const ServerRoomList = new Lang.Class({
         this._account = account;
         this._pendingInfos = [];
         this._list.model.clear();
+        this._filterEntry.set_text('');
         this._onLoadingChanged(this._manager, account);
+    },
+
+    focusEntry: function() {
+        this._filterEntry.grab_focus();
     },
 
     _onLoadingChanged: function(mgr, account) {

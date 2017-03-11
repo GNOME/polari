@@ -28,8 +28,6 @@ const JoinDialog = new Lang.Class({
                        'filterEntry',
                        'connectionsList',
                        'serverRoomList',
-                       'nameEntry',
-                       'spinner',
                        'details',
                        'addButton',
                        'customToggle'],
@@ -111,19 +109,8 @@ const JoinDialog = new Lang.Class({
                                       Lang.bind(this, this._onAccountChanged));
         this._connectionCombo.sensitive = false;
 
-        this._nameEntry.connect('changed',
-                                Lang.bind(this, this._updateCanJoin));
-        this._nameEntry.connect('stop-search', Lang.bind(this,
-            function() {
-                if (this._nameEntry.text.length > 0)
-                    this._nameEntry.text = '';
-                else
-                    this.response(Gtk.ResponseType.CANCEL);
-            }));
         this._serverRoomList.connect('notify::can-join',
                                      Lang.bind(this, this._updateCanJoin));
-        this._serverRoomList.bind_property('loading', this._spinner, 'active',
-                                            GObject.BindingFlags.SYNC_CREATE);
     },
 
     _setupConnectionPage: function() {
@@ -176,8 +163,6 @@ const JoinDialog = new Lang.Class({
     },
 
     _onAccountChanged: function() {
-        this._nameEntry.set_text('');
-
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
         if (!account)
@@ -197,9 +182,6 @@ const JoinDialog = new Lang.Class({
         let account = this._accounts[selected];
 
         let toJoinRooms = this._serverRoomList.selectedRooms;
-        if (this._nameEntry.get_text_length() > 0)
-            toJoinRooms.push(this._nameEntry.get_text());
-
         toJoinRooms.forEach(function(room) {
             if (room[0] != '#')
                 room = '#' + room;
@@ -238,8 +220,7 @@ const JoinDialog = new Lang.Class({
 
         if (this._page == DialogPage.MAIN)
             sensitive = this._connectionCombo.get_active() > -1  &&
-                        (this._nameEntry.get_text_length() > 0 ||
-                        this._serverRoomList.can_join);
+                        this._serverRoomList.can_join;
 
         this._joinButton.sensitive = sensitive;
         this.set_default_response(sensitive ? Gtk.ResponseType.OK
@@ -258,7 +239,7 @@ const JoinDialog = new Lang.Class({
         let isAccountsEmpty = !this._hasAccounts;
 
         if (isMain)
-            this._nameEntry.grab_focus();
+            this._serverRoomList.focusEntry();
         else
             this._customToggle.active = false;
 
