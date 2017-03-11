@@ -118,11 +118,6 @@ const ServerRoomList = new Lang.Class({
                                                         'can-join',
                                                         'can-join',
                                                         GObject.ParamFlags.READABLE,
-                                                        false),
-                  'loading': GObject.ParamSpec.boolean('loading',
-                                                       'loading',
-                                                       'loading',
-                                                       GObject.ParamFlags.READABLE,
                                                        false)
     },
 
@@ -148,9 +143,6 @@ const ServerRoomList = new Lang.Class({
             this._toggleChecked(path);
         });
 
-        this.bind_property('loading', this._spinner, 'active',
-                           GObject.BindingFlags.SYNC_CREATE);
-
         this._manager = getDefault();
         this._manager.connect('loading-changed',
                               Lang.bind(this, this._onLoadingChanged));
@@ -167,11 +159,6 @@ const ServerRoomList = new Lang.Class({
             return canJoin;
         });
         return canJoin;
-    },
-
-    get loading() {
-        return this._pendingInfos.length ||
-               (this._account && this._manager.isLoading(this._account));
     },
 
     get selectedRooms() {
@@ -209,7 +196,7 @@ const ServerRoomList = new Lang.Class({
         if (account != this._account)
             return;
 
-        this.notify('loading');
+        this._checkSpinner();
 
         if (this.loading)
             return;
@@ -232,7 +219,7 @@ const ServerRoomList = new Lang.Class({
         });
         this._pendingInfos = roomInfos;
 
-        this.notify('loading');
+        this._checkSpinner();
 
         let roomManager = RoomManager.getDefault();
 
@@ -260,9 +247,15 @@ const ServerRoomList = new Lang.Class({
                 return GLib.SOURCE_CONTINUE;
 
             this._idleId = 0;
-            this.notify('loading');
+            this._checkSpinner();
             return GLib.SOURCE_REMOVE;
         });
+    },
+
+    _checkSpinner: function() {
+        let loading = this._pendingInfos.length ||
+                      (this._account && this._manager.isLoading(this._account));
+        this._spinner.active = loading;
     },
 
     _toggleChecked: function(path) {
