@@ -108,6 +108,10 @@ const RoomListColumn = {
     SENSITIVE: 3,
 };
 
+function _strBaseEqual(str1, str2) {
+    return str1.localeCompare(str2, {}, { sensitivity: 'base'}) == 0;
+};
+
 const ServerRoomList = new Lang.Class({
     Name: 'ServerRoomList',
     Extends: Gtk.Box,
@@ -226,6 +230,20 @@ const ServerRoomList = new Lang.Class({
         if (newName.search(/\s/) != -1)
             newName = '';
 
+        if (newName) {
+            let exactMatch = false;
+            this._store.foreach((model, path, iter) => {
+                if (this._isCustomRoomItem(iter))
+                    return false;
+
+                let name = model.get_value(iter, RoomListColumn.NAME);
+                return exactMatch = _strBaseEqual(newName, name);
+            });
+
+            if (exactMatch)
+                newName = '';
+        }
+
         this._store.set_value(this._customRoomItem, RoomListColumn.NAME, newName);
     },
 
@@ -270,12 +288,18 @@ const ServerRoomList = new Lang.Class({
         let roomManager = RoomManager.getDefault();
 
         this._idleId = Mainloop.idle_add(() => {
+            let customName = this._store.get_value(this._customRoomItem,
+                                                   RoomListColumn.NAME);
             this._pendingInfos.splice(0, LIST_CHUNK_SIZE).forEach(roomInfo => {
                 let store = this._store;
 
                 let name = roomInfo.get_name();
                 if (name[0] == '#')
                     name = name.substr(1, name.length);
+
+                if (_strBaseEqual(name, customName))
+                    this._store.set_value(this._customRoomItem,
+                                          RoomListColumn.NAME, customName = '');
 
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
                 let sensitive = room == null;
