@@ -12,6 +12,14 @@
         	<email its:translate="no">ankit4922@gmail.com</email>
         	<years>2016</years>
   	</credit>
+  	
+  	<revision pkgversion="3.22" date="2017-03-12" status="stub" />
+  	
+  	<credit type="author copyright">
+  	        <name>Paul Cutler</name>
+  	        <email>pcutler@gnome.org</email>
+  	        <years>2017</years>
+  	 </credit>
 
         <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
 
@@ -21,7 +29,7 @@
   <title>Introduction</title>
 
   <p>
-	<app>Polari</app> is a simple IRC client which perfectly integrates with the GNOME desktop, and enables you to chat with people around world through large chatrooms or via private messaging.
+	<app>Polari</app> is a simple Internet Relay Chat (IRC) client which integrates with the GNOME desktop and enables you to chat with people around the world through large chatrooms or private messaging.
   </p>
 
   <media type="image" mime="image/png" src="images/main.png">
