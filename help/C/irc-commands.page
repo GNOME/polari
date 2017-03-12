@@ -1,0 +1,34 @@
+<page xmlns="http://projectmallard.org/1.0/"
+  xmlns:its="http://www.w3.org/2005/11/its"
+  type="topic"
+  id="irc-commands">
+
+  <info>
+    <link type="guide" xref="index#conversations"/>
+    <desc>The supported IRC commands.</desc>
+    <revision pkgversion="3.24" version="0.1" date="2017-03-20" status="draft"/>
+    <credit type="author">
+      <name>Milo Casagrande</name>
+      <email its:translate="no">milo@ubuntu.com</email>
+    </credit>
+    <credit type="author">
+      <name>Paul Cutler</name>
+      <email its:translate="no">pcutler@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 4.0</p>
+    </license>
+  </info>
+
+  <title>Supported IRC commands</title>
+  <p>
+    To see the list of the supported IRC commands, in a chat room type <input>/help</input>
+    and press <key>Enter</key>.
+  </p>
+  <note>
+    <p>
+      All commands available will be listed and you can type <input> /help commandname</input>
+      to get additional help with a specific command.
+    </p>
+  </note>
+</page>

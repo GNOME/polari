@@ -4,11 +4,41 @@
       id="index">
 
   <info>
-    <revision pkgversion="3.20" date="2016-05-06" status="stub" />
+    <title type="text">Polari</title>
+    <revision pkgversion="3.20" date="2016-08-06" status="stub" />
+    <revision pkgversion="3.24" version="0.1" date="2017-03-12" status="draft" />
+
+  <credit type="author">
+    <name>Ankit R Gadiya</name>
+    <email its:translate="no">ankit4922@gmail.com</email>
+    <years>2016</years>
+  </credit>
+
+  <credit type="author">
+    <name>Paul Cutler</name>
+    <email its:translate="no">pcutler@gnome.org</email>
+  </credit>
+
+  <license>
+    <p>Creative Commons Share Alike 4.0</p>
+  </license>
 
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+    <desc><app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) client which completely integrates with the gnome desktop. Learn more about Polari.</desc>
   </info>
 
-  <title>Polari</title>
+  <title>
+    <media type="image" mime="image/png" its:translate="no" src="images/Polari.png"/>
+    Polari
+  </title>
+
+  <section id="connect" style="2column">
+    <title>Connecting to IRC Servers and Chat Rooms</title>
+  </section>
+
+  <section id="conversations" style="2column">
+    <title>Conversations</title>
+  </section>
+
 
 </page>

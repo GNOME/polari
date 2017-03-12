@@ -1,0 +1,40 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallrd.org/experimental/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="irc-join-room">
+
+  <info>
+    <link type="guide" xref="index#connect"/>
+    <link type="seealso" xref="network-connect"/>
+    <desc>Join an IRC channel.</desc>
+    <revision pkgversion="3.24" version="0.1" date="2016-03-13" status="draft"/>
+    <credit type="author">
+      <name>Paul Cutler</name>
+      <email its:translate="no">pcutler@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 4.0</p>
+    </license>
+  </info>
+
+  <title>Join an IRC chat room</title>
+
+  <p>You can join IRC chat rooms (also known as IRC channels) on any IRC network you are
+  connected to.  To connect to an IRC network, see <link xref="network-connect"/>.</p>
+
+  <p>To join an IRC chat room:</p>
+
+  <steps>
+    <item>
+      <p>Click on the <key>+</key> in the top left corner.</p>
+    </item>
+    <item>
+      <p>Enter the name of the chat room you would like to join or select the chat room(s) from the list and
+      then press <gui>Join</gui>.  You can select multiple rooms from the list to join.</p>
+     </item>
+     <item>
+       <p>Click the <gui>Join</gui> button to connect to the chat room or rooms.</p>
+     </item>
+  </steps>
+</page>
