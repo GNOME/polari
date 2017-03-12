@@ -188,6 +188,20 @@ function openURL(url, timestamp) {
     }
 }
 
+function updateTerms(terms, str) {
+    let normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
+    let newTerms = normalized ? normalized.split(' ') : [];
+
+    let changed = newTerms.length != terms.length;
+    for (let i = 0; i < terms.length && !changed; i++)
+        changed = terms[i] != newTerms[i];
+
+    if (changed)
+        terms.splice.apply(terms, [0, terms.length, ...newTerms]);
+
+    return changed;
+}
+
 function gpaste(text, title, callback) {
     if (title.length > MAX_PASTE_TITLE_LENGTH)
         title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
