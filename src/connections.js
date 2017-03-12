@@ -7,6 +7,7 @@ const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const NetworksManager = imports.networksManager;
+const Utils = imports.utils;
 
 const DEFAULT_PORT = 6667;
 const DEFAULT_SSL_PORT = 6697;
@@ -107,8 +108,8 @@ const ConnectionsList = new Lang.Class({
     },
 
     setFilter: function(filter) {
-        this._filterTerms = filter.trim().toLowerCase().replace(/\s+/g, ' ').split(' ');
-        this._list.invalidate_filter();
+        if (Utils.updateTerms(this._filterTerms, filter))
+            this._list.invalidate_filter();
     },
 
     activateFirst: function() {
