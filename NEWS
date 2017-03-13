@@ -1,3 +1,20 @@
+3.23.92 - "Mr. Five Minutes Ago"
+================================
+* Support the meson build system [Florian; #779599]
+* Implement room list filtering [Florian; #779960]
+* Misc. bug fixes and cleanups [Florian; #779906, #779921, #779940]
+
+Contributors:
+  Christian Hergert, Florian Müllner
+
+Translations:
+  Piotr Drąg [pl], Jiri Grönroos [fi], Cédric Valmary [oc],
+  Mario Blättermann [de], Rafael Fontenelle [pt_BR], Kukuh Syafaat [id],
+  Guillaume Bernard [fr], Alan Mortensen [da], Anders Jonsson [sv],
+  Balázs Meskó [hu], Marek Cernocky [cs], Milo Casagrande [it], Jordi Mas [ca],
+  Aurimas Černius [lt], Fran Dieguez [gl], Changwoo Ryu [ko],
+  Марко М. Костић [sr, sr@latin], Dušan Kazik [sk], Yuri Myasoedov [ru]
+
 3.23.91 - "That's a Good-Looking Gun"
 =====================================
 * Bundle required Telepathy services in flatpak [Florian; #777705]
