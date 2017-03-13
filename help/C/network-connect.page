@@ -1,0 +1,56 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="network-connect">
+
+  <info>
+  	<link type="guide" xref="index#connect"/>
+  	<revision pkgversion="3.20" date="2016-08-06" status="stub" />
+  	<revision pkgversion="3.22" date="2017-03-13" status="draft" />
+	<credit type="author copyright">
+      		<name>Ankit R Gadiya</name>
+      		<email its:translate="no">ankit4922@gmail.com</email>
+      		<years>2016</years>
+    	</credit>
+	<credit type="author copyright">
+      		<name>Paul Cutler</name>
+      		<email its:translate="no">pcutler@gnome.org</email>
+      		<years>2017</years>
+    	</credit>
+    	<include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+	<desc>How to connect to an IRC network.</desc>
+  </info>
+  
+  <title>Connect to an IRC Network</title>
+  
+    <p>The first time you start <app>Polari</app> you will be asked to join a network.
+    Polari comes with over fifty IRC networks configured for you.   Choose the IRC Network
+    you would like to connect to and click on it.
+    </p>
+    
+    <p>If you do not see the IRC network you would like to join, you can also enter the details of
+    the IRC network.  Click the <gui>Custom Network</gui> button and enter the <gui>Server Address</gui>.
+    You can optionally enter the name of the network as you want it to appear in the list of networks
+    in the <gui>Network Name</gui> field.
+    </p>
+    
+    <p>After you have connected to an IRC Network, you can connect to other IRC Networks.
+    </p>
+ 
+  <steps>
+	<item>
+		<p>Click on the <key>+</key> in the top left corner.</p>
+	</item>
+	<item>
+		<p>Click <gui>Add Network</gui> and select the IRC network you would like to join
+		or click on <gui>Custom Network</gui> and enter the details.</p>
+	</item>
+	<item>
+		<p>In Join room window, type the <em>Room name</em> and <em>Password</em> if joining a
+		password protected room.</p>
+	</item>
+	<item>
+		<p>Click the <gui>Join</gui> button to connect.</p>
+	</item>
+  </steps>
+</page>

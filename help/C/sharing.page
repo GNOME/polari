@@ -1,0 +1,41 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:e="http://projectmallrd.org/experimental/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="topic" style="task"
+      id="irc-send-file">
+
+  <info>
+    <link type="guide" xref="index#conversations"/>
+    <desc>How to easily share multiple lines of text or images.</desc>
+
+  <credit type="author copyright">
+    <name>Paul Cutler</name>
+    <email its:translate="no">pcutler@gnome.org</email>
+    <years>2017</years>
+  </credit>
+  <license>
+    <p>Creative Commons Share Alike 4.0</p>
+  </license> 
+
+  </info>
+
+  <title>Share text or images</title>
+
+  <p>It is considered rude in IRC to copy and paste more than five lines of text.  
+  If you attempt to paste more than five lines of text, <gui>Polari</gui> will ask you if you
+  would like the text to automatically be pasted to a public paste service.  If you agree to paste
+  the text, press the <gui>Paste</gui> button as seen in the following screenshot.  After pressing
+  <gui>Paste</gui>, the link to the paste website will be automatically entered into the chat box.
+  Press <key>Enter</key> to share the link with the chat room.
+  </p>
+  
+  <media type="image" mime="image/png" src="images/polari-paste.png"/>
+  
+  <p>To share an image file, drag and drop the image from <app>Files</app> into the chat box
+  in <app>Polari</app>.  You will be asked if you wish to upload the image to a public paste service.
+  If you agree to upload the image, press the <gui>Paste</gui> button as seen in the following screenshot.
+  After pressing <gui>Paste</gui>, the link to the where the image was uplaoded will be automatically 
+  entered into the chat box.  Press <key>Enter</key> to share the link with the chat room.
+  </p>
+
+</page>

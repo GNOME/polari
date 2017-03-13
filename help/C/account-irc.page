@@ -1,0 +1,162 @@
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      xmlns:e="http://projectmallard.org/experimental/"
+      type="topic" style="screen"
+      id="account-irc">
+
+  <info>
+    <link type="guide" xref="irc-manage#manage"/> 
+    <desc>Additional information necessary for connecting to IRC networks.</desc>
+    <revision pkgversion="2.28" version="0.1" date="2009-08-31" status="review">
+      <!--
+      <e:review by="shaunm@gnome.org" date="2009-08-31" status="done"/>
+      -->
+    </revision>
+    <revision pkgversion="2.30" version="0.2" date="2010-04-19" status="review"/>
+    <credit type="author">
+      <name>Shaun McCance</name>
+      <email its:translate="no">shaunm@gnome.org</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>    
+<!--
+    <copyright>
+      <year>2009</year>
+      <name>GNOME Documentation Project</name>
+    </copyright>
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/> 
+-->
+  </info>
+
+  <title>IRC account details</title>
+
+  <p>IRC accounts require different information than many other types of
+  accounts.  To create an IRC account, you must specify at least an IRC
+  network and a nickname.  This page details the information you can
+  provide for an IRC account.</p>
+
+  <note style="info package">
+    <p>You must have the <sys>telepathy-idle</sys> package installed to use IRC 
+    in <app>Empathy</app>.</p>
+  </note>
+
+  <terms>
+    <item>
+      <title><gui>Network</gui></title>
+      <p>IRC is an open system that allows people to run separate IRC
+      networks.  Each network is distinct and has its own users and
+      chat rooms.  <app>Empathy</app> lists the most popular networks
+      in the <gui>Network</gui> drop-down list.  You can add additional
+      networks.  See <link xref="#networks"/> below.</p>
+    </item>
+    <item>
+      <title><gui>Nickname</gui></title>
+      <p>Your nickname is your unique name on the IRC network. Only one
+      person on a network may use a given nickname.  If you get an error
+      message that says <link xref="prob-conn-name" role="error-msg"/>
+      you will need to change your nickname.</p>
+    </item>
+    <item>
+      <title><gui>Password</gui></title>
+      <p>Some servers, particularly those on private networks, require
+      a password to connect.  If you are authorized to use the network,
+      the network administrators should provide you with a password.</p>
+      <note>
+        <title>NickServ Passwords</title>
+        <p>On some networks, nicknames can be registered using a service
+        known as NickServ.  <app>Empathy</app> does not directly support
+        nickname passwords.  On some networks, including the popular
+        freenode network, server passwords are automatically forwarded
+        to NickServ, allowing you to set this field to identify yourself
+        with NickServ.  See <link xref="irc-nick-password"/> for more
+        details.</p>
+      </note>
+    </item>
+    <item>
+      <title><gui>Real name</gui></title>
+      <p>You can provide your real name in addition to your nickname.  Other
+      users will be able to see this when they view your information.</p>
+    </item>
+    <item>
+      <title><gui>Quit message</gui></title>
+      <p>When you go offline, a quit message is sent to all the chat rooms
+      you’re in and to all the users you’re having a private conversation
+      with.  Use this field to provide a custom quit message.</p>
+    </item>
+  </terms>
+
+<!--
+telepathy-idle note
+-->
+
+  <section id="networks">
+    <info>
+      <title type="link">IRC Networks</title>
+    </info>
+
+    <title>Networks</title>
+
+    <p><app>Empathy</app> includes a list of popular IRC networks.  If you
+    wish to another IRC network, you can add it to the list.  You can also
+    modify networks and remove them from the list.</p>
+
+    <list>
+      <item><p>To add a network to the list, click <media type="image"
+      mime="image/png" src="figures/gtk-add.png" width="16"
+      height="16" its:translate="no"><span
+      its:translate="yes">Add</span></media>.</p></item>
+      <item><p>To modify a network in the list, select the network and click
+      <media type="image" mime="image/png" src="figures/gtk-edit.png" width="16"
+      height="16" its:translate="no"><span
+      its:translate="yes">Edit</span></media>.</p></item>
+      <item><p>To remove a network from the list, select the network and
+      click <media type="image" mime="image/png" src="figures/gtk-remove.png"
+      width="16" height="16" its:translate="no"><span
+      its:translate="yes">Remove</span></media>.</p></item>
+    </list>
+
+    <p>When adding or modifying a network, you can enter the following
+    information:</p>
+
+    <terms>
+      <item>
+        <title><gui>Network</gui></title>
+        <p>This is the name of the network as you want it to appear in
+        the list of networks.</p>
+      </item>
+      <item>
+        <title><gui>Charset</gui></title>
+        <p>This specifies the character encoding that is typically used on
+        this network.  A character encoding is a specific way of recording
+        characters internally in a computer.  There are many character
+        encodings, and you need to use the same character encoding as other
+        users to see their messages correctly.</p>
+        <!--
+            Translators: Recommend character encodings that are common
+            for your language.
+        -->
+        <p>By default, <app>Empathy</app> uses UTF-8, a modern character
+        encoding that can handle text from most of the world's languages.
+        Another common encoding for English and some other Western languages
+        is ISO-8859-1.</p>
+      </item>
+      <item>
+        <title><gui>Servers</gui></title>
+        <p>An IRC network may have many servers you can connect to.  When
+        you are connected to a server on a particular network, you can
+        communicate with all users on all other servers on that network.
+        You can add and remove servers for this network using the
+        <gui>Add</gui> and <gui>Remove</gui> buttons.</p>
+        <p>When a server is selected, click the field under <gui>Server</gui>
+        or <gui>Port</gui> to edit it.  Alternatively, use the left and right
+        arrow keys to focus the field, and press the space bar to begin
+        editing.</p>
+        <p>Select the check box in the <gui>SSL</gui> column to encrypt
+        all communication with a server.  Note that this does not prevent
+        other users on the network from seeing what you write on public
+        chat rooms.</p>
+      </item>
+    </terms>
+  </section>
+</page>
