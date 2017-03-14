@@ -2,7 +2,7 @@ appdata = app_id + '.appdata.xml'
 i18n.merge_file('appdata',
                 input: appdata + '.in',
                 output: appdata,
-                po_dir: src_podir,
+                po_dir: '../../po',
                 install: true,
                 install_dir: appdatadir)
 

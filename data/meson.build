@@ -5,7 +5,7 @@ desktop_file = app_id + '.desktop'
 i18n.merge_file('desktop',
                 input: desktop_file + '.in',
                 output: desktop_file,
-                po_dir: src_podir,
+                po_dir: '../po',
                 install: true,
                 install_dir: desktopdir,
                 type: 'desktop')

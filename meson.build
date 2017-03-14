@@ -26,10 +26,6 @@ tpclientdir = join_paths(datadir, 'telepathy', 'clients')
 girdir      = join_paths(pkgdatadir, 'gir-1.0')
 typelibdir  = join_paths(pkglibdir, 'girepository-1.0')
 
-src_auxdir  = join_paths(meson.source_root(), 'build-aux', 'meson')
-src_datadir = join_paths(meson.source_root(), 'data')
-src_podir   = join_paths(meson.source_root(), 'po')
-
 gjs_console = find_program('gjs')
 
 desktop_file_validate = find_program('desktop-file-validate', required: false)
@@ -51,6 +47,4 @@ subdir('data')
 subdir('po')
 subdir('help')
 
-if (not is_variable('DESTDIR'))
-  meson.add_install_script(join_paths(src_auxdir, 'meson-postinstall.sh'))
-endif
+meson.add_install_script('build-aux/meson/meson-postinstall.sh')

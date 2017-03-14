@@ -6,15 +6,13 @@ configure_file(input: script + '.in',
                output: script,
                configuration: script_conf)
 
-resource_name = app_id + '.data.gresource.xml'
 data_resources = gnome.compile_resources('data-resources',
-                                         join_paths(src_datadir, resource_name),
-                                         source_dir: src_datadir,
+                                         '../data/@0@.data.gresource.xml'.format(app_id),
+                                         source_dir: '../data',
                                          c_name: 'data_resources')
 
-resource_name = app_id + '.src.gresource.xml'
 src_resources = gnome.compile_resources('src-resources',
-                                        resource_name,
+                                        '@0@.src.gresource.xml'.format(app_id),
                                         c_name: 'src_resources')
 
 exeargs = ['-DPACKAGE_NAME="polari"',
@@ -28,12 +26,12 @@ polari = executable('polari',
                     c_args: exeargs,
                     install: true)
 
-libsources = [join_paths('lib', 'polari-drag-helper.c'),
-              join_paths('lib', 'polari-drag-helper.h'),
-              join_paths('lib', 'polari-room.c'),
-              join_paths('lib', 'polari-room.h'),
-              join_paths('lib', 'polari-util.c'),
-              join_paths('lib', 'polari-util.h')]
+libsources = ['lib/polari-drag-helper.c',
+              'lib/polari-drag-helper.h',
+              'lib/polari-room.c',
+              'lib/polari-room.h',
+              'lib/polari-util.c',
+              'lib/polari-util.h']
 
 libargs = ['-DG_LOG_USE_STRUCTURED',
            '-DG_LOG_DOMAIN="Polari"']
