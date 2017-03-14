@@ -11,6 +11,7 @@ data/resources/join-room-dialog.ui
 data/resources/main-window.ui
 data/resources/menus.ui
 data/resources/room-list-header.ui
+data/resources/server-room-list.ui
 data/resources/user-details.ui
 src/application.js
 src/appNotifications.js
