@@ -43,7 +43,7 @@
                 "/share/aclocal", "/share/autoconf-archive",
                 "/share/dbus-1/services/org.freedesktop*", "/share/gir-1.0",
                 "/share/gtk-doc", "/share/info", "/share/man",
-                "/share/polari", "/share/telepathy"
+                "/share/polari/gir-1.0", "/share/telepathy"
     ],
     "modules": [
         {
