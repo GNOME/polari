@@ -24,8 +24,8 @@
     Internet Relay Chat (IRC) is a means of chatting with people online using
     public and private chatrooms.  IRC networks, such as Freenode or Gimpnet, are unique
     and host their own servers with its own channels.  IRC uses a client / server model 
-    where you can use a client, such as Polari, to connect to an IRC server on and join a channel.  C
-    hannels, also known as chat rooms, are where users meet online to chat.
+    where you can use a client, such as Polari, to connect to an IRC server on and join a channel. 
+    Channels, also known as chat rooms, are where users meet online to chat.
 
   </p>  
   
