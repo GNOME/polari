@@ -92,14 +92,12 @@ const ConnectionsList = new Lang.Class({
         this._list.set_sort_func(Lang.bind(this, this._sort));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('account-added', Lang.bind(this,
-            function(mon, account) {
-                this._setAccountRowSensitive(account, false);
-            }));
-        this._accountsMonitor.connect('account-removed', Lang.bind(this,
-            function(mon, account) {
-                this._setAccountRowSensitive(account, true);
-            }));
+        this._accountsMonitor.connect('account-added', (mon, account) => {
+            this._setAccountRowSensitive(account, false);
+        });
+        this._accountsMonitor.connect('account-removed', (mon, account) => {
+            this._setAccountRowSensitive(account, true);
+        });
 
         this._networksManager = NetworksManager.getDefault();
         this._networksManager.connect('changed',
@@ -120,8 +118,8 @@ const ConnectionsList = new Lang.Class({
 
     _filterRows: function(row) {
         let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
-        return this._filterTerms.every(function(term) {
-            return matchTerms.some(function(s) { return s.indexOf(term) != -1; });
+        return this._filterTerms.every(term => {
+            return matchTerms.some(s => s.indexOf(term) != -1);
         });
     },
 
@@ -133,23 +131,20 @@ const ConnectionsList = new Lang.Class({
     },
 
     _networksChanged: function() {
-        this._list.foreach(function(w) { w.destroy(); });
+        this._list.foreach(w => { w.destroy(); });
 
         let accounts = this._accountsMonitor.accounts;
-        let usedNetworks = accounts.filter(Lang.bind(this, function(a) {
+        let usedNetworks = accounts.filter(a => {
             return this._networksManager.getAccountIsPredefined(a);
-        })).map(function(a) {
-            return a.service;
-        });
+        }).map(a => a.service);
 
-        this._networksManager.networks.forEach(Lang.bind(this,
-            function(network) {
-                let sensitive = usedNetworks.indexOf(network.id) < 0;
-                this._rows.set(network.id,
-                               new ConnectionRow({ id: network.id,
-                                                   sensitive: sensitive }));
-                this._list.add(this._rows.get(network.id));
-            }));
+        this._networksManager.networks.forEach(network => {
+            let sensitive = usedNetworks.indexOf(network.id) < 0;
+            this._rows.set(network.id,
+                           new ConnectionRow({ id: network.id,
+                                               sensitive: sensitive }));
+            this._list.add(this._rows.get(network.id));
+        });
     },
 
     _onRowActivated: function(list, row) {
@@ -166,12 +161,11 @@ const ConnectionsList = new Lang.Class({
         for (let prop in details)
             req.set_parameter(prop, details[prop]);
 
-        req.create_account_async(Lang.bind(this,
-            function(r, res) {
-                let account = req.create_account_finish(res);
-                if (account) // TODO: Handle errors
-                    this.emit('account-created', account);
-            }));
+        req.create_account_async((r, res) => {
+            let account = req.create_account_finish(res);
+            if (account) // TODO: Handle errors
+                this.emit('account-created', account);
+        });
         this.emit('account-selected');
     },
 
@@ -219,10 +213,9 @@ const ConnectionDetails = new Lang.Class({
 
     _init: function(params) {
         this._networksManager = NetworksManager.getDefault();
-        this._networksManager.connect('changed', Lang.bind(this,
-            function() {
-                this.notify('has-service');
-            }));
+        this._networksManager.connect('changed', () => {
+            this.notify('has-service');
+        });
 
         this._account = null;
 
@@ -384,12 +377,11 @@ const ConnectionDetails = new Lang.Class({
         for (let prop in details)
             req.set_parameter(prop, details[prop]);
 
-        req.create_account_async(Lang.bind(this,
-            function(r, res) {
-                let account = req.create_account_finish(res);
-                if (account) // TODO: Handle errors
-                    this.emit('account-created', account);
-            }));
+        req.create_account_async((r, res) => {
+            let account = req.create_account_finish(res);
+            if (account) // TODO: Handle errors
+                this.emit('account-created', account);
+        });
     },
 
     _updateAccount: function() {
@@ -399,15 +391,13 @@ const ConnectionDetails = new Lang.Class({
         let [details, removed] = this._detailsFromParams(params, oldDetails);
         let vardict = GLib.Variant.new('a{sv}', details);
 
-        account.update_parameters_vardict_async(vardict, removed,
-            Lang.bind(this, function(a, res) {
-                a.update_parameters_vardict_finish(res); // TODO: Check for errors
-            }));
+        account.update_parameters_vardict_async(vardict, removed, (a, res) => {
+            a.update_parameters_vardict_finish(res); // TODO: Check for errors
+        });
 
-        account.set_display_name_async(params.name, Lang.bind(this,
-            function(a, res) {
-                a.set_display_name_finish(res); // TODO: Check for errors
-            }));
+        account.set_display_name_async(params.name, (a, res) => {
+            a.set_display_name_finish(res); // TODO: Check for errors
+        });
     },
 
     _detailsFromParams: function(params, oldDetails) {
@@ -422,10 +412,7 @@ const ConnectionDetails = new Lang.Class({
         if (params.use_ssl)
             details['use-ssl'] = GLib.Variant.new('b', params.use_ssl);
 
-        let removed = Object.keys(oldDetails).filter(
-                function(p) {
-                    return !details.hasOwnProperty(p);
-                });
+        let removed = Object.keys(oldDetails).filter(p => !details.hasOwnProperty(p));
 
         return [details, removed];
     }
@@ -448,22 +435,20 @@ const ConnectionProperties = new Lang.Class({
 
         this._details.account = account;
 
-        this._details.connect('notify::has-service', Lang.bind(this,
-            function() {
-                /* HACK:
-                 * Shrink back to minimum height when the visibility of
-                 * some elements in Details could have changed; this
-                 * assumes that this only happens before the user could
-                 * resize the dialog herself
-                 */
-                this.resize(this.default_width, 1);
-            }));
+        this._details.connect('notify::has-service', () => {
+            /* HACK:
+             * Shrink back to minimum height when the visibility of
+             * some elements in Details could have changed; this
+             * assumes that this only happens before the user could
+             * resize the dialog herself
+             */
+            this.resize(this.default_width, 1);
+        });
 
-        this.connect('response', Lang.bind(this,
-            function(w, response) {
-                if (response == Gtk.ResponseType.OK)
-                    this._details.save();
-            }));
+        this.connect('response', (w, response) => {
+            if (response == Gtk.ResponseType.OK)
+                this._details.save();
+        });
         this.set_default_response(Gtk.ResponseType.OK);
 
         account.connect('notify::connection-status',

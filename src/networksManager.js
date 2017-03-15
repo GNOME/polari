@@ -53,10 +53,9 @@ const NetworksManager = new Lang.Class({
 
         this._networksById.clear();
         this._networks = networks;
-        this._networks.forEach(Lang.bind(this,
-            function(network) {
-                this._networksById.set(network.id, network);
-            }));
+        this._networks.forEach(network => {
+            this._networksById.set(network.id, network);
+        });
         return true;
     },
 
@@ -111,9 +110,7 @@ const NetworksManager = new Lang.Class({
 
     getNetworkMatchTerms: function(id) {
         let network = this._lookupNetwork(id);
-        let servers = network.servers.map(function(s) {
-            return s.address.toLowerCase();
-        });
+        let servers = network.servers.map(s => s.address.toLowerCase());
         return [network.name.toLowerCase(),
                 network.id.toLowerCase()].concat(servers);
     },

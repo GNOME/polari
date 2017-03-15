@@ -115,18 +115,17 @@ function storeIdentifyPassword(account, password, callback) {
 
 function _storePassword(schema, label, account, password, callback) {
     let attr = { 'account-id': account.get_path_suffix() };
-    Secret.password_store(schema, attr, Secret.COLLECTION_DEFAULT,
-                          label, password, null,
-        function(o, res) {
-            try {
-                let success = Secret.password_store_finish(res);
-                callback(success);
-            } catch(e) {
-                log('Failed to store password for account "%s": %s'.format(
-                    account.display_name, e.message));
-                callback(false);
-            }
-        });
+    let coll = Secret.COLLECTION_DEFAULT;
+    Secret.password_store(schema, attr, coll, label, password, null, (o, res) => {
+        try {
+            let success = Secret.password_store_finish(res);
+            callback(success);
+        } catch(e) {
+            log('Failed to store password for account "%s": %s'.format(
+                account.display_name, e.message));
+            callback(false);
+        }
+    });
 }
 
 function lookupAccountPassword(account, callback) {
@@ -139,17 +138,16 @@ function lookupIdentifyPassword(account, callback) {
 
 function _lookupPassword(schema, account, callback) {
     let attr = { 'account-id': account.get_path_suffix() };
-    Secret.password_lookup(schema, attr, null,
-        function(o, res) {
-            try {
-                let password = Secret.password_lookup_finish(res);
-                callback(password);
-            } catch(e) {
-                log('Failed to lookup password for account "%s": %s'.format(
-                    account.display_name, e.message));
-                callback(null);
-            }
-        });
+    Secret.password_lookup(schema, attr, null, (o, res) => {
+        try {
+            let password = Secret.password_lookup_finish(res);
+            callback(password);
+        } catch(e) {
+            log('Failed to lookup password for account "%s": %s'.format(
+                account.display_name, e.message));
+            callback(null);
+        }
+    });
 }
 
 // findUrls:
@@ -257,24 +255,23 @@ function gpaste(text, title, callback) {
     let session = new Soup.Session();
     let createUrl = GPASTE_BASEURL + 'api/json/create';
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
-    session.queue_message(message,
-        function(session, message) {
-            if (message.status_code != Soup.KnownStatusCode.OK) {
-                callback(null);
-                return;
-            }
+    session.queue_message(message, (s, message) => {
+        if (message.status_code != Soup.KnownStatusCode.OK) {
+            callback(null);
+            return;
+        }
 
-            let info = {};
-            try {
-                info = JSON.parse(message.response_body.data);
-            } catch(e) {
-                log(e.message);
-            }
-            if (info.result && info.result.id)
-                callback(GPASTE_BASEURL + info.result.id);
-            else
-                callback(null);
-        });
+        let info = {};
+        try {
+            info = JSON.parse(message.response_body.data);
+        } catch(e) {
+            log(e.message);
+        }
+        if (info.result && info.result.id)
+            callback(GPASTE_BASEURL + info.result.id);
+        else
+            callback(null);
+    });
 }
 
 function imgurPaste(pixbuf, title, callback) {
@@ -295,22 +292,21 @@ function imgurPaste(pixbuf, title, callback) {
 
     let requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', 'Client-ID ' + IMGUR_CLIENT_ID);
-    session.queue_message(message,
-        function(session, message) {
-            if (message.status_code != Soup.KnownStatusCode.OK) {
-                callback(null);
-                return;
-            }
+    session.queue_message(message, (s, message) => {
+        if (message.status_code != Soup.KnownStatusCode.OK) {
+            callback(null);
+            return;
+        }
 
-            let info = {};
-            try {
-                info = JSON.parse(message.response_body.data);
-            } catch(e) {
-                log(e.message);
-            }
-            if (info.success)
-                callback(info.data.link);
-            else
-                callback(null);
-        });
+        let info = {};
+        try {
+            info = JSON.parse(message.response_body.data);
+        } catch(e) {
+            log(e.message);
+        }
+        if (info.success)
+            callback(info.data.link);
+        else
+            callback(null);
+    });
 }

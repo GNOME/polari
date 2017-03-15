@@ -19,10 +19,10 @@ const AccountsWindow = new Lang.Class({
         this.add(scrolled);
 
         this._list = new Gtk.ListBox();
-        this._list.set_sort_func(function(row1, row2) {
+        this._list.set_sort_func((row1, row2) => {
             return row1.account.display_name.localeCompare(row2.account.display_name);
         });
-        this._list.set_header_func(function(row, before) {
+        this._list.set_header_func((row, before) => {
             let header = row.get_header();
 
             if (!before)
@@ -30,7 +30,7 @@ const AccountsWindow = new Lang.Class({
             else if (!header)
                 row.set_header(new Gtk.Separator({ orientation: Gtk.Orientation.HORIZONTAL }));
         });
-        this._list.connect('row-activated', function(l, row) {
+        this._list.connect('row-activated', (l, row) => {
             row.account.set_enabled_async(!row.account.enabled, null);
         });
         scrolled.add(this._list);
@@ -41,17 +41,15 @@ const AccountsWindow = new Lang.Class({
     },
 
     _onPrepared: function(am) {
-        am.connect('account-validity-changed', Lang.bind(this,
-            function(am, account, valid) {
-                if (valid)
-                    this._addAccount(account);
-                else
-                    this._removeAccount(account);
-            }));
-        am.connect('account-removed', Lang.bind(this,
-            function(am, account) {
+        am.connect('account-validity-changed', (am, account, valid) => {
+            if (valid)
+                this._addAccount(account);
+            else
                 this._removeAccount(account);
-            }));
+        });
+        am.connect('account-removed', (am, account) => {
+            this._removeAccount(account);
+        });
         am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
     },
 
@@ -80,11 +78,9 @@ const AccountsWindow = new Lang.Class({
                               GObject.BindingFlags.SYNC_CREATE);
         account.bind_property('enabled', sw, 'state',
                               GObject.BindingFlags.SYNC_CREATE);
-        account.connect('notify::display-name', function() {
-            row.changed();
-        });
+        account.connect('notify::display-name', () => { row.changed(); });
 
-        sw.connect('state-set', function(w, state) {
+        sw.connect('state-set', (w, state) => {
             account.set_enabled_async(state, null);
             return true;
         });
@@ -103,7 +99,7 @@ const AccountsWindow = new Lang.Class({
 GLib.set_application_name("Polari Accounts");
 
 let app = new Gtk.Application({ application_id: 'org.gnome.Polari.Accounts' });
-app.connect('activate', function() {
+app.connect('activate', () => {
     let window = app.active_window;
     if (!window)
         window = new AccountsWindow({ application: app,

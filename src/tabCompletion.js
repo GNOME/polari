@@ -16,10 +16,9 @@ const TabCompletion = new Lang.Class({
         this._entry.connect('key-press-event', Lang.bind(this, this._onKeyPress));
         this._entry.connect('focus-out-event', Lang.bind(this, this._cancel));
         this._entry.connect('unmap', Lang.bind(this, this._cancel));
-        this._entry.connect('realize', Lang.bind(this,
-            function() {
-                this._popup.set_transient_for(this._entry.get_toplevel());
-            }));
+        this._entry.connect('realize', () => {
+            this._popup.set_transient_for(this._entry.get_toplevel());
+        });
 
         this._popup = new Gtk.Window({ type: Gtk.WindowType.POPUP });
 
@@ -78,11 +77,10 @@ const TabCompletion = new Lang.Class({
 
     setCompletions: function(completions) {
         if (this._popup.visible) {
-            let id = this._popup.connect('unmap', Lang.bind(this,
-                function() {
-                    this._popup.disconnect(id);
-                    this.setCompletions(completions);
-                }));
+            let id = this._popup.connect('unmap', () => {
+                this._popup.disconnect(id);
+                this.setCompletions(completions);
+            });
             return;
         }
 
@@ -110,7 +108,7 @@ const TabCompletion = new Lang.Class({
         this._widgetMap = widgetMap;
 
         // All remaining rows except those with IRC commands are going unused
-        this._list.foreach(function(r) {
+        this._list.foreach(r => {
             if (!r._text.startsWith('/'))
                 r.destroy();
         });
@@ -216,9 +214,7 @@ const TabCompletion = new Lang.Class({
 
         this._list.invalidate_filter();
 
-        let visibleRows = this._list.get_children().filter(function(c) {
-            return c.get_child_visible();
-        });
+        let visibleRows = this._list.get_children().filter(c => c.get_child_visible());
         let nVisibleRows = visibleRows.length;
 
         if (nVisibleRows == 0)

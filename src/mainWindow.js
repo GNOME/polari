@@ -153,14 +153,13 @@ const MainWindow = new Lang.Class({
                                       GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
-        this._joinButton.connect('size-allocate', Lang.bind(this,
-            function(w, rect) {
-                let width = rect.width;
-                Mainloop.idle_add(Lang.bind(this, function() {
-                    this._showUserListButton.width_request = width;
-                    return GLib.SOURCE_REMOVE;
-                }));
-            }));
+        this._joinButton.connect('size-allocate', (w, rect) => {
+            let width = rect.width;
+            Mainloop.idle_add(() => {
+                this._showUserListButton.width_request = width;
+                return GLib.SOURCE_REMOVE;
+            });
+        });
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('accounts-changed',
@@ -178,15 +177,13 @@ const MainWindow = new Lang.Class({
 
         this._userListAction = app.lookup_action('user-list');
 
-        app.connect('action-state-changed::user-list', Lang.bind(this,
-            function(group, actionName, value) {
-                this._userListPopover.visible = value.get_boolean();
-            }));
-        this._userListPopover.connect('notify::visible', Lang.bind(this,
-            function() {
-                if (!this._userListPopover.visible)
-                    this._userListAction.change_state(GLib.Variant.new('b', false));
-            }));
+        app.connect('action-state-changed::user-list', (group, name, value) => {
+            this._userListPopover.visible = value.get_boolean();
+        });
+        this._userListPopover.connect('notify::visible', () => {
+            if (!this._userListPopover.visible)
+                this._userListAction.change_state(GLib.Variant.new('b', false));
+        });
 
         this._gtkSettings.connect('notify::gtk-decoration-layout',
                                   Lang.bind(this, this._updateDecorations));

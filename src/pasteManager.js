@@ -65,21 +65,18 @@ const PasteManager = new Lang.Class({
         let targetType = _getTargetForContentType(contentType);
 
         if (targetType == DndTargetType.TEXT)
-            file.load_contents_async(null, Lang.bind(this,
-                function(f, res) {
-                    let [, contents, ,] = f.load_contents_finish(res);
-                    Utils.gpaste(contents.toString(), title, callback);
-                }));
+            file.load_contents_async(null, (f, res) => {
+                let [, contents, ,] = f.load_contents_finish(res);
+                Utils.gpaste(contents.toString(), title, callback);
+            });
         else if (targetType == DndTargetType.IMAGE)
-            file.read_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
-                function(f, res) {
-                    let stream = f.read_finish(res);
-                    GdkPixbuf.Pixbuf.new_from_stream_async(stream, null,
-                        Lang.bind(this, function(stream, res) {
-                            let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(res);
-                            Utils.imgurPaste(pixbuf, title, callback);
-                        }));
-                }));
+            file.read_async(GLib.PRIORITY_DEFAULT, null, (f, res) => {
+                let stream = f.read_finish(res);
+                GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, res) => {
+                    let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(res);
+                    Utils.imgurPaste(pixbuf, title, callback);
+                });
+            });
         else
             callback(null);
     }
@@ -175,13 +172,12 @@ const DropTargetIface = new Lang.Interface({
             // TODO: handle multiple files ...
             let file = Gio.File.new_for_uri(uris[0]);
             try {
-                this._lookupFileInfo(file, Lang.bind(this,
-                    function(targetType) {
-                        let canHandle = targetType != 0;
-                        if (canHandle)
-                            this.emit('file-dropped', file);
-                        Gtk.drag_finish(context, canHandle, false, time);
-                    }));
+                this._lookupFileInfo(file, targetType => {
+                    let canHandle = targetType != 0;
+                    if (canHandle)
+                        this.emit('file-dropped', file);
+                    Gtk.drag_finish(context, canHandle, false, time);
+                });
             } catch(e) {
                 Gtk.drag_finish(context, false, false, time);
             }
@@ -202,14 +198,13 @@ const DropTargetIface = new Lang.Interface({
     },
 
     _lookupFileInfo: function(file, callback) {
-        file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
-                              Gio.FileQueryInfoFlags.NONE,
-                              GLib.PRIORITY_DEFAULT,
-                              null, Lang.bind(this,
-            function(f, res) {
-                let fileInfo = file.query_info_finish(res);
-                let contentType = fileInfo.get_content_type();
-                callback(_getTargetForContentType(contentType));
-            }))
+        let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE;
+        let flags = Gio.FileQueryInfoFlags.NONE;
+        let priority = GLib.PRIORITY_DEFAULT;
+        file.query_info_async(attr, flags, priority, null, (f, res) => {
+            let fileInfo = file.query_info_finish(res);
+            let contentType = fileInfo.get_content_type();
+            callback(_getTargetForContentType(contentType));
+        });
     }
 });

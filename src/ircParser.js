@@ -8,7 +8,7 @@ const RoomManager = imports.roomManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 
-const N_ = function(s) { return s; };
+const N_ = s => s;
 
 const knownCommands = {
     /* commands that would be nice to support: */
@@ -69,9 +69,7 @@ const IrcParser = new Lang.Class({
             return true;
         }
 
-        let stripCommand = function(text) {
-            return text.substr(text.indexOf(' ')).trimLeft();
-        }
+        let stripCommand = text => text.substr(text.indexOf(' ')).trimLeft();
 
         let retval = true;
 
@@ -103,7 +101,7 @@ const IrcParser = new Lang.Class({
                     break;
                 }
                 this._room.channel.connection.dup_contact_by_id_async(nick, [],
-                    Lang.bind(this, function(c, res) {
+                    (c, res) => {
                         let contact;
                         try {
                             contact = c.dup_contact_by_id_finish(res);
@@ -112,7 +110,7 @@ const IrcParser = new Lang.Class({
                             return;
                         }
                         this._room.add_member(contact);
-                    }));
+                    });
                 break;
             }
             case 'J':
@@ -143,7 +141,7 @@ const IrcParser = new Lang.Class({
                     break;
                 }
                 this._room.channel.connection.dup_contact_by_id_async(nick, [],
-                    Lang.bind(this, function(c, res) {
+                    (c, res) => {
                         let contact;
                         try {
                             contact = c.dup_contact_by_id_finish(res);
@@ -152,7 +150,7 @@ const IrcParser = new Lang.Class({
                             return;
                         }
                         this._room.remove_member(contact);
-                    }));
+                    });
                 break;
             }
             case 'ME': {
@@ -189,8 +187,7 @@ const IrcParser = new Lang.Class({
             }
             case 'NAMES': {
                 let channel = this._room.channel;
-                let members = channel.group_dup_members_contacts().map(
-                    function(m) { return m.alias; });
+                let members = channel.group_dup_members_contacts().map(m => m.alias);
                 output = this._createFeedbackGrid(_("Users on %s:").format(channel.identifier),
                                                     members);
                 break;
@@ -205,14 +202,13 @@ const IrcParser = new Lang.Class({
                 if (argv.length)
                     log('Excess arguments to NICK command: ' + argv);
 
-                this._room.account.set_nickname_async(nick, Lang.bind(this,
-                    function(a, res) {
-                        try {
-                            a.set_nickname_finish(res);
-                        } catch(e) {
-                            logError(e, 'Failed to update nick');
-                        }
-                    }));
+                this._room.account.set_nickname_async(nick, (a, res) => {
+                    try {
+                        a.set_nickname_finish(res);
+                    } catch(e) {
+                        logError(e, 'Failed to update nick');
+                    }
+                });
                 break;
             }
             case 'PART':
@@ -255,13 +251,13 @@ const IrcParser = new Lang.Class({
                 let presence = Tp.ConnectionPresenceType.OFFLINE;
                 let message = stripCommand(text);
                 this._room.account.request_presence_async(presence, 'offline', message,
-                    Lang.bind(this, function(a, res) {
+                    (a, res) => {
                         try {
                             a.request_presence_finish(res);
                         } catch(e) {
                             logError(e, 'Failed to disconnect');
                         }
-                    }));
+                    });
                 break;
             }
             case 'SAY': {
@@ -298,15 +294,14 @@ const IrcParser = new Lang.Class({
     },
 
     _sendMessage: function(message) {
-        this._room.channel.send_message_async(message, 0, Lang.bind(this,
-            function(c, res) {
-                try {
-                     c.send_message_finish(res);
-                } catch(e) {
-                    // TODO: propagate to user
-                    logError(e, 'Failed to send message')
-                }
-            }));
+        this._room.channel.send_message_async(message, 0, (c, res) => {
+            try {
+                 c.send_message_finish(res);
+            } catch(e) {
+                // TODO: propagate to user
+                logError(e, 'Failed to send message')
+            }
+        });
     }
 });
 Signals.addSignalMethods(IrcParser.prototype);

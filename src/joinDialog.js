@@ -62,29 +62,25 @@ const JoinDialog = new Lang.Class({
             this._accounts[a.display_name] = a;
         });
         this._accountAddedId =
-            this._accountsMonitor.connect('account-added', Lang.bind(this,
-                function(am, account) {
-                    this._accounts[account.display_name] = account;
-                    this._updateConnectionCombo();
-                }));
+            this._accountsMonitor.connect('account-added', (am, account) => {
+                this._accounts[account.display_name] = account;
+                this._updateConnectionCombo();
+            });
         this._accountRemovedId =
-            this._accountsMonitor.connect('account-removed', Lang.bind(this,
-                function(am, account) {
-                    delete this._accounts[account.display_name];
-                    this._updateConnectionCombo();
-                }));
+            this._accountsMonitor.connect('account-removed', (am, account) => {
+                delete this._accounts[account.display_name];
+                this._updateConnectionCombo();
+            });
 
-        this.connect('response', Lang.bind(this,
-            function(w, response) {
-                if (response == Gtk.ResponseType.OK)
-                    this._joinRoom();
-                this.destroy();
-            }));
-        this.connect('destroy', Lang.bind(this,
-            function() {
-                this._accountsMonitor.disconnect(this._accountAddedId);
-                this._accountsMonitor.disconnect(this._accountRemovedId);
-            }));
+        this.connect('response', (w, response) => {
+            if (response == Gtk.ResponseType.OK)
+                this._joinRoom();
+            this.destroy();
+        });
+        this.connect('destroy', () => {
+            this._accountsMonitor.disconnect(this._accountAddedId);
+            this._accountsMonitor.disconnect(this._accountRemovedId);
+        });
 
         if (this._hasAccounts)
             this._setPage(DialogPage.MAIN);
@@ -100,10 +96,9 @@ const JoinDialog = new Lang.Class({
     },
 
     _setupMainPage: function() {
-        this._connectionButton.connect('clicked', Lang.bind(this,
-            function() {
-                this._setPage(DialogPage.CONNECTION);
-            }));
+        this._connectionButton.connect('clicked', () => {
+            this._setPage(DialogPage.CONNECTION);
+        });
 
         this._connectionCombo.connect('changed',
                                       Lang.bind(this, this._onAccountChanged));
@@ -114,52 +109,45 @@ const JoinDialog = new Lang.Class({
     },
 
     _setupConnectionPage: function() {
-        this._backButton.connect('clicked', Lang.bind(this,
-            function() {
-                this._setPage(DialogPage.MAIN);
-            }));
-        this._connectionsList.connect('account-selected', Lang.bind(this,
-            function() {
-                this._setPage(DialogPage.MAIN);
-            }));
-        this._addButton.connect('clicked', Lang.bind(this,
-            function() {
-                this._details.save();
-                this._setPage(DialogPage.MAIN);
-            }));
+        this._backButton.connect('clicked', () => {
+            this._setPage(DialogPage.MAIN);
+        });
+        this._connectionsList.connect('account-selected', () => {
+            this._setPage(DialogPage.MAIN);
+        });
+        this._addButton.connect('clicked', () => {
+            this._details.save();
+            this._setPage(DialogPage.MAIN);
+        });
 
         this._connectionsList.connect('account-created',
                                       Lang.bind(this, this._onAccountCreated));
         this._details.connect('account-created',
                               Lang.bind(this, this._onAccountCreated));
 
-        this._customToggle.connect('notify::active', Lang.bind(this,
-            function() {
-                let isCustom = this._customToggle.active;
-                this._connectionStack.visible_child_name = isCustom ? 'custom'
-                                                                    : 'predefined';
-                if (isCustom) {
-                    this._addButton.grab_default();
-                    this._details.reset();
-                }
-            }));
+        this._customToggle.connect('notify::active', () => {
+            let isCustom = this._customToggle.active;
+            this._connectionStack.visible_child_name = isCustom ? 'custom'
+                                                                : 'predefined';
+            if (isCustom) {
+                this._addButton.grab_default();
+                this._details.reset();
+            }
+        });
 
-        this._filterEntry.connect('search-changed', Lang.bind(this,
-            function() {
-                this._connectionsList.setFilter(this._filterEntry.text);
-            }));
-        this._filterEntry.connect('stop-search', Lang.bind(this,
-            function() {
-                if (this._filterEntry.text.length > 0)
-                    this._filterEntry.text = '';
-                else
-                    this.response(Gtk.ResponseType.CANCEL);
-            }));
-        this._filterEntry.connect('activate', Lang.bind(this,
-            function() {
-                if (this._filterEntry.text.length > 0)
-                    this._connectionsList.activateFirst();
-            }));
+        this._filterEntry.connect('search-changed', () => {
+            this._connectionsList.setFilter(this._filterEntry.text);
+        });
+        this._filterEntry.connect('stop-search', () => {
+            if (this._filterEntry.text.length > 0)
+                this._filterEntry.text = '';
+            else
+                this.response(Gtk.ResponseType.CANCEL);
+        });
+        this._filterEntry.connect('activate', () => {
+            if (this._filterEntry.text.length > 0)
+                this._connectionsList.activateFirst();
+        });
     },
 
     _onAccountChanged: function() {
@@ -182,7 +170,7 @@ const JoinDialog = new Lang.Class({
         let account = this._accounts[selected];
 
         let toJoinRooms = this._serverRoomList.selectedRooms;
-        toJoinRooms.forEach(function(room) {
+        toJoinRooms.forEach(room => {
             if (room[0] != '#')
                 room = '#' + room;
 
@@ -198,11 +186,10 @@ const JoinDialog = new Lang.Class({
     _updateConnectionCombo: function() {
         this._connectionCombo.remove_all();
 
-        let names = Object.keys(this._accounts).sort(
-            function(a, b) {
-                // TODO: figure out combo box sorting
-                return (a < b) ? -1 : ((a > b) ? 1 : 0);
-            });
+        let names = Object.keys(this._accounts).sort((a, b) => {
+            // TODO: figure out combo box sorting
+            return (a < b) ? -1 : ((a > b) ? 1 : 0);
+        });
         for (let i = 0; i < names.length; i++)
             this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;

@@ -60,11 +60,11 @@ const MessageNotification = new Lang.Class({
 
     addButton: function(label, callback) {
         let button = new Gtk.Button({ label: label, visible: true });
-        button.connect('clicked', Lang.bind(this, function() {
+        button.connect('clicked', () => {
             if (callback)
                 callback();
             this.close();
-        }));
+        });
 
         this._box.add(button);
     }
@@ -82,9 +82,7 @@ const UndoNotification = new Lang.Class({
 
         this.connect('destroy', Lang.bind(this, this._onDestroy));
 
-        this.addButton(_("Undo"), Lang.bind(this, function() {
-            this._undo = true;
-        }));
+        this.addButton(_("Undo"), () => { this._undo = true; });
 
         this._app = Gio.Application.get_default();
         this._shutdownId = this._app.connect('prepare-shutdown',

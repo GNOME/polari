@@ -101,12 +101,11 @@ const SASLAuthHandler = new Lang.Class({
         let account = this._channel.connection.get_account();
         let prompt = new GLib.Variant('b', false);
         let params = new GLib.Variant('a{sv}', { 'password-prompt': prompt });
-        account.update_parameters_vardict_async(params, [], Lang.bind(this,
-            function(a, res) {
-                a.update_parameters_vardict_finish(res);
-                account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
-                                               'available', '', null);
-            }));
+        account.update_parameters_vardict_async(params, [], (a, res) => {
+            a.update_parameters_vardict_finish(res);
+            account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
+                                           'available', '', null);
+        });
     }
 });
 
@@ -354,14 +353,12 @@ const TelepathyClient = new Lang.Class({
 
         let prompt = new GLib.Variant('b', password.length > 0);
         let params = GLib.Variant.new('a{sv}', { 'password-prompt': prompt });
-        account.update_parameters_vardict_async(params, [],
-            Lang.bind(this, function(a, res) {
-                a.update_parameters_vardict_finish(res);
-                Utils.storeAccountPassword(a, password, Lang.bind(this,
-                    function() {
-                        a.reconnect_async(null);
-                    }));
-            }));
+        account.update_parameters_vardict_async(params, [], (a, res) => {
+            a.update_parameters_vardict_finish(res);
+            Utils.storeAccountPassword(a, password, () => {
+                a.reconnect_async(null);
+            });
+        });
     },
 
     _onQueryActivated: function(action, parameter) {
@@ -481,45 +478,43 @@ const TelepathyClient = new Lang.Class({
 
     vfunc_observe_channels: function(account, connection, channels,
                                      op, requests, context) {
-        this._processRequest(context, connection, channels, Lang.bind(this,
-            function(channel) {
-                if (this._isAuthChannel(channel))
-                    return;
+        this._processRequest(context, connection, channels, channel => {
+            if (this._isAuthChannel(channel))
+                return;
 
-                if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
-                    let [invited, , , ,] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
-                    if (invited)
-                      // this is an invitation - only add it in handleChannel
-                      // if accepted
-                      return;
-                }
+            if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
+                let [invited, , , ,] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
+                if (invited)
+                  // this is an invitation - only add it in handleChannel
+                  // if accepted
+                  return;
+            }
 
-                channel.connect('message-received',
-                                Lang.bind(this, this._onMessageReceived));
-                channel.connect('pending-message-removed',
-                                Lang.bind(this, this._onPendingMessageRemoved));
+            channel.connect('message-received',
+                            Lang.bind(this, this._onMessageReceived));
+            channel.connect('pending-message-removed',
+                            Lang.bind(this, this._onPendingMessageRemoved));
 
-                this._roomManager.ensureRoomForChannel(channel, 0);
-            }));
+            this._roomManager.ensureRoomForChannel(channel, 0);
+        });
     },
 
     vfunc_handle_channels: function(account, connection, channels,
                                     satisfied, userTime, context) {
         let [present, ] = Tp.user_action_time_should_present(userTime);
 
-        this._processRequest(context, connection, channels, Lang.bind(this,
-            function(channel) {
-                if (this._isAuthChannel(channel)) {
-                    let authHandler = new SASLAuthHandler(channel);
-                    return;
-                }
+        this._processRequest(context, connection, channels, channel => {
+            if (this._isAuthChannel(channel)) {
+                let authHandler = new SASLAuthHandler(channel);
+                return;
+            }
 
-                if (present)
-                    this._app.activate();
+            if (present)
+                this._app.activate();
 
-                this._roomManager.ensureRoomForChannel(channel, userTime);
-                //channel.join_async('', null);
-            }));
+            this._roomManager.ensureRoomForChannel(channel, userTime);
+            //channel.join_async('', null);
+        });
     },
 
     _getPendingNotificationID: function(room, id) {

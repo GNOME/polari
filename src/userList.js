@@ -24,16 +24,14 @@ const UserListPopover = new Lang.Class({
 
         this._createWidget();
 
-        this.connect('closed', Lang.bind(this, function() {
-            this._entry.text = '';
-        }));
-        this.connect('map', Lang.bind(this, function() {
+        this.connect('closed', () => { this._entry.text = ''; });
+        this.connect('map', () => {
             this._revealer.transition_duration = 0;
             this._ensureUserList();
-        }));
-        this._revealer.connect('notify::child-revealed', Lang.bind(this, function() {
+        });
+        this._revealer.connect('notify::child-revealed', () => {
             this._revealer.transition_duration = 250;
-        }));
+        });
     },
 
     vfunc_realize: function() {
@@ -447,9 +445,9 @@ const UserListRow = new Lang.Class({
 
         this._createWidget();
 
-        this.connect('unmap', Lang.bind(this, function() {
+        this.connect('unmap', () => {
             this._revealer.reveal_child = false;
-        }));
+        });
         this.connect('state-flags-changed',
                      Lang.bind(this, this._updateArrowVisibility));
 
@@ -617,9 +615,9 @@ const UserList = new Lang.Class({
               handler: Lang.bind(this, this._onChannelChanged) }
         ];
         this._roomSignals = [];
-        roomSignals.forEach(Lang.bind(this, function(signal) {
+        roomSignals.forEach(signal => {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
-        }));
+        });
         this._onChannelChanged(room);
 
         this.show_all();
@@ -644,7 +642,7 @@ const UserList = new Lang.Class({
         if (this._updateHeightId != 0)
             return;
 
-        this._updateHeightId = Mainloop.idle_add(Lang.bind(this, function() {
+        this._updateHeightId = Mainloop.idle_add(() => {
             let topRow = this._list.get_row_at_y(this.vadjustment.value);
             let membersShown = Math.min(this.numRows, MAX_USERS_SHOWN);
             // topRow is unset when all rows are hidden due to filtering,
@@ -661,7 +659,7 @@ const UserList = new Lang.Class({
             this.propagate_natural_height = true;
             this._updateHeightId = 0;
             return GLib.SOURCE_REMOVE;
-        }));
+        });
     },
 
     _onMemberRenamed: function(room, oldMember, newMember) {
@@ -682,7 +680,7 @@ const UserList = new Lang.Class({
     },
 
     _onChannelChanged: function(room) {
-        this._list.foreach(function(w) { w.destroy(); });
+        this._list.foreach(w => { w.destroy(); });
         this._rows = {};
 
         if (!room.channel)

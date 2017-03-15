@@ -82,17 +82,15 @@ const AccountsMonitor = new Lang.Class({
 
         am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
 
-        am.connect('account-validity-changed', Lang.bind(this,
-            function(am, account, valid) {
-                if (valid)
-                    this._addAccount(account);
-                else
-                    this._removeAccount(account);
-            }));
-        am.connect('account-removed', Lang.bind(this,
-            function(am, account) {
+        am.connect('account-validity-changed', (am, account, valid) => {
+            if (valid)
+                this._addAccount(account);
+            else
                 this._removeAccount(account);
-            }));
+        });
+        am.connect('account-removed', (am, account) => {
+            this._removeAccount(account);
+        });
         am.connect('account-enabled',
                    Lang.bind(this, this._accountEnabledChanged));
         am.connect('account-disabled',
@@ -126,10 +124,9 @@ const AccountsMonitor = new Lang.Class({
             return;
 
         account._statusNotifyId =
-            account.connect('notify::connection-status', Lang.bind(this,
-                function() {
-                    this.emit('account-status-changed', account);
-                }));
+            account.connect('notify::connection-status', () => {
+                this.emit('account-status-changed', account);
+            });
         this._accounts.set(account.object_path, account);
 
         this.emit('account-added', account);

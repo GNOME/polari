@@ -88,10 +88,10 @@ const TextView = new Lang.Class({
                                                  location.x, location.y);
 
         let tags = iter.get_tags();
-        let pixelsAbove = tags.reduce(function(prev, current) {
+        let pixelsAbove = tags.reduce((prev, current) => {
                 return Math.max(prev, current.pixels_above_lines);
             }, this.get_pixels_above_lines());
-        let pixelsBelow = tags.reduce(function(prev, current) {
+        let pixelsBelow = tags.reduce((prev, current) => {
                 return Math.max(prev, current.pixels_below_lines);
             }, this.get_pixels_below_lines());
 
@@ -365,10 +365,9 @@ const ChatView = new Lang.Class({
         let statusMonitor = UserTracker.getUserStatusMonitor();
         this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
 
-        this._room.account.connect('notify::nickname', Lang.bind(this,
-            function() {
-                this._updateMaxNickChars(this._room.account.nickname.length);
-            }));
+        this._room.account.connect('notify::nickname', () => {
+            this._updateMaxNickChars(this._room.account.nickname.length);
+        });
         this._updateMaxNickChars(this._room.account.nickname.length);
 
         let isRoom = room.type == Tp.HandleType.ROOM;
@@ -415,9 +414,9 @@ const ChatView = new Lang.Class({
               handler: Lang.bind(this, this._onMemberLeft) }
         ];
         this._roomSignals = [];
-        roomSignals.forEach(Lang.bind(this, function(signal) {
+        roomSignals.forEach(signal => {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
-        }));
+        });
         this._onChannelChanged();
 
         this._nickStatusChangedId = this._userTracker.watchRoomStatus(this._room,
@@ -461,9 +460,7 @@ const ChatView = new Lang.Class({
           { name: 'loading',
             justification: Gtk.Justification.CENTER }
         ];
-        tags.forEach(function(tagProps) {
-            tagTable.add(new Gtk.TextTag(tagProps));
-        });
+        tags.forEach(tagProps => { tagTable.add(new Gtk.TextTag(tagProps)); });
     },
 
     _onStyleUpdated: function() {
@@ -509,7 +506,7 @@ const ChatView = new Lang.Class({
           { name: 'url',
             foreground_rgba: linkColor }
         ];
-        tags.forEach(function(tagProps) {
+        tags.forEach(tagProps => {
             let tag = tagTable.lookup(tagProps.name);
             for (let prop in tagProps) {
                 if (prop == 'name')
@@ -740,13 +737,12 @@ const ChatView = new Lang.Class({
 
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
-        this._backlogTimeoutId = Mainloop.timeout_add(500, Lang.bind(this,
-            function() {
-                this._logWalker.get_events_async(NUM_LOG_EVENTS,
-                                                 Lang.bind(this, this._onLogEventsReady));
-                this._backlogTimeoutId = 0;
-                return GLib.SOURCE_REMOVE;
-            }));
+        this._backlogTimeoutId = Mainloop.timeout_add(500, () => {
+            this._logWalker.get_events_async(NUM_LOG_EVENTS,
+                                             Lang.bind(this, this._onLogEventsReady));
+            this._backlogTimeoutId = 0;
+            return GLib.SOURCE_REMOVE;
+        });
         return Gdk.EVENT_STOP;
     },
 
@@ -754,12 +750,11 @@ const ChatView = new Lang.Class({
         if (this._valueChangedId)
             return;
 
-        this._valueChangedId = Mainloop.timeout_add(SCROLL_TIMEOUT, Lang.bind(this,
-            function() {
-                this._checkMessages();
-                this._valueChangedId = 0;
-                return GLib.SOURCE_REMOVE;
-            }));
+        this._valueChangedId = Mainloop.timeout_add(SCROLL_TIMEOUT, () => {
+            this._checkMessages();
+            this._valueChangedId = 0;
+            return GLib.SOURCE_REMOVE;
+        });
     },
 
     _pendingMessageRemoved: function(channel, message) {
@@ -782,17 +777,16 @@ const ChatView = new Lang.Class({
         let menu = new Gtk.Menu();
 
         let item = new Gtk.MenuItem({ label: _("Open Link") });
-        item.connect('activate', function() {
+        item.connect('activate', () => {
             Utils.openURL(url, Gtk.get_current_event_time());
         });
         menu.append(item);
 
         item = new Gtk.MenuItem({ label: _("Copy Link Address") });
-        item.connect('activate',
-            function() {
-                let clipboard = Gtk.Clipboard.get_default(item.get_display());
-                clipboard.set_text(url, -1);
-            });
+        item.connect('activate', () => {
+            let clipboard = Gtk.Clipboard.get_default(item.get_display());
+            clipboard.set_text(url, -1);
+        });
         menu.append(item);
 
         menu.show_all();
@@ -807,21 +801,14 @@ const ChatView = new Lang.Class({
 
         let hoveredButtonTags;
         if (inside)
-            hoveredButtonTags = iter.get_tags().filter(
-                function(t) {
-                    return t instanceof ButtonTag;
-                });
+            hoveredButtonTags = iter.get_tags().filter(t => t instanceof ButtonTag);
         else
             hoveredButtonTags = [];
 
-        hoveredButtonTags.forEach(
-            function(t) {
-                t.hover = true;
-            });
-        this._hoveredButtonTags.forEach(
-            function(t) {
-                t.hover = hoveredButtonTags.indexOf(t) >= 0;
-            });
+        hoveredButtonTags.forEach(t => { t.hover = true; });
+        this._hoveredButtonTags.forEach(t => {
+            t.hover = hoveredButtonTags.indexOf(t) >= 0;
+        });
 
         let isHovering = hoveredButtonTags.length > 0;
         let wasHovering = this._hoveredButtonTags.length > 0;
@@ -953,9 +940,9 @@ const ChatView = new Lang.Class({
             { name: 'pending-message-removed',
               handler: Lang.bind(this, this._pendingMessageRemoved) }
         ];
-        channelSignals.forEach(Lang.bind(this, function(signal) {
+        channelSignals.forEach(signal => {
             this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
-        }));
+        });
 
         let pending = this._channel.dup_pending_messages();
         this._initialPending = pending.map(p => this._createMessage(p));
@@ -1059,15 +1046,13 @@ const ChatView = new Lang.Class({
             groupTag.bind_property('invisible', headerArrowTag, 'invisible',
                                     GObject.BindingFlags.INVERT_BOOLEAN);
 
-            headerTag.connect('clicked',
-                function() {
-                    groupTag.invisible = !groupTag.invisible;
-                });
+            headerTag.connect('clicked', () => {
+                groupTag.invisible = !groupTag.invisible;
+            });
 
-            headerTag.connect('notify::hover', Lang.bind(this,
-                function() {
-                    headerTag.foreground_rgba = headerTag.hover ? this._statusHeaderHoverColor : null;
-                }));
+            headerTag.connect('notify::hover', () => {
+                headerTag.foreground_rgba = headerTag.hover ? this._statusHeaderHoverColor : null;
+            });
 
             this._ensureNewLine();
             headerMark = buffer.create_mark('idle-status-start', buffer.get_end_iter(), true);
@@ -1396,23 +1381,20 @@ const ChatView = new Lang.Class({
             url = 'http://' + url;
 
         let tag = new ButtonTag();
-        tag.connect('notify::hover', Lang.bind(this,
-            function() {
-                tag.foreground_rgba = tag.hover ? this._hoveredLinkColor : null;
-            }));
-        tag.connect('clicked',
-            function() {
-                Utils.openURL(url, Gtk.get_current_event_time());
-            });
-        tag.connect('button-press-event', Lang.bind(this,
-            function(tag, event) {
-                let [, button] = event.get_button();
-                if (button != Gdk.BUTTON_SECONDARY)
-                    return Gdk.EVENT_PROPAGATE;
+        tag.connect('notify::hover', () => {
+            tag.foreground_rgba = tag.hover ? this._hoveredLinkColor : null;
+        });
+        tag.connect('clicked', () => {
+            Utils.openURL(url, Gtk.get_current_event_time());
+        });
+        tag.connect('button-press-event', (tag, event) => {
+            let [, button] = event.get_button();
+            if (button != Gdk.BUTTON_SECONDARY)
+                return Gdk.EVENT_PROPAGATE;
 
-                this._showUrlContextMenu(url, button, event.get_time());
-                return Gdk.EVENT_STOP;
-            }));
+            this._showUrlContextMenu(url, button, event.get_time());
+            return Gdk.EVENT_STOP;
+        });
         return tag;
     },
 

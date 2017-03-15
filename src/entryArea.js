@@ -69,20 +69,18 @@ const ChatEntry = new Lang.Class({
         }
 
         let clipboard = Gtk.Clipboard.get_default(this.get_display());
-        clipboard.request_uris(Lang.bind(this,
-            function(clipboard, uris) {
-                if (uris && uris.length)
-                    this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
-                else
-                    clipboard.request_text(Lang.bind(this, this._onTextReceived));
-            }));
+        clipboard.request_uris((clipboard, uris) => {
+            if (uris && uris.length)
+                this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
+            else
+                clipboard.request_text(Lang.bind(this, this._onTextReceived));
+        });
 
-        clipboard.request_image(Lang.bind(this,
-            function(clipboard, pixbuf) {
-                if (pixbuf == null)
-                    return;
-                this.emit('image-pasted', pixbuf);
-            }));
+        clipboard.request_image((clipboard, pixbuf) => {
+            if (pixbuf == null)
+                return;
+            this.emit('image-pasted', pixbuf);
+        });
     },
 
     _onTextReceived: function(clipboard, text) {
@@ -136,90 +134,79 @@ const EntryArea = new Lang.Class({
 
         this.connect('destroy', Lang.bind(this, this._onDestroy));
         this.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
-        this.connect('realize', Lang.bind(this,
-            function() {
-                this._toplevel = this.get_toplevel();
-                this._keyPressId = this._toplevel.connect('key-press-event',
-                                                          Lang.bind(this, this._onKeyPressEvent));
-            }));
+        this.connect('realize', () => {
+            this._toplevel = this.get_toplevel();
+            this._keyPressId = this._toplevel.connect('key-press-event',
+                                                      Lang.bind(this, this._onKeyPressEvent));
+        });
 
         this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
         this._nickLabel.width_chars = this._maxNickChars;
 
         /* HACK: We don't want the button to look different when the toplevel
                  is unfocused, so filter out the BACKDROP state */
-        this._nickButton.connect('state-flags-changed', Lang.bind(this,
-            function(w) {
-                let state = w.get_state_flags();
-                if (!(state & Gtk.StateFlags.BACKDROP))
-                    return; // avoid indefinite recursion
+        this._nickButton.connect('state-flags-changed', w => {
+            let state = w.get_state_flags();
+            if (!(state & Gtk.StateFlags.BACKDROP))
+                return; // avoid indefinite recursion
 
-                state &= ~Gtk.StateFlags.BACKDROP;
-                w.set_state_flags (state, true);
-            }));
+            state &= ~Gtk.StateFlags.BACKDROP;
+            w.set_state_flags (state, true);
+        });
 
-        this._changeButton.connect('clicked', Lang.bind(this,
-            function() {
-               if (this._nickEntry.text)
-                   this._setNick(this._nickEntry.text);
-               this._nickButton.active = false;
-            }));
+        this._changeButton.connect('clicked', () => {
+           if (this._nickEntry.text)
+               this._setNick(this._nickEntry.text);
+           this._nickButton.active = false;
+        });
         this._nickPopover.set_default_widget(this._changeButton);
 
-        this._chatEntry.connect('text-pasted', Lang.bind(this,
-            function(entry, text, nLines) {
-                this.pasteText(text, nLines);
-            }));
-        this._chatEntry.connect('text-dropped', Lang.bind(this,
-            function(entry, text) {
-                this.pasteText(text, text.split('\n').length);
-            }));
+        this._chatEntry.connect('text-pasted', (entry, text, nLines) => {
+            this.pasteText(text, nLines);
+        });
+        this._chatEntry.connect('text-dropped', (entry, text) => {
+            this.pasteText(text, text.split('\n').length);
+        });
 
-        this._chatEntry.connect('image-pasted', Lang.bind(this,
-            function(entry, image) {
-                this.pasteImage(image);
-            }));
-        this._chatEntry.connect('image-dropped', Lang.bind(this,
-            function(entry, image) {
-                this.pasteImage(image);
-            }));
+        this._chatEntry.connect('image-pasted', (entry, image) => {
+            this.pasteImage(image);
+        });
+        this._chatEntry.connect('image-dropped', (entry, image) => {
+            this.pasteImage(image);
+        });
 
-        this._chatEntry.connect('file-pasted', Lang.bind(this,
-            function(entry, file) {
-                this.pasteFile(file);
-            }));
-        this._chatEntry.connect('file-dropped', Lang.bind(this,
-            function(entry, file) {
-                this.pasteFile(file);
-            }));
+        this._chatEntry.connect('file-pasted', (entry, file) => {
+            this.pasteFile(file);
+        });
+        this._chatEntry.connect('file-dropped', (entry, file) => {
+            this.pasteFile(file);
+        });
 
         this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
 
-        this._chatEntry.connect('activate', Lang.bind(this,
-            function() {
-                if (this._ircParser.process(this._chatEntry.text)) {
-                    this._chatEntry.text = '';
-                } else {
-                    this._chatEntry.get_style_context().add_class('error');
-                    this._chatEntry.grab_focus(); // select text
-                }
-            }));
+        this._chatEntry.connect('activate', () => {
+            if (this._ircParser.process(this._chatEntry.text)) {
+                this._chatEntry.text = '';
+            } else {
+                this._chatEntry.get_style_context().add_class('error');
+                this._chatEntry.grab_focus(); // select text
+            }
+        });
 
         this._cancelButton.connect('clicked', Lang.bind(this, this._onCancelClicked));
         this._pasteButton.connect('clicked', Lang.bind(this, this._onPasteClicked));
 
-        this._pasteBox.connect_after('key-press-event', Lang.bind(this,
-            function(w, event) {
-                let [, keyval] = event.get_keyval();
-                let [, mods] = event.get_state();
-                if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
-                    keyval == Gdk.KEY_Delete ||
-                    keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
-                    this._cancelButton.clicked();
-                    return Gdk.EVENT_STOP;
-                }
-                return Gdk.EVENT_PROPAGATE;
-            }));
+        this._pasteBox.connect_after('key-press-event', (w, event) => {
+            let [, keyval] = event.get_keyval();
+            let [, mods] = event.get_state();
+            if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
+                keyval == Gdk.KEY_Delete ||
+                keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
+                this._cancelButton.clicked();
+                return Gdk.EVENT_STOP;
+            }
+            return Gdk.EVENT_PROPAGATE;
+        });
 
         if (!this._room)
             return;
@@ -253,7 +240,7 @@ const EntryArea = new Lang.Class({
             this._room.channel &&
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
             let members = this._room.channel.group_dup_members_contacts();
-            nicks = members.map(function(member) { return member.alias; });
+            nicks = members.map(member => member.alias);
         }
         this._completion.setCompletions(nicks);
     },
@@ -361,13 +348,12 @@ const EntryArea = new Lang.Class({
 
         let app = Gio.Application.get_default();
         try {
-            app.pasteManager.pasteContent(this._pasteContent, title,
-                Lang.bind(this, function(url) {
-                    // TODO: handle errors
-                    this._setPasteContent(null);
-                    if (url)
-                        this._chatEntry.emit('insert-at-cursor', url);
-                }));
+            app.pasteManager.pasteContent(this._pasteContent, title, url => {
+                // TODO: handle errors
+                this._setPasteContent(null);
+                if (url)
+                    this._chatEntry.emit('insert-at-cursor', url);
+            });
         } catch(e) {
             let type = typeof this._pasteContent;
             debug('Failed to paste content of type ' +
@@ -403,31 +389,29 @@ const EntryArea = new Lang.Class({
         this._nickLabel.label = nick;
 
         let account = this._room.account;
-        account.set_nickname_async(nick, Lang.bind(this,
-            function(a, res) {
-                try {
-                    a.set_nickname_finish(res);
-                } catch(e) {
-                    logError(e, "Failed to change nick");
+        account.set_nickname_async(nick, (a, res) => {
+            try {
+                a.set_nickname_finish(res);
+            } catch(e) {
+                logError(e, "Failed to change nick");
 
-                    this._updateNick();
-                    return;
-                }
+                this._updateNick();
+                return;
+            }
 
-                // TpAccount:nickname is a local property which doesn't
-                // necessarily match the externally visible nick; telepathy
-                // doesn't consider failing to sync the two an error, so
-                // we give the server MAX_NICK_UPDATE_TIME seconds until
-                // we assume failure and revert back to the server nick
-                //
-                // (set_aliases() would do what we want, but it's not
-                // introspected)
-                Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME,
-                    Lang.bind(this, function() {
-                        this._updateNick();
-                        return GLib.SOURCE_REMOVE;
-                    }));
-            }));
+            // TpAccount:nickname is a local property which doesn't
+            // necessarily match the externally visible nick; telepathy
+            // doesn't consider failing to sync the two an error, so
+            // we give the server MAX_NICK_UPDATE_TIME seconds until
+            // we assume failure and revert back to the server nick
+            //
+            // (set_aliases() would do what we want, but it's not
+            // introspected)
+            Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME, () => {
+                this._updateNick();
+                return GLib.SOURCE_REMOVE;
+            });
+        });
     },
 
     _updateNick: function() {

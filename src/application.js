@@ -193,26 +193,24 @@ const Application = new Lang.Class({
           { name: 'previous-pending-room',
             accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
         ];
-        actionEntries.forEach(Lang.bind(this,
-            function(actionEntry) {
-                let props = {};
-                ['name', 'state', 'parameter_type'].forEach(
-                    function(prop) {
-                        if (actionEntry[prop])
-                            props[prop] = actionEntry[prop];
-                    });
-                let action = new Gio.SimpleAction(props);
-                if (actionEntry.create_hook)
-                    actionEntry.create_hook(action);
-                if (actionEntry.activate)
-                    action.connect('activate', actionEntry.activate);
-                if (actionEntry.change_state)
-                    action.connect('change-state', actionEntry.change_state);
-                if (actionEntry.accels)
-                    this.set_accels_for_action('app.' + actionEntry.name,
-                                               actionEntry.accels);
-                this.add_action(action);
-        }));
+        actionEntries.forEach(actionEntry => {
+            let props = {};
+            ['name', 'state', 'parameter_type'].forEach(prop => {
+                if (actionEntry[prop])
+                    props[prop] = actionEntry[prop];
+            });
+            let action = new Gio.SimpleAction(props);
+            if (actionEntry.create_hook)
+                actionEntry.create_hook(action);
+            if (actionEntry.activate)
+                action.connect('activate', actionEntry.activate);
+            if (actionEntry.change_state)
+                action.connect('change-state', actionEntry.change_state);
+            if (actionEntry.accels)
+                this.set_accels_for_action('app.' + actionEntry.name,
+                                           actionEntry.accels);
+            this.add_action(action);
+        });
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         let action = this._settings.create_action('run-in-background');
@@ -297,7 +295,7 @@ const Application = new Lang.Class({
         this.activate();
 
         let time = Utils.getTpEventTime();
-        let uris = files.map(function(f) { return f.get_uri(); });
+        let uris = files.map(f => f.get_uri());
 
         this._accountsMonitor.prepare(() => {
             this._openURIs(uris, time);
@@ -316,13 +314,13 @@ const Application = new Lang.Class({
         });
 
         let joinAction = this.lookup_action('join-room');
-        uris.forEach(Lang.bind(this, function(uri) {
+        uris.forEach(uri => {
             let [success, server, port, room] = this._parseURI(uri);
             if (!success)
                 return;
 
             let matchedId = this._networksManager.findByServer(server);
-            let matches = Object.keys(map).filter(function(a) {
+            let matches = Object.keys(map).filter(a => {
                 return GLib.ascii_strcasecmp(map[a].server, server) == 0 ||
                        map[a].service == matchedId;
             });
@@ -331,14 +329,13 @@ const Application = new Lang.Class({
                 joinAction.activate(new GLib.Variant('(ssu)',
                                 [matches[0], '#' + room, time]));
             else
-                this._createAccount(matchedId, server, port,
-                    function(a) {
-                        if (a)
-                            joinAction.activate(new GLib.Variant('(ssu)',
+                this._createAccount(matchedId, server, port, a => {
+                    if (a)
+                        joinAction.activate(new GLib.Variant('(ssu)',
                                             [a.get_object_path(),
                                              '#' + room, time]));
-                    });
-        }));
+                });
+        });
     },
 
     _parseURI: function(uri) {
@@ -385,11 +382,10 @@ const Application = new Lang.Class({
         for (let prop in params)
             req.set_parameter(prop, params[prop]);
 
-        req.create_account_async(Lang.bind(this,
-            function(r, res) {
-                let account = req.create_account_finish(res);
-                callback(account);
-            }));
+        req.create_account_async((r, res) => {
+            let account = req.create_account_finish(res);
+            callback(account);
+        });
     },
 
     _updateUserListAction: function() {
@@ -399,7 +395,7 @@ const Application = new Lang.Class({
     },
 
     _userListCreateHook: function(action) {
-        action.connect('notify::enabled', function() {
+        action.connect('notify::enabled', () => {
             if (!action.enabled)
                 action.change_state(GLib.Variant.new('b', false));
         });
@@ -553,23 +549,22 @@ const Application = new Lang.Class({
     _onRemoveConnection: function(action, parameter){
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
-        account.set_enabled_async(false, Lang.bind(this,
-            function() {
-                let label = _("%s removed.").format(account.display_name);
-                let n = new AppNotifications.UndoNotification(label);
-                this.notificationQueue.addNotification(n);
+        account.set_enabled_async(false, () => {
+            let label = _("%s removed.").format(account.display_name);
+            let n = new AppNotifications.UndoNotification(label);
+            this.notificationQueue.addNotification(n);
 
-                n.connect('closed', function() {
-                    account.remove_async(function(a, res) {
-                        a.remove_finish(res); // TODO: Check for errors
-                    });
+            n.connect('closed', () => {
+                account.remove_async((a, res) => {
+                    a.remove_finish(res); // TODO: Check for errors
                 });
-                n.connect('undo', function() {
-                    account.set_enabled_async(true, function(a, res) {
-                        a.set_enabled_finish(res); // TODO: Check for errors
-                    });
+            });
+            n.connect('undo', () => {
+                account.set_enabled_async(true, (a, res) => {
+                    a.set_enabled_finish(res); // TODO: Check for errors
                 });
-            }));
+            });
+        });
     },
 
     _onEditConnection: function(action, parameter) {
@@ -577,10 +572,9 @@ const Application = new Lang.Class({
         let account = this._accountsMonitor.lookupAccount(accountPath);
         let dialog = new Connections.ConnectionProperties(account);
         dialog.transient_for = this.active_window;
-        dialog.connect('response', Lang.bind(this,
-            function(w, response) {
-                w.destroy();
-            }));
+        dialog.connect('response', (w, reponse) => {
+            w.destroy();
+        });
         dialog.show();
     },
 
@@ -669,10 +663,10 @@ const Application = new Lang.Class({
 
         this._aboutDialog = new Gtk.AboutDialog(aboutParams);
         this._aboutDialog.show();
-        this._aboutDialog.connect('response', Lang.bind(this, function() {
+        this._aboutDialog.connect('response', () => {
             this._aboutDialog.destroy();
             this._aboutDialog = null;
-        }));
+        });
     },
 
     _onQuit: function() {

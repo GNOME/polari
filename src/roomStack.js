@@ -39,11 +39,10 @@ const RoomStack = new Lang.Class({
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
 
         this._entryAreaHeight = 0;
-        this._sizeGroup.get_widgets()[0].connect('size-allocate', Lang.bind(this,
-            function(w, rect) {
-                this._entryAreaHeight = rect.height - 1;
-                this.notify('entry-area-height');
-            }));
+        this._sizeGroup.get_widgets()[0].connect('size-allocate', (w, rect) => {
+            this._entryAreaHeight = rect.height - 1;
+            this.notify('entry-area-height');
+        });
     },
 
     vfunc_realize: function() {
@@ -217,18 +216,15 @@ const RoomView = new Lang.Class({
                                  GObject.BindingFlags.SYNC_CREATE);
         sizeGroup.add_widget(this._entryArea);
 
-        this._view.connect('text-dropped', Lang.bind(this,
-            function(view, text) {
-               this._entryArea.pasteText(text, text.split('\n').length);
-            }));
-        this._view.connect('image-dropped', Lang.bind(this,
-            function(view, image) {
-               this._entryArea.pasteImage(image);
-            }));
-        this._view.connect('file-dropped', Lang.bind(this,
-            function(view, file) {
-               this._entryArea.pasteFile(file);
-            }));
+        this._view.connect('text-dropped', (view, text) => {
+           this._entryArea.pasteText(text, text.split('\n').length);
+        });
+        this._view.connect('image-dropped', (view, image) => {
+           this._entryArea.pasteImage(image);
+        });
+        this._view.connect('file-dropped', (view, file) => {
+           this._entryArea.pasteFile(file);
+        });
 
         this.show_all();
     },

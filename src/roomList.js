@@ -168,10 +168,9 @@ const RoomListHeader = new Lang.Class({
 
         this.popover.set_default_widget(this._popoverPassword);
         this.popover.connect('notify::visible', _onPopoverVisibleChanged);
-        this.popover.connect('closed', Lang.bind(this,
-            function() {
-                this._popoverPassword.text = '';
-            }));
+        this.popover.connect('closed', () => {
+            this._popoverPassword.text = '';
+        });
 
         let target = new GLib.Variant('o', this._account.get_object_path());
         this._popoverConnect.action_target = target;
@@ -179,15 +178,14 @@ const RoomListHeader = new Lang.Class({
         this._popoverRemove.action_target = target;
         this._popoverProperties.action_target = target;
 
-        this._popoverPassword.connect('activate', Lang.bind(this,
-            function() {
-                let action = this._app.lookup_action('authenticate-account');
-                let password = this._popoverPassword.text;
-                let accountPath = this._account.get_object_path();
-                let param = new GLib.Variant('(os)', [accountPath, password]);
-                action.activate(param);
-                this.popover.hide();
-            }));
+        this._popoverPassword.connect('activate', () => {
+            let action = this._app.lookup_action('authenticate-account');
+            let password = this._popoverPassword.text;
+            let accountPath = this._account.get_object_path();
+            let param = new GLib.Variant('(os)', [accountPath, password]);
+            action.activate(param);
+            this.popover.hide();
+        });
 
         let displayNameChangedId =
             this._account.connect('notify::display-name',
@@ -203,11 +201,11 @@ const RoomListHeader = new Lang.Class({
                                   Lang.bind(this, this._onRequestedPresenceChanged));
         this._onRequestedPresenceChanged();
 
-        this.connect('destroy', Lang.bind(this, function() {
+        this.connect('destroy', () => {
             this._account.disconnect(displayNameChangedId);
             this._account.disconnect(connectionStatusChangedId);
             this._account.disconnect(presenceChangedId);
-        }));
+        });
     },
 
     _onDisplayNameChanged: function() {
@@ -508,10 +506,9 @@ const RoomList = new Lang.Class({
         this._placeholders.set(account, placeholder);
         this.add(placeholder);
 
-        placeholder.connect('notify::visible', Lang.bind(this,
-            function() {
-                this.invalidate_sort();
-            }));
+        placeholder.connect('notify::visible', () => {
+            this.invalidate_sort();
+        });
 
         this._updatePlaceholderVisibility(account);
     },
@@ -580,9 +577,8 @@ const RoomList = new Lang.Class({
     },
 
     _updateHeader: function(row, before) {
-        let getAccount = function(row) {
-            return row ? row.account : null;
-        };
+        let getAccount = row => row ? row.account : null;
+
         let beforeAccount = getAccount(before);
         let account = getAccount(row);
 
