@@ -174,13 +174,17 @@ const DropTargetIface = new Lang.Interface({
 
             // TODO: handle multiple files ...
             let file = Gio.File.new_for_uri(uris[0]);
-            this._lookupFileInfo(file, Lang.bind(this,
-                function(targetType) {
-                    let canHandle = targetType != 0;
-                    if (canHandle)
-                        this.emit('file-dropped', file);
-                    Gtk.drag_finish(context, canHandle, false, time);
-                }));
+            try {
+                this._lookupFileInfo(file, Lang.bind(this,
+                    function(targetType) {
+                        let canHandle = targetType != 0;
+                        if (canHandle)
+                            this.emit('file-dropped', file);
+                        Gtk.drag_finish(context, canHandle, false, time);
+                    }));
+            } catch(e) {
+                Gtk.drag_finish(context, false, false, time);
+            }
         } else {
             let success = false;
             switch(info) {
@@ -203,14 +207,7 @@ const DropTargetIface = new Lang.Interface({
                               GLib.PRIORITY_DEFAULT,
                               null, Lang.bind(this,
             function(f, res) {
-                let fileInfo = null;
-                try {
-                    fileInfo = file.query_info_finish(res);
-                } catch(e) {
-                    callback(0);
-                    Gtk.drag_finish(context, false, false, time);
-                }
-
+                let fileInfo = file.query_info_finish(res);
                 let contentType = fileInfo.get_content_type();
                 callback(_getTargetForContentType(contentType));
             }))
