@@ -3,7 +3,21 @@
 HELP_ID=$(APP_ID)
 
 HELP_FILES = \
+	account-irc.page \
 	index.page \
-	legal.xml
+	introduction.page \
+	irc-commands.page \
+	irc-join-room.page \
+	irc-nick-password.page \
+	irc-start-conversation.page \
+	legal.xml \
+	network-connect.page \
+	overview.page \
+	sharing.page
+
+HELP_MEDIA = \
+	images/main.png \
+	images/polari-paste.png \
+	images/Polari.png
 
 HELP_LINGUAS = cs de es fr hu pt_BR sv
