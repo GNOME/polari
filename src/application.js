@@ -30,7 +30,7 @@ var Application = GObject.registerClass({
                       flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
         GLib.set_application_name('Polari');
-        GLib.set_prgname('org.gnome.Polari');
+        GLib.set_prgname('polari');
         this._retryData = new Map();
         this._nickTrackData = new Map();
         this._demons = [];
