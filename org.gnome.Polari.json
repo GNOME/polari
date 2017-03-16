@@ -68,10 +68,6 @@
                     "sha256": "dcb05349b32427924fa2a258a5e23e40e09c1bf9dd09919198c3a2ae1c38ba53"
                 },
                 {
-                    "type": "patch",
-                    "path": "build-aux/flatpak/mesonlib-Use-lib-as-default-libdir.patch"
-                },
-                {
                     "type": "file",
                     "path": "build-aux/flatpak/setuptools-makefile",
                     "dest-filename": "Makefile"
@@ -140,6 +136,7 @@
             "name": "polari",
             "buildsystem": "meson",
             "builddir": true,
+            "config-opts": ["--libdir=lib"],
             "sources": [
                 {
                     "type": "git",
