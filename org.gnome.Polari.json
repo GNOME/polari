@@ -127,8 +127,9 @@
             "config-opts": ["--disable-vala"],
             "sources": [
                 {
-                    "type": "git",
-                    "url": "git://git.gnome.org/gspell"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gspell/1.3/gspell-1.3.3.tar.xz",
+                    "sha256": "b9f798599cd4f785709c0de95614c99603b3649accaf356dd4031522405bc212"
                 }
             ]
         },
