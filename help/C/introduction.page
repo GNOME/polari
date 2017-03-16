@@ -31,7 +31,7 @@
     <app>Polari</app> is a simple Internet Relay Chat (IRC) client which integrates with the GNOME desktop and enables you to chat with people around the world through large chatrooms or private messaging.
   </p>
 
-  <media type="image" mime="image/png" src="images/polari.png">
+  <media type="image" mime="image/png" src="images/polari-screenshot.png">
 	<p>Polari IRC Client</p>
   </media>
 
