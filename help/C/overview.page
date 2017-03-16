@@ -5,7 +5,7 @@
 
   <info>
     <link type="guide" xref="index"/>
-    <revision pkgversion="3.7" version="0.1" date="2012-11-30" status="draft"/>
+    <revision pkgversion="3.24" version="0.1" date="2012-11-30" status="draft"/>
     <desc>
       What IRC is and how you can use it.
     </desc>

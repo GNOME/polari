@@ -6,7 +6,7 @@
   <info>
   	<link type="guide" xref="index"/>
   	<revision pkgversion="3.20" date="2016-08-06" status="stub" />
-  	<revision pkgversion="3.22" date="2017-03-12" status="draft" />
+  	<revision pkgversion="3.24" version="0.1" date="2017-03-12" status="draft" />
 
   	<credit type="author copyright">
     		<name>Ankit R Gadiya</name>

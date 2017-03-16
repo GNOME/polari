@@ -6,7 +6,7 @@
   <info>
     <link type="guide" xref="index#conversations"/>
     <desc>The supported IRC commands.</desc>
-    <revision pkgversion="3.22" version="0.1" date="2017-03-20" status="draft"/>
+    <revision pkgversion="3.24" version="0.1" date="2017-03-20" status="draft"/>
     <credit type="author">
       <name>Milo Casagrande</name>
       <email its:translate="no">milo@ubuntu.com</email>

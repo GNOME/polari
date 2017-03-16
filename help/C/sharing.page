@@ -7,7 +7,7 @@
   <info>
     <link type="guide" xref="index#conversations"/>
     <desc>How to easily share multiple lines of text or images.</desc>
-
+    <revision pkgversion="3.24" version="0.1" date="2012-11-30" status="draft"/>
   <credit type="author copyright">
     <name>Paul Cutler</name>
     <email its:translate="no">pcutler@gnome.org</email>
