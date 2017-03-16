@@ -104,9 +104,9 @@
             "name": "polari",
             "sources": [
                 {
-                    "type": "git",
-                    "branch": "gnome-3-22",
-                    "url": "git://git.gnome.org/polari"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/polari/3.22/polari-3.22.2.tar.xz",
+                    "sha256": "c7b4c382a9bae8094a576dbd9d022de0a90e186a36529a2eab914fe9d9b0045f"
                 }
             ]
         }
