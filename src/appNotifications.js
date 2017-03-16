@@ -142,7 +142,7 @@ const GridOutput = new Lang.Class({
 
         let numItems = items.length;
         let numCols = Math.min(numItems, 4);
-        let numRows = Number.toInteger(numItems / numCols) + numItems % numCols;
+        let numRows = Math.floor(numItems / numCols) + numItems % numCols;
 
         let grid = new Gtk.Grid({ column_homogeneous: true,
                                   row_spacing: 6,
