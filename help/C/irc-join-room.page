@@ -8,7 +8,7 @@
     <link type="guide" xref="index#connect"/>
     <link type="seealso" xref="network-connect"/>
     <desc>Join an IRC channel.</desc>
-    <revision pkgversion="3.24"version="0.1" date="2016-03-13" status="draft"/>
+    <revision pkgversion="3.24" version="0.1" date="2017-03-13" status="draft"/>
     <credit type="author">
       <name>Paul Cutler</name>
       <email its:translate="no">pcutler@gnome.org</email>
