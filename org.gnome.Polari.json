@@ -51,7 +51,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://ftpmirror.gnu.org/autoconf-archive/autoconf-archive-2016.09.16.tar.xz",
+                    "url": "https://ftpmirror.gnu.org/autoconf-archive/autoconf-archive-2016.09.16.tar.xz",
                     "sha256": "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
                 }
             ]
@@ -61,7 +61,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
+                    "url": "https://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
                     "sha256": "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
                 }
             ]
@@ -91,7 +91,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2",
+                    "url": "https://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2",
                     "sha256": "8fcad534d653b1b365132c5b158adae947810ffbae9843f72dd1797966415dae"
                 },
                 {
