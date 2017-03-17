@@ -370,7 +370,10 @@ const ChatView = new Lang.Class({
 
         this._room.connect("notify::topic", () => {
                                     this._canBlankStateBeInserted = true;
-                                    this._tryToInsertBlankState(); });
+                                    this._lookupTag('blank-state-topic').invisible = false;
+                                    this._lookupTag('blank-state-header-placeholder').invisible = true; //TODOOOO
+                                    this._tryToInsertBlankState();
+                                    });
 
         let statusMonitor = UserTracker.getUserStatusMonitor();
         this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
@@ -476,6 +479,11 @@ const ChatView = new Lang.Class({
             size: 18000
           },
           {
+            name: 'blank-state-header-placeholder',
+            left_margin: MARGIN,
+            size: 13000
+          },
+          {
             name: 'blank-state-topic',
             left_margin: MARGIN,
             size: 13000
@@ -537,6 +545,9 @@ const ChatView = new Lang.Class({
           { name: 'timestamp',
             foreground_rgba: dimColor },
           { name: 'blank-state-header',
+            foreground_rgba: dimColor },
+          {
+            name: 'blank-state-header-placeholder',
             foreground_rgba: dimColor },
           { name: 'blank-state-topic',
             foreground_rgba: dimColor },
@@ -792,7 +803,7 @@ const ChatView = new Lang.Class({
 
     _tryToInsertBlankState: function() {
         if (this._logWalker.is_end() && !this._isBlankStateInserted && this._canBlankStateBeInserted) {
-            this._insertBlankState();
+            this._insertBlankState();log("insert in " + this._room.display_name + " " + this._room.topic);
             this._isBlankStateInserted = true;
         }
     },
@@ -805,6 +816,7 @@ const ChatView = new Lang.Class({
                                                            false);
 
         let header = "";
+        let headerPlaceholder = "Connecting...";
         let topic = "";
         let image1 = "";
         let image2 = "";
@@ -826,8 +838,8 @@ const ChatView = new Lang.Class({
             tip3 = "This room is private. Use public paste services with care.\n";
         }
         else {
-            header = 'Conversations in ' + this._room.channel_name + ' start here.\n';
-            topic = 'The topic of ' + this._room.channel_name + ' is: ' + this._room.topic + '\n';
+            header = 'sConversations in ' + this._room.channel_name + ' start here.\n';
+            topic = 'The topic of ' + this._room.channel_name + ' is: ' + (this._room.topic == "" ? "None" : this._room.topic) + '\n';
 
             image1 = 'polari-user-notify-symbolic';
             image2 = 'edit-paste-symbolic';
@@ -841,10 +853,15 @@ const ChatView = new Lang.Class({
         let tags = [this._lookupTag('blank-state-header')];
         this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark), header, tags);
 
+        let tags = [this._lookupTag('blank-state-header-placeholder')];
+        this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark), headerPlaceholder, tags);
+        this._lookupTag('blank-state-header-placeholder').invisible = false; //TODOOOO
+
         tags = [this._lookupTag('blank-state-topic')];
         this._insertWithTags(this._view.buffer.get_iter_at_mark(blankStateMark),
                          topic,
                          tags);
+        this._lookupTag('blank-state-topic').invisible = true;
 
         tags = [this._lookupTag('blank-state-tips')];
         let imageTags = [this._lookupTag('blank-state-tips-image')];
