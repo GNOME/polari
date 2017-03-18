@@ -38,7 +38,7 @@
     "build-options": {
         "cflags": "-O2 -g"
     },
-    "cleanup": ["/bin/mc*","/include","/lib/*.la","/lib/*.a",
+    "cleanup": ["/bin/mc*","/include","/lib/*.la",
                 "/lib/pkgconfig","/lib/polari/*.la",
                 "/share/aclocal", "/share/autoconf-archive",
                 "/share/dbus-1/services/org.freedesktop*", "/share/gir-1.0",
@@ -58,6 +58,7 @@
         },
         {
             "name": "telepathy-glib",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",
@@ -68,6 +69,7 @@
         },
         {
             "name": "telepathy-mission-control",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",
@@ -78,6 +80,7 @@
         },
         {
             "name": "telepathy-idle",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",
@@ -88,6 +91,7 @@
         },
         {
             "name": "telepathy-logger",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",
@@ -102,6 +106,7 @@
         },
         {
             "name": "polari",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",
