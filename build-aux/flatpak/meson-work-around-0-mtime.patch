@@ -1,0 +1,52 @@
+From f56ca83802009e63a5428ac8d10c37a74e6e0dfa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Sun, 19 Mar 2017 02:15:04 +0100
+Subject: [PATCH 1/2] deps: Consider all pkg-config deps "system" includes
+
+... to work around ninja considering files with mtime==0 as dirty.
+---
+ mesonbuild/dependencies.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mesonbuild/dependencies.py b/mesonbuild/dependencies.py
+index e4317f1e..ed3fbb6b 100644
+--- a/mesonbuild/dependencies.py
++++ b/mesonbuild/dependencies.py
+@@ -204,7 +204,7 @@ class PkgConfigDependency(Dependency):
+         if ret != 0:
+             raise DependencyException('Could not generate cargs for %s:\n\n%s' %
+                                       (self.name, out))
+-        self.cargs = out.split()
++        self.cargs = out.replace('-I', '-isystem=').split()
+ 
+     def _set_libs(self):
+         libcmd = [self.name, '--libs']
+-- 
+2.12.0
+
+
+From b79c97447c868725456bb6a71712ccf21cf6452e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Sun, 19 Mar 2017 00:57:18 +0100
+Subject: [PATCH 2/2] gnome: Revert pkg-config change for gi-scanner args
+
+g-ir-scanner doesn't handle -isystem, so transform back to -I ...
+---
+ mesonbuild/modules/gnome.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/mesonbuild/modules/gnome.py b/mesonbuild/modules/gnome.py
+index 13ffabc7..c61ab76f 100644
+--- a/mesonbuild/modules/gnome.py
++++ b/mesonbuild/modules/gnome.py
+@@ -524,6 +524,7 @@ class GnomeModule(ExtensionModule):
+         elif isinstance(girtarget, build.SharedLibrary):
+             libname = girtarget.get_basename()
+             scan_command += ['--library', libname]
++        scan_command = list(map(lambda s:s.replace('-isystem=','-I'),scan_command))
+         scankwargs = {'output': girfile,
+                       'input': libsources,
+                       'command': scan_command,
+-- 
+2.12.0
+
