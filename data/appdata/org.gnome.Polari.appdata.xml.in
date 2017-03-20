@@ -48,6 +48,7 @@
     <kudo>HighContast</kudo>
     <kudo>ModernToolkit</kudo>
     <kudo>Notifications</kudo>
+    <kudo>UserDocs</kudo>
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
