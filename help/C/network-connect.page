@@ -23,38 +23,44 @@
 
   <title>Connect to an IRC Network</title>
 
-    <p>The first time you start <app>Polari</app> you will be asked to join a network.
-    Polari comes with over fifty IRC networks configured for you.   Choose the IRC Network
-    you would like to connect to and click on it.
+    <p>The first time you start <app>Polari</app> you will be asked to join a 
+    network.  <app>Polari</app> comes with over fifty IRC networks configured 
+    for you.  Choose the IRC Network you would like to connect to and click 
+    on it.
     </p>
 
-    <p>If you do not see the IRC network you would like to join, you can also enter the details of
-    the IRC network.  Click the <gui>Custom Network</gui> button and enter the <gui>Server Address</gui>.
-    You can optionally enter the name of the network as you want it to appear in the list of networks
-    in the <gui>Network Name</gui> field.
+    <p>If you do not see the IRC network you would like to join, you can also 
+    enter the details of the IRC network.  Click the <gui>Custom Network</gui> 
+    button and enter the <gui>Server Address</gui>.  You can optionally 
+    enter the name of the network as you want it to appear in the list of 
+    networks in the <gui>Network Name</gui> field.
     </p>
 
-    <p>After you have connected to an IRC Network, you can also connect to other IRC Networks.
+    <p>After you have connected to an IRC Network, you can also connect to 
+    other IRC Networks.
     </p>
 
   <steps>
     <item>
-        <p>Click on the <key>+</key> in the top left corner.</p>
+        <p>Press on the <key>+</key> in the top left corner.</p>
     </item>
     <item>
-        <p>Click <gui>Add Network</gui> and select the IRC network from the list you would like to join
-        or click on <gui>Custom Network</gui> and enter the details.</p>
+        <p>Press <gui>Add Network</gui> and select the IRC network from the 
+        list you would like to join or press <gui>Custom Network</gui> and 
+        enter the details.</p>
     </item>
     <item>
-        <p>Enter the name of the chat room you would like to join or select the chat room(s) from the list and
-        then press <gui>Join</gui>.</p>
+        <p>Enter the name of the chat room you would like to join or 
+        select the chat room(s) from the list and then press 
+        <gui>Join</gui>.</p>
     </item>
     <item>
-        <p>Click the <gui>Join</gui> button to connect to the room or rooms.</p>
+        <p>Press the <gui>Join</gui> button to connect to the room or rooms.</p>
     </item>
   </steps>
 
-  <note><p>If the IRC network you are connecting to uses a custom port, you can append it to the name of the network with a
+  <note><p>If the IRC network you are connecting to uses a custom port, 
+  you can append it to the name of the network with a
   colon and the port number, for example <em>irc.example.org:12345</em></p>
   </note>
 </page>

@@ -24,7 +24,9 @@
   </license>
 
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
-    <desc><app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) client which completely integrates with the GNOME desktop. Learn more about Polari.</desc>
+    <desc><app>Polari</app> is a clean, simple, and minimal Internet Relay Chat 
+    (IRC) client which integrates with the GNOME desktop. 
+    Learn more about Polari.</desc>
   </info>
 
   <title>

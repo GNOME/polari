@@ -34,7 +34,8 @@
     </item>
     <item>
       <p>Information about the user, including their name and the last time they
-      were active in the channel, will appear.  Click <gui>Message</gui> to start a private conversation.
+      were active in the channel, will appear.  Click <gui>Message</gui> to 
+      start a private conversation.
       </p>
     </item>
   </steps>
@@ -43,22 +44,24 @@
 
   <steps>
     <item>
-      <p>In the upper right hand corner of <app>Polari</app> a number is displayed
-      that shows the total number of users in the chat room.  Click on the number.
+      <p>In the upper-right hand corner of <app>Polari</app> a number is 
+      displayed that shows the total number of users in the chat room.  
+      Click on the number.
       </p>
     </item>
     <item>
-      <p>Select the name of the user you want to message.  Information about the user,
-      including their name and the last time they were active in the channel, will appear.</p>
+      <p>Select the name of the user you want to message.  Information about 
+      the user, including their name and the last time they were active in 
+      the channel, will appear.</p>
     </item>
     <item>
-      <p>Click <gui>Message</gui> to start a private conversation.</p>
+      <p>Press <gui>Message</gui> to start a private conversation.</p>
     </item>
   </steps>
 
-    <p>A new private conversation will start and a chat room will be started. The chat room
-    will be shown in the left sidebar of <app>Polari</app> with the name of the person
-    you are chatting with.
+    <p>A new private conversation will start and a chat room will be created. 
+    The chat room will be shown in the left sidebar of <app>Polari</app> 
+    with the name of the person you are chatting with.
     </p>
 
 

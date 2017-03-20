@@ -22,13 +22,14 @@
 
   <title>Supported IRC commands</title>
   <p>
-    To see the list of the supported IRC commands, in a chat room type <input>/help</input>
-    and press <key>Enter</key>.
+    To see the list of the supported IRC commands, in a chat room type 
+    <input>/help</input> and press <key>Enter</key>.
   </p>
   <note>
     <p>
-      All commands available will be listed and you can type <input> /help commandname</input>
-      to get additional help with a specific command.
+      All commands available will be listed and you can type 
+      <input>/help commandname</input> to get additional help with a specific 
+      command.
     </p>
   </note>
 </page>
