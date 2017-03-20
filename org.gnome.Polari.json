@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Polari",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.22",
+    "runtime-version": "3.24",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "polari",
@@ -18,6 +18,7 @@
         "--talk-name=org.freedesktop.Telepathy.AccountManager",
         "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
         "--talk-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
+        "--own-name=org.freedesktop.Telepathy.Client.TpGLibRequestAndHandle.*",
         /* Telepathy names owned by bundled services */
         "--own-name=org.freedesktop.Telepathy.AccountManager",
         "--own-name=org.freedesktop.Telepathy.ChannelDispatcher",
@@ -38,12 +39,12 @@
     "build-options": {
         "cflags": "-O2 -g"
     },
-    "cleanup": ["/bin/mc*","/include","/lib/*.la",
-                "/lib/pkgconfig","/lib/polari/*.la",
+    "cleanup": ["/bin/m*","/bin/wraptool","/include","/lib/*.la",
+                "/lib/pkgconfig","/lib/polari/*.la","/lib/python*",
                 "/share/aclocal", "/share/autoconf-archive",
                 "/share/dbus-1/services/org.freedesktop*", "/share/gir-1.0",
                 "/share/gtk-doc", "/share/info", "/share/man",
-                "/share/polari/gir-1.0", "/share/telepathy"
+                "/share/polari", "/share/telepathy"
     ],
     "modules": [
         {
@@ -64,6 +65,10 @@
                     "type": "archive",
                     "url": "https://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
                     "sha256": "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
+                },
+                {
+                    "type": "patch",
+                    "path": "build-aux/flatpak/tp-change-uniquify.patch"
                 }
             ]
         },
@@ -105,13 +110,24 @@
             ]
         },
         {
+            "name": "gspell",
+            "config-opts": ["--disable-vala", "--disable-static"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gspell/1.4/gspell-1.4.0.tar.xz",
+                    "sha256": "8d317c6bf6ae298b0a6c89aed63bc133c85c8ce7e8e799d870da560ad10b2d4e"
+                }
+            ]
+        },
+        {
             "name": "polari",
             "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/polari/3.22/polari-3.22.2.tar.xz",
-                    "sha256": "c7b4c382a9bae8094a576dbd9d022de0a90e186a36529a2eab914fe9d9b0045f"
+                    "url": "https://download.gnome.org/sources/polari/3.24/polari-3.24.0.tar.xz",
+                    "sha256": "4aa83b309b9d16c4a9c1fff7e374fc745eaaeac40def7daaeebf54e8e01b19ae"
                 }
             ]
         }
