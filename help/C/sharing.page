@@ -35,7 +35,7 @@
   in <app>Polari</app> or drag and drop a file from <app>Files</app> to <app>Polari</app>.
   You will be asked if you wish to upload the image to a public paste service.
   If you agree to upload the image, press the <gui>Paste</gui> button as seen in the following screenshot.
-  After pressing <gui>Paste</gui>, the link to the where the image was uplaoded will be automatically
+  After pressing <gui>Paste</gui>, the link to the where the image was uploaded will be automatically
   entered into the chat box.  Press <key>Enter</key> to share the link with the chat room.
   </p>
 
