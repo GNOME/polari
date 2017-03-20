@@ -1,3 +1,15 @@
+3.24.0 - "Yoko Ono"
+===================
+* Add user documentation [Paul; #722498]
+* Misc. bug fixes [Florian, Anders; #780166, #779946, #780298]
+
+Contributors:
+  Mario Blättermann, Paul Cutler, Patrick Griffis, Anders Jonsson,
+  Florian Müllner
+
+Translations:
+  Rūdolfs Mazurs [lv], Daniel Korostil [uk]
+
 3.23.92 - "Mr. Five Minutes Ago"
 ================================
 * Support the meson build system [Florian; #779599]
