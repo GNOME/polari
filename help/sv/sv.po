@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2017-03-17 09:23+0000\n"
-"PO-Revision-Date: 2017-03-20 12:33+0100\n"
+"POT-Creation-Date: 2017-03-20 13:22+0000\n"
+"PO-Revision-Date: 2017-03-20 15:58+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -46,38 +46,36 @@ msgstr "2016"
 msgid "Paul Cutler"
 msgstr "Paul Cutler"
 
-# TODO: Attribution??
 #. (itstool) path: license/p
 #: C/index.page:23 C/irc-commands.page:19 C/irc-join-room.page:17
 #: C/irc-nick-password.page:21 C/irc-start-conversation.page:20
 #: C/overview.page:17 C/sharing.page:17
 msgid "Creative Commons Share Alike 4.0"
-msgstr "Creative Commons DelaLika 4.0 Internationell"
+msgstr "Creative Commons DelaLika 4.0"
 
 # TODO: GNOME
 #. (itstool) path: info/desc
 #: C/index.page:27
 msgid ""
 "<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
-"client which completely integrates with the gnome desktop. Learn more about "
-"Polari."
+"client which integrates with the GNOME desktop. Learn more about Polari."
 msgstr ""
 "<app>Polari</app> är en stilren, enkel och minimal klient för IRC (Internet "
 "Relay Chat) som är fullständigt integrerad med GNOME-skrivbordet. Lär dig "
 "mer om Polari."
 
 #. (itstool) path: page/title
-#: C/index.page:30
+#: C/index.page:32
 msgid "<_:media-1/> Polari"
 msgstr "<_:media-1/> Polari"
 
 #. (itstool) path: section/title
-#: C/index.page:36
+#: C/index.page:38
 msgid "Connecting to IRC Servers and Chat Rooms"
 msgstr "Ansluta till IRC-servrar och chattrum"
 
 #. (itstool) path: section/title
-#: C/index.page:40
+#: C/index.page:42
 msgid "Conversations"
 msgstr "Konversationer"
 
@@ -93,12 +91,12 @@ msgstr ""
 "En introduktion till <app>Polari</app>, en stilren, minimal IRC-klient."
 
 #. (itstool) path: page/title
-#: C/introduction.page:28
+#: C/introduction.page:29
 msgid "Introduction"
 msgstr "Introduktion"
 
 #. (itstool) path: page/p
-#: C/introduction.page:30
+#: C/introduction.page:31
 msgid ""
 "<app>Polari</app> is a simple Internet Relay Chat (IRC) client which "
 "integrates with the GNOME desktop and enables you to chat with people around "
@@ -113,7 +111,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/introduction.page:34
+#: C/introduction.page:37
 msgctxt "_"
 msgid ""
 "external ref='images/polari-screenshot.png' "
@@ -123,7 +121,7 @@ msgstr ""
 "md5='6b752736dd41aa5cddf337bb3b4be452'"
 
 #. (itstool) path: media/p
-#: C/introduction.page:35
+#: C/introduction.page:38
 msgid "Polari IRC Client"
 msgstr "Polari IRC-klient"
 
@@ -155,12 +153,11 @@ msgstr ""
 #. (itstool) path: note/p
 #: C/irc-commands.page:29
 msgid ""
-"All commands available will be listed and you can type <input> /help "
+"All commands available will be listed and you can type <input>/help "
 "commandname</input> to get additional help with a specific command."
 msgstr ""
-"Alla tillgängliga kommandon kommer att listas och du kan skriva <input> /"
-"help kommandonamn</input> för att få ytterligare hjälp kring ett givet "
-"kommando."
+"Alla tillgängliga kommandon kommer att listas och du kan skriva <input>/help "
+"kommandonamn</input> för att få ytterligare hjälp kring ett givet kommando."
 
 #. (itstool) path: info/desc
 #: C/irc-join-room.page:10
@@ -184,17 +181,17 @@ msgstr ""
 "xref=\"network-connect\"/>."
 
 #. (itstool) path: page/p
-#: C/irc-join-room.page:26
+#: C/irc-join-room.page:27
 msgid "To join an IRC chat room:"
 msgstr "För att gå in i ett IRC-chattrum:"
 
 #. (itstool) path: item/p
-#: C/irc-join-room.page:30 C/network-connect.page:42
-msgid "Click on the <key>+</key> in the top left corner."
-msgstr "Klicka på <key>+</key> i det övre vänstra hörnet."
+#: C/irc-join-room.page:31
+msgid "Press <key>+</key> in the top-left corner."
+msgstr "Tryck ned <key>+</key> i det övre vänstra hörnet."
 
 #. (itstool) path: item/p
-#: C/irc-join-room.page:33
+#: C/irc-join-room.page:34
 msgid ""
 "Enter the name of the chat room you would like to join or select the chat "
 "room(s) from the list and then press <gui>Join</gui>. You can select "
@@ -205,7 +202,7 @@ msgstr ""
 "gå in i dem."
 
 #. (itstool) path: item/p
-#: C/irc-join-room.page:37
+#: C/irc-join-room.page:39
 msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
 msgstr ""
 "Klicka på knappen <gui>Anslut</gui> för att ansluta till ett eller flera "
@@ -239,7 +236,7 @@ msgstr ""
 #: C/irc-nick-password.page:32
 msgid ""
 "<app>Polari</app> does not currently support nickname registration "
-"automatically. Every IRC network handles registering a specific nickname "
+"automatically. Each IRC network handles registering a specific nickname "
 "differently and you will need to check with the IRC network on how to "
 "register your nickname. After you have registered a nickname, you will need "
 "to message NickServ to identify yourself after connecting to the IRC Network "
@@ -253,17 +250,17 @@ msgstr ""
 "själv efter att du anslutit till IRC-nätverket med följande kommando:"
 
 #. (itstool) path: item/p
-#: C/irc-nick-password.page:39
+#: C/irc-nick-password.page:40
 msgid "<input>/msg NickServ identify username password</input>"
 msgstr "<input>/msg NickServ identify användarnamn lösenord</input>"
 
 #. (itstool) path: item/p
-#: C/irc-nick-password.page:42
+#: C/irc-nick-password.page:43
 msgid "Press <key>Enter</key>"
 msgstr "Tryck ned <key>Retur</key>"
 
 #. (itstool) path: note/p
-#: C/irc-nick-password.page:46
+#: C/irc-nick-password.page:47
 msgid ""
 "Use the username and password you registered with the IRC network with this "
 "command."
@@ -272,7 +269,7 @@ msgstr ""
 "detta kommando."
 
 #. (itstool) path: page/p
-#: C/irc-nick-password.page:51
+#: C/irc-nick-password.page:52
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
@@ -283,7 +280,7 @@ msgstr ""
 "automatiskt att registrera dig mot Nickserv-tjänsten."
 
 #. (itstool) path: note/p
-#: C/irc-nick-password.page:57
+#: C/irc-nick-password.page:58
 msgid ""
 "These instructions only allow you to use a password-protected nickname on "
 "certain IRC networks. It is not currently possible to register an IRC "
@@ -333,21 +330,21 @@ msgstr ""
 "starta en privat konversation."
 
 #. (itstool) path: page/p
-#: C/irc-start-conversation.page:42
+#: C/irc-start-conversation.page:43
 msgid "Another option to start a conversation with a user:"
 msgstr "Ett annat alternativ för att starta en konversation med en användare:"
 
 #. (itstool) path: item/p
-#: C/irc-start-conversation.page:46
+#: C/irc-start-conversation.page:47
 msgid ""
-"In the upper right hand corner of <app>Polari</app> a number is displayed "
+"In the upper-right hand corner of <app>Polari</app> a number is displayed "
 "that shows the total number of users in the chat room. Click on the number."
 msgstr ""
 "I det övre högra hörnet av <app>Polari</app> visas ett tal som visar det "
 "totala antalet användare i chattrummet. Klicka på talet."
 
 #. (itstool) path: item/p
-#: C/irc-start-conversation.page:51
+#: C/irc-start-conversation.page:53
 msgid ""
 "Select the name of the user you want to message. Information about the user, "
 "including their name and the last time they were active in the channel, will "
@@ -358,15 +355,14 @@ msgstr ""
 "aktiva i kanalen."
 
 #. (itstool) path: item/p
-#: C/irc-start-conversation.page:55
-msgid "Click <gui>Message</gui> to start a private conversation."
-msgstr "Klicka på <gui>Meddelande</gui> för att starta en privat konversation."
+#: C/irc-start-conversation.page:58
+msgid "Press <gui>Message</gui> to start a private conversation."
+msgstr "Tryck ned <gui>Meddelande</gui> för att starta en privat konversation."
 
-# TODO: and *A* chat room will be started??
 #. (itstool) path: page/p
-#: C/irc-start-conversation.page:59
+#: C/irc-start-conversation.page:62
 msgid ""
-"A new private conversation will start and chat room will be started. The "
+"A new private conversation will start and a chat room will be created. The "
 "chat room will be shown in the left sidebar of <app>Polari</app> with the "
 "name of the person you are chatting with."
 msgstr ""
@@ -409,15 +405,16 @@ msgstr "Ansluta till ett IRC-nätverk"
 #: C/network-connect.page:26
 msgid ""
 "The first time you start <app>Polari</app> you will be asked to join a "
-"network. Polari comes with over fifty IRC networks configured for you. "
-"Choose the IRC Network you would like to connect to and click on it."
+"network. <app>Polari</app> comes with over fifty IRC networks configured for "
+"you. Choose the IRC Network you would like to connect to and click on it."
 msgstr ""
 "Första gången du startar <app>Polari</app> kommer du att ombes att ansluta "
-"till ett nätverk. Polari kommer med över femtio IRC-nätverk konfigurerade åt "
-"dig. Välj det IRC-nätverk som du vill ansluta till och klicka på det."
+"till ett nätverk. <app>Polari</app> kommer med över femtio IRC-nätverk "
+"konfigurerade åt dig. Välj det IRC-nätverk som du vill ansluta till och "
+"klicka på det."
 
 #. (itstool) path: page/p
-#: C/network-connect.page:31
+#: C/network-connect.page:32
 msgid ""
 "If you do not see the IRC network you would like to join, you can also enter "
 "the details of the IRC network. Click the <gui>Custom Network</gui> button "
@@ -432,7 +429,7 @@ msgstr ""
 "<gui>Nätverksnamn</gui>."
 
 #. (itstool) path: page/p
-#: C/network-connect.page:37
+#: C/network-connect.page:39
 msgid ""
 "After you have connected to an IRC Network, you can also connect to other "
 "IRC Networks."
@@ -442,17 +439,21 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/network-connect.page:45
+msgid "Press on the <key>+</key> in the top left corner."
+msgstr "Tryck ned <key>+</key> i det övre vänstra hörnet."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:48
 msgid ""
-"Click <gui>Add Network</gui> and select the IRC network from the list you "
-"would like to join or click on <gui>Custom Network</gui> and enter the "
-"details."
+"Press <gui>Add Network</gui> and select the IRC network from the list you "
+"would like to join or press <gui>Custom Network</gui> and enter the details."
 msgstr ""
-"Klicka på <gui>Lägg till nätverk</gui> och välj IRC-nätverket som du vill "
+"Tryck ned <gui>Lägg till nätverk</gui> och välj IRC-nätverket som du vill "
 "ansluta till från listan eller klicka på <gui>Anpassat nätverk</gui> och "
 "ange detaljerna."
 
 #. (itstool) path: item/p
-#: C/network-connect.page:49
+#: C/network-connect.page:53
 msgid ""
 "Enter the name of the chat room you would like to join or select the chat "
 "room(s) from the list and then press <gui>Join</gui>."
@@ -462,14 +463,14 @@ msgstr ""
 
 # TODO: doubled period
 #. (itstool) path: item/p
-#: C/network-connect.page:53
-msgid "Click the <gui>Join</gui> button to connect to the room or rooms.."
+#: C/network-connect.page:58
+msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
 msgstr ""
-"Klicka på knappen <gui>Anslut</gui> för att ansluta till ett eller flera "
+"Tryck ned knappen <gui>Anslut</gui> för att ansluta till ett eller flera "
 "chattrum."
 
 #. (itstool) path: note/p
-#: C/network-connect.page:57
+#: C/network-connect.page:62
 msgid ""
 "If the IRC network you are connecting to uses a custom port, you can append "
 "it to the name of the network with a colon and the port number, for example "
@@ -489,7 +490,6 @@ msgstr "Vad IRC är och hur du kan använda det."
 msgid "Overview of Internet Relay Chat"
 msgstr "Överblick över Internet Relay Chat"
 
-# TODO: remove *on* and join a
 #. (itstool) path: page/p
 #: C/overview.page:23
 msgid ""
@@ -497,8 +497,8 @@ msgid ""
 "public and private chatrooms. IRC networks, such as Freenode or Gimpnet, are "
 "unique and host their own servers with its own channels. IRC uses a client / "
 "server model where you can use a client, such as Polari, to connect to an "
-"IRC server on and join a channel. Channels, also known as chat rooms, are "
-"where users meet online to chat."
+"IRC server and join a channel. Channels, also known as chat rooms, are where "
+"users meet online to chat."
 msgstr ""
 "Internet Relay Chat (IRC) är ett sätt att chatta med folk på nätet genom "
 "offentliga och privata chattrum. IRC-nätverk, så som Freenode eller Gimpnet, "
@@ -549,7 +549,6 @@ msgid ""
 msgstr ""
 "external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
 
-# TODO: uplaoded -> uploaded
 #. (itstool) path: page/p
 #: C/sharing.page:34
 msgid ""
@@ -558,7 +557,7 @@ msgid ""
 "app> to <app>Polari</app>. You will be asked if you wish to upload the image "
 "to a public paste service. If you agree to upload the image, press the "
 "<gui>Paste</gui> button as seen in the following screenshot. After pressing "
-"<gui>Paste</gui>, the link to the where the image was uplaoded will be "
+"<gui>Paste</gui>, the link to the where the image was uploaded will be "
 "automatically entered into the chat box. Press <key>Enter</key> to share the "
 "link with the chat room."
 msgstr ""
