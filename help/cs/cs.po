@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2017-03-17 09:23+0000\n"
-"PO-Revision-Date: 2017-03-20 18:52+0100\n"
+"POT-Creation-Date: 2017-03-20 17:54+0000\n"
+"PO-Revision-Date: 2017-03-20 18:55+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>>\n"
 "Language: cs\n"
@@ -25,7 +25,6 @@ msgstr "Marek Černocký <marek@manet.cz>"
 
 #. (itstool) path: info/title
 #: C/index.page:7
-#| msgid "Polari"
 msgctxt "text"
 msgid "Polari"
 msgstr "Polari"
@@ -52,7 +51,6 @@ msgstr "Paul Cutler"
 #: C/index.page:23 C/irc-commands.page:19 C/irc-join-room.page:17
 #: C/irc-nick-password.page:21 C/irc-start-conversation.page:20
 #: C/overview.page:17 C/sharing.page:17
-#| msgid "Creative Commons Attribution-ShareAlike 4.0 International"
 msgid "Creative Commons Share Alike 4.0"
 msgstr "Creative Commons Share Alike 4.0"
 
@@ -60,25 +58,24 @@ msgstr "Creative Commons Share Alike 4.0"
 #: C/index.page:27
 msgid ""
 "<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
-"client which completely integrates with the gnome desktop. Learn more about "
-"Polari."
+"client which integrates with the GNOME desktop. Learn more about Polari."
 msgstr ""
 "<app>Polari</app> je čistý, jednoduchý a minimalistický klient IRC (Internet "
-"Relay Chat), který je plně integrován s uživatelským prostředím GNOME. "
+"Relay Chat), který je integrován s uživatelským prostředím GNOME. "
 "Seznamte se s ním blíže."
 
 #. (itstool) path: page/title
-#: C/index.page:30
+#: C/index.page:32
 msgid "<_:media-1/> Polari"
 msgstr "<_:media-1/> Polari"
 
 #. (itstool) path: section/title
-#: C/index.page:36
+#: C/index.page:38
 msgid "Connecting to IRC Servers and Chat Rooms"
 msgstr "Připojení k serverům IRC a diskuzním místnostem"
 
 #. (itstool) path: section/title
-#: C/index.page:40
+#: C/index.page:42
 msgid "Conversations"
 msgstr "Konverzace"
 
@@ -94,12 +91,12 @@ msgstr ""
 "Úvod do aplikace <app>Polari</app>, čistého minimalistického klienta IRC."
 
 #. (itstool) path: page/title
-#: C/introduction.page:28
+#: C/introduction.page:29
 msgid "Introduction"
 msgstr "Úvod"
 
 #. (itstool) path: page/p
-#: C/introduction.page:30
+#: C/introduction.page:31
 msgid ""
 "<app>Polari</app> is a simple Internet Relay Chat (IRC) client which "
 "integrates with the GNOME desktop and enables you to chat with people around "
@@ -114,7 +111,7 @@ msgstr ""
 #. the file changes, the md5 hash will change to let you know you need to
 #. update your localized copy. The msgstr is not used at all. Set it to
 #. whatever you like once you have updated your copy of the file.
-#: C/introduction.page:34
+#: C/introduction.page:37
 msgctxt "_"
 msgid ""
 "external ref='images/polari-screenshot.png' "
@@ -124,7 +121,7 @@ msgstr ""
 "md5='6b752736dd41aa5cddf337bb3b4be452'"
 
 #. (itstool) path: media/p
-#: C/introduction.page:35
+#: C/introduction.page:38
 msgid "Polari IRC Client"
 msgstr "Klient IRC Polari"
 
@@ -156,7 +153,7 @@ msgstr ""
 #. (itstool) path: note/p
 #: C/irc-commands.page:29
 msgid ""
-"All commands available will be listed and you can type <input> /help "
+"All commands available will be listed and you can type <input>/help "
 "commandname</input> to get additional help with a specific command."
 msgstr ""
 "Vypíší se vám všechny dostupné příkazy a můžete pak napsat <input>/help "
@@ -185,17 +182,17 @@ msgstr ""
 "najdete v kapitole <link xref=\"network-connect\"/>."
 
 #. (itstool) path: page/p
-#: C/irc-join-room.page:26
+#: C/irc-join-room.page:27
 msgid "To join an IRC chat room:"
 msgstr "Pro vstup do diskuzní místnosti IRC:"
 
 #. (itstool) path: item/p
-#: C/irc-join-room.page:30 C/network-connect.page:42
-msgid "Click on the <key>+</key> in the top left corner."
+#: C/irc-join-room.page:31
+msgid "Press <key>+</key> in the top-left corner."
 msgstr "Klikněte na <key>+</key> v levém horním rohu."
 
 #. (itstool) path: item/p
-#: C/irc-join-room.page:33
+#: C/irc-join-room.page:34
 msgid ""
 "Enter the name of the chat room you would like to join or select the chat "
 "room(s) from the list and then press <gui>Join</gui>. You can select "
@@ -206,7 +203,7 @@ msgstr ""
 "Můžete v seznamu vybrat i více místností, do kterých chcete vstoupit naráz."
 
 #. (itstool) path: item/p
-#: C/irc-join-room.page:37
+#: C/irc-join-room.page:39
 msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
 msgstr ""
 "Klikněte na tlačítko <gui>Vstoupit</gui> a připojíte se do diskuzní "
@@ -240,7 +237,7 @@ msgstr ""
 #: C/irc-nick-password.page:32
 msgid ""
 "<app>Polari</app> does not currently support nickname registration "
-"automatically. Every IRC network handles registering a specific nickname "
+"automatically. Each IRC network handles registering a specific nickname "
 "differently and you will need to check with the IRC network on how to "
 "register your nickname. After you have registered a nickname, you will need "
 "to message NickServ to identify yourself after connecting to the IRC Network "
@@ -254,17 +251,17 @@ msgstr ""
 "příkazem:"
 
 #. (itstool) path: item/p
-#: C/irc-nick-password.page:39
+#: C/irc-nick-password.page:40
 msgid "<input>/msg NickServ identify username password</input>"
 msgstr "<input>/msg NickServ identify jméno heslo</input>"
 
 #. (itstool) path: item/p
-#: C/irc-nick-password.page:42
+#: C/irc-nick-password.page:43
 msgid "Press <key>Enter</key>"
 msgstr "Zmáčkněte <key>Enter</key>"
 
 #. (itstool) path: note/p
-#: C/irc-nick-password.page:46
+#: C/irc-nick-password.page:47
 msgid ""
 "Use the username and password you registered with the IRC network with this "
 "command."
@@ -273,7 +270,7 @@ msgstr ""
 "zaregistrovali."
 
 #. (itstool) path: page/p
-#: C/irc-nick-password.page:51
+#: C/irc-nick-password.page:52
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
@@ -283,7 +280,7 @@ msgstr ""
 "připojení k síti IRC vás ke službě NickServ zaregistruje automaticky sám."
 
 #. (itstool) path: note/p
-#: C/irc-nick-password.page:57
+#: C/irc-nick-password.page:58
 msgid ""
 "These instructions only allow you to use a password-protected nickname on "
 "certain IRC networks. It is not currently possible to register an IRC "
@@ -334,14 +331,14 @@ msgstr ""
 "konverzaci."
 
 #. (itstool) path: page/p
-#: C/irc-start-conversation.page:42
+#: C/irc-start-conversation.page:43
 msgid "Another option to start a conversation with a user:"
 msgstr "Další volby pro spuštění konverzace s uživatelem:"
 
 #. (itstool) path: item/p
-#: C/irc-start-conversation.page:46
+#: C/irc-start-conversation.page:47
 msgid ""
-"In the upper right hand corner of <app>Polari</app> a number is displayed "
+"In the upper-right hand corner of <app>Polari</app> a number is displayed "
 "that shows the total number of users in the chat room. Click on the number."
 msgstr ""
 "V pravém horním rohu aplikace <app>Polari</app> je zobrazené číslo, které "
@@ -349,7 +346,7 @@ msgstr ""
 "číslo."
 
 #. (itstool) path: item/p
-#: C/irc-start-conversation.page:51
+#: C/irc-start-conversation.page:53
 msgid ""
 "Select the name of the user you want to message. Information about the user, "
 "including their name and the last time they were active in the channel, will "
@@ -359,14 +356,14 @@ msgstr ""
 "uživateli, zahrnující jeho jméno a poslední čas, kdy byl na kanále aktivní."
 
 #. (itstool) path: item/p
-#: C/irc-start-conversation.page:55
-msgid "Click <gui>Message</gui> to start a private conversation."
-msgstr "Kliknutím na <gui>Zpráva</gui> začnete soukromou konverzaci."
+#: C/irc-start-conversation.page:58
+msgid "Press <gui>Message</gui> to start a private conversation."
+msgstr "Zmáčknutím tlačítka <gui>Zpráva</gui> začnete soukromou konverzaci."
 
 #. (itstool) path: page/p
-#: C/irc-start-conversation.page:59
+#: C/irc-start-conversation.page:62
 msgid ""
-"A new private conversation will start and chat room will be started. The "
+"A new private conversation will start and a chat room will be created. The "
 "chat room will be shown in the left sidebar of <app>Polari</app> with the "
 "name of the person you are chatting with."
 msgstr ""
@@ -409,15 +406,15 @@ msgstr "Připojení k síti IRC"
 #: C/network-connect.page:26
 msgid ""
 "The first time you start <app>Polari</app> you will be asked to join a "
-"network. Polari comes with over fifty IRC networks configured for you. "
-"Choose the IRC Network you would like to connect to and click on it."
+"network. <app>Polari</app> comes with over fifty IRC networks configured for "
+"you. Choose the IRC Network you would like to connect to and click on it."
 msgstr ""
 "Když poprvé spustíte aplikaci <app>Polari</app>, budete dotázání na "
 "připojení k síti. <app>Polari</app> má pro vás připravené nastavení více než "
 "padesáti sítí. Stačí si síť IRC vybrat a kliknout na ni."
 
 #. (itstool) path: page/p
-#: C/network-connect.page:31
+#: C/network-connect.page:32
 msgid ""
 "If you do not see the IRC network you would like to join, you can also enter "
 "the details of the IRC network. Click the <gui>Custom Network</gui> button "
@@ -431,7 +428,7 @@ msgstr ""
 "zadat název sítě, pod kterým chcete, aby se síť objevovala v seznamu sítí."
 
 #. (itstool) path: page/p
-#: C/network-connect.page:37
+#: C/network-connect.page:39
 msgid ""
 "After you have connected to an IRC Network, you can also connect to other "
 "IRC Networks."
@@ -441,16 +438,20 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/network-connect.page:45
-msgid ""
-"Click <gui>Add Network</gui> and select the IRC network from the list you "
-"would like to join or click on <gui>Custom Network</gui> and enter the "
-"details."
-msgstr ""
-"Klikněte na <gui>Přidat síť</gui> a vyberte ze seznamu síť IRC, kterou si "
-"přejete, nebo klikněte na <gui>Vlastní síť</gui> a zadejte ručně její údaje."
+msgid "Press on the <key>+</key> in the top left corner."
+msgstr "Zmáčkněte tlačítko <key>+</key> v levém horním rohu."
 
 #. (itstool) path: item/p
-#: C/network-connect.page:49
+#: C/network-connect.page:48
+msgid ""
+"Press <gui>Add Network</gui> and select the IRC network from the list you "
+"would like to join or press <gui>Custom Network</gui> and enter the details."
+msgstr ""
+"Zmáčkněte tlačítko <gui>Přidat síť</gui> a vyberte ze seznamu síť IRC, kterou "
+"si přejete, nebo zmáčkněte <gui>Vlastní síť</gui> a zadejte ručně její údaje."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:53
 msgid ""
 "Enter the name of the chat room you would like to join or select the chat "
 "room(s) from the list and then press <gui>Join</gui>."
@@ -459,14 +460,13 @@ msgstr ""
 "diskuzní místnost(i) vyberte ze seznamu a zmáčkněte <gui>Vstoupit</gui>."
 
 #. (itstool) path: item/p
-#: C/network-connect.page:53
-msgid "Click the <gui>Join</gui> button to connect to the room or rooms.."
+#: C/network-connect.page:58
+msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
 msgstr ""
-"Kliknutím na <gui>Vstoupit</gui> se připojíte do místnosti, či více "
-"místností."
+"Zmáčknutím <gui>Vstoupit</gui> se připojíte do místnosti, či více místností."
 
 #. (itstool) path: note/p
-#: C/network-connect.page:57
+#: C/network-connect.page:62
 msgid ""
 "If the IRC network you are connecting to uses a custom port, you can append "
 "it to the name of the network with a colon and the port number, for example "
@@ -493,8 +493,8 @@ msgid ""
 "public and private chatrooms. IRC networks, such as Freenode or Gimpnet, are "
 "unique and host their own servers with its own channels. IRC uses a client / "
 "server model where you can use a client, such as Polari, to connect to an "
-"IRC server on and join a channel. Channels, also known as chat rooms, are "
-"where users meet online to chat."
+"IRC server and join a channel. Channels, also known as chat rooms, are where "
+"users meet online to chat."
 msgstr ""
 "Internet Relay Chat (IRC) představuje komunikaci s jinými lidmi on-line "
 "pomocí veřejných nebo soukromých diskuzních místností. Sítě IRC, jako je "
@@ -554,14 +554,16 @@ msgid ""
 "app> to <app>Polari</app>. You will be asked if you wish to upload the image "
 "to a public paste service. If you agree to upload the image, press the "
 "<gui>Paste</gui> button as seen in the following screenshot. After pressing "
-"<gui>Paste</gui>, the link to the where the image was uplaoded will be "
+"<gui>Paste</gui>, the link to the where the image was uploaded will be "
 "automatically entered into the chat box. Press <key>Enter</key> to share the "
 "link with the chat room."
 msgstr ""
 "Když chcete sdílet obrázek, přetáhněte soubor s obrázkem z aplikace "
-"<app>Soubory</app> do pole konverzace v aplikaci <app>Polari</app>. Budete "
-"dotázáni, zdali si přejete obrázek nahrát do veřejné služby pro vkládání. "
-"Když s tím budete souhlasit, zmáčkněte tlačítko <gui>Vložit</gui>, které "
-"můžete vidět na následujícím snímku obrazovky. Po jeho zmáčknutí se do pole "
-"konverzace automaticky vloží odkaz na nahraný obrázek. Zmáčknutím klávesy "
-"<key>Enter</key> se odkaz zveřejní do diskuzní místnosti."
+"<app>Soubory</app> do pole konverzace v aplikaci <app>Polari</app>. "
+"Přetáhnout se dá obecně jakýkoliv soubor. Budete dotázáni, zdali si přejete "
+"obrázek nahrát do veřejné služby pro vkládání. Když s tím budete souhlasit, "
+"zmáčkněte tlačítko <gui>Vložit</gui>, které můžete vidět na následujícím "
+"snímku obrazovky. Po jeho zmáčknutí se do pole konverzace automaticky vloží "
+"odkaz na nahraný obrázek. Zmáčknutím klávesy <key>Enter</key> se odkaz "
+"zveřejní do diskuzní místnosti."
+
