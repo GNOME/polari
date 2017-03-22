@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "POT-Creation-Date: 2017-03-20 13:22+0000\n"
-"PO-Revision-Date: 2017-03-21 12:36+0100\n"
+"PO-Revision-Date: 2017-03-22 12:25+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -62,6 +62,9 @@ msgid ""
 "<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
 "client which integrates with the GNOME desktop. Learn more about Polari."
 msgstr ""
+"<app>Polari</app> es un cliente sencillo, limpio y minimalista de Internet "
+"Relay Chat (IRC) que se integra con el entorno de escritorio GNOME. Aprenda "
+"más sobre Polari."
 
 #. (itstool) path: page/title
 #: C/index.page:32
@@ -71,7 +74,7 @@ msgstr "<_:media-1/> Polari"
 #. (itstool) path: section/title
 #: C/index.page:38
 msgid "Connecting to IRC Servers and Chat Rooms"
-msgstr ""
+msgstr "Conectarse a servidores de IRC y salas de chat."
 
 #. (itstool) path: section/title
 #: C/index.page:42
@@ -87,6 +90,8 @@ msgstr "2017"
 #: C/introduction.page:25
 msgid "An introduction to <app>Polari</app>, a clean, minimal IRC client."
 msgstr ""
+"Una introducción a <app>Polari</app>, un cliente sencillo, limpio y "
+"minimalista de Internet Relay Chat (IRC)."
 
 #. (itstool) path: page/title
 #: C/introduction.page:29
@@ -100,6 +105,9 @@ msgid ""
 "integrates with the GNOME desktop and enables you to chat with people around "
 "the world through large chatrooms or private messaging."
 msgstr ""
+"<app>Polari</app> es un cliente sencillo de Internet Relay Chat (IRC) que se "
+"integra con el entorno de escritorio GNOME y le permite hablar con personas "
+"de todo el mundo mediante grandes salas de chat o mensajes privados."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -142,6 +150,8 @@ msgid ""
 "To see the list of the supported IRC commands, in a chat room type <input>/"
 "help</input> and press <key>Enter</key>."
 msgstr ""
+"Para ver una lista de los comandos de IRC soportados, en una sala de chat "
+"escriba <input>/help</input> y pulse <key>Intro</key> "
 
 #. (itstool) path: note/p
 #: C/irc-commands.page:29
@@ -176,7 +186,7 @@ msgstr "Para unirse a una sala de chat en IRC:"
 #. (itstool) path: item/p
 #: C/irc-join-room.page:31
 msgid "Press <key>+</key> in the top-left corner."
-msgstr ""
+msgstr "Pulse <key>+</key> en la esquina superior izquierda."
 
 #. (itstool) path: item/p
 #: C/irc-join-room.page:34
@@ -190,11 +200,12 @@ msgstr ""
 #: C/irc-join-room.page:39
 msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
 msgstr ""
+"Pulse el botón <gui>Unirse</gui> para conectarse a la/s sala/s de chat."
 
 #. (itstool) path: info/desc
 #: C/irc-nick-password.page:10
 msgid "Protect your nickname to prevent other IRC users from using it."
-msgstr ""
+msgstr "Proteja su apodo para prevenir que otros usuarios del IRC lo usen."
 
 #. (itstool) path: page/title
 #: C/irc-nick-password.page:25
@@ -228,7 +239,7 @@ msgstr ""
 #. (itstool) path: item/p
 #: C/irc-nick-password.page:40
 msgid "<input>/msg NickServ identify username password</input>"
-msgstr ""
+msgstr "<input>/msg NickServ identify usuario contraseña</input>"
 
 #. (itstool) path: item/p
 #: C/irc-nick-password.page:43
@@ -241,6 +252,8 @@ msgid ""
 "Use the username and password you registered with the IRC network with this "
 "command."
 msgstr ""
+"Use el nombre de usuario y la contraseña que ha registrado en la red de IRC "
+"con este comando."
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:52
@@ -249,6 +262,9 @@ msgid ""
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
 "you with the Nickserv service."
 msgstr ""
+"<app>Polari</app> recordará su nombre de usuario y su contraseña y la "
+"próxima vez que se conecte a la red IRC <app>Polari</app> registrará le "
+"automáticamente con el servicio Nickserv."
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:58
@@ -264,7 +280,7 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/irc-start-conversation.page:9
 msgid "Start a conversation with an individual in IRC."
-msgstr ""
+msgstr "Iniciar una conversación con otra persona en IRC."
 
 #. (itstool) path: page/title
 #: C/irc-start-conversation.page:24
@@ -277,6 +293,9 @@ msgid ""
 "You can hold private conversations with other IRC users, outside of the "
 "public IRC chat rooms. To start a conversation with another IRC user:"
 msgstr ""
+"Puede mantener conversaciones privadas con otros usuarios del IRC, fuera de "
+"las salas públicas del IRC. Para iniciar una conversación con otro usuario "
+"del IRC:"
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:31
@@ -284,6 +303,8 @@ msgid ""
 "Click on the name of the person in the channel you would like to start a "
 "chat with."
 msgstr ""
+"Pulse sobre el nombre de la persona en el canal con la que quiere iniciar "
+"una conversación."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
@@ -296,7 +317,7 @@ msgstr ""
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
 msgid "Another option to start a conversation with a user:"
-msgstr ""
+msgstr "Otra opción para iniciar una conversación con un usuario."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:47
@@ -316,7 +337,7 @@ msgstr ""
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
 msgid "Press <gui>Message</gui> to start a private conversation."
-msgstr ""
+msgstr "Pulse en <gui>Mensaje</gui> para iniciar una conversación privada."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -350,7 +371,7 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/network-connect.page:21
 msgid "How to connect to an IRC network."
-msgstr ""
+msgstr "Cómo conectar con una red de IRC."
 
 #. (itstool) path: page/title
 #: C/network-connect.page:24
@@ -381,11 +402,13 @@ msgid ""
 "After you have connected to an IRC Network, you can also connect to other "
 "IRC Networks."
 msgstr ""
+"Una vez que se haya conectado a la red de IRC se puede conectar también a "
+"otras redes de IRC."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:45
 msgid "Press on the <key>+</key> in the top left corner."
-msgstr ""
+msgstr "Pulse el <key>+</key> en la esquina superior izquierda."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:48
@@ -404,7 +427,7 @@ msgstr ""
 #. (itstool) path: item/p
 #: C/network-connect.page:58
 msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
-msgstr ""
+msgstr "Pulse el botón <gui>Unirse</gui> para conectarse a la/s sala/s."
 
 #. (itstool) path: note/p
 #: C/network-connect.page:62
@@ -417,12 +440,12 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/overview.page:9
 msgid "What IRC is and how you can use it."
-msgstr ""
+msgstr "Qué es IRC y cómo puede usarlo."
 
 #. (itstool) path: page/title
 #: C/overview.page:21
 msgid "Overview of Internet Relay Chat"
-msgstr ""
+msgstr "Vista general de Internet Relay Chat (IRC)"
 
 #. (itstool) path: page/p
 #: C/overview.page:23
@@ -438,7 +461,7 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/sharing.page:9
 msgid "How to easily share multiple lines of text or images."
-msgstr ""
+msgstr "Cómo compartir fácilmente varias líneas de texto o imágenes."
 
 #. (itstool) path: page/title
 #: C/sharing.page:22
