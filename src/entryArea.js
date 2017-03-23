@@ -386,11 +386,11 @@ const EntryArea = new Lang.Class({
         this._updateCompletions();
 
         if (room.channel)
-            this._nicknameChangedId =
+            this._selfAliasChangedId =
                 room.channel.connection.connect('notify::self-contact',
                                                 Lang.bind(this, this._updateNick));
         else
-            this._nicknameChangedId = 0;
+            this._selfAliasChangedId = 0;
         this._updateNick();
     },
 
@@ -443,9 +443,9 @@ const EntryArea = new Lang.Class({
         if (this._membersChangedId)
             this._room.disconnect(this._membersChangedId);
         this._membersChangedId = 0;
-        if (this._nicknameChangedId)
-            this._room.channel.connection.disconnect(this._nicknameChangedId);
-        this._nicknameChangedId = 0;
+        if (this._selfAliasChangedId)
+            this._room.channel.connection.disconnect(this._selfAliasChangedId);
+        this._selfAliasChangedId = 0;
         if (this._channelChangedId)
             this._room.disconnect(this._channelChangedId);
         this._channelChangedId = 0;
