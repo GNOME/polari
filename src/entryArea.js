@@ -228,6 +228,9 @@ const EntryArea = new Lang.Class({
         this._membersChangedId =
             this._room.connect('members-changed',
                                Lang.bind(this, this._updateCompletions));
+        this._nicknameChangedId =
+            this._room.account.connect('notify::nickname',
+                                       Lang.bind(this, this._updateNick));
         this._channelChangedId =
             this._room.connect('notify::channel',
                                Lang.bind(this, this._onChannelChanged));
@@ -446,6 +449,9 @@ const EntryArea = new Lang.Class({
         if (this._selfAliasChangedId)
             this._room.channel.connection.disconnect(this._selfAliasChangedId);
         this._selfAliasChangedId = 0;
+        if (this._nicknameChangedId)
+            this._room.account.disconnect(this._nicknameChangedId);
+        this._nicknameChangedId = 0;
         if (this._channelChangedId)
             this._room.disconnect(this._channelChangedId);
         this._channelChangedId = 0;
