@@ -65,7 +65,12 @@ const _ServerRoomManager = new Lang.Class({
 
         let roomList = new Tp.RoomList({ account: account });
         roomList.init_async(GLib.PRIORITY_DEFAULT, null, (o, res) => {
-            roomList.init_finish(res);
+            try {
+                roomList.init_finish(res);
+            } catch(e) {
+                this._roomLists.delete(account);
+                return;
+            }
             roomList.start();
         });
         roomList.connect('got-room', Lang.bind(this, this._onGotRoom));
