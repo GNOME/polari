@@ -202,3 +202,12 @@ treeview.polari-server-room-list {
 /* tweak labels in the user popover */
 .polari-user-popover-nick { font-weight: bold; }
 .polari-user-popover-status { font-size: smaller; }
+
+/* Differentiate debug instance from "normal" ones */
+window.debug headerbar:last-child {
+    background-image: -gtk-icontheme('dialog-warning-symbolic');
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: 1em center;
+    background-size: 6em;
+}
