@@ -23,6 +23,7 @@ function getAccountParams(account) {
     for (let p in params)
         params[p] = params[p].deep_unpack();
 
+    params['username'] = params['username'] || params['account'];
     params['use-ssl'] = !!params['use-ssl'];
     params['port'] = params['port'] || params['use-ssl'] ? DEFAULT_SSL_PORT
                                                          : DEFAULT_PORT;
@@ -319,7 +320,7 @@ const ConnectionDetails = new Lang.Class({
         let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
         this._savedServer = params.server || '';
         let port = params.port;
-        this._savedNick = params.account || '';
+        this._savedNick = params.username || '';
         this._savedRealname = params.fullname || '';
 
         if (port != defaultPort)
