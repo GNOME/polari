@@ -437,7 +437,6 @@ const Application = new Lang.Class({
 
         data = {
             retry: 0,
-            originalAccountName: accountName,
             alternateServers: accountServers.filter(s => s.address != server ||
                                                          s.port != port)
         };
@@ -445,15 +444,16 @@ const Application = new Lang.Class({
         return data;
     },
 
-    _restoreAccountName: function(account) {
-        let data = this._retryData.get(account.object_path);
-        if (!data || !data.retry || !data.originalAccountName)
-            return;
+    _getTrimmedAccountName: function(account) {
+        let params = Connections.getAccountParams(account);
+        return params.account.replace(/_+$/, '');
+    },
 
-        let params = { account: new GLib.Variant('s', data.originalAccountName) };
+    _restoreAccountName: function(account) {
+        let accountName = this._getTrimmedAccountName(account);
+        let params = { account: new GLib.Variant('s', accountName) };
         let asv = new GLib.Variant('a{sv}', params);
         account.update_parameters_vardict_async(asv, [], null);
-        delete data.originalAccountName;
     },
 
     _retryWithParams: function(account, params) {
