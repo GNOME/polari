@@ -59,18 +59,6 @@
             ]
         },
         {
-            "name": "meson",
-            "buildsystem": "simple",
-            "build-commands": ["python3 ./setup.py install --prefix=/app --optimize=1"],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/mesonbuild/meson/releases/download/0.38.1/meson-0.38.1.tar.gz",
-                    "sha256": "dcb05349b32427924fa2a258a5e23e40e09c1bf9dd09919198c3a2ae1c38ba53"
-                }
-            ]
-        },
-        {
             "name": "telepathy-glib",
             "config-opts": ["--disable-static"],
             "sources": [
