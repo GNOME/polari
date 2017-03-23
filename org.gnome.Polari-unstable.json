@@ -67,10 +67,6 @@
                     "type": "archive",
                     "url": "https://github.com/mesonbuild/meson/releases/download/0.38.1/meson-0.38.1.tar.gz",
                     "sha256": "dcb05349b32427924fa2a258a5e23e40e09c1bf9dd09919198c3a2ae1c38ba53"
-                },
-                {
-                    "type": "patch",
-                    "path": "build-aux/flatpak/meson-work-around-0-mtime.patch"
                 }
             ]
         },
@@ -134,17 +130,6 @@
                     "type": "archive",
                     "url": "https://download.gnome.org/sources/gspell/1.4/gspell-1.4.0.tar.xz",
                     "sha256": "8d317c6bf6ae298b0a6c89aed63bc133c85c8ce7e8e799d870da560ad10b2d4e"
-                }
-            ]
-        },
-        {
-            "name": "mozjs-38",
-            "buildsystem": "simple",
-            "build-commands": ["bash fixup-mozjs-38.sh"],
-            "sources": [
-                {
-                    "type": "file",
-                    "path": "build-aux/flatpak/fixup-mozjs-38.sh"
                 }
             ]
         },
