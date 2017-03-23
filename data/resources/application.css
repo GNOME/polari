@@ -206,3 +206,12 @@ treeview.polari-server-room-list {
 .polari-room-loading {
     opacity: 0.3;
 }
+
+/* Differentiate test instance from "normal" ones */
+window.test-instance headerbar:last-child {
+    background-image: -gtk-icontheme('system-run-symbolic');
+    background-blend-mode: color-burn;
+    background-repeat: no-repeat;
+    background-position: 1em center;
+    background-size: 4em;
+}

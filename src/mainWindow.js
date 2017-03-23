@@ -137,6 +137,9 @@ var MainWindow = GObject.registerClass({
         this._overlay.add_overlay(app.notificationQueue);
         this._overlay.add_overlay(app.commandOutputQueue);
 
+        if (app.isTestInstance)
+            this.get_style_context().add_class('test-instance');
+
         // command output notifications should not pop up over
         // the input area, but appear to emerge from it, so
         // set up an appropriate margin
