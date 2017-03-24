@@ -235,6 +235,13 @@ const Application = new Lang.Class({
 
         this._accountsMonitor.connect('account-status-changed',
                                       Lang.bind(this, this._onAccountStatusChanged));
+        this._accountsMonitor.connect('account-added', (am, account) => {
+            // Reset nickname at startup
+            let params = Connections.getAccountParams(account);
+            account.set_nickname_async(params.username, (a, res) => {
+                a.set_nickname_finish(res);
+            });
+        });
 
         this.pasteManager = new PasteManager.PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();
