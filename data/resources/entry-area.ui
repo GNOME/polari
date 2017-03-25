@@ -44,6 +44,7 @@
     <property name="valign">end</property>
     <property name="transition-type">crossfade</property>
     <style>
+      <class name="polari-entry-area"/>
       <class name="view"/>
     </style>
     <child>

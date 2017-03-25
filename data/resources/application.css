@@ -144,6 +144,9 @@ treeview.polari-server-room-list {
     border-width: 0 0 1px;
 }
 
+/* "opt-out" of insensitive view styling */
+.polari-entry-area:disabled { background-color: @theme_base_color; }
+
 /* the following adds a border on top of the inputbar when users scroll up */
 .polari-chat-view > undershoot.bottom { border-bottom: 1px solid @borders; }
 
