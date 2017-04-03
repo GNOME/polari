@@ -86,6 +86,8 @@ const _urlRegexp = new RegExp(
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)','g');
 
+let _gpasteExpire = undefined;
+
 let _inFlatpakSandbox = undefined;
 
 function isFlatpakSandbox() {
@@ -202,13 +204,53 @@ function updateTerms(terms, str) {
     return changed;
 }
 
+function _getGpasteExpire(callback) {
+    let session = new Soup.Session();
+    let paramUrl = GPASTE_BASEURL + 'api/json/parameter/expire';
+    let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
+    session.queue_message(message, (s, message) => {
+        if (message.status_code != Soup.KnownStatusCode.OK) {
+            callback(false);
+            return;
+        }
+
+        let info = {};
+        try {
+            info = JSON.parse(message.response_body.data);
+        } catch(e) {
+            log(e.message);
+        }
+
+        let values = info.result ? info.result.values : undefined;
+        if (!values)
+            callback(false);
+
+        let day = 24 * 60 * 60;
+        _gpasteExpire = values.reduce((acc, val) => {
+            return Math.abs(day - acc) < Math.abs(day - val) ? acc : val;
+        }, 0).toString();
+        callback(true);
+    });
+}
+
 function gpaste(text, title, callback) {
+    if (_gpasteExpire == undefined) {
+        _getGpasteExpire(success => {
+            if (success)
+                gpaste(text, title, callback);
+            else
+                callback(null);
+        });
+        return;
+    }
+
     if (title.length > MAX_PASTE_TITLE_LENGTH)
         title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
 
     let params = {
         title: title,
         data: text,
+        expire: _gpasteExpire,
         language: 'text'
     };
 
