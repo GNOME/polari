@@ -17,6 +17,7 @@ const PasteManager = imports.pasteManager;
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
 
+let _checker = null;
 
 const ChatEntry = new Lang.Class({
     Name: 'ChatEntry',
@@ -35,8 +36,14 @@ const ChatEntry = new Lang.Class({
 
         PasteManager.DropTargetIface.addTargets(this, this);
 
+        if (!_checker)
+            _checker = new Gspell.Checker();
+
+        let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
+        buffer.set_spell_checker (_checker);
+
         let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
-        spellEntry.basic_setup();
+        spellEntry.set_inline_spell_checking(true);
 
         this._useDefaultHandler = false;
     },
