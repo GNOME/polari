@@ -1,10 +1,11 @@
 {
     "app-id": "org.gnome.Polari",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.24",
-    "branch": "stable",
+    "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "command": "polari",
+    "tags": ["nightly"],
+    "desktop-file-name-prefix": "(Nightly) ",
     "finish-args": [
         /* X11 + XShm access */
         "--share=ipc", "--socket=x11",
@@ -68,7 +69,7 @@
                 },
                 {
                     "type": "patch",
-                    "path": "flatpak/tp-change-uniquify.patch"
+                    "path": "tp-change-uniquify.patch"
                 }
             ]
         },
@@ -105,7 +106,7 @@
                 },
                 {
                     "type": "patch",
-                    "path": "flatpak/tpl-override-basedir.patch"
+                    "path": "tpl-override-basedir.patch"
                 }
             ]
         },
@@ -122,12 +123,13 @@
         },
         {
             "name": "polari",
-            "config-opts": ["--disable-static"],
+            "buildsystem": "meson",
+            "builddir": true,
+            "config-opts": ["--libdir=lib"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/polari/3.24/polari-3.24.0.tar.xz",
-                    "sha256": "4aa83b309b9d16c4a9c1fff7e374fc745eaaeac40def7daaeebf54e8e01b19ae"
+                    "type": "git",
+                    "url": "https://git.gnome.org/browse/polari"
                 }
             ]
         }
