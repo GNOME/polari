@@ -69,7 +69,7 @@
                 },
                 {
                     "type": "patch",
-                    "path": "build-aux/flatpak/tp-change-uniquify.patch"
+                    "path": "flatpak/tp-change-uniquify.patch"
                 }
             ]
         },
@@ -106,7 +106,7 @@
                 },
                 {
                     "type": "patch",
-                    "path": "build-aux/flatpak/tpl-override-basedir.patch"
+                    "path": "flatpak/tpl-override-basedir.patch"
                 }
             ]
         },

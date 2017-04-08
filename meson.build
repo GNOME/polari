@@ -47,4 +47,4 @@ subdir('data')
 subdir('po')
 subdir('help')
 
-meson.add_install_script('build-aux/meson/meson-postinstall.sh')
+meson.add_install_script('meson/meson-postinstall.sh')
