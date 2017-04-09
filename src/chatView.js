@@ -1078,7 +1078,7 @@ const ChatView = new Lang.Class({
 
             let start = buffer.get_iter_at_mark(headerMark);
             let end = start.copy();
-            end.forward_to_line_end(headerTag);
+            end.forward_to_line_end();
             buffer.delete(start, end);
         }
 
