@@ -1,3 +1,18 @@
+3.24.1 - "I'm always Kate Winslet"
+==================================
+* Share a spell checker to only load dictionaries once [Florian; #780762]
+* Override paste.gnome.org's default expiry [Florian; #780888]
+* Indicate in private conversation when contact disconnects [Florian; #712635]
+* Trim trailing underscores from nick on startup [Florian; #781161]
+* Misc. bug fixes [Florian; #780113, #781072, #781159]
+
+Contributors:
+  Mario Blättermann, Rafael Fontenelle, Florian Müllner, Daniel Mustieles
+
+Translations:
+  Daniel Mustieles [es], Daniel Korostil [uk], Fabio Tomat [fur],
+  Piotr Drąg [pl], Tom Tryfonidis [el]
+
 3.24.0 - "Yoko Ono"
 ===================
 * Add user documentation [Paul; #722498]
