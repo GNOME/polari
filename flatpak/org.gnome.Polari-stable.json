@@ -126,8 +126,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/polari/3.24/polari-3.24.0.tar.xz",
-                    "sha256": "4aa83b309b9d16c4a9c1fff7e374fc745eaaeac40def7daaeebf54e8e01b19ae"
+                    "url": "https://download.gnome.org/sources/polari/3.24/polari-3.24.1.tar.xz",
+                    "sha256": "3a106160cd988d28620a27692c1f41073e3d140a264dd301d55933508533d7cc"
                 }
             ]
         }
