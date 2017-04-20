@@ -458,6 +458,7 @@ const ChatView = new Lang.Class({
           { name: 'indicator-line',
             pixels_above_lines: 24 },
           { name: 'loading',
+            left_margin: MARGIN,
             justification: Gtk.Justification.CENTER }
         ];
         tags.forEach(tagProps => { tagTable.add(new Gtk.TextTag(tagProps)); });
@@ -826,6 +827,7 @@ const ChatView = new Lang.Class({
     _showLoadingIndicator: function() {
         let indicator = new Gtk.Image({ icon_name: 'content-loading-symbolic',
                                         visible: true });
+        indicator.get_style_context().add_class('dim-label');
 
         let buffer = this._view.buffer;
         let iter = buffer.get_start_iter();
