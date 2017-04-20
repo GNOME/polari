@@ -12,4 +12,4 @@ gnome.yelp(app_id,
            media: ['images/polari-paste.png',
                    'images/polari-screenshot.png',
                    'images/Polari.png'],
-           languages: ['cs', 'de', 'fr', 'hu', 'pt_BR', 'sv'])
+           languages: ['cs', 'de', 'es', 'fr', 'hu', 'pt_BR', 'sv'])
