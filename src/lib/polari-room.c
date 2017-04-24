@@ -142,8 +142,11 @@ match_self_nick (PolariRoom *room,
   gboolean result = FALSE;
   int len;
 
-  folded_text = FOLDFUNC (text);
   len = strlen (priv->self_nick);
+  if (len == 0)
+    return FALSE;
+
+  folded_text = FOLDFUNC (text);
   match = MATCHFUNC (folded_text, priv->self_nick);
 
   while (match != NULL)
