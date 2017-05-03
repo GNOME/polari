@@ -42,22 +42,12 @@
     },
     "cleanup": ["/bin/m*","/bin/wraptool","/include","/lib/*.la",
                 "/lib/pkgconfig","/lib/polari/*.la","/lib/python*",
-                "/share/aclocal", "/share/autoconf-archive",
+                "/share/aclocal",
                 "/share/dbus-1/services/org.freedesktop*", "/share/gir-1.0",
                 "/share/gtk-doc", "/share/info", "/share/man",
                 "/share/polari", "/share/telepathy"
     ],
     "modules": [
-        {
-            "name": "autoconf-archive",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://ftpmirror.gnu.org/autoconf-archive/autoconf-archive-2016.09.16.tar.xz",
-                    "sha256": "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
-                }
-            ]
-        },
         {
             "name": "telepathy-glib",
             "config-opts": ["--disable-static"],
