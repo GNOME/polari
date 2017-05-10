@@ -309,6 +309,11 @@ const TelepathyClient = new Lang.Class({
                     return;
 
                 let room = this._roomManager.lookupRoomByChannel(channel);
+                let activeNick = room.channel.connection.self_contact.alias;
+                // Omit username parameter when it matches the default, to
+                // support NickServ bots that don't support the parameter at all
+                if (activeNick == username)
+                    username = null;
                 room.send_identify_message_async(command, username, password, (r, res) => {
                     try {
                         r.send_identify_message_finish(res);
