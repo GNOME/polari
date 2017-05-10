@@ -268,6 +268,11 @@ on_identify_message_sent (GObject      *source,
   g_object_unref (task);
 }
 
+/**
+ * polari_room_send_identify_message_async:
+ *  @username: (nullable): Username to use in identify command or %NULL
+ */
+
 void
 polari_room_send_identify_message_async (PolariRoom          *room,
                                          const char          *command,
@@ -282,7 +287,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   char *text;
 
   g_return_if_fail (POLARI_IS_ROOM (room));
-  g_return_if_fail (command != NULL && username != NULL && password != NULL);
+  g_return_if_fail (command != NULL && password != NULL);
 
   priv = room->priv;
 
@@ -299,7 +304,11 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   /* Don't emit ::identify-sent for our own identify message */
   room->priv->ignore_identify = TRUE;
 
-  text = g_strdup_printf ("%s %s %s", command, username, password);
+  if (username == NULL)
+    text = g_strdup_printf ("%s %s", command, password);
+  else
+    text = g_strdup_printf ("%s %s %s", command, username, password);
+
   message = tp_client_message_new_text (TP_CHANNEL_TEXT_MESSAGE_TYPE_NORMAL, text);
 
   tp_text_channel_send_message_async (TP_TEXT_CHANNEL (priv->channel), message,
