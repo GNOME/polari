@@ -1,6 +1,7 @@
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Gdk = imports.gi.Gdk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -189,7 +190,10 @@ const ServerRoomList = new Lang.Class({
         });
 
         this._toggleRenderer.connect('toggled', (cell, pathStr) => {
-            this._toggleChecked(Gtk.TreePath.new_from_string(pathStr));
+            // For pointer devices, ::row-activated is emitted as well
+            let dev = Gtk.get_current_event_device();
+            if (dev && dev.input_source == Gdk.InputSource.KEYBOARD)
+                this._toggleChecked(Gtk.TreePath.new_from_string(pathStr));
         });
 
         this._manager = getDefault();
