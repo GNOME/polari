@@ -61,6 +61,7 @@ gnome.generate_gir(libpolari,
   symbol_prefix: 'polari',
   identifier_prefix: 'Polari',
   includes: ['Gio-2.0', 'Gtk-3.0', 'TelepathyGLib-0.12'],
+  extra_args: '--quiet',
   install_dir_gir: girdir,
   install_dir_typelib: typelibdir,
   install: true
