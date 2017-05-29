@@ -1,2 +1,1 @@
-i18n.gettext('polari',
-             args: ['--from-code=UTF-8'])
+i18n.gettext('polari', args: ['--from-code=UTF-8'])
