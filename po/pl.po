@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2017-03-18 15:07+0000\n"
-"PO-Revision-Date: 2017-03-25 22:04+0100\n"
+"PO-Revision-Date: 2017-06-03 18:00+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -347,7 +347,7 @@ msgstr ""
 
 #: data/resources/user-details.ui:181
 msgid "Message"
-msgstr "Wiadomość"
+msgstr "Wyślij wiadomość"
 
 #: src/application.js:45
 msgid "Start Telepathy client"
@@ -705,7 +705,7 @@ msgstr[2] "%d użytkowników"
 
 #: src/roomList.js:133
 msgid "Leave chatroom"
-msgstr "Opuść pokój rozmów"
+msgstr "Opuść pokój"
 
 #: src/roomList.js:133
 msgid "End conversation"
