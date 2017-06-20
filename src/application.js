@@ -528,6 +528,11 @@ const Application = new Lang.Class({
                 let strReasons = Object.keys(Tp.ConnectionStatusReason);
                 debug('Account %s disconnected with reason %s'.format(
                       account.display_name, strReasons[reason]));
+
+                // Connection failed, keep tp from retrying over and over
+                let presence = Tp.ConnectionPresenceType.OFFLINE;
+                let msg = account.requested_status_message;
+                account.request_presence_async(presence, 'offline', msg, null);
             }
         }
 
