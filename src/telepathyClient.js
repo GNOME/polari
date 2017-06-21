@@ -198,13 +198,13 @@ const TelepathyClient = new Lang.Class({
             this._onAccountStatusChanged(this._accountsMonitor, a);
         });
 
-        this._networkMonitor.connect('notify::network-available',
-                                     Lang.bind(this, this._onNetworkAvailableChanged));
-        this._onNetworkAvailableChanged();
+        this._networkMonitor.connect('network-changed',
+                                     Lang.bind(this, this._onNetworkChanged));
+        this._onNetworkChanged(this._networkMonitor,
+                               this._networkMonitor.network_available);
     },
 
-    _onNetworkAvailableChanged: function() {
-        let connected = this._networkMonitor.network_available;
+    _onNetworkChanged: function(mon, connected) {
         let presence = connected ? Tp.ConnectionPresenceType.AVAILABLE
                                  : Tp.ConnectionPresenceType.OFFLINE;
         debug('Network changed to %s'.format(connected ? 'available'
