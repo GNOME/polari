@@ -194,6 +194,9 @@ const TelepathyClient = new Lang.Class({
         this._accountsMonitor.connect('account-enabled', (mon, account) => {
             this._connectAccount(account);
         });
+        this._accountsMonitor.enabledAccounts.forEach(a => {
+            this._onAccountStatusChanged(this._accountsMonitor, a);
+        });
 
         this._networkMonitor.connect('notify::network-available',
                                      Lang.bind(this, this._onNetworkAvailableChanged));
@@ -208,11 +211,7 @@ const TelepathyClient = new Lang.Class({
                                                        : 'unavailable'));
 
         this._accountsMonitor.enabledAccounts.forEach(a => {
-            if (a.requested_presence_type == Tp.ConnectionPresenceType.AVAILABLE &&
-                a.connection_status == Tp.ConnectionStatus.CONNECTED)
-                this._onAccountStatusChanged(this._accountsMonitor, a);
-            else
-                this._setAccountPresence(a, presence);
+            this._setAccountPresence(a, presence);
         });
     },
 
