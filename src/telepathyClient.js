@@ -301,6 +301,7 @@ const TelepathyClient = new Lang.Class({
         let params = account.dup_parameters_vardict().deep_unpack();
         let username = settings.get_string('identify-username') ||
                        params.username.deep_unpack();
+        let alwaysSendUsername = settings.get_boolean('identify-username-supported');
         let contactName = settings.get_string('identify-botname');
         let command = settings.get_string('identify-command');
         this._requestChannel(account, Tp.HandleType.CONTACT, contactName,
@@ -312,7 +313,7 @@ const TelepathyClient = new Lang.Class({
                 let activeNick = room.channel.connection.self_contact.alias;
                 // Omit username parameter when it matches the default, to
                 // support NickServ bots that don't support the parameter at all
-                if (activeNick == username)
+                if (!alwaysSendUsername && activeNick == username)
                     username = null;
                 room.send_identify_message_async(command, username, password, (r, res) => {
                     try {
@@ -441,6 +442,7 @@ const TelepathyClient = new Lang.Class({
             settings.set_string('identify-command', data.command);
 
         settings.set_string('identify-username', data.username);
+        settings.set_boolean('identify-username-supported', data.usernameSupported);
     },
 
     _onDiscardIdentifyPasswordActivated: function(action, parameter) {
@@ -561,6 +563,7 @@ const TelepathyClient = new Lang.Class({
             botname: room.channel.target_contact.alias,
             command: command,
             username: username || room.channel.connection.self_contact.alias,
+            usernameSupported: username != null,
             password: password
         };
         this._pendingBotPasswords.set(accountPath, data);

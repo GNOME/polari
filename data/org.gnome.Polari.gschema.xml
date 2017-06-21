@@ -44,5 +44,12 @@
       <summary>Identify username</summary>
       <description>Username to use in identify command</description>
     </key>
+    <key type="b" name="identify-username-supported">
+      <default>false</default>
+      <summary>Identify username supported</summary>
+      <description>
+        Whether the identify command is known to support the username parameter
+      </description>
+    </key>
   </schema>
 </schemalist>
