@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-05-13 23:37+0000\n"
-"PO-Revision-Date: 2017-05-14 20:48+0200\n"
+"POT-Creation-Date: 2017-06-27 22:38+0000\n"
+"PO-Revision-Date: 2017-06-28 20:50+0200\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de_DE\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -31,7 +31,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:661
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:666
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ein IRC-Client für GNOME"
 
@@ -131,6 +131,15 @@ msgstr "Benutzernamen identifizieren"
 #: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
 msgstr "Der Benutzername, der mit dem identify-Befehl verwendet werden soll"
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr "Unterstützung für Identify-Benutzername"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+"Gibt an, ob der Identify-Befehl den Benutzernamen-Parameter unterstützt"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -364,12 +373,12 @@ msgstr "Versionsnummer ausgeben und beenden"
 msgid "Failed to open link"
 msgstr "Fehler beim Öffnen des Links"
 
-#: src/application.js:562
+#: src/application.js:567
 #, javascript-format
 msgid "%s removed."
 msgstr "%s wurde entfernt."
 
-#: src/application.js:660
+#: src/application.js:665
 msgid "translator-credits"
 msgstr ""
 "Christian Kirbach <christian.kirbach@gmail.com>\n"
@@ -377,7 +386,7 @@ msgstr ""
 "J.M. Ruetter <jm@jublo.net>\n"
 "Mario Blättermann <mario.blaettermann@gmail.com>"
 
-#: src/application.js:666
+#: src/application.js:671
 msgid "Learn more about Polari"
 msgstr "Mehr über Polari erfahren"
 
@@ -779,7 +788,7 @@ msgstr "Passwort _speichern"
 msgid "Should the password be saved?"
 msgstr "Soll das Passwort gespeichert werden?"
 
-#: src/roomStack.js:141 src/telepathyClient.js:570
+#: src/roomStack.js:141 src/telepathyClient.js:577
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -791,18 +800,18 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Nutzen Sie den +-Knopf, um einen Raum zu betreten."
 
-#: src/telepathyClient.js:397
+#: src/telepathyClient.js:402
 msgid "Good Bye"
 msgstr "Auf Wiedersehen"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:569
+#: src/telepathyClient.js:576
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Passwort %s für %s speichern?"
 
-#: src/telepathyClient.js:573
+#: src/telepathyClient.js:580
 msgid "Save"
 msgstr "Speichern"
 
@@ -882,117 +891,3 @@ msgstr "Polari-Server-Passwort für %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polari NickServ-Passwort für %s"
-
-#~ msgid "Room _Name"
-#~ msgstr "_Raumname"
-
-#~ msgid "_Password"
-#~ msgstr "_Passwort"
-
-#~ msgid "_Name"
-#~ msgstr "_Name"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Message User"
-#~ msgstr "Nachricht senden"
-
-#~ msgid "_Add Connection"
-#~ msgstr "Verbindung _hinzufügen"
-
-#~ msgid "Join a Room"
-#~ msgstr "Raum beitreten"
-
-#~ msgid "Message a User"
-#~ msgstr "Nachricht senden"
-
-#~ msgid "Join room"
-#~ msgstr "Raum beitreten"
-
-#~ msgid "_Message"
-#~ msgstr "_Nachricht"
-
-#~ msgid "_Recent"
-#~ msgstr "_Zuletzt verwendet"
-
-#~ msgid "Add Connection"
-#~ msgstr "Verbindung hinzufügen"
-
-#~ msgid "No recent users"
-#~ msgstr "Keine vorherigen Benutzer"
-
-#~ msgid "Uploading %s"
-#~ msgstr "%s wird hochgeladen"
-
-#~ msgid "Could not connect to %s. Authentication failed."
-#~ msgstr ""
-#~ "Zu %s konnte keine Verbindung hergestellt werden. Legitimierung ist "
-#~ "fehlgeschlagen."
-
-#~ msgid "_Description"
-#~ msgstr "_Beschreibung"
-
-#~ msgid "Edit Connection"
-#~ msgstr "Verbindung bearbeiten"
-
-#~ msgid "Cr_eate"
-#~ msgstr "_Erstellen"
-
-#~ msgid "Show connections"
-#~ msgstr "Verbindungen anzeigen"
-
-#~ msgid "Use the + button to add a new connection."
-#~ msgstr "Verwenden Sie den »+«-Knopf, um eine neue Verbindung zu erstellen."
-
-#~ msgid "Add"
-#~ msgstr "Hinzufügen"
-
-#~ msgid "Preferences"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Please check your connection details."
-#~ msgstr "Bitte überprüfen Sie ihre Verbindungseinstellungen"
-
-#~ msgid "Try again"
-#~ msgstr "Versuchen Sie es noch einmal"
-
-#~ msgid "The server is busy."
-#~ msgstr "Der Server ist belegt."
-
-#~ msgid "Failed to connect for an unknown reason."
-#~ msgstr ""
-#~ "Die Verbindung konnte aus unbekannten Gründen nicht hergestellt werden."
-
-#~ msgid "Begin chatting by adding a new connection."
-#~ msgstr ""
-#~ "Beginnen Sie eine neue Unterhaltung durch Erstellen einer neuen "
-#~ "Verbindung."
-
-#~ msgid "Open %s in the application menu."
-#~ msgstr "%s im Anwendungsmenü öffnen."
-
-#~ msgid "Your connections are disabled."
-#~ msgstr "Ihre Verbindungen sind nicht verfügbar."
-
-#~ msgid "Enable them by opening %s in the application menu."
-#~ msgstr "Machen Sie diese verfügbar durch Öffnen von %s im Anwendungsmenü."
-
-#~ msgid "Connecting to %s"
-#~ msgstr "Verbinden mit %s"
-
-#~ msgid "Window position"
-#~ msgstr "Fensterposition"
-
-#~ msgid "Window position (x and y)."
-#~ msgstr "Fensterposition (x und y)."
-
-#~ msgid "_Leave"
-#~ msgstr "_Verlassen"
-
-#~ msgid "_Close"
-#~ msgstr "_Schließen"
-
-#~ msgid "Identity"
-#~ msgstr "Identität"
-
-#~ msgid "Send"
-#~ msgstr "Senden"
