@@ -17,8 +17,6 @@ const RoomStack = imports.roomStack;
 const UserList = imports.userList;
 const Utils = imports.utils;
 
-const CONFIGURE_TIMEOUT = 100; /* ms */
-
 
 const FixedSizeFrame = new Lang.Class({
     Name: 'FixedSizeFrame',
