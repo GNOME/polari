@@ -1,3 +1,19 @@
+3.24.2 - "She's Spaghetti"
+==========================
+* Support NickServ bots that don't handle nick in identify command
+  [Justyn, Florian; #772915]
+* Improve handling of temporarily unavailble networks [Florian; #784047]
+* Fix double-toggling of room checkboxes [mjash; #782969]
+* Misc. bug fixes [Florian; #781686]
+
+Contributors:
+  mjash, Christian Kirbach, Florian Müllner, Justyn Temme
+
+Translations:
+  Christian Kirbach [de], Piotr Drąg [pl], Rafael Fontenelle [pt_BR],
+  Mario Blättermann [de], Balázs Meskó [hu], Marek Cernocky [cs],
+  Kukuh Syafaat [id]
+
 3.24.1 - "I'm always Kate Winslet"
 ==================================
 * Share a spell checker to only load dictionaries once [Florian; #780762]
