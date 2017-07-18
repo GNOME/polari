@@ -656,7 +656,8 @@ var Application = new Lang.Class({
                 'Isabella Ribeiro <belinhacbr@gmail.com>',
                 'Jonas Danielsson <jonas@threetimestwo.org>',
                 'Rares Visalom <rares.visalom@gmail.com>',
-                'Danny Mølgaard <moelgaard.dmp@gmail.com>'
+                'Danny Mølgaard <moelgaard.dmp@gmail.com>',
+                'Justyn Temme <Justyntemme@gmail.com>'
             ],
             artists: [
                 'Sam Hewitt <hewittsamuel@gmail.com>',
