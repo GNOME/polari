@@ -1,3 +1,19 @@
+3.25.4 - "You're 21. You're Like Almost 30"
+===========================================
+* Support NickServ bots that don't handle nick in identify command
+  [Justyn, Florian; #772915]
+* Improve handling of temporarily unavailble networks [Florian; #784047]
+* Fix double-toggling of room checkboxes [mjash; #782969]
+* Misc. bug fixes [Piotr; #783747]
+
+Contributors:
+  mjash, Piotr Drąg, Christian Kirbach, Florian Müllner, Justyn Temme
+
+Translations:
+  Kukuh Syafaat [id], Mario Blättermann [de], Piotr Drąg [pl],
+  Daniel Mustieles [es], Balázs Meskó [hu], Rafael Fontenelle [pt_BR],
+  Marek Cernocky [cs], Jordi Mas [ca], Fabio Tomat [fur]
+
 3.25.1 - "He's Fred West"
 =========================
 * Share a spell checker to only load dictionaries once [Florian; #780762]
