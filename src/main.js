@@ -18,7 +18,7 @@ pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 const Application = imports.application;
 const GLib = imports.gi.GLib;
 
-const LOG_DOMAIN = 'Polari';
+var LOG_DOMAIN = 'Polari';
 
 function _makeLogFunction(level) {
     return message => {

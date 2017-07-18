@@ -17,7 +17,7 @@ const Utils = imports.utils;
 const UserTracker = imports.userTracker;
 const UserList = imports.userList;
 
-const MAX_NICK_CHARS = 8;
+var MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 
 const SCROLL_TIMEOUT = 100; // ms

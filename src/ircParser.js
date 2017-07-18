@@ -10,7 +10,7 @@ const Utils = imports.utils;
 
 const N_ = s => s;
 
-const knownCommands = {
+var knownCommands = {
     /* commands that would be nice to support: */
     /*
     AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
