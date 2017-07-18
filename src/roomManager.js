@@ -15,7 +15,7 @@ function getDefault() {
     return _singleton;
 }
 
-const _RoomManager = new Lang.Class({
+var _RoomManager = new Lang.Class({
     Name: '_RoomManager',
 
     _init: function() {

@@ -11,7 +11,7 @@ const EntryArea = imports.entryArea;
 const Lang = imports.lang;
 const RoomManager = imports.roomManager;
 
-const RoomStack = new Lang.Class({
+var RoomStack = new Lang.Class({
     Name: 'RoomStack',
     Extends: Gtk.Stack,
     Properties: {
@@ -90,7 +90,7 @@ const RoomStack = new Lang.Class({
     }
 });
 
-const SavePasswordConfirmationBar = new Lang.Class({
+var SavePasswordConfirmationBar = new Lang.Class({
     Name: 'SavePasswordConfirmationBar',
     Extends: Gtk.Revealer,
 
@@ -153,7 +153,7 @@ const SavePasswordConfirmationBar = new Lang.Class({
     }
 });
 
-const ChatPlaceholder = new Lang.Class({
+var ChatPlaceholder = new Lang.Class({
     Name: 'ChatPlaceholder',
     Extends: Gtk.Overlay,
 
@@ -191,7 +191,7 @@ const ChatPlaceholder = new Lang.Class({
     }
 });
 
-const RoomView = new Lang.Class({
+var RoomView = new Lang.Class({
     Name: 'RoomView',
     Extends: Gtk.Overlay,
 

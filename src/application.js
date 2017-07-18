@@ -25,7 +25,7 @@ const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+
 const AUTOSTART_DIR = GLib.get_user_config_dir() + '/autostart';
 const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
 
-const Application = new Lang.Class({
+var Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
     Signals: { 'prepare-shutdown': {},

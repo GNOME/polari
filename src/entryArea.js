@@ -19,7 +19,7 @@ const MAX_LINES = 5;
 
 let _checker = null;
 
-const ChatEntry = new Lang.Class({
+var ChatEntry = new Lang.Class({
     Name: 'ChatEntry',
     Extends: Gtk.Entry,
     Implements: [PasteManager.DropTargetIface],
@@ -100,7 +100,7 @@ const ChatEntry = new Lang.Class({
     }
 });
 
-const EntryArea = new Lang.Class({
+var EntryArea = new Lang.Class({
     Name: 'EntryArea',
     Extends: Gtk.Stack,
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',

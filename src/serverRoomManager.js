@@ -22,7 +22,7 @@ function getDefault() {
     return _singleton;
 }
 
-const _ServerRoomManager = new Lang.Class({
+var _ServerRoomManager = new Lang.Class({
     Name: '_ServerRoomManager',
 
     _init: function() {
@@ -118,7 +118,7 @@ function _strBaseEqual(str1, str2) {
     return str1.localeCompare(str2, {}, { sensitivity: 'base'}) == 0;
 };
 
-const ServerRoomList = new Lang.Class({
+var ServerRoomList = new Lang.Class({
     Name: 'ServerRoomList',
     Extends: Gtk.Box,
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',

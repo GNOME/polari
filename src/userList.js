@@ -15,7 +15,7 @@ const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 const MAX_USERS_SHOWN = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
-const UserListPopover = new Lang.Class({
+var UserListPopover = new Lang.Class({
     Name: 'UserListPopover',
     Extends: Gtk.Popover,
 
@@ -101,7 +101,7 @@ const UserListPopover = new Lang.Class({
     }
 });
 
-const UserDetails = new Lang.Class({
+var UserDetails = new Lang.Class({
     Name: 'UserDetails',
     Extends: Gtk.Frame,
     Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
@@ -325,7 +325,7 @@ const UserDetails = new Lang.Class({
     }
 });
 
-const UserPopover = new Lang.Class({
+var UserPopover = new Lang.Class({
     Name: 'UserPopover',
     Extends: Gtk.Popover,
     Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
@@ -434,7 +434,7 @@ const UserPopover = new Lang.Class({
     }
 });
 
-const UserListRow = new Lang.Class({
+var UserListRow = new Lang.Class({
     Name: 'UserListRow',
     Extends: Gtk.ListBoxRow,
 
@@ -546,7 +546,7 @@ const UserListRow = new Lang.Class({
     }
 });
 
-const UserList = new Lang.Class({
+var UserList = new Lang.Class({
     Name: 'UserList',
     Extends: Gtk.ScrolledWindow,
 

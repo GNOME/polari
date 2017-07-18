@@ -18,7 +18,7 @@ const UserList = imports.userList;
 const Utils = imports.utils;
 
 
-const FixedSizeFrame = new Lang.Class({
+var FixedSizeFrame = new Lang.Class({
     Name: 'FixedSizeFrame',
     Extends: Gtk.Frame,
     Properties: {
@@ -86,7 +86,7 @@ const FixedSizeFrame = new Lang.Class({
     }
 });
 
-const MainWindow = new Lang.Class({
+var MainWindow = new Lang.Class({
     Name: 'MainWindow',
     Extends: Gtk.ApplicationWindow,
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',

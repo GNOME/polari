@@ -39,7 +39,7 @@ const knownCommands = {
 const UNKNOWN_COMMAND_MESSAGE =
     N_("Unknown command — try /HELP for a list of available commands");
 
-const IrcParser = new Lang.Class({
+var IrcParser = new Lang.Class({
     Name: 'IrcParser',
 
     _init: function(room) {

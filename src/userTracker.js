@@ -18,7 +18,7 @@ function getUserStatusMonitor() {
     return _singleton;
 }
 
-const UserStatusMonitor = new Lang.Class({
+var UserStatusMonitor = new Lang.Class({
     Name: 'UserStatusMonitor',
 
     _init: function() {
@@ -51,7 +51,7 @@ const UserStatusMonitor = new Lang.Class({
 });
 
 
-const UserTracker = new Lang.Class({
+var UserTracker = new Lang.Class({
     Name: 'UserTracker',
     Extends: GObject.Object,
 

@@ -12,7 +12,7 @@ function getDefault() {
     return _singleton;
 }
 
-const NetworksManager = new Lang.Class({
+var NetworksManager = new Lang.Class({
     Name: 'NetworksManager',
 
     _init: function() {

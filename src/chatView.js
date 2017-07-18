@@ -47,7 +47,7 @@ function _getColor(context) {
 
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
-const TextView = new Lang.Class({
+var TextView = new Lang.Class({
     Name: 'TextView',
     Extends: Gtk.TextView,
 
@@ -143,7 +143,7 @@ const TextView = new Lang.Class({
     }
 });
 
-const ButtonTag = new Lang.Class({
+var ButtonTag = new Lang.Class({
     Name: 'ButtonTag',
     Extends: Gtk.TextTag,
     Properties: {
@@ -226,7 +226,7 @@ const ButtonTag = new Lang.Class({
     }
 });
 
-const HoverFilterTag = new Lang.Class({
+var HoverFilterTag = new Lang.Class({
     Name: 'HoverFilterTag',
     Extends: ButtonTag,
     Properties: {
@@ -291,7 +291,7 @@ const HoverFilterTag = new Lang.Class({
     }
 });
 
-const ChatView = new Lang.Class({
+var ChatView = new Lang.Class({
     Name: 'ChatView',
     Extends: Gtk.ScrolledWindow,
     Implements: [PasteManager.DropTargetIface],

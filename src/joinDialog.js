@@ -15,7 +15,7 @@ const DialogPage = {
     CONNECTION: 1
 };
 
-const JoinDialog = new Lang.Class({
+var JoinDialog = new Lang.Class({
     Name: 'JoinDialog',
     Extends: Gtk.Dialog,
     Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',

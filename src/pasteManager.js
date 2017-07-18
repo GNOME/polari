@@ -28,7 +28,7 @@ function _getTargetForContentType(contentType) {
 }
 
 
-const PasteManager = new Lang.Class({
+var PasteManager = new Lang.Class({
     Name: 'PasteManager',
 
     _init: function() {
@@ -82,7 +82,7 @@ const PasteManager = new Lang.Class({
     }
 });
 
-const DropTargetIface = new Lang.Interface({
+var DropTargetIface = new Lang.Interface({
     Name: 'DropTargetIface',
     Requires: [GObject.Object],
     Properties: {

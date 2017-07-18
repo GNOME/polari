@@ -18,7 +18,7 @@ function _onPopoverVisibleChanged(popover) {
         context.remove_class('has-open-popup');
 }
 
-const RoomRow = new Lang.Class({
+var RoomRow = new Lang.Class({
     Name: 'RoomRow',
     Extends: Gtk.ListBoxRow,
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
@@ -141,7 +141,7 @@ const RoomRow = new Lang.Class({
     }
 });
 
-const RoomListHeader = new Lang.Class({
+var RoomListHeader = new Lang.Class({
     Name: 'RoomListHeader',
     Extends: Gtk.MenuButton,
     CssName: 'row',
@@ -345,7 +345,7 @@ const RoomListHeader = new Lang.Class({
     },
 });
 
-const RoomList = new Lang.Class({
+var RoomList = new Lang.Class({
     Name: 'RoomList',
     Extends: Gtk.ListBox,
 

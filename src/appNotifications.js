@@ -9,7 +9,7 @@ const Mainloop = imports.mainloop;
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
-const AppNotification = new Lang.Class({
+var AppNotification = new Lang.Class({
     Name: 'AppNotification',
     Abstract: true,
     Extends: Gtk.Revealer,
@@ -31,7 +31,7 @@ const AppNotification = new Lang.Class({
     }
 });
 
-const MessageNotification = new Lang.Class({
+var MessageNotification = new Lang.Class({
     Name: 'MessageNotification',
     Extends: AppNotification,
 
@@ -70,7 +70,7 @@ const MessageNotification = new Lang.Class({
     }
 });
 
-const UndoNotification = new Lang.Class({
+var UndoNotification = new Lang.Class({
     Name: 'UndoNotification',
     Extends: MessageNotification,
     Signals: { closed: {}, undo: {} },
@@ -101,7 +101,7 @@ const UndoNotification = new Lang.Class({
     }
 });
 
-const CommandOutputNotification = new Lang.Class({
+var CommandOutputNotification = new Lang.Class({
     Name: 'CommandOutputNotification',
     Extends: AppNotification,
     Abstract: true,
@@ -115,7 +115,7 @@ const CommandOutputNotification = new Lang.Class({
     }
 });
 
-const SimpleOutput = new Lang.Class({
+var SimpleOutput = new Lang.Class({
     Name: 'SimpleOutput',
     Extends: CommandOutputNotification,
 
@@ -131,7 +131,7 @@ const SimpleOutput = new Lang.Class({
     }
 });
 
-const GridOutput = new Lang.Class({
+var GridOutput = new Lang.Class({
     Name: 'GridOutput',
     Extends: CommandOutputNotification,
 
@@ -163,7 +163,7 @@ const GridOutput = new Lang.Class({
     }
 });
 
-const NotificationQueue = new Lang.Class({
+var NotificationQueue = new Lang.Class({
     Name: 'NotificationQueue',
     Extends: Gtk.Frame,
 
@@ -192,7 +192,7 @@ const NotificationQueue = new Lang.Class({
     }
 });
 
-const CommandOutputQueue = new Lang.Class({
+var CommandOutputQueue = new Lang.Class({
     Name: 'CommandOutputQueue',
     Extends: NotificationQueue,
 

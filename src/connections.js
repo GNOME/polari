@@ -29,7 +29,7 @@ function getAccountParams(account) {
     return params;
 };
 
-const ConnectionRow = new Lang.Class({
+var ConnectionRow = new Lang.Class({
     Name: 'ConnectionRow',
     Extends: Gtk.ListBoxRow,
 
@@ -68,7 +68,7 @@ const ConnectionRow = new Lang.Class({
     }
 });
 
-const ConnectionsList = new Lang.Class({
+var ConnectionsList = new Lang.Class({
     Name: 'ConnectionsList',
     Extends: Gtk.ScrolledWindow,
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
@@ -190,7 +190,7 @@ const ConnectionsList = new Lang.Class({
     }
 });
 
-const ConnectionDetails = new Lang.Class({
+var ConnectionDetails = new Lang.Class({
     Name: 'ConnectionDetails',
     Extends: Gtk.Grid,
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
@@ -419,7 +419,7 @@ const ConnectionDetails = new Lang.Class({
 });
 
 
-const ConnectionProperties = new Lang.Class({
+var ConnectionProperties = new Lang.Class({
     Name: 'ConnectionProperties',
     Extends: Gtk.Dialog,
     Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',

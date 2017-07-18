@@ -5,7 +5,7 @@ const Pango = imports.gi.Pango;
 const IrcParser = imports.ircParser;
 const Lang = imports.lang;
 
-const TabCompletion = new Lang.Class({
+var TabCompletion = new Lang.Class({
     Name: 'TabCompletion',
 
     _init: function(entry) {

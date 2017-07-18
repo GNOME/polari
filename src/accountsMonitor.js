@@ -12,7 +12,7 @@ function getDefault() {
     return _singleton;
 }
 
-const AccountsMonitor = new Lang.Class({
+var AccountsMonitor = new Lang.Class({
     Name: 'AccountsMonitor',
 
     _init: function() {

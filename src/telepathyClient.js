@@ -44,7 +44,7 @@ const SASLAbortReason = {
     USER_ABORT: 1
 };
 
-const SASLAuthHandler = new Lang.Class({
+var SASLAuthHandler = new Lang.Class({
     Name: 'SASLAuthHandler',
 
     _init: function(channel) {
@@ -109,7 +109,7 @@ const SASLAuthHandler = new Lang.Class({
     }
 });
 
-const TelepathyClient = new Lang.Class({
+var TelepathyClient = new Lang.Class({
     Name: 'TelepathyClient',
     Extends: Tp.BaseClient,
 
