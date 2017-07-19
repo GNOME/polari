@@ -232,7 +232,7 @@ var TelepathyClient = new Lang.Class({
 
     _setAccountPresence: function(account, presence) {
         let statuses = Object.keys(Tp.ConnectionPresenceType).map(s =>
-            s.replace('_', '-', 'g').toLowerCase()
+            s.replace(/_/g, '-').toLowerCase()
         );
         let status = statuses[presence];
         let msg = account.requested_status_message;
