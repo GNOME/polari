@@ -388,29 +388,20 @@ var EntryArea = new Lang.Class({
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
-        let account = this._room.account;
-        account.set_nickname_async(nick, (a, res) => {
-            try {
-                a.set_nickname_finish(res);
-            } catch(e) {
-                logError(e, "Failed to change nick");
+        let app = Gio.Application.get_default();
+        app.setAccountNick(this._room.account, nick);
 
-                this._updateNick();
-                return;
-            }
-
-            // TpAccount:nickname is a local property which doesn't
-            // necessarily match the externally visible nick; telepathy
-            // doesn't consider failing to sync the two an error, so
-            // we give the server MAX_NICK_UPDATE_TIME seconds until
-            // we assume failure and revert back to the server nick
-            //
-            // (set_aliases() would do what we want, but it's not
-            // introspected)
-            Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME, () => {
-                this._updateNick();
-                return GLib.SOURCE_REMOVE;
-            });
+        // TpAccount:nickname is a local property which doesn't
+        // necessarily match the externally visible nick; telepathy
+        // doesn't consider failing to sync the two an error, so
+        // we give the server MAX_NICK_UPDATE_TIME seconds until
+        // we assume failure and revert back to the server nick
+        //
+        // (set_aliases() would do what we want, but it's not
+        // introspected)
+        Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME, () => {
+            this._updateNick();
+            return GLib.SOURCE_REMOVE;
         });
     },
 

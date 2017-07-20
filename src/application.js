@@ -75,6 +75,13 @@ var Application = new Lang.Class({
                this.active_window.active_room == room;
     },
 
+    // Small wrapper to mark user-requested nick changes
+    setAccountNick: function(account, nick) {
+        account.set_nickname_async(nick, (a, res) => {
+            account.set_nickname_finish(res);
+        });
+    },
+
     _checkService: function(conn, name, opath, iface) {
         let flags = Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
                     Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS;

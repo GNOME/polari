@@ -202,13 +202,7 @@ var IrcParser = new Lang.Class({
                 if (argv.length)
                     log('Excess arguments to NICK command: ' + argv);
 
-                this._room.account.set_nickname_async(nick, (a, res) => {
-                    try {
-                        a.set_nickname_finish(res);
-                    } catch(e) {
-                        logError(e, 'Failed to update nick');
-                    }
-                });
+                this._app.setAccountNick(this._room.account, nick);
                 break;
             }
             case 'PART':
