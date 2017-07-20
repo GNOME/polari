@@ -52,6 +52,37 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.24.2" date="2017-07-19">
+      <description>
+        <p>
+          The second update for GNOME 3.24 brings new features and bug fixes:
+        </p>
+        <ul>
+          <li>Support NickServ bots that don't handle the nickname in their
+              identify command</li>
+          <li>Better handling of unavailable networks (for example on VPN
+              or LAN)</li>
+          <li>Clicking a checkbox in the join dialog no longer toggles it
+              off again immediately</li>
+        </ul>
+      </description>
+    </release>
+    <release version="3.24.1" date="2017-04-11">
+      <description>
+        <p>
+          The first update for GNOME 3.24 brings new features and bug fixes:
+        </p>
+        <ul>
+          <li>Underscores that are appended automatically to nicknames
+              are removed</li>
+          <li>The chat log now indicates when a contact disconnects from
+              a private conversation</li>
+          <li>Longer expiry time for text uploaded to GNOME's paste
+              service</li>
+          <li>Fixes a performance regression caused by spell checking</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.24.0" date="2017-03-20">
       <description>
         <p>
