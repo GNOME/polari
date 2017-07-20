@@ -422,7 +422,7 @@ var EntryArea = new Lang.Class({
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
-        if (!this._nickEntry.is_focus)
+        if (!this._nickEntry.is_focus())
             this._nickEntry.text = nick;
     },
 
