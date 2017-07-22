@@ -37,4 +37,5 @@ foreach s : services
 endforeach
 
 install_data(app_id + '.gschema.xml', install_dir: schemadir)
+install_data(app_id + '.Autostart.desktop', install_dir: pkgdatadir)
 install_data('Polari.client', install_dir: tpclientdir)
