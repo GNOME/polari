@@ -1,4 +1,6 @@
 [Desktop Entry]
+Name=Polari Autostart
+Icon=org.gnome.Polari
 Type=Application
 Exec=gapplication action org.gnome.Polari start-client
 NoDisplay=True
