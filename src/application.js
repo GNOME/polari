@@ -71,7 +71,7 @@ var Application = new Lang.Class({
 
     isRoomFocused: function(room) {
         return this.active_window &&
-               this.active_window.is_active &&
+               this.active_window['is-active'] &&
                this.active_window.active_room == room;
     },
 
