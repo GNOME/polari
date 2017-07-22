@@ -36,6 +36,8 @@ libsources = [
   'lib/polari-message.h',
   'lib/polari-room.c',
   'lib/polari-room.h',
+  'lib/polari-tpl-importer.c',
+  'lib/polari-tpl-importer.h',
   'lib/polari-util.c',
   'lib/polari-util.h'
 ]
