@@ -249,7 +249,7 @@ var EntryArea = new Lang.Class({
         let toplevelFocus = this._chatEntry.get_toplevel().get_focus();
         return this.sensitive &&
                this._chatEntry.get_mapped() &&
-               !this._chatEntry.has_focus() &&
+               !this._chatEntry['has-focus'] &&
                !(toplevelFocus instanceof Gtk.Entry);
     },
 
@@ -422,7 +422,7 @@ var EntryArea = new Lang.Class({
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
-        if (!this._nickEntry.is_focus())
+        if (!this._nickEntry['is-focus'])
             this._nickEntry.text = nick;
     },
 
