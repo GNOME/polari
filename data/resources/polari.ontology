@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2017 Carlos Garnacho <carlosg@gnome.org>
+# SPDX-FileCopyrightText: 2017 Florian Müllner <fmuellner@gnome.org>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix nrl: <http://tracker.api.gnome.org/ontology/v3/nrl#> .
+@prefix polari: <org.gnome.Polari:#> .
+
+polari: a nrl:Namespace, nrl:Ontology ;
+  nrl:prefix "polari" ;
+  rdfs:comment "Ontology for Polari chat logs" ;
+  nrl:lastModified "2017-07-22T02:35:00Z" .
+
+# Account
+polari:Account a rdfs:Class ;
+  rdfs:subClassOf rdfs:Resource .
+
+polari:id a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Account ;
+  rdfs:range xsd:string .
+
+# Contact
+polari:Contact a rdfs:Class ;
+  rdfs:subClassOf rdfs:Resource .
+
+polari:nick a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Contact ;
+  rdfs:range xsd:string .
+
+# User's own contact
+polari:SelfContact a rdfs:Class ;
+  rdfs:subClassOf polari:Contact .
+
+# Channel
+polari:Channel a rdfs:Class ;
+  rdfs:subClassOf rdfs:Resource .
+
+polari:name a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Channel ;
+  rdfs:range xsd:string .
+
+polari:account a rdf:Property ;
+  rdfs:domain polari:Channel ;
+  rdfs:range polari:Account .
+
+# Room
+polari:Room a rdfs:Class ;
+  rdfs:subClassOf polari:Channel .
+
+# Conversation
+polari:Conversation a rdfs:Class ;
+  rdfs:subClassOf polari:Channel .
+
+polari:target a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Conversation ;
+  rdfs:range polari:Contact .
+
+# Message
+polari:Message a rdfs:Class ;
+  rdfs:subClassOf rdfs:Resource .
+
+polari:channel a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Message ;
+  rdfs:range polari:Channel .
+
+polari:sender a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Message ;
+  rdfs:range polari:Contact .
+
+polari:time a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Message ;
+  rdfs:range xsd:dateTime ;
+  nrl:indexed true .
+
+polari:text a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Message ;
+  rdfs:range xsd:string ;
+  nrl:fulltextIndexed true .
+
+polari:isAction a rdf:Property ;
+  nrl:maxCardinality 1 ;
+  rdfs:domain polari:Message ;
+  rdfs:range xsd:boolean .
