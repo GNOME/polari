@@ -115,6 +115,13 @@ libpolari = shared_library('polari-1.0', libsources + libsources_private + lib_r
   install_dir: pkglibdir
 )
 
+polari_log_tool = executable('polari-log-tool', 'polari-log-tool.c',
+  dependencies: [gio, telepathy_glib, tracker],
+  link_with: libpolari,
+  install_rpath: pkglibdir,
+  install: true
+)
+
 gnome.generate_gir(libpolari,
   sources: libsources,
   nsversion: '1.0',
