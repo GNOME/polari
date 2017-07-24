@@ -68,6 +68,8 @@ libsources = [
   'lib/polari-client-factory.h',
   'lib/polari-drag-helper.c',
   'lib/polari-drag-helper.h',
+  'lib/polari-message.h',
+  'lib/polari-message.c',
   'lib/polari-room.c',
   'lib/polari-room.h',
   'lib/polari-util.c',
@@ -75,6 +77,7 @@ libsources = [
 ]
 
 lib_nongir_sources = [
+  'lib/polari-message-private.h',
   'lib/polari-tp-autocleanup.h',
 ]
 
@@ -83,7 +86,7 @@ libargs = [
   '-DG_LOG_DOMAIN="Polari"'
 ]
 libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources,
-  dependencies: [gio, gtk3, telepathy_glib],
+  dependencies: [gio, gtk3, telepathy_glib, telepathy_logger],
   c_args: libargs,
   install: true,
   install_dir: pkglibdir
@@ -101,7 +104,7 @@ gnome.generate_gir(libpolari,
   namespace: 'Polari',
   symbol_prefix: 'polari',
   identifier_prefix: 'Polari',
-  includes: ['Gio-2.0', 'Gtk-3.0', 'TelepathyGLib-0.12'],
+  includes: ['Gio-2.0', 'Gtk-3.0', 'TelepathyGLib-0.12', 'TelepathyLogger-0.2'],
   extra_args: '--quiet',
   install_dir_gir: girdir,
   install_dir_typelib: typelibdir,
