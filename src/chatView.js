@@ -559,19 +559,14 @@ var ChatView = new Lang.Class({
 
     _createMessage: function(source) {
         if (source instanceof Tp.Message) {
-            let [text, ] = source.to_text();
             let [id, valid] = source.get_pending_message_id();
-            return { nick: source.sender.alias,
-                     text: text,
-                     timestamp: source.get_sent_timestamp() ||
-                                source.get_received_timestamp(),
-                     messageType: source.get_message_type(),
-                     pendingId: valid ? id : undefined };
+            let msg = Polari.Message.new_from_tp_message(source);
+            msg.pendingId = valid ? id : undefined;
+            return msg;
         } else if (source instanceof Tpl.Event) {
-            return { nick: source.sender.alias,
-                     text: source.message,
-                     timestamp: source.timestamp,
-                     messageType: source.get_message_type() };
+            let msg = Polari.Message.new_from_tpl_event(source);
+            msg.pendingId = undefined;
+            return msg;
         }
 
         throw new Error('Cannot create message from source ' + source);
@@ -581,12 +576,12 @@ var ChatView = new Lang.Class({
         if (this._logWalker.is_end())
             return this._pendingLogs.splice(0);
 
-        let nick = this._pendingLogs[0].nick;
-        let type = this._pendingLogs[0].messageType;
+        let nick = this._pendingLogs[0].get_sender();
+        let isAction = this._pendingLogs[0].is_action();
         let maxNum = this._pendingLogs.length - this._initialPending.length;
         for (let i = 0; i < maxNum; i++)
-            if (this._pendingLogs[i].nick != nick ||
-                this._pendingLogs[i].messageType != type)
+            if (this._pendingLogs[i].get_sender() != nick ||
+                this._pendingLogs[i].is_action() != isAction)
                 return this._pendingLogs.splice(i);
         return [];
     },
@@ -598,10 +593,10 @@ var ChatView = new Lang.Class({
         let numLogs = logs.length;
         let pos;
         for (pos = numLogs - pending.length; pos < numLogs; pos++)
-            if (logs[pos].nick == firstPending.nick &&
-                logs[pos].text == firstPending.text &&
-                logs[pos].timestamp == firstPending.timestamp &&
-                logs[pos].messageType == firstPending.messageType)
+            if (logs[pos].get_sender() == firstPending.get_sender() &&
+                logs[pos].get_text() == firstPending.get_text() &&
+                logs[pos].is_action() == firstPending.is_action() &&
+                logs[pos].get_time().equal(firstPending.get_time()))
                 break;
         // Remove entries that are also in pending (if any), then
         // add the entries from pending
@@ -1211,7 +1206,7 @@ var ChatView = new Lang.Class({
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
 
-        if (message.pendingId == undefined /* outgoing */ ||
+        if (message.is_self() /* outgoing */ ||
             (this._app.isRoomFocused(this._room) && this._pending.size == 0))
             this._channel.ack_message_async(tpMessage, null);
         else if (this._needsIndicator)
@@ -1219,35 +1214,37 @@ var ChatView = new Lang.Class({
     },
 
     _insertMessage: function(iter, message, state) {
-        let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
-        let needsGap = message.nick != state.lastNick || isAction;
-        let highlight = this._room.should_highlight_message(message.nick,
-                                                            message.text);
+        let nick = message.get_sender();
+        let text = message.get_text();
+        let isAction = message.is_action();
+        let needsGap = nick != state.lastNick || isAction;
+        let highlight = this._room.should_highlight_message(nick, text);
+        let timestamp = message.get_time().to_unix();
 
-        if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
+        if (timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
             let tags = [this._lookupTag('timestamp')];
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
             this._insertWithTags(iter,
-                                 this._formatTimestamp(message.timestamp) + '\n',
+                                 this._formatTimestamp(timestamp) + '\n',
                                  tags);
         }
-        state.lastTimestamp = message.timestamp;
+        state.lastTimestamp = timestamp;
 
-        this._updateMaxNickChars(message.nick.length);
+        this._updateMaxNickChars(nick.length);
 
         let tags = [];
         if (isAction) {
-            message.text = "%s %s".format(message.nick, message.text);
+            text = "%s %s".format(nick, text);
             state.lastNick = null;
             tags.push(this._lookupTag('action'));
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
         } else {
-            if (state.lastNick != message.nick) {
+            if (state.lastNick != nick) {
                 let tags = [this._lookupTag('nick')];
-                let nickTagName = this._getNickTagName(message.nick);
+                let nickTagName = this._getNickTagName(nick);
                 let nickTag = this._lookupTag(nickTagName);
                 let buffer = this._view.get_buffer();
 
@@ -1255,7 +1252,7 @@ var ChatView = new Lang.Class({
                     nickTag = new ButtonTag({ name: nickTagName });
                     nickTag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
 
-                    let status = this._userTracker.getNickRoomStatus(message.nick, this._room);
+                    let status = this._userTracker.getNickRoomStatus(nick, this._room);
                     this._updateNickTag(nickTag, status);
 
                     buffer.get_tag_table().add(nickTag);
@@ -1270,10 +1267,10 @@ var ChatView = new Lang.Class({
 
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
-                this._insertWithTags(iter, message.nick, tags);
+                this._insertWithTags(iter, nick, tags);
                 buffer.insert(iter, '\t', -1);
             }
-            state.lastNick = message.nick;
+            state.lastNick = nick;
             tags.push(this._lookupTag('message'));
         }
 
@@ -1282,8 +1279,6 @@ var ChatView = new Lang.Class({
 
         let params = this._room.account.dup_parameters_vardict().deep_unpack();
         let server = params.server.deep_unpack();
-
-        let text = message.text;
 
         // mask identify passwords in private chats
         if (this._room.type == Tp.HandleType.CONTACT) {
