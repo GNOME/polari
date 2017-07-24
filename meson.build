@@ -38,6 +38,7 @@ check_version = find_program('meson/check-version.py')
 
 gio = dependency('gio-2.0', version: '>= 2.43.4')
 telepathy_glib = dependency('telepathy-glib')
+telepathy_logger = dependency('telepathy-logger-0.2')
 girepository = dependency('gobject-introspection-1.0')
 gjs = dependency('gjs-1.0', version: '>= 1.73.1')
 
