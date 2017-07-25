@@ -5,6 +5,13 @@ data_resources = gnome.compile_resources(
   c_name: 'data_resources'
 )
 
+lib_resources = gnome.compile_resources(
+  'lib-resources',
+  '../data/@0@.lib.gresource.xml'.format(app_id),
+  source_dir: '../data',
+  c_name: 'lib_resources'
+)
+
 js_sources = [
   'accountsMonitor.js',
   'application.js',
@@ -103,8 +110,8 @@ libargs = [
   '-DG_LOG_USE_STRUCTURED',
   '-DG_LOG_DOMAIN="Polari"'
 ]
-libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources,
-  dependencies: [gio, gtk3, telepathy_glib, telepathy_logger],
+libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources + lib_resources,
+  dependencies: [gio, gtk3, telepathy_glib, telepathy_logger, tracker],
   c_args: libargs,
   install: true,
   install_dir: pkglibdir
@@ -122,7 +129,7 @@ gnome.generate_gir(libpolari,
   namespace: 'Polari',
   symbol_prefix: 'polari',
   identifier_prefix: 'Polari',
-  includes: ['Gio-2.0', 'Gtk-3.0', 'TelepathyGLib-0.12', 'TelepathyLogger-0.2'],
+  includes: ['Gio-2.0', 'Gtk-3.0', 'TelepathyGLib-0.12', 'TelepathyLogger-0.2', 'Tracker-2.0'],
   extra_args: '--quiet',
   install_dir_gir: girdir,
   install_dir_typelib: typelibdir,
