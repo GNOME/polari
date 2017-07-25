@@ -13,6 +13,12 @@ data_resources = gnome.compile_resources(
   c_name: 'data_resources'
 )
 
+lib_resources = gnome.compile_resources(
+  'lib-resources',
+  app_id + '.lib.gresource.xml',
+  c_name: 'lib_resources'
+)
+
 desktop_filename = app_id + '.desktop'
 desktop_file = i18n.merge_file(
   input: desktop_filename + '.in',
