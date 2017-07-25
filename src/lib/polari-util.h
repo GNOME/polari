@@ -20,6 +20,7 @@
 #define __POLARI_UTIL_H__
 
 #include <glib.h>
+#include <libtracker-sparql/tracker-sparql.h>
 
 char *polari_util_get_basenick (const char *nick);
 
@@ -27,5 +28,7 @@ gboolean polari_util_match_identify_message (const char  *message,
                                              char       **command,
                                              char       **username,
                                              char       **password);
+
+TrackerSparqlConnection *polari_util_get_tracker_connection (GError **error);
 
 #endif /* __POLARI_UTIL_H__ */
