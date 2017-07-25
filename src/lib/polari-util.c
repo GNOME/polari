@@ -89,3 +89,36 @@ polari_util_match_identify_message (const char  *message,
 
   return matched;
 }
+
+/**
+ * polari_util_get_tracker_connection:
+ *
+ * Returns: (transfer none):
+ */
+TrackerSparqlConnection *
+polari_util_get_tracker_connection (GError **error)
+{
+  static TrackerSparqlConnection *connection = NULL;
+
+  if (connection == NULL)
+    {
+      g_autoptr(GFile) store, ontology;
+      g_autofree char *store_path;
+
+      store_path = g_build_filename (g_get_user_data_dir (),
+                                     "polari",
+                                     "chatlogs.v1",
+                                     NULL);
+      store = g_file_new_for_path (store_path);
+      ontology = g_file_new_for_uri ("resource:///org/gnome/Polari/ontologies/");
+
+      connection = tracker_sparql_connection_local_new (TRACKER_SPARQL_CONNECTION_FLAGS_NONE,
+                                                        store,
+                                                        NULL,
+                                                        ontology,
+                                                        NULL,
+                                                        error);
+    }
+
+  return connection;
+}
