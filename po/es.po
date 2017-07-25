@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-05-25 21:13+0000\n"
-"PO-Revision-Date: 2017-06-19 13:48+0200\n"
+"POT-Creation-Date: 2017-07-22 18:39+0000\n"
+"PO-Revision-Date: 2017-07-24 16:03+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:661
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:667
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -128,6 +128,16 @@ msgstr "Nombre de usuario de «identify»"
 #: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
 msgstr "Nombre de usuario que usar en el comando «identify»"
+
+#: data/org.gnome.Polari.gschema.xml:49
+#| msgid "Identify username"
+msgid "Identify username supported"
+msgstr "«Identify nombre_usuario» soportado"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+"Indica si el comando «identify» soporta el nombre de usuario como parámetro"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -361,16 +371,16 @@ msgstr "Mostrar el número de versión y salir"
 msgid "Failed to open link"
 msgstr "Falló al abrir el enlace"
 
-#: src/application.js:562
+#: src/application.js:567
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eliminado."
 
-#: src/application.js:660
+#: src/application.js:666
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2016"
 
-#: src/application.js:666
+#: src/application.js:672
 msgid "Learn more about Polari"
 msgstr "Saber más acerca de Polari"
 
@@ -692,7 +702,7 @@ msgstr "No hay ningún tema establecido"
 msgid "Add Network"
 msgstr "Añadir red"
 
-#: src/mainWindow.js:385
+#: src/mainWindow.js:383
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -767,7 +777,7 @@ msgstr "_Guardar contraseña"
 msgid "Should the password be saved?"
 msgstr "¿Se debe guardar la contraseña?"
 
-#: src/roomStack.js:141 src/telepathyClient.js:570
+#: src/roomStack.js:141 src/telepathyClient.js:577
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -778,18 +788,18 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Únase a una sala pulsando el botón +."
 
-#: src/telepathyClient.js:397
+#: src/telepathyClient.js:402
 msgid "Good Bye"
 msgstr "Adiós"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:569
+#: src/telepathyClient.js:576
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "¿Guardar contraseña %s para %s?"
 
-#: src/telepathyClient.js:573
+#: src/telepathyClient.js:580
 msgid "Save"
 msgstr "Guardar"
 
