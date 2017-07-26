@@ -504,6 +504,8 @@ class TelepathyClient extends Tp.BaseClient {
                     return;
             }
 
+            channel.connect('message-sent',
+                            this._onMessageSent.bind(this));
             channel.connect('message-received',
                             this._onMessageReceived.bind(this));
             channel.connect('pending-message-removed',
@@ -591,7 +593,34 @@ class TelepathyClient extends Tp.BaseClient {
         this._app.send_notification(this._getIdentifyNotificationID(accountPath), notification);
     }
 
+    _logMessage(tpMessage, channel) {
+        let connection = Polari.util_get_tracker_connection ();
+
+        let accountId = channel.connection.get_account().get_path_suffix();
+        let isRoom = channel.handle_type == Tp.HandleType.ROOM;
+        let channelName = channel.identifier;
+
+        let message = Polari.Message.new_from_tp_message (tpMessage);
+        let res = message.to_tracker_resource(accountId, channelName, isRoom);
+
+        let nsManager = connection.get_namespace_manager();
+        let sparql = res.print_sparql_update(nsManager, null);
+        connection.update_async(sparql, 0, null, (o, res) => {
+            try {
+                connection.update_finish(res);
+            } catch (e) {
+                log(`Failed to log message: ${e.message}`);
+            }
+        });
+    }
+
+    _onMessageSent(channel, msg) {
+        this._logMessage(msg, channel);
+    }
+
     _onMessageReceived(channel, msg) {
+        this._logMessage(msg, channel);
+
         let [id] = msg.get_pending_message_id();
         let room = this._roomManager.lookupRoomByChannel(channel);
 
