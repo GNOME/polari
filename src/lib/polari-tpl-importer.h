@@ -42,6 +42,15 @@ GList *polari_tpl_importer_import_finish (PolariTplImporter  *self,
                                           gboolean           *is_room,
                                           GError            **error);
 
+void   polari_tpl_importer_collect_files_async  (PolariTplImporter   *self,
+                                                 GCancellable        *cancellable,
+                                                 GAsyncReadyCallback  callback,
+                                                 gpointer             user_data);
+
+GList *polari_tpl_importer_collect_files_finish (PolariTplImporter  *self,
+                                                 GAsyncResult       *result,
+                                                 GError            **error);
+
 #define POLARI_TYPE_TPL_MESSAGE (polari_tpl_message_get_type())
 
 G_END_DECLS
