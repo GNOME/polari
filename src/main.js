@@ -5,6 +5,7 @@
 import GLib from 'gi://GLib';
 
 import * as Config from './config.js';
+import Polari from 'gi://Polari';
 import {ngettext} from 'gettext';
 import {programInvocationName, programArgs} from 'system';
 
@@ -30,6 +31,7 @@ pkg.require({
     'Secret': '1',
     'TelepathyGLib': '0.12',
     'TelepathyLogger': '0.2',
+    'Tracker': '3.0',
 });
 pkg.requireSymbol('Adw', '1', 'ToolbarView');
 pkg.checkSymbol('Soup', '3.0');
@@ -40,3 +42,4 @@ let application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))
     application.hold();
 application.run([programInvocationName, ...programArgs]);
+Polari.util_close_tracker_connection();

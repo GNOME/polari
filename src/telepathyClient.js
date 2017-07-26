@@ -31,6 +31,7 @@ Gio._promisify(Tp.TextChannel.prototype,
     'send_message_async', 'send_message_finish');
 
 const SHELL_CLIENT_PREFIX = 'org.freedesktop.Telepathy.Client.GnomeShell';
+const DEFAULT_GRAPH = 'polari:irc';
 
 const SASLAuthenticationIface = `
 <node>
@@ -604,6 +605,8 @@ class TelepathyClient extends Tp.BaseClient {
 
             this._roomManager.ensureRoomForChannel(channel, false);
 
+            channel.connect('message-sent',
+                this._onMessageSent.bind(this));
             channel.connect('message-received',
                 this._onMessageReceived.bind(this));
             channel.connect('pending-message-removed',
@@ -696,7 +699,32 @@ class TelepathyClient extends Tp.BaseClient {
         this._app.send_notification(this._getIdentifyNotificationID(accountPath), notification);
     }
 
+    _logMessage(tpMessage, channel) {
+        const connection = Polari.util_get_tracker_connection();
+
+        const accountId = channel.connection.get_account().get_path_suffix();
+        const isRoom = channel.handle_type === Tp.HandleType.ROOM;
+        const channelName = channel.identifier;
+
+        const message = Polari.Message.new_from_tp_message(tpMessage);
+        const resource = message.to_tracker_resource(accountId, channelName, isRoom);
+
+        connection.update_resource_async(DEFAULT_GRAPH, resource, null, (o, res) => {
+            try {
+                connection.update_resource_finish(res);
+            } catch (e) {
+                log(`Failed to log message: ${e.message}`);
+            }
+        });
+    }
+
+    _onMessageSent(channel, msg) {
+        this._logMessage(msg, channel);
+    }
+
     _onMessageReceived(channel, msg) {
+        this._logMessage(msg, channel);
+
         let [id] = msg.get_pending_message_id();
         let room = this._roomManager.lookupRoomByChannel(channel);
 
