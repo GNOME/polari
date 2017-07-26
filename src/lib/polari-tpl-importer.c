@@ -352,6 +352,146 @@ polari_tpl_importer_import_finish (PolariTplImporter  *self,
 }
 
 static void
+free_file_list (GList *files)
+{
+  g_list_free_full (files, g_object_unref);
+}
+
+static GList *
+collect_files_recursively (GFile         *dir,
+                           GCancellable  *cancellable,
+                           GError       **error)
+{
+  GFileEnumerator *direnum;
+  GFileInfo *info;
+  GFile *child;
+  GList *files = NULL;
+
+  direnum = g_file_enumerate_children (dir,
+                                       G_FILE_ATTRIBUTE_STANDARD_TYPE,
+                                       G_FILE_QUERY_INFO_NONE,
+                                       cancellable,
+                                       error);
+
+  if (error && *error)
+    return NULL;
+
+  while (g_file_enumerator_iterate (direnum, &info, &child, cancellable, error))
+    {
+      if (!info)
+        break;
+
+      if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
+        files = g_list_concat (files, collect_files_recursively (child, cancellable, error));
+      else
+        files = g_list_prepend (files, g_object_ref (child));
+
+      if (error && *error)
+        break;
+    }
+  g_object_unref (direnum);
+
+  if (error && *error)
+    {
+      free_file_list (files);
+      return NULL;
+    }
+
+  return files;
+}
+
+static GList *
+collect_log_files (GFile         *dir,
+                   GCancellable  *cancellable,
+                   GError       **error)
+{
+  GFileEnumerator *direnum;
+  GFileInfo *info;
+  GFile *child;
+  GList *files = NULL;
+
+  direnum = g_file_enumerate_children (dir,
+                                       G_FILE_ATTRIBUTE_STANDARD_NAME,
+                                       G_FILE_QUERY_INFO_NONE,
+                                       cancellable,
+                                       error);
+
+  if (error && *error)
+    return NULL;
+
+  while (g_file_enumerator_iterate (direnum, &info, &child, cancellable, error))
+    {
+      if (!info)
+        break;
+
+      if (!g_str_has_prefix (g_file_info_get_name (info), "idle_irc_"))
+        continue;
+
+      files = g_list_concat (files, collect_files_recursively (child, cancellable, error));
+
+      if (error && *error)
+        break;
+    }
+  g_object_unref (direnum);
+
+  if (error && *error)
+    {
+      free_file_list (files);
+      return NULL;
+    }
+
+  return files;
+}
+
+static void
+collect_files_thread_func (GTask        *task,
+                           gpointer      source_object,
+                           gpointer      task_data,
+                           GCancellable *cancellable)
+{
+  GFile *log_root;
+  char *path;
+  GList *files;
+  GError *error = NULL;
+
+  path = g_build_filename (g_get_user_data_dir (), "TpLogger", "logs", NULL);
+  log_root = g_file_new_for_path (path);
+  g_free (path);
+
+  files = collect_log_files (log_root, cancellable, &error);
+
+  if (error)
+    g_task_return_error (task, error);
+  else
+    g_task_return_pointer (task, files, (GDestroyNotify)free_file_list);
+}
+
+void
+polari_tpl_importer_collect_files_async  (PolariTplImporter   *self,
+                                          GCancellable        *cancellable,
+                                          GAsyncReadyCallback  callback,
+                                          gpointer             user_data)
+{
+  GTask *task;
+
+  g_return_if_fail (POLARI_IS_TPL_IMPORTER (self));
+
+  task = g_task_new (self, cancellable, callback, user_data);
+  g_task_set_source_tag (task, polari_tpl_importer_collect_files_async);
+
+  g_task_run_in_thread (task, collect_files_thread_func);
+}
+
+GList *
+polari_tpl_importer_collect_files_finish (PolariTplImporter  *self,
+                                          GAsyncResult       *result,
+                                          GError            **error)
+{
+  g_return_val_if_fail (g_task_is_valid (result, self), NULL);
+  return g_task_propagate_pointer (G_TASK (result), error);
+}
+
+static void
 polari_tpl_importer_finalize (GObject *object)
 {
   //PolariTplImporter *self = (PolariTplImporter *)object;
