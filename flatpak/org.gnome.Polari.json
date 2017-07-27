@@ -137,6 +137,22 @@
             ]
         },
         {
+            "name": "tracker",
+            "cleanup": ["/bin", "/etc", "/libexec",
+                        "/lib/systemd", "/share/vala",
+                        "/lib/girepository-1.0/TrackerControl*",
+                        "/lib/girepository-1.0/TrackerMiner*",
+                        "/lib/libtracker-control*", "/lib/libtracker-miner*"],
+            "config-opts": ["--enable-minimal", "--enable-introspection",
+                            "--disable-static", "--with-bash-completion-dir=no"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://git.gnome.org/browse/tracker"
+                }
+            ]
+        },
+        {
             "name": "polari",
             "buildsystem": "meson",
             "builddir": true,
