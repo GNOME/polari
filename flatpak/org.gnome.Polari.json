@@ -26,13 +26,10 @@
         "--own-name=org.freedesktop.Telepathy.MissionControl5",
         "--own-name=org.freedesktop.Telepathy.ConnectionManager.idle",
         "--own-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
-        "--own-name=org.freedesktop.Telepathy.Client.Logger",
-        "--own-name=org.freedesktop.Telepathy.Logger",
         /* Keyring */
         "--talk-name=org.freedesktop.secrets",
         /* log files written by tp-logger outside the sandbox */
         "--filesystem=~/.local/share/TpLogger:ro",
-        "--env=TPL_LOG_DIR=.local/share",
         /* dconf */
         "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
         "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
@@ -82,21 +79,6 @@
                     "type": "archive",
                     "url": "https://telepathy.freedesktop.org/releases/telepathy-idle/telepathy-idle-0.2.0.tar.gz",
                     "sha256": "3013ad4b38d14ee630b8cc8ada5e95ccaa849b9a6fe15d2eaf6d0717d76f2fab"
-                }
-            ]
-        },
-        {
-            "name": "telepathy-logger",
-            "config-opts": ["--disable-static"],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2",
-                    "sha256": "8fcad534d653b1b365132c5b158adae947810ffbae9843f72dd1797966415dae"
-                },
-                {
-                    "type": "patch",
-                    "path": "tpl-override-basedir.patch"
                 }
             ]
         },
