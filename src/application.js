@@ -131,11 +131,6 @@ var Application = new Lang.Class({
                             Tp.CM_OBJECT_PATH_BASE + 'idle',
                             'org.freedesktop.Telepathy.ConnectionManager',
                             '/app/libexec/telepathy-idle');
-        this._ensureService(conn,
-                            Tp.CLIENT_BUS_NAME_BASE + 'Logger',
-                            Tp.CLIENT_OBJECT_PATH_BASE + 'Logger',
-                            Tp.IFACE_CLIENT,
-                            '/app/libexec/telepathy-logger');
         return true;
     },
 
