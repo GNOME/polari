@@ -30,7 +30,6 @@ pkg.require({
     'PangoCairo': '1.0',
     'Secret': '1',
     'TelepathyGLib': '0.12',
-    'TelepathyLogger': '0.2',
     'Tracker': '3.0',
 });
 pkg.requireSymbol('Adw', '1', 'ToolbarView');
