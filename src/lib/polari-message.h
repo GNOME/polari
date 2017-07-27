@@ -21,7 +21,6 @@
 
 #include <libtracker-sparql/tracker-sparql.h>
 #include <telepathy-glib/telepathy-glib.h>
-#include <telepathy-logger/telepathy-logger.h>
 
 G_BEGIN_DECLS
 
@@ -36,7 +35,6 @@ PolariMessage   *polari_message_new                 (const char *text,
                                                      gboolean    is_action,
                                                      gboolean    is_self);
 PolariMessage   *polari_message_new_from_tp_message (TpMessage *tp_message);
-PolariMessage   *polari_message_new_from_tpl_event  (TplEvent  *tpl_event);
 
 PolariMessage   *polari_message_copy  (PolariMessage *self);
 void             polari_message_free  (PolariMessage *self);
