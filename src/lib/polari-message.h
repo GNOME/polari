@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <libtracker-sparql/tracker-sparql.h>
 G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 #include <telepathy-glib/telepathy-glib.h>
 #include <telepathy-logger/telepathy-logger.h>
@@ -34,6 +35,11 @@ const char        *polari_message_get_sender (PolariMessage *message);
 GDateTime         *polari_message_get_time   (PolariMessage *message);
 gboolean           polari_message_is_action  (PolariMessage *message);
 gboolean           polari_message_is_self    (PolariMessage *message);
+
+TrackerResource *polari_message_to_tracker_resource (PolariMessage *message,
+                                                     const char    *account_id,
+                                                     const char    *channel_name,
+                                                     gboolean       is_room);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (PolariMessage, polari_message_free)
 

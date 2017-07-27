@@ -135,3 +135,97 @@ polari_message_is_self (PolariMessage *message)
 {
   return message->is_self;
 }
+
+static TrackerResource *
+create_account_resource (const char *id)
+{
+  TrackerResource *res;
+  g_autofree char *uri = NULL;
+
+  uri = g_strconcat ("urn:account:", id, NULL);
+
+  res = tracker_resource_new (uri);
+
+  tracker_resource_set_uri (res, "rdf:type", "polari:Account");
+  tracker_resource_set_string (res, "polari:id", id);
+
+  return res;
+}
+
+static TrackerResource *
+create_channel_resource (const char *name,
+                         const char *account_id,
+                         gboolean    is_room)
+{
+  TrackerResource *res;
+  g_autofree char *uri = NULL;
+
+  uri = g_strdup_printf ("urn:channel:%s:%s", account_id, name);
+
+  res = tracker_resource_new (uri);
+
+  tracker_resource_set_uri (res, "rdf:type", is_room ? "polari:Room"
+                                                     : "polari:Conversation");
+  tracker_resource_set_string (res, "polari:name", name);
+  tracker_resource_set_take_relation (res, "polari:account",
+                                      create_account_resource (account_id));
+
+  return res;
+}
+
+static TrackerResource *
+create_sender_resource (const char *nick,
+                        const char *account_id,
+                        gboolean    is_self)
+{
+  TrackerResource *res;
+  g_autofree char *uri = NULL, *id = NULL;
+
+  id = g_ascii_strdown (nick, -1);
+  uri = g_strdup_printf ("urn:contact:%s:%s", account_id, id);
+
+  res = tracker_resource_new (uri);
+
+  tracker_resource_set_uri (res, "rdf:type", is_self ? "polari:SelfContact"
+                                                     : "polari:Contact");
+  tracker_resource_set_string (res, "polari:nick", nick);
+
+  return res;
+}
+
+/**
+ * polari_message_to_tracker_resource:
+ *
+ * Returns: (transfer full):
+ */
+TrackerResource *
+polari_message_to_tracker_resource (PolariMessage *message,
+                                    const char    *account_id,
+                                    const char    *channel_name,
+                                    gboolean       is_room)
+{
+  TrackerResource *res, *rel;
+  GDateTime *time;
+
+  res = tracker_resource_new (NULL);
+
+  tracker_resource_set_uri (res, "rdf:type", "polari:Message");
+
+  if (polari_message_is_action (message))
+    tracker_resource_set_boolean (res, "polari:isAction", TRUE);
+
+  time = polari_message_get_time (message);
+  tracker_resource_set_datetime (res, "polari:time", time);
+
+  tracker_resource_set_string (res, "polari:text", polari_message_get_text (message));
+
+  rel = create_sender_resource (polari_message_get_sender (message),
+                                account_id,
+                                polari_message_is_self (message));
+  tracker_resource_set_take_relation (res, "polari:sender", rel);
+
+  rel = create_channel_resource (channel_name, account_id, is_room);
+  tracker_resource_set_take_relation (res, "polari:channel", rel);
+
+  return res;
+}
