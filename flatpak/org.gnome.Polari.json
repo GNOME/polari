@@ -24,7 +24,6 @@
         "--own-name=org.freedesktop.Telepathy.ConnectionManager.idle",
         "--own-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
         "--own-name=org.freedesktop.Telepathy.Client.Logger",
-        "--own-name=org.freedesktop.Telepathy.Logger",
         "--talk-name=org.freedesktop.secrets",
         "--filesystem=~/.local/share/TpLogger",
         "--env=TPL_LOG_DIR=.local/share",
@@ -95,33 +94,6 @@
                     "url": "https://www.github.com/TelepathyIM/telepathy-idle.git",
                     "tag": "telepathy-idle-0.2.1",
                     "commit": "b0f139ff63c4d5f9471423422f298443ae222f9a"
-                }
-            ],
-            "cleanup": [
-                "/share/dbus-1"
-            ]
-        },
-        {
-            "name": "telepathy-logger",
-            "config-opts": ["--disable-static", "--disable-gtk-doc"],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://www.github.com/TelepathyIM/telepathy-logger.git",
-                    "tag": "telepathy-logger-0.8.2",
-                    "commit": "b342c568fe855786151e4f0f96276fc6c3cc7e43"
-                },
-                {
-                    "type": "patch",
-                    "path": "tpl-override-basedir.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "tpl-python3.patch"
-                },
-                {
-                    "type": "patch",
-                    "path": "tpl-drop-intltool.patch"
                 }
             ],
             "cleanup": [
