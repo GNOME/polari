@@ -107,7 +107,8 @@ libpolari_dep = declare_dependency(
 
 polari_log_tool = executable('polari-log-tool', 'polari-log-tool.c',
   dependencies: libpolari_dep,
-  install_rpath: pkglibdir,
+  install_rpath: ':'.join([join_paths(prefix, libdir),
+                           join_paths(prefix, pkglibdir)]),
   install: true
 )
 
