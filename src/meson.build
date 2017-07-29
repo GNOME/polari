@@ -118,7 +118,8 @@ libpolari = shared_library('polari-1.0', libsources + libsources_private + lib_r
 polari_log_tool = executable('polari-log-tool', 'polari-log-tool.c',
   dependencies: [gio, telepathy_glib, tracker],
   link_with: libpolari,
-  install_rpath: pkglibdir,
+  install_rpath: ':'.join([join_paths(prefix, libdir),
+                           join_paths(prefix, pkglibdir)]),
   install: true
 )
 
