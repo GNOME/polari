@@ -146,7 +146,7 @@ var JoinDialog = new Lang.Class({
         });
         this._filterEntry.connect('activate', () => {
             if (this._filterEntry.text.length > 0)
-                this._connectionsList.activateFirst();
+                this._connectionsList.activateSelected();
         });
     },
 
