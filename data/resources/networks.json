@@ -200,6 +200,7 @@
   {
     "name": "EFnet",
     "id": "efnet",
+    "favorite": true,
     "servers": [
       { "ssl": false, "port": 6667, "address": "irc.blackened.com" },
       { "ssl": false, "port": 6667, "address": "irc.Prison.NET" },
@@ -477,6 +478,7 @@
   {
     "name": "OFTC",
     "id": "oftc",
+    "favorite": true,
     "servers": [
       { "ssl": false, "port": 6667, "address": "irc.oftc.net" }
     ]
