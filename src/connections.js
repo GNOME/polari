@@ -53,6 +53,7 @@ var ConnectionRow = new Lang.Class({
 
         let insensitiveDesc = new Gtk.Label({ label: _("Already added"),
                                               hexpand: true,
+                                              no_show_all: true,
                                               halign: Gtk.Align.END });
         box.add(insensitiveDesc);
 
