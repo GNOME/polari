@@ -72,10 +72,20 @@ var ConnectionRow = new Lang.Class({
 var ConnectionsList = new Lang.Class({
     Name: 'ConnectionsList',
     Extends: Gtk.ScrolledWindow,
+    Properties: {
+        'favorites-only': GObject.ParamSpec.boolean('favorites-only',
+                                                    'favorites-only',
+                                                    'favorites-only',
+                                                    GObject.ParamFlags.READWRITE |
+                                                    GObject.ParamFlags.CONSTRUCT_ONLY,
+                                                    false)
+    },
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
                'account-selected': {}},
 
     _init: function(params) {
+        this._favoritesOnly = false;
+
         this.parent(params);
 
         this.hscrollbar_policy = Gtk.PolicyType.NEVER;
@@ -104,6 +114,18 @@ var ConnectionsList = new Lang.Class({
         this._networksManager.connect('changed',
                                       Lang.bind(this, this._networksChanged));
         this._networksChanged();
+    },
+
+    get favorites_only() {
+        return this._favoritesOnly;
+    },
+
+    set favorites_only(favsOnly) {
+        if (this._favoritesOnly == favsOnly)
+            return;
+
+        this._favoritesOnly = favsOnly;
+        this.notify('favorites-only');
     },
 
     setFilter: function(filter) {
@@ -140,6 +162,10 @@ var ConnectionsList = new Lang.Class({
         }).map(a => a.service);
 
         this._networksManager.networks.forEach(network => {
+            if (this._favoritesOnly &&
+                !this._networksManager.getNetworkIsFavorite(network.id))
+                return;
+
             let sensitive = usedNetworks.indexOf(network.id) < 0;
             this._rows.set(network.id,
                            new ConnectionRow({ id: network.id,
@@ -172,6 +198,9 @@ var ConnectionsList = new Lang.Class({
 
     _setAccountRowSensitive: function(account, sensitive) {
         if (!this._networksManager.getAccountIsPredefined(account))
+            return;
+
+        if (!this._rows.has(account.service))
             return;
 
         this._rows.get(account.service).sensitive = sensitive;
