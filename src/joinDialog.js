@@ -144,7 +144,7 @@ var JoinDialog = GObject.registerClass({
         });
         this._filterEntry.connect('activate', () => {
             if (this._filterEntry.text.length > 0)
-                this._connectionsList.activateFirst();
+                this._connectionsList.activateSelected();
         });
     }
 
