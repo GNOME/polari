@@ -139,12 +139,18 @@ var ConnectionsList = GObject.registerClass({
     }
 
     setFilter(filter) {
-        if (Utils.updateTerms(this._filterTerms, filter))
-            this._list.invalidate_filter();
+        if (!Utils.updateTerms(this._filterTerms, filter))
+            return;
+
+        this._list.invalidate_filter();
+
+        let row = this._list.get_row_at_y(0);
+        if (row)
+            this._list.select_row(row);
     }
 
-    activateFirst() {
-        let row = this._list.get_row_at_y(0);
+    activateSelected() {
+        let row = this._list.get_selected_row();
         if (row)
             row.activate();
     }
