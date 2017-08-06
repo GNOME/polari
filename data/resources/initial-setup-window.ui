@@ -34,6 +34,61 @@
         <property name="transition-type">slide-left-right</property>
         <property name="vexpand">True</property>
         <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="row_spacing">6</property>
+            <property name="column_spacing">18</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="pixel_size">64</property>
+                <property name="icon_name">network-offline-symbolic</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Not connected</property>
+                <style>
+                  <class name="polari-setup-title"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Please connect to the internet to continue the setup.</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">30</property>
+                <property name="xalign">0</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">offline-hint</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
             <property name="visible">True</property>

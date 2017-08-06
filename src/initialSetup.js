@@ -7,7 +7,8 @@ const Utils = imports.utils;
 
 const SetupPage = {
     CONNECTION: 0,
-    ROOM: 1
+    ROOM: 1,
+    OFFLINE: 2
 };
 
 var InitialSetupWindow = new Lang.Class({
@@ -56,14 +57,29 @@ var InitialSetupWindow = new Lang.Class({
             }
         });
 
-        this._setPage(SetupPage.CONNECTION);
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._networkMonitor.connect('notify::network-available',
+                                     Lang.bind(this, this._onNetworkAvailableChanged));
+        this._onNetworkAvailableChanged();
+    },
+
+    _onNetworkAvailableChanged: function() {
+        if (this._networkMonitor.network_available)
+            this._setPage(this._currentAccount ? SetupPage.ROOM
+                                               : SetupPage.CONNECTION);
+        else
+            this._setPage(SetupPage.OFFLINE);
     },
 
     _setPage: function(page) {
-        let isLastPage = page == SetupPage.ROOM;
+        if (page == SetupPage.CONNECTION)
+            this._contentStack.visible_child_name = 'connections';
+        else if (page == SetupPage.ROOM)
+            this._contentStack.visible_child_name = 'rooms';
+        else
+            this._contentStack.visible_child_name = 'offline-hint';
 
-        this._contentStack.visible_child_name = isLastPage ? 'rooms'
-                                                           : 'connections';
+        let isLastPage = page == SetupPage.ROOM;
 
         this._prevButton.label = isLastPage ? _("_Back") : _("_Cancel");
         this._nextButton.label = isLastPage ? _("_Done") : _("_Next");
@@ -91,12 +107,14 @@ var InitialSetupWindow = new Lang.Class({
     get _page() {
         if (this._contentStack.visible_child_name == 'rooms')
             return SetupPage.ROOM;
-        else
+        else if (this._contentStack.visible_child_name == 'connections')
             return SetupPage.CONNECTION;
+        else
+            return SetupPage.OFFLINE;
     },
 
     _updateNextSensitivity: function() {
-        let sensitive = true;
+        let sensitive = this._page != SetupPage.OFFLINE;
 
         if (this._page == SetupPage.ROOM)
             sensitive = this._serverRoomList.can_join;
