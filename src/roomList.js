@@ -161,7 +161,6 @@ var RoomListHeader = new Lang.Class({
         this._account = params.account;
         delete params.account;
 
-        this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._app = Gio.Application.get_default();
 
         this.parent(params);
