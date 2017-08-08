@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/org/gnome/Polari">
     <file alias="css/application.css">resources/application.css</file>
+    <file alias="data/emoji.json">resources/emoji.json</file>
     <file alias="data/networks.json">resources/networks.json</file>
     <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">resources/help-overlay.ui</file>
     <file alias="gtk/menus.ui" preprocess="xml-stripblanks">resources/menus.ui</file>
