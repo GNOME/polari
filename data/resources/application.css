@@ -106,6 +106,47 @@ treeview.polari-server-room-list {
     padding: 6px;
 }
 
+.emoji-picker { padding-left: 0; padding-right: 0; }
+
+.emoji-picker undershoot.bottom { border-bottom: 1px solid @borders; }
+.emoji-picker undershoot.bottom:backdrop { border-bottom-color: @unfocused_borders; }
+
+.emoji-picker undershoot.top { border-top: 1px solid @borders; }
+.emoji-picker undershoot.top:backdrop { border-top-color: @unfocused_borders; }
+
+.emoji-picker entry { margin: 8px 10px 10px; }
+
+.emoji {
+    font-size: xx-large;
+    padding: 8px;
+    border-radius: 8px;
+}
+.emoji:hover { background: @theme_selected_bg_color; }
+
+.emoji-section {
+    border: 0 solid transparent;
+    border-bottom-width: 3px;
+    border-radius: 0;
+
+    margin: 2px 4px;
+    padding: 3px 0 0;
+    min-width: 38px;
+    min-height: 28px;
+
+    outline-offset: -5px;
+
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+.emoji-section:hover { border-color: @borders; }
+.emoji-section:checked { border-color: @theme_selected_bg_color; }
+.emoji-section:backdrop:not(:checked) { border-color: transparent; }
+
+/* HighContrast needs this ... */
+.emoji-section:checked { color: @theme_fg_color; }
+.emoji-section:checked:backdrop { color: @theme_unfocused_fg_color; }
+
 /* Hack: Move separator by 1px so that it aligns with the sidebar */
 .titlebar > separator:dir(ltr) { margin-left: -1px; }
 .titlebar > headerbar:first-child:dir(ltr) { margin-right: 1px; }

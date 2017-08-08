@@ -6,6 +6,7 @@
     <file>appNotifications.js</file>
     <file>chatView.js</file>
     <file>connections.js</file>
+    <file>emojiPicker.js</file>
     <file>entryArea.js</file>
     <file>ircParser.js</file>
     <file>joinDialog.js</file>
