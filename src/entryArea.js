@@ -7,6 +7,7 @@ const Gspell = imports.gi.Gspell;
 const Gtk = imports.gi.Gtk;
 
 const ChatView = imports.chatView;
+const EmojiPicker = imports.emojiPicker;
 const IrcParser = imports.ircParser;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -36,6 +37,10 @@ var ChatEntry = new Lang.Class({
 
         PasteManager.DropTargetIface.addTargets(this, this);
 
+        this._emojiPicker = null;
+
+        this.connect('icon-press', Lang.bind(this, this._showEmojiPicker));
+
         if (!_checker)
             _checker = new Gspell.Checker();
 
@@ -46,6 +51,26 @@ var ChatEntry = new Lang.Class({
         spellEntry.set_inline_spell_checking(true);
 
         this._useDefaultHandler = false;
+    },
+
+    _showEmojiPicker: function() {
+        if (!this.is_sensitive() || !this.get_mapped())
+            return;
+
+        if (!this._emojiPicker) {
+            this._emojiPicker = new EmojiPicker.EmojiPicker();
+            this._emojiPicker.connect('emoji-picked', (w, emoji) => {
+                this.delete_selection();
+                let pos = this.insert_text(emoji, -1, this.get_position());
+                this.set_position(pos);
+                this.grab_focus_without_selecting();
+            });
+        }
+
+        let rect = this.get_icon_area(Gtk.EntryIconPosition.SECONDARY);
+        this._emojiPicker.set_relative_to(this);
+        this._emojiPicker.set_pointing_to(rect);
+        this._emojiPicker.popup();
     },
 
     get can_drop() {
