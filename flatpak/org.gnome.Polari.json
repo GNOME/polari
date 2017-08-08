@@ -180,6 +180,25 @@
             ]
         },
         {
+            "name": "noto-emoji",
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/googlei18n/noto-emoji.git"
+                }
+            ],
+            "build-commands": [
+                "mkdir -p /app/share/fonts/google-noto-emoji",
+                "install -m 0644 fonts/*.ttf /app/share/fonts/google-noto-emoji"
+            ],
+            "cleanup-commands": [
+                "touch -d @0 /app/share/fonts",
+                "touch -d @0 /app/share/fonts/*",
+                "fc-cache -fs"
+            ]
+        },
+        {
             "name": "gspell",
             "config-opts": ["--disable-vala", "--disable-static"],
             "sources": [
