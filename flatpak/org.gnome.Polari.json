@@ -100,6 +100,85 @@
                 }
             ]
         },
+        /* For fontconfig, until color emoji support makes it into the SDK */
+        {
+            "name": "python-lxml",
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://lxml.de/files/lxml-3.8.0.tgz",
+                    "sha256": "736f72be15caad8116891eb6aa4a078b590d231fdc63818c40c21624ac71db96"
+                },
+                {
+                    "type": "file",
+                    "path": "xslt-config"
+                }
+            ],
+            "build-commands": [
+                "python2 setup.py build --with-xslt-config=./xslt-config",
+                "python2 setup.py install --prefix=/app --with-xslt-config=./xslt-config"
+            ]
+        },
+        {
+            "name": "python-six",
+            "buildsystem": "simple",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://pypi.python.org/packages/b3/b2/238e2590826bfdd113244a40d9d3eb26918bd798fc187e2360a8367068db/six-1.10.0.tar.gz",
+                    "sha256": "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
+                }
+            ],
+            "build-commands": [
+                "python2 setup.py build",
+                "python2 setup.py install --prefix=/app"
+            ],
+            "ensure-writable": [
+                "/lib/python2.7/site-packages/easy-install.pth"
+             ]
+        },
+        {
+            "name": "fontconfig",
+            "config-opts": [
+                "--disable-static",
+                "--disable-docs"
+            ],
+            "sources": [
+                {
+                    "url": "https://anongit.freedesktop.org/git/fontconfig",
+                    "type": "git"
+                }
+            ],
+            "post-install": [
+                "cp -u /etc/fonts/conf.d/* /app/etc/fonts/conf.d",
+                "cp -u /usr/share/fontconfig/conf.avail/* /app/share/fontconfig/conf.avail"
+            ]
+        },
+        /* Color-emoji enabled cairo */
+        {
+            "name": "cairo",
+            "config-opts": [
+                "--disable-static",
+                "--enable-xlib",
+                "--enable-ft",
+                "--enable-svg",
+                "--enable-ps",
+                "--enable-pdf",
+                "--enable-tee",
+                "--enable-gobject"
+            ],
+            "sources": [
+                {
+                    "url": "https://anongit.freedesktop.org/git/cairo",
+                    "type": "git",
+                    "disable-fsckobjects": true
+                }
+            ],
+            "cleanup": [
+                "/bin"
+            ]
+        },
         {
             "name": "gspell",
             "config-opts": ["--disable-vala", "--disable-static"],
