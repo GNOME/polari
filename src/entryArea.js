@@ -19,6 +19,7 @@ const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
 
 let _checker = null;
+let _emojiPicker = null;
 
 var ChatEntry = new Lang.Class({
     Name: 'ChatEntry',
@@ -37,9 +38,14 @@ var ChatEntry = new Lang.Class({
 
         PasteManager.DropTargetIface.addTargets(this, this);
 
-        this._emojiPicker = null;
+        this._emojiPickedId = 0;
 
         this.connect('icon-press', Lang.bind(this, this._showEmojiPicker));
+        this.connect('unmap', () => {
+            if (this._emojiPickedId)
+                _emojiPicker.disconnect(this._emojiPickedId);
+            this._emojiPickedId = 0;
+        });
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('show-emoji-picker');
@@ -61,20 +67,22 @@ var ChatEntry = new Lang.Class({
         if (!this.is_sensitive() || !this.get_mapped())
             return;
 
-        if (!this._emojiPicker) {
-            this._emojiPicker = new EmojiPicker.EmojiPicker();
-            this._emojiPicker.connect('emoji-picked', (w, emoji) => {
-                this.delete_selection();
-                let pos = this.insert_text(emoji, -1, this.get_position());
-                this.set_position(pos);
-                this.grab_focus_without_selecting();
-            });
-        }
+        if (!_emojiPicker)
+            _emojiPicker = new EmojiPicker.EmojiPicker();
+
+        if (!this._emojiPickedId)
+            this._emojiPickedId = _emojiPicker.connect('emoji-picked',
+                (w, emoji) => {
+                    this.delete_selection();
+                    let pos = this.insert_text(emoji, -1, this.get_position());
+                    this.set_position(pos);
+                    this.grab_focus_without_selecting();
+                });
 
         let rect = this.get_icon_area(Gtk.EntryIconPosition.SECONDARY);
-        this._emojiPicker.set_relative_to(this);
-        this._emojiPicker.set_pointing_to(rect);
-        this._emojiPicker.popup();
+        _emojiPicker.set_relative_to(this);
+        _emojiPicker.set_pointing_to(rect);
+        _emojiPicker.popup();
     },
 
     get can_drop() {
