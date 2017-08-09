@@ -41,6 +41,10 @@ var ChatEntry = new Lang.Class({
 
         this.connect('icon-press', Lang.bind(this, this._showEmojiPicker));
 
+        let app = Gio.Application.get_default();
+        let action = app.lookup_action('show-emoji-picker');
+        action.connect('activate', Lang.bind(this, this._showEmojiPicker));
+
         if (!_checker)
             _checker = new Gspell.Checker();
 

@@ -187,6 +187,8 @@ var Application = new Lang.Class({
             parameter_type: GLib.VariantType.new('o') },
           { name: 'discard-identify-password',
             parameter_type: GLib.VariantType.new('o') },
+          { name: 'show-emoji-picker',
+            accels: ['<Primary>e'] },
           { name: 'start-client',
             activate: Lang.bind(this, this._onStartClient) },
           { name: 'help',
