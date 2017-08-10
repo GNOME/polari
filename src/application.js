@@ -430,6 +430,11 @@ var Application = new Lang.Class({
     },
 
     _needsInitialSetup: function() {
+        if (GLib.getenv('POLARI_FORCE_INITIAL_SETUP')) {
+            GLib.unsetenv('POLARI_FORCE_INITIAL_SETUP');
+            return true;
+        }
+
         let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
                                       '/polari/initial-setup-completed');
         try {
