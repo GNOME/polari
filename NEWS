@@ -1,3 +1,18 @@
+3.25.90 - "Science Fiction 👄 Double Feature"
+=============================================
+* Change to nominal nick when it becomes available [Florian; #710731]
+* Revamp initial setup [Danny, Florian, Bastian; #772458]
+* Add an Emoji picker to the chat entry [Florian; #755579]
+* Misc. bug fixes [Danny; #774212]
+
+Contributors:
+  Bastian Ilsø, Danny Mølgaard, Florian Müllner
+
+Translations:
+  Aurimas Černius [lt], Matej Urbančič [sl], Daniel Mustieles [es],
+  Marek Cernocky [cs], Kukuh Syafaat [id], Fabio Tomat [fur],
+  Pawan Chitrakar [ne]
+
 3.25.4 - "You're 21. You're Like Almost 30"
 ===========================================
 * Support NickServ bots that don't handle nick in identify command
