@@ -751,7 +751,8 @@ var Application = new Lang.Class({
             ],
             artists: [
                 'Sam Hewitt <hewittsamuel@gmail.com>',
-                'Jakub Steiner <jimmac@gmail.com>'
+                'Jakub Steiner <jimmac@gmail.com>',
+                'Lapo Calamandrei <calamandrei@gmail.com>'
             ],
             translator_credits: _("translator-credits"),
             comments: _("An Internet Relay Chat Client for GNOME"),
