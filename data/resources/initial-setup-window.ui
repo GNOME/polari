@@ -118,7 +118,7 @@
                     <property name="max-width-chars">42</property>
                     <property name="wrap">True</property>
                     <property name="justify">center</property>
-                    <property name="label" translatable="yes">Polari is an easy way to chat using IRC. Select a networks to get started.</property>
+                    <property name="label" translatable="yes">Polari is an easy way to chat using IRC. Select a network to get started.</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
