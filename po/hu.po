@@ -2,7 +2,7 @@
 # Copyright (C) 2014-2016 Free Software Foundation, Inc.
 # This file is distributed under the same license as the polari package.
 #
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2014, 2016.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2014, 2016, 2017.
 # Balázs Meskó <meskobalazs at gmail dot com>, 2014.
 # Balázs Úr <urbalazs at gmail dot com>, 2014, 2015, 2016.
 msgid ""
@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-06-21 16:43+0000\n"
-"PO-Revision-Date: 2017-06-21 21:52+0200\n"
-"Last-Translator: Meskó Balázs <meskobalazs@fedoraproject.org>\n"
+"POT-Creation-Date: 2017-08-13 21:20+0000\n"
+"PO-Revision-Date: 2017-08-18 21:09+0200\n"
+"Last-Translator: Gabor Kelemen <kelemeng at ubuntu dot com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:661
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Interneten továbbított csevegés (IRC) kliens a GNOME-hoz"
 
@@ -163,8 +163,8 @@ msgstr "_Becenév"
 msgid "_Real Name"
 msgstr "Való_di név"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:148
-#: data/resources/join-room-dialog.ui:11
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "Mé_gse"
 
@@ -184,7 +184,7 @@ msgstr "_Módosítás"
 msgid "Change nickname"
 msgstr "Becenév módosítása"
 
-#: data/resources/entry-area.ui:158
+#: data/resources/entry-area.ui:159
 msgid "_Paste"
 msgstr "_Beillesztés"
 
@@ -210,53 +210,93 @@ msgstr "Felhasználólista megjelenítése"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Emodzsi-választó megjelenítése"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: data/resources/help-overlay.ui:48
+#: data/resources/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: data/resources/help-overlay.ui:57
+#: data/resources/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigáció"
 
-#: data/resources/help-overlay.ui:61
+#: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Következő szoba"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Előző szoba"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Következő szoba olvasatlan üzenetekkel"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Előző szoba olvasatlan üzenetekkel"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Első szoba"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Utolsó szoba"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Első - kilencedik szoba"
+
+#: data/resources/initial-setup-window.ui:10
+#| msgid "Polari"
+msgid "Polari Setup"
+msgstr "Polari beállításai"
+
+#: data/resources/initial-setup-window.ui:60
+#| msgid "Connected"
+msgid "Not connected"
+msgstr "Nincs kapcsolat"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Csatlakozzon az internetre a beállítás folytatásához."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+#| msgid "Learn more about Polari"
+msgid "Welcome to Polari"
+msgstr "Üdvözli a Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"A Polari egyszerű lehetőséget ad az IRC csevegésre. Válasszon egy hálózatot a "
+"kezdéshez."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Válassza ki a szobákat a csatlakozáshoz. A + gombra kattintva később további "
+"hálózatok és szobák is felvehetők."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
 msgid "Join Chat Room"
@@ -355,33 +395,34 @@ msgid "Will notify if user appears online."
 msgstr "Értesíteni fog, ha a felhasználó elérhető lesz."
 
 #: data/resources/user-details.ui:181
-msgid "Message"
-msgstr "Üzenet"
+#| msgid "End conversation"
+msgid "Start Conversation"
+msgstr "Beszélgetés kezdése"
 
-#: src/application.js:45
+#: src/application.js:47
 msgid "Start Telepathy client"
 msgstr "Telepathy ügyfél indítása"
 
-#: src/application.js:48
+#: src/application.js:50
 msgid "Print version and exit"
 msgstr "Verzió kiírása és kilépés"
 
-#: src/application.js:357 src/utils.js:185
+#: src/application.js:380 src/utils.js:185
 msgid "Failed to open link"
 msgstr "A hivatkozás megnyitása nem sikerült"
 
-#: src/application.js:562
+#: src/application.js:657
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eltávolítva."
 
-#: src/application.js:660
+#: src/application.js:757
 msgid "translator-credits"
 msgstr ""
 "Kelemen Gábor <kelemeng at ubuntu dot com>\n"
 "Meskó Balázs <meskobalazs at gmail dot com>"
 
-#: src/application.js:666
+#: src/application.js:763
 msgid "Learn more about Polari"
 msgstr "Tudjon meg többet a Polari-ról"
 
@@ -540,12 +581,12 @@ msgid "Already added"
 msgstr "Már fel van véve"
 
 #. Translators: %s is a connection name
-#: src/connections.js:432
+#: src/connections.js:468
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "„%s” tulajdonságai"
 
-#: src/connections.js:474
+#: src/connections.js:510
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -553,50 +594,62 @@ msgstr ""
 "A Polari egy hálózati hiba miatt bontotta a kapcsolatot. Kérem ellenőrizze, "
 "hogy a cím mező helyes-e."
 
-#: src/entryArea.js:301
+#: src/entryArea.js:338
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Beilleszt %s szövegsort egy nyilvános beillesztési szolgáltatásba?"
 msgstr[1] "Beilleszt %s szövegsort egy nyilvános beillesztési szolgáltatásba?"
 
-#: src/entryArea.js:305
+#: src/entryArea.js:342
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "%s szövegsor feltöltése egy nyilvános beillesztési szolgáltatásba…"
 msgstr[1] "%s szövegsor feltöltése egy nyilvános beillesztési szolgáltatásba…"
 
-#: src/entryArea.js:312
+#: src/entryArea.js:349
 msgid "Upload image to public paste service?"
 msgstr "Feltölti a képet egy nyilvános beillesztési szolgáltatásba?"
 
-#: src/entryArea.js:313
+#: src/entryArea.js:350
 msgid "Uploading image to public paste service…"
 msgstr "Kép feltöltése egy nyilvános beillesztési szolgáltatásba…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:334
+#: src/entryArea.js:371
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Feltölti a(z) „%s” fájlt egy nyilvános beillesztési szolgáltatásba?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:336
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "A(z) „%s” fájl feltöltése egy nyilvános beillesztési szolgáltatásba…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:345
+#: src/entryArea.js:382
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s itt: #%s"
 
-#: src/entryArea.js:347
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Beillesztés innen: %s"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "_Vissza"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "_Kész"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "Kö_vetkező"
 
 #. commands that would be nice to support:
 #.
@@ -700,7 +753,7 @@ msgstr "Ismert parancsok:"
 msgid "Users on %s:"
 msgstr "Felhasználók ezen: %s:"
 
-#: src/ircParser.js:276
+#: src/ircParser.js:270
 msgid "No topic set"
 msgstr "Nincs téma beállítva"
 
@@ -708,7 +761,7 @@ msgstr "Nincs téma beállítva"
 msgid "Add Network"
 msgstr "Hálózat hozzáadása"
 
-#: src/mainWindow.js:385
+#: src/mainWindow.js:383
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -723,54 +776,54 @@ msgstr "Csevegőszoba elhagyása"
 msgid "End conversation"
 msgstr "Beszélgetés befejezése"
 
-#: src/roomList.js:225
+#: src/roomList.js:224
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "A(z) %s hálózattal probléma van"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:282
+#: src/roomList.js:281
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:289
+#: src/roomList.js:288
 msgid "Connection Problem"
 msgstr "Kapcsolódási probléma"
 
-#: src/roomList.js:305
+#: src/roomList.js:304
 msgid "Connected"
 msgstr "Kapcsolódva"
 
-#: src/roomList.js:307
+#: src/roomList.js:306
 msgid "Connecting…"
 msgstr "Kapcsolódás…"
 
-#: src/roomList.js:309 src/userList.js:422
+#: src/roomList.js:308 src/userList.js:422
 msgid "Offline"
 msgstr "Nem érhető el"
 
-#: src/roomList.js:311
+#: src/roomList.js:310
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/roomList.js:331
+#: src/roomList.js:330
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nem sikerült biztonságos módon kapcsolódni ide: %s."
 
-#: src/roomList.js:334
+#: src/roomList.js:333
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Ehhez jelszó szükséges: %s."
 
-#: src/roomList.js:340
+#: src/roomList.js:339
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nem sikerült kapcsolódni ide: %s. A kiszolgáló elfoglalt."
 
-#: src/roomList.js:343
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nem sikerült kapcsolódni ide: %s."
@@ -783,7 +836,7 @@ msgstr "_Jelszó mentése"
 msgid "Should the password be saved?"
 msgstr "A jelszó mentendő?"
 
-#: src/roomStack.js:141 src/telepathyClient.js:578
+#: src/roomStack.js:141 src/telepathyClient.js:577
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -794,18 +847,18 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Csatlakozás egy szobához a + gomb használatával."
 
-#: src/telepathyClient.js:403
+#: src/telepathyClient.js:402
 msgid "Good Bye"
 msgstr "Viszlát"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:577
+#: src/telepathyClient.js:576
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Menti a(z) %s jelszót ehhez: %s?"
 
-#: src/telepathyClient.js:581
+#: src/telepathyClient.js:580
 msgid "Save"
 msgstr "Mentés"
 
@@ -885,6 +938,9 @@ msgstr "Polari kiszolgáló jelszó ehhez: %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polari NickServ jelszó ehhez: %s"
+
+#~ msgid "Message"
+#~ msgstr "Üzenet"
 
 #~ msgid "Room _Name"
 #~ msgstr "Szoba_név"
