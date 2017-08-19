@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-02 00:58+0000\n"
-"PO-Revision-Date: 2017-08-02 07:09+0200\n"
+"POT-Creation-Date: 2017-08-18 19:10+0000\n"
+"PO-Revision-Date: 2017-08-19 16:48+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
-"Language-Team: čeština <gnome-cs-list@gnome.org>>\n"
+"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:712
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Komunikační klient IRC pro GNOME"
 
@@ -159,8 +159,8 @@ msgstr "Přez_dívka"
 msgid "_Real Name"
 msgstr "_Skutečné jméno"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:148
-#: data/resources/join-room-dialog.ui:11
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "_Zrušit"
 
@@ -180,7 +180,7 @@ msgstr "Z_měnit"
 msgid "Change nickname"
 msgstr "Změnit přezdívku"
 
-#: data/resources/entry-area.ui:158
+#: data/resources/entry-area.ui:159
 msgid "_Paste"
 msgstr "V_ložit"
 
@@ -206,53 +206,90 @@ msgstr "Zobrazit seznam uživatelů"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Zobrazit výběr Emodži"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: data/resources/help-overlay.ui:48
+#: data/resources/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
-#: data/resources/help-overlay.ui:57
+#: data/resources/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigace"
 
-#: data/resources/help-overlay.ui:61
+#: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Následující místnost"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Předchozí místnost"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Následující místnost s nepřečtenými zprávami"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Předchozí místnost s nepřečtenými zprávami"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "První místnost"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Poslední místnost"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "První – devátá místnost"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "Nastavení Polari"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "Nepřipojeno"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Připojte se prosím k Internetu, aby byl možné pokračovat v nastavení."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "Vítejte v Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari poskytuje snadný způsob, jak komunikovat přes IRC. Začněte výběrem "
+"sítě."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Vyberte místnost, do které chcete vstoupit. Další sítě a místnosti můžete "
+"přidat později pomocí tlačítka +."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
 msgid "Join Chat Room"
@@ -354,28 +391,28 @@ msgstr "Budete upozorněni, kdy se uživatel připojí."
 msgid "Start Conversation"
 msgstr "Začít konverzaci"
 
-#: src/application.js:46
+#: src/application.js:47
 msgid "Start Telepathy client"
 msgstr "Spustit klienta Telepathy"
 
-#: src/application.js:49
+#: src/application.js:50
 msgid "Print version and exit"
 msgstr "Vypsat verzi a skončit"
 
-#: src/application.js:366 src/utils.js:185
+#: src/application.js:380 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Selhalo otevření odkazu"
 
-#: src/application.js:612
+#: src/application.js:657
 #, javascript-format
 msgid "%s removed."
 msgstr "Účet %s byl odstraněn."
 
-#: src/application.js:711
+#: src/application.js:757
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
-#: src/application.js:717
+#: src/application.js:763
 msgid "Learn more about Polari"
 msgstr "Dozvědět se více o Polari"
 
@@ -536,12 +573,12 @@ msgid "Already added"
 msgstr "Již bylo přidáno"
 
 #. Translators: %s is a connection name
-#: src/connections.js:432
+#: src/connections.js:468
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Vlastnosti připojení „%s“"
 
-#: src/connections.js:474
+#: src/connections.js:510
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -549,7 +586,7 @@ msgstr ""
 "Polari se odpojilo kvůli chybě sítě. Zkontrolujte prosím, jestli je pole s "
 "adresou správné."
 
-#: src/entryArea.js:301
+#: src/entryArea.js:338
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -557,7 +594,7 @@ msgstr[0] "Vložit %s řádek textu do veřejně přístupné služby?"
 msgstr[1] "Vložit %s řádky textu do veřejně přístupné služby?"
 msgstr[2] "Vložit %s řádků textu do veřejně přístupné služby?"
 
-#: src/entryArea.js:305
+#: src/entryArea.js:342
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -565,36 +602,48 @@ msgstr[0] "Nahrává se %s řádek textu do veřejně přístupné služby…"
 msgstr[1] "Nahrávají se %s řádky textu do veřejně přístupné služby…"
 msgstr[2] "Nahrává se %s řádků textu do veřejně přístupné služby…"
 
-#: src/entryArea.js:312
+#: src/entryArea.js:349
 msgid "Upload image to public paste service?"
 msgstr "Nahrát obrázek do veřejně přístupné služby?"
 
-#: src/entryArea.js:313
+#: src/entryArea.js:350
 msgid "Uploading image to public paste service…"
 msgstr "Nahrává se obrázek do veřejně přístupné služby…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:334
+#: src/entryArea.js:371
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Nahrát „%s“ do veřejně přístupné služby?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:336
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Nahrává se „%s“ do veřejně přístupné služby…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:345
+#: src/entryArea.js:382
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s na kanále #%s"
 
-#: src/entryArea.js:347
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Vložit od uživatele %s"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "_Zpět"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "_Dokončít"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "Da_lší"
 
 #. commands that would be nice to support:
 #.
@@ -714,54 +763,54 @@ msgstr "Opustit diskuzní místnost"
 msgid "End conversation"
 msgstr "Ukončit konverzaci"
 
-#: src/roomList.js:225
+#: src/roomList.js:224
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Síť %s má chybu"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:282
+#: src/roomList.js:281
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:289
+#: src/roomList.js:288
 msgid "Connection Problem"
 msgstr "Problém s připojením"
 
-#: src/roomList.js:305
+#: src/roomList.js:304
 msgid "Connected"
 msgstr "Připojeno"
 
-#: src/roomList.js:307
+#: src/roomList.js:306
 msgid "Connecting…"
 msgstr "Připojuje se…"
 
-#: src/roomList.js:309 src/userList.js:422
+#: src/roomList.js:308 src/userList.js:422
 msgid "Offline"
 msgstr "Odpojeno"
 
-#: src/roomList.js:311
+#: src/roomList.js:310
 msgid "Unknown"
 msgstr "Neznámo"
 
-#: src/roomList.js:331
+#: src/roomList.js:330
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "K účtu %s se nelze připojit zabezpečeným způsobem."
 
-#: src/roomList.js:334
+#: src/roomList.js:333
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Účet %s požaduje heslo."
 
-#: src/roomList.js:340
+#: src/roomList.js:339
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nelze se připojit k účtu %s. Server je zaneprázdněn."
 
-#: src/roomList.js:343
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nelze se připojit k účtu %s."
@@ -882,4 +931,3 @@ msgstr "Heslo serveru Polari pro účet %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Heslo Polari NickServ pro účet %s"
-
