@@ -1,0 +1,884 @@
+# Malayalam translation for polari.
+# Copyright (C) 2017 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Anish Sheela <aneesh.nl@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N"
+"+L10N&component=general\n"
+"POT-Creation-Date: 2017-08-11 23:52+0000\n"
+"PO-Revision-Date: 2017-08-20 23:30+0530\n"
+"Last-Translator: Anish Sheela <aneesh.nl@gmail.com>\n"
+"Language-Team: Malayalam <l10n@lists.smc.org.in>\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.1\n"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7 data/org.gnome.Polari.desktop.in:3
+#: data/resources/main-window.ui:39 src/roomStack.js:169
+msgid "Polari"
+msgstr "പോളരി"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8 data/org.gnome.Polari.desktop.in:4
+#: src/application.js:758
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "ഗ്നോമിന് വേണ്ടിയുള്ള ഇന്റെര്‍നെറ്റ് സല്ലാപ ക്ലൈന്റ്"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate seamlessly with GNOME; it "
+"features a simple and beautiful interface which allows you to focus on your conversations."
+msgstr ""
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have private one-to-one "
+"conversations. Notifications make sure that you never miss an important message — for private "
+"conversations, they even allow you to reply instantly without switching back to the application!"
+msgstr ""
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
+msgid "org.gnome.Polari"
+msgstr "org.gnome.Polari"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;"
+
+#: data/org.gnome.Polari.gschema.xml:6
+msgid "Saved channel list"
+msgstr "സൂക്ഷിച്ച ചാനല്‍ പട്ടിക"
+
+#: data/org.gnome.Polari.gschema.xml:7
+msgid "List of channels to restore on startup"
+msgstr "തുടങ്ങുമ്പോള്‍ തിരിച്ചെടുക്കേണ്ട ചാനലുകളുടെ പട്ടിക"
+
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+msgid "Run in Background"
+msgstr "പശ്ചാത്തലത്തില്‍ പ്രവര്‍ത്തിപ്പിക്കുക"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "അടച്ചാലും പശ്ചാത്തലത്തില്‍ പ്രവര്‍ത്തിച്ച് കൊണ്ടിരിക്കുക."
+
+#: data/org.gnome.Polari.gschema.xml:16
+msgid "Window size"
+msgstr "ജാലകത്തിന്റെ വലിപ്പം"
+
+#: data/org.gnome.Polari.gschema.xml:17
+msgid "Window size (width and height)."
+msgstr "ജാലകത്തിന്റെ വലിപ്പം (വീതിയും നീളവും)."
+
+#: data/org.gnome.Polari.gschema.xml:21
+msgid "Window maximized"
+msgstr "ജാലകം പരമാവധിയാക്കി"
+
+#: data/org.gnome.Polari.gschema.xml:22
+msgid "Window maximized state"
+msgstr "ജാലകം വലുതാക്കിയ നില"
+
+#: data/org.gnome.Polari.gschema.xml:26
+msgid "Last active channel"
+msgstr "അവസാനം പ്രവര്‍ത്തിപ്പിച്ച ചാനല്‍"
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Last active (selected) channel"
+msgstr "അവസാനം പ്രവര്‍ത്തിപ്പിച്ച (തെരഞ്ഞെടുത്ത) ചാനല്‍"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify botname"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Nickname of the bot to identify with"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify username"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Username to use in identify command"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "സര്‍വര്‍ വിലാസം (_S)"
+
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "ശൃംഖലയുടെ പേര് (_w)"
+
+#: data/resources/connection-details.ui:49 data/resources/connection-details.ui:116
+msgid "optional"
+msgstr "വേണമെങ്കില്‍ മാത്രം"
+
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "സുരക്ഷിതമായ കണക്ഷന്‍ ഉപയോഗിക്കുക (_o)"
+
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "വിളിപ്പേരു് (_N)"
+
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "ശരിയായ പേരു് (_R)"
+
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
+msgid "_Cancel"
+msgstr "റദ്ദാക്കുക (_C)"
+
+#: data/resources/connection-properties.ui:17
+msgid "_Apply"
+msgstr "കംപ്യൂട്ടറില്‍ സൂക്ഷിക്കുക (_A)"
+
+#: data/resources/entry-area.ui:16
+msgid "Change nickname:"
+msgstr "വിളിപ്പേരു് മാറ്റുക:"
+
+#: data/resources/entry-area.ui:27
+msgid "_Change"
+msgstr "മാറ്റുക (_C)"
+
+#: data/resources/entry-area.ui:78
+msgid "Change nickname"
+msgstr "വിളിപ്പേരു് മാറ്റുക"
+
+#: data/resources/entry-area.ui:159
+msgid "_Paste"
+msgstr "ഒട്ടിക്കുക (_P)"
+
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "സാധാരണ"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "മുറിയില്‍ ചേരുക"
+
+#: data/resources/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "മുറിയില്‍ നിന്ന് പുറത്ത് പോവുക"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "ഉപയോക്താവിന്റെ പട്ടിക കാണിയ്ക്കുക"
+
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr ""
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "പുറത്തു് കടക്കുക"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "കീബോര്‍ഡിനുള്ള കുറുക്കുവഴികള്‍"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "ഗതിനിയന്ത്രണം"
+
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "അടുത്ത മുറി"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "മുന്‍പിലത്തെ മുറി"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "വായിക്കാത്ത സന്ദേശം ഉള്ള അടുത്ത മുറി"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "വായിക്കാത്ത സന്ദേശം ഉള്ള മുന്‍പിലത്തെ മുറി"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "ആദ്യത്തെ മുറി"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "അവസാനത്തെ മുറി"
+
+#: data/resources/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "അദ്യം - ഒന്‍പത് മുറികള്‍"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "പോളരി ക്രമീകരണം"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "ബന്ധിപ്പിച്ചിട്ടില്ല"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "സജ്ജികരണം തുടരാന്‍ ഇന്റെര്‍നെറ്റുമായി ബന്ധിപ്പിക്കുക"
+
+#: data/resources/initial-setup-window.ui:109 data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "പോളരിയിലേയ്ക്ക് സ്വാഗതം"
+
+#: data/resources/initial-setup-window.ui:121
+msgid "Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms later, by clicking the + "
+"button."
+msgstr ""
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
+msgid "Join Chat Room"
+msgstr "ചാറ്റ് മുറിയിലേക്കു് ചേരുക"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "_Join"
+msgstr "കയറുക (_J)"
+
+#: data/resources/join-room-dialog.ui:46
+msgid "C_onnection"
+msgstr "കണക്ഷന്‍ (_o)"
+
+#: data/resources/join-room-dialog.ui:75
+msgid "_Add Network"
+msgstr "ശൃംഖല ചേര്‍ക്കുക (_A)"
+
+#: data/resources/join-room-dialog.ui:159
+msgid "_Add"
+msgstr "ചേര്‍ക്കുക (_A)"
+
+#: data/resources/join-room-dialog.ui:178
+msgid "_Custom Network"
+msgstr "ഇഷ്ടാനുസൃതമുള്ള ശൃംഖല (_C)"
+
+#: data/resources/main-window.ui:14
+msgid "Run Polari in the Background?"
+msgstr "പോളരി പശ്ചാത്തലത്തില്‍ പ്രവര്‍ത്തിപ്പിക്കട്ടെ?"
+
+#: data/resources/main-window.ui:15
+msgid "Polari will continue to run when closed and will be automatically started on login."
+msgstr "പോളരി അടച്ചിരിക്കുമ്പോഴും പ്രവര്‍ത്തിക്കുകയും, പ്രവേശിക്കുമ്പോള്‍ തനിയെ പ്രവര്‍ത്തിക്കുകയും ചെയ്യും."
+
+#: data/resources/main-window.ui:21
+msgid "_Quit"
+msgstr "നിര്‍ത്തുക (_Q)"
+
+#: data/resources/main-window.ui:28
+msgid "_Run in background"
+msgstr "പശ്ചാത്തലത്തില്‍ പ്രവര്‍ത്തിക്കുക (_R)"
+
+#: data/resources/main-window.ui:68
+msgid "Add rooms and networks"
+msgstr "മുറികളും ശൃംഖലകളും ചേര്‍ക്കുക"
+
+#: data/resources/menus.ui:12
+msgid "Keyboard Shortcuts"
+msgstr "കീബോര്‍ഡിനുള്ള കുറുക്കുവഴികള്‍"
+
+#: data/resources/menus.ui:16
+msgid "Help"
+msgstr "സഹായം"
+
+#: data/resources/menus.ui:20
+msgid "About"
+msgstr "പോളരിയെ കുറിച്ചു്"
+
+#: data/resources/menus.ui:24
+msgid "Quit"
+msgstr "പുറത്തു് കടക്കുക"
+
+#: data/resources/room-list-header.ui:146
+msgid "Connect"
+msgstr "ബന്ധിപ്പിക്കു"
+
+#: data/resources/room-list-header.ui:154
+msgid "Reconnect"
+msgstr "വീണ്ടും കണക്ട് ചെയ്യുക"
+
+#: data/resources/room-list-header.ui:162
+msgid "Remove"
+msgstr "എടുത്തുകളയുക"
+
+#: data/resources/room-list-header.ui:170
+msgid "Properties"
+msgstr "വിശേഷതകള്‍"
+
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "ചേര്‍ക്കാന്‍ ചാറ്റ് മുറിയുടെ പേര് പറയുക"
+
+#: data/resources/user-details.ui:27
+msgid "Loading details"
+msgstr "വിവരങ്ങള്‍ ലഭ്യമാക്കുന്നു"
+
+#: data/resources/user-details.ui:60
+msgid "Last Activity:"
+msgstr "അവസാന പ്രവര്‍ത്തനം:"
+
+#: data/resources/user-details.ui:159
+msgid "Will notify if user appears online."
+msgstr "ഉപയോക്താവ് ഓണ്‍ലൈന്‍ വരുമ്പോള്‍ പറയാം."
+
+#: data/resources/user-details.ui:181
+msgid "Start Conversation"
+msgstr "സംഭാഷണം ആരംഭിയ്ക്കു"
+
+#: src/application.js:47
+msgid "Start Telepathy client"
+msgstr "ടെലിപതി ക്ലയന്റ് ആരംഭിയ്ക്കു"
+
+#: src/application.js:50
+msgid "Print version and exit"
+msgstr "പതിപ്പ് വിവരങ്ങള്‍ അച്ചടിക്കുക, പുറത്തുകടക്കുക"
+
+#: src/application.js:380 src/utils.js:185
+msgid "Failed to open link"
+msgstr "ലിങ്ക് തുറക്കുവാന്‍ സാധ്യമായില്ല"
+
+#: src/application.js:657
+#, javascript-format
+msgid "%s removed."
+msgstr "%s നീക്കംചെയ്തു."
+
+#: src/application.js:757
+msgid "translator-credits"
+msgstr "അനീഷ് ഷീല <aneesh.nl@gmail.com>"
+
+#: src/application.js:763
+msgid "Learn more about Polari"
+msgstr "പോളരിയെ കുറിച്ച് കൂടുതല്‍ അറിയുക"
+
+#: src/appNotifications.js:85
+msgid "Undo"
+msgstr "വേണ്ടെന്ന് വയ്കുക"
+
+#: src/chatView.js:142
+msgid "New Messages"
+msgstr "പുതിയ സന്ദേശങ്ങള്‍"
+
+#: src/chatView.js:780
+msgid "Open Link"
+msgstr "കണ്ണി തുറക്കുക"
+
+#: src/chatView.js:786
+msgid "Copy Link Address"
+msgstr "കണ്ണിയുടെ വിലാസം പകര്‍ത്തുക"
+
+#: src/chatView.js:954
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s ഇപ്പോള്‍ %s ആയിട്ടാണ് അറിയപ്പെടുന്നത്"
+
+#: src/chatView.js:959
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s കണക്ഷന്‍ വിഛേദിച്ചിരിയ്ക്കുന്നു"
+
+#: src/chatView.js:967
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s നെ %s പുറത്താക്കി"
+
+#: src/chatView.js:969
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s പുറത്തായി"
+
+#: src/chatView.js:975
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s നെ %s നിരോധിച്ചു"
+
+#: src/chatView.js:977
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s നെ നിരോധിച്ചു"
+
+#: src/chatView.js:982
+#, javascript-format
+msgid "%s joined"
+msgstr "%s ചേര്‍ന്നു"
+
+#: src/chatView.js:987
+#, javascript-format
+msgid "%s left"
+msgstr "%s പുറത്തേക്കു പോയി"
+
+#: src/chatView.js:1080
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d ഉപയോക്താവ് ചേര്‍ന്നു"
+msgstr[1] "%d ഉപയോക്താക്കള്‍ ചേര്‍ന്നു"
+
+#: src/chatView.js:1083
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d ഉപയോക്താവ് ബാക്കിയുണ്ട്"
+msgstr[1] "%d ഉപയോക്താക്കള്‍ ബാക്കിയുണ്ട്"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1150
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1155
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "ഇന്നലെ %H∶%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1160
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A %H:%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1166
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1172
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1177
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1182
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "ഇന്നലെ %l:%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1187
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1193
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1199
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: src/connections.js:54
+msgid "Already added"
+msgstr "നേരത്തേ തന്നെ ചേര്‍ത്തു"
+
+#. Translators: %s is a connection name
+#: src/connections.js:468
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "“%s” ഗുണഗണങ്ങള്‍"
+
+#: src/connections.js:510
+msgid "Polari disconnected due to a network error. Please check if the address field is correct."
+msgstr ""
+
+#: src/entryArea.js:338
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/entryArea.js:342
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/entryArea.js:349
+msgid "Upload image to public paste service?"
+msgstr ""
+
+#: src/entryArea.js:350
+msgid "Uploading image to public paste service…"
+msgstr ""
+
+#. Translators: %s is a filename
+#: src/entryArea.js:371
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr ""
+
+#. Translators: %s is a filename
+#: src/entryArea.js:373
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr ""
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:382
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s #%s ല്‍"
+
+#: src/entryArea.js:384
+#, javascript-format
+msgid "Paste from %s"
+msgstr "%s ല്‍ നിന്നും ഒട്ടിയ്ക്കുക"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "_പുറകോട്ട്"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "_ചെയ്തു"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "_അടുത്തതു്"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
+#.
+#: src/ircParser.js:24
+msgid "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr ""
+
+#: src/ircParser.js:25
+msgid "/HELP [<command>] — displays help for <command>, or a list of available commands"
+msgstr ""
+
+#: src/ircParser.js:26
+msgid "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr ""
+
+#: src/ircParser.js:27
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <channel> — <channel> ല്‍ ചേരുന്നു"
+
+#: src/ircParser.js:28
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr ""
+
+#: src/ircParser.js:29
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr ""
+
+#: src/ircParser.js:30
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr ""
+
+#: src/ircParser.js:31
+msgid "/NAMES — lists users on the current channel"
+msgstr ""
+
+#: src/ircParser.js:32
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <nickname> — നിലവിലുള്ള സര്‍വറിലുള്ള വിളിപ്പേരു് <nickname> എന്ന് മാറ്റുക"
+
+#: src/ircParser.js:33
+msgid "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr ""
+
+#: src/ircParser.js:34
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr ""
+
+#: src/ircParser.js:35
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr ""
+
+#: src/ircParser.js:36
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr ""
+
+#: src/ircParser.js:37
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr ""
+
+#: src/ircParser.js:40
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "അപരിചിതമായ കമാന്‍ഡ് - ലഭ്യമായ കമാന്‍ഡുകള്‍ക്കു് /help കാണുക"
+
+#: src/ircParser.js:56
+#, javascript-format
+msgid "Usage: %s"
+msgstr "ഉപയോഗക്രമം: %s"
+
+#: src/ircParser.js:92
+msgid "Known commands:"
+msgstr "അറിയാവുന്ന കമാന്‍ഡുകള്‍:"
+
+#: src/ircParser.js:191
+#, javascript-format
+msgid "Users on %s:"
+msgstr "%s ലെ ഉപയോക്താക്കള്‍:"
+
+#: src/ircParser.js:270
+msgid "No topic set"
+msgstr "വിഷയം സജ്ജികരിച്ചിട്ടില്ല"
+
+#: src/joinDialog.js:237
+msgid "Add Network"
+msgstr "ശൃംഖല ചേര്‍ക്കുക"
+
+#: src/mainWindow.js:383
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d ഉപയോക്താവ്"
+msgstr[1] "%d ഉപയോക്താക്കള്‍"
+
+#: src/roomList.js:133
+msgid "Leave chatroom"
+msgstr "ചാറ്റ് മുറിയില്‍ നിന്നും പുറത്തുകടക്കുക"
+
+#: src/roomList.js:133
+msgid "End conversation"
+msgstr "സംഭാഷണം അവസാനിപ്പിക്കുക"
+
+#: src/roomList.js:224
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "ശൃംഖല %s ല്‍ പിഴവു്"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:281
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:288
+msgid "Connection Problem"
+msgstr "കണക്ഷന്‍ തകരാറ്"
+
+#: src/roomList.js:304
+msgid "Connected"
+msgstr "ബന്ധിച്ചു"
+
+#: src/roomList.js:306
+msgid "Connecting…"
+msgstr "ബന്ധിപ്പിക്കുന്നു..."
+
+#: src/roomList.js:308 src/userList.js:422
+msgid "Offline"
+msgstr "ഓഫ്‌ലൈന്‍"
+
+#: src/roomList.js:310
+msgid "Unknown"
+msgstr "അറിയാത്ത"
+
+#: src/roomList.js:330
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "%s ലേക്കു് സുരക്ഷിതമായി ബന്ധിപ്പിക്കാന്‍ സാധ്യമല്ല."
+
+#: src/roomList.js:333
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s ന് ഒരു രഹസ്യവാക്ക് വേണം."
+
+#: src/roomList.js:339
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "%s ലേക്കു് കണക്ട് ചെയ്യുവാന്‍ സാധ്യമല്ല. സെര്‍വ്വര്‍ തിരക്കിലാണ്."
+
+#: src/roomList.js:342
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "%s ലേക്കു് കണക്ട് ചെയ്യുവാന്‍ സാധ്യമല്ല."
+
+#: src/roomStack.js:124
+msgid "_Save Password"
+msgstr "രഹസ്യവാക്ക് സൂക്ഷിക്കുക (_S)"
+
+#: src/roomStack.js:133
+msgid "Should the password be saved?"
+msgstr "അടയാളവാക്കു് സൂക്ഷിക്കണോ?"
+
+#: src/roomStack.js:141 src/telepathyClient.js:577
+#, javascript-format
+msgid "Identification will happen automatically the next time you connect to %s"
+msgstr ""
+
+#: src/roomStack.js:172
+msgid "Join a room using the + button."
+msgstr "+ ബട്ടണ്‍ ഉപയോഗിച്ച് മുറിയില്‍ ചേരുക"
+
+#: src/telepathyClient.js:402
+msgid "Good Bye"
+msgstr "പിന്നെ കാണാം"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:576
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "%s രഹസ്യവാക്ക്, %s ന്റെ സുക്ഷിക്കണോ?"
+
+#: src/telepathyClient.js:580
+msgid "Save"
+msgstr "സൂക്ഷിയ്ക്കുക (_S)"
+
+#: src/userList.js:237
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d സെക്കന്‍ഡ് മുന്‍പ്"
+msgstr[1] "%d സെക്കന്‍ഡുകള്‍ മുന്‍പ്"
+
+#: src/userList.js:242
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d മിനുട്ട് മുന്‍പ്"
+msgstr[1] "%d മിനുട്ടുകള്‍ മുന്‍പ്"
+
+#: src/userList.js:247
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d മണിക്കുര്‍ മുന്‍പ്"
+msgstr[1] "%d മണിക്കുറുകള്‍ മുന്‍പ്"
+
+#: src/userList.js:252
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d ദിവസം മുന്‍പ്"
+msgstr[1] "%d ദിവസം മുന്‍പ്"
+
+#: src/userList.js:257
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d ആഴ്ച മുന്‍പ്"
+msgstr[1] "%d ആഴ്ച മുന്‍പ്"
+
+#: src/userList.js:261
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d മാസം മുന്‍പ്"
+msgstr[1] "%d മാസം മുന്‍പ്"
+
+#: src/userList.js:418
+msgid "Available in another room."
+msgstr "മറ്റൊരു മുറിയില്‍ ലഭ്യമാണ്."
+
+#: src/userList.js:420
+msgid "Online"
+msgstr "ഓണ്‍ലൈന്‍"
+
+#: src/userList.js:569
+msgid "No results"
+msgstr "ഫലങ്ങള്‍ ലഭ്യമല്ല"
+
+#: src/userList.js:743
+msgid "All"
+msgstr "എല്ലാം"
+
+#: src/userTracker.js:315
+msgid "User is online"
+msgstr "ഉപയോക്താവ് ഓണ്‍ലൈന്‍ ആണ്"
+
+#: src/userTracker.js:316
+#, javascript-format
+msgid "User %s is now online."
+msgstr "ഉപയോക്താവ് %s ഓണ്‍ലൈന്‍ ആണ്."
+
+#: src/utils.js:107
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "%s ന്റെ പോളരി സെര്‍വ്വര്‍ രഹസ്യവാക്ക്"
+
+#: src/utils.js:112
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "%s ന്റെ പോളരി NickServ രഹസ്യവാക്ക്"
