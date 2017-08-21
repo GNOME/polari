@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-11 23:12+0000\n"
-"PO-Revision-Date: 2017-08-11 01:55+0200\n"
+"POT-Creation-Date: 2017-08-18 19:10+0000\n"
+"PO-Revision-Date: 2017-08-21 15:42+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:757
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Klient IRC dla środowiska GNOME"
 
@@ -409,15 +409,15 @@ msgstr "Otwarcie odnośnika się nie powiodło"
 #: src/application.js:657
 #, javascript-format
 msgid "%s removed."
-msgstr "Usunięto %s."
+msgstr "Usunięto „%s”."
 
-#: src/application.js:756
+#: src/application.js:757
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2017\n"
 "Aviary.pl <community-poland@mozilla.org>, 2013-2017"
 
-#: src/application.js:762
+#: src/application.js:763
 msgid "Learn more about Polari"
 msgstr "Więcej informacji o programie Polari"
 
@@ -807,22 +807,22 @@ msgstr "Nieznane"
 #: src/roomList.js:330
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
-msgstr "Nie można wykonać bezpiecznego połączenia z %s."
+msgstr "Nie można wykonać bezpiecznego połączenia z „%s”."
 
 #: src/roomList.js:333
 #, javascript-format
 msgid "%s requires a password."
-msgstr "%s wymaga hasła."
+msgstr "„%s” wymaga hasła."
 
 #: src/roomList.js:339
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
-msgstr "Nie można połączyć z %s. Serwer jest zajęty."
+msgstr "Nie można połączyć z „%s”. Serwer jest zajęty."
 
 #: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s."
-msgstr "Nie można połączyć z %s."
+msgstr "Nie można połączyć z „%s”."
 
 #: src/roomStack.js:124
 msgid "_Save Password"
@@ -836,7 +836,7 @@ msgstr "Zapisać hasło?"
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
-msgstr "Identyfikacja nastąpi automatycznie podczas następnego łączenia z %s"
+msgstr "Identyfikacja nastąpi automatycznie podczas następnego łączenia z „%s”"
 
 #: src/roomStack.js:172
 msgid "Join a room using the + button."
