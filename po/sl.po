@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-02 09:26+0200\n"
-"PO-Revision-Date: 2017-08-02 09:26+0200\n"
+"POT-Creation-Date: 2017-08-27 22:30+0200\n"
+"PO-Revision-Date: 2017-08-27 22:32+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:712
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Odjemalec za IRC za GNOME"
 
@@ -163,8 +163,8 @@ msgstr "_Vzdevek"
 msgid "_Real Name"
 msgstr "_Pravo ime"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:148
-#: data/resources/join-room-dialog.ui:11
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -184,7 +184,7 @@ msgstr "_Spremeni"
 msgid "Change nickname"
 msgstr "Spremeni vzdevek"
 
-#: data/resources/entry-area.ui:158
+#: data/resources/entry-area.ui:159
 msgid "_Paste"
 msgstr "_Prilepi"
 
@@ -210,53 +210,90 @@ msgstr "Pokaži seznam uporabnikov"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Pokaži izbirnik izraznih ikon"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Končaj"
 
-#: data/resources/help-overlay.ui:48
+#: data/resources/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovne bližnjice"
 
-#: data/resources/help-overlay.ui:57
+#: data/resources/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Krmarjenje"
 
-#: data/resources/help-overlay.ui:61
+#: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Naslednja klepetalnica"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Predhodna klepetalnica"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Naslednja klepetalnica z neprebranimi sporočili"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Predhodna klepetalnica z neprebranimi sporočili"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Prva klepetalnica"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Zadnja klepetalnica"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Prva – Deveta klepetalnica"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "Nastavitve"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "Brez povezave"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Povežite se na internet za nadaljevanje nastavitev."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "Dobrodošli v programu Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari je program za enostavno delo z omrežji IRC. Za zažetek izberite "
+"omrežje."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Izberite sobe, v katere si želite povezati. Te je mogoče dodati tudi kasneje "
+"s klikom na gumb +."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
 msgid "Join Chat Room"
@@ -358,28 +395,28 @@ msgstr "Obvestilo se pokaže, ko se uporabnik pojavi v klepetalnici."
 msgid "Start Conversation"
 msgstr "Začni pogovor"
 
-#: src/application.js:46
+#: src/application.js:47
 msgid "Start Telepathy client"
 msgstr "Zaženi odjemalec Telepathy"
 
-#: src/application.js:49
+#: src/application.js:50
 msgid "Print version and exit"
 msgstr "Izpiši različico programa in končaj"
 
-#: src/application.js:366 src/utils.js:185
+#: src/application.js:380 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Odpiranje povezave je spodletelo"
 
-#: src/application.js:612
+#: src/application.js:657
 #, javascript-format
 msgid "%s removed."
 msgstr "%s je odstranjen."
 
-#: src/application.js:711
+#: src/application.js:757
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
-#: src/application.js:717
+#: src/application.js:763
 msgid "Learn more about Polari"
 msgstr "Več podrobnosti o programu Polari"
 
@@ -542,12 +579,12 @@ msgid "Already added"
 msgstr "Že dodano"
 
 #. Translators: %s is a connection name
-#: src/connections.js:432
+#: src/connections.js:468
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Lastnosti »%s«"
 
-#: src/connections.js:474
+#: src/connections.js:510
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -555,7 +592,7 @@ msgstr ""
 "Povezava je prekinjena zaradi napake omrežja. Preverite, ali je naslovno "
 "polje zapisano pravilno."
 
-#: src/entryArea.js:301
+#: src/entryArea.js:338
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -568,7 +605,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ali želite poslati %s vrstice besedila na javno spletno odložišče ..."
 
-#: src/entryArea.js:305
+#: src/entryArea.js:342
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -577,36 +614,48 @@ msgstr[1] "Pošiljanje %s vrstice besedila na javno spletno odložišče ..."
 msgstr[2] "Pošiljanje %s vrstic besedila na javno spletno odložišče ..."
 msgstr[3] "Pošiljanje %s vrstic besedila na javno spletno odložišče ..."
 
-#: src/entryArea.js:312
+#: src/entryArea.js:349
 msgid "Upload image to public paste service?"
 msgstr "Ali želite poslati sliko na javno spletno odložišče ..."
 
-#: src/entryArea.js:313
+#: src/entryArea.js:350
 msgid "Uploading image to public paste service…"
 msgstr "Pošiljanje slike na javno spletno odložišče ..."
 
 #. Translators: %s is a filename
-#: src/entryArea.js:334
+#: src/entryArea.js:371
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Ali želite poslati »%s« na javno spletno odložišče?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:336
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Pošiljanje »%s« na javno spletno odložišče …"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:345
+#: src/entryArea.js:382
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s v #%s"
 
-#: src/entryArea.js:347
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Prilepi iz %s"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "_Nazaj"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "_Končano"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "_Naslednji"
 
 #. commands that would be nice to support:
 #.
@@ -728,54 +777,54 @@ msgstr "Zapusti klepetalnico"
 msgid "End conversation"
 msgstr "Končaj pogovor"
 
-#: src/roomList.js:225
+#: src/roomList.js:224
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Na omrežju %s je napaka"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:282
+#: src/roomList.js:281
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:289
+#: src/roomList.js:288
 msgid "Connection Problem"
 msgstr "Napaka povezovanja"
 
-#: src/roomList.js:305
+#: src/roomList.js:304
 msgid "Connected"
 msgstr "Povezano"
 
-#: src/roomList.js:307
+#: src/roomList.js:306
 msgid "Connecting…"
 msgstr "Vzpostavljanje povezave …"
 
-#: src/roomList.js:309 src/userList.js:422
+#: src/roomList.js:308 src/userList.js:422
 msgid "Offline"
 msgstr "Nepovezano"
 
-#: src/roomList.js:311
+#: src/roomList.js:310
 msgid "Unknown"
 msgstr "Neznano"
 
-#: src/roomList.js:331
+#: src/roomList.js:330
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Na varen način se ni mogoče povezati s strežnikom %s."
 
-#: src/roomList.js:334
+#: src/roomList.js:333
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Strežnik %s zahteva geslo."
 
-#: src/roomList.js:340
+#: src/roomList.js:339
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Ni se mogoče povezati s strežnikom %s. Strežnik je zaseden."
 
-#: src/roomList.js:343
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Ni se mogoče povezati s strežnikom %s."
@@ -1028,9 +1077,6 @@ msgstr "Geslo Polari NickServer za %s"
 
 #~ msgid "Message User"
 #~ msgstr "Uporabnk sporočila"
-
-#~ msgid "About Polari"
-#~ msgstr "O programu"
 
 #~ msgid "Server"
 #~ msgstr "Strežnik"
