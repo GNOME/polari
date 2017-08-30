@@ -2,14 +2,14 @@
 # Copyright (C) 2014 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Bogdan Mințoi <mintoi.bogdan@gmail.com>, 2014.
-# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=polari&"
-"keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-06-22 11:24+0000\n"
-"PO-Revision-Date: 2015-06-22 19:50+0200\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=polari"
+"&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-08-11 23:52+0000\n"
+"PO-Revision-Date: 2017-08-20 13:29+0200\n"
 "Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
 "Language-Team: Gnome Romanian Translation Team\n"
 "Language: ro\n"
@@ -21,18 +21,18 @@ msgstr ""
 "X-Generator: Virtaal 0.7.1\n"
 "X-Project-Style: gnome\n"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:1
-#: ../data/org.gnome.Polari.desktop.in.h:1
-#: ../data/resources/main-window.ui.h:3
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: src/roomStack.js:169
 msgid "Polari"
 msgstr "Polari"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:2
-#: ../data/org.gnome.Polari.desktop.in.h:2 ../src/application.js:417
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un client IRC pentru GNOME"
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:3
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -42,403 +42,763 @@ msgstr ""
 "mediul GNOME; beneficiază de o interfață simpatică ce vă permite să vă "
 "concentrați asupra conversațiilor."
 
-#: ../data/appdata/org.gnome.Polari.appdata.xml.in.h:4
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
+#| msgid ""
+#| "You can use Polari to publicly chat with people in a channel, and to have "
+#| "private one-to-one conversations. Notifications make sure that you never "
+#| "miss an important message - for private conversations, they even allow "
+#| "you to reply instantly without switching back to the application!"
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
-"miss an important message - for private conversations, they even allow you "
+"miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
 "Puteți utiliza Polari atât pentru a conversa public cu persoane într-un "
 "canal de discuții cât și pentru conversații private unu-la-unu. Notificările "
-"asigură că nu ratați niciodată un mesaj important iar pentru discuțiile "
-"private, vă permite chiar să răspundeți instant, fără a fi nevoie să aduceți "
-"în prim plan fereastra aplicației!"
+"asigură că nu ratați niciodată un mesaj important — pentru discuțiile "
+"private, iar notificările vă permit chiar să răspundeți instant, fără a fi "
+"nevoie să aduceți în prim plan fereastra aplicației!"
 
-#: ../data/org.gnome.Polari.desktop.in.h:3
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
+msgid "org.gnome.Polari"
+msgstr "org.gnome.Polari"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;Discuție;"
 
-#: ../data/org.gnome.Polari.desktop.in.h:4
-msgid "Show connections"
-msgstr "Arată conexiunile"
-
-#: ../data/org.gnome.Polari.gschema.xml.h:1
+#: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
 msgstr "Lista canalelor salvate"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:2
+#: data/org.gnome.Polari.gschema.xml:7
 msgid "List of channels to restore on startup"
 msgstr "Lista canalelor ce vor fi restaurate la pornire"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:3
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+msgid "Run in Background"
+msgstr "Rulează în fundal"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "Continuă să ruleze în fundal când este închisă."
+
+#: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
 msgstr "Dimensiunile ferestrei"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:4
+#: data/org.gnome.Polari.gschema.xml:17
 msgid "Window size (width and height)."
 msgstr "Dimensiunile ferestrei (lățime și înălțime)."
 
-#: ../data/org.gnome.Polari.gschema.xml.h:5
+#: data/org.gnome.Polari.gschema.xml:21
 msgid "Window maximized"
 msgstr "Fereastra maximizată"
 
-#: ../data/org.gnome.Polari.gschema.xml.h:6
+#: data/org.gnome.Polari.gschema.xml:22
 msgid "Window maximized state"
 msgstr "Starea ferestrei maximizate"
 
-#: ../data/resources/connection-details.ui.h:1
-msgid "_Address"
-msgstr "_Adresă"
+#: data/org.gnome.Polari.gschema.xml:26
+msgid "Last active channel"
+msgstr "Ultimul canal activ"
 
-#: ../data/resources/connection-details.ui.h:2
-msgid "_Description"
-msgstr "_Descriere"
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Last active (selected) channel"
+msgstr "Ultimul canal activ (selectat)"
 
-#: ../data/resources/connection-details.ui.h:3
-msgid "_Nickname"
-msgstr "_Pseudonim"
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify botname"
+msgstr "Identifică numele botului"
 
-#: ../data/resources/connection-details.ui.h:4
-msgid "_Real Name"
-msgstr "_Numele real"
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Nickname of the bot to identify with"
+msgstr "Numele botului cu care se identifică"
 
-#: ../data/resources/connection-details.ui.h:5
-#: ../data/resources/join-room-dialog.ui.h:4
+#: data/org.gnome.Polari.gschema.xml:39
+#| msgid "Identify botname"
+msgid "Identify command"
+msgstr "Comanda de identificare"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Comandă folosită la identificarea cu un bot"
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify username"
+msgstr "Identifică numele utilizatorului"
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Username to use in identify command"
+msgstr "Numele utilizatorului folosit în comanda de identificare"
+
+#: data/org.gnome.Polari.gschema.xml:49
+#| msgid "Identify username"
+msgid "Identify username supported"
+msgstr "Identificarea numelui utilizatorului este suportată"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr "Când comanda de identificare suportă parmetrul numele utilizatorului"
+
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "_Adresă server"
+
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "Nu_me rețea"
+
+#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:116
 msgid "optional"
 msgstr "opțional"
 
-#: ../data/resources/connection-list-dialog.ui.h:1
-#: ../data/resources/menus.ui.h:1
-msgid "Connections"
-msgstr "Conexiuni"
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "Utilizează c_onexiune sigură"
 
-#: ../data/resources/connection-list-dialog.ui.h:2
-msgid "Add"
-msgstr "Adaugă"
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "Pseudo_nim"
 
-#: ../data/resources/connection-list-dialog.ui.h:3
-msgid "Remove"
-msgstr "Șterge"
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "Numele _real"
 
-#: ../data/resources/join-room-dialog.ui.h:1 ../src/joinDialog.js:218
-msgid "Join Chat Room"
-msgstr "Alătură-te camerei de discuții"
-
-#: ../data/resources/join-room-dialog.ui.h:2
-#: ../data/resources/message-user-dialog.ui.h:1 ../src/connections.js:340
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "_Anulează"
 
-#: ../data/resources/join-room-dialog.ui.h:3 ../src/joinDialog.js:220
-msgid "_Join"
-msgstr "_Alătură-te"
+#: data/resources/connection-properties.ui:17
+#| msgid "A_pply"
+msgid "_Apply"
+msgstr "_Aplică"
 
-#: ../data/resources/join-room-dialog.ui.h:5
-msgid "_Add Connection"
-msgstr "_Adăugați o conexiune"
+#: data/resources/entry-area.ui:16
+msgid "Change nickname:"
+msgstr "Schimbă pseudonimul:"
 
-#: ../data/resources/join-room-dialog.ui.h:6
-#: ../data/resources/message-user-dialog.ui.h:3
-msgid "C_onnection"
-msgstr "C_onexiune"
+#: data/resources/entry-area.ui:27
+msgid "_Change"
+msgstr "S_chimbă"
 
-#: ../data/resources/join-room-dialog.ui.h:7
-msgid "Room _Name"
-msgstr "_Numele canalului"
+#: data/resources/entry-area.ui:78
+msgid "Change nickname"
+msgstr "Schimbă pseudonimul"
 
-#: ../data/resources/join-room-dialog.ui.h:8
-msgid "_Password"
-msgstr "_Parolă"
+#: data/resources/entry-area.ui:159
+msgid "_Paste"
+msgstr "Li_pește"
 
-#: ../data/resources/main-window.ui.h:1
-msgid "Join a Room"
-msgstr "Alătură-te unui canal"
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generale"
 
-#: ../data/resources/main-window.ui.h:2
-msgid "Message a User"
-msgstr "Mesaj către utilizator"
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "Alătură-te unei camere"
 
-#: ../data/resources/main-window.ui.h:4
-#| msgid "Join a Room"
-msgid "Join room"
-msgstr "Alătură-te canalului"
+#: data/resources/help-overlay.ui:27
+#| msgid "Leave chatroom"
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "Părăsește camera"
 
-#: ../data/resources/menus.ui.h:2
-msgid "Preferences"
-msgstr "Preferințe"
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "Arată lista utilizatorilor"
 
-#: ../data/resources/menus.ui.h:3
-msgid "About"
-msgstr "Despre"
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Arată selectorul de emoji"
 
-#: ../data/resources/menus.ui.h:4
+#: data/resources/help-overlay.ui:48
+#| msgid "Quit"
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ieșire"
 
-#: ../data/resources/message-user-dialog.ui.h:2
-msgid "_Message"
-msgstr "_Mesaj"
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Scurtături de tastatură"
 
-#: ../data/resources/message-user-dialog.ui.h:4
-msgid "_Recent"
-msgstr "_Recent"
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Navigare"
 
-#: ../data/resources/message-user-dialog.ui.h:5
-msgid "_Name"
-msgstr "_Nume"
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "Camera următoare"
 
-#: ../data/resources/user-list-details.ui.h:1
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "Camera precedentă"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Următoarea cameră cu mesaje necitite"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Precedenta cameră cu mesaje necitite"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "Prima cameră"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "Ultima cameră"
+
+#: data/resources/help-overlay.ui:110
+#| msgctxt "shortcut window"
+#| msgid "First - Ninth Room"
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "Prima – A noua camera"
+
+#: data/resources/initial-setup-window.ui:10
+#| msgid "Polari"
+msgid "Polari Setup"
+msgstr "Configurare inițială Polari"
+
+#: data/resources/initial-setup-window.ui:60
+#| msgid "Connected"
+msgid "Not connected"
+msgstr "Neconectat"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Conectați-vă la internet pentru a continua configurarea inițială."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+#| msgid "Learn more about Polari"
+msgid "Welcome to Polari"
+msgstr "Bun venit la Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari este un mod ușor de a discuta folosind IRC. Alegeți rețeaua pentru a "
+"iniția aplicația."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Alegeți camerele la care doriți să vă conectați. Puteți adăuga mai multe "
+"rețele și camere mai târziu, apăsând pe butonul +."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
+msgid "Join Chat Room"
+msgstr "Alătură-te camerei de discuții"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "_Join"
+msgstr "_Alătură-te"
+
+#: data/resources/join-room-dialog.ui:46
+msgid "C_onnection"
+msgstr "C_onexiune"
+
+#: data/resources/join-room-dialog.ui:75
+msgid "_Add Network"
+msgstr "_Adaugă rețea"
+
+#: data/resources/join-room-dialog.ui:159
+msgid "_Add"
+msgstr "_Adaugă"
+
+#: data/resources/join-room-dialog.ui:178
+msgid "_Custom Network"
+msgstr "Rețea _personalizată"
+
+#: data/resources/main-window.ui:14
+msgid "Run Polari in the Background?"
+msgstr "Rulați Polari în fundal?"
+
+#: data/resources/main-window.ui:15
+msgid ""
+"Polari will continue to run when closed and will be automatically started on "
+"login."
+msgstr ""
+"Polari va continua să ruleze când este închis și va porni automat la "
+"autentificare."
+
+#: data/resources/main-window.ui:21
+#| msgid "Quit"
+msgid "_Quit"
+msgstr "_Ieșire"
+
+#: data/resources/main-window.ui:28
+msgid "_Run in background"
+msgstr "_Rulează în fundal"
+
+#: data/resources/main-window.ui:68
+msgid "Add rooms and networks"
+msgstr "Adăugare canale și rețele"
+
+#: data/resources/menus.ui:12
+msgid "Keyboard Shortcuts"
+msgstr "Scurtături de tastatură"
+
+#: data/resources/menus.ui:16
+msgid "Help"
+msgstr "Ajutor"
+
+#: data/resources/menus.ui:20
+msgid "About"
+msgstr "Despre"
+
+#: data/resources/menus.ui:24
+msgid "Quit"
+msgstr "Ieșire"
+
+#: data/resources/room-list-header.ui:146
+msgid "Connect"
+msgstr "Conectează"
+
+#: data/resources/room-list-header.ui:154
+msgid "Reconnect"
+msgstr "Reconectează"
+
+#: data/resources/room-list-header.ui:162
+msgid "Remove"
+msgstr "Elimină"
+
+#: data/resources/room-list-header.ui:170
+msgid "Properties"
+msgstr "Proprietăți"
+
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "Introduceți numele camerei de adăugat"
+
+#: data/resources/user-details.ui:27
 msgid "Loading details"
 msgstr "Se încarcă detaliile"
 
-#: ../data/resources/user-list-details.ui.h:2 ../src/userList.js:228
+#: data/resources/user-details.ui:60
 msgid "Last Activity:"
 msgstr "Ultima activitate:"
 
-#: ../data/resources/user-list-details.ui.h:3
-msgid "Message"
-msgstr "Mesaj"
+#: data/resources/user-details.ui:159
+msgid "Will notify if user appears online."
+msgstr "Va notifica dacă utilizatorul apare online."
 
-#: ../src/application.js:351
-msgid "Good Bye"
-msgstr "La revedere"
+#: data/resources/user-details.ui:181
+#| msgid "End conversation"
+msgid "Start Conversation"
+msgstr "Începe conversația"
 
-#: ../src/application.js:416
-msgid "translator-credits"
-msgstr "Bogdan Mințoi <mintoi.bogdan@gmail.com> 2014"
+#: src/application.js:47
+msgid "Start Telepathy client"
+msgstr "Pornește clientul Telepathy"
 
-#: ../src/appNotifications.js:104
+#: src/application.js:50
+msgid "Print version and exit"
+msgstr "Afișează versiunea și ieși"
+
+#: src/application.js:380 src/utils.js:185
+msgid "Failed to open link"
+msgstr "Nu s-a putut deschide legătura"
+
+#: src/application.js:657
 #, javascript-format
-msgid "Connecting to %s"
-msgstr "Se conectează la %s"
+msgid "%s removed."
+msgstr "S-a eliminat %s."
 
-#: ../src/chatView.js:439
+#: src/application.js:757
+msgid "translator-credits"
+msgstr ""
+"Bogdan Mințoi <mintoi [dot] bogdan [at] gmail [dot] com>, 2014\n"
+"Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2017"
+
+#: src/application.js:763
+msgid "Learn more about Polari"
+msgstr "Învață mai multe despre Polari"
+
+#: src/appNotifications.js:85
+msgid "Undo"
+msgstr "Anulează"
+
+#: src/chatView.js:142
+msgid "New Messages"
+msgstr "Mesaj nou"
+
+#: src/chatView.js:780
 msgid "Open Link"
 msgstr "Deschide o legătură"
 
-#: ../src/chatView.js:446
+#: src/chatView.js:786
 msgid "Copy Link Address"
 msgstr "Copiază adresa legăturii"
 
-#: ../src/chatView.js:630
+#: src/chatView.js:954
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s și-a schimbat pseudonimul în %s"
 
-#: ../src/chatView.js:637
+#: src/chatView.js:959
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s s-a deconectat"
 
-#: ../src/chatView.js:646
+#: src/chatView.js:967
 #, javascript-format
 msgid "%s has been kicked by %s"
-msgstr "%s a ieșit forțat la cererea lui %s"
+msgstr "%s a fost dat afară de %s"
 
-#: ../src/chatView.js:648
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has been kicked"
-msgstr "%s a ieșit forțat"
+msgstr "%s a fost dat afară"
 
-#: ../src/chatView.js:655
+#: src/chatView.js:975
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s a primit interdicție din partea lui %s"
 
-#: ../src/chatView.js:657
+#: src/chatView.js:977
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s a primit interdicție"
 
-#: ../src/chatView.js:663
+#: src/chatView.js:982
 #, javascript-format
 msgid "%s joined"
 msgstr "%s a intrat"
 
-#: ../src/chatView.js:668
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s left"
 msgstr "%s a ieșit"
 
-#. Translators: Time in 24h format */
-#: ../src/chatView.js:708
+#: src/chatView.js:1080
+#, javascript-format
+#| msgid "%s joined"
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d utilizator a intrat"
+msgstr[1] "%d utilizatori au intrat"
+msgstr[2] "%d de utilizatori au intrat"
+
+#: src/chatView.js:1083
+#, javascript-format
+#| msgid "%d user"
+#| msgid_plural "%d users"
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d utilizator a ieșit"
+msgstr[1] "%d utilizatori au ieșit"
+msgstr[2] "%d de utilizatori au ieșit"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1150
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 24h format. i.e. "Yesterday, 14:30" */
-#: ../src/chatView.js:713
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1155
+#, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Ieri, %H∶%M"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 24h format. i.e. "Monday, 14:30" */
-#: ../src/chatView.js:718
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1160
+#, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
-#. i.e. "May 25, 14:30" */
-#: ../src/chatView.js:724
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1166
+#, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
-#. i.e. "May 25 2012, 14:30" */
-#: ../src/chatView.js:730
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1172
+#, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
-#. Translators: Time in 12h format */
-#: ../src/chatView.js:735
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1177
 msgid "%l∶%M %p"
-msgstr "%H∶%M"
+msgstr "%l∶%M %p"
 
+#. yesterday
 #. Translators: this is the word "Yesterday" followed by a
-#. time string in 12h format. i.e. "Yesterday, 2:30 pm" */
-#: ../src/chatView.js:740
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1182
+#, no-c-format
 msgid "Yesterday, %l∶%M %p"
-msgstr "Ieri, %H∶%M"
+msgstr "Ieri, %l∶%M %p"
 
+#. this week
 #. Translators: this is the week day name followed by a time
-#. string in 12h format. i.e. "Monday, 2:30 pm" */
-#: ../src/chatView.js:745
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1187
+#, no-c-format
 msgid "%A, %l∶%M %p"
-msgstr "%A, %H∶%M"
+msgstr "%A, %l∶%M %p"
 
+#. this year
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
-#. i.e. "May 25, 2:30 pm" */
-#: ../src/chatView.js:751
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1193
+#, no-c-format
 msgid "%B %d, %l∶%M %p"
-msgstr "%d %B, %H∶%M"
+msgstr "%d %B, %l∶%M %p"
 
+#. before this year
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
-#. i.e. "May 25 2012, 2:30 pm"*/
-#: ../src/chatView.js:757
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1199
+#, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
-msgstr "%d %B %Y, %H∶%M"
+msgstr "%d %B %Y, %l∶%M %p"
 
-#: ../src/connections.js:328
-msgid "Edit Connection"
-msgstr "Editează o conexiune"
+#: src/connections.js:54
+msgid "Already added"
+msgstr "Adăugat deja"
 
-#: ../src/connections.js:329
-msgid "New Connection"
-msgstr "Conexiune nouă"
+#. Translators: %s is a connection name
+#: src/connections.js:468
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Proprietăți pentru „%s”"
 
-#: ../src/connections.js:342
-msgid "A_pply"
-msgstr "A_plică"
-
-#: ../src/connections.js:342
-msgid "Cr_eate"
-msgstr "Cr_eează"
-
-#. commands that would be nice to support: */
-#.
-#. AWAY: N_("/AWAY [<message>] - sets or unsets away message"),
-#. LIST: N_("/LIST [<channel>] - lists stats on <channel>, or all channels on the server"),
-#. MODE: "/MODE <mode> <nick|channel> - ",
-#. NOTICE: N_("/NOTICE <nick|channel> <message> - sends notice to <nick|channel>"),
-#. OP: N_("/OP <nick> - gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> - requests information on <nick>"),
-#. */
-#: ../src/ircParser.js:26
+#: src/connections.js:510
 msgid ""
-"/HELP [<command>] - displays help for <command>, or a list of available "
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari s-a deconectat datorită unei probleme de rețea. Verificați dacă "
+"câmpul adresei este corect."
+
+#: src/entryArea.js:338
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Lipesc %s linie de text pe serviciul public de note?"
+msgstr[1] "Lipesc %s linii de text pe serviciul public de note?"
+msgstr[2] "Lipesc %s de linii de text pe serviciul public de note?"
+
+#: src/entryArea.js:342
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Se încarcă %s linie de text la serviciul public de note…"
+msgstr[1] "Se încarcă %s linii de text la serviciul public de note…"
+msgstr[2] "Se încarcă %s de linii de text la serviciul public de note…"
+
+#: src/entryArea.js:349
+msgid "Upload image to public paste service?"
+msgstr "Doriți încărcarea imaginii pe serviciul public de note?"
+
+#: src/entryArea.js:350
+msgid "Uploading image to public paste service…"
+msgstr "Se încarcă imaginea pe serviciul public de note…"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:371
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Încarc „%s” pe serviciul public de note?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:373
+#, javascript-format
+#| msgid "Uploading “%s” to public paste service …"
+msgid "Uploading “%s” to public paste service…"
+msgstr "Se încarcă „%s” la serviciul public de note…"
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:382
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s în #%s"
+
+#: src/entryArea.js:384
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Lipește de la %s"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "Îna_poi"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "_Gata"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "_Următorul"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
+#.
+#: src/ircParser.js:24
+#| msgid ""
+#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
+#| "one"
+msgid ""
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr "/CLOSE [<canal>] [<motiv>] — părăsește <canalul>, implicit cel curent"
+
+#: src/ircParser.js:25
+#| msgid ""
+#| "/HELP [<command>] - displays help for <command>, or a list of available "
+#| "commands"
+msgid ""
+"/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr ""
-"/HELP [<comandă>] - afișează contextul de ajutor pentru <comandă>, sau o "
-"listă de comenzi disponibile"
+"/HELP [<comandă>] — afișează ajutorul pentru <comandă>, sau o listă de "
+"comenzi disponibile"
 
-#: ../src/ircParser.js:27
+#: src/ircParser.js:26
+#| msgid ""
+#| "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current "
+#| "one"
 msgid ""
-"/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current one"
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <pseudonim> [<canal>] - invită pe <pseudonim> pe <canal>, sau pe cel "
+"/INVITE <pseudonim> [<canal>] — invită pe <pseudonim> pe <canal>, sau pe cel "
 "actual"
 
-#: ../src/ircParser.js:28
-msgid "/JOIN <channel> - joins <channel>"
-msgstr "/JOIN <canal> - se alătură <canal>"
+#: src/ircParser.js:27
+#| msgid "/JOIN <channel> - joins <channel>"
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <canal> — se alătură <canal>"
 
-#: ../src/ircParser.js:29
-msgid "/KICK <nick> - kicks <nick> from current channel"
-msgstr "/KICK <pseudonim> - îl înlătură pe <pseudonim> din canal"
+#: src/ircParser.js:28
+#| msgid "/KICK <nick> - kicks <nick> from current channel"
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <pseudonim> — îl dă afară pe <pseudonim> din canal"
 
-#: ../src/ircParser.js:30
-msgid "/ME <action> - sends <action> to the current channel"
-msgstr "/ME <acțiune> - trimite <acțiune> pe canalul curent"
+#: src/ircParser.js:29
+#| msgid "/ME <action> - sends <action> to the current channel"
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <acțiune> — trimite <acțiune> pe canalul curent"
 
-#: ../src/ircParser.js:31
-msgid "/NAMES - lists users on the current channel"
-msgstr "/NAMES - listează utilizatorii aflați pe canalul curent"
+#: src/ircParser.js:30
+#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <pseudonim> [<mesaj>] — trimite un mesaj privat către <pseudonim>"
 
-#: ../src/ircParser.js:32
-msgid "/NICK <nickname> - sets your nick to <nickname>"
-msgstr "/NICK <pseudonim> - modifică porecla dumneavoastră în <pseudonim>"
+#: src/ircParser.js:31
+#| msgid "/NAMES - lists users on the current channel"
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — listează utilizatorii aflați pe canalul curent"
 
-#: ../src/ircParser.js:33
+#: src/ircParser.js:32
+#| msgid "/NICK <nickname> - sets your nick to <nickname>"
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <pseudonim> — modifică pseudonimul în <pseudonim>"
+
+#: src/ircParser.js:33
+#| msgid ""
+#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
+#| "one"
 msgid ""
-"/PART [<channel>] [<reason>] - leaves <channel>, by default the current one"
-msgstr "/PART [<canal>] [<motiv>] - părăsește <canal>, implicit cel curent"
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr "/PART [<canal>] [<motiv>] — părăsește <canal>, implicit cel curent"
 
-#: ../src/ircParser.js:34
-msgid "/QUERY <nick> - opens a private conversation with <nick>"
+#: src/ircParser.js:34
+#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr ""
-"/QUERY <pseudonim> - deschide o fereastră de discuție privată cu <pseudonim>"
+"/QUERY <pseudonim> — deschide o fereastră de discuție privată cu <pseudonim>"
 
-#: ../src/ircParser.js:35
-msgid "/QUIT [<reason>] - disconnects from the current server"
-msgstr "/QUIT [<motiv>] - se deconectează de la serverul curent"
+#: src/ircParser.js:35
+#| msgid "/QUIT [<reason>] - disconnects from the current server"
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<motiv>] — se deconectează de la serverul curent"
 
-#: ../src/ircParser.js:36
-msgid "/SAY <text> - sends <text> to the current room/contact"
-msgstr "/SAY <text> - trimite <text> către camera/contactul curent"
+#: src/ircParser.js:36
+#| msgid "/SAY <text> - sends <text> to the current room/contact"
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <text> — trimite <text> către camera/contactul curent"
 
-#: ../src/ircParser.js:37
-msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+#: src/ircParser.js:37
+#| msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
-"/TOPIC <subiect> - modifică tema de discuții în <subiect>, sau afișează tema "
+"/TOPIC <subiect> — modifică tema de discuții în <subiect>, sau afișează tema "
 "de discuții existentă"
 
-#: ../src/ircParser.js:40
-msgid "Unknown command - try /HELP for a list of available commands"
+#: src/ircParser.js:40
+#| msgid "Unknown command - try /HELP for a list of available commands"
+msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
-"Comandă necunoscută - încercați /HELP pentru lista de comenzi disponibile"
+"Comandă necunoscută — încercați /HELP pentru lista de comenzi disponibile"
 
-#: ../src/ircParser.js:61
+#: src/ircParser.js:56
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Sintaxă: %s"
 
-#: ../src/ircParser.js:96
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "Comenzi cunoscute:"
 
-#: ../src/ircParser.js:173
+#: src/ircParser.js:191
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Utilizatori în %s:"
 
-#: ../src/ircParser.js:254
+#: src/ircParser.js:270
 msgid "No topic set"
 msgstr "Nicio temă de discuție aleasă"
 
-#: ../src/joinDialog.js:219
-msgid "Add Connection"
-msgstr "Adaugă o conexiune"
+#: src/joinDialog.js:237
+msgid "Add Network"
+msgstr "Adaugă o rețea"
 
-#: ../src/joinDialog.js:221
-msgid "_Save"
-msgstr "_Salvează"
-
-#: ../src/mainWindow.js:260
+#: src/mainWindow.js:383
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -446,25 +806,102 @@ msgstr[0] "%d utilizator"
 msgstr[1] "%d utilizatori"
 msgstr[2] "%d de utilizatori"
 
-#: ../src/messageDialog.js:92
-msgid "No recent users"
-msgstr "Niciun utilizator recent"
-
-#: ../src/pasteManager.js:291
-#, javascript-format
-msgid "Uploading %s"
-msgstr "Se încarcă %s"
-
-#: ../src/roomList.js:22
+#: src/roomList.js:133
 msgid "Leave chatroom"
 msgstr "Părăsește camera de discuții"
 
-#: ../src/roomList.js:23
-#| msgid "Edit Connection"
+#: src/roomList.js:133
 msgid "End conversation"
 msgstr "Încheie conversația"
 
-#: ../src/userList.js:184
+#: src/roomList.js:224
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "Rețeaua %s are o eroare"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:281
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:288
+msgid "Connection Problem"
+msgstr "Problemă de conexiune"
+
+#: src/roomList.js:304
+msgid "Connected"
+msgstr "Conectat"
+
+#: src/roomList.js:306
+#| msgid "Connecting..."
+msgid "Connecting…"
+msgstr "Se conectează…"
+
+#: src/roomList.js:308 src/userList.js:422
+msgid "Offline"
+msgstr "Deconectat"
+
+#: src/roomList.js:310
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: src/roomList.js:330
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "Nu s-a putut realiza o conexiune sigură cu %s."
+
+#: src/roomList.js:333
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s necesită o parolă."
+
+#: src/roomList.js:339
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Nu s-a putut realiza conexiunea cu %s. Serverul este ocupat."
+
+#: src/roomList.js:342
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Nu s-a putut realiza conexiunea cu %s."
+
+#: src/roomStack.js:124
+msgid "_Save Password"
+msgstr "_Salvează parola"
+
+#: src/roomStack.js:133
+msgid "Should the password be saved?"
+msgstr "Doriți salvarea parolei?"
+
+#: src/roomStack.js:141 src/telepathyClient.js:577
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr "Identificarea se va realiza automat la următoarea conectare la %s"
+
+#: src/roomStack.js:172
+msgid "Join a room using the + button."
+msgstr "Alăturați-vă unei camere de discuții utilizând butonul +."
+
+#: src/telepathyClient.js:402
+msgid "Good Bye"
+msgstr "La revedere"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:576
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Doriți salvarea parolei %s pentru %s?"
+
+#: src/telepathyClient.js:580
+#| msgid "_Save"
+msgid "Save"
+msgstr "Salvează"
+
+#: src/userList.js:237
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -472,7 +909,7 @@ msgstr[0] "acum %d secundă"
 msgstr[1] "acum %d secunde"
 msgstr[2] "acum %d de secunde"
 
-#: ../src/userList.js:189
+#: src/userList.js:242
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -480,7 +917,7 @@ msgstr[0] "acum %d minut"
 msgstr[1] "acum %d minute"
 msgstr[2] "acum %d de minute"
 
-#: ../src/userList.js:194
+#: src/userList.js:247
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -488,7 +925,7 @@ msgstr[0] "acum %d oră"
 msgstr[1] "acum %d ore"
 msgstr[2] "acum %d de ore"
 
-#: ../src/userList.js:199
+#: src/userList.js:252
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -496,7 +933,7 @@ msgstr[0] "acum %d zi"
 msgstr[1] "acum %d zile"
 msgstr[2] "acum %d de zile"
 
-#: ../src/userList.js:204
+#: src/userList.js:257
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -504,7 +941,7 @@ msgstr[0] "acum %d săptămână"
 msgstr[1] "acum %d săptămâni"
 msgstr[2] "acum %d de săptămâni"
 
-#: ../src/userList.js:208
+#: src/userList.js:261
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -512,9 +949,96 @@ msgstr[0] "acum %d lună"
 msgstr[1] "acum %d luni"
 msgstr[2] "acum %d de luni"
 
-#: ../src/userList.js:545
+#: src/userList.js:418
+msgid "Available in another room."
+msgstr "Disponibil în altă cameră."
+
+#: src/userList.js:420
+msgid "Online"
+msgstr "Conectat"
+
+#: src/userList.js:569
+msgid "No results"
+msgstr "Niciun rezultat"
+
+#: src/userList.js:743
 msgid "All"
-msgstr "Tot"
+msgstr "Toți"
+
+#: src/userTracker.js:315
+#| msgid "Users on %s:"
+msgid "User is online"
+msgstr "Utilizatorul s-a conectat"
+
+#: src/userTracker.js:316
+#, javascript-format
+msgid "User %s is now online."
+msgstr "Utilizatorul %s s-a conectat."
+
+#: src/utils.js:107
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Parola de server Polari pentru %s"
+
+#: src/utils.js:112
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Parola NickServ pentru %s"
+
+#~ msgid "Room _Name"
+#~ msgstr "_Numele canalului"
+
+#~ msgid "_Password"
+#~ msgstr "_Parolă"
+
+#~ msgid "Message"
+#~ msgstr "Mesaj"
+
+#~ msgid "Show connections"
+#~ msgstr "Arată conexiunile"
+
+#~ msgid "_Description"
+#~ msgstr "_Descriere"
+
+#~ msgid "Add"
+#~ msgstr "Adaugă"
+
+#~ msgid "_Add Connection"
+#~ msgstr "_Adăugați o conexiune"
+
+#~ msgid "Message a User"
+#~ msgstr "Mesaj către utilizator"
+
+#~| msgid "Join a Room"
+#~ msgid "Join room"
+#~ msgstr "Alătură-te canalului"
+
+#~ msgid "Preferences"
+#~ msgstr "Preferințe"
+
+#~ msgid "_Message"
+#~ msgstr "_Mesaj"
+
+#~ msgid "_Recent"
+#~ msgstr "_Recent"
+
+#~ msgid "_Name"
+#~ msgstr "_Nume"
+
+#~ msgid "Edit Connection"
+#~ msgstr "Editează o conexiune"
+
+#~ msgid "Cr_eate"
+#~ msgstr "Cr_eează"
+
+#~ msgid "Add Connection"
+#~ msgstr "Adaugă o conexiune"
+
+#~ msgid "No recent users"
+#~ msgstr "Niciun utilizator recent"
+
+#~ msgid "Uploading %s"
+#~ msgstr "Se încarcă %s"
 
 #~ msgid "Window position"
 #~ msgstr "Poziția ferestrei"
