@@ -1,7 +1,7 @@
 # Italian translation of polari
-# Copyright (C) 2013, 2014, 2015, 2016 Free Software Foundation, Inc.
+# Copyright (C) 2013, 2014, 2015, 2016, 2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the polari package.
-# Milo Casagrande <milo@milo.name>, 2013, 2014, 2015, 2016.
+# Milo Casagrande <milo@milo.name>, 2013, 2014, 2015, 2016, 2017.
 # Gianvito Cavasoli <gianvito@gmx.it>, 2017.
 #
 msgid ""
@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-25 10:12+0000\n"
-"PO-Revision-Date: 2017-08-11 11:07+0200\n"
-"Last-Translator: Gianvito Cavasoli <gianvito@gmx.it>\n"
+"POT-Creation-Date: 2017-08-13 21:20+0000\n"
+"PO-Revision-Date: 2017-08-22 08:57+0200\n"
+"Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italiano <gnome-it-list@gnome.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -19,16 +19,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2011-04-18 19:13+0000\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
-#: src/roomStack.js:170
+#: src/roomStack.js:169
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:664
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un programma IRC per GNOME"
 
@@ -130,7 +130,6 @@ msgid "Username to use in identify command"
 msgstr "Nome utente da usare con il comando di identificazione"
 
 #: data/org.gnome.Polari.gschema.xml:49
-#| msgid "Identify username"
 msgid "Identify username supported"
 msgstr "Nome utente d'identificazione supportato"
 
@@ -165,8 +164,8 @@ msgstr "Sopran_nome"
 msgid "_Real Name"
 msgstr "Nome _reale:"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:148
-#: data/resources/join-room-dialog.ui:11
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "A_nnulla"
 
@@ -186,7 +185,7 @@ msgstr "C_ambia"
 msgid "Change nickname"
 msgstr "Cambia soprannome"
 
-#: data/resources/entry-area.ui:158
+#: data/resources/entry-area.ui:159
 msgid "_Paste"
 msgstr "_Incolla"
 
@@ -212,55 +211,92 @@ msgstr "Mostra l'elenco utenti"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Mostra selettore emoji"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Esce"
 
-#: data/resources/help-overlay.ui:48
+#: data/resources/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: data/resources/help-overlay.ui:57
+#: data/resources/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigazione"
 
-#: data/resources/help-overlay.ui:61
+#: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Stanza successiva"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Stanza precedente"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Stanza successiva con messaggi non letti"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Stanza precedente con messaggi non letti"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Prima stanza"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Ultima stanza"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Prima - Nona stanza"
 
-#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:249
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "Configurazione di Polari"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "Non connessi"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Collegarsi a Internet per continuare la configurazione."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "Benvenuti in Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari è il modo più semplice per conversare utilizzando IRC. Per iniziare, "
+"selezionare una rete."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Selezionare le stanze a cui collegarsi. Facendo clic sul pulsante + è "
+"possibile aggiungere nuove reti e stanze."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
 msgid "Join Chat Room"
 msgstr "Entra in stanza di conversazione"
 
@@ -357,27 +393,31 @@ msgid "Will notify if user appears online."
 msgstr "Invia una notifica se l'utente appare online."
 
 #: data/resources/user-details.ui:181
-msgid "Message"
-msgstr "Messaggio"
+msgid "Start Conversation"
+msgstr "Inizia conversazione"
 
-#: src/application.js:45
+#: src/application.js:47
 msgid "Start Telepathy client"
 msgstr "Avvia client Telepathy"
 
-#: src/application.js:351 src/utils.js:187
+#: src/application.js:50
+msgid "Print version and exit"
+msgstr "Stampa la versione ed esce"
+
+#: src/application.js:380 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Apertura del collegamento non riuscita"
 
-#: src/application.js:563
+#: src/application.js:657
 #, javascript-format
 msgid "%s removed."
 msgstr "%s rimosso."
 
-#: src/application.js:663
+#: src/application.js:757
 msgid "translator-credits"
 msgstr "Milo Casagrande <milo@milo.name>, 2013-2016"
 
-#: src/application.js:669
+#: src/application.js:763
 msgid "Learn more about Polari"
 msgstr "Maggiori informazioni su Polari"
 
@@ -389,62 +429,62 @@ msgstr "Annulla"
 msgid "New Messages"
 msgstr "Nuovi messaggi"
 
-#: src/chatView.js:785
+#: src/chatView.js:780
 msgid "Open Link"
 msgstr "Apri collegamento"
 
-#: src/chatView.js:791
+#: src/chatView.js:786
 msgid "Copy Link Address"
 msgstr "Copia indirizzo collegamento"
 
-#: src/chatView.js:967
+#: src/chatView.js:954
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "L'utente %s è ora conosciuto come %s"
 
-#: src/chatView.js:972
+#: src/chatView.js:959
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "L'utente %s si è disconnesso"
 
-#: src/chatView.js:980
+#: src/chatView.js:967
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "L'utente %s è stato cacciato (kick) da %s"
 
-#: src/chatView.js:982
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "L'utente %s è stato cacciato (kick)"
 
-#: src/chatView.js:988
+#: src/chatView.js:975
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "L'utente %s è stato bandito da %s"
 
-#: src/chatView.js:990
+#: src/chatView.js:977
 #, javascript-format
 msgid "%s has been banned"
 msgstr "L'utente %s è stato bandito"
 
-#: src/chatView.js:995
+#: src/chatView.js:982
 #, javascript-format
 msgid "%s joined"
 msgstr "L'utente %s è entrato"
 
-#: src/chatView.js:1000
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s left"
 msgstr "L'utente %s se n'è andato"
 
-#: src/chatView.js:1095
+#: src/chatView.js:1080
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d utente è entrato"
 msgstr[1] "%d utenti sono entrati"
 
-#: src/chatView.js:1098
+#: src/chatView.js:1083
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -453,14 +493,14 @@ msgstr[1] "%d utenti se ne sono andati"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1165
+#: src/chatView.js:1150
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1170
+#: src/chatView.js:1155
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Ieri, %H:%M"
@@ -468,7 +508,7 @@ msgstr "Ieri, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1175
+#: src/chatView.js:1160
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -477,7 +517,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1181
+#: src/chatView.js:1166
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
@@ -486,21 +526,21 @@ msgstr "%d %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1187
+#: src/chatView.js:1172
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1192
+#: src/chatView.js:1177
 msgid "%l∶%M %p"
 msgstr "%I∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1197
+#: src/chatView.js:1182
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Ieri, %I∶%M %p"
@@ -508,7 +548,7 @@ msgstr "Ieri, %I∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1202
+#: src/chatView.js:1187
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %I∶%M %p"
@@ -517,7 +557,7 @@ msgstr "%A, %I∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1208
+#: src/chatView.js:1193
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %I∶%M %p"
@@ -526,7 +566,7 @@ msgstr "%d %B, %I∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1214
+#: src/chatView.js:1199
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %I∶%M %p"
@@ -536,12 +576,12 @@ msgid "Already added"
 msgstr "Già aggiunto"
 
 #. Translators: %s is a connection name
-#: src/connections.js:445
+#: src/connections.js:468
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Proprietà di «%s»"
 
-#: src/connections.js:489
+#: src/connections.js:510
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -549,50 +589,62 @@ msgstr ""
 "Polari si è scollegato a causa di un errore di rete. Verificare che "
 "l'indirizzo sia corretto."
 
-#: src/entryArea.js:314
+#: src/entryArea.js:338
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Incollare %s riga di testo nel servizio di «paste» pubblico?"
 msgstr[1] "Incollare %s righe di testo nel servizio di «paste» pubblico?"
 
-#: src/entryArea.js:318
+#: src/entryArea.js:342
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "Caricamento di %s riga di testo al servizio di «paste» pubblico…"
 msgstr[1] "Caricamento di %s righe di testo al servizio di «paste» pubblico…"
 
-#: src/entryArea.js:325
+#: src/entryArea.js:349
 msgid "Upload image to public paste service?"
 msgstr "Caricare l'immagine nel servizio di «paste» pubblico?"
 
-#: src/entryArea.js:326
+#: src/entryArea.js:350
 msgid "Uploading image to public paste service…"
 msgstr "Caricamento dell'immagine nel servizio di «paste» pubblico…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:347
+#: src/entryArea.js:371
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Caricare «%s» nel servizio di «paste» pubblico?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:349
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Caricamento di «%s» nel servizio di «paste» pubblico…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:358
+#: src/entryArea.js:382
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s in #%s"
 
-#: src/entryArea.js:360
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Incolla da %s"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "_Indietro"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "Fa_tto"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "_Successivo"
 
 #. commands that would be nice to support:
 #.
@@ -685,24 +737,24 @@ msgstr ""
 msgid "Usage: %s"
 msgstr "Uso: %s"
 
-#: src/ircParser.js:94
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "Comandi noti:"
 
-#: src/ircParser.js:194
+#: src/ircParser.js:191
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Utenti in %s:"
 
-#: src/ircParser.js:280
+#: src/ircParser.js:270
 msgid "No topic set"
 msgstr "Nessun argomento impostato"
 
-#: src/joinDialog.js:250
+#: src/joinDialog.js:237
 msgid "Add Network"
 msgstr "Aggiungi rete"
 
-#: src/mainWindow.js:388
+#: src/mainWindow.js:383
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -717,147 +769,147 @@ msgstr "Esci dalla stanza"
 msgid "End conversation"
 msgstr "Termina conversazione"
 
-#: src/roomList.js:227
+#: src/roomList.js:224
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "La rete %s presenta un errore"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:284
+#: src/roomList.js:281
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:291
+#: src/roomList.js:288
 msgid "Connection Problem"
 msgstr "Errore di connessione"
 
-#: src/roomList.js:307
+#: src/roomList.js:304
 msgid "Connected"
 msgstr "Connessi"
 
-#: src/roomList.js:309
+#: src/roomList.js:306
 msgid "Connecting…"
 msgstr "Connessione…"
 
-#: src/roomList.js:311 src/userList.js:424
+#: src/roomList.js:308 src/userList.js:422
 msgid "Offline"
 msgstr "Offline"
 
-#: src/roomList.js:313
+#: src/roomList.js:310
 msgid "Unknown"
 msgstr "Sconosiuto"
 
-#: src/roomList.js:333
+#: src/roomList.js:330
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Impossibile stabilire una connessione con %s in modo sicuro."
 
-#: src/roomList.js:336
+#: src/roomList.js:333
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s richiede una password."
 
-#: src/roomList.js:342
+#: src/roomList.js:339
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Impossibile stabilire una connessione con %s: il server è occupato."
 
-#: src/roomList.js:345
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Impossibile stabilire una connessione con %s."
 
-#: src/roomStack.js:125
+#: src/roomStack.js:124
 msgid "_Save Password"
 msgstr "Salva pass_word"
 
-#: src/roomStack.js:134
+#: src/roomStack.js:133
 msgid "Should the password be saved?"
 msgstr "Salvare la password?"
 
-#: src/roomStack.js:142 src/telepathyClient.js:582
+#: src/roomStack.js:141 src/telepathyClient.js:577
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr ""
 "L'identificazione avverrà automaticamente alla successiva connessione a %s"
 
-#: src/roomStack.js:173
+#: src/roomStack.js:172
 msgid "Join a room using the + button."
 msgstr "Entrare in una stanza utilizzando il pulsante +"
 
-#: src/telepathyClient.js:405
+#: src/telepathyClient.js:402
 msgid "Good Bye"
 msgstr "Ciao!"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:581
+#: src/telepathyClient.js:576
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Salvare la password di %s per %s?"
 
-#: src/telepathyClient.js:585
+#: src/telepathyClient.js:580
 msgid "Save"
 msgstr "Salva"
 
-#: src/userList.js:239
+#: src/userList.js:237
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d secondo fa"
 msgstr[1] "%d secondi fa"
 
-#: src/userList.js:244
+#: src/userList.js:242
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d minuto fa"
 msgstr[1] "%d minuti fa"
 
-#: src/userList.js:249
+#: src/userList.js:247
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d ora fa"
 msgstr[1] "%d ore fa"
 
-#: src/userList.js:254
+#: src/userList.js:252
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d giorno fa"
 msgstr[1] "%d giorni fa"
 
-#: src/userList.js:259
+#: src/userList.js:257
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d settimana fa"
 msgstr[1] "%d settimane fa"
 
-#: src/userList.js:263
+#: src/userList.js:261
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d mese fa"
 msgstr[1] "%d mesi fa"
 
-#: src/userList.js:420
+#: src/userList.js:418
 msgid "Available in another room."
 msgstr "Disponibile in un'altra stanza."
 
-#: src/userList.js:422
+#: src/userList.js:420
 msgid "Online"
 msgstr "Online"
 
-#: src/userList.js:571
+#: src/userList.js:569
 msgid "No results"
 msgstr "Nessun risultato"
 
-#: src/userList.js:745
+#: src/userList.js:743
 msgid "All"
 msgstr "Tutto"
 
@@ -879,3 +931,6 @@ msgstr "Password del server per %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Password del NickServ per %s"
+
+#~ msgid "Message"
+#~ msgstr "Messaggio"
