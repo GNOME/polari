@@ -2,6 +2,7 @@
 # Copyright (C) 2014 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Changwoo Ryu <cwryu@debian.org>, 2014-2017.
+# DaeHyun Sung <sungdh86@gmail.com>, 2017.
 #
 # - 이 프로그램의 이름인 Polari는 '폴라리'로 번역
 #
@@ -13,24 +14,25 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-03-04 21:50+0000\n"
-"PO-Revision-Date: 2017-03-11 17:57+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"POT-Creation-Date: 2017-08-13 21:20+0000\n"
+"PO-Revision-Date: 2017-09-02 15:31+0900\n"
+"Last-Translator: DaeHyun Sung <sungdh86@gmail.com>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
-#: src/roomStack.js:170
+#: src/roomStack.js:169
 msgid "Polari"
 msgstr "폴라리"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:651
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "그놈 데스크톱 IRC 클라이언트"
 
@@ -51,10 +53,10 @@ msgid ""
 "miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"폴라리를 사용해 채널의 사람들과 대화할 수 있고, 개인적으로 일대일 대화를 할 "
-"수도 있습니다. 알림 기능을 이용해 중요한 메시지를 놓치지 않을 수 있습니다. 개"
-"인 대화의 경우에는 폴라리 프로그램으로 전환하지 않고 알림 창에서 즉시 대답을 "
-"할 수 있습니다."
+"폴라리를 사용해 채널의 여러 사람과 대화할 수 있고, 개인적으로 일대일 대화를 "
+"할 수도 있습니다. 알림 기능을 이용해 중요한 메시지를 놓치지 않을 수 있습니"
+"다. 개인 대화의 경우에는 폴라리 프로그램으로 전환하지 않고 알림 창에서 즉시 "
+"대답을 할 수 있습니다."
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
@@ -135,6 +137,16 @@ msgstr "신원 확인 사용자 이름"
 msgid "Username to use in identify command"
 msgstr "신원 확인(identify) 명령에서 사용할 사용자 이름"
 
+# NOTE: nickserv의 identify 명령을 뜻한다
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr "신원 확인 사용자 이름 지원"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+"신원 확인 명령이 사용자 이름 매개변수를 지원하는 것으로 알려져 있는지 여부"
+
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
 msgstr "서버 주소(_S)"
@@ -160,8 +172,8 @@ msgstr "대화명(_N)"
 msgid "_Real Name"
 msgstr "실명(_R)"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:147
-#: data/resources/join-room-dialog.ui:11
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "취소(_C)"
 
@@ -177,11 +189,11 @@ msgstr "대화명 바꾸기:"
 msgid "_Change"
 msgstr "바꾸기(_C)"
 
-#: data/resources/entry-area.ui:77
+#: data/resources/entry-area.ui:78
 msgid "Change nickname"
 msgstr "별명 바꾸기"
 
-#: data/resources/entry-area.ui:157
+#: data/resources/entry-area.ui:159
 msgid "_Paste"
 msgstr "붙여넣기(_P)"
 
@@ -207,55 +219,92 @@ msgstr "사용자 목록 표시"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "이모지 선택 표시"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "끝내기"
 
-#: data/resources/help-overlay.ui:48
+#: data/resources/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "키보드 바로 가기"
 
-#: data/resources/help-overlay.ui:57
+#: data/resources/help-overlay.ui:64
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "돌아다니기"
 
-#: data/resources/help-overlay.ui:61
+#: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "다음 대화방"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "이전 대화방"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "읽지 않은 메시지가 있는 다음 대화방"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "읽지 않은 메시지가 있는 이전 대화방"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "첫 대화방"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "최근 대화방"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "1번째 – 9번째 대화방"
 
-#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:268
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "폴라리 설정"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "연결되지 않음"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "설정을 진행하려면 인터넷에 연결하세요."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "폴라리에 오신 것을 환영합니다"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"폴라리는 IRC를 사용하여 쉽게 채팅할 수 있는 프로그램입니다. 시작 할 네트워크"
+"를 선택하세요."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"연결할 대화방을 선택하기. + 단추를 선택하여 여러 네트워크 및 대화방을 추가할 "
+"수 있습니다."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
 msgid "Join Chat Room"
 msgstr "대화방 입장"
 
@@ -271,15 +320,11 @@ msgstr "연결(_O)"
 msgid "_Add Network"
 msgstr "네트워크 추가(_A)"
 
-#: data/resources/join-room-dialog.ui:112
-msgid "Enter room name to add"
-msgstr "추가할 대화방 이름을 입력하십시오"
-
-#: data/resources/join-room-dialog.ui:204
+#: data/resources/join-room-dialog.ui:159
 msgid "_Add"
 msgstr "추가(_A)"
 
-#: data/resources/join-room-dialog.ui:223
+#: data/resources/join-room-dialog.ui:178
 msgid "_Custom Network"
 msgstr "사용자 설정 네트워크(_C)"
 
@@ -337,6 +382,10 @@ msgstr "제거"
 msgid "Properties"
 msgstr "속성"
 
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "추가할 대화방 이름을 입력하십시오"
+
 #: data/resources/user-details.ui:27
 msgid "Loading details"
 msgstr "자세한 정보 읽어들이는 중"
@@ -350,27 +399,33 @@ msgid "Will notify if user appears online."
 msgstr "사용자가 온라인 상태가 될 때 알립니다."
 
 #: data/resources/user-details.ui:181
-msgid "Message"
-msgstr "메시지"
+msgid "Start Conversation"
+msgstr "대화 시작"
 
-#: src/application.js:45
+#: src/application.js:47
 msgid "Start Telepathy client"
 msgstr "텔레파시 클라이언트 시작"
 
-#: src/application.js:344 src/utils.js:185
+#: src/application.js:50
+msgid "Print version and exit"
+msgstr "버전을 출력하고 나가기"
+
+#: src/application.js:380 src/utils.js:185
 msgid "Failed to open link"
 msgstr "연결을 여는데 실패했습니다"
 
-#: src/application.js:551
+#: src/application.js:657
 #, javascript-format
 msgid "%s removed."
 msgstr "%s 제거함."
 
-#: src/application.js:650
+#: src/application.js:757
 msgid "translator-credits"
-msgstr "류창우"
+msgstr ""
+"류창우\n"
+"성대현 <sungdh86@gmail.com>"
 
-#: src/application.js:656
+#: src/application.js:763
 msgid "Learn more about Polari"
 msgstr "폴라리에 대해 더 알아보기"
 
@@ -382,61 +437,61 @@ msgstr "실행 취소"
 msgid "New Messages"
 msgstr "새 메시지"
 
-#: src/chatView.js:784
+#: src/chatView.js:780
 msgid "Open Link"
 msgstr "링크 열기"
 
-#: src/chatView.js:790
+#: src/chatView.js:786
 msgid "Copy Link Address"
 msgstr "링크 주소 복사"
 
-#: src/chatView.js:965
+#: src/chatView.js:954
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s님은 이제 %s입니다"
 
-#: src/chatView.js:970
+#: src/chatView.js:959
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s님이 연결을 끊었습니다"
 
-#: src/chatView.js:978
+#: src/chatView.js:967
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s님을 %s님이 강제 퇴장시켰습니다"
 
-#: src/chatView.js:980
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s님이 강제 퇴장되었습니다"
 
-#: src/chatView.js:986
+#: src/chatView.js:975
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s님을 %s님이 입장 금지했습니다"
 
-#: src/chatView.js:988
+#: src/chatView.js:977
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s님이 입장 금지되었습니다"
 
-#: src/chatView.js:993
+#: src/chatView.js:982
 #, javascript-format
 msgid "%s joined"
 msgstr "%s님이 입장했습니다"
 
-#: src/chatView.js:998
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s left"
 msgstr "%s 남음"
 
-#: src/chatView.js:1093
+#: src/chatView.js:1080
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "사용자 %d명 입장했습니다"
 
-#: src/chatView.js:1096
+#: src/chatView.js:1083
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -444,14 +499,14 @@ msgstr[0] "사용자 %d명 떠났습니다"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1163
+#: src/chatView.js:1150
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1168
+#: src/chatView.js:1155
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "어제, %H∶%M"
@@ -459,7 +514,7 @@ msgstr "어제, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1173
+#: src/chatView.js:1160
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -468,7 +523,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1179
+#: src/chatView.js:1166
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d일, %H∶%M"
@@ -477,21 +532,21 @@ msgstr "%B %d일, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1185
+#: src/chatView.js:1172
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y년 %B %d일, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1190
+#: src/chatView.js:1177
 msgid "%l∶%M %p"
 msgstr "%p %l∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1195
+#: src/chatView.js:1182
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "어제, %p %l∶%M"
@@ -499,7 +554,7 @@ msgstr "어제, %p %l∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1200
+#: src/chatView.js:1187
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %p %l∶%M"
@@ -508,7 +563,7 @@ msgstr "%A, %p %l∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1206
+#: src/chatView.js:1193
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d일, %p %l∶%M"
@@ -517,22 +572,22 @@ msgstr "%B %d일, %p %l∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1212
+#: src/chatView.js:1199
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y년 %B %d일, %p %l∶%M"
 
-#: src/connections.js:53
+#: src/connections.js:54
 msgid "Already added"
 msgstr "이미 추가함"
 
 #. Translators: %s is a connection name
-#: src/connections.js:444
+#: src/connections.js:468
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "“%s” 속성"
 
-#: src/connections.js:488
+#: src/connections.js:510
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -540,48 +595,60 @@ msgstr ""
 "폴라리의 연결이 네트워크 오류 때문에 끊겼습니다. 주소 입력이 올바른지 확인해 "
 "보십시오."
 
-#: src/entryArea.js:304
+#: src/entryArea.js:338
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "공개 페이스트 서비스에 텍스트 %s줄을 붙여넣으시겠습니까?"
 
-#: src/entryArea.js:308
+#: src/entryArea.js:342
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "공개 페이스트 서비스에 텍스트 %s줄을 업로드하는 중…"
 
-#: src/entryArea.js:315
+#: src/entryArea.js:349
 msgid "Upload image to public paste service?"
 msgstr "이미지를 공개 페이스트 서비스에 업로드하시겠습니까?"
 
-#: src/entryArea.js:316
+#: src/entryArea.js:350
 msgid "Uploading image to public paste service…"
 msgstr "이미지를 공개 페이스트 서비스에 업로드하는 중…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:337
+#: src/entryArea.js:371
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "“%s” 파일을 공개 페이스트 서비스에 업로드하시겠습니까?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:339
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "“%s” 파일을 공개 페이스트 서비스에 업로드하는 중…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:348
+#: src/entryArea.js:382
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s (#%s 대화방)"
 
-#: src/entryArea.js:350
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste from %s"
 msgstr "%s에서 붙여 넣음"
+
+#: src/initialSetup.js:84
+msgid "_Back"
+msgstr "뒤로(_B)"
+
+#: src/initialSetup.js:85
+msgid "_Done"
+msgstr "완료(_D)"
+
+#: src/initialSetup.js:85
+msgid "_Next"
+msgstr "다음(_N)"
 
 #. commands that would be nice to support:
 #.
@@ -672,24 +739,24 @@ msgstr "알 수 없는 명령 — 명령어 목록을 보려면 /HELP 명령을 
 msgid "Usage: %s"
 msgstr "사용법: %s"
 
-#: src/ircParser.js:94
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "알려진 명령어:"
 
-#: src/ircParser.js:194
+#: src/ircParser.js:191
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s에 있는 사용자:"
 
-#: src/ircParser.js:280
+#: src/ircParser.js:270
 msgid "No topic set"
 msgstr "방 제목을 설정하지 않았습니다"
 
-#: src/joinDialog.js:269
+#: src/joinDialog.js:237
 msgid "Add Network"
 msgstr "네트워크 추가"
 
-#: src/mainWindow.js:388
+#: src/mainWindow.js:383
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -703,159 +770,162 @@ msgstr "대화방 나가기"
 msgid "End conversation"
 msgstr "대화 끝내기"
 
-#: src/roomList.js:227
+#: src/roomList.js:224
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "%s 네트워크에 오류가 있습니다"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:284
+#: src/roomList.js:281
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:291
+#: src/roomList.js:288
 msgid "Connection Problem"
 msgstr "연결 문제"
 
-#: src/roomList.js:307
+#: src/roomList.js:304
 msgid "Connected"
 msgstr "연결됨"
 
-#: src/roomList.js:309
+#: src/roomList.js:306
 msgid "Connecting…"
 msgstr "연결 중…"
 
-#: src/roomList.js:311 src/userList.js:423
+#: src/roomList.js:308 src/userList.js:422
 msgid "Offline"
 msgstr "오프라인"
 
-#: src/roomList.js:313
+#: src/roomList.js:310
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: src/roomList.js:333
+#: src/roomList.js:330
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "안전한 방법으로 %s에 연결할 수 없습니다."
 
-#: src/roomList.js:336
+#: src/roomList.js:333
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s에 암호가 필요합니다."
 
-#: src/roomList.js:342
+#: src/roomList.js:339
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "%s에 연결할 수 없습니다. 서버가 사용 중입니다."
 
-#: src/roomList.js:345
+#: src/roomList.js:342
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "%s에 연결할 수 없습니다."
 
-#: src/roomStack.js:125
+#: src/roomStack.js:124
 msgid "_Save Password"
 msgstr "암호 저장(_S)"
 
-#: src/roomStack.js:134
+#: src/roomStack.js:133
 msgid "Should the password be saved?"
 msgstr "암호를 저장합니까?"
 
 # NOTE: nickserv의 identify 명령을 뜻한다
-#: src/roomStack.js:142 src/telepathyClient.js:575
+#: src/roomStack.js:141 src/telepathyClient.js:577
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr "신원 확인(identify)은 다음에 %s에 연결할 때 자동으로 수행합니다"
 
-#: src/roomStack.js:173
+#: src/roomStack.js:172
 msgid "Join a room using the + button."
 msgstr "+ 단추를 이용해 대화방에 입장하십시오."
 
-#: src/telepathyClient.js:400
+#: src/telepathyClient.js:402
 msgid "Good Bye"
 msgstr "안녕히 가세요"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:574
+#: src/telepathyClient.js:576
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "%s 암호를 (%s에 대해) 저장합니까?"
 
-#: src/telepathyClient.js:578
+#: src/telepathyClient.js:580
 msgid "Save"
 msgstr "저장"
 
-#: src/userList.js:238
+#: src/userList.js:237
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d초 전"
 
-#: src/userList.js:243
+#: src/userList.js:242
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d분 전"
 
-#: src/userList.js:248
+#: src/userList.js:247
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d시간 전"
 
-#: src/userList.js:253
+#: src/userList.js:252
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d일 전"
 
-#: src/userList.js:258
+#: src/userList.js:257
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d주 전"
 
-#: src/userList.js:262
+#: src/userList.js:261
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d달 전"
 
-#: src/userList.js:419
+#: src/userList.js:418
 msgid "Available in another room."
 msgstr "다른 대화방에 있음."
 
-#: src/userList.js:421
+#: src/userList.js:420
 msgid "Online"
 msgstr "온라인"
 
-#: src/userList.js:570
+#: src/userList.js:569
 msgid "No results"
 msgstr "결과 없음"
 
-#: src/userList.js:744
+#: src/userList.js:743
 msgid "All"
 msgstr "모두"
 
-#: src/userTracker.js:303
+#: src/userTracker.js:315
 msgid "User is online"
 msgstr "사용자 온라인"
 
-#: src/userTracker.js:304
+#: src/userTracker.js:316
 #, javascript-format
 msgid "User %s is now online."
 msgstr "%s 사용자는 이제 온라인 상태입니다."
 
-#: src/utils.js:105
+#: src/utils.js:107
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "%s에 대한 폴라리 서버 암호"
 
-#: src/utils.js:110
+#: src/utils.js:112
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "%s에 대한 폴라리 NickServ 암호"
+
+#~ msgid "Message"
+#~ msgstr "메시지"
