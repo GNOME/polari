@@ -52,6 +52,7 @@
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="action_name">app.show-join-dialog</property>
+                <property name="tooltip-text" translatable="yes">Add rooms and networks</property>
                 <style>
                   <class name="image-button"/>
                 </style>
