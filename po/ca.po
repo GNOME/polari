@@ -5,13 +5,14 @@
 # Gil Forcada <gilforcada@guifi.net>, 2014.
 # Walter Garcia-Fontes <walter.garcia@upf.edu<, 2015.
 # Carles Ferrando Garcia <carles.ferrando@gmail.com>, 2017.
+# Jordi Serratosa <jordis@softcatala.cat>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-09-03 08:00+0000\n"
+"POT-Creation-Date: 2017-09-08 11:03+0000\n"
 "PO-Revision-Date: 2017-09-03 12:46+0200\n"
 "Last-Translator: Carles Ferrando Garcia <carles.ferrando@gmail.com>\n"
 "Language-Team: català; valencià <info@softcatala.org>\n"
@@ -586,15 +587,15 @@ msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr ""
-"El Polari s'ha desconnectat a causa d'un error de xarxa. Si us plau "
-"verifiqueu si el camp de l'adreça és correcte."
+"El Polari s'ha desconnectat a causa d'un error de xarxa. "
+"Verifiqueu si el camp de l'adreça és correcte."
 
 #: src/entryArea.js:338
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Voleu enganxar %s línia de text al servei públic d'enganxament?"
-msgstr[1] "Voleu enganxar %s línies de text al servei públic d'enganxament?<"
+msgstr[1] "Voleu enganxar %s línies de text al servei públic d'enganxament?"
 
 #: src/entryArea.js:342
 #, javascript-format
@@ -602,7 +603,7 @@ msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "S'està carregant %s línia de text a un servei públic d'enganxament…"
 msgstr[1] ""
-"S'estan carregant %s línies de text a un servei públic d'enganxament…<"
+"S'estan carregant %s línies de text a un servei públic d'enganxament…"
 
 #: src/entryArea.js:349
 msgid "Upload image to public paste service?"
@@ -610,7 +611,7 @@ msgstr "Voleu carregar la imatge al servei públic d'enganxament?"
 
 #: src/entryArea.js:350
 msgid "Uploading image to public paste service…"
-msgstr "S'està carregant la imatge a un servei públic d'enganxament…<"
+msgstr "S'està carregant la imatge a un servei públic d'enganxament…"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:371
