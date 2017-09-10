@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
-"Report-Msgid-Bugs-To: "
-"https://bugzilla.gnome.org/enter_bug.cgi?product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-13 21:20+0000\n"
-"PO-Revision-Date: 2017-03-05 11:38+0100\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
+"product=polari&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-08-30 06:24+0000\n"
+"PO-Revision-Date: 2017-09-10 17:58+0200\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -131,15 +131,12 @@ msgid "Username to use in identify command"
 msgstr "Brugernavn i identify-kommando"
 
 #: data/org.gnome.Polari.gschema.xml:49
-#, fuzzy
-#| msgid "Identify username"
 msgid "Identify username supported"
-msgstr "Brugernavn til identify"
+msgstr "Understøtter identify med brugernavn"
 
 #: data/org.gnome.Polari.gschema.xml:50
-msgid ""
-"Whether the identify command is known to support the username parameter"
-msgstr ""
+msgid "Whether the identify command is known to support the username parameter"
+msgstr "Om identify-kommandoen vides at understøtte brugernavn (parameteren username)"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -214,7 +211,7 @@ msgstr "Vis brugerliste"
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
 msgid "Show Emoji Picker"
-msgstr ""
+msgstr "Vis emoji-vælger"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
@@ -267,38 +264,32 @@ msgid "First – Ninth Room"
 msgstr "Første – niende rum"
 
 #: data/resources/initial-setup-window.ui:10
-#, fuzzy
-#| msgid "Polari"
 msgid "Polari Setup"
-msgstr "Polari"
+msgstr "Polari-opsætning"
 
 #: data/resources/initial-setup-window.ui:60
-#, fuzzy
-#| msgid "Connected"
 msgid "Not connected"
-msgstr "Forbundet"
+msgstr "Ikke forbundet"
 
 #: data/resources/initial-setup-window.ui:73
 msgid "Please connect to the internet to continue the setup."
-msgstr ""
+msgstr "Forbind venligst til nettet for at fortsætte opsætningen."
 
 #: data/resources/initial-setup-window.ui:109
 #: data/resources/initial-setup-window.ui:159
-#, fuzzy
-#| msgid "Learn more about Polari"
 msgid "Welcome to Polari"
-msgstr "Lær mere om Polari"
+msgstr "Velkommen til Polari"
 
 #: data/resources/initial-setup-window.ui:121
 msgid ""
 "Polari is an easy way to chat using IRC. Select a network to get started."
-msgstr ""
+msgstr "Polari er en nem måde at chatte på over IRC. Vælg et netværk for at komme i gang."
 
 #: data/resources/initial-setup-window.ui:171
 msgid ""
 "Select rooms you want to connect to. You can add more networks and rooms "
 "later, by clicking the + button."
-msgstr ""
+msgstr "Vælg rummene, du vil forbinde til. Du kan tilføje flere netværk og rum senere ved at klikke på +-knappen."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
 msgid "Join Chat Room"
@@ -397,10 +388,8 @@ msgid "Will notify if user appears online."
 msgstr "Vil give påmindelse, hvis bruger ses online."
 
 #: data/resources/user-details.ui:181
-#, fuzzy
-#| msgid "End conversation"
 msgid "Start Conversation"
-msgstr "Afslut samtale"
+msgstr "Begynd samtale"
 
 #: src/application.js:47
 msgid "Start Telepathy client"
@@ -408,7 +397,7 @@ msgstr "Start Telepathy-klient"
 
 #: src/application.js:50
 msgid "Print version and exit"
-msgstr ""
+msgstr "Udskriv version og afslut"
 
 #: src/application.js:380 src/utils.js:185
 msgid "Failed to open link"
@@ -648,15 +637,15 @@ msgstr "Indsæt fra %s"
 
 #: src/initialSetup.js:84
 msgid "_Back"
-msgstr ""
+msgstr "_Tilbage"
 
 #: src/initialSetup.js:85
 msgid "_Done"
-msgstr ""
+msgstr "_Færdig"
 
 #: src/initialSetup.js:85
 msgid "_Next"
-msgstr ""
+msgstr "_Næste"
 
 #. commands that would be nice to support:
 #.
@@ -727,8 +716,7 @@ msgstr "/QUERY <kaldenavn> — åbner en privat samtale med <kaldenavn>"
 
 #: src/ircParser.js:35
 msgid "/QUIT [<reason>] — disconnects from the current server"
-msgstr ""
-"/QUIT [<begrundelse>] — afbryder forbindelsen til den nuværende server"
+msgstr "/QUIT [<begrundelse>] — afbryder forbindelsen til den nuværende server"
 
 #: src/ircParser.js:36
 msgid "/SAY <text> — sends <text> to the current room/contact"
@@ -944,7 +932,7 @@ msgstr "Polari-serveradgangskode for %s"
 msgid "Polari NickServ password for %s"
 msgstr "Polari-NickServ-serveradgangskode til %s"
 
-#~ # scootergrisen: "Message" er noget man gør når man har valgt en bruger.
+# scootergrisen: "Message" er noget man gør når man har valgt en bruger.
 #~ msgid "Message"
 #~ msgstr "Send meddelelse"
 
@@ -1028,5 +1016,3 @@ msgstr "Polari-NickServ-serveradgangskode til %s"
 
 #~ msgid "Enable them by opening %s in the application menu."
 #~ msgstr "Slå dem til ved at åbne %s i programmenuen."
-
-
