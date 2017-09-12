@@ -168,6 +168,7 @@
                 <property name="visible">True</property>
                 <property name="focus-on-click">False</property>
                 <property name="action-name">app.user-list</property>
+                <property name="tooltip-text" translatable="yes">Show connected users</property>
                 <style>
                   <class name="polari-user-list-button"/>
                   <class name="text-button"/>
