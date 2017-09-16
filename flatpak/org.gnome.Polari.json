@@ -146,8 +146,9 @@
             ],
             "sources": [
                 {
-                    "url": "https://anongit.freedesktop.org/git/fontconfig",
-                    "type": "git"
+                    "url": "https://fontconfig.org/release/fontconfig-2.12.5.tar.bz2",
+                    "type": "archive",
+                    "sha256": "e10ccf1e26b0968f61d81037af1147fea28e86bfd159ffd8cfd5a486da126ce4"
                 }
             ],
             "post-install": [
