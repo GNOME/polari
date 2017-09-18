@@ -19,9 +19,9 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot type="default">https://git.gnome.org/browse/polari/plain/data/appdata/polari-main.png</screenshot>
-    <screenshot>https://git.gnome.org/browse/polari/plain/data/appdata/polari-user-list.png</screenshot>
-    <screenshot>https://git.gnome.org/browse/polari/plain/data/appdata/polari-connections.png</screenshot>
+    <screenshot type="default"><image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-16/data/appdata/polari-main.png</image></screenshot>
+    <screenshot><image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-16/data/appdata/polari-user-list.png</image></screenshot>
+    <screenshot><image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-16/data/appdata/polari-connections.png</image></screenshot>
   </screenshots>
   <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
   <updatecontact>fmuellner@gnome.org</updatecontact>
