@@ -218,7 +218,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://git.gnome.org/browse/polari"
+                    "url": "https://gitlab.gnome.org/GNOME/polari.git"
                 }
             ]
         }
