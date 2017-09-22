@@ -109,6 +109,9 @@
                     "url": "https://download.gnome.org/sources/gspell/1.6/gspell-1.6.0.tar.xz",
                     "sha256": "b5d73dab4bda45cde4bdeed04e472dca8a3e16ea19739cfb66237553e91f872d"
                 }
+            ],
+            "cleanup": [
+                "/bin"
             ]
         },
         {
