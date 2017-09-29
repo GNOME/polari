@@ -93,9 +93,6 @@ var _ServerRoomManager = new Lang.Class({
         let roomList = this._roomLists.get(list.account);
         if (!roomList)
             return;
-
-        debug('Got room %s for account %s'.format(roomInfo.get_name(),
-                                                  list.account.display_name));
         roomList.rooms.push(roomInfo);
     },
 
