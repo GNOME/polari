@@ -52,6 +52,13 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.26.1" date="2017-10-04">
+      <description>
+        <p>
+           The first update for GNOME 3.26 brings in new translations.
+        </p>
+      </description>
+    </release>
     <release version="3.26.0" date="2017-09-12">
       <description>
         <p>
