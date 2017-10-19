@@ -1,0 +1,15 @@
+image: fedora:26
+
+stages:
+ - build
+
+before_script:
+  - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
+                   gjs-devel gobject-introspection-devel telepathy-glib-devel
+                   libappstream-glib desktop-file-utils
+
+build-polari:
+  stage: build
+  script:
+    - meson _build .
+    - ninja -C _build test install
