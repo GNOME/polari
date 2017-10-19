@@ -1,15 +1,6 @@
-image: fedora:26
+image: alexl/flatpak-builder-gnome:3.26
 
-stages:
- - build
-
-before_script:
-  - dnf install -y gcc meson ninja-build redhat-rpm-config gettext itstool
-                   gtk3-devel gjs-devel gobject-introspection-devel
-                   telepathy-glib-devel libappstream-glib desktop-file-utils
-
-build-polari:
+build:
   stage: build
   script:
-    - meson _build .
-    - ninja -C _build test install
+    - flatpak-builder --force-clean --repo=repo app flatpak/org.gnome.Polari.json
