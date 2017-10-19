@@ -1257,8 +1257,8 @@ var ChatView = GObject.registerClass({
                     nickTag = new ButtonTag({ name: nickTagName });
                     nickTag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
 
-                    nickTag.underline = Pango.Underline.SINGLE;
-                    nickTag.underline_rgba = this._getNickTagColor(message.nick);
+                    //nickTag.underline = Pango.Underline.SINGLE;
+                    nickTag.background_rgba = this._getNickTagColor(message.nick);
 
                     let status = this._userTracker.getNickRoomStatus(message.nick, this._room);
                     this._updateNickTag(nickTag, status);
