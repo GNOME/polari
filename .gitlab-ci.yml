@@ -4,8 +4,8 @@ stages:
  - build
 
 before_script:
-  - dnf install -y gcc meson ninja-build gettext gtk3-devel gjs-devel
-                   gobject-introspection-devel telepathy-glib-devel
+  - dnf install -y gcc meson ninja-build redhat-rpm-config gettext gtk3-devel
+                   gjs-devel gobject-introspection-devel telepathy-glib-devel
 
 build-polari:
   stage: build
