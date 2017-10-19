@@ -45,7 +45,7 @@ js_xml = []
 foreach js_source : js_sources
   js_xml += '    <file>@0@</file>'.format(js_source)
 
-  test('Syntax check ' + js_source, js,
+  test('Syntax check ' + js_source, js52,
     args: ['-s', '-c', js_source],
     workdir: meson.current_source_dir())
 endforeach
