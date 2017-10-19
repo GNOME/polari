@@ -6,7 +6,7 @@ stages:
 before_script:
   - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
                    gjs-devel gobject-introspection-devel telepathy-glib-devel
-                   libappstream-glib desktop-file-utils
+                   tracker-sparql-2.0 libappstream-glib desktop-file-utils
 
 build-polari:
   stage: build
