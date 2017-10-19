@@ -1,0 +1,14 @@
+image: fedora:26
+
+stages:
+ - build
+
+before_script:
+  - dnf install -y gcc meson ninja-build gettext gtk3-devel gjs-devel
+                   gobject-introspection-devel telepathy-glib-devel
+
+build-polari:
+  stage: build
+  script:
+    - meson _build .
+    - ninja -C _build test install
