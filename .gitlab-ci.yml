@@ -1,4 +1,4 @@
-image: alexl/flatpak-builder-gnome:master
+image: alexl/flatpak-builder-gnome:3.26
 
 build:
   stage: build
