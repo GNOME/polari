@@ -893,6 +893,17 @@ var ChatView = GObject.registerClass({
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     }
 
+    _getNickTagColor(nick) {
+        let type = GLib.ChecksumType.MD5;
+        let baseNick = Polari.util_get_basenick(nick);
+        let hash = GLib.compute_checksum_for_string(type, baseNick, -1);
+        let rgba = new Gdk.RGBA();
+        rgba.parse('#' + hash.substr(0, 6));
+        rgba.alpha = 0.2;
+
+        return rgba;
+    }
+
     _getNickFromTagName(tagName) {
         if (tagName.startsWith(NICKTAG_PREFIX))
             return tagName.replace(NICKTAG_PREFIX, '');
@@ -1245,6 +1256,9 @@ var ChatView = GObject.registerClass({
                 if (!nickTag) {
                     nickTag = new ButtonTag({ name: nickTagName });
                     nickTag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
+
+                    nickTag.underline = Pango.Underline.SINGLE;
+                    nickTag.underline_rgba = this._getNickTagColor(message.nick);
 
                     let status = this._userTracker.getNickRoomStatus(message.nick, this._room);
                     this._updateNickTag(nickTag, status);
