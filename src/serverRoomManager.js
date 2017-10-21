@@ -12,7 +12,7 @@ const RoomManager = imports.roomManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
 
-const LIST_CHUNK_SIZE = 100;
+const MS_PER_IDLE = 10;
 
 let _singleton = null;
 
@@ -319,16 +319,18 @@ var ServerRoomList = new Lang.Class({
         this._idleId = Mainloop.idle_add(() => {
             let customName = this._store.get_value(this._customRoomItem,
                                                    RoomListColumn.NAME);
-            this._pendingInfos.splice(0, LIST_CHUNK_SIZE).forEach(roomInfo => {
-                let store = this._store;
+            let store = this._store;
+            let startTime = GLib.get_monotonic_time();
+            while (this._pendingInfos.length > 0) {
+                let roomInfo = this._pendingInfos.shift();
 
                 let name = roomInfo.get_name();
                 if (name[0] == '#')
                     name = name.substr(1, name.length);
 
                 if (_strBaseEqual(name, customName))
-                    this._store.set_value(this._customRoomItem,
-                                          RoomListColumn.NAME, customName = '');
+                    store.set_value(this._customRoomItem,
+                                    RoomListColumn.NAME, customName = '');
 
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
                 let sensitive = room == null;
@@ -342,9 +344,10 @@ var ServerRoomList = new Lang.Class({
                                                       RoomListColumn.SENSITIVE],
                                                      [checked, name, count, sensitive]);
                 store.move_before(iter, this._customRoomItem);
-            });
-            if (this._pendingInfos.length)
-                return GLib.SOURCE_CONTINUE;
+
+                if (GLib.get_monotonic_time() - startTime > 1000 * MS_PER_IDLE)
+                    return GLib.SOURCE_CONTINUE;
+            }
 
             this._idleId = 0;
             this._checkSpinner();
