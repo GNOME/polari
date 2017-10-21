@@ -63,6 +63,7 @@
             <property name="visible">True</property>
             <property name="model">modelFilter</property>
             <property name="activate-on-single-click">True</property>
+            <property name="fixed-height-mode">True</property>
             <property name="enable-grid-lines">horizontal</property>
             <property name="headers-visible">False</property>
             <style>
@@ -70,6 +71,7 @@
             </style>
             <child>
               <object class="GtkTreeViewColumn">
+                <property name="sizing">fixed</property>
                 <child>
                   <object class="GtkCellRendererToggle" id="toggleRenderer"/>
                   <attributes>
@@ -95,6 +97,12 @@
                 <child>
                   <object class="GtkCellRendererText">
                     <property name="xalign">1.0</property>
+                    <!-- Fixed-height mode requires fixed column sizing,
+                         which means renderers don't grow with their content;
+                         the biggest rooms on Freenode have around 2000 users,
+                         so 5 digits should be a safe to no cut off the number
+                     -->
+                    <property name="width-chars">5</property>
                   </object>
                   <attributes>
                     <attribute name="text">2</attribute>
