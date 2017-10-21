@@ -42,6 +42,8 @@ var Application = new Lang.Class({
         this._nickTrackData = new Map();
         this._demons = [];
 
+        this._windowRemovedId = 0;
+
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Start Telepathy client"), null);
@@ -285,8 +287,9 @@ var Application = new Lang.Class({
         if (!this.active_window) {
             if (this._needsInitialSetup()) {
                 let setupDialog = new InitialSetup.InitialSetupWindow({ application: this });
-                let id = this.connect('window-removed', () => {
-                    this.disconnect(id);
+                this._windowRemovedId = this.connect('window-removed', () => {
+                    this.disconnect(this._windowRemovedId);
+                    this._windowRemovedId = 0;
                     this.activate();
                 });
             } else {
@@ -776,6 +779,10 @@ var Application = new Lang.Class({
     },
 
     _onQuit: function() {
+        if (this._windowRemovedId)
+            this.disconnect(this._windowRemovedId);
+        this._windowRemovedId = 0;
+
         this.get_windows().reverse().forEach(w => { w.destroy(); });
         this.emit('prepare-shutdown');
     }
