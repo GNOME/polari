@@ -39,9 +39,12 @@
   </screenshots>
   <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
   <url type="bugtracker">https://gitlab.gnome.org/GNOME/polari/issues/new</url>
+  <url type="help">https://help.gnome.org/users/polari/stable/</url>
   <url type="donation">http://www.gnome.org/friends/</url>
+  <url type="translate">https://wiki.gnome.org/TranslationProject</url>
   <update_contact>fmuellner@gnome.org</update_contact>
   <project_group>GNOME</project_group>
+  <developer_name>The GNOME Project</developer_name>
   <kudos>
     <kudo>AppMenu</kudo>
     <kudo>HiDpiIcon</kudo>
