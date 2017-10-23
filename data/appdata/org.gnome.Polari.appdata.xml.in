@@ -38,7 +38,7 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://wiki.gnome.org/Apps/Polari</url>
-  <url type="bugtracker">https://bugzilla.gnome.org/enter_bug.cgi?product=polari</url>
+  <url type="bugtracker">https://gitlab.gnome.org/GNOME/polari/issues/new</url>
   <url type="donation">http://www.gnome.org/friends/</url>
   <update_contact>fmuellner@gnome.org</update_contact>
   <project_group>GNOME</project_group>
