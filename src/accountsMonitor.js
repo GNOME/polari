@@ -12,10 +12,8 @@ function getDefault() {
     return _singleton;
 }
 
-var AccountsMonitor = new Lang.Class({
-    Name: 'AccountsMonitor',
-
-    _init() {
+class AccountsMonitor {
+    constructor() {
         this._accounts = new Map();
         this._accountSettings = new Map();
 
@@ -33,23 +31,23 @@ var AccountsMonitor = new Lang.Class({
         this._preparedCallbacks = [];
         this._accountManager.prepare_async(null,
                                            Lang.bind(this, this._onPrepared));
-    },
+    }
 
     get accounts() {
         return [...this._accounts.values()];
-    },
+    }
 
     get enabledAccounts() {
         return [...this._accounts.values()].filter(a => a.enabled);
-    },
+    }
 
     get accountManager() {
         return this._accountManager;
-    },
+    }
 
     lookupAccount(accountPath) {
         return this._accounts.get(accountPath);
-    },
+    }
 
     getAccountSettings(account) {
         let accountPath = account.object_path;
@@ -62,7 +60,7 @@ var AccountsMonitor = new Lang.Class({
                                       path: path });
         this._accountSettings.set(accountPath, settings);
         return settings;
-    },
+    }
 
     prepare(callback) {
         let quark = Tp.AccountManager.get_feature_quark_core();
@@ -70,7 +68,7 @@ var AccountsMonitor = new Lang.Class({
             callback();
         else
             this._preparedCallbacks.push(callback);
-    },
+    }
 
     _onPrepared(am, res) {
         try {
@@ -97,7 +95,7 @@ var AccountsMonitor = new Lang.Class({
                    Lang.bind(this, this._accountEnabledChanged));
 
         this._preparedCallbacks.forEach(callback => { callback(); });
-    },
+    }
 
     _onPrepareShutdown() {
         let presence = Tp.ConnectionPresenceType.OFFLINE;
@@ -110,11 +108,11 @@ var AccountsMonitor = new Lang.Class({
                 this._app.release();
             });
         });
-    },
+    }
 
     _shouldMonitorAccount(account) {
         return account.protocol_name == 'irc';
-    },
+    }
 
     _addAccount(account) {
         if (!this._shouldMonitorAccount(account))
@@ -131,7 +129,7 @@ var AccountsMonitor = new Lang.Class({
 
         this.emit('account-added', account);
         this.emit('accounts-changed');
-    },
+    }
 
     _removeAccount(account) {
         if (!this._accounts.delete(account.object_path))
@@ -142,7 +140,7 @@ var AccountsMonitor = new Lang.Class({
 
         this.emit('account-removed', account);
         this.emit('accounts-changed');
-    },
+    }
 
     _accountEnabledChanged(am, account) {
         if (!this._accounts.has(account.object_path))
@@ -151,5 +149,5 @@ var AccountsMonitor = new Lang.Class({
                                   : 'account-disabled', account);
         this.emit('accounts-changed');
     }
-});
+};
 Signals.addSignalMethods(AccountsMonitor.prototype);

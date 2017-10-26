@@ -18,10 +18,8 @@ function getUserStatusMonitor() {
     return _singleton;
 }
 
-var UserStatusMonitor = new Lang.Class({
-    Name: 'UserStatusMonitor',
-
-    _init() {
+class UserStatusMonitor {
+    constructor() {
         this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();
 
@@ -32,23 +30,23 @@ var UserStatusMonitor = new Lang.Class({
 
         this._accountsMonitor.accounts.forEach(
                     a => { this._onAccountAdded(this._accountsMonitor, a); });
-    },
+    }
 
     _onAccountAdded(accountsMonitor, account) {
         if (this._userTrackers.has(account))
             return;
 
         this._userTrackers.set(account, new UserTracker(account));
-    },
+    }
 
     _onAccountRemoved(accountsMonitor, account) {
         this._userTrackers.delete(account);
-    },
+    }
 
     getUserTrackerForAccount(account) {
             return this._userTrackers.get(account);
     }
-});
+};
 
 
 var UserTracker = new Lang.Class({
