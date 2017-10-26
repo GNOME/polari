@@ -22,7 +22,7 @@ var RoomStack = new Lang.Class({
                                                     0, GLib.MAXUINT32, 0)
     },
 
-    _init: function(params) {
+    _init(params) {
         this.parent(params);
 
         this._sizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.VERTICAL });
@@ -45,7 +45,7 @@ var RoomStack = new Lang.Class({
         });
     },
 
-    vfunc_realize: function() {
+    vfunc_realize() {
         this.parent();
 
         let toplevel = this.get_toplevel();
@@ -62,26 +62,26 @@ var RoomStack = new Lang.Class({
         return this._entryAreaHeight;
     },
 
-    _addView: function(id, view) {
+    _addView(id, view) {
         this._rooms.set(id, view);
         this.add_named(view, id);
     },
 
-    _roomAdded: function(roomManager, room) {
+    _roomAdded(roomManager, room) {
         this._addView(room.id, new RoomView(room, this._sizeGroup));
     },
 
-    _roomRemoved: function(roomManager, room) {
+    _roomRemoved(roomManager, room) {
         this._rooms.get(room.id).destroy();
         this._rooms.delete(room.id);
     },
 
-    _activeRoomChanged: function() {
+    _activeRoomChanged() {
         let room = this.get_toplevel().active_room;
         this.set_visible_child_name(room ? room.id : 'placeholder');
     },
 
-    _updateSensitivity: function() {
+    _updateSensitivity() {
         let room = this.get_toplevel().active_room;
         if (!room)
             return;
@@ -94,7 +94,7 @@ var SavePasswordConfirmationBar = new Lang.Class({
     Name: 'SavePasswordConfirmationBar',
     Extends: Gtk.Revealer,
 
-    _init: function(room) {
+    _init(room) {
         this._room = room;
 
         this.parent({ valign: Gtk.Align.START });
@@ -116,7 +116,7 @@ var SavePasswordConfirmationBar = new Lang.Class({
         });
     },
 
-    _createWidget: function() {
+    _createWidget() {
         this._infoBar = new Gtk.InfoBar({ show_close_button: true })
         this.add(this._infoBar);
 
@@ -146,7 +146,7 @@ var SavePasswordConfirmationBar = new Lang.Class({
         this._infoBar.show_all();
     },
 
-    _onDestroy: function() {
+    _onDestroy() {
         if (this._identifySentId)
             this._room.disconnect(this._identifySentId);
         this._identifySentId = 0;
@@ -157,7 +157,7 @@ var ChatPlaceholder = new Lang.Class({
     Name: 'ChatPlaceholder',
     Extends: Gtk.Overlay,
 
-    _init: function(sizeGroup) {
+    _init(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         let image = new Gtk.Image({ icon_name: 'org.gnome.Polari-symbolic',
@@ -195,7 +195,7 @@ var RoomView = new Lang.Class({
     Name: 'RoomView',
     Extends: Gtk.Overlay,
 
-    _init: function(room, sizeGroup) {
+    _init(room, sizeGroup) {
         this.parent();
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });

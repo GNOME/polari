@@ -32,7 +32,7 @@ var Application = new Lang.Class({
     Signals: { 'prepare-shutdown': {},
                'room-focus-changed': {} },
 
-    _init: function() {
+    _init() {
         this.parent({ application_id: 'org.gnome.Polari',
                       flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
@@ -73,21 +73,21 @@ var Application = new Lang.Class({
         });
     },
 
-    isRoomFocused: function(room) {
+    isRoomFocused(room) {
         return this.active_window &&
                this.active_window['is-active'] &&
                this.active_window.active_room == room;
     },
 
     // Small wrapper to mark user-requested nick changes
-    setAccountNick: function(account, nick) {
+    setAccountNick(account, nick) {
         account.set_nickname_async(nick, (a, res) => {
             account.set_nickname_finish(res);
         });
         this._untrackNominalNick(account);
     },
 
-    _checkService: function(conn, name, opath, iface) {
+    _checkService(conn, name, opath, iface) {
         let flags = Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
                     Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS;
         let proxy = null;
@@ -100,7 +100,7 @@ var Application = new Lang.Class({
         return proxy != null && proxy.get_name_owner() != null;
     },
 
-    _ensureService: function(conn, name, opath, iface, command) {
+    _ensureService(conn, name, opath, iface, command) {
         debug('Trying to ensure service %s'.format(name));
 
         if (this._checkService(conn, name, opath, iface))
@@ -118,7 +118,7 @@ var Application = new Lang.Class({
         }
     },
 
-    vfunc_dbus_register: function(conn, path) {
+    vfunc_dbus_register(conn, path) {
         if (!Utils.isFlatpakSandbox())
             return true;
 
@@ -141,13 +141,13 @@ var Application = new Lang.Class({
         return true;
     },
 
-    vfunc_dbus_unregister: function(conn, path) {
+    vfunc_dbus_unregister(conn, path) {
         for (let proc of this._demons)
             proc.force_exit();
         this._demons = [];
     },
 
-    vfunc_startup: function() {
+    vfunc_startup() {
         this.parent();
 
         let actionEntries = [
@@ -281,7 +281,7 @@ var Application = new Lang.Class({
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     },
 
-    vfunc_activate: function() {
+    vfunc_activate() {
         this.activate_action('start-client', null);
 
         if (!this.active_window) {
@@ -309,7 +309,7 @@ var Application = new Lang.Class({
         this.active_window.present();
     },
 
-    vfunc_window_added: function(window) {
+    vfunc_window_added(window) {
         this.parent(window);
 
         if (!(window instanceof MainWindow.MainWindow))
@@ -326,7 +326,7 @@ var Application = new Lang.Class({
         this._updateUserListAction();
     },
 
-    vfunc_open: function(files) {
+    vfunc_open(files) {
         this.activate();
 
         let time = Utils.getTpEventTime();
@@ -337,7 +337,7 @@ var Application = new Lang.Class({
         });
     },
 
-    _openURIs: function(uris, time) {
+    _openURIs(uris, time) {
         let map = {};
 
         this._accountsMonitor.enabledAccounts.forEach(a => {
@@ -373,7 +373,7 @@ var Application = new Lang.Class({
         });
     },
 
-    _parseURI: function(uri) {
+    _parseURI(uri) {
         let server, port, room;
         let success = false;
         try {
@@ -389,7 +389,7 @@ var Application = new Lang.Class({
         return [success, server, port, room];
     },
 
-    _createAccount: function(id, server, port, callback) {
+    _createAccount(id, server, port, callback) {
         let params, name;
 
         if (id) {
@@ -423,7 +423,7 @@ var Application = new Lang.Class({
         });
     },
 
-    _touchFile: function(file) {
+    _touchFile(file) {
         try {
             file.get_parent().make_directory_with_parents(null);
         } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
@@ -434,7 +434,7 @@ var Application = new Lang.Class({
         stream.close(null);
     },
 
-    _needsInitialSetup: function() {
+    _needsInitialSetup() {
         if (GLib.getenv('POLARI_FORCE_INITIAL_SETUP')) {
             GLib.unsetenv('POLARI_FORCE_INITIAL_SETUP');
             return true;
@@ -454,13 +454,13 @@ var Application = new Lang.Class({
         return savedRooms.n_children() == 0;
     },
 
-    _updateUserListAction: function() {
+    _updateUserListAction() {
         let room = this.active_window.active_room;
         let action = this.lookup_action('user-list');
         action.enabled = room && room.type == Tp.HandleType.ROOM && room.channel;
     },
 
-    _userListCreateHook: function(action) {
+    _userListCreateHook(action) {
         action.connect('notify::enabled', () => {
             if (!action.enabled)
                 action.change_state(GLib.Variant.new('b', false));
@@ -468,28 +468,28 @@ var Application = new Lang.Class({
         action.enabled = false;
     },
 
-    _onShowJoinDialog: function() {
+    _onShowJoinDialog() {
         this.active_window.showJoinRoomDialog();
     },
 
-    _maybePresent: function(time) {
+    _maybePresent(time) {
         let [present, ] = Tp.user_action_time_should_present(time);
 
         if (!this.active_window || present)
             this.activate();
     },
 
-    _onJoinRoom: function(action, parameter) {
+    _onJoinRoom(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
         this._maybePresent(time);
     },
 
-    _onMessageUser: function(action, parameter) {
+    _onMessageUser(action, parameter) {
         let [accountPath, contactName, message, time] = parameter.deep_unpack();
         this._maybePresent(time);
     },
 
-    _trackNominalNick: function(account) {
+    _trackNominalNick(account) {
         if (this._nickTrackData.has(account))
             return;
 
@@ -514,7 +514,7 @@ var Application = new Lang.Class({
         this._nickTrackData.set(account, { tracker, contactsChangedId });
     },
 
-    _untrackNominalNick: function(account) {
+    _untrackNominalNick(account) {
         let data = this._nickTrackData.get(account);
         if (!data)
             return;
@@ -523,7 +523,7 @@ var Application = new Lang.Class({
         this._nickTrackData.delete(account);
     },
 
-    _ensureRetryData: function(account) {
+    _ensureRetryData(account) {
         let data = this._retryData.get(account.object_path);
         if (data)
             return data;
@@ -547,19 +547,19 @@ var Application = new Lang.Class({
         return data;
     },
 
-    _getTrimmedAccountName: function(account) {
+    _getTrimmedAccountName(account) {
         let params = Connections.getAccountParams(account);
         return params.account.replace(/_+$/, '');
     },
 
-    _restoreAccountName: function(account) {
+    _restoreAccountName(account) {
         let accountName = this._getTrimmedAccountName(account);
         let params = { account: new GLib.Variant('s', accountName) };
         let asv = new GLib.Variant('a{sv}', params);
         account.update_parameters_vardict_async(asv, [], null);
     },
 
-    _retryWithParams: function(account, params) {
+    _retryWithParams(account, params) {
         account.update_parameters_vardict_async(params, [], () => {
             let presence = Tp.ConnectionPresenceType.AVAILABLE;
             let msg = account.requested_status_message;
@@ -567,7 +567,7 @@ var Application = new Lang.Class({
         });
     },
 
-    _retryNickRequest: function(account) {
+    _retryNickRequest(account) {
         let retryData = this._ensureRetryData(account);
 
         if (retryData.retry++ >= MAX_RETRIES)
@@ -584,7 +584,7 @@ var Application = new Lang.Class({
         return true;
     },
 
-    _retryServerRequest: function(account) {
+    _retryServerRequest(account) {
         let retryData = this._ensureRetryData(account);
 
         let server = retryData.alternateServers.shift();
@@ -599,7 +599,7 @@ var Application = new Lang.Class({
         return true;
     },
 
-    _onAccountStatusChanged: function(mon, account) {
+    _onAccountStatusChanged(mon, account) {
         let status = account.connection_status;
 
         if (status == Tp.ConnectionStatus.CONNECTING)
@@ -632,7 +632,7 @@ var Application = new Lang.Class({
         this._restoreAccountName(account);
     },
 
-    _onLeaveCurrentRoom: function() {
+    _onLeaveCurrentRoom() {
         let room = this.active_window.active_room;
         if (!room)
             return;
@@ -640,7 +640,7 @@ var Application = new Lang.Class({
         action.activate(GLib.Variant.new('(ss)', [room.id, '']));
     },
 
-    _onConnectAccount: function(action, parameter) {
+    _onConnectAccount(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         if (account)
@@ -648,12 +648,12 @@ var Application = new Lang.Class({
         this._retryData.delete(accountPath);
     },
 
-    _onToggleAction: function(action) {
+    _onToggleAction(action) {
         let state = action.get_state();
         action.change_state(GLib.Variant.new('b', !state.get_boolean()));
     },
 
-    _onRemoveConnection: function(action, parameter){
+    _onRemoveConnection(action, parameter){
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         account.set_enabled_async(false, () => {
@@ -674,7 +674,7 @@ var Application = new Lang.Class({
         });
     },
 
-    _onEditConnection: function(action, parameter) {
+    _onEditConnection(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         let dialog = new Connections.ConnectionProperties(account);
@@ -685,7 +685,7 @@ var Application = new Lang.Class({
         dialog.show();
     },
 
-    _createLink: function(file, target) {
+    _createLink(file, target) {
         try {
             file.get_parent().make_directory_with_parents(null);
         } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
@@ -695,7 +695,7 @@ var Application = new Lang.Class({
         file.make_symbolic_link(target, null);
     },
 
-    _onRunInBackgroundChanged: function() {
+    _onRunInBackgroundChanged() {
         let file = Gio.File.new_for_path(AUTOSTART_DIR + AUTOSTART_FILE);
 
         if (this._settings.get_boolean('run-in-background'))
@@ -714,7 +714,7 @@ var Application = new Lang.Class({
             }
     },
 
-    _onStartClient: function() {
+    _onStartClient() {
         if (this._telepathyClient)
             return;
 
@@ -726,11 +726,11 @@ var Application = new Lang.Class({
         this._telepathyClient = new TelepathyClient.TelepathyClient(params);
     },
 
-    _onShowHelp: function() {
+    _onShowHelp() {
         Utils.openURL('help:org.gnome.Polari', Gtk.get_current_event_time());
     },
 
-    _onShowAbout: function() {
+    _onShowAbout() {
         if (this._aboutDialog) {
             this._aboutDialog.present();
             return;
@@ -778,7 +778,7 @@ var Application = new Lang.Class({
         });
     },
 
-    _onQuit: function() {
+    _onQuit() {
         if (this._windowRemovedId)
             this.disconnect(this._windowRemovedId);
         this._windowRemovedId = 0;

@@ -8,7 +8,7 @@ const Lang = imports.lang;
 var TabCompletion = new Lang.Class({
     Name: 'TabCompletion',
 
-    _init: function(entry) {
+    _init(entry) {
         this._entry = entry;
         this._canComplete = false;
         this._key = '';
@@ -52,7 +52,7 @@ var TabCompletion = new Lang.Class({
         }
     },
 
-    _showPopup: function() {
+    _showPopup() {
         this._list.show_all();
 
         let [, height] = this._list.get_preferred_height();
@@ -75,7 +75,7 @@ var TabCompletion = new Lang.Class({
         this._popup.show();
     },
 
-    setCompletions: function(completions) {
+    setCompletions(completions) {
         if (this._popup.visible) {
             let id = this._popup.connect('unmap', () => {
                 this._popup.disconnect(id);
@@ -120,7 +120,7 @@ var TabCompletion = new Lang.Class({
         this._canComplete = completions.length > 0;
     },
 
-    _onKeyPress: function(w, event) {
+    _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
 
         if (this._key.length == 0) {
@@ -158,7 +158,7 @@ var TabCompletion = new Lang.Class({
         return Gdk.EVENT_PROPAGATE;
     },
 
-    _getRowCompletion: function(row) {
+    _getRowCompletion(row) {
         this._previousWasCommand = this._isCommand;
 
         if (this._isCommand)
@@ -168,18 +168,18 @@ var TabCompletion = new Lang.Class({
         return row._text;
     },
 
-    _onRowSelected: function(w, row) {
+    _onRowSelected(w, row) {
         if (row)
             this._insertCompletion(this._getRowCompletion(row));
     },
 
-    _filter: function(row) {
+    _filter(row) {
         if (this._key.length == 0)
             return false;
         return row._casefoldedText.startsWith(this._key);
     },
 
-    _insertCompletion: function(completion) {
+    _insertCompletion(completion) {
         let pos = this._entry.get_position();
         this._endPos = this._startPos + completion.length;
         this._entry.delete_text(this._startPos, pos);
@@ -187,14 +187,14 @@ var TabCompletion = new Lang.Class({
         this._entry.set_position(this._endPos);
     },
 
-    _setPreviousCompletionChained: function(chained) {
+    _setPreviousCompletionChained(chained) {
         let repl = chained ? ',' : ':';
         let start = this._startPos - 2;
         this._entry.delete_text(start, start + 1);
         this._entry.insert_text(repl, -1, start);
     },
 
-    _start: function() {
+    _start() {
         if (!this._canComplete)
             return;
 
@@ -229,7 +229,7 @@ var TabCompletion = new Lang.Class({
         }
     },
 
-    _onKeynavFailed: function(w, dir) {
+    _onKeynavFailed(w, dir) {
         if (this._inHandler)
             return Gdk.EVENT_PROPAGATE;
         let count = dir == Gtk.DirectionType.DOWN ? -1 : 1;
@@ -239,13 +239,13 @@ var TabCompletion = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    _moveSelection: function(movement, count) {
+    _moveSelection(movement, count) {
         this._list.emit('move-cursor', movement, count);
         let row = this._list.get_focus_child();
         this._list.select_row(row);
     },
 
-    _stop: function() {
+    _stop() {
         if (this._key.length == 0)
             return;
 
@@ -257,7 +257,7 @@ var TabCompletion = new Lang.Class({
         this._list.invalidate_filter();
     },
 
-    _cancel: function() {
+    _cancel() {
         if (this._key.length == 0)
             return;
         if (this._isChained)

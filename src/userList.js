@@ -19,7 +19,7 @@ var UserListPopover = new Lang.Class({
     Name: 'UserListPopover',
     Extends: Gtk.Popover,
 
-    _init: function(params) {
+    _init(params) {
         this.parent(params);
 
         this._createWidget();
@@ -34,7 +34,7 @@ var UserListPopover = new Lang.Class({
         });
     },
 
-    vfunc_realize: function() {
+    vfunc_realize() {
         this.parent();
 
         let toplevel = this.get_toplevel();
@@ -42,7 +42,7 @@ var UserListPopover = new Lang.Class({
                          Lang.bind(this, this._activeRoomChanged));
     },
 
-    _createWidget: function() {
+    _createWidget() {
         this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
                                   spacing: 6 });
         this.add(this._box);
@@ -61,7 +61,7 @@ var UserListPopover = new Lang.Class({
         this._box.show_all();
     },
 
-    _activeRoomChanged: function() {
+    _activeRoomChanged() {
         this._entry.text = '';
 
         if (this._userList)
@@ -69,7 +69,7 @@ var UserListPopover = new Lang.Class({
         this._userList = null;
     },
 
-    _ensureUserList: function() {
+    _ensureUserList() {
         if (this._userList)
             return;
 
@@ -85,7 +85,7 @@ var UserListPopover = new Lang.Class({
         this._updateEntryVisibility();
     },
 
-    _updateEntryVisibility: function() {
+    _updateEntryVisibility() {
         if (!this._userList)
             return;
 
@@ -94,7 +94,7 @@ var UserListPopover = new Lang.Class({
         this._revealer.reveal_child = reveal;
     },
 
-    _updateFilter: function() {
+    _updateFilter() {
         if (!this._userList)
             return;
         this._userList.setFilter(this._entry.text);
@@ -123,7 +123,7 @@ var UserDetails = new Lang.Class({
                                                              READWRITE,
                                                              false)},
 
-    _init: function(params = {}) {
+    _init(params = {}) {
         let user = params.user;
         delete params.user;
 
@@ -209,7 +209,7 @@ var UserDetails = new Lang.Class({
         this.notify('expanded');
     },
 
-    _expand: function() {
+    _expand() {
         this._detailsGrid.visible = this._initialDetailsLoaded;
         this._spinnerBox.visible = !this._initialDetailsLoaded;
         this._spinner.start();
@@ -224,7 +224,7 @@ var UserDetails = new Lang.Class({
             this._revealDetails();
     },
 
-    _unexpand: function() {
+    _unexpand() {
         this._spinner.stop();
 
         if (this._cancellable)
@@ -232,7 +232,7 @@ var UserDetails = new Lang.Class({
         this._cancellable = null;
     },
 
-    _formatLast: function(seconds) {
+    _formatLast(seconds) {
         if (seconds < 60)
             return ngettext("%d second ago",
                             "%d seconds ago", seconds).format(seconds);
@@ -262,7 +262,7 @@ var UserDetails = new Lang.Class({
                         "%d months ago", months).format(months);
     },
 
-    _onContactInfoReady: function(c, res) {
+    _onContactInfoReady(c, res) {
         this._initialDetailsLoaded = true;
 
         let fn, last;
@@ -289,13 +289,13 @@ var UserDetails = new Lang.Class({
         this._revealDetails();
     },
 
-    _revealDetails: function() {
+    _revealDetails() {
         this._spinner.stop();
         this._spinnerBox.hide();
         this._detailsGrid.show();
     },
 
-    _onMessageButtonClicked: function() {
+    _onMessageButtonClicked() {
         let account = this._user.connection.get_account();
 
         let app = Gio.Application.get_default();
@@ -308,7 +308,7 @@ var UserDetails = new Lang.Class({
                                            time ]));
     },
 
-    _updateButtonVisibility: function() {
+    _updateButtonVisibility() {
         if (!this._user) {
             this._messageButton.sensitive = false;
 
@@ -334,7 +334,7 @@ var UserPopover = new Lang.Class({
                        'notifyButton',
                        'userDetails'],
 
-    _init: function(params) {
+    _init(params) {
         this._room = params.room;
         delete params.room;
 
@@ -378,7 +378,7 @@ var UserPopover = new Lang.Class({
         this._setBasenick(Polari.util_get_basenick(nickname));
     },
 
-    _setBasenick: function(basenick) {
+    _setBasenick(basenick) {
         if (this._basenick == basenick)
             return;
 
@@ -408,7 +408,7 @@ var UserPopover = new Lang.Class({
         return this._nickname;
     },
 
-    _onStatusChanged: function() {
+    _onStatusChanged() {
         let status = this._userTracker.getNickStatus(this._nickname);
         let roomStatus = this._userTracker.getNickRoomStatus(this._nickname,
                                                              this._room);
@@ -425,11 +425,11 @@ var UserPopover = new Lang.Class({
         this._nickLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
     },
 
-    _updateDetailsContact: function() {
+    _updateDetailsContact() {
         this._userDetails.user = this._userTracker.lookupContact(this._nickname);
      },
 
-    _onNickStatusChanged: function(baseNick, status) {
+    _onNickStatusChanged(baseNick, status) {
         this._onStatusChanged();
     }
 });
@@ -438,7 +438,7 @@ var UserListRow = new Lang.Class({
     Name: 'UserListRow',
     Extends: Gtk.ListBoxRow,
 
-    _init: function(user) {
+    _init(user) {
         this._user = user;
 
         this.parent();
@@ -469,7 +469,7 @@ var UserListRow = new Lang.Class({
         this._revealer.reveal_child = expand;
     },
 
-    _createWidget: function() {
+    _createWidget() {
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add(vbox);
 
@@ -496,7 +496,7 @@ var UserListRow = new Lang.Class({
         this.show_all();
     },
 
-    _ensureDetails: function() {
+    _ensureDetails() {
         if (this._revealer.get_child())
             return;
 
@@ -507,16 +507,16 @@ var UserListRow = new Lang.Class({
         this._revealer.add(details);
     },
 
-    shouldShow: function() {
+    shouldShow() {
         return this._user.alias.toLowerCase().indexOf(this._filter) != -1;
     },
 
-    setFilter: function(filter) {
+    setFilter(filter) {
         this._filter = filter.toLowerCase();
         this._updateLabel();
     },
 
-    _updateLabel: function() {
+    _updateLabel() {
         let filterIndex = -1;
         if (this._filter)
             filterIndex = this._user.alias.toLowerCase().indexOf(this._filter);
@@ -531,14 +531,14 @@ var UserListRow = new Lang.Class({
         }
     },
 
-    _updateArrowVisibility: function() {
+    _updateArrowVisibility() {
         let flags = this.get_state_flags();
         this._arrow.visible = this.expand ||
                               flags & Gtk.StateFlags.PRELIGHT ||
                               flags & Gtk.StateFlags.FOCUSED;
     },
 
-    _onExpandedChanged: function() {
+    _onExpandedChanged() {
         if (this._revealer.reveal_child) {
             this.get_style_context().add_class('expanded');
             this._arrow.arrow_type = Gtk.ArrowType.DOWN;
@@ -554,7 +554,7 @@ var UserList = new Lang.Class({
     Name: 'UserList',
     Extends: Gtk.ScrolledWindow,
 
-    _init: function(room) {
+    _init(room) {
         this.parent({ hexpand: true,
                       shadow_type: Gtk.ShadowType.ETCHED_IN,
                       hscrollbar_policy: Gtk.PolicyType.NEVER,
@@ -631,18 +631,18 @@ var UserList = new Lang.Class({
         return Object.keys(this._rows).length;
     },
 
-    _onDestroy: function() {
+    _onDestroy() {
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
     },
 
-    setFilter: function(filter) {
+    setFilter(filter) {
         this._filter = filter;
         this._list.invalidate_filter();
     },
 
-    _updateContentHeight: function() {
+    _updateContentHeight() {
         if (this._updateHeightId != 0)
             return;
 
@@ -666,24 +666,24 @@ var UserList = new Lang.Class({
         });
     },
 
-    _onMemberRenamed: function(room, oldMember, newMember) {
+    _onMemberRenamed(room, oldMember, newMember) {
         this._removeMember(oldMember);
         this._addMember(newMember);
     },
 
-    _onMemberRemoved: function(room, member) {
+    _onMemberRemoved(room, member) {
         this._removeMember(member);
     },
 
-    _onMemberJoined: function(room, member) {
+    _onMemberJoined(room, member) {
         this._addMember(member);
     },
 
-    _onMembersChanged: function(room) {
+    _onMembersChanged(room) {
         this._counterLabel.label = this.numRows.toString();
     },
 
-    _onChannelChanged: function(room) {
+    _onChannelChanged(room) {
         this._list.foreach(w => { w.destroy(); });
         this._rows = {};
 
@@ -695,40 +695,40 @@ var UserList = new Lang.Class({
             this._addMember(members[i]);
     },
 
-    _addMember: function(member) {
+    _addMember(member) {
         let row = new UserListRow(member);
         this._rows[member] = row;
         this._list.add(row);
     },
 
-    _removeMember: function(member) {
+    _removeMember(member) {
         let row = this._rows[member];
         if (row)
             row.destroy();
         delete this._rows[member];
     },
 
-    _setActiveRow: function(row) {
+    _setActiveRow(row) {
         if (this._activeRow && this._activeRow != row)
             this._activeRow.expand = false;
         this._activeRow = row;
     },
 
-    _onRowActivated: function(list, row) {
+    _onRowActivated(list, row) {
         this._setActiveRow(row);
         this._activeRow.expand = !this._activeRow.expand;
     },
 
-    _sort: function(row1, row2) {
+    _sort(row1, row2) {
         return row1.user.alias.localeCompare(row2.user.alias);
     },
 
-    _filterRows: function(row) {
+    _filterRows(row) {
         row.setFilter(this._filter);
         return row.shouldShow();
     },
 
-    _updateHeader: function(row, before) {
+    _updateHeader(row, before) {
         if (before) {
             row.set_header(null);
             return;

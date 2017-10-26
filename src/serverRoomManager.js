@@ -26,7 +26,7 @@ function getDefault() {
 var _ServerRoomManager = new Lang.Class({
     Name: '_ServerRoomManager',
 
-    _init: function() {
+    _init() {
         this._roomLists = new Map();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -41,21 +41,21 @@ var _ServerRoomManager = new Lang.Class({
         });
     },
 
-    getRoomInfos: function(account) {
+    getRoomInfos(account) {
         let roomList = this._roomLists.get(account);
         if (!roomList || roomList.list.listing)
             return [];
         return roomList.rooms.slice();
     },
 
-    isLoading: function(account) {
+    isLoading(account) {
         let roomList = this._roomLists.get(account);
         if (!roomList)
             return account.connection_status == Tp.ConnectionStatus.CONNECTING;
         return roomList.list.listing;
     },
 
-    _onAccountStatusChanged: function(mon, account) {
+    _onAccountStatusChanged(mon, account) {
         if (account.connection_status == Tp.ConnectionStatus.CONNECTING)
             this.emit('loading-changed', account);
 
@@ -81,7 +81,7 @@ var _ServerRoomManager = new Lang.Class({
         this._roomLists.set(account, { list: roomList, rooms: [] });
     },
 
-    _onAccountRemoved: function(mon, account) {
+    _onAccountRemoved(mon, account) {
         let roomList = this._roomLists.get(account);
         if (!roomList)
             return;
@@ -90,14 +90,14 @@ var _ServerRoomManager = new Lang.Class({
         this._roomLists.delete(account);
     },
 
-    _onGotRoom: function(list, roomInfo) {
+    _onGotRoom(list, roomInfo) {
         let roomList = this._roomLists.get(list.account);
         if (!roomList)
             return;
         roomList.rooms.push(roomInfo);
     },
 
-    _onListingChanged: function(list) {
+    _onListingChanged(list) {
         this.emit('loading-changed', list.account);
     }
 });
@@ -132,7 +132,7 @@ var ServerRoomList = new Lang.Class({
                                                        false)
     },
 
-    _init: function(params) {
+    _init(params) {
         this._account = null;
         this._pendingInfos = [];
         this._filterTerms = [];
@@ -221,7 +221,7 @@ var ServerRoomList = new Lang.Class({
         return rooms;
     },
 
-    setAccount: function(account) {
+    setAccount(account) {
         if (this._account == account)
             return;
 
@@ -232,17 +232,17 @@ var ServerRoomList = new Lang.Class({
         this._onLoadingChanged(this._manager, account);
     },
 
-    focusEntry: function() {
+    focusEntry() {
         this._filterEntry.grab_focus();
     },
 
-    _isCustomRoomItem: function(iter) {
+    _isCustomRoomItem(iter) {
         let path = this._store.get_path(iter);
         let customPath = this._store.get_path(this._customRoomItem);
         return path.compare(customPath) == 0;
     },
 
-    _updateCustomRoomName: function() {
+    _updateCustomRoomName() {
         let newName = this._filterEntry.text.trim();
         if (newName.search(/\s/) != -1)
             newName = '';
@@ -264,7 +264,7 @@ var ServerRoomList = new Lang.Class({
         this._store.set_value(this._customRoomItem, RoomListColumn.NAME, newName);
     },
 
-    _updateSelection: function() {
+    _updateSelection() {
         if (this._filterEntry.text.trim().length == 0)
             return;
 
@@ -277,7 +277,7 @@ var ServerRoomList = new Lang.Class({
         this._list.scroll_to_cell(model.get_path(iter), null, true, 0.0, 0.0);
     },
 
-    _clearList: function() {
+    _clearList() {
         let [valid, iter] = this._store.get_iter_first();
         if (this._isCustomRoomItem(iter))
             return;
@@ -286,7 +286,7 @@ var ServerRoomList = new Lang.Class({
             ;
     },
 
-    _onLoadingChanged: function(mgr, account) {
+    _onLoadingChanged(mgr, account) {
         if (account != this._account)
             return;
 
@@ -359,13 +359,13 @@ var ServerRoomList = new Lang.Class({
         });
     },
 
-    _checkSpinner: function() {
+    _checkSpinner() {
         let loading = this._pendingInfos.length ||
                       (this._account && this._manager.isLoading(this._account));
         this._spinner.active = loading;
     },
 
-    _toggleChecked: function(path) {
+    _toggleChecked(path) {
         let childPath = this._list.model.convert_path_to_child_path(path);
         let [valid, iter] = this._store.get_iter(childPath);
         if (!this._store.get_value(iter, RoomListColumn.SENSITIVE))

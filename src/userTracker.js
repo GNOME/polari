@@ -21,7 +21,7 @@ function getUserStatusMonitor() {
 var UserStatusMonitor = new Lang.Class({
     Name: 'UserStatusMonitor',
 
-    _init: function() {
+    _init() {
         this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();
 
@@ -34,18 +34,18 @@ var UserStatusMonitor = new Lang.Class({
                     a => { this._onAccountAdded(this._accountsMonitor, a); });
     },
 
-    _onAccountAdded: function(accountsMonitor, account) {
+    _onAccountAdded(accountsMonitor, account) {
         if (this._userTrackers.has(account))
             return;
 
         this._userTrackers.set(account, new UserTracker(account));
     },
 
-    _onAccountRemoved: function(accountsMonitor, account) {
+    _onAccountRemoved(accountsMonitor, account) {
         this._userTrackers.delete(account);
     },
 
-    getUserTrackerForAccount: function(account) {
+    getUserTrackerForAccount(account) {
             return this._userTrackers.get(account);
     }
 });
@@ -66,7 +66,7 @@ var UserTracker = new Lang.Class({
         }
     },
 
-    _init: function(account) {
+    _init(account) {
         this.parent();
 
         this._account = account;
@@ -83,24 +83,24 @@ var UserTracker = new Lang.Class({
         this._roomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
     },
 
-    _onShutdown: function() {
+    _onShutdown() {
         for (let room of this._roomData.keys())
             this._onRoomRemoved(this._roomManager, room);
     },
 
-    _getRoomContacts: function(room) {
+    _getRoomContacts(room) {
         return this._roomData.get(room).contactMapping;
     },
 
-    _getRoomHandlers: function(room) {
+    _getRoomHandlers(room) {
         return this._roomData.get(room).handlerMapping;
     },
 
-    _getRoomSignals: function(room) {
+    _getRoomSignals(room) {
         return this._roomData.get(room).roomSignals;
     },
 
-    _onRoomAdded: function(roomManager, room) {
+    _onRoomAdded(roomManager, room) {
         if (room.account != this._account)
             return;
 
@@ -129,7 +129,7 @@ var UserTracker = new Lang.Class({
         });
     },
 
-    _onRoomRemoved: function(roomManager, room) {
+    _onRoomRemoved(roomManager, room) {
         if (!this._roomData.has(room))
             return;
 
@@ -138,7 +138,7 @@ var UserTracker = new Lang.Class({
         this._roomData.delete(room);
     },
 
-    _onChannelChanged: function(room) {
+    _onChannelChanged(room) {
         if (!room.channel) {
             this._clearUsersFromRoom(room);
             return;
@@ -155,13 +155,13 @@ var UserTracker = new Lang.Class({
         members.forEach(m => { this._trackMember(m, room); });
     },
 
-    _clearUsersFromRoom: function(room) {
+    _clearUsersFromRoom(room) {
         let map = this._getRoomContacts(room);
         for (let [baseNick, contacts] of map)
             contacts.slice().forEach((m) => { this._untrackMember(m, room); });
     },
 
-    _ensureRoomMappingForRoom: function(room) {
+    _ensureRoomMappingForRoom(room) {
         if (this._roomData.has(room))
             return;
         this._roomData.set(room, { contactMapping: new Map(),
@@ -169,20 +169,20 @@ var UserTracker = new Lang.Class({
                                    roomSignals: [] });
     },
 
-    _onMemberRenamed: function(room, oldMember, newMember) {
+    _onMemberRenamed(room, oldMember, newMember) {
         this._untrackMember(oldMember, room);
         this._trackMember(newMember, room);
     },
 
-    _onMemberJoined: function(room, member) {
+    _onMemberJoined(room, member) {
         this._trackMember(member, room);
     },
 
-    _onMemberLeft: function(room, member) {
+    _onMemberLeft(room, member) {
         this._untrackMember(member, room);
     },
 
-    _runHandlers: function(room, member, status) {
+    _runHandlers(room, member, status) {
         let baseNick = Polari.util_get_basenick(member.alias);
         let roomHandlers = this._getRoomHandlers(room);
         for (let [id, info] of roomHandlers)
@@ -190,14 +190,14 @@ var UserTracker = new Lang.Class({
                 info.handler(baseNick, status);
     },
 
-    _pushMember: function(map, baseNick, member) {
+    _pushMember(map, baseNick, member) {
         if (!map.has(baseNick))
             map.set(baseNick, []);
         let contacts = map.get(baseNick);
         return contacts.push(member);
     },
 
-    _trackMember: function(member, room) {
+    _trackMember(member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
         let status = Tp.ConnectionPresenceType.AVAILABLE;
 
@@ -224,7 +224,7 @@ var UserTracker = new Lang.Class({
         this.emit("contacts-changed::" + baseNick, member.alias);
     },
 
-    _popMember: function(map, baseNick, member) {
+    _popMember(map, baseNick, member) {
         let contacts = map.get(baseNick) || [];
         let index = contacts.map(c => c.alias).indexOf(member.alias);
         if (index < 0)
@@ -233,7 +233,7 @@ var UserTracker = new Lang.Class({
         return [true, contacts.length];
     },
 
-    _untrackMember: function(member, room) {
+    _untrackMember(member, room) {
         let baseNick = Polari.util_get_basenick(member.alias);
         let status = Tp.ConnectionPresenceType.OFFLINE;
 
@@ -261,7 +261,7 @@ var UserTracker = new Lang.Class({
         }
     },
 
-    getNickStatus: function(nickName) {
+    getNickStatus(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
         let contacts = this._baseNickContacts.get(baseNick) || [];
@@ -269,7 +269,7 @@ var UserTracker = new Lang.Class({
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
-    getNickRoomStatus: function(nickName, room) {
+    getNickRoomStatus(nickName, room) {
         let baseNick = Polari.util_get_basenick(nickName);
 
         this._ensureRoomMappingForRoom(room);
@@ -279,7 +279,7 @@ var UserTracker = new Lang.Class({
                                     : Tp.ConnectionPresenceType.AVAILABLE;
     },
 
-    lookupContact: function(nickName) {
+    lookupContact(nickName) {
         let baseNick = Polari.util_get_basenick(nickName);
 
         let contacts = this._baseNickContacts.get(baseNick) || [];
@@ -293,7 +293,7 @@ var UserTracker = new Lang.Class({
         return contacts[0];
     },
 
-    watchRoomStatus: function(room, baseNick, callback) {
+    watchRoomStatus(room, baseNick, callback) {
         this._ensureRoomMappingForRoom(room);
 
         this._getRoomHandlers(room).set(++this._handlerCounter, {
@@ -304,13 +304,13 @@ var UserTracker = new Lang.Class({
         return this._handlerCounter;
     },
 
-    unwatchRoomStatus: function(room, handlerID) {
+    unwatchRoomStatus(room, handlerID) {
         if (!this._roomData.has(room))
             return;
         this._getRoomHandlers(room).delete(handlerID);
     },
 
-    _notifyNickAvailable: function (member, room) {
+    _notifyNickAvailable (member, room) {
         let notification = new Gio.Notification();
         notification.set_title(_("User is online"));
         notification.set_body(_("User %s is now online.").format(member.alias));
@@ -326,27 +326,27 @@ var UserTracker = new Lang.Class({
         let baseNick = Polari.util_get_basenick(member.alias);
     },
 
-    _shouldNotifyNick: function(nickName) {
+    _shouldNotifyNick(nickName) {
         let actionName = this._getNotifyActionNameInternal(nickName);
         let state = this._app.get_action_state(actionName);
         return state ? state.get_boolean()
                      : false;
     },
 
-    _setNotifyActionEnabled: function(nickName, enabled) {
+    _setNotifyActionEnabled(nickName, enabled) {
         let name = this._getNotifyActionNameInternal(nickName);
         let action = this._app.lookup_action(name);
         if (action)
             action.enabled = enabled;
     },
 
-    _getNotifyActionNameInternal: function(nickName) {
+    _getNotifyActionNameInternal(nickName) {
         return 'notify-user-' +
                this._account.get_path_suffix() + '-' +
                Polari.util_get_basenick(nickName);
     },
 
-    getNotifyActionName: function(nickName) {
+    getNotifyActionName(nickName) {
         let name = this._getNotifyActionNameInternal(nickName);
 
         if (!this._app.lookup_action(name)) {

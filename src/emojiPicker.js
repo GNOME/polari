@@ -65,7 +65,7 @@ const Emoji = new Lang.Class({
     Name: 'Emoji',
     Extends: Gtk.FlowBoxChild,
 
-    _init: function(emojiData) {
+    _init(emojiData) {
         this._name = emojiData.name;
         this._matchName = this._name.toLowerCase();
         this._char = emojiData.char;
@@ -91,7 +91,7 @@ const Emoji = new Lang.Class({
         box.show_all();
     },
 
-    match: function(terms) {
+    match(terms) {
         return terms.every(t => this._matchName.includes(t));
     },
 
@@ -104,7 +104,7 @@ const SectionIndicator = new Lang.Class({
     Name: 'SectionIndicator',
     Extends: Gtk.Button,
 
-    _init: function(labelCode, from, to) {
+    _init(labelCode, from, to) {
         this._from = from;
         this._to = to;
 
@@ -116,7 +116,7 @@ const SectionIndicator = new Lang.Class({
                                  visible: true }));
     },
 
-    updateForIndex: function(index) {
+    updateForIndex(index) {
         if (this._from <= index && index <= this._to)
             this.set_state_flags(Gtk.StateFlags.CHECKED, false);
         else
@@ -129,7 +129,7 @@ var EmojiPicker = new Lang.Class({
     Extends: Gtk.Popover,
     Signals: { 'emoji-picked': { param_types: [GObject.TYPE_STRING] } },
 
-    _init: function(params) {
+    _init(params) {
         this._terms = [];
 
         let sections = {
@@ -227,7 +227,7 @@ var EmojiPicker = new Lang.Class({
         });
     },
 
-    _updateIndicators: function() {
+    _updateIndicators() {
         let child = null;
 
         if (this._terms.length == 0) {

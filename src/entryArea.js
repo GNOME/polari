@@ -33,7 +33,7 @@ var ChatEntry = new Lang.Class({
                'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
                'file-pasted': { param_types: [Gio.File.$gtype] } },
 
-    _init: function(params) {
+    _init(params) {
         this.parent(params);
 
         PasteManager.DropTargetIface.addTargets(this, this);
@@ -63,7 +63,7 @@ var ChatEntry = new Lang.Class({
         this._useDefaultHandler = false;
     },
 
-    _showEmojiPicker: function() {
+    _showEmojiPicker() {
         if (!this.is_sensitive() || !this.get_mapped())
             return;
 
@@ -89,7 +89,7 @@ var ChatEntry = new Lang.Class({
         return true;
     },
 
-    vfunc_drag_data_received: function(context, x, y, data, info, time) {
+    vfunc_drag_data_received(context, x, y, data, info, time) {
         let str = data.get_text();
         if (!str || str.split('\n').length >= MAX_LINES)
             // Disable GtkEntry's built-in drop target support
@@ -99,7 +99,7 @@ var ChatEntry = new Lang.Class({
         this.parent(context, x, y, data, info, time);
     },
 
-    vfunc_paste_clipboard: function(entry) {
+    vfunc_paste_clipboard(entry) {
         if (!this.editable || this._useDefaultHandler) {
             this.parent();
             return;
@@ -120,7 +120,7 @@ var ChatEntry = new Lang.Class({
         });
     },
 
-    _onTextReceived: function(clipboard, text) {
+    _onTextReceived(clipboard, text) {
         if (text == null)
             return;
         text = text.trim();
@@ -160,7 +160,7 @@ var EntryArea = new Lang.Class({
                                                  0, GLib.MAXUINT32, 0)
     },
 
-    _init: function(params) {
+    _init(params) {
         this._room = params.room;
         delete params.room;
 
@@ -269,7 +269,7 @@ var EntryArea = new Lang.Class({
         this._updateNick();
     },
 
-    _updateCompletions: function() {
+    _updateCompletions() {
         let nicks = [];
 
         if (this._chatEntry.get_mapped() &&
@@ -282,7 +282,7 @@ var EntryArea = new Lang.Class({
         this._completion.setCompletions(nicks);
     },
 
-    _canFocusChatEntry: function() {
+    _canFocusChatEntry() {
         let toplevelFocus = this._chatEntry.get_toplevel().get_focus();
         return this.sensitive &&
                this._chatEntry.get_mapped() &&
@@ -290,7 +290,7 @@ var EntryArea = new Lang.Class({
                !(toplevelFocus instanceof Gtk.Entry);
     },
 
-    _onKeyPressEvent: function(w, event) {
+    _onKeyPressEvent(w, event) {
         if (!this._canFocusChatEntry())
             return Gdk.EVENT_PROPAGATE;
 
@@ -316,11 +316,11 @@ var EntryArea = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    _onEntryChanged: function() {
+    _onEntryChanged() {
         this._chatEntry.get_style_context().remove_class('error');
     },
 
-    _setPasteContent: function(content) {
+    _setPasteContent(content) {
         this._pasteContent = content;
 
         if (content) {
@@ -333,7 +333,7 @@ var EntryArea = new Lang.Class({
         }
     },
 
-    pasteText: function(text, nLines) {
+    pasteText(text, nLines) {
         this._confirmLabel.label =
             ngettext("Paste %s line of text to public paste service?",
                      "Paste %s lines of text to public paste service?",
@@ -345,20 +345,20 @@ var EntryArea = new Lang.Class({
         this._setPasteContent(text);
     },
 
-    pasteImage: function(pixbuf) {
+    pasteImage(pixbuf) {
         this._confirmLabel.label = _("Upload image to public paste service?");
         this._uploadLabel.label = _("Uploading image to public paste service…");
         this._setPasteContent(pixbuf);
     },
 
-    pasteFile: function(file) {
+    pasteFile(file) {
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                               Gio.FileQueryInfoFlags.NONE,
                               GLib.PRIORITY_DEFAULT, null,
                               Lang.bind(this, this._onFileInfoReady));
     },
 
-    _onFileInfoReady: function(file, res) {
+    _onFileInfoReady(file, res) {
         let fileInfo = null;
         try {
             fileInfo = file.query_info_finish(res);
@@ -374,7 +374,7 @@ var EntryArea = new Lang.Class({
         this._setPasteContent(file);
     },
 
-    _onPasteClicked: function() {
+    _onPasteClicked() {
         let title;
         let nick = this._room.channel.connection.self_contact.alias;
         if (this._room.type == Tp.HandleType.ROOM)
@@ -399,16 +399,16 @@ var EntryArea = new Lang.Class({
         this._confirmLabel.hide();
     },
 
-    _onCancelClicked: function() {
+    _onCancelClicked() {
         this._setPasteContent(null);
     },
 
-    _onSensitiveChanged: function() {
+    _onSensitiveChanged() {
         if (this._canFocusChatEntry())
             this._chatEntry.grab_focus();
     },
 
-    _onChannelChanged: function(room) {
+    _onChannelChanged(room) {
         this._updateCompletions();
 
         if (room.channel)
@@ -421,7 +421,7 @@ var EntryArea = new Lang.Class({
     },
 
 
-    _setNick: function(nick) {
+    _setNick(nick) {
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
@@ -442,7 +442,7 @@ var EntryArea = new Lang.Class({
         });
     },
 
-    _updateNick: function() {
+    _updateNick() {
         let channel = this._room ? this._room.channel : null;
         let nick = channel ? channel.connection.self_contact.alias
                            : this._room ? this._room.account.nickname : '';
@@ -454,7 +454,7 @@ var EntryArea = new Lang.Class({
             this._nickEntry.text = nick;
     },
 
-    _onDestroy: function() {
+    _onDestroy() {
         if (this._membersChangedId)
             this._room.disconnect(this._membersChangedId);
         this._membersChangedId = 0;
