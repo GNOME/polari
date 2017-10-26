@@ -61,16 +61,14 @@ function getEmojis() {
     return _emojis;
 }
 
-const Emoji = new Lang.Class({
-    Name: 'Emoji',
-    Extends: Gtk.FlowBoxChild,
-
+const Emoji = GObject.registerClass(
+class Emoji extends Gtk.FlowBoxChild {
     _init(emojiData) {
         this._name = emojiData.name;
         this._matchName = this._name.toLowerCase();
         this._char = emojiData.char;
 
-        this.parent();
+        super._init();
 
         this.get_style_context().add_class('emoji');
 
@@ -89,32 +87,30 @@ const Emoji = new Lang.Class({
 
         box.add(new Gtk.Label({ label: this._char }));
         box.show_all();
-    },
+    }
 
     match(terms) {
         return terms.every(t => this._matchName.includes(t));
-    },
+    }
 
     get emoji() {
         return this._char;
     }
 });
 
-const SectionIndicator = new Lang.Class({
-    Name: 'SectionIndicator',
-    Extends: Gtk.Button,
-
+const SectionIndicator = GObject.registerClass(
+class SectionIndicator extends Gtk.Button {
     _init(labelCode, from, to) {
         this._from = from;
         this._to = to;
 
-        this.parent({ relief: Gtk.ReliefStyle.NONE });
+        super._init({ relief: Gtk.ReliefStyle.NONE });
 
         this.get_style_context().add_class('emoji-section');
 
         this.add(new Gtk.Label({ label: String.fromCodePoint(labelCode, 0xfe0e),
                                  visible: true }));
-    },
+    }
 
     updateForIndex(index) {
         if (this._from <= index && index <= this._to)
@@ -124,11 +120,9 @@ const SectionIndicator = new Lang.Class({
     }
 });
 
-var EmojiPicker = new Lang.Class({
-    Name: 'EmojiPicker',
-    Extends: Gtk.Popover,
+var EmojiPicker = GObject.registerClass({
     Signals: { 'emoji-picked': { param_types: [GObject.TYPE_STRING] } },
-
+}, class EmojiPicker extends Gtk.Popover {
     _init(params) {
         this._terms = [];
 
@@ -149,7 +143,7 @@ var EmojiPicker = new Lang.Class({
                        fromNo: 2357, toNo: 2623 }
         };
 
-        this.parent(params);
+        super._init(params);
 
         this.get_style_context().add_class('emoji-picker');
 
@@ -225,7 +219,7 @@ var EmojiPicker = new Lang.Class({
             this._adjustment.value = 0;
             this._updateIndicators();
         });
-    },
+    }
 
     _updateIndicators() {
         let child = null;

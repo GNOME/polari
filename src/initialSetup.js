@@ -1,5 +1,6 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 
 const Lang = imports.lang;
@@ -11,19 +12,17 @@ const SetupPage = {
     OFFLINE: 2
 };
 
-var InitialSetupWindow = new Lang.Class({
-    Name: 'InitialSetupWindow',
-    Extends: Gtk.Window,
+var InitialSetupWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/initial-setup-window.ui',
     InternalChildren: ['contentStack',
                        'connectionsList',
                        'nextButton',
                        'prevButton',
                        'serverRoomList'],
-
+}, class InitialSetupWindow extends Gtk.Window {
     _init(params) {
 
-        this.parent(params);
+        super._init(params);
 
         this._currentAccount = null;
 
@@ -61,7 +60,7 @@ var InitialSetupWindow = new Lang.Class({
         this._networkMonitor.connect('notify::network-available',
                                      Lang.bind(this, this._onNetworkAvailableChanged));
         this._onNetworkAvailableChanged();
-    },
+    }
 
     _onNetworkAvailableChanged() {
         if (this._networkMonitor.network_available)
@@ -69,7 +68,7 @@ var InitialSetupWindow = new Lang.Class({
                                                : SetupPage.CONNECTION);
         else
             this._setPage(SetupPage.OFFLINE);
-    },
+    }
 
     _setPage(page) {
         if (page == SetupPage.CONNECTION)
@@ -92,7 +91,7 @@ var InitialSetupWindow = new Lang.Class({
 
         this._nextButton.grab_default();
         this._updateNextSensitivity();
-    },
+    }
 
     _unsetAccount() {
         if (!this._currentAccount)
@@ -102,7 +101,7 @@ var InitialSetupWindow = new Lang.Class({
             a.remove_finish(res);
         });
         this._currentAccount = null;
-    },
+    }
 
     get _page() {
         if (this._contentStack.visible_child_name == 'rooms')
@@ -111,7 +110,7 @@ var InitialSetupWindow = new Lang.Class({
             return SetupPage.CONNECTION;
         else
             return SetupPage.OFFLINE;
-    },
+    }
 
     _updateNextSensitivity() {
         let sensitive = this._page != SetupPage.OFFLINE;
@@ -120,7 +119,7 @@ var InitialSetupWindow = new Lang.Class({
             sensitive = this._serverRoomList.can_join;
 
         this._nextButton.sensitive = sensitive;
-    },
+    }
 
     _joinRooms() {
         this.hide();

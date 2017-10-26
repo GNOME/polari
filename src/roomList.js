@@ -18,14 +18,12 @@ function _onPopoverVisibleChanged(popover) {
         context.remove_class('has-open-popup');
 }
 
-var RoomRow = new Lang.Class({
-    Name: 'RoomRow',
-    Extends: Gtk.ListBoxRow,
+var RoomRow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
     InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter'],
-
+}, class RoomRow extends Gtk.ListBoxRow {
     _init(room) {
-        this.parent();
+        super._init();
 
         this._room = room;
         this._popover = null;
@@ -45,24 +43,24 @@ var RoomRow = new Lang.Class({
 
         this._updatePending();
         this._onChannelChanged();
-    },
+    }
 
     get room() {
         return this._room;
-    },
+    }
 
     get account() {
         return this._room.account;
-    },
+    }
 
     get hasPending() {
         return !this.get_style_context().has_class('inactive');
-    },
+    }
 
     selected() {
         if (!this._room.channel)
             this._updatePending();
-    },
+    }
 
     _getNumPending() {
         if (!this._room.channel)
@@ -78,7 +76,7 @@ var RoomRow = new Lang.Class({
             return this._room.should_highlight_message(m.sender.alias, text);
         });
         return [nPending, highlights.length];
-    },
+    }
 
     _updatePending() {
         let [nPending, nHighlights] = this._getNumPending();
@@ -91,7 +89,7 @@ var RoomRow = new Lang.Class({
             context.add_class('inactive');
         else
             context.remove_class('inactive');
-    },
+    }
 
     _onChannelChanged() {
         if (!this._room.channel)
@@ -101,7 +99,7 @@ var RoomRow = new Lang.Class({
         this._room.channel.connect('pending-message-removed',
                                    Lang.bind(this, this._updatePending));
         this._updatePending();
-    },
+    }
 
     _onButtonRelease(w, event) {
         let [, button] = event.get_button();
@@ -111,7 +109,7 @@ var RoomRow = new Lang.Class({
         this._showPopover();
 
         return Gdk.EVENT_STOP;
-    },
+    }
 
     _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
@@ -124,7 +122,7 @@ var RoomRow = new Lang.Class({
         this._showPopover();
 
         return Gdk.EVENT_STOP;
-    },
+    }
 
     _showPopover() {
         if (!this._popover) {
@@ -141,9 +139,7 @@ var RoomRow = new Lang.Class({
     }
 });
 
-var RoomListHeader = new Lang.Class({
-    Name: 'RoomListHeader',
-    Extends: Gtk.MenuButton,
+var RoomListHeader = GObject.registerClass({
     CssName: 'row',
     Template: 'resource:///org/gnome/Polari/ui/room-list-header.ui',
     InternalChildren: ['label',
@@ -156,14 +152,14 @@ var RoomListHeader = new Lang.Class({
                        'popoverRemove',
                        'popoverProperties',
                        'spinner'],
-
+}, class RoomListHeader extends Gtk.MenuButton {
     _init(params) {
         this._account = params.account;
         delete params.account;
 
         this._app = Gio.Application.get_default();
 
-        this.parent(params);
+        super._init(params);
 
         this.popover.set_default_widget(this._popoverPassword);
         this.popover.connect('notify::visible', _onPopoverVisibleChanged);
@@ -205,7 +201,7 @@ var RoomListHeader = new Lang.Class({
             this._account.disconnect(connectionStatusChangedId);
             this._account.disconnect(presenceChangedId);
         });
-    },
+    }
 
     _onDisplayNameChanged() {
         this._label.label = this._account.display_name;
@@ -223,27 +219,27 @@ var RoomListHeader = new Lang.Class({
 
         let accessibleName = _("Network %s has an error").format(this._account.display_name);
         this.get_accessible().set_name(accessibleName);
-    },
+    }
 
     /* hack: Handle primary and secondary button interchangeably */
     vfunc_button_press_event(event) {
         if (event.button == Gdk.BUTTON_SECONDARY)
             event.button = Gdk.BUTTON_PRIMARY;
-        return this.parent(event);
-    },
+        return super.vfunc_button_press_event(event);
+    }
 
     vfunc_button_release_event(event) {
         if (event.button == Gdk.BUTTON_SECONDARY)
             event.button = Gdk.BUTTON_PRIMARY;
-        return this.parent(event);
-    },
+        return super.vfunc_button_release_event(event);
+    }
 
     _getConnectionStatus() {
         let presence = this._account.requested_presence_type;
         if (presence == Tp.ConnectionPresenceType.OFFLINE)
             return Tp.ConnectionStatus.DISCONNECTED;
         return this._account.connection_status;
-    },
+    }
 
     _onConnectionStatusChanged() {
         let status = this._getConnectionStatus();
@@ -288,7 +284,7 @@ var RoomListHeader = new Lang.Class({
             this._popoverTitle.label = '<b>' + _("Connection Problem") + '</b>';
             this._popoverStatus.label = this._getErrorLabel();
         }
-    },
+    }
 
     _onRequestedPresenceChanged() {
         let presence = this._account.requested_presence_type;
@@ -296,7 +292,7 @@ var RoomListHeader = new Lang.Class({
         this._popoverConnect.visible = offline;
         this._popoverReconnect.visible = !offline;
         this._onConnectionStatusChanged();
-    },
+    }
 
     _getStatusLabel() {
         switch (this._getConnectionStatus()) {
@@ -309,7 +305,7 @@ var RoomListHeader = new Lang.Class({
             default:
                 return _("Unknown");
         }
-    },
+    }
 
     _getErrorLabel() {
         switch (this._account.connection_error) {
@@ -341,15 +337,13 @@ var RoomListHeader = new Lang.Class({
             default:
                 return _("Could not connect to %s.").format(this._account.display_name);
         }
-    },
+    }
 });
 
-var RoomList = new Lang.Class({
-    Name: 'RoomList',
-    Extends: Gtk.ListBox,
-
+var RoomList = GObject.registerClass(
+class RoomList extends Gtk.ListBox {
     _init(params) {
-        this.parent(params);
+        super._init(params);
 
         this.set_header_func(Lang.bind(this, this._updateHeader));
         this.set_sort_func(Lang.bind(this, this._sort));
@@ -408,22 +402,22 @@ var RoomList = new Lang.Class({
         actions.forEach(a => {
             app.lookup_action(a.name).connect('activate', a.handler);
         });
-    },
+    }
 
     vfunc_realize() {
-        this.parent();
+        super.vfunc_realize();
 
         let toplevel = this.get_toplevel();
         toplevel.connect('notify::active-room',
                          Lang.bind(this, this._activeRoomChanged));
         this._activeRoomChanged();
-    },
+    }
 
     _rowToRoomIndex(index) {
         let placeholders = [...this._placeholders.values()];
         let nBefore = placeholders.filter(p => p.get_index() < index).length;
         return index - nBefore;
-    },
+    }
 
     _roomToRowIndex(index) {
         let nChildren = this.get_children().length;
@@ -431,21 +425,21 @@ var RoomList = new Lang.Class({
             if (this.get_row_at_index(i).room && roomIndex++ == index)
                 return i;
         return -1;
-    },
+    }
 
     _getRoomRowAtIndex(index) {
         return this.get_row_at_index(this._roomToRowIndex(index));
-    },
+    }
 
     _selectRoomAtIndex(index) {
         let row = this._getRoomRowAtIndex(index);
         if (row)
             this.select_row(row);
-    },
+    }
 
     _moveSelection(direction) {
         this._moveSelectionFull(direction, () => { return true; });
-    },
+    }
 
     _moveSelectionFull(direction, testFunction){
         let current = this.get_selected_row();
@@ -464,7 +458,7 @@ var RoomList = new Lang.Class({
 
         if (row)
             this.select_row(row);
-    },
+    }
 
     _moveSelectionFromRow(row) {
         if (this._roomManager.roomCount == 0)
@@ -491,7 +485,7 @@ var RoomList = new Lang.Class({
 
         if (selected != row)
             this.select_row(selected);
-    },
+    }
 
     _accountAdded(am, account) {
         if (this._placeholders.has(account))
@@ -510,7 +504,7 @@ var RoomList = new Lang.Class({
         });
 
         this._updatePlaceholderVisibility(account);
-    },
+    }
 
     _accountRemoved(am, account) {
         let placeholder = this._placeholders.get(account);
@@ -520,7 +514,7 @@ var RoomList = new Lang.Class({
 
         this._placeholders.delete(account);
         placeholder.destroy();
-    },
+    }
 
     _roomAdded(roomManager, room) {
         if (this._roomRows.has(room.id))
@@ -532,7 +526,7 @@ var RoomList = new Lang.Class({
 
         row.connect('destroy', w => { this._roomRows.delete(w.room.id); });
         this._placeholders.get(room.account).hide();
-    },
+    }
 
     _roomRemoved(roomManager, room) {
         let row = this._roomRows.get(room.id);
@@ -543,7 +537,7 @@ var RoomList = new Lang.Class({
         row.destroy();
         this._roomRows.delete(room.id);
         this._updatePlaceholderVisibility(room.account);
-    },
+    }
 
     _updatePlaceholderVisibility(account) {
         if (!account.enabled) {
@@ -554,7 +548,7 @@ var RoomList = new Lang.Class({
         let rows = [...this._roomRows.values()];
         let hasRooms = rows.some(r => r.account == account);
         this._placeholders.get(account).visible = !hasRooms;
-    },
+    }
 
     _activeRoomChanged() {
         let room = this.get_toplevel().active_room;
@@ -567,13 +561,13 @@ var RoomList = new Lang.Class({
         row.can_focus = false;
         this.select_row(row);
         row.can_focus = true;
-    },
+    }
 
     vfunc_row_selected(row) {
         this.get_toplevel().active_room = row ? row.room : null;
         if (row)
             row.selected();
-    },
+    }
 
     _updateHeader(row, before) {
         let getAccount = row => row ? row.account : null;
@@ -594,7 +588,7 @@ var RoomList = new Lang.Class({
 
         let roomListHeader = new RoomListHeader({ account: account });
         row.set_header(roomListHeader);
-    },
+    }
 
     _sort(row1, row2) {
         let account1 = row1.account;

@@ -29,10 +29,8 @@ function getAccountParams(account) {
     return params;
 };
 
-var ConnectionRow = new Lang.Class({
-    Name: 'ConnectionRow',
-    Extends: Gtk.ListBoxRow,
-
+const ConnectionRow = GObject.registerClass(
+class ConnectionRow extends Gtk.ListBoxRow {
     _init(params) {
         if (!params || !params.id)
             throw new Error('No id in parameters');
@@ -40,7 +38,7 @@ var ConnectionRow = new Lang.Class({
         this._id = params.id;
         delete params.id;
 
-        this.parent(params);
+        super._init(params);
 
         this.bind_property('sensitive', this, 'activatable',
                            GObject.BindingFlags.SYNC_CREATE);
@@ -62,16 +60,14 @@ var ConnectionRow = new Lang.Class({
         this.bind_property('sensitive', insensitiveDesc, 'visible',
                            GObject.BindingFlags.SYNC_CREATE |
                            GObject.BindingFlags.INVERT_BOOLEAN);
-    },
+    }
 
     get id() {
         return this._id;
     }
 });
 
-var ConnectionsList = new Lang.Class({
-    Name: 'ConnectionsList',
-    Extends: Gtk.ScrolledWindow,
+var ConnectionsList = GObject.registerClass({
     Properties: {
         'favorites-only': GObject.ParamSpec.boolean('favorites-only',
                                                     'favorites-only',
@@ -81,12 +77,12 @@ var ConnectionsList = new Lang.Class({
                                                     false)
     },
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
-               'account-selected': {}},
-
+               'account-selected': {}}
+}, class ConnectionsList extends Gtk.ScrolledWindow {
     _init(params) {
         this._favoritesOnly = false;
 
-        this.parent(params);
+        super._init(params);
 
         this.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
@@ -114,11 +110,11 @@ var ConnectionsList = new Lang.Class({
         this._networksManager.connect('changed',
                                       Lang.bind(this, this._networksChanged));
         this._networksChanged();
-    },
+    }
 
     get favorites_only() {
         return this._favoritesOnly;
-    },
+    }
 
     set favorites_only(favsOnly) {
         if (this._favoritesOnly == favsOnly)
@@ -126,38 +122,38 @@ var ConnectionsList = new Lang.Class({
 
         this._favoritesOnly = favsOnly;
         this.notify('favorites-only');
-    },
+    }
 
     setFilter(filter) {
         if (Utils.updateTerms(this._filterTerms, filter))
             this._list.invalidate_filter();
-    },
+    }
 
     activateFirst() {
         let row = this._list.get_row_at_y(0);
         if (row)
             row.activate();
-    },
+    }
 
     activateSelected() {
         let row = this._list.get_selected_row();
         if (row)
             row.activate();
-    },
+    }
 
     _filterRows(row) {
         let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
         return this._filterTerms.every(term => {
             return matchTerms.some(s => s.indexOf(term) != -1);
         });
-    },
+    }
 
     _updateHeader(row, before) {
         if (!before)
             row.set_header(null);
         else if (!row.get_header())
             row.set_header(new Gtk.Separator());
-    },
+    }
 
     _networksChanged() {
         this._list.foreach(w => { w.destroy(); });
@@ -178,7 +174,7 @@ var ConnectionsList = new Lang.Class({
                                                sensitive: sensitive }));
             this._list.add(this._rows.get(network.id));
         });
-    },
+    }
 
     _onRowActivated(list, row) {
         let name = this._networksManager.getNetworkName(row.id);
@@ -200,7 +196,7 @@ var ConnectionsList = new Lang.Class({
                 this.emit('account-created', account);
         });
         this.emit('account-selected');
-    },
+    }
 
     _setAccountRowSensitive(account, sensitive) {
         if (!this._networksManager.getAccountIsPredefined(account))
@@ -210,7 +206,7 @@ var ConnectionsList = new Lang.Class({
             return;
 
         this._rows.get(account.service).sensitive = sensitive;
-    },
+    }
 
     _sort(row1, row2) {
         let isFavorite1 = this._networksManager.getNetworkIsFavorite(row1.id);
@@ -226,9 +222,7 @@ var ConnectionsList = new Lang.Class({
     }
 });
 
-var ConnectionDetails = new Lang.Class({
-    Name: 'ConnectionDetails',
-    Extends: Gtk.Grid,
+var ConnectionDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
     InternalChildren: ['nameEntry',
                        'serverEntry',
@@ -246,7 +240,7 @@ var ConnectionDetails = new Lang.Class({
                                                            GObject.ParamFlags.READABLE,
                                                            false)},
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
-
+}, class ConnectionDetails extends Gtk.Grid {
     _init(params) {
         this._networksManager = NetworksManager.getDefault();
         this._networksManager.connect('changed', () => {
@@ -255,7 +249,7 @@ var ConnectionDetails = new Lang.Class({
 
         this._account = null;
 
-        this.parent(params);
+        super._init(params);
 
         this._nameEntry.connect('changed',
                                 Lang.bind(this, this._onCanConfirmChanged));
@@ -279,7 +273,7 @@ var ConnectionDetails = new Lang.Class({
         this._realnameEntry.set_completion(completion);
 
         this.reset();
-    },
+    }
 
     setErrorHint(hint) {
         if (hint == ErrorHint.SERVER)
@@ -291,7 +285,7 @@ var ConnectionDetails = new Lang.Class({
             this._nickEntry.get_style_context().add_class('error');
         else
             this._nickEntry.get_style_context().remove_class('error');
-    },
+    }
 
     _getParams() {
         let nameText = this._nameEntry.text.trim();
@@ -316,7 +310,7 @@ var ConnectionDetails = new Lang.Class({
             params.port = DEFAULT_SSL_PORT;
 
         return params;
-    },
+    }
 
     reset() {
         this._savedName = '';
@@ -335,11 +329,11 @@ var ConnectionDetails = new Lang.Class({
             this._serverEntry.grab_focus();
         else
             this._nickEntry.grab_focus();
-    },
+    }
 
     _onCanConfirmChanged() {
         this.notify('can-confirm');
-    },
+    }
 
     _populateFromAccount(account) {
         let params = getAccountParams(account);
@@ -362,7 +356,7 @@ var ConnectionDetails = new Lang.Class({
         this._realnameEntry.text = this._savedRealname;
         this._nameEntry.text = this._savedName;
         this._sslCheckbox.active = this._savedSSL;
-    },
+    }
 
     get can_confirm() {
         let paramsChanged = this._nameEntry.text != this._savedName ||
@@ -374,11 +368,11 @@ var ConnectionDetails = new Lang.Class({
         return this._serverEntry.get_text_length() > 0 &&
                this._nickEntry.get_text_length() > 0 &&
                paramsChanged;
-    },
+    }
 
     get has_service() {
         return this._networksManager.getAccountIsPredefined(this._account);
-    },
+    }
 
     set account(account) {
         this._account = account;
@@ -387,7 +381,7 @@ var ConnectionDetails = new Lang.Class({
         this.reset();
         if (this._account)
             this._populateFromAccount(this._account);
-    },
+    }
 
     save() {
         if (!this.can_confirm)
@@ -397,7 +391,7 @@ var ConnectionDetails = new Lang.Class({
             this._updateAccount();
         else
             this._createAccount();
-    },
+    }
 
     _createAccount() {
         let params = this._getParams();
@@ -418,7 +412,7 @@ var ConnectionDetails = new Lang.Class({
             if (account) // TODO: Handle errors
                 this.emit('account-created', account);
         });
-    },
+    }
 
     _updateAccount() {
         let params = this._getParams();
@@ -434,7 +428,7 @@ var ConnectionDetails = new Lang.Class({
         account.set_display_name_async(params.name, (a, res) => {
             a.set_display_name_finish(res); // TODO: Check for errors
         });
-    },
+    }
 
     _detailsFromParams(params, oldDetails) {
         let details = { account:  GLib.Variant.new('s', params.account),
@@ -455,18 +449,16 @@ var ConnectionDetails = new Lang.Class({
 });
 
 
-var ConnectionProperties = new Lang.Class({
-    Name: 'ConnectionProperties',
-    Extends: Gtk.Dialog,
+var ConnectionProperties = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
     InternalChildren: ['details',
                        'errorBox',
                        'errorLabel'],
-
+}, class ConnectionProperties extends Gtk.Dialog {
     _init(account) {
         /* Translators: %s is a connection name */
         let title = _("“%s” Properties").format(account.display_name);
-        this.parent({ title: title,
+        super._init({ title: title,
                       use_header_bar: 1 });
 
         this._details.account = account;
@@ -490,7 +482,7 @@ var ConnectionProperties = new Lang.Class({
         account.connect('notify::connection-status',
                         Lang.bind(this, this._syncErrorMessage));
         this._syncErrorMessage(account);
-    },
+    }
 
     _syncErrorMessage(account) {
         let status = account.connection_status;

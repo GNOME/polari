@@ -1,4 +1,5 @@
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
@@ -9,21 +10,18 @@ const Mainloop = imports.mainloop;
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
-var AppNotification = new Lang.Class({
-    Name: 'AppNotification',
-    Abstract: true,
-    Extends: Gtk.Revealer,
-
+var AppNotification = GObject.registerClass(
+class AppNotification extends Gtk.Revealer {
     _init() {
-        this.parent({ reveal_child: true,
+        super._init({ reveal_child: true,
                       transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN });
         this.connect('notify::child-revealed',
                      Lang.bind(this, this._onChildRevealed));
-    },
+    }
 
     close() {
         this.reveal_child = false;
-    },
+    }
 
     _onChildRevealed() {
         if (!this.child_revealed)
@@ -31,12 +29,10 @@ var AppNotification = new Lang.Class({
     }
 });
 
-var MessageNotification = new Lang.Class({
-    Name: 'MessageNotification',
-    Extends: AppNotification,
-
+var MessageNotification = GObject.registerClass(
+class MessageNotification extends AppNotification {
     _init(label, iconName) {
-        this.parent();
+        super._init();
 
         Mainloop.timeout_add_seconds(TIMEOUT, Lang.bind(this, this.close));
 
@@ -55,7 +51,7 @@ var MessageNotification = new Lang.Class({
 
         this.add(this._box);
         this.show_all();
-    },
+    }
 
 
     addButton(label, callback) {
@@ -70,13 +66,11 @@ var MessageNotification = new Lang.Class({
     }
 });
 
-var UndoNotification = new Lang.Class({
-    Name: 'UndoNotification',
-    Extends: MessageNotification,
-    Signals: { closed: {}, undo: {} },
-
+var UndoNotification = GObject.registerClass({
+    Signals: { closed: {}, undo: {} }
+}, class UndoNotification extends MessageNotification {
     _init(label) {
-        this.parent(label);
+        super._init(label);
 
         this._undo = false;
 
@@ -87,12 +81,12 @@ var UndoNotification = new Lang.Class({
         this._app = Gio.Application.get_default();
         this._shutdownId = this._app.connect('prepare-shutdown',
                                              Lang.bind(this, this.close));
-    },
+    }
 
     close() {
         this.emit(this._undo ? 'undo' : 'closed');
-        this.parent();
-    },
+        super.close();
+    }
 
     _onDestroy() {
         if (this._shutdownId)
@@ -101,13 +95,10 @@ var UndoNotification = new Lang.Class({
     }
 });
 
-var CommandOutputNotification = new Lang.Class({
-    Name: 'CommandOutputNotification',
-    Extends: AppNotification,
-    Abstract: true,
-
+var CommandOutputNotification = GObject.registerClass(
+class CommandOutputNotification extends AppNotification {
     _init() {
-        this.parent();
+        super._init();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         Mainloop.timeout_add_seconds(COMMAND_OUTPUT_REVEAL_TIME,
@@ -115,12 +106,10 @@ var CommandOutputNotification = new Lang.Class({
     }
 });
 
-var SimpleOutput = new Lang.Class({
-    Name: 'SimpleOutput',
-    Extends: CommandOutputNotification,
-
+var SimpleOutput = GObject.registerClass(
+class SimpleOutput extends CommandOutputNotification {
     _init(text) {
-        this.parent();
+        super._init();
 
         let label = new Gtk.Label({ label: text,
                                     vexpand: true,
@@ -131,12 +120,10 @@ var SimpleOutput = new Lang.Class({
     }
 });
 
-var GridOutput = new Lang.Class({
-    Name: 'GridOutput',
-    Extends: CommandOutputNotification,
-
+var GridOutput = GObject.registerClass(
+class GridOutput extends CommandOutputNotification {
     _init(header, items) {
-        this.parent();
+        super._init();
 
         let numItems = items.length;
         let numCols = Math.min(numItems, 4);
@@ -163,12 +150,10 @@ var GridOutput = new Lang.Class({
     }
 });
 
-var NotificationQueue = new Lang.Class({
-    Name: 'NotificationQueue',
-    Extends: Gtk.Frame,
-
+var NotificationQueue = GObject.registerClass(
+class NotificationQueue extends Gtk.Frame {
     _init() {
-        this.parent({ valign: Gtk.Align.START,
+        super._init({ valign: Gtk.Align.START,
                       halign: Gtk.Align.CENTER,
                       margin_start: 24, margin_end: 24,
                       no_show_all: true });
@@ -177,14 +162,14 @@ var NotificationQueue = new Lang.Class({
         this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                     row_spacing: 6, visible: true });
         this.add(this._grid);
-    },
+    }
 
     addNotification(notification) {
         this._grid.add(notification);
 
         notification.connect('destroy', Lang.bind(this, this._onChildDestroy));
         this.show();
-    },
+    }
 
     _onChildDestroy() {
         if (this._grid.get_children().length == 0)
@@ -192,12 +177,10 @@ var NotificationQueue = new Lang.Class({
     }
 });
 
-var CommandOutputQueue = new Lang.Class({
-    Name: 'CommandOutputQueue',
-    Extends: NotificationQueue,
-
+var CommandOutputQueue = GObject.registerClass(
+class CommandOutputQueue extends NotificationQueue {
     _init() {
-        this.parent();
+        super._init();
 
         this.valign = Gtk.Align.END;
         this.get_style_context().add_class('irc-feedback');

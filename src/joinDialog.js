@@ -15,9 +15,7 @@ const DialogPage = {
     CONNECTION: 1
 };
 
-var JoinDialog = new Lang.Class({
-    Name: 'JoinDialog',
-    Extends: Gtk.Dialog,
+var JoinDialog = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
     InternalChildren: ['cancelButton',
                        'joinButton',
@@ -31,10 +29,10 @@ var JoinDialog = new Lang.Class({
                        'details',
                        'addButton',
                        'customToggle'],
-
+}, class JoinDialog extends Gtk.Dialog {
     _init(params) {
         params['use-header-bar'] = 1;
-        this.parent(params);
+        super._init(params);
 
         // TODO: Is there really no way to do this in the template?
         let icon = new Gtk.Image({ icon_name: 'go-previous-symbolic' });
@@ -89,11 +87,11 @@ var JoinDialog = new Lang.Class({
 
         this._updateConnectionCombo();
         this._updateCanJoin();
-    },
+    }
 
     get _hasAccounts() {
       return Object.keys(this._accounts).length > 0;
-    },
+    }
 
     _setupMainPage() {
         this._connectionButton.connect('clicked', () => {
@@ -106,7 +104,7 @@ var JoinDialog = new Lang.Class({
 
         this._serverRoomList.connect('notify::can-join',
                                      Lang.bind(this, this._updateCanJoin));
-    },
+    }
 
     _setupConnectionPage() {
         this._backButton.connect('clicked', () => {
@@ -148,7 +146,7 @@ var JoinDialog = new Lang.Class({
             if (this._filterEntry.text.length > 0)
                 this._connectionsList.activateFirst();
         });
-    },
+    }
 
     _onAccountChanged() {
         let selected = this._connectionCombo.get_active_text();
@@ -157,11 +155,11 @@ var JoinDialog = new Lang.Class({
             return;
 
        this._serverRoomList.setAccount(account);
-    },
+    }
 
     _onAccountCreated(w, account) {
         this._connectionCombo.set_active_id(account.display_name);
-    },
+    }
 
     _joinRoom() {
         this.hide();
@@ -181,7 +179,7 @@ var JoinDialog = new Lang.Class({
                                              room,
                                              Utils.getTpEventTime() ]));
         });
-    },
+    }
 
     _updateConnectionCombo() {
         this._connectionCombo.remove_all();
@@ -200,7 +198,7 @@ var JoinDialog = new Lang.Class({
         if(activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
         this._connectionCombo.set_active(activeIndex);
-    },
+    }
 
     _updateCanJoin() {
         let sensitive = false;
@@ -212,14 +210,14 @@ var JoinDialog = new Lang.Class({
         this._joinButton.sensitive = sensitive;
         this.set_default_response(sensitive ? Gtk.ResponseType.OK
                                             : Gtk.ResponseType.NONE);
-    },
+    }
 
     get _page() {
         if (this._mainStack.visible_child_name == 'connection')
             return DialogPage.CONNECTION;
         else
             return DialogPage.MAIN;
-    },
+    }
 
     _setPage(page) {
         let isMain = page == DialogPage.MAIN;

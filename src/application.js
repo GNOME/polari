@@ -1,6 +1,7 @@
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
@@ -26,14 +27,12 @@ const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z\.-]+):?(\d+)?\/(?:%23)?([\w\.\+-]+
 const AUTOSTART_DIR = GLib.get_user_config_dir() + '/autostart';
 const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
 
-var Application = new Lang.Class({
-    Name: 'Application',
-    Extends: Gtk.Application,
+var Application = GObject.registerClass({
     Signals: { 'prepare-shutdown': {},
                'room-focus-changed': {} },
-
+}, class Application extends Gtk.Application {
     _init() {
-        this.parent({ application_id: 'org.gnome.Polari',
+        super._init({ application_id: 'org.gnome.Polari',
                       flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
         GLib.set_application_name('Polari');
@@ -71,13 +70,13 @@ var Application = new Lang.Class({
 
             return -1;
         });
-    },
+    }
 
     isRoomFocused(room) {
         return this.active_window &&
                this.active_window['is-active'] &&
                this.active_window.active_room == room;
-    },
+    }
 
     // Small wrapper to mark user-requested nick changes
     setAccountNick(account, nick) {
@@ -85,7 +84,7 @@ var Application = new Lang.Class({
             account.set_nickname_finish(res);
         });
         this._untrackNominalNick(account);
-    },
+    }
 
     _checkService(conn, name, opath, iface) {
         let flags = Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
@@ -98,7 +97,7 @@ var Application = new Lang.Class({
         } catch(e) {}
 
         return proxy != null && proxy.get_name_owner() != null;
-    },
+    }
 
     _ensureService(conn, name, opath, iface, command) {
         debug('Trying to ensure service %s'.format(name));
@@ -116,7 +115,7 @@ var Application = new Lang.Class({
         } catch(e) {
             log('Failed to launch %s: %s'.format(command, e.message));
         }
-    },
+    }
 
     vfunc_dbus_register(conn, path) {
         if (!Utils.isFlatpakSandbox())
@@ -139,16 +138,16 @@ var Application = new Lang.Class({
                             Tp.IFACE_CLIENT,
                             '/app/libexec/telepathy-logger');
         return true;
-    },
+    }
 
     vfunc_dbus_unregister(conn, path) {
         for (let proc of this._demons)
             proc.force_exit();
         this._demons = [];
-    },
+    }
 
     vfunc_startup() {
-        this.parent();
+        super.vfunc_startup();
 
         let actionEntries = [
           { name: 'show-join-dialog',
@@ -279,7 +278,7 @@ var Application = new Lang.Class({
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
                                                  provider,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-    },
+    }
 
     vfunc_activate() {
         this.activate_action('start-client', null);
@@ -307,10 +306,10 @@ var Application = new Lang.Class({
         }
 
         this.active_window.present();
-    },
+    }
 
     vfunc_window_added(window) {
-        this.parent(window);
+        super.vfunc_window_added(window);
 
         if (!(window instanceof MainWindow.MainWindow))
             return;
@@ -324,7 +323,7 @@ var Application = new Lang.Class({
         window.connect('active-room-state-changed',
                        Lang.bind(this, this._updateUserListAction));
         this._updateUserListAction();
-    },
+    }
 
     vfunc_open(files) {
         this.activate();
@@ -335,7 +334,7 @@ var Application = new Lang.Class({
         this._accountsMonitor.prepare(() => {
             this._openURIs(uris, time);
         });
-    },
+    }
 
     _openURIs(uris, time) {
         let map = {};
@@ -371,7 +370,7 @@ var Application = new Lang.Class({
                                              '#' + room, time]));
                 });
         });
-    },
+    }
 
     _parseURI(uri) {
         let server, port, room;
@@ -387,7 +386,7 @@ var Application = new Lang.Class({
         }
 
         return [success, server, port, room];
-    },
+    }
 
     _createAccount(id, server, port, callback) {
         let params, name;
@@ -421,7 +420,7 @@ var Application = new Lang.Class({
             let account = req.create_account_finish(res);
             callback(account);
         });
-    },
+    }
 
     _touchFile(file) {
         try {
@@ -432,7 +431,7 @@ var Application = new Lang.Class({
 
         let stream = file.create(0, null);
         stream.close(null);
-    },
+    }
 
     _needsInitialSetup() {
         if (GLib.getenv('POLARI_FORCE_INITIAL_SETUP')) {
@@ -452,13 +451,13 @@ var Application = new Lang.Class({
 
         let savedRooms = this._settings.get_value('saved-channel-list');
         return savedRooms.n_children() == 0;
-    },
+    }
 
     _updateUserListAction() {
         let room = this.active_window.active_room;
         let action = this.lookup_action('user-list');
         action.enabled = room && room.type == Tp.HandleType.ROOM && room.channel;
-    },
+    }
 
     _userListCreateHook(action) {
         action.connect('notify::enabled', () => {
@@ -466,28 +465,28 @@ var Application = new Lang.Class({
                 action.change_state(GLib.Variant.new('b', false));
         });
         action.enabled = false;
-    },
+    }
 
     _onShowJoinDialog() {
         this.active_window.showJoinRoomDialog();
-    },
+    }
 
     _maybePresent(time) {
         let [present, ] = Tp.user_action_time_should_present(time);
 
         if (!this.active_window || present)
             this.activate();
-    },
+    }
 
     _onJoinRoom(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
         this._maybePresent(time);
-    },
+    }
 
     _onMessageUser(action, parameter) {
         let [accountPath, contactName, message, time] = parameter.deep_unpack();
         this._maybePresent(time);
-    },
+    }
 
     _trackNominalNick(account) {
         if (this._nickTrackData.has(account))
@@ -512,7 +511,7 @@ var Application = new Lang.Class({
                 });
             });
         this._nickTrackData.set(account, { tracker, contactsChangedId });
-    },
+    }
 
     _untrackNominalNick(account) {
         let data = this._nickTrackData.get(account);
@@ -521,7 +520,7 @@ var Application = new Lang.Class({
 
         data.tracker.disconnect(data.contactsChangedId);
         this._nickTrackData.delete(account);
-    },
+    }
 
     _ensureRetryData(account) {
         let data = this._retryData.get(account.object_path);
@@ -545,19 +544,19 @@ var Application = new Lang.Class({
         };
         this._retryData.set(account.object_path, data);
         return data;
-    },
+    }
 
     _getTrimmedAccountName(account) {
         let params = Connections.getAccountParams(account);
         return params.account.replace(/_+$/, '');
-    },
+    }
 
     _restoreAccountName(account) {
         let accountName = this._getTrimmedAccountName(account);
         let params = { account: new GLib.Variant('s', accountName) };
         let asv = new GLib.Variant('a{sv}', params);
         account.update_parameters_vardict_async(asv, [], null);
-    },
+    }
 
     _retryWithParams(account, params) {
         account.update_parameters_vardict_async(params, [], () => {
@@ -565,7 +564,7 @@ var Application = new Lang.Class({
             let msg = account.requested_status_message;
             account.request_presence_async(presence, 'available', msg, null);
         });
-    },
+    }
 
     _retryNickRequest(account) {
         let retryData = this._ensureRetryData(account);
@@ -582,7 +581,7 @@ var Application = new Lang.Class({
         let params = { account: new GLib.Variant('s', nick + '_') };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
-    },
+    }
 
     _retryServerRequest(account) {
         let retryData = this._ensureRetryData(account);
@@ -597,7 +596,7 @@ var Application = new Lang.Class({
                        'use-ssl': new GLib.Variant('b', server.ssl) };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
-    },
+    }
 
     _onAccountStatusChanged(mon, account) {
         let status = account.connection_status;
@@ -630,7 +629,7 @@ var Application = new Lang.Class({
         }
 
         this._restoreAccountName(account);
-    },
+    }
 
     _onLeaveCurrentRoom() {
         let room = this.active_window.active_room;
@@ -638,7 +637,7 @@ var Application = new Lang.Class({
             return;
         let action = this.lookup_action('leave-room');
         action.activate(GLib.Variant.new('(ss)', [room.id, '']));
-    },
+    }
 
     _onConnectAccount(action, parameter) {
         let accountPath = parameter.deep_unpack();
@@ -646,12 +645,12 @@ var Application = new Lang.Class({
         if (account)
             this._restoreAccountName(account);
         this._retryData.delete(accountPath);
-    },
+    }
 
     _onToggleAction(action) {
         let state = action.get_state();
         action.change_state(GLib.Variant.new('b', !state.get_boolean()));
-    },
+    }
 
     _onRemoveConnection(action, parameter){
         let accountPath = parameter.deep_unpack();
@@ -672,7 +671,7 @@ var Application = new Lang.Class({
                 });
             });
         });
-    },
+    }
 
     _onEditConnection(action, parameter) {
         let accountPath = parameter.deep_unpack();
@@ -683,7 +682,7 @@ var Application = new Lang.Class({
             w.destroy();
         });
         dialog.show();
-    },
+    }
 
     _createLink(file, target) {
         try {
@@ -693,7 +692,7 @@ var Application = new Lang.Class({
         }
 
         file.make_symbolic_link(target, null);
-    },
+    }
 
     _onRunInBackgroundChanged() {
         let file = Gio.File.new_for_path(AUTOSTART_DIR + AUTOSTART_FILE);
@@ -712,7 +711,7 @@ var Application = new Lang.Class({
                 if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
                     log('Failed to remove autostart link: ' + e.message);
             }
-    },
+    }
 
     _onStartClient() {
         if (this._telepathyClient)
@@ -724,11 +723,11 @@ var Application = new Lang.Class({
             uniquify_name: false
         };
         this._telepathyClient = new TelepathyClient.TelepathyClient(params);
-    },
+    }
 
     _onShowHelp() {
         Utils.openURL('help:org.gnome.Polari', Gtk.get_current_event_time());
-    },
+    }
 
     _onShowAbout() {
         if (this._aboutDialog) {
@@ -776,7 +775,7 @@ var Application = new Lang.Class({
             this._aboutDialog.destroy();
             this._aboutDialog = null;
         });
-    },
+    }
 
     _onQuit() {
         if (this._windowRemovedId)
