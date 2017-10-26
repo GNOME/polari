@@ -22,10 +22,8 @@ function getDefault() {
     return _singleton;
 }
 
-var _ServerRoomManager = new Lang.Class({
-    Name: '_ServerRoomManager',
-
-    _init() {
+class _ServerRoomManager {
+    constructor() {
         this._roomLists = new Map();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -38,21 +36,21 @@ var _ServerRoomManager = new Lang.Class({
                 this._onAccountStatusChanged(this._accountsMonitor, a);
             });
         });
-    },
+    }
 
     getRoomInfos(account) {
         let roomList = this._roomLists.get(account);
         if (!roomList || roomList.list.listing)
             return [];
         return roomList.rooms.slice();
-    },
+    }
 
     isLoading(account) {
         let roomList = this._roomLists.get(account);
         if (!roomList)
             return account.connection_status == Tp.ConnectionStatus.CONNECTING;
         return roomList.list.listing;
-    },
+    }
 
     _onAccountStatusChanged(mon, account) {
         if (account.connection_status == Tp.ConnectionStatus.CONNECTING)
@@ -78,7 +76,7 @@ var _ServerRoomManager = new Lang.Class({
         roomList.connect('notify::listing',
                          Lang.bind(this, this._onListingChanged));
         this._roomLists.set(account, { list: roomList, rooms: [] });
-    },
+    }
 
     _onAccountRemoved(mon, account) {
         let roomList = this._roomLists.get(account);
@@ -87,19 +85,19 @@ var _ServerRoomManager = new Lang.Class({
 
         roomList.list.run_dispose();
         this._roomLists.delete(account);
-    },
+    }
 
     _onGotRoom(list, roomInfo) {
         let roomList = this._roomLists.get(list.account);
         if (!roomList)
             return;
         roomList.rooms.push(roomInfo);
-    },
+    }
 
     _onListingChanged(list) {
         this.emit('loading-changed', list.account);
     }
-});
+};
 Signals.addSignalMethods(_ServerRoomManager.prototype);
 
 

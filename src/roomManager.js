@@ -15,10 +15,8 @@ function getDefault() {
     return _singleton;
 }
 
-var _RoomManager = new Lang.Class({
-    Name: '_RoomManager',
-
-    _init() {
+class _RoomManager {
+    constructor() {
         this._rooms = new Map();
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' })
 
@@ -52,33 +50,33 @@ var _RoomManager = new Lang.Class({
             this._removeSavedChannelsForAccount(account.object_path);
         });
         this._accountsMonitor.prepare(() => { this._restoreRooms(); });
-    },
+    }
 
     lookupRoom(id) {
         return this._rooms.get(id);
-    },
+    }
 
     lookupRoomByName(name, account) {
         for (let room of this._rooms.values())
             if (room.channel_name == name && room.account == account)
                 return room;
         return null;
-    },
+    }
 
     lookupRoomByChannel(channel) {
         let account = channel.connection.get_account();
         let channelName = channel.identifier;
         let id = Polari.create_room_id(account, channelName, channel.handle_type);
         return this._rooms.get(id);
-    },
+    }
 
     get roomCount() {
         return this._rooms.size;
-    },
+    }
 
     get rooms() {
         return [...this._rooms.values()];
-    },
+    }
 
     _onJoinActivated(action, parameter) {
         let [accountPath, channelName, time] = parameter.deep_unpack();
@@ -87,7 +85,7 @@ var _RoomManager = new Lang.Class({
         this._accountsMonitor.prepare(() => {
             this._ensureRoom(accountPath, channelName, Tp.HandleType.ROOM, time);
         });
-    },
+    }
 
     _onQueryActivated(action, parameter) {
         let [accountPath, channelName, , time] = parameter.deep_unpack();
@@ -95,7 +93,7 @@ var _RoomManager = new Lang.Class({
         this._accountsMonitor.prepare(() => {
             this._ensureRoom(accountPath, channelName, Tp.HandleType.CONTACT, time);
         });
-    },
+    }
 
     _onLeaveActivated(action, parameter) {
         let [id, ] = parameter.deep_unpack();
@@ -103,7 +101,7 @@ var _RoomManager = new Lang.Class({
 
         this._removeSavedChannel(room.account.object_path, room.channel_name);
         this._removeRoom(room);
-    },
+    }
 
     _restoreRooms(accountPath) {
         this._settings.get_value('saved-channel-list').deep_unpack().forEach(c => {
@@ -113,13 +111,13 @@ var _RoomManager = new Lang.Class({
                 this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0)
         });
         this.emit('rooms-loaded');
-    },
+    }
 
     _removeRooms(accountPath) {
         for (let room of this._rooms.values())
             if (accountPath == null || room.account.object_path == accountPath)
                 this._removeRoom(room);
-    },
+    }
 
     _findChannelIndex(channels, accountPath, channelName) {
         let matchName = channelName.toLowerCase();
@@ -128,7 +126,7 @@ var _RoomManager = new Lang.Class({
                 channels[i].channel.deep_unpack().toLowerCase() == matchName)
             return i;
         return -1;
-    },
+    }
 
     _addSavedChannel(accountPath, channelName) {
         let channels = this._settings.get_value('saved-channel-list').deep_unpack();
@@ -140,7 +138,7 @@ var _RoomManager = new Lang.Class({
         });
         this._settings.set_value('saved-channel-list',
                                  new GLib.Variant('aa{sv}', channels));
-    },
+    }
 
     _removeSavedChannel(accountPath, channelName) {
         let channels = this._settings.get_value('saved-channel-list').deep_unpack();
@@ -150,7 +148,7 @@ var _RoomManager = new Lang.Class({
         channels.splice(pos, 1);
         this._settings.set_value('saved-channel-list',
                                  new GLib.Variant('aa{sv}', channels));
-    },
+    }
 
     _removeSavedChannelsForAccount(accountPath) {
         let channels = this._settings.get_value('saved-channel-list').deep_unpack();
@@ -159,7 +157,7 @@ var _RoomManager = new Lang.Class({
         channels = channels.filter(c => !c.account.equal(account));
         this._settings.set_value('saved-channel-list',
                                  new GLib.Variant('aa{sv}', channels));
-    },
+    }
 
     _ensureRoom(accountPath, channelName, type, time) {
         let account = this._accountsMonitor.lookupAccount(accountPath);
@@ -187,7 +185,7 @@ var _RoomManager = new Lang.Class({
             this._app.active_window.active_room = room;
 
         return room;
-    },
+    }
 
     ensureRoomForChannel(channel, time) {
         let accountPath = channel.connection.get_account().object_path;
@@ -196,11 +194,11 @@ var _RoomManager = new Lang.Class({
                                         : channel.identifier;
         let room = this._ensureRoom(accountPath, channelName, channel.handle_type, time);
         room.channel = channel;
-    },
+    }
 
     _removeRoom(room) {
         if (this._rooms.delete(room.id))
             this.emit('room-removed', room);
     }
-});
+};
 Signals.addSignalMethods(_RoomManager.prototype);

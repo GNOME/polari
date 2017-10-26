@@ -3,7 +3,6 @@ const GLib = imports.gi.GLib;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
-const Lang = imports.lang;
 const RoomManager = imports.roomManager;
 const Signals = imports.signals;
 const Utils = imports.utils;
@@ -39,26 +38,24 @@ var knownCommands = {
 const UNKNOWN_COMMAND_MESSAGE =
     N_("Unknown command — try /HELP for a list of available commands");
 
-var IrcParser = new Lang.Class({
-    Name: 'IrcParser',
-
-    _init(room) {
+var IrcParser = class {
+    constructor(room) {
         this._app = Gio.Application.get_default();
         this._roomManager = RoomManager.getDefault();
         this._room = room;
-    },
+    }
 
     _createFeedbackLabel(text) {
         return new AppNotifications.SimpleOutput(text);
-    },
+    }
 
     _createFeedbackUsage(cmd) {
         return this._createFeedbackLabel(_("Usage: %s").format(_(knownCommands[cmd])));
-    },
+    }
 
     _createFeedbackGrid(header, items) {
         return new AppNotifications.GridOutput(header, items);
-    },
+    }
 
     process(text) {
         if (!this._room || !this._room.channel || !text.length)
@@ -279,13 +276,13 @@ var IrcParser = new Lang.Class({
         if (output)
             this._app.commandOutputQueue.addNotification(output);
         return retval;
-    },
+    }
 
     _sendText(text) {
         let type = Tp.ChannelTextMessageType.NORMAL;
         let message = Tp.ClientMessage.new_text(type, text);
         this._sendMessage(message);
-    },
+    }
 
     _sendMessage(message) {
         this._room.channel.send_message_async(message, 0, (c, res) => {
@@ -297,5 +294,5 @@ var IrcParser = new Lang.Class({
             }
         });
     }
-});
+};
 Signals.addSignalMethods(IrcParser.prototype);
