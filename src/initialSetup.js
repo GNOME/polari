@@ -21,7 +21,7 @@ var InitialSetupWindow = new Lang.Class({
                        'prevButton',
                        'serverRoomList'],
 
-    _init: function(params) {
+    _init(params) {
 
         this.parent(params);
 
@@ -63,7 +63,7 @@ var InitialSetupWindow = new Lang.Class({
         this._onNetworkAvailableChanged();
     },
 
-    _onNetworkAvailableChanged: function() {
+    _onNetworkAvailableChanged() {
         if (this._networkMonitor.network_available)
             this._setPage(this._currentAccount ? SetupPage.ROOM
                                                : SetupPage.CONNECTION);
@@ -71,7 +71,7 @@ var InitialSetupWindow = new Lang.Class({
             this._setPage(SetupPage.OFFLINE);
     },
 
-    _setPage: function(page) {
+    _setPage(page) {
         if (page == SetupPage.CONNECTION)
             this._contentStack.visible_child_name = 'connections';
         else if (page == SetupPage.ROOM)
@@ -94,7 +94,7 @@ var InitialSetupWindow = new Lang.Class({
         this._updateNextSensitivity();
     },
 
-    _unsetAccount: function() {
+    _unsetAccount() {
         if (!this._currentAccount)
             return;
 
@@ -113,7 +113,7 @@ var InitialSetupWindow = new Lang.Class({
             return SetupPage.OFFLINE;
     },
 
-    _updateNextSensitivity: function() {
+    _updateNextSensitivity() {
         let sensitive = this._page != SetupPage.OFFLINE;
 
         if (this._page == SetupPage.ROOM)
@@ -122,7 +122,7 @@ var InitialSetupWindow = new Lang.Class({
         this._nextButton.sensitive = sensitive;
     },
 
-    _joinRooms: function() {
+    _joinRooms() {
         this.hide();
 
         let toJoinRooms = this._serverRoomList.selectedRooms;

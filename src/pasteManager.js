@@ -31,10 +31,10 @@ function _getTargetForContentType(contentType) {
 var PasteManager = new Lang.Class({
     Name: 'PasteManager',
 
-    _init: function() {
+    _init() {
     },
 
-    pasteContent: function(content, title, callback) {
+    pasteContent(content, title, callback) {
         if (typeof content == 'string') {
             Utils.gpaste(content, title, callback);
         } else if (content instanceof GdkPixbuf.Pixbuf) {
@@ -46,14 +46,14 @@ var PasteManager = new Lang.Class({
         }
     },
 
-    _pasteFile: function(file, title, callback) {
+    _pasteFile(file, title, callback) {
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                               Gio.FileQueryInfoFlags.NONE,
                               GLib.PRIORITY_DEFAULT, null,
                               Lang.bind(this, this._onFileQueryFinish, title, callback));
     },
 
-    _onFileQueryFinish: function(file, res, title, callback) {
+    _onFileQueryFinish(file, res, title, callback) {
         let fileInfo = null;
         try {
             fileInfo = file.query_info_finish(res);
@@ -96,7 +96,7 @@ var DropTargetIface = new Lang.Interface({
         'file-dropped': { param_types: [Gio.File.$gtype] }
     },
 
-    addTargets: function(widget) {
+    addTargets(widget) {
         this._dragHighlight = false;
 
         widget.drag_dest_set(0, [], Gdk.DragAction.COPY);
@@ -118,7 +118,7 @@ var DropTargetIface = new Lang.Interface({
                              Lang.bind(this, this._onDragDataReceived));
     },
 
-    _onDragDrop: function(widget, context, x, y, time) {
+    _onDragDrop(widget, context, x, y, time) {
         if (!this.can_drop)
             return Gdk.EVENT_PROPAGATE;
 
@@ -129,12 +129,12 @@ var DropTargetIface = new Lang.Interface({
         return Gdk.EVENT_STOP;
     },
 
-    _onDragLeave: function(widget, context, time) {
+    _onDragLeave(widget, context, time) {
         widget.drag_unhighlight();
         this._dragHighlight = false;
     },
 
-    _onDragMotion: function(widget, context, x, y, time) {
+    _onDragMotion(widget, context, x, y, time) {
         if (!this.can_drop)
             return Gdk.EVENT_PROPAGATE;
 
@@ -161,7 +161,7 @@ var DropTargetIface = new Lang.Interface({
     },
 
 
-    _onDragDataReceived: function(widget, context, x, y, data, info, time) {
+    _onDragDataReceived(widget, context, x, y, data, info, time) {
         if (info == DndTargetType.URI_LIST) {
             let uris = data.get_uris();
             if (!uris) {
@@ -197,7 +197,7 @@ var DropTargetIface = new Lang.Interface({
         }
     },
 
-    _lookupFileInfo: function(file, callback) {
+    _lookupFileInfo(file, callback) {
         let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE;
         let flags = Gio.FileQueryInfoFlags.NONE;
         let priority = GLib.PRIORITY_DEFAULT;

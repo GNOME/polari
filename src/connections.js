@@ -33,7 +33,7 @@ var ConnectionRow = new Lang.Class({
     Name: 'ConnectionRow',
     Extends: Gtk.ListBoxRow,
 
-    _init: function(params) {
+    _init(params) {
         if (!params || !params.id)
             throw new Error('No id in parameters');
 
@@ -83,7 +83,7 @@ var ConnectionsList = new Lang.Class({
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
                'account-selected': {}},
 
-    _init: function(params) {
+    _init(params) {
         this._favoritesOnly = false;
 
         this.parent(params);
@@ -128,38 +128,38 @@ var ConnectionsList = new Lang.Class({
         this.notify('favorites-only');
     },
 
-    setFilter: function(filter) {
+    setFilter(filter) {
         if (Utils.updateTerms(this._filterTerms, filter))
             this._list.invalidate_filter();
     },
 
-    activateFirst: function() {
+    activateFirst() {
         let row = this._list.get_row_at_y(0);
         if (row)
             row.activate();
     },
 
-    activateSelected: function() {
+    activateSelected() {
         let row = this._list.get_selected_row();
         if (row)
             row.activate();
     },
 
-    _filterRows: function(row) {
+    _filterRows(row) {
         let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
         return this._filterTerms.every(term => {
             return matchTerms.some(s => s.indexOf(term) != -1);
         });
     },
 
-    _updateHeader: function(row, before) {
+    _updateHeader(row, before) {
         if (!before)
             row.set_header(null);
         else if (!row.get_header())
             row.set_header(new Gtk.Separator());
     },
 
-    _networksChanged: function() {
+    _networksChanged() {
         this._list.foreach(w => { w.destroy(); });
 
         let accounts = this._accountsMonitor.accounts;
@@ -180,7 +180,7 @@ var ConnectionsList = new Lang.Class({
         });
     },
 
-    _onRowActivated: function(list, row) {
+    _onRowActivated(list, row) {
         let name = this._networksManager.getNetworkName(row.id);
         let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
                                           connection_manager: 'idle',
@@ -202,7 +202,7 @@ var ConnectionsList = new Lang.Class({
         this.emit('account-selected');
     },
 
-    _setAccountRowSensitive: function(account, sensitive) {
+    _setAccountRowSensitive(account, sensitive) {
         if (!this._networksManager.getAccountIsPredefined(account))
             return;
 
@@ -212,7 +212,7 @@ var ConnectionsList = new Lang.Class({
         this._rows.get(account.service).sensitive = sensitive;
     },
 
-    _sort: function(row1, row2) {
+    _sort(row1, row2) {
         let isFavorite1 = this._networksManager.getNetworkIsFavorite(row1.id);
         let isFavorite2 = this._networksManager.getNetworkIsFavorite(row2.id);
 
@@ -247,7 +247,7 @@ var ConnectionDetails = new Lang.Class({
                                                            false)},
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
 
-    _init: function(params) {
+    _init(params) {
         this._networksManager = NetworksManager.getDefault();
         this._networksManager.connect('changed', () => {
             this.notify('has-service');
@@ -281,7 +281,7 @@ var ConnectionDetails = new Lang.Class({
         this.reset();
     },
 
-    setErrorHint: function(hint) {
+    setErrorHint(hint) {
         if (hint == ErrorHint.SERVER)
             this._serverEntry.get_style_context().add_class('error');
         else
@@ -293,7 +293,7 @@ var ConnectionDetails = new Lang.Class({
             this._nickEntry.get_style_context().remove_class('error');
     },
 
-    _getParams: function() {
+    _getParams() {
         let nameText = this._nameEntry.text.trim();
         let serverText = this._serverEntry.text.trim();
 
@@ -318,7 +318,7 @@ var ConnectionDetails = new Lang.Class({
         return params;
     },
 
-    reset: function() {
+    reset() {
         this._savedName = '';
         this._savedServer = '';
         this._savedNick = GLib.get_user_name();
@@ -337,11 +337,11 @@ var ConnectionDetails = new Lang.Class({
             this._nickEntry.grab_focus();
     },
 
-    _onCanConfirmChanged: function() {
+    _onCanConfirmChanged() {
         this.notify('can-confirm');
     },
 
-    _populateFromAccount: function(account) {
+    _populateFromAccount(account) {
         let params = getAccountParams(account);
 
         this._savedSSL = params['use-ssl'];
@@ -389,7 +389,7 @@ var ConnectionDetails = new Lang.Class({
             this._populateFromAccount(this._account);
     },
 
-    save: function() {
+    save() {
         if (!this.can_confirm)
             return;
 
@@ -399,7 +399,7 @@ var ConnectionDetails = new Lang.Class({
             this._createAccount();
     },
 
-    _createAccount: function() {
+    _createAccount() {
         let params = this._getParams();
         let accountManager = Tp.AccountManager.dup();
         let req = new Tp.AccountRequest({ account_manager: accountManager,
@@ -420,7 +420,7 @@ var ConnectionDetails = new Lang.Class({
         });
     },
 
-    _updateAccount: function() {
+    _updateAccount() {
         let params = this._getParams();
         let account = this._account;
         let oldDetails = account.dup_parameters_vardict().deep_unpack();
@@ -436,7 +436,7 @@ var ConnectionDetails = new Lang.Class({
         });
     },
 
-    _detailsFromParams: function(params, oldDetails) {
+    _detailsFromParams(params, oldDetails) {
         let details = { account:  GLib.Variant.new('s', params.account),
                         username: GLib.Variant.new('s', params.account),
                         server:   GLib.Variant.new('s', params.server) };
@@ -463,7 +463,7 @@ var ConnectionProperties = new Lang.Class({
                        'errorBox',
                        'errorLabel'],
 
-    _init: function(account) {
+    _init(account) {
         /* Translators: %s is a connection name */
         let title = _("“%s” Properties").format(account.display_name);
         this.parent({ title: title,
@@ -492,7 +492,7 @@ var ConnectionProperties = new Lang.Class({
         this._syncErrorMessage(account);
     },
 
-    _syncErrorMessage: function(account) {
+    _syncErrorMessage(account) {
         let status = account.connection_status;
         let reason = account.connection_status_reason;
 

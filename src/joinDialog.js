@@ -32,7 +32,7 @@ var JoinDialog = new Lang.Class({
                        'addButton',
                        'customToggle'],
 
-    _init: function(params) {
+    _init(params) {
         params['use-header-bar'] = 1;
         this.parent(params);
 
@@ -95,7 +95,7 @@ var JoinDialog = new Lang.Class({
       return Object.keys(this._accounts).length > 0;
     },
 
-    _setupMainPage: function() {
+    _setupMainPage() {
         this._connectionButton.connect('clicked', () => {
             this._setPage(DialogPage.CONNECTION);
         });
@@ -108,7 +108,7 @@ var JoinDialog = new Lang.Class({
                                      Lang.bind(this, this._updateCanJoin));
     },
 
-    _setupConnectionPage: function() {
+    _setupConnectionPage() {
         this._backButton.connect('clicked', () => {
             this._setPage(DialogPage.MAIN);
         });
@@ -150,7 +150,7 @@ var JoinDialog = new Lang.Class({
         });
     },
 
-    _onAccountChanged: function() {
+    _onAccountChanged() {
         let selected = this._connectionCombo.get_active_text();
         let account = this._accounts[selected];
         if (!account)
@@ -159,11 +159,11 @@ var JoinDialog = new Lang.Class({
        this._serverRoomList.setAccount(account);
     },
 
-    _onAccountCreated: function(w, account) {
+    _onAccountCreated(w, account) {
         this._connectionCombo.set_active_id(account.display_name);
     },
 
-    _joinRoom: function() {
+    _joinRoom() {
         this.hide();
 
         let selected = this._connectionCombo.get_active_text();
@@ -183,7 +183,7 @@ var JoinDialog = new Lang.Class({
         });
     },
 
-    _updateConnectionCombo: function() {
+    _updateConnectionCombo() {
         this._connectionCombo.remove_all();
 
         let names = Object.keys(this._accounts).sort((a, b) => {
@@ -202,7 +202,7 @@ var JoinDialog = new Lang.Class({
         this._connectionCombo.set_active(activeIndex);
     },
 
-    _updateCanJoin: function() {
+    _updateCanJoin() {
         let sensitive = false;
 
         if (this._page == DialogPage.MAIN)
@@ -221,7 +221,7 @@ var JoinDialog = new Lang.Class({
             return DialogPage.MAIN;
     },
 
-    _setPage: function(page) {
+    _setPage(page) {
         let isMain = page == DialogPage.MAIN;
         let isAccountsEmpty = !this._hasAccounts;
 

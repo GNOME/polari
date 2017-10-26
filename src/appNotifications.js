@@ -14,18 +14,18 @@ var AppNotification = new Lang.Class({
     Abstract: true,
     Extends: Gtk.Revealer,
 
-    _init: function() {
+    _init() {
         this.parent({ reveal_child: true,
                       transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN });
         this.connect('notify::child-revealed',
                      Lang.bind(this, this._onChildRevealed));
     },
 
-    close: function() {
+    close() {
         this.reveal_child = false;
     },
 
-    _onChildRevealed: function() {
+    _onChildRevealed() {
         if (!this.child_revealed)
             this.destroy();
     }
@@ -35,7 +35,7 @@ var MessageNotification = new Lang.Class({
     Name: 'MessageNotification',
     Extends: AppNotification,
 
-    _init: function(label, iconName) {
+    _init(label, iconName) {
         this.parent();
 
         Mainloop.timeout_add_seconds(TIMEOUT, Lang.bind(this, this.close));
@@ -58,7 +58,7 @@ var MessageNotification = new Lang.Class({
     },
 
 
-    addButton: function(label, callback) {
+    addButton(label, callback) {
         let button = new Gtk.Button({ label: label, visible: true });
         button.connect('clicked', () => {
             if (callback)
@@ -75,7 +75,7 @@ var UndoNotification = new Lang.Class({
     Extends: MessageNotification,
     Signals: { closed: {}, undo: {} },
 
-    _init: function(label) {
+    _init(label) {
         this.parent(label);
 
         this._undo = false;
@@ -89,12 +89,12 @@ var UndoNotification = new Lang.Class({
                                              Lang.bind(this, this.close));
     },
 
-    close: function() {
+    close() {
         this.emit(this._undo ? 'undo' : 'closed');
         this.parent();
     },
 
-    _onDestroy: function() {
+    _onDestroy() {
         if (this._shutdownId)
             this._app.disconnect(this._shutdownId);
         this._shutdownId = 0;
@@ -106,7 +106,7 @@ var CommandOutputNotification = new Lang.Class({
     Extends: AppNotification,
     Abstract: true,
 
-    _init: function() {
+    _init() {
         this.parent();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
@@ -119,7 +119,7 @@ var SimpleOutput = new Lang.Class({
     Name: 'SimpleOutput',
     Extends: CommandOutputNotification,
 
-    _init: function(text) {
+    _init(text) {
         this.parent();
 
         let label = new Gtk.Label({ label: text,
@@ -135,7 +135,7 @@ var GridOutput = new Lang.Class({
     Name: 'GridOutput',
     Extends: CommandOutputNotification,
 
-    _init: function(header, items) {
+    _init(header, items) {
         this.parent();
 
         let numItems = items.length;
@@ -167,7 +167,7 @@ var NotificationQueue = new Lang.Class({
     Name: 'NotificationQueue',
     Extends: Gtk.Frame,
 
-    _init: function() {
+    _init() {
         this.parent({ valign: Gtk.Align.START,
                       halign: Gtk.Align.CENTER,
                       margin_start: 24, margin_end: 24,
@@ -179,14 +179,14 @@ var NotificationQueue = new Lang.Class({
         this.add(this._grid);
     },
 
-    addNotification: function(notification) {
+    addNotification(notification) {
         this._grid.add(notification);
 
         notification.connect('destroy', Lang.bind(this, this._onChildDestroy));
         this.show();
     },
 
-    _onChildDestroy: function() {
+    _onChildDestroy() {
         if (this._grid.get_children().length == 0)
            this.hide();
     }
@@ -196,7 +196,7 @@ var CommandOutputQueue = new Lang.Class({
     Name: 'CommandOutputQueue',
     Extends: NotificationQueue,
 
-    _init: function() {
+    _init() {
         this.parent();
 
         this.valign = Gtk.Align.END;

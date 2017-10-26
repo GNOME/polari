@@ -15,7 +15,7 @@ function getDefault() {
 var NetworksManager = new Lang.Class({
     Name: 'NetworksManager',
 
-    _init: function() {
+    _init() {
         this._networks = [];
         this._networksById = new Map();
 
@@ -30,7 +30,7 @@ var NetworksManager = new Lang.Class({
         }
     },
 
-    _onContentsReady: function(f, res) {
+    _onContentsReady(f, res) {
         let success, data;
         try {
             [success, data, ] = f.load_contents_finish(res);
@@ -42,7 +42,7 @@ var NetworksManager = new Lang.Class({
             this.emit('changed');
     },
 
-    _parseNetworks: function(data) {
+    _parseNetworks(data) {
         let networks;
         try {
             networks = JSON.parse(data);
@@ -59,7 +59,7 @@ var NetworksManager = new Lang.Class({
         return true;
     },
 
-    _lookupNetwork: function(id) {
+    _lookupNetwork(id) {
         let network = this._networksById.get(id);
         if (!network)
             throw new Error('Invalid network ID');
@@ -70,15 +70,15 @@ var NetworksManager = new Lang.Class({
         return this._networks;
     },
 
-    getAccountIsPredefined: function(account) {
+    getAccountIsPredefined(account) {
         return account && this._networksById.get(account.service) != null;
     },
 
-    getNetworkName: function(id) {
+    getNetworkName(id) {
         return this._lookupNetwork(id).name;
     },
 
-    getNetworkIsFavorite: function(id) {
+    getNetworkIsFavorite(id) {
         let network = this._lookupNetwork(id);
 
         if (network.hasOwnProperty('favorite'))
@@ -87,7 +87,7 @@ var NetworksManager = new Lang.Class({
         return false;
     },
 
-    getNetworkDetails: function(id) {
+    getNetworkDetails(id) {
         let network = this._lookupNetwork(id);
         if (!network.servers || !network.servers.length)
             throw new Error('No servers for network ' + id);
@@ -101,21 +101,21 @@ var NetworksManager = new Lang.Class({
         };
     },
 
-    getNetworkServers: function(id) {
+    getNetworkServers(id) {
         let network = this._lookupNetwork(id);
         let sslServers = network.servers.filter(s => s.ssl);
         return sslServers.length > 0 ? sslServers
                                      : network.servers.slice();
     },
 
-    getNetworkMatchTerms: function(id) {
+    getNetworkMatchTerms(id) {
         let network = this._lookupNetwork(id);
         let servers = network.servers.map(s => s.address.toLowerCase());
         return [network.name.toLowerCase(),
                 network.id.toLowerCase()].concat(servers);
     },
 
-    findByServer: function(server) {
+    findByServer(server) {
         for (let n of this._networks)
            if (n.servers.some(s => s.address == server))
                return n.id;
