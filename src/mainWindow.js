@@ -18,9 +18,7 @@ const UserList = imports.userList;
 const Utils = imports.utils;
 
 
-var FixedSizeFrame = new Lang.Class({
-    Name: 'FixedSizeFrame',
-    Extends: Gtk.Frame,
+var FixedSizeFrame = GObject.registerClass({
     Properties: {
         height: GObject.ParamSpec.int('height',
                                       'height',
@@ -33,24 +31,24 @@ var FixedSizeFrame = new Lang.Class({
                                      GObject.ParamFlags.READWRITE,
                                      -1, GLib.MAXINT32, -1)
     },
-
+}, class FixedSizeFrame extends Gtk.Frame {
     _init(params) {
         this._height = -1;
         this._width = -1;
 
-        this.parent(params);
-    },
+        super._init(params);
+    }
 
     _queueRedraw() {
         let child = this.get_child();
         if (child)
             child.queue_resize();
         this.queue_draw();
-    },
+    }
 
     get height() {
         return this._height;
-    },
+    }
 
     set height(height) {
         if (height == this._height)
@@ -59,11 +57,11 @@ var FixedSizeFrame = new Lang.Class({
         this.notify('height');
         this.set_size_request(this._width, this._height);
         this._queueRedraw();
-    },
+    }
 
     get width() {
         return this._width;
-    },
+    }
 
     set width(width) {
         if (width == this._width)
@@ -73,22 +71,20 @@ var FixedSizeFrame = new Lang.Class({
         this.notify('width');
         this.set_size_request(this._width, this._height);
         this._queueRedraw();
-    },
+    }
 
     vfunc_get_preferred_width_for_height(forHeight) {
-        let [min, nat] = this.parent(forHeight);
+        let [min, nat] = super.vfunc_get_preferred_width_for_height(forHeight);
         return [min, this._width < 0 ? nat : this._width];
-    },
+    }
 
     vfunc_get_preferred_height_for_width(forWidth) {
-        let [min, nat] = this.parent(forWidth);
+        let [min, nat] = super.vfunc_get_preferred_height_for_width(forWidth);
         return [min, this._height < 0 ? nat : this._height];
     }
 });
 
-var MainWindow = new Lang.Class({
-    Name: 'MainWindow',
-    Extends: Gtk.ApplicationWindow,
+var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
     InternalChildren: ['titlebarRight',
                        'titlebarLeft',
@@ -117,7 +113,7 @@ var MainWindow = new Lang.Class({
                                                 Polari.Room.$gtype)
     },
     Signals: { 'active-room-state-changed': {} },
-
+}, class MainWindow extends Gtk.ApplicationWindow {
     _init(params) {
         this._subtitle = '';
         params.show_menubar = false;
@@ -130,7 +126,7 @@ var MainWindow = new Lang.Class({
         this._membersChangedId = 0;
         this._channelChangedId = 0;
 
-        this.parent(params);
+        super._init(params);
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         this._gtkSettings = Gtk.Settings.get_default();
@@ -210,27 +206,27 @@ var MainWindow = new Lang.Class({
 
         if (this._settings.get_boolean('window-maximized'))
             this.maximize();
-    },
+    }
 
     get subtitle() {
         return this._subtitle;
-    },
+    }
 
     get subtitle_visible() {
         return this._subtitle.length > 0;
-    },
+    }
 
     _onWindowStateEvent(widget, event) {
         let state = event.get_window().get_state();
 
         this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
         this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
-    },
+    }
 
     _onSizeAllocate(widget, allocation) {
         if (!this._isFullscreen && !this._isMaximized)
             this._currentSize = this.get_size();
-    },
+    }
 
     _onDestroy(widget) {
         this._settings.set_boolean ('window-maximized', this._isMaximized);
@@ -248,7 +244,7 @@ var MainWindow = new Lang.Class({
             this._settings.set_value('last-selected-channel', serializedChannel);
         else
             this._settings.reset('last-selected-channel');
-    },
+    }
 
     _touchFile(file) {
         try {
@@ -259,7 +255,7 @@ var MainWindow = new Lang.Class({
 
         let stream = file.create(0, null);
         stream.close(null);
-    },
+    }
 
     _onDeleteEvent() {
         let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
@@ -274,12 +270,12 @@ var MainWindow = new Lang.Class({
 
         this._closeConfirmationDialog.show();
         return Gdk.EVENT_STOP;
-    },
+    }
 
     _onAccountsChanged(am) {
         let hasAccounts = this._accountsMonitor.enabledAccounts.length > 0;
         this._roomListRevealer.reveal_child = hasAccounts;
-    },
+    }
 
     _updateDecorations() {
         let layoutLeft = null;
@@ -295,11 +291,11 @@ var MainWindow = new Lang.Class({
 
         this._titlebarLeft.set_decoration_layout(layoutLeft);
         this._titlebarRight.set_decoration_layout(layoutRight);
-    },
+    }
 
     get active_room() {
         return this._room;
-    },
+    }
 
     set active_room(room) {
         if (room == this._room)
@@ -342,7 +338,7 @@ var MainWindow = new Lang.Class({
                 this._updateUserListLabel();
                 this.emit('active-room-state-changed');
             });
-    },
+    }
 
     _onRoomsLoaded(mgr) {
         if (this.active_room)
@@ -360,17 +356,17 @@ var MainWindow = new Lang.Class({
 
         this.active_room = this._roomManager.lookupRoom(roomId) ||
                            this._roomManager.rooms.shift();
-    },
+    }
 
     _onRoomRemoved(mgr, room) {
         if (room == this._lastActiveRoom)
             this._lastActiveRoom = null;
-    },
+    }
 
     showJoinRoomDialog() {
         let dialog = new JoinDialog.JoinDialog({ transient_for: this });
         dialog.show();
-    },
+    }
 
     _updateUserListLabel() {
         let numMembers = 0;
@@ -384,7 +380,7 @@ var MainWindow = new Lang.Class({
                                       "%d users", numMembers).format(numMembers);
         this._showUserListButton.get_accessible().set_name(accessibleName);
         this._showUserListButton.label = '%d'.format(numMembers);
-    },
+    }
 
     _updateTitlebar() {
         let subtitle = '';

@@ -77,8 +77,7 @@ var PasteManager = class {
     }
 };
 
-var DropTargetIface = new Lang.Interface({
-    Name: 'DropTargetIface',
+var DropTargetIface = GObject.registerClass({
     Requires: [GObject.Object],
     Properties: {
         'can-drop': GObject.ParamSpec.boolean('can-drop', '', '',
@@ -90,7 +89,7 @@ var DropTargetIface = new Lang.Interface({
         'image-dropped': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
         'file-dropped': { param_types: [Gio.File.$gtype] }
     },
-
+}, class DropTargetIface extends GObject.Interface {
     addTargets(widget) {
         this._dragHighlight = false;
 
@@ -111,7 +110,7 @@ var DropTargetIface = new Lang.Interface({
         widget.connect('drag-motion', Lang.bind(this, this._onDragMotion));
         widget.connect_after('drag-data-received',
                              Lang.bind(this, this._onDragDataReceived));
-    },
+    }
 
     _onDragDrop(widget, context, x, y, time) {
         if (!this.can_drop)
@@ -122,12 +121,12 @@ var DropTargetIface = new Lang.Interface({
 
         Polari.drag_dest_request_data(widget, context, time);
         return Gdk.EVENT_STOP;
-    },
+    }
 
     _onDragLeave(widget, context, time) {
         widget.drag_unhighlight();
         this._dragHighlight = false;
-    },
+    }
 
     _onDragMotion(widget, context, x, y, time) {
         if (!this.can_drop)
@@ -153,7 +152,7 @@ var DropTargetIface = new Lang.Interface({
         }
 
         return Gdk.EVENT_STOP;
-    },
+    }
 
 
     _onDragDataReceived(widget, context, x, y, data, info, time) {
@@ -190,7 +189,7 @@ var DropTargetIface = new Lang.Interface({
             }
             Gtk.drag_finish(context, success, false, time);
         }
-    },
+    }
 
     _lookupFileInfo(file, callback) {
         let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE;
