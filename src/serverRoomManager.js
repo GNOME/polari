@@ -114,9 +114,7 @@ function _strBaseEqual(str1, str2) {
     return str1.localeCompare(str2, {}, { sensitivity: 'base'}) == 0;
 };
 
-var ServerRoomList = new Lang.Class({
-    Name: 'ServerRoomList',
-    Extends: Gtk.Box,
+var ServerRoomList = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
     InternalChildren: ['filterEntry',
                        'list',
@@ -129,13 +127,13 @@ var ServerRoomList = new Lang.Class({
                                                         GObject.ParamFlags.READABLE,
                                                        false)
     },
-
+}, class ServerRoomList extends Gtk.Box {
     _init(params) {
         this._account = null;
         this._pendingInfos = [];
         this._filterTerms = [];
 
-        this.parent(params);
+        super._init(params);
 
         this.connect('destroy', () => {
             this.setAccount(null);
@@ -195,7 +193,7 @@ var ServerRoomList = new Lang.Class({
         this._manager = getDefault();
         this._manager.connect('loading-changed',
                               Lang.bind(this, this._onLoadingChanged));
-    },
+    }
 
     get can_join() {
         let canJoin = false;
@@ -205,7 +203,7 @@ var ServerRoomList = new Lang.Class({
             return canJoin;
         });
         return canJoin;
-    },
+    }
 
     get selectedRooms() {
         let rooms = [];
@@ -217,7 +215,7 @@ var ServerRoomList = new Lang.Class({
             rooms.push(this._store.get_value(iter, RoomListColumn.NAME));
         }
         return rooms;
-    },
+    }
 
     setAccount(account) {
         if (this._account == account)
@@ -228,17 +226,17 @@ var ServerRoomList = new Lang.Class({
         this._clearList();
         this._filterEntry.set_text('');
         this._onLoadingChanged(this._manager, account);
-    },
+    }
 
     focusEntry() {
         this._filterEntry.grab_focus();
-    },
+    }
 
     _isCustomRoomItem(iter) {
         let path = this._store.get_path(iter);
         let customPath = this._store.get_path(this._customRoomItem);
         return path.compare(customPath) == 0;
-    },
+    }
 
     _updateCustomRoomName() {
         let newName = this._filterEntry.text.trim();
@@ -260,7 +258,7 @@ var ServerRoomList = new Lang.Class({
         }
 
         this._store.set_value(this._customRoomItem, RoomListColumn.NAME, newName);
-    },
+    }
 
     _updateSelection() {
         if (this._filterEntry.text.trim().length == 0)
@@ -273,7 +271,7 @@ var ServerRoomList = new Lang.Class({
 
         this._list.get_selection().select_iter(iter);
         this._list.scroll_to_cell(model.get_path(iter), null, true, 0.0, 0.0);
-    },
+    }
 
     _clearList() {
         let [valid, iter] = this._store.get_iter_first();
@@ -282,7 +280,7 @@ var ServerRoomList = new Lang.Class({
         this._store.move_before(this._customRoomItem, iter);
         while (this._store.remove(iter))
             ;
-    },
+    }
 
     _onLoadingChanged(mgr, account) {
         if (account != this._account)
@@ -355,13 +353,13 @@ var ServerRoomList = new Lang.Class({
             this._checkSpinner();
             return GLib.SOURCE_REMOVE;
         });
-    },
+    }
 
     _checkSpinner() {
         let loading = this._pendingInfos.length ||
                       (this._account && this._manager.isLoading(this._account));
         this._spinner.active = loading;
-    },
+    }
 
     _toggleChecked(path) {
         let childPath = this._list.model.convert_path_to_child_path(path);

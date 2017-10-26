@@ -15,12 +15,10 @@ const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 const MAX_USERS_SHOWN = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
-var UserListPopover = new Lang.Class({
-    Name: 'UserListPopover',
-    Extends: Gtk.Popover,
-
+var UserListPopover = GObject.registerClass(
+class UserListPopover extends Gtk.Popover {
     _init(params) {
-        this.parent(params);
+        super._init(params);
 
         this._createWidget();
 
@@ -32,15 +30,15 @@ var UserListPopover = new Lang.Class({
         this._revealer.connect('notify::child-revealed', () => {
             this._revealer.transition_duration = 250;
         });
-    },
+    }
 
     vfunc_realize() {
-        this.parent();
+        super.vfunc_realize();
 
         let toplevel = this.get_toplevel();
         toplevel.connect('notify::active-room',
                          Lang.bind(this, this._activeRoomChanged));
-    },
+    }
 
     _createWidget() {
         this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
@@ -59,7 +57,7 @@ var UserListPopover = new Lang.Class({
         this._revealer.add(this._entry);
 
         this._box.show_all();
-    },
+    }
 
     _activeRoomChanged() {
         this._entry.text = '';
@@ -67,7 +65,7 @@ var UserListPopover = new Lang.Class({
         if (this._userList)
             this._userList.destroy();
         this._userList = null;
-    },
+    }
 
     _ensureUserList() {
         if (this._userList)
@@ -83,7 +81,7 @@ var UserListPopover = new Lang.Class({
         this._userList.vadjustment.connect('changed',
                                            Lang.bind(this, this._updateEntryVisibility));
         this._updateEntryVisibility();
-    },
+    }
 
     _updateEntryVisibility() {
         if (!this._userList)
@@ -92,7 +90,7 @@ var UserListPopover = new Lang.Class({
         let reveal = this._entry.text != '' ||
                      this._userList.numRows > MAX_USERS_SHOWN;
         this._revealer.reveal_child = reveal;
-    },
+    }
 
     _updateFilter() {
         if (!this._userList)
@@ -101,9 +99,7 @@ var UserListPopover = new Lang.Class({
     }
 });
 
-var UserDetails = new Lang.Class({
-    Name: 'UserDetails',
-    Extends: Gtk.Frame,
+var UserDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
     InternalChildren: ['spinnerBox',
                        'spinner',
@@ -122,7 +118,7 @@ var UserDetails = new Lang.Class({
                                                              'notifications-enabled',
                                                              READWRITE,
                                                              false)},
-
+}, class UserDetails extends Gtk.Frame {
     _init(params = {}) {
         let user = params.user;
         delete params.user;
@@ -132,7 +128,7 @@ var UserDetails = new Lang.Class({
         this._notificationsEnabled = false;
         this._user = null;
 
-        this.parent(params);
+        super._init(params);
 
         this.user = user;
 
@@ -142,11 +138,11 @@ var UserDetails = new Lang.Class({
         this._updateButtonVisibility();
         this._detailsGrid.hide();
         this._notificationLabel.opacity = this.notifications_enabled ? 1. : 0.;
-    },
+    }
 
     get notifications_enabled() {
         return this._notificationsEnabled;
-    },
+    }
 
     set notifications_enabled(value) {
         if (this._notificationsEnabled == value)
@@ -157,7 +153,7 @@ var UserDetails = new Lang.Class({
         this.notify('notifications-enabled');
 
         this._notificationLabel.opacity = value ? 1. : 0.;
-    },
+    }
 
     set user(user) {
         if (this._user == user)
@@ -179,7 +175,7 @@ var UserDetails = new Lang.Class({
         this._updateButtonVisibility();
         this._notificationLabel.visible = this._user == null;
         this._lastLabel.visible = this._user != null;
-    },
+    }
 
     set nickname(nickname) {
         this._nickname = nickname;
@@ -189,11 +185,11 @@ var UserDetails = new Lang.Class({
 
 
         this._updateButtonVisibility();
-    },
+    }
 
     get expanded() {
         return this._expanded;
-    },
+    }
 
     set expanded(v) {
         if (v == this._expanded)
@@ -207,7 +203,7 @@ var UserDetails = new Lang.Class({
             this._unexpand();
 
         this.notify('expanded');
-    },
+    }
 
     _expand() {
         this._detailsGrid.visible = this._initialDetailsLoaded;
@@ -222,7 +218,7 @@ var UserDetails = new Lang.Class({
         //TODO: else use this._nickname to query tracker
         else
             this._revealDetails();
-    },
+    }
 
     _unexpand() {
         this._spinner.stop();
@@ -230,7 +226,7 @@ var UserDetails = new Lang.Class({
         if (this._cancellable)
             this._cancellable.cancel();
         this._cancellable = null;
-    },
+    }
 
     _formatLast(seconds) {
         if (seconds < 60)
@@ -260,7 +256,7 @@ var UserDetails = new Lang.Class({
         let months = days / 30;
         return ngettext("%d month ago",
                         "%d months ago", months).format(months);
-    },
+    }
 
     _onContactInfoReady(c, res) {
         this._initialDetailsLoaded = true;
@@ -287,13 +283,13 @@ var UserDetails = new Lang.Class({
         }
 
         this._revealDetails();
-    },
+    }
 
     _revealDetails() {
         this._spinner.stop();
         this._spinnerBox.hide();
         this._detailsGrid.show();
-    },
+    }
 
     _onMessageButtonClicked() {
         let account = this._user.connection.get_account();
@@ -306,7 +302,7 @@ var UserDetails = new Lang.Class({
                                            this._user.alias,
                                            '',
                                            time ]));
-    },
+    }
 
     _updateButtonVisibility() {
         if (!this._user) {
@@ -325,15 +321,13 @@ var UserDetails = new Lang.Class({
     }
 });
 
-var UserPopover = new Lang.Class({
-    Name: 'UserPopover',
-    Extends: Gtk.Popover,
+var UserPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
     InternalChildren: ['nickLabel',
                        'statusLabel',
                        'notifyButton',
                        'userDetails'],
-
+}, class UserPopover extends Gtk.Popover {
     _init(params) {
         this._room = params.room;
         delete params.room;
@@ -344,7 +338,7 @@ var UserPopover = new Lang.Class({
         this._nickname = null;
         this._basenick = null;
 
-        this.parent(params);
+        super._init(params);
 
         this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
 
@@ -359,7 +353,7 @@ var UserPopover = new Lang.Class({
         });
 
         this.show();
-    },
+    }
 
     set nickname(nickname) {
         if (this._nickname == nickname)
@@ -376,7 +370,7 @@ var UserPopover = new Lang.Class({
         this._notifyButton.action_name = actionName;
 
         this._setBasenick(Polari.util_get_basenick(nickname));
-    },
+    }
 
     _setBasenick(basenick) {
         if (this._basenick == basenick)
@@ -402,11 +396,11 @@ var UserPopover = new Lang.Class({
 
         this._onStatusChanged();
         this._updateDetailsContact();
-    },
+    }
 
     get nickname() {
         return this._nickname;
-    },
+    }
 
     _onStatusChanged() {
         let status = this._userTracker.getNickStatus(this._nickname);
@@ -423,25 +417,23 @@ var UserPopover = new Lang.Class({
         this._statusLabel.label = label;
 
         this._nickLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
-    },
+    }
 
     _updateDetailsContact() {
         this._userDetails.user = this._userTracker.lookupContact(this._nickname);
-     },
+     }
 
     _onNickStatusChanged(baseNick, status) {
         this._onStatusChanged();
     }
 });
 
-var UserListRow = new Lang.Class({
-    Name: 'UserListRow',
-    Extends: Gtk.ListBoxRow,
-
+const UserListRow = GObject.registerClass(
+class UserListRow extends Gtk.ListBoxRow {
     _init(user) {
         this._user = user;
 
-        this.parent();
+        super._init();
 
         this._createWidget();
 
@@ -453,21 +445,21 @@ var UserListRow = new Lang.Class({
 
         this._revealer.connect('notify::reveal-child',
                                Lang.bind(this, this._onExpandedChanged));
-    },
+    }
 
     get user() {
         return this._user;
-    },
+    }
 
     get expand() {
         return this._revealer.reveal_child;
-    },
+    }
 
     set expand(expand) {
         if (expand)
             this._ensureDetails();
         this._revealer.reveal_child = expand;
-    },
+    }
 
     _createWidget() {
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
@@ -494,7 +486,7 @@ var UserListRow = new Lang.Class({
         vbox.add(this._revealer);
 
         this.show_all();
-    },
+    }
 
     _ensureDetails() {
         if (this._revealer.get_child())
@@ -505,16 +497,16 @@ var UserListRow = new Lang.Class({
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
         this._revealer.add(details);
-    },
+    }
 
     shouldShow() {
         return this._user.alias.toLowerCase().indexOf(this._filter) != -1;
-    },
+    }
 
     setFilter(filter) {
         this._filter = filter.toLowerCase();
         this._updateLabel();
-    },
+    }
 
     _updateLabel() {
         let filterIndex = -1;
@@ -529,14 +521,14 @@ var UserListRow = new Lang.Class({
             let postMatch = this._user.alias.substring(filterIndex + this._filter.length);
             this._label.label = preMatch + '<b>' + theMatch + '</b>' + postMatch;
         }
-    },
+    }
 
     _updateArrowVisibility() {
         let flags = this.get_state_flags();
         this._arrow.visible = this.expand ||
                               flags & Gtk.StateFlags.PRELIGHT ||
                               flags & Gtk.StateFlags.FOCUSED;
-    },
+    }
 
     _onExpandedChanged() {
         if (this._revealer.reveal_child) {
@@ -550,12 +542,10 @@ var UserListRow = new Lang.Class({
     }
 });
 
-var UserList = new Lang.Class({
-    Name: 'UserList',
-    Extends: Gtk.ScrolledWindow,
-
+var UserList = GObject.registerClass(
+class UserList extends Gtk.ScrolledWindow {
     _init(room) {
-        this.parent({ hexpand: true,
+        super._init({ hexpand: true,
                       shadow_type: Gtk.ShadowType.ETCHED_IN,
                       hscrollbar_policy: Gtk.PolicyType.NEVER,
                       propagate_natural_width: true });
@@ -625,22 +615,22 @@ var UserList = new Lang.Class({
         this._onChannelChanged(room);
 
         this.show_all();
-    },
+    }
 
     get numRows() {
         return Object.keys(this._rows).length;
-    },
+    }
 
     _onDestroy() {
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
-    },
+    }
 
     setFilter(filter) {
         this._filter = filter;
         this._list.invalidate_filter();
-    },
+    }
 
     _updateContentHeight() {
         if (this._updateHeightId != 0)
@@ -664,24 +654,24 @@ var UserList = new Lang.Class({
             this._updateHeightId = 0;
             return GLib.SOURCE_REMOVE;
         });
-    },
+    }
 
     _onMemberRenamed(room, oldMember, newMember) {
         this._removeMember(oldMember);
         this._addMember(newMember);
-    },
+    }
 
     _onMemberRemoved(room, member) {
         this._removeMember(member);
-    },
+    }
 
     _onMemberJoined(room, member) {
         this._addMember(member);
-    },
+    }
 
     _onMembersChanged(room) {
         this._counterLabel.label = this.numRows.toString();
-    },
+    }
 
     _onChannelChanged(room) {
         this._list.foreach(w => { w.destroy(); });
@@ -693,40 +683,40 @@ var UserList = new Lang.Class({
         let members = room.channel.group_dup_members_contacts();
         for (let i = 0; i < members.length; i++)
             this._addMember(members[i]);
-    },
+    }
 
     _addMember(member) {
         let row = new UserListRow(member);
         this._rows[member] = row;
         this._list.add(row);
-    },
+    }
 
     _removeMember(member) {
         let row = this._rows[member];
         if (row)
             row.destroy();
         delete this._rows[member];
-    },
+    }
 
     _setActiveRow(row) {
         if (this._activeRow && this._activeRow != row)
             this._activeRow.expand = false;
         this._activeRow = row;
-    },
+    }
 
     _onRowActivated(list, row) {
         this._setActiveRow(row);
         this._activeRow.expand = !this._activeRow.expand;
-    },
+    }
 
     _sort(row1, row2) {
         return row1.user.alias.localeCompare(row2.user.alias);
-    },
+    }
 
     _filterRows(row) {
         row.setFilter(this._filter);
         return row.shouldShow();
-    },
+    }
 
     _updateHeader(row, before) {
         if (before) {

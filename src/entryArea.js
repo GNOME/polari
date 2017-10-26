@@ -21,9 +21,7 @@ const MAX_LINES = 5;
 let _checker = null;
 let _emojiPicker = null;
 
-var ChatEntry = new Lang.Class({
-    Name: 'ChatEntry',
-    Extends: Gtk.Entry,
+var ChatEntry = GObject.registerClass({
     Implements: [PasteManager.DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', PasteManager.DropTargetIface),
@@ -32,9 +30,9 @@ var ChatEntry = new Lang.Class({
                                               GObject.TYPE_INT] },
                'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
                'file-pasted': { param_types: [Gio.File.$gtype] } },
-
+}, class ChatEntry extends Gtk.Entry {
     _init(params) {
-        this.parent(params);
+        super._init(params);
 
         PasteManager.DropTargetIface.addTargets(this, this);
 
@@ -61,7 +59,7 @@ var ChatEntry = new Lang.Class({
         spellEntry.set_inline_spell_checking(true);
 
         this._useDefaultHandler = false;
-    },
+    }
 
     _showEmojiPicker() {
         if (!this.is_sensitive() || !this.get_mapped())
@@ -83,11 +81,11 @@ var ChatEntry = new Lang.Class({
         _emojiPicker.set_relative_to(this);
         _emojiPicker.set_pointing_to(rect);
         _emojiPicker.popup();
-    },
+    }
 
     get can_drop() {
         return true;
-    },
+    }
 
     vfunc_drag_data_received(context, x, y, data, info, time) {
         let str = data.get_text();
@@ -96,12 +94,12 @@ var ChatEntry = new Lang.Class({
             return;
 
          GObject.signal_stop_emission_by_name(this, 'drag-data-received');
-        this.parent(context, x, y, data, info, time);
-    },
+        super.vfunc_drag_data_received(context, x, y, data, info, time);
+    }
 
     vfunc_paste_clipboard(entry) {
         if (!this.editable || this._useDefaultHandler) {
-            this.parent();
+            super.vfunc_paste_clipboard();
             return;
         }
 
@@ -118,7 +116,7 @@ var ChatEntry = new Lang.Class({
                 return;
             this.emit('image-pasted', pixbuf);
         });
-    },
+    }
 
     _onTextReceived(clipboard, text) {
         if (text == null)
@@ -137,9 +135,7 @@ var ChatEntry = new Lang.Class({
     }
 });
 
-var EntryArea = new Lang.Class({
-    Name: 'EntryArea',
-    Extends: Gtk.Stack,
+var EntryArea = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
     InternalChildren: ['chatEntry',
                        'nickButton',
@@ -159,7 +155,7 @@ var EntryArea = new Lang.Class({
                                                  GObject.ParamFlags.WRITABLE,
                                                  0, GLib.MAXUINT32, 0)
     },
-
+}, class EntryArea extends Gtk.Stack {
     _init(params) {
         this._room = params.room;
         delete params.room;
@@ -167,7 +163,7 @@ var EntryArea = new Lang.Class({
         this._ircParser = new IrcParser.IrcParser(this._room);
         this._maxNickChars = ChatView.MAX_NICK_CHARS;
 
-        this.parent(params);
+        super._init(params);
 
         this.connect('destroy', Lang.bind(this, this._onDestroy));
         this.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
@@ -262,12 +258,12 @@ var EntryArea = new Lang.Class({
 
         this._chatEntry.connect('map', Lang.bind(this, this._updateCompletions));
         this._chatEntry.connect('unmap', Lang.bind(this, this._updateCompletions));
-    },
+    }
 
     set max_nick_chars(maxChars) {
         this._maxNickChars = maxChars;
         this._updateNick();
-    },
+    }
 
     _updateCompletions() {
         let nicks = [];
@@ -280,7 +276,7 @@ var EntryArea = new Lang.Class({
             nicks = members.map(member => member.alias);
         }
         this._completion.setCompletions(nicks);
-    },
+    }
 
     _canFocusChatEntry() {
         let toplevelFocus = this._chatEntry.get_toplevel().get_focus();
@@ -288,7 +284,7 @@ var EntryArea = new Lang.Class({
                this._chatEntry.get_mapped() &&
                !this._chatEntry['has-focus'] &&
                !(toplevelFocus instanceof Gtk.Entry);
-    },
+    }
 
     _onKeyPressEvent(w, event) {
         if (!this._canFocusChatEntry())
@@ -314,11 +310,11 @@ var EntryArea = new Lang.Class({
         this._chatEntry.grab_focus_without_selecting();
         this._chatEntry.event(event);
         return Gdk.EVENT_STOP;
-    },
+    }
 
     _onEntryChanged() {
         this._chatEntry.get_style_context().remove_class('error');
-    },
+    }
 
     _setPasteContent(content) {
         this._pasteContent = content;
@@ -331,7 +327,7 @@ var EntryArea = new Lang.Class({
             this.visible_child_name = 'default';
             this._chatEntry.grab_focus_without_selecting();
         }
-    },
+    }
 
     pasteText(text, nLines) {
         this._confirmLabel.label =
@@ -343,20 +339,20 @@ var EntryArea = new Lang.Class({
                      "Uploading %s lines of text to public paste service…",
                      nLines).format(nLines);
         this._setPasteContent(text);
-    },
+    }
 
     pasteImage(pixbuf) {
         this._confirmLabel.label = _("Upload image to public paste service?");
         this._uploadLabel.label = _("Uploading image to public paste service…");
         this._setPasteContent(pixbuf);
-    },
+    }
 
     pasteFile(file) {
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                               Gio.FileQueryInfoFlags.NONE,
                               GLib.PRIORITY_DEFAULT, null,
                               Lang.bind(this, this._onFileInfoReady));
-    },
+    }
 
     _onFileInfoReady(file, res) {
         let fileInfo = null;
@@ -372,7 +368,7 @@ var EntryArea = new Lang.Class({
         /* Translators: %s is a filename */
         this._uploadLabel.label = _("Uploading “%s” to public paste service…").format(name);
         this._setPasteContent(file);
-    },
+    }
 
     _onPasteClicked() {
         let title;
@@ -397,16 +393,16 @@ var EntryArea = new Lang.Class({
                   (type == 'object' ? this._pasteContent.toString() : type));
         }
         this._confirmLabel.hide();
-    },
+    }
 
     _onCancelClicked() {
         this._setPasteContent(null);
-    },
+    }
 
     _onSensitiveChanged() {
         if (this._canFocusChatEntry())
             this._chatEntry.grab_focus();
-    },
+    }
 
     _onChannelChanged(room) {
         this._updateCompletions();
@@ -418,8 +414,7 @@ var EntryArea = new Lang.Class({
         else
             this._selfAliasChangedId = 0;
         this._updateNick();
-    },
-
+    }
 
     _setNick(nick) {
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
@@ -440,7 +435,7 @@ var EntryArea = new Lang.Class({
             this._updateNick();
             return GLib.SOURCE_REMOVE;
         });
-    },
+    }
 
     _updateNick() {
         let channel = this._room ? this._room.channel : null;
@@ -452,7 +447,7 @@ var EntryArea = new Lang.Class({
 
         if (!this._nickEntry['is-focus'])
             this._nickEntry.text = nick;
-    },
+    }
 
     _onDestroy() {
         if (this._membersChangedId)
