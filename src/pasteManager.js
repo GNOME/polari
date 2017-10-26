@@ -28,12 +28,7 @@ function _getTargetForContentType(contentType) {
 }
 
 
-var PasteManager = new Lang.Class({
-    Name: 'PasteManager',
-
-    _init() {
-    },
-
+var PasteManager = class PasteManager {
     pasteContent(content, title, callback) {
         if (typeof content == 'string') {
             Utils.gpaste(content, title, callback);
@@ -44,14 +39,14 @@ var PasteManager = new Lang.Class({
         } else {
             throw new Error('Unhandled content type');
         }
-    },
+    }
 
     _pasteFile(file, title, callback) {
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                               Gio.FileQueryInfoFlags.NONE,
                               GLib.PRIORITY_DEFAULT, null,
                               Lang.bind(this, this._onFileQueryFinish, title, callback));
-    },
+    }
 
     _onFileQueryFinish(file, res, title, callback) {
         let fileInfo = null;
@@ -80,7 +75,7 @@ var PasteManager = new Lang.Class({
         else
             callback(null);
     }
-});
+};
 
 var DropTargetIface = new Lang.Interface({
     Name: 'DropTargetIface',

@@ -5,10 +5,8 @@ const Pango = imports.gi.Pango;
 const IrcParser = imports.ircParser;
 const Lang = imports.lang;
 
-var TabCompletion = new Lang.Class({
-    Name: 'TabCompletion',
-
-    _init(entry) {
+var TabCompletion = class TabCompletion {
+    constructor(entry) {
         this._entry = entry;
         this._canComplete = false;
         this._key = '';
@@ -50,7 +48,7 @@ var TabCompletion = new Lang.Class({
                                     margin_end: 6 }));
             this._list.add(row);
         }
-    },
+    }
 
     _showPopup() {
         this._list.show_all();
@@ -73,7 +71,7 @@ var TabCompletion = new Lang.Class({
         y += allocation.y - height;
         this._popup.move(x, y);
         this._popup.show();
-    },
+    }
 
     setCompletions(completions) {
         if (this._popup.visible) {
@@ -118,7 +116,7 @@ var TabCompletion = new Lang.Class({
             this._list.add(row);
         }
         this._canComplete = completions.length > 0;
-    },
+    }
 
     _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
@@ -156,7 +154,7 @@ var TabCompletion = new Lang.Class({
                     keyval == Gdk.KEY_ISO_Enter);
         }
         return Gdk.EVENT_PROPAGATE;
-    },
+    }
 
     _getRowCompletion(row) {
         this._previousWasCommand = this._isCommand;
@@ -166,18 +164,18 @@ var TabCompletion = new Lang.Class({
         if (this._startPos == 0 || this._isChained)
             return row._text + ': ';
         return row._text;
-    },
+    }
 
     _onRowSelected(w, row) {
         if (row)
             this._insertCompletion(this._getRowCompletion(row));
-    },
+    }
 
     _filter(row) {
         if (this._key.length == 0)
             return false;
         return row._casefoldedText.startsWith(this._key);
-    },
+    }
 
     _insertCompletion(completion) {
         let pos = this._entry.get_position();
@@ -185,14 +183,14 @@ var TabCompletion = new Lang.Class({
         this._entry.delete_text(this._startPos, pos);
         this._entry.insert_text(completion, -1, this._startPos);
         this._entry.set_position(this._endPos);
-    },
+    }
 
     _setPreviousCompletionChained(chained) {
         let repl = chained ? ',' : ':';
         let start = this._startPos - 2;
         this._entry.delete_text(start, start + 1);
         this._entry.insert_text(repl, -1, start);
-    },
+    }
 
     _start() {
         if (!this._canComplete)
@@ -227,7 +225,7 @@ var TabCompletion = new Lang.Class({
             this._list.select_row(visibleRows[0]);
             this._showPopup()
         }
-    },
+    }
 
     _onKeynavFailed(w, dir) {
         if (this._inHandler)
@@ -237,13 +235,13 @@ var TabCompletion = new Lang.Class({
         this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, count);
         this._inHandler = false;
         return Gdk.EVENT_STOP;
-    },
+    }
 
     _moveSelection(movement, count) {
         this._list.emit('move-cursor', movement, count);
         let row = this._list.get_focus_child();
         this._list.select_row(row);
-    },
+    }
 
     _stop() {
         if (this._key.length == 0)
@@ -255,7 +253,7 @@ var TabCompletion = new Lang.Class({
         this._key = '';
 
         this._list.invalidate_filter();
-    },
+    }
 
     _cancel() {
         if (this._key.length == 0)
@@ -264,5 +262,5 @@ var TabCompletion = new Lang.Class({
             this._setPreviousCompletionChained(false);
         this._insertCompletion('');
         this._stop();
-    },
-});
+    }
+};

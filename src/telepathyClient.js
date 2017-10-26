@@ -44,16 +44,14 @@ const SASLAbortReason = {
     USER_ABORT: 1
 };
 
-var SASLAuthHandler = new Lang.Class({
-    Name: 'SASLAuthHandler',
-
-    _init(channel) {
+class SASLAuthHandler {
+    constructor(channel) {
         this._channel = channel;
         this._proxy = new SASLAuthProxy(Gio.DBus.session,
                                         channel.bus_name,
                                         channel.object_path,
                                         Lang.bind(this, this._onProxyReady));
-    },
+    }
 
     _onProxyReady(proxy) {
         this._proxy.connectSignal('SASLStatusChanged',
@@ -62,7 +60,7 @@ var SASLAuthHandler = new Lang.Class({
         let account = this._channel.connection.get_account();
         Utils.lookupAccountPassword(account,
                                     Lang.bind(this, this._onPasswordReady));
-    },
+    }
 
     _onPasswordReady(password) {
         if (password)
@@ -72,7 +70,7 @@ var SASLAuthHandler = new Lang.Class({
             this._proxy.AbortSASLRemote(SASLAbortReason.USER_ABORT,
                                         'Password not available',
                                         Lang.bind(this, this._resetPrompt));
-    },
+    }
 
     _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
@@ -95,7 +93,7 @@ var SASLAuthHandler = new Lang.Class({
                 this._channel.close_async(null);
                 break;
         }
-    },
+    }
 
     _resetPrompt() {
         let account = this._channel.connection.get_account();
@@ -107,7 +105,7 @@ var SASLAuthHandler = new Lang.Class({
                                            'available', '', null);
         });
     }
-});
+};
 
 var TelepathyClient = new Lang.Class({
     Name: 'TelepathyClient',

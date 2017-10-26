@@ -1,7 +1,6 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 
-const Lang = imports.lang;
 const Signals = imports.signals;
 
 let _singleton = null;
@@ -12,10 +11,8 @@ function getDefault() {
     return _singleton;
 }
 
-var NetworksManager = new Lang.Class({
-    Name: 'NetworksManager',
-
-    _init() {
+var NetworksManager = class NetworksManager {
+    constructor() {
         this._networks = [];
         this._networksById = new Map();
 
@@ -28,7 +25,7 @@ var NetworksManager = new Lang.Class({
         } catch(e) {
             log('Failed to load network list: ' + e.message);
         }
-    },
+    }
 
     _onContentsReady(f, res) {
         let success, data;
@@ -40,7 +37,7 @@ var NetworksManager = new Lang.Class({
         }
         if (this._parseNetworks(data))
             this.emit('changed');
-    },
+    }
 
     _parseNetworks(data) {
         let networks;
@@ -57,26 +54,26 @@ var NetworksManager = new Lang.Class({
             this._networksById.set(network.id, network);
         });
         return true;
-    },
+    }
 
     _lookupNetwork(id) {
         let network = this._networksById.get(id);
         if (!network)
             throw new Error('Invalid network ID');
         return network;
-    },
+    }
 
     get networks() {
         return this._networks;
-    },
+    }
 
     getAccountIsPredefined(account) {
         return account && this._networksById.get(account.service) != null;
-    },
+    }
 
     getNetworkName(id) {
         return this._lookupNetwork(id).name;
-    },
+    }
 
     getNetworkIsFavorite(id) {
         let network = this._lookupNetwork(id);
@@ -85,7 +82,7 @@ var NetworksManager = new Lang.Class({
             return network['favorite'];
 
         return false;
-    },
+    }
 
     getNetworkDetails(id) {
         let network = this._lookupNetwork(id);
@@ -99,21 +96,21 @@ var NetworksManager = new Lang.Class({
             'port': new GLib.Variant('u', server.port),
             'use-ssl': new GLib.Variant('b', server.ssl)
         };
-    },
+    }
 
     getNetworkServers(id) {
         let network = this._lookupNetwork(id);
         let sslServers = network.servers.filter(s => s.ssl);
         return sslServers.length > 0 ? sslServers
                                      : network.servers.slice();
-    },
+    }
 
     getNetworkMatchTerms(id) {
         let network = this._lookupNetwork(id);
         let servers = network.servers.map(s => s.address.toLowerCase());
         return [network.name.toLowerCase(),
                 network.id.toLowerCase()].concat(servers);
-    },
+    }
 
     findByServer(server) {
         for (let n of this._networks)
@@ -121,5 +118,5 @@ var NetworksManager = new Lang.Class({
                return n.id;
         return null;
     }
-});
+};
 Signals.addSignalMethods(NetworksManager.prototype);
