@@ -47,7 +47,7 @@ const SASLAbortReason = {
 var SASLAuthHandler = new Lang.Class({
     Name: 'SASLAuthHandler',
 
-    _init: function(channel) {
+    _init(channel) {
         this._channel = channel;
         this._proxy = new SASLAuthProxy(Gio.DBus.session,
                                         channel.bus_name,
@@ -55,7 +55,7 @@ var SASLAuthHandler = new Lang.Class({
                                         Lang.bind(this, this._onProxyReady));
     },
 
-    _onProxyReady: function(proxy) {
+    _onProxyReady(proxy) {
         this._proxy.connectSignal('SASLStatusChanged',
                                   Lang.bind(this, this._onSASLStatusChanged));
 
@@ -64,7 +64,7 @@ var SASLAuthHandler = new Lang.Class({
                                     Lang.bind(this, this._onPasswordReady));
     },
 
-    _onPasswordReady: function(password) {
+    _onPasswordReady(password) {
         if (password)
             this._proxy.StartMechanismWithDataRemote('X-TELEPATHY-PASSWORD',
                                                      password);
@@ -74,7 +74,7 @@ var SASLAuthHandler = new Lang.Class({
                                         Lang.bind(this, this._resetPrompt));
     },
 
-    _onSASLStatusChanged: function(proxy, sender, [status]) {
+    _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
         let statusString = (Object.keys(SASLStatus))[status];
         debug('Auth status for server "%s": %s'.format(name, statusString));
@@ -97,7 +97,7 @@ var SASLAuthHandler = new Lang.Class({
         }
     },
 
-    _resetPrompt: function() {
+    _resetPrompt() {
         let account = this._channel.connection.get_account();
         let prompt = new GLib.Variant('b', false);
         let params = new GLib.Variant('a{sv}', { 'password-prompt': prompt });
@@ -113,7 +113,7 @@ var TelepathyClient = new Lang.Class({
     Name: 'TelepathyClient',
     Extends: Tp.BaseClient,
 
-    _init: function(params) {
+    _init(params) {
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
@@ -141,7 +141,7 @@ var TelepathyClient = new Lang.Class({
         this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
     },
 
-    _onPrepared: function() {
+    _onPrepared() {
         let actions = [
             { name: 'message-user',
               handler: Lang.bind(this, this._onQueryActivated) },
@@ -203,7 +203,7 @@ var TelepathyClient = new Lang.Class({
                                this._networkMonitor.network_available);
     },
 
-    _onNetworkChanged: function(mon, connected) {
+    _onNetworkChanged(mon, connected) {
         let presence = connected ? Tp.ConnectionPresenceType.AVAILABLE
                                  : Tp.ConnectionPresenceType.OFFLINE;
         debug('Network changed to %s'.format(connected ? 'available'
@@ -214,7 +214,7 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _onAccountStatusChanged: function(mon, account) {
+    _onAccountStatusChanged(mon, account) {
         if (account.connection_status != Tp.ConnectionStatus.CONNECTED)
             return;
 
@@ -226,11 +226,11 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _connectAccount: function(account) {
+    _connectAccount(account) {
         this._setAccountPresence(account, Tp.ConnectionPresenceType.AVAILABLE);
     },
 
-    _setAccountPresence: function(account, presence) {
+    _setAccountPresence(account, presence) {
         let statuses = Object.keys(Tp.ConnectionPresenceType).map(s =>
             s.replace(/_/g, '-').toLowerCase()
         );
@@ -249,18 +249,18 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _connectRooms: function(account) {
+    _connectRooms(account) {
         this._roomManager.rooms.forEach(room => {
             if (account == null || room.account == account)
                 this._connectRoom(room);
         });
     },
 
-    _connectRoom: function(room) {
+    _connectRoom(room) {
         this._requestChannel(room.account, room.type, room.channel_name, null);
     },
 
-    _requestChannel: function(account, targetType, targetId, callback) {
+    _requestChannel(account, targetType, targetId, callback) {
         if (!account || !account.enabled)
             return;
 
@@ -294,7 +294,7 @@ var TelepathyClient = new Lang.Class({
             });
     },
 
-    _sendIdentify: function(account, password) {
+    _sendIdentify(account, password) {
         let settings = this._accountsMonitor.getAccountSettings(account);
 
         let params = account.dup_parameters_vardict().deep_unpack();
@@ -325,7 +325,7 @@ var TelepathyClient = new Lang.Class({
             });
     },
 
-    _sendMessage: function(channel, message) {
+    _sendMessage(channel, message) {
         if (!message || !channel)
             return;
 
@@ -340,19 +340,19 @@ var TelepathyClient = new Lang.Class({
             });
     },
 
-    _onConnectAccountActivated: function(action, parameter) {
+    _onConnectAccountActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         this._connectAccount(account);
     },
 
-    _onReconnectAccountActivated: function(action, parameter) {
+    _onReconnectAccountActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         account.reconnect_async((a, res) => { a.reconnect_finish(res); });
     },
 
-    _onAuthenticateAccountActivated: function(action, parameter) {
+    _onAuthenticateAccountActivated(action, parameter) {
         let [accountPath, password] = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
@@ -366,7 +366,7 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _onQueryActivated: function(action, parameter) {
+    _onQueryActivated(action, parameter) {
         let [accountPath, channelName, message, time] = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
@@ -377,7 +377,7 @@ var TelepathyClient = new Lang.Class({
                              Lang.bind(this, this._sendMessage, message));
     },
 
-    _onLeaveActivated: function(action, parameter) {
+    _onLeaveActivated(action, parameter) {
         let [id, message] = parameter.deep_unpack();
 
         let request = this._pendingRequests.get(id);
@@ -409,7 +409,7 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _onSaveIdentifyPasswordActivated: function(action, parameter) {
+    _onSaveIdentifyPasswordActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
         if (!account)
@@ -427,7 +427,7 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _saveIdentifySettings: function(account, data) {
+    _saveIdentifySettings(account, data) {
         let settings = this._accountsMonitor.getAccountSettings(account);
 
         if (data.botname == 'NickServ')
@@ -444,22 +444,22 @@ var TelepathyClient = new Lang.Class({
         settings.set_boolean('identify-username-supported', data.usernameSupported);
     },
 
-    _onDiscardIdentifyPasswordActivated: function(action, parameter) {
+    _onDiscardIdentifyPasswordActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         this._discardIdentifyPassword(accountPath);
     },
 
-    _discardIdentifyPassword: function(accountPath) {
+    _discardIdentifyPassword(accountPath) {
         this._pendingBotPasswords.delete(accountPath);
         this._app.withdraw_notification(this._getIdentifyNotificationID(accountPath));
     },
 
 
-    _isAuthChannel: function(channel) {
+    _isAuthChannel(channel) {
         return channel.channel_type == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
     },
 
-    _processRequest: function(context, connection, channels, processChannel) {
+    _processRequest(context, connection, channels, processChannel) {
         if (connection.protocol_name != 'irc') {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({ code: Tp.Error.NOT_IMPLEMENTED,
@@ -482,7 +482,7 @@ var TelepathyClient = new Lang.Class({
         context.accept();
     },
 
-    vfunc_observe_channels: function(account, connection, channels,
+    vfunc_observe_channels(account, connection, channels,
                                      op, requests, context) {
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel))
@@ -505,7 +505,7 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    vfunc_handle_channels: function(account, connection, channels,
+    vfunc_handle_channels(account, connection, channels,
                                     satisfied, userTime, context) {
         let [present, ] = Tp.user_action_time_should_present(userTime);
 
@@ -523,15 +523,15 @@ var TelepathyClient = new Lang.Class({
         });
     },
 
-    _getPendingNotificationID: function(room, id) {
+    _getPendingNotificationID(room, id) {
         return 'pending-message-%s-%d'.format(room.id, id);
     },
 
-    _getIdentifyNotificationID: function(accountPath) {
+    _getIdentifyNotificationID(accountPath) {
         return 'identify-password-%s'.format(accountPath);
     },
 
-    _createNotification: function(room, summary, body) {
+    _createNotification(room, summary, body) {
         let notification = new Gio.Notification();
         notification.set_title(summary);
         notification.set_body(body);
@@ -555,7 +555,7 @@ var TelepathyClient = new Lang.Class({
         return notification;
     },
 
-    _onIdentifySent: function(room, command, username, password) {
+    _onIdentifySent(room, command, username, password) {
         let accountPath = room.account.object_path;
 
         let data = {
@@ -583,7 +583,7 @@ var TelepathyClient = new Lang.Class({
         this._app.send_notification(this._getIdentifyNotificationID(accountPath), notification);
     },
 
-    _onMessageReceived: function(channel, msg) {
+    _onMessageReceived(channel, msg) {
         let [id, ] = msg.get_pending_message_id();
         let room = this._roomManager.lookupRoomByChannel(channel);
 
@@ -605,7 +605,7 @@ var TelepathyClient = new Lang.Class({
         this._app.send_notification(this._getPendingNotificationID(room, id), notification);
     },
 
-    _onPendingMessageRemoved: function(channel, msg) {
+    _onPendingMessageRemoved(channel, msg) {
         let [id, valid] = msg.get_pending_message_id();
         if (!valid)
             return;

@@ -34,14 +34,14 @@ var FixedSizeFrame = new Lang.Class({
                                      -1, GLib.MAXINT32, -1)
     },
 
-    _init: function(params) {
+    _init(params) {
         this._height = -1;
         this._width = -1;
 
         this.parent(params);
     },
 
-    _queueRedraw: function() {
+    _queueRedraw() {
         let child = this.get_child();
         if (child)
             child.queue_resize();
@@ -75,12 +75,12 @@ var FixedSizeFrame = new Lang.Class({
         this._queueRedraw();
     },
 
-    vfunc_get_preferred_width_for_height: function(forHeight) {
+    vfunc_get_preferred_width_for_height(forHeight) {
         let [min, nat] = this.parent(forHeight);
         return [min, this._width < 0 ? nat : this._width];
     },
 
-    vfunc_get_preferred_height_for_width: function(forWidth) {
+    vfunc_get_preferred_height_for_width(forWidth) {
         let [min, nat] = this.parent(forWidth);
         return [min, this._height < 0 ? nat : this._height];
     }
@@ -118,7 +118,7 @@ var MainWindow = new Lang.Class({
     },
     Signals: { 'active-room-state-changed': {} },
 
-    _init: function(params) {
+    _init(params) {
         this._subtitle = '';
         params.show_menubar = false;
 
@@ -220,19 +220,19 @@ var MainWindow = new Lang.Class({
         return this._subtitle.length > 0;
     },
 
-    _onWindowStateEvent: function(widget, event) {
+    _onWindowStateEvent(widget, event) {
         let state = event.get_window().get_state();
 
         this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
         this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
     },
 
-    _onSizeAllocate: function(widget, allocation) {
+    _onSizeAllocate(widget, allocation) {
         if (!this._isFullscreen && !this._isMaximized)
             this._currentSize = this.get_size();
     },
 
-    _onDestroy: function(widget) {
+    _onDestroy(widget) {
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
                                  GLib.Variant.new('ai', this._currentSize));
@@ -250,7 +250,7 @@ var MainWindow = new Lang.Class({
             this._settings.reset('last-selected-channel');
     },
 
-    _touchFile: function(file) {
+    _touchFile(file) {
         try {
             file.get_parent().make_directory_with_parents(null);
         } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
@@ -261,7 +261,7 @@ var MainWindow = new Lang.Class({
         stream.close(null);
     },
 
-    _onDeleteEvent: function() {
+    _onDeleteEvent() {
         let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
                                       '/polari/close-confirmation-shown');
         try {
@@ -276,12 +276,12 @@ var MainWindow = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    _onAccountsChanged: function(am) {
+    _onAccountsChanged(am) {
         let hasAccounts = this._accountsMonitor.enabledAccounts.length > 0;
         this._roomListRevealer.reveal_child = hasAccounts;
     },
 
-    _updateDecorations: function() {
+    _updateDecorations() {
         let layoutLeft = null;
         let layoutRight = null;
 
@@ -344,7 +344,7 @@ var MainWindow = new Lang.Class({
             });
     },
 
-    _onRoomsLoaded: function(mgr) {
+    _onRoomsLoaded(mgr) {
         if (this.active_room)
             return;
 
@@ -362,17 +362,17 @@ var MainWindow = new Lang.Class({
                            this._roomManager.rooms.shift();
     },
 
-    _onRoomRemoved: function(mgr, room) {
+    _onRoomRemoved(mgr, room) {
         if (room == this._lastActiveRoom)
             this._lastActiveRoom = null;
     },
 
-    showJoinRoomDialog: function() {
+    showJoinRoomDialog() {
         let dialog = new JoinDialog.JoinDialog({ transient_for: this });
         dialog.show();
     },
 
-    _updateUserListLabel: function() {
+    _updateUserListLabel() {
         let numMembers = 0;
 
         if (this._room &&
@@ -386,7 +386,7 @@ var MainWindow = new Lang.Class({
         this._showUserListButton.label = '%d'.format(numMembers);
     },
 
-    _updateTitlebar: function() {
+    _updateTitlebar() {
         let subtitle = '';
         if (this._room && this._room.topic) {
             let urls = Utils.findUrls(this._room.topic);

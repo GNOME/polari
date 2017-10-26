@@ -42,25 +42,25 @@ const UNKNOWN_COMMAND_MESSAGE =
 var IrcParser = new Lang.Class({
     Name: 'IrcParser',
 
-    _init: function(room) {
+    _init(room) {
         this._app = Gio.Application.get_default();
         this._roomManager = RoomManager.getDefault();
         this._room = room;
     },
 
-    _createFeedbackLabel: function(text) {
+    _createFeedbackLabel(text) {
         return new AppNotifications.SimpleOutput(text);
     },
 
-    _createFeedbackUsage: function(cmd) {
+    _createFeedbackUsage(cmd) {
         return this._createFeedbackLabel(_("Usage: %s").format(_(knownCommands[cmd])));
     },
 
-    _createFeedbackGrid: function(header, items) {
+    _createFeedbackGrid(header, items) {
         return new AppNotifications.GridOutput(header, items);
     },
 
-    process: function(text) {
+    process(text) {
         if (!this._room || !this._room.channel || !text.length)
             return true;
 
@@ -281,13 +281,13 @@ var IrcParser = new Lang.Class({
         return retval;
     },
 
-    _sendText: function(text) {
+    _sendText(text) {
         let type = Tp.ChannelTextMessageType.NORMAL;
         let message = Tp.ClientMessage.new_text(type, text);
         this._sendMessage(message);
     },
 
-    _sendMessage: function(message) {
+    _sendMessage(message) {
         this._room.channel.send_message_async(message, 0, (c, res) => {
             try {
                  c.send_message_finish(res);

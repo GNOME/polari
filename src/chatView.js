@@ -51,18 +51,18 @@ var TextView = new Lang.Class({
     Name: 'TextView',
     Extends: Gtk.TextView,
 
-    _init: function(params) {
+    _init(params) {
         this.parent(params);
 
         this.buffer.connect('mark-set', Lang.bind(this, this._onMarkSet));
         this.connect('screen-changed', Lang.bind(this, this._updateLayout));
     },
 
-    vfunc_get_preferred_width: function() {
+    vfunc_get_preferred_width() {
         return [1, 1];
     },
 
-    vfunc_style_updated: function() {
+    vfunc_style_updated() {
         let context = this.get_style_context();
         context.save();
         context.add_class('dim-label');
@@ -73,7 +73,7 @@ var TextView = new Lang.Class({
         this.parent();
     },
 
-    vfunc_draw: function(cr) {
+    vfunc_draw(cr) {
         this.parent(cr);
 
         let mark = this.buffer.get_mark('indicator-line');
@@ -132,12 +132,12 @@ var TextView = new Lang.Class({
         return Gdk.EVENT_PROPAGATE;
     },
 
-    _onMarkSet: function(buffer, iter, mark) {
+    _onMarkSet(buffer, iter, mark) {
         if (mark.name == 'indicator-line')
             this.queue_draw();
     },
 
-    _updateLayout: function() {
+    _updateLayout() {
         this._layout = this.create_pango_layout(null);
         this._layout.set_markup('<small><b>%s</b></small>'.format(_("New Messages")), -1);
     }
@@ -169,7 +169,7 @@ var ButtonTag = new Lang.Class({
         'clicked': { }
     },
 
-    _init: function(params) {
+    _init(params) {
         this._hover = false;
         this._pressed = false;
 
@@ -188,19 +188,19 @@ var ButtonTag = new Lang.Class({
         this.notify('hover');
     },
 
-    on_notify: function(pspec) {
+    on_notify(pspec) {
         if (pspec.name == 'hover' && !this.hover)
             this._pressed = false;
     },
 
-    'on_button-press-event': function(event) {
+    'on_button-press-event'(event) {
         let [, button] = event.get_button();
         this._pressed = button == Gdk.BUTTON_PRIMARY;
 
         return Gdk.EVENT_STOP;
     },
 
-    'on_button-release-event': function(event) {
+    'on_button-release-event'(event) {
         let [, button] = event.get_button();
         if (!(button == Gdk.BUTTON_PRIMARY && this._pressed))
             return Gdk.EVENT_PROPAGATE;
@@ -210,7 +210,7 @@ var ButtonTag = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    vfunc_event: function(object, event, iter) {
+    vfunc_event(object, event, iter) {
         let type = event.get_event_type();
 
         if (!this._hover)
@@ -243,7 +243,7 @@ var HoverFilterTag = new Lang.Class({
                                                   0.0, 1.0, 1.0)
     },
 
-    _init: function(params) {
+    _init(params) {
         this._filteredTag = null;
         this._hoverOpacity = 1.;
 
@@ -252,7 +252,7 @@ var HoverFilterTag = new Lang.Class({
         this.connect('notify::hover', () => { this._updateColor(); });
     },
 
-    _updateColor: function() {
+    _updateColor() {
         if (!this._filteredTag)
             return;
 
@@ -304,7 +304,7 @@ var ChatView = new Lang.Class({
                                                  0, GLib.MAXUINT32, 0)
     },
 
-    _init: function(room) {
+    _init(room) {
         this.parent({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
 
         this.get_style_context().add_class('polari-chat-view');
@@ -429,7 +429,7 @@ var ChatView = new Lang.Class({
         });
     },
 
-    _createTags: function() {
+    _createTags() {
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
@@ -464,7 +464,7 @@ var ChatView = new Lang.Class({
         tags.forEach(tagProps => { tagTable.add(new Gtk.TextTag(tagProps)); });
     },
 
-    _onStyleUpdated: function() {
+    _onStyleUpdated() {
         let context = this.get_style_context();
         context.save();
         context.add_class('dim-label');
@@ -530,7 +530,7 @@ var ChatView = new Lang.Class({
         });
     },
 
-    _onDestroy: function() {
+    _onDestroy() {
         for (let i = 0; i < this._channelSignals.length; i++)
             this._channel.disconnect(this._channelSignals[i]);
         this._channelSignals = [];
@@ -547,7 +547,7 @@ var ChatView = new Lang.Class({
         this._logWalker = null;
     },
 
-    _onLogEventsReady: function(lw, res) {
+    _onLogEventsReady(lw, res) {
         this._hideLoadingIndicator();
         this._fetchingBacklog = false;
 
@@ -557,7 +557,7 @@ var ChatView = new Lang.Class({
         this._insertPendingLogs();
     },
 
-    _createMessage: function(source) {
+    _createMessage(source) {
         if (source instanceof Tp.Message) {
             let [text, ] = source.to_text();
             let [id, valid] = source.get_pending_message_id();
@@ -577,7 +577,7 @@ var ChatView = new Lang.Class({
         throw new Error('Cannot create message from source ' + source);
     },
 
-    _getReadyLogs: function() {
+    _getReadyLogs() {
         if (this._logWalker.is_end())
             return this._pendingLogs.splice(0);
 
@@ -591,7 +591,7 @@ var ChatView = new Lang.Class({
         return [];
     },
 
-    _appendInitialPending: function(logs) {
+    _appendInitialPending(logs) {
         let pending = this._initialPending.splice(0);
         let firstPending = pending[0];
 
@@ -608,7 +608,7 @@ var ChatView = new Lang.Class({
         logs.splice.apply(logs, [pos, numLogs, ...pending]);
     },
 
-    _insertPendingLogs: function() {
+    _insertPendingLogs() {
         let pending = this._getReadyLogs();
 
         if (!pending.length) {
@@ -647,7 +647,7 @@ var ChatView = new Lang.Class({
         return this._channel != null;
     },
 
-    _updateMaxNickChars: function(length) {
+    _updateMaxNickChars(length) {
         if (length <= this._maxNickChars)
             return;
 
@@ -656,7 +656,7 @@ var ChatView = new Lang.Class({
         this._updateIndent();
     },
 
-    _updateIndent: function() {
+    _updateIndent() {
         let context = this._view.get_pango_context();
         let metrics = context.get_metrics(null, null);
         let charWidth = Math.max(metrics.get_approximate_char_width(),
@@ -672,7 +672,7 @@ var ChatView = new Lang.Class({
         this._view.left_margin = MARGIN + totalWidth;
     },
 
-    _updateScroll: function() {
+    _updateScroll() {
         if (!this._autoscroll)
             return;
 
@@ -686,7 +686,7 @@ var ChatView = new Lang.Class({
         }
     },
 
-    _onScroll: function(w, event) {
+    _onScroll(w, event) {
         let [hasDir, dir] = event.get_scroll_direction();
         if (hasDir && dir != Gdk.ScrollDirection.UP)
             return Gdk.EVENT_PROPAGATE;
@@ -700,7 +700,7 @@ var ChatView = new Lang.Class({
         return this._fetchBacklog();
     },
 
-    _onKeyPress: function(w, event) {
+    _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
 
         if (keyval === Gdk.KEY_Home ||
@@ -728,7 +728,7 @@ var ChatView = new Lang.Class({
         return this._fetchBacklog();
     },
 
-    _fetchBacklog: function() {
+    _fetchBacklog() {
         if (this.vadjustment.value != 0 ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
@@ -747,7 +747,7 @@ var ChatView = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    _onValueChanged: function() {
+    _onValueChanged() {
         if (this._valueChangedId)
             return;
 
@@ -758,14 +758,14 @@ var ChatView = new Lang.Class({
         });
     },
 
-    _pendingMessageRemoved: function(channel, message) {
+    _pendingMessageRemoved(channel, message) {
         let [id, valid] = message.get_pending_message_id();
         if (!valid || !this._pending.has(id))
             return;
         this._removePendingMark(id);
     },
 
-    _removePendingMark: function(id) {
+    _removePendingMark(id) {
         let mark = this._pending.get(id);
         // Re-enable auto-scrolling if this is the most recent message
         if (this._view.buffer.get_iter_at_mark(mark).is_end())
@@ -774,7 +774,7 @@ var ChatView = new Lang.Class({
         this._pending.delete(id);
     },
 
-    _showUrlContextMenu: function(url, button, time) {
+    _showUrlContextMenu(url, button, time) {
         let menu = new Gtk.Menu();
 
         let item = new Gtk.MenuItem({ label: _("Open Link") });
@@ -794,7 +794,7 @@ var ChatView = new Lang.Class({
         menu.popup(null, null, null, button, time);
     },
 
-    _handleButtonTagsHover: function(view, event) {
+    _handleButtonTagsHover(view, event) {
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
                                                   eventX, eventY);
@@ -824,7 +824,7 @@ var ChatView = new Lang.Class({
         return Gdk.EVENT_PROPAGATE;
     },
 
-    _showLoadingIndicator: function() {
+    _showLoadingIndicator() {
         let indicator = new Gtk.Image({ icon_name: 'content-loading-symbolic',
                                         visible: true });
         indicator.get_style_context().add_class('dim-label');
@@ -840,7 +840,7 @@ var ChatView = new Lang.Class({
         buffer.apply_tag(this._lookupTag('loading'), start, iter);
     },
 
-    _hideLoadingIndicator: function() {
+    _hideLoadingIndicator() {
         let buffer = this._view.buffer;
         let iter = buffer.get_start_iter();
 
@@ -851,7 +851,7 @@ var ChatView = new Lang.Class({
         buffer.delete(buffer.get_start_iter(), iter);
     },
 
-    _setIndicatorMark: function(iter) {
+    _setIndicatorMark(iter) {
         let lineStart = iter.copy();
         lineStart.set_line_offset(0);
 
@@ -872,7 +872,7 @@ var ChatView = new Lang.Class({
         this._needsIndicator = false;
     },
 
-    _checkMessages: function() {
+    _checkMessages() {
         if (!this._app.isRoomFocused(this._room) || !this._channel)
             return;
 
@@ -898,17 +898,17 @@ var ChatView = new Lang.Class({
         }
     },
 
-    _getNickTagName: function(nick) {
+    _getNickTagName(nick) {
         return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
     },
 
-    _getNickFromTagName: function(tagName) {
+    _getNickFromTagName(tagName) {
         if (tagName.startsWith(NICKTAG_PREFIX))
             return tagName.replace(NICKTAG_PREFIX, '');
         return null;
     },
 
-    _onChannelChanged: function() {
+    _onChannelChanged() {
         if (this._channel == this._room.channel)
             return;
 
@@ -950,19 +950,19 @@ var ChatView = new Lang.Class({
         this._initialPending = pending.map(p => this._createMessage(p));
     },
 
-    _onMemberRenamed: function(room, oldMember, newMember) {
+    _onMemberRenamed(room, oldMember, newMember) {
         let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
     },
 
-    _onMemberDisconnected: function(room, member, message) {
+    _onMemberDisconnected(room, member, message) {
         let text = _("%s has disconnected").format(member.alias);
         if (message)
             text += ' (%s)'.format(message);
         this._insertStatus(text, member.alias, 'left');
     },
 
-    _onMemberKicked: function(room, member, actor) {
+    _onMemberKicked(room, member, actor) {
         let message =
             actor ? _("%s has been kicked by %s").format(member.alias,
                                                          actor.alias)
@@ -970,7 +970,7 @@ var ChatView = new Lang.Class({
         this._insertStatus(message, member.alias, 'left');
     },
 
-    _onMemberBanned: function(room, member, actor) {
+    _onMemberBanned(room, member, actor) {
         let message =
             actor ? _("%s has been banned by %s").format(member.alias,
                                                          actor.alias)
@@ -978,12 +978,12 @@ var ChatView = new Lang.Class({
         this._insertStatus(message, member.alias, 'left');
     },
 
-    _onMemberJoined: function(room, member) {
+    _onMemberJoined(room, member) {
         let text = _("%s joined").format(member.alias);
         this._insertStatus(text, member.alias, 'joined');
     },
 
-    _onMemberLeft: function(room, member, message) {
+    _onMemberLeft(room, member, message) {
         let text = _("%s left").format(member.alias);
 
         if (message)
@@ -992,7 +992,7 @@ var ChatView = new Lang.Class({
         this._insertStatus(text, member.alias, 'left');
     },
 
-    _onMessageReceived: function(channel, tpMessage) {
+    _onMessageReceived(channel, tpMessage) {
         this._insertTpMessage(tpMessage);
         this._resetStatusCompressed();
         let nick = tpMessage.sender.alias;
@@ -1002,12 +1002,12 @@ var ChatView = new Lang.Class({
         nickTag._lastActivity = GLib.get_monotonic_time();
     },
 
-    _onMessageSent: function(channel, tpMessage) {
+    _onMessageSent(channel, tpMessage) {
         this._insertTpMessage(tpMessage);
         this._resetStatusCompressed();
     },
 
-    _resetStatusCompressed: function() {
+    _resetStatusCompressed() {
         let markStart = this._view.buffer.get_mark('idle-status-start');
         if (!markStart)
             return;
@@ -1017,7 +1017,7 @@ var ChatView = new Lang.Class({
         this._state.lastStatusGroup++;
     },
 
-    _shouldShowStatus: function(nick) {
+    _shouldShowStatus(nick) {
         let nickTag = this._lookupTag('nick' + nick);
 
         if (!nickTag || !nickTag._lastActivity)
@@ -1027,7 +1027,7 @@ var ChatView = new Lang.Class({
         return (time - nickTag._lastActivity) / (1000 * 1000) < INACTIVITY_THRESHOLD;
     },
 
-    _updateStatusHeader: function() {
+    _updateStatusHeader() {
         let buffer = this._view.buffer;
         let headerMark = buffer.get_mark('idle-status-start');
 
@@ -1093,7 +1093,7 @@ var ChatView = new Lang.Class({
         this._insertWithTags(iter, '\u25BC', tags.concat(groupTag));
     },
 
-    _insertStatus: function(text, member, type) {
+    _insertStatus(text, member, type) {
         let time = GLib.DateTime.new_now_utc().to_unix();
         if (time - this._joinTime < IGNORE_STATUS_TIME)
             return;
@@ -1124,7 +1124,7 @@ var ChatView = new Lang.Class({
         this._insertWithTags(iter, text, tags);
     },
 
-    _formatTimestamp: function(timestamp) {
+    _formatTimestamp(timestamp) {
         let date = GLib.DateTime.new_from_unix_local(timestamp);
         let now = GLib.DateTime.new_now_local();
 
@@ -1203,7 +1203,7 @@ var ChatView = new Lang.Class({
         return date.format(format);
     },
 
-    _insertTpMessage: function(tpMessage) {
+    _insertTpMessage(tpMessage) {
         let message = this._createMessage(tpMessage);
 
         this._ensureNewLine();
@@ -1218,7 +1218,7 @@ var ChatView = new Lang.Class({
             this._setIndicatorMark(this._view.buffer.get_end_iter());
     },
 
-    _insertMessage: function(iter, message, state) {
+    _insertMessage(iter, message, state) {
         let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
         let needsGap = message.nick != state.lastNick || isAction;
         let highlight = this._room.should_highlight_message(message.nick,
@@ -1317,7 +1317,7 @@ var ChatView = new Lang.Class({
                               this._view.buffer.create_mark(null, iter, true));
     },
 
-    _onNickStatusChanged: function(baseNick, status) {
+    _onNickStatusChanged(baseNick, status) {
         if (this._room.type == Tp.HandleType.CONTACT &&
             status == Tp.ConnectionPresenceType.OFFLINE &&
             this._room.channel)
@@ -1334,14 +1334,14 @@ var ChatView = new Lang.Class({
         this._updateNickTag(nickTag, status);
     },
 
-    _updateNickTag: function(tag, status) {
+    _updateNickTag(tag, status) {
         if (status == Tp.ConnectionPresenceType.AVAILABLE)
             tag.foreground_rgba = this._activeNickColor;
         else
             tag.foreground_rgba = this._inactiveNickColor;
     },
 
-    _onNickTagClicked: function(tag) {
+    _onNickTagClicked(tag) {
         let view = this._view;
         let event = Gtk.get_current_event();
         let [, eventX, eventY] = event.get_coords();
@@ -1378,7 +1378,7 @@ var ChatView = new Lang.Class({
         tag._popover.show();
     },
 
-    _createUrlTag: function(url) {
+    _createUrlTag(url) {
         if (url.indexOf(':') == -1)
             url = 'http://' + url;
 
@@ -1400,7 +1400,7 @@ var ChatView = new Lang.Class({
         return tag;
     },
 
-    _ensureNewLine: function() {
+    _ensureNewLine() {
         let buffer = this._view.get_buffer();
         let iter = buffer.get_end_iter();
         let tags = [];
@@ -1414,7 +1414,7 @@ var ChatView = new Lang.Class({
             this._insertWithTags(iter, '\n', tags);
     },
 
-    _getLineIters: function(iter) {
+    _getLineIters(iter) {
         let start = iter.copy();
         start.backward_line();
         start.forward_to_line_end();
@@ -1425,15 +1425,15 @@ var ChatView = new Lang.Class({
         return [start, end];
     },
 
-    _lookupTag: function(name) {
+    _lookupTag(name) {
         return this._view.get_buffer().tag_table.lookup(name);
     },
 
-    _insertWithTagName: function(iter, text, name) {
+    _insertWithTagName(iter, text, name) {
         this._insertWithTags(iter, text, [this._lookupTag(name)]);
     },
 
-    _insertWithTags: function(iter, text, tags) {
+    _insertWithTags(iter, text, tags) {
         let buffer = this._view.get_buffer();
         let offset = iter.get_offset();
 

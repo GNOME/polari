@@ -15,7 +15,7 @@ function getDefault() {
 var AccountsMonitor = new Lang.Class({
     Name: 'AccountsMonitor',
 
-    _init: function() {
+    _init() {
         this._accounts = new Map();
         this._accountSettings = new Map();
 
@@ -47,11 +47,11 @@ var AccountsMonitor = new Lang.Class({
         return this._accountManager;
     },
 
-    lookupAccount: function(accountPath) {
+    lookupAccount(accountPath) {
         return this._accounts.get(accountPath);
     },
 
-    getAccountSettings: function(account) {
+    getAccountSettings(account) {
         let accountPath = account.object_path;
         let settings = this._accountSettings.get(accountPath);
         if (settings)
@@ -64,7 +64,7 @@ var AccountsMonitor = new Lang.Class({
         return settings;
     },
 
-    prepare: function(callback) {
+    prepare(callback) {
         let quark = Tp.AccountManager.get_feature_quark_core();
         if (this._accountManager.is_prepared(quark))
             callback();
@@ -72,7 +72,7 @@ var AccountsMonitor = new Lang.Class({
             this._preparedCallbacks.push(callback);
     },
 
-    _onPrepared: function(am, res) {
+    _onPrepared(am, res) {
         try {
             am.prepare_finish(res);
         } catch(e) {
@@ -99,7 +99,7 @@ var AccountsMonitor = new Lang.Class({
         this._preparedCallbacks.forEach(callback => { callback(); });
     },
 
-    _onPrepareShutdown: function() {
+    _onPrepareShutdown() {
         let presence = Tp.ConnectionPresenceType.OFFLINE;
         this.accounts.filter(a => a.requested_presence_type != presence).forEach(a => {
             this._app.hold();
@@ -112,11 +112,11 @@ var AccountsMonitor = new Lang.Class({
         });
     },
 
-    _shouldMonitorAccount: function(account) {
+    _shouldMonitorAccount(account) {
         return account.protocol_name == 'irc';
     },
 
-    _addAccount: function(account) {
+    _addAccount(account) {
         if (!this._shouldMonitorAccount(account))
             return;
 
@@ -133,7 +133,7 @@ var AccountsMonitor = new Lang.Class({
         this.emit('accounts-changed');
     },
 
-    _removeAccount: function(account) {
+    _removeAccount(account) {
         if (!this._accounts.delete(account.object_path))
             return;
 
@@ -144,7 +144,7 @@ var AccountsMonitor = new Lang.Class({
         this.emit('accounts-changed');
     },
 
-    _accountEnabledChanged: function(am, account) {
+    _accountEnabledChanged(am, account) {
         if (!this._accounts.has(account.object_path))
             return;
         this.emit(account.enabled ? 'account-enabled'

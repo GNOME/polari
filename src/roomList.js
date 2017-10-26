@@ -24,7 +24,7 @@ var RoomRow = new Lang.Class({
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
     InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter'],
 
-    _init: function(room) {
+    _init(room) {
         this.parent();
 
         this._room = room;
@@ -59,12 +59,12 @@ var RoomRow = new Lang.Class({
         return !this.get_style_context().has_class('inactive');
     },
 
-    selected: function() {
+    selected() {
         if (!this._room.channel)
             this._updatePending();
     },
 
-    _getNumPending: function() {
+    _getNumPending() {
         if (!this._room.channel)
             return [0, 0];
 
@@ -80,7 +80,7 @@ var RoomRow = new Lang.Class({
         return [nPending, highlights.length];
     },
 
-    _updatePending: function() {
+    _updatePending() {
         let [nPending, nHighlights] = this._getNumPending();
 
         this._counter.label = nHighlights.toString();
@@ -93,7 +93,7 @@ var RoomRow = new Lang.Class({
             context.remove_class('inactive');
     },
 
-    _onChannelChanged: function() {
+    _onChannelChanged() {
         if (!this._room.channel)
             return;
         this._room.channel.connect('message-received',
@@ -103,7 +103,7 @@ var RoomRow = new Lang.Class({
         this._updatePending();
     },
 
-    _onButtonRelease: function(w, event) {
+    _onButtonRelease(w, event) {
         let [, button] = event.get_button();
         if (button != Gdk.BUTTON_SECONDARY)
             return Gdk.EVENT_PROPAGATE;
@@ -113,7 +113,7 @@ var RoomRow = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    _onKeyPress: function(w, event) {
+    _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
         let [, mods] = event.get_state();
         if (keyval != Gdk.KEY_Menu &&
@@ -126,7 +126,7 @@ var RoomRow = new Lang.Class({
         return Gdk.EVENT_STOP;
     },
 
-    _showPopover: function() {
+    _showPopover() {
         if (!this._popover) {
             let menu = new Gio.Menu();
             let isRoom = this._room.type == Tp.HandleType.ROOM;
@@ -157,7 +157,7 @@ var RoomListHeader = new Lang.Class({
                        'popoverProperties',
                        'spinner'],
 
-    _init: function(params) {
+    _init(params) {
         this._account = params.account;
         delete params.account;
 
@@ -207,7 +207,7 @@ var RoomListHeader = new Lang.Class({
         });
     },
 
-    _onDisplayNameChanged: function() {
+    _onDisplayNameChanged() {
         this._label.label = this._account.display_name;
 
         /* update pop-over status label */
@@ -226,26 +226,26 @@ var RoomListHeader = new Lang.Class({
     },
 
     /* hack: Handle primary and secondary button interchangeably */
-    vfunc_button_press_event: function(event) {
+    vfunc_button_press_event(event) {
         if (event.button == Gdk.BUTTON_SECONDARY)
             event.button = Gdk.BUTTON_PRIMARY;
         return this.parent(event);
     },
 
-    vfunc_button_release_event: function(event) {
+    vfunc_button_release_event(event) {
         if (event.button == Gdk.BUTTON_SECONDARY)
             event.button = Gdk.BUTTON_PRIMARY;
         return this.parent(event);
     },
 
-    _getConnectionStatus: function() {
+    _getConnectionStatus() {
         let presence = this._account.requested_presence_type;
         if (presence == Tp.ConnectionPresenceType.OFFLINE)
             return Tp.ConnectionStatus.DISCONNECTED;
         return this._account.connection_status;
     },
 
-    _onConnectionStatusChanged: function() {
+    _onConnectionStatusChanged() {
         let status = this._getConnectionStatus();
         let reason = this._account.connection_status_reason;
         let authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
@@ -290,7 +290,7 @@ var RoomListHeader = new Lang.Class({
         }
     },
 
-    _onRequestedPresenceChanged: function() {
+    _onRequestedPresenceChanged() {
         let presence = this._account.requested_presence_type;
         let offline = presence == Tp.ConnectionPresenceType.OFFLINE;
         this._popoverConnect.visible = offline;
@@ -298,7 +298,7 @@ var RoomListHeader = new Lang.Class({
         this._onConnectionStatusChanged();
     },
 
-    _getStatusLabel: function() {
+    _getStatusLabel() {
         switch (this._getConnectionStatus()) {
             case Tp.ConnectionStatus.CONNECTED:
                 return _("Connected");
@@ -311,7 +311,7 @@ var RoomListHeader = new Lang.Class({
         }
     },
 
-    _getErrorLabel: function() {
+    _getErrorLabel() {
         switch (this._account.connection_error) {
 
             case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
@@ -348,7 +348,7 @@ var RoomList = new Lang.Class({
     Name: 'RoomList',
     Extends: Gtk.ListBox,
 
-    _init: function(params) {
+    _init(params) {
         this.parent(params);
 
         this.set_header_func(Lang.bind(this, this._updateHeader));
@@ -410,7 +410,7 @@ var RoomList = new Lang.Class({
         });
     },
 
-    vfunc_realize: function() {
+    vfunc_realize() {
         this.parent();
 
         let toplevel = this.get_toplevel();
@@ -419,13 +419,13 @@ var RoomList = new Lang.Class({
         this._activeRoomChanged();
     },
 
-    _rowToRoomIndex: function(index) {
+    _rowToRoomIndex(index) {
         let placeholders = [...this._placeholders.values()];
         let nBefore = placeholders.filter(p => p.get_index() < index).length;
         return index - nBefore;
     },
 
-    _roomToRowIndex: function(index) {
+    _roomToRowIndex(index) {
         let nChildren = this.get_children().length;
         for (let i = 0, roomIndex = 0; i < nChildren; i++)
             if (this.get_row_at_index(i).room && roomIndex++ == index)
@@ -433,21 +433,21 @@ var RoomList = new Lang.Class({
         return -1;
     },
 
-    _getRoomRowAtIndex: function(index) {
+    _getRoomRowAtIndex(index) {
         return this.get_row_at_index(this._roomToRowIndex(index));
     },
 
-    _selectRoomAtIndex: function(index) {
+    _selectRoomAtIndex(index) {
         let row = this._getRoomRowAtIndex(index);
         if (row)
             this.select_row(row);
     },
 
-    _moveSelection: function(direction) {
+    _moveSelection(direction) {
         this._moveSelectionFull(direction, () => { return true; });
     },
 
-    _moveSelectionFull: function(direction, testFunction){
+    _moveSelectionFull(direction, testFunction){
         let current = this.get_selected_row();
         if (!current)
             return;
@@ -466,7 +466,7 @@ var RoomList = new Lang.Class({
             this.select_row(row);
     },
 
-    _moveSelectionFromRow: function(row) {
+    _moveSelectionFromRow(row) {
         if (this._roomManager.roomCount == 0)
             return;
 
@@ -493,7 +493,7 @@ var RoomList = new Lang.Class({
             this.select_row(selected);
     },
 
-    _accountAdded: function(am, account) {
+    _accountAdded(am, account) {
         if (this._placeholders.has(account))
             return;
 
@@ -512,7 +512,7 @@ var RoomList = new Lang.Class({
         this._updatePlaceholderVisibility(account);
     },
 
-    _accountRemoved: function(am, account) {
+    _accountRemoved(am, account) {
         let placeholder = this._placeholders.get(account);
 
         if (!placeholder)
@@ -522,7 +522,7 @@ var RoomList = new Lang.Class({
         placeholder.destroy();
     },
 
-    _roomAdded: function(roomManager, room) {
+    _roomAdded(roomManager, room) {
         if (this._roomRows.has(room.id))
             return;
 
@@ -534,7 +534,7 @@ var RoomList = new Lang.Class({
         this._placeholders.get(room.account).hide();
     },
 
-    _roomRemoved: function(roomManager, room) {
+    _roomRemoved(roomManager, room) {
         let row = this._roomRows.get(room.id);
         if (!row)
             return;
@@ -545,7 +545,7 @@ var RoomList = new Lang.Class({
         this._updatePlaceholderVisibility(room.account);
     },
 
-    _updatePlaceholderVisibility: function(account) {
+    _updatePlaceholderVisibility(account) {
         if (!account.enabled) {
             this._placeholders.get(account).hide();
             return;
@@ -556,7 +556,7 @@ var RoomList = new Lang.Class({
         this._placeholders.get(account).visible = !hasRooms;
     },
 
-    _activeRoomChanged: function() {
+    _activeRoomChanged() {
         let room = this.get_toplevel().active_room;
         if (!room)
             return;
@@ -569,13 +569,13 @@ var RoomList = new Lang.Class({
         row.can_focus = true;
     },
 
-    vfunc_row_selected: function(row) {
+    vfunc_row_selected(row) {
         this.get_toplevel().active_room = row ? row.room : null;
         if (row)
             row.selected();
     },
 
-    _updateHeader: function(row, before) {
+    _updateHeader(row, before) {
         let getAccount = row => row ? row.account : null;
 
         let beforeAccount = getAccount(before);
@@ -596,7 +596,7 @@ var RoomList = new Lang.Class({
         row.set_header(roomListHeader);
     },
 
-    _sort: function(row1, row2) {
+    _sort(row1, row2) {
         let account1 = row1.account;
         let account2 = row2.account;
 
