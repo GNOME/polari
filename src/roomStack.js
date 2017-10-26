@@ -11,9 +11,7 @@ const EntryArea = imports.entryArea;
 const Lang = imports.lang;
 const RoomManager = imports.roomManager;
 
-var RoomStack = new Lang.Class({
-    Name: 'RoomStack',
-    Extends: Gtk.Stack,
+var RoomStack = GObject.registerClass({
     Properties: {
         'entry-area-height': GObject.ParamSpec.uint('entry-area-height',
                                                     'entry-area-height',
@@ -21,9 +19,9 @@ var RoomStack = new Lang.Class({
                                                     GObject.ParamFlags.READABLE,
                                                     0, GLib.MAXUINT32, 0)
     },
-
+}, class RoomStack extends Gtk.Stack {
     _init(params) {
-        this.parent(params);
+        super._init(params);
 
         this._sizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.VERTICAL });
         this._rooms = new Map();
@@ -43,10 +41,10 @@ var RoomStack = new Lang.Class({
             this._entryAreaHeight = rect.height - 1;
             this.notify('entry-area-height');
         });
-    },
+    }
 
     vfunc_realize() {
-        this.parent();
+        super.vfunc_realize();
 
         let toplevel = this.get_toplevel();
 
@@ -56,30 +54,30 @@ var RoomStack = new Lang.Class({
                          Lang.bind(this, this._updateSensitivity));
         this._activeRoomChanged();
         this._updateSensitivity();
-    },
+    }
 
     get entry_area_height() {
         return this._entryAreaHeight;
-    },
+    }
 
     _addView(id, view) {
         this._rooms.set(id, view);
         this.add_named(view, id);
-    },
+    }
 
     _roomAdded(roomManager, room) {
         this._addView(room.id, new RoomView(room, this._sizeGroup));
-    },
+    }
 
     _roomRemoved(roomManager, room) {
         this._rooms.get(room.id).destroy();
         this._rooms.delete(room.id);
-    },
+    }
 
     _activeRoomChanged() {
         let room = this.get_toplevel().active_room;
         this.set_visible_child_name(room ? room.id : 'placeholder');
-    },
+    }
 
     _updateSensitivity() {
         let room = this.get_toplevel().active_room;
@@ -90,14 +88,12 @@ var RoomStack = new Lang.Class({
     }
 });
 
-var SavePasswordConfirmationBar = new Lang.Class({
-    Name: 'SavePasswordConfirmationBar',
-    Extends: Gtk.Revealer,
-
+var SavePasswordConfirmationBar = GObject.registerClass(
+class SavePasswordConfirmationBar extends Gtk.Revealer {
     _init(room) {
         this._room = room;
 
-        this.parent({ valign: Gtk.Align.START });
+        super._init({ valign: Gtk.Align.START });
 
         this.connect('destroy', Lang.bind(this, this._onDestroy));
 
@@ -114,7 +110,7 @@ var SavePasswordConfirmationBar = new Lang.Class({
             }
             this.reveal_child = false;
         });
-    },
+    }
 
     _createWidget() {
         this._infoBar = new Gtk.InfoBar({ show_close_button: true })
@@ -144,7 +140,7 @@ var SavePasswordConfirmationBar = new Lang.Class({
         box.add(this._subtitleLabel);
 
         this._infoBar.show_all();
-    },
+    }
 
     _onDestroy() {
         if (this._identifySentId)
@@ -153,10 +149,8 @@ var SavePasswordConfirmationBar = new Lang.Class({
     }
 });
 
-var ChatPlaceholder = new Lang.Class({
-    Name: 'ChatPlaceholder',
-    Extends: Gtk.Overlay,
-
+var ChatPlaceholder = GObject.registerClass(
+class ChatPlaceholder extends Gtk.Overlay {
     _init(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
@@ -177,7 +171,7 @@ var ChatPlaceholder = new Lang.Class({
         let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
         sizeGroup.add_widget(inputPlaceholder);
 
-        this.parent();
+        super._init();
         let grid = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
                                   column_spacing: 18, hexpand: true, vexpand: true,
                                   valign: Gtk.Align.CENTER });
@@ -191,12 +185,10 @@ var ChatPlaceholder = new Lang.Class({
     }
 });
 
-var RoomView = new Lang.Class({
-    Name: 'RoomView',
-    Extends: Gtk.Overlay,
-
+var RoomView = GObject.registerClass(
+class RoomView extends Gtk.Overlay {
     _init(room, sizeGroup) {
-        this.parent();
+        super._init();
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add(box);
@@ -227,7 +219,7 @@ var RoomView = new Lang.Class({
         });
 
         this.show_all();
-    },
+    }
 
     set inputSensitive(sensitive) {
         this._entryArea.sensitive = sensitive;

@@ -7,12 +7,10 @@ const Tp = imports.gi.TelepathyGLib;
 
 const Lang = imports.lang;
 
-const AccountsWindow = new Lang.Class({
-    Name: 'AccountsWindow',
-    Extends: Gtk.ApplicationWindow,
-
+const AccountsWindow = GObject.registerClass(
+class AccountsWindow extends Gtk.ApplicationWindow {
     _init(params) {
-        this.parent(params);
+        super._init(params);
 
         let scrolled = new Gtk.ScrolledWindow({ hscrollbar_policy: Gtk.PolicyType.NEVER,
                                                 shadow_type: Gtk.ShadowType.NONE });
@@ -38,7 +36,7 @@ const AccountsWindow = new Lang.Class({
 
         let am = Tp.AccountManager.dup();
         am.prepare_async(null, Lang.bind(this, this._onPrepared));
-    },
+    }
 
     _onPrepared(am) {
         am.connect('account-validity-changed', (am, account, valid) => {
@@ -51,7 +49,7 @@ const AccountsWindow = new Lang.Class({
             this._removeAccount(account);
         });
         am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
-    },
+    }
 
     _addAccount(account) {
         if (account.protocol_name != 'irc')
@@ -84,7 +82,7 @@ const AccountsWindow = new Lang.Class({
             account.set_enabled_async(state, null);
             return true;
         });
-    },
+    }
 
     _removeAccount(account) {
         let rows = this._list.get_children();
