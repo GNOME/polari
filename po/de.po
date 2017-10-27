@@ -11,11 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
-"product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-08-25 11:21+0000\n"
-"PO-Revision-Date: 2017-08-26 21:34+0200\n"
-"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2017-10-23 02:33+0000\n"
+"PO-Revision-Date: 2017-10-27 11:45+0200\n"
+"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:761
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ein IRC-Client für GNOME"
 
@@ -57,6 +56,10 @@ msgstr ""
 "dafür, dass Sie keine wichtige Nachricht mehr verpassen. Bei privaten "
 "Unterhaltungen können Sie sogar direkt antworten, ohne in das "
 "Anwendungsfenster wechseln zu müssen."
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:47
+msgid "The GNOME Project"
+msgstr "Das GNOME-Projekt"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
@@ -400,24 +403,24 @@ msgstr "Benachrichtigung wird gesendet, wenn sich der Benutzer angemeldet hat."
 msgid "Start Conversation"
 msgstr "Unterhaltung beginnen"
 
-#: src/application.js:47
+#: src/application.js:49
 msgid "Start Telepathy client"
 msgstr "Telepathy-Client starten"
 
-#: src/application.js:50
+#: src/application.js:52
 msgid "Print version and exit"
 msgstr "Versionsnummer ausgeben und beenden"
 
-#: src/application.js:380 src/utils.js:185
+#: src/application.js:383 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Fehler beim Öffnen des Links"
 
-#: src/application.js:657
+#: src/application.js:660
 #, javascript-format
 msgid "%s removed."
 msgstr "%s wurde entfernt."
 
-#: src/application.js:757
+#: src/application.js:760
 msgid "translator-credits"
 msgstr ""
 "Christian Kirbach <christian.kirbach@gmail.com>\n"
@@ -425,7 +428,7 @@ msgstr ""
 "J.M. Ruetter <jm@jublo.net>\n"
 "Mario Blättermann <mario.blaettermann@gmail.com>"
 
-#: src/application.js:763
+#: src/application.js:766
 msgid "Learn more about Polari"
 msgstr "Mehr über Polari erfahren"
 
@@ -865,6 +868,14 @@ msgstr "Passwort %s für %s speichern?"
 #: src/telepathyClient.js:580
 msgid "Save"
 msgstr "Speichern"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:603
+#, javascript-format
+#| msgid "%s in #%s"
+msgid "%s in %s"
+msgstr "%s in %s"
 
 #: src/userList.js:237
 #, javascript-format
