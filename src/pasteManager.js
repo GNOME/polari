@@ -122,7 +122,7 @@ var DropTargetIface = new Lang.Interface({
         if (!this.can_drop)
             return Gdk.EVENT_PROPAGATE;
 
-        if (!Polari.drag_dest_supports_target(widget, context, null))
+        if (!Polari.drag_dest_supports_target(widget, context))
             return Gdk.EVENT_PROPAGATE;
 
         Polari.drag_dest_request_data(widget, context, time);
@@ -138,7 +138,7 @@ var DropTargetIface = new Lang.Interface({
         if (!this.can_drop)
             return Gdk.EVENT_PROPAGATE;
 
-        if (!Polari.drag_dest_supports_target(widget, context, null))
+        if (!Polari.drag_dest_supports_target(widget, context))
             return Gdk.EVENT_PROPAGATE;
 
         let info = Polari.drag_dest_find_target(widget, context);
