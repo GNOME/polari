@@ -1,4 +1,3 @@
-const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
@@ -76,25 +75,20 @@ var UndoNotification = GObject.registerClass({
         super._init(label);
 
         this._undo = false;
+        this._closed = false;
 
-        this.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.connect('destroy', () => { this.close(); });
 
         this.addButton(_("Undo"), () => { this._undo = true; });
-
-        this._app = Gio.Application.get_default();
-        this._shutdownId = this._app.connect('prepare-shutdown',
-                                             Lang.bind(this, this.close));
     }
 
     close() {
+        if (this._closed)
+            return;
+
+        this._closed = true;
         this.emit(this._undo ? 'undo' : 'closed');
         super.close();
-    }
-
-    _onDestroy() {
-        if (this._shutdownId)
-            this._app.disconnect(this._shutdownId);
-        this._shutdownId = 0;
     }
 });
 
