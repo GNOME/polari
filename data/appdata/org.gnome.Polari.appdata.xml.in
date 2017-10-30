@@ -52,6 +52,14 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.26.2" date="2017-10-30">
+      <description>
+        <p>
+           The second update for GNOME 3.26 improves the performance of
+           room list in the join dialog and fixes various minor bugs.
+        </p>
+      </description>
+    </release>
     <release version="3.26.1" date="2017-10-04">
       <description>
         <p>
