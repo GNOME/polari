@@ -249,8 +249,10 @@ var EntryArea = GObject.registerClass({
             this._room.connect('members-changed',
                                Lang.bind(this, this._updateCompletions));
         this._nicknameChangedId =
-            this._room.account.connect('notify::nickname',
-                                       Lang.bind(this, this._updateNick));
+            this._room.account.connect('notify::nickname', () => {
+                if (!this._room.channel)
+                    this._updateNick();
+            });
         this._channelChangedId =
             this._room.connect('notify::channel',
                                Lang.bind(this, this._onChannelChanged));
