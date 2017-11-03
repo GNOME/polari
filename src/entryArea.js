@@ -135,14 +135,57 @@ var ChatEntry = GObject.registerClass({
     }
 });
 
+var NickPopover = GObject.registerClass({
+    Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
+    InternalChildren: ['nickEntry',
+                       'changeButton'],
+    Properties: {
+        nick: GObject.ParamSpec.string('nick',
+                                       'nick',
+                                       'nick',
+                                       GObject.ParamFlags.READWRITE |
+                                       GObject.ParamFlags.EXPLICIT_NOTIFY,
+                                       '')
+    },
+    Signals: { 'nick-changed': {} }
+}, class NickPopover extends Gtk.Popover {
+    _init() {
+        this._nick = '';
+
+        super._init();
+
+        this.set_default_widget(this._changeButton);
+
+        this._changeButton.connect('clicked', () => {
+            if (!this._nickEntry.text)
+                return;
+
+            this._nick = this._nickEntry.text;
+            this.emit('nick-changed');
+        });
+    }
+
+    get nick() {
+        return this._nick;
+    }
+
+    set nick(nick) {
+        if (this._nick == nick)
+            return;
+
+        if (!this._nickEntry['is-focus'])
+            this._nickEntry.text = nick;
+        this._nick = nick;
+
+        this.notify('nick');
+    }
+});
+
 var EntryArea = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
     InternalChildren: ['chatEntry',
                        'nickButton',
                        'nickLabel',
-                       'nickPopover',
-                       'nickEntry',
-                       'changeButton',
                        'pasteBox',
                        'confirmLabel',
                        'uploadLabel',
@@ -187,12 +230,12 @@ var EntryArea = GObject.registerClass({
             w.set_state_flags (state, true);
         });
 
-        this._changeButton.connect('clicked', () => {
-           if (this._nickEntry.text)
-               this._setNick(this._nickEntry.text);
-           this._nickButton.active = false;
+        this._nickPopover = new NickPopover();
+        this._nickPopover.connect('nick-changed', () => {
+            this._setNick(this._nickPopover.nick);
+            this._nickButton.active = false;
         });
-        this._nickPopover.set_default_widget(this._changeButton);
+        this._nickButton.popover = this._nickPopover;
 
         this._chatEntry.connect('text-pasted', (entry, text, nLines) => {
             this.pasteText(text, nLines);
@@ -447,8 +490,7 @@ var EntryArea = GObject.registerClass({
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
-        if (!this._nickEntry['is-focus'])
-            this._nickEntry.text = nick;
+        this._nickPopover.nick = nick;
     }
 
     _onDestroy() {
