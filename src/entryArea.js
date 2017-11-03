@@ -20,6 +20,7 @@ const MAX_LINES = 5;
 
 let _checker = null;
 let _emojiPicker = null;
+let _nickPopover = null;
 
 var ChatEntry = GObject.registerClass({
     Implements: [PasteManager.DropTargetIface],
@@ -205,6 +206,7 @@ var EntryArea = GObject.registerClass({
 
         this._ircParser = new IrcParser.IrcParser(this._room);
         this._maxNickChars = ChatView.MAX_NICK_CHARS;
+        this._nickChangedId = 0;
 
         super._init(params);
 
@@ -214,6 +216,25 @@ var EntryArea = GObject.registerClass({
             this._toplevel = this.get_toplevel();
             this._keyPressId = this._toplevel.connect('key-press-event',
                                                       Lang.bind(this, this._onKeyPressEvent));
+        });
+        this.connect('map', () => {
+            if (!_nickPopover)
+                _nickPopover = new NickPopover();
+            this._nickButton.popover = _nickPopover;
+
+            if (this._nickChangedId)
+                return;
+
+            this._nickChangedId = _nickPopover.connect('nick-changed', () => {
+                this._setNick(_nickPopover.nick);
+                this._nickButton.active = false;
+            });
+            this._updateNick();
+        });
+        this.connect('unmap', () => {
+            if (this._nickChangedId)
+                _nickPopover.disconnect(this._nickChangedId);
+            this._nickChangedId = 0;
         });
 
         this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
@@ -229,13 +250,6 @@ var EntryArea = GObject.registerClass({
             state &= ~Gtk.StateFlags.BACKDROP;
             w.set_state_flags (state, true);
         });
-
-        this._nickPopover = new NickPopover();
-        this._nickPopover.connect('nick-changed', () => {
-            this._setNick(this._nickPopover.nick);
-            this._nickButton.active = false;
-        });
-        this._nickButton.popover = this._nickPopover;
 
         this._chatEntry.connect('text-pasted', (entry, text, nLines) => {
             this.pasteText(text, nLines);
@@ -465,6 +479,9 @@ var EntryArea = GObject.registerClass({
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
+        if (!this.get_mapped())
+            return;
+
         let app = Gio.Application.get_default();
         app.setAccountNick(this._room.account, nick);
 
@@ -490,7 +507,8 @@ var EntryArea = GObject.registerClass({
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
-        this._nickPopover.nick = nick;
+        if (this.get_mapped())
+            _nickPopover.nick = nick;
     }
 
     _onDestroy() {
@@ -509,5 +527,8 @@ var EntryArea = GObject.registerClass({
         if (this._keyPressId)
             this._toplevel.disconnect(this._keyPressId);
         this._keyPressId = 0;
+        if (this._nickChangedId)
+            _nickPopover.disconnect(this._nickChangedId);
+        this._nickChangedId = 0;
     }
 });
