@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="Gjs_NickPopover" parent="GtkPopover">
+    <property name="position">top</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="margin">6</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="halign">start</property>
+            <property name="hexpand">True</property>
+            <property name="label" translatable="yes">Change nickname:</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="nickEntry">
+            <property name="visible">True</property>
+            <property name="activates-default">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="changeButton">
+            <property name="label" translatable="yes">_Change</property>
+            <property name="visible">True</property>
+            <property name="receives-default">True</property>
+            <property name="can-default">True</property>
+            <property name="halign">end</property>
+            <property name="hexpand">True</property>
+            <property name="use-underline">True</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

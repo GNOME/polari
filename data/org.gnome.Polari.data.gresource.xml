@@ -12,6 +12,7 @@
     <file alias="ui/entry-area.ui" preprocess="xml-stripblanks">resources/entry-area.ui</file>
     <file alias="ui/join-room-dialog.ui" preprocess="xml-stripblanks">resources/join-room-dialog.ui</file>
     <file alias="ui/main-window.ui" preprocess="xml-stripblanks">resources/main-window.ui</file>
+    <file alias="ui/nick-popover.ui" preprocess="xml-stripblanks">resources/nick-popover.ui</file>
     <file alias="ui/room-list-header.ui" preprocess="xml-stripblanks">resources/room-list-header.ui</file>
     <file alias="ui/room-list-row.ui" preprocess="xml-stripblanks">resources/room-list-row.ui</file>
     <file alias="ui/server-room-list.ui" preprocess="xml-stripblanks">resources/server-room-list.ui</file>
