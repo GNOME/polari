@@ -18,9 +18,6 @@ const PasteManager = imports.pasteManager;
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
 
-let _checker = null;
-let _emojiPicker = null;
-let _nickPopover = null;
 
 var ChatEntry = GObject.registerClass({
     Implements: [PasteManager.DropTargetIface],
@@ -32,6 +29,18 @@ var ChatEntry = GObject.registerClass({
                'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
                'file-pasted': { param_types: [Gio.File.$gtype] } },
 }, class ChatEntry extends Gtk.Entry {
+    static get _checker() {
+        if (!this.__checker)
+            this.__checker = new Gspell.Checker();
+        return this.__checker;
+    }
+
+    static get _emojiPicker() {
+        if (!this.__emojiPicker)
+            this.__emojiPicker = new EmojiPicker.EmojiPicker();
+        return this.__emojiPicker;
+    }
+
     _init(params) {
         super._init(params);
 
@@ -42,7 +51,7 @@ var ChatEntry = GObject.registerClass({
         this.connect('icon-press', Lang.bind(this, this._showEmojiPicker));
         this.connect('unmap', () => {
             if (this._emojiPickedId)
-                _emojiPicker.disconnect(this._emojiPickedId);
+                ChatEntry._emojiPicker.disconnect(this._emojiPickedId);
             this._emojiPickedId = 0;
         });
 
@@ -50,11 +59,8 @@ var ChatEntry = GObject.registerClass({
         let action = app.lookup_action('show-emoji-picker');
         action.connect('activate', Lang.bind(this, this._showEmojiPicker));
 
-        if (!_checker)
-            _checker = new Gspell.Checker();
-
         let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
-        buffer.set_spell_checker (_checker);
+        buffer.set_spell_checker (ChatEntry._checker);
 
         let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
         spellEntry.set_inline_spell_checking(true);
@@ -66,11 +72,8 @@ var ChatEntry = GObject.registerClass({
         if (!this.is_sensitive() || !this.get_mapped())
             return;
 
-        if (!_emojiPicker)
-            _emojiPicker = new EmojiPicker.EmojiPicker();
-
         if (!this._emojiPickedId)
-            this._emojiPickedId = _emojiPicker.connect('emoji-picked',
+            this._emojiPickedId = ChatEntry._emojiPicker.connect('emoji-picked',
                 (w, emoji) => {
                     this.delete_selection();
                     let pos = this.insert_text(emoji, -1, this.get_position());
@@ -79,9 +82,9 @@ var ChatEntry = GObject.registerClass({
                 });
 
         let rect = this.get_icon_area(Gtk.EntryIconPosition.SECONDARY);
-        _emojiPicker.set_relative_to(this);
-        _emojiPicker.set_pointing_to(rect);
-        _emojiPicker.popup();
+        ChatEntry._emojiPicker.set_relative_to(this);
+        ChatEntry._emojiPicker.set_pointing_to(rect);
+        ChatEntry._emojiPicker.popup();
     }
 
     get can_drop() {
@@ -200,6 +203,12 @@ var EntryArea = GObject.registerClass({
                                                  0, GLib.MAXUINT32, 0)
     },
 }, class EntryArea extends Gtk.Stack {
+    static get _nickPopover() {
+        if (!this.__nickPopover)
+            this.__nickPopover = new NickPopover();
+        return this.__nickPopover;
+    }
+
     _init(params) {
         this._room = params.room;
         delete params.room;
@@ -218,22 +227,21 @@ var EntryArea = GObject.registerClass({
                                                       Lang.bind(this, this._onKeyPressEvent));
         });
         this.connect('map', () => {
-            if (!_nickPopover)
-                _nickPopover = new NickPopover();
-            this._nickButton.popover = _nickPopover;
+            this._nickButton.popover = EntryArea._nickPopover;
 
             if (this._nickChangedId)
                 return;
 
-            this._nickChangedId = _nickPopover.connect('nick-changed', () => {
-                this._setNick(_nickPopover.nick);
-                this._nickButton.active = false;
-            });
+            this._nickChangedId = EntryArea._nickPopover.connect('nick-changed',
+                () => {
+                    this._setNick(EntryArea._nickPopover.nick);
+                    this._nickButton.active = false;
+                });
             this._updateNick();
         });
         this.connect('unmap', () => {
             if (this._nickChangedId)
-                _nickPopover.disconnect(this._nickChangedId);
+                EntryArea._nickPopover.disconnect(this._nickChangedId);
             this._nickChangedId = 0;
         });
 
@@ -508,7 +516,7 @@ var EntryArea = GObject.registerClass({
         this._nickLabel.label = nick;
 
         if (this.get_mapped())
-            _nickPopover.nick = nick;
+            EntryArea._nickPopover.nick = nick;
     }
 
     _onDestroy() {
@@ -528,7 +536,7 @@ var EntryArea = GObject.registerClass({
             this._toplevel.disconnect(this._keyPressId);
         this._keyPressId = 0;
         if (this._nickChangedId)
-            _nickPopover.disconnect(this._nickChangedId);
+            EntryArea._nickPopover.disconnect(this._nickChangedId);
         this._nickChangedId = 0;
     }
 });
