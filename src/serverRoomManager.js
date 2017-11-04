@@ -147,7 +147,7 @@ var ServerRoomList = GObject.registerClass({
             if (this._isCustomRoomItem(iter))
                 return true;
 
-            return this._filterTerms.every((term) => name.indexOf(term) != -1);
+            return this._filterTerms.every(term => name.includes(term));
         });
 
         [, this._customRoomItem] = this._store.get_iter_first();

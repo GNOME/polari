@@ -800,7 +800,7 @@ var ChatView = GObject.registerClass({
 
         hoveredButtonTags.forEach(t => { t.hover = true; });
         this._hoveredButtonTags.forEach(t => {
-            t.hover = hoveredButtonTags.indexOf(t) >= 0;
+            t.hover = hoveredButtonTags.includes(t);
         });
 
         let isHovering = hoveredButtonTags.length > 0;
@@ -1371,7 +1371,7 @@ var ChatView = GObject.registerClass({
     }
 
     _createUrlTag(url) {
-        if (url.indexOf(':') == -1)
+        if (!url.includes(':'))
             url = 'http://' + url;
 
         let tag = new ButtonTag();

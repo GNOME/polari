@@ -166,7 +166,7 @@ var ConnectionsList = GObject.registerClass({
     _filterRows(row) {
         let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
         return this._filterTerms.every(term => {
-            return matchTerms.some(s => s.indexOf(term) != -1);
+            return matchTerms.some(s => s.includes(term));
         });
     }
 
@@ -190,7 +190,7 @@ var ConnectionsList = GObject.registerClass({
                 !this._networksManager.getNetworkIsFavorite(network.id))
                 return;
 
-            let sensitive = usedNetworks.indexOf(network.id) < 0;
+            let sensitive = !usedNetworks.includes(network.id);
             this._rows.set(network.id,
                            new ConnectionRow({ id: network.id,
                                                sensitive: sensitive }));
