@@ -500,7 +500,7 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     shouldShow() {
-        return this._user.alias.toLowerCase().indexOf(this._filter) != -1;
+        return this._user.alias.toLowerCase().includes(this._filter);
     }
 
     setFilter(filter) {

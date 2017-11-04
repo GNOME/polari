@@ -363,7 +363,7 @@ var EntryArea = GObject.registerClass({
             Gdk.KEY_ISO_Enter,
             Gdk.KEY_space
         ];
-        if (activationKeys.indexOf(keyval) != -1)
+        if (activationKeys.includes(keyval))
             return Gdk.EVENT_PROPAGATE;
 
         this._chatEntry.grab_focus_without_selecting();
