@@ -55,18 +55,18 @@ var JoinDialog = GObject.registerClass({
 
         this._accountsMonitor = AccountsMonitor.getDefault();
 
-        this._accounts = {};
+        this._accounts = new Map();
         this._accountsMonitor.enabledAccounts.forEach(a => {
-            this._accounts[a.display_name] = a;
+            this._accounts.set(a.display_name, a);
         });
         this._accountAddedId =
             this._accountsMonitor.connect('account-added', (am, account) => {
-                this._accounts[account.display_name] = account;
+                this._accounts.set(account.display_name, account);
                 this._updateConnectionCombo();
             });
         this._accountRemovedId =
             this._accountsMonitor.connect('account-removed', (am, account) => {
-                delete this._accounts[account.display_name];
+                this._accounts.delete(account.display_name);
                 this._updateConnectionCombo();
             });
 
@@ -90,7 +90,7 @@ var JoinDialog = GObject.registerClass({
     }
 
     get _hasAccounts() {
-      return Object.keys(this._accounts).length > 0;
+      return this._accounts.size > 0;
     }
 
     _setupMainPage() {
@@ -150,7 +150,7 @@ var JoinDialog = GObject.registerClass({
 
     _onAccountChanged() {
         let selected = this._connectionCombo.get_active_text();
-        let account = this._accounts[selected];
+        let account = this._accounts.get(selected);
         if (!account)
             return;
 
@@ -165,7 +165,7 @@ var JoinDialog = GObject.registerClass({
         this.hide();
 
         let selected = this._connectionCombo.get_active_text();
-        let account = this._accounts[selected];
+        let account = this._accounts.get(selected);
 
         let toJoinRooms = this._serverRoomList.selectedRooms;
         toJoinRooms.forEach(room => {
@@ -184,7 +184,7 @@ var JoinDialog = GObject.registerClass({
     _updateConnectionCombo() {
         this._connectionCombo.remove_all();
 
-        let names = Object.keys(this._accounts).sort((a, b) => {
+        let names = [...this._accounts.keys()].sort((a, b) => {
             // TODO: figure out combo box sorting
             return (a < b) ? -1 : ((a > b) ? 1 : 0);
         });

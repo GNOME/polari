@@ -34,7 +34,7 @@ var TabCompletion = class {
         this._list.connect('keynav-failed', Lang.bind(this, this._onKeynavFailed));
         frame.add(this._list);
 
-        this._widgetMap = {};
+        this._widgetMap = new Map();
         this._previousWasCommand = false;
 
         let commands = Object.keys(IrcParser.knownCommands);
@@ -82,14 +82,14 @@ var TabCompletion = class {
             return;
         }
 
-        let widgetMap = {};
+        let widgetMap = new Map();
 
         for (let i = 0; i < completions.length; i++) {
             let nick = completions[i];
-            let row = this._widgetMap[nick];
+            let row = this._widgetMap.get(nick);
 
             if (row) {
-                widgetMap[nick] = row;
+                widgetMap.set(nick, row);
                 this._list.remove(row);
             } else {
                 row = new Gtk.ListBoxRow();
@@ -99,7 +99,7 @@ var TabCompletion = class {
                                         halign: Gtk.Align.START,
                                         margin_start: 6,
                                         margin_end: 6 }));
-                widgetMap[nick] = row;
+                widgetMap.set(nick, row);
             }
         }
 
@@ -112,7 +112,7 @@ var TabCompletion = class {
         });
 
         for (let i = 0; i < completions.length; i++) {
-            let row = this._widgetMap[completions[i]];
+            let row = this._widgetMap.get(completions[i]);
             this._list.add(row);
         }
         this._canComplete = completions.length > 0;
