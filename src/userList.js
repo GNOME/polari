@@ -584,7 +584,7 @@ class UserList extends Gtk.ScrolledWindow {
                      Lang.bind(this, this._onDestroy));
 
         this._room = room;
-        this._rows = {};
+        this._rows = new Map();
         this._activeRow = null;
 
         let roomSignals = [
@@ -618,7 +618,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     get numRows() {
-        return Object.keys(this._rows).length;
+        return this.rows.size;
     }
 
     _onDestroy() {
@@ -675,7 +675,7 @@ class UserList extends Gtk.ScrolledWindow {
 
     _onChannelChanged(room) {
         this._list.foreach(w => { w.destroy(); });
-        this._rows = {};
+        this._rows.clear();
 
         if (!room.channel)
             return;
@@ -687,15 +687,15 @@ class UserList extends Gtk.ScrolledWindow {
 
     _addMember(member) {
         let row = new UserListRow(member);
-        this._rows[member] = row;
+        this._rows.set(member, row);
         this._list.add(row);
     }
 
     _removeMember(member) {
-        let row = this._rows[member];
+        let row = this._rows.get(member);
         if (row)
             row.destroy();
-        delete this._rows[member];
+        this._rows.delete(member);
     }
 
     _setActiveRow(row) {
