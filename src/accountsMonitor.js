@@ -4,15 +4,13 @@ const Tp = imports.gi.TelepathyGLib;
 const Lang = imports.lang;
 const Signals = imports.signals;
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new AccountsMonitor();
-    return _singleton;
-}
-
 class AccountsMonitor {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new AccountsMonitor();
+        return this._singleton;
+    }
+
     constructor() {
         this._accounts = new Map();
         this._accountSettings = new Map();
@@ -151,3 +149,5 @@ class AccountsMonitor {
     }
 };
 Signals.addSignalMethods(AccountsMonitor.prototype);
+
+var getDefault = AccountsMonitor.getDefault;

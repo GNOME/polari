@@ -15,15 +15,13 @@ const Utils = imports.utils;
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new _ServerRoomManager();
-    return _singleton;
-}
-
 class _ServerRoomManager {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new _ServerRoomManager();
+        return this._singleton;
+    }
+
     constructor() {
         this._roomLists = new Map();
 
@@ -372,3 +370,5 @@ var ServerRoomList = GObject.registerClass({
         this.notify('can-join');
     }
 });
+
+var getDefault = _ServerRoomManager.getDefault;

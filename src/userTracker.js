@@ -10,15 +10,13 @@ const GLib = imports.gi.GLib;
 const AccountsMonitor = imports.accountsMonitor;
 const RoomManager = imports.roomManager;
 
-let _singleton = null;
-
-function getUserStatusMonitor() {
-    if (_singleton == null)
-        _singleton = new UserStatusMonitor();
-    return _singleton;
-}
-
 class UserStatusMonitor {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new UserStatusMonitor();
+        return this._singleton;
+    }
+
     constructor() {
         this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -48,6 +46,7 @@ class UserStatusMonitor {
     }
 };
 
+var getUserStatusMonitor = UserStatusMonitor.getDefault;
 
 var UserTracker = GObject.registerClass({
     Signals: {
