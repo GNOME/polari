@@ -13,7 +13,7 @@ const Tpl = imports.gi.TelepathyLogger;
 
 const {DropTargetIface} = imports.pasteManager;
 const {UserPopover} = imports.userList;
-const UserTracker = imports.userTracker;
+const {UserStatusMonitor} = imports.userTracker;
 const Utils = imports.utils;
 
 var MAX_NICK_CHARS = 8;
@@ -353,7 +353,7 @@ var ChatView = GObject.registerClass({
         this._backlogTimeoutId = 0;
         this._statusCount = { left: 0, joined: 0, total: 0 };
 
-        let statusMonitor = UserTracker.getUserStatusMonitor();
+        let statusMonitor = UserStatusMonitor.getDefault();
         this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
 
         this._room.account.connect('notify::nickname', () => {

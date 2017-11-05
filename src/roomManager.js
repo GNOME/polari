@@ -5,17 +5,15 @@ const Polari = imports.gi.Polari;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
-const AccountsMonitor = imports.accountsMonitor;
-
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new RoomManager();
-    return _singleton;
-}
+const {AccountsMonitor} = imports.accountsMonitor;
 
 var RoomManager = class {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new RoomManager();
+        return this._singleton;
+    }
+
     constructor() {
         this._rooms = new Map();
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' })

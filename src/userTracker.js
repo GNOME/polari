@@ -5,19 +5,17 @@ const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
-const AccountsMonitor = imports.accountsMonitor;
-const RoomManager = imports.roomManager;
+const {AccountsMonitor} = imports.accountsMonitor;
+const {RoomManager} = imports.roomManager;
 const Utils = imports.utils;
 
-let _singleton = null;
-
-function getUserStatusMonitor() {
-    if (_singleton == null)
-        _singleton = new UserStatusMonitor();
-    return _singleton;
-}
-
 var UserStatusMonitor = class {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new UserStatusMonitor();
+        return this._singleton;
+    }
+
     constructor() {
         this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();

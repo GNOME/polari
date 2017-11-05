@@ -6,10 +6,10 @@ const Lang = imports.lang;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
-const AccountsMonitor = imports.accountsMonitor;
+const {AccountsMonitor} = imports.accountsMonitor;
 const {ChatView} = imports.chatView;
 const {EntryArea} = imports.entryArea;
-const RoomManager = imports.roomManager;
+const {RoomManager} = imports.roomManager;
 
 var RoomStack = GObject.registerClass({
     Properties: {

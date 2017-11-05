@@ -5,8 +5,8 @@ const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
-const AccountsMonitor = imports.accountsMonitor;
-const RoomManager = imports.roomManager;
+const {AccountsMonitor} = imports.accountsMonitor;
+const {RoomManager} = imports.roomManager;
 const Utils = imports.utils;
 
 const SASLAuthenticationIface = '<node> \

@@ -5,7 +5,7 @@ const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 
-const AccountsMonitor = imports.accountsMonitor;
+const {AccountsMonitor} = imports.accountsMonitor;
 const Utils = imports.utils;
 
 const DialogPage = {

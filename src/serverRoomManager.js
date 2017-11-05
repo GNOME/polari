@@ -7,22 +7,20 @@ const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
-const AccountsMonitor = imports.accountsMonitor;
-const RoomManager = imports.roomManager;
+const {AccountsMonitor} = imports.accountsMonitor;
+const {RoomManager} = imports.roomManager;
 const Utils = imports.utils;
 
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new ServerRoomManager();
-    return _singleton;
-}
-
 var ServerRoomManager = class {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new ServerRoomManager();
+        return this._singleton;
+    }
+
     constructor() {
         this._roomLists = new Map();
 
@@ -189,7 +187,7 @@ var ServerRoomList = GObject.registerClass({
                 this._toggleChecked(Gtk.TreePath.new_from_string(pathStr));
         });
 
-        this._manager = getDefault();
+        this._manager = ServerRoomManager.getDefault();
         this._manager.connect('loading-changed',
                               Lang.bind(this, this._onLoadingChanged));
     }

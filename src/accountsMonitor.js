@@ -3,15 +3,13 @@ const Lang = imports.lang;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new AccountsMonitor();
-    return _singleton;
-}
-
 var AccountsMonitor = class {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new AccountsMonitor();
+        return this._singleton;
+    }
+
     constructor() {
         this._accounts = new Map();
         this._accountSettings = new Map();

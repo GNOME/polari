@@ -2,15 +2,13 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Signals = imports.signals;
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new NetworksManager();
-    return _singleton;
-}
-
 var NetworksManager = class {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new NetworksManager();
+        return this._singleton;
+    }
+
     constructor() {
         this._networks = [];
         this._networksById = new Map();
