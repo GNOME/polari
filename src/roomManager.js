@@ -7,15 +7,13 @@ const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 const Signals = imports.signals;
 
-let _singleton = null;
-
-function getDefault() {
-    if (_singleton == null)
-        _singleton = new _RoomManager();
-    return _singleton;
-}
-
 class _RoomManager {
+    static getDefault() {
+        if (!this._singleton)
+            this._singleton = new _RoomManager();
+        return this._singleton;
+    }
+
     constructor() {
         this._rooms = new Map();
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' })
@@ -202,3 +200,5 @@ class _RoomManager {
     }
 };
 Signals.addSignalMethods(_RoomManager.prototype);
+
+var getDefault = _RoomManager.getDefault;
