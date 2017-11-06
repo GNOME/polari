@@ -4,6 +4,7 @@
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "command": "polari",
+    "x-run-args": ["--test-instance"],
     "tags": ["nightly"],
     "desktop-file-name-prefix": "(Nightly) ",
     "finish-args": [
