@@ -143,6 +143,8 @@ class TelepathyClient extends Tp.BaseClient {
               handler: this._onLeaveActivated.bind(this) },
             { name: 'connect-account',
               handler: this._onConnectAccountActivated.bind(this) },
+            { name: 'disconnect-account',
+              handler: this._onDisconnectAccountActivated.bind(this) },
             { name: 'reconnect-account',
               handler: this._onReconnectAccountActivated.bind(this) },
             { name: 'authenticate-account',
@@ -340,7 +342,18 @@ class TelepathyClient extends Tp.BaseClient {
     _onConnectAccountActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
-        this._connectAccount(account);
+        if (account.enabled)
+            this._connectAccount(account);
+        else
+            account.set_enabled_async(true, () => {});
+    }
+
+    _onDisconnectAccountActivated(action, parameter) {
+        let accountPath = parameter.deep_unpack();
+        let account = this._accountsMonitor.lookupAccount(accountPath);
+        account.set_enabled_async(false, () => {
+            this._setAccountPresence(account, Tp.ConnectionPresenceType.OFFLINE);
+        });
     }
 
     _onReconnectAccountActivated(action, parameter) {

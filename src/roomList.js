@@ -144,6 +144,7 @@ var RoomListHeader = GObject.registerClass({
                        'popoverTitle',
                        'popoverPassword',
                        'popoverConnect',
+                       'popoverDisconnect',
                        'popoverReconnect',
                        'popoverRemove',
                        'popoverProperties',
@@ -169,6 +170,7 @@ var RoomListHeader = GObject.registerClass({
 
         let target = new GLib.Variant('o', this._account.get_object_path());
         this._popoverConnect.action_target = target;
+        this._popoverDisconnect.action_target = target;
         this._popoverReconnect.action_target = target;
         this._popoverRemove.action_target = target;
         this._popoverProperties.action_target = target;
@@ -290,6 +292,7 @@ var RoomListHeader = GObject.registerClass({
         let presence = this._account.requested_presence_type;
         let offline = presence == Tp.ConnectionPresenceType.OFFLINE;
         this._popoverConnect.visible = offline;
+        this._popoverDisconnect.visible = !offline;
         this._popoverReconnect.visible = !offline;
         this._onConnectionStatusChanged();
     }
