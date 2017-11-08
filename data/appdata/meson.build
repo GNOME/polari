@@ -4,7 +4,7 @@ i18n.merge_file(appdata,
   output: appdata,
   po_dir: '../../po',
   install: true,
-  install_dir: appdatadir
+  install_dir: metainfodir
 )
 
 if (appstream_util.found())
