@@ -273,7 +273,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onAccountsChanged(am) {
-        let hasAccounts = this._accountsMonitor.enabledAccounts.length > 0;
+        let hasAccounts = this._accountsMonitor.visibleAccounts.length > 0;
         this._roomListRevealer.reveal_child = hasAccounts;
     }
 
@@ -351,7 +351,7 @@ var MainWindow = GObject.registerClass({
         let roomId = null;
         let account = this._accountsMonitor.lookupAccount(selectedRoom.account);
         let channelName = selectedRoom.channel;
-        if (account && account.enabled && channelName)
+        if (account && account.visible && channelName)
             roomId = Polari.create_room_id(account, channelName, Tp.HandleType.ROOM);
 
         this.active_room = this._roomManager.lookupRoom(roomId) ||

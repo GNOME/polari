@@ -184,10 +184,10 @@ class TelepathyClient extends Tp.BaseClient {
         this._accountsMonitor.connect('account-added', (mon, account) => {
             this._connectAccount(account);
         });
-        this._accountsMonitor.connect('account-enabled', (mon, account) => {
+        this._accountsMonitor.connect('account-shown', (mon, account) => {
             this._connectAccount(account);
         });
-        this._accountsMonitor.enabledAccounts.forEach(a => {
+        this._accountsMonitor.visibleAccounts.forEach(a => {
             this._onAccountStatusChanged(this._accountsMonitor, a);
         });
 
@@ -203,7 +203,7 @@ class TelepathyClient extends Tp.BaseClient {
         debug('Network changed to %s'.format(connected ? 'available'
                                                        : 'unavailable'));
 
-        this._accountsMonitor.enabledAccounts.forEach(a => {
+        this._accountsMonitor.visibleAccounts.forEach(a => {
             this._setAccountPresence(a, presence);
         });
     }
@@ -225,6 +225,9 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _setAccountPresence(account, presence) {
+        if (!account.enabled)
+            return;
+
         let statuses = Object.keys(Tp.ConnectionPresenceType).map(s =>
             s.replace(/_/g, '-').toLowerCase()
         );
