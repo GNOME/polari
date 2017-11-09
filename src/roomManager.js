@@ -36,10 +36,10 @@ var RoomManager = class {
                 this._app.lookup_action(a.name).connect('activate', a.handler);
         });
 
-        this._accountsMonitor.connect('account-enabled', (mon, account) => {
+        this._accountsMonitor.connect('account-shown', (mon, account) => {
             this._restoreRooms(account.object_path);
         });
-        this._accountsMonitor.connect('account-disabled', (mon, account) => {
+        this._accountsMonitor.connect('account-hidden', (mon, account) => {
             this._removeRooms(account.object_path);
         });
         this._accountsMonitor.connect('account-removed', (mon, account) => {
@@ -164,7 +164,7 @@ var RoomManager = class {
             return null;
         }
 
-        if (!account.enabled)
+        if (!account.visible)
             return null;
 
         let id = Polari.create_room_id(account, channelName, type);

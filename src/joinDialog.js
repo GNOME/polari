@@ -53,7 +53,7 @@ var JoinDialog = GObject.registerClass({
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._accounts = new Map();
-        this._accountsMonitor.enabledAccounts.forEach(a => {
+        this._accountsMonitor.visibleAccounts.forEach(a => {
             this._accounts.set(a.display_name, a);
         });
         this._accountAddedId =

@@ -29,7 +29,7 @@ var ServerRoomManager = class {
         this._accountsMonitor.connect('account-removed',
                                       this._onAccountRemoved.bind(this));
         this._accountsMonitor.prepare(() => {
-            this._accountsMonitor.enabledAccounts.forEach(a => {
+            this._accountsMonitor.visibleAccounts.forEach(a => {
                 this._onAccountStatusChanged(this._accountsMonitor, a);
             });
         });

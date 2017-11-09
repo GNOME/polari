@@ -356,10 +356,10 @@ class RoomList extends Gtk.ListBox {
                                       this._accountAdded.bind(this));
         this._accountsMonitor.connect('account-removed',
                                       this._accountRemoved.bind(this));
-        this._accountsMonitor.connect('account-enabled', (mon, account) => {
+        this._accountsMonitor.connect('account-shown', (mon, account) => {
             this._updatePlaceholderVisibility(account);
         });
-        this._accountsMonitor.connect('account-disabled', (mon, account) => {
+        this._accountsMonitor.connect('account-hidden', (mon, account) => {
             this._updatePlaceholderVisibility(account);
         });
         this._accountsMonitor.prepare(() => {
@@ -540,7 +540,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _updatePlaceholderVisibility(account) {
-        if (!account.enabled) {
+        if (!account.visible) {
             this._placeholders.get(account).hide();
             return;
         }
