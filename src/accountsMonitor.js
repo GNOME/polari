@@ -1,4 +1,6 @@
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
+const Polari = imports.gi.Polari;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -17,12 +19,13 @@ var AccountsMonitor = class {
         this._app.connect('prepare-shutdown',
                           this._onPrepareShutdown.bind(this));
 
-        this._accountManager = Tp.AccountManager.dup();
-
-        let factory = this._accountManager.get_factory();
+        let factory = new ClientFactory();
         factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
         factory.add_channel_features([Tp.Channel.get_feature_quark_contacts()]);
         factory.add_contact_features([Tp.ContactFeature.ALIAS]);
+
+        this._accountManager = Tp.AccountManager.new_with_factory(factory);
+        this._accountManager.set_default();
 
         this._preparedCallbacks = [];
         this._accountManager.prepare_async(null, this._onPrepared.bind(this));
@@ -144,3 +147,17 @@ var AccountsMonitor = class {
     }
 };
 Signals.addSignalMethods(AccountsMonitor.prototype);
+
+const ClientFactory = GObject.registerClass(
+class ClientFactory extends Polari.ClientFactory {
+    vfunc_create_account(objectPath) {
+        return new PolariAccount({ factory: this,
+                                   dbus_daemon: this.dbus_daemon,
+                                   bus_name: Tp.ACCOUNT_MANAGER_BUS_NAME,
+                                   object_path: objectPath });
+    }
+});
+
+const PolariAccount = GObject.registerClass(
+class PolariAccount extends Tp.Account {
+});
