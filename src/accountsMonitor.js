@@ -35,8 +35,8 @@ var AccountsMonitor = class {
         return [...this._accounts.values()];
     }
 
-    get enabledAccounts() {
-        return [...this._accounts.values()].filter(a => a.enabled);
+    get visibleAccounts() {
+        return [...this._accounts.values()].filter(a => a.visible);
     }
 
     get accountManager() {
@@ -121,6 +121,12 @@ var AccountsMonitor = class {
             account.connect('notify::connection-status', () => {
                 this.emit('account-status-changed', account);
             });
+        account._visibleNotifyId =
+            account.connect('notify::visible', () => {
+                this.emit(account.visible ? 'account-shown'
+                                          : 'account-hidden', account);
+                this.emit('accounts-changed');
+            });
         this._accounts.set(account.object_path, account);
 
         this.emit('account-added', account);
@@ -133,6 +139,9 @@ var AccountsMonitor = class {
 
         account.disconnect(account._statusNotifyId);
         delete account._statusNotifyId;
+
+        account.disconnect(account._visibleNotifyId);
+        delete account._visibleNotifyId;
 
         this.emit('account-removed', account);
         this.emit('accounts-changed');
