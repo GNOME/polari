@@ -22,6 +22,7 @@
 
 G_BEGIN_DECLS
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (TpAutomaticClientFactory, g_object_unref)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (TpMessage, g_object_unref)
 
 G_END_DECLS
