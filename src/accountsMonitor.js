@@ -158,6 +158,31 @@ class ClientFactory extends Polari.ClientFactory {
     }
 });
 
-const PolariAccount = GObject.registerClass(
-class PolariAccount extends Tp.Account {
+const PolariAccount = GObject.registerClass({
+    Properties: {
+        visible: GObject.ParamSpec.boolean('visible',
+                                           'visible',
+                                           'visible',
+                                           GObject.ParamFlags.READWRITE |
+                                           GObject.ParamFlags.EXPLICIT_NOTIFY,
+                                           true)
+    }
+}, class PolariAccount extends Tp.Account {
+    _init(params) {
+        this._visible = true;
+
+        super._init(params);
+    }
+
+    get visible() {
+        return this._visible;
+    }
+
+    set visible(value) {
+        if (this._visible == value)
+            return;
+
+        this._visible = value;
+        this.notify('visible');
+    }
 });
