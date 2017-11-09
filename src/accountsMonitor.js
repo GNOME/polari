@@ -11,7 +11,7 @@ function getDefault() {
     return _singleton;
 }
 
-class AccountsMonitor {
+var AccountsMonitor = class {
     constructor() {
         this._accounts = new Map();
         this._accountSettings = new Map();

@@ -18,11 +18,11 @@ let _singleton = null;
 
 function getDefault() {
     if (_singleton == null)
-        _singleton = new _ServerRoomManager();
+        _singleton = new ServerRoomManager();
     return _singleton;
 }
 
-class _ServerRoomManager {
+var ServerRoomManager = class {
     constructor() {
         this._roomLists = new Map();
 
@@ -98,7 +98,7 @@ class _ServerRoomManager {
         this.emit('loading-changed', list.account);
     }
 };
-Signals.addSignalMethods(_ServerRoomManager.prototype);
+Signals.addSignalMethods(ServerRoomManager.prototype);
 
 
 const RoomListColumn = {

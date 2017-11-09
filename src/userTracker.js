@@ -17,7 +17,7 @@ function getUserStatusMonitor() {
     return _singleton;
 }
 
-class UserStatusMonitor {
+var UserStatusMonitor = class {
     constructor() {
         this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();

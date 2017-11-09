@@ -11,11 +11,11 @@ let _singleton = null;
 
 function getDefault() {
     if (_singleton == null)
-        _singleton = new _RoomManager();
+        _singleton = new RoomManager();
     return _singleton;
 }
 
-class _RoomManager {
+var RoomManager = class {
     constructor() {
         this._rooms = new Map();
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' })
@@ -201,4 +201,4 @@ class _RoomManager {
             this.emit('room-removed', room);
     }
 };
-Signals.addSignalMethods(_RoomManager.prototype);
+Signals.addSignalMethods(RoomManager.prototype);
