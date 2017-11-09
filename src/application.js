@@ -345,7 +345,7 @@ var Application = GObject.registerClass({
     _openURIs(uris, time) {
         let map = {};
 
-        this._accountsMonitor.enabledAccounts.forEach(a => {
+        this._accountsMonitor.visibleAccounts.forEach(a => {
             let params = a.dup_parameters_vardict().deep_unpack();
             map[a.get_object_path()] = {
                 server: params.server.deep_unpack(),
@@ -658,10 +658,11 @@ var Application = GObject.registerClass({
         action.change_state(GLib.Variant.new('b', !state.get_boolean()));
     }
 
-    _onRemoveConnection(action, parameter){
+    _onRemoveConnection(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
-        account.set_enabled_async(false, () => {
+
+        account.setVisible(false, () => {
             let label = _("%s removed.").format(account.display_name);
             let n = new AppNotifications.UndoNotification(label);
             this.notificationQueue.addNotification(n);
@@ -672,9 +673,7 @@ var Application = GObject.registerClass({
                 });
             });
             n.connect('undo', () => {
-                account.set_enabled_async(true, (a, res) => {
-                    a.set_enabled_finish(res); // TODO: Check for errors
-                });
+                account.setVisible(true, () => {});
             });
         });
     }
