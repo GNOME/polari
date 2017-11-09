@@ -83,6 +83,8 @@ polari = executable('polari', ['polari.c', src_resources, data_resources],
 )
 
 libsources = [
+  'lib/polari-client-factory.c',
+  'lib/polari-client-factory.h',
   'lib/polari-drag-helper.c',
   'lib/polari-drag-helper.h',
   'lib/polari-room.c',
