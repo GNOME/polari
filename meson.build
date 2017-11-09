@@ -11,9 +11,9 @@ i18n = import('i18n')
 
 prefix = get_option('prefix')
 
-bindir = get_option('bindir')
-libdir = get_option('libdir')
-datadir = get_option('datadir')
+bindir = join_paths(prefix, get_option('bindir'))
+libdir = join_paths(prefix, get_option('libdir'))
+datadir = join_paths(prefix, get_option('datadir'))
 
 pkglibdir = join_paths(libdir, meson.project_name())
 pkgdatadir = join_paths(datadir, meson.project_name())

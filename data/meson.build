@@ -20,7 +20,7 @@ if (desktop_file_validate.found())
 endif
 
 service_conf = configuration_data()
-service_conf.set('bindir', join_paths(prefix, bindir))
+service_conf.set('bindir', bindir)
 
 services = [
   'org.freedesktop.Telepathy.Client.Polari.service',

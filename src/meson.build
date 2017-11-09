@@ -25,8 +25,8 @@ exeargs = [
   '-DPACKAGE_NAME="polari"',
   '-DPACKAGE_VERSION="@0@"'.format(meson.project_version()),
   '-DPREFIX="@0@"'.format(prefix),
-  '-DLIBDIR="@0@"'.format(join_paths(prefix, libdir)),
-  '-DPKGLIBDIR="@0@"'.format(join_paths(prefix, pkglibdir))
+  '-DLIBDIR="@0@"'.format(libdir),
+  '-DPKGLIBDIR="@0@"'.format(pkglibdir)
 ]
 polari = executable('polari', ['polari.c', src_resources, data_resources],
   dependencies: [gio, girepository, gjs],
