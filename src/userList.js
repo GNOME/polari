@@ -615,7 +615,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     get numRows() {
-        return this.rows.size;
+        return this._rows.size;
     }
 
     _onDestroy() {
