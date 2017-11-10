@@ -5,15 +5,15 @@ const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gspell = imports.gi.Gspell;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+const Tp = imports.gi.TelepathyGLib;
 
 const ChatView = imports.chatView;
 const EmojiPicker = imports.emojiPicker;
 const IrcParser = imports.ircParser;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
-const TabCompletion = imports.tabCompletion;
-const Tp = imports.gi.TelepathyGLib;
 const PasteManager = imports.pasteManager;
+const TabCompletion = imports.tabCompletion;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;

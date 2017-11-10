@@ -1,10 +1,10 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
 const RoomManager = imports.roomManager;
-const Signals = imports.signals;
 const Utils = imports.utils;
 
 const N_ = s => s;

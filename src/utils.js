@@ -24,8 +24,8 @@ const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
-const Soup = imports.gi.Soup;
 const Secret = imports.gi.Secret;
+const Soup = imports.gi.Soup;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;

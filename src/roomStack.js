@@ -2,13 +2,13 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const ChatView = imports.chatView;
 const EntryArea = imports.entryArea;
-const Lang = imports.lang;
 const RoomManager = imports.roomManager;
 
 var RoomStack = GObject.registerClass({

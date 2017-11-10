@@ -1,12 +1,12 @@
 const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
-const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 
-const Lang = imports.lang;
 const Utils = imports.utils;
 
 const DndTargetType = {

@@ -1,11 +1,11 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const Lang = imports.lang;
 const Polari = imports.gi.Polari;
+const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const Lang = imports.lang;
-const Signals = imports.signals;
 
 let _singleton = null;
 

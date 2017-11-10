@@ -1,14 +1,14 @@
+const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const RoomManager = imports.roomManager;
-const Signals = imports.signals;
 const Utils = imports.utils;
 
 const MS_PER_IDLE = 10; // max time spend in idle

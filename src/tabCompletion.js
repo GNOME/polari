@@ -1,9 +1,9 @@
 const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Pango = imports.gi.Pango;
 
 const IrcParser = imports.ircParser;
-const Lang = imports.lang;
 
 var TabCompletion = class {
     constructor(entry) {

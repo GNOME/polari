@@ -3,22 +3,22 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const Connections = imports.connections;
-const Lang = imports.lang;
+const InitialSetup = imports.initialSetup;
 const MainWindow = imports.mainWindow;
+const NetworksManager = imports.networksManager;
 const PasteManager = imports.pasteManager;
 const RoomManager = imports.roomManager;
 const ServerRoomManager = imports.serverRoomManager;
 const TelepathyClient = imports.telepathyClient;
 const UserTracker = imports.userTracker;
 const Utils = imports.utils;
-const NetworksManager = imports.networksManager;
-const InitialSetup = imports.initialSetup;
 
 const MAX_RETRIES = 3;
 

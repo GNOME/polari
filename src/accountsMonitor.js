@@ -1,8 +1,7 @@
 const Gio = imports.gi.Gio;
-const Tp = imports.gi.TelepathyGLib;
-
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Tp = imports.gi.TelepathyGLib;
 
 let _singleton = null;
 

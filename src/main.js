@@ -15,8 +15,9 @@ pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Gspell', '1', 'Entry');
 pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
-const Application = imports.application;
 const GLib = imports.gi.GLib;
+
+const Application = imports.application;
 
 var LOG_DOMAIN = 'Polari';
 

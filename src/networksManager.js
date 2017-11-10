@@ -1,6 +1,5 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-
 const Signals = imports.signals;
 
 let _singleton = null;

@@ -3,13 +3,13 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
 const JoinDialog = imports.joinDialog;
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const RoomList = imports.roomList; // used in template
 const RoomManager = imports.roomManager;
 const RoomStack = imports.roomStack; // used in template

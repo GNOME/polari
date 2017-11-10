@@ -2,12 +2,11 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
-const Tp = imports.gi.TelepathyGLib;
-const Polari = imports.gi.Polari;
-
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Pango = imports.gi.Pango;
+const Polari = imports.gi.Polari;
+const Tp = imports.gi.TelepathyGLib;
 
 const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 

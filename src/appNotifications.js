@@ -1,9 +1,8 @@
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
-
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Pango = imports.gi.Pango;
 
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;

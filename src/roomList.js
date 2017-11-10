@@ -3,10 +3,10 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const Lang = imports.lang;
 const RoomManager = imports.roomManager;
 
 function _onPopoverVisibleChanged(popover) {

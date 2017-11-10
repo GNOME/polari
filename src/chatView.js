@@ -1,20 +1,20 @@
 const Gdk = imports.gi.Gdk;
-const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
-const Utils = imports.utils;
-const UserTracker = imports.userTracker;
 const UserList = imports.userList;
+const UserTracker = imports.userTracker;
+const Utils = imports.utils;
 
 var MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
