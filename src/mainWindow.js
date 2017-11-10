@@ -9,7 +9,7 @@ const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const JoinDialog = imports.joinDialog;
+const {JoinDialog} = imports.joinDialog;
 const RoomList = imports.roomList; // used in template
 const RoomManager = imports.roomManager;
 const RoomStack = imports.roomStack; // used in template
@@ -363,7 +363,7 @@ var MainWindow = GObject.registerClass({
     }
 
     showJoinRoomDialog() {
-        let dialog = new JoinDialog.JoinDialog({ transient_for: this });
+        let dialog = new JoinDialog({ transient_for: this });
         dialog.show();
     }
 

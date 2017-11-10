@@ -7,8 +7,8 @@ const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const ChatView = imports.chatView;
-const EntryArea = imports.entryArea;
+const {ChatView} = imports.chatView;
+const {EntryArea} = imports.entryArea;
 const RoomManager = imports.roomManager;
 
 var RoomStack = GObject.registerClass({
@@ -196,11 +196,11 @@ class RoomView extends Gtk.Overlay {
         if (room.type == Tp.HandleType.CONTACT)
             this.add_overlay(new SavePasswordConfirmationBar(room));
 
-        this._view = new ChatView.ChatView(room);
+        this._view = new ChatView(room);
         box.add(this._view);
 
-        this._entryArea = new EntryArea.EntryArea({ room: room,
-                                                    sensitive: false });
+        this._entryArea = new EntryArea({ room: room,
+                                          sensitive: false });
         box.add(this._entryArea);
 
         this._view.bind_property('max-nick-chars',

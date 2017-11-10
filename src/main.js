@@ -17,7 +17,7 @@ pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
 const GLib = imports.gi.GLib;
 
-const Application = imports.application;
+const {Application} = imports.application;
 
 var LOG_DOMAIN = 'Polari';
 
@@ -49,7 +49,7 @@ function main(args) {
     if (GLib.log_writer_is_journald(2))
         GLib.setenv('G_MESSAGES_DEBUG', LOG_DOMAIN, false);
 
-    let application = new Application.Application();
+    let application = new Application();
     if (GLib.getenv('POLARI_PERSIST'))
         application.hold();
     return application.run(args);

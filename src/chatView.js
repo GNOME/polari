@@ -11,8 +11,8 @@ const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
-const PasteManager = imports.pasteManager;
-const UserList = imports.userList;
+const {DropTargetIface} = imports.pasteManager;
+const {UserPopover} = imports.userList;
 const UserTracker = imports.userTracker;
 const Utils = imports.utils;
 
@@ -285,9 +285,9 @@ var HoverFilterTag = GObject.registerClass({
 });
 
 var ChatView = GObject.registerClass({
-    Implements: [PasteManager.DropTargetIface],
+    Implements: [DropTargetIface],
     Properties: {
-        'can-drop': GObject.ParamSpec.override('can-drop', PasteManager.DropTargetIface),
+        'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
         'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
                                                  'max-nick-chars',
                                                  'max-nick-chars',
@@ -377,7 +377,7 @@ var ChatView = GObject.registerClass({
         this._autoscroll = true;
 
         this._app = Gio.Application.get_default();
-        PasteManager.DropTargetIface.addTargets(this, this._view);
+        DropTargetIface.addTargets(this, this._view);
 
         this._app.connect('room-focus-changed',
                           Lang.bind(this, this._checkMessages));
@@ -1359,9 +1359,9 @@ var ChatView = GObject.registerClass({
         let actualNickName = view.get_buffer().get_slice(start, end, false);
 
         if (!tag._popover)
-            tag._popover = new UserList.UserPopover({ relative_to: this._view,
-                                                      userTracker: this._userTracker,
-                                                      room: this._room });
+            tag._popover = new UserPopover({ relative_to: this._view,
+                                             userTracker: this._userTracker,
+                                             room: this._room });
 
         tag._popover.nickname = actualNickName;
 

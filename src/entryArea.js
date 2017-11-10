@@ -10,10 +10,10 @@ const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 
 const ChatView = imports.chatView;
-const EmojiPicker = imports.emojiPicker;
-const IrcParser = imports.ircParser;
-const PasteManager = imports.pasteManager;
-const TabCompletion = imports.tabCompletion;
+const {DropTargetIface} = imports.pasteManager;
+const {EmojiPicker} = imports.emojiPicker;
+const {IrcParser} = imports.ircParser;
+const {TabCompletion} = imports.tabCompletion;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -23,9 +23,9 @@ let _emojiPicker = null;
 let _nickPopover = null;
 
 var ChatEntry = GObject.registerClass({
-    Implements: [PasteManager.DropTargetIface],
+    Implements: [DropTargetIface],
     Properties: {
-        'can-drop': GObject.ParamSpec.override('can-drop', PasteManager.DropTargetIface),
+        'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
     },
     Signals: { 'text-pasted': { param_types: [GObject.TYPE_STRING,
                                               GObject.TYPE_INT] },
@@ -35,7 +35,7 @@ var ChatEntry = GObject.registerClass({
     _init(params) {
         super._init(params);
 
-        PasteManager.DropTargetIface.addTargets(this, this);
+        DropTargetIface.addTargets(this, this);
 
         this._emojiPickedId = 0;
 
@@ -67,7 +67,7 @@ var ChatEntry = GObject.registerClass({
             return;
 
         if (!_emojiPicker)
-            _emojiPicker = new EmojiPicker.EmojiPicker();
+            _emojiPicker = new EmojiPicker();
 
         if (!this._emojiPickedId)
             this._emojiPickedId = _emojiPicker.connect('emoji-picked',
@@ -204,7 +204,7 @@ var EntryArea = GObject.registerClass({
         this._room = params.room;
         delete params.room;
 
-        this._ircParser = new IrcParser.IrcParser(this._room);
+        this._ircParser = new IrcParser(this._room);
         this._maxNickChars = ChatView.MAX_NICK_CHARS;
         this._nickChangedId = 0;
 
@@ -301,7 +301,7 @@ var EntryArea = GObject.registerClass({
         if (!this._room)
             return;
 
-        this._completion = new TabCompletion.TabCompletion(this._chatEntry);
+        this._completion = new TabCompletion(this._chatEntry);
         this._membersChangedId =
             this._room.connect('members-changed',
                                Lang.bind(this, this._updateCompletions));

@@ -10,13 +10,13 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const Connections = imports.connections;
-const InitialSetup = imports.initialSetup;
-const MainWindow = imports.mainWindow;
+const {InitialSetupWindow} = imports.initialSetup;
+const {MainWindow} = imports.mainWindow;
 const NetworksManager = imports.networksManager;
-const PasteManager = imports.pasteManager;
+const {PasteManager} = imports.pasteManager;
 const RoomManager = imports.roomManager;
 const ServerRoomManager = imports.serverRoomManager;
-const TelepathyClient = imports.telepathyClient;
+const {TelepathyClient} = imports.telepathyClient;
 const UserTracker = imports.userTracker;
 const Utils = imports.utils;
 
@@ -263,7 +263,7 @@ var Application = GObject.registerClass({
             });
         });
 
-        this.pasteManager = new PasteManager.PasteManager();
+        this.pasteManager = new PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();
         this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
@@ -285,14 +285,14 @@ var Application = GObject.registerClass({
 
         if (!this.active_window) {
             if (this._needsInitialSetup()) {
-                let setupDialog = new InitialSetup.InitialSetupWindow({ application: this });
+                let setupDialog = new InitialSetupWindow({ application: this });
                 this._windowRemovedId = this.connect('window-removed', () => {
                     this.disconnect(this._windowRemovedId);
                     this._windowRemovedId = 0;
                     this.activate();
                 });
             } else {
-                let window = new MainWindow.MainWindow({ application: this });
+                let window = new MainWindow({ application: this });
                 window.connect('destroy', () => {
                     if (this._settings.get_boolean('run-in-background'))
                         return;
@@ -311,7 +311,7 @@ var Application = GObject.registerClass({
     vfunc_window_added(window) {
         super.vfunc_window_added(window);
 
-        if (!(window instanceof MainWindow.MainWindow))
+        if (!(window instanceof MainWindow))
             return;
 
         let action = this.lookup_action('leave-current-room');
@@ -722,7 +722,7 @@ var Application = GObject.registerClass({
             account_manager: this._accountsMonitor.accountManager,
             uniquify_name: false
         };
-        this._telepathyClient = new TelepathyClient.TelepathyClient(params);
+        this._telepathyClient = new TelepathyClient(params);
     }
 
     _onShowHelp() {
