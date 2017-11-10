@@ -29,7 +29,6 @@ const Secret = imports.gi.Secret;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
-const Signals = imports.signals;
 
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account', Secret.SchemaFlags.NONE,

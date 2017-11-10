@@ -12,7 +12,6 @@ const Tpl = imports.gi.TelepathyLogger;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PasteManager = imports.pasteManager;
-const Signals = imports.signals;
 const Utils = imports.utils;
 const UserTracker = imports.userTracker;
 const UserList = imports.userList;

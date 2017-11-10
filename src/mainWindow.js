@@ -7,14 +7,13 @@ const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
 const AccountsMonitor = imports.accountsMonitor;
-const AppNotifications = imports.appNotifications;
 const JoinDialog = imports.joinDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
-const RoomList = imports.roomList;
+const RoomList = imports.roomList; // used in template
 const RoomManager = imports.roomManager;
-const RoomStack = imports.roomStack;
-const UserList = imports.userList;
+const RoomStack = imports.roomStack; // used in template
+const UserList = imports.userList; // used in template
 const Utils = imports.utils;
 
 

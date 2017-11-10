@@ -1,7 +1,6 @@
 const Polari = imports.gi.Polari;
 const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
-const Signals = imports.signals;
 const GObject = imports.gi.GObject;
 const Utils = imports.utils;
 const Gio = imports.gi.Gio;

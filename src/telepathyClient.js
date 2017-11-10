@@ -7,7 +7,6 @@ const Tp = imports.gi.TelepathyGLib;
 const AccountsMonitor = imports.accountsMonitor;
 const Lang = imports.lang;
 const RoomManager = imports.roomManager;
-const Signals = imports.signals;
 const Utils = imports.utils;
 
 const SASLAuthenticationIface = '<node> \

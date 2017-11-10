@@ -2,11 +2,9 @@ const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
-const Tp = imports.gi.TelepathyGLib;
 const GObject = imports.gi.GObject;
 
 const AccountsMonitor = imports.accountsMonitor;
-const Connections = imports.connections;
 const Lang = imports.lang;
 const Utils = imports.utils;
 
