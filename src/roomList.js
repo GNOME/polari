@@ -3,7 +3,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 
 const {AccountsMonitor} = imports.accountsMonitor;
@@ -31,12 +30,10 @@ var RoomRow = GObject.registerClass({
         this._icon.visible = room.icon != null;
 
         this._eventBox.connect('button-release-event',
-                               Lang.bind(this, this._onButtonRelease));
-        this.connect('key-press-event',
-                     Lang.bind(this, this._onKeyPress));
+                               this._onButtonRelease.bind(this));
+        this.connect('key-press-event', this._onKeyPress.bind(this));
 
-        room.connect('notify::channel',
-                     Lang.bind(this, this._onChannelChanged));
+        room.connect('notify::channel', this._onChannelChanged.bind(this));
         room.bind_property('display-name', this._roomLabel, 'label',
                            GObject.BindingFlags.SYNC_CREATE);
 
@@ -94,9 +91,9 @@ var RoomRow = GObject.registerClass({
         if (!this._room.channel)
             return;
         this._room.channel.connect('message-received',
-                                   Lang.bind(this, this._updatePending));
+                                   this._updatePending.bind(this));
         this._room.channel.connect('pending-message-removed',
-                                   Lang.bind(this, this._updatePending));
+                                   this._updatePending.bind(this));
         this._updatePending();
     }
 
@@ -187,16 +184,16 @@ var RoomListHeader = GObject.registerClass({
 
         let displayNameChangedId =
             this._account.connect('notify::display-name',
-                                  Lang.bind(this, this._onDisplayNameChanged));
+                                  this._onDisplayNameChanged.bind(this));
         this._onDisplayNameChanged();
 
         let connectionStatusChangedId =
             this._account.connect('notify::connection-status',
-                                  Lang.bind(this, this._onConnectionStatusChanged));
+                                  this._onConnectionStatusChanged.bind(this));
 
         let presenceChangedId =
             this._account.connect('notify::requested-presence-type',
-                                  Lang.bind(this, this._onRequestedPresenceChanged));
+                                  this._onRequestedPresenceChanged.bind(this));
         this._onRequestedPresenceChanged();
 
         this.connect('destroy', () => {
@@ -348,17 +345,17 @@ class RoomList extends Gtk.ListBox {
     _init(params) {
         super._init(params);
 
-        this.set_header_func(Lang.bind(this, this._updateHeader));
-        this.set_sort_func(Lang.bind(this, this._sort));
+        this.set_header_func(this._updateHeader.bind(this));
+        this.set_sort_func(this._sort.bind(this));
 
         this._placeholders = new Map();
         this._roomRows = new Map();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-added',
-                                      Lang.bind(this, this._accountAdded));
+                                      this._accountAdded.bind(this));
         this._accountsMonitor.connect('account-removed',
-                                      Lang.bind(this, this._accountRemoved));
+                                      this._accountRemoved.bind(this));
         this._accountsMonitor.connect('account-enabled', (mon, account) => {
             this._updatePlaceholderVisibility(account);
         });
@@ -373,9 +370,9 @@ class RoomList extends Gtk.ListBox {
 
         this._roomManager = RoomManager.getDefault();
         this._roomManager.connect('room-added',
-                                  Lang.bind(this, this._roomAdded));
+                                  this._roomAdded.bind(this));
         this._roomManager.connect('room-removed',
-                                  Lang.bind(this, this._roomRemoved));
+                                  this._roomRemoved.bind(this));
         this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
 
         let app = Gio.Application.get_default();
@@ -412,7 +409,7 @@ class RoomList extends Gtk.ListBox {
 
         let toplevel = this.get_toplevel();
         toplevel.connect('notify::active-room',
-                         Lang.bind(this, this._activeRoomChanged));
+                         this._activeRoomChanged.bind(this));
         this._activeRoomChanged();
     }
 

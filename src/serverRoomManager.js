@@ -2,7 +2,6 @@ const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
@@ -26,9 +25,9 @@ var ServerRoomManager = class {
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
-                                      Lang.bind(this, this._onAccountStatusChanged));
+                                      this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-removed',
-                                      Lang.bind(this, this._onAccountRemoved));
+                                      this._onAccountRemoved.bind(this));
         this._accountsMonitor.prepare(() => {
             this._accountsMonitor.enabledAccounts.forEach(a => {
                 this._onAccountStatusChanged(this._accountsMonitor, a);
@@ -70,9 +69,8 @@ var ServerRoomManager = class {
             }
             roomList.start();
         });
-        roomList.connect('got-room', Lang.bind(this, this._onGotRoom));
-        roomList.connect('notify::listing',
-                         Lang.bind(this, this._onListingChanged));
+        roomList.connect('got-room', this._onGotRoom.bind(this));
+        roomList.connect('notify::listing', this._onListingChanged.bind(this));
         this._roomLists.set(account, { list: roomList, rooms: [] });
     }
 
@@ -189,7 +187,7 @@ var ServerRoomList = GObject.registerClass({
 
         this._manager = ServerRoomManager.getDefault();
         this._manager.connect('loading-changed',
-                              Lang.bind(this, this._onLoadingChanged));
+                              this._onLoadingChanged.bind(this));
     }
 
     get can_join() {

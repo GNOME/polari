@@ -1,7 +1,6 @@
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Tp = imports.gi.TelepathyGLib;
 
 const {AccountsMonitor} = imports.accountsMonitor;
@@ -88,16 +87,15 @@ var ConnectionsList = GObject.registerClass({
         this.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
         this._list = new Gtk.ListBox({ visible: true });
-        this._list.connect('row-activated',
-                           Lang.bind(this, this._onRowActivated));
+        this._list.connect('row-activated', this._onRowActivated.bind(this));
         this.add(this._list);
 
         this._rows = new Map();
 
         this._filterTerms = [];
-        this._list.set_filter_func(Lang.bind(this, this._filterRows));
-        this._list.set_header_func(Lang.bind(this, this._updateHeader));
-        this._list.set_sort_func(Lang.bind(this, this._sort));
+        this._list.set_filter_func(this._filterRows.bind(this));
+        this._list.set_header_func(this._updateHeader.bind(this));
+        this._list.set_sort_func(this._sort.bind(this));
 
         let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
                                         valign: Gtk.Align.CENTER,
@@ -123,7 +121,7 @@ var ConnectionsList = GObject.registerClass({
 
         this._networksManager = NetworksManager.getDefault();
         this._networksManager.connect('changed',
-                                      Lang.bind(this, this._networksChanged));
+                                      this._networksChanged.bind(this));
         this._networksChanged();
     }
 
@@ -273,15 +271,15 @@ var ConnectionDetails = GObject.registerClass({
         super._init(params);
 
         this._nameEntry.connect('changed',
-                                Lang.bind(this, this._onCanConfirmChanged));
+                                this._onCanConfirmChanged.bind(this));
         this._serverEntry.connect('changed',
-                                  Lang.bind(this, this._onCanConfirmChanged));
+                                  this._onCanConfirmChanged.bind(this));
         this._nickEntry.connect('changed',
-                                Lang.bind(this, this._onCanConfirmChanged));
+                                this._onCanConfirmChanged.bind(this));
         this._realnameEntry.connect('changed',
-                                    Lang.bind(this, this._onCanConfirmChanged));
+                                    this._onCanConfirmChanged.bind(this));
         this._sslCheckbox.connect('toggled',
-                                  Lang.bind(this, this._onCanConfirmChanged));
+                                  this._onCanConfirmChanged.bind(this));
 
         let realnameStore = new Gtk.ListStore();
         realnameStore.set_column_types([GObject.TYPE_STRING]);
@@ -501,7 +499,7 @@ var ConnectionProperties = GObject.registerClass({
         this.set_default_response(Gtk.ResponseType.OK);
 
         account.connect('notify::connection-status',
-                        Lang.bind(this, this._syncErrorMessage));
+                        this._syncErrorMessage.bind(this));
         this._syncErrorMessage(account);
     }
 

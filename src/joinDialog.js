@@ -3,7 +3,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 
 const {AccountsMonitor} = imports.accountsMonitor;
 const Utils = imports.utils;
@@ -97,11 +96,11 @@ var JoinDialog = GObject.registerClass({
         });
 
         this._connectionCombo.connect('changed',
-                                      Lang.bind(this, this._onAccountChanged));
+                                      this._onAccountChanged.bind(this));
         this._connectionCombo.sensitive = false;
 
         this._serverRoomList.connect('notify::can-join',
-                                     Lang.bind(this, this._updateCanJoin));
+                                     this._updateCanJoin.bind(this));
     }
 
     _setupConnectionPage() {
@@ -117,9 +116,9 @@ var JoinDialog = GObject.registerClass({
         });
 
         this._connectionsList.connect('account-created',
-                                      Lang.bind(this, this._onAccountCreated));
+                                      this._onAccountCreated.bind(this));
         this._details.connect('account-created',
-                              Lang.bind(this, this._onAccountCreated));
+                              this._onAccountCreated.bind(this));
 
         this._customToggle.connect('notify::active', () => {
             let isCustom = this._customToggle.active;

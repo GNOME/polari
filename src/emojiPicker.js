@@ -2,7 +2,6 @@ const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 
 const modifierBlacklist = [
     'child',
@@ -212,7 +211,7 @@ var EmojiPicker = GObject.registerClass({
         });
 
         this._adjustment.connect('value-changed',
-                                 Lang.bind(this, this._updateIndicators));
+                                 this._updateIndicators.bind(this));
 
         this.connect('map', () => {
             entry.text = '';

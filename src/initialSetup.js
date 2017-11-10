@@ -2,7 +2,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 
 const Utils = imports.utils;
 
@@ -35,7 +34,7 @@ var InitialSetupWindow = GObject.registerClass({
         this.connect('destroy', () => { this._unsetAccount(); });
 
         this._serverRoomList.connect('notify::can-join',
-                                     Lang.bind(this, this._updateNextSensitivity));
+                                     this._updateNextSensitivity.bind(this));
 
         this._nextButton.connect('clicked', () => {
             if (this._page == SetupPage.CONNECTION) {
@@ -58,7 +57,7 @@ var InitialSetupWindow = GObject.registerClass({
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._networkMonitor.connect('notify::network-available',
-                                     Lang.bind(this, this._onNetworkAvailableChanged));
+                                     this._onNetworkAvailableChanged.bind(this));
         this._onNetworkAvailableChanged();
     }
 

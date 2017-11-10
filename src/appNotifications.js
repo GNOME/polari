@@ -1,6 +1,5 @@
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Pango = imports.gi.Pango;
 
@@ -16,7 +15,7 @@ class AppNotification extends Gtk.Revealer {
         super._init({ reveal_child: true,
                       transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN });
         this.connect('notify::child-revealed',
-                     Lang.bind(this, this._onChildRevealed));
+                     this._onChildRevealed.bind(this));
     }
 
     close() {
@@ -34,7 +33,7 @@ class MessageNotification extends AppNotification {
     _init(label, iconName) {
         super._init();
 
-        Mainloop.timeout_add_seconds(TIMEOUT, Lang.bind(this, this.close));
+        Mainloop.timeout_add_seconds(TIMEOUT, this.close.bind(this));
 
         this._box = new Gtk.Box({ spacing: 12 });
 
@@ -46,7 +45,7 @@ class MessageNotification extends AppNotification {
 
         let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
         closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic' });
-        closeButton.connect('clicked', Lang.bind(this, this.close));
+        closeButton.connect('clicked', this.close.bind(this));
         this._box.pack_end(closeButton, false, false, 0);
 
         this.add(this._box);
@@ -100,7 +99,7 @@ class CommandOutputNotification extends AppNotification {
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         Mainloop.timeout_add_seconds(COMMAND_OUTPUT_REVEAL_TIME,
-                                     Lang.bind(this, this.close));
+                                     this.close.bind(this));
     }
 });
 
@@ -165,7 +164,7 @@ class NotificationQueue extends Gtk.Frame {
     addNotification(notification) {
         this._grid.add(notification);
 
-        notification.connect('destroy', Lang.bind(this, this._onChildDestroy));
+        notification.connect('destroy', this._onChildDestroy.bind(this));
         this.show();
     }
 

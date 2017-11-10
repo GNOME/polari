@@ -3,7 +3,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
@@ -156,14 +155,14 @@ var MainWindow = GObject.registerClass({
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('accounts-changed',
-                                      Lang.bind(this, this._onAccountsChanged));
+                                      this._onAccountsChanged.bind(this));
         this._onAccountsChanged(this._accountsMonitor);
 
         this._roomManager = RoomManager.getDefault();
         this._roomManager.connect('rooms-loaded',
-                                  Lang.bind(this, this._onRoomsLoaded));
+                                  this._onRoomsLoaded.bind(this));
         this._roomManager.connect('room-removed',
-                                  Lang.bind(this, this._onRoomRemoved));
+                                  this._onRoomRemoved.bind(this));
         this._onRoomsLoaded();
 
         this._updateUserListLabel();
@@ -179,7 +178,7 @@ var MainWindow = GObject.registerClass({
         });
 
         this._gtkSettings.connect('notify::gtk-decoration-layout',
-                                  Lang.bind(this, this._updateDecorations));
+                                  this._updateDecorations.bind(this));
         this._updateDecorations();
 
         this._closeConfirmationDialog.transient_for = this;
@@ -191,10 +190,10 @@ var MainWindow = GObject.registerClass({
             this.destroy();
         });
 
-        this.connect('window-state-event', Lang.bind(this, this._onWindowStateEvent));
-        this.connect('size-allocate', Lang.bind(this, this._onSizeAllocate));
-        this.connect('destroy', Lang.bind(this, this._onDestroy));
-        this.connect('delete-event', Lang.bind(this, this._onDeleteEvent));
+        this.connect('window-state-event', this._onWindowStateEvent.bind(this));
+        this.connect('size-allocate', this._onSizeAllocate.bind(this));
+        this.connect('destroy', this._onDestroy.bind(this));
+        this.connect('delete-event', this._onDeleteEvent.bind(this));
         this.connect('notify::active-room', () => {
             this._updateUserListLabel();
         });
@@ -325,13 +324,13 @@ var MainWindow = GObject.registerClass({
 
         this._displayNameChangedId =
             this._room.connect('notify::display-name',
-                               Lang.bind(this, this._updateTitlebar));
+                               this._updateTitlebar.bind(this));
         this._topicChangedId =
             this._room.connect('notify::topic',
-                               Lang.bind(this, this._updateTitlebar));
+                               this._updateTitlebar.bind(this));
         this._membersChangedId =
             this._room.connect('members-changed',
-                               Lang.bind(this, this._updateUserListLabel));
+                               this._updateUserListLabel.bind(this));
         this._channelChangedId =
             this._room.connect('notify::channel', () => {
                 this._updateUserListLabel();

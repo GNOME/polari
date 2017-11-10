@@ -3,7 +3,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -151,38 +150,38 @@ var Application = GObject.registerClass({
 
         let actionEntries = [
           { name: 'show-join-dialog',
-            activate: Lang.bind(this, this._onShowJoinDialog),
+            activate: this._onShowJoinDialog.bind(this),
             accels: ['<Primary>n'] },
           { name: 'join-room',
-            activate: Lang.bind(this, this._onJoinRoom),
+            activate: this._onJoinRoom.bind(this),
             parameter_type: GLib.VariantType.new('(ssu)') },
           { name: 'message-user',
-            activate: Lang.bind(this, this._onMessageUser),
+            activate: this._onMessageUser.bind(this),
             parameter_type: GLib.VariantType.new('(sssu)') },
           { name: 'leave-room',
             parameter_type: GLib.VariantType.new('(ss)') },
           { name: 'leave-current-room',
-            activate: Lang.bind(this, this._onLeaveCurrentRoom),
+            activate: this._onLeaveCurrentRoom.bind(this),
             create_hook: (a) => { a.enabled = false; },
             accels: ['<Primary>w'] },
           { name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)') },
           { name: 'connect-account',
-            activate: Lang.bind(this, this._onConnectAccount),
+            activate: this._onConnectAccount.bind(this),
             parameter_type: GLib.VariantType.new('o') },
           { name: 'reconnect-account',
-            activate: Lang.bind(this, this._onConnectAccount),
+            activate: this._onConnectAccount.bind(this),
             parameter_type: GLib.VariantType.new('o') },
           { name: 'user-list',
-            activate: Lang.bind(this, this._onToggleAction),
-            create_hook: Lang.bind(this, this._userListCreateHook),
+            activate: this._onToggleAction.bind(this),
+            create_hook: this._userListCreateHook.bind(this),
             state: GLib.Variant.new('b', false),
             accels: ['F9', '<Primary>u'] },
           { name: 'remove-connection',
-            activate: Lang.bind(this, this._onRemoveConnection),
+            activate: this._onRemoveConnection.bind(this),
             parameter_type: GLib.VariantType.new('o') },
           { name: 'edit-connection',
-            activate: Lang.bind(this, this._onEditConnection),
+            activate: this._onEditConnection.bind(this),
             parameter_type: GLib.VariantType.new('o') },
           { name: 'save-identify-password',
             parameter_type: GLib.VariantType.new('o') },
@@ -191,14 +190,14 @@ var Application = GObject.registerClass({
           { name: 'show-emoji-picker',
             accels: ['<Primary>e'] },
           { name: 'start-client',
-            activate: Lang.bind(this, this._onStartClient) },
+            activate: this._onStartClient.bind(this) },
           { name: 'help',
-            activate: Lang.bind(this, this._onShowHelp),
+            activate: this._onShowHelp.bind(this),
             accels: ['F1'] },
           { name: 'about',
-            activate: Lang.bind(this, this._onShowAbout) },
+            activate: this._onShowAbout.bind(this) },
           { name: 'quit',
-            activate: Lang.bind(this, this._onQuit),
+            activate: this._onQuit.bind(this),
             accels: ['<Primary>q'] },
           { name: 'next-room',
             accels: ['<Primary>Page_Down', '<Alt>Down'] },
@@ -239,7 +238,7 @@ var Application = GObject.registerClass({
         this.add_action(action);
 
         this._settings.connect('changed::run-in-background',
-                               Lang.bind(this, this._onRunInBackgroundChanged));
+                               this._onRunInBackgroundChanged.bind(this));
         this._onRunInBackgroundChanged();
 
         for (let i = 1; i < 10; i++)
@@ -254,7 +253,7 @@ var Application = GObject.registerClass({
         this._serverRoomManager = ServerRoomManager.getDefault();
 
         this._accountsMonitor.connect('account-status-changed',
-                                      Lang.bind(this, this._onAccountStatusChanged));
+                                      this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-added', (am, account) => {
             // Reset nickname at startup
             let accountName = this._getTrimmedAccountName(account);
@@ -321,7 +320,7 @@ var Application = GObject.registerClass({
         action.enabled = window.active_room != null;
 
         window.connect('active-room-state-changed',
-                       Lang.bind(this, this._updateUserListAction));
+                       this._updateUserListAction.bind(this));
         this._updateUserListAction();
     }
 

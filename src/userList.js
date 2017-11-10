@@ -2,7 +2,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Pango = imports.gi.Pango;
 const Polari = imports.gi.Polari;
@@ -35,7 +34,7 @@ class UserListPopover extends Gtk.Popover {
 
         let toplevel = this.get_toplevel();
         toplevel.connect('notify::active-room',
-                         Lang.bind(this, this._activeRoomChanged));
+                         this._activeRoomChanged.bind(this));
     }
 
     _createWidget() {
@@ -50,8 +49,7 @@ class UserListPopover extends Gtk.Popover {
         this._box.add(this._userListBin);
 
         this._entry = new Gtk.SearchEntry({ primary_icon_name: 'avatar-default-symbolic' });
-        this._entry.connect('search-changed',
-                            Lang.bind(this, this._updateFilter));
+        this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.add(this._entry);
 
         this._box.show_all();
@@ -77,7 +75,7 @@ class UserListPopover extends Gtk.Popover {
         this._userListBin.add(this._userList);
 
         this._userList.vadjustment.connect('changed',
-                                           Lang.bind(this, this._updateEntryVisibility));
+                                           this._updateEntryVisibility.bind(this));
         this._updateEntryVisibility();
     }
 
@@ -131,7 +129,7 @@ var UserDetails = GObject.registerClass({
         this.user = user;
 
         this._messageButton.connect('clicked',
-                                    Lang.bind(this, this._onMessageButtonClicked));
+                                    this._onMessageButtonClicked.bind(this));
 
         this._updateButtonVisibility();
         this._detailsGrid.hide();
@@ -164,8 +162,9 @@ var UserDetails = GObject.registerClass({
         this._user = user;
 
         if (this._user)
-            this._selfContactChangedId = this._user.connection.connect('notify::self-contact',
-                                                    Lang.bind(this, this._updateButtonVisibility));
+            this._selfContactChangedId =
+                this._user.connection.connect('notify::self-contact',
+                                              this._updateButtonVisibility.bind(this));
 
         if (this.expanded)
             this._expand();
@@ -212,7 +211,7 @@ var UserDetails = GObject.registerClass({
 
         if (this._user)
             this._user.request_contact_info_async(this._cancellable,
-                                              Lang.bind(this, this._onContactInfoReady));
+                                                  this._onContactInfoReady.bind(this));
         //TODO: else use this._nickname to query tracker
         else
             this._revealDetails();
@@ -380,11 +379,13 @@ var UserPopover = GObject.registerClass({
             this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
         this._roomStatusChangedId =
             this._userTracker.watchRoomStatus(this._room, this._basenick,
-                                        Lang.bind(this, this._onNickStatusChanged));
+                                              this._onNickStatusChanged.bind(this));
 
         if (this._globalStatusChangedId > 0)
             this._userTracker.disconnect(this._globalStatusChangedId);
-        this._globalStatusChangedId = this._userTracker.connect("status-changed::" + basenick, Lang.bind(this, this._onStatusChanged));
+        this._globalStatusChangedId =
+            this._userTracker.connect("status-changed::" + basenick,
+                                      this._onStatusChanged.bind(this));
 
         if (this._contactsChangedId > 0)
             this._userTracker.disconnect(this._contactsChangedId);
@@ -439,10 +440,10 @@ class UserListRow extends Gtk.ListBoxRow {
             this._revealer.reveal_child = false;
         });
         this.connect('state-flags-changed',
-                     Lang.bind(this, this._updateArrowVisibility));
+                     this._updateArrowVisibility.bind(this));
 
         this._revealer.connect('notify::reveal-child',
-                               Lang.bind(this, this._onExpandedChanged));
+                               this._onExpandedChanged.bind(this));
     }
 
     get user() {
@@ -567,19 +568,17 @@ class UserList extends Gtk.ScrolledWindow {
 
         this._updateHeightId = 0;
         this._list.connect('size-allocate',
-                           Lang.bind(this, this._updateContentHeight));
+                           this._updateContentHeight.bind(this));
 
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
         /* see https://bugzilla.gnome.org/show_bug.cgi?id=725403 */
-        //this._list.set_header_func(Lang.bind(this, this._updateHeader));
+        //this._list.set_header_func(this._updateHeader.bind(this));
         this._filter = '';
-        this._list.set_filter_func(Lang.bind(this, this._filterRows));
-        this._list.set_sort_func(Lang.bind(this, this._sort));
+        this._list.set_filter_func(this._filterRows.bind(this));
+        this._list.set_sort_func(this._sort.bind(this));
 
-        this._list.connect('row-activated',
-                           Lang.bind(this, this._onRowActivated));
-        this.connect('destroy',
-                     Lang.bind(this, this._onDestroy));
+        this._list.connect('row-activated', this._onRowActivated.bind(this));
+        this.connect('destroy', this._onDestroy.bind(this));
 
         this._room = room;
         this._rows = new Map();
@@ -587,24 +586,24 @@ class UserList extends Gtk.ScrolledWindow {
 
         let roomSignals = [
             { name: 'member-renamed',
-              handler: Lang.bind(this, this._onMemberRenamed) },
+              handler: this._onMemberRenamed.bind(this) },
             { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberRemoved) },
+              handler: this._onMemberRemoved.bind(this) },
             { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberRemoved) },
+              handler: this._onMemberRemoved.bind(this) },
             { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberRemoved) },
+              handler: this._onMemberRemoved.bind(this) },
             { name: 'member-left',
-              handler: Lang.bind(this, this._onMemberRemoved) },
+              handler: this._onMemberRemoved.bind(this) },
             { name: 'member-joined',
-              handler: Lang.bind(this, this._onMemberJoined) },
+              handler: this._onMemberJoined.bind(this) },
             /*
             // see https://bugzilla.gnome.org/show_bug.cgi?id=725403
             { name: 'members-changed',
-              handler: Lang.bind(this, this._onMembersChanged) },
+              handler: this._onMembersChanged.bind(this) },
             */
             { name: 'notify::channel',
-              handler: Lang.bind(this, this._onChannelChanged) }
+              handler: this._onChannelChanged.bind(this) }
         ];
         this._roomSignals = [];
         roomSignals.forEach(signal => {

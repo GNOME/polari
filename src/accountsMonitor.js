@@ -1,5 +1,4 @@
 const Gio = imports.gi.Gio;
-const Lang = imports.lang;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -16,7 +15,7 @@ var AccountsMonitor = class {
 
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown',
-                          Lang.bind(this, this._onPrepareShutdown));
+                          this._onPrepareShutdown.bind(this));
 
         this._accountManager = Tp.AccountManager.dup();
 
@@ -26,8 +25,7 @@ var AccountsMonitor = class {
         factory.add_contact_features([Tp.ContactFeature.ALIAS]);
 
         this._preparedCallbacks = [];
-        this._accountManager.prepare_async(null,
-                                           Lang.bind(this, this._onPrepared));
+        this._accountManager.prepare_async(null, this._onPrepared.bind(this));
     }
 
     get accounts() {
@@ -75,7 +73,7 @@ var AccountsMonitor = class {
             return; // no point in carrying on
         }
 
-        am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
+        am.dup_valid_accounts().forEach(this._addAccount.bind(this));
 
         am.connect('account-validity-changed', (am, account, valid) => {
             if (valid)
@@ -86,10 +84,8 @@ var AccountsMonitor = class {
         am.connect('account-removed', (am, account) => {
             this._removeAccount(account);
         });
-        am.connect('account-enabled',
-                   Lang.bind(this, this._accountEnabledChanged));
-        am.connect('account-disabled',
-                   Lang.bind(this, this._accountEnabledChanged));
+        am.connect('account-enabled', this._accountEnabledChanged.bind(this));
+        am.connect('account-disabled', this._accountEnabledChanged.bind(this));
 
         this._preparedCallbacks.forEach(callback => { callback(); });
     }

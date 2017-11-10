@@ -1,6 +1,5 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
@@ -23,12 +22,12 @@ var RoomManager = class {
         this._app = Gio.Application.get_default();
         let actions = [
             { name: 'join-room',
-              handler: Lang.bind(this, this._onJoinActivated) },
+              handler: this._onJoinActivated.bind(this) },
             { name: 'message-user',
-              handler: Lang.bind(this, this._onQueryActivated) },
+              handler: this._onQueryActivated.bind(this) },
             { name: 'leave-room',
               after: true,
-              handler: Lang.bind(this, this._onLeaveActivated) }
+              handler: this._onLeaveActivated.bind(this) }
         ];
         actions.forEach(a => {
             if (a.after)

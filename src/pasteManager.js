@@ -4,7 +4,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 
 const Utils = imports.utils;
@@ -42,8 +41,9 @@ var PasteManager = class {
     _pasteFile(file, title, callback) {
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
                               Gio.FileQueryInfoFlags.NONE,
-                              GLib.PRIORITY_DEFAULT, null,
-                              Lang.bind(this, this._onFileQueryFinish, title, callback));
+                              GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                                  this._onFileQueryFinish(file, res, title, callback);
+                              });
     }
 
     _onFileQueryFinish(file, res, title, callback) {
@@ -103,11 +103,11 @@ var DropTargetIface = GObject.registerClass({
 
         widget.drag_dest_set_target_list(targetList);
 
-        widget.connect('drag-drop', Lang.bind(this, this._onDragDrop));
-        widget.connect('drag-leave', Lang.bind(this, this._onDragLeave));
-        widget.connect('drag-motion', Lang.bind(this, this._onDragMotion));
+        widget.connect('drag-drop', this._onDragDrop.bind(this));
+        widget.connect('drag-leave', this._onDragLeave.bind(this));
+        widget.connect('drag-motion', this._onDragMotion.bind(this));
         widget.connect_after('drag-data-received',
-                             Lang.bind(this, this._onDragDataReceived));
+                             this._onDragDataReceived.bind(this));
     }
 
     _onDragDrop(widget, context, x, y, time) {

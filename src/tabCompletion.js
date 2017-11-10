@@ -1,6 +1,5 @@
 const Gdk = imports.gi.Gdk;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Pango = imports.gi.Pango;
 
 const IrcParser = imports.ircParser;
@@ -11,9 +10,9 @@ var TabCompletion = class {
         this._canComplete = false;
         this._key = '';
 
-        this._entry.connect('key-press-event', Lang.bind(this, this._onKeyPress));
-        this._entry.connect('focus-out-event', Lang.bind(this, this._cancel));
-        this._entry.connect('unmap', Lang.bind(this, this._cancel));
+        this._entry.connect('key-press-event', this._onKeyPress.bind(this));
+        this._entry.connect('focus-out-event', this._cancel.bind(this));
+        this._entry.connect('unmap', this._cancel.bind(this));
         this._entry.connect('realize', () => {
             this._popup.set_transient_for(this._entry.get_toplevel());
         });
@@ -28,10 +27,10 @@ var TabCompletion = class {
         this._popup.add(frame);
 
         this._list = new Gtk.ListBox({ selection_mode: Gtk.SelectionMode.SINGLE });
-        this._list.set_filter_func(Lang.bind(this, this._filter));
-        this._list.connect('row-selected', Lang.bind(this, this._onRowSelected));
-        this._list.connect('row-activated', Lang.bind(this, this._stop));
-        this._list.connect('keynav-failed', Lang.bind(this, this._onKeynavFailed));
+        this._list.set_filter_func(this._filter.bind(this));
+        this._list.connect('row-selected', this._onRowSelected.bind(this));
+        this._list.connect('row-activated', this._stop.bind(this));
+        this._list.connect('keynav-failed', this._onKeynavFailed.bind(this));
         frame.add(this._list);
 
         this._widgetMap = new Map();

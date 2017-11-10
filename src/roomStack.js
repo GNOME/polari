@@ -2,7 +2,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -28,10 +27,8 @@ var RoomStack = GObject.registerClass({
 
         this._roomManager = RoomManager.getDefault();
 
-        this._roomManager.connect('room-added',
-                                  Lang.bind(this, this._roomAdded));
-        this._roomManager.connect('room-removed',
-                                  Lang.bind(this, this._roomRemoved));
+        this._roomManager.connect('room-added', this._roomAdded.bind(this));
+        this._roomManager.connect('room-removed', this._roomRemoved.bind(this));
         this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
 
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
@@ -49,9 +46,9 @@ var RoomStack = GObject.registerClass({
         let toplevel = this.get_toplevel();
 
         toplevel.connect('notify::active-room',
-                         Lang.bind(this, this._activeRoomChanged));
+                         this._activeRoomChanged.bind(this));
         toplevel.connect('active-room-state-changed',
-                         Lang.bind(this, this._updateSensitivity));
+                         this._updateSensitivity.bind(this));
         this._activeRoomChanged();
         this._updateSensitivity();
     }
@@ -95,7 +92,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
 
         super._init({ valign: Gtk.Align.START });
 
-        this.connect('destroy', Lang.bind(this, this._onDestroy));
+        this.connect('destroy', this._onDestroy.bind(this));
 
         this._createWidget();
 

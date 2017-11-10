@@ -5,7 +5,6 @@ const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gspell = imports.gi.Gspell;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -48,7 +47,7 @@ var ChatEntry = GObject.registerClass({
 
         this._emojiPickedId = 0;
 
-        this.connect('icon-press', Lang.bind(this, this._showEmojiPicker));
+        this.connect('icon-press', this._showEmojiPicker.bind(this));
         this.connect('unmap', () => {
             if (this._emojiPickedId)
                 ChatEntry._emojiPicker.disconnect(this._emojiPickedId);
@@ -57,7 +56,7 @@ var ChatEntry = GObject.registerClass({
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('show-emoji-picker');
-        action.connect('activate', Lang.bind(this, this._showEmojiPicker));
+        action.connect('activate', this._showEmojiPicker.bind(this));
 
         let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
         buffer.set_spell_checker (ChatEntry._checker);
@@ -112,7 +111,7 @@ var ChatEntry = GObject.registerClass({
             if (uris && uris.length)
                 this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
             else
-                clipboard.request_text(Lang.bind(this, this._onTextReceived));
+                clipboard.request_text(this._onTextReceived.bind(this));
         });
 
         clipboard.request_image((clipboard, pixbuf) => {
@@ -219,12 +218,12 @@ var EntryArea = GObject.registerClass({
 
         super._init(params);
 
-        this.connect('destroy', Lang.bind(this, this._onDestroy));
-        this.connect('notify::sensitive', Lang.bind(this, this._onSensitiveChanged));
+        this.connect('destroy', this._onDestroy.bind(this));
+        this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));
         this.connect('realize', () => {
             this._toplevel = this.get_toplevel();
             this._keyPressId = this._toplevel.connect('key-press-event',
-                                                      Lang.bind(this, this._onKeyPressEvent));
+                                                      this._onKeyPressEvent.bind(this));
         });
         this.connect('map', () => {
             this._nickButton.popover = EntryArea._nickPopover;
@@ -280,7 +279,7 @@ var EntryArea = GObject.registerClass({
             this.pasteFile(file);
         });
 
-        this._chatEntry.connect('changed', Lang.bind(this, this._onEntryChanged));
+        this._chatEntry.connect('changed', this._onEntryChanged.bind(this));
 
         this._chatEntry.connect('activate', () => {
             if (this._ircParser.process(this._chatEntry.text)) {
@@ -291,8 +290,8 @@ var EntryArea = GObject.registerClass({
             }
         });
 
-        this._cancelButton.connect('clicked', Lang.bind(this, this._onCancelClicked));
-        this._pasteButton.connect('clicked', Lang.bind(this, this._onPasteClicked));
+        this._cancelButton.connect('clicked', this._onCancelClicked.bind(this));
+        this._pasteButton.connect('clicked', this._onPasteClicked.bind(this));
 
         this._pasteBox.connect_after('key-press-event', (w, event) => {
             let [, keyval] = event.get_keyval();
@@ -312,7 +311,7 @@ var EntryArea = GObject.registerClass({
         this._completion = new TabCompletion(this._chatEntry);
         this._membersChangedId =
             this._room.connect('members-changed',
-                               Lang.bind(this, this._updateCompletions));
+                               this._updateCompletions.bind(this));
         this._nicknameChangedId =
             this._room.account.connect('notify::nickname', () => {
                 if (!this._room.channel)
@@ -320,11 +319,11 @@ var EntryArea = GObject.registerClass({
             });
         this._channelChangedId =
             this._room.connect('notify::channel',
-                               Lang.bind(this, this._onChannelChanged));
+                               this._onChannelChanged.bind(this));
         this._onChannelChanged(this._room);
 
-        this._chatEntry.connect('map', Lang.bind(this, this._updateCompletions));
-        this._chatEntry.connect('unmap', Lang.bind(this, this._updateCompletions));
+        this._chatEntry.connect('map', this._updateCompletions.bind(this));
+        this._chatEntry.connect('unmap', this._updateCompletions.bind(this));
     }
 
     set max_nick_chars(maxChars) {
@@ -418,7 +417,7 @@ var EntryArea = GObject.registerClass({
         file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                               Gio.FileQueryInfoFlags.NONE,
                               GLib.PRIORITY_DEFAULT, null,
-                              Lang.bind(this, this._onFileInfoReady));
+                              this._onFileInfoReady.bind(this));
     }
 
     _onFileInfoReady(file, res) {
@@ -477,7 +476,7 @@ var EntryArea = GObject.registerClass({
         if (room.channel)
             this._selfAliasChangedId =
                 room.channel.connection.connect('notify::self-contact',
-                                                Lang.bind(this, this._updateNick));
+                                                this._updateNick.bind(this));
         else
             this._selfAliasChangedId = 0;
         this._updateNick();

@@ -1,7 +1,6 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
-const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -21,9 +20,9 @@ var UserStatusMonitor = class {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._accountsMonitor.connect('account-added',
-                                      Lang.bind(this, this._onAccountAdded));
+                                      this._onAccountAdded.bind(this));
         this._accountsMonitor.connect('account-removed',
-                                      Lang.bind(this, this._onAccountRemoved));
+                                      this._onAccountRemoved.bind(this));
 
         this._accountsMonitor.accounts.forEach(
                     a => { this._onAccountAdded(this._accountsMonitor, a); });
@@ -68,11 +67,11 @@ var UserTracker = GObject.registerClass({
         this._handlerCounter = 0;
         this._app = Gio.Application.get_default();
 
-        this._app.connect('prepare-shutdown', Lang.bind(this, this._onShutdown));
+        this._app.connect('prepare-shutdown', this._onShutdown.bind(this));
 
         this._roomManager = RoomManager.getDefault();
-        this._roomManager.connect('room-added', Lang.bind(this, this._onRoomAdded));
-        this._roomManager.connect('room-removed', Lang.bind(this, this._onRoomRemoved));
+        this._roomManager.connect('room-added', this._onRoomAdded.bind(this));
+        this._roomManager.connect('room-removed', this._onRoomRemoved.bind(this));
     }
 
     _onShutdown() {
@@ -100,19 +99,19 @@ var UserTracker = GObject.registerClass({
 
         let roomSignals = [
             { name: 'notify::channel',
-              handler: Lang.bind(this, this._onChannelChanged) },
+              handler: this._onChannelChanged.bind(this) },
             { name: 'member-renamed',
-              handler: Lang.bind(this, this._onMemberRenamed) },
+              handler: this._onMemberRenamed.bind(this) },
             { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberLeft) },
+              handler: this._onMemberLeft.bind(this) },
             { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberLeft) },
+              handler: this._onMemberLeft.bind(this) },
             { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberLeft) },
+              handler: this._onMemberLeft.bind(this) },
             { name: 'member-joined',
-              handler: Lang.bind(this, this._onMemberJoined) },
+              handler: this._onMemberJoined.bind(this) },
             { name: 'member-left',
-              handler: Lang.bind(this, this._onMemberLeft) }
+              handler: this._onMemberLeft.bind(this) }
         ];
 
         let signalIds = this._getRoomSignals(room);

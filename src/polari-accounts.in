@@ -5,8 +5,6 @@ const Gtk = imports.gi.Gtk;
 const Pango = imports.gi.Pango;
 const Tp = imports.gi.TelepathyGLib;
 
-const Lang = imports.lang;
-
 const AccountsWindow = GObject.registerClass(
 class AccountsWindow extends Gtk.ApplicationWindow {
     _init(params) {
@@ -35,7 +33,7 @@ class AccountsWindow extends Gtk.ApplicationWindow {
         scrolled.show_all();
 
         let am = Tp.AccountManager.dup();
-        am.prepare_async(null, Lang.bind(this, this._onPrepared));
+        am.prepare_async(null, this._onPrepared.bind(this));
     }
 
     _onPrepared(am) {
@@ -48,7 +46,7 @@ class AccountsWindow extends Gtk.ApplicationWindow {
         am.connect('account-removed', (am, account) => {
             this._removeAccount(account);
         });
-        am.dup_valid_accounts().forEach(Lang.bind(this, this._addAccount));
+        am.dup_valid_accounts().forEach(this._addAccount.bind(this));
     }
 
     _addAccount(account) {

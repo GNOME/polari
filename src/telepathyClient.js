@@ -1,7 +1,6 @@
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
-const Lang = imports.lang;
 const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 
@@ -50,16 +49,15 @@ class SASLAuthHandler {
         this._proxy = new SASLAuthProxy(Gio.DBus.session,
                                         channel.bus_name,
                                         channel.object_path,
-                                        Lang.bind(this, this._onProxyReady));
+                                        this._onProxyReady.bind(this));
     }
 
     _onProxyReady(proxy) {
         this._proxy.connectSignal('SASLStatusChanged',
-                                  Lang.bind(this, this._onSASLStatusChanged));
+                                  this._onSASLStatusChanged.bind(this));
 
         let account = this._channel.connection.get_account();
-        Utils.lookupAccountPassword(account,
-                                    Lang.bind(this, this._onPasswordReady));
+        Utils.lookupAccountPassword(account, this._onPasswordReady.bind(this));
     }
 
     _onPasswordReady(password) {
@@ -69,7 +67,7 @@ class SASLAuthHandler {
         else
             this._proxy.AbortSASLRemote(SASLAbortReason.USER_ABORT,
                                         'Password not available',
-                                        Lang.bind(this, this._resetPrompt));
+                                        this._resetPrompt.bind(this));
     }
 
     _onSASLStatusChanged(proxy, sender, [status]) {
@@ -131,28 +129,28 @@ class TelepathyClient extends Tp.BaseClient {
         this._roomManager.connect('room-added', (mgr, room) => {
             if (room.account.connection)
                 this._connectRoom(room);
-            room.connect('identify-sent', Lang.bind(this, this._onIdentifySent));
+            room.connect('identify-sent', this._onIdentifySent.bind(this));
         });
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.prepare(Lang.bind(this, this._onPrepared));
+        this._accountsMonitor.prepare(this._onPrepared.bind(this));
     }
 
     _onPrepared() {
         let actions = [
             { name: 'message-user',
-              handler: Lang.bind(this, this._onQueryActivated) },
+              handler: this._onQueryActivated.bind(this) },
             { name: 'leave-room',
-              handler: Lang.bind(this, this._onLeaveActivated) },
+              handler: this._onLeaveActivated.bind(this) },
             { name: 'connect-account',
-              handler: Lang.bind(this, this._onConnectAccountActivated) },
+              handler: this._onConnectAccountActivated.bind(this) },
             { name: 'reconnect-account',
-              handler: Lang.bind(this, this._onReconnectAccountActivated) },
+              handler: this._onReconnectAccountActivated.bind(this) },
             { name: 'authenticate-account',
-              handler: Lang.bind(this, this._onAuthenticateAccountActivated) },
+              handler: this._onAuthenticateAccountActivated.bind(this) },
             { name: 'save-identify-password',
-              handler: Lang.bind(this, this._onSaveIdentifyPasswordActivated) },
+              handler: this._onSaveIdentifyPasswordActivated.bind(this) },
             { name: 'discard-identify-password',
-              handler: Lang.bind(this, this._onDiscardIdentifyPasswordActivated) }
+              handler: this._onDiscardIdentifyPasswordActivated.bind(this) }
         ];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
@@ -182,7 +180,7 @@ class TelepathyClient extends Tp.BaseClient {
         this.register();
 
         this._accountsMonitor.connect('account-status-changed',
-                                      Lang.bind(this ,this._onAccountStatusChanged));
+                                      this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-added', (mon, account) => {
             this._connectAccount(account);
         });
@@ -194,7 +192,7 @@ class TelepathyClient extends Tp.BaseClient {
         });
 
         this._networkMonitor.connect('network-changed',
-                                     Lang.bind(this, this._onNetworkChanged));
+                                     this._onNetworkChanged.bind(this));
         this._onNetworkChanged(this._networkMonitor,
                                this._networkMonitor.network_available);
     }
@@ -369,8 +367,9 @@ class TelepathyClient extends Tp.BaseClient {
         if (!account || !account.enabled)
             return;
 
-        this._requestChannel(account, Tp.HandleType.CONTACT, channelName,
-                             Lang.bind(this, this._sendMessage, message));
+        this._requestChannel(account, Tp.HandleType.CONTACT, channelName, c => {
+            this._sendMessage(c, message);
+        });
     }
 
     _onLeaveActivated(action, parameter) {
@@ -492,9 +491,9 @@ class TelepathyClient extends Tp.BaseClient {
             }
 
             channel.connect('message-received',
-                            Lang.bind(this, this._onMessageReceived));
+                            this._onMessageReceived.bind(this));
             channel.connect('pending-message-removed',
-                            Lang.bind(this, this._onPendingMessageRemoved));
+                            this._onPendingMessageRemoved.bind(this));
 
             this._roomManager.ensureRoomForChannel(channel, 0);
         });

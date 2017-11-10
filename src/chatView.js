@@ -3,7 +3,6 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
@@ -51,8 +50,8 @@ class TextView extends Gtk.TextView {
     _init(params) {
         super._init(params);
 
-        this.buffer.connect('mark-set', Lang.bind(this, this._onMarkSet));
-        this.connect('screen-changed', Lang.bind(this, this._updateLayout));
+        this.buffer.connect('mark-set', this._onMarkSet.bind(this));
+        this.connect('screen-changed', this._updateLayout.bind(this));
     }
 
     vfunc_get_preferred_width() {
@@ -310,36 +309,33 @@ var ChatView = GObject.registerClass({
 
         this._createTags();
 
-        this.connect('style-updated',
-                     Lang.bind(this, this._onStyleUpdated));
+        this.connect('style-updated', this._onStyleUpdated.bind(this));
         this._onStyleUpdated();
 
-        this.connect('destroy', Lang.bind(this, this._onDestroy));
-        this.connect('screen-changed',
-                     Lang.bind(this, this._updateIndent));
-        this.connect('scroll-event', Lang.bind(this, this._onScroll));
+        this.connect('destroy', this._onDestroy.bind(this));
+        this.connect('screen-changed', this._updateIndent.bind(this));
+        this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
             if (pos == Gtk.PositionType.BOTTOM)
                 this._autoscroll = true;
         });
 
         this.vadjustment.connect('value-changed',
-                                 Lang.bind(this, this._onValueChanged));
-        this.vadjustment.connect('changed',
-                                 Lang.bind(this, this._updateScroll));
+                                 this._onValueChanged.bind(this));
+        this.vadjustment.connect('changed', this._updateScroll.bind(this));
 
-        this._view.connect('key-press-event', Lang.bind(this, this._onKeyPress));
+        this._view.connect('key-press-event', this._onKeyPress.bind(this));
         this._view.connect('motion-notify-event',
-                           Lang.bind(this, this._handleButtonTagsHover));
+                           this._handleButtonTagsHover.bind(this));
         this._view.connect('enter-notify-event',
-                           Lang.bind(this, this._handleButtonTagsHover));
+                           this._handleButtonTagsHover.bind(this));
         this._view.connect('leave-notify-event',
-                           Lang.bind(this, this._handleButtonTagsHover));
+                           this._handleButtonTagsHover.bind(this));
         /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
            the default handler calls pango_cairo_context_set_resolution(), so
            update the indent after that */
         this._view.connect_after('style-updated',
-                                 Lang.bind(this, this._updateIndent));
+                                 this._updateIndent.bind(this));
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
@@ -372,7 +368,7 @@ var ChatView = GObject.registerClass({
 
         this._fetchingBacklog = true;
         this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
-                                         Lang.bind(this, this._onLogEventsReady));
+                                         this._onLogEventsReady.bind(this));
 
         this._autoscroll = true;
 
@@ -380,7 +376,7 @@ var ChatView = GObject.registerClass({
         DropTargetIface.addTargets(this, this._view);
 
         this._app.connect('room-focus-changed',
-                          Lang.bind(this, this._checkMessages));
+                          this._checkMessages.bind(this));
 
         this._hoverCursor = Gdk.Cursor.new_from_name(this.get_display(),
                                                      'pointer');
@@ -390,19 +386,19 @@ var ChatView = GObject.registerClass({
 
         let roomSignals = [
             { name: 'notify::channel',
-              handler: Lang.bind(this, this._onChannelChanged) },
+              handler: this._onChannelChanged.bind(this) },
             { name: 'member-renamed',
-              handler: Lang.bind(this, this._onMemberRenamed) },
+              handler: this._onMemberRenamed.bind(this) },
             { name: 'member-disconnected',
-              handler: Lang.bind(this, this._onMemberDisconnected) },
+              handler: this._onMemberDisconnected.bind(this) },
             { name: 'member-kicked',
-              handler: Lang.bind(this, this._onMemberKicked) },
+              handler: this._onMemberKicked.bind(this) },
             { name: 'member-banned',
-              handler: Lang.bind(this, this._onMemberBanned) },
+              handler: this._onMemberBanned.bind(this) },
             { name: 'member-joined',
-              handler: Lang.bind(this, this._onMemberJoined) },
+              handler: this._onMemberJoined.bind(this) },
             { name: 'member-left',
-              handler: Lang.bind(this, this._onMemberLeft) }
+              handler: this._onMemberLeft.bind(this) }
         ];
         this._roomSignals = [];
         roomSignals.forEach(signal => {
@@ -412,7 +408,7 @@ var ChatView = GObject.registerClass({
 
         this._nickStatusChangedId = this._userTracker.watchRoomStatus(this._room,
                                     null,
-                                    Lang.bind(this, this._onNickStatusChanged));
+                                    this._onNickStatusChanged.bind(this));
 
         this.connect('destroy', () => {
             this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
@@ -731,7 +727,7 @@ var ChatView = GObject.registerClass({
         this._showLoadingIndicator();
         this._backlogTimeoutId = Mainloop.timeout_add(500, () => {
             this._logWalker.get_events_async(NUM_LOG_EVENTS,
-                                             Lang.bind(this, this._onLogEventsReady));
+                                             this._onLogEventsReady.bind(this));
             this._backlogTimeoutId = 0;
             return GLib.SOURCE_REMOVE;
         });
@@ -927,11 +923,11 @@ var ChatView = GObject.registerClass({
 
         let channelSignals = [
             { name: 'message-received',
-              handler: Lang.bind(this, this._onMessageReceived) },
+              handler: this._onMessageReceived.bind(this) },
             { name: 'message-sent',
-              handler: Lang.bind(this, this._onMessageSent) },
+              handler: this._onMessageSent.bind(this) },
             { name: 'pending-message-removed',
-              handler: Lang.bind(this, this._pendingMessageRemoved) }
+              handler: this._pendingMessageRemoved.bind(this) }
         ];
         channelSignals.forEach(signal => {
             this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
@@ -1244,7 +1240,7 @@ var ChatView = GObject.registerClass({
 
                 if (!nickTag) {
                     nickTag = new ButtonTag({ name: nickTagName });
-                    nickTag.connect('clicked', Lang.bind(this, this._onNickTagClicked));
+                    nickTag.connect('clicked', this._onNickTagClicked.bind(this));
 
                     let status = this._userTracker.getNickRoomStatus(message.nick, this._room);
                     this._updateNickTag(nickTag, status);
