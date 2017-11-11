@@ -261,6 +261,11 @@ var Application = GObject.registerClass({
                 a.set_nickname_finish(res);
             });
         });
+        this._accountsMonitor.connect('account-removed', (am, account) => {
+            // Make sure we don't 'inject' outdated data into
+            // a new account with the same ID
+            this._retryData.delete(account.object_path);
+        });
 
         this.pasteManager = new PasteManager();
         this.notificationQueue = new AppNotifications.NotificationQueue();
