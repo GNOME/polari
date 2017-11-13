@@ -1,3 +1,21 @@
+3.27.2 - "Talking in Sentences With No Punchline"
+=================================================
+* Clarify title of message notifications [Daniel; #786709]
+* Fix overlapping scrollbar in user list [Zandr; #728756]
+* Improve performance of server room list in join dialog [Florian; #13]
+* Add empty placeholder to networks list [Augusto; #762892]
+* Add explanatory tooltips to buttons [Daniel; #787154]
+* Show indicator when joining a room takes some time [Bastian; #775239]
+* Misc. bug fixes and cleanups [Florian; #11, #14, #27]
+
+Contributors:
+  Daniel Boles, Augusto Cesar, Rafael Fontenelle, Bastian Ilsø, Zandr Martin,
+  Florian Müllner, Jan Tojnar
+
+Translations:
+  Xavi Ivars [ca@valencia], Mario Blättermann [de], Marek Cernocky [cs],
+  Matej Urbančič [sl], Fabio Tomat [fur], Kjartan Maraas [nb], Nurperi Utlu [tr]
+
 3.26.1 - "God is Straight"
 ==========================
 
