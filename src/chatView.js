@@ -148,18 +148,6 @@ var ButtonTag = GObject.registerClass({
                                            false)
     },
     Signals: {
-        'button-press-event': {
-            flags: GObject.SignalFlags.RUN_LAST,
-            param_types: [Gdk.Event.$gtype],
-            return_type: GObject.TYPE_BOOLEAN,
-            accumulator: GObject.AccumulatorType.TRUE_HANDLED
-        },
-        'button-release-event': {
-            flags: GObject.SignalFlags.RUN_LAST,
-            param_types: [Gdk.Event.$gtype],
-            return_type: GObject.TYPE_BOOLEAN,
-            accumulator: GObject.AccumulatorType.TRUE_HANDLED
-        },
         'clicked': { },
         'popup-menu': { }
     },
@@ -188,26 +176,6 @@ var ButtonTag = GObject.registerClass({
             this._pressed = false;
     }
 
-    'on_button-press-event'(event) {
-        let [, button] = event.get_button();
-        this._pressed = button == Gdk.BUTTON_PRIMARY;
-
-        if (button == Gdk.BUTTON_SECONDARY)
-            this.emit('popup-menu');
-
-        return Gdk.EVENT_STOP;
-    }
-
-    'on_button-release-event'(event) {
-        let [, button] = event.get_button();
-        if (!(button == Gdk.BUTTON_PRIMARY && this._pressed))
-            return Gdk.EVENT_PROPAGATE;
-
-        this._pressed = false;
-        this.emit('clicked');
-        return Gdk.EVENT_STOP;
-    }
-
     vfunc_event(object, event, iter) {
         let type = event.get_event_type();
 
@@ -218,9 +186,24 @@ var ButtonTag = GObject.registerClass({
             type != Gdk.EventType.BUTTON_RELEASE)
             return Gdk.EVENT_PROPAGATE;
 
-        let isPress = type == Gdk.EventType.BUTTON_PRESS;
-        return this.emit(isPress ? 'button-press-event'
-                                 : 'button-release-event', event);
+        let [, button] = event.get_button();
+
+        if (type == Gdk.EventType.BUTTON_PRESS) {
+            this._pressed = button == Gdk.BUTTON_PRIMARY;
+
+            if (button == Gdk.BUTTON_SECONDARY)
+                this.emit('popup-menu');
+
+            return Gdk.EVENT_STOP;
+        } else if (button == Gdk.BUTTON_PRIMARY && this._pressed) {
+            this._pressed = false;
+
+            this.emit('clicked');
+
+            return Gdk.EVENT_STOP;
+        }
+
+        return Gdk.EVENT_PROPAGATE;
     }
 });
 
