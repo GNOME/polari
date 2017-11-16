@@ -160,7 +160,8 @@ var ButtonTag = GObject.registerClass({
             return_type: GObject.TYPE_BOOLEAN,
             accumulator: GObject.AccumulatorType.TRUE_HANDLED
         },
-        'clicked': { }
+        'clicked': { },
+        'popup-menu': { }
     },
 }, class ButtonTag extends Gtk.TextTag {
     _init(params) {
@@ -190,6 +191,9 @@ var ButtonTag = GObject.registerClass({
     'on_button-press-event'(event) {
         let [, button] = event.get_button();
         this._pressed = button == Gdk.BUTTON_PRIMARY;
+
+        if (button == Gdk.BUTTON_SECONDARY)
+            this.emit('popup-menu');
 
         return Gdk.EVENT_STOP;
     }
@@ -1376,13 +1380,8 @@ var ChatView = GObject.registerClass({
         tag.connect('clicked', () => {
             Utils.openURL(url, Gtk.get_current_event_time());
         });
-        tag.connect('button-press-event', (tag, event) => {
-            let [, button] = event.get_button();
-            if (button != Gdk.BUTTON_SECONDARY)
-                return Gdk.EVENT_PROPAGATE;
-
+        tag.connect('popup-menu', () => {
             this._showUrlContextMenu(url);
-            return Gdk.EVENT_STOP;
         });
         return tag;
     }
