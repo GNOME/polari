@@ -154,7 +154,8 @@ var ButtonTag = GObject.registerClass({
 }, class ButtonTag extends Gtk.TextTag {
     _init(params) {
         this._hover = false;
-        this._pressed = false;
+
+        this._gesture = null;
 
         super._init(params);
     }
@@ -171,39 +172,40 @@ var ButtonTag = GObject.registerClass({
         this.notify('hover');
     }
 
-    on_notify(pspec) {
-        if (pspec.name == 'hover' && !this.hover)
-            this._pressed = false;
-    }
-
     vfunc_event(object, event, iter) {
-        let type = event.get_event_type();
+        this._ensureGesture(object);
 
-        if (!this._hover)
-            return Gdk.EVENT_PROPAGATE;
-
-        if (type != Gdk.EventType.BUTTON_PRESS &&
-            type != Gdk.EventType.BUTTON_RELEASE)
-            return Gdk.EVENT_PROPAGATE;
-
-        let [, button] = event.get_button();
-
-        if (type == Gdk.EventType.BUTTON_PRESS) {
-            this._pressed = button == Gdk.BUTTON_PRIMARY;
-
-            if (button == Gdk.BUTTON_SECONDARY)
-                this.emit('popup-menu');
-
+        if (this._gesture.handle_event(event) ||
+            this._gesture.is_recognized())
             return Gdk.EVENT_STOP;
-        } else if (button == Gdk.BUTTON_PRIMARY && this._pressed) {
-            this._pressed = false;
-
-            this.emit('clicked');
-
-            return Gdk.EVENT_STOP;
-        }
 
         return Gdk.EVENT_PROPAGATE;
+    }
+
+    _ensureGesture(widget) {
+        if (this._gesture)
+            return;
+
+        this._gesture = new Gtk.GestureMultiPress({ widget,
+                                                    button: 0,
+                                                    exclusive: true });
+
+        this._gesture.connect('pressed', (gesture, nPress) => {
+            if (!this._hover || nPress > 1)
+                return;
+
+            let button = this._gesture.get_current_button();
+            if (button == Gdk.BUTTON_SECONDARY)
+                this.emit('popup-menu');
+        });
+        this._gesture.connect('released', (gesture, nPress) => {
+            if (!this._hover || nPress > 1)
+                return;
+
+            let button = this._gesture.get_current_button();
+            if (button == Gdk.BUTTON_PRIMARY)
+                this.emit('clicked');
+        });
     }
 });
 
