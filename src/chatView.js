@@ -761,7 +761,7 @@ var ChatView = GObject.registerClass({
         this._pending.delete(id);
     }
 
-    _showUrlContextMenu(url, button, time) {
+    _showUrlContextMenu(url) {
         let menu = new Gtk.Menu();
 
         let item = new Gtk.MenuItem({ label: _("Open Link") });
@@ -778,7 +778,7 @@ var ChatView = GObject.registerClass({
         menu.append(item);
 
         menu.show_all();
-        menu.popup(null, null, null, button, time);
+        menu.popup_at_pointer(null);
     }
 
     _handleButtonTagsHover(view, event) {
@@ -1381,7 +1381,7 @@ var ChatView = GObject.registerClass({
             if (button != Gdk.BUTTON_SECONDARY)
                 return Gdk.EVENT_PROPAGATE;
 
-            this._showUrlContextMenu(url, button, event.get_time());
+            this._showUrlContextMenu(url);
             return Gdk.EVENT_STOP;
         });
         return tag;
