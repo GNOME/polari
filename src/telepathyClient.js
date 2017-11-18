@@ -589,7 +589,7 @@ class TelepathyClient extends Tp.BaseClient {
 
         let [text, ] = msg.to_text();
         let nick = msg.sender.alias;
-        if (!room.should_highlight_message(nick, text))
+        if ((!room.should_highlight_message(nick, text)) && (GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"))
             return;
 
         /* Translators: This is the title of the notification announcing a newly
