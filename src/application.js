@@ -250,7 +250,9 @@ var Application = GObject.registerClass({
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._userStatusMonitor = UserStatusMonitor.getDefault();
         this._networksManager = NetworksManager.getDefault();
-        this._serverRoomManager = ServerRoomManager.getDefault();
+
+        if (!Gio.NetworkMonitor.get_default().get_network_metered())
+            this._serverRoomManager = ServerRoomManager.getDefault();
 
         this._accountsMonitor.connect('account-status-changed',
                                       this._onAccountStatusChanged.bind(this));
