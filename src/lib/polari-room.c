@@ -43,9 +43,6 @@ struct _PolariRoomPrivate {
   TpHandleType type;
 
   guint self_contact_notify_id;
-  guint invalidated_id;
-  guint group_contacts_changed_id;
-  guint message_sent_id;
 
   gboolean ignore_identify;
 
@@ -697,9 +694,7 @@ polari_room_set_channel (PolariRoom *room,
 
   if (priv->channel)
     {
-      g_signal_handler_disconnect (priv->channel, priv->group_contacts_changed_id);
-      g_signal_handler_disconnect (priv->channel, priv->message_sent_id);
-      g_signal_handler_disconnect( priv->channel, priv->invalidated_id);
+      g_signal_handlers_disconnect_by_data (priv->channel, room);
       g_signal_handler_disconnect (tp_channel_get_connection (priv->channel),
                                    priv->self_contact_notify_id);
 
@@ -731,15 +726,14 @@ polari_room_set_channel (PolariRoom *room,
         g_signal_connect (tp_channel_get_connection (channel),
                           "notify::self-contact",
                           G_CALLBACK (on_self_contact_notify), room);
-      priv->group_contacts_changed_id =
-        g_signal_connect (channel, "group-contacts-changed",
-                          G_CALLBACK (on_group_contacts_changed), room);
-      priv->message_sent_id =
-        g_signal_connect ( channel, "message-sent",
-                          G_CALLBACK (on_message_sent), room);
-      priv->invalidated_id =
-        g_signal_connect (channel, "invalidated",
-                          G_CALLBACK (on_channel_invalidated), room);
+      g_object_connect (channel,
+                        "signal::group-contacts-changed",
+                        G_CALLBACK (on_group_contacts_changed), room,
+                        "signal::message-sent",
+                        G_CALLBACK (on_message_sent), room,
+                        "signal::invalidated",
+			G_CALLBACK (on_channel_invalidated), room,
+                        NULL);
       priv->properties_changed_id =
         tp_cli_dbus_properties_connect_to_properties_changed (
                                  channel, properties_changed,
