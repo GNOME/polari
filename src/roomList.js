@@ -34,20 +34,26 @@ var RoomRow = GObject.registerClass({
                                this._onButtonRelease.bind(this));
         this.connect('key-press-event', this._onKeyPress.bind(this));
 
-        room.connect('notify::channel', this._onChannelChanged.bind(this));
         room.bind_property('display-name', this._roomLabel, 'label',
                            GObject.BindingFlags.SYNC_CREATE);
 
+        let channelChangedId =
+            room.connect('notify::channel', this._onChannelChanged.bind(this));
+
+        let connectionStatusChangedId = 0;
+
         if (this._room.type == Tp.HandleType.ROOM) {
-            let connectionStatusChangedId =
+            connectionStatusChangedId =
                 this.account.connect('notify::connection-status',
                                      this._onConnectionStatusChanged.bind(this));
             this._onConnectionStatusChanged();
-
-            this.connect('destroy', () => {
-                this.account.disconnect(connectionStatusChangedId);
-            });
         }
+
+        this.connect('destroy', () => {
+            room.disconnect(channelChangedId);
+            if (connectionStatusChangedId)
+                this.account.disconnect(connectionStatusChangedId);
+        });
 
         this._updatePending();
         this._onChannelChanged();
