@@ -364,8 +364,9 @@ var ChatView = GObject.registerClass({
         this._app = Gio.Application.get_default();
         DropTargetIface.addTargets(this, this._view);
 
-        this._app.connect('room-focus-changed',
-                          this._checkMessages.bind(this));
+        this._roomFocusChangedId =
+            this._app.connect('room-focus-changed',
+                              this._checkMessages.bind(this));
 
         this._hoverCursor = Gdk.Cursor.new_from_name(this.get_display(),
                                                      'pointer');
@@ -509,6 +510,10 @@ var ChatView = GObject.registerClass({
         for (let i = 0; i < this._roomSignals.length; i++)
             this._room.disconnect(this._roomSignals[i]);
         this._roomSignals = [];
+
+        if (this._roomFocusChangedId)
+            this._app.disconnect(this._roomFocusChangedId);
+        this._roomFocusChangedId = 0;
 
         if (this._backlogTimeoutId)
             Mainloop.source_remove(this._backlogTimeoutId);
