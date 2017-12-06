@@ -498,9 +498,11 @@ var ConnectionProperties = GObject.registerClass({
         });
         this.set_default_response(Gtk.ResponseType.OK);
 
-        account.connect('notify::connection-status',
-                        this._syncErrorMessage.bind(this));
+        let id = account.connect('notify::connection-status',
+                                 this._syncErrorMessage.bind(this));
         this._syncErrorMessage(account);
+
+        this.connect('destroy', () => { account.disconnect(id); });
     }
 
     _syncErrorMessage(account) {
