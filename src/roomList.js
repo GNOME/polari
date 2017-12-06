@@ -51,6 +51,9 @@ var RoomRow = GObject.registerClass({
 
         this.connect('destroy', () => {
             room.disconnect(channelChangedId);
+            this._channelSignals.forEach(id => {
+                room.channel.disconnect(id);
+            });
             if (connectionStatusChangedId)
                 this.account.disconnect(connectionStatusChangedId);
         });
@@ -128,13 +131,17 @@ var RoomRow = GObject.registerClass({
     }
 
     _onChannelChanged() {
+        this._channelSignals = [];
+
         if (!this._room.channel)
             return;
         this._eventStack.visible_child_name = 'messages';
-        this._room.channel.connect('message-received',
-                                   this._updatePending.bind(this));
-        this._room.channel.connect('pending-message-removed',
-                                   this._updatePending.bind(this));
+
+        for (let signal of ['message-received', 'pending-message-removed'])
+            this._channelSignals.push(
+                this._room.channel.connect(signal,
+                                           this._updatePending.bind(this))
+            );
         this._updatePending();
     }
 
