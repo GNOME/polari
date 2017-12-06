@@ -398,11 +398,6 @@ var ChatView = GObject.registerClass({
         this._nickStatusChangedId = this._userTracker.watchRoomStatus(this._room,
                                     null,
                                     this._onNickStatusChanged.bind(this));
-
-        this.connect('destroy', () => {
-            this._userTracker.unwatchRoomStatus(this._room, this._nickStatusChangedId);
-            this._userTracker = null;
-        });
     }
 
     _createTags() {
@@ -518,6 +513,12 @@ var ChatView = GObject.registerClass({
         if (this._backlogTimeoutId)
             Mainloop.source_remove(this._backlogTimeoutId);
         this._backlogTimeoutId = 0;
+
+        if (this._nickStatusChangedId)
+            this._userTracker.unwatchRoomStatus(this._room,
+                                                this._nickStatusChangedId);
+        this._nickStatusChangedId = 0;
+        this._userTracker = null;
 
         this._logWalker.run_dispose();
         this._logWalker = null;
