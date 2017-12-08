@@ -16,8 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.";
  */
 
-#ifndef __POLARI_UTIL_H__
-#define __POLARI_UTIL_H__
+#pragma once
 
 #include <glib.h>
 
@@ -27,5 +26,3 @@ gboolean polari_util_match_identify_message (const char  *message,
                                              char       **command,
                                              char       **username,
                                              char       **password);
-
-#endif /* __POLARI_UTIL_H__ */

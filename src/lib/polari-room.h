@@ -16,8 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.";
  */
 
-#ifndef __POLARI_ROOM_H__
-#define __POLARI_ROOM_H__
+#pragma once
 
 #include <glib-object.h>
 
@@ -52,5 +51,3 @@ char *polari_create_room_id (TpAccount    *account,
                              TpHandleType  type);
 
 G_END_DECLS
-
-#endif /* __POLARI_ROOM_H__ */
