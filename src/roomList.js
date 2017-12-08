@@ -28,6 +28,7 @@ var RoomRow = GObject.registerClass({
         this._popover = null;
 
         this._popoverVisibleChangedId = 0;
+        this._connectingTimeoutId = 0;
 
         this._icon.gicon = room.icon;
         this._icon.visible = room.icon != null;
@@ -62,6 +63,9 @@ var RoomRow = GObject.registerClass({
             });
             if (connectionStatusChangedId)
                 this.account.disconnect(connectionStatusChangedId);
+            if (this._connectingTimeoutId)
+                Mainloop.source_remove(this._connectingTimeoutId);
+            this._connectingTimeoutId = 0;
         });
 
         this._updatePending();
@@ -113,7 +117,9 @@ var RoomRow = GObject.registerClass({
         let status = this._getConnectionStatus();
         // Show loading indicator if joining a room takes more than 3 seconds
         if (status == Tp.ConnectionStatus.CONNECTED && !this._room.channel)
-            Mainloop.timeout_add_seconds(3, () => {
+            this._connectingTimeoutId = Mainloop.timeout_add_seconds(3, () => {
+                this._connectingTimeoutId = 0;
+
                 if (this._room.channel)
                     return GLib.SOURCE_REMOVE;
                 this._eventStack.visible_child_name = 'connecting';
