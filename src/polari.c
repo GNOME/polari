@@ -1,6 +1,8 @@
 #include <girepository.h>
 #include <gjs/gjs.h>
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GjsContext, g_object_unref)
+
 const char *src =
   "imports.package.start({ name: '" PACKAGE_NAME "',"
   "                        version: '" PACKAGE_VERSION "',"
@@ -11,8 +13,8 @@ int
 main (int argc, char *argv[])
 {
   const char *search_path[] = { "resource:///org/gnome/Polari/js", NULL };
-  GError *error = NULL;
-  GjsContext *context;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GjsContext) context = NULL;
   int status;
 
   g_irepository_prepend_search_path (PKGLIBDIR);
@@ -26,9 +28,6 @@ main (int argc, char *argv[])
                                         &error))
     {
       g_message ("Failed to define ARGV: %s", error->message);
-      g_error_free (error);
-
-      g_object_unref (context);
 
       return 1;
     }
@@ -36,14 +35,9 @@ main (int argc, char *argv[])
   if (!gjs_context_eval (context, src, -1, "<main>", &status, &error))
     {
       g_message ("Execution of start() threw exception: %s", error->message);
-      g_error_free (error);
-
-      g_object_unref (context);
 
       return status;
     }
-
-  g_object_unref (context);
 
   return 0;
 }
