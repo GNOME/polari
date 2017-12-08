@@ -91,11 +91,15 @@ libsources = [
   'lib/polari-util.h'
 ]
 
+lib_nongir_sources = [
+  'lib/polari-tp-autocleanup.h',
+]
+
 libargs = [
   '-DG_LOG_USE_STRUCTURED',
   '-DG_LOG_DOMAIN="Polari"'
 ]
-libpolari = shared_library('polari-1.0', libsources,
+libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources,
   dependencies: [gio, gtk3, telepathy_glib],
   c_args: libargs,
   install: true,

@@ -20,6 +20,7 @@
 
 #include "polari-room.h"
 #include "polari-util.h"
+#include "polari-tp-autocleanup.h"
 
 typedef struct _PolariRoomPrivate PolariRoomPrivate;
 
@@ -106,7 +107,8 @@ polari_create_room_id (TpAccount    *account,
                        const char   *name,
                        TpHandleType  type)
 {
-  char *id, *folded_name;
+  g_autofree char *folded_name = NULL;
+  char *id;
 
   g_return_val_if_fail (TP_IS_ACCOUNT (account), NULL);
   g_return_val_if_fail (name != NULL, NULL);
@@ -116,18 +118,15 @@ polari_create_room_id (TpAccount    *account,
                         tp_proxy_get_object_path (TP_PROXY (account)),
                         type, folded_name);
 
-  g_free (folded_name);
   return id;
 }
 
 #ifdef HAVE_STRCASESTR
 #  define FOLDFUNC(text) ((char *)(text))
 #  define MATCHFUNC(haystick,needle) strcasestr (haystick, needle)
-#  define FREEFUNC(text)
 #else
 #  define FOLDFUNC(text) g_utf8_casefold (text, -1)
 #  define MATCHFUNC(haystick,needle) strstr (haystick, needle)
-#  define FREEFUNC(text) g_free(text)
 #endif
 
 static gboolean
@@ -135,7 +134,8 @@ match_self_nick (PolariRoom *room,
                  const char *text)
 {
   PolariRoomPrivate *priv = room->priv;
-  char *folded_text, *match;
+  g_autofree char *folded_text = NULL;
+  char *match;
   gboolean result = FALSE;
   int len;
 
@@ -159,8 +159,6 @@ match_self_nick (PolariRoom *room,
         break;
       match = MATCHFUNC (match + len, priv->self_nick);
     }
-
-  FREEFUNC (folded_text);
 
   return result;
 }
@@ -248,7 +246,7 @@ on_identify_message_sent (GObject      *source,
                           gpointer      user_data)
 {
   TpTextChannel *channel = TP_TEXT_CHANNEL (source);
-  GTask *task = user_data;
+  g_autoptr(GTask) task = user_data;
   PolariRoom *room = g_task_get_source_object (task);
   GError *error = NULL;
 
@@ -257,12 +255,10 @@ on_identify_message_sent (GObject      *source,
       room->priv->ignore_identify = FALSE;
 
       g_task_return_error (task, error);
-      g_object_unref (task);
       return;
     }
 
   g_task_return_boolean (task, TRUE);
-  g_object_unref (task);
 }
 
 /**
@@ -279,9 +275,9 @@ polari_room_send_identify_message_async (PolariRoom          *room,
                                          gpointer             user_data)
 {
   PolariRoomPrivate *priv;
-  TpMessage *message;
-  GTask *task;
-  char *text;
+  g_autoptr(TpMessage) message = NULL;
+  g_autoptr(GTask) task = NULL;;
+  g_autofree char *text = NULL;
 
   g_return_if_fail (POLARI_IS_ROOM (room));
   g_return_if_fail (command != NULL && password != NULL);
@@ -294,7 +290,6 @@ polari_room_send_identify_message_async (PolariRoom          *room,
     {
       g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_NOT_CONNECTED,
                                "The room is disconnected.");
-      g_object_unref (task);
       return;
     }
 
@@ -309,10 +304,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   message = tp_client_message_new_text (TP_CHANNEL_TEXT_MESSAGE_TYPE_NORMAL, text);
 
   tp_text_channel_send_message_async (TP_TEXT_CHANNEL (priv->channel), message,
-                                      0, on_identify_message_sent, task);
-
-  g_object_unref (message);
-  g_free (text);
+                                      0, on_identify_message_sent, g_steal_pointer (&task));
 }
 
 gboolean
@@ -405,7 +397,7 @@ on_group_contacts_changed (TpChannel  *channel,
 {
   TpChannelGroupChangeReason reason;
   const char *raw_message;
-  char *message = NULL;
+  g_autofree char *message = NULL;
   guint i;
 
   reason = tp_asv_get_uint32 (details, "change-reason", NULL);
@@ -464,7 +456,6 @@ on_group_contacts_changed (TpChannel  *channel,
     }
 
   g_signal_emit (user_data, signals[MEMBERS_CHANGED], 0);
-  g_free (message);
 }
 
 static void
@@ -476,7 +467,7 @@ on_message_sent (TpTextChannel      *channel,
 {
   PolariRoom *room = user_data;
   PolariRoomPrivate *priv = room->priv;
-  char *command, *username, *password, *text;
+  g_autofree char *command = NULL, *username = NULL, *password = NULL, *text = NULL;
 
   if (priv->type != TP_HANDLE_TYPE_CONTACT)
     return;
@@ -489,13 +480,7 @@ on_message_sent (TpTextChannel      *channel,
         g_signal_emit (room, signals[IDENTIFY_SENT], 0, command, username, password);
 
       priv->ignore_identify = FALSE;
-
-      g_free (command);
-      g_free (username);
-      g_free (password);
     }
-
-  g_free (text);
 }
 
 static void
@@ -514,7 +499,7 @@ update_subject (PolariRoom *room,
 {
   PolariRoomPrivate *priv = room->priv;
   const char *raw_subject;
-  char *subject = NULL;
+  g_autofree char *subject = NULL;
 
   raw_subject = tp_asv_get_string (properties, "Subject");
 
@@ -523,13 +508,10 @@ update_subject (PolariRoom *room,
 
   subject = strip_color_codes (raw_subject);
   if (g_strcmp0 (priv->topic, subject) == 0)
-    {
-      g_free (subject);
-      return;
-    }
+    return;
 
   g_free (priv->topic);
-  priv->topic = subject;
+  priv->topic = g_steal_pointer (&subject);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
 }

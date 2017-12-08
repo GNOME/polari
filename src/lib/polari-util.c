@@ -61,8 +61,9 @@ polari_util_match_identify_message (const char  *message,
                                     char       **password)
 {
   static GRegex *identify_message_regex = NULL;
-  GMatchInfo *match;
-  char *text, *stripped_text;
+  g_autoptr(GMatchInfo) match = NULL;
+  g_autofree char *text = NULL;
+  char *stripped_text;
   gboolean matched;
 
   text = g_strdup (message);
@@ -83,9 +84,6 @@ polari_util_match_identify_message (const char  *message,
       if (password)
         *password = g_match_info_fetch (match, 3);
     }
-
-  g_match_info_free (match);
-  g_free (text);
 
   return matched;
 }
