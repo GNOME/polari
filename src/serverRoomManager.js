@@ -130,10 +130,6 @@ var ServerRoomList = GObject.registerClass({
 
         super._init(params);
 
-        this.connect('destroy', () => {
-            this.setAccount(null);
-        });
-
         this._list.model.set_visible_func((model, iter) => {
             let name = model.get_value(iter, RoomListColumn.NAME);
             if (!name)
@@ -186,8 +182,15 @@ var ServerRoomList = GObject.registerClass({
         });
 
         this._manager = ServerRoomManager.getDefault();
-        this._manager.connect('loading-changed',
-                              this._onLoadingChanged.bind(this));
+        let loadingChangedId =
+            this._manager.connect('loading-changed',
+                                  this._onLoadingChanged.bind(this));
+
+        this.connect('destroy', () => {
+            this.setAccount(null);
+
+            this._manager.disconnect(loadingChangedId);
+        });
     }
 
     get can_join() {
