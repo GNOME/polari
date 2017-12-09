@@ -242,6 +242,8 @@ var MainWindow = GObject.registerClass({
             this._settings.set_value('last-selected-channel', serializedChannel);
         else
             this._settings.reset('last-selected-channel');
+
+        this.active_room = null;
     }
 
     _touchFile(file) {
