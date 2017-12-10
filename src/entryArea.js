@@ -198,8 +198,18 @@ var EntryArea = GObject.registerClass({
         'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
                                                  'max-nick-chars',
                                                  'max-nick-chars',
-                                                 GObject.ParamFlags.WRITABLE,
-                                                 0, GLib.MAXUINT32, 0)
+                                                 GObject.ParamFlags.READABLE,
+                                                 0, GLib.MAXUINT32, 0),
+        'msg-nick-pixels': GObject.ParamSpec.uint('msg-nick-pixels',
+                                                  'msg-nick-pixels',
+                                                  'msg-nick-pixels',
+                                                  GObject.ParamFlags.WRITABLE,
+                                                  0, GLib.MAXUINT32, 0),
+        'user-nick-pixels': GObject.ParamSpec.uint('user-nick-pixels',
+                                                    'user-nick-pixels',
+                                                    'user-nick-pixels',
+                                                    GObject.ParamFlags.READABLE,
+                                                    0, GLib.MAXUINT32, 0)
     },
 }, class EntryArea extends Gtk.Stack {
     static get _nickPopover() {
@@ -213,7 +223,9 @@ var EntryArea = GObject.registerClass({
         delete params.room;
 
         this._ircParser = new IrcParser(this._room);
-        this._maxNickChars = ChatView.MAX_NICK_CHARS;
+        this._maxNickChars = 0;
+        this._userNickPixels = 0;
+        this._msgNickPixels = 0;
         this._nickChangedId = 0;
 
         super._init(params);
@@ -245,7 +257,6 @@ var EntryArea = GObject.registerClass({
         });
 
         this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
-        this._nickLabel.width_chars = this._maxNickChars;
 
         /* HACK: We don't want the button to look different when the toplevel
                  is unfocused, so filter out the BACKDROP state */
@@ -326,8 +337,16 @@ var EntryArea = GObject.registerClass({
         this._chatEntry.connect('unmap', this._updateCompletions.bind(this));
     }
 
-    set max_nick_chars(maxChars) {
-        this._maxNickChars = maxChars;
+    get max_nick_chars() {
+        return this._maxNickChars;
+    }
+
+    get user_nick_pixels() {
+        return this._userNickPixels;
+    }
+
+    set msg_nick_pixels(msgNickPixels) {
+        this._msgNickPixels = msgNickPixels;
         this._updateNick();
     }
 
@@ -483,7 +502,6 @@ var EntryArea = GObject.registerClass({
     }
 
     _setNick(nick) {
-        this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
 
         if (!this.get_mapped())
@@ -510,9 +528,20 @@ var EntryArea = GObject.registerClass({
         let channel = this._room ? this._room.channel : null;
         let nick = channel ? channel.connection.self_contact.alias
                            : this._room ? this._room.account.nickname : '';
-
-        this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;
+
+        this._maxNickChars = nick.length;
+        let prevNickPixels = this._userNickPixels
+        this._userNickPixels = this._nickLabel.get_preferred_width()[1];
+        // prevent infinite call loop
+        if (prevNickPixels != this._userNickPixels)
+            this.notify('max-nick-chars');
+
+        let height = this._nickLabel.get_preferred_height()[1];
+        // Set width to match indent pixels
+        // The chatView sets the appropriate Pixels to use between
+        // the user and msg nicks
+        this._nickLabel.set_size_request(this._msgNickPixels, height);
 
         if (this.get_mapped())
             EntryArea._nickPopover.nick = nick;
