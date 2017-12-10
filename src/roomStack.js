@@ -200,8 +200,11 @@ class RoomView extends Gtk.Overlay {
                                           sensitive: false });
         box.add(this._entryArea);
 
-        this._view.bind_property('max-nick-chars',
-                                 this._entryArea, 'max-nick-chars',
+        this._view.bind_property('msg-nick-pixels',
+                                 this._entryArea, 'msg-nick-pixels',
+                                 GObject.BindingFlags.SYNC_CREATE);
+        this._entryArea.bind_property('user-nick-pixels',
+                                 this._view, 'user-nick-pixels',
                                  GObject.BindingFlags.SYNC_CREATE);
         sizeGroup.add_widget(this._entryArea);
 
