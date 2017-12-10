@@ -271,8 +271,12 @@ var ConnectionDetails = GObject.registerClass({
 }, class ConnectionDetails extends Gtk.Grid {
     _init(params) {
         this._networksManager = NetworksManager.getDefault();
-        this._networksManager.connect('changed', () => {
+        let id = this._networksManager.connect('changed', () => {
             this.notify('has-service');
+        });
+
+        this.connect('destroy', () => {
+            this._networksManager.disconnect(id);
         });
 
         this._account = null;
