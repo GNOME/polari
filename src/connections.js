@@ -112,17 +112,26 @@ var ConnectionsList = GObject.registerClass({
         this._list.set_placeholder(placeholder);
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('account-added', (mon, account) => {
-            this._setAccountRowSensitive(account, false);
-        });
-        this._accountsMonitor.connect('account-removed', (mon, account) => {
-            this._setAccountRowSensitive(account, true);
-        });
+        let accountAddedId =
+            this._accountsMonitor.connect('account-added', (mon, account) => {
+                this._setAccountRowSensitive(account, false);
+            });
+        let accountRemovedId =
+            this._accountsMonitor.connect('account-removed', (mon, account) => {
+                this._setAccountRowSensitive(account, true);
+            });
 
         this._networksManager = NetworksManager.getDefault();
-        this._networksManager.connect('changed',
-                                      this._networksChanged.bind(this));
+        let networksChangedId =
+            this._networksManager.connect('changed',
+                                          this._networksChanged.bind(this));
         this._networksChanged();
+
+        this.connect('destroy', () => {
+            this._accountsMonitor.disconnect(accountAddedId);
+            this._accountsMonitor.disconnect(accountRemovedId);
+            this._networksManager.disconnect(networksChangedId);
+        });
     }
 
     get favorites_only() {
