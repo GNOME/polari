@@ -15,12 +15,12 @@ const {UserPopover} = imports.userList;
 const {UserStatusMonitor} = imports.userTracker;
 const Utils = imports.utils;
 
-const MARGIN = 14;         // Margin from line start to nick
-const NICK_SPACING = 14;   // Space between nick and message text
-const NICK_TRIM = 2;       // The amount of chars to remove before adding ellipsis
-const MIN_NICK_CHARS = 10; // must have a min char length or a short user nick
-                           // will trim all msg nicks
-const UPDATE_INDENT_TIMEOUT = 1000; // MS
+const MARGIN = 14;          // Margin from line start to nick
+const NICK_SPACING = 14;    // Space between nick and message text
+const NICK_TRIM = 2;        // The amount of chars to remove before adding ellipsis
+                            // 2 generally works well for average char width
+const MIN_NICK_CHARS = 10;  // must have a min char length or a short user nick
+                            // will trim all msg nicks
 
 const IGNORE_STATUS_TIME = 5;
 
@@ -279,17 +279,17 @@ var ChatView = GObject.registerClass({
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
         'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
                                                  'max-nick-chars',
-                                                 'Max nick chars set by user nick',
+                                                 'Max nick chars set by user nick length',
                                                  GObject.ParamFlags.WRITABLE,
                                                  0, GLib.MAXUINT32, 0),
         'msg-nick-pixels': GObject.ParamSpec.uint('msg-nick-pixels',
                                                   'msg-nick-pixels',
-                                                  'Pixel width of largest msg nick after ellipsis',
+                                                  'The pixel width of largest msg nick after ellipsis',
                                                   GObject.ParamFlags.READABLE,
                                                   0, GLib.MAXUINT32, 0),
         'user-nick-pixels': GObject.ParamSpec.uint('user-nick-pixels',
                                                    'user-nick-pixels',
-                                                   'Pixel width of the users nick',
+                                                   'The pixel width of the users nick',
                                                    GObject.ParamFlags.WRITABLE,
                                                    0, GLib.MAXUINT32, 0)
     }
@@ -313,6 +313,7 @@ var ChatView = GObject.registerClass({
         this._onStyleUpdated();
 
         this.connect('destroy', this._onDestroy.bind(this));
+        this.connect('screen-changed', this._updateMaxIndentPixels.bind(this));
         this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
             if (pos == Gtk.PositionType.BOTTOM)
@@ -677,6 +678,8 @@ var ChatView = GObject.registerClass({
         return nick;
     }
 
+    // Get a rect using the start and end iters as the start and
+    // end positions of the rect (end - start = width)
     _getRectFromIters(start, end) {
         let rect1 = this._view.get_iter_location(start);
         let rect2 = this._view.get_iter_location(end);
@@ -688,7 +691,9 @@ var ChatView = GObject.registerClass({
         return rect1;
     }
 
-    // used to get the actual nick size in pixels
+    // Given a starting iter it will find the end for a nick
+    // and return a rect
+    // Used to get the actual nick size in pixels
     _getNickRectFromIter(iter) {
         let tags = iter.get_tags();
         let nickTagName = null;
@@ -707,7 +712,9 @@ var ChatView = GObject.registerClass({
         return null
     }
 
-	_updateMaxIndentPixels() {
+    // Finds the largest nick width in pixels from the current
+    // displayed only (not entire buffer)
+    _updateMaxIndentPixels() {
         this._msgNickPixels = 0;
         let wRect = this._view.get_visible_rect();
         let [, start] = this._view.get_iter_at_location(wRect.x, wRect.y);
@@ -727,6 +734,7 @@ var ChatView = GObject.registerClass({
         this.notify('msg-nick-pixels');
     }
 
+    // Update indent per line
     _updateIndent() {
         let totalWidth = this._msgNickPixels + NICK_SPACING;
         let tabs = Pango.TabArray.new(1, true);
