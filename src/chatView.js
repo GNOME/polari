@@ -313,7 +313,7 @@ var ChatView = GObject.registerClass({
         this._onStyleUpdated();
 
         this.connect('destroy', this._onDestroy.bind(this));
-        this.connect('screen-changed', this._updateMaxIndentPixels.bind(this));
+        this.connect('screen-changed', this._redrawHistory.bind(this));
         this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
             if (pos == Gtk.PositionType.BOTTOM)
@@ -336,7 +336,7 @@ var ChatView = GObject.registerClass({
            the default handler calls pango_cairo_context_set_resolution(), so
            update the indent after that */
         this._view.connect_after('style-updated',
-                                 this._updateMaxIndentPixels.bind(this));
+                                 this._redrawHistory.bind(this));
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
@@ -543,7 +543,7 @@ var ChatView = GObject.registerClass({
         this._insertPendingLogs();
         // Require to update indent here since it indents aren't set on
         // load otherwise
-        this._updateMaxIndentPixels();
+        this._redrawHistory();
     }
 
     _createMessage(source) {
@@ -635,7 +635,6 @@ var ChatView = GObject.registerClass({
     set max_nick_chars(maxNickChars) {
         this._maxNickChars = maxNickChars;
         this._redrawHistory();
-        this._updateMaxIndentPixels();
     }
 
     set user_nick_pixels(userNickPixels) {
@@ -647,35 +646,59 @@ var ChatView = GObject.registerClass({
     }
 
     // redraw the loaded history to match the users updated nick
-    // otherwise the history retains the ellipsis nicks
+    // otherwise the history retains nicks that throw out indent
+    // TODO: we could set a marker for last load point and process
+    // only up to that point
     _redrawHistory() {
         let buffer = this._view.buffer;
         let lines = buffer.get_line_count();
 
         for (let line=0; line < lines; line++) {
             let iter = buffer.get_iter_at_line(line);
-            let tags = iter.get_tags();
-            for (let tag=0; tag < tags.length; tag++) {
-                if (tags[tag] instanceof ButtonTag && tags[tag].name != null) {
-                    let nick = tags[tag].name;
-                    // Trim the 'nick' from start
-                    let ellipsisNick = this._getEllipsisNick(nick.slice(4, nick.length));
-
-                    let iterEnd = iter.copy();
-                    iterEnd.forward_to_tag_toggle(this._lookupTag(nick));
-                    this._replaceWithTags(iter, iterEnd, ellipsisNick, tags);
-                    break;
-                }
+            let width = this._setNickOrEllipsisAtIter(iter);
+            if (width != null) {
+                this._msgNickPixels = Math.max(this._msgNickPixels, width);
+                this._updateIndent();
             }
         }
     }
 
-    _getEllipsisNick(nick) {
-        if (nick.length > this._maxNickChars && nick.length > this._minNickChars) {
-            let trim = Math.max(this._maxNickChars, this._minNickChars);
-            nick = nick.slice(0,trim-NICK_TRIM)+'\u2026';
+    // will adjust the message nick until it is under the width
+    // of the users nick
+    _setNickOrEllipsisAtIter(iter) {
+        let tags = iter.get_tags();
+        for (let tag=0; tag < tags.length; tag++) {
+            if (tags[tag] instanceof ButtonTag && tags[tag].name != null &&
+                this._userNickPixels != 0) {
+                let iterEnd = iter.copy();
+                let nick = tags[tag].name;
+                let actualNick = nick.slice(4, nick.length);
+
+                iterEnd.forward_to_tag_toggle(this._lookupTag(nick));
+                let width = this._getRectFromIters(iter, iterEnd).width;
+                if (width > this._userNickPixels) {
+                    for (let x=0; x<actualNick.length; x++) {
+                        if (width > this._userNickPixels) {
+                            actualNick = actualNick.slice(0, actualNick.length - x)+'\u2026';
+                            iter = this._replaceWithTags(iter, iterEnd, actualNick, tags);
+                            iterEnd = iter.copy();
+                            iterEnd.forward_to_tag_toggle(this._lookupTag(nick));
+                            width = this._getRectFromIters(iter, iterEnd).width;
+                        } else {
+                            break;
+                        }
+                    }
+                } else if (actualNick.length > this._minNickChars) {
+                    actualNick = actualNick.slice(0, actualNick.length - NICK_TRIM)+'\u2026';
+                    iter = this._replaceWithTags(iter, iterEnd, actualNick, tags);
+                    iterEnd = iter.copy();
+                    iterEnd.forward_to_tag_toggle(this._lookupTag(nick));
+                    width = this._getRectFromIters(iter, iterEnd).width;
+                }
+                return width;
+            }
         }
-        return nick;
+        return null;
     }
 
     // Get a rect using the start and end iters as the start and
@@ -691,41 +714,18 @@ var ChatView = GObject.registerClass({
         return rect1;
     }
 
-    // Given a starting iter it will find the end for a nick
-    // and return a rect
-    // Used to get the actual nick size in pixels
-    _getNickRectFromIter(iter) {
-        let tags = iter.get_tags();
-        let nickTagName = null;
-        // match lines that display a nick
-        for (let tag=0; tag < tags.length; tag++) {
-            if (tags[tag] instanceof ButtonTag && tags[tag].name != null) {
-                nickTagName = tags[tag].name;
-                break;
-            }
-        }
-        if (nickTagName != null) {
-            let iterEnd = iter.copy();
-            iterEnd.forward_to_tag_toggle(this._lookupTag(nickTagName));
-            return this._getRectFromIters(iter, iterEnd);
-        }
-        return null
-    }
-
     // Finds the largest nick width in pixels from the current
-    // displayed only (not entire buffer)
-    _updateMaxIndentPixels() {
+    // displayed only (not entire buffer). Used for new message insert
+    _updateVisibleIndent() {
         this._msgNickPixels = 0;
         let wRect = this._view.get_visible_rect();
         let [, start] = this._view.get_iter_at_location(wRect.x, wRect.y);
 
         // find the longest msg nick
         do {
-            let rect = this._getNickRectFromIter(start);
-            if (rect != null) {
-                if (rect.y > wRect.height - rect.height)
-                    break;
-                this._msgNickPixels = Math.max(this._msgNickPixels, rect.width);
+            let width = this._setNickOrEllipsisAtIter(start);
+            if (width != null) {
+                this._msgNickPixels = Math.max(this._msgNickPixels, width);
                 this._updateIndent();
             }
         } while (start.forward_line());
@@ -759,8 +759,6 @@ var ChatView = GObject.registerClass({
 
     _onScroll(w, event) {
         let [hasDir, dir] = event.get_scroll_direction();
-
-        this._updateMaxIndentPixels();
 
         if (hasDir && dir != Gdk.ScrollDirection.UP)
             return Gdk.EVENT_PROPAGATE;
@@ -1281,6 +1279,11 @@ var ChatView = GObject.registerClass({
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
 
+        let prev_msgNickPixels = this._msgNickPixels;
+        this._updateVisibleIndent();
+        if (prev_msgNickPixels < this._msgNickPixels)
+            this._redrawHistory();
+
         if (message.pendingId == undefined /* outgoing */ ||
             (this._app.isRoomFocused(this._room) && this._pending.size == 0))
             this._channel.ack_message_async(tpMessage, null);
@@ -1339,10 +1342,7 @@ var ChatView = GObject.registerClass({
                 if (needsGap)
                     tags.push(this._lookupTag('gap'));
 
-                // shorten nick for display if needed
-                let ellipsisNick = this._getEllipsisNick(message.nick);
-
-                this._insertWithTags(iter, ellipsisNick, tags);
+                this._insertWithTags(iter, message.nick, tags);
                 buffer.insert(iter, '\t', -1);
             }
             state.lastNick = message.nick;
@@ -1502,6 +1502,8 @@ var ChatView = GObject.registerClass({
         let start = buffer.get_iter_at_offset(offset);
         for (let i = 0; i < tags.length; i++)
             buffer.apply_tag(tags[i], start, iter);
+        // Old iter was invalidated so return new
+        return start;
     }
 
     _insertWithTags(iter, text, tags) {
