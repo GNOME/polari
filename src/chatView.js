@@ -730,13 +730,12 @@ var ChatView = GObject.registerClass({
             }
         } while (start.forward_line());
 
-        this._msgNickPixels = Math.max(this._msgNickPixels, this._userNickPixels);
         this.notify('msg-nick-pixels');
     }
 
     // Update indent per line
     _updateIndent() {
-        let totalWidth = this._msgNickPixels + NICK_SPACING;
+        let totalWidth = (Math.max(this._msgNickPixels, this._userNickPixels)) + NICK_SPACING;
         let tabs = Pango.TabArray.new(1, true);
         tabs.set_tab(0, Pango.TabAlign.LEFT, totalWidth);
         this._view.tabs = tabs;

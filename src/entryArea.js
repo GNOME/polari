@@ -541,7 +541,7 @@ var EntryArea = GObject.registerClass({
         // Set width to match indent pixels
         // The chatView sets the appropriate Pixels to use between
         // the user and msg nicks
-        this._nickLabel.set_size_request(this._msgNickPixels, height);
+        this._nickLabel.set_size_request(this._userNickPixels, height);
 
         if (this.get_mapped())
             EntryArea._nickPopover.nick = nick;
