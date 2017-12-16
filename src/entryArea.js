@@ -345,7 +345,8 @@ var EntryArea = GObject.registerClass({
         // The chatView sets the appropriate Pixels to use between
         // the user and msg nicks
         let height = this._nickLabel.get_preferred_height()[1];
-        this._nickLabel.set_size_request(this._msgNickPixels, height);
+        let width = Math.max(this._userNickPixels, this._msgNickPixels);
+        this._nickLabel.set_size_request(width, height);
     }
 
     _updateCompletions() {
