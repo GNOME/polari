@@ -16,7 +16,6 @@ const {UserStatusMonitor} = imports.userTracker;
 const Utils = imports.utils;
 
 const CHAR_MARGIN = 1;          // Margin from line start to nick
-const NICK_SPACING = 14;    // Space between nick and message text
 const NICK_TRIM = 2;        // The amount of chars to remove before adding ellipsis
                             // 2 generally works well for average char width
 const MIN_NICK_CHARS = 10;  // must have a min char length or a short user nick
@@ -649,15 +648,12 @@ var ChatView = GObject.registerClass({
     _redrawHistory() {
         let buffer = this._view.buffer;
         let lines = buffer.get_line_count();
-        this._msgNickPixels = 0;
-
-        let maxWidth = Math.max(this._userNickPixels,
+        // set which nick length to make maximum
+        this._msgNickPixels = Math.max(this._userNickPixels,
                                 this._getPixelWidthFromAvg(MIN_NICK_CHARS));
         for (let line=0; line < lines; line++) {
             let iter = buffer.get_iter_at_line(line);
-            let [width,] = this._setNickOrEllipsisAtIter(iter, maxWidth);
-            if (width != null)
-                this._msgNickPixels = Math.max(this._msgNickPixels, width);
+            this._setNickOrEllipsisAtIter(iter);
         }
         this._updateIndent();
         this.notify('msg-nick-pixels');
@@ -665,7 +661,7 @@ var ChatView = GObject.registerClass({
 
     // will adjust the message nick until it is under the width
     // of the users nick
-    _setNickOrEllipsisAtIter(iter, maxWidth) {
+    _setNickOrEllipsisAtIter(iter) {
         let tags = iter.get_tags();
         for (let tag=0; tag < tags.length; tag++) {
             if (tags[tag] instanceof ButtonTag && tags[tag].name != null &&
@@ -686,7 +682,7 @@ var ChatView = GObject.registerClass({
                 let width = this._getRectFromIters(iter, iterEnd).width;
                 let trim = 1;
                 // only trim by width if the users nick is above the minimum length
-                while (width > maxWidth) {
+                while (width > this._msgNickPixels) {
                     actualNick = actualNick.slice(0, actualNick.length - trim)+'\u2026';
                     iter = this._replaceWithTags(iter, iterEnd, actualNick, tags);
                     iterEnd = iter.copy();
@@ -694,10 +690,8 @@ var ChatView = GObject.registerClass({
                     width = this._getRectFromIters(iter, iterEnd).width;
                     trim += 1;
                 }
-                return [width, iter];
             }
         }
-        return [null, iter];
     }
 
     // Get a rect using the start and end iters as the start and
@@ -727,40 +721,36 @@ var ChatView = GObject.registerClass({
     // displayed only (not entire buffer). Used for new message insert
     _updateVisibleIndent() {
         let prevIndent = this._msgNickPixels;
-        this._msgNickPixels = 0;
         let wRect = this._view.get_visible_rect();
         let [, start] = this._view.get_iter_at_location(wRect.x, wRect.y);
 
-        // find the longest msg nick
-        let maxWidth = Math.max(this._userNickPixels,
+        // set which nick length to make maximum
+        this._msgNickPixels = Math.max(this._userNickPixels,
                                 this._getPixelWidthFromAvg(MIN_NICK_CHARS));
         do {
             if (start.is_end())
                 break;
-            let [width, next] = this._setNickOrEllipsisAtIter(start, maxWidth);
-            start = next;
-            if (width != null)
-                this._msgNickPixels = Math.max(this._msgNickPixels, width);
+            this._setNickOrEllipsisAtIter(start, maxWidth);
         } while (start.forward_line());
 
         // May not be true very often, if at all. Exists as a safeguard against
         // possible indent issues
-        if (prevIndent != this._msgNickPixels && this._msgNickPixels != 0) {
+        if (prevIndent != this._msgNickPixels) {
             this._redrawHistory();
-            this._updateIndent();
         }
+        this._updateIndent();
         this.notify('msg-nick-pixels');
     }
 
     // Update indent per line
     _updateIndent() {
-        let totalWidth = this._msgNickPixels +
-                         this._getPixelWidthFromAvg(CHAR_MARGIN);
+        let char_margin = this._getPixelWidthFromAvg(CHAR_MARGIN);
+        let totalWidth = this._msgNickPixels + char_margin;
         let tabs = Pango.TabArray.new(1, true);
         tabs.set_tab(0, Pango.TabAlign.LEFT, totalWidth);
         this._view.tabs = tabs;
         this._view.indent = -totalWidth;
-        this._view.left_margin = MARGIN + totalWidth;
+        this._view.left_margin = char_margin + totalWidth;
     }
 
     _updateScroll() {
