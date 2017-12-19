@@ -275,13 +275,13 @@ var ConnectionDetails = GObject.registerClass({
             this.notify('has-service');
         });
 
-        this.connect('destroy', () => {
-            this._networksManager.disconnect(id);
-        });
-
         this._account = null;
 
         super._init(params);
+
+        this.connect('destroy', () => {
+            this._networksManager.disconnect(id);
+        });
 
         this._nameEntry.connect('changed',
                                 this._onCanConfirmChanged.bind(this));
