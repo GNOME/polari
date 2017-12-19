@@ -15,11 +15,9 @@ const {UserPopover} = imports.userList;
 const {UserStatusMonitor} = imports.userTracker;
 const Utils = imports.utils;
 
-const CHAR_MARGIN = 2;          // Margin from line start to nick
-const NICK_TRIM = 2;        // The amount of chars to remove before adding ellipsis
-                            // 2 generally works well for average char width
-const MIN_NICK_CHARS = 12;  // must have a min char length or a short user nick
-                            // will trim all msg nicks
+const CHAR_MARGIN = 1;      // Margin from line start to nick
+const MIN_NICK_CHARS = 10;  // must have a min char length or a short user nick
+                            // will trim all msg nicks. 10 works well
 
 const IGNORE_STATUS_TIME = 5;
 
@@ -309,7 +307,9 @@ var ChatView = GObject.registerClass({
         this._onStyleUpdated();
 
         this.connect('destroy', this._onDestroy.bind(this));
-        this.connect('screen-changed', this._updateVisibleIndent.bind(this));
+        // whenever the screen pixel count changes the full history will
+        // need to be checked since pixel indent size will change
+        this.connect('screen-changed', this._doEllipsisOfBuffer.bind(this));
         this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
             if (pos == Gtk.PositionType.BOTTOM)
@@ -332,7 +332,7 @@ var ChatView = GObject.registerClass({
            the default handler calls pango_cairo_context_set_resolution(), so
            update the indent after that */
         this._view.connect_after('style-updated',
-                                 this._updateVisibleIndent.bind(this));
+                                 this._doEllipsisOfBuffer.bind(this));
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
@@ -543,7 +543,7 @@ var ChatView = GObject.registerClass({
         this._insertPendingLogs();
         // Require to update indent here since it indents aren't set on
         // load otherwise
-        this._updateVisibleIndent();
+        this._doEllipsisOfBuffer();
     }
 
     _createMessage(source) {
@@ -634,7 +634,7 @@ var ChatView = GObject.registerClass({
 
     set user_nick_pixels(userNickPixels) {
         this._userNickPixels = userNickPixels;
-        this._redrawHistory();
+        this._doEllipsisOfBuffer();
     }
 
     get can_drop() {
@@ -645,7 +645,7 @@ var ChatView = GObject.registerClass({
     // otherwise the history retains nicks that throw out indent
     // TODO: we could set a marker for last load point and process
     // only up to that point
-    _redrawHistory() {
+    _doEllipsisOfBuffer() {
         let buffer = this._view.buffer;
         let lines = buffer.get_line_count();
         // set which nick length to make maximum
@@ -653,7 +653,7 @@ var ChatView = GObject.registerClass({
                                 this._getPixelWidthFromAvg(MIN_NICK_CHARS));
         for (let line=0; line < lines; line++) {
             let iter = buffer.get_iter_at_line(line);
-            this._setNickOrEllipsisAtIter(iter);
+            this._maybeNickEllipsis(iter);
         }
         this._updateIndent();
         if (this._msgNickPixels > this._userNickPixels)
@@ -661,8 +661,8 @@ var ChatView = GObject.registerClass({
     }
 
     // will adjust the message nick until it is under the width
-    // of the users nick
-    _setNickOrEllipsisAtIter(iter) {
+    // of the users nick or the base minimum, whichever is larger
+    _maybeNickEllipsis(iter) {
         let tags = iter.get_tags();
         for (let tag=0; tag < tags.length; tag++) {
             if (tags[tag] instanceof ButtonTag && tags[tag].name != null &&
@@ -674,7 +674,8 @@ var ChatView = GObject.registerClass({
                 iterEnd.forward_to_tag_toggle(this._lookupTag(nick));
 
                 // need to replace with original nick if it was previously changed
-                if (actualNick != iter.get_text(iterEnd)) {
+                if (actualNick != iter.get_text(iterEnd) &&
+                    actualNick[actualNick.length-1] == '\u2026') {
                     iter = this._replaceWithTags(iter, iterEnd, actualNick, tags);
                     iterEnd = iter.copy();
                     iterEnd.forward_to_tag_toggle(this._lookupTag(nick));
@@ -693,7 +694,6 @@ var ChatView = GObject.registerClass({
                 }
             }
         }
-        return iter;
     }
 
     // Get a rect using the start and end iters as the start and
@@ -719,33 +719,6 @@ var ChatView = GObject.registerClass({
         return charCount * pixelWidth;
     }
 
-    // Finds the largest nick width in pixels from the current
-    // displayed only (not entire buffer). Used for new message insert
-    _updateVisibleIndent() {
-        let prevIndent = this._msgNickPixels;
-        let wRect = this._view.get_visible_rect();
-        let [, start] = this._view.get_iter_at_location(wRect.x, wRect.y);
-
-        // set which nick length to make maximum
-        this._msgNickPixels = Math.max(this._userNickPixels,
-                                this._getPixelWidthFromAvg(MIN_NICK_CHARS));
-        do {
-            if (start.is_end())
-                break;
-            let next = this._setNickOrEllipsisAtIter(start);
-            start = next;
-        } while (start.forward_line());
-
-        // May not be true very often, if at all. Exists as a safeguard against
-        // possible indent issues
-        if (prevIndent != this._msgNickPixels) {
-            this._redrawHistory();
-        }
-        this._updateIndent();
-        if (this._msgNickPixels > this._userNickPixels)
-            this.notify('msg-nick-pixels');
-    }
-
     // Update indent per line
     _updateIndent() {
         let char_margin = this._getPixelWidthFromAvg(CHAR_MARGIN);
@@ -754,7 +727,7 @@ var ChatView = GObject.registerClass({
         tabs.set_tab(0, Pango.TabAlign.LEFT, totalWidth);
         this._view.tabs = tabs;
         this._view.indent = -totalWidth;
-        this._view.left_margin = char_margin + totalWidth;
+        this._view.left_margin = totalWidth + char_margin*2;
     }
 
     _updateScroll() {
@@ -1299,7 +1272,7 @@ var ChatView = GObject.registerClass({
         else if (this._needsIndicator)
             this._setIndicatorMark(this._view.buffer.get_end_iter());
 
-        this._updateVisibleIndent();
+        this._maybeNickEllipsis(iter);
     }
 
     _insertMessage(iter, message, state) {
