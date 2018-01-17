@@ -9,6 +9,8 @@ const Tp = imports.gi.TelepathyGLib;
 const {AccountsMonitor} = imports.accountsMonitor;
 const {RoomManager} = imports.roomManager;
 
+const MIN_SPINNER_TIME = 1000000;   //in microsecond
+
 function _onPopoverVisibleChanged(popover) {
     let context = popover.relative_to.get_style_context();
     if (popover.visible)
@@ -244,6 +246,8 @@ var RoomListHeader = GObject.registerClass({
             this.popover.hide();
         });
 
+        this._spinnerActivationTime = 0;
+
         let displayNameChangedId =
             this._account.connect('notify::display-name',
                                   this._onDisplayNameChanged.bind(this));
@@ -319,9 +323,23 @@ var RoomListHeader = GObject.registerClass({
         else if (status == Tp.ConnectionStatus.DISCONNECTED)
             child = 'disconnected';
 
+        if (isError && this._spinner.active) {
+            let spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
+            if (spinnerTime < MIN_SPINNER_TIME) {
+                Mainloop.timeout_add((MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
+                    this._onConnectionStatusChanged();
+                    return GLib.SOURCE_REMOVE;
+                });
+                return;
+            }
+        }
+
         this._iconStack.visible_child_name = child;
         this._spinner.active = (child == 'connecting');
         this._popoverTitle.visible = !isAuth;
+
+        if(this._spinner.active)
+            this._spinnerActivationTime = GLib.get_monotonic_time();
 
         this._popoverTitle.use_markup = isError;
         this._popoverStatus.use_markup = !isError;
