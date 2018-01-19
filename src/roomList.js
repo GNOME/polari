@@ -9,7 +9,7 @@ const Tp = imports.gi.TelepathyGLib;
 const {AccountsMonitor} = imports.accountsMonitor;
 const {RoomManager} = imports.roomManager;
 
-const MIN_SPINNER_TIME = 1000000;
+const MIN_SPINNER_TIME = 1000000;   //in microsecond
 
 function _onPopoverVisibleChanged(popover) {
     let context = popover.relative_to.get_style_context();
