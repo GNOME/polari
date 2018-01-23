@@ -125,6 +125,10 @@
                         <property name="use-markup">True</property>
                         <property name="label" bind-source="Gjs_MainWindow"
                                   bind-property="subtitle" bind-flags="sync-create"/>
+                        <property name="has-tooltip" bind-source="Gjs_MainWindow"
+                                  bind-property="subtitle-visible" bind-flags="sync-create" />
+                        <property name="tooltip-markup" bind-source="Gjs_MainWindow"
+                                  bind-property="subtitle" bind-flags="sync-create" />
                         <style>
                           <class name="subtitle"/>
                           <class name="dim-label"/>
