@@ -377,7 +377,7 @@ msgstr "Propietats"
 
 #: data/resources/server-room-list.ui:45
 msgid "Enter room name to add"
-msgstr "Entreu el nom de la sala on afegir-vos"
+msgstr "Introduïu el nom de la sala on afegir-vos"
 
 #: data/resources/user-details.ui:27
 msgid "Loading details"
@@ -691,7 +691,7 @@ msgstr "/ME <acció> - envia l'<acció> al canal actual"
 
 #: src/ircParser.js:30
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
-msgstr "/MSG <sobrenom> [<missatge>] - envia una missatge privat a <sobrenom>"
+msgstr "/MSG <sobrenom> [<missatge>] - envia un missatge privat a <sobrenom>"
 
 #: src/ircParser.js:31
 msgid "/NAMES — lists users on the current channel"
