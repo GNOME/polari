@@ -61,6 +61,13 @@ var ChatEntry = GObject.registerClass({
         let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
         buffer.set_spell_checker (ChatEntry._checker);
 
+        this._room = params.room;
+        if(this._room && this._room.channel) {
+        	let nicks = this._room.channel.group_dup_members_contacts().map( x => x.alias);
+        	nicks.forEach( (x,index,arr) => arr[index] += '\0');
+        	nicks.forEach( x => ChatEntry._checker.add_word_to_session(x,-1));
+        }
+
         let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
         spellEntry.set_inline_spell_checking(true);
 
