@@ -1,3 +1,23 @@
+3.27.91 — “I Gotta Get Rid of Those Pens”
+=========================================
+* Fix interactive elements in chat log on touch screens [Florian; #784547]
+* Defer loading room lists when connection is metered [Florian; #29]
+* Ensure feedback for the "reconnect" action [unkemptArc99; #21]
+* Add "Disconnect" item to the network context popover [Florian; #771889]
+* Allow running a test instance alongside the regular one [Florian; #24]
+* Misc. bug fixes [Florian; #32]
+
+Contributors:
+  Piotr Drąg, Daniel García Moreno, Florian Müllner, unkemptArc99, Balázs Úr
+
+Translators:
+  Kjartan Maraas [nb], Борисав Живановић [sr], Kukuh Syafaat [id],
+  Stas Solovey [ru], Anders Jonsson [sv], Jiri Grönroos [fi], Balázs Meskó [hu],
+  Jordi Mas [ca], Gil Forcada [ca], Andika Triwidada [id],
+  Rafael Fontenelle [pt_BR], Mario Blättermann [de], Piotr Drąg [pl],
+  Fabio Tomat [fur], Cheng-Chia Tseng [zh_TW], Fran Dieguez [gl],
+  Марко Костић [sr], Милош Поповић [sr@latin]
+
 3.27.2 - "Talking in Sentences With No Punchline"
 =================================================
 * Clarify title of message notifications [Daniel; #786709]
