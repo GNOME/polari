@@ -5,22 +5,22 @@
 # Gustavo Marques <gutodisse@gmail.com>, 2015.
 # Artur de Aquino Morais <artur.morais93@outlook.com>, 2016.
 # Fábio Nogueira <fnogueira@gnome.org>, 2016.
-# Enrico Nicoletto <liverig@gmail.com>, 2013-2016.
+# Enrico Nicoletto <liverig@gmail.com>, 2013-2016, 2018.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2013-2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-02 21:33+0000\n"
-"PO-Revision-Date: 2018-02-03 08:57-0200\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2018-02-20 23:18+0000\n"
+"PO-Revision-Date: 2018-02-20 21:04-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Virtaal 1.0.0-beta1\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Um cliente de bate-papo através da Internet (IRC) para o GNOME"
 
@@ -343,7 +343,6 @@ msgid "Add rooms and networks"
 msgstr "Adicionar salas e redes"
 
 #: data/resources/main-window.ui:175
-#| msgid "Show connections"
 msgid "Show connected users"
 msgstr "Mostra usuários conectados"
 
@@ -380,7 +379,6 @@ msgid "Reconnect"
 msgstr "Reconectar"
 
 #: data/resources/room-list-header.ui:162
-#| msgid "Reconnect"
 msgid "Disconnect"
 msgstr "Desconectar"
 
@@ -417,27 +415,31 @@ msgid "Start Telepathy client"
 msgstr "Inicia o cliente Telephathy"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Permitir a execução junto com outra instância"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Exibe a versão e sai"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Falha ao abrir o link"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "%s removido."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
 msgstr ""
-"Enrico Nicoletto <liverig@gmail.com>, 2013-2016\n"
+"Enrico Nicoletto <liverig@gmail.com>, 2013-2016, 2018\n"
 "Gustavo Marques<gutodisse@gmail.com>, 2015.\n"
 "Fábio Nogueira <fnogueira@gnome.org>, 2016.\n"
 "Rafael Fontenelle <rafaelff@gnome.org>, 2013-2018."
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Aprenda mais sobre o Polari"
 
@@ -596,7 +598,6 @@ msgid "Already added"
 msgstr "Já adicionado"
 
 #: src/connections.js:107
-#| msgid "No results"
 msgid "No results."
 msgstr "Nenhum resultado."
 
@@ -776,7 +777,7 @@ msgstr "Nenhum tópico definido"
 msgid "Add Network"
 msgstr "Adicionar rede"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -882,7 +883,6 @@ msgstr "Salvar"
 #. received message, in the form "user-nickname in room-display-name"
 #: src/telepathyClient.js:613
 #, javascript-format
-#| msgid "%s in #%s"
 msgid "%s in %s"
 msgstr "%s em %s"
 
