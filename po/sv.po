@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari.master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-02 21:33+0000\n"
-"PO-Revision-Date: 2018-02-03 13:41+0100\n"
+"POT-Creation-Date: 2018-02-20 23:18+0000\n"
+"PO-Revision-Date: 2018-02-22 12:33+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "En IRC-chattklient för GNOME"
 
@@ -410,19 +410,23 @@ msgid "Start Telepathy client"
 msgstr "Starta Telepathy-klient"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Tillåt körning vid sidan av en annan instans"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Skriv ut version och avsluta"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Misslyckades med att öppna länk"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "%s borttagen."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
 msgstr ""
 "Kristoffer Grundström <kristoffer.grundstrom1983@gmail.com>\n"
@@ -431,7 +435,7 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Lär dig mer om Polari"
 
@@ -774,7 +778,7 @@ msgstr "Inget ämne är inställt"
 msgid "Add Network"
 msgstr "Lägg till nätverk"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
