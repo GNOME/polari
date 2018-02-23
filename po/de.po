@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-02 21:33+0000\n"
-"PO-Revision-Date: 2018-02-04 14:55+0100\n"
+"POT-Creation-Date: 2018-02-20 23:18+0000\n"
+"PO-Revision-Date: 2018-02-23 22:45+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -30,7 +30,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Ein IRC-Client für GNOME"
 
@@ -416,19 +416,23 @@ msgid "Start Telepathy client"
 msgstr "Telepathy-Client starten"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Ausführung weiterer Instanzen erlauben"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Versionsnummer ausgeben und beenden"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Fehler beim Öffnen des Links"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "%s wurde entfernt."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
 msgstr ""
 "Christian Kirbach <christian.kirbach@gmail.com>\n"
@@ -436,7 +440,7 @@ msgstr ""
 "J.M. Ruetter <jm@jublo.net>\n"
 "Mario Blättermann <mario.blaettermann@gmail.com>"
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Mehr über Polari erfahren"
 
@@ -778,7 +782,7 @@ msgstr "Kein Thema angegeben"
 msgid "Add Network"
 msgstr "Netzwerk hinzufügen"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
