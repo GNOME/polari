@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Adrian Perez Dominguez <adrian@aztli.org>, 2016.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013, 2014, 2015., 2016, 2017, 2018.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013-2018.
 #
 msgid ""
 msgstr ""
