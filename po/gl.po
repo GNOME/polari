@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-02 21:33+0000\n"
-"PO-Revision-Date: 2018-02-14 23:51+0200\n"
+"POT-Creation-Date: 2018-02-20 23:18+0000\n"
+"PO-Revision-Date: 2018-02-23 01:36+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -25,7 +25,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de Internet Relay Chat para GNOME"
 
@@ -336,7 +336,6 @@ msgid "Add rooms and networks"
 msgstr "Engadir salas e redes"
 
 #: data/resources/main-window.ui:175
-#| msgid "Show connections"
 msgid "Show connected users"
 msgstr "Mostrar os usuarios conectados"
 
@@ -373,7 +372,6 @@ msgid "Reconnect"
 msgstr "Reconectar"
 
 #: data/resources/room-list-header.ui:162
-#| msgid "Reconnect"
 msgid "Disconnect"
 msgstr "Desconectar"
 
@@ -410,23 +408,27 @@ msgid "Start Telepathy client"
 msgstr "Iniciar o cliente de Telepathy"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Permitir a execución ao carón de outra instancia"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Imprimir versión e saír"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Produciuse un fallo ao abrir a ligazón"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "%s quitado."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
-msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2016."
+msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2018."
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Aprender máis sobre Polari"
 
@@ -585,7 +587,6 @@ msgid "Already added"
 msgstr "Xa engadido"
 
 #: src/connections.js:107
-#| msgid "No results"
 msgid "No results."
 msgstr "Sen resultados."
 
@@ -760,7 +761,7 @@ msgstr "Non hai ningún asunto estabelecido"
 msgid "Add Network"
 msgstr "Engadir rede"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -866,7 +867,6 @@ msgstr "Gardar"
 #. received message, in the form "user-nickname in room-display-name"
 #: src/telepathyClient.js:613
 #, javascript-format
-#| msgid "%s in #%s"
 msgid "%s in %s"
 msgstr "%s en %s"
 
