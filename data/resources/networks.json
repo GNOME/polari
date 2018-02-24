@@ -702,5 +702,17 @@
       { "ssl": false, "port": 6667, "address": "Bayern.DE.EU.XWorld.Org" },
       { "ssl": false, "port": 6667, "address": "Chicago.IL.US.XWorld.Org" }
     ]
+  },
+  {
+    "name": "Ozinger",
+    "id": "ozinger",
+    "servers": [
+      { "ssl": false, "port": 6667, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6667, "address": "ipv6.ozinger.org"},
+      { "ssl": false, "port": 80,   "address": "altirc.ozinger.org"},
+      { "ssl": true,  "port": 6667, "address": "irc.ozinger.org"},
+      { "ssl": true,  "port": 6667, "address": "ipv6.ozinger.org"},
+      { "ssl": true,  "port": 443,  "address": "altirc.ozinger.org"}
+    ]
   }
 ]
