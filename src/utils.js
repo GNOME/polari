@@ -49,7 +49,7 @@ const MAX_PASTE_TITLE_LENGTH = 25;
 const IMGUR_CLIENT_ID = '4109e59177ec95e';
 
 // http://daringfireball.net/2010/07/improved_regex_for_matching_urls
-const _balancedParens = '\\((?:[^\\s()<>]+|(?:\\(?:[^\\s()<>]+\\)))*\\)';
+const _balancedParens = '\\([^\\s()<>]+\\)';
 const _leadingJunk = '[\\s`(\\[{\'\\"<\u00AB\u201C\u2018]';
 const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]';
 
