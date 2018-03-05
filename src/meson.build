@@ -28,6 +28,7 @@ js_sources = [
   'joinDialog.js',
   'main.js',
   'mainWindow.js',
+  'messageHistory.js',
   'networksManager.js',
   'pasteManager.js',
   'roomList.js',
