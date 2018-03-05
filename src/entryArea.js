@@ -13,6 +13,7 @@ const {DropTargetIface} = imports.pasteManager;
 const {EmojiPicker} = imports.emojiPicker;
 const {IrcParser} = imports.ircParser;
 const {TabCompletion} = imports.tabCompletion;
+const {MessageHistory} = imports.messageHistory;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -283,6 +284,7 @@ var EntryArea = GObject.registerClass({
 
         this._chatEntry.connect('activate', () => {
             if (this._ircParser.process(this._chatEntry.text)) {
+                this._history._newMessage(this._chatEntry.text);
                 this._chatEntry.text = '';
             } else {
                 this._chatEntry.get_style_context().add_class('error');
@@ -309,6 +311,7 @@ var EntryArea = GObject.registerClass({
             return;
 
         this._completion = new TabCompletion(this._chatEntry);
+        this._history = new MessageHistory(this._chatEntry);
         this._membersChangedId =
             this._room.connect('members-changed',
                                this._updateCompletions.bind(this));
