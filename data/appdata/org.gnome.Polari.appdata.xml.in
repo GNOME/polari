@@ -55,21 +55,19 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="3.26.1" date="2017-10-04">
+    <release version="3.28.0" date="2018-03-12">
       <description>
         <p>
-           The first update for GNOME 3.26 brings in new translations.
-        </p>
-      </description>
-    </release>
-    <release version="3.26.0" date="2017-09-12">
-      <description>
-        <p>
-           This release is part of the GNOME 3.26 update. Highlights include:
+          GNOME 3.28 brings with it a brand new Polari release with bug fixes,
+          performance improvements and new features:
         </p>
         <ul>
-          <li>A guided initial setup mode on first run to assist new users</li>
-          <li>An integrated dialog to easily insert Emoji characters</li>
+          <li>Rooms now indicate when joining them takes a while to show at
+              a glance when they are ready</li>
+          <li>It is now possible to disconnect from networks to disable
+              them temporarily</li>
+          <li>Developing Polari got easier – test changes from GNOME Builder
+              without leaving your chats first</li>
         </ul>
       </description>
     </release>
