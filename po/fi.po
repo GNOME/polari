@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-02 21:33+0000\n"
-"PO-Revision-Date: 2018-02-04 11:07+0200\n"
+"POT-Creation-Date: 2018-02-28 21:04+0000\n"
+"PO-Revision-Date: 2018-03-03 17:46+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -408,23 +408,27 @@ msgid "Start Telepathy client"
 msgstr "Käynnistä Telepathy-asiakas"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Salli käynnissä oleminen toisen instanssin rinnalla"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Tulosta versio ja poistu"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Linkin avaaminen epäonnistui"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "%s poistettiin."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Tietoja - Polari"
 
@@ -771,7 +775,7 @@ msgstr "Kanavan otsikkoa ei ole asetettu"
 msgid "Add Network"
 msgstr "Lisää verkko"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"

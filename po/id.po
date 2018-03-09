@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-02 21:33+0000\n"
-"PO-Revision-Date: 2018-02-03 14:36+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2018-02-20 23:18+0000\n"
+"PO-Revision-Date: 2018-02-22 16:12+0700\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Suatu Klien Internet Relay Chat untuk GNOME"
 
@@ -411,26 +411,30 @@ msgid "Start Telepathy client"
 msgstr "Mulai klien Telepathy"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Izinkan berjalan di samping instance lain"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Cetak versi dan keluar"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Gagal membuka taut"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "%s dihapus."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
 msgstr ""
 "Andika Triwidada <andika@gmail.com>, 2014, 2016, 2018\n"
 "Sendy Aditya Suryana <sendzation@gmail.com>, 2015\n"
 "Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017"
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Pelajari lebih lanjut tentang Polari"
 
@@ -766,7 +770,7 @@ msgstr "Topik tak ditata"
 msgid "Add Network"
 msgstr "Tambah Jaringan"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"

@@ -1,3 +1,19 @@
+3.27.92 — “Like a Baby's Arm”
+=============================
+* Misc. bugs [Florian; #46]
+
+Contributors:
+  Piotr Drąg, Florian Müllner
+
+Translators:
+  Piotr Drąg [pl, es], Enrico Nicoletto [pt_BR], Fabio Tomat [fur],
+  Марко Костић [sr], Daniel Mustieles [es], Marek Cernocky [cs],
+  Furkan Ahmet Kara [tr], Anders Jonsson [sv], Fran Dieguez [gl],
+  Mario Blättermann [de], Balázs Úr [hu], Cheng-Chia Tseng [zh_TW],
+  DaeHyun Sung [ko], GNOME Translation Robot [nl], Milo Casagrande [it],
+  Dušan Kazik [sk], Khaled Hosny [ar], Aurimas Černius [lt], Kukuh Syafaat [id],
+  Guillaume Bernard [fr], Baurzhan Muftakhidinov [kk], Jiri Grönroos [fi]
+
 3.27.91 — “I Gotta Get Rid of Those Pens”
 =========================================
 * Fix interactive elements in chat log on touch screens [Florian; #784547]
