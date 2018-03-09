@@ -4,7 +4,6 @@ stages:
  - build
 
 before_script:
-  - dnf clean packages
   - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
                    gjs-devel gobject-introspection-devel telepathy-glib-devel
                    libappstream-glib desktop-file-utils
