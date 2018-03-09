@@ -13,4 +13,3 @@ build-polari:
   script:
     - meson _build .
     - ninja -C _build test install
-
