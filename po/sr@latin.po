@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-14 22:52+0000\n"
-"PO-Revision-Date: 2018-02-18 18:01+0100\n"
+"POT-Creation-Date: 2018-02-28 21:04+0000\n"
+"PO-Revision-Date: 2018-02-20 19:13+0100\n"
 "Last-Translator: Marko M. Kostić <marko.m.kostic@gmail.com>\n"
 "Language-Team: srpski <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:774
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Gnomov IRC klijent za ćaskanje"
 
@@ -413,19 +413,23 @@ msgid "Start Telepathy client"
 msgstr "Pokreni klijenta Telepatije"
 
 #: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Dozvoli izvršavanje uz još jedan primerak programa"
+
+#: src/application.js:53
 msgid "Print version and exit"
 msgstr "Ispisuje izdanje i izlazi"
 
-#: src/application.js:391 src/utils.js:184
+#: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Nisam uspeo da otvorim vezu"
 
-#: src/application.js:672
+#: src/application.js:705
 #, javascript-format
 msgid "%s removed."
 msgstr "„%s“ je uklonjeno."
 
-#: src/application.js:773
+#: src/application.js:807
 msgid "translator-credits"
 msgstr ""
 "Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
@@ -434,7 +438,7 @@ msgstr ""
 "\n"
 "http://prevod.org — prevod na srpski jezi"
 
-#: src/application.js:779
+#: src/application.js:813
 msgid "Learn more about Polari"
 msgstr "Saznajte više o Polariju"
 
@@ -777,7 +781,7 @@ msgstr "Tema nije postavljena"
 msgid "Add Network"
 msgstr "Dodaj mrežu"
 
-#: src/mainWindow.js:379
+#: src/mainWindow.js:382
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
