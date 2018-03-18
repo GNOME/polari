@@ -806,7 +806,7 @@ var Application = GObject.registerClass({
             ],
             translator_credits: _("translator-credits"),
             comments: _("An Internet Relay Chat Client for GNOME"),
-            copyright: 'Copyright © 2013-2015 The Polari authors',
+            copyright: 'Copyright © 2013-2018 The Polari authors',
             license_type: Gtk.License.GPL_2_0,
             logo_icon_name: 'org.gnome.Polari',
             version: pkg.version,
