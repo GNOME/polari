@@ -120,6 +120,7 @@
             "name": "polari",
             "buildsystem": "meson",
             "builddir": true,
+            "run-tests": true,
             "config-opts": ["--libdir=lib"],
             "sources": [
                 {
