@@ -1,15 +1,19 @@
-image: fedora:latest
-
 stages:
- - build
+ - test
 
-before_script:
-  - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
-                   gjs-devel gobject-introspection-devel telepathy-glib-devel
-                   libappstream-glib desktop-file-utils
-
-build-polari:
-  stage: build
+flatpak:master:
+  image: registry.gitlab.com/alatiera/gnome-nightly-oci/gnome-master:latest
+  stage: test
   script:
-    - meson _build .
-    - ninja -C _build test install
+    - flatpak-builder --keep-build-dirs --repo=repo app flatpak/org.gnome.Polari.json
+    - flatpak build-bundle repo polari-dev.flatpak --runtime-repo=https://sdk.gnome.org/gnome-nightly.flatpakrepo org.gnome.Polari
+    - cp -r .flatpak-builder/build/polari/_flatpak_build/meson-logs .
+  artifacts:
+    paths:
+      - polari-dev.flatpak
+      - meson-logs/meson-log.txt
+      - meson-logs/testlog.txt
+    expire_in: 2 days
+  cache:
+    paths:
+      - .flatpak-builder/cache
