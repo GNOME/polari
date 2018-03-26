@@ -567,6 +567,26 @@
     ]
   },
   {
+    "name": "Rizon",
+    "id": "rizon",
+    "servers": [
+      { "ssl": true, "port": 9999, "address": "irc.rizon.net" },
+      { "ssl": true, "port": 6697, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6660, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6661, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6662, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6663, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6664, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6665, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6666, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6667, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6668, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6669, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 6670, "address": "irc.rizon.net" },
+      { "ssl": false, "port": 7000, "address": "irc.rizon.net" }
+    ]
+  },
+  {
     "name": "RusNet",
     "id": "rusnet",
     "servers": [
