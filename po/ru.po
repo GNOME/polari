@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-03-26 12:00+0000\n"
-"PO-Revision-Date: 2018-03-27 00:08+0300\n"
+"POT-Creation-Date: 2018-03-26 21:10+0000\n"
+"PO-Revision-Date: 2018-03-27 00:12+0300\n"
 "Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -50,6 +50,10 @@ msgstr ""
 "Приложение Polari используется для для публичного и приватного общения на "
 "чат-каналах. Благодаря уведомлениям вы никогда не пропустите важного "
 "сообщения, а для личных бесед можно ответить собеседнику прямо в уведомлении!"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:47
+msgid "The GNOME Project"
+msgstr "Проект GNOME"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
@@ -592,7 +596,7 @@ msgstr "Уже добавлено"
 
 #: src/connections.js:107
 msgid "No results."
-msgstr "Результатов не найдено."
+msgstr "Нет результатов."
 
 #. Translators: %s is a connection name
 #: src/connections.js:492
