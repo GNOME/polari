@@ -51,6 +51,9 @@ var Application = GObject.registerClass({
         this.add_main_option('version', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Print version and exit"), null);
+        this.add_main_option('quit', 0,
+                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+                             _("Quit polari"), null)
         this.connect('handle-local-options', (o, dict) => {
             let v = dict.lookup_value('test-instance', null);
             if (v && v.get_boolean())
@@ -71,6 +74,12 @@ var Application = GObject.registerClass({
             v = dict.lookup_value('version', null);
             if (v && v.get_boolean()) {
                 print("Polari %s".format(pkg.version));
+                return 0;
+            }
+
+            v = dict.lookup_value('quit', null);
+            if (v && v.get_boolean()) {
+                this.activate_action('quit', null);
                 return 0;
             }
 
