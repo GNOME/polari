@@ -384,7 +384,7 @@ msgstr "Propietats"
 
 #: data/resources/server-room-list.ui:45
 msgid "Enter room name to add"
-msgstr "Entreu el nom de la sala on afegir-vos"
+msgstr "Introduïu el nom de la sala on afegir-vos"
 
 #: data/resources/user-details.ui:27
 msgid "Loading details"
@@ -528,7 +528,7 @@ msgstr "%A, %H∶%M"
 #: src/chatView.js:1158
 #, no-c-format
 msgid "%B %d, %H∶%M"
-msgstr "%d de %B, %H∶%M"
+msgstr "%d %B, %H∶%M"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -537,7 +537,7 @@ msgstr "%d de %B, %H∶%M"
 #: src/chatView.js:1164
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
-msgstr "%d de %B de %Y, %H∶%M"
+msgstr "%d %B de %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
@@ -568,7 +568,7 @@ msgstr "%A, %l∶%M %p"
 #: src/chatView.js:1185
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
-msgstr "%d de %B, %l∶%M %p"
+msgstr "%d %B, %l∶%M %p"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -577,7 +577,7 @@ msgstr "%d de %B, %l∶%M %p"
 #: src/chatView.js:1191
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
-msgstr "%d de %B de %Y, %l∶%M %p"
+msgstr "%d %B de %Y, %l∶%M %p"
 
 #: src/connections.js:54
 msgid "Already added"
