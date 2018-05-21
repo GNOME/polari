@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-03-23 22:10+0000\n"
-"PO-Revision-Date: 2018-03-25 22:22-0500\n"
+"POT-Creation-Date: 2018-04-14 05:16+0000\n"
+"PO-Revision-Date: 2018-05-10 12:14-0500\n"
 "Last-Translator: Mingcong Bai <jeffbai@aosc.xyz>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -426,7 +426,7 @@ msgstr ""
 "tuhaihe <1132321739qq@gmail.com>, 2013\n"
 "Sphinx Jiang <yishanj13@gmail.com>, 2014\n"
 "Mandy Wang <wangmychn@gmail.com>, 2016\n"
-"Mingcong Bai <jeffbai@aosc.xyz>, 2016, 2017\n"
+"Mingcong Bai <jeffbai@aosc.xyz>, 2016, 2017, 2018\n"
 "Dingzhong Chen <wsxy162@gmail.com>, 2017, 2018"
 
 #: src/application.js:813
@@ -827,10 +827,10 @@ msgid "Should the password be saved?"
 msgstr "是否保存该密码？"
 
 #: src/roomStack.js:134 src/telepathyClient.js:587
-#, fuzzy, javascript-format
+#, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
-msgstr "下次连接到 %s 时会自动开启身份鉴别"
+msgstr "下次连接到 %s 时会自动进行身份鉴别"
 
 #: src/roomStack.js:163
 msgid "Join a room using the + button."
@@ -895,9 +895,8 @@ msgid_plural "%d months ago"
 msgstr[0] "%d 个月前"
 
 #: src/userList.js:411
-#, fuzzy
 msgid "Available in another room."
-msgstr "在另一聊天室。"
+msgstr "在另一聊天室在线。"
 
 #: src/userList.js:413
 msgid "Online"
