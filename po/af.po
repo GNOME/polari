@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2018-05-21 14:25+0000\n"
-"PO-Revision-Date: 2018-05-27 13:46+0200\n"
+"PO-Revision-Date: 2018-05-27 17:04+0200\n"
 "Language-Team: Afrikaans <translate-discuss-af@lists.sourceforge.net>\n"
 "Language: af\n"
 "MIME-Version: 1.0\n"
@@ -132,11 +132,11 @@ msgstr ""
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
-msgstr ""
+msgstr "_Bediener adres"
 
 #: data/resources/connection-details.ui:33
 msgid "Net_work Name"
-msgstr ""
+msgstr "_Netwerk naam"
 
 #: data/resources/connection-details.ui:49
 #: data/resources/connection-details.ui:116
@@ -166,7 +166,7 @@ msgstr "_Pas toe"
 
 #: data/resources/entry-area.ui:38
 msgid "Change nickname"
-msgstr ""
+msgstr "Verander bynaam"
 
 #: data/resources/entry-area.ui:119
 msgid "_Paste"
@@ -180,7 +180,7 @@ msgstr "Algemeen"
 #: data/resources/help-overlay.ui:19
 msgctxt "shortcut window"
 msgid "Join Room"
-msgstr ""
+msgstr "Sluit by kletskamer aan"
 
 #: data/resources/help-overlay.ui:27
 msgctxt "shortcut window"
@@ -225,12 +225,12 @@ msgstr "Vorige kamer"
 #: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
-msgstr ""
+msgstr "Volgende kamer met ongelese boodskappe"
 
 #: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
-msgstr ""
+msgstr "Vorige kamer met ongelese boodskappe"
 
 #: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
@@ -262,7 +262,7 @@ msgstr ""
 #: data/resources/initial-setup-window.ui:109
 #: data/resources/initial-setup-window.ui:159
 msgid "Welcome to Polari"
-msgstr ""
+msgstr "Welkom by Polari"
 
 #: data/resources/initial-setup-window.ui:121
 msgid ""
@@ -277,11 +277,11 @@ msgstr ""
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:231
 msgid "Join Chat Room"
-msgstr ""
+msgstr "Sluit by die kletskamer aan"
 
 #: data/resources/join-room-dialog.ui:19
 msgid "_Join"
-msgstr ""
+msgstr "_Sluit aan"
 
 #: data/resources/join-room-dialog.ui:46
 msgid "C_onnection"
@@ -289,7 +289,7 @@ msgstr "_Konneksie"
 
 #: data/resources/join-room-dialog.ui:75
 msgid "_Add Network"
-msgstr ""
+msgstr "_Voeg netwerk by"
 
 #: data/resources/join-room-dialog.ui:159
 msgid "_Add"
@@ -297,7 +297,7 @@ msgstr "_Voeg by"
 
 #: data/resources/join-room-dialog.ui:178
 msgid "_Custom Network"
-msgstr ""
+msgstr "_Pasgemaakte netwerk"
 
 #: data/resources/main-window.ui:14
 msgid "Run Polari in the Background?"
@@ -319,11 +319,11 @@ msgstr "_Loop in die agtergrond"
 
 #: data/resources/main-window.ui:55 data/resources/main-window.ui:69
 msgid "Add rooms and networks"
-msgstr ""
+msgstr "Voeg kamers en netwerke by"
 
 #: data/resources/main-window.ui:175
 msgid "Show connected users"
-msgstr ""
+msgstr "Vertoon gekoppelde gebruikers"
 
 #: data/resources/menus.ui:12
 msgid "Keyboard Shortcuts"
@@ -355,7 +355,7 @@ msgstr "Koppel"
 
 #: data/resources/room-list-header.ui:154
 msgid "Reconnect"
-msgstr ""
+msgstr "Herkoppel"
 
 #: data/resources/room-list-header.ui:162
 msgid "Disconnect"
@@ -371,15 +371,15 @@ msgstr "Eienskappe"
 
 #: data/resources/server-room-list.ui:45
 msgid "Enter room name to add"
-msgstr ""
+msgstr "Sleutel kamer naam in om by te voeg"
 
 #: data/resources/user-details.ui:27
 msgid "Loading details"
-msgstr ""
+msgstr "Laai tans besonderhede"
 
 #: data/resources/user-details.ui:60
 msgid "Last Activity:"
-msgstr ""
+msgstr "Laaste aktiwiteit:"
 
 #: data/resources/user-details.ui:159
 msgid "Will notify if user appears online."
@@ -387,7 +387,7 @@ msgstr ""
 
 #: data/resources/user-details.ui:181
 msgid "Start Conversation"
-msgstr ""
+msgstr "Begin gesprek"
 
 #: src/application.js:47
 msgid "Start Telepathy client"
@@ -399,11 +399,11 @@ msgstr ""
 
 #: src/application.js:53
 msgid "Print version and exit"
-msgstr ""
+msgstr "Druk weergawe en maak toe"
 
 #: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
-msgstr ""
+msgstr "Kon nie skakel oopmaak nie"
 
 #: src/application.js:705
 #, javascript-format
@@ -432,7 +432,7 @@ msgstr "Open skakel"
 
 #: src/chatView.js:768
 msgid "Copy Link Address"
-msgstr ""
+msgstr "Kopieer skakeladres"
 
 #: src/chatView.js:936
 #, javascript-format
@@ -447,27 +447,27 @@ msgstr "%s het ontkoppel"
 #: src/chatView.js:949
 #, javascript-format
 msgid "%s has been kicked by %s"
-msgstr ""
+msgstr "%s is deur %s uitgeskop"
 
 #: src/chatView.js:951
 #, javascript-format
 msgid "%s has been kicked"
-msgstr ""
+msgstr "%s is uitgeskop"
 
 #: src/chatView.js:957
 #, javascript-format
 msgid "%s has been banned by %s"
-msgstr ""
+msgstr "%s is verban deur %s"
 
 #: src/chatView.js:959
 #, javascript-format
 msgid "%s has been banned"
-msgstr ""
+msgstr "%s is verban"
 
 #: src/chatView.js:964
 #, javascript-format
 msgid "%s joined"
-msgstr ""
+msgstr "%s het aangesluit"
 
 #: src/chatView.js:969
 #, javascript-format
@@ -478,8 +478,8 @@ msgstr ""
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d gebruiker het aangesluit"
+msgstr[1] "%d gebruikers het aangesluit"
 
 #: src/chatView.js:1065
 #, javascript-format
@@ -626,12 +626,12 @@ msgstr ""
 #: src/entryArea.js:444
 #, javascript-format
 msgid "%s in #%s"
-msgstr ""
+msgstr "%s in #%s"
 
 #: src/entryArea.js:446
 #, javascript-format
 msgid "Paste from %s"
-msgstr ""
+msgstr "Plak van %s"
 
 #: src/initialSetup.js:82
 msgid "_Back"
@@ -726,7 +726,7 @@ msgstr "Gebruik: %s"
 
 #: src/ircParser.js:89
 msgid "Known commands:"
-msgstr ""
+msgstr "Bekende bevele:"
 
 #: src/ircParser.js:188
 #, javascript-format
@@ -735,11 +735,11 @@ msgstr "Gebruikers op %s:"
 
 #: src/ircParser.js:267
 msgid "No topic set"
-msgstr ""
+msgstr "Geen onderwerp gestel nie"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
-msgstr ""
+msgstr "Voeg 'n netwerk by"
 
 #: src/mainWindow.js:382
 #, javascript-format
@@ -750,16 +750,16 @@ msgstr[1] "%d gebruikers"
 
 #: src/roomList.js:189
 msgid "Leave chatroom"
-msgstr ""
+msgstr "Verlaat kletskamer"
 
 #: src/roomList.js:189
 msgid "End conversation"
-msgstr ""
+msgstr "Beëindig gesprek"
 
 #: src/roomList.js:288
 #, javascript-format
 msgid "Network %s has an error"
-msgstr ""
+msgstr "Netwerk %s het 'n fout"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
@@ -770,7 +770,7 @@ msgstr "%s (%s)"
 
 #: src/roomList.js:366
 msgid "Connection Problem"
-msgstr ""
+msgstr "Verbindingsprobleem"
 
 #: src/roomList.js:383
 msgid "Connected"
@@ -791,22 +791,22 @@ msgstr "Onbekend"
 #: src/roomList.js:409
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
-msgstr ""
+msgstr "Kon nie op 'n veilige manier aan %s koppel nie."
 
 #: src/roomList.js:412
 #, javascript-format
 msgid "%s requires a password."
-msgstr ""
+msgstr "%s benodig 'n wagwoord."
 
 #: src/roomList.js:418
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
-msgstr ""
+msgstr "Kon nie aan %s koppel nie. Die bediener is besig."
 
 #: src/roomList.js:421
 #, javascript-format
 msgid "Could not connect to %s."
-msgstr ""
+msgstr "Kon nie aan %s koppel nie."
 
 #: src/roomStack.js:117
 msgid "_Save Password"
@@ -814,17 +814,17 @@ msgstr "_Stoor wagwoord"
 
 #: src/roomStack.js:126
 msgid "Should the password be saved?"
-msgstr ""
+msgstr "Moet die wagwoord gestoor word?"
 
 #: src/roomStack.js:134 src/telepathyClient.js:587
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
-msgstr ""
+msgstr "As jy weer aan %s koppel, sal identifikasie outomaties gebeur"
 
 #: src/roomStack.js:163
 msgid "Join a room using the + button."
-msgstr ""
+msgstr "Gebruik die + knoppie om by 'n kamer aan te sluit."
 
 #: src/telepathyClient.js:413
 msgid "Good Bye"
@@ -835,7 +835,7 @@ msgstr "Totsiens"
 #: src/telepathyClient.js:586
 #, javascript-format
 msgid "Save %s password for %s?"
-msgstr ""
+msgstr "Stoor %s wagwoord vir %s?"
 
 #: src/telepathyClient.js:590
 msgid "Save"
@@ -918,9 +918,9 @@ msgstr "Gebruiker %s is nou aanlyn."
 #: src/utils.js:106
 #, javascript-format
 msgid "Polari server password for %s"
-msgstr ""
+msgstr "Polari bediener wagwoord vir %s"
 
 #: src/utils.js:111
 #, javascript-format
 msgid "Polari NickServ password for %s"
-msgstr ""
+msgstr "Polari NickServ wagwoord vir %s"
