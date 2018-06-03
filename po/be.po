@@ -1,0 +1,959 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2018-05-27 15:05+0000\n"
+"PO-Revision-Date: 2018-06-03 22:13+0300\n"
+"Last-Translator: Uladzimir Manulenka <vlma@tut.by>\n"
+"Language-Team: \n"
+"Language: be_BY\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: src/roomStack.js:160
+msgid "Polari"
+msgstr "Polari"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "IRC-кліент для GNOME"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Просты IRC-кліент які створаны для асяроддзя GNOME; мае просты і прыгожы "
+"інтэрфэйс які дазваляе вам сканцэнтравацца на вашых размовах."
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message — for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"Вы можаце выкарыстоўваць Polari для публікацыі размоваў з людзьмі ў чат-"
+"канале і для прыватных абмеркаванняў. Апавяшчэнні дазволяць вам ніколі не "
+"прапускаць важныя паведамленні для прыватных размоваў, яны нават дазволяць "
+"вам адказваць праз апавяшчэнні без уваходу ў праграму!"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:47
+msgid "The GNOME Project"
+msgstr "Праект GNOME"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
+msgid "org.gnome.Polari"
+msgstr "org.gnome.Polari"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Інтэрнэт;Трансляцыя;Чат;"
+
+#: data/org.gnome.Polari.gschema.xml:6
+msgid "Saved channel list"
+msgstr "Спіс захаваных каналаў"
+
+#: data/org.gnome.Polari.gschema.xml:7
+msgid "List of channels to restore on startup"
+msgstr "Спіс каналаў для аднаўлення пад час запуску"
+
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+msgid "Run in Background"
+msgstr "Запусціць у фоне"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "Трымаць запушчаным у фоне пасля закрыцця."
+
+#: data/org.gnome.Polari.gschema.xml:16
+msgid "Window size"
+msgstr "Памер вакна"
+
+#: data/org.gnome.Polari.gschema.xml:17
+msgid "Window size (width and height)."
+msgstr "Памер вакна (шырыня і вышыня)."
+
+#: data/org.gnome.Polari.gschema.xml:21
+msgid "Window maximized"
+msgstr "Акно разгорнута"
+
+#: data/org.gnome.Polari.gschema.xml:22
+msgid "Window maximized state"
+msgstr "Стан разгорнутага вакна"
+
+#: data/org.gnome.Polari.gschema.xml:26
+msgid "Last active channel"
+msgstr "Спіс актыўных каналаў"
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Last active (selected) channel"
+msgstr "Спіс актыўных (выбраных) каналаў"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify botname"
+msgstr "Імя для робата ідэнтыфікацыі"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Nickname of the bot to identify with"
+msgstr "Мянушка для робата з якога будзе адбывацца ідэнтыфікацыя"
+
+#: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "Каманда ідэнтыфікацыі"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Каманда, якая выкарыстоўваецца для ідэнтыфікацыі робата"
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify username"
+msgstr "Імя ўдзельніка ідэнтыфікацыі"
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Username to use in identify command"
+msgstr "Імя ўдзельніка, якое выкарыстоўваецца ў камандзе ідэнтыфікацыі"
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr "Падтрымліваецца ідэнтыфікацыя імя ўдзельніка"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+"Ці будзе каманда ідэнтыфікацыі вядомая для падтрымкі параметра ўдзельніка"
+
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "_Адрас сервера"
+
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "Назв_ва сеткі"
+
+#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:116
+msgid "optional"
+msgstr "дадаткова"
+
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "Ужыць бяспечнае злу_чэнне"
+
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "_Мянушка"
+
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "_Сапраўднае імя"
+
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:82
+msgid "_Cancel"
+msgstr "_Скасаваць"
+
+#: data/resources/connection-properties.ui:17
+msgid "_Apply"
+msgstr "_Ужыць"
+
+#: data/resources/entry-area.ui:38
+msgid "Change nickname"
+msgstr "Змяніць мянушку"
+
+#: data/resources/entry-area.ui:119
+msgid "_Paste"
+msgstr "_Уставіць"
+
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Агульнае"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "Увайсці ў пакой"
+
+#: data/resources/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "Пакінуць пакой"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "Паказаць спіс удзельнікаў"
+
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Паказаць сборшчыка эмоджы"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйсці"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Клавіятурныя скароты"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Навігацыя"
+
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "Наступны пакой"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "Папярэдні пакой"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Наступны пакой з непрачытанымі паведамленнямі"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Папярэдні пакой з непрачытанымі паведамленнямі"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "Першы пакой"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "Апошні пакой"
+
+#: data/resources/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "Першы - дзевяты пакоі"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "Устаноўка Polari"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "Няма злучэння"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Калі ласка, злучыцеся з інтэрнетам для працягу ўсталявання."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "Вітаем у Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr "Polari гэта просты шлях зносіцца праз IRC. Выберыце сетку для пачатку."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Выберыце пакоі да якіх вы жадаеце далучыцца. Вы можаце дадаць болей сетак і "
+"пакояў пазней націснуўшы кнопку +."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:231
+msgid "Join Chat Room"
+msgstr "Далучыцца да чат-пакоя"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "_Join"
+msgstr "_Далучыцца"
+
+#: data/resources/join-room-dialog.ui:46
+msgid "C_onnection"
+msgstr "З_лучэнне"
+
+#: data/resources/join-room-dialog.ui:75
+msgid "_Add Network"
+msgstr "_ Дадаць сетку"
+
+#: data/resources/join-room-dialog.ui:159
+msgid "_Add"
+msgstr "_Дадаць"
+
+#: data/resources/join-room-dialog.ui:178
+msgid "_Custom Network"
+msgstr "_Іншая сетка"
+
+#: data/resources/main-window.ui:14
+msgid "Run Polari in the Background?"
+msgstr "Запусціць Polari у фоне?"
+
+#: data/resources/main-window.ui:15
+msgid ""
+"Polari will continue to run when closed and will be automatically started on "
+"login."
+msgstr ""
+"Polari будзе працягваць працаваць пасля закрыцця і будзе аўтаматычна "
+"запускацца пасля ўваходу ў сістэму."
+
+#: data/resources/main-window.ui:21
+msgid "_Quit"
+msgstr "_Выхад"
+
+#: data/resources/main-window.ui:28
+msgid "_Run in background"
+msgstr "_Запусціць у фоне"
+
+#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+msgid "Add rooms and networks"
+msgstr "Дадаць пакоі і сеткі"
+
+#: data/resources/main-window.ui:175
+msgid "Show connected users"
+msgstr "Паказаць далучаных удзельнікаў"
+
+#: data/resources/menus.ui:12
+msgid "Keyboard Shortcuts"
+msgstr "Клавіятурныя скароты"
+
+#: data/resources/menus.ui:16
+msgid "Help"
+msgstr "Дапамога"
+
+#: data/resources/menus.ui:20
+msgid "About"
+msgstr "Пра праграму"
+
+#: data/resources/menus.ui:24
+msgid "Quit"
+msgstr "Выйсці"
+
+#: data/resources/nick-popover.ui:16
+msgid "Change nickname:"
+msgstr "Змяніць мянушку:"
+
+#: data/resources/nick-popover.ui:27
+msgid "_Change"
+msgstr "_Змяніць"
+
+#: data/resources/room-list-header.ui:146
+msgid "Connect"
+msgstr "Далучыцца"
+
+#: data/resources/room-list-header.ui:154
+msgid "Reconnect"
+msgstr "Падлучыцца зноўку"
+
+#: data/resources/room-list-header.ui:162
+msgid "Disconnect"
+msgstr "Адключыцца"
+
+#: data/resources/room-list-header.ui:170
+msgid "Remove"
+msgstr "Выдаліць"
+
+#: data/resources/room-list-header.ui:178
+msgid "Properties"
+msgstr "Уласцівасці"
+
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "Увядзіце назву пакоя для дадання"
+
+#: data/resources/user-details.ui:27
+msgid "Loading details"
+msgstr "Загрузка элементаў"
+
+#: data/resources/user-details.ui:60
+msgid "Last Activity:"
+msgstr "Апошняя актыўнасць:"
+
+#: data/resources/user-details.ui:159
+msgid "Will notify if user appears online."
+msgstr "Паведаміць калі ўдзельнік з'явіцца ў сетцы."
+
+#: data/resources/user-details.ui:181
+msgid "Start Conversation"
+msgstr "Пачаць размову"
+
+#: src/application.js:47
+msgid "Start Telepathy client"
+msgstr "Запусціць кліент Telepathy"
+
+#: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Дазволіць запуск разам з іншым асобнікам"
+
+#: src/application.js:53
+msgid "Print version and exit"
+msgstr "Вывесці інфармацыю пра версію і выйсці"
+
+#: src/application.js:420 src/utils.js:184
+msgid "Failed to open link"
+msgstr "Памылка адкрыцця спасылкі"
+
+#: src/application.js:705
+#, javascript-format
+msgid "%s removed."
+msgstr "%s выдалены."
+
+#: src/application.js:807
+msgid "translator-credits"
+msgstr "Uladzimir Manulenka <vlma@tut.by>"
+
+#: src/application.js:813
+msgid "Learn more about Polari"
+msgstr "Даведацца больш пра Polari"
+
+#: src/appNotifications.js:79
+msgid "Undo"
+msgstr "Адмяніць апошняе дзеянне"
+
+#: src/chatView.js:138
+msgid "New Messages"
+msgstr "Новыя паведамленні"
+
+#: src/chatView.js:762
+msgid "Open Link"
+msgstr "Адкрыць спасылку"
+
+#: src/chatView.js:768
+msgid "Copy Link Address"
+msgstr "Скапіраваць адрас спасылкі"
+
+#: src/chatView.js:936
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s цяпер вядомы як %s"
+
+#: src/chatView.js:941
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s быў адключаны"
+
+#: src/chatView.js:949
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s быў выштурхнуты %s"
+
+#: src/chatView.js:951
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s быў выштурхнуты"
+
+#: src/chatView.js:957
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s быў заблакіраваны %s"
+
+#: src/chatView.js:959
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s быў заблакіраваны"
+
+#: src/chatView.js:964
+#, javascript-format
+msgid "%s joined"
+msgstr "%s далучыўся"
+
+#: src/chatView.js:969
+#, javascript-format
+msgid "%s left"
+msgstr "%s пакінуў"
+
+#: src/chatView.js:1062
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d удзельнік далучыўся"
+msgstr[1] "%d удзельнікі далучыліся"
+msgstr[2] "%d удзельнікаў далучылася"
+
+#: src/chatView.js:1065
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d удзельнік пакінуў"
+msgstr[1] "%d удзельнікі пакінула"
+msgstr[2] "%d удзельнікаў пакінула"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1132
+msgid "%H∶%M"
+msgstr "%Г∶%Х"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1137
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "Учора, %Г∶%Х"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1142
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A, %Г∶%Х"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1148
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %Г∶%Х"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1154
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %Г∶%Х"
+
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1159
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1164
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "Учора, %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1169
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1175
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1181
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: src/connections.js:52
+msgid "Already added"
+msgstr "Ужо дадана"
+
+#: src/connections.js:107
+msgid "No results."
+msgstr "Нама вынікаў."
+
+#. Translators: %s is a connection name
+#: src/connections.js:492
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "“%s” Уласцівасці"
+
+#: src/connections.js:536
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari адключаны з-за памылкі сеткі. Калі ласка, праверце слушнасць "
+"запаўнення адраснага поля."
+
+#: src/entryArea.js:400
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Уставіць %s радок тэксту ў публічны сервіс уставак?"
+msgstr[1] "Уставіць %s радкі тэксту ў публічны сервіс уставак?"
+msgstr[2] "Уставіць %s радкоў тэксту ў публічны сервіс уставак?"
+
+#: src/entryArea.js:404
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Загрузка %s радка тэксту ў публічны сервіс уставак…"
+msgstr[1] "Загрузка %s радкоў тэксту ў публічны сервіс уставак…"
+msgstr[2] "Загрузка %s радкоў тэксту ў публічны сервіс уставак…"
+
+#: src/entryArea.js:411
+msgid "Upload image to public paste service?"
+msgstr "Загрузіць выяву ў публічны сервіс уставак?"
+
+#: src/entryArea.js:412
+msgid "Uploading image to public paste service…"
+msgstr "Загрузка выявы ў публічны сервіс уставак…"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:433
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Загрузіць “%s” у публічны сервіс уставак?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:435
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr "Загрузка “%s” у публічны сервіс уставак…"
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:444
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s у #%s"
+
+#: src/entryArea.js:446
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Уставіць з %s"
+
+#: src/initialSetup.js:82
+msgid "_Back"
+msgstr "_Назад"
+
+#: src/initialSetup.js:83
+msgid "_Done"
+msgstr "_Зроблена"
+
+#: src/initialSetup.js:83
+msgid "_Next"
+msgstr "_Наступны"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
+#.
+#: src/ircParser.js:23
+msgid ""
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<channel>] [<reason>] — зачыніць <channel>, прадвызначана - цяперашні"
+
+#: src/ircParser.js:24
+msgid ""
+"/HELP [<command>] — displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<command>] — выводзіць дапамогу для <command> ці спіс даступных "
+"камандаў"
+
+#: src/ircParser.js:25
+msgid ""
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <nick> [<channel>] — запрасіць <nick> у <channel>, ці ў цяперашні"
+
+#: src/ircParser.js:26
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <channel> — далучыўся да <channel>"
+
+#: src/ircParser.js:27
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <nick> — выкінуць <nick> з гэтага канала"
+
+#: src/ircParser.js:28
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <action> — даслаць <action> у цяперашні канал"
+
+#: src/ircParser.js:29
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <nick> [<message>] — даслаць прыватнае паведамленне да <nick>"
+
+#: src/ircParser.js:30
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — спісы ўдзельнікаў цяперашняга канала"
+
+#: src/ircParser.js:31
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <nickname> — усталяваць вашу мянушку як <nickname>"
+
+#: src/ircParser.js:32
+msgid ""
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<channel>] [<reason>] — пакінуць <channel>, прадвызначана - цяперашні"
+
+#: src/ircParser.js:33
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <nick> — пачаць прыватную размову з <nick>"
+
+#: src/ircParser.js:34
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<reason>] — адключыцца ад цяперашняга сервера"
+
+#: src/ircParser.js:35
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <text> — даслаць <text> у цяперашні пакой/кантакту"
+
+#: src/ircParser.js:36
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <topic> — усталяваць тэму для <topic> ці паказаць цяперашнюю"
+
+#: src/ircParser.js:39
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr ""
+"Невядомая каманда — паспрабуйце /HELP каб атрымаць спіс даступных камандаў"
+
+#: src/ircParser.js:53
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Выкарыстанне: %s"
+
+#: src/ircParser.js:89
+msgid "Known commands:"
+msgstr "Вядомыя каманды:"
+
+#: src/ircParser.js:188
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Удзельнікі на %s:"
+
+#: src/ircParser.js:267
+msgid "No topic set"
+msgstr "Тэма не ўсталяваная"
+
+#: src/joinDialog.js:232
+msgid "Add Network"
+msgstr "Дадаць сетку"
+
+#: src/mainWindow.js:382
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d удзельнік"
+msgstr[1] "%d удзельнікі"
+msgstr[2] "%d удзельнікаў"
+
+#: src/roomList.js:189
+msgid "Leave chatroom"
+msgstr "Пакінуць чат-пакой"
+
+#: src/roomList.js:189
+msgid "End conversation"
+msgstr "Скончыць размову"
+
+#: src/roomList.js:288
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "Сетка %s мае памылку"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:359
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:366
+msgid "Connection Problem"
+msgstr "Праблема злучэння"
+
+#: src/roomList.js:383
+msgid "Connected"
+msgstr "Далучаны"
+
+#: src/roomList.js:385
+msgid "Connecting…"
+msgstr "Злучэнне…"
+
+#: src/roomList.js:387 src/userList.js:415
+msgid "Offline"
+msgstr "Па-за сеткай"
+
+#: src/roomList.js:389
+msgid "Unknown"
+msgstr "Невядомы"
+
+#: src/roomList.js:409
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "Не магчыма злучыцца з %s бяспечным чынам."
+
+#: src/roomList.js:412
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s патрабуе пароль."
+
+#: src/roomList.js:418
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Не магчыма злучыцца з %s. Сервер заняты."
+
+#: src/roomList.js:421
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Не магчыма злучыцца з %s."
+
+#: src/roomStack.js:117
+msgid "_Save Password"
+msgstr "_Захаваць пароль"
+
+#: src/roomStack.js:126
+msgid "Should the password be saved?"
+msgstr "Ці павінен пароль быць захаваны?"
+
+#: src/roomStack.js:134 src/telepathyClient.js:587
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr ""
+"Наступны раз, калі вы будзеце далучацца да %s, ідэнтыфікацыя адбудзецца "
+"аўтаматычна"
+
+#: src/roomStack.js:163
+msgid "Join a room using the + button."
+msgstr "Далучыцца да пакоя праз кнопку +."
+
+#: src/telepathyClient.js:413
+msgid "Good Bye"
+msgstr "Да пабачэння"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:586
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Захаваць %s пароль для %s?"
+
+#: src/telepathyClient.js:590
+msgid "Save"
+msgstr "Захаваць"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:613
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s у #%s"
+
+#: src/userList.js:230
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d секунда таму"
+msgstr[1] "%d секунды таму"
+msgstr[2] "%d секунд таму"
+
+#: src/userList.js:235
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d хвіліна таму"
+msgstr[1] "%d хвіліны таму"
+msgstr[2] "%d хвілін таму"
+
+#: src/userList.js:240
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d гадзіна таму"
+msgstr[1] "%d гадзіны таму"
+msgstr[2] "%d гадзін таму"
+
+#: src/userList.js:245
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d дзень таму"
+msgstr[1] "%d дні таму"
+msgstr[2] "%d дзён таму"
+
+#: src/userList.js:250
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d тыдзень таму"
+msgstr[1] "%d тыдні таму"
+msgstr[2] "%d тыдняў таму"
+
+#: src/userList.js:254
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d месяц таму"
+msgstr[1] "%d месяцы таму"
+msgstr[2] "%d месяцаў таму"
+
+#: src/userList.js:411
+msgid "Available in another room."
+msgstr "Даступны ў іншым пакоі."
+
+#: src/userList.js:413
+msgid "Online"
+msgstr "Анлайн"
+
+#: src/userList.js:562
+msgid "No results"
+msgstr "Нама вынікаў"
+
+#: src/userList.js:734
+msgid "All"
+msgstr "Усе"
+
+#: src/userTracker.js:306
+msgid "User is online"
+msgstr "Удзельнік анлайн"
+
+#: src/userTracker.js:307
+#, javascript-format
+msgid "User %s is now online."
+msgstr "Удзельнік %s цяпер анлайн."
+
+#: src/utils.js:106
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Пароль сервера Polari для %s"
+
+#: src/utils.js:111
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Пароль NickServ Polari для %s"
