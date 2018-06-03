@@ -1,0 +1,950 @@
+# Estonian translation for polari.
+# Copyright (C) 2018 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Liivia Lilleväli <liivia.l10n@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2018-05-27 15:05+0000\n"
+"PO-Revision-Date: 2018-06-03 23:43+0300\n"
+"Last-Translator: Mart Raudsepp <leio@gentoo.org>\n"
+"Language-Team: Estonian <gnome-et-list@gnome.org>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.7\n"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: src/roomStack.js:160
+msgid "Polari"
+msgstr "Polari"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "IRC klient GNOME’ile"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Lihtne Interneti rühmadiskussiooni (IRC) klient, mis integreerub sujuvalt "
+"GNOME’iga. Polaril on lihtne ja ilus kasutajaliides, mis võimaldab sul "
+"keskenduda oma vestlustele."
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message — for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"Polari võimaldab vestelda inimestega nii avalikes jututubades kui pidada "
+"privaatseid üks-ühele vestlusi. Tänu teavitustele ei jää sa ilma ühestki "
+"olulisest sõnumist ning privaatvestlustele saad vastata otse läbi teavituse, "
+"ilma et peaksid rakenduse akna peale tagasi vahetama!"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:47
+msgid "The GNOME Project"
+msgstr "GNOME projekt"
+
+#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+#: data/org.gnome.Polari.desktop.in:7
+msgid "org.gnome.Polari"
+msgstr "org.gnome.Polari"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;Vestlus;"
+
+#: data/org.gnome.Polari.gschema.xml:6
+msgid "Saved channel list"
+msgstr "Salvestatud kanalinimekiri"
+
+#: data/org.gnome.Polari.gschema.xml:7
+msgid "List of channels to restore on startup"
+msgstr "Nimekiri kanalitest, kuhu rakenduse käivitumisel taasühenduda"
+
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+msgid "Run in Background"
+msgstr "Taustal töötamine"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "Akna sulgemisel jätkab Polari taustal töötamist."
+
+#: data/org.gnome.Polari.gschema.xml:16
+msgid "Window size"
+msgstr "Akna suurus"
+
+#: data/org.gnome.Polari.gschema.xml:17
+msgid "Window size (width and height)."
+msgstr "Akna suurus (laius ja kõrgus)."
+
+#: data/org.gnome.Polari.gschema.xml:21
+msgid "Window maximized"
+msgstr "Akna maksimeeritus"
+
+#: data/org.gnome.Polari.gschema.xml:22
+msgid "Window maximized state"
+msgstr "Akna maksimeerituse olek"
+
+#: data/org.gnome.Polari.gschema.xml:26
+msgid "Last active channel"
+msgstr "Viimati aktiivne kanal"
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Last active (selected) channel"
+msgstr "Viimati aktiivne (valitud) kanal"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify botname"
+msgstr "Tuvastusbot’i nimi"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Nickname of the bot to identify with"
+msgstr "Bot’i hüüdnimi, millele end tuvastada"
+
+#: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "Tuvastuskäsk"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Käsk, millega end bot’ile tuvastada"
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify username"
+msgstr "Tuvastatav kasutajanimi"
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Username to use in identify command"
+msgstr "Kasutajanimi, mida tuvastuskäsus kasutada"
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr "Tuvastusel kasutajanime parameeter toetatud"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr "Kas tuvastuskäsk toetab kasutajanime parameetrit"
+
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "_Serveri aadress"
+
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "_Võrgu nimi"
+
+#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:116
+msgid "optional"
+msgstr "mittekohustuslik"
+
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "_Turvalise ühenduse kasutamine"
+
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "_Hüüdnimi"
+
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "_Pärisnimi"
+
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:82
+msgid "_Cancel"
+msgstr "_Loobu"
+
+#: data/resources/connection-properties.ui:17
+msgid "_Apply"
+msgstr "_Rakenda"
+
+#: data/resources/entry-area.ui:38
+msgid "Change nickname"
+msgstr "Hüüdnime muutmine"
+
+#: data/resources/entry-area.ui:119
+msgid "_Paste"
+msgstr "_Aseta"
+
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Üldine"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "Tuppa sisenemine"
+
+#: data/resources/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "Toast lahkumine"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "Kasutajate nimekirja näitamine"
+
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Emoji-valija näitamine"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Polari sulgemine"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Kiirklahvid"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Navigeerimine"
+
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "Järgmine tuba"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "Eelmine tuba"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Järgmine lugemata sõnumitega tuba"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Eelmine lugemata sõnumitega tuba"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "Esimene tuba"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "Viimane tuba"
+
+#: data/resources/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "Esimene – üheksas tuba"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "Polari seadistamine"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "Pole ühendatud"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Et seadistamist jätkata, palun ühendu internetti."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "Tere tulemast Polarisse"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari võimaldab hõlpsasti teiste inimestega vestelda, kasutades selleks IRC "
+"protokolli. Alustamiseks vali võrk, kuhu soovid ühenduda."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Palun vali toad, kuhu ühenduda soovid. Uusi võrke ja tube saab lisada ka "
+"hiljem, klõpsates + nupul."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:231
+msgid "Join Chat Room"
+msgstr "Jututuppa sisenemine"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "_Join"
+msgstr "_Sisene"
+
+#: data/resources/join-room-dialog.ui:46
+msgid "C_onnection"
+msgstr "Ühe_ndus"
+
+#: data/resources/join-room-dialog.ui:75
+msgid "_Add Network"
+msgstr "Lisa _võrk"
+
+#: data/resources/join-room-dialog.ui:159
+msgid "_Add"
+msgstr "L_isa"
+
+#: data/resources/join-room-dialog.ui:178
+msgid "_Custom Network"
+msgstr "_Kohandatud võrk"
+
+#: data/resources/main-window.ui:14
+msgid "Run Polari in the Background?"
+msgstr "Kas soovid, et Polari taustal töötaks?"
+
+#: data/resources/main-window.ui:15
+msgid ""
+"Polari will continue to run when closed and will be automatically started on "
+"login."
+msgstr ""
+"Sulgemisel jätkab Polari töötamist ning sisselogimisel käivitub automaatselt."
+
+#: data/resources/main-window.ui:21
+msgid "_Quit"
+msgstr "_Lõpeta"
+
+#: data/resources/main-window.ui:28
+msgid "_Run in background"
+msgstr "_Taustal töötamine"
+
+#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+msgid "Add rooms and networks"
+msgstr "Jututubade ja võrkude lisamine"
+
+#: data/resources/main-window.ui:175
+msgid "Show connected users"
+msgstr "Ühendatud kasutajate näitamine"
+
+#: data/resources/menus.ui:12
+msgid "Keyboard Shortcuts"
+msgstr "Kiirklahvid"
+
+#: data/resources/menus.ui:16
+msgid "Help"
+msgstr "Abi"
+
+#: data/resources/menus.ui:20
+msgid "About"
+msgstr "Programmist"
+
+#: data/resources/menus.ui:24
+msgid "Quit"
+msgstr "Lõpeta"
+
+#: data/resources/nick-popover.ui:16
+msgid "Change nickname:"
+msgstr "Hüüdnime muutmine:"
+
+#: data/resources/nick-popover.ui:27
+msgid "_Change"
+msgstr "_Muuda"
+
+#: data/resources/room-list-header.ui:146
+msgid "Connect"
+msgstr "Ühendu"
+
+#: data/resources/room-list-header.ui:154
+msgid "Reconnect"
+msgstr "Ühendu uuesti"
+
+#: data/resources/room-list-header.ui:162
+msgid "Disconnect"
+msgstr "Katkesta ühendus"
+
+#: data/resources/room-list-header.ui:170
+msgid "Remove"
+msgstr "Eemalda"
+
+#: data/resources/room-list-header.ui:178
+msgid "Properties"
+msgstr "Omadused"
+
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "Sisesta lisatava toa nimi"
+
+#: data/resources/user-details.ui:27
+msgid "Loading details"
+msgstr "Üksikasjade laadimine"
+
+#: data/resources/user-details.ui:60
+msgid "Last Activity:"
+msgstr "Viimati aktiivne:"
+
+#: data/resources/user-details.ui:159
+msgid "Will notify if user appears online."
+msgstr "Teavitatakse, kui kasutaja võrgus on."
+
+#: data/resources/user-details.ui:181
+msgid "Start Conversation"
+msgstr "Alusta vestlust"
+
+#: src/application.js:47
+msgid "Start Telepathy client"
+msgstr "Käivita Telepathy klient"
+
+#: src/application.js:50
+msgid "Allow running alongside another instance"
+msgstr "Mitme protsessi üheaegse töötamise lubamine"
+
+#: src/application.js:53
+msgid "Print version and exit"
+msgstr "Versiooninumbri kuvamine"
+
+#: src/application.js:420 src/utils.js:184
+msgid "Failed to open link"
+msgstr "Viida avamine nurjus"
+
+#: src/application.js:705
+#, javascript-format
+msgid "%s removed."
+msgstr "%s eemaldati."
+
+#: src/application.js:807
+msgid "translator-credits"
+msgstr "Liivia Lilleväli <liivia.l10n@gmail.com>, 2018"
+
+#: src/application.js:813
+msgid "Learn more about Polari"
+msgstr "Rohkem teavet Polari kohta"
+
+#: src/appNotifications.js:79
+msgid "Undo"
+msgstr "Võta tagasi"
+
+#: src/chatView.js:138
+msgid "New Messages"
+msgstr "Uued sõnumid"
+
+#: src/chatView.js:762
+msgid "Open Link"
+msgstr "Ava viit"
+
+#: src/chatView.js:768
+msgid "Copy Link Address"
+msgstr "Kopeeri viida aadress"
+
+#: src/chatView.js:936
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s hüüdnimi on nüüd %s"
+
+#: src/chatView.js:941
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s katkestas ühenduse"
+
+#: src/chatView.js:949
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s visati kasutaja %s poolt välja"
+
+#: src/chatView.js:951
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s visati välja"
+
+#: src/chatView.js:957
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s blokeeriti kasutaja %s poolt"
+
+#: src/chatView.js:959
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s blokeeriti"
+
+#: src/chatView.js:964
+#, javascript-format
+msgid "%s joined"
+msgstr "%s sisenes"
+
+#: src/chatView.js:969
+#, javascript-format
+msgid "%s left"
+msgstr "%s lahkus"
+
+#: src/chatView.js:1062
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d kasutaja sisenes"
+msgstr[1] "%d kasutajat sisenesid"
+
+#: src/chatView.js:1065
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d kasutaja lahkus"
+msgstr[1] "%d kasutajat lahkusid"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1132
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1137
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "Eile, %H∶%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1142
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1148
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%d. %B, %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1154
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d. %B %Y, %H∶%M"
+
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1159
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1164
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "Eile, %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1169
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1175
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%d. %B, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1181
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d. %B %Y, %l∶%M %p"
+
+#: src/connections.js:52
+msgid "Already added"
+msgstr "Juba lisatud"
+
+#: src/connections.js:107
+msgid "No results."
+msgstr "Tulemused puuduvad."
+
+#. Translators: %s is a connection name
+#: src/connections.js:492
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "„%s“ omadused"
+
+#: src/connections.js:536
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari ühendus katkes võrguvea tõttu. Palun veendu, et aadressiväli on õige."
+
+#: src/entryArea.js:400
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Kas soovid %s tekstirea üles laadida avalikule pastisaidile?"
+msgstr[1] "Kas soovid %s tekstirida üles laadida avalikule pastisaidile?"
+
+#: src/entryArea.js:404
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "%s tekstirea üleslaadimine avalikule pastisaidile…"
+msgstr[1] "%s tekstirea üleslaadimine avalikule pastisaidile…"
+
+#: src/entryArea.js:411
+msgid "Upload image to public paste service?"
+msgstr "Kas soovid pildi üles laadida avalikule pastisaidile?"
+
+#: src/entryArea.js:412
+msgid "Uploading image to public paste service…"
+msgstr "Pildi üleslaadimine avalikule pastisaidile…"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:433
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Kas soovid „%s“ üles laadida avalikule pastisaidile?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:435
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr "„%s“ üleslaadimine avalikule pastisaidile…"
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:444
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s #%s kanalis"
+
+#: src/entryArea.js:446
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Aseta %s-st"
+
+#: src/initialSetup.js:82
+msgid "_Back"
+msgstr "_Tagasi"
+
+#: src/initialSetup.js:83
+msgid "_Done"
+msgstr "_Valmis"
+
+#: src/initialSetup.js:83
+msgid "_Next"
+msgstr "_Edasi"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
+#.
+#: src/ircParser.js:23
+msgid ""
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<kanal>] [<põhjus>] — sulgeb <kanali>, kui kanalinime pole "
+"täpsustatud, siis suletakse käesolev kanal"
+
+#: src/ircParser.js:24
+msgid ""
+"/HELP [<command>] — displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<käsk>] — kuvab <käsu> kohta käivat abiteavet või saadaolevate "
+"käskude nimekirja"
+
+#: src/ircParser.js:25
+msgid ""
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <hüüdnimi> [<kanal>] — kutsub <hüüdnimega> kasutaja <kanalisse>, "
+"kanalinime mittetäpsustamisel kutsutakse käesolevasse kanalisse"
+
+#: src/ircParser.js:26
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <kanal> — siseneb <kanalisse>"
+
+#: src/ircParser.js:27
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <hüüdnimi> — viskab <hüüdnime> käesolevast kanalist välja"
+
+#: src/ircParser.js:28
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr ""
+"/ME <tegevuse kirjeldus> — postitab <tegevuse kirjelduse> käesolevasse "
+"kanalisse"
+
+#: src/ircParser.js:29
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <hüüdnimi> [<sõnum>] — saadab privaatsõnumi <hüüdnimele>"
+
+#: src/ircParser.js:30
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — näitab käesolevas kanalis viibivate kasutajate nimekirja"
+
+#: src/ircParser.js:31
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <hüüdnimi> — muudab su hüüdnime <hüüdnimeks>"
+
+#: src/ircParser.js:32
+msgid ""
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<kanal>] [<põhjus>] — lahkub <kanalist>, kanalinime "
+"mittetäpsustamisel lahkutakse käesolevast kanalist"
+
+#: src/ircParser.js:33
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <hüüdnimi> — avab privaatvestluse <hüüdnimega>"
+
+#: src/ircParser.js:34
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<põhjus>] — katkestab ühenduse käesoleva serveriga"
+
+#: src/ircParser.js:35
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <tekst> — saadab <teksti> käesolevale jututoale/kontaktile"
+
+#: src/ircParser.js:36
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr ""
+"/TOPIC <teema> — muudab kanali teema <teemaks> või näitab praegust teemat"
+
+#: src/ircParser.js:39
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "Tundmatu käsk — et näha kõiki võimalikke käske, kirjuta /HELP"
+
+#: src/ircParser.js:53
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Kasutus: %s"
+
+#: src/ircParser.js:89
+msgid "Known commands:"
+msgstr "Võimalikud käsud:"
+
+#: src/ircParser.js:188
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Kasutajad kanalis %s:"
+
+#: src/ircParser.js:267
+msgid "No topic set"
+msgstr "Teema on määramata"
+
+#: src/joinDialog.js:232
+msgid "Add Network"
+msgstr "Võrgu lisamine"
+
+#: src/mainWindow.js:382
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d kasutaja"
+msgstr[1] "%d kasutajat"
+
+#: src/roomList.js:189
+msgid "Leave chatroom"
+msgstr "Lahku toast"
+
+#: src/roomList.js:189
+msgid "End conversation"
+msgstr "Lõpeta vestlus"
+
+#: src/roomList.js:288
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "Võrgus %s esineb viga"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:359
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:366
+msgid "Connection Problem"
+msgstr "Viga ühendumisel"
+
+#: src/roomList.js:383
+msgid "Connected"
+msgstr "Ühendatud"
+
+#: src/roomList.js:385
+msgid "Connecting…"
+msgstr "Ühendumine…"
+
+#: src/roomList.js:387 src/userList.js:415
+msgid "Offline"
+msgstr "Pole võrgus"
+
+#: src/roomList.js:389
+msgid "Unknown"
+msgstr "Teadmata"
+
+#: src/roomList.js:409
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "%s-ga ei õnnestunud turvaliselt ühenduda."
+
+#: src/roomList.js:412
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s nõuab parooli."
+
+#: src/roomList.js:418
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "%s-ga ühendumine nurjus. Server on hõivatud."
+
+#: src/roomList.js:421
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "%s-ga ühendumine nurjus."
+
+#: src/roomStack.js:117
+msgid "_Save Password"
+msgstr "_Salvesta parool"
+
+#: src/roomStack.js:126
+msgid "Should the password be saved?"
+msgstr "Kas soovid parooli salvestada?"
+
+#: src/roomStack.js:134 src/telepathyClient.js:587
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr "Järgmine kord %s-ga ühendudes tuvastatakse sind automaatselt"
+
+#: src/roomStack.js:163
+msgid "Join a room using the + button."
+msgstr "Mõnda jututuppa sisenemiseks vajuta + nuppu."
+
+#: src/telepathyClient.js:413
+msgid "Good Bye"
+msgstr "Nägemiseni"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:586
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Kas salvestada %s parool %s jaoks?"
+
+#: src/telepathyClient.js:590
+msgid "Save"
+msgstr "Salvesta"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:613
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s %s-s"
+
+#: src/userList.js:230
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d sekund tagasi"
+msgstr[1] "%d sekundit tagasi"
+
+#: src/userList.js:235
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d minut tagasi"
+msgstr[1] "%d minutit tagasi"
+
+#: src/userList.js:240
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d tund tagasi"
+msgstr[1] "%d tundi tagasi"
+
+#: src/userList.js:245
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d päev tagasi"
+msgstr[1] "%d päeva tagasi"
+
+#: src/userList.js:250
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d nädal tagasi"
+msgstr[1] "%d nädalat tagasi"
+
+#: src/userList.js:254
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d kuu tagasi"
+msgstr[1] "%d kuud tagasi"
+
+#: src/userList.js:411
+msgid "Available in another room."
+msgstr "Olemas teises toas."
+
+#: src/userList.js:413
+msgid "Online"
+msgstr "Ühendatud"
+
+#: src/userList.js:562
+msgid "No results"
+msgstr "Tulemused puuduvad"
+
+#: src/userList.js:734
+msgid "All"
+msgstr "Kõik"
+
+#: src/userTracker.js:306
+msgid "User is online"
+msgstr "Kasutaja on võrgus"
+
+#: src/userTracker.js:307
+#, javascript-format
+msgid "User %s is now online."
+msgstr "Kasutaja %s on nüüd võrgus."
+
+#: src/utils.js:106
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Polari serveri parool %s jaoks"
+
+#: src/utils.js:111
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Polari NickServi parool %s jaoks"
