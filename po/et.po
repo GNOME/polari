@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-05-27 15:05+0000\n"
-"PO-Revision-Date: 2018-06-03 23:43+0300\n"
-"Last-Translator: Mart Raudsepp <leio@gentoo.org>\n"
+"POT-Creation-Date: 2018-06-03 20:46+0000\n"
+"PO-Revision-Date: 2018-06-09 01:50+0300\n"
+"Last-Translator: Liivia Lilleväli <liivia.l10n@gmail.com>\n"
 "Language-Team: Estonian <gnome-et-list@gnome.org>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -411,7 +411,7 @@ msgstr "Mitme protsessi üheaegse töötamise lubamine"
 
 #: src/application.js:53
 msgid "Print version and exit"
-msgstr "Versiooninumbri kuvamine"
+msgstr "Versiooniteabe kuvamine"
 
 #: src/application.js:420 src/utils.js:184
 msgid "Failed to open link"
