@@ -256,6 +256,7 @@ var ConnectionDetails = GObject.registerClass({
                        'serverEntry',
                        'nickEntry',
                        'realnameEntry',
+                       'usernameEntry',
                        'sslCheckbox'],
     Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
                                                            'can-confirm',
@@ -291,6 +292,8 @@ var ConnectionDetails = GObject.registerClass({
                                 this._onCanConfirmChanged.bind(this));
         this._realnameEntry.connect('changed',
                                     this._onCanConfirmChanged.bind(this));
+        this._usernameEntry.connect('changed',
+                                    this._onCanConfirmChanged.bind(this))
         this._sslCheckbox.connect('toggled',
                                   this._onCanConfirmChanged.bind(this));
 
@@ -329,7 +332,8 @@ var ConnectionDetails = GObject.registerClass({
         let params = {
             name: nameText.length ? nameText : server,
             server: server,
-            account: this._nickEntry.text.trim()
+            account: this._nickEntry.text.trim(),
+            username: this._usernameEntry.text.trim() || this._nickEntry.text.trim(),
         };
 
         if (this._realnameEntry.text)
@@ -349,6 +353,7 @@ var ConnectionDetails = GObject.registerClass({
         this._savedServer = '';
         this._savedNick = GLib.get_user_name();
         this._savedRealname = '';
+        this._savedUsername = '';
         this._savedSSL = false;
 
         this._nameEntry.text = this._savedName;
@@ -376,6 +381,7 @@ var ConnectionDetails = GObject.registerClass({
         let port = params.port;
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
+        this._savedUsername = params.username || '';
 
         if (port != defaultPort)
             this._savedServer += ':%d'.format(port);
@@ -386,6 +392,7 @@ var ConnectionDetails = GObject.registerClass({
         this._serverEntry.text = this._savedServer;
         this._nickEntry.text = this._savedNick;
         this._realnameEntry.text = this._savedRealname;
+        this._usernameEntry.text = this._savedUsername;
         this._nameEntry.text = this._savedName;
         this._sslCheckbox.active = this._savedSSL;
     }
@@ -395,6 +402,7 @@ var ConnectionDetails = GObject.registerClass({
                             this._serverEntry.text != this._savedServer ||
                             this._nickEntry.text != this._savedNick ||
                             this._realnameEntry.text != this._savedRealname ||
+                            this._usernameEntry.text != this._savedUsername ||
                             this._sslCheckbox.active != this._savedSSL;
 
         return this._serverEntry.get_text_length() > 0 &&
@@ -464,7 +472,7 @@ var ConnectionDetails = GObject.registerClass({
 
     _detailsFromParams(params, oldDetails) {
         let details = { account:  GLib.Variant.new('s', params.account),
-                        username: GLib.Variant.new('s', params.account),
+                        username: GLib.Variant.new('s', params.username),
                         server:   GLib.Variant.new('s', params.server) };
 
         if (params.port)
