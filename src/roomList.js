@@ -234,10 +234,15 @@ var RoomListHeader = GObject.registerClass({
 
         let target = new GLib.Variant('o', this._account.get_object_path());
         this._popoverConnect.action_target = target;
+        this._popoverConnect.action_name = 'app.connect-account';
         this._popoverDisconnect.action_target = target;
+        this._popoverDisconnect.action_name = 'app.disconnect-account';
         this._popoverReconnect.action_target = target;
+        this._popoverReconnect.action_name = 'app.reconnect-account';
         this._popoverRemove.action_target = target;
+        this._popoverRemove.action_name = 'app.remove-connection';
         this._popoverProperties.action_target = target;
+        this._popoverProperties.action_name = 'app.edit-connection';
 
         this._popoverPassword.connect('activate', () => {
             let action = this._app.lookup_action('authenticate-account');

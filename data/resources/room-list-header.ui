@@ -142,7 +142,6 @@
           <object class="GtkModelButton" id="popoverConnect">
             <property name="xalign">0</property>
             <property name="visible">True</property>
-            <property name="action-name">app.connect-account</property>
             <property name="text" translatable="yes">Connect</property>
           </object>
         </child>
@@ -150,7 +149,6 @@
           <object class="GtkModelButton" id="popoverReconnect">
             <property name="xalign">0</property>
             <property name="visible">True</property>
-            <property name="action-name">app.reconnect-account</property>
             <property name="text" translatable="yes">Reconnect</property>
           </object>
         </child>
@@ -158,7 +156,6 @@
           <object class="GtkModelButton" id="popoverDisconnect">
             <property name="xalign">0</property>
             <property name="visible">True</property>
-            <property name="action-name">app.disconnect-account</property>
             <property name="text" translatable="yes">Disconnect</property>
           </object>
         </child>
@@ -166,7 +163,6 @@
           <object class="GtkModelButton" id="popoverRemove">
             <property name="xalign">0</property>
             <property name="visible">True</property>
-            <property name="action-name">app.remove-connection</property>
             <property name="text" translatable="yes">Remove</property>
           </object>
         </child>
@@ -174,7 +170,6 @@
           <object class="GtkModelButton" id="popoverProperties">
             <property name="xalign">0</property>
             <property name="visible">True</property>
-            <property name="action-name">app.edit-connection</property>
             <property name="text" translatable="yes">Properties</property>
           </object>
         </child>
