@@ -9,6 +9,32 @@
       <class name="polari-user-list"/>
     </style>
   </object>
+  <menu id="hamburgerMenu">
+    <section>
+      <item>
+        <attribute name="action">app.run-in-background</attribute>
+        <attribute name="label" translatable="yes">Run in Background</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">win.show-help-overlay</attribute>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.help</attribute>
+        <attribute name="label" translatable="yes">Help</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.about</attribute>
+        <attribute name="label" translatable="yes">About</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.quit</attribute>
+        <attribute name="label" translatable="yes">Quit</attribute>
+      </item>
+    </section>
+  </menu>
   <object class="GtkMessageDialog" id="closeConfirmationDialog">
     <property name="message-type">question</property>
     <property name="text" translatable="yes">Run Polari in the Background?</property>
@@ -72,6 +98,27 @@
               </object>
               <packing>
                 <property name="pack-type">start</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton">
+                <property name="visible">True</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="menu-model">hamburgerMenu</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="icon-size">1</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
               </packing>
             </child>
           </object>
