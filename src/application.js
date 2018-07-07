@@ -463,8 +463,10 @@ var Application = GObject.registerClass({
     _touchFile(file) {
         try {
             file.get_parent().make_directory_with_parents(null);
-        } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-            // not an error, carry on
+        } catch(e) {
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                return; // not an error, carry on
+            throw e;
         }
 
         let stream = file.create(0, null);
@@ -734,8 +736,10 @@ var Application = GObject.registerClass({
     _createLink(file, target) {
         try {
             file.get_parent().make_directory_with_parents(null);
-        } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-            // not an error, carry on
+        } catch(e) {
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                return; // not an error, carry on
+            throw e;
         }
 
         file.make_symbolic_link(target, null);

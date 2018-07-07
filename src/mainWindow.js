@@ -252,8 +252,10 @@ var MainWindow = GObject.registerClass({
     _touchFile(file) {
         try {
             file.get_parent().make_directory_with_parents(null);
-        } catch(e if e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS)) {
-            // not an error, carry on
+        } catch(e) {
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                return; // not an error, carry on
+            throw e;
         }
 
         let stream = file.create(0, null);
