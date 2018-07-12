@@ -121,46 +121,13 @@ polari_create_room_id (TpAccount    *account,
   return id;
 }
 
-#ifdef HAVE_STRCASESTR
-#  define FOLDFUNC(text) ((char *)(text))
-#  define MATCHFUNC(haystick,needle) strcasestr (haystick, needle)
-#else
-#  define FOLDFUNC(text) g_utf8_casefold (text, -1)
-#  define MATCHFUNC(haystick,needle) strstr (haystick, needle)
-#endif
-
 static gboolean
 match_self_nick (PolariRoom *room,
                  const char *text)
 {
   PolariRoomPrivate *priv = room->priv;
-  g_autofree char *folded_text = NULL;
-  char *match;
-  gboolean result = FALSE;
-  int len;
 
-  len = strlen (priv->self_nick);
-  if (len == 0)
-    return FALSE;
-
-  folded_text = FOLDFUNC (text);
-  match = MATCHFUNC (folded_text, priv->self_nick);
-
-  while (match != NULL)
-    {
-      gboolean starts_word, ends_word;
-
-      /* assume ASCII nicknames, so no complex pango-style breaks */
-      starts_word = (match == folded_text || !g_ascii_isalnum (*(match - 1)));
-      ends_word = !g_ascii_isalnum (*(match + len));
-
-      result = starts_word && ends_word;
-      if (result)
-        break;
-      match = MATCHFUNC (match + len, priv->self_nick);
-    }
-
-  return result;
+  return polari_util_match_nick (text, priv->self_nick);
 }
 
 gboolean
