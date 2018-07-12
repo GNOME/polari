@@ -108,6 +108,12 @@ libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources,
   install_dir: pkglibdir
 )
 
+libpolari_dep = declare_dependency(
+  include_directories: include_directories('lib'),
+  dependencies: [gio, gtk3, telepathy_glib],
+  link_with: libpolari
+)
+
 gnome.generate_gir(libpolari,
   sources: libsources,
   nsversion: '1.0',
@@ -120,3 +126,5 @@ gnome.generate_gir(libpolari,
   install_dir_typelib: typelibdir,
   install: true
 )
+
+subdir('tests')
