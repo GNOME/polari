@@ -52,12 +52,13 @@
     "modules": [
         {
             "name": "telepathy-glib",
-            "config-opts": ["--disable-static"],
+            "config-opts": ["--disable-static", "--disable-gtk-doc"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://telepathy.freedesktop.org/releases/telepathy-glib/telepathy-glib-0.24.1.tar.gz",
-                    "sha256": "9e0df1d8f857e0270cf0b32e2d1ca5a24aa7282873361785d573f72ad7f7d5eb"
+                    "type": "git",
+                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-glib.git",
+                    "tag": "telepathy-glib-0.24.1",
+                    "commit": "c834ef1a50a97cbfae7a0d560ff806fd5aa7ffe8"
                 },
                 {
                     "type": "patch",
@@ -67,12 +68,13 @@
         },
         {
             "name": "telepathy-mission-control",
-            "config-opts": ["--disable-static"],
+            "config-opts": ["--disable-static", "--disable-gtk-doc"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://telepathy.freedesktop.org/releases/telepathy-mission-control/telepathy-mission-control-5.16.4.tar.gz",
-                    "sha256": "9769ddac7ad8aad21f6db854016792162b57e6fa0b0aed8d823d76a71fe7e6cb"
+                    "type": "git",
+                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-mission-control.git",
+                    "tag": "telepathy-mission-control-5.16.4",
+                    "commit": "74d553d4125224f0a95c9d2843d38861b42eae9f"
                 }
             ]
         },
@@ -81,20 +83,22 @@
             "config-opts": ["--disable-static"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://telepathy.freedesktop.org/releases/telepathy-idle/telepathy-idle-0.2.0.tar.gz",
-                    "sha256": "3013ad4b38d14ee630b8cc8ada5e95ccaa849b9a6fe15d2eaf6d0717d76f2fab"
+                    "type": "git",
+                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-idle.git",
+                    "tag": "telepathy-idle-0.2.0",
+                    "commit": "22371837e080c41343600ca773fd987e5310baf2"
                 }
             ]
         },
         {
             "name": "telepathy-logger",
-            "config-opts": ["--disable-static"],
+            "config-opts": ["--disable-static", "--disable-gtk-doc"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://telepathy.freedesktop.org/releases/telepathy-logger/telepathy-logger-0.8.2.tar.bz2",
-                    "sha256": "8fcad534d653b1b365132c5b158adae947810ffbae9843f72dd1797966415dae"
+                    "type": "git",
+                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-logger.git",
+                    "tag": "telepathy-logger-0.8.2",
+                    "commit": "b342c568fe855786151e4f0f96276fc6c3cc7e43"
                 },
                 {
                     "type": "patch",
@@ -104,12 +108,17 @@
         },
         {
             "name": "gspell",
-            "config-opts": ["--disable-vala", "--disable-static"],
+            "config-opts": [
+                "--disable-vala",
+                "--disable-static",
+                "--disable-gtk-doc"
+            ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gspell/1.6/gspell-1.6.0.tar.xz",
-                    "sha256": "b5d73dab4bda45cde4bdeed04e472dca8a3e16ea19739cfb66237553e91f872d"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gspell.git",
+                    "tag": "1.6.1",
+                    "commit": "f2823c994b9af57d91e75c54bd1ec68a1dee5767"
                 }
             ],
             "cleanup": [
