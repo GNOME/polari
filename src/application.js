@@ -45,6 +45,11 @@ var Application = GObject.registerClass({
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Start Telepathy client"), null);
+        // Only included for --help output, the actual option is handled
+        // from C before handling over control to JS
+        this.add_main_option('debugger', 'd',
+                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+                             _("Start in debug mode"), null);
         this.add_main_option('test-instance', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _("Allow running alongside another instance"), null);
