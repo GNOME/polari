@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.";
  */
 
+#include <string.h>
+
 #include "polari-util.h"
 
 #include <glib.h>
@@ -40,6 +42,50 @@ polari_util_get_basenick (const char *nick)
     return g_utf8_casefold (nick, len);
   else
     return g_utf8_casefold (nick, -1);
+}
+
+#ifdef HAVE_STRCASESTR
+#  define FOLDFUNC(text) ((char *)(text))
+#  define MATCHFUNC(haystick,needle) strcasestr (haystick, needle)
+#else
+#  define FOLDFUNC(text) g_utf8_casefold (text, -1)
+#  define MATCHFUNC(haystick,needle) strstr (haystick, needle)
+#endif
+
+gboolean
+polari_util_match_nick (const char *text,
+                        const char *nick)
+{
+  g_autofree char *folded_text = NULL;
+  g_autofree char *folded_nick = NULL;
+  char *match;
+  gboolean result = FALSE;
+  int len;
+
+  len = strlen (nick);
+  if (len == 0)
+    return FALSE;
+
+  folded_text = FOLDFUNC (text);
+  folded_nick = FOLDFUNC (nick);
+
+  match = MATCHFUNC (folded_text, folded_nick);
+
+  while (match != NULL)
+    {
+      gboolean starts_word, ends_word;
+
+      /* assume ASCII nicknames, so no complex pango-style breaks */
+      starts_word = (match == folded_text || !g_ascii_isalnum (*(match - 1)));
+      ends_word = !g_ascii_isalnum (*(match + len));
+
+      result = starts_word && ends_word;
+      if (result)
+        break;
+      match = MATCHFUNC (match + len, folded_nick);
+    }
+
+  return result;
 }
 
 /**
