@@ -282,6 +282,10 @@ var MainWindow = GObject.registerClass({
         this._roomListRevealer.reveal_child = hasAccounts;
     }
 
+    _filterFallbackAppMenu(layoutStr) {
+        return layoutStr.split(',').filter(s => s != 'menu').join(',');
+    }
+
     _updateDecorations() {
         let layoutLeft = null;
         let layoutRight = null;
@@ -290,8 +294,8 @@ var MainWindow = GObject.registerClass({
         if (layout) {
             let split = layout.split(':');
 
-            layoutLeft = split[0] + ':';
-            layoutRight = ':' + split[1];
+            layoutLeft = this._filterFallbackAppMenu(split[0]) + ':';
+            layoutRight = ':' + this._filterFallbackAppMenu(split[1]);
         }
 
         this._titlebarLeft.set_decoration_layout(layoutLeft);
