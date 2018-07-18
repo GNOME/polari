@@ -1,3 +1,18 @@
+3.28.1 — “Screw Maximilian!”
+===========================
+* Add Rizon to list of predefined networks [Niek; #54]
+* Misc. bug fixes [Florian; !48, #53]
+
+Contributors:
+  Piotr Drąg, gogo, Liivia Lilleväli, Florian Müllner, nick richards,
+  Pieter Schalk Schoeman, Yuras Shumovich, Niek Visser
+
+Translators:
+  Efstathios Iosifidis [el], gogo [hr], Matej Urbančič [sl], Stas Solovey [ru],
+  Rūdolfs Mazurs [lv], Mingcong Bai [zh_CN], Jordi Mas [ca],
+  Daniel Șerbănescu [ro], Pieter Schalk Schoeman [af], Yuras Shumovich [be],
+  Liivia Lilleväli [et]
+
 3.28.0 — “Lesbian Blouse”
 =========================
 * Include Ozinger in list of predefined networks [DaeHyun; !34]
