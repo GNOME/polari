@@ -1,15 +1,76 @@
-image: fedora:latest
-
 stages:
  - build
+ - review
 
-before_script:
-  - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
-                   gjs-devel gobject-introspection-devel telepathy-glib-devel
-                   libappstream-glib desktop-file-utils
+variables:
+    BUNDLE: "polari-git.flatpak"
 
 build-polari:
+  image: fedora:latest
   stage: build
+  before_script:
+    - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
+                       gjs-devel gobject-introspection-devel telepathy-glib-devel
+                       libappstream-glib desktop-file-utils
   script:
     - meson _build .
     - ninja -C _build test install
+
+flatpak:
+    image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
+    stage: build
+    variables:
+        # Your manifest path
+        MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
+        RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
+        FLATPAK_MODULE: "polari"
+        # Make sure to keep this in sync with the Flatpak manifest, all arguments
+        # are passed except the config-args because we build it ourselves
+        MESON_ARGS: ""
+        DBUS_ID: "org.gnome.Polari"
+
+    script:
+        - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
+        # Make sure to keep this in sync with the Flatpak manifest, all arguments
+        # are passed except the config-args because we build it ourselves
+        - flatpak build app meson --prefix=/app ${MESON_ARGS} _build
+        - flatpak build app ninja -C _build install
+        - flatpak-builder --finish-only --repo=repo app ${MANIFEST_PATH}
+        # Run automatic tests inside the Flatpak env
+        - flatpak build app ninja -C _build test
+        # Generate a Flatpak bundle
+        - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID}
+
+    artifacts:
+        paths:
+            - ${BUNDLE}
+            - _build/meson-logs/meson-log.txt
+            - _build/meson-logs/testlog.txt
+        expire_in: 30 days
+    cache:
+        paths:
+             - .flatpak-builder/cache
+
+review:
+    stage: review
+    dependencies:
+        - flatpak
+    script:
+        - echo "Generating flatpak deployment"
+    artifacts:
+        paths:
+            - ${BUNDLE}
+        expire_in: 30 days
+    environment:
+        name: review/$CI_COMMIT_REF_NAME
+        url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
+        on_stop: stop_review
+
+stop_review:
+    stage: review
+    script:
+        - echo "Stopping flatpak deployment"
+    when: manual
+    environment:
+        name: review/$CI_COMMIT_REF_NAME
+        action: stop
