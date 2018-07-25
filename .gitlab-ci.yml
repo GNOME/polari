@@ -5,18 +5,6 @@ stages:
 variables:
     BUNDLE: "polari-git.flatpak"
 
-fedora:
-  image: fedora:latest
-  stage: build
-  before_script:
-    - dnf install -y 'dnf-command(builddep)' redhat-rpm-config
-    - dnf builddep -y polari
-  script:
-    - meson _build .
-    - ninja -C _build test install
-  only:
-    - web
-
 flatpak:
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
     stage: build
@@ -79,3 +67,15 @@ stop_review:
     environment:
         name: review/$CI_COMMIT_REF_NAME
         action: stop
+
+fedora:
+  image: fedora:latest
+  stage: build
+  before_script:
+    - dnf install -y 'dnf-command(builddep)' redhat-rpm-config
+    - dnf builddep -y polari
+  script:
+    - meson _build .
+    - ninja -C _build test install
+  only:
+    - web
