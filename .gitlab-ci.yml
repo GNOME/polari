@@ -1,22 +1,22 @@
 stages:
  - build
+ - test
+ - deploy
  - review
 
 variables:
     BUNDLE: "polari-git.flatpak"
 
-flatpak:
+build:flatpak:
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
     stage: build
     variables:
         # Your manifest path
         MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
-        RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
         FLATPAK_MODULE: "polari"
         # Make sure to keep this in sync with the Flatpak manifest, all arguments
         # are passed except the config-args because we build it ourselves
         MESON_ARGS: ""
-        DBUS_ID: "org.gnome.Polari"
 
     script:
         - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
@@ -25,25 +25,52 @@ flatpak:
         - flatpak build app meson --prefix=/app ${MESON_ARGS} _build
         - flatpak build app ninja -C _build install
         - flatpak-builder --finish-only --repo=repo app ${MANIFEST_PATH}
+
+    cache:
+        key: $CI_COMMIT_REF_SLUG
+        untracked: true
+
+test:flatpak:
+    image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
+    stage: test
+    dependencies:
+        - build:flatpak
+    script:
         # Run automatic tests inside the Flatpak env
         - flatpak build app ninja -C _build test
+
+    cache:
+        key: $CI_COMMIT_REF_SLUG
+        untracked: true
+
+deploy:flatpak:
+    image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
+    stage: deploy
+    dependencies:
+        - test:flatpak
+    variables:
+        RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
+        DBUS_ID: "org.gnome.Polari"
+    script:
         # Generate a Flatpak bundle
         - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID}
 
-    artifacts:
-        paths:
-            - ${BUNDLE}
-            - _build/meson-logs/meson-log.txt
-            - _build/meson-logs/testlog.txt
-        expire_in: 30 days
     cache:
+        key: $CI_COMMIT_REF_SLUG
         paths:
              - .flatpak-builder/cache
+
+    artifacts:
+        paths:
+            - _build/meson-logs/meson-log.txt
+            - _build/meson-logs/testlog.txt
+            - ${BUNDLE}
+        expire_in: 30 days
 
 review:
     stage: review
     dependencies:
-        - flatpak
+        - deploy:flatpak
     script:
         - echo "Generating flatpak deployment"
     artifacts:
