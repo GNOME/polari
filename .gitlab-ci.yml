@@ -14,6 +14,8 @@ fedora:
   script:
     - meson _build .
     - ninja -C _build test install
+  only:
+    - web
 
 flatpak:
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
