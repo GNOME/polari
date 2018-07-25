@@ -9,9 +9,8 @@ variables:
   image: fedora:latest
   stage: build
   before_script:
-    - dnf install -y gcc meson redhat-rpm-config gettext itstool gtk3-devel
-                       gjs-devel gobject-introspection-devel telepathy-glib-devel
-                       libappstream-glib desktop-file-utils
+    - dnf install -y 'dnf-command(builddep)' redhat-rpm-config
+    - dnf builddep -y polari
   script:
     - meson _build .
     - ninja -C _build test install
