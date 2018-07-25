@@ -27,11 +27,13 @@ flatpak:
         # are passed except the config-args because we build it ourselves
         - flatpak build app meson --prefix=/app ${MESON_ARGS} _build
         - flatpak build app ninja -C _build install
-        - flatpak-builder --finish-only --repo=repo --default-branch=${BRANCH} app ${MANIFEST_PATH}
+        - flatpak-builder --finish-only --repo=repo \
+                          --default-branch=${BRANCH} app ${MANIFEST_PATH}
         # Run automatic tests inside the Flatpak env
         - flatpak build app ninja -C _build test
         # Generate a Flatpak bundle
-        - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID} ${BRANCH}
+        - flatpak build-bundle --runtime-repo=${RUNTIME_REPO} \
+                               repo ${BUNDLE} ${DBUS_ID} ${BRANCH}
     after_script:
         - tar -czf cache.tar.gz .flatpak-builder/cache
 
