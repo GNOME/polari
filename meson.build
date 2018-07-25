@@ -39,10 +39,24 @@ telepathy_glib = dependency('telepathy-glib')
 girepository = dependency('gobject-introspection-1.0')
 gjs = dependency('gjs-1.0')
 
+conf = configuration_data()
+
+conf.set_quoted('PACKAGE_NAME', meson.project_name())
+conf.set_quoted('PACKAGE_VERSION', meson.project_version())
+conf.set_quoted('PREFIX', prefix)
+conf.set_quoted('LIBDIR', libdir)
+conf.set_quoted('PKGLIBDIR', pkglibdir)
+
 cc = meson.get_compiler('c')
-if (cc.has_function('strcasestr'))
-  add_project_arguments('-DHAVE_STRCASECSTR', language: 'c')
-endif
+conf.set10('HAVE_STRCASESTR', cc.has_function('strcasestr'))
+
+config_h = declare_dependency(
+  sources: configure_file(
+    configuration: conf,
+    output: 'config.h'
+  ),
+  include_directories: include_directories('.')
+)
 
 subdir('src')
 subdir('data')
