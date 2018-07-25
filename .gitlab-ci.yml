@@ -42,6 +42,7 @@ flatpak:
             - _build/meson-logs/testlog.txt
         expire_in: 30 days
     cache:
+        key: flatpak-builder
         paths:
              - cache.tar.gz
 
