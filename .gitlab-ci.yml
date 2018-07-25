@@ -1,5 +1,5 @@
 stages:
- - test
+ - build
  - review
 
 variables:
@@ -18,7 +18,7 @@ build-polari:
 
 flatpak:
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
-    stage: test
+    stage: build
     variables:
         # Your manifest path
         MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
