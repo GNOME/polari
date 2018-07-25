@@ -14,13 +14,21 @@ const char *src =
 static char **
 get_js_argv (int argc, const char * const *argv)
 {
+  char * injected_args[] = {
+#ifdef SNAPSHOT
+    "--test-instance",
+#endif
+    NULL
+  };
   char **strv;
   int js_argc = argc - 1; // gjs doesn't do argv[0]
   int i;
 
-  strv = g_new0 (char *, js_argc + 1);
+  strv = g_new0 (char *, js_argc + G_N_ELEMENTS (injected_args) + 1);
   for (i = 0; i < js_argc; i++)
     strv[i] = g_strdup (argv[i + 1]);
+  for (i = 0; i < G_N_ELEMENTS (injected_args); i++)
+    strv[js_argc + i] = g_strdup (injected_args[i]);
   return strv;
 }
 

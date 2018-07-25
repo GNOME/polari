@@ -1,0 +1,5 @@
+option('snapshot',
+  type: 'boolean',
+  value: false,
+  description: 'Build development snapshot'
+)
