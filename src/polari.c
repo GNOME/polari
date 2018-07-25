@@ -11,6 +11,19 @@ const char *src =
   "                        prefix: '" PREFIX "',"
   "                        libdir: '" LIBDIR "' });";
 
+static char **
+get_js_argv (int argc, const char * const *argv)
+{
+  char **strv;
+  int js_argc = argc - 1; // gjs doesn't do argv[0]
+  int i;
+
+  strv = g_new0 (char *, js_argc + 1);
+  for (i = 0; i < js_argc; i++)
+    strv[i] = g_strdup (argv[i + 1]);
+  return strv;
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -18,6 +31,7 @@ main (int argc, char *argv[])
   g_autoptr (GOptionContext) option_context = NULL;
   g_autoptr (GError) error = NULL;
   g_autoptr (GjsContext) context = NULL;
+  g_auto (GStrv) js_argv = NULL;
   gboolean debugger = FALSE;
   int status;
 
@@ -42,8 +56,10 @@ main (int argc, char *argv[])
   if (debugger)
     gjs_context_setup_debugger_console (context);
 
+  js_argv = get_js_argv (argc, (const char * const *)argv);
+
   if (!gjs_context_define_string_array (context, "ARGV",
-                                        argc - 1, (const char **)argv + 1,
+                                        -1, (const char **)js_argv,
                                         &error))
     {
       g_message ("Failed to define ARGV: %s", error->message);
