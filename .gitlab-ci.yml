@@ -1,11 +1,12 @@
 stages:
  - build
+ - test
  - review
 
 variables:
     BUNDLE: "polari-git.flatpak"
 
-flatpak:
+build:flatpak:
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
     stage: build
     variables:
@@ -25,6 +26,20 @@ flatpak:
         - flatpak build app meson --prefix=/app ${MESON_ARGS} _build
         - flatpak build app ninja -C _build install
         - flatpak-builder --finish-only --repo=repo app ${MANIFEST_PATH}
+
+    artifacts:
+        untracked: true
+        expire_in: 10 minutes
+    cache:
+        paths:
+             - .flatpak-builder/cache
+
+test:flatpak:
+    image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
+    stage: test
+    dependencies:
+        - build:flatpak
+    script:
         # Run automatic tests inside the Flatpak env
         - flatpak build app ninja -C _build test
         # Generate a Flatpak bundle
@@ -32,18 +47,15 @@ flatpak:
 
     artifacts:
         paths:
-            - ${BUNDLE}
             - _build/meson-logs/meson-log.txt
             - _build/meson-logs/testlog.txt
+            - ${BUNDLE}
         expire_in: 30 days
-    cache:
-        paths:
-             - .flatpak-builder/cache
 
 review:
     stage: review
     dependencies:
-        - flatpak
+        - test:flatpak
     script:
         - echo "Generating flatpak deployment"
     artifacts:
