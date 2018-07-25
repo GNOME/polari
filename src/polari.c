@@ -49,6 +49,12 @@ main (int argc, char *argv[])
       { NULL }
     };
 
+#ifdef SNAPSHOT
+  g_set_application_name ("Polari Development Snapshot");
+#else
+  g_set_application_name ("Polari");
+#endif
+
   g_irepository_prepend_search_path (PKGLIBDIR);
 
   context = g_object_new (GJS_TYPE_CONTEXT,

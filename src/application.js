@@ -29,7 +29,6 @@ var Application = GObject.registerClass({
         super._init({ application_id: 'org.gnome.Polari',
                       flags: Gio.ApplicationFlags.HANDLES_OPEN });
 
-        GLib.set_application_name('Polari');
         GLib.set_prgname('polari');
         this._retryData = new Map();
         this._nickTrackData = new Map();
