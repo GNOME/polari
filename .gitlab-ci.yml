@@ -5,7 +5,7 @@ stages:
 variables:
     BUNDLE: "polari-git.flatpak"
 
-build-polari:
+.fedora:latest:
   image: fedora:latest
   stage: build
   before_script:
