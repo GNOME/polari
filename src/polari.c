@@ -1,6 +1,8 @@
 #include <girepository.h>
 #include <gjs/gjs.h>
 
+#include "config.h"
+
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GjsContext, g_object_unref)
 
 const char *src =

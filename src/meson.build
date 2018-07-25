@@ -59,16 +59,8 @@ src_resources = gnome.compile_resources(
   c_name: 'src_resources'
 )
 
-exeargs = [
-  '-DPACKAGE_NAME="polari"',
-  '-DPACKAGE_VERSION="@0@"'.format(meson.project_version()),
-  '-DPREFIX="@0@"'.format(prefix),
-  '-DLIBDIR="@0@"'.format(libdir),
-  '-DPKGLIBDIR="@0@"'.format(pkglibdir)
-]
 polari = executable('polari', ['polari.c', src_resources, data_resources],
-  dependencies: [gio, girepository, gjs],
-  c_args: exeargs,
+  dependencies: [config_h, gio, girepository, gjs],
   install: true
 )
 
