@@ -21,7 +21,8 @@ main (int argc, char *argv[])
 
   GOptionEntry entries[] =
     {
-      { "debugger", 'd', 0, G_OPTION_ARG_NONE, &debugger, NULL, NULL }
+      { "debugger", 'd', 0, G_OPTION_ARG_NONE, &debugger, NULL, NULL },
+      { NULL }
     };
 
   g_irepository_prepend_search_path (PKGLIBDIR);
