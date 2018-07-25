@@ -18,6 +18,8 @@ flatpak:
         MESON_ARGS: ""
         DBUS_ID: "org.gnome.Polari"
 
+    before_script:
+        - tar -xzf cache.tar.gz .flatpak-builder/cache || true
     script:
         - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
         # Make sure to keep this in sync with the Flatpak manifest, all arguments
@@ -29,6 +31,8 @@ flatpak:
         - flatpak build app ninja -C _build test
         # Generate a Flatpak bundle
         - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID}
+    after_script:
+        - tar -czf cache.tar.gz .flatpak-builder/cache
 
     artifacts:
         paths:
@@ -38,7 +42,7 @@ flatpak:
         expire_in: 30 days
     cache:
         paths:
-             - .flatpak-builder/cache
+             - cache.tar.gz
 
 review:
     stage: review
