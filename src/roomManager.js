@@ -61,7 +61,8 @@ var RoomManager = class {
     lookupRoomByChannel(channel) {
         let account = channel.connection.get_account();
         let channelName = channel.identifier;
-        let id = Polari.create_room_id(account, channelName, channel.handle_type);
+        let [, handleType] = channel.get_handle();
+        let id = Polari.create_room_id(account, channelName, handleType);
         return this._rooms.get(id);
     }
 
@@ -187,7 +188,8 @@ var RoomManager = class {
         let targetContact = channel.target_contact;
         let channelName = targetContact ? targetContact.alias
                                         : channel.identifier;
-        let room = this._ensureRoom(accountPath, channelName, channel.handle_type, time);
+        let [, handleType] = channel.get_handle();
+        let room = this._ensureRoom(accountPath, channelName, handleType, time);
         room.channel = channel;
     }
 

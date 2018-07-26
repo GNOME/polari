@@ -463,7 +463,8 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _isAuthChannel(channel) {
-        return channel.channel_type == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
+        let channelType = channel.get_channel_type();
+        return channelType == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
     }
 
     _processRequest(context, connection, channels, processChannel) {
