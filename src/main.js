@@ -26,6 +26,9 @@ function _makeLogFunction(level) {
         let stack = (new Error()).stack;
         let caller = stack.split('\n')[1];
 
+        // Map from resource- to source location
+        caller = caller.replace('resource:///org/gnome/Polari/js', 'src');
+
         let [, func, file, line] = new RegExp('(.+)?@(.+):(\\d+)').exec(caller);
         GLib.log_variant(LOG_DOMAIN, level, new GLib.Variant('a{sv}', {
             'MESSAGE': new GLib.Variant('s', `${message}`),
