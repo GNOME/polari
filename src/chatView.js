@@ -1,12 +1,5 @@
-const Gdk = imports.gi.Gdk;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
+const { Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari } = imports.gi;
 const Mainloop = imports.mainloop;
-const Pango = imports.gi.Pango;
-const PangoCairo = imports.gi.PangoCairo;
-const Polari = imports.gi.Polari;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 

@@ -1,10 +1,4 @@
-const Gdk = imports.gi.Gdk;
-const GdkPixbuf = imports.gi.GdkPixbuf;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gspell = imports.gi.Gspell;
-const Gtk = imports.gi.Gtk;
+const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk } = imports.gi;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 

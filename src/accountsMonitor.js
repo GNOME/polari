@@ -1,6 +1,4 @@
-const Gio = imports.gi.Gio;
-const GObject = imports.gi.GObject;
-const Polari = imports.gi.Polari;
+const { Gio, GObject, Polari } = imports.gi;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 

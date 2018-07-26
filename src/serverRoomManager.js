@@ -1,7 +1,4 @@
-const Gdk = imports.gi.Gdk;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
+const { Gdk, GLib, GObject, Gtk } = imports.gi;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;

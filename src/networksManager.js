@@ -1,5 +1,4 @@
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
+const { Gio, GLib } = imports.gi;
 const Signals = imports.signals;
 
 var NetworksManager = class {

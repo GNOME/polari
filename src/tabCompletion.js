@@ -1,6 +1,4 @@
-const Gdk = imports.gi.Gdk;
-const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
+const { Gdk, Gtk, Pango } = imports.gi;
 
 const IrcParser = imports.ircParser;
 

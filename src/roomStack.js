@@ -1,8 +1,4 @@
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
-const Pango = imports.gi.Pango;
+const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
 const {AccountsMonitor} = imports.accountsMonitor;

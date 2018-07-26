@@ -1,9 +1,4 @@
-const Gdk = imports.gi.Gdk;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
-const Polari = imports.gi.Polari;
+const { Gdk, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
 const {AccountsMonitor} = imports.accountsMonitor;

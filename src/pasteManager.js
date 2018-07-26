@@ -1,10 +1,4 @@
-const Gdk = imports.gi.Gdk;
-const GdkPixbuf = imports.gi.GdkPixbuf;
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject;
-const Gtk = imports.gi.Gtk;
-const Polari = imports.gi.Polari;
+const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 
 const Utils = imports.utils;
 
