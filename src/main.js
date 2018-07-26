@@ -29,7 +29,8 @@ function _makeLogFunction(level) {
         // Map from resource- to source location
         caller = caller.replace('resource:///org/gnome/Polari/js', 'src');
 
-        let [, func, file, line] = new RegExp('(.+)?@(.+):(\\d+)').exec(caller);
+        let [code, line] = caller.split(':');
+        let [func, file] = code.split(/\W*@/);
         GLib.log_structured(LOG_DOMAIN, level, {
             'MESSAGE': `${message}`,
             'SYSLOG_IDENTIFIER': 'org.gnome.Polari',
