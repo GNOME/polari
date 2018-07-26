@@ -30,13 +30,13 @@ function _makeLogFunction(level) {
         caller = caller.replace('resource:///org/gnome/Polari/js', 'src');
 
         let [, func, file, line] = new RegExp('(.+)?@(.+):(\\d+)').exec(caller);
-        GLib.log_variant(LOG_DOMAIN, level, new GLib.Variant('a{sv}', {
-            'MESSAGE': new GLib.Variant('s', `${message}`),
-            'SYSLOG_IDENTIFIER': new GLib.Variant('s', 'org.gnome.Polari'),
-            'CODE_FILE': new GLib.Variant('s', file),
-            'CODE_FUNC': new GLib.Variant('s', func),
-            'CODE_LINE': new GLib.Variant('s', line)
-        }));
+        GLib.log_structured(LOG_DOMAIN, level, {
+            'MESSAGE': `${message}`,
+            'SYSLOG_IDENTIFIER': 'org.gnome.Polari',
+            'CODE_FILE': file,
+            'CODE_FUNC': func,
+            'CODE_LINE': line
+        });
     };
 }
 
