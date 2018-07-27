@@ -106,7 +106,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
     }
 
     _createWidget() {
-        this._infoBar = new Gtk.InfoBar({ show_close_button: true })
+        this._infoBar = new Gtk.InfoBar({ show_close_button: true });
         this.add(this._infoBar);
 
         let target = new GLib.Variant('o', this._room.account.object_path);

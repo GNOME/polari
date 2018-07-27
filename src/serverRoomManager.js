@@ -104,7 +104,7 @@ const RoomListColumn = {
 
 function _strBaseEqual(str1, str2) {
     return str1.localeCompare(str2, {}, { sensitivity: 'base' }) == 0;
-};
+}
 
 var ServerRoomList = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',

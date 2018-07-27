@@ -13,7 +13,7 @@ var RoomManager = class {
 
     constructor() {
         this._rooms = new Map();
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' })
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
 
         this._accountsMonitor = AccountsMonitor.getDefault();
 
@@ -104,7 +104,7 @@ var RoomManager = class {
             for (let prop in c)
                 c[prop] = c[prop].deep_unpack();
             if (accountPath == null || c.account == accountPath)
-                this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0)
+                this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0);
         });
         this.emit('rooms-loaded');
     }

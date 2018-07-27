@@ -23,7 +23,7 @@ function getAccountParams(account) {
     params['port'] = params['port'] || params['use-ssl'] ? DEFAULT_SSL_PORT
                                                          : DEFAULT_PORT;
     return params;
-};
+}
 
 const ConnectionRow = GObject.registerClass(
 class ConnectionRow extends Gtk.ListBoxRow {

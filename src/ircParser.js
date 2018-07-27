@@ -203,7 +203,7 @@ var IrcParser = class {
             }
             case 'PART':
             case 'CLOSE': {
-                let room = null;;
+                let room = null;
                 let name = argv[0];
                 if (name)
                     room = this._roomManager.lookupRoomByName(name, this._room.account);
@@ -289,7 +289,7 @@ var IrcParser = class {
                  c.send_message_finish(res);
             } catch(e) {
                 // TODO: propagate to user
-                logError(e, 'Failed to send message')
+                logError(e, 'Failed to send message');
             }
         });
     }

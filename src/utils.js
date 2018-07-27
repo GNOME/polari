@@ -172,7 +172,7 @@ function openURL(url, timestamp) {
     let app = Gio.Application.get_default();
     try {
         if (app.active_window)
-            Gtk.show_uri_on_window (app.active_window, url, timestamp)
+            Gtk.show_uri_on_window (app.active_window, url, timestamp);
         else
             Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
     } catch(e) {

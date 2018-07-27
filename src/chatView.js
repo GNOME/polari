@@ -953,7 +953,7 @@ var ChatView = GObject.registerClass({
         let message =
             actor ? _("%s has been banned by %s").format(member.alias,
                                                          actor.alias)
-                  : _("%s has been banned").format(member.alias)
+                  : _("%s has been banned").format(member.alias);
         this._insertStatus(message, member.alias, 'left');
     }
 

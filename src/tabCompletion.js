@@ -220,7 +220,7 @@ var TabCompletion = class {
         this._insertCompletion(this._getRowCompletion(visibleRows[0]));
         if (visibleRows.length > 1) {
             this._list.select_row(visibleRows[0]);
-            this._showPopup()
+            this._showPopup();
         }
     }
 

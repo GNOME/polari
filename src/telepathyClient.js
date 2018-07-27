@@ -100,7 +100,7 @@ class SASLAuthHandler {
                                            'available', '', null);
         });
     }
-};
+}
 
 var TelepathyClient = GObject.registerClass(
 class TelepathyClient extends Tp.BaseClient {
