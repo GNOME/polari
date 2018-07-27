@@ -306,7 +306,6 @@ var Application = GObject.registerClass({
 
         let provider = new Gtk.CssProvider();
         let uri = 'resource:///org/gnome/Polari/css/application.css';
-        let file = Gio.File.new_for_uri(uri);
         try {
             provider.load_from_file(Gio.File.new_for_uri(uri));
         } catch(e) {

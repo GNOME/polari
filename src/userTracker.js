@@ -310,8 +310,6 @@ var UserTracker = GObject.registerClass({
         notification.set_default_action_and_target('app.join-room', param);
 
         this._app.send_notification(this._getNotifyActionNameInternal(member.alias), notification);
-
-        let baseNick = Polari.util_get_basenick(member.alias);
     }
 
     _shouldNotifyNick(nickName) {
