@@ -1,3 +1,5 @@
+/* exported ChatEntry EntryArea NickPopover */
+
 const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk } = imports.gi;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;

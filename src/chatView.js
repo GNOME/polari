@@ -1,3 +1,5 @@
+/* exported ChatView */
+
 const { Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari } = imports.gi;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;

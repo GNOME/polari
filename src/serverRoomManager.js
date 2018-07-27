@@ -1,3 +1,5 @@
+/* exported ServerRoomManager ServerRoomList */
+
 const { Gdk, GLib, GObject, Gtk } = imports.gi;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;

@@ -1,3 +1,5 @@
+/* exported RoomStack */
+
 const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 

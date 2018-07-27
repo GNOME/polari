@@ -1,3 +1,5 @@
+/* exported TabCompletion */
+
 const { Gdk, Gtk, Pango } = imports.gi;
 
 const IrcParser = imports.ircParser;

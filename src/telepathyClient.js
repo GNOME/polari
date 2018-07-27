@@ -1,3 +1,5 @@
+/* exported TelepathyClient */
+
 const { Gio, GLib, GObject, Polari } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 

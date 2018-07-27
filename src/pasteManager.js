@@ -1,3 +1,5 @@
+/* exported PasteManager DropTargetIface */
+
 const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 
 const Utils = imports.utils;

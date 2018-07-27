@@ -1,3 +1,6 @@
+/* exported MessageNotification UndoNotification NotificationQueue
+            SimpleOutput GridOutput CommandOutputQueue */
+
 const { GObject, Gtk, Pango } = imports.gi;
 const Mainloop = imports.mainloop;
 

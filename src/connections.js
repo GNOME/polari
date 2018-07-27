@@ -1,3 +1,5 @@
+/* exported ConnectionProperties ConnectionDetails ConnectionsList */
+
 const { GLib, GObject, Gtk } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
