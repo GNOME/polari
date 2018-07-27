@@ -169,7 +169,7 @@ var DropTargetIface = GObject.registerClass({
             }
         } else {
             let success = false;
-            switch(info) {
+            switch (info) {
                 case DndTargetType.TEXT:
                     this.emit('text-dropped', data.get_text());
                     success = true;

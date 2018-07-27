@@ -78,7 +78,7 @@ const _urlRegexp = new RegExp(
         ')' +
     ')', 'gi');
 
-const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)','g');
+const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)', 'g');
 
 let _gpasteExpire = undefined;
 

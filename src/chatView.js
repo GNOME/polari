@@ -486,7 +486,7 @@ var ChatView = GObject.registerClass({
         });
 
         tagTable.foreach(tag => {
-            if(!tag.name)
+            if (!tag.name)
                 return;
 
             let nickname = this._getNickFromTagName(tag.name);
@@ -1124,10 +1124,10 @@ var ChatView = GObject.registerClass({
         let hasAmPm = date.format('%p') != '';
 
         if (clockFormat == '24h' || !hasAmPm) {
-            if(daysAgo < 1) { // today
+            if (daysAgo < 1) { // today
                 /* Translators: Time in 24h format */
                 format = _("%H\u2236%M");
-            } else if(daysAgo <2) { // yesterday
+            } else if (daysAgo < 2) { // yesterday
                 /* Translators: this is the word "Yesterday" followed by a
                  time string in 24h format. i.e. "Yesterday, 14:30" */
                 // xgettext:no-c-format
@@ -1151,10 +1151,10 @@ var ChatView = GObject.registerClass({
                 format = _("%B %d %Y, %H\u2236%M");
             }
         } else {
-            if(daysAgo < 1) { // today
+            if (daysAgo < 1) { // today
                 /* Translators: Time in 12h format */
                 format = _("%l\u2236%M %p");
-            } else if(daysAgo <2) { // yesterday
+            } else if (daysAgo < 2) { // yesterday
                 /* Translators: this is the word "Yesterday" followed by a
                  time string in 12h format. i.e. "Yesterday, 2:30 pm" */
                 // xgettext:no-c-format
@@ -1274,7 +1274,7 @@ var ChatView = GObject.registerClass({
         }
 
         let channels = Utils.findChannels(text, server);
-        let urls = Utils.findUrls(text).concat(channels).sort((u1,u2) => u1.pos - u2.pos);
+        let urls = Utils.findUrls(text).concat(channels).sort((u1, u2) => u1.pos - u2.pos);
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
             let url = urls[i];

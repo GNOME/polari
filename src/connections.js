@@ -100,10 +100,10 @@ var ConnectionsList = GObject.registerClass({
                                         orientation: Gtk.Orientation.VERTICAL,
                                         visible: true });
         placeholder.add(new Gtk.Image({ icon_name: 'edit-find-symbolic',
-                                        pixel_size : 115,
-                                        visible : true }));
-        placeholder.add(new Gtk.Label({ label : _("No results."),
-                                        visible : true }));
+                                        pixel_size: 115,
+                                        visible: true }));
+        placeholder.add(new Gtk.Label({ label: _("No results."),
+                                        visible: true }));
 
         placeholder.get_style_context().add_class('dim-label');
 

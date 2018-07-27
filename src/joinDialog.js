@@ -188,7 +188,7 @@ var JoinDialog = GObject.registerClass({
         let activeRoom = this.transient_for ? this.transient_for.active_room
                                             : null;
         let activeIndex = 0;
-        if(activeRoom)
+        if (activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
         this._connectionCombo.set_active(activeIndex);
     }

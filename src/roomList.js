@@ -341,7 +341,7 @@ var RoomListHeader = GObject.registerClass({
         this._spinner.active = (child == 'connecting');
         this._popoverTitle.visible = !isAuth;
 
-        if(this._spinner.active)
+        if (this._spinner.active)
             this._spinnerActivationTime = GLib.get_monotonic_time();
 
         this._popoverTitle.use_markup = isError;
@@ -529,7 +529,7 @@ class RoomList extends Gtk.ListBox {
         this._moveSelectionFull(direction, () => { return true; });
     }
 
-    _moveSelectionFull(direction, testFunction){
+    _moveSelectionFull(direction, testFunction) {
         let current = this.get_selected_row();
         if (!current)
             return;

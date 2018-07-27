@@ -72,7 +72,7 @@ class SASLAuthHandler {
         let statusString = (Object.keys(SASLStatus))[status];
         debug('Auth status for server "%s": %s'.format(name, statusString));
 
-        switch(status) {
+        switch (status) {
             case SASLStatus.NOT_STARTED:
             case SASLStatus.IN_PROGRESS:
             case SASLStatus.CLIENT_ACCEPTED:
