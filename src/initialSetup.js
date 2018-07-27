@@ -1,3 +1,5 @@
+/* exported InitialSetupWindow */
+
 const { Gio, GLib, GObject, Gtk } = imports.gi;
 
 const Utils = imports.utils;

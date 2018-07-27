@@ -1,3 +1,5 @@
+/* exported Application */
+
 const { Gdk, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 

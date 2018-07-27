@@ -1,3 +1,5 @@
+/* exported IrcParser */
+
 const { Gio, GLib } = imports.gi;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;

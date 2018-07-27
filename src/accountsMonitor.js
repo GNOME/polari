@@ -1,3 +1,5 @@
+/* exported AccountsMonitor */
+
 const { Gio, GObject, Polari } = imports.gi;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;

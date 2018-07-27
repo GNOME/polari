@@ -1,3 +1,5 @@
+/* exported NetworksManager */
+
 const { Gio, GLib } = imports.gi;
 const ByteArray = imports.byteArray;
 const Signals = imports.signals;

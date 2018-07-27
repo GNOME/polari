@@ -1,3 +1,7 @@
+/* exported isFlatpakSandbox getTpEventTime findUrls findChannels openURL
+            storeAccountPassword storeIdentifyPassword
+            lookupAccountPassword lookupIdentifyPassword
+            updateTerms gpaste imgurPaste */
 /*
  * Copyright (c) 2011 Red Hat, Inc.
  *

@@ -1,3 +1,5 @@
+/* exported JoinDialog */
+
 const { Gdk, Gio, GLib, GObject, Gtk } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;

@@ -1,3 +1,5 @@
+/* exported main */
+
 pkg.initFormat();
 pkg.initGettext();
 window.ngettext = imports.gettext.ngettext;

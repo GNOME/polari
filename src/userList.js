@@ -1,3 +1,5 @@
+/* exported UserList UserListPopover UserDetails UserPopover */
+
 const { Gio, GLib, GObject, Gtk, Pango, Polari } = imports.gi;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
