@@ -99,7 +99,7 @@ var AccountsMonitor = class {
             this._app.hold();
             a.request_presence_async(presence, 'offline', '', (a, res) => {
                 try {
-                    a.request_presence_finish(result);
+                    a.request_presence_finish(res);
                 } catch(e) { }
                 this._app.release();
             });
