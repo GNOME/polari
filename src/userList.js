@@ -4,8 +4,6 @@ const {
     Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp
 } = imports.gi;
 
-const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
-
 const MAX_USERS_SHOWN = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
@@ -108,16 +106,14 @@ var UserDetails = GObject.registerClass({
         'messageButton'
     ],
     Properties: {
-        'expanded': GObject.ParamSpec.boolean('expanded',
-                                              'expanded',
-                                              'expanded',
-                                              READWRITE,
-                                              false),
-        'notifications-enabled': GObject.ParamSpec.boolean('notifications-enabled',
-                                                           'notifications-enabled',
-                                                           'notifications-enabled',
-                                                           READWRITE,
-                                                           false)
+        'expanded': GObject.ParamSpec.boolean(
+            'expanded', 'expanded', 'expanded',
+            GObject.ParamFlags.READWRITE,
+            false),
+        'notifications-enabled': GObject.ParamSpec.boolean(
+            'notifications-enabled', 'notifications-enabled', 'notifications-enabled',
+            GObject.ParamFlags.READWRITE,
+            false)
     }
 }, class UserDetails extends Gtk.Frame {
     _init(params = {}) {

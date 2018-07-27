@@ -74,9 +74,10 @@ var PasteManager = class {
 var DropTargetIface = GObject.registerClass({
     Requires: [GObject.Object],
     Properties: {
-        'can-drop': GObject.ParamSpec.boolean('can-drop', '', '',
-                                              GObject.ParamFlags.READABLE,
-                                              false)
+        'can-drop': GObject.ParamSpec.boolean(
+            'can-drop', 'can-drop', 'can-drop',
+            GObject.ParamFlags.READABLE,
+            false)
     },
     Signals: {
         'text-dropped': { param_types: [GObject.TYPE_STRING] },

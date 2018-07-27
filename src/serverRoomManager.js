@@ -115,11 +115,10 @@ var ServerRoomList = GObject.registerClass({
         'toggleRenderer'
     ],
     Properties: {
-        'can-join': GObject.ParamSpec.boolean('can-join',
-                                              'can-join',
-                                              'can-join',
-                                              GObject.ParamFlags.READABLE,
-                                              false)
+        'can-join': GObject.ParamSpec.boolean(
+            'can-join', 'can-join', 'can-join',
+            GObject.ParamFlags.READABLE,
+            false)
     }
 }, class ServerRoomList extends Gtk.Box {
     _init(params) {

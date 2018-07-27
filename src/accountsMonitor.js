@@ -176,11 +176,10 @@ class ClientFactory extends Polari.ClientFactory {
 
 const PolariAccount = GObject.registerClass({
     Properties: {
-        visible: GObject.ParamSpec.boolean('visible',
-                                           'visible',
-                                           'visible',
-                                           GObject.ParamFlags.READWRITE,
-                                           true)
+        visible: GObject.ParamSpec.boolean(
+            'visible', 'visible', 'visible',
+            GObject.ParamFlags.READWRITE,
+            true)
     }
 }, class PolariAccount extends Tp.Account {
     _init(params) {

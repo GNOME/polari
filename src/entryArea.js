@@ -111,11 +111,10 @@ var NickPopover = GObject.registerClass({
         'changeButton'
     ],
     Properties: {
-        nick: GObject.ParamSpec.string('nick',
-                                       'nick',
-                                       'nick',
-                                       GObject.ParamFlags.READWRITE,
-                                       '')
+        nick: GObject.ParamSpec.string(
+            'nick', 'nick', 'nick',
+            GObject.ParamFlags.READWRITE,
+            '')
     },
     Signals: {
         'nick-changed': {}
@@ -166,11 +165,10 @@ var EntryArea = GObject.registerClass({
         'pasteButton'
     ],
     Properties: {
-        'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
-                                                 'max-nick-chars',
-                                                 'max-nick-chars',
-                                                 GObject.ParamFlags.WRITABLE,
-                                                 0, GLib.MAXUINT32, 0)
+        'max-nick-chars': GObject.ParamSpec.uint(
+            'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
+            GObject.ParamFlags.WRITABLE,
+            0, GLib.MAXUINT32, 0)
     }
 }, class EntryArea extends Gtk.Stack {
     static get _nickPopover() {

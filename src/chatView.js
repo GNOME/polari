@@ -140,11 +140,10 @@ class TextView extends Gtk.TextView {
 
 const ButtonTag = GObject.registerClass({
     Properties: {
-        'hover': GObject.ParamSpec.boolean('hover',
-                                           'hover',
-                                           'hover',
-                                           GObject.ParamFlags.READWRITE,
-                                           false)
+        'hover': GObject.ParamSpec.boolean(
+            'hover', 'hover', 'hover',
+            GObject.ParamFlags.READWRITE,
+            false)
     },
     Signals: {
         'clicked': {},
@@ -212,17 +211,14 @@ const ButtonTag = GObject.registerClass({
 
 const HoverFilterTag = GObject.registerClass({
     Properties: {
-        'filtered-tag': GObject.ParamSpec.object('filtered-tag',
-                                                 'filtered-tag',
-                                                 'filtered-tag',
-                                                 GObject.ParamFlags.READWRITE |
-                                                 GObject.ParamFlags.CONSTRUCT_ONLY,
-                                                 Gtk.TextTag.$gtype),
-        'hover-opacity': GObject.ParamSpec.double('hover-opacity',
-                                                  'hover-opacity',
-                                                  'hover-opacity',
-                                                  GObject.ParamFlags.READWRITE,
-                                                  0.0, 1.0, 1.0)
+        'filtered-tag': GObject.ParamSpec.object(
+            'filtered-tag', 'filtered-tag', 'filtered-tag',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
+            Gtk.TextTag.$gtype),
+        'hover-opacity': GObject.ParamSpec.double(
+            'hover-opacity', 'hover-opacity', 'hover-opacity',
+            GObject.ParamFlags.READWRITE,
+            0.0, 1.0, 1.0)
     }
 }, class HoverFilterTag extends ButtonTag {
     _init(params) {
@@ -281,11 +277,10 @@ var ChatView = GObject.registerClass({
     Implements: [DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
-        'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
-                                                 'max-nick-chars',
-                                                 'max-nick-chars',
-                                                 GObject.ParamFlags.READABLE,
-                                                 0, GLib.MAXUINT32, 0)
+        'max-nick-chars': GObject.ParamSpec.uint(
+            'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
+            GObject.ParamFlags.READABLE,
+            0, GLib.MAXUINT32, 0)
     }
 }, class ChatView extends Gtk.ScrolledWindow {
     _init(room) {

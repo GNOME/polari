@@ -13,16 +13,14 @@ const Utils = imports.utils;
 
 var FixedSizeFrame = GObject.registerClass({
     Properties: {
-        height: GObject.ParamSpec.int('height',
-                                      'height',
-                                      'height',
-                                      GObject.ParamFlags.READWRITE,
-                                      -1, GLib.MAXINT32, -1),
-        width: GObject.ParamSpec.int('width',
-                                     'width',
-                                     'width',
-                                     GObject.ParamFlags.READWRITE,
-                                     -1, GLib.MAXINT32, -1)
+        height: GObject.ParamSpec.int(
+            'height', 'height', 'height',
+            GObject.ParamFlags.READWRITE,
+            -1, GLib.MAXINT32, -1),
+        width: GObject.ParamSpec.int(
+            'width', 'width', 'width',
+            GObject.ParamFlags.READWRITE,
+            -1, GLib.MAXINT32, -1)
     }
 }, class FixedSizeFrame extends Gtk.Frame {
     _init(params) {
@@ -90,21 +88,18 @@ var MainWindow = GObject.registerClass({
         'roomStack',
     ],
     Properties: {
-        subtitle: GObject.ParamSpec.string('subtitle',
-                                           'subtitle',
-                                           'subtitle',
-                                           GObject.ParamFlags.READABLE,
-                                           ''),
-        'subtitle-visible': GObject.ParamSpec.boolean('subtitle-visible',
-                                                      'subtitle-visible',
-                                                      'subtitle-visible',
-                                                      GObject.ParamFlags.READABLE,
-                                                      false),
-        'active-room': GObject.ParamSpec.object('active-room',
-                                                'active-room',
-                                                'active-room',
-                                                GObject.ParamFlags.READWRITE,
-                                                Polari.Room.$gtype)
+        subtitle: GObject.ParamSpec.string(
+            'subtitle', 'subtitle', 'subtitle',
+            GObject.ParamFlags.READABLE,
+            ''),
+        'subtitle-visible': GObject.ParamSpec.boolean(
+            'subtitle-visible', 'subtitle-visible', 'subtitle-visible',
+            GObject.ParamFlags.READABLE,
+            false),
+        'active-room': GObject.ParamSpec.object(
+            'active-room', 'active-room', 'active-room',
+            GObject.ParamFlags.READWRITE,
+            Polari.Room.$gtype)
     },
     Signals: {
         'active-room-state-changed': {}

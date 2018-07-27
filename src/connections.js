@@ -72,12 +72,10 @@ class ConnectionRow extends Gtk.ListBoxRow {
 
 var ConnectionsList = GObject.registerClass({
     Properties: {
-        'favorites-only': GObject.ParamSpec.boolean('favorites-only',
-                                                    'favorites-only',
-                                                    'favorites-only',
-                                                    GObject.ParamFlags.READWRITE |
-                                                    GObject.ParamFlags.CONSTRUCT_ONLY,
-                                                    false)
+        'favorites-only': GObject.ParamSpec.boolean(
+            'favorites-only', 'favorites-only', 'favorites-only',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
+            false)
     },
     Signals: {
         'account-created': { param_types: [Tp.Account.$gtype] },
@@ -270,16 +268,14 @@ var ConnectionDetails = GObject.registerClass({
         'sslCheckbox'
     ],
     Properties: {
-        'can-confirm': GObject.ParamSpec.boolean('can-confirm',
-                                                 'can-confirm',
-                                                 'can-confirm',
-                                                 GObject.ParamFlags.READABLE,
-                                                 false),
-        'has-serivce': GObject.ParamSpec.boolean('has-service',
-                                                 'has-service',
-                                                 'has-service',
-                                                 GObject.ParamFlags.READABLE,
-                                                 false)
+        'can-confirm': GObject.ParamSpec.boolean(
+            'can-confirm', 'can-confirm', 'can-confirm',
+            GObject.ParamFlags.READABLE,
+            false),
+        'has-serivce': GObject.ParamSpec.boolean(
+            'has-service', 'has-service', 'has-service',
+            GObject.ParamFlags.READABLE,
+            false)
     },
     Signals: {
         'account-created': { param_types: [Tp.Account.$gtype] }

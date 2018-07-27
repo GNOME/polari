@@ -9,11 +9,10 @@ const { RoomManager } = imports.roomManager;
 
 var RoomStack = GObject.registerClass({
     Properties: {
-        'entry-area-height': GObject.ParamSpec.uint('entry-area-height',
-                                                    'entry-area-height',
-                                                    'entry-area-height',
-                                                    GObject.ParamFlags.READABLE,
-                                                    0, GLib.MAXUINT32, 0)
+        'entry-area-height': GObject.ParamSpec.uint(
+            'entry-area-height', 'entry-area-height', 'entry-area-height',
+            GObject.ParamFlags.READABLE,
+            0, GLib.MAXUINT32, 0)
     }
 }, class RoomStack extends Gtk.Stack {
     _init(params) {
