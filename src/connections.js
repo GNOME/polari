@@ -249,11 +249,13 @@ var ConnectionsList = GObject.registerClass({
 
 var ConnectionDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
-    InternalChildren: ['nameEntry',
-                       'serverEntry',
-                       'nickEntry',
-                       'realnameEntry',
-                       'sslCheckbox'],
+    InternalChildren: [
+        'nameEntry',
+        'serverEntry',
+        'nickEntry',
+        'realnameEntry',
+        'sslCheckbox'
+    ],
     Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
                                                            'can-confirm',
                                                            'can-confirm',
@@ -482,9 +484,11 @@ var ConnectionDetails = GObject.registerClass({
 
 var ConnectionProperties = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
-    InternalChildren: ['details',
-                       'errorBox',
-                       'errorLabel'],
+    InternalChildren: [
+        'details',
+        'errorBox',
+        'errorLabel'
+    ]
 }, class ConnectionProperties extends Gtk.Dialog {
     _init(account) {
         /* Translators: %s is a connection name */

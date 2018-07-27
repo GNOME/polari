@@ -79,14 +79,16 @@ var FixedSizeFrame = GObject.registerClass({
 
 var MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
-    InternalChildren: ['titlebarRight',
-                       'titlebarLeft',
-                       'joinButton',
-                       'showUserListButton',
-                       'userListPopover',
-                       'roomListRevealer',
-                       'overlay',
-                       'roomStack'],
+    InternalChildren: [
+        'titlebarRight',
+        'titlebarLeft',
+        'joinButton',
+        'showUserListButton',
+        'userListPopover',
+        'roomListRevealer',
+        'overlay',
+        'roomStack',
+    ],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',

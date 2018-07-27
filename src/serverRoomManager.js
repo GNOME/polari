@@ -108,11 +108,13 @@ function _strBaseEqual(str1, str2) {
 
 var ServerRoomList = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
-    InternalChildren: ['filterEntry',
-                       'list',
-                       'spinner',
-                       'store',
-                       'toggleRenderer'],
+    InternalChildren: [
+        'filterEntry',
+        'list',
+        'spinner',
+        'store',
+        'toggleRenderer'
+    ],
     Properties: { 'can-join': GObject.ParamSpec.boolean('can-join',
                                                         'can-join',
                                                         'can-join',

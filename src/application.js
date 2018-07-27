@@ -417,9 +417,10 @@ var Application = GObject.registerClass({
             else
                 this._createAccount(matchedId, server, port, a => {
                     if (a)
-                        joinAction.activate(new GLib.Variant('(ssu)',
-                                                             [a.get_object_path(),
-                                                              `#${room}`, time]));
+                        joinAction.activate(new GLib.Variant('(ssu)', [
+                            a.get_object_path(),
+                            `#${room}`, time
+                        ]));
                 });
         });
     }

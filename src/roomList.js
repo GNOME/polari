@@ -17,7 +17,13 @@ function _onPopoverVisibleChanged(popover) {
 
 var RoomRow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
-    InternalChildren: ['eventBox', 'icon', 'roomLabel', 'counter', 'eventStack'],
+    InternalChildren: [
+        'eventBox',
+        'icon',
+        'roomLabel',
+        'counter',
+        'eventStack'
+    ]
 }, class RoomRow extends Gtk.ListBoxRow {
     _init(room) {
         super._init({ name: `RoomRow ${room.display_name}` });
@@ -198,17 +204,19 @@ var RoomRow = GObject.registerClass({
 var RoomListHeader = GObject.registerClass({
     CssName: 'row',
     Template: 'resource:///org/gnome/Polari/ui/room-list-header.ui',
-    InternalChildren: ['label',
-                       'iconStack',
-                       'popoverStatus',
-                       'popoverTitle',
-                       'popoverPassword',
-                       'popoverConnect',
-                       'popoverDisconnect',
-                       'popoverReconnect',
-                       'popoverRemove',
-                       'popoverProperties',
-                       'spinner'],
+    InternalChildren: [
+        'label',
+        'iconStack',
+        'popoverStatus',
+        'popoverTitle',
+        'popoverPassword',
+        'popoverConnect',
+        'popoverDisconnect',
+        'popoverReconnect',
+        'popoverRemove',
+        'popoverProperties',
+        'spinner'
+    ]
 }, class RoomListHeader extends Gtk.MenuButton {
     _init(params) {
         this._account = params.account;

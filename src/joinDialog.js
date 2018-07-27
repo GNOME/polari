@@ -12,18 +12,20 @@ const DialogPage = {
 
 var JoinDialog = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
-    InternalChildren: ['cancelButton',
-                       'joinButton',
-                       'mainStack',
-                       'connectionCombo',
-                       'connectionButton',
-                       'connectionStack',
-                       'filterEntry',
-                       'connectionsList',
-                       'serverRoomList',
-                       'details',
-                       'addButton',
-                       'customToggle'],
+    InternalChildren: [
+        'cancelButton',
+        'joinButton',
+        'mainStack',
+        'connectionCombo',
+        'connectionButton',
+        'connectionStack',
+        'filterEntry',
+        'connectionsList',
+        'serverRoomList',
+        'details',
+        'addButton',
+        'customToggle'
+    ]
 }, class JoinDialog extends Gtk.Dialog {
     _init(params) {
         params['use-header-bar'] = 1;
@@ -169,10 +171,11 @@ var JoinDialog = GObject.registerClass({
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
-            action.activate(GLib.Variant.new('(ssu)',
-                                             [account.get_object_path(),
-                                              room,
-                                              Utils.getTpEventTime()]));
+            action.activate(GLib.Variant.new('(ssu)', [
+                account.get_object_path(),
+                room,
+                Utils.getTpEventTime()
+            ]));
         });
     }
 

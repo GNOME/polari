@@ -94,13 +94,15 @@ class UserListPopover extends Gtk.Popover {
 
 var UserDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
-    InternalChildren: ['spinnerBox',
-                       'spinner',
-                       'detailsGrid',
-                       'fullnameLabel',
-                       'lastLabel',
-                       'notificationLabel',
-                       'messageButton'],
+    InternalChildren: [
+        'spinnerBox',
+        'spinner',
+        'detailsGrid',
+        'fullnameLabel',
+        'lastLabel',
+        'notificationLabel',
+        'messageButton'
+    ],
     Properties: { 'expanded': GObject.ParamSpec.boolean('expanded',
                                                         'expanded',
                                                         'expanded',
@@ -293,11 +295,12 @@ var UserDetails = GObject.registerClass({
         let app = Gio.Application.get_default();
         let action = app.lookup_action('message-user');
         let time = Gtk.get_current_event().get_time();
-        action.activate(GLib.Variant.new('(sssu)',
-                                         [account.get_object_path(),
-                                          this._user.alias,
-                                          '',
-                                          time]));
+        action.activate(GLib.Variant.new('(sssu)', [
+            account.get_object_path(),
+            this._user.alias,
+            '',
+            time
+        ]));
     }
 
     _updateButtonVisibility() {
@@ -319,10 +322,12 @@ var UserDetails = GObject.registerClass({
 
 var UserPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
-    InternalChildren: ['nickLabel',
-                       'statusLabel',
-                       'notifyButton',
-                       'userDetails'],
+    InternalChildren: [
+        'nickLabel',
+        'statusLabel',
+        'notifyButton',
+        'userDetails'
+    ]
 }, class UserPopover extends Gtk.Popover {
     _init(params) {
         this._room = params.room;

@@ -105,8 +105,10 @@ var ChatEntry = GObject.registerClass({
 
 var NickPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
-    InternalChildren: ['nickEntry',
-                       'changeButton'],
+    InternalChildren: [
+        'nickEntry',
+        'changeButton'
+    ],
     Properties: {
         nick: GObject.ParamSpec.string('nick',
                                        'nick',
@@ -150,14 +152,16 @@ var NickPopover = GObject.registerClass({
 
 var EntryArea = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
-    InternalChildren: ['chatEntry',
-                       'nickButton',
-                       'nickLabel',
-                       'pasteBox',
-                       'confirmLabel',
-                       'uploadLabel',
-                       'cancelButton',
-                       'pasteButton'],
+    InternalChildren: [
+        'chatEntry',
+        'nickButton',
+        'nickLabel',
+        'pasteBox',
+        'confirmLabel',
+        'uploadLabel',
+        'cancelButton',
+        'pasteButton'
+    ],
     Properties: {
         'max-nick-chars': GObject.ParamSpec.uint('max-nick-chars',
                                                  'max-nick-chars',
