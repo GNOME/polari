@@ -1,0 +1,14 @@
+{
+    "globals": {
+        "debug": false,
+        "info": false,
+        "warning": false,
+        "critical": false,
+        "error": false,
+        "pkg": false,
+        "_": false,
+        "C_": false,
+        "N_": false,
+        "ngettext": false
+    }
+}
