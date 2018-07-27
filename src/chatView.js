@@ -538,7 +538,7 @@ var ChatView = GObject.registerClass({
 
     _createMessage(source) {
         if (source instanceof Tp.Message) {
-            let [text, ] = source.to_text();
+            let [text] = source.to_text();
             let [id, valid] = source.get_pending_message_id();
             return { nick: source.sender.alias,
                      text: text,
@@ -864,7 +864,7 @@ var ChatView = GObject.registerClass({
         let rect = this._view.get_visible_rect();
         let buffer = this._view.get_buffer();
         for (let i = 0; i < pending.length; i++) {
-            let [id,] = pending[i].get_pending_message_id();
+            let [id] = pending[i].get_pending_message_id();
             let mark = this._pending.get(id);
             if (!mark) {
                 this._channel.ack_message_async(pending[i], null);

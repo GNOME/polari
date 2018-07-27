@@ -426,7 +426,7 @@ var ConnectionDetails = GObject.registerClass({
                                           display_name: params.name });
         req.set_enabled(true);
 
-        let [details,] = this._detailsFromParams(params, {});
+        let [details] = this._detailsFromParams(params, {});
 
         for (let prop in details)
             req.set_parameter(prop, details[prop]);

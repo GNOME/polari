@@ -59,7 +59,7 @@ var TabCompletion = class {
         let layout = this._entry.get_layout();
         let layoutIndex = this._entry.text_index_to_layout_index(this._startPos);
         let wordPos = layout.index_to_pos(layoutIndex);
-        let [layoutX,] = this._entry.get_layout_offsets();
+        let [layoutX] = this._entry.get_layout_offsets();
 
         let allocation = this._entry.get_allocation();
         let [ret, x, y] = win.get_origin();

@@ -53,7 +53,7 @@ var PasteManager = class {
 
         if (targetType == DndTargetType.TEXT)
             file.load_contents_async(null, (f, res) => {
-                let [, contents, ,] = f.load_contents_finish(res);
+                let [, contents] = f.load_contents_finish(res);
                 Utils.gpaste(contents.toString(), title, callback);
             });
         else if (targetType == DndTargetType.IMAGE)

@@ -92,7 +92,7 @@ var RoomManager = class {
     }
 
     _onLeaveActivated(action, parameter) {
-        let [id, ] = parameter.deep_unpack();
+        let [id] = parameter.deep_unpack();
         let room = this._rooms.get(id);
 
         this._removeSavedChannel(room.account.object_path, room.channel_name);
@@ -176,7 +176,7 @@ var RoomManager = class {
             this.emit('room-added', room);
         }
 
-        let [present, ] = Tp.user_action_time_should_present(time);
+        let [present] = Tp.user_action_time_should_present(time);
         if (present && this._app.active_window)
             this._app.active_window.active_room = room;
 

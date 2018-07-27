@@ -514,7 +514,7 @@ var Application = GObject.registerClass({
     }
 
     _maybePresent(time) {
-        let [present, ] = Tp.user_action_time_should_present(time);
+        let [present] = Tp.user_action_time_should_present(time);
 
         if (!this.active_window || present)
             this.activate();

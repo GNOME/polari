@@ -98,7 +98,7 @@ var RoomRow = GObject.registerClass({
             return [nPending, nPending];
 
         let highlights = pending.filter(m => {
-            let [text, ] = m.to_text();
+            let [text] = m.to_text();
             return this._room.should_highlight_message(m.sender.alias, text);
         });
         return [nPending, highlights.length];

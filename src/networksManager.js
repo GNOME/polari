@@ -17,7 +17,7 @@ var NetworksManager = class {
         let file = Gio.File.new_for_uri(uri);
         let success, data;
         try {
-            [success, data, ] = file.load_contents(null);
+            [success, data] = file.load_contents(null);
             this._parseNetworks(ByteArray.toString(data));
         } catch(e) {
             log('Failed to load network list: ' + e.message);
@@ -27,7 +27,7 @@ var NetworksManager = class {
     _onContentsReady(f, res) {
         let success, data;
         try {
-            [success, data, ] = f.load_contents_finish(res);
+            [success, data] = f.load_contents_finish(res);
         } catch(e) {
             log('Failed to load network list: ' + e.message);
             return;

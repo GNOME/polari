@@ -497,7 +497,7 @@ class TelepathyClient extends Tp.BaseClient {
                 return;
 
             if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
-                let [invited, , , ,] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
+                let [invited] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
                 if (invited)
                   // this is an invitation - only add it in handleChannel
                   // if accepted
@@ -515,7 +515,7 @@ class TelepathyClient extends Tp.BaseClient {
 
     vfunc_handle_channels(account, connection, channels,
                                     satisfied, userTime, context) {
-        let [present, ] = Tp.user_action_time_should_present(userTime);
+        let [present] = Tp.user_action_time_should_present(userTime);
 
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel)) {
@@ -592,7 +592,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onMessageReceived(channel, msg) {
-        let [id, ] = msg.get_pending_message_id();
+        let [id] = msg.get_pending_message_id();
         let room = this._roomManager.lookupRoomByChannel(channel);
 
         // Rooms are removed instantly when the user requests it, but closing
@@ -601,7 +601,7 @@ class TelepathyClient extends Tp.BaseClient {
         if (!room || this._app.isRoomFocused(room))
             return;
 
-        let [text, ] = msg.to_text();
+        let [text] = msg.to_text();
         let nick = msg.sender.alias;
         if (!room.should_highlight_message(nick, text))
             return;
