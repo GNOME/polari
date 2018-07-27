@@ -172,8 +172,7 @@ const PolariAccount = GObject.registerClass({
         visible: GObject.ParamSpec.boolean('visible',
                                            'visible',
                                            'visible',
-                                           GObject.ParamFlags.READWRITE |
-                                           GObject.ParamFlags.EXPLICIT_NOTIFY,
+                                           GObject.ParamFlags.READWRITE,
                                            true)
     }
 }, class PolariAccount extends Tp.Account {

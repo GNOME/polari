@@ -140,8 +140,7 @@ var NickPopover = GObject.registerClass({
         nick: GObject.ParamSpec.string('nick',
                                        'nick',
                                        'nick',
-                                       GObject.ParamFlags.READWRITE |
-                                       GObject.ParamFlags.EXPLICIT_NOTIFY,
+                                       GObject.ParamFlags.READWRITE,
                                        '')
     },
     Signals: { 'nick-changed': {} }
