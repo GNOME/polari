@@ -12,8 +12,10 @@ class AppNotification extends Gtk.Revealer {
         if (this.constructor.name == 'AppNotification')
             throw new Error('Cannot instantiate abstract class AppNotification');
 
-        super._init({ reveal_child: true,
-                      transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN });
+        super._init({
+            reveal_child: true,
+            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN
+        });
         this.connect('notify::child-revealed',
                      this._onChildRevealed.bind(this));
     }
@@ -40,8 +42,11 @@ class MessageNotification extends AppNotification {
         if (iconName)
             this._box.add(new Gtk.Image({ icon_name: iconName }));
 
-        this._box.add(new Gtk.Label({ label: label, hexpand: true,
-                                      ellipsize: Pango.EllipsizeMode.END }));
+        this._box.add(new Gtk.Label({
+            label: label,
+            hexpand: true,
+            ellipsize: Pango.EllipsizeMode.END
+        }));
 
         let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
         closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic' });
@@ -66,7 +71,10 @@ class MessageNotification extends AppNotification {
 });
 
 var UndoNotification = GObject.registerClass({
-    Signals: { closed: {}, undo: {} }
+    Signals: {
+        closed: {},
+        undo: {}
+    }
 }, class UndoNotification extends MessageNotification {
     _init(label) {
         super._init(label);
@@ -109,10 +117,12 @@ class SimpleOutput extends CommandOutputNotification {
     _init(text) {
         super._init();
 
-        let label = new Gtk.Label({ label: text,
-                                    vexpand: true,
-                                    visible: true,
-                                    wrap: true });
+        let label = new Gtk.Label({
+            label: text,
+            vexpand: true,
+            visible: true,
+            wrap: true
+        });
         this.add(label);
         this.show_all();
     }
@@ -127,9 +137,11 @@ class GridOutput extends CommandOutputNotification {
         let numCols = Math.min(numItems, 4);
         let numRows = Math.floor(numItems / numCols) + numItems % numCols;
 
-        let grid = new Gtk.Grid({ column_homogeneous: true,
-                                  row_spacing: 6,
-                                  column_spacing: 18 });
+        let grid = new Gtk.Grid({
+            column_homogeneous: true,
+            row_spacing: 6,
+            column_spacing: 18
+        });
         grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
 
         let row = 1;
@@ -151,14 +163,18 @@ class GridOutput extends CommandOutputNotification {
 var NotificationQueue = GObject.registerClass(
 class NotificationQueue extends Gtk.Frame {
     _init() {
-        super._init({ valign: Gtk.Align.START,
-                      halign: Gtk.Align.CENTER,
-                      margin_start: 24, margin_end: 24,
-                      no_show_all: true });
+        super._init({
+            valign: Gtk.Align.START,
+            halign: Gtk.Align.CENTER,
+            margin_start: 24, margin_end: 24,
+            no_show_all: true
+        });
         this.get_style_context().add_class('app-notification');
 
-        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                    row_spacing: 6, visible: true });
+        this._grid = new Gtk.Grid({
+            orientation: Gtk.Orientation.VERTICAL,
+            row_spacing: 6, visible: true
+        });
         this.add(this._grid);
     }
 

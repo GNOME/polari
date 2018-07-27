@@ -35,8 +35,10 @@ class UserListPopover extends Gtk.Popover {
     }
 
     _createWidget() {
-        this._box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL,
-                                  spacing: 6 });
+        this._box = new Gtk.Box({
+            orientation: Gtk.Orientation.VERTICAL,
+            spacing: 6
+        });
         this.add(this._box);
 
         this._revealer = new Gtk.Revealer();
@@ -45,7 +47,9 @@ class UserListPopover extends Gtk.Popover {
         this._userListBin = new Gtk.Frame({ shadow_type: Gtk.ShadowType.NONE });
         this._box.add(this._userListBin);
 
-        this._entry = new Gtk.SearchEntry({ primary_icon_name: 'avatar-default-symbolic' });
+        this._entry = new Gtk.SearchEntry({
+            primary_icon_name: 'avatar-default-symbolic'
+        });
         this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.add(this._entry);
 
@@ -103,16 +107,18 @@ var UserDetails = GObject.registerClass({
         'notificationLabel',
         'messageButton'
     ],
-    Properties: { 'expanded': GObject.ParamSpec.boolean('expanded',
-                                                        'expanded',
-                                                        'expanded',
-                                                        READWRITE,
-                                                        false),
-                  'notifications-enabled': GObject.ParamSpec.boolean('notifications-enabled',
-                                                                     'notifications-enabled',
-                                                                     'notifications-enabled',
-                                                                     READWRITE,
-                                                                     false) },
+    Properties: {
+        'expanded': GObject.ParamSpec.boolean('expanded',
+                                              'expanded',
+                                              'expanded',
+                                              READWRITE,
+                                              false),
+        'notifications-enabled': GObject.ParamSpec.boolean('notifications-enabled',
+                                                           'notifications-enabled',
+                                                           'notifications-enabled',
+                                                           READWRITE,
+                                                           false)
+    }
 }, class UserDetails extends Gtk.Frame {
     _init(params = {}) {
         let user = params.user;
@@ -465,19 +471,25 @@ class UserListRow extends Gtk.ListBoxRow {
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add(vbox);
 
-        let hbox = new Gtk.Box({ margin_end: 12,
-                                 margin_start: 4,
-                                 margin_top: 4,
-                                 margin_bottom: 4,
-                                 spacing: 4 });
-        this._arrow = new Gtk.Arrow({ arrow_type: Gtk.ArrowType.RIGHT,
-                                      no_show_all: true });
-        this._label = new Gtk.Label({ label: this._user.alias,
-                                      halign: Gtk.Align.START,
-                                      hexpand: true,
-                                      use_markup: true,
-                                      ellipsize: Pango.EllipsizeMode.END,
-                                      max_width_chars: MAX_USERS_WIDTH_CHARS });
+        let hbox = new Gtk.Box({
+            margin_end: 12,
+            margin_start: 4,
+            margin_top: 4,
+            margin_bottom: 4,
+            spacing: 4
+        });
+        this._arrow = new Gtk.Arrow({
+            arrow_type: Gtk.ArrowType.RIGHT,
+            no_show_all: true
+        });
+        this._label = new Gtk.Label({
+            label: this._user.alias,
+            halign: Gtk.Align.START,
+            hexpand: true,
+            use_markup: true,
+            ellipsize: Pango.EllipsizeMode.END,
+            max_width_chars: MAX_USERS_WIDTH_CHARS
+        });
         hbox.add(this._label);
         hbox.add(this._arrow);
         vbox.add(hbox);
@@ -545,23 +557,31 @@ class UserListRow extends Gtk.ListBoxRow {
 var UserList = GObject.registerClass(
 class UserList extends Gtk.ScrolledWindow {
     _init(room) {
-        super._init({ hexpand: true,
-                      shadow_type: Gtk.ShadowType.ETCHED_IN,
-                      hscrollbar_policy: Gtk.PolicyType.NEVER,
-                      propagate_natural_width: true });
+        super._init({
+            hexpand: true,
+            shadow_type: Gtk.ShadowType.ETCHED_IN,
+            hscrollbar_policy: Gtk.PolicyType.NEVER,
+            propagate_natural_width: true
+        });
 
         this._list = new Gtk.ListBox({ vexpand: true });
         this.add(this._list);
 
-        let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
-                                        valign: Gtk.Align.CENTER,
-                                        orientation: Gtk.Orientation.VERTICAL,
-                                        visible: true });
-        placeholder.add(new Gtk.Image({ icon_name: 'edit-find-symbolic',
-                                        pixel_size: 64,
-                                        visible: true }));
-        placeholder.add(new Gtk.Label({ label: _("No results"),
-                                        visible: true }));
+        let placeholder = new Gtk.Box({
+            halign: Gtk.Align.CENTER,
+            valign: Gtk.Align.CENTER,
+            orientation: Gtk.Orientation.VERTICAL,
+            visible: true
+        });
+        placeholder.add(new Gtk.Image({
+            icon_name: 'edit-find-symbolic',
+            pixel_size: 64,
+            visible: true
+        }));
+        placeholder.add(new Gtk.Label({
+            label: _("No results"),
+            visible: true
+        }));
 
         placeholder.get_style_context().add_class('dim-label');
 

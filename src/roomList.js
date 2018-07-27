@@ -26,7 +26,9 @@ var RoomRow = GObject.registerClass({
     ]
 }, class RoomRow extends Gtk.ListBoxRow {
     _init(room) {
-        super._init({ name: `RoomRow ${room.display_name}` });
+        super._init({
+            name: `RoomRow ${room.display_name}`
+        });
 
         this._room = room;
         this._popover = null;
@@ -587,9 +589,11 @@ class RoomList extends Gtk.ListBox {
         if (this._placeholders.has(account))
             return;
 
-        let placeholder = new Gtk.ListBoxRow({ selectable: false,
-                                               activatable: false,
-                                               no_show_all: true });
+        let placeholder = new Gtk.ListBoxRow({
+            selectable: false,
+            activatable: false,
+            no_show_all: true
+        });
         placeholder.account = account;
 
         this._placeholders.set(account, placeholder);

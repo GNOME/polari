@@ -23,7 +23,7 @@ var FixedSizeFrame = GObject.registerClass({
                                      'width',
                                      GObject.ParamFlags.READWRITE,
                                      -1, GLib.MAXINT32, -1)
-    },
+    }
 }, class FixedSizeFrame extends Gtk.Frame {
     _init(params) {
         this._height = -1;
@@ -106,7 +106,9 @@ var MainWindow = GObject.registerClass({
                                                 GObject.ParamFlags.READWRITE,
                                                 Polari.Room.$gtype)
     },
-    Signals: { 'active-room-state-changed': {} },
+    Signals: {
+        'active-room-state-changed': {}
+    }
 }, class MainWindow extends Gtk.ApplicationWindow {
     _init(params) {
         this._subtitle = '';

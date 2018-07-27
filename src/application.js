@@ -20,12 +20,16 @@ const MAX_RETRIES = 3;
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
 var Application = GObject.registerClass({
-    Signals: { 'prepare-shutdown': {},
-               'room-focus-changed': {} },
+    Signals: {
+        'prepare-shutdown': {},
+        'room-focus-changed': {}
+    }
 }, class Application extends Gtk.Application {
     _init() {
-        super._init({ application_id: 'org.gnome.Polari',
-                      flags: Gio.ApplicationFlags.HANDLES_OPEN });
+        super._init({
+            application_id: 'org.gnome.Polari',
+            flags: Gio.ApplicationFlags.HANDLES_OPEN
+        });
 
         GLib.set_prgname('polari');
         this._retryData = new Map();
@@ -457,10 +461,12 @@ var Application = GObject.registerClass({
             name = server;
         }
 
-        let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
-                                          connection_manager: 'idle',
-                                          protocol: 'irc',
-                                          display_name: name });
+        let req = new Tp.AccountRequest({
+            account_manager: Tp.AccountManager.dup(),
+            connection_manager: 'idle',
+            protocol: 'irc',
+            display_name: name
+        });
         req.set_enabled(true);
 
         if (id)
@@ -650,9 +656,11 @@ var Application = GObject.registerClass({
             return false;
 
         debug(`Retrying with ${server.address}:${server.port}`);
-        let params = { server: new GLib.Variant('s', server.address),
-                       port: new GLib.Variant('u', server.port),
-                       'use-ssl': new GLib.Variant('b', server.ssl) };
+        let params = {
+            server: new GLib.Variant('s', server.address),
+            port: new GLib.Variant('u', server.port),
+            'use-ssl': new GLib.Variant('b', server.ssl)
+        };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
     }

@@ -18,10 +18,11 @@ var ChatEntry = GObject.registerClass({
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
     },
-    Signals: { 'text-pasted': { param_types: [GObject.TYPE_STRING,
-                                              GObject.TYPE_INT] },
-               'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
-               'file-pasted': { param_types: [Gio.File.$gtype] } },
+    Signals: {
+        'text-pasted': { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT] },
+        'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
+        'file-pasted': { param_types: [Gio.File.$gtype] }
+    }
 }, class ChatEntry extends Gtk.Entry {
     static get _checker() {
         if (!this.__checker)
@@ -116,7 +117,9 @@ var NickPopover = GObject.registerClass({
                                        GObject.ParamFlags.READWRITE,
                                        '')
     },
-    Signals: { 'nick-changed': {} }
+    Signals: {
+        'nick-changed': {}
+    }
 }, class NickPopover extends Gtk.Popover {
     _init() {
         this._nick = '';
@@ -168,7 +171,7 @@ var EntryArea = GObject.registerClass({
                                                  'max-nick-chars',
                                                  GObject.ParamFlags.WRITABLE,
                                                  0, GLib.MAXUINT32, 0)
-    },
+    }
 }, class EntryArea extends Gtk.Stack {
     static get _nickPopover() {
         if (!this.__nickPopover)

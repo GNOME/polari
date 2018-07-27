@@ -50,10 +50,12 @@ class ConnectionRow extends Gtk.ListBoxRow {
 
         box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
 
-        let insensitiveDesc = new Gtk.Label({ label: _("Already added"),
-                                              hexpand: true,
-                                              no_show_all: true,
-                                              halign: Gtk.Align.END });
+        let insensitiveDesc = new Gtk.Label({
+            label: _("Already added"),
+            hexpand: true,
+            no_show_all: true,
+            halign: Gtk.Align.END
+        });
         box.add(insensitiveDesc);
 
         this.show_all();
@@ -77,8 +79,10 @@ var ConnectionsList = GObject.registerClass({
                                                     GObject.ParamFlags.CONSTRUCT_ONLY,
                                                     false)
     },
-    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
-               'account-selected': {} }
+    Signals: {
+        'account-created': { param_types: [Tp.Account.$gtype] },
+        'account-selected': {}
+    }
 }, class ConnectionsList extends Gtk.ScrolledWindow {
     _init(params) {
         this._favoritesOnly = false;
@@ -98,15 +102,21 @@ var ConnectionsList = GObject.registerClass({
         this._list.set_header_func(this._updateHeader.bind(this));
         this._list.set_sort_func(this._sort.bind(this));
 
-        let placeholder = new Gtk.Box({ halign: Gtk.Align.CENTER,
-                                        valign: Gtk.Align.CENTER,
-                                        orientation: Gtk.Orientation.VERTICAL,
-                                        visible: true });
-        placeholder.add(new Gtk.Image({ icon_name: 'edit-find-symbolic',
-                                        pixel_size: 115,
-                                        visible: true }));
-        placeholder.add(new Gtk.Label({ label: _("No results."),
-                                        visible: true }));
+        let placeholder = new Gtk.Box({
+            halign: Gtk.Align.CENTER,
+            valign: Gtk.Align.CENTER,
+            orientation: Gtk.Orientation.VERTICAL,
+            visible: true
+        });
+        placeholder.add(new Gtk.Image({
+            icon_name: 'edit-find-symbolic',
+            pixel_size: 115,
+            visible: true
+        }));
+        placeholder.add(new Gtk.Label({
+            label: _("No results."),
+            visible: true
+        }));
 
         placeholder.get_style_context().add_class('dim-label');
 
@@ -194,19 +204,22 @@ var ConnectionsList = GObject.registerClass({
                 return;
 
             let sensitive = !usedNetworks.includes(network.id);
-            this._rows.set(network.id,
-                           new ConnectionRow({ id: network.id,
-                                               sensitive: sensitive }));
+            this._rows.set(network.id, new ConnectionRow({
+                id: network.id,
+                sensitive: sensitive
+            }));
             this._list.add(this._rows.get(network.id));
         });
     }
 
     _onRowActivated(list, row) {
         let name = this._networksManager.getNetworkName(row.id);
-        let req = new Tp.AccountRequest({ account_manager: Tp.AccountManager.dup(),
-                                          connection_manager: 'idle',
-                                          protocol: 'irc',
-                                          display_name: name });
+        let req = new Tp.AccountRequest({
+            account_manager: Tp.AccountManager.dup(),
+            connection_manager: 'idle',
+            protocol: 'irc',
+            display_name: name
+        });
         req.set_service(row.id);
         req.set_enabled(true);
 
@@ -256,17 +269,21 @@ var ConnectionDetails = GObject.registerClass({
         'realnameEntry',
         'sslCheckbox'
     ],
-    Properties: { 'can-confirm': GObject.ParamSpec.boolean('can-confirm',
-                                                           'can-confirm',
-                                                           'can-confirm',
-                                                           GObject.ParamFlags.READABLE,
-                                                           false),
-                  'has-serivce': GObject.ParamSpec.boolean('has-service',
-                                                           'has-service',
-                                                           'has-service',
-                                                           GObject.ParamFlags.READABLE,
-                                                           false) },
-    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] } },
+    Properties: {
+        'can-confirm': GObject.ParamSpec.boolean('can-confirm',
+                                                 'can-confirm',
+                                                 'can-confirm',
+                                                 GObject.ParamFlags.READABLE,
+                                                 false),
+        'has-serivce': GObject.ParamSpec.boolean('has-service',
+                                                 'has-service',
+                                                 'has-service',
+                                                 GObject.ParamFlags.READABLE,
+                                                 false)
+    },
+    Signals: {
+        'account-created': { param_types: [Tp.Account.$gtype] }
+    }
 }, class ConnectionDetails extends Gtk.Grid {
     _init(params) {
         this._networksManager = NetworksManager.getDefault();
@@ -297,10 +314,12 @@ var ConnectionDetails = GObject.registerClass({
         realnameStore.set_column_types([GObject.TYPE_STRING]);
         realnameStore.insert_with_valuesv(-1, [0], [GLib.get_real_name()]);
 
-        let completion = new Gtk.EntryCompletion({ model: realnameStore,
-                                                   text_column: 0,
-                                                   inline_completion: true,
-                                                   popup_completion: false });
+        let completion = new Gtk.EntryCompletion({
+            model: realnameStore,
+            text_column: 0,
+            inline_completion: true,
+            popup_completion: false
+        });
         this._realnameEntry.set_completion(completion);
 
         this.reset();
@@ -429,10 +448,12 @@ var ConnectionDetails = GObject.registerClass({
     _createAccount() {
         let params = this._getParams();
         let accountManager = Tp.AccountManager.dup();
-        let req = new Tp.AccountRequest({ account_manager: accountManager,
-                                          connection_manager: 'idle',
-                                          protocol: 'irc',
-                                          display_name: params.name });
+        let req = new Tp.AccountRequest({
+            account_manager: accountManager,
+            connection_manager: 'idle',
+            protocol: 'irc',
+            display_name: params.name
+        });
         req.set_enabled(true);
 
         let [details] = this._detailsFromParams(params, {});
@@ -464,9 +485,11 @@ var ConnectionDetails = GObject.registerClass({
     }
 
     _detailsFromParams(params, oldDetails) {
-        let details = { account:  GLib.Variant.new('s', params.account),
-                        username: GLib.Variant.new('s', params.account),
-                        server:   GLib.Variant.new('s', params.server) };
+        let details = {
+            account: GLib.Variant.new('s', params.account),
+            username: GLib.Variant.new('s', params.account),
+            server: GLib.Variant.new('s', params.server)
+        };
 
         if (params.port)
             details.port = GLib.Variant.new('u', params.port);
@@ -492,9 +515,10 @@ var ConnectionProperties = GObject.registerClass({
 }, class ConnectionProperties extends Gtk.Dialog {
     _init(account) {
         /* Translators: %s is a connection name */
-        let title = _("“%s” Properties").format(account.display_name);
-        super._init({ title: title,
-                      use_header_bar: 1 });
+        super._init({
+            title: _("“%s” Properties").format(account.display_name),
+            use_header_bar: 1
+        });
 
         this._details.account = account;
 

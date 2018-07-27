@@ -41,10 +41,12 @@ var TabCompletion = class {
             let row = new Gtk.ListBoxRow();
             row._text = `/${commands[i]}`;
             row._casefoldedText = row._text.toLowerCase();
-            row.add(new Gtk.Label({ label: row._text,
-                                    halign: Gtk.Align.START,
-                                    margin_start: 6,
-                                    margin_end: 6 }));
+            row.add(new Gtk.Label({
+                label: row._text,
+                halign: Gtk.Align.START,
+                margin_start: 6,
+                margin_end: 6
+            }));
             this._list.add(row);
         }
     }
@@ -94,10 +96,12 @@ var TabCompletion = class {
                 row = new Gtk.ListBoxRow();
                 row._text = nick;
                 row._casefoldedText = row._text.toLowerCase();
-                row.add(new Gtk.Label({ label: row._text,
-                                        halign: Gtk.Align.START,
-                                        margin_start: 6,
-                                        margin_end: 6 }));
+                row.add(new Gtk.Label({
+                    label: row._text,
+                    halign: Gtk.Align.START,
+                    margin_start: 6,
+                    margin_end: 6
+                }));
                 widgetMap.set(nick, row);
             }
         }

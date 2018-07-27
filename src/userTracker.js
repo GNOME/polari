@@ -154,9 +154,11 @@ const UserTracker = GObject.registerClass({
     _ensureRoomMappingForRoom(room) {
         if (this._roomData.has(room))
             return;
-        this._roomData.set(room, { contactMapping: new Map(),
-                                   handlerMapping: new Map(),
-                                   roomSignals: [] });
+        this._roomData.set(room, {
+            contactMapping: new Map(),
+            handlerMapping: new Map(),
+            roomSignals: []
+        });
     }
 
     _onMemberRenamed(room, oldMember, newMember) {
@@ -344,9 +346,11 @@ const UserTracker = GObject.registerClass({
             let enabled = status == Tp.ConnectionPresenceType.OFFLINE;
 
             let state = new GLib.Variant('b', false);
-            let action = new Gio.SimpleAction({ name: name,
-                                                enabled: enabled,
-                                                state: state });
+            let action = new Gio.SimpleAction({
+                name: name,
+                enabled: enabled,
+                state: state
+            });
 
             action.connect('notify::enabled', () => {
                 if (!action.enabled)

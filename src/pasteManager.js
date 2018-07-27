@@ -82,7 +82,7 @@ var DropTargetIface = GObject.registerClass({
         'text-dropped': { param_types: [GObject.TYPE_STRING] },
         'image-dropped': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
         'file-dropped': { param_types: [Gio.File.$gtype] }
-    },
+    }
 }, class DropTargetIface extends GObject.Interface {
     addTargets(widget) {
         this._dragHighlight = false;

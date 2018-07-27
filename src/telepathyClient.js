@@ -471,15 +471,19 @@ class TelepathyClient extends Tp.BaseClient {
     _processRequest(context, connection, channels, processChannel) {
         if (connection.protocol_name != 'irc') {
             let message = 'Not implementing non-IRC protocols';
-            context.fail(new Tp.Error({ code: Tp.Error.NOT_IMPLEMENTED,
-                                        message: message }));
+            context.fail(new Tp.Error({
+                code: Tp.Error.NOT_IMPLEMENTED,
+                message: message
+            }));
             return;
         }
 
         if (this._isAuthChannel(channels[0]) && channels.length > 1) {
             let message = 'Only one authentication channel per connection allowed';
-            context.fail(new Tp.Error({ code: Tp.Error.INVALID_ARGUMENT,
-                                        message: message }));
+            context.fail(new Tp.Error({
+                code: Tp.Error.INVALID_ARGUMENT,
+                message: message
+            }));
             return;
         }
 
@@ -545,9 +549,11 @@ class TelepathyClient extends Tp.BaseClient {
         notification.set_title(summary);
         notification.set_body(body);
 
-        let params = [room.account.object_path,
-                      room.channel_name,
-                      Utils.getTpEventTime()];
+        let params = [
+            room.account.object_path,
+            room.channel_name,
+            Utils.getTpEventTime()
+        ];
 
         let actionName, paramFormat;
         if (room.type == Tp.HandleType.ROOM) {

@@ -14,7 +14,7 @@ var RoomStack = GObject.registerClass({
                                                     'entry-area-height',
                                                     GObject.ParamFlags.READABLE,
                                                     0, GLib.MAXUINT32, 0)
-    },
+    }
 }, class RoomStack extends Gtk.Stack {
     _init(params) {
         super._init(params);
@@ -119,26 +119,32 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
         this.add(this._infoBar);
 
         let target = new GLib.Variant('o', this._room.account.object_path);
-        let button = new Gtk.Button({ label: _("_Save Password"),
-                                      use_underline: true,
-                                      action_name: 'app.save-identify-password',
-                                      action_target: target });
+        let button = new Gtk.Button({
+            label: _("_Save Password"),
+            use_underline: true,
+            action_name: 'app.save-identify-password',
+            action_target: target
+        });
         this._infoBar.add_action_widget(button, Gtk.ResponseType.ACCEPT);
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._infoBar.get_content_area().add(box);
 
         let title = _("Should the password be saved?");
-        this._titleLabel = new Gtk.Label({ halign: Gtk.Align.START,
-                                           valign: Gtk.Align.CENTER,
-                                           wrap: true });
+        this._titleLabel = new Gtk.Label({
+            halign: Gtk.Align.START,
+            valign: Gtk.Align.CENTER,
+            wrap: true
+        });
         this._titleLabel.set_markup(`<b>${title}</b>`);
         box.add(this._titleLabel);
 
         let accountName = this._room.account.display_name;
         let text = _("Identification will happen automatically the next time you connect to %s").format(accountName);
-        this._subtitleLabel = new Gtk.Label({ label: text,
-                                              ellipsize: Pango.EllipsizeMode.END });
+        this._subtitleLabel = new Gtk.Label({
+            label: text,
+            ellipsize: Pango.EllipsizeMode.END
+        });
         box.add(this._subtitleLabel);
 
         this._infoBar.show_all();
@@ -156,27 +162,39 @@ class ChatPlaceholder extends Gtk.Overlay {
     _init(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
-        let image = new Gtk.Image({ icon_name: 'org.gnome.Polari-symbolic',
-                                    pixel_size: 96, halign: Gtk.Align.END,
-                                    margin_end: 14 });
+        let image = new Gtk.Image({
+            icon_name: 'org.gnome.Polari-symbolic',
+            pixel_size: 96, halign: Gtk.Align.END,
+            margin_end: 14
+        });
 
-        let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
-                                    margin_start: 14 });
+        let title = new Gtk.Label({
+            use_markup: true,
+            halign: Gtk.Align.START,
+            margin_start: 14
+        });
         title.label = `<span letter_spacing="4500">${_("Polari")}</span>`;
         title.get_style_context().add_class('polari-background-title');
 
-        let description = new Gtk.Label({ label: _("Join a room using the + button."),
-                                          halign: Gtk.Align.CENTER, wrap: true,
-                                          margin_top: 24, use_markup: true });
+        let description = new Gtk.Label({
+            label: _("Join a room using the + button."),
+            halign: Gtk.Align.CENTER, wrap: true,
+            margin_top: 24, use_markup: true
+        });
         description.get_style_context().add_class('polari-background-description');
 
         let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
         sizeGroup.add_widget(inputPlaceholder);
 
         super._init();
-        let grid = new Gtk.Grid({ column_homogeneous: true, can_focus: false,
-                                  column_spacing: 18, hexpand: true, vexpand: true,
-                                  valign: Gtk.Align.CENTER });
+        let grid = new Gtk.Grid({
+            column_homogeneous: true,
+            can_focus: false,
+            column_spacing: 18,
+            hexpand: true,
+            vexpand: true,
+            valign: Gtk.Align.CENTER
+        });
         grid.get_style_context().add_class('polari-background');
         grid.attach(image, 0, 0, 1, 1);
         grid.attach(title, 1, 0, 1, 1);
@@ -201,8 +219,10 @@ class RoomView extends Gtk.Overlay {
         this._view = new ChatView(room);
         box.add(this._view);
 
-        this._entryArea = new EntryArea({ room: room,
-                                          sensitive: false });
+        this._entryArea = new EntryArea({
+            room: room,
+            sensitive: false
+        });
         box.add(this._entryArea);
 
         this._view.bind_property('max-nick-chars',

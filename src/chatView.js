@@ -147,9 +147,9 @@ const ButtonTag = GObject.registerClass({
                                            false)
     },
     Signals: {
-        'clicked': { },
-        'popup-menu': { }
-    },
+        'clicked': {},
+        'popup-menu': {}
+    }
 }, class ButtonTag extends Gtk.TextTag {
     _init(params) {
         this._hover = false;
@@ -185,9 +185,11 @@ const ButtonTag = GObject.registerClass({
         if (this._gesture)
             return;
 
-        this._gesture = new Gtk.GestureMultiPress({ widget,
-                                                    button: 0,
-                                                    exclusive: true });
+        this._gesture = new Gtk.GestureMultiPress({
+            widget,
+            button: 0,
+            exclusive: true
+        });
 
         this._gesture.connect('pressed', (gesture, nPress) => {
             if (!this._hover || nPress > 1)
@@ -291,9 +293,11 @@ var ChatView = GObject.registerClass({
 
         this.get_style_context().add_class('polari-chat-view');
 
-        this._view = new TextView({ editable: false, cursor_visible: false,
-                                    wrap_mode: Gtk.WrapMode.WORD_CHAR,
-                                    right_margin: MARGIN });
+        this._view = new TextView({
+            editable: false, cursor_visible: false,
+            wrap_mode: Gtk.WrapMode.WORD_CHAR,
+            right_margin: MARGIN
+        });
         this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
                               Gdk.EventMask.ENTER_NOTIFY_MASK);
         this.add(this._view);
@@ -350,9 +354,10 @@ var ChatView = GObject.registerClass({
         this._updateMaxNickChars(this._room.account.nickname.length);
 
         let isRoom = room.type == Tp.HandleType.ROOM;
-        let target = new Tpl.Entity({ type: isRoom ? Tpl.EntityType.ROOM
-                                                   : Tpl.EntityType.CONTACT,
-                                      identifier: room.channel_name });
+        let target = new Tpl.Entity({
+            type: isRoom ? Tpl.EntityType.ROOM : Tpl.EntityType.CONTACT,
+            identifier: room.channel_name
+        });
         let logManager = Tpl.LogManager.dup_singleton();
         this._logWalker =
             logManager.walk_filtered_events(room.account, target,
@@ -461,10 +466,12 @@ var ChatView = GObject.registerClass({
         let desaturatedNickColor = (this._activeNickColor.red +
                                     this._activeNickColor.blue +
                                     this._activeNickColor.green) / 3;
-        this._inactiveNickColor = new Gdk.RGBA ({ red: desaturatedNickColor,
-                                                  green: desaturatedNickColor,
-                                                  blue: desaturatedNickColor,
-                                                  alpha: 1.0 });
+        this._inactiveNickColor = new Gdk.RGBA({
+            red: desaturatedNickColor,
+            green: desaturatedNickColor,
+            blue: desaturatedNickColor,
+            alpha: 1.0
+        });
         if (this._activeNickColor.equal(this._inactiveNickColor))
             this._inactiveNickColor.alpha = 0.5;
 
@@ -550,17 +557,21 @@ var ChatView = GObject.registerClass({
         if (source instanceof Tp.Message) {
             let [text] = source.to_text();
             let [id, valid] = source.get_pending_message_id();
-            return { nick: source.sender.alias,
-                     text: text,
-                     timestamp: source.get_sent_timestamp() ||
-                                source.get_received_timestamp(),
-                     messageType: source.get_message_type(),
-                     pendingId: valid ? id : undefined };
+            return {
+                nick: source.sender.alias,
+                text: text,
+                timestamp: source.get_sent_timestamp() ||
+                           source.get_received_timestamp(),
+                messageType: source.get_message_type(),
+                pendingId: valid ? id : undefined
+            };
         } else if (source instanceof Tpl.Event) {
-            return { nick: source.sender.alias,
-                     text: source.message,
-                     timestamp: source.timestamp,
-                     messageType: source.get_message_type() };
+            return {
+                nick: source.sender.alias,
+                text: source.message,
+                timestamp: source.timestamp,
+                messageType: source.get_message_type()
+            };
         }
 
         throw new Error(`Cannot create message from source ${source}`);
@@ -813,8 +824,10 @@ var ChatView = GObject.registerClass({
     }
 
     _showLoadingIndicator() {
-        let indicator = new Gtk.Image({ icon_name: 'content-loading-symbolic',
-                                        visible: true });
+        let indicator = new Gtk.Image({
+            icon_name: 'content-loading-symbolic',
+            visible: true
+        });
         indicator.get_style_context().add_class('dim-label');
 
         let buffer = this._view.buffer;
@@ -1251,8 +1264,10 @@ var ChatView = GObject.registerClass({
                 }
                 tags.push(nickTag);
 
-                let hoverTag = new HoverFilterTag({ filtered_tag: nickTag,
-                                                    hover_opacity: 0.8 });
+                let hoverTag = new HoverFilterTag({
+                    filtered_tag: nickTag,
+                    hover_opacity: 0.8
+                });
                 buffer.get_tag_table().add(hoverTag);
 
                 tags.push(hoverTag);
@@ -1357,9 +1372,11 @@ var ChatView = GObject.registerClass({
         let actualNickName = view.get_buffer().get_slice(start, end, false);
 
         if (!tag._popover)
-            tag._popover = new UserPopover({ relative_to: this._view,
-                                             userTracker: this._userTracker,
-                                             room: this._room });
+            tag._popover = new UserPopover({
+                relative_to: this._view,
+                userTracker: this._userTracker,
+                room: this._room
+            });
 
         tag._popover.nickname = actualNickName;
 

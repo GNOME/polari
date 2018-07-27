@@ -55,8 +55,10 @@ var AccountsMonitor = class {
             return settings;
 
         let path = `/org/gnome/Polari/Accounts/${account.get_path_suffix()}/`;
-        settings = new Gio.Settings({ schema_id: 'org.gnome.Polari.Account',
-                                      path: path });
+        settings = new Gio.Settings({
+            schema_id: 'org.gnome.Polari.Account',
+            path: path
+        });
         this._accountSettings.set(accountPath, settings);
         return settings;
     }
@@ -162,10 +164,12 @@ Signals.addSignalMethods(AccountsMonitor.prototype);
 const ClientFactory = GObject.registerClass(
 class ClientFactory extends Polari.ClientFactory {
     vfunc_create_account(objectPath) {
-        return new PolariAccount({ factory: this,
-                                   dbus_daemon: this.dbus_daemon,
-                                   bus_name: Tp.ACCOUNT_MANAGER_BUS_NAME,
-                                   object_path: objectPath });
+        return new PolariAccount({
+            factory: this,
+            dbus_daemon: this.dbus_daemon,
+            bus_name: Tp.ACCOUNT_MANAGER_BUS_NAME,
+            object_path: objectPath
+        });
     }
 });
 
