@@ -19,7 +19,7 @@ var NetworksManager = class {
         try {
             [success, data] = file.load_contents(null);
             this._parseNetworks(ByteArray.toString(data));
-        } catch(e) {
+        } catch (e) {
             log('Failed to load network list: ' + e.message);
         }
     }
@@ -28,7 +28,7 @@ var NetworksManager = class {
         let success, data;
         try {
             [success, data] = f.load_contents_finish(res);
-        } catch(e) {
+        } catch (e) {
             log('Failed to load network list: ' + e.message);
             return;
         }
@@ -40,7 +40,7 @@ var NetworksManager = class {
         let networks;
         try {
             networks = JSON.parse(data);
-        } catch(e) {
+        } catch (e) {
             log('Failed to parse network list: ' + e.message);
             return false;
         }

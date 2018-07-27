@@ -71,7 +71,7 @@ var AccountsMonitor = class {
     _onPrepared(am, res) {
         try {
             am.prepare_finish(res);
-        } catch(e) {
+        } catch (e) {
             this._app.release();
             return; // no point in carrying on
         }
@@ -100,7 +100,7 @@ var AccountsMonitor = class {
             a.request_presence_async(presence, 'offline', '', (a, res) => {
                 try {
                     a.request_presence_finish(res);
-                } catch(e) { }
+                } catch (e) { }
                 this._app.release();
             });
         });

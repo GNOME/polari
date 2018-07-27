@@ -44,7 +44,7 @@ var PasteManager = class {
         let fileInfo = null;
         try {
             fileInfo = file.query_info_finish(res);
-        } catch(e) {
+        } catch (e) {
             callback(null);
         }
 
@@ -164,7 +164,7 @@ var DropTargetIface = GObject.registerClass({
                         this.emit('file-dropped', file);
                     Gtk.drag_finish(context, canHandle, false, time);
                 });
-            } catch(e) {
+            } catch (e) {
                 Gtk.drag_finish(context, false, false, time);
             }
         } else {

@@ -239,7 +239,7 @@ class TelepathyClient extends Tp.BaseClient {
         account.request_presence_async(presence, status, msg, (o, res) => {
             try {
                 account.request_presence_finish(res);
-            } catch(e) {
+            } catch (e) {
                 log('Connection failed: ' + e.message);
             }
         });
@@ -280,7 +280,7 @@ class TelepathyClient extends Tp.BaseClient {
                 let channel = null;
                 try {
                     channel = req.ensure_and_observe_channel_finish(res);
-                } catch(e) {
+                } catch (e) {
                     debug('Failed to ensure channel: ' + e.message);
                 }
 
@@ -313,7 +313,7 @@ class TelepathyClient extends Tp.BaseClient {
                 room.send_identify_message_async(command, username, password, (r, res) => {
                     try {
                         r.send_identify_message_finish(res);
-                    } catch(e) {
+                    } catch (e) {
                         log('Failed to send identify message: ' + e.message);
                     }
                     this._connectRooms(account);
@@ -330,7 +330,7 @@ class TelepathyClient extends Tp.BaseClient {
             (c, res) => {
                 try {
                     c.send_message_finish(res);
-                } catch(e) {
+                } catch (e) {
                     log('Failed to send message: ' + e.message);
                 }
             });
@@ -411,7 +411,7 @@ class TelepathyClient extends Tp.BaseClient {
         room.channel.leave_async(reason, message, (c, res) => {
             try {
                 c.leave_finish(res);
-            } catch(e) {
+            } catch (e) {
                 log('Failed to leave channel: ' + e.message);
             }
         });

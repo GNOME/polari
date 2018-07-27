@@ -114,7 +114,7 @@ function _storePassword(schema, label, account, password, callback) {
         try {
             let success = Secret.password_store_finish(res);
             callback(success);
-        } catch(e) {
+        } catch (e) {
             log('Failed to store password for account "%s": %s'.format(
                 account.display_name, e.message));
             callback(false);
@@ -136,7 +136,7 @@ function _lookupPassword(schema, account, callback) {
         try {
             let password = Secret.password_lookup_finish(res);
             callback(password);
-        } catch(e) {
+        } catch (e) {
             log('Failed to lookup password for account "%s": %s'.format(
                 account.display_name, e.message));
             callback(null);
@@ -175,7 +175,7 @@ function openURL(url, timestamp) {
             Gtk.show_uri_on_window (app.active_window, url, timestamp);
         else
             Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
-    } catch(e) {
+    } catch (e) {
         let n = new AppNotifications.SimpleOutput(_("Failed to open link"));
         app.notificationQueue.addNotification(n);
         debug("failed to open %s: %s".format(url, e.message));
@@ -209,7 +209,7 @@ function _getGpasteExpire(callback) {
         let info = {};
         try {
             info = JSON.parse(message.response_body.data);
-        } catch(e) {
+        } catch (e) {
             log(e.message);
         }
 
@@ -258,7 +258,7 @@ function gpaste(text, title, callback) {
         let info = {};
         try {
             info = JSON.parse(message.response_body.data);
-        } catch(e) {
+        } catch (e) {
             log(e.message);
         }
         if (info.result && info.result.id)
@@ -295,7 +295,7 @@ function imgurPaste(pixbuf, title, callback) {
         let info = {};
         try {
             info = JSON.parse(message.response_body.data);
-        } catch(e) {
+        } catch (e) {
             log(e.message);
         }
         if (info.success)

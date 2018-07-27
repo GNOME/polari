@@ -57,7 +57,7 @@ var Application = GObject.registerClass({
 
             try {
                 this.register(null);
-            } catch(e) {
+            } catch (e) {
                 return 1;
             }
 
@@ -99,7 +99,7 @@ var Application = GObject.registerClass({
         try {
             proxy = Gio.DBusProxy.new_sync(conn, flags, null,
                                            name, opath, iface, null);
-        } catch(e) {}
+        } catch (e) {}
 
         return proxy != null && proxy.get_name_owner() != null;
     }
@@ -117,7 +117,7 @@ var Application = GObject.registerClass({
         try {
             proc.init(null);
             this._demons.push(proc);
-        } catch(e) {
+        } catch (e) {
             log('Failed to launch %s: %s'.format(command, e.message));
         }
     }
@@ -308,7 +308,7 @@ var Application = GObject.registerClass({
         let uri = 'resource:///org/gnome/Polari/css/application.css';
         try {
             provider.load_from_file(Gio.File.new_for_uri(uri));
-        } catch(e) {
+        } catch (e) {
             logError(e, 'Failed to add application style');
         }
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
@@ -414,7 +414,7 @@ var Application = GObject.registerClass({
         try {
             [,, server, port, room] = uri.match(IRC_SCHEMA_REGEX);
             success = true;
-        } catch(e) {
+        } catch (e) {
             let label = _("Failed to open link");
             let n = new AppNotifications.MessageNotification(label,
                                                              'dialog-error-symbolic');
@@ -461,7 +461,7 @@ var Application = GObject.registerClass({
     _touchFile(file) {
         try {
             file.get_parent().make_directory_with_parents(null);
-        } catch(e) {
+        } catch (e) {
             if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 throw e;
             // not an error, carry on
@@ -481,7 +481,7 @@ var Application = GObject.registerClass({
                                       '/polari/initial-setup-completed');
         try {
             this._touchFile(f);
-        } catch(e) {
+        } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 return false; // initial setup has completed
             log('Failed to mark initial setup as completed: ' + e.message);
@@ -734,7 +734,7 @@ var Application = GObject.registerClass({
     _createLink(file, target) {
         try {
             file.get_parent().make_directory_with_parents(null);
-        } catch(e) {
+        } catch (e) {
             if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 throw e;
             // not an error, carry on
@@ -749,14 +749,14 @@ var Application = GObject.registerClass({
         if (this._settings.get_boolean('run-in-background'))
             try {
                 this._createLink(file, pkg.pkgdatadir + AUTOSTART_FILE);
-            } catch(e) {
+            } catch (e) {
                 if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                     log('Failed to create autostart link: ' + e.message);
             }
         else
             try {
                 file.delete(null);
-            } catch(e) {
+            } catch (e) {
                 if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
                     log('Failed to remove autostart link: ' + e.message);
             }

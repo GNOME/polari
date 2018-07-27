@@ -101,7 +101,7 @@ var IrcParser = class {
                         let contact;
                         try {
                             contact = c.dup_contact_by_id_finish(res);
-                        } catch(e) {
+                        } catch (e) {
                             logError(e, 'Failed to get contact for ' + nick);
                             return;
                         }
@@ -141,7 +141,7 @@ var IrcParser = class {
                         let contact;
                         try {
                             contact = c.dup_contact_by_id_finish(res);
-                        } catch(e) {
+                        } catch (e) {
                             logError(e, 'Failed to get contact for ' + nick);
                             return;
                         }
@@ -244,7 +244,7 @@ var IrcParser = class {
                     (a, res) => {
                         try {
                             a.request_presence_finish(res);
-                        } catch(e) {
+                        } catch (e) {
                             logError(e, 'Failed to disconnect');
                         }
                     });
@@ -287,7 +287,7 @@ var IrcParser = class {
         this._room.channel.send_message_async(message, 0, (c, res) => {
             try {
                 c.send_message_finish(res);
-            } catch(e) {
+            } catch (e) {
                 // TODO: propagate to user
                 logError(e, 'Failed to send message');
             }

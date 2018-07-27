@@ -60,7 +60,7 @@ var ServerRoomManager = class {
         roomList.init_async(GLib.PRIORITY_DEFAULT, null, (o, res) => {
             try {
                 roomList.init_finish(res);
-            } catch(e) {
+            } catch (e) {
                 this._roomLists.delete(account);
                 return;
             }

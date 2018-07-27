@@ -385,7 +385,7 @@ var EntryArea = GObject.registerClass({
         let fileInfo = null;
         try {
             fileInfo = file.query_info_finish(res);
-        } catch(e) {
+        } catch (e) {
             return;
         }
 
@@ -414,7 +414,7 @@ var EntryArea = GObject.registerClass({
                 if (url)
                     this._chatEntry.emit('insert-at-cursor', url);
             });
-        } catch(e) {
+        } catch (e) {
             let type = typeof this._pasteContent;
             debug('Failed to paste content of type ' +
                   (type == 'object' ? this._pasteContent.toString() : type));

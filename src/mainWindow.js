@@ -249,7 +249,7 @@ var MainWindow = GObject.registerClass({
     _touchFile(file) {
         try {
             file.get_parent().make_directory_with_parents(null);
-        } catch(e) {
+        } catch (e) {
             if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 throw e;
             // not an error, carry on
@@ -264,7 +264,7 @@ var MainWindow = GObject.registerClass({
                                       '/polari/close-confirmation-shown');
         try {
             this._touchFile(f);
-        } catch(e) {
+        } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 return Gdk.EVENT_PROPAGATE; // the dialog has been shown
             log('Failed to mark confirmation dialog as shown: ' + e.message);
