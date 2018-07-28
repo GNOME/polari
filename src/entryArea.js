@@ -418,8 +418,9 @@ var EntryArea = GObject.registerClass({
             });
         } catch (e) {
             let type = typeof this._pasteContent;
-            debug('Failed to paste content of type ' +
-                  (type == 'object' ? this._pasteContent.toString() : type));
+            if (type == 'object')
+                type = this._pasteContent.toString();
+            debug(`Failed to paste content of type ${type}`);
         }
         this._confirmLabel.hide();
     }

@@ -372,7 +372,7 @@ var ConnectionDetails = GObject.registerClass({
         this._savedRealname = params.fullname || '';
 
         if (port != defaultPort)
-            this._savedServer += ':%d'.format(port);
+            this._savedServer += `:${port}`;
 
         if (this._savedServer != account.display_name)
             this._savedName = account.display_name;

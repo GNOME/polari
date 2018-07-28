@@ -128,7 +128,7 @@ var InitialSetupWindow = GObject.registerClass({
         let time = Utils.getTpEventTime();
         toJoinRooms.forEach(room => {
             if (room[0] != '#')
-                room = '#' + room;
+                room = `#${room}`;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');

@@ -55,7 +55,7 @@ var AccountsMonitor = class {
         if (settings)
             return settings;
 
-        let path = '/org/gnome/Polari/Accounts/%s/'.format(account.get_path_suffix());
+        let path = `/org/gnome/Polari/Accounts/${account.get_path_suffix()}/`;
         settings = new Gio.Settings({ schema_id: 'org.gnome.Polari.Account',
                                       path: path });
         this._accountSettings.set(accountPath, settings);

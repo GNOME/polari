@@ -22,7 +22,7 @@ var NetworksManager = class {
             [, data] = file.load_contents(null);
             this._parseNetworks(ByteArray.toString(data));
         } catch (e) {
-            log('Failed to load network list: ' + e.message);
+            log(`Failed to load network list: ${e.message}`);
         }
     }
 
@@ -31,7 +31,7 @@ var NetworksManager = class {
         try {
             [, data] = f.load_contents_finish(res);
         } catch (e) {
-            log('Failed to load network list: ' + e.message);
+            log(`Failed to load network list: ${e.message}`);
             return;
         }
         if (this._parseNetworks(data))
@@ -43,7 +43,7 @@ var NetworksManager = class {
         try {
             networks = JSON.parse(data);
         } catch (e) {
-            log('Failed to parse network list: ' + e.message);
+            log(`Failed to parse network list: ${e.message}`);
             return false;
         }
 
@@ -86,7 +86,7 @@ var NetworksManager = class {
     getNetworkDetails(id) {
         let network = this._lookupNetwork(id);
         if (!network.servers || !network.servers.length)
-            throw new Error('No servers for network ' + id);
+            throw new Error(`No servers for network ${id}`);
 
         let server = this.getNetworkServers(id)[0];
         return {

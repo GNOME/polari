@@ -165,7 +165,7 @@ var JoinDialog = GObject.registerClass({
         let toJoinRooms = this._serverRoomList.selectedRooms;
         toJoinRooms.forEach(room => {
             if (room[0] != '#')
-                room = '#' + room;
+                room = `#${room}`;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');

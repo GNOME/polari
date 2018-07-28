@@ -104,7 +104,7 @@ var IrcParser = class {
                         try {
                             contact = c.dup_contact_by_id_finish(res);
                         } catch (e) {
-                            logError(e, 'Failed to get contact for ' + nick);
+                            logError(e, `Failed to get contact for ${nick}`);
                             return;
                         }
                         this._room.add_member(contact);
@@ -120,7 +120,7 @@ var IrcParser = class {
                     break;
                 }
                 if (argv.length)
-                    log('Excess arguments to JOIN command: ' + argv);
+                    log(`Excess arguments to JOIN command: ${argv}`);
 
                 let account = this._room.account;
                 let app = Gio.Application.get_default();
@@ -144,7 +144,7 @@ var IrcParser = class {
                         try {
                             contact = c.dup_contact_by_id_finish(res);
                         } catch (e) {
-                            logError(e, 'Failed to get contact for ' + nick);
+                            logError(e, `Failed to get contact for ${nick}`);
                             return;
                         }
                         this._room.remove_member(contact);
@@ -198,7 +198,7 @@ var IrcParser = class {
                     break;
                 }
                 if (argv.length)
-                    log('Excess arguments to NICK command: ' + argv);
+                    log(`Excess arguments to NICK command: ${argv}`);
 
                 this._app.setAccountNick(this._room.account, nick);
                 break;

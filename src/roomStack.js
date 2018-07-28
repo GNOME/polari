@@ -125,7 +125,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
         this._titleLabel = new Gtk.Label({ halign: Gtk.Align.START,
                                            valign: Gtk.Align.CENTER,
                                            wrap: true });
-        this._titleLabel.set_markup('<b>' + title + '</b>');
+        this._titleLabel.set_markup(`<b>${title}</b>`);
         box.add(this._titleLabel);
 
         let accountName = this._room.account.display_name;
@@ -155,7 +155,7 @@ class ChatPlaceholder extends Gtk.Overlay {
 
         let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
                                     margin_start: 14 });
-        title.label = '<span letter_spacing="4500">%s</span>'.format(_("Polari"));
+        title.label = `<span letter_spacing="4500">${_("Polari")}</span>`;
         title.get_style_context().add_class('polari-background-title');
 
         let description = new Gtk.Label({ label: _("Join a room using the + button."),
