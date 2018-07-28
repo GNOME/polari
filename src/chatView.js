@@ -82,11 +82,11 @@ class TextView extends Gtk.TextView {
 
         let tags = iter.get_tags();
         let pixelsAbove = tags.reduce((prev, current) => {
-                return Math.max(prev, current.pixels_above_lines);
-            }, this.get_pixels_above_lines());
+            return Math.max(prev, current.pixels_above_lines);
+        }, this.get_pixels_above_lines());
         let pixelsBelow = tags.reduce((prev, current) => {
-                return Math.max(prev, current.pixels_below_lines);
-            }, this.get_pixels_below_lines());
+            return Math.max(prev, current.pixels_below_lines);
+        }, this.get_pixels_below_lines());
 
         let lineSpace = Math.floor((pixelsAbove + pixelsBelow) / 2);
         y = y - lineSpace + 0.5;
@@ -393,9 +393,9 @@ var ChatView = GObject.registerClass({
         });
         this._onChannelChanged();
 
-        this._nickStatusChangedId = this._userTracker.watchRoomStatus(this._room,
-                                    null,
-                                    this._onNickStatusChanged.bind(this));
+        this._nickStatusChangedId =
+            this._userTracker.watchRoomStatus(this._room, null,
+                                              this._onNickStatusChanged.bind(this));
     }
 
     _createTags() {
@@ -977,7 +977,7 @@ var ChatView = GObject.registerClass({
         let nick = tpMessage.sender.alias;
         let nickTag = this._lookupTag('nick' + nick);
         if (!nickTag)
-           return;
+            return;
         nickTag._lastActivity = GLib.get_monotonic_time();
     }
 
@@ -1025,7 +1025,7 @@ var ChatView = GObject.registerClass({
             buffer.tag_table.add(groupTag);
 
             groupTag.bind_property('invisible', headerArrowTag, 'invisible',
-                                    GObject.BindingFlags.INVERT_BOOLEAN);
+                                   GObject.BindingFlags.INVERT_BOOLEAN);
 
             headerTag.connect('clicked', () => {
                 groupTag.invisible = !groupTag.invisible;
@@ -1325,7 +1325,7 @@ var ChatView = GObject.registerClass({
         let event = Gtk.get_current_event();
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
-                                                          eventX, eventY);
+                                                  eventX, eventY);
         let [inside, start] = view.get_iter_at_location(x, y);
         let end = start.copy();
 

@@ -86,7 +86,7 @@ var IrcParser = class {
                     output = this._createFeedbackUsage(command);
                 else
                     output = this._createFeedbackGrid(_("Known commands:"),
-                                                        Object.keys(knownCommands));
+                                                      Object.keys(knownCommands));
                 break;
             }
             case 'INVITE': {
@@ -185,7 +185,7 @@ var IrcParser = class {
                 let channel = this._room.channel;
                 let members = channel.group_dup_members_contacts().map(m => m.alias);
                 output = this._createFeedbackGrid(_("Users on %s:").format(channel.identifier),
-                                                    members);
+                                                  members);
                 break;
             }
             case 'NICK': {
@@ -286,7 +286,7 @@ var IrcParser = class {
     _sendMessage(message) {
         this._room.channel.send_message_async(message, 0, (c, res) => {
             try {
-                 c.send_message_finish(res);
+                c.send_message_finish(res);
             } catch(e) {
                 // TODO: propagate to user
                 logError(e, 'Failed to send message');

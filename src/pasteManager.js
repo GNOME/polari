@@ -15,7 +15,7 @@ function _getTargetForContentType(contentType) {
     else if (Gio.content_type_is_a(contentType, 'image/*'))
         return DndTargetType.IMAGE;
     else
-       return 0;
+        return 0;
 }
 
 

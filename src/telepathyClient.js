@@ -490,8 +490,8 @@ class TelepathyClient extends Tp.BaseClient {
         context.accept();
     }
 
-    vfunc_observe_channels(account, connection, channels,
-                                     op, requests, context) {
+    vfunc_observe_channels(...args) {
+        let [account, connection, channels, op, requests, context] = args;
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel))
                 return;
@@ -499,9 +499,9 @@ class TelepathyClient extends Tp.BaseClient {
             if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
                 let [invited] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
                 if (invited)
-                  // this is an invitation - only add it in handleChannel
-                  // if accepted
-                  return;
+                    // this is an invitation - only add it in handleChannel
+                    // if accepted
+                    return;
             }
 
             channel.connect('message-received',
@@ -513,8 +513,8 @@ class TelepathyClient extends Tp.BaseClient {
         });
     }
 
-    vfunc_handle_channels(account, connection, channels,
-                                    satisfied, userTime, context) {
+    vfunc_handle_channels(...args) {
+        let [account, connection, channels, satisfied, userTime, context] = args;
         let [present] = Tp.user_action_time_should_present(userTime);
 
         this._processRequest(context, connection, channels, channel => {

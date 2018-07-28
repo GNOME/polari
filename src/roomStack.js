@@ -148,8 +148,8 @@ class ChatPlaceholder extends Gtk.Overlay {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         let image = new Gtk.Image({ icon_name: 'org.gnome.Polari-symbolic',
-                                      pixel_size: 96, halign: Gtk.Align.END,
-                                      margin_end: 14 });
+                                    pixel_size: 96, halign: Gtk.Align.END,
+                                    margin_end: 14 });
 
         let title = new Gtk.Label({ use_markup: true, halign: Gtk.Align.START,
                                     margin_start: 14 });
@@ -202,13 +202,13 @@ class RoomView extends Gtk.Overlay {
         sizeGroup.add_widget(this._entryArea);
 
         this._view.connect('text-dropped', (view, text) => {
-           this._entryArea.pasteText(text, text.split('\n').length);
+            this._entryArea.pasteText(text, text.split('\n').length);
         });
         this._view.connect('image-dropped', (view, image) => {
-           this._entryArea.pasteImage(image);
+            this._entryArea.pasteImage(image);
         });
         this._view.connect('file-dropped', (view, file) => {
-           this._entryArea.pasteFile(file);
+            this._entryArea.pasteFile(file);
         });
 
         this.show_all();

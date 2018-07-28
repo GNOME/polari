@@ -58,7 +58,7 @@ var ChatEntry = GObject.registerClass({
             // Disable GtkEntry's built-in drop target support
             return;
 
-         GObject.signal_stop_emission_by_name(this, 'drag-data-received');
+        GObject.signal_stop_emission_by_name(this, 'drag-data-received');
         super.vfunc_drag_data_received(context, x, y, data, info, time);
     }
 

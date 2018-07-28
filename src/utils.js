@@ -93,7 +93,7 @@ function isFlatpakSandbox() {
 function getTpEventTime() {
     let time = Gtk.get_current_event_time ();
     if (time == 0)
-      return GLib.MAXUINT32;
+        return GLib.MAXUINT32;
     return Tp.user_action_time_from_x11 (time);
 }
 

@@ -83,7 +83,7 @@ var JoinDialog = GObject.registerClass({
     }
 
     get _hasAccounts() {
-      return this._accounts.size > 0;
+        return this._accounts.size > 0;
     }
 
     _setupMainPage() {
@@ -147,7 +147,7 @@ var JoinDialog = GObject.registerClass({
         if (!account)
             return;
 
-       this._serverRoomList.setAccount(account);
+        this._serverRoomList.setAccount(account);
     }
 
     _onAccountCreated(w, account) {
@@ -169,8 +169,8 @@ var JoinDialog = GObject.registerClass({
             let action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssu)',
                                              [account.get_object_path(),
-                                             room,
-                                             Utils.getTpEventTime()]));
+                                              room,
+                                              Utils.getTpEventTime()]));
         });
     }
 

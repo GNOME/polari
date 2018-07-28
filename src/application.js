@@ -129,9 +129,9 @@ var Application = GObject.registerClass({
 
         let handled = false;
         let id = Gio.bus_watch_name(bus, name, flags, () => {
-                debug('Running as test instance alongside primary instance');
-                this.set_flags(this.flags | Gio.ApplicationFlags.NON_UNIQUE);
-                handled = true;
+            debug('Running as test instance alongside primary instance');
+            this.set_flags(this.flags | Gio.ApplicationFlags.NON_UNIQUE);
+            handled = true;
         }, () => {
             debug('No primary instance found, running normally');
             handled = true;
@@ -397,13 +397,13 @@ var Application = GObject.registerClass({
 
             if (matches.length)
                 joinAction.activate(new GLib.Variant('(ssu)',
-                                [matches[0], '#' + room, time]));
+                                                     [matches[0], '#' + room, time]));
             else
                 this._createAccount(matchedId, server, port, a => {
                     if (a)
                         joinAction.activate(new GLib.Variant('(ssu)',
-                                            [a.get_object_path(),
-                                             '#' + room, time]));
+                                                             [a.get_object_path(),
+                                                              '#' + room, time]));
                 });
         });
     }
@@ -660,8 +660,8 @@ var Application = GObject.registerClass({
 
             if (reason != Tp.ConnectionStatusReason.REQUESTED) {
                 let strReasons = Object.keys(Tp.ConnectionStatusReason);
-                debug('Account %s disconnected with reason %s'.format(
-                      account.display_name, strReasons[reason]));
+                debug('Account %s disconnected with reason %s'
+                    .format(account.display_name, strReasons[reason]));
 
                 // Connection failed, keep tp from retrying over and over
                 let presence = Tp.ConnectionPresenceType.OFFLINE;
@@ -713,8 +713,8 @@ var Application = GObject.registerClass({
             });
             n.connect('undo', () => {
                 account.set_enabled_async(true, (o, res) => {
-                  account.set_enabled_finish(res);
-                  account.visible = true;
+                    account.set_enabled_finish(res);
+                    account.visible = true;
                 });
             });
         });

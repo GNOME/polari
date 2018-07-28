@@ -120,7 +120,7 @@ var RoomManager = class {
         for (let i = 0; i < channels.length; i++)
             if (channels[i].account.deep_unpack() == accountPath &&
                 channels[i].channel.deep_unpack().toLowerCase() == matchName)
-            return i;
+                return i;
         return -1;
     }
 

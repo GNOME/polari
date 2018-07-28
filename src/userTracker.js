@@ -21,8 +21,9 @@ var UserStatusMonitor = class {
         this._accountsMonitor.connect('account-removed',
                                       this._onAccountRemoved.bind(this));
 
-        this._accountsMonitor.accounts.forEach(
-                    a => { this._onAccountAdded(this._accountsMonitor, a); });
+        this._accountsMonitor.accounts.forEach(a => {
+            this._onAccountAdded(this._accountsMonitor, a);
+        });
     }
 
     _onAccountAdded(accountsMonitor, account) {
@@ -37,7 +38,7 @@ var UserStatusMonitor = class {
     }
 
     getUserTrackerForAccount(account) {
-            return this._userTrackers.get(account);
+        return this._userTrackers.get(account);
     }
 };
 

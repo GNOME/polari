@@ -105,10 +105,10 @@ var UserDetails = GObject.registerClass({
                                                         READWRITE,
                                                         false),
                   'notifications-enabled': GObject.ParamSpec.boolean('notifications-enabled',
-                                                             'notifications-enabled',
-                                                             'notifications-enabled',
-                                                             READWRITE,
-                                                             false) },
+                                                                     'notifications-enabled',
+                                                                     'notifications-enabled',
+                                                                     READWRITE,
+                                                                     false) },
 }, class UserDetails extends Gtk.Frame {
     _init(params = {}) {
         let user = params.user;

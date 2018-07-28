@@ -137,7 +137,7 @@ class GridOutput extends CommandOutputNotification {
                     continue;
                 let w = new Gtk.Label({ label: item });
                 grid.attach(w, j, row, 1, 1);
-             }
+            }
             row++;
         }
         this.add(grid);
@@ -168,7 +168,7 @@ class NotificationQueue extends Gtk.Frame {
 
     _onChildDestroy() {
         if (this._grid.get_children().length == 0)
-           this.hide();
+            this.hide();
     }
 });
 

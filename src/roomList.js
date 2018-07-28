@@ -280,11 +280,11 @@ var RoomListHeader = GObject.registerClass({
 
         let parent;
         do
-          parent = this.get_parent();
+            parent = this.get_parent();
         while (parent && !(parent instanceof Gtk.ListBox));
 
         if (parent)
-          parent.invalidate_sort();
+            parent.invalidate_sort();
 
         let accessibleName = _("Network %s has an error").format(this._account.display_name);
         this.get_accessible().set_name(accessibleName);
@@ -485,7 +485,7 @@ class RoomList extends Gtk.ListBox {
               handler: () => {
                   this._moveSelectionFull(Gtk.DirectionType.UP,
                                           row => row.hasPending);
-            } }
+              } }
         ];
         actions.forEach(a => {
             app.lookup_action(a.name).connect('activate', a.handler);
