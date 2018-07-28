@@ -562,8 +562,6 @@ class UserList extends Gtk.ScrolledWindow {
                            this._updateContentHeight.bind(this));
 
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
-        /* see https://bugzilla.gnome.org/show_bug.cgi?id=725403 */
-        //this._list.set_header_func(this._updateHeader.bind(this));
         this._filter = '';
         this._list.set_filter_func(this._filterRows.bind(this));
         this._list.set_sort_func(this._sort.bind(this));
@@ -588,11 +586,6 @@ class UserList extends Gtk.ScrolledWindow {
               handler: this._onMemberRemoved.bind(this) },
             { name: 'member-joined',
               handler: this._onMemberJoined.bind(this) },
-            /*
-            // see https://bugzilla.gnome.org/show_bug.cgi?id=725403
-            { name: 'members-changed',
-              handler: this._onMembersChanged.bind(this) },
-            */
             { name: 'notify::channel',
               handler: this._onChannelChanged.bind(this) }
         ];
@@ -657,10 +650,6 @@ class UserList extends Gtk.ScrolledWindow {
         this._addMember(member);
     }
 
-    _onMembersChanged(room) {
-        this._counterLabel.label = this.numRows.toString();
-    }
-
     _onChannelChanged(room) {
         this._list.foreach(w => { w.destroy(); });
         this._rows.clear();
@@ -704,33 +693,5 @@ class UserList extends Gtk.ScrolledWindow {
     _filterRows(row) {
         row.setFilter(this._filter);
         return row.shouldShow();
-    }
-
-    _updateHeader(row, before) {
-        if (before) {
-            row.set_header(null);
-            return;
-        }
-
-        if (row.get_header())
-            return;
-
-        if (!this._room.channel)
-            return;
-
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                margin_start: 6,
-                                margin_end: 6,
-                                spacing: 6 });
-        box.add(new Gtk.Label({ label: '<b>' + _("All") + '</b>',
-                                use_markup: true,
-                                hexpand: true,
-                                halign: Gtk.Align.START }));
-        this._counterLabel = new Gtk.Label({ label: this.numRows.toString(),
-                                             halign: Gtk.Align.END });
-        box.add(this._counterLabel);
-        box.show_all();
-
-        row.set_header(box);
     }
 });
