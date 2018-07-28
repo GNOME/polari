@@ -221,12 +221,12 @@ var MainWindow = GObject.registerClass({
         this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
     }
 
-    _onSizeAllocate(widget, allocation) {
+    _onSizeAllocate() {
         if (!this._isFullscreen && !this._isMaximized)
             this._currentSize = this.get_size();
     }
 
-    _onDestroy(widget) {
+    _onDestroy() {
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
                                  GLib.Variant.new('ai', this._currentSize));
@@ -274,7 +274,7 @@ var MainWindow = GObject.registerClass({
         return Gdk.EVENT_STOP;
     }
 
-    _onAccountsChanged(am) {
+    _onAccountsChanged() {
         let hasAccounts = this._accountsMonitor.visibleAccounts.length > 0;
         this._roomListRevealer.reveal_child = hasAccounts;
     }
@@ -342,7 +342,7 @@ var MainWindow = GObject.registerClass({
             });
     }
 
-    _onRoomsLoaded(mgr) {
+    _onRoomsLoaded() {
         if (this.active_room)
             return;
 

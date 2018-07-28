@@ -49,7 +49,7 @@ class SASLAuthHandler {
                                         this._onProxyReady.bind(this));
     }
 
-    _onProxyReady(proxy) {
+    _onProxyReady() {
         this._proxy.connectSignal('SASLStatusChanged',
                                   this._onSASLStatusChanged.bind(this));
 
