@@ -951,19 +951,17 @@ var ChatView = GObject.registerClass({
     }
 
     _onMemberKicked(room, member, actor) {
-        let message =
-            actor ? _("%s has been kicked by %s").format(member.alias,
-                                                         actor.alias)
-                  : _("%s has been kicked").format(member.alias);
-        this._insertStatus(message, member.alias, 'left');
+        let [kicked, kicker] = [member.alias, actor ? actor.alias : null];
+        let msg = kicker ? _("%s has been kicked by %s").format(kicked, kicker)
+                         : _("%s has been kicked").format(kicked);
+        this._insertStatus(msg, kicked, 'left');
     }
 
     _onMemberBanned(room, member, actor) {
-        let message =
-            actor ? _("%s has been banned by %s").format(member.alias,
-                                                         actor.alias)
-                  : _("%s has been banned").format(member.alias);
-        this._insertStatus(message, member.alias, 'left');
+        let [banned, banner] = [member.alias, actor ? actor.alias : null];
+        let msg = banner ? _("%s has been banned by %s").format(banned, banner)
+                         : _("%s has been banned").format(banned);
+        this._insertStatus(msg, banned, 'left');
     }
 
     _onMemberJoined(room, member) {
