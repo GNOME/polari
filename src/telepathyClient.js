@@ -74,20 +74,20 @@ class SASLAuthHandler {
         debug(`Auth status for server "${name}": ${statusString}`);
 
         switch (status) {
-            case SASLStatus.NOT_STARTED:
-            case SASLStatus.IN_PROGRESS:
-            case SASLStatus.CLIENT_ACCEPTED:
-                break;
+        case SASLStatus.NOT_STARTED:
+        case SASLStatus.IN_PROGRESS:
+        case SASLStatus.CLIENT_ACCEPTED:
+            break;
 
-            case SASLStatus.SERVER_SUCCEEDED:
-                this._proxy.AcceptSASLRemote();
-                break;
+        case SASLStatus.SERVER_SUCCEEDED:
+            this._proxy.AcceptSASLRemote();
+            break;
 
-            case SASLStatus.SUCCEEDED:
-            case SASLStatus.SERVER_FAILED:
-            case SASLStatus.CLIENT_FAILED:
-                this._channel.close_async(null);
-                break;
+        case SASLStatus.SUCCEEDED:
+        case SASLStatus.SERVER_FAILED:
+        case SASLStatus.CLIENT_FAILED:
+            this._channel.close_async(null);
+            break;
         }
     }
 

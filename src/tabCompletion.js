@@ -129,17 +129,17 @@ var TabCompletion = class {
         }
 
         switch (keyval) {
-            case Gdk.KEY_Tab:
-            case Gdk.KEY_Down:
-                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
-                return Gdk.EVENT_STOP;
-            case Gdk.KEY_ISO_Left_Tab:
-            case Gdk.KEY_Up:
-                this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
-                return Gdk.EVENT_STOP;
-            case Gdk.KEY_Escape:
-                this._cancel();
-                return Gdk.EVENT_STOP;
+        case Gdk.KEY_Tab:
+        case Gdk.KEY_Down:
+            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
+            return Gdk.EVENT_STOP;
+        case Gdk.KEY_ISO_Left_Tab:
+        case Gdk.KEY_Up:
+            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
+            return Gdk.EVENT_STOP;
+        case Gdk.KEY_Escape:
+            this._cancel();
+            return Gdk.EVENT_STOP;
         }
 
         if (Gdk.keyval_to_unicode(keyval) != 0) {

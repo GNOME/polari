@@ -380,46 +380,46 @@ var RoomListHeader = GObject.registerClass({
 
     _getStatusLabel() {
         switch (this._getConnectionStatus()) {
-            case Tp.ConnectionStatus.CONNECTED:
-                return _("Connected");
-            case Tp.ConnectionStatus.CONNECTING:
-                return _("Connecting…");
-            case Tp.ConnectionStatus.DISCONNECTED:
-                return _("Offline");
-            default:
-                return _("Unknown");
+        case Tp.ConnectionStatus.CONNECTED:
+            return _("Connected");
+        case Tp.ConnectionStatus.CONNECTING:
+            return _("Connecting…");
+        case Tp.ConnectionStatus.DISCONNECTED:
+            return _("Offline");
+        default:
+            return _("Unknown");
         }
     }
 
     _getErrorLabel() {
         switch (this._account.connection_error) {
 
-            case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_INSECURE):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_LIMIT_EXCEEDED):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_INVALID):
-            case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_ERROR):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_PROVIDED):
-            case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_NOT_AVAILABLE):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_UNTRUSTED):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_EXPIRED):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_ACTIVATED):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
-            case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED):
-                return _("Could not connect to %s in a safe way.").format(this._account.display_name);
+        case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_INSECURE):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_LIMIT_EXCEEDED):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_INVALID):
+        case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_ERROR):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_PROVIDED):
+        case Tp.error_get_dbus_name(Tp.Error.ENCRYPTION_NOT_AVAILABLE):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_UNTRUSTED):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_EXPIRED):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_NOT_ACTIVATED):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
+        case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED):
+            return _("Could not connect to %s in a safe way.").format(this._account.display_name);
 
-            case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED):
-                return _("%s requires a password.").format(this._account.display_name);
+        case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED):
+            return _("%s requires a password.").format(this._account.display_name);
 
-            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
-            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
-            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
-            case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY):
-                return _("Could not connect to %s. The server is busy.").format(this._account.display_name);
+        case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
+        case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
+        case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
+        case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY):
+            return _("Could not connect to %s. The server is busy.").format(this._account.display_name);
 
-            default:
-                return _("Could not connect to %s.").format(this._account.display_name);
+        default:
+            return _("Could not connect to %s.").format(this._account.display_name);
         }
     }
 });

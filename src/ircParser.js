@@ -74,203 +74,203 @@ var IrcParser = class {
         let cmd = argv.shift().toUpperCase();
         let output = null;
         switch (cmd) {
-            case 'HELP': {
-                let command = argv.shift();
-                if (command)
-                    command = command.toUpperCase();
+        case 'HELP': {
+            let command = argv.shift();
+            if (command)
+                command = command.toUpperCase();
 
-                retval = (command == null || knownCommands[command] != null);
+            retval = (command == null || knownCommands[command] != null);
 
-                if (!retval) //error
-                    output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
-                else if (command)
-                    output = this._createFeedbackUsage(command);
-                else
-                    output = this._createFeedbackGrid(_("Known commands:"),
-                                                      Object.keys(knownCommands));
-                break;
-            }
-            case 'INVITE': {
-                let nick = argv.shift();
-                if (!nick) {
-                    this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-                this._room.channel.connection.dup_contact_by_id_async(nick, [],
-                    (c, res) => {
-                        let contact;
-                        try {
-                            contact = c.dup_contact_by_id_finish(res);
-                        } catch (e) {
-                            logError(e, `Failed to get contact for ${nick}`);
-                            return;
-                        }
-                        this._room.add_member(contact);
-                    });
-                break;
-            }
-            case 'J':
-            case 'JOIN': {
-                let room = argv.shift();
-                if (!room) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-                if (argv.length)
-                    log(`Excess arguments to JOIN command: ${argv}`);
-
-                let account = this._room.account;
-                let app = Gio.Application.get_default();
-                let action = app.lookup_action('join-room');
-                action.activate(GLib.Variant.new('(ssu)',
-                                                 [account.get_object_path(),
-                                                  room,
-                                                  Utils.getTpEventTime()]));
-                break;
-            }
-            case 'KICK': {
-                let nick = argv.shift();
-                if (!nick) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-                this._room.channel.connection.dup_contact_by_id_async(nick, [],
-                    (c, res) => {
-                        let contact;
-                        try {
-                            contact = c.dup_contact_by_id_finish(res);
-                        } catch (e) {
-                            logError(e, `Failed to get contact for ${nick}`);
-                            return;
-                        }
-                        this._room.remove_member(contact);
-                    });
-                break;
-            }
-            case 'ME': {
-                if (!argv.length) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-                let action = stripCommand(text);
-                let type = Tp.ChannelTextMessageType.ACTION;
-                let message = Tp.ClientMessage.new_text(type, action);
-                this._sendMessage(message);
-                break;
-            }
-            case 'MSG': {
-                let nick = argv.shift();
-                let message = argv.join(' ');
-                if (!nick || !message) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-
-                let account = this._room.account;
-
-                let app = Gio.Application.get_default();
-                let action = app.lookup_action('message-user');
-                action.activate(GLib.Variant.new('(sssu)',
-                                                 [account.get_object_path(),
-                                                  nick,
-                                                  message,
-                                                  Tp.USER_ACTION_TIME_NOT_USER_ACTION]));
-                break;
-            }
-            case 'NAMES': {
-                let channel = this._room.channel;
-                let members = channel.group_dup_members_contacts().map(m => m.alias);
-                output = this._createFeedbackGrid(_("Users on %s:").format(channel.identifier),
-                                                  members);
-                break;
-            }
-            case 'NICK': {
-                let nick = argv.shift();
-                if (!nick) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-                if (argv.length)
-                    log(`Excess arguments to NICK command: ${argv}`);
-
-                this._app.setAccountNick(this._room.account, nick);
-                break;
-            }
-            case 'PART':
-            case 'CLOSE': {
-                let room = null;
-                let name = argv[0];
-                if (name)
-                    room = this._roomManager.lookupRoomByName(name, this._room.account);
-                if (room)
-                    argv.shift(); // first arg was a room name
-                else
-                    room = this._room;
-
-                let app = Gio.Application.get_default();
-                let action = app.lookup_action('leave-room');
-                let param = GLib.Variant.new('(ss)', [room.id, argv.join(' ')]);
-                action.activate(param);
-                break;
-            }
-            case 'QUERY': {
-                let nick = argv.shift();
-                if (!nick) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-
-                let account = this._room.account;
-
-                let app = Gio.Application.get_default();
-                let action = app.lookup_action('message-user');
-                action.activate(GLib.Variant.new('(sssu)',
-                                                 [account.get_object_path(),
-                                                  nick,
-                                                  '',
-                                                  Utils.getTpEventTime()]));
-                break;
-            }
-            case 'QUIT': {
-                let presence = Tp.ConnectionPresenceType.OFFLINE;
-                let message = stripCommand(text);
-                this._room.account.request_presence_async(presence, 'offline', message,
-                    (a, res) => {
-                        try {
-                            a.request_presence_finish(res);
-                        } catch (e) {
-                            logError(e, 'Failed to disconnect');
-                        }
-                    });
-                break;
-            }
-            case 'SAY': {
-                if (!argv.length) {
-                    output = this._createFeedbackUsage(cmd);
-                    retval = false;
-                    break;
-                }
-                this._sendText(stripCommand(text));
-                break;
-            }
-            case 'TOPIC': {
-                if (argv.length)
-                    this._room.set_topic(stripCommand(text));
-                else
-                    output = this._createFeedbackLabel(this._room.topic || _("No topic set"));
-                break;
-            }
-            default:
+            if (!retval) //error
                 output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
+            else if (command)
+                output = this._createFeedbackUsage(command);
+            else
+                output = this._createFeedbackGrid(_("Known commands:"),
+                                                  Object.keys(knownCommands));
+            break;
+        }
+        case 'INVITE': {
+            let nick = argv.shift();
+            if (!nick) {
+                this._createFeedbackUsage(cmd);
                 retval = false;
                 break;
+            }
+            this._room.channel.connection.dup_contact_by_id_async(nick, [],
+                (c, res) => {
+                    let contact;
+                    try {
+                        contact = c.dup_contact_by_id_finish(res);
+                    } catch (e) {
+                        logError(e, `Failed to get contact for ${nick}`);
+                        return;
+                    }
+                    this._room.add_member(contact);
+                });
+            break;
+        }
+        case 'J':
+        case 'JOIN': {
+            let room = argv.shift();
+            if (!room) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+            if (argv.length)
+                log(`Excess arguments to JOIN command: ${argv}`);
+
+            let account = this._room.account;
+            let app = Gio.Application.get_default();
+            let action = app.lookup_action('join-room');
+            action.activate(GLib.Variant.new('(ssu)',
+                                             [account.get_object_path(),
+                                              room,
+                                              Utils.getTpEventTime()]));
+            break;
+        }
+        case 'KICK': {
+            let nick = argv.shift();
+            if (!nick) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+            this._room.channel.connection.dup_contact_by_id_async(nick, [],
+                (c, res) => {
+                    let contact;
+                    try {
+                        contact = c.dup_contact_by_id_finish(res);
+                    } catch (e) {
+                        logError(e, `Failed to get contact for ${nick}`);
+                        return;
+                    }
+                    this._room.remove_member(contact);
+                });
+            break;
+        }
+        case 'ME': {
+            if (!argv.length) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+            let action = stripCommand(text);
+            let type = Tp.ChannelTextMessageType.ACTION;
+            let message = Tp.ClientMessage.new_text(type, action);
+            this._sendMessage(message);
+            break;
+        }
+        case 'MSG': {
+            let nick = argv.shift();
+            let message = argv.join(' ');
+            if (!nick || !message) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+
+            let account = this._room.account;
+
+            let app = Gio.Application.get_default();
+            let action = app.lookup_action('message-user');
+            action.activate(GLib.Variant.new('(sssu)',
+                                             [account.get_object_path(),
+                                              nick,
+                                              message,
+                                              Tp.USER_ACTION_TIME_NOT_USER_ACTION]));
+            break;
+        }
+        case 'NAMES': {
+            let channel = this._room.channel;
+            let members = channel.group_dup_members_contacts().map(m => m.alias);
+            output = this._createFeedbackGrid(_("Users on %s:").format(channel.identifier),
+                                              members);
+            break;
+        }
+        case 'NICK': {
+            let nick = argv.shift();
+            if (!nick) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+            if (argv.length)
+                log(`Excess arguments to NICK command: ${argv}`);
+
+            this._app.setAccountNick(this._room.account, nick);
+            break;
+        }
+        case 'PART':
+        case 'CLOSE': {
+            let room = null;
+            let name = argv[0];
+            if (name)
+                room = this._roomManager.lookupRoomByName(name, this._room.account);
+            if (room)
+                argv.shift(); // first arg was a room name
+            else
+                room = this._room;
+
+            let app = Gio.Application.get_default();
+            let action = app.lookup_action('leave-room');
+            let param = GLib.Variant.new('(ss)', [room.id, argv.join(' ')]);
+            action.activate(param);
+            break;
+        }
+        case 'QUERY': {
+            let nick = argv.shift();
+            if (!nick) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+
+            let account = this._room.account;
+
+            let app = Gio.Application.get_default();
+            let action = app.lookup_action('message-user');
+            action.activate(GLib.Variant.new('(sssu)',
+                                             [account.get_object_path(),
+                                              nick,
+                                              '',
+                                              Utils.getTpEventTime()]));
+            break;
+        }
+        case 'QUIT': {
+            let presence = Tp.ConnectionPresenceType.OFFLINE;
+            let message = stripCommand(text);
+            this._room.account.request_presence_async(presence, 'offline', message,
+                (a, res) => {
+                    try {
+                        a.request_presence_finish(res);
+                    } catch (e) {
+                        logError(e, 'Failed to disconnect');
+                    }
+                });
+            break;
+        }
+        case 'SAY': {
+            if (!argv.length) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+            this._sendText(stripCommand(text));
+            break;
+        }
+        case 'TOPIC': {
+            if (argv.length)
+                this._room.set_topic(stripCommand(text));
+            else
+                output = this._createFeedbackLabel(this._room.topic || _("No topic set"));
+            break;
+        }
+        default:
+            output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
+            retval = false;
+            break;
         }
 
         if (output)

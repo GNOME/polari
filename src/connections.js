@@ -529,12 +529,12 @@ var ConnectionProperties = GObject.registerClass({
             return;
 
         switch (account.connection_error) {
-            case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
-            case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR):
-                this._errorBox.show();
-                this._errorLabel.label = _("Polari disconnected due to a network error. Please check if the address field is correct.");
-                this._details.setErrorHint(ErrorHint.SERVER);
-                break;
+        case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
+        case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR):
+            this._errorBox.show();
+            this._errorLabel.label = _("Polari disconnected due to a network error. Please check if the address field is correct.");
+            this._details.setErrorHint(ErrorHint.SERVER);
+            break;
         }
     }
 });

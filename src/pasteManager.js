@@ -131,13 +131,13 @@ var DropTargetIface = GObject.registerClass({
 
         let info = Polari.drag_dest_find_target(widget, context);
         switch (info) {
-            case DndTargetType.TEXT:
-            case DndTargetType.IMAGE:
-            case DndTargetType.URI_LIST:
-                Gdk.drag_status(context, Gdk.DragAction.COPY, time);
-                break;
-            default:
-                return Gdk.EVENT_PROPAGATE;
+        case DndTargetType.TEXT:
+        case DndTargetType.IMAGE:
+        case DndTargetType.URI_LIST:
+            Gdk.drag_status(context, Gdk.DragAction.COPY, time);
+            break;
+        default:
+            return Gdk.EVENT_PROPAGATE;
         }
 
         if (!this._dragHighlight) {
@@ -172,14 +172,14 @@ var DropTargetIface = GObject.registerClass({
         } else {
             let success = false;
             switch (info) {
-                case DndTargetType.TEXT:
-                    this.emit('text-dropped', data.get_text());
-                    success = true;
-                    break;
-                case DndTargetType.IMAGE:
-                    this.emit('image-dropped', data.get_pixbuf());
-                    success = true;
-                    break;
+            case DndTargetType.TEXT:
+                this.emit('text-dropped', data.get_text());
+                success = true;
+                break;
+            case DndTargetType.IMAGE:
+                this.emit('image-dropped', data.get_pixbuf());
+                success = true;
+                break;
             }
             Gtk.drag_finish(context, success, false, time);
         }
