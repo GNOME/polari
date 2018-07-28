@@ -166,7 +166,7 @@ var ServerRoomList = GObject.registerClass({
                 this._toggleChecked(this._list.model.get_path(iter));
         });
 
-        this._list.connect('row-activated', (view, path, column) => {
+        this._list.connect('row-activated', (view, path, _column) => {
             this._toggleChecked(path);
         });
 
