@@ -310,7 +310,7 @@ var Application = GObject.registerClass({
         try {
             provider.load_from_file(Gio.File.new_for_uri(uri));
         } catch(e) {
-            logError(e, "Failed to add application style");
+            logError(e, 'Failed to add application style');
         }
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
                                                  provider,
