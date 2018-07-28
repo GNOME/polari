@@ -381,14 +381,15 @@ var UserPopover = GObject.registerClass({
         if (this._globalStatusChangedId > 0)
             this._userTracker.disconnect(this._globalStatusChangedId);
         this._globalStatusChangedId =
-            this._userTracker.connect("status-changed::" + basenick,
+            this._userTracker.connect(`status-changed::${basenick}`,
                                       this._onStatusChanged.bind(this));
 
         if (this._contactsChangedId > 0)
             this._userTracker.disconnect(this._contactsChangedId);
-        this._contactsChangedId = this._userTracker.connect("contacts-changed::" + basenick, () => {
-            this._userDetails.user = this._userTracker.lookupContact(this._nickname);
-        });
+        this._contactsChangedId =
+            this._userTracker.connect(`contacts-changed::${basenick}`, () => {
+                this._userDetails.user = this._userTracker.lookupContact(this._nickname);
+            });
 
         this._onStatusChanged();
         this._updateDetailsContact();
@@ -511,7 +512,7 @@ class UserListRow extends Gtk.ListBoxRow {
             let preMatch = this._user.alias.substring(0, filterIndex);
             let theMatch = this._user.alias.substring(filterIndex, filterIndex + this._filter.length);
             let postMatch = this._user.alias.substring(filterIndex + this._filter.length);
-            this._label.label = preMatch + '<b>' + theMatch + '</b>' + postMatch;
+            this._label.label = `${preMatch} <b> ${theMatch} </b> ${postMatch}`;
         }
     }
 

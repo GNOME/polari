@@ -134,7 +134,7 @@ class TextView extends Gtk.TextView {
 
     _updateLayout() {
         this._layout = this.create_pango_layout(null);
-        this._layout.set_markup('<small><b>%s</b></small>'.format(_("New Messages")), -1);
+        this._layout.set_markup(`<small><b>${_("New Messages")}</b></small>`, -1);
     }
 });
 
@@ -559,7 +559,7 @@ var ChatView = GObject.registerClass({
                      messageType: source.get_message_type() };
         }
 
-        throw new Error('Cannot create message from source ' + source);
+        throw new Error(`Cannot create message from source ${source}`);
     }
 
     _getReadyLogs() {
@@ -884,7 +884,7 @@ var ChatView = GObject.registerClass({
     }
 
     _getNickTagName(nick) {
-        return NICKTAG_PREFIX + Polari.util_get_basenick(nick);
+        return `${NICKTAG_PREFIX}${Polari.util_get_basenick(nick)}`;
     }
 
     _getNickFromTagName(tagName) {
@@ -943,7 +943,7 @@ var ChatView = GObject.registerClass({
     _onMemberDisconnected(room, member, message) {
         let text = _("%s has disconnected").format(member.alias);
         if (message)
-            text += ' (%s)'.format(message);
+            text += ` (${message})`;
         this._insertStatus(text, member.alias, 'left');
     }
 
@@ -972,7 +972,7 @@ var ChatView = GObject.registerClass({
         let text = _("%s left").format(member.alias);
 
         if (message)
-            text += ' (%s)'.format(message);
+            text += ` (${message})`;
 
         this._insertStatus(text, member.alias, 'left');
     }
@@ -981,7 +981,7 @@ var ChatView = GObject.registerClass({
         this._insertTpMessage(tpMessage);
         this._resetStatusCompressed();
         let nick = tpMessage.sender.alias;
-        let nickTag = this._lookupTag('nick' + nick);
+        let nickTag = this._lookupTag(`nick${nick}`);
         if (!nickTag)
             return;
         nickTag._lastActivity = GLib.get_monotonic_time();
@@ -1003,7 +1003,7 @@ var ChatView = GObject.registerClass({
     }
 
     _shouldShowStatus(nick) {
-        let nickTag = this._lookupTag('nick' + nick);
+        let nickTag = this._lookupTag(`nick${nick}`);
 
         if (!nickTag || !nickTag._lastActivity)
             return false;
@@ -1016,9 +1016,9 @@ var ChatView = GObject.registerClass({
         let buffer = this._view.buffer;
         let headerMark = buffer.get_mark('idle-status-start');
 
-        let headerTagName = 'status-compressed' + this._state.lastStatusGroup;
-        let headerArrowTagName = 'status-arrow-compressed' + this._state.lastStatusGroup;
-        let groupTagName = 'status' + this._state.lastStatusGroup;
+        let headerTagName = `status-compressed${this._state.lastStatusGroup}`;
+        let headerArrowTagName = `status-arrow-compressed${this._state.lastStatusGroup}`;
+        let groupTagName = `status${this._state.lastStatusGroup}`;
 
         let headerTag, headerArrowTag, groupTag;
         if (!headerMark) {
@@ -1098,7 +1098,7 @@ var ChatView = GObject.registerClass({
             }
             this._updateStatusHeader();
 
-            groupTag = this._lookupTag('status' + this._state.lastStatusGroup);
+            groupTag = this._lookupTag(`status${this._state.lastStatusGroup}`);
             tags.push(groupTag);
         } else {
             this._resetStatusCompressed();
@@ -1215,7 +1215,7 @@ var ChatView = GObject.registerClass({
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
             this._insertWithTags(iter,
-                                 this._formatTimestamp(message.timestamp) + '\n',
+                                 `${this._formatTimestamp(message.timestamp)}\n`,
                                  tags);
         }
         state.lastTimestamp = message.timestamp;
@@ -1224,7 +1224,7 @@ var ChatView = GObject.registerClass({
 
         let tags = [];
         if (isAction) {
-            message.text = "%s %s".format(message.nick, message.text);
+            message.text = `${message.nick} ${message.text}`;
             state.lastNick = null;
             tags.push(this._lookupTag('action'));
             if (needsGap)
@@ -1365,7 +1365,7 @@ var ChatView = GObject.registerClass({
 
     _createUrlTag(url) {
         if (!url.includes(':'))
-            url = 'http://' + url;
+            url = `http://${url}`;
 
         let tag = new ButtonTag();
         tag.connect('notify::hover', () => {
@@ -1384,10 +1384,10 @@ var ChatView = GObject.registerClass({
         let buffer = this._view.get_buffer();
         let iter = buffer.get_end_iter();
         let tags = [];
-        let groupTag = this._lookupTag('status' + this._state.lastStatusGroup);
+        let groupTag = this._lookupTag(`status${this._state.lastStatusGroup}`);
         if (groupTag && iter.ends_tag(groupTag))
             tags.push(groupTag);
-        let headerTag = this._lookupTag('status-compressed' + this._state.lastStatusGroup);
+        let headerTag = this._lookupTag(`status-compressed${this._state.lastStatusGroup}`);
         if (headerTag && iter.ends_tag(headerTag))
             tags.push(headerTag);
         if (iter.get_line_offset() != 0)

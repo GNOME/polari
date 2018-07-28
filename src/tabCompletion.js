@@ -39,7 +39,7 @@ var TabCompletion = class {
         let commands = Object.keys(IrcParser.knownCommands);
         for (let i = 0; i < commands.length; i++) {
             let row = new Gtk.ListBoxRow();
-            row._text = '/' + commands[i];
+            row._text = `/${commands[i]}`;
             row._casefoldedText = row._text.toLowerCase();
             row.add(new Gtk.Label({ label: row._text,
                                     halign: Gtk.Align.START,
@@ -159,9 +159,9 @@ var TabCompletion = class {
         this._previousWasCommand = this._isCommand;
 
         if (this._isCommand)
-            return row._text + ' ';
+            return `${row._text} `;
         if (this._startPos == 0 || this._isChained)
-            return row._text + ': ';
+            return `${row._text}: `;
         return row._text;
     }
 
