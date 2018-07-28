@@ -138,7 +138,7 @@ class TextView extends Gtk.TextView {
     }
 });
 
-var ButtonTag = GObject.registerClass({
+const ButtonTag = GObject.registerClass({
     Properties: {
         'hover': GObject.ParamSpec.boolean('hover',
                                            'hover',
@@ -208,7 +208,7 @@ var ButtonTag = GObject.registerClass({
     }
 });
 
-var HoverFilterTag = GObject.registerClass({
+const HoverFilterTag = GObject.registerClass({
     Properties: {
         'filtered-tag': GObject.ParamSpec.object('filtered-tag',
                                                  'filtered-tag',

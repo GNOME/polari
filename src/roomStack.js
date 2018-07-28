@@ -83,7 +83,7 @@ var RoomStack = GObject.registerClass({
     }
 });
 
-var SavePasswordConfirmationBar = GObject.registerClass(
+const SavePasswordConfirmationBar = GObject.registerClass(
 class SavePasswordConfirmationBar extends Gtk.Revealer {
     _init(room) {
         this._room = room;
@@ -144,7 +144,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
     }
 });
 
-var ChatPlaceholder = GObject.registerClass(
+const ChatPlaceholder = GObject.registerClass(
 class ChatPlaceholder extends Gtk.Overlay {
     _init(sizeGroup) {
         this._accountsMonitor = AccountsMonitor.getDefault();
@@ -180,7 +180,7 @@ class ChatPlaceholder extends Gtk.Overlay {
     }
 });
 
-var RoomView = GObject.registerClass(
+const RoomView = GObject.registerClass(
 class RoomView extends Gtk.Overlay {
     _init(room, sizeGroup) {
         super._init({ name: `RoomView ${room.display_name}` });
