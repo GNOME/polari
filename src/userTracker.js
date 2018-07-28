@@ -146,7 +146,7 @@ var UserTracker = GObject.registerClass({
 
     _clearUsersFromRoom(room) {
         let map = this._getRoomContacts(room);
-        for (let [baseNick, contacts] of map)
+        for (let [, contacts] of map)
             contacts.slice().forEach((m) => { this._untrackMember(m, room); });
     }
 
@@ -174,7 +174,7 @@ var UserTracker = GObject.registerClass({
     _runHandlers(room, member, status) {
         let baseNick = Polari.util_get_basenick(member.alias);
         let roomHandlers = this._getRoomHandlers(room);
-        for (let [id, info] of roomHandlers)
+        for (let [, info] of roomHandlers)
             if (!info.nickName || info.nickName == baseNick)
                 info.handler(baseNick, status);
     }
