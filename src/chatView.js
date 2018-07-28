@@ -670,7 +670,7 @@ var ChatView = GObject.registerClass({
         if (hasDir && dir != Gdk.ScrollDirection.UP)
             return Gdk.EVENT_PROPAGATE;
 
-        let [hasDeltas, dx, dy] = event.get_scroll_deltas();
+        let [hasDeltas, dx_, dy] = event.get_scroll_deltas();
         if (hasDeltas && dy >= 0)
             return Gdk.EVENT_PROPAGATE;
 
@@ -1266,7 +1266,7 @@ var ChatView = GObject.registerClass({
 
         // mask identify passwords in private chats
         if (this._room.type == Tp.HandleType.CONTACT) {
-            let [isIdentify, command, username, password] =
+            let [isIdentify, command_, username_, password] =
                 Polari.util_match_identify_message(text);
 
             if (isIdentify)
@@ -1326,7 +1326,7 @@ var ChatView = GObject.registerClass({
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
                                                   eventX, eventY);
-        let [inside, start] = view.get_iter_at_location(x, y);
+        let [inside_, start] = view.get_iter_at_location(x, y);
         let end = start.copy();
 
         if (!start.starts_tag(tag))

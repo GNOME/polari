@@ -374,7 +374,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onQueryActivated(action, parameter) {
-        let [accountPath, channelName, message, time] = parameter.deep_unpack();
+        let [accountPath, channelName, message, time_] = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
         if (!account || !account.enabled)
@@ -491,7 +491,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     vfunc_observe_channels(...args) {
-        let [account, connection, channels, op, requests, context] = args;
+        let [account_, connection, channels, op_, requests_, context] = args;
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel))
                 return;
@@ -514,8 +514,8 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     vfunc_handle_channels(...args) {
-        let [account, connection, channels, satisfied, userTime, context] = args;
-        let [present] = Tp.user_action_time_should_present(userTime);
+        let [account_, connection, channels, satisfied_, time, context] = args;
+        let [present] = Tp.user_action_time_should_present(time);
 
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel)) {
@@ -526,7 +526,7 @@ class TelepathyClient extends Tp.BaseClient {
             if (present)
                 this._app.activate();
 
-            this._roomManager.ensureRoomForChannel(channel, userTime);
+            this._roomManager.ensureRoomForChannel(channel, time);
             //channel.join_async('', null);
         });
     }
