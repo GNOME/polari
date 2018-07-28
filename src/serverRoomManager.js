@@ -161,7 +161,7 @@ var ServerRoomList = GObject.registerClass({
             if (this._filterEntry.text.trim().length == 0)
                 return;
 
-            let [selected, model, iter] = this._list.get_selection().get_selected();
+            let [selected, model_, iter] = this._list.get_selection().get_selected();
             if (selected)
                 this._toggleChecked(this._list.model.get_path(iter));
         });
@@ -268,7 +268,7 @@ var ServerRoomList = GObject.registerClass({
     }
 
     _clearList() {
-        let [valid, iter] = this._store.get_iter_first();
+        let [valid_, iter] = this._store.get_iter_first();
         if (this._isCustomRoomItem(iter))
             return;
         this._store.move_before(this._customRoomItem, iter);
@@ -355,7 +355,7 @@ var ServerRoomList = GObject.registerClass({
 
     _toggleChecked(path) {
         let childPath = this._list.model.convert_path_to_child_path(path);
-        let [valid, iter] = this._store.get_iter(childPath);
+        let [valid_, iter] = this._store.get_iter(childPath);
         if (!this._store.get_value(iter, RoomListColumn.SENSITIVE))
             return;
         let checked = this._store.get_value(iter, RoomListColumn.CHECKED);

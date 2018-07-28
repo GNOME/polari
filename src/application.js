@@ -521,12 +521,12 @@ var Application = GObject.registerClass({
     }
 
     _onJoinRoom(action, parameter) {
-        let [accountPath, channelName, time] = parameter.deep_unpack();
+        let [accountPath_, channelName_, time] = parameter.deep_unpack();
         this._maybePresent(time);
     }
 
     _onMessageUser(action, parameter) {
-        let [accountPath, contactName, message, time] = parameter.deep_unpack();
+        let [accountPath_, contactName_, msg_, time] = parameter.deep_unpack();
         this._maybePresent(time);
     }
 
