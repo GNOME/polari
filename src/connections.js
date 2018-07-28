@@ -161,12 +161,6 @@ var ConnectionsList = GObject.registerClass({
             row.activate();
     }
 
-    activateSelected() {
-        let row = this._list.get_selected_row();
-        if (row)
-            row.activate();
-    }
-
     _filterRows(row) {
         let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
         return this._filterTerms.every(term => {
