@@ -1,6 +1,14 @@
 {
     "rules": {
         "arrow-spacing": "error",
+        "key-spacing": [
+            "error",
+            {
+                "mode": "minimum",
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
         "object-curly-spacing": [
             "error",
             "always"
