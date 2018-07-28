@@ -13,20 +13,24 @@ const IGNORE_STATUS_TIME = 5;
 
 const SCROLL_TIMEOUT = 100; // ms
 
-const TIMESTAMP_INTERVAL = 300; // seconds of inactivity after which to
-                                // insert a timestamp
+// seconds of inactivity after which to insert a timestamp
+const TIMESTAMP_INTERVAL = 300;
 
-const INACTIVITY_THRESHOLD = 300; // a threshold in seconds used to control
-                                  // the visibility of status messages
+// a threshold in seconds used to control
+// the visibility of status messages
+const INACTIVITY_THRESHOLD = 300;
 const STATUS_NOISE_MAXIMUM = 4;
 
-const NUM_INITIAL_LOG_EVENTS = 50; // number of log events to fetch on start
-const NUM_LOG_EVENTS = 10; // number of log events to fetch when requesting more
+// number of log events to fetch on start
+const NUM_INITIAL_LOG_EVENTS = 50;
+// number of log events to fetch when requesting more
+const NUM_LOG_EVENTS = 10;
 
 const MARGIN = 14;
-const NICK_SPACING = 14; // space after nicks, matching the following elements
-                         // of the nick button in the entry area:
-                         // 8px padding + 6px spacing
+// space after nicks, matching the following elements
+// of the nick button in the entry area:
+// 8px padding + 6px spacing
+const NICK_SPACING = 14;
 
 const NICKTAG_PREFIX = 'nick';
 
