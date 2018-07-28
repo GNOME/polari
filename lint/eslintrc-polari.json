@@ -8,6 +8,17 @@
                 "allowSingleLine": true
             }
         ],
+        "indent": [
+            "error",
+            4,
+            {
+                "ignoredNodes": [
+                    "ArrayExpression > ObjectExpression",
+                    "ConditionalExpression"
+                ],
+                "MemberExpression": "off"
+            }
+        ],
         "key-spacing": [
             "error",
             {
