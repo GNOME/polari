@@ -374,7 +374,7 @@ var UserPopover = GObject.registerClass({
             this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
         this._roomStatusChangedId =
             this._userTracker.watchRoomStatus(this._room, this._basenick,
-                                              this._onNickStatusChanged.bind(this));
+                                              this._onStatusChanged.bind(this));
 
         if (this._globalStatusChangedId > 0)
             this._userTracker.disconnect(this._globalStatusChangedId);
@@ -415,10 +415,6 @@ var UserPopover = GObject.registerClass({
 
     _updateDetailsContact() {
         this._userDetails.user = this._userTracker.lookupContact(this._nickname);
-     }
-
-    _onNickStatusChanged(baseNick, status) {
-        this._onStatusChanged();
     }
 });
 
