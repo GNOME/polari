@@ -178,77 +178,100 @@ var Application = GObject.registerClass({
     vfunc_startup() {
         super.vfunc_startup();
 
-        /* eslint-disable indent */
-        let actionEntries = [
-          { name: 'show-join-dialog',
+        let actionEntries = [{
+            name: 'show-join-dialog',
             activate: this._onShowJoinDialog.bind(this),
-            accels: ['<Primary>n'] },
-          { name: 'join-room',
+            accels: ['<Primary>n']
+        }, {
+            name: 'join-room',
             activate: this._onJoinRoom.bind(this),
-            parameter_type: GLib.VariantType.new('(ssu)') },
-          { name: 'message-user',
+            parameter_type: GLib.VariantType.new('(ssu)')
+        }, {
+            name: 'message-user',
             activate: this._onMessageUser.bind(this),
-            parameter_type: GLib.VariantType.new('(sssu)') },
-          { name: 'leave-room',
-            parameter_type: GLib.VariantType.new('(ss)') },
-          { name: 'leave-current-room',
+            parameter_type: GLib.VariantType.new('(sssu)')
+        }, {
+            name: 'leave-room',
+            parameter_type: GLib.VariantType.new('(ss)')
+        }, {
+            name: 'leave-current-room',
             activate: this._onLeaveCurrentRoom.bind(this),
             create_hook: (a) => a.enabled = false,
-            accels: ['<Primary>w'] },
-          { name: 'authenticate-account',
-            parameter_type: GLib.VariantType.new('(os)') },
-          { name: 'connect-account',
+            accels: ['<Primary>w']
+        }, {
+            name: 'authenticate-account',
+            parameter_type: GLib.VariantType.new('(os)')
+        }, {
+            name: 'connect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'disconnect-account',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'disconnect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'reconnect-account',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'reconnect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'user-list',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'user-list',
             activate: this._onToggleAction.bind(this),
             create_hook: this._userListCreateHook.bind(this),
             state: GLib.Variant.new('b', false),
-            accels: ['F9', '<Primary>u'] },
-          { name: 'remove-connection',
+            accels: ['F9', '<Primary>u']
+        }, {
+            name: 'remove-connection',
             activate: this._onRemoveConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'edit-connection',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'edit-connection',
             activate: this._onEditConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'save-identify-password',
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'discard-identify-password',
-            parameter_type: GLib.VariantType.new('o') },
-          { name: 'show-emoji-picker',
-            accels: ['<Primary>e'] },
-          { name: 'start-client',
-            activate: this._onStartClient.bind(this) },
-          { name: 'help',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'save-identify-password',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'discard-identify-password',
+            parameter_type: GLib.VariantType.new('o')
+        }, {
+            name: 'show-emoji-picker',
+            accels: ['<Primary>e']
+        }, {
+            name: 'start-client',
+            activate: this._onStartClient.bind(this)
+        }, {
+            name: 'help',
             activate: this._onShowHelp.bind(this),
-            accels: ['F1'] },
-          { name: 'about',
-            activate: this._onShowAbout.bind(this) },
-          { name: 'quit',
+            accels: ['F1']
+        }, {
+            name: 'about',
+            activate: this._onShowAbout.bind(this)
+        }, {
+            name: 'quit',
             activate: this._onQuit.bind(this),
-            accels: ['<Primary>q'] },
-          { name: 'next-room',
-            accels: ['<Primary>Page_Down', '<Alt>Down'] },
-          { name: 'previous-room',
-            accels: ['<Primary>Page_Up', '<Alt>Up'] },
-          { name: 'first-room',
-            accels: ['<Primary>Home'] },
-          { name: 'last-room',
-            accels: ['<Primary>End'] },
-          { name: 'nth-room',
-            parameter_type: GLib.VariantType.new('i') },
-          { name: 'next-pending-room',
-            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down'] },
-          { name: 'previous-pending-room',
-            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up'] }
-        ];
-        /* eslint-enable indent */
+            accels: ['<Primary>q']
+        }, {
+            name: 'next-room',
+            accels: ['<Primary>Page_Down', '<Alt>Down']
+        }, {
+            name: 'previous-room',
+            accels: ['<Primary>Page_Up', '<Alt>Up']
+        }, {
+            name: 'first-room',
+            accels: ['<Primary>Home']
+        }, {
+            name: 'last-room',
+            accels: ['<Primary>End']
+        }, {
+            name: 'nth-room',
+            parameter_type: GLib.VariantType.new('i')
+        }, {
+            name: 'next-pending-room',
+            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']
+        }, {
+            name: 'previous-pending-room',
+            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']
+        }];
         actionEntries.forEach(actionEntry => {
             let props = {};
             ['name', 'state', 'parameter_type'].forEach(prop => {

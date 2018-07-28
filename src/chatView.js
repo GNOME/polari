@@ -382,22 +382,28 @@ var ChatView = GObject.registerClass({
         this._channelSignals = [];
         this._channel = null;
 
-        let roomSignals = [
-            { name: 'notify::channel',
-              handler: this._onChannelChanged.bind(this) },
-            { name: 'member-renamed',
-              handler: this._onMemberRenamed.bind(this) },
-            { name: 'member-disconnected',
-              handler: this._onMemberDisconnected.bind(this) },
-            { name: 'member-kicked',
-              handler: this._onMemberKicked.bind(this) },
-            { name: 'member-banned',
-              handler: this._onMemberBanned.bind(this) },
-            { name: 'member-joined',
-              handler: this._onMemberJoined.bind(this) },
-            { name: 'member-left',
-              handler: this._onMemberLeft.bind(this) }
-        ];
+        let roomSignals = [{
+            name: 'notify::channel',
+            handler: this._onChannelChanged.bind(this)
+        }, {
+            name: 'member-renamed',
+            handler: this._onMemberRenamed.bind(this)
+        }, {
+            name: 'member-disconnected',
+            handler: this._onMemberDisconnected.bind(this)
+        }, {
+            name: 'member-kicked',
+            handler: this._onMemberKicked.bind(this)
+        }, {
+            name: 'member-banned',
+            handler: this._onMemberBanned.bind(this)
+        }, {
+            name: 'member-joined',
+            handler: this._onMemberJoined.bind(this)
+        }, {
+            name: 'member-left',
+            handler: this._onMemberLeft.bind(this)
+        }];
         this._roomSignals = [];
         roomSignals.forEach(signal => {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
@@ -412,37 +418,44 @@ var ChatView = GObject.registerClass({
     _createTags() {
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
-        let tags = [
-            /* eslint-disable indent */
-          { name: 'nick',
+        let tags = [{
+            name: 'nick',
             left_margin: MARGIN,
-            weight: Pango.Weight.BOLD },
-          { name: 'gap',
-            pixels_above_lines: 10 },
-          { name: 'message',
-            indent: 0 },
-          { name: 'highlight',
-            weight: Pango.Weight.BOLD },
-          { name: 'status',
+            weight: Pango.Weight.BOLD
+        }, {
+            name: 'gap',
+            pixels_above_lines: 10
+        }, {
+            name: 'message',
+            indent: 0
+        }, {
+            name: 'highlight',
+            weight: Pango.Weight.BOLD
+        }, {
+            name: 'status',
             left_margin: MARGIN,
             indent: 0,
-            justification: Gtk.Justification.RIGHT },
-          { name: 'timestamp',
+            justification: Gtk.Justification.RIGHT
+        }, {
+            name: 'timestamp',
             left_margin: MARGIN,
             indent: 0,
-            justification: Gtk.Justification.RIGHT },
-          { name: 'action',
+            justification: Gtk.Justification.RIGHT
+        }, {
+            name: 'action',
             left_margin: MARGIN,
-            style: Pango.Style.ITALIC },
-          { name: 'url',
-            underline: Pango.Underline.SINGLE },
-          { name: 'indicator-line',
-            pixels_above_lines: 24 },
-          { name: 'loading',
+            style: Pango.Style.ITALIC
+        }, {
+            name: 'url',
+            underline: Pango.Underline.SINGLE
+        }, {
+            name: 'indicator-line',
+            pixels_above_lines: 24
+        }, {
+            name: 'loading',
             left_margin: MARGIN,
-            justification: Gtk.Justification.CENTER }
-            /* eslint-enable indent */
-        ];
+            justification: Gtk.Justification.CENTER
+        }];
         tags.forEach(tagProps => tagTable.add(new Gtk.TextTag(tagProps)));
     }
 
@@ -483,16 +496,16 @@ var ChatView = GObject.registerClass({
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
-        let tags = [
-            /* eslint-disable indent */
-          { name: 'status',
-            foreground_rgba: dimColor },
-          { name: 'timestamp',
-            foreground_rgba: dimColor },
-          { name: 'url',
-            foreground_rgba: linkColor }
-            /* eslint-enable indent */
-        ];
+        let tags = [{
+            name: 'status',
+            foreground_rgba: dimColor
+        }, {
+            name: 'timestamp',
+            foreground_rgba: dimColor
+        }, {
+            name: 'url',
+            foreground_rgba: linkColor
+        }];
         tags.forEach(tagProps => {
             let tag = tagTable.lookup(tagProps.name);
             for (let prop in tagProps) {
@@ -936,14 +949,16 @@ var ChatView = GObject.registerClass({
 
         this._joinTime = GLib.DateTime.new_now_utc().to_unix();
 
-        let channelSignals = [
-            { name: 'message-received',
-              handler: this._onMessageReceived.bind(this) },
-            { name: 'message-sent',
-              handler: this._onMessageSent.bind(this) },
-            { name: 'pending-message-removed',
-              handler: this._pendingMessageRemoved.bind(this) }
-        ];
+        let channelSignals = [{
+            name: 'message-received',
+            handler: this._onMessageReceived.bind(this)
+        }, {
+            name: 'message-sent',
+            handler: this._onMessageSent.bind(this)
+        }, {
+            name: 'pending-message-removed',
+            handler: this._pendingMessageRemoved.bind(this)
+        }];
         channelSignals.forEach(signal => {
             this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
         });

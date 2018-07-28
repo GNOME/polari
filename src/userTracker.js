@@ -96,22 +96,28 @@ const UserTracker = GObject.registerClass({
 
         this._ensureRoomMappingForRoom(room);
 
-        let roomSignals = [
-            { name: 'notify::channel',
-              handler: this._onChannelChanged.bind(this) },
-            { name: 'member-renamed',
-              handler: this._onMemberRenamed.bind(this) },
-            { name: 'member-disconnected',
-              handler: this._onMemberLeft.bind(this) },
-            { name: 'member-kicked',
-              handler: this._onMemberLeft.bind(this) },
-            { name: 'member-banned',
-              handler: this._onMemberLeft.bind(this) },
-            { name: 'member-joined',
-              handler: this._onMemberJoined.bind(this) },
-            { name: 'member-left',
-              handler: this._onMemberLeft.bind(this) }
-        ];
+        let roomSignals = [{
+            name: 'notify::channel',
+            handler: this._onChannelChanged.bind(this)
+        }, {
+            name: 'member-renamed',
+            handler: this._onMemberRenamed.bind(this)
+        }, {
+            name: 'member-disconnected',
+            handler: this._onMemberLeft.bind(this)
+        }, {
+            name: 'member-kicked',
+            handler: this._onMemberLeft.bind(this)
+        }, {
+            name: 'member-banned',
+            handler: this._onMemberLeft.bind(this)
+        }, {
+            name: 'member-joined',
+            handler: this._onMemberJoined.bind(this)
+        }, {
+            name: 'member-left',
+            handler: this._onMemberLeft.bind(this)
+        }];
 
         let signalIds = this._getRoomSignals(room);
         roomSignals.forEach(signal => {

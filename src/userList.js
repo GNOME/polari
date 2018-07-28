@@ -603,22 +603,28 @@ class UserList extends Gtk.ScrolledWindow {
         this._rows = new Map();
         this._activeRow = null;
 
-        let roomSignals = [
-            { name: 'member-renamed',
-              handler: this._onMemberRenamed.bind(this) },
-            { name: 'member-disconnected',
-              handler: this._onMemberRemoved.bind(this) },
-            { name: 'member-kicked',
-              handler: this._onMemberRemoved.bind(this) },
-            { name: 'member-banned',
-              handler: this._onMemberRemoved.bind(this) },
-            { name: 'member-left',
-              handler: this._onMemberRemoved.bind(this) },
-            { name: 'member-joined',
-              handler: this._onMemberJoined.bind(this) },
-            { name: 'notify::channel',
-              handler: this._onChannelChanged.bind(this) }
-        ];
+        let roomSignals = [{
+            name: 'member-renamed',
+            handler: this._onMemberRenamed.bind(this)
+        }, {
+            name: 'member-disconnected',
+            handler: this._onMemberRemoved.bind(this)
+        }, {
+            name: 'member-kicked',
+            handler: this._onMemberRemoved.bind(this)
+        }, {
+            name: 'member-banned',
+            handler: this._onMemberRemoved.bind(this)
+        }, {
+            name: 'member-left',
+            handler: this._onMemberRemoved.bind(this)
+        }, {
+            name: 'member-joined',
+            handler: this._onMemberJoined.bind(this)
+        }, {
+            name: 'notify::channel',
+            handler: this._onChannelChanged.bind(this)
+        }];
         this._roomSignals = [];
         roomSignals.forEach(signal => {
             this._roomSignals.push(room.connect(signal.name, signal.handler));

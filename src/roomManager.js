@@ -19,15 +19,17 @@ var RoomManager = class {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._app = Gio.Application.get_default();
-        let actions = [
-            { name: 'join-room',
-              handler: this._onJoinActivated.bind(this) },
-            { name: 'message-user',
-              handler: this._onQueryActivated.bind(this) },
-            { name: 'leave-room',
-              after: true,
-              handler: this._onLeaveActivated.bind(this) }
-        ];
+        let actions = [{
+            name: 'join-room',
+            handler: this._onJoinActivated.bind(this)
+        }, {
+            name: 'message-user',
+            handler: this._onQueryActivated.bind(this)
+        }, {
+            name: 'leave-room',
+            after: true,
+            handler: this._onLeaveActivated.bind(this)
+        }];
         actions.forEach(a => {
             if (a.after)
                 this._app.lookup_action(a.name).connect_after('activate', a.handler);

@@ -470,33 +470,39 @@ class RoomList extends Gtk.ListBox {
         this._roomManager.rooms.forEach(r => this._roomAdded(this._roomManager, r));
 
         let app = Gio.Application.get_default();
-        let actions = [
-            { name: 'next-room',
-              handler: () => this._moveSelection(Gtk.DirectionType.DOWN) },
-            { name: 'previous-room',
-              handler: () => this._moveSelection(Gtk.DirectionType.UP) },
-            { name: 'first-room',
-              handler: () => this._selectRoomAtIndex(0) },
-            { name: 'last-room',
-              handler: () => {
-                  let nRows = this._roomManager.roomCount;
-                  this._selectRoomAtIndex(nRows - 1);
-              } },
-            { name: 'nth-room',
-              handler: (a, param) => {
-                  this._selectRoomAtIndex(param.get_int32() - 1);
-              } },
-            { name: 'next-pending-room',
-              handler: () => {
-                  this._moveSelectionFull(Gtk.DirectionType.DOWN,
-                                          row => row.hasPending);
-              } },
-            { name: 'previous-pending-room',
-              handler: () => {
-                  this._moveSelectionFull(Gtk.DirectionType.UP,
-                                          row => row.hasPending);
-              } }
-        ];
+        let actions = [{
+            name: 'next-room',
+            handler: () => this._moveSelection(Gtk.DirectionType.DOWN)
+        }, {
+            name: 'previous-room',
+            handler: () => this._moveSelection(Gtk.DirectionType.UP)
+        }, {
+            name: 'first-room',
+            handler: () => this._selectRoomAtIndex(0)
+        }, {
+            name: 'last-room',
+            handler: () => {
+                let nRows = this._roomManager.roomCount;
+                this._selectRoomAtIndex(nRows - 1);
+            }
+        }, {
+            name: 'nth-room',
+            handler: (a, param) => {
+                this._selectRoomAtIndex(param.get_int32() - 1);
+            }
+        }, {
+            name: 'next-pending-room',
+            handler: () => {
+                this._moveSelectionFull(Gtk.DirectionType.DOWN,
+                                        row => row.hasPending);
+            }
+        }, {
+            name: 'previous-pending-room',
+            handler: () => {
+                this._moveSelectionFull(Gtk.DirectionType.UP,
+                                        row => row.hasPending);
+            }
+        }];
         actions.forEach(a => {
             app.lookup_action(a.name).connect('activate', a.handler);
         });

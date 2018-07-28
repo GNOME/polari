@@ -134,24 +134,31 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onPrepared() {
-        let actions = [
-            { name: 'message-user',
-              handler: this._onQueryActivated.bind(this) },
-            { name: 'leave-room',
-              handler: this._onLeaveActivated.bind(this) },
-            { name: 'connect-account',
-              handler: this._onConnectAccountActivated.bind(this) },
-            { name: 'disconnect-account',
-              handler: this._onDisconnectAccountActivated.bind(this) },
-            { name: 'reconnect-account',
-              handler: this._onReconnectAccountActivated.bind(this) },
-            { name: 'authenticate-account',
-              handler: this._onAuthenticateAccountActivated.bind(this) },
-            { name: 'save-identify-password',
-              handler: this._onSaveIdentifyPasswordActivated.bind(this) },
-            { name: 'discard-identify-password',
-              handler: this._onDiscardIdentifyPasswordActivated.bind(this) }
-        ];
+        let actions = [{
+            name: 'message-user',
+            handler: this._onQueryActivated.bind(this)
+        }, {
+            name: 'leave-room',
+            handler: this._onLeaveActivated.bind(this)
+        }, {
+            name: 'connect-account',
+            handler: this._onConnectAccountActivated.bind(this)
+        }, {
+            name: 'disconnect-account',
+            handler: this._onDisconnectAccountActivated.bind(this)
+        }, {
+            name: 'reconnect-account',
+            handler: this._onReconnectAccountActivated.bind(this)
+        }, {
+            name: 'authenticate-account',
+            handler: this._onAuthenticateAccountActivated.bind(this)
+        }, {
+            name: 'save-identify-password',
+            handler: this._onSaveIdentifyPasswordActivated.bind(this)
+        }, {
+            name: 'discard-identify-password',
+            handler: this._onDiscardIdentifyPasswordActivated.bind(this)
+        }];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
         });
