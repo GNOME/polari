@@ -104,7 +104,7 @@ var DropTargetIface = GObject.registerClass({
                              this._onDragDataReceived.bind(this));
     }
 
-    _onDragDrop(widget, context, x, y, time) {
+    _onDragDrop(widget, context, _x, _y, time) {
         if (!this.can_drop)
             return Gdk.EVENT_PROPAGATE;
 
@@ -115,12 +115,12 @@ var DropTargetIface = GObject.registerClass({
         return Gdk.EVENT_STOP;
     }
 
-    _onDragLeave(widget, context, time) {
+    _onDragLeave(widget, _context, _time) {
         widget.drag_unhighlight();
         this._dragHighlight = false;
     }
 
-    _onDragMotion(widget, context, x, y, time) {
+    _onDragMotion(widget, context, _x, _y, time) {
         if (!this.can_drop)
             return Gdk.EVENT_PROPAGATE;
 
@@ -147,7 +147,7 @@ var DropTargetIface = GObject.registerClass({
     }
 
 
-    _onDragDataReceived(widget, context, x, y, data, info, time) {
+    _onDragDataReceived(_widget, context, _x, _y, data, info, time) {
         if (info == DndTargetType.URI_LIST) {
             let uris = data.get_uris();
             if (!uris) {

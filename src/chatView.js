@@ -169,7 +169,7 @@ var ButtonTag = GObject.registerClass({
         this.notify('hover');
     }
 
-    vfunc_event(object, event, iter) {
+    vfunc_event(object, event, _iter) {
         this._ensureGesture(object);
 
         if (this._gesture.handle_event(event) ||

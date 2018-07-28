@@ -144,7 +144,7 @@ var Application = GObject.registerClass({
         Gio.bus_unwatch_name(id);
     }
 
-    vfunc_dbus_register(conn, path) {
+    vfunc_dbus_register(conn, _path) {
         if (!Utils.isFlatpakSandbox())
             return true;
 
@@ -167,7 +167,7 @@ var Application = GObject.registerClass({
         return true;
     }
 
-    vfunc_dbus_unregister(conn, path) {
+    vfunc_dbus_unregister(_conn, _path) {
         for (let proc of this._demons)
             proc.force_exit();
         this._demons = [];
