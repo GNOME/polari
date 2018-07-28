@@ -134,7 +134,7 @@ class TextView extends Gtk.TextView {
 
     _updateLayout() {
         this._layout = this.create_pango_layout(null);
-        this._layout.set_markup(`<small><b>${_("New Messages")}</b></small>`, -1);
+        this._layout.set_markup(`<small><b>${_('New Messages')}</b></small>`, -1);
     }
 });
 
@@ -776,13 +776,13 @@ var ChatView = GObject.registerClass({
     _showUrlContextMenu(url) {
         let menu = new Gtk.Menu();
 
-        let item = new Gtk.MenuItem({ label: _("Open Link") });
+        let item = new Gtk.MenuItem({ label: _('Open Link') });
         item.connect('activate', () => {
             Utils.openURL(url, Gtk.get_current_event_time());
         });
         menu.append(item);
 
-        item = new Gtk.MenuItem({ label: _("Copy Link Address") });
+        item = new Gtk.MenuItem({ label: _('Copy Link Address') });
         item.connect('activate', () => {
             let clipboard = Gtk.Clipboard.get_default(item.get_display());
             clipboard.set_text(url, -1);
@@ -953,12 +953,12 @@ var ChatView = GObject.registerClass({
     }
 
     _onMemberRenamed(room, oldMember, newMember) {
-        let text = _("%s is now known as %s").format(oldMember.alias, newMember.alias);
+        let text = _('%s is now known as %s').format(oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
     }
 
     _onMemberDisconnected(room, member, message) {
-        let text = _("%s has disconnected").format(member.alias);
+        let text = _('%s has disconnected').format(member.alias);
         if (message)
             text += ` (${message})`;
         this._insertStatus(text, member.alias, 'left');
@@ -967,26 +967,26 @@ var ChatView = GObject.registerClass({
     _onMemberKicked(room, member, actor) {
         let [kicked, kicker] = [member.alias, actor ? actor.alias : null];
         let msg = kicker ?
-            _("%s has been kicked by %s").format(kicked, kicker) :
-            _("%s has been kicked").format(kicked);
+            _('%s has been kicked by %s').format(kicked, kicker) :
+            _('%s has been kicked').format(kicked);
         this._insertStatus(msg, kicked, 'left');
     }
 
     _onMemberBanned(room, member, actor) {
         let [banned, banner] = [member.alias, actor ? actor.alias : null];
         let msg = banner ?
-            _("%s has been banned by %s").format(banned, banner) :
-            _("%s has been banned").format(banned);
+            _('%s has been banned by %s').format(banned, banner) :
+            _('%s has been banned').format(banned);
         this._insertStatus(msg, banned, 'left');
     }
 
     _onMemberJoined(room, member) {
-        let text = _("%s joined").format(member.alias);
+        let text = _('%s joined').format(member.alias);
         this._insertStatus(text, member.alias, 'joined');
     }
 
     _onMemberLeft(room, member, message) {
-        let text = _("%s left").format(member.alias);
+        let text = _('%s left').format(member.alias);
 
         if (message)
             text += ` (${message})`;
@@ -1079,11 +1079,11 @@ var ChatView = GObject.registerClass({
 
         let stats = [];
         if (this._statusCount.joined > 0)
-            stats.push(ngettext("%d user joined",
-                                "%d users joined", this._statusCount.joined).format(this._statusCount.joined));
+            stats.push(ngettext('%d user joined',
+                                '%d users joined', this._statusCount.joined).format(this._statusCount.joined));
         if (this._statusCount.left > 0)
-            stats.push(ngettext("%d user left",
-                                "%d users left", this._statusCount.left).format(this._statusCount.left));
+            stats.push(ngettext('%d user left',
+                                '%d users left', this._statusCount.left).format(this._statusCount.left));
         // TODO: How do we update the arrow direction when text direction change?
         let iter = buffer.get_iter_at_mark(headerMark);
         let tags = [this._lookupTag('status'), headerTag];
@@ -1149,56 +1149,56 @@ var ChatView = GObject.registerClass({
         if (clockFormat == '24h' || !hasAmPm) {
             if (daysAgo < 1) { // today
                 /* Translators: Time in 24h format */
-                format = _("%H\u2236%M");
+                format = _('%H\u2236%M');
             } else if (daysAgo < 2) { // yesterday
                 /* Translators: this is the word "Yesterday" followed by a
                  time string in 24h format. i.e. "Yesterday, 14:30" */
                 // xgettext:no-c-format
-                format = _("Yesterday, %H\u2236%M");
+                format = _('Yesterday, %H\u2236%M');
             } else if (daysAgo < 7) { // this week
                 /* Translators: this is the week day name followed by a time
                  string in 24h format. i.e. "Monday, 14:30" */
                 // xgettext:no-c-format
-                format = _("%A, %H\u2236%M");
+                format = _('%A, %H\u2236%M');
             } else if (date.get_year() == now.get_year()) { // this year
                 /* Translators: this is the month name and day number
                  followed by a time string in 24h format.
                  i.e. "May 25, 14:30" */
                 // xgettext:no-c-format
-                format = _("%B %d, %H\u2236%M");
+                format = _('%B %d, %H\u2236%M');
             } else { // before this year
                 /* Translators: this is the month name, day number, year
                  number followed by a time string in 24h format.
                  i.e. "May 25 2012, 14:30" */
                 // xgettext:no-c-format
-                format = _("%B %d %Y, %H\u2236%M");
+                format = _('%B %d %Y, %H\u2236%M');
             }
         } else {
             if (daysAgo < 1) { // today
                 /* Translators: Time in 12h format */
-                format = _("%l\u2236%M %p");
+                format = _('%l\u2236%M %p');
             } else if (daysAgo < 2) { // yesterday
                 /* Translators: this is the word "Yesterday" followed by a
                  time string in 12h format. i.e. "Yesterday, 2:30 pm" */
                 // xgettext:no-c-format
-                format = _("Yesterday, %l\u2236%M %p");
+                format = _('Yesterday, %l\u2236%M %p');
             } else if (daysAgo < 7) { // this week
                 /* Translators: this is the week day name followed by a time
                  string in 12h format. i.e. "Monday, 2:30 pm" */
                 // xgettext:no-c-format
-                format = _("%A, %l\u2236%M %p");
+                format = _('%A, %l\u2236%M %p');
             } else if (date.get_year() == now.get_year()) { // this year
                 /* Translators: this is the month name and day number
                  followed by a time string in 12h format.
                  i.e. "May 25, 2:30 pm" */
                 // xgettext:no-c-format
-                format = _("%B %d, %l\u2236%M %p");
+                format = _('%B %d, %l\u2236%M %p');
             } else { // before this year
                 /* Translators: this is the month name, day number, year
                  number followed by a time string in 12h format.
                  i.e. "May 25 2012, 2:30 pm"*/
                 // xgettext:no-c-format
-                format = _("%B %d %Y, %l\u2236%M %p");
+                format = _('%B %d %Y, %l\u2236%M %p');
             }
         }
 

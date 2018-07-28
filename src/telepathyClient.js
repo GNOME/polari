@@ -408,7 +408,7 @@ class TelepathyClient extends Tp.BaseClient {
         });
 
         let reason = Tp.ChannelGroupChangeReason.NONE;
-        message = message || _("Good Bye");
+        message = message || _('Good Bye');
         room.channel.leave_async(reason, message, (c, res) => {
             try {
                 c.leave_finish(res);
@@ -588,11 +588,11 @@ class TelepathyClient extends Tp.BaseClient {
         let accountName = room.account.display_name;
         /* Translators: Those are a botname and an accountName, e.g.
            "Save NickServ password for GNOME" */
-        let summary = _("Save %s password for %s?").format(data.botname, accountName);
-        let text = _("Identification will happen automatically the next time you connect to %s").format(accountName);
+        let summary = _('Save %s password for %s?').format(data.botname, accountName);
+        let text = _('Identification will happen automatically the next time you connect to %s').format(accountName);
         let notification = this._createNotification(room, summary, text);
 
-        notification.add_button_with_target(_("Save"), 'app.save-identify-password',
+        notification.add_button_with_target(_('Save'), 'app.save-identify-password',
                                             new GLib.Variant('o', accountPath));
 
         this._app.send_notification(this._getIdentifyNotificationID(accountPath), notification);

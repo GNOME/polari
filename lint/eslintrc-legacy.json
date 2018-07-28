@@ -12,7 +12,6 @@
                 "ObjectExpression": "first",
                 "MemberExpression": "off"
             }
-        ],
-        "quotes": "off"
+        ]
    }
 }

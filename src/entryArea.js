@@ -369,19 +369,19 @@ var EntryArea = GObject.registerClass({
 
     pasteText(text, nLines) {
         this._confirmLabel.label =
-            ngettext("Paste %s line of text to public paste service?",
-                     "Paste %s lines of text to public paste service?",
+            ngettext('Paste %s line of text to public paste service?',
+                     'Paste %s lines of text to public paste service?',
                      nLines).format(nLines);
         this._uploadLabel.label =
-            ngettext("Uploading %s line of text to public paste service…",
-                     "Uploading %s lines of text to public paste service…",
+            ngettext('Uploading %s line of text to public paste service…',
+                     'Uploading %s lines of text to public paste service…',
                      nLines).format(nLines);
         this._setPasteContent(text);
     }
 
     pasteImage(pixbuf) {
-        this._confirmLabel.label = _("Upload image to public paste service?");
-        this._uploadLabel.label = _("Uploading image to public paste service…");
+        this._confirmLabel.label = _('Upload image to public paste service?');
+        this._uploadLabel.label = _('Uploading image to public paste service…');
         this._setPasteContent(pixbuf);
     }
 
@@ -402,9 +402,9 @@ var EntryArea = GObject.registerClass({
 
         let name = fileInfo.get_display_name();
         /* Translators: %s is a filename */
-        this._confirmLabel.label = _("Upload “%s” to public paste service?").format(name);
+        this._confirmLabel.label = _('Upload “%s” to public paste service?').format(name);
         /* Translators: %s is a filename */
-        this._uploadLabel.label = _("Uploading “%s” to public paste service…").format(name);
+        this._uploadLabel.label = _('Uploading “%s” to public paste service…').format(name);
         this._setPasteContent(file);
     }
 
@@ -413,9 +413,9 @@ var EntryArea = GObject.registerClass({
         let nick = this._room.channel.connection.self_contact.alias;
         if (this._room.type == Tp.HandleType.ROOM)
             /* translators: %s is a nick, #%s a channel */
-            title = _("%s in #%s").format(nick, this._room.display_name);
+            title = _('%s in #%s').format(nick, this._room.display_name);
         else
-            title = _("Paste from %s").format(nick);
+            title = _('Paste from %s').format(nick);
 
         let app = Gio.Application.get_default();
         try {

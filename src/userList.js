@@ -234,32 +234,32 @@ var UserDetails = GObject.registerClass({
 
     _formatLast(seconds) {
         if (seconds < 60)
-            return ngettext("%d second ago",
-                            "%d seconds ago", seconds).format(seconds);
+            return ngettext('%d second ago',
+                            '%d seconds ago', seconds).format(seconds);
 
         let minutes = seconds / 60;
         if (minutes < 60)
-            return ngettext("%d minute ago",
-                            "%d minutes ago", minutes).format(minutes);
+            return ngettext('%d minute ago',
+                            '%d minutes ago', minutes).format(minutes);
 
         let hours = minutes / 60;
         if (hours < 24)
-            return ngettext("%d hour ago",
-                            "%d hours ago", hours).format(hours);
+            return ngettext('%d hour ago',
+                            '%d hours ago', hours).format(hours);
 
         let days = hours / 24;
         if (days < 7)
-            return ngettext("%d day ago",
-                            "%d days ago", days).format(days);
+            return ngettext('%d day ago',
+                            '%d days ago', days).format(days);
 
         let weeks = days / 7;
         if (days < 30)
-            return ngettext("%d week ago",
-                            "%d weeks ago", weeks).format(weeks);
+            return ngettext('%d week ago',
+                            '%d weeks ago', weeks).format(weeks);
 
         let months = days / 30;
-        return ngettext("%d month ago",
-                        "%d months ago", months).format(months);
+        return ngettext('%d month ago',
+                        '%d months ago', months).format(months);
     }
 
     _onContactInfoReady() {
@@ -419,11 +419,11 @@ var UserPopover = GObject.registerClass({
 
         let label;
         if (status != roomStatus)
-            label = _("Available in another room.");
+            label = _('Available in another room.');
         else if (status == Tp.ConnectionPresenceType.AVAILABLE)
-            label = _("Online");
+            label = _('Online');
         else
-            label = _("Offline");
+            label = _('Offline');
         this._statusLabel.label = label;
 
         this._nickLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
@@ -579,7 +579,7 @@ class UserList extends Gtk.ScrolledWindow {
             visible: true
         }));
         placeholder.add(new Gtk.Label({
-            label: _("No results"),
+            label: _('No results'),
             visible: true
         }));
 

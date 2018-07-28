@@ -81,8 +81,8 @@ var InitialSetupWindow = GObject.registerClass({
 
         let isLastPage = page == SetupPage.ROOM;
 
-        this._prevButton.label = isLastPage ? _("_Back") : _("_Cancel");
-        this._nextButton.label = isLastPage ? _("_Done") : _("_Next");
+        this._prevButton.label = isLastPage ? _('_Back') : _('_Cancel');
+        this._nextButton.label = isLastPage ? _('_Done') : _('_Next');
 
         let context = this._nextButton.get_style_context();
         if (isLastPage)

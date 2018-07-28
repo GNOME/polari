@@ -120,7 +120,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
 
         let target = new GLib.Variant('o', this._room.account.object_path);
         let button = new Gtk.Button({
-            label: _("_Save Password"),
+            label: _('_Save Password'),
             use_underline: true,
             action_name: 'app.save-identify-password',
             action_target: target
@@ -130,7 +130,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._infoBar.get_content_area().add(box);
 
-        let title = _("Should the password be saved?");
+        let title = _('Should the password be saved?');
         this._titleLabel = new Gtk.Label({
             halign: Gtk.Align.START,
             valign: Gtk.Align.CENTER,
@@ -140,7 +140,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
         box.add(this._titleLabel);
 
         let accountName = this._room.account.display_name;
-        let text = _("Identification will happen automatically the next time you connect to %s").format(accountName);
+        let text = _('Identification will happen automatically the next time you connect to %s').format(accountName);
         this._subtitleLabel = new Gtk.Label({
             label: text,
             ellipsize: Pango.EllipsizeMode.END
@@ -173,11 +173,11 @@ class ChatPlaceholder extends Gtk.Overlay {
             halign: Gtk.Align.START,
             margin_start: 14
         });
-        title.label = `<span letter_spacing="4500">${_("Polari")}</span>`;
+        title.label = `<span letter_spacing="4500">${_('Polari')}</span>`;
         title.get_style_context().add_class('polari-background-title');
 
         let description = new Gtk.Label({
-            label: _("Join a room using the + button."),
+            label: _('Join a room using the + button.'),
             halign: Gtk.Align.CENTER, wrap: true,
             margin_top: 24, use_markup: true
         });

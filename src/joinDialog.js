@@ -231,7 +231,7 @@ var JoinDialog = GObject.registerClass({
         this._joinButton.visible = isMain;
         this._cancelButton.visible = isMain || isAccountsEmpty;
         this._backButton.visible = !(isMain || isAccountsEmpty);
-        this.title = isMain ? _("Join Chat Room") : _("Add Network");
+        this.title = isMain ? _('Join Chat Room') : _('Add Network');
         this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
         this._updateCanJoin();
     }

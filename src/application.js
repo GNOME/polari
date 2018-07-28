@@ -40,18 +40,18 @@ var Application = GObject.registerClass({
 
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _("Start Telepathy client"), null);
+                             _('Start Telepathy client'), null);
         // Only included for --help output, the actual option is handled
         // from C before handling over control to JS
         this.add_main_option('debugger', 'd',
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _("Start in debug mode"), null);
+                             _('Start in debug mode'), null);
         this.add_main_option('test-instance', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _("Allow running alongside another instance"), null);
+                             _('Allow running alongside another instance'), null);
         this.add_main_option('version', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _("Print version and exit"), null);
+                             _('Print version and exit'), null);
         this.connect('handle-local-options', (o, dict) => {
             let v = dict.lookup_value('test-instance', null);
             if (v && v.get_boolean())
@@ -436,7 +436,7 @@ var Application = GObject.registerClass({
             [,, server, port, room] = uri.match(IRC_SCHEMA_REGEX);
             success = true;
         } catch (e) {
-            let label = _("Failed to open link");
+            let label = _('Failed to open link');
             let n = new AppNotifications.MessageNotification(label,
                                                              'dialog-error-symbolic');
             this.notificationQueue.addNotification(n);
@@ -727,7 +727,7 @@ var Application = GObject.registerClass({
             account.set_enabled_finish(res);
             account.visible = false;
 
-            let label = _("%s removed.").format(account.display_name);
+            let label = _('%s removed.').format(account.display_name);
             let n = new AppNotifications.UndoNotification(label);
             this.notificationQueue.addNotification(n);
 
@@ -802,13 +802,13 @@ var Application = GObject.registerClass({
                 'Lapo Calamandrei <calamandrei@gmail.com>',
                 'Tobias Bernard <tbernard@gnome.org>'
             ],
-            translator_credits: _("translator-credits"),
-            comments: _("An Internet Relay Chat Client for GNOME"),
+            translator_credits: _('translator-credits'),
+            comments: _('An Internet Relay Chat Client for GNOME'),
             copyright: 'Copyright © 2013-2018 The Polari authors',
             license_type: Gtk.License.GPL_2_0,
             logo_icon_name: 'org.gnome.Polari',
             version: pkg.version,
-            website_label: _("Learn more about Polari"),
+            website_label: _('Learn more about Polari'),
             website: 'https://wiki.gnome.org/Apps/Polari',
 
             transient_for: this.active_window,

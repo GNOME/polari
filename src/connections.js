@@ -51,7 +51,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
         box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
 
         let insensitiveDesc = new Gtk.Label({
-            label: _("Already added"),
+            label: _('Already added'),
             hexpand: true,
             no_show_all: true,
             halign: Gtk.Align.END
@@ -114,7 +114,7 @@ var ConnectionsList = GObject.registerClass({
             visible: true
         }));
         placeholder.add(new Gtk.Label({
-            label: _("No results."),
+            label: _('No results.'),
             visible: true
         }));
 
@@ -516,7 +516,7 @@ var ConnectionProperties = GObject.registerClass({
     _init(account) {
         /* Translators: %s is a connection name */
         super._init({
-            title: _("“%s” Properties").format(account.display_name),
+            title: _('“%s” Properties').format(account.display_name),
             use_header_bar: 1
         });
 
@@ -560,7 +560,7 @@ var ConnectionProperties = GObject.registerClass({
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
         case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR):
             this._errorBox.show();
-            this._errorLabel.label = _("Polari disconnected due to a network error. Please check if the address field is correct.");
+            this._errorLabel.label = _('Polari disconnected due to a network error. Please check if the address field is correct.');
             this._details.setErrorHint(ErrorHint.SERVER);
             break;
         }

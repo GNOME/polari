@@ -103,12 +103,12 @@ function getTpEventTime() {
 }
 
 function storeAccountPassword(account, password, callback) {
-    let label = _("Polari server password for %s").format(account.display_name);
+    let label = _('Polari server password for %s').format(account.display_name);
     _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password, callback);
 }
 
 function storeIdentifyPassword(account, password, callback) {
-    let label = _("Polari NickServ password for %s").format(account.display_name);
+    let label = _('Polari NickServ password for %s').format(account.display_name);
     _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password, callback);
 }
 
@@ -183,7 +183,7 @@ function openURL(url, timestamp) {
         else
             Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
     } catch (e) {
-        let n = new AppNotifications.SimpleOutput(_("Failed to open link"));
+        let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
         app.notificationQueue.addNotification(n);
         debug(`Failed to open ${url}: ${e.message}`);
     }

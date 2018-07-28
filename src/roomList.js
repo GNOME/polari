@@ -190,7 +190,7 @@ var RoomRow = GObject.registerClass({
         if (!this._popover) {
             let menu = new Gio.Menu();
             let isRoom = this._room.type == Tp.HandleType.ROOM;
-            menu.append(isRoom ? _("Leave chatroom") : _("End conversation"),
+            menu.append(isRoom ? _('Leave chatroom') : _('End conversation'),
                         `app.leave-room(("${this._room.id}", ""))`);
 
             this._popover = Gtk.Popover.new_from_model(this, menu);
@@ -296,7 +296,7 @@ var RoomListHeader = GObject.registerClass({
         if (parent)
             parent.invalidate_sort();
 
-        let accessibleName = _("Network %s has an error").format(this._account.display_name);
+        let accessibleName = _('Network %s has an error').format(this._account.display_name);
         this.get_accessible().set_name(accessibleName);
     }
 
@@ -367,14 +367,14 @@ var RoomListHeader = GObject.registerClass({
 
             /* Translators: This is an account name followed by a
                server address, e.g. "GNOME (irc.gnome.org)" */
-            let fullTitle = _("%s (%s)").format(accountName, server);
+            let fullTitle = _('%s (%s)').format(accountName, server);
             this._popoverTitle.label = (accountName == server) ? accountName : fullTitle;
             this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
         } else {
             let styleContext = this._popoverStatus.get_style_context();
             styleContext.remove_class('dim-label');
 
-            this._popoverTitle.label = `<b>${_("Connection Problem")}<${'/'}b>`;
+            this._popoverTitle.label = `<b>${_('Connection Problem')}<${'/'}b>`;
             this._popoverStatus.label = this._getErrorLabel();
         }
     }
@@ -391,13 +391,13 @@ var RoomListHeader = GObject.registerClass({
     _getStatusLabel() {
         switch (this._getConnectionStatus()) {
         case Tp.ConnectionStatus.CONNECTED:
-            return _("Connected");
+            return _('Connected');
         case Tp.ConnectionStatus.CONNECTING:
-            return _("Connecting…");
+            return _('Connecting…');
         case Tp.ConnectionStatus.DISCONNECTED:
-            return _("Offline");
+            return _('Offline');
         default:
-            return _("Unknown");
+            return _('Unknown');
         }
     }
 
@@ -417,19 +417,19 @@ var RoomListHeader = GObject.registerClass({
         case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
         case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
         case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED):
-            return _("Could not connect to %s in a safe way.").format(this._account.display_name);
+            return _('Could not connect to %s in a safe way.').format(this._account.display_name);
 
         case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED):
-            return _("%s requires a password.").format(this._account.display_name);
+            return _('%s requires a password.').format(this._account.display_name);
 
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
         case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY):
-            return _("Could not connect to %s. The server is busy.").format(this._account.display_name);
+            return _('Could not connect to %s. The server is busy.').format(this._account.display_name);
 
         default:
-            return _("Could not connect to %s.").format(this._account.display_name);
+            return _('Could not connect to %s.').format(this._account.display_name);
         }
     }
 });
