@@ -322,7 +322,7 @@ var Application = GObject.registerClass({
 
         if (!this.active_window) {
             if (this._needsInitialSetup()) {
-                let setupDialog = new InitialSetupWindow({ application: this });
+                new InitialSetupWindow({ application: this });
                 this._windowRemovedId = this.connect('window-removed', () => {
                     this.disconnect(this._windowRemovedId);
                     this._windowRemovedId = 0;

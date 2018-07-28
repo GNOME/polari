@@ -519,7 +519,7 @@ class TelepathyClient extends Tp.BaseClient {
 
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel)) {
-                let authHandler = new SASLAuthHandler(channel);
+                new SASLAuthHandler(channel);
                 return;
             }
 
