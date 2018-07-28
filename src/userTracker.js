@@ -45,7 +45,7 @@ var UserStatusMonitor = class {
 };
 
 
-var UserTracker = GObject.registerClass({
+const UserTracker = GObject.registerClass({
     Signals: {
         'status-changed': {
             flags: GObject.SignalFlags.DETAILED,

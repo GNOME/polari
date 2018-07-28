@@ -7,7 +7,7 @@ const Mainloop = imports.mainloop;
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
-var AppNotification = GObject.registerClass(
+const AppNotification = GObject.registerClass(
 class AppNotification extends Gtk.Revealer {
     _init() {
         if (this.constructor.name == 'AppNotification')
@@ -90,7 +90,7 @@ var UndoNotification = GObject.registerClass({
     }
 });
 
-var CommandOutputNotification = GObject.registerClass(
+const CommandOutputNotification = GObject.registerClass(
 class CommandOutputNotification extends AppNotification {
     _init() {
         if (this.constructor.name == 'CommandOutputNotification')
