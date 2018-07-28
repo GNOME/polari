@@ -62,7 +62,7 @@ var ChatEntry = GObject.registerClass({
         super.vfunc_drag_data_received(context, x, y, data, info, time);
     }
 
-    vfunc_paste_clipboard(entry) {
+    vfunc_paste_clipboard() {
         if (!this.editable || this._useDefaultHandler) {
             super.vfunc_paste_clipboard();
             return;

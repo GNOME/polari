@@ -250,7 +250,7 @@ var UserDetails = GObject.registerClass({
                         "%d months ago", months).format(months);
     }
 
-    _onContactInfoReady(c, res) {
+    _onContactInfoReady() {
         this._initialDetailsLoaded = true;
 
         let fn, last;
