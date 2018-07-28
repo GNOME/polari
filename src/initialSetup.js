@@ -35,7 +35,7 @@ var InitialSetupWindow = GObject.registerClass({
         this.connect('destroy', () => this._unsetAccount());
 
         this._serverRoomList.connect('notify::can-join',
-                                     this._updateNextSensitivity.bind(this));
+            this._updateNextSensitivity.bind(this));
 
         this._nextButton.connect('clicked', () => {
             if (this._page == SetupPage.CONNECTION) {
@@ -58,7 +58,7 @@ var InitialSetupWindow = GObject.registerClass({
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._networkMonitor.connect('notify::network-available',
-                                     this._onNetworkAvailableChanged.bind(this));
+            this._onNetworkAvailableChanged.bind(this));
         if (this._networkMonitor.state_valid)
             this._onNetworkAvailableChanged();
     }

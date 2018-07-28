@@ -154,8 +154,8 @@ var MainWindow = GObject.registerClass({
         // the input area, but appear to emerge from it, so
         // set up an appropriate margin
         this._roomStack.bind_property('entry-area-height',
-                                      app.commandOutputQueue, 'margin-bottom',
-                                      GObject.BindingFlags.SYNC_CREATE);
+            app.commandOutputQueue, 'margin-bottom',
+            GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
         this._joinButton.connect('size-allocate', (w, rect) => {
@@ -168,16 +168,14 @@ var MainWindow = GObject.registerClass({
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('accounts-changed',
-                                      this._onAccountsChanged.bind(this));
+            this._onAccountsChanged.bind(this));
         this._onAccountsChanged(this._accountsMonitor);
 
         this._roomManager = RoomManager.getDefault();
-        this._roomsLoadedId =
-            this._roomManager.connect('rooms-loaded',
-                                      this._onRoomsLoaded.bind(this));
-        this._roomRemovedId =
-            this._roomManager.connect('room-removed',
-                                      this._onRoomRemoved.bind(this));
+        this._roomsLoadedId = this._roomManager.connect('rooms-loaded',
+            this._onRoomsLoaded.bind(this));
+        this._roomRemovedId = this._roomManager.connect('room-removed',
+            this._onRoomRemoved.bind(this));
         this._onRoomsLoaded();
 
         this._updateUserListLabel();
@@ -196,7 +194,7 @@ var MainWindow = GObject.registerClass({
         });
 
         this._gtkSettings.connect('notify::gtk-decoration-layout',
-                                  this._updateDecorations.bind(this));
+            this._updateDecorations.bind(this));
         this._updateDecorations();
 
         this.connect('window-state-event', this._onWindowStateEvent.bind(this));
@@ -249,7 +247,7 @@ var MainWindow = GObject.registerClass({
     _onDestroy() {
         this._settings.set_boolean ('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
-                                 GLib.Variant.new('ai', this._currentSize));
+            new GLib.Variant('ai', this._currentSize));
 
         let serializedChannel = null;
         if (this._lastActiveRoom) {
@@ -337,13 +335,13 @@ var MainWindow = GObject.registerClass({
 
         this._displayNameChangedId =
             this._room.connect('notify::display-name',
-                               this._updateTitlebar.bind(this));
+                this._updateTitlebar.bind(this));
         this._topicChangedId =
             this._room.connect('notify::topic',
-                               this._updateTitlebar.bind(this));
+                this._updateTitlebar.bind(this));
         this._membersChangedId =
             this._room.connect('members-changed',
-                               this._updateUserListLabel.bind(this));
+                this._updateUserListLabel.bind(this));
         this._channelChangedId =
             this._room.connect('notify::channel', () => {
                 this._updateUserListLabel();
@@ -390,8 +388,9 @@ var MainWindow = GObject.registerClass({
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
             numMembers = this._room.channel.group_dup_members_contacts().length;
 
-        let accessibleName = ngettext('%d user',
-                                      '%d users', numMembers).format(numMembers);
+        let accessibleName = ngettext(
+            '%d user',
+            '%d users', numMembers).format(numMembers);
         this._showUserListButton.get_accessible().set_name(accessibleName);
         this._showUserListButton.label = `${numMembers}`;
     }

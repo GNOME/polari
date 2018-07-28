@@ -86,8 +86,8 @@ var IrcParser = class {
             } else if (command) {
                 output = this._createFeedbackUsage(command);
             } else {
-                output = this._createFeedbackGrid(_('Known commands:'),
-                                                  Object.keys(knownCommands));
+                output = this._createFeedbackGrid(
+                    _('Known commands:'), Object.keys(knownCommands));
             }
             break;
         }
@@ -188,8 +188,8 @@ var IrcParser = class {
         case 'NAMES': {
             let channel = this._room.channel;
             let members = channel.group_dup_members_contacts().map(m => m.alias);
-            output = this._createFeedbackGrid(_('Users on %s:').format(channel.identifier),
-                                              members);
+            output = this._createFeedbackGrid(
+                _('Users on %s:').format(channel.identifier), members);
             break;
         }
         case 'NICK': {

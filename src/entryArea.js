@@ -192,7 +192,7 @@ var EntryArea = GObject.registerClass({
         this.connect('realize', () => {
             this._toplevel = this.get_toplevel();
             this._keyPressId = this._toplevel.connect('key-press-event',
-                                                      this._onKeyPressEvent.bind(this));
+                this._onKeyPressEvent.bind(this));
         });
         this.connect('map', () => {
             this._nickButton.popover = EntryArea._nickPopover;
@@ -278,17 +278,15 @@ var EntryArea = GObject.registerClass({
             return;
 
         this._completion = new TabCompletion(this._chatEntry);
-        this._membersChangedId =
-            this._room.connect('members-changed',
-                               this._updateCompletions.bind(this));
+        this._membersChangedId = this._room.connect('members-changed',
+            this._updateCompletions.bind(this));
         this._nicknameChangedId =
             this._room.account.connect('notify::nickname', () => {
                 if (!this._room.channel)
                     this._updateNick();
             });
-        this._channelChangedId =
-            this._room.connect('notify::channel',
-                               this._onChannelChanged.bind(this));
+        this._channelChangedId = this._room.connect('notify::channel',
+            this._onChannelChanged.bind(this));
         this._onChannelChanged(this._room);
 
         this._chatEntry.connect('map', this._updateCompletions.bind(this));
@@ -366,14 +364,14 @@ var EntryArea = GObject.registerClass({
     }
 
     pasteText(text, nLines) {
-        this._confirmLabel.label =
-            ngettext('Paste %s line of text to public paste service?',
-                     'Paste %s lines of text to public paste service?',
-                     nLines).format(nLines);
-        this._uploadLabel.label =
-            ngettext('Uploading %s line of text to public paste service…',
-                     'Uploading %s lines of text to public paste service…',
-                     nLines).format(nLines);
+        this._confirmLabel.label = ngettext(
+            'Paste %s line of text to public paste service?',
+            'Paste %s lines of text to public paste service?', nLines)
+        .format(nLines);
+        this._uploadLabel.label = ngettext(
+            'Uploading %s line of text to public paste service…',
+            'Uploading %s lines of text to public paste service…', nLines)
+        .format(nLines);
         this._setPasteContent(text);
     }
 
@@ -384,10 +382,11 @@ var EntryArea = GObject.registerClass({
     }
 
     pasteFile(file) {
-        file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
-                              Gio.FileQueryInfoFlags.NONE,
-                              GLib.PRIORITY_DEFAULT, null,
-                              this._onFileInfoReady.bind(this));
+        file.query_info_async(
+            Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT, null,
+            this._onFileInfoReady.bind(this));
     }
 
     _onFileInfoReady(file, res) {
@@ -447,7 +446,7 @@ var EntryArea = GObject.registerClass({
         if (room.channel) {
             this._selfAliasChangedId =
                 room.channel.connection.connect('notify::self-contact',
-                                                this._updateNick.bind(this));
+                    this._updateNick.bind(this));
         } else {
             this._selfAliasChangedId = 0;
         }

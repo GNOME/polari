@@ -50,9 +50,9 @@ var RoomStack = GObject.registerClass({
         let toplevel = this.get_toplevel();
 
         toplevel.connect('notify::active-room',
-                         this._activeRoomChanged.bind(this));
+            this._activeRoomChanged.bind(this));
         toplevel.connect('active-room-state-changed',
-                         this._updateSensitivity.bind(this));
+            this._updateSensitivity.bind(this));
         this._activeRoomChanged();
         this._updateSensitivity();
     }
@@ -200,8 +200,8 @@ class RoomView extends Gtk.Overlay {
         box.add(this._entryArea);
 
         this._view.bind_property('max-nick-chars',
-                                 this._entryArea, 'max-nick-chars',
-                                 GObject.BindingFlags.SYNC_CREATE);
+            this._entryArea, 'max-nick-chars',
+            GObject.BindingFlags.SYNC_CREATE);
         sizeGroup.add_widget(this._entryArea);
 
         this._view.connect('text-dropped', (view, text) => {

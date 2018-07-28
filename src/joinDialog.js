@@ -41,12 +41,10 @@ var JoinDialog = GObject.registerClass({
         this.get_header_bar().pack_start(this._backButton);
 
         let accelGroup = new Gtk.AccelGroup();
-        this._connectionButton.add_accelerator('clicked', accelGroup,
-                                               Gdk.KEY_n,
-                                               Gdk.ModifierType.CONTROL_MASK, 0);
-        this._backButton.add_accelerator('clicked', accelGroup,
-                                         Gdk.KEY_Left,
-                                         Gdk.ModifierType.MOD1_MASK, 0);
+        this._connectionButton.add_accelerator('clicked',
+            accelGroup, Gdk.KEY_n, Gdk.ModifierType.CONTROL_MASK, 0);
+        this._backButton.add_accelerator('clicked',
+            accelGroup, Gdk.KEY_Left, Gdk.ModifierType.MOD1_MASK, 0);
         this.add_accel_group(accelGroup);
 
         this._setupMainPage();
@@ -98,11 +96,11 @@ var JoinDialog = GObject.registerClass({
         });
 
         this._connectionCombo.connect('changed',
-                                      this._onAccountChanged.bind(this));
+            this._onAccountChanged.bind(this));
         this._connectionCombo.sensitive = false;
 
         this._serverRoomList.connect('notify::can-join',
-                                     this._updateCanJoin.bind(this));
+            this._updateCanJoin.bind(this));
     }
 
     _setupConnectionPage() {
@@ -118,9 +116,9 @@ var JoinDialog = GObject.registerClass({
         });
 
         this._connectionsList.connect('account-created',
-                                      this._onAccountCreated.bind(this));
+            this._onAccountCreated.bind(this));
         this._details.connect('account-created',
-                              this._onAccountCreated.bind(this));
+            this._onAccountCreated.bind(this));
 
         this._customToggle.connect('notify::active', () => {
             let isCustom = this._customToggle.active;

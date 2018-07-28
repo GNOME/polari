@@ -80,7 +80,7 @@ class TextView extends Gtk.TextView {
         let iter = this.buffer.get_iter_at_mark(mark);
         let location = this.get_iter_location(iter);
         let [, y] = this.buffer_to_window_coords(Gtk.TextWindowType.TEXT,
-                                                 location.x, location.y);
+            location.x, location.y);
 
         let tags = iter.get_tags();
         let pixelsAbove = tags.reduce((prev, current) => {
@@ -312,21 +312,21 @@ var ChatView = GObject.registerClass({
         });
 
         this.vadjustment.connect('value-changed',
-                                 this._onValueChanged.bind(this));
+            this._onValueChanged.bind(this));
         this.vadjustment.connect('changed', this._updateScroll.bind(this));
 
         this._view.connect('key-press-event', this._onKeyPress.bind(this));
         this._view.connect('motion-notify-event',
-                           this._handleButtonTagsHover.bind(this));
+            this._handleButtonTagsHover.bind(this));
         this._view.connect('enter-notify-event',
-                           this._handleButtonTagsHover.bind(this));
+            this._handleButtonTagsHover.bind(this));
         this._view.connect('leave-notify-event',
-                           this._handleButtonTagsHover.bind(this));
+            this._handleButtonTagsHover.bind(this));
         /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
            the default handler calls pango_cairo_context_set_resolution(), so
            update the indent after that */
         this._view.connect_after('style-updated',
-                                 this._updateIndent.bind(this));
+            this._updateIndent.bind(this));
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
@@ -354,25 +354,24 @@ var ChatView = GObject.registerClass({
             identifier: room.channel_name
         });
         let logManager = Tpl.LogManager.dup_singleton();
-        this._logWalker =
-            logManager.walk_filtered_events(room.account, target,
-                                            Tpl.EventTypeMask.TEXT, null);
+        this._logWalker = logManager.walk_filtered_events(
+            room.account, target,
+            Tpl.EventTypeMask.TEXT, null);
 
         this._fetchingBacklog = true;
         this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
-                                         this._onLogEventsReady.bind(this));
+            this._onLogEventsReady.bind(this));
 
         this._autoscroll = true;
 
         this._app = Gio.Application.get_default();
         DropTargetIface.addTargets(this, this._view);
 
-        this._roomFocusChangedId =
-            this._app.connect('room-focus-changed',
-                              this._checkMessages.bind(this));
+        this._roomFocusChangedId = this._app.connect('room-focus-changed',
+            this._checkMessages.bind(this));
 
-        this._hoverCursor = Gdk.Cursor.new_from_name(this.get_display(),
-                                                     'pointer');
+        this._hoverCursor = Gdk.Cursor.new_from_name(
+            this.get_display(), 'pointer');
 
         this._channelSignals = [];
         this._channel = null;
@@ -405,9 +404,8 @@ var ChatView = GObject.registerClass({
         });
         this._onChannelChanged();
 
-        this._nickStatusChangedId =
-            this._userTracker.watchRoomStatus(this._room, null,
-                                              this._onNickStatusChanged.bind(this));
+        this._nickStatusChangedId = this._userTracker.watchRoomStatus(
+            this._room, null, this._onNickStatusChanged.bind(this));
     }
 
     _createTags() {
@@ -471,9 +469,10 @@ var ChatView = GObject.registerClass({
         this._hoveredLinkColor = _getColor(context);
         context.restore();
 
-        let desaturatedNickColor = (this._activeNickColor.red +
-                                    this._activeNickColor.blue +
-                                    this._activeNickColor.green) / 3;
+        let desaturatedNickColor = (
+            this._activeNickColor.red +
+            this._activeNickColor.blue +
+            this._activeNickColor.green) / 3;
         this._inactiveNickColor = new Gdk.RGBA({
             red: desaturatedNickColor,
             green: desaturatedNickColor,
@@ -540,8 +539,8 @@ var ChatView = GObject.registerClass({
         this._backlogTimeoutId = 0;
 
         if (this._nickStatusChangedId) {
-            this._userTracker.unwatchRoomStatus(this._room,
-                                                this._nickStatusChangedId);
+            this._userTracker.unwatchRoomStatus(
+                this._room, this._nickStatusChangedId);
         }
         this._nickStatusChangedId = 0;
         this._userTracker = null;
@@ -667,8 +666,9 @@ var ChatView = GObject.registerClass({
     _updateIndent() {
         let context = this._view.get_pango_context();
         let metrics = context.get_metrics(null, null);
-        let charWidth = Math.max(metrics.get_approximate_char_width(),
-                                 metrics.get_approximate_digit_width());
+        let charWidth = Math.max(
+            metrics.get_approximate_char_width(),
+            metrics.get_approximate_digit_width());
         let pixelWidth = Pango.units_to_double(charWidth);
 
         let totalWidth = this._maxNickChars * pixelWidth + NICK_SPACING;
@@ -686,7 +686,7 @@ var ChatView = GObject.registerClass({
 
         if (this._pending.size == 0) {
             this._view.emit('move-cursor',
-                            Gtk.MovementStep.BUFFER_ENDS, 1, false);
+                Gtk.MovementStep.BUFFER_ENDS, 1, false);
         } else {
             this._autoscroll = false;
             let mark = [...this._pending.values()].shift();
@@ -714,14 +714,12 @@ var ChatView = GObject.registerClass({
         if (keyval === Gdk.KEY_Home ||
             keyval === Gdk.KEY_KP_Home) {
             this._view.emit('move-cursor',
-                            Gtk.MovementStep.BUFFER_ENDS,
-                            -1, false);
+                Gtk.MovementStep.BUFFER_ENDS, -1, false);
             return Gdk.EVENT_STOP;
         } else if (keyval === Gdk.KEY_End ||
                    keyval === Gdk.KEY_KP_End) {
             this._view.emit('move-cursor',
-                            Gtk.MovementStep.BUFFER_ENDS,
-                            1, false);
+                Gtk.MovementStep.BUFFER_ENDS, 1, false);
             return Gdk.EVENT_STOP;
         }
 
@@ -748,7 +746,7 @@ var ChatView = GObject.registerClass({
         this._showLoadingIndicator();
         this._backlogTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
             this._logWalker.get_events_async(NUM_LOG_EVENTS,
-                                             this._onLogEventsReady.bind(this));
+                this._onLogEventsReady.bind(this));
             this._backlogTimeoutId = 0;
             return GLib.SOURCE_REMOVE;
         });
@@ -805,7 +803,7 @@ var ChatView = GObject.registerClass({
     _handleButtonTagsHover(view, event) {
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
-                                                  eventX, eventY);
+            eventX, eventY);
         let [inside, iter] = view.get_iter_at_location(x, y);
 
         let hoveredButtonTags;
@@ -1057,8 +1055,9 @@ var ChatView = GObject.registerClass({
             buffer.tag_table.add(headerArrowTag);
             buffer.tag_table.add(groupTag);
 
-            groupTag.bind_property('invisible', headerArrowTag, 'invisible',
-                                   GObject.BindingFlags.INVERT_BOOLEAN);
+            groupTag.bind_property('invisible',
+                headerArrowTag, 'invisible',
+                GObject.BindingFlags.INVERT_BOOLEAN);
 
             headerTag.connect('clicked', () => {
                 groupTag.invisible = !groupTag.invisible;
@@ -1069,7 +1068,8 @@ var ChatView = GObject.registerClass({
             });
 
             this._ensureNewLine();
-            headerMark = buffer.create_mark('idle-status-start', buffer.get_end_iter(), true);
+            headerMark = buffer.create_mark('idle-status-start',
+                buffer.get_end_iter(), true);
         } else {
             headerTag = this._lookupTag(headerTagName);
             headerArrowTag = this._lookupTag(headerArrowTagName);
@@ -1089,12 +1089,18 @@ var ChatView = GObject.registerClass({
 
         let stats = [];
         if (this._statusCount.joined > 0) {
-            stats.push(ngettext('%d user joined',
-                                '%d users joined', this._statusCount.joined).format(this._statusCount.joined));
+            stats.push(
+                ngettext(
+                    '%d user joined',
+                    '%d users joined', this._statusCount.joined)
+                .format(this._statusCount.joined));
         }
         if (this._statusCount.left > 0) {
-            stats.push(ngettext('%d user left',
-                                '%d users left', this._statusCount.left).format(this._statusCount.left));
+            stats.push(
+                ngettext(
+                    '%d user left',
+                    '%d users left', this._statusCount.left)
+                .format(this._statusCount.left));
         }
         // TODO: How do we update the arrow direction when text direction change?
         let iter = buffer.get_iter_at_mark(headerMark);
@@ -1102,8 +1108,9 @@ var ChatView = GObject.registerClass({
         let headerText = stats.join(', ');
         let baseDir = Pango.find_base_dir(headerText, -1);
         this._insertWithTags(iter, headerText, tags);
-        this._insertWithTags(iter, baseDir == Pango.Direction.LTR ? '\u25B6' : '\u25C0',
-                             tags.concat(headerArrowTag));
+        this._insertWithTags(iter,
+            baseDir == Pango.Direction.LTR ? '\u25B6' : '\u25C0',
+            tags.concat(headerArrowTag));
         this._insertWithTags(iter, '\u25BC', tags.concat(groupTag));
     }
 
@@ -1143,14 +1150,16 @@ var ChatView = GObject.registerClass({
         let now = GLib.DateTime.new_now_local();
 
         // 00:01 actually, just to be safe
-        let todayMidnight = GLib.DateTime.new_local(now.get_year(),
-                                                    now.get_month(),
-                                                    now.get_day_of_month(),
-                                                    0, 1, 0);
-        let dateMidnight = GLib.DateTime.new_local(date.get_year(),
-                                                   date.get_month(),
-                                                   date.get_day_of_month(),
-                                                   0, 1, 0);
+        let todayMidnight = GLib.DateTime.new_local(
+            now.get_year(),
+            now.get_month(),
+            now.get_day_of_month(),
+            0, 1, 0);
+        let dateMidnight = GLib.DateTime.new_local(
+            date.get_year(),
+            date.get_month(),
+            date.get_day_of_month(),
+            0, 1, 0);
         let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
 
         let format;
@@ -1235,8 +1244,8 @@ var ChatView = GObject.registerClass({
     _insertMessage(iter, message, state) {
         let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
         let needsGap = message.nick != state.lastNick || isAction;
-        let highlight = this._room.should_highlight_message(message.nick,
-                                                            message.text);
+        let highlight = this._room.should_highlight_message(
+            message.nick, message.text);
 
         if (message.timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
             let tags = [this._lookupTag('timestamp')];
@@ -1244,8 +1253,7 @@ var ChatView = GObject.registerClass({
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
             this._insertWithTags(iter,
-                                 `${this._formatTimestamp(message.timestamp)}\n`,
-                                 tags);
+                `${this._formatTimestamp(message.timestamp)}\n`, tags);
         }
         state.lastTimestamp = message.timestamp;
 
@@ -1321,16 +1329,17 @@ var ChatView = GObject.registerClass({
             this._view.get_buffer().tag_table.add(tag);
 
             let name = url.name ? url.name : url.url;
-            this._insertWithTags(iter, name,
-                                 tags.concat(this._lookupTag('url'), tag));
+            this._insertWithTags(iter,
+                name, tags.concat(this._lookupTag('url'), tag));
 
             pos = url.pos + name.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
 
         if (highlight && message.pendingId) {
-            this._pending.set(message.pendingId,
-                              this._view.buffer.create_mark(null, iter, true));
+            this._pending.set(
+                message.pendingId,
+                this._view.buffer.create_mark(null, iter, true));
         }
     }
 
@@ -1364,7 +1373,7 @@ var ChatView = GObject.registerClass({
         let event = Gtk.get_current_event();
         let [, eventX, eventY] = event.get_coords();
         let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
-                                                  eventX, eventY);
+            eventX, eventY);
         let [inside_, start] = view.get_iter_at_location(x, y);
         let end = start.copy();
 

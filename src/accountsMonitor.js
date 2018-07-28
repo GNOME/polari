@@ -18,7 +18,7 @@ var AccountsMonitor = class {
 
         if (!this._app.isTestInstance) {
             this._app.connect('prepare-shutdown',
-                              this._onPrepareShutdown.bind(this));
+                this._onPrepareShutdown.bind(this));
         }
 
         let factory = new ClientFactory();

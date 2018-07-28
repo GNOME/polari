@@ -135,7 +135,7 @@ var RoomManager = class {
             channel: new GLib.Variant('s', channelName)
         });
         this._settings.set_value('saved-channel-list',
-                                 new GLib.Variant('aa{sv}', channels));
+            new GLib.Variant('aa{sv}', channels));
     }
 
     _removeSavedChannel(accountPath, channelName) {
@@ -145,7 +145,7 @@ var RoomManager = class {
             return;
         channels.splice(pos, 1);
         this._settings.set_value('saved-channel-list',
-                                 new GLib.Variant('aa{sv}', channels));
+            new GLib.Variant('aa{sv}', channels));
     }
 
     _removeSavedChannelsForAccount(accountPath) {
@@ -154,7 +154,7 @@ var RoomManager = class {
 
         channels = channels.filter(c => !c.account.equal(account));
         this._settings.set_value('saved-channel-list',
-                                 new GLib.Variant('aa{sv}', channels));
+            new GLib.Variant('aa{sv}', channels));
     }
 
     _ensureRoom(accountPath, channelName, type, time) {

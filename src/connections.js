@@ -42,8 +42,9 @@ class ConnectionRow extends Gtk.ListBoxRow {
         let name = NetworksManager.getDefault().getNetworkName(this._id);
         this.name = `ConnectionRow ${name}`;
 
-        this.bind_property('sensitive', this, 'activatable',
-                           GObject.BindingFlags.SYNC_CREATE);
+        this.bind_property('sensitive',
+            this, 'activatable',
+            GObject.BindingFlags.SYNC_CREATE);
 
         let box = new Gtk.Box({ spacing: 12, margin: 12 });
         this.add(box);
@@ -60,9 +61,10 @@ class ConnectionRow extends Gtk.ListBoxRow {
 
         this.show_all();
 
-        this.bind_property('sensitive', insensitiveDesc, 'visible',
-                           GObject.BindingFlags.SYNC_CREATE |
-                           GObject.BindingFlags.INVERT_BOOLEAN);
+        this.bind_property('sensitive',
+            insensitiveDesc, 'visible',
+            GObject.BindingFlags.SYNC_CREATE |
+            GObject.BindingFlags.INVERT_BOOLEAN);
     }
 
     get id() {
@@ -131,9 +133,8 @@ var ConnectionsList = GObject.registerClass({
             });
 
         this._networksManager = NetworksManager.getDefault();
-        let networksChangedId =
-            this._networksManager.connect('changed',
-                                          this._networksChanged.bind(this));
+        let networksChangedId = this._networksManager.connect('changed',
+            this._networksChanged.bind(this));
         this._networksChanged();
 
         this.connect('destroy', () => {
@@ -296,15 +297,15 @@ var ConnectionDetails = GObject.registerClass({
         });
 
         this._nameEntry.connect('changed',
-                                this._onCanConfirmChanged.bind(this));
+            this._onCanConfirmChanged.bind(this));
         this._serverEntry.connect('changed',
-                                  this._onCanConfirmChanged.bind(this));
+            this._onCanConfirmChanged.bind(this));
         this._nickEntry.connect('changed',
-                                this._onCanConfirmChanged.bind(this));
+            this._onCanConfirmChanged.bind(this));
         this._realnameEntry.connect('changed',
-                                    this._onCanConfirmChanged.bind(this));
+            this._onCanConfirmChanged.bind(this));
         this._sslCheckbox.connect('toggled',
-                                  this._onCanConfirmChanged.bind(this));
+            this._onCanConfirmChanged.bind(this));
 
         let realnameStore = new Gtk.ListStore();
         realnameStore.set_column_types([GObject.TYPE_STRING]);
@@ -535,7 +536,7 @@ var ConnectionProperties = GObject.registerClass({
         this.set_default_response(Gtk.ResponseType.OK);
 
         let id = account.connect('notify::connection-status',
-                                 this._syncErrorMessage.bind(this));
+            this._syncErrorMessage.bind(this));
         this._syncErrorMessage(account);
 
         this.connect('destroy', () => account.disconnect(id));

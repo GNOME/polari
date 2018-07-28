@@ -17,7 +17,7 @@ class AppNotification extends Gtk.Revealer {
             transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN
         });
         this.connect('notify::child-revealed',
-                     this._onChildRevealed.bind(this));
+            this._onChildRevealed.bind(this));
     }
 
     close() {
@@ -106,9 +106,10 @@ class CommandOutputNotification extends AppNotification {
         super._init();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
-        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT,
-                                 COMMAND_OUTPUT_REVEAL_TIME,
-                                 this.close.bind(this));
+        GLib.timeout_add_seconds(
+            GLib.PRIORITY_DEFAULT,
+            COMMAND_OUTPUT_REVEAL_TIME,
+            this.close.bind(this));
     }
 });
 

@@ -22,9 +22,9 @@ var ServerRoomManager = class {
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.connect('account-status-changed',
-                                      this._onAccountStatusChanged.bind(this));
+            this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-removed',
-                                      this._onAccountRemoved.bind(this));
+            this._onAccountRemoved.bind(this));
         this._accountsMonitor.prepare(() => {
             this._accountsMonitor.visibleAccounts.forEach(a => {
                 this._onAccountStatusChanged(this._accountsMonitor, a);
@@ -182,7 +182,7 @@ var ServerRoomList = GObject.registerClass({
         this._manager = ServerRoomManager.getDefault();
         let loadingChangedId =
             this._manager.connect('loading-changed',
-                                  this._onLoadingChanged.bind(this));
+                this._onLoadingChanged.bind(this));
 
         this.connect('destroy', () => {
             this.setAccount(null);
@@ -311,8 +311,9 @@ var ServerRoomList = GObject.registerClass({
         let roomManager = RoomManager.getDefault();
 
         this._idleId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-            let customName = this._store.get_value(this._customRoomItem,
-                                                   RoomListColumn.NAME);
+            let customName = this._store.get_value(
+                this._customRoomItem,
+                RoomListColumn.NAME);
             let store = this._store;
             let startTime = GLib.get_monotonic_time();
             while (this._pendingInfos.length > 0) {
@@ -324,7 +325,7 @@ var ServerRoomList = GObject.registerClass({
 
                 if (_strBaseEqual(name, customName)) {
                     store.set_value(this._customRoomItem,
-                                    RoomListColumn.NAME, customName = '');
+                        RoomListColumn.NAME, customName = '');
                 }
 
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
@@ -334,8 +335,8 @@ var ServerRoomList = GObject.registerClass({
 
                 let { CHECKED, NAME, COUNT, SENSITIVE } = RoomListColumn;
                 let iter = store.insert_with_valuesv(-1,
-                                                     [CHECKED, NAME, COUNT, SENSITIVE],
-                                                     [checked, name, count, sensitive]);
+                    [CHECKED, NAME, COUNT, SENSITIVE],
+                    [checked, name, count, sensitive]);
                 store.move_before(iter, this._customRoomItem);
 
                 let maxTime = this._filterTerms.length > 0 ?

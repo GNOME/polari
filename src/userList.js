@@ -30,9 +30,9 @@ class UserListPopover extends Gtk.Popover {
 
         let toplevel = this.get_toplevel();
         toplevel.connect('notify::active-room',
-                         this._activeRoomChanged.bind(this));
+            this._activeRoomChanged.bind(this));
         toplevel.connect('notify::view-height',
-                         this._updateContentHeight.bind(this));
+            this._updateContentHeight.bind(this));
     }
 
     _createWidget() {
@@ -45,7 +45,9 @@ class UserListPopover extends Gtk.Popover {
         this._revealer = new Gtk.Revealer();
         this._box.add(this._revealer);
 
-        this._userListBin = new Gtk.Frame({ shadow_type: Gtk.ShadowType.NONE });
+        this._userListBin = new Gtk.Frame({
+            shadow_type: Gtk.ShadowType.NONE
+        });
         this._box.add(this._userListBin);
 
         this._entry = new Gtk.SearchEntry({
@@ -90,7 +92,7 @@ class UserListPopover extends Gtk.Popover {
         this._userListBin.add(this._userList);
 
         this._userList.vadjustment.connect('changed',
-                                           this._updateEntryVisibility.bind(this));
+            this._updateEntryVisibility.bind(this));
         this._updateEntryVisibility();
         this._updateContentHeight();
     }
@@ -147,7 +149,7 @@ var UserDetails = GObject.registerClass({
         this.user = user;
 
         this._messageButton.connect('clicked',
-                                    this._onMessageButtonClicked.bind(this));
+            this._onMessageButtonClicked.bind(this));
 
         this._updateButtonVisibility();
         this._detailsGrid.hide();
@@ -184,7 +186,7 @@ var UserDetails = GObject.registerClass({
         if (this._user) {
             this._selfContactChangedId =
                 this._user.connection.connect('notify::self-contact',
-                                              this._updateButtonVisibility.bind(this));
+                    this._updateButtonVisibility.bind(this));
         }
 
         if (this.expanded)
@@ -231,8 +233,9 @@ var UserDetails = GObject.registerClass({
         this._cancellable = new Gio.Cancellable();
 
         if (this._user) {
-            this._user.request_contact_info_async(this._cancellable,
-                                                  this._onContactInfoReady.bind(this));
+            this._user.request_contact_info_async(
+                this._cancellable,
+                this._onContactInfoReady.bind(this));
         } else {
             //TODO: else use this._nickname to query tracker
             this._revealDetails();
@@ -249,37 +252,43 @@ var UserDetails = GObject.registerClass({
 
     _formatLast(seconds) {
         if (seconds < 60) {
-            return ngettext('%d second ago',
-                            '%d seconds ago', seconds).format(seconds);
+            return ngettext(
+                '%d second ago',
+                '%d seconds ago', seconds).format(seconds);
         }
 
         let minutes = seconds / 60;
         if (minutes < 60) {
-            return ngettext('%d minute ago',
-                            '%d minutes ago', minutes).format(minutes);
+            return ngettext(
+                '%d minute ago',
+                '%d minutes ago', minutes).format(minutes);
         }
 
         let hours = minutes / 60;
         if (hours < 24) {
-            return ngettext('%d hour ago',
-                            '%d hours ago', hours).format(hours);
+            return ngettext(
+                '%d hour ago',
+                '%d hours ago', hours).format(hours);
         }
 
         let days = hours / 24;
         if (days < 7) {
-            return ngettext('%d day ago',
-                            '%d days ago', days).format(days);
+            return ngettext(
+                '%d day ago',
+                '%d days ago', days).format(days);
         }
 
         let weeks = days / 7;
         if (days < 30) {
-            return ngettext('%d week ago',
-                            '%d weeks ago', weeks).format(weeks);
+            return ngettext(
+                '%d week ago',
+                '%d weeks ago', weeks).format(weeks);
         }
 
         let months = days / 30;
-        return ngettext('%d month ago',
-                        '%d months ago', months).format(months);
+        return ngettext(
+            '%d month ago',
+            '%d months ago', months).format(months);
     }
 
     _onContactInfoReady() {
@@ -405,17 +414,18 @@ var UserPopover = GObject.registerClass({
 
         this._basenick = basenick;
 
-        if (this._roomStatusChangedId > 0)
-            this._userTracker.unwatchRoomStatus(this._room, this._roomStatusChangedId);
-        this._roomStatusChangedId =
-            this._userTracker.watchRoomStatus(this._room, this._basenick,
-                                              this._onStatusChanged.bind(this));
+        if (this._roomStatusChangedId > 0) {
+            this._userTracker.unwatchRoomStatus(
+                this._room, this._roomStatusChangedId);
+        }
+        this._roomStatusChangedId = this._userTracker.watchRoomStatus(
+            this._room, this._basenick, this._onStatusChanged.bind(this));
 
         if (this._globalStatusChangedId > 0)
             this._userTracker.disconnect(this._globalStatusChangedId);
         this._globalStatusChangedId =
             this._userTracker.connect(`status-changed::${basenick}`,
-                                      this._onStatusChanged.bind(this));
+                this._onStatusChanged.bind(this));
 
         if (this._contactsChangedId > 0)
             this._userTracker.disconnect(this._contactsChangedId);
@@ -434,8 +444,8 @@ var UserPopover = GObject.registerClass({
 
     _onStatusChanged() {
         let status = this._userTracker.getNickStatus(this._nickname);
-        let roomStatus = this._userTracker.getNickRoomStatus(this._nickname,
-                                                             this._room);
+        let roomStatus = this._userTracker.getNickRoomStatus(
+            this._nickname, this._room);
 
         let label;
         if (status != roomStatus)
@@ -467,10 +477,10 @@ class UserListRow extends Gtk.ListBoxRow {
             this._revealer.reveal_child = false;
         });
         this.connect('state-flags-changed',
-                     this._updateArrowVisibility.bind(this));
+            this._updateArrowVisibility.bind(this));
 
         this._revealer.connect('notify::reveal-child',
-                               this._onExpandedChanged.bind(this));
+            this._onExpandedChanged.bind(this));
     }
 
     get user() {
@@ -549,8 +559,11 @@ class UserListRow extends Gtk.ListBoxRow {
             this._label.label = this._user.alias;
         } else {
             let preMatch = this._user.alias.substring(0, filterIndex);
-            let theMatch = this._user.alias.substring(filterIndex, filterIndex + this._filter.length);
-            let postMatch = this._user.alias.substring(filterIndex + this._filter.length);
+            let theMatch = this._user.alias.substring(
+                filterIndex,
+                filterIndex + this._filter.length);
+            let postMatch = this._user.alias.substring(
+                filterIndex + this._filter.length);
             this._label.label = `${preMatch}<b>${theMatch}<${'/'}b>${postMatch}`;
         }
     }

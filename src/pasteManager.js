@@ -34,11 +34,12 @@ var PasteManager = class {
     }
 
     _pasteFile(file, title, callback) {
-        file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
-                              Gio.FileQueryInfoFlags.NONE,
-                              GLib.PRIORITY_DEFAULT, null, (file, res) => {
-                                  this._onFileQueryFinish(file, res, title, callback);
-                              });
+        file.query_info_async(
+            Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+            Gio.FileQueryInfoFlags.NONE,
+            GLib.PRIORITY_DEFAULT, null, (file, res) => {
+                this._onFileQueryFinish(file, res, title, callback);
+            });
     }
 
     _onFileQueryFinish(file, res, title, callback) {
@@ -104,7 +105,7 @@ var DropTargetIface = GObject.registerClass({
         widget.connect('drag-leave', this._onDragLeave.bind(this));
         widget.connect('drag-motion', this._onDragMotion.bind(this));
         widget.connect_after('drag-data-received',
-                             this._onDragDataReceived.bind(this));
+            this._onDragDataReceived.bind(this));
     }
 
     _onDragDrop(widget, context, _x, _y, time) {

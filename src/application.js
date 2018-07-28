@@ -39,19 +39,19 @@ var Application = GObject.registerClass({
         this._windowRemovedId = 0;
 
         this.add_main_option('start-client', 0,
-                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _('Start Telepathy client'), null);
+            GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+            _('Start Telepathy client'), null);
         // Only included for --help output, the actual option is handled
         // from C before handling over control to JS
         this.add_main_option('debugger', 'd',
-                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _('Start in debug mode'), null);
+            GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+            _('Start in debug mode'), null);
         this.add_main_option('test-instance', 0,
-                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _('Allow running alongside another instance'), null);
+            GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+            _('Allow running alongside another instance'), null);
         this.add_main_option('version', 0,
-                             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
-                             _('Print version and exit'), null);
+            GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
+            _('Print version and exit'), null);
         this.connect('handle-local-options', (o, dict) => {
             let v = dict.lookup_value('test-instance', null);
             if (v && v.get_boolean())
@@ -99,8 +99,8 @@ var Application = GObject.registerClass({
         let proxy = null;
 
         try {
-            proxy = Gio.DBusProxy.new_sync(conn, flags, null,
-                                           name, opath, iface, null);
+            proxy = Gio.DBusProxy.new_sync(
+                conn, flags, null, name, opath, iface, null);
         } catch (e) {}
 
         return proxy != null && proxy.get_name_owner() != null;
@@ -152,20 +152,20 @@ var Application = GObject.registerClass({
 
         GLib.setenv('IDLE_PERSIST', '1', false);
         this._ensureService(conn,
-                            Tp.ACCOUNT_MANAGER_BUS_NAME,
-                            Tp.ACCOUNT_MANAGER_OBJECT_PATH,
-                            Tp.ACCOUNT_MANAGER_BUS_NAME,
-                            '/app/libexec/mission-control-5');
+            Tp.ACCOUNT_MANAGER_BUS_NAME,
+            Tp.ACCOUNT_MANAGER_OBJECT_PATH,
+            Tp.ACCOUNT_MANAGER_BUS_NAME,
+            '/app/libexec/mission-control-5');
         this._ensureService(conn,
-                            `${Tp.CM_BUS_NAME_BASE}idle`,
-                            `${Tp.CM_OBJECT_PATH_BASE}idle`,
-                            'org.freedesktop.Telepathy.ConnectionManager',
-                            '/app/libexec/telepathy-idle');
+            `${Tp.CM_BUS_NAME_BASE}idle`,
+            `${Tp.CM_OBJECT_PATH_BASE}idle`,
+            'org.freedesktop.Telepathy.ConnectionManager',
+            '/app/libexec/telepathy-idle');
         this._ensureService(conn,
-                            `${Tp.CLIENT_BUS_NAME_BASE}Logger`,
-                            `${Tp.CLIENT_OBJECT_PATH_BASE}Logger`,
-                            Tp.IFACE_CLIENT,
-                            '/app/libexec/telepathy-logger');
+            `${Tp.CLIENT_BUS_NAME_BASE}Logger`,
+            `${Tp.CLIENT_OBJECT_PATH_BASE}Logger`,
+            Tp.IFACE_CLIENT,
+            '/app/libexec/telepathy-logger');
         return true;
     }
 
@@ -286,8 +286,9 @@ var Application = GObject.registerClass({
             if (actionEntry.change_state)
                 action.connect('change-state', actionEntry.change_state);
             if (actionEntry.accels) {
-                this.set_accels_for_action(`app.${actionEntry.name}`,
-                                           actionEntry.accels);
+                this.set_accels_for_action(
+                    `app.${actionEntry.name}`,
+                    actionEntry.accels);
             }
             this.add_action(action);
         });
@@ -328,7 +329,7 @@ var Application = GObject.registerClass({
         }
 
         this._accountsMonitor.connect('account-status-changed',
-                                      this._onAccountStatusChanged.bind(this));
+            this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-added', (am, account) => {
             // Reset nickname at startup
             let accountName = this._getTrimmedAccountName(account);
@@ -354,8 +355,8 @@ var Application = GObject.registerClass({
             logError(e, 'Failed to add application style');
         }
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-                                                 provider,
-                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     vfunc_activate() {
@@ -379,9 +380,9 @@ var Application = GObject.registerClass({
                     this.emit('prepare-shutdown');
                 });
                 window.connect('notify::active-room',
-                               () => this.emit('room-focus-changed'));
+                    () => this.emit('room-focus-changed'));
                 window.connect('notify::is-active',
-                               () => this.emit('room-focus-changed'));
+                    () => this.emit('room-focus-changed'));
             }
         }
 
@@ -401,7 +402,7 @@ var Application = GObject.registerClass({
         action.enabled = window.active_room != null;
 
         window.connect('active-room-state-changed',
-                       this._updateUserListAction.bind(this));
+            this._updateUserListAction.bind(this));
         this._updateUserListAction();
     }
 
@@ -440,8 +441,9 @@ var Application = GObject.registerClass({
             });
 
             if (matches.length) {
-                joinAction.activate(new GLib.Variant('(ssu)',
-                                                     [matches[0], `#${room}`, time]));
+                joinAction.activate(new GLib.Variant('(ssu)', [
+                    matches[0], `#${room}`, time
+                ]));
             } else {
                 this._createAccount(matchedId, server, port, a => {
                     if (a) {
@@ -463,8 +465,8 @@ var Application = GObject.registerClass({
             success = true;
         } catch (e) {
             let label = _('Failed to open link');
-            let n = new AppNotifications.MessageNotification(label,
-                                                             'dialog-error-symbolic');
+            let n = new AppNotifications.MessageNotification(
+                label, 'dialog-error-symbolic');
             this.notificationQueue.addNotification(n);
         }
 

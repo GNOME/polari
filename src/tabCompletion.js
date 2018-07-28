@@ -67,8 +67,9 @@ var TabCompletion = class {
 
         let allocation = this._entry.get_allocation();
         let [ret_, x, y] = win.get_origin();
-        x += allocation.x + Math.min((layoutX + wordPos.x) / Pango.SCALE,
-                                     allocation.width - width);
+        x += allocation.x + Math.min(
+            (layoutX + wordPos.x) / Pango.SCALE,
+            allocation.width - width);
         y += allocation.y - height;
         this._popup.move(x, y);
         this._popup.show();

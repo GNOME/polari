@@ -46,15 +46,16 @@ const SASLAbortReason = {
 class SASLAuthHandler {
     constructor(channel) {
         this._channel = channel;
-        this._proxy = new SASLAuthProxy(Gio.DBus.session,
-                                        channel.bus_name,
-                                        channel.object_path,
-                                        this._onProxyReady.bind(this));
+        this._proxy = new SASLAuthProxy(
+            Gio.DBus.session,
+            channel.bus_name,
+            channel.object_path,
+            this._onProxyReady.bind(this));
     }
 
     _onProxyReady() {
         this._proxy.connectSignal('SASLStatusChanged',
-                                  this._onSASLStatusChanged.bind(this));
+            this._onSASLStatusChanged.bind(this));
 
         let account = this._channel.connection.get_account();
         Utils.lookupAccountPassword(account, this._onPasswordReady.bind(this));
@@ -62,12 +63,13 @@ class SASLAuthHandler {
 
     _onPasswordReady(password) {
         if (password) {
-            this._proxy.StartMechanismWithDataRemote('X-TELEPATHY-PASSWORD',
-                                                     password);
+            this._proxy.StartMechanismWithDataRemote(
+                'X-TELEPATHY-PASSWORD', password);
         } else {
-            this._proxy.AbortSASLRemote(SASLAbortReason.USER_ABORT,
-                                        'Password not available',
-                                        this._resetPrompt.bind(this));
+            this._proxy.AbortSASLRemote(
+                SASLAbortReason.USER_ABORT,
+                'Password not available',
+                this._resetPrompt.bind(this));
         }
     }
 
@@ -101,7 +103,7 @@ class SASLAuthHandler {
         account.update_parameters_vardict_async(params, [], (a, res) => {
             a.update_parameters_vardict_finish(res);
             account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
-                                           'available', '', null);
+                'available', '', null);
         });
     }
 }
@@ -231,7 +233,7 @@ class TelepathyClient extends Tp.BaseClient {
         this.register();
 
         this._accountsMonitor.connect('account-status-changed',
-                                      this._onAccountStatusChanged.bind(this));
+            this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-added', (mon, account) => {
             this._connectAccount(account);
         });
@@ -243,10 +245,10 @@ class TelepathyClient extends Tp.BaseClient {
         });
 
         this._networkMonitor.connect('network-changed',
-                                     this._onNetworkChanged.bind(this));
+            this._onNetworkChanged.bind(this));
         if (this._networkMonitor.state_valid) {
             this._onNetworkChanged(this._networkMonitor,
-                                   this._networkMonitor.network_available);
+                this._networkMonitor.network_available);
         }
     }
 
@@ -562,9 +564,9 @@ class TelepathyClient extends Tp.BaseClient {
             }
 
             channel.connect('message-received',
-                            this._onMessageReceived.bind(this));
+                this._onMessageReceived.bind(this));
             channel.connect('pending-message-removed',
-                            this._onPendingMessageRemoved.bind(this));
+                this._onPendingMessageRemoved.bind(this));
 
             this._roomManager.ensureRoomForChannel(channel, 0);
         });
@@ -644,8 +646,9 @@ class TelepathyClient extends Tp.BaseClient {
         let text = _('Identification will happen automatically the next time you connect to %s').format(accountName);
         let notification = this._createNotification(room, summary, text);
 
-        notification.add_button_with_target(_('Save'), 'app.save-identify-password',
-                                            new GLib.Variant('o', accountPath));
+        notification.add_button_with_target(_('Save'),
+            'app.save-identify-password',
+            new GLib.Variant('o', accountPath));
 
         this._app.send_notification(this._getIdentifyNotificationID(accountPath), notification);
     }

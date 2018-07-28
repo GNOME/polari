@@ -18,9 +18,9 @@ var UserStatusMonitor = class {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._accountsMonitor.connect('account-added',
-                                      this._onAccountAdded.bind(this));
+            this._onAccountAdded.bind(this));
         this._accountsMonitor.connect('account-removed',
-                                      this._onAccountRemoved.bind(this));
+            this._onAccountRemoved.bind(this));
 
         this._accountsMonitor.accounts.forEach(a => {
             this._onAccountAdded(this._accountsMonitor, a);
