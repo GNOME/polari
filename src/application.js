@@ -20,7 +20,7 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-const AUTOSTART_DIR = GLib.get_user_config_dir() + '/autostart';
+const AUTOSTART_DIR = `${GLib.get_user_config_dir()}/autostart`;
 const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
 
 var Application = GObject.registerClass({
@@ -71,7 +71,7 @@ var Application = GObject.registerClass({
 
             v = dict.lookup_value('version', null);
             if (v && v.get_boolean()) {
-                print("Polari %s".format(pkg.version));
+                print(`Polari ${pkg.version}`);
                 return 0;
             }
 
@@ -107,12 +107,12 @@ var Application = GObject.registerClass({
     }
 
     _ensureService(conn, name, opath, iface, command) {
-        debug('Trying to ensure service %s'.format(name));
+        debug(`Trying to ensure service ${name}`);
 
         if (this._checkService(conn, name, opath, iface))
             return;
 
-        log('Failed to activate service %s, starting manually'.format(name));
+        log(`Failed to activate service ${name}, starting manually`);
 
         let proc = new Gio.Subprocess({ argv: [command] });
 
@@ -157,13 +157,13 @@ var Application = GObject.registerClass({
                             Tp.ACCOUNT_MANAGER_BUS_NAME,
                             '/app/libexec/mission-control-5');
         this._ensureService(conn,
-                            Tp.CM_BUS_NAME_BASE + 'idle',
-                            Tp.CM_OBJECT_PATH_BASE + 'idle',
+                            `${Tp.CM_BUS_NAME_BASE}idle`,
+                            `${Tp.CM_OBJECT_PATH_BASE}idle`,
                             'org.freedesktop.Telepathy.ConnectionManager',
                             '/app/libexec/telepathy-idle');
         this._ensureService(conn,
-                            Tp.CLIENT_BUS_NAME_BASE + 'Logger',
-                            Tp.CLIENT_OBJECT_PATH_BASE + 'Logger',
+                            `${Tp.CLIENT_BUS_NAME_BASE}Logger`,
+                            `${Tp.CLIENT_OBJECT_PATH_BASE}Logger`,
                             Tp.IFACE_CLIENT,
                             '/app/libexec/telepathy-logger');
         return true;
@@ -263,7 +263,7 @@ var Application = GObject.registerClass({
             if (actionEntry.change_state)
                 action.connect('change-state', actionEntry.change_state);
             if (actionEntry.accels)
-                this.set_accels_for_action('app.' + actionEntry.name,
+                this.set_accels_for_action(`app.${actionEntry.name}`,
                                            actionEntry.accels);
             this.add_action(action);
         });
@@ -277,7 +277,7 @@ var Application = GObject.registerClass({
         this._onRunInBackgroundChanged();
 
         for (let i = 1; i < 10; i++)
-            this.set_accels_for_action('app.nth-room(%d)'.format(i), ['<Alt>' + i]);
+            this.set_accels_for_action(`app.nth-room(${i})`, [`<Alt>${i}`]);
 
         this._telepathyClient = null;
 
@@ -401,13 +401,13 @@ var Application = GObject.registerClass({
 
             if (matches.length)
                 joinAction.activate(new GLib.Variant('(ssu)',
-                                                     [matches[0], '#' + room, time]));
+                                                     [matches[0], `#${room}`, time]));
             else
                 this._createAccount(matchedId, server, port, a => {
                     if (a)
                         joinAction.activate(new GLib.Variant('(ssu)',
                                                              [a.get_object_path(),
-                                                              '#' + room, time]));
+                                                              `#${room}`, time]));
                 });
         });
     }
@@ -481,14 +481,14 @@ var Application = GObject.registerClass({
             return true;
         }
 
-        let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
-                                      '/polari/initial-setup-completed');
+        let path = `${GLib.get_user_cache_dir()}/polari/initial-setup-completed`;
+        let f = Gio.File.new_for_path(path);
         try {
             this._touchFile(f);
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 return false; // initial setup has completed
-            log('Failed to mark initial setup as completed: ' + e.message);
+            log(`Failed to mark initial setup as completed: ${e.message}`);
         }
 
         let savedRooms = this._settings.get_value('saved-channel-list');
@@ -542,7 +542,7 @@ var Application = GObject.registerClass({
         let baseNick = Polari.util_get_basenick(nominalNick);
 
         let tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
-        let contactsChangedId = tracker.connect('contacts-changed::' + baseNick,
+        let contactsChangedId = tracker.connect(`contacts-changed::${baseNick}`,
             (t, nick) => {
                 if (nick != nominalNick)
                     return;
@@ -577,7 +577,7 @@ var Application = GObject.registerClass({
         let server = params['server'];
         let accountName = params['account'];
         let port = params['port'];
-        debug('Failed to connect to %s with username %s'.format(server, accountName));
+        debug(`Failed to connect to ${server} with username ${accountName}`);
 
         let accountServers = [];
         if (this._networksManager.getAccountIsPredefined(account))
@@ -623,8 +623,8 @@ var Application = GObject.registerClass({
         let oldParams = account.dup_parameters_vardict().deep_unpack();
         let nick = oldParams['account'].deep_unpack();
 
-        debug('Retrying with nickname %s'.format(nick + '_'));
-        let params = { account: new GLib.Variant('s', nick + '_') };
+        debug(`Retrying with nickname ${nick}_`);
+        let params = { account: new GLib.Variant('s', `${nick}_`) };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
     }
@@ -636,7 +636,7 @@ var Application = GObject.registerClass({
         if (!server)
             return false;
 
-        debug('Retrying with %s:%d'.format(server.address, server.port));
+        debug(`Retrying with ${server.address}:${server.port}`);
         let params = { server: new GLib.Variant('s', server.address),
                        port: new GLib.Variant('u', server.port),
                        'use-ssl': new GLib.Variant('b', server.ssl) };
@@ -663,9 +663,9 @@ var Application = GObject.registerClass({
                     return;
 
             if (reason != Tp.ConnectionStatusReason.REQUESTED) {
-                let strReasons = Object.keys(Tp.ConnectionStatusReason);
-                debug('Account %s disconnected with reason %s'
-                    .format(account.display_name, strReasons[reason]));
+                let strReason = Object.keys(Tp.ConnectionStatusReason)[reason];
+                let name = account.display_name;
+                debug(`Account ${name} disconnected with reason ${strReason}`);
 
                 // Connection failed, keep tp from retrying over and over
                 let presence = Tp.ConnectionPresenceType.OFFLINE;
@@ -748,21 +748,21 @@ var Application = GObject.registerClass({
     }
 
     _onRunInBackgroundChanged() {
-        let file = Gio.File.new_for_path(AUTOSTART_DIR + AUTOSTART_FILE);
+        let file = Gio.File.new_for_path(`${AUTOSTART_DIR}${AUTOSTART_FILE}`);
 
         if (this._settings.get_boolean('run-in-background'))
             try {
-                this._createLink(file, pkg.pkgdatadir + AUTOSTART_FILE);
+                this._createLink(file, `${pkg.pkgdatadir}${AUTOSTART_FILE}`);
             } catch (e) {
                 if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                    log('Failed to create autostart link: ' + e.message);
+                    log(`Failed to create autostart link: ${e.message}`);
             }
         else
             try {
                 file.delete(null);
             } catch (e) {
                 if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
-                    log('Failed to remove autostart link: ' + e.message);
+                    log(`Failed to remove autostart link: ${e.message}`);
             }
     }
 

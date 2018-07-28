@@ -72,7 +72,7 @@ class SASLAuthHandler {
     _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
         let statusString = (Object.keys(SASLStatus))[status];
-        debug('Auth status for server "%s": %s'.format(name, statusString));
+        debug(`Auth status for server "${name}": ${statusString}`);
 
         switch (status) {
             case SASLStatus.NOT_STARTED:
@@ -201,8 +201,7 @@ class TelepathyClient extends Tp.BaseClient {
     _onNetworkChanged(mon, connected) {
         let presence = connected ? Tp.ConnectionPresenceType.AVAILABLE
                                  : Tp.ConnectionPresenceType.OFFLINE;
-        debug('Network changed to %s'.format(connected ? 'available'
-                                                       : 'unavailable'));
+        debug(`Network changed to ${connected ? 'available' : 'unavailable'}`);
 
         this._accountsMonitor.visibleAccounts.forEach(a => {
             this._setAccountPresence(a, presence);
@@ -236,13 +235,12 @@ class TelepathyClient extends Tp.BaseClient {
         let msg = account.requested_status_message;
         let accountName = account.display_name;
 
-        debug('Setting presence of account "%s" to %s'.format(accountName,
-                                                              status));
+        debug(`Setting presence of account "${accountName}" to ${status}`);
         account.request_presence_async(presence, status, msg, (o, res) => {
             try {
                 account.request_presence_finish(res);
             } catch (e) {
-                log('Connection failed: ' + e.message);
+                log(`Connection failed: ${e.message}`);
             }
         });
     }
@@ -276,14 +274,14 @@ class TelepathyClient extends Tp.BaseClient {
         req.set_target_id(targetType, targetId);
         req.set_delegate_to_preferred_handler(true);
 
-        let preferredHandler = Tp.CLIENT_BUS_NAME_BASE + 'Polari';
+        let preferredHandler = `${Tp.CLIENT_BUS_NAME_BASE}Polari`;
         req.ensure_and_observe_channel_async(preferredHandler, cancellable,
             (o, res) => {
                 let channel = null;
                 try {
                     channel = req.ensure_and_observe_channel_finish(res);
                 } catch (e) {
-                    debug('Failed to ensure channel: ' + e.message);
+                    debug(`Failed to ensure channel: ${e.message}`);
                 }
 
                 if (callback)
@@ -316,7 +314,7 @@ class TelepathyClient extends Tp.BaseClient {
                     try {
                         r.send_identify_message_finish(res);
                     } catch (e) {
-                        log('Failed to send identify message: ' + e.message);
+                        log(`Failed to send identify message: ${e.message}`);
                     }
                     this._connectRooms(account);
                 });
@@ -333,7 +331,7 @@ class TelepathyClient extends Tp.BaseClient {
                 try {
                     c.send_message_finish(res);
                 } catch (e) {
-                    log('Failed to send message: ' + e.message);
+                    log(`Failed to send message: ${e.message}`);
                 }
             });
     }
@@ -414,7 +412,7 @@ class TelepathyClient extends Tp.BaseClient {
             try {
                 c.leave_finish(res);
             } catch (e) {
-                log('Failed to leave channel: ' + e.message);
+                log(`Failed to leave channel: ${e.message}`);
             }
         });
     }
@@ -534,11 +532,11 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _getPendingNotificationID(room, id) {
-        return 'pending-message-%s-%d'.format(room.id, id);
+        return `pending-message-${room.id}-${id}`;
     }
 
     _getIdentifyNotificationID(accountPath) {
-        return 'identify-password-%s'.format(accountPath);
+        return `identify-password-${accountPath}`;
     }
 
     _createNotification(room, summary, body) {

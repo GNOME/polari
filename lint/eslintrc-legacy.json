@@ -16,7 +16,6 @@
                 "SwitchCase": 1
             }
         ],
-        "prefer-template": "off",
         "quotes": "off"
    }
 }

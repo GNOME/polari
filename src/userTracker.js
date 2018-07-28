@@ -203,7 +203,7 @@ const UserTracker = GObject.registerClass({
         if (room.type == Tp.HandleType.ROOM) {
             let map = this._baseNickContacts;
             if (this._pushMember(map, baseNick, member) == 1) {
-                this.emit("status-changed::" + baseNick, baseNick, status);
+                this.emit(`status-changed::${baseNick}`, baseNick, status);
 
                 if (this._shouldNotifyNick(member.alias))
                     this._notifyNickAvailable(member, room);
@@ -212,7 +212,7 @@ const UserTracker = GObject.registerClass({
             }
         }
 
-        this.emit("contacts-changed::" + baseNick, member.alias);
+        this.emit(`contacts-changed::${baseNick}`, member.alias);
     }
 
     _popMember(map, baseNick, member) {
@@ -237,7 +237,7 @@ const UserTracker = GObject.registerClass({
         [found, nContacts] = this._popMember(map, baseNick, member);
         if (found) {
             if (nContacts == 0) {
-                this.emit("status-changed::" + baseNick, member.alias, status);
+                this.emit(`status-changed::${baseNick}`, member.alias, status);
                 this._setNotifyActionEnabled(member.alias, true);
 
                 this._app.withdraw_notification(this._getNotifyActionNameInternal(member.alias));
@@ -248,7 +248,7 @@ const UserTracker = GObject.registerClass({
                 for (let r of this._roomData.keys())
                     this._untrackMember(member, r);
             }
-            this.emit("contacts-changed::" + baseNick, member.alias);
+            this.emit(`contacts-changed::${baseNick}`, member.alias);
         }
     }
 
@@ -330,9 +330,9 @@ const UserTracker = GObject.registerClass({
     }
 
     _getNotifyActionNameInternal(nickName) {
-        return 'notify-user-' +
-               this._account.get_path_suffix() + '-' +
-               Polari.util_get_basenick(nickName);
+        let pathSuffix = this._account.get_path_suffix();
+        let baseNick = Polari.util_get_basenick(nickName);
+        return `notify-user-${pathSuffix}-${baseNick}`;
     }
 
     getNotifyActionName(nickName) {
@@ -355,6 +355,6 @@ const UserTracker = GObject.registerClass({
             this._app.add_action(action);
         }
 
-        return 'app.' + name;
+        return `app.${name}`;
     }
 });

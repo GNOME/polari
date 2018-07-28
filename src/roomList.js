@@ -185,7 +185,7 @@ var RoomRow = GObject.registerClass({
             let menu = new Gio.Menu();
             let isRoom = this._room.type == Tp.HandleType.ROOM;
             menu.append(isRoom ? _("Leave chatroom") : _("End conversation"),
-                        'app.leave-room(("%s", ""))'.format(this._room.id));
+                        `app.leave-room(("${this._room.id}", ""))`);
 
             this._popover = Gtk.Popover.new_from_model(this, menu);
             this._popoverVisibleChangedId =
@@ -361,12 +361,12 @@ var RoomListHeader = GObject.registerClass({
                server address, e.g. "GNOME (irc.gnome.org)" */
             let fullTitle = _("%s (%s)").format(accountName, server);
             this._popoverTitle.label = (accountName == server) ? accountName : fullTitle;
-            this._popoverStatus.label = '<sup>' + this._getStatusLabel() + '</sup>';
+            this._popoverStatus.label = `<sup>${this._getStatusLabel()}</sup>`;
         } else {
             let styleContext = this._popoverStatus.get_style_context();
             styleContext.remove_class('dim-label');
 
-            this._popoverTitle.label = '<b>' + _("Connection Problem") + '</b>';
+            this._popoverTitle.label = `<b>${_("Connection Problem")}</b>`;
             this._popoverStatus.label = this._getErrorLabel();
         }
     }

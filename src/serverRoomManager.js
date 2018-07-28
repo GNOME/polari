@@ -328,7 +328,7 @@ var ServerRoomList = GObject.registerClass({
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
                 let sensitive = room == null;
                 let checked = !sensitive;
-                let count = '%d'.format(roomInfo.get_members_count(null));
+                let count = `${roomInfo.get_members_count(null)}`;
 
                 let { CHECKED, NAME, COUNT, SENSITIVE } = RoomListColumn;
                 let iter = store.insert_with_valuesv(-1,

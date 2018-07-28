@@ -56,6 +56,7 @@ const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\
 // a lot of false positives, so whitelist some useful ones and hope nobody complains :-)
 const _schemeWhitelist = ['geo', 'mailto', 'man', 'info', 'ghelp', 'help'];
 
+/* eslint-disable prefer-template */
 const _urlRegexp = new RegExp(
     '(^|' + _leadingJunk + ')' +
     '(' +
@@ -81,6 +82,7 @@ const _urlRegexp = new RegExp(
             _notTrailingJunk +                    // last non-junk char
         ')' +
     ')', 'gi');
+/* eslint-enable prefer-template */
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)', 'g');
 
@@ -119,8 +121,8 @@ function _storePassword(schema, label, account, password, callback) {
             let success = Secret.password_store_finish(res);
             callback(success);
         } catch (e) {
-            log('Failed to store password for account "%s": %s'.format(
-                account.display_name, e.message));
+            let name = account.display_name;
+            log(`Failed to store password for account "${name}": ${e.message}`);
             callback(false);
         }
     });
@@ -141,8 +143,8 @@ function _lookupPassword(schema, account, callback) {
             let password = Secret.password_lookup_finish(res);
             callback(password);
         } catch (e) {
-            log('Failed to lookup password for account "%s": %s'.format(
-                account.display_name, e.message));
+            let name = account.display_name;
+            log(`Failed to lookup password for account "${name}": ${e.message}`);
             callback(null);
         }
     });
@@ -166,8 +168,8 @@ function findUrls(str) {
 function findChannels(str, server) {
     let res = [], match;
     while ((match = _channelRegexp.exec(str)))
-        res.push({ url: 'irc://%s/%s'.format(server, match[2]),
-                   name: '#' + match[2],
+        res.push({ url: `irc://${server}/${match[2]}`,
+                   name: `#${match[2]}`,
                    pos: match.index + match[1].length });
     return res;
 }
@@ -182,7 +184,7 @@ function openURL(url, timestamp) {
     } catch (e) {
         let n = new AppNotifications.SimpleOutput(_("Failed to open link"));
         app.notificationQueue.addNotification(n);
-        debug("failed to open %s: %s".format(url, e.message));
+        debug(`Failed to open ${url}: ${e.message}`);
     }
 }
 
@@ -202,7 +204,7 @@ function updateTerms(terms, str) {
 
 function _getGpasteExpire(callback) {
     let session = new Soup.Session();
-    let paramUrl = GPASTE_BASEURL + 'api/json/parameter/expire';
+    let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
     let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
     session.queue_message(message, (s, message) => {
         if (message.status_code != Soup.KnownStatusCode.OK) {
@@ -241,7 +243,7 @@ function gpaste(text, title, callback) {
     }
 
     if (title.length > MAX_PASTE_TITLE_LENGTH)
-        title = title.substr(0, MAX_PASTE_TITLE_LENGTH - 1) + '…';
+        title = `${title.substr(0, MAX_PASTE_TITLE_LENGTH - 1)}…`;
 
     let params = {
         title: title,
@@ -251,7 +253,7 @@ function gpaste(text, title, callback) {
     };
 
     let session = new Soup.Session();
-    let createUrl = GPASTE_BASEURL + 'api/json/create';
+    let createUrl = `${GPASTE_BASEURL}api/json/create`;
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
     session.queue_message(message, (s, message) => {
         if (message.status_code != Soup.KnownStatusCode.OK) {
@@ -266,7 +268,7 @@ function gpaste(text, title, callback) {
             log(e.message);
         }
         if (info.result && info.result.id)
-            callback(GPASTE_BASEURL + info.result.id);
+            callback(`${GPASTE_BASEURL}${info.result.id}`);
         else
             callback(null);
     });
@@ -289,7 +291,7 @@ function imgurPaste(pixbuf, title, callback) {
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
 
     let requestHeaders = message.request_headers;
-    requestHeaders.append('Authorization', 'Client-ID ' + IMGUR_CLIENT_ID);
+    requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
     session.queue_message(message, (s, message) => {
         if (message.status_code != Soup.KnownStatusCode.OK) {
             callback(null);

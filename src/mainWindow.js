@@ -262,14 +262,15 @@ var MainWindow = GObject.registerClass({
     }
 
     _onDeleteEvent() {
-        let f = Gio.File.new_for_path(GLib.get_user_cache_dir() +
-                                      '/polari/close-confirmation-shown');
+        let f = Gio.File.new_for_path(
+            `${GLib.get_user_cache_dir()}/polari/close-confirmation-shown`
+        );
         try {
             this._touchFile(f);
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
                 return Gdk.EVENT_PROPAGATE; // the dialog has been shown
-            log('Failed to mark confirmation dialog as shown: ' + e.message);
+            log(`Failed to mark confirmation dialog as shown: ${e.message}`);
         }
 
         this._closeConfirmationDialog.show();
@@ -287,10 +288,10 @@ var MainWindow = GObject.registerClass({
 
         let layout = this._gtkSettings.gtk_decoration_layout;
         if (layout) {
-            let split = layout.split(':');
+            let [buttonsLeft, buttonsRight] = layout.split(':');
 
-            layoutLeft = split[0] + ':';
-            layoutRight = ':' + split[1];
+            layoutLeft = `${buttonsLeft}:`;
+            layoutRight = `:${buttonsRight}`;
         }
 
         this._titlebarLeft.set_decoration_layout(layoutLeft);
@@ -383,7 +384,7 @@ var MainWindow = GObject.registerClass({
         let accessibleName = ngettext("%d user",
                                       "%d users", numMembers).format(numMembers);
         this._showUserListButton.get_accessible().set_name(accessibleName);
-        this._showUserListButton.label = '%d'.format(numMembers);
+        this._showUserListButton.label = `${numMembers}`;
     }
 
     _updateTitlebar() {
@@ -393,10 +394,11 @@ var MainWindow = GObject.registerClass({
             let pos = 0;
             for (let i = 0; i < urls.length; i++) {
                 let url = urls[i];
-                let text = this._room.topic.substr(pos, url.pos - pos);
+                let text = GLib.markup_escape_text(
+                    this._room.topic.substr(pos, url.pos - pos), -1
+                );
                 let urlText = GLib.markup_escape_text(url.url, -1);
-                subtitle += GLib.markup_escape_text(text, -1) +
-                            '<a href="%s">%s</a>'.format(urlText, urlText);
+                subtitle += `${text} <a href="${urlText}">${urlText}</a>`;
                 pos = url.pos + url.url.length;
             }
             subtitle += GLib.markup_escape_text(this._room.topic.substr(pos), -1);
