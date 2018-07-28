@@ -1,13 +1,3 @@
-script_conf = configuration_data()
-script_conf.set('GJS', gjs_console.path())
-
-script = 'polari-accounts'
-configure_file(
-  input: script + '.in',
-  output: script,
-  configuration: script_conf
-)
-
 data_resources = gnome.compile_resources(
   'data-resources',
   '../data/@0@.data.gresource.xml'.format(app_id),
