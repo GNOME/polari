@@ -35,8 +35,8 @@ js_xml = []
 foreach js_source : js_sources
   js_xml += '    <file>@0@</file>'.format(js_source)
 
-  if (js52.found())
-    test('Checking syntax of ' + js_source, js52,
+  if (js_shell.found())
+    test('Checking syntax of ' + js_source, js_shell,
       args: ['-s', '-c', js_source],
       workdir: meson.current_source_dir()
     )
