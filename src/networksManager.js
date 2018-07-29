@@ -17,6 +17,8 @@ var NetworksManager = class {
         let success, data;
         try {
             [success, data, ] = file.load_contents(null);
+            if (data instanceof Uint8Array)
+                data = String.fromCodePoint(...data);
             this._parseNetworks(data);
         } catch(e) {
             log('Failed to load network list: ' + e.message);
