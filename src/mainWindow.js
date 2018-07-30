@@ -248,9 +248,9 @@ var MainWindow = GObject.registerClass({
         try {
             file.get_parent().make_directory_with_parents(null);
         } catch(e) {
-            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                return; // not an error, carry on
-            throw e;
+            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+                throw e;
+            // not an error, carry on
         }
 
         let stream = file.create(0, null);
