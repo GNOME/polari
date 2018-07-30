@@ -134,6 +134,8 @@ var MainWindow = GObject.registerClass({
 
         if (app.isTestInstance)
             this.get_style_context().add_class('test-instance');
+        if (GLib.get_application_name().toLowerCase().includes('snapshot'))
+            this.get_style_context().add_class('snapshot');
 
         // command output notifications should not pop up over
         // the input area, but appear to emerge from it, so
