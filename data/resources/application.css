@@ -209,9 +209,17 @@ treeview.polari-server-room-list {
 
 /* Differentiate test instance from "normal" ones */
 window.test-instance headerbar:last-child {
-    background-image: -gtk-icontheme('system-run-symbolic');
-    background-blend-mode: color-burn;
+    background-image: cross-fade(25% -gtk-icontheme('system-run-symbolic'));
     background-repeat: no-repeat;
     background-position: 1em center;
     background-size: 4em;
+}
+
+/* Differentiate snapshot builds from regular ones */
+window.snapshot headerbar { background: none; }
+window.snapshot .titlebar {
+    background: linear-gradient(to left, #a5b1bd 0%, #a5b1bd 8%, @theme_bg_color 25%);
+    box-shadow: inset 0 1px #f1f3f5;
+    border-color: #909fae;
+    color: alpha(@theme_fg_color, 0.4);
 }
