@@ -4,7 +4,6 @@ const Tp = imports.gi.TelepathyGLib;
 
 const ChatView = imports.chatView;
 const {DropTargetIface} = imports.pasteManager;
-const {EmojiPicker} = imports.emojiPicker;
 const {IrcParser} = imports.ircParser;
 const {TabCompletion} = imports.tabCompletion;
 
@@ -28,29 +27,17 @@ var ChatEntry = GObject.registerClass({
         return this.__checker;
     }
 
-    static get _emojiPicker() {
-        if (!this.__emojiPicker)
-            this.__emojiPicker = new EmojiPicker();
-        return this.__emojiPicker;
-    }
-
     _init(params) {
         super._init(params);
 
         DropTargetIface.addTargets(this, this);
 
-        this._emojiPickedId = 0;
-
-        this.connect('icon-press', this._showEmojiPicker.bind(this));
-        this.connect('unmap', () => {
-            if (this._emojiPickedId)
-                ChatEntry._emojiPicker.disconnect(this._emojiPickedId);
-            this._emojiPickedId = 0;
-        });
-
         let app = Gio.Application.get_default();
         let action = app.lookup_action('show-emoji-picker');
-        action.connect('activate', this._showEmojiPicker.bind(this));
+        action.connect('activate', () => {
+            if (this.is_sensitive() && this.get_mapped())
+                this.emit('insert-emoji');
+        });
 
         let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
         buffer.set_spell_checker (ChatEntry._checker);
@@ -59,25 +46,6 @@ var ChatEntry = GObject.registerClass({
         spellEntry.set_inline_spell_checking(true);
 
         this._useDefaultHandler = false;
-    }
-
-    _showEmojiPicker() {
-        if (!this.is_sensitive() || !this.get_mapped())
-            return;
-
-        if (!this._emojiPickedId)
-            this._emojiPickedId = ChatEntry._emojiPicker.connect('emoji-picked',
-                (w, emoji) => {
-                    this.delete_selection();
-                    let pos = this.insert_text(emoji, -1, this.get_position());
-                    this.set_position(pos);
-                    this.grab_focus_without_selecting();
-                });
-
-        let rect = this.get_icon_area(Gtk.EntryIconPosition.SECONDARY);
-        ChatEntry._emojiPicker.set_relative_to(this);
-        ChatEntry._emojiPicker.set_pointing_to(rect);
-        ChatEntry._emojiPicker.popup();
     }
 
     get can_drop() {

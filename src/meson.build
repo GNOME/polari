@@ -11,7 +11,6 @@ js_sources = [
   'appNotifications.js',
   'chatView.js',
   'connections.js',
-  'emojiPicker.js',
   'entryArea.js',
   'initialSetup.js',
   'ircParser.js',

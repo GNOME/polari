@@ -44,7 +44,7 @@
           <object class="Gjs_ChatEntry" id="chatEntry">
             <property name="visible">True</property>
             <property name="hexpand">True</property>
-            <property name="secondary-icon-name">face-smile-symbolic</property>
+            <property name="show-emoji-icon">True</property>
           </object>
         </child>
       </object>
