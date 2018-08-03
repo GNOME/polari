@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-03-05 15:04+0000\n"
-"PO-Revision-Date: 2018-03-06 21:53+0100\n"
+"POT-Creation-Date: 2018-07-30 04:19+0000\n"
+"PO-Revision-Date: 2018-07-30 22:09+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Bookmarks: 77,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
-#: src/roomStack.js:160
+#: src/roomStack.js:156
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:812
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Odjemalec za IRC za GNOME"
 
@@ -167,7 +167,7 @@ msgid "_Real Name"
 msgstr "_Pravo ime"
 
 #: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
-#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:82
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:79
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -290,7 +290,7 @@ msgstr ""
 "Izberite sobe, v katere si želite povezati. Te je mogoče dodati tudi kasneje "
 "s klikom na gumb +."
 
-#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:231
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:227
 msgid "Join Chat Room"
 msgstr "Pridruži se klepetalnici"
 
@@ -366,23 +366,23 @@ msgstr "Spremeni vzdevek:"
 msgid "_Change"
 msgstr "_Spremeni"
 
-#: data/resources/room-list-header.ui:146
+#: data/resources/room-list-header.ui:145
 msgid "Connect"
 msgstr "Poveži"
 
-#: data/resources/room-list-header.ui:154
+#: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "Ponovno poveži"
 
-#: data/resources/room-list-header.ui:162
+#: data/resources/room-list-header.ui:159
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#: data/resources/room-list-header.ui:170
+#: data/resources/room-list-header.ui:166
 msgid "Remove"
 msgstr "Odstrani"
 
-#: data/resources/room-list-header.ui:178
+#: data/resources/room-list-header.ui:173
 msgid "Properties"
 msgstr "Lastnosti"
 
@@ -406,9 +406,13 @@ msgstr "Obvestilo se pokaže, ko se uporabnik pojavi v klepetalnici."
 msgid "Start Conversation"
 msgstr "Začni pogovor"
 
-#: src/application.js:47
+#: src/application.js:42
 msgid "Start Telepathy client"
 msgstr "Zaženi odjemalec Telepathy"
+
+#: src/application.js:47
+msgid "Start in debug mode"
+msgstr "Omogoči razhroščevalni način"
 
 #: src/application.js:50
 msgid "Allow running alongside another instance"
@@ -418,80 +422,80 @@ msgstr "Dovoli sočasen zagon več primerkov programa"
 msgid "Print version and exit"
 msgstr "Izpiši različico programa in končaj"
 
-#: src/application.js:420 src/utils.js:184
+#: src/application.js:420 src/utils.js:179
 msgid "Failed to open link"
 msgstr "Odpiranje povezave je spodletelo"
 
-#: src/application.js:705
+#: src/application.js:707
 #, javascript-format
 msgid "%s removed."
 msgstr "%s je odstranjen."
 
-#: src/application.js:807
+#: src/application.js:811
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
-#: src/application.js:813
+#: src/application.js:817
 msgid "Learn more about Polari"
 msgstr "Več podrobnosti o programu Polari"
 
-#: src/appNotifications.js:79
+#: src/appNotifications.js:77
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: src/chatView.js:138
+#: src/chatView.js:131
 msgid "New Messages"
 msgstr "Novo sporočilo"
 
-#: src/chatView.js:762
+#: src/chatView.js:755
 msgid "Open Link"
 msgstr "Odpri povezavo"
 
-#: src/chatView.js:768
+#: src/chatView.js:761
 msgid "Copy Link Address"
 msgstr "Kopiraj naslov povezave"
 
-#: src/chatView.js:936
+#: src/chatView.js:929
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je preimenovan v %s"
 
-#: src/chatView.js:941
+#: src/chatView.js:934
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s je prekinil povezavo"
 
-#: src/chatView.js:949
+#: src/chatView.js:942
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s je bil odstranjen s strani %s"
 
-#: src/chatView.js:951
+#: src/chatView.js:944
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s je bil odstranjen"
 
-#: src/chatView.js:957
+#: src/chatView.js:950
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s je dobil prepoved s strani %s"
 
-#: src/chatView.js:959
+#: src/chatView.js:952
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s je dobil prepoved"
 
-#: src/chatView.js:964
+#: src/chatView.js:957
 #, javascript-format
 msgid "%s joined"
 msgstr "%s je vstopil v klepetalnico."
 
-#: src/chatView.js:969
+#: src/chatView.js:962
 #, javascript-format
 msgid "%s left"
 msgstr "%s preostalo"
 
-#: src/chatView.js:1062
+#: src/chatView.js:1055
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -500,7 +504,7 @@ msgstr[1] "Pridružil se je %d uporabnik"
 msgstr[2] "Pridružil sta se %d uporabnika"
 msgstr[3] "Pridružil so se %d uporabniki"
 
-#: src/chatView.js:1065
+#: src/chatView.js:1058
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -511,14 +515,14 @@ msgstr[3] "Odjavili so se %d uporabniki"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1132
+#: src/chatView.js:1125
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1137
+#: src/chatView.js:1130
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včeraj, %H:%M"
@@ -526,7 +530,7 @@ msgstr "Včeraj, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1142
+#: src/chatView.js:1135
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -535,7 +539,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1148
+#: src/chatView.js:1141
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
@@ -544,21 +548,21 @@ msgstr "%B %d, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1154
+#: src/chatView.js:1147
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%B %d %Y, %H∶%M"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1159
+#: src/chatView.js:1152
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1164
+#: src/chatView.js:1157
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včeraj, %l:%M %p"
@@ -566,7 +570,7 @@ msgstr "Včeraj, %l:%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1169
+#: src/chatView.js:1162
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -575,7 +579,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1175
+#: src/chatView.js:1168
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
@@ -584,26 +588,26 @@ msgstr "%B %d, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1181
+#: src/chatView.js:1174
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
 
-#: src/connections.js:52
+#: src/connections.js:50
 msgid "Already added"
 msgstr "Že dodano"
 
-#: src/connections.js:107
+#: src/connections.js:105
 msgid "No results."
 msgstr "Ni najdenih zadetkov."
 
 #. Translators: %s is a connection name
-#: src/connections.js:492
+#: src/connections.js:490
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Lastnosti »%s«"
 
-#: src/connections.js:536
+#: src/connections.js:534
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -611,7 +615,7 @@ msgstr ""
 "Povezava je prekinjena zaradi napake omrežja. Preverite, ali je naslovno "
 "polje zapisano pravilno."
 
-#: src/entryArea.js:400
+#: src/entryArea.js:393
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -624,7 +628,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Ali želite poslati %s vrstice besedila na javno spletno odložišče ..."
 
-#: src/entryArea.js:404
+#: src/entryArea.js:397
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -633,46 +637,46 @@ msgstr[1] "Pošiljanje %s vrstice besedila na javno spletno odložišče ..."
 msgstr[2] "Pošiljanje %s vrstic besedila na javno spletno odložišče ..."
 msgstr[3] "Pošiljanje %s vrstic besedila na javno spletno odložišče ..."
 
-#: src/entryArea.js:411
+#: src/entryArea.js:404
 msgid "Upload image to public paste service?"
 msgstr "Ali želite poslati sliko na javno spletno odložišče ..."
 
-#: src/entryArea.js:412
+#: src/entryArea.js:405
 msgid "Uploading image to public paste service…"
 msgstr "Pošiljanje slike na javno spletno odložišče ..."
 
 #. Translators: %s is a filename
-#: src/entryArea.js:433
+#: src/entryArea.js:426
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Ali želite poslati »%s« na javno spletno odložišče?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:435
+#: src/entryArea.js:428
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Pošiljanje »%s« na javno spletno odložišče …"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:444
+#: src/entryArea.js:437
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s v #%s"
 
-#: src/entryArea.js:446
+#: src/entryArea.js:439
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Prilepi iz %s"
 
-#: src/initialSetup.js:82
+#: src/initialSetup.js:79
 msgid "_Back"
 msgstr "_Nazaj"
 
-#: src/initialSetup.js:83
+#: src/initialSetup.js:80
 msgid "_Done"
 msgstr "_Končano"
 
-#: src/initialSetup.js:83
+#: src/initialSetup.js:80
 msgid "_Next"
 msgstr "_Naslednji"
 
@@ -685,12 +689,12 @@ msgstr "_Naslednji"
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:23
+#: src/ircParser.js:22
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr "/CLOSE [<kanal>] [<vzrok>] – zapre <kanal>, privzeto zapre trenutnega"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:23
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -698,88 +702,88 @@ msgstr ""
 "/HELP [<ukaz>] – izpiše pomoč za <ukaz> oziroma izpiše seznam razpoložljivih "
 "ukazov"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:24
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <vzdevek> [<kanal>] – pošlje povabilo uporabniku z vzdevkom "
 "<vzdevek> na kanal <kanal> oziroma na trenutni kanal"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:25
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN [<kanal>] – pridruži uporabnika na <kanal>"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:26
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK [<vzdevek>] – brcne uporabnika <vzdevek> s trenutnega kanala"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:27
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <dejanje> – pošlje <dejanje> na trenutni kanal"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:28
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr ""
 "/MSG <vzdevek> [<sporočilo>] – pošlje zasebno sporočilo uporabniku <vzdevek>"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:29
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES – izpiše seznam vseh uporabnikov na trenutnem kanalu"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:30
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <vzdevek> – nastavi <vzdevek> na trenutnem kanalu"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:31
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr "/PART [<kanal>] [<vzrok>] – zapusti <kanal>, privzeto trenutnega"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:32
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <vzdevek> – odpre zasebno okno pogovora z uporabnikom <vzdevek>"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:33
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<vzrok>] – prekine povezavo s trenutnim strežnikom"
 
-#: src/ircParser.js:35
+#: src/ircParser.js:34
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr ""
 "/SAY <besedilo> – pošlje <besedilo> v trenutno klepetalnico ali izbrani osebi"
 
-#: src/ircParser.js:36
+#: src/ircParser.js:35
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <tema> – nastavi želeno <temo> oziroma prikaže trenutno"
 
-#: src/ircParser.js:39
+#: src/ircParser.js:38
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "Neznan ukaz – poskusite možnost /HELP za seznam vseh razpoložljivih ukazov"
 
-#: src/ircParser.js:53
+#: src/ircParser.js:52
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Uporaba: %s"
 
-#: src/ircParser.js:89
+#: src/ircParser.js:88
 msgid "Known commands:"
 msgstr "Znani ukazi:"
 
-#: src/ircParser.js:188
+#: src/ircParser.js:187
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Uporabniki na %s:"
 
-#: src/ircParser.js:267
+#: src/ircParser.js:266
 msgid "No topic set"
 msgstr "Ni določene teme"
 
-#: src/joinDialog.js:232
+#: src/joinDialog.js:228
 msgid "Add Network"
 msgstr "Dodaj omrežje"
 
-#: src/mainWindow.js:382
+#: src/mainWindow.js:379
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -788,108 +792,108 @@ msgstr[1] "%d uporabnik"
 msgstr[2] "%d uporabnika"
 msgstr[3] "%d uporabniki"
 
-#: src/roomList.js:189
+#: src/roomList.js:185
 msgid "Leave chatroom"
 msgstr "Zapusti klepetalnico"
 
-#: src/roomList.js:189
+#: src/roomList.js:185
 msgid "End conversation"
 msgstr "Končaj pogovor"
 
-#: src/roomList.js:288
+#: src/roomList.js:289
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Na omrežju %s je napaka"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:359
+#: src/roomList.js:360
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:366
+#: src/roomList.js:367
 msgid "Connection Problem"
 msgstr "Napaka povezovanja"
 
-#: src/roomList.js:383
+#: src/roomList.js:384
 msgid "Connected"
 msgstr "Povezano"
 
-#: src/roomList.js:385
+#: src/roomList.js:386
 msgid "Connecting…"
 msgstr "Vzpostavljanje povezave …"
 
-#: src/roomList.js:387 src/userList.js:415
+#: src/roomList.js:388 src/userList.js:410
 msgid "Offline"
 msgstr "Nepovezano"
 
-#: src/roomList.js:389
+#: src/roomList.js:390
 msgid "Unknown"
 msgstr "Neznano"
 
-#: src/roomList.js:409
+#: src/roomList.js:410
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Na varen način se ni mogoče povezati s strežnikom %s."
 
-#: src/roomList.js:412
+#: src/roomList.js:413
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Strežnik %s zahteva geslo."
 
-#: src/roomList.js:418
+#: src/roomList.js:419
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Ni se mogoče povezati s strežnikom %s. Strežnik je zaseden."
 
-#: src/roomList.js:421
+#: src/roomList.js:422
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Ni se mogoče povezati s strežnikom %s."
 
-#: src/roomStack.js:117
+#: src/roomStack.js:113
 msgid "_Save Password"
 msgstr "_Shrani geslo"
 
-#: src/roomStack.js:126
+#: src/roomStack.js:122
 msgid "Should the password be saved?"
 msgstr "Ali naj se geslo shrani?"
 
-#: src/roomStack.js:134 src/telepathyClient.js:587
+#: src/roomStack.js:130 src/telepathyClient.js:584
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr ""
 "Določevanje istovetnosti bo izvedeno samodeno ob naslednji povezavi na %s."
 
-#: src/roomStack.js:163
+#: src/roomStack.js:159
 msgid "Join a room using the + button."
 msgstr "Pridruži se klepetalnici prek gumba +."
 
-#: src/telepathyClient.js:413
+#: src/telepathyClient.js:410
 msgid "Good Bye"
 msgstr "Na svidenje"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:586
+#: src/telepathyClient.js:583
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Ali želite shraniti geslo %s za %s?"
 
-#: src/telepathyClient.js:590
+#: src/telepathyClient.js:587
 msgid "Save"
 msgstr "Shrani"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:613
+#: src/telepathyClient.js:610
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s v %s"
 
-#: src/userList.js:230
+#: src/userList.js:225
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -898,7 +902,7 @@ msgstr[1] "Pred %d sekundo"
 msgstr[2] "Pred %d sekundama"
 msgstr[3] "Pred %d sekundami"
 
-#: src/userList.js:235
+#: src/userList.js:230
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -907,7 +911,7 @@ msgstr[1] "Pred %d minuto"
 msgstr[2] "Pred %d minutama"
 msgstr[3] "Pred %d minutami"
 
-#: src/userList.js:240
+#: src/userList.js:235
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -916,7 +920,7 @@ msgstr[1] "Pred %d uro"
 msgstr[2] "Pred %d urama"
 msgstr[3] "Pred %d urami"
 
-#: src/userList.js:245
+#: src/userList.js:240
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -925,7 +929,7 @@ msgstr[1] "Pred %d dnevom"
 msgstr[2] "Pred %d dnevoma"
 msgstr[3] "Pred %d dnevi"
 
-#: src/userList.js:250
+#: src/userList.js:245
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -934,7 +938,7 @@ msgstr[1] "Pred %d tednom"
 msgstr[2] "Pred %d tednoma"
 msgstr[3] "Pred %d tedni"
 
-#: src/userList.js:254
+#: src/userList.js:249
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -943,37 +947,37 @@ msgstr[1] "Pred %d mesecem"
 msgstr[2] "Pred %d mesecema"
 msgstr[3] "Pred %d meseci"
 
-#: src/userList.js:411
+#: src/userList.js:406
 msgid "Available in another room."
 msgstr "Na voljo v drugi klepetalnici"
 
-#: src/userList.js:413
+#: src/userList.js:408
 msgid "Online"
 msgstr "Povezano"
 
-#: src/userList.js:562
+#: src/userList.js:557
 msgid "No results"
 msgstr "Ni najdenih zadetkov"
 
-#: src/userList.js:734
+#: src/userList.js:729
 msgid "All"
 msgstr "Vse"
 
-#: src/userTracker.js:306
+#: src/userTracker.js:303
 msgid "User is online"
 msgstr "Uporabniki je povezan"
 
-#: src/userTracker.js:307
+#: src/userTracker.js:304
 #, javascript-format
 msgid "User %s is now online."
 msgstr "Uporabnik %s se je prijavil."
 
-#: src/utils.js:106
+#: src/utils.js:101
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Strežniško geslo Polari  za %s"
 
-#: src/utils.js:111
+#: src/utils.js:106
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Geslo Polari NickServer za %s"
