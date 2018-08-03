@@ -48,8 +48,8 @@ conf.set_quoted('LIBDIR', libdir)
 conf.set_quoted('PKGLIBDIR', pkglibdir)
 
 cc = meson.get_compiler('c')
-conf.set10('HAVE_STRCASESTR', cc.has_function('strcasestr'))
-conf.set10('SNAPSHOT', get_option('snapshot'))
+conf.set('HAVE_STRCASESTR', cc.has_function('strcasestr'))
+conf.set('SNAPSHOT', get_option('snapshot'))
 
 config_h = declare_dependency(
   sources: vcs_tag(
