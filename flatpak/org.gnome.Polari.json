@@ -33,7 +33,7 @@
         /* Keyring */
         "--talk-name=org.freedesktop.secrets",
         /* log files written by tp-logger outside the sandbox */
-        "--filesystem=~/.local/share/TpLogger:ro",
+        "--filesystem=~/.local/share/TpLogger",
         "--env=TPL_LOG_DIR=.local/share",
         /* dconf */
         "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
