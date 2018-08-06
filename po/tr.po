@@ -4,18 +4,18 @@
 # sabri ünal <yakushabb@gmail.com>, 2014.
 # Çağatay Yiğit Şahin <cyigitsahin@outlook.com>, 2017.
 # Berkay Aktunç <berkay.aktunc@gmail.com>, 2017.
-# Muhammet Kara <muhammetk@gmail.com>, 2014, 2015, 2016, 2017.
 # Nurperi Utlu <utlunurperi@gmail.com>, 2017.
 # Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2018.
+# Muhammet Kara <muhammetk@gnome.org>, 2014, 2015, 2016, 2017, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-22 09:59+0000\n"
-"PO-Revision-Date: 2018-02-24 16:49+0200\n"
-"Last-Translator: Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>\n"
-"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2018-07-25 04:57+0000\n"
+"PO-Revision-Date: 2018-08-06 10:23+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,13 +24,13 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:65
 #: src/roomStack.js:160
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:817
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME için İnternet Aktarmalı Sohbet İstemcisi"
 
@@ -78,7 +78,7 @@ msgstr "Kanal listesi kaydedildi"
 msgid "List of channels to restore on startup"
 msgstr "Açılışta geri yüklenecek kanallar listesi"
 
-#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
 msgstr "Arkaplanda Çalıştır"
 
@@ -317,11 +317,27 @@ msgstr "_Ekle"
 msgid "_Custom Network"
 msgstr "_Özel Ağ"
 
-#: data/resources/main-window.ui:14
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "Klavye Kısayolları"
+
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "Yardım"
+
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "Hakkında"
+
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+msgid "Quit"
+msgstr "Çıkış"
+
+#: data/resources/main-window.ui:40
 msgid "Run Polari in the Background?"
 msgstr "Polari Arkaplanda Çalışsın mı?"
 
-#: data/resources/main-window.ui:15
+#: data/resources/main-window.ui:41
 msgid ""
 "Polari will continue to run when closed and will be automatically started on "
 "login."
@@ -329,37 +345,21 @@ msgstr ""
 "Polari kapalıyken de çalışmaya devam edecek ve oturum açıldığında otomatik "
 "olarak başlatılacak."
 
-#: data/resources/main-window.ui:21
+#: data/resources/main-window.ui:47
 msgid "_Quit"
 msgstr "_Çık"
 
-#: data/resources/main-window.ui:28
+#: data/resources/main-window.ui:54
 msgid "_Run in background"
 msgstr "_Arkaplanda çalıştır"
 
-#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+#: data/resources/main-window.ui:81 data/resources/main-window.ui:95
 msgid "Add rooms and networks"
 msgstr "Odalar ve ağlar ekleyin"
 
-#: data/resources/main-window.ui:175
+#: data/resources/main-window.ui:222
 msgid "Show connected users"
 msgstr "Bağlı kullanıcıları göster"
-
-#: data/resources/menus.ui:12
-msgid "Keyboard Shortcuts"
-msgstr "Klavye Kısayolları"
-
-#: data/resources/menus.ui:16
-msgid "Help"
-msgstr "Yardım"
-
-#: data/resources/menus.ui:20
-msgid "About"
-msgstr "Hakkında"
-
-#: data/resources/menus.ui:24
-msgid "Quit"
-msgstr "Çıkış"
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -369,23 +369,23 @@ msgstr "Takma adı değiştir:"
 msgid "_Change"
 msgstr "_Değiştir"
 
-#: data/resources/room-list-header.ui:146
+#: data/resources/room-list-header.ui:145
 msgid "Connect"
 msgstr "Bağlan"
 
-#: data/resources/room-list-header.ui:154
+#: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "Yeniden Bağlan"
 
-#: data/resources/room-list-header.ui:162
+#: data/resources/room-list-header.ui:159
 msgid "Disconnect"
 msgstr "Bağlantıyı Kes"
 
-#: data/resources/room-list-header.ui:170
+#: data/resources/room-list-header.ui:166
 msgid "Remove"
 msgstr "Kaldır"
 
-#: data/resources/room-list-header.ui:178
+#: data/resources/room-list-header.ui:173
 msgid "Properties"
 msgstr "Özellikler"
 
@@ -413,28 +413,32 @@ msgstr "Konuşmaya Başla"
 msgid "Start Telepathy client"
 msgstr "Telepathy istemcisi başlat"
 
-#: src/application.js:50
+#: src/application.js:52
+msgid "Start in debug mode"
+msgstr "Hata ayıklama kipinde başlat"
+
+#: src/application.js:55
 msgid "Allow running alongside another instance"
 msgstr "Başka bir örneğin yanında çalışmaya izin ver"
 
-#: src/application.js:53
+#: src/application.js:58
 msgid "Print version and exit"
 msgstr "Sürümü yazdır ve çık"
 
-#: src/application.js:420 src/utils.js:184
+#: src/application.js:425 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Bağlantıyı açma başarısız oldu"
 
-#: src/application.js:705
+#: src/application.js:712
 #, javascript-format
 msgid "%s removed."
 msgstr "%s kaldırıldı"
 
-#: src/application.js:807
+#: src/application.js:816
 msgid "translator-credits"
 msgstr "Muhammet Kara <muhammetk@gmail.com>"
 
-#: src/application.js:813
+#: src/application.js:822
 msgid "Learn more about Polari"
 msgstr "Polari hakkında daha fazlasını öğrenin"
 
@@ -770,7 +774,7 @@ msgstr "Konu ayarlanmamış"
 msgid "Add Network"
 msgstr "Ağ Ekle"
 
-#: src/mainWindow.js:382
+#: src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -784,54 +788,54 @@ msgstr "Sohbet odasından ayrıl"
 msgid "End conversation"
 msgstr "Konuşmayı sonlandır"
 
-#: src/roomList.js:288
+#: src/roomList.js:293
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "%s ağında bir hata var"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:359
+#: src/roomList.js:364
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:366
+#: src/roomList.js:371
 msgid "Connection Problem"
 msgstr "Bağlantı Sorunu"
 
-#: src/roomList.js:383
+#: src/roomList.js:388
 msgid "Connected"
 msgstr "Bağlandı"
 
-#: src/roomList.js:385
+#: src/roomList.js:390
 msgid "Connecting…"
 msgstr "Bağlanıyor…"
 
-#: src/roomList.js:387 src/userList.js:415
+#: src/roomList.js:392 src/userList.js:415
 msgid "Offline"
 msgstr "Çevrimdışı"
 
-#: src/roomList.js:389
+#: src/roomList.js:394
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/roomList.js:409
+#: src/roomList.js:414
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "%s ile güvenli bir şekilde bağlantı kurulamadı."
 
-#: src/roomList.js:412
+#: src/roomList.js:417
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s parola gerektiriyor."
 
-#: src/roomList.js:418
+#: src/roomList.js:423
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "%s ile bağlantı kurulamadı. Sunucu meşgul."
 
-#: src/roomList.js:421
+#: src/roomList.js:426
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "%s ile bağlantı kurulamadı."
