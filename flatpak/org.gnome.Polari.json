@@ -145,6 +145,10 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/polari.git"
+                },
+                {
+                    "type": "patch",
+                    "path": "work-around-regressions.patch"
                 }
             ]
         }
