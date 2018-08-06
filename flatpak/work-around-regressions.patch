@@ -1,0 +1,127 @@
+From 9229be553e752d0d9d51beb1bbb50a61235a72b4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Thu, 26 Jul 2018 13:43:32 +0200
+Subject: [PATCH 1/2] Work around a GJS regression
+
+Somehow properties from the TpChannelIface disappeard on TpChannel,
+same for GtkActionable[0] ...
+Fall back to the accessor functions in the meantime.
+
+[0] https://gitlab.gnome.org/GNOME/gjs/merge_requests/223
+---
+ src/roomList.js        | 20 ++++++++++----------
+ src/roomManager.js     |  6 ++++--
+ src/telepathyClient.js |  3 ++-
+ 3 files changed, 16 insertions(+), 13 deletions(-)
+
+diff --git a/src/roomList.js b/src/roomList.js
+index 49cd0c83..38bf2b88 100644
+--- a/src/roomList.js
++++ b/src/roomList.js
+@@ -229,16 +229,16 @@ var RoomListHeader = GObject.registerClass({
+         });
+ 
+         let target = new GLib.Variant('o', this._account.get_object_path());
+-        this._popoverConnect.action_target = target;
+-        this._popoverConnect.action_name = 'app.connect-account';
+-        this._popoverDisconnect.action_target = target;
+-        this._popoverDisconnect.action_name = 'app.disconnect-account';
+-        this._popoverReconnect.action_target = target;
+-        this._popoverReconnect.action_name = 'app.reconnect-account';
+-        this._popoverRemove.action_target = target;
+-        this._popoverRemove.action_name = 'app.remove-connection';
+-        this._popoverProperties.action_target = target;
+-        this._popoverProperties.action_name = 'app.edit-connection';
++        this._popoverConnect.set_action_target_value(target);
++        this._popoverConnect.set_action_name('app.connect-account');
++        this._popoverDisconnect.set_action_target_value(target);
++        this._popoverDisconnect.set_action_name('app.disconnect-account');
++        this._popoverReconnect.set_action_target_value(target);
++        this._popoverReconnect.set_action_name('app.reconnect-account');
++        this._popoverRemove.set_action_target_value(target);
++        this._popoverRemove.set_action_name('app.remove-connection');
++        this._popoverProperties.set_action_target_value(target);
++        this._popoverProperties.set_action_name('app.edit-connection');
+ 
+         this._popoverPassword.connect('activate', () => {
+             let action = this._app.lookup_action('authenticate-account');
+diff --git a/src/roomManager.js b/src/roomManager.js
+index cabe2c2c..a74463ec 100644
+--- a/src/roomManager.js
++++ b/src/roomManager.js
+@@ -61,7 +61,8 @@ var RoomManager = class {
+     lookupRoomByChannel(channel) {
+         let account = channel.connection.get_account();
+         let channelName = channel.identifier;
+-        let id = Polari.create_room_id(account, channelName, channel.handle_type);
++        let [, handleType] = channel.get_handle();
++        let id = Polari.create_room_id(account, channelName, handleType);
+         return this._rooms.get(id);
+     }
+ 
+@@ -187,7 +188,8 @@ var RoomManager = class {
+         let targetContact = channel.target_contact;
+         let channelName = targetContact ? targetContact.alias
+                                         : channel.identifier;
+-        let room = this._ensureRoom(accountPath, channelName, channel.handle_type, time);
++        let [, handleType] = channel.get_handle();
++        let room = this._ensureRoom(accountPath, channelName, handleType, time);
+         room.channel = channel;
+     }
+ 
+diff --git a/src/telepathyClient.js b/src/telepathyClient.js
+index a961f149..e0876b7c 100644
+--- a/src/telepathyClient.js
++++ b/src/telepathyClient.js
+@@ -463,7 +463,8 @@ class TelepathyClient extends Tp.BaseClient {
+     }
+ 
+     _isAuthChannel(channel) {
+-        return channel.channel_type == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
++        let channelType = channel.get_channel_type();
++        return channelType == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
+     }
+ 
+     _processRequest(context, connection, channels, processChannel) {
+-- 
+2.17.1
+
+
+From a152b17abfdf6d4a07724094aa61857d57dedc33 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Sat, 4 Aug 2018 01:30:05 +0200
+Subject: [PATCH 2/2] telepathyClient: Work around NetworkMonitor portal issue
+
+The portal doesn't report the correct state until the first network
+change, with the result that a sandboxed test instance will always
+trigger a reconnect in the regular running instance.
+
+Work around this by not picking up the initial network state (which
+is wrong anyway) and rely on the primary instance for setting the
+correct telepathy presence.
+---
+ src/telepathyClient.js | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/telepathyClient.js b/src/telepathyClient.js
+index e0876b7c..7d669126 100644
+--- a/src/telepathyClient.js
++++ b/src/telepathyClient.js
+@@ -192,8 +192,12 @@ class TelepathyClient extends Tp.BaseClient {
+ 
+         this._networkMonitor.connect('network-changed',
+                                      this._onNetworkChanged.bind(this));
+-        this._onNetworkChanged(this._networkMonitor,
+-                               this._networkMonitor.network_available);
++
++        // Rely on main instance for network, to work around this issue:
++        // https://gitlab.gnome.org/GNOME/glib/merge_requests/227
++        if (!Utils.isFlatpakSandbox() && !this._app.isTestInstance)
++            this._onNetworkChanged(this._networkMonitor,
++                                   this._networkMonitor.network_available);
+     }
+ 
+     _onNetworkChanged(mon, connected) {
+-- 
+2.17.1
+
