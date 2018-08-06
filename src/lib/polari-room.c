@@ -789,6 +789,7 @@ polari_room_finalize (GObject *object)
 
   g_clear_pointer (&priv->channel_name, g_free);
   g_clear_pointer (&priv->display_name, g_free);
+  g_clear_pointer (&priv->self_nick, g_free);
 
   G_OBJECT_CLASS (polari_room_parent_class)->finalize (object);
 }
