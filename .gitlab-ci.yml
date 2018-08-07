@@ -23,6 +23,8 @@ flatpak:
         - tar -xzf cache.tar.gz .flatpak-builder/cache || true
     script:
         - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
+        # Work around for gjs/gio regressions until we get a proper fix
+        - patch -p1 <flatpak/work-around-regressions.patch
         # Make sure to keep this in sync with the Flatpak manifest, all arguments
         # are passed except the config-args because we build it ourselves
         - flatpak build app meson --prefix=/app ${MESON_ARGS} _build
