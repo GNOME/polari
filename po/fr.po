@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-20 23:18+0000\n"
-"PO-Revision-Date: 2018-02-27 10:57+0100\n"
+"POT-Creation-Date: 2018-07-25 04:57+0000\n"
+"PO-Revision-Date: 2018-08-11 11:59+0200\n"
 "Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
 "Language-Team: français <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -19,16 +19,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:65
 #: src/roomStack.js:160
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:817
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un client de discussion relayée par Internet (IRC) pour GNOME"
 
@@ -77,7 +77,7 @@ msgstr "Liste des salons enregistrés"
 msgid "List of channels to restore on startup"
 msgstr "Liste des salons à restaurer au démarrage"
 
-#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
 msgstr "Exécuter en arrière-plan"
 
@@ -317,11 +317,27 @@ msgstr "_Ajouter"
 msgid "_Custom Network"
 msgstr "Réseau _personnalisé"
 
-#: data/resources/main-window.ui:14
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "Raccourcis clavier"
+
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "Aide"
+
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "À propos"
+
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+msgid "Quit"
+msgstr "Quitter"
+
+#: data/resources/main-window.ui:40
 msgid "Run Polari in the Background?"
 msgstr "Exécuter Polari en arrière-plan ?"
 
-#: data/resources/main-window.ui:15
+#: data/resources/main-window.ui:41
 msgid ""
 "Polari will continue to run when closed and will be automatically started on "
 "login."
@@ -329,37 +345,21 @@ msgstr ""
 "Polari continuera à fonctionner s’il est fermé et sera redémarré "
 "automatiquement à la connexion."
 
-#: data/resources/main-window.ui:21
+#: data/resources/main-window.ui:47
 msgid "_Quit"
 msgstr "_Quitter"
 
-#: data/resources/main-window.ui:28
+#: data/resources/main-window.ui:54
 msgid "_Run in background"
 msgstr "E_xécution en arrière-plan"
 
-#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+#: data/resources/main-window.ui:81 data/resources/main-window.ui:95
 msgid "Add rooms and networks"
 msgstr "Ajouter des salons et des réseaux"
 
-#: data/resources/main-window.ui:175
+#: data/resources/main-window.ui:222
 msgid "Show connected users"
 msgstr "Afficher les utilisateurs connectés"
-
-#: data/resources/menus.ui:12
-msgid "Keyboard Shortcuts"
-msgstr "Raccourcis clavier"
-
-#: data/resources/menus.ui:16
-msgid "Help"
-msgstr "Aide"
-
-#: data/resources/menus.ui:20
-msgid "About"
-msgstr "À propos"
-
-#: data/resources/menus.ui:24
-msgid "Quit"
-msgstr "Quitter"
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -369,23 +369,23 @@ msgstr "Changer de pseudonyme :"
 msgid "_Change"
 msgstr "_Modifier"
 
-#: data/resources/room-list-header.ui:146
+#: data/resources/room-list-header.ui:145
 msgid "Connect"
 msgstr "Se connecter"
 
-#: data/resources/room-list-header.ui:154
+#: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "Se reconnecter"
 
-#: data/resources/room-list-header.ui:162
+#: data/resources/room-list-header.ui:159
 msgid "Disconnect"
 msgstr "Se déconnecter"
 
-#: data/resources/room-list-header.ui:170
+#: data/resources/room-list-header.ui:166
 msgid "Remove"
 msgstr "Supprimer"
 
-#: data/resources/room-list-header.ui:178
+#: data/resources/room-list-header.ui:173
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -413,24 +413,28 @@ msgstr "Commencer la conversation"
 msgid "Start Telepathy client"
 msgstr "Démarrer le client Telepathy"
 
-#: src/application.js:50
+#: src/application.js:52
+msgid "Start in debug mode"
+msgstr "Démarrer avec le mode débogage"
+
+#: src/application.js:55
 msgid "Allow running alongside another instance"
 msgstr "Autoriser l’exécution d'une autre instance"
 
-#: src/application.js:53
+#: src/application.js:58
 msgid "Print version and exit"
 msgstr "Imprimer la version et quitter"
 
-#: src/application.js:420 src/utils.js:184
+#: src/application.js:425 src/utils.js:184
 msgid "Failed to open link"
 msgstr "L’ouverture du lien a échoué"
 
-#: src/application.js:705
+#: src/application.js:712
 #, javascript-format
 msgid "%s removed."
 msgstr "%s supprimé."
 
-#: src/application.js:807
+#: src/application.js:816
 msgid "translator-credits"
 msgstr ""
 "Alexandre Franke <alexandre.franke@gmail.com>, 2013-2016\n"
@@ -439,7 +443,7 @@ msgstr ""
 "Mathieu Stumpf Guntz, 2016\n"
 "Alain Lojewski <allomervan@gmail.com>, 2017"
 
-#: src/application.js:813
+#: src/application.js:822
 msgid "Learn more about Polari"
 msgstr "En apprendre plus sur Polari"
 
@@ -777,7 +781,7 @@ msgstr "Aucun sujet défini"
 msgid "Add Network"
 msgstr "Ajouter un réseau"
 
-#: src/mainWindow.js:382
+#: src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -792,54 +796,54 @@ msgstr "Quitter le salon"
 msgid "End conversation"
 msgstr "Mettre fin à la conversation"
 
-#: src/roomList.js:288
+#: src/roomList.js:293
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Le réseau %s présente une erreur"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:359
+#: src/roomList.js:364
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:366
+#: src/roomList.js:371
 msgid "Connection Problem"
 msgstr "Erreur de connexion"
 
-#: src/roomList.js:383
+#: src/roomList.js:388
 msgid "Connected"
 msgstr "Connecté"
 
-#: src/roomList.js:385
+#: src/roomList.js:390
 msgid "Connecting…"
 msgstr "Connexion…"
 
-#: src/roomList.js:387 src/userList.js:415
+#: src/roomList.js:392 src/userList.js:415
 msgid "Offline"
 msgstr "Hors ligne"
 
-#: src/roomList.js:389
+#: src/roomList.js:394
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: src/roomList.js:409
+#: src/roomList.js:414
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Impossible de se connecter à %s de manière sûre."
 
-#: src/roomList.js:412
+#: src/roomList.js:417
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s nécessite un mot de passe."
 
-#: src/roomList.js:418
+#: src/roomList.js:423
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Impossible de se connecter à %s. Le serveur est occupé."
 
-#: src/roomList.js:421
+#: src/roomList.js:426
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Impossible de se connecter à %s."
