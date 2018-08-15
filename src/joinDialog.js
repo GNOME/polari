@@ -1,6 +1,6 @@
 const { Gdk, Gio, GLib, GObject, Gtk } = imports.gi;
 
-const {AccountsMonitor} = imports.accountsMonitor;
+const { AccountsMonitor } = imports.accountsMonitor;
 const Utils = imports.utils;
 
 const DialogPage = {

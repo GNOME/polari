@@ -1,8 +1,8 @@
 const { Gio, GLib, GObject, Polari } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
-const {RoomManager} = imports.roomManager;
+const { AccountsMonitor } = imports.accountsMonitor;
+const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
 
 var UserStatusMonitor = class {

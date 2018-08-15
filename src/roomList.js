@@ -2,8 +2,8 @@ const { Gdk, Gio, GLib, GObject, Gtk } = imports.gi;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
-const {RoomManager} = imports.roomManager;
+const { AccountsMonitor } = imports.accountsMonitor;
+const { RoomManager } = imports.roomManager;
 
 const MIN_SPINNER_TIME = 1000000;   //in microsecond
 

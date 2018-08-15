@@ -1,10 +1,10 @@
 const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
-const {ChatView} = imports.chatView;
-const {EntryArea} = imports.entryArea;
-const {RoomManager} = imports.roomManager;
+const { AccountsMonitor } = imports.accountsMonitor;
+const { ChatView } = imports.chatView;
+const { EntryArea } = imports.entryArea;
+const { RoomManager } = imports.roomManager;
 
 var RoomStack = GObject.registerClass({
     Properties: {

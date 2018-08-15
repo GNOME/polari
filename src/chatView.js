@@ -3,9 +3,9 @@ const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 const Tpl = imports.gi.TelepathyLogger;
 
-const {DropTargetIface} = imports.pasteManager;
-const {UserPopover} = imports.userList;
-const {UserStatusMonitor} = imports.userTracker;
+const { DropTargetIface } = imports.pasteManager;
+const { UserPopover } = imports.userList;
+const { UserStatusMonitor } = imports.userTracker;
 const Utils = imports.utils;
 
 var MAX_NICK_CHARS = 8;

@@ -3,9 +3,9 @@ const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 
 const ChatView = imports.chatView;
-const {DropTargetIface} = imports.pasteManager;
-const {IrcParser} = imports.ircParser;
-const {TabCompletion} = imports.tabCompletion;
+const { DropTargetIface } = imports.pasteManager;
+const { IrcParser } = imports.ircParser;
+const { TabCompletion } = imports.tabCompletion;
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;

@@ -3,7 +3,7 @@ const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
-const {RoomManager} = imports.roomManager;
+const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
 
 const N_ = s => s;

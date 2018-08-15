@@ -1,17 +1,17 @@
 const { Gdk, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
+const { AccountsMonitor } = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;
 const Connections = imports.connections;
-const {InitialSetupWindow} = imports.initialSetup;
-const {MainWindow} = imports.mainWindow;
-const {NetworksManager} = imports.networksManager;
-const {PasteManager} = imports.pasteManager;
-const {RoomManager} = imports.roomManager;
-const {ServerRoomManager} = imports.serverRoomManager;
-const {TelepathyClient} = imports.telepathyClient;
-const {UserStatusMonitor} = imports.userTracker;
+const { InitialSetupWindow } = imports.initialSetup;
+const { MainWindow } = imports.mainWindow;
+const { NetworksManager } = imports.networksManager;
+const { PasteManager } = imports.pasteManager;
+const { RoomManager } = imports.roomManager;
+const { ServerRoomManager } = imports.serverRoomManager;
+const { TelepathyClient } = imports.telepathyClient;
+const { UserStatusMonitor } = imports.userTracker;
 const Utils = imports.utils;
 
 const MAX_RETRIES = 3;

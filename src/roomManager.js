@@ -2,7 +2,7 @@ const { Gio, GLib, Polari } = imports.gi;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
+const { AccountsMonitor } = imports.accountsMonitor;
 
 var RoomManager = class {
     static getDefault() {

@@ -3,8 +3,8 @@ const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
-const {RoomManager} = imports.roomManager;
+const { AccountsMonitor } = imports.accountsMonitor;
+const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
 
 const MS_PER_IDLE = 10; // max time spend in idle

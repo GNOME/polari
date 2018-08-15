@@ -2,10 +2,10 @@ const { Gdk, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 const Mainloop = imports.mainloop;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
-const {JoinDialog} = imports.joinDialog;
+const { AccountsMonitor } = imports.accountsMonitor;
+const { JoinDialog } = imports.joinDialog;
 const RoomList = imports.roomList; // used in template
-const {RoomManager} = imports.roomManager;
+const { RoomManager } = imports.roomManager;
 const RoomStack = imports.roomStack; // used in template
 const UserList = imports.userList; // used in template
 const Utils = imports.utils;

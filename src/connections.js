@@ -1,8 +1,8 @@
 const { GLib, GObject, Gtk } = imports.gi;
 const Tp = imports.gi.TelepathyGLib;
 
-const {AccountsMonitor} = imports.accountsMonitor;
-const {NetworksManager} = imports.networksManager;
+const { AccountsMonitor } = imports.accountsMonitor;
+const { NetworksManager } = imports.networksManager;
 const Utils = imports.utils;
 
 const DEFAULT_PORT = 6667;
