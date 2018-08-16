@@ -304,9 +304,9 @@ var UserTracker = GObject.registerClass({
         notification.set_body(_("User %s is now online.").format(member.alias));
 
         let param = GLib.Variant.new('(ssu)',
-                                     [ this._account.get_object_path(),
-                                       room.channel_name,
-                                       Utils.getTpEventTime() ]);
+                                     [this._account.get_object_path(),
+                                      room.channel_name,
+                                      Utils.getTpEventTime()]);
         notification.set_default_action_and_target('app.join-room', param);
 
         this._app.send_notification(this._getNotifyActionNameInternal(member.alias), notification);

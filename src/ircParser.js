@@ -124,9 +124,9 @@ var IrcParser = class {
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('join-room');
                 action.activate(GLib.Variant.new('(ssu)',
-                                                 [ account.get_object_path(),
-                                                   room,
-                                                   Utils.getTpEventTime() ]));
+                                                 [account.get_object_path(),
+                                                  room,
+                                                  Utils.getTpEventTime()]));
                 break;
             }
             case 'KICK': {
@@ -175,10 +175,10 @@ var IrcParser = class {
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('message-user');
                 action.activate(GLib.Variant.new('(sssu)',
-                                                 [ account.get_object_path(),
-                                                   nick,
-                                                   message,
-                                                   Tp.USER_ACTION_TIME_NOT_USER_ACTION ]));
+                                                 [account.get_object_path(),
+                                                  nick,
+                                                  message,
+                                                  Tp.USER_ACTION_TIME_NOT_USER_ACTION]));
                 break;
             }
             case 'NAMES': {
@@ -231,10 +231,10 @@ var IrcParser = class {
                 let app = Gio.Application.get_default();
                 let action = app.lookup_action('message-user');
                 action.activate(GLib.Variant.new('(sssu)',
-                                                 [ account.get_object_path(),
-                                                   nick,
-                                                   '',
-                                                   Utils.getTpEventTime() ]));
+                                                 [account.get_object_path(),
+                                                  nick,
+                                                  '',
+                                                  Utils.getTpEventTime()]));
                 break;
             }
             case 'QUIT': {

@@ -290,10 +290,10 @@ var UserDetails = GObject.registerClass({
         let action = app.lookup_action('message-user');
         let time = Gtk.get_current_event().get_time();
         action.activate(GLib.Variant.new('(sssu)',
-                                         [ account.get_object_path(),
-                                           this._user.alias,
-                                           '',
-                                           time ]));
+                                         [account.get_object_path(),
+                                          this._user.alias,
+                                          '',
+                                          time]));
     }
 
     _updateButtonVisibility() {

@@ -168,9 +168,9 @@ var JoinDialog = GObject.registerClass({
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssu)',
-                                             [ account.get_object_path(),
+                                             [account.get_object_path(),
                                              room,
-                                             Utils.getTpEventTime() ]));
+                                             Utils.getTpEventTime()]));
         });
     }
 
