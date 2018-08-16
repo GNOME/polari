@@ -477,11 +477,15 @@ class RoomList extends Gtk.ListBox {
                   this._selectRoomAtIndex(param.get_int32() - 1);
               } },
             { name: 'next-pending-room',
-              handler: () => { this._moveSelectionFull(Gtk.DirectionType.DOWN,
-                                                       row => row.hasPending); } },
+              handler: () => {
+                  this._moveSelectionFull(Gtk.DirectionType.DOWN,
+                                          row => row.hasPending);
+              } },
             { name: 'previous-pending-room',
-              handler: () => { this._moveSelectionFull(Gtk.DirectionType.UP,
-                                                       row => row.hasPending); } }
+              handler: () => {
+                  this._moveSelectionFull(Gtk.DirectionType.UP,
+                                          row => row.hasPending);
+            } }
         ];
         actions.forEach(a => {
             app.lookup_action(a.name).connect('activate', a.handler);
