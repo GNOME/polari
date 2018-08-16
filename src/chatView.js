@@ -404,6 +404,7 @@ var ChatView = GObject.registerClass({
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
+            /* eslint-disable indent */
           { name: 'nick',
             left_margin: MARGIN,
             weight: Pango.Weight.BOLD },
@@ -431,6 +432,7 @@ var ChatView = GObject.registerClass({
           { name: 'loading',
             left_margin: MARGIN,
             justification: Gtk.Justification.CENTER }
+            /* eslint-enable indent */
         ];
         tags.forEach(tagProps => { tagTable.add(new Gtk.TextTag(tagProps)); });
     }
@@ -471,12 +473,14 @@ var ChatView = GObject.registerClass({
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [
+            /* eslint-disable indent */
           { name: 'status',
             foreground_rgba: dimColor },
           { name: 'timestamp',
             foreground_rgba: dimColor },
           { name: 'url',
             foreground_rgba: linkColor }
+            /* eslint-enable indent */
         ];
         tags.forEach(tagProps => {
             let tag = tagTable.lookup(tagProps.name);

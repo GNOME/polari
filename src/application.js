@@ -178,6 +178,7 @@ var Application = GObject.registerClass({
     vfunc_startup() {
         super.vfunc_startup();
 
+        /* eslint-disable indent */
         let actionEntries = [
           { name: 'show-join-dialog',
             activate: this._onShowJoinDialog.bind(this),
@@ -247,6 +248,7 @@ var Application = GObject.registerClass({
           { name: 'previous-pending-room',
             accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up'] }
         ];
+        /* eslint-enable indent */
         actionEntries.forEach(actionEntry => {
             let props = {};
             ['name', 'state', 'parameter_type'].forEach(prop => {
