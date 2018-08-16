@@ -1,9 +1,21 @@
 stages:
+ - source_check
  - build
  - review
 
 variables:
     BUNDLE: "polari-git.flatpak"
+    LINT_LOG: "eslint-report.txt"
+
+eslint:
+    image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
+    stage: source_check
+    script:
+        - eslint -o $LINT_LOG -c lint/eslintrc-legacy.json --no-color .
+    artifacts:
+        paths:
+            - ${LINT_LOG}
+        when: on_failure
 
 flatpak:
     image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
