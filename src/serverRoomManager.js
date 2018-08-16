@@ -103,7 +103,7 @@ const RoomListColumn = {
 };
 
 function _strBaseEqual(str1, str2) {
-    return str1.localeCompare(str2, {}, { sensitivity: 'base'}) == 0;
+    return str1.localeCompare(str2, {}, { sensitivity: 'base' }) == 0;
 };
 
 var ServerRoomList = GObject.registerClass({
@@ -117,8 +117,7 @@ var ServerRoomList = GObject.registerClass({
                                                         'can-join',
                                                         'can-join',
                                                         GObject.ParamFlags.READABLE,
-                                                       false)
-    },
+                                                       false) },
 }, class ServerRoomList extends Gtk.Box {
     _init(params) {
         this._account = null;

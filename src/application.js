@@ -241,9 +241,9 @@ var Application = GObject.registerClass({
           { name: 'nth-room',
             parameter_type: GLib.VariantType.new('i') },
           { name: 'next-pending-room',
-            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']},
+            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down'] },
           { name: 'previous-pending-room',
-            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']}
+            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up'] }
         ];
         actionEntries.forEach(actionEntry => {
             let props = {};

@@ -75,7 +75,7 @@ var ConnectionsList = GObject.registerClass({
                                                     false)
     },
     Signals: { 'account-created': { param_types: [Tp.Account.$gtype] },
-               'account-selected': {}}
+               'account-selected': {} }
 }, class ConnectionsList extends Gtk.ScrolledWindow {
     _init(params) {
         this._favoritesOnly = false;
@@ -103,7 +103,7 @@ var ConnectionsList = GObject.registerClass({
                                         pixel_size : 115,
                                         visible : true }));
         placeholder.add(new Gtk.Label({ label : _("No results."),
-                                        visible : true}));
+                                        visible : true }));
 
         placeholder.get_style_context().add_class('dim-label');
 
@@ -258,8 +258,8 @@ var ConnectionDetails = GObject.registerClass({
                                                            'has-service',
                                                            'has-service',
                                                            GObject.ParamFlags.READABLE,
-                                                           false)},
-    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] }},
+                                                           false) },
+    Signals: { 'account-created': { param_types: [Tp.Account.$gtype] } },
 }, class ConnectionDetails extends Gtk.Grid {
     _init(params) {
         this._networksManager = NetworksManager.getDefault();
