@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-28 21:04+0000\n"
-"PO-Revision-Date: 2018-03-03 17:46+0200\n"
+"POT-Creation-Date: 2018-07-25 04:57+0000\n"
+"PO-Revision-Date: 2018-08-17 11:08+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:65
 #: src/roomStack.js:160
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:817
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "IRC-asiakassovellus Gnomelle"
 
@@ -74,7 +74,7 @@ msgstr "Tallennettujen kanavien luettelo"
 msgid "List of channels to restore on startup"
 msgstr "Luettelo kanavista, jotka palautetaan käynnistyksen yhteydessä"
 
-#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
 msgstr "Suorita taustalla"
 
@@ -311,11 +311,27 @@ msgstr "_Lisää"
 msgid "_Custom Network"
 msgstr "_Omavalintainen verkko"
 
-#: data/resources/main-window.ui:14
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "Pikanäppäimet"
+
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "Ohje"
+
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "Tietoja"
+
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+msgid "Quit"
+msgstr "Lopeta"
+
+#: data/resources/main-window.ui:40
 msgid "Run Polari in the Background?"
 msgstr "Suoritetaanko Polari taustalla?"
 
-#: data/resources/main-window.ui:15
+#: data/resources/main-window.ui:41
 msgid ""
 "Polari will continue to run when closed and will be automatically started on "
 "login."
@@ -323,37 +339,21 @@ msgstr ""
 "Polarin suorittamista jatketaan, kun se suljetaan, ja se käynnistetään "
 "automaattisesti sisäänkirjautumisen yhteydessä."
 
-#: data/resources/main-window.ui:21
+#: data/resources/main-window.ui:47
 msgid "_Quit"
 msgstr "_Lopeta"
 
-#: data/resources/main-window.ui:28
+#: data/resources/main-window.ui:54
 msgid "_Run in background"
 msgstr "_Suorita taustalla"
 
-#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+#: data/resources/main-window.ui:81 data/resources/main-window.ui:95
 msgid "Add rooms and networks"
 msgstr "Lisää kanavia ja verkkoja"
 
-#: data/resources/main-window.ui:175
+#: data/resources/main-window.ui:222
 msgid "Show connected users"
 msgstr "Näytä yhdistetyt käyttäjät"
-
-#: data/resources/menus.ui:12
-msgid "Keyboard Shortcuts"
-msgstr "Pikanäppäimet"
-
-#: data/resources/menus.ui:16
-msgid "Help"
-msgstr "Ohje"
-
-#: data/resources/menus.ui:20
-msgid "About"
-msgstr "Tietoja"
-
-#: data/resources/menus.ui:24
-msgid "Quit"
-msgstr "Lopeta"
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -363,23 +363,23 @@ msgstr "Muuta nimimerkki:"
 msgid "_Change"
 msgstr "_Muuta"
 
-#: data/resources/room-list-header.ui:146
+#: data/resources/room-list-header.ui:145
 msgid "Connect"
 msgstr "Yhdistä"
 
-#: data/resources/room-list-header.ui:154
+#: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "Yhdistä uudelleen"
 
-#: data/resources/room-list-header.ui:162
+#: data/resources/room-list-header.ui:159
 msgid "Disconnect"
 msgstr "Katkaise yhteys"
 
-#: data/resources/room-list-header.ui:170
+#: data/resources/room-list-header.ui:166
 msgid "Remove"
 msgstr "Poista"
 
-#: data/resources/room-list-header.ui:178
+#: data/resources/room-list-header.ui:173
 msgid "Properties"
 msgstr "Ominaisuudet"
 
@@ -407,28 +407,32 @@ msgstr "Aloita keskustelu"
 msgid "Start Telepathy client"
 msgstr "Käynnistä Telepathy-asiakas"
 
-#: src/application.js:50
+#: src/application.js:52
+msgid "Start in debug mode"
+msgstr "Käynnistä vianjäljitystilassa"
+
+#: src/application.js:55
 msgid "Allow running alongside another instance"
 msgstr "Salli käynnissä oleminen toisen instanssin rinnalla"
 
-#: src/application.js:53
+#: src/application.js:58
 msgid "Print version and exit"
 msgstr "Tulosta versio ja poistu"
 
-#: src/application.js:420 src/utils.js:184
+#: src/application.js:425 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Linkin avaaminen epäonnistui"
 
-#: src/application.js:705
+#: src/application.js:712
 #, javascript-format
 msgid "%s removed."
 msgstr "%s poistettiin."
 
-#: src/application.js:807
+#: src/application.js:816
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: src/application.js:813
+#: src/application.js:822
 msgid "Learn more about Polari"
 msgstr "Tietoja - Polari"
 
@@ -775,7 +779,7 @@ msgstr "Kanavan otsikkoa ei ole asetettu"
 msgid "Add Network"
 msgstr "Lisää verkko"
 
-#: src/mainWindow.js:382
+#: src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -790,54 +794,54 @@ msgstr "Poistu kanavalta"
 msgid "End conversation"
 msgstr "Lopeta keskustelu"
 
-#: src/roomList.js:288
+#: src/roomList.js:293
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Verkossa %s on virhe"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:359
+#: src/roomList.js:364
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:366
+#: src/roomList.js:371
 msgid "Connection Problem"
 msgstr "Yhteysongelma"
 
-#: src/roomList.js:383
+#: src/roomList.js:388
 msgid "Connected"
 msgstr "Yhdistetty"
 
-#: src/roomList.js:385
+#: src/roomList.js:390
 msgid "Connecting…"
 msgstr "Yhdistetään…"
 
-#: src/roomList.js:387 src/userList.js:415
+#: src/roomList.js:392 src/userList.js:415
 msgid "Offline"
 msgstr "Ei verkossa"
 
-#: src/roomList.js:389
+#: src/roomList.js:394
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: src/roomList.js:409
+#: src/roomList.js:414
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Yhteydeyn muodostaminen kohteeseen %s ei onnistunut turvallisesti."
 
-#: src/roomList.js:412
+#: src/roomList.js:417
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s vaatii salasanan."
 
-#: src/roomList.js:418
+#: src/roomList.js:423
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Yhteys kohteeseen %s epäonnistui. Palvelin on varattu."
 
-#: src/roomList.js:421
+#: src/roomList.js:426
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Yhteys kohteeseen %s epäonnistui."
