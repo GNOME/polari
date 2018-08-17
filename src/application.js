@@ -668,7 +668,7 @@ var Application = GObject.registerClass({
                     .format(account.display_name, strReasons[reason]));
 
                 // Connection failed, keep tp from retrying over and over
-                let presence = Tp.ConnectionPresenceType.OFFLINE;
+                let presence = Tp.ConnectionPresenceType.OFFLINE
                 let msg = account.requested_status_message;
                 account.request_presence_async(presence, 'offline', msg, null);
             }
