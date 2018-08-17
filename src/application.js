@@ -658,7 +658,7 @@ var Application = GObject.registerClass({
                     return;
 
             if (reason == Tp.ConnectionStatusReason.NETWORK_ERROR ||
-                reason == Tp.ConnectionStatusReason.NONE_SPECIFIED)
+                reason = Tp.ConnectionStatusReason.NONE_SPECIFIED)
                 if (this._retryServerRequest(account))
                     return;
 
