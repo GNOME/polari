@@ -26,18 +26,6 @@ var NetworksManager = class {
         }
     }
 
-    _onContentsReady(f, res) {
-        let data;
-        try {
-            [, data] = f.load_contents_finish(res);
-        } catch (e) {
-            log('Failed to load network list: ' + e.message);
-            return;
-        }
-        if (this._parseNetworks(data))
-            this.emit('changed');
-    }
-
     _parseNetworks(data) {
         let networks;
         try {
