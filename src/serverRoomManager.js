@@ -1,11 +1,13 @@
 /* exported ServerRoomManager ServerRoomList */
 
-const { Gdk, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 const Signals = imports.signals;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
+
+Gio._promisify(Tp.RoomList.prototype, 'init_async', 'init_finish');
 
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering
@@ -46,7 +48,7 @@ var ServerRoomManager = class {
         return roomList.list.listing;
     }
 
-    _onAccountStatusChanged(mon, account) {
+    async _onAccountStatusChanged(mon, account) {
         if (account.connection_status === Tp.ConnectionStatus.CONNECTING)
             this.emit('loading-changed', account);
 
@@ -57,18 +59,16 @@ var ServerRoomManager = class {
             return;
 
         let roomList = new Tp.RoomList({ account });
-        roomList.init_async(GLib.PRIORITY_DEFAULT, null, (o, res) => {
-            try {
-                roomList.init_finish(res);
-            } catch (e) {
-                this._roomLists.delete(account);
-                return;
-            }
-            roomList.start();
-        });
         roomList.connect('got-room', this._onGotRoom.bind(this));
         roomList.connect('notify::listing', this._onListingChanged.bind(this));
         this._roomLists.set(account, { list: roomList, rooms: [] });
+
+        try {
+            await roomList.init_async(GLib.PRIORITY_DEFAULT, null);
+            roomList.start();
+        } catch (e) {
+            this._roomLists.delete(account);
+        }
     }
 
     _onAccountRemoved(mon, account) {

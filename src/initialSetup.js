@@ -1,8 +1,10 @@
 /* exported InitialSetupWindow */
 
-const { Gio, GLib, GObject, Gtk } = imports.gi;
+const { Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 
 const Utils = imports.utils;
+
+Gio._promisify(Tp.Account.prototype, 'remove_async', 'remove_finish');
 
 const SetupPage = {
     CONNECTION: 0,
@@ -94,13 +96,11 @@ var InitialSetupWindow = GObject.registerClass({
         this._updateNextSensitivity();
     }
 
-    _unsetAccount() {
+    async _unsetAccount() {
         if (!this._currentAccount)
             return;
 
-        this._currentAccount.remove_async((a, res) => {
-            a.remove_finish(res);
-        });
+        await this._currentAccount.remove_async();
         this._currentAccount = null;
     }
 

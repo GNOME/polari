@@ -15,6 +15,18 @@ const { TelepathyClient } = imports.telepathyClient;
 const { UserStatusMonitor } = imports.userTracker;
 const Utils = imports.utils;
 
+Gio._promisify(Tp.AccountRequest.prototype,
+    'create_account_async', 'create_account_finish');
+Gio._promisify(Tp.Account.prototype, 'remove_async', 'remove_finish');
+Gio._promisify(Tp.Account.prototype,
+    'request_presence_async', 'request_presence_finish');
+Gio._promisify(Tp.Account.prototype,
+    'set_enabled_async', 'set_enabled_finish');
+Gio._promisify(Tp.Account.prototype,
+    'set_nickname_async', 'set_nickname_finish');
+Gio._promisify(Tp.Account.prototype,
+    'update_parameters_vardict_async', 'update_parameters_vardict_finish');
+
 const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
@@ -96,10 +108,8 @@ var Application = GObject.registerClass({
     }
 
     // Small wrapper to mark user-requested nick changes
-    setAccountNick(account, nick) {
-        account.set_nickname_async(nick, (a, res) => {
-            account.set_nickname_finish(res);
-        });
+    async setAccountNick(account, nick) {
+        await account.set_nickname_async(nick);
         this._untrackNominalNick(account);
     }
 
@@ -352,9 +362,7 @@ var Application = GObject.registerClass({
         this._accountsMonitor.connect('account-added', (am, account) => {
             // Reset nickname at startup
             let accountName = this._getTrimmedAccountName(account);
-            account.set_nickname_async(accountName, (a, res) => {
-                a.set_nickname_finish(res);
-            });
+            account.set_nickname_async(accountName);
         });
         this._accountsMonitor.connect('account-removed', (am, account) => {
             // Make sure we don't 'inject' outdated data into
@@ -448,7 +456,7 @@ var Application = GObject.registerClass({
         });
 
         let joinAction = this.lookup_action('join-room');
-        uris.forEach(uri => {
+        uris.forEach(async uri => {
             let [success, server, port, room] = this._parseURI(uri);
             if (!success)
                 return;
@@ -459,20 +467,16 @@ var Application = GObject.registerClass({
                        map[a].service === matchedId;
             });
 
+            let accountPath;
             if (matches.length) {
-                joinAction.activate(new GLib.Variant('(ssu)', [
-                    matches[0], `#${room}`, time,
-                ]));
+                accountPath = matches[0];
             } else {
-                this._createAccount(matchedId, server, port, a => {
-                    if (a) {
-                        joinAction.activate(new GLib.Variant('(ssu)', [
-                            a.get_object_path(),
-                            `#${room}`, time,
-                        ]));
-                    }
-                });
+                const account =
+                    await this._createAccount(matchedId, server, port);
+                accountPath = account.get_object_path();
             }
+
+            joinAction.activate(new GLib.Variant('(ssu)', [accountPath, `#${room}`, time]));
         });
     }
 
@@ -492,7 +496,7 @@ var Application = GObject.registerClass({
         return [success, server, port, room];
     }
 
-    _createAccount(id, server, port, callback) {
+    async _createAccount(id, server, port) {
         let params, name;
 
         if (id) {
@@ -522,14 +526,12 @@ var Application = GObject.registerClass({
         for (let prop in params)
             req.set_parameter(prop, params[prop]);
 
-        req.create_account_async((r, res) => {
-            let account = req.create_account_finish(res);
+        const account = await req.create_account_async();
 
-            Utils.clearAccountPassword(account);
-            Utils.clearIdentifyPassword(account);
+        Utils.clearAccountPassword(account);
+        Utils.clearIdentifyPassword(account);
 
-            callback(account);
-        });
+        return account;
     }
 
     _needsInitialSetup() {
@@ -602,9 +604,7 @@ var Application = GObject.registerClass({
                     return;
 
                 this._untrackNominalNick(account);
-                account.set_nickname_async(nominalNick, (a, res) => {
-                    a.set_nickname_finish(res);
-                });
+                account.set_nickname_async(nominalNick);
             });
         this._nickTrackData.set(account, { tracker, contactsChangedId });
     }
@@ -649,15 +649,15 @@ var Application = GObject.registerClass({
         let accountName = this._getTrimmedAccountName(account);
         let params = { account: new GLib.Variant('s', accountName) };
         let asv = new GLib.Variant('a{sv}', params);
-        account.update_parameters_vardict_async(asv, [], null);
+        account.update_parameters_vardict_async(asv, []);
     }
 
-    _retryWithParams(account, params) {
-        account.update_parameters_vardict_async(params, [], () => {
-            let presence = Tp.ConnectionPresenceType.AVAILABLE;
-            let msg = account.requested_status_message;
-            account.request_presence_async(presence, 'available', msg, null);
-        });
+    async _retryWithParams(account, params) {
+        await account.update_parameters_vardict_async(params, []);
+
+        const presence = Tp.ConnectionPresenceType.AVAILABLE;
+        const msg = account.requested_status_message;
+        account.request_presence_async(presence, 'available', msg);
     }
 
     _retryNickRequest(account) {
@@ -722,7 +722,7 @@ var Application = GObject.registerClass({
                 // Connection failed, keep tp from retrying over and over
                 let presence = Tp.ConnectionPresenceType.OFFLINE;
                 let msg = account.requested_status_message;
-                account.request_presence_async(presence, 'offline', msg, null);
+                account.request_presence_async(presence, 'offline', msg);
             }
         }
 
@@ -750,32 +750,26 @@ var Application = GObject.registerClass({
         action.change_state(GLib.Variant.new('b', !state.get_boolean()));
     }
 
-    _onRemoveConnection(action, parameter) {
+    async _onRemoveConnection(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
-        account.set_enabled_async(false, (a, res) => {
-            account.set_enabled_finish(res);
-            account.visible = false;
+        await account.set_enabled_async(false);
+        account.visible = false;
 
-            let label = _('%s removed.').format(account.display_name);
-            let n = new AppNotifications.UndoNotification(label);
-            this.notificationQueue.addNotification(n);
+        const label = _('%s removed.').format(account.display_name);
+        const n = new AppNotifications.UndoNotification(label);
+        this.notificationQueue.addNotification(n);
 
-            n.connect('closed', () => {
-                account.remove_async((o, r) => {
-                    a.remove_finish(r); // TODO: Check for errors
+        n.connect('closed', async () => {
+            await account.remove_async(); // TODO: Check for errors
 
-                    Utils.clearAccountPassword(a);
-                    Utils.clearIdentifyPassword(a);
-                });
-            });
-            n.connect('undo', () => {
-                account.set_enabled_async(true, (o, r) => {
-                    account.set_enabled_finish(r);
-                    account.visible = true;
-                });
-            });
+            Utils.clearAccountPassword(account);
+            Utils.clearIdentifyPassword(account);
+        });
+        n.connect('undo', async () => {
+            await account.set_enabled_async(true);
+            account.visible = true;
         });
     }
 

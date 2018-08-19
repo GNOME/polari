@@ -5,6 +5,10 @@ const Signals = imports.signals;
 
 const { NetworksManager } = imports.networksManager;
 
+Gio._promisify(Tp.AccountManager.prototype, 'prepare_async', 'prepare_finish');
+Gio._promisify(Tp.Account.prototype,
+    'request_presence_async', 'request_presence_finish');
+
 var AccountsMonitor = class {
     static getDefault() {
         if (!this._singleton)
@@ -95,17 +99,17 @@ var AccountsMonitor = class {
         this.visibleAccounts.forEach(a => this._updateAccountReachable(a));
     }
 
-    _onPrepareShutdown() {
-        let presence = Tp.ConnectionPresenceType.OFFLINE;
-        this.accounts.filter(a => a.requested_presence_type !== presence).forEach(a => {
-            this._app.hold();
-            a.request_presence_async(presence, 'offline', '', (o, res) => {
-                try {
-                    a.request_presence_finish(res);
-                } catch (e) { }
-                this._app.release();
-            });
-        });
+    async _onPrepareShutdown() {
+        const presence = Tp.ConnectionPresenceType.OFFLINE;
+        const onlineAccounts =
+            this.accounts.filter(a => a.requested_presence_type !== presence);
+
+        this._app.hold();
+
+        await Promise.all(onlineAccounts.map(
+            a => a.request_presence_async(presence, 'offline', '')));
+
+        this._app.release();
     }
 
     _shouldMonitorAccount(account) {

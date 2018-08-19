@@ -4,6 +4,14 @@ const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
 
 const Utils = imports.utils;
 
+Gio._promisify(Gio._LocalFilePrototype,
+    'load_contents_async', 'load_contents_finish');
+Gio._promisify(Gio._LocalFilePrototype,
+    'query_info_async', 'query_info_finish');
+Gio._promisify(Gio._LocalFilePrototype, 'read_async', 'read_finish');
+Gio._promisify(GdkPixbuf.Pixbuf.prototype,
+    'new_from_stream_async', 'new_from_stream_finish');
+
 const DndTargetType = {
     URI_LIST: 1,
 
@@ -22,50 +30,36 @@ function _getTargetForContentType(contentType) {
 
 
 var PasteManager = class {
-    pasteContent(content, title, callback) {
+    pasteContent(content, title) {
         if (typeof content === 'string')
-            Utils.gpaste(content, title, callback);
+            return Utils.gpaste(content, title);
         else if (content instanceof GdkPixbuf.Pixbuf)
-            Utils.imgurPaste(content, title, callback);
+            return Utils.imgurPaste(content, title);
         else if (content.query_info_async)
-            this._pasteFile(content, title, callback);
+            return this._pasteFile(content, title);
         else
             throw new Error('Unhandled content type');
     }
 
-    _pasteFile(file, title, callback) {
-        file.query_info_async(
+    async _pasteFile(file, title) {
+        const fileInfo = await file.query_info_async(
             Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
             Gio.FileQueryInfoFlags.NONE,
-            GLib.PRIORITY_DEFAULT, null, (f, res) => {
-                try {
-                    let fileInfo = file.query_info_finish(res);
-                    this._handleFilePaste(file, fileInfo, title, callback);
-                } catch (e) {
-                    callback(null);
-                }
-            });
-    }
+            GLib.PRIORITY_DEFAULT, null);
 
-    _handleFilePaste(file, fileInfo, title, callback) {
         let contentType = fileInfo.get_content_type();
         let targetType = _getTargetForContentType(contentType);
 
         if (targetType === DndTargetType.TEXT) {
-            file.load_contents_async(null, (f, res) => {
-                let [, contents] = f.load_contents_finish(res);
-                Utils.gpaste(contents.toString(), title, callback);
-            });
+            const [, contents] = await file.load_contents_async(null);
+            return Utils.gpaste(contents.toString(), title);
         } else if (targetType === DndTargetType.IMAGE) {
-            file.read_async(GLib.PRIORITY_DEFAULT, null, (f, res) => {
-                let stream = f.read_finish(res);
-                GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, r) => {
-                    let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(r);
-                    Utils.imgurPaste(pixbuf, title, callback);
-                });
-            });
+            const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
+            const pixbuf =
+                await GdkPixbuf.Pixbuf.new_from_stream_async(stream, null);
+            return Utils.imgurPaste(pixbuf, title);
         } else {
-            callback(null);
+            throw new Error('Unhandled content type');
         }
     }
 };
@@ -149,7 +143,7 @@ var DropTargetIface = GObject.registerClass({
     }
 
 
-    _onDragDataReceived(_widget, context, _x, _y, data, info, time) {
+    async _onDragDataReceived(_widget, context, _x, _y, data, info, time) {
         if (info === DndTargetType.URI_LIST) {
             let uris = data.get_uris();
             if (!uris) {
@@ -158,14 +152,19 @@ var DropTargetIface = GObject.registerClass({
             }
 
             // TODO: handle multiple files ...
-            let file = Gio.File.new_for_uri(uris[0]);
+            const file = Gio.File.new_for_uri(uris[0]);
+            const attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE;
+            const flags = Gio.FileQueryInfoFlags.NONE;
+            const priority = GLib.PRIORITY_DEFAULT;
             try {
-                this._lookupFileInfo(file, targetType => {
-                    let canHandle = targetType !== 0;
-                    if (canHandle)
-                        this.emit('file-dropped', file);
-                    Gtk.drag_finish(context, canHandle, false, time);
-                });
+                const fileInfo =
+                    await file.query_info_async(attr, flags, priority, null);
+                const contentType = fileInfo.get_content_type();
+                const targetType = _getTargetForContentType(contentType);
+                const canHandle = targetType !== 0;
+                if (canHandle)
+                    this.emit('file-dropped', file);
+                Gtk.drag_finish(context, canHandle, false, time);
             } catch (e) {
                 Gtk.drag_finish(context, false, false, time);
             }
@@ -183,16 +182,5 @@ var DropTargetIface = GObject.registerClass({
             }
             Gtk.drag_finish(context, success, false, time);
         }
-    }
-
-    _lookupFileInfo(file, callback) {
-        let attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE;
-        let flags = Gio.FileQueryInfoFlags.NONE;
-        let priority = GLib.PRIORITY_DEFAULT;
-        file.query_info_async(attr, flags, priority, null, (f, res) => {
-            let fileInfo = file.query_info_finish(res);
-            let contentType = fileInfo.get_content_type();
-            callback(_getTargetForContentType(contentType));
-        });
     }
 });

@@ -6,6 +6,9 @@ const Signals = imports.signals;
 const AppNotifications = imports.appNotifications;
 const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
+
+Gio._promisify(Tp.Account.prototype,
+    'request_presence_async', 'request_presence_finish');
 Gio._promisify(Tp.Connection.prototype,
     'dup_contact_by_id_async', 'dup_contact_by_id_finish');
 Gio._promisify(Tp.Contact.prototype,
@@ -100,17 +103,14 @@ var IrcParser = class {
                 retval = false;
                 break;
             }
-            this._room.channel.connection.dup_contact_by_id_async(nick, [],
-                (c, res) => {
-                    let contact;
-                    try {
-                        contact = c.dup_contact_by_id_finish(res);
-                    } catch (e) {
-                        logError(e, `Failed to get contact for ${nick}`);
-                        return;
-                    }
-                    this._room.add_member(contact);
-                });
+            try {
+                let connection = this._room.channel.connection;
+                let contact = await connection.dup_contact_by_id_async(nick);
+                this._room.add_member(contact);
+            } catch (e) {
+                logError(e, `Failed to get contact for ${nick}`);
+                retval = false;
+            }
             break;
         }
         case 'J':
@@ -141,17 +141,14 @@ var IrcParser = class {
                 retval = false;
                 break;
             }
-            this._room.channel.connection.dup_contact_by_id_async(nick, [],
-                (c, res) => {
-                    let contact;
-                    try {
-                        contact = c.dup_contact_by_id_finish(res);
-                    } catch (e) {
-                        logError(e, `Failed to get contact for ${nick}`);
-                        return;
-                    }
-                    this._room.remove_member(contact);
-                });
+            try {
+                let connection = this._room.channel.connection;
+                let contact = await connection.dup_contact_by_id_async(nick);
+                this._room.remove_member(contact);
+            } catch (e) {
+                logError(e, `Failed to get contact for ${nick}`);
+                retval = false;
+            }
             break;
         }
         case 'ME': {
@@ -247,14 +244,12 @@ var IrcParser = class {
         case 'QUIT': {
             let presence = Tp.ConnectionPresenceType.OFFLINE;
             let message = stripCommand(text);
-            this._room.account.request_presence_async(presence, 'offline', message,
-                (a, res) => {
-                    try {
-                        a.request_presence_finish(res);
-                    } catch (e) {
-                        logError(e, 'Failed to disconnect');
-                    }
-                });
+            try {
+                await this._room.account.request_presence_async(presence, 'offline', message);
+            } catch (e) {
+                logError(e, 'Failed to disconnect');
+                retval = false;
+            }
             break;
         }
         case 'SAY': {
@@ -318,15 +313,13 @@ var IrcParser = class {
         this._sendMessage(message);
     }
 
-    _sendMessage(message) {
-        this._room.channel.send_message_async(message, 0, (c, res) => {
-            try {
-                c.send_message_finish(res);
-            } catch (e) {
-                // TODO: propagate to user
-                logError(e, 'Failed to send message');
-            }
-        });
+    async _sendMessage(message) {
+        try {
+            await this._room.channel.send_message_async(message, 0);
+        } catch (e) {
+            // TODO: propagate to user
+            logError(e, 'Failed to send message');
+        }
     }
 };
 Signals.addSignalMethods(IrcParser.prototype);

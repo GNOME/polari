@@ -12,6 +12,8 @@ const { TabCompletion } = imports.tabCompletion;
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
 
+Gio._promisify(Gio._LocalFilePrototype,
+    'query_info_async', 'query_info_finish');
 
 var ChatEntry = GObject.registerClass({
     Implements: [DropTargetIface],
@@ -383,18 +385,13 @@ var EntryArea = GObject.registerClass({
         this._setPasteContent(pixbuf);
     }
 
-    pasteFile(file) {
-        file.query_info_async(
-            Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
-            Gio.FileQueryInfoFlags.NONE,
-            GLib.PRIORITY_DEFAULT, null,
-            this._onFileInfoReady.bind(this));
-    }
-
-    _onFileInfoReady(file, res) {
+    async pasteFile(file) {
         let fileInfo = null;
         try {
-            fileInfo = file.query_info_finish(res);
+            fileInfo = await file.query_info_async(
+                Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+                Gio.FileQueryInfoFlags.NONE,
+                GLib.PRIORITY_DEFAULT, null);
         } catch (e) {
             return;
         }
@@ -407,7 +404,7 @@ var EntryArea = GObject.registerClass({
         this._setPasteContent(file);
     }
 
-    _onPasteClicked() {
+    async _onPasteClicked() {
         let title;
         let nick = this._room.channel.connection.self_contact.alias;
         if (this._room.type === Tp.HandleType.ROOM)
@@ -415,24 +412,23 @@ var EntryArea = GObject.registerClass({
             title = _('%s in #%s').format(nick, this._room.display_name);
         else
             title = _('Paste from %s').format(nick);
+        this._confirmLabel.hide();
 
         this._confirmLabel.hide();
         this._uploadSpinner.start();
 
         let app = Gio.Application.get_default();
         try {
-            app.pasteManager.pasteContent(this._pasteContent, title, url => {
-                // TODO: handle errors
-                this._uploadSpinner.stop();
-                this._setPasteContent(null);
-                if (url)
-                    this._chatEntry.emit('insert-at-cursor', url);
-            });
+            const url =
+                await app.pasteManager.pasteContent(this._pasteContent, title);
+            this._setPasteContent(null);
+            this._chatEntry.emit('insert-at-cursor', url);
         } catch (e) {
             let type = typeof this._pasteContent;
             if (type === 'object')
                 type = this._pasteContent.toString();
             debug(`Failed to paste content of type ${type}`);
+        } finally {
             this._uploadSpinner.stop();
         }
     }

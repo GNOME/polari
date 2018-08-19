@@ -1,10 +1,17 @@
 /* exported ConnectionProperties ConnectionDetails ConnectionsList */
 
-const { GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+const { Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { NetworksManager } = imports.networksManager;
 const Utils = imports.utils;
+
+Gio._promisify(Tp.Account.prototype,
+    'set_display_name_async', 'set_display_name_finish');
+Gio._promisify(Tp.Account.prototype,
+    'update_parameters_vardict_async', 'update_parameters_vardict_finish');
+Gio._promisify(Tp.AccountRequest.prototype,
+    'create_account_async', 'create_account_finish');
 
 const DEFAULT_PORT = 6667;
 const DEFAULT_SSL_PORT = 6697;
@@ -196,7 +203,7 @@ var ConnectionsList = GObject.registerClass({
         });
     }
 
-    _onRowActivated(list, row) {
+    async _onRowActivated(list, row) {
         let name = this._networksManager.getNetworkName(row.id);
         let req = new Tp.AccountRequest({
             account_manager: Tp.AccountManager.dup(),
@@ -212,17 +219,14 @@ var ConnectionsList = GObject.registerClass({
         for (let prop in details)
             req.set_parameter(prop, details[prop]);
 
-        req.create_account_async((r, res) => {
-            let account = req.create_account_finish(res);
-            if (!account) // TODO: Handle errors
-                return;
-
-            Utils.clearAccountPassword(account);
-            Utils.clearIdentifyPassword(account);
-
-            this.emit('account-created', account);
-        });
         this.emit('account-selected');
+
+        const account = await req.create_account_async();
+
+        Utils.clearAccountPassword(account);
+        Utils.clearIdentifyPassword(account);
+
+        this.emit('account-created', account);
     }
 
     _setAccountRowSensitive(account, sensitive) {
@@ -432,7 +436,7 @@ var ConnectionDetails = GObject.registerClass({
             this._createAccount();
     }
 
-    _createAccount() {
+    async _createAccount() {
         let params = this._getParams();
         let accountManager = Tp.AccountManager.dup();
         let req = new Tp.AccountRequest({
@@ -448,32 +452,25 @@ var ConnectionDetails = GObject.registerClass({
         for (let prop in details)
             req.set_parameter(prop, details[prop]);
 
-        req.create_account_async((r, res) => {
-            let account = req.create_account_finish(res);
-            if (!account) // TODO: Handle errors
-                return;
+        const account = await req.create_account_async();
 
-            Utils.clearAccountPassword(account);
-            Utils.clearIdentifyPassword(account);
+        Utils.clearAccountPassword(account);
+        Utils.clearIdentifyPassword(account);
 
-            this.emit('account-created', account);
-        });
+        this.emit('account-created', account);
     }
 
-    _updateAccount() {
+    async _updateAccount() {
         let params = this._getParams();
         let account = this._account;
         let oldDetails = account.dup_parameters_vardict().deep_unpack();
         let [details, removed] = this._detailsFromParams(params, oldDetails);
         let vardict = GLib.Variant.new('a{sv}', details);
 
-        account.update_parameters_vardict_async(vardict, removed, (a, res) => {
-            a.update_parameters_vardict_finish(res); // TODO: Check for errors
-        });
-
-        account.set_display_name_async(params.name, (a, res) => {
-            a.set_display_name_finish(res); // TODO: Check for errors
-        });
+        await Promise.all([
+            account.update_parameters_vardict_async(vardict, removed),
+            account.set_display_name_async(params.name),
+        ]);
     }
 
     _detailsFromParams(params, oldDetails) {

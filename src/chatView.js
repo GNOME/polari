@@ -11,6 +11,9 @@ const { UserStatusMonitor } = imports.userTracker;
 const { URLPreview } = imports.urlPreview;
 const Utils = imports.utils;
 
+Gio._promisify(Tpl.LogWalker.prototype,
+    'get_events_async', 'get_events_finish');
+
 var MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 
@@ -359,8 +362,7 @@ var ChatView = GObject.registerClass({
             Tpl.EventTypeMask.TEXT, null);
 
         this._fetchingBacklog = true;
-        this._logWalker.get_events_async(NUM_INITIAL_LOG_EVENTS,
-            this._onLogEventsReady.bind(this));
+        this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
 
         this._autoscroll = true;
 
@@ -549,11 +551,12 @@ var ChatView = GObject.registerClass({
         this._logWalker = null;
     }
 
-    _onLogEventsReady(lw, res) {
+    async _getLogEvents(num) {
+        const [events] = await this._logWalker.get_events_async(num);
+
         this._hideLoadingIndicator();
         this._fetchingBacklog = false;
 
-        let [, events] = lw.get_events_finish(res);
         let messages = events.map(e => this._createMessage(e));
         this._pendingLogs = messages.concat(this._pendingLogs);
         this._insertPendingLogs();
@@ -744,8 +747,7 @@ var ChatView = GObject.registerClass({
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
         this._backlogTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
-            this._logWalker.get_events_async(NUM_LOG_EVENTS,
-                this._onLogEventsReady.bind(this));
+            this._getLogEvents(NUM_LOG_EVENTS);
             this._backlogTimeoutId = 0;
             return GLib.SOURCE_REMOVE;
         });

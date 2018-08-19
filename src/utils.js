@@ -31,6 +31,10 @@ const { Gdk, Gio, GLib, Gtk, Secret, Soup, TelepathyGLib: Tp }  = imports.gi;
 
 const AppNotifications = imports.appNotifications;
 
+Gio._promisify(Secret, 'password_store', 'password_store_finish');
+Gio._promisify(Secret, 'password_lookup', 'password_lookup_finish');
+Gio._promisify(Secret, 'password_clear', 'password_clear_finish');
+
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account',
     Secret.SchemaFlags.NONE,
@@ -133,51 +137,48 @@ function getTpEventTime() {
     return Tp.user_action_time_from_x11(time);
 }
 
-function storeAccountPassword(account, password, callback) {
+function storeAccountPassword(account, password) {
     let label = _('Polari server password for %s').format(account.display_name);
-    _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password, callback);
+    _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password);
 }
 
-function storeIdentifyPassword(account, password, callback) {
+function storeIdentifyPassword(account, password) {
     let label = _('Polari NickServ password for %s').format(account.display_name);
-    _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password, callback);
+    _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password);
 }
 
-function _storePassword(schema, label, account, password, callback) {
+async function _storePassword(schema, label, account, password) {
     let attr = { 'account-id': account.get_path_suffix() };
     let coll = Secret.COLLECTION_DEFAULT;
-    Secret.password_store(schema, attr, coll, label, password, null, (o, res) => {
-        try {
-            let success = Secret.password_store_finish(res);
-            callback(success);
-        } catch (e) {
-            let name = account.display_name;
-            log(`Failed to store password for account ${name}: ${e.message}`);
-            callback(false);
-        }
-    });
+    try {
+        await Secret.password_store(schema, attr, coll, label, password, null);
+    } catch (e) {
+        const name = account.display_name;
+        log(`Failed to store password for account ${name}: ${e.message}`);
+        throw e;
+    }
 }
 
-function lookupAccountPassword(account, callback) {
-    _lookupPassword(SECRET_SCHEMA_ACCOUNT, account, callback);
+function lookupAccountPassword(account) {
+    return _lookupPassword(SECRET_SCHEMA_ACCOUNT, account);
 }
 
-function lookupIdentifyPassword(account, callback) {
-    _lookupPassword(SECRET_SCHEMA_IDENTIFY, account, callback);
+function lookupIdentifyPassword(account) {
+    return _lookupPassword(SECRET_SCHEMA_IDENTIFY, account);
 }
 
-function _lookupPassword(schema, account, callback) {
+async function _lookupPassword(schema, account) {
     let attr = { 'account-id': account.get_path_suffix() };
-    Secret.password_lookup(schema, attr, null, (o, res) => {
-        try {
-            let password = Secret.password_lookup_finish(res);
-            callback(password);
-        } catch (e) {
-            let name = account.display_name;
-            log(`Failed to lookup password for account "${name}": ${e.message}`);
-            callback(null);
-        }
-    });
+    let password = null;
+    try {
+        password = await Secret.password_lookup(schema, attr, null);
+    } catch (e) {
+        const name = account.display_name;
+        log(`Failed to lookup password for account "${name}": ${e.message}`);
+        throw e;
+    }
+
+    return password;
 }
 
 function clearAccountPassword(account) {
@@ -188,16 +189,15 @@ function clearIdentifyPassword(account) {
     _clearPassword(SECRET_SCHEMA_IDENTIFY, account);
 }
 
-function _clearPassword(schema, account) {
+async function _clearPassword(schema, account) {
     let attr = { 'account-id': account.get_path_suffix() };
-    Secret.password_clear(schema, attr, null, (o, res) => {
-        try {
-            Secret.password_clear_finish(res);
-        } catch (e) {
-            const name = account.display_name;
-            log(`Failed to clear password for account "${name}": ${e.message}`);
-        }
-    });
+    try {
+        await Secret.password_clear(schema, attr, null);
+    } catch (e) {
+        const name = account.display_name;
+        log(`Failed to clear password for account "${name}": ${e.message}`);
+        throw e;
+    }
 }
 
 // findUrls:
@@ -258,45 +258,39 @@ function updateTerms(terms, str) {
     return changed;
 }
 
-function _getGpasteExpire(callback) {
-    let session = new Soup.Session();
-    let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
-    let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
-    session.queue_message(message, () => {
-        if (message.status_code !== Soup.KnownStatusCode.OK) {
-            callback(false);
-            return;
-        }
-
-        let info = {};
-        try {
-            info = JSON.parse(message.response_body.data);
-        } catch (e) {
-            log(e.message);
-        }
-
-        let values = info.result ? info.result.values : undefined;
-        if (!values)
-            callback(false);
-
-        let day = 24 * 60 * 60;
-        _gpasteExpire = values.reduce((acc, val) => {
-            return Math.abs(day - acc) < Math.abs(day - val) ? acc : val;
-        }, 0).toString();
-        callback(true);
+function _queueSoupMessage(session, message) {
+    return new Promise((resolve, reject) => {
+        session.queue_message(message, () => {
+            const { statusCode } = message;
+            if (statusCode === Soup.KnownStatusCode.OK)
+                resolve(message.responseBody.data);
+            else
+                reject(new Error(`Got unexpected response ${statusCode}`));
+        });
     });
 }
 
-function gpaste(text, title, callback) {
-    if (_gpasteExpire === undefined) {
-        _getGpasteExpire(success => {
-            if (success)
-                gpaste(text, title, callback);
-            else
-                callback(null);
-        });
-        return;
-    }
+async function _getGpasteExpire() {
+    let session = new Soup.Session();
+    let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
+    let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
+
+    const json = await _queueSoupMessage(session, message);
+    const info = JSON.parse(json);
+
+    const values = info.result?.values;
+    if (!values)
+        throw new Error('Returned data is missing expected fields');
+
+    const day = 24 * 60 * 60;
+    return values.reduce((acc, val) => {
+        return Math.abs(day - acc) < Math.abs(day - val) ? acc : val;
+    }, 0).toString();
+}
+
+async function gpaste(text, title) {
+    if (_gpasteExpire === undefined)
+        _gpasteExpire = await _getGpasteExpire();
 
     if (title.length > MAX_PASTE_TITLE_LENGTH)
         title = `${title.substr(0, MAX_PASTE_TITLE_LENGTH - 1)}…`;
@@ -311,31 +305,19 @@ function gpaste(text, title, callback) {
     let session = new Soup.Session();
     let createUrl = `${GPASTE_BASEURL}api/json/create`;
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
-    session.queue_message(message, () => {
-        if (message.status_code !== Soup.KnownStatusCode.OK) {
-            callback(null);
-            return;
-        }
 
-        let info = {};
-        try {
-            info = JSON.parse(message.response_body.data);
-        } catch (e) {
-            log(e.message);
-        }
-        if (info.result && info.result.id)
-            callback(`${GPASTE_BASEURL}${info.result.id}`);
-        else
-            callback(null);
-    });
+    const json = await _queueSoupMessage(session, message);
+    const info = JSON.parse(json);
+
+    if (!info.result?.id)
+        throw new Error('Paste server did not return a URL');
+    return `${GPASTE_BASEURL}${info.result.id}`;
 }
 
-function imgurPaste(pixbuf, title, callback) {
+async function imgurPaste(pixbuf, title) {
     let [success, buffer] = pixbuf.save_to_bufferv('png', [], []);
-    if (!success) {
-        callback(null);
-        return;
-    }
+    if (!success)
+        throw new Error('Failed to create image buffer');
 
     let params = {
         title,
@@ -348,23 +330,14 @@ function imgurPaste(pixbuf, title, callback) {
 
     let requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
-    session.queue_message(message, () => {
-        if (message.status_code !== Soup.KnownStatusCode.OK) {
-            callback(null);
-            return;
-        }
 
-        let info = {};
-        try {
-            info = JSON.parse(message.response_body.data);
-        } catch (e) {
-            log(e.message);
-        }
-        if (info.success)
-            callback(info.data.link);
-        else
-            callback(null);
-    });
+    const json = await _queueSoupMessage(session, message);
+    const info = JSON.parse(json);
+
+    if (!info.success)
+        throw new Error('Failed to upload image to paste service');
+
+    return info.data.link;
 }
 
 function formatTimePassed(seconds) {
