@@ -1,3 +1,25 @@
+3.29.91 — “It's Like the 60s, with Less Hope”
+=============================================
+* Misc. bug fixes and cleanups [Florian; !47, #64, !60, !61, !62]
+* Improve continuous integration:
+  * Base build test on flatpak and produce a testable bundle
+    [Jordan, Florian; #61]
+  * Require passing static analysis from eslint [Florian; !63]
+* Hook up gjs' new debugger console via command line [Florian; !49]
+* Fix debug information logged to journal [Florian; !55]
+* Switch to GTK+'s built-in emoji picker [Florian; !58]
+
+Contributors:
+  Florian Müllner, Jordan Petridis
+
+Translators:
+  Daniel Mustieles [es], Fabio Tomat [fur], Matej Urbančič [sl],
+  Mario Blättermann [de], Piotr Drąg [pl], Aurimas Černius [lt],
+  Muhammet Kara [tr], Anders Jonsson [sv], Guillaume Bernard [fr],
+  Yi-Jyun Pan [zh_TW], Yuras Shumovich [be], Efstathios Iosifidis [el],
+  Marek Cernocky [cs], Claude Paroz [fr], Jiri Grönroos [fi],
+  Bruce Cowan [en_GB], Hannie Dumoleyn [nl], Daniel Șerbănescu [ro]
+
 3.29.4 — “Screw Maximilian!”
 ===========================
 * Add Rizon to list of predefined networks [Niek; #54]
