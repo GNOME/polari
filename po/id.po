@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-02-20 23:18+0000\n"
-"PO-Revision-Date: 2018-02-22 16:12+0700\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"POT-Creation-Date: 2018-07-25 04:57+0000\n"
+"PO-Revision-Date: 2018-07-25 15:56+0700\n"
+"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:65
 #: src/roomStack.js:160
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:808
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:817
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Suatu Klien Internet Relay Chat untuk GNOME"
 
@@ -75,7 +75,7 @@ msgstr "Daftar kanal tersimpan"
 msgid "List of channels to restore on startup"
 msgstr "Daftar kanal yang akan dipulihkan saat awal mula"
 
-#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
 msgstr "Jalankan di Latar Belakang"
 
@@ -314,11 +314,27 @@ msgstr "T_ambah"
 msgid "_Custom Network"
 msgstr "Jaringan _Ubahan"
 
-#: data/resources/main-window.ui:14
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Tik"
+
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "Bantuan"
+
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "Tentang"
+
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+msgid "Quit"
+msgstr "Keluar"
+
+#: data/resources/main-window.ui:40
 msgid "Run Polari in the Background?"
 msgstr "Jalankan Polari di Latar Belakang?"
 
-#: data/resources/main-window.ui:15
+#: data/resources/main-window.ui:41
 msgid ""
 "Polari will continue to run when closed and will be automatically started on "
 "login."
@@ -326,37 +342,21 @@ msgstr ""
 "Polari akan terus berjalan ketika ditutup dan akan secara otomatis dimulai "
 "pada saat masuk."
 
-#: data/resources/main-window.ui:21
+#: data/resources/main-window.ui:47
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: data/resources/main-window.ui:28
+#: data/resources/main-window.ui:54
 msgid "_Run in background"
 msgstr "_Jalankan di latar belakang"
 
-#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+#: data/resources/main-window.ui:81 data/resources/main-window.ui:95
 msgid "Add rooms and networks"
 msgstr "Tambah ruang dan jaringan"
 
-#: data/resources/main-window.ui:175
+#: data/resources/main-window.ui:222
 msgid "Show connected users"
 msgstr "Tampilkan pengguna yang tersambung"
-
-#: data/resources/menus.ui:12
-msgid "Keyboard Shortcuts"
-msgstr "Pintasan Papan Tik"
-
-#: data/resources/menus.ui:16
-msgid "Help"
-msgstr "Bantuan"
-
-#: data/resources/menus.ui:20
-msgid "About"
-msgstr "Tentang"
-
-#: data/resources/menus.ui:24
-msgid "Quit"
-msgstr "Keluar"
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -366,23 +366,23 @@ msgstr "Ubah nama panggilan:"
 msgid "_Change"
 msgstr "U_bah"
 
-#: data/resources/room-list-header.ui:146
+#: data/resources/room-list-header.ui:145
 msgid "Connect"
 msgstr "Sambung"
 
-#: data/resources/room-list-header.ui:154
+#: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "Sambungkan kembali"
 
-#: data/resources/room-list-header.ui:162
+#: data/resources/room-list-header.ui:159
 msgid "Disconnect"
 msgstr "Putuskan"
 
-#: data/resources/room-list-header.ui:170
+#: data/resources/room-list-header.ui:166
 msgid "Remove"
 msgstr "Buang"
 
-#: data/resources/room-list-header.ui:178
+#: data/resources/room-list-header.ui:173
 msgid "Properties"
 msgstr "Properti"
 
@@ -410,31 +410,35 @@ msgstr "Mulai Percakapan"
 msgid "Start Telepathy client"
 msgstr "Mulai klien Telepathy"
 
-#: src/application.js:50
+#: src/application.js:52
+msgid "Start in debug mode"
+msgstr "Mulai dalam mode awakutu"
+
+#: src/application.js:55
 msgid "Allow running alongside another instance"
 msgstr "Izinkan berjalan di samping instance lain"
 
-#: src/application.js:53
+#: src/application.js:58
 msgid "Print version and exit"
 msgstr "Cetak versi dan keluar"
 
-#: src/application.js:420 src/utils.js:184
+#: src/application.js:425 src/utils.js:184
 msgid "Failed to open link"
 msgstr "Gagal membuka taut"
 
-#: src/application.js:705
+#: src/application.js:712
 #, javascript-format
 msgid "%s removed."
 msgstr "%s dihapus."
 
-#: src/application.js:807
+#: src/application.js:816
 msgid "translator-credits"
 msgstr ""
 "Andika Triwidada <andika@gmail.com>, 2014, 2016, 2018\n"
 "Sendy Aditya Suryana <sendzation@gmail.com>, 2015\n"
 "Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017"
 
-#: src/application.js:813
+#: src/application.js:822
 msgid "Learn more about Polari"
 msgstr "Pelajari lebih lanjut tentang Polari"
 
@@ -770,7 +774,7 @@ msgstr "Topik tak ditata"
 msgid "Add Network"
 msgstr "Tambah Jaringan"
 
-#: src/mainWindow.js:382
+#: src/mainWindow.js:388
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -784,54 +788,54 @@ msgstr "Tinggalkan ruangan"
 msgid "End conversation"
 msgstr "Akhiri percakapan"
 
-#: src/roomList.js:288
+#: src/roomList.js:293
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Jaringan %s punya kesalahan"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:359
+#: src/roomList.js:364
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:366
+#: src/roomList.js:371
 msgid "Connection Problem"
 msgstr "Masalah Koneksi"
 
-#: src/roomList.js:383
+#: src/roomList.js:388
 msgid "Connected"
 msgstr "Tersambung"
 
-#: src/roomList.js:385
+#: src/roomList.js:390
 msgid "Connecting…"
 msgstr "Menyambung..."
 
-#: src/roomList.js:387 src/userList.js:415
+#: src/roomList.js:392 src/userList.js:415
 msgid "Offline"
 msgstr "Luring"
 
-#: src/roomList.js:389
+#: src/roomList.js:394
 msgid "Unknown"
 msgstr "Tak dikenal"
 
-#: src/roomList.js:409
+#: src/roomList.js:414
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Tidak bisa menyambung ke %s dengan cara aman."
 
-#: src/roomList.js:412
+#: src/roomList.js:417
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s memerlukan sandi."
 
-#: src/roomList.js:418
+#: src/roomList.js:423
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Tidak bisa menyambung ke %s. Server sibuk."
 
-#: src/roomList.js:421
+#: src/roomList.js:426
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Tidak bisa menyambung ke %s."
