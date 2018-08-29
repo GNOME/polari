@@ -1,9 +1,8 @@
 /* exported ServerRoomManager ServerRoomList */
 
-const { Gdk, GLib, GObject, Gtk } = imports.gi;
+const { Gdk, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
-const Tp = imports.gi.TelepathyGLib;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;

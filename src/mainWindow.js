@@ -1,8 +1,7 @@
 /* exported MainWindow FixedSizeFrame RoomList RoomStack UserList */
 
-const { Gdk, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
+const { Gdk, Gio, GLib, GObject, Gtk, Polari, TelepathyGLib: Tp } = imports.gi;
 const Mainloop = imports.mainloop;
-const Tp = imports.gi.TelepathyGLib;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { JoinDialog } = imports.joinDialog;

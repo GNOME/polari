@@ -1,8 +1,7 @@
 /* exported IrcParser */
 
-const { Gio, GLib } = imports.gi;
+const { Gio, GLib, TelepathyGLib: Tp } = imports.gi;
 const Signals = imports.signals;
-const Tp = imports.gi.TelepathyGLib;
 
 const AppNotifications = imports.appNotifications;
 const { RoomManager } = imports.roomManager;

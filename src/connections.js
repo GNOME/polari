@@ -1,7 +1,6 @@
 /* exported ConnectionProperties ConnectionDetails ConnectionsList */
 
-const { GLib, GObject, Gtk } = imports.gi;
-const Tp = imports.gi.TelepathyGLib;
+const { GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { NetworksManager } = imports.networksManager;

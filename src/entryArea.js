@@ -1,8 +1,9 @@
 /* exported ChatEntry EntryArea NickPopover */
 
-const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk } = imports.gi;
+const {
+    Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp
+} = imports.gi;
 const Mainloop = imports.mainloop;
-const Tp = imports.gi.TelepathyGLib;
 
 const ChatView = imports.chatView;
 const { DropTargetIface } = imports.pasteManager;

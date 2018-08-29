@@ -1,7 +1,6 @@
 /* exported RoomStack */
 
-const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
-const Tp = imports.gi.TelepathyGLib;
+const { Gio, GLib, GObject, Gtk, Pango, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { ChatView } = imports.chatView;

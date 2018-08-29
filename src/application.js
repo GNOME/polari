@@ -1,7 +1,6 @@
 /* exported Application */
 
-const { Gdk, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
-const Tp = imports.gi.TelepathyGLib;
+const { Gdk, Gio, GLib, GObject, Gtk, Polari, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const AppNotifications = imports.appNotifications;

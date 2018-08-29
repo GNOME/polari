@@ -1,9 +1,10 @@
 /* exported ChatView */
 
-const { Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari } = imports.gi;
+const {
+    Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari,
+    TelepathyGLib: Tp, TelepathyLogger: Tpl
+} = imports.gi;
 const Mainloop = imports.mainloop;
-const Tp = imports.gi.TelepathyGLib;
-const Tpl = imports.gi.TelepathyLogger;
 
 const { DropTargetIface } = imports.pasteManager;
 const { UserPopover } = imports.userList;

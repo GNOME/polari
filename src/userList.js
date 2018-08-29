@@ -1,8 +1,9 @@
 /* exported UserList UserListPopover UserDetails UserPopover */
 
-const { Gio, GLib, GObject, Gtk, Pango, Polari } = imports.gi;
+const {
+    Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp
+} = imports.gi;
 const Mainloop = imports.mainloop;
-const Tp = imports.gi.TelepathyGLib;
 
 const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 

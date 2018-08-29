@@ -24,8 +24,7 @@
  *
  */
 
-const { Gdk, Gio, GLib, Gtk, Secret, Soup }  = imports.gi;
-const Tp = imports.gi.TelepathyGLib;
+const { Gdk, Gio, GLib, Gtk, Secret, Soup, TelepathyGLib: Tp }  = imports.gi;
 
 const AppNotifications = imports.appNotifications;
 

@@ -1,7 +1,6 @@
 /* exported TelepathyClient */
 
-const { Gio, GLib, GObject, Polari } = imports.gi;
-const Tp = imports.gi.TelepathyGLib;
+const { Gio, GLib, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;

@@ -1,8 +1,7 @@
 /* exported AccountsMonitor */
 
-const { Gio, GObject, Polari } = imports.gi;
+const { Gio, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
 const Signals = imports.signals;
-const Tp = imports.gi.TelepathyGLib;
 
 var AccountsMonitor = class {
     static getDefault() {

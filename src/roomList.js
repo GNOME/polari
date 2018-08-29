@@ -1,8 +1,7 @@
 /* exported RoomList RoomListHeader RoomRow */
 
-const { Gdk, Gio, GLib, GObject, Gtk } = imports.gi;
+const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 const Mainloop = imports.mainloop;
-const Tp = imports.gi.TelepathyGLib;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
