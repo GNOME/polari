@@ -1,3 +1,14 @@
+3.29.92 — “Stem the Rose”
+=========================
+* Improve highlighting for nicks with dashes/underscores [Florian; #69]
+* Misc. bug fixes [Florian; !64, !65, #38]
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Rafael Fontenelle [pt_BR], Kukuh Syafaat [id], Milo Casagrande [it]
+
 3.29.91 — “It's Like the 60s, with Less Hope”
 =============================================
 * Misc. bug fixes and cleanups [Florian; !47, #64, !60, !61, !62]
