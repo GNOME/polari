@@ -29,24 +29,25 @@ Gio._promisify(Tp.TextChannel.prototype,
 
 const SHELL_CLIENT_PREFIX = 'org.freedesktop.Telepathy.Client.GnomeShell';
 
-const SASLAuthenticationIface = '<node> \
-<interface name="org.freedesktop.Telepathy.Channel.Interface.SASLAuthentication"> \
-<method name="StartMechanismWithData"> \
-    <arg type="s" direction="in" name="mechanism" /> \
-    <arg type="ay" direction="in" name="data" /> \
-</method> \
-<method name="AcceptSASL"/> \
-<method name="AbortSASL"> \
-    <arg type="u" direction="in" name="reason"/> \
-    <arg type="s" direction="in" name="debug-message"/> \
-</method> \
-<signal name="SASLStatusChanged"> \
-    <arg name="status" type="u" /> \
-    <arg name="reason" type="s" /> \
-    <arg name="details" type="a{sv}" /> \
-</signal> \
-</interface> \
-</node>';
+const SASLAuthenticationIface = `
+<node>
+<interface name="org.freedesktop.Telepathy.Channel.Interface.SASLAuthentication">
+  <method name="StartMechanismWithData">
+    <arg type="s" direction="in" name="mechanism" />
+    <arg type="ay" direction="in" name="data" />
+  </method>
+  <method name="AcceptSASL"/>
+  <method name="AbortSASL">
+    <arg type="u" direction="in" name="reason"/>
+    <arg type="s" direction="in" name="debug-message"/>
+  </method>
+  <signal name="SASLStatusChanged">
+    <arg name="status" type="u" />
+    <arg name="reason" type="s" />
+    <arg name="details" type="a{sv}" />
+  </signal>
+</interface>
+</node>`;
 let SASLAuthProxy = Gio.DBusProxy.makeProxyWrapper(SASLAuthenticationIface);
 
 const SASLStatus = {
