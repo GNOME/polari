@@ -57,7 +57,8 @@ var InitialSetupWindow = GObject.registerClass({
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._networkMonitor.connect('notify::network-available',
                                      this._onNetworkAvailableChanged.bind(this));
-        this._onNetworkAvailableChanged();
+        if (this._networkMonitor.state_valid)
+            this._onNetworkAvailableChanged();
     }
 
     _onNetworkAvailableChanged() {
