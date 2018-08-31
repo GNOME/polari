@@ -193,8 +193,9 @@ class TelepathyClient extends Tp.BaseClient {
 
         this._networkMonitor.connect('network-changed',
                                      this._onNetworkChanged.bind(this));
-        this._onNetworkChanged(this._networkMonitor,
-                               this._networkMonitor.network_available);
+        if (this._networkMonitor.state_valid)
+            this._onNetworkChanged(this._networkMonitor,
+                                   this._networkMonitor.network_available);
     }
 
     _onNetworkChanged(mon, connected) {
