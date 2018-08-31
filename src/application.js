@@ -285,8 +285,26 @@ var Application = GObject.registerClass({
         this._userStatusMonitor = UserStatusMonitor.getDefault();
         this._networksManager = NetworksManager.getDefault();
 
-        if (!Gio.NetworkMonitor.get_default().get_network_metered())
-            this._serverRoomManager = ServerRoomManager.getDefault();
+        // The portal implementation fetches the initial state asynchronously,
+        // so track when the it becomes valid to not base decisions on an
+        // incorrect offline state
+        let networkMonitor = Gio.NetworkMonitor.get_default();
+        networkMonitor.state_valid =
+            !Utils.isFlatpakSandbox() &&
+            GLib.getenv('GTK_USE_PORTAL') != '1';
+
+        if (!networkMonitor.state_valid) {
+            let id = networkMonitor.connect('network-changed', () => {
+                networkMonitor.disconnect(id);
+                networkMonitor.state_valid = true;
+
+                if (!networkMonitor.network_metered)
+                    this._serverRoomManager = ServerRoomManager.getDefault();
+            });
+        } else {
+            if (!networkMonitor.network_metered)
+                this._serverRoomManager = ServerRoomManager.getDefault();
+        }
 
         this._accountsMonitor.connect('account-status-changed',
                                       this._onAccountStatusChanged.bind(this));
