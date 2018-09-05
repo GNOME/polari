@@ -513,7 +513,7 @@ class UserListRow extends Gtk.ListBoxRow {
             let preMatch = this._user.alias.substring(0, filterIndex);
             let theMatch = this._user.alias.substring(filterIndex, filterIndex + this._filter.length);
             let postMatch = this._user.alias.substring(filterIndex + this._filter.length);
-            this._label.label = `${preMatch} <b> ${theMatch} </b> ${postMatch}`;
+            this._label.label = `${preMatch} <b> ${theMatch} <${'/'}b> ${postMatch}`;
         }
     }
 

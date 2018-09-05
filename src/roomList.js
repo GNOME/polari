@@ -360,12 +360,12 @@ var RoomListHeader = GObject.registerClass({
                server address, e.g. "GNOME (irc.gnome.org)" */
             let fullTitle = _("%s (%s)").format(accountName, server);
             this._popoverTitle.label = (accountName == server) ? accountName : fullTitle;
-            this._popoverStatus.label = `<sup>${this._getStatusLabel()}</sup>`;
+            this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
         } else {
             let styleContext = this._popoverStatus.get_style_context();
             styleContext.remove_class('dim-label');
 
-            this._popoverTitle.label = `<b>${_("Connection Problem")}</b>`;
+            this._popoverTitle.label = `<b>${_("Connection Problem")}<${'/'}b>`;
             this._popoverStatus.label = this._getErrorLabel();
         }
     }
