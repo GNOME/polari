@@ -19,7 +19,7 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-const AUTOSTART_DIR = `${GLib.get_user_config_dir()}/autostart`;
+const AUTOSTART_DIR = `${GLib.get_user_config_dir()}${'/'}autostart`;
 const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
 
 var Application = GObject.registerClass({

@@ -397,7 +397,7 @@ var MainWindow = GObject.registerClass({
                     this._room.topic.substr(pos, url.pos - pos), -1
                 );
                 let urlText = GLib.markup_escape_text(url.url, -1);
-                subtitle += `${text} <a href="${urlText}">${urlText}</a>`;
+                subtitle += `${text} <a href="${urlText}">${urlText}<${'/'}a>`;
                 pos = url.pos + url.url.length;
             }
             subtitle += GLib.markup_escape_text(this._room.topic.substr(pos), -1);
