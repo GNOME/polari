@@ -28,7 +28,7 @@ girdir = join_paths(pkgdatadir, 'gir-1.0')
 typelibdir = join_paths(pkglibdir, 'girepository-1.0')
 
 gjs_console = find_program('gjs')
-js_shell = find_program('js60', 'js52', required: false)
+js_shell = find_program('js60', required: false)
 
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
