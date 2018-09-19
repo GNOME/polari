@@ -494,8 +494,8 @@ msgstr[1] "%d brukere ble med"
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
-msgstr[0] "%d bruker igjen"
-msgstr[1] "%d brukere igjen"
+msgstr[0] "%d bruker forlot"
+msgstr[1] "%d brukere forlot"
 
 #. today
 #. Translators: Time in 24h format
