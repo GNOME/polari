@@ -590,11 +590,11 @@
     "name": "RusNet",
     "id": "rusnet",
     "servers": [
-      { "ssl": false, "port": 6667, "address": "irc.tomsk.net" },
-      { "ssl": false, "port": 6667, "address": "irc.rinet.ru" },
-      { "ssl": false, "port": 6667, "address": "irc.run.net" },
-      { "ssl": false, "port": 6667, "address": "irc.ru" },
-      { "ssl": false, "port": 6667, "address": "irc.lucky.net" }
+      { "charset": "koi8-r", "ssl": false, "port": 6667, "address": "irc.tomsk.net" },
+      { "charset": "koi8-r", "ssl": false, "port": 6667, "address": "irc.rinet.ru" },
+      { "charset": "koi8-r", "ssl": false, "port": 6667, "address": "irc.run.net" },
+      { "charset": "koi8-r", "ssl": false, "port": 6667, "address": "irc.ru" },
+      { "charset": "koi8-r", "ssl": false, "port": 6667, "address": "irc.lucky.net" }
     ]
   },
   {
