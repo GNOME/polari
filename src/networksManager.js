@@ -81,7 +81,8 @@ var NetworksManager = class {
             'account': new GLib.Variant('s', GLib.get_user_name()),
             'server': new GLib.Variant('s', server.address),
             'port': new GLib.Variant('u', server.port),
-            'use-ssl': new GLib.Variant('b', server.ssl)
+            'use-ssl': new GLib.Variant('b', server.ssl),
+            'charset': server.charset ? new GLib.Variant('s', server.charset) : undefined
         };
     }
 
