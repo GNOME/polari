@@ -820,7 +820,8 @@ var Application = GObject.registerClass({
                 'Rares Visalom <rares.visalom@gmail.com>',
                 'Danny Mølgaard <moelgaard.dmp@gmail.com>',
                 'Justyn Temme <Justyntemme@gmail.com>',
-                'unkemptArc99 <abhishekbhardwaj540@gmail.com>'
+                'unkemptArc99 <abhishekbhardwaj540@gmail.com>',
+                'Oscar Shrimpton <oscar.shrimpton.personal@gmail.com>'
             ],
             artists: [
                 'Sam Hewitt <hewittsamuel@gmail.com>',
