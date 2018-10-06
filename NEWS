@@ -1,3 +1,15 @@
+3.30.1 — “Light Your Tampon”
+============================
+* Improve network connectivity handling when running sandboxed [Florian; !68]
+* Support non-UTF8 charsets in predefined networks [Oscar; #43]
+* Misc. bug fixes [Florian; #76, !72]
+
+Contributors:
+  Florian Müllner, Oscar Shrimpton
+
+Translators:
+  Stas Solovey [ru], Марко Костић [sr]
+
 3.30.0 — “I Was Left For a Punctuation Mark”
 ============================================
 
