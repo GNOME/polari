@@ -1,4 +1,4 @@
-gnome.yelp(app_id,
+gnome.yelp(meson.project_name(),
   sources: [
     'index.page',
     'introduction.page',
