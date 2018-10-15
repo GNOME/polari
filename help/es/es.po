@@ -2,13 +2,14 @@
 # Copyright (C) 2016 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2016, 2017.
+# Rodrigo <rodhos92@gmail.com>, 2018.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2016, 2017, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2017-03-20 13:22+0000\n"
-"PO-Revision-Date: 2017-03-22 12:25+0100\n"
+"POT-Creation-Date: 2018-10-06 17:25+0000\n"
+"PO-Revision-Date: 2018-10-15 10:08+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -25,7 +26,6 @@ msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2017"
 
 #. (itstool) path: info/title
 #: C/index.page:7
-#| msgid "Polari"
 msgctxt "text"
 msgid "Polari"
 msgstr "Polari"
@@ -52,7 +52,6 @@ msgstr "Paul Cutler"
 #: C/index.page:23 C/irc-commands.page:19 C/irc-join-room.page:17
 #: C/irc-nick-password.page:21 C/irc-start-conversation.page:20
 #: C/overview.page:17 C/sharing.page:17
-#| msgid "Creative Commons Attribution-ShareAlike 4.0 International"
 msgid "Creative Commons Share Alike 4.0"
 msgstr "Creative Commons Compartir Igual 4.0"
 
@@ -159,6 +158,9 @@ msgid ""
 "All commands available will be listed and you can type <input>/help "
 "commandname</input> to get additional help with a specific command."
 msgstr ""
+"Todos los comandos disponibles se listarán y puede escribir <input>/help "
+"nombredecomando</input> para obtener ayuda adicional con un comando "
+"específico."
 
 #. (itstool) path: info/desc
 #: C/irc-join-room.page:10
@@ -177,6 +179,9 @@ msgid ""
 "you are connected to. To connect to an IRC network, see <link xref=\"network-"
 "connect\"/>."
 msgstr ""
+"Puede unirse a las salas de chat IRC (también conocidas como canales IRC) en "
+"cualquier red IRC a la que esté conectado. Para conectarse a una red IRC, "
+"consulte <link xref=\"network-connect\"/>."
 
 #. (itstool) path: page/p
 #: C/irc-join-room.page:27
@@ -195,6 +200,9 @@ msgid ""
 "room(s) from the list and then press <gui>Join</gui>. You can select "
 "multiple rooms from the list to join."
 msgstr ""
+"Introduzca el nombre de la sala de chat a la que quiere unirse o seleccione "
+"la(s) sala(s) de chat de la lista y luego presione <gui>Unirse</gui>. Puede "
+"seleccionar varias salas de la lista para unirse."
 
 #. (itstool) path: item/p
 #: C/irc-join-room.page:39
@@ -235,6 +243,11 @@ msgid ""
 "to message NickServ to identify yourself after connecting to the IRC Network "
 "with the following command:"
 msgstr ""
+"<app>Polari</app> actualmente no admite el registro de apodos "
+"automáticamente. Cada red IRC maneja el registro de un apodo específico de "
+"manera diferente y deberá consultar con la red IRC cómo registrar su apodo. "
+"Después de registrar un apodo, deberá enviar un mensaje a NickServ para "
+"identificarse después de conectarse a la red IRC con el siguiente comando:"
 
 #. (itstool) path: item/p
 #: C/irc-nick-password.page:40
@@ -313,6 +326,9 @@ msgid ""
 "active in the channel, will appear. Click <gui>Message</gui> to start a "
 "private conversation."
 msgstr ""
+"Aparecerá información sobre el usuario, incluido su nombre y la última vez "
+"que estuvo activo en el canal. Pulse en <gui>Mensaje</gui> para iniciar una "
+"conversación privada."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -325,6 +341,9 @@ msgid ""
 "In the upper-right hand corner of <app>Polari</app> a number is displayed "
 "that shows the total number of users in the chat room. Click on the number."
 msgstr ""
+"En la esquina superior derecha de <app>Polari</app> se muestra un número que "
+"representa el número total de usuarios en la sala de chat. Pulse en el "
+"número."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:53
@@ -333,6 +352,9 @@ msgid ""
 "including their name and the last time they were active in the channel, will "
 "appear."
 msgstr ""
+"Seleccione el nombre del usuario al que quiere escribir un mensaje. "
+"Aparecerá información sobre el usuario, incluido su nombre y la última vez "
+"que estuvo activo en el canal."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
@@ -346,6 +368,9 @@ msgid ""
 "chat room will be shown in the left sidebar of <app>Polari</app> with the "
 "name of the person you are chatting with."
 msgstr ""
+"Se iniciará una nueva conversación privada y se creará una sala de chat. La "
+"sala de chat se mostrará en la barra lateral izquierda de <app>Polari</app> "
+"con el nombre de la persona con la que está conversando."
 
 #. (itstool) path: p/link
 #: C/legal.xml:5
@@ -385,6 +410,9 @@ msgid ""
 "network. <app>Polari</app> comes with over fifty IRC networks configured for "
 "you. Choose the IRC Network you would like to connect to and click on it."
 msgstr ""
+"La primera vez que inicie <app>Polari</app> se le pedirá que se una a una "
+"red. <app>Polari</app> viene con más de cincuenta redes IRC configuradas "
+"para el usuario. Elija la red IRC a la que quiere conectarse y pulse en ella."
 
 #. (itstool) path: page/p
 #: C/network-connect.page:32
@@ -395,6 +423,11 @@ msgid ""
 "of the network as you want it to appear in the list of networks in the "
 "<gui>Network Name</gui> field."
 msgstr ""
+"Si no ve la red IRC a la que quiere unirse, también puede introducir los "
+"detalles de la red IRC. Pulse en el botón <gui>Red personalizada</gui> e "
+"introduzca la <gui>Dirección del servidor</gui>. Opcionalmente, puede "
+"introducir el nombre de la red como quiera que aparezca en la lista de redes "
+"en el campo <gui>Nombre de red</gui>."
 
 #. (itstool) path: page/p
 #: C/network-connect.page:39
@@ -416,6 +449,9 @@ msgid ""
 "Press <gui>Add Network</gui> and select the IRC network from the list you "
 "would like to join or press <gui>Custom Network</gui> and enter the details."
 msgstr ""
+"Presione <gui>Agregar red</gui> y seleccione la red IRC de la lista a la que "
+"quiere unirse o presione <gui>Red personalizada</gui> e introduzca los "
+"detalles."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:53
@@ -423,6 +459,8 @@ msgid ""
 "Enter the name of the chat room you would like to join or select the chat "
 "room(s) from the list and then press <gui>Join</gui>."
 msgstr ""
+"Introduzca el nombre de la sala de chat a la que quiere unirse o seleccione "
+"la(s) sala(s) de chat de la lista y luego presione <gui>Unirse</gui>."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:58
@@ -436,6 +474,9 @@ msgid ""
 "it to the name of the network with a colon and the port number, for example "
 "<em>irc.example.org:12345</em>"
 msgstr ""
+"Si la red IRC a la que se está conectando usa un puerto personalizado, puede "
+"adjuntarlo al nombre de la red con dos puntos y el número de puerto, por "
+"ejemplo <em>irc.ejemplo.org:12345</em>"
 
 #. (itstool) path: info/desc
 #: C/overview.page:9
@@ -457,6 +498,13 @@ msgid ""
 "IRC server and join a channel. Channels, also known as chat rooms, are where "
 "users meet online to chat."
 msgstr ""
+"Internet Relay Chat (IRC) es un medio de conversar con personas en línea a "
+"través de salas de chat públicas y privadas. Las redes IRC, como Freenode o "
+"Gimpnet, son únicas y alojan sus propios servidores con sus propios canales. "
+"IRC usa un modelo cliente / servidor donde puede usar un cliente, como "
+"Polari, para conectarse a un servidor IRC y unirse a un canal. Los canales, "
+"también conocidos como salas de chat, es donde los usuarios se reúnen en "
+"línea para conversar."
 
 #. (itstool) path: info/desc
 #: C/sharing.page:9
@@ -479,6 +527,14 @@ msgid ""
 "the link to the paste website will be automatically entered into the chat "
 "box. Press <key>Enter</key> to share the link with the chat room."
 msgstr ""
+"Se considera grosero en IRC copiar y pegar más de cinco líneas de texto. Si "
+"intenta pegar más de cinco líneas de texto, <gui>Polari</gui> le preguntará "
+"si quiere que el texto se pegue automáticamente en un servicio público de "
+"pegado. Si acepta pegar el texto, presione el botón <gui>Pegar</gui> como se "
+"muestra en la siguiente captura de pantalla. Después de presionar "
+"<gui>Pegar</gui>, el enlace al sitio web de pegado se introducirá "
+"automáticamente en el cuadro de conversación. Presione <key>Intro</key> para "
+"compartir el enlace con la sala de chat."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -504,3 +560,12 @@ msgid ""
 "automatically entered into the chat box. Press <key>Enter</key> to share the "
 "link with the chat room."
 msgstr ""
+"Para compartir un archivo de imagen, arrastre y suelte la imagen desde "
+"<app>Archivos</app> en el cuadro de conversación en <app>Polari</app> o "
+"arrastre y suelte un archivo desde <app>Archivos</app> a <app>Polari</app>. "
+"Se le preguntará si quiere cargar la imagen en un servicio público de "
+"pegado. Si acepta cargar la imagen, presione el botón <gui>Pegar</gui> como "
+"se muestra en la siguiente captura de pantalla. Después de presionar "
+"<gui>Pegar</gui>, el enlace al lugar donde se cargó la imagen se introducirá "
+"automáticamente en el cuadro de conversación. Presione <key>Intro</key> para "
+"compartir el enlace con la sala de chat."
