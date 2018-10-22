@@ -77,13 +77,17 @@ var NetworksManager = class {
             throw new Error(`No servers for network ${id}`);
 
         let server = this.getNetworkServers(id)[0];
-        return {
+        let details = {
             'account': new GLib.Variant('s', GLib.get_user_name()),
             'server': new GLib.Variant('s', server.address),
             'port': new GLib.Variant('u', server.port),
             'use-ssl': new GLib.Variant('b', server.ssl),
-            'charset': server.charset ? new GLib.Variant('s', server.charset) : undefined
         };
+
+        if (server.charset)
+            details['charset'] = new GLib.Variant('s', server.charset);
+
+        return details;
     }
 
     getNetworkServers(id) {
