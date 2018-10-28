@@ -1,5 +1,5 @@
 project('polari', 'c',
-  version: '3.30.1',
+  version: '3.30.2',
   meson_version: '>= 0.43.0',
   license: 'GPL2+'
 )

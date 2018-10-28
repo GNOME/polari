@@ -1,3 +1,14 @@
+3.30.2 — “Mind the Sheep, Not Eat Them”
+=======================================
+* Fix regression with predefined networks [Florian; #82]
+
+Contributors:
+  Rodrigo Lledó, Florian Müllner, Jordan Petridis
+
+Translators:
+  Rūdolfs Mazurs [lv], Kjartan Maraas [nb], gogo [hr], Anish Sheela [ml],
+  Carmen Bianca BAKKER [eo]
+
 3.30.1 — “Light Your Tampon”
 ============================
 * Improve network connectivity handling when running sandboxed [Florian; !68]
