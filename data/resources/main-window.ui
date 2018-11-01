@@ -12,7 +12,7 @@
   <object class="GtkMessageDialog" id="closeConfirmationDialog">
     <property name="message-type">question</property>
     <property name="text" translatable="yes">Run Polari in the Background?</property>
-    <property name="secondary-text" translatable="yes">Polari will continue to run when closed and will be automatically started on login.</property>
+    <property name="secondary-text" translatable="yes">Polari will continue to run when closed.</property>
     <property name="destroy-with-parent">true</property>
     <property name="modal">true</property>
     <signal name="delete-event" handler="hide_on_delete"/>
