@@ -4,7 +4,6 @@ const {
     Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari,
     TelepathyGLib: Tp, TelepathyLogger: Tpl
 } = imports.gi;
-const Mainloop = imports.mainloop;
 
 const { DropTargetIface } = imports.pasteManager;
 const { UserPopover } = imports.userList;
@@ -520,7 +519,7 @@ var ChatView = GObject.registerClass({
         this._roomFocusChangedId = 0;
 
         if (this._backlogTimeoutId)
-            Mainloop.source_remove(this._backlogTimeoutId);
+            GLib.SOURCE_REMOVE(this._backlogTimeoutId);
         this._backlogTimeoutId = 0;
 
         if (this._nickStatusChangedId)
@@ -724,7 +723,7 @@ var ChatView = GObject.registerClass({
 
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
-        this._backlogTimeoutId = Mainloop.timeout_add(500, () => {
+        this._backlogTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
             this._logWalker.get_events_async(NUM_LOG_EVENTS,
                                              this._onLogEventsReady.bind(this));
             this._backlogTimeoutId = 0;
@@ -737,7 +736,8 @@ var ChatView = GObject.registerClass({
         if (this._valueChangedId)
             return;
 
-        this._valueChangedId = Mainloop.timeout_add(SCROLL_TIMEOUT, () => {
+        this._valueChangedId = GLib.timeout_add(GLib.PRIORITY_DEFAULT,
+            SCROLL_TIMEOUT, () => {
             this._checkMessages();
             this._valueChangedId = 0;
             return GLib.SOURCE_REMOVE;
