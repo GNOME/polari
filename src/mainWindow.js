@@ -1,7 +1,6 @@
 /* exported MainWindow FixedSizeFrame RoomList RoomStack UserList */
 
 const { Gdk, Gio, GLib, GObject, Gtk, Polari, TelepathyGLib: Tp } = imports.gi;
-const Mainloop = imports.mainloop;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { JoinDialog } = imports.joinDialog;
@@ -148,7 +147,7 @@ var MainWindow = GObject.registerClass({
         // Make sure user-list button is at least as wide as icon buttons
         this._joinButton.connect('size-allocate', (w, rect) => {
             let width = rect.width;
-            Mainloop.idle_add(() => {
+            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
                 this._showUserListButton.width_request = width;
                 return GLib.SOURCE_REMOVE;
             });
