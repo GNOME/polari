@@ -33,6 +33,7 @@ var Application = GObject.registerClass({
         this._demons = [];
 
         this._windowRemovedId = 0;
+        this._runHidden = false;
 
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
@@ -226,6 +227,8 @@ var Application = GObject.registerClass({
             accels: ['F1'] },
           { name: 'about',
             activate: this._onShowAbout.bind(this) },
+          { name: 'hide',
+            activate: this._onHide.bind(this) },
           { name: 'quit',
             activate: this._onQuit.bind(this),
             accels: ['<Primary>q'] },
@@ -264,13 +267,10 @@ var Application = GObject.registerClass({
             this.add_action(action);
         });
 
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-        let action = this._settings.create_action('run-in-background');
-        this.add_action(action);
-
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action(`app.nth-room(${i})`, [`<Alt>${i}`]);
 
+        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         this._telepathyClient = null;
 
         this._roomManager = RoomManager.getDefault();
@@ -344,7 +344,7 @@ var Application = GObject.registerClass({
             } else {
                 let window = new MainWindow({ application: this });
                 window.connect('destroy', () => {
-                    if (this._settings.get_boolean('run-in-background'))
+                    if (this._runHidden)
                         return;
                     this.emit('prepare-shutdown');
                 });
@@ -356,6 +356,7 @@ var Application = GObject.registerClass({
         }
 
         this.active_window.present();
+        this._runHidden = false;
     }
 
     vfunc_window_added(window) {
@@ -811,12 +812,21 @@ var Application = GObject.registerClass({
         });
     }
 
-    _onQuit() {
+    _closeWindows() {
         if (this._windowRemovedId)
             this.disconnect(this._windowRemovedId);
         this._windowRemovedId = 0;
 
         this.get_windows().reverse().forEach(w => { w.destroy(); });
+    }
+
+    _onHide() {
+        this._runHidden = true;
+        this._closeWindows();
+    }
+
+    _onQuit() {
+        this._closeWindows();
         this.emit('prepare-shutdown');
     }
 });

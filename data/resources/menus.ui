@@ -2,7 +2,7 @@
   <menu id="app-menu">
     <section>
       <item>
-        <attribute name="action">app.run-in-background</attribute>
+        <attribute name="action">app.hide</attribute>
         <attribute name="label" translatable="yes">Run in Background</attribute>
       </item>
     </section>
