@@ -1,7 +1,6 @@
 /* exported ServerRoomManager ServerRoomList */
 
 const { Gdk, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
-const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
 const { AccountsMonitor } = imports.accountsMonitor;
@@ -289,7 +288,7 @@ var ServerRoomList = GObject.registerClass({
         this._clearList();
 
         if (this._idleId)
-            Mainloop.source_remove(this._idleId);
+            GLib.SOURCE_REMOVE(this._idleId);
 
         if (!account)
             return;
@@ -308,7 +307,7 @@ var ServerRoomList = GObject.registerClass({
 
         let roomManager = RoomManager.getDefault();
 
-        this._idleId = Mainloop.idle_add(() => {
+        this._idleId = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
             let customName = this._store.get_value(this._customRoomItem,
                                                    RoomListColumn.NAME);
             let store = this._store;
