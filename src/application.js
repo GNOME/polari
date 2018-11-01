@@ -19,9 +19,6 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-const AUTOSTART_DIR = `${GLib.get_user_config_dir()}${'/'}autostart`;
-const AUTOSTART_FILE = '/org.gnome.Polari.Autostart.desktop';
-
 var Application = GObject.registerClass({
     Signals: { 'prepare-shutdown': {},
                'room-focus-changed': {} },
@@ -270,10 +267,6 @@ var Application = GObject.registerClass({
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         let action = this._settings.create_action('run-in-background');
         this.add_action(action);
-
-        this._settings.connect('changed::run-in-background',
-                               this._onRunInBackgroundChanged.bind(this));
-        this._onRunInBackgroundChanged();
 
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action(`app.nth-room(${i})`, [`<Alt>${i}`]);
@@ -750,37 +743,6 @@ var Application = GObject.registerClass({
             w.destroy();
         });
         dialog.show();
-    }
-
-    _createLink(file, target) {
-        try {
-            file.get_parent().make_directory_with_parents(null);
-        } catch (e) {
-            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                throw e;
-            // not an error, carry on
-        }
-
-        file.make_symbolic_link(target, null);
-    }
-
-    _onRunInBackgroundChanged() {
-        let file = Gio.File.new_for_path(`${AUTOSTART_DIR}${AUTOSTART_FILE}`);
-
-        if (this._settings.get_boolean('run-in-background'))
-            try {
-                this._createLink(file, `${pkg.pkgdatadir}${AUTOSTART_FILE}`);
-            } catch (e) {
-                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                    log(`Failed to create autostart link: ${e.message}`);
-            }
-        else
-            try {
-                file.delete(null);
-            } catch (e) {
-                if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND))
-                    log(`Failed to remove autostart link: ${e.message}`);
-            }
     }
 
     _onStartClient() {
