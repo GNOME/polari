@@ -1,7 +1,6 @@
 /* exported RoomList RoomListHeader RoomRow */
 
 const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
-const Mainloop = imports.mainloop;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
@@ -63,7 +62,7 @@ var RoomRow = GObject.registerClass({
             if (connectionStatusChangedId)
                 this.account.disconnect(connectionStatusChangedId);
             if (this._connectingTimeoutId)
-                Mainloop.source_remove(this._connectingTimeoutId);
+                GLib.SOURCE_REMOVE(this._connectingTimeoutId);
             this._connectingTimeoutId = 0;
         });
 
@@ -116,7 +115,8 @@ var RoomRow = GObject.registerClass({
         let status = this._getConnectionStatus();
         // Show loading indicator if joining a room takes more than 3 seconds
         if (status == Tp.ConnectionStatus.CONNECTED && !this._room.channel)
-            this._connectingTimeoutId = Mainloop.timeout_add_seconds(3, () => {
+            this._connectingTimeoutId = GLib.timeout_add_seconds(
+                GLib.PRIORITY_DEFAULT, 3, () => {
                 this._connectingTimeoutId = 0;
 
                 if (this._room.channel)
@@ -330,7 +330,8 @@ var RoomListHeader = GObject.registerClass({
         if (isError && this._spinner.active) {
             let spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
             if (spinnerTime < MIN_SPINNER_TIME) {
-                Mainloop.timeout_add((MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
+                GLib.timeout_add(GLib.PRIORITY_DEFAULT,
+                    (MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
                     this._onConnectionStatusChanged();
                     return GLib.SOURCE_REMOVE;
                 });
