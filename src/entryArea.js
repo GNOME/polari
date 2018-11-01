@@ -3,7 +3,6 @@
 const {
     Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp
 } = imports.gi;
-const Mainloop = imports.mainloop;
 
 const ChatView = imports.chatView;
 const { DropTargetIface } = imports.pasteManager;
@@ -465,7 +464,7 @@ var EntryArea = GObject.registerClass({
         //
         // (set_aliases() would do what we want, but it's not
         // introspected)
-        Mainloop.timeout_add_seconds(MAX_NICK_UPDATE_TIME, () => {
+        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, MAX_NICK_UPDATE_TIME, () => {
             this._updateNick();
             return GLib.SOURCE_REMOVE;
         });
