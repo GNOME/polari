@@ -28,7 +28,8 @@ var Application = GObject.registerClass({
 }, class Application extends Gtk.Application {
     _init() {
         super._init({ application_id: 'org.gnome.Polari',
-                      flags: Gio.ApplicationFlags.HANDLES_OPEN });
+                      flags: Gio.ApplicationFlags.HANDLES_OPEN |
+                             Gio.ApplicationFlags.ALLOW_REPLACEMENT });
 
         GLib.set_prgname('polari');
         this._retryData = new Map();
@@ -36,6 +37,7 @@ var Application = GObject.registerClass({
         this._demons = [];
 
         this._windowRemovedId = 0;
+        this._restarting = false;
 
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
@@ -75,6 +77,10 @@ var Application = GObject.registerClass({
             }
 
             return -1;
+        });
+        this.connect('name-lost', () => {
+            this._restarting = true;
+            return false;
         });
     }
 
@@ -516,6 +522,10 @@ var Application = GObject.registerClass({
 
     get isTestInstance() {
         return this.flags & Gio.ApplicationFlags.NON_UNIQUE;
+    }
+
+    get isRestarting() {
+        return this._restarting;
     }
 
     _updateUserListAction() {

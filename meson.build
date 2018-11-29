@@ -33,7 +33,7 @@ js_shell = find_program('js60', required: false)
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
 
-gio = dependency('gio-2.0', version: '>= 2.43.4')
+gio = dependency('gio-2.0', version: '>= 2.59.0')
 gtk3 = dependency('gtk+-3.0', version: '>= 3.21.6')
 telepathy_glib = dependency('telepathy-glib')
 girepository = dependency('gobject-introspection-1.0')

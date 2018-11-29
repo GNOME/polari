@@ -16,9 +16,8 @@ var AccountsMonitor = class {
 
         this._app = Gio.Application.get_default();
 
-        if (!this._app.isTestInstance)
-            this._app.connect('prepare-shutdown',
-                              this._onPrepareShutdown.bind(this));
+        this._app.connect('prepare-shutdown',
+                          this._onPrepareShutdown.bind(this));
 
         let factory = new ClientFactory();
         factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
@@ -95,6 +94,9 @@ var AccountsMonitor = class {
     }
 
     _onPrepareShutdown() {
+        if (this._app.isTestInstance || this._app.isRestarting)
+            return;
+
         let presence = Tp.ConnectionPresenceType.OFFLINE;
         this.accounts.filter(a => a.requested_presence_type != presence).forEach(a => {
             this._app.hold();
