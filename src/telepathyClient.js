@@ -110,6 +110,7 @@ class TelepathyClient extends Tp.BaseClient {
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
             [...this._pendingBotPasswords.keys()].forEach(a => { this._discardIdentifyPassword(a); });
+            this.unregister();
             this._app.release();
         });
         this._app.hold();
