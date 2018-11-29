@@ -38,6 +38,7 @@ var Application = GObject.registerClass({
 
         this._windowRemovedId = 0;
         this._restarting = false;
+        this._updatePending = false;
 
         this.add_main_option('start-client', 0,
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
@@ -235,6 +236,9 @@ var Application = GObject.registerClass({
             accels: ['F1'] },
           { name: 'about',
             activate: this._onShowAbout.bind(this) },
+          { name: 'restart',
+            activate: this._onRestart.bind(this),
+            create_hook: a => { a.enabled = Utils.isFlatpakSandbox(); } },
           { name: 'quit',
             activate: this._onQuit.bind(this),
             accels: ['<Primary>q'] },
@@ -341,6 +345,18 @@ var Application = GObject.registerClass({
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
                                                  provider,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        let file = Gio.File.new_for_path('/app/.updated');
+        this._updateMonitor = file.monitor_file(Gio.FileMonitorFlags.NONE, null);
+        this._updateMonitor.connect('changed', (mon, file, other, eventType) => {
+            if (eventType != Gio.FileMonitorEvent.CREATED)
+                return;
+
+            if (this.active_window)
+                this.active_window.showUpdateDialog();
+            else
+                this._updatePending = true;
+        });
     }
 
     vfunc_activate() {
@@ -371,6 +387,10 @@ var Application = GObject.registerClass({
         }
 
         this.active_window.present();
+
+        if (this._updatePending)
+            this.active_window.showUpdateDialog();
+        this._updatePending = false;
     }
 
     vfunc_window_added(window) {
@@ -859,6 +879,31 @@ var Application = GObject.registerClass({
             this._aboutDialog.destroy();
             this._aboutDialog = null;
         });
+    }
+
+    _onRestart() {
+        let cwd = GLib.get_current_dir();
+        let argv = ['polari', '--gapplication-replace'];
+        let fds = [];
+        let envs = [];
+        let flags = 2; // respawn latest
+        let options = [];
+        this.get_dbus_connection().call(
+            'org.freedesktop.portal.Flatpak',
+            '/org/freedesktop/portal/Flatpak',
+            'org.freedesktop.portal.Flatpak',
+            'Spawn',
+            new GLib.Variant(
+                '(ayaaya{uh}a{ss}ua{sv})',
+                [cwd, argv, fds, envs, flags, options]),
+            null,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            null,
+            (conn, res) => {
+                let [pid] = conn.call_finish(res).deep_unpack();
+                debug(`Restarted with PID ${pid}`);
+            });
     }
 
     _onQuit() {

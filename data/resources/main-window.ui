@@ -35,6 +35,33 @@
       <action-widget response="accept">backgroundButton</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkMessageDialog" id="updateDialog">
+    <property name="text" translatable="yes">Polari has been updated</property>
+    <property name="secondary_text" translatable="yes">You can start using the new version immediately without interrupting existing connections, or keep using the current version until Polari is closed.</property>
+    <property name="destroy-with-parent">true</property>
+    <property name="modal">true</property>
+    <child type="action">
+      <object class="GtkButton" id="ignoreButton">
+        <property name="label" translatable="yes">Ignore</property>
+        <property name="visible">True</property>
+        <property name="can-default">True</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="restartButton">
+        <property name="label" translatable="yes">Restart Now</property>
+        <property name="visible">True</property>
+        <property name="can-default">True</property>
+        <style>
+          <class name="suggested-action"/>
+        </style>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="cancel">ignoreButton</action-widget>
+      <action-widget response="accept">restartButton</action-widget>
+    </action-widgets>
+  </object>
   <template class="Gjs_MainWindow">
     <property name="title" translatable="yes">Polari</property>
     <property name="icon-name">org.gnome.Polari</property>

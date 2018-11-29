@@ -88,7 +88,8 @@ var MainWindow = GObject.registerClass({
                        'roomListRevealer',
                        'overlay',
                        'roomStack',
-                       'closeConfirmationDialog'],
+                       'closeConfirmationDialog',
+                       'updateDialog'],
     Properties: {
         subtitle: GObject.ParamSpec.string('subtitle',
                                            'subtitle',
@@ -191,6 +192,13 @@ var MainWindow = GObject.registerClass({
 
             this._settings.set_boolean('run-in-background', r == Gtk.ResponseType.ACCEPT);
             this.destroy();
+        });
+
+        this._updateDialog.transient_for = this;
+        this._updateDialog.connect('response', (dlg, response) => {
+            if (response == Gtk.ResponseType.ACCEPT)
+                this.application.activate_action('restart', null);
+            dlg.destroy();
         });
 
         this.connect('window-state-event', this._onWindowStateEvent.bind(this));
@@ -373,6 +381,10 @@ var MainWindow = GObject.registerClass({
     _onRoomRemoved(mgr, room) {
         if (room == this._lastActiveRoom)
             this._lastActiveRoom = null;
+    }
+
+    showUpdateDialog() {
+        this._updateDialog.show();
     }
 
     showJoinRoomDialog() {
