@@ -620,9 +620,6 @@ var ChatView = GObject.registerClass({
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
         }
-
-        if (!this._channel)
-            return;
     }
 
     get max_nick_chars() {
