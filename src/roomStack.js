@@ -24,8 +24,10 @@ var RoomStack = GObject.registerClass({
 
         this._roomManager = RoomManager.getDefault();
 
-        this._roomManager.connect('room-added', this._roomAdded.bind(this));
-        this._roomManager.connect('room-removed', this._roomRemoved.bind(this));
+        this._roomAddedId =
+            this._roomManager.connect('room-added', this._roomAdded.bind(this));
+        this._roomRemovedId =
+            this._roomManager.connect('room-removed', this._roomRemoved.bind(this));
         this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
 
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
@@ -34,6 +36,11 @@ var RoomStack = GObject.registerClass({
         this._sizeGroup.get_widgets()[0].connect('size-allocate', (w, rect) => {
             this._entryAreaHeight = rect.height - 1;
             this.notify('entry-area-height');
+        });
+
+        this.connect('destroy', () => {
+            this._roomManager.disconnect(this._roomAddedId);
+            this._roomManager.disconnect(this._roomRemovedId);
         });
     }
 
