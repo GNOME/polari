@@ -250,6 +250,9 @@ var MainWindow = GObject.registerClass({
 
         this._roomManager.disconnect(this._roomsLoadedId);
         this._roomManager.disconnect(this._roomRemovedId);
+
+        this._overlay.remove(this.application.notificationQueue);
+        this._overlay.remove(this.application.commandOutputQueue);
     }
 
     _touchFile(file) {
