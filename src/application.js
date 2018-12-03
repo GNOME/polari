@@ -341,16 +341,18 @@ var Application = GObject.registerClass({
         this.activate_action('start-client', null);
 
         if (!this.active_window) {
+            if (this._windowRemovedId)
+                this.disconnect(this._windowRemovedId);
+            this._windowRemovedId = 0;
+
             if (this._needsInitialSetup()) {
                 new InitialSetupWindow({ application: this });
                 this._windowRemovedId = this.connect('window-removed', () => {
-                    this.disconnect(this._windowRemovedId);
-                    this._windowRemovedId = 0;
                     this.activate();
                 });
             } else {
                 let window = new MainWindow({ application: this });
-                window.connect('destroy', () => {
+                this._windowRemovedId = this.connect('window-removed', () => {
                     if (this._settings.get_boolean('run-in-background'))
                         return;
                     this.emit('prepare-shutdown');
