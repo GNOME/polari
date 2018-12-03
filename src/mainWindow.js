@@ -160,10 +160,12 @@ var MainWindow = GObject.registerClass({
         this._onAccountsChanged(this._accountsMonitor);
 
         this._roomManager = RoomManager.getDefault();
-        this._roomManager.connect('rooms-loaded',
-                                  this._onRoomsLoaded.bind(this));
-        this._roomManager.connect('room-removed',
-                                  this._onRoomRemoved.bind(this));
+        this._roomsLoadedId =
+            this._roomManager.connect('rooms-loaded',
+                                      this._onRoomsLoaded.bind(this));
+        this._roomRemovedId =
+            this._roomManager.connect('room-removed',
+                                      this._onRoomRemoved.bind(this));
         this._onRoomsLoaded();
 
         this._updateUserListLabel();
@@ -245,6 +247,9 @@ var MainWindow = GObject.registerClass({
             this._settings.reset('last-selected-channel');
 
         this.active_room = null;
+
+        this._roomManager.disconnect(this._roomsLoadedId);
+        this._roomManager.disconnect(this._roomRemovedId);
     }
 
     _touchFile(file) {
