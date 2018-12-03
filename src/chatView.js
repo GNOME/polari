@@ -1304,8 +1304,8 @@ var ChatView = GObject.registerClass({
         if (this._room.type == Tp.HandleType.CONTACT &&
             status == Tp.ConnectionPresenceType.OFFLINE &&
             this._room.channel)
-            this._room.channel.ack_all_pending_messages_async(() => {
-                this._room.channel.close_async(null);
+            this._room.channel.ack_all_pending_messages_async(channel => {
+                channel.close_async(null);
             });
 
         let nickTagName = this._getNickTagName(baseNick);
