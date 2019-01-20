@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2018-05-21 14:25+0000\n"
-"PO-Revision-Date: 2018-05-27 17:04+0200\n"
+"PO-Revision-Date: 2018-06-12 21:22+0200\n"
 "Language-Team: Afrikaans <translate-discuss-af@lists.sourceforge.net>\n"
 "Language: af\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Polari"
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
 #: data/org.gnome.Polari.desktop.in:4 src/application.js:808
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
+msgstr "'n Internet-aflos-klets kliënt vir GNOME"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
@@ -56,15 +56,15 @@ msgstr "org.gnome.Polari"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
-msgstr ""
+msgstr "irc;internet;"
 
 #: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
-msgstr ""
+msgstr "Gestoorde kanaal lys"
 
 #: data/org.gnome.Polari.gschema.xml:7
 msgid "List of channels to restore on startup"
-msgstr ""
+msgstr "Lys kanale om te herstel"
 
 #: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
 msgid "Run in Background"
@@ -72,7 +72,7 @@ msgstr "Loop in die agtergrond"
 
 #: data/org.gnome.Polari.gschema.xml:12
 msgid "Keep running in background when closed."
-msgstr ""
+msgstr "Hou aan uitvoer in die agtergrond indien toegemaak word."
 
 #: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
@@ -80,7 +80,7 @@ msgstr "Venstergrootte"
 
 #: data/org.gnome.Polari.gschema.xml:17
 msgid "Window size (width and height)."
-msgstr "Venstergrootte (wydte en hoogte)."
+msgstr "Venstergrootte (breedte en hoogte)."
 
 #: data/org.gnome.Polari.gschema.xml:21
 msgid "Window maximized"
@@ -92,15 +92,15 @@ msgstr "Venster gemaksimeer staat"
 
 #: data/org.gnome.Polari.gschema.xml:26
 msgid "Last active channel"
-msgstr ""
+msgstr "Laaste aktiewe kanaal"
 
 #: data/org.gnome.Polari.gschema.xml:27
 msgid "Last active (selected) channel"
-msgstr ""
+msgstr "Laaste aktiewe (gekose) kanaal"
 
 #: data/org.gnome.Polari.gschema.xml:34
 msgid "Identify botname"
-msgstr ""
+msgstr "Identifiseer botnaam"
 
 #: data/org.gnome.Polari.gschema.xml:35
 msgid "Nickname of the bot to identify with"
@@ -108,7 +108,7 @@ msgstr ""
 
 #: data/org.gnome.Polari.gschema.xml:39
 msgid "Identify command"
-msgstr ""
+msgstr "Identifiseer bevel"
 
 #: data/org.gnome.Polari.gschema.xml:40
 msgid "Command used to identify with bot"
@@ -120,11 +120,11 @@ msgstr "Identifiseer gebruikersnaam"
 
 #: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
-msgstr ""
+msgstr "Gebruikersnaam om te gebruik in die identifiseer bevel"
 
 #: data/org.gnome.Polari.gschema.xml:49
 msgid "Identify username supported"
-msgstr ""
+msgstr "Identifiseer gebruikersnaam ondersteun"
 
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
@@ -145,7 +145,7 @@ msgstr "opsioneel"
 
 #: data/resources/connection-details.ui:61
 msgid "Use secure c_onnection"
-msgstr ""
+msgstr "Gebruik 'n veilige _verbinding"
 
 #: data/resources/connection-details.ui:76
 msgid "_Nickname"
@@ -185,17 +185,17 @@ msgstr "Sluit by kletskamer aan"
 #: data/resources/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Leave Room"
-msgstr ""
+msgstr "Verlaat kamer"
 
 #: data/resources/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Show Userlist"
-msgstr ""
+msgstr "Vertoon gebruikerlys"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
 msgid "Show Emoji Picker"
-msgstr ""
+msgstr "Vertoon emosikoon kieser"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
@@ -245,7 +245,7 @@ msgstr "Laaste kamer"
 #: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
-msgstr ""
+msgstr "Eerste - Negende kamer"
 
 #: data/resources/initial-setup-window.ui:10
 msgid "Polari Setup"
@@ -257,7 +257,7 @@ msgstr "Nie gekoppel nie"
 
 #: data/resources/initial-setup-window.ui:73
 msgid "Please connect to the internet to continue the setup."
-msgstr ""
+msgstr "Koppel asseblief aan die internet om met die opstelling voort te gaan."
 
 #: data/resources/initial-setup-window.ui:109
 #: data/resources/initial-setup-window.ui:159
@@ -301,13 +301,15 @@ msgstr "_Pasgemaakte netwerk"
 
 #: data/resources/main-window.ui:14
 msgid "Run Polari in the Background?"
-msgstr ""
+msgstr "Laat Polari in die agtergrond loop?"
 
 #: data/resources/main-window.ui:15
 msgid ""
 "Polari will continue to run when closed and will be automatically started on "
 "login."
 msgstr ""
+"Polari sal aanhou uitvoer nadat dit toegemaak is, en outomaties na "
+"aanmelding begin word."
 
 #: data/resources/main-window.ui:21
 msgid "_Quit"
@@ -383,7 +385,7 @@ msgstr "Laaste aktiwiteit:"
 
 #: data/resources/user-details.ui:159
 msgid "Will notify if user appears online."
-msgstr ""
+msgstr "Stel my in kennis sodra die gebruiker aanlyn verskyn."
 
 #: data/resources/user-details.ui:181
 msgid "Start Conversation"
@@ -472,7 +474,7 @@ msgstr "%s het aangesluit"
 #: src/chatView.js:969
 #, javascript-format
 msgid "%s left"
-msgstr ""
+msgstr "%s verlaat"
 
 #: src/chatView.js:1062
 #, javascript-format
@@ -485,8 +487,8 @@ msgstr[1] "%d gebruikers het aangesluit"
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d gebruiker verlaat"
+msgstr[1] "%d gebruikers verlaat"
 
 #. today
 #. Translators: Time in 24h format
@@ -587,6 +589,8 @@ msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr ""
+"Polari het ontkoppel weens 'n netwerkfout. Gaan asseblief die adresveld na "
+"vir foute."
 
 #: src/entryArea.js:400
 #, javascript-format
@@ -658,46 +662,53 @@ msgstr "_Volgende"
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
+"/SLUIT [<channel>] [<reason>] — sluit <channel>, per verstek die huidige een"
 
 #: src/ircParser.js:24
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr ""
+"/HULP [<command>] — vertoon hulp vir <command>, of vertoon 'n lys van "
+"beskikbare bevele"
 
 #: src/ircParser.js:25
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
+"/UITNODIGING <nick> [<channel>] — nooi <nick> uit na <channel>, of die "
+"huidige een"
 
 #: src/ircParser.js:26
 msgid "/JOIN <channel> — joins <channel>"
-msgstr ""
+msgstr "/AANSLUIT <channel> — sluit aan by <channel>"
 
 #: src/ircParser.js:27
 msgid "/KICK <nick> — kicks <nick> from current channel"
-msgstr ""
+msgstr "/SKOP <nick> — skop <nick> van huidige kanaal"
 
 #: src/ircParser.js:28
 msgid "/ME <action> — sends <action> to the current channel"
-msgstr ""
+msgstr "/EK <action> — stuur <action> na die huidige kanaal"
 
 #: src/ircParser.js:29
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
-msgstr ""
+msgstr "/BOODSKAP <nick> [<message>] — stuur 'n private boodskap aan <nick>"
 
 #: src/ircParser.js:30
 msgid "/NAMES — lists users on the current channel"
-msgstr ""
+msgstr "/NAME — gebruikers in die huidige kanaal"
 
 #: src/ircParser.js:31
 msgid "/NICK <nickname> — sets your nick to <nickname>"
-msgstr ""
+msgstr "/BYNAAM <nickname> — stel jou bynaam na <nickname>"
 
 #: src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
+"/DEEL [<channel>] [<reason>] — verlaat <channel>, per verstek die huidige "
+"kanaal"
 
 #: src/ircParser.js:33
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
@@ -714,10 +725,11 @@ msgstr ""
 #: src/ircParser.js:36
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
+"/ONDERWERP <topic> — stel die onderwerp na <topic>, of wys die huidige een"
 
 #: src/ircParser.js:39
 msgid "Unknown command — try /HELP for a list of available commands"
-msgstr ""
+msgstr "Onbekende bevel — gebruik /HULP vir 'n lys van beskikbare bevele"
 
 #: src/ircParser.js:53
 #, javascript-format
