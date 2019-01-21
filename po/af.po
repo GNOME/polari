@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2019-01-20 19:47+0000\n"
-"PO-Revision-Date: 2019-01-21 00:17+0200\n"
+"PO-Revision-Date: 2019-01-21 11:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Afrikaans <translate-discuss-af@lists.sourceforge.net>\n"
 "Language: af\n"
@@ -34,6 +34,8 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
+"'n Eenvoudige implementasie van die IRC protokol. Dit bevat 'n pragtige "
+"koppelvlak wat ontwerp is om jou aandag op jou gesprekke te hou."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
@@ -42,10 +44,14 @@ msgid ""
 "miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
+"Jy kan Polari gebruik om met mense in 'n publieke kanaal te praat, of "
+"private gesprekke te voer. Kennisgewings maak seker dat jy nooit 'n "
+"belangrike boodskap mis nie. Die kennisgewings van privaat gesprekke maak "
+"dit selfs moontlik om jou antwoord in die kennisgewing self te skryf!"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:48
 msgid "The GNOME Project"
-msgstr "Die GNOME Projek"
+msgstr "Die GNOME-projek"
 
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
@@ -128,6 +134,8 @@ msgstr "Identifiseer gebruikersnaam ondersteun"
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
 msgstr ""
+"Of dit bekend is dat die identifiseer bevel die gebruikersnaam parameter "
+"ondersteun"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -267,6 +275,8 @@ msgstr "Welkom by Polari"
 msgid ""
 "Polari is an easy way to chat using IRC. Select a network to get started."
 msgstr ""
+"Polari maak dit maklik om deur IRC te kommunikeer. Kies 'n netwerk om te "
+"begin."
 
 #: data/resources/initial-setup-window.ui:171
 msgid ""
@@ -374,7 +384,7 @@ msgstr "Eienskappe"
 
 #: data/resources/server-room-list.ui:45
 msgid "Enter room name to add"
-msgstr "Sleutel kamer naam in om by te voeg"
+msgstr "Sleutel die kamer se naam in om by te voeg"
 
 #: data/resources/user-details.ui:27
 msgid "Loading details"
@@ -394,7 +404,7 @@ msgstr "Begin gesprek"
 
 #: src/application.js:42
 msgid "Start Telepathy client"
-msgstr ""
+msgstr "Begin die Telepathy-kliënt"
 
 #: src/application.js:47
 msgid "Start in debug mode"
@@ -402,7 +412,7 @@ msgstr "Begin in ontfoutingsmodus"
 
 #: src/application.js:50
 msgid "Allow running alongside another instance"
-msgstr ""
+msgstr "Laat toe om nog 'n instansie geleyk te laat loop"
 
 #: src/application.js:53
 msgid "Print version and exit"
@@ -734,7 +744,7 @@ msgstr ""
 
 #: src/ircParser.js:39
 msgid "Unknown command — try /HELP for a list of available commands"
-msgstr "Onbekende bevel — gebruik /HULP vir 'n lys van beskikbare bevele"
+msgstr "Onbekende bevel — probeer /HULP vir 'n lys van beskikbare bevele"
 
 #: src/ircParser.js:53
 #, javascript-format
@@ -931,12 +941,12 @@ msgstr "Gebruiker %s is nou aanlyn."
 #: src/utils.js:106
 #, javascript-format
 msgid "Polari server password for %s"
-msgstr "Polari bediener wagwoord vir %s"
+msgstr "Polari bediener-wagwoord vir %s"
 
 #: src/utils.js:111
 #, javascript-format
 msgid "Polari NickServ password for %s"
-msgstr "Polari NickServ wagwoord vir %s"
+msgstr "Polari NickServ-wagwoord vir %s"
 
 #~ msgid "All"
 #~ msgstr "Alles"
