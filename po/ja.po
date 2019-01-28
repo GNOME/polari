@@ -3,14 +3,16 @@
 # This file is distributed under the same license as the polari package.
 # Kentaro KAZUHAMA <kazken3@gmail.com>, 2015.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2015-2016.
+# sujiniku <sujinikusityuu@gmail.com>, 2018.
+# sicklylife <translation@sicklylife.jp>, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2019-01-24 16:33+0000\n"
-"PO-Revision-Date: 2019-01-29 00:30+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
+"PO-Revision-Date: 2019-01-29 00:40+0900\n"
+"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +28,7 @@ msgstr "Polari"
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
 #: data/org.gnome.Polari.desktop.in:4 src/application.js:796
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr "GNOME用インターネットリレーチャットクライアント"
+msgstr "GNOME 用インターネットリレーチャットクライアント"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
@@ -34,24 +36,18 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"シンプルなインターネットリレーチャット(IRC)クライアントです。GNOME とシームレ"
+"シンプルなインターネットリレーチャット (IRC) クライアントです。GNOME とシームレ"
 "スに統合するように設計されています。会話に集中しやすいシンプルできれいなイン"
 "ターフェースを特長としています。"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
-#, fuzzy
-#| msgid ""
-#| "You can use Polari to publicly chat with people in a channel, and to have "
-#| "private one-to-one conversations. Notifications make sure that you never "
-#| "miss an important message - for private conversations, they even allow "
-#| "you to reply instantly without switching back to the application!"
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"Polariを使うとチャネル内の人々との公開チャットやプライベートな1対1の会話を行"
+"Polari を使うとチャネル内の人々との公開チャットやプライベートな1対1の会話を行"
 "えます。重要なメッセージ (プライベートな会話など) を見逃さないように通知機能"
 "をサポートしており、しかもアプリケーションに画面を切り替えることなく、通知"
 "メッセージからすぐ返事することもできます。"
@@ -63,7 +59,7 @@ msgstr ""
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
 msgid "org.gnome.Polari"
-msgstr ""
+msgstr "org.gnome.Polari"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
@@ -82,7 +78,7 @@ msgstr "開始時に復元するチャネルの一覧"
 
 #: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
 msgid "Run in Background"
-msgstr ""
+msgstr "バックグラウンドで実行"
 
 #: data/org.gnome.Polari.gschema.xml:12
 msgid "Keep running in background when closed."
@@ -209,7 +205,7 @@ msgstr "ユーザーリストを表示する"
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
 msgid "Show Emoji Picker"
-msgstr ""
+msgstr "絵文字ピッカーを表示する"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
@@ -257,46 +253,38 @@ msgid "Last Room"
 msgstr "末尾のルームへ移動する"
 
 #: data/resources/help-overlay.ui:110
-#, fuzzy
-#| msgctxt "shortcut window"
 #| msgid "First - Ninth Room"
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
-msgstr "指定位置のルームへ移動する (1-9)"
+msgstr "指定位置のルームへ移動する (1 – 9)"
 
 #: data/resources/initial-setup-window.ui:10
-#, fuzzy
-#| msgid "Polari"
 msgid "Polari Setup"
-msgstr "Polari"
+msgstr "Polari のセットアップ"
 
 #: data/resources/initial-setup-window.ui:60
-#, fuzzy
-#| msgid "Connected"
 msgid "Not connected"
-msgstr "接続済み"
+msgstr "接続されていません"
 
 #: data/resources/initial-setup-window.ui:73
 msgid "Please connect to the internet to continue the setup."
-msgstr ""
+msgstr "セットアップ続行のために、インターネットに接続してください。"
 
 #: data/resources/initial-setup-window.ui:109
 #: data/resources/initial-setup-window.ui:159
-#, fuzzy
-#| msgid "Learn more about Polari"
 msgid "Welcome to Polari"
-msgstr "Polari の詳細について"
+msgstr "Polari へようこそ"
 
 #: data/resources/initial-setup-window.ui:121
 msgid ""
 "Polari is an easy way to chat using IRC. Select a network to get started."
-msgstr ""
+msgstr "Polari は使いやすい IRC クライアントです。利用したいネットワークを選択してください。"
 
 #: data/resources/initial-setup-window.ui:171
 msgid ""
 "Select rooms you want to connect to. You can add more networks and rooms "
 "later, by clicking the + button."
-msgstr ""
+msgstr "接続したいルームを選択してください。ネットワークやルームは後から + ボタンをクリックして追加できます。"
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:229
 msgid "Join Chat Room"
@@ -328,7 +316,7 @@ msgstr "ルームおよびネットワークを追加する"
 
 #: data/resources/main-window.ui:149
 msgid "Show connected users"
-msgstr ""
+msgstr "接続しているユーザーを表示する"
 
 #: data/resources/menus.ui:12
 msgid "Keyboard Shortcuts"
@@ -336,7 +324,7 @@ msgstr "キーボードショートカット"
 
 #: data/resources/menus.ui:16
 msgid "Help"
-msgstr ""
+msgstr "ヘルプ"
 
 #: data/resources/menus.ui:20
 msgid "About"
@@ -355,20 +343,16 @@ msgid "_Change"
 msgstr "変更(_C)"
 
 #: data/resources/room-list-header.ui:145
-#, fuzzy
-#| msgid "Connected"
 msgid "Connect"
-msgstr "接続済み"
+msgstr "接続"
 
 #: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "再接続"
 
 #: data/resources/room-list-header.ui:159
-#, fuzzy
-#| msgid "Reconnect"
 msgid "Disconnect"
-msgstr "再接続"
+msgstr "切断"
 
 #: data/resources/room-list-header.ui:166
 msgid "Remove"
@@ -380,7 +364,7 @@ msgstr "プロパティ"
 
 #: data/resources/server-room-list.ui:45
 msgid "Enter room name to add"
-msgstr ""
+msgstr "追加するルーム名を入力してください"
 
 #: data/resources/user-details.ui:27
 msgid "Loading details"
@@ -395,10 +379,8 @@ msgid "Will notify if user appears online."
 msgstr ""
 
 #: data/resources/user-details.ui:181
-#, fuzzy
-#| msgid "End conversation"
 msgid "Start Conversation"
-msgstr "会話の終了"
+msgstr "会話の開始"
 
 #: src/application.js:39
 msgid "Start Telepathy client"
@@ -406,7 +388,7 @@ msgstr ""
 
 #: src/application.js:44
 msgid "Start in debug mode"
-msgstr ""
+msgstr "デバッグモードで起動する"
 
 #: src/application.js:47
 msgid "Allow running alongside another instance"
@@ -414,7 +396,7 @@ msgstr ""
 
 #: src/application.js:50
 msgid "Print version and exit"
-msgstr ""
+msgstr "バージョンを表示して終了する"
 
 #: src/application.js:434 src/utils.js:184
 msgid "Failed to open link"
@@ -430,7 +412,9 @@ msgid "translator-credits"
 msgstr ""
 "Kentaro KAZUHAMA <kazken3@gmail.com>\n"
 "松澤 二郎 <jmatsuzawa@gnome.org>\n"
-"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
+"日本GNOMEユーザー会 <http://www.gnome.gr.jp>\n"
+"sujiniku <sujinikusityuu@gmail.com>\n"
+"sicklylife <translation@sicklylife.jp>"
 
 #: src/application.js:801
 msgid "Learn more about Polari"
@@ -455,7 +439,7 @@ msgstr "リンクアドレスをコピー"
 #: src/chatView.js:937
 #, javascript-format
 msgid "%s is now known as %s"
-msgstr "%sは%sとなりました"
+msgstr "%s は %s となりました"
 
 #: src/chatView.js:942
 #, javascript-format
@@ -475,12 +459,12 @@ msgstr "%s はキックされました"
 #: src/chatView.js:958
 #, javascript-format
 msgid "%s has been banned by %s"
-msgstr "%s は %s にBANされました"
+msgstr "%s は %s に BAN されました"
 
 #: src/chatView.js:960
 #, javascript-format
 msgid "%s has been banned"
-msgstr "%s はBANされました"
+msgstr "%s は BAN されました"
 
 #: src/chatView.js:965
 #, javascript-format
@@ -589,10 +573,8 @@ msgid "Already added"
 msgstr "追加済み"
 
 #: src/connections.js:106
-#, fuzzy
-#| msgid "No results"
 msgid "No results."
-msgstr "結果なし"
+msgstr "結果はありません。"
 
 #. Translators: %s is a connection name
 #: src/connections.js:485
@@ -630,17 +612,15 @@ msgstr "画像をペーストサービスにアップロードしています…
 
 #. Translators: %s is a filename
 #: src/entryArea.js:397
-#, fuzzy, javascript-format
-#| msgid "Upload image to public paste service?"
+#, javascript-format
 msgid "Upload “%s” to public paste service?"
-msgstr "画像をペーストサービスにアップロードしますか?"
+msgstr "“%s”をペーストサービスにアップロードしますか?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:399
-#, fuzzy, javascript-format
-#| msgid "Uploading image to public paste service…"
+#, javascript-format
 msgid "Uploading “%s” to public paste service…"
-msgstr "画像をペーストサービスにアップロードしています…"
+msgstr "“%s”をペーストサービスにアップロードしています…"
 
 # なぜかjavascript-formatだと"#%2$s の %1$s" だとmsgfmt -vcでエラーになる (非対応?)
 #. translators: %s is a nick, #%s a channel
@@ -656,15 +636,15 @@ msgstr "%s から貼り付け"
 
 #: src/initialSetup.js:82
 msgid "_Back"
-msgstr ""
+msgstr "前へ(_B)"
 
 #: src/initialSetup.js:83
 msgid "_Done"
-msgstr ""
+msgstr "完了(_D)"
 
 #: src/initialSetup.js:83
 msgid "_Next"
-msgstr ""
+msgstr "次へ(_N)"
 
 #. commands that would be nice to support:
 #.
@@ -676,117 +656,77 @@ msgstr ""
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
 #: src/ircParser.js:23
-#, fuzzy
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
-"/PART [<channel>] [<reason>] - <channel>を離れます。デフォルトは現在のチャネ"
-"ルです"
+"/CLOSE [<channel>] [<reason>] — <channel> を閉じる (デフォルトは現在のチャネル)"
 
 #: src/ircParser.js:24
-#, fuzzy
-#| msgid ""
-#| "/HELP [<command>] - displays help for <command>, or a list of available "
-#| "commands"
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr ""
-"/HELP [<command>] -  <command>のヘルプ、もしくは利用可能なコマンドの一覧を表"
+"/HELP [<command>] — <command> のヘルプ、もしくは利用可能なコマンドの一覧を表"
 "示する"
 
 #: src/ircParser.js:25
-#, fuzzy
-#| msgid ""
-#| "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current "
-#| "one"
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
-"/INVITE <nick> [<channel>] - <nick> を <channel> 、もしくは現在のチャネルに招"
+"/INVITE <nick> [<channel>] — <nick> を <channel>、もしくは現在のチャネルに招"
 "待する"
 
 #: src/ircParser.js:26
-#, fuzzy
-#| msgid "/JOIN <channel> - joins <channel>"
 msgid "/JOIN <channel> — joins <channel>"
-msgstr "/JOIN <channel> - <channel>に参加する"
+msgstr "/JOIN <channel> — <channel> に参加する"
 
 #: src/ircParser.js:27
-#, fuzzy
-#| msgid "/KICK <nick> - kicks <nick> from current channel"
 msgid "/KICK <nick> — kicks <nick> from current channel"
-msgstr "/KICK <nick> - <nick>を現在のチャネルから排除する"
+msgstr "/KICK <nick> — <nick> を現在のチャネルから排除する"
 
 #: src/ircParser.js:28
-#, fuzzy
-#| msgid "/ME <action> - sends <action> to the current channel"
 msgid "/ME <action> — sends <action> to the current channel"
-msgstr "/ME <action> - 現在のチャネルに <action> を送信する"
+msgstr "/ME <action> — 現在のチャネルに <action> を送信する"
 
 #: src/ircParser.js:29
-#, fuzzy
-#| msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
-msgstr "/MSG <nick> [<message>] - <nick> にプライベートメッセージを送信する"
+msgstr "/MSG <nick> [<message>] — <nick> にプライベートメッセージを送信する"
 
 #: src/ircParser.js:30
-#, fuzzy
-#| msgid "/NAMES - lists users on the current channel"
 msgid "/NAMES — lists users on the current channel"
-msgstr "/NAMES - 現在のチャネル上のユーザーを一覧表示する"
+msgstr "/NAMES — 現在のチャネル上のユーザーを一覧表示する"
 
 #: src/ircParser.js:31
-#, fuzzy
-#| msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgid "/NICK <nickname> — sets your nick to <nickname>"
-msgstr "/NICK <nickname> - あなたのニックネームを<nickname>に設定します"
+msgstr "/NICK <nickname> — あなたのニックネームを <nickname> に設定する"
 
 #: src/ircParser.js:32
-#, fuzzy
-#| msgid ""
-#| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
-#| "one"
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
-"/PART [<channel>] [<reason>] - <channel>を離れます。デフォルトは現在のチャネ"
-"ルです"
+"/PART [<channel>] [<reason>] — <channel> を離れる (デフォルトは現在のチャネル)"
 
 #: src/ircParser.js:33
-#, fuzzy
-#| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
-msgstr "/QUERY <nick> - <nick>とのプライベートな会話を開きます"
+msgstr "/QUERY <nick> — <nick> とのプライベートな会話を開く"
 
 #: src/ircParser.js:34
-#, fuzzy
-#| msgid "/QUIT [<reason>] - disconnects from the current server"
 msgid "/QUIT [<reason>] — disconnects from the current server"
-msgstr "/QUIT [<reason>] - 現在のサーバーから切断します"
+msgstr "/QUIT [<reason>] — 現在のサーバーから切断する"
 
 #: src/ircParser.js:35
-#, fuzzy
-#| msgid "/SAY <text> - sends <text> to the current room/contact"
 msgid "/SAY <text> — sends <text> to the current room/contact"
-msgstr "/SAY <text> - 現在のチャットルーム/コンタクトに<text>を送ります"
+msgstr "/SAY <text> — 現在のチャットルーム/コンタクトに <text> を送る"
 
 #: src/ircParser.js:36
-#, fuzzy
-#| msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
-"/TOPIC <topic> - <topic>をトピックに設定、もしくは現在のチャネルに表示します"
+"/TOPIC <topic> — <topic> をトピックに設定、もしくは現在のチャネルに表示する"
 
 #: src/ircParser.js:39
-#, fuzzy
-#| msgid "Unknown command - try /HELP for a list of available commands"
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
-"不明なコマンド - /HELP を実行して使用可能なコマンド一覧を確認してください。"
+"不明なコマンド — /HELP を実行して使用可能なコマンド一覧を確認してください"
 
 #: src/ircParser.js:53
 #, javascript-format
@@ -800,7 +740,7 @@ msgstr "使用可能なコマンド:"
 #: src/ircParser.js:188
 #, javascript-format
 msgid "Users on %s:"
-msgstr "%s上のユーザー:"
+msgstr "%s 上のユーザー:"
 
 #: src/ircParser.js:267
 msgid "No topic set"
@@ -845,10 +785,8 @@ msgid "Connected"
 msgstr "接続済み"
 
 #: src/roomList.js:387
-#, fuzzy
-#| msgid "Connecting..."
 msgid "Connecting…"
-msgstr "接続処理中..."
+msgstr "接続処理中…"
 
 #: src/roomList.js:389 src/userList.js:414
 msgid "Offline"
@@ -879,10 +817,8 @@ msgid "Could not connect to %s."
 msgstr "%s へ接続できませんでした。"
 
 #: src/roomStack.js:121
-#, fuzzy
-#| msgid "_Password"
 msgid "_Save Password"
-msgstr "パスワード(_P)"
+msgstr "パスワードの保存(_S)"
 
 #: src/roomStack.js:130
 msgid "Should the password be saved?"
@@ -901,7 +837,7 @@ msgstr "Good Bye"
 #: src/telepathyClient.js:584
 #, javascript-format
 msgid "Save %s password for %s?"
-msgstr ""
+msgstr "%s のパスワード (%s 用) を保存しますか?"
 
 #: src/telepathyClient.js:585
 #, javascript-format
@@ -911,16 +847,15 @@ msgstr ""
 
 #: src/telepathyClient.js:588
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 # なぜかjavascript-formatだと"#%2$s の %1$s" だとmsgfmt -vcでエラーになる (非対応?)
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
 #: src/telepathyClient.js:611
-#, fuzzy, javascript-format
-#| msgid "%s in #%s"
+#, javascript-format
 msgid "%s in %s"
-msgstr "%s (#%s)"
+msgstr "%s (%s)"
 
 #: src/userList.js:228
 #, javascript-format
@@ -963,25 +898,21 @@ msgid "Available in another room."
 msgstr ""
 
 #: src/userList.js:412
-#, fuzzy
-#| msgid "Offline"
 msgid "Online"
-msgstr "オフライン"
+msgstr "オンライン"
 
 #: src/userList.js:557
 msgid "No results"
 msgstr "結果なし"
 
 #: src/userTracker.js:305
-#, fuzzy
-#| msgid "Users on %s:"
 msgid "User is online"
-msgstr "%s上のユーザー:"
+msgstr ""
 
 #: src/userTracker.js:306
 #, javascript-format
 msgid "User %s is now online."
-msgstr ""
+msgstr "ユーザー %s は現在オンラインです。"
 
 #: src/utils.js:106
 #, javascript-format
