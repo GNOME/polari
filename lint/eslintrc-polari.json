@@ -8,6 +8,13 @@
                 "allowSingleLine": true
             }
         ],
+        "camelcase": [
+            "error",
+            {
+                "properties": "never",
+                "allow": ["^vfunc_"]
+            }
+        ],
         "indent": [
             "error",
             4,
