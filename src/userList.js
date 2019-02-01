@@ -134,10 +134,12 @@ var UserDetails = GObject.registerClass({
         this._notificationLabel.opacity = this.notifications_enabled ? 1. : 0.;
     }
 
+    // eslint-disable-next-line camelcase
     get notifications_enabled() {
         return this._notificationsEnabled;
     }
 
+    // eslint-disable-next-line camelcase
     set notifications_enabled(value) {
         if (this._notificationsEnabled == value)
             return;

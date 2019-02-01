@@ -57,6 +57,7 @@ var RoomStack = GObject.registerClass({
         this._updateSensitivity();
     }
 
+    // eslint-disable-next-line camelcase
     get entry_area_height() {
         return this._entryAreaHeight;
     }

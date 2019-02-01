@@ -51,6 +51,7 @@ var ChatEntry = GObject.registerClass({
         this._useDefaultHandler = false;
     }
 
+    // eslint-disable-next-line camelcase
     get can_drop() {
         return true;
     }
@@ -290,6 +291,7 @@ var EntryArea = GObject.registerClass({
         this._chatEntry.connect('unmap', this._updateCompletions.bind(this));
     }
 
+    // eslint-disable-next-line camelcase
     set max_nick_chars(maxChars) {
         this._maxNickChars = maxChars;
         this._updateNick();

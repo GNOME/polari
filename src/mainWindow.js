@@ -202,6 +202,7 @@ var MainWindow = GObject.registerClass({
         return this._subtitle;
     }
 
+    // eslint-disable-next-line camelcase
     get subtitle_visible() {
         return this._subtitle.length > 0;
     }
@@ -269,10 +270,12 @@ var MainWindow = GObject.registerClass({
         this._titlebarRight.set_decoration_layout(layoutRight);
     }
 
+    // eslint-disable-next-line camelcase
     get active_room() {
         return this._room;
     }
 
+    // eslint-disable-next-line camelcase
     set active_room(room) {
         if (room == this._room)
             return;

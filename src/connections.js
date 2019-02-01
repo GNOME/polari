@@ -133,10 +133,12 @@ var ConnectionsList = GObject.registerClass({
         });
     }
 
+    // eslint-disable-next-line camelcase
     get favorites_only() {
         return this._favoritesOnly;
     }
 
+    // eslint-disable-next-line camelcase
     set favorites_only(favsOnly) {
         if (this._favoritesOnly == favsOnly)
             return;
@@ -383,6 +385,7 @@ var ConnectionDetails = GObject.registerClass({
         this._sslCheckbox.active = this._savedSSL;
     }
 
+    // eslint-disable-next-line camelcase
     get can_confirm() {
         let paramsChanged = this._nameEntry.text != this._savedName ||
                             this._serverEntry.text != this._savedServer ||
@@ -395,6 +398,7 @@ var ConnectionDetails = GObject.registerClass({
                paramsChanged;
     }
 
+    // eslint-disable-next-line camelcase
     get has_service() {
         return this._networksManager.getAccountIsPredefined(this._account);
     }

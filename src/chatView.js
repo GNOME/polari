@@ -243,6 +243,7 @@ const HoverFilterTag = GObject.registerClass({
         this.foreground_rgba = color;
     }
 
+    // eslint-disable-next-line camelcase
     set filtered_tag(value) {
         this._filteredTag = value;
         this.notify('filtered-tag');
@@ -253,10 +254,12 @@ const HoverFilterTag = GObject.registerClass({
         this._updateColor();
     }
 
+    // eslint-disable-next-line camelcase
     get filtered_tag() {
         return this._filteredTag;
     }
 
+    // eslint-disable-next-line camelcase
     set hover_opacity(value) {
         if (this._hoverOpacity == value)
             return;
@@ -267,6 +270,7 @@ const HoverFilterTag = GObject.registerClass({
             this._updateColor();
     }
 
+    // eslint-disable-next-line camelcase
     get hover_opacity() {
         return this._hoverOpacity;
     }
@@ -622,10 +626,12 @@ var ChatView = GObject.registerClass({
         }
     }
 
+    // eslint-disable-next-line camelcase
     get max_nick_chars() {
         return this._maxNickChars;
     }
 
+    // eslint-disable-next-line camelcase
     get can_drop() {
         return this._channel != null;
     }
