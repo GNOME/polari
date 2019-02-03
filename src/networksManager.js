@@ -100,7 +100,7 @@ var NetworksManager = class {
     getNetworkMatchTerms(id) {
         let network = this._lookupNetwork(id);
         let terms = [network.name, network.id, ...network.servers];
-        return terms.map(String.toLowerCase);
+        return terms.map(t => t.toLowerCase);
     }
 
     findByServer(server) {
