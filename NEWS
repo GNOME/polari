@@ -1,3 +1,17 @@
+3.31.90 — “Rimming a Snowman”
+=============================
+* Update app icon [Tobias; !78]
+* Turn "Run in Background" into a regular setting [Florian; #89]
+* Remove app menu [Florian; !53]
+* Misc. bug fixes and cleanups [Florian, Bilal; !79, !81, !87]
+
+Contributors:
+  Tobias Bernard, Jeremy Bicha, Bloomraptor, Bilal Elmoussaoui, Florian Müllner
+
+Translators:
+  Charles Monzat [fr], Pieter Schalk Schoeman [af], Ryuta Fujii [ja],
+  Balázs Úr [hu]
+
 3.30.2 — “Mind the Sheep, Not Eat Them”
 =======================================
 * Fix regression with predefined networks [Florian; #82]
