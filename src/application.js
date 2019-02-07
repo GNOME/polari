@@ -790,7 +790,8 @@ var Application = GObject.registerClass({
             artists: [
                 'Sam Hewitt <hewittsamuel@gmail.com>',
                 'Jakub Steiner <jimmac@gmail.com>',
-                'Lapo Calamandrei <calamandrei@gmail.com>'
+                'Lapo Calamandrei <calamandrei@gmail.com>',
+                'Tobias Bernard <tbernard@gnome.org>'
             ],
             translator_credits: _("translator-credits"),
             comments: _("An Internet Relay Chat Client for GNOME"),
