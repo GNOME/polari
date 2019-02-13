@@ -27,6 +27,10 @@ G_BEGIN_DECLS
 #define POLARI_TYPE_ROOM            (polari_room_get_type())
 G_DECLARE_FINAL_TYPE (PolariRoom, polari_room, POLARI, ROOM, GObject)
 
+const char *polari_room_get_channel_error (PolariRoom *room);
+void        polari_room_set_channel_error (PolariRoom *room,
+                                           const char *channel_error);
+
 gboolean polari_room_should_highlight_message (PolariRoom *room,
                                                const char *sender,
                                                const char *message);
