@@ -42,6 +42,8 @@ struct _PolariRoomPrivate {
   char *self_nick;
   char *self_user;
 
+  char *channel_error;
+
   TpHandleType type;
 
   guint self_contact_notify_id;
@@ -59,6 +61,7 @@ enum
   PROP_ICON,
   PROP_ACCOUNT,
   PROP_TYPE,
+  PROP_CHANNEL_ERROR,
   PROP_CHANNEL_NAME,
   PROP_CHANNEL,
   PROP_DISPLAY_NAME,
@@ -149,6 +152,29 @@ polari_room_should_highlight_message (PolariRoom *room,
     return FALSE;
 
   return match_self_nick (room, message);
+}
+
+const char *
+polari_room_get_channel_error (PolariRoom *room)
+{
+  g_return_val_if_fail (POLARI_IS_ROOM (room), NULL);
+
+  return room->priv->channel_error;
+}
+
+void
+polari_room_set_channel_error (PolariRoom *room,
+                               const char *channel_error)
+{
+  g_return_if_fail (POLARI_IS_ROOM (room));
+
+  if (g_strcmp0 (room->priv->channel_error, channel_error) == 0)
+    return;
+
+  g_free (room->priv->channel_error);
+  room->priv->channel_error = g_strdup (channel_error);
+
+  g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_ERROR]);
 }
 
 void
@@ -771,6 +797,9 @@ polari_room_get_property (GObject    *object,
     case PROP_TYPE:
       g_value_set_uint (value, priv->type);
       break;
+    case PROP_CHANNEL_ERROR:
+      g_value_set_string (value, priv->channel_error);
+      break;
     case PROP_CHANNEL_NAME:
       g_value_set_string (value, priv->channel_name);
       break;
@@ -808,6 +837,9 @@ polari_room_set_property (GObject      *object,
       break;
     case PROP_TYPE:
       polari_room_set_type (room, g_value_get_uint (value));
+      break;
+    case PROP_CHANNEL_ERROR:
+      polari_room_set_channel_error (room, g_value_get_string (value));
       break;
     case PROP_CHANNEL_NAME:
       polari_room_set_channel_name (room, g_value_get_string (value));
@@ -896,6 +928,13 @@ polari_room_class_init (PolariRoomClass *klass)
                        TP_HANDLE_TYPE_GROUP,
                        TP_HANDLE_TYPE_ROOM,
                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+
+  props[PROP_CHANNEL_ERROR] =
+    g_param_spec_string ("channel-error",
+                         "Channel error",
+                         "Channel error",
+                         NULL,
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   props[PROP_CHANNEL_NAME] =
     g_param_spec_string ("channel-name",
