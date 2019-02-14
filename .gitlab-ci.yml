@@ -1,4 +1,5 @@
 stages:
+ - commit_check
  - source_check
  - build
  - review
@@ -6,6 +7,13 @@ stages:
 variables:
     BUNDLE: "polari-git.flatpak"
     LINT_LOG: "eslint-report.txt"
+
+check_commit_log:
+    stage: commit_check
+    script:
+        - ./.gitlab-ci/check-commit-log.sh
+    only:
+        - merge_requests
 
 eslint:
     image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
