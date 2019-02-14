@@ -25,7 +25,7 @@ var Application = GObject.registerClass({
 }, class Application extends Gtk.Application {
     _init() {
         super._init({ application_id: 'org.gnome.Polari',
-                      flags: Gio.ApplicationFlags.HANDLES_OPEN });
+                      flags: Gio.ApplicationFlags.HANDLES_OPEN })
 
         GLib.set_prgname('polari');
         this._retryData = new Map();
