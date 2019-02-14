@@ -150,7 +150,9 @@ class TelepathyClient extends Tp.BaseClient {
             { name: 'save-identify-password',
               handler: this._onSaveIdentifyPasswordActivated.bind(this) },
             { name: 'discard-identify-password',
-              handler: this._onDiscardIdentifyPasswordActivated.bind(this) }
+              handler: this._onDiscardIdentifyPasswordActivated.bind(this) },
+            { name: 'retry-channel-connection',
+              handler: this._onRetryChannelConnectionActivated.bind(this) }
         ];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
@@ -282,6 +284,12 @@ class TelepathyClient extends Tp.BaseClient {
                     channel = req.ensure_and_observe_channel_finish(res);
                 } catch (e) {
                     debug(`Failed to ensure channel: ${e.message}`);
+
+                    let room = this._roomManager.lookupRoom(roomId);
+                    if (room) {
+                        room.channel_error = '';
+                        room.channel_error = Tp.error_get_dbus_name(e.code);
+                    }
                 }
 
                 if (callback)
@@ -460,6 +468,12 @@ class TelepathyClient extends Tp.BaseClient {
     _discardIdentifyPassword(accountPath) {
         this._pendingBotPasswords.delete(accountPath);
         this._app.withdraw_notification(this._getIdentifyNotificationID(accountPath));
+    }
+
+    _onRetryChannelConnectionActivated(action, parameter) {
+        let roomId = parameter.deep_unpack();
+        let room = this._roomManager.lookupRoom(roomId);
+        this._connectRoom(room);
     }
 
     _isAuthChannel(channel) {

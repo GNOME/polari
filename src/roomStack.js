@@ -151,6 +151,64 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
     }
 });
 
+const ChannelErrorBar = GObject.registerClass(
+class ChannelErrorBar extends Gtk.Revealer {
+    _init(room) {
+        this._room = room;
+
+        super._init({ valign: Gtk.Align.START });
+
+        this.connect('destroy', this._onDestroy.bind(this));
+
+        this._room.connect('notify::channel-error', () => {
+            this.error_type = room.channel_error;
+            if (this.error_type == '')
+                return;
+            this._createWidget();
+            this.reveal_child = true;
+
+            this._infoBar.connect('response', () => {
+                this.reveal_child = false;
+            });
+        });
+    }
+
+    _createWidget() {
+        this._infoBar = new Gtk.InfoBar({ show_close_button: true });
+        this.add(this._infoBar);
+
+        let target = new GLib.Variant('s', this._room.id);
+        let button = new Gtk.Button({ label: _("_Retry"),
+                                      use_underline: true,
+                                      action_name: 'app.retry-channel-connection',
+                                      action_target: target });
+        this._infoBar.add_action_widget(button, Gtk.ResponseType.ACCEPT);
+
+        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this._infoBar.get_content_area().add(box);
+
+        let title = _("Failed to join the room.");
+        this._titleLabel = new Gtk.Label({ halign: Gtk.Align.START,
+                                           valign: Gtk.Align.CENTER,
+                                           wrap: true });
+        this._titleLabel.set_markup(`<b>${title}</b>`);
+        box.add(this._titleLabel);
+
+        let text = _('ERROR: ${this.error_type}');
+        this._subtitleLabel = new Gtk.Label({ label: text,
+                                              ellipsize: Pango.EllipsizeMode.END });
+        box.add(this._subtitleLabel);
+
+        this._infoBar.show_all();
+    }
+
+    _onDestroy() {
+        if (this._identifySentId)
+            this._room.disconnect(this._identifySentId);
+        this._identifySentId = 0;
+    }
+});
+
 const ChatPlaceholder = GObject.registerClass(
 class ChatPlaceholder extends Gtk.Overlay {
     _init(sizeGroup) {
@@ -197,6 +255,8 @@ class RoomView extends Gtk.Overlay {
 
         if (room.type == Tp.HandleType.CONTACT)
             this.add_overlay(new SavePasswordConfirmationBar(room));
+
+        this.add_overlay(new ChannelErrorBar(room));
 
         this._view = new ChatView(room);
         box.add(this._view);
