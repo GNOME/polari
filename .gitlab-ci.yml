@@ -49,8 +49,6 @@ flatpak:
         MESON_ARGS: "-Dsnapshot=true"
         DBUS_ID: "org.gnome.Polari"
 
-    before_script:
-        - tar -xzf cache.tar.gz .flatpak-builder/cache || true
     script:
         - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
         # Make sure to keep this in sync with the Flatpak manifest, all arguments
@@ -62,8 +60,6 @@ flatpak:
         - flatpak build app ninja -C _build test
         # Generate a Flatpak bundle
         - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID} ${BRANCH}
-    after_script:
-        - tar -czf cache.tar.gz .flatpak-builder/cache
     <<: *only_default
 
     artifacts:
@@ -73,9 +69,10 @@ flatpak:
             - _build/meson-logs/testlog.txt
         expire_in: 30 days
     cache:
-        key: flatpak-builder
+        key: "$CI_JOB_NAME"
         paths:
-             - cache.tar.gz
+             - .flatpak-builder/downloads
+             - .flatpak-builder/git
 
 review:
     stage: review
