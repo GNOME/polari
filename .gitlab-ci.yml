@@ -1,4 +1,5 @@
 stages:
+ - commit_check
  - source_check
  - build
  - review
@@ -7,11 +8,28 @@ variables:
     BUNDLE: "polari-git.flatpak"
     LINT_LOG: "eslint-report.txt"
 
+.only_default: &only_default
+    only:
+        - branches
+        - tags
+        - merge_requests
+
+check_commit_log:
+    image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
+    stage: commit_check
+    before_script:
+        - dnf install -y git
+    script:
+        - ./.gitlab-ci/check-commit-log.sh
+    only:
+        - merge_requests
+
 eslint:
     image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
     stage: source_check
     script:
         - sh lint/generate-report.sh -o $LINT_LOG || { cat $LINT_LOG; false; }
+    <<: *only_default
     artifacts:
         paths:
             - ${LINT_LOG}
@@ -46,6 +64,7 @@ flatpak:
         - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID} ${BRANCH}
     after_script:
         - tar -czf cache.tar.gz .flatpak-builder/cache
+    <<: *only_default
 
     artifacts:
         paths:
@@ -64,6 +83,7 @@ review:
         - flatpak
     script:
         - echo "Generating flatpak deployment"
+    <<: *only_default
     artifacts:
         paths:
             - ${BUNDLE}
@@ -81,6 +101,7 @@ stop_review:
     stage: review
     script:
         - echo "Stopping flatpak deployment"
+    <<: *only_default
     when: manual
     environment:
         name: review/$CI_COMMIT_REF_NAME
