@@ -131,6 +131,61 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
     }
 });
 
+const ChannelErrorBar = GObject.registerClass(
+class ChannelErrorBar extends MessageInfoBar {
+    _init(room) {
+        this._room = room;
+
+        super._init({ title: _('Failed to join the room') });
+
+        this.add_button(_('_Retry'), Gtk.ResponseType.ACCEPT).set({
+            action_name: 'app.reconnect-room',
+            action_target: new GLib.Variant('s', this._room.id)
+        });
+
+
+        this.connect('destroy', this._onDestroy.bind(this));
+
+        this._identifyError = this._room.connect('notify::channel-error', () => {
+            if (this._room.channel_error == '') {
+                this.revealed = false;
+                return;
+            }
+            this._updateLabels();
+            this.revealed = true;
+        });
+
+    }
+
+    _updateLabels() {
+        let text;
+
+        switch (this._room.channel_error) {
+        case Tp.error_get_dbus_name(Tp.Error.CHANNEL_FULL):
+            text = _('The channel is full.');
+            break;
+        case Tp.error_get_dbus_name(Tp.Error.CHANNEL_BANNED):
+            text = _('You have been banned from the channel.');
+            break;
+        case Tp.error_get_dbus_name(Tp.Error.CHANNEL_INVITE_ONLY):
+            text = _('The channel is invite-only.');
+            break;
+        case Tp.error_get_dbus_name(Tp.Error.CHANNEL_KICKED):
+            text = _('You have been kicked from the channel.');
+            break;
+        default:
+            text = _('It is not possible to join the channel now, but you can retry later.');
+        }
+
+        this.subtitle = text;
+    }
+
+    _onDestroy() {
+        if (this._identifyError)
+            this._room.disconnect(this._identifyError);
+    }
+});
+
 const ChatPlaceholder = GObject.registerClass(
 class ChatPlaceholder extends Gtk.Overlay {
     _init(sizeGroup) {
@@ -189,6 +244,8 @@ class RoomView extends Gtk.Overlay {
 
         if (room.type == Tp.HandleType.CONTACT)
             this.add_overlay(new SavePasswordConfirmationBar(room));
+
+        this.add_overlay(new ChannelErrorBar(room));
 
         this._view = new ChatView(room);
         box.add(this._view);
