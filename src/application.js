@@ -217,6 +217,8 @@ var Application = GObject.registerClass({
             parameter_type: GLib.VariantType.new('o') },
           { name: 'discard-identify-password',
             parameter_type: GLib.VariantType.new('o') },
+          { name: 'reconnect-room',
+            parameter_type: GLib.VariantType.new('s') },
           { name: 'show-emoji-picker',
             accels: ['<Primary>e'] },
           { name: 'start-client',
