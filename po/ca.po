@@ -412,7 +412,7 @@ msgstr "Inicia el client Telepathy"
 
 #: src/application.js:50
 msgid "Allow running alongside another instance"
-msgstr "Permet que s'executi juntament amb una altre instància"
+msgstr "Permet que s'executi juntament amb una altra instància"
 
 #: src/application.js:53
 msgid "Print version and exit"
@@ -511,7 +511,7 @@ msgstr[1] "han sortit %d usuaris"
 #. Translators: Time in 24h format
 #: src/chatView.js:1132
 msgid "%H∶%M"
-msgstr "%H∶%M"
+msgstr "%-H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
@@ -519,7 +519,7 @@ msgstr "%H∶%M"
 #: src/chatView.js:1137
 #, no-c-format
 msgid "Yesterday, %H∶%M"
-msgstr "Ahir, %H∶%M"
+msgstr "Ahir, %-H∶%M"
 
 #. this week
 #. Translators: this is the week day name followed by a time
@@ -527,7 +527,7 @@ msgstr "Ahir, %H∶%M"
 #: src/chatView.js:1142
 #, no-c-format
 msgid "%A, %H∶%M"
-msgstr "%A, %H∶%M"
+msgstr "%A, %-H∶%M"
 
 #. this year
 #. Translators: this is the month name and day number
@@ -536,7 +536,7 @@ msgstr "%A, %H∶%M"
 #: src/chatView.js:1148
 #, no-c-format
 msgid "%B %d, %H∶%M"
-msgstr "%d %B, %H∶%M"
+msgstr "%-d %B, %-H∶%M"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -545,7 +545,7 @@ msgstr "%d %B, %H∶%M"
 #: src/chatView.js:1154
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
-msgstr "%d %B de %Y, %H∶%M"
+msgstr "%-d %B de %Y, %-H∶%M"
 
 #. today
 #. Translators: Time in 12h format
@@ -576,7 +576,7 @@ msgstr "%A, %l∶%M %p"
 #: src/chatView.js:1175
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
-msgstr "%d %B, %l∶%M %p"
+msgstr "%-d %B, %l∶%M %p"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -585,7 +585,7 @@ msgstr "%d %B, %l∶%M %p"
 #: src/chatView.js:1181
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
-msgstr "%d %B de %Y, %l∶%M %p"
+msgstr "%-d %B de %Y, %l∶%M %p"
 
 #: src/connections.js:52
 msgid "Already added"
@@ -710,7 +710,7 @@ msgstr "/ME <acció> - envia l'<acció> al canal actual"
 
 #: src/ircParser.js:29
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
-msgstr "/MSG <sobrenom> [<missatge>] - envia una missatge privat a <sobrenom>"
+msgstr "/MSG <sobrenom> [<missatge>] - envia un missatge privat a <sobrenom>"
 
 #: src/ircParser.js:30
 msgid "/NAMES — lists users on the current channel"
