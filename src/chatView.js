@@ -342,6 +342,15 @@ class ChatView extends Gtk.ScrolledWindow {
                 this._autoscroll = true;
         });
 
+        this._queriedInitialBacklog = false;
+        this.connect('map', () => {
+            if (!this._queriedInitialBacklog) {
+                this._queriedInitialBacklog = true;
+                this._fetchingBacklog = true;
+                this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
+            }
+        });
+
         this.vadjustment.connect('value-changed',
             this._onValueChanged.bind(this));
         this.vadjustment.connect('changed', this._updateScroll.bind(this));
@@ -402,9 +411,6 @@ class ChatView extends Gtk.ScrolledWindow {
         this._updateMaxNickChars(this._room.account.nickname.length);
 
         this._logWalker = new LogWalker(this._room);
-
-        this._fetchingBacklog = true;
-        this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
 
         this._autoscroll = true;
         this._originalUpper = this.vadjustment.get_upper();
