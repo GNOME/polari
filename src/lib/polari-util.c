@@ -156,3 +156,19 @@ polari_util_get_tracker_connection (GError **error)
 
   return connection;
 }
+
+/**
+ * polari_util_close_tracker_connection:
+ */
+void
+polari_util_close_tracker_connection (void)
+{
+  TrackerSparqlConnection *connection = NULL;
+
+  connection = polari_util_get_tracker_connection (NULL);
+  if (connection)
+    {
+      tracker_sparql_connection_close (connection);
+      g_object_unref (connection);
+    }
+}
