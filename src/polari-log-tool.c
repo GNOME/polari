@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <locale.h>
+
 #include "lib/polari-tpl-importer.h"
 #include "lib/polari-message.h"
 #include "lib/polari-util.h"
@@ -243,6 +245,8 @@ main (int   argc,
       char *argv[])
 {
   const char *command;
+
+  setlocale (LC_ALL, "");
 
   g_set_prgname ("polari-log-tool");
   g_set_application_name ("Polari Log Tool");
