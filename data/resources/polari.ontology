@@ -76,7 +76,8 @@ polari:sender a rdf:Property ;
 polari:time a rdf:Property ;
             nrl:maxCardinality 1 ;
             rdfs:domain polari:Message ;
-            rdfs:range xsd:dateTime .
+            rdfs:range xsd:dateTime ;
+            tracker:indexed true .
 
 polari:text a rdf:Property ;
             nrl:maxCardinality 1 ;
