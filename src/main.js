@@ -17,7 +17,7 @@ pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Gspell', '1', 'Entry');
 pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
-const { GLib } = imports.gi;
+const { GLib, Polari } = imports.gi;
 
 const { Application } = imports.application;
 
@@ -58,5 +58,8 @@ function main(args) {
     let application = new Application();
     if (GLib.getenv('POLARI_PERSIST'))
         application.hold();
-    return application.run(args);
+
+    let retval = application.run(args);
+    Polari.util_close_tracker_connection ();
+    return retval;
 }
