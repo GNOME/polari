@@ -136,8 +136,8 @@ create_account_resource (const char *id)
 
   res = tracker_resource_new (uri);
 
-  tracker_resource_set_uri (res, "rdf:type", "polari:Account");
-  tracker_resource_set_string (res, "polari:id", id);
+  tracker_resource_add_uri (res, "rdf:type", "polari:Account");
+  tracker_resource_add_string (res, "polari:id", id);
 
   g_free (uri);
 
@@ -156,10 +156,10 @@ create_channel_resource (const char *name,
 
   res = tracker_resource_new (uri);
 
-  tracker_resource_set_uri (res, "rdf:type", is_room ? "polari:Room"
+  tracker_resource_add_uri (res, "rdf:type", is_room ? "polari:Room"
                                                      : "polari:Conversation");
-  tracker_resource_set_string (res, "polari:name", name);
-  tracker_resource_set_take_relation (res, "polari:account",
+  tracker_resource_add_string (res, "polari:name", name);
+  tracker_resource_add_take_relation (res, "polari:account",
                                       create_account_resource (account_id));
 
   g_free (uri);
@@ -180,7 +180,7 @@ create_sender_resource (const char *nick,
 
   res = tracker_resource_new (uri);
 
-  tracker_resource_set_uri (res, "rdf:type", is_self ? "polari:SelfContact"
+  tracker_resource_add_uri (res, "rdf:type", is_self ? "polari:SelfContact"
                                                      : "polari:Contact");
   tracker_resource_set_string (res, "polari:nick", nick);
 
