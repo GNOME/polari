@@ -605,7 +605,7 @@ const ChatView = GObject.registerClass({
             if (logs[pos].get_sender() === firstPending.get_sender() &&
                 logs[pos].get_text() === firstPending.get_text() &&
                 logs[pos].is_action() === firstPending.is_action() &&
-                logs[pos].get_time().equal(firstPending.get_time()))
+                logs[pos].get_time().to_unix() === firstPending.get_time().to_unix())
                 break;
         }
         // Remove entries that are also in pending (if any), then
