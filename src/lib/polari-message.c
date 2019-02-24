@@ -206,10 +206,10 @@ polari_message_to_tracker_resource (PolariMessage *message,
 
   res = tracker_resource_new (NULL);
 
+  tracker_resource_set_uri (res, "rdf:type", "polari:Message");
+
   if (polari_message_is_action (message))
-    tracker_resource_set_uri (res, "rdf:type", "polari:ActionMessage");
-  else
-    tracker_resource_set_uri (res, "rdf:type", "polari:Message");
+    tracker_resource_set_boolean (res, "polari:isAction", TRUE);
 
   time = g_date_time_format (polari_message_get_time (message), "%FT%H:%M:%S");
   tracker_resource_set_string (res, "polari:time", time);
