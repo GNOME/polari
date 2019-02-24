@@ -167,6 +167,8 @@ handle_import (int   argc,
   g_object_unref (importer);
   g_main_loop_unref (loop);
 
+  polari_util_close_tracker_connection ();
+
   return status;
 }
 

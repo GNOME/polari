@@ -2,6 +2,7 @@ import GLib from 'gi://GLib';
 
 import * as Config from './config.js';
 import * as Log from './logging.js';
+import Polari from 'gi://Polari';
 import { ngettext } from 'gettext';
 import { programInvocationName, programArgs } from 'system';
 
@@ -39,3 +40,4 @@ let application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))
     application.hold();
 application.run([programInvocationName, ...programArgs]);
+Polari.util_close_tracker_connection ();
