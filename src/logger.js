@@ -4,7 +4,7 @@ const { Gio, GLib, Polari, Tracker } = imports.gi;
 
 var GenericQuery  = class {
     constructor(limit = -1) {
-        this._connection = Polari.util_get_tracker_connection();
+        this._connection = Polari.util_get_tracker_connection(false);
         this._results = [];
         this._limit = limit;
         this._count = 0;

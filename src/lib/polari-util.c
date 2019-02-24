@@ -140,7 +140,8 @@ polari_util_match_identify_message (const char  *message,
  * Returns: (transfer none):
  */
 TrackerSparqlConnection *
-polari_util_get_tracker_connection (GError **error)
+polari_util_get_tracker_connection (gboolean readonly,
+                                    GError **error)
 {
   static TrackerSparqlConnection *connection = NULL;
 
@@ -148,6 +149,7 @@ polari_util_get_tracker_connection (GError **error)
     {
       g_autoptr(GFile) store, ontology;
       g_autofree char *store_path;
+      TrackerSparqlConnectionFlags flags = 0;
 
       store_path = g_build_filename (g_get_user_data_dir (),
                                      "polari",
@@ -156,7 +158,10 @@ polari_util_get_tracker_connection (GError **error)
       store = g_file_new_for_path (store_path);
       ontology = g_file_new_for_uri ("resource:///org/gnome/Polari/ontologies/");
 
-      connection = tracker_sparql_connection_local_new (TRACKER_SPARQL_CONNECTION_FLAGS_NONE,
+      if (readonly)
+        flags |= TRACKER_SPARQL_CONNECTION_FLAGS_READONLY;
+
+      connection = tracker_sparql_connection_local_new (flags,
                                                         store,
                                                         NULL,
                                                         ontology,
