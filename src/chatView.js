@@ -313,6 +313,16 @@ var ChatView = GObject.registerClass({
                 this._autoscroll = true;
         });
 
+        this._queriedInitialBacklog = false;
+        this.connect('map', () => {
+            if (!this._queriedInitialBacklog) {
+                this._queriedInitialBacklog = true;
+                this._fetchingBacklog = true;
+                this._logWalker.getEvents(NUM_INITIAL_LOG_EVENTS,
+                                          this._onLogEventsReady.bind(this));
+            }
+        });
+
         this.vadjustment.connect('value-changed',
                                  this._onValueChanged.bind(this));
         this.vadjustment.connect('changed', this._updateScroll.bind(this));
@@ -351,10 +361,6 @@ var ChatView = GObject.registerClass({
         this._updateMaxNickChars(this._room.account.nickname.length);
 
         this._logWalker = new LogWalker(this._room);
-
-        this._fetchingBacklog = true;
-        this._logWalker.getEvents(NUM_INITIAL_LOG_EVENTS,
-                                  this._onLogEventsReady.bind(this));
 
         this._autoscroll = true;
 
