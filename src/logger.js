@@ -146,6 +146,7 @@ var LogWalker = class {
         if (!this._query) {
             this._query = new GenericQuery(numEvents);
 
+            let channel = Tracker.sparql_escape_uri(`urn:channel:${this._room.account.get_path_suffix()}:${this._room.channel_name}`);
             let sparql = `
                 select polari:text(?msg) as ?text
                        polari:nick(?sender) as ?sender
@@ -154,10 +155,7 @@ var LogWalker = class {
                        (exists { ?sender a polari:SelfContact }) as ?isSelf
                 { ?msg a polari:Message;
                        polari:sender ?sender;
-                       polari:channel ?chan .
-                  ?chan polari:account ?account;
-                        polari:name "${this._room.channel_name}" .
-                  ?account polari:id "${this._room.account.get_path_suffix()}"
+                       polari:channel <${channel}>
                 } order by desc(?time) desc(tracker:id(?msg))
             `;
             this._query.run(sparql, null, returnFunc);
