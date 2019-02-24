@@ -171,3 +171,18 @@ polari_util_get_tracker_connection (gboolean readonly,
 
   return connection;
 }
+
+/**
+ * polari_util_close_tracker_connection:
+ *
+ * Returns: (transfer none):
+ */
+void
+polari_util_close_tracker_connection (void)
+{
+  TrackerSparqlConnection *connection = NULL;
+
+  connection = polari_util_get_tracker_connection (TRUE, NULL);
+  if (connection)
+    g_object_unref (connection);
+}
