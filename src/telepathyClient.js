@@ -601,10 +601,7 @@ class TelepathyClient extends Tp.BaseClient {
         let channelName = channel.identifier;
 
         let message = Polari.Message.new_from_tp_message (tpMessage);
-        let res = message.to_tracker_resource(accountId, channelName, isRoom);
-
-        let nsManager = connection.get_namespace_manager();
-        let sparql = res.print_sparql_update(nsManager, null);
+        let sparql = message.to_sparql(connection, accountId, channelName, isRoom);
         connection.update_async(sparql, 0, null, (o, res) => {
             try {
                 connection.update_finish(res);
