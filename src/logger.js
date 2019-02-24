@@ -150,10 +150,11 @@ var LogWalker = class {
             let sparql = `
                 select polari:text(?msg) as ?text
                        polari:nick(?sender) as ?sender
-                       polari:time(?msg) as ?time
+                       ?time
                        (exists { ?msg a polari:ActionMessage }) as ?isAction
                        (exists { ?sender a polari:SelfContact }) as ?isSelf
                 { ?msg a polari:Message;
+                       polari:time ?time;
                        polari:sender ?sender;
                        polari:channel <${channel}>
                 } order by desc(?time) desc(tracker:id(?msg))
