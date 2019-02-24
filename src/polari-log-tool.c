@@ -56,7 +56,7 @@ import_ready (GObject      *source,
       goto out;
     }
 
-  connection = polari_util_get_tracker_connection (&error);
+  connection = polari_util_get_tracker_connection (FALSE, &error);
   ns_manager = tracker_sparql_connection_get_namespace_manager (connection);
 
   if (error)
@@ -179,7 +179,7 @@ handle_query (int argc,
   GError *error = NULL;
   char *sparql;
 
-  connection = polari_util_get_tracker_connection (NULL);
+  connection = polari_util_get_tracker_connection (TRUE, NULL);
 
   sparql = argv[1];
 

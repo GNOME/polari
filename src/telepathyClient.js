@@ -594,7 +594,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _logMessage(tpMessage, channel) {
-        let connection = Polari.util_get_tracker_connection ();
+        let connection = Polari.util_get_tracker_connection (false);
 
         let accountId = channel.connection.get_account().get_path_suffix();
         let isRoom = channel.handle_type == Tp.HandleType.ROOM;
