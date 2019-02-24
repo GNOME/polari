@@ -238,6 +238,9 @@ handle_query (int argc,
         }
     }
 
+  tracker_sparql_cursor_close (cursor);
+  g_object_unref (cursor);
+
   return status;
 }
 
