@@ -206,7 +206,7 @@ polari_message_to_tracker_resource (PolariMessage *message,
 
   uri = tracker_sparql_get_uuid_urn ();
 
-  res = tracker_resource_new (uri);
+  res = tracker_resource_new (NULL);
 
   if (polari_message_is_action (message))
     tracker_resource_set_uri (res, "rdf:type", "polari:ActionMessage");
