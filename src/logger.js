@@ -151,7 +151,7 @@ var LogWalker = class {
                 select polari:text(?msg) as ?text
                        polari:nick(?sender) as ?sender
                        ?time
-                       (exists { ?msg a polari:ActionMessage }) as ?isAction
+                       polari:isAction(?msg) as ?isAction
                        (exists { ?sender a polari:SelfContact }) as ?isSelf
                 { ?msg a polari:Message;
                        polari:time ?time;
