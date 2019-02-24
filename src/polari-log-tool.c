@@ -42,6 +42,7 @@ import_ready (GObject      *source,
   GString *sparql = g_string_new (NULL);
   char *account_id = NULL, *channel_name = NULL;
   gboolean is_room;
+  int batch_count = 0;
 
   messages = polari_tpl_importer_import_finish (importer,
                                                 result,
@@ -90,6 +91,17 @@ import_ready (GObject      *source,
               polari_message_get_sender (tpl_message),
               polari_message_get_text (tpl_message));
 #endif
+
+      batch_count++;
+
+      if (batch_count == 500)
+        {
+          tracker_sparql_connection_update (connection, sparql->str,
+                                            G_PRIORITY_DEFAULT, NULL, &error);
+          g_string_free (sparql, TRUE);
+          sparql = g_string_new (NULL);
+          batch_count = 0;
+        }
     }
   g_list_free_full (messages, (GDestroyNotify)polari_message_free);
 
