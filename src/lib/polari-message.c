@@ -228,3 +228,25 @@ polari_message_to_tracker_resource (PolariMessage *message,
 
   return res;
 }
+
+/**
+ * polari_message_to_sparql:
+ *
+ * Returns: (transfer full):
+ */
+gchar *
+polari_message_to_sparql (PolariMessage           *message,
+                          TrackerSparqlConnection *connection,
+                          const char              *account_id,
+                          const char              *channel_name,
+                          gboolean                 is_room)
+{
+  TrackerNamespaceManager *ns_manager;
+  TrackerResource *res;
+
+  res = polari_message_to_tracker_resource (message, account_id,
+                                            channel_name, is_room);
+  ns_manager = tracker_sparql_connection_get_namespace_manager (connection);
+
+  return tracker_resource_print_sparql_update (res, ns_manager, NULL);
+}
