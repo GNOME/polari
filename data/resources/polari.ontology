@@ -85,6 +85,7 @@ polari:text a rdf:Property ;
             rdfs:range xsd:string ;
             tracker:fulltextIndexed true .
 
-
-polari:ActionMessage a rdfs:Class ;
-                     rdfs:subClassOf polari:Message .
+polari:isAction a rdf:Property ;
+            nrl:maxCardinality 1 ;
+            rdfs:domain polari:Message ;
+            rdfs:range xsd:boolean .
