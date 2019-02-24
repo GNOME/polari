@@ -202,11 +202,9 @@ polari_message_to_tracker_resource (PolariMessage *message,
                                     gboolean       is_room)
 {
   TrackerResource *res, *rel;
-  char *uri, *time;
+  char *time;
 
-  uri = tracker_sparql_get_uuid_urn ();
-
-  res = tracker_resource_new (uri);
+  res = tracker_resource_new (NULL);
 
   if (polari_message_is_action (message))
     tracker_resource_set_uri (res, "rdf:type", "polari:ActionMessage");
@@ -226,7 +224,6 @@ polari_message_to_tracker_resource (PolariMessage *message,
   rel = create_channel_resource (channel_name, account_id, is_room);
   tracker_resource_set_take_relation (res, "polari:channel", rel);
 
-  g_free (uri);
   g_free (time);
 
   return res;
