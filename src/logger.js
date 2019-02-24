@@ -138,8 +138,7 @@ var LogWalker = class {
         let returnFunc = r => {
             callback(r.reverse().map(m => {
                 let { text, sender, isAction, isSelf } = m;
-                let timestamp = new Date(m.time).toLocaleFormat('%s');
-                let dt = GLib.DateTime.new_from_unix_utc(timestamp);
+                let dt = GLib.DateTime.new_from_unix_utc(m.time);
                 return new Polari.Message(text, sender, dt, isAction, isSelf);
             }));
         };
