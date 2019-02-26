@@ -1,8 +1,7 @@
 /* exported MessageNotification UndoNotification NotificationQueue
             SimpleOutput GridOutput CommandOutputQueue */
 
-const { GObject, Gtk, Pango } = imports.gi;
-const Mainloop = imports.mainloop;
+const { GLib, GObject, Gtk, Pango } = imports.gi;
 
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
@@ -34,7 +33,7 @@ class MessageNotification extends AppNotification {
     _init(label, iconName) {
         super._init();
 
-        Mainloop.timeout_add_seconds(TIMEOUT, this.close.bind(this));
+        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, TIMEOUT, this.close.bind(this));
 
         this._box = new Gtk.Box({ spacing: 12 });
 
@@ -99,8 +98,9 @@ class CommandOutputNotification extends AppNotification {
         super._init();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
-        Mainloop.timeout_add_seconds(COMMAND_OUTPUT_REVEAL_TIME,
-                                     this.close.bind(this));
+        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT,
+                                 COMMAND_OUTPUT_REVEAL_TIME,
+                                 this.close.bind(this));
     }
 });
 

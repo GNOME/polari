@@ -3,7 +3,6 @@
 const {
     Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp
 } = imports.gi;
-const Mainloop = imports.mainloop;
 
 const READWRITE = GObject.ParamFlags.READABLE | GObject.ParamFlags.WRITABLE;
 
@@ -623,7 +622,7 @@ class UserList extends Gtk.ScrolledWindow {
         if (this._updateHeightId != 0)
             return;
 
-        this._updateHeightId = Mainloop.idle_add(() => {
+        this._updateHeightId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
             let topRow = this._list.get_row_at_y(this.vadjustment.value);
             let membersShown = Math.min(this.numRows, MAX_USERS_SHOWN);
             // topRow is unset when all rows are hidden due to filtering,
