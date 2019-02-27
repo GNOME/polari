@@ -199,8 +199,9 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onNetworkChanged(mon, connected) {
-        let presence = connected ? Tp.ConnectionPresenceType.AVAILABLE
-                                 : Tp.ConnectionPresenceType.OFFLINE;
+        let presence = connected ?
+            Tp.ConnectionPresenceType.AVAILABLE :
+            Tp.ConnectionPresenceType.OFFLINE;
         debug(`Network changed to ${connected ? 'available' : 'unavailable'}`);
 
         this._accountsMonitor.visibleAccounts.forEach(a => {

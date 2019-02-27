@@ -563,8 +563,8 @@ class RoomList extends Gtk.ListBox {
 
         let index = this._rowToRoomIndex(row.get_index());
         this.select_row(row);
-        this._moveSelection(index == 0 ? Gtk.DirectionType.DOWN
-                                       : Gtk.DirectionType.UP);
+        this._moveSelection(index == 0 ?
+            Gtk.DirectionType.DOWN : Gtk.DirectionType.UP);
 
         let newSelected = this.get_selected_row();
         if (newSelected != row)

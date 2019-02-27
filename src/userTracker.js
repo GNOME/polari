@@ -255,8 +255,9 @@ const UserTracker = GObject.registerClass({
         let baseNick = Polari.util_get_basenick(nickName);
 
         let contacts = this._baseNickContacts.get(baseNick) || [];
-        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
-                                    : Tp.ConnectionPresenceType.AVAILABLE;
+        return contacts.length == 0 ?
+            Tp.ConnectionPresenceType.OFFLINE :
+            Tp.ConnectionPresenceType.AVAILABLE;
     }
 
     getNickRoomStatus(nickName, room) {
@@ -265,8 +266,9 @@ const UserTracker = GObject.registerClass({
         this._ensureRoomMappingForRoom(room);
 
         let contacts = this._getRoomContacts(room).get(baseNick) || [];
-        return contacts.length == 0 ? Tp.ConnectionPresenceType.OFFLINE
-                                    : Tp.ConnectionPresenceType.AVAILABLE;
+        return contacts.length == 0 ?
+            Tp.ConnectionPresenceType.OFFLINE :
+            Tp.ConnectionPresenceType.AVAILABLE;
     }
 
     lookupContact(nickName) {
@@ -317,8 +319,7 @@ const UserTracker = GObject.registerClass({
     _shouldNotifyNick(nickName) {
         let actionName = this._getNotifyActionNameInternal(nickName);
         let state = this._app.get_action_state(actionName);
-        return state ? state.get_boolean()
-                     : false;
+        return state ? state.get_boolean() : false;
     }
 
     _setNotifyActionEnabled(nickName, enabled) {

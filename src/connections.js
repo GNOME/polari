@@ -21,8 +21,10 @@ function getAccountParams(account) {
         params[p] = params[p].deep_unpack();
 
     params['use-ssl'] = !!params['use-ssl'];
-    params['port'] = params['port'] || params['use-ssl'] ? DEFAULT_SSL_PORT
-                                                         : DEFAULT_PORT;
+
+    let defaultPort = params['use-ssl'] ? DEFAULT_SSL_PORT : DEFAULT_PORT;
+    params['port'] = params['port'] || defaultPort;
+
     return params;
 }
 

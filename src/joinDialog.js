@@ -120,8 +120,8 @@ var JoinDialog = GObject.registerClass({
 
         this._customToggle.connect('notify::active', () => {
             let isCustom = this._customToggle.active;
-            this._connectionStack.visible_child_name = isCustom ? 'custom'
-                                                                : 'predefined';
+            let childName = isCustom ? 'custom' : 'predefined';
+            this._connectionStack.visible_child_name = childName;
             if (isCustom) {
                 this._addButton.grab_default();
                 this._details.reset();
@@ -187,8 +187,8 @@ var JoinDialog = GObject.registerClass({
             this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
-        let activeRoom = this.transient_for ? this.transient_for.active_room
-                                            : null;
+        let activeRoom = this.transient_for ?
+            this.transient_for.active_room : null;
         let activeIndex = 0;
         if (activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
@@ -203,8 +203,8 @@ var JoinDialog = GObject.registerClass({
                         this._serverRoomList.can_join;
 
         this._joinButton.sensitive = sensitive;
-        this.set_default_response(sensitive ? Gtk.ResponseType.OK
-                                            : Gtk.ResponseType.NONE);
+        this.set_default_response(sensitive ?
+            Gtk.ResponseType.OK : Gtk.ResponseType.NONE);
     }
 
     get _page() {
@@ -226,8 +226,7 @@ var JoinDialog = GObject.registerClass({
         this._joinButton.visible = isMain;
         this._cancelButton.visible = isMain || isAccountsEmpty;
         this._backButton.visible = !(isMain || isAccountsEmpty);
-        this.title = isMain ? _("Join Chat Room")
-                            : _("Add Network");
+        this.title = isMain ? _("Join Chat Room") : _("Add Network");
         this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
         this._updateCanJoin();
     }

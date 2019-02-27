@@ -124,8 +124,9 @@ var AccountsMonitor = class {
             });
         account._visibleNotifyId =
             account.connect('notify::visible', () => {
-                this.emit(account.visible ? 'account-shown'
-                                          : 'account-hidden', account);
+                let signal = account.visible ?
+                    'account-shown' : 'account-hidden';
+                this.emit(signal, account);
                 this.emit('accounts-changed');
             });
         this._accounts.set(account.object_path, account);
@@ -151,8 +152,8 @@ var AccountsMonitor = class {
     _accountEnabledChanged(am, account) {
         if (!this._accounts.has(account.object_path))
             return;
-        this.emit(account.enabled ? 'account-enabled'
-                                  : 'account-disabled', account);
+        let signal = account.enabled ? 'account-enabled' : 'account-disabled';
+        this.emit(signal, account);
         this.emit('accounts-changed');
     }
 };

@@ -93,8 +93,7 @@ var NetworksManager = class {
     getNetworkServers(id) {
         let network = this._lookupNetwork(id);
         let sslServers = network.servers.filter(s => s.ssl);
-        return sslServers.length > 0 ? sslServers
-                                     : network.servers.slice();
+        return sslServers.length > 0 ? sslServers : network.servers.slice();
     }
 
     getNetworkMatchTerms(id) {

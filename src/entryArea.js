@@ -474,8 +474,9 @@ var EntryArea = GObject.registerClass({
 
     _updateNick() {
         let channel = this._room ? this._room.channel : null;
-        let nick = channel ? channel.connection.self_contact.alias
-                           : this._room ? this._room.account.nickname : '';
+        let nick = channel ?
+            channel.connection.self_contact.alias :
+            this._room ? this._room.account.nickname : '';
 
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;

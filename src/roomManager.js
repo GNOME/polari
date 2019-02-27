@@ -187,8 +187,8 @@ var RoomManager = class {
     ensureRoomForChannel(channel, time) {
         let accountPath = channel.connection.get_account().object_path;
         let targetContact = channel.target_contact;
-        let channelName = targetContact ? targetContact.alias
-                                        : channel.identifier;
+        let channelName = targetContact ?
+            targetContact.alias : channel.identifier;
         let [, handleType] = channel.get_handle();
         let room = this._ensureRoom(accountPath, channelName, handleType, time);
         room.channel = channel;

@@ -913,8 +913,9 @@ var ChatView = GObject.registerClass({
 
         this._channel = this._room.channel;
 
-        let nick = this._channel ? this._channel.connection.self_contact.alias
-                                 : this._room.account.nickname;
+        let nick = this._channel ?
+            this._channel.connection.self_contact.alias :
+            this._room.account.nickname;
         this._updateMaxNickChars(nick.length);
 
         if (!this._channel)
@@ -952,15 +953,17 @@ var ChatView = GObject.registerClass({
 
     _onMemberKicked(room, member, actor) {
         let [kicked, kicker] = [member.alias, actor ? actor.alias : null];
-        let msg = kicker ? _("%s has been kicked by %s").format(kicked, kicker)
-                         : _("%s has been kicked").format(kicked);
+        let msg = kicker ?
+            _("%s has been kicked by %s").format(kicked, kicker) :
+            _("%s has been kicked").format(kicked);
         this._insertStatus(msg, kicked, 'left');
     }
 
     _onMemberBanned(room, member, actor) {
         let [banned, banner] = [member.alias, actor ? actor.alias : null];
-        let msg = banner ? _("%s has been banned by %s").format(banned, banner)
-                         : _("%s has been banned").format(banned);
+        let msg = banner ?
+            _("%s has been banned by %s").format(banned, banner) :
+            _("%s has been banned").format(banned);
         this._insertStatus(msg, banned, 'left');
     }
 
