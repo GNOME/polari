@@ -191,7 +191,7 @@ var ConnectionsList = GObject.registerClass({
     }
 
     _networksChanged() {
-        this._list.foreach(w => { w.destroy(); });
+        this._list.foreach(w => w.destroy());
 
         let accounts = this._accountsMonitor.accounts;
         let usedNetworks = accounts.filter(a => {
@@ -542,7 +542,7 @@ var ConnectionProperties = GObject.registerClass({
                                  this._syncErrorMessage.bind(this));
         this._syncErrorMessage(account);
 
-        this.connect('destroy', () => { account.disconnect(id); });
+        this.connect('destroy', () => account.disconnect(id));
     }
 
     _syncErrorMessage(account) {

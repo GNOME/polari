@@ -231,7 +231,7 @@ const HoverFilterTag = GObject.registerClass({
 
         super._init(params);
 
-        this.connect('notify::hover', () => { this._updateColor(); });
+        this.connect('notify::hover', () => this._updateColor());
     }
 
     _updateColor() {
@@ -443,7 +443,7 @@ var ChatView = GObject.registerClass({
             justification: Gtk.Justification.CENTER }
             /* eslint-enable indent */
         ];
-        tags.forEach(tagProps => { tagTable.add(new Gtk.TextTag(tagProps)); });
+        tags.forEach(tagProps => tagTable.add(new Gtk.TextTag(tagProps)));
     }
 
     _onStyleUpdated() {
@@ -805,7 +805,7 @@ var ChatView = GObject.registerClass({
         else
             hoveredButtonTags = [];
 
-        hoveredButtonTags.forEach(t => { t.hover = true; });
+        hoveredButtonTags.forEach(t => t.hover = true);
         this._hoveredButtonTags.forEach(t => {
             t.hover = hoveredButtonTags.includes(t);
         });

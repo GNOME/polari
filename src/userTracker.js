@@ -123,7 +123,7 @@ const UserTracker = GObject.registerClass({
         if (!this._roomData.has(room))
             return;
 
-        this._getRoomSignals(room).forEach(id => { room.disconnect(id); });
+        this._getRoomSignals(room).forEach(id => room.disconnect(id));
         this._clearUsersFromRoom(room);
         this._roomData.delete(room);
     }
@@ -142,13 +142,13 @@ const UserTracker = GObject.registerClass({
 
         /*keep track of initial members in the room, both locally and
         globally*/
-        members.forEach(m => { this._trackMember(m, room); });
+        members.forEach(m => this._trackMember(m, room));
     }
 
     _clearUsersFromRoom(room) {
         let map = this._getRoomContacts(room);
         for (let [, contacts] of map)
-            contacts.slice().forEach((m) => { this._untrackMember(m, room); });
+            contacts.slice().forEach((m) => this._untrackMember(m, room));
     }
 
     _ensureRoomMappingForRoom(room) {

@@ -193,7 +193,7 @@ var Application = GObject.registerClass({
             parameter_type: GLib.VariantType.new('(ss)') },
           { name: 'leave-current-room',
             activate: this._onLeaveCurrentRoom.bind(this),
-            create_hook: (a) => { a.enabled = false; },
+            create_hook: (a) => a.enabled = false,
             accels: ['<Primary>w'] },
           { name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)') },
@@ -355,9 +355,9 @@ var Application = GObject.registerClass({
                     this.emit('prepare-shutdown');
                 });
                 window.connect('notify::active-room',
-                               () => { this.emit('room-focus-changed'); });
+                               () => this.emit('room-focus-changed'));
                 window.connect('notify::is-active',
-                               () => { this.emit('room-focus-changed'); });
+                               () => this.emit('room-focus-changed'));
             }
         }
 
@@ -828,7 +828,7 @@ var Application = GObject.registerClass({
             this.disconnect(this._windowRemovedId);
         this._windowRemovedId = 0;
 
-        this.get_windows().reverse().forEach(w => { w.destroy(); });
+        this.get_windows().reverse().forEach(w => w.destroy());
         this.emit('prepare-shutdown');
     }
 });

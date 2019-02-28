@@ -32,7 +32,7 @@ var InitialSetupWindow = GObject.registerClass({
             this._serverRoomList.setAccount(account);
         });
 
-        this.connect('destroy', () => { this._unsetAccount(); });
+        this.connect('destroy', () => this._unsetAccount());
 
         this._serverRoomList.connect('notify::can-join',
                                      this._updateNextSensitivity.bind(this));

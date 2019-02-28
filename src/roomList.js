@@ -467,16 +467,16 @@ class RoomList extends Gtk.ListBox {
                                   this._roomAdded.bind(this));
         this._roomManager.connect('room-removed',
                                   this._roomRemoved.bind(this));
-        this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
+        this._roomManager.rooms.forEach(r => this._roomAdded(this._roomManager, r));
 
         let app = Gio.Application.get_default();
         let actions = [
             { name: 'next-room',
-              handler: () => { this._moveSelection(Gtk.DirectionType.DOWN); } },
+              handler: () => this._moveSelection(Gtk.DirectionType.DOWN) },
             { name: 'previous-room',
-              handler: () => { this._moveSelection(Gtk.DirectionType.UP); } },
+              handler: () => this._moveSelection(Gtk.DirectionType.UP) },
             { name: 'first-room',
-              handler: () => { this._selectRoomAtIndex(0); } },
+              handler: () => this._selectRoomAtIndex(0) },
             { name: 'last-room',
               handler: () => {
                   let nRows = this._roomManager.roomCount;
@@ -536,7 +536,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _moveSelection(direction) {
-        this._moveSelectionFull(direction, () => { return true; });
+        this._moveSelectionFull(direction, () => true);
     }
 
     _moveSelectionFull(direction, testFunction) {
@@ -624,7 +624,7 @@ class RoomList extends Gtk.ListBox {
         this.add(row);
         this._roomRows.set(room.id, row);
 
-        row.connect('destroy', w => { this._roomRows.delete(w.room.id); });
+        row.connect('destroy', w => this._roomRows.delete(w.room.id));
         this._placeholders.get(room.account).hide();
     }
 

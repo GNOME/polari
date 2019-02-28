@@ -45,7 +45,7 @@ var RoomManager = class {
             this._removeRooms(account.object_path);
             this._removeSavedChannelsForAccount(account.object_path);
         });
-        this._accountsMonitor.prepare(() => { this._restoreRooms(); });
+        this._accountsMonitor.prepare(() => this._restoreRooms());
     }
 
     lookupRoom(id) {

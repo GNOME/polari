@@ -108,8 +108,8 @@ class TelepathyClient extends Tp.BaseClient {
     _init(params) {
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown', () => {
-            [...this._pendingRequests.values()].forEach(r => { r.cancel(); });
-            [...this._pendingBotPasswords.keys()].forEach(a => { this._discardIdentifyPassword(a); });
+            [...this._pendingRequests.values()].forEach(r => r.cancel());
+            [...this._pendingBotPasswords.keys()].forEach(a => this._discardIdentifyPassword(a));
             this._app.release();
         });
         this._app.hold();
@@ -357,7 +357,7 @@ class TelepathyClient extends Tp.BaseClient {
     _onReconnectAccountActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
-        account.reconnect_async((a, res) => { a.reconnect_finish(res); });
+        account.reconnect_async((a, res) => a.reconnect_finish(res));
     }
 
     _onAuthenticateAccountActivated(action, parameter) {

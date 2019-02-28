@@ -28,7 +28,7 @@ var RoomStack = GObject.registerClass({
             this._roomManager.connect('room-added', this._roomAdded.bind(this));
         this._roomRemovedId =
             this._roomManager.connect('room-removed', this._roomRemoved.bind(this));
-        this._roomManager.rooms.forEach(r => { this._roomAdded(this._roomManager, r); });
+        this._roomManager.rooms.forEach(r => this._roomAdded(this._roomManager, r));
 
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
 

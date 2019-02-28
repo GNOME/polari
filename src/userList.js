@@ -16,7 +16,7 @@ class UserListPopover extends Gtk.Popover {
 
         this._createWidget();
 
-        this.connect('closed', () => { this._entry.text = ''; });
+        this.connect('closed', () => this._entry.text = '');
         this.connect('map', () => {
             this._revealer.transition_duration = 0;
             this._ensureUserList();
@@ -681,7 +681,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     _onChannelChanged(room) {
-        this._list.foreach(w => { w.destroy(); });
+        this._list.foreach(w => w.destroy());
         this._rows.clear();
 
         if (!room.channel)

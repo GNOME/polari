@@ -93,7 +93,7 @@ var AccountsMonitor = class {
         am.connect('account-enabled', this._accountEnabledChanged.bind(this));
         am.connect('account-disabled', this._accountEnabledChanged.bind(this));
 
-        this._preparedCallbacks.forEach(callback => { callback(); });
+        this._preparedCallbacks.forEach(callback => callback());
     }
 
     _onPrepareShutdown() {
