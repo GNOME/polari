@@ -95,10 +95,9 @@ Signals.addSignalMethods(ServerRoomManager.prototype);
 
 
 const RoomListColumn = {
-    CHECKED:   0,
-    NAME:      1,
-    COUNT:     2,
-
+    CHECKED: 0,
+    NAME: 1,
+    COUNT: 2,
     SENSITIVE: 3,
 };
 

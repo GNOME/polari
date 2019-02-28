@@ -18,14 +18,6 @@
                 "MemberExpression": "off"
             }
         ],
-        "key-spacing": [
-            "error",
-            {
-                "mode": "minimum",
-                "beforeColon": false,
-                "afterColon": true
-            }
-        ],
         "no-restricted-properties": [
             "error",
             {
