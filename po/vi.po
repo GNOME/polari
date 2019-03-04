@@ -1,15 +1,14 @@
 # Vietnamese translations for polari package.
 # Bản dịch tiếng Việt dành cho gói polari.
 # This file is distributed under the same license as the polari package.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2017.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2017, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
-"product=polari&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-09-13 19:40+0000\n"
-"PO-Revision-Date: 2017-09-16 07:29+0700\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2019-03-03 19:58+0000\n"
+"PO-Revision-Date: 2019-03-04 07:04+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -21,12 +20,11 @@ msgstr ""
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
-#: src/roomStack.js:169
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:758
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:829
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Trình khách Internet Relay Chat dành cho GNOME"
 
@@ -53,6 +51,10 @@ msgstr ""
 "thậm chí cho phép bạn trả lời ngay lập tức mà không cần quay trở lại ứng "
 "dụng!"
 
+#: data/appdata/org.gnome.Polari.appdata.xml.in:48
+msgid "The GNOME Project"
+msgstr "Dự án GNOME"
+
 #. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 #: data/org.gnome.Polari.desktop.in:7
 msgid "org.gnome.Polari"
@@ -61,7 +63,7 @@ msgstr "org.gnome.Polari"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;Chát;"
 
 #: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
@@ -71,7 +73,7 @@ msgstr "Danh sách kênh đã lưu"
 msgid "List of channels to restore on startup"
 msgstr "Danh sách các kênh được khôi phục khi khởi chạy"
 
-#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
 msgstr "Chạy trên nền"
 
@@ -160,7 +162,7 @@ msgstr "_Biệt hiệu"
 msgid "_Real Name"
 msgstr "_Tên thật"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:149
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
 #: data/resources/join-room-dialog.ui:11 src/initialSetup.js:84
 msgid "_Cancel"
 msgstr "Thô_i"
@@ -169,19 +171,11 @@ msgstr "Thô_i"
 msgid "_Apply"
 msgstr "Á_p dụng"
 
-#: data/resources/entry-area.ui:16
-msgid "Change nickname:"
-msgstr "Đổi tên hiệu:"
-
-#: data/resources/entry-area.ui:27
-msgid "_Change"
-msgstr "Tha_y đổi"
-
-#: data/resources/entry-area.ui:78
+#: data/resources/entry-area.ui:38
 msgid "Change nickname"
 msgstr "Đổi tên hiệu"
 
-#: data/resources/entry-area.ui:159
+#: data/resources/entry-area.ui:119
 msgid "_Paste"
 msgstr "_Dán"
 
@@ -290,7 +284,7 @@ msgstr ""
 "Chọn các phòng mà bạn muốn kết nối. Bạn có thể thêm nhiều mạng và phòng sau "
 "này, bằng các bấm và nút +."
 
-#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:236
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:234
 msgid "Join Chat Room"
 msgstr "Tham gia phòng"
 
@@ -314,58 +308,55 @@ msgstr "T_hêm"
 msgid "_Custom Network"
 msgstr "Mạng _Tùy chỉnh"
 
-#: data/resources/main-window.ui:14
-msgid "Run Polari in the Background?"
-msgstr "Chạy Polari ở dưới nền hệ thống?"
-
-#: data/resources/main-window.ui:15
-msgid ""
-"Polari will continue to run when closed and will be automatically started on "
-"login."
-msgstr ""
-"Polari vẫn sẽ tiếp tục chạy khi đã đóng và sẽ tự động chạy khi đăng nhập."
-
-#: data/resources/main-window.ui:21
-msgid "_Quit"
-msgstr "T_hoát"
-
-#: data/resources/main-window.ui:28
-msgid "_Run in background"
-msgstr "_Chạy trên nền"
-
-#: data/resources/main-window.ui:68
-msgid "Add rooms and networks"
-msgstr "Thêm phòng và mạng"
-
-#: data/resources/menus.ui:12
+#: data/resources/main-window.ui:22
 msgid "Keyboard Shortcuts"
 msgstr "Phím tắt"
 
-#: data/resources/menus.ui:16
+#: data/resources/main-window.ui:26
 msgid "Help"
 msgstr "Trợ giúp"
 
-#: data/resources/menus.ui:20
+#: data/resources/main-window.ui:30
 msgid "About"
 msgstr "Giới thiệu"
 
-#: data/resources/menus.ui:24
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
 msgid "Quit"
 msgstr "Thoát"
 
-#: data/resources/room-list-header.ui:146
+#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+msgid "Add rooms and networks"
+msgstr "Thêm phòng và mạng"
+
+#: data/resources/main-window.ui:196
+msgid "Show connected users"
+msgstr "Hiển thị các người dùng đã kết nối"
+
+#: data/resources/nick-popover.ui:16
+msgid "Change nickname:"
+msgstr "Đổi tên hiệu:"
+
+#: data/resources/nick-popover.ui:27
+msgid "_Change"
+msgstr "Tha_y đổi"
+
+#: data/resources/room-list-header.ui:145
 msgid "Connect"
 msgstr "Kết nối"
 
-#: data/resources/room-list-header.ui:154
+#: data/resources/room-list-header.ui:152
 msgid "Reconnect"
 msgstr "Tái kết nối"
 
-#: data/resources/room-list-header.ui:162
+#: data/resources/room-list-header.ui:159
+msgid "Disconnect"
+msgstr "Ngắt kết nối"
+
+#: data/resources/room-list-header.ui:166
 msgid "Remove"
 msgstr "Gỡ bỏ"
 
-#: data/resources/room-list-header.ui:170
+#: data/resources/room-list-header.ui:173
 msgid "Properties"
 msgstr "Thuộc tính"
 
@@ -389,94 +380,102 @@ msgstr "Sẽ thông báo nếu người dùng xuất hiện trực tuyến."
 msgid "Start Conversation"
 msgstr "Bắt đầu trao đổi"
 
-#: src/application.js:47
+#: src/application.js:43
 msgid "Start Telepathy client"
 msgstr "Khởi chạy máy khách Telepathy"
 
-#: src/application.js:50
+#: src/application.js:48
+msgid "Start in debug mode"
+msgstr "Bắt đầu ở chế độ gỡ lỗi"
+
+#: src/application.js:51
+msgid "Allow running alongside another instance"
+msgstr "Cho phép chạy bên cạnh các minh dụ khác"
+
+#: src/application.js:54
 msgid "Print version and exit"
 msgstr "In ra thông tin phiên bản rồi thoát"
 
-#: src/application.js:380 src/utils.js:185
+#: src/application.js:462 src/utils.js:186
 msgid "Failed to open link"
 msgstr "Gặp lỗi khi mở liên kết"
 
-#: src/application.js:657
+#: src/application.js:753
 #, javascript-format
 msgid "%s removed."
 msgstr "Đã gỡ bỏ %s."
 
-#: src/application.js:757
+#: src/application.js:828
 msgid "translator-credits"
 msgstr "Nhóm Việt hóa GNOME <gnome-vi-list@gnome.org>"
 
-#: src/application.js:763
+#: src/application.js:834
 msgid "Learn more about Polari"
 msgstr "Tìm hiểu thêm về Polari"
 
-#: src/appNotifications.js:85
+#: src/appNotifications.js:87
 msgid "Undo"
 msgstr "Hoàn tác"
 
-#: src/chatView.js:142
+#: src/chatView.js:137
 msgid "New Messages"
 msgstr "Tin nhắn mới"
 
-#: src/chatView.js:780
+#: src/chatView.js:792
 msgid "Open Link"
 msgstr "Mở liên kết"
 
-#: src/chatView.js:786
+#: src/chatView.js:798
 msgid "Copy Link Address"
 msgstr "Chép địa chỉ liên kết"
 
-#: src/chatView.js:954
+#: src/chatView.js:971
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s bây giờ đổi thành %s"
 
-#: src/chatView.js:959
+#: src/chatView.js:976
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s đã ngắt kết nối"
 
-#: src/chatView.js:967
+#: src/chatView.js:985
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s đã bị đá bởi %s"
 
-#: src/chatView.js:969
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s đã bị đá"
 
-#: src/chatView.js:975
+#: src/chatView.js:993
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s đã bị cấm bởi %s"
 
-#: src/chatView.js:977
+#: src/chatView.js:994
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s đã bị cấm"
 
-#: src/chatView.js:982
+#: src/chatView.js:999
 #, javascript-format
 msgid "%s joined"
 msgstr "%s đã gia nhập"
 
-#: src/chatView.js:987
+#: src/chatView.js:1004
 #, javascript-format
 msgid "%s left"
 msgstr "%s rời đi"
 
-#: src/chatView.js:1080
+#: src/chatView.js:1097
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d người dùng đã gia nhập"
 
-#: src/chatView.js:1083
+#: src/chatView.js:1100
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -484,14 +483,14 @@ msgstr[0] "%d người dùng rời đi"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1150
+#: src/chatView.js:1167
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1155
+#: src/chatView.js:1172
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "%H:%M, hôm qua"
@@ -499,7 +498,7 @@ msgstr "%H:%M, hôm qua"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1160
+#: src/chatView.js:1177
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%H∶%M, %A"
@@ -508,7 +507,7 @@ msgstr "%H∶%M, %A"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1166
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%H∶%M, %d %B"
@@ -517,21 +516,21 @@ msgstr "%H∶%M, %d %B"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1172
+#: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%H∶%M, %d %B %Y"
 
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1177
+#: src/chatView.js:1194
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1182
+#: src/chatView.js:1199
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "%l∶%M %p, hôm qua"
@@ -539,7 +538,7 @@ msgstr "%l∶%M %p, hôm qua"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1187
+#: src/chatView.js:1204
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -548,7 +547,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1193
+#: src/chatView.js:1210
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%l:%M %p, %d %B"
@@ -557,7 +556,7 @@ msgstr "%l:%M %p, %d %B"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1199
+#: src/chatView.js:1216
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%l:%M %p, %d %B %Y"
@@ -566,13 +565,16 @@ msgstr "%l:%M %p, %d %B %Y"
 msgid "Already added"
 msgstr "Đã được thêm rồi"
 
-#. Translators: %s is a connection name
-#: src/connections.js:468
+#: src/connections.js:117
+msgid "No results."
+msgstr "Không tìm thấy kết quả nào."
+
+#: src/connections.js:519
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Các thuộc tính “%s”"
 
-#: src/connections.js:510
+#: src/connections.js:563
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -580,45 +582,45 @@ msgstr ""
 "Polari ngắt kết nối bởi vì một lỗi mạng. Vui lòng kiểm tra xem trường địa "
 "chỉ có đúng không."
 
-#: src/entryArea.js:338
+#: src/entryArea.js:372
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "Dán %s dòng văn bản cho dịch vụ dán công cộng chứ?"
 
-#: src/entryArea.js:342
+#: src/entryArea.js:376
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "Đang tải lên %s dòng văn bản đến dịch vụ dán công cộng…"
 
-#: src/entryArea.js:349
+#: src/entryArea.js:383
 msgid "Upload image to public paste service?"
 msgstr "Tải ảnh lên dịch vụ dán công cộng?"
 
-#: src/entryArea.js:350
+#: src/entryArea.js:384
 msgid "Uploading image to public paste service…"
 msgstr "Đang tải ảnh lên dịch vụ dán công cộng…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:371
+#: src/entryArea.js:405
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Tải “%s” lên dịch vụ dán công cộng?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:373
+#: src/entryArea.js:407
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Đang tải “%s” lên dịch vụ dán công cộng…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:382
+#: src/entryArea.js:416
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s trong #%s"
 
-#: src/entryArea.js:384
+#: src/entryArea.js:418
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Dán từ %s"
@@ -644,14 +646,14 @@ msgstr "_Kế tiếp"
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:24
+#: src/ircParser.js:23
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/CLOSE [<channel>] [<reason>] — đóng <channel>, theo mặc định là kênh hiện "
 "tại"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:24
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -659,73 +661,73 @@ msgstr ""
 "/HELP [<command>] — hiển thị trợ giúp cho <lệnh>, hoặc một danh sách các "
 "lệnh sẵn có"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:25
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <nick> [<channel>] — mời <nick> vào <channel>, hay kênh hiện tại"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:26
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <channel> — gia nhập <kênh>"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:27
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <nick> — đá <nick> khỏi kênh hiện tại"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:28
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <action> — gửi <action> tới kênh hiện tại"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:29
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <nick> [<message>] — gửi lời nhắn riêng cho <nick>"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:30
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — liệt kê các người dùng trên kênh hiện tại"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:31
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <nickname> — đặt biệt hiệu của bạn thành <nickname>"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:32
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<channel>] [<reason>] — rời <channel>, mặc định là kênh hiện tại"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:33
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <nick> — mở một trao đổi kín với <nick>"
 
-#: src/ircParser.js:35
+#: src/ircParser.js:34
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<reason>] — ngắt kết nối khỏi máy phục vụ hiện tại"
 
-#: src/ircParser.js:36
+#: src/ircParser.js:35
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <text> — gửi <text> tới phòng/liên lạc hiện tại"
 
-#: src/ircParser.js:37
+#: src/ircParser.js:36
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <topic> — đặt chủ đề thành <topic>, hay hiển thị chủ đề hiện tại"
 
-#: src/ircParser.js:40
+#: src/ircParser.js:39
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr "Không hiểu lệnh - hãy dùng /HELP để liệt kê các lệnh sẵn có"
 
-#: src/ircParser.js:56
+#: src/ircParser.js:53
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Cách dùng: %s"
 
-#: src/ircParser.js:92
+#: src/ircParser.js:89
 msgid "Known commands:"
 msgstr "Các lệnh có thể dùng:"
 
-#: src/ircParser.js:191
+#: src/ircParser.js:190
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Người dùng trên %s:"
@@ -734,77 +736,77 @@ msgstr "Người dùng trên %s:"
 msgid "No topic set"
 msgstr "Chưa đặt chủ đề"
 
-#: src/joinDialog.js:237
+#: src/joinDialog.js:234
 msgid "Add Network"
 msgstr "Thêm mạng"
 
-#: src/mainWindow.js:383
+#: src/mainWindow.js:361
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d tài khoản"
 
-#: src/roomList.js:133
+#: src/roomList.js:193
 msgid "Leave chatroom"
 msgstr "Rời phòng chat"
 
-#: src/roomList.js:133
+#: src/roomList.js:193
 msgid "End conversation"
 msgstr "Kết thúc trò truyện"
 
-#: src/roomList.js:224
+#: src/roomList.js:299
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Mạng %s có lỗi"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:281
+#: src/roomList.js:370
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:288
+#: src/roomList.js:377
 msgid "Connection Problem"
 msgstr "Trục trặc về kết nối"
 
-#: src/roomList.js:304
+#: src/roomList.js:394
 msgid "Connected"
 msgstr "Đã kết nối"
 
-#: src/roomList.js:306
+#: src/roomList.js:396
 msgid "Connecting…"
 msgstr "Đang kết nối…"
 
-#: src/roomList.js:308 src/userList.js:422
+#: src/roomList.js:398 src/userList.js:426
 msgid "Offline"
 msgstr "Ngoại tuyến"
 
-#: src/roomList.js:310
+#: src/roomList.js:400
 msgid "Unknown"
 msgstr "Chưa biết"
 
-#: src/roomList.js:330
+#: src/roomList.js:420
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Không thể kết nối đến %s theo cách anh toàn."
 
-#: src/roomList.js:333
+#: src/roomList.js:423
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s yêu cầu mật khẩu."
 
-#: src/roomList.js:339
+#: src/roomList.js:429
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Không thể kết nối đến %s. Máy phục vụ đang bận."
 
-#: src/roomList.js:342
+#: src/roomList.js:432
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Không thể kết nối đến %s. "
 
-#: src/roomStack.js:124
+#: src/roomStack.js:123
 msgid "_Save Password"
 msgstr "_Lưu mật khẩu"
 
@@ -812,30 +814,37 @@ msgstr "_Lưu mật khẩu"
 msgid "Should the password be saved?"
 msgstr "Mật khẩu có nên được lưu lại không?"
 
-#: src/roomStack.js:141 src/telepathyClient.js:577
-#, javascript-format
-msgid ""
-"Identification will happen automatically the next time you connect to %s"
-msgstr "Định danh sẽ xảy ra tự động vào lần sau bạn kết nối đến %s"
-
-#: src/roomStack.js:172
+#: src/roomStack.js:180
 msgid "Join a room using the + button."
 msgstr "Gia nhập một phòng bằng cách bấm vào nút +"
 
-#: src/telepathyClient.js:402
+#: src/telepathyClient.js:418
 msgid "Good Bye"
 msgstr "Tạm biệt"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:576
+#: src/telepathyClient.js:598
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Lưu mật khẩu %s cho %s chứ?"
 
-#: src/telepathyClient.js:580
+#: src/telepathyClient.js:599
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr "Định danh sẽ xảy ra tự động vào lần sau bạn kết nối đến %s"
+
+#: src/telepathyClient.js:602
 msgid "Save"
 msgstr "Ghi lại"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:625
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s trong %s"
 
 #: src/userList.js:237
 #, javascript-format
@@ -873,21 +882,17 @@ msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d tháng trước"
 
-#: src/userList.js:418
+#: src/userList.js:422
 msgid "Available in another room."
 msgstr "Sẵn ở phòng khác."
 
-#: src/userList.js:420
+#: src/userList.js:424
 msgid "Online"
 msgstr "Trực tuyến"
 
-#: src/userList.js:569
+#: src/userList.js:582
 msgid "No results"
 msgstr "Không tìm thấy kết quả nào"
-
-#: src/userList.js:743
-msgid "All"
-msgstr "Tất cả"
 
 #: src/userTracker.js:315
 msgid "User is online"
@@ -898,12 +903,30 @@ msgstr "Người dùng trực tuyến."
 msgid "User %s is now online."
 msgstr "Người dùng %s giờ trực tuyến."
 
-#: src/utils.js:107
+#: src/utils.js:106
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Mật khẩu máy phục vụ Polari cho %s"
 
-#: src/utils.js:112
+#: src/utils.js:111
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Mật khẩu máy phục vụ Polari NickServ cho %s"
+
+#~ msgid "Run Polari in the Background?"
+#~ msgstr "Chạy Polari ở dưới nền hệ thống?"
+
+#~ msgid ""
+#~ "Polari will continue to run when closed and will be automatically started "
+#~ "on login."
+#~ msgstr ""
+#~ "Polari vẫn sẽ tiếp tục chạy khi đã đóng và sẽ tự động chạy khi đăng nhập."
+
+#~ msgid "_Quit"
+#~ msgstr "T_hoát"
+
+#~ msgid "_Run in background"
+#~ msgstr "_Chạy trên nền"
+
+#~ msgid "All"
+#~ msgstr "Tất cả"
