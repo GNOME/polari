@@ -1,3 +1,14 @@
+3.31.92 — “Sad Gay Puppy”
+=========================
+* Misc. bug fixes and cleanups [Daronion, Florian; #68, !92, !93, !94,
+  !95, !96]
+
+Contributors:
+  Daronion, Florian Müllner, Justin van Steijn
+
+Translators:
+  Jordi Mas [ca], Fabio Tomat [fur], Trần Ngọc Quân [vi]
+
 3.31.91 — “Tell-A-Queen”
 ========================
 * Fix logs when running telepathy-logger sandboxed [Florian; !90]
