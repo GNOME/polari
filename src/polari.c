@@ -21,8 +21,8 @@ get_js_argv (int argc, const char * const *argv)
     NULL
   };
   char **strv;
-  int js_argc = argc - 1; // gjs doesn't do argv[0]
-  int i;
+  guint js_argc = argc - 1; // gjs doesn't do argv[0]
+  guint i;
 
   strv = g_new0 (char *, js_argc + G_N_ELEMENTS (injected_args) + 1);
   for (i = 0; i < js_argc; i++)
