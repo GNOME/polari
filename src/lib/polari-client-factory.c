@@ -51,7 +51,7 @@ polari_client_factory_create_account (PolariClientFactory  *self,
 static TpAccount *
 polari_client_factory_create_account_impl (TpSimpleClientFactory  *self,
                                            const char             *object_path,
-                                           const GHashTable       *immutable_props,
+                                           const GHashTable       *immutable_props G_GNUC_UNUSED,
                                            GError                **error)
 {
   return polari_client_factory_create_account (POLARI_CLIENT_FACTORY (self),
@@ -68,6 +68,6 @@ polari_client_factory_class_init (PolariClientFactoryClass *klass)
 }
 
 static void
-polari_client_factory_init (PolariClientFactory *self)
+polari_client_factory_init (PolariClientFactory *self G_GNUC_UNUSED)
 {
 }

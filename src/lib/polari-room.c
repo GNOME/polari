@@ -390,19 +390,19 @@ update_icon (PolariRoom *room)
 }
 
 static void
-on_self_contact_notify (GObject    *object,
-                        GParamSpec *pspec,
+on_self_contact_notify (GObject    *object G_GNUC_UNUSED,
+                        GParamSpec *pspec G_GNUC_UNUSED,
                         gpointer    user_data)
 {
   update_self_nick (POLARI_ROOM (user_data));
 }
 
 static void
-on_group_contacts_changed (TpChannel  *channel,
+on_group_contacts_changed (TpChannel  *channel G_GNUC_UNUSED,
                            GPtrArray  *added,
                            GPtrArray  *removed,
-                           GPtrArray  *local_pending,
-                           GPtrArray  *remote_pending,
+                           GPtrArray  *local_pending G_GNUC_UNUSED,
+                           GPtrArray  *remote_pending G_GNUC_UNUSED,
                            TpContact  *actor,
                            GHashTable *details,
                            gpointer    user_data)
@@ -471,10 +471,10 @@ on_group_contacts_changed (TpChannel  *channel,
 }
 
 static void
-on_message_sent (TpTextChannel      *channel,
+on_message_sent (TpTextChannel      *channel G_GNUC_UNUSED,
                  TpSignalledMessage *message,
-                 guint               flags,
-                 char               *token,
+                 guint               flags G_GNUC_UNUSED,
+                 char               *token G_GNUC_UNUSED,
                  gpointer            user_data)
 {
   PolariRoom *room = user_data;
@@ -496,10 +496,10 @@ on_message_sent (TpTextChannel      *channel,
 }
 
 static void
-on_channel_invalidated (TpProxy  *channel,
-                        guint     domain,
-                        int       code,
-                        char     *message,
+on_channel_invalidated (TpProxy  *channel G_GNUC_UNUSED,
+                        guint     domain G_GNUC_UNUSED,
+                        int       code G_GNUC_UNUSED,
+                        char     *message G_GNUC_UNUSED,
                         gpointer  user_data)
 {
   polari_room_set_channel (POLARI_ROOM (user_data), NULL);
@@ -529,11 +529,11 @@ update_subject (PolariRoom *room,
 }
 
 static void
-subject_get_all (TpProxy      *proxy,
-                 GHashTable   *properties,
+subject_get_all (TpProxy      *proxy G_GNUC_UNUSED,
+                 GHashTable   *properties G_GNUC_UNUSED,
                  const GError *error,
                  gpointer      user_data,
-                 GObject      *object)
+                 GObject      *object G_GNUC_UNUSED)
 {
   if (error)
     return;
@@ -542,12 +542,12 @@ subject_get_all (TpProxy      *proxy,
 }
 
 static void
-properties_changed (TpProxy     *proxy,
+properties_changed (TpProxy     *proxy G_GNUC_UNUSED,
                     const char  *iface_name,
                     GHashTable  *changed,
-                    const char **invalidated,
+                    const char **invalidated G_GNUC_UNUSED,
                     gpointer     data,
-                    GObject    *weak_ref)
+                    GObject    *weak_ref G_GNUC_UNUSED)
 {
   if (strcmp (iface_name, TP_IFACE_CHANNEL_INTERFACE_SUBJECT) != 0)
     return;
@@ -557,7 +557,7 @@ properties_changed (TpProxy     *proxy,
 
 static void
 on_contact_info_ready (GObject      *source,
-                       GAsyncResult *res,
+                       GAsyncResult *res G_GNUC_UNUSED,
                        gpointer      data)
 {
   PolariRoom *room = data;
