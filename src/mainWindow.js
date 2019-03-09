@@ -330,6 +330,9 @@ var MainWindow = GObject.registerClass({
         for (let prop in selectedRoom)
             selectedRoom[prop] = selectedRoom[prop].deep_unpack();
 
+        if (!selectedRoom.hasOwnProperty('account'))
+            return;
+
         let roomId = null;
         let account = this._accountsMonitor.lookupAccount(selectedRoom.account);
         let channelName = selectedRoom.channel;
