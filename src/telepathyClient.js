@@ -6,6 +6,8 @@ const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
 
+const SHELL_CLIENT_PREFIX = 'org.freedesktop.Telepathy.Client.GnomeShell';
+
 const SASLAuthenticationIface = '<node> \
 <interface name="org.freedesktop.Telepathy.Channel.Interface.SASLAuthentication"> \
 <method name="StartMechanismWithData"> \
@@ -131,6 +133,47 @@ class TelepathyClient extends Tp.BaseClient {
         });
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.prepare(this._onPrepared.bind(this));
+
+        this._shellHandlesPrivateChats = false;
+
+        // Track whether gnome-shell's built-in chat client is
+        // running; unfortunately it uses :uniquify-name, so
+        // we cannot simply use Gio.watch_bus_name()
+        let conn = this._app.get_dbus_connection();
+        conn.signal_subscribe(
+            'org.freedesktop.DBus', /* sender */
+            'org.freedesktop.DBus', /* iface */
+            'NameOwnerChanged', /* member */
+            '/org/freedesktop/DBus', /* path */
+            SHELL_CLIENT_PREFIX, /* arg0 */
+            Gio.DBusSignalFlags.MATCH_ARG0_NAMESPACE,
+            (_conn, _sender, _path, _iface, _signal, params) => {
+                let [name_, oldOwner_, newOwner] = params.deep_unpack();
+                this._shellHandlesPrivateChats = (newOwner != '');
+            });
+
+        conn.call(
+            'org.freedesktop.DBus',
+            '/org/freedesktop/DBus',
+            'org.freedesktop.DBus',
+            'ListNames',
+            null, /* params */
+            new GLib.VariantType('(as)'),
+            Gio.DBusCallFlags.NONE,
+            -1,
+            null, /* cancellable */
+            (_o, res) => {
+                let names = [];
+
+                try {
+                    [names] = conn.call_finish(res).deep_unpack();
+                } catch (e) {
+                    debug(`Failed to list bus names: ${e}`);
+                }
+
+                this._shellHandlesPrivateChats =
+                    names.find(n => n.startsWith(SHELL_CLIENT_PREFIX)) != null;
+            });
     }
 
     _onPrepared() {

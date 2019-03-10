@@ -21,6 +21,7 @@
         "--talk-name=org.freedesktop.Telepathy.AccountManager",
         "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
         "--talk-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
+        "--talk-name=org.freedesktop.Telepathy.Client.GnomeShell.*",
         "--own-name=org.freedesktop.Telepathy.Client.TpGLibRequestAndHandle.*",
         /* Telepathy names owned by bundled services */
         "--own-name=org.freedesktop.Telepathy.AccountManager",
