@@ -299,7 +299,7 @@ update_self_nick (PolariRoom *room)
 {
   PolariRoomPrivate *priv = room->priv;
   const char *nick;
-  char *basenick;
+  g_autofree char *basenick = NULL;
 
   g_clear_pointer (&priv->self_nick, g_free);
 
@@ -340,8 +340,6 @@ update_self_nick (PolariRoom *room)
     priv->self_nick = g_strdup (priv->self_user);
   else
     priv->self_nick = g_strdup (basenick);
-
-  g_free (basenick);
 }
 
 static void
@@ -564,7 +562,8 @@ on_contact_info_ready (GObject      *source,
 {
   PolariRoom *room = data;
   PolariRoomPrivate *priv = room->priv;
-  GList *infos, *l;
+  g_autolist (TpContactInfoField) infos = NULL;
+  GList *l;
 
   infos = tp_contact_dup_contact_info (TP_CONTACT (source));
   for (l = infos; l; l = l->next)
@@ -583,7 +582,6 @@ on_contact_info_ready (GObject      *source,
         }
       break;
     }
-  tp_contact_info_list_free (infos);
 }
 
 static void
