@@ -226,8 +226,8 @@ class ChannelErrorBar extends Gtk.Revealer {
     }
 
     _onDestroy() {
-        if (this._identifyError)
-            this._room.disconnect(this._identifyError);
+        if (this._notifyErrorId)
+            this._room.disconnect(this._notifyErrorId);
     }
 });
 
