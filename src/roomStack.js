@@ -162,7 +162,7 @@ class ChannelErrorBar extends Gtk.Revealer {
 
         this._createWidget();
 
-        this._identifyError = this._room.connect('notify::channel-error', () => {
+        this._notifyErrorId = this._room.connect('notify::channel-error', () => {
             if (this._room.channel_error == '') {
                 this.reveal_child = false;
                 return;
