@@ -282,7 +282,7 @@ var EntryArea = GObject.registerClass({
         this._completion = new TabCompletion(this._chatEntry);
         this._membersChangedId =
             this._room.connect('members-changed',
-                               this._updateCompletions.bind(this));
+                               this._updateMemberNicknames.bind(this));
         this._nicknameChangedId =
             this._room.account.connect('notify::nickname', () => {
                 if (!this._room.channel)
@@ -293,8 +293,8 @@ var EntryArea = GObject.registerClass({
                                this._onChannelChanged.bind(this));
         this._onChannelChanged(this._room);
 
-        this._chatEntry.connect('map', this._updateCompletions.bind(this));
-        this._chatEntry.connect('unmap', this._updateCompletions.bind(this));
+        this._chatEntry.connect('map', this._updateMemberNicknames.bind(this));
+        this._chatEntry.connect('unmap', this._updateMemberNicknames.bind(this));
     }
 
     // eslint-disable-next-line camelcase
@@ -303,7 +303,7 @@ var EntryArea = GObject.registerClass({
         this._updateNick();
     }
 
-    _updateCompletions() {
+    _updateMemberNicknames() {
         let nicks = [];
 
         if (this._chatEntry.get_mapped() &&
@@ -314,6 +314,14 @@ var EntryArea = GObject.registerClass({
             nicks = members.map(member => member.alias);
         }
         this._completion.setCompletions(nicks);
+
+        if (this._chatEntry._checker) {
+            debug('gere');
+            this._chatEntry._checker.clear_session();
+            nicks.forEach((nick) => {
+                this._chatEntry._checker.add_word_to_session(nick, -1);
+            });
+        }
     }
 
     _canFocusChatEntry() {
@@ -444,7 +452,7 @@ var EntryArea = GObject.registerClass({
     }
 
     _onChannelChanged(room) {
-        this._updateCompletions();
+        this._updateMemberNicknames();
 
         if (room.channel)
             this._selfAliasChangedId =
