@@ -57,7 +57,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-glib.git",
+                    "url": "https://www.github.com/TelepathyIM/telepathy-glib.git",
                     "tag": "telepathy-glib-0.24.1",
                     "commit": "c834ef1a50a97cbfae7a0d560ff806fd5aa7ffe8"
                 },
@@ -73,7 +73,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-mission-control.git",
+                    "url": "https://www.github.com/TelepathyIM/telepathy-mission-control.git",
                     "tag": "telepathy-mission-control-5.16.4",
                     "commit": "74d553d4125224f0a95c9d2843d38861b42eae9f"
                 }
@@ -89,7 +89,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-idle.git",
+                    "url": "https://www.github.com/TelepathyIM/telepathy-idle.git",
                     "tag": "telepathy-idle-0.2.0",
                     "commit": "22371837e080c41343600ca773fd987e5310baf2"
                 }
@@ -104,7 +104,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://anongit.freedesktop.org/git/telepathy/telepathy-logger.git",
+                    "url": "https://www.github.com/TelepathyIM/telepathy-logger.git",
                     "tag": "telepathy-logger-0.8.2",
                     "commit": "b342c568fe855786151e4f0f96276fc6c3cc7e43"
                 },
