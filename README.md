@@ -25,4 +25,4 @@ issue to the GNOME [bug tracking system][bug-tracker].
 [build-instructions]: https://wiki.gnome.org/Newcomers/BuildProject
 [irc-channel]: irc://irc.gnome.org/%23polari
 [bug-tracker]: https://gitlab.gnome.org/GNOME/polari/issues
-[polari-logo]: data/icons/hicolor/48x48/apps/org.gnome.Polari.png
+[polari-logo]: logo.png
