@@ -97,7 +97,7 @@ var RoomRow = GObject.registerClass({
     }
 
     _getNumPending() {
-        if (!this._room.channel)
+        if (!this._room.channel || this._room.type == Tp.HandleType.CONTACT)
             return [0, 0];
 
         let pending = this._room.channel.dup_pending_messages();
