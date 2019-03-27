@@ -663,6 +663,9 @@ class TelepathyClient extends Tp.BaseClient {
         if (!room.should_highlight_message(nick, text))
             return;
 
+        if (this._shellHandlesPrivateChats && room.type == Tp.HandleType.CONTACT)
+            return;
+
         /* Translators: This is the title of the notification announcing a newly
 	   received message, in the form "user-nickname in room-display-name" */
         let summary = _('%s in %s').format(nick, room.display_name);
