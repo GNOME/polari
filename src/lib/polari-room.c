@@ -143,7 +143,7 @@ polari_room_should_highlight_message (PolariRoom *room,
   priv = room->priv;
 
   if (priv->type != TP_HANDLE_TYPE_ROOM)
-    return FALSE;
+    return TRUE;
 
   if (match_self_nick (room, sender))
     return FALSE;

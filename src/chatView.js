@@ -1296,7 +1296,7 @@ var ChatView = GObject.registerClass({
             tags.push(this._lookupTag('message'));
         }
 
-        if (highlight)
+        if (highlight && this._room.type != Tp.HandleType.CONTACT)
             tags.push(this._lookupTag('highlight'));
 
         let params = this._room.account.dup_parameters_vardict().deep_unpack();

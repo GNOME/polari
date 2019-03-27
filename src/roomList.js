@@ -102,8 +102,6 @@ var RoomRow = GObject.registerClass({
 
         let pending = this._room.channel.dup_pending_messages();
         let nPending = pending.length;
-        if (!this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
-            return [nPending, nPending];
 
         let highlights = pending.filter(m => {
             let [text] = m.to_text();
