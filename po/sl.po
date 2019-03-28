@@ -2,14 +2,14 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2013–2018.
+# Matej Urbančič <mateju@svn.gnome.org>, 2013–2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2018-07-30 04:19+0000\n"
-"PO-Revision-Date: 2018-07-30 22:09+0200\n"
+"PO-Revision-Date: 2019-03-26 22:50+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Bookmarks: 77,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -31,7 +31,7 @@ msgstr "Polari"
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
 #: data/org.gnome.Polari.desktop.in:4 src/application.js:812
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr "Odjemalec za IRC za GNOME"
+msgstr "Odjemalec IRC za okolje GNOME"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
@@ -39,8 +39,8 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"Enostaven odjemalec IRC, zasnovan za okolje GNOME. Program ima enostaven in "
-"pregleden vmesnikč"
+"Enostaven odjemalec IRC, zasnovan za okolje GNOME. Program ima prijeten in "
+"pregleden vmesnik, zato je klepetanje prijetno."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
@@ -49,10 +49,10 @@ msgid ""
 "miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"Program Polari je namenjen javnemu klepetu z drugimi uporabniki na javnem "
-"kanalu oziroma zasebnem pogovoru s posameznim uporabnikom. Obvestila "
-"omogočajo hipen odziv na sporočila – za zasebne pogovore je mogoče uporabiti "
-"tudi hitro odgovarjanje preko obvestilnega polja."
+"Program Polari omogoča klepetanje z drugimi uporabniki na javnih kanalih in "
+"zasebno z izbrano osebo. Obvestila omogočajo hipen odziv na sporočila – za "
+"zasebne pogovore je mogoče uporabiti tudi hitro odgovarjanje prek "
+"obvestilnega polja."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:47
 msgid "The GNOME Project"
@@ -66,7 +66,7 @@ msgstr "org.gnome.Polari"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
-msgstr "IRC;Internet;Klepet;Sobe;"
+msgstr "IRC;Internet;Klepet;Sobe;chat"
 
 #: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
@@ -78,11 +78,11 @@ msgstr "Seznam kanalov, ki naj se obnovijo ob zagonu"
 
 #: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
 msgid "Run in Background"
-msgstr "Zaženi v ozadju"
+msgstr "Ohrani povezavo v ozadju"
 
 #: data/org.gnome.Polari.gschema.xml:12
 msgid "Keep running in background when closed."
-msgstr "Izvajaj v ozadju, ko je program zaprt."
+msgstr "Ohrani izvajanje programa, ko je okno program zaprto."
 
 #: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
@@ -201,22 +201,22 @@ msgstr "Zapusti klepetalnico"
 #: data/resources/help-overlay.ui:34
 msgctxt "shortcut window"
 msgid "Show Userlist"
-msgstr "Pokaži seznam uporabnikov"
+msgstr "Pokaže seznam uporabnikov"
 
 #: data/resources/help-overlay.ui:41
 msgctxt "shortcut window"
 msgid "Show Emoji Picker"
-msgstr "Pokaži izbirnik izraznih ikon"
+msgstr "Pokaže izbirnik izraznih ikon"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Končaj"
+msgstr "Konča program"
 
 #: data/resources/help-overlay.ui:55
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
-msgstr "Tipkovne bližnjice"
+msgstr "Pokaže tipkovne bližnjice"
 
 #: data/resources/help-overlay.ui:64
 msgctxt "shortcut window"
@@ -226,37 +226,37 @@ msgstr "Krmarjenje"
 #: data/resources/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Room"
-msgstr "Naslednja klepetalnica"
+msgstr "Skoči v naslednjo klepetalnico"
 
 #: data/resources/help-overlay.ui:75
 msgctxt "shortcut window"
 msgid "Previous Room"
-msgstr "Predhodna klepetalnica"
+msgstr "Skoči v predhodno klepetalnico"
 
 #: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
-msgstr "Naslednja klepetalnica z neprebranimi sporočili"
+msgstr "Skoči v naslednjo klepetalnico z novimi sporočili"
 
 #: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
-msgstr "Predhodna klepetalnica z neprebranimi sporočili"
+msgstr "Skoči v predhodno klepetalnico z novimi sporočili"
 
 #: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "First Room"
-msgstr "Prva klepetalnica"
+msgstr "Skoči v prvo klepetalnico"
 
 #: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Last Room"
-msgstr "Zadnja klepetalnica"
+msgstr "Skoči v zadnjo klepetalnico"
 
 #: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
-msgstr "Prva – Deveta klepetalnica"
+msgstr "Skoči v prvo ... deveto klepetalnico"
 
 #: data/resources/initial-setup-window.ui:10
 msgid "Polari Setup"
@@ -264,7 +264,7 @@ msgstr "Nastavitve"
 
 #: data/resources/initial-setup-window.ui:60
 msgid "Not connected"
-msgstr "Brez povezave"
+msgstr "Ni povezave"
 
 #: data/resources/initial-setup-window.ui:73
 msgid "Please connect to the internet to continue the setup."
@@ -279,16 +279,16 @@ msgstr "Dobrodošli v programu Polari"
 msgid ""
 "Polari is an easy way to chat using IRC. Select a network to get started."
 msgstr ""
-"Polari je program za enostavno delo z omrežji IRC. Za zažetek izberite "
-"omrežje."
+"Polari je program za enostavno delo z omrežji IRC. Za začetek je treba "
+"izbrani omrežje."
 
 #: data/resources/initial-setup-window.ui:171
 msgid ""
 "Select rooms you want to connect to. You can add more networks and rooms "
 "later, by clicking the + button."
 msgstr ""
-"Izberite sobe, v katere si želite povezati. Te je mogoče dodati tudi kasneje "
-"s klikom na gumb +."
+"Izberite sobe za povezavo. Te je mogoče dodati tudi kasneje s klikom na gumb "
+"» + «."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:227
 msgid "Join Chat Room"
@@ -316,7 +316,7 @@ msgstr "Omrežje po _meri"
 
 #: data/resources/main-window.ui:14
 msgid "Run Polari in the Background?"
-msgstr "Ali naj se program Polari izvajata v ozadju?"
+msgstr "Ali naj se program Polari izvaja v ozadju?"
 
 #: data/resources/main-window.ui:15
 msgid ""
@@ -865,11 +865,11 @@ msgstr "Ali naj se geslo shrani?"
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr ""
-"Določevanje istovetnosti bo izvedeno samodeno ob naslednji povezavi na %s."
+"Določevanje istovetnosti bo izvedeno samodejno ob naslednji povezavi na %s."
 
 #: src/roomStack.js:159
 msgid "Join a room using the + button."
-msgstr "Pridruži se klepetalnici prek gumba +."
+msgstr "Pridruži se klepetalnici s klikom na gumb » + «."
 
 #: src/telepathyClient.js:410
 msgid "Good Bye"
@@ -975,7 +975,7 @@ msgstr "Uporabnik %s se je prijavil."
 #: src/utils.js:101
 #, javascript-format
 msgid "Polari server password for %s"
-msgstr "Strežniško geslo Polari  za %s"
+msgstr "Strežniško geslo Polari za %s"
 
 #: src/utils.js:106
 #, javascript-format
