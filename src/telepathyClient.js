@@ -667,8 +667,12 @@ class TelepathyClient extends Tp.BaseClient {
             return;
 
         /* Translators: This is the title of the notification announcing a newly
-	   received message, in the form "user-nickname in room-display-name" */
+        received message, in the form "user-nickname in room-display-name" */
         let summary = _('%s in %s').format(nick, room.display_name);
+
+        if (room.type == Tp.HandleType.CONTACT)
+            summary = _('%s').format(nick);
+
         let notification = this._createNotification(room, summary, text);
         this._app.send_notification(this._getPendingNotificationID(room, id), notification);
     }
