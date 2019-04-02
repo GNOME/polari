@@ -666,9 +666,16 @@ class TelepathyClient extends Tp.BaseClient {
         if (this._shellHandlesPrivateChats && room.type == Tp.HandleType.CONTACT)
             return;
 
-        /* Translators: This is the title of the notification announcing a newly
-	   received message, in the form "user-nickname in room-display-name" */
-        let summary = _('%s in %s').format(nick, room.display_name);
+        let summary;
+
+        if (room.type == Tp.HandleType.CONTACT) {
+            summary = '%s'.format(nick);
+        } else {
+            /* Translators: This is the title of the notification announcing a newly
+               received message, in the form "user-nickname in room-display-name" */
+            summary = _('%s in %s').format(nick, room.display_name);
+        }
+
         let notification = this._createNotification(room, summary, text);
         this._app.send_notification(this._getPendingNotificationID(room, id), notification);
     }
