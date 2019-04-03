@@ -23,15 +23,14 @@ function _getTargetForContentType(contentType) {
 
 var PasteManager = class {
     pasteContent(content, title, callback) {
-        if (typeof content == 'string') {
+        if (typeof content == 'string')
             Utils.gpaste(content, title, callback);
-        } else if (content instanceof GdkPixbuf.Pixbuf) {
+        else if (content instanceof GdkPixbuf.Pixbuf)
             Utils.imgurPaste(content, title, callback);
-        } else if (content.query_info_async) {
+        else if (content.query_info_async)
             this._pasteFile(content, title, callback);
-        } else {
+        else
             throw new Error('Unhandled content type');
-        }
     }
 
     _pasteFile(file, title, callback) {
