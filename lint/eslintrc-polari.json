@@ -7,6 +7,11 @@
                 "allow": ["^vfunc_"]
             }
         ],
+        "curly": [
+            "error",
+            "multi-or-nest",
+            "consistent"
+        ],
         "no-unused-vars": [
             "error",
             {
