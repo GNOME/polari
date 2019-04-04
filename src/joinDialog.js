@@ -185,7 +185,6 @@ var JoinDialog = GObject.registerClass({
         this._connectionCombo.remove_all();
 
         let names = [...this._accounts.keys()].sort((a, b) => {
-            // TODO: figure out combo box sorting
             return (a < b) ? -1 : ((a > b) ? 1 : 0);
         });
         for (let i = 0; i < names.length; i++)
