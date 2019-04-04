@@ -287,12 +287,7 @@ const UserTracker = GObject.registerClass({
         if (!contacts.length)
             return null;
 
-        for (let i = 0; i < contacts.length; i++) {
-            if (contacts[i].alias == nickName)
-                return contacts[i];
-        }
-
-        return contacts[0];
+        return contacts.find(c => c.alias == nickName) || contacts[0];
     }
 
     watchRoomStatus(room, baseNick, callback) {

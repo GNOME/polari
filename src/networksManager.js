@@ -104,11 +104,10 @@ var NetworksManager = class {
     }
 
     findByServer(server) {
-        for (let n of this._networks) {
-            if (n.servers.some(s => s.address == server))
-                return n.id;
-        }
-        return null;
+        let network = this._networks.find(n => {
+            return n.servers.some(s => s.address == server);
+        });
+        return network ? network.id : null;
     }
 };
 Signals.addSignalMethods(NetworksManager.prototype);

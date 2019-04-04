@@ -55,11 +55,9 @@ var RoomManager = class {
     }
 
     lookupRoomByName(name, account) {
-        for (let room of this._rooms.values()) {
-            if (room.channel_name == name && room.account == account)
-                return room;
-        }
-        return null;
+        return [...this._rooms.values()].find(room => {
+            return room.channel_name == name && room.account == account;
+        });
     }
 
     lookupRoomByChannel(channel) {
@@ -122,12 +120,10 @@ var RoomManager = class {
 
     _findChannelIndex(channels, accountPath, channelName) {
         let matchName = channelName.toLowerCase();
-        for (let i = 0; i < channels.length; i++) {
-            if (channels[i].account.deep_unpack() == accountPath &&
-                channels[i].channel.deep_unpack().toLowerCase() == matchName)
-                return i;
-        }
-        return -1;
+        return channels.findIndex(c => {
+            return c.account.deep_unpack() == accountPath &&
+                   c.channel.deep_unpack().toLowerCase() == matchName;
+        });
     }
 
     _addSavedChannel(accountPath, channelName) {
