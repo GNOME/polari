@@ -104,9 +104,10 @@ var NetworksManager = class {
     }
 
     findByServer(server) {
-        for (let n of this._networks)
+        for (let n of this._networks) {
             if (n.servers.some(s => s.address == server))
                 return n.id;
+        }
         return null;
     }
 };

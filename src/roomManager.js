@@ -55,9 +55,10 @@ var RoomManager = class {
     }
 
     lookupRoomByName(name, account) {
-        for (let room of this._rooms.values())
+        for (let room of this._rooms.values()) {
             if (room.channel_name == name && room.account == account)
                 return room;
+        }
         return null;
     }
 
@@ -113,17 +114,19 @@ var RoomManager = class {
     }
 
     _removeRooms(accountPath) {
-        for (let room of this._rooms.values())
+        for (let room of this._rooms.values()) {
             if (accountPath == null || room.account.object_path == accountPath)
                 this._removeRoom(room);
+        }
     }
 
     _findChannelIndex(channels, accountPath, channelName) {
         let matchName = channelName.toLowerCase();
-        for (let i = 0; i < channels.length; i++)
+        for (let i = 0; i < channels.length; i++) {
             if (channels[i].account.deep_unpack() == accountPath &&
                 channels[i].channel.deep_unpack().toLowerCase() == matchName)
                 return i;
+        }
         return -1;
     }
 

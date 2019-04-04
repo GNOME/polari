@@ -183,9 +183,10 @@ const UserTracker = GObject.registerClass({
     _runHandlers(room, member, status) {
         let baseNick = Polari.util_get_basenick(member.alias);
         let roomHandlers = this._getRoomHandlers(room);
-        for (let [, info] of roomHandlers)
+        for (let [, info] of roomHandlers) {
             if (!info.nickName || info.nickName == baseNick)
                 info.handler(baseNick, status);
+        }
     }
 
     _pushMember(map, baseNick, member) {
@@ -286,9 +287,10 @@ const UserTracker = GObject.registerClass({
         if (!contacts.length)
             return null;
 
-        for (let i = 0; i < contacts.length; i++)
+        for (let i = 0; i < contacts.length; i++) {
             if (contacts[i].alias == nickName)
                 return contacts[i];
+        }
 
         return contacts[0];
     }

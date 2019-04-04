@@ -697,14 +697,16 @@ var Application = GObject.registerClass({
         if (status == Tp.ConnectionStatus.DISCONNECTED) {
             let reason = account.connection_status_reason;
 
-            if (reason == Tp.ConnectionStatusReason.NAME_IN_USE)
+            if (reason == Tp.ConnectionStatusReason.NAME_IN_USE) {
                 if (this._retryNickRequest(account))
                     return;
+            }
 
             if (reason == Tp.ConnectionStatusReason.NETWORK_ERROR ||
-                reason == Tp.ConnectionStatusReason.NONE_SPECIFIED)
+                reason == Tp.ConnectionStatusReason.NONE_SPECIFIED) {
                 if (this._retryServerRequest(account))
                     return;
+            }
 
             if (reason != Tp.ConnectionStatusReason.REQUESTED) {
                 let strReason = Object.keys(Tp.ConnectionStatusReason)[reason];

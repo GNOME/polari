@@ -523,9 +523,10 @@ class RoomList extends Gtk.ListBox {
 
     _roomToRowIndex(index) {
         let nChildren = this.get_children().length;
-        for (let i = 0, roomIndex = 0; i < nChildren; i++)
+        for (let i = 0, roomIndex = 0; i < nChildren; i++) {
             if (this.get_row_at_index(i).room && roomIndex++ == index)
                 return i;
+        }
         return -1;
     }
 

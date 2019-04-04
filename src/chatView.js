@@ -597,10 +597,11 @@ var ChatView = GObject.registerClass({
         let nick = this._pendingLogs[0].nick;
         let type = this._pendingLogs[0].messageType;
         let maxNum = this._pendingLogs.length - this._initialPending.length;
-        for (let i = 0; i < maxNum; i++)
+        for (let i = 0; i < maxNum; i++) {
             if (this._pendingLogs[i].nick != nick ||
                 this._pendingLogs[i].messageType != type)
                 return this._pendingLogs.splice(i);
+        }
         return [];
     }
 
@@ -610,12 +611,13 @@ var ChatView = GObject.registerClass({
 
         let numLogs = logs.length;
         let pos;
-        for (pos = numLogs - pending.length; pos < numLogs; pos++)
+        for (pos = numLogs - pending.length; pos < numLogs; pos++) {
             if (logs[pos].nick == firstPending.nick &&
                 logs[pos].text == firstPending.text &&
                 logs[pos].timestamp == firstPending.timestamp &&
                 logs[pos].messageType == firstPending.messageType)
                 break;
+        }
         // Remove entries that are also in pending (if any), then
         // add the entries from pending
         logs.splice.apply(logs, [pos, numLogs, ...pending]);
