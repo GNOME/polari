@@ -646,8 +646,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     _onDestroy() {
-        for (let i = 0; i < this._roomSignals.length; i++)
-            this._room.disconnect(this._roomSignals[i]);
+        this._roomSignals.forEach(id => this._room.disconnect(id));
         this._roomSignals = [];
     }
 

@@ -530,12 +530,10 @@ var ChatView = GObject.registerClass({
     }
 
     _onDestroy() {
-        for (let i = 0; i < this._channelSignals.length; i++)
-            this._channel.disconnect(this._channelSignals[i]);
+        this._channelSignals.forEach(id => this._channel.disconnect(id));
         this._channelSignals = [];
 
-        for (let i = 0; i < this._roomSignals.length; i++)
-            this._room.disconnect(this._roomSignals[i]);
+        this._roomSignals.forEach(id => this._room.disconnect(id));
         this._roomSignals = [];
 
         if (this._roomFocusChangedId)
@@ -935,8 +933,7 @@ var ChatView = GObject.registerClass({
             this._removePendingMark(id);
 
         if (this._channel) {
-            for (let i = 0; i < this._channelSignals.length; i++)
-                this._channel.disconnect(this._channelSignals[i]);
+            this._channelSignals.forEach(id => this._channel.disconnect(id));
             this._channelSignals = [];
         }
 
