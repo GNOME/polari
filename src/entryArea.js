@@ -446,12 +446,13 @@ var EntryArea = GObject.registerClass({
     _onChannelChanged(room) {
         this._updateCompletions();
 
-        if (room.channel)
+        if (room.channel) {
             this._selfAliasChangedId =
                 room.channel.connection.connect('notify::self-contact',
                                                 this._updateNick.bind(this));
-        else
+        } else {
             this._selfAliasChangedId = 0;
+        }
         this._updateNick();
     }
 

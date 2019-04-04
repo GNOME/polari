@@ -228,11 +228,12 @@ var MainWindow = GObject.registerClass({
                                  GLib.Variant.new('ai', this._currentSize));
 
         let serializedChannel = null;
-        if (this._lastActiveRoom)
+        if (this._lastActiveRoom) {
             serializedChannel = new GLib.Variant('a{sv}', {
                 account: new GLib.Variant('s', this._lastActiveRoom.account.object_path),
                 channel: new GLib.Variant('s', this._lastActiveRoom.channel_name)
             });
+        }
 
         if (serializedChannel)
             this._settings.set_value('last-selected-channel', serializedChannel);

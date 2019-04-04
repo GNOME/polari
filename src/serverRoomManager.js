@@ -323,9 +323,10 @@ var ServerRoomList = GObject.registerClass({
                 if (name[0] == '#')
                     name = name.substr(1, name.length);
 
-                if (_strBaseEqual(name, customName))
+                if (_strBaseEqual(name, customName)) {
                     store.set_value(this._customRoomItem,
                                     RoomListColumn.NAME, customName = '');
+                }
 
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
                 let sensitive = room == null;

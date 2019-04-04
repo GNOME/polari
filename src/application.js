@@ -285,9 +285,10 @@ var Application = GObject.registerClass({
                 action.connect('activate', actionEntry.activate);
             if (actionEntry.change_state)
                 action.connect('change-state', actionEntry.change_state);
-            if (actionEntry.accels)
+            if (actionEntry.accels) {
                 this.set_accels_for_action(`app.${actionEntry.name}`,
                                            actionEntry.accels);
+            }
             this.add_action(action);
         });
 
@@ -438,17 +439,19 @@ var Application = GObject.registerClass({
                        map[a].service == matchedId;
             });
 
-            if (matches.length)
+            if (matches.length) {
                 joinAction.activate(new GLib.Variant('(ssu)',
                                                      [matches[0], `#${room}`, time]));
-            else
+            } else {
                 this._createAccount(matchedId, server, port, a => {
-                    if (a)
+                    if (a) {
                         joinAction.activate(new GLib.Variant('(ssu)', [
                             a.get_object_path(),
                             `#${room}`, time
                         ]));
+                    }
                 });
+            }
         });
     }
 

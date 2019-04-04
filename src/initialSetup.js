@@ -64,11 +64,12 @@ var InitialSetupWindow = GObject.registerClass({
     }
 
     _onNetworkAvailableChanged() {
-        if (this._networkMonitor.network_available)
+        if (this._networkMonitor.network_available) {
             this._setPage(this._currentAccount ?
                 SetupPage.ROOM : SetupPage.CONNECTION);
-        else
+        } else {
             this._setPage(SetupPage.OFFLINE);
+        }
     }
 
     _setPage(page) {

@@ -203,9 +203,10 @@ var JoinDialog = GObject.registerClass({
     _updateCanJoin() {
         let sensitive = false;
 
-        if (this._page == DialogPage.MAIN)
+        if (this._page == DialogPage.MAIN) {
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._serverRoomList.can_join;
+        }
 
         this._joinButton.sensitive = sensitive;
         this.set_default_response(sensitive ?

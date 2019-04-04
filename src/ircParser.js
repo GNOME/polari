@@ -81,13 +81,14 @@ var IrcParser = class {
 
             retval = (command == null || knownCommands[command] != null);
 
-            if (!retval) //error
+            if (!retval) {
                 output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
-            else if (command)
+            } else if (command) {
                 output = this._createFeedbackUsage(command);
-            else
+            } else {
                 output = this._createFeedbackGrid(_('Known commands:'),
                                                   Object.keys(knownCommands));
+            }
             break;
         }
         case 'INVITE': {

@@ -61,13 +61,14 @@ class SASLAuthHandler {
     }
 
     _onPasswordReady(password) {
-        if (password)
+        if (password) {
             this._proxy.StartMechanismWithDataRemote('X-TELEPATHY-PASSWORD',
                                                      password);
-        else
+        } else {
             this._proxy.AbortSASLRemote(SASLAbortReason.USER_ABORT,
                                         'Password not available',
                                         this._resetPrompt.bind(this));
+        }
     }
 
     _onSASLStatusChanged(proxy, sender, [status]) {
@@ -243,9 +244,10 @@ class TelepathyClient extends Tp.BaseClient {
 
         this._networkMonitor.connect('network-changed',
                                      this._onNetworkChanged.bind(this));
-        if (this._networkMonitor.state_valid)
+        if (this._networkMonitor.state_valid) {
             this._onNetworkChanged(this._networkMonitor,
                                    this._networkMonitor.network_available);
+        }
     }
 
     _onNetworkChanged(mon, connected) {

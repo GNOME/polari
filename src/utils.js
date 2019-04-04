@@ -166,12 +166,13 @@ function findUrls(str) {
 
 function findChannels(str, server) {
     let res = [], match;
-    while ((match = _channelRegexp.exec(str)))
+    while ((match = _channelRegexp.exec(str))) {
         res.push({
             url: `irc://${server}/${match[2]}`,
             name: `#${match[2]}`,
             pos: match.index + match[1].length
         });
+    }
     return res;
 }
 

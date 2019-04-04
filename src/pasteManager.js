@@ -52,12 +52,12 @@ var PasteManager = class {
         let contentType = fileInfo.get_content_type();
         let targetType = _getTargetForContentType(contentType);
 
-        if (targetType == DndTargetType.TEXT)
+        if (targetType == DndTargetType.TEXT) {
             file.load_contents_async(null, (f, res) => {
                 let [, contents] = f.load_contents_finish(res);
                 Utils.gpaste(contents.toString(), title, callback);
             });
-        else if (targetType == DndTargetType.IMAGE)
+        } else if (targetType == DndTargetType.IMAGE) {
             file.read_async(GLib.PRIORITY_DEFAULT, null, (f, res) => {
                 let stream = f.read_finish(res);
                 GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, res) => {
@@ -65,8 +65,9 @@ var PasteManager = class {
                     Utils.imgurPaste(pixbuf, title, callback);
                 });
             });
-        else
+        } else {
             callback(null);
+        }
     }
 };
 

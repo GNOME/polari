@@ -168,10 +168,11 @@ var UserDetails = GObject.registerClass({
 
         this._user = user;
 
-        if (this._user)
+        if (this._user) {
             this._selfContactChangedId =
                 this._user.connection.connect('notify::self-contact',
                                               this._updateButtonVisibility.bind(this));
+        }
 
         if (this.expanded)
             this._expand();
@@ -216,12 +217,13 @@ var UserDetails = GObject.registerClass({
 
         this._cancellable = new Gio.Cancellable();
 
-        if (this._user)
+        if (this._user) {
             this._user.request_contact_info_async(this._cancellable,
                                                   this._onContactInfoReady.bind(this));
-        //TODO: else use this._nickname to query tracker
-        else
+        } else {
+            //TODO: else use this._nickname to query tracker
             this._revealDetails();
+        }
     }
 
     _unexpand() {
@@ -233,29 +235,34 @@ var UserDetails = GObject.registerClass({
     }
 
     _formatLast(seconds) {
-        if (seconds < 60)
+        if (seconds < 60) {
             return ngettext('%d second ago',
                             '%d seconds ago', seconds).format(seconds);
+        }
 
         let minutes = seconds / 60;
-        if (minutes < 60)
+        if (minutes < 60) {
             return ngettext('%d minute ago',
                             '%d minutes ago', minutes).format(minutes);
+        }
 
         let hours = minutes / 60;
-        if (hours < 24)
+        if (hours < 24) {
             return ngettext('%d hour ago',
                             '%d hours ago', hours).format(hours);
+        }
 
         let days = hours / 24;
-        if (days < 7)
+        if (days < 7) {
             return ngettext('%d day ago',
                             '%d days ago', days).format(days);
+        }
 
         let weeks = days / 7;
-        if (days < 30)
+        if (days < 30) {
             return ngettext('%d week ago',
                             '%d weeks ago', weeks).format(weeks);
+        }
 
         let months = days / 30;
         return ngettext('%d month ago',

@@ -546,9 +546,10 @@ var ChatView = GObject.registerClass({
             GLib.source_remove(this._backlogTimeoutId);
         this._backlogTimeoutId = 0;
 
-        if (this._nickStatusChangedId)
+        if (this._nickStatusChangedId) {
             this._userTracker.unwatchRoomStatus(this._room,
                                                 this._nickStatusChangedId);
+        }
         this._nickStatusChangedId = 0;
         this._userTracker = null;
 
@@ -1095,12 +1096,14 @@ var ChatView = GObject.registerClass({
         }
 
         let stats = [];
-        if (this._statusCount.joined > 0)
+        if (this._statusCount.joined > 0) {
             stats.push(ngettext('%d user joined',
                                 '%d users joined', this._statusCount.joined).format(this._statusCount.joined));
-        if (this._statusCount.left > 0)
+        }
+        if (this._statusCount.left > 0) {
             stats.push(ngettext('%d user left',
                                 '%d users left', this._statusCount.left).format(this._statusCount.left));
+        }
         // TODO: How do we update the arrow direction when text direction change?
         let iter = buffer.get_iter_at_mark(headerMark);
         let tags = [this._lookupTag('status'), headerTag];
@@ -1333,18 +1336,20 @@ var ChatView = GObject.registerClass({
         }
         this._insertWithTags(iter, text.substr(pos), tags);
 
-        if (highlight && message.pendingId)
+        if (highlight && message.pendingId) {
             this._pending.set(message.pendingId,
                               this._view.buffer.create_mark(null, iter, true));
+        }
     }
 
     _onNickStatusChanged(baseNick, status) {
         if (this._room.type == Tp.HandleType.CONTACT &&
             status == Tp.ConnectionPresenceType.OFFLINE &&
-            this._room.channel)
+            this._room.channel) {
             this._room.channel.ack_all_pending_messages_async(channel => {
                 channel.close_async(null);
             });
+        }
 
         let nickTagName = this._getNickTagName(baseNick);
         let nickTag = this._lookupTag(nickTagName);
@@ -1388,12 +1393,13 @@ var ChatView = GObject.registerClass({
 
         let actualNickName = view.get_buffer().get_slice(start, end, false);
 
-        if (!tag._popover)
+        if (!tag._popover) {
             tag._popover = new UserPopover({
                 relative_to: this._view,
                 userTracker: this._userTracker,
                 room: this._room
             });
+        }
 
         tag._popover.nickname = actualNickName;
 
