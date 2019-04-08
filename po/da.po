@@ -415,7 +415,7 @@ msgstr ""
 "scootergrisen\n"
 "\n"
 "Dansk-gruppen\n"
-"Websted <http://dansk-gruppen.dk>\n"
+"Websted http://dansk-gruppen.dk\n"
 "E-mail <dansk@dansk-gruppen.dk>"
 
 #: src/application.js:834
