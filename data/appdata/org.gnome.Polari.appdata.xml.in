@@ -47,7 +47,6 @@
   <project_group>GNOME</project_group>
   <developer_name>The GNOME Project</developer_name>
   <kudos>
-    <kudo>AppMenu</kudo>
     <kudo>HiDpiIcon</kudo>
     <kudo>HighContrast</kudo>
     <kudo>ModernToolkit</kudo>
@@ -56,28 +55,26 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="3.30.2" date="2018-10-28">
+    <release version="3.32.1" date="2019-04-17">
       <description>
         <p>
-          This update fixes a regression with predefined networks and
-          updates translations.
+          The first 3.32 stable update improves the handling of private
+          conversations when GNOME's built-in chat integration is unavailable.
         </p>
       </description>
     </release>
-    <release version="3.30.1" date="2018-10-06">
+    <release version="3.32.0" date="2019-03-12">
       <description>
         <p>
-          The first 3.30 stable update fixes network connectivity issues
-          in flatpak sandboxes and adds support for non-UTF8 charsets in
-          predefined networks.
-        </p>
-      </description>
-    </release>
-    <release version="3.30.0" date="2018-08-04">
-      <description>
-        <p>
-          GNOME 3.30 brings with it a brand new Polari release with bug fixes
+          GNOME 3.32 brings with it a brand new Polari release with bug fixes
           and performance improvements.
+        </p>
+        <p>
+          The release also brings Polari in line with current GNOME initiatives:
+          <li>
+            <ul>a brand-new icon that follows the updated style guidelines</ul>
+            <ul>no more external application menu</ul>
+          </li>
         </p>
       </description>
     </release>
