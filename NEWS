@@ -1,3 +1,16 @@
+3.32.1 — “Style Always Wins Out In The End”
+===========================================
+* Handle notifications for private chats if GNOME's chat integration is
+  not available [Florian, Daronion; #18]
+* Misc. bug fixes and cleanups [Florian, Shubhesh, Kalev; !103, !100, !101,
+  !99, !108, !109, !110, !111]
+
+Contributors:
+  Daronion, Shubhesh Dwivedi, Kalev Lember, Florian Müllner
+
+Translators:
+  Matej Urbančič [sl], Ask Hjorth Larsen [da]
+
 3.32.0 — “Don't Dream it, Be it”
 ================================
 
