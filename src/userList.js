@@ -573,11 +573,12 @@ class UserList extends Gtk.ScrolledWindow {
 
         this._list = new Gtk.ListBox({ vexpand: true });
         this.add(this._list);
-
         let placeholder = new Gtk.Box({
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             orientation: Gtk.Orientation.VERTICAL,
+            margin: 32,
+            spacing: 6,
             visible: true
         });
         placeholder.add(new Gtk.Image({
@@ -586,11 +587,11 @@ class UserList extends Gtk.ScrolledWindow {
             visible: true
         }));
         placeholder.add(new Gtk.Label({
-            label: _('No results'),
+            label: _('No Results'),
             visible: true
         }));
 
-        placeholder.get_style_context().add_class('dim-label');
+        placeholder.get_style_context().add_class('placeholder');
 
         this._list.set_placeholder(placeholder);
 
