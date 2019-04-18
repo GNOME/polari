@@ -4,7 +4,7 @@ const {
     Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp
 } = imports.gi;
 
-const MAX_USERS_SHOWN = 8;
+const FILTER_ENTRY_THRESHOLD = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
 var UserListPopover = GObject.registerClass(
@@ -17,6 +17,7 @@ class UserListPopover extends Gtk.Popover {
         this.connect('closed', () => this._entry.text = '');
         this.connect('map', () => {
             this._revealer.transition_duration = 0;
+            this._updateContentHeight();
             this._ensureUserList();
         });
         this._revealer.connect('notify::child-revealed', () => {
@@ -30,6 +31,8 @@ class UserListPopover extends Gtk.Popover {
         let toplevel = this.get_toplevel();
         toplevel.connect('notify::active-room',
                          this._activeRoomChanged.bind(this));
+        toplevel.connect('notify::view-height',
+                         this._updateContentHeight.bind(this));
     }
 
     _createWidget() {
@@ -62,6 +65,19 @@ class UserListPopover extends Gtk.Popover {
         this._userList = null;
     }
 
+    _updateContentHeight() {
+        if (!this._userList)
+            return;
+        if (!this.get_mapped())
+            return;
+
+        let viewHeight = this.get_toplevel().view_height;
+        let [popoverHeight] = this.get_preferred_height();
+        let [userListHeight] = this._userList.get_preferred_height();
+        let chromeHeight = popoverHeight - userListHeight;
+        this._userList.max_content_height = viewHeight - chromeHeight;
+    }
+
     _ensureUserList() {
         if (this._userList)
             return;
@@ -76,6 +92,7 @@ class UserListPopover extends Gtk.Popover {
         this._userList.vadjustment.connect('changed',
                                            this._updateEntryVisibility.bind(this));
         this._updateEntryVisibility();
+        this._updateContentHeight();
     }
 
     _updateEntryVisibility() {
@@ -83,7 +100,7 @@ class UserListPopover extends Gtk.Popover {
             return;
 
         let reveal = this._entry.text != '' ||
-                     this._userList.numRows > MAX_USERS_SHOWN;
+                     this._userList.numRows > FILTER_ENTRY_THRESHOLD;
         this._revealer.reveal_child = reveal;
     }
 
@@ -564,6 +581,7 @@ class UserList extends Gtk.ScrolledWindow {
             hexpand: true,
             shadow_type: Gtk.ShadowType.ETCHED_IN,
             hscrollbar_policy: Gtk.PolicyType.NEVER,
+            propagate_natural_height: true,
             propagate_natural_width: true
         });
 
@@ -590,10 +608,6 @@ class UserList extends Gtk.ScrolledWindow {
         placeholder.get_style_context().add_class('placeholder');
 
         this._list.set_placeholder(placeholder);
-
-        this._updateHeightId = 0;
-        this._list.connect('size-allocate',
-                           this._updateContentHeight.bind(this));
 
         this._list.set_selection_mode(Gtk.SelectionMode.NONE);
         this._filter = '';
@@ -650,30 +664,6 @@ class UserList extends Gtk.ScrolledWindow {
     setFilter(filter) {
         this._filter = filter;
         this._list.invalidate_filter();
-    }
-
-    _updateContentHeight() {
-        if (this._updateHeightId != 0)
-            return;
-
-        this._updateHeightId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-            let topRow = this._list.get_row_at_y(this.vadjustment.value);
-            let membersShown = Math.min(this.numRows, MAX_USERS_SHOWN);
-            // topRow is unset when all rows are hidden due to filtering,
-            // base height on the first membersShown rows in that case
-            let index = 0;
-            if (topRow)
-                index = Math.min(topRow.get_index(), this.numRows - membersShown);
-            let height = 0;
-
-            for (let i = 0; i < membersShown; i++)
-                height += this._list.get_row_at_index(index + i).get_allocated_height();
-
-            this.max_content_height = height;
-            this.propagate_natural_height = true;
-            this._updateHeightId = 0;
-            return GLib.SOURCE_REMOVE;
-        });
     }
 
     _onMemberRenamed(room, oldMember, newMember) {
