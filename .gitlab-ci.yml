@@ -1,3 +1,5 @@
+include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
+
 stages:
  - commit_check
  - source_check
@@ -44,70 +46,22 @@ flatpak:
         BRANCH: "snapshot"
         # Make sure to keep this in sync with the Flatpak manifest, all arguments
         # are passed except the config-args because we build it ourselves
-        MESON_ARGS: "-Dsnapshot=true"
-        DBUS_ID: "org.gnome.Polari"
-
-    before_script:
-        - tar -xzf cache.tar.gz .flatpak-builder/cache || true
-    script:
-        - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
-        # Make sure to keep this in sync with the Flatpak manifest, all arguments
-        # are passed except the config-args because we build it ourselves
-        - flatpak build app meson --prefix=/app ${MESON_ARGS} --werror --warnlevel 2 _build
-        - flatpak build app ninja -C _build install
-        - flatpak-builder --finish-only --repo=repo --default-branch=${BRANCH} app ${MANIFEST_PATH}
-        # Run automatic tests inside the Flatpak env
-        - flatpak build app ninja -C _build test
-        # Generate a Flatpak bundle
-        - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${DBUS_ID} ${BRANCH}
-    after_script:
-        - tar -czf cache.tar.gz .flatpak-builder/cache
+        MESON_ARGS: "-Dsnapshot=true --werror --warnlevel 2"
+        APP_ID: "org.gnome.Polari"
+    extends: .flatpak
     <<: *only_default
-
-    artifacts:
-        paths:
-            - ${BUNDLE}
-            - _build/meson-logs/meson-log.txt
-            - _build/meson-logs/testlog.txt
-        expire_in: 30 days
-    cache:
-        key: flatpak-builder
-        paths:
-             - cache.tar.gz
 
 review:
     stage: review
     dependencies:
         - flatpak
-    script:
-        - echo "Generating flatpak deployment"
+    extends: .review
     <<: *only_default
-    artifacts:
-        paths:
-            - ${BUNDLE}
-        expire_in: 30 days
-    environment:
-        name: review/$CI_COMMIT_REF_NAME
-        url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
-        on_stop: stop_review
-    except:
-        - tags
-        - gnome-3-.*
-        - master@GNOME/polari
 
 stop_review:
     stage: review
-    script:
-        - echo "Stopping flatpak deployment"
+    extends: .stop_review
     <<: *only_default
-    when: manual
-    environment:
-        name: review/$CI_COMMIT_REF_NAME
-        action: stop
-    except:
-        - tags
-        - gnome-3-.*
-        - master@GNOME/polari
 
 fedora:
   image: fedora:latest
