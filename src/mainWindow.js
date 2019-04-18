@@ -99,7 +99,11 @@ var MainWindow = GObject.registerClass({
         'active-room': GObject.ParamSpec.object(
             'active-room', 'active-room', 'active-room',
             GObject.ParamFlags.READWRITE,
-            Polari.Room.$gtype)
+            Polari.Room.$gtype),
+        'view-height': GObject.ParamSpec.uint(
+            'view-height', 'view-height', 'view-height',
+            GObject.ParamFlags.READABLE,
+            0, GLib.MAXUINT32, 0)
     },
     Signals: {
         'active-room-state-changed': {}
@@ -134,6 +138,10 @@ var MainWindow = GObject.registerClass({
             this.get_style_context().add_class('test-instance');
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
             this.get_style_context().add_class('snapshot');
+
+        this._roomStack.connect('size-allocate', () => {
+            this.notify('view-height');
+        });
 
         // command output notifications should not pop up over
         // the input area, but appear to emerge from it, so
@@ -203,6 +211,11 @@ var MainWindow = GObject.registerClass({
     // eslint-disable-next-line camelcase
     get subtitle_visible() {
         return this._subtitle.length > 0;
+    }
+
+    // eslint-disable-next-line camelcase
+    get view_height() {
+        return this._roomStack.get_allocated_height() - this._roomStack.entry_area_height;
     }
 
     _onWindowStateEvent(widget, event) {
