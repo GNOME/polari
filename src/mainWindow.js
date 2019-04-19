@@ -4,11 +4,14 @@ const { Gdk, Gio, GLib, GObject, Gtk, Polari, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { JoinDialog } = imports.joinDialog;
+const { MessageInfoBar } = imports.appNotifications;
 const RoomList = imports.roomList; // used in template
 const { RoomManager } = imports.roomManager;
 const RoomStack = imports.roomStack; // used in template
 const UserList = imports.userList; // used in template
 const Utils = imports.utils;
+
+Gio._promisify(Gio.DBusConnection.prototype, 'call', 'call_finish');
 
 
 var FixedSizeFrame = GObject.registerClass({
@@ -134,6 +137,7 @@ var MainWindow = GObject.registerClass({
         let app = this.application;
         this._overlay.add_overlay(app.notificationQueue);
         this._overlay.add_overlay(app.commandOutputQueue);
+        this._overlay.add_overlay(new OfflineInfoBar());
 
         if (app.isTestInstance)
             this.get_style_context().add_class('test-instance');
@@ -392,5 +396,79 @@ var MainWindow = GObject.registerClass({
         }
 
         this.title = this._room ? this._room.display_name : null;
+    }
+});
+
+const OfflineInfoBar = GObject.registerClass(
+class OfflineInfoBar extends MessageInfoBar {
+    _init() {
+        let title = _('No network connection');
+        let subtitle = _('You need to go online to chat.');
+        super._init({ title, subtitle, visible: true });
+
+        this.add_button(_('_Network Settings'), Gtk.ResponseType.ACCEPT);
+
+        this.connect('destroy', this._onDestroy.bind(this));
+
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._networkChangedId = this._networkMonitor.connect(
+            'network-changed',
+            this._onNetworkChanged.bind(this));
+        this._onNetworkChanged();
+    }
+
+    vfunc_response(response) {
+        if (response == Gtk.ResponseType.ACCEPT)
+            this._openNetworkSettings();
+        else
+            super.vfunc_response(response);
+    }
+
+    async _openNetworkSettings() {
+        let app = Gio.Application.get_default();
+
+        try {
+            await app.get_dbus_connection().call(
+                'org.gnome.ControlCenter',
+                '/org/gnome/ControlCenter',
+                'org.freedesktop.Application',
+                'ActivateAction',
+                new GLib.Variant('(sava{sv})', [
+                    'launch-panel',
+                    [new GLib.Variant('(sav)', ['wifi', []])],
+                    {}
+                ]),
+                null,
+                Gio.DBusCallFlags.NONE,
+                -1,
+                null);
+        } catch (e) {
+            let errorNames = [
+                'SERVICE_UNKNOWN',
+                'NAME_HAS_NO_OWNER',
+                'NO_REPLY',
+                'TIMED_OUT'
+            ];
+            let body = null;
+            if (errorNames.some(n => e.matches(Gio.DBusError, Gio.DBusError[n])))
+                body = _('GNOME Settings is not available');
+
+            let notification = new Gio.Notification();
+            notification.set_title(_('Failed to open network settings'));
+            if (body)
+                notification.set_body(body);
+            app.send_notification(null, notification);
+        }
+    }
+
+    _onNetworkChanged() {
+        let { networkAvailable } = this._networkMonitor;
+        this.revealed = this._networkMonitor.state_valid && !networkAvailable;
+    }
+
+    _onDestroy() {
+        if (this._networkChangedId)
+            this._networkMonitor.disconnect(this._networkChangedId);
+        this._networkChangedId = 0;
     }
 });
