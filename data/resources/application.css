@@ -1,5 +1,7 @@
 @define-color polari_dark_bg_color shade(@theme_bg_color, 0.95);
 
+.info.top { margin-bottom: 1px; }
+
 .polari-room-list .sidebar {
     border-style: solid;
     border-color: @borders;
