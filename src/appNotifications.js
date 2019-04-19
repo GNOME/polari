@@ -1,5 +1,5 @@
 /* exported MessageNotification UndoNotification NotificationQueue
-            SimpleOutput GridOutput CommandOutputQueue */
+            SimpleOutput GridOutput CommandOutputQueue MessageInfoBar */
 
 const { GLib, GObject, Gtk, Pango } = imports.gi;
 
@@ -198,5 +198,86 @@ class CommandOutputQueue extends NotificationQueue {
 
         this.valign = Gtk.Align.END;
         this.get_style_context().add_class('irc-feedback');
+    }
+});
+
+var MessageInfoBar = GObject.registerClass({
+    Properties: {
+        'title': GObject.ParamSpec.string(
+            'title', 'title', 'title',
+            GObject.ParamFlags.READWRITE,
+            ''),
+        'subtitle': GObject.ParamSpec.string(
+            'subtitle', 'subtitle', 'subtitle',
+            GObject.ParamFlags.READWRITE,
+            '')
+    }
+}, class MessageInfoBar extends Gtk.InfoBar {
+    _init(params) {
+        this._title = '';
+        this._subtitle = '';
+
+        let defaultParams = {
+            show_close_button: true,
+            revealed: false,
+            valign: Gtk.Align.START
+        };
+        super._init(Object.assign(defaultParams, params));
+
+        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this.get_content_area().add(box);
+
+        this._titleLabel = new Gtk.Label({
+            halign: Gtk.Align.START,
+            valign: Gtk.Align.CENTER,
+            label: `<b>${this._title}</b>`,
+            use_markup: true,
+            wrap: true
+        });
+        box.add(this._titleLabel);
+
+        this._subtitleLabel = new Gtk.Label({
+            halign: Gtk.Align.START,
+            valign: Gtk.Align.CENTER,
+            label: this._subtitle,
+            ellipsize: Pango.EllipsizeMode.END
+        });
+        box.add(this._subtitleLabel);
+
+        box.show_all();
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(title) {
+        if (this._title == title)
+            return;
+
+        this._title = title;
+        this.notify('title');
+
+        if (this._titleLabel)
+            this._titleLabel.label = `<b>${title}</b>`;
+    }
+
+    get subtitle() {
+        return this._subtitle;
+    }
+
+    set subtitle(subtitle) {
+        if (this._subtitle == subtitle)
+            return;
+
+        this._subtitle = subtitle;
+        this.notify('subtitle');
+
+        if (this._subtitleLabel)
+            this._subtitleLabel.label = subtitle;
+    }
+
+    vfunc_response() {
+        this.revealed = false;
     }
 });

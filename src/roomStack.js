@@ -1,10 +1,11 @@
 /* exported RoomStack */
 
-const { Gio, GLib, GObject, Gtk, Pango, TelepathyGLib: Tp } = imports.gi;
+const { Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { ChatView } = imports.chatView;
 const { EntryArea } = imports.entryArea;
+const { MessageInfoBar } = imports.appNotifications;
 const { RoomManager } = imports.roomManager;
 
 var RoomStack = GObject.registerClass({
@@ -90,19 +91,22 @@ var RoomStack = GObject.registerClass({
 });
 
 const SavePasswordConfirmationBar = GObject.registerClass(
-class SavePasswordConfirmationBar extends Gtk.InfoBar {
+class SavePasswordConfirmationBar extends MessageInfoBar {
     _init(room) {
         this._room = room;
 
-        super._init({
-            show_close_button: true,
-            revealed: false,
-            valign: Gtk.Align.START
-        });
+        let title = _('Should the password be saved?');
+        let subtitle = _(
+            'Identification will happen automatically the next time you connect to %s'
+        ).format(this._room.account.display_name);
+        super._init({ title, subtitle });
 
         this.connect('destroy', this._onDestroy.bind(this));
 
-        this._createWidget();
+        this.add_button(_('_Save Password'), Gtk.ResponseType.ACCEPT).set({
+            action_name: 'app.save-identify-password',
+            action_target: new GLib.Variant('o', this._room.account.object_path)
+        });
 
         this._identifySentId = this._room.connect('identify-sent', () => {
             this.revealed = true;
@@ -110,7 +114,7 @@ class SavePasswordConfirmationBar extends Gtk.InfoBar {
     }
 
     vfunc_response(response) {
-        this.revealed = false;
+        super.vfunc_response(response);
 
         if (response == Gtk.ResponseType.ACCEPT)
             return;
@@ -118,35 +122,6 @@ class SavePasswordConfirmationBar extends Gtk.InfoBar {
         let app = Gio.Application.get_default();
         let target = new GLib.Variant('o', this._room.account.object_path);
         app.lookup_action('discard-identify-password').activate(target);
-    }
-
-    _createWidget() {
-        this.add_button(_('_Save Password'), Gtk.ResponseType.ACCEPT).set({
-            action_name: 'app.save-identify-password',
-            action_target: new GLib.Variant('o', this._room.account.object_path)
-        });
-
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.get_content_area().add(box);
-
-        let title = _('Should the password be saved?');
-        this._titleLabel = new Gtk.Label({
-            halign: Gtk.Align.START,
-            valign: Gtk.Align.CENTER,
-            wrap: true
-        });
-        this._titleLabel.set_markup(`<b>${title}<${'/'}b>`);
-        box.add(this._titleLabel);
-
-        let accountName = this._room.account.display_name;
-        let text = _('Identification will happen automatically the next time you connect to %s').format(accountName);
-        this._subtitleLabel = new Gtk.Label({
-            label: text,
-            ellipsize: Pango.EllipsizeMode.END
-        });
-        box.add(this._subtitleLabel);
-
-        box.show_all();
     }
 
     _onDestroy() {
