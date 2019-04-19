@@ -90,44 +90,44 @@ var RoomStack = GObject.registerClass({
 });
 
 const SavePasswordConfirmationBar = GObject.registerClass(
-class SavePasswordConfirmationBar extends Gtk.Revealer {
+class SavePasswordConfirmationBar extends Gtk.InfoBar {
     _init(room) {
         this._room = room;
 
-        super._init({ valign: Gtk.Align.START });
+        super._init({
+            show_close_button: true,
+            revealed: false,
+            valign: Gtk.Align.START
+        });
 
         this.connect('destroy', this._onDestroy.bind(this));
 
         this._createWidget();
 
         this._identifySentId = this._room.connect('identify-sent', () => {
-            this.reveal_child = true;
-        });
-        this._infoBar.connect('response', (w, res) => {
-            if (res == Gtk.ResponseType.CLOSE) {
-                let app = Gio.Application.get_default();
-                let target = new GLib.Variant('o', this._room.account.object_path);
-                app.lookup_action('discard-identify-password').activate(target);
-            }
-            this.reveal_child = false;
+            this.revealed = true;
         });
     }
 
-    _createWidget() {
-        this._infoBar = new Gtk.InfoBar({ show_close_button: true });
-        this.add(this._infoBar);
+    vfunc_response(response) {
+        this.revealed = false;
 
+        if (response == Gtk.ResponseType.ACCEPT)
+            return;
+
+        let app = Gio.Application.get_default();
         let target = new GLib.Variant('o', this._room.account.object_path);
-        let button = new Gtk.Button({
-            label: _('_Save Password'),
-            use_underline: true,
+        app.lookup_action('discard-identify-password').activate(target);
+    }
+
+    _createWidget() {
+        this.add_button(_('_Save Password'), Gtk.ResponseType.ACCEPT).set({
             action_name: 'app.save-identify-password',
-            action_target: target
+            action_target: new GLib.Variant('o', this._room.account.object_path)
         });
-        this._infoBar.add_action_widget(button, Gtk.ResponseType.ACCEPT);
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this._infoBar.get_content_area().add(box);
+        this.get_content_area().add(box);
 
         let title = _('Should the password be saved?');
         this._titleLabel = new Gtk.Label({
@@ -146,7 +146,7 @@ class SavePasswordConfirmationBar extends Gtk.Revealer {
         });
         box.add(this._subtitleLabel);
 
-        this._infoBar.show_all();
+        box.show_all();
     }
 
     _onDestroy() {
