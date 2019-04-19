@@ -84,6 +84,7 @@ var MainWindow = GObject.registerClass({
         'showUserListButton',
         'userListPopover',
         'roomListRevealer',
+        'offlineInfoBar',
         'overlay',
         'roomStack',
     ],
@@ -138,6 +139,12 @@ var MainWindow = GObject.registerClass({
             this.get_style_context().add_class('test-instance');
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
             this.get_style_context().add_class('snapshot');
+
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._networkChangedId = this._networkMonitor.connect(
+            'network-changed',
+            this._onNetworkChanged.bind(this));
+        this._onNetworkChanged();
 
         this._roomStack.connect('size-allocate', () => {
             this.notify('view-height');
@@ -221,6 +228,12 @@ var MainWindow = GObject.registerClass({
         return this._roomStack.get_allocated_height() - this._roomStack.entry_area_height;
     }
 
+    _onNetworkChanged() {
+        let { networkAvailable } = this._networkMonitor;
+        this._offlineInfoBar.revealed =
+            this._networkMonitor.state_valid && !networkAvailable;
+    }
+
     _onWindowStateEvent(widget, event) {
         let state = event.get_window().get_state();
 
@@ -255,6 +268,10 @@ var MainWindow = GObject.registerClass({
 
         this._roomManager.disconnect(this._roomsLoadedId);
         this._roomManager.disconnect(this._roomRemovedId);
+
+        if (this._networkChangedId)
+            this._networkMonitor.disconnect(this._networkChangedId);
+        this._networkChangedId = 0;
 
         this._overlay.remove(this.application.notificationQueue);
         this._overlay.remove(this.application.commandOutputQueue);
