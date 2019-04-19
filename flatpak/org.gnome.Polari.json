@@ -33,6 +33,8 @@
         "--own-name=org.freedesktop.Telepathy.Logger",
         /* Keyring */
         "--talk-name=org.freedesktop.secrets",
+        /* Settings */
+        "--talk-name=org.gnome.ControlCenter",
         /* log files written by tp-logger outside the sandbox */
         "--filesystem=~/.local/share/TpLogger",
         "--env=TPL_LOG_DIR=.local/share",
