@@ -4,6 +4,7 @@ const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
+const { UserStatusMonitor } = imports.userTracker;
 
 const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
@@ -33,9 +34,16 @@ var RoomRow = GObject.registerClass({
         this._room = room;
         this._popover = null;
 
+        const mon = UserStatusMonitor.getDefault();
+        this._userTracker = mon.getUserTrackerForAccount(this.account);
+
         this._connectingTimeoutId = 0;
 
-        this._icon.gicon = room.icon;
+        this._mutedIcon = new Gio.EmblemedIcon({ gicon: room.icon });
+        this._mutedIcon.add_emblem(new Gio.Emblem({
+            icon: new Gio.ThemedIcon({ name: 'emblem-unreadable' }),
+        }));
+
         this._icon.visible = room.icon !== null;
 
         this._eventBox.connect('button-release-event',
@@ -51,12 +59,18 @@ var RoomRow = GObject.registerClass({
             this._onChannelChanged.bind(this));
 
         let connectionStatusChangedId = 0;
+        let mutedChangedId = 0;
 
         if (this._room.type === Tp.HandleType.ROOM) {
             connectionStatusChangedId =
                 this.account.connect('notify::connection-status',
                     this._onConnectionStatusChanged.bind(this));
             this._onConnectionStatusChanged();
+        } else {
+            mutedChangedId = this._userTracker.connect(
+                `muted-changed::${room.channel_name}`,
+                this._onMutedChanged.bind(this));
+            this._onMutedChanged();
         }
 
         this.connect('destroy', () => {
@@ -64,6 +78,8 @@ var RoomRow = GObject.registerClass({
             this._channelSignals.forEach(id => {
                 room.channel.disconnect(id);
             });
+            if (mutedChangedId)
+                this._userTracker.disconnect(mutedChangedId);
             if (connectionStatusChangedId)
                 this.account.disconnect(connectionStatusChangedId);
             this._clearConnectingTimeout();
@@ -86,6 +102,10 @@ var RoomRow = GObject.registerClass({
         return !this.get_style_context().has_class('inactive');
     }
 
+    get muted() {
+        return this._userTracker.isMuted(this._room.channel_name);
+    }
+
     selected() {
         if (!this._room.channel)
             this._updatePending();
@@ -97,6 +117,9 @@ var RoomRow = GObject.registerClass({
 
         let pending = this._room.channel.dup_pending_messages();
         let nPending = pending.length;
+
+        if (this.muted)
+            return [nPending, 0];
 
         let highlights = pending.filter(m => {
             let [text] = m.to_text();
@@ -128,6 +151,15 @@ var RoomRow = GObject.registerClass({
             this._clearConnectingTimeout();
             this._eventStack.visible_child_name = 'messages';
         }
+    }
+
+    _onMutedChanged() {
+        if (this.muted)
+            this._icon.gicon = this._mutedIcon;
+        else
+            this._icon.gicon = this.room.icon;
+
+        this._updatePending();
     }
 
     _updatePending() {
@@ -496,13 +528,13 @@ class RoomList extends Gtk.ListBox {
             name: 'next-pending-room',
             handler: () => {
                 this._moveSelectionFull(Gtk.DirectionType.DOWN,
-                    row => row.hasPending);
+                    row => row.hasPending && !row.muted);
             },
         }, {
             name: 'previous-pending-room',
             handler: () => {
                 this._moveSelectionFull(Gtk.DirectionType.UP,
-                    row => row.hasPending);
+                    row => row.hasPending && !row.muted);
             },
         }];
         actions.forEach(a => {
