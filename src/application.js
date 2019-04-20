@@ -226,6 +226,12 @@ var Application = GObject.registerClass({
             activate: this._onConnectAccount.bind(this),
             parameter_type: GLib.VariantType.new('o'),
         }, {
+            name: 'mute-nick',
+            parameter_type: GLib.VariantType.new('(ss)'),
+        }, {
+            name: 'unmute-nick',
+            parameter_type: GLib.VariantType.new('(ss)'),
+        }, {
             name: 'user-list',
             activate: this._onToggleAction.bind(this),
             create_hook: this._userListCreateHook.bind(this),

@@ -17,6 +17,23 @@ var UserStatusMonitor = class {
         this._userTrackers = new Map();
         this._accountsMonitor = AccountsMonitor.getDefault();
 
+        this._app = Gio.Application.get_default();
+
+        let action;
+        action = this._app.lookup_action('mute-nick');
+        action.connect('activate', (a, params) => {
+            const [accountPath, nick] = params.deep_unpack();
+            const account = this._accountsMonitor.lookupAccount(accountPath);
+            this._userTrackers.get(account).muteNick(nick);
+        });
+
+        action = this._app.lookup_action('unmute-nick');
+        action.connect('activate', (a, params) => {
+            const [accountPath, nick] = params.deep_unpack();
+            const account = this._accountsMonitor.lookupAccount(accountPath);
+            this._userTrackers.get(account).unmuteNick(nick);
+        });
+
         this._accountsMonitor.connect('account-added',
             this._onAccountAdded.bind(this));
         this._accountsMonitor.connect('account-removed',
@@ -50,6 +67,10 @@ const UserTracker = GObject.registerClass({
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING, GObject.TYPE_INT],
         },
+        'muted-changed': {
+            flags: GObject.SignalFlags.DETAILED,
+            param_types: [GObject.TYPE_STRING, GObject.TYPE_BOOLEAN],
+        },
         'contacts-changed': {
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING],
@@ -65,6 +86,19 @@ const UserTracker = GObject.registerClass({
         this._roomData = new Map();
         this._handlerCounter = 0;
         this._app = Gio.Application.get_default();
+
+        const { settings } = account;
+        this._mutedUsers = settings.get_strv('muted-usernames');
+        settings.connect('changed::muted-usernames', () => {
+            const muted = settings.get_strv('muted-usernames');
+            const newlyMuted = muted.filter(s => !this._mutedUsers.includes(s));
+            const newlyUnmuted = this._mutedUsers.filter(s => !muted.includes(s));
+
+            this._mutedUsers = muted;
+
+            newlyMuted.forEach(s => this.emit(`muted-changed::${s}`, s, true));
+            newlyUnmuted.forEach(s => this.emit(`muted-changed::${s}`, s, false));
+        });
 
         this._app.connect('prepare-shutdown', this._onShutdown.bind(this));
 
@@ -278,6 +312,29 @@ const UserTracker = GObject.registerClass({
         return contacts.length === 0
             ? Tp.ConnectionPresenceType.OFFLINE
             : Tp.ConnectionPresenceType.AVAILABLE;
+    }
+
+    isMuted(nickName) {
+        return this._mutedUsers.includes(nickName.toLowerCase());
+    }
+
+    muteNick(nickName) {
+        if (this.isMuted(nickName))
+            return;
+
+        let settings = this._account.settings;
+        settings.set_strv('muted-usernames',
+            [...this._mutedUsers, nickName.toLowerCase()]);
+    }
+
+    unmuteNick(nickName) {
+        if (!this.isMuted(nickName))
+            return;
+
+        let nick = nickName.toLowerCase();
+        let settings = this._account.settings;
+        settings.set_strv('muted-usernames',
+            this._mutedUsers.filter(s => s !== nick));
     }
 
     lookupContact(nickName) {

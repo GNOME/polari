@@ -51,5 +51,12 @@
         Whether the identify command is known to support the username parameter
       </description>
     </key>
+    <key type="as" name="muted-usernames">
+      <default>[]</default>
+      <summary>List of muted usernames</summary>
+      <description>
+        A list of usernames for whose private messages not to show notifications
+      </description>
+    </key>
   </schema>
 </schemalist>
