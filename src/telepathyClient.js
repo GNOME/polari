@@ -334,7 +334,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _sendIdentify(account, password) {
-        let settings = this._accountsMonitor.getAccountSettings(account);
+        let { settings } = account;
 
         let params = account.dup_parameters_vardict().deep_unpack();
         let username = settings.get_string('identify-username') ||
@@ -479,7 +479,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _saveIdentifySettings(account, data) {
-        let settings = this._accountsMonitor.getAccountSettings(account);
+        let { settings } = account;
 
         if (data.botname == 'NickServ')
             settings.reset('identify-botname');

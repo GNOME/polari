@@ -14,7 +14,6 @@ var AccountsMonitor = class {
 
     constructor() {
         this._accounts = new Map();
-        this._accountSettings = new Map();
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
 
@@ -51,21 +50,6 @@ var AccountsMonitor = class {
 
     lookupAccount(accountPath) {
         return this._accounts.get(accountPath);
-    }
-
-    getAccountSettings(account) {
-        let accountPath = account.object_path;
-        let settings = this._accountSettings.get(accountPath);
-        if (settings)
-            return settings;
-
-        let path = `/org/gnome/Polari/Accounts/${account.get_path_suffix()}/`;
-        settings = new Gio.Settings({
-            schema_id: 'org.gnome.Polari.Account',
-            path: path
-        });
-        this._accountSettings.set(accountPath, settings);
-        return settings;
     }
 
     prepare(callback) {
@@ -239,7 +223,11 @@ const PolariAccount = GObject.registerClass({
         visible: GObject.ParamSpec.boolean(
             'visible', 'visible', 'visible',
             GObject.ParamFlags.READWRITE,
-            true)
+            true),
+        settings: GObject.ParamSpec.object(
+            'settings', 'settings', 'settings',
+            GObject.ParamFlags.READABLE,
+            Gio.Settings.$gtype)
     }
 }, class PolariAccount extends Tp.Account {
     _init(params) {
@@ -249,6 +237,11 @@ const PolariAccount = GObject.registerClass({
         this._networksManager = NetworksManager.getDefault();
 
         super._init(params);
+
+        this._settings = new Gio.Settings({
+            schema_id: 'org.gnome.Polari.Account',
+            path: `/org/gnome/Polari/Accounts/${this.get_path_suffix()}/`
+        });
     }
 
     get predefined() {
@@ -301,5 +294,9 @@ const PolariAccount = GObject.registerClass({
             address: params.server,
             port: params.port
         }];
+    }
+
+    get settings() {
+        return this._settings;
     }
 });
