@@ -193,7 +193,7 @@ var RoomRow = GObject.registerClass({
                                    _onPopoverVisibleChanged);
             this._popover.position = Gtk.PositionType.BOTTOM;
         }
-        this._popover.show();
+        this._popover.popup();
     }
 
     _clearConnectingTimeout() {
