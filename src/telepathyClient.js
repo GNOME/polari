@@ -4,6 +4,7 @@ const { Gio, GLib, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
 
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
+const { UserStatusMonitor } = imports.userTracker;
 const Utils = imports.utils;
 
 const SHELL_CLIENT_PREFIX = 'org.freedesktop.Telepathy.Client.GnomeShell';
@@ -135,6 +136,8 @@ class TelepathyClient extends Tp.BaseClient {
         });
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsMonitor.prepare(this._onPrepared.bind(this));
+
+        this._userStatusMonitor = UserStatusMonitor.getDefault();
 
         this._shellHandlesPrivateChats = false;
         this._monitorShellClient();
@@ -674,6 +677,10 @@ class TelepathyClient extends Tp.BaseClient {
             return;
 
         if (this._shellHandlesPrivateChats && room.type === Tp.HandleType.CONTACT)
+            return;
+
+        const tracker = this._userStatusMonitor.getUserTrackerForAccount(room.account);
+        if (tracker.isMuted(msg.sender.identifier))
             return;
 
         let summary;
