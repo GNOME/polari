@@ -33,7 +33,6 @@ var RoomRow = GObject.registerClass({
         this._room = room;
         this._popover = null;
 
-        this._popoverVisibleChangedId = 0;
         this._connectingTimeoutId = 0;
 
         this._icon.gicon = room.icon;
@@ -61,10 +60,6 @@ var RoomRow = GObject.registerClass({
         }
 
         this.connect('destroy', () => {
-            if (this._popoverVisibleChangedId)
-                this._popover.disconnect(this._popoverVisibleChangedId);
-            this._popoverVisibleChangedId = 0;
-
             room.disconnect(channelChangedId);
             this._channelSignals.forEach(id => {
                 room.channel.disconnect(id);
@@ -196,9 +191,8 @@ var RoomRow = GObject.registerClass({
             menu.append(label, `app.leave-room(("${this._room.id}", ""))`);
 
             this._popover = Gtk.Popover.new_from_model(this, menu);
-            this._popoverVisibleChangedId =
-                this._popover.connect('notify::visible',
-                    _onPopoverVisibleChanged);
+            this._popover.connect('notify::visible',
+                _onPopoverVisibleChanged);
             this._popover.position = Gtk.PositionType.BOTTOM;
         }
         this._popover.show();
