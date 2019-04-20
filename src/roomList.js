@@ -242,10 +242,41 @@ class RoomRowPopover extends Gtk.Popover {
         this._menu = new Gio.Menu();
         const isRoom = row.room.type === Tp.HandleType.ROOM;
 
+        if (!isRoom) {
+            this._muteItem = new Gio.MenuItem();
+            this._muteTarget = new GLib.Variant('(ss)', [
+                row.account.object_path,
+                row.room.channel_name,
+            ]);
+            this._menu.append_item(this._muteItem);
+        }
+
         const label = isRoom ?  _('Leave chatroom') : _('End conversation');
         this._menu.append(label, `app.leave-room(("${this._row.room.id}", ""))`);
 
         this.bind_model(this._menu, null);
+    }
+
+    vfunc_map() {
+        if (this._row.room.type !== Tp.HandleType.ROOM)
+            this._updateMuteItem();
+        super.vfunc_map();
+    }
+
+    _updateMuteItem() {
+        this._menu.remove(0);
+
+        if (this._row.muted) {
+            this._muteItem.set_label(_('Unmute'));
+            this._muteItem.set_action_and_target_value(
+                'app.unmute-nick', this._muteTarget);
+        } else {
+            this._muteItem.set_label(_('Mute'));
+            this._muteItem.set_action_and_target_value(
+                'app.mute-nick', this._muteTarget);
+        }
+
+        this._menu.insert_item(0, this._muteItem);
     }
 });
 
