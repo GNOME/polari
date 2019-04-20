@@ -216,17 +216,8 @@ var RoomRow = GObject.registerClass({
     }
 
     _showPopover() {
-        if (!this._popover) {
-            let menu = new Gio.Menu();
-            let isRoom = this._room.type === Tp.HandleType.ROOM;
-            let label = isRoom ?  _('Leave chatroom') : _('End conversation');
-            menu.append(label, `app.leave-room(("${this._room.id}", ""))`);
-
-            this._popover = Gtk.Popover.new_from_model(this, menu);
-            this._popover.connect('notify::visible',
-                _onPopoverVisibleChanged);
-            this._popover.position = Gtk.PositionType.BOTTOM;
-        }
+        if (!this._popover)
+            this._popover = new RoomRowPopover(this);
         this._popover.popup();
     }
 
@@ -234,6 +225,27 @@ var RoomRow = GObject.registerClass({
         if (this._connectingTimeoutId)
             GLib.source_remove(this._connectingTimeoutId);
         this._connectingTimeoutId = 0;
+    }
+});
+
+const RoomRowPopover = GObject.registerClass(
+class RoomRowPopover extends Gtk.Popover {
+    _init(row) {
+        super._init({
+            relative_to: row,
+            position: Gtk.PositionType.BOTTOM,
+        });
+
+        this.connect('notify::visible', _onPopoverVisibleChanged);
+
+        this._row = row;
+        this._menu = new Gio.Menu();
+        const isRoom = row.room.type === Tp.HandleType.ROOM;
+
+        const label = isRoom ?  _('Leave chatroom') : _('End conversation');
+        this._menu.append(label, `app.leave-room(("${this._row.room.id}", ""))`);
+
+        this.bind_model(this._menu, null);
     }
 });
 
