@@ -1,7 +1,7 @@
-/* exported isFlatpakSandbox getTpEventTime findUrls findChannels openURL
+/* exported isFlatpakSandbox touchFile needsOnetimeAction getTpEventTime
+            findUrls findChannels openURL updateTerms gpaste imgurPaste
             storeAccountPassword storeIdentifyPassword
-            lookupAccountPassword lookupIdentifyPassword
-            updateTerms gpaste imgurPaste */
+            lookupAccountPassword lookupIdentifyPassword */
 /*
  * Copyright (c) 2011 Red Hat, Inc.
  *
@@ -91,6 +91,36 @@ function isFlatpakSandbox() {
     if (_inFlatpakSandbox === undefined)
         _inFlatpakSandbox = GLib.file_test('/.flatpak-info', GLib.FileTest.EXISTS);
     return _inFlatpakSandbox;
+}
+
+function touchFile(file) {
+    try {
+        file.get_parent().make_directory_with_parents(null);
+    } catch (e) {
+        if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+            throw e;
+        // not an error, carry on
+    }
+
+    let stream = file.create(0, null);
+    stream.close(null);
+}
+
+function needsOnetimeAction(name) {
+    let path = GLib.build_filenamev([
+        GLib.get_user_data_dir(),
+        'polari',
+        `${name}-completed`,
+    ]);
+    let file = Gio.File.new_for_path(path);
+    try {
+        touchFile(file);
+    } catch (e) {
+        if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
+            return false;
+        log(`Failed to mark onetime action ${name} as completed: ${e.message}`);
+    }
+    return true;
 }
 
 function getTpEventTime() {

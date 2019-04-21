@@ -521,34 +521,14 @@ var Application = GObject.registerClass({
         });
     }
 
-    _touchFile(file) {
-        try {
-            file.get_parent().make_directory_with_parents(null);
-        } catch (e) {
-            if (!e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                throw e;
-            // not an error, carry on
-        }
-
-        let stream = file.create(0, null);
-        stream.close(null);
-    }
-
     _needsInitialSetup() {
         if (GLib.getenv('POLARI_FORCE_INITIAL_SETUP')) {
             GLib.unsetenv('POLARI_FORCE_INITIAL_SETUP');
             return true;
         }
 
-        let path = `${GLib.get_user_data_dir()}/polari/initial-setup-completed`;
-        let f = Gio.File.new_for_path(path);
-        try {
-            this._touchFile(f);
-        } catch (e) {
-            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
-                return false; // initial setup has completed
-            log(`Failed to mark initial setup as completed: ${e.message}`);
-        }
+        if (!Utils.needsOnetimeAction('initial-setup'))
+            return;
 
         let savedRooms = this._settings.get_value('saved-channel-list');
         return savedRooms.n_children() === 0;
