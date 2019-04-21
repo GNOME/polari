@@ -175,7 +175,10 @@ var MainWindow = GObject.registerClass({
         this._userListAction = app.lookup_action('user-list');
 
         app.connect('action-state-changed::user-list', (group, name, value) => {
-            this._userListPopover.visible = value.get_boolean();
+            if (value.get_boolean())
+                this._userListPopover.popup();
+            else
+                this._userListPopover.popdown();
         });
         this._userListPopover.connect('notify::visible', () => {
             if (!this._userListPopover.visible)
