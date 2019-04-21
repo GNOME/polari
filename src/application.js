@@ -537,7 +537,7 @@ var Application = GObject.registerClass({
             return true;
         }
 
-        let path = `${GLib.get_user_cache_dir()}/polari/initial-setup-completed`;
+        let path = `${GLib.get_user_data_dir()}/polari/initial-setup-completed`;
         let f = Gio.File.new_for_path(path);
         try {
             this._touchFile(f);
