@@ -507,6 +507,10 @@ class TelepathyClient extends Tp.BaseClient {
 
         settings.set_string('identify-username', data.username);
         settings.set_boolean('identify-username-supported', data.usernameSupported);
+
+        // We know it's a bot, mute it by default!
+        let tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
+        tracker.muteNick(data.botname);
     }
 
     _onDiscardIdentifyPasswordActivated(action, parameter) {
