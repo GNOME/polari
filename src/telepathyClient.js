@@ -240,6 +240,17 @@ class TelepathyClient extends Tp.BaseClient {
         });
         this.register();
 
+        if (Utils.needsOnetimeAction('mute-bots')) {
+            this._accountsMonitor.visibleAccounts.forEach(a => {
+                if (a.settings.get_string('identify-username') === null)
+                    return;
+
+                const tracker =
+                    this._userStatusMonitor.getUserTrackerForAccount(a);
+                tracker.muteNick(a.settings.get_string('identify-botname'));
+            });
+        }
+
         this._accountsMonitor.connect('account-status-changed',
             this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-reachable-changed',
