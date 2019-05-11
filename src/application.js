@@ -53,7 +53,13 @@ var Application = GObject.registerClass({
                              GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
                              _('Print version and exit'), null);
         this.connect('handle-local-options', (o, dict) => {
-            let v = dict.lookup_value('test-instance', null);
+            let v = dict.lookup_value('version', null);
+            if (v && v.get_boolean()) {
+                print(`Polari ${pkg.version}`);
+                return 0;
+            }
+
+            v = dict.lookup_value('test-instance', null);
             if (v && v.get_boolean())
                 this._maybeMakeNonUnique();
 
@@ -66,12 +72,6 @@ var Application = GObject.registerClass({
             v = dict.lookup_value('start-client', null);
             if (v && v.get_boolean()) {
                 this.activate_action('start-client', null);
-                return 0;
-            }
-
-            v = dict.lookup_value('version', null);
-            if (v && v.get_boolean()) {
-                print(`Polari ${pkg.version}`);
                 return 0;
             }
 
