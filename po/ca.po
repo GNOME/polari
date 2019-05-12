@@ -50,10 +50,10 @@ msgid ""
 "miss an important message — for private conversations, they even allow you "
 "to reply instantly without switching back to the application!"
 msgstr ""
-"Podeu utilitzar el Polari per parlar en públic en un canal i per tenir "
-"converses privades d'un a un. Les notificacions us asseguren que no us "
+"Podeu utilitzar el Polari per parlar en canals públics i per tenir "
+"converses privades. Les notificacions us asseguren que no us "
 "perdreu cap missatge important - per les converses privades, fins i tot us "
-"permeten respondre directament sense haver de canviar d'aplicació!"
+"permeten respondre directament sense haver de canviar d'aplicació."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:47
 msgid "The GNOME Project"
@@ -273,7 +273,7 @@ msgstr "Connecteu-vos a Internet per continuar la configuració."
 #: data/resources/initial-setup-window.ui:109
 #: data/resources/initial-setup-window.ui:159
 msgid "Welcome to Polari"
-msgstr "Benvingut a Polari"
+msgstr "Us donem la benvinguda a Polari"
 
 #: data/resources/initial-setup-window.ui:121
 msgid ""
