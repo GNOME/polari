@@ -3,6 +3,8 @@
 const { Gio, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
 const Signals = imports.signals;
 
+const { NetworksManager } = imports.networksManager;
+
 var AccountsMonitor = class {
     static getDefault() {
         if (!this._singleton)
@@ -176,6 +178,10 @@ class ClientFactory extends Polari.ClientFactory {
 
 const PolariAccount = GObject.registerClass({
     Properties: {
+        predefined: GObject.ParamSpec.boolean(
+            'predefined', 'predefined', 'predefined',
+            GObject.ParamFlags.READABLE,
+            false),
         visible: GObject.ParamSpec.boolean(
             'visible', 'visible', 'visible',
             GObject.ParamFlags.READWRITE,
@@ -185,7 +191,13 @@ const PolariAccount = GObject.registerClass({
     _init(params) {
         this._visible = true;
 
+        this._networksManager = NetworksManager.getDefault();
+
         super._init(params);
+    }
+
+    get predefined() {
+        return this._networksManager.getAccountIsPredefined(this);
     }
 
     get visible() {
@@ -198,5 +210,29 @@ const PolariAccount = GObject.registerClass({
 
         this._visible = value;
         this.notify('visible');
+    }
+
+    getConnectionParams() {
+        let params = this.dup_parameters_vardict().deep_unpack();
+        for (let p in params)
+            params[p] = params[p].deep_unpack();
+
+        params['use-ssl'] = !!params['use-ssl'];
+
+        let defaultPort = params['use-ssl'] ? 6697 : 6667;
+        params['port'] = params['port'] || defaultPort;
+
+        return params;
+    }
+
+    getServers() {
+        if (this.predefined)
+            return this._networksManager.getNetworkServers(this.service);
+
+        let params = this.getConnectionParams();
+        return [{
+            address: params.server,
+            port: params.port
+        }];
     }
 });
