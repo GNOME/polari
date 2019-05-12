@@ -15,19 +15,6 @@ const ErrorHint = {
     NICK: 2
 };
 
-function getAccountParams(account) {
-    let params = account.dup_parameters_vardict().deep_unpack();
-    for (let p in params)
-        params[p] = params[p].deep_unpack();
-
-    params['use-ssl'] = !!params['use-ssl'];
-
-    let defaultPort = params['use-ssl'] ? DEFAULT_SSL_PORT : DEFAULT_PORT;
-    params['port'] = params['port'] || defaultPort;
-
-    return params;
-}
-
 const ConnectionRow = GObject.registerClass(
 class ConnectionRow extends Gtk.ListBoxRow {
     _init(params) {
@@ -194,9 +181,7 @@ var ConnectionsList = GObject.registerClass({
         this._list.foreach(w => w.destroy());
 
         let accounts = this._accountsMonitor.accounts;
-        let usedNetworks = accounts.filter(a => {
-            return this._networksManager.getAccountIsPredefined(a);
-        }).map(a => a.service);
+        let usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);
 
         this._networksManager.networks.forEach(network => {
             if (this._favoritesOnly &&
@@ -237,7 +222,7 @@ var ConnectionsList = GObject.registerClass({
     }
 
     _setAccountRowSensitive(account, sensitive) {
-        if (!this._networksManager.getAccountIsPredefined(account))
+        if (!account.predefined)
             return;
 
         if (!this._rows.has(account.service))
@@ -386,7 +371,7 @@ var ConnectionDetails = GObject.registerClass({
     }
 
     _populateFromAccount(account) {
-        let params = getAccountParams(account);
+        let params = account.getConnectionParams();
 
         this._savedSSL = params['use-ssl'];
         let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
@@ -423,7 +408,7 @@ var ConnectionDetails = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     get has_service() {
-        return this._networksManager.getAccountIsPredefined(this._account);
+        return this._account && this._account.predefined;
     }
 
     set account(account) {

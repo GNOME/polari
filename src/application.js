@@ -618,15 +618,15 @@ var Application = GObject.registerClass({
         if (data)
             return data;
 
-        let params = Connections.getAccountParams(account);
+        let params = account.getConnectionParams();
         let server = params['server'];
         let accountName = params['account'];
         let port = params['port'];
         debug(`Failed to connect to ${server} with username ${accountName}`);
 
         let accountServers = [];
-        if (this._networksManager.getAccountIsPredefined(account))
-            accountServers = this._networksManager.getNetworkServers(account.service);
+        if (account.predefined)
+            accountServers = account.getServers();
 
         data = {
             retry: 0,
@@ -638,7 +638,7 @@ var Application = GObject.registerClass({
     }
 
     _getTrimmedAccountName(account) {
-        let params = Connections.getAccountParams(account);
+        let params = account.getConnectionParams();
         return params.account.replace(/_+$/, '');
     }
 
