@@ -71,9 +71,7 @@ var RoomRow = GObject.registerClass({
             });
             if (connectionStatusChangedId)
                 this.account.disconnect(connectionStatusChangedId);
-            if (this._connectingTimeoutId)
-                GLib.source_remove(this._connectingTimeoutId);
-            this._connectingTimeoutId = 0;
+            this._clearConnectingTimeout();
         });
 
         this._updatePending();
@@ -132,6 +130,7 @@ var RoomRow = GObject.registerClass({
                 return GLib.SOURCE_REMOVE;
             });
         } else {
+            this._clearConnectingTimeout();
             this._eventStack.visible_child_name = 'messages';
         }
     }
@@ -154,6 +153,7 @@ var RoomRow = GObject.registerClass({
 
         if (!this._room.channel)
             return;
+        this._clearConnectingTimeout();
         this._eventStack.visible_child_name = 'messages';
 
         for (let signal of ['message-received', 'pending-message-removed']) {
@@ -202,6 +202,12 @@ var RoomRow = GObject.registerClass({
             this._popover.position = Gtk.PositionType.BOTTOM;
         }
         this._popover.show();
+    }
+
+    _clearConnectingTimeout() {
+        if (this._connectingTimeoutId)
+            GLib.source_remove(this._connectingTimeoutId);
+        this._connectingTimeoutId = 0;
     }
 });
 
