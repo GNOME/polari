@@ -190,7 +190,7 @@ var RoomRow = GObject.registerClass({
 
             this._popover = Gtk.Popover.new_from_model(this, menu);
             this._popover.connect('notify::visible',
-                                   _onPopoverVisibleChanged);
+                                  _onPopoverVisibleChanged);
             this._popover.position = Gtk.PositionType.BOTTOM;
         }
         this._popover.popup();
