@@ -140,12 +140,6 @@ var MainWindow = GObject.registerClass({
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
             this.get_style_context().add_class('snapshot');
 
-        this._networkMonitor = Gio.NetworkMonitor.get_default();
-        this._networkChangedId = this._networkMonitor.connect(
-            'network-changed',
-            this._onNetworkChanged.bind(this));
-        this._onNetworkChanged();
-
         this._roomStack.connect('size-allocate', () => {
             this.notify('view-height');
         });
@@ -170,6 +164,10 @@ var MainWindow = GObject.registerClass({
         this._accountsChangedId = this._accountsMonitor.connect(
             'accounts-changed', this._onAccountsChanged.bind(this));
         this._onAccountsChanged(this._accountsMonitor);
+
+        this._accountReachableId = this._accountsMonitor.connect(
+            'account-reachable-changed', this._onAccountsReachableChanged.bind(this));
+        this._onAccountsReachableChanged();
 
         this._roomManager = RoomManager.getDefault();
         this._roomsLoadedId = this._roomManager.connect('rooms-loaded',
@@ -226,10 +224,10 @@ var MainWindow = GObject.registerClass({
         return this._roomStack.get_allocated_height() - this._roomStack.entry_area_height;
     }
 
-    _onNetworkChanged() {
-        let { networkAvailable } = this._networkMonitor;
+    _onAccountsReachableChanged() {
+        let accounts = this._accountsMonitor.visibleAccounts;
         this._offlineInfoBar.revealed =
-            this._networkMonitor.state_valid && !networkAvailable;
+            (accounts.length > 0) && !accounts.some(a => a.reachable);
     }
 
     _onWindowStateEvent(widget, event) {
@@ -265,13 +263,10 @@ var MainWindow = GObject.registerClass({
         this.active_room = null;
 
         this._accountsMonitor.disconnect(this._accountsChangedId);
+        this._accountsMonitor.disconnect(this._accountReachableId);
 
         this._roomManager.disconnect(this._roomsLoadedId);
         this._roomManager.disconnect(this._roomRemovedId);
-
-        if (this._networkChangedId)
-            this._networkMonitor.disconnect(this._networkChangedId);
-        this._networkChangedId = 0;
 
         this._overlay.remove(this.application.notificationQueue);
         this._overlay.remove(this.application.commandOutputQueue);
