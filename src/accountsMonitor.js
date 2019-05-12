@@ -16,6 +16,8 @@ var AccountsMonitor = class {
         this._accounts = new Map();
         this._accountSettings = new Map();
 
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
+
         this._app = Gio.Application.get_default();
 
         if (!this._app.isTestInstance) {
@@ -97,6 +99,14 @@ var AccountsMonitor = class {
         am.connect('account-disabled', this._accountEnabledChanged.bind(this));
 
         this._preparedCallbacks.forEach(callback => callback());
+
+        this._networkMonitor.connect('network-changed',
+            this._onNetworkChanged.bind(this));
+        this._onNetworkChanged();
+    }
+
+    _onNetworkChanged() {
+        this.visibleAccounts.forEach(a => this._updateAccountReachable(a));
     }
 
     _onPrepareShutdown() {
@@ -127,8 +137,13 @@ var AccountsMonitor = class {
             account.connect('notify::connection-status', () => {
                 this.emit('account-status-changed', account);
             });
+        account._reachableNotifyId =
+            account.connect('notify::reachable', () => {
+                this.emit('account-reachable-changed', account);
+            });
         account._visibleNotifyId =
             account.connect('notify::visible', () => {
+                this._updateAccountReachable(account);
                 let signal = account.visible ?
                     'account-shown' : 'account-hidden';
                 this.emit(signal, account);
@@ -147,6 +162,9 @@ var AccountsMonitor = class {
         account.disconnect(account._statusNotifyId);
         delete account._statusNotifyId;
 
+        account.disconnect(account._reachableId);
+        delete account._reachableId;
+
         account.disconnect(account._visibleNotifyId);
         delete account._visibleNotifyId;
 
@@ -160,6 +178,36 @@ var AccountsMonitor = class {
         let signal = account.enabled ? 'account-enabled' : 'account-disabled';
         this.emit(signal, account);
         this.emit('accounts-changed');
+    }
+
+    async _updateAccountReachable(account) {
+        if (!this._networkMonitor.state_valid)
+            return;
+
+        let servers = account.getServers();
+        for (let s of servers) {
+            let addr = new Gio.NetworkAddress({
+                hostname: s.address,
+                port: s.port
+            });
+
+            account._setReachable(await this._canReach(addr));
+
+            if (account.reachable)
+                break;
+        }
+    }
+
+    _canReach(addr) {
+        return new Promise((resolve) => {
+            this._networkMonitor.can_reach_async(addr, null, (mon, res) => {
+                try {
+                    resolve(this._networkMonitor.can_reach_finish(res));
+                } catch (e) {
+                    resolve(false);
+                }
+            });
+        });
     }
 };
 Signals.addSignalMethods(AccountsMonitor.prototype);
@@ -182,6 +230,10 @@ const PolariAccount = GObject.registerClass({
             'predefined', 'predefined', 'predefined',
             GObject.ParamFlags.READABLE,
             false),
+        reachable: GObject.ParamSpec.boolean(
+            'reachable', 'reachable', 'reachable',
+            GObject.ParamFlags.READABLE,
+            false),
         visible: GObject.ParamSpec.boolean(
             'visible', 'visible', 'visible',
             GObject.ParamFlags.READWRITE,
@@ -190,6 +242,7 @@ const PolariAccount = GObject.registerClass({
 }, class PolariAccount extends Tp.Account {
     _init(params) {
         this._visible = true;
+        this._reachable = undefined;
 
         this._networksManager = NetworksManager.getDefault();
 
@@ -198,6 +251,18 @@ const PolariAccount = GObject.registerClass({
 
     get predefined() {
         return this._networksManager.getAccountIsPredefined(this);
+    }
+
+    get reachable() {
+        return this._reachable;
+    }
+
+    _setReachable(reachable) {
+        if (this._reachable == reachable)
+            return;
+
+        this._reachable = reachable;
+        this.notify('reachable');
     }
 
     get visible() {
