@@ -125,7 +125,6 @@ class TelepathyClient extends Tp.BaseClient {
         this.set_handler_bypass_approval(false);
         this.set_observer_recover(true);
 
-        this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._roomManager = RoomManager.getDefault();
         this._roomManager.connect('room-added', (mgr, room) => {
             if (room.account.connection)
@@ -232,33 +231,22 @@ class TelepathyClient extends Tp.BaseClient {
 
         this._accountsMonitor.connect('account-status-changed',
                                       this._onAccountStatusChanged.bind(this));
-        this._accountsMonitor.connect('account-added', (mon, account) => {
-            this._connectAccount(account);
-        });
-        this._accountsMonitor.connect('account-shown', (mon, account) => {
-            this._connectAccount(account);
-        });
+        this._accountsMonitor.connect('account-reachable-changed',
+                                      this._onAccountReachableChanged.bind(this));
         this._accountsMonitor.visibleAccounts.forEach(a => {
             this._onAccountStatusChanged(this._accountsMonitor, a);
         });
-
-        this._networkMonitor.connect('network-changed',
-                                     this._onNetworkChanged.bind(this));
-        if (this._networkMonitor.state_valid) {
-            this._onNetworkChanged(this._networkMonitor,
-                                   this._networkMonitor.network_available);
-        }
     }
 
-    _onNetworkChanged(mon, connected) {
-        let presence = connected ?
-            Tp.ConnectionPresenceType.AVAILABLE :
-            Tp.ConnectionPresenceType.OFFLINE;
-        debug(`Network changed to ${connected ? 'available' : 'unavailable'}`);
+    _onAccountReachableChanged(mon, account) {
+        let presence = account.reachable
+            ? Tp.ConnectionPresenceType.AVAILABLE
+            : Tp.ConnectionPresenceType.OFFLINE;
+        debug(`Account ${account.display_name} is now ${account.reachable
+            ? 'reachable'
+            : 'unreachable'}`);
 
-        this._accountsMonitor.visibleAccounts.forEach(a => {
-            this._setAccountPresence(a, presence);
-        });
+        this._setAccountPresence(account, presence);
     }
 
     _onAccountStatusChanged(mon, account) {
