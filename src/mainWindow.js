@@ -167,8 +167,8 @@ var MainWindow = GObject.registerClass({
         });
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        this._accountsMonitor.connect('accounts-changed',
-            this._onAccountsChanged.bind(this));
+        this._accountsChangedId = this._accountsMonitor.connect(
+            'accounts-changed', this._onAccountsChanged.bind(this));
         this._onAccountsChanged(this._accountsMonitor);
 
         this._roomManager = RoomManager.getDefault();
@@ -263,6 +263,8 @@ var MainWindow = GObject.registerClass({
             this._settings.reset('last-selected-channel');
 
         this.active_room = null;
+
+        this._accountsMonitor.disconnect(this._accountsChangedId);
 
         this._roomManager.disconnect(this._roomsLoadedId);
         this._roomManager.disconnect(this._roomRemovedId);
