@@ -199,6 +199,9 @@ var Application = GObject.registerClass({
             create_hook: (a) => a.enabled = false,
             accels: ['<Primary>w']
         }, {
+            name: 'reconnect-room',
+            parameter_type: GLib.VariantType.new('s')
+        }, {
             name: 'authenticate-account',
             parameter_type: GLib.VariantType.new('(os)')
         }, {
