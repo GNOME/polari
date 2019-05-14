@@ -333,10 +333,15 @@ class TelepathyClient extends Tp.BaseClient {
         req.ensure_and_observe_channel_async(preferredHandler, cancellable,
             (o, res) => {
                 let channel = null;
+                let room = this._roomManager.lookupRoom(roomId);
                 try {
                     channel = req.ensure_and_observe_channel_finish(res);
+                    room.channel_error = '';
                 } catch (e) {
                     debug(`Failed to ensure channel: ${e.message}`);
+
+                    if (room)
+                        room.channel_error = Tp.error_get_dbus_name(e.code);
                 }
 
                 if (callback)
