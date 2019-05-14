@@ -1,3 +1,18 @@
+3.33.1 — “No Penguin Kisses!”
+===========================================
+* Polish the no-results placeholder in userlist [Florian; #768846]
+* Allow user-list to take up all available height [Florian; #768851]
+* Show a clear indication when offline [Florian; #760833]
+* Add a --quit command line option [Will; #20]
+* Improve connectivity handling [Florian; !120]
+* Misc. bug fixes and cleanups [Florian; !115, !116, !117, !119, !122]
+
+Contributors:
+  Will Burklund, Florian Müllner
+
+Translators:
+  Daniel Mustieles [es], Kukuh Syafaat [id], Fabio Tomat [fur], Jordi Mas [ca]
+
 3.32.1 — “Style Always Wins Out In The End”
 ===========================================
 * Handle notifications for private chats if GNOME's chat integration is
