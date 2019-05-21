@@ -186,6 +186,9 @@ class TelepathyClient extends Tp.BaseClient {
             name: 'leave-room',
             handler: this._onLeaveActivated.bind(this)
         }, {
+            name: 'reconnect-room',
+            handler: this._onReconnectRoomActivated.bind(this)
+        }, {
             name: 'connect-account',
             handler: this._onConnectAccountActivated.bind(this)
         }, {
@@ -508,6 +511,12 @@ class TelepathyClient extends Tp.BaseClient {
     _discardIdentifyPassword(accountPath) {
         this._pendingBotPasswords.delete(accountPath);
         this._app.withdraw_notification(this._getIdentifyNotificationID(accountPath));
+    }
+
+    _onReconnectRoomActivated(action, parameter) {
+        let roomId = parameter.deep_unpack();
+        let room = this._roomManager.lookupRoom(roomId);
+        this._connectRoom(room);
     }
 
     _isAuthChannel(channel) {
