@@ -1,3 +1,13 @@
+3.33.2 — “Booty Hole Police”
+============================
+* Display error message on failure to join room [Florian, Daronion; #17]
+
+Contributors:
+  Daronion, Florian Müllner
+
+Translators:
+  Daniel Mustieles [es]
+
 3.33.1 — “No Penguin Kisses!”
 ===========================================
 * Polish the no-results placeholder in userlist [Florian; #768846]
