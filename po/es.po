@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-05-14 20:39+0000\n"
-"PO-Revision-Date: 2019-05-16 12:38+0200\n"
+"POT-Creation-Date: 2019-05-21 16:29+0000\n"
+"PO-Revision-Date: 2019-06-10 15:17+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -23,12 +23,12 @@ msgstr ""
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
-#: src/roomStack.js:150
+#: src/roomStack.js:205
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:846
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:849
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -406,20 +406,20 @@ msgstr "Permitir ejecutar junto con otra instancia"
 msgid "Print version and exit"
 msgstr "Mostrar el número de versión y salir"
 
-#: src/application.js:476 src/utils.js:187
+#: src/application.js:479 src/utils.js:187
 msgid "Failed to open link"
 msgstr "Falló al abrir el enlace"
 
-#: src/application.js:769
+#: src/application.js:772
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eliminado."
 
-#: src/application.js:845
+#: src/application.js:848
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2016"
 
-#: src/application.js:851
+#: src/application.js:854
 msgid "Learn more about Polari"
 msgstr "Saber más acerca de Polari"
 
@@ -823,7 +823,7 @@ msgstr "No se pudo conectar a %s."
 msgid "Should the password be saved?"
 msgstr "¿Se debe guardar la contraseña?"
 
-#: src/roomStack.js:100 src/telepathyClient.js:634
+#: src/roomStack.js:100 src/telepathyClient.js:648
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -834,28 +834,59 @@ msgstr ""
 msgid "_Save Password"
 msgstr "_Guardar contraseña"
 
-#: src/roomStack.js:154
+#: src/roomStack.js:139
+#| msgid "Available in another room."
+msgid "Failed to join the room"
+msgstr "Falló al unirse a la sala"
+
+#: src/roomStack.js:141
+msgid "_Retry"
+msgstr "_Reintentar"
+
+#: src/roomStack.js:165
+#| msgid "The server is busy."
+msgid "The room is full."
+msgstr "La sala está llena."
+
+#: src/roomStack.js:168
+msgid "You have been banned from the room."
+msgstr "Se le ha bloqueado en la sala."
+
+#: src/roomStack.js:171
+msgid "The room is invite-only."
+msgstr "La sala es sólo para invitados."
+
+#: src/roomStack.js:174
+msgid "You have been kicked from the room."
+msgstr "Se ha expulsado de la sala."
+
+#: src/roomStack.js:177
+msgid "It is not possible to join the room now, but you can retry later."
+msgstr ""
+"No posible unirse a la sala ahora, pero puede volver a intentarlo más tarde."
+
+#: src/roomStack.js:209
 msgid "Join a room using the + button."
 msgstr "Únase a una sala pulsando el botón +."
 
-#: src/telepathyClient.js:453
+#: src/telepathyClient.js:461
 msgid "Good Bye"
 msgstr "Adiós"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:633
+#: src/telepathyClient.js:647
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "¿Guardar contraseña %s para %s?"
 
-#: src/telepathyClient.js:637
+#: src/telepathyClient.js:651
 msgid "Save"
 msgstr "Guardar"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:669
+#: src/telepathyClient.js:683
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s en %s"
@@ -1044,9 +1075,6 @@ msgstr "Contraseña del NickServ de Polari para %s"
 
 #~ msgid "Try again"
 #~ msgstr "Intentarlo de nuevo"
-
-#~ msgid "The server is busy."
-#~ msgstr "El servidor está ocupado"
 
 #~ msgid "Failed to connect for an unknown reason."
 #~ msgstr "Falló al conectar debido a una razón desconocida."
