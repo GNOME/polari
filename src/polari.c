@@ -32,6 +32,32 @@ get_js_argv (int argc, const char * const *argv)
   return strv;
 }
 
+static gboolean
+get_profiler_fd (int *fd_p)
+{
+  const char *enabled;
+  const char *fd_str;
+  int fd;
+
+  /* Sysprof uses the "GJS_TRACE_FD=N" environment variable to connect GJS
+   * profiler data to the combined Sysprof capture. Since we are in control of
+   * the GjsContext, we need to proxy this FD across to the GJS profiler.
+   */
+
+  fd_str = g_getenv ("GJS_TRACE_FD");
+  enabled = g_getenv ("GJS_ENABLE_PROFILER");
+  if (fd_str == NULL || enabled == NULL)
+    return FALSE;
+
+  fd = atoi (fd_str);
+
+  if (fd <= 2)
+    return FALSE;
+
+  *fd_p = fd;
+  return TRUE;
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -40,8 +66,9 @@ main (int argc, char *argv[])
   g_autoptr (GError) error = NULL;
   g_autoptr (GjsContext) context = NULL;
   g_auto (GStrv) js_argv = NULL;
+  GjsProfiler *profiler = NULL;
   gboolean debugger = FALSE;
-  int status;
+  int status, profiler_fd;
 
   GOptionEntry entries[] =
     {
@@ -82,12 +109,19 @@ main (int argc, char *argv[])
       return 1;
     }
 
-  if (!gjs_context_eval (context, src, -1, "<main>", &status, &error))
+  if (get_profiler_fd (&profiler_fd))
     {
-      g_message ("Execution of start() threw exception: %s", error->message);
+      profiler = gjs_context_get_profiler (context);
 
-      return status;
+      gjs_profiler_set_fd (profiler, profiler_fd);
+      gjs_profiler_start (profiler);
     }
 
-  return 0;
+  if (!gjs_context_eval (context, src, -1, "<main>", &status, &error))
+    g_message ("Execution of start() threw exception: %s", error->message);
+
+  if (profiler)
+    gjs_profiler_stop (profiler);
+
+  return status;
 }
