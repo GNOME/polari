@@ -7,8 +7,6 @@ const AppNotifications = imports.appNotifications;
 const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
 
-const N_ = s => s;
-
 var knownCommands = {
     /* commands that would be nice to support: */
     /*
