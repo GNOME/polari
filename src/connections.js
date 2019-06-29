@@ -480,7 +480,7 @@ var ConnectionDetails = GObject.registerClass({
         if (params.use_ssl)
             details['use-ssl'] = GLib.Variant.new('b', params.use_ssl);
 
-        let removed = Object.keys(oldDetails).filter(p => !details.hasOwnProperty(p));
+        let removed = Object.keys(oldDetails).filter(p => details[p] === undefined);
 
         return [details, removed];
     }

@@ -354,7 +354,7 @@ var MainWindow = GObject.registerClass({
         for (let prop in selectedRoom)
             selectedRoom[prop] = selectedRoom[prop].deep_unpack();
 
-        if (!selectedRoom.hasOwnProperty('account'))
+        if (!selectedRoom.account)
             return;
 
         let roomId = null;

@@ -1128,7 +1128,7 @@ var ChatView = GObject.registerClass({
         let tags = [this._lookupTag('status')];
         let groupTag = null;
         if (grouped) {
-            if (this._statusCount.hasOwnProperty(type)) {
+            if (this._statusCount.type !== undefined) {
                 this._statusCount[type]++;
                 this._statusCount.total++;
             }

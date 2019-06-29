@@ -65,7 +65,7 @@ var NetworksManager = class {
     getNetworkIsFavorite(id) {
         let network = this._lookupNetwork(id);
 
-        if (network.hasOwnProperty('favorite'))
+        if (Object.prototype.hasOwnProperty.call(network, 'favorite'))
             return network['favorite'];
 
         return false;
