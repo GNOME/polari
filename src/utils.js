@@ -55,15 +55,14 @@ const _notTrailingJunk = '[^\\s`!()\\[\\]{};:\'\\".,<>?\u00AB\u00BB\u201C\u201D\
 // a lot of false positives, so whitelist some useful ones and hope nobody complains :-)
 const _schemeWhitelist = ['geo', 'mailto', 'man', 'info', 'ghelp', 'help'];
 
-/* eslint-disable prefer-template */
 const _urlRegexp = new RegExp(
-    '(^|' + _leadingJunk + ')' +
+    `(^|${_leadingJunk})` +
     '(' +
         '(?:' +
             '(?:[a-z]+)://' +                     // scheme://
             '|' +
             '(?:' +
-                _schemeWhitelist.join('|') +      // scheme:
+               `${_schemeWhitelist.join('|')}` + // scheme:
             '):' +
             '|' +
             'www\\d{0,3}[.]' +                    // www.
@@ -73,15 +72,14 @@ const _urlRegexp = new RegExp(
         '(?:' +                                   // one or more:
             '[^\\s()<>]+' +                       // run of non-space non-()
             '|' +                                 // or
-            _balancedParens +                     // balanced parens
+            `${_balancedParens}` +                // balanced parens
         ')+' +
         '(?:' +                                   // end with:
-            _balancedParens +                     // balanced parens
+            `${_balancedParens}` +                // balanced parens
             '|' +                                 // or
-            _notTrailingJunk +                    // last non-junk char
+            `${_notTrailingJunk}` +               // last non-junk char
         ')' +
     ')', 'gi');
-/* eslint-enable prefer-template */
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)', 'g');
 
