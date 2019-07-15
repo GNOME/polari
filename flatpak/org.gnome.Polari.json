@@ -36,9 +36,8 @@
         /* log files written by tp-logger outside the sandbox */
         "--filesystem=~/.local/share/TpLogger",
         "--env=TPL_LOG_DIR=.local/share",
-        /* dconf */
-        "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
-        "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+	/* GSettings migration */
+	"--metadata=X-DConf=migrate-path=/org/gnome/polari/"
     ],
     "build-options": {
         "cflags": "-O2 -g"
