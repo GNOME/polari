@@ -2,21 +2,21 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-#
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014, 2015, 2016, 2017.
+# Asier Sarasua Garmendia <asier.sarasua@gmail.com>, 2019.
+#
 msgid ""
 msgstr "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2019-06-15 10:57+0000\n"
-"PO-Revision-Date: 2017-08-27 17:40+0200\n"
-"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
+"PO-Revision-Date: 2019-07-20 10:00+0100\n"
+"Last-Translator: Asier Sarasua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -317,7 +317,7 @@ msgstr "Gehitu gelak eta sareak"
 
 #: data/resources/main-window.ui:196
 msgid "Show connected users"
-msgstr ""
+msgstr "Erakutsi konektatutako erabiltzaileak"
 
 #: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
 msgid "Offline"
@@ -325,7 +325,7 @@ msgstr "Deskonektatuta"
 
 #: data/resources/main-window.ui:233
 msgid "Go online to chat and receive messages."
-msgstr ""
+msgstr "Konektatu berriketan aritzeko eta mezuak jasotzeko."
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -381,11 +381,11 @@ msgstr "Abiarazi Telepathy bezeroa"
 
 #: src/application.js:48
 msgid "Start in debug mode"
-msgstr ""
+msgstr "Abiarazi arazteko modua"
 
 #: src/application.js:51
 msgid "Allow running alongside another instance"
-msgstr ""
+msgstr "Onartu beste instantzia batekin aldi berean exekutatzea"
 
 #: src/application.js:54
 msgid "Print version and exit"
@@ -809,7 +809,7 @@ msgstr "_Gorde pasahitza"
 
 #: src/roomStack.js:139
 msgid "Failed to join the room"
-msgstr ""
+msgstr "Huts egin du gelarekin elkartzeak"
 
 #: src/roomStack.js:141
 msgid "_Retry"
@@ -817,23 +817,23 @@ msgstr "S_aiatu berriro"
 
 #: src/roomStack.js:165
 msgid "The room is full."
-msgstr ""
+msgstr "Gela beteta dago."
 
 #: src/roomStack.js:168
 msgid "You have been banned from the room."
-msgstr ""
+msgstr "Gela honetan debekua ezarri dizute."
 
 #: src/roomStack.js:171
 msgid "The room is invite-only."
-msgstr ""
+msgstr "Gelara gonbidapen bidez soilik sar daiteke."
 
 #: src/roomStack.js:174
 msgid "You have been kicked from the room."
-msgstr ""
+msgstr "Gelatik bota egin zaituzte."
 
 #: src/roomStack.js:177
 msgid "It is not possible to join the room now, but you can retry later."
-msgstr ""
+msgstr "Ezin da gelarekin elkartzea orain, baina geroago saia zaitezke berriro."
 
 #: src/roomStack.js:209
 msgid "Join a room using the + button."
@@ -913,7 +913,7 @@ msgstr "Konektatuta"
 
 #: src/userList.js:617
 msgid "No Results"
-msgstr ""
+msgstr "Ez dago emaitzarik"
 
 #: src/userTracker.js:312
 msgid "User is online"
