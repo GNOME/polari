@@ -135,6 +135,10 @@
                 {
                     "type": "patch",
                     "path": "tpl-python3.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "tpl-drop-intltool.patch"
                 }
             ],
             "cleanup": [
