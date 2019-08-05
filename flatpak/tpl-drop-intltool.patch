@@ -1,4 +1,4 @@
-From 1c63573eef51dbb547f02e54a56e2750cf2b87bb Mon Sep 17 00:00:00 2001
+From cbec33705156cb58fa65fd2c3346c46a605428ba Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
 Date: Wed, 31 Jul 2019 23:24:41 +0200
 Subject: [PATCH] build: Drop intltool
@@ -9,15 +9,15 @@ previously provided by intltool.
  autogen.sh                                    |  1 -
  configure.ac                                  |  3 +-
  data/Makefile.am                              |  8 +--
- ....freedesktop.Telepathy.Logger.gschema.xml} | 10 +--
+ ....freedesktop.Telepathy.Logger.gschema.xml} |  6 +-
  po/Makevars                                   | 68 +++++++++++++++++++
  po/POTFILES.in                                |  2 +-
- 6 files changed, 77 insertions(+), 15 deletions(-)
- rename data/{org.freedesktop.Telepathy.Logger.gschema.xml.in => org.freedesktop.Telepathy.Logger.gschema.xml} (63%)
+ 6 files changed, 75 insertions(+), 13 deletions(-)
+ rename data/{org.freedesktop.Telepathy.Logger.gschema.xml.in => org.freedesktop.Telepathy.Logger.gschema.xml} (79%)
  create mode 100644 po/Makevars
 
 diff --git a/autogen.sh b/autogen.sh
-index 4492665..61a4150 100755
+index 58ee191..0d8e27d 100755
 --- a/autogen.sh
 +++ b/autogen.sh
 @@ -1,7 +1,6 @@
@@ -26,14 +26,14 @@ index 4492665..61a4150 100755
  
 -intltoolize --force --copy --automake || exit 1
  gtkdocize || exit 1
- autoreconf -i -f
  
+ if test -n "$AUTOMAKE"; then
 diff --git a/configure.ac b/configure.ac
-index 4108dd9..6d2a308 100644
+index 332e8ce..6391678 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -93,7 +93,8 @@ LT_INIT
- AC_PROG_MKDIR_P
+@@ -95,7 +95,8 @@ LT_INIT
+ AM_PROG_MKDIR_P
  AM_PATH_GLIB_2_0
  AC_PATH_XTRA
 -IT_PROG_INTLTOOL([0.35.0])
@@ -71,13 +71,13 @@ index 1e2d780..f6949f7 100644
  	$(clientfile_DATA)
  
 diff --git a/data/org.freedesktop.Telepathy.Logger.gschema.xml.in b/data/org.freedesktop.Telepathy.Logger.gschema.xml
-similarity index 63%
+similarity index 79%
 rename from data/org.freedesktop.Telepathy.Logger.gschema.xml.in
 rename to data/org.freedesktop.Telepathy.Logger.gschema.xml
-index ca39e36..80f3f35 100644
+index ddb4c15..76d145d 100644
 --- a/data/org.freedesktop.Telepathy.Logger.gschema.xml.in
 +++ b/data/org.freedesktop.Telepathy.Logger.gschema.xml
-@@ -2,16 +2,16 @@
+@@ -2,11 +2,11 @@
    <schema id="org.freedesktop.Telepathy.Logger" path="/apps/telepathy-logger/">
      <key name="enabled" type="b">
        <default>true</default>
@@ -89,13 +89,6 @@ index ca39e36..80f3f35 100644
          "false" will completely disable all logging.
 -      </_description>
 +      </description>
-     </key>
-     <key name="ignorelist" type="as">
-       <default>[]</default>
--      <_summary>Ignore list</_summary>
--      <_description>Conversations with entities with ID listed here will not be logged.</_description>
-+      <summary>Ignore list</summary>
-+      <description>Conversations with entities with ID listed here will not be logged.</description>
      </key>
    </schema>
  </schemalist>
