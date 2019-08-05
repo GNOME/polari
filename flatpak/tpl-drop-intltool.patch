@@ -1,4 +1,4 @@
-From b5be12522471b60e7504c1b50bf653a3f6bc6c17 Mon Sep 17 00:00:00 2001
+From 1c63573eef51dbb547f02e54a56e2750cf2b87bb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
 Date: Wed, 31 Jul 2019 23:24:41 +0200
 Subject: [PATCH] build: Drop intltool
@@ -9,11 +9,11 @@ previously provided by intltool.
  autogen.sh                                    |  1 -
  configure.ac                                  |  3 +-
  data/Makefile.am                              |  8 +--
- ....freedesktop.Telepathy.Logger.gschema.xml} |  0
+ ....freedesktop.Telepathy.Logger.gschema.xml} | 10 +--
  po/Makevars                                   | 68 +++++++++++++++++++
  po/POTFILES.in                                |  2 +-
- 6 files changed, 72 insertions(+), 10 deletions(-)
- rename data/{org.freedesktop.Telepathy.Logger.gschema.xml.in => org.freedesktop.Telepathy.Logger.gschema.xml} (100%)
+ 6 files changed, 77 insertions(+), 15 deletions(-)
+ rename data/{org.freedesktop.Telepathy.Logger.gschema.xml.in => org.freedesktop.Telepathy.Logger.gschema.xml} (63%)
  create mode 100644 po/Makevars
 
 diff --git a/autogen.sh b/autogen.sh
@@ -71,9 +71,34 @@ index 1e2d780..f6949f7 100644
  	$(clientfile_DATA)
  
 diff --git a/data/org.freedesktop.Telepathy.Logger.gschema.xml.in b/data/org.freedesktop.Telepathy.Logger.gschema.xml
-similarity index 100%
+similarity index 63%
 rename from data/org.freedesktop.Telepathy.Logger.gschema.xml.in
 rename to data/org.freedesktop.Telepathy.Logger.gschema.xml
+index ca39e36..80f3f35 100644
+--- a/data/org.freedesktop.Telepathy.Logger.gschema.xml.in
++++ b/data/org.freedesktop.Telepathy.Logger.gschema.xml
+@@ -2,16 +2,16 @@
+   <schema id="org.freedesktop.Telepathy.Logger" path="/apps/telepathy-logger/">
+     <key name="enabled" type="b">
+       <default>true</default>
+-      <_summary>Enable logging</_summary>
+-      <_description>
++      <summary>Enable logging</summary>
++      <description>
+         Globally enable or disable the Telepathy logger system. Setting it to
+         "false" will completely disable all logging.
+-      </_description>
++      </description>
+     </key>
+     <key name="ignorelist" type="as">
+       <default>[]</default>
+-      <_summary>Ignore list</_summary>
+-      <_description>Conversations with entities with ID listed here will not be logged.</_description>
++      <summary>Ignore list</summary>
++      <description>Conversations with entities with ID listed here will not be logged.</description>
+     </key>
+   </schema>
+ </schemalist>
 diff --git a/po/Makevars b/po/Makevars
 new file mode 100644
 index 0000000..30799ce
