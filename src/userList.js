@@ -14,7 +14,7 @@ class UserListPopover extends Gtk.Popover {
 
         this._createWidget();
 
-        this.connect('closed', () => this._entry.text = '');
+        this.connect('closed', () => (this._entry.text = ''));
         this.connect('map', () => {
             this._revealer.transition_duration = 0;
             this._updateContentHeight();

@@ -247,7 +247,7 @@ var ServerRoomList = GObject.registerClass({
                     return false;
 
                 let name = model.get_value(iter, RoomListColumn.NAME);
-                return exactMatch = _strBaseEqual(newName, name);
+                return (exactMatch = _strBaseEqual(newName, name));
             });
 
             if (exactMatch)

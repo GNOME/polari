@@ -205,7 +205,7 @@ var Application = GObject.registerClass({
         }, {
             name: 'leave-current-room',
             activate: this._onLeaveCurrentRoom.bind(this),
-            create_hook: a => a.enabled = false,
+            create_hook: a => (a.enabled = false),
             accels: ['<Primary>w']
         }, {
             name: 'reconnect-room',

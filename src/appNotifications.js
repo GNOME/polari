@@ -82,7 +82,7 @@ var UndoNotification = GObject.registerClass({
 
         this.connect('destroy', () => this.close());
 
-        this.addButton(_('Undo'), () => this._undo = true);
+        this.addButton(_('Undo'), () => (this._undo = true));
     }
 
     close() {

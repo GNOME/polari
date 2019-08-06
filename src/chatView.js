@@ -812,7 +812,7 @@ var ChatView = GObject.registerClass({
         else
             hoveredButtonTags = [];
 
-        hoveredButtonTags.forEach(t => t.hover = true);
+        hoveredButtonTags.forEach(t => (t.hover = true));
         this._hoveredButtonTags.forEach(t => {
             t.hover = hoveredButtonTags.includes(t);
         });
