@@ -173,7 +173,7 @@ var AccountsMonitor = class {
         let servers = account.getServers().map(s => {
             return new Gio.NetworkAddress({
                 hostname: s.address,
-                port: s.port
+                port: s.port,
             });
         });
 
@@ -215,7 +215,7 @@ class ClientFactory extends Polari.ClientFactory {
             factory: this,
             dbus_daemon: this.dbus_daemon,
             bus_name: Tp.ACCOUNT_MANAGER_BUS_NAME,
-            object_path: objectPath
+            object_path: objectPath,
         });
     }
 });
@@ -237,8 +237,8 @@ const PolariAccount = GObject.registerClass({
         settings: GObject.ParamSpec.object(
             'settings', 'settings', 'settings',
             GObject.ParamFlags.READABLE,
-            Gio.Settings.$gtype)
-    }
+            Gio.Settings.$gtype),
+    },
 }, class PolariAccount extends Tp.Account {
     _init(params) {
         this._visible = true;
@@ -250,7 +250,7 @@ const PolariAccount = GObject.registerClass({
 
         this._settings = new Gio.Settings({
             schema_id: 'org.gnome.Polari.Account',
-            path: `/org/gnome/Polari/Accounts/${this.get_path_suffix()}/`
+            path: `/org/gnome/Polari/Accounts/${this.get_path_suffix()}/`,
         });
     }
 
@@ -302,7 +302,7 @@ const PolariAccount = GObject.registerClass({
         let params = this.getConnectionParams();
         return [{
             address: params.server,
-            port: params.port
+            port: params.port,
         }];
     }
 

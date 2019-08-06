@@ -126,7 +126,7 @@ var IrcParser = class {
             action.activate(GLib.Variant.new('(ssu)', [
                 account.get_object_path(),
                 room,
-                Utils.getTpEventTime()
+                Utils.getTpEventTime(),
             ]));
             break;
         }
@@ -179,7 +179,7 @@ var IrcParser = class {
                 account.get_object_path(),
                 nick,
                 message,
-                Tp.USER_ACTION_TIME_NOT_USER_ACTION
+                Tp.USER_ACTION_TIME_NOT_USER_ACTION,
             ]));
             break;
         }
@@ -236,7 +236,7 @@ var IrcParser = class {
                 account.get_object_path(),
                 nick,
                 '',
-                Utils.getTpEventTime()
+                Utils.getTpEventTime(),
             ]));
             break;
         }

@@ -20,8 +20,8 @@ var FixedSizeFrame = GObject.registerClass({
         width: GObject.ParamSpec.int(
             'width', 'width', 'width',
             GObject.ParamFlags.READWRITE,
-            -1, GLib.MAXINT32, -1)
-    }
+            -1, GLib.MAXINT32, -1),
+    },
 }, class FixedSizeFrame extends Gtk.Frame {
     _init(params) {
         this._height = -1;
@@ -104,11 +104,11 @@ var MainWindow = GObject.registerClass({
         'view-height': GObject.ParamSpec.uint(
             'view-height', 'view-height', 'view-height',
             GObject.ParamFlags.READABLE,
-            0, GLib.MAXUINT32, 0)
+            0, GLib.MAXUINT32, 0),
     },
     Signals: {
-        'active-room-state-changed': {}
-    }
+        'active-room-state-changed': {},
+    },
 }, class MainWindow extends Gtk.ApplicationWindow {
     _init(params) {
         this._subtitle = '';
@@ -251,7 +251,7 @@ var MainWindow = GObject.registerClass({
         if (this._lastActiveRoom) {
             serializedChannel = new GLib.Variant('a{sv}', {
                 account: new GLib.Variant('s', this._lastActiveRoom.account.object_path),
-                channel: new GLib.Variant('s', this._lastActiveRoom.channel_name)
+                channel: new GLib.Variant('s', this._lastActiveRoom.channel_name),
             });
         }
 

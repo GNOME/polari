@@ -22,12 +22,12 @@ var RoomRow = GObject.registerClass({
         'icon',
         'roomLabel',
         'counter',
-        'eventStack'
-    ]
+        'eventStack',
+    ],
 }, class RoomRow extends Gtk.ListBoxRow {
     _init(room) {
         super._init({
-            name: `RoomRow ${room.display_name}`
+            name: `RoomRow ${room.display_name}`,
         });
 
         this._room = room;
@@ -219,8 +219,8 @@ var RoomListHeader = GObject.registerClass({
         'popoverReconnect',
         'popoverRemove',
         'popoverProperties',
-        'spinner'
-    ]
+        'spinner',
+    ],
 }, class RoomListHeader extends Gtk.MenuButton {
     _init(params) {
         this._account = params.account;
@@ -474,36 +474,36 @@ class RoomList extends Gtk.ListBox {
         let app = Gio.Application.get_default();
         let actions = [{
             name: 'next-room',
-            handler: () => this._moveSelection(Gtk.DirectionType.DOWN)
+            handler: () => this._moveSelection(Gtk.DirectionType.DOWN),
         }, {
             name: 'previous-room',
-            handler: () => this._moveSelection(Gtk.DirectionType.UP)
+            handler: () => this._moveSelection(Gtk.DirectionType.UP),
         }, {
             name: 'first-room',
-            handler: () => this._selectRoomAtIndex(0)
+            handler: () => this._selectRoomAtIndex(0),
         }, {
             name: 'last-room',
             handler: () => {
                 let nRows = this._roomManager.roomCount;
                 this._selectRoomAtIndex(nRows - 1);
-            }
+            },
         }, {
             name: 'nth-room',
             handler: (a, param) => {
                 this._selectRoomAtIndex(param.get_int32() - 1);
-            }
+            },
         }, {
             name: 'next-pending-room',
             handler: () => {
                 this._moveSelectionFull(Gtk.DirectionType.DOWN,
                     row => row.hasPending);
-            }
+            },
         }, {
             name: 'previous-pending-room',
             handler: () => {
                 this._moveSelectionFull(Gtk.DirectionType.UP,
                     row => row.hasPending);
-            }
+            },
         }];
         actions.forEach(a => {
             app.lookup_action(a.name).connect('activate', a.handler);
@@ -597,7 +597,7 @@ class RoomList extends Gtk.ListBox {
         let placeholder = new Gtk.ListBoxRow({
             selectable: false,
             activatable: false,
-            no_show_all: true
+            no_show_all: true,
         });
         placeholder.account = account;
 

@@ -35,12 +35,12 @@ const SASLStatus = {
     CLIENT_ACCEPTED: 3,
     SUCCEEDED: 4,
     SERVER_FAILED: 5,
-    CLIENT_FAILED: 6
+    CLIENT_FAILED: 6,
 };
 
 const SASLAbortReason = {
     INVALID_CHALLENGE: 0,
-    USER_ABORT: 1
+    USER_ABORT: 1,
 };
 
 class SASLAuthHandler {
@@ -184,31 +184,31 @@ class TelepathyClient extends Tp.BaseClient {
     _onPrepared() {
         let actions = [{
             name: 'message-user',
-            handler: this._onQueryActivated.bind(this)
+            handler: this._onQueryActivated.bind(this),
         }, {
             name: 'leave-room',
-            handler: this._onLeaveActivated.bind(this)
+            handler: this._onLeaveActivated.bind(this),
         }, {
             name: 'reconnect-room',
-            handler: this._onReconnectRoomActivated.bind(this)
+            handler: this._onReconnectRoomActivated.bind(this),
         }, {
             name: 'connect-account',
-            handler: this._onConnectAccountActivated.bind(this)
+            handler: this._onConnectAccountActivated.bind(this),
         }, {
             name: 'disconnect-account',
-            handler: this._onDisconnectAccountActivated.bind(this)
+            handler: this._onDisconnectAccountActivated.bind(this),
         }, {
             name: 'reconnect-account',
-            handler: this._onReconnectAccountActivated.bind(this)
+            handler: this._onReconnectAccountActivated.bind(this),
         }, {
             name: 'authenticate-account',
-            handler: this._onAuthenticateAccountActivated.bind(this)
+            handler: this._onAuthenticateAccountActivated.bind(this),
         }, {
             name: 'save-identify-password',
-            handler: this._onSaveIdentifyPasswordActivated.bind(this)
+            handler: this._onSaveIdentifyPasswordActivated.bind(this),
         }, {
             name: 'discard-identify-password',
-            handler: this._onDiscardIdentifyPasswordActivated.bind(this)
+            handler: this._onDiscardIdentifyPasswordActivated.bind(this),
         }];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
@@ -532,7 +532,7 @@ class TelepathyClient extends Tp.BaseClient {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({
                 code: Tp.Error.NOT_IMPLEMENTED,
-                message
+                message,
             }));
             return;
         }
@@ -541,7 +541,7 @@ class TelepathyClient extends Tp.BaseClient {
             let message = 'Only one authentication channel per connection allowed';
             context.fail(new Tp.Error({
                 code: Tp.Error.INVALID_ARGUMENT,
-                message
+                message,
             }));
             return;
         }
@@ -611,7 +611,7 @@ class TelepathyClient extends Tp.BaseClient {
         let params = [
             room.account.object_path,
             room.channel_name,
-            Utils.getTpEventTime()
+            Utils.getTpEventTime(),
         ];
 
         let actionName, paramFormat;
@@ -637,7 +637,7 @@ class TelepathyClient extends Tp.BaseClient {
             command,
             username: username || room.channel.connection.self_contact.alias,
             usernameSupported: username != null,
-            password
+            password,
         };
         this._pendingBotPasswords.set(accountPath, data);
 

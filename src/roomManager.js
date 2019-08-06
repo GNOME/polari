@@ -21,14 +21,14 @@ var RoomManager = class {
         this._app = Gio.Application.get_default();
         let actions = [{
             name: 'join-room',
-            handler: this._onJoinActivated.bind(this)
+            handler: this._onJoinActivated.bind(this),
         }, {
             name: 'message-user',
-            handler: this._onQueryActivated.bind(this)
+            handler: this._onQueryActivated.bind(this),
         }, {
             name: 'leave-room',
             after: true,
-            handler: this._onLeaveActivated.bind(this)
+            handler: this._onLeaveActivated.bind(this),
         }];
         actions.forEach(a => {
             if (a.after)
@@ -132,7 +132,7 @@ var RoomManager = class {
             return;
         channels.push({
             account: new GLib.Variant('s', accountPath),
-            channel: new GLib.Variant('s', channelName)
+            channel: new GLib.Variant('s', channelName),
         });
         this._settings.set_value('saved-channel-list',
             new GLib.Variant('aa{sv}', channels));
@@ -174,7 +174,7 @@ var RoomManager = class {
             room = new Polari.Room({
                 account,
                 channel_name: channelName,
-                type
+                type,
             });
             this._rooms.set(room.id, room);
             this.emit('room-added', room);

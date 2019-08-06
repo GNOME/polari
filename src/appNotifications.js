@@ -12,7 +12,7 @@ const AppNotification = GObject.registerClass({
     _init() {
         super._init({
             reveal_child: true,
-            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN
+            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
         });
         this.connect('notify::child-revealed',
             this._onChildRevealed.bind(this));
@@ -43,7 +43,7 @@ class MessageNotification extends AppNotification {
         this._box.add(new Gtk.Label({
             label,
             hexpand: true,
-            ellipsize: Pango.EllipsizeMode.END
+            ellipsize: Pango.EllipsizeMode.END,
         }));
 
         let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
@@ -71,8 +71,8 @@ class MessageNotification extends AppNotification {
 var UndoNotification = GObject.registerClass({
     Signals: {
         closed: {},
-        undo: {}
-    }
+        undo: {},
+    },
 }, class UndoNotification extends MessageNotification {
     _init(label) {
         super._init(label);
@@ -118,7 +118,7 @@ class SimpleOutput extends CommandOutputNotification {
             label: text,
             vexpand: true,
             visible: true,
-            wrap: true
+            wrap: true,
         });
         this.add(label);
         this.show_all();
@@ -137,7 +137,7 @@ class GridOutput extends CommandOutputNotification {
         let grid = new Gtk.Grid({
             column_homogeneous: true,
             row_spacing: 6,
-            column_spacing: 18
+            column_spacing: 18,
         });
         grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
 
@@ -164,13 +164,13 @@ class NotificationQueue extends Gtk.Frame {
             valign: Gtk.Align.START,
             halign: Gtk.Align.CENTER,
             margin_start: 24, margin_end: 24,
-            no_show_all: true
+            no_show_all: true,
         });
         this.get_style_context().add_class('app-notification');
 
         this._grid = new Gtk.Grid({
             orientation: Gtk.Orientation.VERTICAL,
-            row_spacing: 6, visible: true
+            row_spacing: 6, visible: true,
         });
         this.add(this._grid);
     }
@@ -207,8 +207,8 @@ var MessageInfoBar = GObject.registerClass({
         'subtitle': GObject.ParamSpec.string(
             'subtitle', 'subtitle', 'subtitle',
             GObject.ParamFlags.READWRITE,
-            '')
-    }
+            ''),
+    },
 }, class MessageInfoBar extends Gtk.InfoBar {
     _init(params) {
         this._title = '';
@@ -217,7 +217,7 @@ var MessageInfoBar = GObject.registerClass({
         let defaultParams = {
             show_close_button: true,
             revealed: false,
-            valign: Gtk.Align.START
+            valign: Gtk.Align.START,
         };
         super._init(Object.assign(defaultParams, params));
 
@@ -229,7 +229,7 @@ var MessageInfoBar = GObject.registerClass({
             valign: Gtk.Align.CENTER,
             label: `<b>${this._title}</b>`,
             use_markup: true,
-            wrap: true
+            wrap: true,
         });
         box.add(this._titleLabel);
 
@@ -237,7 +237,7 @@ var MessageInfoBar = GObject.registerClass({
             halign: Gtk.Align.START,
             valign: Gtk.Align.CENTER,
             label: this._subtitle,
-            ellipsize: Pango.EllipsizeMode.END
+            ellipsize: Pango.EllipsizeMode.END,
         });
         box.add(this._subtitleLabel);
 

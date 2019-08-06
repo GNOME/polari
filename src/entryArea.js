@@ -1,7 +1,7 @@
 /* exported ChatEntry EntryArea NickPopover */
 
 const {
-    Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp
+    Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp,
 } = imports.gi;
 
 const ChatView = imports.chatView;
@@ -21,8 +21,8 @@ var ChatEntry = GObject.registerClass({
     Signals: {
         'text-pasted': { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT] },
         'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
-        'file-pasted': { param_types: [Gio.File.$gtype] }
-    }
+        'file-pasted': { param_types: [Gio.File.$gtype] },
+    },
 }, class ChatEntry extends Gtk.Entry {
     static get _checker() {
         if (!this.__checker)
@@ -108,17 +108,17 @@ var NickPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
     InternalChildren: [
         'nickEntry',
-        'changeButton'
+        'changeButton',
     ],
     Properties: {
         nick: GObject.ParamSpec.string(
             'nick', 'nick', 'nick',
             GObject.ParamFlags.READWRITE,
-            '')
+            ''),
     },
     Signals: {
-        'nick-changed': {}
-    }
+        'nick-changed': {},
+    },
 }, class NickPopover extends Gtk.Popover {
     _init() {
         this._nick = '';
@@ -162,14 +162,14 @@ var EntryArea = GObject.registerClass({
         'confirmLabel',
         'uploadLabel',
         'cancelButton',
-        'pasteButton'
+        'pasteButton',
     ],
     Properties: {
         'max-nick-chars': GObject.ParamSpec.uint(
             'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
             GObject.ParamFlags.WRITABLE,
-            0, GLib.MAXUINT32, 0)
-    }
+            0, GLib.MAXUINT32, 0),
+    },
 }, class EntryArea extends Gtk.Stack {
     static get _nickPopover() {
         if (!this.__nickPopover)
@@ -336,7 +336,7 @@ var EntryArea = GObject.registerClass({
             Gdk.KEY_Tab,
             Gdk.KEY_Return,
             Gdk.KEY_ISO_Enter,
-            Gdk.KEY_space
+            Gdk.KEY_space,
         ];
         if (activationKeys.includes(keyval))
             return Gdk.EVENT_PROPAGATE;

@@ -7,7 +7,7 @@ const Utils = imports.utils;
 
 const DialogPage = {
     MAIN: 0,
-    CONNECTION: 1
+    CONNECTION: 1,
 };
 
 var JoinDialog = GObject.registerClass({
@@ -24,8 +24,8 @@ var JoinDialog = GObject.registerClass({
         'serverRoomList',
         'details',
         'addButton',
-        'customToggle'
-    ]
+        'customToggle',
+    ],
 }, class JoinDialog extends Gtk.Dialog {
     _init(params) {
         params['use-header-bar'] = 1;
@@ -36,7 +36,7 @@ var JoinDialog = GObject.registerClass({
         this._backButton = new Gtk.Button({
             image: icon,
             valign: Gtk.Align.CENTER,
-            focus_on_click: false
+            focus_on_click: false,
         });
         this.get_header_bar().pack_start(this._backButton);
 
@@ -174,7 +174,7 @@ var JoinDialog = GObject.registerClass({
             action.activate(GLib.Variant.new('(ssu)', [
                 account.get_object_path(),
                 room,
-                Utils.getTpEventTime()
+                Utils.getTpEventTime(),
             ]));
         });
     }

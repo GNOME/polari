@@ -168,7 +168,7 @@ function findChannels(str, server) {
         res.push({
             url: `irc://${server}/${match[2]}`,
             name: `#${match[2]}`,
-            pos: match.index + match[1].length
+            pos: match.index + match[1].length,
         });
     }
     return res;
@@ -249,7 +249,7 @@ function gpaste(text, title, callback) {
         title,
         data: text,
         expire: _gpasteExpire,
-        language: 'text'
+        language: 'text',
     };
 
     let session = new Soup.Session();
@@ -283,7 +283,7 @@ function imgurPaste(pixbuf, title, callback) {
 
     let params = {
         title,
-        image: GLib.base64_encode(buffer)
+        image: GLib.base64_encode(buffer),
     };
 
     let session = new Soup.Session();

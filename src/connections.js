@@ -12,7 +12,7 @@ const DEFAULT_SSL_PORT = 6697;
 const ErrorHint = {
     NONE: 0,
     SERVER: 1,
-    NICK: 2
+    NICK: 2,
 };
 
 const ConnectionRow = GObject.registerClass(
@@ -42,7 +42,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
             label: _('Already added'),
             hexpand: true,
             no_show_all: true,
-            halign: Gtk.Align.END
+            halign: Gtk.Align.END,
         });
         box.add(insensitiveDesc);
 
@@ -64,12 +64,12 @@ var ConnectionsList = GObject.registerClass({
         'favorites-only': GObject.ParamSpec.boolean(
             'favorites-only', 'favorites-only', 'favorites-only',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
-            false)
+            false),
     },
     Signals: {
         'account-created': { param_types: [Tp.Account.$gtype] },
-        'account-selected': {}
-    }
+        'account-selected': {},
+    },
 }, class ConnectionsList extends Gtk.ScrolledWindow {
     _init(params) {
         this._favoritesOnly = false;
@@ -93,16 +93,16 @@ var ConnectionsList = GObject.registerClass({
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             orientation: Gtk.Orientation.VERTICAL,
-            visible: true
+            visible: true,
         });
         placeholder.add(new Gtk.Image({
             icon_name: 'edit-find-symbolic',
             pixel_size: 115,
-            visible: true
+            visible: true,
         }));
         placeholder.add(new Gtk.Label({
             label: _('No results.'),
-            visible: true
+            visible: true,
         }));
 
         placeholder.get_style_context().add_class('dim-label');
@@ -190,7 +190,7 @@ var ConnectionsList = GObject.registerClass({
             let sensitive = !usedNetworks.includes(network.id);
             this._rows.set(network.id, new ConnectionRow({
                 id: network.id,
-                sensitive
+                sensitive,
             }));
             this._list.add(this._rows.get(network.id));
         });
@@ -202,7 +202,7 @@ var ConnectionsList = GObject.registerClass({
             account_manager: Tp.AccountManager.dup(),
             connection_manager: 'idle',
             protocol: 'irc',
-            display_name: name
+            display_name: name,
         });
         req.set_service(row.id);
         req.set_enabled(true);
@@ -251,7 +251,7 @@ var ConnectionDetails = GObject.registerClass({
         'serverEntry',
         'nickEntry',
         'realnameEntry',
-        'sslCheckbox'
+        'sslCheckbox',
     ],
     Properties: {
         'can-confirm': GObject.ParamSpec.boolean(
@@ -261,11 +261,11 @@ var ConnectionDetails = GObject.registerClass({
         'has-serivce': GObject.ParamSpec.boolean(
             'has-service', 'has-service', 'has-service',
             GObject.ParamFlags.READABLE,
-            false)
+            false),
     },
     Signals: {
-        'account-created': { param_types: [Tp.Account.$gtype] }
-    }
+        'account-created': { param_types: [Tp.Account.$gtype] },
+    },
 }, class ConnectionDetails extends Gtk.Grid {
     _init(params) {
         this._networksManager = NetworksManager.getDefault();
@@ -300,7 +300,7 @@ var ConnectionDetails = GObject.registerClass({
             model: realnameStore,
             text_column: 0,
             inline_completion: true,
-            popup_completion: false
+            popup_completion: false,
         });
         this._realnameEntry.set_completion(completion);
 
@@ -329,7 +329,7 @@ var ConnectionDetails = GObject.registerClass({
         let params = {
             name: nameText.length ? nameText : server,
             server,
-            account: this._nickEntry.text.trim()
+            account: this._nickEntry.text.trim(),
         };
 
         if (this._realnameEntry.text)
@@ -434,7 +434,7 @@ var ConnectionDetails = GObject.registerClass({
             account_manager: accountManager,
             connection_manager: 'idle',
             protocol: 'irc',
-            display_name: params.name
+            display_name: params.name,
         });
         req.set_enabled(true);
 
@@ -470,7 +470,7 @@ var ConnectionDetails = GObject.registerClass({
         let details = {
             account: GLib.Variant.new('s', params.account),
             username: GLib.Variant.new('s', params.account),
-            server: GLib.Variant.new('s', params.server)
+            server: GLib.Variant.new('s', params.server),
         };
 
         if (params.port)
@@ -492,14 +492,14 @@ var ConnectionProperties = GObject.registerClass({
     InternalChildren: [
         'details',
         'errorBox',
-        'errorLabel'
-    ]
+        'errorLabel',
+    ],
 }, class ConnectionProperties extends Gtk.Dialog {
     _init(account) {
         /* Translators: %s is a connection name */
         super._init({
             title: _('“%s” Properties').format(account.display_name),
-            use_header_bar: 1
+            use_header_bar: 1,
         });
 
         this._details.account = account;

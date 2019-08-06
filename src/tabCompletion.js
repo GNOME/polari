@@ -45,7 +45,7 @@ var TabCompletion = class {
                 label: row._text,
                 halign: Gtk.Align.START,
                 margin_start: 6,
-                margin_end: 6
+                margin_end: 6,
             }));
             this._list.add(row);
         }
@@ -101,7 +101,7 @@ var TabCompletion = class {
                     label: row._text,
                     halign: Gtk.Align.START,
                     margin_start: 6,
-                    margin_end: 6
+                    margin_end: 6,
                 }));
                 widgetMap.set(nick, row);
             }

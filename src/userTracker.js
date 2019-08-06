@@ -48,13 +48,13 @@ const UserTracker = GObject.registerClass({
     Signals: {
         'status-changed': {
             flags: GObject.SignalFlags.DETAILED,
-            param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]
+            param_types: [GObject.TYPE_STRING, GObject.TYPE_INT],
         },
         'contacts-changed': {
             flags: GObject.SignalFlags.DETAILED,
-            param_types: [GObject.TYPE_STRING]
-        }
-    }
+            param_types: [GObject.TYPE_STRING],
+        },
+    },
 }, class UserTracker extends GObject.Object {
     _init(account) {
         super._init();
@@ -98,25 +98,25 @@ const UserTracker = GObject.registerClass({
 
         let roomSignals = [{
             name: 'notify::channel',
-            handler: this._onChannelChanged.bind(this)
+            handler: this._onChannelChanged.bind(this),
         }, {
             name: 'member-renamed',
-            handler: this._onMemberRenamed.bind(this)
+            handler: this._onMemberRenamed.bind(this),
         }, {
             name: 'member-disconnected',
-            handler: this._onMemberLeft.bind(this)
+            handler: this._onMemberLeft.bind(this),
         }, {
             name: 'member-kicked',
-            handler: this._onMemberLeft.bind(this)
+            handler: this._onMemberLeft.bind(this),
         }, {
             name: 'member-banned',
-            handler: this._onMemberLeft.bind(this)
+            handler: this._onMemberLeft.bind(this),
         }, {
             name: 'member-joined',
-            handler: this._onMemberJoined.bind(this)
+            handler: this._onMemberJoined.bind(this),
         }, {
             name: 'member-left',
-            handler: this._onMemberLeft.bind(this)
+            handler: this._onMemberLeft.bind(this),
         }];
 
         let signalIds = this._getRoomSignals(room);
@@ -163,7 +163,7 @@ const UserTracker = GObject.registerClass({
         this._roomData.set(room, {
             contactMapping: new Map(),
             handlerMapping: new Map(),
-            roomSignals: []
+            roomSignals: [],
         });
     }
 
@@ -295,7 +295,7 @@ const UserTracker = GObject.registerClass({
 
         this._getRoomHandlers(room).set(++this._handlerCounter, {
             nickName: baseNick,
-            handler: callback
+            handler: callback,
         });
 
         return this._handlerCounter;
@@ -315,7 +315,7 @@ const UserTracker = GObject.registerClass({
         let param = GLib.Variant.new('(ssu)', [
             this._account.get_object_path(),
             room.channel_name,
-            Utils.getTpEventTime()
+            Utils.getTpEventTime(),
         ]);
         notification.set_default_action_and_target('app.join-room', param);
 
@@ -352,7 +352,7 @@ const UserTracker = GObject.registerClass({
             let action = new Gio.SimpleAction({
                 name,
                 enabled,
-                state
+                state,
             });
 
             action.connect('notify::enabled', () => {

@@ -13,8 +13,8 @@ var RoomStack = GObject.registerClass({
         'entry-area-height': GObject.ParamSpec.uint(
             'entry-area-height', 'entry-area-height', 'entry-area-height',
             GObject.ParamFlags.READABLE,
-            0, GLib.MAXUINT32, 0)
-    }
+            0, GLib.MAXUINT32, 0),
+    },
 }, class RoomStack extends Gtk.Stack {
     _init(params) {
         super._init(params);
@@ -105,7 +105,7 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
 
         this.add_button(_('_Save Password'), Gtk.ResponseType.ACCEPT).set({
             action_name: 'app.save-identify-password',
-            action_target: new GLib.Variant('o', this._room.account.object_path)
+            action_target: new GLib.Variant('o', this._room.account.object_path),
         });
 
         this._identifySentId = this._room.connect('identify-sent', () => {
@@ -140,7 +140,7 @@ class ChannelErrorBar extends MessageInfoBar {
 
         this.add_button(_('_Retry'), Gtk.ResponseType.ACCEPT).set({
             action_name: 'app.reconnect-room',
-            action_target: new GLib.Variant('s', this._room.id)
+            action_target: new GLib.Variant('s', this._room.id),
         });
 
 
@@ -194,13 +194,13 @@ class ChatPlaceholder extends Gtk.Overlay {
         let image = new Gtk.Image({
             icon_name: 'org.gnome.Polari-symbolic',
             pixel_size: 96, halign: Gtk.Align.END,
-            margin_end: 14
+            margin_end: 14,
         });
 
         let title = new Gtk.Label({
             use_markup: true,
             halign: Gtk.Align.START,
-            margin_start: 14
+            margin_start: 14,
         });
         title.label = `<span letter_spacing="4500">${_('Polari')}<${'/'}span>`;
         title.get_style_context().add_class('polari-background-title');
@@ -208,7 +208,7 @@ class ChatPlaceholder extends Gtk.Overlay {
         let description = new Gtk.Label({
             label: _('Join a room using the + button.'),
             halign: Gtk.Align.CENTER, wrap: true,
-            margin_top: 24, use_markup: true
+            margin_top: 24, use_markup: true,
         });
         description.get_style_context().add_class('polari-background-description');
 
@@ -222,7 +222,7 @@ class ChatPlaceholder extends Gtk.Overlay {
             column_spacing: 18,
             hexpand: true,
             vexpand: true,
-            valign: Gtk.Align.CENTER
+            valign: Gtk.Align.CENTER,
         });
         grid.get_style_context().add_class('polari-background');
         grid.attach(image, 0, 0, 1, 1);
@@ -252,7 +252,7 @@ class RoomView extends Gtk.Overlay {
 
         this._entryArea = new EntryArea({
             room,
-            sensitive: false
+            sensitive: false,
         });
         box.add(this._entryArea);
 

@@ -22,13 +22,13 @@ const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i
 var Application = GObject.registerClass({
     Signals: {
         'prepare-shutdown': {},
-        'room-focus-changed': {}
-    }
+        'room-focus-changed': {},
+    },
 }, class Application extends Gtk.Application {
     _init() {
         super._init({
             application_id: 'org.gnome.Polari',
-            flags: Gio.ApplicationFlags.HANDLES_OPEN
+            flags: Gio.ApplicationFlags.HANDLES_OPEN,
         });
 
         GLib.set_prgname('polari');
@@ -190,99 +190,99 @@ var Application = GObject.registerClass({
         let actionEntries = [{
             name: 'show-join-dialog',
             activate: this._onShowJoinDialog.bind(this),
-            accels: ['<Primary>n']
+            accels: ['<Primary>n'],
         }, {
             name: 'join-room',
             activate: this._onJoinRoom.bind(this),
-            parameter_type: GLib.VariantType.new('(ssu)')
+            parameter_type: GLib.VariantType.new('(ssu)'),
         }, {
             name: 'message-user',
             activate: this._onMessageUser.bind(this),
-            parameter_type: GLib.VariantType.new('(sssu)')
+            parameter_type: GLib.VariantType.new('(sssu)'),
         }, {
             name: 'leave-room',
-            parameter_type: GLib.VariantType.new('(ss)')
+            parameter_type: GLib.VariantType.new('(ss)'),
         }, {
             name: 'leave-current-room',
             activate: this._onLeaveCurrentRoom.bind(this),
             create_hook: a => (a.enabled = false),
-            accels: ['<Primary>w']
+            accels: ['<Primary>w'],
         }, {
             name: 'reconnect-room',
-            parameter_type: GLib.VariantType.new('s')
+            parameter_type: GLib.VariantType.new('s'),
         }, {
             name: 'authenticate-account',
-            parameter_type: GLib.VariantType.new('(os)')
+            parameter_type: GLib.VariantType.new('(os)'),
         }, {
             name: 'connect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'disconnect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'reconnect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'user-list',
             activate: this._onToggleAction.bind(this),
             create_hook: this._userListCreateHook.bind(this),
             state: GLib.Variant.new('b', false),
-            accels: ['F9', '<Primary>u']
+            accels: ['F9', '<Primary>u'],
         }, {
             name: 'remove-connection',
             activate: this._onRemoveConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'edit-connection',
             activate: this._onEditConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'save-identify-password',
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'discard-identify-password',
-            parameter_type: GLib.VariantType.new('o')
+            parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'show-emoji-picker',
-            accels: ['<Primary>e']
+            accels: ['<Primary>e'],
         }, {
             name: 'start-client',
-            activate: this._onStartClient.bind(this)
+            activate: this._onStartClient.bind(this),
         }, {
             name: 'help',
             activate: this._onShowHelp.bind(this),
-            accels: ['F1']
+            accels: ['F1'],
         }, {
             name: 'about',
-            activate: this._onShowAbout.bind(this)
+            activate: this._onShowAbout.bind(this),
         }, {
             name: 'quit',
             activate: this._onQuit.bind(this),
-            accels: ['<Primary>q']
+            accels: ['<Primary>q'],
         }, {
             name: 'next-room',
-            accels: ['<Primary>Page_Down', '<Alt>Down']
+            accels: ['<Primary>Page_Down', '<Alt>Down'],
         }, {
             name: 'previous-room',
-            accels: ['<Primary>Page_Up', '<Alt>Up']
+            accels: ['<Primary>Page_Up', '<Alt>Up'],
         }, {
             name: 'first-room',
-            accels: ['<Primary>Home']
+            accels: ['<Primary>Home'],
         }, {
             name: 'last-room',
-            accels: ['<Primary>End']
+            accels: ['<Primary>End'],
         }, {
             name: 'nth-room',
-            parameter_type: GLib.VariantType.new('i')
+            parameter_type: GLib.VariantType.new('i'),
         }, {
             name: 'next-pending-room',
-            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down']
+            accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down'],
         }, {
             name: 'previous-pending-room',
-            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up']
+            accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up'],
         }];
         actionEntries.forEach(actionEntry => {
             let props = {};
@@ -436,7 +436,7 @@ var Application = GObject.registerClass({
             let params = a.dup_parameters_vardict().deep_unpack();
             map[a.get_object_path()] = {
                 server: params.server.deep_unpack(),
-                service: a.service
+                service: a.service,
             };
         });
 
@@ -454,14 +454,14 @@ var Application = GObject.registerClass({
 
             if (matches.length) {
                 joinAction.activate(new GLib.Variant('(ssu)', [
-                    matches[0], `#${room}`, time
+                    matches[0], `#${room}`, time,
                 ]));
             } else {
                 this._createAccount(matchedId, server, port, a => {
                     if (a) {
                         joinAction.activate(new GLib.Variant('(ssu)', [
                             a.get_object_path(),
-                            `#${room}`, time
+                            `#${room}`, time,
                         ]));
                     }
                 });
@@ -505,7 +505,7 @@ var Application = GObject.registerClass({
             account_manager: Tp.AccountManager.dup(),
             connection_manager: 'idle',
             protocol: 'irc',
-            display_name: name
+            display_name: name,
         });
         req.set_enabled(true);
 
@@ -643,7 +643,7 @@ var Application = GObject.registerClass({
         data = {
             retry: 0,
             alternateServers: accountServers.filter(s => s.address != server ||
-                                                         s.port != port)
+                                                         s.port != port),
         };
         this._retryData.set(account.object_path, data);
         return data;
@@ -697,7 +697,7 @@ var Application = GObject.registerClass({
         let params = {
             server: new GLib.Variant('s', server.address),
             port: new GLib.Variant('u', server.port),
-            'use-ssl': new GLib.Variant('b', server.ssl)
+            'use-ssl': new GLib.Variant('b', server.ssl),
         };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
@@ -803,7 +803,7 @@ var Application = GObject.registerClass({
         let params = {
             name: 'Polari',
             account_manager: this._accountsMonitor.accountManager,
-            uniquify_name: this.isTestInstance
+            uniquify_name: this.isTestInstance,
         };
         this._telepathyClient = new TelepathyClient(params);
     }
@@ -835,13 +835,13 @@ var Application = GObject.registerClass({
                 'Justyn Temme <Justyntemme@gmail.com>',
                 'unkemptArc99 <abhishekbhardwaj540@gmail.com>',
                 'Oscar Shrimpton <oscar.shrimpton.personal@gmail.com>',
-                'Daronion <stefanosdimos.98@gmail.com>'
+                'Daronion <stefanosdimos.98@gmail.com>',
             ],
             artists: [
                 'Sam Hewitt <hewittsamuel@gmail.com>',
                 'Jakub Steiner <jimmac@gmail.com>',
                 'Lapo Calamandrei <calamandrei@gmail.com>',
-                'Tobias Bernard <tbernard@gnome.org>'
+                'Tobias Bernard <tbernard@gnome.org>',
             ],
             translator_credits: _('translator-credits'),
             comments: _('An Internet Relay Chat Client for GNOME'),
@@ -853,7 +853,7 @@ var Application = GObject.registerClass({
             website: 'https://wiki.gnome.org/Apps/Polari',
 
             transient_for: this.active_window,
-            modal: true
+            modal: true,
         };
 
         this._aboutDialog = new Gtk.AboutDialog(aboutParams);

@@ -2,7 +2,7 @@
 
 const {
     Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari,
-    TelepathyGLib: Tp, TelepathyLogger: Tpl
+    TelepathyGLib: Tp, TelepathyLogger: Tpl,
 } = imports.gi;
 
 const { DropTargetIface } = imports.pasteManager;
@@ -143,12 +143,12 @@ const ButtonTag = GObject.registerClass({
         'hover': GObject.ParamSpec.boolean(
             'hover', 'hover', 'hover',
             GObject.ParamFlags.READWRITE,
-            false)
+            false),
     },
     Signals: {
         'clicked': {},
-        'popup-menu': {}
-    }
+        'popup-menu': {},
+    },
 }, class ButtonTag extends Gtk.TextTag {
     _init(params) {
         this._hover = false;
@@ -187,7 +187,7 @@ const ButtonTag = GObject.registerClass({
         this._gesture = new Gtk.GestureMultiPress({
             widget,
             button: 0,
-            exclusive: true
+            exclusive: true,
         });
 
         this._gesture.connect('pressed', (gesture, nPress) => {
@@ -218,8 +218,8 @@ const HoverFilterTag = GObject.registerClass({
         'hover-opacity': GObject.ParamSpec.double(
             'hover-opacity', 'hover-opacity', 'hover-opacity',
             GObject.ParamFlags.READWRITE,
-            0.0, 1.0, 1.0)
-    }
+            0.0, 1.0, 1.0),
+    },
 }, class HoverFilterTag extends ButtonTag {
     _init(params) {
         this._filteredTag = null;
@@ -280,8 +280,8 @@ var ChatView = GObject.registerClass({
         'max-nick-chars': GObject.ParamSpec.uint(
             'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
             GObject.ParamFlags.READABLE,
-            0, GLib.MAXUINT32, 0)
-    }
+            0, GLib.MAXUINT32, 0),
+    },
 }, class ChatView extends Gtk.ScrolledWindow {
     _init(room) {
         super._init({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
@@ -291,7 +291,7 @@ var ChatView = GObject.registerClass({
         this._view = new TextView({
             editable: false, cursor_visible: false,
             wrap_mode: Gtk.WrapMode.WORD_CHAR,
-            right_margin: MARGIN
+            right_margin: MARGIN,
         });
         this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
                               Gdk.EventMask.ENTER_NOTIFY_MASK);
@@ -351,7 +351,7 @@ var ChatView = GObject.registerClass({
         let isRoom = room.type == Tp.HandleType.ROOM;
         let target = new Tpl.Entity({
             type: isRoom ? Tpl.EntityType.ROOM : Tpl.EntityType.CONTACT,
-            identifier: room.channel_name
+            identifier: room.channel_name,
         });
         let logManager = Tpl.LogManager.dup_singleton();
         this._logWalker = logManager.walk_filtered_events(
@@ -378,25 +378,25 @@ var ChatView = GObject.registerClass({
 
         let roomSignals = [{
             name: 'notify::channel',
-            handler: this._onChannelChanged.bind(this)
+            handler: this._onChannelChanged.bind(this),
         }, {
             name: 'member-renamed',
-            handler: this._onMemberRenamed.bind(this)
+            handler: this._onMemberRenamed.bind(this),
         }, {
             name: 'member-disconnected',
-            handler: this._onMemberDisconnected.bind(this)
+            handler: this._onMemberDisconnected.bind(this),
         }, {
             name: 'member-kicked',
-            handler: this._onMemberKicked.bind(this)
+            handler: this._onMemberKicked.bind(this),
         }, {
             name: 'member-banned',
-            handler: this._onMemberBanned.bind(this)
+            handler: this._onMemberBanned.bind(this),
         }, {
             name: 'member-joined',
-            handler: this._onMemberJoined.bind(this)
+            handler: this._onMemberJoined.bind(this),
         }, {
             name: 'member-left',
-            handler: this._onMemberLeft.bind(this)
+            handler: this._onMemberLeft.bind(this),
         }];
         this._roomSignals = [];
         roomSignals.forEach(signal => {
@@ -414,40 +414,40 @@ var ChatView = GObject.registerClass({
         let tags = [{
             name: 'nick',
             left_margin: MARGIN,
-            weight: Pango.Weight.BOLD
+            weight: Pango.Weight.BOLD,
         }, {
             name: 'gap',
-            pixels_above_lines: 10
+            pixels_above_lines: 10,
         }, {
             name: 'message',
-            indent: 0
+            indent: 0,
         }, {
             name: 'highlight',
-            weight: Pango.Weight.BOLD
+            weight: Pango.Weight.BOLD,
         }, {
             name: 'status',
             left_margin: MARGIN,
             indent: 0,
-            justification: Gtk.Justification.RIGHT
+            justification: Gtk.Justification.RIGHT,
         }, {
             name: 'timestamp',
             left_margin: MARGIN,
             indent: 0,
-            justification: Gtk.Justification.RIGHT
+            justification: Gtk.Justification.RIGHT,
         }, {
             name: 'action',
             left_margin: MARGIN,
-            style: Pango.Style.ITALIC
+            style: Pango.Style.ITALIC,
         }, {
             name: 'url',
-            underline: Pango.Underline.SINGLE
+            underline: Pango.Underline.SINGLE,
         }, {
             name: 'indicator-line',
-            pixels_above_lines: 24
+            pixels_above_lines: 24,
         }, {
             name: 'loading',
             left_margin: MARGIN,
-            justification: Gtk.Justification.CENTER
+            justification: Gtk.Justification.CENTER,
         }];
         tags.forEach(tagProps => tagTable.add(new Gtk.TextTag(tagProps)));
     }
@@ -477,7 +477,7 @@ var ChatView = GObject.registerClass({
             red: desaturatedNickColor,
             green: desaturatedNickColor,
             blue: desaturatedNickColor,
-            alpha: 1.0
+            alpha: 1.0,
         });
         if (this._activeNickColor.equal(this._inactiveNickColor))
             this._inactiveNickColor.alpha = 0.5;
@@ -492,13 +492,13 @@ var ChatView = GObject.registerClass({
         let tagTable = buffer.get_tag_table();
         let tags = [{
             name: 'status',
-            foreground_rgba: dimColor
+            foreground_rgba: dimColor,
         }, {
             name: 'timestamp',
-            foreground_rgba: dimColor
+            foreground_rgba: dimColor,
         }, {
             name: 'url',
-            foreground_rgba: linkColor
+            foreground_rgba: linkColor,
         }];
         tags.forEach(tagProps => {
             let tag = tagTable.lookup(tagProps.name);
@@ -569,14 +569,14 @@ var ChatView = GObject.registerClass({
                 timestamp: source.get_sent_timestamp() ||
                            source.get_received_timestamp(),
                 messageType: source.get_message_type(),
-                pendingId: valid ? id : undefined
+                pendingId: valid ? id : undefined,
             };
         } else if (source instanceof Tpl.Event) {
             return {
                 nick: source.sender.alias,
                 text: source.message,
                 timestamp: source.timestamp,
-                messageType: source.get_message_type()
+                messageType: source.get_message_type(),
             };
         }
 
@@ -832,7 +832,7 @@ var ChatView = GObject.registerClass({
     _showLoadingIndicator() {
         let indicator = new Gtk.Image({
             icon_name: 'content-loading-symbolic',
-            visible: true
+            visible: true,
         });
         indicator.get_style_context().add_class('dim-label');
 
@@ -943,13 +943,13 @@ var ChatView = GObject.registerClass({
 
         let channelSignals = [{
             name: 'message-received',
-            handler: this._onMessageReceived.bind(this)
+            handler: this._onMessageReceived.bind(this),
         }, {
             name: 'message-sent',
-            handler: this._onMessageSent.bind(this)
+            handler: this._onMessageSent.bind(this),
         }, {
             name: 'pending-message-removed',
-            handler: this._pendingMessageRemoved.bind(this)
+            handler: this._pendingMessageRemoved.bind(this),
         }];
         channelSignals.forEach(signal => {
             this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
@@ -1286,7 +1286,7 @@ var ChatView = GObject.registerClass({
 
                 let hoverTag = new HoverFilterTag({
                     filtered_tag: nickTag,
-                    hover_opacity: 0.8
+                    hover_opacity: 0.8,
                 });
                 buffer.get_tag_table().add(hoverTag);
 
@@ -1398,7 +1398,7 @@ var ChatView = GObject.registerClass({
             tag._popover = new UserPopover({
                 relative_to: this._view,
                 userTracker: this._userTracker,
-                room: this._room
+                room: this._room,
             });
         }
 

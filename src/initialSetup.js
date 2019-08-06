@@ -7,7 +7,7 @@ const Utils = imports.utils;
 const SetupPage = {
     CONNECTION: 0,
     ROOM: 1,
-    OFFLINE: 2
+    OFFLINE: 2,
 };
 
 var InitialSetupWindow = GObject.registerClass({
@@ -17,8 +17,8 @@ var InitialSetupWindow = GObject.registerClass({
         'connectionsList',
         'nextButton',
         'prevButton',
-        'serverRoomList'
-    ]
+        'serverRoomList',
+    ],
 }, class InitialSetupWindow extends Gtk.Window {
     _init(params) {
 
