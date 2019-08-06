@@ -197,7 +197,7 @@ function updateTerms(terms, str) {
         changed = terms[i] != newTerms[i];
 
     if (changed)
-        terms.splice.apply(terms, [0, terms.length, ...newTerms]);
+        terms.splice(0, terms.length, ...newTerms);
 
     return changed;
 }

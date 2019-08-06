@@ -613,7 +613,7 @@ var ChatView = GObject.registerClass({
         }
         // Remove entries that are also in pending (if any), then
         // add the entries from pending
-        logs.splice.apply(logs, [pos, numLogs, ...pending]);
+        logs.splice(pos, numLogs, ...pending);
     }
 
     _insertPendingLogs() {

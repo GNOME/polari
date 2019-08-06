@@ -204,7 +204,7 @@ var MainWindow = GObject.registerClass({
 
         let size = this._settings.get_value('window-size').deep_unpack();
         if (size.length == 2)
-            this.set_default_size.apply(this, size);
+            this.set_default_size(...size);
 
         if (this._settings.get_boolean('window-maximized'))
             this.maximize();
