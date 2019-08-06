@@ -5,7 +5,7 @@ const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
 const { AccountsMonitor } = imports.accountsMonitor;
 const { RoomManager } = imports.roomManager;
 
-const MIN_SPINNER_TIME = 1000000;   //in microsecond
+const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
 function _onPopoverVisibleChanged(popover) {
     let context = popover.relative_to.get_style_context();

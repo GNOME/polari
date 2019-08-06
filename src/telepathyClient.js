@@ -591,7 +591,7 @@ class TelepathyClient extends Tp.BaseClient {
                 this._app.activate();
 
             this._roomManager.ensureRoomForChannel(channel, time);
-            //channel.join_async('', null);
+            // channel.join_async('', null);
         });
     }
 

@@ -146,7 +146,7 @@ const UserTracker = GObject.registerClass({
         else
             members = [room.channel.connection.self_contact, room.channel.target_contact];
 
-        /*keep track of initial members in the room, both locally and
+        /* keep track of initial members in the room, both locally and
         globally*/
         members.forEach(m => this._trackMember(m, room));
     }
@@ -307,7 +307,7 @@ const UserTracker = GObject.registerClass({
         this._getRoomHandlers(room).delete(handlerID);
     }
 
-    _notifyNickAvailable (member, room) {
+    _notifyNickAvailable(member, room) {
         let notification = new Gio.Notification();
         notification.set_title(_('User is online'));
         notification.set_body(_('User %s is now online.').format(member.alias));

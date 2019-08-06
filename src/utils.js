@@ -94,10 +94,10 @@ function isFlatpakSandbox() {
 }
 
 function getTpEventTime() {
-    let time = Gtk.get_current_event_time ();
+    let time = Gtk.get_current_event_time();
     if (time == 0)
         return GLib.MAXUINT32;
-    return Tp.user_action_time_from_x11 (time);
+    return Tp.user_action_time_from_x11(time);
 }
 
 function storeAccountPassword(account, password, callback) {
@@ -178,9 +178,9 @@ function openURL(url, timestamp) {
     let app = Gio.Application.get_default();
     try {
         if (app.active_window)
-            Gtk.show_uri_on_window (app.active_window, url, timestamp);
+            Gtk.show_uri_on_window(app.active_window, url, timestamp);
         else
-            Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
+            Gtk.show_uri(Gdk.Screen.get_default(), url, timestamp);
     } catch (e) {
         let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
         app.notificationQueue.addNotification(n);

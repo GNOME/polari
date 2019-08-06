@@ -43,7 +43,7 @@ var ChatEntry = GObject.registerClass({
         });
 
         let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
-        buffer.set_spell_checker (ChatEntry._checker);
+        buffer.set_spell_checker(ChatEntry._checker);
 
         let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
         spellEntry.set_inline_spell_checking(true);
@@ -224,7 +224,7 @@ var EntryArea = GObject.registerClass({
                 return; // avoid indefinite recursion
 
             state &= ~Gtk.StateFlags.BACKDROP;
-            w.set_state_flags (state, true);
+            w.set_state_flags(state, true);
         });
 
         this._chatEntry.connect('text-pasted', (entry, text, nLines) => {

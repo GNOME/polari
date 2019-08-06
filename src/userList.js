@@ -237,7 +237,7 @@ var UserDetails = GObject.registerClass({
                 this._cancellable,
                 this._onContactInfoReady.bind(this));
         } else {
-            //TODO: else use this._nickname to query tracker
+            // TODO: else use this._nickname to query tracker
             this._revealDetails();
         }
     }

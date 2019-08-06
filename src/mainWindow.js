@@ -243,7 +243,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onDestroy() {
-        this._settings.set_boolean ('window-maximized', this._isMaximized);
+        this._settings.set_boolean('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
             new GLib.Variant('ai', this._currentSize));
 
