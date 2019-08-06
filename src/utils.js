@@ -83,9 +83,9 @@ const _urlRegexp = new RegExp(
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)', 'g');
 
-let _gpasteExpire = undefined;
+let _gpasteExpire;
 
-let _inFlatpakSandbox = undefined;
+let _inFlatpakSandbox;
 
 function isFlatpakSandbox() {
     if (_inFlatpakSandbox === undefined)
