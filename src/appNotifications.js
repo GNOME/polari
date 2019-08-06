@@ -6,12 +6,10 @@ const { GLib, GObject, Gtk, Pango } = imports.gi;
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
-const AppNotification = GObject.registerClass(
-class AppNotification extends Gtk.Revealer {
+const AppNotification = GObject.registerClass({
+    GTypeFlags: GObject.TypeFlags.ABSTRACT,
+}, class AppNotification extends Gtk.Revealer {
     _init() {
-        if (this.constructor.name == 'AppNotification')
-            throw new Error('Cannot instantiate abstract class AppNotification');
-
         super._init({
             reveal_child: true,
             transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN
@@ -97,12 +95,10 @@ var UndoNotification = GObject.registerClass({
     }
 });
 
-const CommandOutputNotification = GObject.registerClass(
-class CommandOutputNotification extends AppNotification {
+const CommandOutputNotification = GObject.registerClass({
+    GTypeFlags: GObject.TypeFlags.ABSTRACT,
+}, class CommandOutputNotification extends AppNotification {
     _init() {
-        if (this.constructor.name == 'CommandOutputNotification')
-            throw new Error('Cannot instantiate abstract class CommandOutputNotification');
-
         super._init();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
