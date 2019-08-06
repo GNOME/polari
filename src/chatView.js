@@ -1195,6 +1195,7 @@ var ChatView = GObject.registerClass({
                 format = _('%B %d %Y, %H\u2236%M');
             }
         } else {
+            // eslint-disable-next-line no-lonely-if
             if (daysAgo < 1) { // today
                 /* Translators: Time in 12h format */
                 format = _('%l\u2236%M %p');
