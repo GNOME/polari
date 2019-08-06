@@ -1269,7 +1269,7 @@ var ChatView = GObject.registerClass({
                 tags.push(this._lookupTag('gap'));
         } else {
             if (state.lastNick != message.nick) {
-                let tags = [this._lookupTag('nick')];
+                let nickTags = [this._lookupTag('nick')];
                 let nickTagName = this._getNickTagName(message.nick);
                 let nickTag = this._lookupTag(nickTagName);
                 let buffer = this._view.get_buffer();
@@ -1283,7 +1283,7 @@ var ChatView = GObject.registerClass({
 
                     buffer.get_tag_table().add(nickTag);
                 }
-                tags.push(nickTag);
+                nickTags.push(nickTag);
 
                 let hoverTag = new HoverFilterTag({
                     filtered_tag: nickTag,
@@ -1291,11 +1291,11 @@ var ChatView = GObject.registerClass({
                 });
                 buffer.get_tag_table().add(hoverTag);
 
-                tags.push(hoverTag);
+                nickTags.push(hoverTag);
 
                 if (needsGap)
-                    tags.push(this._lookupTag('gap'));
-                this._insertWithTags(iter, message.nick, tags);
+                    nickTags.push(this._lookupTag('gap'));
+                this._insertWithTags(iter, message.nick, nickTags);
                 buffer.insert(iter, '\t', -1);
             }
             state.lastNick = message.nick;

@@ -73,14 +73,14 @@ var ChatEntry = GObject.registerClass({
         }
 
         let clipboard = Gtk.Clipboard.get_default(this.get_display());
-        clipboard.request_uris((clipboard, uris) => {
+        clipboard.request_uris((cb, uris) => {
             if (uris && uris.length)
                 this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
             else
                 clipboard.request_text(this._onTextReceived.bind(this));
         });
 
-        clipboard.request_image((clipboard, pixbuf) => {
+        clipboard.request_image((cb, pixbuf) => {
             if (pixbuf == null)
                 return;
             this.emit('image-pasted', pixbuf);

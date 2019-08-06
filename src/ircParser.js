@@ -64,7 +64,7 @@ var IrcParser = class {
             return true;
         }
 
-        let stripCommand = text => text.substr(text.indexOf(' ')).trimLeft();
+        let stripCommand = txt => txt.substr(txt.indexOf(' ')).trimLeft();
 
         let retval = true;
 

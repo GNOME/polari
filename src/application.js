@@ -765,7 +765,7 @@ var Application = GObject.registerClass({
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
-        account.set_enabled_async(false, (o, res) => {
+        account.set_enabled_async(false, (a, res) => {
             account.set_enabled_finish(res);
             account.visible = false;
 
@@ -774,13 +774,13 @@ var Application = GObject.registerClass({
             this.notificationQueue.addNotification(n);
 
             n.connect('closed', () => {
-                account.remove_async((a, res) => {
-                    a.remove_finish(res); // TODO: Check for errors
+                account.remove_async((o, r) => {
+                    a.remove_finish(r); // TODO: Check for errors
                 });
             });
             n.connect('undo', () => {
-                account.set_enabled_async(true, (o, res) => {
-                    account.set_enabled_finish(res);
+                account.set_enabled_async(true, (o, r) => {
+                    account.set_enabled_finish(r);
                     account.visible = true;
                 });
             });

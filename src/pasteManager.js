@@ -37,7 +37,7 @@ var PasteManager = class {
         file.query_info_async(
             Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
             Gio.FileQueryInfoFlags.NONE,
-            GLib.PRIORITY_DEFAULT, null, (file, res) => {
+            GLib.PRIORITY_DEFAULT, null, (f, res) => {
                 try {
                     let fileInfo = file.query_info_finish(res);
                     this._handleFilePaste(file, fileInfo, title, callback);
@@ -59,8 +59,8 @@ var PasteManager = class {
         } else if (targetType == DndTargetType.IMAGE) {
             file.read_async(GLib.PRIORITY_DEFAULT, null, (f, res) => {
                 let stream = f.read_finish(res);
-                GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, res) => {
-                    let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(res);
+                GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, r) => {
+                    let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(r);
                     Utils.imgurPaste(pixbuf, title, callback);
                 });
             });

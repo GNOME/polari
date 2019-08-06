@@ -70,7 +70,7 @@ var AccountsMonitor = class {
 
         am.dup_valid_accounts().forEach(this._addAccount.bind(this));
 
-        am.connect('account-validity-changed', (am, account, valid) => {
+        am.connect('account-validity-changed', (o, account, valid) => {
             if (valid) {
                 this._addAccount(account);
                 this._updateAccountReachable(account);
@@ -78,7 +78,7 @@ var AccountsMonitor = class {
                 this._removeAccount(account);
             }
         });
-        am.connect('account-removed', (am, account) => {
+        am.connect('account-removed', (o, account) => {
             this._removeAccount(account);
         });
         am.connect('account-enabled', this._accountEnabledChanged.bind(this));
@@ -99,7 +99,7 @@ var AccountsMonitor = class {
         let presence = Tp.ConnectionPresenceType.OFFLINE;
         this.accounts.filter(a => a.requested_presence_type != presence).forEach(a => {
             this._app.hold();
-            a.request_presence_async(presence, 'offline', '', (a, res) => {
+            a.request_presence_async(presence, 'offline', '', (o, res) => {
                 try {
                     a.request_presence_finish(res);
                 } catch (e) { }

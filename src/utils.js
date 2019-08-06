@@ -206,7 +206,7 @@ function _getGpasteExpire(callback) {
     let session = new Soup.Session();
     let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
     let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
-    session.queue_message(message, (s, message) => {
+    session.queue_message(message, () => {
         if (message.status_code != Soup.KnownStatusCode.OK) {
             callback(false);
             return;
@@ -255,7 +255,7 @@ function gpaste(text, title, callback) {
     let session = new Soup.Session();
     let createUrl = `${GPASTE_BASEURL}api/json/create`;
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
-    session.queue_message(message, (s, message) => {
+    session.queue_message(message, () => {
         if (message.status_code != Soup.KnownStatusCode.OK) {
             callback(null);
             return;
@@ -292,7 +292,7 @@ function imgurPaste(pixbuf, title, callback) {
 
     let requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
-    session.queue_message(message, (s, message) => {
+    session.queue_message(message, () => {
         if (message.status_code != Soup.KnownStatusCode.OK) {
             callback(null);
             return;
