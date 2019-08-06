@@ -137,7 +137,10 @@ class TelepathyClient extends Tp.BaseClient {
         this._accountsMonitor.prepare(this._onPrepared.bind(this));
 
         this._shellHandlesPrivateChats = false;
+        this._monitorShellClient();
+    }
 
+    _monitorShellClient() {
         // Track whether gnome-shell's built-in chat client is
         // running; unfortunately it uses :uniquify-name, so
         // we cannot simply use Gio.watch_bus_name()
