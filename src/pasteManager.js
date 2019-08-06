@@ -38,18 +38,16 @@ var PasteManager = class {
             Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
             Gio.FileQueryInfoFlags.NONE,
             GLib.PRIORITY_DEFAULT, null, (file, res) => {
-                this._onFileQueryFinish(file, res, title, callback);
+                try {
+                    let fileInfo = file.query_info_finish(res);
+                    this._handleFilePaste(file, fileInfo, title, callback);
+                } catch (e) {
+                    callback(null);
+                }
             });
     }
 
-    _onFileQueryFinish(file, res, title, callback) {
-        let fileInfo = null;
-        try {
-            fileInfo = file.query_info_finish(res);
-        } catch (e) {
-            callback(null);
-        }
-
+    _handleFilePaste(file, fileInfo, title, callback) {
         let contentType = fileInfo.get_content_type();
         let targetType = _getTargetForContentType(contentType);
 
