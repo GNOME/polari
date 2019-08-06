@@ -327,7 +327,10 @@ var Application = GObject.registerClass({
             !Utils.isFlatpakSandbox() &&
             GLib.getenv('GTK_USE_PORTAL') != '1';
 
-        if (!networkMonitor.state_valid) {
+        if (networkMonitor.state_valid) {
+            if (!networkMonitor.network_metered)
+                this._serverRoomManager = ServerRoomManager.getDefault();
+        } else {
             let id = networkMonitor.connect('network-changed', () => {
                 networkMonitor.disconnect(id);
                 networkMonitor.state_valid = true;
@@ -335,9 +338,6 @@ var Application = GObject.registerClass({
                 if (!networkMonitor.network_metered)
                     this._serverRoomManager = ServerRoomManager.getDefault();
             });
-        } else {
-            if (!networkMonitor.network_metered)
-                this._serverRoomManager = ServerRoomManager.getDefault();
         }
 
         this._accountsMonitor.connect('account-status-changed',
