@@ -350,9 +350,9 @@ const UserTracker = GObject.registerClass({
 
             let state = new GLib.Variant('b', false);
             let action = new Gio.SimpleAction({
-                name: name,
-                enabled: enabled,
-                state: state
+                name,
+                enabled,
+                state
             });
 
             action.connect('notify::enabled', () => {

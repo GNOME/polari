@@ -532,7 +532,7 @@ class TelepathyClient extends Tp.BaseClient {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({
                 code: Tp.Error.NOT_IMPLEMENTED,
-                message: message
+                message
             }));
             return;
         }
@@ -541,7 +541,7 @@ class TelepathyClient extends Tp.BaseClient {
             let message = 'Only one authentication channel per connection allowed';
             context.fail(new Tp.Error({
                 code: Tp.Error.INVALID_ARGUMENT,
-                message: message
+                message
             }));
             return;
         }
@@ -634,10 +634,10 @@ class TelepathyClient extends Tp.BaseClient {
 
         let data = {
             botname: room.channel.target_contact.alias,
-            command: command,
+            command,
             username: username || room.channel.connection.self_contact.alias,
             usernameSupported: username != null,
-            password: password
+            password
         };
         this._pendingBotPasswords.set(accountPath, data);
 

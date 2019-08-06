@@ -172,9 +172,9 @@ var RoomManager = class {
         let room = this._rooms.get(id);
         if (!room) {
             room = new Polari.Room({
-                account: account,
+                account,
                 channel_name: channelName,
-                type: type
+                type
             });
             this._rooms.set(room.id, room);
             this.emit('room-added', room);

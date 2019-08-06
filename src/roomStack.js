@@ -251,7 +251,7 @@ class RoomView extends Gtk.Overlay {
         box.add(this._view);
 
         this._entryArea = new EntryArea({
-            room: room,
+            room,
             sensitive: false
         });
         box.add(this._entryArea);

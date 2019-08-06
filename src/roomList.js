@@ -691,7 +691,7 @@ class RoomList extends Gtk.ListBox {
         if (oldHeader)
             return;
 
-        let roomListHeader = new RoomListHeader({ account: account });
+        let roomListHeader = new RoomListHeader({ account });
         row.set_header(roomListHeader);
     }
 

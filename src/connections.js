@@ -190,7 +190,7 @@ var ConnectionsList = GObject.registerClass({
             let sensitive = !usedNetworks.includes(network.id);
             this._rows.set(network.id, new ConnectionRow({
                 id: network.id,
-                sensitive: sensitive
+                sensitive
             }));
             this._list.add(this._rows.get(network.id));
         });
@@ -328,7 +328,7 @@ var ConnectionDetails = GObject.registerClass({
 
         let params = {
             name: nameText.length ? nameText : server,
-            server: server,
+            server,
             account: this._nickEntry.text.trim()
         };
 

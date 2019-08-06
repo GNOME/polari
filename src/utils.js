@@ -246,7 +246,7 @@ function gpaste(text, title, callback) {
         title = `${title.substr(0, MAX_PASTE_TITLE_LENGTH - 1)}…`;
 
     let params = {
-        title: title,
+        title,
         data: text,
         expire: _gpasteExpire,
         language: 'text'
@@ -282,7 +282,7 @@ function imgurPaste(pixbuf, title, callback) {
     }
 
     let params = {
-        title: title,
+        title,
         image: GLib.base64_encode(buffer)
     };
 

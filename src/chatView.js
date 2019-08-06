@@ -565,7 +565,7 @@ var ChatView = GObject.registerClass({
             let [id, valid] = source.get_pending_message_id();
             return {
                 nick: source.sender.alias,
-                text: text,
+                text,
                 timestamp: source.get_sent_timestamp() ||
                            source.get_received_timestamp(),
                 messageType: source.get_message_type(),

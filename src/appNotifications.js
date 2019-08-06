@@ -41,7 +41,7 @@ class MessageNotification extends AppNotification {
             this._box.add(new Gtk.Image({ icon_name: iconName }));
 
         this._box.add(new Gtk.Label({
-            label: label,
+            label,
             hexpand: true,
             ellipsize: Pango.EllipsizeMode.END
         }));
@@ -57,7 +57,7 @@ class MessageNotification extends AppNotification {
 
 
     addButton(label, callback) {
-        let button = new Gtk.Button({ label: label, visible: true });
+        let button = new Gtk.Button({ label, visible: true });
         button.connect('clicked', () => {
             if (callback)
                 callback();

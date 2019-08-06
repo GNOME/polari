@@ -56,7 +56,7 @@ var ServerRoomManager = class {
         if (this._roomLists.has(account))
             return;
 
-        let roomList = new Tp.RoomList({ account: account });
+        let roomList = new Tp.RoomList({ account });
         roomList.init_async(GLib.PRIORITY_DEFAULT, null, (o, res) => {
             try {
                 roomList.init_finish(res);
