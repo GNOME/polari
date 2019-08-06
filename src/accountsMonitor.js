@@ -130,8 +130,8 @@ var AccountsMonitor = class {
         account._visibleNotifyId =
             account.connect('notify::visible', () => {
                 this._updateAccountReachable(account);
-                let signal = account.visible ?
-                    'account-shown' : 'account-hidden';
+                let signal = account.visible
+                    ? 'account-shown' : 'account-hidden';
                 this.emit(signal, account);
                 this.emit('accounts-changed');
             });

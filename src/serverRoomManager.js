@@ -339,8 +339,8 @@ var ServerRoomList = GObject.registerClass({
                     [checked, name, count, sensitive]);
                 store.move_before(iter, this._customRoomItem);
 
-                let maxTime = this._filterTerms.length > 0 ?
-                    MS_PER_FILTER_IDLE : MS_PER_IDLE;
+                let maxTime = this._filterTerms.length > 0
+                    ? MS_PER_FILTER_IDLE : MS_PER_IDLE;
                 // Limit time spent in idle to leave room for drawing etc.
                 if (GLib.get_monotonic_time() - startTime > 1000 * maxTime)
                     return GLib.SOURCE_CONTINUE;

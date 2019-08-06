@@ -189,8 +189,8 @@ var JoinDialog = GObject.registerClass({
             this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
-        let activeRoom = this.transient_for ?
-            this.transient_for.active_room : null;
+        let activeRoom = this.transient_for
+            ? this.transient_for.active_room : null;
         let activeIndex = 0;
         if (activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
@@ -206,8 +206,8 @@ var JoinDialog = GObject.registerClass({
         }
 
         this._joinButton.sensitive = sensitive;
-        this.set_default_response(sensitive ?
-            Gtk.ResponseType.OK : Gtk.ResponseType.NONE);
+        this.set_default_response(sensitive
+            ? Gtk.ResponseType.OK : Gtk.ResponseType.NONE);
     }
 
     get _page() {
