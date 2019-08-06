@@ -205,7 +205,7 @@ var Application = GObject.registerClass({
         }, {
             name: 'leave-current-room',
             activate: this._onLeaveCurrentRoom.bind(this),
-            create_hook: (a) => a.enabled = false,
+            create_hook: a => a.enabled = false,
             accels: ['<Primary>w']
         }, {
             name: 'reconnect-room',
@@ -496,7 +496,7 @@ var Application = GObject.registerClass({
                 'account': new GLib.Variant('s', GLib.get_user_name()),
                 'server': new GLib.Variant('s', server),
                 'port': new GLib.Variant('u', port ? port : 6667),
-                'use-ssl': new GLib.Variant('b', (port == 6697)),
+                'use-ssl': new GLib.Variant('b', port == 6697),
             };
             name = server;
         }

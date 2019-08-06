@@ -227,7 +227,7 @@ var MainWindow = GObject.registerClass({
     _onAccountsReachableChanged() {
         let accounts = this._accountsMonitor.visibleAccounts;
         this._offlineInfoBar.revealed =
-            (accounts.length > 0) && !accounts.some(a => a.reachable);
+            accounts.length > 0 && !accounts.some(a => a.reachable);
     }
 
     _onWindowStateEvent(widget, event) {

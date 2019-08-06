@@ -326,8 +326,8 @@ var RoomListHeader = GObject.registerClass({
         let status = this._getConnectionStatus();
         let reason = this._account.connection_status_reason;
         let authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
-        let isError = (status == Tp.ConnectionStatus.DISCONNECTED &&
-                       reason != Tp.ConnectionStatusReason.REQUESTED);
+        let isError = status == Tp.ConnectionStatus.DISCONNECTED &&
+                      reason != Tp.ConnectionStatusReason.REQUESTED;
         let isAuth = isError && this._account.connection_error == authError;
 
         let child = 'default';
@@ -350,7 +350,7 @@ var RoomListHeader = GObject.registerClass({
         }
 
         this._iconStack.visible_child_name = child;
-        this._spinner.active = (child == 'connecting');
+        this._spinner.active = child == 'connecting';
         this._popoverTitle.visible = !isAuth;
 
         if (this._spinner.active)
@@ -370,7 +370,7 @@ var RoomListHeader = GObject.registerClass({
             /* Translators: This is an account name followed by a
                server address, e.g. "GNOME (irc.gnome.org)" */
             let fullTitle = _('%s (%s)').format(accountName, server);
-            this._popoverTitle.label = (accountName == server) ? accountName : fullTitle;
+            this._popoverTitle.label = accountName == server ? accountName : fullTitle;
             this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
         } else {
             let styleContext = this._popoverStatus.get_style_context();

@@ -456,7 +456,7 @@ var UserPopover = GObject.registerClass({
             label = _('Offline');
         this._statusLabel.label = label;
 
-        this._nickLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
+        this._nickLabel.sensitive = status == Tp.ConnectionPresenceType.AVAILABLE;
     }
 
     _updateDetailsContact() {

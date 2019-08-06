@@ -77,7 +77,7 @@ var IrcParser = class {
             if (command)
                 command = command.toUpperCase();
 
-            retval = (command == null || knownCommands[command] != null);
+            retval = command == null || knownCommands[command] != null;
 
             if (!retval) {
                 output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));

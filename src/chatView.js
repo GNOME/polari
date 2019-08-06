@@ -1236,7 +1236,7 @@ var ChatView = GObject.registerClass({
         this._insertMessage(iter, message, this._state);
 
         if (message.pendingId == undefined /* outgoing */ ||
-            (this._app.isRoomFocused(this._room) && this._pending.size == 0))
+            this._app.isRoomFocused(this._room) && this._pending.size == 0)
             this._channel.ack_message_async(tpMessage, null);
         else if (this._needsIndicator)
             this._setIndicatorMark(this._view.buffer.get_end_iter());
@@ -1316,7 +1316,7 @@ var ChatView = GObject.registerClass({
                 Polari.util_match_identify_message(text);
 
             if (isIdentify)
-                text = text.replace(password, (p) => p.replace(/./g, '●'));
+                text = text.replace(password, p => p.replace(/./g, '●'));
         }
 
         let channels = Utils.findChannels(text, server);

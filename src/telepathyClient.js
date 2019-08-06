@@ -75,7 +75,7 @@ class SASLAuthHandler {
 
     _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
-        let statusString = (Object.keys(SASLStatus))[status];
+        let statusString = Object.keys(SASLStatus)[status];
         debug(`Auth status for server "${name}": ${statusString}`);
 
         switch (status) {
@@ -154,7 +154,7 @@ class TelepathyClient extends Tp.BaseClient {
             Gio.DBusSignalFlags.MATCH_ARG0_NAMESPACE,
             (_conn, _sender, _path, _iface, _signal, params) => {
                 let [name_, oldOwner_, newOwner] = params.deep_unpack();
-                this._shellHandlesPrivateChats = (newOwner != '');
+                this._shellHandlesPrivateChats = newOwner != '';
             });
 
         conn.call(
@@ -261,7 +261,7 @@ class TelepathyClient extends Tp.BaseClient {
         if (account.connection_status != Tp.ConnectionStatus.CONNECTED)
             return;
 
-        Utils.lookupIdentifyPassword(account, (password) => {
+        Utils.lookupIdentifyPassword(account, password => {
             if (password)
                 this._sendIdentify(account, password);
             else
@@ -354,7 +354,7 @@ class TelepathyClient extends Tp.BaseClient {
         let contactName = settings.get_string('identify-botname');
         let command = settings.get_string('identify-command');
         this._requestChannel(account, Tp.HandleType.CONTACT, contactName,
-            (channel) => {
+            channel => {
                 if (!channel)
                     return;
 
@@ -481,7 +481,7 @@ class TelepathyClient extends Tp.BaseClient {
         if (!data)
             return;
 
-        Utils.storeIdentifyPassword(account, data.password, (res) => {
+        Utils.storeIdentifyPassword(account, data.password, res => {
             if (res)
                 this._saveIdentifySettings(account, data);
 

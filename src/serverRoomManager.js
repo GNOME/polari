@@ -354,7 +354,7 @@ var ServerRoomList = GObject.registerClass({
 
     _checkSpinner() {
         let loading = this._pendingInfos.length ||
-                      (this._account && this._manager.isLoading(this._account));
+                      this._account && this._manager.isLoading(this._account);
         this._spinner.active = loading;
     }
 

@@ -154,7 +154,7 @@ const UserTracker = GObject.registerClass({
     _clearUsersFromRoom(room) {
         let map = this._getRoomContacts(room);
         for (let [, contacts] of map)
-            contacts.slice().forEach((m) => this._untrackMember(m, room));
+            contacts.slice().forEach(m => this._untrackMember(m, room));
     }
 
     _ensureRoomMappingForRoom(room) {

@@ -211,7 +211,7 @@ var TabCompletion = class {
 
         // Chain completions if the current completion directly follows a previous one,
         // except when one of them was for an IRC command
-        let previousCompletion = (this._endPos == this._startPos);
+        let previousCompletion = this._endPos == this._startPos;
         this._isChained = previousCompletion && !this._isCommand && !this._previousWasCommand;
 
         this._list.invalidate_filter();
