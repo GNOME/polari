@@ -170,27 +170,37 @@ var AccountsMonitor = class {
         if (!this._networkMonitor.state_valid)
             return;
 
-        let servers = account.getServers();
-        for (let s of servers) {
-            let addr = new Gio.NetworkAddress({
+        let servers = account.getServers().map(s => {
+            return new Gio.NetworkAddress({
                 hostname: s.address,
                 port: s.port
             });
+        });
 
-            account._setReachable(await this._canReach(addr));
-
-            if (account.reachable)
-                break;
+        try {
+            let reachable = await this._canReachAny(servers);
+            account._setReachable(reachable);
+        } catch (e) {
+            account._setReachable(false);
         }
     }
 
+    _canReachAny(servers) {
+        let reverse = promise => {
+            return new Promise((resolve, reject) => {
+                return Promise.resolve(promise).then(reject, resolve);
+            });
+        };
+        return reverse(Promise.all(servers.map(s => reverse(this._canReach(s)))));
+    }
+
     _canReach(addr) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             this._networkMonitor.can_reach_async(addr, null, (mon, res) => {
                 try {
                     resolve(this._networkMonitor.can_reach_finish(res));
                 } catch (e) {
-                    resolve(false);
+                    reject(e);
                 }
             });
         });
