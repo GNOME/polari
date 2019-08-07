@@ -607,7 +607,7 @@ var Application = GObject.registerClass({
                     return;
 
                 let contact = tracker.lookupContact(nick);
-                if (contact != null && contact.alias == nick)
+                if (contact && contact.alias == nick)
                     return;
 
                 this._untrackNominalNick(account);

@@ -55,7 +55,7 @@ var NetworksManager = class {
     }
 
     getAccountIsPredefined(account) {
-        return account && this._networksById.get(account.service) != null;
+        return account && this._networksById.has(account.service);
     }
 
     getNetworkName(id) {

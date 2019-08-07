@@ -177,7 +177,7 @@ class TelepathyClient extends Tp.BaseClient {
                 }
 
                 this._shellHandlesPrivateChats =
-                    names.find(n => n.startsWith(SHELL_CLIENT_PREFIX)) != null;
+                    names.some(n => n.startsWith(SHELL_CLIENT_PREFIX));
             });
     }
 
@@ -296,7 +296,7 @@ class TelepathyClient extends Tp.BaseClient {
 
     _connectRooms(account) {
         this._roomManager.rooms.forEach(room => {
-            if (account == null || room.account == account)
+            if (!account || room.account == account)
                 this._connectRoom(room);
         });
     }

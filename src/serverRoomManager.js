@@ -329,7 +329,7 @@ var ServerRoomList = GObject.registerClass({
                 }
 
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
-                let sensitive = room == null;
+                let sensitive = !room;
                 let checked = !sensitive;
                 let count = `${roomInfo.get_members_count(null)}`;
 

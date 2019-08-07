@@ -105,7 +105,7 @@ var RoomManager = class {
         this._settings.get_value('saved-channel-list').deep_unpack().forEach(c => {
             for (let prop in c)
                 c[prop] = c[prop].deep_unpack();
-            if (accountPath == null || c.account == accountPath)
+            if (!accountPath || c.account == accountPath)
                 this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0);
         });
         this.emit('rooms-loaded');
@@ -113,7 +113,7 @@ var RoomManager = class {
 
     _removeRooms(accountPath) {
         for (let room of this._rooms.values()) {
-            if (accountPath == null || room.account.object_path == accountPath)
+            if (!accountPath || room.account.object_path == accountPath)
                 this._removeRoom(room);
         }
     }

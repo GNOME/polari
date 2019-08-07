@@ -81,14 +81,14 @@ var ChatEntry = GObject.registerClass({
         });
 
         clipboard.request_image((cb, pixbuf) => {
-            if (pixbuf == null)
+            if (!pixbuf)
                 return;
             this.emit('image-pasted', pixbuf);
         });
     }
 
     _onTextReceived(clipboard, text) {
-        if (text == null)
+        if (!text)
             return;
         text = text.trim();
 
