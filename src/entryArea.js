@@ -141,7 +141,7 @@ var NickPopover = GObject.registerClass({
     }
 
     set nick(nick) {
-        if (this._nick == nick)
+        if (this._nick === nick)
             return;
 
         if (!this._nickEntry['is-focus'])
@@ -265,9 +265,10 @@ var EntryArea = GObject.registerClass({
         this._pasteBox.connect_after('key-press-event', (w, event) => {
             let [, keyval] = event.get_keyval();
             let [, mods] = event.get_state();
-            if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
-                keyval == Gdk.KEY_Delete ||
-                keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
+            if (keyval === Gdk.KEY_Escape ||
+                keyval === Gdk.KEY_BackSpace ||
+                keyval === Gdk.KEY_Delete ||
+                keyval === Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
                 this._cancelButton.clicked();
                 return Gdk.EVENT_STOP;
             }
@@ -325,11 +326,11 @@ var EntryArea = GObject.registerClass({
             return Gdk.EVENT_PROPAGATE;
 
         let [, keyval] = event.get_keyval();
-        if (Gdk.keyval_to_unicode(keyval) == 0)
+        if (Gdk.keyval_to_unicode(keyval) === 0)
             return Gdk.EVENT_PROPAGATE;
 
         let [, state] = event.get_state();
-        if (state != 0 && state != Gdk.ModifierType.SHIFT_MASK)
+        if (state !== 0 && state !== Gdk.ModifierType.SHIFT_MASK)
             return Gdk.EVENT_PROPAGATE;
 
         let activationKeys = [
@@ -408,7 +409,7 @@ var EntryArea = GObject.registerClass({
     _onPasteClicked() {
         let title;
         let nick = this._room.channel.connection.self_contact.alias;
-        if (this._room.type == Tp.HandleType.ROOM)
+        if (this._room.type === Tp.HandleType.ROOM)
             /* translators: %s is a nick, #%s a channel */
             title = _('%s in #%s').format(nick, this._room.display_name);
         else
@@ -424,7 +425,7 @@ var EntryArea = GObject.registerClass({
             });
         } catch (e) {
             let type = typeof this._pasteContent;
-            if (type == 'object')
+            if (type === 'object')
                 type = this._pasteContent.toString();
             debug(`Failed to paste content of type ${type}`);
         }

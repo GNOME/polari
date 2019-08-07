@@ -138,7 +138,7 @@ var ConnectionsList = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     set favorites_only(favsOnly) {
-        if (this._favoritesOnly == favsOnly)
+        if (this._favoritesOnly === favsOnly)
             return;
 
         this._favoritesOnly = favsOnly;
@@ -234,7 +234,7 @@ var ConnectionsList = GObject.registerClass({
         let isFavorite1 = this._networksManager.getNetworkIsFavorite(row1.id);
         let isFavorite2 = this._networksManager.getNetworkIsFavorite(row2.id);
 
-        if (isFavorite1 != isFavorite2)
+        if (isFavorite1 !== isFavorite2)
             return isFavorite1 ? -1 : 1;
 
         let name1 = this._networksManager.getNetworkName(row1.id);
@@ -308,12 +308,12 @@ var ConnectionDetails = GObject.registerClass({
     }
 
     setErrorHint(hint) {
-        if (hint == ErrorHint.SERVER)
+        if (hint === ErrorHint.SERVER)
             this._serverEntry.get_style_context().add_class('error');
         else
             this._serverEntry.get_style_context().remove_class('error');
 
-        if (hint == ErrorHint.NICK)
+        if (hint === ErrorHint.NICK)
             this._nickEntry.get_style_context().add_class('error');
         else
             this._nickEntry.get_style_context().remove_class('error');
@@ -377,10 +377,10 @@ var ConnectionDetails = GObject.registerClass({
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
 
-        if (port != defaultPort)
+        if (port !== defaultPort)
             this._savedServer += `:${port}`;
 
-        if (this._savedServer != account.display_name)
+        if (this._savedServer !== account.display_name)
             this._savedName = account.display_name;
 
         this._serverEntry.text = this._savedServer;
@@ -392,11 +392,11 @@ var ConnectionDetails = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     get can_confirm() {
-        let paramsChanged = this._nameEntry.text != this._savedName ||
-                            this._serverEntry.text != this._savedServer ||
-                            this._nickEntry.text != this._savedNick ||
-                            this._realnameEntry.text != this._savedRealname ||
-                            this._sslCheckbox.active != this._savedSSL;
+        let paramsChanged = this._nameEntry.text !== this._savedName ||
+                            this._serverEntry.text !== this._savedServer ||
+                            this._nickEntry.text !== this._savedNick ||
+                            this._realnameEntry.text !== this._savedRealname ||
+                            this._sslCheckbox.active !== this._savedSSL;
 
         return this._serverEntry.get_text_length() > 0 &&
                this._nickEntry.get_text_length() > 0 &&
@@ -515,7 +515,7 @@ var ConnectionProperties = GObject.registerClass({
         });
 
         this.connect('response', (w, response) => {
-            if (response == Gtk.ResponseType.OK)
+            if (response === Gtk.ResponseType.OK)
                 this._details.save();
         });
         this.set_default_response(Gtk.ResponseType.OK);
@@ -534,8 +534,8 @@ var ConnectionProperties = GObject.registerClass({
         this._errorBox.hide();
         this._details.setErrorHint(ErrorHint.NONE);
 
-        if (status != Tp.ConnectionStatus.DISCONNECTED ||
-            reason == Tp.ConnectionStatusReason.REQUESTED)
+        if (status !== Tp.ConnectionStatus.DISCONNECTED ||
+            reason === Tp.ConnectionStatusReason.REQUESTED)
             return;
 
         switch (account.connection_error) {

@@ -105,7 +105,7 @@ var NetworksManager = class {
 
     findByServer(server) {
         let network = this._networks.find(n => {
-            return n.servers.some(s => s.address == server);
+            return n.servers.some(s => s.address === server);
         });
         return network ? network.id : null;
     }

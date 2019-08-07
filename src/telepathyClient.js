@@ -154,7 +154,7 @@ class TelepathyClient extends Tp.BaseClient {
             Gio.DBusSignalFlags.MATCH_ARG0_NAMESPACE,
             (_conn, _sender, _path, _iface, _signal, params) => {
                 let [name_, oldOwner_, newOwner] = params.deep_unpack();
-                this._shellHandlesPrivateChats = newOwner != '';
+                this._shellHandlesPrivateChats = newOwner !== '';
             });
 
         conn.call(
@@ -258,7 +258,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onAccountStatusChanged(mon, account) {
-        if (account.connection_status != Tp.ConnectionStatus.CONNECTED)
+        if (account.connection_status !== Tp.ConnectionStatus.CONNECTED)
             return;
 
         Utils.lookupIdentifyPassword(account, password => {
@@ -296,7 +296,7 @@ class TelepathyClient extends Tp.BaseClient {
 
     _connectRooms(account) {
         this._roomManager.rooms.forEach(room => {
-            if (!account || room.account == account)
+            if (!account || room.account === account)
                 this._connectRoom(room);
         });
     }
@@ -362,7 +362,7 @@ class TelepathyClient extends Tp.BaseClient {
                 let activeNick = room.channel.connection.self_contact.alias;
                 // Omit username parameter when it matches the default, to
                 // support NickServ bots that don't support the parameter at all
-                if (!alwaysSendUsername && activeNick == username)
+                if (!alwaysSendUsername && activeNick === username)
                     username = null;
                 room.send_identify_message_async(command, username, password, (r, res) => {
                     try {
@@ -492,12 +492,12 @@ class TelepathyClient extends Tp.BaseClient {
     _saveIdentifySettings(account, data) {
         let { settings } = account;
 
-        if (data.botname == 'NickServ')
+        if (data.botname === 'NickServ')
             settings.reset('identify-botname');
         else
             settings.set_string('identify-botname', data.botname);
 
-        if (data.command == 'identify')
+        if (data.command === 'identify')
             settings.reset('identify-command');
         else
             settings.set_string('identify-command', data.command);
@@ -524,11 +524,11 @@ class TelepathyClient extends Tp.BaseClient {
 
     _isAuthChannel(channel) {
         let channelType = channel.get_channel_type();
-        return channelType == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
+        return channelType === Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
     }
 
     _processRequest(context, connection, channels, processChannel) {
-        if (connection.protocol_name != 'irc') {
+        if (connection.protocol_name !== 'irc') {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({
                 code: Tp.Error.NOT_IMPLEMENTED,
@@ -615,7 +615,7 @@ class TelepathyClient extends Tp.BaseClient {
         ];
 
         let actionName, paramFormat;
-        if (room.type == Tp.HandleType.ROOM) {
+        if (room.type === Tp.HandleType.ROOM) {
             actionName = 'app.join-room';
             paramFormat = '(ssu)';
         } else {
@@ -636,7 +636,7 @@ class TelepathyClient extends Tp.BaseClient {
             botname: room.channel.target_contact.alias,
             command,
             username: username || room.channel.connection.self_contact.alias,
-            usernameSupported: username != null,
+            usernameSupported: username !== null,
             password,
         };
         this._pendingBotPasswords.set(accountPath, data);
@@ -673,12 +673,12 @@ class TelepathyClient extends Tp.BaseClient {
         if (!room.should_highlight_message(nick, text))
             return;
 
-        if (this._shellHandlesPrivateChats && room.type == Tp.HandleType.CONTACT)
+        if (this._shellHandlesPrivateChats && room.type === Tp.HandleType.CONTACT)
             return;
 
         let summary;
 
-        if (room.type == Tp.HandleType.CONTACT) {
+        if (room.type === Tp.HandleType.CONTACT) {
             summary = '%s'.format(nick);
         } else {
             /* Translators: This is the title of the notification announcing a newly

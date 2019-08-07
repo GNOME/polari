@@ -68,7 +68,7 @@ var JoinDialog = GObject.registerClass({
             });
 
         this.connect('response', (w, response) => {
-            if (response == Gtk.ResponseType.OK)
+            if (response === Gtk.ResponseType.OK)
                 this._joinRoom();
             this.destroy();
         });
@@ -166,7 +166,7 @@ var JoinDialog = GObject.registerClass({
 
         let toJoinRooms = this._serverRoomList.selectedRooms;
         toJoinRooms.forEach(room => {
-            if (room[0] != '#')
+            if (room[0] !== '#')
                 room = `#${room}`;
 
             let app = Gio.Application.get_default();
@@ -200,7 +200,7 @@ var JoinDialog = GObject.registerClass({
     _updateCanJoin() {
         let sensitive = false;
 
-        if (this._page == DialogPage.MAIN) {
+        if (this._page === DialogPage.MAIN) {
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._serverRoomList.can_join;
         }
@@ -211,14 +211,14 @@ var JoinDialog = GObject.registerClass({
     }
 
     get _page() {
-        if (this._mainStack.visible_child_name == 'connection')
+        if (this._mainStack.visible_child_name === 'connection')
             return DialogPage.CONNECTION;
         else
             return DialogPage.MAIN;
     }
 
     _setPage(page) {
-        let isMain = page == DialogPage.MAIN;
+        let isMain = page === DialogPage.MAIN;
         let isAccountsEmpty = !this._hasAccounts;
 
         if (isMain)

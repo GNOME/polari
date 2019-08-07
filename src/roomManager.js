@@ -56,7 +56,7 @@ var RoomManager = class {
 
     lookupRoomByName(name, account) {
         return [...this._rooms.values()].find(room => {
-            return room.channel_name == name && room.account == account;
+            return room.channel_name === name && room.account === account;
         });
     }
 
@@ -105,7 +105,7 @@ var RoomManager = class {
         this._settings.get_value('saved-channel-list').deep_unpack().forEach(c => {
             for (let prop in c)
                 c[prop] = c[prop].deep_unpack();
-            if (!accountPath || c.account == accountPath)
+            if (!accountPath || c.account === accountPath)
                 this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0);
         });
         this.emit('rooms-loaded');
@@ -113,7 +113,7 @@ var RoomManager = class {
 
     _removeRooms(accountPath) {
         for (let room of this._rooms.values()) {
-            if (!accountPath || room.account.object_path == accountPath)
+            if (!accountPath || room.account.object_path === accountPath)
                 this._removeRoom(room);
         }
     }
@@ -121,14 +121,14 @@ var RoomManager = class {
     _findChannelIndex(channels, accountPath, channelName) {
         let matchName = channelName.toLowerCase();
         return channels.findIndex(c => {
-            return c.account.deep_unpack() == accountPath &&
-                   c.channel.deep_unpack().toLowerCase() == matchName;
+            return c.account.deep_unpack() === accountPath &&
+                   c.channel.deep_unpack().toLowerCase() === matchName;
         });
     }
 
     _addSavedChannel(accountPath, channelName) {
         let channels = this._settings.get_value('saved-channel-list').deep_unpack();
-        if (this._findChannelIndex(channels, accountPath, channelName) != -1)
+        if (this._findChannelIndex(channels, accountPath, channelName) !== -1)
             return;
         channels.push({
             account: new GLib.Variant('s', accountPath),

@@ -42,7 +42,7 @@ var FixedSizeFrame = GObject.registerClass({
     }
 
     set height(height) {
-        if (height == this._height)
+        if (height === this._height)
             return;
         this._height = height;
         this.notify('height');
@@ -55,7 +55,7 @@ var FixedSizeFrame = GObject.registerClass({
     }
 
     set width(width) {
-        if (width == this._width)
+        if (width === this._width)
             return;
 
         this._width = width;
@@ -203,7 +203,7 @@ var MainWindow = GObject.registerClass({
         });
 
         let size = this._settings.get_value('window-size').deep_unpack();
-        if (size.length == 2)
+        if (size.length === 2)
             this.set_default_size(...size);
 
         if (this._settings.get_boolean('window-maximized'))
@@ -233,8 +233,8 @@ var MainWindow = GObject.registerClass({
     _onWindowStateEvent(widget, event) {
         let state = event.get_window().get_state();
 
-        this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
-        this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
+        this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) !== 0;
+        this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) !== 0;
     }
 
     _onSizeAllocate() {
@@ -278,7 +278,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _filterFallbackAppMenu(layoutStr) {
-        return layoutStr.split(',').filter(s => s != 'menu').join(',');
+        return layoutStr.split(',').filter(s => s !== 'menu').join(',');
     }
 
     _updateDecorations() {
@@ -304,7 +304,7 @@ var MainWindow = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     set active_room(room) {
-        if (room == this._room)
+        if (room === this._room)
             return;
 
         if (this._room) {
@@ -318,7 +318,7 @@ var MainWindow = GObject.registerClass({
         this._membersChangedId = 0;
         this._channelChangedId = 0;
 
-        if (room && room.type == Tp.HandleType.ROOM)
+        if (room && room.type === Tp.HandleType.ROOM)
             this._lastActiveRoom = room;
         this._room = room;
 
@@ -368,7 +368,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onRoomRemoved(mgr, room) {
-        if (room == this._lastActiveRoom)
+        if (room === this._lastActiveRoom)
             this._lastActiveRoom = null;
     }
 
@@ -409,7 +409,7 @@ var MainWindow = GObject.registerClass({
             subtitle += GLib.markup_escape_text(this._room.topic.substr(pos), -1);
         }
 
-        if (this._subtitle != subtitle) {
+        if (this._subtitle !== subtitle) {
             this._subtitle = subtitle;
             this.notify('subtitle');
             this.notify('subtitle-visible');

@@ -36,7 +36,7 @@ var RoomRow = GObject.registerClass({
         this._connectingTimeoutId = 0;
 
         this._icon.gicon = room.icon;
-        this._icon.visible = room.icon != null;
+        this._icon.visible = room.icon !== null;
 
         this._eventBox.connect('button-release-event',
             this._onButtonRelease.bind(this));
@@ -52,7 +52,7 @@ var RoomRow = GObject.registerClass({
 
         let connectionStatusChangedId = 0;
 
-        if (this._room.type == Tp.HandleType.ROOM) {
+        if (this._room.type === Tp.HandleType.ROOM) {
             connectionStatusChangedId =
                 this.account.connect('notify::connection-status',
                     this._onConnectionStatusChanged.bind(this));
@@ -107,7 +107,7 @@ var RoomRow = GObject.registerClass({
 
     _getConnectionStatus() {
         let presence = this.account.requested_presence_type;
-        if (presence == Tp.ConnectionPresenceType.OFFLINE)
+        if (presence === Tp.ConnectionPresenceType.OFFLINE)
             return Tp.ConnectionStatus.DISCONNECTED;
         return this.account.connection_status;
     }
@@ -115,7 +115,7 @@ var RoomRow = GObject.registerClass({
     _onConnectionStatusChanged() {
         let status = this._getConnectionStatus();
         // Show loading indicator if joining a room takes more than 3 seconds
-        if (status == Tp.ConnectionStatus.CONNECTED && !this._room.channel) {
+        if (status === Tp.ConnectionStatus.CONNECTED && !this._room.channel) {
             this._connectingTimeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => {
                 this._connectingTimeoutId = 0;
 
@@ -137,7 +137,7 @@ var RoomRow = GObject.registerClass({
         this._counter.opacity = nHighlights > 0 ? 1. : 0.;
 
         let context = this.get_style_context();
-        if (nPending == 0)
+        if (nPending === 0)
             context.add_class('inactive');
         else
             context.remove_class('inactive');
@@ -162,7 +162,7 @@ var RoomRow = GObject.registerClass({
 
     _onButtonRelease(w, event) {
         let [, button] = event.get_button();
-        if (button != Gdk.BUTTON_SECONDARY)
+        if (button !== Gdk.BUTTON_SECONDARY)
             return Gdk.EVENT_PROPAGATE;
 
         this._showPopover();
@@ -173,8 +173,8 @@ var RoomRow = GObject.registerClass({
     _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
         let [, mods] = event.get_state();
-        if (keyval != Gdk.KEY_Menu &&
-            !(keyval == Gdk.KEY_F10 &&
+        if (keyval !== Gdk.KEY_Menu &&
+            !(keyval === Gdk.KEY_F10 &&
               mods & Gdk.ModifierType.SHIFT_MASK))
             return Gdk.EVENT_PROPAGATE;
 
@@ -186,7 +186,7 @@ var RoomRow = GObject.registerClass({
     _showPopover() {
         if (!this._popover) {
             let menu = new Gio.Menu();
-            let isRoom = this._room.type == Tp.HandleType.ROOM;
+            let isRoom = this._room.type === Tp.HandleType.ROOM;
             let label = isRoom ?  _('Leave chatroom') : _('End conversation');
             menu.append(label, `app.leave-room(("${this._room.id}", ""))`);
 
@@ -304,20 +304,20 @@ var RoomListHeader = GObject.registerClass({
 
     /* hack: Handle primary and secondary button interchangeably */
     vfunc_button_press_event(event) {
-        if (event.button == Gdk.BUTTON_SECONDARY)
+        if (event.button === Gdk.BUTTON_SECONDARY)
             event.button = Gdk.BUTTON_PRIMARY;
         return super.vfunc_button_press_event(event);
     }
 
     vfunc_button_release_event(event) {
-        if (event.button == Gdk.BUTTON_SECONDARY)
+        if (event.button === Gdk.BUTTON_SECONDARY)
             event.button = Gdk.BUTTON_PRIMARY;
         return super.vfunc_button_release_event(event);
     }
 
     _getConnectionStatus() {
         let presence = this._account.requested_presence_type;
-        if (presence == Tp.ConnectionPresenceType.OFFLINE)
+        if (presence === Tp.ConnectionPresenceType.OFFLINE)
             return Tp.ConnectionStatus.DISCONNECTED;
         return this._account.connection_status;
     }
@@ -326,16 +326,16 @@ var RoomListHeader = GObject.registerClass({
         let status = this._getConnectionStatus();
         let reason = this._account.connection_status_reason;
         let authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
-        let isError = status == Tp.ConnectionStatus.DISCONNECTED &&
-                      reason != Tp.ConnectionStatusReason.REQUESTED;
-        let isAuth = isError && this._account.connection_error == authError;
+        let isError = status === Tp.ConnectionStatus.DISCONNECTED &&
+                      reason !== Tp.ConnectionStatusReason.REQUESTED;
+        let isAuth = isError && this._account.connection_error === authError;
 
         let child = 'default';
-        if (status == Tp.ConnectionStatus.CONNECTING)
+        if (status === Tp.ConnectionStatus.CONNECTING)
             child = 'connecting';
         else if (isError)
             child = isAuth ? 'auth' : 'error';
-        else if (status == Tp.ConnectionStatus.DISCONNECTED)
+        else if (status === Tp.ConnectionStatus.DISCONNECTED)
             child = 'disconnected';
 
         if (isError && this._spinner.active) {
@@ -350,7 +350,7 @@ var RoomListHeader = GObject.registerClass({
         }
 
         this._iconStack.visible_child_name = child;
-        this._spinner.active = child == 'connecting';
+        this._spinner.active = child === 'connecting';
         this._popoverTitle.visible = !isAuth;
 
         if (this._spinner.active)
@@ -370,7 +370,7 @@ var RoomListHeader = GObject.registerClass({
             /* Translators: This is an account name followed by a
                server address, e.g. "GNOME (irc.gnome.org)" */
             let fullTitle = _('%s (%s)').format(accountName, server);
-            this._popoverTitle.label = accountName == server ? accountName : fullTitle;
+            this._popoverTitle.label = accountName === server ? accountName : fullTitle;
             this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
         } else {
             let styleContext = this._popoverStatus.get_style_context();
@@ -383,7 +383,7 @@ var RoomListHeader = GObject.registerClass({
 
     _onRequestedPresenceChanged() {
         let presence = this._account.requested_presence_type;
-        let offline = presence == Tp.ConnectionPresenceType.OFFLINE;
+        let offline = presence === Tp.ConnectionPresenceType.OFFLINE;
         this._popoverConnect.visible = offline;
         this._popoverDisconnect.visible = !offline;
         this._popoverReconnect.visible = !offline;
@@ -549,7 +549,7 @@ class RoomList extends Gtk.ListBox {
         if (!current)
             return;
 
-        let inc = direction == Gtk.DirectionType.UP ? -1 : 1;
+        let inc = direction === Gtk.DirectionType.UP ? -1 : 1;
         let index = this._rowToRoomIndex(current.get_index());
 
         let row = current;
@@ -564,13 +564,13 @@ class RoomList extends Gtk.ListBox {
     }
 
     _moveSelectionFromRow(row) {
-        if (this._roomManager.roomCount == 0)
+        if (this._roomManager.roomCount === 0)
             return;
 
         let toplevel = this.get_toplevel();
         let current = this._roomRows.get(toplevel.active_room.id);
 
-        if (current != row)
+        if (current !== row)
             return;
 
         let selected = this.get_selected_row();
@@ -578,15 +578,15 @@ class RoomList extends Gtk.ListBox {
 
         let index = this._rowToRoomIndex(row.get_index());
         this.select_row(row);
-        this._moveSelection(index == 0
+        this._moveSelection(index === 0
             ? Gtk.DirectionType.DOWN : Gtk.DirectionType.UP);
 
         let newSelected = this.get_selected_row();
-        if (newSelected != row)
+        if (newSelected !== row)
             newActive = newSelected.room;
         toplevel.active_room = newActive;
 
-        if (selected != row)
+        if (selected !== row)
             this.select_row(selected);
     }
 
@@ -651,7 +651,7 @@ class RoomList extends Gtk.ListBox {
         }
 
         let rows = [...this._roomRows.values()];
-        let hasRooms = rows.some(r => r.account == account);
+        let hasRooms = rows.some(r => r.account === account);
         this._placeholders.get(account).visible = !hasRooms;
     }
 
@@ -680,7 +680,7 @@ class RoomList extends Gtk.ListBox {
 
         let oldHeader = row.get_header();
 
-        if (beforeAccount == account) {
+        if (beforeAccount === account) {
             if (oldHeader)
                 oldHeader.destroy();
             return;
@@ -700,15 +700,15 @@ class RoomList extends Gtk.ListBox {
         let hasRooms1 = !this._placeholders.get(account1).visible;
         let hasRooms2 = !this._placeholders.get(account2).visible;
 
-        if (hasRooms1 != hasRooms2)
+        if (hasRooms1 !== hasRooms2)
             return hasRooms1 ? -1 : 1;
 
 
-        if (account1 != account2) {
+        if (account1 !== account2) {
             let displayName1 = account1.display_name;
             let displayName2 = account2.display_name;
 
-            if (displayName1 != displayName2)
+            if (displayName1 !== displayName2)
                 return displayName1.localeCompare(displayName2);
 
             // Different account with the same display name :-(
@@ -727,8 +727,8 @@ class RoomList extends Gtk.ListBox {
         if (!room2)
             return 1;
 
-        if (room1.type != room2.type)
-            return room1.type == Tp.HandleType.ROOM ? -1 : 1;
+        if (room1.type !== room2.type)
+            return room1.type === Tp.HandleType.ROOM ? -1 : 1;
 
         return room1.display_name.localeCompare(room2.display_name);
     }

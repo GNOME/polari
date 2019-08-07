@@ -59,7 +59,7 @@ var IrcParser = class {
         if (!this._room || !this._room.channel || !text.length)
             return true;
 
-        if (text[0] != '/') {
+        if (text[0] !== '/') {
             this._sendText(text);
             return true;
         }

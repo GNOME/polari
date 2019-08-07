@@ -116,7 +116,7 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
     vfunc_response(response) {
         super.vfunc_response(response);
 
-        if (response == Gtk.ResponseType.ACCEPT)
+        if (response === Gtk.ResponseType.ACCEPT)
             return;
 
         let app = Gio.Application.get_default();
@@ -147,7 +147,7 @@ class ChannelErrorBar extends MessageInfoBar {
         this.connect('destroy', this._onDestroy.bind(this));
 
         this._identifyError = this._room.connect('notify::channel-error', () => {
-            if (this._room.channel_error == '') {
+            if (this._room.channel_error === '') {
                 this.revealed = false;
                 return;
             }
@@ -242,7 +242,7 @@ class RoomView extends Gtk.Overlay {
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add(box);
 
-        if (room.type == Tp.HandleType.CONTACT)
+        if (room.type === Tp.HandleType.CONTACT)
             this.add_overlay(new SavePasswordConfirmationBar(room));
 
         this.add_overlay(new ChannelErrorBar(room));

@@ -91,7 +91,7 @@ const UserTracker = GObject.registerClass({
     }
 
     _onRoomAdded(roomManager, room) {
-        if (room.account != this._account)
+        if (room.account !== this._account)
             return;
 
         this._ensureRoomMappingForRoom(room);
@@ -141,7 +141,7 @@ const UserTracker = GObject.registerClass({
         }
 
         let members;
-        if (room.type == Tp.HandleType.ROOM)
+        if (room.type === Tp.HandleType.ROOM)
             members = room.channel.group_dup_members_contacts();
         else
             members = [room.channel.connection.self_contact, room.channel.target_contact];
@@ -184,7 +184,7 @@ const UserTracker = GObject.registerClass({
         let baseNick = Polari.util_get_basenick(member.alias);
         let roomHandlers = this._getRoomHandlers(room);
         for (let [, info] of roomHandlers) {
-            if (!info.nickName || info.nickName == baseNick)
+            if (!info.nickName || info.nickName === baseNick)
                 info.handler(baseNick, status);
         }
     }
@@ -201,16 +201,16 @@ const UserTracker = GObject.registerClass({
         let status = Tp.ConnectionPresenceType.AVAILABLE;
 
         let roomMap = this._getRoomContacts(room);
-        if (this._pushMember(roomMap, baseNick, member) == 1)
+        if (this._pushMember(roomMap, baseNick, member) === 1)
             this._runHandlers(room, member, status);
 
         // HACK: Telepathy doesn't notify on member changes for private chats,
         //       so approximate the online status in this case by not adding
         //       the contact to the global map, and removing it from the room
         //       map when the global count drops to 0 (see _untrackMember)
-        if (room.type == Tp.HandleType.ROOM) {
+        if (room.type === Tp.HandleType.ROOM) {
             let map = this._baseNickContacts;
-            if (this._pushMember(map, baseNick, member) == 1) {
+            if (this._pushMember(map, baseNick, member) === 1) {
                 this.emit(`status-changed::${baseNick}`, baseNick, status);
 
                 if (this._shouldNotifyNick(member.alias))
@@ -238,13 +238,13 @@ const UserTracker = GObject.registerClass({
 
         let roomMap = this._getRoomContacts(room);
         let [found, nContacts] = this._popMember(roomMap, baseNick, member);
-        if (found && nContacts == 0)
+        if (found && nContacts === 0)
             this._runHandlers(room, member, status);
 
         let map = this._baseNickContacts;
         [found, nContacts] = this._popMember(map, baseNick, member);
         if (found) {
-            if (nContacts == 0) {
+            if (nContacts === 0) {
                 this.emit(`status-changed::${baseNick}`, member.alias, status);
                 this._setNotifyActionEnabled(member.alias, true);
 
@@ -264,7 +264,7 @@ const UserTracker = GObject.registerClass({
         let baseNick = Polari.util_get_basenick(nickName);
 
         let contacts = this._baseNickContacts.get(baseNick) || [];
-        return contacts.length == 0
+        return contacts.length === 0
             ? Tp.ConnectionPresenceType.OFFLINE
             : Tp.ConnectionPresenceType.AVAILABLE;
     }
@@ -275,7 +275,7 @@ const UserTracker = GObject.registerClass({
         this._ensureRoomMappingForRoom(room);
 
         let contacts = this._getRoomContacts(room).get(baseNick) || [];
-        return contacts.length == 0
+        return contacts.length === 0
             ? Tp.ConnectionPresenceType.OFFLINE
             : Tp.ConnectionPresenceType.AVAILABLE;
     }
@@ -287,7 +287,7 @@ const UserTracker = GObject.registerClass({
         if (!contacts.length)
             return null;
 
-        return contacts.find(c => c.alias == nickName) || contacts[0];
+        return contacts.find(c => c.alias === nickName) || contacts[0];
     }
 
     watchRoomStatus(room, baseNick, callback) {
@@ -346,7 +346,7 @@ const UserTracker = GObject.registerClass({
 
         if (!this._app.lookup_action(name)) {
             let status = this.getNickStatus(nickName);
-            let enabled = status == Tp.ConnectionPresenceType.OFFLINE;
+            let enabled = status === Tp.ConnectionPresenceType.OFFLINE;
 
             let state = new GLib.Variant('b', false);
             let action = new Gio.SimpleAction({

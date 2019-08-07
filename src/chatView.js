@@ -128,7 +128,7 @@ class TextView extends Gtk.TextView {
     }
 
     _onMarkSet(buffer, iter, mark) {
-        if (mark.name == 'indicator-line')
+        if (mark.name === 'indicator-line')
             this.queue_draw();
     }
 
@@ -163,7 +163,7 @@ const ButtonTag = GObject.registerClass({
     }
 
     set hover(hover) {
-        if (this._hover == hover)
+        if (this._hover === hover)
             return;
 
         this._hover = hover;
@@ -195,7 +195,7 @@ const ButtonTag = GObject.registerClass({
                 return;
 
             let button = this._gesture.get_current_button();
-            if (button == Gdk.BUTTON_SECONDARY)
+            if (button === Gdk.BUTTON_SECONDARY)
                 this.emit('popup-menu');
         });
         this._gesture.connect('released', (gesture, nPress) => {
@@ -203,7 +203,7 @@ const ButtonTag = GObject.registerClass({
                 return;
 
             let button = this._gesture.get_current_button();
-            if (button == Gdk.BUTTON_PRIMARY)
+            if (button === Gdk.BUTTON_PRIMARY)
                 this.emit('clicked');
         });
     }
@@ -258,7 +258,7 @@ const HoverFilterTag = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     set hover_opacity(value) {
-        if (this._hoverOpacity == value)
+        if (this._hoverOpacity === value)
             return;
         this._hoverOpacity = value;
         this.notify('hover-opacity');
@@ -307,7 +307,7 @@ var ChatView = GObject.registerClass({
         this.connect('screen-changed', this._updateIndent.bind(this));
         this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
-            if (pos == Gtk.PositionType.BOTTOM)
+            if (pos === Gtk.PositionType.BOTTOM)
                 this._autoscroll = true;
         });
 
@@ -348,7 +348,7 @@ var ChatView = GObject.registerClass({
         });
         this._updateMaxNickChars(this._room.account.nickname.length);
 
-        let isRoom = room.type == Tp.HandleType.ROOM;
+        let isRoom = room.type === Tp.HandleType.ROOM;
         let target = new Tpl.Entity({
             type: isRoom ? Tpl.EntityType.ROOM : Tpl.EntityType.CONTACT,
             identifier: room.channel_name,
@@ -503,7 +503,7 @@ var ChatView = GObject.registerClass({
         tags.forEach(tagProps => {
             let tag = tagTable.lookup(tagProps.name);
             for (let prop in tagProps) {
-                if (prop == 'name')
+                if (prop === 'name')
                     continue;
                 tag[prop] = tagProps[prop];
             }
@@ -590,8 +590,8 @@ var ChatView = GObject.registerClass({
         let { nick, messageType: type } = this._pendingLogs[0];
         let maxNum = this._pendingLogs.length - this._initialPending.length;
         for (let i = 0; i < maxNum; i++) {
-            if (this._pendingLogs[i].nick != nick ||
-                this._pendingLogs[i].messageType != type)
+            if (this._pendingLogs[i].nick !== nick ||
+                this._pendingLogs[i].messageType !== type)
                 return this._pendingLogs.splice(i);
         }
         return [];
@@ -604,10 +604,10 @@ var ChatView = GObject.registerClass({
         let numLogs = logs.length;
         let pos;
         for (pos = numLogs - pending.length; pos < numLogs; pos++) {
-            if (logs[pos].nick == firstPending.nick &&
-                logs[pos].text == firstPending.text &&
-                logs[pos].timestamp == firstPending.timestamp &&
-                logs[pos].messageType == firstPending.messageType)
+            if (logs[pos].nick === firstPending.nick &&
+                logs[pos].text === firstPending.text &&
+                logs[pos].timestamp === firstPending.timestamp &&
+                logs[pos].messageType === firstPending.messageType)
                 break;
         }
         // Remove entries that are also in pending (if any), then
@@ -635,7 +635,7 @@ var ChatView = GObject.registerClass({
         for (let i = 0; i < pending.length; i++) {
             this._insertMessage(iter, pending[i], state);
 
-            if (i == indicatorIndex)
+            if (i === indicatorIndex)
                 this._setIndicatorMark(iter);
 
             if (!iter.is_end() || i < pending.length - 1)
@@ -650,7 +650,7 @@ var ChatView = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     get can_drop() {
-        return this._channel != null;
+        return this._channel !== null;
     }
 
     _updateMaxNickChars(length) {
@@ -683,7 +683,7 @@ var ChatView = GObject.registerClass({
         if (!this._autoscroll)
             return;
 
-        if (this._pending.size == 0) {
+        if (this._pending.size === 0) {
             this._view.emit('move-cursor',
                 Gtk.MovementStep.BUFFER_ENDS, 1, false);
         } else {
@@ -695,7 +695,7 @@ var ChatView = GObject.registerClass({
 
     _onScroll(w, event) {
         let [hasDir, dir] = event.get_scroll_direction();
-        if (hasDir && dir != Gdk.ScrollDirection.UP)
+        if (hasDir && dir !== Gdk.ScrollDirection.UP)
             return Gdk.EVENT_PROPAGATE;
 
         let [hasDeltas, dx_, dy] = event.get_scroll_deltas();
@@ -722,10 +722,10 @@ var ChatView = GObject.registerClass({
             return Gdk.EVENT_STOP;
         }
 
-        if (keyval != Gdk.KEY_Up &&
-            keyval != Gdk.KEY_KP_Up &&
-            keyval != Gdk.KEY_Page_Up &&
-            keyval != Gdk.KEY_KP_Page_Up)
+        if (keyval !== Gdk.KEY_Up &&
+            keyval !== Gdk.KEY_KP_Up &&
+            keyval !== Gdk.KEY_Page_Up &&
+            keyval !== Gdk.KEY_KP_Page_Up)
             return Gdk.EVENT_PROPAGATE;
 
         this._autoscroll = false;
@@ -734,7 +734,7 @@ var ChatView = GObject.registerClass({
     }
 
     _fetchBacklog() {
-        if (this.vadjustment.value != 0 ||
+        if (this.vadjustment.value !== 0 ||
             this._logWalker.is_end())
             return Gdk.EVENT_PROPAGATE;
 
@@ -819,7 +819,7 @@ var ChatView = GObject.registerClass({
         let isHovering = hoveredButtonTags.length > 0;
         let wasHovering = this._hoveredButtonTags.length > 0;
 
-        if (isHovering != wasHovering) {
+        if (isHovering !== wasHovering) {
             let cursor = isHovering ? this._hoverCursor : null;
             this._view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor);
         }
@@ -886,7 +886,7 @@ var ChatView = GObject.registerClass({
         this._needsIndicator = true;
 
         let pending = this._channel.dup_pending_messages();
-        if (pending.length == 0)
+        if (pending.length === 0)
             return;
 
         let rect = this._view.get_visible_rect();
@@ -916,7 +916,7 @@ var ChatView = GObject.registerClass({
     }
 
     _onChannelChanged() {
-        if (this._channel == this._room.channel)
+        if (this._channel === this._room.channel)
             return;
 
         // Pending IDs are invalidated by channel changes, so
@@ -1108,7 +1108,7 @@ var ChatView = GObject.registerClass({
         let baseDir = Pango.find_base_dir(headerText, -1);
         this._insertWithTags(iter, headerText, tags);
         this._insertWithTags(iter,
-            baseDir == Pango.Direction.LTR ? '\u25B6' : '\u25C0',
+            baseDir === Pango.Direction.LTR ? '\u25B6' : '\u25C0',
             tags.concat(headerArrowTag));
         this._insertWithTags(iter, '\u25BC', tags.concat(groupTag));
     }
@@ -1164,9 +1164,9 @@ var ChatView = GObject.registerClass({
         let format;
         let desktopSettings = new Gio.Settings({ schema_id: 'org.gnome.desktop.interface' });
         let clockFormat = desktopSettings.get_string('clock-format');
-        let hasAmPm = date.format('%p') != '';
+        let hasAmPm = date.format('%p') !== '';
 
-        if (clockFormat == '24h' || !hasAmPm) {
+        if (clockFormat === '24h' || !hasAmPm) {
             if (daysAgo < 1) { // today
                 /* Translators: Time in 24h format */
                 format = _('%H\u2236%M');
@@ -1180,7 +1180,7 @@ var ChatView = GObject.registerClass({
                  string in 24h format. i.e. "Monday, 14:30" */
                 // xgettext:no-c-format
                 format = _('%A, %H\u2236%M');
-            } else if (date.get_year() == now.get_year()) { // this year
+            } else if (date.get_year() === now.get_year()) { // this year
                 /* Translators: this is the month name and day number
                  followed by a time string in 24h format.
                  i.e. "May 25, 14:30" */
@@ -1208,7 +1208,7 @@ var ChatView = GObject.registerClass({
                  string in 12h format. i.e. "Monday, 2:30 pm" */
                 // xgettext:no-c-format
                 format = _('%A, %l\u2236%M %p');
-            } else if (date.get_year() == now.get_year()) { // this year
+            } else if (date.get_year() === now.get_year()) { // this year
                 /* Translators: this is the month name and day number
                  followed by a time string in 12h format.
                  i.e. "May 25, 2:30 pm" */
@@ -1234,16 +1234,16 @@ var ChatView = GObject.registerClass({
         let iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
 
-        if (message.pendingId == undefined /* outgoing */ ||
-            this._app.isRoomFocused(this._room) && this._pending.size == 0)
+        if (message.pendingId === undefined /* outgoing */ ||
+            this._app.isRoomFocused(this._room) && this._pending.size === 0)
             this._channel.ack_message_async(tpMessage, null);
         else if (this._needsIndicator)
             this._setIndicatorMark(this._view.buffer.get_end_iter());
     }
 
     _insertMessage(iter, message, state) {
-        let isAction = message.messageType == Tp.ChannelTextMessageType.ACTION;
-        let needsGap = message.nick != state.lastNick || isAction;
+        let isAction = message.messageType === Tp.ChannelTextMessageType.ACTION;
+        let needsGap = message.nick !== state.lastNick || isAction;
         let highlight = this._room.should_highlight_message(
             message.nick, message.text);
 
@@ -1267,7 +1267,7 @@ var ChatView = GObject.registerClass({
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
         } else {
-            if (state.lastNick != message.nick) {
+            if (state.lastNick !== message.nick) {
                 let nickTags = [this._lookupTag('nick')];
                 let nickTagName = this._getNickTagName(message.nick);
                 let nickTag = this._lookupTag(nickTagName);
@@ -1301,7 +1301,7 @@ var ChatView = GObject.registerClass({
             tags.push(this._lookupTag('message'));
         }
 
-        if (highlight && this._room.type != Tp.HandleType.CONTACT)
+        if (highlight && this._room.type !== Tp.HandleType.CONTACT)
             tags.push(this._lookupTag('highlight'));
 
         let params = this._room.account.dup_parameters_vardict().deep_unpack();
@@ -1310,7 +1310,7 @@ var ChatView = GObject.registerClass({
         let { text } = message;
 
         // mask identify passwords in private chats
-        if (this._room.type == Tp.HandleType.CONTACT) {
+        if (this._room.type === Tp.HandleType.CONTACT) {
             let [isIdentify, command_, username_, password] =
                 Polari.util_match_identify_message(text);
 
@@ -1344,8 +1344,8 @@ var ChatView = GObject.registerClass({
     }
 
     _onNickStatusChanged(baseNick, status) {
-        if (this._room.type == Tp.HandleType.CONTACT &&
-            status == Tp.ConnectionPresenceType.OFFLINE &&
+        if (this._room.type === Tp.HandleType.CONTACT &&
+            status === Tp.ConnectionPresenceType.OFFLINE &&
             this._room.channel) {
             this._room.channel.ack_all_pending_messages_async(channel => {
                 channel.close_async(null);
@@ -1362,7 +1362,7 @@ var ChatView = GObject.registerClass({
     }
 
     _updateNickTag(tag, status) {
-        if (status == Tp.ConnectionPresenceType.AVAILABLE)
+        if (status === Tp.ConnectionPresenceType.AVAILABLE)
             tag.foreground_rgba = this._activeNickColor;
         else
             tag.foreground_rgba = this._inactiveNickColor;
@@ -1435,7 +1435,7 @@ var ChatView = GObject.registerClass({
         let headerTag = this._lookupTag(`status-compressed${this._state.lastStatusGroup}`);
         if (headerTag && iter.ends_tag(headerTag))
             tags.push(headerTag);
-        if (iter.get_line_offset() != 0)
+        if (iter.get_line_offset() !== 0)
             this._insertWithTags(iter, '\n', tags);
     }
 

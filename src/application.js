@@ -91,7 +91,7 @@ var Application = GObject.registerClass({
     isRoomFocused(room) {
         return this.active_window &&
                this.active_window['is-active'] &&
-               this.active_window.active_room == room;
+               this.active_window.active_room === room;
     }
 
     // Small wrapper to mark user-requested nick changes
@@ -112,7 +112,7 @@ var Application = GObject.registerClass({
                 conn, flags, null, name, opath, iface, null);
         } catch (e) {}
 
-        return proxy != null && proxy.get_name_owner() != null;
+        return proxy !== null && proxy.get_name_owner() !== null;
     }
 
     _ensureService(conn, name, opath, iface, command) {
@@ -325,7 +325,7 @@ var Application = GObject.registerClass({
         let networkMonitor = Gio.NetworkMonitor.get_default();
         networkMonitor.state_valid =
             !Utils.isFlatpakSandbox() &&
-            GLib.getenv('GTK_USE_PORTAL') != '1';
+            GLib.getenv('GTK_USE_PORTAL') !== '1';
 
         if (networkMonitor.state_valid) {
             if (!networkMonitor.network_metered)
@@ -409,9 +409,9 @@ var Application = GObject.registerClass({
 
         let action = this.lookup_action('leave-current-room');
         window.connect('notify::active-room', () => {
-            action.enabled = window.active_room != null;
+            action.enabled = window.active_room !== null;
         });
-        action.enabled = window.active_room != null;
+        action.enabled = window.active_room !== null;
 
         window.connect('active-room-state-changed',
             this._updateUserListAction.bind(this));
@@ -448,8 +448,8 @@ var Application = GObject.registerClass({
 
             let matchedId = this._networksManager.findByServer(server);
             let matches = Object.keys(map).filter(a => {
-                return GLib.ascii_strcasecmp(map[a].server, server) == 0 ||
-                       map[a].service == matchedId;
+                return GLib.ascii_strcasecmp(map[a].server, server) === 0 ||
+                       map[a].service === matchedId;
             });
 
             if (matches.length) {
@@ -496,7 +496,7 @@ var Application = GObject.registerClass({
                 'account': new GLib.Variant('s', GLib.get_user_name()),
                 'server': new GLib.Variant('s', server),
                 'port': new GLib.Variant('u', port ? port : 6667),
-                'use-ssl': new GLib.Variant('b', port == 6697),
+                'use-ssl': new GLib.Variant('b', port === 6697),
             };
             name = server;
         }
@@ -551,7 +551,7 @@ var Application = GObject.registerClass({
         }
 
         let savedRooms = this._settings.get_value('saved-channel-list');
-        return savedRooms.n_children() == 0;
+        return savedRooms.n_children() === 0;
     }
 
     get isTestInstance() {
@@ -561,7 +561,7 @@ var Application = GObject.registerClass({
     _updateUserListAction() {
         let room = this.active_window.active_room;
         let action = this.lookup_action('user-list');
-        action.enabled = room && room.type == Tp.HandleType.ROOM && room.channel;
+        action.enabled = room && room.type === Tp.HandleType.ROOM && room.channel;
     }
 
     _userListCreateHook(action) {
@@ -603,11 +603,11 @@ var Application = GObject.registerClass({
         let tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
         let contactsChangedId = tracker.connect(`contacts-changed::${baseNick}`,
             (t, nick) => {
-                if (nick != nominalNick)
+                if (nick !== nominalNick)
                     return;
 
                 let contact = tracker.lookupContact(nick);
-                if (contact && contact.alias == nick)
+                if (contact && contact.alias === nick)
                     return;
 
                 this._untrackNominalNick(account);
@@ -642,8 +642,8 @@ var Application = GObject.registerClass({
 
         data = {
             retry: 0,
-            alternateServers: accountServers.filter(s => s.address != server ||
-                                                         s.port != port),
+            alternateServers: accountServers.filter(s => s.address !== server ||
+                                                         s.port !== port),
         };
         this._retryData.set(account.object_path, data);
         return data;
@@ -706,24 +706,24 @@ var Application = GObject.registerClass({
     _onAccountStatusChanged(mon, account) {
         let status = account.connection_status;
 
-        if (status == Tp.ConnectionStatus.CONNECTING)
+        if (status === Tp.ConnectionStatus.CONNECTING)
             return;
 
-        if (status == Tp.ConnectionStatus.DISCONNECTED) {
+        if (status === Tp.ConnectionStatus.DISCONNECTED) {
             let reason = account.connection_status_reason;
 
-            if (reason == Tp.ConnectionStatusReason.NAME_IN_USE) {
+            if (reason === Tp.ConnectionStatusReason.NAME_IN_USE) {
                 if (this._retryNickRequest(account))
                     return;
             }
 
-            if (reason == Tp.ConnectionStatusReason.NETWORK_ERROR ||
-                reason == Tp.ConnectionStatusReason.NONE_SPECIFIED) {
+            if (reason === Tp.ConnectionStatusReason.NETWORK_ERROR ||
+                reason === Tp.ConnectionStatusReason.NONE_SPECIFIED) {
                 if (this._retryServerRequest(account))
                     return;
             }
 
-            if (reason != Tp.ConnectionStatusReason.REQUESTED) {
+            if (reason !== Tp.ConnectionStatusReason.REQUESTED) {
                 let strReason = Object.keys(Tp.ConnectionStatusReason)[reason];
                 let name = account.display_name;
                 debug(`Account ${name} disconnected with reason ${strReason}`);

@@ -97,7 +97,7 @@ var AccountsMonitor = class {
 
     _onPrepareShutdown() {
         let presence = Tp.ConnectionPresenceType.OFFLINE;
-        this.accounts.filter(a => a.requested_presence_type != presence).forEach(a => {
+        this.accounts.filter(a => a.requested_presence_type !== presence).forEach(a => {
             this._app.hold();
             a.request_presence_async(presence, 'offline', '', (o, res) => {
                 try {
@@ -109,7 +109,7 @@ var AccountsMonitor = class {
     }
 
     _shouldMonitorAccount(account) {
-        return account.protocol_name == 'irc';
+        return account.protocol_name === 'irc';
     }
 
     _addAccount(account) {
@@ -263,7 +263,7 @@ const PolariAccount = GObject.registerClass({
     }
 
     _setReachable(reachable) {
-        if (this._reachable == reachable)
+        if (this._reachable === reachable)
             return;
 
         this._reachable = reachable;
@@ -275,7 +275,7 @@ const PolariAccount = GObject.registerClass({
     }
 
     set visible(value) {
-        if (this._visible == value)
+        if (this._visible === value)
             return;
 
         this._visible = value;

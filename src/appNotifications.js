@@ -183,7 +183,7 @@ class NotificationQueue extends Gtk.Frame {
     }
 
     _onChildDestroy() {
-        if (this._grid.get_children().length == 0)
+        if (this._grid.get_children().length === 0)
             this.hide();
     }
 });
@@ -249,7 +249,7 @@ var MessageInfoBar = GObject.registerClass({
     }
 
     set title(title) {
-        if (this._title == title)
+        if (this._title === title)
             return;
 
         this._title = title;
@@ -264,7 +264,7 @@ var MessageInfoBar = GObject.registerClass({
     }
 
     set subtitle(subtitle) {
-        if (this._subtitle == subtitle)
+        if (this._subtitle === subtitle)
             return;
 
         this._subtitle = subtitle;

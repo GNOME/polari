@@ -95,7 +95,7 @@ function isFlatpakSandbox() {
 
 function getTpEventTime() {
     let time = Gtk.get_current_event_time();
-    if (time == 0)
+    if (time === 0)
         return GLib.MAXUINT32;
     return Tp.user_action_time_from_x11(time);
 }
@@ -192,9 +192,9 @@ function updateTerms(terms, str) {
     let normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
     let newTerms = normalized ? normalized.split(' ') : [];
 
-    let changed = newTerms.length != terms.length;
+    let changed = newTerms.length !== terms.length;
     for (let i = 0; i < terms.length && !changed; i++)
-        changed = terms[i] != newTerms[i];
+        changed = terms[i] !== newTerms[i];
 
     if (changed)
         terms.splice(0, terms.length, ...newTerms);
@@ -207,7 +207,7 @@ function _getGpasteExpire(callback) {
     let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
     let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
     session.queue_message(message, () => {
-        if (message.status_code != Soup.KnownStatusCode.OK) {
+        if (message.status_code !== Soup.KnownStatusCode.OK) {
             callback(false);
             return;
         }
@@ -232,7 +232,7 @@ function _getGpasteExpire(callback) {
 }
 
 function gpaste(text, title, callback) {
-    if (_gpasteExpire == undefined) {
+    if (_gpasteExpire === undefined) {
         _getGpasteExpire(success => {
             if (success)
                 gpaste(text, title, callback);
@@ -256,7 +256,7 @@ function gpaste(text, title, callback) {
     let createUrl = `${GPASTE_BASEURL}api/json/create`;
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
     session.queue_message(message, () => {
-        if (message.status_code != Soup.KnownStatusCode.OK) {
+        if (message.status_code !== Soup.KnownStatusCode.OK) {
             callback(null);
             return;
         }
@@ -293,7 +293,7 @@ function imgurPaste(pixbuf, title, callback) {
     let requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
     session.queue_message(message, () => {
-        if (message.status_code != Soup.KnownStatusCode.OK) {
+        if (message.status_code !== Soup.KnownStatusCode.OK) {
             callback(null);
             return;
         }
