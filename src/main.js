@@ -28,7 +28,7 @@ var LOG_DOMAIN = 'Polari';
 function _makeLogFunction(level) {
     return message => {
         let stack = (new Error()).stack;
-        let caller = stack.split('\n')[1];
+        let [, caller] = stack.split('\n');
 
         // Map from resource- to source location
         caller = caller.replace('resource:///org/gnome/Polari/js', 'src');

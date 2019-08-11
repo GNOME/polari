@@ -298,9 +298,9 @@ var UserDetails = GObject.registerClass({
         let info = this._user.get_contact_info();
         for (let i = 0; i < info.length; i++) {
             if (info[i].field_name == 'fn')
-                fn = info[i].field_value[0];
+                [fn] = info[i].field_value;
             else if (info[i].field_name == 'x-idle-time')
-                last = info[i].field_value[0];
+                [last] = info[i].field_value;
         }
 
         if (!fn)
