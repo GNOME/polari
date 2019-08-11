@@ -633,9 +633,7 @@ var Application = GObject.registerClass({
             return data;
 
         let params = account.getConnectionParams();
-        let server = params['server'];
-        let accountName = params['account'];
-        let port = params['port'];
+        let { server, account: accountName, port } = params;
         debug(`Failed to connect to ${server} with username ${accountName}`);
 
         let accountServers = [];

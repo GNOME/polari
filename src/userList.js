@@ -136,7 +136,7 @@ var UserDetails = GObject.registerClass({
     }
 }, class UserDetails extends Gtk.Frame {
     _init(params = {}) {
-        let user = params.user;
+        let { user } = params;
         delete params.user;
 
         this._expanded = false;

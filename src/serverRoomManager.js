@@ -261,7 +261,7 @@ var ServerRoomList = GObject.registerClass({
         if (this._filterEntry.text.trim().length == 0)
             return;
 
-        let model = this._list.model;
+        let { model } = this._list;
         let [valid, iter] = model.get_iter_first();
         if (!valid)
             return;

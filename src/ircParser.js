@@ -120,7 +120,7 @@ var IrcParser = class {
             if (argv.length)
                 log(`Excess arguments to JOIN command: ${argv}`);
 
-            let account = this._room.account;
+            let { account } = this._room;
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssu)', [
@@ -171,7 +171,7 @@ var IrcParser = class {
                 break;
             }
 
-            let account = this._room.account;
+            let { account } = this._room;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
@@ -184,7 +184,7 @@ var IrcParser = class {
             break;
         }
         case 'NAMES': {
-            let channel = this._room.channel;
+            let { channel } = this._room;
             let members = channel.group_dup_members_contacts().map(m => m.alias);
             output = this._createFeedbackGrid(
                 _('Users on %s:').format(channel.identifier), members);
@@ -228,7 +228,7 @@ var IrcParser = class {
                 break;
             }
 
-            let account = this._room.account;
+            let { account } = this._room;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');

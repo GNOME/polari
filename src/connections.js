@@ -179,7 +179,7 @@ var ConnectionsList = GObject.registerClass({
     _networksChanged() {
         this._list.foreach(w => w.destroy());
 
-        let accounts = this._accountsMonitor.accounts;
+        let { accounts } = this._accountsMonitor;
         let usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);
 
         this._networksManager.networks.forEach(network => {
@@ -370,10 +370,10 @@ var ConnectionDetails = GObject.registerClass({
     _populateFromAccount(account) {
         let params = account.getConnectionParams();
 
+        let { port } = params;
         this._savedSSL = params['use-ssl'];
         let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
         this._savedServer = params.server || '';
-        let port = params.port;
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
 

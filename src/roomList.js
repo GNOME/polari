@@ -675,10 +675,8 @@ class RoomList extends Gtk.ListBox {
     }
 
     _updateHeader(row, before) {
-        let getAccount = row => row ? row.account : null;
-
-        let beforeAccount = getAccount(before);
-        let account = getAccount(row);
+        let { account: beforeAccount } = before || {};
+        let { account } = row;
 
         let oldHeader = row.get_header();
 

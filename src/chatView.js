@@ -587,8 +587,7 @@ var ChatView = GObject.registerClass({
         if (this._logWalker.is_end())
             return this._pendingLogs.splice(0);
 
-        let nick = this._pendingLogs[0].nick;
-        let type = this._pendingLogs[0].messageType;
+        let { nick, messageType: type } = this._pendingLogs[0];
         let maxNum = this._pendingLogs.length - this._initialPending.length;
         for (let i = 0; i < maxNum; i++) {
             if (this._pendingLogs[i].nick != nick ||
@@ -837,7 +836,7 @@ var ChatView = GObject.registerClass({
         });
         indicator.get_style_context().add_class('dim-label');
 
-        let buffer = this._view.buffer;
+        let { buffer } = this._view;
         let iter = buffer.get_start_iter();
         let anchor = buffer.create_child_anchor(iter);
         this._view.add_child_at_anchor(indicator, anchor);
@@ -849,7 +848,7 @@ var ChatView = GObject.registerClass({
     }
 
     _hideLoadingIndicator() {
-        let buffer = this._view.buffer;
+        let { buffer } = this._view;
         let iter = buffer.get_start_iter();
 
         if (!iter.get_child_anchor())
@@ -863,7 +862,7 @@ var ChatView = GObject.registerClass({
         let lineStart = iter.copy();
         lineStart.set_line_offset(0);
 
-        let buffer = this._view.buffer;
+        let { buffer } = this._view;
         let mark = buffer.get_mark('indicator-line');
         if (mark) {
             let [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
@@ -1038,7 +1037,7 @@ var ChatView = GObject.registerClass({
     }
 
     _updateStatusHeader() {
-        let buffer = this._view.buffer;
+        let { buffer } = this._view;
         let headerMark = buffer.get_mark('idle-status-start');
 
         let headerTagName = `status-compressed${this._state.lastStatusGroup}`;
@@ -1308,7 +1307,7 @@ var ChatView = GObject.registerClass({
         let params = this._room.account.dup_parameters_vardict().deep_unpack();
         let server = params.server.deep_unpack();
 
-        let text = message.text;
+        let { text } = message;
 
         // mask identify passwords in private chats
         if (this._room.type == Tp.HandleType.CONTACT) {

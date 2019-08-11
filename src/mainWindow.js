@@ -153,7 +153,7 @@ var MainWindow = GObject.registerClass({
 
         // Make sure user-list button is at least as wide as icon buttons
         this._joinButton.connect('size-allocate', (w, rect) => {
-            let width = rect.width;
+            let { width } = rect;
             GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
                 this._showUserListButton.width_request = width;
                 return GLib.SOURCE_REMOVE;

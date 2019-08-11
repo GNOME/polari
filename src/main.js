@@ -27,7 +27,7 @@ var LOG_DOMAIN = 'Polari';
 
 function _makeLogFunction(level) {
     return message => {
-        let stack = (new Error()).stack;
+        let { stack } = new Error();
         let [, caller] = stack.split('\n');
 
         // Map from resource- to source location
