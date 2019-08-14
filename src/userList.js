@@ -1,7 +1,7 @@
 /* exported UserList UserListPopover UserDetails UserPopover */
 
 const {
-    Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp
+    Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp,
 } = imports.gi;
 
 const FILTER_ENTRY_THRESHOLD = 8;
@@ -14,7 +14,7 @@ class UserListPopover extends Gtk.Popover {
 
         this._createWidget();
 
-        this.connect('closed', () => this._entry.text = '');
+        this.connect('closed', () => (this._entry.text = ''));
         this.connect('map', () => {
             this._revealer.transition_duration = 0;
             this._updateContentHeight();
@@ -38,7 +38,7 @@ class UserListPopover extends Gtk.Popover {
     _createWidget() {
         this._box = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
-            spacing: 6
+            spacing: 6,
         });
         this.add(this._box);
 
@@ -46,12 +46,12 @@ class UserListPopover extends Gtk.Popover {
         this._box.add(this._revealer);
 
         this._userListBin = new Gtk.Frame({
-            shadow_type: Gtk.ShadowType.NONE
+            shadow_type: Gtk.ShadowType.NONE,
         });
         this._box.add(this._userListBin);
 
         this._entry = new Gtk.SearchEntry({
-            primary_icon_name: 'avatar-default-symbolic'
+            primary_icon_name: 'avatar-default-symbolic',
         });
         this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.add(this._entry);
@@ -85,7 +85,7 @@ class UserListPopover extends Gtk.Popover {
             return;
 
         let room = this.get_toplevel().active_room;
-        if (!room || room.type != Tp.HandleType.ROOM)
+        if (!room || room.type !== Tp.HandleType.ROOM)
             return;
 
         this._userList = new UserList(room);
@@ -101,7 +101,7 @@ class UserListPopover extends Gtk.Popover {
         if (!this._userList)
             return;
 
-        let reveal = this._entry.text != '' ||
+        let reveal = this._entry.text !== '' ||
                      this._userList.numRows > FILTER_ENTRY_THRESHOLD;
         this._revealer.reveal_child = reveal;
     }
@@ -122,7 +122,7 @@ var UserDetails = GObject.registerClass({
         'fullnameLabel',
         'lastLabel',
         'notificationLabel',
-        'messageButton'
+        'messageButton',
     ],
     Properties: {
         'expanded': GObject.ParamSpec.boolean(
@@ -132,11 +132,11 @@ var UserDetails = GObject.registerClass({
         'notifications-enabled': GObject.ParamSpec.boolean(
             'notifications-enabled', 'notifications-enabled', 'notifications-enabled',
             GObject.ParamFlags.READWRITE,
-            false)
-    }
+            false),
+    },
 }, class UserDetails extends Gtk.Frame {
     _init(params = {}) {
-        let user = params.user;
+        let { user } = params;
         delete params.user;
 
         this._expanded = false;
@@ -163,7 +163,7 @@ var UserDetails = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     set notifications_enabled(value) {
-        if (this._notificationsEnabled == value)
+        if (this._notificationsEnabled === value)
             return;
 
         this._notificationsEnabled = value;
@@ -174,7 +174,7 @@ var UserDetails = GObject.registerClass({
     }
 
     set user(user) {
-        if (this._user == user)
+        if (this._user === user)
             return;
 
         if (this._user)
@@ -193,8 +193,8 @@ var UserDetails = GObject.registerClass({
             this._expand();
 
         this._updateButtonVisibility();
-        this._notificationLabel.visible = this._user == null;
-        this._lastLabel.visible = this._user != null;
+        this._notificationLabel.visible = this._user === null;
+        this._lastLabel.visible = this._user !== null;
     }
 
     set nickname(nickname) {
@@ -212,7 +212,7 @@ var UserDetails = GObject.registerClass({
     }
 
     set expanded(v) {
-        if (v == this._expanded)
+        if (v === this._expanded)
             return;
 
         this._expanded = v;
@@ -237,7 +237,7 @@ var UserDetails = GObject.registerClass({
                 this._cancellable,
                 this._onContactInfoReady.bind(this));
         } else {
-            //TODO: else use this._nickname to query tracker
+            // TODO: else use this._nickname to query tracker
             this._revealDetails();
         }
     }
@@ -297,10 +297,10 @@ var UserDetails = GObject.registerClass({
         let fn, last;
         let info = this._user.get_contact_info();
         for (let i = 0; i < info.length; i++) {
-            if (info[i].field_name == 'fn')
-                fn = info[i].field_value[0];
-            else if (info[i].field_name == 'x-idle-time')
-                last = info[i].field_value[0];
+            if (info[i].field_name === 'fn')
+                [fn] = info[i].field_value;
+            else if (info[i].field_name === 'x-idle-time')
+                [last] = info[i].field_value;
         }
 
         if (!fn)
@@ -334,7 +334,7 @@ var UserDetails = GObject.registerClass({
             account.get_object_path(),
             this._user.alias,
             '',
-            time
+            time,
         ]));
     }
 
@@ -345,7 +345,7 @@ var UserDetails = GObject.registerClass({
             return;
         }
 
-        if (this._user == this._user.connection.self_contact) {
+        if (this._user === this._user.connection.self_contact) {
             this._messageButton.visible = false;
             this._messageButton.sensitive = true;
         } else {
@@ -361,8 +361,8 @@ var UserPopover = GObject.registerClass({
         'nickLabel',
         'statusLabel',
         'notifyButton',
-        'userDetails'
-    ]
+        'userDetails',
+    ],
 }, class UserPopover extends Gtk.Popover {
     _init(params) {
         this._room = params.room;
@@ -392,10 +392,10 @@ var UserPopover = GObject.registerClass({
     }
 
     set nickname(nickname) {
-        if (this._nickname == nickname)
+        if (this._nickname === nickname)
             return;
 
-        if (nickname == null)
+        if (nickname === null)
             return;
 
         this._nickname = nickname;
@@ -409,7 +409,7 @@ var UserPopover = GObject.registerClass({
     }
 
     _setBasenick(basenick) {
-        if (this._basenick == basenick)
+        if (this._basenick === basenick)
             return;
 
         this._basenick = basenick;
@@ -448,15 +448,15 @@ var UserPopover = GObject.registerClass({
             this._nickname, this._room);
 
         let label;
-        if (status != roomStatus)
+        if (status !== roomStatus)
             label = _('Available in another room.');
-        else if (status == Tp.ConnectionPresenceType.AVAILABLE)
+        else if (status === Tp.ConnectionPresenceType.AVAILABLE)
             label = _('Online');
         else
             label = _('Offline');
         this._statusLabel.label = label;
 
-        this._nickLabel.sensitive = (status == Tp.ConnectionPresenceType.AVAILABLE);
+        this._nickLabel.sensitive = status === Tp.ConnectionPresenceType.AVAILABLE;
     }
 
     _updateDetailsContact() {
@@ -506,11 +506,11 @@ class UserListRow extends Gtk.ListBoxRow {
             margin_start: 4,
             margin_top: 4,
             margin_bottom: 4,
-            spacing: 4
+            spacing: 4,
         });
         this._arrow = new Gtk.Arrow({
             arrow_type: Gtk.ArrowType.RIGHT,
-            no_show_all: true
+            no_show_all: true,
         });
         this._label = new Gtk.Label({
             label: this._user.alias,
@@ -518,7 +518,7 @@ class UserListRow extends Gtk.ListBoxRow {
             hexpand: true,
             use_markup: true,
             ellipsize: Pango.EllipsizeMode.END,
-            max_width_chars: MAX_USERS_WIDTH_CHARS
+            max_width_chars: MAX_USERS_WIDTH_CHARS,
         });
         hbox.add(this._label);
         hbox.add(this._arrow);
@@ -595,7 +595,7 @@ class UserList extends Gtk.ScrolledWindow {
             shadow_type: Gtk.ShadowType.ETCHED_IN,
             hscrollbar_policy: Gtk.PolicyType.NEVER,
             propagate_natural_height: true,
-            propagate_natural_width: true
+            propagate_natural_width: true,
         });
 
         this._list = new Gtk.ListBox({ vexpand: true });
@@ -606,16 +606,16 @@ class UserList extends Gtk.ScrolledWindow {
             orientation: Gtk.Orientation.VERTICAL,
             margin: 32,
             spacing: 6,
-            visible: true
+            visible: true,
         });
         placeholder.add(new Gtk.Image({
             icon_name: 'edit-find-symbolic',
             pixel_size: 64,
-            visible: true
+            visible: true,
         }));
         placeholder.add(new Gtk.Label({
             label: _('No Results'),
-            visible: true
+            visible: true,
         }));
 
         placeholder.get_style_context().add_class('placeholder');
@@ -636,25 +636,25 @@ class UserList extends Gtk.ScrolledWindow {
 
         let roomSignals = [{
             name: 'member-renamed',
-            handler: this._onMemberRenamed.bind(this)
+            handler: this._onMemberRenamed.bind(this),
         }, {
             name: 'member-disconnected',
-            handler: this._onMemberRemoved.bind(this)
+            handler: this._onMemberRemoved.bind(this),
         }, {
             name: 'member-kicked',
-            handler: this._onMemberRemoved.bind(this)
+            handler: this._onMemberRemoved.bind(this),
         }, {
             name: 'member-banned',
-            handler: this._onMemberRemoved.bind(this)
+            handler: this._onMemberRemoved.bind(this),
         }, {
             name: 'member-left',
-            handler: this._onMemberRemoved.bind(this)
+            handler: this._onMemberRemoved.bind(this),
         }, {
             name: 'member-joined',
-            handler: this._onMemberJoined.bind(this)
+            handler: this._onMemberJoined.bind(this),
         }, {
             name: 'notify::channel',
-            handler: this._onChannelChanged.bind(this)
+            handler: this._onChannelChanged.bind(this),
         }];
         this._roomSignals = [];
         roomSignals.forEach(signal => {
@@ -718,7 +718,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     _setActiveRow(row) {
-        if (this._activeRow && this._activeRow != row)
+        if (this._activeRow && this._activeRow !== row)
             this._activeRow.expand = false;
         this._activeRow = row;
     }

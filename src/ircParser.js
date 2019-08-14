@@ -59,12 +59,12 @@ var IrcParser = class {
         if (!this._room || !this._room.channel || !text.length)
             return true;
 
-        if (text[0] != '/') {
+        if (text[0] !== '/') {
             this._sendText(text);
             return true;
         }
 
-        let stripCommand = text => text.substr(text.indexOf(' ')).trimLeft();
+        let stripCommand = txt => txt.substr(txt.indexOf(' ')).trimLeft();
 
         let retval = true;
 
@@ -77,7 +77,7 @@ var IrcParser = class {
             if (command)
                 command = command.toUpperCase();
 
-            retval = (command == null || knownCommands[command] != null);
+            retval = !command || knownCommands[command];
 
             if (!retval) {
                 output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
@@ -120,13 +120,13 @@ var IrcParser = class {
             if (argv.length)
                 log(`Excess arguments to JOIN command: ${argv}`);
 
-            let account = this._room.account;
+            let { account } = this._room;
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssu)', [
                 account.get_object_path(),
                 room,
-                Utils.getTpEventTime()
+                Utils.getTpEventTime(),
             ]));
             break;
         }
@@ -171,7 +171,7 @@ var IrcParser = class {
                 break;
             }
 
-            let account = this._room.account;
+            let { account } = this._room;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
@@ -179,12 +179,12 @@ var IrcParser = class {
                 account.get_object_path(),
                 nick,
                 message,
-                Tp.USER_ACTION_TIME_NOT_USER_ACTION
+                Tp.USER_ACTION_TIME_NOT_USER_ACTION,
             ]));
             break;
         }
         case 'NAMES': {
-            let channel = this._room.channel;
+            let { channel } = this._room;
             let members = channel.group_dup_members_contacts().map(m => m.alias);
             output = this._createFeedbackGrid(
                 _('Users on %s:').format(channel.identifier), members);
@@ -228,7 +228,7 @@ var IrcParser = class {
                 break;
             }
 
-            let account = this._room.account;
+            let { account } = this._room;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
@@ -236,7 +236,7 @@ var IrcParser = class {
                 account.get_object_path(),
                 nick,
                 '',
-                Utils.getTpEventTime()
+                Utils.getTpEventTime(),
             ]));
             break;
         }

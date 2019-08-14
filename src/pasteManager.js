@@ -23,7 +23,7 @@ function _getTargetForContentType(contentType) {
 
 var PasteManager = class {
     pasteContent(content, title, callback) {
-        if (typeof content == 'string')
+        if (typeof content === 'string')
             Utils.gpaste(content, title, callback);
         else if (content instanceof GdkPixbuf.Pixbuf)
             Utils.imgurPaste(content, title, callback);
@@ -37,32 +37,30 @@ var PasteManager = class {
         file.query_info_async(
             Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
             Gio.FileQueryInfoFlags.NONE,
-            GLib.PRIORITY_DEFAULT, null, (file, res) => {
-                this._onFileQueryFinish(file, res, title, callback);
+            GLib.PRIORITY_DEFAULT, null, (f, res) => {
+                try {
+                    let fileInfo = file.query_info_finish(res);
+                    this._handleFilePaste(file, fileInfo, title, callback);
+                } catch (e) {
+                    callback(null);
+                }
             });
     }
 
-    _onFileQueryFinish(file, res, title, callback) {
-        let fileInfo = null;
-        try {
-            fileInfo = file.query_info_finish(res);
-        } catch (e) {
-            callback(null);
-        }
-
+    _handleFilePaste(file, fileInfo, title, callback) {
         let contentType = fileInfo.get_content_type();
         let targetType = _getTargetForContentType(contentType);
 
-        if (targetType == DndTargetType.TEXT) {
+        if (targetType === DndTargetType.TEXT) {
             file.load_contents_async(null, (f, res) => {
                 let [, contents] = f.load_contents_finish(res);
                 Utils.gpaste(contents.toString(), title, callback);
             });
-        } else if (targetType == DndTargetType.IMAGE) {
+        } else if (targetType === DndTargetType.IMAGE) {
             file.read_async(GLib.PRIORITY_DEFAULT, null, (f, res) => {
                 let stream = f.read_finish(res);
-                GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, res) => {
-                    let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(res);
+                GdkPixbuf.Pixbuf.new_from_stream_async(stream, null, (s, r) => {
+                    let pixbuf = GdkPixbuf.Pixbuf.new_from_stream_finish(r);
                     Utils.imgurPaste(pixbuf, title, callback);
                 });
             });
@@ -78,13 +76,13 @@ var DropTargetIface = GObject.registerClass({
         'can-drop': GObject.ParamSpec.boolean(
             'can-drop', 'can-drop', 'can-drop',
             GObject.ParamFlags.READABLE,
-            false)
+            false),
     },
     Signals: {
         'text-dropped': { param_types: [GObject.TYPE_STRING] },
         'image-dropped': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
-        'file-dropped': { param_types: [Gio.File.$gtype] }
-    }
+        'file-dropped': { param_types: [Gio.File.$gtype] },
+    },
 }, class DropTargetIface extends GObject.Interface {
     addTargets(widget) {
         this._dragHighlight = false;
@@ -152,7 +150,7 @@ var DropTargetIface = GObject.registerClass({
 
 
     _onDragDataReceived(_widget, context, _x, _y, data, info, time) {
-        if (info == DndTargetType.URI_LIST) {
+        if (info === DndTargetType.URI_LIST) {
             let uris = data.get_uris();
             if (!uris) {
                 Gtk.drag_finish(context, false, false, time);
@@ -163,7 +161,7 @@ var DropTargetIface = GObject.registerClass({
             let file = Gio.File.new_for_uri(uris[0]);
             try {
                 this._lookupFileInfo(file, targetType => {
-                    let canHandle = targetType != 0;
+                    let canHandle = targetType !== 0;
                     if (canHandle)
                         this.emit('file-dropped', file);
                     Gtk.drag_finish(context, canHandle, false, time);

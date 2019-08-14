@@ -55,7 +55,7 @@ var NetworksManager = class {
     }
 
     getAccountIsPredefined(account) {
-        return account && this._networksById.get(account.service) != null;
+        return account && this._networksById.has(account.service);
     }
 
     getNetworkName(id) {
@@ -105,7 +105,7 @@ var NetworksManager = class {
 
     findByServer(server) {
         let network = this._networks.find(n => {
-            return n.servers.some(s => s.address == server);
+            return n.servers.some(s => s.address === server);
         });
         return network ? network.id : null;
     }

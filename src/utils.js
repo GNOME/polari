@@ -83,9 +83,9 @@ const _urlRegexp = new RegExp(
 
 const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)', 'g');
 
-let _gpasteExpire = undefined;
+let _gpasteExpire;
 
-let _inFlatpakSandbox = undefined;
+let _inFlatpakSandbox;
 
 function isFlatpakSandbox() {
     if (_inFlatpakSandbox === undefined)
@@ -94,10 +94,10 @@ function isFlatpakSandbox() {
 }
 
 function getTpEventTime() {
-    let time = Gtk.get_current_event_time ();
-    if (time == 0)
+    let time = Gtk.get_current_event_time();
+    if (time === 0)
         return GLib.MAXUINT32;
-    return Tp.user_action_time_from_x11 (time);
+    return Tp.user_action_time_from_x11(time);
 }
 
 function storeAccountPassword(account, password, callback) {
@@ -168,7 +168,7 @@ function findChannels(str, server) {
         res.push({
             url: `irc://${server}/${match[2]}`,
             name: `#${match[2]}`,
-            pos: match.index + match[1].length
+            pos: match.index + match[1].length,
         });
     }
     return res;
@@ -178,9 +178,9 @@ function openURL(url, timestamp) {
     let app = Gio.Application.get_default();
     try {
         if (app.active_window)
-            Gtk.show_uri_on_window (app.active_window, url, timestamp);
+            Gtk.show_uri_on_window(app.active_window, url, timestamp);
         else
-            Gtk.show_uri (Gdk.Screen.get_default(), url, timestamp);
+            Gtk.show_uri(Gdk.Screen.get_default(), url, timestamp);
     } catch (e) {
         let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
         app.notificationQueue.addNotification(n);
@@ -192,12 +192,12 @@ function updateTerms(terms, str) {
     let normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
     let newTerms = normalized ? normalized.split(' ') : [];
 
-    let changed = newTerms.length != terms.length;
+    let changed = newTerms.length !== terms.length;
     for (let i = 0; i < terms.length && !changed; i++)
-        changed = terms[i] != newTerms[i];
+        changed = terms[i] !== newTerms[i];
 
     if (changed)
-        terms.splice.apply(terms, [0, terms.length, ...newTerms]);
+        terms.splice(0, terms.length, ...newTerms);
 
     return changed;
 }
@@ -206,8 +206,8 @@ function _getGpasteExpire(callback) {
     let session = new Soup.Session();
     let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
     let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
-    session.queue_message(message, (s, message) => {
-        if (message.status_code != Soup.KnownStatusCode.OK) {
+    session.queue_message(message, () => {
+        if (message.status_code !== Soup.KnownStatusCode.OK) {
             callback(false);
             return;
         }
@@ -232,7 +232,7 @@ function _getGpasteExpire(callback) {
 }
 
 function gpaste(text, title, callback) {
-    if (_gpasteExpire == undefined) {
+    if (_gpasteExpire === undefined) {
         _getGpasteExpire(success => {
             if (success)
                 gpaste(text, title, callback);
@@ -246,17 +246,17 @@ function gpaste(text, title, callback) {
         title = `${title.substr(0, MAX_PASTE_TITLE_LENGTH - 1)}…`;
 
     let params = {
-        title: title,
+        title,
         data: text,
         expire: _gpasteExpire,
-        language: 'text'
+        language: 'text',
     };
 
     let session = new Soup.Session();
     let createUrl = `${GPASTE_BASEURL}api/json/create`;
     let message = Soup.form_request_new_from_hash('POST', createUrl, params);
-    session.queue_message(message, (s, message) => {
-        if (message.status_code != Soup.KnownStatusCode.OK) {
+    session.queue_message(message, () => {
+        if (message.status_code !== Soup.KnownStatusCode.OK) {
             callback(null);
             return;
         }
@@ -282,8 +282,8 @@ function imgurPaste(pixbuf, title, callback) {
     }
 
     let params = {
-        title: title,
-        image: GLib.base64_encode(buffer)
+        title,
+        image: GLib.base64_encode(buffer),
     };
 
     let session = new Soup.Session();
@@ -292,8 +292,8 @@ function imgurPaste(pixbuf, title, callback) {
 
     let requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
-    session.queue_message(message, (s, message) => {
-        if (message.status_code != Soup.KnownStatusCode.OK) {
+    session.queue_message(message, () => {
+        if (message.status_code !== Soup.KnownStatusCode.OK) {
             callback(null);
             return;
         }

@@ -45,7 +45,7 @@ var TabCompletion = class {
                 label: row._text,
                 halign: Gtk.Align.START,
                 margin_start: 6,
-                margin_end: 6
+                margin_end: 6,
             }));
             this._list.add(row);
         }
@@ -101,7 +101,7 @@ var TabCompletion = class {
                     label: row._text,
                     halign: Gtk.Align.START,
                     margin_start: 6,
-                    margin_end: 6
+                    margin_end: 6,
                 }));
                 widgetMap.set(nick, row);
             }
@@ -125,8 +125,8 @@ var TabCompletion = class {
     _onKeyPress(w, event) {
         let [, keyval] = event.get_keyval();
 
-        if (this._key.length == 0) {
-            if (keyval == Gdk.KEY_Tab) {
+        if (this._key.length === 0) {
+            if (keyval === Gdk.KEY_Tab) {
                 this._start();
                 return Gdk.EVENT_STOP;
             }
@@ -147,15 +147,15 @@ var TabCompletion = class {
             return Gdk.EVENT_STOP;
         }
 
-        if (Gdk.keyval_to_unicode(keyval) != 0) {
+        if (Gdk.keyval_to_unicode(keyval) !== 0) {
             let popupShown = this._popup.visible;
             this._stop();
             // eat keys that would active the entry
             // when showing the popup
             return popupShown &&
-                   (keyval == Gdk.KEY_Return ||
-                    keyval == Gdk.KEY_KP_Enter ||
-                    keyval == Gdk.KEY_ISO_Enter);
+                   (keyval === Gdk.KEY_Return ||
+                    keyval === Gdk.KEY_KP_Enter ||
+                    keyval === Gdk.KEY_ISO_Enter);
         }
         return Gdk.EVENT_PROPAGATE;
     }
@@ -165,7 +165,7 @@ var TabCompletion = class {
 
         if (this._isCommand)
             return `${row._text} `;
-        if (this._startPos == 0 || this._isChained)
+        if (this._startPos === 0 || this._isChained)
             return `${row._text}: `;
         return row._text;
     }
@@ -176,7 +176,7 @@ var TabCompletion = class {
     }
 
     _filter(row) {
-        if (this._key.length == 0)
+        if (this._key.length === 0)
             return false;
         return row._casefoldedText.startsWith(this._key);
     }
@@ -206,12 +206,12 @@ var TabCompletion = class {
 
         this._isCommand = this._key.startsWith('/');
 
-        if (this._startPos == 0)
+        if (this._startPos === 0)
             this._endPos = -1;
 
         // Chain completions if the current completion directly follows a previous one,
         // except when one of them was for an IRC command
-        let previousCompletion = (this._endPos == this._startPos);
+        let previousCompletion = this._endPos === this._startPos;
         this._isChained = previousCompletion && !this._isCommand && !this._previousWasCommand;
 
         this._list.invalidate_filter();
@@ -219,7 +219,7 @@ var TabCompletion = class {
         let visibleRows = this._list.get_children().filter(c => c.get_child_visible());
         let nVisibleRows = visibleRows.length;
 
-        if (nVisibleRows == 0)
+        if (nVisibleRows === 0)
             return;
 
         if (this._isChained)
@@ -234,7 +234,7 @@ var TabCompletion = class {
     _onKeynavFailed(w, dir) {
         if (this._inHandler)
             return Gdk.EVENT_PROPAGATE;
-        let count = dir == Gtk.DirectionType.DOWN ? -1 : 1;
+        let count = dir === Gtk.DirectionType.DOWN ? -1 : 1;
         this._inHandler = true;
         this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, count);
         this._inHandler = false;
@@ -248,7 +248,7 @@ var TabCompletion = class {
     }
 
     _stop() {
-        if (this._key.length == 0)
+        if (this._key.length === 0)
             return;
 
         this._popup.hide();
@@ -260,7 +260,7 @@ var TabCompletion = class {
     }
 
     _cancel() {
-        if (this._key.length == 0)
+        if (this._key.length === 0)
             return;
         if (this._isChained)
             this._setPreviousCompletionChained(false);

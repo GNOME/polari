@@ -7,7 +7,7 @@ const Utils = imports.utils;
 
 const DialogPage = {
     MAIN: 0,
-    CONNECTION: 1
+    CONNECTION: 1,
 };
 
 var JoinDialog = GObject.registerClass({
@@ -24,8 +24,8 @@ var JoinDialog = GObject.registerClass({
         'serverRoomList',
         'details',
         'addButton',
-        'customToggle'
-    ]
+        'customToggle',
+    ],
 }, class JoinDialog extends Gtk.Dialog {
     _init(params) {
         params['use-header-bar'] = 1;
@@ -36,7 +36,7 @@ var JoinDialog = GObject.registerClass({
         this._backButton = new Gtk.Button({
             image: icon,
             valign: Gtk.Align.CENTER,
-            focus_on_click: false
+            focus_on_click: false,
         });
         this.get_header_bar().pack_start(this._backButton);
 
@@ -68,7 +68,7 @@ var JoinDialog = GObject.registerClass({
             });
 
         this.connect('response', (w, response) => {
-            if (response == Gtk.ResponseType.OK)
+            if (response === Gtk.ResponseType.OK)
                 this._joinRoom();
             this.destroy();
         });
@@ -166,7 +166,7 @@ var JoinDialog = GObject.registerClass({
 
         let toJoinRooms = this._serverRoomList.selectedRooms;
         toJoinRooms.forEach(room => {
-            if (room[0] != '#')
+            if (room[0] !== '#')
                 room = `#${room}`;
 
             let app = Gio.Application.get_default();
@@ -174,7 +174,7 @@ var JoinDialog = GObject.registerClass({
             action.activate(GLib.Variant.new('(ssu)', [
                 account.get_object_path(),
                 room,
-                Utils.getTpEventTime()
+                Utils.getTpEventTime(),
             ]));
         });
     }
@@ -183,14 +183,14 @@ var JoinDialog = GObject.registerClass({
         this._connectionCombo.remove_all();
 
         let names = [...this._accounts.keys()].sort((a, b) => {
-            return (a < b) ? -1 : ((a > b) ? 1 : 0);
+            return a.localeCompare(b);
         });
         for (let i = 0; i < names.length; i++)
             this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
-        let activeRoom = this.transient_for ?
-            this.transient_for.active_room : null;
+        let activeRoom = this.transient_for
+            ? this.transient_for.active_room : null;
         let activeIndex = 0;
         if (activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
@@ -200,25 +200,25 @@ var JoinDialog = GObject.registerClass({
     _updateCanJoin() {
         let sensitive = false;
 
-        if (this._page == DialogPage.MAIN) {
+        if (this._page === DialogPage.MAIN) {
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._serverRoomList.can_join;
         }
 
         this._joinButton.sensitive = sensitive;
-        this.set_default_response(sensitive ?
-            Gtk.ResponseType.OK : Gtk.ResponseType.NONE);
+        this.set_default_response(sensitive
+            ? Gtk.ResponseType.OK : Gtk.ResponseType.NONE);
     }
 
     get _page() {
-        if (this._mainStack.visible_child_name == 'connection')
+        if (this._mainStack.visible_child_name === 'connection')
             return DialogPage.CONNECTION;
         else
             return DialogPage.MAIN;
     }
 
     _setPage(page) {
-        let isMain = page == DialogPage.MAIN;
+        let isMain = page === DialogPage.MAIN;
         let isAccountsEmpty = !this._hasAccounts;
 
         if (isMain)

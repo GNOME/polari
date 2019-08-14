@@ -7,7 +7,7 @@ const Utils = imports.utils;
 const SetupPage = {
     CONNECTION: 0,
     ROOM: 1,
-    OFFLINE: 2
+    OFFLINE: 2,
 };
 
 var InitialSetupWindow = GObject.registerClass({
@@ -17,8 +17,8 @@ var InitialSetupWindow = GObject.registerClass({
         'connectionsList',
         'nextButton',
         'prevButton',
-        'serverRoomList'
-    ]
+        'serverRoomList',
+    ],
 }, class InitialSetupWindow extends Gtk.Window {
     _init(params) {
 
@@ -38,7 +38,7 @@ var InitialSetupWindow = GObject.registerClass({
             this._updateNextSensitivity.bind(this));
 
         this._nextButton.connect('clicked', () => {
-            if (this._page == SetupPage.CONNECTION) {
+            if (this._page === SetupPage.CONNECTION) {
                 this._connectionsList.activateSelected();
             } else {
                 this._joinRooms();
@@ -48,7 +48,7 @@ var InitialSetupWindow = GObject.registerClass({
         });
 
         this._prevButton.connect('clicked', () => {
-            if (this._page == SetupPage.ROOM) {
+            if (this._page === SetupPage.ROOM) {
                 this._setPage(SetupPage.CONNECTION);
                 this._unsetAccount();
             } else {
@@ -65,22 +65,22 @@ var InitialSetupWindow = GObject.registerClass({
 
     _onNetworkAvailableChanged() {
         if (this._networkMonitor.network_available) {
-            this._setPage(this._currentAccount ?
-                SetupPage.ROOM : SetupPage.CONNECTION);
+            this._setPage(this._currentAccount
+                ? SetupPage.ROOM : SetupPage.CONNECTION);
         } else {
             this._setPage(SetupPage.OFFLINE);
         }
     }
 
     _setPage(page) {
-        if (page == SetupPage.CONNECTION)
+        if (page === SetupPage.CONNECTION)
             this._contentStack.visible_child_name = 'connections';
-        else if (page == SetupPage.ROOM)
+        else if (page === SetupPage.ROOM)
             this._contentStack.visible_child_name = 'rooms';
         else
             this._contentStack.visible_child_name = 'offline-hint';
 
-        let isLastPage = page == SetupPage.ROOM;
+        let isLastPage = page === SetupPage.ROOM;
 
         this._prevButton.label = isLastPage ? _('_Back') : _('_Cancel');
         this._nextButton.label = isLastPage ? _('_Done') : _('_Next');
@@ -106,18 +106,18 @@ var InitialSetupWindow = GObject.registerClass({
     }
 
     get _page() {
-        if (this._contentStack.visible_child_name == 'rooms')
+        if (this._contentStack.visible_child_name === 'rooms')
             return SetupPage.ROOM;
-        else if (this._contentStack.visible_child_name == 'connections')
+        else if (this._contentStack.visible_child_name === 'connections')
             return SetupPage.CONNECTION;
         else
             return SetupPage.OFFLINE;
     }
 
     _updateNextSensitivity() {
-        let sensitive = this._page != SetupPage.OFFLINE;
+        let sensitive = this._page !== SetupPage.OFFLINE;
 
-        if (this._page == SetupPage.ROOM)
+        if (this._page === SetupPage.ROOM)
             sensitive = this._serverRoomList.can_join;
 
         this._nextButton.sensitive = sensitive;
@@ -131,7 +131,7 @@ var InitialSetupWindow = GObject.registerClass({
         let accountPath = this._currentAccount.get_object_path();
         let time = Utils.getTpEventTime();
         toJoinRooms.forEach(room => {
-            if (room[0] != '#')
+            if (room[0] !== '#')
                 room = `#${room}`;
 
             let app = Gio.Application.get_default();

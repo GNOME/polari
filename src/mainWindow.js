@@ -20,8 +20,8 @@ var FixedSizeFrame = GObject.registerClass({
         width: GObject.ParamSpec.int(
             'width', 'width', 'width',
             GObject.ParamFlags.READWRITE,
-            -1, GLib.MAXINT32, -1)
-    }
+            -1, GLib.MAXINT32, -1),
+    },
 }, class FixedSizeFrame extends Gtk.Frame {
     _init(params) {
         this._height = -1;
@@ -42,7 +42,7 @@ var FixedSizeFrame = GObject.registerClass({
     }
 
     set height(height) {
-        if (height == this._height)
+        if (height === this._height)
             return;
         this._height = height;
         this.notify('height');
@@ -55,7 +55,7 @@ var FixedSizeFrame = GObject.registerClass({
     }
 
     set width(width) {
-        if (width == this._width)
+        if (width === this._width)
             return;
 
         this._width = width;
@@ -104,11 +104,11 @@ var MainWindow = GObject.registerClass({
         'view-height': GObject.ParamSpec.uint(
             'view-height', 'view-height', 'view-height',
             GObject.ParamFlags.READABLE,
-            0, GLib.MAXUINT32, 0)
+            0, GLib.MAXUINT32, 0),
     },
     Signals: {
-        'active-room-state-changed': {}
-    }
+        'active-room-state-changed': {},
+    },
 }, class MainWindow extends Gtk.ApplicationWindow {
     _init(params) {
         this._subtitle = '';
@@ -153,7 +153,7 @@ var MainWindow = GObject.registerClass({
 
         // Make sure user-list button is at least as wide as icon buttons
         this._joinButton.connect('size-allocate', (w, rect) => {
-            let width = rect.width;
+            let { width } = rect;
             GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
                 this._showUserListButton.width_request = width;
                 return GLib.SOURCE_REMOVE;
@@ -203,8 +203,8 @@ var MainWindow = GObject.registerClass({
         });
 
         let size = this._settings.get_value('window-size').deep_unpack();
-        if (size.length == 2)
-            this.set_default_size.apply(this, size);
+        if (size.length === 2)
+            this.set_default_size(...size);
 
         if (this._settings.get_boolean('window-maximized'))
             this.maximize();
@@ -227,14 +227,14 @@ var MainWindow = GObject.registerClass({
     _onAccountsReachableChanged() {
         let accounts = this._accountsMonitor.visibleAccounts;
         this._offlineInfoBar.revealed =
-            (accounts.length > 0) && !accounts.some(a => a.reachable);
+            accounts.length > 0 && !accounts.some(a => a.reachable);
     }
 
     _onWindowStateEvent(widget, event) {
         let state = event.get_window().get_state();
 
-        this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) != 0;
-        this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) != 0;
+        this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) !== 0;
+        this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) !== 0;
     }
 
     _onSizeAllocate() {
@@ -243,7 +243,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onDestroy() {
-        this._settings.set_boolean ('window-maximized', this._isMaximized);
+        this._settings.set_boolean('window-maximized', this._isMaximized);
         this._settings.set_value('window-size',
             new GLib.Variant('ai', this._currentSize));
 
@@ -251,7 +251,7 @@ var MainWindow = GObject.registerClass({
         if (this._lastActiveRoom) {
             serializedChannel = new GLib.Variant('a{sv}', {
                 account: new GLib.Variant('s', this._lastActiveRoom.account.object_path),
-                channel: new GLib.Variant('s', this._lastActiveRoom.channel_name)
+                channel: new GLib.Variant('s', this._lastActiveRoom.channel_name),
             });
         }
 
@@ -278,7 +278,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _filterFallbackAppMenu(layoutStr) {
-        return layoutStr.split(',').filter(s => s != 'menu').join(',');
+        return layoutStr.split(',').filter(s => s !== 'menu').join(',');
     }
 
     _updateDecorations() {
@@ -304,7 +304,7 @@ var MainWindow = GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     set active_room(room) {
-        if (room == this._room)
+        if (room === this._room)
             return;
 
         if (this._room) {
@@ -318,7 +318,7 @@ var MainWindow = GObject.registerClass({
         this._membersChangedId = 0;
         this._channelChangedId = 0;
 
-        if (room && room.type == Tp.HandleType.ROOM)
+        if (room && room.type === Tp.HandleType.ROOM)
             this._lastActiveRoom = room;
         this._room = room;
 
@@ -368,7 +368,7 @@ var MainWindow = GObject.registerClass({
     }
 
     _onRoomRemoved(mgr, room) {
-        if (room == this._lastActiveRoom)
+        if (room === this._lastActiveRoom)
             this._lastActiveRoom = null;
     }
 
@@ -409,7 +409,7 @@ var MainWindow = GObject.registerClass({
             subtitle += GLib.markup_escape_text(this._room.topic.substr(pos), -1);
         }
 
-        if (this._subtitle != subtitle) {
+        if (this._subtitle !== subtitle) {
             this._subtitle = subtitle;
             this.notify('subtitle');
             this.notify('subtitle-visible');

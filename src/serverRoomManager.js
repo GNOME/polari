@@ -42,21 +42,21 @@ var ServerRoomManager = class {
     isLoading(account) {
         let roomList = this._roomLists.get(account);
         if (!roomList)
-            return account.connection_status == Tp.ConnectionStatus.CONNECTING;
+            return account.connection_status === Tp.ConnectionStatus.CONNECTING;
         return roomList.list.listing;
     }
 
     _onAccountStatusChanged(mon, account) {
-        if (account.connection_status == Tp.ConnectionStatus.CONNECTING)
+        if (account.connection_status === Tp.ConnectionStatus.CONNECTING)
             this.emit('loading-changed', account);
 
-        if (account.connection_status != Tp.ConnectionStatus.CONNECTED)
+        if (account.connection_status !== Tp.ConnectionStatus.CONNECTED)
             return;
 
         if (this._roomLists.has(account))
             return;
 
-        let roomList = new Tp.RoomList({ account: account });
+        let roomList = new Tp.RoomList({ account });
         roomList.init_async(GLib.PRIORITY_DEFAULT, null, (o, res) => {
             try {
                 roomList.init_finish(res);
@@ -102,7 +102,7 @@ const RoomListColumn = {
 };
 
 function _strBaseEqual(str1, str2) {
-    return str1.localeCompare(str2, {}, { sensitivity: 'base' }) == 0;
+    return str1.localeCompare(str2, {}, { sensitivity: 'base' }) === 0;
 }
 
 var ServerRoomList = GObject.registerClass({
@@ -112,14 +112,14 @@ var ServerRoomList = GObject.registerClass({
         'list',
         'spinner',
         'store',
-        'toggleRenderer'
+        'toggleRenderer',
     ],
     Properties: {
         'can-join': GObject.ParamSpec.boolean(
             'can-join', 'can-join', 'can-join',
             GObject.ParamFlags.READABLE,
-            false)
-    }
+            false),
+    },
 }, class ServerRoomList extends Gtk.Box {
     _init(params) {
         this._account = null;
@@ -160,7 +160,7 @@ var ServerRoomList = GObject.registerClass({
                 this.get_toplevel().response(Gtk.ResponseType.CANCEL);
         });
         this._filterEntry.connect('activate', () => {
-            if (this._filterEntry.text.trim().length == 0)
+            if (this._filterEntry.text.trim().length === 0)
                 return;
 
             let [selected, model_, iter] = this._list.get_selection().get_selected();
@@ -175,7 +175,7 @@ var ServerRoomList = GObject.registerClass({
         this._toggleRenderer.connect('toggled', (cell, pathStr) => {
             // For pointer devices, ::row-activated is emitted as well
             let dev = Gtk.get_current_event_device();
-            if (dev && dev.input_source == Gdk.InputSource.KEYBOARD)
+            if (dev && dev.input_source === Gdk.InputSource.KEYBOARD)
                 this._toggleChecked(Gtk.TreePath.new_from_string(pathStr));
         });
 
@@ -215,7 +215,7 @@ var ServerRoomList = GObject.registerClass({
     }
 
     setAccount(account) {
-        if (this._account == account)
+        if (this._account === account)
             return;
 
         this._account = account;
@@ -232,12 +232,12 @@ var ServerRoomList = GObject.registerClass({
     _isCustomRoomItem(iter) {
         let path = this._store.get_path(iter);
         let customPath = this._store.get_path(this._customRoomItem);
-        return path.compare(customPath) == 0;
+        return path.compare(customPath) === 0;
     }
 
     _updateCustomRoomName() {
         let newName = this._filterEntry.text.trim();
-        if (newName.search(/\s/) != -1)
+        if (newName.search(/\s/) !== -1)
             newName = '';
 
         if (newName) {
@@ -247,7 +247,7 @@ var ServerRoomList = GObject.registerClass({
                     return false;
 
                 let name = model.get_value(iter, RoomListColumn.NAME);
-                return exactMatch = _strBaseEqual(newName, name);
+                return (exactMatch = _strBaseEqual(newName, name));
             });
 
             if (exactMatch)
@@ -258,10 +258,10 @@ var ServerRoomList = GObject.registerClass({
     }
 
     _updateSelection() {
-        if (this._filterEntry.text.trim().length == 0)
+        if (this._filterEntry.text.trim().length === 0)
             return;
 
-        let model = this._list.model;
+        let { model } = this._list;
         let [valid, iter] = model.get_iter_first();
         if (!valid)
             return;
@@ -280,7 +280,7 @@ var ServerRoomList = GObject.registerClass({
     }
 
     _onLoadingChanged(mgr, account) {
-        if (account != this._account)
+        if (account !== this._account)
             return;
 
         this._checkSpinner();
@@ -300,7 +300,7 @@ var ServerRoomList = GObject.registerClass({
         roomInfos.sort((info1, info2) => {
             let count1 = info1.get_members_count(null);
             let count2 = info2.get_members_count(null);
-            if (count1 != count2)
+            if (count1 !== count2)
                 return count2 - count1;
             return info1.get_name().localeCompare(info2.get_name());
         });
@@ -320,7 +320,7 @@ var ServerRoomList = GObject.registerClass({
                 let roomInfo = this._pendingInfos.shift();
 
                 let name = roomInfo.get_name();
-                if (name[0] == '#')
+                if (name[0] === '#')
                     name = name.substr(1, name.length);
 
                 if (_strBaseEqual(name, customName)) {
@@ -329,7 +329,7 @@ var ServerRoomList = GObject.registerClass({
                 }
 
                 let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
-                let sensitive = room == null;
+                let sensitive = !room;
                 let checked = !sensitive;
                 let count = `${roomInfo.get_members_count(null)}`;
 
@@ -339,8 +339,8 @@ var ServerRoomList = GObject.registerClass({
                     [checked, name, count, sensitive]);
                 store.move_before(iter, this._customRoomItem);
 
-                let maxTime = this._filterTerms.length > 0 ?
-                    MS_PER_FILTER_IDLE : MS_PER_IDLE;
+                let maxTime = this._filterTerms.length > 0
+                    ? MS_PER_FILTER_IDLE : MS_PER_IDLE;
                 // Limit time spent in idle to leave room for drawing etc.
                 if (GLib.get_monotonic_time() - startTime > 1000 * maxTime)
                     return GLib.SOURCE_CONTINUE;
@@ -354,7 +354,7 @@ var ServerRoomList = GObject.registerClass({
 
     _checkSpinner() {
         let loading = this._pendingInfos.length ||
-                      (this._account && this._manager.isLoading(this._account));
+                      this._account && this._manager.isLoading(this._account);
         this._spinner.active = loading;
     }
 

@@ -35,12 +35,12 @@ const SASLStatus = {
     CLIENT_ACCEPTED: 3,
     SUCCEEDED: 4,
     SERVER_FAILED: 5,
-    CLIENT_FAILED: 6
+    CLIENT_FAILED: 6,
 };
 
 const SASLAbortReason = {
     INVALID_CHALLENGE: 0,
-    USER_ABORT: 1
+    USER_ABORT: 1,
 };
 
 class SASLAuthHandler {
@@ -75,7 +75,7 @@ class SASLAuthHandler {
 
     _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
-        let statusString = (Object.keys(SASLStatus))[status];
+        let statusString = Object.keys(SASLStatus)[status];
         debug(`Auth status for server "${name}": ${statusString}`);
 
         switch (status) {
@@ -137,7 +137,10 @@ class TelepathyClient extends Tp.BaseClient {
         this._accountsMonitor.prepare(this._onPrepared.bind(this));
 
         this._shellHandlesPrivateChats = false;
+        this._monitorShellClient();
+    }
 
+    _monitorShellClient() {
         // Track whether gnome-shell's built-in chat client is
         // running; unfortunately it uses :uniquify-name, so
         // we cannot simply use Gio.watch_bus_name()
@@ -151,7 +154,7 @@ class TelepathyClient extends Tp.BaseClient {
             Gio.DBusSignalFlags.MATCH_ARG0_NAMESPACE,
             (_conn, _sender, _path, _iface, _signal, params) => {
                 let [name_, oldOwner_, newOwner] = params.deep_unpack();
-                this._shellHandlesPrivateChats = (newOwner != '');
+                this._shellHandlesPrivateChats = newOwner !== '';
             });
 
         conn.call(
@@ -174,38 +177,38 @@ class TelepathyClient extends Tp.BaseClient {
                 }
 
                 this._shellHandlesPrivateChats =
-                    names.find(n => n.startsWith(SHELL_CLIENT_PREFIX)) != null;
+                    names.some(n => n.startsWith(SHELL_CLIENT_PREFIX));
             });
     }
 
     _onPrepared() {
         let actions = [{
             name: 'message-user',
-            handler: this._onQueryActivated.bind(this)
+            handler: this._onQueryActivated.bind(this),
         }, {
             name: 'leave-room',
-            handler: this._onLeaveActivated.bind(this)
+            handler: this._onLeaveActivated.bind(this),
         }, {
             name: 'reconnect-room',
-            handler: this._onReconnectRoomActivated.bind(this)
+            handler: this._onReconnectRoomActivated.bind(this),
         }, {
             name: 'connect-account',
-            handler: this._onConnectAccountActivated.bind(this)
+            handler: this._onConnectAccountActivated.bind(this),
         }, {
             name: 'disconnect-account',
-            handler: this._onDisconnectAccountActivated.bind(this)
+            handler: this._onDisconnectAccountActivated.bind(this),
         }, {
             name: 'reconnect-account',
-            handler: this._onReconnectAccountActivated.bind(this)
+            handler: this._onReconnectAccountActivated.bind(this),
         }, {
             name: 'authenticate-account',
-            handler: this._onAuthenticateAccountActivated.bind(this)
+            handler: this._onAuthenticateAccountActivated.bind(this),
         }, {
             name: 'save-identify-password',
-            handler: this._onSaveIdentifyPasswordActivated.bind(this)
+            handler: this._onSaveIdentifyPasswordActivated.bind(this),
         }, {
             name: 'discard-identify-password',
-            handler: this._onDiscardIdentifyPasswordActivated.bind(this)
+            handler: this._onDiscardIdentifyPasswordActivated.bind(this),
         }];
         actions.forEach(a => {
             this._app.lookup_action(a.name).connect('activate', a.handler);
@@ -255,10 +258,10 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onAccountStatusChanged(mon, account) {
-        if (account.connection_status != Tp.ConnectionStatus.CONNECTED)
+        if (account.connection_status !== Tp.ConnectionStatus.CONNECTED)
             return;
 
-        Utils.lookupIdentifyPassword(account, (password) => {
+        Utils.lookupIdentifyPassword(account, password => {
             if (password)
                 this._sendIdentify(account, password);
             else
@@ -293,7 +296,7 @@ class TelepathyClient extends Tp.BaseClient {
 
     _connectRooms(account) {
         this._roomManager.rooms.forEach(room => {
-            if (account == null || room.account == account)
+            if (!account || room.account === account)
                 this._connectRoom(room);
         });
     }
@@ -351,7 +354,7 @@ class TelepathyClient extends Tp.BaseClient {
         let contactName = settings.get_string('identify-botname');
         let command = settings.get_string('identify-command');
         this._requestChannel(account, Tp.HandleType.CONTACT, contactName,
-            (channel) => {
+            channel => {
                 if (!channel)
                     return;
 
@@ -359,7 +362,7 @@ class TelepathyClient extends Tp.BaseClient {
                 let activeNick = room.channel.connection.self_contact.alias;
                 // Omit username parameter when it matches the default, to
                 // support NickServ bots that don't support the parameter at all
-                if (!alwaysSendUsername && activeNick == username)
+                if (!alwaysSendUsername && activeNick === username)
                     username = null;
                 room.send_identify_message_async(command, username, password, (r, res) => {
                     try {
@@ -478,7 +481,7 @@ class TelepathyClient extends Tp.BaseClient {
         if (!data)
             return;
 
-        Utils.storeIdentifyPassword(account, data.password, (res) => {
+        Utils.storeIdentifyPassword(account, data.password, res => {
             if (res)
                 this._saveIdentifySettings(account, data);
 
@@ -489,12 +492,12 @@ class TelepathyClient extends Tp.BaseClient {
     _saveIdentifySettings(account, data) {
         let { settings } = account;
 
-        if (data.botname == 'NickServ')
+        if (data.botname === 'NickServ')
             settings.reset('identify-botname');
         else
             settings.set_string('identify-botname', data.botname);
 
-        if (data.command == 'identify')
+        if (data.command === 'identify')
             settings.reset('identify-command');
         else
             settings.set_string('identify-command', data.command);
@@ -521,15 +524,15 @@ class TelepathyClient extends Tp.BaseClient {
 
     _isAuthChannel(channel) {
         let channelType = channel.get_channel_type();
-        return channelType == Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
+        return channelType === Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
     }
 
     _processRequest(context, connection, channels, processChannel) {
-        if (connection.protocol_name != 'irc') {
+        if (connection.protocol_name !== 'irc') {
             let message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({
                 code: Tp.Error.NOT_IMPLEMENTED,
-                message: message
+                message,
             }));
             return;
         }
@@ -538,7 +541,7 @@ class TelepathyClient extends Tp.BaseClient {
             let message = 'Only one authentication channel per connection allowed';
             context.fail(new Tp.Error({
                 code: Tp.Error.INVALID_ARGUMENT,
-                message: message
+                message,
             }));
             return;
         }
@@ -588,7 +591,7 @@ class TelepathyClient extends Tp.BaseClient {
                 this._app.activate();
 
             this._roomManager.ensureRoomForChannel(channel, time);
-            //channel.join_async('', null);
+            // channel.join_async('', null);
         });
     }
 
@@ -608,11 +611,11 @@ class TelepathyClient extends Tp.BaseClient {
         let params = [
             room.account.object_path,
             room.channel_name,
-            Utils.getTpEventTime()
+            Utils.getTpEventTime(),
         ];
 
         let actionName, paramFormat;
-        if (room.type == Tp.HandleType.ROOM) {
+        if (room.type === Tp.HandleType.ROOM) {
             actionName = 'app.join-room';
             paramFormat = '(ssu)';
         } else {
@@ -631,10 +634,10 @@ class TelepathyClient extends Tp.BaseClient {
 
         let data = {
             botname: room.channel.target_contact.alias,
-            command: command,
+            command,
             username: username || room.channel.connection.self_contact.alias,
-            usernameSupported: username != null,
-            password: password
+            usernameSupported: username !== null,
+            password,
         };
         this._pendingBotPasswords.set(accountPath, data);
 
@@ -670,12 +673,12 @@ class TelepathyClient extends Tp.BaseClient {
         if (!room.should_highlight_message(nick, text))
             return;
 
-        if (this._shellHandlesPrivateChats && room.type == Tp.HandleType.CONTACT)
+        if (this._shellHandlesPrivateChats && room.type === Tp.HandleType.CONTACT)
             return;
 
         let summary;
 
-        if (room.type == Tp.HandleType.CONTACT) {
+        if (room.type === Tp.HandleType.CONTACT) {
             summary = '%s'.format(nick);
         } else {
             /* Translators: This is the title of the notification announcing a newly

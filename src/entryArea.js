@@ -1,7 +1,7 @@
 /* exported ChatEntry EntryArea NickPopover */
 
 const {
-    Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp
+    Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp,
 } = imports.gi;
 
 const ChatView = imports.chatView;
@@ -21,8 +21,8 @@ var ChatEntry = GObject.registerClass({
     Signals: {
         'text-pasted': { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT] },
         'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
-        'file-pasted': { param_types: [Gio.File.$gtype] }
-    }
+        'file-pasted': { param_types: [Gio.File.$gtype] },
+    },
 }, class ChatEntry extends Gtk.Entry {
     static get _checker() {
         if (!this.__checker)
@@ -43,7 +43,7 @@ var ChatEntry = GObject.registerClass({
         });
 
         let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
-        buffer.set_spell_checker (ChatEntry._checker);
+        buffer.set_spell_checker(ChatEntry._checker);
 
         let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
         spellEntry.set_inline_spell_checking(true);
@@ -73,22 +73,22 @@ var ChatEntry = GObject.registerClass({
         }
 
         let clipboard = Gtk.Clipboard.get_default(this.get_display());
-        clipboard.request_uris((clipboard, uris) => {
+        clipboard.request_uris((cb, uris) => {
             if (uris && uris.length)
                 this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
             else
                 clipboard.request_text(this._onTextReceived.bind(this));
         });
 
-        clipboard.request_image((clipboard, pixbuf) => {
-            if (pixbuf == null)
+        clipboard.request_image((cb, pixbuf) => {
+            if (!pixbuf)
                 return;
             this.emit('image-pasted', pixbuf);
         });
     }
 
     _onTextReceived(clipboard, text) {
-        if (text == null)
+        if (!text)
             return;
         text = text.trim();
 
@@ -108,17 +108,17 @@ var NickPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
     InternalChildren: [
         'nickEntry',
-        'changeButton'
+        'changeButton',
     ],
     Properties: {
         nick: GObject.ParamSpec.string(
             'nick', 'nick', 'nick',
             GObject.ParamFlags.READWRITE,
-            '')
+            ''),
     },
     Signals: {
-        'nick-changed': {}
-    }
+        'nick-changed': {},
+    },
 }, class NickPopover extends Gtk.Popover {
     _init() {
         this._nick = '';
@@ -141,7 +141,7 @@ var NickPopover = GObject.registerClass({
     }
 
     set nick(nick) {
-        if (this._nick == nick)
+        if (this._nick === nick)
             return;
 
         if (!this._nickEntry['is-focus'])
@@ -162,14 +162,14 @@ var EntryArea = GObject.registerClass({
         'confirmLabel',
         'uploadLabel',
         'cancelButton',
-        'pasteButton'
+        'pasteButton',
     ],
     Properties: {
         'max-nick-chars': GObject.ParamSpec.uint(
             'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
             GObject.ParamFlags.WRITABLE,
-            0, GLib.MAXUINT32, 0)
-    }
+            0, GLib.MAXUINT32, 0),
+    },
 }, class EntryArea extends Gtk.Stack {
     static get _nickPopover() {
         if (!this.__nickPopover)
@@ -224,7 +224,7 @@ var EntryArea = GObject.registerClass({
                 return; // avoid indefinite recursion
 
             state &= ~Gtk.StateFlags.BACKDROP;
-            w.set_state_flags (state, true);
+            w.set_state_flags(state, true);
         });
 
         this._chatEntry.connect('text-pasted', (entry, text, nLines) => {
@@ -265,9 +265,10 @@ var EntryArea = GObject.registerClass({
         this._pasteBox.connect_after('key-press-event', (w, event) => {
             let [, keyval] = event.get_keyval();
             let [, mods] = event.get_state();
-            if (keyval == Gdk.KEY_Escape || keyval == Gdk.KEY_BackSpace ||
-                keyval == Gdk.KEY_Delete ||
-                keyval == Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
+            if (keyval === Gdk.KEY_Escape ||
+                keyval === Gdk.KEY_BackSpace ||
+                keyval === Gdk.KEY_Delete ||
+                keyval === Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
                 this._cancelButton.clicked();
                 return Gdk.EVENT_STOP;
             }
@@ -325,18 +326,18 @@ var EntryArea = GObject.registerClass({
             return Gdk.EVENT_PROPAGATE;
 
         let [, keyval] = event.get_keyval();
-        if (Gdk.keyval_to_unicode(keyval) == 0)
+        if (Gdk.keyval_to_unicode(keyval) === 0)
             return Gdk.EVENT_PROPAGATE;
 
         let [, state] = event.get_state();
-        if (state != 0 && state != Gdk.ModifierType.SHIFT_MASK)
+        if (state !== 0 && state !== Gdk.ModifierType.SHIFT_MASK)
             return Gdk.EVENT_PROPAGATE;
 
         let activationKeys = [
             Gdk.KEY_Tab,
             Gdk.KEY_Return,
             Gdk.KEY_ISO_Enter,
-            Gdk.KEY_space
+            Gdk.KEY_space,
         ];
         if (activationKeys.includes(keyval))
             return Gdk.EVENT_PROPAGATE;
@@ -408,7 +409,7 @@ var EntryArea = GObject.registerClass({
     _onPasteClicked() {
         let title;
         let nick = this._room.channel.connection.self_contact.alias;
-        if (this._room.type == Tp.HandleType.ROOM)
+        if (this._room.type === Tp.HandleType.ROOM)
             /* translators: %s is a nick, #%s a channel */
             title = _('%s in #%s').format(nick, this._room.display_name);
         else
@@ -424,7 +425,7 @@ var EntryArea = GObject.registerClass({
             });
         } catch (e) {
             let type = typeof this._pasteContent;
-            if (type == 'object')
+            if (type === 'object')
                 type = this._pasteContent.toString();
             debug(`Failed to paste content of type ${type}`);
         }
@@ -478,10 +479,12 @@ var EntryArea = GObject.registerClass({
     }
 
     _updateNick() {
-        let channel = this._room ? this._room.channel : null;
-        let nick = channel ?
-            channel.connection.self_contact.alias :
-            this._room ? this._room.account.nickname : '';
+        let { channel } = this._room || {};
+        let nick = '';
+        if (channel)
+            nick = channel.connection.self_contact.alias;
+        else if (this._room)
+            nick = this._room.account.nickname;
 
         this._nickLabel.width_chars = Math.max(nick.length, this._maxNickChars);
         this._nickLabel.label = nick;

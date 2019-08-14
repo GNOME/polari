@@ -6,15 +6,13 @@ const { GLib, GObject, Gtk, Pango } = imports.gi;
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
-const AppNotification = GObject.registerClass(
-class AppNotification extends Gtk.Revealer {
+const AppNotification = GObject.registerClass({
+    GTypeFlags: GObject.TypeFlags.ABSTRACT,
+}, class AppNotification extends Gtk.Revealer {
     _init() {
-        if (this.constructor.name == 'AppNotification')
-            throw new Error('Cannot instantiate abstract class AppNotification');
-
         super._init({
             reveal_child: true,
-            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN
+            transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
         });
         this.connect('notify::child-revealed',
             this._onChildRevealed.bind(this));
@@ -43,9 +41,9 @@ class MessageNotification extends AppNotification {
             this._box.add(new Gtk.Image({ icon_name: iconName }));
 
         this._box.add(new Gtk.Label({
-            label: label,
+            label,
             hexpand: true,
-            ellipsize: Pango.EllipsizeMode.END
+            ellipsize: Pango.EllipsizeMode.END,
         }));
 
         let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE });
@@ -59,7 +57,7 @@ class MessageNotification extends AppNotification {
 
 
     addButton(label, callback) {
-        let button = new Gtk.Button({ label: label, visible: true });
+        let button = new Gtk.Button({ label, visible: true });
         button.connect('clicked', () => {
             if (callback)
                 callback();
@@ -73,8 +71,8 @@ class MessageNotification extends AppNotification {
 var UndoNotification = GObject.registerClass({
     Signals: {
         closed: {},
-        undo: {}
-    }
+        undo: {},
+    },
 }, class UndoNotification extends MessageNotification {
     _init(label) {
         super._init(label);
@@ -84,7 +82,7 @@ var UndoNotification = GObject.registerClass({
 
         this.connect('destroy', () => this.close());
 
-        this.addButton(_('Undo'), () => this._undo = true);
+        this.addButton(_('Undo'), () => (this._undo = true));
     }
 
     close() {
@@ -97,12 +95,10 @@ var UndoNotification = GObject.registerClass({
     }
 });
 
-const CommandOutputNotification = GObject.registerClass(
-class CommandOutputNotification extends AppNotification {
+const CommandOutputNotification = GObject.registerClass({
+    GTypeFlags: GObject.TypeFlags.ABSTRACT,
+}, class CommandOutputNotification extends AppNotification {
     _init() {
-        if (this.constructor.name == 'CommandOutputNotification')
-            throw new Error('Cannot instantiate abstract class CommandOutputNotification');
-
         super._init();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
@@ -122,7 +118,7 @@ class SimpleOutput extends CommandOutputNotification {
             label: text,
             vexpand: true,
             visible: true,
-            wrap: true
+            wrap: true,
         });
         this.add(label);
         this.show_all();
@@ -141,7 +137,7 @@ class GridOutput extends CommandOutputNotification {
         let grid = new Gtk.Grid({
             column_homogeneous: true,
             row_spacing: 6,
-            column_spacing: 18
+            column_spacing: 18,
         });
         grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
 
@@ -168,13 +164,13 @@ class NotificationQueue extends Gtk.Frame {
             valign: Gtk.Align.START,
             halign: Gtk.Align.CENTER,
             margin_start: 24, margin_end: 24,
-            no_show_all: true
+            no_show_all: true,
         });
         this.get_style_context().add_class('app-notification');
 
         this._grid = new Gtk.Grid({
             orientation: Gtk.Orientation.VERTICAL,
-            row_spacing: 6, visible: true
+            row_spacing: 6, visible: true,
         });
         this.add(this._grid);
     }
@@ -187,7 +183,7 @@ class NotificationQueue extends Gtk.Frame {
     }
 
     _onChildDestroy() {
-        if (this._grid.get_children().length == 0)
+        if (this._grid.get_children().length === 0)
             this.hide();
     }
 });
@@ -211,8 +207,8 @@ var MessageInfoBar = GObject.registerClass({
         'subtitle': GObject.ParamSpec.string(
             'subtitle', 'subtitle', 'subtitle',
             GObject.ParamFlags.READWRITE,
-            '')
-    }
+            ''),
+    },
 }, class MessageInfoBar extends Gtk.InfoBar {
     _init(params) {
         this._title = '';
@@ -221,7 +217,7 @@ var MessageInfoBar = GObject.registerClass({
         let defaultParams = {
             show_close_button: true,
             revealed: false,
-            valign: Gtk.Align.START
+            valign: Gtk.Align.START,
         };
         super._init(Object.assign(defaultParams, params));
 
@@ -233,7 +229,7 @@ var MessageInfoBar = GObject.registerClass({
             valign: Gtk.Align.CENTER,
             label: `<b>${this._title}</b>`,
             use_markup: true,
-            wrap: true
+            wrap: true,
         });
         box.add(this._titleLabel);
 
@@ -241,7 +237,7 @@ var MessageInfoBar = GObject.registerClass({
             halign: Gtk.Align.START,
             valign: Gtk.Align.CENTER,
             label: this._subtitle,
-            ellipsize: Pango.EllipsizeMode.END
+            ellipsize: Pango.EllipsizeMode.END,
         });
         box.add(this._subtitleLabel);
 
@@ -253,7 +249,7 @@ var MessageInfoBar = GObject.registerClass({
     }
 
     set title(title) {
-        if (this._title == title)
+        if (this._title === title)
             return;
 
         this._title = title;
@@ -268,7 +264,7 @@ var MessageInfoBar = GObject.registerClass({
     }
 
     set subtitle(subtitle) {
-        if (this._subtitle == subtitle)
+        if (this._subtitle === subtitle)
             return;
 
         this._subtitle = subtitle;

@@ -70,7 +70,7 @@ var AccountsMonitor = class {
 
         am.dup_valid_accounts().forEach(this._addAccount.bind(this));
 
-        am.connect('account-validity-changed', (am, account, valid) => {
+        am.connect('account-validity-changed', (o, account, valid) => {
             if (valid) {
                 this._addAccount(account);
                 this._updateAccountReachable(account);
@@ -78,7 +78,7 @@ var AccountsMonitor = class {
                 this._removeAccount(account);
             }
         });
-        am.connect('account-removed', (am, account) => {
+        am.connect('account-removed', (o, account) => {
             this._removeAccount(account);
         });
         am.connect('account-enabled', this._accountEnabledChanged.bind(this));
@@ -97,9 +97,9 @@ var AccountsMonitor = class {
 
     _onPrepareShutdown() {
         let presence = Tp.ConnectionPresenceType.OFFLINE;
-        this.accounts.filter(a => a.requested_presence_type != presence).forEach(a => {
+        this.accounts.filter(a => a.requested_presence_type !== presence).forEach(a => {
             this._app.hold();
-            a.request_presence_async(presence, 'offline', '', (a, res) => {
+            a.request_presence_async(presence, 'offline', '', (o, res) => {
                 try {
                     a.request_presence_finish(res);
                 } catch (e) { }
@@ -109,7 +109,7 @@ var AccountsMonitor = class {
     }
 
     _shouldMonitorAccount(account) {
-        return account.protocol_name == 'irc';
+        return account.protocol_name === 'irc';
     }
 
     _addAccount(account) {
@@ -130,8 +130,8 @@ var AccountsMonitor = class {
         account._visibleNotifyId =
             account.connect('notify::visible', () => {
                 this._updateAccountReachable(account);
-                let signal = account.visible ?
-                    'account-shown' : 'account-hidden';
+                let signal = account.visible
+                    ? 'account-shown' : 'account-hidden';
                 this.emit(signal, account);
                 this.emit('accounts-changed');
             });
@@ -173,7 +173,7 @@ var AccountsMonitor = class {
         let servers = account.getServers().map(s => {
             return new Gio.NetworkAddress({
                 hostname: s.address,
-                port: s.port
+                port: s.port,
             });
         });
 
@@ -215,7 +215,7 @@ class ClientFactory extends Polari.ClientFactory {
             factory: this,
             dbus_daemon: this.dbus_daemon,
             bus_name: Tp.ACCOUNT_MANAGER_BUS_NAME,
-            object_path: objectPath
+            object_path: objectPath,
         });
     }
 });
@@ -237,8 +237,8 @@ const PolariAccount = GObject.registerClass({
         settings: GObject.ParamSpec.object(
             'settings', 'settings', 'settings',
             GObject.ParamFlags.READABLE,
-            Gio.Settings.$gtype)
-    }
+            Gio.Settings.$gtype),
+    },
 }, class PolariAccount extends Tp.Account {
     _init(params) {
         this._visible = true;
@@ -250,7 +250,7 @@ const PolariAccount = GObject.registerClass({
 
         this._settings = new Gio.Settings({
             schema_id: 'org.gnome.Polari.Account',
-            path: `/org/gnome/Polari/Accounts/${this.get_path_suffix()}/`
+            path: `/org/gnome/Polari/Accounts/${this.get_path_suffix()}/`,
         });
     }
 
@@ -263,7 +263,7 @@ const PolariAccount = GObject.registerClass({
     }
 
     _setReachable(reachable) {
-        if (this._reachable == reachable)
+        if (this._reachable === reachable)
             return;
 
         this._reachable = reachable;
@@ -275,7 +275,7 @@ const PolariAccount = GObject.registerClass({
     }
 
     set visible(value) {
-        if (this._visible == value)
+        if (this._visible === value)
             return;
 
         this._visible = value;
@@ -302,7 +302,7 @@ const PolariAccount = GObject.registerClass({
         let params = this.getConnectionParams();
         return [{
             address: params.server,
-            port: params.port
+            port: params.port,
         }];
     }
 
