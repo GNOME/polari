@@ -162,6 +162,10 @@
                 {
                     "type": "patch",
                     "path": "gspell-no-code-coverage.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "gspell-gettext-fix.patch"
                 }
             ],
             "cleanup": [
