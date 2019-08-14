@@ -20,7 +20,9 @@
 
 #include <glib-object.h>
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 #include <telepathy-glib/telepathy-glib.h>
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 G_BEGIN_DECLS
 
