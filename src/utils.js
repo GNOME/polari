@@ -119,7 +119,7 @@ function _storePassword(schema, label, account, password, callback) {
             callback(success);
         } catch (e) {
             let name = account.display_name;
-            log(`Failed to store password for account "${name}": ${e.message}`);
+            log(`Failed to store password for account ${name}: ${e.message}`);
             callback(false);
         }
     });

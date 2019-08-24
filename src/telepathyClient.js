@@ -76,7 +76,7 @@ class SASLAuthHandler {
     _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
         let statusString = Object.keys(SASLStatus)[status];
-        debug(`Auth status for server "${name}": ${statusString}`);
+        debug(`Auth status for server ${name}: ${statusString}`);
 
         switch (status) {
         case SASLStatus.NOT_STARTED:
