@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2019-06-15 10:57+0000\n"
-"PO-Revision-Date: 2019-03-07 19:52+0900\n"
+"PO-Revision-Date: 2019-08-25 19:15+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:48
 msgid "The GNOME Project"
-msgstr ""
+msgstr "The GNOME Project"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
@@ -823,7 +823,7 @@ msgstr "%s へ接続できませんでした。"
 
 #: src/roomStack.js:98
 msgid "Should the password be saved?"
-msgstr ""
+msgstr "パスワードを保存しますか?"
 
 #: src/roomStack.js:100 src/telepathyClient.js:648
 #, javascript-format
@@ -833,37 +833,35 @@ msgstr ""
 
 #: src/roomStack.js:106
 msgid "_Save Password"
-msgstr "パスワードの保存(_S)"
+msgstr "パスワードを保存(_S)"
 
 #: src/roomStack.js:139
-#, fuzzy
-#| msgid "Failed to open link"
 msgid "Failed to join the room"
-msgstr "リンクを開けませんでした"
+msgstr "ルームに参加できませんでした"
 
 #: src/roomStack.js:141
 msgid "_Retry"
-msgstr ""
+msgstr "再試行(_R)"
 
 #: src/roomStack.js:165
 msgid "The room is full."
-msgstr ""
+msgstr "ルームが満杯です。"
 
 #: src/roomStack.js:168
 msgid "You have been banned from the room."
-msgstr ""
+msgstr "ルームから BAN されました。"
 
 #: src/roomStack.js:171
 msgid "The room is invite-only."
-msgstr ""
+msgstr "ルームは招待者限定です。"
 
 #: src/roomStack.js:174
 msgid "You have been kicked from the room."
-msgstr ""
+msgstr "ルームからキックされました。"
 
 #: src/roomStack.js:177
 msgid "It is not possible to join the room now, but you can retry later."
-msgstr ""
+msgstr "現時点ではルームに参加できないため、後ほど再試行してください。"
 
 #: src/roomStack.js:209
 msgid "Join a room using the + button."
@@ -937,8 +935,6 @@ msgid "Online"
 msgstr "オンライン"
 
 #: src/userList.js:617
-#, fuzzy
-#| msgid "No results"
 msgid "No Results"
 msgstr "結果なし"
 
