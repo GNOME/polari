@@ -110,3 +110,5 @@ gnome.generate_gir(libpolari,
 )
 
 subdir('tests')
+
+install_data('thumbnailer.js', install_dir: pkgdatadir)
