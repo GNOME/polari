@@ -8,6 +8,7 @@ const {
 const { DropTargetIface } = imports.pasteManager;
 const { UserPopover } = imports.userList;
 const { UserStatusMonitor } = imports.userTracker;
+const { URLPreview } = imports.urlPreview;
 const Utils = imports.utils;
 
 var MAX_NICK_CHARS = 8;
@@ -1320,6 +1321,7 @@ var ChatView = GObject.registerClass({
 
         let channels = Utils.findChannels(text, server);
         let urls = Utils.findUrls(text).concat(channels).sort((u1, u2) => u1.pos - u2.pos);
+        let previews = [];
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
             let url = urls[i];
@@ -1332,9 +1334,22 @@ var ChatView = GObject.registerClass({
             this._insertWithTags(iter,
                 name, tags.concat(this._lookupTag('url'), tag));
 
+            previews.push(new URLPreview({ uri: url.url, visible: true }));
+
             pos = url.pos + name.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
+
+        if (previews.length) {
+            this._view.buffer.insert(iter, '\n', -1);
+
+            for (const preview of previews) {
+                this._view.add_child_at_anchor(preview,
+                    this._view.buffer.create_child_anchor(iter));
+            }
+
+            this._view.buffer.insert(iter, '\n', -1);
+        }
 
         if (highlight && message.pendingId) {
             this._pending.set(
