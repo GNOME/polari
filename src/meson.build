@@ -25,6 +25,7 @@ js_sources = [
   'serverRoomManager.js',
   'tabCompletion.js',
   'telepathyClient.js',
+  'urlPreview.js',
   'userList.js',
   'utils.js',
   'userTracker.js'
