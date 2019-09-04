@@ -1,3 +1,23 @@
+3.33.92 — “We called her Bernie”
+=======
+* Support profiling with sysprof [Florian; !123]
+* Improve network reachability check [Florian; !132]
+* Misc. bug fixes and cleanups [Florian; !125, !124, !126,
+  !127, !128, !129, !131, !130, !133]
+
+Contributors:
+  Florian Müllner, Γιάννης Κουτσούκος
+
+Translators:
+  Balázs Meskó [hu], Cheng-Chia Tseng [zh_TW], Daniel Mustieles [es],
+  Fabio Tomat [fur], Efstathios Iosifidis [el], Nathan Follens [nl],
+  Goran Vidović [hr], Kukuh Syafaat [id], Asier Sarasua Garmendia [eu],
+  Rafael Fontenelle [pt_BR], Kristjan SCHMIDT [eo], Anders Jonsson [sv],
+  Daniel Șerbănescu [ro], Aurimas Černius [lt], Jiri Grönroos [fi],
+  Piotr Drąg [pl], Tim Sabsch [de], Марко Костић [sr], Matej Urbančič [sl],
+  Ryuta Fujii [ja], Fran Dieguez [gl], Zander Brown [en_GB], Jordi Mas [ca],
+  Petr Kovář [cs], Danial Behzadi [fa], DaeHyun Sung [ko]
+
 3.33.2 — “Booty Hole Police”
 ============================
 * Display error message on failure to join room [Florian, Daronion; #17]
