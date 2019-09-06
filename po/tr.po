@@ -1,36 +1,37 @@
 # Turkish translation for polari.
-# Copyright (C) 2014 polari's COPYRIGHT HOLDER
-# This file is distributed under the same license as the polari package.
-# sabri ünal <yakushabb@gmail.com>, 2014.
+# Copyright (C) 2014-2019 polari's COPYRIGHT HOLDER
+# # This file is distributed under the same license as the polari package.
+# #
 # Çağatay Yiğit Şahin <cyigitsahin@outlook.com>, 2017.
 # Berkay Aktunç <berkay.aktunc@gmail.com>, 2017.
 # Nurperi Utlu <utlunurperi@gmail.com>, 2017.
 # Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2018.
 # Muhammet Kara <muhammetk@gnome.org>, 2014, 2015, 2016, 2017, 2018.
+# Sabri Ünal <libreajans@gmail.com>, 2014, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-07-25 04:57+0000\n"
-"PO-Revision-Date: 2018-08-06 10:23+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
+"POT-Creation-Date: 2019-08-20 17:37+0000\n"
+"PO-Revision-Date: 2019-09-06 22:50+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:65
-#: src/roomStack.js:160
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: src/roomStack.js:205
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:817
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:847
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME için İnternet Aktarmalı Sohbet İstemcisi"
 
@@ -56,14 +57,9 @@ msgstr ""
 "iletiyi asla kaçırmayacağınızdan emin olmanızı sağlar - ayrıca özel "
 "konuşmalarda, uygulamaya geri dönmeden anında cevap yazmanıza olanak tanır!"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:47
+#: data/appdata/org.gnome.Polari.appdata.xml.in:48
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Polari.desktop.in:7
-msgid "org.gnome.Polari"
-msgstr "org.gnome.Polari"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
@@ -170,7 +166,7 @@ msgid "_Real Name"
 msgstr "_Gerçek İsim"
 
 #: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
-#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:82
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:85
 msgid "_Cancel"
 msgstr "_İptal"
 
@@ -293,7 +289,7 @@ msgstr ""
 "Bağlanmak istediğiniz odayı seçin. Daha sonra + düğmesine basarak ağ veya "
 "oda ekleyebilirsiniz."
 
-#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:231
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:232
 msgid "Join Chat Room"
 msgstr "Sohbet Odasına Katıl"
 
@@ -330,36 +326,25 @@ msgid "About"
 msgstr "Hakkında"
 
 #: data/resources/main-window.ui:34 data/resources/menus.ui:6
+#: src/application.js:57
 msgid "Quit"
 msgstr "Çıkış"
 
-#: data/resources/main-window.ui:40
-msgid "Run Polari in the Background?"
-msgstr "Polari Arkaplanda Çalışsın mı?"
-
-#: data/resources/main-window.ui:41
-msgid ""
-"Polari will continue to run when closed and will be automatically started on "
-"login."
-msgstr ""
-"Polari kapalıyken de çalışmaya devam edecek ve oturum açıldığında otomatik "
-"olarak başlatılacak."
-
-#: data/resources/main-window.ui:47
-msgid "_Quit"
-msgstr "_Çık"
-
-#: data/resources/main-window.ui:54
-msgid "_Run in background"
-msgstr "_Arkaplanda çalıştır"
-
-#: data/resources/main-window.ui:81 data/resources/main-window.ui:95
+#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
 msgid "Add rooms and networks"
 msgstr "Odalar ve ağlar ekleyin"
 
-#: data/resources/main-window.ui:222
+#: data/resources/main-window.ui:196
 msgid "Show connected users"
 msgstr "Bağlı kullanıcıları göster"
+
+#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+msgid "Offline"
+msgstr "Çevrimdışı"
+
+#: data/resources/main-window.ui:233
+msgid "Go online to chat and receive messages."
+msgstr "Konuşmak ve ileti almak için çevrim içi olun."
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -409,102 +394,102 @@ msgstr "Kullanıcı çevrim içi olursa bildirilecek."
 msgid "Start Conversation"
 msgstr "Konuşmaya Başla"
 
-#: src/application.js:47
+#: src/application.js:43
 msgid "Start Telepathy client"
 msgstr "Telepathy istemcisi başlat"
 
-#: src/application.js:52
+#: src/application.js:48
 msgid "Start in debug mode"
 msgstr "Hata ayıklama kipinde başlat"
 
-#: src/application.js:55
+#: src/application.js:51
 msgid "Allow running alongside another instance"
 msgstr "Başka bir örneğin yanında çalışmaya izin ver"
 
-#: src/application.js:58
+#: src/application.js:54
 msgid "Print version and exit"
 msgstr "Sürümü yazdır ve çık"
 
-#: src/application.js:425 src/utils.js:184
+#: src/application.js:479 src/utils.js:185
 msgid "Failed to open link"
 msgstr "Bağlantıyı açma başarısız oldu"
 
-#: src/application.js:712
+#: src/application.js:770
 #, javascript-format
 msgid "%s removed."
-msgstr "%s kaldırıldı"
+msgstr "%s kaldırıldı."
 
-#: src/application.js:816
+#: src/application.js:846
 msgid "translator-credits"
-msgstr "Muhammet Kara <muhammetk@gmail.com>"
+msgstr "Muhammet Kara <muhammetk@gnome.org>"
 
-#: src/application.js:822
+#: src/application.js:852
 msgid "Learn more about Polari"
-msgstr "Polari hakkında daha fazlasını öğrenin"
+msgstr "Polari hakkında daha çoğunu öğrenin"
 
-#: src/appNotifications.js:79
+#: src/appNotifications.js:85
 msgid "Undo"
 msgstr "Geri Al"
 
-#: src/chatView.js:138
+#: src/chatView.js:137
 msgid "New Messages"
 msgstr "Yeni İletiler"
 
-#: src/chatView.js:762
+#: src/chatView.js:785
 msgid "Open Link"
 msgstr "Bağlantıyı Aç"
 
-#: src/chatView.js:768
+#: src/chatView.js:791
 msgid "Copy Link Address"
 msgstr "Bağlantı Adresini Kopyala"
 
-#: src/chatView.js:936
+#: src/chatView.js:963
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s şimdi %s olarak biliniyor"
 
-#: src/chatView.js:941
+#: src/chatView.js:968
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s bağlantısını kesti"
 
-#: src/chatView.js:949
+#: src/chatView.js:977
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s, %s tarafından kanaldan atıldı"
 
-#: src/chatView.js:951
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kanaldan atıldı"
 
-#: src/chatView.js:957
+#: src/chatView.js:985
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s, %s tarafından yasaklandı"
 
-#: src/chatView.js:959
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s yasaklandı"
 
-#: src/chatView.js:964
+#: src/chatView.js:991
 #, javascript-format
 msgid "%s joined"
 msgstr "%s odaya katıldı"
 
-#: src/chatView.js:969
+#: src/chatView.js:996
 #, javascript-format
 msgid "%s left"
 msgstr "%s odadan ayrıldı"
 
-#: src/chatView.js:1062
+#: src/chatView.js:1093
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d kullanıcı katıldı"
 
-#: src/chatView.js:1065
+#: src/chatView.js:1100
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -512,14 +497,14 @@ msgstr[0] "%d kullanıcı ayrıldı"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1132
+#: src/chatView.js:1172
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1137
+#: src/chatView.js:1177
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Dün, %H∶%M"
@@ -527,7 +512,7 @@ msgstr "Dün, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1142
+#: src/chatView.js:1182
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -536,7 +521,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1148
+#: src/chatView.js:1188
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %B, %H∶%M"
@@ -545,21 +530,22 @@ msgstr "%d %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1154
+#: src/chatView.js:1194
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %H∶%M"
 
+#. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1159
+#: src/chatView.js:1200
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1164
+#: src/chatView.js:1205
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Dün, %l∶%M %p"
@@ -567,7 +553,7 @@ msgstr "Dün, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1169
+#: src/chatView.js:1210
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -576,7 +562,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1175
+#: src/chatView.js:1216
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %l∶%M %p"
@@ -585,26 +571,25 @@ msgstr "%d %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1181
+#: src/chatView.js:1222
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
 
-#: src/connections.js:52
+#: src/connections.js:42
 msgid "Already added"
 msgstr "Zaten eklenmiş"
 
-#: src/connections.js:107
+#: src/connections.js:104
 msgid "No results."
 msgstr "Sonuç yok."
 
-#. Translators: %s is a connection name
-#: src/connections.js:492
+#: src/connections.js:501
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "“%s” Özellikleri"
 
-#: src/connections.js:536
+#: src/connections.js:545
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -612,58 +597,58 @@ msgstr ""
 "Bir ağ hatası nedeniyle Polari'nin bağlantısı kesildi. Lütfen adres "
 "alanındaki bilgilerin doğru olup olmadığını kontrol edin."
 
-#: src/entryArea.js:400
+#: src/entryArea.js:369
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "%s satır metin açık yapıştırma servisine yüklensin mi?"
 
-#: src/entryArea.js:404
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "%s satır metin açık yapıştırma servisine yükleniyor…"
 
-#: src/entryArea.js:411
+#: src/entryArea.js:380
 msgid "Upload image to public paste service?"
 msgstr "Resim açık yapıştırma servisine yüklensin mi?"
 
-#: src/entryArea.js:412
+#: src/entryArea.js:381
 msgid "Uploading image to public paste service…"
 msgstr "Resim açık yapıştırma servisine yükleniyor…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:433
+#: src/entryArea.js:403
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "“%s” açık yapıştırma servisine yüklensin mi?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:435
+#: src/entryArea.js:405
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "“%s” açık yapıştırma servisine yükleniyor…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:444
+#: src/entryArea.js:414
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s, #%s'de"
 
-#: src/entryArea.js:446
+#: src/entryArea.js:416
 #, javascript-format
 msgid "Paste from %s"
 msgstr "%s'den yapıştır"
 
-#: src/initialSetup.js:82
+#: src/initialSetup.js:85
 msgid "_Back"
 msgstr "_Geri"
 
-#: src/initialSetup.js:83
+#: src/initialSetup.js:86
 msgid "_Done"
 msgstr "_Bitti"
 
-#: src/initialSetup.js:83
+#: src/initialSetup.js:86
 msgid "_Next"
 msgstr "_İleri"
 
@@ -676,14 +661,14 @@ msgstr "_İleri"
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:23
+#: src/ircParser.js:21
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/PART [<channel>] [<reason>] — <channel> kanalından, öntanımlı olarak "
 "geçerli kanaldan, ayrılır"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:22
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -691,82 +676,82 @@ msgstr ""
 "/HELP [<command>] — <command> için yardımı ya da kullanılabilir komutların "
 "listesini gösterir"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:23
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <nick> [<channel>] — <nick> adlı kullanıcıyı <channel> kanalına ya "
 "da geçerli kanala davet eder"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:24
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <channel> — <channel> kanalına katılır"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:25
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <nick> — <nick> adlı kullanıcıyı geçerli kanaldan atar"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:26
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <action> — <action> eylemini geçerli kanala gönderir"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:27
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <takmaad> [<ileti>] — <takmaad> kişisine bir özel ileti gönderir"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:28
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — geçerli kanaldaki kullanıcıları listeler"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:29
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <nickname> — takma adınızı <nickname> olarak belirler"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:30
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<channel>] [<reason>] — <channel> kanalından, öntanımlı olarak "
 "geçerli kanaldan, ayrılır"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:31
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <nick> — <nick> ile özel konuşma başlatır"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:32
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<reason>] — geçerli sunucu ile bağlantınızı keser"
 
-#: src/ircParser.js:35
+#: src/ircParser.js:33
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <text> — <text> metnini geçerli odaya/kişiye gönderir"
 
-#: src/ircParser.js:36
+#: src/ircParser.js:34
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <topic> — konuyu <topic> olarak belirler ya da geçerli konuyu gösterir"
 
-#: src/ircParser.js:39
+#: src/ircParser.js:37
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "Bilinmeyen komut — kullanılabilir komutların listesi için /HELP komutunu "
 "deneyiniz"
 
-#: src/ircParser.js:53
+#: src/ircParser.js:51
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Kullanım: %s"
 
-#: src/ircParser.js:89
+#: src/ircParser.js:88
 msgid "Known commands:"
 msgstr "Bilinen komutlar:"
 
-#: src/ircParser.js:188
+#: src/ircParser.js:190
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s üzerindeki kullanıcılar:"
 
-#: src/ircParser.js:267
+#: src/ircParser.js:269
 msgid "No topic set"
 msgstr "Konu ayarlanmamış"
 
@@ -774,182 +759,225 @@ msgstr "Konu ayarlanmamış"
 msgid "Add Network"
 msgstr "Ağ Ekle"
 
-#: src/mainWindow.js:388
+#: src/mainWindow.js:389
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d kullanıcı"
 
-#: src/roomList.js:189
+#: src/roomList.js:190
 msgid "Leave chatroom"
 msgstr "Sohbet odasından ayrıl"
 
-#: src/roomList.js:189
+#: src/roomList.js:190
 msgid "End conversation"
 msgstr "Konuşmayı sonlandır"
 
-#: src/roomList.js:293
+#: src/roomList.js:301
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "%s ağında bir hata var"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:364
+#: src/roomList.js:372
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:371
+#: src/roomList.js:379
 msgid "Connection Problem"
 msgstr "Bağlantı Sorunu"
 
-#: src/roomList.js:388
+#: src/roomList.js:396
 msgid "Connected"
 msgstr "Bağlandı"
 
-#: src/roomList.js:390
+#: src/roomList.js:398
 msgid "Connecting…"
 msgstr "Bağlanıyor…"
 
-#: src/roomList.js:392 src/userList.js:415
-msgid "Offline"
-msgstr "Çevrimdışı"
-
-#: src/roomList.js:394
+#: src/roomList.js:402
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/roomList.js:414
+#: src/roomList.js:422
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "%s ile güvenli bir şekilde bağlantı kurulamadı."
 
-#: src/roomList.js:417
+#: src/roomList.js:425
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s parola gerektiriyor."
 
-#: src/roomList.js:423
+#: src/roomList.js:431
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "%s ile bağlantı kurulamadı. Sunucu meşgul."
 
-#: src/roomList.js:426
+#: src/roomList.js:434
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "%s ile bağlantı kurulamadı."
 
-#: src/roomStack.js:117
-msgid "_Save Password"
-msgstr "_Parolayı Kaydet"
-
-#: src/roomStack.js:126
+#: src/roomStack.js:98
 msgid "Should the password be saved?"
 msgstr "Parola kaydedilmeli mi?"
 
-#: src/roomStack.js:134 src/telepathyClient.js:587
+#: src/roomStack.js:100 src/telepathyClient.js:651
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr "%s'e bir dahaki bağlanışınızda tanıtma otomatik olarak gerçekleşecek"
 
-#: src/roomStack.js:163
+#: src/roomStack.js:106
+msgid "_Save Password"
+msgstr "_Parolayı Kaydet"
+
+#: src/roomStack.js:139
+msgid "Failed to join the room"
+msgstr "Odaya katılım başarısız"
+
+#: src/roomStack.js:141
+msgid "_Retry"
+msgstr "_Yeniden Dene"
+
+#: src/roomStack.js:165
+msgid "The room is full."
+msgstr "Oda dolu."
+
+#: src/roomStack.js:168
+msgid "You have been banned from the room."
+msgstr "Bu odadan yasaklandınız."
+
+#: src/roomStack.js:171
+msgid "The room is invite-only."
+msgstr "Oda davetlilere özel."
+
+#: src/roomStack.js:174
+msgid "You have been kicked from the room."
+msgstr "Odadan atıldınız."
+
+#: src/roomStack.js:177
+msgid "It is not possible to join the room now, but you can retry later."
+msgstr ""
+"Odaya katılmak şimdilik olanaksız ancak daha sonra yeniden deneyebilirsin."
+
+#: src/roomStack.js:209
 msgid "Join a room using the + button."
 msgstr "+ düğmesini kullanarak bir odaya katıl."
 
-#: src/telepathyClient.js:413
+#: src/telepathyClient.js:464
 msgid "Good Bye"
 msgstr "Hoşça Kal"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:586
+#: src/telepathyClient.js:650
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "%2$s için %1$s parolası kaydedilsin mi?"
 
-#: src/telepathyClient.js:590
+#: src/telepathyClient.js:654
 msgid "Save"
 msgstr "Kaydet"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:613
+#: src/telepathyClient.js:686
 #, javascript-format
 msgid "%s in %s"
 msgstr "%2$s içinde %1$s"
 
-#: src/userList.js:230
+#: src/userList.js:256
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d saniye önce"
 
-#: src/userList.js:235
+#: src/userList.js:263
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d dakika önce"
 
-#: src/userList.js:240
+#: src/userList.js:270
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d saat önce"
 
-#: src/userList.js:245
+#: src/userList.js:277
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d gün önce"
 
-#: src/userList.js:250
+#: src/userList.js:284
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hafta önce"
 
-#: src/userList.js:254
+#: src/userList.js:290
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ay önce"
 
-#: src/userList.js:411
+#: src/userList.js:452
 msgid "Available in another room."
 msgstr "Başka bir odada müsait."
 
-#: src/userList.js:413
+#: src/userList.js:454
 msgid "Online"
 msgstr "Çevrim dışı"
 
-#: src/userList.js:562
-msgid "No results"
-msgstr "Sonuç yok"
+#: src/userList.js:617
+msgid "No Results"
+msgstr "Sonuç Yok"
 
-#: src/userList.js:734
-msgid "All"
-msgstr "Tümü"
-
-#: src/userTracker.js:306
+#: src/userTracker.js:312
 msgid "User is online"
 msgstr "Kullanıcı çevrim içi"
 
-#: src/userTracker.js:307
+#: src/userTracker.js:313
 #, javascript-format
 msgid "User %s is now online."
 msgstr "Kullanıcı %s şimdi çevrim içi."
 
-#: src/utils.js:106
+#: src/utils.js:104
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "%s için Polari sunucu parolası"
 
-#: src/utils.js:111
+#: src/utils.js:109
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "%s için Polari NickServ parolası"
+
+#~ msgid "org.gnome.Polari"
+#~ msgstr "org.gnome.Polari"
+
+#~ msgid "Run Polari in the Background?"
+#~ msgstr "Polari Arkaplanda Çalışsın mı?"
+
+#~ msgid ""
+#~ "Polari will continue to run when closed and will be automatically started "
+#~ "on login."
+#~ msgstr ""
+#~ "Polari kapalıyken de çalışmaya devam edecek ve oturum açıldığında "
+#~ "otomatik olarak başlatılacak."
+
+#~ msgid "_Quit"
+#~ msgstr "_Çık"
+
+#~ msgid "_Run in background"
+#~ msgstr "_Arkaplanda çalıştır"
+
+#~ msgid "All"
+#~ msgstr "Tümü"
 
 #~ msgid "Message"
 #~ msgstr "İleti"
@@ -1017,9 +1045,6 @@ msgstr "%s için Polari NickServ parolası"
 
 #~ msgid "Try again"
 #~ msgstr "Tekrar deneyin"
-
-#~ msgid "The server is busy."
-#~ msgstr "Sunucu meşgul."
 
 #~ msgid "Failed to connect for an unknown reason."
 #~ msgstr "Bağlantı, bilinmeyen bir nedenle başarısız oldu."
