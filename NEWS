@@ -1,5 +1,11 @@
+3.34.0 — “Shut the Foot Up”
+===========================
+
+Translators:
+  Milo Casagrande [it], Charles Monzat [fr], Sabri Ünal [tr]
+
 3.33.92 — “We called her Bernie”
-=======
+================================
 * Support profiling with sysprof [Florian; !123]
 * Improve network reachability check [Florian; !132]
 * Misc. bug fixes and cleanups [Florian; !125, !124, !126,
