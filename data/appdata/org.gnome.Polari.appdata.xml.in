@@ -55,25 +55,14 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="3.32.1" date="2019-04-17">
+    <release version="3.34.0" date="2019-09-09">
       <description>
         <p>
-          The first 3.32 stable update improves the handling of private
-          conversations when GNOME's built-in chat integration is unavailable.
-        </p>
-      </description>
-    </release>
-    <release version="3.32.0" date="2019-03-12">
-      <description>
-        <p>
-          GNOME 3.32 brings with it a brand new Polari release with bug fixes
-          and performance improvements.
-        </p>
-        <p>
-          The release also brings Polari in line with current GNOME initiatives:
+          As always, GNOME 3.34 brings with it a brand new Polari release:
           <li>
-            <ul>a brand-new icon that follows the updated style guidelines</ul>
-            <ul>no more external application menu</ul>
+            <ul>Improved connectivity and offline handling</ul>
+            <ul>Better handling of room errors</ul>
+            <ul>Refinement of the user list popover</ul>
           </li>
         </p>
       </description>
