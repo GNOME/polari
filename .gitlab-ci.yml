@@ -8,6 +8,7 @@ stages:
 
 variables:
     BUNDLE: "polari-git.flatpak"
+    LINT_LOG: "eslint-report.txt"
 
 .only_default: &only_default
     only:
@@ -27,11 +28,11 @@ eslint:
     image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
     stage: source_check
     script:
-        - ./.gitlab-ci/run-eslint.sh
+        - eslint -o $LINT_LOG --no-color src || { cat $LINT_LOG; false; }
     <<: *only_default
     artifacts:
         paths:
-            - reports
+            - ${LINT_LOG}
         when: on_failure
 
 flatpak:
