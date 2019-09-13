@@ -1,0 +1,877 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2019-05-14 20:42+0000\n"
+"PO-Revision-Date: 2019-06-18 10:42+0700\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.2.3\n"
+"Last-Translator: \n"
+"Language: lo_LA\n"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7 data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+msgid "Polari"
+msgstr "Polari"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8 data/org.gnome.Polari.desktop.in:4 src/application.js:835
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "ໂປແກຣມສົ່ງຂໍ້ຄວາມສັ້ນຜ່ານອິນເຕີເນັດສຳລັບ GNOME"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate seamlessly with GNOME; it features a simple and beautiful "
+"interface which allows you to focus on your conversations."
+msgstr ""
+"Internet Relay Chat (IRC) ເປັນໂປແກຣມແຊັດທີ່ໃຊ້ງານງ່າຍ ທີ່ໄດ້ຮັບການອອກແບບມາໃຫ້ເຮັດວຽກໄດ້ດີກັບ GNOME ຊຶ່ງມີຫນ້າຕາທີ່ເບິງງ່າຍ ແລະ "
+"ເຮັດໃຫ້ທ່ານສາມາດຊຸ່ມໃສ່ແຕ່ການສົນທະນາຂອງທ່ານ."
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have private one-to-one conversations. Notifications make "
+"sure that you never miss an important message — for private conversations, they even allow you to reply instantly without "
+"switching back to the application!"
+msgstr ""
+"ທ່ານສາມາດນຳໃຊ້ Polari ເຂົ້າໃນການແຊັດແບບສາທາລະນະກັບຄົນຢູ່ໃຫ່ກຸ່ມຕ່າງໆ ແລະ ໃຊ້ແຊັດແບບສ່ວນຕົວກໍ່ໄດ້. ການແຈ້ງເຕືອນຈະເຮັດໃຫ້ທ່ານບໍ່ພາດໃນການຮັບຂໍ້ຄວາມຕ່າງໆທີ່ສຳຄັນ — "
+"ສຳລັບການສົນທະນາແບບສ່ວນຕົວ ທ່ານສາມາດຕອບກັບຂໍ້ຄວາມນັ້ນໄດ້ໂດຍບໍ່ຕ້ອງກັບເຂົ້າໄປໂປແກຣມອີກກໍ່ໄດ້!"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:48
+msgid "The GNOME Project"
+msgstr "ໂຄງການ GNOME"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;ອິນເຕີເນັດ;Relay;ແຊັດ;"
+
+#: data/org.gnome.Polari.gschema.xml:6
+msgid "Saved channel list"
+msgstr "ລາຍຊື່ຊ່ອງທີ່ໄດ້ບັນທຶກໄວ້"
+
+#: data/org.gnome.Polari.gschema.xml:7
+msgid "List of channels to restore on startup"
+msgstr "ລາຍຊື່ຊ່ອງທີ່ຈະເປີດຄືນໃນ startup"
+
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
+msgid "Run in Background"
+msgstr "ເປີດໃນ Background"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "ສືບຕໍ່ເປີດຕໍ່ໄປໃນ Background ເມື່ອອອກໂປແກຣມແລ້ວ."
+
+#: data/org.gnome.Polari.gschema.xml:16
+msgid "Window size"
+msgstr "ຂະຫນາດວິນໂດ"
+
+#: data/org.gnome.Polari.gschema.xml:17
+msgid "Window size (width and height)."
+msgstr "ຂະຫນາດວິນໂດ (ກ້ວາງ ແລະ ສູງ)."
+
+#: data/org.gnome.Polari.gschema.xml:21
+msgid "Window maximized"
+msgstr "ຂະຫຍາຍວິນໂດໃຫຍ່ສຸດ"
+
+#: data/org.gnome.Polari.gschema.xml:22
+msgid "Window maximized state"
+msgstr "ສະຖານະຂະຫຍາຍວິນໂດໃຫຍ່ສຸດ"
+
+#: data/org.gnome.Polari.gschema.xml:26
+msgid "Last active channel"
+msgstr "ຊ່ອງທີ່ຫາກາເຂົ້ານຳໃຊ້ຫລ້າສຸດ"
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Last active (selected) channel"
+msgstr "ຊ່ອງທີ່ຫາກາເຂົ້ານຳໃຊ້ຫລ້າສຸດ"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify botname"
+msgstr "ລະບຸ botname"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Nickname of the bot to identify with"
+msgstr "ຊື່ຫລີ້ນຂອງ bot ທີ່ຈະລະບຸດ້ວຍ"
+
+#: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "ຄຳສັງລະບຸ"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "ຄຳສັງທີ່ເຄີຍໃຊ້ລະບຸກັບ bot"
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify username"
+msgstr "ລະບຸຊື່ຜູ້ໃຊ້"
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Username to use in identify command"
+msgstr "ຊື່ຜູ້ໃຊ້ທີ່ໃຊ້ຢູ່ໃນຄຳສັງລະບຸ"
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr "ລະບຸຊື່ຜູ້ໃຊ້ໄດ້"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr "ຄຳສັ່ງລະບຸຕົວຕົນແມ່ນໄດ້ຮັບການສະຫນັບສະຫນູນຕົວປ່ຽນຊື່ຜູ້ໃຊ້"
+
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "_ທີ່ຢູ່ຂອງເຊີເວີ"
+
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "ຊື່ເນັດເວີກ"
+
+#: data/resources/connection-details.ui:49 data/resources/connection-details.ui:116
+msgid "optional"
+msgstr "ທາງເລືອກ"
+
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "ນຳໃຊ້ການເຊື່ອມຕໍ່ທີ່ປອດໄພ"
+
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "_ຊື່ຫລີ້ນ"
+
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "_ຊື່ແທ້"
+
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109 data/resources/join-room-dialog.ui:11
+#: src/initialSetup.js:85
+msgid "_Cancel"
+msgstr "_ອອກ"
+
+#: data/resources/connection-properties.ui:17
+msgid "_Apply"
+msgstr "_ໃຊ້"
+
+#: data/resources/entry-area.ui:38
+msgid "Change nickname"
+msgstr "ປ່ຽນຊື່ຫລີ້ນ"
+
+#: data/resources/entry-area.ui:119
+msgid "_Paste"
+msgstr "_ວ່າງ"
+
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "ທົ່ວໄປ"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "ເຂົ້າຮ່ວມຫ້ອງ"
+
+#: data/resources/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "ອອກຈາກຫ້ອງ"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "ສະແດງລາຍຊື່ຜູ້ໃຊ້"
+
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "ສະແດງ Emoji Picker"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "ອອກ"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "ຕົວລັດຄີບອດ"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "ການນຳທາງ"
+
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "ຫ້ອງຕໍ່ໄປ"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "ຫ້ອງກ່ອນຫນ້ານີ້"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "ຫ້ອງຕໍ່ໄປກັບຂໍ້ຄວາມທີ່ຍັງບໍ່ທັນອ່ານ"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "ຫ້ອງກ່ອນຫນ້ານີ້ກັບຂໍ້ຄວາມທີ່ຍັງບໍ່ທັນອ່ານ"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "ຫ້ອງທຳອິດ"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "ຫ້ອງສຸດທ້າຍ"
+
+#: data/resources/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "ຫ້ອງທຳອິດ – ທີ່ເກົ້າ"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "ຕິດຕັ້ງ Polari"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "ບໍ່ໄດ້ເຊື່ອມຕໍ່"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "ກະລຸນາເຊື່ອມຕໍ່ກັບອິນເຕີເນັດເພື່ອສືບຕໍ່ການຕິດຕັ້ງ."
+
+#: data/resources/initial-setup-window.ui:109 data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "ຍິນດີຕ້ອນຮັບສູ່ Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid "Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr "Polari ແມ່ນວິທີການແຊັດທີ່ງ່າຍໂດຍການນຳໃຊ້ IRC. ເລືອກເນັດເວີກເພື່ອເລີ່ມການນຳໃຊ້."
+
+#: data/resources/initial-setup-window.ui:171
+msgid "Select rooms you want to connect to. You can add more networks and rooms later, by clicking the + button."
+msgstr "ເລືອກຫ້ອງທີ່ທ່ານຕ້ອງການຈະເຊື່ອມຕໍ່. ທ່ານສາມາດເພີ່ມຫລາຍເນັດເວີກ ແລະ ຫ້ອງໄດ້ໃນພາຍຫລັງ ໂດຍການຄິກໃສ່ປຸ່ມ +."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:234
+msgid "Join Chat Room"
+msgstr "ເຂົ້າຮ່ວມຫ້ອງສົນທະນາ"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "_Join"
+msgstr "_ເຂົ້າຮ່ວມ"
+
+#: data/resources/join-room-dialog.ui:46
+msgid "C_onnection"
+msgstr "ເຊື່ອມຕໍ່"
+
+#: data/resources/join-room-dialog.ui:75
+msgid "_Add Network"
+msgstr "_ເພີ່ມເນັດເວີກ"
+
+#: data/resources/join-room-dialog.ui:159
+msgid "_Add"
+msgstr "_ເພີ່ມ"
+
+#: data/resources/join-room-dialog.ui:178
+msgid "_Custom Network"
+msgstr "_ຕັ້ງຄ່າເນັດເວີກ"
+
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "ຕົວຫຍໍ້ຄີບອດ"
+
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "ຊ່ວຍເຫລືອ"
+
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "ກ່ຽວກັບ"
+
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+msgid "Quit"
+msgstr "ອອກ"
+
+#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+msgid "Add rooms and networks"
+msgstr "ເພີ່ມຫ້ອງ ແລະ ເນັດເວີກ"
+
+#: data/resources/main-window.ui:196
+msgid "Show connected users"
+msgstr "ສະແດງຊື່ຜູ້ໃຊ້ທີ່ເຊື່ອມຕໍ່ຢູ່"
+
+#: data/resources/nick-popover.ui:16
+msgid "Change nickname:"
+msgstr "ປ່ຽນຊື່ຫລີ້ນ:"
+
+#: data/resources/nick-popover.ui:27
+msgid "_Change"
+msgstr "_ປ່ຽນ"
+
+#: data/resources/room-list-header.ui:145
+msgid "Connect"
+msgstr "ເຊື່ອມຕໍ່"
+
+#: data/resources/room-list-header.ui:152
+msgid "Reconnect"
+msgstr "ເຊື່ອມຕໍ່ຄື່ນໃຫມ່"
+
+#: data/resources/room-list-header.ui:159
+msgid "Disconnect"
+msgstr "ຢຸດການເຊື່ອມຕໍ່"
+
+#: data/resources/room-list-header.ui:166
+msgid "Remove"
+msgstr "ລຶບ"
+
+#: data/resources/room-list-header.ui:173
+msgid "Properties"
+msgstr "ຄຸນສົມບັດ"
+
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "ປ້ອນຊື່ຫ້ອງທີ່ຈະເພີ່ມ"
+
+#: data/resources/user-details.ui:27
+msgid "Loading details"
+msgstr "ກຳຫລັງໂຫລດຫລາຍລະອຽດ"
+
+#: data/resources/user-details.ui:60
+msgid "Last Activity:"
+msgstr "ການເຄື່ອນໄຫວຫລ້າສຸດ:"
+
+#: data/resources/user-details.ui:159
+msgid "Will notify if user appears online."
+msgstr "ຈະແຈ້ງເຕືອນຖ້າປະກົດເຫັນວ່າຜູ້ໃຊ້ອັອບລາຍຢູ່."
+
+#: data/resources/user-details.ui:181
+msgid "Start Conversation"
+msgstr "ເລີ່ມການສົນທະນາ"
+
+#: src/application.js:43
+msgid "Start Telepathy client"
+msgstr "ເລີ່ມ Telepathy client"
+
+#: src/application.js:48
+msgid "Start in debug mode"
+msgstr "ເລີ່ມໃນໂຫມດດີບັກ"
+
+#: src/application.js:51
+msgid "Allow running alongside another instance"
+msgstr "ອະນຸຍາດໃຫ້ເປີດຄວບຄູ່ໄປກັບ instance ອື່ນ"
+
+#: src/application.js:54
+msgid "Print version and exit"
+msgstr "ພິມເວີຊັນ ແລະ ອອກ"
+
+#: src/application.js:465 src/utils.js:187
+msgid "Failed to open link"
+msgstr "ມີຂໍ້ຜິດພາດໃນການເປີດລີ້ງ"
+
+#: src/application.js:758
+#, javascript-format
+msgid "%s removed."
+msgstr "%s ລຶບແລ້ວ."
+
+#: src/application.js:834
+msgid "translator-credits"
+msgstr "saikeo kavhanxay (kavhanxay@hotmail.com)"
+
+#: src/application.js:840
+msgid "Learn more about Polari"
+msgstr "ຮຽນຮູ້ເພີ່ມເຕີ່ມກ່ຽວກັບ Polari"
+
+#: src/appNotifications.js:87
+msgid "Undo"
+msgstr "ກັບຄືນ"
+
+#: src/chatView.js:137
+msgid "New Messages"
+msgstr "ຂໍ້ຄວາມໃຫມ່"
+
+#: src/chatView.js:793
+msgid "Open Link"
+msgstr "ເປີດລີ້ງ"
+
+#: src/chatView.js:799
+msgid "Copy Link Address"
+msgstr "ສຳເນົາທີ່ຢູ່ລີ້ງ"
+
+#: src/chatView.js:971
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s ຕອນນີ້ແມ່ນຮູ້ຈັກໃນຖານະ %s"
+
+#: src/chatView.js:976
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s ໄດ້ຢຸດການເຊື່ອມຕໍ່ແລ້ວ"
+
+#: src/chatView.js:985
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s ໄດ້ຖືກໄລ່ອອກໂດຍ %s"
+
+#: src/chatView.js:986
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s ໄດ້ຖືກໄລ່ອອກແລ້ວ"
+
+#: src/chatView.js:993
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s ໄດ້ຖືກແບນໂດຍ %s"
+
+#: src/chatView.js:994
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s ໄດ້ຖືກແບນແລ້ວ"
+
+#: src/chatView.js:999
+#, javascript-format
+msgid "%s joined"
+msgstr "%s ໄດ້ເຂົ້າຮ່ວມແລ້ວ"
+
+#: src/chatView.js:1004
+#, javascript-format
+msgid "%s left"
+msgstr "%s ອອກໄປແລ້ວ"
+
+#: src/chatView.js:1097
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "ຜູ້ໃຊ້ %d ໄດ້ເຂົ້າຮ່ວມແລ້ວ"
+
+#: src/chatView.js:1101
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "ຜູ້ໃຊ້ %d ໄດ້ເຂົ້າອອກໄປແລ້ວ"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1169
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1174
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "ມື້ວານ, %H∶%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1179
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1185
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1191
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1196
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1201
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "ມື້ວານ, %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1206
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1212
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1218
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: src/connections.js:41
+msgid "Already added"
+msgstr "ໄດ້ເພີ່ມແລ້ວ"
+
+#: src/connections.js:104
+msgid "No results."
+msgstr "ບໍ່ພົບ."
+
+#: src/connections.js:504
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "\"%s\" ຄຸນສົມບັດ"
+
+#: src/connections.js:548
+msgid "Polari disconnected due to a network error. Please check if the address field is correct."
+msgstr "Polari ຂາດການເຊື່ອມຕໍ່ເພາະວ່າເກີດມີຂໍ້ຜິດພາດໃນລະບົບເນັດເວີກ. ກະລຸນາກວດເບິງຄືນວ່າການຕັ້ງຄ່າເນັດເວີກຕ່າງໆແມ່ນຖືກຕ້ອງຫມົດແລ້ວ."
+
+#: src/entryArea.js:372
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "ວ່າງແຖວ %s ຂອງຕົວຫນັງສືໄວ້ໃນ public paste service?"
+
+#: src/entryArea.js:376
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "ກຳລັງອັບໂຫລດແຖວ %s ຂອງຕົວຫນັງສືໄວ້ໃນ public paste service…"
+
+#: src/entryArea.js:383
+msgid "Upload image to public paste service?"
+msgstr "ອັບໂຫລດຮູບພາບໄປໄວ້ໃນ public paste service?"
+
+#: src/entryArea.js:384
+msgid "Uploading image to public paste service…"
+msgstr "ກຳຫລັງອັບໂຫລດຮູບພາບໄປໄວ້ໃນ public paste service…"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:405
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "ອັບໂຫລດ “%s” to public paste service?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:407
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr "ກຳຫລັງອັບໂຫລດ “%s” to public paste service…"
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:416
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s ໃນ #%s"
+
+#: src/entryArea.js:418
+#, javascript-format
+msgid "Paste from %s"
+msgstr "ວ່າງຈາກ %s"
+
+#: src/initialSetup.js:85
+msgid "_Back"
+msgstr "_ກັບ"
+
+#: src/initialSetup.js:86
+msgid "_Done"
+msgstr "_ສຳເລັດ"
+
+#: src/initialSetup.js:86
+msgid "_Next"
+msgstr "_ຕໍ່ໄປ"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
+#.
+#: src/ircParser.js:23
+msgid "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr "/CLOSE [<channel>] [<reason>] — ປິດ <channel>, by default the current one"
+
+#: src/ircParser.js:24
+msgid "/HELP [<command>] — displays help for <command>, or a list of available commands"
+msgstr "/HELP [<command>] — ສະແດງວິທີນຳໃຊ້ສຳລັບ <command>, ຫລືສະແດງຄຳສັງທີ່ມີຢູ່"
+
+#: src/ircParser.js:25
+msgid "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr "/INVITE <nick> [<channel>] — ເຊີນ <nick> ເຂົ້າ <channel>, ຫລື ເຂົ້າຫ້ອງປະຈຸບັນ"
+
+#: src/ircParser.js:26
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <channel> — ເຂົ້າຮ່ວມ <channel>"
+
+#: src/ircParser.js:27
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <nick> — ໄລ່ <nick> ອອກຈາກຫ້ອງປະຈຸບັນ"
+
+#: src/ircParser.js:28
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <action> — ສົ່ງ <action> ເຂົ້າໄປໃນຫ້ອງປະຈຸບັນ"
+
+#: src/ircParser.js:29
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <nick> [<message>] — ສົ່ງຂໍ້ຄວາມສ່ວນຕົວໄປຫາ <nick>"
+
+#: src/ircParser.js:30
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — ສະແດງລາຍຊື່ຜູ້ໃຊ້ທີ່ມີຢູ່ໃນຫ້ອງຕອນນີ້"
+
+#: src/ircParser.js:31
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <nickname> — ຕັ້ງຊື່ຫລີ້ນຂອງທ່ານໄປເປັນ <nickname>"
+
+#: src/ircParser.js:32
+msgid "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr "/PART [<channel>] [<reason>] — ອອກຈາກ <channel>, by default the current one"
+
+#: src/ircParser.js:33
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <nick> — ເປີດການສົນທະນາແບບສ່ວນຕົວກັບ <nick>"
+
+#: src/ircParser.js:34
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<reason>] — ຕັດການເຊື່ອມຕໍ່ກັບເຊີເວີປະຈຸບັນນີ້"
+
+#: src/ircParser.js:35
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <text> — ສົ່ງ <text> ໄປຫາ ຫ້ອງ/ລາຍຊື່ຕິດຕໍ່ປະຈຸບັນນີ້"
+
+#: src/ircParser.js:36
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <topic> — ຕັ້ງຫົວຂໍ້ໄປເປັນ <topic>, ຫລື ສະແດງຫົວຂໍ້ປະຈຸບັນນີ້"
+
+#: src/ircParser.js:39
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "ຄຳສັ່ງນີ້ບໍ່ຮຸ້ຈັກ — ໃຫ້ພິມຄຳວ່າ /HELP ເພື່ອຊອກເບິງຄຳສັ່ງຕ່າງໆທີ່ມີຢູ່"
+
+#: src/ircParser.js:53
+#, javascript-format
+msgid "Usage: %s"
+msgstr "ນຳໃຊ້: %s"
+
+#: src/ircParser.js:89
+msgid "Known commands:"
+msgstr "ຄຳສັ່ງທີ່ຮູ້ຈັກ:"
+
+#: src/ircParser.js:191
+#, javascript-format
+msgid "Users on %s:"
+msgstr "ຜູ້ໃຊ້ໃນ %s:"
+
+#: src/ircParser.js:271
+msgid "No topic set"
+msgstr "ບໍ່ໄດ້ຕັ້ງຫົວຂໍ້"
+
+#: src/joinDialog.js:234
+msgid "Add Network"
+msgstr "ເພີ່ມເນັດເວີກ"
+
+#: src/mainWindow.js:370
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d ຜຸ້ໃຊ້"
+
+#: src/roomList.js:188
+msgid "Leave chatroom"
+msgstr "ອອກຈາກຫ້ອງແຊັດ"
+
+#: src/roomList.js:188
+msgid "End conversation"
+msgstr "ຈົບການແຊັດ"
+
+#: src/roomList.js:299
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "ເນັດເວີກ %s ມີຂໍ້ຜິດພາດ"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:370
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:377
+msgid "Connection Problem"
+msgstr "ບັນຫາການເຊື່ອມຕໍ່"
+
+#: src/roomList.js:394
+msgid "Connected"
+msgstr "ເຊື່ອມຕໍ່ແລ້ວ"
+
+#: src/roomList.js:396
+msgid "Connecting…"
+msgstr "ກຳລັງເຊື່ອມຕໍ່…"
+
+#: src/roomList.js:398 src/userList.js:433
+msgid "Offline"
+msgstr "ອັອບລາຍ"
+
+#: src/roomList.js:400
+msgid "Unknown"
+msgstr "ບໍ່ຮູ້ຈັກ"
+
+#: src/roomList.js:420
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ກັບ %s ໃນຮູບແບບທີ່ປອດໄພໄດ້."
+
+#: src/roomList.js:423
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s ຕ້ອງການລະຫັດຜ່ານ."
+
+#: src/roomList.js:429
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ໄປຫາ %s. ເຊີເວີຂັດຂ້ອງ."
+
+#: src/roomList.js:432
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ໄປຫາ %s."
+
+#: src/roomStack.js:125
+msgid "_Save Password"
+msgstr "_ບັນທຶກລະຫັດຜ່ານ"
+
+#: src/roomStack.js:133
+msgid "Should the password be saved?"
+msgstr "ຄວນຈະບັນທຶກລະຫັດຜ່ານໄວ້ບໍ່?"
+
+#: src/roomStack.js:180
+msgid "Join a room using the + button."
+msgstr "ເຂົ້າຫ້ອງແຊັດໂດຍການນຳໃຊ້ປຸ່ມ +."
+
+#: src/telepathyClient.js:451
+msgid "Good Bye"
+msgstr "ລ່າກ່ອນ"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:631
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "ຕ້ອງການບັນທຶກລະຫັດ %s ສຳລັບ %s ບໍ່?"
+
+#: src/telepathyClient.js:632
+#, javascript-format
+msgid "Identification will happen automatically the next time you connect to %s"
+msgstr "ການລະບຸຕົວຕົນຈະເກີດຂື້ນໂດຍອັດຕະໂນມັດໃນຄັ້ງຕໍ່ໄປເມື່ອທ່ານເຊື່ອມຕໍ່ກັບ %s"
+
+#: src/telepathyClient.js:635
+msgid "Save"
+msgstr "ບັນທຶກ"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:666
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s ໃນ %s"
+
+#: src/userList.js:239
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d ວິນາທີທີ່ຜ່ານມາ"
+
+#: src/userList.js:245
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d ນາທີທີ່ຜ່ານມາ"
+
+#: src/userList.js:251
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d ຊົ່ວໂມງທີ່ຜ່ານມາ"
+
+#: src/userList.js:257
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d ມື້ທີ່ຜ່ານມາ"
+
+#: src/userList.js:263
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d ອາທິດທີ່ຜ່ານມາ"
+
+#: src/userList.js:268
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d ເດືອນທີ່ຜ່ານມາ"
+
+#: src/userList.js:429
+msgid "Available in another room."
+msgstr "ວ່າງຢູ່ໃນຫ້ອງແຊັດອື່ນ."
+
+#: src/userList.js:431
+msgid "Online"
+msgstr "ອອນລາຍ"
+
+#: src/userList.js:589
+msgid "No results"
+msgstr "ບໍ່ພົບຫຍັງ"
+
+#: src/userTracker.js:312
+msgid "User is online"
+msgstr "ຜູ້ໃຊ້ທີ່ອອນລາຍຢູ່"
+
+#: src/userTracker.js:313
+#, javascript-format
+msgid "User %s is now online."
+msgstr "ຜູ້ໃຊ້ %s ຕອນນີ້ແມ່ນອອນລາຍຢູ່."
+
+#: src/utils.js:106
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "ລະຫັດຜ່ານເຊີເວີ Polari ສຳລັບ %s"
+
+#: src/utils.js:111
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "ລະຫັດຜ່ານ Polari NickServ ສຳລັບ %s"
