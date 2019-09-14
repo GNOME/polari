@@ -35,9 +35,9 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"Jednoduchý klient IRC (Internet Relay Chat), který je navržen pro hladké "
-"začlenění do GNOME. Má jednoduché a pěkné uživatelské rozhraní, ve kterém se "
-"můžete plně věnovat diskuzím."
+"Jednoduchý klient IRC (Internet Relay Chat), který je navržen, tak aby dobře "
+"zapadl do prostředí GNOME. Má jednoduché a pěkné uživatelské rozhraní, ve "
+"kterém se můžete plně věnovat diskuzím."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
@@ -49,7 +49,7 @@ msgstr ""
 "Polari můžete používat k veřejné diskuzi s lidmi na některém z kanálů nebo k "
 "soukromé konverzaci dvou lidí. Upozorňování zajistí, že nezmeškáte žádnou "
 "důležitou zprávu – u soukromých konverzací můžete dokonce ihned odpovědět, "
-"aniž byste se museli přepnout zpátky do aplikace Polari!"
+"aniž byste se museli přepnout zpátky do aplikace Polari."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:48
 msgid "The GNOME Project"
@@ -66,7 +66,7 @@ msgstr "Seznam uložených kanálů"
 
 #: data/org.gnome.Polari.gschema.xml:7
 msgid "List of channels to restore on startup"
-msgstr "Seznam kanálů, které se mají obnovit po spuštění"
+msgstr "Seznam kanálů, které se mají obnovit po spuštění."
 
 #: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
@@ -90,7 +90,7 @@ msgstr "Maximalizace okna"
 
 #: data/org.gnome.Polari.gschema.xml:22
 msgid "Window maximized state"
-msgstr "Stav maximalizace okna"
+msgstr "Stav maximalizace okna."
 
 #: data/org.gnome.Polari.gschema.xml:26
 msgid "Last active channel"
@@ -98,7 +98,7 @@ msgstr "Poslední aktivní kanál"
 
 #: data/org.gnome.Polari.gschema.xml:27
 msgid "Last active (selected) channel"
-msgstr "Poslední aktivní (vybraný) kanál"
+msgstr "Poslední aktivní (vybraný) kanál."
 
 #: data/org.gnome.Polari.gschema.xml:34
 msgid "Identify botname"
@@ -106,7 +106,7 @@ msgstr "Identifikační bot"
 
 #: data/org.gnome.Polari.gschema.xml:35
 msgid "Nickname of the bot to identify with"
-msgstr "Přezdívka bota, pomocí kterého se uživatel identifikuje"
+msgstr "Přezdívka bota, pomocí kterého se uživatel identifikuje."
 
 #: data/org.gnome.Polari.gschema.xml:39
 msgid "Identify command"
@@ -114,7 +114,7 @@ msgstr "Identifikační příkaz"
 
 #: data/org.gnome.Polari.gschema.xml:40
 msgid "Command used to identify with bot"
-msgstr "Příkaz používaný k identifikaci pomocí bota"
+msgstr "Příkaz používaný k identifikaci pomocí bota."
 
 #: data/org.gnome.Polari.gschema.xml:44
 msgid "Identify username"
@@ -122,7 +122,7 @@ msgstr "Uživatelské jméno pro identifikaci"
 
 #: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
-msgstr "Uživatelské jméno pro identifikační příkaz"
+msgstr "Uživatelské jméno pro identifikační příkaz."
 
 #: data/org.gnome.Polari.gschema.xml:49
 msgid "Identify username supported"
@@ -130,7 +130,7 @@ msgstr "Uživatelské jméno při identifikaci je podporováno"
 
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
-msgstr "Zda příkaz pro identifikaci podporuje jako parametr uživatelské jméno"
+msgstr "Zda příkaz pro identifikaci podporuje jako parametr uživatelské jméno."
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -336,7 +336,7 @@ msgstr "Odpojeno"
 
 #: data/resources/main-window.ui:233
 msgid "Go online to chat and receive messages."
-msgstr "Přejít on-line, chatovat a přijímat zprávy."
+msgstr "Přejít on-line, diskutovat a přijímat zprávy."
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -415,7 +415,7 @@ msgstr "Účet %s byl odstraněn."
 msgid "translator-credits"
 msgstr ""
 "Marek Černocký <marek@manet.cz> \n"
-" Ondřej Kolín <ondrej.kolin@gmail.com>"
+"Ondřej Kolín <ondrej.kolin@gmail.com>"
 
 #: src/application.js:852
 msgid "Learn more about Polari"
@@ -837,11 +837,11 @@ msgstr "_Uložit heslo"
 
 #: src/roomStack.js:139
 msgid "Failed to join the room"
-msgstr "Nepodařilo se připojit do místnosti"
+msgstr "Selhalo připojení do místnosti"
 
 #: src/roomStack.js:141
 msgid "_Retry"
-msgstr "_Zopakovat"
+msgstr "Z_opakovat"
 
 #: src/roomStack.js:165
 msgid "The room is full."
@@ -861,7 +861,7 @@ msgstr "Z místnosti jste byli vykázáni."
 
 #: src/roomStack.js:177
 msgid "It is not possible to join the room now, but you can retry later."
-msgstr "Teď se nedaří do místnosti připojit, zkuste to později."
+msgstr "Momentálně se nedaří do místnosti připojit, zkuste to později."
 
 #: src/roomStack.js:209
 msgid "Join a room using the + button."
@@ -967,25 +967,3 @@ msgstr "Heslo serveru Polari pro účet %s"
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Heslo Polari NickServ pro účet %s"
-
-#~ msgid "org.gnome.Polari"
-#~ msgstr "org.gnome.Polari"
-
-#~ msgid "Run Polari in the Background?"
-#~ msgstr "Nechat Polari běžet na pozadí?"
-
-#~ msgid ""
-#~ "Polari will continue to run when closed and will be automatically started "
-#~ "on login."
-#~ msgstr ""
-#~ "Polari zůstane skrytě běžet, i když jej zavřete a automaticky se spustí "
-#~ "po vašem přihlášení."
-
-#~ msgid "_Quit"
-#~ msgstr "U_končit"
-
-#~ msgid "_Run in background"
-#~ msgstr "Běžet na _pozadí"
-
-#~ msgid "All"
-#~ msgstr "Vše"
