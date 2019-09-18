@@ -35,20 +35,29 @@ eslint:
             - ${LINT_LOG}
         when: on_failure
 
-flatpak:
+.flatpak-template:
     stage: build
     variables:
         # Your manifest path
         MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
         RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
         FLATPAK_MODULE: "polari"
-        BRANCH: "snapshot"
-        # Make sure to keep this in sync with the Flatpak manifest, all arguments
-        # are passed except the config-args because we build it ourselves
-        MESON_ARGS: "-Dsnapshot=true --werror --warnlevel 2"
         APP_ID: "org.gnome.Polari"
     extends: .flatpak
     <<: *only_default
+
+flatpak:
+    variables:
+        BRANCH: "snapshot"
+        MESON_ARGS: "-Dsnapshot=true --werror --warnlevel 2"
+    extends: .flatpak-template
+    except:
+        - master
+
+flatpak-master:
+    extends: .flatpak-template
+    only:
+        - master
 
 review:
     stage: review
