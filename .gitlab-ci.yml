@@ -5,6 +5,7 @@ stages:
  - source_check
  - build
  - review
+ - deploy
 
 variables:
     BUNDLE: "polari-git.flatpak"
@@ -35,21 +36,29 @@ eslint:
             - ${LINT_LOG}
         when: on_failure
 
-flatpak:
-    image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
+.flatpak-template:
     stage: build
     variables:
         # Your manifest path
         MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
         RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
         FLATPAK_MODULE: "polari"
-        BRANCH: "snapshot"
-        # Make sure to keep this in sync with the Flatpak manifest, all arguments
-        # are passed except the config-args because we build it ourselves
-        MESON_ARGS: "-Dsnapshot=true --werror --warnlevel 2"
         APP_ID: "org.gnome.Polari"
     extends: .flatpak
     <<: *only_default
+
+flatpak:
+    variables:
+        BRANCH: "snapshot"
+        MESON_ARGS: "-Dsnapshot=true --werror --warnlevel 2"
+    extends: .flatpak-template
+    except:
+        - master
+
+flatpak-master:
+    extends: .flatpak-template
+    only:
+        - master
 
 review:
     stage: review
@@ -62,6 +71,11 @@ stop_review:
     stage: review
     extends: .stop_review
     <<: *only_default
+
+nightly:
+  extends: '.publish_nightly'
+  variables:
+    BUNDLES: '$BUNDLE'
 
 fedora:
   image: fedora:latest
