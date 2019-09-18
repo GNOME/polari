@@ -5,6 +5,7 @@ stages:
  - source_check
  - build
  - review
+ - deploy
 
 variables:
     BUNDLE: "polari-git.flatpak"
@@ -70,6 +71,11 @@ stop_review:
     stage: review
     extends: .stop_review
     <<: *only_default
+
+nightly:
+  extends: '.publish_nightly'
+  variables:
+    BUNDLES: '$BUNDLE'
 
 fedora:
   image: fedora:latest
