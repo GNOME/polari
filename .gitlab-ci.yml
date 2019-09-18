@@ -36,7 +36,6 @@ eslint:
         when: on_failure
 
 flatpak:
-    image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
     stage: build
     variables:
         # Your manifest path
