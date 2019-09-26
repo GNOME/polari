@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-08-21 19:28+0000\n"
-"PO-Revision-Date: 2019-08-24 18:51+0200\n"
+"POT-Creation-Date: 2019-09-18 23:08+0000\n"
+"PO-Revision-Date: 2019-09-26 21:28+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -340,7 +340,7 @@ msgstr "Nepovezano"
 
 #: data/resources/main-window.ui:233
 msgid "Go online to chat and receive messages."
-msgstr ""
+msgstr "Pridružite se klepetu in sprejemanju sporočil."
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -452,12 +452,12 @@ msgstr "%s je prekinil povezavo"
 #: src/chatView.js:977
 #, javascript-format
 msgid "%s has been kicked by %s"
-msgstr "%s je bil odstranjen s strani %s"
+msgstr "%s je bil vržen iz sobe s strani %s"
 
 #: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked"
-msgstr "%s je bil odstranjen"
+msgstr "%s je bil vržen iz sobe"
 
 #: src/chatView.js:985
 #, javascript-format
@@ -699,7 +699,7 @@ msgstr "/JOIN [<kanal>] – pridruži uporabnika na <kanal>"
 
 #: src/ircParser.js:25
 msgid "/KICK <nick> — kicks <nick> from current channel"
-msgstr "/KICK [<vzdevek>] – brcne uporabnika <vzdevek> s trenutnega kanala"
+msgstr "/KICK [<vzdevek>] – vrže uporabnika <vzdevek> s trenutnega kanala"
 
 #: src/ircParser.js:26
 msgid "/ME <action> — sends <action> to the current channel"
@@ -861,7 +861,7 @@ msgstr "Soba je zasedena."
 
 #: src/roomStack.js:168
 msgid "You have been banned from the room."
-msgstr ""
+msgstr "Vaše članstvo v skupini je preklicano."
 
 #: src/roomStack.js:171
 msgid "The room is invite-only."
@@ -869,7 +869,7 @@ msgstr "Vstop v sobo je mogoč le na povabilo"
 
 #: src/roomStack.js:174
 msgid "You have been kicked from the room."
-msgstr ""
+msgstr "Bili ste vrženi iz sobe."
 
 #: src/roomStack.js:177
 msgid "It is not possible to join the room now, but you can retry later."
