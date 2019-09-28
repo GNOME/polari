@@ -25,6 +25,7 @@ js_sources = [
   'serverRoomManager.js',
   'tabCompletion.js',
   'telepathyClient.js',
+  'urlPreview.js',
   'userList.js',
   'utils.js',
   'userTracker.js'
@@ -109,3 +110,5 @@ gnome.generate_gir(libpolari,
 )
 
 subdir('tests')
+
+install_data('thumbnailer.js', install_dir: pkgdatadir)
