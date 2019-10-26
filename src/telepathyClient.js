@@ -636,7 +636,7 @@ class TelepathyClient extends Tp.BaseClient {
             botname: room.channel.target_contact.alias,
             command,
             username: username || room.channel.connection.self_contact.alias,
-            usernameSupported: username !== null,
+            usernameSupported: !!username,
             password,
         };
         this._pendingBotPasswords.set(accountPath, data);
