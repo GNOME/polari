@@ -87,7 +87,15 @@ var DropTargetIface = GObject.registerClass({
     addTargets(widget) {
         this._dragHighlight = false;
 
-        widget.drag_dest_set(0, [], Gdk.DragAction.COPY);
+        // Broken in gjs 1.58.2
+        try {
+            widget.drag_dest_set(0, [], Gdk.DragAction.COPY);
+        } catch (e) {
+            if (!DropTargetIface.__brokenWarning)
+                log('Failed to set up DND drop target.');
+            DropTargetIface.__brokenWarning = true;
+            return;
+        }
 
         let targetList = widget.drag_dest_get_target_list();
         if (!targetList)
