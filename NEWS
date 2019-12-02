@@ -1,3 +1,16 @@
+3.35.2 — “A Flower Made of Steel”
+=================================
+* Fix NickServ authentication without username [Алексей; !136]
+* Fix grouping of status messages [Florian; #115]
+* Misc. bug fixes and cleanups [Florian; !135]
+
+Contributors:
+  Saikeo Kavhanxay, Florian Müllner, Kukuh Syafaat, Алексей Шилин
+
+Translators:
+  Saikeo Kavhanxay [lo], Marek Černocký [cs], Matej Urbančič [sl],
+  Ask Hjorth Larsen [da], Jordi Mas [ca]
+
 3.34.0 — “Shut the Foot Up”
 ===========================
 
