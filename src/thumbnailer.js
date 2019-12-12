@@ -1,7 +1,9 @@
 imports.gi.versions.Gtk = '3.0';
 
-const { GLib, GObject, Gtk, WebKit2 } = imports.gi;
+const { Gio, GLib, GObject, Gtk, WebKit2 } = imports.gi;
 const Cairo = imports.cairo;
+
+Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
 
 const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
@@ -57,21 +59,21 @@ let PreviewWindow = GObject.registerClass({
         });
     }
 
-    _createSnapshot() {
-        this._view.get_snapshot(
+    async _createSnapshot() {
+        let snapshotOp = this._view.get_snapshot(
             WebKit2.SnapshotRegion.VISIBLE,
-            WebKit2.SnapshotOptions.TRANSPARENT_BACKGROUND,
-            null,
-            (o, res) => {
-                try {
-                    this._snapshot = this._view.get_snapshot_finish(res);
-                } catch (e) {
-                    log(`Creating snapshot failed: ${e}`);
-                    this.emit('snapshot-failed');
-                    return;
-                }
-                this.emit('snapshot-ready');
-            });
+            WebKit2.SnapshotOptions.NONE,
+            null);
+
+        try {
+            this._snapshot = await snapshotOp;
+        } catch (e) {
+            log(`Creating snapshot failed: ${e}`);
+            this.emit('snapshot-failed');
+            return;
+        }
+
+        this.emit('snapshot-ready');
     }
 
     getSnapshot() {
