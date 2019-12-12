@@ -4,6 +4,7 @@ const { Gio, GLib, GObject, Gtk, WebKit2 } = imports.gi;
 const Cairo = imports.cairo;
 
 Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
+Gio._promisify(WebKit2.WebView.prototype, 'run_javascript', 'run_javascript_finish');
 
 const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
@@ -60,20 +61,70 @@ let PreviewWindow = GObject.registerClass({
     }
 
     async _createSnapshot() {
+        let getClipOp = this._getImageClip();
         let snapshotOp = this._view.get_snapshot(
             WebKit2.SnapshotRegion.VISIBLE,
             WebKit2.SnapshotOptions.NONE,
             null);
+        let clip, snapshot;
 
         try {
-            this._snapshot = await snapshotOp;
+            clip = await getClipOp;
+            snapshot = await snapshotOp;
         } catch (e) {
             log(`Creating snapshot failed: ${e}`);
             this.emit('snapshot-failed');
             return;
         }
 
+        if (clip)
+            this._snapshot = this._createClippedSurface(snapshot, clip);
+        else
+            this._snapshot = snapshot;
+
         this.emit('snapshot-ready');
+    }
+
+    async _getImageClip() {
+        const script = `
+            const img = document.images[0];
+            document.contentType.startsWith('image')
+                ? [img.x, img.y, img.width, img.height]
+                : null;
+        `;
+
+        let obj = null;
+
+        try {
+            let res = await this._view.run_javascript(script, null);
+            obj = res.get_js_value();
+        } catch (e) {
+            log(`Failed to get clip information: ${e} (${e.code})`);
+        }
+
+        if (!obj || obj.is_null())
+            return null;
+
+        let [x, y, width, height] = obj.object_enumerate_properties()
+            .map(p => obj.object_get_property(p).to_int32());
+
+        if (width === 0 || height === 0)
+            throw new Error('Invalid image clip');
+
+        return { x, y, width, height };
+    }
+
+    _createClippedSurface(source, clip) {
+        let { x, y, width, height } = clip;
+
+        let surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
+
+        let cr = new Cairo.Context(surface);
+        cr.setSourceSurface(source, -x, -y);
+        cr.paint();
+        cr.$dispose();
+
+        return surface;
     }
 
     getSnapshot() {
