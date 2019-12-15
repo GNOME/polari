@@ -1333,7 +1333,8 @@ var ChatView = GObject.registerClass({
             this._insertWithTags(iter,
                 url.name, tags.concat(this._lookupTag('url'), tag));
 
-            previews.push(new URLPreview({ uri: url.url, visible: true }));
+            if (GLib.uri_parse_scheme(url.url).startsWith('http'))
+                previews.push(new URLPreview({ uri: url.url, visible: true }));
 
             pos = url.pos + url.name.length;
         }
