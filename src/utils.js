@@ -157,8 +157,11 @@ function _lookupPassword(schema, account, callback) {
 // Return value: the list of match objects, as described above
 function findUrls(str) {
     let res = [], match;
-    while ((match = _urlRegexp.exec(str)))
-        res.push({ url: match[2], pos: match.index + match[1].length });
+    while ((match = _urlRegexp.exec(str))) {
+        let name = match[2];
+        let url = GLib.uri_parse_scheme(name) ? name : `http://${name}`;
+        res.push({ name, url, pos: match.index + match[1].length });
+    }
     return res;
 }
 

@@ -1330,13 +1330,12 @@ var ChatView = GObject.registerClass({
             let tag = this._createUrlTag(url.url);
             this._view.get_buffer().tag_table.add(tag);
 
-            let name = url.name ? url.name : url.url;
             this._insertWithTags(iter,
-                name, tags.concat(this._lookupTag('url'), tag));
+                url.name, tags.concat(this._lookupTag('url'), tag));
 
             previews.push(new URLPreview({ uri: url.url, visible: true }));
 
-            pos = url.pos + name.length;
+            pos = url.pos + url.name.length;
         }
         this._insertWithTags(iter, text.substr(pos), tags);
 
@@ -1424,9 +1423,6 @@ var ChatView = GObject.registerClass({
     }
 
     _createUrlTag(url) {
-        if (!url.includes(':'))
-            url = `http://${url}`;
-
         let tag = new ButtonTag();
         tag.connect('notify::hover', () => {
             tag.foreground_rgba = tag.hover ? this._hoveredLinkColor : null;
