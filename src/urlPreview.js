@@ -1,5 +1,5 @@
 /* exported URLPreview */
-const { Gio, GLib, GObject, Gtk } = imports.gi;
+const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 
 class Thumbnailer {
     static getDefault() {
@@ -77,8 +77,10 @@ var URLPreview = GObject.registerClass({
         super._init(params);
 
         this.set({
+            orientation: Gtk.Orientation.VERTICAL,
             margin: 12,
             margin_start: 0,
+            spacing: 6,
         });
 
         let styleContext = this.get_style_context();
@@ -91,8 +93,25 @@ var URLPreview = GObject.registerClass({
         });
         this.add(this._image);
 
+        this._label = new Gtk.Label({
+            halign: Gtk.Align.START,
+            ellipsize: Pango.EllipsizeMode.END,
+            visible: true,
+        });
+        this._label.get_style_context().add_class(Gtk.STYLE_CLASS_DIM_LABEL);
+        this.add(this._label);
+
         Thumbnailer.getDefault().getThumbnail(this.uri, filename => {
             this._image.set_from_file(filename);
+
+            let title = null;
+            if (this._image.pixbuf)
+                title = this._image.pixbuf.get_option('tEXt::Title');
+
+            if (title) {
+                this._label.set_label(title);
+                this.tooltip_text = title;
+            }
         });
     }
 });

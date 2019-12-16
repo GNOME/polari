@@ -1,6 +1,7 @@
+imports.gi.versions.Gdk = '3.0';
 imports.gi.versions.Gtk = '3.0';
 
-const { Gio, GLib, GObject, Gtk, WebKit2 } = imports.gi;
+const { Gdk, Gio, GLib, GObject, Gtk, WebKit2 } = imports.gi;
 const Cairo = imports.cairo;
 
 Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
@@ -31,6 +32,9 @@ let PreviewWindow = GObject.registerClass({
             visible: true,
         });
         this.add(this._view);
+
+        this._view.bind_property('title',
+            this, 'title', GObject.BindingFlags.SYNC_CREATE);
 
         this._view.connect('authenticate', (view, request) => {
             request.cancel();
@@ -157,6 +161,7 @@ class App {
 
     _onSnapshotReady(window) {
         let surface = window.getSnapshot();
+        let title = window.title || this._uri;
         window.destroy();
 
         if (!surface)
@@ -187,7 +192,9 @@ class App {
         cr.paint();
         cr.$dispose();
 
-        target.writeToPNG(this._filename);
+        let pixbuf = Gdk.pixbuf_get_from_surface(target,
+            0, 0, targetWidth, targetHeight);
+        pixbuf.savev(this._filename, 'png', ['tEXt::Title'], [title]);
     }
 }
 
