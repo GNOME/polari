@@ -111,15 +111,25 @@ class App {
 
         let sourceWidth = surface.getWidth();
         let sourceHeight = surface.getHeight();
+        let ratio = sourceWidth / sourceHeight;
+
+        let targetWidth, targetHeight;
+        if (ratio >= PREVIEW_WIDTH / PREVIEW_HEIGHT) {
+            targetWidth = Math.min(sourceWidth, PREVIEW_WIDTH);
+            targetHeight = targetWidth / ratio;
+        } else {
+            targetHeight = Math.min(sourceHeight, PREVIEW_HEIGHT);
+            targetWidth = targetHeight * ratio;
+        }
 
         let target = new Cairo.ImageSurface(Cairo.Format.ARGB32,
-            PREVIEW_WIDTH,
-            PREVIEW_HEIGHT);
+            targetWidth,
+            targetHeight);
 
         let cr = new Cairo.Context(target);
         cr.scale(
-            PREVIEW_WIDTH / sourceWidth,
-            PREVIEW_HEIGHT / sourceHeight);
+            targetWidth / sourceWidth,
+            targetHeight / sourceHeight);
         cr.setSourceSurface(surface, 0, 0);
         cr.paint();
 
