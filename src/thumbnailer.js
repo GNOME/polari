@@ -28,6 +28,11 @@ let PreviewWindow = GObject.registerClass({
         });
         this.add(this._view);
 
+        this._view.connect('authenticate', (view, request) => {
+            request.cancel();
+            return true;
+        });
+
         this._view.connect('notify::is-loading',
             this._onLoadingChanged.bind(this));
         this._view.load_uri(this.uri);
