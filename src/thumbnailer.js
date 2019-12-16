@@ -38,6 +38,11 @@ let PreviewWindow = GObject.registerClass({
             this._onLoadingChanged.bind(this));
         this._view.connect('load-failed', () => this.emit('snapshot-failed'));
         this._view.load_uri(this.uri);
+
+        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
+            this._view.stop_loading();
+            return GLib.SOURCE_REMOVE;
+        });
     }
 
     _onLoadingChanged() {
