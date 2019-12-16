@@ -15,6 +15,7 @@ let PreviewWindow = GObject.registerClass({
     },
     Signals: {
         'snapshot-ready': {},
+        'snapshot-failed': {},
     },
 }, class PreviewWindow extends Gtk.Window {
     _init(params) {
@@ -35,6 +36,7 @@ let PreviewWindow = GObject.registerClass({
 
         this._view.connect('notify::is-loading',
             this._onLoadingChanged.bind(this));
+        this._view.connect('load-failed', () => this.emit('snapshot-failed'));
         this._view.load_uri(this.uri);
     }
 
@@ -60,6 +62,8 @@ let PreviewWindow = GObject.registerClass({
                     this._snapshot = this._view.get_snapshot_finish(res);
                 } catch (e) {
                     log(`Creating snapshot failed: ${e}`);
+                    this.emit('snapshot-failed');
+                    return;
                 }
                 this.emit('snapshot-ready');
             });
@@ -87,6 +91,7 @@ class App {
 
         window.realize();
         window.connect('snapshot-ready', this._onSnapshotReady.bind(this));
+        window.connect('snapshot-failed', () => window.destroy());
         window.connect('destroy', () => Gtk.main_quit());
 
         Gtk.main();
