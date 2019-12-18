@@ -185,6 +185,7 @@ class App {
             targetHeight / sourceHeight);
         cr.setSourceSurface(surface, 0, 0);
         cr.paint();
+        cr.$dispose();
 
         target.writeToPNG(this._filename);
     }
