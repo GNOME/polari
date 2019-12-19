@@ -41,7 +41,7 @@ eslint:
     variables:
         # Your manifest path
         MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
-        RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
+        RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
         FLATPAK_MODULE: "polari"
         APP_ID: "org.gnome.Polari"
     extends: .flatpak
