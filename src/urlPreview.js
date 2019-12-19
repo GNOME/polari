@@ -65,7 +65,7 @@ class Thumbnailer {
     }
 }
 
-let URLPreview = GObject.registerClass({
+var URLPreview = GObject.registerClass({
     Properties: {
         'uri': GObject.ParamSpec.string(
             'uri', 'uri', 'uri',
