@@ -86,12 +86,8 @@
                 {
                     "type": "git",
                     "url": "https://www.github.com/TelepathyIM/telepathy-mission-control.git",
-                    "tag": "telepathy-mission-control-5.16.4",
-                    "commit": "74d553d4125224f0a95c9d2843d38861b42eae9f"
-                },
-                {
-                    "type": "patch",
-                    "path": "tp-mc-python3.patch"
+                    "tag": "telepathy-mission-control-5.16.5",
+                    "commit": "5de9c50b0353f10b2fd7b1a6980c37bd7cb1b4dc"
                 }
             ],
             "cleanup": [
