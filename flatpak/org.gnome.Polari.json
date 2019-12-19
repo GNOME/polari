@@ -88,6 +88,10 @@
                     "url": "https://www.github.com/TelepathyIM/telepathy-mission-control.git",
                     "tag": "telepathy-mission-control-5.16.5",
                     "commit": "5de9c50b0353f10b2fd7b1a6980c37bd7cb1b4dc"
+                },
+                {
+                    "type": "patch",
+                    "path": "tp-mc-fix-prop-name.patch"
                 }
             ],
             "cleanup": [
