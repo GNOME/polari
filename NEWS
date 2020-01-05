@@ -1,3 +1,14 @@
+3.35.3 — “I May As Well Take the Scenic Route”
+==============================================
+* Preview URLs in chat log [daronion, Florian; #58, !139, !140, !142]
+* flatpak: Fix mission-control bug that blows up with newer GLib [Florian; !141]
+
+Contributors:
+  Florian Müllner, daronion
+
+Translators:
+  Fran Dieguez [gl]
+
 3.35.2 — “A Flower Made of Steel”
 =================================
 * Fix NickServ authentication without username [Алексей; !136]
