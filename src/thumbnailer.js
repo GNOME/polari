@@ -27,9 +27,14 @@ let PreviewWindow = GObject.registerClass({
 
         super._init(params);
 
+        let settings = new WebKit2.Settings({
+            hardware_acceleration_policy: WebKit2.HardwareAccelerationPolicy.NEVER,
+        });
+
         this._view = new WebKit2.WebView({
             is_ephemeral: true,
             visible: true,
+            settings,
         });
         this.add(this._view);
 
