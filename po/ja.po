@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-06-15 10:57+0000\n"
+"POT-Creation-Date: 2019-09-18 23:08+0000\n"
 "PO-Revision-Date: 2019-08-25 19:15+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -27,7 +27,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:849
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:847
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME 用インターネットリレーチャットクライアント"
 
@@ -406,16 +406,16 @@ msgstr ""
 msgid "Print version and exit"
 msgstr "バージョンを表示して終了する"
 
-#: src/application.js:479 src/utils.js:187
+#: src/application.js:479 src/utils.js:185
 msgid "Failed to open link"
 msgstr "リンクを開けませんでした"
 
-#: src/application.js:772
+#: src/application.js:770
 #, javascript-format
 msgid "%s removed."
 msgstr "%s を削除。"
 
-#: src/application.js:848
+#: src/application.js:846
 msgid "translator-credits"
 msgstr ""
 "日本 GNOME ユーザー会 <http://www.gnome.gr.jp>\n"
@@ -424,11 +424,11 @@ msgstr ""
 "sicklylife <translation@sicklylife.jp>\n"
 "sujiniku <sujinikusityuu@gmail.com>"
 
-#: src/application.js:854
+#: src/application.js:852
 msgid "Learn more about Polari"
 msgstr "Polari の詳細について"
 
-#: src/appNotifications.js:87
+#: src/appNotifications.js:85
 msgid "Undo"
 msgstr "元に戻す"
 
@@ -436,61 +436,61 @@ msgstr "元に戻す"
 msgid "New Messages"
 msgstr "新しいメッセージ"
 
-#: src/chatView.js:786
+#: src/chatView.js:785
 msgid "Open Link"
 msgstr "リンクを開く"
 
-#: src/chatView.js:792
+#: src/chatView.js:791
 msgid "Copy Link Address"
 msgstr "リンクアドレスをコピー"
 
-#: src/chatView.js:964
+#: src/chatView.js:963
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s は %s となりました"
 
-#: src/chatView.js:969
+#: src/chatView.js:968
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s は切断しました"
 
-#: src/chatView.js:978
+#: src/chatView.js:977
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s は %s にキックされました"
 
-#: src/chatView.js:979
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s はキックされました"
 
-#: src/chatView.js:986
+#: src/chatView.js:985
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s は %s に BAN されました"
 
-#: src/chatView.js:987
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s は BAN されました"
 
-#: src/chatView.js:992
+#: src/chatView.js:991
 #, javascript-format
 msgid "%s joined"
 msgstr "%s が参加しました"
 
-#: src/chatView.js:997
+#: src/chatView.js:996
 #, javascript-format
 msgid "%s left"
 msgstr "%s は離れました"
 
-#: src/chatView.js:1094
+#: src/chatView.js:1093
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d ユーザーが新規参加"
 
-#: src/chatView.js:1101
+#: src/chatView.js:1100
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -498,14 +498,14 @@ msgstr[0] "%d ユーザーが退室"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1173
+#: src/chatView.js:1172
 msgid "%H∶%M"
 msgstr "%H:%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1178
+#: src/chatView.js:1177
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "昨日, %H:%M"
@@ -513,7 +513,7 @@ msgstr "昨日, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1183
+#: src/chatView.js:1182
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
@@ -522,7 +522,7 @@ msgstr "%A, %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1189
+#: src/chatView.js:1188
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%m月%d日, %H:%M"
@@ -531,11 +531,12 @@ msgstr "%m月%d日, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1195
+#: src/chatView.js:1194
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y年%m月%d日, %H:%M"
 
+#. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
 #: src/chatView.js:1200
@@ -597,46 +598,46 @@ msgstr ""
 "ネットワークエラーにより切断しました。アドレスが正しいことを確認してくださ"
 "い。"
 
-#: src/entryArea.js:368
+#: src/entryArea.js:369
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "%s 行のテキストをペーストサービスに貼り付けますか?"
 
-#: src/entryArea.js:372
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "%s 行のテキストをペーストサービスにアップロードしています…"
 
-#: src/entryArea.js:379
+#: src/entryArea.js:380
 msgid "Upload image to public paste service?"
 msgstr "画像をペーストサービスにアップロードしますか?"
 
-#: src/entryArea.js:380
+#: src/entryArea.js:381
 msgid "Uploading image to public paste service…"
 msgstr "画像をペーストサービスにアップロードしています…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:402
+#: src/entryArea.js:403
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "“%s”をペーストサービスにアップロードしますか?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:404
+#: src/entryArea.js:405
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "“%s”をペーストサービスにアップロードしています…"
 
 # なぜかjavascript-formatだと"#%2$s の %1$s" だとmsgfmt -vcでエラーになる (非対応?)
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:413
+#: src/entryArea.js:414
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s (#%s)"
 
-#: src/entryArea.js:415
+#: src/entryArea.js:416
 #, javascript-format
 msgid "Paste from %s"
 msgstr "%s から貼り付け"
@@ -662,14 +663,14 @@ msgstr "次へ(_N)"
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:23
+#: src/ircParser.js:21
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/CLOSE [<channel>] [<reason>] — <channel> を閉じる (デフォルトは現在のチャネ"
 "ル)"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:22
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -677,81 +678,81 @@ msgstr ""
 "/HELP [<command>] — <command> のヘルプ、もしくは利用可能なコマンドの一覧を表"
 "示する"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:23
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <nick> [<channel>] — <nick> を <channel>、もしくは現在のチャネルに招"
 "待する"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:24
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <channel> — <channel> に参加する"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:25
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <nick> — <nick> を現在のチャネルから排除する"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:26
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <action> — 現在のチャネルに <action> を送信する"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:27
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <nick> [<message>] — <nick> にプライベートメッセージを送信する"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:28
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — 現在のチャネル上のユーザーを一覧表示する"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:29
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <nickname> — あなたのニックネームを <nickname> に設定する"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:30
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<channel>] [<reason>] — <channel> を離れる (デフォルトは現在のチャネ"
 "ル)"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:31
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <nick> — <nick> とのプライベートな会話を開く"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:32
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<reason>] — 現在のサーバーから切断する"
 
-#: src/ircParser.js:35
+#: src/ircParser.js:33
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <text> — 現在のチャットルーム/コンタクトに <text> を送る"
 
-#: src/ircParser.js:36
+#: src/ircParser.js:34
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <topic> — <topic> をトピックに設定、もしくは現在のチャネルに表示する"
 
-#: src/ircParser.js:39
+#: src/ircParser.js:37
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "不明なコマンド — /HELP を実行して使用可能なコマンド一覧を確認してください"
 
-#: src/ircParser.js:53
+#: src/ircParser.js:51
 #, javascript-format
 msgid "Usage: %s"
 msgstr "使用方法: %s"
 
-#: src/ircParser.js:90
+#: src/ircParser.js:88
 msgid "Known commands:"
 msgstr "使用可能なコマンド:"
 
-#: src/ircParser.js:192
+#: src/ircParser.js:190
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s 上のユーザー:"
 
-#: src/ircParser.js:271
+#: src/ircParser.js:269
 msgid "No topic set"
 msgstr "トピックが設定されていません"
 
@@ -825,7 +826,7 @@ msgstr "%s へ接続できませんでした。"
 msgid "Should the password be saved?"
 msgstr "パスワードを保存しますか?"
 
-#: src/roomStack.js:100 src/telepathyClient.js:648
+#: src/roomStack.js:100 src/telepathyClient.js:651
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -867,25 +868,25 @@ msgstr "現時点ではルームに参加できないため、後ほど再試行
 msgid "Join a room using the + button."
 msgstr "+ ボタンを押してチャットルームに参加してください。"
 
-#: src/telepathyClient.js:461
+#: src/telepathyClient.js:464
 msgid "Good Bye"
 msgstr "Good Bye"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:647
+#: src/telepathyClient.js:650
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "%s のパスワード (%s 用) を保存しますか?"
 
-#: src/telepathyClient.js:651
+#: src/telepathyClient.js:654
 msgid "Save"
 msgstr "保存"
 
 # なぜかjavascript-formatだと"#%2$s の %1$s" だとmsgfmt -vcでエラーになる (非対応?)
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:683
+#: src/telepathyClient.js:686
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s (%s)"
@@ -947,12 +948,12 @@ msgstr ""
 msgid "User %s is now online."
 msgstr "ユーザー %s は現在オンラインです。"
 
-#: src/utils.js:106
+#: src/utils.js:104
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr ""
 
-#: src/utils.js:111
+#: src/utils.js:109
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr ""
