@@ -1,17 +1,17 @@
 # Japanese translation for polari.
-# Copyright (C) 2015 polari's COPYRIGHT HOLDER
+# Copyright (C) 2015-2020 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Kentaro KAZUHAMA <kazken3@gmail.com>, 2015.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2015-2016.
 # sujiniku <sujinikusityuu@gmail.com>, 2018.
-# sicklylife <translation@sicklylife.jp>, 2019.
+# sicklylife <translation@sicklylife.jp>, 2019-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2019-09-18 23:08+0000\n"
-"PO-Revision-Date: 2019-08-25 19:15+0900\n"
+"PO-Revision-Date: 2020-01-17 00:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -341,6 +341,7 @@ msgstr "オフライン"
 #: data/resources/main-window.ui:233
 msgid "Go online to chat and receive messages."
 msgstr ""
+"チャットやメッセージ受信のためにオンライン接続してください。"
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -384,7 +385,7 @@ msgstr "最後のアクティビティ:"
 
 #: data/resources/user-details.ui:159
 msgid "Will notify if user appears online."
-msgstr ""
+msgstr "ユーザーがオンラインになったら通知します。"
 
 #: data/resources/user-details.ui:181
 msgid "Start Conversation"
@@ -413,7 +414,7 @@ msgstr "リンクを開けませんでした"
 #: src/application.js:770
 #, javascript-format
 msgid "%s removed."
-msgstr "%s を削除。"
+msgstr "%s を削除しました。"
 
 #: src/application.js:846
 msgid "translator-credits"
@@ -830,7 +831,7 @@ msgstr "パスワードを保存しますか?"
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
-msgstr ""
+msgstr "次に %s へ接続したときに自動で認証を行います"
 
 #: src/roomStack.js:106
 msgid "_Save Password"
@@ -941,7 +942,7 @@ msgstr "結果なし"
 
 #: src/userTracker.js:312
 msgid "User is online"
-msgstr ""
+msgstr "ユーザーがオンラインです"
 
 #: src/userTracker.js:313
 #, javascript-format
@@ -951,12 +952,12 @@ msgstr "ユーザー %s は現在オンラインです。"
 #: src/utils.js:104
 #, javascript-format
 msgid "Polari server password for %s"
-msgstr ""
+msgstr "%s のサーバーパスワード"
 
 #: src/utils.js:109
 #, javascript-format
 msgid "Polari NickServ password for %s"
-msgstr ""
+msgstr "%s の NickServ パスワード"
 
 #~ msgid "org.gnome.Polari"
 #~ msgstr "org.gnome.Polari"
