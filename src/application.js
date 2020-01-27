@@ -809,7 +809,7 @@ var Application = GObject.registerClass({
     }
 
     _onShowHelp() {
-        Utils.openURL('help:org.gnome.Polari', Gtk.get_current_event_time());
+        Utils.openURL('help:polari', Gtk.get_current_event_time());
     }
 
     _onShowAbout() {
