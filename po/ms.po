@@ -1,0 +1,958 @@
+# Malay translation for polari.
+# Copyright (C) 2020 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# abuyop <abuyop@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2020-01-18 12:22+0000\n"
+"PO-Revision-Date: 2020-01-24 17:35+0800\n"
+"Language-Team: Malay <ms@li.org>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:7
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: src/roomStack.js:205
+msgid "Polari"
+msgstr "Polari"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:8
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:847
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "Sebuah Klien Sembang Trimantar Internet untuk GNOME"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:10
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"Sebuah klien Sembang Trimantar Internet (IRC) ringkas yang direka untuk "
+"disepadukan secara selanjar dengan GNOME; ia memfiturkan antara muka yang "
+"ringkas dan cantik yang membolehkan anda kekal fokus terhadap perbualan anda."
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:15
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message — for private conversations, they even allow you "
+"to reply instantly without switching back to the application!"
+msgstr ""
+"Anda boleh gunakan Polari untuk bersembang secara awam dengan sesiapa sahaja "
+"di dalam saluran, dan juga berbual persendirian secara seorang-ke-seorang. "
+"Pemberitahuan akan memastikan anda tidak sesekali terlepas mesej penting — "
+"terutamanya perbualan persendirian. Anda boleh jawab serta-merta tanpa "
+"kembali masuk ke aplikasi!"
+
+#: data/appdata/org.gnome.Polari.appdata.xml.in:48
+msgid "The GNOME Project"
+msgstr "Projek GNOME"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Trimantar;Sembang;"
+
+#: data/org.gnome.Polari.gschema.xml:6
+msgid "Saved channel list"
+msgstr "Senarai saluran tersimpan"
+
+#: data/org.gnome.Polari.gschema.xml:7
+msgid "List of channels to restore on startup"
+msgstr "Senarai saluran yang dipulihkan ketika permulaan"
+
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
+msgid "Run in Background"
+msgstr "Jalan di balik tabir"
+
+#: data/org.gnome.Polari.gschema.xml:12
+msgid "Keep running in background when closed."
+msgstr "Kekal berjalan di balik tabir bila ditutup."
+
+#: data/org.gnome.Polari.gschema.xml:16
+msgid "Window size"
+msgstr "Saiz tetingkap"
+
+#: data/org.gnome.Polari.gschema.xml:17
+msgid "Window size (width and height)."
+msgstr "Saiz tetingkap (lebar dan tinggi)."
+
+#: data/org.gnome.Polari.gschema.xml:21
+msgid "Window maximized"
+msgstr "Tetingkap dimaksimumkan"
+
+#: data/org.gnome.Polari.gschema.xml:22
+msgid "Window maximized state"
+msgstr "Keadaan tetingkap yang dimaksimumkan"
+
+#: data/org.gnome.Polari.gschema.xml:26
+msgid "Last active channel"
+msgstr "Saluran aktif terakhir"
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Last active (selected) channel"
+msgstr "Saluran (terpilih) aktif terakhir"
+
+#: data/org.gnome.Polari.gschema.xml:34
+msgid "Identify botname"
+msgstr "Kenal pasti nama bot"
+
+#: data/org.gnome.Polari.gschema.xml:35
+msgid "Nickname of the bot to identify with"
+msgstr "Gelaran bot yang dikenal pasti"
+
+#: data/org.gnome.Polari.gschema.xml:39
+msgid "Identify command"
+msgstr "Perintah kenal pasti"
+
+#: data/org.gnome.Polari.gschema.xml:40
+msgid "Command used to identify with bot"
+msgstr "Perintah yang digunakan untuk dikenal pasti dengan bot"
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify username"
+msgstr "Kenal pasti nama pengguna"
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Username to use in identify command"
+msgstr "Nama pengguna yang digunakan dalam perintah kenal pasti"
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify username supported"
+msgstr "Kenal pasti nama pengguna yang disokong"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+"Sama ada perintah kenal pasti yang diketahui menyokong parameter nama "
+"pengguna"
+
+#: data/resources/connection-details.ui:13
+msgid "_Server Address"
+msgstr "Alamat _Pelayan"
+
+#: data/resources/connection-details.ui:33
+msgid "Net_work Name"
+msgstr "Nama _Rangkaian"
+
+#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:116
+msgid "optional"
+msgstr "pilihan"
+
+#: data/resources/connection-details.ui:61
+msgid "Use secure c_onnection"
+msgstr "Guna sambungan s_elamat"
+
+#: data/resources/connection-details.ui:76
+msgid "_Nickname"
+msgstr "_Gelaran"
+
+#: data/resources/connection-details.ui:101
+msgid "_Real Name"
+msgstr "Nama Se_benar"
+
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:85
+msgid "_Cancel"
+msgstr "Bata_l"
+
+#: data/resources/connection-properties.ui:17
+msgid "_Apply"
+msgstr "_Laksana"
+
+#: data/resources/entry-area.ui:38
+msgid "Change nickname"
+msgstr "Ubah gelaran"
+
+#: data/resources/entry-area.ui:119
+msgid "_Paste"
+msgstr "_Tampal"
+
+#: data/resources/help-overlay.ui:15
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Am"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "Sertai Bilik"
+
+#: data/resources/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "Tinggalkan Bilik"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "Tunjuk Senarai Pengguna"
+
+#: data/resources/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "Tunjuk Pemilih Emoji"
+
+#: data/resources/help-overlay.ui:48
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Keluar"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Kekunci"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Navigasi"
+
+#: data/resources/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "Bilik Berikutnya"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "Bilik Terdahulu"
+
+#: data/resources/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "Bilik Berikutnya dengan Mesej Belum Baca"
+
+#: data/resources/help-overlay.ui:89
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "Bilik Terdahulu dengan Mesej Belum Baca"
+
+#: data/resources/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "Bilik Pertama"
+
+#: data/resources/help-overlay.ui:103
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "Bilik Terakhir"
+
+#: data/resources/help-overlay.ui:110
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "Bilik Pertama — ke Sembilan"
+
+#: data/resources/initial-setup-window.ui:10
+msgid "Polari Setup"
+msgstr "Persediaan Polari"
+
+#: data/resources/initial-setup-window.ui:60
+msgid "Not connected"
+msgstr "Tidak bersambung"
+
+#: data/resources/initial-setup-window.ui:73
+msgid "Please connect to the internet to continue the setup."
+msgstr "Sila sambung dengan internet untuk meneruskan persediaan."
+
+#: data/resources/initial-setup-window.ui:109
+#: data/resources/initial-setup-window.ui:159
+msgid "Welcome to Polari"
+msgstr "Selamat Datang ke Polari"
+
+#: data/resources/initial-setup-window.ui:121
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari merupakan cara termudah untuk bersembang melalui IRC. Pilih satu "
+"rangkaian untuk mula."
+
+#: data/resources/initial-setup-window.ui:171
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"Pilih bilik-bilik yang mahu disambungkan. Anda boleh tambah lagi rangkaian "
+"dan bilik kemudian, dengan mengklik butang +."
+
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:232
+msgid "Join Chat Room"
+msgstr "Sertai Bilik Sembang"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "_Join"
+msgstr "_Sertai"
+
+#: data/resources/join-room-dialog.ui:46
+msgid "C_onnection"
+msgstr "_Sambungan"
+
+#: data/resources/join-room-dialog.ui:75
+msgid "_Add Network"
+msgstr "T_ambah Rangkaian"
+
+#: data/resources/join-room-dialog.ui:159
+msgid "_Add"
+msgstr "T_ambah"
+
+#: data/resources/join-room-dialog.ui:178
+msgid "_Custom Network"
+msgstr "Rangkaian _Suai"
+
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "Pintasan Papan Kekunci"
+
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "Bantuan"
+
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "Perihal"
+
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+#: src/application.js:57
+msgid "Quit"
+msgstr "Keluar"
+
+#: data/resources/main-window.ui:55 data/resources/main-window.ui:69
+msgid "Add rooms and networks"
+msgstr "Tambah bilik dan rangkaian"
+
+#: data/resources/main-window.ui:196
+msgid "Show connected users"
+msgstr "Tunjuk pengguna yang bersambung"
+
+#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+msgid "Offline"
+msgstr "Luar Talian"
+
+#: data/resources/main-window.ui:233
+msgid "Go online to chat and receive messages."
+msgstr "Pergi dalam talian untuk bersembang dan menerima mesej."
+
+#: data/resources/nick-popover.ui:16
+msgid "Change nickname:"
+msgstr "Ubah gelaran:"
+
+#: data/resources/nick-popover.ui:27
+msgid "_Change"
+msgstr "_Ubah"
+
+#: data/resources/room-list-header.ui:145
+msgid "Connect"
+msgstr "Sambung"
+
+#: data/resources/room-list-header.ui:152
+msgid "Reconnect"
+msgstr "Sambung Semula"
+
+#: data/resources/room-list-header.ui:159
+msgid "Disconnect"
+msgstr "Putuskan"
+
+#: data/resources/room-list-header.ui:166
+msgid "Remove"
+msgstr "Buang"
+
+#: data/resources/room-list-header.ui:173
+msgid "Properties"
+msgstr "Sifat"
+
+#: data/resources/server-room-list.ui:45
+msgid "Enter room name to add"
+msgstr "Masukkan nama bilik untuk ditambah"
+
+#: data/resources/user-details.ui:27
+msgid "Loading details"
+msgstr "Memuatkan perincian"
+
+#: data/resources/user-details.ui:60
+msgid "Last Activity:"
+msgstr "Aktiviti Terakhir:"
+
+#: data/resources/user-details.ui:159
+msgid "Will notify if user appears online."
+msgstr "Akan maklum pengguna jika pengguna berada dalam talian."
+
+#: data/resources/user-details.ui:181
+msgid "Start Conversation"
+msgstr "Mula Berbual"
+
+#: src/application.js:43
+msgid "Start Telepathy client"
+msgstr "Mulakan klien Telepathy"
+
+#: src/application.js:48
+msgid "Start in debug mode"
+msgstr "Mula dengan mod nyahpepijat"
+
+#: src/application.js:51
+msgid "Allow running alongside another instance"
+msgstr "Benarkan polari dijalankan bersama-sama kejadian lain"
+
+#: src/application.js:54
+msgid "Print version and exit"
+msgstr "Tunjuk versi kemudian keluar"
+
+#: src/application.js:479 src/utils.js:188
+msgid "Failed to open link"
+msgstr "Gagal membuka pautan"
+
+#: src/application.js:770
+#, javascript-format
+msgid "%s removed."
+msgstr "%s telah dibuang."
+
+#: src/application.js:846
+msgid "translator-credits"
+msgstr ""
+"Launchpad Contributions:\n"
+"  Aizat Faiz https://launchpad.net/~aizatto\n"
+"  Andi Rady Kurniawan https://launchpad.net/~kurniasan\n"
+"  Hasbullah Bin Pit https://launchpad.net/~sebol\n"
+"  Mohd Farimi Ab Rahman https://launchpad.net/~farimi\n"
+"  Zakri Zakaria https://launchpad.net/~zairox\n"
+"  abuyop https://launchpad.net/~abuyop\n"
+"  dequan https://launchpad.net/~dequan"
+
+#: src/application.js:852
+msgid "Learn more about Polari"
+msgstr "Ketahui lebih lanjut berkenaan Polari"
+
+#: src/appNotifications.js:85
+msgid "Undo"
+msgstr "Buat Asal"
+
+#: src/chatView.js:138
+msgid "New Messages"
+msgstr "Mesej Baharu"
+
+#: src/chatView.js:786
+msgid "Open Link"
+msgstr "Buka Pautan"
+
+#: src/chatView.js:792
+msgid "Copy Link Address"
+msgstr "Salin Alamat Pautan"
+
+#: src/chatView.js:964
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s kini dikenali sebagai %s"
+
+#: src/chatView.js:969
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s telah terputus"
+
+#: src/chatView.js:978
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s telah ditendang keluar oleh %s"
+
+#: src/chatView.js:979
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s telah ditendang keluar"
+
+#: src/chatView.js:986
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s telah dilarang masuk oleh %s"
+
+#: src/chatView.js:987
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s telah dilarang masuk"
+
+#: src/chatView.js:992
+#, javascript-format
+msgid "%s joined"
+msgstr "%s telah menyertai"
+
+#: src/chatView.js:997
+#, javascript-format
+msgid "%s left"
+msgstr "%s telah keluar"
+
+#: src/chatView.js:1094
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d pengguna menyertai"
+
+#: src/chatView.js:1101
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d pengguna keluar"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1173
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1178
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "Semalam, %H:%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1183
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A, %H:%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1189
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%b %d, %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1195
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. eslint-disable-next-line no-lonely-if
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1201
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1206
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "Semalam, %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1211
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1217
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1223
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: src/connections.js:42
+msgid "Already added"
+msgstr "Sudah tambah"
+
+#: src/connections.js:104
+msgid "No results."
+msgstr "Tiada keputusan."
+
+#: src/connections.js:501
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "Sifat \"%s\""
+
+#: src/connections.js:545
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"Polari telah terputus sambungan disebabkan oleh ralat rangkaian. Sila "
+"periksa sama ada medan alamat adalah betul."
+
+#: src/entryArea.js:369
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "Tampal %s baris teks ke perkhidmatan tampal awam?"
+
+#: src/entryArea.js:373
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "Memuat naik %s baris teks ke perkhidmatan tampal awal…"
+
+#: src/entryArea.js:380
+msgid "Upload image to public paste service?"
+msgstr "Memuat naik imej ke dalam perkhidmatan tampal awam?"
+
+#: src/entryArea.js:381
+msgid "Uploading image to public paste service…"
+msgstr "Memuat naik imej ke dalam perkhidmatan tampal awam..."
+
+#. Translators: %s is a filename
+#: src/entryArea.js:403
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "Muat naik \"%s\" ke dalam perkhidmatan tampal awam?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:405
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr "Memuat naik \"%s\" ke dalam perkhidmatan tampal awam..."
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:414
+#, javascript-format
+msgid "%s in #%s"
+msgstr "%s dalam #%s"
+
+#: src/entryArea.js:416
+#, javascript-format
+msgid "Paste from %s"
+msgstr "Tampal daripada %s"
+
+#: src/initialSetup.js:85
+msgid "_Back"
+msgstr "_Undur"
+
+#: src/initialSetup.js:86
+msgid "_Done"
+msgstr "Se_lesai"
+
+#: src/initialSetup.js:86
+msgid "_Next"
+msgstr "_Berikutnya"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
+#.
+#: src/ircParser.js:21
+msgid ""
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<channel>] [<reason>] — menutup <channel>, secara lalai yang semasa"
+
+#: src/ircParser.js:22
+msgid ""
+"/HELP [<command>] — displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<command>] — papar bantuan <command>, atau melihat senarai perintah "
+"yang tersedia"
+
+#: src/ircParser.js:23
+msgid ""
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <nick> [<channel>] — jemput <nick> masuk ke <channel>, atau yang "
+"semasa"
+
+#: src/ircParser.js:24
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <channel> — sertai <channel>"
+
+#: src/ircParser.js:25
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <nick> — tendang keluar <nick> dari saluran semasa"
+
+#: src/ircParser.js:26
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <action> — hantar <action> ke saluran semasa"
+
+#: src/ircParser.js:27
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <nick> [<message>] — hantar satu mesej persendirian kepada <nick>"
+
+#: src/ircParser.js:28
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — senaraikan pengguna yang ada dalam saluran semasa"
+
+#: src/ircParser.js:29
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <nickname> — tetapkan gelaran anda kepada <nickname>"
+
+#: src/ircParser.js:30
+msgid ""
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<channel>] [<reason>] — tinggalkan <channel>, secara lalai yang semasa"
+
+#: src/ircParser.js:31
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <nick> — buka satu perbualan persendirian dengan <nick>"
+
+#: src/ircParser.js:32
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<reason>] — terputus dari pelayan semasa"
+
+#: src/ircParser.js:33
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <text> — hantar <text> ke bilik/hubungan semasa"
+
+#: src/ircParser.js:34
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr "/TOPIC <topic> — tetapkan tajuk pada <topic>, atau tunjuk yang semasa"
+
+#: src/ircParser.js:37
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "Unknown command — cuba /HELP untuk senaraikan perintah yang tersedia"
+
+#: src/ircParser.js:51
+#, javascript-format
+msgid "Usage: %s"
+msgstr "Penggunaan: %s"
+
+#: src/ircParser.js:88
+msgid "Known commands:"
+msgstr "Perintah diketahui:"
+
+#: src/ircParser.js:190
+#, javascript-format
+msgid "Users on %s:"
+msgstr "Pengguna di dalam %s:"
+
+#: src/ircParser.js:269
+msgid "No topic set"
+msgstr "Tiada tajuk ditetapkan"
+
+#: src/joinDialog.js:232
+msgid "Add Network"
+msgstr "Tambah Rangkaian"
+
+#: src/mainWindow.js:389
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d pengguna"
+
+#: src/roomList.js:190
+msgid "Leave chatroom"
+msgstr "Tinggalkan bilik sembang"
+
+#: src/roomList.js:190
+msgid "End conversation"
+msgstr "Perbualan tamat"
+
+#: src/roomList.js:301
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "Rangkaian %s menghadapi satu ralat"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "GNOME (irc.gnome.org)"
+#: src/roomList.js:372
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:379
+msgid "Connection Problem"
+msgstr "Masalah Sambungan"
+
+#: src/roomList.js:396
+msgid "Connected"
+msgstr "Bersambung"
+
+#: src/roomList.js:398
+msgid "Connecting…"
+msgstr "Menyambung..."
+
+#: src/roomList.js:402
+msgid "Unknown"
+msgstr "Tidak diketahui"
+
+#: src/roomList.js:422
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "Tidak dapat bersambung dengan %s secara selamat."
+
+#: src/roomList.js:425
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s memerlukan satu kata laluan."
+
+#: src/roomList.js:431
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "Tidak dapat bersambung dengan %s. Pelayan sibuk."
+
+#: src/roomList.js:434
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "Tidak dapat bersambung dengan %s."
+
+#: src/roomStack.js:98
+msgid "Should the password be saved?"
+msgstr "Perlukah kata laluan disimpan?"
+
+#: src/roomStack.js:100 src/telepathyClient.js:651
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr ""
+"Pengecaman akan berlaku secara automatik ketika menyambung ke %s di lain masa"
+
+#: src/roomStack.js:106
+msgid "_Save Password"
+msgstr "_Simpan Kata Laluan"
+
+#: src/roomStack.js:139
+msgid "Failed to join the room"
+msgstr "Gagal menyertai bilik"
+
+#: src/roomStack.js:141
+msgid "_Retry"
+msgstr "_Cuba Lagi"
+
+#: src/roomStack.js:165
+msgid "The room is full."
+msgstr "Bilik sudah penuh."
+
+#: src/roomStack.js:168
+msgid "You have been banned from the room."
+msgstr "Anda telah disekat masuk ke bilik ini."
+
+#: src/roomStack.js:171
+msgid "The room is invite-only."
+msgstr "Bilik untuk jemputan-sahaja."
+
+#: src/roomStack.js:174
+msgid "You have been kicked from the room."
+msgstr "Anda telah ditendang keluar dari bilik."
+
+#: src/roomStack.js:177
+msgid "It is not possible to join the room now, but you can retry later."
+msgstr ""
+"Adalah mustahil dapat menyertai bilik ini sekarang, tetapi anda boleh cuba "
+"nanti."
+
+#: src/roomStack.js:209
+msgid "Join a room using the + button."
+msgstr "Sertai bilik menggunakan butang +."
+
+#: src/telepathyClient.js:464
+msgid "Good Bye"
+msgstr "Selamat Tinggal"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:650
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Simpan kata laluan %s untuk %s?"
+
+#: src/telepathyClient.js:654
+msgid "Save"
+msgstr "Simpan"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:686
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s dalam %s"
+
+#: src/userList.js:256
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d saat yang lalu"
+
+#: src/userList.js:263
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d minit yang lalu"
+
+#: src/userList.js:270
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d jam yang lalu"
+
+#: src/userList.js:277
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d hari yang lalu"
+
+#: src/userList.js:284
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d minggu yang lalu"
+
+#: src/userList.js:290
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d bulan yang lalu"
+
+#: src/userList.js:452
+msgid "Available in another room."
+msgstr "Tersedia dalam bilik lain."
+
+#: src/userList.js:454
+msgid "Online"
+msgstr "Dalam Talian"
+
+#: src/userList.js:617
+msgid "No Results"
+msgstr "Tiada Keputusan"
+
+#: src/userTracker.js:312
+msgid "User is online"
+msgstr "Pengguna berada dalam talian"
+
+#: src/userTracker.js:313
+#, javascript-format
+msgid "User %s is now online."
+msgstr "Pengguna %s kini berada dalam talian."
+
+#: src/utils.js:104
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Kata laluan pelayan Polari untuk %s"
+
+#: src/utils.js:109
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "Kata laluan NickServ Polari untuk %s"
