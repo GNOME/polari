@@ -80,6 +80,7 @@
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="menu-model">hamburgerMenu</property>
+                <accelerator key="F10" signal="activate"/>
                 <style>
                   <class name="image-button"/>
                 </style>
