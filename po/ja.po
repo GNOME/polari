@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-09-18 23:08+0000\n"
+"POT-Creation-Date: 2020-02-12 19:02+0000\n"
 "PO-Revision-Date: 2020-01-17 00:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -204,51 +204,66 @@ msgid "Show Emoji Picker"
 msgstr "絵文字ピッカーを表示する"
 
 #: data/resources/help-overlay.ui:48
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Show Userlist"
+msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "ユーザーリストを表示する"
+
+#: data/resources/help-overlay.ui:55
+#, fuzzy
+#| msgid "Open Link"
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "リンクを開く"
+
+#: data/resources/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "終了する"
 
-#: data/resources/help-overlay.ui:55
+#: data/resources/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "キーボードショートカットを表示する"
 
-#: data/resources/help-overlay.ui:64
+#: data/resources/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "移動"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "次のルームへ移動する"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "前のルームへ移動する"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "次のルームへ移動して未読メッセージを表示する"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "前のルームへ移動して未読メッセージを表示する"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "先頭のルームへ移動する"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "末尾のルームへ移動する"
 
-#: data/resources/help-overlay.ui:110
+#: data/resources/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "指定位置のルームへ移動する (1 – 9)"
@@ -330,18 +345,17 @@ msgstr "終了"
 msgid "Add rooms and networks"
 msgstr "ルームおよびネットワークを追加する"
 
-#: data/resources/main-window.ui:196
+#: data/resources/main-window.ui:197
 msgid "Show connected users"
 msgstr "接続しているユーザーを表示する"
 
-#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
 msgid "Offline"
 msgstr "オフライン"
 
-#: data/resources/main-window.ui:233
+#: data/resources/main-window.ui:234
 msgid "Go online to chat and receive messages."
-msgstr ""
-"チャットやメッセージ受信のためにオンライン接続してください。"
+msgstr "チャットやメッセージ受信のためにオンライン接続してください。"
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -407,7 +421,7 @@ msgstr ""
 msgid "Print version and exit"
 msgstr "バージョンを表示して終了する"
 
-#: src/application.js:479 src/utils.js:185
+#: src/application.js:479 src/utils.js:188
 msgid "Failed to open link"
 msgstr "リンクを開けませんでした"
 
@@ -433,65 +447,65 @@ msgstr "Polari の詳細について"
 msgid "Undo"
 msgstr "元に戻す"
 
-#: src/chatView.js:137
+#: src/chatView.js:138
 msgid "New Messages"
 msgstr "新しいメッセージ"
 
-#: src/chatView.js:785
+#: src/chatView.js:786
 msgid "Open Link"
 msgstr "リンクを開く"
 
-#: src/chatView.js:791
+#: src/chatView.js:792
 msgid "Copy Link Address"
 msgstr "リンクアドレスをコピー"
 
-#: src/chatView.js:963
+#: src/chatView.js:964
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s は %s となりました"
 
-#: src/chatView.js:968
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s は切断しました"
 
-#: src/chatView.js:977
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s は %s にキックされました"
 
-#: src/chatView.js:978
+#: src/chatView.js:979
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s はキックされました"
 
-#: src/chatView.js:985
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s は %s に BAN されました"
 
-#: src/chatView.js:986
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s は BAN されました"
 
-#: src/chatView.js:991
+#: src/chatView.js:992
 #, javascript-format
 msgid "%s joined"
 msgstr "%s が参加しました"
 
-#: src/chatView.js:996
+#: src/chatView.js:997
 #, javascript-format
 msgid "%s left"
 msgstr "%s は離れました"
 
-#: src/chatView.js:1093
+#: src/chatView.js:1094
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d ユーザーが新規参加"
 
-#: src/chatView.js:1100
+#: src/chatView.js:1101
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -499,14 +513,14 @@ msgstr[0] "%d ユーザーが退室"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1172
+#: src/chatView.js:1173
 msgid "%H∶%M"
 msgstr "%H:%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1177
+#: src/chatView.js:1178
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "昨日, %H:%M"
@@ -514,7 +528,7 @@ msgstr "昨日, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1182
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H:%M"
@@ -523,7 +537,7 @@ msgstr "%A, %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1188
+#: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%m月%d日, %H:%M"
@@ -532,7 +546,7 @@ msgstr "%m月%d日, %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1194
+#: src/chatView.js:1195
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y年%m月%d日, %H:%M"
@@ -540,14 +554,14 @@ msgstr "%Y年%m月%d日, %H:%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1200
+#: src/chatView.js:1201
 msgid "%l∶%M %p"
 msgstr "%p %I:%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1205
+#: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "昨日, %p %I:%M"
@@ -555,7 +569,7 @@ msgstr "昨日, %p %I:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1210
+#: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %p %I:%M"
@@ -564,7 +578,7 @@ msgstr "%A, %p %I:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1216
+#: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%m月%d日, %p %I:%M"
@@ -573,7 +587,7 @@ msgstr "%m月%d日, %p %I:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1222
+#: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y年%m月%d日, %p %I:%M"
