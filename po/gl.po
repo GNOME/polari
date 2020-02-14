@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-09-26 19:32+0000\n"
-"PO-Revision-Date: 2019-12-25 13:38+0100\n"
-"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
+"POT-Creation-Date: 2020-02-12 19:02+0000\n"
+"PO-Revision-Date: 2020-02-14 22:55+0100\n"
+"Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Proxecto Trasno <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -202,50 +202,60 @@ msgstr "Mostrar o selector de Emoji"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "Mostrar a axuda"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "Abrir menú"
+
+#: data/resources/help-overlay.ui:62
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Saír"
 
-#: data/resources/help-overlay.ui:55
+#: data/resources/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Atallos de teclado"
 
-#: data/resources/help-overlay.ui:64
+#: data/resources/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navegación"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Seguinte sala"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Anterior sala"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Seguinte sala con mensaxes sen ler"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Angerior sala con mensaxes sen ler"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Primeira sala"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Última sala"
 
-#: data/resources/help-overlay.ui:110
+#: data/resources/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Primeira – Novena sala"
@@ -327,15 +337,15 @@ msgstr "Saír"
 msgid "Add rooms and networks"
 msgstr "Engadir salas e redes"
 
-#: data/resources/main-window.ui:196
+#: data/resources/main-window.ui:197
 msgid "Show connected users"
 msgstr "Mostrar os usuarios conectados"
 
-#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
 msgid "Offline"
 msgstr "Desconectado"
 
-#: data/resources/main-window.ui:233
+#: data/resources/main-window.ui:234
 msgid "Go online to chat and receive messages."
 msgstr "Conectarse ao chat e recibir mensaxes."
 
@@ -403,7 +413,7 @@ msgstr "Permitir a execución ao carón de outra instancia"
 msgid "Print version and exit"
 msgstr "Imprimir versión e saír"
 
-#: src/application.js:479 src/utils.js:185
+#: src/application.js:479 src/utils.js:188
 msgid "Failed to open link"
 msgstr "Produciuse un fallo ao abrir a ligazón"
 
@@ -424,66 +434,66 @@ msgstr "Aprender máis sobre Polari"
 msgid "Undo"
 msgstr "Desfacer"
 
-#: src/chatView.js:137
+#: src/chatView.js:138
 msgid "New Messages"
 msgstr "Novas mensaxe"
 
-#: src/chatView.js:785
+#: src/chatView.js:786
 msgid "Open Link"
 msgstr "Abrir ligazón"
 
-#: src/chatView.js:791
+#: src/chatView.js:792
 msgid "Copy Link Address"
 msgstr "Copiar enderezo da ligazón"
 
-#: src/chatView.js:963
+#: src/chatView.js:964
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s é coñecido como %s"
 
-#: src/chatView.js:968
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s desconectouse"
 
-#: src/chatView.js:977
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s foi expulsado por %s"
 
-#: src/chatView.js:978
+#: src/chatView.js:979
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s foi expulsado"
 
-#: src/chatView.js:985
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s foi baneado por %s"
 
-#: src/chatView.js:986
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s foi baneado"
 
-#: src/chatView.js:991
+#: src/chatView.js:992
 #, javascript-format
 msgid "%s joined"
 msgstr "%s uniuse"
 
-#: src/chatView.js:996
+#: src/chatView.js:997
 #, javascript-format
 msgid "%s left"
 msgstr "%s saiu"
 
-#: src/chatView.js:1093
+#: src/chatView.js:1094
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "uniuse %d usuario"
 msgstr[1] "uníronse %d usuarios"
 
-#: src/chatView.js:1100
+#: src/chatView.js:1101
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -492,14 +502,14 @@ msgstr[1] "quedan %d usuarios"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1172
+#: src/chatView.js:1173
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1177
+#: src/chatView.js:1178
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Onte ás %H:%M"
@@ -507,7 +517,7 @@ msgstr "Onte ás %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1182
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A ás %H:%M"
@@ -516,7 +526,7 @@ msgstr "%A ás %H:%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1188
+#: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d de %B ás %H:%M"
@@ -525,7 +535,7 @@ msgstr "%d de %B ás %H:%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1194
+#: src/chatView.js:1195
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d de %B do %Y ás %H:%M"
@@ -533,14 +543,14 @@ msgstr "%d de %B do %Y ás %H:%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1200
+#: src/chatView.js:1201
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1205
+#: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Onte ás %H:%M %p"
@@ -548,7 +558,7 @@ msgstr "Onte ás %H:%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1210
+#: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A ás %H:%M %p"
@@ -557,7 +567,7 @@ msgstr "%A ás %H:%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1216
+#: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d de %B ás %l:%M %p"
@@ -566,7 +576,7 @@ msgstr "%d de %B ás %l:%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1222
+#: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d de %B do %Y ás %l:%M %p"
