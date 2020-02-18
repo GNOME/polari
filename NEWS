@@ -1,3 +1,18 @@
+3.35.91 — “A Cock in a Frock on a Rock”
+=======================================
+* Fix launching help [Florian; #125]
+* Update keyboard shortcuts dialog [Sabri; !144]
+
+Contributors:
+  Umarzuki Bin Mochlis Moktar, Florian Müllner, Sabri Ünal
+
+Translators:
+  sicklylife [ja], Umarzuki Bin Mochlis Moktar [ms], Daniel Korostil [uk],
+  Danial Behzadi [fa], Daniel Mustieles [es], Rafael Fontenelle [pt_BR],
+  Emin Tufan Çetin [tr], Anders Jonsson [sv], Марко Костић [sr],
+  Marek Černocký [cs], Fran Dieguez [gl], Asier Sarasua Garmendia [eu],
+  Piotr Drąg [pl], Tim Sabsch [de], Aurimas Černius [lt], Balázs Meskó [hu]
+
 3.35.3 — “I May As Well Take the Scenic Route”
 ==============================================
 * Preview URLs in chat log [daronion, Florian; #58, !139, !140, !142]
