@@ -2,7 +2,7 @@
 # Copyright (C) 2015 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Room: ruimte
-# Nathan Follens <nthn@unseen.is>, 2015-2018.
+# Nathan Follens <nthn@unseen.is>, 2015-2018, 2020.
 # Justin van Steijn <jvs@fsfe.org>, 2015, 2016, 2017, 2018.
 # Reinout van Schouwen <reinouts@gnome.org>, 2016.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2016, 2017, 2018.
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-06-15 10:57+0000\n"
-"PO-Revision-Date: 2019-06-18 11:09+0200\n"
+"POT-Creation-Date: 2020-02-12 19:02+0000\n"
+"PO-Revision-Date: 2020-02-24 18:24+0100\n"
 "Last-Translator: Nathan Follens <nthn@unseen.is>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -29,7 +29,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:849
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:847
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Een Internet Relay Chat-cliënt voor Gnome"
 
@@ -209,50 +209,60 @@ msgstr "Emojikiezer tonen"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "Hulp tonen"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "Menu openen"
+
+#: data/resources/help-overlay.ui:62
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: data/resources/help-overlay.ui:55
+#: data/resources/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: data/resources/help-overlay.ui:64
+#: data/resources/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigatie"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Volgende ruimte"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Vorige ruimte"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Volgende ruimte met ongelezen berichten"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Vorige ruimte met ongelezen berichten"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Eerste ruimte"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Laatste ruimte"
 
-#: data/resources/help-overlay.ui:110
+#: data/resources/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Eerste — negende ruimte"
@@ -336,15 +346,15 @@ msgstr "Sluiten"
 msgid "Add rooms and networks"
 msgstr "Ruimtes en netwerken toevoegen"
 
-#: data/resources/main-window.ui:196
+#: data/resources/main-window.ui:197
 msgid "Show connected users"
 msgstr "Verbonden gebruikers tonen"
 
-#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
 msgid "Offline"
 msgstr "Offline"
 
-#: data/resources/main-window.ui:233
+#: data/resources/main-window.ui:234
 msgid "Go online to chat and receive messages."
 msgstr "Ga online om te chatten en berichten te ontvangen."
 
@@ -412,16 +422,16 @@ msgstr "Toestaan dat meerdere instanties worden uitgevoerd"
 msgid "Print version and exit"
 msgstr "Versie tonen en afsluiten"
 
-#: src/application.js:479 src/utils.js:187
+#: src/application.js:479 src/utils.js:188
 msgid "Failed to open link"
 msgstr "Koppeling openen mislukt"
 
-#: src/application.js:772
+#: src/application.js:770
 #, javascript-format
 msgid "%s removed."
 msgstr "%s verwijderd."
 
-#: src/application.js:848
+#: src/application.js:846
 msgid "translator-credits"
 msgstr ""
 "Nathan Follens\n"
@@ -431,15 +441,15 @@ msgstr ""
 "\n"
 "Meer info over Gnome-NL http://nl.gnome.org"
 
-#: src/application.js:854
+#: src/application.js:852
 msgid "Learn more about Polari"
 msgstr "Kom meer te weten over Polari"
 
-#: src/appNotifications.js:87
+#: src/appNotifications.js:85
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/chatView.js:137
+#: src/chatView.js:138
 msgid "New Messages"
 msgstr "Nieuwe berichten"
 
@@ -545,16 +555,17 @@ msgstr "%d %B, %Hu%M"
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %B %Y, %Hu%M"
 
+#. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1200
+#: src/chatView.js:1201
 msgid "%l∶%M %p"
 msgstr "%lu%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1205
+#: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Gisteren, %lu%M %p"
@@ -562,7 +573,7 @@ msgstr "Gisteren, %lu%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1210
+#: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %lu%M %p"
@@ -571,7 +582,7 @@ msgstr "%A, %lu%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1216
+#: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %B, %lu%M %p"
@@ -580,7 +591,7 @@ msgstr "%d %B, %lu%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1222
+#: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %lu%M %p"
@@ -606,47 +617,47 @@ msgstr ""
 "Polari heeft de verbinding verbroken vanwege een netwerkfout. Gelieve te "
 "controleren of het adresveld correct is."
 
-#: src/entryArea.js:368
+#: src/entryArea.js:369
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "%s regel tekst plakken in publieke paste-service?"
 msgstr[1] "%s regels tekst plakken in publieke paste-service?"
 
-#: src/entryArea.js:372
+#: src/entryArea.js:373
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "%s regel tekst uploaden naar publieke paste-service…"
 msgstr[1] "%s regels tekst uploaden naar publieke paste-service…"
 
-#: src/entryArea.js:379
+#: src/entryArea.js:380
 msgid "Upload image to public paste service?"
 msgstr "Afbeelding uploaden naar publieke paste-service?"
 
-#: src/entryArea.js:380
+#: src/entryArea.js:381
 msgid "Uploading image to public paste service…"
 msgstr "Afbeelding uploaden naar publieke paste-service…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:402
+#: src/entryArea.js:403
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "‘%s’ uploaden naar publieke paste-service?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:404
+#: src/entryArea.js:405
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "‘%s’ uploaden naar publieke paste-service…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:413
+#: src/entryArea.js:414
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s in #%s"
 
-#: src/entryArea.js:415
+#: src/entryArea.js:416
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Plakken van %s"
@@ -672,13 +683,13 @@ msgstr "Volge_nde"
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
 #. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:23
+#: src/ircParser.js:21
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/CLOSE [<kanaal>] [<reden>] — sluit <kanaal>, standaard het huidige kanaal"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:22
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -687,82 +698,82 @@ msgstr ""
 "beschikbare opdrachten"
 
 # Ik denk niet dat wat tussen <> staat vertaald moet worden, maar ik weet het niet zeker.
-#: src/ircParser.js:25
+#: src/ircParser.js:23
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <bijnaam> [<kanaal>] — nodigt <bijnaam> uit in <kanaal>, of het "
 "huidige kanaal"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:24
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <kanaal> — treedt toe tot <kanaal>"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:25
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <bijnaam> — schopt <bijnaam> uit het huidige kanaal"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:26
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <actie> — stuurt <actie> naar het huidige kanaal"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:27
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <bijnaam> [<bericht>] — stuurt een privébericht naar <bijnaam>"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:28
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — toont een lijst van gebruikers op het huidige kanaal"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:29
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <bijnaam> — stelt uw bijnaam in als <bijnaam>"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:30
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanaal>] [<reden>] — verlaat <kanaal>, standaard het huidige kanaal"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:31
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <bijnaam> — opent een privégesprek met <bijnaam>"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:32
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<reden>] — verbreekt verbinding met huidige server"
 
-#: src/ircParser.js:35
+#: src/ircParser.js:33
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr ""
 "/SAY <tekst> — stuurt <tekst> naar de huidige ruimte/het huidige contact"
 
-#: src/ircParser.js:36
+#: src/ircParser.js:34
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
 "/TOPIC <onderwerp> — stelt het onderwerp in als <onderwerp>, of toont het "
 "huidige onderwerp"
 
-#: src/ircParser.js:39
+#: src/ircParser.js:37
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "Onbekende opdracht — probeer /HELP voor een lijst van beschikbare opdrachten"
 
-#: src/ircParser.js:53
+#: src/ircParser.js:51
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Gebruik: %s"
 
-#: src/ircParser.js:90
+#: src/ircParser.js:88
 msgid "Known commands:"
 msgstr "Bekende opdrachten:"
 
-#: src/ircParser.js:192
+#: src/ircParser.js:190
 #, javascript-format
 msgid "Users on %s:"
 msgstr "Gebruikers op %s:"
 
-#: src/ircParser.js:271
+#: src/ircParser.js:269
 msgid "No topic set"
 msgstr "Geen onderwerp ingesteld"
 
@@ -837,7 +848,7 @@ msgstr "Verbinden met %s is mislukt."
 msgid "Should the password be saved?"
 msgstr "Moet het wachtwoord worden opgeslagen?"
 
-#: src/roomStack.js:100 src/telepathyClient.js:648
+#: src/roomStack.js:100 src/telepathyClient.js:651
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -881,24 +892,24 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Ga een ruimte binnen met de +-knop."
 
-#: src/telepathyClient.js:461
+#: src/telepathyClient.js:464
 msgid "Good Bye"
 msgstr "Tot ziens"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:647
+#: src/telepathyClient.js:650
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "%s-wachtwoord opslaan voor %s?"
 
-#: src/telepathyClient.js:651
+#: src/telepathyClient.js:654
 msgid "Save"
 msgstr "Opslaan"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:683
+#: src/telepathyClient.js:686
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s in %s"
@@ -966,12 +977,12 @@ msgstr "Gebruiker is online"
 msgid "User %s is now online."
 msgstr "Gebruiker %s is nu online."
 
-#: src/utils.js:106
+#: src/utils.js:104
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Polari-serverwachtwoord voor %s"
 
-#: src/utils.js:111
+#: src/utils.js:109
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Polari-NickServ-wachtwoord voor %s"
