@@ -2,14 +2,14 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2013–2019.
+# Matej Urbančič <mateju@svn.gnome.org>, 2013–2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-09-18 23:08+0000\n"
-"PO-Revision-Date: 2019-09-26 21:28+0200\n"
+"POT-Creation-Date: 2020-02-28 13:57+0000\n"
+"PO-Revision-Date: 2020-02-29 21:50+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Bookmarks: 77,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -205,50 +205,60 @@ msgstr "Pokaže izbirnik izraznih ikon"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "Pokaže pomoč"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "Odpri meni"
+
+#: data/resources/help-overlay.ui:62
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Konča program"
 
-#: data/resources/help-overlay.ui:55
+#: data/resources/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Pokaže tipkovne bližnjice"
 
-#: data/resources/help-overlay.ui:64
+#: data/resources/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Krmarjenje"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Skoči v naslednjo klepetalnico"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Skoči v predhodno klepetalnico"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Skoči v naslednjo klepetalnico z novimi sporočili"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Skoči v predhodno klepetalnico z novimi sporočili"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Skoči v prvo klepetalnico"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Skoči v zadnjo klepetalnico"
 
-#: data/resources/help-overlay.ui:110
+#: data/resources/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Skoči v prvo ... deveto klepetalnico"
@@ -330,15 +340,15 @@ msgstr "Končaj"
 msgid "Add rooms and networks"
 msgstr "Dodaj klepetalnice in omrežja"
 
-#: data/resources/main-window.ui:196
+#: data/resources/main-window.ui:197
 msgid "Show connected users"
 msgstr "Pokaži povezave uporabnike"
 
-#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
 msgid "Offline"
 msgstr "Nepovezano"
 
-#: data/resources/main-window.ui:233
+#: data/resources/main-window.ui:234
 msgid "Go online to chat and receive messages."
 msgstr "Pridružite se klepetu in sprejemanju sporočil."
 
@@ -406,7 +416,7 @@ msgstr "Dovoli sočasen zagon več primerkov programa"
 msgid "Print version and exit"
 msgstr "Izpiši različico programa in končaj"
 
-#: src/application.js:479 src/utils.js:185
+#: src/application.js:479 src/utils.js:188
 msgid "Failed to open link"
 msgstr "Odpiranje povezave je spodletelo"
 
@@ -427,59 +437,59 @@ msgstr "Več podrobnosti o programu Polari"
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: src/chatView.js:137
+#: src/chatView.js:138
 msgid "New Messages"
 msgstr "Novo sporočilo"
 
-#: src/chatView.js:785
+#: src/chatView.js:786
 msgid "Open Link"
 msgstr "Odpri povezavo"
 
-#: src/chatView.js:791
+#: src/chatView.js:792
 msgid "Copy Link Address"
 msgstr "Kopiraj naslov povezave"
 
-#: src/chatView.js:963
+#: src/chatView.js:964
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je preimenovan v %s"
 
-#: src/chatView.js:968
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s je prekinil povezavo"
 
-#: src/chatView.js:977
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s je bil vržen iz sobe s strani %s"
 
-#: src/chatView.js:978
+#: src/chatView.js:979
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s je bil vržen iz sobe"
 
-#: src/chatView.js:985
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s je dobil prepoved s strani %s"
 
-#: src/chatView.js:986
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s je dobil prepoved"
 
-#: src/chatView.js:991
+#: src/chatView.js:992
 #, javascript-format
 msgid "%s joined"
 msgstr "%s je vstopil v klepetalnico."
 
-#: src/chatView.js:996
+#: src/chatView.js:997
 #, javascript-format
 msgid "%s left"
 msgstr "%s preostalo"
 
-#: src/chatView.js:1093
+#: src/chatView.js:1094
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -488,7 +498,7 @@ msgstr[1] "Pridružil se je %d uporabnik"
 msgstr[2] "Pridružil sta se %d uporabnika"
 msgstr[3] "Pridružil so se %d uporabniki"
 
-#: src/chatView.js:1100
+#: src/chatView.js:1101
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -499,14 +509,14 @@ msgstr[3] "Odjavili so se %d uporabniki"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1172
+#: src/chatView.js:1173
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1177
+#: src/chatView.js:1178
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včeraj, %H:%M"
@@ -514,7 +524,7 @@ msgstr "Včeraj, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1182
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -523,7 +533,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1188
+#: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
@@ -532,7 +542,7 @@ msgstr "%B %d, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1194
+#: src/chatView.js:1195
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%B %d %Y, %H∶%M"
@@ -540,14 +550,14 @@ msgstr "%B %d %Y, %H∶%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1200
+#: src/chatView.js:1201
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1205
+#: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včeraj, %l:%M %p"
@@ -555,7 +565,7 @@ msgstr "Včeraj, %l:%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1210
+#: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -564,7 +574,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1216
+#: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
@@ -573,7 +583,7 @@ msgstr "%B %d, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1222
+#: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
