@@ -1,3 +1,14 @@
+3.35.92
+=======
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Efstathios Iosifidis [el], Jiri Grönroos [fi], Charles Monzat [fr],
+  DaeHyun Sung [ko], Kukuh Syafaat [id], Nathan Follens [nl],
+  Alan Mortensen [da], Fabio Tomat [fur], Matej Urbančič [sl]
+
 3.35.91 — “A Cock in a Frock on a Rock”
 =======================================
 * Fix launching help [Florian; #125]
