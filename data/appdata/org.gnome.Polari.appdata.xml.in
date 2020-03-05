@@ -55,15 +55,11 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="3.34.0" date="2019-09-09">
+    <release version="3.36.0" date="2020-03-07">
       <description>
         <p>
-          As always, GNOME 3.34 brings with it a brand new Polari release:
-          <li>
-            <ul>Improved connectivity and offline handling</ul>
-            <ul>Better handling of room errors</ul>
-            <ul>Refinement of the user list popover</ul>
-          </li>
+          In addition to the usual minor fixes, Polari
+          now displays inline previews for URLs
         </p>
       </description>
     </release>
