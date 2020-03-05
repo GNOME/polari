@@ -68,3 +68,21 @@ subdir('po')
 subdir('help')
 
 meson.add_install_script('meson/meson-postinstall.sh')
+
+summary_dirs = {
+  'prefix': get_option('prefix'),
+  'bindir': get_option('bindir'),
+  'libdir': get_option('libdir'),
+  'datadir': get_option('datadir'),
+}
+
+summary_build = {
+  'buildtype': get_option('buildtype'),
+  'snapshot': get_option('snapshot'),
+  'debug': get_option('debug'),
+}
+
+if meson.version().version_compare('>= 0.53.0')
+  summary(summary_dirs, section: 'Directories')
+  summary(summary_build, section: 'Build Configuration')
+endif
