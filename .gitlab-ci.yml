@@ -60,18 +60,6 @@ flatpak-master:
     only:
         - master
 
-review:
-    stage: review
-    dependencies:
-        - flatpak
-    extends: .review
-    <<: *only_default
-
-stop_review:
-    stage: review
-    extends: .stop_review
-    <<: *only_default
-
 nightly:
   extends: '.publish_nightly'
   variables:
