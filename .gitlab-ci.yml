@@ -1,10 +1,8 @@
 include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
 
 stages:
- - commit_check
- - source_check
- - build
  - review
+ - build
  - deploy
 
 variables:
@@ -19,7 +17,7 @@ variables:
 
 check_commit_log:
     image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
-    stage: commit_check
+    stage: review
     script:
         - ./.gitlab-ci/check-commit-log.sh
     only:
@@ -27,7 +25,7 @@ check_commit_log:
 
 eslint:
     image: registry.gitlab.gnome.org/gnome/gjs:fedora.static-analysis
-    stage: source_check
+    stage: review
     script:
         - eslint -o $LINT_LOG --no-color src || { cat $LINT_LOG; false; }
     <<: *only_default
