@@ -55,6 +55,7 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.36.1" date="2020-03-31"/>
     <release version="3.36.0" date="2020-03-07">
       <description>
         <p>

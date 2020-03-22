@@ -1,3 +1,13 @@
+3.36.1
+======
+* Misc. cleanups [Florian; !150, !151]
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Daniel Korostil [uk], Daniel Șerbănescu [ro]
+
 3.36.0 — “Very Macho Homosexual Camper”
 =======================================
 * Fix URL previews in flatpak [Florian; !147]
