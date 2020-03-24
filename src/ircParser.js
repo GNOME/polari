@@ -6,6 +6,10 @@ const Signals = imports.signals;
 const AppNotifications = imports.appNotifications;
 const { RoomManager } = imports.roomManager;
 const Utils = imports.utils;
+Gio._promisify(Tp.Connection.prototype,
+    'dup_contact_by_id_async', 'dup_contact_by_id_finish');
+Gio._promisify(Tp.Contact.prototype,
+    'request_contact_info_async', 'request_contact_info_finish');
 
 var knownCommands = {
     /* commands that would be nice to support: */
@@ -15,9 +19,8 @@ var knownCommands = {
     MODE: "/MODE <mode> <nick|channel> — ",
     NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
     OP: N_("/OP <nick> — gives channel operator status to <nick>"),
-    WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
-    */
 
+    */
     CLOSE: N_('/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one'),
     HELP: N_('/HELP [<command>] — displays help for <command>, or a list of available commands'),
     INVITE: N_('/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one'),
@@ -32,6 +35,7 @@ var knownCommands = {
     QUIT: N_('/QUIT [<reason>] — disconnects from the current server'),
     SAY: N_('/SAY <text> — sends <text> to the current room/contact'),
     TOPIC: N_('/TOPIC <topic> — sets the topic to <topic>, or shows the current one'),
+    WHOIS: N_('/WHOIS <nick> — requests information on <nick>'),
 };
 const UNKNOWN_COMMAND_MESSAGE =
     N_('Unknown command — try /HELP for a list of available commands');
@@ -55,7 +59,7 @@ var IrcParser = class {
         return new AppNotifications.GridOutput(header, items);
     }
 
-    process(text) {
+    async process(text) {
         if (!this._room || !this._room.channel || !text.length)
             return true;
 
@@ -269,6 +273,20 @@ var IrcParser = class {
                 output = this._createFeedbackLabel(this._room.topic || _('No topic set'));
             break;
         }
+        case 'WHOIS': {
+            if (!argv.length) {
+                output = this._createFeedbackUsage(cmd);
+                retval = false;
+                break;
+            }
+
+            let nick = stripCommand(text);
+            const { connection } = this._room.channel;
+            const user = await connection.dup_contact_by_id_async(nick, []);
+            const status = await user.request_contact_info_async(null);
+            output = this._createFeedbackLabel(this._formatUserInfo(status, user));
+            break;
+        }
         default:
             output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
             retval = false;
@@ -278,6 +296,20 @@ var IrcParser = class {
         if (output)
             this._app.commandOutputQueue.addNotification(output);
         return retval;
+    }
+
+    _formatUserInfo(status, user) {
+        let fn, last;
+        if (status) {
+            let info = user.get_contact_info();
+            for (let i = 0; i < info.length; i++) {
+                if (info[i].field_name === 'fn')
+                    [fn] = info[i].field_value;
+                else if (info[i].field_name === 'x-idle-time')
+                    [last] = info[i].field_value;
+            }
+        }
+        return _('User: %s - Last activity: %s').format(fn ? fn : user.alias, Utils.formatTimePassed(last));
     }
 
     _sendText(text) {
