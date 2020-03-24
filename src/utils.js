@@ -2,7 +2,9 @@
             findUrls findChannels openURL updateTerms gpaste imgurPaste
             storeAccountPassword storeIdentifyPassword
             lookupAccountPassword lookupIdentifyPassword
-            clearAccountPassword clearIdentifyPassword */
+            clearAccountPassword clearIdentifyPassword
+            updateTerms gpaste imgurPaste formatTimePassed*/
+
 /*
  * Copyright (c) 2011 Red Hat, Inc.
  *
@@ -363,4 +365,51 @@ function imgurPaste(pixbuf, title, callback) {
         else
             callback(null);
     });
+}
+
+function formatTimePassed(seconds) {
+    if (seconds === 0)
+        return _('Now');
+
+    if (!seconds)
+        return _('Unavailable');
+
+    if (seconds < 60) {
+        return ngettext(
+            '%d second ago',
+            '%d seconds ago', seconds).format(seconds);
+    }
+
+    let minutes = seconds / 60;
+    if (minutes < 60) {
+        return ngettext(
+            '%d minute ago',
+            '%d minutes ago', minutes).format(minutes);
+    }
+
+    let hours = minutes / 60;
+    if (hours < 24) {
+        return ngettext(
+            '%d hour ago',
+            '%d hours ago', hours).format(hours);
+    }
+
+    let days = hours / 24;
+    if (days < 7) {
+        return ngettext(
+            '%d day ago',
+            '%d days ago', days).format(days);
+    }
+
+    let weeks = days / 7;
+    if (days < 30) {
+        return ngettext(
+            '%d week ago',
+            '%d weeks ago', weeks).format(weeks);
+    }
+
+    let months = days / 30;
+    return ngettext(
+        '%d month ago',
+        '%d months ago', months).format(months);
 }

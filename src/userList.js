@@ -4,6 +4,8 @@ const {
     Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp,
 } = imports.gi;
 
+const Utils = imports.utils;
+
 const FILTER_ENTRY_THRESHOLD = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
@@ -250,47 +252,6 @@ var UserDetails = GObject.registerClass({
         this._cancellable = null;
     }
 
-    _formatLast(seconds) {
-        if (seconds < 60) {
-            return ngettext(
-                '%d second ago',
-                '%d seconds ago', seconds).format(seconds);
-        }
-
-        let minutes = seconds / 60;
-        if (minutes < 60) {
-            return ngettext(
-                '%d minute ago',
-                '%d minutes ago', minutes).format(minutes);
-        }
-
-        let hours = minutes / 60;
-        if (hours < 24) {
-            return ngettext(
-                '%d hour ago',
-                '%d hours ago', hours).format(hours);
-        }
-
-        let days = hours / 24;
-        if (days < 7) {
-            return ngettext(
-                '%d day ago',
-                '%d days ago', days).format(days);
-        }
-
-        let weeks = days / 7;
-        if (days < 30) {
-            return ngettext(
-                '%d week ago',
-                '%d weeks ago', weeks).format(weeks);
-        }
-
-        let months = days / 30;
-        return ngettext(
-            '%d month ago',
-            '%d months ago', months).format(months);
-    }
-
     _onContactInfoReady() {
         this._initialDetailsLoaded = true;
 
@@ -309,7 +270,7 @@ var UserDetails = GObject.registerClass({
         this._fullnameLabel.label = fn;
 
         if (last) {
-            this._lastLabel.label = this._formatLast(last);
+            this._lastLabel.label = Utils.formatTimePassed(last);
             this._lastLabel.show();
         } else {
             this._lastLabel.hide();
