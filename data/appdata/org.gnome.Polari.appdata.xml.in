@@ -22,19 +22,19 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/master/data/appdata/polari-main.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-36/data/appdata/polari-main.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/master/data/appdata/polari-user-list.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-36/data/appdata/polari-user-list.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/master/data/appdata/polari-join-dialog.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-36/data/appdata/polari-join-dialog.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/master/data/appdata/polari-connection.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-36/data/appdata/polari-connection.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/master/data/appdata/polari-connection-properties.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/gnome-3-36/data/appdata/polari-connection-properties.png</image>
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">org.gnome.Polari.desktop</launchable>
