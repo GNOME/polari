@@ -517,6 +517,10 @@ var Application = GObject.registerClass({
 
         req.create_account_async((r, res) => {
             let account = req.create_account_finish(res);
+
+            Utils.clearAccountPassword(account);
+            Utils.clearIdentifyPassword(account);
+
             callback(account);
         });
     }

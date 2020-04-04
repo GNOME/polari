@@ -214,8 +214,13 @@ var ConnectionsList = GObject.registerClass({
 
         req.create_account_async((r, res) => {
             let account = req.create_account_finish(res);
-            if (account) // TODO: Handle errors
-                this.emit('account-created', account);
+            if (!account) // TODO: Handle errors
+                return;
+
+            Utils.clearAccountPassword(account);
+            Utils.clearIdentifyPassword(account);
+
+            this.emit('account-created', account);
         });
         this.emit('account-selected');
     }
@@ -445,8 +450,13 @@ var ConnectionDetails = GObject.registerClass({
 
         req.create_account_async((r, res) => {
             let account = req.create_account_finish(res);
-            if (account) // TODO: Handle errors
-                this.emit('account-created', account);
+            if (!account) // TODO: Handle errors
+                return;
+
+            Utils.clearAccountPassword(account);
+            Utils.clearIdentifyPassword(account);
+
+            this.emit('account-created', account);
         });
     }
 
