@@ -1,7 +1,8 @@
 /* exported isFlatpakSandbox touchFile needsOnetimeAction getTpEventTime
             findUrls findChannels openURL updateTerms gpaste imgurPaste
             storeAccountPassword storeIdentifyPassword
-            lookupAccountPassword lookupIdentifyPassword */
+            lookupAccountPassword lookupIdentifyPassword
+            clearAccountPassword clearIdentifyPassword */
 /*
  * Copyright (c) 2011 Red Hat, Inc.
  *
@@ -173,6 +174,26 @@ function _lookupPassword(schema, account, callback) {
             let name = account.display_name;
             log(`Failed to lookup password for account "${name}": ${e.message}`);
             callback(null);
+        }
+    });
+}
+
+function clearAccountPassword(account) {
+    _clearPassword(SECRET_SCHEMA_ACCOUNT, account);
+}
+
+function clearIdentifyPassword(account) {
+    _clearPassword(SECRET_SCHEMA_IDENTIFY, account);
+}
+
+function _clearPassword(schema, account) {
+    let attr = { 'account-id': account.get_path_suffix() };
+    Secret.password_clear(schema, attr, null, (o, res) => {
+        try {
+            Secret.password_clear_finish(res);
+        } catch (e) {
+            const name = account.display_name;
+            log(`Failed to clear password for account "${name}": ${e.message}`);
         }
     });
 }
