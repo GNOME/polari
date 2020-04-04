@@ -774,6 +774,9 @@ var Application = GObject.registerClass({
             n.connect('closed', () => {
                 account.remove_async((o, r) => {
                     a.remove_finish(r); // TODO: Check for errors
+
+                    Utils.clearAccountPassword(a);
+                    Utils.clearIdentifyPassword(a);
                 });
             });
             n.connect('undo', () => {
