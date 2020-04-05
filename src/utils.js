@@ -29,13 +29,13 @@ const { Gdk, Gio, GLib, Gtk, Secret, Soup, TelepathyGLib: Tp }  = imports.gi;
 const AppNotifications = imports.appNotifications;
 
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
-    'org.gnome.Polari.Account', Secret.SchemaFlags.NONE,
-    { 'account-id': Secret.SchemaAttributeType.STRING }
-);
+    'org.gnome.Polari.Account',
+    Secret.SchemaFlags.NONE,
+    { 'account-id': Secret.SchemaAttributeType.STRING });
 const SECRET_SCHEMA_IDENTIFY = new Secret.Schema(
-    'org.gnome.Polari.Identify', Secret.SchemaFlags.NONE,
-    { 'account-id': Secret.SchemaAttributeType.STRING }
-);
+    'org.gnome.Polari.Identify',
+    Secret.SchemaFlags.NONE,
+    { 'account-id': Secret.SchemaAttributeType.STRING });
 
 const GPASTE_BASEURL = 'https://paste.gnome.org/';
 

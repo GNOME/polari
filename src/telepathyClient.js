@@ -291,9 +291,8 @@ class TelepathyClient extends Tp.BaseClient {
         if (!account.enabled)
             return;
 
-        let statuses = Object.keys(Tp.ConnectionPresenceType).map(s =>
-            s.replace(/_/g, '-').toLowerCase()
-        );
+        let statuses = Object.keys(Tp.ConnectionPresenceType)
+            .map(s => s.replace(/_/g, '-').toLowerCase());
         let status = statuses[presence];
         let msg = account.requested_status_message;
         let accountName = account.display_name;

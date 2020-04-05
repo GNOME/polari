@@ -186,8 +186,7 @@ var RoomRow = GObject.registerClass({
         for (let signal of ['message-received', 'pending-message-removed']) {
             this._channelSignals.push(
                 this._room.channel.connect(signal,
-                    this._updatePending.bind(this))
-            );
+                    this._updatePending.bind(this)));
         }
         this._updatePending();
     }
