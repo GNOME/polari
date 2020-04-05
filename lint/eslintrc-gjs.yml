@@ -87,6 +87,7 @@ rules:
     - error
     - all
     - conditionalAssign: false
+      nestedBinaryExpressions: false
       returnAssign: false
   no-implicit-coercion:
     - error
@@ -225,4 +226,4 @@ globals:
   printerr: readonly
   window: readonly
 parserOptions:
-  ecmaVersion: 2017
+  ecmaVersion: 2019
