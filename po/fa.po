@@ -1,15 +1,15 @@
 # Persian translation for polari.
 # Copyright (C) 2015 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# Arash Mousavi <mousavi.arash@gmail.com>, 2015, 2016, 2017.
-# Danial Behzadi <dani.behzi@ubuntu.com>, 2018, 2019, 2020.
+# Arash Mousavi <mousavi.arash@gmail.com>, 2015-2017.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2018-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-02-12 19:02+0000\n"
-"PO-Revision-Date: 2020-02-13 01:24+0000\n"
+"POT-Creation-Date: 2020-04-01 02:04+0000\n"
+"PO-Revision-Date: 2020-04-26 12:55+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -26,7 +26,7 @@ msgid "Polari"
 msgstr "پولاری"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:847
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:833
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "یک کارخواه بازپخش اینترنت (IRC) برای گنوم"
 
@@ -132,6 +132,14 @@ msgstr "شناسایی نام‌کاربری پشتیبانی می‌شود"
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
 msgstr "اینکه آیا فرمان شناسایی از پارامتر نام‌کاربری پشتیبانی می‌کند یا خیر"
+
+#: data/org.gnome.Polari.gschema.xml:56
+msgid "List of muted usernames"
+msgstr "فهرستی از نام‌های کاربری بی‌صدا شده"
+
+#: data/org.gnome.Polari.gschema.xml:57
+msgid "A list of usernames for whose private messages not to show notifications"
+msgstr "فهرستی از نام کاربری‌هایی که پیام‌های شخصیشان آگاهی نشان نمی‌دهند"
 
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
@@ -339,7 +347,7 @@ msgstr "افزودن اتاق‌ها و شبکه‌ها"
 msgid "Show connected users"
 msgstr "نمایش کاربران متّصل"
 
-#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:475 src/userList.js:456
 msgid "Offline"
 msgstr "برون‌خط"
 
@@ -411,20 +419,22 @@ msgstr "اجازه به اجرا در کنار اجرایی دیگر"
 msgid "Print version and exit"
 msgstr "چاپِ نسخه و خروج"
 
-#: src/application.js:479 src/utils.js:188
+#: src/application.js:485 src/utils.js:218
 msgid "Failed to open link"
 msgstr "گشودن پیوند شکست خورد"
 
-#: src/application.js:770
+#: src/application.js:756
 #, javascript-format
 msgid "%s removed."
 msgstr "%s حذف شد."
 
-#: src/application.js:846
+#: src/application.js:832
 msgid "translator-credits"
-msgstr "آرش موسوی <mousavi.arash@gmail.com>"
+msgstr ""
+"دانیال بهزادی <dani.behzi@ubuntu.com>\n"
+"آرش موسوی <mousavi.arash@gmail.com>"
 
-#: src/application.js:852
+#: src/application.js:838
 msgid "Learn more about Polari"
 msgstr "درباره پولاری بیشتر بدانید"
 
@@ -764,58 +774,66 @@ msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%Id کاربر"
 
-#: src/roomList.js:190
+#: src/roomList.js:254
 msgid "Leave chatroom"
 msgstr "ترک اتاق گپ"
 
-#: src/roomList.js:190
+#: src/roomList.js:254
 msgid "End conversation"
 msgstr "ویرایش گفت‌وگو"
 
-#: src/roomList.js:301
+#: src/roomList.js:270
+msgid "Unmute"
+msgstr "باصدا"
+
+#: src/roomList.js:274
+msgid "Mute"
+msgstr "بی‌صدا"
+
+#: src/roomList.js:376
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "شبکه %s خطایی دارد"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:372
+#: src/roomList.js:447
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:379
+#: src/roomList.js:454
 msgid "Connection Problem"
 msgstr "مشکل در اتصال"
 
-#: src/roomList.js:396
+#: src/roomList.js:471
 msgid "Connected"
 msgstr "متصل شد"
 
-#: src/roomList.js:398
+#: src/roomList.js:473
 msgid "Connecting…"
 msgstr "در حال اتصال…"
 
-#: src/roomList.js:402
+#: src/roomList.js:477
 msgid "Unknown"
 msgstr "ناشناس"
 
-#: src/roomList.js:422
+#: src/roomList.js:497
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "امکان برقراری اتصال به %s به شکل ایمن نبود."
 
-#: src/roomList.js:425
+#: src/roomList.js:500
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s نیاز به گذرواژه دارد."
 
-#: src/roomList.js:431
+#: src/roomList.js:506
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "امکان برقراری اتصال به %s نبود. کارساز مشغول است."
 
-#: src/roomList.js:434
+#: src/roomList.js:509
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "امکان برقراری اتصال به %s نبود."
@@ -824,7 +842,7 @@ msgstr "امکان برقراری اتصال به %s نبود."
 msgid "Should the password be saved?"
 msgstr "آیا گذرواژه باید ذخیره شود؟"
 
-#: src/roomStack.js:100 src/telepathyClient.js:651
+#: src/roomStack.js:100 src/telepathyClient.js:669
 #, javascript-format
 msgid "Identification will happen automatically the next time you connect to %s"
 msgstr "شناسایی دفعه آینده‌ای که به %s وارد شوید بطور خودکار انجام خواهد شد"
@@ -866,24 +884,24 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "با استفاده از دکمه + به یک اتاق بپیوندید."
 
-#: src/telepathyClient.js:464
+#: src/telepathyClient.js:478
 msgid "Good Bye"
 msgstr "خداحافظ"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:650
+#: src/telepathyClient.js:668
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "ذخیره گذرواژه %s برای %s؟"
 
-#: src/telepathyClient.js:654
+#: src/telepathyClient.js:672
 msgid "Save"
 msgstr "ذخیره"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:686
+#: src/telepathyClient.js:708
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s در %s"
@@ -936,21 +954,21 @@ msgstr "برخط"
 msgid "No Results"
 msgstr "بدون نتیجه"
 
-#: src/userTracker.js:312
+#: src/userTracker.js:369
 msgid "User is online"
 msgstr "کاربر برخط است"
 
-#: src/userTracker.js:313
+#: src/userTracker.js:370
 #, javascript-format
 msgid "User %s is now online."
 msgstr "کاربر %s هم‌اکنون برخط است."
 
-#: src/utils.js:104
+#: src/utils.js:134
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "گذرواژه کارساز پولاری برای %s"
 
-#: src/utils.js:109
+#: src/utils.js:139
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "گذرواژه پولاری NickServ برای %s"
