@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-02-12 19:02+0000\n"
-"PO-Revision-Date: 2020-02-13 08:54+0100\n"
+"POT-Creation-Date: 2020-04-01 02:04+0000\n"
+"PO-Revision-Date: 2020-04-28 16:19+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.34.0\n"
+"X-Generator: Gtranslator 3.36.0\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -28,7 +28,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:847
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:833
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Un cliente de IRC para GNOME"
 
@@ -136,6 +136,17 @@ msgid "Whether the identify command is known to support the username parameter"
 msgstr ""
 "Indica si el comando «identify» soporta el nombre de usuario como parámetro"
 
+#: data/org.gnome.Polari.gschema.xml:56
+msgid "List of muted usernames"
+msgstr "Lista de nombres de usuarios silenciados"
+
+#: data/org.gnome.Polari.gschema.xml:57
+msgid ""
+"A list of usernames for whose private messages not to show notifications"
+msgstr ""
+"Una lista de nombres de usuarios para los que los mensajes privados no "
+"muestran notificaciones"
+
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
 msgstr "Dirección del _servidor"
@@ -204,14 +215,11 @@ msgid "Show Emoji Picker"
 msgstr "Mostrar el selector de emoticonos"
 
 #: data/resources/help-overlay.ui:48
-#| msgctxt "shortcut window"
-#| msgid "Show Userlist"
 msgctxt "shortcut window"
 msgid "Show Help"
 msgstr "Mostrar ayuda"
 
 #: data/resources/help-overlay.ui:55
-#| msgid "Open Link"
 msgctxt "shortcut window"
 msgid "Open Menu"
 msgstr "Abrir menú"
@@ -347,7 +355,7 @@ msgstr "Añadir salas y redes"
 msgid "Show connected users"
 msgstr "Mostrar usuarios conectados"
 
-#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:475 src/userList.js:456
 msgid "Offline"
 msgstr "Desconectado"
 
@@ -419,20 +427,20 @@ msgstr "Permitir ejecutar junto con otra instancia"
 msgid "Print version and exit"
 msgstr "Mostrar el número de versión y salir"
 
-#: src/application.js:479 src/utils.js:188
+#: src/application.js:485 src/utils.js:218
 msgid "Failed to open link"
 msgstr "Falló al abrir el enlace"
 
-#: src/application.js:770
+#: src/application.js:756
 #, javascript-format
 msgid "%s removed."
 msgstr "%s eliminado."
 
-#: src/application.js:846
+#: src/application.js:832
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2016"
 
-#: src/application.js:852
+#: src/application.js:838
 msgid "Learn more about Polari"
 msgstr "Saber más acerca de Polari"
 
@@ -777,58 +785,66 @@ msgid_plural "%d users"
 msgstr[0] "%d usuario"
 msgstr[1] "%d usuarios"
 
-#: src/roomList.js:190
+#: src/roomList.js:254
 msgid "Leave chatroom"
 msgstr "Salir de la sala de chat"
 
-#: src/roomList.js:190
+#: src/roomList.js:254
 msgid "End conversation"
 msgstr "Terminar conversación"
 
-#: src/roomList.js:301
+#: src/roomList.js:270
+msgid "Unmute"
+msgstr "Quitar silencio"
+
+#: src/roomList.js:274
+msgid "Mute"
+msgstr "Silenciar"
+
+#: src/roomList.js:376
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "La red %s tiene un error"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:372
+#: src/roomList.js:447
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:379
+#: src/roomList.js:454
 msgid "Connection Problem"
 msgstr "Problema de conexión"
 
-#: src/roomList.js:396
+#: src/roomList.js:471
 msgid "Connected"
 msgstr "Conectado"
 
-#: src/roomList.js:398
+#: src/roomList.js:473
 msgid "Connecting…"
 msgstr "Conectando…"
 
-#: src/roomList.js:402
+#: src/roomList.js:477
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: src/roomList.js:422
+#: src/roomList.js:497
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "No se pudo conectar a %s de manera segura."
 
-#: src/roomList.js:425
+#: src/roomList.js:500
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s necesita una contraseña."
 
-#: src/roomList.js:431
+#: src/roomList.js:506
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "No se pudo conectar a %s. El servidor está ocupado"
 
-#: src/roomList.js:434
+#: src/roomList.js:509
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "No se pudo conectar a %s."
@@ -837,7 +853,7 @@ msgstr "No se pudo conectar a %s."
 msgid "Should the password be saved?"
 msgstr "¿Se debe guardar la contraseña?"
 
-#: src/roomStack.js:100 src/telepathyClient.js:651
+#: src/roomStack.js:100 src/telepathyClient.js:669
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -881,24 +897,24 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Únase a una sala pulsando el botón +."
 
-#: src/telepathyClient.js:464
+#: src/telepathyClient.js:478
 msgid "Good Bye"
 msgstr "Adiós"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:650
+#: src/telepathyClient.js:668
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "¿Guardar contraseña %s para %s?"
 
-#: src/telepathyClient.js:654
+#: src/telepathyClient.js:672
 msgid "Save"
 msgstr "Guardar"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:686
+#: src/telepathyClient.js:708
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s en %s"
@@ -957,21 +973,21 @@ msgstr "En línea"
 msgid "No Results"
 msgstr "No hay resultados"
 
-#: src/userTracker.js:312
+#: src/userTracker.js:369
 msgid "User is online"
 msgstr "El usuario está conectado"
 
-#: src/userTracker.js:313
+#: src/userTracker.js:370
 #, javascript-format
 msgid "User %s is now online."
 msgstr "El usuario %s está ahora conectado."
 
-#: src/utils.js:104
+#: src/utils.js:134
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Contraseña del servidor Polari para %s"
 
-#: src/utils.js:109
+#: src/utils.js:139
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Contraseña del NickServ de Polari para %s"
