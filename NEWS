@@ -1,3 +1,13 @@
+3.36.2 — “I've Seen More Meat in a Vegan Kitchen”
+=================================================
+* Fix information leak when re-using account IDs [Florian; #132]
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Cheng-Chia Tseng [zh_TW], Emin Tufan Çetin [tr]
+
 3.36.1
 ======
 * Misc. cleanups [Florian; !150, !151]
