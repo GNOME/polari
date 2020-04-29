@@ -8,22 +8,16 @@
     "tags": ["nightly"],
     "desktop-file-name-prefix": "(Nightly) ",
     "finish-args": [
-        /* X11 + XShm access */
         "--share=ipc", "--socket=x11", "--socket=fallback-x11",
-        /* Wayland access */
         "--socket=wayland",
-        /* Needs network, obviously */
         "--share=network",
-        /* Our client name */
         "--own-name=org.freedesktop.Telepathy.Client.Polari",
         "--own-name=org.freedesktop.Telepathy.Client.Polari.*",
-        /* Telepathy */
         "--talk-name=org.freedesktop.Telepathy.AccountManager",
         "--talk-name=org.freedesktop.Telepathy.ChannelDispatcher",
         "--talk-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
         "--talk-name=org.freedesktop.Telepathy.Client.GnomeShell.*",
         "--own-name=org.freedesktop.Telepathy.Client.TpGLibRequestAndHandle.*",
-        /* Telepathy names owned by bundled services */
         "--own-name=org.freedesktop.Telepathy.AccountManager",
         "--own-name=org.freedesktop.Telepathy.ChannelDispatcher",
         "--own-name=org.freedesktop.Telepathy.MissionControl5",
@@ -31,12 +25,9 @@
         "--own-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
         "--own-name=org.freedesktop.Telepathy.Client.Logger",
         "--own-name=org.freedesktop.Telepathy.Logger",
-        /* Keyring */
         "--talk-name=org.freedesktop.secrets",
-        /* log files written by tp-logger outside the sandbox */
         "--filesystem=~/.local/share/TpLogger",
         "--env=TPL_LOG_DIR=.local/share",
-	/* GSettings migration */
 	"--metadata=X-DConf=migrate-path=/org/gnome/polari/"
     ],
     "build-options": {
