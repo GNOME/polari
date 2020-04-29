@@ -1,3 +1,17 @@
+3.37.1
+======
+* Add the ability to mute nicknames [Florian; !153]
+* Fix information leak when re-using account IDs [Florian; #132]
+* Misc. bug fixes and cleanups [Florian; !150, !151, !155, !156]
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Daniel Korostil [uk], Daniel Șerbănescu [ro], Cheng-Chia Tseng [zh_TW],
+  Yuri Chornoivan [uk], Mingcong Bai [zh_CN], Danial Behzadi [fa],
+  Daniel Mustieles [es], Emin Tufan Çetin [tr]
+
 3.36.0 — “Very Macho Homosexual Camper”
 =======================================
 * Fix URL previews in flatpak [Florian; !147]
