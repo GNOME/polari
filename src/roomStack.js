@@ -34,8 +34,10 @@ var RoomStack = GObject.registerClass({
 
         this._entryAreaHeight = 0;
         this._sizeGroup.get_widgets()[0].connect('size-allocate', (w, rect) => {
-            this._entryAreaHeight = rect.height - 1;
-            this.notify('entry-area-height');
+            if (this._entryAreaHeight !== rect.height - 1) {
+                this._entryAreaHeight = rect.height - 1;
+                this.notify('entry-area-height');
+            }
         });
 
         this.connect('destroy', () => {
