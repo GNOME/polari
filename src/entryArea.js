@@ -161,6 +161,7 @@ var EntryArea = GObject.registerClass({
         'pasteBox',
         'confirmLabel',
         'uploadLabel',
+        'uploadSpinner',
         'cancelButton',
         'pasteButton',
     ],
@@ -415,10 +416,14 @@ var EntryArea = GObject.registerClass({
         else
             title = _('Paste from %s').format(nick);
 
+        this._confirmLabel.hide();
+        this._uploadSpinner.start();
+
         let app = Gio.Application.get_default();
         try {
             app.pasteManager.pasteContent(this._pasteContent, title, url => {
                 // TODO: handle errors
+                this._uploadSpinner.stop();
                 this._setPasteContent(null);
                 if (url)
                     this._chatEntry.emit('insert-at-cursor', url);
@@ -428,8 +433,8 @@ var EntryArea = GObject.registerClass({
             if (type === 'object')
                 type = this._pasteContent.toString();
             debug(`Failed to paste content of type ${type}`);
+            this._uploadSpinner.stop();
         }
-        this._confirmLabel.hide();
     }
 
     _onCancelClicked() {
