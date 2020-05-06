@@ -87,6 +87,7 @@ var URLPreview = GObject.registerClass({
         styleContext.add_class('url-preview');
         styleContext.add_class(Gtk.STYLE_CLASS_BACKGROUND);
 
+        this._imageLoaded = false;
         this._image = new Gtk.Image({
             icon_name: 'image-loading-symbolic',
             visible: true,
@@ -100,18 +101,26 @@ var URLPreview = GObject.registerClass({
         });
         this._label.get_style_context().add_class(Gtk.STYLE_CLASS_DIM_LABEL);
         this.add(this._label);
+    }
 
-        Thumbnailer.getDefault().getThumbnail(this.uri, filename => {
-            this._image.set_from_file(filename);
+    vfunc_map() {
+        if (!this._imageLoaded) {
+            this._imageLoaded = true;
 
-            let title = null;
-            if (this._image.pixbuf)
-                title = this._image.pixbuf.get_option('tEXt::Title');
+            Thumbnailer.getDefault().getThumbnail(this.uri, filename => {
+                this._image.set_from_file(filename);
 
-            if (title) {
-                this._label.set_label(title);
-                this.tooltip_text = title;
-            }
-        });
+                let title = null;
+                if (this._image.pixbuf)
+                    title = this._image.pixbuf.get_option('tEXt::Title');
+
+                if (title) {
+                    this._label.set_label(title);
+                    this.tooltip_text = title;
+                }
+            });
+        }
+
+        super.vfunc_map();
     }
 });
