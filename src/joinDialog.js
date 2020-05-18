@@ -26,20 +26,12 @@ export default GObject.registerClass({
         'details',
         'addButton',
         'customToggle',
+        'backButton',
     ],
 }, class JoinDialog extends Gtk.Dialog {
     _init(params) {
         params['use-header-bar'] = 1;
         super._init(params);
-
-        // TODO: Is there really no way to do this in the template?
-        let icon = new Gtk.Image({ icon_name: 'go-previous-symbolic' });
-        this._backButton = new Gtk.Button({
-            image: icon,
-            valign: Gtk.Align.CENTER,
-            focus_on_click: false,
-        });
-        this.get_header_bar().pack_start(this._backButton);
 
         let accelGroup = new Gtk.AccelGroup();
         this._connectionButton.add_accelerator('clicked',
