@@ -32,7 +32,7 @@ var Application = GObject.registerClass({
         });
 
         GLib.set_prgname('polari');
-        Tp.debug_set_flags(GLib.getenv('TP_DEBUG'));
+        Tp.debug_set_flags(GLib.getenv('TP_DEBUG') || '');
         this._retryData = new Map();
         this._nickTrackData = new Map();
         this._demons = [];
