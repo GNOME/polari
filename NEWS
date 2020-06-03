@@ -1,3 +1,15 @@
+3.37.2
+======
+* Improve performance while idle [Philip; !157]
+* Misc. bug fixes and cleanups [Florian; #144]
+
+Contributors:
+  Yuri Chornoivan, Florian Müllner, Philip Withnall
+
+Translators:
+  Cheng-Chia Tseng [zh_TW], Efstathios Iosifidis [el], Florentina Mușat [ro],
+  Matej Urbančič [sl]
+
 3.37.1
 ======
 * Add the ability to mute nicknames [Florian; !153]
