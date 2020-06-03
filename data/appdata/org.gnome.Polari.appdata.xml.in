@@ -55,6 +55,13 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.36.3" date="2020-06-03">
+      <description>
+        <p>
+          Performance improvements while idle.
+        </p>
+      </description>
+    </release>
     <release version="3.36.2" date="2020-04-30">
       <description>
         <p>

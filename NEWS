@@ -1,3 +1,11 @@
+3.36.3 — “Don't 'Hey, Ms. Albright' me”
+=======================================
+* Misc. bug fixes and cleanups [Florian; !156]
+* Improve performance while idle [Philip; !157]
+
+Contributors:
+  Yuri Chornoivan, Florian Müllner, Philip Withnall
+
 3.36.2 — “I've Seen More Meat in a Vegan Kitchen”
 =================================================
 * Fix information leak when re-using account IDs [Florian; #132]
