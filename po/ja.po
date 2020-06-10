@@ -1,5 +1,5 @@
 # Japanese translation for polari.
-# Copyright (C) 2015-2020 polari's COPYRIGHT HOLDER
+# Copyright (C) 2015-2016, 2018-2020 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Kentaro KAZUHAMA <kazken3@gmail.com>, 2015.
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2015-2016.
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2020-06-08 18:31+0000\n"
-"PO-Revision-Date: 2020-02-15 00:00+0900\n"
+"PO-Revision-Date: 2020-06-10 18:45+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -78,7 +78,7 @@ msgstr "バックグラウンドで実行"
 
 #: data/org.gnome.Polari.gschema.xml:12
 msgid "Keep running in background when closed."
-msgstr ""
+msgstr "閉じてもバックグラウンドでの実行を維持します。"
 
 #: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
@@ -86,7 +86,7 @@ msgstr "ウィンドウサイズ"
 
 #: data/org.gnome.Polari.gschema.xml:17
 msgid "Window size (width and height)."
-msgstr "ウィンドウサイズ (幅と高さ)"
+msgstr "ウィンドウサイズ (幅と高さ) です。"
 
 #: data/org.gnome.Polari.gschema.xml:21
 msgid "Window maximized"
@@ -753,10 +753,8 @@ msgstr ""
 "/TOPIC <topic> — <topic> をトピックに設定、もしくは現在のチャネルに表示する"
 
 #: src/ircParser.js:38
-#, fuzzy
-#| msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgid "/WHOIS <nick> — requests information on <nick>"
-msgstr "/NICK <nickname> — あなたのニックネームを <nickname> に設定する"
+msgstr "/WHOIS <nick> — <nick> の情報を要求する"
 
 #: src/ircParser.js:41
 msgid "Unknown command — try /HELP for a list of available commands"
@@ -782,10 +780,9 @@ msgid "No topic set"
 msgstr "トピックが設定されていません"
 
 #: src/ircParser.js:312
-#, fuzzy, javascript-format
-#| msgid "Last Activity:"
+#, javascript-format
 msgid "User: %s - Last activity: %s"
-msgstr "最後のアクティビティ:"
+msgstr "ユーザー: %s - 最後のアクティビティ: %s"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
