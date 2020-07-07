@@ -55,6 +55,13 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.37.3" type="development" date="2020-07-07">
+      <description>
+        <p>
+          Add WHOIS command.
+        </p>
+      </description>
+    </release>
     <release version="3.37.2" type="development" date="2020-06-03">
       <description>
         <p>

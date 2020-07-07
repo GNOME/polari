@@ -1,3 +1,14 @@
+3.37.3
+======
+* Add WHOIS command [Roberto; !152]
+
+Contributors:
+  Roberto Sánchez Fernández
+
+Translators:
+  Yuri Chornoivan [uk], Daniel Mustieles [es], sicklylife [ja],
+  Matej Urbančič [sl], Florentina Mușat [ro], Baurzhan Muftakhidinov [kk]
+
 3.37.2
 ======
 * Improve performance while idle [Philip; !157]
