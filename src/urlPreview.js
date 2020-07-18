@@ -78,8 +78,6 @@ var URLPreview = GObject.registerClass({
 
         this.set({
             orientation: Gtk.Orientation.VERTICAL,
-            margin: 12,
-            margin_start: 0,
             spacing: 6,
         });
 

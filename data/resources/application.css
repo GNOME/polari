@@ -118,6 +118,9 @@ treeview.polari-server-room-list {
 }
 
 .url-preview { padding: 8px; }
+.url-preview { margin: 12px; }
+.url-preview:dir(ltr) { margin-left: 0; }
+.url-preview:dir(rtl) { margin-right: 0; }
 .url-preview image { min-width: 120px; min-height: 90px; }
 .url-preview label { font-size: small; }
 
