@@ -1,6 +1,8 @@
 /* exported URLPreview */
 const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 
+Gio._promisify(Gio._LocalFilePrototype, 'query_info_async', 'query_info_finish');
+
 class Thumbnailer {
     static getDefault() {
         if (!this._singleton)
@@ -23,9 +25,8 @@ class Thumbnailer {
         this._processData(data);
     }
 
-    _processData(data) {
-        let check = GLib.file_test(`${data.filename}`, GLib.FileTest.EXISTS);
-        if (check)
+    async _processData(data) {
+        if (await this._thumbExists(data))
             this._generationDone(data);
         else if (!this._subProc)
             this._generateThumbnail(data);
@@ -55,6 +56,17 @@ class Thumbnailer {
             this._subProc = null;
             this._generationDone(data);
         });
+    }
+
+    async _thumbExists(data) {
+        const file = Gio.File.new_for_path(`${data.filename}`);
+        try {
+            await file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
+                Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null);
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 
     _generateFilename(url) {
