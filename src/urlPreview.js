@@ -2,6 +2,7 @@
 const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
 
 Gio._promisify(Gio._LocalFilePrototype, 'query_info_async', 'query_info_finish');
+Gio._promisify(Gio.Subprocess.prototype, 'wait_async', 'wait_finish');
 
 class Thumbnailer {
     static getDefault() {
@@ -18,11 +19,13 @@ class Thumbnailer {
         GLib.mkdir_with_parents(this._thumbnailsDir, 0o755);
     }
 
-    getThumbnail(uri, callback) {
-        let filename = this._generateFilename(uri);
-        let data = { uri, filename, callback };
+    getThumbnail(uri) {
+        return new Promise((resolve, reject) => {
+            const filename = this._generateFilename(uri);
+            const data = { uri, filename, resolve, reject };
 
-        this._processData(data);
+            this._processData(data);
+        });
     }
 
     async _processData(data) {
@@ -34,28 +37,29 @@ class Thumbnailer {
             this._urlQueue.push(data);
     }
 
-    _generationDone(data) {
-        data.callback(data.filename);
+    _generationDone(data, error = null) {
+        if (error)
+            data.reject(error);
+        else
+            data.resolve(data.filename);
 
         let nextData = this._urlQueue.shift();
         if (nextData)
             this._processData(nextData);
     }
 
-    _generateThumbnail(data) {
+    async _generateThumbnail(data) {
         let { filename, uri } = data;
         this._subProc = Gio.Subprocess.new(
             ['gjs', `${pkg.pkgdatadir}/thumbnailer.js`, uri, filename],
             Gio.SubprocessFlags.NONE);
-        this._subProc.wait_async(null, (o, res) => {
-            try {
-                this._subProc.wait_finish(res);
-            } catch (e) {
-                log(`Thumbnail generation for ${uri} failed: ${e}`);
-            }
-            this._subProc = null;
+        try {
+            await this._subProc.wait_async(null);
             this._generationDone(data);
-        });
+        } catch (e) {
+            this._generationDone(data, e);
+        }
+        this._subProc = null;
     }
 
     async _thumbExists(data) {
@@ -113,24 +117,32 @@ var URLPreview = GObject.registerClass({
         this.add(this._label);
     }
 
-    vfunc_map() {
-        if (!this._imageLoaded) {
-            this._imageLoaded = true;
+    async _maybeLoadImage() {
+        if (this._imageLoaded)
+            return;
 
-            Thumbnailer.getDefault().getThumbnail(this.uri, filename => {
-                this._image.set_from_file(filename);
+        this._imageLoaded = true;
+        const thumbnailer = Thumbnailer.getDefault();
 
-                let title = null;
-                if (this._image.pixbuf)
-                    title = this._image.pixbuf.get_option('tEXt::Title');
-
-                if (title) {
-                    this._label.set_label(title);
-                    this.tooltip_text = title;
-                }
-            });
+        try {
+            const filename = await thumbnailer.getThumbnail(this.uri);
+            this._image.set_from_file(filename);
+        } catch (e) {
+            log(`Thumbnail generation for ${this.uri} failed: ${e}`);
         }
 
+        let title = null;
+        if (this._image.pixbuf)
+            title = this._image.pixbuf.get_option('tEXt::Title');
+
+        if (title) {
+            this._label.set_label(title);
+            this.tooltip_text = title;
+        }
+    }
+
+    vfunc_map() {
+        this._maybeLoadImage();
         super.vfunc_map();
     }
 });
