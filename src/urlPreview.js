@@ -19,6 +19,11 @@ class Thumbnailer {
         GLib.mkdir_with_parents(this._thumbnailsDir, 0o755);
     }
 
+    get _hasNetwork() {
+        const monitor = Gio.NetworkMonitor.get_default();
+        return monitor.state_valid && monitor.network_available;
+    }
+
     getThumbnail(uri) {
         return new Promise((resolve, reject) => {
             const filename = this._generateFilename(uri);
@@ -31,6 +36,8 @@ class Thumbnailer {
     async _processData(data) {
         if (await this._thumbExists(data))
             this._generationDone(data);
+        else if (!this._hasNetwork)
+            this._generationUnavailable(data);
         else if (!this._subProc)
             this._generateThumbnail(data);
         else
@@ -46,6 +53,13 @@ class Thumbnailer {
         let nextData = this._urlQueue.shift();
         if (nextData)
             this._processData(nextData);
+    }
+
+    _generationUnavailable(data) {
+        this._generationDone(data, new Gio.IOErrorEnum({
+            code: Gio.IOErrorEnum.NETWORK_UNREACHABLE,
+            message: 'Network unreachable',
+        }));
     }
 
     async _generateThumbnail(data) {
@@ -115,10 +129,22 @@ var URLPreview = GObject.registerClass({
         });
         this._label.get_style_context().add_class(Gtk.STYLE_CLASS_DIM_LABEL);
         this.add(this._label);
+
+        this._networkMonitor = Gio.NetworkMonitor.get_default();
+        this._networkChangedId = this._networkMonitor.connect('network-changed',
+            this._maybeLoadImage.bind(this));
+
+        this.connect('destroy', this._onDestroy.bind(this));
+    }
+
+    _onDestroy() {
+        if (this._networkChangedId)
+            this._networkMonitor.disconnect(this._networkChangedId);
+        this._networkChangedId = 0;
     }
 
     async _maybeLoadImage() {
-        if (this._imageLoaded)
+        if (this._imageLoaded || !this.get_mapped())
             return;
 
         this._imageLoaded = true;
@@ -132,7 +158,10 @@ var URLPreview = GObject.registerClass({
             const filename = await thumbnailer.getThumbnail(this.uri);
             this._image.set_from_file(filename);
         } catch (e) {
-            log(`Thumbnail generation for ${this.uri} failed: ${e}`);
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE))
+                this._imageLoaded = false;
+            else
+                log(`Thumbnail generation for ${this.uri} failed: ${e}`);
             this._image.set({
                 icon_name: 'image-x-generic-symbolic',
                 pixel_size: 64,
@@ -150,7 +179,7 @@ var URLPreview = GObject.registerClass({
     }
 
     vfunc_map() {
-        this._maybeLoadImage();
         super.vfunc_map();
+        this._maybeLoadImage();
     }
 });
