@@ -21,7 +21,7 @@ class Thumbnailer {
 
     get _hasNetwork() {
         const monitor = Gio.NetworkMonitor.get_default();
-        return monitor.state_valid && monitor.network_available;
+        return monitor.state_valid && monitor.network_available && !monitor.network_metered;
     }
 
     getThumbnail(uri) {
