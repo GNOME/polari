@@ -103,9 +103,9 @@ var URLPreview = GObject.registerClass({
 
         this._imageLoaded = false;
         this._image = new Gtk.Image({
-            icon_name: 'image-loading-symbolic',
             visible: true,
         });
+        this._image.get_style_context().add_class('dim-label');
         this.add(this._image);
 
         this._label = new Gtk.Label({
@@ -122,6 +122,10 @@ var URLPreview = GObject.registerClass({
             return;
 
         this._imageLoaded = true;
+        this._image.set({
+            icon_name: 'image-loading-symbolic',
+            pixel_size: 16,
+        });
         const thumbnailer = Thumbnailer.getDefault();
 
         try {
@@ -129,6 +133,10 @@ var URLPreview = GObject.registerClass({
             this._image.set_from_file(filename);
         } catch (e) {
             log(`Thumbnail generation for ${this.uri} failed: ${e}`);
+            this._image.set({
+                icon_name: 'image-x-generic-symbolic',
+                pixel_size: 64,
+            });
         }
 
         let title = null;
