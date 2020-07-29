@@ -9,6 +9,7 @@ Gio._promisify(WebKit2.WebView.prototype, 'run_javascript', 'run_javascript_fini
 
 const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
+const FALLBACK_ICON_SIZE = 64;
 
 let PreviewWindow = GObject.registerClass({
     Properties: {
@@ -158,7 +159,7 @@ class App {
 
         window.realize();
         window.connect('snapshot-ready', this._onSnapshotReady.bind(this));
-        window.connect('snapshot-failed', () => window.destroy());
+        window.connect('snapshot-failed', this._onSnapshotFailed.bind(this));
         window.connect('destroy', () => Gtk.main_quit());
 
         Gtk.main();
@@ -200,6 +201,20 @@ class App {
         let pixbuf = Gdk.pixbuf_get_from_surface(target,
             0, 0, targetWidth, targetHeight);
         pixbuf.savev(this._filename, 'png', ['tEXt::Title'], [title]);
+    }
+
+    _onSnapshotFailed(window) {
+        const context = window.get_style_context();
+        context.set_state(Gtk.StateFlags.BACKDROP);
+        const color = context.get_color(context.get_state());
+        window.destroy();
+
+        const [type] = Gio.content_type_guess(this._uri, null);
+        const icon = Gio.content_type_get_symbolic_icon(type);
+        const theme = Gtk.IconTheme.get_default();
+        const info = theme.lookup_by_gicon(icon, FALLBACK_ICON_SIZE, 0);
+        const [pixbuf] = info.load_symbolic(color, null, null, null);
+        pixbuf.savev(this._filename, 'png', [], []);
     }
 }
 
