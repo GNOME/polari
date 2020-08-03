@@ -48,7 +48,7 @@ eslint:
 flatpak:
     variables:
         BRANCH: "snapshot"
-        MESON_ARGS: "-Dsnapshot=true --werror --warnlevel 2"
+        CONFIG_OPTS: "-Dsnapshot=true --werror --warnlevel 2"
     extends: .flatpak-template
     except:
         - master
