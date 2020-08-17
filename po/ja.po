@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2020-08-04 20:58+0000\n"
-"PO-Revision-Date: 2020-06-10 18:45+0900\n"
+"PO-Revision-Date: 2020-08-17 07:30+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -411,7 +411,7 @@ msgstr "会話の開始"
 
 #: src/application.js:44
 msgid "Start Telepathy client"
-msgstr ""
+msgstr "Telepathy クライアントを起動する"
 
 #: src/application.js:49
 msgid "Start in debug mode"
@@ -419,7 +419,7 @@ msgstr "デバッグモードで起動する"
 
 #: src/application.js:52
 msgid "Allow running alongside another instance"
-msgstr ""
+msgstr "別のインスタンスと同時に実行できるようにする"
 
 #: src/application.js:55
 msgid "Print version and exit"
@@ -527,7 +527,7 @@ msgstr "%H:%M"
 #: src/chatView.js:1178
 #, no-c-format
 msgid "Yesterday, %H∶%M"
-msgstr "昨日, %H:%M"
+msgstr "昨日 %H:%M"
 
 #. this week
 #. Translators: this is the week day name followed by a time
@@ -535,7 +535,7 @@ msgstr "昨日, %H:%M"
 #: src/chatView.js:1183
 #, no-c-format
 msgid "%A, %H∶%M"
-msgstr "%A, %H:%M"
+msgstr "%A %H:%M"
 
 #. this year
 #. Translators: this is the month name and day number
@@ -544,7 +544,7 @@ msgstr "%A, %H:%M"
 #: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d, %H∶%M"
-msgstr "%m月%d日, %H:%M"
+msgstr "%-m月%-d日 %H:%M"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -553,7 +553,7 @@ msgstr "%m月%d日, %H:%M"
 #: src/chatView.js:1195
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
-msgstr "%Y年%m月%d日, %H:%M"
+msgstr "%Y年%-m月%-d日 %H:%M"
 
 #. eslint-disable-next-line no-lonely-if
 #. today
@@ -568,7 +568,7 @@ msgstr "%p %I:%M"
 #: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
-msgstr "昨日, %p %I:%M"
+msgstr "昨日 %p %I:%M"
 
 #. this week
 #. Translators: this is the week day name followed by a time
@@ -576,7 +576,7 @@ msgstr "昨日, %p %I:%M"
 #: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
-msgstr "%A, %p %I:%M"
+msgstr "%A %p %I:%M"
 
 #. this year
 #. Translators: this is the month name and day number
@@ -585,7 +585,7 @@ msgstr "%A, %p %I:%M"
 #: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
-msgstr "%m月%d日, %p %I:%M"
+msgstr "%-m月%-d日 %p %I:%M"
 
 #. before this year
 #. Translators: this is the month name, day number, year
@@ -594,7 +594,7 @@ msgstr "%m月%d日, %p %I:%M"
 #: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
-msgstr "%Y年%m月%d日, %p %I:%M"
+msgstr "%Y年%-m月%-d日 %p %I:%M"
 
 #: src/connections.js:42
 msgid "Already added"
@@ -804,11 +804,11 @@ msgstr "会話の終了"
 
 #: src/roomList.js:269
 msgid "Unmute"
-msgstr ""
+msgstr "ミュート解除"
 
 #: src/roomList.js:273
 msgid "Mute"
-msgstr ""
+msgstr "ミュート"
 
 #: src/roomList.js:375
 #, javascript-format
@@ -929,7 +929,7 @@ msgstr "%s (%s)"
 
 #: src/userList.js:413
 msgid "Available in another room."
-msgstr ""
+msgstr "別のルームで利用可能です。"
 
 #: src/userList.js:415
 msgid "Online"
@@ -960,11 +960,11 @@ msgstr "%s の NickServ パスワード"
 
 #: src/utils.js:372
 msgid "Now"
-msgstr ""
+msgstr "今"
 
 #: src/utils.js:375
 msgid "Unavailable"
-msgstr ""
+msgstr "利用できません"
 
 #: src/utils.js:379
 #, javascript-format
@@ -1001,15 +1001,3 @@ msgstr[0] "%d 週前"
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ヶ月前"
-
-#~ msgid "org.gnome.Polari"
-#~ msgstr "org.gnome.Polari"
-
-#~ msgid "Room _Name"
-#~ msgstr "ルーム名(_N)"
-
-#~ msgid "Message"
-#~ msgstr "メッセージ"
-
-#~ msgid "All"
-#~ msgstr "すべて"
