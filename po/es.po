@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-06-08 18:31+0000\n"
+"POT-Creation-Date: 2020-08-04 20:58+0000\n"
 "PO-Revision-Date: 2020-06-09 17:15+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: es <gnome-es-list@gnome.org>\n"
@@ -289,7 +289,7 @@ msgstr "Conéctese a Internet para seguir con la configuración."
 #: data/resources/initial-setup-window.ui:109
 #: data/resources/initial-setup-window.ui:159
 msgid "Welcome to Polari"
-msgstr "Bienvenido a Polari"
+msgstr "Bienvenido/a a Polari"
 
 #: data/resources/initial-setup-window.ui:121
 msgid ""
@@ -751,7 +751,6 @@ msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <tema> - establece el tema a <tema>, o muestra el actual"
 
 #: src/ircParser.js:38
-#| msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgid "/WHOIS <nick> — requests information on <nick>"
 msgstr "/WHOIS <nick> — solicita información sobre <nick>"
 
@@ -781,7 +780,6 @@ msgstr "No hay ningún tema establecido"
 
 #: src/ircParser.js:312
 #, javascript-format
-#| msgid "Last Activity:"
 msgid "User: %s - Last activity: %s"
 msgstr "Usuario: %s - Última actividad: %s"
 
