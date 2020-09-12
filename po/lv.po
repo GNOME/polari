@@ -1,30 +1,31 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014, 2015, 2016, 2017, 2018.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014, 2015, 2016, 2017, 2018, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2018-10-03 22:33+0000\n"
-"PO-Revision-Date: 2018-08-31 19:45+0200\n"
+"POT-Creation-Date: 2020-06-08 18:31+0000\n"
+"PO-Revision-Date: 2020-09-12 22:53+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
-"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 :"
+" 2);\n"
+"X-Generator: Lokalize 19.12.3\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
+#: src/roomStack.js:207
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:831
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:841
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Internet Relay Chat klients GNOME videi"
 
@@ -50,14 +51,9 @@ msgstr ""
 "ziņojumus — privātās sarunās varat atbildēt uzreiz, nepārslēdzoties atpakaļ "
 "uz lietotni."
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:47
+#: data/appdata/org.gnome.Polari.appdata.xml.in:48
 msgid "The GNOME Project"
 msgstr "GNOME projekts"
-
-#. Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-#: data/org.gnome.Polari.desktop.in:7
-msgid "org.gnome.Polari"
-msgstr "org.gnome.Polari"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
@@ -72,7 +68,7 @@ msgstr "Saglabāto kanālu saraksts"
 msgid "List of channels to restore on startup"
 msgstr "Saraksts ar kanāliem, ko atjaunot palaižoties"
 
-#: data/org.gnome.Polari.gschema.xml:11 data/resources/menus.ui:6
+#: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:16
 msgid "Run in Background"
 msgstr "Palaist fonā"
 
@@ -137,6 +133,16 @@ msgid "Whether the identify command is known to support the username parameter"
 msgstr ""
 "Vai zināms, ka identificēšanas komanda atbalsta lietotājvārda parametrus"
 
+#: data/org.gnome.Polari.gschema.xml:56
+msgid "List of muted usernames"
+msgstr "Saraksts ar apklusinātajiem lietotājiem"
+
+#: data/org.gnome.Polari.gschema.xml:57
+msgid ""
+"A list of usernames for whose private messages not to show notifications"
+msgstr ""
+"Saraksts ar lietotājiem, kuru privātie ziņojumi neparādīsies paziņojumos"
+
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
 msgstr "_Servera adrese"
@@ -162,8 +168,8 @@ msgstr "_Segvārds"
 msgid "_Real Name"
 msgstr "Ī_stais vārds"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
-#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:82
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:110
+#: data/resources/join-room-dialog.ui:11 src/initialSetup.js:85
 msgid "_Cancel"
 msgstr "At_celt"
 
@@ -175,7 +181,7 @@ msgstr "_Pielietot"
 msgid "Change nickname"
 msgstr "Mainīt segvārdu"
 
-#: data/resources/entry-area.ui:119
+#: data/resources/entry-area.ui:120
 msgid "_Paste"
 msgstr "_Ielīmēt"
 
@@ -205,51 +211,64 @@ msgid "Show Emoji Picker"
 msgstr "Rādīt emocijzīmju izvēlētāju"
 
 #: data/resources/help-overlay.ui:48
+#| msgctxt "shortcut window"
+#| msgid "Show Userlist"
+msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "Rādīt palīdzību"
+
+#: data/resources/help-overlay.ui:55
+#| msgid "Open Link"
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "Atvērt izvēlni"
+
+#: data/resources/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Iziet"
 
-#: data/resources/help-overlay.ui:55
+#: data/resources/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "Tastatūras saīsnes"
 
-#: data/resources/help-overlay.ui:64
+#: data/resources/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Navigācija"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "Nākamā istaba"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "Iepriekšējā istaba"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "Nākamā istaba ar nelasītiem ziņojumiem"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "Iepriekšējā istaba ar nelasītiem ziņojumiem"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "Pirmā istaba"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "Pēdējā istaba"
 
-#: data/resources/help-overlay.ui:110
+#: data/resources/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "Pirmā – devītā istaba"
@@ -286,7 +305,7 @@ msgstr ""
 "Izvēlieties istabas, ar kurām vēlaties savienoties. Jūs vēlāk varat "
 "pievienot vēl tīklus un istabas, spiežot + pogu."
 
-#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:229
+#: data/resources/join-room-dialog.ui:4 src/joinDialog.js:232
 msgid "Join Chat Room"
 msgstr "Pievienoties sarunu kanālam"
 
@@ -310,49 +329,38 @@ msgstr "_Pievienot"
 msgid "_Custom Network"
 msgstr "_Pielāgots tīkls"
 
-#: data/resources/main-window.ui:14
-msgid "Run Polari in the Background?"
-msgstr "Palaist Polari fonā?"
+#: data/resources/main-window.ui:22
+msgid "Keyboard Shortcuts"
+msgstr "Tastatūras saīsnes"
 
-#: data/resources/main-window.ui:15
-msgid ""
-"Polari will continue to run when closed and will be automatically started on "
-"login."
-msgstr ""
-"Polari turpinās strādāt, kad tas ir aizvērts un automātiski tiks palaists, "
-"kad lietotājs ierakstās."
+#: data/resources/main-window.ui:26
+msgid "Help"
+msgstr "Palīdzība"
 
-#: data/resources/main-window.ui:21
-msgid "_Quit"
-msgstr "I_ziet"
+#: data/resources/main-window.ui:30
+msgid "About"
+msgstr "Par"
 
-#: data/resources/main-window.ui:28
-msgid "_Run in background"
-msgstr "_Palaist fonā"
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6
+#: src/application.js:58
+msgid "Quit"
+msgstr "Iziet"
 
 #: data/resources/main-window.ui:55 data/resources/main-window.ui:69
 msgid "Add rooms and networks"
 msgstr "Pievienot istabas un tīklus"
 
-#: data/resources/main-window.ui:175
+#: data/resources/main-window.ui:197
 msgid "Show connected users"
 msgstr "Rādīt savienotos lietotājus"
 
-#: data/resources/menus.ui:12
-msgid "Keyboard Shortcuts"
-msgstr "Tastatūras saīsnes"
+#: data/resources/main-window.ui:225 src/roomList.js:474 src/userList.js:417
+msgid "Offline"
+msgstr "Nesaistē"
 
-#: data/resources/menus.ui:16
-msgid "Help"
-msgstr "Palīdzība"
-
-#: data/resources/menus.ui:20
-msgid "About"
-msgstr "Par"
-
-#: data/resources/menus.ui:24
-msgid "Quit"
-msgstr "Iziet"
+#: data/resources/main-window.ui:234
+msgid "Go online to chat and receive messages."
+msgstr "Iet uz tiešsaistes tērzēšanu un saņemt ziņojumus."
 
 #: data/resources/nick-popover.ui:16
 msgid "Change nickname:"
@@ -402,40 +410,40 @@ msgstr "Paziņos, ja lietotājs parādās lietotnē."
 msgid "Start Conversation"
 msgstr "Sākt sarunu"
 
-#: src/application.js:42
+#: src/application.js:44
 msgid "Start Telepathy client"
 msgstr "Palaist Telepathy klientu"
 
-#: src/application.js:47
+#: src/application.js:49
 msgid "Start in debug mode"
 msgstr "Palaist atkļūdošanas režīmā"
 
-#: src/application.js:50
+#: src/application.js:52
 msgid "Allow running alongside another instance"
 msgstr "Ļaut darbināt līdzās citu instanci"
 
-#: src/application.js:53
+#: src/application.js:55
 msgid "Print version and exit"
 msgstr "Parādīt versiju un iziet"
 
-#: src/application.js:439 src/utils.js:184
+#: src/application.js:486 src/utils.js:241
 msgid "Failed to open link"
 msgstr "Neizdevās atvērt saiti"
 
-#: src/application.js:726
+#: src/application.js:761
 #, javascript-format
 msgid "%s removed."
 msgstr "%s ir izņemts."
 
-#: src/application.js:830
+#: src/application.js:840
 msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
-#: src/application.js:836
+#: src/application.js:846
 msgid "Learn more about Polari"
 msgstr "Uzziniet vairāk par Polari"
 
-#: src/appNotifications.js:80
+#: src/appNotifications.js:85
 msgid "Undo"
 msgstr "Atsaukt"
 
@@ -443,55 +451,55 @@ msgstr "Atsaukt"
 msgid "New Messages"
 msgstr "Jauni ziņojumi"
 
-#: src/chatView.js:766
+#: src/chatView.js:786
 msgid "Open Link"
 msgstr "Atvērt saiti"
 
-#: src/chatView.js:772
+#: src/chatView.js:792
 msgid "Copy Link Address"
 msgstr "Kopēt saites adresi"
 
-#: src/chatView.js:940
+#: src/chatView.js:964
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s tagad saucas %s"
 
-#: src/chatView.js:945
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s ir izgājis"
 
-#: src/chatView.js:953
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "Dalībnieku %s ņēma un izspēra %s"
 
-#: src/chatView.js:955
+#: src/chatView.js:979
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s ņēma un izspēra"
 
-#: src/chatView.js:961
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "Dalībnieku %s bloķēja %s"
 
-#: src/chatView.js:963
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s tika bloķēts bloķēja"
 
-#: src/chatView.js:968
+#: src/chatView.js:992
 #, javascript-format
 msgid "%s joined"
 msgstr "%s pievienojās"
 
-#: src/chatView.js:973
+#: src/chatView.js:997
 #, javascript-format
 msgid "%s left"
 msgstr "%s aizgāja"
 
-#: src/chatView.js:1066
+#: src/chatView.js:1094
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -499,7 +507,7 @@ msgstr[0] "%d lietotājs pievienojās"
 msgstr[1] "%d lietotāji pievienojās"
 msgstr[2] "%d lietotāji pievienojās"
 
-#: src/chatView.js:1069
+#: src/chatView.js:1101
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -509,14 +517,14 @@ msgstr[2] "%d lietotāju aizgāja"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1136
+#: src/chatView.js:1173
 msgid "%H∶%M"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1141
+#: src/chatView.js:1178
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Vakar, %H.%M"
@@ -524,7 +532,7 @@ msgstr "Vakar, %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1146
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H.%M"
@@ -533,7 +541,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1152
+#: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H.%M"
@@ -542,21 +550,22 @@ msgstr "%d. %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1158
+#: src/chatView.js:1195
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B, %Y. %H.%M"
 
+#. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1163
+#: src/chatView.js:1201
 msgid "%l∶%M %p"
 msgstr "%H.%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1168
+#: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Vakar %H.%M"
@@ -564,7 +573,7 @@ msgstr "Vakar %H.%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1173
+#: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %H.%M"
@@ -573,7 +582,7 @@ msgstr "%A, %H.%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1179
+#: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %H.%M"
@@ -582,26 +591,25 @@ msgstr "%d. %B, %H.%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1185
+#: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B, %Y. %H.%M"
 
-#: src/connections.js:51
+#: src/connections.js:42
 msgid "Already added"
 msgstr "Jau pievienots"
 
-#: src/connections.js:106
+#: src/connections.js:104
 msgid "No results."
 msgstr "Nav rezultātu."
 
-#. Translators: %s is a connection name
-#: src/connections.js:485
+#: src/connections.js:511
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "“%s” īpašības"
 
-#: src/connections.js:529
+#: src/connections.js:555
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -609,7 +617,7 @@ msgstr ""
 "Polari atvienojās tīkla kļūdas dēļ. Pārliecinieties, ka adreses lauks ir "
 "pareizs."
 
-#: src/entryArea.js:364
+#: src/entryArea.js:370
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -617,7 +625,7 @@ msgstr[0] "Ielīmēt %s teksta rindu uz publisko ielīmēšanas pakalpojumu?"
 msgstr[1] "Ielīmēt %s teksta rindas uz publisko ielīmēšanas pakalpojumu?"
 msgstr[2] "Ielīmēt %s teksta rindu uz publisko ielīmēšanas pakalpojumu?"
 
-#: src/entryArea.js:368
+#: src/entryArea.js:374
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -625,46 +633,46 @@ msgstr[0] "Augšupielādēt %s teksta rindu uz publisko ielīmēšanas pakalpoju
 msgstr[1] "Augšupielādēt %s teksta rindas uz publisko ielīmēšanas pakalpojumu?"
 msgstr[2] "Augšupielādēt %s teksta rindu uz publisko ielīmēšanas pakalpojumu?"
 
-#: src/entryArea.js:375
+#: src/entryArea.js:381
 msgid "Upload image to public paste service?"
 msgstr "Augšupielādēt attēlu uz publisku ielīmēšanas pakalpojumu?"
 
-#: src/entryArea.js:376
+#: src/entryArea.js:382
 msgid "Uploading image to public paste service…"
 msgstr "Augšupielādē attēlu uz publisku ielīmēšanas pakalpojumu…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:397
+#: src/entryArea.js:404
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Augšupielādēt “%s” uz publisku ielīmēšanas pakalpojumu?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:399
+#: src/entryArea.js:406
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Augšupielādē “%s” uz publisku ielīmēšanas pakalpojumu…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:408
+#: src/entryArea.js:415
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s istabā #%s"
 
-#: src/entryArea.js:410
+#: src/entryArea.js:417
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Ielīmēt no %s"
 
-#: src/initialSetup.js:82
+#: src/initialSetup.js:85
 msgid "_Back"
 msgstr "_Atpakaļ"
 
-#: src/initialSetup.js:83
+#: src/initialSetup.js:86
 msgid "_Done"
 msgstr "_Gatavs"
 
-#: src/initialSetup.js:83
+#: src/initialSetup.js:86
 msgid "_Next"
 msgstr "_Nākamais"
 
@@ -675,15 +683,15 @@ msgstr "_Nākamais"
 #. MODE: "/MODE <mode> <nick|channel> — ",
 #. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:23
+#.
+#: src/ircParser.js:24
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 "/CLOSE [<kanāls>] [<iemesls>] — aizver <kanāls>, pēc noklusējuma pašreizējo"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:25
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -691,87 +699,98 @@ msgstr ""
 "/HELP [<komanda>] — attēlo <komanda> palīdzību, vai sarakstu ar pieejamajām "
 "komandām"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <segvārds> [<kanāls>] — ielūdz <segvārds> uz <kanāls>, vai arī uz "
 "pašreizējo"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:27
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <kanāls> — pievienojas <kanāls>"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:28
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <segvārds> — izmet <segvārds> no šī kanāla"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:29
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <darbība> — sūta <darbība> uz pašreizējo kanālu"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:30
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <segvārds> [<ziņa>] — sūta privātu ziņu lietotājam <nick>"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:31
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — uzskaita pašreizējā kanāla lietotājus"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:32
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <segvārds> — iestata jūsu segvārdu uz <segvārds>"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
 "/PART [<kanāls>] [<iemesls>] — pamet <kanāls>, pēc noklusējuma pašreizējo"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:34
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <segvārds> — atver privātu sarunu ar <segvārds>"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:35
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<iemesls>] — atvienojas no pašreizējā servera"
 
-#: src/ircParser.js:35
+#: src/ircParser.js:36
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <teksts> — sūta <teksts> uz pašreizējo istabu/kontaktam"
 
-#: src/ircParser.js:36
+#: src/ircParser.js:37
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <temats> — iestata tematu uz <temats> vai parāda pašreizējo"
 
-#: src/ircParser.js:39
+#: src/ircParser.js:38
+#| msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgid "/WHOIS <nick> — requests information on <nick>"
+msgstr "/WHOIS <segvārds> — pieprasa informāciju par <segvārds>"
+
+#: src/ircParser.js:41
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "Nezināma komanda — mēģiniet /HELP, lai redzētu pieejamo komandu sarakstu"
 
-#: src/ircParser.js:53
+#: src/ircParser.js:55
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Lietojums: %s"
 
-#: src/ircParser.js:89
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "Zināmās komandas:"
 
-#: src/ircParser.js:188
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s lietotāji:"
 
-#: src/ircParser.js:267
+#: src/ircParser.js:273
 msgid "No topic set"
 msgstr "Temats nav iestatīts"
 
-#: src/joinDialog.js:230
+#: src/ircParser.js:312
+#, javascript-format
+#| msgid "Last Activity:"
+msgid "User: %s - Last activity: %s"
+msgstr "Lietotājs: %s — Pēdējā aktivitāte: %s"
+
+#: src/joinDialog.js:232
 msgid "Add Network"
 msgstr "Pievienot tīklu"
 
-#: src/mainWindow.js:383
+#: src/mainWindow.js:399
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -779,108 +798,181 @@ msgstr[0] "%d lietotājs"
 msgstr[1] "%d lietotāji"
 msgstr[2] "%d lietotāju"
 
-#: src/roomList.js:186
+#: src/roomList.js:253
 msgid "Leave chatroom"
 msgstr "Pamest istabu"
 
-#: src/roomList.js:186
+#: src/roomList.js:253
 msgid "End conversation"
 msgstr "Beigt sarunu"
 
-#: src/roomList.js:290
+#: src/roomList.js:269
+msgid "Unmute"
+msgstr "Atklusināt"
+
+#: src/roomList.js:273
+msgid "Mute"
+msgstr "Apklusināt"
+
+#: src/roomList.js:375
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Tīklam %s ir kļūda"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:361
+#: src/roomList.js:446
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:368
+#: src/roomList.js:453
 msgid "Connection Problem"
 msgstr "Problēma ar savienojumu"
 
-#: src/roomList.js:385
+#: src/roomList.js:470
 msgid "Connected"
 msgstr "Savienots"
 
-#: src/roomList.js:387
+#: src/roomList.js:472
 msgid "Connecting…"
 msgstr "Savienojas…"
 
-#: src/roomList.js:389 src/userList.js:414
-msgid "Offline"
-msgstr "Nesaistē"
-
-#: src/roomList.js:391
+#: src/roomList.js:476
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: src/roomList.js:411
+#: src/roomList.js:496
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nevarēja savienoties ar %s drošā veidā."
 
-#: src/roomList.js:414
+#: src/roomList.js:499
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s pieprasa paroli."
 
-#: src/roomList.js:420
+#: src/roomList.js:505
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nevarēja savienoties ar %s. Serveris ir aizņemts."
 
-#: src/roomList.js:423
+#: src/roomList.js:508
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nevarēja savienoties ar %s."
 
-#: src/roomStack.js:114
-msgid "_Save Password"
-msgstr "_Saglabāt paroli"
-
-#: src/roomStack.js:123
+#: src/roomStack.js:100
 msgid "Should the password be saved?"
 msgstr "Vai jāsaglabā parole?"
 
-#: src/roomStack.js:160
-msgid "Join a room using the + button."
-msgstr "Pievienojies istabai, izmantojot pogu “+”."
-
-#: src/telepathyClient.js:410
-msgid "Good Bye"
-msgstr "Visu labu"
-
-#. Translators: Those are a botname and an accountName, e.g.
-#. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:584
-#, javascript-format
-msgid "Save %s password for %s?"
-msgstr "Saglabāt %s paroli %s?"
-
-#: src/telepathyClient.js:585
+#: src/roomStack.js:102 src/telepathyClient.js:668
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr ""
 "Identificēšana notiks automātiski nākamājā reizē, kad savienosities ar %s"
 
-#: src/telepathyClient.js:588
+#: src/roomStack.js:108
+msgid "_Save Password"
+msgstr "_Saglabāt paroli"
+
+#: src/roomStack.js:141
+#| msgid "Available in another room."
+msgid "Failed to join the room"
+msgstr "Neizdevās pievienoties istabai"
+
+#: src/roomStack.js:143
+msgid "_Retry"
+msgstr "Mēģināt vēl_reiz"
+
+#: src/roomStack.js:167
+msgid "The room is full."
+msgstr "Šī istaba ir pilna."
+
+#: src/roomStack.js:170
+msgid "You have been banned from the room."
+msgstr "Jūs esat izraidīts no istabas."
+
+#: src/roomStack.js:173
+msgid "The room is invite-only."
+msgstr "Šajā istabā var iekļūt tikai ar ielūgumiem."
+
+#: src/roomStack.js:176
+msgid "You have been kicked from the room."
+msgstr "Jūs esat izmests no istabas."
+
+#: src/roomStack.js:179
+msgid "It is not possible to join the room now, but you can retry later."
+msgstr "Šobrīd nevar pievienoties istabai, bet jūs varat mēģināt vēlāk."
+
+#: src/roomStack.js:211
+msgid "Join a room using the + button."
+msgstr "Pievienojies istabai, izmantojot pogu “+”."
+
+#: src/telepathyClient.js:477
+msgid "Good Bye"
+msgstr "Visu labu"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for GNOME"
+#: src/telepathyClient.js:667
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "Saglabāt %s paroli %s?"
+
+#: src/telepathyClient.js:671
 msgid "Save"
 msgstr "Saglabāt"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:611
+#: src/telepathyClient.js:707
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s istabā %s"
 
-#: src/userList.js:228
+#: src/userList.js:413
+msgid "Available in another room."
+msgstr "Pieejams citā istabā."
+
+#: src/userList.js:415
+msgid "Online"
+msgstr "Tiešsaistē"
+
+#: src/userList.js:578
+#| msgid "No results"
+msgid "No Results"
+msgstr "Nav rezultātu"
+
+#: src/userTracker.js:369
+msgid "User is online"
+msgstr "Lietotājs ir tiešsaistē"
+
+#: src/userTracker.js:370
+#, javascript-format
+msgid "User %s is now online."
+msgstr "Lietotājs %s tagad ir tiešsaistē."
+
+#: src/utils.js:137
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "Polari servera parole priekš %s"
+
+#: src/utils.js:142
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "%s Polari NickServ parole priekš"
+
+#: src/utils.js:372
+msgid "Now"
+msgstr "Tagad"
+
+#: src/utils.js:375
+msgid "Unavailable"
+msgstr "Nav pieejams"
+
+#: src/utils.js:379
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -888,7 +980,7 @@ msgstr[0] "Pirms %d sekundes"
 msgstr[1] "Pirms %d sekundēm"
 msgstr[2] "Pirms %d sekundēm"
 
-#: src/userList.js:233
+#: src/utils.js:386
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -896,7 +988,7 @@ msgstr[0] "Pirms %d minūtes"
 msgstr[1] "Pirms %d minūtēm"
 msgstr[2] "Pirms %d minūtēm"
 
-#: src/userList.js:238
+#: src/utils.js:393
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -904,7 +996,7 @@ msgstr[0] "Pirms %d stundas"
 msgstr[1] "Pirms %d stundām"
 msgstr[2] "Pirms %d stundām"
 
-#: src/userList.js:243
+#: src/utils.js:400
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -912,7 +1004,7 @@ msgstr[0] "Pirms %d dienas"
 msgstr[1] "Pirms %d dienām"
 msgstr[2] "Pirms %d dienām"
 
-#: src/userList.js:248
+#: src/utils.js:407
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -920,7 +1012,7 @@ msgstr[0] "Pirms %d nedēļas"
 msgstr[1] "Pirms %d nedēļām"
 msgstr[2] "Pirms %d nedēļām"
 
-#: src/userList.js:252
+#: src/utils.js:413
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -928,36 +1020,24 @@ msgstr[0] "Pirms %d mēneša"
 msgstr[1] "Pirms %d mēnešiem"
 msgstr[2] "Pirms %d mēnešiem"
 
-#: src/userList.js:410
-msgid "Available in another room."
-msgstr "Pieejams citā istabā."
+#~ msgid "org.gnome.Polari"
+#~ msgstr "org.gnome.Polari"
 
-#: src/userList.js:412
-msgid "Online"
-msgstr "Tiešsaistē"
+#~ msgid "Run Polari in the Background?"
+#~ msgstr "Palaist Polari fonā?"
 
-#: src/userList.js:557
-msgid "No results"
-msgstr "Nav rezultātu"
+#~ msgid ""
+#~ "Polari will continue to run when closed and will be automatically started "
+#~ "on login."
+#~ msgstr ""
+#~ "Polari turpinās strādāt, kad tas ir aizvērts un automātiski tiks "
+#~ "palaists, kad lietotājs ierakstās."
 
-#: src/userTracker.js:305
-msgid "User is online"
-msgstr "Lietotājs ir tiešsaistē"
+#~ msgid "_Quit"
+#~ msgstr "I_ziet"
 
-#: src/userTracker.js:306
-#, javascript-format
-msgid "User %s is now online."
-msgstr "Lietotājs %s tagad ir tiešsaistē."
-
-#: src/utils.js:106
-#, javascript-format
-msgid "Polari server password for %s"
-msgstr "Polari servera parole priekš %s"
-
-#: src/utils.js:111
-#, javascript-format
-msgid "Polari NickServ password for %s"
-msgstr "%s Polari NickServ parole priekš"
+#~ msgid "_Run in background"
+#~ msgstr "_Palaist fonā"
 
 #~ msgid "All"
 #~ msgstr "Visi"
