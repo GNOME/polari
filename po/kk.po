@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-06-03 01:11+0000\n"
-"PO-Revision-Date: 2020-06-26 10:10+0500\n"
+"POT-Creation-Date: 2020-06-26 05:12+0000\n"
+"PO-Revision-Date: 2020-09-12 18:43+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -25,7 +25,7 @@ msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:854
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:841
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME үшін Internet Relay Chat клиенті"
 
@@ -123,6 +123,15 @@ msgstr ""
 
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:56
+msgid "List of muted usernames"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:57
+msgid ""
+"A list of usernames for whose private messages not to show notifications"
 msgstr ""
 
 #: data/resources/connection-details.ui:13
@@ -321,7 +330,7 @@ msgid "About"
 msgstr "Осы туралы"
 
 #: data/resources/main-window.ui:34 data/resources/menus.ui:6
-#: src/application.js:57
+#: src/application.js:58
 msgid "Quit"
 msgstr "Шығу"
 
@@ -333,7 +342,7 @@ msgstr "Бөлмелер мен желілерді қосу"
 msgid "Show connected users"
 msgstr "Байланысқан пайдаланушыларды көрсету"
 
-#: data/resources/main-window.ui:225 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:474 src/userList.js:417
 msgid "Offline"
 msgstr "Желіде емес"
 
@@ -389,36 +398,36 @@ msgstr "Пайдаланушы желіде болса, хабарлайды."
 msgid "Start Conversation"
 msgstr "Сөйлесуді бастау"
 
-#: src/application.js:43
+#: src/application.js:44
 msgid "Start Telepathy client"
 msgstr "Telepathy клиентін іске қосу"
 
-#: src/application.js:48
+#: src/application.js:49
 msgid "Start in debug mode"
 msgstr "Жөндеу режимінде бастау"
 
-#: src/application.js:51
+#: src/application.js:52
 msgid "Allow running alongside another instance"
 msgstr ""
 
-#: src/application.js:54
+#: src/application.js:55
 msgid "Print version and exit"
 msgstr "Нұсқа ақпаратын шығару және шығу"
 
-#: src/application.js:479 src/utils.js:209
+#: src/application.js:486 src/utils.js:241
 msgid "Failed to open link"
 msgstr "Сілтемені ашу сәтсіз аяқталды"
 
-#: src/application.js:774
+#: src/application.js:761
 #, javascript-format
 msgid "%s removed."
 msgstr "%s өшірілді."
 
-#: src/application.js:853
+#: src/application.js:840
 msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
-#: src/application.js:859
+#: src/application.js:846
 msgid "Learn more about Polari"
 msgstr "Polari туралы көбірек білу"
 
@@ -652,91 +661,100 @@ msgstr "_Келесі"
 #. MODE: "/MODE <mode> <nick|channel> — ",
 #. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:21
+#.
+#: src/ircParser.js:24
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
 
-#: src/ircParser.js:22
+#: src/ircParser.js:25
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr ""
 
-#: src/ircParser.js:23
+#: src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 
-#: src/ircParser.js:24
+#: src/ircParser.js:27
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <channel> — <channel> арнасына кіру"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:28
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr ""
 
-#: src/ircParser.js:26
+#: src/ircParser.js:29
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr ""
 
-#: src/ircParser.js:27
+#: src/ircParser.js:30
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr ""
 
-#: src/ircParser.js:28
+#: src/ircParser.js:31
 msgid "/NAMES — lists users on the current channel"
 msgstr ""
 
-#: src/ircParser.js:29
+#: src/ircParser.js:32
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr ""
 
-#: src/ircParser.js:30
+#: src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
 
-#: src/ircParser.js:31
+#: src/ircParser.js:34
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr ""
 
-#: src/ircParser.js:32
+#: src/ircParser.js:35
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr ""
 
-#: src/ircParser.js:33
+#: src/ircParser.js:36
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr ""
 
-#: src/ircParser.js:34
+#: src/ircParser.js:37
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr ""
 
-#: src/ircParser.js:37
+#: src/ircParser.js:38
+msgid "/WHOIS <nick> — requests information on <nick>"
+msgstr ""
+
+#: src/ircParser.js:41
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
 "Белгісіз команда — қолжетерлік командалар тізімін алу үшін /HELP көріңіз"
 
-#: src/ircParser.js:51
+#: src/ircParser.js:55
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Қолданылуы: %s"
 
-#: src/ircParser.js:88
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "Белгілі командалар:"
 
-#: src/ircParser.js:190
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s пайдаланушылары:"
 
-#: src/ircParser.js:269
+#: src/ircParser.js:273
 msgid "No topic set"
 msgstr "Тақырыбы орнатылмаған"
+
+#: src/ircParser.js:312
+#, javascript-format
+msgid "User: %s - Last activity: %s"
+msgstr "Пайдаланушы: %s - Соңғы әрекет: %s"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
@@ -748,58 +766,66 @@ msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d пайдаланушы"
 
-#: src/roomList.js:190
+#: src/roomList.js:253
 msgid "Leave chatroom"
 msgstr "Чат бөлмесінен шығу"
 
-#: src/roomList.js:190
+#: src/roomList.js:253
 msgid "End conversation"
 msgstr "Сөйлесуді аяқтау"
 
-#: src/roomList.js:301
+#: src/roomList.js:269
+msgid "Unmute"
+msgstr "Дыбысты іске қосу"
+
+#: src/roomList.js:273
+msgid "Mute"
+msgstr "Дыбысты өшіру"
+
+#: src/roomList.js:375
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "%s желіде қате бар"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:372
+#: src/roomList.js:446
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:379
+#: src/roomList.js:453
 msgid "Connection Problem"
 msgstr "Байланыс қатесі"
 
-#: src/roomList.js:396
+#: src/roomList.js:470
 msgid "Connected"
 msgstr "Байланысқан"
 
-#: src/roomList.js:398
+#: src/roomList.js:472
 msgid "Connecting…"
 msgstr "Байланысты орнату…"
 
-#: src/roomList.js:402
+#: src/roomList.js:476
 msgid "Unknown"
 msgstr "Белгісіз"
 
-#: src/roomList.js:422
+#: src/roomList.js:496
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "%s-ке қауіпсіз жолмен қосылу мүмкін емес."
 
-#: src/roomList.js:425
+#: src/roomList.js:499
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s парольді талап етеді."
 
-#: src/roomList.js:431
+#: src/roomList.js:505
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "%s байланысын орнату мүмкін емес. Сервер бос емес."
 
-#: src/roomList.js:434
+#: src/roomList.js:508
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "%s байланысын орнату мүмкін емес."
@@ -808,7 +834,7 @@ msgstr "%s байланысын орнату мүмкін емес."
 msgid "Should the password be saved?"
 msgstr "Парольді сақтау керек пе?"
 
-#: src/roomStack.js:102 src/telepathyClient.js:651
+#: src/roomStack.js:102 src/telepathyClient.js:668
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -850,94 +876,102 @@ msgstr "Бөлмеге қазір қосылу мүмкін емес, бірақ
 msgid "Join a room using the + button."
 msgstr ""
 
-#: src/telepathyClient.js:464
+#: src/telepathyClient.js:477
 msgid "Good Bye"
 msgstr "Сау болыңыз"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:650
+#: src/telepathyClient.js:667
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr ""
 
-#: src/telepathyClient.js:654
+#: src/telepathyClient.js:671
 msgid "Save"
 msgstr "Сақтау"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:686
+#: src/telepathyClient.js:707
 #, javascript-format
 msgid "%s in %s"
 msgstr ""
 
-#: src/userList.js:256
+#: src/userList.js:413
+msgid "Available in another room."
+msgstr "Басқа бөлмеде қол жетімді."
+
+#: src/userList.js:415
+msgid "Online"
+msgstr "Желіде"
+
+#: src/userList.js:578
+msgid "No Results"
+msgstr "Нәтижелер жоқ"
+
+#: src/userTracker.js:369
+msgid "User is online"
+msgstr "Пайдаланушы желіде"
+
+#: src/userTracker.js:370
+#, javascript-format
+msgid "User %s is now online."
+msgstr "%s пайдаланушысы енді желіде."
+
+#: src/utils.js:137
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "%s үшін Polari серверінің паролі"
+
+#: src/utils.js:142
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "%s үшін Polari NickServ паролі"
+
+#: src/utils.js:372
+msgid "Now"
+msgstr "Қазір"
+
+#: src/utils.js:375
+msgid "Unavailable"
+msgstr "Қолжетімсіз"
+
+#: src/utils.js:379
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d секунд бұрын"
 
-#: src/userList.js:263
+#: src/utils.js:386
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d минут бұрын"
 
-#: src/userList.js:270
+#: src/utils.js:393
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d сағат бұрын"
 
-#: src/userList.js:277
+#: src/utils.js:400
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d күн бұрын"
 
-#: src/userList.js:284
+#: src/utils.js:407
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d апта бұрын"
 
-#: src/userList.js:290
+#: src/utils.js:413
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ай бұрын"
-
-#: src/userList.js:452
-msgid "Available in another room."
-msgstr "Басқа бөлмеде қол жетімді."
-
-#: src/userList.js:454
-msgid "Online"
-msgstr "Желіде"
-
-#: src/userList.js:617
-msgid "No Results"
-msgstr "Нәтижелер жоқ"
-
-#: src/userTracker.js:312
-msgid "User is online"
-msgstr "Пайдаланушы желіде"
-
-#: src/userTracker.js:313
-#, javascript-format
-msgid "User %s is now online."
-msgstr "%s пайдаланушысы енді желіде."
-
-#: src/utils.js:105
-#, javascript-format
-msgid "Polari server password for %s"
-msgstr "%s үшін Polari серверінің паролі"
-
-#: src/utils.js:110
-#, javascript-format
-msgid "Polari NickServ password for %s"
-msgstr "%s үшін Polari NickServ паролі"
 
 #~ msgid "org.gnome.Polari"
 #~ msgstr "org.gnome.Polari"
