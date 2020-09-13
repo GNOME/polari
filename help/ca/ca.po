@@ -1,0 +1,572 @@
+# Catalan translation for polari.
+# Copyright (C) 2020 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Miniàngel <miquel.angel.burgos@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari master\n"
+"POT-Creation-Date: 2020-09-12 19:55+0000\n"
+"PO-Revision-Date: 2020-09-13 17:39+0200\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Last-Translator: Miquel-Àngel Burgos i Fradeja <miquel.angel.burgos@gmail."
+"com>\n"
+"X-Generator: Poedit 2.3\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Miquel-Àngel Burgos i Fradeja <miquel.angel.burgos@gmail.com>, 2020"
+
+#. (itstool) path: info/title
+#: C/index.page:7
+msgctxt "text"
+msgid "Polari"
+msgstr "Polari"
+
+#. (itstool) path: credit/name
+#: C/index.page:12 C/introduction.page:12 C/network-connect.page:11
+msgid "Ankit R Gadiya"
+msgstr "Ankit R Gadiya"
+
+#. (itstool) path: credit/years
+#: C/index.page:14 C/introduction.page:14 C/network-connect.page:13
+msgid "2016"
+msgstr "2016"
+
+#. (itstool) path: credit/name
+#: C/index.page:18 C/introduction.page:18 C/irc-commands.page:15
+#: C/irc-join-room.page:13 C/irc-nick-password.page:17
+#: C/irc-start-conversation.page:16 C/network-connect.page:16
+#: C/overview.page:13 C/sharing.page:12
+msgid "Paul Cutler"
+msgstr "Paul Cutler"
+
+#. (itstool) path: license/p
+#: C/index.page:23 C/irc-commands.page:19 C/irc-join-room.page:17
+#: C/irc-nick-password.page:21 C/irc-start-conversation.page:20
+#: C/overview.page:17 C/sharing.page:17
+msgid "Creative Commons Share Alike 4.0"
+msgstr "Reconeixement-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)"
+
+#. (itstool) path: info/desc
+#: C/index.page:27
+msgid ""
+"<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
+"client which integrates with the GNOME desktop. Learn more about Polari."
+msgstr ""
+"El <app>Polari</app> és un client d'Internet Relay Chat (IRC) net, senzill i "
+"minimalista que s'integra amb l'escriptori GNOME. Apreneu més sobre el "
+"Polari."
+
+#. (itstool) path: page/title
+#: C/index.page:32
+msgid "<_:media-1/> Polari"
+msgstr "<_:media-1/> Polari"
+
+#. (itstool) path: section/title
+#: C/index.page:38
+msgid "Connecting to IRC Servers and Chat Rooms"
+msgstr "Connexió a servidors d'IRC i sales de xat"
+
+#. (itstool) path: section/title
+#: C/index.page:42
+msgid "Conversations"
+msgstr "Converses"
+
+#. (itstool) path: credit/years
+#: C/introduction.page:20 C/network-connect.page:18 C/sharing.page:14
+msgid "2017"
+msgstr "2017"
+
+#. (itstool) path: info/desc
+#: C/introduction.page:25
+msgid "An introduction to <app>Polari</app>, a clean, minimal IRC client."
+msgstr ""
+"Una introducció al <app>Polari</app>, un client d'IRC net i minimalista."
+
+#. (itstool) path: page/title
+#: C/introduction.page:29
+msgid "Introduction"
+msgstr "Introducció"
+
+#. (itstool) path: page/p
+#: C/introduction.page:31
+msgid ""
+"<app>Polari</app> is a simple Internet Relay Chat (IRC) client which "
+"integrates with the GNOME desktop and enables you to chat with people around "
+"the world through large chatrooms or private messaging."
+msgstr ""
+"El <app>Polari</app> és un client d'Internet Relay Chat (IRC) senzill que "
+"s'integra amb l'escriptori GNOME i us permet xatejar amb persones d'arreu "
+"del món mitjançant grans sales de xat o missatgeria privada."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/introduction.page:37
+msgctxt "_"
+msgid ""
+"external ref='images/polari-screenshot.png' "
+"md5='6b752736dd41aa5cddf337bb3b4be452'"
+msgstr ""
+"external ref='images/polari-screenshot.png' "
+"md5='6b752736dd41aa5cddf337bb3b4be452'"
+
+#. (itstool) path: media/p
+#: C/introduction.page:38
+msgid "Polari IRC Client"
+msgstr "Client IRC Polari"
+
+#. (itstool) path: info/desc
+#: C/irc-commands.page:8
+msgid "The supported IRC commands."
+msgstr "Les ordres d'IRC admeses."
+
+#. (itstool) path: credit/name
+#: C/irc-commands.page:11 C/irc-nick-password.page:13
+#: C/irc-start-conversation.page:12
+msgid "Milo Casagrande"
+msgstr "Milo Casagrande"
+
+#. (itstool) path: page/title
+#: C/irc-commands.page:23
+msgid "Supported IRC commands"
+msgstr "Ordres d'IRC admeses"
+
+#. (itstool) path: page/p
+#: C/irc-commands.page:24
+msgid ""
+"To see the list of the supported IRC commands, in a chat room type <input>/"
+"help</input> and press <key>Enter</key>."
+msgstr ""
+"Per a veure la llista de les ordres d'IRC admeses, en una sala de xat, "
+"escriviu <input>/help</input> i premeu <key>Enter</key>."
+
+#. (itstool) path: note/p
+#: C/irc-commands.page:29
+msgid ""
+"All commands available will be listed and you can type <input>/help "
+"commandname</input> to get additional help with a specific command."
+msgstr ""
+"Es mostrarà una llista de totes les ordres disponibles i podeu escriure "
+"<input>/help ordre</input> per a obtenir ajuda addicional d'una ordre "
+"específica."
+
+#. (itstool) path: info/desc
+#: C/irc-join-room.page:10
+msgid "Join an IRC channel."
+msgstr "Uniu-vos a un canal d'IRC."
+
+#. (itstool) path: page/title
+#: C/irc-join-room.page:21
+msgid "Join an IRC chat room"
+msgstr "Unir-se a una sala de xat d'IRC"
+
+#. (itstool) path: page/p
+#: C/irc-join-room.page:23
+msgid ""
+"You can join IRC chat rooms (also known as IRC channels) on any IRC network "
+"you are connected to. To connect to an IRC network, see <link xref=\"network-"
+"connect\"/>."
+msgstr ""
+"Podeu unir-vos a sales de xat d'IRC (conegudes també com a canals d'IRC) de "
+"la xarxa d'IRC a la qual esteu connectat. Per a connectar-vos a una xarxa "
+"d'IRC, vegeu <link xref=\"network-connect\"/>."
+
+#. (itstool) path: page/p
+#: C/irc-join-room.page:27
+msgid "To join an IRC chat room:"
+msgstr "Per a unir-vos a una sala de xat d'IRC:"
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:31
+msgid "Press <key>+</key> in the top-left corner."
+msgstr "Preeu <key>+</key> a la cantonada superior esquerra."
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:34
+msgid ""
+"Enter the name of the chat room you would like to join or select the chat "
+"room(s) from the list and then press <gui>Join</gui>. You can select "
+"multiple rooms from the list to join."
+msgstr ""
+"Introduïu el nom de la sala de xat a la qual us voleu unir o seleccioneu les "
+"sales de xat de la llista i premeu <gui>Entra</gui>. Podeu seleccionar "
+"diverses sales de la llista per a unir-vos-hi."
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:39
+msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
+msgstr ""
+"Feu clic al botó <gui>Entra</gui> per a connectar-vos a les sales de xat."
+
+#. (itstool) path: info/desc
+#: C/irc-nick-password.page:10
+msgid "Protect your nickname to prevent other IRC users from using it."
+msgstr ""
+"Protegiu el vostre sobrenom per a evitar que altres usuaris d'IRC "
+"l'utilitzin."
+
+#. (itstool) path: page/title
+#: C/irc-nick-password.page:25
+msgid "Use a nickname password on IRC"
+msgstr "Ús d'una contrasenya de sobrenom a l'IRC"
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:27
+msgid ""
+"On some IRC networks, you can register your nickname with a service called "
+"NickServ. By sending special messages to NickServ, you can set your password "
+"and identify yourself. Some IRC chat rooms may not allow you to join without "
+"a registered nickname."
+msgstr ""
+"En algunes xarxes d'IRC, podeu registrar el vostre sobrenom amb un servei "
+"anomenat NickServ. En enviar missatges especials a NickServ, podeu establir "
+"la vostra contrasenya i identificar-vos. És possible que algunes sales de "
+"xat d'IRC no us permetin unir-vos-hi sense un sobrenom registrat."
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:32
+msgid ""
+"<app>Polari</app> does not currently support nickname registration "
+"automatically. Each IRC network handles registering a specific nickname "
+"differently and you will need to check with the IRC network on how to "
+"register your nickname. After you have registered a nickname, you will need "
+"to message NickServ to identify yourself after connecting to the IRC Network "
+"with the following command:"
+msgstr ""
+"El <app>Polari</app> actualment no admet el registre de sobrenoms automàtic. "
+"Cada xarxa d'IRC gestiona el registre d'un sobrenom específic de manera "
+"diferent i haureu de comprovar a la xarxa d'IRC com registrar el vostre "
+"sobrenom. Després d'haver registrat un sobrenom, haureu de enviar un "
+"missatge a NickServ per a identificar-vos després de connectar-vos a la "
+"xarxa d'IRC amb la següent ordre:"
+
+#. (itstool) path: item/p
+#: C/irc-nick-password.page:40
+msgid "<input>/msg NickServ identify username password</input>"
+msgstr "<input>/msg NickServ identify usuari contrasenya</input>"
+
+#. (itstool) path: item/p
+#: C/irc-nick-password.page:43
+msgid "Press <key>Enter</key>"
+msgstr "Premeu <key>Enter</key>"
+
+#. (itstool) path: note/p
+#: C/irc-nick-password.page:47
+msgid ""
+"Use the username and password you registered with the IRC network with this "
+"command."
+msgstr ""
+"Utilitzeu el nom d'usuari i la contrasenya amb què us heu registrat a la "
+"xarxa d'IRC amb aquesta ordre."
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:52
+msgid ""
+"<app>Polari</app> will remember your username and password and the next time "
+"you connect to the IRC network <gui>Polari</gui> will automatically register "
+"you with the Nickserv service."
+msgstr ""
+"El <app>Polari</app> recordarà el vostre nom d'usuari i contrasenya i, el "
+"proper cop que us connecteu a la xarxa IRC, el <gui>Polari</gui> us "
+"registrarà automàticament amb el servei Nickserv."
+
+#. (itstool) path: note/p
+#: C/irc-nick-password.page:58
+msgid ""
+"These instructions only allow you to use a password-protected nickname on "
+"certain IRC networks. It is not currently possible to register an IRC "
+"nickname or change your nickname password using <app>Polari</app>."
+msgstr ""
+"Aquestes instruccions només us permetran utilitzar un sobrenom protegit per "
+"contrasenya en certes xarxes d'IRC. Actualment no és possible registrar un "
+"sobrenom d'IRC o canviar la contrasenya del sobrenom mitjançant el "
+"<app>Polari</app>."
+
+#. (itstool) path: info/desc
+#: C/irc-start-conversation.page:9
+msgid "Start a conversation with an individual in IRC."
+msgstr "Inicieu una conversa amb un usuari de l'IRC."
+
+#. (itstool) path: page/title
+#: C/irc-start-conversation.page:24
+msgid "Chat with somebody on IRC"
+msgstr "Xatejar amb algú a l'IRC"
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:26
+msgid ""
+"You can hold private conversations with other IRC users, outside of the "
+"public IRC chat rooms. To start a conversation with another IRC user:"
+msgstr ""
+"Podeu mantenir converses privades amb altres usuaris de l'IRC, fora de les "
+"sales de xat públiques. Per a iniciar una conversa amb un altre usuari de "
+"l'IRC:"
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:31
+msgid ""
+"Click on the name of the person in the channel you would like to start a "
+"chat with."
+msgstr "Feu clic al nom de la persona del canal amb qui voleu iniciar un xat."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:36
+msgid ""
+"Information about the user, including their name and the last time they were "
+"active in the channel, will appear. Click <gui>Message</gui> to start a "
+"private conversation."
+msgstr ""
+"Apareixerà la informació de l'usuari, incloent-n'hi el nom i la darrera "
+"vegada que ha estat actiu al canal. Feu clic a <gui>Comença una conversació</"
+"gui> per a iniciar una conversa privada."
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:43
+msgid "Another option to start a conversation with a user:"
+msgstr "Una altra opció per a iniciar una conversa amb un usuari:"
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:47
+msgid ""
+"In the upper-right hand corner of <app>Polari</app> a number is displayed "
+"that shows the total number of users in the chat room. Click on the number."
+msgstr ""
+"A la cantonada superior dreta del <app>Polari</app>, un nombre mostra la "
+"quantitat total d'usuaris que hi ha a la sala de xat. Feu-hi clic."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:53
+msgid ""
+"Select the name of the user you want to message. Information about the user, "
+"including their name and the last time they were active in the channel, will "
+"appear."
+msgstr ""
+"Seleccioneu el nom de l'usuari a qui voleu enviar un missatge. Apareixerà la "
+"informació de l'usuari, incloent-n'hi el nom i la darrera vegada que ha "
+"estat actiu al canal."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:58
+msgid "Press <gui>Message</gui> to start a private conversation."
+msgstr ""
+"Premeu <gui>Comença una conversació</gui> per a iniciar una conversa privada."
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:62
+msgid ""
+"A new private conversation will start and a chat room will be created. The "
+"chat room will be shown in the left sidebar of <app>Polari</app> with the "
+"name of the person you are chatting with."
+msgstr ""
+"S'iniciarà una conversa privada nova i es crearà una sala de xat. La sala de "
+"xat es mostrarà a la barra lateral esquerra del <app>Polari</app> amb el nom "
+"de la persona amb qui esteu xatejant."
+
+#. (itstool) path: p/link
+#: C/legal.xml:5
+msgid "Creative Commons Attribution-ShareAlike 4.0 International"
+msgstr "Reconeixement-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)"
+
+#. (itstool) path: license/p
+#: C/legal.xml:4
+msgid "This work is licensed under a <_:link-1/> license."
+msgstr "Aquesta obra està llicenciada sota una <_:link-1>."
+
+#. (itstool) path: license/p
+#: C/legal.xml:8
+msgid ""
+"As a special exception, the copyright holders give you permission to copy, "
+"modify, and distribute the example code contained in this documentation "
+"under the terms of your choosing, without restriction."
+msgstr ""
+"Com a excepció especial, els titulars dels drets d'autor us donen permís per "
+"a copiar, modificar i distribuir el codi d'exemple que conté aquest document "
+"sota els termes que vulgueu, sense cap restricció."
+
+#. (itstool) path: info/desc
+#: C/network-connect.page:21
+msgid "How to connect to an IRC network."
+msgstr "Com connectar-vos a una xarxa d'IRC."
+
+#. (itstool) path: page/title
+#: C/network-connect.page:24
+msgid "Connect to an IRC Network"
+msgstr "Connexió a una xarxa d'IRC"
+
+#. (itstool) path: page/p
+#: C/network-connect.page:26
+msgid ""
+"The first time you start <app>Polari</app> you will be asked to join a "
+"network. <app>Polari</app> comes with over fifty IRC networks configured for "
+"you. Choose the IRC Network you would like to connect to and click on it."
+msgstr ""
+"La primera vegada que inicieu el <app>Polari</app>, se us demanarà que us "
+"uniu a una xarxa. El <app>Polari</app> inclou més de cinquanta xarxes d'IRC "
+"configurades. Escolliu la xarxa d'IRC a què voleu connectar-vos i feu-hi "
+"clic."
+
+#. (itstool) path: page/p
+#: C/network-connect.page:32
+msgid ""
+"If you do not see the IRC network you would like to join, you can also enter "
+"the details of the IRC network. Click the <gui>Custom Network</gui> button "
+"and enter the <gui>Server Address</gui>. You can optionally enter the name "
+"of the network as you want it to appear in the list of networks in the "
+"<gui>Network Name</gui> field."
+msgstr ""
+"Si no trobeu la xarxa d'IRC a què us voleu unir, també podeu introduir-ne "
+"els detalls. Feu clic al botó <gui>Xarxa personalitzada</gui> i introduïu "
+"l'<gui>adreça del servidor</gui>. També podeu introduir el nom de la xarxa "
+"com voleu que aparegui a la llista de xarxes al camp <gui>Nom de la xarxa</"
+"gui>."
+
+#. (itstool) path: page/p
+#: C/network-connect.page:39
+msgid ""
+"After you have connected to an IRC Network, you can also connect to other "
+"IRC Networks."
+msgstr ""
+"Després d'haver-vos connectat a una xarxa d'IRC, també podeu connectar-vos a "
+"altres xarxes d'IRC."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:45
+msgid "Press on the <key>+</key> in the top left corner."
+msgstr "Premeu <key>+</key> a la cantonada superior esquerra."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:48
+msgid ""
+"Press <gui>Add Network</gui> and select the IRC network from the list you "
+"would like to join or press <gui>Custom Network</gui> and enter the details."
+msgstr ""
+"Premeu <gui>Afegeix una xarxa</gui> i seleccioneu la xarxa d'IRC de la "
+"llista a què voleu unir-vos o premeu <gui>Xarxa personalitzada</gui> i "
+"introduïu-ne els detalls."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:53
+msgid ""
+"Enter the name of the chat room you would like to join or select the chat "
+"room(s) from the list and then press <gui>Join</gui>."
+msgstr ""
+"Introduïu el nom de la sala de xat a la qual us voleu unir o seleccioneu les "
+"sales de xat de la llista i premeu <gui>Entra</gui>."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:58
+msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
+msgstr ""
+"Premeu el botó <gui>Entra</gui> per a connectar-vos a la sala o les sales."
+
+#. (itstool) path: note/p
+#: C/network-connect.page:62
+msgid ""
+"If the IRC network you are connecting to uses a custom port, you can append "
+"it to the name of the network with a colon and the port number, for example "
+"<em>irc.example.org:12345</em>"
+msgstr ""
+"Si la xarxa d'IRC a què us esteu connectant utilitza un port personalitzat, "
+"podeu afegir-lo al nom de la xarxa amb un punt i coma i el número de port; "
+"per exemple, <em>irc.example.org:12345</em>."
+
+#. (itstool) path: info/desc
+#: C/overview.page:9
+msgid "What IRC is and how you can use it."
+msgstr "Què és l'IRC i com podeu utilitzar-lo."
+
+#. (itstool) path: page/title
+#: C/overview.page:21
+msgid "Overview of Internet Relay Chat"
+msgstr "Descripció de l'Internet Relay Chat"
+
+#. (itstool) path: page/p
+#: C/overview.page:23
+msgid ""
+"Internet Relay Chat (IRC) is a means of chatting with people online using "
+"public and private chatrooms. IRC networks, such as Freenode or Gimpnet, are "
+"unique and host their own servers with its own channels. IRC uses a client / "
+"server model where you can use a client, such as Polari, to connect to an "
+"IRC server and join a channel. Channels, also known as chat rooms, are where "
+"users meet online to chat."
+msgstr ""
+"L'Internet Relay Chat (IRC) és un mitjà per a xatejar amb persones en línia "
+"utilitzant sales de xat públiques i privades. Les xarxes d'IRC, com ara "
+"Freenode o Gimpnet, són úniques i allotgen els seus propis servidors amb els "
+"seus propis canals. L'IRC utilitza un model client/servidor on podeu "
+"utilitzar un client, com ara el Polari, per a connectar-vos a un servidor "
+"IRC i unir-vos a un canal. Els canals, també coneguts com a sales de xat, "
+"són on els usuaris es reuneixen en línia per a xatejar."
+
+#. (itstool) path: info/desc
+#: C/sharing.page:9
+msgid "How to easily share multiple lines of text or images."
+msgstr "Com compartir fàcilment diverses línies de text o imatges."
+
+#. (itstool) path: page/title
+#: C/sharing.page:22
+msgid "Share text or images"
+msgstr "Compartició de text o imatges"
+
+#. (itstool) path: page/p
+#: C/sharing.page:24
+msgid ""
+"It is considered rude in IRC to copy and paste more than five lines of text. "
+"If you attempt to paste more than five lines of text, <gui>Polari</gui> will "
+"ask you if you would like the text to automatically be pasted to a public "
+"paste service. If you agree to paste the text, press the <gui>Paste</gui> "
+"button as seen in the following screenshot. After pressing <gui>Paste</gui>, "
+"the link to the paste website will be automatically entered into the chat "
+"box. Press <key>Enter</key> to share the link with the chat room."
+msgstr ""
+"A l'IRC, es considera groller copiar i enganxar més de cinc línies de text. "
+"Si intenteu enganxar més de cinc línies de text, el <gui>Polari</gui> us "
+"preguntarà si voleu que el text s'enganxi automàticament en un servei públic "
+"d'enganxat. Si esteu d'acord a enganxar el text, premeu el botó "
+"<gui>Enganxa</gui> que podeu veure a la captura de pantalla següent. Després "
+"de prémer <gui>Enganxa</gui>, l'enllaç al lloc web d'enganxament "
+"s'introduirà automàticament al quadre de xat. Premeu <key>Enter</key> per a "
+"compartir l'enllaç amb la sala de xat."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/sharing.page:32
+msgctxt "_"
+msgid ""
+"external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
+msgstr ""
+"external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
+
+#. (itstool) path: page/p
+#: C/sharing.page:34
+msgid ""
+"To share an image file, drag and drop the image from <app>Files</app> into "
+"the chat box in <app>Polari</app> or drag and drop a file from <app>Files</"
+"app> to <app>Polari</app>. You will be asked if you wish to upload the image "
+"to a public paste service. If you agree to upload the image, press the "
+"<gui>Paste</gui> button as seen in the following screenshot. After pressing "
+"<gui>Paste</gui>, the link to the where the image was uploaded will be "
+"automatically entered into the chat box. Press <key>Enter</key> to share the "
+"link with the chat room."
+msgstr ""
+"Per a compartir un fitxer d'imatge, arrossegueu i deixeu anar la imatge des "
+"del <app>Fitxers</app> dins el quadre de xat del <app>Polari</app> o "
+"arrossegueu i deixeu anar un fitxer des del <app>Fitxers</app> al "
+"<app>Polari</app>. Se us demanarà si voleu carregar la imatge a un servei "
+"públic d'enganxament. Si accepteu carregar la imatge, premeu el botó "
+"<app>Enganxa</app> que podeu veure a la captura de pantalla. Després de "
+"prémer <gui>Enganxa</gui>, l'enllaç al lloc on s'ha carregat la imatge "
+"s'introduirà automàticament al quadre de xat. Premeu <key>Enter</key> per a "
+"compartir l'enllaç amb la sala de xat."
