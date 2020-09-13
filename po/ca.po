@@ -787,7 +787,7 @@ msgstr "Usuari: %s - Darrera activitat: %s"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
-msgstr "Afegeix la xarxa"
+msgstr "Afegeix una xarxa"
 
 #: src/mainWindow.js:399
 #, javascript-format
