@@ -147,7 +147,7 @@ msgid ""
 "help</input> and press <key>Enter</key>."
 msgstr ""
 "Per a veure la llista de les ordres d'IRC admeses, en una sala de xat, "
-"escriviu <input>/help</input> i premeu <key>Enter</key>."
+"escriviu <input>/help</input> i premeu <key>Retorn</key>."
 
 #. (itstool) path: note/p
 #: C/irc-commands.page:29
@@ -188,7 +188,7 @@ msgstr "Per a unir-vos a una sala de xat d'IRC:"
 #. (itstool) path: item/p
 #: C/irc-join-room.page:31
 msgid "Press <key>+</key> in the top-left corner."
-msgstr "Preeu <key>+</key> a la cantonada superior esquerra."
+msgstr "Premeu <key>+</key> a la cantonada superior esquerra."
 
 #. (itstool) path: item/p
 #: C/irc-join-room.page:34
@@ -245,7 +245,7 @@ msgstr ""
 "El <app>Polari</app> actualment no admet el registre de sobrenoms automàtic. "
 "Cada xarxa d'IRC gestiona el registre d'un sobrenom específic de manera "
 "diferent i haureu de comprovar a la xarxa d'IRC com registrar el vostre "
-"sobrenom. Després d'haver registrat un sobrenom, haureu de enviar un "
+"sobrenom. Després d'haver registrat un sobrenom, haureu d'enviar un "
 "missatge a NickServ per a identificar-vos després de connectar-vos a la "
 "xarxa d'IRC amb la següent ordre:"
 
@@ -257,7 +257,7 @@ msgstr "<input>/msg NickServ identify usuari contrasenya</input>"
 #. (itstool) path: item/p
 #: C/irc-nick-password.page:43
 msgid "Press <key>Enter</key>"
-msgstr "Premeu <key>Enter</key>"
+msgstr "Premeu <key>Retorn</key>"
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:47
@@ -477,7 +477,7 @@ msgid ""
 msgstr ""
 "Si la xarxa d'IRC a què us esteu connectant utilitza un port personalitzat, "
 "podeu afegir-lo al nom de la xarxa amb un punt i coma i el número de port; "
-"per exemple, <em>irc.example.org:12345</em>."
+"per exemple, <em>irc.example.org:12345</em>"
 
 #. (itstool) path: info/desc
 #: C/overview.page:9
@@ -534,7 +534,7 @@ msgstr ""
 "d'enganxat. Si esteu d'acord a enganxar el text, premeu el botó "
 "<gui>Enganxa</gui> que podeu veure a la captura de pantalla següent. Després "
 "de prémer <gui>Enganxa</gui>, l'enllaç al lloc web d'enganxament "
-"s'introduirà automàticament al quadre de xat. Premeu <key>Enter</key> per a "
+"s'introduirà automàticament al quadre de xat. Premeu <key>Retorn</key> per a "
 "compartir l'enllaç amb la sala de xat."
 
 #. (itstool) path: page/media
@@ -568,5 +568,5 @@ msgstr ""
 "públic d'enganxament. Si accepteu carregar la imatge, premeu el botó "
 "<app>Enganxa</app> que podeu veure a la captura de pantalla. Després de "
 "prémer <gui>Enganxa</gui>, l'enllaç al lloc on s'ha carregat la imatge "
-"s'introduirà automàticament al quadre de xat. Premeu <key>Enter</key> per a "
+"s'introduirà automàticament al quadre de xat. Premeu <key>Retorn</key> per a "
 "compartir l'enllaç amb la sala de xat."
