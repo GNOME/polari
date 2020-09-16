@@ -379,7 +379,7 @@ msgstr "Reconeixement-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)"
 #. (itstool) path: license/p
 #: C/legal.xml:4
 msgid "This work is licensed under a <_:link-1/> license."
-msgstr "Aquesta obra està llicenciada sota una <_:link-1>."
+msgstr "Aquesta obra està llicenciada sota una <_:link-1/>."
 
 #. (itstool) path: license/p
 #: C/legal.xml:8
