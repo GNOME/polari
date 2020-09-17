@@ -37,7 +37,7 @@ foreach js_source : js_sources
 
   if (js_shell.found())
     test('Checking syntax of ' + js_source, js_shell,
-      args: ['-s', '-c', js_source],
+      args: ['-c', js_source],
       workdir: meson.current_source_dir()
     )
   endif
