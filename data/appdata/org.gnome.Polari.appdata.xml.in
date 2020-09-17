@@ -55,28 +55,14 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="3.37.3" type="development" date="2020-07-07">
+    <release version="3.38.0" date="2020-09-17">
       <description>
         <p>
-          Add WHOIS command.
-        </p>
-      </description>
-    </release>
-    <release version="3.37.2" type="development" date="2020-06-03">
-      <description>
-        <p>
-          Performance improvements while idle.
-        </p>
-      </description>
-    </release>
-    <release version="3.37.1" type="development" date="2020-03-31">
-      <description>
-        <p>
-          The first 3.38 development release brings some improvements
-          and fixes:
+          As always, GNOME 3.38 brings with it a branch new Polari release:
           <ul>
             <li>Add the ability to mute nicknames</li>
-            <li>Fix information leak when re-using account IDs</li>
+            <li>Add WHOIS command</li>
+            <li>Disable URL previews when on metered data</li>
           </ul>
         </p>
       </description>

@@ -1,3 +1,25 @@
+3.38.0 — “Wonder Woman in the Hizzy”
+======
+* Disable URL previews when on metered data [Florian; #149]
+* Misc. bug fixes and cleanups [Florian; #142]
+
+Contributors:
+  Jordi Mas i Hernandez, Andre Klapper, Jordi Mas, Florian Müllner,
+  Jwtiyar Nariman, Jordan Petridis
+
+Translators:
+  Tim Sabsch [de], Jordi Mas [ca], Fabio Tomat [fur], Aurimas Černius [lt],
+  Efstathios Iosifidis [el], Jwtiyar Nariman [ckb],
+  Asier Sarasua Garmendia [eu], Emin Tufan Çetin [tr], Fran Dieguez [gl],
+  Piotr Drąg [pl], Jiri Grönroos [fi], sicklylife [ja], Kukuh Syafaat [id],
+  Goran Vidović [hr], Thibault Martin [fr], Anders Jonsson [sv],
+  Boyuan Yang [zh_CN], Rafael Fontenelle [pt_BR], Nathan Follens [nl],
+  Marek Černocký [cs], Danial Behzadi [fa], Bruce Cowan [en_GB],
+  Марко Костић [sr], DaeHyun Sung [ko], Dušan Kazik [sk], Daniel Mustieles [es],
+  Balázs Meskó [hu], Milo Casagrande [it], Ask Hjorth Larsen [da],
+  Baurzhan Muftakhidinov [kk], Rūdolfs Mazurs [lv],
+  Juliano de Souza Camargo [pt], Cheng-Chia Tseng [zh_TW]
+
 3.37.3
 ======
 * Add WHOIS command [Roberto; !152]
