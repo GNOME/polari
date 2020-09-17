@@ -7,25 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-04-01 02:04+0000\n"
-"PO-Revision-Date: 2020-05-02 15:39+0800\n"
+"POT-Creation-Date: 2020-08-04 20:58+0000\n"
+"PO-Revision-Date: 2020-09-17 22:56+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
-#: src/roomStack.js:205
+#: src/roomStack.js:207
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
-#: data/org.gnome.Polari.desktop.in:4 src/application.js:833
+#: data/org.gnome.Polari.desktop.in:4 src/application.js:841
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME 的網際網路中繼聊天客戶端"
 
@@ -163,7 +163,7 @@ msgstr "暱稱(_N)"
 msgid "_Real Name"
 msgstr "實名(_R)"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:110
 #: data/resources/join-room-dialog.ui:11 src/initialSetup.js:85
 msgid "_Cancel"
 msgstr "取消(_C)"
@@ -176,7 +176,7 @@ msgstr "套用(_A)"
 msgid "Change nickname"
 msgstr "變更暱稱"
 
-#: data/resources/entry-area.ui:119
+#: data/resources/entry-area.ui:120
 msgid "_Paste"
 msgstr "貼上(_P)"
 
@@ -331,7 +331,7 @@ msgid "About"
 msgstr "關於"
 
 #: data/resources/main-window.ui:34 data/resources/menus.ui:6
-#: src/application.js:57
+#: src/application.js:58
 msgid "Quit"
 msgstr "退出"
 
@@ -343,7 +343,7 @@ msgstr "加入聊天室和網路"
 msgid "Show connected users"
 msgstr "顯示連結的使用者"
 
-#: data/resources/main-window.ui:225 src/roomList.js:475 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:474 src/userList.js:417
 msgid "Offline"
 msgstr "離線"
 
@@ -399,36 +399,36 @@ msgstr "如果使用者上線將會通知。"
 msgid "Start Conversation"
 msgstr "開始對話"
 
-#: src/application.js:43
+#: src/application.js:44
 msgid "Start Telepathy client"
 msgstr "啟動 Telepathy 客戶端"
 
-#: src/application.js:48
+#: src/application.js:49
 msgid "Start in debug mode"
 msgstr "以偵錯模式啟動"
 
-#: src/application.js:51
+#: src/application.js:52
 msgid "Allow running alongside another instance"
 msgstr "允許同另一個實體一併運行"
 
-#: src/application.js:54
+#: src/application.js:55
 msgid "Print version and exit"
 msgstr "列印版本並離開"
 
-#: src/application.js:485 src/utils.js:218
+#: src/application.js:486 src/utils.js:241
 msgid "Failed to open link"
 msgstr "無法開啟連結"
 
-#: src/application.js:756
+#: src/application.js:761
 #, javascript-format
 msgid "%s removed."
 msgstr "%s 已經移除。"
 
-#: src/application.js:832
+#: src/application.js:840
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2013-2020."
 
-#: src/application.js:838
+#: src/application.js:846
 msgid "Learn more about Polari"
 msgstr "深入瞭解關於 Polari"
 
@@ -589,56 +589,56 @@ msgstr "已經加入"
 msgid "No results."
 msgstr "沒有結果。"
 
-#: src/connections.js:501
+#: src/connections.js:511
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "「%s」屬性"
 
-#: src/connections.js:545
+#: src/connections.js:555
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr "Polari 由於網路錯誤而斷線。請檢查位址欄位是否正確。"
 
-#: src/entryArea.js:369
+#: src/entryArea.js:370
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "貼上 %s 列文字到公共剪貼服務？"
 
-#: src/entryArea.js:373
+#: src/entryArea.js:374
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "正在上傳 %s 列文字到公共剪貼服務…"
 
-#: src/entryArea.js:380
+#: src/entryArea.js:381
 msgid "Upload image to public paste service?"
 msgstr "上傳圖片到公共剪貼服務？"
 
-#: src/entryArea.js:381
+#: src/entryArea.js:382
 msgid "Uploading image to public paste service…"
 msgstr "正在上傳圖片到公共剪貼服務…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:403
+#: src/entryArea.js:404
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "上傳「%s」到公共剪貼服務？"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:405
+#: src/entryArea.js:406
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "正在上傳「%s」到公共剪貼服務…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:414
+#: src/entryArea.js:415
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s 於頻道 #%s"
 
-#: src/entryArea.js:416
+#: src/entryArea.js:417
 #, javascript-format
 msgid "Paste from %s"
 msgstr "從 %s 貼上"
@@ -662,278 +662,251 @@ msgstr "下一步(_N)"
 #. MODE: "/MODE <mode> <nick|channel> — ",
 #. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:21
+#.
+#: src/ircParser.js:24
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr "/CLOSE [<頻道>] [<原因>] — 關閉 <頻道>，預設為目前的頻道"
 
-#: src/ircParser.js:22
+#: src/ircParser.js:25
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr "/HELP [<指令>] — 顯示 <指令> 說明，或是可用的指令清單"
 
-#: src/ircParser.js:23
+#: src/ircParser.js:26
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr "/INVITE <暱稱> [<頻道>] — 邀請 <暱稱> 參與 <頻道>，或是目前的頻道"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:27
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <頻道> — 參與 <頻道>"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:28
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <暱稱> — 將 <暱稱> 從目前頻道中踢除"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:29
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <動作> — 送出 <動作> 訊息到目前的頻道中"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:30
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <暱稱> [<訊息>] — 傳送私人訊息給 <暱稱>"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:31
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — 列出目前頻道中的使用者"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:32
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <暱稱> — 將您的暱稱設為 <暱稱>"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:33
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr "/PART [<頻道>] [<原因>] — 離開 <頻道>，預設為目前的聊天室"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:34
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <暱稱> — 開啟與 <暱稱> 的私人對話"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:35
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<原因>] —  與目前的伺服器中斷連接"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:36
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <文字> — 傳送 <文字> 給目前的聊天室/聯絡人"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:37
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <主題> — 將討論主題設為 <主題>，或是顯示目前的主題"
 
-#: src/ircParser.js:37
+#: src/ircParser.js:38
+msgid "/WHOIS <nick> — requests information on <nick>"
+msgstr "/WHOIS <暱稱> — 詢問 <暱稱> 的資訊"
+
+#: src/ircParser.js:41
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr "未知指令 — 請輸入 /HELP 取得可用指令清單"
 
-#: src/ircParser.js:51
+#: src/ircParser.js:55
 #, javascript-format
 msgid "Usage: %s"
 msgstr "用法：%s"
 
-#: src/ircParser.js:88
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "未知指令："
 
-#: src/ircParser.js:190
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "%s 上的使用者："
 
-#: src/ircParser.js:269
+#: src/ircParser.js:273
 msgid "No topic set"
 msgstr "尚未設定主題"
+
+#: src/ircParser.js:312
+#, javascript-format
+msgid "User: %s - Last activity: %s"
+msgstr "使用者：%s - 上次活動：%s"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
 msgstr "加入網路"
 
-#: src/mainWindow.js:389
+#: src/mainWindow.js:399
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d 位使用者"
 
-#: src/roomList.js:254
+#: src/roomList.js:253
 msgid "Leave chatroom"
 msgstr "離開聊天室"
 
-#: src/roomList.js:254
+#: src/roomList.js:253
 msgid "End conversation"
 msgstr "結束對話"
 
-#: src/roomList.js:270
+#: src/roomList.js:269
 msgid "Unmute"
 msgstr "取消靜音"
 
-#: src/roomList.js:274
+#: src/roomList.js:273
 msgid "Mute"
 msgstr "靜音"
 
-#: src/roomList.js:376
+#: src/roomList.js:375
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "%s 網路有錯誤"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:447
+#: src/roomList.js:446
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:454
+#: src/roomList.js:453
 msgid "Connection Problem"
 msgstr "連線問題"
 
-#: src/roomList.js:471
+#: src/roomList.js:470
 msgid "Connected"
 msgstr "已連線"
 
-#: src/roomList.js:473
+#: src/roomList.js:472
 msgid "Connecting…"
 msgstr "連線中…"
 
-#: src/roomList.js:477
+#: src/roomList.js:476
 msgid "Unknown"
 msgstr "不明"
 
-#: src/roomList.js:497
+#: src/roomList.js:496
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "無法以安全方式連線到 %s。"
 
-#: src/roomList.js:500
+#: src/roomList.js:499
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s 需要密碼。"
 
-#: src/roomList.js:506
+#: src/roomList.js:505
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "無法連接到 %s。伺服器忙碌。"
 
-#: src/roomList.js:509
+#: src/roomList.js:508
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "無法連接到 %s。"
 
-#: src/roomStack.js:98
+#: src/roomStack.js:100
 msgid "Should the password be saved?"
 msgstr "是否應該儲存密碼？"
 
-#: src/roomStack.js:100 src/telepathyClient.js:669
+#: src/roomStack.js:102 src/telepathyClient.js:668
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr "下次您連接至 %s 時會自動識別身份"
 
-#: src/roomStack.js:106
+#: src/roomStack.js:108
 msgid "_Save Password"
 msgstr "儲存密碼(_S)"
 
-#: src/roomStack.js:139
+#: src/roomStack.js:141
 msgid "Failed to join the room"
 msgstr "無法加入聊天室"
 
-#: src/roomStack.js:141
+#: src/roomStack.js:143
 msgid "_Retry"
 msgstr "重試(_R)"
 
-#: src/roomStack.js:165
+#: src/roomStack.js:167
 msgid "The room is full."
 msgstr "聊天室已滿。"
 
-#: src/roomStack.js:168
+#: src/roomStack.js:170
 msgid "You have been banned from the room."
 msgstr "您被禁止進入此聊天室。"
 
-#: src/roomStack.js:171
+#: src/roomStack.js:173
 msgid "The room is invite-only."
 msgstr "此聊天室只限受邀者加入。"
 
-#: src/roomStack.js:174
+#: src/roomStack.js:176
 msgid "You have been kicked from the room."
 msgstr "您已從聊天室中被踢除。"
 
-#: src/roomStack.js:177
+#: src/roomStack.js:179
 msgid "It is not possible to join the room now, but you can retry later."
 msgstr "現在無法加入聊天室，但您可以稍後重試。"
 
-#: src/roomStack.js:209
+#: src/roomStack.js:211
 msgid "Join a room using the + button."
 msgstr "使用 + 鈕來加入聊天室。"
 
-#: src/telepathyClient.js:478
+#: src/telepathyClient.js:477
 msgid "Good Bye"
 msgstr "再見"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:668
+#: src/telepathyClient.js:667
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "儲存 %s 位於 %s 的密碼？"
 
-#: src/telepathyClient.js:672
+#: src/telepathyClient.js:671
 msgid "Save"
 msgstr "儲存"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:708
+#: src/telepathyClient.js:707
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s 位於 %s"
 
-#: src/userList.js:256
-#, javascript-format
-msgid "%d second ago"
-msgid_plural "%d seconds ago"
-msgstr[0] "%d 秒前"
-
-#: src/userList.js:263
-#, javascript-format
-msgid "%d minute ago"
-msgid_plural "%d minutes ago"
-msgstr[0] "%d 分鐘前"
-
-#: src/userList.js:270
-#, javascript-format
-msgid "%d hour ago"
-msgid_plural "%d hours ago"
-msgstr[0] "%d 小時前"
-
-#: src/userList.js:277
-#, javascript-format
-msgid "%d day ago"
-msgid_plural "%d days ago"
-msgstr[0] "%d 天前"
-
-#: src/userList.js:284
-#, javascript-format
-msgid "%d week ago"
-msgid_plural "%d weeks ago"
-msgstr[0] "%d 週前"
-
-#: src/userList.js:290
-#, javascript-format
-msgid "%d month ago"
-msgid_plural "%d months ago"
-msgstr[0] "%d 個月前"
-
-#: src/userList.js:452
+#: src/userList.js:413
 msgid "Available in another room."
 msgstr "在其他聊天室有空。"
 
-#: src/userList.js:454
+#: src/userList.js:415
 msgid "Online"
 msgstr "上線"
 
-#: src/userList.js:617
+#: src/userList.js:578
 msgid "No Results"
 msgstr "沒有結果"
 
@@ -946,15 +919,59 @@ msgstr "使用者在線上"
 msgid "User %s is now online."
 msgstr "使用者 %s 在線上。"
 
-#: src/utils.js:134
+#: src/utils.js:137
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "%s 的 Polari 伺服器密碼"
 
-#: src/utils.js:139
+#: src/utils.js:142
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "%s 的 Polari NickServ 密碼"
+
+#: src/utils.js:372
+msgid "Now"
+msgstr "現在"
+
+#: src/utils.js:375
+msgid "Unavailable"
+msgstr "不在"
+
+#: src/utils.js:379
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d 秒前"
+
+#: src/utils.js:386
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d 分鐘前"
+
+#: src/utils.js:393
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d 小時前"
+
+#: src/utils.js:400
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d 天前"
+
+#: src/utils.js:407
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d 週前"
+
+#: src/utils.js:413
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d 個月前"
 
 #~ msgid "org.gnome.Polari"
 #~ msgstr "org.gnome.Polari"
