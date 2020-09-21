@@ -192,7 +192,10 @@ export const ConnectionsList = GObject.registerClass({
     }
 
     _networksChanged() {
-        this._list.foreach(w => w.destroy());
+        this._list.foreach(w => {
+            this._list.remove(w);
+            w.run_dispose();
+        });
 
         let { accounts } = this._accountsMonitor;
         let usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);

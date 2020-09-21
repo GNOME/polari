@@ -24,7 +24,7 @@ const AppNotification = GObject.registerClass({
 
     _onChildRevealed() {
         if (!this.child_revealed)
-            this.destroy();
+            this.hide();
     }
 });
 
@@ -178,11 +178,18 @@ class NotificationQueue extends Gtk.Frame {
     addNotification(notification) {
         this._grid.add(notification);
 
-        notification.connect('destroy', this._onChildDestroy.bind(this));
+        notification.connect('notify::visible',
+            this._onChildVisibleChanged.bind(this));
         this.show();
     }
 
-    _onChildDestroy() {
+    _onChildVisibleChanged(child) {
+        if (child.visible)
+            return;
+
+        this._grid.remove(child);
+        child.run_dispose();
+
         if (this._grid.get_children().length === 0)
             this.hide();
     }

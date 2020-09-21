@@ -97,8 +97,10 @@ export default class TabCompletion {
 
         // All remaining rows except those with IRC commands are going unused
         this._list.foreach(r => {
-            if (!r._text.startsWith('/'))
-                r.destroy();
+            if (r._text.startsWith('/'))
+                return;
+            this._list.remove(r);
+            r.run_dispose();
         });
 
         for (let i = 0; i < completions.length; i++) {

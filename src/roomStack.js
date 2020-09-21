@@ -76,8 +76,11 @@ export default GObject.registerClass({
     }
 
     _roomRemoved(roomManager, room) {
-        this._rooms.get(room.id).destroy();
+        const view = this._rooms.get(room.id);
         this._rooms.delete(room.id);
+
+        this.remove(view);
+        view.run_dispose();
     }
 
     _activeRoomChanged() {

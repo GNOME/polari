@@ -64,7 +64,8 @@ class UserListPopover extends Gtk.Popover {
         this._entry.text = '';
 
         if (this._userList)
-            this._userList.destroy();
+            this._box.remove(this._userList);
+        this._userList?.run_dispose();
         this._userList = null;
     }
 
@@ -655,7 +656,10 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     _onChannelChanged(room) {
-        this._list.foreach(w => w.destroy());
+        this._list.foreach(w => {
+            this._list.remove(w);
+            w.run_dispose();
+        });
         this._rows.clear();
 
         if (!room.channel)
@@ -675,7 +679,8 @@ class UserList extends Gtk.ScrolledWindow {
     _removeMember(member) {
         let row = this._rows.get(member);
         if (row)
-            row.destroy();
+            this._list.remove(row);
+        row?.run_dispose();
         this._rows.delete(member);
     }
 

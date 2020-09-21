@@ -694,7 +694,8 @@ class RoomList extends Gtk.ListBox {
             return;
 
         this._placeholders.delete(account);
-        placeholder.destroy();
+        this.remove(placeholder);
+        placeholder.run_dispose();
     }
 
     _roomAdded(roomManager, room) {
@@ -715,7 +716,8 @@ class RoomList extends Gtk.ListBox {
             return;
 
         this._moveSelectionFromRow(row);
-        row.destroy();
+        this.remove(row);
+        row.run_dispose();
         this._roomRows.delete(room.id);
         this._updatePlaceholderVisibility(room.account);
     }
@@ -757,8 +759,8 @@ class RoomList extends Gtk.ListBox {
         let oldHeader = row.get_header();
 
         if (beforeAccount === account) {
-            if (oldHeader)
-                oldHeader.destroy();
+            row.set_header(null);
+            oldHeader?.run_dispose();
             return;
         }
 
