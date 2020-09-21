@@ -3,7 +3,6 @@ import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gspell from 'gi://Gspell';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
@@ -29,12 +28,6 @@ export const ChatEntry = GObject.registerClass({
         'file-pasted': { param_types: [Gio.File.$gtype] },
     },
 }, class ChatEntry extends Gtk.Entry {
-    static get _checker() {
-        if (!this.__checker)
-            this.__checker = new Gspell.Checker();
-        return this.__checker;
-    }
-
     _init(params) {
         super._init(params);
 
@@ -46,12 +39,6 @@ export const ChatEntry = GObject.registerClass({
             if (this.is_sensitive() && this.get_mapped())
                 this.emit('insert-emoji');
         });
-
-        let buffer = Gspell.EntryBuffer.get_from_gtk_entry_buffer(this.buffer);
-        buffer.set_spell_checker(ChatEntry._checker);
-
-        let spellEntry = Gspell.Entry.get_from_gtk_entry(this);
-        spellEntry.set_inline_spell_checking(true);
 
         this._useDefaultHandler = false;
     }
