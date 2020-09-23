@@ -196,9 +196,12 @@ export default GObject.registerClass({
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));
         this.connect('realize', () => {
-            this._toplevel = this.get_toplevel();
-            this._keyPressId = this._toplevel.connect('key-press-event',
-                this._onKeyPressEvent.bind(this));
+            this._toplevelKeyController = new Gtk.EventControllerKey({
+                widget: this.get_toplevel(),
+                propagation_phase: Gtk.PropagationPhase.CAPTURE,
+            });
+            this._toplevelKeyController.connect('key-pressed',
+                this._onKeyPressed.bind(this));
         });
         this.connect('map', () => {
             this._nickButton.popover = EntryArea._nickPopover;
@@ -268,9 +271,10 @@ export default GObject.registerClass({
         this._cancelButton.connect('clicked', this._onCancelClicked.bind(this));
         this._pasteButton.connect('clicked', this._onPasteClicked.bind(this));
 
-        this._pasteBox.connect_after('key-press-event', (w, event) => {
-            let [, keyval] = event.get_keyval();
-            let [, mods] = event.get_state();
+        this._pasteController = new Gtk.EventControllerKey({
+            widget: this._pasteBox,
+        });
+        this._pasteController.connect_after('key-pressed', (c, keyval, code, mods) => {
             if (keyval === Gdk.KEY_Escape ||
                 keyval === Gdk.KEY_BackSpace ||
                 keyval === Gdk.KEY_Delete ||
@@ -327,15 +331,13 @@ export default GObject.registerClass({
                !(toplevelFocus instanceof Gtk.Entry);
     }
 
-    _onKeyPressEvent(w, event) {
+    _onKeyPressed(controller, keyval, keycode, state) {
         if (!this._canFocusChatEntry())
             return Gdk.EVENT_PROPAGATE;
 
-        let [, keyval] = event.get_keyval();
         if (Gdk.keyval_to_unicode(keyval) === 0)
             return Gdk.EVENT_PROPAGATE;
 
-        let [, state] = event.get_state();
         if (state !== 0 && state !== Gdk.ModifierType.SHIFT_MASK)
             return Gdk.EVENT_PROPAGATE;
 
@@ -349,7 +351,7 @@ export default GObject.registerClass({
             return Gdk.EVENT_PROPAGATE;
 
         this._chatEntry.grab_focus_without_selecting();
-        this._chatEntry.event(event);
+        this._chatEntry.event(Gtk.get_current_event());
         return Gdk.EVENT_STOP;
     }
 
@@ -513,11 +515,11 @@ export default GObject.registerClass({
         if (this._channelChangedId)
             this._room.disconnect(this._channelChangedId);
         this._channelChangedId = 0;
-        if (this._keyPressId)
-            this._toplevel.disconnect(this._keyPressId);
-        this._keyPressId = 0;
         if (this._nickChangedId)
             EntryArea._nickPopover.disconnect(this._nickChangedId);
         this._nickChangedId = 0;
+        if (this._toplevelKeyController)
+            this._toplevelKeyController.run_dispose();
+        this._toplevelKeyController = null;
     }
 });

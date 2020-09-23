@@ -10,8 +10,12 @@ export default class TabCompletion {
         this._canComplete = false;
         this._key = '';
 
-        this._entry.connect('key-press-event', this._onKeyPress.bind(this));
+        this._keyController = new Gtk.EventControllerKey({
+            widget: this._entry,
+        });
+        this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
         this._entry.connect('focus-out-event', this._cancel.bind(this));
+
         this._entry.connect('unmap', this._cancel.bind(this));
 
         this._popup = new Gtk.Popover({
@@ -114,9 +118,7 @@ export default class TabCompletion {
         this._canComplete = completions.length > 0;
     }
 
-    _onKeyPress(w, event) {
-        let [, keyval] = event.get_keyval();
-
+    _onKeyPressed(controller, keyval) {
         if (this._key.length === 0) {
             if (keyval === Gdk.KEY_Tab) {
                 this._start();

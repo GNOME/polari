@@ -49,10 +49,17 @@ const RoomRow = GObject.registerClass({
 
         this._icon.visible = room.icon !== null;
 
-        this._eventBox.connect('button-release-event',
-            this._onButtonRelease.bind(this));
-        this.connect('key-press-event',
-            this._onKeyPress.bind(this));
+        this._keyController = new Gtk.EventControllerKey({
+            widget: this,
+        });
+        this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
+
+        this._clickGesture = new Gtk.GestureMultiPress({
+            widget: this._eventBox,
+            button: Gdk.BUTTON_SECONDARY,
+        });
+        this._clickGesture.connect('released',
+            this._onButtonReleased.bind(this));
 
         room.bind_property('display-name',
             this._roomLabel, 'label',
@@ -194,19 +201,12 @@ const RoomRow = GObject.registerClass({
         this._updatePending();
     }
 
-    _onButtonRelease(w, event) {
-        let [, button] = event.get_button();
-        if (button !== Gdk.BUTTON_SECONDARY)
-            return Gdk.EVENT_PROPAGATE;
-
+    _onButtonReleased(controller) {
+        controller.set_state(Gtk.EventSequenceState.CLAIMED);
         this._showPopover();
-
-        return Gdk.EVENT_STOP;
     }
 
-    _onKeyPress(w, event) {
-        let [, keyval] = event.get_keyval();
-        let [, mods] = event.get_state();
+    _onKeyPressed(controller, keyval, keycode, mods) {
         if (keyval !== Gdk.KEY_Menu &&
             !(keyval === Gdk.KEY_F10 &&
               mods & Gdk.ModifierType.SHIFT_MASK))

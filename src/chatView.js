@@ -325,12 +325,19 @@ export default GObject.registerClass({
         this.vadjustment.connect('notify::upper',
             this._onUpperChanged.bind(this));
 
-        this._view.connect('key-press-event', this._onKeyPress.bind(this));
-        this._view.connect('motion-notify-event',
+        this._keyController = new Gtk.EventControllerKey({
+            widget: this._view,
+        });
+        this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
+
+        this._motionController = new Gtk.EventControllerMotion({
+            widget: this._view,
+        });
+        this._motionController.connect('motion',
             this._handleButtonTagsHover.bind(this));
-        this._view.connect('enter-notify-event',
+        this._motionController.connect('enter',
             this._handleButtonTagsHover.bind(this));
-        this._view.connect('leave-notify-event',
+        this._motionController.connect('leave',
             this._handleButtonTagsHover.bind(this));
         /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
            the default handler calls pango_cairo_context_set_resolution(), so
@@ -707,13 +714,8 @@ export default GObject.registerClass({
         }
     }
 
-    _onScroll(w, event) {
-        let [hasDir, dir] = event.get_scroll_direction();
-        if (hasDir && dir !== Gdk.ScrollDirection.UP)
-            return Gdk.EVENT_PROPAGATE;
-
-        let [hasDeltas, dx_, dy] = event.get_scroll_deltas();
-        if (hasDeltas && dy >= 0)
+    _onScroll(w, dx, dy) {
+        if (dy >= 0)
             return Gdk.EVENT_PROPAGATE;
 
         this._autoscroll = false;
@@ -721,9 +723,7 @@ export default GObject.registerClass({
         return this._fetchBacklog();
     }
 
-    _onKeyPress(w, event) {
-        let [, keyval] = event.get_keyval();
-
+    _onKeyPressed(c, keyval) {
         if (keyval === Gdk.KEY_Home ||
             keyval === Gdk.KEY_KP_Home) {
             this._view.emit('move-cursor',
@@ -826,11 +826,15 @@ export default GObject.registerClass({
         menu.popup_at_pointer(null);
     }
 
-    _handleButtonTagsHover(view, event) {
-        let [, eventX, eventY] = event.get_coords();
-        let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
-            eventX, eventY);
-        let [inside, iter] = view.get_iter_at_location(x, y);
+    _handleButtonTagsHover(controller, ...coords) {
+        let inside, iter;
+
+        if (coords.length > 0) {
+            const [eventX, eventY] = coords;
+            const [x, y] = this._view.window_to_buffer_coords(
+                Gtk.TextWindowType.WIDGET, eventX, eventY);
+            [inside, iter] = this._view.get_iter_at_location(x, y);
+        }
 
         let hoveredButtonTags;
         if (inside)
