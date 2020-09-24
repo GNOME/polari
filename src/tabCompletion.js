@@ -39,13 +39,15 @@ export default class TabCompletion {
                 halign: Gtk.Align.START,
                 margin_start: 6,
                 margin_end: 6,
+                visible: true,
             }));
+            row.show();
             this._list.add(row);
         }
     }
 
     _showPopup() {
-        this._list.show_all();
+        this._list.show();
 
         let layout = this._entry.get_layout();
         let layoutIndex = this._entry.text_index_to_layout_index(this._startPos);
@@ -88,7 +90,9 @@ export default class TabCompletion {
                     halign: Gtk.Align.START,
                     margin_start: 6,
                     margin_end: 6,
+                    visible: true,
                 }));
+                row.show();
                 widgetMap.set(nick, row);
             }
         }

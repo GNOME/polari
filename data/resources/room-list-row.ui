@@ -17,7 +17,7 @@
             <property name="spacing">6</property>
             <child>
               <object class="GtkImage" id="icon">
-                <property name="no-show-all">True</property>
+                <property name="visible">False</property>
                 <property name="valign">baseline</property>
                 <property name="icon-size">1</property>
               </object>

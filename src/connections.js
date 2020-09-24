@@ -48,20 +48,21 @@ class ConnectionRow extends Gtk.ListBoxRow {
             margin_end: 12,
             margin_top: 12,
             margin_bottom: 12,
+            visible: true,
         });
         this.add(box);
 
-        box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
+        box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START, visible: true }));
 
         let insensitiveDesc = new Gtk.Label({
             label: _('Already added'),
             hexpand: true,
-            no_show_all: true,
             halign: Gtk.Align.END,
+            visible: false,
         });
         box.add(insensitiveDesc);
 
-        this.show_all();
+        this.show();
 
         this.bind_property('sensitive',
             insensitiveDesc, 'visible',

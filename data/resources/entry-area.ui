@@ -78,7 +78,6 @@
             </child>
             <child>
               <object class="GtkLabel" id="uploadLabel">
-                <property name="no-show-all">True</property>
                 <property name="visible" bind-source="confirmLabel"
                           bind-property="visible"
                           bind-flags="sync-create|invert-boolean" />
@@ -90,12 +89,11 @@
             </child>
             <child>
               <object class="GtkLabel" id="confirmLabel">
-                <property name="no-show-all">True</property>
                 <property name="halign">start</property>
                 <property name="hexpand">True</property>
                 <property name="ellipsize">end</property>
                 <property name="xalign">0</property>
-                <property name="visible">True</property>
+                <property name="visible">False</property>
               </object>
             </child>
             <child>

@@ -673,7 +673,7 @@ class RoomList extends Gtk.ListBox {
         let placeholder = new Gtk.ListBoxRow({
             selectable: false,
             activatable: false,
-            no_show_all: true,
+            visible: false,
         });
         placeholder.account = account;
 

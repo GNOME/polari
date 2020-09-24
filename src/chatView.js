@@ -299,11 +299,12 @@ export default GObject.registerClass({
             editable: false, cursor_visible: false,
             wrap_mode: Gtk.WrapMode.WORD_CHAR,
             right_margin: MARGIN,
+            visible: true,
         });
         this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
                               Gdk.EventMask.ENTER_NOTIFY_MASK);
         this.add(this._view);
-        this.show_all();
+        this.show();
 
         this._createTags();
 

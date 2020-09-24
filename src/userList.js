@@ -47,17 +47,16 @@ class UserListPopover extends Gtk.Popover {
             margin_end: 6,
             margin_top: 6,
             margin_bottom: 6,
+            visible: true,
         });
         this.add(this._box);
 
-        this._revealer = new Gtk.Revealer();
+        this._revealer = new Gtk.Revealer({ visible: true });
         this._box.add(this._revealer);
 
-        this._entry = new Gtk.SearchEntry();
+        this._entry = new Gtk.SearchEntry({ visible: true });
         this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.add(this._entry);
-
-        this._box.show_all();
     }
 
     _activeRoomChanged() {
@@ -458,7 +457,7 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     _createWidget() {
-        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, visible: true });
         this.add(vbox);
 
         let hbox = new Gtk.Box({
@@ -467,10 +466,11 @@ class UserListRow extends Gtk.ListBoxRow {
             margin_top: 4,
             margin_bottom: 4,
             spacing: 4,
+            visible: true,
         });
         this._arrow = new Gtk.Image({
             icon_name: 'pan-end-symbolic',
-            no_show_all: true,
+            visible: false,
         });
         this._label = new Gtk.Label({
             label: this._user.alias,
@@ -479,15 +479,16 @@ class UserListRow extends Gtk.ListBoxRow {
             use_markup: true,
             ellipsize: Pango.EllipsizeMode.END,
             max_width_chars: MAX_USERS_WIDTH_CHARS,
+            visible: true,
         });
         hbox.add(this._label);
         hbox.add(this._arrow);
         vbox.add(hbox);
 
-        this._revealer = new Gtk.Revealer({ reveal_child: false });
+        this._revealer = new Gtk.Revealer({ reveal_child: false, visible: true });
         vbox.add(this._revealer);
 
-        this.show_all();
+        this.show();
     }
 
     _ensureDetails() {
@@ -625,7 +626,8 @@ class UserList extends Gtk.ScrolledWindow {
         });
         this._onChannelChanged(room);
 
-        this.show_all();
+        this._list.show();
+        this.show();
     }
 
     get numRows() {
