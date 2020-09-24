@@ -360,7 +360,7 @@ export default GObject.registerClass({
             null);
         this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
                               Gdk.EventMask.ENTER_NOTIFY_MASK);
-        this.add(this._view);
+        this.set_child(this._view);
         this.show();
 
         this._createTags();

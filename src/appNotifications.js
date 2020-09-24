@@ -38,9 +38,9 @@ class MessageNotification extends AppNotification {
         this._box = new Gtk.Box({ spacing: 12, visible: true });
 
         if (iconName)
-            this._box.add(new Gtk.Image({ icon_name: iconName, visible: true }));
+            this._box.append(new Gtk.Image({ icon_name: iconName, visible: true }));
 
-        this._box.add(new Gtk.Label({
+        this._box.append(new Gtk.Label({
             label,
             hexpand: true,
             ellipsize: Pango.EllipsizeMode.END,
@@ -52,7 +52,7 @@ class MessageNotification extends AppNotification {
         closeButton.connect('clicked', this.close.bind(this));
         this._box.pack_end(closeButton, false, false, 0);
 
-        this.add(this._box);
+        this.set_child(this._box);
         this.show();
     }
 
@@ -65,7 +65,7 @@ class MessageNotification extends AppNotification {
             this.close();
         });
 
-        this._box.add(button);
+        this._box.append(button);
     }
 });
 
@@ -121,7 +121,7 @@ class SimpleOutput extends CommandOutputNotification {
             visible: true,
             wrap: true,
         });
-        this.add(label);
+        this.set_child(label);
         this.show();
     }
 });
@@ -154,7 +154,7 @@ class GridOutput extends CommandOutputNotification {
             }
             row++;
         }
-        this.add(grid);
+        this.set_child(grid);
         this.show();
     }
 });
@@ -174,11 +174,12 @@ class NotificationQueue extends Gtk.Frame {
             orientation: Gtk.Orientation.VERTICAL,
             row_spacing: 6, visible: true,
         });
-        this.add(this._grid);
+        this.set_child(this._grid);
     }
 
     addNotification(notification) {
-        this._grid.add(notification);
+        this._grid.attach_next_to(notification,
+            null, Gtk.PositionType.BOTTOM, 1, 1);
 
         notification.connect('notify::visible',
             this._onChildVisibleChanged.bind(this));
@@ -192,7 +193,7 @@ class NotificationQueue extends Gtk.Frame {
         this._grid.remove(child);
         child.run_dispose();
 
-        if (this._grid.get_children().length === 0)
+        if (this._grid.get_first_child() === null)
             this.hide();
     }
 });
@@ -231,7 +232,7 @@ export const MessageInfoBar = GObject.registerClass({
         super._init(Object.assign(defaultParams, params));
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.get_content_area().add(box);
+        this.get_content_area().append(box);
 
         this._titleLabel = new Gtk.Label({
             halign: Gtk.Align.START,
@@ -241,7 +242,7 @@ export const MessageInfoBar = GObject.registerClass({
             wrap: true,
             visible: true,
         });
-        box.add(this._titleLabel);
+        box.append(this._titleLabel);
 
         this._subtitleLabel = new Gtk.Label({
             halign: Gtk.Align.START,
@@ -250,7 +251,7 @@ export const MessageInfoBar = GObject.registerClass({
             ellipsize: Pango.EllipsizeMode.END,
             visible: true,
         });
-        box.add(this._subtitleLabel);
+        box.append(this._subtitleLabel);
 
         this.connect('response', () => (this.revealed = false));
 

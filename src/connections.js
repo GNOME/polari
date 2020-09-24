@@ -50,9 +50,9 @@ class ConnectionRow extends Gtk.ListBoxRow {
             margin_bottom: 12,
             visible: true,
         });
-        this.add(box);
+        this.set_child(box);
 
-        box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START, visible: true }));
+        box.append(new Gtk.Label({ label: name, halign: Gtk.Align.START, visible: true }));
 
         let insensitiveDesc = new Gtk.Label({
             label: _('Already added'),
@@ -60,7 +60,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
             halign: Gtk.Align.END,
             visible: false,
         });
-        box.add(insensitiveDesc);
+        box.append(insensitiveDesc);
 
         this.show();
 
@@ -96,7 +96,7 @@ export const ConnectionsList = GObject.registerClass({
 
         this._list = new Gtk.ListBox({ visible: true });
         this._list.connect('row-activated', this._onRowActivated.bind(this));
-        this.add(this._list);
+        this.set_child(this._list);
 
         this._rows = new Map();
 
@@ -111,12 +111,12 @@ export const ConnectionsList = GObject.registerClass({
             orientation: Gtk.Orientation.VERTICAL,
             visible: true,
         });
-        placeholder.add(new Gtk.Image({
+        placeholder.append(new Gtk.Image({
             icon_name: 'edit-find-symbolic',
             pixel_size: 115,
             visible: true,
         }));
-        placeholder.add(new Gtk.Label({
+        placeholder.append(new Gtk.Label({
             label: _('No results.'),
             visible: true,
         }));
@@ -193,7 +193,7 @@ export const ConnectionsList = GObject.registerClass({
     }
 
     _networksChanged() {
-        this._list.foreach(w => {
+        [...this._list].forEach(w => {
             this._list.remove(w);
             w.run_dispose();
         });
@@ -211,7 +211,7 @@ export const ConnectionsList = GObject.registerClass({
                 id: network.id,
                 sensitive,
             }));
-            this._list.add(this._rows.get(network.id));
+            this._list.append(this._rows.get(network.id));
         });
     }
 

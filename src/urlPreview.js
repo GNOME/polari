@@ -124,7 +124,7 @@ export default GObject.registerClass({
             visible: true,
         });
         this._image.get_style_context().add_class('dim-label');
-        this.add(this._image);
+        this.append(this._image);
 
         this._label = new Gtk.Label({
             halign: Gtk.Align.START,
@@ -132,7 +132,7 @@ export default GObject.registerClass({
             visible: true,
         });
         this._label.get_style_context().add_class('dim-label');
-        this.add(this._label);
+        this.append(this._label);
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
         this._networkChangedId = this._networkMonitor.connect('network-changed',

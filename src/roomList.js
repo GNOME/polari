@@ -632,7 +632,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _roomToRowIndex(index) {
-        let roomRows = this.get_children().filter(r => r instanceof RoomRow);
+        let roomRows = [...this].filter(r => r instanceof RoomRow);
         return index < roomRows.length ? roomRows[index].get_index() : -1;
     }
 
@@ -708,7 +708,7 @@ class RoomList extends Gtk.ListBox {
         placeholder.account = account;
 
         this._placeholders.set(account, placeholder);
-        this.add(placeholder);
+        this.append(placeholder);
 
         placeholder.connect('notify::visible', () => {
             this.invalidate_sort();
@@ -733,7 +733,7 @@ class RoomList extends Gtk.ListBox {
             return;
 
         let row = new RoomRow(room);
-        this.add(row);
+        this.append(row);
         this._roomRows.set(room.id, row);
 
         row.connect('destroy', w => this._roomRows.delete(w.room.id));

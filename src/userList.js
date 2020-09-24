@@ -49,14 +49,14 @@ class UserListPopover extends Gtk.Popover {
             margin_bottom: 6,
             visible: true,
         });
-        this.add(this._box);
+        this.set_child(this._box);
 
         this._revealer = new Gtk.Revealer({ visible: true });
-        this._box.add(this._revealer);
+        this._box.append(this._revealer);
 
         this._entry = new Gtk.SearchEntry({ visible: true });
         this._entry.connect('search-changed', this._updateFilter.bind(this));
-        this._revealer.add(this._entry);
+        this._revealer.set_child(this._entry);
     }
 
     _activeRoomChanged() {
@@ -90,7 +90,7 @@ class UserListPopover extends Gtk.Popover {
             return;
 
         this._userList = new UserList(room);
-        this._box.add(this._userList);
+        this._box.append(this._userList);
 
         this._userList.vadjustment.connect('changed',
             this._updateEntryVisibility.bind(this));
@@ -463,7 +463,7 @@ class UserListRow extends Gtk.ListBoxRow {
 
     _createWidget() {
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, visible: true });
-        this.add(vbox);
+        this.set_child(vbox);
 
         let hbox = new Gtk.Box({
             margin_end: 12,
@@ -486,12 +486,12 @@ class UserListRow extends Gtk.ListBoxRow {
             max_width_chars: MAX_USERS_WIDTH_CHARS,
             visible: true,
         });
-        hbox.add(this._label);
-        hbox.add(this._arrow);
-        vbox.add(hbox);
+        hbox.append(this._label);
+        hbox.append(this._arrow);
+        vbox.append(hbox);
 
         this._revealer = new Gtk.Revealer({ reveal_child: false, visible: true });
-        vbox.add(this._revealer);
+        vbox.append(this._revealer);
 
         this.show();
     }
@@ -504,7 +504,7 @@ class UserListRow extends Gtk.ListBoxRow {
 
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
-        this._revealer.add(details);
+        this._revealer.set_child(details);
     }
 
     shouldShow() {
@@ -565,7 +565,7 @@ class UserList extends Gtk.ScrolledWindow {
         });
 
         this._list = new Gtk.ListBox({ vexpand: true });
-        this.add(this._list);
+        this.set_child(this._list);
         let placeholder = new Gtk.Box({
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
@@ -577,12 +577,12 @@ class UserList extends Gtk.ScrolledWindow {
             spacing: 6,
             visible: true,
         });
-        placeholder.add(new Gtk.Image({
+        placeholder.append(new Gtk.Image({
             icon_name: 'edit-find-symbolic',
             pixel_size: 64,
             visible: true,
         }));
-        placeholder.add(new Gtk.Label({
+        placeholder.append(new Gtk.Label({
             label: _('No Results'),
             visible: true,
         }));
@@ -663,7 +663,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     _onChannelChanged(room) {
-        this._list.foreach(w => {
+        [...this._list].forEach(w => {
             this._list.remove(w);
             w.run_dispose();
         });
@@ -680,7 +680,7 @@ class UserList extends Gtk.ScrolledWindow {
     _addMember(member) {
         let row = new UserListRow(member);
         this._rows.set(member, row);
-        this._list.add(row);
+        this._list.append(row);
     }
 
     _removeMember(member) {

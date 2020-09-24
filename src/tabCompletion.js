@@ -28,7 +28,7 @@ export default class TabCompletion {
         this._list.set_filter_func(this._filter.bind(this));
         this._list.connect('row-selected', this._onRowSelected.bind(this));
         this._list.connect('row-activated', this._stop.bind(this));
-        this._popup.add(this._list);
+        this._popup.set_child(this._list);
 
         this._widgetMap = new Map();
         this._previousWasCommand = false;
@@ -38,7 +38,7 @@ export default class TabCompletion {
             let row = new Gtk.ListBoxRow();
             row._text = `/${commands[i]}`;
             row._casefoldedText = row._text.toLowerCase();
-            row.add(new Gtk.Label({
+            row.set_child(new Gtk.Label({
                 label: row._text,
                 halign: Gtk.Align.START,
                 margin_start: 6,
@@ -46,7 +46,7 @@ export default class TabCompletion {
                 visible: true,
             }));
             row.show();
-            this._list.add(row);
+            this._list.append(row);
         }
     }
 
@@ -89,7 +89,7 @@ export default class TabCompletion {
                 row = new Gtk.ListBoxRow();
                 row._text = nick;
                 row._casefoldedText = row._text.toLowerCase();
-                row.add(new Gtk.Label({
+                row.set_child(new Gtk.Label({
                     label: row._text,
                     halign: Gtk.Align.START,
                     margin_start: 6,
@@ -104,7 +104,7 @@ export default class TabCompletion {
         this._widgetMap = widgetMap;
 
         // All remaining rows except those with IRC commands are going unused
-        this._list.foreach(r => {
+        [...this._list].forEach(r => {
             if (r._text.startsWith('/'))
                 return;
             this._list.remove(r);
@@ -113,7 +113,7 @@ export default class TabCompletion {
 
         for (let i = 0; i < completions.length; i++) {
             let row = this._widgetMap.get(completions[i]);
-            this._list.add(row);
+            this._list.append(row);
         }
         this._canComplete = completions.length > 0;
     }
@@ -210,7 +210,7 @@ export default class TabCompletion {
 
         this._list.invalidate_filter();
 
-        let visibleRows = this._list.get_children().filter(c => c.get_child_visible());
+        let visibleRows = [...this._list].filter(c => c.get_child_visible());
         let nVisibleRows = visibleRows.length;
 
         if (nVisibleRows === 0)
@@ -226,7 +226,7 @@ export default class TabCompletion {
     }
 
     _moveSelection(count) {
-        const rows = this._list.get_children().filter(c => c.get_child_visible());
+        const rows = [...this._list].filter(c => c.get_child_visible());
         const current = this._list.get_selected_row();
         const index = current ? rows.findIndex(r => r === current) : 0;
         const newIndex = (index + rows.length + count) % rows.length;

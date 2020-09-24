@@ -258,7 +258,7 @@ class ChatPlaceholder extends Gtk.Overlay {
         grid.attach(title, 1, 0, 1, 1);
         grid.attach(description, 0, 1, 2, 1);
         inputPlaceholder.show();
-        this.add(grid);
+        this.set_child(grid);
         this.add_overlay(inputPlaceholder);
         this.show();
     }
@@ -270,7 +270,7 @@ class RoomView extends Gtk.Overlay {
         super._init({ name: `RoomView ${room.display_name}` });
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, visible: true });
-        this.add(box);
+        this.set_child(box);
 
         if (room.type === Tp.HandleType.CONTACT)
             this.add_overlay(new SavePasswordConfirmationBar(room));
@@ -278,14 +278,14 @@ class RoomView extends Gtk.Overlay {
         this.add_overlay(new ChannelErrorBar(room));
 
         this._view = new ChatView(room);
-        box.add(this._view);
+        box.append(this._view);
 
         this._entryArea = new EntryArea({
             room,
             sensitive: false,
             visible: true,
         });
-        box.add(this._entryArea);
+        box.append(this._entryArea);
 
         this._view.bind_property('max-nick-chars',
             this._entryArea, 'max-nick-chars',
