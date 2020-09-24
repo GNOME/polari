@@ -442,7 +442,7 @@ export default GObject.registerClass({
         this._originalUpper = this.vadjustment.get_upper();
 
         this._app = Gio.Application.get_default();
-        this.addTargets(this._view);
+        // this.addTargets(this._view);
 
         this._roomFocusChangedId = this._app.connect('room-focus-changed',
             this._checkMessages.bind(this));

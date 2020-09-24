@@ -32,7 +32,7 @@ export const ChatEntry = GObject.registerClass({
         super._init(params);
 
         const delegate = this.get_delegate();
-        this.addTargets(delegate);
+        // this.addTargets(delegate);
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('show-emoji-picker');
