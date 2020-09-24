@@ -70,8 +70,8 @@ export default GObject.registerClass({
         this._toplevelSignals = [];
     }
 
-    vfunc_size_allocate(allocation) {
-        super.vfunc_size_allocate(allocation);
+    vfunc_size_allocate(width, height, baseline) {
+        super.vfunc_size_allocate(width, height, baseline);
 
         const [firstEntry] =
             this._sizeGroup.get_widgets().filter(w => w.get_mapped());

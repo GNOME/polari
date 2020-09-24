@@ -1,8 +1,8 @@
-import Gdk from 'gi://Gdk?version=3.0';
+import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gtk from 'gi://Gtk?version=3.0';
+import Gtk from 'gi://Gtk?version=4.0';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 

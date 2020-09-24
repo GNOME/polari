@@ -175,12 +175,11 @@ export default GObject.registerClass({
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));
         this.connect('realize', () => {
-            this._toplevelKeyController = new Gtk.EventControllerKey({
-                widget: this.get_root(),
-                propagation_phase: Gtk.PropagationPhase.CAPTURE,
-            });
+            this._toplevel = this.get_root();
+            this._toplevelKeyController = new Gtk.EventControllerKey();
             this._toplevelKeyController.connect('key-pressed',
                 this._onKeyPressed.bind(this));
+            this._toplevel.add_controller(this._toplevelKeyController);
         });
         this.connect('map', () => {
             EntryArea._nickPopover.unparent();
@@ -252,9 +251,7 @@ export default GObject.registerClass({
         this._cancelButton.connect('clicked', this._onCancelClicked.bind(this));
         this._pasteButton.connect('clicked', this._onPasteClicked.bind(this));
 
-        this._pasteController = new Gtk.EventControllerKey({
-            widget: this._pasteBox,
-        });
+        this._pasteController = new Gtk.EventControllerKey();
         this._pasteController.connect_after('key-pressed', (c, keyval, code, mods) => {
             if (keyval === Gdk.KEY_Escape ||
                 keyval === Gdk.KEY_BackSpace ||
@@ -265,6 +262,7 @@ export default GObject.registerClass({
             }
             return Gdk.EVENT_PROPAGATE;
         });
+        this._pasteBox.add_controller(this._pasteController);
 
         if (!this._room)
             return;
@@ -505,7 +503,7 @@ export default GObject.registerClass({
             EntryArea._nickPopover.disconnect(this._nickChangedId);
         this._nickChangedId = 0;
         if (this._toplevelKeyController)
-            this._toplevelKeyController.run_dispose();
+            this._toplevel.remove_controller(this._toplevelKeyController);
         this._toplevelKeyController = null;
     }
 });

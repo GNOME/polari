@@ -91,7 +91,6 @@ export default GObject.registerClass({
         else
             this._nextButton.remove_css_class('suggested-action');
 
-        this._nextButton.grab_default();
         this._updateNextSensitivity();
     }
 

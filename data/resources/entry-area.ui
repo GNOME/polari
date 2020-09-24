@@ -9,126 +9,127 @@
       <class name="view"/>
     </style>
     <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="spacing">6</property>
-        <property name="margin-start">6</property>
-        <property name="margin-end">14</property>
-        <property name="margin-top">6</property>
-        <property name="margin-bottom">6</property>
-        <child>
-          <object class="GtkToggleButton" id="nickButton">
-            <property name="visible">True</property>
-            <property name="receives-default">True</property>
-            <property name="focus-on-click">False</property>
-            <style>
-              <class name="flat"/>
-              <class name="polari-nick-button"/>
-            </style>
-            <child>
-              <object class="GtkLabel" id="nickLabel">
-                <property name="visible">True</property>
-                <property name="xalign">0</property>
-                <attributes>
-                  <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-                </attributes>
-              </object>
-            </child>
-            <child internal-child="accessible">
-              <object class="AtkObject">
-                <property name="AtkObject::accessible-name"
-                          translatable="yes">Change nickname</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="Gjs_ChatEntry" id="chatEntry">
-            <property name="visible">True</property>
-            <property name="hexpand">True</property>
-            <property name="show-emoji-icon">True</property>
-          </object>
-        </child>
-      </object>
-      <packing>
+      <object class="GtkStackPage">
         <property name="name">default</property>
-      </packing>
+        <property name="child">
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="spacing">6</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">14</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <child>
+              <object class="GtkToggleButton" id="nickButton">
+                <property name="visible">True</property>
+                <property name="receives-default">True</property>
+                <property name="focus-on-click">False</property>
+                <style>
+                  <class name="flat"/>
+                  <class name="polari-nick-button"/>
+                </style>
+                <child>
+                  <object class="GtkLabel" id="nickLabel">
+                    <property name="visible">True</property>
+                    <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+                    </attributes>
+                  </object>
+                </child>
+                <accessibility>
+                  <property name="label" translatable="yes">Change nickname</property>
+                </accessibility>
+              </object>
+            </child>
+            <child>
+              <object class="Gjs_ChatEntry" id="chatEntry">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+                <property name="show-emoji-icon">True</property>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
     </child>
     <child>
-      <object class="GtkBox" id="pasteBox">
-        <property name="visible">True</property>
-        <property name="spacing">6</property>
-        <style>
-          <class name="background"/>
-          <class name="polari-paste-confirmation"/>
-        </style>
-        <child>
-          <object class="GtkSpinner" id="uploadSpinner">
+      <object class="GtkStackPage">
+        <property name="name">paste-confirmation</property>
+        <property name="child">
+          <object class="GtkBox" id="pasteBox">
             <property name="visible">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="uploadLabel">
-            <property name="visible" bind-source="confirmLabel"
-                      bind-property="visible"
-                      bind-flags="sync-create|invert-boolean" />
-            <property name="halign">start</property>
-            <property name="hexpand">True</property>
-            <property name="ellipsize">end</property>
-            <property name="xalign">0</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="confirmLabel">
-            <property name="halign">start</property>
-            <property name="hexpand">True</property>
-            <property name="ellipsize">end</property>
-            <property name="xalign">0</property>
-            <property name="visible">False</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkRevealer">
-            <property name="visible">True</property>
-            <property name="transition-type">slide-left</property>
-            <property name="reveal-child" bind-source="confirmLabel"
-                      bind-property="visible" bind-flags="sync-create" />
+            <property name="spacing">6</property>
+            <style>
+              <class name="background"/>
+              <class name="polari-paste-confirmation"/>
+            </style>
             <child>
-              <object class="GtkBox">
+              <object class="GtkSpinner" id="uploadSpinner">
                 <property name="visible">True</property>
-                <property name="spacing">6</property>
-                <property name="margin-end">14</property>
-                <child>
-                  <object class="GtkButton" id="cancelButton">
-                    <property name="label" translatable="yes">_Cancel</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="uploadLabel">
+                <property name="visible" bind-source="confirmLabel"
+                          bind-property="visible"
+                          bind-flags="sync-create|invert-boolean"/>
+                <property name="halign">start</property>
+                <property name="hexpand">True</property>
+                <property name="ellipsize">end</property>
+                <property name="xalign">0</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="confirmLabel">
+                <property name="halign">start</property>
+                <property name="hexpand">True</property>
+                <property name="ellipsize">end</property>
+                <property name="xalign">0</property>
+                <property name="visible">False</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkRevealer">
+                <property name="visible">True</property>
+                <property name="transition-type">slide-left</property>
+                <property name="reveal-child" bind-source="confirmLabel"
+                          bind-property="visible" bind-flags="sync-create"/>
+                <property name="child">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="receives-default">True</property>
-                    <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="confirmLabel"
-                              bind-property="visible" bind-flags="sync-create" />
+                    <property name="spacing">6</property>
+                    <property name="margin-end">14</property>
+                    <child>
+                      <object class="GtkButton" id="cancelButton">
+                        <property name="label" translatable="yes">_Cancel</property>
+                        <property name="visible">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="sensitive" bind-source="confirmLabel"
+                                  bind-property="visible" bind-flags="sync-create" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="pasteButton">
+                        <property name="label" translatable="yes">_Paste</property>
+                        <property name="visible">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="sensitive" bind-source="confirmLabel"
+                                  bind-property="visible" bind-flags="sync-create"/>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="pasteButton">
-                    <property name="label" translatable="yes">_Paste</property>
-                    <property name="visible">True</property>
-                    <property name="receives-default">True</property>
-                    <property name="use-underline">True</property>
-                    <property name="sensitive" bind-source="confirmLabel"
-                              bind-property="visible" bind-flags="sync-create" />
-                    <style>
-                      <class name="suggested-action"/>
-                    </style>
-                  </object>
-                </child>
+                </property>
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
-      <packing>
-        <property name="name">paste-confirmation</property>
-      </packing>
     </child>
   </template>
 </interface>

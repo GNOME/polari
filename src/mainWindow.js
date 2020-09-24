@@ -1,4 +1,3 @@
-import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -26,16 +25,19 @@ export const FixedSizeFrame = GObject.registerClass({
             GObject.ParamFlags.READWRITE,
             -1, GLib.MAXINT32, -1),
     },
-}, class FixedSizeFrame extends Gtk.Bin {
+}, class FixedSizeFrame extends Gtk.Widget {
     _init(params) {
         this._height = -1;
         this._width = -1;
 
-        super._init(params);
+        super._init({
+            ...params,
+            layout_manager: new Gtk.BinLayout(),
+        });
     }
 
     _queueRedraw() {
-        let child = this.get_child();
+        const [child] = this;
         child?.queue_resize();
         this.queue_draw();
     }
@@ -67,14 +69,11 @@ export const FixedSizeFrame = GObject.registerClass({
         this._queueRedraw();
     }
 
-    vfunc_get_preferred_width_for_height(forHeight) {
-        let [min, nat] = super.vfunc_get_preferred_width_for_height(forHeight);
-        return [min, this._width < 0 ? nat : this._width];
-    }
-
-    vfunc_get_preferred_height_for_width(forWidth) {
-        let [min, nat] = super.vfunc_get_preferred_height_for_width(forWidth);
-        return [min, this._height < 0 ? nat : this._height];
+    vfunc_measure(orientation, forSize) {
+        const fixedSize = orientation === Gtk.Orientation.HORIZONTAL
+            ? this._width : this._height;
+        const [min, nat] = super.vfunc_measure(orientation, forSize);
+        return [min, fixedSize < 0 ? nat : fixedSize, -1, -1];
     }
 });
 
@@ -193,8 +192,14 @@ export default GObject.registerClass({
             this._updateDecorations.bind(this));
         this._updateDecorations();
 
-        this.connect('window-state-event', this._onWindowStateEvent.bind(this));
-        this.connect('size-allocate', this._onSizeAllocate.bind(this));
+        this.connect('notify::maximized',
+            () => (this._isMaximized = this.maximized));
+        this.connect('notify::fullscreened',
+            () => (this._isFullscreen = this.fullscreened));
+        this.connect('notify::default-width',
+            () => (this._currentSize = this.get_default_size()));
+        this.connect('notify::default-height',
+            () => (this._currentSize = this.get_default_size()));
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::active-room', () => {
             this._updateUserListLabel();
@@ -240,18 +245,6 @@ export default GObject.registerClass({
         let accounts = this._accountsMonitor.visibleAccounts;
         this._offlineInfoBar.revealed =
             accounts.length > 0 && !accounts.some(a => a.reachable);
-    }
-
-    _onWindowStateEvent(widget, event) {
-        let state = event.get_window().get_state();
-
-        this._isFullscreen = (state & Gdk.WindowState.FULLSCREEN) !== 0;
-        this._isMaximized = (state & Gdk.WindowState.MAXIMIZED) !== 0;
-    }
-
-    _onSizeAllocate() {
-        if (!this._isFullscreen && !this._isMaximized)
-            this._currentSize = this.get_size();
     }
 
     _onDestroy() {

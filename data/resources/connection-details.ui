@@ -4,7 +4,7 @@
     <property name="visible">True</property>
     <property name="row-spacing">6</property>
     <property name="column-spacing">12</property>
-        <child>
+    <child>
       <object class="GtkLabel" id="server_label">
         <property name="visible" bind-source="Gjs_ConnectionDetails"
                   bind-property="has-service"
@@ -33,11 +33,11 @@
         <property name="label" translatable="yes">Net_work Name</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">nameEntry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">0</property>
-        <property name="top-attach">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="nameEntry">
@@ -47,11 +47,11 @@
         <property name="hexpand">True</property>
         <property name="activates-default">True</property>
         <property name="placeholder-text" translatable="yes">optional</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">1</property>
-        <property name="top-attach">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkCheckButton" id="sslCheckbox">
@@ -61,11 +61,11 @@
         <property name="label" translatable="yes">Use secure c_onnection</property>
         <property name="margin-bottom">24</property>
         <property name="use-underline">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">2</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">1</property>
-        <property name="top-attach">2</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="nickname_label">
@@ -74,23 +74,22 @@
         <property name="label" translatable="yes">_Nickname</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">nickEntry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">3</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">0</property>
-        <property name="top-attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="nickEntry">
         <property name="visible">True</property>
         <property name="hexpand">True</property>
-        <property name="can-default">True</property>
         <property name="activates-default">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">3</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">1</property>
-        <property name="top-attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="realname_label">
@@ -99,11 +98,11 @@
         <property name="label" translatable="yes">_Real Name</property>
         <property name="use-underline">True</property>
         <property name="mnemonic-widget">realnameEntry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">4</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">0</property>
-        <property name="top-attach">4</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="realnameEntry">
@@ -112,11 +111,11 @@
         <property name="activates-default">True</property>
         <property name="width-chars">30</property>
         <property name="placeholder-text" translatable="yes">optional</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">4</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left-attach">1</property>
-        <property name="top-attach">4</property>
-      </packing>
     </child>
   </template>
 </interface>

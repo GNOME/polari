@@ -8,7 +8,6 @@
         <!-- The longer shortcut titles make GTK+ want to layout the groups
              vertically, but we really really want a horizontal layout -->
         <property name="max-height">10</property>
-        <!--property name="section-name">shortcuts</property-->
         <child>
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>

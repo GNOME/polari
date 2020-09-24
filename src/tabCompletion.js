@@ -10,10 +10,14 @@ export default class TabCompletion {
         this._key = '';
 
         this._keyController = new Gtk.EventControllerKey({
-            widget: this._entry,
+            propagation_phase: Gtk.PropagationPhase.CAPTURE,
         });
         this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
-        this._entry.connect('focus-out-event', this._cancel.bind(this));
+        this._entry.add_controller(this._keyController);
+
+        this._focusController = new Gtk.EventControllerFocus();
+        this._focusController.connect('leave', this._cancel.bind(this));
+        this._entry.add_controller(this._focusController);
 
         this._entry.connect('unmap', this._cancel.bind(this));
 

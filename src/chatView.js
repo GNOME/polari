@@ -2,9 +2,9 @@ import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
+import Graphene from 'gi://Graphene';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
-import PangoCairo from 'gi://PangoCairo';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 import Tpl from 'gi://TelepathyLogger';
@@ -65,7 +65,7 @@ const TextView = GObject.registerClass({
         super._init(params);
 
         this.buffer.connect('mark-set', this._onMarkSet.bind(this));
-        this.connect('screen-changed', this._onScreenChanged.bind(this));
+        this.connect('notify::root', this._onScreenChanged.bind(this));
     }
 
     // eslint-disable-next-line camelcase
@@ -119,15 +119,17 @@ const TextView = GObject.registerClass({
         });
     }
 
-    vfunc_get_preferred_width() {
-        return [1, 1];
+    vfunc_measure(orientation, forSize) {
+        const [min, nat] = orientation === Gtk.Orientation.HORIZONTAL
+            ? [1, 1] : super.vfunc_measure(orientation, forSize);
+        return [min, nat, -1, -1];
     }
 
-    vfunc_style_updated() {
+    vfunc_css_changed(change) {
+        super.vfunc_css_changed(change);
+
         const context = this.get_style_context();
         [, this._dimColor] = context.lookup_color('inactive_nick_color');
-
-        super.vfunc_style_updated();
 
         /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
            the default handler calls pango_cairo_context_set_resolution(), so
@@ -135,14 +137,12 @@ const TextView = GObject.registerClass({
         this._updateIndent();
     }
 
-    vfunc_draw(cr) {
-        super.vfunc_draw(cr);
+    vfunc_snapshot(snapshot) {
+        super.vfunc_snapshot(snapshot);
 
         let mark = this.buffer.get_mark('indicator-line');
-        if (!mark) {
-            cr.$dispose();
-            return Gdk.EVENT_PROPAGATE;
-        }
+        if (!mark)
+            return;
 
         let iter = this.buffer.get_iter_at_mark(mark);
         let location = this.get_iter_location(iter);
@@ -169,28 +169,29 @@ const TextView = GObject.registerClass({
         let baseline = Math.floor(this._layout.get_baseline() / Pango.SCALE);
         let layoutY = y - baseline + Math.floor((layoutHeight - baseline) / 2) + 0.5;
 
-        let [hasClip, clip] = Gdk.cairo_get_clip_rectangle(cr);
-        if (hasClip &&
-            clip.y <= layoutY + layoutHeight &&
-            clip.y + clip.height >= layoutY) {
-            Gdk.cairo_set_source_rgba(cr, this._dimColor);
+        const bounds = new Graphene.Rect();
+        bounds.init(MARGIN, y, width, 1);
 
-            cr.moveTo(layoutX, layoutY);
-            PangoCairo.show_layout(cr, this._layout);
+        snapshot.save();
 
-            let [, color] = this.get_style_context().lookup_color('borders');
-            Gdk.cairo_set_source_rgba(cr, color);
+        snapshot.translate(new Graphene.Point({ x: layoutX, y: layoutY }));
+        snapshot.append_layout(this._layout, this._dimColor);
 
-            cr.setLineWidth(1);
-            cr.moveTo(MARGIN, y);
-            cr.lineTo(layoutX - MARGIN, y);
-            cr.moveTo(layoutX + layoutWidth + MARGIN, y);
-            cr.lineTo(MARGIN + width, y);
-            cr.stroke();
-        }
+        snapshot.restore();
+
+        const cr = snapshot.append_cairo(bounds);
+
+        const [, color] = this.get_style_context().lookup_color('borders');
+        Gdk.cairo_set_source_rgba(cr, color);
+
+        cr.setLineWidth(1);
+        cr.moveTo(MARGIN, y);
+        cr.lineTo(layoutX - MARGIN, y);
+        cr.moveTo(layoutX + layoutWidth + MARGIN, y);
+        cr.lineTo(MARGIN + width, y);
+        cr.stroke();
+
         cr.$dispose();
-
-        return Gdk.EVENT_PROPAGATE;
     }
 
     _onMarkSet(buffer, iter, mark) {
@@ -358,18 +359,12 @@ export default GObject.registerClass({
             GObject.BindingFlags.SYNC_CREATE,
             (v, source) => [true, MARGIN - source],
             null);
-        this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
-                              Gdk.EventMask.ENTER_NOTIFY_MASK);
         this.set_child(this._view);
         this.show();
 
         this._createTags();
 
-        this.connect('style-updated', this._onStyleUpdated.bind(this));
-        this._onStyleUpdated();
-
         this.connect('destroy', this._onDestroy.bind(this));
-        this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
             if (pos === Gtk.PositionType.BOTTOM)
                 this._autoscroll = true;
@@ -381,23 +376,26 @@ export default GObject.registerClass({
         this.vadjustment.connect('notify::upper',
             this._onUpperChanged.bind(this));
 
-        this._keyController = new Gtk.EventControllerKey({
-            widget: this._view,
+        this._scrollController = new Gtk.EventControllerScroll({
+            flags: Gtk.EventControllerScrollFlags.VERTICAL,
         });
-        this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
+        this._scrollController.connect('scroll', this._onScroll.bind(this));
+        this.add_controller(this._scrollController);
 
-        this._motionController = new Gtk.EventControllerMotion({
-            widget: this._view,
-        });
+        this._keyController = new Gtk.EventControllerKey();
+        this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
+        this._view.add_controller(this._keyController);
+
+        this._motionController = new Gtk.EventControllerMotion();
         this._motionController.connect('motion',
             this._handleButtonTagsHover.bind(this));
         this._motionController.connect('enter',
             this._handleButtonTagsHover.bind(this));
         this._motionController.connect('leave',
             this._handleButtonTagsHover.bind(this));
+        this._view.add_controller(this._motionController);
 
         this._clickGesture = new Gtk.GestureClick({
-            widget: this._view,
             propagation_phase: Gtk.PropagationPhase.CAPTURE,
             button: 0,
         });
@@ -405,6 +403,7 @@ export default GObject.registerClass({
             this._handleButtonTagPressed.bind(this));
         this._clickGesture.connect('released',
             this._handleButtonTagReleased.bind(this));
+        this._view.add_controller(this._clickGesture);
 
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
@@ -416,6 +415,11 @@ export default GObject.registerClass({
         this._initialPending = [];
         this._backlogTimeoutId = 0;
         this._statusCount = { left: 0, joined: 0, total: 0 };
+
+        this._activeNickColor = new Gdk.RGBA();
+        this._inactiveNickColor = new Gdk.RGBA();
+        this._hoveredLinkColor = new Gdk.RGBA();
+        this._statusHeaderHoverColor = new Gdk.RGBA();
 
         let statusMonitor = UserStatusMonitor.getDefault();
         this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
@@ -525,7 +529,9 @@ export default GObject.registerClass({
         tags.forEach(tagProps => tagTable.add(new Gtk.TextTag(tagProps)));
     }
 
-    _onStyleUpdated() {
+    vfunc_css_changed(change) {
+        super.vfunc_css_changed(change);
+
         const context = this.get_style_context();
         const [, activeColor] =
             context.lookup_color('active_nick_color');
@@ -836,9 +842,9 @@ export default GObject.registerClass({
         const menu = new Gtk.PopoverMenu({
             position: Gtk.PositionType.BOTTOM,
             pointing_to: new Gdk.Rectangle({ x, y }),
+            menu_model: section,
         });
-        menu.set_parent(this);
-        menu.bind_model(section, null);
+        menu.set_parent(this._view);
         menu.popup();
     }
 

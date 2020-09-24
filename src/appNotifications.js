@@ -232,7 +232,7 @@ export const MessageInfoBar = GObject.registerClass({
         super._init(Object.assign(defaultParams, params));
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.get_content_area().append(box);
+        this.add_child(box);
 
         this._titleLabel = new Gtk.Label({
             halign: Gtk.Align.START,

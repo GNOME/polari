@@ -110,7 +110,7 @@ export default GObject.registerClass({
             let childName = isCustom ? 'custom' : 'predefined';
             this._connectionStack.visible_child_name = childName;
             if (isCustom) {
-                this._addButton.grab_default();
+                this.set_default_widget(this._addButton);
                 this._details.reset();
             }
         });

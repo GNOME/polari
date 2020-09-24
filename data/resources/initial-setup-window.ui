@@ -4,10 +4,11 @@
     <property name="icon-name">org.gnome.Polari</property>
     <property name="default-width">800</property>
     <property name="default-height">600</property>
+    <property name="default-widget">nextButton</property>
+    <property name="title" translatable="yes">Polari Setup</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
-        <property name="title" translatable="yes">Polari Setup</property>
         <child>
           <object class="GtkButton" id="prevButton">
             <property name="visible">True</property>
@@ -15,16 +16,12 @@
             <property name="valign">center</property>
           </object>
         </child>
-        <child>
+        <child type="end">
           <object class="GtkButton" id="nextButton">
             <property name="visible">True</property>
             <property name="use-underline">True</property>
-            <property name="can-default">True</property>
             <property name="valign">center</property>
           </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
         </child>
       </object>
     </child>
@@ -34,158 +31,164 @@
         <property name="transition-type">slide-left-right</property>
         <property name="vexpand">True</property>
         <child>
-          <object class="GtkGrid">
-            <property name="visible">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="row_spacing">6</property>
-            <property name="column_spacing">18</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="pixel_size">64</property>
-                <property name="icon_name">network-offline-symbolic</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="height">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">Not connected</property>
-                <style>
-                  <class name="polari-setup-title"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Please connect to the internet to continue the setup.</property>
-                <property name="wrap">True</property>
-                <property name="max_width_chars">30</property>
-                <property name="xalign">0</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
+          <object class="GtkStackPage">
             <property name="name">offline-hint</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="visible">True</property>
-            <property name="vexpand">True</property>
-            <property name="spacing">24</property>
-            <style>
-              <class name="polari-setup-page"/>
-            </style>
-            <child>
-              <object class="GtkBox">
+            <property name="child">
+              <object class="GtkGrid">
                 <property name="visible">True</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">24</property>
                 <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="row_spacing">6</property>
+                <property name="column_spacing">18</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Welcome to Polari</property>
-                    <style>
-                      <class name="polari-setup-title"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="max-width-chars">42</property>
-                    <property name="wrap">True</property>
-                    <property name="justify">center</property>
-                    <property name="label" translatable="yes">Polari is an easy way to chat using IRC. Select a network to get started.</property>
+                    <property name="pixel_size">64</property>
+                    <property name="icon_name">network-offline-symbolic</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
+                    <layout>
+                      <property name="row-span">2</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Not connected</property>
+                    <style>
+                      <class name="polari-setup-title"/>
+                    </style>
+                    <layout>
+                      <property name="column">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Please connect to the internet to continue the setup.</property>
+                    <property name="wrap">True</property>
+                    <property name="max_width_chars">30</property>
+                    <property name="xalign">0</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">1</property>
+                    </layout>
                   </object>
                 </child>
               </object>
-            </child>
-            <child>
-              <object class="Gjs_ConnectionsList" id="connectionsList">
-                <property name="visible">True</property>
-                <property name="vscrollbar-policy">never</property>
-                <property name="shadow-type">in</property>
-                <property name="favorites-only">True</property>
-              </object>
-            </child>
+            </property>
           </object>
-          <packing>
-            <property name="name">connections</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="visible">True</property>
-            <property name="spacing">24</property>
-            <style>
-              <class name="polari-setup-page"/>
-            </style>
-            <child>
+          <object class="GtkStackPage">
+            <property name="name">connections</property>
+            <property name="child">
               <object class="GtkBox">
-                <property name="visible">True</property>
                 <property name="orientation">vertical</property>
-                <property name="halign">center</property>
-                <property name="spacing">24</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Welcome to Polari</property>
-                    <style>
-                      <class name="polari-setup-title"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="max-width-chars">60</property>
-                    <property name="wrap">True</property>
-                    <property name="justify">center</property>
-                    <property name="label" translatable="yes">Select rooms you want to connect to. You can add more networks and rooms later, by clicking the + button.</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
-                </object>
-            </child>
-            <child>
-              <object class="Gjs_ServerRoomList" id="serverRoomList">
                 <property name="visible">True</property>
                 <property name="vexpand">True</property>
+                <property name="spacing">24</property>
+                <style>
+                  <class name="polari-setup-page"/>
+                </style>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">24</property>
+                    <property name="halign">center</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Welcome to Polari</property>
+                        <style>
+                          <class name="polari-setup-title"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="max-width-chars">42</property>
+                        <property name="wrap">True</property>
+                        <property name="justify">center</property>
+                        <property name="label" translatable="yes">Polari is an easy way to chat using IRC. Select a network to get started.</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="Gjs_ConnectionsList" id="connectionsList">
+                    <property name="visible">True</property>
+                    <property name="vscrollbar-policy">never</property>
+                    <property name="has-frame">True</property>
+                    <property name="favorites-only">True</property>
+                  </object>
+                </child>
               </object>
-            </child>
+            </property>
           </object>
-          <packing>
+        </child>
+        <child>
+          <object class="GtkStackPage">
             <property name="name">rooms</property>
-          </packing>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="visible">True</property>
+                <property name="spacing">24</property>
+                <style>
+                  <class name="polari-setup-page"/>
+                </style>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="halign">center</property>
+                    <property name="spacing">24</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Welcome to Polari</property>
+                        <style>
+                          <class name="polari-setup-title"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="max-width-chars">60</property>
+                        <property name="wrap">True</property>
+                        <property name="justify">center</property>
+                        <property name="label" translatable="yes">Select rooms you want to connect to. You can add more networks and rooms later, by clicking the + button.</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="Gjs_ServerRoomList" id="serverRoomList">
+                    <property name="visible">True</property>
+                    <property name="vexpand">True</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
         </child>
       </object>
     </child>

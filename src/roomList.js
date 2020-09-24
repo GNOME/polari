@@ -21,7 +21,7 @@ function _onPopoverVisibleChanged(popover) {
 const RoomRow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
     InternalChildren: [
-        'eventBox',
+        'box',
         'icon',
         'roomLabel',
         'counter',
@@ -48,17 +48,16 @@ const RoomRow = GObject.registerClass({
 
         this._icon.visible = room.icon !== null;
 
-        this._keyController = new Gtk.EventControllerKey({
-            widget: this,
-        });
+        this._keyController = new Gtk.EventControllerKey();
         this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
+        this.add_controller(this._keyController);
 
         this._clickGesture = new Gtk.GestureClick({
-            widget: this._eventBox,
             button: Gdk.BUTTON_SECONDARY,
         });
         this._clickGesture.connect('released',
             this._onButtonReleased.bind(this));
+        this._box.add_controller(this._clickGesture);
 
         room.bind_property('display-name',
             this._roomLabel, 'label',
@@ -302,7 +301,7 @@ const RoomListHeader = GObject.registerClass({
             GObject.ParamFlags.READWRITE,
             Gtk.Popover.$gtype),
     },
-}, class RoomListHeader extends Gtk.EventBox {
+}, class RoomListHeader extends Gtk.Grid {
     _init(params) {
         this._account = params.account;
         delete params.account;
@@ -318,8 +317,8 @@ const RoomListHeader = GObject.registerClass({
         this._clickGesture = new Gtk.GestureClick({
             propagation_phase: Gtk.PropagationPhase.CAPTURE,
             button: 0,
-            widget: this,
         });
+        this.add_controller(this._clickGesture);
 
         this._clickGesture.connect('released', () => {
             const button = this._clickGesture.get_current_button();
@@ -795,6 +794,7 @@ class RoomList extends Gtk.ListBox {
 
         if (beforeAccount === account) {
             row.set_header(null);
+            oldHeader?.unparent();
             oldHeader?.run_dispose();
             return;
         }

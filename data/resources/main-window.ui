@@ -3,7 +3,6 @@
   <object class="Gjs_UserListPopover" id="userListPopover">
     <property name="position">bottom</property>
     <property name="width-request">250</property>
-    <property name="relative-to">showUserListButton</property>
     <style>
       <class name="polari-user-list"/>
     </style>
@@ -44,11 +43,10 @@
           <object class="GtkHeaderBar" id="titlebarLeft">
             <property name="visible">True</property>
             <property name="hexpand">False</property>
-            <property name="show-close-button">True</property>
             <child type="title">
               <object class="GtkLabel"/>
             </child>
-            <child>
+            <child type="start">
               <object class="GtkButton" id="joinButton">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
@@ -65,38 +63,30 @@
                     <property name="icon-size">1</property>
                   </object>
                 </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject">
-                    <property name="AtkObject::accessible-name"
-                              translatable="yes">Add rooms and networks</property>
-                  </object>
-                </child>
+                <accessibility>
+                  <property name="label" translatable="yes">Add rooms and networks</property>
+                </accessibility>
               </object>
-              <packing>
-                <property name="pack-type">start</property>
-              </packing>
             </child>
-            <child>
+            <child type="end">
               <object class="GtkMenuButton">
                 <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="menu-model">hamburgerMenu</property>
-                <accelerator key="F10" signal="activate"/>
-                <style>
-                  <class name="image-button"/>
-                </style>
+                <property name="icon-name">open-menu-symbolic</property>
                 <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="icon-size">1</property>
+                  <object class='GtkShortcutController'>
+                    <property name='scope'>managed</property>
+                    <child>
+                      <object class='GtkShortcut'>
+                        <property name='trigger'>F10</property>
+                        <property name='action'>activate</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
           </object>
         </child>
@@ -110,7 +100,6 @@
           <object class="GtkHeaderBar" id="titlebarRight">
             <property name="visible">True</property>
             <property name="hexpand">True</property>
-            <property name="show-close-button">True</property>
             <!-- Use a custom title widget to enable markup for subtitles
                  (for URLs in channel topics); other than that, we want
                  the default GtkHeaderBar behavior, e.g. the subtitle may
@@ -191,7 +180,7 @@
                 </child>
               </object>
             </child>
-            <child>
+            <child type="end">
               <object class="GtkToggleButton" id="showUserListButton">
                 <property name="visible">True</property>
                 <property name="focus-on-click">False</property>
@@ -202,9 +191,6 @@
                   <class name="text-button"/>
                 </style>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
           </object>
         </child>
@@ -218,7 +204,7 @@
           <object class="GtkInfoBar" id="offlineInfoBar">
             <property name="visible">True</property>
             <property name="revealed">False</property>
-            <child internal-child="content_area">
+            <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <child>
@@ -238,10 +224,10 @@
                 </child>
               </object>
             </child>
+            <layout>
+              <property name="column-span">2</property>
+            </layout>
           </object>
-          <packing>
-            <property name="width">2</property>
-          </packing>
         </child>
         <child>
           <object class="GtkRevealer" id="roomListRevealer">
@@ -284,23 +270,24 @@
             <child>
               <object class="Gjs_RoomStack" id="roomStack">
                 <property name="visible">True</property>
-                <property name="homogeneous">True</property>
+                <property name="hhomogeneous">True</property>
+                <property name="vhomogeneous">True</property>
                 <property name="transition-type">crossfade</property>
               </object>
             </child>
+            <layout>
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
           </object>
-          <packing>
-            <property name="left-attach">1</property>
-            <property name="top-attach">1</property>
-          </packing>
         </child>
       </object>
     </child>
   </template>
   <object class="GtkSizeGroup">
-      <widgets>
-        <widget name="titlebarLeft"/>
-        <widget name="roomSidebar"/>
-      </widgets>
+    <widgets>
+      <widget name="titlebarLeft"/>
+      <widget name="roomSidebar"/>
+    </widgets>
   </object>
 </interface>

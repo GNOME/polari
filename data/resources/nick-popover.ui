@@ -2,7 +2,7 @@
 <interface>
   <template class="Gjs_NickPopover" parent="GtkPopover">
     <property name="position">top</property>
-    <child>
+    <property name="child">
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="margin-start">6</property>
@@ -30,7 +30,6 @@
             <property name="label" translatable="yes">_Change</property>
             <property name="visible">True</property>
             <property name="receives-default">True</property>
-            <property name="can-default">True</property>
             <property name="halign">end</property>
             <property name="hexpand">True</property>
             <property name="use-underline">True</property>
@@ -40,6 +39,6 @@
           </object>
         </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

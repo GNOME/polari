@@ -47,12 +47,12 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="column-span">1</property>
+              <property name="row">0</property>
+              <property name="column">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="width">1</property>
-            <property name="top-attach">0</property>
-            <property name="left-attach">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkLabel">
@@ -65,11 +65,11 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="row">0</property>
+              <property name="column">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="top-attach">0</property>
-            <property name="left-attach">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkLabel" id="lastLabel">
@@ -83,11 +83,11 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="row">0</property>
+              <property name="column">1</property>
+            </layout>
           </object>
-          <packing>
-            <property name="top-attach">0</property>
-            <property name="left-attach">1</property>
-          </packing>
         </child>
         <child>
           <object class="GtkImage">
@@ -97,12 +97,12 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="column-span">1</property>
+              <property name="row">1</property>
+              <property name="column">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="width">1</property>
-            <property name="top-attach">1</property>
-            <property name="left-attach">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkLabel" id="fullnameLabel">
@@ -116,12 +116,12 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="column-span">2</property>
+              <property name="row">1</property>
+              <property name="column">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="width">2</property>
-            <property name="top-attach">1</property>
-            <property name="left-attach">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkImage">
@@ -134,12 +134,12 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="column-span">1</property>
+              <property name="row">2</property>
+              <property name="column">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="width">1</property>
-            <property name="top-attach">2</property>
-            <property name="left-attach">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkLabel" id="notificationLabel">
@@ -153,12 +153,12 @@
             <style>
               <class name="dim-label" />
             </style>
+            <layout>
+              <property name="column-span">2</property>
+              <property name="row">2</property>
+              <property name="column">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="width">2</property>
-            <property name="top-attach">2</property>
-            <property name="left-attach">0</property>
-          </packing>
         </child>
       </object>
     </child>

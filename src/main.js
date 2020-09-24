@@ -20,6 +20,7 @@ globalThis.vprintf = (fmt, ...args) => imports.format.vprintf(fmt, args);
 pkg.require({
     'GdkPixbuf': '2.0',
     'GObject': '2.0',
+    'Gtk': '4.0',
     'Pango': '1.0',
     'PangoCairo': '1.0',
     'Secret': '1',
@@ -28,7 +29,6 @@ pkg.require({
 });
 pkg.requireSymbol('Gio', '2.0', 'Application.send_notification');
 pkg.requireSymbol('GLib', '2.0', 'log_variant');
-pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
 if (!pkg.checkSymbol('Soup', '3.0'))
     pkg.requireSymbol('Soup', '2.4');
