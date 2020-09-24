@@ -399,7 +399,7 @@ export default GObject.registerClass({
             console.warn('Failed to add application style');
             console.debug(e);
         }
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
+        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
