@@ -35,7 +35,6 @@ appstream_util = find_program('appstream-util', required: false)
 check_version = find_program('meson/check-version.py')
 
 gio = dependency('gio-2.0', version: '>= 2.43.4')
-gtk3 = dependency('gtk+-3.0', version: '>= 3.21.6')
 telepathy_glib = dependency('telepathy-glib')
 girepository = dependency('gobject-introspection-1.0')
 gjs = dependency('gjs-1.0', version: '>= 1.69.2')
