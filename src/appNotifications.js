@@ -241,6 +241,8 @@ var MessageInfoBar = GObject.registerClass({
         });
         box.add(this._subtitleLabel);
 
+        this.connect('response', () => (this.revealed = false));
+
         box.show_all();
     }
 
@@ -272,9 +274,5 @@ var MessageInfoBar = GObject.registerClass({
 
         if (this._subtitleLabel)
             this._subtitleLabel.label = subtitle;
-    }
-
-    vfunc_response() {
-        this.revealed = false;
     }
 });

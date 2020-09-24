@@ -741,7 +741,7 @@ class RoomList extends Gtk.ListBox {
         row.can_focus = true;
     }
 
-    vfunc_row_selected(row) {
+    on_row_selected(row) {
         this.get_toplevel().active_room = row ? row.room : null;
         if (row)
             row.selected();

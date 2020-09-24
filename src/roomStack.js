@@ -115,9 +115,7 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
         });
     }
 
-    vfunc_response(response) {
-        super.vfunc_response(response);
-
+    on_response(response) {
         if (response === Gtk.ResponseType.ACCEPT)
             return;
 
