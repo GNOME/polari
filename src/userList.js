@@ -413,13 +413,12 @@ export const UserPopover = GObject.registerClass({
             label = _('Offline');
         this._statusLabel.label = label;
 
-        const context = this._nickLabel.get_style_context();
         if (status === Tp.ConnectionPresenceType.AVAILABLE) {
-            context.remove_class('polari-inactive-nick');
-            context.add_class('polari-active-nick');
+            this._nickLabel.remove_css_class('polari-inactive-nick');
+            this._nickLabel.add_css_class('polari-active-nick');
         } else {
-            context.remove_class('polari-active-nick');
-            context.add_class('polari-inactive-nick');
+            this._nickLabel.remove_css_class('polari-active-nick');
+            this._nickLabel.add_css_class('polari-inactive-nick');
         }
     }
 
@@ -543,10 +542,10 @@ class UserListRow extends Gtk.ListBoxRow {
 
     _onExpandedChanged() {
         if (this._revealer.reveal_child) {
-            this.get_style_context().add_class('expanded');
+            this.add_css_class('expanded');
             this._arrow.icon_name = 'pan-down-symbolic';
         } else {
-            this.get_style_context().remove_class('expanded');
+            this.remove_css_class('expanded');
             this._arrow.icon_name = 'pan-end-symbolic';
             this._updateArrowVisibility();
         }
@@ -587,7 +586,7 @@ class UserList extends Gtk.ScrolledWindow {
             visible: true,
         }));
 
-        placeholder.get_style_context().add_class('placeholder');
+        placeholder.add_css_class('placeholder');
 
         this._list.set_placeholder(placeholder);
 

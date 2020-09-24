@@ -86,11 +86,10 @@ export default GObject.registerClass({
         this._prevButton.label = isLastPage ? _('_Back') : _('_Cancel');
         this._nextButton.label = isLastPage ? _('_Done') : _('_Next');
 
-        let context = this._nextButton.get_style_context();
         if (isLastPage)
-            context.add_class('suggested-action');
+            this._nextButton.add_css_class('suggested-action');
         else
-            context.remove_class('suggested-action');
+            this._nextButton.remove_css_class('suggested-action');
 
         this._nextButton.grab_default();
         this._updateNextSensitivity();

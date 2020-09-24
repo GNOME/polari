@@ -138,9 +138,9 @@ export default GObject.registerClass({
         this._overlay.add_overlay(app.commandOutputQueue);
 
         if (app.isTestInstance)
-            this.get_style_context().add_class('test-instance');
+            this.add_css_class('test-instance');
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
-            this.get_style_context().add_class('snapshot');
+            this.add_css_class('snapshot');
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));

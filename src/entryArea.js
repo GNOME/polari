@@ -242,7 +242,7 @@ export default GObject.registerClass({
             if (this._ircParser.process(this._chatEntry.text)) {
                 this._chatEntry.text = '';
             } else {
-                this._chatEntry.get_style_context().add_class('error');
+                this._chatEntry.add_css_class('error');
                 this._chatEntry.grab_focus(); // select text
             }
         });
@@ -335,7 +335,7 @@ export default GObject.registerClass({
     }
 
     _onEntryChanged() {
-        this._chatEntry.get_style_context().remove_class('error');
+        this._chatEntry.remove_css_class('error');
     }
 
     _setPasteContent(content) {
@@ -429,9 +429,9 @@ export default GObject.registerClass({
             this._chatEntry.grab_focus();
 
         if (this.sensitive)
-            this._nickLabel.get_style_context().add_class('polari-active-nick');
+            this._nickLabel.add_css_class('polari-active-nick');
         else
-            this._nickLabel.get_style_context().remove_class('polari-active-nick');
+            this._nickLabel.remove_css_class('polari-active-nick');
     }
 
     _onChannelChanged(room) {

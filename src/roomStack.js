@@ -230,7 +230,7 @@ class ChatPlaceholder extends Gtk.Overlay {
             visible: true,
         });
         title.label = `<span letter_spacing="4500">${_('Polari')}<${'/'}span>`;
-        title.get_style_context().add_class('polari-background-title');
+        title.add_css_class('polari-background-title');
 
         let description = new Gtk.Label({
             label: _('Join a room using the + button.'),
@@ -238,7 +238,7 @@ class ChatPlaceholder extends Gtk.Overlay {
             margin_top: 24, use_markup: true,
             visible: true,
         });
-        description.get_style_context().add_class('polari-background-description');
+        description.add_css_class('polari-background-description');
 
         let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
         sizeGroup.add_widget(inputPlaceholder);
@@ -253,7 +253,7 @@ class ChatPlaceholder extends Gtk.Overlay {
             valign: Gtk.Align.CENTER,
             visible: true,
         });
-        grid.get_style_context().add_class('polari-background');
+        grid.add_css_class('polari-background');
         grid.attach(image, 0, 0, 1, 1);
         grid.attach(title, 1, 0, 1, 1);
         grid.attach(description, 0, 1, 2, 1);

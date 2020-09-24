@@ -168,7 +168,7 @@ class NotificationQueue extends Gtk.Frame {
             margin_start: 24, margin_end: 24,
             visible: false,
         });
-        this.get_style_context().add_class('app-notification');
+        this.add_css_class('app-notification');
 
         this._grid = new Gtk.Grid({
             orientation: Gtk.Orientation.VERTICAL,
@@ -204,7 +204,7 @@ class CommandOutputQueue extends NotificationQueue {
         super._init();
 
         this.valign = Gtk.Align.END;
-        this.get_style_context().add_class('irc-feedback');
+        this.add_css_class('irc-feedback');
     }
 });
 

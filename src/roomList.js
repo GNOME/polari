@@ -12,11 +12,10 @@ import UserStatusMonitor from './userTracker.js';
 const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
 function _onPopoverVisibleChanged(popover) {
-    let context = popover.relative_to.get_style_context();
     if (popover.visible)
-        context.add_class('has-open-popup');
+        popover.relative_to.add_css_class('has-open-popup');
     else
-        context.remove_class('has-open-popup');
+        popover.relative_to.remove_css_class('has-open-popup');
 }
 
 const RoomRow = GObject.registerClass({
@@ -178,11 +177,10 @@ const RoomRow = GObject.registerClass({
         this._counter.label = nHighlights.toString();
         this._counter.opacity = nHighlights > 0 ? 1. : 0.;
 
-        let context = this.get_style_context();
         if (nPending === 0)
-            context.add_class('inactive');
+            this.add_css_class('inactive');
         else
-            context.remove_class('inactive');
+            this.remove_css_class('inactive');
     }
 
     _onChannelChanged() {
@@ -467,8 +465,7 @@ const RoomListHeader = GObject.registerClass({
         this._popoverStatus.use_markup = !isError;
 
         if (!isError) {
-            let styleContext = this._popoverStatus.get_style_context();
-            styleContext.add_class('dim-label');
+            this._popoverStatus.add_css_class('dim-label');
 
             let params = this._account.dup_parameters_vardict().deep_unpack();
             let server = params['server'].deep_unpack();
@@ -480,8 +477,7 @@ const RoomListHeader = GObject.registerClass({
             this._popoverTitle.label = accountName === server ? accountName : fullTitle;
             this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
         } else {
-            let styleContext = this._popoverStatus.get_style_context();
-            styleContext.remove_class('dim-label');
+            this._popoverStatus.remove_css_class('dim-label');
 
             this._popoverTitle.label = `<b>${_('Connection Problem')}<${'/'}b>`;
             this._popoverStatus.label = this._getErrorLabel();

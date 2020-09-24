@@ -121,7 +121,7 @@ export const ConnectionsList = GObject.registerClass({
             visible: true,
         }));
 
-        placeholder.get_style_context().add_class('dim-label');
+        placeholder.add_css_class('dim-label');
 
         this._list.set_placeholder(placeholder);
 
@@ -330,14 +330,14 @@ export const ConnectionDetails = GObject.registerClass({
 
     setErrorHint(hint) {
         if (hint === ErrorHint.SERVER)
-            this._serverEntry.get_style_context().add_class('error');
+            this._serverEntry.add_css_class('error');
         else
-            this._serverEntry.get_style_context().remove_class('error');
+            this._serverEntry.remove_css_class('error');
 
         if (hint === ErrorHint.NICK)
-            this._nickEntry.get_style_context().add_class('error');
+            this._nickEntry.add_css_class('error');
         else
-            this._nickEntry.get_style_context().remove_class('error');
+            this._nickEntry.remove_css_class('error');
     }
 
     _getParams() {

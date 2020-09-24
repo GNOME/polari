@@ -115,15 +115,14 @@ export default GObject.registerClass({
             spacing: 6,
         });
 
-        let styleContext = this.get_style_context();
-        styleContext.add_class('url-preview');
-        styleContext.add_class('background');
+        this.add_css_class('url-preview');
+        this.add_css_class('background');
 
         this._imageLoaded = false;
         this._image = new Gtk.Image({
             visible: true,
         });
-        this._image.get_style_context().add_class('dim-label');
+        this._image.add_css_class('dim-label');
         this.append(this._image);
 
         this._label = new Gtk.Label({
@@ -131,7 +130,7 @@ export default GObject.registerClass({
             ellipsize: Pango.EllipsizeMode.END,
             visible: true,
         });
-        this._label.get_style_context().add_class('dim-label');
+        this._label.add_css_class('dim-label');
         this.append(this._label);
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();
@@ -165,7 +164,7 @@ export default GObject.registerClass({
 
             title = pixbuf.get_option('tEXt::Title');
             this._image.set_from_pixbuf(pixbuf);
-            this._image.get_style_context().remove_class('dim-label');
+            this._image.remove_css_class('dim-label');
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE)) {
                 this._imageLoaded = false;

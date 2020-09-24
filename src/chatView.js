@@ -321,7 +321,7 @@ export default GObject.registerClass({
     _init(room) {
         super._init({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
 
-        this.get_style_context().add_class('polari-chat-view');
+        this.add_css_class('polari-chat-view');
 
         this._actionGroup = new Gio.SimpleActionGroup();
         this.insert_action_group('chatlog', this._actionGroup);
@@ -909,7 +909,7 @@ export default GObject.registerClass({
             icon_name: 'content-loading-symbolic',
             visible: true,
         });
-        indicator.get_style_context().add_class('dim-label');
+        indicator.add_css_class('dim-label');
 
         let { buffer } = this._view;
         let iter = buffer.get_start_iter();
