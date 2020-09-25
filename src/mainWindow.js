@@ -391,7 +391,8 @@ export default GObject.registerClass({
         let accessibleName = vprintf(ngettext(
             '%d user',
             '%d users', numMembers), numMembers);
-        this._showUserListButton.get_accessible().set_name(accessibleName);
+        this._showUserListButton.update_property(
+            [Gtk.AccessibleProperty.LABEL], [accessibleName]);
         this._showUserListButton.label = `${numMembers}`;
     }
 

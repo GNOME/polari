@@ -415,7 +415,8 @@ const RoomListHeader = GObject.registerClass({
             parent.invalidate_sort();
 
         let accessibleName = vprintf(_('Network %s has an error'), this._account.display_name);
-        this.get_accessible().set_name(accessibleName);
+        this.update_property(
+            [Gtk.AccessibleProperty.LABEL], [accessibleName]);
     }
 
     _getConnectionStatus() {
