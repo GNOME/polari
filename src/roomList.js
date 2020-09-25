@@ -615,7 +615,7 @@ class RoomList extends Gtk.ListBox {
     vfunc_realize() {
         super.vfunc_realize();
 
-        let toplevel = this.get_toplevel();
+        const toplevel = this.get_root();
         toplevel.connect('notify::active-room',
             this._activeRoomChanged.bind(this));
         this._activeRoomChanged();
@@ -669,7 +669,7 @@ class RoomList extends Gtk.ListBox {
         if (this._roomManager.roomCount === 0)
             return;
 
-        let toplevel = this.get_toplevel();
+        const toplevel = this.get_root();
         let current = this._roomRows.get(toplevel.active_room.id);
 
         if (current !== row)
@@ -760,7 +760,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _activeRoomChanged() {
-        let room = this.get_toplevel().active_room;
+        const room = this.get_root().active_room;
         if (!room)
             return;
         let row = this._roomRows.get(room.id);
@@ -773,7 +773,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     on_row_selected(row) {
-        this.get_toplevel().active_room = row ? row.room : null;
+        this.get_root().active_room = row ? row.room : null;
         if (row)
             row.selected();
     }

@@ -32,7 +32,7 @@ class UserListPopover extends Gtk.Popover {
     vfunc_realize() {
         super.vfunc_realize();
 
-        let toplevel = this.get_toplevel();
+        const toplevel = this.get_root();
         toplevel.connect('notify::active-room',
             this._activeRoomChanged.bind(this));
         toplevel.connect('notify::view-height',
@@ -74,7 +74,7 @@ class UserListPopover extends Gtk.Popover {
         if (!this.get_mapped())
             return;
 
-        let viewHeight = this.get_toplevel().view_height;
+        const viewHeight = this.get_root().view_height;
         let [popoverHeight] = this.get_preferred_height();
         let [userListHeight] = this._userList.get_preferred_height();
         let chromeHeight = popoverHeight - userListHeight;
@@ -85,7 +85,7 @@ class UserListPopover extends Gtk.Popover {
         if (this._userList)
             return;
 
-        let room = this.get_toplevel().active_room;
+        const room = this.get_root().active_room;
         if (!room || room.type !== Tp.HandleType.ROOM)
             return;
 

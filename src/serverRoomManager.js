@@ -160,8 +160,8 @@ export const ServerRoomList = GObject.registerClass({
         this._filterEntry.connect('stop-search', () => {
             if (this._filterEntry.get_text().length > 0)
                 this._filterEntry.set_text('');
-            else if (this.get_toplevel() instanceof Gtk.Dialog)
-                this.get_toplevel().response(Gtk.ResponseType.CANCEL);
+            else if (this.get_root() instanceof Gtk.Dialog)
+                this.get_root().response(Gtk.ResponseType.CANCEL);
         });
         this._filterEntry.connect('activate', () => {
             if (this._filterEntry.text.trim().length === 0)

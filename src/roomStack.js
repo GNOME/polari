@@ -50,7 +50,7 @@ export default GObject.registerClass({
     vfunc_realize() {
         super.vfunc_realize();
 
-        let toplevel = this.get_toplevel();
+        const toplevel = this.get_root();
 
         toplevel.connect('notify::active-room',
             this._activeRoomChanged.bind(this));
@@ -105,12 +105,12 @@ export default GObject.registerClass({
     }
 
     _activeRoomChanged() {
-        let room = this.get_toplevel().active_room;
+        const room = this.get_root().active_room;
         this.set_visible_child_name(room ? room.id : 'placeholder');
     }
 
     _updateSensitivity() {
-        let room = this.get_toplevel().active_room;
+        const room = this.get_root().active_room;
         if (!room)
             return;
         let sensitive = room && room.channel;

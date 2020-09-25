@@ -175,7 +175,7 @@ export default GObject.registerClass({
         this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));
         this.connect('realize', () => {
             this._toplevelKeyController = new Gtk.EventControllerKey({
-                widget: this.get_toplevel(),
+                widget: this.get_root(),
                 propagation_phase: Gtk.PropagationPhase.CAPTURE,
             });
             this._toplevelKeyController.connect('key-pressed',
@@ -303,7 +303,7 @@ export default GObject.registerClass({
     }
 
     _canFocusChatEntry() {
-        let toplevelFocus = this._chatEntry.get_toplevel().get_focus();
+        const toplevelFocus = this._chatEntry.get_root().get_focus();
         return this.sensitive &&
                this._chatEntry.get_mapped() &&
                !this._chatEntry['has-focus'] &&
