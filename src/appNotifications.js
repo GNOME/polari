@@ -47,7 +47,7 @@ class MessageNotification extends AppNotification {
             visible: true,
         }));
 
-        let closeButton = new Gtk.Button({ relief: Gtk.ReliefStyle.NONE, visible: true });
+        let closeButton = new Gtk.Button({ has_frame: false, visible: true });
         closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic', visible: true });
         closeButton.connect('clicked', this.close.bind(this));
         this._box.pack_end(closeButton, false, false, 0);

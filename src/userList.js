@@ -557,7 +557,7 @@ class UserList extends Gtk.ScrolledWindow {
     _init(room) {
         super._init({
             hexpand: true,
-            shadow_type: Gtk.ShadowType.ETCHED_IN,
+            has_frame: true,
             hscrollbar_policy: Gtk.PolicyType.NEVER,
             propagate_natural_height: true,
             propagate_natural_width: true,
