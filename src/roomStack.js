@@ -35,12 +35,6 @@ export default GObject.registerClass({
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
 
         this._entryAreaHeight = 0;
-        this._sizeGroup.get_widgets()[0].connect('size-allocate', (w, rect) => {
-            if (this._entryAreaHeight !== rect.height - 1) {
-                this._entryAreaHeight = rect.height - 1;
-                this.notify('entry-area-height');
-            }
-        });
 
         this.connect('destroy', () => {
             this._roomManager.disconnect(this._roomAddedId);
@@ -59,6 +53,17 @@ export default GObject.registerClass({
             this._updateSensitivity.bind(this));
         this._activeRoomChanged();
         this._updateSensitivity();
+    }
+
+    vfunc_size_allocate(allocation) {
+        super.vfunc_size_allocate(allocation);
+
+        const [firstEntry] = this._sizeGroup.get_widgets();
+        const entryHeight = firstEntry.get_allocated_height() - 1;
+        if (this._entryAreaHeight !== entryHeight) {
+            this._entryAreaHeight = entryHeight;
+            this.notify('entry-area-height');
+        }
     }
 
     // eslint-disable-next-line camelcase
