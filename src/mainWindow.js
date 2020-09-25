@@ -158,15 +158,6 @@ export default GObject.registerClass({
             this._commandOutputQueue, 'margin-bottom',
             GObject.BindingFlags.SYNC_CREATE);
 
-        // Make sure user-list button is at least as wide as icon buttons
-        this._joinButton.connect('size-allocate', (w, rect) => {
-            let { width } = rect;
-            GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
-                this._showUserListButton.width_request = width;
-                return GLib.SOURCE_REMOVE;
-            });
-        });
-
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsChangedId = this._accountsMonitor.connect(
             'accounts-changed', this._onAccountsChanged.bind(this));
