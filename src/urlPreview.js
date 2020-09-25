@@ -119,16 +119,13 @@ export default GObject.registerClass({
         this.add_css_class('background');
 
         this._imageLoaded = false;
-        this._image = new Gtk.Image({
-            visible: true,
-        });
+        this._image = new Gtk.Image();
         this._image.add_css_class('dim-label');
         this.append(this._image);
 
         this._label = new Gtk.Label({
             halign: Gtk.Align.START,
             ellipsize: Pango.EllipsizeMode.END,
-            visible: true,
         });
         this._label.add_css_class('dim-label');
         this.append(this._label);

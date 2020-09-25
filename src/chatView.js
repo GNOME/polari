@@ -352,7 +352,6 @@ export default GObject.registerClass({
             right_margin: MARGIN,
             indent_width_chars: MAX_NICK_CHARS,
             indent_spacing: NICK_SPACING,
-            visible: true,
         });
         this._view.bind_property_full('indent',
             this._view, 'left-margin',
@@ -360,7 +359,6 @@ export default GObject.registerClass({
             (v, source) => [true, MARGIN - source],
             null);
         this.set_child(this._view);
-        this.show();
 
         this._createTags();
 
@@ -908,7 +906,6 @@ export default GObject.registerClass({
     _showLoadingIndicator() {
         let indicator = new Gtk.Image({
             icon_name: 'content-loading-symbolic',
-            visible: true,
         });
         indicator.add_css_class('dim-label');
 
@@ -1409,7 +1406,7 @@ export default GObject.registerClass({
                 url.name, tags.concat(this._lookupTag('url'), tag));
 
             if (GLib.uri_parse_scheme(url.url).startsWith('http'))
-                previews.push(new URLPreview({ uri: url.url, visible: true }));
+                previews.push(new URLPreview({ uri: url.url }));
 
             pos = url.pos + url.name.length;
         }

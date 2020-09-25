@@ -47,14 +47,13 @@ class UserListPopover extends Gtk.Popover {
             margin_end: 6,
             margin_top: 6,
             margin_bottom: 6,
-            visible: true,
         });
         this.set_child(this._box);
 
-        this._revealer = new Gtk.Revealer({ visible: true });
+        this._revealer = new Gtk.Revealer();
         this._box.append(this._revealer);
 
-        this._entry = new Gtk.SearchEntry({ visible: true });
+        this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.set_child(this._entry);
     }
@@ -344,8 +343,6 @@ export const UserPopover = GObject.registerClass({
         this.connect('destroy', () => {
             this.nickname = null;
         });
-
-        this.show();
     }
 
     set nickname(nickname) {
@@ -461,7 +458,7 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     _createWidget() {
-        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, visible: true });
+        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.set_child(vbox);
 
         let hbox = new Gtk.Box({
@@ -470,7 +467,6 @@ class UserListRow extends Gtk.ListBoxRow {
             margin_top: 4,
             margin_bottom: 4,
             spacing: 4,
-            visible: true,
         });
         this._arrow = new Gtk.Image({
             icon_name: 'pan-end-symbolic',
@@ -483,16 +479,13 @@ class UserListRow extends Gtk.ListBoxRow {
             use_markup: true,
             ellipsize: Pango.EllipsizeMode.END,
             max_width_chars: MAX_USERS_WIDTH_CHARS,
-            visible: true,
         });
         hbox.append(this._label);
         hbox.append(this._arrow);
         vbox.append(hbox);
 
-        this._revealer = new Gtk.Revealer({ reveal_child: false, visible: true });
+        this._revealer = new Gtk.Revealer({ reveal_child: false });
         vbox.append(this._revealer);
-
-        this.show();
     }
 
     _ensureDetails() {
@@ -574,16 +567,13 @@ class UserList extends Gtk.ScrolledWindow {
             margin_start: 32,
             margin_end: 32,
             spacing: 6,
-            visible: true,
         });
         placeholder.append(new Gtk.Image({
             icon_name: 'edit-find-symbolic',
             pixel_size: 64,
-            visible: true,
         }));
         placeholder.append(new Gtk.Label({
             label: _('No Results'),
-            visible: true,
         }));
 
         placeholder.add_css_class('placeholder');
@@ -629,9 +619,6 @@ class UserList extends Gtk.ScrolledWindow {
             this._roomSignals.push(room.connect(signal.name, signal.handler));
         });
         this._onChannelChanged(room);
-
-        this._list.show();
-        this.show();
     }
 
     get numRows() {

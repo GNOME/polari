@@ -38,17 +38,14 @@
     <property name="icon-name">org.gnome.Polari</property>
     <child type="titlebar">
       <object class="GtkBox">
-        <property name="visible">True</property>
         <child>
           <object class="GtkHeaderBar" id="titlebarLeft">
-            <property name="visible">True</property>
             <property name="hexpand">False</property>
             <child type="title">
               <object class="GtkLabel"/>
             </child>
             <child type="start">
               <object class="GtkButton" id="joinButton">
-                <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="action_name">app.show-join-dialog</property>
@@ -58,7 +55,6 @@
                 </style>
                 <child>
                   <object class="GtkImage">
-                    <property name="visible">True</property>
                     <property name="icon-name">list-add-symbolic</property>
                     <property name="icon-size">1</property>
                   </object>
@@ -70,7 +66,6 @@
             </child>
             <child type="end">
               <object class="GtkMenuButton">
-                <property name="visible">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="menu-model">hamburgerMenu</property>
@@ -92,13 +87,11 @@
         </child>
         <child>
           <object class="GtkSeparator">
-            <property name="visible">True</property>
             <property name="orientation">vertical</property>
           </object>
         </child>
         <child>
           <object class="GtkHeaderBar" id="titlebarRight">
-            <property name="visible">True</property>
             <property name="hexpand">True</property>
             <!-- Use a custom title widget to enable markup for subtitles
                  (for URLs in channel topics); other than that, we want
@@ -108,17 +101,14 @@
                  its first child, but still consider the second one's size -->
             <child type="title">
               <object class="GtkStack">
-                <property name="visible">True</property>
                 <property name="margin-start">24</property>
                 <property name="margin-end">24</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <property name="valign">center</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="single-line-mode">True</property>
                         <property name="ellipsize">end</property>
                         <property name="label" bind-source="Gjs_MainWindow"
@@ -152,11 +142,9 @@
                 </child>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="single-line-mode">True</property>
                         <property name="ellipsize">end</property>
                         <style>
@@ -166,7 +154,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="single-line-mode">True</property>
                         <property name="ellipsize">end</property>
                         <property name="use-markup">True</property>
@@ -182,7 +169,6 @@
             </child>
             <child type="end">
               <object class="GtkToggleButton" id="showUserListButton">
-                <property name="visible">True</property>
                 <property name="focus-on-click">False</property>
                 <property name="action-name">app.user-list</property>
                 <property name="tooltip-text" translatable="yes">Show connected users</property>
@@ -198,18 +184,14 @@
     </child>
     <child>
       <object class="GtkGrid">
-        <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkInfoBar" id="offlineInfoBar">
-            <property name="visible">True</property>
             <property name="revealed">False</property>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
                     <property name="label" translatable="yes">Offline</property>
                     <attributes>
                       <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
@@ -218,7 +200,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
                     <property name="label" translatable="yes">Go online to chat and receive messages.</property>
                   </object>
                 </child>
@@ -231,12 +212,10 @@
         </child>
         <child>
           <object class="GtkRevealer" id="roomListRevealer">
-            <property name="visible">True</property>
             <property name="hexpand">False</property>
             <property name="transition-type">slide-right</property>
             <child>
               <object class="Gjs_FixedSizeFrame" id="roomSidebar">
-                <property name="visible">True</property>
                 <property name="hexpand">False</property>
                 <property name="width">200</property>
                 <style>
@@ -244,13 +223,11 @@
                 </style>
                 <child>
                   <object class="GtkScrolledWindow">
-                    <property name="visible">True</property>
                     <property name="hscrollbar-policy">never</property>
                     <property name="vexpand">True</property>
                     <property name="hexpand">True</property>
                     <child>
                       <object class="Gjs_RoomList">
-                        <property name="visible">True</property>
                         <property name="selection-mode">browse</property>
                         <style>
                           <class name="sidebar"/>
@@ -265,11 +242,9 @@
         </child>
         <child>
           <object class="GtkOverlay" id="overlay">
-            <property name="visible">True</property>
             <property name="vexpand">True</property>
             <child>
               <object class="Gjs_RoomStack" id="roomStack">
-                <property name="visible">True</property>
                 <property name="hhomogeneous">True</property>
                 <property name="vhomogeneous">True</property>
                 <property name="transition-type">crossfade</property>

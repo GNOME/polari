@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="Gjs_EntryArea" parent="GtkStack">
-    <property name="visible">True</property>
     <property name="valign">end</property>
     <property name="transition-type">crossfade</property>
     <style>
@@ -13,7 +12,6 @@
         <property name="name">default</property>
         <property name="child">
           <object class="GtkBox">
-            <property name="visible">True</property>
             <property name="spacing">6</property>
             <property name="margin-start">6</property>
             <property name="margin-end">14</property>
@@ -21,7 +19,6 @@
             <property name="margin-bottom">6</property>
             <child>
               <object class="GtkToggleButton" id="nickButton">
-                <property name="visible">True</property>
                 <property name="receives-default">True</property>
                 <property name="focus-on-click">False</property>
                 <style>
@@ -30,7 +27,6 @@
                 </style>
                 <child>
                   <object class="GtkLabel" id="nickLabel">
-                    <property name="visible">True</property>
                     <property name="xalign">0</property>
                     <attributes>
                       <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
@@ -44,7 +40,6 @@
             </child>
             <child>
               <object class="Gjs_ChatEntry" id="chatEntry">
-                <property name="visible">True</property>
                 <property name="hexpand">True</property>
                 <property name="show-emoji-icon">True</property>
               </object>
@@ -58,16 +53,13 @@
         <property name="name">paste-confirmation</property>
         <property name="child">
           <object class="GtkBox" id="pasteBox">
-            <property name="visible">True</property>
             <property name="spacing">6</property>
             <style>
               <class name="background"/>
               <class name="polari-paste-confirmation"/>
             </style>
             <child>
-              <object class="GtkSpinner" id="uploadSpinner">
-                <property name="visible">True</property>
-              </object>
+              <object class="GtkSpinner" id="uploadSpinner"/>
             </child>
             <child>
               <object class="GtkLabel" id="uploadLabel">
@@ -91,19 +83,16 @@
             </child>
             <child>
               <object class="GtkRevealer">
-                <property name="visible">True</property>
                 <property name="transition-type">slide-left</property>
                 <property name="reveal-child" bind-source="confirmLabel"
                           bind-property="visible" bind-flags="sync-create"/>
                 <property name="child">
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="spacing">6</property>
                     <property name="margin-end">14</property>
                     <child>
                       <object class="GtkButton" id="cancelButton">
                         <property name="label" translatable="yes">_Cancel</property>
-                        <property name="visible">True</property>
                         <property name="receives-default">True</property>
                         <property name="use-underline">True</property>
                         <property name="sensitive" bind-source="confirmLabel"
@@ -113,7 +102,6 @@
                     <child>
                       <object class="GtkButton" id="pasteButton">
                         <property name="label" translatable="yes">_Paste</property>
-                        <property name="visible">True</property>
                         <property name="receives-default">True</property>
                         <property name="use-underline">True</property>
                         <property name="sensitive" bind-source="confirmLabel"

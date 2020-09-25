@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="Gjs_ConnectionDetails" parent="GtkGrid">
-    <property name="visible">True</property>
     <property name="row-spacing">6</property>
     <property name="column-spacing">12</property>
     <child>
@@ -69,7 +68,6 @@
     </child>
     <child>
       <object class="GtkLabel" id="nickname_label">
-        <property name="visible">True</property>
         <property name="halign">end</property>
         <property name="label" translatable="yes">_Nickname</property>
         <property name="use-underline">True</property>
@@ -82,7 +80,6 @@
     </child>
     <child>
       <object class="GtkEntry" id="nickEntry">
-        <property name="visible">True</property>
         <property name="hexpand">True</property>
         <property name="activates-default">True</property>
         <layout>
@@ -93,7 +90,6 @@
     </child>
     <child>
       <object class="GtkLabel" id="realname_label">
-        <property name="visible">True</property>
         <property name="halign">end</property>
         <property name="label" translatable="yes">_Real Name</property>
         <property name="use-underline">True</property>
@@ -106,7 +102,6 @@
     </child>
     <child>
       <object class="GtkEntry" id="realnameEntry">
-        <property name="visible">True</property>
         <property name="hexpand">True</property>
         <property name="activates-default">True</property>
         <property name="width-chars">30</property>

@@ -29,13 +29,11 @@
     </style>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
         <style>
           <class name="polari-listbox-filterbar"/>
         </style>
         <child>
           <object class="GtkSearchEntry" id="filterEntry">
-            <property name="visible">True</property>
             <property name="hexpand">True</property>
             <property name="margin-start">60</property>
             <property name="margin-end">22</property>
@@ -47,7 +45,6 @@
         </child>
         <child>
           <object class="GtkSpinner" id="spinner">
-            <property name="visible">True</property>
             <property name="margin-end">22</property>
           </object>
         </child>
@@ -55,12 +52,10 @@
     </child>
     <child>
       <object class="GtkScrolledWindow">
-        <property name="visible">True</property>
         <property name="vexpand">True</property>
         <property name="hscrollbar-policy">never</property>
         <child>
           <object class="GtkTreeView" id="list">
-            <property name="visible">True</property>
             <property name="model">modelFilter</property>
             <property name="activate-on-single-click">True</property>
             <property name="fixed-height-mode">True</property>

@@ -48,11 +48,10 @@ class ConnectionRow extends Gtk.ListBoxRow {
             margin_end: 12,
             margin_top: 12,
             margin_bottom: 12,
-            visible: true,
         });
         this.set_child(box);
 
-        box.append(new Gtk.Label({ label: name, halign: Gtk.Align.START, visible: true }));
+        box.append(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
 
         let insensitiveDesc = new Gtk.Label({
             label: _('Already added'),
@@ -61,8 +60,6 @@ class ConnectionRow extends Gtk.ListBoxRow {
             visible: false,
         });
         box.append(insensitiveDesc);
-
-        this.show();
 
         this.bind_property('sensitive',
             insensitiveDesc, 'visible',
@@ -94,7 +91,7 @@ export const ConnectionsList = GObject.registerClass({
 
         this.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
-        this._list = new Gtk.ListBox({ visible: true });
+        this._list = new Gtk.ListBox();
         this._list.connect('row-activated', this._onRowActivated.bind(this));
         this.set_child(this._list);
 
@@ -109,16 +106,13 @@ export const ConnectionsList = GObject.registerClass({
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             orientation: Gtk.Orientation.VERTICAL,
-            visible: true,
         });
         placeholder.append(new Gtk.Image({
             icon_name: 'edit-find-symbolic',
             pixel_size: 115,
-            visible: true,
         }));
         placeholder.append(new Gtk.Label({
             label: _('No results.'),
-            visible: true,
         }));
 
         placeholder.add_css_class('dim-label');

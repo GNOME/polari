@@ -7,7 +7,6 @@
     <child type="action">
       <object class="GtkButton" id="cancelButton">
         <property name="label" translatable="yes">_Cancel</property>
-        <property name="visible">True</property>
         <property name="receives-default">True</property>
         <property name="use-underline">True</property>
       </object>
@@ -15,7 +14,6 @@
     <child type="action">
       <object class="GtkButton" id="applyButton">
         <property name="label" translatable="yes">_Apply</property>
-        <property name="visible">True</property>
         <property name="receives-default">True</property>
         <property name="use-underline">True</property>
         <property name="sensitive" bind-source="details"
@@ -28,7 +26,6 @@
         <property name="spacing">24</property>
         <child>
           <object class="Gjs_ConnectionDetails" id="details">
-            <property name="visible">True</property>
             <property name="margin-start">24</property>
             <property name="margin-end">24</property>
             <property name="margin-top">24</property>
@@ -37,13 +34,11 @@
         </child>
         <child>
           <object class="GtkBox" id="errorBox">
-            <property name="visible">True</property>
             <style>
               <class name="polari-error-information"/>
             </style>
             <child>
               <object class="GtkImage" id="image1">
-                <property name="visible">True</property>
                 <property name="icon-name">dialog-error-symbolic</property>
                 <property name="icon-size">large</property>
                 <property name="margin-start">24</property>
@@ -54,7 +49,6 @@
             </child>
             <child>
               <object class="GtkLabel" id="errorLabel">
-                <property name="visible">True</property>
                 <property name="vexpand">True</property>
                 <property name="wrap">True</property>
                 <property name="xalign">0</property>

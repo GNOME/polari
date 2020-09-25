@@ -46,16 +46,12 @@ export default class TabCompletion {
                 halign: Gtk.Align.START,
                 margin_start: 6,
                 margin_end: 6,
-                visible: true,
             }));
-            row.show();
             this._list.append(row);
         }
     }
 
     _showPopup() {
-        this._list.show();
-
         const delegate = this._entry.get_delegate();
         const [extents] = delegate.compute_cursor_extents(this._startPos);
         const [, bounds] = this._entry.compute_bounds(delegate);
@@ -93,9 +89,7 @@ export default class TabCompletion {
                     halign: Gtk.Align.START,
                     margin_start: 6,
                     margin_end: 6,
-                    visible: true,
                 }));
-                row.show();
                 widgetMap.set(nick, row);
             }
         }

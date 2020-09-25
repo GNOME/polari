@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="Gjs_RoomRow" parent="GtkListBoxRow">
-    <property name="visible">True</property>
     <property name="margin-bottom">4</property>
     <property name="focus-on-click">False</property>
     <child>
       <object class="GtkBox" id="box">
-        <property name="visible">True</property>
         <property name="margin-start">8</property>
         <property name="margin-end">8</property>
         <property name="margin-top">2</property>
@@ -21,7 +19,6 @@
         </child>
         <child>
           <object class="GtkLabel" id="roomLabel">
-            <property name="visible">True</property>
             <property name="halign">start</property>
             <property name="valign">baseline</property>
             <property name="hexpand">True</property>
@@ -30,14 +27,12 @@
         </child>
         <child>
           <object class="GtkStack" id="eventStack">
-            <property name="visible">True</property>
             <property name="transition-type">crossfade</property>
             <child>
               <object class="GtkStackPage">
                 <property name="name">connecting</property>
                 <property name="child">
                   <object class="GtkImage">
-                    <property name="visible">True</property>
                     <property name="valign">baseline</property>
                     <property name="icon-size">1</property>
                     <property name="icon-name">content-loading-symbolic</property>
@@ -53,11 +48,9 @@
                 <property name="name">messages</property>
                 <property name="child">
                   <object class="GtkAspectFrame">
-                    <property name="visible">True</property>
                     <property name="obey-child">False</property>
                     <property name="child">
                       <object class="GtkLabel" id="counter">
-                        <property name="visible">True</property>
                         <property name="width-chars">2</property>
                         <style>
                           <class name="pending-messages-count"/>

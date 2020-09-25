@@ -232,14 +232,12 @@ class ChatPlaceholder extends Gtk.Overlay {
             icon_name: 'org.gnome.Polari-symbolic',
             pixel_size: 96, halign: Gtk.Align.END,
             margin_end: 14,
-            visible: true,
         });
 
         let title = new Gtk.Label({
             use_markup: true,
             halign: Gtk.Align.START,
             margin_start: 14,
-            visible: true,
         });
         title.label = `<span letter_spacing="4500">${_('Polari')}<${'/'}span>`;
         title.add_css_class('polari-background-title');
@@ -248,7 +246,6 @@ class ChatPlaceholder extends Gtk.Overlay {
             label: _('Join a room using the + button.'),
             halign: Gtk.Align.CENTER, wrap: true,
             margin_top: 24, use_markup: true,
-            visible: true,
         });
         description.add_css_class('polari-background-description');
 
@@ -263,16 +260,13 @@ class ChatPlaceholder extends Gtk.Overlay {
             hexpand: true,
             vexpand: true,
             valign: Gtk.Align.CENTER,
-            visible: true,
         });
         grid.add_css_class('polari-background');
         grid.attach(image, 0, 0, 1, 1);
         grid.attach(title, 1, 0, 1, 1);
         grid.attach(description, 0, 1, 2, 1);
-        inputPlaceholder.show();
         this.set_child(grid);
         this.add_overlay(inputPlaceholder);
-        this.show();
     }
 });
 
@@ -281,7 +275,7 @@ class RoomView extends Gtk.Overlay {
     _init(room, sizeGroup) {
         super._init({ name: `RoomView ${room.display_name}` });
 
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, visible: true });
+        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.set_child(box);
 
         if (room.type === Tp.HandleType.CONTACT)
@@ -295,7 +289,6 @@ class RoomView extends Gtk.Overlay {
         this._entryArea = new EntryArea({
             room,
             sensitive: false,
-            visible: true,
         });
         box.append(this._entryArea);
 
@@ -313,8 +306,6 @@ class RoomView extends Gtk.Overlay {
         this._view.connect('file-dropped', (view, file) => {
             this._entryArea.pasteFile(file);
         });
-
-        this.show();
     }
 
     set inputSensitive(sensitive) {

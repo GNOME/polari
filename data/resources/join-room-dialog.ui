@@ -9,10 +9,8 @@
     <property name="default-widget">joinButton</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
-        <property name="visible">True</property>
         <child>
           <object class="GtkButton" id="backButton">
-            <property name="visible">True</property>
             <property name="focus-on-click">False</property>
             <child>
               <object class='GtkShortcutController'>
@@ -27,7 +25,6 @@
             </child>
             <child>
               <object class="GtkImage">
-                <property name="visible">True</property>
                 <property name="valign">center</property>
                 <property name="icon-name">go-previous-symbolic</property>
               </object>
@@ -39,7 +36,6 @@
     <child type="action">
       <object class="GtkButton" id="cancelButton">
         <property name="label" translatable="yes">_Cancel</property>
-        <property name="visible">True</property>
         <property name="receives-default">True</property>
         <property name="use-underline">True</property>
       </object>
@@ -47,7 +43,6 @@
     <child type="action">
       <object class="GtkButton" id="joinButton">
         <property name="label" translatable="yes">_Join</property>
-        <property name="visible">True</property>
         <property name="receives-default">True</property>
         <property name="use-underline">True</property>
       </object>
@@ -58,14 +53,12 @@
         <property name="spacing">2</property>
         <child>
           <object class="GtkStack" id="mainStack">
-            <property name="visible">True</property>
             <property name="transition-type">slide-left-right</property>
             <child>
               <object class="GtkStackPage">
                 <property name="name">main</property>
                 <property name="child">
                   <object class="GtkGrid">
-                    <property name="visible">True</property>
                     <property name="margin-start">30</property>
                     <property name="margin-end">30</property>
                     <property name="margin-top">30</property>
@@ -74,7 +67,6 @@
                     <property name="column-spacing">12</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="halign">end</property>
                         <property name="label" translatable="yes">C_onnection</property>
                         <property name="use-underline">True</property>
@@ -83,13 +75,11 @@
                     </child>
                     <child>
                       <object class="GtkComboBoxText" id="connectionCombo">
-                        <property name="visible">True</property>
                         <property name="hexpand">True</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkButton" id="connectionButton">
-                        <property name="visible">True</property>
                         <property name="receives-default">True</property>
                         <property name="focus-on-click">False</property>
                         <child>
@@ -105,17 +95,14 @@
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">True</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkImage">
-                                <property name="visible">True</property>
                                 <property name="icon-name">list-add-symbolic</property>
                               </object>
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
                                 <property name="label" translatable="yes">_Add Network</property>
                                 <property name="use-underline">True</property>
                                 <property name="mnemonic-widget">connectionButton</property>
@@ -127,7 +114,6 @@
                     </child>
                     <child>
                       <object class="Gjs_ServerRoomList" id="serverRoomList">
-                        <property name="visible">True</property>
                         <layout>
                           <property name="column-span">3</property>
                           <property name="column">0</property>
@@ -144,7 +130,6 @@
                 <property name="name">connection</property>
                 <property name="child">
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="margin-start">30</property>
                     <property name="margin-end">30</property>
                     <property name="margin-top">30</property>
@@ -153,7 +138,6 @@
                     <property name="spacing">18</property>
                     <child>
                       <object class="GtkStack" id="connectionStack">
-                        <property name="visible">True</property>
                         <property name="vexpand">True</property>
                         <property name="transition-type">crossfade</property>
                         <child>
@@ -161,7 +145,6 @@
                             <property name="name">predefined</property>
                             <property name="child">
                               <object class="GtkBox">
-                                <property name="visible">True</property>
                                 <property name="orientation">vertical</property>
                                 <style>
                                   <class name="linked"/>
@@ -169,13 +152,11 @@
                                 </style>
                                 <child>
                                   <object class="GtkBox">
-                                    <property name="visible">True</property>
                                     <style>
                                       <class name="polari-listbox-filterbar"/>
                                     </style>
                                     <child>
                                       <object class="GtkSearchEntry" id="filterEntry">
-                                        <property name="visible">True</property>
                                         <property name="hexpand">True</property>
                                         <property name="margin-start">60</property>
                                         <property name="margin-end">60</property>
@@ -187,7 +168,6 @@
                                 </child>
                                 <child>
                                   <object class="Gjs_ConnectionsList" id="connectionsList">
-                                    <property name="visible">True</property>
                                     <property name="vexpand">True</property>
                                   </object>
                                 </child>
@@ -200,18 +180,15 @@
                             <property name="name">custom</property>
                             <property name="child">
                               <object class="GtkBox">
-                                <property name="visible">True</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">24</property>
                                 <child>
                                   <object class="Gjs_ConnectionDetails" id="details">
-                                    <property name="visible">True</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="addButton">
                                     <property name="label" translatable="yes">_Add</property>
-                                    <property name="visible">True</property>
                                     <property name="halign">end</property>
                                     <property name="receives-default">True</property>
                                     <property name="use-underline">True</property>
@@ -229,7 +206,6 @@
                     <child>
                       <object class="GtkToggleButton" id="customToggle">
                         <property name="label" translatable="yes">_Custom Network</property>
-                        <property name="visible">True</property>
                         <property name="receives-default">True</property>
                         <property name="use-underline">True</property>
                         <property name="focus-on-click">False</property>
