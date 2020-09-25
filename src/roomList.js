@@ -442,7 +442,7 @@ const RoomListHeader = GObject.registerClass({
         else if (status === Tp.ConnectionStatus.DISCONNECTED)
             child = 'disconnected';
 
-        if (isError && this._spinner.active) {
+        if (isError && this._spinner.spinning) {
             let spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
             if (spinnerTime < MIN_SPINNER_TIME) {
                 GLib.timeout_add(GLib.PRIORITY_DEFAULT, (MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
@@ -454,10 +454,10 @@ const RoomListHeader = GObject.registerClass({
         }
 
         this._iconStack.visible_child_name = child;
-        this._spinner.active = child === 'connecting';
+        this._spinner.spinning = child === 'connecting';
         this._popoverTitle.visible = !isAuth;
 
-        if (this._spinner.active)
+        if (this._spinner.spinning)
             this._spinnerActivationTime = GLib.get_monotonic_time();
 
         this._popoverTitle.use_markup = isError;

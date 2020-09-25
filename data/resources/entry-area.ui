@@ -65,7 +65,6 @@
         <child>
           <object class="GtkSpinner" id="uploadSpinner">
             <property name="visible">True</property>
-            <property name="active">False</property>
           </object>
         </child>
         <child>
