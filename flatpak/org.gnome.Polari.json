@@ -16,6 +16,7 @@
         "--socket=fallback-x11",
         "--socket=wayland",
         "--share=network",
+        "--device=dri",
         "--own-name=org.freedesktop.Telepathy.Client.Polari",
         "--own-name=org.freedesktop.Telepathy.Client.Polari.*",
         "--talk-name=org.freedesktop.Telepathy.AccountManager",
