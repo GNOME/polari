@@ -49,16 +49,11 @@
                 <property name="halign">end</property>
                 <property name="valign">center</property>
                 <property name="action_name">app.show-join-dialog</property>
+                <property name="icon-name">list-add-symbolic</property>
                 <property name="tooltip-text" translatable="yes">Add rooms and networks</property>
                 <style>
                   <class name="image-button"/>
                 </style>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">list-add-symbolic</property>
-                    <property name="icon-size">1</property>
-                  </object>
-                </child>
                 <accessibility>
                   <property name="label" translatable="yes">Add rooms and networks</property>
                 </accessibility>

@@ -46,8 +46,10 @@ class MessageNotification extends AppNotification {
             ellipsize: Pango.EllipsizeMode.END,
         }));
 
-        let closeButton = new Gtk.Button({ has_frame: false });
-        closeButton.image = new Gtk.Image({ icon_name: 'window-close-symbolic' });
+        let closeButton = new Gtk.Button({
+            icon_name: 'window-close-symbolic',
+            has_frame: false,
+        });
         closeButton.connect('clicked', this.close.bind(this));
         this._box.pack_end(closeButton, false, false, 0);
 

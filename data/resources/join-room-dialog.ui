@@ -12,6 +12,7 @@
         <child>
           <object class="GtkButton" id="backButton">
             <property name="focus-on-click">False</property>
+            <property name="icon-name">go-previous-symbolic</property>
             <child>
               <object class='GtkShortcutController'>
                 <property name='scope'>managed</property>
@@ -21,12 +22,6 @@
                     <property name='action'>signal(clicked)</property>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkImage">
-                <property name="valign">center</property>
-                <property name="icon-name">go-previous-symbolic</property>
               </object>
             </child>
           </object>

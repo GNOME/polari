@@ -47,15 +47,10 @@
                 <property name="hexpand">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
+                <property name="icon-name">polari-user-notify-symbolic</property>
                 <property name="visible" bind-source="notifyButton"
                           bind-property="sensitive"
                           bind-flags="sync-create"/>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">polari-user-notify-symbolic</property>
-                    <property name="halign">center</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
