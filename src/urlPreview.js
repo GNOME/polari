@@ -113,7 +113,7 @@ var URLPreview = GObject.registerClass({
 
         let styleContext = this.get_style_context();
         styleContext.add_class('url-preview');
-        styleContext.add_class(Gtk.STYLE_CLASS_BACKGROUND);
+        styleContext.add_class('background');
 
         this._imageLoaded = false;
         this._image = new Gtk.Image({
@@ -127,7 +127,7 @@ var URLPreview = GObject.registerClass({
             ellipsize: Pango.EllipsizeMode.END,
             visible: true,
         });
-        this._label.get_style_context().add_class(Gtk.STYLE_CLASS_DIM_LABEL);
+        this._label.get_style_context().add_class('dim-label');
         this.add(this._label);
 
         this._networkMonitor = Gio.NetworkMonitor.get_default();

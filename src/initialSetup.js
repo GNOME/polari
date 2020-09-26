@@ -88,9 +88,9 @@ var InitialSetupWindow = GObject.registerClass({
 
         let context = this._nextButton.get_style_context();
         if (isLastPage)
-            context.add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+            context.add_class('suggested-action');
         else
-            context.remove_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+            context.remove_class('suggested-action');
 
         this._nextButton.grab_default();
         this._updateNextSensitivity();
