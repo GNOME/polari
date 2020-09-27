@@ -45,6 +45,9 @@
             <property name="visible">True</property>
             <property name="hexpand">False</property>
             <property name="show-close-button">True</property>
+            <child type="title">
+              <object class="GtkLabel"/>
+            </child>
             <child>
               <object class="GtkButton" id="joinButton">
                 <property name="visible">True</property>
