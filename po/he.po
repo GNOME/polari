@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2020-06-08 18:31+0000\n"
-"PO-Revision-Date: 2020-09-30 14:40+0300\n"
+"PO-Revision-Date: 2020-09-30 14:59+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -279,7 +279,7 @@ msgstr "חדר אחרון"
 #| msgid "First - Ninth Room"
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
-msgstr "ראשון - חדר תשיעי"
+msgstr "חדר ראשון - תשיעי"
 
 #: data/resources/initial-setup-window.ui:10
 #| msgid "Polari"
@@ -451,7 +451,9 @@ msgstr "%s הוסר."
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
-"ירון שהרבני <sh.yaron@gmail.com>"
+"ירון שהרבני <sh.yaron@gmail.com>\n"
+"\n"
+"<a href=\"https://l10n.gnome.org/teams/he/\">מיזם תרגום GNOME לעברית</a>"
 
 #: src/application.js:846
 msgid "Learn more about Polari"
@@ -615,10 +617,9 @@ msgid "Already added"
 msgstr "כבר נוסף"
 
 #: src/connections.js:104
-#, fuzzy
 #| msgid "No results"
 msgid "No results."
-msgstr "לא נמצאו תוצאות"
+msgstr "לא נמצאו תוצאות."
 
 #: src/connections.js:511
 #, javascript-format
@@ -663,7 +664,7 @@ msgstr "העלאת „%s” לשרת הדבק ציבורי?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:406
-#, fuzzy, javascript-format
+#, javascript-format
 #| msgid "Uploading “%s” to public paste service …"
 msgid "Uploading “%s” to public paste service…"
 msgstr "מעלה את „%s” לשרת הדבקה ציבורי…"
@@ -681,15 +682,15 @@ msgstr "הודבק מ־%s"
 
 #: src/initialSetup.js:85
 msgid "_Back"
-msgstr ""
+msgstr "_חזרה"
 
 #: src/initialSetup.js:86
 msgid "_Done"
-msgstr ""
+msgstr "_בוצע"
 
 #: src/initialSetup.js:86
 msgid "_Next"
-msgstr ""
+msgstr "_הבא"
 
 #. commands that would be nice to support:
 #.
@@ -701,116 +702,101 @@ msgstr ""
 #.
 #.
 #: src/ircParser.js:24
-#, fuzzy
 #| msgid ""
 #| "/CLOSE [<channel>] [<reason>] - closes <channel>, by default the current "
 #| "one"
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
-msgstr "‏/CLOSE [<ערוץ>] [<סיבה>] - סגירת <ערוץ>, כברירת מחדל את זה הנוכחי"
+msgstr "‏‎/CLOSE [<ערוץ>] [<סיבה>] — סוגר <ערוץ>, בברירת מחדל את הערוץ הנוכחי"
 
 #: src/ircParser.js:25
-#, fuzzy
 #| msgid ""
 #| "/HELP [<command>] - displays help for <command>, or a list of available "
 #| "commands"
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
-msgstr "‏‎/HELP [<פקודה>] - הצגת עזרה עבור <פקודה>, או רשימה של פקודות זמינות"
+msgstr "‏‎/HELP [<פקודה>] — הצגת עזרה עבור <פקודה>, או רשימה של פקודות זמינות"
 
 #: src/ircParser.js:26
-#, fuzzy
 #| msgid ""
 #| "/INVITE <nick> [<channel>] - invites <nick> to <channel>, or the current "
 #| "one"
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
-msgstr "‏‎/INVITE <כינוי> [<ערוץ>] - הזמנת <כינוי> לתוך <ערוץ>, או לזה הנוכחי"
+msgstr "‏‎/INVITE <כינוי> [<ערוץ>] — הזמנת <כינוי> לערוץ <ערוץ>, או לערוץ הנוכחי"
 
 #: src/ircParser.js:27
-#, fuzzy
 #| msgid "/JOIN <channel> - joins <channel>"
 msgid "/JOIN <channel> — joins <channel>"
-msgstr "‏‎/JOIN <ערוץ> - הצטרפות לתוך <ערוץ>"
+msgstr "‏‎/JOIN <ערוץ> — הצטרפות לערוץ <ערוץ>"
 
 #: src/ircParser.js:28
-#, fuzzy
 #| msgid "/KICK <nick> - kicks <nick> from current channel"
 msgid "/KICK <nick> — kicks <nick> from current channel"
-msgstr "‏‎/KICK <כינוי> - לבעוט את <כינוי> מהערוץ הנוכחי"
+msgstr "‏‎/KICK <כינוי> — להוציא את <כינוי> מהערוץ הנוכחי"
 
 #: src/ircParser.js:29
-#, fuzzy
 #| msgid "/ME <action> - sends <action> to the current channel"
 msgid "/ME <action> — sends <action> to the current channel"
-msgstr "‏‎/ME <פעולה> - שליחת <פעולה> לערוץ הנוכחי"
+msgstr "‏‎/ME <פעולה> — שליחת <פעולה> לערוץ הנוכחי"
 
 #: src/ircParser.js:30
-#, fuzzy
 #| msgid "/MSG <nick> [<message>] - sends a private message to <nick>"
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "‏‎/MSG ‏<כינוי> [<הודעה>] - שליחת הודעה פרטית אל <כינוי>"
 
 #: src/ircParser.js:31
-#, fuzzy
 #| msgid "/NAMES - lists users on the current channel"
 msgid "/NAMES — lists users on the current channel"
-msgstr "‏‎/NAMES - רשימה של המשתמשים בערוץ הנוכחי"
+msgstr "‏‎‎‏‎/NAMES - רשימה של המשתמשים בערוץ הנוכחי"
 
 #: src/ircParser.js:32
-#, fuzzy
 #| msgid "/NICK <nickname> - sets your nick to <nickname>"
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "‏‎/NICK <כינוי> - הגדרת הכינוי שלך לכינוי <כינוי>"
 
 #: src/ircParser.js:33
-#, fuzzy
 #| msgid ""
 #| "/PART [<channel>] [<reason>] - leaves <channel>, by default the current "
 #| "one"
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
-msgstr "‏‎/NICK [<ערוץ>] [<סיבה>] - עזיבת <ערוץ>, הערוץ הנוכחי כברירת מחדל"
+msgstr "‏‎/PART [<ערוץ>] [<סיבה>] - עזיבת <ערוץ>, הערוץ הנוכחי כברירת מחדל"
 
 #: src/ircParser.js:34
-#, fuzzy
 #| msgid "/QUERY <nick> - opens a private conversation with <nick>"
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "‏‎/QUERY ‏<כינוי> - פתיחת שיחה פרטית עם <כינוי>"
 
 #: src/ircParser.js:35
-#, fuzzy
 #| msgid "/QUIT [<reason>] - disconnects from the current server"
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "‏‎/QUIT ‏[<סיבה>] - התנתקות מהשרת הנוכחי"
 
 #: src/ircParser.js:36
-#, fuzzy
 #| msgid "/SAY <text> - sends <text> to the current room/contact"
 msgid "/SAY <text> — sends <text> to the current room/contact"
-msgstr "‏‎/SAY ‏<טקסט> - שליחת ‏<טקסט> לערוץ/קשר הנוכחי"
+msgstr "‏‎/SAY ‏<טקסט> - שליחת ‏<טקסט> לערוץ/איש הקשר הנוכחי"
 
 #: src/ircParser.js:37
-#, fuzzy
 #| msgid "/TOPIC <topic> - sets the topic to <topic>, or shows the current one"
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
-msgstr "‏‎/TOPIC ‏<נושא> - הגדרת הנושא לנושא ‏<נושא>, או הצגת זה הנוכחי"
+msgstr "‏‎/TOPIC ‏<נושא> - הגדרת הנושא לנושא ‏<נושא>, או הצגת הנושא הנוכחי"
 
 #: src/ircParser.js:38
 msgid "/WHOIS <nick> — requests information on <nick>"
-msgstr ""
+msgstr "‏‎/WHOIS <כינוי> - בקשת מידע על <כינוי>"
 
 #: src/ircParser.js:41
-#, fuzzy
 #| msgid "Unknown command - try /HELP for a list of available commands"
 msgid "Unknown command — try /HELP for a list of available commands"
-msgstr "פקודה לא ידועה - ניתן לנסות ‎/HELP לרשימת הפקודות הזמינות"
+msgstr "פקודה לא ידועה - ניתן לנסות ‎/HELP לקבלת רשימת הפקודות הזמינות"
 
 #: src/ircParser.js:55
 #, javascript-format
 msgid "Usage: %s"
-msgstr "שימוש: %s"
+msgstr "שימוש: ‏%s"
 
 #: src/ircParser.js:92
 msgid "Known commands:"
@@ -826,10 +812,10 @@ msgid "No topic set"
 msgstr "לא הוגדר נושא"
 
 #: src/ircParser.js:312
-#, fuzzy, javascript-format
+#, javascript-format
 #| msgid "Last Activity:"
 msgid "User: %s - Last activity: %s"
-msgstr "פעילות אחרונה:"
+msgstr "משתמש: %s פעילות אחרונה: %s"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
@@ -853,11 +839,11 @@ msgstr "סיום השיחה"
 
 #: src/roomList.js:269
 msgid "Unmute"
-msgstr ""
+msgstr "לא מושתק"
 
 #: src/roomList.js:273
 msgid "Mute"
-msgstr ""
+msgstr "מושתק"
 
 #: src/roomList.js:375
 #, javascript-format
@@ -880,10 +866,9 @@ msgid "Connected"
 msgstr "מחובר"
 
 #: src/roomList.js:472
-#, fuzzy
 #| msgid "Connecting..."
 msgid "Connecting…"
-msgstr "מתחבר…"
+msgstr "בהתחברות…"
 
 #: src/roomList.js:476
 msgid "Unknown"
@@ -924,36 +909,34 @@ msgid "_Save Password"
 msgstr "_שמירת ססמה"
 
 #: src/roomStack.js:141
-#, fuzzy
 #| msgid "Failed to open link"
 msgid "Failed to join the room"
-msgstr "אירע כשל בפתיחת הקישור"
+msgstr "אירע כשל בהצטרפות לחדר"
 
 #: src/roomStack.js:143
 msgid "_Retry"
-msgstr ""
+msgstr "_ניסיון חוזר"
 
 #: src/roomStack.js:167
-#, fuzzy
 #| msgid "The server is busy."
 msgid "The room is full."
-msgstr "השרת עסוק"
+msgstr "החדר מלא."
 
 #: src/roomStack.js:170
 msgid "You have been banned from the room."
-msgstr ""
+msgstr "הורחקת מהחדר."
 
 #: src/roomStack.js:173
 msgid "The room is invite-only."
-msgstr ""
+msgstr "החדר הוא להזמנה בלבד."
 
 #: src/roomStack.js:176
 msgid "You have been kicked from the room."
-msgstr ""
+msgstr "הועפת מחדר זה."
 
 #: src/roomStack.js:179
 msgid "It is not possible to join the room now, but you can retry later."
-msgstr ""
+msgstr "לא ניתן להצטרף כרגע לחדר, באפשרותך לנסות שוב מאוחר יותר."
 
 #: src/roomStack.js:211
 msgid "Join a room using the + button."
@@ -977,37 +960,34 @@ msgstr "שמירה"
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
 #: src/telepathyClient.js:707
-#, fuzzy, javascript-format
+#, javascript-format
 #| msgid "%s in #%s"
 msgid "%s in %s"
-msgstr "‏%s בערוץ #‎%s"
+msgstr "‏%s בערוץ ‎%s"
 
 #: src/userList.js:413
 msgid "Available in another room."
-msgstr ""
+msgstr "זמין בחדרים נוספים."
 
 #: src/userList.js:415
-#, fuzzy
 #| msgid "Offline"
 msgid "Online"
-msgstr "לא מקוון"
+msgstr "מקוון"
 
 #: src/userList.js:578
-#, fuzzy
 #| msgid "No results"
 msgid "No Results"
 msgstr "לא נמצאו תוצאות"
 
 #: src/userTracker.js:369
-#, fuzzy
 #| msgid "Users on %s:"
 msgid "User is online"
-msgstr "משתמשים על %s‎:"
+msgstr "משתמשים מחוברים"
 
 #: src/userTracker.js:370
 #, javascript-format
 msgid "User %s is now online."
-msgstr ""
+msgstr "משתמש %s מחובר עכשיו."
 
 #: src/utils.js:137
 #, javascript-format
@@ -1021,11 +1001,11 @@ msgstr "Polari כינוי שרת ססמה עבור %s"
 
 #: src/utils.js:372
 msgid "Now"
-msgstr ""
+msgstr "עכשיו"
 
 #: src/utils.js:375
 msgid "Unavailable"
-msgstr ""
+msgstr "לא זמין"
 
 #: src/utils.js:379
 #, javascript-format
