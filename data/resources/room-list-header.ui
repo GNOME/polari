@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="Gjs_RoomListHeader" parent="GtkMenuButton">
+  <template class="Gjs_RoomListHeader" parent="GtkEventBox">
     <property name="popover">connectionPopover</property>
     <property name="margin-bottom">4</property>
-    <property name="focus-on-click">False</property>
-    <property name="visible">True</property>
+    <property name="can-focus">True</property>
     <style>
-      <class name="room-list-header"/>
-      <class name="activatable" />
+      <class name="activatable"/>
     </style>
     <child>
       <object class="GtkGrid">
@@ -16,7 +14,8 @@
         <property name="margin-top">1</property>
         <property name="visible">True</property>
         <style>
-          <class name="dim-label" />
+          <class name="room-list-header"/>
+          <class name="dim-label"/>
         </style>
         <child>
           <object class="GtkLabel" id="label">

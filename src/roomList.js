@@ -298,16 +298,39 @@ const RoomListHeader = GObject.registerClass({
         'popoverProperties',
         'spinner',
     ],
-}, class RoomListHeader extends Gtk.MenuButton {
+    Properties: {
+        'popover': GObject.ParamSpec.object(
+            'popover', 'popover', 'popover',
+            GObject.ParamFlags.READWRITE,
+            Gtk.Popover.$gtype),
+    },
+}, class RoomListHeader extends Gtk.EventBox {
     _init(params) {
         this._account = params.account;
         delete params.account;
 
-        params.name = `RoomListHeader ${this._account.display_name}`;
-
         this._app = Gio.Application.get_default();
+        this._popover = null;
 
-        super._init(params);
+        super._init({
+            ...params,
+            name: `RoomListHeader ${this._account.display_name}`,
+        });
+
+        this._clickGesture = new Gtk.GestureMultiPress({
+            propagation_phase: Gtk.PropagationPhase.CAPTURE,
+            button: 0,
+            widget: this,
+        });
+
+        this._clickGesture.connect('released', () => {
+            const button = this._clickGesture.get_current_button();
+            if (button !== Gdk.BUTTON_PRIMARY && button !== Gdk.BUTTON_SECONDARY)
+                return;
+
+            this._clickGesture.set_state(Gtk.EventSequenceState.CLAIMED);
+            this._popover?.popup();
+        });
 
         this.popover.name = `ConnectionPopover ${this._account.display_name}`;
 
@@ -361,6 +384,26 @@ const RoomListHeader = GObject.registerClass({
         });
     }
 
+    get popover() {
+        return this._popover;
+    }
+
+    set popover(popover) {
+        if (this._popover === popover)
+            return;
+
+        if (this._popover)
+            this._popover.relative_to = null;
+        this._popover?.run_dispose();
+
+        this._popover = popover;
+
+        if (this._popover)
+            this._popover.relative_to = this;
+
+        this.notify('popover');
+    }
+
     _onDisplayNameChanged() {
         this._label.label = this._account.display_name;
 
@@ -377,19 +420,6 @@ const RoomListHeader = GObject.registerClass({
 
         let accessibleName = vprintf(_('Network %s has an error'), this._account.display_name);
         this.get_accessible().set_name(accessibleName);
-    }
-
-    /* hack: Handle primary and secondary button interchangeably */
-    vfunc_button_press_event(event) {
-        if (event.button === Gdk.BUTTON_SECONDARY)
-            event.button = Gdk.BUTTON_PRIMARY;
-        return super.vfunc_button_press_event(event);
-    }
-
-    vfunc_button_release_event(event) {
-        if (event.button === Gdk.BUTTON_SECONDARY)
-            event.button = Gdk.BUTTON_PRIMARY;
-        return super.vfunc_button_release_event(event);
     }
 
     _getConnectionStatus() {
