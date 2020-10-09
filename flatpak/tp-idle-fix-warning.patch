@@ -1,0 +1,34 @@
+From 8f04d4db50f29420022f11a48b5ecf132058c2f3 Mon Sep 17 00:00:00 2001
+From: Guillaume Desmottes <guillaume.desmottes@collabora.co.uk>
+Date: Fri, 14 Feb 2014 12:12:54 +0100
+Subject: [PATCH] idle-connection: make sure to always reset
+ force_disconnect_id
+
+Recent GLib raises a critical when trying to remove an invalid source.
+---
+ src/idle-connection.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/idle-connection.c b/src/idle-connection.c
+index 6ab5fea..8614d52 100644
+--- a/src/idle-connection.c
++++ b/src/idle-connection.c
+@@ -585,6 +585,7 @@ static gboolean _finish_shutdown_idle_func(gpointer data) {
+ 	IdleConnectionPrivate *priv = self->priv;
+ 	if (priv->force_disconnect_id != 0) {
+ 		g_source_remove(priv->force_disconnect_id);
++		priv->force_disconnect_id = 0;
+ 	}
+ 
+ 	tp_base_connection_finish_shutdown(conn);
+@@ -600,6 +601,7 @@ _force_disconnect (gpointer data)
+ 
+ 	IDLE_DEBUG("gave up waiting, forcibly disconnecting");
+ 	idle_server_connection_force_disconnect(priv->conn);
++	priv->force_disconnect_id = 0;
+ 	return FALSE;
+ }
+ 
+-- 
+2.28.0
+
