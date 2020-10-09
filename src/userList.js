@@ -41,7 +41,10 @@ class UserListPopover extends Gtk.Popover {
         this._box = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             spacing: 6,
-            margin: 6,
+            margin_start: 6,
+            margin_end: 6,
+            margin_top: 6,
+            margin_bottom: 6,
         });
         this.add(this._box);
 
@@ -559,7 +562,10 @@ class UserList extends Gtk.ScrolledWindow {
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             orientation: Gtk.Orientation.VERTICAL,
-            margin: 32,
+            margin_top: 32,
+            margin_bottom: 32,
+            margin_start: 32,
+            margin_end: 32,
             spacing: 6,
             visible: true,
         });

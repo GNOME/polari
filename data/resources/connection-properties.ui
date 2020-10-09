@@ -31,7 +31,10 @@
         <child>
           <object class="Gjs_ConnectionDetails" id="details">
             <property name="visible">True</property>
-            <property name="margin">24</property>
+            <property name="margin-start">24</property>
+            <property name="margin-end">24</property>
+            <property name="margin-top">24</property>
+            <property name="margin-bottom">24</property>
           </object>
         </child>
         <child>
@@ -45,8 +48,10 @@
                 <property name="visible">True</property>
                 <property name="icon-name">dialog-error-symbolic</property>
                 <property name="icon-size">5</property>
-                <property name="margin">12</property>
                 <property name="margin-start">24</property>
+                <property name="margin-end">12</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
               </object>
             </child>
             <child>
@@ -55,8 +60,10 @@
                 <property name="vexpand">True</property>
                 <property name="wrap">True</property>
                 <property name="xalign">0</property>
-                <property name="margin">12</property>
+                <property name="margin-start">12</property>
                 <property name="margin-end">24</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
               </object>
             </child>
           </object>

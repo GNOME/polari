@@ -40,7 +40,13 @@ class ConnectionRow extends Gtk.ListBoxRow {
             this, 'activatable',
             GObject.BindingFlags.SYNC_CREATE);
 
-        let box = new Gtk.Box({ spacing: 12, margin: 12 });
+        let box = new Gtk.Box({
+            spacing: 12,
+            margin_start: 12,
+            margin_end: 12,
+            margin_top: 12,
+            margin_bottom: 12,
+        });
         this.add(box);
 
         box.add(new Gtk.Label({ label: name, halign: Gtk.Align.START }));

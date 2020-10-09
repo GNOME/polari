@@ -35,7 +35,9 @@
             <child>
               <object class="GtkGrid">
                 <property name="visible">True</property>
-                <property name="margin">30</property>
+                <property name="margin-start">30</property>
+                <property name="margin-end">30</property>
+                <property name="margin-top">30</property>
                 <property name="margin-bottom">24</property>
                 <property name="row-spacing">18</property>
                 <property name="column-spacing">12</property>
@@ -99,7 +101,9 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="margin">30</property>
+                <property name="margin-start">30</property>
+                <property name="margin-end">30</property>
+                <property name="margin-top">30</property>
                 <property name="margin-bottom">24</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">18</property>
@@ -126,7 +130,8 @@
                               <object class="GtkSearchEntry" id="filterEntry">
                                 <property name="visible">True</property>
                                 <property name="hexpand">True</property>
-                                <property name="margin">60</property>
+                                <property name="margin-start">60</property>
+                                <property name="margin-end">60</property>
                                 <property name="margin-top">6</property>
                                 <property name="margin-bottom">6</property>
                               </object>
