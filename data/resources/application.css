@@ -2,20 +2,6 @@
 
 .info { margin-bottom: 1px; }
 
-.polari-room-list .sidebar {
-    border-style: solid;
-    border-color: @borders;
-    border-image: none;
-}
-
-.polari-room-list .sidebar:dir(ltr) {
-    border-width: 0 1px 0 0;
-}
-
-.polari-room-list .sidebar:dir(rtl) {
-    border-width: 0 0 0 1px;
-}
-
 .polari-user-list row.expanded {
     background-color: @content_view_bg;
 }
