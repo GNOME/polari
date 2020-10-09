@@ -469,8 +469,8 @@ class UserListRow extends Gtk.ListBoxRow {
             margin_bottom: 4,
             spacing: 4,
         });
-        this._arrow = new Gtk.Arrow({
-            arrow_type: Gtk.ArrowType.RIGHT,
+        this._arrow = new Gtk.Image({
+            icon_name: 'pan-end-symbolic',
             no_show_all: true,
         });
         this._label = new Gtk.Label({
@@ -539,10 +539,10 @@ class UserListRow extends Gtk.ListBoxRow {
     _onExpandedChanged() {
         if (this._revealer.reveal_child) {
             this.get_style_context().add_class('expanded');
-            this._arrow.arrow_type = Gtk.ArrowType.DOWN;
+            this._arrow.icon_name = 'pan-down-symbolic';
         } else {
             this.get_style_context().remove_class('expanded');
-            this._arrow.arrow_type = Gtk.ArrowType.RIGHT;
+            this._arrow.icon_name = 'pan-end-symbolic';
             this._updateArrowVisibility();
         }
     }
