@@ -2,7 +2,6 @@
 <interface>
   <object class="Gjs_UserListPopover" id="userListPopover">
     <property name="position">bottom</property>
-    <property name="border-width">6</property>
     <property name="width-request">250</property>
     <property name="relative-to">showUserListButton</property>
     <style>
