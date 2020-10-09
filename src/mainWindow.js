@@ -22,7 +22,7 @@ var FixedSizeFrame = GObject.registerClass({
             GObject.ParamFlags.READWRITE,
             -1, GLib.MAXINT32, -1),
     },
-}, class FixedSizeFrame extends Gtk.Frame {
+}, class FixedSizeFrame extends Gtk.Bin {
     _init(params) {
         this._height = -1;
         this._width = -1;
@@ -32,8 +32,7 @@ var FixedSizeFrame = GObject.registerClass({
 
     _queueRedraw() {
         let child = this.get_child();
-        if (child)
-            child.queue_resize();
+        child?.queue_resize();
         this.queue_draw();
     }
 
