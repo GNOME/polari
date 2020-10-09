@@ -103,6 +103,14 @@
                 {
                     "type": "patch",
                     "path": "tp-idle-python3.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "tp-idle-long-messages.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "tp-idle-fix-warning.patch"
                 }
             ],
             "cleanup": [
