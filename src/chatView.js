@@ -447,9 +447,6 @@ export default GObject.registerClass({
         this._roomFocusChangedId = this._app.connect('room-focus-changed',
             this._checkMessages.bind(this));
 
-        this._hoverCursor = Gdk.Cursor.new_from_name(
-            this.get_display(), 'pointer');
-
         this._channelSignals = [];
         this._channel = null;
 
@@ -870,10 +867,8 @@ export default GObject.registerClass({
         let isHovering = hoveredButtonTags.length > 0;
         let wasHovering = this._hoveredButtonTags.length > 0;
 
-        if (isHovering !== wasHovering) {
-            let cursor = isHovering ? this._hoverCursor : null;
-            this._view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor);
-        }
+        if (isHovering !== wasHovering)
+            this._view.set_cursor_from_name(isHovering ? 'pointer' : 'text');
 
         this._hoveredButtonTags = hoveredButtonTags;
     }
