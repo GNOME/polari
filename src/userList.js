@@ -48,11 +48,6 @@ class UserListPopover extends Gtk.Popover {
         this._revealer = new Gtk.Revealer();
         this._box.add(this._revealer);
 
-        this._userListBin = new Gtk.Frame({
-            shadow_type: Gtk.ShadowType.NONE,
-        });
-        this._box.add(this._userListBin);
-
         this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.add(this._entry);
@@ -90,7 +85,7 @@ class UserListPopover extends Gtk.Popover {
             return;
 
         this._userList = new UserList(room);
-        this._userListBin.add(this._userList);
+        this._box.add(this._userList);
 
         this._userList.vadjustment.connect('changed',
             this._updateEntryVisibility.bind(this));
