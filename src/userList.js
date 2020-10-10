@@ -75,8 +75,8 @@ class UserListPopover extends Gtk.Popover {
             return;
 
         const viewHeight = this.get_root().view_height;
-        let [popoverHeight] = this.get_preferred_height();
-        let [userListHeight] = this._userList.get_preferred_height();
+        const [popoverHeight] = this.measure(Gtk.Orientation.VERTICAL, -1);
+        const [userListHeight] = this._userList.measure(Gtk.Orientation.VERTICAL, -1);
         let chromeHeight = popoverHeight - userListHeight;
         this._userList.max_content_height = viewHeight - chromeHeight;
     }
