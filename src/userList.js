@@ -335,8 +335,6 @@ export const UserPopover = GObject.registerClass({
 
         super._init(params);
 
-        this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
-
         this._app = Gio.Application.get_default();
 
         this._roomStatusChangedId = 0;
@@ -415,7 +413,14 @@ export const UserPopover = GObject.registerClass({
             label = _('Offline');
         this._statusLabel.label = label;
 
-        this._nickLabel.sensitive = status === Tp.ConnectionPresenceType.AVAILABLE;
+        const context = this._nickLabel.get_style_context();
+        if (status === Tp.ConnectionPresenceType.AVAILABLE) {
+            context.remove_class('polari-inactive-nick');
+            context.add_class('polari-active-nick');
+        } else {
+            context.remove_class('polari-active-nick');
+            context.add_class('polari-inactive-nick');
+        }
     }
 
     _updateDetailsContact() {

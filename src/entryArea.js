@@ -222,19 +222,7 @@ export default GObject.registerClass({
             this._nickChangedId = 0;
         });
 
-        this._nickLabel.set_state_flags(Gtk.StateFlags.LINK, false);
         this._nickLabel.width_chars = this._maxNickChars;
-
-        /* HACK: We don't want the button to look different when the toplevel
-                 is unfocused, so filter out the BACKDROP state */
-        this._nickButton.connect('state-flags-changed', w => {
-            let state = w.get_state_flags();
-            if (!(state & Gtk.StateFlags.BACKDROP))
-                return; // avoid indefinite recursion
-
-            state &= ~Gtk.StateFlags.BACKDROP;
-            w.set_state_flags(state, true);
-        });
 
         this._chatEntry.connect('text-pasted', (entry, text, nLines) => {
             this.pasteText(text, nLines);
@@ -448,6 +436,11 @@ export default GObject.registerClass({
     _onSensitiveChanged() {
         if (this._canFocusChatEntry())
             this._chatEntry.grab_focus();
+
+        if (this.sensitive)
+            this._nickLabel.get_style_context().add_class('polari-active-nick');
+        else
+            this._nickLabel.get_style_context().remove_class('polari-active-nick');
     }
 
     _onChannelChanged(room) {

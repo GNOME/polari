@@ -1,6 +1,18 @@
 @define-color polari_dark_bg_color shade(@theme_bg_color, 0.95);
 
+@define-color active_nick_color @theme_selected_bg_color;
+@define-color active_nick_hover_color lighter(@active_nick_color);
+
+@define-color inactive_nick_color alpha(@theme_text_color, 0.55);
+@define-color inactive_nick_hover_color lighter(@inactive_nick_color);
+
 .info { margin-bottom: 1px; }
+
+.polari-active-nick { color: @active_nick_color; }
+.polari-active-nick:hover { color: @active_nick_hover_color; }
+
+.polari-inactive-nick { color: @inactive_nick_color; }
+.polari-inactive-nick:hover { color: @inactive_nick_hover_color; }
 
 .polari-user-list row.expanded {
     background-color: @content_view_bg;

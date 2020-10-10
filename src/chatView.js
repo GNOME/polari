@@ -44,12 +44,6 @@ const NICK_SPACING = 14;
 
 const NICKTAG_PREFIX = 'nick';
 
-function _getColor(context) {
-    let color = context.get_color(context.get_state());
-    color.alpha *= context.get_property('opacity', context.get_state());
-    return color;
-}
-
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
 const TextView = GObject.registerClass(
@@ -66,12 +60,8 @@ class TextView extends Gtk.TextView {
     }
 
     vfunc_style_updated() {
-        let context = this.get_style_context();
-        context.save();
-        context.add_class('dim-label');
-        context.set_state(Gtk.StateFlags.NORMAL);
-        this._dimColor = _getColor(context);
-        context.restore();
+        const context = this.get_style_context();
+        [, this._dimColor] = context.lookup_color('inactive_nick_color');
 
         super.vfunc_style_updated();
     }
@@ -469,52 +459,32 @@ export default GObject.registerClass({
     }
 
     _onStyleUpdated() {
-        let context = this.get_style_context();
-        context.save();
-        context.add_class('dim-label');
-        context.set_state(Gtk.StateFlags.NORMAL);
-        let dimColor = _getColor(context);
-        context.restore();
+        const context = this.get_style_context();
+        const [, activeColor] =
+            context.lookup_color('active_nick_color');
+        const [, activeHoverColor] =
+            context.lookup_color('active_nick_hover_color');
+        const [, inactiveColor] =
+            context.lookup_color('inactive_nick_color');
+        const [, inactiveHoverColor] =
+            context.lookup_color('inactive_nick_hover_color');
 
-        context.save();
-        context.set_state(Gtk.StateFlags.LINK);
-        let linkColor = _getColor(context);
-        this._activeNickColor = _getColor(context);
-
-        context.set_state(Gtk.StateFlags.LINK | Gtk.StateFlags.PRELIGHT);
-        this._hoveredLinkColor = _getColor(context);
-        context.restore();
-
-        let desaturatedNickColor = (
-            this._activeNickColor.red +
-            this._activeNickColor.blue +
-            this._activeNickColor.green) / 3;
-        this._inactiveNickColor = new Gdk.RGBA({
-            red: desaturatedNickColor,
-            green: desaturatedNickColor,
-            blue: desaturatedNickColor,
-            alpha: 1.0,
-        });
-        if (this._activeNickColor.equal(this._inactiveNickColor))
-            this._inactiveNickColor.alpha = 0.5;
-
-        context.save();
-        context.add_class('view');
-        context.set_state(Gtk.StateFlags.NORMAL);
-        this._statusHeaderHoverColor = _getColor(context);
-        context.restore();
+        this._activeNickColor = activeColor;
+        this._inactiveNickColor = inactiveColor;
+        this._hoveredLinkColor = activeHoverColor;
+        this._statusHeaderHoverColor = inactiveHoverColor;
 
         let buffer = this._view.get_buffer();
         let tagTable = buffer.get_tag_table();
         let tags = [{
             name: 'status',
-            foreground_rgba: dimColor,
+            foreground_rgba: inactiveColor,
         }, {
             name: 'timestamp',
-            foreground_rgba: dimColor,
+            foreground_rgba: inactiveColor,
         }, {
             name: 'url',
-            foreground_rgba: linkColor,
+            foreground_rgba: activeColor,
         }];
         tags.forEach(tagProps => {
             let tag = tagTable.lookup(tagProps.name);
