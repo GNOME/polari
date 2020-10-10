@@ -229,7 +229,7 @@ const RoomRow = GObject.registerClass({
 });
 
 const RoomRowPopover = GObject.registerClass(
-class RoomRowPopover extends Gtk.Popover {
+class RoomRowPopover extends Gtk.PopoverMenu {
     _init(row) {
         super._init({
             position: Gtk.PositionType.BOTTOM,
@@ -254,7 +254,7 @@ class RoomRowPopover extends Gtk.Popover {
         const label = isRoom ?  _('Leave chatroom') : _('End conversation');
         this._menu.append(label, `app.leave-room(("${this._row.room.id}", ""))`);
 
-        this.bind_model(this._menu, null);
+        this.set_menu_model(this._menu);
     }
 
     vfunc_map() {
