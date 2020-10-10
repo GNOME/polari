@@ -43,10 +43,6 @@ class UserListPopover extends Gtk.Popover {
         this._box = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             spacing: 6,
-            margin_start: 6,
-            margin_end: 6,
-            margin_top: 6,
-            margin_bottom: 6,
         });
         this.set_child(this._box);
 
