@@ -35,9 +35,6 @@ if (!pkg.checkSymbol('Soup', '3.0'))
 
 import Application from './application.js';
 
-import * as GtkShim from './gtkShim.js';
-GtkShim.init();
-
 let application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))
     application.hold();

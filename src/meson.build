@@ -12,7 +12,6 @@ js_sources = [
   'chatView.js',
   'connections.js',
   'entryArea.js',
-  'gtkShim.js',
   'initialSetup.js',
   'ircParser.js',
   'joinDialog.js',
