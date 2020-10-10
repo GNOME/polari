@@ -53,9 +53,7 @@ class UserListPopover extends Gtk.Popover {
         });
         this._box.add(this._userListBin);
 
-        this._entry = new Gtk.SearchEntry({
-            primary_icon_name: 'avatar-default-symbolic',
-        });
+        this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed', this._updateFilter.bind(this));
         this._revealer.add(this._entry);
 
