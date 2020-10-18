@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-06-08 18:31+0000\n"
-"PO-Revision-Date: 2020-07-12 15:10+0200\n"
+"POT-Creation-Date: 2020-08-04 20:58+0000\n"
+"PO-Revision-Date: 2020-10-18 17:16+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:39
@@ -864,7 +864,7 @@ msgstr "La password ise di salvâ?"
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
 msgstr ""
-"La identificazion e vegnarà fate in automatic la prossime volte che tu ti "
+"La identificazion e vignarà fate in automatic la prossime volte che tu ti "
 "conetis a %s"
 
 #: src/roomStack.js:108
