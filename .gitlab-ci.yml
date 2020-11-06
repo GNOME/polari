@@ -22,6 +22,12 @@ check_commit_log:
         - ./.gitlab-ci/check-commit-log.sh
     only:
         - merge_requests
+    artifacts:
+        expire_in: 1 week
+        paths:
+            - commit-message-junit-report.xml
+        reports:
+            junit: commit-message-junit-report.xml
 
 eslint:
     image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/33:2020-11-17.0
