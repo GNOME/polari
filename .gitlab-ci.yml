@@ -20,8 +20,7 @@ check_commit_log:
     stage: review
     script:
         - ./.gitlab-ci/check-commit-log.sh
-    only:
-        - merge_requests
+    <<: *only_default
     artifacts:
         expire_in: 1 week
         paths:
