@@ -479,7 +479,6 @@ var RoomListHeader = GObject.registerClass({
 
     _getErrorLabel() {
         switch (this._account.connection_error) {
-
         case Tp.error_get_dbus_name(Tp.Error.CERT_REVOKED):
         case Tp.error_get_dbus_name(Tp.Error.CERT_INSECURE):
         case Tp.error_get_dbus_name(Tp.Error.CERT_LIMIT_EXCEEDED):

@@ -156,7 +156,6 @@ class ChannelErrorBar extends MessageInfoBar {
             this._updateLabels();
             this.revealed = true;
         });
-
     }
 
     _updateLabels() {
