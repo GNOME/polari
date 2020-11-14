@@ -2,7 +2,7 @@
 
 pkg.initFormat();
 pkg.initGettext();
-window.ngettext = imports.gettext.ngettext;
+globalThis.ngettext = imports.gettext.ngettext;
 
 pkg.require({
     'GdkPixbuf': '2.0',
@@ -45,12 +45,12 @@ function _makeLogFunction(level) {
     };
 }
 
-window.log      = _makeLogFunction(GLib.LogLevelFlags.LEVEL_MESSAGE);
-window.debug    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_DEBUG);
-window.info     = _makeLogFunction(GLib.LogLevelFlags.LEVEL_INFO);
-window.warning  = _makeLogFunction(GLib.LogLevelFlags.LEVEL_WARNING);
-window.critical = _makeLogFunction(GLib.LogLevelFlags.LEVEL_CRITICAL);
-window.error    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_ERROR);
+globalThis.log      = _makeLogFunction(GLib.LogLevelFlags.LEVEL_MESSAGE);
+globalThis.debug    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_DEBUG);
+globalThis.info     = _makeLogFunction(GLib.LogLevelFlags.LEVEL_INFO);
+globalThis.warning  = _makeLogFunction(GLib.LogLevelFlags.LEVEL_WARNING);
+globalThis.critical = _makeLogFunction(GLib.LogLevelFlags.LEVEL_CRITICAL);
+globalThis.error    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_ERROR);
 
 function main(args) {
     // Log all messages when connected to the journal
