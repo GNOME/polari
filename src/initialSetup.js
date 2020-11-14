@@ -21,7 +21,6 @@ var InitialSetupWindow = GObject.registerClass({
     ],
 }, class InitialSetupWindow extends Gtk.Window {
     _init(params) {
-
         super._init(params);
 
         this._currentAccount = null;

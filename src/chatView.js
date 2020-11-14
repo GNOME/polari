@@ -107,7 +107,6 @@ class TextView extends Gtk.TextView {
         if (hasClip &&
             clip.y <= layoutY + layoutHeight &&
             clip.y + clip.height >= layoutY) {
-
             Gdk.cairo_set_source_rgba(cr, this._dimColor);
 
             cr.moveTo(layoutX, layoutY);
