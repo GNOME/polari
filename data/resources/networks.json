@@ -727,11 +727,20 @@
     "name": "Ozinger",
     "id": "ozinger",
     "servers": [
+      { "ssl": false, "port": 6661, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6662, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6663, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6664, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6665, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6666, "address": "irc.ozinger.org"},
       { "ssl": false, "port": 6667, "address": "irc.ozinger.org"},
-      { "ssl": false, "port": 6667, "address": "ipv6.ozinger.org"},
+      { "ssl": false, "port": 6668, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 6669, "address": "irc.ozinger.org"},
+      { "ssl": false, "port": 8080, "address": "irc.ozinger.org"},
       { "ssl": false, "port": 80,   "address": "altirc.ozinger.org"},
-      { "ssl": true,  "port": 6667, "address": "irc.ozinger.org"},
-      { "ssl": true,  "port": 6667, "address": "ipv6.ozinger.org"},
+      { "ssl": true,  "port": 16666,"address": "irc.ozinger.org"},
+      { "ssl": true,  "port": 16667,"address": "irc.ozinger.org"},
+      { "ssl": true,  "port": 6697, "address": "irc.ozinger.org"},
       { "ssl": true,  "port": 443,  "address": "altirc.ozinger.org"}
     ]
   }
