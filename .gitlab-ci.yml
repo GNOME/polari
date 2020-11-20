@@ -25,11 +25,19 @@ variables:
     BUNDLE: "polari-git.flatpak"
     LINT_LOG: "eslint-report.xml"
 
-.only_default: &only_default
-    only:
-        - branches
-        - tags
-        - merge_requests
+workflow:
+    rules:
+        - if: '$CI_MERGE_REQUEST_IID'
+        - if: '$CI_COMMIT_TAG'
+        - if: '$CI_COMMIT_BRANCH'
+
+.pipeline_guard: &pipeline_guard
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+        - if: '$CI_COMMIT_TAG'
+        - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+        - if: '$CI_COMMIT_BRANCH =~ /^gnome-[0-9-]+$/'
+        - when: 'manual'
 
 check_commit_log:
     extends:
@@ -37,7 +45,7 @@ check_commit_log:
     stage: pre_review
     script:
         - ./.gitlab-ci/check-commit-log.sh
-    <<: *only_default
+    <<: *pipeline_guard
     artifacts:
         expire_in: 1 week
         paths:
@@ -56,7 +64,7 @@ check-merge-request:
           else
             echo "Not a merge request" ;
           fi
-    <<: *only_default
+    <<: *pipeline_guard
     artifacts:
         expire_in: 1 week
         paths:
@@ -69,7 +77,6 @@ eslint:
     stage: review
     script:
         - eslint -o $LINT_LOG -f junit src
-    <<: *only_default
     artifacts:
         paths:
             - ${LINT_LOG}
@@ -85,7 +92,6 @@ eslint:
         FLATPAK_MODULE: "polari"
         APP_ID: "org.gnome.Polari"
     extends: .flatpak
-    <<: *only_default
 
 flatpak:
     variables:
