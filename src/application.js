@@ -391,12 +391,7 @@ export default GObject.registerClass({
 
         let provider = new Gtk.CssProvider();
         let uri = 'resource:///org/gnome/Polari/css/application.css';
-        try {
-            provider.load_from_file(Gio.File.new_for_uri(uri));
-        } catch (e) {
-            console.warn('Failed to add application style');
-            console.debug(e);
-        }
+        provider.load_from_file(Gio.File.new_for_uri(uri));
         Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
