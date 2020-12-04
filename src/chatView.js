@@ -143,15 +143,12 @@ const ButtonTag = GObject.registerClass({
             false),
     },
     Signals: {
-        'clicked': {},
-        'popup-menu': {},
+        'clicked': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
+        'popup-menu': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
     },
 }, class ButtonTag extends Gtk.TextTag {
     _init(params) {
         this._hover = false;
-
-        this._gesture = null;
-
         super._init(params);
     }
 
@@ -167,42 +164,12 @@ const ButtonTag = GObject.registerClass({
         this.notify('hover');
     }
 
-    vfunc_event(object, event, _iter) {
-        this._ensureGesture(object);
-
-        if (this._gesture.handle_event(event) ||
-            this._gesture.is_recognized())
-            return Gdk.EVENT_STOP;
-
-        return Gdk.EVENT_PROPAGATE;
+    clicked(...coords) {
+        this.emit('clicked', ...coords);
     }
 
-    _ensureGesture(widget) {
-        if (this._gesture)
-            return;
-
-        this._gesture = new Gtk.GestureMultiPress({
-            widget,
-            button: 0,
-            exclusive: true,
-        });
-
-        this._gesture.connect('pressed', (gesture, nPress) => {
-            if (!this._hover || nPress > 1)
-                return;
-
-            let button = this._gesture.get_current_button();
-            if (button === Gdk.BUTTON_SECONDARY)
-                this.emit('popup-menu');
-        });
-        this._gesture.connect('released', (gesture, nPress) => {
-            if (!this._hover || nPress > 1)
-                return;
-
-            let button = this._gesture.get_current_button();
-            if (button === Gdk.BUTTON_PRIMARY)
-                this.emit('clicked');
-        });
+    popupMenu(...coords) {
+        this.emit('popup-menu', ...coords);
     }
 });
 
@@ -329,6 +296,17 @@ export default GObject.registerClass({
             this._handleButtonTagsHover.bind(this));
         this._motionController.connect('leave',
             this._handleButtonTagsHover.bind(this));
+
+        this._clickGesture = new Gtk.GestureMultiPress({
+            widget: this._view,
+            propagation_phase: Gtk.PropagationPhase.CAPTURE,
+            button: 0,
+        });
+        this._clickGesture.connect('pressed',
+            this._handleButtonTagPressed.bind(this));
+        this._clickGesture.connect('released',
+            this._handleButtonTagReleased.bind(this));
+
         /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
            the default handler calls pango_cairo_context_set_resolution(), so
            update the indent after that */
@@ -796,7 +774,7 @@ export default GObject.registerClass({
         menu.popup_at_pointer(null);
     }
 
-    _handleButtonTagsHover(controller, ...coords) {
+    _getHoveredButtonTags(coords) {
         let inside, iter;
 
         if (coords.length > 0) {
@@ -806,11 +784,12 @@ export default GObject.registerClass({
             [inside, iter] = this._view.get_iter_at_location(x, y);
         }
 
-        let hoveredButtonTags;
-        if (inside)
-            hoveredButtonTags = iter.get_tags().filter(t => t instanceof ButtonTag);
-        else
-            hoveredButtonTags = [];
+        return inside
+            ? iter.get_tags().filter(t => t instanceof ButtonTag) : [];
+    }
+
+    _handleButtonTagsHover(controller, ...coords) {
+        const hoveredButtonTags = this._getHoveredButtonTags(coords);
 
         hoveredButtonTags.forEach(t => (t.hover = true));
         this._hoveredButtonTags.forEach(t => {
@@ -826,8 +805,32 @@ export default GObject.registerClass({
         }
 
         this._hoveredButtonTags = hoveredButtonTags;
+    }
 
-        return Gdk.EVENT_PROPAGATE;
+    _handleButtonTagPressed(gesture, nPress, ...coords) {
+        const event = Gtk.get_current_event();
+
+        if (nPress > 1 || !event.triggers_context_menu())
+            return;
+
+        const hoveredButtonTags = this._getHoveredButtonTags(coords);
+        hoveredButtonTags.forEach(t => t.popupMenu(...coords));
+
+        if (hoveredButtonTags.length > 0)
+            gesture.set_state(Gtk.EventSequenceState.CLAIMED);
+    }
+
+    _handleButtonTagReleased(gesture, nPress, ...coords) {
+        const button = gesture.get_current_button();
+
+        if (nPress > 1 || button !== Gdk.BUTTON_PRIMARY)
+            return;
+
+        const hoveredButtonTags = this._getHoveredButtonTags(coords);
+        hoveredButtonTags.forEach(t => t.clicked(...coords));
+
+        if (hoveredButtonTags.length > 0)
+            gesture.set_state(Gtk.EventSequenceState.CLAIMED);
     }
 
     _showLoadingIndicator() {
@@ -1383,13 +1386,11 @@ export default GObject.registerClass({
             tag.foreground_rgba = this._inactiveNickColor;
     }
 
-    _onNickTagClicked(tag) {
-        let view = this._view;
-        let event = Gtk.get_current_event();
-        let [, eventX, eventY] = event.get_coords();
-        let [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
+    _onNickTagClicked(tag, eventX, eventY) {
+        const view = this._view;
+        const [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
             eventX, eventY);
-        let [inside_, start] = view.get_iter_at_location(x, y);
+        const [inside_, start] = view.get_iter_at_location(x, y);
         let end = start.copy();
 
         if (!start.starts_tag(tag))
@@ -1431,8 +1432,8 @@ export default GObject.registerClass({
         tag.connect('clicked', () => {
             Utils.openURL(url);
         });
-        tag.connect('popup-menu', () => {
-            this._showUrlContextMenu(url);
+        tag.connect('popup-menu', (t, ...coords) => {
+            this._showUrlContextMenu(url, ...coords);
         });
         return tag;
     }
