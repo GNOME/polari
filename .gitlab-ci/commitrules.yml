@@ -2,3 +2,10 @@ patterns:
   require:
     - regex: ($CI_MERGE_REQUEST_PROJECT_URL/(-/)?(issues|merge_requests)/[0-9]+|https://bugzilla.gnome.org/show_bug.cgi?id=[0-9]+)
       message: Commit message must contain a link to an issue or merge request
+  deny:
+    - regex: '^[^:]+: [a-z]'
+      message: "Commit message subject should be properly Capitalized. E.g. 'chatView: Marginalize extradicity'"
+      where: subject
+    - regex: '^\S*\.js:'
+      message: Commit message subject prefix should not include .js
+      where: subject
