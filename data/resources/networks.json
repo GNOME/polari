@@ -329,6 +329,14 @@
     ]
   },
   {
+    "name": "hackint",
+    "id": "hackint",
+    "servers": [
+      { "ssl": true, "port": 6697, "address": "irc.hackint.org" },
+      { "ssl": true, "port": 6697, "address": "irc.hackint.eu" }
+    ]
+  },
+  {
     "name": "Hashmark",
     "id": "hashmark",
     "servers": [
