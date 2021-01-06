@@ -467,7 +467,7 @@ msgstr "Copia l'adreça de l'enllaç"
 #: src/chatView.js:964
 #, javascript-format
 msgid "%s is now known as %s"
-msgstr "%s ara se'l coneix com %s"
+msgstr "%s ara se'l coneix com a %s"
 
 #: src/chatView.js:969
 #, javascript-format
@@ -910,7 +910,7 @@ msgstr "Uniu-vos a una sala usant el botó +."
 
 #: src/telepathyClient.js:477
 msgid "Good Bye"
-msgstr "Adéu"
+msgstr "Adeu"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
