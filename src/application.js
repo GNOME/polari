@@ -801,10 +801,6 @@ var Application = GObject.registerClass({
     }
 
     _onShowAbout() {
-        if (this._aboutDialog) {
-            this._aboutDialog.present();
-            return;
-        }
         let aboutParams = {
             authors: [
                 'Florian Müllner <fmuellner@gnome.org>',
@@ -844,12 +840,8 @@ var Application = GObject.registerClass({
             modal: true,
         };
 
-        this._aboutDialog = new Gtk.AboutDialog(aboutParams);
-        this._aboutDialog.show();
-        this._aboutDialog.connect('response', () => {
-            this._aboutDialog.destroy();
-            this._aboutDialog = null;
-        });
+        const aboutDialog = new Gtk.AboutDialog(aboutParams);
+        aboutDialog.show();
     }
 
     _onQuit() {
