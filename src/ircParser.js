@@ -14,6 +14,8 @@ Gio._promisify(Tp.Connection.prototype,
 Gio._promisify(Tp.Contact.prototype,
     'request_contact_info_async', 'request_contact_info_finish');
 
+const N_ = s => s;
+
 var knownCommands = {
     /* commands that would be nice to support: */
     /*
