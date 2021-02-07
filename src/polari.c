@@ -6,10 +6,11 @@
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GjsContext, g_object_unref)
 
 const char *src =
-  "imports.package.start({ name: '" PACKAGE_NAME "',"
-  "                        version: '" PACKAGE_VERSION "',"
-  "                        prefix: '" PREFIX "',"
-  "                        libdir: '" LIBDIR "' });";
+  "const Config = imports.config;"
+  "imports.package.start({ name: Config.PACKAGE_NAME,"
+  "                        version: Config.PACKAGE_VERSION,"
+  "                        prefix: Config.PREFIX,"
+  "                        libdir: Config.LIBDIR });";
 
 static char **
 get_js_argv (int argc, const char * const *argv)

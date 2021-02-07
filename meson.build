@@ -40,10 +40,6 @@ gjs = dependency('gjs-1.0', version: '>= 1.57.3')
 
 conf = configuration_data()
 
-conf.set_quoted('PACKAGE_NAME', meson.project_name())
-conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
-conf.set_quoted('PREFIX', prefix)
-conf.set_quoted('LIBDIR', libdir)
 conf.set_quoted('PKGLIBDIR', pkglibdir)
 
 cc = meson.get_compiler('c')
@@ -51,12 +47,8 @@ conf.set('HAVE_STRCASESTR', cc.has_function('strcasestr'))
 conf.set('SNAPSHOT', get_option('snapshot'))
 
 config_h = declare_dependency(
-  sources: vcs_tag(
-    command: ['git', 'describe'],
-    input: configure_file(
-      configuration: conf,
-      output: 'config.h.in'
-    ),
+  sources: configure_file(
+    configuration: conf,
     output: 'config.h'
   ),
   include_directories: include_directories('.')

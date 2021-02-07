@@ -53,9 +53,25 @@ src_resources_xml = configure_file(
   configuration: resource_data
 )
 
+config_js = vcs_tag(
+  command: ['git', 'describe'],
+  input: configure_file(
+    configuration: {
+      'PACKAGE_NAME': meson.project_name(),
+      'PACKAGE_VERSION': '@VCS_TAG@',
+      'PREFIX': prefix,
+      'LIBDIR': libdir,
+    },
+    input: 'config.js.in',
+    output: 'config.js.in'
+  ),
+  output: 'config.js'
+)
+
 src_resources = gnome.compile_resources(
   'src-resources',
   src_resources_xml,
+  dependencies: config_js,
   c_name: 'src_resources'
 )
 
