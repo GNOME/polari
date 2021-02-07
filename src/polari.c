@@ -82,7 +82,8 @@ main (int argc, char *argv[])
   g_set_application_name ("Polari");
 #endif
 
-  g_irepository_prepend_search_path (PKGLIBDIR);
+  g_irepository_prepend_search_path (PKGLIBDIR "/girepository-1.0");
+  g_irepository_prepend_library_path (PKGLIBDIR);
 
   context = g_object_new (GJS_TYPE_CONTEXT,
                           "search-path", search_path,
