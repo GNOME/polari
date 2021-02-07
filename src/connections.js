@@ -1,10 +1,18 @@
-/* exported ConnectionProperties ConnectionDetails ConnectionsList */
+export {
+    ConnectionProperties,
+    ConnectionDetails,
+    ConnectionsList
+};
 
-const { Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { NetworksManager } = imports.networksManager;
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { NetworksManager } from './networksManager.js';
+import * as Utils from './utils.js';
 
 Gio._promisify(Tp.Account.prototype,
     'set_display_name_async', 'set_display_name_finish');
@@ -72,7 +80,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
     }
 });
 
-var ConnectionsList = GObject.registerClass({
+const ConnectionsList = GObject.registerClass({
     Properties: {
         'favorites-only': GObject.ParamSpec.boolean(
             'favorites-only', 'favorites-only', 'favorites-only',
@@ -259,7 +267,7 @@ var ConnectionsList = GObject.registerClass({
     }
 });
 
-var ConnectionDetails = GObject.registerClass({
+const ConnectionDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
     InternalChildren: [
         'nameEntry',
@@ -500,7 +508,7 @@ var ConnectionDetails = GObject.registerClass({
 });
 
 
-var ConnectionProperties = GObject.registerClass({
+const ConnectionProperties = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
     InternalChildren: [
         'details',

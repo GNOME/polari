@@ -1,12 +1,16 @@
-/* exported UserStatusMonitor */
+export { UserStatusMonitor };
 
-const { Gio, GLib, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { RoomManager } = imports.roomManager;
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { RoomManager } from './roomManager.js';
+import * as Utils from './utils.js';
 
-var UserStatusMonitor = class {
+const UserStatusMonitor = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new UserStatusMonitor();

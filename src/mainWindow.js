@@ -1,17 +1,28 @@
-/* exported MainWindow FixedSizeFrame RoomList RoomStack UserList */
+export {
+    MainWindow,
+    FixedSizeFrame,
+    RoomList,
+    RoomStack,
+    UserList
+};
 
-const { Gdk, Gio, GLib, GObject, Gtk, Polari, TelepathyGLib: Tp } = imports.gi;
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { JoinDialog } = imports.joinDialog;
-const RoomList = imports.roomList; // used in template
-const { RoomManager } = imports.roomManager;
-const RoomStack = imports.roomStack; // used in template
-const UserList = imports.userList; // used in template
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { JoinDialog } from './joinDialog.js';
+import * as RoomList from './roomList.js'; // used in template
+import { RoomManager } from './roomManager.js';
+import * as RoomStack from './roomStack.js'; // used in template
+import * as UserList from './userList.js'; // used in template
+import * as Utils from './utils.js';
 
-
-var FixedSizeFrame = GObject.registerClass({
+const FixedSizeFrame = GObject.registerClass({
     Properties: {
         height: GObject.ParamSpec.int(
             'height', 'height', 'height',
@@ -74,7 +85,7 @@ var FixedSizeFrame = GObject.registerClass({
     }
 });
 
-var MainWindow = GObject.registerClass({
+const MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
     InternalChildren: [
         'titlebarRight',

@@ -1,8 +1,17 @@
-/* exported PasteManager DropTargetIface */
+export {
+    PasteManager,
+    DropTargetIface
+};
 
-const { Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk, Polari } = imports.gi;
+import Gdk from 'gi://Gdk';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Polari from 'gi://Polari';
 
-const Utils = imports.utils;
+import * as Utils from './utils.js';
 
 Gio._promisify(Gio._LocalFilePrototype,
     'load_contents_async', 'load_contents_finish');
@@ -29,7 +38,7 @@ function _getTargetForContentType(contentType) {
 }
 
 
-var PasteManager = class {
+const PasteManager = class {
     pasteContent(content, title) {
         if (typeof content === 'string')
             return Utils.gpaste(content, title);
@@ -64,7 +73,7 @@ var PasteManager = class {
     }
 };
 
-var DropTargetIface = GObject.registerClass({
+const DropTargetIface = GObject.registerClass({
     Requires: [GObject.Object],
     Properties: {
         'can-drop': GObject.ParamSpec.boolean(

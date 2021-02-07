@@ -1,19 +1,25 @@
-/* exported Application */
+export { Application };
 
-const { Gdk, Gio, GLib, GObject, Gtk, Polari, TelepathyGLib: Tp } = imports.gi;
+import Gdk from 'gi://Gdk?version=3.0';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk?version=3.0';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const AppNotifications = imports.appNotifications;
-const Connections = imports.connections;
-const { InitialSetupWindow } = imports.initialSetup;
-const { MainWindow } = imports.mainWindow;
-const { NetworksManager } = imports.networksManager;
-const { PasteManager } = imports.pasteManager;
-const { RoomManager } = imports.roomManager;
-const { ServerRoomManager } = imports.serverRoomManager;
-const { TelepathyClient } = imports.telepathyClient;
-const { UserStatusMonitor } = imports.userTracker;
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import * as AppNotifications from './appNotifications.js';
+import * as Connections from './connections.js';
+import { InitialSetupWindow } from './initialSetup.js';
+import { MainWindow } from './mainWindow.js';
+import { NetworksManager } from './networksManager.js';
+import { PasteManager } from './pasteManager.js';
+import { RoomManager } from './roomManager.js';
+import { ServerRoomManager } from './serverRoomManager.js';
+import { TelepathyClient } from './telepathyClient.js';
+import { UserStatusMonitor } from './userTracker.js';
+import * as Utils from './utils.js';
 
 Gio._promisify(Tp.AccountRequest.prototype,
     'create_account_async', 'create_account_finish');
@@ -31,7 +37,7 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-var Application = GObject.registerClass({
+const Application = GObject.registerClass({
     Signals: {
         'prepare-shutdown': {},
         'room-focus-changed': {},

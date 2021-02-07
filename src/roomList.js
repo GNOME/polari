@@ -1,10 +1,19 @@
-/* exported RoomList RoomListHeader RoomRow */
+export {
+    RoomList,
+    RoomListHeader,
+    RoomRow
+};
 
-const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { RoomManager } = imports.roomManager;
-const { UserStatusMonitor } = imports.userTracker;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { RoomManager } from './roomManager.js';
+import { UserStatusMonitor } from './userTracker.js';
 
 const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
@@ -16,7 +25,7 @@ function _onPopoverVisibleChanged(popover) {
         context.remove_class('has-open-popup');
 }
 
-var RoomRow = GObject.registerClass({
+const RoomRow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
     InternalChildren: [
         'eventBox',
@@ -279,7 +288,7 @@ class RoomRowPopover extends Gtk.Popover {
     }
 });
 
-var RoomListHeader = GObject.registerClass({
+const RoomListHeader = GObject.registerClass({
     CssName: 'row',
     Template: 'resource:///org/gnome/Polari/ui/room-list-header.ui',
     InternalChildren: [
@@ -509,7 +518,7 @@ var RoomListHeader = GObject.registerClass({
     }
 });
 
-var RoomList = GObject.registerClass(
+const RoomList = GObject.registerClass(
 class RoomList extends Gtk.ListBox {
     _init(params) {
         super._init(params);

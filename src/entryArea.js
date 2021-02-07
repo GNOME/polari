@@ -1,13 +1,22 @@
-/* exported ChatEntry EntryArea NickPopover */
+export {
+    ChatEntry,
+    EntryArea,
+    NickPopover
+};
 
-const {
-    Gdk, GdkPixbuf, Gio, GLib, GObject, Gspell, Gtk, TelepathyGLib: Tp,
-} = imports.gi;
+import Gdk from 'gi://Gdk';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gspell from 'gi://Gspell';
+import Gtk from 'gi://Gtk';
+import Tp from 'gi://TelepathyGLib';
 
-const ChatView = imports.chatView;
-const { DropTargetIface } = imports.pasteManager;
-const { IrcParser } = imports.ircParser;
-const { TabCompletion } = imports.tabCompletion;
+import * as ChatView from './chatView.js';
+import { DropTargetIface } from './pasteManager.js';
+import { IrcParser } from './ircParser.js';
+import { TabCompletion } from './tabCompletion.js';
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -15,7 +24,7 @@ const MAX_LINES = 5;
 Gio._promisify(Gio._LocalFilePrototype,
     'query_info_async', 'query_info_finish');
 
-var ChatEntry = GObject.registerClass({
+const ChatEntry = GObject.registerClass({
     Implements: [DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
@@ -106,7 +115,7 @@ var ChatEntry = GObject.registerClass({
     }
 });
 
-var NickPopover = GObject.registerClass({
+const NickPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
     InternalChildren: [
         'nickEntry',
@@ -154,7 +163,7 @@ var NickPopover = GObject.registerClass({
     }
 });
 
-var EntryArea = GObject.registerClass({
+const EntryArea = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
     InternalChildren: [
         'chatEntry',

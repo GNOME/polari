@@ -1,11 +1,14 @@
-/* exported IrcParser */
+export { IrcParser };
 
-const { Gio, GLib, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Tp from 'gi://TelepathyGLib';
+
 const Signals = imports.signals;
 
-const AppNotifications = imports.appNotifications;
-const { RoomManager } = imports.roomManager;
-const Utils = imports.utils;
+import * as AppNotifications from './appNotifications.js';
+import { RoomManager } from './roomManager.js';
+import * as Utils from './utils.js';
 
 Gio._promisify(Tp.Account.prototype,
     'request_presence_async', 'request_presence_finish');
@@ -16,7 +19,7 @@ Gio._promisify(Tp.Contact.prototype,
 
 const N_ = s => s;
 
-var knownCommands = {
+export const knownCommands = {
     /* commands that would be nice to support: */
     /*
     AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
@@ -45,7 +48,7 @@ var knownCommands = {
 const UNKNOWN_COMMAND_MESSAGE =
     N_('Unknown command — try /HELP for a list of available commands');
 
-var IrcParser = class {
+const IrcParser = class IrcParser {
     constructor(room) {
         this._app = Gio.Application.get_default();
         this._roomManager = RoomManager.getDefault();

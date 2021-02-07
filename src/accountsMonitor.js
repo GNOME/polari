@@ -1,15 +1,19 @@
-/* exported AccountsMonitor */
+export { AccountsMonitor };
 
-const { Gio, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
+
 const Signals = imports.signals;
 
-const { NetworksManager } = imports.networksManager;
+import { NetworksManager } from './networksManager.js';
 
 Gio._promisify(Tp.AccountManager.prototype, 'prepare_async', 'prepare_finish');
 Gio._promisify(Tp.Account.prototype,
     'request_presence_async', 'request_presence_finish');
 
-var AccountsMonitor = class {
+const AccountsMonitor = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new AccountsMonitor();

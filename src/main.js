@@ -1,8 +1,19 @@
-/* exported main */
+import GLib from 'gi://GLib';
+
+import * as Config from './config.js';
+import { ngettext } from 'gettext';
+import { programInvocationName } from 'system';
+
+imports.package.init({
+    name: Config.PACKAGE_NAME,
+    version: Config.PACKAGE_VERSION,
+    prefix: Config.PREFIX,
+    libdir: Config.LIBDIR,
+});
 
 pkg.initFormat();
 pkg.initGettext();
-globalThis.ngettext = imports.gettext.ngettext;
+globalThis.ngettext = ngettext;
 
 pkg.require({
     'GdkPixbuf': '2.0',
@@ -19,9 +30,7 @@ pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Gspell', '1', 'Entry');
 pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
-const { GLib } = imports.gi;
-
-const { Application } = imports.application;
+import { Application } from './application.js';
 
 var LOG_DOMAIN = 'Polari';
 
@@ -52,13 +61,11 @@ globalThis.warning  = _makeLogFunction(GLib.LogLevelFlags.LEVEL_WARNING);
 globalThis.critical = _makeLogFunction(GLib.LogLevelFlags.LEVEL_CRITICAL);
 globalThis.error    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_ERROR);
 
-function main(args) {
-    // Log all messages when connected to the journal
-    if (GLib.log_writer_is_journald(2))
-        GLib.setenv('G_MESSAGES_DEBUG', LOG_DOMAIN, false);
+// Log all messages when connected to the journal
+if (GLib.log_writer_is_journald(2))
+    GLib.setenv('G_MESSAGES_DEBUG', LOG_DOMAIN, false);
 
-    let application = new Application();
-    if (GLib.getenv('POLARI_PERSIST'))
-        application.hold();
-    return application.run(args);
-}
+let application = new Application();
+if (GLib.getenv('POLARI_PERSIST'))
+    application.hold();
+application.run([programInvocationName, ...ARGV]);

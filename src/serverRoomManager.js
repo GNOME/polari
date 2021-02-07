@@ -1,18 +1,27 @@
-/* exported ServerRoomManager ServerRoomList */
+export {
+    ServerRoomManager,
+    ServerRoomList
+};
 
-const { Gdk, Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Tp from 'gi://TelepathyGLib';
+
 const Signals = imports.signals;
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { RoomManager } = imports.roomManager;
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { RoomManager } from './roomManager.js';
+import * as Utils from './utils.js';
 
 Gio._promisify(Tp.RoomList.prototype, 'init_async', 'init_finish');
 
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering
 
-var ServerRoomManager = class {
+const ServerRoomManager = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new ServerRoomManager();
@@ -105,7 +114,7 @@ function _strBaseEqual(str1, str2) {
     return str1.localeCompare(str2, {}, { sensitivity: 'base' }) === 0;
 }
 
-var ServerRoomList = GObject.registerClass({
+const ServerRoomList = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
     InternalChildren: [
         'filterEntry',

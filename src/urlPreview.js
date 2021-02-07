@@ -1,5 +1,10 @@
-/* exported URLPreview */
-const { Gio, GLib, GObject, Gtk, Pango } = imports.gi;
+export { URLPreview };
+
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Pango from 'gi://Pango';
 
 Gio._promisify(Gio._LocalFilePrototype, 'query_info_async', 'query_info_finish');
 Gio._promisify(Gio.Subprocess.prototype, 'wait_async', 'wait_finish');
@@ -65,7 +70,7 @@ class Thumbnailer {
     async _generateThumbnail(data) {
         let { filename, uri } = data;
         this._subProc = Gio.Subprocess.new(
-            ['gjs', `${pkg.pkgdatadir}/thumbnailer.js`, uri, filename],
+            ['gjs', '--module', `${pkg.pkgdatadir}/thumbnailer.js`, uri, filename],
             Gio.SubprocessFlags.NONE);
         try {
             await this._subProc.wait_async(null);
@@ -95,7 +100,7 @@ class Thumbnailer {
     }
 }
 
-var URLPreview = GObject.registerClass({
+const URLPreview = GObject.registerClass({
     Properties: {
         'uri': GObject.ParamSpec.string(
             'uri', 'uri', 'uri',

@@ -1,14 +1,18 @@
-/* exported RoomStack */
+export { RoomStack };
 
-const { Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { ChatView } = imports.chatView;
-const { EntryArea } = imports.entryArea;
-const { MessageInfoBar } = imports.appNotifications;
-const { RoomManager } = imports.roomManager;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { ChatView } from './chatView.js';
+import { EntryArea } from './entryArea.js';
+import { MessageInfoBar } from './appNotifications.js';
+import { RoomManager } from './roomManager.js';
 
-var RoomStack = GObject.registerClass({
+const RoomStack = GObject.registerClass({
     Properties: {
         'entry-area-height': GObject.ParamSpec.uint(
             'entry-area-height', 'entry-area-height', 'entry-area-height',

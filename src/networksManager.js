@@ -1,10 +1,12 @@
-/* exported NetworksManager */
+export { NetworksManager };
 
-const { Gio, GLib } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+
 const ByteArray = imports.byteArray;
 const Signals = imports.signals;
 
-var NetworksManager = class {
+const NetworksManager = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new NetworksManager();

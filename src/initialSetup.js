@@ -1,8 +1,12 @@
-/* exported InitialSetupWindow */
+export { InitialSetupWindow };
 
-const { Gio, GLib, GObject, Gtk, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Tp from 'gi://TelepathyGLib';
 
-const Utils = imports.utils;
+import * as Utils from './utils.js';
 
 Gio._promisify(Tp.Account.prototype, 'remove_async', 'remove_finish');
 
@@ -12,7 +16,7 @@ const SetupPage = {
     OFFLINE: 2,
 };
 
-var InitialSetupWindow = GObject.registerClass({
+const InitialSetupWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/initial-setup-window.ui',
     InternalChildren: [
         'contentStack',

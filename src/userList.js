@@ -1,15 +1,24 @@
-/* exported UserList UserListPopover UserDetails UserPopover */
+export {
+    UserList,
+    UserListPopover,
+    UserDetails,
+    UserPopover
+};
 
-const {
-    Gio, GLib, GObject, Gtk, Pango, Polari, TelepathyGLib: Tp,
-} = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Pango from 'gi://Pango';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
 
-const Utils = imports.utils;
+import * as Utils from './utils.js';
 
 const FILTER_ENTRY_THRESHOLD = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
-var UserListPopover = GObject.registerClass(
+const UserListPopover = GObject.registerClass(
 class UserListPopover extends Gtk.Popover {
     _init(params) {
         super._init(params);
@@ -112,7 +121,7 @@ class UserListPopover extends Gtk.Popover {
     }
 });
 
-var UserDetails = GObject.registerClass({
+const UserDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
     InternalChildren: [
         'spinnerBox',
@@ -313,7 +322,7 @@ var UserDetails = GObject.registerClass({
     }
 });
 
-var UserPopover = GObject.registerClass({
+const UserPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
     InternalChildren: [
         'nickLabel',
@@ -545,7 +554,7 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 });
 
-var UserList = GObject.registerClass(
+const UserList = GObject.registerClass(
 class UserList extends Gtk.ScrolledWindow {
     _init(room) {
         super._init({

@@ -1,15 +1,21 @@
-/* exported ChatView */
+export { ChatView };
 
-const {
-    Gdk, Gio, GLib, GObject, Gtk, Pango, PangoCairo, Polari,
-    TelepathyGLib: Tp, TelepathyLogger: Tpl,
-} = imports.gi;
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
+import Pango from 'gi://Pango';
+import PangoCairo from 'gi://PangoCairo';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
+import Tpl from 'gi://TelepathyLogger';
 
-const { DropTargetIface } = imports.pasteManager;
-const { UserPopover } = imports.userList;
-const { UserStatusMonitor } = imports.userTracker;
-const { URLPreview } = imports.urlPreview;
-const Utils = imports.utils;
+import { DropTargetIface } from './pasteManager.js';
+import { UserPopover } from './userList.js';
+import { UserStatusMonitor } from './userTracker.js';
+import { URLPreview } from './urlPreview.js';
+import * as Utils from './utils.js';
 
 Gio._promisify(Tpl.LogWalker.prototype,
     'get_events_async', 'get_events_finish');
@@ -276,7 +282,7 @@ const HoverFilterTag = GObject.registerClass({
     }
 });
 
-var ChatView = GObject.registerClass({
+const ChatView = GObject.registerClass({
     Implements: [DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),

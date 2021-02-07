@@ -36,7 +36,7 @@ gio = dependency('gio-2.0', version: '>= 2.43.4')
 gtk3 = dependency('gtk+-3.0', version: '>= 3.21.6')
 telepathy_glib = dependency('telepathy-glib')
 girepository = dependency('gobject-introspection-1.0')
-gjs = dependency('gjs-1.0', version: '>= 1.57.3')
+gjs = dependency('gjs-1.0', version: '>= 1.67.2')
 
 conf = configuration_data()
 

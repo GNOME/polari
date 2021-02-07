@@ -1,8 +1,10 @@
-imports.gi.versions.Gdk = '3.0';
-imports.gi.versions.Gtk = '3.0';
-
-const { Gdk, Gio, GLib, GObject, Gtk, WebKit2 } = imports.gi;
-const Cairo = imports.cairo;
+import Cairo from 'cairo';
+import Gdk from 'gi://Gdk?version=3.0';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk?version=3.0';
+import WebKit2 from 'gi://WebKit2';
 
 Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
 Gio._promisify(WebKit2.WebView.prototype, 'run_javascript', 'run_javascript_finish');

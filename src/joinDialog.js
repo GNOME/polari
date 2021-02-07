@@ -1,16 +1,20 @@
-/* exported JoinDialog */
+export { JoinDialog };
 
-const { Gdk, Gio, GLib, GObject, Gtk } = imports.gi;
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import * as Utils from './utils.js';
 
 const DialogPage = {
     MAIN: 0,
     CONNECTION: 1,
 };
 
-var JoinDialog = GObject.registerClass({
+const JoinDialog = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
     InternalChildren: [
         'cancelButton',

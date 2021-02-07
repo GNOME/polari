@@ -1,11 +1,15 @@
-/* exported TelepathyClient */
+export { TelepathyClient };
 
-const { Gio, GLib, GObject, Polari, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
 
-const { AccountsMonitor } = imports.accountsMonitor;
-const { RoomManager } = imports.roomManager;
-const { UserStatusMonitor } = imports.userTracker;
-const Utils = imports.utils;
+import { AccountsMonitor } from './accountsMonitor.js';
+import { RoomManager } from './roomManager.js';
+import { UserStatusMonitor } from './userTracker.js';
+import * as Utils from './utils.js';
 
 Gio._promisify(Gio.DBusConnection.prototype, 'call', 'call_finish');
 Gio._promisify(Polari.Room.prototype,
@@ -120,7 +124,7 @@ class SASLAuthHandler {
     }
 }
 
-var TelepathyClient = GObject.registerClass(
+const TelepathyClient = GObject.registerClass(
 class TelepathyClient extends Tp.BaseClient {
     _init(params) {
         this._app = Gio.Application.get_default();

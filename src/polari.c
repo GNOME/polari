@@ -5,12 +5,7 @@
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GjsContext, g_object_unref)
 
-const char *src =
-  "const Config = imports.config;"
-  "imports.package.start({ name: Config.PACKAGE_NAME,"
-  "                        version: Config.PACKAGE_VERSION,"
-  "                        prefix: Config.PREFIX,"
-  "                        libdir: Config.LIBDIR });";
+#define JS_MAIN "resource:///org/gnome/Polari/js/main.js"
 
 static char **
 get_js_argv (int argc, const char * const *argv)
@@ -69,7 +64,8 @@ main (int argc, char *argv[])
   g_auto (GStrv) js_argv = NULL;
   GjsProfiler *profiler = NULL;
   gboolean debugger = FALSE;
-  int status, profiler_fd;
+  int profiler_fd;
+  uint8_t status;
 
   GOptionEntry entries[] =
     {
@@ -119,8 +115,9 @@ main (int argc, char *argv[])
       gjs_profiler_start (profiler);
     }
 
-  if (!gjs_context_eval (context, src, -1, "<main>", &status, &error))
-    g_message ("Execution of start() threw exception: %s", error->message);
+  if (!gjs_context_register_module (context, "<main>", JS_MAIN, &error) ||
+      !gjs_context_eval_module (context, "<main>", &status, &error))
+    g_message ("Execution of main.js threw exception: %s", error->message);
 
   if (profiler)
     gjs_profiler_stop (profiler);

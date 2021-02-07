@@ -1,10 +1,3 @@
-/* exported isFlatpakSandbox touchFile needsOnetimeAction getTpEventTime
-            findUrls findChannels openURL updateTerms gpaste imgurPaste
-            storeAccountPassword storeIdentifyPassword
-            lookupAccountPassword lookupIdentifyPassword
-            clearAccountPassword clearIdentifyPassword
-            updateTerms gpaste imgurPaste formatTimePassed*/
-
 /*
  * Copyright (c) 2011 Red Hat, Inc.
  *
@@ -27,9 +20,35 @@
  *
  */
 
-const { Gdk, Gio, GLib, Gtk, Secret, Soup, TelepathyGLib: Tp }  = imports.gi;
+export {
+    isFlatpakSandbox,
+    touchFile,
+    needsOnetimeAction,
+    getTpEventTime,
+    findUrls,
+    findChannels,
+    openURL,
+    updateTerms,
+    gpaste,
+    imgurPaste,
+    storeAccountPassword,
+    storeIdentifyPassword,
+    lookupAccountPassword,
+    lookupIdentifyPassword,
+    clearAccountPassword,
+    clearIdentifyPassword,
+    formatTimePassed
+};
 
-const AppNotifications = imports.appNotifications;
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Gtk from 'gi://Gtk';
+import Secret from 'gi://Secret';
+import Soup from 'gi://Soup';
+import Tp from 'gi://TelepathyGLib';
+
+import * as AppNotifications from './appNotifications.js';
 
 Gio._promisify(Secret, 'password_store', 'password_store_finish');
 Gio._promisify(Secret, 'password_lookup', 'password_lookup_finish');

@@ -1,11 +1,15 @@
-/* exported RoomManager */
+export { RoomManager };
 
-const { Gio, GLib, Polari, TelepathyGLib: Tp } = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Polari from 'gi://Polari';
+import Tp from 'gi://TelepathyGLib';
+
 const Signals = imports.signals;
 
-const { AccountsMonitor } = imports.accountsMonitor;
+import { AccountsMonitor } from './accountsMonitor.js';
 
-var RoomManager = class {
+const RoomManager = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new RoomManager();
