@@ -1,6 +1,7 @@
 import GLib from 'gi://GLib';
 
 import * as Config from './config.js';
+import * as Log from './logging.js';
 import { ngettext } from 'gettext';
 import { programInvocationName } from 'system';
 
@@ -30,40 +31,9 @@ pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Gspell', '1', 'Entry');
 pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
+Log.init();
+
 import { Application } from './application.js';
-
-var LOG_DOMAIN = 'Polari';
-
-function _makeLogFunction(level) {
-    return message => {
-        let { stack } = new Error();
-        let [, caller] = stack.split('\n');
-
-        // Map from resource- to source location
-        caller = caller.replace('resource:///org/gnome/Polari/js', 'src');
-
-        let [code, line] = caller.split(':');
-        let [func, file] = code.split(/\W*@/);
-        GLib.log_structured(LOG_DOMAIN, level, {
-            'MESSAGE': `${message}`,
-            'SYSLOG_IDENTIFIER': 'org.gnome.Polari',
-            'CODE_FILE': file,
-            'CODE_FUNC': func,
-            'CODE_LINE': line,
-        });
-    };
-}
-
-globalThis.log      = _makeLogFunction(GLib.LogLevelFlags.LEVEL_MESSAGE);
-globalThis.debug    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_DEBUG);
-globalThis.info     = _makeLogFunction(GLib.LogLevelFlags.LEVEL_INFO);
-globalThis.warning  = _makeLogFunction(GLib.LogLevelFlags.LEVEL_WARNING);
-globalThis.critical = _makeLogFunction(GLib.LogLevelFlags.LEVEL_CRITICAL);
-globalThis.error    = _makeLogFunction(GLib.LogLevelFlags.LEVEL_ERROR);
-
-// Log all messages when connected to the journal
-if (GLib.log_writer_is_journald(2))
-    GLib.setenv('G_MESSAGES_DEBUG', LOG_DOMAIN, false);
 
 let application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))
