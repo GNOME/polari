@@ -3,7 +3,7 @@ import GLib from 'gi://GLib';
 import * as Config from './config.js';
 import * as Log from './logging.js';
 import { ngettext } from 'gettext';
-import { programInvocationName } from 'system';
+import { programInvocationName, programArgs } from 'system';
 
 imports.package.init({
     name: Config.PACKAGE_NAME,
@@ -38,4 +38,4 @@ import { Application } from './application.js';
 let application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))
     application.hold();
-application.run([programInvocationName, ...ARGV]);
+application.run([programInvocationName, ...programArgs]);

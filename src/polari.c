@@ -97,15 +97,7 @@ main (int argc, char *argv[])
     gjs_context_setup_debugger_console (context);
 
   js_argv = get_js_argv (argc, (const char * const *)argv);
-
-  if (!gjs_context_define_string_array (context, "ARGV",
-                                        -1, (const char **)js_argv,
-                                        &error))
-    {
-      g_message ("Failed to define ARGV: %s", error->message);
-
-      return 1;
-    }
+  gjs_context_set_argv (context, g_strv_length (js_argv), (const char **)js_argv);
 
   if (get_profiler_fd (&profiler_fd))
     {
