@@ -13,7 +13,7 @@ import Gspell from 'gi://Gspell';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import * as ChatView from './chatView.js';
+import { MAX_NICK_CHARS } from './chatView.js';
 import { DropTargetIface } from './pasteManager.js';
 import { IrcParser } from './ircParser.js';
 import { TabCompletion } from './tabCompletion.js';
@@ -194,7 +194,7 @@ const EntryArea = GObject.registerClass({
         delete params.room;
 
         this._ircParser = new IrcParser(this._room);
-        this._maxNickChars = ChatView.MAX_NICK_CHARS;
+        this._maxNickChars = MAX_NICK_CHARS;
         this._nickChangedId = 0;
 
         super._init(params);

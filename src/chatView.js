@@ -20,7 +20,7 @@ import * as Utils from './utils.js';
 Gio._promisify(Tpl.LogWalker.prototype,
     'get_events_async', 'get_events_finish');
 
-var MAX_NICK_CHARS = 8;
+export const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 
 const SCROLL_TIMEOUT = 100; // ms
