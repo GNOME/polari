@@ -7,7 +7,7 @@ import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
 import { MAX_NICK_CHARS } from './chatView.js';
-import { DropTargetIface } from './pasteManager.js';
+import { DropTargetIface, gtypeFromFormats } from './pasteManager.js';
 import IrcParser from './ircParser.js';
 import TabCompletion from './tabCompletion.js';
 
@@ -59,31 +59,36 @@ export const ChatEntry = GObject.registerClass({
         this.emit('text-pasted', text, nLines);
     }
 
-    _onPasteClipboard(editable) {
+    async _onPasteClipboard(editable) {
         if (!this.editable)
             return;
 
         editable.stop_emission_by_name('paste-clipboard');
         const clipboard = this.get_clipboard();
 
-        clipboard.request_uris((cb, uris) => {
-            if (uris && uris.length)
-                this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));
-            else
-                clipboard.request_text(this._onTextReceived.bind(this));
-        });
-
-        clipboard.request_image((cb, pixbuf) => {
-            if (!pixbuf)
-                return;
-            this.emit('image-pasted', pixbuf);
-        });
+        const { formats } = clipboard;
+        const type = gtypeFromFormats(formats);
+        const value = await this._readClipboardValue(clipboard, type);
+        if (typeof value === 'string')
+            editable.emit('insert-at-cursor', value);
+        else if (value instanceof GdkPixbuf.Pixbuf)
+            this.emit('image-pasted', value);
+        else if (value instanceof Gio.File)
+            this.emit('file-pasted', value);
     }
 
-    _onTextReceived(clipboard, text) {
-        if (!text)
-            return;
-        this.emit('insert-at-cursor', text);
+    _readClipboardValue(clipboard, type) {
+        return new Promise((resolve, reject) => {
+            clipboard.read_value_async(type, 0, null, (_, res) => {
+                try {
+                    const value = clipboard.read_value_finish(res);
+                    resolve(value);
+                } catch (e) {
+                    console.error(e);
+                    reject(e);
+                }
+            });
+        });
     }
 });
 

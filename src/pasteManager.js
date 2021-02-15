@@ -4,7 +4,6 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-import Polari from 'gi://Polari';
 
 import * as Utils from './utils.js';
 
@@ -16,22 +15,22 @@ Gio._promisify(Gio._LocalFilePrototype, 'read_async', 'read_finish');
 Gio._promisify(GdkPixbuf.Pixbuf,
     'new_from_stream_async', 'new_from_stream_finish');
 
-const DndTargetType = {
-    URI_LIST: 1,
+/**
+ * Find a supported GType for the formats of a contents exchange
+ * that is being negotiated
+ *
+ * @param {Gdk.ContentFormats} formats - provided formats
+ * @returns {GType=} - the matching GType
+ */
+export function gtypeFromFormats(formats) {
+    const builder = new Gdk.ContentFormatsBuilder();
+    builder.add_gtype(Gio.File);
+    builder.add_gtype(GdkPixbuf.Pixbuf);
+    builder.add_gtype(GObject.TYPE_STRING);
+    const supportedFormats = builder.to_formats();
 
-    TEXT: 2,
-    IMAGE: 3,
-};
-
-function _getTargetForContentType(contentType) {
-    if (Gio.content_type_is_a(contentType, 'text/plain'))
-        return DndTargetType.TEXT;
-    else if (Gio.content_type_is_a(contentType, 'image/*'))
-        return DndTargetType.IMAGE;
-    else
-        return 0;
+    return supportedFormats.match_gtype(formats.union_deserialize_gtypes());
 }
-
 
 export default class PasteManager {
     pasteContent(content, title) {
@@ -51,13 +50,11 @@ export default class PasteManager {
             Gio.FileQueryInfoFlags.NONE,
             GLib.PRIORITY_DEFAULT, null);
 
-        let contentType = fileInfo.get_content_type();
-        let targetType = _getTargetForContentType(contentType);
-
-        if (targetType === DndTargetType.TEXT) {
+        const contentType = fileInfo.get_content_type();
+        if (Gio.content_type_is_a(contentType, 'text/plain')) {
             const [contents] = await file.load_contents_async(null);
             return Utils.gpaste(new TextDecoder().decode(contents), title);
-        } else if (targetType === DndTargetType.IMAGE) {
+        } else if (Gio.content_type_is_a(contentType, 'image/*')) {
             const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
             const pixbuf =
                 await GdkPixbuf.Pixbuf.new_from_stream_async(stream, null);
@@ -78,113 +75,81 @@ export const DropTargetIface = GObject.registerClass({
     },
     Signals: {
         'text-dropped': { param_types: [GObject.TYPE_STRING] },
-        'image-dropped': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
-        'file-dropped': { param_types: [Gio.File.$gtype] },
+        'image-dropped': { param_types: [GdkPixbuf.Pixbuf] },
+        'file-dropped': { param_types: [Gio.File] },
     },
 }, class DropTargetIface extends GObject.Interface {
     addTargets(widget) {
-        this._dragHighlight = false;
+        const imageTypes = [];
+        for (const f of GdkPixbuf.Pixbuf.get_formats())
+            imageTypes.push(...f.get_mime_types());
 
-        widget.drag_dest_set(0, [], Gdk.DragAction.COPY);
-
-        let targetList = widget.drag_dest_get_target_list();
-        if (!targetList)
-            targetList = Gtk.TargetList.new([]);
-
-        targetList.add_uri_targets(DndTargetType.URI_LIST);
-        targetList.add_text_targets(DndTargetType.TEXT);
-        targetList.add_image_targets(DndTargetType.IMAGE, false);
-
-        widget.drag_dest_set_target_list(targetList);
-
-        widget.connect('drag-drop', this._onDragDrop.bind(this));
-        widget.connect('drag-leave', this._onDragLeave.bind(this));
-        widget.connect('drag-motion', this._onDragMotion.bind(this));
-        widget.connect_after('drag-data-received',
-            this._onDragDataReceived.bind(this));
+        this._dropTarget = new Gtk.DropTargetAsync({
+            actions: Gdk.DragAction.COPY,
+            formats: new Gdk.ContentFormats([
+                'text/plain',
+                'text/uri-list',
+                ...imageTypes,
+            ]),
+        });
+        this._dropTarget.connect('drop', (_, drop) => {
+            this._handleDrop(drop);
+            return true;
+        });
+        this._dropTarget.connect('accept', (_, drop) => {
+            if (!this.can_drop)
+                return false;
+            return this._dropTarget.formats.match(drop.get_formats());
+        });
+        widget.add_controller(this._dropTarget);
     }
 
-    _onDragDrop(widget, context, _x, _y, time) {
-        if (!this.can_drop)
-            return Gdk.EVENT_PROPAGATE;
-
-        if (!Polari.drag_dest_supports_target(widget, context))
-            return Gdk.EVENT_PROPAGATE;
-
-        Polari.drag_dest_request_data(widget, context, time);
-        return Gdk.EVENT_STOP;
-    }
-
-    _onDragLeave(widget, _context, _time) {
-        widget.drag_unhighlight();
-        this._dragHighlight = false;
-    }
-
-    _onDragMotion(widget, context, _x, _y, time) {
-        if (!this.can_drop)
-            return Gdk.EVENT_PROPAGATE;
-
-        if (!Polari.drag_dest_supports_target(widget, context))
-            return Gdk.EVENT_PROPAGATE;
-
-        let info = Polari.drag_dest_find_target(widget, context);
-        switch (info) {
-        case DndTargetType.TEXT:
-        case DndTargetType.IMAGE:
-        case DndTargetType.URI_LIST:
-            Gdk.drag_status(context, Gdk.DragAction.COPY, time);
-            break;
-        default:
-            return Gdk.EVENT_PROPAGATE;
-        }
-
-        if (!this._dragHighlight) {
-            this._dragHighlight = true;
-            widget.drag_highlight();
-        }
-
-        return Gdk.EVENT_STOP;
-    }
-
-
-    async _onDragDataReceived(_widget, context, _x, _y, data, info, time) {
-        if (info === DndTargetType.URI_LIST) {
-            let uris = data.get_uris();
-            if (!uris) {
-                Gtk.drag_finish(context, false, false, time);
-                return;
-            }
-
-            // TODO: handle multiple files ...
-            const file = Gio.File.new_for_uri(uris[0]);
-            const attr = Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE;
-            const flags = Gio.FileQueryInfoFlags.NONE;
-            const priority = GLib.PRIORITY_DEFAULT;
-            try {
-                const fileInfo =
-                    await file.query_info_async(attr, flags, priority, null);
-                const contentType = fileInfo.get_content_type();
-                const targetType = _getTargetForContentType(contentType);
-                const canHandle = targetType !== 0;
-                if (canHandle)
-                    this.emit('file-dropped', file);
-                Gtk.drag_finish(context, canHandle, false, time);
-            } catch (e) {
-                Gtk.drag_finish(context, false, false, time);
-            }
+    async _handleDrop(drop) {
+        const type = gtypeFromFormats(drop.formats);
+        const value = await this._readDropValue(drop, type);
+        let action = Gdk.DragAction.COPY;
+        if (typeof value === 'string') {
+            this.emit('text-dropped', value);
+        } else if (value instanceof GdkPixbuf.Pixbuf) {
+            this.emit('image-dropped', value);
+        } else if (value instanceof Gio.File) {
+            if (await this._canHandleFile(value))
+                this.emit('file-dropped', value);
+            else
+                action = 0;
         } else {
-            let success = false;
-            switch (info) {
-            case DndTargetType.TEXT:
-                this.emit('text-dropped', data.get_text());
-                success = true;
-                break;
-            case DndTargetType.IMAGE:
-                this.emit('image-dropped', data.get_pixbuf());
-                success = true;
-                break;
-            }
-            Gtk.drag_finish(context, success, false, time);
+            console.warn(`Unexpected drop value ${value}`);
         }
+        drop.finish(action);
+    }
+
+    async _canHandleFile(file) {
+        let contentType = '';
+        try {
+            const fileInfo = await file.query_info_async(
+                Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+                Gio.FileQueryInfoFlags.NONE,
+                GLib.PRIORITY_DEFAULT,
+                null);
+            contentType = fileInfo.get_content_type();
+        } catch (e) {
+            console.log(`Failed to determine content type: ${e}`);
+        }
+
+        const mimes = this._dropTarget.formats.get_mime_types();
+        return mimes.some(mime => Gio.content_type_is_a(contentType, mime));
+    }
+
+    _readDropValue(drop, type) {
+        return new Promise((resolve, reject) => {
+            drop.read_value_async(type, 0, null, (_, res) => {
+                try {
+                    const value = drop.read_value_finish(res);
+                    resolve(value);
+                } catch (e) {
+                    reject(e);
+                }
+            });
+        });
     }
 });
