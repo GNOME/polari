@@ -36,6 +36,13 @@
 .polari-paste-confirmation {
     border: 0 solid @borders;
     border-top-width: 1px;
+    padding: 6px;
+}
+.polari-paste-confirmation:dir(ltr) {
+    padding-right: 0;
+}
+.polari-paste-confirmation:dir(rtl) {
+    padding-left: 0;
 }
 
 .polari-nick-button {
