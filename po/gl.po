@@ -1,22 +1,22 @@
 # Spanish translation for polari.
 # Copyright (C) 2013 Polari developers
 # This file is distributed under the same license as the polari package.
-# Fran Dieguez <frandieguez@gnome.org>, 2013-2020.
 #
+# Fran Dieguez <frandieguez@gnome.org>, 2013-2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2020-06-08 18:31+0000\n"
-"PO-Revision-Date: 2020-08-13 01:04+0200\n"
+"POT-Creation-Date: 2020-08-12 23:05+0000\n"
+"PO-Revision-Date: 2021-02-23 15:43+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language-Team: Proxecto Trasno <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 "X-Project-Style: gnome\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
@@ -151,7 +151,7 @@ msgstr "Enderezo do _servidor"
 
 #: data/resources/connection-details.ui:33
 msgid "Net_work Name"
-msgstr "Nombre de _rede"
+msgstr "Nome de _rede"
 
 #: data/resources/connection-details.ui:49
 #: data/resources/connection-details.ui:116
@@ -255,7 +255,7 @@ msgstr "Seguinte sala con mensaxes sen ler"
 #: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
-msgstr "Angerior sala con mensaxes sen ler"
+msgstr "Anterior sala con mensaxes sen ler"
 
 #: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
@@ -293,7 +293,7 @@ msgstr "Benvida a Polari"
 msgid ""
 "Polari is an easy way to chat using IRC. Select a network to get started."
 msgstr ""
-"Polari é unha forma doada de conversar empregando IRC. Seleccoine unha rede "
+"Polari é unha forma doada de conversar empregando IRC. Seleccione unha rede "
 "para comezar."
 
 #: data/resources/initial-setup-window.ui:171
@@ -302,7 +302,7 @@ msgid ""
 "later, by clicking the + button."
 msgstr ""
 "Seleccione as salas ás que quere conectarse. Pode engadir máis redes e salas "
-"máis tarde, premento no botón +."
+"máis tarde, premendo no botón +."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:232
 msgid "Join Chat Room"
@@ -496,7 +496,7 @@ msgstr "%s uniuse"
 #: src/chatView.js:997
 #, javascript-format
 msgid "%s left"
-msgstr "%s saiu"
+msgstr "%s saíu"
 
 #: src/chatView.js:1094
 #, javascript-format
@@ -745,7 +745,6 @@ msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <asunto> — estabelece o asunto a <asunto>, ou mostra o actual"
 
 #: src/ircParser.js:38
-#| msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgid "/WHOIS <nick> — requests information on <nick>"
 msgstr "/NICK <alcume> — solicita información de <alcume>"
 
@@ -774,7 +773,6 @@ msgstr "Non hai ningún asunto estabelecido"
 
 #: src/ircParser.js:312
 #, javascript-format
-#| msgid "Last Activity:"
 msgid "User: %s - Last activity: %s"
 msgstr "Usuario: %s - Última actividade:: %s"
 
@@ -855,7 +853,7 @@ msgstr "Non foi posíbel conectarse a %s."
 
 #: src/roomStack.js:100
 msgid "Should the password be saved?"
-msgstr "Deberiase gardar o contrasinal?"
+msgstr "Deberíase gardar o contrasinal?"
 
 #: src/roomStack.js:102 src/telepathyClient.js:668
 #, javascript-format
