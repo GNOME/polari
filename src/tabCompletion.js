@@ -15,24 +15,18 @@ const TabCompletion = class {
         this._entry.connect('key-press-event', this._onKeyPress.bind(this));
         this._entry.connect('focus-out-event', this._cancel.bind(this));
         this._entry.connect('unmap', this._cancel.bind(this));
-        this._entry.connect('realize', () => {
-            this._popup.set_transient_for(this._entry.get_toplevel());
+
+        this._popup = new Gtk.Popover({
+            position: Gtk.PositionType.TOP,
+            modal: false,
+            relative_to: this._entry,
         });
-
-        this._popup = new Gtk.Window({ type: Gtk.WindowType.POPUP });
-
-        // HACK: tooltips are the only popup windows that don't require a
-        //       grab on wayland
-        this._popup.set_type_hint(Gdk.WindowTypeHint.TOOLTIP);
-
-        let frame = new Gtk.Frame({ visible: true });
-        this._popup.add(frame);
 
         this._list = new Gtk.ListBox({ selection_mode: Gtk.SelectionMode.SINGLE });
         this._list.set_filter_func(this._filter.bind(this));
         this._list.connect('row-selected', this._onRowSelected.bind(this));
         this._list.connect('row-activated', this._stop.bind(this));
-        frame.add(this._list);
+        this._popup.add(this._list);
 
         this._widgetMap = new Map();
         this._previousWasCommand = false;
@@ -55,25 +49,18 @@ const TabCompletion = class {
     _showPopup() {
         this._list.show_all();
 
-        let [, height] = this._list.get_preferred_height();
-        let [, width] = this._list.get_preferred_width();
-        this._popup.resize(width, height);
-
-        let win = this._entry.get_window();
-
         let layout = this._entry.get_layout();
         let layoutIndex = this._entry.text_index_to_layout_index(this._startPos);
         let wordPos = layout.index_to_pos(layoutIndex);
         let [layoutX] = this._entry.get_layout_offsets();
 
-        let allocation = this._entry.get_allocation();
-        let [ret_, x, y] = win.get_origin();
-        x += allocation.x + Math.min(
-            (layoutX + wordPos.x) / Pango.SCALE,
-            allocation.width - width);
-        y += allocation.y - height;
-        this._popup.move(x, y);
-        this._popup.show();
+        this._popup.pointing_to = new Gdk.Rectangle({
+            x: layoutX + wordPos.x / Pango.SCALE,
+            y: 0,
+            width: 1,
+            height: 1,
+        });
+        this._popup.popup();
     }
 
     setCompletions(completions) {
@@ -245,7 +232,7 @@ const TabCompletion = class {
         if (this._key.length === 0)
             return;
 
-        this._popup.hide();
+        this._popup.popdown();
         this._popup.set_size_request(-1, -1);
 
         this._key = '';
