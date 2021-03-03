@@ -20,7 +20,7 @@ export default class TabCompletion {
 
         this._popup = new Gtk.Popover({
             position: Gtk.PositionType.TOP,
-            modal: false,
+            autohide: false,
         });
         this._popup.set_parent(this._entry);
 
