@@ -134,7 +134,7 @@ msgstr "Zda příkaz pro identifikaci podporuje jako parametr uživatelské jmé
 
 #: data/org.gnome.Polari.gschema.xml:56
 msgid "List of muted usernames"
-msgstr "Seznam ztišených uživatelů"
+msgstr "Seznam uživatelů s vypnutým zvukem"
 
 #: data/org.gnome.Polari.gschema.xml:57
 msgid ""
