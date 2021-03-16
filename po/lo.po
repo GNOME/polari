@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2019-09-18 23:08+0000\n"
-"PO-Revision-Date: 2019-11-01 14:27+0700\n"
+"POT-Creation-Date: 2020-06-08 18:31+0000\n"
+"PO-Revision-Date: 2021-03-16 11:22+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lo_LA\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7 data/org.gnome.Polari.desktop.in:3
-#: data/resources/main-window.ui:39 src/roomStack.js:205
+#: data/resources/main-window.ui:39 src/roomStack.js:207
 msgid "Polari"
 msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8 data/org.gnome.Polari.desktop.in:4
-#: src/application.js:847
+#: src/application.js:841
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "ໂປແກຣມສົ່ງຂໍ້ຄວາມສັ້ນຜ່ານອິນເຕີເນັດສຳລັບ GNOME"
 
@@ -129,6 +129,14 @@ msgstr "ລະບຸຊື່ຜູ້ໃຊ້ໄດ້"
 msgid "Whether the identify command is known to support the username parameter"
 msgstr "ຄຳສັ່ງລະບຸຕົວຕົນແມ່ນໄດ້ຮັບການສະຫນັບສະຫນູນຕົວປ່ຽນຊື່ຜູ້ໃຊ້"
 
+#: data/org.gnome.Polari.gschema.xml:56
+msgid "List of muted usernames"
+msgstr "ລາຍຊື່ຜູ້ໃຊ້ທີ່ປິດສຽງໄວ້"
+
+#: data/org.gnome.Polari.gschema.xml:57
+msgid "A list of usernames for whose private messages not to show notifications"
+msgstr "ລາຍຊື່ຜູ້ໃຊ້ສໍາລັບຜູ້ທີ່ມີຂ່າວສານສ່ວນຕົວທີ່ຈະບໍ່ສະແດງການແຈ້ງເຕືອນ"
+
 #: data/resources/connection-details.ui:13
 msgid "_Server Address"
 msgstr "_ທີ່ຢູ່ຂອງເຊີເວີ"
@@ -153,7 +161,7 @@ msgstr "_ຊື່ຫລີ້ນ"
 msgid "_Real Name"
 msgstr "_ຊື່ແທ້"
 
-#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:109
+#: data/resources/connection-properties.ui:9 data/resources/entry-area.ui:110
 #: data/resources/join-room-dialog.ui:11 src/initialSetup.js:85
 msgid "_Cancel"
 msgstr "_ອອກ"
@@ -166,7 +174,7 @@ msgstr "_ໃຊ້"
 msgid "Change nickname"
 msgstr "ປ່ຽນຊື່ຫລີ້ນ"
 
-#: data/resources/entry-area.ui:119
+#: data/resources/entry-area.ui:120
 msgid "_Paste"
 msgstr "_ວ່າງ"
 
@@ -197,50 +205,60 @@ msgstr "ສະແດງ Emoji Picker"
 
 #: data/resources/help-overlay.ui:48
 msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "ສະແດງວິທີໃຊ້"
+
+#: data/resources/help-overlay.ui:55
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "ເປີດເມນູ"
+
+#: data/resources/help-overlay.ui:62
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "ອອກ"
 
-#: data/resources/help-overlay.ui:55
+#: data/resources/help-overlay.ui:69
 msgctxt "shortcut window"
 msgid "Keyboard Shortcuts"
 msgstr "ຕົວລັດຄີບອດ"
 
-#: data/resources/help-overlay.ui:64
+#: data/resources/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "ການນຳທາງ"
 
-#: data/resources/help-overlay.ui:68
+#: data/resources/help-overlay.ui:82
 msgctxt "shortcut window"
 msgid "Next Room"
 msgstr "ຫ້ອງຕໍ່ໄປ"
 
-#: data/resources/help-overlay.ui:75
+#: data/resources/help-overlay.ui:89
 msgctxt "shortcut window"
 msgid "Previous Room"
 msgstr "ຫ້ອງກ່ອນຫນ້ານີ້"
 
-#: data/resources/help-overlay.ui:82
+#: data/resources/help-overlay.ui:96
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
 msgstr "ຫ້ອງຕໍ່ໄປກັບຂໍ້ຄວາມທີ່ຍັງບໍ່ທັນອ່ານ"
 
-#: data/resources/help-overlay.ui:89
+#: data/resources/help-overlay.ui:103
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
 msgstr "ຫ້ອງກ່ອນຫນ້ານີ້ກັບຂໍ້ຄວາມທີ່ຍັງບໍ່ທັນອ່ານ"
 
-#: data/resources/help-overlay.ui:96
+#: data/resources/help-overlay.ui:110
 msgctxt "shortcut window"
 msgid "First Room"
 msgstr "ຫ້ອງທຳອິດ"
 
-#: data/resources/help-overlay.ui:103
+#: data/resources/help-overlay.ui:117
 msgctxt "shortcut window"
 msgid "Last Room"
 msgstr "ຫ້ອງສຸດທ້າຍ"
 
-#: data/resources/help-overlay.ui:110
+#: data/resources/help-overlay.ui:124
 msgctxt "shortcut window"
 msgid "First – Ninth Room"
 msgstr "ຫ້ອງທຳອິດ – ທີ່ເກົ້າ"
@@ -307,7 +325,7 @@ msgstr "ຊ່ວຍເຫລືອ"
 msgid "About"
 msgstr "ກ່ຽວກັບ"
 
-#: data/resources/main-window.ui:34 data/resources/menus.ui:6 src/application.js:57
+#: data/resources/main-window.ui:34 data/resources/menus.ui:6 src/application.js:58
 msgid "Quit"
 msgstr "ອອກ"
 
@@ -315,15 +333,15 @@ msgstr "ອອກ"
 msgid "Add rooms and networks"
 msgstr "ເພີ່ມຫ້ອງ ແລະ ເນັດເວີກ"
 
-#: data/resources/main-window.ui:196
+#: data/resources/main-window.ui:197
 msgid "Show connected users"
 msgstr "ສະແດງຊື່ຜູ້ໃຊ້ທີ່ເຊື່ອມຕໍ່ຢູ່"
 
-#: data/resources/main-window.ui:224 src/roomList.js:400 src/userList.js:456
+#: data/resources/main-window.ui:225 src/roomList.js:474 src/userList.js:417
 msgid "Offline"
 msgstr "ອັອບລາຍ"
 
-#: data/resources/main-window.ui:233
+#: data/resources/main-window.ui:234
 msgid "Go online to chat and receive messages."
 msgstr "ເປີດອອນໄລນເພື່ອແຊັດ ແລະ ຮັບຂໍ້ຄວາມ."
 
@@ -375,36 +393,36 @@ msgstr "ຈະແຈ້ງເຕືອນຖ້າປະກົດເຫັນວ
 msgid "Start Conversation"
 msgstr "ເລີ່ມການສົນທະນາ"
 
-#: src/application.js:43
+#: src/application.js:44
 msgid "Start Telepathy client"
 msgstr "ເລີ່ມ Telepathy client"
 
-#: src/application.js:48
+#: src/application.js:49
 msgid "Start in debug mode"
 msgstr "ເລີ່ມໃນໂຫມດດີບັກ"
 
-#: src/application.js:51
+#: src/application.js:52
 msgid "Allow running alongside another instance"
 msgstr "ອະນຸຍາດໃຫ້ເປີດຄວບຄູ່ໄປກັບ instance ອື່ນ"
 
-#: src/application.js:54
+#: src/application.js:55
 msgid "Print version and exit"
 msgstr "ພິມເວີຊັນ ແລະ ອອກ"
 
-#: src/application.js:479 src/utils.js:185
+#: src/application.js:486 src/utils.js:241
 msgid "Failed to open link"
 msgstr "ມີຂໍ້ຜິດພາດໃນການເປີດລີ້ງ"
 
-#: src/application.js:770
+#: src/application.js:761
 #, javascript-format
 msgid "%s removed."
 msgstr "%s ລຶບແລ້ວ."
 
-#: src/application.js:846
+#: src/application.js:840
 msgid "translator-credits"
 msgstr "saikeo kavhanxay (kavhanxay@hotmail.com)"
 
-#: src/application.js:852
+#: src/application.js:846
 msgid "Learn more about Polari"
 msgstr "ຮຽນຮູ້ເພີ່ມເຕີ່ມກ່ຽວກັບ Polari"
 
@@ -412,65 +430,65 @@ msgstr "ຮຽນຮູ້ເພີ່ມເຕີ່ມກ່ຽວກັບ Po
 msgid "Undo"
 msgstr "ກັບຄືນ"
 
-#: src/chatView.js:137
+#: src/chatView.js:138
 msgid "New Messages"
 msgstr "ຂໍ້ຄວາມໃຫມ່"
 
-#: src/chatView.js:785
+#: src/chatView.js:786
 msgid "Open Link"
 msgstr "ເປີດລີ້ງ"
 
-#: src/chatView.js:791
+#: src/chatView.js:792
 msgid "Copy Link Address"
 msgstr "ສຳເນົາທີ່ຢູ່ລີ້ງ"
 
-#: src/chatView.js:963
+#: src/chatView.js:964
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s ຕອນນີ້ແມ່ນຮູ້ຈັກໃນຖານະ %s"
 
-#: src/chatView.js:968
+#: src/chatView.js:969
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s ໄດ້ຢຸດການເຊື່ອມຕໍ່ແລ້ວ"
 
-#: src/chatView.js:977
+#: src/chatView.js:978
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s ໄດ້ຖືກໄລ່ອອກໂດຍ %s"
 
-#: src/chatView.js:978
+#: src/chatView.js:979
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s ໄດ້ຖືກໄລ່ອອກແລ້ວ"
 
-#: src/chatView.js:985
+#: src/chatView.js:986
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s ໄດ້ຖືກແບນໂດຍ %s"
 
-#: src/chatView.js:986
+#: src/chatView.js:987
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s ໄດ້ຖືກແບນແລ້ວ"
 
-#: src/chatView.js:991
+#: src/chatView.js:992
 #, javascript-format
 msgid "%s joined"
 msgstr "%s ໄດ້ເຂົ້າຮ່ວມແລ້ວ"
 
-#: src/chatView.js:996
+#: src/chatView.js:997
 #, javascript-format
 msgid "%s left"
 msgstr "%s ອອກໄປແລ້ວ"
 
-#: src/chatView.js:1093
+#: src/chatView.js:1094
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "ຜູ້ໃຊ້ %d ໄດ້ເຂົ້າຮ່ວມແລ້ວ"
 
-#: src/chatView.js:1100
+#: src/chatView.js:1101
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -478,14 +496,14 @@ msgstr[0] "ຜູ້ໃຊ້ %d ໄດ້ເຂົ້າອອກໄປແລ�
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1172
+#: src/chatView.js:1173
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1177
+#: src/chatView.js:1178
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "ມື້ວານ, %H∶%M"
@@ -493,7 +511,7 @@ msgstr "ມື້ວານ, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1182
+#: src/chatView.js:1183
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -502,7 +520,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1188
+#: src/chatView.js:1189
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
@@ -511,7 +529,7 @@ msgstr "%B %d, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1194
+#: src/chatView.js:1195
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%B %d %Y, %H∶%M"
@@ -519,14 +537,14 @@ msgstr "%B %d %Y, %H∶%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1200
+#: src/chatView.js:1201
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1205
+#: src/chatView.js:1206
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "ມື້ວານ, %l∶%M %p"
@@ -534,7 +552,7 @@ msgstr "ມື້ວານ, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1210
+#: src/chatView.js:1211
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -543,7 +561,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1216
+#: src/chatView.js:1217
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
@@ -552,7 +570,7 @@ msgstr "%B %d, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1222
+#: src/chatView.js:1223
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%B %d %Y, %l∶%M %p"
@@ -565,57 +583,57 @@ msgstr "ໄດ້ເພີ່ມແລ້ວ"
 msgid "No results."
 msgstr "ບໍ່ພົບ."
 
-#: src/connections.js:501
+#: src/connections.js:511
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "\"%s\" ຄຸນສົມບັດ"
 
-#: src/connections.js:545
+#: src/connections.js:555
 msgid ""
 "Polari disconnected due to a network error. Please check if the address field is correct."
 msgstr ""
 "Polari ຂາດການເຊື່ອມຕໍ່ເພາະວ່າເກີດມີຂໍ້ຜິດພາດໃນລະບົບເນັດເວີກ. "
 "ກະລຸນາກວດເບິງຄືນວ່າການຕັ້ງຄ່າເນັດເວີກຕ່າງໆແມ່ນຖືກຕ້ອງຫມົດແລ້ວ."
 
-#: src/entryArea.js:369
+#: src/entryArea.js:370
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "ວ່າງແຖວ %s ຂອງຕົວຫນັງສືໄວ້ໃນ public paste service?"
 
-#: src/entryArea.js:373
+#: src/entryArea.js:374
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "ກຳລັງອັບໂຫລດແຖວ %s ຂອງຕົວຫນັງສືໄວ້ໃນ public paste service…"
 
-#: src/entryArea.js:380
+#: src/entryArea.js:381
 msgid "Upload image to public paste service?"
 msgstr "ອັບໂຫລດຮູບພາບໄປໄວ້ໃນ public paste service?"
 
-#: src/entryArea.js:381
+#: src/entryArea.js:382
 msgid "Uploading image to public paste service…"
 msgstr "ກຳຫລັງອັບໂຫລດຮູບພາບໄປໄວ້ໃນ public paste service…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:403
+#: src/entryArea.js:404
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "ອັບໂຫລດ “%s” to public paste service?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:405
+#: src/entryArea.js:406
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "ກຳຫລັງອັບໂຫລດ “%s” to public paste service…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:414
+#: src/entryArea.js:415
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s ໃນ #%s"
 
-#: src/entryArea.js:416
+#: src/entryArea.js:417
 #, javascript-format
 msgid "Paste from %s"
 msgstr "ວ່າງຈາກ %s"
@@ -639,282 +657,307 @@ msgstr "_ຕໍ່ໄປ"
 #. MODE: "/MODE <mode> <nick|channel> — ",
 #. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
-#. WHOIS: N_("/WHOIS <nick> — requests information on <nick>"),
 #.
-#: src/ircParser.js:21
+#.
+#: src/ircParser.js:24
 msgid "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr "/CLOSE [<channel>] [<reason>] — ປິດ <channel>, by default the current one"
 
-#: src/ircParser.js:22
+#: src/ircParser.js:25
 msgid "/HELP [<command>] — displays help for <command>, or a list of available commands"
 msgstr "/HELP [<command>] — ສະແດງວິທີນຳໃຊ້ສຳລັບ <command>, ຫລືສະແດງຄຳສັງທີ່ມີຢູ່"
 
-#: src/ircParser.js:23
+#: src/ircParser.js:26
 msgid "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr "/INVITE <nick> [<channel>] — ເຊີນ <nick> ເຂົ້າ <channel>, ຫລື ເຂົ້າຫ້ອງປະຈຸບັນ"
 
-#: src/ircParser.js:24
+#: src/ircParser.js:27
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <channel> — ເຂົ້າຮ່ວມ <channel>"
 
-#: src/ircParser.js:25
+#: src/ircParser.js:28
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <nick> — ໄລ່ <nick> ອອກຈາກຫ້ອງປະຈຸບັນ"
 
-#: src/ircParser.js:26
+#: src/ircParser.js:29
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <action> — ສົ່ງ <action> ເຂົ້າໄປໃນຫ້ອງປະຈຸບັນ"
 
-#: src/ircParser.js:27
+#: src/ircParser.js:30
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr "/MSG <nick> [<message>] — ສົ່ງຂໍ້ຄວາມສ່ວນຕົວໄປຫາ <nick>"
 
-#: src/ircParser.js:28
+#: src/ircParser.js:31
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES — ສະແດງລາຍຊື່ຜູ້ໃຊ້ທີ່ມີຢູ່ໃນຫ້ອງຕອນນີ້"
 
-#: src/ircParser.js:29
+#: src/ircParser.js:32
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <nickname> — ຕັ້ງຊື່ຫລີ້ນຂອງທ່ານໄປເປັນ <nickname>"
 
-#: src/ircParser.js:30
+#: src/ircParser.js:33
 msgid "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr "/PART [<channel>] [<reason>] — ອອກຈາກ <channel>, by default the current one"
 
-#: src/ircParser.js:31
+#: src/ircParser.js:34
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr "/QUERY <nick> — ເປີດການສົນທະນາແບບສ່ວນຕົວກັບ <nick>"
 
-#: src/ircParser.js:32
+#: src/ircParser.js:35
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<reason>] — ຕັດການເຊື່ອມຕໍ່ກັບເຊີເວີປະຈຸບັນນີ້"
 
-#: src/ircParser.js:33
+#: src/ircParser.js:36
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <text> — ສົ່ງ <text> ໄປຫາ ຫ້ອງ/ລາຍຊື່ຕິດຕໍ່ປະຈຸບັນນີ້"
 
-#: src/ircParser.js:34
+#: src/ircParser.js:37
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <topic> — ຕັ້ງຫົວຂໍ້ໄປເປັນ <topic>, ຫລື ສະແດງຫົວຂໍ້ປະຈຸບັນນີ້"
 
-#: src/ircParser.js:37
+#: src/ircParser.js:38
+msgid "/WHOIS <nick> — requests information on <nick>"
+msgstr "/WHOIS <nick> — ຂໍຂໍ້ມູນກ່ຽວກັບ <nick>"
+
+#: src/ircParser.js:41
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr "ຄຳສັ່ງນີ້ບໍ່ຮຸ້ຈັກ — ໃຫ້ພິມຄຳວ່າ /HELP ເພື່ອຊອກເບິງຄຳສັ່ງຕ່າງໆທີ່ມີຢູ່"
 
-#: src/ircParser.js:51
+#: src/ircParser.js:55
 #, javascript-format
 msgid "Usage: %s"
 msgstr "ນຳໃຊ້: %s"
 
-#: src/ircParser.js:88
+#: src/ircParser.js:92
 msgid "Known commands:"
 msgstr "ຄຳສັ່ງທີ່ຮູ້ຈັກ:"
 
-#: src/ircParser.js:190
+#: src/ircParser.js:194
 #, javascript-format
 msgid "Users on %s:"
 msgstr "ຜູ້ໃຊ້ໃນ %s:"
 
-#: src/ircParser.js:269
+#: src/ircParser.js:273
 msgid "No topic set"
 msgstr "ບໍ່ໄດ້ຕັ້ງຫົວຂໍ້"
+
+#: src/ircParser.js:312
+#, javascript-format
+msgid "User: %s - Last activity: %s"
+msgstr "ຜູ້ໃຊ້: %s - ກິດຈະກໍາສຸດທ້າຍ: %s"
 
 #: src/joinDialog.js:232
 msgid "Add Network"
 msgstr "ເພີ່ມເນັດເວີກ"
 
-#: src/mainWindow.js:389
+#: src/mainWindow.js:399
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d ຜຸ້ໃຊ້"
 
-#: src/roomList.js:190
+#: src/roomList.js:253
 msgid "Leave chatroom"
 msgstr "ອອກຈາກຫ້ອງແຊັດ"
 
-#: src/roomList.js:190
+#: src/roomList.js:253
 msgid "End conversation"
 msgstr "ຈົບການແຊັດ"
 
-#: src/roomList.js:301
+#: src/roomList.js:269
+msgid "Unmute"
+msgstr "ບໍ່ປິດສຽງ"
+
+#: src/roomList.js:273
+msgid "Mute"
+msgstr "ປິດສຽງ"
+
+#: src/roomList.js:375
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "ເນັດເວີກ %s ມີຂໍ້ຜິດພາດ"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "GNOME (irc.gnome.org)"
-#: src/roomList.js:372
+#: src/roomList.js:446
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:379
+#: src/roomList.js:453
 msgid "Connection Problem"
 msgstr "ບັນຫາການເຊື່ອມຕໍ່"
 
-#: src/roomList.js:396
+#: src/roomList.js:470
 msgid "Connected"
 msgstr "ເຊື່ອມຕໍ່ແລ້ວ"
 
-#: src/roomList.js:398
+#: src/roomList.js:472
 msgid "Connecting…"
 msgstr "ກຳລັງເຊື່ອມຕໍ່…"
 
-#: src/roomList.js:402
+#: src/roomList.js:476
 msgid "Unknown"
 msgstr "ບໍ່ຮູ້ຈັກ"
 
-#: src/roomList.js:422
+#: src/roomList.js:496
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ກັບ %s ໃນຮູບແບບທີ່ປອດໄພໄດ້."
 
-#: src/roomList.js:425
+#: src/roomList.js:499
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s ຕ້ອງການລະຫັດຜ່ານ."
 
-#: src/roomList.js:431
+#: src/roomList.js:505
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ໄປຫາ %s. ເຊີເວີຂັດຂ້ອງ."
 
-#: src/roomList.js:434
+#: src/roomList.js:508
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "ບໍ່ສາມາດເຊື່ອມຕໍ່ໄປຫາ %s."
 
-#: src/roomStack.js:98
+#: src/roomStack.js:100
 msgid "Should the password be saved?"
 msgstr "ຄວນຈະບັນທຶກລະຫັດຜ່ານໄວ້ບໍ່?"
 
-#: src/roomStack.js:100 src/telepathyClient.js:651
+#: src/roomStack.js:102 src/telepathyClient.js:668
 #, javascript-format
 msgid "Identification will happen automatically the next time you connect to %s"
 msgstr "ການລະບຸຕົວຕົນຈະເກີດຂື້ນໂດຍອັດຕະໂນມັດໃນຄັ້ງຕໍ່ໄປເມື່ອທ່ານເຊື່ອມຕໍ່ກັບ %s"
 
-#: src/roomStack.js:106
+#: src/roomStack.js:108
 msgid "_Save Password"
 msgstr "_ບັນທຶກລະຫັດຜ່ານ"
 
-#: src/roomStack.js:139
+#: src/roomStack.js:141
 msgid "Failed to join the room"
 msgstr "ເຂົ້າຮ່ວມຫ້ອງນີ້ບໍ່ໄດ້"
 
-#: src/roomStack.js:141
+#: src/roomStack.js:143
 msgid "_Retry"
 msgstr "_ຫລອງໃຫມ່"
 
-#: src/roomStack.js:165
+#: src/roomStack.js:167
 msgid "The room is full."
 msgstr "ຫ້ອງນີ້ເຕັມແລ້ວ."
 
-#: src/roomStack.js:168
+#: src/roomStack.js:170
 msgid "You have been banned from the room."
 msgstr "ທ່ານໄດ້ຖືກແບນຈາກຫ້ອງນີ້ແລ້ວ."
 
-#: src/roomStack.js:171
+#: src/roomStack.js:173
 msgid "The room is invite-only."
 msgstr "ຫ້ອງນີ້ແມ່ນສຳລັບຜູ້ທີ່ໄດ້ຮັບການເຊີນເຂົ້າເທົ່ານັ້ນ."
 
-#: src/roomStack.js:174
+#: src/roomStack.js:176
 msgid "You have been kicked from the room."
 msgstr "ທ່ານໄດ້ຖືກໄລ່ອອກຈາກກຸ່ມແລ້ວ."
 
-#: src/roomStack.js:177
+#: src/roomStack.js:179
 msgid "It is not possible to join the room now, but you can retry later."
 msgstr "ບໍ່ສາມາດເຂົ້າຮ່ວມຫ້ອງນີ້ໄດ້ໃນຕອນນີ້ ແຕ່ວ່າທ່ານສາມາດລອງເຂົ້າໃຫມ່ຕາມຫລັງ."
 
-#: src/roomStack.js:209
+#: src/roomStack.js:211
 msgid "Join a room using the + button."
 msgstr "ເຂົ້າຫ້ອງແຊັດໂດຍການນຳໃຊ້ປຸ່ມ +."
 
-#: src/telepathyClient.js:464
+#: src/telepathyClient.js:477
 msgid "Good Bye"
 msgstr "ລ່າກ່ອນ"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:650
+#: src/telepathyClient.js:667
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "ຕ້ອງການບັນທຶກລະຫັດ %s ສຳລັບ %s ບໍ່?"
 
-#: src/telepathyClient.js:654
+#: src/telepathyClient.js:671
 msgid "Save"
 msgstr "ບັນທຶກ"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:686
+#: src/telepathyClient.js:707
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s ໃນ %s"
 
-#: src/userList.js:256
+#: src/userList.js:413
+msgid "Available in another room."
+msgstr "ວ່າງຢູ່ໃນຫ້ອງແຊັດອື່ນ."
+
+#: src/userList.js:415
+msgid "Online"
+msgstr "ອອນລາຍ"
+
+#: src/userList.js:578
+msgid "No Results"
+msgstr "ບໍ່ພົບຫຍັງ"
+
+#: src/userTracker.js:369
+msgid "User is online"
+msgstr "ຜູ້ໃຊ້ທີ່ອອນລາຍຢູ່"
+
+#: src/userTracker.js:370
+#, javascript-format
+msgid "User %s is now online."
+msgstr "ຜູ້ໃຊ້ %s ຕອນນີ້ແມ່ນອອນລາຍຢູ່."
+
+#: src/utils.js:137
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "ລະຫັດຜ່ານເຊີເວີ Polari ສຳລັບ %s"
+
+#: src/utils.js:142
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "ລະຫັດຜ່ານ Polari NickServ ສຳລັບ %s"
+
+#: src/utils.js:372
+msgid "Now"
+msgstr "ຕອນນີ້"
+
+#: src/utils.js:375
+msgid "Unavailable"
+msgstr "ບໍ່ຫວ່າງ"
+
+#: src/utils.js:379
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "%d ວິນາທີທີ່ຜ່ານມາ"
 
-#: src/userList.js:263
+#: src/utils.js:386
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%d ນາທີທີ່ຜ່ານມາ"
 
-#: src/userList.js:270
+#: src/utils.js:393
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d ຊົ່ວໂມງທີ່ຜ່ານມາ"
 
-#: src/userList.js:277
+#: src/utils.js:400
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d ມື້ທີ່ຜ່ານມາ"
 
-#: src/userList.js:284
+#: src/utils.js:407
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d ອາທິດທີ່ຜ່ານມາ"
 
-#: src/userList.js:290
+#: src/utils.js:413
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ເດືອນທີ່ຜ່ານມາ"
-
-#: src/userList.js:452
-msgid "Available in another room."
-msgstr "ວ່າງຢູ່ໃນຫ້ອງແຊັດອື່ນ."
-
-#: src/userList.js:454
-msgid "Online"
-msgstr "ອອນລາຍ"
-
-#: src/userList.js:617
-msgid "No Results"
-msgstr "ບໍ່ພົບຫຍັງ"
-
-#: src/userTracker.js:312
-msgid "User is online"
-msgstr "ຜູ້ໃຊ້ທີ່ອອນລາຍຢູ່"
-
-#: src/userTracker.js:313
-#, javascript-format
-msgid "User %s is now online."
-msgstr "ຜູ້ໃຊ້ %s ຕອນນີ້ແມ່ນອອນລາຍຢູ່."
-
-#: src/utils.js:104
-#, javascript-format
-msgid "Polari server password for %s"
-msgstr "ລະຫັດຜ່ານເຊີເວີ Polari ສຳລັບ %s"
-
-#: src/utils.js:109
-#, javascript-format
-msgid "Polari NickServ password for %s"
-msgstr "ລະຫັດຜ່ານ Polari NickServ ສຳລັບ %s"
