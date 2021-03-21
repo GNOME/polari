@@ -34,7 +34,7 @@
     </item>
     <item>
       <p>Information about the user, including their name and the last time they
-      were active in the channel, will appear.  Click <gui>Message</gui> to 
+      were active in the channel, will appear. Click <gui>Start Conversation</gui> to
       start a private conversation.
       </p>
     </item>
@@ -55,7 +55,7 @@
       the channel, will appear.</p>
     </item>
     <item>
-      <p>Press <gui>Message</gui> to start a private conversation.</p>
+      <p>Press <gui>Start Conversation</gui> to start a private conversation.</p>
     </item>
   </steps>
 
