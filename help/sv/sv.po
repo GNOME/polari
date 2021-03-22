@@ -1,13 +1,13 @@
 # Swedish translation for polari.
-# Copyright © 2016, 2017 polari's COPYRIGHT HOLDER
+# Copyright © 2016-2021 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2017.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2016, 2017, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2017-03-20 13:22+0000\n"
-"PO-Revision-Date: 2017-03-20 15:58+0100\n"
+"POT-Creation-Date: 2021-03-22 13:18+0000\n"
+"PO-Revision-Date: 2021-03-22 17:50+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -53,7 +53,6 @@ msgstr "Paul Cutler"
 msgid "Creative Commons Share Alike 4.0"
 msgstr "Creative Commons DelaLika 4.0"
 
-# TODO: GNOME
 #. (itstool) path: info/desc
 #: C/index.page:27
 msgid ""
@@ -322,12 +321,12 @@ msgstr ""
 #: C/irc-start-conversation.page:36
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
 "Information om användaren kommer att visas, så som deras namn och sista "
-"gången de var aktiva i kanalen. Klicka å <gui>Meddelande</gui> för att "
-"starta en privat konversation."
+"gången de var aktiva i kanalen. Klicka på <gui>Starta konversation</gui> för "
+"att starta en privat konversation."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -356,8 +355,10 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
-msgstr "Tryck ned <gui>Meddelande</gui> för att starta en privat konversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
+msgstr ""
+"Tryck ned <gui>Starta konversation</gui> för att starta en privat "
+"konversation."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -461,7 +462,6 @@ msgstr ""
 "Ange namnet på chattrummet du vill gå in i eller välj ett eller flera "
 "chattrum från listan och tryck sedan ned <gui>Anslut</gui>."
 
-# TODO: doubled period
 #. (itstool) path: item/p
 #: C/network-connect.page:58
 msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
