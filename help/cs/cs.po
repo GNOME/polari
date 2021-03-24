@@ -1,14 +1,14 @@
 # Czech translation for polari.
 # Copyright (C) 2016 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Marek Černocký <marek@manet.cz>, 2016, 2017.
+#
+# Marek Černocký <marek@manet.cz>, 2016, 2017, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2017-03-20 17:54+0000\n"
-"PO-Revision-Date: 2017-03-20 18:55+0100\n"
+"POT-Creation-Date: 2021-03-22 13:18+0000\n"
+"PO-Revision-Date: 2021-03-24 08:36+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>>\n"
 "Language: cs\n"
@@ -61,8 +61,8 @@ msgid ""
 "client which integrates with the GNOME desktop. Learn more about Polari."
 msgstr ""
 "<app>Polari</app> je čistý, jednoduchý a minimalistický klient IRC (Internet "
-"Relay Chat), který je integrován s uživatelským prostředím GNOME. "
-"Seznamte se s ním blíže."
+"Relay Chat), který je integrován s uživatelským prostředím GNOME. Seznamte "
+"se s ním blíže."
 
 #. (itstool) path: page/title
 #: C/index.page:32
@@ -323,12 +323,12 @@ msgstr ""
 #: C/irc-start-conversation.page:36
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
 "Objeví se informace o uživateli, zahrnující jeho jména a poslední čas, kdy "
-"byl na kanále aktivní. Kliknutím na <gui>Zpráva</gui> začněte soukromou "
-"konverzaci."
+"byl na kanále aktivní. Kliknutím na <gui>Začít konverzaci</gui> začněte "
+"soukromou konverzaci."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -357,8 +357,9 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
-msgstr "Zmáčknutím tlačítka <gui>Zpráva</gui> začnete soukromou konverzaci."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
+msgstr ""
+"Zmáčknutím tlačítka <gui>Začít konverzaci</gui> začnete soukromou konverzaci."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -447,8 +448,9 @@ msgid ""
 "Press <gui>Add Network</gui> and select the IRC network from the list you "
 "would like to join or press <gui>Custom Network</gui> and enter the details."
 msgstr ""
-"Zmáčkněte tlačítko <gui>Přidat síť</gui> a vyberte ze seznamu síť IRC, kterou "
-"si přejete, nebo zmáčkněte <gui>Vlastní síť</gui> a zadejte ručně její údaje."
+"Zmáčkněte tlačítko <gui>Přidat síť</gui> a vyberte ze seznamu síť IRC, "
+"kterou si přejete, nebo zmáčkněte <gui>Vlastní síť</gui> a zadejte ručně "
+"její údaje."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:53
