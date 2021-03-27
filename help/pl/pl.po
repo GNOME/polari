@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari-help\n"
-"POT-Creation-Date: 2017-10-18 15:09+0000\n"
+"POT-Creation-Date: 2021-03-22 13:18+0000\n"
 "PO-Revision-Date: 2017-08-13 23:40+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
@@ -322,8 +322,8 @@ msgstr "Kliknij nazwę osoby w kanale, z którą rozpocząć rozmowę."
 #: C/irc-start-conversation.page:36
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
 "Pojawią się informacje o użytkowniku, w tym jego nazwisko i czas ostatniej "
 "aktywności w kanale. Kliknij <gui>Wyślij wiadomość</gui>, aby rozpocząć "
@@ -355,7 +355,7 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr "Kliknij <gui>Wyślij wiadomość</gui>, aby rozpocząć prywatną rozmowę."
 
 #. (itstool) path: page/p
