@@ -1,28 +1,28 @@
 # French translation for polari.
 # Copyright (C) 2016 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
-# Charles Monzat <superboa@hotmail.fr>, 2016
 # Guillaume Bernard <associations@guillaume-bernard.fr>, 2018.
+# Charles Monzat <charles.monzat@free.fr>, 2016-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari gnome-3-22\n"
-"POT-Creation-Date: 2018-03-01 20:04+0000\n"
-"PO-Revision-Date: 2018-03-01 22:40+0100\n"
-"Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
-"Language-Team: français <gnomefr@traduc.org>\n"
+"POT-Creation-Date: 2021-03-22 13:18+0000\n"
+"PO-Revision-Date: 2021-03-23 16:14+0100\n"
+"Last-Translator: Charles Monzat <charles.monzat@free.fr>\n"
+"Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
 msgstr ""
-"Charles Monzat <superboa@hotmail.fr>, 2016\n"
+"Charles Monzat <charles.monzat@free.fr>, 2016-2021\n"
 "Guillaume Bernard <associations@guillaume-bernard.fr>, 2018"
 
 #. (itstool) path: info/title
@@ -158,7 +158,7 @@ msgid ""
 "All commands available will be listed and you can type <input>/help "
 "commandname</input> to get additional help with a specific command."
 msgstr ""
-"Toutes les commandes disponibles seront listées et vous pouvez taper <input>/"
+"Toutes les commandes disponibles sont listées et vous pouvez taper <input>/"
 "help nomdecommande</input> pour obtenir de l’aide à propos d’une commande "
 "particulière."
 
@@ -221,7 +221,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: C/irc-nick-password.page:25
 msgid "Use a nickname password on IRC"
-msgstr "Utiliser un mot de passe pour le pseudonyme sur IRC"
+msgstr "Utilisation d’un mot de passe pour le pseudonyme sur IRC"
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:27
@@ -249,9 +249,9 @@ msgid ""
 msgstr ""
 "Actuellement, <app>Polari</app> ne prend pas en charge automatiquement "
 "l’enregistrement de pseudonyme. Chaque réseau IRC gère différemment "
-"l’enregistrement et vous devrez vérifier auprès du réseau IRC la procédure "
+"l’enregistrement et vous devez vérifier auprès du réseau IRC la procédure "
 "d’enregistrement de votre pseudonyme. Après avoir enregistré un pseudonyme, "
-"vous devrez envoyer un message à NickServ pour vous identifier après vous "
+"vous devez envoyer un message à NickServ pour vous identifier après vous "
 "être connecté au réseau IRC avec la commande suivante :"
 
 #. (itstool) path: item/p
@@ -262,7 +262,7 @@ msgstr "<input>/msg NickServ identify pseudonyme motdepasse</input>"
 #. (itstool) path: item/p
 #: C/irc-nick-password.page:43
 msgid "Press <key>Enter</key>"
-msgstr "Appuyer sur <key>Entrée</key>"
+msgstr "Appuyez sur <key>Entrée</key>"
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:47
@@ -280,9 +280,9 @@ msgid ""
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
 "you with the Nickserv service."
 msgstr ""
-"<app>Polari</app> se souviendra de votre pseudonyme et de votre mot de "
-"passe, et à la prochaine connexion au réseau IRC, <gui>Polari</gui> vous "
-"enregistrera automatiquement auprès du service Nickserv."
+"<app>Polari</app> mémorise votre pseudonyme et votre mot de passe, et à la "
+"prochaine connexion au réseau IRC, <gui>Polari</gui> vous enregistre "
+"automatiquement auprès du service Nickserv."
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:58
@@ -299,12 +299,12 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/irc-start-conversation.page:9
 msgid "Start a conversation with an individual in IRC."
-msgstr "Commencez une conversation avec quelqu’un sur IRC."
+msgstr "Commencer une conversation avec quelqu’un sur IRC."
 
 #. (itstool) path: page/title
 #: C/irc-start-conversation.page:24
 msgid "Chat with somebody on IRC"
-msgstr "Discuter avec quelqu’un sur IRC"
+msgstr "Discussion avec une personne sur IRC"
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:26
@@ -327,14 +327,18 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
+#| msgid ""
+#| "Information about the user, including their name and the last time they "
+#| "were active in the channel, will appear. Click <gui>Message</gui> to "
+#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
 "Les informations sur l’utilisateur, comprenant son nom et la date de sa "
-"dernière activité dans le salon, s’afficheront. Cliquez sur <gui>Commencer "
-"la conversation</gui> pour commencer une conversation privée."
+"dernière activité dans le salon, s’affichent. Cliquez sur <gui>Commencer la "
+"conversation</gui> pour commencer une conversation privée."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -360,12 +364,15 @@ msgid ""
 msgstr ""
 "Sélectionnez le nom de l’utilisateur auquel vous voulez envoyer un message. "
 "Des informations sur l’utilisateur, comprenant son nom et la date de sa "
-"dernière activité dans le salon s’afficheront."
+"dernière activité dans le salon s’affichent."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
-msgstr "Appuyez sur <gui>Commencer la conversation</gui> pour commencer une conversation privée."
+#| msgid "Press <gui>Message</gui> to start a private conversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
+msgstr ""
+"Appuyez sur <gui>Commencer la conversation</gui> pour commencer une "
+"conversation privée."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -374,9 +381,9 @@ msgid ""
 "chat room will be shown in the left sidebar of <app>Polari</app> with the "
 "name of the person you are chatting with."
 msgstr ""
-"Une nouvelle conversation privée commencera et un salon de discussion sera "
-"créé. Ce salon apparaîtra dans la barre latérale gauche de <app>Polari</"
-"app>, indiquant le nom de la personne avec laquelle vous discutez."
+"Une nouvelle conversation privée commence et un salon de discussion est "
+"créé. Ce salon apparaît dans la barre latérale gauche de <app>Polari</app>, "
+"indiquant le nom de la personne avec laquelle vous discutez."
 
 #. (itstool) path: p/link
 #: C/legal.xml:5
@@ -388,7 +395,7 @@ msgstr ""
 #. (itstool) path: license/p
 #: C/legal.xml:4
 msgid "This work is licensed under a <_:link-1/> license."
-msgstr "Cette oeuvre est distribuée sous licence <_:link-1/>."
+msgstr "Cette œuvre est distribuée sous licence <_:link-1/>."
 
 #. (itstool) path: license/p
 #: C/legal.xml:8
@@ -409,7 +416,7 @@ msgstr "Se connecter à un réseau IRC."
 #. (itstool) path: page/title
 #: C/network-connect.page:24
 msgid "Connect to an IRC Network"
-msgstr "Se connecter à un réseau IRC"
+msgstr "Connexion à un réseau IRC"
 
 #. (itstool) path: page/p
 #: C/network-connect.page:26
@@ -418,8 +425,8 @@ msgid ""
 "network. <app>Polari</app> comes with over fifty IRC networks configured for "
 "you. Choose the IRC Network you would like to connect to and click on it."
 msgstr ""
-"La première fois que vous démarrez <app>Polari</app>, il vous sera demandé "
-"de rejoindre un réseau. <app>Polari</app> est livré avec plus de cinquante "
+"La première fois que vous démarrez <app>Polari</app>, il vous est demandé de "
+"rejoindre un réseau. <app>Polari</app> est livré avec plus de cinquante "
 "réseaux IRC configurés pour vous. Choisissez le réseau IRC auquel vous "
 "souhaitez vous connecter et cliquez dessus."
 
@@ -444,8 +451,8 @@ msgid ""
 "After you have connected to an IRC Network, you can also connect to other "
 "IRC Networks."
 msgstr ""
-"Après vous être connecté à un réseau IRC, vous pouvez également vous "
-"connecter à d’autres réseaux IRC."
+"Après la connexion à un réseau IRC, vous pouvez également vous connecter à "
+"d’autres réseaux IRC."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:45
@@ -493,7 +500,7 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/overview.page:9
 msgid "What IRC is and how you can use it."
-msgstr "Qu’est ce qu’IRC et comment vous pouvez l’utiliser."
+msgstr "Définition d’IRC et comment l’utiliser."
 
 #. (itstool) path: page/title
 #: C/overview.page:21
@@ -528,7 +535,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: C/sharing.page:22
 msgid "Share text or images"
-msgstr "Partager du texte ou des images"
+msgstr "Partage de texte ou d’images"
 
 #. (itstool) path: page/p
 #: C/sharing.page:24
@@ -543,11 +550,11 @@ msgid ""
 msgstr ""
 "Sur IRC, il est considéré comme impoli de copier et partager plus de cinq "
 "lignes de texte. Si vous désirez coller plus de cinq lignes de texte, "
-"<gui>Polari</gui> vous demandera si vous ne voulez pas plutôt partager votre "
+"<gui>Polari</gui> vous demande si vous ne voulez pas plutôt partager votre "
 "texte sur un service de partage public. Si vous autorisez la copie du texte, "
 "appuyez sur le bouton <gui>Coller</gui> comme dans la capture d’écran ci-"
-"dessous. Après avoir appuyé sur <gui>Coller</gui>, le lien vers le site web "
-"contenant votre texte sera automatiquement saisi dans le champ de saisie du "
+"dessous. Après avoir appuyé sur <gui>Coller</gui>, le lien vers le site Web "
+"contenant votre texte est automatiquement saisi dans le champ de saisie du "
 "message. Appuyez sur <key>Entrée</key> pour partager le lien avec le salon "
 "de discussion."
 
@@ -579,10 +586,10 @@ msgstr ""
 "Pour partager un fichier d’image, glissez et déposez l’image depuis "
 "<app>Fichiers</app> jusque dans le champ de saisie de message de "
 "<app>Polari</app>, ou glissez et déposez un fichier depuis <app>Fichiers</"
-"app> vers <app>Polari</app>. Il vous sera demandé si vous souhaitez envoyer "
+"app> vers <app>Polari</app>. Il vous est demandé si vous souhaitez envoyer "
 "l’image vers un service de partage public. Si vous acceptez d’envoyer "
 "l’image, appuyez sur le bouton <gui>Coller</gui> comme dans la capture "
 "d’écran ci-dessous. Après avoir appuyé sur <gui>Coller</gui>, le lien vers "
-"l’endroit où votre image a été envoyée sera automatiquement saisi dans le "
+"l’endroit où votre image a été envoyée est automatiquement saisi dans le "
 "champ de saisie du message. Appuyez sur <key>Entrée</key> pour partager le "
 "lien avec le salon de discussion."
