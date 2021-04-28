@@ -1,10 +1,10 @@
 subdir('appdata')
 subdir('icons')
 
-desktop_file = app_id + '.desktop'
-i18n.merge_file(desktop_file,
-  input: desktop_file + '.in',
-  output: desktop_file,
+desktop_filename = app_id + '.desktop'
+desktop_file = i18n.merge_file(desktop_filename,
+  input: desktop_filename + '.in',
+  output: desktop_filename,
   po_dir: '../po',
   install: true,
   install_dir: desktopdir,
@@ -12,10 +12,11 @@ i18n.merge_file(desktop_file,
 )
 
 if (desktop_file_validate.found())
-  test('Validating ' + desktop_file,
+  test('Validating ' + desktop_filename,
     desktop_file_validate,
-    args: [desktop_file],
-    workdir: meson.current_build_dir()
+    args: [desktop_file.full_path()],
+    workdir: meson.current_build_dir(),
+    depends: [desktop_file]
   )
 endif
 
