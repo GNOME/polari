@@ -48,6 +48,8 @@ export const knownCommands = {
 const UNKNOWN_COMMAND_MESSAGE =
     N_('Unknown command — try /HELP for a list of available commands');
 
+const ROOM_PREFIXES = ['#', '&', '+', '!'];
+
 const IrcParser = class IrcParser {
     constructor(room) {
         this._app = Gio.Application.get_default();
@@ -128,7 +130,8 @@ const IrcParser = class IrcParser {
             }
             if (argv.length)
                 log(`Excess arguments to JOIN command: ${argv}`);
-
+            if (!ROOM_PREFIXES.some(prefix => room.startsWith(prefix)))
+                room = `#${room}`;
             let { account } = this._room;
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
