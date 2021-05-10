@@ -3,26 +3,26 @@
 # This file is distributed under the same license as the polari package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Rodrigo <rodhos92@gmail.com>, 2018.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2016, 2017, 2018.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2016-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2018-10-06 17:25+0000\n"
-"PO-Revision-Date: 2018-10-15 10:08+0200\n"
+"POT-Creation-Date: 2021-03-22 13:18+0000\n"
+"PO-Revision-Date: 2021-05-10 12:13+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: es <gnome-es-list@gnome.org>\n"
-"Language: es\n"
+"Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2017"
+msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2017 - 2021"
 
 #. (itstool) path: info/title
 #: C/index.page:7
@@ -321,14 +321,18 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
+#| msgid ""
+#| "Information about the user, including their name and the last time they "
+#| "were active in the channel, will appear. Click <gui>Message</gui> to "
+#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
 "Aparecerá información sobre el usuario, incluido su nombre y la última vez "
-"que estuvo activo en el canal. Pulse en <gui>Mensaje</gui> para iniciar una "
-"conversación privada."
+"que estuvo activo en el canal. Pulse en <gui>Iniciar conversación</gui> para "
+"iniciar una conversación privada."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -358,8 +362,11 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
-msgstr "Pulse en <gui>Mensaje</gui> para iniciar una conversación privada."
+#| msgid "Press <gui>Message</gui> to start a private conversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
+msgstr ""
+"Pulse en <gui>Iniciar conversación</gui> para iniciar una conversación "
+"privada."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
