@@ -45,7 +45,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
-import Soup from 'gi://Soup';
+import Soup from 'gi://Soup?version=2.4';
 import Tp from 'gi://TelepathyGLib';
 
 import * as AppNotifications from './appNotifications.js';
