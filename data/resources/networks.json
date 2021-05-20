@@ -678,6 +678,13 @@
     ]
   },
   {
+    "name": "tilde.chat",
+    "id": "tilde.chat",
+    "servers": [
+      { "ssl": true, "port": 6697, "address": "irc.tilde.chat" },
+    ]
+  },
+  {
     "name": "TNI3",
     "id": "tni3",
     "servers": [
