@@ -397,6 +397,14 @@
     ]
   },
   {
+    "name": "Libera Chat",
+    "id": "liberachat",
+    "servers": [
+      { "ssl": true, "port": 6697, "address": "irc.libera.chat" },
+      { "ssl": false, "port": 6667, "address": "irc.libera.chat" }
+    ]
+  },
+  {
     "name": "Librenet",
     "id": "librenet",
     "servers": [
