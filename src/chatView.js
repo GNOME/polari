@@ -323,6 +323,8 @@ const ChatView = GObject.registerClass({
         this.vadjustment.connect('value-changed',
             this._onValueChanged.bind(this));
         this.vadjustment.connect('changed', this._updateScroll.bind(this));
+        this.vadjustment.connect('notify::upper',
+            this._onUpperChanged.bind(this));
 
         this._view.connect('key-press-event', this._onKeyPress.bind(this));
         this._view.connect('motion-notify-event',
@@ -371,6 +373,7 @@ const ChatView = GObject.registerClass({
         this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
 
         this._autoscroll = true;
+        this._originalUpper = this.vadjustment.get_upper();
 
         this._app = Gio.Application.get_default();
         DropTargetIface.addTargets(this, this._view);
@@ -642,6 +645,10 @@ const ChatView = GObject.registerClass({
         let iter = this._view.buffer.get_start_iter();
 
         for (let i = 0; i < pending.length; i++) {
+            // Workaround https://gitlab.gnome.org/GNOME/gtk/merge_requests/395
+            this.set_kinetic_scrolling(false);
+            this._insertingBacklog = true;
+
             this._insertMessage(iter, pending[i], state);
 
             if (i === indicatorIndex)
@@ -769,6 +776,20 @@ const ChatView = GObject.registerClass({
             this._valueChangedId = 0;
             return GLib.SOURCE_REMOVE;
         });
+    }
+
+    _onUpperChanged() {
+        const newUpper = this.vadjustment.get_upper();
+        const diff = newUpper - this._originalUpper;
+
+        if (diff !== 0.0) {
+            this._originalUpper = newUpper;
+            if (this._insertingBacklog) {
+                this.vadjustment.set_value(this.vadjustment.get_value() + diff);
+                this.set_kinetic_scrolling(true);
+                this._insertingBacklog = false;
+            }
+        }
     }
 
     _pendingMessageRemoved(channel, message) {
