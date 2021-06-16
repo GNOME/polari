@@ -681,7 +681,7 @@
     "name": "tilde.chat",
     "id": "tilde.chat",
     "servers": [
-      { "ssl": true, "port": 6697, "address": "irc.tilde.chat" },
+      { "ssl": true, "port": 6697, "address": "irc.tilde.chat" }
     ]
   },
   {
