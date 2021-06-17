@@ -269,7 +269,6 @@
   {
     "name": "Freenode",
     "id": "freenode",
-    "favorite": true,
     "servers": [
       { "ssl": true, "port": 6697, "address": "chat.freenode.net" },
       { "ssl": true, "port": 7000, "address": "chat.freenode.net" },
@@ -399,6 +398,7 @@
   {
     "name": "Libera Chat",
     "id": "liberachat",
+    "favorite": true,
     "servers": [
       { "ssl": true, "port": 6697, "address": "irc.libera.chat" },
       { "ssl": false, "port": 6667, "address": "irc.libera.chat" }
