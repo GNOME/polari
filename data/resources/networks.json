@@ -496,7 +496,13 @@
     "id": "oftc",
     "favorite": true,
     "servers": [
-      { "ssl": false, "port": 6667, "address": "irc.oftc.net" }
+      { "ssl": true, "port": 6697, "address": "irc.oftc.net" },
+      { "ssl": true, "port": 9999, "address": "irc.oftc.net" },
+      { "ssl": false, "port": 6667, "address": "irc.oftc.net" },
+      { "ssl": false, "port": 6668, "address": "irc.oftc.net" },
+      { "ssl": false, "port": 6669, "address": "irc.oftc.net" },
+      { "ssl": false, "port": 6670, "address": "irc.oftc.net" },
+      { "ssl": false, "port": 7000, "address": "irc.oftc.net" }
     ]
   },
   {
