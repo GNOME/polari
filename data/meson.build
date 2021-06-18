@@ -20,6 +20,13 @@ if (desktop_file_validate.found())
   )
 endif
 
+if (json_glib_validate.found())
+  test('Validating ' + 'networks.json',
+    json_glib_validate,
+    args: [files('resources/networks.json')]
+  )
+endif
+
 service_conf = configuration_data()
 service_conf.set('bindir', bindir)
 

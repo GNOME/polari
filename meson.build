@@ -30,6 +30,7 @@ typelibdir = join_paths(pkglibdir, 'girepository-1.0')
 js_shell = find_program('js78', required: false)
 
 desktop_file_validate = find_program('desktop-file-validate', required: false)
+json_glib_validate = find_program('json-glib-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
 
 gio = dependency('gio-2.0', version: '>= 2.43.4')
