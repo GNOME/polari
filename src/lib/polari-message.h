@@ -49,11 +49,6 @@ TrackerResource *polari_message_to_tracker_resource (PolariMessage *message,
                                                      const char    *account_id,
                                                      const char    *channel_name,
                                                      gboolean       is_room);
-gchar * polari_message_to_sparql (PolariMessage           *message,
-                                  TrackerSparqlConnection *connection,
-                                  const char              *account_id,
-                                  const char              *channel_name,
-                                  gboolean                 is_room);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (PolariMessage, polari_message_free)
 
