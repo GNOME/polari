@@ -38,11 +38,9 @@ import_ready (GObject      *source,
   GError *error = NULL;
   GList *files = user_data;
   TrackerSparqlConnection *connection;
-  TrackerNamespaceManager *ns_manager;
-  GString *sparql = g_string_new (NULL);
+  TrackerBatch *batch = NULL;
   char *account_id = NULL, *channel_name = NULL;
   gboolean is_room;
-  int batch_count = 0;
 
   messages = polari_tpl_importer_import_finish (importer,
                                                 result,
@@ -60,7 +58,6 @@ import_ready (GObject      *source,
     }
 
   connection = polari_util_get_tracker_connection (FALSE, &error);
-  ns_manager = tracker_sparql_connection_get_namespace_manager (connection);
 
   if (error)
     {
@@ -70,44 +67,30 @@ import_ready (GObject      *source,
       goto out;
     }
 
+  batch = tracker_sparql_connection_create_batch (connection);
+
   for (l = messages; l; l = l->next)
     {
       PolariMessage *message = l->data;
 #if 1
       TrackerResource *res;
-      char *tmp;
 
       res = polari_message_to_tracker_resource (message,
                                                 account_id,
                                                 channel_name,
                                                 is_room);
 
-      tmp = tracker_resource_print_sparql_update (res, ns_manager, NULL);
-      g_string_append (sparql, tmp);
+      tracker_batch_add_resource (batch, NULL, res);
       g_object_unref (res);
-      g_free (tmp);
 #else
       g_print ("<%s> %s\n",
               polari_message_get_sender (tpl_message),
               polari_message_get_text (tpl_message));
 #endif
-
-      batch_count++;
-
-      if (batch_count == 500)
-        {
-          tracker_sparql_connection_update (connection, sparql->str,
-                                            NULL, &error);
-          g_string_free (sparql, TRUE);
-          sparql = g_string_new (NULL);
-          batch_count = 0;
-        }
     }
   g_list_free_full (messages, (GDestroyNotify)polari_message_free);
 
-  if (sparql->len > 0)
-    tracker_sparql_connection_update (connection, sparql->str,
-                                      NULL, &error);
+  tracker_batch_execute (batch, NULL, &error);
 
   if (error)
     {
@@ -117,8 +100,7 @@ import_ready (GObject      *source,
     }
 
 out:
-  g_string_free (sparql, TRUE);
-
+  g_clear_object (&batch);
   g_free (account_id);
   g_free (channel_name);
 
