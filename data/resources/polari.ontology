@@ -1,16 +1,14 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix tracker: <http://www.tracker-project.org/ontologies/tracker#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix nao: <http://www.semanticdesktop.org/ontologies/2007/08/15/nao#> .
-@prefix nrl: <http://www.semanticdesktop.org/ontologies/2007/08/15/nrl#> .
+@prefix nrl: <http://tracker.api.gnome.org/ontology/v3/nrl#> .
 
 @prefix polari: <http://example.org/ns#> .
 
-polari: a tracker:Namespace, tracker:Ontology ;
-        tracker:prefix "polari" ;
+polari: a nrl:Namespace, nrl:Ontology ;
+        nrl:prefix "polari" ;
         rdfs:comment "Ontology for Polari chat logs" ;
-        nao:lastModified "2017-07-22T02:35:00Z" .
+        nrl:lastModified "2017-07-22T02:35:00Z" .
 
 polari:Account a rdfs:Class ;
                rdfs:subClassOf rdfs:Resource .
@@ -77,13 +75,13 @@ polari:time a rdf:Property ;
             nrl:maxCardinality 1 ;
             rdfs:domain polari:Message ;
             rdfs:range xsd:dateTime ;
-            tracker:indexed true .
+            nrl:indexed true .
 
 polari:text a rdf:Property ;
             nrl:maxCardinality 1 ;
             rdfs:domain polari:Message ;
             rdfs:range xsd:string ;
-            tracker:fulltextIndexed true .
+            nrl:fulltextIndexed true .
 
 polari:isAction a rdf:Property ;
             nrl:maxCardinality 1 ;

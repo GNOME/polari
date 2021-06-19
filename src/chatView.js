@@ -17,9 +17,6 @@ import { UserStatusMonitor } from './userTracker.js';
 import { URLPreview } from './urlPreview.js';
 import * as Utils from './utils.js';
 
-Gio._promisify(Tpl.LogWalker.prototype,
-    'get_events_async', 'get_events_finish');
-
 export const MAX_NICK_CHARS = 8;
 const IGNORE_STATUS_TIME = 5;
 

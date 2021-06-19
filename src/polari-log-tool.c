@@ -97,7 +97,7 @@ import_ready (GObject      *source,
       if (batch_count == 500)
         {
           tracker_sparql_connection_update (connection, sparql->str,
-                                            G_PRIORITY_DEFAULT, NULL, &error);
+                                            NULL, &error);
           g_string_free (sparql, TRUE);
           sparql = g_string_new (NULL);
           batch_count = 0;
@@ -107,7 +107,7 @@ import_ready (GObject      *source,
 
   if (sparql->len > 0)
     tracker_sparql_connection_update (connection, sparql->str,
-                                      G_PRIORITY_DEFAULT, NULL, &error);
+                                      NULL, &error);
 
   if (error)
     {

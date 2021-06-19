@@ -153,7 +153,7 @@ polari_util_get_tracker_connection (gboolean readonly,
 
       store_path = g_build_filename (g_get_user_data_dir (),
                                      "polari",
-                                     "chatlogs.v1",
+                                     "chatlogs.v2",
                                      NULL);
       store = g_file_new_for_path (store_path);
       ontology = g_file_new_for_uri ("resource:///org/gnome/Polari/ontologies/");
@@ -161,12 +161,11 @@ polari_util_get_tracker_connection (gboolean readonly,
       if (readonly)
         flags |= TRACKER_SPARQL_CONNECTION_FLAGS_READONLY;
 
-      connection = tracker_sparql_connection_local_new (flags,
-                                                        store,
-                                                        NULL,
-                                                        ontology,
-                                                        NULL,
-                                                        error);
+      connection = tracker_sparql_connection_new (flags,
+                                                  store,
+                                                  ontology,
+                                                  NULL,
+                                                  error);
     }
 
   return connection;
@@ -184,5 +183,5 @@ polari_util_close_tracker_connection (void)
 
   connection = polari_util_get_tracker_connection (TRUE, NULL);
   if (connection)
-    g_object_unref (connection);
+    tracker_sparql_connection_close (connection);
 }

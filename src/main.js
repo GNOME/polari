@@ -25,7 +25,7 @@ pkg.require({
     'Secret': '1',
     'Soup': '2.4',
     'TelepathyGLib': '0.12',
-    'Tracker': '2.0',
+    'Tracker': '3.0',
 });
 pkg.requireSymbol('Gio', '2.0', 'Application.send_notification');
 pkg.requireSymbol('GLib', '2.0', 'log_variant');

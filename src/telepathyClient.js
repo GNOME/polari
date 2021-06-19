@@ -704,7 +704,7 @@ class TelepathyClient extends Tp.BaseClient {
 
         let message = Polari.Message.new_from_tp_message (tpMessage);
         let sparql = message.to_sparql(connection, accountId, channelName, isRoom);
-        connection.update_async(sparql, 0, null, (o, res) => {
+        connection.update_async(sparql, null, (o, res) => {
             try {
                 connection.update_finish(res);
             } catch (e) {
