@@ -27,13 +27,24 @@ var GenericQuery  = class {
         });
     }
 
-    run(sparql, cancellable, callback) {
+    run(sparql, args, cancellable, callback) {
         this._task = this._createTask(cancellable, callback);
+        let statement;
 
-        this._connection.query_async(sparql, cancellable, (c, res) => {
+        try {
+            statement = this._connection.query_statement(sparql, cancellable);
+        } catch (e) {
+            this._task.return_error(e);
+            return;
+        }
+
+        for (const name in args)
+            statement.bind_string(name, args[name]);
+
+        statement.execute_async(cancellable, (c, res) => {
             let cursor;
             try {
-                cursor = this._connection.query_finish(res);
+                cursor = statement.execute_finish(res);
             } catch (e) {
                 this._task.return_error(e);
                 return;
@@ -146,7 +157,8 @@ var LogWalker = class {
         if (!this._query) {
             this._query = new GenericQuery(numEvents);
 
-            let channel = Tracker.sparql_escape_uri(`urn:channel:${this._room.account.get_path_suffix()}:${this._room.channel_name}`);
+            let channel =
+		`urn:channel:${this._room.account.get_path_suffix()}:${this._room.channel_name}`;
             let sparql = `
                 select polari:text(?msg) as ?text
                        polari:nick(?sender) as ?sender
@@ -157,11 +169,11 @@ var LogWalker = class {
                 { ?msg a polari:Message;
                        polari:time ?time;
                        polari:sender ?sender;
-                       polari:channel <${channel}> .
+                       polari:channel ~channel .
                        bind (exists { ?sender a polari:SelfContact } as ?isSelf)
                 } order by desc(?time) desc(tracker:id(?msg))
             `;
-            this._query.run(sparql, null, returnFunc);
+            this._query.run(sparql, { 'channel': channel }, null, returnFunc);
         } else {
             this._query.next(numEvents, null, returnFunc);
         }
