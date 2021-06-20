@@ -80,7 +80,7 @@ import_ready (GObject      *source,
                                                 channel_name,
                                                 is_room);
 
-      tracker_batch_add_resource (batch, NULL, res);
+      tracker_batch_add_resource (batch, "polari:irc", res);
       g_object_unref (res);
 #else
       g_print ("<%s> %s\n",

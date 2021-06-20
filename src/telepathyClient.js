@@ -704,7 +704,7 @@ class TelepathyClient extends Tp.BaseClient {
 
         let message = Polari.Message.new_from_tp_message (tpMessage);
         let res = message.to_tracker_resource(accountId, channelName, isRoom);
-        connection.update_resource_async(null, resource, null, (o, res) => {
+        connection.update_resource_async('polari:irc', resource, null, (o, res) => {
             try {
                 connection.update_resource_finish(res);
             } catch (e) {

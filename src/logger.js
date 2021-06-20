@@ -153,6 +153,7 @@ var LogWalker = class {
                        ?time
                        polari:isAction(?msg) as ?isAction
                        ?isSelf
+                from polari:irc
                 { ?msg a polari:Message;
                        polari:time ?time;
                        polari:sender ?sender;
