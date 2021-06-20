@@ -132,7 +132,7 @@ create_account_resource (const char *id)
   TrackerResource *res;
   char *uri;
 
-  uri = tracker_sparql_escape_uri_printf ("urn:account:%s", id);
+  uri = g_strdup_printf ("urn:account:%s", id);
 
   res = tracker_resource_new (uri);
 
@@ -152,7 +152,7 @@ create_channel_resource (const char *name,
   TrackerResource *res;
   char *uri;
 
-  uri = tracker_sparql_escape_uri_printf ("urn:channel:%s:%s", account_id, name);
+  uri = g_strdup_printf ("urn:channel:%s:%s", account_id, name);
 
   res = tracker_resource_new (uri);
 
@@ -176,7 +176,7 @@ create_sender_resource (const char *nick,
   char *uri, *id;
 
   id = g_ascii_strdown (nick, -1);
-  uri = tracker_sparql_escape_uri_printf ("urn:contact:%s:%s", account_id, id);
+  uri = g_strdup_printf ("urn:contact:%s:%s", account_id, id);
 
   res = tracker_resource_new (uri);
 
