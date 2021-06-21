@@ -18,7 +18,7 @@ Gio._promisify(Gio._LocalFilePrototype,
 Gio._promisify(Gio._LocalFilePrototype,
     'query_info_async', 'query_info_finish');
 Gio._promisify(Gio._LocalFilePrototype, 'read_async', 'read_finish');
-Gio._promisify(GdkPixbuf.Pixbuf.prototype,
+Gio._promisify(GdkPixbuf.Pixbuf,
     'new_from_stream_async', 'new_from_stream_finish');
 
 const DndTargetType = {
