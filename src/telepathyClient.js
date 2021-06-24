@@ -349,21 +349,20 @@ class TelepathyClient extends Tp.BaseClient {
         req.set_target_id(targetType, targetId);
         req.set_delegate_to_preferred_handler(true);
 
-        const room = this._roomManager.lookupRoom(roomId);
         const preferredHandler = `${Tp.CLIENT_BUS_NAME_BASE}Polari`;
         let channel = null;
+        let channelError = '';
         try {
             channel = await req.ensure_and_observe_channel_async(
                 preferredHandler, cancellable);
-            room.channel_error = '';
         } catch (e) {
             debug(`Failed to ensure channel: ${e.message}`);
-
-            if (room)
-                room.channel_error = Tp.error_get_dbus_name(e.code);
-
+            channelError = Tp.error_get_dbus_name(e.code);
             throw e;
         } finally {
+            const room = this._roomManager.lookupRoom(roomId);
+            if (room)
+                room.set({ channelError });
             this._pendingRequests.delete(roomId);
         }
 
