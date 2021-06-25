@@ -22,7 +22,7 @@ pkg.require({
     'Pango': '1.0',
     'PangoCairo': '1.0',
     'Secret': '1',
-    'Soup': '2.4',
+    'Soup': '3.0',
     'TelepathyGLib': '0.12',
     'TelepathyLogger': '0.2',
 });

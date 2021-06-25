@@ -4,7 +4,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk?version=3.0';
-import WebKit2 from 'gi://WebKit2?version=4.0';
+import WebKit2 from 'gi://WebKit2?version=4.1';
 
 Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
 Gio._promisify(WebKit2.WebView.prototype, 'run_javascript', 'run_javascript_finish');

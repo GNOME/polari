@@ -20,11 +20,13 @@
  *
  */
 
+const ByteArray = imports.byteArray;
+
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
-import Soup from 'gi://Soup?version=2.4';
+import Soup from 'gi://Soup?version=3.0';
 import Tp from 'gi://TelepathyGLib';
 
 import * as AppNotifications from './appNotifications.js';
@@ -32,6 +34,8 @@ import * as AppNotifications from './appNotifications.js';
 Gio._promisify(Secret, 'password_store', 'password_store_finish');
 Gio._promisify(Secret, 'password_lookup', 'password_lookup_finish');
 Gio._promisify(Secret, 'password_clear', 'password_clear_finish');
+Gio._promisify(Soup.Session.prototype,
+    'send_and_read_async', 'send_and_read_finish');
 
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account',
@@ -253,24 +257,17 @@ export function updateTerms(terms, str) {
     return changed;
 }
 
-function _queueSoupMessage(session, message) {
-    return new Promise((resolve, reject) => {
-        session.queue_message(message, () => {
-            const { statusCode } = message;
-            if (statusCode === Soup.KnownStatusCode.OK)
-                resolve(message.responseBody.data);
-            else
-                reject(new Error(`Got unexpected response ${statusCode}`));
-        });
-    });
-}
-
 async function _getGpasteExpire() {
-    let session = new Soup.Session();
-    let paramUrl = `${GPASTE_BASEURL}api/json/parameter/expire`;
-    let message = Soup.form_request_new_from_hash('GET', paramUrl, {});
+    const session = new Soup.Session();
+    const message = Soup.Message.new('GET',
+        `${GPASTE_BASEURL}api/json/parameter/expire`);
 
-    const json = await _queueSoupMessage(session, message);
+    const bytes = await session.send_and_read_async(
+        message,
+        GLib.PRIORITY_DEFAULT,
+        null);
+    checkResponse(message);
+    const json = ByteArray.toString(bytes.get_data());
     const info = JSON.parse(json);
 
     const values = info.result?.values;
@@ -297,11 +294,17 @@ export async function gpaste(text, title) {
         language: 'text',
     };
 
-    let session = new Soup.Session();
-    let createUrl = `${GPASTE_BASEURL}api/json/create`;
-    let message = Soup.form_request_new_from_hash('POST', createUrl, params);
+    const session = new Soup.Session();
+    const message = Soup.Message.new_from_encoded_form('POST',
+        `${GPASTE_BASEURL}api/json/create`,
+        Soup.form_encode_hash(params));
 
-    const json = await _queueSoupMessage(session, message);
+    const bytes = await session.send_and_read_async(
+        message,
+        GLib.PRIORITY_DEFAULT,
+        null);
+    checkResponse(message);
+    const json = ByteArray.toString(bytes.get_data());
     const info = JSON.parse(json);
 
     if (!info.result?.id)
@@ -319,20 +322,33 @@ export async function imgurPaste(pixbuf, title) {
         image: GLib.base64_encode(buffer),
     };
 
-    let session = new Soup.Session();
-    let createUrl = 'https://api.imgur.com/3/image';
-    let message = Soup.form_request_new_from_hash('POST', createUrl, params);
+    const session = new Soup.Session();
+    const message = Soup.Message.new_from_encoded_form('POST',
+        'https://api.imgur.com/3/image',
+        Soup.form_encode_hash(params));
 
     let requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
 
-    const json = await _queueSoupMessage(session, message);
+    const bytes = await session.send_and_read_async(
+        message,
+        GLib.PRIORITY_DEFAULT,
+        null);
+    checkResponse(message);
+    const json = ByteArray.toString(bytes.get_data());
     const info = JSON.parse(json);
 
     if (!info.success)
         throw new Error('Failed to upload image to paste service');
 
     return info.data.link;
+}
+
+function checkResponse(message) {
+    const { statusCode } = message;
+    const phrase = Soup.Status.get_phrase(statusCode);
+    if (statusCode !== Soup.Status.OK)
+        throw new Error(`Unexpected response: ${phrase}`);
 }
 
 export function formatTimePassed(seconds) {
