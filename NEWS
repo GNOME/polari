@@ -1,3 +1,31 @@
+40.0 — “You Need a Boyfriend, Not a Person”
+===========================================
+* Promisify async operations [Florian; !169]
+* Add hackint to predefined networks [Martin; !172]
+* Prepare for GTK4 [Florian; !174]
+* Port to ES modules [Florian; !176, !177, !178]
+* Allow /join without '#' prefix [Jack; #167]
+* Add Libera.Chat to predefined networks [Florian; !187]
+* Add tilde.chat to predefined networks [Ben, Juan; !186, #180]
+* Keep scroll position when loading extra logs [Raidro; !189]
+* Promote Libera.Chat over Freenode [Florian; #169]
+* Update OFTC server list [Florian; #181]
+* Misc. bug fixes and cleanups [Florian, DaeHyun, Jonas, Jordan, Sabri, Bastien,
+  Juan; !163, #155, !166, !167, !168, !170, !171, !173, !180, !183, !184, !193,
+  #179, !195, !196]
+
+Contributors:
+  Jonas Ådahl, Juan R. García Blanco, Marek Černocký, Yuri Chornoivan,
+  Rodrigo Costa, Piotr Drąg, Jack Gleeson, Ben Harris, Anders Jonsson,
+  Raidro Manchester, Jordi Mas, Charles Monzat, Florian Müllner,
+  Daniel Mustieles, Bastien Nocera, Jordan Petridis, DaeHyun Sung,
+  Andika Triwidada, Sabri Ünal, Martin Weinelt
+
+Translators:
+  Yosef Or Boczko [he], Fabio Tomat [fur], Kjartan Maraas [nb], Jordi Mas [ca],
+  Fran Dieguez [gl], Marek Černocký [cs], Saikeo Kavhanxay [lo],
+  Ngọc Quân Trần [vi], Quentin PAGÈS [oc]
+
 3.38.0 — “Wonder Woman in the Hizzy”
 ======
 * Disable URL previews when on metered data [Florian; #149]

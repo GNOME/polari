@@ -55,14 +55,14 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="3.38.0" date="2020-09-17">
+    <release version="40.0" date="2021-06-25">
       <description>
         <p>
-          As always, GNOME 3.38 brings with it a branch new Polari release:
+          Polari belatedly joins the GNOME 40 fun, with a small but fine release:
           <ul>
-            <li>Add the ability to mute nicknames</li>
-            <li>Add WHOIS command</li>
-            <li>Disable URL previews when on metered data</li>
+            <li>Allow /join without '#' prefix</li>
+            <li>Add Libera.Chat and others to predefined networks</li>
+            <li>Keep scroll position when loading extra logs</li>
           </ul>
         </p>
       </description>
