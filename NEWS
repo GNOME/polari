@@ -1,3 +1,19 @@
+3.38.1
+======
+* Add hackint to predefined networks [Martin; !172]
+* Add Libera.Chat to predefined networks [Florian; !187]
+* Promote Libera.Chat over Freenode [Florian; #169]
+* Update OFTC server list [Florian; #181]
+* Misc. bug fixes and cleanups [Florian, DaeHyun, Jonas, Jordan, Sabri; !163,
+  #155, !166, !167, !168, !170, !171, !173, !180, !183]
+
+Contributors:
+  Jonas Ådahl, Piotr Drąg, Florian Müllner, Jordan Petridis, DaeHyun Sung,
+  Sabri Ünal, Martin Weinelt
+
+Translators:
+  Yosef Or Boczko [he], Fabio Tomat [fur], Kjartan Maraas [nb], Jordi Mas [ca]
+
 3.38.0 — “Wonder Woman in the Hizzy”
 ======
 * Disable URL previews when on metered data [Florian; #149]

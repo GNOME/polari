@@ -55,6 +55,13 @@
   </kudos>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="3.38.1" date="2021-06-25">
+      <description>
+        <p>
+          A small update to update the list of predefined networks.
+        </p>
+      </description>
+    </release>
     <release version="3.38.0" date="2020-09-17">
       <description>
         <p>
