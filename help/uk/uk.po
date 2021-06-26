@@ -2,21 +2,20 @@
 # Copyright (C) 2020 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2020-05-02 07:41+0000\n"
-"PO-Revision-Date: 2020-05-05 17:58+0300\n"
+"POT-Creation-Date: 2021-06-25 17:54+0000\n"
+"PO-Revision-Date: 2021-06-26 08:51+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.07.70\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -60,9 +59,9 @@ msgid ""
 "<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
 "client which integrates with the GNOME desktop. Learn more about Polari."
 msgstr ""
-"<app>Балаканина</app> — простий мінімалістичний клієнт Internet Relay Chat"
-" (IRC), який інтегровано зі стільницею GNOME. Дізнайтеся більше про"
-" «Балаканину»."
+"<app>Балаканина</app> — простий мінімалістичний клієнт Internet Relay Chat "
+"(IRC), який інтегровано зі стільницею GNOME. Дізнайтеся більше про "
+"«Балаканину»."
 
 #. (itstool) path: page/title
 #: C/index.page:32
@@ -102,9 +101,9 @@ msgid ""
 "integrates with the GNOME desktop and enables you to chat with people around "
 "the world through large chatrooms or private messaging."
 msgstr ""
-"<app>Polari</app> — простий клієнт IRC, який інтегровано зі стільницею GNOME"
-" і який уможливлює спілкування із людьми з усього світу у великих кімнатах"
-" спілкування або за допомогою обміну конфіденційними повідомленнями."
+"<app>Polari</app> — простий клієнт IRC, який інтегровано зі стільницею GNOME "
+"і який уможливлює спілкування із людьми з усього світу у великих кімнатах "
+"спілкування або за допомогою обміну конфіденційними повідомленнями."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -147,8 +146,8 @@ msgid ""
 "To see the list of the supported IRC commands, in a chat room type <input>/"
 "help</input> and press <key>Enter</key>."
 msgstr ""
-"Щоб переглянути список підтримуваних команд IRC, у кімнаті спілкування"
-" введіть команду <input>/help</input> і натисніть <key>Enter</key>."
+"Щоб переглянути список підтримуваних команд IRC, у кімнаті спілкування "
+"введіть команду <input>/help</input> і натисніть <key>Enter</key>."
 
 #. (itstool) path: note/p
 #: C/irc-commands.page:29
@@ -156,8 +155,8 @@ msgid ""
 "All commands available will be listed and you can type <input>/help "
 "commandname</input> to get additional help with a specific command."
 msgstr ""
-"Програма виведе список усі доступних команд. Ви можете віддати команду <input"
-">/help назва_команди</input>, щоб отримати довідку щодо певної команди."
+"Програма виведе список усі доступних команд. Ви можете віддати команду "
+"<input>/help назва_команди</input>, щоб отримати довідку щодо певної команди."
 
 #. (itstool) path: info/desc
 #: C/irc-join-room.page:10
@@ -176,10 +175,10 @@ msgid ""
 "you are connected to. To connect to an IRC network, see <link xref=\"network-"
 "connect\"/>."
 msgstr ""
-"Ви можете входити до кімнат спілкування IRC (також відомих як канали IRC) у"
-" будь-яких мережах IRC, з якими ви встановлюєте з'єднання. Щоб встановити"
-" з'єднання із мережею IRC, скористайтеся настановами розділу <link"
-" xref=\"network-connect\"/>."
+"Ви можете входити до кімнат спілкування IRC (також відомих як канали IRC) у "
+"будь-яких мережах IRC, з якими ви встановлюєте з'єднання. Щоб встановити "
+"з'єднання із мережею IRC, скористайтеся настановами розділу <link xref="
+"\"network-connect\"/>."
 
 #. (itstool) path: page/p
 #: C/irc-join-room.page:27
@@ -198,23 +197,23 @@ msgid ""
 "room(s) from the list and then press <gui>Join</gui>. You can select "
 "multiple rooms from the list to join."
 msgstr ""
-"Введіть назву кімнати спілкування, до якої ви хочете увійти, або виберіть"
-" кімнати спілкування зі списку і натисніть кнопку <gui>Увійти</gui>. Ви"
-" можете вибрати для входу декілька кімнат."
+"Введіть назву кімнати спілкування, до якої ви хочете увійти, або виберіть "
+"кімнати спілкування зі списку і натисніть кнопку <gui>Увійти</gui>. Ви "
+"можете вибрати для входу декілька кімнат."
 
 #. (itstool) path: item/p
 #: C/irc-join-room.page:39
 msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
 msgstr ""
-"Натисніть кнопку <gui>Увійти</gui>, щоб встановити з'єднання із кімнатою або"
-" кімнатами спілкування."
+"Натисніть кнопку <gui>Увійти</gui>, щоб встановити з'єднання із кімнатою або "
+"кімнатами спілкування."
 
 #. (itstool) path: info/desc
 #: C/irc-nick-password.page:10
 msgid "Protect your nickname to prevent other IRC users from using it."
 msgstr ""
-"Захист вашого псевдоніма для запобігання його використанню іншими"
-" користувачами IRC."
+"Захист вашого псевдоніма для запобігання його використанню іншими "
+"користувачами IRC."
 
 #. (itstool) path: page/title
 #: C/irc-nick-password.page:25
@@ -229,10 +228,10 @@ msgid ""
 "and identify yourself. Some IRC chat rooms may not allow you to join without "
 "a registered nickname."
 msgstr ""
-"У деяких мережах IRC ви можете зареєструвати ваш псевдонім за допомогою"
-" служби із назвою NickServ. Надсиланням особливих повідомлень до NickServ ви"
-" можете встановити пароль для власної ідентифікації. До деяких кімнат"
-" спілкування IRC не можна увійти без зареєстрованого псевдоніма."
+"У деяких мережах IRC ви можете зареєструвати ваш псевдонім за допомогою "
+"служби із назвою NickServ. Надсиланням особливих повідомлень до NickServ ви "
+"можете встановити пароль для власної ідентифікації. До деяких кімнат "
+"спілкування IRC не можна увійти без зареєстрованого псевдоніма."
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:32
@@ -244,12 +243,12 @@ msgid ""
 "to message NickServ to identify yourself after connecting to the IRC Network "
 "with the following command:"
 msgstr ""
-"У поточній версії <app>Балаканині</app> не передбачено автоматичної"
-" реєстрації псевдонімів. У кожній мережі IRC реєстрація псевдонімів"
-" виконується інакше. Вам слід ознайомитися із документацією до мережі IRC,"
-" щоб дізнатися про те, як зареєструвати ваш псевдонім. Після реєстрації"
-" псевдоніма вам слід надіслати повідомлення NickServ для ідентифікації після"
-" встановлення з'єднання із мережею IRC за допомогою такої команди:"
+"У поточній версії <app>Балаканині</app> не передбачено автоматичної "
+"реєстрації псевдонімів. У кожній мережі IRC реєстрація псевдонімів "
+"виконується інакше. Вам слід ознайомитися із документацією до мережі IRC, "
+"щоб дізнатися про те, як зареєструвати ваш псевдонім. Після реєстрації "
+"псевдоніма вам слід надіслати повідомлення NickServ для ідентифікації після "
+"встановлення з'єднання із мережею IRC за допомогою такої команди:"
 
 #. (itstool) path: item/p
 #: C/irc-nick-password.page:40
@@ -267,8 +266,8 @@ msgid ""
 "Use the username and password you registered with the IRC network with this "
 "command."
 msgstr ""
-"Скористайтеся іменем користувача і паролем, за допомогою яких ви"
-" зареєструвалися у мережі IRC, у цій команді."
+"Скористайтеся іменем користувача і паролем, за допомогою яких ви "
+"зареєструвалися у мережі IRC, у цій команді."
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:52
@@ -277,9 +276,9 @@ msgid ""
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
 "you with the Nickserv service."
 msgstr ""
-"<app>Балаканина</app> запам'ятає ваше ім'я користувача і пароль. Наступного"
-" разу, коли ви встановлюватимете з'єднання із мережею IRC, <gui>Балаканина<"
-"/gui> автоматично зареєструє вас за допомогою служби Nickserv."
+"<app>Балаканина</app> запам'ятає ваше ім'я користувача і пароль. Наступного "
+"разу, коли ви встановлюватимете з'єднання із мережею IRC, <gui>Балаканина</"
+"gui> автоматично зареєструє вас за допомогою служби Nickserv."
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:58
@@ -288,10 +287,10 @@ msgid ""
 "certain IRC networks. It is not currently possible to register an IRC "
 "nickname or change your nickname password using <app>Polari</app>."
 msgstr ""
-"Ці настанови нададуть вам змогу користуватися захищеним паролем псевдонімом"
-" лише у певних мережах IRC. У поточній версії <app>Балаканини</app> не"
-" передбачено можливості зареєструвати ваш псевдонім IRC або змінити пароль до"
-" нього."
+"Ці настанови нададуть вам змогу користуватися захищеним паролем псевдонімом "
+"лише у певних мережах IRC. У поточній версії <app>Балаканини</app> не "
+"передбачено можливості зареєструвати ваш псевдонім IRC або змінити пароль до "
+"нього."
 
 #. (itstool) path: info/desc
 #: C/irc-start-conversation.page:9
@@ -309,9 +308,9 @@ msgid ""
 "You can hold private conversations with other IRC users, outside of the "
 "public IRC chat rooms. To start a conversation with another IRC user:"
 msgstr ""
-"Ви можете конфіденційно спілкуватися із іншими користувачами IRC поза"
-" загальнодоступними кімнатами спілкування IRC. Щоб розпочати спілкування із"
-" іншими користувачем IRC, виконайте такі дії:"
+"Ви можете конфіденційно спілкуватися із іншими користувачами IRC поза "
+"загальнодоступними кімнатами спілкування IRC. Щоб розпочати спілкування із "
+"іншими користувачем IRC, виконайте такі дії:"
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:31
@@ -319,19 +318,23 @@ msgid ""
 "Click on the name of the person in the channel you would like to start a "
 "chat with."
 msgstr ""
-"Клацніть на пункті імені особи, з якою ви хочете розпочати спілкування, на"
-" каналі."
+"Клацніть на пункті імені особи, з якою ви хочете розпочати спілкування, на "
+"каналі."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
+#| msgid ""
+#| "Information about the user, including their name and the last time they "
+#| "were active in the channel, will appear. Click <gui>Message</gui> to "
+#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
-"Програма покаже відомості щодо користувача, зокрема ім'я та момент останньої"
-" активності на каналі. Натисніть кнопку <gui>Повідомлення</gui>, щоб"
-" розпочати конфіденційне спілкування."
+"Програма покаже відомості щодо користувача, зокрема ім'я та момент останньої "
+"активності на каналі. Натисніть кнопку <gui>Почати спілкування</gui>, щоб "
+"розпочати конфіденційне спілкування."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -344,8 +347,8 @@ msgid ""
 "In the upper-right hand corner of <app>Polari</app> a number is displayed "
 "that shows the total number of users in the chat room. Click on the number."
 msgstr ""
-"У верхньому правому куті вікна <app>Балаканини</app> буде показано загальну"
-" кількість користувачів у кімнаті спілкування. Клацніть на позначці кількості."
+"У верхньому правому куті вікна <app>Балаканини</app> буде показано загальну "
+"кількість користувачів у кімнаті спілкування. Клацніть на позначці кількості."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:53
@@ -354,16 +357,17 @@ msgid ""
 "including their name and the last time they were active in the channel, will "
 "appear."
 msgstr ""
-"Виберіть ім'я користувача, якому ви хочете надіслати повідомлення. Програма"
-" покаже відомості щодо користувача, зокрема ім'я та момент останньої"
-" активності на каналі."
+"Виберіть ім'я користувача, якому ви хочете надіслати повідомлення. Програма "
+"покаже відомості щодо користувача, зокрема ім'я та момент останньої "
+"активності на каналі."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
+#| msgid "Press <gui>Message</gui> to start a private conversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
-"Натисніть кнопку <gui>Повідомлення</gui>, щоб розпочати конфіденційне"
-" спілкування."
+"Натисніть кнопку <gui>Почати спілкування</gui>, щоб розпочати конфіденційне "
+"спілкування."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -372,9 +376,9 @@ msgid ""
 "chat room will be shown in the left sidebar of <app>Polari</app> with the "
 "name of the person you are chatting with."
 msgstr ""
-"Буде розпочато нове конфіденційне спілкування і створено кімнату спілкування."
-" Назву кімнати спілкування буде показано на лівій бічній панелі <app"
-">Балаканини</app> разом із іменем особи, із якою ви спілкуєтеся."
+"Буде розпочато нове конфіденційне спілкування і створено кімнату "
+"спілкування. Назву кімнати спілкування буде показано на лівій бічній панелі "
+"<app>Балаканини</app> разом із іменем особи, із якою ви спілкуєтеся."
 
 #. (itstool) path: p/link
 #: C/legal.xml:5
@@ -414,10 +418,10 @@ msgid ""
 "network. <app>Polari</app> comes with over fifty IRC networks configured for "
 "you. Choose the IRC Network you would like to connect to and click on it."
 msgstr ""
-"Під час першого запуску <app>Балаканини</app> програма запропонує вам"
-" встановити з'єднання із мережею. До стандартного списку <app>Балаканини</app"
-"> включено понад п'ятдесят мереж IRC. Виберіть мережу IRC, з якою слід"
-" встановити з'єднання, і клацніть на відповідному пункті у списку."
+"Під час першого запуску <app>Балаканини</app> програма запропонує вам "
+"встановити з'єднання із мережею. До стандартного списку <app>Балаканини</"
+"app> включено понад п'ятдесят мереж IRC. Виберіть мережу IRC, з якою слід "
+"встановити з'єднання, і клацніть на відповідному пункті у списку."
 
 #. (itstool) path: page/p
 #: C/network-connect.page:32
@@ -428,11 +432,11 @@ msgid ""
 "of the network as you want it to appear in the list of networks in the "
 "<gui>Network Name</gui> field."
 msgstr ""
-"Якщо у списку немає мережі IRC, із якою ви хочете з'єднатися, ви можете"
-" ввести параметри потрібної вам мережі IRC вручну. Натисніть кнопку <gui>Інша"
-" мережа</gui> і введіть <gui>Адресу сервера</gui>. Ви також можете вказати"
-" назву мережі, яку буде показано у списку мереж, у полі <gui>Назва мережі<"
-"/gui>."
+"Якщо у списку немає мережі IRC, із якою ви хочете з'єднатися, ви можете "
+"ввести параметри потрібної вам мережі IRC вручну. Натисніть кнопку <gui>Інша "
+"мережа</gui> і введіть <gui>Адресу сервера</gui>. Ви також можете вказати "
+"назву мережі, яку буде показано у списку мереж, у полі <gui>Назва мережі</"
+"gui>."
 
 #. (itstool) path: page/p
 #: C/network-connect.page:39
@@ -440,8 +444,8 @@ msgid ""
 "After you have connected to an IRC Network, you can also connect to other "
 "IRC Networks."
 msgstr ""
-"Після встановлення з'єднання із однією мережею IRC ви можете встановити"
-" з'єднання і з іншими мережами IRC."
+"Після встановлення з'єднання із однією мережею IRC ви можете встановити "
+"з'єднання і з іншими мережами IRC."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:45
@@ -454,9 +458,9 @@ msgid ""
 "Press <gui>Add Network</gui> and select the IRC network from the list you "
 "would like to join or press <gui>Custom Network</gui> and enter the details."
 msgstr ""
-"Натисніть кнопку <gui>Додати мережу</gui> і виберіть зі списку ту мережу IRC,"
-" з якою ви хочете з'єднатися, натисніть кнопку <gui>Інша мережа</gui> і"
-" введіть параметри мережі."
+"Натисніть кнопку <gui>Додати мережу</gui> і виберіть зі списку ту мережу "
+"IRC, з якою ви хочете з'єднатися, натисніть кнопку <gui>Інша мережа</gui> і "
+"введіть параметри мережі."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:53
@@ -464,15 +468,15 @@ msgid ""
 "Enter the name of the chat room you would like to join or select the chat "
 "room(s) from the list and then press <gui>Join</gui>."
 msgstr ""
-"Введіть назву кімнати спілкування, до якої ви хочете увійти, або виберіть"
-" кімнати спілкування зі списку і натисніть кнопку <gui>Увійти</gui>."
+"Введіть назву кімнати спілкування, до якої ви хочете увійти, або виберіть "
+"кімнати спілкування зі списку і натисніть кнопку <gui>Увійти</gui>."
 
 #. (itstool) path: item/p
 #: C/network-connect.page:58
 msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
 msgstr ""
-"Натисніть кнопку <gui>Увійти</gui>, щоб встановити з'єднання із кімнатою або"
-" кімнатами спілкування."
+"Натисніть кнопку <gui>Увійти</gui>, щоб встановити з'єднання із кімнатою або "
+"кімнатами спілкування."
 
 #. (itstool) path: note/p
 #: C/network-connect.page:62
@@ -481,9 +485,9 @@ msgid ""
 "it to the name of the network with a colon and the port number, for example "
 "<em>irc.example.org:12345</em>"
 msgstr ""
-"Якщо для з'єднання із потрібною вам мережею IRC використовується нетиповий"
-" порт, ви можете дописати його номер до назви мережі після двокрапки. Ось"
-" так: <em>irc.example.org:12345</em>"
+"Якщо для з'єднання із потрібною вам мережею IRC використовується нетиповий "
+"порт, ви можете дописати його номер до назви мережі після двокрапки. Ось "
+"так: <em>irc.example.org:12345</em>"
 
 #. (itstool) path: info/desc
 #: C/overview.page:9
@@ -505,14 +509,14 @@ msgid ""
 "IRC server and join a channel. Channels, also known as chat rooms, are where "
 "users meet online to chat."
 msgstr ""
-"Internet Relay Chat (IRC) — спосіб спілкування в інтернеті за допомогою"
-" загальнодоступних та конфіденційних кімнат спілкування. Мережі IRC, зокрема"
-" Freenode або Gimpnet, є автономними і працюють на власних серверах із"
-" власними каналами. В IRC використовується модель «клієнт-сервер», у якій ви"
-" можете скористатися клієнтом, наприклад «Балаканиною», для встановлення"
-" з'єднання із сервером IRC і входу на канал. Канали, також відомі як кімнати"
-" спілкування, є місцями, де користувачів зустрічаються в інтернеті для"
-" спілкування."
+"Internet Relay Chat (IRC) — спосіб спілкування в інтернеті за допомогою "
+"загальнодоступних та конфіденційних кімнат спілкування. Мережі IRC, зокрема "
+"Freenode або Gimpnet, є автономними і працюють на власних серверах із "
+"власними каналами. В IRC використовується модель «клієнт-сервер», у якій ви "
+"можете скористатися клієнтом, наприклад «Балаканиною», для встановлення "
+"з'єднання із сервером IRC і входу на канал. Канали, також відомі як кімнати "
+"спілкування, є місцями, де користувачів зустрічаються в інтернеті для "
+"спілкування."
 
 #. (itstool) path: info/desc
 #: C/sharing.page:9
@@ -535,16 +539,16 @@ msgid ""
 "the link to the paste website will be automatically entered into the chat "
 "box. Press <key>Enter</key> to share the link with the chat room."
 msgstr ""
-"В IRC вважається грубістю копіювання і вставлення у повідомлення більше, ніж"
-" 5 рядків тексту. Якщо ви спробуєте вставити понад 5 рядків тексту, <gui"
-">Балаканина</gui> запитає у вас, чи хочете ви, щоб до повідомлення на"
-" загальнодоступному каналі було автоматично вставлено текст з буфера обміну"
-" даними. Якщо ви підтверджуєте вставлення, натисніть кнопку <gui>Вставити<"
-"/gui>, яку показано на наведеному нижче знімку. Після натискання кнопки <gui"
-">Вставити</gui>, до поля введення тексту буде автоматично вставлено посилання"
-" на сторінку сайта тимчасового зберігання даних із повним текстом вставлених"
-" даних. Натисніть клавішу <key>Enter</key>, щоб надіслати посилання до"
-" кімнати спілкування."
+"В IRC вважається грубістю копіювання і вставлення у повідомлення більше, ніж "
+"5 рядків тексту. Якщо ви спробуєте вставити понад 5 рядків тексту, "
+"<gui>Балаканина</gui> запитає у вас, чи хочете ви, щоб до повідомлення на "
+"загальнодоступному каналі було автоматично вставлено текст з буфера обміну "
+"даними. Якщо ви підтверджуєте вставлення, натисніть кнопку <gui>Вставити</"
+"gui>, яку показано на наведеному нижче знімку. Після натискання кнопки "
+"<gui>Вставити</gui>, до поля введення тексту буде автоматично вставлено "
+"посилання на сторінку сайта тимчасового зберігання даних із повним текстом "
+"вставлених даних. Натисніть клавішу <key>Enter</key>, щоб надіслати "
+"посилання до кімнати спілкування."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -570,13 +574,13 @@ msgid ""
 "automatically entered into the chat box. Press <key>Enter</key> to share the "
 "link with the chat room."
 msgstr ""
-"Щоб поділитися файлом зображення, перетягніть зображення з вікна програми <"
-"app>Файли</app> і скиньте його на панель спілкування <app>Балаканини</app>"
-" або просто перетягніть файл з вікна програми <app>Файли</app> до вікна <app"
-">Балаканини</app>. Програма запитає вас, чи хочете ви вивантажити зображення"
-" на загальнодоступну службу оприлюднення зображень. Якщо ви згодні"
-" вивантажити зображення, натисніть кнопку <gui>Вставити</gui>, яку показано"
-" на наведеному нижче знімку вікна. Після натискання кнопки <gui>Вставити</gui"
-"> до поля панелі спілкування буде автоматично вставлено посилання на"
-" зображення. Натисніть клавішу <key>Enter</key>, щоб поділитися посиланням у"
-" кімнаті спілкування."
+"Щоб поділитися файлом зображення, перетягніть зображення з вікна програми "
+"<app>Файли</app> і скиньте його на панель спілкування <app>Балаканини</app> "
+"або просто перетягніть файл з вікна програми <app>Файли</app> до вікна "
+"<app>Балаканини</app>. Програма запитає вас, чи хочете ви вивантажити "
+"зображення на загальнодоступну службу оприлюднення зображень. Якщо ви згодні "
+"вивантажити зображення, натисніть кнопку <gui>Вставити</gui>, яку показано "
+"на наведеному нижче знімку вікна. Після натискання кнопки <gui>Вставити</"
+"gui> до поля панелі спілкування буде автоматично вставлено посилання на "
+"зображення. Натисніть клавішу <key>Enter</key>, щоб поділитися посиланням у "
+"кімнаті спілкування."
