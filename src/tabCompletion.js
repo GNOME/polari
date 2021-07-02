@@ -32,7 +32,6 @@ const TabCompletion = class {
         this._list.set_filter_func(this._filter.bind(this));
         this._list.connect('row-selected', this._onRowSelected.bind(this));
         this._list.connect('row-activated', this._stop.bind(this));
-        this._list.connect('keynav-failed', this._onKeynavFailed.bind(this));
         frame.add(this._list);
 
         this._widgetMap = new Map();
@@ -138,11 +137,11 @@ const TabCompletion = class {
         switch (keyval) {
         case Gdk.KEY_Tab:
         case Gdk.KEY_Down:
-            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, 1);
+            this._moveSelection(1);
             return Gdk.EVENT_STOP;
         case Gdk.KEY_ISO_Left_Tab:
         case Gdk.KEY_Up:
-            this._moveSelection(Gtk.MovementStep.DISPLAY_LINES, -1);
+            this._moveSelection(-1);
             return Gdk.EVENT_STOP;
         case Gdk.KEY_Escape:
             this._cancel();
@@ -233,19 +232,12 @@ const TabCompletion = class {
         }
     }
 
-    _onKeynavFailed(w, dir) {
-        if (this._inHandler)
-            return Gdk.EVENT_PROPAGATE;
-        let count = dir === Gtk.DirectionType.DOWN ? -1 : 1;
-        this._inHandler = true;
-        this._moveSelection(Gtk.MovementStep.BUFFER_ENDS, count);
-        this._inHandler = false;
-        return Gdk.EVENT_STOP;
-    }
-
-    _moveSelection(movement, count) {
-        this._list.emit('move-cursor', movement, count);
-        let row = this._list.get_focus_child();
+    _moveSelection(count) {
+        const rows = this._list.get_children().filter(c => c.get_child_visible());
+        const current = this._list.get_selected_row();
+        const index = current ? rows.findIndex(r => r === current) : 0;
+        const newIndex = (index + rows.length + count) % rows.length;
+        const row = rows[newIndex];
         this._list.select_row(row);
     }
 
