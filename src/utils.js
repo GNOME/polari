@@ -40,7 +40,6 @@ export {
     formatTimePassed
 };
 
-import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
@@ -252,10 +251,7 @@ function findChannels(str, server) {
 function openURL(url, timestamp) {
     let app = Gio.Application.get_default();
     try {
-        if (app.active_window)
-            Gtk.show_uri_on_window(app.active_window, url, timestamp);
-        else
-            Gtk.show_uri(Gdk.Screen.get_default(), url, timestamp);
+        Gtk.show_uri_on_window(app.active_window, url, timestamp);
     } catch (e) {
         let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
         app.notificationQueue.addNotification(n);
