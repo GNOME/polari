@@ -21,8 +21,8 @@ export default class TabCompletion {
         this._popup = new Gtk.Popover({
             position: Gtk.PositionType.TOP,
             modal: false,
-            relative_to: this._entry,
         });
+        this._popup.set_parent(this._entry);
 
         this._list = new Gtk.ListBox({ selection_mode: Gtk.SelectionMode.SINGLE });
         this._list.set_filter_func(this._filter.bind(this));

@@ -126,6 +126,8 @@ export default GObject.registerClass({
 
         super._init(params);
 
+        this._userListPopover.set_parent(this._showUserListButton);
+
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         this._gtkSettings = Gtk.Settings.get_default();
 

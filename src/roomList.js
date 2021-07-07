@@ -13,9 +13,9 @@ const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
 function _onPopoverVisibleChanged(popover) {
     if (popover.visible)
-        popover.relative_to.add_css_class('has-open-popup');
+        popover.get_parent().add_css_class('has-open-popup');
     else
-        popover.relative_to.remove_css_class('has-open-popup');
+        popover.get_parent().remove_css_class('has-open-popup');
 }
 
 const RoomRow = GObject.registerClass({
@@ -232,9 +232,9 @@ const RoomRowPopover = GObject.registerClass(
 class RoomRowPopover extends Gtk.Popover {
     _init(row) {
         super._init({
-            relative_to: row,
             position: Gtk.PositionType.BOTTOM,
         });
+        this.set_parent(row);
 
         this.connect('notify::visible', _onPopoverVisibleChanged);
 
@@ -390,14 +390,12 @@ const RoomListHeader = GObject.registerClass({
         if (this._popover === popover)
             return;
 
-        if (this._popover)
-            this._popover.relative_to = null;
+        this._popover?.unparent();
         this._popover?.run_dispose();
 
         this._popover = popover;
 
-        if (this._popover)
-            this._popover.relative_to = this;
+        this._popover?.set_parent(this);
 
         this.notify('popover');
     }

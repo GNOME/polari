@@ -837,10 +837,10 @@ export default GObject.registerClass({
             _('Copy Link Address'), `chatlog.copy-url("${url}")`);
 
         const menu = new Gtk.PopoverMenu({
-            relative_to: this,
             position: Gtk.PositionType.BOTTOM,
             pointing_to: new Gdk.Rectangle({ x, y }),
         });
+        menu.set_parent(this);
         menu.bind_model(section, null);
         menu.popup();
     }
@@ -1483,10 +1483,10 @@ export default GObject.registerClass({
 
         if (!tag._popover) {
             tag._popover = new UserPopover({
-                relative_to: this._view,
                 userTracker: this._userTracker,
                 room: this._room,
             });
+            tag._popover.set_parent(this._view);
         }
 
         tag._popover.nickname = actualNickName;

@@ -182,7 +182,8 @@ export default GObject.registerClass({
                 this._onKeyPressed.bind(this));
         });
         this.connect('map', () => {
-            EntryArea._nickPopover.relative_to = this._nickButton;
+            EntryArea._nickPopover.unparent();
+            EntryArea._nickPopover.set_parent(this._nickButton);
 
             if (this._nickChangedId)
                 return;
