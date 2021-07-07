@@ -1,6 +1,5 @@
 import Gdk from 'gi://Gdk';
 import Gtk from 'gi://Gtk';
-import Pango from 'gi://Pango';
 
 import * as IrcParser from './ircParser.js';
 
@@ -53,16 +52,12 @@ export default class TabCompletion {
     _showPopup() {
         this._list.show();
 
-        let layout = this._entry.get_layout();
-        let layoutIndex = this._entry.text_index_to_layout_index(this._startPos);
-        let wordPos = layout.index_to_pos(layoutIndex);
-        let [layoutX] = this._entry.get_layout_offsets();
+        const delegate = this._entry.get_delegate();
+        const [extents] = delegate.compute_cursor_extents(this._startPos);
+        const [, bounds] = this._entry.compute_bounds(delegate);
 
         this._popup.pointing_to = new Gdk.Rectangle({
-            x: layoutX + wordPos.x / Pango.SCALE,
-            y: 0,
-            width: 1,
-            height: 1,
+            x: extents.get_x() - bounds.get_x(),
         });
         this._popup.popup();
     }
