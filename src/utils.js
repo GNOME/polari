@@ -26,7 +26,7 @@ import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
 
-import * as AppNotifications from './appNotifications.js';
+import { SimpleOutput as AppNotification } from './appNotifications.js';
 
 import gi from 'gi';
 let Soup;
@@ -310,13 +310,17 @@ export function findChannels(str, server) {
  */
 export function openURL(url) {
     let app = Gio.Application.get_default();
-    try {
-        Gtk.show_uri_on_window(app.active_window, url, Gdk.CURRENT_TIME);
-    } catch (e) {
-        let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
-        app.notificationQueue.addNotification(n);
-        console.debug(`Failed to open ${url}: %o`, e);
-    }
+    Gtk.show_uri_full(
+        app.active_window, url, Gdk.CURRENT_TIME, null,
+        (o, res) => {
+            try {
+                Gtk.show_uri_full_finish(app.active_window, res);
+            } catch (e) {
+                let n = new AppNotification(_('Failed to open link'));
+                app.notificationQueue.addNotification(n);
+                console.debug(`Failed to open ${url}: %o`, e);
+            }
+        });
 }
 
 /**
