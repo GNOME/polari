@@ -811,7 +811,7 @@ export default GObject.registerClass({
 
         let item = new Gtk.MenuItem({ label: _('Open Link') });
         item.connect('activate', () => {
-            Utils.openURL(url, Gtk.get_current_event_time());
+            Utils.openURL(url);
         });
         menu.append(item);
 
@@ -1455,7 +1455,7 @@ export default GObject.registerClass({
             tag.foreground_rgba = tag.hover ? this._hoveredLinkColor : null;
         });
         tag.connect('clicked', () => {
-            Utils.openURL(url, Gtk.get_current_event_time());
+            Utils.openURL(url);
         });
         tag.connect('popup-menu', () => {
             this._showUrlContextMenu(url);

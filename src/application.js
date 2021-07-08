@@ -798,7 +798,7 @@ export default GObject.registerClass({
     }
 
     _onShowHelp() {
-        Utils.openURL('help:polari', Gtk.get_current_event_time());
+        Utils.openURL('help:polari');
     }
 
     _onShowAbout() {

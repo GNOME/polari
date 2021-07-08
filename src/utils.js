@@ -22,6 +22,7 @@
 
 const ByteArray = imports.byteArray;
 
+import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
@@ -303,12 +304,11 @@ export function findChannels(str, server) {
 
 /**
  * @param {string} url - the url
- * @param {number} timestamp - a timestamp
  */
-export function openURL(url, timestamp) {
+export function openURL(url) {
     let app = Gio.Application.get_default();
     try {
-        Gtk.show_uri_on_window(app.active_window, url, timestamp);
+        Gtk.show_uri_on_window(app.active_window, url, Gdk.CURRENT_TIME);
     } catch (e) {
         let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
         app.notificationQueue.addNotification(n);
