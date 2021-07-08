@@ -316,8 +316,7 @@
       { "ssl": false, "port": 6667, "address": "irc.us.gimp.org" },
       { "ssl": true, "port": 6697, "address": "irc.eagle.y.se" },
       { "ssl": true, "port": 6697, "address": "irc.acc.umu.se" },
-      { "ssl": true, "port": 6697, "address": "irc.gimp.ca" },
-      { "ssl": true, "port": 6697, "address": "irc.poop.nl" }
+      { "ssl": true, "port": 6697, "address": "irc.gimp.ca" }
     ]
   },
   {
