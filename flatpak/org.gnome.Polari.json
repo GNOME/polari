@@ -61,8 +61,8 @@
                 {
                     "type": "git",
                     "url": "https://www.github.com/TelepathyIM/telepathy-glib.git",
-                    "tag": "telepathy-glib-0.24.1",
-                    "commit": "c834ef1a50a97cbfae7a0d560ff806fd5aa7ffe8"
+                    "tag": "telepathy-glib-0.24.2",
+                    "commit": "424e12a3277d23bc8cb3e84a1659a0939ade819e"
                 },
                 {
                     "type": "patch",
