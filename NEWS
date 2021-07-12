@@ -1,3 +1,14 @@
+40.1
+====
+* Update GNOME server list [Florian; !200]
+* Misc. bug fixes [Florian; !197]
+
+Contributors:
+  Florian Müllner
+
+Translators:
+  Alexey Rubtsov [ru]
+
 40.0 — “You Need a Boyfriend, Not a Person”
 ===========================================
 * Promisify async operations [Florian; !169]
