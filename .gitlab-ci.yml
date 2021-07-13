@@ -103,13 +103,13 @@ flatpak:
         BRANCH: "snapshot"
         CONFIG_OPTS: "-Dsnapshot=true --werror --warnlevel 2"
     extends: .flatpak-template
-    except:
-        - master
+    rules:
+        - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH'
 
-flatpak-master:
+flatpak-main:
     extends: .flatpak-template
-    only:
-        - master
+    rules:
+        - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 nightly:
   extends: '.publish_nightly'
