@@ -21,6 +21,20 @@ with nice folks, please join us in [#polari on irc.gnome.org][irc-channel].
 If you found a problem or have a feature suggestion, please report the
 issue to the GNOME [bug tracking system][bug-tracker].
 
+
+## Default branch
+
+The default development branch is `main`. If you still have a local
+checkout with the old name, use:
+```sh
+git checkout master
+git branch -m master main
+git fetch
+git branch --unset-upstream
+git branch -u origin/main
+git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+```
+
 [project-page]: https://wiki.gnome.org/Apps/Polari
 [build-instructions]: https://wiki.gnome.org/Newcomers/BuildProject
 [irc-channel]: irc://irc.gnome.org/%23polari
