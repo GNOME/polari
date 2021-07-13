@@ -1,6 +1,0 @@
-*.pot
-*.sw?
-*.tar.xz
-.buildconfig
-.flatpak-builder
-*~

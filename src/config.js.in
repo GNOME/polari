@@ -1,4 +1,0 @@
-export const PACKAGE_NAME = '@PACKAGE_NAME@';
-export const PACKAGE_VERSION = '@PACKAGE_VERSION@';
-export const PREFIX = '@PREFIX@';
-export const LIBDIR = '@LIBDIR@';
