@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2021-03-22 13:18+0000\n"
-"PO-Revision-Date: 2021-03-22 15:54+0200\n"
+"POT-Creation-Date: 2021-07-14 07:24+0000\n"
+"PO-Revision-Date: 2021-07-14 11:05+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.11.70\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -271,14 +271,18 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:52
+#| msgid ""
+#| "<app>Polari</app> will remember your username and password and the next "
+#| "time you connect to the IRC network <gui>Polari</gui> will automatically "
+#| "register you with the Nickserv service."
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
-"you with the Nickserv service."
+"you with the NickServ service."
 msgstr ""
 "<app>Балаканина</app> запам'ятає ваше ім'я користувача і пароль. Наступного "
 "разу, коли ви встановлюватимете з'єднання із мережею IRC, <gui>Балаканина</"
-"gui> автоматично зареєструє вас за допомогою служби Nickserv."
+"gui> автоматично зареєструє вас за допомогою служби NickServ."
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:58
@@ -323,10 +327,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
-#| msgid ""
-#| "Information about the user, including their name and the last time they "
-#| "were active in the channel, will appear. Click <gui>Message</gui> to "
-#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
 "active in the channel, will appear. Click <gui>Start Conversation</gui> to "
@@ -363,7 +363,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-#| msgid "Press <gui>Message</gui> to start a private conversation."
 msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
 "Натисніть кнопку <gui>Почати спілкування</gui>, щоб розпочати конфіденційне "
