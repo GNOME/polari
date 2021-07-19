@@ -22,6 +22,7 @@ default:
 
 
 variables:
+    FDO_UPSTREAM_REPO: GNOME/polari
     BUNDLE: "polari-git.flatpak"
     LINT_LOG: "eslint-report.xml"
 
