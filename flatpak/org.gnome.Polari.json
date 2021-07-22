@@ -4,11 +4,16 @@
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "command": "polari",
-    "x-run-args": ["--test-instance"],
-    "tags": ["nightly"],
+    "x-run-args": [
+        "--test-instance"
+    ],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-prefix": "(Nightly) ",
     "finish-args": [
-        "--share=ipc", "--socket=fallback-x11",
+        "--share=ipc",
+        "--socket=fallback-x11",
         "--socket=wayland",
         "--share=network",
         "--own-name=org.freedesktop.Telepathy.Client.Polari",
@@ -33,18 +38,22 @@
     "build-options": {
         "cflags": "-O2 -g"
     },
-    "cleanup": ["*.la",
-                "/include",
-                "/lib/pkgconfig",
-                "/share/gir-1.0",
-                "/share/man",
-                "/share/polari/gir-1.0",
-                "/share/telepathy"
+    "cleanup": [
+        "*.la",
+        "/include",
+        "/lib/pkgconfig",
+        "/share/gir-1.0",
+        "/share/man",
+        "/share/polari/gir-1.0",
+        "/share/telepathy"
     ],
     "modules": [
         {
             "name": "dbus-glib",
-            "config-opts": ["--disable-static", "--disable-gtk-doc"],
+            "config-opts": [
+                "--disable-static",
+                "--disable-gtk-doc"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -56,7 +65,10 @@
         },
         {
             "name": "telepathy-glib",
-            "config-opts": ["--disable-static", "--disable-gtk-doc"],
+            "config-opts": [
+                "--disable-static",
+                "--disable-gtk-doc"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -72,7 +84,10 @@
         },
         {
             "name": "telepathy-mission-control",
-            "config-opts": ["--disable-static", "--disable-gtk-doc"],
+            "config-opts": [
+                "--disable-static",
+                "--disable-gtk-doc"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -107,7 +122,10 @@
         },
         {
             "name": "telepathy-logger",
-            "config-opts": ["--disable-static", "--disable-gtk-doc"],
+            "config-opts": [
+                "--disable-static",
+                "--disable-gtk-doc"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -163,7 +181,9 @@
             "name": "polari",
             "buildsystem": "meson",
             "builddir": true,
-            "config-opts": ["--libdir=lib"],
+            "config-opts": [
+                "--libdir=lib"
+            ],
             "sources": [
                 {
                     "type": "git",
