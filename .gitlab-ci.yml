@@ -7,6 +7,7 @@ stages:
  - review
  - build
  - deploy
+ - housekeeping
 
 default:
     # Cancel jobs if newer commits are pushed to the branch
@@ -23,6 +24,7 @@ default:
 
 variables:
     FDO_UPSTREAM_REPO: GNOME/polari
+    MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
     BUNDLE: "polari-git.flatpak"
     LINT_LOG: "eslint-report.xml"
 
@@ -35,6 +37,7 @@ workflow:
 .pipeline_guard: &pipeline_guard
     rules:
         - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+        - if: '$CI_PIPELINE_SOURCE == "schedule"'
         - if: '$CI_COMMIT_TAG'
         - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
         - if: '$CI_COMMIT_BRANCH =~ /^gnome-[0-9-]+$/'
@@ -92,8 +95,6 @@ eslint:
 .flatpak-template:
     stage: build
     variables:
-        # Your manifest path
-        MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
         RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
         FLATPAK_MODULE: "polari"
         APP_ID: "org.gnome.Polari"
@@ -116,3 +117,13 @@ nightly:
   extends: '.publish_nightly'
   variables:
     BUNDLES: '$BUNDLE'
+
+check-flatpak-deps:
+    image:
+        name: ghcr.io/flathub/flatpak-external-data-checker
+        entrypoint: [""]
+    stage: housekeeping
+    script:
+        - /app/flatpak-external-data-checker $MANIFEST_PATH
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "schedule" && $POLARI_SCHEDULED_JOB == "x-checker"'
