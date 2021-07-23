@@ -116,15 +116,3 @@ nightly:
   extends: '.publish_nightly'
   variables:
     BUNDLES: '$BUNDLE'
-
-fedora:
-  image: fedora:latest
-  stage: build
-  before_script:
-    - dnf install -y 'dnf-command(builddep)' redhat-rpm-config
-    - dnf builddep -y polari
-  script:
-    - meson _build .
-    - ninja -C _build test install
-  only:
-    - web
