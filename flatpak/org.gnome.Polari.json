@@ -49,8 +49,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.freedesktop.org/dbus/dbus-glib.git",
-                    "tag": "dbus-glib-0.110",
-                    "commit": "ffeb6909967ff79585a7ede85227da94f04ecb01"
+                    "tag": "dbus-glib-0.112",
+                    "commit": "f16a4ec9a37d067aea4772ce35ae5b88d9416cab"
                 }
             ]
         },
@@ -93,8 +93,8 @@
                 {
                     "type": "git",
                     "url": "https://www.github.com/TelepathyIM/telepathy-idle.git",
-                    "tag": "telepathy-idle-0.2.1",
-                    "commit": "b0f139ff63c4d5f9471423422f298443ae222f9a"
+                    "tag": "telepathy-idle-0.2.2",
+                    "commit": "02d03c57cb5f061e374fe375c9b82f3c826cb538"
                 }
             ],
             "cleanup": [
