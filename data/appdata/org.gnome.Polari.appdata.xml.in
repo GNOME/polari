@@ -53,6 +53,14 @@
     <kudo>Notifications</kudo>
     <kudo>UserDocs</kudo>
   </kudos>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">medium</display_length>
+  </requires>
   <translation type="gettext">polari</translation>
   <releases>
     <release version="40.0" date="2021-06-25">
