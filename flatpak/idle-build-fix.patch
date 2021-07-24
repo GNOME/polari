@@ -1,0 +1,38 @@
+From 99704fb9214cbc1319f7faea129ea4b97fda1c97 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Florian=20M=C3=BCllner?= <fmuellner@gnome.org>
+Date: Sat, 24 Jul 2021 04:43:28 +0200
+Subject: [PATCH] meson: Built helper libraries statically
+
+They aren't installed, so the dynamic linker has no chance of
+locating them if they are built as shared libraries.
+---
+ extensions/meson.build | 2 +-
+ src/meson.build        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/extensions/meson.build b/extensions/meson.build
+index 388820d..78f11a5 100644
+--- a/extensions/meson.build
++++ b/extensions/meson.build
+@@ -5,7 +5,7 @@ xmls = files(
+ 
+ subdir('_gen')
+ 
+-libidle_extensions = library(
++libidle_extensions = static_library(
+ 	'idle-extensions',
+ 	sources: [
+ 		'extensions.h',
+diff --git a/src/meson.build b/src/meson.build
+index 0cfcc3a..25a599c 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -1,4 +1,4 @@
+-libidle_convenience = library(
++libidle_convenience = static_library(
+ 	'idle-convenience',
+ 	sources: [
+ 		'idle-connection.c',
+-- 
+2.31.1
+

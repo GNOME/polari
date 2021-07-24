@@ -130,6 +130,10 @@
                         "type": "git",
                         "tag-pattern": "^telepathy-idle-(\\d+.[^(99)].[\\d.]+)$"
                     }
+                },
+                {
+                    "type": "patch",
+                    "path": "idle-build-fix.patch"
                 }
             ],
             "cleanup": [
