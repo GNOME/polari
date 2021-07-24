@@ -252,6 +252,28 @@ export default GObject.registerClass({
 
         this.get_style_context().add_class('polari-chat-view');
 
+        this._actionGroup = new Gio.SimpleActionGroup();
+        this.insert_action_group('chatlog', this._actionGroup);
+
+        let action;
+        action = new Gio.SimpleAction({
+            name: 'open-url',
+            parameter_type: new GLib.VariantType('s'),
+        });
+        action.connect('activate',
+            (a, params) => Utils.openURL(params.unpack()));
+        this._actionGroup.add_action(action);
+
+        action = new Gio.SimpleAction({
+            name: 'copy-url',
+            parameter_type: new GLib.VariantType('s'),
+        });
+        action.connect('activate', (a, params) => {
+            const clipboard = Gtk.Clipboard.get_default(this.get_display());
+            clipboard.set_text(params.unpack(), -1);
+        });
+        this._actionGroup.add_action(action);
+
         this._view = new TextView({
             editable: false, cursor_visible: false,
             wrap_mode: Gtk.WrapMode.WORD_CHAR,
@@ -754,24 +776,21 @@ export default GObject.registerClass({
         this._pending.delete(id);
     }
 
-    _showUrlContextMenu(url) {
-        let menu = new Gtk.Menu();
+    _showUrlContextMenu(url, x, y) {
+        const section = new Gio.Menu();
 
-        let item = new Gtk.MenuItem({ label: _('Open Link') });
-        item.connect('activate', () => {
-            Utils.openURL(url);
+        section.append(
+            _('Open Link'), `chatlog.open-url("${url}")`);
+        section.append(
+            _('Copy Link Address'), `chatlog.copy-url("${url}")`);
+
+        const menu = new Gtk.PopoverMenu({
+            relative_to: this,
+            position: Gtk.PositionType.BOTTOM,
+            pointing_to: new Gdk.Rectangle({ x, y }),
         });
-        menu.append(item);
-
-        item = new Gtk.MenuItem({ label: _('Copy Link Address') });
-        item.connect('activate', () => {
-            let clipboard = Gtk.Clipboard.get_default(item.get_display());
-            clipboard.set_text(url, -1);
-        });
-        menu.append(item);
-
-        menu.show_all();
-        menu.popup_at_pointer(null);
+        menu.bind_model(section, null);
+        menu.popup();
     }
 
     _getHoveredButtonTags(coords) {
@@ -1430,7 +1449,8 @@ export default GObject.registerClass({
             tag.foreground_rgba = tag.hover ? this._hoveredLinkColor : null;
         });
         tag.connect('clicked', () => {
-            Utils.openURL(url);
+            const v = new GLib.Variant('s', url);
+            this._actionGroup.activate_action('open-url', v);
         });
         tag.connect('popup-menu', (t, ...coords) => {
             this._showUrlContextMenu(url, ...coords);
