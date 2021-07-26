@@ -446,6 +446,8 @@ export default GObject.registerClass({
 
         this._toplevelSignals.forEach(id => window.disconnect(id));
         this._toplevelSignals = [];
+
+        window.run_dispose();
     }
 
     vfunc_open(files) {
