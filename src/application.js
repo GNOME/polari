@@ -61,7 +61,8 @@ export default GObject.registerClass({
         this._nickTrackData = new Map();
         this._demons = [];
 
-        this._windowRemovedId = 0;
+        this._windowRemovedId =
+            this.connect('window-removed', this._onWindowRemoved.bind(this));
 
         this.add_main_option('start-client', 0,
             GLib.OptionFlags.NONE, GLib.OptionArg.NONE,
@@ -407,22 +408,10 @@ export default GObject.registerClass({
         this.activate_action('start-client', null);
 
         if (!this.active_window) {
-            if (this._windowRemovedId)
-                this.disconnect(this._windowRemovedId);
-            this._windowRemovedId = 0;
-
             if (this._needsInitialSetup()) {
                 new InitialSetupWindow({ application: this });
-                this._windowRemovedId = this.connect('window-removed', () => {
-                    this.activate();
-                });
             } else {
                 let window = new MainWindow({ application: this });
-                this._windowRemovedId = this.connect('window-removed', () => {
-                    if (this._settings.get_boolean('run-in-background'))
-                        return;
-                    this.emit('prepare-shutdown');
-                });
                 window.connect('notify::active-room',
                     () => this.emit('room-focus-changed'));
                 window.connect('notify::is-active',
@@ -448,6 +437,13 @@ export default GObject.registerClass({
         window.connect('active-room-state-changed',
             this._updateUserListAction.bind(this));
         this._updateUserListAction();
+    }
+
+    _onWindowRemoved(app, window) {
+        if (!(window instanceof MainWindow))
+            this.activate();
+        else if (!this._settings.get_boolean('run-in-background'))
+            this.emit('prepare-shutdown');
     }
 
     vfunc_open(files) {
