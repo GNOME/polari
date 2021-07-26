@@ -52,12 +52,22 @@ export default GObject.registerClass({
 
         const toplevel = this.get_root();
 
-        toplevel.connect('notify::active-room',
-            this._activeRoomChanged.bind(this));
-        toplevel.connect('active-room-state-changed',
-            this._updateSensitivity.bind(this));
+        this._toplevelSignals = [
+            toplevel.connect('notify::active-room',
+                this._activeRoomChanged.bind(this)),
+            toplevel.connect('active-room-state-changed',
+                this._updateSensitivity.bind(this)),
+        ];
         this._activeRoomChanged();
         this._updateSensitivity();
+    }
+
+    vfunc_unrealize() {
+        super.vfunc_unrealize();
+
+        const toplevel = this.get_root();
+        this._toplevelSignals.forEach(id => toplevel.disconnect(id));
+        this._toplevelSignals = [];
     }
 
     vfunc_size_allocate(allocation) {
