@@ -427,13 +427,14 @@ export default GObject.registerClass({
             return;
 
         let action = this.lookup_action('leave-current-room');
-        window.connect('notify::active-room', () => {
-            action.enabled = window.active_room !== null;
-        });
         action.enabled = window.active_room !== null;
 
-        window.connect('active-room-state-changed',
-            this._updateUserListAction.bind(this));
+        this._toplevelSignals = [
+            window.connect('notify::active-room',
+                () => (action.enabled = window.active_room !== null)),
+            window.connect('active-room-state-changed',
+                () => this._updateUserListAction()),
+        ];
         this._updateUserListAction();
     }
 
@@ -442,6 +443,9 @@ export default GObject.registerClass({
             this.activate();
         else if (!this._settings.get_boolean('run-in-background'))
             this.emit('prepare-shutdown');
+
+        this._toplevelSignals.forEach(id => window.disconnect(id));
+        this._toplevelSignals = [];
     }
 
     vfunc_open(files) {
