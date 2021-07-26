@@ -615,9 +615,19 @@ class RoomList extends Gtk.ListBox {
         super.vfunc_realize();
 
         const toplevel = this.get_root();
-        toplevel.connect('notify::active-room',
-            this._activeRoomChanged.bind(this));
+        this._toplevelSignals = [
+            toplevel.connect('notify::active-room',
+                () => this._activeRoomChanged()),
+        ];
         this._activeRoomChanged();
+    }
+
+    vfunc_unrealize() {
+        super.vfunc_unrealize();
+
+        const toplevel = this.get_root();
+        this._toplevelSignals.forEach(id => toplevel.disconnect(id));
+        this._toplevelSignals = [];
     }
 
     _rowToRoomIndex(index) {
