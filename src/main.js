@@ -22,7 +22,6 @@ pkg.require({
     'Pango': '1.0',
     'PangoCairo': '1.0',
     'Secret': '1',
-    'Soup': '3.0',
     'TelepathyGLib': '0.12',
     'TelepathyLogger': '0.2',
 });
@@ -30,6 +29,9 @@ pkg.requireSymbol('Gio', '2.0', 'Application.send_notification');
 pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Gspell', '1', 'Entry');
 pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
+
+if (!pkg.checkSymbol('Soup', '3.0'))
+    pkg.requireSymbol('Soup', '2.4');
 
 Log.init();
 
