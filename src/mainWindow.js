@@ -1,9 +1,6 @@
 export {
     MainWindow,
-    FixedSizeFrame,
-    RoomList,
-    RoomStack,
-    UserList
+    FixedSizeFrame
 };
 
 import Gdk from 'gi://Gdk';
@@ -16,10 +13,10 @@ import Tp from 'gi://TelepathyGLib';
 
 import { AccountsMonitor } from './accountsMonitor.js';
 import { JoinDialog } from './joinDialog.js';
-import * as RoomList from './roomList.js'; // used in template
+import * as RoomList_ from './roomList.js'; // used in template
 import { RoomManager } from './roomManager.js';
-import * as RoomStack from './roomStack.js'; // used in template
-import * as UserList from './userList.js'; // used in template
+import * as RoomStack_ from './roomStack.js'; // used in template
+import * as UserList_ from './userList.js'; // used in template
 import * as Utils from './utils.js';
 
 const FixedSizeFrame = GObject.registerClass({
