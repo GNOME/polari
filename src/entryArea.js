@@ -9,8 +9,8 @@ import Tp from 'gi://TelepathyGLib';
 
 import { MAX_NICK_CHARS } from './chatView.js';
 import { DropTargetIface } from './pasteManager.js';
-import { IrcParser } from './ircParser.js';
-import { TabCompletion } from './tabCompletion.js';
+import IrcParser from './ircParser.js';
+import TabCompletion from './tabCompletion.js';
 
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
@@ -157,7 +157,7 @@ export const NickPopover = GObject.registerClass({
     }
 });
 
-export const EntryArea = GObject.registerClass({
+export default GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
     InternalChildren: [
         'chatEntry',

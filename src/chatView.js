@@ -11,8 +11,8 @@ import Tpl from 'gi://TelepathyLogger';
 
 import { DropTargetIface } from './pasteManager.js';
 import { UserPopover } from './userList.js';
-import { UserStatusMonitor } from './userTracker.js';
-import { URLPreview } from './urlPreview.js';
+import UserStatusMonitor from './userTracker.js';
+import URLPreview from './urlPreview.js';
 import * as Utils from './utils.js';
 
 Gio._promisify(Tpl.LogWalker.prototype,
@@ -280,7 +280,7 @@ const HoverFilterTag = GObject.registerClass({
     }
 });
 
-export const ChatView = GObject.registerClass({
+export default GObject.registerClass({
     Implements: [DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),

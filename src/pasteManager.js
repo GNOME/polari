@@ -33,7 +33,7 @@ function _getTargetForContentType(contentType) {
 }
 
 
-export const PasteManager = class {
+export default class PasteManager {
     pasteContent(content, title) {
         if (typeof content === 'string')
             return Utils.gpaste(content, title);
@@ -66,7 +66,7 @@ export const PasteManager = class {
             throw new Error('Unhandled content type');
         }
     }
-};
+}
 
 export const DropTargetIface = GObject.registerClass({
     Requires: [GObject.Object],

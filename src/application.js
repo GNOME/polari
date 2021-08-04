@@ -6,17 +6,17 @@ import Gtk from 'gi://Gtk?version=3.0';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
-import { AccountsMonitor } from './accountsMonitor.js';
+import AccountsMonitor from './accountsMonitor.js';
 import * as AppNotifications from './appNotifications.js';
 import * as Connections from './connections.js';
-import { InitialSetupWindow } from './initialSetup.js';
-import { MainWindow } from './mainWindow.js';
-import { NetworksManager } from './networksManager.js';
-import { PasteManager } from './pasteManager.js';
-import { RoomManager } from './roomManager.js';
-import { ServerRoomManager } from './serverRoomManager.js';
-import { TelepathyClient } from './telepathyClient.js';
-import { UserStatusMonitor } from './userTracker.js';
+import InitialSetupWindow from './initialSetup.js';
+import MainWindow from './mainWindow.js';
+import NetworksManager from './networksManager.js';
+import PasteManager from './pasteManager.js';
+import RoomManager from './roomManager.js';
+import ServerRoomManager from './serverRoomManager.js';
+import TelepathyClient from './telepathyClient.js';
+import UserStatusMonitor from './userTracker.js';
 import * as Utils from './utils.js';
 
 Gio._promisify(Tp.AccountRequest.prototype,
@@ -35,7 +35,7 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-export const Application = GObject.registerClass({
+export default GObject.registerClass({
     Signals: {
         'prepare-shutdown': {},
         'room-focus-changed': {},

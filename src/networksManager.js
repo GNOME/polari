@@ -4,7 +4,7 @@ import GLib from 'gi://GLib';
 const ByteArray = imports.byteArray;
 const Signals = imports.signals;
 
-export const NetworksManager = class {
+export default class NetworksManager {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new NetworksManager();
@@ -109,5 +109,5 @@ export const NetworksManager = class {
         });
         return network ? network.id : null;
     }
-};
+}
 Signals.addSignalMethods(NetworksManager.prototype);

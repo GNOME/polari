@@ -98,7 +98,7 @@ class Thumbnailer {
     }
 }
 
-export const URLPreview = GObject.registerClass({
+export default GObject.registerClass({
     Properties: {
         'uri': GObject.ParamSpec.string(
             'uri', 'uri', 'uri',

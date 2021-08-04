@@ -5,7 +5,7 @@ import Tp from 'gi://TelepathyGLib';
 const Signals = imports.signals;
 
 import * as AppNotifications from './appNotifications.js';
-import { RoomManager } from './roomManager.js';
+import RoomManager from './roomManager.js';
 import * as Utils from './utils.js';
 
 Gio._promisify(Tp.Account.prototype,
@@ -48,7 +48,7 @@ const UNKNOWN_COMMAND_MESSAGE =
 
 const ROOM_PREFIXES = ['#', '&', '+', '!'];
 
-export const IrcParser = class IrcParser {
+export default class IrcParser {
     constructor(room) {
         this._app = Gio.Application.get_default();
         this._roomManager = RoomManager.getDefault();
@@ -327,5 +327,5 @@ export const IrcParser = class IrcParser {
             logError(e, 'Failed to send message');
         }
     }
-};
+}
 Signals.addSignalMethods(IrcParser.prototype);

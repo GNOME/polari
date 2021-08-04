@@ -5,9 +5,9 @@ import Tp from 'gi://TelepathyGLib';
 
 const Signals = imports.signals;
 
-import { AccountsMonitor } from './accountsMonitor.js';
+import AccountsMonitor from './accountsMonitor.js';
 
-export const RoomManager = class {
+export default class RoomManager {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new RoomManager();
@@ -203,5 +203,5 @@ export const RoomManager = class {
         if (this._rooms.delete(room.id))
             this.emit('room-removed', room);
     }
-};
+}
 Signals.addSignalMethods(RoomManager.prototype);

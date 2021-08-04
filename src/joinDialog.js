@@ -4,7 +4,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
-import { AccountsMonitor } from './accountsMonitor.js';
+import AccountsMonitor from './accountsMonitor.js';
 import * as Utils from './utils.js';
 
 const DialogPage = {
@@ -12,7 +12,7 @@ const DialogPage = {
     CONNECTION: 1,
 };
 
-export const JoinDialog = GObject.registerClass({
+export default GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
     InternalChildren: [
         'cancelButton',

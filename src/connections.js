@@ -4,8 +4,8 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import { AccountsMonitor } from './accountsMonitor.js';
-import { NetworksManager } from './networksManager.js';
+import AccountsMonitor from './accountsMonitor.js';
+import NetworksManager from './networksManager.js';
 import * as Utils from './utils.js';
 
 Gio._promisify(Tp.Account.prototype,

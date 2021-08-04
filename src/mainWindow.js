@@ -6,11 +6,11 @@ import Gtk from 'gi://Gtk';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
-import { AccountsMonitor } from './accountsMonitor.js';
-import { JoinDialog } from './joinDialog.js';
-import * as RoomList_ from './roomList.js'; // used in template
-import { RoomManager } from './roomManager.js';
-import * as RoomStack_ from './roomStack.js'; // used in template
+import AccountsMonitor from './accountsMonitor.js';
+import JoinDialog from './joinDialog.js';
+import RoomList_ from './roomList.js'; // used in template
+import RoomManager from './roomManager.js';
+import RoomStack_ from './roomStack.js'; // used in template
 import * as UserList_ from './userList.js'; // used in template
 import * as Utils from './utils.js';
 
@@ -77,7 +77,7 @@ export const FixedSizeFrame = GObject.registerClass({
     }
 });
 
-export const MainWindow = GObject.registerClass({
+export default GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
     InternalChildren: [
         'titlebarRight',

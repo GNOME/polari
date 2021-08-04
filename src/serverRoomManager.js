@@ -7,8 +7,8 @@ import Tp from 'gi://TelepathyGLib';
 
 const Signals = imports.signals;
 
-import { AccountsMonitor } from './accountsMonitor.js';
-import { RoomManager } from './roomManager.js';
+import AccountsMonitor from './accountsMonitor.js';
+import RoomManager from './roomManager.js';
 import * as Utils from './utils.js';
 
 Gio._promisify(Tp.RoomList.prototype, 'init_async', 'init_finish');
@@ -16,7 +16,7 @@ Gio._promisify(Tp.RoomList.prototype, 'init_async', 'init_finish');
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering
 
-export const ServerRoomManager = class {
+export default class ServerRoomManager {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new ServerRoomManager();
@@ -94,7 +94,7 @@ export const ServerRoomManager = class {
     _onListingChanged(list) {
         this.emit('loading-changed', list.account);
     }
-};
+}
 Signals.addSignalMethods(ServerRoomManager.prototype);
 
 

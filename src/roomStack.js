@@ -4,13 +4,13 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import { AccountsMonitor } from './accountsMonitor.js';
-import { ChatView } from './chatView.js';
-import { EntryArea } from './entryArea.js';
+import AccountsMonitor from './accountsMonitor.js';
+import ChatView from './chatView.js';
+import EntryArea from './entryArea.js';
 import { MessageInfoBar } from './appNotifications.js';
-import { RoomManager } from './roomManager.js';
+import RoomManager from './roomManager.js';
 
-export const RoomStack = GObject.registerClass({
+export default GObject.registerClass({
     Properties: {
         'entry-area-height': GObject.ParamSpec.uint(
             'entry-area-height', 'entry-area-height', 'entry-area-height',

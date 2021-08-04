@@ -33,7 +33,7 @@ pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
 Log.init();
 
-import { Application } from './application.js';
+import Application from './application.js';
 
 let application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))

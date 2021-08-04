@@ -14,7 +14,7 @@ const SetupPage = {
     OFFLINE: 2,
 };
 
-export const InitialSetupWindow = GObject.registerClass({
+export default GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/initial-setup-window.ui',
     InternalChildren: [
         'contentStack',

@@ -4,7 +4,7 @@ import Pango from 'gi://Pango';
 
 import * as IrcParser from './ircParser.js';
 
-export const TabCompletion = class {
+export default class TabCompletion {
     constructor(entry) {
         this._entry = entry;
         this._canComplete = false;
@@ -246,4 +246,4 @@ export const TabCompletion = class {
         this._insertCompletion('');
         this._stop();
     }
-};
+}

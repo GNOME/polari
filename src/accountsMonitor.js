@@ -5,13 +5,13 @@ import Tp from 'gi://TelepathyGLib';
 
 const Signals = imports.signals;
 
-import { NetworksManager } from './networksManager.js';
+import NetworksManager from './networksManager.js';
 
 Gio._promisify(Tp.AccountManager.prototype, 'prepare_async', 'prepare_finish');
 Gio._promisify(Tp.Account.prototype,
     'request_presence_async', 'request_presence_finish');
 
-export const AccountsMonitor = class {
+export default class AccountsMonitor {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new AccountsMonitor();
@@ -211,7 +211,7 @@ export const AccountsMonitor = class {
             });
         });
     }
-};
+}
 Signals.addSignalMethods(AccountsMonitor.prototype);
 
 const ClientFactory = GObject.registerClass(

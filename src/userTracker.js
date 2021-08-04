@@ -4,11 +4,11 @@ import GObject from 'gi://GObject';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
-import { AccountsMonitor } from './accountsMonitor.js';
-import { RoomManager } from './roomManager.js';
+import AccountsMonitor from './accountsMonitor.js';
+import RoomManager from './roomManager.js';
 import * as Utils from './utils.js';
 
-export const UserStatusMonitor = class {
+export default class UserStatusMonitor {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new UserStatusMonitor();
@@ -60,7 +60,7 @@ export const UserStatusMonitor = class {
     getUserTrackerForAccount(account) {
         return this._userTrackers.get(account);
     }
-};
+}
 
 
 const UserTracker = GObject.registerClass({

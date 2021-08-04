@@ -5,9 +5,9 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import { AccountsMonitor } from './accountsMonitor.js';
-import { RoomManager } from './roomManager.js';
-import { UserStatusMonitor } from './userTracker.js';
+import AccountsMonitor from './accountsMonitor.js';
+import RoomManager from './roomManager.js';
+import UserStatusMonitor from './userTracker.js';
 
 const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
@@ -512,7 +512,7 @@ const RoomListHeader = GObject.registerClass({
     }
 });
 
-export const RoomList = GObject.registerClass(
+export default GObject.registerClass(
 class RoomList extends Gtk.ListBox {
     _init(params) {
         super._init(params);
