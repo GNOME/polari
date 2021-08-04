@@ -1,8 +1,4 @@
-export {
-    RoomList,
-    RoomListHeader,
-    RoomRow
-};
+export { RoomList };
 
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
