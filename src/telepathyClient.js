@@ -1,5 +1,3 @@
-export { TelepathyClient };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -125,7 +123,7 @@ class SASLAuthHandler {
     }
 }
 
-const TelepathyClient = GObject.registerClass(
+export const TelepathyClient = GObject.registerClass(
 class TelepathyClient extends Tp.BaseClient {
     _init(params) {
         this._app = Gio.Application.get_default();

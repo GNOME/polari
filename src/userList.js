@@ -1,10 +1,3 @@
-export {
-    UserList,
-    UserListPopover,
-    UserDetails,
-    UserPopover
-};
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -18,7 +11,7 @@ import * as Utils from './utils.js';
 const FILTER_ENTRY_THRESHOLD = 8;
 const MAX_USERS_WIDTH_CHARS = 17;
 
-const UserListPopover = GObject.registerClass(
+export const UserListPopover = GObject.registerClass(
 class UserListPopover extends Gtk.Popover {
     _init(params) {
         super._init(params);
@@ -121,7 +114,7 @@ class UserListPopover extends Gtk.Popover {
     }
 });
 
-const UserDetails = GObject.registerClass({
+export const UserDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
     InternalChildren: [
         'spinnerBox',
@@ -322,7 +315,7 @@ const UserDetails = GObject.registerClass({
     }
 });
 
-const UserPopover = GObject.registerClass({
+export const UserPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
     InternalChildren: [
         'nickLabel',

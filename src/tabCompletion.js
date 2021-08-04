@@ -1,12 +1,10 @@
-export { TabCompletion };
-
 import Gdk from 'gi://Gdk';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 
 import * as IrcParser from './ircParser.js';
 
-const TabCompletion = class {
+export const TabCompletion = class {
     constructor(entry) {
         this._entry = entry;
         this._canComplete = false;

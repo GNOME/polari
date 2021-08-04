@@ -1,13 +1,3 @@
-export {
-    MessageNotification,
-    UndoNotification,
-    NotificationQueue,
-    SimpleOutput,
-    GridOutput,
-    CommandOutputQueue,
-    MessageInfoBar
-};
-
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
@@ -38,7 +28,7 @@ const AppNotification = GObject.registerClass({
     }
 });
 
-const MessageNotification = GObject.registerClass(
+export const MessageNotification = GObject.registerClass(
 class MessageNotification extends AppNotification {
     _init(label, iconName) {
         super._init();
@@ -78,7 +68,7 @@ class MessageNotification extends AppNotification {
     }
 });
 
-const UndoNotification = GObject.registerClass({
+export const UndoNotification = GObject.registerClass({
     Signals: {
         closed: {},
         undo: {},
@@ -119,7 +109,7 @@ const CommandOutputNotification = GObject.registerClass({
     }
 });
 
-const SimpleOutput = GObject.registerClass(
+export const SimpleOutput = GObject.registerClass(
 class SimpleOutput extends CommandOutputNotification {
     _init(text) {
         super._init();
@@ -135,7 +125,7 @@ class SimpleOutput extends CommandOutputNotification {
     }
 });
 
-const GridOutput = GObject.registerClass(
+export const GridOutput = GObject.registerClass(
 class GridOutput extends CommandOutputNotification {
     _init(header, items) {
         super._init();
@@ -167,7 +157,7 @@ class GridOutput extends CommandOutputNotification {
     }
 });
 
-const NotificationQueue = GObject.registerClass(
+export const NotificationQueue = GObject.registerClass(
 class NotificationQueue extends Gtk.Frame {
     _init() {
         super._init({
@@ -198,7 +188,7 @@ class NotificationQueue extends Gtk.Frame {
     }
 });
 
-const CommandOutputQueue = GObject.registerClass(
+export const CommandOutputQueue = GObject.registerClass(
 class CommandOutputQueue extends NotificationQueue {
     _init() {
         super._init();
@@ -208,7 +198,7 @@ class CommandOutputQueue extends NotificationQueue {
     }
 });
 
-const MessageInfoBar = GObject.registerClass({
+export const MessageInfoBar = GObject.registerClass({
     Properties: {
         'title': GObject.ParamSpec.string(
             'title', 'title', 'title',

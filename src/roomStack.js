@@ -1,5 +1,3 @@
-export { RoomStack };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -12,7 +10,7 @@ import { EntryArea } from './entryArea.js';
 import { MessageInfoBar } from './appNotifications.js';
 import { RoomManager } from './roomManager.js';
 
-const RoomStack = GObject.registerClass({
+export const RoomStack = GObject.registerClass({
     Properties: {
         'entry-area-height': GObject.ParamSpec.uint(
             'entry-area-height', 'entry-area-height', 'entry-area-height',

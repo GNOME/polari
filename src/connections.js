@@ -1,9 +1,3 @@
-export {
-    ConnectionProperties,
-    ConnectionDetails,
-    ConnectionsList
-};
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -80,7 +74,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
     }
 });
 
-const ConnectionsList = GObject.registerClass({
+export const ConnectionsList = GObject.registerClass({
     Properties: {
         'favorites-only': GObject.ParamSpec.boolean(
             'favorites-only', 'favorites-only', 'favorites-only',
@@ -267,7 +261,7 @@ const ConnectionsList = GObject.registerClass({
     }
 });
 
-const ConnectionDetails = GObject.registerClass({
+export const ConnectionDetails = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
     InternalChildren: [
         'nameEntry',
@@ -508,7 +502,7 @@ const ConnectionDetails = GObject.registerClass({
 });
 
 
-const ConnectionProperties = GObject.registerClass({
+export const ConnectionProperties = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
     InternalChildren: [
         'details',

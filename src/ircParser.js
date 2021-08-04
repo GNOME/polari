@@ -1,5 +1,3 @@
-export { IrcParser };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Tp from 'gi://TelepathyGLib';
@@ -50,7 +48,7 @@ const UNKNOWN_COMMAND_MESSAGE =
 
 const ROOM_PREFIXES = ['#', '&', '+', '!'];
 
-const IrcParser = class IrcParser {
+export const IrcParser = class IrcParser {
     constructor(room) {
         this._app = Gio.Application.get_default();
         this._roomManager = RoomManager.getDefault();

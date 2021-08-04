@@ -1,9 +1,3 @@
-export {
-    ChatEntry,
-    EntryArea,
-    NickPopover
-};
-
 import Gdk from 'gi://Gdk';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
@@ -24,7 +18,7 @@ const MAX_LINES = 5;
 Gio._promisify(Gio._LocalFilePrototype,
     'query_info_async', 'query_info_finish');
 
-const ChatEntry = GObject.registerClass({
+export const ChatEntry = GObject.registerClass({
     Implements: [DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
@@ -115,7 +109,7 @@ const ChatEntry = GObject.registerClass({
     }
 });
 
-const NickPopover = GObject.registerClass({
+export const NickPopover = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
     InternalChildren: [
         'nickEntry',
@@ -163,7 +157,7 @@ const NickPopover = GObject.registerClass({
     }
 });
 
-const EntryArea = GObject.registerClass({
+export const EntryArea = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
     InternalChildren: [
         'chatEntry',

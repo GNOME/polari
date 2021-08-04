@@ -1,5 +1,3 @@
-export { Application };
-
 import Gdk from 'gi://Gdk?version=3.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -37,7 +35,7 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-const Application = GObject.registerClass({
+export const Application = GObject.registerClass({
     Signals: {
         'prepare-shutdown': {},
         'room-focus-changed': {},

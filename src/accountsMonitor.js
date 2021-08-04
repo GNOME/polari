@@ -1,5 +1,3 @@
-export { AccountsMonitor };
-
 import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Polari from 'gi://Polari';
@@ -13,7 +11,7 @@ Gio._promisify(Tp.AccountManager.prototype, 'prepare_async', 'prepare_finish');
 Gio._promisify(Tp.Account.prototype,
     'request_presence_async', 'request_presence_finish');
 
-const AccountsMonitor = class {
+export const AccountsMonitor = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new AccountsMonitor();

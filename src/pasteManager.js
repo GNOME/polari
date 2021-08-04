@@ -1,8 +1,3 @@
-export {
-    PasteManager,
-    DropTargetIface
-};
-
 import Gdk from 'gi://Gdk';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
@@ -38,7 +33,7 @@ function _getTargetForContentType(contentType) {
 }
 
 
-const PasteManager = class {
+export const PasteManager = class {
     pasteContent(content, title) {
         if (typeof content === 'string')
             return Utils.gpaste(content, title);
@@ -73,7 +68,7 @@ const PasteManager = class {
     }
 };
 
-const DropTargetIface = GObject.registerClass({
+export const DropTargetIface = GObject.registerClass({
     Requires: [GObject.Object],
     Properties: {
         'can-drop': GObject.ParamSpec.boolean(

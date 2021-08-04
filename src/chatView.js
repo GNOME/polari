@@ -1,5 +1,3 @@
-export { ChatView };
-
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -282,7 +280,7 @@ const HoverFilterTag = GObject.registerClass({
     }
 });
 
-const ChatView = GObject.registerClass({
+export const ChatView = GObject.registerClass({
     Implements: [DropTargetIface],
     Properties: {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),

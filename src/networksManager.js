@@ -1,12 +1,10 @@
-export { NetworksManager };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
 const ByteArray = imports.byteArray;
 const Signals = imports.signals;
 
-const NetworksManager = class {
+export const NetworksManager = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new NetworksManager();

@@ -1,5 +1,3 @@
-export { RoomManager };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Polari from 'gi://Polari';
@@ -9,7 +7,7 @@ const Signals = imports.signals;
 
 import { AccountsMonitor } from './accountsMonitor.js';
 
-const RoomManager = class {
+export const RoomManager = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new RoomManager();

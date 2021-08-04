@@ -1,5 +1,3 @@
-export { UserStatusMonitor };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -10,7 +8,7 @@ import { AccountsMonitor } from './accountsMonitor.js';
 import { RoomManager } from './roomManager.js';
 import * as Utils from './utils.js';
 
-const UserStatusMonitor = class {
+export const UserStatusMonitor = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new UserStatusMonitor();

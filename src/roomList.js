@@ -1,5 +1,3 @@
-export { RoomList };
-
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -514,7 +512,7 @@ const RoomListHeader = GObject.registerClass({
     }
 });
 
-const RoomList = GObject.registerClass(
+export const RoomList = GObject.registerClass(
 class RoomList extends Gtk.ListBox {
     _init(params) {
         super._init(params);

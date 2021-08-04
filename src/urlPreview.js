@@ -1,5 +1,3 @@
-export { URLPreview };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -100,7 +98,7 @@ class Thumbnailer {
     }
 }
 
-const URLPreview = GObject.registerClass({
+export const URLPreview = GObject.registerClass({
     Properties: {
         'uri': GObject.ParamSpec.string(
             'uri', 'uri', 'uri',

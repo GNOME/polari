@@ -1,8 +1,3 @@
-export {
-    MainWindow,
-    FixedSizeFrame
-};
-
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -19,7 +14,7 @@ import * as RoomStack_ from './roomStack.js'; // used in template
 import * as UserList_ from './userList.js'; // used in template
 import * as Utils from './utils.js';
 
-const FixedSizeFrame = GObject.registerClass({
+export const FixedSizeFrame = GObject.registerClass({
     Properties: {
         height: GObject.ParamSpec.int(
             'height', 'height', 'height',
@@ -82,7 +77,7 @@ const FixedSizeFrame = GObject.registerClass({
     }
 });
 
-const MainWindow = GObject.registerClass({
+export const MainWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
     InternalChildren: [
         'titlebarRight',

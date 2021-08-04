@@ -1,8 +1,3 @@
-export {
-    ServerRoomManager,
-    ServerRoomList
-};
-
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -21,7 +16,7 @@ Gio._promisify(Tp.RoomList.prototype, 'init_async', 'init_finish');
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering
 
-const ServerRoomManager = class {
+export const ServerRoomManager = class {
     static getDefault() {
         if (!this._singleton)
             this._singleton = new ServerRoomManager();
@@ -114,7 +109,7 @@ function _strBaseEqual(str1, str2) {
     return str1.localeCompare(str2, {}, { sensitivity: 'base' }) === 0;
 }
 
-const ServerRoomList = GObject.registerClass({
+export const ServerRoomList = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
     InternalChildren: [
         'filterEntry',

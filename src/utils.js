@@ -20,26 +20,6 @@
  *
  */
 
-export {
-    isFlatpakSandbox,
-    touchFile,
-    needsOnetimeAction,
-    getTpEventTime,
-    findUrls,
-    findChannels,
-    openURL,
-    updateTerms,
-    gpaste,
-    imgurPaste,
-    storeAccountPassword,
-    storeIdentifyPassword,
-    lookupAccountPassword,
-    lookupIdentifyPassword,
-    clearAccountPassword,
-    clearIdentifyPassword,
-    formatTimePassed
-};
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
@@ -112,13 +92,13 @@ let _gpasteExpire;
 
 let _inFlatpakSandbox;
 
-function isFlatpakSandbox() {
+export function isFlatpakSandbox() {
     if (_inFlatpakSandbox === undefined)
         _inFlatpakSandbox = GLib.file_test('/.flatpak-info', GLib.FileTest.EXISTS);
     return _inFlatpakSandbox;
 }
 
-function touchFile(file) {
+export function touchFile(file) {
     try {
         file.get_parent().make_directory_with_parents(null);
     } catch (e) {
@@ -131,7 +111,7 @@ function touchFile(file) {
     stream.close(null);
 }
 
-function needsOnetimeAction(name) {
+export function needsOnetimeAction(name) {
     let path = GLib.build_filenamev([
         GLib.get_user_data_dir(),
         'polari',
@@ -148,19 +128,19 @@ function needsOnetimeAction(name) {
     return true;
 }
 
-function getTpEventTime() {
+export function getTpEventTime() {
     let time = Gtk.get_current_event_time();
     if (time === 0)
         return GLib.MAXUINT32;
     return Tp.user_action_time_from_x11(time);
 }
 
-function storeAccountPassword(account, password) {
+export function storeAccountPassword(account, password) {
     let label = _('Polari server password for %s').format(account.display_name);
     _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password);
 }
 
-function storeIdentifyPassword(account, password) {
+export function storeIdentifyPassword(account, password) {
     let label = _('Polari NickServ password for %s').format(account.display_name);
     _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password);
 }
@@ -177,11 +157,11 @@ async function _storePassword(schema, label, account, password) {
     }
 }
 
-function lookupAccountPassword(account) {
+export function lookupAccountPassword(account) {
     return _lookupPassword(SECRET_SCHEMA_ACCOUNT, account);
 }
 
-function lookupIdentifyPassword(account) {
+export function lookupIdentifyPassword(account) {
     return _lookupPassword(SECRET_SCHEMA_IDENTIFY, account);
 }
 
@@ -199,11 +179,11 @@ async function _lookupPassword(schema, account) {
     return password;
 }
 
-function clearAccountPassword(account) {
+export function clearAccountPassword(account) {
     _clearPassword(SECRET_SCHEMA_ACCOUNT, account);
 }
 
-function clearIdentifyPassword(account) {
+export function clearIdentifyPassword(account) {
     _clearPassword(SECRET_SCHEMA_IDENTIFY, account);
 }
 
@@ -226,7 +206,7 @@ async function _clearPassword(schema, account) {
 // the position within @str where the URL was found.
 //
 // Return value: the list of match objects, as described above
-function findUrls(str) {
+export function findUrls(str) {
     let res = [], match;
     while ((match = _urlRegexp.exec(str))) {
         let name = match[2];
@@ -236,7 +216,7 @@ function findUrls(str) {
     return res;
 }
 
-function findChannels(str, server) {
+export function findChannels(str, server) {
     let res = [], match;
     while ((match = _channelRegexp.exec(str))) {
         res.push({
@@ -248,7 +228,7 @@ function findChannels(str, server) {
     return res;
 }
 
-function openURL(url, timestamp) {
+export function openURL(url, timestamp) {
     let app = Gio.Application.get_default();
     try {
         Gtk.show_uri_on_window(app.active_window, url, timestamp);
@@ -259,7 +239,7 @@ function openURL(url, timestamp) {
     }
 }
 
-function updateTerms(terms, str) {
+export function updateTerms(terms, str) {
     let normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
     let newTerms = normalized ? normalized.split(' ') : [];
 
@@ -303,7 +283,7 @@ async function _getGpasteExpire() {
     }, 0).toString();
 }
 
-async function gpaste(text, title) {
+export async function gpaste(text, title) {
     if (_gpasteExpire === undefined)
         _gpasteExpire = await _getGpasteExpire();
 
@@ -329,7 +309,7 @@ async function gpaste(text, title) {
     return `${GPASTE_BASEURL}${info.result.id}`;
 }
 
-async function imgurPaste(pixbuf, title) {
+export async function imgurPaste(pixbuf, title) {
     let [success, buffer] = pixbuf.save_to_bufferv('png', [], []);
     if (!success)
         throw new Error('Failed to create image buffer');
@@ -355,7 +335,7 @@ async function imgurPaste(pixbuf, title) {
     return info.data.link;
 }
 
-function formatTimePassed(seconds) {
+export function formatTimePassed(seconds) {
     if (seconds === 0)
         return _('Now');
 

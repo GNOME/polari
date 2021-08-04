@@ -1,5 +1,3 @@
-export { InitialSetupWindow };
-
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -16,7 +14,7 @@ const SetupPage = {
     OFFLINE: 2,
 };
 
-const InitialSetupWindow = GObject.registerClass({
+export const InitialSetupWindow = GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/initial-setup-window.ui',
     InternalChildren: [
         'contentStack',
