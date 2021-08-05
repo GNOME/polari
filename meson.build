@@ -1,6 +1,6 @@
 project('polari', 'c',
   version: '40.0',
-  meson_version: '>= 0.51.0',
+  meson_version: '>= 0.53.0',
   license: 'GPL2+'
 )
 
@@ -75,7 +75,5 @@ summary_build = {
   'debug': get_option('debug'),
 }
 
-if meson.version().version_compare('>= 0.53.0')
-  summary(summary_dirs, section: 'Directories')
-  summary(summary_build, section: 'Build Configuration')
-endif
+summary(summary_dirs, section: 'Directories')
+summary(summary_build, section: 'Build Configuration')
