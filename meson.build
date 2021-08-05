@@ -62,18 +62,11 @@ subdir('help')
 
 meson.add_install_script('meson/meson-postinstall.sh')
 
-summary_dirs = {
-  'prefix': get_option('prefix'),
-  'bindir': get_option('bindir'),
-  'libdir': get_option('libdir'),
-  'datadir': get_option('datadir'),
-}
+summary('prefix', get_option('prefix'))
+summary('bindir', get_option('bindir'))
+summary('libdir', get_option('libdir'))
+summary('datadir', get_option('datadir'))
 
-summary_build = {
-  'buildtype': get_option('buildtype'),
-  'snapshot': get_option('snapshot'),
-  'debug': get_option('debug'),
-}
-
-summary(summary_dirs, section: 'Directories')
-summary(summary_build, section: 'Build Configuration')
+summary('buildtype', get_option('buildtype'), section: 'Build Configuration')
+summary('snapshot', get_option('snapshot'), section: 'Build Configuration')
+summary('debug', get_option('debug'), section: 'Build Configuration')
