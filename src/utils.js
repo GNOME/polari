@@ -20,8 +20,6 @@
  *
  */
 
-const ByteArray = imports.byteArray;
-
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -345,7 +343,7 @@ async function _getGpasteExpire() {
         GLib.PRIORITY_DEFAULT,
         null);
     checkResponse(message);
-    const json = ByteArray.toString(bytes.get_data());
+    const json = new TextDecoder().decode(bytes.get_data());
     const info = JSON.parse(json);
 
     const values = info.result?.values;
@@ -388,7 +386,7 @@ export async function gpaste(text, title) {
         GLib.PRIORITY_DEFAULT,
         null);
     checkResponse(message);
-    const json = ByteArray.toString(bytes.get_data());
+    const json = new TextDecoder().decode(bytes.get_data());
     const info = JSON.parse(json);
 
     if (!info.result?.id)
@@ -425,7 +423,7 @@ export async function imgurPaste(pixbuf, title) {
         GLib.PRIORITY_DEFAULT,
         null);
     checkResponse(message);
-    const json = ByteArray.toString(bytes.get_data());
+    const json = new TextDecoder().decode(bytes.get_data());
     const info = JSON.parse(json);
 
     if (!info.success)

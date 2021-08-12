@@ -1,7 +1,6 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
-const ByteArray = imports.byteArray;
 const Signals = imports.signals;
 
 export default class NetworksManager {
@@ -20,7 +19,7 @@ export default class NetworksManager {
         let data;
         try {
             [, data] = file.load_contents(null);
-            this._parseNetworks(ByteArray.toString(data));
+            this._parseNetworks(new TextDecoder().decode(data));
         } catch (e) {
             log(`Failed to load network list: ${e.message}`);
         }
