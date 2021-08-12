@@ -432,7 +432,8 @@ export default GObject.registerClass({
             let type = typeof this._pasteContent;
             if (type === 'object')
                 type = this._pasteContent.toString();
-            debug(`Failed to paste content of type ${type}`);
+            console.warn(`Failed to paste content of type ${type}`);
+            console.debug(e);
         } finally {
             this._uploadSpinner.stop();
         }

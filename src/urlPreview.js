@@ -161,10 +161,12 @@ export default GObject.registerClass({
             const filename = await thumbnailer.getThumbnail(this.uri);
             this._image.set_from_file(filename);
         } catch (e) {
-            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE))
+            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE)) {
                 this._imageLoaded = false;
-            else
-                log(`Thumbnail generation for ${this.uri} failed: ${e}`);
+            } else {
+                console.info(`Failed to generate thumbnail for ${this.uri}`);
+                console.debug(e);
+            }
             this._image.set({
                 icon_name: 'image-x-generic-symbolic',
                 pixel_size: 64,

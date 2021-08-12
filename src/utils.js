@@ -166,7 +166,9 @@ export function needsOnetimeAction(name) {
     } catch (e) {
         if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.EXISTS))
             return false;
-        log(`Failed to mark onetime action ${name} as completed: ${e.message}`);
+        console.warn(`Failed to mark onetime action ${
+            name} as completed`);
+        console.debug(e);
     }
     return true;
 }
@@ -198,7 +200,8 @@ async function _storePassword(schema, label, account, password) {
         await Secret.password_store(schema, attr, coll, label, password, null);
     } catch (e) {
         const name = account.display_name;
-        log(`Failed to store password for account ${name}: ${e.message}`);
+        console.warn(`Failed to store password for account ${name}`);
+        console.debug(e);
         throw e;
     }
 }
@@ -228,7 +231,8 @@ async function _lookupPassword(schema, account) {
         password = await Secret.password_lookup(schema, attr, null);
     } catch (e) {
         const name = account.display_name;
-        log(`Failed to lookup password for account "${name}": ${e.message}`);
+        console.warn(`Failed to lookup password for account ${name}`);
+        console.debug(e);
         throw e;
     }
 
@@ -257,7 +261,8 @@ async function _clearPassword(schema, account) {
         await Secret.password_clear(schema, attr, null);
     } catch (e) {
         const name = account.display_name;
-        log(`Failed to clear password for account "${name}": ${e.message}`);
+        console.warn(`Failed to clear password for account ${name}`);
+        console.debug(e);
         throw e;
     }
 }
@@ -310,7 +315,7 @@ export function openURL(url) {
     } catch (e) {
         let n = new AppNotifications.SimpleOutput(_('Failed to open link'));
         app.notificationQueue.addNotification(n);
-        debug(`Failed to open ${url}: ${e.message}`);
+        console.debug(`Failed to open ${url}: %o`, e);
     }
 }
 

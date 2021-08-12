@@ -6,6 +6,8 @@ import Gtk from 'gi://Gtk?version=3.0';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
+import { setConsoleLogDomain } from 'console';
+
 import AccountsMonitor from './accountsMonitor.js';
 import * as AppNotifications from './appNotifications.js';
 import * as Connections from './connections.js';
@@ -49,6 +51,12 @@ export default GObject.registerClass({
 
         GLib.set_prgname('polari');
         Tp.debug_set_flags(GLib.getenv('TP_DEBUG') || '');
+
+        const logDomain = 'Polari';
+        setConsoleLogDomain(logDomain);
+        if (GLib.log_writer_is_journald(2))
+            GLib.setenv('G_MESSAGES_DEBUG', logDomain, false);
+
         this._retryData = new Map();
         this._nickTrackData = new Map();
         this._demons = [];
@@ -131,12 +139,13 @@ export default GObject.registerClass({
     }
 
     _ensureService(conn, name, opath, iface, command) {
-        debug(`Trying to ensure service ${name}`);
+        console.info(`Trying to ensure service ${name}`);
 
         if (this._checkService(conn, name, opath, iface))
             return;
 
-        log(`Failed to activate service ${name}, starting manually`);
+        console.info(`Failed to activate service ${
+            name}, starting manually`);
 
         let proc = new Gio.Subprocess({ argv: [command] });
 
@@ -144,7 +153,9 @@ export default GObject.registerClass({
             proc.init(null);
             this._demons.push(proc);
         } catch (e) {
-            log(`Failed to launch ${command}: ${e.message}`);
+            console.error(`Failed to launch ${
+                command} to provide service ${name}`);
+            console.debug(e);
         }
     }
 
@@ -155,11 +166,12 @@ export default GObject.registerClass({
 
         let handled = false;
         let id = Gio.bus_watch_name(bus, name, flags, () => {
-            debug('Running as test instance alongside primary instance');
+            console.info(
+                'Running as test instance alongside primary instance');
             this.set_flags(this.flags | Gio.ApplicationFlags.NON_UNIQUE);
             handled = true;
         }, () => {
-            debug('No primary instance found, running normally');
+            console.info('No primary instance found, running normally');
             handled = true;
         });
 
@@ -383,7 +395,8 @@ export default GObject.registerClass({
         try {
             provider.load_from_file(Gio.File.new_for_uri(uri));
         } catch (e) {
-            logError(e, 'Failed to add application style');
+            console.warn('Failed to add application style');
+            console.debug(e);
         }
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
             provider,
@@ -626,7 +639,8 @@ export default GObject.registerClass({
 
         let params = account.getConnectionParams();
         let { server, account: accountName, port } = params;
-        debug(`Failed to connect to ${server} with username ${accountName}`);
+        console.info(`Failed to connect to ${server} with username ${
+            accountName}`);
 
         let accountServers = [];
         if (account.predefined)
@@ -672,7 +686,7 @@ export default GObject.registerClass({
         let oldParams = account.dup_parameters_vardict().deep_unpack();
         let nick = oldParams['account'].deep_unpack();
 
-        debug(`Retrying with nickname ${nick}_`);
+        console.info(`Retrying with nickname ${nick}_`);
         let params = { account: new GLib.Variant('s', `${nick}_`) };
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
@@ -685,7 +699,7 @@ export default GObject.registerClass({
         if (!server)
             return false;
 
-        debug(`Retrying with ${server.address}:${server.port}`);
+        console.info(`Retrying with ${server.address}:${server.port}`);
         let params = {
             server: new GLib.Variant('s', server.address),
             port: new GLib.Variant('u', server.port),
@@ -718,7 +732,8 @@ export default GObject.registerClass({
             if (reason !== Tp.ConnectionStatusReason.REQUESTED) {
                 let strReason = Object.keys(Tp.ConnectionStatusReason)[reason];
                 let name = account.display_name;
-                debug(`Account ${name} disconnected with reason ${strReason}`);
+                console.info(`Account ${name} disconnected with reason ${
+                    strReason}`);
 
                 // Connection failed, keep tp from retrying over and over
                 let presence = Tp.ConnectionPresenceType.OFFLINE;

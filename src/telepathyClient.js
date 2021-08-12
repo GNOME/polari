@@ -93,7 +93,7 @@ class SASLAuthHandler {
     _onSASLStatusChanged(proxy, sender, [status]) {
         let name = this._channel.connection.get_account().display_name;
         let statusString = Object.keys(SASLStatus)[status];
-        debug(`Auth status for server ${name}: ${statusString}`);
+        console.info(`Auth status for server ${name}: ${statusString}`);
 
         switch (status) {
         case SASLStatus.NOT_STARTED:
@@ -188,7 +188,8 @@ class TelepathyClient extends Tp.BaseClient {
                 null);
             [names] = result.deep_unpack();
         } catch (e) {
-            debug(`Failed to list bus names: ${e}`);
+            console.info('Failed to list bus names');
+            console.debug(e);
         }
 
         this._shellHandlesPrivateChats =
@@ -275,7 +276,7 @@ class TelepathyClient extends Tp.BaseClient {
         let presence = account.reachable
             ? Tp.ConnectionPresenceType.AVAILABLE
             : Tp.ConnectionPresenceType.OFFLINE;
-        debug(`Account ${account.display_name} is now ${account.reachable
+        console.info(`Account ${account.display_name} is now ${account.reachable
             ? 'reachable'
             : 'unreachable'}`);
 
@@ -308,11 +309,13 @@ class TelepathyClient extends Tp.BaseClient {
         let msg = account.requested_status_message;
         let accountName = account.display_name;
 
-        debug(`Setting presence of account "${accountName}" to ${status}`);
+        console.info(`Setting presence of account "${accountName}" to ${status}`);
         try {
             await account.request_presence_async(presence, status, msg);
         } catch (e) {
-            log(`Connection failed: ${e.message}`);
+            console.warn(`Failed to change presence of account "${
+                accountName}" to ${status}`);
+            console.debug(e);
         }
     }
 
@@ -355,7 +358,9 @@ class TelepathyClient extends Tp.BaseClient {
             channel = await req.ensure_and_observe_channel_async(
                 preferredHandler, cancellable);
         } catch (e) {
-            debug(`Failed to ensure channel: ${e.message}`);
+            console.warn(`Failed to ensure channel ${
+                targetId} for account ${account.displayName}`);
+            console.debug(e);
             channelError = Tp.error_get_dbus_name(e.code);
             throw e;
         } finally {
@@ -396,7 +401,9 @@ class TelepathyClient extends Tp.BaseClient {
         try {
             await room.send_identify_message_async(command, username, password);
         } catch (e) {
-            log(`Failed to send identify message: ${e.message}`);
+            console.warn(`Failed to send identify message for ${
+                username} to ${contactName} on ${account.displayName}`);
+            console.debug(e);
         }
         this._connectRooms(account);
     }
@@ -452,8 +459,11 @@ class TelepathyClient extends Tp.BaseClient {
             let tpMessage = Tp.ClientMessage.new_text(type, message);
             await channel.send_message_async(tpMessage, 0);
         } catch (e) {
-            if (message)
-                log(`Failed to send message: ${e.message}`);
+            if (!message)
+                return; // already logged by _requestChannel()
+            console.warn(`Failed to send message to ${channelName} on ${
+                account.displayName}`);
+            console.debug(e);
         }
     }
 
@@ -483,7 +493,9 @@ class TelepathyClient extends Tp.BaseClient {
         try {
             await room.channel.leave_async(reason, message);
         } catch (e) {
-            log(`Failed to leave channel: ${e.message}`);
+            console.warn(`Failed to leave channel ${
+                room.channelName} on ${room.account.displayName}`);
+            console.debug(e);
         }
     }
 

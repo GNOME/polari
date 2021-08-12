@@ -5,6 +5,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk?version=3.0';
 
+import { setConsoleLogDomain } from 'console';
 import { programArgs } from 'system';
 
 import gi from 'gi';
@@ -94,7 +95,8 @@ let PreviewWindow = GObject.registerClass({
             clip = await getClipOp;
             snapshot = await snapshotOp;
         } catch (e) {
-            log(`Creating snapshot failed: ${e}`);
+            console.warn(`Failed to create snapshot of ${this.uri}`);
+            console.debug(e);
             this.emit('snapshot-failed');
             return;
         }
@@ -121,7 +123,8 @@ let PreviewWindow = GObject.registerClass({
             let res = await this._view.run_javascript(script, null);
             obj = res.get_js_value();
         } catch (e) {
-            log(`Failed to get clip information: ${e} (${e.code})`);
+            console.warn(`Failed to get clip information from ${this.uri}`);
+            console.debug(e);
         }
 
         if (!obj || obj.is_null())
@@ -162,6 +165,11 @@ class App {
 
     run() {
         Gtk.init(null);
+
+        const logDomain = 'Polari Thumbnailer';
+        setConsoleLogDomain(logDomain);
+        if (GLib.log_writer_is_journald(2))
+            GLib.setenv('G_MESSAGES_DEBUG', logDomain, false);
 
         let window = new PreviewWindow({
             uri: this._uri,

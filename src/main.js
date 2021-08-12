@@ -1,7 +1,6 @@
 import GLib from 'gi://GLib';
 
 import * as Config from './config.js';
-import * as Log from './logging.js';
 import { ngettext } from 'gettext';
 import { programInvocationName, programArgs } from 'system';
 
@@ -34,8 +33,6 @@ pkg.requireSymbol('Gtk', '3.0', 'ScrolledWindow.propagate_natural_width');
 
 if (!pkg.checkSymbol('Soup', '3.0'))
     pkg.requireSymbol('Soup', '2.4');
-
-Log.init();
 
 import Application from './application.js';
 

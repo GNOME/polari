@@ -21,7 +21,8 @@ export default class NetworksManager {
             [, data] = file.load_contents(null);
             this._parseNetworks(new TextDecoder().decode(data));
         } catch (e) {
-            log(`Failed to load network list: ${e.message}`);
+            console.warn('Failed to load network list');
+            console.debug(e);
         }
     }
 
@@ -30,7 +31,8 @@ export default class NetworksManager {
         try {
             networks = JSON.parse(data);
         } catch (e) {
-            log(`Failed to parse network list: ${e.message}`);
+            console.warn('Failed to parse network list');
+            console.debug(e);
             return false;
         }
 

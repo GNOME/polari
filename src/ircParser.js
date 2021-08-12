@@ -127,7 +127,7 @@ export default class IrcParser {
                 break;
             }
             if (argv.length)
-                log(`Excess arguments to JOIN command: ${argv}`);
+                console.warn(`Excess arguments to JOIN command: ${argv}`);
             if (!ROOM_PREFIXES.some(prefix => room.startsWith(prefix)))
                 room = `#${room}`;
             let { account } = this._room;
@@ -205,7 +205,7 @@ export default class IrcParser {
                 break;
             }
             if (argv.length)
-                log(`Excess arguments to NICK command: ${argv}`);
+                console.warn(`Excess arguments to NICK command: ${argv}`);
 
             this._app.setAccountNick(this._room.account, nick);
             break;
