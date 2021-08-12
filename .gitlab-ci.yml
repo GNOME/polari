@@ -82,10 +82,10 @@ check-merge-request:
             junit: check-merge-request-report.xml
 
 eslint:
-    image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/33:2020-11-17.0
+    image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/34:2021-08-12.0
     stage: review
     script:
-        - eslint -o $LINT_LOG -f junit src
+        - eslint -o $LINT_LOG -f junit --resolve-plugins-relative-to $(npm root -g) src
     artifacts:
         paths:
             - ${LINT_LOG}

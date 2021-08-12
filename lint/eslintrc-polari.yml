@@ -3,6 +3,9 @@ rules:
     - error
     - properties: never
       allow: [^vfunc_, ^on_]
+  jsdoc/require-jsdoc:
+    - error
+    - publicOnly: true
   object-curly-spacing:
     - error
     - always
