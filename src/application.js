@@ -144,7 +144,7 @@ export default GObject.registerClass({
             proc.init(null);
             this._demons.push(proc);
         } catch (e) {
-            log('Failed to launch %s: %s'.format(command, e.message));
+            log(`Failed to launch ${command}: ${e.message}`);
         }
     }
 
