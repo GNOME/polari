@@ -20,6 +20,7 @@ function log(level, message) {
     });
 }
 
+/** initialize logging */
 export function init() {
     const { LogLevelFlags } = GLib;
     globalThis.log      = msg => log(LogLevelFlags.LEVEL_MESSAGE, msg);

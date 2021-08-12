@@ -126,12 +126,19 @@ let _gpasteExpire;
 
 let _inFlatpakSandbox;
 
+/**
+ * @returns {bool}
+ */
 export function isFlatpakSandbox() {
     if (_inFlatpakSandbox === undefined)
         _inFlatpakSandbox = GLib.file_test('/.flatpak-info', GLib.FileTest.EXISTS);
     return _inFlatpakSandbox;
 }
 
+/**
+ * @param {Gio.File} file - file to touch
+ * @throws
+ */
 export function touchFile(file) {
     try {
         file.get_parent().make_directory_with_parents(null);
@@ -145,6 +152,10 @@ export function touchFile(file) {
     stream.close(null);
 }
 
+/**
+ * @param {string} name - name of the one-time action
+ * @returns {bool}
+ */
 export function needsOnetimeAction(name) {
     let path = GLib.build_filenamev([
         GLib.get_user_data_dir(),
@@ -162,6 +173,9 @@ export function needsOnetimeAction(name) {
     return true;
 }
 
+/**
+ * @returns {number}
+ */
 export function getTpEventTime() {
     let time = Gtk.get_current_event_time();
     if (time === 0)
@@ -169,11 +183,21 @@ export function getTpEventTime() {
     return Tp.user_action_time_from_x11(time);
 }
 
+/**
+ * @param {Tp.Account} account - the account
+ * @param {string} password - the password
+ * @throws
+ */
 export function storeAccountPassword(account, password) {
     let label = vprintf(_('Polari server password for %s'), account.display_name);
     _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password);
 }
 
+/**
+ * @param {Tp.Account} account - the account
+ * @param {string} password - the password
+ * @throws
+ */
 export function storeIdentifyPassword(account, password) {
     let label = vprintf(_('Polari NickServ password for %s'), account.display_name);
     _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password);
@@ -191,10 +215,20 @@ async function _storePassword(schema, label, account, password) {
     }
 }
 
+/**
+ * @param {Tp.Account} account - the account
+ * @returns {string} - the password
+ * @throws
+ */
 export function lookupAccountPassword(account) {
     return _lookupPassword(SECRET_SCHEMA_ACCOUNT, account);
 }
 
+/**
+ * @param {Tp.Account} account - the account
+ * @returns {string}
+ * @throws
+ */
 export function lookupIdentifyPassword(account) {
     return _lookupPassword(SECRET_SCHEMA_IDENTIFY, account);
 }
@@ -213,10 +247,18 @@ async function _lookupPassword(schema, account) {
     return password;
 }
 
+/**
+ * @param {Tp.Account} account - the account
+ * @throws
+ */
 export function clearAccountPassword(account) {
     _clearPassword(SECRET_SCHEMA_ACCOUNT, account);
 }
 
+/**
+ * @param {Tp.Account} account - the account
+ * @throws
+ */
 export function clearIdentifyPassword(account) {
     _clearPassword(SECRET_SCHEMA_IDENTIFY, account);
 }
@@ -232,14 +274,17 @@ async function _clearPassword(schema, account) {
     }
 }
 
-// findUrls:
-// @str: string to find URLs in
-//
-// Searches @str for URLs and returns an array of objects with %url
-// properties showing the matched URL string, and %pos properties indicating
-// the position within @str where the URL was found.
-//
-// Return value: the list of match objects, as described above
+/**
+ * @typedef {Object} UrlMatch
+ * @property {string} url - the matched URL
+ * @property {string} name - the user-visible name of the URL
+ * @property {number} pos - the position of the match
+ */
+
+/**
+ * @param {string} str - string to find URLs in
+ * @returns {UrlMatch}
+ */
 export function findUrls(str) {
     let res = [], match;
     while ((match = _urlRegexp.exec(str))) {
@@ -250,6 +295,11 @@ export function findUrls(str) {
     return res;
 }
 
+/**
+ * @param {string} str - string to find IRC channel references in
+ * @param {string} server - server to use in channel URLs
+ * @returns {UrlMatch}
+ */
 export function findChannels(str, server) {
     let res = [], match;
     while ((match = _channelRegexp.exec(str))) {
@@ -262,6 +312,10 @@ export function findChannels(str, server) {
     return res;
 }
 
+/**
+ * @param {string} url - the url
+ * @param {number} timestamp - a timestamp
+ */
 export function openURL(url, timestamp) {
     let app = Gio.Application.get_default();
     try {
@@ -273,6 +327,11 @@ export function openURL(url, timestamp) {
     }
 }
 
+/**
+ * @param {string[]} terms - list of search terms (words) to update
+ * @param {string} str - search string
+ * @returns {bool} - whether terms changed
+ */
 export function updateTerms(terms, str) {
     let normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
     let newTerms = normalized ? normalized.split(' ') : [];
@@ -310,6 +369,12 @@ async function _getGpasteExpire() {
     }, 0).toString();
 }
 
+/**
+ * @param {string} text - text to upload
+ * @param {string} title - title to use
+ * @throws
+ * @returns {string} - the paste URL
+ */
 export async function gpaste(text, title) {
     if (_gpasteExpire === undefined)
         _gpasteExpire = await _getGpasteExpire();
@@ -342,6 +407,12 @@ export async function gpaste(text, title) {
     return `${GPASTE_BASEURL}${info.result.id}`;
 }
 
+/**
+ * @param {GdkPixbuf.Pixbuf} pixbuf - the pixbuf to paste
+ * @param {string} title - the title to use
+ * @returns {string} - the paste URL
+ * @throws
+ */
 export async function imgurPaste(pixbuf, title) {
     let [success, buffer] = pixbuf.save_to_bufferv('png', [], []);
     if (!success)
@@ -381,6 +452,10 @@ function checkResponse(message) {
         throw new Error(`Unexpected response: ${phrase}`);
 }
 
+/**
+ * @param {number} seconds - time in seconds
+ * @returns {string}
+ */
 export function formatTimePassed(seconds) {
     if (seconds === 0)
         return _('Now');
