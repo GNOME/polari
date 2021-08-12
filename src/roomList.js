@@ -375,7 +375,7 @@ const RoomListHeader = GObject.registerClass({
         if (parent)
             parent.invalidate_sort();
 
-        let accessibleName = _('Network %s has an error').format(this._account.display_name);
+        let accessibleName = vprintf(_('Network %s has an error'), this._account.display_name);
         this.get_accessible().set_name(accessibleName);
     }
 
@@ -446,7 +446,7 @@ const RoomListHeader = GObject.registerClass({
 
             /* Translators: This is an account name followed by a
                server address, e.g. "GNOME (irc.gnome.org)" */
-            let fullTitle = _('%s (%s)').format(accountName, server);
+            let fullTitle = vprintf(_('%s (%s)'), accountName, server);
             this._popoverTitle.label = accountName === server ? accountName : fullTitle;
             this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
         } else {
@@ -495,19 +495,19 @@ const RoomListHeader = GObject.registerClass({
         case Tp.error_get_dbus_name(Tp.Error.CERT_HOSTNAME_MISMATCH):
         case Tp.error_get_dbus_name(Tp.Error.CERT_FINGERPRINT_MISMATCH):
         case Tp.error_get_dbus_name(Tp.Error.CERT_SELF_SIGNED):
-            return _('Could not connect to %s in a safe way.').format(this._account.display_name);
+            return vprintf(_('Could not connect to %s in a safe way.'), this._account.display_name);
 
         case Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED):
-            return _('%s requires a password.').format(this._account.display_name);
+            return vprintf(_('%s requires a password.'), this._account.display_name);
 
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_FAILED):
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_LOST):
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REPLACED):
         case Tp.error_get_dbus_name(Tp.Error.SERVICE_BUSY):
-            return _('Could not connect to %s. The server is busy.').format(this._account.display_name);
+            return vprintf(_('Could not connect to %s. The server is busy.'), this._account.display_name);
 
         default:
-            return _('Could not connect to %s.').format(this._account.display_name);
+            return vprintf(_('Could not connect to %s.'), this._account.display_name);
         }
     }
 });

@@ -987,12 +987,12 @@ export default GObject.registerClass({
     }
 
     _onMemberRenamed(room, oldMember, newMember) {
-        let text = _('%s is now known as %s').format(oldMember.alias, newMember.alias);
+        let text = vprintf(_('%s is now known as %s'), oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
     }
 
     _onMemberDisconnected(room, member, message) {
-        let text = _('%s has disconnected').format(member.alias);
+        let text = vprintf(_('%s has disconnected'), member.alias);
         if (message)
             text += ` (${message})`;
         this._insertStatus(text, member.alias, 'left');
@@ -1001,26 +1001,26 @@ export default GObject.registerClass({
     _onMemberKicked(room, member, actor) {
         let [kicked, kicker] = [member.alias, actor ? actor.alias : null];
         let msg = kicker
-            ? _('%s has been kicked by %s').format(kicked, kicker)
-            : _('%s has been kicked').format(kicked);
+            ? vprintf(_('%s has been kicked by %s'), kicked, kicker)
+            : vprintf(_('%s has been kicked'), kicked);
         this._insertStatus(msg, kicked, 'left');
     }
 
     _onMemberBanned(room, member, actor) {
         let [banned, banner] = [member.alias, actor ? actor.alias : null];
         let msg = banner
-            ? _('%s has been banned by %s').format(banned, banner)
-            : _('%s has been banned').format(banned);
+            ? vprintf(_('%s has been banned by %s'), banned, banner)
+            : vprintf(_('%s has been banned'), banned);
         this._insertStatus(msg, banned, 'left');
     }
 
     _onMemberJoined(room, member) {
-        let text = _('%s joined').format(member.alias);
+        let text = vprintf(_('%s joined'), member.alias);
         this._insertStatus(text, member.alias, 'joined');
     }
 
     _onMemberLeft(room, member, message) {
-        let text = _('%s left').format(member.alias);
+        let text = vprintf(_('%s left'), member.alias);
 
         if (message)
             text += ` (${message})`;
@@ -1115,18 +1115,18 @@ export default GObject.registerClass({
 
         let stats = [];
         if (this._statusCount.joined > 0) {
-            stats.push(
+            stats.push(vprintf(
                 ngettext(
                     '%d user joined',
-                    '%d users joined', this._statusCount.joined)
-                .format(this._statusCount.joined));
+                    '%d users joined', this._statusCount.joined),
+                this._statusCount.joined));
         }
         if (this._statusCount.left > 0) {
-            stats.push(
+            stats.push(vprintf(
                 ngettext(
                     '%d user left',
-                    '%d users left', this._statusCount.left)
-                .format(this._statusCount.left));
+                    '%d users left', this._statusCount.left),
+                this._statusCount.left));
         }
         // TODO: How do we update the arrow direction when text direction change?
         let iter = buffer.get_iter_at_mark(headerMark);

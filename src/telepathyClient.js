@@ -680,8 +680,9 @@ class TelepathyClient extends Tp.BaseClient {
         let accountName = room.account.display_name;
         /* Translators: Those are a botname and an accountName, e.g.
            "Save NickServ password for GNOME" */
-        let summary = _('Save %s password for %s?').format(data.botname, accountName);
-        let text = _('Identification will happen automatically the next time you connect to %s').format(accountName);
+        let summary = vprintf(_('Save %s password for %s?'), data.botname, accountName);
+        let text = vprintf(
+            _('Identification will happen automatically the next time you connect to %s'), accountName);
         let notification = this._createNotification(room, summary, text);
 
         notification.add_button_with_target(_('Save'),
@@ -716,11 +717,11 @@ class TelepathyClient extends Tp.BaseClient {
         let summary;
 
         if (room.type === Tp.HandleType.CONTACT) {
-            summary = '%s'.format(nick);
+            summary = vprintf('%s', nick);
         } else {
             /* Translators: This is the title of the notification announcing a newly
                received message, in the form "user-nickname in room-display-name" */
-            summary = _('%s in %s').format(nick, room.display_name);
+            summary = vprintf(_('%s in %s'), nick, room.display_name);
         }
 
         let notification = this._createNotification(room, summary, text);

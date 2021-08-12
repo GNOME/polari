@@ -100,9 +100,9 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
         this._room = room;
 
         let title = _('Should the password be saved?');
-        let subtitle =
-            _('Identification will happen automatically the next time you connect to %s')
-            .format(this._room.account.display_name);
+        let subtitle = vprintf(
+            _('Identification will happen automatically the next time you connect to %s'),
+            this._room.account.display_name);
         super._init({ title, subtitle });
 
         this.connect('destroy', this._onDestroy.bind(this));

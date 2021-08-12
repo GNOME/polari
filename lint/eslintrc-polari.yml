@@ -18,5 +18,6 @@ globals:
   C_: readonly
   N_: readonly
   ngettext: readonly
+  vprintf: readonly
 parserOptions:
   sourceType: module

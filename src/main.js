@@ -12,9 +12,11 @@ imports.package.init({
     libdir: Config.LIBDIR,
 });
 
-pkg.initFormat();
 pkg.initGettext();
 globalThis.ngettext = ngettext;
+
+// eslint-disable-next-line no-restricted-properties
+globalThis.vprintf = (fmt, ...args) => imports.format.vprintf(fmt, args);
 
 pkg.require({
     'GdkPixbuf': '2.0',

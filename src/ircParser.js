@@ -60,7 +60,7 @@ export default class IrcParser {
     }
 
     _createFeedbackUsage(cmd) {
-        return this._createFeedbackLabel(_('Usage: %s').format(_(knownCommands[cmd])));
+        return vprintf(this._createFeedbackLabel(_('Usage: %s'), _(knownCommands[cmd])));
     }
 
     _createFeedbackGrid(header, items) {
@@ -194,7 +194,7 @@ export default class IrcParser {
             let { channel } = this._room;
             let members = channel.group_dup_members_contacts().map(m => m.alias);
             output = this._createFeedbackGrid(
-                _('Users on %s:').format(channel.identifier), members);
+                vprintf(_('Users on %s:'), channel.identifier), members);
             break;
         }
         case 'NICK': {
@@ -310,7 +310,7 @@ export default class IrcParser {
                     [last] = info[i].field_value;
             }
         }
-        return _('User: %s - Last activity: %s').format(fn ? fn : user.alias, Utils.formatTimePassed(last));
+        return vprintf(_('User: %s - Last activity: %s'), fn ? fn : user.alias, Utils.formatTimePassed(last));
     }
 
     _sendText(text) {

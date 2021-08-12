@@ -513,7 +513,7 @@ export const ConnectionProperties = GObject.registerClass({
     _init(account) {
         /* Translators: %s is a connection name */
         super._init({
-            title: _('“%s” Properties').format(account.display_name),
+            title: vprintf(_('“%s” Properties'), account.display_name),
             use_header_bar: 1,
         });
 

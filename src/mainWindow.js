@@ -397,9 +397,9 @@ export default GObject.registerClass({
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
             numMembers = this._room.channel.group_dup_members_contacts().length;
 
-        let accessibleName = ngettext(
+        let accessibleName = vprintf(ngettext(
             '%d user',
-            '%d users', numMembers).format(numMembers);
+            '%d users', numMembers), numMembers);
         this._showUserListButton.get_accessible().set_name(accessibleName);
         this._showUserListButton.label = `${numMembers}`;
     }

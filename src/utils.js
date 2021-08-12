@@ -170,12 +170,12 @@ export function getTpEventTime() {
 }
 
 export function storeAccountPassword(account, password) {
-    let label = _('Polari server password for %s').format(account.display_name);
+    let label = vprintf(_('Polari server password for %s'), account.display_name);
     _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password);
 }
 
 export function storeIdentifyPassword(account, password) {
-    let label = _('Polari NickServ password for %s').format(account.display_name);
+    let label = vprintf(_('Polari NickServ password for %s'), account.display_name);
     _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password);
 }
 
@@ -389,41 +389,41 @@ export function formatTimePassed(seconds) {
         return _('Unavailable');
 
     if (seconds < 60) {
-        return ngettext(
+        return vprintf(ngettext(
             '%d second ago',
-            '%d seconds ago', seconds).format(seconds);
+            '%d seconds ago', seconds), seconds);
     }
 
     let minutes = seconds / 60;
     if (minutes < 60) {
-        return ngettext(
+        return vprintf(ngettext(
             '%d minute ago',
-            '%d minutes ago', minutes).format(minutes);
+            '%d minutes ago', minutes), minutes);
     }
 
     let hours = minutes / 60;
     if (hours < 24) {
-        return ngettext(
+        return vprintf(ngettext(
             '%d hour ago',
-            '%d hours ago', hours).format(hours);
+            '%d hours ago', hours), hours);
     }
 
     let days = hours / 24;
     if (days < 7) {
-        return ngettext(
+        return vprintf(ngettext(
             '%d day ago',
-            '%d days ago', days).format(days);
+            '%d days ago', days), days);
     }
 
     let weeks = days / 7;
     if (days < 30) {
-        return ngettext(
+        return vprintf(ngettext(
             '%d week ago',
-            '%d weeks ago', weeks).format(weeks);
+            '%d weeks ago', weeks), weeks);
     }
 
     let months = days / 30;
-    return ngettext(
+    return vprintf(ngettext(
         '%d month ago',
-        '%d months ago', months).format(months);
+        '%d months ago', months), months);
 }

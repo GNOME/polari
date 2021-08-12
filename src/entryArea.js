@@ -371,14 +371,16 @@ export default GObject.registerClass({
     }
 
     pasteText(text, nLines) {
-        this._confirmLabel.label = ngettext(
-            'Paste %s line of text to public paste service?',
-            'Paste %s lines of text to public paste service?', nLines)
-        .format(nLines);
-        this._uploadLabel.label = ngettext(
-            'Uploading %s line of text to public paste service…',
-            'Uploading %s lines of text to public paste service…', nLines)
-        .format(nLines);
+        this._confirmLabel.label = vprintf(
+            ngettext(
+                'Paste %s line of text to public paste service?',
+                'Paste %s lines of text to public paste service?', nLines),
+            nLines);
+        this._uploadLabel.label = vprintf(
+            ngettext(
+                'Uploading %s line of text to public paste service…',
+                'Uploading %s lines of text to public paste service…', nLines),
+            nLines);
         this._setPasteContent(text);
     }
 
@@ -401,9 +403,9 @@ export default GObject.registerClass({
 
         let name = fileInfo.get_display_name();
         /* Translators: %s is a filename */
-        this._confirmLabel.label = _('Upload “%s” to public paste service?').format(name);
+        this._confirmLabel.label = vprintf(_('Upload “%s” to public paste service?'), name);
         /* Translators: %s is a filename */
-        this._uploadLabel.label = _('Uploading “%s” to public paste service…').format(name);
+        this._uploadLabel.label = vprintf(_('Uploading “%s” to public paste service…'), name);
         this._setPasteContent(file);
     }
 
@@ -412,9 +414,9 @@ export default GObject.registerClass({
         let nick = this._room.channel.connection.self_contact.alias;
         if (this._room.type === Tp.HandleType.ROOM)
             /* translators: %s is a nick, #%s a channel */
-            title = _('%s in #%s').format(nick, this._room.display_name);
+            title = vprintf(_('%s in #%s'), nick, this._room.display_name);
         else
-            title = _('Paste from %s').format(nick);
+            title = vprintf(_('Paste from %s'), nick);
         this._confirmLabel.hide();
 
         this._confirmLabel.hide();

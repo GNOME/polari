@@ -761,7 +761,7 @@ export default GObject.registerClass({
         await account.set_enabled_async(false);
         account.visible = false;
 
-        const label = _('%s removed.').format(account.display_name);
+        const label = vprintf(_('%s removed.'), account.display_name);
         const n = new AppNotifications.UndoNotification(label);
         this.notificationQueue.addNotification(n);
 
