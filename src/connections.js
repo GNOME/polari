@@ -315,7 +315,7 @@ export const ConnectionDetails = GObject.registerClass({
 
         let realnameStore = new Gtk.ListStore();
         realnameStore.set_column_types([GObject.TYPE_STRING]);
-        realnameStore.insert_with_valuesv(-1, [0], [GLib.get_real_name()]);
+        realnameStore.insert_with_values(-1, [0], [GLib.get_real_name()]);
 
         let completion = new Gtk.EntryCompletion({
             model: realnameStore,

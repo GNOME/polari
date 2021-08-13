@@ -338,7 +338,7 @@ export const ServerRoomList = GObject.registerClass({
                 let count = `${roomInfo.get_members_count(null)}`;
 
                 let { CHECKED, NAME, COUNT, SENSITIVE } = RoomListColumn;
-                let iter = store.insert_with_valuesv(-1,
+                let iter = store.insert_with_values(-1,
                     [CHECKED, NAME, COUNT, SENSITIVE],
                     [checked, name, count, sensitive]);
                 store.move_before(iter, this._customRoomItem);
