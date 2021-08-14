@@ -6,7 +6,6 @@ import Tp from 'gi://TelepathyGLib';
 
 import AccountsMonitor from './accountsMonitor.js';
 import RoomManager from './roomManager.js';
-import * as Utils from './utils.js';
 
 export default class UserStatusMonitor {
     static getDefault() {
@@ -371,10 +370,10 @@ const UserTracker = GObject.registerClass({
         notification.set_title(_('User is online'));
         vprintf(notification.set_body(_('User %s is now online.'), member.alias));
 
-        let param = GLib.Variant.new('(ssu)', [
+        let param = GLib.Variant.new('(ssb)', [
             this._account.get_object_path(),
             room.channel_name,
-            Utils.getTpEventTime(),
+            true,
         ]);
         notification.set_default_action_and_target('app.join-room', param);
 

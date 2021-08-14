@@ -133,10 +133,10 @@ export default class IrcParser {
             let { account } = this._room;
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
-            action.activate(GLib.Variant.new('(ssu)', [
+            action.activate(GLib.Variant.new('(ssb)', [
                 account.get_object_path(),
                 room,
-                Utils.getTpEventTime(),
+                true,
             ]));
             break;
         }
@@ -182,11 +182,11 @@ export default class IrcParser {
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
-            action.activate(GLib.Variant.new('(sssu)', [
+            action.activate(GLib.Variant.new('(sssb)', [
                 account.get_object_path(),
                 nick,
                 message,
-                Tp.USER_ACTION_TIME_NOT_USER_ACTION,
+                false,
             ]));
             break;
         }
@@ -239,11 +239,11 @@ export default class IrcParser {
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
-            action.activate(GLib.Variant.new('(sssu)', [
+            action.activate(GLib.Variant.new('(sssb)', [
                 account.get_object_path(),
                 nick,
                 '',
-                Utils.getTpEventTime(),
+                true,
             ]));
             break;
         }

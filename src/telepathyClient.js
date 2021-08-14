@@ -448,7 +448,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     async _onQueryActivated(action, parameter) {
-        let [accountPath, channelName, message, time_] = parameter.deep_unpack();
+        let [accountPath, channelName, message, present_] = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
         if (!account || !account.enabled)
@@ -606,7 +606,7 @@ class TelepathyClient extends Tp.BaseClient {
             channel.connect('pending-message-removed',
                 this._onPendingMessageRemoved.bind(this));
 
-            this._roomManager.ensureRoomForChannel(channel, 0);
+            this._roomManager.ensureRoomForChannel(channel, false);
         });
     }
 
@@ -623,7 +623,7 @@ class TelepathyClient extends Tp.BaseClient {
             if (present)
                 this._app.activate();
 
-            this._roomManager.ensureRoomForChannel(channel, time);
+            this._roomManager.ensureRoomForChannel(channel, present);
             // channel.join_async('', null);
         });
     }
@@ -644,16 +644,16 @@ class TelepathyClient extends Tp.BaseClient {
         let params = [
             room.account.object_path,
             room.channel_name,
-            Utils.getTpEventTime(),
+            true,
         ];
 
         let actionName, paramFormat;
         if (room.type === Tp.HandleType.ROOM) {
             actionName = 'app.join-room';
-            paramFormat = '(ssu)';
+            paramFormat = '(ssb)';
         } else {
             actionName = 'app.message-user';
-            paramFormat = '(sssu)';
+            paramFormat = '(sssb)';
             params.splice(2, 0, '');
         }
 

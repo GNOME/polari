@@ -26,7 +26,6 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
-import Tp from 'gi://TelepathyGLib';
 
 import * as AppNotifications from './appNotifications.js';
 
@@ -171,16 +170,6 @@ export function needsOnetimeAction(name) {
         log(`Failed to mark onetime action ${name} as completed: ${e.message}`);
     }
     return true;
-}
-
-/**
- * @returns {number}
- */
-export function getTpEventTime() {
-    let time = Gtk.get_current_event_time();
-    if (time === 0)
-        return GLib.MAXUINT32;
-    return Tp.user_action_time_from_x11(time);
 }
 
 /**

@@ -79,19 +79,19 @@ export default class RoomManager {
     }
 
     _onJoinActivated(action, parameter) {
-        let [accountPath, channelName, time] = parameter.deep_unpack();
+        let [accountPath, channelName, present] = parameter.deep_unpack();
         this._addSavedChannel(accountPath, channelName);
 
         this._accountsMonitor.prepare(() => {
-            this._ensureRoom(accountPath, channelName, Tp.HandleType.ROOM, time);
+            this._ensureRoom(accountPath, channelName, Tp.HandleType.ROOM, present);
         });
     }
 
     _onQueryActivated(action, parameter) {
-        let [accountPath, channelName, , time] = parameter.deep_unpack();
+        let [accountPath, channelName, , present] = parameter.deep_unpack();
 
         this._accountsMonitor.prepare(() => {
-            this._ensureRoom(accountPath, channelName, Tp.HandleType.CONTACT, time);
+            this._ensureRoom(accountPath, channelName, Tp.HandleType.CONTACT, present);
         });
     }
 
@@ -108,7 +108,7 @@ export default class RoomManager {
             for (let prop in c)
                 c[prop] = c[prop].deep_unpack();
             if (!accountPath || c.account === accountPath)
-                this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, 0);
+                this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, false);
         });
         this.emit('rooms-loaded');
     }
@@ -159,7 +159,7 @@ export default class RoomManager {
             new GLib.Variant('aa{sv}', channels));
     }
 
-    _ensureRoom(accountPath, channelName, type, time) {
+    _ensureRoom(accountPath, channelName, type, present) {
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
         if (!account) {
@@ -182,20 +182,19 @@ export default class RoomManager {
             this.emit('room-added', room);
         }
 
-        let [present] = Tp.user_action_time_should_present(time);
         if (present && this._app.active_window)
             this._app.active_window.active_room = room;
 
         return room;
     }
 
-    ensureRoomForChannel(channel, time) {
+    ensureRoomForChannel(channel, present) {
         let accountPath = channel.connection.get_account().object_path;
         let targetContact = channel.target_contact;
         let channelName = targetContact
             ? targetContact.alias : channel.identifier;
         let [, handleType] = channel.get_handle();
-        let room = this._ensureRoom(accountPath, channelName, handleType, time);
+        let room = this._ensureRoom(accountPath, channelName, handleType, present);
         room.channel = channel;
     }
 

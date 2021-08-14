@@ -209,11 +209,11 @@ export default GObject.registerClass({
         }, {
             name: 'join-room',
             activate: this._onJoinRoom.bind(this),
-            parameter_type: GLib.VariantType.new('(ssu)'),
+            parameter_type: GLib.VariantType.new('(ssb)'),
         }, {
             name: 'message-user',
             activate: this._onMessageUser.bind(this),
-            parameter_type: GLib.VariantType.new('(sssu)'),
+            parameter_type: GLib.VariantType.new('(sssb)'),
         }, {
             name: 'leave-room',
             parameter_type: GLib.VariantType.new('(ss)'),
@@ -440,15 +440,14 @@ export default GObject.registerClass({
     vfunc_open(files) {
         this.activate();
 
-        let time = Utils.getTpEventTime();
         let uris = files.map(f => f.get_uri());
 
         this._accountsMonitor.prepare(() => {
-            this._openURIs(uris, time);
+            this._openURIs(uris);
         });
     }
 
-    _openURIs(uris, time) {
+    _openURIs(uris) {
         let map = {};
 
         this._accountsMonitor.visibleAccounts.forEach(a => {
@@ -480,7 +479,7 @@ export default GObject.registerClass({
                 accountPath = account.get_object_path();
             }
 
-            joinAction.activate(new GLib.Variant('(ssu)', [accountPath, `#${room}`, time]));
+            joinAction.activate(new GLib.Variant('(ssb)', [accountPath, `#${room}`, true]));
         });
     }
 
@@ -573,21 +572,19 @@ export default GObject.registerClass({
         this.active_window.showJoinRoomDialog();
     }
 
-    _maybePresent(time) {
-        let [present] = Tp.user_action_time_should_present(time);
-
+    _maybePresent(present) {
         if (!this.active_window || present)
             this.activate();
     }
 
     _onJoinRoom(action, parameter) {
-        let [accountPath_, channelName_, time] = parameter.deep_unpack();
-        this._maybePresent(time);
+        let [accountPath_, channelName_, present] = parameter.deep_unpack();
+        this._maybePresent(present);
     }
 
     _onMessageUser(action, parameter) {
-        let [accountPath_, contactName_, msg_, time] = parameter.deep_unpack();
-        this._maybePresent(time);
+        let [accountPath_, contactName_, msg_, present] = parameter.deep_unpack();
+        this._maybePresent(present);
     }
 
     _trackNominalNick(account) {

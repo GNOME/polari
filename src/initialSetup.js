@@ -4,8 +4,6 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import * as Utils from './utils.js';
-
 Gio._promisify(Tp.Account.prototype, 'remove_async', 'remove_finish');
 
 const SetupPage = {
@@ -130,14 +128,13 @@ export default GObject.registerClass({
         let toJoinRooms = this._serverRoomList.selectedRooms;
 
         let accountPath = this._currentAccount.get_object_path();
-        let time = Utils.getTpEventTime();
         toJoinRooms.forEach(room => {
             if (room[0] !== '#')
                 room = `#${room}`;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
-            action.activate(GLib.Variant.new('(ssu)', [accountPath, room, time]));
+            action.activate(GLib.Variant.new('(ssb)', [accountPath, room, true]));
         });
     }
 });

@@ -5,7 +5,6 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
 import AccountsMonitor from './accountsMonitor.js';
-import * as Utils from './utils.js';
 
 const DialogPage = {
     MAIN: 0,
@@ -173,10 +172,10 @@ export default GObject.registerClass({
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
-            action.activate(GLib.Variant.new('(ssu)', [
+            action.activate(GLib.Variant.new('(ssb)', [
                 account.get_object_path(),
                 room,
-                Utils.getTpEventTime(),
+                true,
             ]));
         });
     }
