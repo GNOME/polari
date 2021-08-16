@@ -401,19 +401,6 @@ class TelepathyClient extends Tp.BaseClient {
         this._connectRooms(account);
     }
 
-    async _sendMessage(channel, message) {
-        if (!message || !channel)
-            return;
-
-        let type = Tp.ChannelTextMessageType.NORMAL;
-        try {
-            await channel.send_message_async(
-                Tp.ClientMessage.new_text(type, message), 0);
-        } catch (e) {
-            log(`Failed to send message: ${e.message}`);
-        }
-    }
-
     _onConnectAccountActivated(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
