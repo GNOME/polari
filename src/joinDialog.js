@@ -1,4 +1,3 @@
-import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -32,13 +31,6 @@ export default GObject.registerClass({
     _init(params) {
         params['use-header-bar'] = 1;
         super._init(params);
-
-        let accelGroup = new Gtk.AccelGroup();
-        this._connectionButton.add_accelerator('clicked',
-            accelGroup, Gdk.KEY_n, Gdk.ModifierType.CONTROL_MASK, 0);
-        this._backButton.add_accelerator('clicked',
-            accelGroup, Gdk.KEY_Left, Gdk.ModifierType.MOD1_MASK, 0);
-        this.add_accel_group(accelGroup);
 
         this._setupMainPage();
         this._setupConnectionPage();
