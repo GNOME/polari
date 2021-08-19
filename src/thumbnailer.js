@@ -5,6 +5,8 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk?version=3.0';
 
+import { programArgs } from 'system';
+
 import gi from 'gi';
 let WebKit2;
 
@@ -228,6 +230,6 @@ class App {
     }
 }
 
-let [url, filename] = ARGV;
+let [url, filename] = programArgs;
 let app = new App(url, filename);
 app.run();
