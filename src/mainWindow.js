@@ -77,6 +77,20 @@ export const FixedSizeFrame = GObject.registerClass({
     }
 });
 
+export const HeaderBarButtonLayout = GObject.registerClass(
+class ButtonBinLayout extends Gtk.BinLayout {
+    vfunc_measure(widget, orientation, forSize) {
+        const [min, nat] = super.vfunc_measure(widget, orientation, forSize);
+        if (orientation === Gtk.Orientation.VERTICAL)
+            return [min, nat, -1, -1];
+
+        let [, height] = widget.measure(Gtk.Orientation.VERTICAL, -1);
+        const padding = widget.get_style_context().get_padding();
+        height -= padding.left + padding.right;
+        return [min, Math.max(nat, height), -1, -1];
+    }
+});
+
 export default GObject.registerClass({
     Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
     InternalChildren: [
@@ -156,6 +170,9 @@ export default GObject.registerClass({
         this._roomStack.bind_property('entry-area-height',
             this._commandOutputQueue, 'margin-bottom',
             GObject.BindingFlags.SYNC_CREATE);
+
+        // Make sure user-list button is at least as wide as icon buttons
+        this._showUserListButton.layout_manager = new HeaderBarButtonLayout();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsChangedId = this._accountsMonitor.connect(
