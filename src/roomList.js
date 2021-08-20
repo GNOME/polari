@@ -301,7 +301,15 @@ const RoomListHeader = GObject.registerClass({
             GObject.ParamFlags.READWRITE,
             Gtk.Popover.$gtype),
     },
-}, class RoomListHeader extends Gtk.Grid {
+}, class RoomListHeader extends Gtk.Widget {
+    static _classInit(klass) {
+        klass = Gtk.Widget._classInit(klass);
+
+        Gtk.Widget.set_layout_manager_type = Gtk.GridLayout;
+
+        return klass;
+    }
+
     _init(params) {
         this._account = params.account;
         delete params.account;
@@ -379,6 +387,12 @@ const RoomListHeader = GObject.registerClass({
             this._account.disconnect(connectionStatusChangedId);
             this._account.disconnect(presenceChangedId);
         });
+    }
+
+    vfunc_unroot() {
+        [...this].forEach(child => child.unparent());
+
+        super.vfunc_unroot();
     }
 
     get popover() {
