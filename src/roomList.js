@@ -259,7 +259,13 @@ class RoomRowPopover extends Gtk.PopoverMenu {
     vfunc_map() {
         if (this._row.room.type !== Tp.HandleType.ROOM)
             this._updateMuteItem();
+        this._previousFocus = this.get_root().get_focus();
         super.vfunc_map();
+    }
+
+    vfunc_unmap() {
+        this._previousFocus.grab_focus();
+        super.vfunc_unmap();
     }
 
     _updateMuteItem() {
@@ -341,6 +347,8 @@ const RoomListHeader = GObject.registerClass({
                 return;
 
             this._clickGesture.set_state(Gtk.EventSequenceState.CLAIMED);
+
+            this._previousFocus = this.get_root().get_focus();
             this._popover?.popup();
         });
 
@@ -350,6 +358,7 @@ const RoomListHeader = GObject.registerClass({
         this.popover.connect('notify::visible', _onPopoverVisibleChanged);
         this.popover.connect('closed', () => {
             this._popoverPassword.text = '';
+            this._previousFocus?.grab_focus();
         });
 
         let target = new GLib.Variant('o', this._account.get_object_path());
