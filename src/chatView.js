@@ -1440,7 +1440,7 @@ export default GObject.registerClass({
         tag._popover.nickname = actualNickName;
 
         tag._popover.pointing_to = rect1;
-        tag._popover.show();
+        tag._popover.popup();
     }
 
     _createUrlTag(url) {
