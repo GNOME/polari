@@ -90,7 +90,7 @@
       </object>
     </child>
   </template>
-  <object class="GtkPopoverMenu" id="connectionPopover">
+  <object class="GtkPopover" id="connectionPopover">
     <property name="position">bottom</property>
     <child>
       <object class="GtkBox">
