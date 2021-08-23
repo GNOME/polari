@@ -1,196 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="Gjs_UserDetails" parent="GtkFrame">
-    <property name="visible">True</property>
+  <template class="Gjs_UserDetails" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="spacing">2</property>
+    <property name="margin-start">9</property>
+    <property name="margin-end">9</property>
+    <property name="margin-top">9</property>
+    <property name="margin-bottom">9</property>
     <property name="hexpand">True</property>
-    <property name="shadow-type">none</property>
+    <property name="visible">True</property>
     <child>
-      <object class="GtkBox" id="box">
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <property name="margin-start">9</property>
-        <property name="margin-end">9</property>
-        <property name="margin-top">9</property>
-        <property name="margin-bottom">9</property>
+      <object class="GtkBox" id="spinnerBox">
+        <property name="spacing">6</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
+        <property name="margin-top">12</property>
+        <property name="margin-bottom">12</property>
+        <property name="hexpand">True</property>
+        <property name="halign">center</property>
         <property name="visible">True</property>
         <child>
-          <object class="GtkBox" id="spinnerBox">
-            <property name="spacing">6</property>
-            <property name="margin-start">12</property>
-            <property name="margin-end">12</property>
-            <property name="margin-top">12</property>
-            <property name="margin-bottom">12</property>
-            <property name="hexpand">True</property>
-            <property name="halign">center</property>
+          <object class="GtkSpinner" id="spinner">
             <property name="visible">True</property>
-            <child>
-              <object class="GtkSpinner" id="spinner">
-                <property name="visible">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label1">
-                <property name="label" translatable="yes">Loading details</property>
-                <property name="visible">True</property>
-              </object>
-            </child>
           </object>
         </child>
         <child>
-          <object class="GtkGrid" id="detailsGrid">
-            <property name="row-spacing">6</property>
-            <property name="column-spacing">6</property>
-            <property name="margin-end">18</property>
-            <property name="hexpand">True</property>
+          <object class="GtkLabel" id="label1">
+            <property name="label" translatable="yes">Loading details</property>
             <property name="visible">True</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">document-open-recent-symbolic</property>
-                <property name="visible" bind-source="lastLabel"
-                          bind-property="visible" bind-flags="sync-create"/>
-                <property name="halign">start</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="width">1</property>
-                <property name="top-attach">0</property>
-                <property name="left-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Last Activity:</property>
-                <property name="valign">start</property>
-                <property name="halign">start</property>
-                <property name="visible" bind-source="lastLabel"
-                          bind-property="visible" bind-flags="sync-create"/>
-                <property name="margin-start">20</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="top-attach">0</property>
-                <property name="left-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="lastLabel">
-                <property name="valign">end</property>
-                <property name="use-markup">True</property>
-                <property name="wrap">True</property>
-                <property name="hexpand">True</property>
-                <property name="visible">False</property>
-                <property name="hexpand">True</property>
-                <property name="halign">start</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="top-attach">0</property>
-                <property name="left-attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">avatar-default-symbolic</property>
-                <property name="visible">True</property>
-                <property name="halign">start</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="width">1</property>
-                <property name="top-attach">1</property>
-                <property name="left-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="fullnameLabel">
-                <property name="ellipsize">end</property>
-                <property name="halign">start</property>
-                <property name="visible">True</property>
-                <property name="margin-start">20</property>
-                <property name="hexpand">True</property>
-                <property name="use-markup">True</property>
-                <property name="max-width-chars">25</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="width">2</property>
-                <property name="top-attach">1</property>
-                <property name="left-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">polari-user-notify-symbolic</property>
-                <property name="visible" bind-source="notificationLabel"
-                          bind-property="visible" bind-flags="sync-create"/>
-                <property name="opacity" bind-source="notificationLabel"
-                          bind-property="opacity" bind-flags="sync-create"/>
-                <property name="halign">start</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="width">1</property>
-                <property name="top-attach">2</property>
-                <property name="left-attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="notificationLabel">
-                <property name="ellipsize">end</property>
-                <property name="halign">start</property>
-                <property name="margin-start">20</property>
-                <property name="hexpand">True</property>
-                <property name="visible">False</property>
-                <property name="use-markup">True</property>
-                <property name="label" translatable="yes">Will notify if user appears online.</property>
-                <style>
-                  <class name="dim-label" />
-                </style>
-              </object>
-              <packing>
-                <property name="width">2</property>
-                <property name="top-attach">2</property>
-                <property name="left-attach">0</property>
-              </packing>
-            </child>
           </object>
         </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="visible" bind-source="messageButton"
-                      bind-property="visible" bind-flags="sync-create"/>
-            <property name="margin-top">7</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkModelButton" id="messageButton">
-            <property name="text" translatable="yes">Start Conversation</property>
-            <property name="halign">fill</property>
-            <property name="hexpand">True</property>
-            <property name="visible">False</property>
-          </object>
-        </child>
-        <!-- <child>
-          <object class="GtkModelButton" id="pastActivityButton">
-            <property name="text" translatable="yes">View Past Activity</property>
-            <property name="halign">fill</property>
-            <property name="hexpand">True</property>
-            <property name="visible">False</property>
-          </object>
-        </child> -->
       </object>
     </child>
+    <child>
+      <object class="GtkGrid" id="detailsGrid">
+        <property name="row-spacing">6</property>
+        <property name="column-spacing">6</property>
+        <property name="margin-end">18</property>
+        <property name="hexpand">True</property>
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkImage">
+            <property name="icon-name">document-open-recent-symbolic</property>
+            <property name="visible" bind-source="lastLabel"
+                      bind-property="visible" bind-flags="sync-create"/>
+            <property name="halign">start</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="width">1</property>
+            <property name="top-attach">0</property>
+            <property name="left-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Last Activity:</property>
+            <property name="valign">start</property>
+            <property name="halign">start</property>
+            <property name="visible" bind-source="lastLabel"
+                      bind-property="visible" bind-flags="sync-create"/>
+            <property name="margin-start">20</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="top-attach">0</property>
+            <property name="left-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lastLabel">
+            <property name="valign">end</property>
+            <property name="use-markup">True</property>
+            <property name="wrap">True</property>
+            <property name="hexpand">True</property>
+            <property name="visible">False</property>
+            <property name="hexpand">True</property>
+            <property name="halign">start</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="top-attach">0</property>
+            <property name="left-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="icon-name">avatar-default-symbolic</property>
+            <property name="visible">True</property>
+            <property name="halign">start</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="width">1</property>
+            <property name="top-attach">1</property>
+            <property name="left-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="fullnameLabel">
+            <property name="ellipsize">end</property>
+            <property name="halign">start</property>
+            <property name="visible">True</property>
+            <property name="margin-start">20</property>
+            <property name="hexpand">True</property>
+            <property name="use-markup">True</property>
+            <property name="max-width-chars">25</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="width">2</property>
+            <property name="top-attach">1</property>
+            <property name="left-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="icon-name">polari-user-notify-symbolic</property>
+            <property name="visible" bind-source="notificationLabel"
+                      bind-property="visible" bind-flags="sync-create"/>
+            <property name="opacity" bind-source="notificationLabel"
+                      bind-property="opacity" bind-flags="sync-create"/>
+            <property name="halign">start</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="width">1</property>
+            <property name="top-attach">2</property>
+            <property name="left-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="notificationLabel">
+            <property name="ellipsize">end</property>
+            <property name="halign">start</property>
+            <property name="margin-start">20</property>
+            <property name="hexpand">True</property>
+            <property name="visible">False</property>
+            <property name="use-markup">True</property>
+            <property name="label" translatable="yes">Will notify if user appears online.</property>
+            <style>
+              <class name="dim-label" />
+            </style>
+          </object>
+          <packing>
+            <property name="width">2</property>
+            <property name="top-attach">2</property>
+            <property name="left-attach">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparator">
+        <property name="visible" bind-source="messageButton"
+                  bind-property="visible" bind-flags="sync-create"/>
+        <property name="margin-top">7</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkModelButton" id="messageButton">
+        <property name="text" translatable="yes">Start Conversation</property>
+        <property name="halign">fill</property>
+        <property name="hexpand">True</property>
+        <property name="visible">False</property>
+      </object>
+    </child>
+    <!-- <child>
+      <object class="GtkModelButton" id="pastActivityButton">
+        <property name="text" translatable="yes">View Past Activity</property>
+        <property name="halign">fill</property>
+        <property name="hexpand">True</property>
+        <property name="visible">False</property>
+      </object>
+    </child> -->
   </template>
 </interface>

@@ -135,7 +135,7 @@ export const UserDetails = GObject.registerClass({
             GObject.ParamFlags.READWRITE,
             false),
     },
-}, class UserDetails extends Gtk.Frame {
+}, class UserDetails extends Gtk.Box {
     _init(params = {}) {
         let { user } = params;
         delete params.user;
