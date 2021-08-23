@@ -142,15 +142,8 @@ export default GObject.registerClass({
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
             this.get_style_context().add_class('snapshot');
 
-        this._viewHeight = this._calculateViewHeight();
-        this._roomStack.connect('size-allocate', () => {
-            let oldViewHeight = this._viewHeight;
-            let newViewHeight = this._calculateViewHeight();
-            if (oldViewHeight !== newViewHeight) {
-                this._viewHeight = newViewHeight;
-                this.notify('view-height');
-            }
-        });
+        this._roomStack.connect('notify::view-height',
+            () => this.notify('view-height'));
 
         // command output notifications should not pop up over
         // the input area, but appear to emerge from it, so
@@ -227,13 +220,9 @@ export default GObject.registerClass({
         return this._subtitle.length > 0;
     }
 
-    _calculateViewHeight() {
-        return this._roomStack.get_allocated_height() - this._roomStack.entry_area_height;
-    }
-
     // eslint-disable-next-line camelcase
     get view_height() {
-        return this._viewHeight;
+        return this._roomStack.view_height;
     }
 
     _onAccountsReachableChanged() {
