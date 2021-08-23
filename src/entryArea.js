@@ -177,6 +177,7 @@ export default GObject.registerClass({
         this._ircParser = new IrcParser(this._room);
         this._maxNickChars = MAX_NICK_CHARS;
         this._nickChangedId = 0;
+        this._popoverClosedId = 0;
 
         super._init(params);
 
@@ -191,10 +192,13 @@ export default GObject.registerClass({
                 this._onKeyPressed.bind(this));
         });
         this.connect('map', () => {
-            this._nickButton.popover = EntryArea._nickPopover;
+            EntryArea._nickPopover.relative_to = this._nickButton;
 
             if (this._nickChangedId)
                 return;
+
+            this._popoverCloseId = EntryArea._nickPopover.connect('closed',
+                () => (this._nickButton.active = false));
 
             this._nickChangedId = EntryArea._nickPopover.connect('nick-changed',
                 () => {
@@ -207,6 +211,16 @@ export default GObject.registerClass({
             if (this._nickChangedId)
                 EntryArea._nickPopover.disconnect(this._nickChangedId);
             this._nickChangedId = 0;
+
+            if (this._popoverClosedId)
+                EntryArea._nickPopover.disconnect(this._popoverClosedId);
+            this._popoverClosedId = 0;
+        });
+        this._nickButton.connect('toggled', () => {
+            if (this._nickButton.active)
+                EntryArea._nickPopover.popup();
+            else
+                EntryArea._nickPopover.popdown();
         });
 
         this._nickLabel.width_chars = this._maxNickChars;
