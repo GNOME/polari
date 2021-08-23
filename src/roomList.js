@@ -53,7 +53,7 @@ const RoomRow = GObject.registerClass({
         });
         this._keyController.connect('key-pressed', this._onKeyPressed.bind(this));
 
-        this._clickGesture = new Gtk.GestureMultiPress({
+        this._clickGesture = new Gtk.GestureClick({
             widget: this._eventBox,
             button: Gdk.BUTTON_SECONDARY,
         });
@@ -315,7 +315,7 @@ const RoomListHeader = GObject.registerClass({
             name: `RoomListHeader ${this._account.display_name}`,
         });
 
-        this._clickGesture = new Gtk.GestureMultiPress({
+        this._clickGesture = new Gtk.GestureClick({
             propagation_phase: Gtk.PropagationPhase.CAPTURE,
             button: 0,
             widget: this,

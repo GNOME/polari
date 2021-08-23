@@ -396,7 +396,7 @@ export default GObject.registerClass({
         this._motionController.connect('leave',
             this._handleButtonTagsHover.bind(this));
 
-        this._clickGesture = new Gtk.GestureMultiPress({
+        this._clickGesture = new Gtk.GestureClick({
             widget: this._view,
             propagation_phase: Gtk.PropagationPhase.CAPTURE,
             button: 0,
