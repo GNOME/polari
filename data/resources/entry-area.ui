@@ -42,6 +42,7 @@
               <object class="Gjs_ChatEntry" id="chatEntry">
                 <property name="hexpand">True</property>
                 <property name="show-emoji-icon">True</property>
+                <property name="enable-emoji-completion">True</property>
               </object>
             </child>
           </object>
