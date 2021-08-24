@@ -63,8 +63,8 @@ export const ChatEntry = GObject.registerClass({
             return;
 
         editable.stop_emission_by_name('paste-clipboard');
+        const clipboard = this.get_clipboard();
 
-        let clipboard = Gtk.Clipboard.get_default(this.get_display());
         clipboard.request_uris((cb, uris) => {
             if (uris && uris.length)
                 this.emit('file-pasted', Gio.File.new_for_uri(uris[0]));

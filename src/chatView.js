@@ -340,8 +340,8 @@ export default GObject.registerClass({
             parameter_type: new GLib.VariantType('s'),
         });
         action.connect('activate', (a, params) => {
-            const clipboard = Gtk.Clipboard.get_default(this.get_display());
-            clipboard.set_text(params.unpack(), -1);
+            const clipboard = this.get_clipboard();
+            clipboard.set(params.unpack());
         });
         this._actionGroup.add_action(action);
 
