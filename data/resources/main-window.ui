@@ -65,17 +65,7 @@
                 <property name="valign">center</property>
                 <property name="menu-model">hamburgerMenu</property>
                 <property name="icon-name">open-menu-symbolic</property>
-                <child>
-                  <object class='GtkShortcutController'>
-                    <property name='scope'>managed</property>
-                    <child>
-                      <object class='GtkShortcut'>
-                        <property name='trigger'>F10</property>
-                        <property name='action'>activate</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <property name="primary">True</property>
               </object>
             </child>
           </object>
