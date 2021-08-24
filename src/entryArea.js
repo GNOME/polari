@@ -40,8 +40,7 @@ export const ChatEntry = GObject.registerClass({
                 this.emit('insert-emoji');
         });
 
-        this._useDefaultHandler = false;
-
+        this.connect('insert-text', this._onInsertText.bind(this));
         this.connect('paste-clipboard', this._onPasteClipboard.bind(this));
     }
 
@@ -50,18 +49,17 @@ export const ChatEntry = GObject.registerClass({
         return true;
     }
 
-    vfunc_drag_data_received(context, x, y, data, info, time) {
-        let str = data.get_text();
-        if (!str || str.split('\n').length >= MAX_LINES)
-            // Disable GtkEntry's built-in drop target support
+    _onInsertText(editable, text) {
+        const nLines = text.split('\n').length;
+        if (nLines < MAX_LINES)
             return;
 
-        GObject.signal_stop_emission_by_name(this, 'drag-data-received');
-        super.vfunc_drag_data_received(context, x, y, data, info, time);
+        editable.stop_emission_by_name('insert-text');
+        this.emit('text-pasted', text, nLines);
     }
 
     _onPasteClipboard(editable) {
-        if (!this.editable || this._useDefaultHandler)
+        if (!this.editable)
             return;
 
         editable.stop_emission_by_name('paste-clipboard');
@@ -84,17 +82,7 @@ export const ChatEntry = GObject.registerClass({
     _onTextReceived(clipboard, text) {
         if (!text)
             return;
-        text = text.trim();
-
-        let nLines = text.split('\n').length;
-        if (nLines >= MAX_LINES) {
-            this.emit('text-pasted', text, nLines);
-            return;
-        }
-
-        this._useDefaultHandler = true;
-        this.emit('paste-clipboard');
-        this._useDefaultHandler = false;
+        this.emit('insert-at-cursor', text);
     }
 });
 
