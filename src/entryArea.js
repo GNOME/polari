@@ -331,7 +331,7 @@ export default GObject.registerClass({
             return Gdk.EVENT_PROPAGATE;
 
         this._chatEntry.grab_focus_without_selecting();
-        this._chatEntry.event(Gtk.get_current_event());
+        controller.forward(this._chatEntry);
         return Gdk.EVENT_STOP;
     }
 
