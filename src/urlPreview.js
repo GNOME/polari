@@ -1,3 +1,4 @@
+import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -157,9 +158,13 @@ export default GObject.registerClass({
         });
         const thumbnailer = Thumbnailer.getDefault();
 
+        let title;
         try {
             const filename = await thumbnailer.getThumbnail(this.uri);
-            this._image.set_from_file(filename);
+            const pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename);
+
+            title = pixbuf.get_option('tEXt::Title');
+            this._image.set_from_pixbuf(pixbuf);
             this._image.get_style_context().remove_class('dim-label');
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE)) {
@@ -173,10 +178,6 @@ export default GObject.registerClass({
                 pixel_size: 64,
             });
         }
-
-        let title = null;
-        if (this._image.pixbuf)
-            title = this._image.pixbuf.get_option('tEXt::Title');
 
         if (title) {
             this._label.set_label(title);
