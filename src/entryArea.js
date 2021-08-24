@@ -31,17 +31,18 @@ export const ChatEntry = GObject.registerClass({
     _init(params) {
         super._init(params);
 
-        this.addTargets(this);
+        const delegate = this.get_delegate();
+        this.addTargets(delegate);
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('show-emoji-picker');
         action.connect('activate', () => {
             if (this.is_sensitive() && this.get_mapped())
-                this.emit('insert-emoji');
+                delegate.emit('insert-emoji');
         });
 
-        this.connect('insert-text', this._onInsertText.bind(this));
-        this.connect('paste-clipboard', this._onPasteClipboard.bind(this));
+        delegate.connect('insert-text', this._onInsertText.bind(this));
+        delegate.connect('paste-clipboard', this._onPasteClipboard.bind(this));
     }
 
     // eslint-disable-next-line camelcase
@@ -331,7 +332,7 @@ export default GObject.registerClass({
             return Gdk.EVENT_PROPAGATE;
 
         this._chatEntry.grab_focus_without_selecting();
-        controller.forward(this._chatEntry);
+        controller.forward(this._chatEntry.get_delegate());
         return Gdk.EVENT_STOP;
     }
 
@@ -409,7 +410,7 @@ export default GObject.registerClass({
             const url =
                 await app.pasteManager.pasteContent(this._pasteContent, title);
             this._setPasteContent(null);
-            this._chatEntry.emit('insert-at-cursor', url);
+            this._chatEntry.get_delegate().emit('insert-at-cursor', url);
         } catch (e) {
             let type = typeof this._pasteContent;
             if (type === 'object')
