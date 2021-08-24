@@ -879,7 +879,7 @@ export default GObject.registerClass({
     }
 
     _handleButtonTagPressed(gesture, nPress, ...coords) {
-        const event = Gtk.get_current_event();
+        const event = gesture.get_current_event();
 
         if (nPress > 1 || !event.triggers_context_menu())
             return;
