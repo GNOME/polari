@@ -55,8 +55,8 @@ export default class PasteManager {
         let targetType = _getTargetForContentType(contentType);
 
         if (targetType === DndTargetType.TEXT) {
-            const [, contents] = await file.load_contents_async(null);
-            return Utils.gpaste(contents.toString(), title);
+            const [contents] = await file.load_contents_async(null);
+            return Utils.gpaste(new TextDecoder().decode(contents), title);
         } else if (targetType === DndTargetType.IMAGE) {
             const stream = await file.read_async(GLib.PRIORITY_DEFAULT, null);
             const pixbuf =
