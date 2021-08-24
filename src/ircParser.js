@@ -60,7 +60,7 @@ export default class IrcParser {
     }
 
     _createFeedbackUsage(cmd) {
-        return vprintf(this._createFeedbackLabel(_('Usage: %s'), _(knownCommands[cmd])));
+        return this._createFeedbackLabel(vprintf(_('Usage: %s'), _(knownCommands[cmd])));
     }
 
     _createFeedbackGrid(header, items) {
