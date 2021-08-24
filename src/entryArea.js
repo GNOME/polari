@@ -41,6 +41,8 @@ export const ChatEntry = GObject.registerClass({
         });
 
         this._useDefaultHandler = false;
+
+        this.connect('paste-clipboard', this._onPasteClipboard.bind(this));
     }
 
     // eslint-disable-next-line camelcase
@@ -58,11 +60,11 @@ export const ChatEntry = GObject.registerClass({
         super.vfunc_drag_data_received(context, x, y, data, info, time);
     }
 
-    vfunc_paste_clipboard() {
-        if (!this.editable || this._useDefaultHandler) {
-            super.vfunc_paste_clipboard();
+    _onPasteClipboard(editable) {
+        if (!this.editable || this._useDefaultHandler)
             return;
-        }
+
+        editable.stop_emission_by_name('paste-clipboard');
 
         let clipboard = Gtk.Clipboard.get_default(this.get_display());
         clipboard.request_uris((cb, uris) => {
