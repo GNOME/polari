@@ -841,6 +841,7 @@ export default GObject.registerClass({
             position: Gtk.PositionType.BOTTOM,
             pointing_to: new Gdk.Rectangle({ x, y }),
             menu_model: section,
+            has_arrow: false,
         });
         menu.set_parent(this._view);
         menu.popup();
