@@ -258,7 +258,7 @@ export default GObject.registerClass({
                 keyval === Gdk.KEY_BackSpace ||
                 keyval === Gdk.KEY_Delete ||
                 keyval === Gdk.KEY_z && mods & Gdk.ModifierType.CONTROL_MASK) {
-                this._cancelButton.clicked();
+                this._cancelButton.emit('clicked');
                 return Gdk.EVENT_STOP;
             }
             return Gdk.EVENT_PROPAGATE;
