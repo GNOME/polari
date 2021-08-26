@@ -46,13 +46,77 @@ const NICKTAG_PREFIX = 'nick';
 
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
-const TextView = GObject.registerClass(
-class TextView extends Gtk.TextView {
+const TextView = GObject.registerClass({
+    Properties: {
+        'indent-width-chars': GObject.ParamSpec.uint(
+            'indent-width-chars', 'indent-width-chars', 'indent-width-chars',
+            GObject.ParamFlags.READWRITE,
+            0, GLib.MAXUINT32, 0),
+        'indext-spacing': GObject.ParamSpec.uint(
+            'indent-spacing', 'indent-spacing', 'indent-spacing',
+            GObject.ParamFlags.READWRITE,
+            0, GLib.MAXUINT32, 0),
+    },
+}, class TextView extends Gtk.TextView {
     _init(params) {
+        this._indentWidthChars = 0;
+        this._indentSpacing = 0;
+
         super._init(params);
 
         this.buffer.connect('mark-set', this._onMarkSet.bind(this));
-        this.connect('screen-changed', this._updateLayout.bind(this));
+        this.connect('screen-changed', this._onScreenChanged.bind(this));
+    }
+
+    // eslint-disable-next-line camelcase
+    get indent_width_chars() {
+        return this._indentWidthChars;
+    }
+
+    // eslint-disable-next-line camelcase
+    set indent_width_chars(value) {
+        if (this._indentWidthChars === value)
+            return;
+
+        this._indentWidthChars = value;
+        this.notify('indent-width-chars');
+
+        this._updateIndent();
+    }
+
+    // eslint-disable-next-line camelcase
+    get indent_spacing() {
+        return this._indentSpacing;
+    }
+
+    // eslint-disable-next-line camelcase
+    set indent_spacing(value) {
+        if (this._indentSpacing === value)
+            return;
+
+        this._indentSpacing = value;
+        this.notify('indent-spacing');
+        this._updateIndent();
+    }
+
+    _updateIndent() {
+        const context = this.get_pango_context();
+        const metrics = context.get_metrics(null, null);
+        const charWidth = Math.max(
+            metrics.get_approximate_char_width(),
+            metrics.get_approximate_digit_width());
+        const pixelWidth = Pango.units_to_double(charWidth);
+
+        const totalWidth =
+            this._indentWidthChars * pixelWidth + this._indentSpacing;
+
+        const tabs = Pango.TabArray.new(1, true);
+        tabs.set_tab(0, Pango.TabAlign.LEFT, totalWidth);
+
+        this.set({
+            tabs,
+            indent: -totalWidth,
+        });
     }
 
     vfunc_get_preferred_width() {
@@ -64,6 +128,11 @@ class TextView extends Gtk.TextView {
         [, this._dimColor] = context.lookup_color('inactive_nick_color');
 
         super.vfunc_style_updated();
+
+        /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
+           the default handler calls pango_cairo_context_set_resolution(), so
+           update the indent after that */
+        this._updateIndent();
     }
 
     vfunc_draw(cr) {
@@ -129,9 +198,11 @@ class TextView extends Gtk.TextView {
             this.queue_draw();
     }
 
-    _updateLayout() {
+    _onScreenChanged() {
         this._layout = this.create_pango_layout(null);
         this._layout.set_markup(`<small><b>${_('New Messages')}</b></small>`, -1);
+
+        this._updateIndent();
     }
 });
 
@@ -278,8 +349,15 @@ export default GObject.registerClass({
             editable: false, cursor_visible: false,
             wrap_mode: Gtk.WrapMode.WORD_CHAR,
             right_margin: MARGIN,
+            indent_width_chars: MAX_NICK_CHARS,
+            indent_spacing: NICK_SPACING,
             visible: true,
         });
+        this._view.bind_property_full('indent',
+            this._view, 'left-margin',
+            GObject.BindingFlags.SYNC_CREATE,
+            (v, source) => [true, MARGIN - source],
+            null);
         this._view.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK |
                               Gdk.EventMask.ENTER_NOTIFY_MASK);
         this.add(this._view);
@@ -291,7 +369,6 @@ export default GObject.registerClass({
         this._onStyleUpdated();
 
         this.connect('destroy', this._onDestroy.bind(this));
-        this.connect('screen-changed', this._updateIndent.bind(this));
         this.connect('scroll-event', this._onScroll.bind(this));
         this.connect('edge-reached', (w, pos) => {
             if (pos === Gtk.PositionType.BOTTOM)
@@ -329,16 +406,9 @@ export default GObject.registerClass({
         this._clickGesture.connect('released',
             this._handleButtonTagReleased.bind(this));
 
-        /* pick up DPI changes (e.g. via the 'text-scaling-factor' setting):
-           the default handler calls pango_cairo_context_set_resolution(), so
-           update the indent after that */
-        this._view.connect_after('style-updated',
-            this._updateIndent.bind(this));
-
         this._room = room;
         this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
         this._joinTime = 0;
-        this._maxNickChars = MAX_NICK_CHARS;
         this._hoveredButtonTags = [];
         this._needsIndicator = true;
         this._pending = new Map();
@@ -636,7 +706,7 @@ export default GObject.registerClass({
 
     // eslint-disable-next-line camelcase
     get max_nick_chars() {
-        return this._maxNickChars;
+        return this._view.indent_width_chars;
     }
 
     // eslint-disable-next-line camelcase
@@ -645,29 +715,11 @@ export default GObject.registerClass({
     }
 
     _updateMaxNickChars(length) {
-        if (length <= this._maxNickChars)
+        if (length <= this._view.indent_width_chars)
             return;
 
-        this._maxNickChars = length;
+        this._view.indent_width_chars = length;
         this.notify('max-nick-chars');
-        this._updateIndent();
-    }
-
-    _updateIndent() {
-        let context = this._view.get_pango_context();
-        let metrics = context.get_metrics(null, null);
-        let charWidth = Math.max(
-            metrics.get_approximate_char_width(),
-            metrics.get_approximate_digit_width());
-        let pixelWidth = Pango.units_to_double(charWidth);
-
-        let totalWidth = this._maxNickChars * pixelWidth + NICK_SPACING;
-
-        let tabs = Pango.TabArray.new(1, true);
-        tabs.set_tab(0, Pango.TabAlign.LEFT, totalWidth);
-        this._view.tabs = tabs;
-        this._view.indent = -totalWidth;
-        this._view.left_margin = MARGIN + totalWidth;
     }
 
     _updateScroll() {
