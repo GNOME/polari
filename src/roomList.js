@@ -301,10 +301,14 @@ const RoomListHeader = GObject.registerClass({
             GObject.ParamFlags.READWRITE,
             Gtk.Popover.$gtype),
     },
+    Signals: {
+        'activate': { flags: GObject.SignalFlags.ACTION },
+    },
 }, class RoomListHeader extends Gtk.Widget {
     static _classInit(klass) {
         klass = Gtk.Widget._classInit(klass);
 
+        Gtk.Widget.set_activate_signal_from_name.call(klass, 'activate');
         Gtk.Widget.set_layout_manager_type = Gtk.GridLayout;
 
         return klass;
@@ -321,6 +325,9 @@ const RoomListHeader = GObject.registerClass({
             ...params,
             name: `RoomListHeader ${this._account.display_name}`,
         });
+
+        this.connect('activate',
+            () => this._popover?.popup());
 
         this._clickGesture = new Gtk.GestureClick({
             propagation_phase: Gtk.PropagationPhase.CAPTURE,
