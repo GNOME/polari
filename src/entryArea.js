@@ -31,7 +31,7 @@ export const ChatEntry = GObject.registerClass({
     _init(params) {
         super._init(params);
 
-        DropTargetIface.addTargets(this, this);
+        this.addTargets(this);
 
         let app = Gio.Application.get_default();
         let action = app.lookup_action('show-emoji-picker');
