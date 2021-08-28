@@ -161,6 +161,19 @@ nightly:
   variables:
     BUNDLES: '$BUNDLE'
 
+fedora-build:
+  extends:
+    - .fdo.distribution-image@fedora
+    - .polari.fedora:34
+  stage: build
+  needs:
+    - build-fedora-container
+  script:
+    - meson setup build --werror
+    - meson compile -C build
+    - meson test -C build
+    - meson install -C build
+
 check-flatpak-deps:
   image:
     name: ghcr.io/flathub/flatpak-external-data-checker
