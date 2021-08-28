@@ -1,9 +1,11 @@
 include:
   - remote: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
+  - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/bbe5232986c9b98eb1efe62484e07216f7d1a4df/templates/fedora.yml'
   - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/6f86b8bcb0cd5168c32779c4fea9a893c4a0c046/templates/ci-fairy.yml'
 
 stages:
   - pre_review
+  - prepare
   - review
   - build
   - deploy
@@ -43,6 +45,33 @@ workflow:
     - if: '$CI_COMMIT_BRANCH =~ /^gnome-[0-9-]+$/'
     - when: 'manual'
 
+.polari.fedora:34:
+  variables:
+    FDO_DISTRIBUTION_VERSION: 34
+    FDO_DISTRIBUTION_TAG: '2021-08-31.1'
+    FDO_DISTRIBUTION_PACKAGES: >
+      meson gcc g++ pkgconf git gettext itstool
+      desktop-file-utils */appstream-util */json-glib-validate
+      findutils mozjs78-devel nodejs npm
+      pkgconfig(gtk+-3.0) pkgconfig(gjs-1.0)
+      pkgconfig(gobject-introspection-1.0)
+      pkgconfig(telepathy-glib)
+    FDO_DISTRIBUTION_EXEC: |
+      # For static analysis with eslint
+      npm install -g eslint eslint-plugin-jsdoc &&
+
+      ./.gitlab-ci/install-meson-project.sh \
+        -Dskip_dbus_tests=true \
+        https://gitlab.gnome.org/GNOME/gjs.git \
+        1.69.2 . &&
+
+      dnf clean all
+
+.prereview_req: &prereview_req
+  needs:
+    - check_commit_log
+    - check-merge-request
+
 check_commit_log:
   extends:
     - .fdo.ci-fairy
@@ -81,10 +110,20 @@ check-merge-request:
     reports:
       junit: check-merge-request-report.xml
 
+build-fedora-container:
+  extends:
+    - .fdo.container-build@fedora@x86_64
+    - .polari.fedora:34
+  stage: prepare
+  <<: *prereview_req
+
 eslint:
-  image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/34:2021-08-12.0
+  extends:
+    - .fdo.distribution-image@fedora
+    - .polari.fedora:34
   stage: review
-  needs: []
+  needs:
+    - build-fedora-container
   script:
     - eslint -o $LINT_LOG -f junit --resolve-plugins-relative-to $(npm root -g) src
   artifacts:
@@ -95,7 +134,7 @@ eslint:
 
 .flatpak-template:
   stage: build
-  needs: []
+  <<: *prereview_req
   variables:
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
     FLATPAK_MODULE: "polari"
@@ -127,7 +166,7 @@ check-flatpak-deps:
     name: ghcr.io/flathub/flatpak-external-data-checker
     entrypoint: [""]
   stage: housekeeping
-  needs: []
+  <<: *prereview_req
   script:
     - /app/flatpak-external-data-checker $MANIFEST_PATH
   rules:
