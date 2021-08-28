@@ -437,7 +437,6 @@ export default GObject.registerClass({
             name: 'status',
             left_margin: MARGIN,
             indent: 0,
-            justification: Gtk.Justification.RIGHT,
         }, {
             name: 'timestamp',
             left_margin: MARGIN,
@@ -1130,7 +1129,7 @@ export default GObject.registerClass({
         }
         // TODO: How do we update the arrow direction when text direction change?
         let iter = buffer.get_iter_at_mark(headerMark);
-        let tags = [this._lookupTag('status'), headerTag];
+        let tags = [this._lookupTag('gap'), this._lookupTag('status'), headerTag];
         let headerText = stats.join(', ');
         let baseDir = Pango.find_base_dir(headerText, -1);
         this._insertWithTags(iter, headerText, tags);
