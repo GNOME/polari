@@ -84,6 +84,7 @@ check-merge-request:
 eslint:
   image: registry.gitlab.gnome.org/gnome/gnome-shell/fedora/34:2021-08-12.0
   stage: review
+  needs: []
   script:
     - eslint -o $LINT_LOG -f junit --resolve-plugins-relative-to $(npm root -g) src
   artifacts:
@@ -94,6 +95,7 @@ eslint:
 
 .flatpak-template:
   stage: build
+  needs: []
   variables:
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
     FLATPAK_MODULE: "polari"
@@ -115,6 +117,8 @@ flatpak-main:
 
 nightly:
   extends: '.publish_nightly'
+  needs:
+    - flatpak-main
   variables:
     BUNDLES: '$BUNDLE'
 
@@ -123,6 +127,7 @@ check-flatpak-deps:
     name: ghcr.io/flathub/flatpak-external-data-checker
     entrypoint: [""]
   stage: housekeeping
+  needs: []
   script:
     - /app/flatpak-external-data-checker $MANIFEST_PATH
   rules:
