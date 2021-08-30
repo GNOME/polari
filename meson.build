@@ -63,9 +63,12 @@ subdir('help')
 
 meson.add_install_script('meson/meson-postinstall.sh')
 
+meson.add_dist_script(check_version, meson.project_version(), 'NEWS')
+
 if (appstream_util.found())
   meson.add_dist_script(check_version,
     meson.project_version(),
+    '--type', 'metainfo',
     'data/appdata/org.gnome.Polari.appdata.xml.in')
 endif
 
