@@ -14,14 +14,4 @@ if (appstream_util.found())
     workdir: meson.current_build_dir(),
     depends: [appdata]
   )
-
-  r = run_command(appstream_util, '--help')
-  if (r.stdout().contains('validate-version'))
-    test('Checking release entry for @0@'.format(meson.project_version()),
-      appstream_util,
-      args: ['validate-version', appdata.full_path(), meson.project_version()],
-      workdir: meson.current_build_dir(),
-      depends: [appdata]
-    )
-  endif
 endif

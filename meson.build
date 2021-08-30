@@ -32,6 +32,7 @@ js_shell = find_program('js78', required: false)
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 json_glib_validate = find_program('json-glib-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
+check_version = find_program('meson/check-version.py')
 
 gio = dependency('gio-2.0', version: '>= 2.43.4')
 gtk3 = dependency('gtk+-3.0', version: '>= 3.21.6')
@@ -61,6 +62,12 @@ subdir('po')
 subdir('help')
 
 meson.add_install_script('meson/meson-postinstall.sh')
+
+if (appstream_util.found())
+  meson.add_dist_script(check_version,
+    meson.project_version(),
+    'data/appdata/org.gnome.Polari.appdata.xml.in')
+endif
 
 summary('prefix', get_option('prefix'))
 summary('bindir', get_option('bindir'))
