@@ -79,9 +79,9 @@ check_commit_log:
   script:
     - if [[ x"$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" != "x" ]] ;
       then
-      ci-fairy check-commits --junit-xml=commit-message-junit-report.xml ;
+        ci-fairy check-commits --junit-xml=commit-message-junit-report.xml ;
       else
-      echo "Not a merge request" ;
+        echo "Not a merge request" ;
       fi
   <<: *pipeline_guard
   artifacts:
@@ -98,9 +98,9 @@ check-merge-request:
   script:
     - if [[ x"$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" != "x" ]] ;
       then
-      ci-fairy check-merge-request --require-allow-collaboration --junit-xml=check-merge-request-report.xml ;
+        ci-fairy check-merge-request --require-allow-collaboration --junit-xml=check-merge-request-report.xml ;
       else
-      echo "Not a merge request" ;
+        echo "Not a merge request" ;
       fi
   <<: *pipeline_guard
   artifacts:
