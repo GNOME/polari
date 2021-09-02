@@ -1132,7 +1132,7 @@ export default GObject.registerClass({
         let tags = [this._lookupTag('gap'), this._lookupTag('status'), headerTag];
         let headerText = stats.join(', ');
         let baseDir = Pango.find_base_dir(headerText, -1);
-        this._insertWithTags(iter, headerText, tags);
+        this._insertWithTags(iter, `${headerText}\u00A0`, tags);
         this._insertWithTags(iter,
             baseDir === Pango.Direction.LTR ? '\u25B6' : '\u25C0',
             tags.concat(headerArrowTag));
