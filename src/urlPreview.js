@@ -160,6 +160,7 @@ export default GObject.registerClass({
         try {
             const filename = await thumbnailer.getThumbnail(this.uri);
             this._image.set_from_file(filename);
+            this._image.get_style_context().remove_class('dim-label');
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE)) {
                 this._imageLoaded = false;
