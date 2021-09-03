@@ -7,6 +7,7 @@ import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
 import AccountsMonitor from './accountsMonitor.js';
+import * as AppNotifications from './appNotifications.js';
 import JoinDialog from './joinDialog.js';
 import RoomList_ from './roomList.js'; // used in template
 import RoomManager from './roomManager.js';
@@ -135,10 +136,13 @@ export default GObject.registerClass({
         this._isMaximized = false;
         this._isFullscreen = false;
 
-        let app = this.application;
-        this._overlay.add_overlay(app.notificationQueue);
-        this._overlay.add_overlay(app.commandOutputQueue);
+        this._notificationQueue = new AppNotifications.NotificationQueue();
+        this._commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
+        this._overlay.add_overlay(this._notificationQueue);
+        this._overlay.add_overlay(this._commandOutputQueue);
+
+        const app = this.application;
         if (app.isTestInstance)
             this.add_css_class('test-instance');
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
@@ -151,7 +155,7 @@ export default GObject.registerClass({
         // the input area, but appear to emerge from it, so
         // set up an appropriate margin
         this._roomStack.bind_property('entry-area-height',
-            app.commandOutputQueue, 'margin-bottom',
+            this._commandOutputQueue, 'margin-bottom',
             GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
@@ -227,6 +231,20 @@ export default GObject.registerClass({
         return this._roomStack.view_height;
     }
 
+    /**
+     * @param {AppNotification} n - a notification
+     */
+    queueNotification(n) {
+        this._notificationQueue.addNotification(n);
+    }
+
+    /**
+     * @param {AppNotification} n - a notification
+     */
+    queueCommandOutput(n) {
+        this._commandOutputQueue.addNotification(n);
+    }
+
     _onAccountsReachableChanged() {
         let accounts = this._accountsMonitor.visibleAccounts;
         this._offlineInfoBar.revealed =
@@ -270,9 +288,6 @@ export default GObject.registerClass({
 
         this._roomManager.disconnect(this._roomsLoadedId);
         this._roomManager.disconnect(this._roomRemovedId);
-
-        this._overlay.remove(this.application.notificationQueue);
-        this._overlay.remove(this.application.commandOutputQueue);
     }
 
     _onAccountsChanged() {

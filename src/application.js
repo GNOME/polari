@@ -388,8 +388,6 @@ export default GObject.registerClass({
         });
 
         this.pasteManager = new PasteManager();
-        this.notificationQueue = new AppNotifications.NotificationQueue();
-        this.commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         let provider = new Gtk.CssProvider();
         let uri = 'resource:///org/gnome/Polari/css/application.css';
@@ -502,7 +500,7 @@ export default GObject.registerClass({
             let label = _('Failed to open link');
             let n = new AppNotifications.MessageNotification(
                 label, 'dialog-error-symbolic');
-            this.notificationQueue.addNotification(n);
+            this.active_window?.queueNotification(n);
         }
 
         return [success, server, port, room];
@@ -771,7 +769,7 @@ export default GObject.registerClass({
 
         const label = vprintf(_('%s removed.'), account.display_name);
         const n = new AppNotifications.UndoNotification(label);
-        this.notificationQueue.addNotification(n);
+        this?.active_window.queueNotification(n);
 
         n.connect('closed', async () => {
             await account.remove_async(); // TODO: Check for errors

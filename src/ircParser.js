@@ -295,7 +295,7 @@ export default class IrcParser {
         }
 
         if (output)
-            this._app.commandOutputQueue.addNotification(output);
+            this._app.active_window?.queueCommandOutput(output);
         return retval;
     }
 

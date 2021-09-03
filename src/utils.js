@@ -317,7 +317,7 @@ export function openURL(url) {
                 Gtk.show_uri_full_finish(app.active_window, res);
             } catch (e) {
                 let n = new AppNotification(_('Failed to open link'));
-                app.notificationQueue.addNotification(n);
+                app.active_window?.queueNotification(n);
                 console.debug(`Failed to open ${url}: %o`, e);
             }
         });
