@@ -289,8 +289,9 @@ class TelepathyClient extends Tp.BaseClient {
 
         try {
             const password = await Utils.lookupIdentifyPassword(account);
-            this._sendIdentify(account, password);
+            await this._sendIdentify(account, password);
         } catch (e) {
+            console.debug(e);
             this._connectRooms(account);
         }
     }
