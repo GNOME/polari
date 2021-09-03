@@ -1,3 +1,23 @@
+41.rc
+=====
+* Prepare for GTK4 [Florian, ranfdev; !198, !199, !212, !215, !225]
+* Support Soup 3 [Florian; !207]
+* Replace custom logging with console module [Florian; !214]
+* Fix pasting text files [Florian; !217]
+* Put status message on the left [William; !223]
+* Improve chat log appearance [Florian; !224, !227]
+* Port to GTK4 [Florian; !228, !232, !234, !235]
+* Misc. bug fixes and cleanups [Florian, scootergrisen; !197, !200, !181, !201,
+  !202, !146, !67, !203, !204, !205, !206, !208, !209, !211, !210, !213, !216,
+  !218, !220, !229, !230, !231, !233]
+
+Contributors:
+  Yuri Chornoivan, William Cordova, Asier Sarasua Garmendia, Anders Jonsson,
+  Florian Müllner, Andika Triwidada, ranfdev, scootergrisen, Marek Černocký
+
+Translators:
+  Alexey Rubtsov [ru]
+
 40.0 — “You Need a Boyfriend, Not a Person”
 ===========================================
 * Promisify async operations [Florian; !169]

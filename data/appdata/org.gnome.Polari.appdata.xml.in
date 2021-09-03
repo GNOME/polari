@@ -63,14 +63,14 @@
   </requires>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="40.0" date="2021-06-25">
+    <release version="41.rc" type="development" date="2021-09-04">
       <description>
         <p>
-          Polari belatedly joins the GNOME 40 fun, with a small but fine release:
+          A shiny new Polari release:
           <ul>
-            <li>Allow /join without '#' prefix</li>
-            <li>Add Libera.Chat and others to predefined networks</li>
-            <li>Keep scroll position when loading extra logs</li>
+            <li>User interface now uses GTK4</li>
+            <li>Improved chat log appearance</li>
+            <li>Fixed pasting of text files</li>
           </ul>
         </p>
       </description>
