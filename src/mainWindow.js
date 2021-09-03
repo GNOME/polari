@@ -282,6 +282,7 @@ export default GObject.registerClass({
             this._settings.reset('last-selected-channel');
 
         this.active_room = null;
+        this._userListPopover.unparent();
 
         this._accountsMonitor.disconnect(this._accountsChangedId);
         this._accountsMonitor.disconnect(this._accountReachableId);
