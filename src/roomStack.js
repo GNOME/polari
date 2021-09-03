@@ -63,8 +63,10 @@ export default GObject.registerClass({
     vfunc_size_allocate(allocation) {
         super.vfunc_size_allocate(allocation);
 
-        const [firstEntry] = this._sizeGroup.get_widgets();
-        const entryHeight = firstEntry.get_allocated_height() - 1;
+        const [firstEntry] =
+            this._sizeGroup.get_widgets().filter(w => w.get_mapped());
+        const entryHeight = firstEntry
+            ? firstEntry.get_allocated_height() - 1 : 0;
         if (this._entryAreaHeight !== entryHeight) {
             this._entryAreaHeight = entryHeight;
             this.notify('entry-area-height');
