@@ -5,7 +5,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+ and LGPL-2.1+</project_license>
   <name>Polari</name>
-  <summary>An Internet Relay Chat Client for GNOME</summary>
+  <summary>Talk to people on IRC</summary>
   <description>
     <p>
       A simple Internet Relay Chat (IRC) client that is designed to integrate
@@ -15,9 +15,7 @@
     <p>
       You can use Polari to publicly chat with people in a channel, and to
       have private one-to-one conversations. Notifications make sure that
-      you never miss an important message — for private conversations,
-      they even allow you to reply instantly without switching back to the
-      application!
+      you never miss an important message.
     </p>
   </description>
   <screenshots>
