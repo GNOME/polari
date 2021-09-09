@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2021-03-22 13:18+0000\n"
-"PO-Revision-Date: 2021-05-10 12:13+0200\n"
+"POT-Creation-Date: 2021-08-27 08:14+0000\n"
+"PO-Revision-Date: 2021-09-09 14:05+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Poedit 3.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -73,7 +73,7 @@ msgstr "<_:media-1/> Polari"
 #. (itstool) path: section/title
 #: C/index.page:38
 msgid "Connecting to IRC Servers and Chat Rooms"
-msgstr "Conectarse a servidores de IRC y salas de chat."
+msgstr "Conectarse a servidores de IRC y salas de chat"
 
 #. (itstool) path: section/title
 #: C/index.page:42
@@ -150,7 +150,7 @@ msgid ""
 "help</input> and press <key>Enter</key>."
 msgstr ""
 "Para ver una lista de los comandos de IRC soportados, en una sala de chat "
-"escriba <input>/help</input> y pulse <key>Intro</key> "
+"escriba <input>/help</input> y pulse <key>Intro</key>."
 
 #. (itstool) path: note/p
 #: C/irc-commands.page:29
@@ -273,10 +273,10 @@ msgstr ""
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
-"you with the Nickserv service."
+"you with the NickServ service."
 msgstr ""
 "<app>Polari</app> recordará su nombre de usuario y su contraseña y la "
-"próxima vez que se conecte a la red IRC <app>Polari</app> registrará le "
+"próxima vez que se conecte a la red IRC <app>Polari</app> le registrará "
 "automáticamente con el servicio Nickserv."
 
 #. (itstool) path: note/p
@@ -321,10 +321,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
-#| msgid ""
-#| "Information about the user, including their name and the last time they "
-#| "were active in the channel, will appear. Click <gui>Message</gui> to "
-#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
 "active in the channel, will appear. Click <gui>Start Conversation</gui> to "
@@ -337,7 +333,7 @@ msgstr ""
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
 msgid "Another option to start a conversation with a user:"
-msgstr "Otra opción para iniciar una conversación con un usuario."
+msgstr "Otra opción para iniciar una conversación con un usuario:"
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:47
@@ -362,7 +358,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-#| msgid "Press <gui>Message</gui> to start a private conversation."
 msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
 "Pulse en <gui>Iniciar conversación</gui> para iniciar una conversación "
