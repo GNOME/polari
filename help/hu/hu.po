@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari-help master\n"
-"POT-Creation-Date: 2021-07-14 07:27+0000\n"
-"PO-Revision-Date: 2021-09-12 21:32+0200\n"
+"POT-Creation-Date: 2021-09-12 19:34+0000\n"
+"PO-Revision-Date: 2021-09-12 21:36+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -273,14 +273,18 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:52
+#| msgid ""
+#| "<app>Polari</app> will remember your username and password and the next "
+#| "time you connect to the IRC network <gui>Polari</gui> will automatically "
+#| "register you with the Nickserv service."
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
-"you with the Nickserv service."
+"you with the NickServ service."
 msgstr ""
 "A <app>Polari</app> megjegyzi a felhasználónevét és jelszavát, így amikor "
 "legközelebb kapcsolódik az IRC-hálózathoz, akkor a <gui>Polari</gui> "
-"automatikusan regisztrálja Önt a Nickserv szolgáltatásba."
+"automatikusan regisztrálja Önt a NickServ szolgáltatásba."
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:58
@@ -324,18 +328,15 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
-#| msgid ""
-#| "Information about the user, including their name and the last time they "
-#| "were active in the channel, will appear. Click <gui>Message</gui> to "
-#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
 "active in the channel, will appear. Click <gui>Start Conversation</gui> to "
 "start a private conversation."
 msgstr ""
-"Meg fognak jelenni a felhasználóval kapcsolatos információk, beleértve a"
-" nevét és a csatornán lévő utolsó aktivitásának idejét. Kattintson a <gui"
-">Beszélgetés kezdése</gui> gombra egy személyes társalgás kezdeményezéséhez."
+"Meg fognak jelenni a felhasználóval kapcsolatos információk, beleértve a "
+"nevét és a csatornán lévő utolsó aktivitásának idejét. Kattintson a "
+"<gui>Beszélgetés kezdése</gui> gombra egy személyes társalgás "
+"kezdeményezéséhez."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -365,11 +366,10 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-#| msgid "Press <gui>Message</gui> to start a private conversation."
 msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
-"Nyomja meg a <gui>Beszélgetés kezdése</gui> gombot egy személyes társalgás"
-" kezdeményezéséhez."
+"Nyomja meg a <gui>Beszélgetés kezdése</gui> gombot egy személyes társalgás "
+"kezdeményezéséhez."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
