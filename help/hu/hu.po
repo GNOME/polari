@@ -1,27 +1,27 @@
 # Hungarian translation for polari help.
-# Copyright (C) 2016, 2018 Free Software Foundation, Inc.
+# Copyright (C) 2016, 2018, 2021 Free Software Foundation, Inc.
 # This file is distributed under the same license as the polari package.
 #
-# Balázs Úr <urbalazs at gmail dot com>, 2016, 2018.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2016, 2018, 2021.
 # Gabor Kelemen <kelemeng at ubuntu dot com>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari-help master\n"
-"POT-Creation-Date: 2018-01-25 19:57+0000\n"
-"PO-Revision-Date: 2018-01-29 01:47+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng at ubuntu dot com>\n"
-"Language-Team: Hungarian <openscope at googlegroups dot com>\n"
+"POT-Creation-Date: 2021-07-14 07:27+0000\n"
+"PO-Revision-Date: 2021-09-12 21:32+0200\n"
+"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 19.12.3\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr "Úr Balázs <urbalazs@gmail.com>, 2016, 2018."
+msgstr "Úr Balázs <ur.balazs at fsf dot hu>, 2016, 2018."
 
 #. (itstool) path: info/title
 #: C/index.page:7
@@ -62,8 +62,7 @@ msgid ""
 msgstr ""
 "A <app>Polari</app> egy letisztult, egyszerű és minimalista Internet Relay "
 "Chat (IRC) kliens, a GNOME asztali környezetbe integrálva. Tudjon meg többet "
-"a "
-"Polari programról."
+"a Polari programról."
 
 #. (itstool) path: page/title
 #: C/index.page:32
@@ -105,9 +104,8 @@ msgid ""
 msgstr ""
 "A <app>Polari</app> egy egyszerű Internet Relay Chat (IRC) kliens, amely "
 "integrálódik a GNOME asztali környezetbe, és lehetővé teszi, hogy emberekkel "
-"csevegjen "
-"a világ minden tájáról nagy csevegőszobákon és személyes üzenetküldésen "
-"keresztül."
+"csevegjen a világ minden tájáról nagy csevegőszobákon és személyes "
+"üzenetküldésen keresztül."
 
 #. (itstool) path: page/media
 #. This is a reference to an external file such as an image or video. When
@@ -326,14 +324,18 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
+#| msgid ""
+#| "Information about the user, including their name and the last time they "
+#| "were active in the channel, will appear. Click <gui>Message</gui> to "
+#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
-"Meg fognak jelenni a felhasználóval kapcsolatos információk, beleértve a "
-"nevét, és az utolsó aktivitásának idejét. Kattintson az <gui>Üzenet</gui> "
-"gombra egy személyes társalgás kezdeményezéséhez."
+"Meg fognak jelenni a felhasználóval kapcsolatos információk, beleértve a"
+" nevét és a csatornán lévő utolsó aktivitásának idejét. Kattintson a <gui"
+">Beszélgetés kezdése</gui> gombra egy személyes társalgás kezdeményezéséhez."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -363,10 +365,11 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
+#| msgid "Press <gui>Message</gui> to start a private conversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
-"Nyomja meg az <gui>Üzenet</gui> gombot egy személyes társalgás "
-"kezdeményezéséhez."
+"Nyomja meg a <gui>Beszélgetés kezdése</gui> gombot egy személyes társalgás"
+" kezdeményezéséhez."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -582,4 +585,3 @@ msgstr ""
 "feltöltött képet tartalmazó weboldalra mutató hivatkozás automatikusan "
 "beírásra kerül a csevegődobozba. Nyomja meg az <key>Enter</key> billentyűt a "
 "hivatkozás megosztásához a csevegőszobában."
-
