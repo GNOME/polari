@@ -61,7 +61,7 @@
   </requires>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="41.rc" type="development" date="2021-09-04">
+    <release version="41.0" date="2021-09-20">
       <description>
         <p>
           A shiny new Polari release:

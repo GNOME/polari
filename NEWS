@@ -1,3 +1,23 @@
+41.0 — “He used to be a Euphemism”
+==================================
+* Update screenshots and metainfo [Florian; !236]
+* Refresh application icon [Tobias; !237]
+
+Contributors:
+  Tobias Bernard, Piotr Drąg, Rafael Fontenelle, Ask Hjorth Larsen,
+  Rodrigo Lledó, Florian Müllner, Balázs Úr
+
+Translators:
+  Yuri Chornoivan [uk], Daniel Șerbănescu [ro], Jiri Grönroos [fi],
+  Enrico Nicoletto [pt_BR], Luna Jernberg [sv], Matej Urbančič [sl],
+  Goran Vidović [hr], Hugo Carvalho [pt], Asier Sarasua Garmendia [eu],
+  Marek Černocký [cs], Fran Dieguez [gl], Daniel Mustieles [es],
+  Kukuh Syafaat [id], Claude Paroz [fr], Jordi Mas [ca], Emin Tufan Çetin [tr],
+  Philipp Kiemle [de], Balázs Úr [hu], Piotr Drąg [pl], Aurimas Černius [lt],
+  Nathan Follens [nl], Alan Mortensen [da], Seong-ho Cho [ko],
+  Danial Behzadi [fa], Efstathios Iosifidis [el], Boyuan Yang [zh_CN],
+  Źmicier Turok [be]
+
 41.rc
 =====
 * Prepare for GTK4 [Florian, ranfdev; !198, !199, !212, !215, !225]
