@@ -30,7 +30,7 @@ msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
 msgid "Talk to people on IRC"
-msgstr "Parla amb la gent a l'IRC"
+msgstr "Parleu amb la gent a l'IRC"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
