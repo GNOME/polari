@@ -410,6 +410,13 @@ class UserPopover extends Gtk.Popover {
 
 const UserListRow = GObject.registerClass(
 class UserListRow extends Gtk.ListBoxRow {
+    static [GObject.properties] = {
+        'filter': GObject.ParamSpec.string(
+            'filter', 'filter', 'filter',
+            GObject.ParamFlags.READWRITE,
+            ''),
+    };
+
     constructor(user) {
         super({name: `UserListRow ${user.alias}`});
 
@@ -425,6 +432,8 @@ class UserListRow extends Gtk.ListBoxRow {
 
         this._revealer.connect('notify::reveal-child',
             this._onExpandedChanged.bind(this));
+
+        this.connect('notify::filter', () => this._updateLabel());
     }
 
     get user() {
@@ -484,16 +493,11 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     shouldShow() {
-        return this._user.alias.toLowerCase().includes(this._filter);
-    }
-
-    setFilter(filter) {
-        this._filter = filter.toLowerCase();
-        this._updateLabel();
+        return this._user.alias.toLowerCase().includes(this.filter.toLowerCase());
     }
 
     _updateLabel() {
-        const str = GLib.regex_escape_string(this._filter ?? '', -1);
+        const str = GLib.regex_escape_string(this.filter ?? '', -1);
         const regex = new RegExp(`(${str})`, 'i');
         this._label.label = this._user.alias.replace(regex, '<b>$1</b>');
     }
@@ -665,7 +669,7 @@ class UserList extends Gtk.ScrolledWindow {
     }
 
     _filterRows(row) {
-        row.setFilter(this._filter);
+        row.filter = this._filter;
         return row.shouldShow();
     }
 });
