@@ -493,21 +493,9 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     _updateLabel() {
-        let filterIndex = -1;
-        if (this._filter)
-            filterIndex = this._user.alias.toLowerCase().indexOf(this._filter);
-
-        if (filterIndex < 0) {
-            this._label.label = this._user.alias;
-        } else {
-            let preMatch = this._user.alias.substring(0, filterIndex);
-            let theMatch = this._user.alias.substring(
-                filterIndex,
-                filterIndex + this._filter.length);
-            let postMatch = this._user.alias.substring(
-                filterIndex + this._filter.length);
-            this._label.label = `${preMatch}<b>${theMatch}<${'/'}b>${postMatch}`;
-        }
+        const str = GLib.regex_escape_string(this._filter ?? '', -1);
+        const regex = new RegExp(`(${str})`, 'i');
+        this._label.label = this._user.alias.replace(regex, '<b>$1</b>');
     }
 
     _updateArrowVisibility() {
