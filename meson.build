@@ -1,6 +1,6 @@
 project('polari', 'c',
   version: '41.0',
-  meson_version: '>= 0.53.0',
+  meson_version: '>= 0.59.0',
   license: 'GPL2+'
 )
 
@@ -55,12 +55,16 @@ config_h = declare_dependency(
   include_directories: include_directories('.')
 )
 
+gnome.post_install(
+  glib_compile_schemas: true,
+  gtk_update_icon_cache: true,
+  update_desktop_database: true
+)
+
 subdir('src')
 subdir('data')
 subdir('po')
 subdir('help')
-
-meson.add_install_script('meson/meson-postinstall.sh')
 
 meson.add_dist_script(check_version, meson.project_version(), 'NEWS')
 
