@@ -1,3 +1,4 @@
+import Adw from 'gi://Adw';
 import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -38,7 +39,7 @@ const MAX_RETRIES = 3;
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
 export default GObject.registerClass(
-class Application extends Gtk.Application {
+class Application extends Adw.Application {
     static [GObject.signals] = {
         'prepare-shutdown': {},
         'room-focus-changed': {},
