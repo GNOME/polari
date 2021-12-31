@@ -1,5 +1,4 @@
 import Adw from 'gi://Adw';
-import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -390,13 +389,6 @@ class Application extends Adw.Application {
         });
 
         this.pasteManager = new PasteManager();
-
-        let provider = new Gtk.CssProvider();
-        let uri = 'resource:///org/gnome/Polari/css/application.css';
-        provider.load_from_file(Gio.File.new_for_uri(uri));
-        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),
-            provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     vfunc_activate() {
