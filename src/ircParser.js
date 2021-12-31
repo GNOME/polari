@@ -191,10 +191,7 @@ export default class IrcParser {
             break;
         }
         case 'NAMES': {
-            let { channel } = this._room;
-            let members = channel.group_dup_members_contacts().map(m => m.alias);
-            output = this._createFeedbackGrid(
-                vprintf(_('Users on %s:'), channel.identifier), members);
+            this._app.activate_action('user-list', null);
             break;
         }
         case 'NICK': {
