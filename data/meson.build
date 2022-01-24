@@ -2,7 +2,7 @@ subdir('appdata')
 subdir('icons')
 
 desktop_filename = app_id + '.desktop'
-desktop_file = i18n.merge_file(desktop_filename,
+desktop_file = i18n.merge_file(
   input: desktop_filename + '.in',
   output: desktop_filename,
   po_dir: '../po',

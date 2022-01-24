@@ -1,5 +1,5 @@
 appdata_name = app_id + '.appdata.xml'
-appdata = i18n.merge_file(appdata_name,
+appdata = i18n.merge_file(
   input: appdata_name + '.in',
   output: appdata_name,
   po_dir: '../../po',
