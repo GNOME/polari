@@ -49,10 +49,20 @@ const UNKNOWN_COMMAND_MESSAGE =
 const ROOM_PREFIXES = ['#', '&', '+', '!'];
 
 export default class IrcParser {
-    constructor(room) {
+    constructor(entry, room) {
         this._app = Gio.Application.get_default();
         this._roomManager = RoomManager.getDefault();
         this._room = room;
+        this._entry = entry;
+
+        this._entry.connect('activate', async () => {
+            if (await this._process(this._entry.text)) {
+                this._entry.text = '';
+            } else {
+                this._entry.add_css_class('error');
+                this._entry.grab_focus(); // select text
+            }
+        });
     }
 
     _createFeedbackLabel(text) {
@@ -67,7 +77,7 @@ export default class IrcParser {
         return new AppNotifications.GridOutput(header, items);
     }
 
-    async process(text) {
+    async _process(text) {
         if (!this._room || !this._room.channel || !text.length)
             return true;
 

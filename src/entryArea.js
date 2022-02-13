@@ -184,7 +184,6 @@ class EntryArea extends Gtk.Stack {
         super(params);
 
         this._room = room;
-        this._ircParser = new IrcParser(this._room);
 
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));
@@ -253,15 +252,6 @@ class EntryArea extends Gtk.Stack {
 
         this._chatEntry.connect('changed', this._onEntryChanged.bind(this));
 
-        this._chatEntry.connect('activate', () => {
-            if (this._ircParser.process(this._chatEntry.text)) {
-                this._chatEntry.text = '';
-            } else {
-                this._chatEntry.add_css_class('error');
-                this._chatEntry.grab_focus(); // select text
-            }
-        });
-
         this._cancelButton.connect('clicked', this._onCancelClicked.bind(this));
         this._pasteButton.connect('clicked', this._onPasteClicked.bind(this));
 
@@ -281,6 +271,7 @@ class EntryArea extends Gtk.Stack {
         if (!this._room)
             return;
 
+        this._ircParser = new IrcParser(this._chatEntry, this._room);
         this._completion = new TabCompletion(this._chatEntry);
         this._membersChangedId = this._room.connect('members-changed',
             this._updateCompletions.bind(this));
