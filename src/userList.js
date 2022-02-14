@@ -13,8 +13,8 @@ const MAX_USERS_WIDTH_CHARS = 17;
 
 export const UserListPopover = GObject.registerClass(
 class UserListPopover extends Gtk.Popover {
-    _init(params) {
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this._createWidget();
 
@@ -131,16 +131,16 @@ export const UserDetails = GObject.registerClass({
             false),
     },
 }, class UserDetails extends Gtk.Box {
-    _init(params = {}) {
+    _expanded = false;
+    _initialDetailsLoaded = false;
+    _notificationsEnabled = false;
+    _user = null;
+
+    constructor(params = {}) {
         let { user } = params;
         delete params.user;
 
-        this._expanded = false;
-        this._initialDetailsLoaded = false;
-        this._notificationsEnabled = false;
-        this._user = null;
-
-        super._init(params);
+        super(params);
 
         this.user = user;
 
@@ -318,17 +318,18 @@ export const UserPopover = GObject.registerClass({
         'userDetails',
     ],
 }, class UserPopover extends Gtk.Popover {
-    _init(params) {
-        this._room = params.room;
-        delete params.room;
+    _nickname = null;
+    _basenick = null;
 
-        this._userTracker = params.userTracker;
+    constructor(params) {
+        const { room, userTracker } = params;
+        delete params.room;
         delete params.userTracker;
 
-        this._nickname = null;
-        this._basenick = null;
+        super(params);
 
-        super._init(params);
+        this._room = room;
+        this._userTracker = userTracker;
 
         this._app = Gio.Application.get_default();
 
@@ -422,10 +423,10 @@ export const UserPopover = GObject.registerClass({
 
 const UserListRow = GObject.registerClass(
 class UserListRow extends Gtk.ListBoxRow {
-    _init(user) {
-        this._user = user;
+    constructor(user) {
+        super({ name: `UserListRow ${user.alias}` });
 
-        super._init({ name: `UserListRow ${user.alias}` });
+        this._user = user;
 
         this._createWidget();
 

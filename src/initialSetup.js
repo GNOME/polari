@@ -22,8 +22,8 @@ export default GObject.registerClass({
         'serverRoomList',
     ],
 }, class InitialSetupWindow extends Gtk.Window {
-    _init(params) {
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this._currentAccount = null;
 

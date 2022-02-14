@@ -28,9 +28,9 @@ export default GObject.registerClass({
         'backButton',
     ],
 }, class JoinDialog extends Gtk.Dialog {
-    _init(params) {
+    constructor(params) {
         params['use-header-bar'] = 1;
-        super._init(params);
+        super(params);
 
         this._setupMainPage();
         this._setupConnectionPage();

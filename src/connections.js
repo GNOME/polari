@@ -26,15 +26,16 @@ const ErrorHint = {
 
 const ConnectionRow = GObject.registerClass(
 class ConnectionRow extends Gtk.ListBoxRow {
-    _init(params) {
+    constructor(params) {
         if (!params || !params.id)
             throw new Error('No id in parameters');
 
-        this._id = params.id;
+        const { id } = params;
         delete params.id;
 
-        super._init(params);
+        super(params);
 
+        this._id = id;
         let name = NetworksManager.getDefault().getNetworkName(this._id);
         this.name = `ConnectionRow ${name}`;
 
@@ -84,10 +85,10 @@ export const ConnectionsList = GObject.registerClass({
         'account-selected': {},
     },
 }, class ConnectionsList extends Gtk.ScrolledWindow {
-    _init(params) {
-        this._favoritesOnly = false;
+    _favoritesOnly = false;
 
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this.hscrollbar_policy = Gtk.PolicyType.NEVER;
 
@@ -282,15 +283,15 @@ export const ConnectionDetails = GObject.registerClass({
         'account-created': { param_types: [Tp.Account.$gtype] },
     },
 }, class ConnectionDetails extends Gtk.Grid {
-    _init(params) {
-        this._networksManager = NetworksManager.getDefault();
+    _networksManager = NetworksManager.getDefault();
+    _account = null;
+
+    constructor(params) {
+        super(params);
+
         let id = this._networksManager.connect('changed', () => {
             this.notify('has-service');
         });
-
-        this._account = null;
-
-        super._init(params);
 
         this.connect('destroy', () => {
             this._networksManager.disconnect(id);
@@ -508,9 +509,9 @@ export const ConnectionProperties = GObject.registerClass({
         'errorLabel',
     ],
 }, class ConnectionProperties extends Gtk.Dialog {
-    _init(account) {
+    constructor(account) {
         /* Translators: %s is a connection name */
-        super._init({
+        super({
             title: vprintf(_('“%s” Properties'), account.display_name),
             use_header_bar: 1,
         });

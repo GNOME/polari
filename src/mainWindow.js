@@ -26,11 +26,11 @@ export const FixedSizeFrame = GObject.registerClass({
             -1, GLib.MAXINT32, -1),
     },
 }, class FixedSizeFrame extends Gtk.Widget {
-    _init(params) {
-        this._height = -1;
-        this._width = -1;
+    _height = -1;
+    _width = -1;
 
-        super._init({
+    constructor(params) {
+        super({
             ...params,
             layout_manager: new Gtk.BinLayout(),
         });
@@ -126,28 +126,28 @@ export default GObject.registerClass({
         'active-room-state-changed': {},
     },
 }, class MainWindow extends Gtk.ApplicationWindow {
-    _init(params) {
-        this._subtitle = '';
+    _subtitle = '';
+
+    _room = null;
+    _lastActiveRoom = null;
+
+    _settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+    _gtkSettings = Gtk.Settings.get_default();
+
+    _currentSize = [-1, -1];
+    _isMaximized = false;
+    _isFullscreen = false;
+
+    _displayNameChangedId = 0;
+    _topicChangedId = 0;
+    _membersChangedId = 0;
+    _channelChangedId = 0;
+
+    constructor(params) {
         params.show_menubar = false;
-
-        this._room = null;
-        this._lastActiveRoom = null;
-
-        this._displayNameChangedId = 0;
-        this._topicChangedId = 0;
-        this._membersChangedId = 0;
-        this._channelChangedId = 0;
-
-        super._init(params);
+        super(params);
 
         this._userListPopover.set_parent(this._showUserListButton);
-
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-        this._gtkSettings = Gtk.Settings.get_default();
-
-        this._currentSize = [-1, -1];
-        this._isMaximized = false;
-        this._isFullscreen = false;
 
         this._notificationQueue = new AppNotifications.NotificationQueue();
         this._commandOutputQueue = new AppNotifications.CommandOutputQueue();

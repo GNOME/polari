@@ -58,11 +58,11 @@ const TextView = GObject.registerClass({
             0, GLib.MAXUINT32, 0),
     },
 }, class TextView extends Gtk.TextView {
-    _init(params) {
-        this._indentWidthChars = 0;
-        this._indentSpacing = 0;
+    _indentWidthChars = 0;
+    _indentSpacing = 0;
 
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this.buffer.connect('mark-set', this._onMarkSet.bind(this));
         this.connect('notify::root', this._onScreenChanged.bind(this));
@@ -219,10 +219,7 @@ const ButtonTag = GObject.registerClass({
         'popup-menu': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
     },
 }, class ButtonTag extends Gtk.TextTag {
-    _init(params) {
-        this._hover = false;
-        super._init(params);
-    }
+    _hover = false;
 
     get hover() {
         return this._hover;
@@ -257,11 +254,11 @@ const HoverFilterTag = GObject.registerClass({
             0.0, 1.0, 1.0),
     },
 }, class HoverFilterTag extends ButtonTag {
-    _init(params) {
-        this._filteredTag = null;
-        this._hoverOpacity = 1.;
+    _filteredTag = null;
+    _hoverOpacity = 1.;
 
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this.connect('notify::hover', () => this._updateColor());
     }
@@ -319,8 +316,8 @@ export default GObject.registerClass({
             0, GLib.MAXUINT32, 0),
     },
 }, class ChatView extends Gtk.ScrolledWindow {
-    _init(room) {
-        super._init({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
+    constructor(room) {
+        super({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
 
         this.add_css_class('polari-chat-view');
 

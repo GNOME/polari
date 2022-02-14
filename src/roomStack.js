@@ -22,8 +22,8 @@ export default GObject.registerClass({
             0, GLib.MAXUINT32, 0),
     },
 }, class RoomStack extends Gtk.Stack {
-    _init(params) {
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this._sizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.VERTICAL });
         this._rooms = new Map();
@@ -132,14 +132,14 @@ export default GObject.registerClass({
 
 const SavePasswordConfirmationBar = GObject.registerClass(
 class SavePasswordConfirmationBar extends MessageInfoBar {
-    _init(room) {
-        this._room = room;
-
+    constructor(room) {
         let title = _('Should the password be saved?');
         let subtitle = vprintf(
             _('Identification will happen automatically the next time you connect to %s'),
-            this._room.account.display_name);
-        super._init({ title, subtitle });
+            room.account.display_name);
+        super({ title, subtitle });
+
+        this._room = room;
 
         this.connect('destroy', this._onDestroy.bind(this));
 
@@ -171,10 +171,10 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
 
 const ChannelErrorBar = GObject.registerClass(
 class ChannelErrorBar extends MessageInfoBar {
-    _init(room) {
-        this._room = room;
+    constructor(room) {
+        super({ title: _('Failed to join the room') });
 
-        super._init({ title: _('Failed to join the room') });
+        this._room = room;
 
         this.add_button(_('_Retry'), Gtk.ResponseType.ACCEPT).set({
             action_name: 'app.reconnect-room',
@@ -225,8 +225,10 @@ class ChannelErrorBar extends MessageInfoBar {
 
 const ChatPlaceholder = GObject.registerClass(
 class ChatPlaceholder extends Gtk.Overlay {
-    _init(sizeGroup) {
-        this._accountsMonitor = AccountsMonitor.getDefault();
+    _accountsMonitor = AccountsMonitor.getDefault();
+
+    constructor(sizeGroup) {
+        super();
 
         let image = new Gtk.Image({
             icon_name: 'org.gnome.Polari-symbolic',
@@ -252,7 +254,6 @@ class ChatPlaceholder extends Gtk.Overlay {
         let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
         sizeGroup.add_widget(inputPlaceholder);
 
-        super._init();
         let grid = new Gtk.Grid({
             column_homogeneous: true,
             can_focus: false,
@@ -272,8 +273,8 @@ class ChatPlaceholder extends Gtk.Overlay {
 
 const RoomView = GObject.registerClass(
 class RoomView extends Gtk.Overlay {
-    _init(room, sizeGroup) {
-        super._init({ name: `RoomView ${room.display_name}` });
+    constructor(room, sizeGroup) {
+        super({ name: `RoomView ${room.display_name}` });
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.set_child(box);

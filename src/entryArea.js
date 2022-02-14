@@ -28,8 +28,8 @@ export const ChatEntry = GObject.registerClass({
         'file-pasted': { param_types: [Gio.File.$gtype] },
     },
 }, class ChatEntry extends Gtk.Entry {
-    _init(params) {
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         const delegate = this.get_delegate();
         this.addTargets(delegate);
@@ -108,10 +108,10 @@ export const NickPopover = GObject.registerClass({
         'nick-changed': {},
     },
 }, class NickPopover extends Gtk.Popover {
-    _init() {
-        this._nick = '';
+    _nick = '';
 
-        super._init();
+    constructor() {
+        super();
 
         this.set_default_widget(this._changeButton);
 
@@ -166,16 +166,18 @@ export default GObject.registerClass({
         return this.__nickPopover;
     }
 
-    _init(params) {
-        this._room = params.room;
+    _maxNickChars = MAX_NICK_CHARS;
+    _nickChangedId = 0;
+    _popoverClosedId = 0;
+
+    constructor(params) {
+        const { room } = params;
         delete params.room;
 
-        this._ircParser = new IrcParser(this._room);
-        this._maxNickChars = MAX_NICK_CHARS;
-        this._nickChangedId = 0;
-        this._popoverClosedId = 0;
+        super(params);
 
-        super._init(params);
+        this._room = room;
+        this._ircParser = new IrcParser(this._room);
 
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));

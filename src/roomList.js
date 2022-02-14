@@ -28,8 +28,8 @@ const RoomRow = GObject.registerClass({
         'eventStack',
     ],
 }, class RoomRow extends Gtk.ListBoxRow {
-    _init(room) {
-        super._init({
+    constructor(room) {
+        super({
             name: `RoomRow ${room.display_name}`,
         });
 
@@ -229,8 +229,8 @@ const RoomRow = GObject.registerClass({
 
 const RoomRowPopover = GObject.registerClass(
 class RoomRowPopover extends Gtk.PopoverMenu {
-    _init(row) {
-        super._init({
+    constructor(row) {
+        super({
             position: Gtk.PositionType.BOTTOM,
         });
         this.set_parent(row);
@@ -320,17 +320,19 @@ const RoomListHeader = GObject.registerClass({
         return klass;
     }
 
-    _init(params) {
-        this._account = params.account;
+    constructor(params) {
+        const { account } = params;
         delete params.account;
+
+        super({
+            ...params,
+            name: `RoomListHeader ${account.display_name}`,
+        });
+
+        this._account = account;
 
         this._app = Gio.Application.get_default();
         this._popover = null;
-
-        super._init({
-            ...params,
-            name: `RoomListHeader ${this._account.display_name}`,
-        });
 
         this.connect('activate',
             () => this._popover?.popup());
@@ -568,8 +570,8 @@ const RoomListHeader = GObject.registerClass({
 
 export default GObject.registerClass(
 class RoomList extends Gtk.ListBox {
-    _init(params) {
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this.set_header_func(this._updateHeader.bind(this));
         this.set_sort_func(this._sort.bind(this));

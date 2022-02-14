@@ -9,8 +9,8 @@ const COMMAND_OUTPUT_REVEAL_TIME = 3;
 const AppNotification = GObject.registerClass({
     GTypeFlags: GObject.TypeFlags.ABSTRACT,
 }, class AppNotification extends Gtk.Revealer {
-    _init() {
-        super._init({
+    constructor() {
+        super({
             reveal_child: true,
             transition_type: Gtk.RevealerTransitionType.SLIDE_DOWN,
         });
@@ -30,8 +30,8 @@ const AppNotification = GObject.registerClass({
 
 export const MessageNotification = GObject.registerClass(
 class MessageNotification extends AppNotification {
-    _init(label, iconName) {
-        super._init();
+    constructor(label, iconName) {
+        super();
 
         GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, TIMEOUT, this.close.bind(this));
 
@@ -75,8 +75,8 @@ export const UndoNotification = GObject.registerClass({
         undo: {},
     },
 }, class UndoNotification extends MessageNotification {
-    _init(label) {
-        super._init(label);
+    constructor(label) {
+        super(label);
 
         this._undo = false;
         this._closed = false;
@@ -99,8 +99,8 @@ export const UndoNotification = GObject.registerClass({
 const CommandOutputNotification = GObject.registerClass({
     GTypeFlags: GObject.TypeFlags.ABSTRACT,
 }, class CommandOutputNotification extends AppNotification {
-    _init() {
-        super._init();
+    constructor() {
+        super();
 
         this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
         GLib.timeout_add_seconds(
@@ -112,8 +112,8 @@ const CommandOutputNotification = GObject.registerClass({
 
 export const SimpleOutput = GObject.registerClass(
 class SimpleOutput extends CommandOutputNotification {
-    _init(text) {
-        super._init();
+    constructor(text) {
+        super();
 
         let label = new Gtk.Label({
             label: text,
@@ -126,8 +126,8 @@ class SimpleOutput extends CommandOutputNotification {
 
 export const GridOutput = GObject.registerClass(
 class GridOutput extends CommandOutputNotification {
-    _init(header, items) {
-        super._init();
+    constructor(header, items) {
+        super();
 
         let numItems = items.length;
         let numCols = Math.min(numItems, 4);
@@ -157,8 +157,8 @@ class GridOutput extends CommandOutputNotification {
 
 export const NotificationQueue = GObject.registerClass(
 class NotificationQueue extends Gtk.Frame {
-    _init() {
-        super._init({
+    constructor() {
+        super({
             valign: Gtk.Align.START,
             halign: Gtk.Align.CENTER,
             margin_start: 24, margin_end: 24,
@@ -196,8 +196,8 @@ class NotificationQueue extends Gtk.Frame {
 
 export const CommandOutputQueue = GObject.registerClass(
 class CommandOutputQueue extends NotificationQueue {
-    _init() {
-        super._init();
+    constructor() {
+        super();
 
         this.valign = Gtk.Align.END;
         this.add_css_class('irc-feedback');
@@ -216,16 +216,16 @@ export const MessageInfoBar = GObject.registerClass({
             ''),
     },
 }, class MessageInfoBar extends Gtk.InfoBar {
-    _init(params) {
-        this._title = '';
-        this._subtitle = '';
+    _title = '';
+    _subtitle = '';
 
+    constructor(params) {
         let defaultParams = {
             show_close_button: true,
             revealed: false,
             valign: Gtk.Align.START,
         };
-        super._init(Object.assign(defaultParams, params));
+        super(Object.assign(defaultParams, params));
 
         let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this.add_child(box);

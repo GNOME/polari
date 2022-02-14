@@ -43,8 +43,8 @@ export default GObject.registerClass({
         'room-focus-changed': {},
     },
 }, class Application extends Gtk.Application {
-    _init() {
-        super._init({
+    constructor() {
+        super({
             application_id: 'org.gnome.Polari',
             flags: Gio.ApplicationFlags.HANDLES_OPEN,
         });

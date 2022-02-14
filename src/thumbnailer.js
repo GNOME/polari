@@ -36,10 +36,10 @@ let PreviewWindow = GObject.registerClass({
         'snapshot-failed': {},
     },
 }, class PreviewWindow extends Gtk.Window {
-    _init(params) {
-        this._snapshot = null;
+    _snapshot = null;
 
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         let settings = new WebKit2.Settings({
             hardware_acceleration_policy: WebKit2.HardwareAccelerationPolicy.NEVER,

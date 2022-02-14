@@ -246,13 +246,12 @@ const PolariAccount = GObject.registerClass({
             Gio.Settings.$gtype),
     },
 }, class PolariAccount extends Tp.Account {
-    _init(params) {
-        this._visible = true;
-        this._reachable = undefined;
+    _visible = true;
+    _reachable = undefined;
+    _networksManager = NetworksManager.getDefault();
 
-        this._networksManager = NetworksManager.getDefault();
-
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this._settings = new Gio.Settings({
             schema_id: 'org.gnome.Polari.Account',

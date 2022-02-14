@@ -125,7 +125,12 @@ class SASLAuthHandler {
 
 export default GObject.registerClass(
 class TelepathyClient extends Tp.BaseClient {
-    _init(params) {
+    _pendingBotPasswords = new Map();
+    _pendingRequests = new Map();
+
+    constructor(params) {
+        super(params);
+
         this._app = Gio.Application.get_default();
         this._app.connect('prepare-shutdown', () => {
             [...this._pendingRequests.values()].forEach(r => r.cancel());
@@ -133,11 +138,6 @@ class TelepathyClient extends Tp.BaseClient {
             this._app.release();
         });
         this._app.hold();
-
-        this._pendingBotPasswords = new Map();
-        this._pendingRequests = new Map();
-
-        super._init(params);
 
         this.set_handler_bypass_approval(false);
         this.set_observer_recover(true);

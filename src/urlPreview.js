@@ -107,8 +107,8 @@ export default GObject.registerClass({
             null),
     },
 }, class URLPreview extends Gtk.Box {
-    _init(params) {
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this.set({
             orientation: Gtk.Orientation.VERTICAL,

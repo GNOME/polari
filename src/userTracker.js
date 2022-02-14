@@ -78,8 +78,8 @@ const UserTracker = GObject.registerClass({
         },
     },
 }, class UserTracker extends GObject.Object {
-    _init(account) {
-        super._init();
+    constructor(account) {
+        super();
 
         this._account = account;
 

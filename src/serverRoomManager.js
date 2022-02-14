@@ -125,12 +125,12 @@ export const ServerRoomList = GObject.registerClass({
             false),
     },
 }, class ServerRoomList extends Gtk.Box {
-    _init(params) {
-        this._account = null;
-        this._pendingInfos = [];
-        this._filterTerms = [];
+    _account = null;
+    _pendingInfos = [];
+    _filterTerms = [];
 
-        super._init(params);
+    constructor(params) {
+        super(params);
 
         this._list.model.set_visible_func((model, iter) => {
             let name = model.get_value(iter, RoomListColumn.NAME);
