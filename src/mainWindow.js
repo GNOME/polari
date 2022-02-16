@@ -1,3 +1,4 @@
+import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -75,7 +76,7 @@ class FixedSizeFrame extends Gtk.Widget {
 });
 
 export default GObject.registerClass(
-class MainWindow extends Gtk.ApplicationWindow {
+class MainWindow extends Adw.ApplicationWindow {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/main-window.ui';
     static [Gtk.internalChildren] = [
         'joinButton',
