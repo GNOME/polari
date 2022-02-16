@@ -1,10 +1,11 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
 const Signals = imports.signals;
 
-import * as AppNotifications from './appNotifications.js';
 import RoomManager from './roomManager.js';
 import * as Utils from './utils.js';
 
@@ -63,18 +64,9 @@ export default class IrcParser {
                 this._entry.grab_focus(); // select text
             }
         });
-    }
 
-    _createFeedbackLabel(text) {
-        return new AppNotifications.SimpleOutput(text);
-    }
-
-    _createFeedbackUsage(cmd) {
-        return this._createFeedbackLabel(vprintf(_('Usage: %s'), _(knownCommands[cmd])));
-    }
-
-    _createFeedbackGrid(header, items) {
-        return new AppNotifications.GridOutput(header, items);
+        this._feedback = new FeedbackPopover();
+        this._feedback.set_parent(this._entry);
     }
 
     async _process(text) {
@@ -92,7 +84,6 @@ export default class IrcParser {
 
         let argv = text.trimRight().substr(1).split(/ +/);
         let cmd = argv.shift().toUpperCase();
-        let output = null;
         switch (cmd) {
         case 'HELP': {
             let command = argv.shift();
@@ -102,11 +93,11 @@ export default class IrcParser {
             retval = !command || knownCommands[command];
 
             if (!retval) {
-                output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
+                this._feedback.showFeedback(_(UNKNOWN_COMMAND_MESSAGE));
             } else if (command) {
-                output = this._createFeedbackUsage(command);
+                this._feedback.showUsage(command);
             } else {
-                output = this._createFeedbackGrid(
+                this._feedback.showGrid(
                     _('Known commands:'), Object.keys(knownCommands));
             }
             break;
@@ -114,7 +105,7 @@ export default class IrcParser {
         case 'INVITE': {
             let nick = argv.shift();
             if (!nick) {
-                this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -132,7 +123,7 @@ export default class IrcParser {
         case 'JOIN': {
             let room = argv.shift();
             if (!room) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -153,7 +144,7 @@ export default class IrcParser {
         case 'KICK': {
             let nick = argv.shift();
             if (!nick) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -169,7 +160,7 @@ export default class IrcParser {
         }
         case 'ME': {
             if (!argv.length) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -183,7 +174,7 @@ export default class IrcParser {
             let nick = argv.shift();
             let message = argv.join(' ');
             if (!nick || !message) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -207,7 +198,7 @@ export default class IrcParser {
         case 'NICK': {
             let nick = argv.shift();
             if (!nick) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -237,7 +228,7 @@ export default class IrcParser {
         case 'QUERY': {
             let nick = argv.shift();
             if (!nick) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -267,7 +258,7 @@ export default class IrcParser {
         }
         case 'SAY': {
             if (!argv.length) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -278,12 +269,12 @@ export default class IrcParser {
             if (argv.length)
                 this._room.set_topic(stripCommand(text));
             else
-                output = this._createFeedbackLabel(this._room.topic || _('No topic set'));
+                this._feedback.showFeedback(this._room.topic || _('No topic set'));
             break;
         }
         case 'WHOIS': {
             if (!argv.length) {
-                output = this._createFeedbackUsage(cmd);
+                this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
@@ -292,17 +283,15 @@ export default class IrcParser {
             const { connection } = this._room.channel;
             const user = await connection.dup_contact_by_id_async(nick, []);
             const status = await user.request_contact_info_async(null);
-            output = this._createFeedbackLabel(this._formatUserInfo(status, user));
+            this._feedback.showFeedback(this._formatUserInfo(status, user));
             break;
         }
         default:
-            output = this._createFeedbackLabel(_(UNKNOWN_COMMAND_MESSAGE));
+            this._feedback.showFeedback(_(UNKNOWN_COMMAND_MESSAGE));
             retval = false;
             break;
         }
 
-        if (output)
-            this._app.active_window?.queueCommandOutput(output);
         return retval;
     }
 
@@ -336,3 +325,66 @@ export default class IrcParser {
     }
 }
 Signals.addSignalMethods(IrcParser.prototype);
+
+const FeedbackPopover = GObject.registerClass(
+class FeedbackPopover extends Gtk.Popover {
+    constructor() {
+        super({
+            position: Gtk.PositionType.TOP,
+        });
+
+        this._stack = new Gtk.Stack({
+            vhomogeneous: false,
+        });
+
+        this._feedbackLabel = new Gtk.Label({
+            wrap: true,
+        });
+        this._stack.add_child(this._feedbackLabel);
+
+        this._feedbackGrid = new Gtk.Grid({
+            column_homogeneous: true,
+            row_spacing: 6,
+            column_spacing: 18,
+        });
+        this._stack.add_child(this._feedbackGrid);
+
+        this.set_child(this._stack);
+    }
+
+    showFeedback(label) {
+        this._feedbackLabel.set({ label });
+        this._stack.visible_child = this._feedbackLabel;
+        this.popup();
+    }
+
+    showUsage(cmd) {
+        this.showFeedback(vprintf(_('Usage: %s'), _(knownCommands[cmd])));
+    }
+
+    showGrid(header, items) {
+        const grid = this._feedbackGrid;
+        [...grid].forEach(w => grid.remove(w));
+
+        const numItems = items.length;
+        const numCols = Math.min(numItems, 4);
+        const numRows = Math.floor(numItems / numCols) + numItems % numCols;
+
+        grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
+
+        let row = 1;
+        for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+                const item = items[i + j * numRows];
+                if (!item)
+                    continue;
+                const w = new Gtk.Label({ label: item });
+                grid.attach(w, j, row, 1, 1);
+            }
+            row++;
+        }
+
+        this._stack.visible_child = grid;
+        this.popup();
+    }
+});
