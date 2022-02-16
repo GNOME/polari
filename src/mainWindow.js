@@ -78,8 +78,6 @@ export default GObject.registerClass(
 class MainWindow extends Gtk.ApplicationWindow {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/main-window.ui';
     static [Gtk.internalChildren] = [
-        'titlebarRight',
-        'titlebarLeft',
         'joinButton',
         'showUserListButton',
         'userListPopover',
@@ -115,7 +113,6 @@ class MainWindow extends Gtk.ApplicationWindow {
     _lastActiveRoom = null;
 
     _settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
-    _gtkSettings = Gtk.Settings.get_default();
 
     _currentSize = [-1, -1];
     _isMaximized = false;
@@ -171,10 +168,6 @@ class MainWindow extends Gtk.ApplicationWindow {
             if (!this._userListPopover.visible)
                 this._userListAction.change_state(GLib.Variant.new('b', false));
         });
-
-        this._gtkSettings.connect('notify::gtk-decoration-layout',
-            this._updateDecorations.bind(this));
-        this._updateDecorations();
 
         this.connect('notify::maximized',
             () => (this._isMaximized = this.maximized));
@@ -259,22 +252,6 @@ class MainWindow extends Gtk.ApplicationWindow {
 
     _filterFallbackAppMenu(layoutStr) {
         return layoutStr.split(',').filter(s => s !== 'menu').join(',');
-    }
-
-    _updateDecorations() {
-        let layoutLeft = null;
-        let layoutRight = null;
-
-        let layout = this._gtkSettings.gtk_decoration_layout;
-        if (layout) {
-            let [buttonsLeft, buttonsRight] = layout.split(':');
-
-            layoutLeft = `${this._filterFallbackAppMenu(buttonsLeft)}:`;
-            layoutRight = `:${this._filterFallbackAppMenu(buttonsRight)}`;
-        }
-
-        this._titlebarLeft.set_decoration_layout(layoutLeft);
-        this._titlebarRight.set_decoration_layout(layoutRight);
     }
 
     // eslint-disable-next-line camelcase

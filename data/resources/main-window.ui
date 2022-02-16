@@ -39,11 +39,12 @@
     <child type="titlebar">
       <object class="GtkBox">
         <child>
-          <object class="GtkHeaderBar" id="titlebarLeft">
+          <object class="AdwHeaderBar" id="titlebarLeft">
             <property name="hexpand">False</property>
-            <child type="title">
+            <property name="show-end-title-buttons">False</property>
+            <property name="title-widget">
               <object class="GtkLabel"/>
-            </child>
+            </property>
             <child type="start">
               <object class="GtkButton" id="joinButton">
                 <property name="halign">end</property>
@@ -76,7 +77,8 @@
           </object>
         </child>
         <child>
-          <object class="GtkHeaderBar" id="titlebarRight">
+          <object class="AdwHeaderBar" id="titlebarRight">
+            <property name="show-start-title-buttons">False</property>
             <property name="hexpand">True</property>
             <!-- Use a custom title widget to enable markup for subtitles
                  (for URLs in channel topics); other than that, we want
@@ -84,7 +86,7 @@
                  be hidden, but is always included in the size request.
                  We replicate this by using a stack which will only ever show
                  its first child, but still consider the second one's size -->
-            <child type="title">
+            <property name="title-widget">
               <object class="GtkStack">
                 <property name="margin-start">24</property>
                 <property name="margin-end">24</property>
@@ -151,7 +153,7 @@
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
             <child type="end">
               <object class="GtkToggleButton" id="showUserListButton">
                 <property name="focus-on-click">False</property>
