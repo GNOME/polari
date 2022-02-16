@@ -58,6 +58,8 @@ class Application extends Adw.Application {
         if (GLib.log_writer_is_journald(2))
             GLib.setenv('G_MESSAGES_DEBUG', logDomain, false);
 
+        this._removedAccounts = new Set();
+
         this._retryData = new Map();
         this._nickTrackData = new Map();
         this._demons = [];
@@ -269,6 +271,10 @@ class Application extends Adw.Application {
         }, {
             name: 'remove-connection',
             activate: this._onRemoveConnection.bind(this),
+            parameter_type: GLib.VariantType.new('o'),
+        }, {
+            name: 'undo-remove-connection',
+            activate: this._onUndoRemoveConnection.bind(this),
             parameter_type: GLib.VariantType.new('o'),
         }, {
             name: 'edit-connection',
@@ -760,6 +766,7 @@ class Application extends Adw.Application {
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
         await account.set_enabled_async(false);
+        this._removedAccounts.add(account);
         account.visible = false;
 
         const label = vprintf(_('%s removed.'), account.display_name);
@@ -767,15 +774,25 @@ class Application extends Adw.Application {
         this?.active_window.queueNotification(n);
 
         n.connect('closed', async () => {
+            if (!this._removedAccounts.delete(account))
+                return;
+
             await account.remove_async(); // TODO: Check for errors
 
             Utils.clearAccountPassword(account);
             Utils.clearIdentifyPassword(account);
         });
-        n.connect('undo', async () => {
-            await account.set_enabled_async(true);
-            account.visible = true;
-        });
+        n.connect('undo',
+            () => this.activate_action('undo-remove-connection', parameter));
+    }
+
+    async _onUndoRemoveConnection(action, parameter) {
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
+
+        this._removedAccounts.delete(account);
+        await account.set_enabled_async(true);
+        account.visible = true;
     }
 
     _onEditConnection(action, parameter) {
