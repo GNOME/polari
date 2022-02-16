@@ -151,10 +151,8 @@ class MainWindow extends Gtk.ApplicationWindow {
         this._userListPopover.set_parent(this._showUserListButton);
 
         this._notificationQueue = new AppNotifications.NotificationQueue();
-        this._commandOutputQueue = new AppNotifications.CommandOutputQueue();
 
         this._overlay.add_overlay(this._notificationQueue);
-        this._overlay.add_overlay(this._commandOutputQueue);
 
         const app = this.application;
         if (app.isTestInstance)
@@ -164,13 +162,6 @@ class MainWindow extends Gtk.ApplicationWindow {
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));
-
-        // command output notifications should not pop up over
-        // the input area, but appear to emerge from it, so
-        // set up an appropriate margin
-        this._roomStack.bind_property('entry-area-height',
-            this._commandOutputQueue, 'margin-bottom',
-            GObject.BindingFlags.SYNC_CREATE);
 
         // Make sure user-list button is at least as wide as icon buttons
         this._showUserListButton.layout_manager = new HeaderBarButtonLayout();
@@ -250,13 +241,6 @@ class MainWindow extends Gtk.ApplicationWindow {
      */
     queueNotification(n) {
         this._notificationQueue.addNotification(n);
-    }
-
-    /**
-     * @param {AppNotification} n - a notification
-     */
-    queueCommandOutput(n) {
-        this._commandOutputQueue.addNotification(n);
     }
 
     _onAccountsReachableChanged() {

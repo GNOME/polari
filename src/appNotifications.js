@@ -4,7 +4,6 @@ import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 
 const TIMEOUT = 7;
-const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
 const AppNotification = GObject.registerClass(
 class AppNotification extends Gtk.Revealer {
@@ -95,66 +94,6 @@ class UndoNotification extends MessageNotification {
         this._closed = true;
         this.emit(this._undo ? 'undo' : 'closed');
         super.close();
-    }
-});
-
-const CommandOutputNotification = GObject.registerClass(
-class CommandOutputNotification extends AppNotification {
-    static [GObject.GTypeFlags] = GObject.TypeFlags.ABSTRACT;
-
-    constructor() {
-        super();
-
-        this.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
-        GLib.timeout_add_seconds(
-            GLib.PRIORITY_DEFAULT,
-            COMMAND_OUTPUT_REVEAL_TIME,
-            this.close.bind(this));
-    }
-});
-
-export const SimpleOutput = GObject.registerClass(
-class SimpleOutput extends CommandOutputNotification {
-    constructor(text) {
-        super();
-
-        let label = new Gtk.Label({
-            label: text,
-            vexpand: true,
-            wrap: true,
-        });
-        this.set_child(label);
-    }
-});
-
-export const GridOutput = GObject.registerClass(
-class GridOutput extends CommandOutputNotification {
-    constructor(header, items) {
-        super();
-
-        let numItems = items.length;
-        let numCols = Math.min(numItems, 4);
-        let numRows = Math.floor(numItems / numCols) + numItems % numCols;
-
-        let grid = new Gtk.Grid({
-            column_homogeneous: true,
-            row_spacing: 6,
-            column_spacing: 18,
-        });
-        grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
-
-        let row = 1;
-        for (let i = 0; i < numRows; i++) {
-            for (let j = 0; j < numCols; j++) {
-                let item = items[i + j * numRows];
-                if (!item)
-                    continue;
-                let w = new Gtk.Label({ label: item });
-                grid.attach(w, j, row, 1, 1);
-            }
-            row++;
-        }
-        this.set_child(grid);
     }
 });
 
