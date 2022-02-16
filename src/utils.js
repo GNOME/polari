@@ -20,13 +20,12 @@
  *
  */
 
+import Adw from 'gi://Adw';
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
-
-import { MessageNotification } from './appNotifications.js';
 
 import gi from 'gi';
 let Soup;
@@ -316,8 +315,10 @@ export function openURL(url) {
             try {
                 Gtk.show_uri_full_finish(app.active_window, res);
             } catch (e) {
-                let n = new MessageNotification(_('Failed to open link'));
-                app.active_window?.queueNotification(n);
+                const toast = new Adw.Toast({
+                    title: _('Failed to open link'),
+                });
+                app.active_window?.addToast(toast);
                 console.debug(`Failed to open ${url}: %o`, e);
             }
         });

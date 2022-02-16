@@ -498,10 +498,10 @@ class Application extends Adw.Application {
             [,, server, port, room] = uri.match(IRC_SCHEMA_REGEX);
             success = true;
         } catch (e) {
-            let label = _('Failed to open link');
-            let n = new AppNotifications.MessageNotification(
-                label, 'dialog-error-symbolic');
-            this.active_window?.queueNotification(n);
+            const toast = new Adw.Toast({
+                title: _('Failed to open link'),
+            });
+            this.active_window?.addToast(toast);
         }
 
         return [success, server, port, room];
@@ -769,11 +769,13 @@ class Application extends Adw.Application {
         this._removedAccounts.add(account);
         account.visible = false;
 
-        const label = vprintf(_('%s removed.'), account.display_name);
-        const n = new AppNotifications.UndoNotification(label);
-        this?.active_window.queueNotification(n);
-
-        n.connect('closed', async () => {
+        const toast = new Adw.Toast({
+            title: vprintf(_('%s removed.'), account.display_name),
+            button_label: _('Undo'),
+            action_name: 'app.undo-remove-connection',
+            action_target: parameter,
+        });
+        toast.connect('dismissed', async () => {
             if (!this._removedAccounts.delete(account))
                 return;
 
@@ -782,8 +784,7 @@ class Application extends Adw.Application {
             Utils.clearAccountPassword(account);
             Utils.clearIdentifyPassword(account);
         });
-        n.connect('undo',
-            () => this.activate_action('undo-remove-connection', parameter));
+        this?.active_window.addToast(toast);
     }
 
     async _onUndoRemoveConnection(action, parameter) {

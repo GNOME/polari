@@ -6,7 +6,6 @@ import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
 import AccountsMonitor from './accountsMonitor.js';
-import * as AppNotifications from './appNotifications.js';
 import JoinDialog from './joinDialog.js';
 import RoomList_ from './roomList.js'; // used in template
 import RoomManager from './roomManager.js';
@@ -133,10 +132,6 @@ class MainWindow extends Gtk.ApplicationWindow {
 
         this._userListPopover.set_parent(this._showUserListButton);
 
-        this._notificationQueue = new AppNotifications.NotificationQueue();
-
-        this._overlay.add_overlay(this._notificationQueue);
-
         const app = this.application;
         if (app.isTestInstance)
             this.add_css_class('test-instance');
@@ -217,10 +212,10 @@ class MainWindow extends Gtk.ApplicationWindow {
     }
 
     /**
-     * @param {AppNotification} n - a notification
+     * @param {Adw.Toast} toast - a toast (cheers!)
      */
-    queueNotification(n) {
-        this._notificationQueue.addNotification(n);
+    addToast(toast) {
+        this._overlay.add_toast(toast);
     }
 
     _onAccountsReachableChanged() {
