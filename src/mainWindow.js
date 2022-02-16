@@ -126,9 +126,6 @@ export default GObject.registerClass({
         'active-room-state-changed': {},
     },
 }, class MainWindow extends Gtk.ApplicationWindow {
-    _subtitle = '';
-
-    _room = null;
     _lastActiveRoom = null;
 
     _settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });

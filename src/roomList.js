@@ -332,7 +332,6 @@ const RoomListHeader = GObject.registerClass({
         this._account = account;
 
         this._app = Gio.Application.get_default();
-        this._popover = null;
 
         this.connect('activate',
             () => this._popover?.popup());

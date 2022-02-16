@@ -254,9 +254,6 @@ const HoverFilterTag = GObject.registerClass({
             0.0, 1.0, 1.0),
     },
 }, class HoverFilterTag extends ButtonTag {
-    _filteredTag = null;
-    _hoverOpacity = 1.;
-
     constructor(params) {
         super(params);
 
