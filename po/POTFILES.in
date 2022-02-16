@@ -16,7 +16,6 @@ data/resources/room-list-header.ui
 data/resources/server-room-list.ui
 data/resources/user-details.ui
 src/application.js
-src/appNotifications.js
 src/chatView.js
 src/connections.js
 src/entryArea.js

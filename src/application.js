@@ -9,7 +9,6 @@ import Tp from 'gi://TelepathyGLib';
 import { setConsoleLogDomain } from 'console';
 
 import AccountsMonitor from './accountsMonitor.js';
-import * as AppNotifications from './appNotifications.js';
 import * as Connections from './connections.js';
 import InitialSetupWindow from './initialSetup.js';
 import MainWindow from './mainWindow.js';

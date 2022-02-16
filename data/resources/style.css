@@ -103,16 +103,6 @@ treeview.polari-server-room-list {
     padding: 6px 12px;
 }
 
-.irc-feedback {
-    color: @theme_fg_color;
-    background-color: @theme_bg_color;
-    border-style: solid;
-    border-color: @borders;
-    border-width: 1px 1px 0 1px;
-    border-radius: 6px 6px 0 0;
-    padding: 6px;
-}
-
 .url-preview { padding: 8px; }
 .url-preview { margin: 12px; }
 .url-preview:dir(ltr) { margin-left: 0; }
