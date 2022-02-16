@@ -231,12 +231,12 @@ export default GObject.registerClass({
     }
 
     get subtitle() {
-        return this._subtitle;
+        return this._subtitle ?? '';
     }
 
     // eslint-disable-next-line camelcase
     get subtitle_visible() {
-        return this._subtitle.length > 0;
+        return this.subtitle.length > 0;
     }
 
     // eslint-disable-next-line camelcase
