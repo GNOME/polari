@@ -13,10 +13,6 @@ import RoomManager from './roomManager.js';
 export default GObject.registerClass(
 class RoomStack extends Gtk.Stack {
     static [GObject.properties] = {
-        'entry-area-height': GObject.ParamSpec.uint(
-            'entry-area-height', 'entry-area-height', 'entry-area-height',
-            GObject.ParamFlags.READABLE,
-            0, GLib.MAXUINT32, 0),
         'view-height': GObject.ParamSpec.uint(
             'view-height', 'view-height', 'view-height',
             GObject.ParamFlags.READABLE,
@@ -39,7 +35,6 @@ class RoomStack extends Gtk.Stack {
 
         this.add_named(new ChatPlaceholder(this._sizeGroup), 'placeholder');
 
-        this._entryAreaHeight = 0;
         this._viewHeight = 0;
 
         this.connect('destroy', () => {
@@ -78,21 +73,12 @@ class RoomStack extends Gtk.Stack {
             this._sizeGroup.get_widgets().filter(w => w.get_mapped());
         const entryHeight = firstEntry
             ? firstEntry.get_allocated_height() - 1 : 0;
-        if (this._entryAreaHeight !== entryHeight) {
-            this._entryAreaHeight = entryHeight;
-            this.notify('entry-area-height');
-        }
 
         const viewHeight = this.get_allocated_height() - entryHeight;
         if (this._viewHeight !== viewHeight) {
             this._viewHeight = viewHeight;
             this.notify('view-height');
         }
-    }
-
-    // eslint-disable-next-line camelcase
-    get entry_area_height() {
-        return this._entryAreaHeight;
     }
 
     // eslint-disable-next-line camelcase
