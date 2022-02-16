@@ -1,9 +1,9 @@
-@define-color polari_dark_bg_color shade(@theme_bg_color, 0.95);
+@define-color polari_dark_bg_color shade(@window_bg_color, 0.95);
 
-@define-color active_nick_color @theme_selected_bg_color;
+@define-color active_nick_color @accent_bg_color;
 @define-color active_nick_hover_color lighter(@active_nick_color);
 
-@define-color inactive_nick_color alpha(@theme_text_color, 0.55);
+@define-color inactive_nick_color alpha(@view_fg_color, 0.55);
 @define-color inactive_nick_hover_color lighter(@inactive_nick_color);
 
 .info { margin-bottom: 1px; }
@@ -51,7 +51,7 @@
 }
 
 .polari-nick-entry {
-    color: alpha(@theme_fg_color, 0.6);
+    color: alpha(@window_fg_color, 0.6);
 }
 
 .polari-room-list .room-list-header {
@@ -79,33 +79,33 @@
 
 .polari-room-list row.inactive *,
 .polari-room-list row.inactive:backdrop * {
-    color: mix(@theme_fg_color, @theme_base_color, 0.3);
+    color: mix(@window_fg_color, @view_bg_color, 0.3);
 }
 
 .polari-room-list row.inactive:selected *,
 .polari-room-list row.inactive:selected:backdrop * {
-    color: mix(@theme_selected_fg_color, @theme_base_color, 0.3);
+    color: mix(@accent_fg_color, @view_bg_color, 0.3);
 }
 
 .polari-room-list row:backdrop * {
-    color: @theme_fg_color;
+    color: @window_fg_color;
 }
 
 .polari-room-list row:backdrop:selected * {
-    color: @theme_selected_fg_color;
+    color: @accent_fg_color;
 }
 
 .polari-room-list row .pending-messages-count {
-    color: @theme_selected_fg_color;
-    background-color: mix(@theme_selected_bg_color, @theme_selected_fg_color, 0.3);
+    color: @accent_fg_color;
+    background-color: mix(@accent_bg_color, @accent_fg_color, 0.3);
     font-size: smaller;
     border-radius: 4px;
     padding: 0px 4px;
 }
 
 .polari-room-list row .pending-messages-count:backdrop {
-    color: @theme_unfocused_selected_fg_color;
-    background-color: mix(@theme_unfocused_selected_bg_color, @theme_unfocused_selected_fg_color, 0.1);
+    color: @accent_fg_color;
+    background-color: mix(@accent_bg_color, @accent_fg_color, 0.1);
 }
 
 treeview.polari-server-room-list {
@@ -131,7 +131,7 @@ treeview.polari-server-room-list {
 
 .emoji-picker entry { margin: 6px; }
 
-.emoji-picker .view { background-color: @theme_bg_color; }
+.emoji-picker .view { background-color: @window_bg_color; }
 
 .emoji-picker undershoot { border: 0 solid @borders; }
 .emoji-picker undershoot:backdrop { border: 0 solid @unfocused_borders; }
@@ -179,7 +179,7 @@ treeview.polari-server-room-list {
     border-width: 1px 0 0 0;
 }
 .polari-error-information GtkLabel {
-    color: @theme_fg_color;
+    color: @window_fg_color;
     font-size: smaller;
 }
 
@@ -189,7 +189,7 @@ treeview.polari-server-room-list {
 }
 
 /* "opt-out" of insensitive view styling */
-.polari-entry-area:disabled { background-color: @theme_base_color; }
+.polari-entry-area:disabled { background-color: @view_bg_color; }
 
 /* the following adds a border on top of the inputbar when users scroll up */
 .polari-chat-view > undershoot.bottom { border-bottom: 1px solid @borders; }
@@ -213,8 +213,8 @@ window.test-instance headerbar:last-child {
 /* Differentiate snapshot builds from regular ones */
 window.snapshot headerbar { background: none; }
 window.snapshot .titlebar {
-    background: linear-gradient(to left, #a5b1bd 0%, #a5b1bd 8%, @theme_bg_color 25%);
+    background: linear-gradient(to left, #a5b1bd 0%, #a5b1bd 8%, @window_bg_color 25%);
     box-shadow: inset 0 1px #f1f3f5;
     border-color: #909fae;
-    color: alpha(@theme_fg_color, 0.4);
+    color: alpha(@window_fg_color, 0.4);
 }
