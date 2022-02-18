@@ -34,13 +34,6 @@ js_sources = [
 js_xml = []
 foreach js_source : js_sources
   js_xml += '    <file>@0@</file>'.format(js_source)
-
-  if (js_shell.found())
-    test('Checking syntax of ' + js_source, js_shell,
-      args: ['-e', 'parseModule(read("@0@"))'.format(js_source)],
-      workdir: meson.current_source_dir()
-    )
-  endif
 endforeach
 
 resource_data = configuration_data()

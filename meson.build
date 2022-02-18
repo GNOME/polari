@@ -27,8 +27,6 @@ tpclientdir = join_paths(datadir, 'telepathy', 'clients')
 girdir = join_paths(pkgdatadir, 'gir-1.0')
 typelibdir = join_paths(pkglibdir, 'girepository-1.0')
 
-js_shell = find_program('js78', required: false)
-
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 json_glib_validate = find_program('json-glib-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
