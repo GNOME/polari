@@ -65,8 +65,6 @@ workflow:
         https://gitlab.gnome.org/GNOME/gjs.git \
         1.71.1 . &&
 
-      dnf clean all
-
 .prereview_req: &prereview_req
   needs:
     - check_commit_log
