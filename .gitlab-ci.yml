@@ -48,11 +48,11 @@ workflow:
 .polari.fedora:35:
   variables:
     FDO_DISTRIBUTION_VERSION: 35
-    FDO_DISTRIBUTION_TAG: '2022-02-15.0'
+    FDO_DISTRIBUTION_TAG: '2022-02-18.0'
     FDO_DISTRIBUTION_PACKAGES: >
       meson gcc g++ pkgconf git gettext itstool
       desktop-file-utils */appstream-util */json-glib-validate
-      findutils mozjs91-devel nodejs npm
+      mozjs91-devel nodejs npm
       pkgconfig(gtk+-3.0) pkgconfig(gjs-1.0)
       pkgconfig(gobject-introspection-1.0)
       pkgconfig(telepathy-glib)
@@ -64,6 +64,10 @@ workflow:
         -Dskip_dbus_tests=true \
         https://gitlab.gnome.org/GNOME/gjs.git \
         1.71.1 . &&
+
+      ./.gitlab-ci/install-meson-project.sh \
+        https://gitlab.gnome.org/fmuellner/gjs-ci-tools.git \
+        main .
 
 .prereview_req: &prereview_req
   needs:
@@ -129,6 +133,16 @@ eslint:
       - ${LINT_LOG}
     reports:
       junit: ${LINT_LOG}
+
+js-check:
+  extends:
+    - .fdo.distribution-image@fedora
+    - .polari.fedora:35
+  stage: review
+  needs:
+    - build-fedora-container
+  script:
+    - gjs-check-syntax
 
 .flatpak-template:
   stage: build
