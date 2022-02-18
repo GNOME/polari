@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/gnome/Polari/js">
+    <file>config.js</file>
+    <file>accountsMonitor.js</file>
+    <file>application.js</file>
+    <file>appNotifications.js</file>
+    <file>chatView.js</file>
+    <file>connections.js</file>
+    <file>entryArea.js</file>
+    <file>initialSetup.js</file>
+    <file>ircParser.js</file>
+    <file>joinDialog.js</file>
+    <file>main.js</file>
+    <file>mainWindow.js</file>
+    <file>networksManager.js</file>
+    <file>pasteManager.js</file>
+    <file>roomList.js</file>
+    <file>roomManager.js</file>
+    <file>roomStack.js</file>
+    <file>serverRoomManager.js</file>
+    <file>tabCompletion.js</file>
+    <file>telepathyClient.js</file>
+    <file>urlPreview.js</file>
+    <file>userList.js</file>
+    <file>utils.js</file>
+    <file>userTracker.js</file>
+  </gresource>
+</gresources>

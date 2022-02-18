@@ -5,47 +5,6 @@ data_resources = gnome.compile_resources(
   c_name: 'data_resources'
 )
 
-js_sources = [
-  'accountsMonitor.js',
-  'application.js',
-  'appNotifications.js',
-  'chatView.js',
-  'connections.js',
-  'entryArea.js',
-  'initialSetup.js',
-  'ircParser.js',
-  'joinDialog.js',
-  'main.js',
-  'mainWindow.js',
-  'networksManager.js',
-  'pasteManager.js',
-  'roomList.js',
-  'roomManager.js',
-  'roomStack.js',
-  'serverRoomManager.js',
-  'tabCompletion.js',
-  'telepathyClient.js',
-  'urlPreview.js',
-  'userList.js',
-  'utils.js',
-  'userTracker.js'
-]
-
-js_xml = []
-foreach js_source : js_sources
-  js_xml += '    <file>@0@</file>'.format(js_source)
-endforeach
-
-resource_data = configuration_data()
-resource_data.set('JS_SOURCE_FILES', '\n'.join(js_xml))
-
-resource_xml_name = '@0@.src.gresource.xml'.format(app_id)
-src_resources_xml = configure_file(
-  input: resource_xml_name + '.meson',
-  output: resource_xml_name,
-  configuration: resource_data
-)
-
 config_js = vcs_tag(
   command: ['git', 'describe'],
   input: configure_file(
@@ -63,7 +22,7 @@ config_js = vcs_tag(
 
 src_resources = gnome.compile_resources(
   'src-resources',
-  src_resources_xml,
+  '@0@.src.gresource.xml'.format(app_id),
   dependencies: config_js,
   c_name: 'src_resources'
 )
