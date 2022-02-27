@@ -3,12 +3,12 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
+import Pango from 'gi://Pango';
 import Tp from 'gi://TelepathyGLib';
 
 import AccountsMonitor from './accountsMonitor.js';
 import ChatView from './chatView.js';
 import EntryArea from './entryArea.js';
-import { MessageInfoBar } from './appNotifications.js';
 import RoomManager from './roomManager.js';
 
 export default GObject.registerClass(
@@ -115,6 +115,56 @@ class RoomStack extends Gtk.Stack {
             return;
         let sensitive = room && room.channel;
         this._rooms.get(room.id).inputSensitive = sensitive;
+    }
+});
+
+export const MessageInfoBar = GObject.registerClass(
+class MessageInfoBar extends Gtk.InfoBar {
+    static [GObject.properties] = {
+        'title': GObject.ParamSpec.string(
+            'title', 'title', 'title',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            ''),
+        'subtitle': GObject.ParamSpec.string(
+            'subtitle', 'subtitle', 'subtitle',
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            ''),
+    };
+
+    constructor(params) {
+        let defaultParams = {
+            show_close_button: true,
+            revealed: false,
+            valign: Gtk.Align.START,
+        };
+        super(Object.assign(defaultParams, params));
+
+        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this.add_child(box);
+
+        this._titleLabel = new Gtk.Label({
+            css_classes: ['heading'],
+            halign: Gtk.Align.START,
+            valign: Gtk.Align.CENTER,
+            wrap: true,
+        });
+        box.append(this._titleLabel);
+
+        this._subtitleLabel = new Gtk.Label({
+            halign: Gtk.Align.START,
+            valign: Gtk.Align.CENTER,
+            ellipsize: Pango.EllipsizeMode.END,
+        });
+        box.append(this._subtitleLabel);
+
+        this.bind_property('title',
+            this._titleLabel, 'label',
+            GObject.BindingFlags.SYNC_CREATE);
+        this.bind_property('subtitle',
+            this._subtitleLabel, 'label',
+            GObject.BindingFlags.SYNC_CREATE);
+
+        this.connect('response', () => (this.revealed = false));
     }
 });
 
