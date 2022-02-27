@@ -12,16 +12,17 @@ const SetupPage = {
     OFFLINE: 2,
 };
 
-export default GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/initial-setup-window.ui',
-    InternalChildren: [
+export default GObject.registerClass(
+class InitialSetupWindow extends Gtk.Window {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/initial-setup-window.ui';
+    static [Gtk.internalChildren] = [
         'contentStack',
         'connectionsList',
         'nextButton',
         'prevButton',
         'serverRoomList',
-    ],
-}, class InitialSetupWindow extends Gtk.Window {
+    ];
+
     constructor(params) {
         super(params);
 

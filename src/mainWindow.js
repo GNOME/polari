@@ -14,8 +14,9 @@ import RoomStack_ from './roomStack.js'; // used in template
 import * as UserList_ from './userList.js'; // used in template
 import * as Utils from './utils.js';
 
-export const FixedSizeFrame = GObject.registerClass({
-    Properties: {
+export const FixedSizeFrame = GObject.registerClass(
+class FixedSizeFrame extends Gtk.Widget {
+    static [GObject.properties] = {
         height: GObject.ParamSpec.int(
             'height', 'height', 'height',
             GObject.ParamFlags.READWRITE,
@@ -24,8 +25,8 @@ export const FixedSizeFrame = GObject.registerClass({
             'width', 'width', 'width',
             GObject.ParamFlags.READWRITE,
             -1, GLib.MAXINT32, -1),
-    },
-}, class FixedSizeFrame extends Gtk.Widget {
+    };
+
     _height = -1;
     _width = -1;
 
@@ -91,9 +92,10 @@ class ButtonBinLayout extends Gtk.BinLayout {
     }
 });
 
-export default GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/main-window.ui',
-    InternalChildren: [
+export default GObject.registerClass(
+class MainWindow extends Gtk.ApplicationWindow {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/main-window.ui';
+    static [Gtk.internalChildren] = [
         'titlebarRight',
         'titlebarLeft',
         'joinButton',
@@ -103,8 +105,9 @@ export default GObject.registerClass({
         'offlineInfoBar',
         'overlay',
         'roomStack',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         subtitle: GObject.ParamSpec.string(
             'subtitle', 'subtitle', 'subtitle',
             GObject.ParamFlags.READABLE,
@@ -121,11 +124,12 @@ export default GObject.registerClass({
             'view-height', 'view-height', 'view-height',
             GObject.ParamFlags.READABLE,
             0, GLib.MAXUINT32, 0),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'active-room-state-changed': {},
-    },
-}, class MainWindow extends Gtk.ApplicationWindow {
+    };
+
     _lastActiveRoom = null;
 
     _settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });

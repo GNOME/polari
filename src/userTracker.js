@@ -62,8 +62,9 @@ export default class UserStatusMonitor {
 }
 
 
-const UserTracker = GObject.registerClass({
-    Signals: {
+const UserTracker = GObject.registerClass(
+class UserTracker extends GObject.Object {
+    static [GObject.signals] = {
         'status-changed': {
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING, GObject.TYPE_INT],
@@ -76,8 +77,8 @@ const UserTracker = GObject.registerClass({
             flags: GObject.SignalFlags.DETAILED,
             param_types: [GObject.TYPE_STRING],
         },
-    },
-}, class UserTracker extends GObject.Object {
+    };
+
     constructor(account) {
         super();
 

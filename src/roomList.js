@@ -18,16 +18,17 @@ function _onPopoverVisibleChanged(popover) {
         popover.get_parent().remove_css_class('has-open-popup');
 }
 
-const RoomRow = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/room-list-row.ui',
-    InternalChildren: [
+const RoomRow = GObject.registerClass(
+class RoomRow extends Gtk.ListBoxRow {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/room-list-row.ui';
+    static [Gtk.internalChildren] = [
         'box',
         'icon',
         'roomLabel',
         'counter',
         'eventStack',
-    ],
-}, class RoomRow extends Gtk.ListBoxRow {
+    ];
+
     constructor(room) {
         super({
             name: `RoomRow ${room.display_name}`,
@@ -285,10 +286,11 @@ class RoomRowPopover extends Gtk.PopoverMenu {
     }
 });
 
-const RoomListHeader = GObject.registerClass({
-    CssName: 'row',
-    Template: 'resource:///org/gnome/Polari/ui/room-list-header.ui',
-    InternalChildren: [
+const RoomListHeader = GObject.registerClass(
+class RoomListHeader extends Gtk.Widget {
+    static [Gtk.cssName] = 'row';
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/room-list-header.ui';
+    static [Gtk.internalChildren] = [
         'label',
         'iconStack',
         'popoverStatus',
@@ -300,17 +302,19 @@ const RoomListHeader = GObject.registerClass({
         'popoverRemove',
         'popoverProperties',
         'spinner',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         'popover': GObject.ParamSpec.object(
             'popover', 'popover', 'popover',
             GObject.ParamFlags.READWRITE,
             Gtk.Popover.$gtype),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'activate': { flags: GObject.SignalFlags.ACTION },
-    },
-}, class RoomListHeader extends Gtk.Widget {
+    };
+
     static _classInit(klass) {
         klass = Gtk.Widget._classInit(klass);
 

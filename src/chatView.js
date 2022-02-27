@@ -46,8 +46,9 @@ const NICKTAG_PREFIX = 'nick';
 
 // Workaround for GtkTextView growing horizontally over time when
 // added to a GtkScrolledWindow with horizontal scrolling disabled
-const TextView = GObject.registerClass({
-    Properties: {
+const TextView = GObject.registerClass(
+class TextView extends Gtk.TextView {
+    static [GObject.properties] = {
         'indent-width-chars': GObject.ParamSpec.uint(
             'indent-width-chars', 'indent-width-chars', 'indent-width-chars',
             GObject.ParamFlags.READWRITE,
@@ -56,8 +57,8 @@ const TextView = GObject.registerClass({
             'indent-spacing', 'indent-spacing', 'indent-spacing',
             GObject.ParamFlags.READWRITE,
             0, GLib.MAXUINT32, 0),
-    },
-}, class TextView extends Gtk.TextView {
+    };
+
     _indentWidthChars = 0;
     _indentSpacing = 0;
 
@@ -207,18 +208,20 @@ const TextView = GObject.registerClass({
     }
 });
 
-const ButtonTag = GObject.registerClass({
-    Properties: {
+const ButtonTag = GObject.registerClass(
+class ButtonTag extends Gtk.TextTag {
+    static [GObject.properties] = {
         'hover': GObject.ParamSpec.boolean(
             'hover', 'hover', 'hover',
             GObject.ParamFlags.READWRITE,
             false),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'clicked': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
         'popup-menu': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
-    },
-}, class ButtonTag extends Gtk.TextTag {
+    };
+
     _hover = false;
 
     get hover() {
@@ -242,8 +245,9 @@ const ButtonTag = GObject.registerClass({
     }
 });
 
-const HoverFilterTag = GObject.registerClass({
-    Properties: {
+const HoverFilterTag = GObject.registerClass(
+class HoverFilterTag extends ButtonTag {
+    static [GObject.properties] = {
         'filtered-tag': GObject.ParamSpec.object(
             'filtered-tag', 'filtered-tag', 'filtered-tag',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
@@ -252,8 +256,8 @@ const HoverFilterTag = GObject.registerClass({
             'hover-opacity', 'hover-opacity', 'hover-opacity',
             GObject.ParamFlags.READWRITE,
             0.0, 1.0, 1.0),
-    },
-}, class HoverFilterTag extends ButtonTag {
+    };
+
     constructor(params) {
         super(params);
 
@@ -303,16 +307,17 @@ const HoverFilterTag = GObject.registerClass({
     }
 });
 
-export default GObject.registerClass({
-    Implements: [DropTargetIface],
-    Properties: {
+export default GObject.registerClass(
+class ChatView extends Gtk.ScrolledWindow {
+    static [GObject.interfaces] = [DropTargetIface];
+    static [GObject.properties] = {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
         'max-nick-chars': GObject.ParamSpec.uint(
             'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
             GObject.ParamFlags.READABLE,
             0, GLib.MAXUINT32, 0),
-    },
-}, class ChatView extends Gtk.ScrolledWindow {
+    };
+
     constructor(room) {
         super({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
 

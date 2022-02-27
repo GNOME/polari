@@ -17,17 +17,19 @@ const MAX_LINES = 5;
 Gio._promisify(Gio._LocalFilePrototype,
     'query_info_async', 'query_info_finish');
 
-export const ChatEntry = GObject.registerClass({
-    Implements: [DropTargetIface],
-    Properties: {
+export const ChatEntry = GObject.registerClass(
+class ChatEntry extends Gtk.Entry {
+    static [GObject.interfaces] = [DropTargetIface];
+    static [GObject.properties] = {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'text-pasted': { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT] },
         'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
         'file-pasted': { param_types: [Gio.File.$gtype] },
-    },
-}, class ChatEntry extends Gtk.Entry {
+    };
+
     constructor(params) {
         super(params);
 
@@ -92,22 +94,25 @@ export const ChatEntry = GObject.registerClass({
     }
 });
 
-export const NickPopover = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/nick-popover.ui',
-    InternalChildren: [
+export const NickPopover = GObject.registerClass(
+class NickPopover extends Gtk.Popover {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/nick-popover.ui';
+    static [Gtk.internalChildren] = [
         'nickEntry',
         'changeButton',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         nick: GObject.ParamSpec.string(
             'nick', 'nick', 'nick',
             GObject.ParamFlags.READWRITE,
             ''),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'nick-changed': {},
-    },
-}, class NickPopover extends Gtk.Popover {
+    };
+
     _nick = '';
 
     constructor() {
@@ -140,9 +145,10 @@ export const NickPopover = GObject.registerClass({
     }
 });
 
-export default GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/entry-area.ui',
-    InternalChildren: [
+export default GObject.registerClass(
+class EntryArea extends Gtk.Stack {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/entry-area.ui';
+    static [Gtk.internalChildren] = [
         'chatEntry',
         'nickButton',
         'nickLabel',
@@ -152,14 +158,15 @@ export default GObject.registerClass({
         'uploadSpinner',
         'cancelButton',
         'pasteButton',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         'max-nick-chars': GObject.ParamSpec.uint(
             'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
             GObject.ParamFlags.WRITABLE,
             0, GLib.MAXUINT32, 0),
-    },
-}, class EntryArea extends Gtk.Stack {
+    };
+
     static get _nickPopover() {
         if (!this.__nickPopover)
             this.__nickPopover = new NickPopover();

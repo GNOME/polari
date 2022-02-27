@@ -24,18 +24,20 @@ const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
 const FALLBACK_ICON_SIZE = 64;
 
-let PreviewWindow = GObject.registerClass({
-    Properties: {
+let PreviewWindow = GObject.registerClass(
+class PreviewWindow extends Gtk.Window {
+    static [GObject.properties] = {
         'uri': GObject.ParamSpec.string(
             'uri', 'uri', 'uri',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             null),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'snapshot-ready': {},
         'snapshot-failed': {},
-    },
-}, class PreviewWindow extends Gtk.Window {
+    };
+
     _snapshot = null;
 
     constructor(params) {

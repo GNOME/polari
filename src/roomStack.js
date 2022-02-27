@@ -10,8 +10,9 @@ import EntryArea from './entryArea.js';
 import { MessageInfoBar } from './appNotifications.js';
 import RoomManager from './roomManager.js';
 
-export default GObject.registerClass({
-    Properties: {
+export default GObject.registerClass(
+class RoomStack extends Gtk.Stack {
+    static [GObject.properties] = {
         'entry-area-height': GObject.ParamSpec.uint(
             'entry-area-height', 'entry-area-height', 'entry-area-height',
             GObject.ParamFlags.READABLE,
@@ -20,8 +21,8 @@ export default GObject.registerClass({
             'view-height', 'view-height', 'view-height',
             GObject.ParamFlags.READABLE,
             0, GLib.MAXUINT32, 0),
-    },
-}, class RoomStack extends Gtk.Stack {
+    };
+
     constructor(params) {
         super(params);
 

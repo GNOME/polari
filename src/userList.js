@@ -109,9 +109,10 @@ class UserListPopover extends Gtk.Popover {
     }
 });
 
-export const UserDetails = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/user-details.ui',
-    InternalChildren: [
+export const UserDetails = GObject.registerClass(
+class UserDetails extends Gtk.Box {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/user-details.ui';
+    static [Gtk.internalChildren] = [
         'spinnerBox',
         'spinner',
         'detailsGrid',
@@ -119,8 +120,9 @@ export const UserDetails = GObject.registerClass({
         'lastLabel',
         'notificationLabel',
         'messageButton',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         'expanded': GObject.ParamSpec.boolean(
             'expanded', 'expanded', 'expanded',
             GObject.ParamFlags.READWRITE,
@@ -129,8 +131,8 @@ export const UserDetails = GObject.registerClass({
             'notifications-enabled', 'notifications-enabled', 'notifications-enabled',
             GObject.ParamFlags.READWRITE,
             false),
-    },
-}, class UserDetails extends Gtk.Box {
+    };
+
     _expanded = false;
     _initialDetailsLoaded = false;
     _notificationsEnabled = false;
@@ -309,15 +311,16 @@ export const UserDetails = GObject.registerClass({
     }
 });
 
-export const UserPopover = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/user-popover.ui',
-    InternalChildren: [
+export const UserPopover = GObject.registerClass(
+class UserPopover extends Gtk.Popover {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/user-popover.ui';
+    static [Gtk.internalChildren] = [
         'nickLabel',
         'statusLabel',
         'notifyButton',
         'userDetails',
-    ],
-}, class UserPopover extends Gtk.Popover {
+    ];
+
     _nickname = null;
     _basenick = null;
 

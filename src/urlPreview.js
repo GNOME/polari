@@ -99,14 +99,15 @@ class Thumbnailer {
     }
 }
 
-export default GObject.registerClass({
-    Properties: {
+export default GObject.registerClass(
+class URLPreview extends Gtk.Box {
+    static [GObject.properties] = {
         'uri': GObject.ParamSpec.string(
             'uri', 'uri', 'uri',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             null),
-    },
-}, class URLPreview extends Gtk.Box {
+    };
+
     constructor(params) {
         super(params);
 

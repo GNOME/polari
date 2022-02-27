@@ -37,12 +37,13 @@ const MAX_RETRIES = 3;
 
 const IRC_SCHEMA_REGEX = /^(irc?:\/\/)([\da-z.-]+):?(\d+)?\/(?:%23)?([\w.+-]+)/i;
 
-export default GObject.registerClass({
-    Signals: {
+export default GObject.registerClass(
+class Application extends Gtk.Application {
+    static [GObject.signals] = {
         'prepare-shutdown': {},
         'room-focus-changed': {},
-    },
-}, class Application extends Gtk.Application {
+    };
+
     constructor() {
         super({
             application_id: 'org.gnome.Polari',

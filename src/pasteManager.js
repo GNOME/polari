@@ -65,20 +65,22 @@ export default class PasteManager {
     }
 }
 
-export const DropTargetIface = GObject.registerClass({
-    Requires: [GObject.Object],
-    Properties: {
+export const DropTargetIface = GObject.registerClass(
+class DropTargetIface extends GObject.Interface {
+    static [GObject.requires] = [GObject.Object];
+    static [GObject.properties] = {
         'can-drop': GObject.ParamSpec.boolean(
             'can-drop', 'can-drop', 'can-drop',
             GObject.ParamFlags.READABLE,
             false),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'text-dropped': { param_types: [GObject.TYPE_STRING] },
         'image-dropped': { param_types: [GdkPixbuf.Pixbuf] },
         'file-dropped': { param_types: [Gio.File] },
-    },
-}, class DropTargetIface extends GObject.Interface {
+    };
+
     addTargets(widget) {
         const imageTypes = [];
         for (const f of GdkPixbuf.Pixbuf.get_formats())

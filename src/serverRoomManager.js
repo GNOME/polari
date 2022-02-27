@@ -109,22 +109,24 @@ function _strBaseEqual(str1, str2) {
     return str1.localeCompare(str2, {}, { sensitivity: 'base' }) === 0;
 }
 
-export const ServerRoomList = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/server-room-list.ui',
-    InternalChildren: [
+export const ServerRoomList = GObject.registerClass(
+class ServerRoomList extends Gtk.Box {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/server-room-list.ui';
+    static [Gtk.internalChildren] = [
         'filterEntry',
         'list',
         'spinner',
         'store',
         'toggleRenderer',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         'can-join': GObject.ParamSpec.boolean(
             'can-join', 'can-join', 'can-join',
             GObject.ParamFlags.READABLE,
             false),
-    },
-}, class ServerRoomList extends Gtk.Box {
+    };
+
     _account = null;
     _pendingInfos = [];
     _filterTerms = [];

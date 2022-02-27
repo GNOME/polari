@@ -10,9 +10,10 @@ const DialogPage = {
     CONNECTION: 1,
 };
 
-export default GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/join-room-dialog.ui',
-    InternalChildren: [
+export default GObject.registerClass(
+class JoinDialog extends Gtk.Dialog {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/join-room-dialog.ui';
+    static [Gtk.internalChildren] = [
         'cancelButton',
         'joinButton',
         'mainStack',
@@ -26,8 +27,8 @@ export default GObject.registerClass({
         'addButton',
         'customToggle',
         'backButton',
-    ],
-}, class JoinDialog extends Gtk.Dialog {
+    ];
+
     constructor(params) {
         params['use-header-bar'] = 1;
         super(params);

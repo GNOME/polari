@@ -73,18 +73,20 @@ class ConnectionRow extends Gtk.ListBoxRow {
     }
 });
 
-export const ConnectionsList = GObject.registerClass({
-    Properties: {
+export const ConnectionsList = GObject.registerClass(
+class ConnectionsList extends Gtk.ScrolledWindow {
+    static [GObject.properties] = {
         'favorites-only': GObject.ParamSpec.boolean(
             'favorites-only', 'favorites-only', 'favorites-only',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             false),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'account-created': { param_types: [Tp.Account.$gtype] },
         'account-selected': {},
-    },
-}, class ConnectionsList extends Gtk.ScrolledWindow {
+    };
+
     _favoritesOnly = false;
 
     constructor(params) {
@@ -260,16 +262,18 @@ export const ConnectionsList = GObject.registerClass({
     }
 });
 
-export const ConnectionDetails = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/connection-details.ui',
-    InternalChildren: [
+export const ConnectionDetails = GObject.registerClass(
+class ConnectionDetails extends Gtk.Grid {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-details.ui';
+    static [Gtk.internalChildren] = [
         'nameEntry',
         'serverEntry',
         'nickEntry',
         'realnameEntry',
         'sslCheckbox',
-    ],
-    Properties: {
+    ];
+
+    static [GObject.properties] = {
         'can-confirm': GObject.ParamSpec.boolean(
             'can-confirm', 'can-confirm', 'can-confirm',
             GObject.ParamFlags.READABLE,
@@ -278,11 +282,12 @@ export const ConnectionDetails = GObject.registerClass({
             'has-service', 'has-service', 'has-service',
             GObject.ParamFlags.READABLE,
             false),
-    },
-    Signals: {
+    };
+
+    static [GObject.signals] = {
         'account-created': { param_types: [Tp.Account.$gtype] },
-    },
-}, class ConnectionDetails extends Gtk.Grid {
+    };
+
     _networksManager = NetworksManager.getDefault();
     _account = null;
 
@@ -501,14 +506,15 @@ export const ConnectionDetails = GObject.registerClass({
 });
 
 
-export const ConnectionProperties = GObject.registerClass({
-    Template: 'resource:///org/gnome/Polari/ui/connection-properties.ui',
-    InternalChildren: [
+export const ConnectionProperties = GObject.registerClass(
+class ConnectionProperties extends Gtk.Dialog {
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-properties.ui';
+    static [Gtk.internalChildren] = [
         'details',
         'errorBox',
         'errorLabel',
-    ],
-}, class ConnectionProperties extends Gtk.Dialog {
+    ];
+
     constructor(account) {
         /* Translators: %s is a connection name */
         super({

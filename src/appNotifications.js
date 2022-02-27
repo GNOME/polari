@@ -6,9 +6,10 @@ import Pango from 'gi://Pango';
 const TIMEOUT = 7;
 const COMMAND_OUTPUT_REVEAL_TIME = 3;
 
-const AppNotification = GObject.registerClass({
-    GTypeFlags: GObject.TypeFlags.ABSTRACT,
-}, class AppNotification extends Gtk.Revealer {
+const AppNotification = GObject.registerClass(
+class AppNotification extends Gtk.Revealer {
+    static [GObject.GTypeFlags] = GObject.TypeFlags.ABSTRACT;
+
     constructor() {
         super({
             reveal_child: true,
@@ -69,12 +70,13 @@ class MessageNotification extends AppNotification {
     }
 });
 
-export const UndoNotification = GObject.registerClass({
-    Signals: {
+export const UndoNotification = GObject.registerClass(
+class UndoNotification extends MessageNotification {
+    static [GObject.signals] = {
         closed: {},
         undo: {},
-    },
-}, class UndoNotification extends MessageNotification {
+    };
+
     constructor(label) {
         super(label);
 
@@ -96,9 +98,10 @@ export const UndoNotification = GObject.registerClass({
     }
 });
 
-const CommandOutputNotification = GObject.registerClass({
-    GTypeFlags: GObject.TypeFlags.ABSTRACT,
-}, class CommandOutputNotification extends AppNotification {
+const CommandOutputNotification = GObject.registerClass(
+class CommandOutputNotification extends AppNotification {
+    static [GObject.GTypeFlags] = GObject.TypeFlags.ABSTRACT;
+
     constructor() {
         super();
 
@@ -204,8 +207,9 @@ class CommandOutputQueue extends NotificationQueue {
     }
 });
 
-export const MessageInfoBar = GObject.registerClass({
-    Properties: {
+export const MessageInfoBar = GObject.registerClass(
+class MessageInfoBar extends Gtk.InfoBar {
+    static [GObject.properties] = {
         'title': GObject.ParamSpec.string(
             'title', 'title', 'title',
             GObject.ParamFlags.READWRITE,
@@ -214,8 +218,8 @@ export const MessageInfoBar = GObject.registerClass({
             'subtitle', 'subtitle', 'subtitle',
             GObject.ParamFlags.READWRITE,
             ''),
-    },
-}, class MessageInfoBar extends Gtk.InfoBar {
+    };
+
     _title = '';
     _subtitle = '';
 

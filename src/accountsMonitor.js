@@ -226,8 +226,9 @@ class ClientFactory extends Polari.ClientFactory {
     }
 });
 
-const PolariAccount = GObject.registerClass({
-    Properties: {
+const PolariAccount = GObject.registerClass(
+class PolariAccount extends Tp.Account {
+    static [GObject.properties] = {
         predefined: GObject.ParamSpec.boolean(
             'predefined', 'predefined', 'predefined',
             GObject.ParamFlags.READABLE,
@@ -244,8 +245,8 @@ const PolariAccount = GObject.registerClass({
             'settings', 'settings', 'settings',
             GObject.ParamFlags.READABLE,
             Gio.Settings.$gtype),
-    },
-}, class PolariAccount extends Tp.Account {
+    };
+
     _visible = true;
     _reachable = undefined;
     _networksManager = NetworksManager.getDefault();
