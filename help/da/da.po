@@ -6,15 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2021-04-09 07:41+0000\n"
-"PO-Revision-Date: 2021-04-13 00:00+0000\n"
-"Last-Translator: scootergrisen\n"
+"POT-Creation-Date: 2021-11-14 14:09+0000\n"
+"PO-Revision-Date: 2022-02-22 19:33+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -268,10 +269,10 @@ msgstr ""
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
-"you with the Nickserv service."
+"you with the NickServ service."
 msgstr ""
-"<app>Polari</app> husker dit brugernavn og adgangskode, og næste gang du "
-"opretter forbindelse til IRC-netværket vil <gui>Polari</gui> automatisk "
+"<app>Polari</app> husker dit brugernavn og adgangskode, og næste gang, du "
+"opretter forbindelse til IRC-netværket, vil <gui>Polari</gui> automatisk "
 "registrere dig med Nickserv-tjenesten."
 
 #. (itstool) path: note/p
@@ -314,10 +315,6 @@ msgstr "Klik på navnet i kanalen på den person, du vil starte en chat med."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
-#| msgid ""
-#| "Information about the user, including their name and the last time they "
-#| "were active in the channel, will appear. Click <gui>Message</gui> to "
-#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
 "active in the channel, will appear. Click <gui>Start Conversation</gui> to "
@@ -353,7 +350,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-#| msgid "Press <gui>Message</gui> to start a private conversation."
 msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr "Tryk på <gui>Begynd samtale</gui> for at starte en privat samtale."
 
