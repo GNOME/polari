@@ -92,6 +92,9 @@
     </child>
   </template>
   <object class="GtkPopover" id="connectionPopover">
+    <style>
+      <class name="menu"/>
+    </style>
     <property name="child">
       <object class="GtkBox">
         <property name="orientation">vertical</property>
