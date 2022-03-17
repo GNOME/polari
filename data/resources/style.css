@@ -139,10 +139,6 @@ treeview.polari-server-room-list {
 .titlebar > separator:dir(rtl) { margin-right: -1px; }
 .titlebar > headerbar:first-child:dir(rtl) { margin-left: 1px; }
 
-.polari-user-list-button {
-    padding: 0px 4px;
-}
-
 .polari-setup-page {
     padding: 0 0 48px 0;
 }

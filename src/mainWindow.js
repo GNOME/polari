@@ -75,20 +75,6 @@ class FixedSizeFrame extends Gtk.Widget {
     }
 });
 
-export const HeaderBarButtonLayout = GObject.registerClass(
-class ButtonBinLayout extends Gtk.BinLayout {
-    vfunc_measure(widget, orientation, forSize) {
-        const [min, nat] = super.vfunc_measure(widget, orientation, forSize);
-        if (orientation === Gtk.Orientation.VERTICAL)
-            return [min, nat, -1, -1];
-
-        let [, height] = widget.measure(Gtk.Orientation.VERTICAL, -1);
-        const padding = widget.get_style_context().get_padding();
-        height -= padding.left + padding.right;
-        return [min, Math.max(nat, height), -1, -1];
-    }
-});
-
 export default GObject.registerClass(
 class MainWindow extends Gtk.ApplicationWindow {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/main-window.ui';
@@ -159,9 +145,6 @@ class MainWindow extends Gtk.ApplicationWindow {
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));
-
-        // Make sure user-list button is at least as wide as icon buttons
-        this._showUserListButton.layout_manager = new HeaderBarButtonLayout();
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsChangedId = this._accountsMonitor.connect(
@@ -392,7 +375,7 @@ class MainWindow extends Gtk.ApplicationWindow {
             '%d users', numMembers), numMembers);
         this._showUserListButton.update_property(
             [Gtk.AccessibleProperty.LABEL], [accessibleName]);
-        this._showUserListButton.label = `${numMembers}`;
+        this._showUserListButton.child.label = `${numMembers}`;
     }
 
     _updateTitlebar() {

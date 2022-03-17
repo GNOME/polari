@@ -157,10 +157,11 @@
                 <property name="focus-on-click">False</property>
                 <property name="action-name">app.user-list</property>
                 <property name="tooltip-text" translatable="yes">Show connected users</property>
-                <style>
-                  <class name="polari-user-list-button"/>
-                  <class name="text-button"/>
-                </style>
+                <property name="child">
+                  <object class="AdwButtonContent">
+                    <property name="icon-name">people-symbolic</property>
+                  </object>
+                </property>
               </object>
             </child>
           </object>
