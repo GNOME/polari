@@ -1,3 +1,4 @@
+import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -217,43 +218,16 @@ class ChatPlaceholder extends Gtk.Overlay {
     constructor(sizeGroup) {
         super();
 
-        let image = new Gtk.Image({
+        const statusPage = new Adw.StatusPage({
             icon_name: 'org.gnome.Polari-symbolic',
-            pixel_size: 96, halign: Gtk.Align.END,
-            margin_end: 14,
-        });
-
-        let title = new Gtk.Label({
-            use_markup: true,
-            halign: Gtk.Align.START,
-            margin_start: 14,
-        });
-        title.label = `<span letter_spacing="4500">${_('Polari')}<${'/'}span>`;
-        title.add_css_class('polari-background-title');
-
-        let description = new Gtk.Label({
-            label: _('Join a room using the + button.'),
-            halign: Gtk.Align.CENTER, wrap: true,
-            margin_top: 24, use_markup: true,
-        });
-        description.add_css_class('polari-background-description');
-
-        let inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
-        sizeGroup.add_widget(inputPlaceholder);
-
-        let grid = new Gtk.Grid({
-            column_homogeneous: true,
-            can_focus: false,
-            column_spacing: 18,
-            hexpand: true,
+            title: _('Polari'),
+            description: _('Join a room using the + button.'),
             vexpand: true,
-            valign: Gtk.Align.CENTER,
         });
-        grid.add_css_class('polari-background');
-        grid.attach(image, 0, 0, 1, 1);
-        grid.attach(title, 1, 0, 1, 1);
-        grid.attach(description, 0, 1, 2, 1);
-        this.set_child(grid);
+        this.set_child(statusPage);
+
+        const inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
+        sizeGroup.add_widget(inputPlaceholder);
         this.add_overlay(inputPlaceholder);
     }
 });
