@@ -171,10 +171,9 @@ class MessageInfoBar extends Gtk.InfoBar {
         this.add_child(box);
 
         this._titleLabel = new Gtk.Label({
+            css_classes: ['heading'],
             halign: Gtk.Align.START,
             valign: Gtk.Align.CENTER,
-            label: `<b>${this._title}</b>`,
-            use_markup: true,
             wrap: true,
         });
         box.append(this._titleLabel);
@@ -182,41 +181,17 @@ class MessageInfoBar extends Gtk.InfoBar {
         this._subtitleLabel = new Gtk.Label({
             halign: Gtk.Align.START,
             valign: Gtk.Align.CENTER,
-            label: this._subtitle,
             ellipsize: Pango.EllipsizeMode.END,
         });
         box.append(this._subtitleLabel);
 
+        this.bind_property('title',
+            this._titleLabel, 'label',
+            GObject.BindingFlags.SYNC_CREATE);
+        this.bind_property('subtitle',
+            this._subtitleLabel, 'label',
+            GObject.BindingFlags.SYNC_CREATE);
+
         this.connect('response', () => (this.revealed = false));
-    }
-
-    get title() {
-        return this._title;
-    }
-
-    set title(title) {
-        if (this._title === title)
-            return;
-
-        this._title = title;
-        this.notify('title');
-
-        if (this._titleLabel)
-            this._titleLabel.label = `<b>${title}</b>`;
-    }
-
-    get subtitle() {
-        return this._subtitle;
-    }
-
-    set subtitle(subtitle) {
-        if (this._subtitle === subtitle)
-            return;
-
-        this._subtitle = subtitle;
-        this.notify('subtitle');
-
-        if (this._subtitleLabel)
-            this._subtitleLabel.label = subtitle;
     }
 });
