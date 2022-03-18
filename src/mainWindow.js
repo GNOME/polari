@@ -79,7 +79,9 @@ export default GObject.registerClass(
 class MainWindow extends Adw.ApplicationWindow {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/main-window.ui';
     static [Gtk.internalChildren] = [
+        'backButton',
         'joinButton',
+        'mainLeaflet',
         'showUserListButton',
         'userListPopover',
         'roomListRevealer',
@@ -138,6 +140,10 @@ class MainWindow extends Adw.ApplicationWindow {
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));
+        this._roomStack.connect('notify::visible-child',
+            () => this._mainLeaflet.navigate(Adw.NavigationDirection.FORWARD));
+        this._backButton.connect('clicked',
+            () => this._mainLeaflet.navigate(Adw.NavigationDirection.BACKWARD));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsChangedId = this._accountsMonitor.connect(

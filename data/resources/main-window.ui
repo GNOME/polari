@@ -39,14 +39,16 @@
     <child>
       <object class="AdwToastOverlay" id="overlay">
         <child>
-          <object class="GtkBox">
+          <object class="AdwLeaflet" id="mainLeaflet">
             <child>
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="AdwHeaderBar" id="titlebarLeft">
                     <property name="hexpand">False</property>
-                    <property name="show-end-title-buttons">False</property>
+                    <binding name="show-end-title-buttons">
+                      <lookup name="folded">mainLeaflet</lookup>
+                    </binding>
                     <property name="title-widget">
                       <object class="GtkLabel"/>
                     </property>
@@ -107,7 +109,12 @@
               </object>
             </child>
             <child>
-              <object class="GtkSeparator"/>
+              <object class="AdwLeafletPage">
+                <property name="navigatable">False</property>
+                <property name="child">
+                  <object class="GtkSeparator"/>
+                </property>
+              </object>
             </child>
             <child>
               <object class="GtkBox">
@@ -115,7 +122,9 @@
                 <property name="hexpand">True</property>
                 <child>
                   <object class="AdwHeaderBar" id="titlebarRight">
-                    <property name="show-start-title-buttons">False</property>
+                    <binding name="show-start-title-buttons">
+                      <lookup name="folded">mainLeaflet</lookup>
+                    </binding>
                     <!-- Use a custom title widget to enable markup for subtitles
                          (for URLs in channel topics); other than that, we want
                          the default GtkHeaderBar behavior, e.g. the subtitle may
@@ -190,6 +199,13 @@
                         </child>
                       </object>
                     </property>
+                    <child type="start">
+                      <object class="GtkButton" id="backButton">
+                        <property name="icon-name">go-previous-symbolic</property>
+                        <property name="visible" bind-source="mainLeaflet"
+                                  bind-property="folded" bind-flags="sync-create"/>
+                      </object>
+                    </child>
                     <child type="end">
                       <object class="GtkToggleButton" id="showUserListButton">
                         <property name="focus-on-click">False</property>
