@@ -494,11 +494,10 @@ class RoomListHeader extends Gtk.Widget {
         if (this._spinner.spinning)
             this._spinnerActivationTime = GLib.get_monotonic_time();
 
-        this._popoverTitle.use_markup = isError;
-        this._popoverStatus.use_markup = !isError;
-
         if (!isError) {
             this._popoverStatus.add_css_class('dim-label');
+            this._popoverStatus.add_css_class('caption');
+            this._popoverTitle.remove_css_class('heading');
 
             let params = this._account.dup_parameters_vardict().deep_unpack();
             let server = params['server'].deep_unpack();
@@ -508,11 +507,13 @@ class RoomListHeader extends Gtk.Widget {
                server address, e.g. "GNOME (irc.gnome.org)" */
             let fullTitle = vprintf(_('%s (%s)'), accountName, server);
             this._popoverTitle.label = accountName === server ? accountName : fullTitle;
-            this._popoverStatus.label = `<sup>${this._getStatusLabel()}<${'/'}sup>`;
+            this._popoverStatus.label = this._getStatusLabel();
         } else {
             this._popoverStatus.remove_css_class('dim-label');
+            this._popoverStatus.remove_css_class('caption');
+            this._popoverTitle.add_css_class('heading');
 
-            this._popoverTitle.label = `<b>${_('Connection Problem')}<${'/'}b>`;
+            this._popoverTitle.label = _('Connection Problem');
             this._popoverStatus.label = this._getErrorLabel();
         }
     }
