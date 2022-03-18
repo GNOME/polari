@@ -151,16 +151,13 @@ class MessageInfoBar extends Gtk.InfoBar {
     static [GObject.properties] = {
         'title': GObject.ParamSpec.string(
             'title', 'title', 'title',
-            GObject.ParamFlags.READWRITE,
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             ''),
         'subtitle': GObject.ParamSpec.string(
             'subtitle', 'subtitle', 'subtitle',
-            GObject.ParamFlags.READWRITE,
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             ''),
     };
-
-    _title = '';
-    _subtitle = '';
 
     constructor(params) {
         let defaultParams = {

@@ -51,16 +51,13 @@ class TextView extends Gtk.TextView {
     static [GObject.properties] = {
         'indent-width-chars': GObject.ParamSpec.uint(
             'indent-width-chars', 'indent-width-chars', 'indent-width-chars',
-            GObject.ParamFlags.READWRITE,
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXUINT32, 0),
         'indext-spacing': GObject.ParamSpec.uint(
             'indent-spacing', 'indent-spacing', 'indent-spacing',
-            GObject.ParamFlags.READWRITE,
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXUINT32, 0),
     };
-
-    _indentWidthChars = 0;
-    _indentSpacing = 0;
 
     constructor(params) {
         super(params);
@@ -221,20 +218,6 @@ class ButtonTag extends Gtk.TextTag {
         'clicked': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
         'popup-menu': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
     };
-
-    _hover = false;
-
-    get hover() {
-        return this._hover;
-    }
-
-    set hover(hover) {
-        if (this._hover === hover)
-            return;
-
-        this._hover = hover;
-        this.notify('hover');
-    }
 
     clicked(...coords) {
         this.emit('clicked', ...coords);

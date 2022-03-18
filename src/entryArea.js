@@ -6,7 +6,6 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import { MAX_NICK_CHARS } from './chatView.js';
 import { DropTargetIface, gtypeFromFormats } from './pasteManager.js';
 import IrcParser from './ircParser.js';
 import TabCompletion from './tabCompletion.js';
@@ -113,8 +112,6 @@ class NickPopover extends Gtk.Popover {
         'nick-changed': {},
     };
 
-    _nick = '';
-
     constructor() {
         super();
 
@@ -173,7 +170,6 @@ class EntryArea extends Gtk.Stack {
         return this.__nickPopover;
     }
 
-    _maxNickChars = MAX_NICK_CHARS;
     _nickChangedId = 0;
     _popoverClosedId = 0;
 

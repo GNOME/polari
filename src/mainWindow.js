@@ -19,16 +19,13 @@ class FixedSizeFrame extends Gtk.Widget {
     static [GObject.properties] = {
         height: GObject.ParamSpec.int(
             'height', 'height', 'height',
-            GObject.ParamFlags.READWRITE,
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             -1, GLib.MAXINT32, -1),
         width: GObject.ParamSpec.int(
             'width', 'width', 'width',
-            GObject.ParamFlags.READWRITE,
+            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             -1, GLib.MAXINT32, -1),
     };
-
-    _height = -1;
-    _width = -1;
 
     constructor(params) {
         super({

@@ -87,8 +87,6 @@ class ConnectionsList extends Gtk.ScrolledWindow {
         'account-selected': {},
     };
 
-    _favoritesOnly = false;
-
     constructor(params) {
         super(params);
 
@@ -144,20 +142,6 @@ class ConnectionsList extends Gtk.ScrolledWindow {
         });
     }
 
-    // eslint-disable-next-line camelcase
-    get favorites_only() {
-        return this._favoritesOnly;
-    }
-
-    // eslint-disable-next-line camelcase
-    set favorites_only(favsOnly) {
-        if (this._favoritesOnly === favsOnly)
-            return;
-
-        this._favoritesOnly = favsOnly;
-        this.notify('favorites-only');
-    }
-
     setFilter(filter) {
         if (!Utils.updateTerms(this._filterTerms, filter))
             return;
@@ -199,7 +183,7 @@ class ConnectionsList extends Gtk.ScrolledWindow {
         let usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);
 
         this._networksManager.networks.forEach(network => {
-            if (this._favoritesOnly &&
+            if (this.favoritesOnly &&
                 !this._networksManager.getNetworkIsFavorite(network.id))
                 return;
 
