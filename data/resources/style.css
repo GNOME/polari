@@ -144,11 +144,7 @@ treeview.polari-server-room-list {
 }
 
 .polari-setup-page {
-    padding: 48px 156px;
-}
-
-.polari-setup-title {
-    font-size: 175%;
+    padding: 0 0 48px 0;
 }
 
 .polari-error-information {
