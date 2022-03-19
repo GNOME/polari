@@ -247,14 +247,14 @@ class ConnectionsList extends Gtk.ScrolledWindow {
 });
 
 export const ConnectionDetails = GObject.registerClass(
-class ConnectionDetails extends Gtk.Grid {
+class ConnectionDetails extends Gtk.Box {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-details.ui';
     static [Gtk.internalChildren] = [
         'nameEntry',
         'serverEntry',
         'nickEntry',
         'realnameEntry',
-        'sslCheckbox',
+        'sslSwitch',
     ];
 
     static [GObject.properties] = {
@@ -294,7 +294,7 @@ class ConnectionDetails extends Gtk.Grid {
             this._onCanConfirmChanged.bind(this));
         this._realnameEntry.connect('changed',
             this._onCanConfirmChanged.bind(this));
-        this._sslCheckbox.connect('toggled',
+        this._sslSwitch.connect('notify::active',
             this._onCanConfirmChanged.bind(this));
 
         let realnameStore = new Gtk.ListStore();
@@ -339,7 +339,7 @@ class ConnectionDetails extends Gtk.Grid {
 
         if (this._realnameEntry.text)
             params.fullname = this._realnameEntry.text.trim();
-        if (this._sslCheckbox.active)
+        if (this._sslSwitch.active)
             params.use_ssl = true;
         if (port)
             params.port = port;
@@ -360,7 +360,7 @@ class ConnectionDetails extends Gtk.Grid {
         this._serverEntry.text = this._savedServer;
         this._nickEntry.text = this._savedNick;
         this._realnameEntry.text = this._savedRealname;
-        this._sslCheckbox.active = this._savedSSL;
+        this._sslSwitch.active = this._savedSSL;
 
         if (this._serverEntry.visible)
             this._serverEntry.grab_focus();
@@ -392,7 +392,7 @@ class ConnectionDetails extends Gtk.Grid {
         this._nickEntry.text = this._savedNick;
         this._realnameEntry.text = this._savedRealname;
         this._nameEntry.text = this._savedName;
-        this._sslCheckbox.active = this._savedSSL;
+        this._sslSwitch.active = this._savedSSL;
     }
 
     // eslint-disable-next-line camelcase
@@ -401,7 +401,7 @@ class ConnectionDetails extends Gtk.Grid {
                             this._serverEntry.text !== this._savedServer ||
                             this._nickEntry.text !== this._savedNick ||
                             this._realnameEntry.text !== this._savedRealname ||
-                            this._sslCheckbox.active !== this._savedSSL;
+                            this._sslSwitch.active !== this._savedSSL;
 
         return this._serverEntry.get_text_length() > 0 &&
                this._nickEntry.get_text_length() > 0 &&
