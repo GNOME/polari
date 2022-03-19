@@ -61,15 +61,10 @@
   </requires>
   <translation type="gettext">polari</translation>
   <releases>
-    <release version="41.0" date="2021-09-20">
+    <release version="42.0" date="2022-03-19">
       <description>
         <p>
-          A shiny new Polari release:
-          <ul>
-            <li>User interface now uses GTK4</li>
-            <li>Improved chat log appearance</li>
-            <li>Fixed pasting of text files</li>
-          </ul>
+          Slight modernize the appearance and support the new dark mode.
         </p>
       </description>
     </release>

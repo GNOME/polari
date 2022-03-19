@@ -1,3 +1,18 @@
+42.0 — “Little Last Season Prada Shoes”
+=======================================
+* Move /command feedback into a popover [Florian; !247]
+* Port UI to libadwaita [Florian; !250]
+* Misc. bug fixes and cleanups [Florian, Jan; !241, !242, !243, !245,
+  !244, !246, !248, !249]
+
+Contributors:
+  Sergej A, Jan Beich, Alan Mortensen, Florian Müllner, Sabri Ünal
+
+Translators:
+  Марко Костић [sr], Jordi Mas [ca], Yaron Shahrabani [he], Bruce Cowan [en_GB],
+  Alexey Rubtsov [ru], Dušan Kazik [sk], Rūdolfs Mazurs [lv],
+  Quentin PAGÈS [oc], Kjartan Maraas [nb]
+
 41.0 — “He used to be a Euphemism”
 ==================================
 * Update screenshots and metainfo [Florian; !236]
