@@ -125,11 +125,11 @@ class UserDetails extends Gtk.Box {
     static [GObject.properties] = {
         'expanded': GObject.ParamSpec.boolean(
             'expanded', 'expanded', 'expanded',
-            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            GObject.ParamFlags.READWRITE,
             false),
         'notifications-enabled': GObject.ParamSpec.boolean(
             'notifications-enabled', 'notifications-enabled', 'notifications-enabled',
-            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+            GObject.ParamFlags.READWRITE,
             false),
     };
 
@@ -149,24 +149,19 @@ class UserDetails extends Gtk.Box {
 
         this._updateButtonVisibility();
         this._detailsGrid.hide();
-        this._notificationLabel.opacity = this.notifications_enabled ? 1. : 0.;
-    }
 
-    // eslint-disable-next-line camelcase
-    get notifications_enabled() {
-        return this._notificationsEnabled;
-    }
+        this.bind_property_full('notifications-enabled',
+            this._notificationLabel, 'opacity',
+            GObject.BindingFlags.SYNC_CREATE,
+            (p, source) => [true, source ? 1. : 0.],
+            null);
 
-    // eslint-disable-next-line camelcase
-    set notifications_enabled(value) {
-        if (this._notificationsEnabled === value)
-            return;
-
-        this._notificationsEnabled = value;
-
-        this.notify('notifications-enabled');
-
-        this._notificationLabel.opacity = value ? 1. : 0.;
+        this.connect('notify::expanded', () => {
+            if (this.expanded)
+                this._expand();
+            else
+                this._unexpand();
+        });
     }
 
     set user(user) {
@@ -201,24 +196,6 @@ class UserDetails extends Gtk.Box {
 
 
         this._updateButtonVisibility();
-    }
-
-    get expanded() {
-        return this._expanded;
-    }
-
-    set expanded(v) {
-        if (v === this._expanded)
-            return;
-
-        this._expanded = v;
-
-        if (this._expanded)
-            this._expand();
-        else
-            this._unexpand();
-
-        this.notify('expanded');
     }
 
     _expand() {
