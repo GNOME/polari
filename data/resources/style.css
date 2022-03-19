@@ -82,17 +82,8 @@
     color: mix(@window_fg_color, @view_bg_color, 0.3);
 }
 
-.polari-room-list row.inactive:selected *,
-.polari-room-list row.inactive:selected:backdrop * {
-    color: mix(@accent_fg_color, @view_bg_color, 0.3);
-}
-
 .polari-room-list row:backdrop * {
     color: @window_fg_color;
-}
-
-.polari-room-list row:backdrop:selected * {
-    color: @accent_fg_color;
 }
 
 .polari-room-list row .pending-messages-count {
