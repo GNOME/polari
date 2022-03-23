@@ -127,7 +127,6 @@ class MainWindow extends Adw.ApplicationWindow {
     _channelChangedId = 0;
 
     constructor(params) {
-        params.show_menubar = false;
         super(params);
 
         this._userListPopover.set_parent(this._showUserListButton);
