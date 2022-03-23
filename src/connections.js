@@ -1,3 +1,12 @@
+// SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+// SPDX-FileCopyrightText: 2015 Bastian Ilsø <bastianilso@gnome.org>
+// SPDX-FileCopyrightText: 2015 Kunaal Jain <kunaalus@gmail.com>
+// SPDX-FileCopyrightText: 2016 Isabella Ribeiro <belinhacbr@gmail.com>
+// SPDX-FileCopyrightText: 2016 raresv <rares.visalom@gmail.com>
+// SPDX-FileCopyrightText: 2016 Augusto Cesar <augusto.cms7@gmail.com>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';

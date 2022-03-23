@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2016 Florian Müllner <fmuellner@gnome.org>
+// SPDX-FileCopyrightText: 2016 Isabella Ribeiro <belinhacbr@gmail.com>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import Gdk from 'gi://Gdk';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';

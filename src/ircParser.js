@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+// SPDX-FileCopyrightText: 2016 Kunaal Jain <kunaalus@gmail.com>
+// SPDX-FileCopyrightText: 2020 Roberto Sánchez Fernández <robertosanchez_9@hotmail.com>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';

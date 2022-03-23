@@ -1,24 +1,9 @@
-/*
- * Copyright (c) 2011 Red Hat, Inc.
- *
- * Polari is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * Polari is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
- * for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with Polari; if not, write to the Free Software Foundation,
- * Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * Authors: Cosimo Cecchi <cosimoc@redhat.com>
- *          Florian Müllner <fmuellner@gnome.org>
- *
- */
+// SPDX-FileCopyrightText: 2013 Cosimo Cecchi <cosimoc@redhat.com>
+// SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+// SPDX-FileCopyrightText: 2015 Jonas Danielsson <jonas@threetimestwo.org>
+// SPDX-FileCopyrightText: 2016 Kunaal Jain <kunaalus@gmail.com>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 import Adw from 'gi://Adw';
 import Gdk from 'gi://Gdk';

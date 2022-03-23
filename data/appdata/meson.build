@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2016 Florian Müllner <fmuellner@gnome.org>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 appdata_name = app_id + '.appdata.xml'
 appdata = i18n.merge_file(
   input: appdata_name + '.in',

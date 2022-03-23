@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2016 Florian Müllner <fmuellner@gnome.org>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 data_resources = gnome.compile_resources(
   'data-resources',
   '../data/@0@.data.gresource.xml'.format(app_id),

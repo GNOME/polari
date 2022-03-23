@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: 2016 Florian Müllner <fmuellner@gnome.org>
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include <girepository.h>
 #include <gjs/gjs.h>
 

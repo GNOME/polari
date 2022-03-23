@@ -1,3 +1,9 @@
+// SPDX-FileCopyrightText: 2019 daronion <stefanosdimos.98@gmail.com>
+// SPDX-FileCopyrightText: 2019 Florian Müllner <fmuellner@gnome.org>
+// SPDX-FileCopyrightText: 2020 Philip Withnall <withnall@endlessm.com>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';

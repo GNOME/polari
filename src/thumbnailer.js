@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2019 daronion <stefanosdimos.98@gmail.com>
+// SPDX-FileCopyrightText: 2019 Florian Müllner <fmuellner@gnome.org>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import Cairo from 'cairo';
 import Gdk from 'gi://Gdk?version=3.0';
 import Gio from 'gi://Gio';

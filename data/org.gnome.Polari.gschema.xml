@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-License-Identifier: GPL-2.0-or-later
+
+SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.or>
+-->
+
 <schemalist gettext-domain="polari">
   <schema path="/org/gnome/polari/" id="org.gnome.Polari">
     <key type="aa{sv}" name="saved-channel-list">

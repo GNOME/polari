@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2016 Danny Mølgaard <moelgaard.dmp@gmail.com>
+SPDX-FileCopyrightText: 2017 Florian Müllner <fmuellner@gnome.org>
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
 <interface>
   <template class="Gjs_InitialSetupWindow">
     <property name="icon-name">org.gnome.Polari</property>

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
 import Polari from 'gi://Polari';

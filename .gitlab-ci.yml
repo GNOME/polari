@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2017 Florian Müllner
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 include:
   - remote: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
   - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/fedora.yml'

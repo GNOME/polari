@@ -1,3 +1,14 @@
+/*
+ * SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+ * SPDX-FileCopyrightText: 2013 Jakub Steiner <jimmac@gmail.com>
+ * SPDX-FileCopyrightText: 2015 Bastian Ilsø <bastianilso@gnome.org>
+ * SPDX-FileCopyrightText: 2016 Lapo Calamandrei <calamandrei@gmail.com>
+ * SPDX-FileCopyrightText: 2016 Danny Mølgaard <moelgaard.dmp@gmail.com>
+ * SPDX-FileCopyrightText: 2019 daronion <stefanosdimos.98@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
 @define-color polari_dark_bg_color shade(@window_bg_color, 0.95);
 
 @define-color active_nick_color @accent_bg_color;

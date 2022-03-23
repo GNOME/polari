@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2016 Danny Mølgaard <moelgaard.dmp@gmail.com>
+// SPDX-FileCopyrightText: 2017 Florian Müllner <fmuellner@gnome.org>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';

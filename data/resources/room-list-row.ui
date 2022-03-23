@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2016 Florian Müllner <fmuellner@gnome.org>
+SPDX-FileCopyrightText: 2016 Bastian Ilsø <bastianilso@gnome.org>
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
 <interface>
   <template class="Gjs_RoomRow" parent="GtkListBoxRow">
     <property name="margin-bottom">4</property>

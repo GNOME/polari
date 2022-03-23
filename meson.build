@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2016 Florian Müllner <fmuellner@gnome.org>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 project('polari', 'c',
   version: '43.0',
   meson_version: '>= 0.59.0',

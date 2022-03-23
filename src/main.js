@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+//
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 import GLib from 'gi://GLib';
 
 import * as Config from './config.js';

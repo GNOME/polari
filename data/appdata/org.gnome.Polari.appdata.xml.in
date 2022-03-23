@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2014 Florian Müllner <fmuellner@gnome.org> -->
+
+<!--
+SPDX-FileCopyrightText: 2014 Florian Müllner <fmuellner@gnome.org>
+
+SPDX-License-Identifier: CC0-1.0
+-->
+
 <component type="desktop">
   <id>org.gnome.Polari.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>

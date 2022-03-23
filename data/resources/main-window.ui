@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2013 Florian Müllner <fmuellner@gnome.org>
+SPDX-FileCopyrightText: 2014 Yosef Or Boczko <yoseforb@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
 <interface>
   <object class="Gjs_UserListPopover" id="userListPopover">
     <property name="position">bottom</property>
