@@ -10,7 +10,6 @@ data/resources/help-overlay.ui
 data/resources/initial-setup-window.ui
 data/resources/join-room-dialog.ui
 data/resources/main-window.ui
-data/resources/menus.ui
 data/resources/nick-popover.ui
 data/resources/room-list-header.ui
 data/resources/server-room-list.ui
