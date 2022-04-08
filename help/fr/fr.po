@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: polari gnome-3-22\n"
-"POT-Creation-Date: 2021-03-22 13:18+0000\n"
-"PO-Revision-Date: 2021-03-23 16:14+0100\n"
+"POT-Creation-Date: 2021-09-12 19:34+0000\n"
+"PO-Revision-Date: 2021-10-07 20:21+0200\n"
 "Last-Translator: Charles Monzat <charles.monzat@free.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -275,14 +275,18 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: C/irc-nick-password.page:52
+#| msgid ""
+#| "<app>Polari</app> will remember your username and password and the next "
+#| "time you connect to the IRC network <gui>Polari</gui> will automatically "
+#| "register you with the Nickserv service."
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
-"you with the Nickserv service."
+"you with the NickServ service."
 msgstr ""
 "<app>Polari</app> mémorise votre pseudonyme et votre mot de passe, et à la "
 "prochaine connexion au réseau IRC, <gui>Polari</gui> vous enregistre "
-"automatiquement auprès du service Nickserv."
+"automatiquement auprès du service NickServ."
 
 #. (itstool) path: note/p
 #: C/irc-nick-password.page:58
@@ -327,10 +331,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:36
-#| msgid ""
-#| "Information about the user, including their name and the last time they "
-#| "were active in the channel, will appear. Click <gui>Message</gui> to "
-#| "start a private conversation."
 msgid ""
 "Information about the user, including their name and the last time they were "
 "active in the channel, will appear. Click <gui>Start Conversation</gui> to "
@@ -368,7 +368,6 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-#| msgid "Press <gui>Message</gui> to start a private conversation."
 msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
 "Appuyez sur <gui>Commencer la conversation</gui> pour commencer une "
