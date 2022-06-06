@@ -250,10 +250,10 @@ export const ConnectionDetails = GObject.registerClass(
 class ConnectionDetails extends Gtk.Box {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-details.ui';
     static [Gtk.internalChildren] = [
-        'nameEntry',
-        'serverEntry',
-        'nickEntry',
-        'realnameEntry',
+        'nameRow',
+        'serverRow',
+        'nickRow',
+        'realnameRow',
         'sslSwitch',
     ];
 
@@ -286,20 +286,19 @@ class ConnectionDetails extends Gtk.Box {
             this._networksManager.disconnect(id);
         });
 
-        this._nameEntry.connect('changed',
-            this._onCanConfirmChanged.bind(this));
-        this._serverEntry.connect('changed',
-            this._onCanConfirmChanged.bind(this));
-        this._nickEntry.connect('changed',
-            this._onCanConfirmChanged.bind(this));
-        this._realnameEntry.connect('changed',
-            this._onCanConfirmChanged.bind(this));
+        const rows = [
+            this._nameRow, this._serverRow, this._nickRow, this._realnameRow,
+        ];
+        for (const row of rows) {
+            row.connect('changed', this._onCanConfirmChanged.bind(this));
+            row.get_delegate().activates_default = true;
+        }
         this._sslSwitch.connect('notify::active',
             this._onCanConfirmChanged.bind(this));
 
-        const buffer = this._realnameEntry.get_buffer();
+        const buffer = this._realnameRow.get_delegate().get_buffer();
         const insertedTextId = buffer.connect('inserted-text', () => {
-            const text = this._realnameEntry.get_text();
+            const text = this._realnameRow.get_text();
             const realname = GLib.get_real_name();
             if (!realname.startsWith(text))
                 return;
@@ -308,9 +307,9 @@ class ConnectionDetails extends Gtk.Box {
                 buffer.block_signal_handler(insertedTextId);
 
                 const startPos = GLib.utf8_strlen(text, -1);
-                this._realnameEntry.insert_text(
+                this._realnameRow.insert_text(
                     realname.substring(text.length), -1, startPos);
-                this._realnameEntry.select_region(startPos, -1);
+                this._realnameRow.select_region(startPos, -1);
 
                 buffer.unblock_signal_handler(insertedTextId);
                 return GLib.SOURCE_REMOVE;
@@ -322,19 +321,19 @@ class ConnectionDetails extends Gtk.Box {
 
     setErrorHint(hint) {
         if (hint === ErrorHint.SERVER)
-            this._serverEntry.add_css_class('error');
+            this._serverRow.add_css_class('error');
         else
-            this._serverEntry.remove_css_class('error');
+            this._serverRow.remove_css_class('error');
 
         if (hint === ErrorHint.NICK)
-            this._nickEntry.add_css_class('error');
+            this._nickRow.add_css_class('error');
         else
-            this._nickEntry.remove_css_class('error');
+            this._nickRow.remove_css_class('error');
     }
 
     _getParams() {
-        let nameText = this._nameEntry.text.trim();
-        let serverText = this._serverEntry.text.trim();
+        let nameText = this._nameRow.text.trim();
+        let serverText = this._serverRow.text.trim();
 
         let serverRegEx = /(.*?)(?::(\d{1,5}))?$/;
         let [, server, port] = serverText.match(serverRegEx);
@@ -342,11 +341,11 @@ class ConnectionDetails extends Gtk.Box {
         let params = {
             name: nameText.length ? nameText : server,
             server,
-            account: this._nickEntry.text.trim(),
+            account: this._nickRow.text.trim(),
         };
 
-        if (this._realnameEntry.text)
-            params.fullname = this._realnameEntry.text.trim();
+        if (this._realnameRow.text)
+            params.fullname = this._realnameRow.text.trim();
         if (this._sslSwitch.active)
             params.use_ssl = true;
         if (port)
@@ -364,16 +363,16 @@ class ConnectionDetails extends Gtk.Box {
         this._savedRealname = '';
         this._savedSSL = false;
 
-        this._nameEntry.text = this._savedName;
-        this._serverEntry.text = this._savedServer;
-        this._nickEntry.text = this._savedNick;
-        this._realnameEntry.text = this._savedRealname;
+        this._nameRow.text = this._savedName;
+        this._serverRow.text = this._savedServer;
+        this._nickRow.text = this._savedNick;
+        this._realnameRow.text = this._savedRealname;
         this._sslSwitch.active = this._savedSSL;
 
-        if (this._serverEntry.visible)
-            this._serverEntry.grab_focus();
+        if (this._serverRow.visible)
+            this._serverRow.grab_focus();
         else
-            this._nickEntry.grab_focus();
+            this._nickRow.grab_focus();
     }
 
     _onCanConfirmChanged() {
@@ -396,23 +395,23 @@ class ConnectionDetails extends Gtk.Box {
         if (this._savedServer !== account.display_name)
             this._savedName = account.display_name;
 
-        this._serverEntry.text = this._savedServer;
-        this._nickEntry.text = this._savedNick;
-        this._realnameEntry.text = this._savedRealname;
-        this._nameEntry.text = this._savedName;
+        this._serverRow.text = this._savedServer;
+        this._nickRow.text = this._savedNick;
+        this._realnameRow.text = this._savedRealname;
+        this._nameRow.text = this._savedName;
         this._sslSwitch.active = this._savedSSL;
     }
 
     // eslint-disable-next-line camelcase
     get can_confirm() {
-        let paramsChanged = this._nameEntry.text !== this._savedName ||
-                            this._serverEntry.text !== this._savedServer ||
-                            this._nickEntry.text !== this._savedNick ||
-                            this._realnameEntry.text !== this._savedRealname ||
+        let paramsChanged = this._nameRow.text !== this._savedName ||
+                            this._serverRow.text !== this._savedServer ||
+                            this._nickRow.text !== this._savedNick ||
+                            this._realnameRow.text !== this._savedRealname ||
                             this._sslSwitch.active !== this._savedSSL;
 
-        return this._serverEntry.get_text_length() > 0 &&
-               this._nickEntry.get_text_length() > 0 &&
+        return this._serverRow.text.length > 0 &&
+               this._nickRow.text.length > 0 &&
                paramsChanged;
     }
 
