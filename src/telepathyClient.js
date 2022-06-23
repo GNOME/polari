@@ -80,13 +80,18 @@ class SASLAuthHandler {
         let account = this._channel.connection.get_account();
         try {
             const password = await Utils.lookupAccountPassword(account);
-            this._proxy.StartMechanismWithDataRemote(
+            await this._proxy.StartMechanismWithDataAsync(
                 'X-TELEPATHY-PASSWORD', password);
         } catch (e) {
-            this._proxy.AbortSASLRemote(
+            await this._proxy.AbortSASLAsync(
                 SASLAbortReason.USER_ABORT,
-                'Password not available',
-                this._resetPrompt.bind(this));
+                'Password not available');
+
+            let prompt = new GLib.Variant('b', false);
+            let params = new GLib.Variant('a{sv}', { 'password-prompt': prompt });
+            await account.update_parameters_vardict_async(params, []);
+            await account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
+                'available', '', null);
         }
     }
 
@@ -102,7 +107,7 @@ class SASLAuthHandler {
             break;
 
         case SASLStatus.SERVER_SUCCEEDED:
-            this._proxy.AcceptSASLRemote();
+            this._proxy.AcceptSASLAsync();
             break;
 
         case SASLStatus.SUCCEEDED:
@@ -111,15 +116,6 @@ class SASLAuthHandler {
             this._channel.close_async(null);
             break;
         }
-    }
-
-    async _resetPrompt() {
-        let account = this._channel.connection.get_account();
-        let prompt = new GLib.Variant('b', false);
-        let params = new GLib.Variant('a{sv}', { 'password-prompt': prompt });
-        await account.update_parameters_vardict_async(params, []);
-        await account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
-            'available', '', null);
     }
 }
 
