@@ -3,27 +3,29 @@
 # This file is distributed under the same license as the polari package.
 # Christian Kirbach <Christian.Kirbach@gmail.com>, 2016.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2017.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
-"POT-Creation-Date: 2017-03-20 13:22+0000\n"
-"PO-Revision-Date: 2017-05-14 01:25+0200\n"
-"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"POT-Creation-Date: 2022-04-28 15:36+0000\n"
+"PO-Revision-Date: 2022-06-30 21:18+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 3.1\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
 msgstr ""
 "Christian Kirbach <christian.kirbach@gmail.com>, 2016,2017\n"
-"Mario Blättermann <mario.blaettermann@gmail.com>, 2017"
+"Mario Blättermann <mario.blaettermann@gmail.com>, 2017\n"
+"Jürgen Benvenuti <gastornis@posteo.org>, 2022"
 
 #. (itstool) path: info/title
 #: C/index.page:7
@@ -62,8 +64,8 @@ msgid ""
 "<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
 "client which integrates with the GNOME desktop. Learn more about Polari."
 msgstr ""
-"<app>Polari</app> ist ein sauberer, einfacher, minimalistischer Client für "
-"Internet Relay Chat (IRC), der sich in die GNOME Arbeitsumgebung integriert. "
+"<app>Polari</app> ist ein sauberes, einfaches, minimalistisches Programm für "
+"Internet Relay Chat (IRC), das sich in die GNOME Arbeitsumgebung integriert. "
 "Erfahren Sie mehr über <app>Polari</app>."
 
 #. (itstool) path: page/title
@@ -90,7 +92,8 @@ msgstr "2017"
 #: C/introduction.page:25
 msgid "An introduction to <app>Polari</app>, a clean, minimal IRC client."
 msgstr ""
-"Eine Einführung in <app>Polari</app>, einen einfachen, minimalen IRC-Client."
+"Eine Einführung in <app>Polari</app>, ein einfaches, minimalistisches IRC-"
+"Programm."
 
 #. (itstool) path: page/title
 #: C/introduction.page:29
@@ -104,8 +107,8 @@ msgid ""
 "integrates with the GNOME desktop and enables you to chat with people around "
 "the world through large chatrooms or private messaging."
 msgstr ""
-"<app>Polari</app> ist ein einfacher Client für Internet Relay Chat (IRC), "
-"der sich in die GNOME Arbeitsumgebung integriert und Ihnen Unterhaltungen "
+"<app>Polari</app> ist ein einfaches Programm für Internet Relay Chat (IRC), "
+"das sich in die GNOME Arbeitsumgebung integriert und Ihnen Unterhaltungen "
 "mit Leuten in der ganzen Welt in großen Unterhaltungsräumen oder in Form "
 "privater Nachrichten ermöglicht."
 
@@ -165,12 +168,12 @@ msgstr ""
 #. (itstool) path: info/desc
 #: C/irc-join-room.page:10
 msgid "Join an IRC channel."
-msgstr "Beitreten zu einem IRC-Kanal."
+msgstr "Einem IRC-Kanal beitreten."
 
 #. (itstool) path: page/title
 #: C/irc-join-room.page:21
 msgid "Join an IRC chat room"
-msgstr "Beitreten zu einem IRC-Unterhaltungsraum"
+msgstr "Einem IRC-Unterhaltungsraum beitreten"
 
 #. (itstool) path: page/p
 #: C/irc-join-room.page:23
@@ -179,7 +182,7 @@ msgid ""
 "you are connected to. To connect to an IRC network, see <link xref=\"network-"
 "connect\"/>."
 msgstr ""
-"Sie können zu IRC-Unterhaltungsräumen (auch als IRC-Kanäle bekannt) in jedem "
+"Sie können IRC-Unterhaltungsräumen (auch als IRC-Kanäle bekannt) in jedem "
 "IRC-Netzwerk beitreten, mit dem Sie verbunden sind. Wie Sie dies tun können, "
 "erfahren Sie in <link xref=\"network-connect\"/>."
 
@@ -272,7 +275,7 @@ msgid ""
 "Use the username and password you registered with the IRC network with this "
 "command."
 msgstr ""
-"Verwenden Sie dazu den Benutzernamen und das Passwort, das Sie in dem IRC-"
+"Verwenden Sie dazu den Benutzernamen und das Passwort, die Sie in dem IRC-"
 "Netzwerk registriert haben."
 
 #. (itstool) path: page/p
@@ -280,7 +283,7 @@ msgstr ""
 msgid ""
 "<app>Polari</app> will remember your username and password and the next time "
 "you connect to the IRC network <gui>Polari</gui> will automatically register "
-"you with the Nickserv service."
+"you with the NickServ service."
 msgstr ""
 "<app>Polari</app> merkt sich Benutzername und Passwort, so dass Sie beim "
 "nächsten Verbinden mit dem IRC-Netzwerk automatisch über den NickServ-Dienst "
@@ -331,12 +334,12 @@ msgstr ""
 #: C/irc-start-conversation.page:36
 msgid ""
 "Information about the user, including their name and the last time they were "
-"active in the channel, will appear. Click <gui>Message</gui> to start a "
-"private conversation."
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
 msgstr ""
 "Informationen zum Benutzer, wie der Name und der Zeitpunkt der letzten "
-"Aktivität im Kanal, werden angezeigt. Klicken Sie auf <gui>Nachricht</gui>, "
-"um eine private Unterhaltung zu beginnen."
+"Aktivität im Kanal, werden angezeigt. Klicken Sie auf <gui>Unterhaltung "
+"beginnen</gui>, um eine private Unterhaltung zu beginnen."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:43
@@ -360,16 +363,16 @@ msgid ""
 "including their name and the last time they were active in the channel, will "
 "appear."
 msgstr ""
-"Wählen sie den Namen des Benutzers aus, dem Sie eine Nachricht senden "
+"Wählen Sie den Namen des Benutzers aus, dem Sie eine Nachricht senden "
 "wollen. Informationen zum Benutzer, wie der Name und der Zeitpunkt der "
 "letzten Aktivität im Kanal, werden angezeigt."
 
 #. (itstool) path: item/p
 #: C/irc-start-conversation.page:58
-msgid "Press <gui>Message</gui> to start a private conversation."
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
 msgstr ""
-"Klicken Sie auf <gui>Nachricht</gui>, um eine private Unterhaltung zu "
-"beginnen."
+"Klicken Sie auf <gui>Unterhaltung beginnen</gui>, um eine private "
+"Unterhaltung zu beginnen."
 
 #. (itstool) path: page/p
 #: C/irc-start-conversation.page:62
@@ -378,7 +381,7 @@ msgid ""
 "chat room will be shown in the left sidebar of <app>Polari</app> with the "
 "name of the person you are chatting with."
 msgstr ""
-"Eine neue private Unterhaltung wird gestartet und ein Unterhaltungsraum "
+"Eine neue private Unterhaltung wird gestartet und ein Unterhaltungsraum wird "
 "dafür angelegt. Der Unterhaltungsraum wird in der linken Seitenleiste von "
 "<app>Polari</app> mit dem Namen der Person angezeigt, mit der Sie die "
 "Unterhaltung führen."
