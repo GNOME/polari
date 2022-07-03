@@ -601,12 +601,15 @@ class TelepathyClient extends Tp.BaseClient {
                     return;
             }
 
+            this._roomManager.ensureRoomForChannel(channel, false);
+
             channel.connect('message-received',
                 this._onMessageReceived.bind(this));
             channel.connect('pending-message-removed',
                 this._onPendingMessageRemoved.bind(this));
 
-            this._roomManager.ensureRoomForChannel(channel, false);
+            channel.dup_pending_messages().forEach(
+                m => this._onMessageReceived(channel, m));
         });
     }
 
