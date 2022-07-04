@@ -61,6 +61,13 @@
   </requires>
   <translation type="gettext">polari</translation>
   <releases>
+    <release version="42.1" date="2022-07-04">
+      <description>
+        <p>
+          This release fixes showing notifications for initial messages.
+        </p>
+      </description>
+    </release>
     <release version="42.0" date="2022-03-19">
       <description>
         <p>

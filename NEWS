@@ -1,3 +1,14 @@
+42.1 — “I Hear You, Mama”
+=========================
+* Fix showing notification for initial message [Florian; !254]
+* Misc. bug fixes and cleanups [Florian; !252]
+
+Contributors:
+  Jürgen Benvenuti, Piotr Drąg, Nathan Follens, Charles Monzat, Florian Müllner
+
+Translators:
+  Nathan Follens [nl]
+
 42.0 — “Little Last Season Prada Shoes”
 =======================================
 * Move /command feedback into a popover [Florian; !247]
