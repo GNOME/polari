@@ -217,74 +217,72 @@ class Application extends Adw.Application {
     vfunc_startup() {
         super.vfunc_startup();
 
-        let actionEntries = [{
+        const actionEntries = [{
             name: 'show-join-dialog',
             activate: this._onShowJoinDialog.bind(this),
             accels: ['<Primary>n'],
         }, {
             name: 'join-room',
             activate: this._onJoinRoom.bind(this),
-            parameter_type: GLib.VariantType.new('(ssb)'),
+            parameter_type: '(ssb)',
         }, {
             name: 'message-user',
             activate: this._onMessageUser.bind(this),
-            parameter_type: GLib.VariantType.new('(sssb)'),
+            parameter_type: '(sssb)',
         }, {
             name: 'leave-room',
-            parameter_type: GLib.VariantType.new('(ss)'),
+            parameter_type: '(ss)',
         }, {
             name: 'leave-current-room',
             activate: this._onLeaveCurrentRoom.bind(this),
-            create_hook: a => (a.enabled = false),
             accels: ['<Primary>w'],
         }, {
             name: 'reconnect-room',
-            parameter_type: GLib.VariantType.new('s'),
+            parameter_type: 's',
         }, {
             name: 'authenticate-account',
-            parameter_type: GLib.VariantType.new('(os)'),
+            parameter_type: '(os)',
         }, {
             name: 'connect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'disconnect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'reconnect-account',
             activate: this._onConnectAccount.bind(this),
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'mute-nick',
-            parameter_type: GLib.VariantType.new('(ss)'),
+            parameter_type: '(ss)',
         }, {
             name: 'unmute-nick',
-            parameter_type: GLib.VariantType.new('(ss)'),
+            parameter_type: '(ss)',
         }, {
             name: 'user-list',
             activate: this._onToggleAction.bind(this),
-            create_hook: this._userListCreateHook.bind(this),
-            state: GLib.Variant.new('b', false),
+            state: 'false',
             accels: ['F9', '<Primary>u'],
         }, {
             name: 'remove-connection',
             activate: this._onRemoveConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'undo-remove-connection',
             activate: this._onUndoRemoveConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'edit-connection',
             activate: this._onEditConnection.bind(this),
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'save-identify-password',
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'discard-identify-password',
-            parameter_type: GLib.VariantType.new('o'),
+            parameter_type: 'o',
         }, {
             name: 'show-emoji-picker',
             accels: ['<Primary>e'],
@@ -316,7 +314,7 @@ class Application extends Adw.Application {
             accels: ['<Primary>End'],
         }, {
             name: 'nth-room',
-            parameter_type: GLib.VariantType.new('i'),
+            parameter_type: 'i',
         }, {
             name: 'next-pending-room',
             accels: ['<Alt><Shift>Down', '<Primary><Shift>Page_Down'],
@@ -324,30 +322,26 @@ class Application extends Adw.Application {
             name: 'previous-pending-room',
             accels: ['<Alt><Shift>Up', '<Primary><Shift>Page_Up'],
         }];
-        actionEntries.forEach(actionEntry => {
-            let props = {};
-            ['name', 'state', 'parameter_type'].forEach(prop => {
-                if (actionEntry[prop])
-                    props[prop] = actionEntry[prop];
-            });
-            let action = new Gio.SimpleAction(props);
-            if (actionEntry.create_hook)
-                actionEntry.create_hook(action);
-            if (actionEntry.activate)
-                action.connect('activate', actionEntry.activate);
-            if (actionEntry.change_state)
-                action.connect('change-state', actionEntry.change_state);
-            if (actionEntry.accels) {
-                this.set_accels_for_action(
-                    `app.${actionEntry.name}`,
-                    actionEntry.accels);
-            }
-            this.add_action(action);
-        });
+        this.add_action_entries(actionEntries);
 
         this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
         let action = this._settings.create_action('run-in-background');
         this.add_action(action);
+
+        action = this.lookup_action('user-list');
+        action.connect('notify::enabled', () => {
+            if (!action.enabled)
+                action.change_state(GLib.Variant.new('b', false));
+        });
+        action.enabled = false;
+
+        action = this.lookup_action('leave-current-room');
+        action.enabled = false;
+
+        for (const { name, accels } of actionEntries) {
+            if (accels)
+                this.set_accels_for_action(`app.${name}`, accels);
+        }
 
         for (let i = 1; i < 10; i++)
             this.set_accels_for_action(`app.nth-room(${i})`, [`<Alt>${i}`]);
@@ -565,14 +559,6 @@ class Application extends Adw.Application {
         let room = this.active_window.active_room;
         let action = this.lookup_action('user-list');
         action.enabled = room && room.type === Tp.HandleType.ROOM && room.channel;
-    }
-
-    _userListCreateHook(action) {
-        action.connect('notify::enabled', () => {
-            if (!action.enabled)
-                action.change_state(GLib.Variant.new('b', false));
-        });
-        action.enabled = false;
     }
 
     _onShowJoinDialog() {
