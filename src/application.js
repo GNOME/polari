@@ -824,7 +824,7 @@ class Application extends Adw.Application {
 
     _onShowAbout() {
         let aboutParams = {
-            authors: [
+            developers: [
                 'Florian Müllner <fmuellner@gnome.org>',
                 'William Jon McCann <william.jon.mccann@gmail.com>',
                 'Carlos Soriano <carlos.soriano89@gmail.com>',
@@ -853,16 +853,16 @@ class Application extends Adw.Application {
             comments: _('An Internet Relay Chat Client for GNOME'),
             copyright: 'Copyright © 2013-2018 The Polari authors',
             license_type: Gtk.License.GPL_2_0,
-            logo_icon_name: 'org.gnome.Polari',
+            application_icon: 'org.gnome.Polari',
             version: pkg.version,
-            website_label: _('Learn more about Polari'),
+            issue_url: 'https://gitlab.gnome.org/GNOME/polari/-/issues',
             website: 'https://wiki.gnome.org/Apps/Polari',
 
             transient_for: this.active_window,
             modal: true,
         };
 
-        const aboutDialog = new Gtk.AboutDialog(aboutParams);
+        const aboutDialog = new Adw.AboutWindow(aboutParams);
         aboutDialog.show();
     }
 
