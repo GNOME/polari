@@ -855,7 +855,6 @@ class Application extends Adw.Application {
                 'Allan Day <allanpday@gmail.com>',
             ],
             translator_credits: _('translator-credits'),
-            comments: _('An Internet Relay Chat Client for GNOME'),
             copyright: 'Copyright © 2013-2018 The Polari authors',
             license_type: Gtk.License.GPL_2_0,
             application_icon: 'org.gnome.Polari',
