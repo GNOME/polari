@@ -170,8 +170,6 @@ nightly:
   extends: '.publish_nightly'
   needs:
     - flatpak-main
-  variables:
-    BUNDLES: '$BUNDLE'
 
 fedora-build:
   extends:
