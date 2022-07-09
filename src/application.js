@@ -849,6 +849,11 @@ class Application extends Adw.Application {
                 'Lapo Calamandrei <calamandrei@gmail.com>',
                 'Tobias Bernard <tbernard@gnome.org>',
             ],
+            designers: [
+                'William Jon McCann <william.jon.mccann@gmail.com>',
+                'Bastian Ilsø <bastianilso@gnome.org>',
+                'Allan Day <allanpday@gmail.com>',
+            ],
             translator_credits: _('translator-credits'),
             comments: _('An Internet Relay Chat Client for GNOME'),
             copyright: 'Copyright © 2013-2018 The Polari authors',
