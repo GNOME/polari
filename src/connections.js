@@ -297,17 +297,25 @@ class ConnectionDetails extends Gtk.Box {
         this._sslSwitch.connect('notify::active',
             this._onCanConfirmChanged.bind(this));
 
-        let realnameStore = new Gtk.ListStore();
-        realnameStore.set_column_types([GObject.TYPE_STRING]);
-        realnameStore.insert_with_values(-1, [0], [GLib.get_real_name()]);
+        const buffer = this._realnameEntry.get_buffer();
+        const insertedTextId = buffer.connect('inserted-text', () => {
+            const text = this._realnameEntry.get_text();
+            const realname = GLib.get_real_name();
+            if (!realname.startsWith(text))
+                return;
 
-        let completion = new Gtk.EntryCompletion({
-            model: realnameStore,
-            text_column: 0,
-            inline_completion: true,
-            popup_completion: false,
+            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                buffer.block_signal_handler(insertedTextId);
+
+                const startPos = GLib.utf8_strlen(text, -1);
+                this._realnameEntry.insert_text(
+                    realname.substring(text.length), -1, startPos);
+                this._realnameEntry.select_region(startPos, -1);
+
+                buffer.unblock_signal_handler(insertedTextId);
+                return GLib.SOURCE_REMOVE;
+            });
         });
-        this._realnameEntry.set_completion(completion);
 
         this.reset();
     }
