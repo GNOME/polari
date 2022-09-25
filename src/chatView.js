@@ -344,6 +344,9 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._queriedInitialBacklog = false;
         this.connect('map', () => {
+            if (this._app.importingLogs)
+                return;
+
             if (!this._queriedInitialBacklog) {
                 this._queriedInitialBacklog = true;
                 this._fetchingBacklog = true;
@@ -728,6 +731,9 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _fetchBacklog() {
+        if (this._app.importingLogs)
+            return Gdk.EVENT_PROPAGATE;
+
         if (this.vadjustment.value !== 0 ||
             this._logWalker.isEnd())
             return Gdk.EVENT_PROPAGATE;

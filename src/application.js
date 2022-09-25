@@ -178,6 +178,7 @@ class Application extends Adw.Application {
 
         try {
             this.hold();
+            this._importingLogs = true;
 
             let importer = new Logger.LogImporter();
 
@@ -197,6 +198,7 @@ class Application extends Adw.Application {
             console.debug(e);
         } finally {
             this.release();
+            this._importingLogs = false;
         }
     }
 
@@ -588,6 +590,10 @@ class Application extends Adw.Application {
 
     get isTestInstance() {
         return this.flags & Gio.ApplicationFlags.NON_UNIQUE;
+    }
+
+    get importingLogs() {
+        return this._importingLogs;
     }
 
     _updateUserListAction() {
