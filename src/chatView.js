@@ -394,7 +394,6 @@ class ChatView extends Gtk.ScrolledWindow {
         this._pending = new Map();
         this._pendingLogs = [];
         this._initialPending = [];
-        this._backlogTimeoutId = 0;
         this._statusCount = {left: 0, joined: 0, total: 0};
 
         this._activeNickColor = new Gdk.RGBA();
@@ -562,10 +561,6 @@ class ChatView extends Gtk.ScrolledWindow {
         if (this._roomFocusChangedId)
             this._app.disconnect(this._roomFocusChangedId);
         this._roomFocusChangedId = 0;
-
-        if (this._backlogTimeoutId)
-            GLib.source_remove(this._backlogTimeoutId);
-        this._backlogTimeoutId = 0;
 
         if (this._nickStatusChangedId) {
             this._userTracker.unwatchRoomStatus(
@@ -742,11 +737,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
-        this._backlogTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
-            this._getLogEvents(NUM_LOG_EVENTS);
-            this._backlogTimeoutId = 0;
-            return GLib.SOURCE_REMOVE;
-        });
+        this._getLogEvents(NUM_LOG_EVENTS);
         return Gdk.EVENT_STOP;
     }
 
