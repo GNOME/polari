@@ -31,6 +31,7 @@ class MainWindow extends Adw.ApplicationWindow {
         'offlineBanner',
         'overlay',
         'roomStack',
+        'importProgress',
     ];
 
     static [GObject.properties] = {
@@ -311,5 +312,10 @@ class MainWindow extends Adw.ApplicationWindow {
         }
 
         this.title = this._room ? this._room.display_name : null;
+    }
+
+    showImportProgress(n, max) {
+        this._importProgress.set_fraction(n / max);
+        this._importProgress.visible = max !== n;
     }
 });

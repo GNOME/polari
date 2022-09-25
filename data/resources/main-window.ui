@@ -225,6 +225,23 @@ SPDX-License-Identifier: GPL-2.0-or-later
                             <property name="valign">start</property>
                           </object>
                         </child>
+                        <child type="overlay">
+                          <object class="AdwBanner">
+                            <property name="title" translatable="yes">Importing old conversations — Will be back after conversion</property>
+                            <property name="revealed" bind-source="importProgress"
+                                      bind-property="visible" bind-flags="sync-create"/>
+                            <property name="valign">start</property>
+                          </object>
+                        </child>
+                        <child type="overlay">
+                          <object class="GtkProgressBar" id="importProgress">
+                            <style>
+                              <class name="osd"/>
+                            </style>
+                            <property name="valign">start</property>
+                            <property name="visible">false</property>
+                          </object>
+                        </child>
                         <child>
                           <object class="Gjs_RoomStack" id="roomStack">
                             <property name="hhomogeneous">True</property>
