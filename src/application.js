@@ -17,6 +17,7 @@ import {setConsoleLogDomain} from 'console';
 import AccountsMonitor from './accountsMonitor.js';
 import * as Connections from './connections.js';
 import InitialSetupWindow from './initialSetup.js';
+import * as Logger from './logger.js';
 import MainWindow from './mainWindow.js';
 import NetworksManager from './networksManager.js';
 import PasteManager from './pasteManager.js';
@@ -165,6 +166,37 @@ class Application extends Adw.Application {
             console.error(`Failed to launch ${
                 command} to provide service ${name}`);
             console.debug(e);
+        }
+    }
+
+    async _maybeImportLogs() {
+        const path = GLib.build_filenamev(
+            [GLib.get_user_data_dir(), 'polari', 'chatlogs.v1']);
+        const file = Gio.File.new_for_path(path);
+        if (file.query_exists(null))
+            return;
+
+        try {
+            this.hold();
+
+            let importer = new Logger.LogImporter();
+
+            let numFiles = await importer.init();
+            let n = 0;
+            this.activeWindow?.showImportProgress(n, numFiles);
+
+            // eslint-disable-next-line no-await-in-loop
+            while (await importer.importNext()) {
+                this.activeWindow?.showImportProgress(n, numFiles);
+                n++;
+            }
+
+            this.activeWindow?.showImportProgress(n, numFiles);
+        } catch (e) {
+            console.error('Failed to import telepathy-logger logs');
+            console.debug(e);
+        } finally {
+            this.release();
         }
     }
 
@@ -395,6 +427,8 @@ class Application extends Adw.Application {
         this.activate_action('start-client', null);
 
         if (!this.active_window) {
+            this._maybeImportLogs();
+
             if (this._needsInitialSetup()) {
                 new InitialSetupWindow({application: this});
             } else {
