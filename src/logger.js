@@ -10,6 +10,9 @@ import Tracker from 'gi://Tracker';
 
 Gio._promisify(Tracker.SparqlStatement.prototype, 'execute_async');
 Gio._promisify(Tracker.SparqlCursor.prototype, 'next_async');
+Gio._promisify(Tracker.Batch.prototype, 'execute_async');
+Gio._promisify(Polari.TplImporter.prototype, 'collect_files_async');
+Gio._promisify(Polari.TplImporter.prototype, 'import_async');
 
 class GenericQuery {
     constructor(query) {
@@ -132,5 +135,32 @@ export class LogWalker {
 
     isEnd() {
         return this._isEnd;
+    }
+}
+
+export class LogImporter {
+    constructor() {
+        this._connection = Polari.util_get_tracker_connection();
+        this._importer = new Polari.TplImporter();
+    }
+
+    async init() {
+        this._files = await this._importer.collect_files_async(null);
+        return this._files.length;
+    }
+
+    async importNext() {
+        try {
+            const file = this._files.pop();
+            if (!file)
+                return false;
+
+            let batch = await this._importer.import_async(file, null);
+
+            return await batch.execute_async(null);
+        } catch (e) {
+            console.debug(e);
+            return true;
+        }
     }
 }
