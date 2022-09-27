@@ -47,23 +47,18 @@ workflow:
 
 .polari.fedora:
   variables:
-    FDO_DISTRIBUTION_VERSION: 35
-    FDO_DISTRIBUTION_TAG: '2022-02-18.0'
+    FDO_DISTRIBUTION_VERSION: 37
+    FDO_DISTRIBUTION_TAG: '2022-09-27.0'
     FDO_DISTRIBUTION_PACKAGES: >
       meson gcc g++ pkgconf git gettext itstool
       desktop-file-utils */appstream-util */json-glib-validate
-      mozjs91-devel nodejs npm
+      nodejs npm
       pkgconfig(gtk+-3.0) pkgconfig(gjs-1.0)
       pkgconfig(gobject-introspection-1.0)
       pkgconfig(telepathy-glib)
     FDO_DISTRIBUTION_EXEC: |
       # For static analysis with eslint
       npm install -g eslint eslint-plugin-jsdoc &&
-
-      ./.gitlab-ci/install-meson-project.sh \
-        -Dskip_dbus_tests=true \
-        https://gitlab.gnome.org/GNOME/gjs.git \
-        1.71.1 . &&
 
       ./.gitlab-ci/install-meson-project.sh \
         https://gitlab.gnome.org/fmuellner/gjs-ci-tools.git \
