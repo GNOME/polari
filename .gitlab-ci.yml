@@ -152,13 +152,6 @@ js-check:
     FLATPAK_MODULE: "polari"
     APP_ID: "org.gnome.Polari"
   extends: .flatpak
-  artifacts:
-    paths:
-      - polari-git.flatpak
-      - .flatpak-builder/build/polari/_flatpak_build/meson-logs/meson-log.txt
-      - .flatpak-builder/build/polari/_flatpak_build/meson-logs/testlog.txt
-    reports:
-      junit: .flatpak-builder/build/polari/_flatpak_build/meson-logs/testlog.junit.xml
 
 flatpak:
   variables:
