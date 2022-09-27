@@ -45,7 +45,7 @@ workflow:
     - if: '$CI_COMMIT_BRANCH =~ /^gnome-[0-9-]+$/'
     - when: 'manual'
 
-.polari.fedora:35:
+.polari.fedora:
   variables:
     FDO_DISTRIBUTION_VERSION: 35
     FDO_DISTRIBUTION_TAG: '2022-02-18.0'
@@ -115,14 +115,14 @@ check-merge-request:
 build-fedora-container:
   extends:
     - .fdo.container-build@fedora@x86_64
-    - .polari.fedora:35
+    - .polari.fedora
   stage: prepare
   <<: *prereview_req
 
 eslint:
   extends:
     - .fdo.distribution-image@fedora
-    - .polari.fedora:35
+    - .polari.fedora
   stage: review
   needs:
     - build-fedora-container
@@ -137,7 +137,7 @@ eslint:
 js-check:
   extends:
     - .fdo.distribution-image@fedora
-    - .polari.fedora:35
+    - .polari.fedora
   stage: review
   needs:
     - build-fedora-container
@@ -174,7 +174,7 @@ nightly:
 fedora-build:
   extends:
     - .fdo.distribution-image@fedora
-    - .polari.fedora:35
+    - .polari.fedora
   stage: build
   needs:
     - build-fedora-container
@@ -190,7 +190,7 @@ fedora-build:
 fedora-dist:
   extends:
     - .fdo.distribution-image@fedora
-    - .polari.fedora:35
+    - .polari.fedora
   stage: deploy
   needs:
     - fedora-build
