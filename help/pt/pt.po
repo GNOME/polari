@@ -1,0 +1,568 @@
+# Portuguese translation for polari.
+# Copyright (C) 2022 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari gnome-42\n"
+"POT-Creation-Date: 2022-09-16 19:18+0000\n"
+"PO-Revision-Date: 2022-09-28 14:44+0100\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
+
+#. (itstool) path: info/title
+#: C/index.page:7
+msgctxt "text"
+msgid "Polari"
+msgstr "Polari"
+
+#. (itstool) path: credit/name
+#: C/index.page:12 C/introduction.page:12 C/network-connect.page:11
+msgid "Ankit R Gadiya"
+msgstr "Ankit R Gadiya"
+
+#. (itstool) path: credit/years
+#: C/index.page:14 C/introduction.page:14 C/network-connect.page:13
+msgid "2016"
+msgstr "2016"
+
+#. (itstool) path: credit/name
+#: C/index.page:18 C/introduction.page:18 C/irc-commands.page:15
+#: C/irc-join-room.page:13 C/irc-nick-password.page:17
+#: C/irc-start-conversation.page:16 C/network-connect.page:16
+#: C/overview.page:13 C/sharing.page:12
+msgid "Paul Cutler"
+msgstr "Paul Cutler"
+
+#. (itstool) path: license/p
+#: C/index.page:23 C/irc-commands.page:19 C/irc-join-room.page:17
+#: C/irc-nick-password.page:21 C/irc-start-conversation.page:20
+#: C/overview.page:17 C/sharing.page:17
+msgid "Creative Commons Share Alike 4.0"
+msgstr "Creative Commons Share Alike 4.0"
+
+#. (itstool) path: info/desc
+#: C/index.page:27
+msgid ""
+"<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) "
+"client which integrates with the GNOME desktop. Learn more about Polari."
+msgstr ""
+"<app>Polari</app> é um cliente simples e minimalista de Internet Relay Chat "
+"(IRC) que se integra com o ambiente GNOME. Aprenda mais sobre o Polari."
+
+#. (itstool) path: page/title
+#: C/index.page:32
+msgid "<_:media-1/> Polari"
+msgstr "<_:media-1/> Polari"
+
+#. (itstool) path: section/title
+#: C/index.page:38
+msgid "Connecting to IRC Servers and Chat Rooms"
+msgstr "Ligando-se a salas de conversa e servidores IRC"
+
+#. (itstool) path: section/title
+#: C/index.page:42
+msgid "Conversations"
+msgstr "Conversas"
+
+#. (itstool) path: credit/years
+#: C/introduction.page:20 C/network-connect.page:18 C/sharing.page:14
+msgid "2017"
+msgstr "2017"
+
+#. (itstool) path: info/desc
+#: C/introduction.page:25
+msgid "An introduction to <app>Polari</app>, a clean, minimal IRC client."
+msgstr ""
+"Uma introdução ao <app>Polari</app>, um cliente simples e minimalista de IRC."
+
+#. (itstool) path: page/title
+#: C/introduction.page:29
+msgid "Introduction"
+msgstr "Introdução"
+
+#. (itstool) path: page/p
+#: C/introduction.page:31
+msgid ""
+"<app>Polari</app> is a simple Internet Relay Chat (IRC) client which "
+"integrates with the GNOME desktop and enables you to chat with people around "
+"the world through large chatrooms or private messaging."
+msgstr ""
+"<app>Polari</app> é um cliente simples de Internet Relay Chat (IRC) que se "
+"integra com o ambiente GNOME e permite-lhe conversar com pessoas de todo o "
+"mundo por meio de grandes salas de conversa ou mensagens privadas."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/introduction.page:37
+msgctxt "_"
+msgid ""
+"external ref='images/polari-screenshot.png' "
+"md5='6b752736dd41aa5cddf337bb3b4be452'"
+msgstr ""
+"external ref='images/polari-screenshot.png' "
+"md5='6b752736dd41aa5cddf337bb3b4be452'"
+
+#. (itstool) path: media/p
+#: C/introduction.page:38
+msgid "Polari IRC Client"
+msgstr "Cliente de IRC Polari"
+
+#. (itstool) path: info/desc
+#: C/irc-commands.page:8
+msgid "The supported IRC commands."
+msgstr "Os comandos IRC suportados."
+
+#. (itstool) path: credit/name
+#: C/irc-commands.page:11 C/irc-nick-password.page:13
+#: C/irc-start-conversation.page:12
+msgid "Milo Casagrande"
+msgstr "Milo Casagrande"
+
+#. (itstool) path: page/title
+#: C/irc-commands.page:23
+msgid "Supported IRC commands"
+msgstr "Comandos IRC suportados"
+
+#. (itstool) path: page/p
+#: C/irc-commands.page:24
+msgid ""
+"To see the list of the supported IRC commands, in a chat room type <input>/"
+"help</input> and press <key>Enter</key>."
+msgstr ""
+"Para ver a lista de comandos IRC aceitos, em uma sala de conversa digite "
+"<input>/help</input> e pressione <key>Enter</key>."
+
+#. (itstool) path: note/p
+#: C/irc-commands.page:29
+msgid ""
+"All commands available will be listed and you can type <input>/help "
+"commandname</input> to get additional help with a specific command."
+msgstr ""
+"Todos os comandos disponíveis serão listados e você pode digitar <input>/"
+"help nome-do-comando</input> para obter ajuda com um comando específico."
+
+#. (itstool) path: info/desc
+#: C/irc-join-room.page:10
+msgid "Join an IRC channel."
+msgstr "Entre em um canal IRC."
+
+#. (itstool) path: page/title
+#: C/irc-join-room.page:21
+msgid "Join an IRC chat room"
+msgstr "Entrando em uma sala de conversa IRC"
+
+#. (itstool) path: page/p
+#: C/irc-join-room.page:23
+msgid ""
+"You can join IRC chat rooms (also known as IRC channels) on any IRC network "
+"you are connected to. To connect to an IRC network, see <link xref=\"network-"
+"connect\"/>."
+msgstr ""
+"Você pode entrar em salas de conversa IRC (também conhecidas como canais "
+"IRC) em qualquer rede IRC a qual você esteja conectado. Para se conectar a "
+"uma rede IRC, veja <link xref=\"network-connect\"/>."
+
+#. (itstool) path: page/p
+#: C/irc-join-room.page:27
+msgid "To join an IRC chat room:"
+msgstr "Para entrar em uma sala de conversa IRC:"
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:31
+msgid "Press <key>+</key> in the top-left corner."
+msgstr "Pressione <key>+</key> no canto superior esquerdo."
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:34
+msgid ""
+"Enter the name of the chat room you would like to join or select the chat "
+"room(s) from the list and then press <gui>Join</gui>. You can select "
+"multiple rooms from the list to join."
+msgstr ""
+"Digite o nome da sala de conversa na qual você gostaria entrar ou selecione "
+"a(s) sala(s) de conversa da lista e, então, pressione <gui>Entrar</gui>. "
+"Você pode selecionar múltiplas salas da lista para entrar."
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:39
+msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
+msgstr ""
+"Clique no botão <gui>Entrar</gui> para se conectar à sala ou às salas de "
+"conversa."
+
+#. (itstool) path: info/desc
+#: C/irc-nick-password.page:10
+msgid "Protect your nickname to prevent other IRC users from using it."
+msgstr "Proteja o seu apelido para evitar que outros utilizadores IRC o usem."
+
+#. (itstool) path: page/title
+#: C/irc-nick-password.page:25
+msgid "Use a nickname password on IRC"
+msgstr "Usando uma senha de apelido no IRC"
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:27
+msgid ""
+"On some IRC networks, you can register your nickname with a service called "
+"NickServ. By sending special messages to NickServ, you can set your password "
+"and identify yourself. Some IRC chat rooms may not allow you to join without "
+"a registered nickname."
+msgstr ""
+"Em algumas redes IRC, você pode registrar seu apelido com um serviço chamado "
+"NickServ. Ao enviar mensagens especiais para NickServ, você pode definir sua "
+"senha e se identificar. Algumas salas de conversa IRC podem não permitir que "
+"você entre sem um apelido registrado."
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:32
+msgid ""
+"<app>Polari</app> does not currently support nickname registration "
+"automatically. Each IRC network handles registering a specific nickname "
+"differently and you will need to check with the IRC network on how to "
+"register your nickname. After you have registered a nickname, you will need "
+"to message NickServ to identify yourself after connecting to the IRC Network "
+"with the following command:"
+msgstr ""
+"<app>Polari</app> não oferece suporte a registro automático de apelido. Cada "
+"rede IRC trata de registrar apelidos diferentemente e você precisará "
+"verificar com a rede IRC como registrar seu apelido. Após ter registrado um "
+"apelido, você precisará enviar uma mensagem para o NickServ para se "
+"identificar logo após se conectar à rede IRC com o seguinte comando:"
+
+#. (itstool) path: item/p
+#: C/irc-nick-password.page:40
+msgid "<input>/msg NickServ identify username password</input>"
+msgstr "<input>/msg NickServ identify utilizador senha</input>"
+
+#. (itstool) path: item/p
+#: C/irc-nick-password.page:43
+msgid "Press <key>Enter</key>"
+msgstr "Pressione <key>Enter</key>"
+
+#. (itstool) path: note/p
+#: C/irc-nick-password.page:47
+msgid ""
+"Use the username and password you registered with the IRC network with this "
+"command."
+msgstr ""
+"Use o nome de utilizador e senha que você registrou na rede IRC com este "
+"comando."
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:52
+msgid ""
+"<app>Polari</app> will remember your username and password and the next time "
+"you connect to the IRC network <gui>Polari</gui> will automatically register "
+"you with the NickServ service."
+msgstr ""
+"<app>Polari</app> lembrará seu nome de utilizador e senha, e a próxima vez "
+"que você se conectar à rede IRC, <gui>Polari</gui> lhe registrará "
+"automaticamente com o serviço NickServ."
+
+#. (itstool) path: note/p
+#: C/irc-nick-password.page:58
+msgid ""
+"These instructions only allow you to use a password-protected nickname on "
+"certain IRC networks. It is not currently possible to register an IRC "
+"nickname or change your nickname password using <app>Polari</app>."
+msgstr ""
+"Estas instruções só lhe permitem usar um apelido protegido com palavra-passe "
+"em certas redes IRC. Atualmente não é possível registar um apelido IRC ou "
+"alterar a palavra-passe do seu apelido usando <app>Polari</app>."
+
+#. (itstool) path: info/desc
+#: C/irc-start-conversation.page:9
+msgid "Start a conversation with an individual in IRC."
+msgstr "Inicie uma conversa com um indivíduo no IRC."
+
+#. (itstool) path: page/title
+#: C/irc-start-conversation.page:24
+msgid "Chat with somebody on IRC"
+msgstr "Conversando com alguém no IRC"
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:26
+msgid ""
+"You can hold private conversations with other IRC users, outside of the "
+"public IRC chat rooms. To start a conversation with another IRC user:"
+msgstr ""
+"Mantenha conversas privadas com outros utilizadores IRC, fora de salas de "
+"conversa públicas do IRC. Para iniciar uma conversa com um outro utilizador "
+"IRC:"
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:31
+msgid ""
+"Click on the name of the person in the channel you would like to start a "
+"chat with."
+msgstr ""
+"Clique no nome da pessoa no canal com a qual gostaria de iniciar uma "
+"conversa."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:36
+msgid ""
+"Information about the user, including their name and the last time they were "
+"active in the channel, will appear. Click <gui>Start Conversation</gui> to "
+"start a private conversation."
+msgstr ""
+"Informações sobre utilizadores, incluindo seus nomes e a última vez que "
+"estiveram ativos no canal, irão aparecer. Clique em <gui>Mensagem</gui> para "
+"iniciar uma conversa privada."
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:43
+msgid "Another option to start a conversation with a user:"
+msgstr "Uma outra opção para iniciar uma conversa com um utilizador:"
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:47
+msgid ""
+"In the upper-right hand corner of <app>Polari</app> a number is displayed "
+"that shows the total number of users in the chat room. Click on the number."
+msgstr ""
+"No canto superior direito do <app>Polari</app> um número é exibido que "
+"mostra o número total de utilizadores na sala de conversa. Clique no número."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:53
+msgid ""
+"Select the name of the user you want to message. Information about the user, "
+"including their name and the last time they were active in the channel, will "
+"appear."
+msgstr ""
+"Selecione o nome do utilizador ao qual você deseja mandar mensagem. "
+"Informações sobre os utilizadores, incluindo seus nomes e a última vez que "
+"estiveram ativos no canal, aparecerão."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:58
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
+msgstr "Pressione <gui>Mensagem</gui> para iniciar uma conversa privada."
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:62
+msgid ""
+"A new private conversation will start and a chat room will be created. The "
+"chat room will be shown in the left sidebar of <app>Polari</app> with the "
+"name of the person you are chatting with."
+msgstr ""
+"Uma nova conversa privada será iniciada e uma sala de conversa será criada. "
+"A sala de conversa será mostrada na barra lateral esquerda do <app>Polari</"
+"app> com o nome da pessoa com a qual está a conversar."
+
+#. (itstool) path: p/link
+#: C/legal.xml:5
+msgid "Creative Commons Attribution-ShareAlike 4.0 International"
+msgstr "Creative Commons Atribuição-Compartilhada Igual 4.0 Internacional"
+
+#. (itstool) path: license/p
+#: C/legal.xml:4
+msgid "This work is licensed under a <_:link-1/> license."
+msgstr "Essa obra está licenciada sob uma licença <_:link-1/>."
+
+#. (itstool) path: license/p
+#: C/legal.xml:8
+msgid ""
+"As a special exception, the copyright holders give you permission to copy, "
+"modify, and distribute the example code contained in this documentation "
+"under the terms of your choosing, without restriction."
+msgstr ""
+"Como uma exceção especial, os mantenedores do copyright lhe fornecem "
+"permissão para copiar, modificar e distribuir o código exemplo contido nesta "
+"documentação sob os termos de sua escolha, sem restrições."
+
+#. (itstool) path: info/desc
+#: C/network-connect.page:21
+msgid "How to connect to an IRC network."
+msgstr "Como se conectar a uma rede IRC."
+
+#. (itstool) path: page/title
+#: C/network-connect.page:24
+msgid "Connect to an IRC Network"
+msgstr "Conectando a uma rede IRC"
+
+#. (itstool) path: page/p
+#: C/network-connect.page:26
+msgid ""
+"The first time you start <app>Polari</app> you will be asked to join a "
+"network. <app>Polari</app> comes with over fifty IRC networks configured for "
+"you. Choose the IRC Network you would like to connect to and click on it."
+msgstr ""
+"Na primeira vez que você iniciar o <app>Polari</app>, será solicitado que  "
+"você entre em uma rede. O <app>Polari</app> vem com mais de cinquenta redes "
+"IRC configuradas para você. Escolha a rede IRC a qual você gostaria de se "
+"conectar e clique nela."
+
+#. (itstool) path: page/p
+#: C/network-connect.page:32
+msgid ""
+"If you do not see the IRC network you would like to join, you can also enter "
+"the details of the IRC network. Click the <gui>Custom Network</gui> button "
+"and enter the <gui>Server Address</gui>. You can optionally enter the name "
+"of the network as you want it to appear in the list of networks in the "
+"<gui>Network Name</gui> field."
+msgstr ""
+"Se você não vê a rede IRC na qual você gostaria de entrar, você também pode "
+"digitar os detalhes da rede IRC. Clique no botão <gui>Rede personalizada</"
+"gui> e digite o <gui>Endereço do servidor</gui>. Opcionalmente, você pode "
+"digitar o nome da rede que você deseja que apareça na lista de redes no "
+"campo <gui>Nome da rede</gui>."
+
+#. (itstool) path: page/p
+#: C/network-connect.page:39
+msgid ""
+"After you have connected to an IRC Network, you can also connect to other "
+"IRC Networks."
+msgstr ""
+"Após você ter se conectado a uma rede IRC, você também pode se conectar a "
+"outras redes IRC."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:45
+msgid "Press on the <key>+</key> in the top left corner."
+msgstr "Pressione o <key>+</key> no canto superior esquerdo."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:48
+msgid ""
+"Press <gui>Add Network</gui> and select the IRC network from the list you "
+"would like to join or press <gui>Custom Network</gui> and enter the details."
+msgstr ""
+"Pressione <gui>Adicionar rede</gui> e selecione a rede IRC da lista na qual "
+"você gostaria de entrar ou pressione <gui>Rede personalizada</gui> e digite "
+"os detalhes."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:53
+msgid ""
+"Enter the name of the chat room you would like to join or select the chat "
+"room(s) from the list and then press <gui>Join</gui>."
+msgstr ""
+"Digite o nome da sala de conversa na qual gostaria entrar ou selecione a(s) "
+"sala(s) de conversa da lista e, depois, prima <gui>Entrar</gui>."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:58
+msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
+msgstr ""
+"Pressione o botão <gui>Entrar</gui> para se conectar à sala ou às salas."
+
+#. (itstool) path: note/p
+#: C/network-connect.page:62
+msgid ""
+"If the IRC network you are connecting to uses a custom port, you can append "
+"it to the name of the network with a colon and the port number, for example "
+"<em>irc.example.org:12345</em>"
+msgstr ""
+"Se a rede IRC à qual você está se conectando usa uma porta personalizada, "
+"você pode anexá-la ao nome da rede com um ponto e vírgula e o número da "
+"porta, como, por exemplo, <em>irc.exemplo.org:12345</em>"
+
+#. (itstool) path: info/desc
+#: C/overview.page:9
+msgid "What IRC is and how you can use it."
+msgstr "O que é IRC e como você pode usá-lo."
+
+#. (itstool) path: page/title
+#: C/overview.page:21
+msgid "Overview of Internet Relay Chat"
+msgstr "Visão geral do Internet Relay Chat"
+
+#. (itstool) path: page/p
+#: C/overview.page:23
+msgid ""
+"Internet Relay Chat (IRC) is a means of chatting with people online using "
+"public and private chatrooms. IRC networks, such as Freenode or Gimpnet, are "
+"unique and host their own servers with its own channels. IRC uses a client / "
+"server model where you can use a client, such as Polari, to connect to an "
+"IRC server and join a channel. Channels, also known as chat rooms, are where "
+"users meet online to chat."
+msgstr ""
+"Internet Relay Chat (IRC) é uma forma de conversar com pessoas online usando "
+"salas de conversa públicas e privadas. Redes IRC, como Freenode ou Gimpnet, "
+"são únicas e hospedam seus próprios servidores com seus próprios canais. O "
+"IRC usa um modelo cliente/servidor, no qual você usa um cliente, tal como "
+"Polari, para se conectar a um servidor IRC e entrar em uma sala. Canais, "
+"também conhecidos como salas de conversa, são onde os utilizadores se "
+"encontram online para bate papo."
+
+#. (itstool) path: info/desc
+#: C/sharing.page:9
+msgid "How to easily share multiple lines of text or images."
+msgstr "Como compartilhar com facilidade múltiplas linhas de texto ou imagens."
+
+#. (itstool) path: page/title
+#: C/sharing.page:22
+msgid "Share text or images"
+msgstr "Compartilhando texto ou imagens"
+
+#. (itstool) path: page/p
+#: C/sharing.page:24
+msgid ""
+"It is considered rude in IRC to copy and paste more than five lines of text. "
+"If you attempt to paste more than five lines of text, <gui>Polari</gui> will "
+"ask you if you would like the text to automatically be pasted to a public "
+"paste service. If you agree to paste the text, press the <gui>Paste</gui> "
+"button as seen in the following screenshot. After pressing <gui>Paste</gui>, "
+"the link to the paste website will be automatically entered into the chat "
+"box. Press <key>Enter</key> to share the link with the chat room."
+msgstr ""
+"É considerado grosseiro no IRC copiar e colar mais de cinco linhas de texto. "
+"Se você está tentando colar mais de cinco linhas de texto, <gui>Polari</gui> "
+"lhe perguntará se você gostaria que o texto ser automaticamente colado para "
+"um serviço de “paste” público. Se você concordar em colar o texto, pressione "
+"o botão <gui>Colar</gui> como visto na captura de tela. Após pressionar "
+"<gui>Colar</gui>, o link para o site de colagem será digitado "
+"automaticamente na caixa de conversa. Pressione <key>Enter</key> para "
+"compartilhar o link com a sala de conversa."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/sharing.page:32
+msgctxt "_"
+msgid ""
+"external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
+msgstr ""
+"external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
+
+#. (itstool) path: page/p
+#: C/sharing.page:34
+msgid ""
+"To share an image file, drag and drop the image from <app>Files</app> into "
+"the chat box in <app>Polari</app> or drag and drop a file from <app>Files</"
+"app> to <app>Polari</app>. You will be asked if you wish to upload the image "
+"to a public paste service. If you agree to upload the image, press the "
+"<gui>Paste</gui> button as seen in the following screenshot. After pressing "
+"<gui>Paste</gui>, the link to the where the image was uploaded will be "
+"automatically entered into the chat box. Press <key>Enter</key> to share the "
+"link with the chat room."
+msgstr ""
+"Para compartilhar um arquivo de imagem, arraste e solte a imagem do "
+"<app>Arquivos</app> na caixa de conversa no <app>Polari</app> ou arraste e "
+"solte um arquivo do <app>Arquivos</app> para <app>Polari</app>. Será "
+"perguntado a você se deseja enviar a imagem para um serviço de colagem "
+"público. Se você concordar em enviar a imagem, pressione o botão <gui>Colar</"
+"gui> como visto na captura de tela. Após pressionar <gui>Colar</gui>, o link "
+"para onde a imagem foi enviada será inserida automaticamente na caixa de "
+"conversa. Pressione <key>Enter</key> para compartilhar o link com a sala de "
+"conversa."
