@@ -267,7 +267,7 @@ async function _clearPassword(schema, account) {
 }
 
 /**
- * @typedef {Object} UrlMatch
+ * @typedef {object} UrlMatch
  * @property {string} url - the matched URL
  * @property {string} name - the user-visible name of the URL
  * @property {number} pos - the position of the match
