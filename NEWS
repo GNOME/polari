@@ -1,3 +1,15 @@
+43.0 — “Hi.”
+============
+* Move more UI to libadwaita [Florian; !256, !258]
+* Misc. bug fixes and cleanups [Florian; !257, !260, !262, !261]
+
+Contributors:
+  Hugo Carvalho, Zurab Kargareteli, Florian Müllner
+
+Translators:
+  Zurab Kargareteli [ka], Sabri Ünal [tr], Goran Vidović [hr],
+  Anders Jonsson [sv], Quentin PAGÈS [oc]
+
 42.1 — “I Hear You, Mama”
 =========================
 * Fix showing notification for initial message [Florian; !254]
