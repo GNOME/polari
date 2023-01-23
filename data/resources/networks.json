@@ -306,20 +306,6 @@
     ]
   },
   {
-    "name": "GNOME",
-    "id": "gimpnet",
-    "favorite": true,
-    "servers": [
-      { "ssl": false, "port": 6667, "address": "irc.gnome.org" },
-      { "ssl": false, "port": 6667, "address": "irc.gimp.net" },
-      { "ssl": false, "port": 6667, "address": "irc.gimp.org" },
-      { "ssl": false, "port": 6667, "address": "irc.us.gimp.org" },
-      { "ssl": true, "port": 6697, "address": "irc.eagle.y.se" },
-      { "ssl": true, "port": 6697, "address": "irc.acc.umu.se" },
-      { "ssl": true, "port": 6697, "address": "irc.gimp.ca" }
-    ]
-  },
-  {
     "name": "HabberNet",
     "id": "habbernet",
     "servers": [

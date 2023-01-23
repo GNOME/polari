@@ -678,7 +678,7 @@ class TelepathyClient extends Tp.BaseClient {
 
         let accountName = room.account.display_name;
         /* Translators: Those are a botname and an accountName, e.g.
-           "Save NickServ password for GNOME" */
+           "Save NickServ password for Libera" */
         let summary = vprintf(_('Save %s password for %s?'), data.botname, accountName);
         let text = vprintf(
             _('Identification will happen automatically the next time you connect to %s'), accountName);

@@ -504,7 +504,7 @@ class RoomListHeader extends Gtk.Widget {
             let accountName = this._account.display_name;
 
             /* Translators: This is an account name followed by a
-               server address, e.g. "GNOME (irc.gnome.org)" */
+               server address, e.g. "Libera (irc.libera.chat)" */
             let fullTitle = vprintf(_('%s (%s)'), accountName, server);
             this._popoverTitle.label = accountName === server ? accountName : fullTitle;
             this._popoverStatus.label = this._getStatusLabel();
