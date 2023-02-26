@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2022-07-31 08:10+0000\n"
-"PO-Revision-Date: 2022-08-01 00:00+0300\n"
+"POT-Creation-Date: 2023-01-25 21:46+0000\n"
+"PO-Revision-Date: 2023-02-20 23:06+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -425,20 +425,20 @@ msgstr "Başka bir örneğin yanında çalışmaya izin ver"
 msgid "Print version and exit"
 msgstr "Sürümü yazdır ve çık"
 
-#: src/application.js:501 src/utils.js:319
+#: src/application.js:495 src/utils.js:319
 msgid "Failed to open link"
-msgstr "Bağlantıyı açma başarısız oldu"
+msgstr "Bağlantı açılamadı"
 
-#: src/application.js:772
+#: src/application.js:758
 #, javascript-format
 msgid "%s removed."
 msgstr "%s kaldırıldı."
 
-#: src/application.js:773
+#: src/application.js:759
 msgid "Undo"
 msgstr "Geri Al"
 
-#: src/application.js:857
+#: src/application.js:843
 msgid "translator-credits"
 msgstr ""
 "Muhammet Kara <muhammetk@gnome.org>\n"
@@ -804,7 +804,7 @@ msgid "Network %s has an error"
 msgstr "%s ağında hata var"
 
 #. Translators: This is an account name followed by a
-#. server address, e.g. "GNOME (irc.gnome.org)"
+#. server address, e.g. "Libera (irc.libera.chat)"
 #: src/roomList.js:508
 #, javascript-format
 msgid "%s (%s)"
@@ -850,7 +850,7 @@ msgstr "%s ile bağlantı kurulamadı."
 msgid "Should the password be saved?"
 msgstr "Parola kaydedilmeli mi?"
 
-#: src/roomStack.js:176 src/telepathyClient.js:688
+#: src/roomStack.js:176 src/telepathyClient.js:684
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -862,7 +862,7 @@ msgstr "_Parolayı Kaydet"
 
 #: src/roomStack.js:213
 msgid "Failed to join the room"
-msgstr "Odaya katılım başarısız"
+msgstr "Odaya katılamadı"
 
 #: src/roomStack.js:217
 msgid "_Retry"
@@ -893,24 +893,24 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "+ düğmesini kullanarak bir odaya katıl."
 
-#: src/telepathyClient.js:493
+#: src/telepathyClient.js:489
 msgid "Good Bye"
 msgstr "Hoşça Kal"
 
 #. Translators: Those are a botname and an accountName, e.g.
-#. "Save NickServ password for GNOME"
-#: src/telepathyClient.js:686
+#. "Save NickServ password for Libera"
+#: src/telepathyClient.js:682
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "%2$s için %1$s parolası kaydedilsin mi?"
 
-#: src/telepathyClient.js:691
+#: src/telepathyClient.js:687
 msgid "Save"
 msgstr "Kaydet"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:727
+#: src/telepathyClient.js:723
 #, javascript-format
 msgid "%s in %s"
 msgstr "%2$s içinde %1$s"
