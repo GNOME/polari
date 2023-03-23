@@ -3,19 +3,19 @@
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import Gdk from 'gi://Gdk?version=3.0';
+import Gdk from 'gi://Gdk?version=4.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gtk from 'gi://Gtk?version=3.0';
+import Gtk from 'gi://Gtk?version=4.0';
 import GdkPixbuf from 'gi://GdkPixbuf';
-import WebKit2 from 'gi://WebKit2?version=4.1';
+import WebKit from 'gi://WebKit?version=6.0';
 
 import {setConsoleLogDomain} from 'console';
 import {programArgs} from 'system';
 
-Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot');
-Gio._promisify(WebKit2.WebView.prototype, 'evaluate_javascript');
+Gio._promisify(WebKit.WebView.prototype, 'get_snapshot');
+Gio._promisify(WebKit.WebView.prototype, 'evaluate_javascript');
 
 const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
@@ -39,16 +39,15 @@ class PreviewWindow extends Gtk.Window {
     constructor(params) {
         super(params);
 
-        const settings = new WebKit2.Settings({
-            hardware_acceleration_policy: WebKit2.HardwareAccelerationPolicy.NEVER,
+        const settings = new WebKit.Settings({
+            hardware_acceleration_policy: WebKit.HardwareAccelerationPolicy.NEVER,
         });
 
-        this._view = new WebKit2.WebView({
-            is_ephemeral: true,
-            visible: true,
+        this._view = new WebKit.WebView({
+            network_session: WebKit.NetworkSession.new_ephemeral(),
             settings,
         });
-        this.add(this._view);
+        this.set_child(this._view);
 
         this._view.bind_property('title',
             this, 'title', GObject.BindingFlags.SYNC_CREATE);
@@ -88,8 +87,8 @@ class PreviewWindow extends Gtk.Window {
     async _createSnapshot() {
         const getClipOp = this._getImageClip();
         const snapshotOp = this._view.get_snapshot(
-            WebKit2.SnapshotRegion.VISIBLE,
-            WebKit2.SnapshotOptions.NONE,
+            WebKit.SnapshotRegion.VISIBLE,
+            WebKit.SnapshotOptions.NONE,
             null);
         let clip, snapshot;
 
@@ -103,8 +102,7 @@ class PreviewWindow extends Gtk.Window {
             return;
         }
 
-        const pixbuf = Gdk.pixbuf_get_from_surface(snapshot,
-            0, 0, snapshot.getWidth(), snapshot.getHeight());
+        const pixbuf = Gdk.pixbuf_get_from_texture(snapshot);
 
         if (clip)
             this._snapshot = this._createClippedPixbuf(pixbuf, clip);
