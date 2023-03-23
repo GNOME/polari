@@ -155,21 +155,32 @@ class PreviewWindow extends Gtk.Window {
     }
 });
 
-class App {
+class App extends Gtk.Application {
+    static {
+        GObject.registerClass(this);
+    }
+
     constructor(url, filename) {
+        super({
+            application_id: 'org.gnome.Polari.Thumbnailer',
+        });
+
         this._uri = url;
         this._filename = filename;
     }
 
-    run() {
-        Gtk.init(null);
-
+    vfunc_startup() {
         const logDomain = 'Polari Thumbnailer';
         setConsoleLogDomain(logDomain);
         if (GLib.log_writer_is_journald(2))
             GLib.setenv('G_MESSAGES_DEBUG', logDomain, false);
 
+        super.vfunc_startup();
+    }
+
+    vfunc_activate() {
         const window = new PreviewWindow({
+            application: this,
             uri: this._uri,
             default_width: 10 * PREVIEW_WIDTH,
             default_height: 10 * PREVIEW_HEIGHT,
@@ -178,9 +189,6 @@ class App {
         window.realize();
         window.connect('snapshot-ready', this._onSnapshotReady.bind(this));
         window.connect('snapshot-failed', this._onSnapshotFailed.bind(this));
-        window.connect('destroy', () => Gtk.main_quit());
-
-        Gtk.main();
     }
 
     _onSnapshotReady(window) {
@@ -232,4 +240,8 @@ class App {
 
 const [url, filename] = programArgs;
 const app = new App(url, filename);
-app.run();
+try {
+    await app.runAsync([]);
+} catch (e) {
+    console.error(e);
+}
