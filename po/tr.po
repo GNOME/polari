@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2023-01-25 21:46+0000\n"
-"PO-Revision-Date: 2023-02-20 23:06+0300\n"
+"POT-Creation-Date: 2023-04-10 05:32+0000\n"
+"PO-Revision-Date: 2023-05-12 13:35+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:37
@@ -614,33 +614,33 @@ msgstr ""
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
-msgstr[0] "%s satır metin açık yapıştırma servisine yüklensin mi?"
+msgstr[0] "%s satır metin açık yapıştırma hizmetine yüklensin mi?"
 
 #: src/entryArea.js:363
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
-msgstr[0] "%s satır metin açık yapıştırma servisine yükleniyor…"
+msgstr[0] "%s satır metin açık yapıştırma hizmetine yükleniyor…"
 
 #: src/entryArea.js:370
 msgid "Upload image to public paste service?"
-msgstr "Resim açık yapıştırma servisine yüklensin mi?"
+msgstr "Resim açık yapıştırma hizmetine yüklensin mi?"
 
 #: src/entryArea.js:371
 msgid "Uploading image to public paste service…"
-msgstr "Resim açık yapıştırma servisine yükleniyor…"
+msgstr "Resim açık yapıştırma hizmetine yükleniyor…"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:388
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
-msgstr "“%s” açık yapıştırma servisine yüklensin mi?"
+msgstr "“%s” açık yapıştırma hizmetine yüklensin mi?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:390
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
-msgstr "“%s” açık yapıştırma servisine yükleniyor…"
+msgstr "“%s” açık yapıştırma hizmetine yükleniyor…"
 
 #. translators: %s is a nick, #%s a channel
 #: src/entryArea.js:399
