@@ -71,7 +71,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                             <property name="valign">center</property>
                             <property name="action_name">app.show-join-dialog</property>
                             <property name="icon-name">list-add-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Add rooms and networks</property>
+                            <property name="tooltip-text" translatable="yes">Add Rooms and Networks</property>
                             <style>
                               <class name="image-button"/>
                             </style>
@@ -87,6 +87,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                             <property name="menu-model">hamburgerMenu</property>
                             <property name="icon-name">open-menu-symbolic</property>
                             <property name="primary">True</property>
+                            <property name="tooltip-text" translatable="yes">Main Menu</property>
                           </object>
                         </child>
                       </object>
@@ -206,7 +207,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                           <object class="GtkToggleButton" id="showUserListButton">
                             <property name="focus-on-click">False</property>
                             <property name="action-name">app.user-list</property>
-                            <property name="tooltip-text" translatable="yes">Show connected users</property>
+                            <property name="tooltip-text" translatable="yes">Show Connected Users</property>
                             <property name="child">
                               <object class="AdwButtonContent">
                                 <property name="icon-name">people-symbolic</property>
