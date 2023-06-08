@@ -14,74 +14,12 @@ import RoomStack_ from './roomStack.js'; // used in template
 import * as UserList_ from './userList.js'; // used in template
 import * as Utils from './utils.js';
 
-export const FixedSizeFrame = GObject.registerClass(
-class FixedSizeFrame extends Gtk.Widget {
-    static [GObject.properties] = {
-        height: GObject.ParamSpec.int(
-            'height', 'height', 'height',
-            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
-            -1, GLib.MAXINT32, -1),
-        width: GObject.ParamSpec.int(
-            'width', 'width', 'width',
-            GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
-            -1, GLib.MAXINT32, -1),
-    };
-
-    constructor(params) {
-        super({
-            ...params,
-            layout_manager: new Gtk.BinLayout(),
-        });
-    }
-
-    _queueRedraw() {
-        const [child] = this;
-        child?.queue_resize();
-        this.queue_draw();
-    }
-
-    get height() {
-        return this._height;
-    }
-
-    set height(height) {
-        if (height === this._height)
-            return;
-        this._height = height;
-        this.notify('height');
-        this.set_size_request(this._width, this._height);
-        this._queueRedraw();
-    }
-
-    get width() {
-        return this._width;
-    }
-
-    set width(width) {
-        if (width === this._width)
-            return;
-
-        this._width = width;
-        this.notify('width');
-        this.set_size_request(this._width, this._height);
-        this._queueRedraw();
-    }
-
-    vfunc_measure(orientation, forSize) {
-        const fixedSize = orientation === Gtk.Orientation.HORIZONTAL
-            ? this._width : this._height;
-        const [min, nat] = super.vfunc_measure(orientation, forSize);
-        return [min, fixedSize < 0 ? nat : fixedSize, -1, -1];
-    }
-});
-
 export default GObject.registerClass(
 class MainWindow extends Adw.ApplicationWindow {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/main-window.ui';
     static [Gtk.internalChildren] = [
-        'backButton',
         'joinButton',
-        'mainLeaflet',
+        'splitView',
         'showUserListButton',
         'userListPopover',
         'roomListRevealer',
@@ -139,10 +77,8 @@ class MainWindow extends Adw.ApplicationWindow {
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));
-        this._roomStack.connect('notify::visible-child',
-            () => this._mainLeaflet.navigate(Adw.NavigationDirection.FORWARD));
-        this._backButton.connect('clicked',
-            () => this._mainLeaflet.navigate(Adw.NavigationDirection.BACKWARD));
+        this._roomStack.connect('notify::visible-child', () =>
+            this._splitView.activate_action('navigation.push', new GLib.Variant('s', 'content')));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsChangedId = this._accountsMonitor.connect(

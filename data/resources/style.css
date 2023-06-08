@@ -158,7 +158,7 @@ treeview.polari-server-room-list {
 }
 
 /* Differentiate test instance from "normal" ones */
-window.test-instance headerbar:last-child {
+window.test-instance .content-pane headerbar {
     background-image: cross-fade(25% -gtk-icontheme('system-run-symbolic'));
     background-repeat: no-repeat;
     background-position: 1em center;
