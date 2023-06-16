@@ -410,12 +410,6 @@ class RoomListHeader extends Gtk.Widget {
         });
     }
 
-    vfunc_unroot() {
-        [...this].forEach(child => child.unparent());
-
-        super.vfunc_unroot();
-    }
-
     get popover() {
         return this._popover;
     }
