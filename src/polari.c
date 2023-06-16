@@ -3,7 +3,9 @@
 
 #include "config.h"
 
+#ifndef GJS_HAS_AUTOCLEANUP
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GjsContext, g_object_unref)
+#endif
 
 #define JS_MAIN "resource:///org/gnome/Polari/js/main.js"
 

@@ -42,8 +42,16 @@ conf = configuration_data()
 conf.set_quoted('PKGLIBDIR', pkglibdir)
 
 cc = meson.get_compiler('c')
+gjs_has_autocleanup = cc.compiles(
+'''
+#include <gjs/gjs.h>
+void main(void) { g_autoptr(GjsContext) context = NULL; }
+''',
+  dependencies: [gjs])
+
 conf.set('HAVE_STRCASESTR', cc.has_function('strcasestr'))
 conf.set('SNAPSHOT', get_option('snapshot'))
+conf.set('GJS_HAS_AUTOCLEANUP', gjs_has_autocleanup)
 
 config_h = declare_dependency(
   sources: configure_file(
