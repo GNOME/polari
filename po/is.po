@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2023-04-10 05:32+0000\n"
-"PO-Revision-Date: 2023-04-26 15:07+0000\n"
+"POT-Creation-Date: 2023-05-20 06:39+0000\n"
+"PO-Revision-Date: 2023-06-18 08:12+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -34,9 +34,9 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"Einfalt spjallforrit (IRC) sem er hannað til að falla hnökralaust inn í"
-" GNOME-umhverfið, einfalt og fallegt viðmót þess gerir þér kleift að beina"
-" óskertri athygli að samtalinu."
+"Einfalt spjallforrit (IRC) sem er hannað til að falla hnökralaust inn í "
+"GNOME-umhverfið, einfalt og fallegt viðmót þess gerir þér kleift að beina "
+"óskertri athygli að samtalinu."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
@@ -44,9 +44,9 @@ msgid ""
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message."
 msgstr ""
-"Þú getur notað Polari fyrir samtöl á almennum rásum og einnig fyrir"
-" einkasamtöl. Tilkynningar sjá til þess að þú missir aldrei af þýðingarmiklum"
-" skilaboðum."
+"Þú getur notað Polari fyrir samtöl á almennum rásum og einnig fyrir "
+"einkasamtöl. Tilkynningar sjá til þess að þú missir aldrei af þýðingarmiklum "
+"skilaboðum."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:46
 msgid "The GNOME Project"
@@ -142,8 +142,8 @@ msgstr "Listi yfir svæfða notendur"
 msgid ""
 "A list of usernames for whose private messages not to show notifications"
 msgstr ""
-"Listi yfir notendanöfn þar sem ekki á AÐ BIRTA TILKynningar VEGNA"
-" einkaskilaboðA"
+"Listi yfir notendanöfn þar sem ekki á AÐ BIRTA TILKynningar VEGNA "
+"einkaskilaboðA"
 
 #: data/resources/connection-details.ui:18
 msgid "_Server Address"
@@ -716,8 +716,7 @@ msgstr "/NICK <nickname> — breytir gælunafni þínu í <nickname>"
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
-"/PART [<channel>] [<reason>] — yfirgefur <channel>, sjálfgefið það núverandi "
-"ath"
+"/PART [<channel>] [<reason>] — yfirgefur <channel>, sjálfgefið þá núverandi"
 
 #: src/ircParser.js:41
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
@@ -763,7 +762,7 @@ msgstr "Notkun:%s"
 
 #: src/joinDialog.js:218
 msgid "Add Network"
-msgstr "Bæta við netitölvuneti tengslaneti ath"
+msgstr "Bæta við netkerfi"
 
 #: src/mainWindow.js:352
 #, javascript-format
