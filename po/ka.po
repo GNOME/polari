@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2022-09-28 13:45+0000\n"
-"PO-Revision-Date: 2023-01-19 18:48+0100\n"
+"POT-Creation-Date: 2023-05-13 08:25+0000\n"
+"PO-Revision-Date: 2023-06-20 06:09+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: \n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:7
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:37
@@ -26,7 +26,7 @@ msgstr "Polari"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:8
 msgid "Talk to people on IRC"
-msgstr ""
+msgstr "ესაუბრეთ ხალხს IRC-ზე"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:10
 msgid ""
@@ -48,20 +48,20 @@ msgstr "პროექტი \"GNOME\""
 
 #: data/org.gnome.Polari.desktop.in:4
 msgid "An Internet Relay Chat Client for GNOME"
-msgstr ""
+msgstr "IRC-ის კლიენტი GNOME-სთვის"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:15
 msgid "IRC;Internet;Relay;Chat;"
-msgstr ""
+msgstr "IRC;Internet;Relay;Chat;ჩატი;"
 
 #: data/org.gnome.Polari.gschema.xml:6
 msgid "Saved channel list"
-msgstr ""
+msgstr "შენახული არხების სია"
 
 #: data/org.gnome.Polari.gschema.xml:7
 msgid "List of channels to restore on startup"
-msgstr ""
+msgstr "გაშვებისას არხების სიის აღდგენა"
 
 #: data/org.gnome.Polari.gschema.xml:11 data/resources/main-window.ui:14
 msgid "Run in Background"
@@ -69,7 +69,7 @@ msgstr "ფონურად გაშვება"
 
 #: data/org.gnome.Polari.gschema.xml:12
 msgid "Keep running in background when closed."
-msgstr ""
+msgstr "დახურვისას ფონში დარჩენა."
 
 #: data/org.gnome.Polari.gschema.xml:16
 msgid "Window size"
@@ -89,39 +89,39 @@ msgstr "ფანჯრის სრულად გაშლილი მდგ
 
 #: data/org.gnome.Polari.gschema.xml:26
 msgid "Last active channel"
-msgstr ""
+msgstr "ბოლო აქტიური არხი"
 
 #: data/org.gnome.Polari.gschema.xml:27
 msgid "Last active (selected) channel"
-msgstr ""
+msgstr "უკანასკნელი აქტიური (მონიშნული) არხები"
 
 #: data/org.gnome.Polari.gschema.xml:34
 msgid "Identify botname"
-msgstr ""
+msgstr "ბოტის სახელის იდენტიფიცირება"
 
 #: data/org.gnome.Polari.gschema.xml:35
 msgid "Nickname of the bot to identify with"
-msgstr ""
+msgstr "ბოტის იდენტიფიკატორი მეტსახელი"
 
 #: data/org.gnome.Polari.gschema.xml:39
 msgid "Identify command"
-msgstr ""
+msgstr "ბრძანების იდენტიფიცირება"
 
 #: data/org.gnome.Polari.gschema.xml:40
 msgid "Command used to identify with bot"
-msgstr ""
+msgstr "ბოტის იდენტიფიკატორი ბრძანება"
 
 #: data/org.gnome.Polari.gschema.xml:44
 msgid "Identify username"
-msgstr ""
+msgstr "მომხმარებლის სახელის იდენტიფიცირება"
 
 #: data/org.gnome.Polari.gschema.xml:45
 msgid "Username to use in identify command"
-msgstr ""
+msgstr "იდენტიფიკაციის ბრძანებაში გამოყენებული მომხმარებლის სახელი"
 
 #: data/org.gnome.Polari.gschema.xml:49
 msgid "Identify username supported"
-msgstr ""
+msgstr "მომხმარებლის სახელის იდენტიფიცირება მხარდაჭერილია"
 
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
@@ -129,7 +129,7 @@ msgstr ""
 
 #: data/org.gnome.Polari.gschema.xml:56
 msgid "List of muted usernames"
-msgstr ""
+msgstr "დადუმებული მომხმარებლის სახელების სია"
 
 #: data/org.gnome.Polari.gschema.xml:57
 msgid ""
@@ -146,7 +146,7 @@ msgstr "_ქსელური სახელი"
 
 #: data/resources/connection-details.ui:30
 msgid "Use secure c_onnection"
-msgstr ""
+msgstr "_უსაფრთხო მიერთების გამოყენება"
 
 #: data/resources/connection-details.ui:47
 msgid "_Nickname"
@@ -236,12 +236,12 @@ msgstr "წინა ოთახი"
 #: data/resources/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Next Room with Unread Messages"
-msgstr ""
+msgstr "შემდეგი ოთახი წაუკითხავი შეტყობინებებით"
 
 #: data/resources/help-overlay.ui:86
 msgctxt "shortcut window"
 msgid "Previous Room with Unread Messages"
-msgstr ""
+msgstr "წინა ოთახი წაუკითხავი შეტყობინებებით"
 
 #: data/resources/help-overlay.ui:92
 msgctxt "shortcut window"
@@ -328,11 +328,11 @@ msgstr "გამოსვლა"
 
 #: data/resources/main-window.ui:61 data/resources/main-window.ui:66
 msgid "Add rooms and networks"
-msgstr ""
+msgstr "ქსელებისა და ოთახებსი დამატება"
 
 #: data/resources/main-window.ui:213
 msgid "Show connected users"
-msgstr ""
+msgstr "მიერთებული მომხმარებლების სია"
 
 #: data/resources/main-window.ui:233 src/roomList.js:537 src/userList.js:385
 msgid "Offline"
@@ -340,7 +340,7 @@ msgstr "გათიშული"
 
 #: data/resources/main-window.ui:241
 msgid "Go online to chat and receive messages."
-msgstr ""
+msgstr "გადადით ონლაინ სასაუბროდ და მიიღეთ შეტყობინებები."
 
 #: data/resources/nick-popover.ui:17
 msgid "Change nickname:"
@@ -372,7 +372,7 @@ msgstr "პარამეტრები"
 
 #: data/resources/server-room-list.ui:43
 msgid "Enter room name to add"
-msgstr ""
+msgstr "დასამატებლად შეიყვანეთ ოთახის სახელი"
 
 #: data/resources/user-details.ui:25
 msgid "Loading details"
@@ -384,7 +384,7 @@ msgstr "ბოლო აქტივობა:"
 
 #: data/resources/user-details.ui:145
 msgid "Will notify if user appears online."
-msgstr ""
+msgstr "გაფრთხილება, თუ მომხმარებელი ონლაინაა."
 
 #: data/resources/user-details.ui:167
 msgid "Start Conversation"
@@ -400,7 +400,7 @@ msgstr "გამართვის რეჟიმში გაშვება"
 
 #: src/application.js:79
 msgid "Allow running alongside another instance"
-msgstr ""
+msgstr "სხვა გაშვებული ასლის დაშვება"
 
 #: src/application.js:82
 msgid "Print version and exit"
@@ -443,27 +443,27 @@ msgstr "%s-ს ახლა ჰქვია %s"
 #: src/chatView.js:1024
 #, javascript-format
 msgid "%s has disconnected"
-msgstr ""
+msgstr "%s გაითიშა"
 
 #: src/chatView.js:1033
 #, javascript-format
 msgid "%s has been kicked by %s"
-msgstr ""
+msgstr "%s გააგდო %s-მა"
 
 #: src/chatView.js:1034
 #, javascript-format
 msgid "%s has been kicked"
-msgstr ""
+msgstr "%s გააგდეს"
 
 #: src/chatView.js:1041
 #, javascript-format
 msgid "%s has been banned by %s"
-msgstr ""
+msgstr "%s-ს %s-მა ბანი დაადო"
 
 #: src/chatView.js:1042
 #, javascript-format
 msgid "%s has been banned"
-msgstr ""
+msgstr "%s-ს ბანი დაედო"
 
 #: src/chatView.js:1047
 #, javascript-format
@@ -479,15 +479,15 @@ msgstr "%s მარცხნივ"
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d მომხმარებელი შემოგვიერთდა"
+msgstr[1] "%d მომხმარებელი შემოგვიერთდა"
 
 #: src/chatView.js:1156
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d მომხმარებელი გავიდა"
+msgstr[1] "%d მომხმარებელი გავიდა"
 
 #. today
 #. Translators: Time in 24h format
@@ -588,40 +588,42 @@ msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
 msgstr ""
+"Polari ქსელის შეცდომის გამო გაითიშა. შეამოწმეთ, მისამართის ველი სწორია, თუ "
+"არა."
 
 #: src/entryArea.js:358
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ჩავსვა %s ხაზი ტექსტი საჯარო სერვისში?"
+msgstr[1] "ჩავსვა %s ხაზი ტექსტი საჯარო სერვისში?"
 
 #: src/entryArea.js:363
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s ხაზი ტექსტის საჯარო სერვისზე ატვირთვა…"
+msgstr[1] "%s ხაზი ტექსტის საჯარო სერვისზე ატვირთვა…"
 
 #: src/entryArea.js:370
 msgid "Upload image to public paste service?"
-msgstr ""
+msgstr "ავტვირთო გამოსახულება საჯარო სერვისზე?"
 
 #: src/entryArea.js:371
 msgid "Uploading image to public paste service…"
-msgstr ""
+msgstr "გამოსახულების ატვირთვა საჯარო სერვისზე…"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:388
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
-msgstr ""
+msgstr "ავტვირთო \"%s\" საჯარო სერვისზე?"
 
 #. Translators: %s is a filename
 #: src/entryArea.js:390
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
-msgstr ""
+msgstr "\"%s\"-ის ატვირთვა საჯარო სერვისზე…"
 
 #. translators: %s is a nick, #%s a channel
 #: src/entryArea.js:399
@@ -659,6 +661,7 @@ msgstr "_შემდეგი"
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr ""
+"/CLOSE [<channel>] [<reason>] — <channel>-ის დახურვა, ნაგულიხმებად მიმდინარის"
 
 #: src/ircParser.js:32
 msgid ""
@@ -673,11 +676,11 @@ msgstr ""
 
 #: src/ircParser.js:34
 msgid "/JOIN <channel> — joins <channel>"
-msgstr ""
+msgstr "/JOIN <channel> — <channel>-ზე გაწევრიანება"
 
 #: src/ircParser.js:35
 msgid "/KICK <nick> — kicks <nick> from current channel"
-msgstr ""
+msgstr "/KICK <nick> — <nick>-ის გაგდება მიმდინარე არხიდან"
 
 #: src/ircParser.js:36
 msgid "/ME <action> — sends <action> to the current channel"
@@ -689,24 +692,26 @@ msgstr ""
 
 #: src/ircParser.js:38
 msgid "/NAMES — lists users on the current channel"
-msgstr ""
+msgstr "/NAMES — მიმდინარე არხის მომხმარებლების ჩამონათვალი"
 
 #: src/ircParser.js:39
 msgid "/NICK <nickname> — sets your nick to <nickname>"
-msgstr ""
+msgstr "/NICK <nickname> — მეტსახელის დაყენება მნიშვნელობაზე: <nickname>"
 
 #: src/ircParser.js:40
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr ""
+"/PART [<channel>] [<reason>] — არხიდან <channel> გასვლა, ნაგულისხმებად "
+"მიმდინარედან"
 
 #: src/ircParser.js:41
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
-msgstr ""
+msgstr "/QUERY <nick> — <nick>-სთან პირადი საუბრის გახსნა"
 
 #: src/ircParser.js:42
 msgid "/QUIT [<reason>] — disconnects from the current server"
-msgstr ""
+msgstr "/QUIT [<reason>] — მიმდინარე სერვერიდან გათიშვა"
 
 #: src/ircParser.js:43
 msgid "/SAY <text> — sends <text> to the current room/contact"
@@ -730,7 +735,7 @@ msgstr "ცნობილი ბრძანებები:"
 
 #: src/ircParser.js:272
 msgid "No topic set"
-msgstr ""
+msgstr "თემა დაყენებული არაა"
 
 #: src/ircParser.js:309
 #, javascript-format
@@ -772,10 +777,10 @@ msgstr "გაჩუმება"
 #: src/roomList.js:451
 #, javascript-format
 msgid "Network %s has an error"
-msgstr ""
+msgstr "ქსელში %s შეცდომაა"
 
 #. Translators: This is an account name followed by a
-#. server address, e.g. "GNOME (irc.gnome.org)"
+#. server address, e.g. "Libera (irc.libera.chat)"
 #: src/roomList.js:508
 #, javascript-format
 msgid "%s (%s)"
@@ -800,26 +805,26 @@ msgstr "უცნობი"
 #: src/roomList.js:558
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
-msgstr ""
+msgstr "%s-სთან უსაფრთხოდ დაკავშირების შეცდომა."
 
 #: src/roomList.js:561
 #, javascript-format
 msgid "%s requires a password."
-msgstr ""
+msgstr "%s პაროლს მოითხოვს."
 
 #: src/roomList.js:567
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
-msgstr ""
+msgstr "%s-სთან მიერთების შეცდომა. სერვერი დაკავებულია."
 
 #: src/roomList.js:570
 #, javascript-format
 msgid "Could not connect to %s."
-msgstr ""
+msgstr "%s-სთან მიერთების შეცდომა."
 
 #: src/roomStack.js:174
 msgid "Should the password be saved?"
-msgstr ""
+msgstr "შევინახო პაროლები?"
 
 #: src/roomStack.js:176 src/telepathyClient.js:684
 #, javascript-format
@@ -833,7 +838,7 @@ msgstr "­_პაროლის შენახვა"
 
 #: src/roomStack.js:213
 msgid "Failed to join the room"
-msgstr ""
+msgstr "ოთახში შესვლის შეცდომა"
 
 #: src/roomStack.js:217
 msgid "_Retry"
@@ -845,34 +850,34 @@ msgstr "ოთახი სავსეა."
 
 #: src/roomStack.js:243
 msgid "You have been banned from the room."
-msgstr ""
+msgstr "ოთახში ბანი დაგადეს."
 
 #: src/roomStack.js:246
 msgid "The room is invite-only."
-msgstr ""
+msgstr "ოთახი მხოლოდ-მოსაწვევითა."
 
 #: src/roomStack.js:249
 msgid "You have been kicked from the room."
-msgstr ""
+msgstr "ოთახიდან გაგაგდეს."
 
 #: src/roomStack.js:252
 msgid "It is not possible to join the room now, but you can retry later."
-msgstr ""
+msgstr "ოთახში შესვლა ამჟამად შეუძლებელია. მოგვიანებით სცადეთ."
 
 #: src/roomStack.js:274
 msgid "Join a room using the + button."
-msgstr ""
+msgstr "შედით ოთახში + ღილაკის გამოყენებით."
 
 #: src/telepathyClient.js:489
 msgid "Good Bye"
 msgstr "ნახვამდის"
 
 #. Translators: Those are a botname and an accountName, e.g.
-#. "Save NickServ password for GNOME"
+#. "Save NickServ password for Libera"
 #: src/telepathyClient.js:682
 #, javascript-format
 msgid "Save %s password for %s?"
-msgstr ""
+msgstr "შევინახო %s პაროლი %s-სთვის?"
 
 #: src/telepathyClient.js:687
 msgid "Save"
