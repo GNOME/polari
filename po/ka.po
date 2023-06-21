@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2023-05-13 08:25+0000\n"
-"PO-Revision-Date: 2023-06-20 06:09+0200\n"
+"POT-Creation-Date: 2023-06-20 04:11+0000\n"
+"PO-Revision-Date: 2023-06-21 05:22+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
-"Language-Team: \n"
+"Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,6 +34,9 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
+"მარტივი ინტერნეტ-ჩატის (IRC) კლიენტი, რომელიც GNOME-შია ინტეგრირებული. მისი "
+"მარტივი და ლამაზი ინტერფეისი მხოლოდ იმისთვისაა განკუთვნილი, რომ ყურადღება "
+"მხოლოდ თქვენს საუბრებს მიაქციოთ."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:15
 msgid ""
@@ -41,6 +44,9 @@ msgid ""
 "private one-to-one conversations. Notifications make sure that you never "
 "miss an important message."
 msgstr ""
+"შეგიძლიათ, Polari არხზე მყოფ ხალხთან საჯარო საუბრისთვის გამოიყენოთ, ან ერთი-"
+"ერთზე დაიმარტოხელოთ. გაფრთხილებები უზრუნველყოფს, რომ მნიშვნელოვან "
+"შეტყობინებას არასდროს გამოტოვებთ."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:46
 msgid "The GNOME Project"
@@ -126,6 +132,8 @@ msgstr "მომხმარებლის სახელის იდენ�
 #: data/org.gnome.Polari.gschema.xml:50
 msgid "Whether the identify command is known to support the username parameter"
 msgstr ""
+"აქვს თუ არა იდენტიფიცირების ბრძანებას მომხმარებლის სახელის პარამეტრის "
+"მხარდაჭერა"
 
 #: data/org.gnome.Polari.gschema.xml:56
 msgid "List of muted usernames"
@@ -135,6 +143,8 @@ msgstr "დადუმებული მომხმარებლის ს�
 msgid ""
 "A list of usernames for whose private messages not to show notifications"
 msgstr ""
+"მომხმარებლის სახელების სია, რომლების პირად შეტყობინებებზეც გაფრთხილება "
+"ნაჩვენები არ იქნება"
 
 #: data/resources/connection-details.ui:18
 msgid "_Server Address"
@@ -268,7 +278,7 @@ msgstr "დაკავშირებული არაა"
 
 #: data/resources/initial-setup-window.ui:36
 msgid "Please connect to the internet to continue the setup."
-msgstr ""
+msgstr "მორგების გასაგრძელებლად ინტერნეტთან მიერთება აუცილებელია."
 
 #: data/resources/initial-setup-window.ui:46
 #: data/resources/initial-setup-window.ui:74
@@ -278,13 +288,15 @@ msgstr "კეთილი იყოს თქვენი მობრძან
 #: data/resources/initial-setup-window.ui:47
 msgid ""
 "Polari is an easy way to chat using IRC. Select a network to get started."
-msgstr ""
+msgstr "Polari ადვილი საშუალებაა IRC-ით ჩატისთვის. დასაწყებად ქსელი აირჩიეთ."
 
 #: data/resources/initial-setup-window.ui:75
 msgid ""
 "Select rooms you want to connect to. You can add more networks and rooms "
 "later, by clicking the + button."
 msgstr ""
+"აირჩიეთ ოთახები, რომლებთანაც მიერთება გნებავთ. მეტი ქსელებისა და ოთახების "
+"დასამატებლად მოგვიანებით + ღილაკით შეგიძლიათ."
 
 #: data/resources/join-room-dialog.ui:4 src/joinDialog.js:218
 msgid "Join Chat Room"
@@ -326,19 +338,19 @@ msgstr "შესახებ"
 msgid "Quit"
 msgstr "გამოსვლა"
 
-#: data/resources/main-window.ui:61 data/resources/main-window.ui:66
+#: data/resources/main-window.ui:66 data/resources/main-window.ui:71
 msgid "Add rooms and networks"
 msgstr "ქსელებისა და ოთახებსი დამატება"
 
-#: data/resources/main-window.ui:213
+#: data/resources/main-window.ui:198
 msgid "Show connected users"
 msgstr "მიერთებული მომხმარებლების სია"
 
-#: data/resources/main-window.ui:233 src/roomList.js:537 src/userList.js:385
+#: data/resources/main-window.ui:218 src/roomList.js:531 src/userList.js:385
 msgid "Offline"
 msgstr "გათიშული"
 
-#: data/resources/main-window.ui:241
+#: data/resources/main-window.ui:226
 msgid "Go online to chat and receive messages."
 msgstr "გადადით ონლაინ სასაუბროდ და მიიღეთ შეტყობინებები."
 
@@ -668,11 +680,14 @@ msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
 msgstr ""
+"/HELP [<ბრძანება>] —<ბრძანების> დახმარება ან ხელმისაწვდომი ბრძანებების სია"
 
 #: src/ircParser.js:33
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
+"/INVITE <მეტსახელი> [<არხი>] — <მეტსახელის> მიმდინარე ან მითითებულ "
+"<არხზე>მოწვევა"
 
 #: src/ircParser.js:34
 msgid "/JOIN <channel> — joins <channel>"
@@ -684,11 +699,13 @@ msgstr "/KICK <nick> — <nick>-ის გაგდება მიმდინ�
 
 #: src/ircParser.js:36
 msgid "/ME <action> — sends <action> to the current channel"
-msgstr ""
+msgstr "/ME <ქმედება> — <ქმედების> გაგზავნა მიმდინარე არხისთვის"
 
 #: src/ircParser.js:37
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr ""
+"/MSG <მეტსახელი> [<შეტყობინება>] — <მეტსახელისთვის> პირადი შეტყობინების "
+"გაგზავნა"
 
 #: src/ircParser.js:38
 msgid "/NAMES — lists users on the current channel"
@@ -716,18 +733,20 @@ msgstr "/QUIT [<reason>] — მიმდინარე სერვერი�
 #: src/ircParser.js:43
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr ""
+"/SAY <ტექსტი> — მიმდინარე ოთახი/კონტაქტისთვის მითითებული <ტექსტის> გაგზავნა"
 
 #: src/ircParser.js:44
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
-msgstr ""
+msgstr "/TOPIC <თემა> — მითითებული <თემის> დაყენება ან ამჟამინდელის ჩვენება"
 
 #: src/ircParser.js:45
 msgid "/WHOIS <nick> — requests information on <nick>"
-msgstr ""
+msgstr "/WHOIS <მეტსახელი> — <მეტსახელის> შესახებ ინფორმაციის გამოთხოვა"
 
 #: src/ircParser.js:48
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
+"უცნობი ბრძანება - სცადეთ /HELP ხელმისაწვდომი ბრძანებების ჩამონათვალისთვის"
 
 #: src/ircParser.js:101
 msgid "Known commands:"
@@ -751,7 +770,7 @@ msgstr "გამოყენება: %s\\"
 msgid "Add Network"
 msgstr "ქსელის დამატება"
 
-#: src/mainWindow.js:352
+#: src/mainWindow.js:288
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -774,50 +793,50 @@ msgstr "ჩაჩუმების გამორთვა"
 msgid "Mute"
 msgstr "გაჩუმება"
 
-#: src/roomList.js:451
+#: src/roomList.js:445
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "ქსელში %s შეცდომაა"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "Libera (irc.libera.chat)"
-#: src/roomList.js:508
+#: src/roomList.js:502
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:516
+#: src/roomList.js:510
 msgid "Connection Problem"
 msgstr "მიერთების პრობლემა"
 
-#: src/roomList.js:533
+#: src/roomList.js:527
 msgid "Connected"
 msgstr "დაკავშირებულია"
 
-#: src/roomList.js:535
+#: src/roomList.js:529
 msgid "Connecting…"
 msgstr "დაკავშირება…"
 
-#: src/roomList.js:539
+#: src/roomList.js:533
 msgid "Unknown"
 msgstr "უცნობი"
 
-#: src/roomList.js:558
+#: src/roomList.js:552
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "%s-სთან უსაფრთხოდ დაკავშირების შეცდომა."
 
-#: src/roomList.js:561
+#: src/roomList.js:555
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s პაროლს მოითხოვს."
 
-#: src/roomList.js:567
+#: src/roomList.js:561
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "%s-სთან მიერთების შეცდომა. სერვერი დაკავებულია."
 
-#: src/roomList.js:570
+#: src/roomList.js:564
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "%s-სთან მიერთების შეცდომა."
@@ -830,7 +849,7 @@ msgstr "შევინახო პაროლები?"
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
-msgstr ""
+msgstr "იდენტიფიკაცია მოხდება ავტომატურად, როდესაც დაუკავშირდებით %s-ს"
 
 #: src/roomStack.js:184
 msgid "_Save Password"
