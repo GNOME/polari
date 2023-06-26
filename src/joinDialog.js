@@ -17,7 +17,7 @@ const DialogPage = {
 };
 
 export default GObject.registerClass(
-class JoinDialog extends Gtk.Dialog {
+class JoinDialog extends Gtk.Window {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/join-room-dialog.ui';
     static [Gtk.internalChildren] = [
         'cancelButton',
@@ -36,7 +36,6 @@ class JoinDialog extends Gtk.Dialog {
     ];
 
     constructor(params) {
-        params['use-header-bar'] = 1;
         super(params);
 
         this._setupMainPage();
@@ -59,11 +58,9 @@ class JoinDialog extends Gtk.Dialog {
                 this._updateConnectionCombo();
             });
 
-        this.connect('response', (w, response) => {
-            if (response === Gtk.ResponseType.OK)
-                this._joinRoom();
-            this.destroy();
-        });
+        this._joinButton.connect('clicked',
+            () => this._joinRoom());
+
         this.connect('destroy', () => {
             this._accountsMonitor.disconnect(this._accountAddedId);
             this._accountsMonitor.disconnect(this._accountRemovedId);
@@ -129,7 +126,7 @@ class JoinDialog extends Gtk.Dialog {
             if (this._filterEntry.text.length > 0)
                 this._filterEntry.text = '';
             else
-                this.response(Gtk.ResponseType.CANCEL);
+                this.destroy();
         });
         this._filterEntry.connect('activate', () => {
             if (this._filterEntry.text.length > 0)
@@ -169,6 +166,8 @@ class JoinDialog extends Gtk.Dialog {
                 true,
             ]));
         });
+
+        this.destroy();
     }
 
     _updateConnectionCombo() {
@@ -198,8 +197,6 @@ class JoinDialog extends Gtk.Dialog {
         }
 
         this._joinButton.sensitive = sensitive;
-        this.set_default_response(sensitive
-            ? Gtk.ResponseType.OK : Gtk.ResponseType.NONE);
     }
 
     get _page() {
