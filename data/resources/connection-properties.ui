@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="Gjs_ConnectionProperties" parent="GtkDialog">
+  <template class="Gjs_ConnectionProperties" parent="GtkWindow">
     <property name="modal">True</property>
     <property name="destroy-with-parent">True</property>
     <property name="default-width">450</property>
-    <child type="action">
-      <object class="GtkButton" id="cancelButton">
-        <property name="label" translatable="yes">_Cancel</property>
-        <property name="receives-default">True</property>
-        <property name="use-underline">True</property>
+    <property name="default-widget">applyButton</property>
+    <child>
+      <object class="GtkShortcutController">
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">action(window.close)</property>
+          </object>
+        </child>
       </object>
     </child>
-    <child type="action">
-      <object class="GtkButton" id="applyButton">
-        <property name="label" translatable="yes">_Apply</property>
-        <property name="receives-default">True</property>
-        <property name="use-underline">True</property>
-        <property name="sensitive" bind-source="details"
-                  bind-property="can-confirm" bind-flags="sync-create"/>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="show-title-buttons">False</property>
+        <child type="start">
+          <object class="GtkButton" id="cancelButton">
+            <property name="label" translatable="yes">_Cancel</property>
+            <property name="receives-default">True</property>
+            <property name="use-underline">True</property>
+            <property name="action-name">window.close</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton" id="applyButton">
+            <property name="label" translatable="yes">_Apply</property>
+            <property name="receives-default">True</property>
+            <property name="use-underline">True</property>
+            <property name="sensitive" bind-source="details"
+                      bind-property="can-confirm" bind-flags="sync-create"/>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+          </object>
+        </child>
       </object>
     </child>
-    <child internal-child="content_area">
+    <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <property name="spacing">24</property>
@@ -62,9 +82,5 @@
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="cancel">cancelButton</action-widget>
-      <action-widget response="ok">applyButton</action-widget>
-    </action-widgets>
   </template>
 </interface>

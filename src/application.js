@@ -786,9 +786,6 @@ class Application extends Adw.Application {
         let account = this._accountsMonitor.lookupAccount(accountPath);
         let dialog = new Connections.ConnectionProperties(account);
         dialog.transient_for = this.active_window;
-        dialog.connect('response', w => {
-            w.destroy();
-        });
         dialog.show();
     }
 

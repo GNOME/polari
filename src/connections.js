@@ -499,9 +499,10 @@ class ConnectionDetails extends Gtk.Box {
 
 
 export const ConnectionProperties = GObject.registerClass(
-class ConnectionProperties extends Gtk.Dialog {
+class ConnectionProperties extends Gtk.Window {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-properties.ui';
     static [Gtk.internalChildren] = [
+        'applyButton',
         'details',
         'errorBox',
         'errorLabel',
@@ -511,7 +512,6 @@ class ConnectionProperties extends Gtk.Dialog {
         /* Translators: %s is a connection name */
         super({
             title: vprintf(_('“%s” Properties'), account.display_name),
-            use_header_bar: 1,
         });
 
         this._details.account = account;
@@ -526,11 +526,10 @@ class ConnectionProperties extends Gtk.Dialog {
             this.resize(this.default_width, 1);
         });
 
-        this.connect('response', (w, response) => {
-            if (response === Gtk.ResponseType.OK)
-                this._details.save();
+        this._applyButton.connect('clicked', () => {
+            this._details.save();
+            this.destroy();
         });
-        this.set_default_response(Gtk.ResponseType.OK);
 
         let id = account.connect('notify::connection-status',
             this._syncErrorMessage.bind(this));
