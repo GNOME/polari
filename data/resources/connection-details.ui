@@ -26,15 +26,9 @@
                  </object>
                </child>
                <child>
-                 <object class="AdwActionRow">
+                 <object class="AdwSwitchRow" id="sslRow">
                    <property name="title" translatable="yes">Use secure c_onnection</property>
                    <property name="use-underline">True</property>
-                   <property name="activatable-widget">sslSwitch</property>
-                   <child type="suffix">
-                     <object class="GtkSwitch" id="sslSwitch">
-                       <property name="valign">center</property>
-                     </object>
-                   </child>
                  </object>
                </child>
              </object>

@@ -1,3 +1,4 @@
+import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -254,7 +255,7 @@ class ConnectionDetails extends Gtk.Box {
         'serverRow',
         'nickRow',
         'realnameRow',
-        'sslSwitch',
+        'sslRow',
     ];
 
     static [GObject.properties] = {
@@ -293,7 +294,7 @@ class ConnectionDetails extends Gtk.Box {
             row.connect('changed', this._onCanConfirmChanged.bind(this));
             row.get_delegate().activates_default = true;
         }
-        this._sslSwitch.connect('notify::active',
+        this._sslRow.connect('notify::active',
             this._onCanConfirmChanged.bind(this));
 
         const buffer = this._realnameRow.get_delegate().get_buffer();
@@ -346,7 +347,7 @@ class ConnectionDetails extends Gtk.Box {
 
         if (this._realnameRow.text)
             params.fullname = this._realnameRow.text.trim();
-        if (this._sslSwitch.active)
+        if (this._sslRow.active)
             params.use_ssl = true;
         if (port)
             params.port = port;
@@ -367,7 +368,7 @@ class ConnectionDetails extends Gtk.Box {
         this._serverRow.text = this._savedServer;
         this._nickRow.text = this._savedNick;
         this._realnameRow.text = this._savedRealname;
-        this._sslSwitch.active = this._savedSSL;
+        this._sslRow.active = this._savedSSL;
 
         if (this._serverRow.visible)
             this._serverRow.grab_focus();
@@ -399,7 +400,7 @@ class ConnectionDetails extends Gtk.Box {
         this._nickRow.text = this._savedNick;
         this._realnameRow.text = this._savedRealname;
         this._nameRow.text = this._savedName;
-        this._sslSwitch.active = this._savedSSL;
+        this._sslRow.active = this._savedSSL;
     }
 
     // eslint-disable-next-line camelcase
@@ -408,7 +409,7 @@ class ConnectionDetails extends Gtk.Box {
                             this._serverRow.text !== this._savedServer ||
                             this._nickRow.text !== this._savedNick ||
                             this._realnameRow.text !== this._savedRealname ||
-                            this._sslSwitch.active !== this._savedSSL;
+                            this._sslRow.active !== this._savedSSL;
 
         return this._serverRow.text.length > 0 &&
                this._nickRow.text.length > 0 &&
