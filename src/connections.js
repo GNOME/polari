@@ -499,13 +499,14 @@ class ConnectionDetails extends Gtk.Box {
 
 
 export const ConnectionProperties = GObject.registerClass(
-class ConnectionProperties extends Gtk.Window {
+class ConnectionProperties extends Adw.Window {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-properties.ui';
     static [Gtk.internalChildren] = [
         'applyButton',
         'details',
         'errorBox',
         'errorLabel',
+        'view',
     ];
 
     constructor(account) {
@@ -542,8 +543,8 @@ class ConnectionProperties extends Gtk.Window {
         let status = account.connection_status;
         let reason = account.connection_status_reason;
 
-        this._errorBox.hide();
         this._details.setErrorHint(ErrorHint.NONE);
+        this._view.reveal_bottom_bars = false;
 
         if (status !== Tp.ConnectionStatus.DISCONNECTED ||
             reason === Tp.ConnectionStatusReason.REQUESTED)
@@ -552,9 +553,9 @@ class ConnectionProperties extends Gtk.Window {
         switch (account.connection_error) {
         case Tp.error_get_dbus_name(Tp.Error.CONNECTION_REFUSED):
         case Tp.error_get_dbus_name(Tp.Error.NETWORK_ERROR):
-            this._errorBox.show();
             this._errorLabel.label = _('Polari disconnected due to a network error. Please check if the address field is correct.');
             this._details.setErrorHint(ErrorHint.SERVER);
+            this._view.reveal_bottom_bars = true;
             break;
         }
     }
