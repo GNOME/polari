@@ -233,17 +233,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                   </object>
                 </child>
                 <property name="content">
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="margin-start">30</property>
-                    <property name="margin-end">30</property>
-                    <property name="margin-top">30</property>
-                    <property name="margin-bottom">24</property>
-                    <child>
-                      <object class="Gjs_ConnectionDetails" id="details">
-                      </object>
-                    </child>
-                  </object>
+                  <object class="Gjs_ConnectionDetails" id="details"/>
                 </property>
               </object>
             </property>

@@ -8,58 +8,48 @@ SPDX-License-Identifier: GPL-2.0-or-later
 -->
 
 <interface>
-  <template class="Gjs_ConnectionDetails" parent="GtkBox">
+  <template class="Gjs_ConnectionDetails" parent="AdwPreferencesPage">
     <child>
-      <object class="AdwClamp">
-        <property name="child">
-          <object class="GtkBox">
-           <property name="orientation">vertical</property>
-           <property name="spacing">24</property>
-           <child>
-             <object class="AdwPreferencesGroup">
-               <property name="hexpand">True</property>
-               <property name="visible" bind-source="Gjs_ConnectionDetails"
-                         bind-property="has-service"
-                         bind-flags="invert-boolean|sync-create"/>
-               <child>
-                 <object class="AdwEntryRow" id="serverRow">
-                   <property name="title" translatable="yes">_Server Address</property>
-                   <property name="use-underline">True</property>
-                 </object>
-               </child>
-               <child>
-                 <object class="AdwEntryRow" id="nameRow">
-                   <property name="title" translatable="yes">Net_work Name</property>
-                   <property name="use-underline">True</property>
-                 </object>
-               </child>
-               <child>
-                 <object class="AdwSwitchRow" id="sslRow">
-                   <property name="title" translatable="yes">Use secure c_onnection</property>
-                   <property name="use-underline">True</property>
-                 </object>
-               </child>
-             </object>
-           </child>
-           <child>
-             <object class="AdwPreferencesGroup">
-               <property name="hexpand">True</property>
-               <child>
-                 <object class="AdwEntryRow" id="nickRow">
-                   <property name="title" translatable="yes">_Nickname</property>
-                   <property name="use-underline">True</property>
-                 </object>
-               </child>
-               <child>
-                 <object class="AdwEntryRow" id="realnameRow">
-                   <property name="title" translatable="yes">_Real Name</property>
-                   <property name="use-underline">True</property>
-                 </object>
-               </child>
-             </object>
-           </child>
+      <object class="AdwPreferencesGroup">
+        <property name="hexpand">True</property>
+        <property name="visible" bind-source="Gjs_ConnectionDetails"
+                  bind-property="has-service"
+                  bind-flags="invert-boolean|sync-create"/>
+        <child>
+          <object class="AdwEntryRow" id="serverRow">
+            <property name="title" translatable="yes">_Server Address</property>
+            <property name="use-underline">True</property>
           </object>
-        </property>
+        </child>
+        <child>
+          <object class="AdwEntryRow" id="nameRow">
+            <property name="title" translatable="yes">Net_work Name</property>
+            <property name="use-underline">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwSwitchRow" id="sslRow">
+            <property name="title" translatable="yes">Use secure c_onnection</property>
+            <property name="use-underline">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="hexpand">True</property>
+        <child>
+          <object class="AdwEntryRow" id="nickRow">
+            <property name="title" translatable="yes">_Nickname</property>
+            <property name="use-underline">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwEntryRow" id="realnameRow">
+            <property name="title" translatable="yes">_Real Name</property>
+            <property name="use-underline">True</property>
+          </object>
+        </child>
       </object>
     </child>
   </template>

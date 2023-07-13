@@ -51,12 +51,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
           </object>
         </child>
         <property name="content">
-          <object class="Gjs_ConnectionDetails" id="details">
-            <property name="margin-start">24</property>
-            <property name="margin-end">24</property>
-            <property name="margin-top">24</property>
-            <property name="margin-bottom">24</property>
-          </object>
+          <object class="Gjs_ConnectionDetails" id="details"/>
         </property>
         <child type="bottom">
           <object class="GtkCenterBox" id="errorBox">

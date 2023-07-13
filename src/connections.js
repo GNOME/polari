@@ -257,7 +257,7 @@ class ConnectionsList extends Gtk.ScrolledWindow {
 });
 
 export const ConnectionDetails = GObject.registerClass(
-class ConnectionDetails extends Gtk.Box {
+class ConnectionDetails extends Adw.PreferencesPage {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-details.ui';
     static [Gtk.internalChildren] = [
         'nameRow',
