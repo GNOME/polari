@@ -43,7 +43,7 @@
   <url type="translate">https://wiki.gnome.org/TranslationProject</url>
   <update_contact>fmuellner@gnome.org</update_contact>
   <project_group>GNOME</project_group>
-  <developer_name>The GNOME Project</developer_name>
+  <developer_name>Florian Müllner</developer_name>
   <kudos>
     <kudo>HiDpiIcon</kudo>
     <kudo>HighContrast</kudo>
