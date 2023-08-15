@@ -113,6 +113,9 @@
             <property name="content">
               <object class="AdwNavigationPage">
                 <property name="tag">content</property>
+                <style>
+                  <class name="view"/>
+                </style>
                 <property name="child">
                   <object class="AdwToolbarView">
                     <child type="top">
