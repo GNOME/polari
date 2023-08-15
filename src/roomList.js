@@ -667,7 +667,7 @@ class RoomList extends Gtk.ListBox {
 
     _roomToRowIndex(index) {
         let roomRows = [...this].filter(r => r instanceof RoomRow);
-        return index < roomRows.length ? roomRows[index].get_index() : -1;
+        return index >= 0 && index < roomRows.length ? roomRows[index].get_index() : -1;
     }
 
     _getRoomRowAtIndex(index) {
