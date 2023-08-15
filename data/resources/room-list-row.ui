@@ -13,14 +13,14 @@
         <child>
           <object class="GtkImage" id="icon">
             <property name="visible">False</property>
-            <property name="valign">baseline</property>
+            <property name="valign">center</property>
             <property name="icon-size">1</property>
           </object>
         </child>
         <child>
           <object class="GtkLabel" id="roomLabel">
             <property name="halign">start</property>
-            <property name="valign">baseline</property>
+            <property name="valign">center</property>
             <property name="hexpand">True</property>
             <property name="ellipsize">end</property>
           </object>
@@ -33,7 +33,7 @@
                 <property name="name">connecting</property>
                 <property name="child">
                   <object class="GtkImage">
-                    <property name="valign">baseline</property>
+                    <property name="valign">center</property>
                     <property name="icon-size">1</property>
                     <property name="icon-name">content-loading-symbolic</property>
                     <style>
