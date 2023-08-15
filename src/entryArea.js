@@ -304,7 +304,7 @@ class EntryArea extends Gtk.Stack {
     }
 
     _canFocusChatEntry() {
-        const toplevelFocus = this._chatEntry.get_root().get_focus();
+        const toplevelFocus = this._chatEntry.get_root()?.get_focus();
         return this.sensitive &&
                this._chatEntry.get_mapped() &&
                !this._chatEntry['has-focus'] &&
