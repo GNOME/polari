@@ -2,7 +2,6 @@
 <interface>
   <template class="Gjs_RoomListHeader" parent="GtkWidget">
     <property name="popover">connectionPopover</property>
-    <property name="margin-bottom">4</property>
     <property name="focusable">True</property>
     <property name="margin-top">1</property>
     <property name="layout-manager">

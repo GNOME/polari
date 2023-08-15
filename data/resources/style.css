@@ -57,6 +57,7 @@
 .polari-room-list .room-list-header {
     font-size: smaller;
     padding: 8px 7px 0;
+    min-height: 24px;
 }
 
 .polari-room-list .room-list-header label:dir(ltr),
