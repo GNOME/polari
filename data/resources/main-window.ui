@@ -98,7 +98,7 @@
                                 <property name="selection-mode">browse</property>
                                 <style>
                                   <class name="polari-room-list"/>
-                                  <class name="sidebar-pane"/>
+                                  <class name="navigation-sidebar"/>
                                 </style>
                               </object>
                             </child>
