@@ -160,79 +160,85 @@ SPDX-License-Identifier: GPL-2.0-or-later
                     <property name="orientation">vertical</property>
                     <property name="spacing">18</property>
                     <child>
-                      <object class="GtkStack" id="connectionStack">
-                        <property name="vexpand">True</property>
-                        <property name="transition-type">crossfade</property>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <style>
+                          <class name="linked"/>
+                          <class name="frame"/>
+                        </style>
                         <child>
-                          <object class="GtkStackPage">
-                            <property name="name">predefined</property>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <style>
-                                  <class name="linked"/>
-                                  <class name="frame"/>
-                                </style>
-                                <child>
-                                  <object class="GtkBox">
-                                    <style>
-                                      <class name="polari-listbox-filterbar"/>
-                                    </style>
-                                    <child>
-                                      <object class="GtkSearchEntry" id="filterEntry">
-                                        <property name="hexpand">True</property>
-                                        <property name="margin-start">60</property>
-                                        <property name="margin-end">60</property>
-                                        <property name="margin-top">6</property>
-                                        <property name="margin-bottom">6</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="Gjs_ConnectionsList" id="connectionsList">
-                                    <property name="vexpand">True</property>
-                                  </object>
-                                </child>
+                          <object class="GtkBox">
+                            <style>
+                              <class name="polari-listbox-filterbar"/>
+                            </style>
+                            <child>
+                              <object class="GtkSearchEntry" id="filterEntry">
+                                <property name="hexpand">True</property>
+                                <property name="margin-start">60</property>
+                                <property name="margin-end">60</property>
+                                <property name="margin-top">6</property>
+                                <property name="margin-bottom">6</property>
                               </object>
-                            </property>
+                            </child>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkStackPage">
-                            <property name="name">custom</property>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">24</property>
-                                <child>
-                                  <object class="Gjs_ConnectionDetails" id="details">
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="addButton">
-                                    <property name="label" translatable="yes">_Add</property>
-                                    <property name="halign">end</property>
-                                    <property name="receives-default">True</property>
-                                    <property name="use-underline">True</property>
-                                    <property name="sensitive" bind-source="details"
-                                              bind-property="can-confirm"
-                                              bind-flags="sync-create"/>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
+                          <object class="Gjs_ConnectionsList" id="connectionsList">
+                            <property name="vexpand">True</property>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkToggleButton" id="customToggle">
+                      <object class="GtkButton">
                         <property name="label" translatable="yes">_Custom Network</property>
                         <property name="receives-default">True</property>
                         <property name="use-underline">True</property>
                         <property name="focus-on-click">False</property>
-                        <property name="halign">start</property>
+                        <property name="halign">center</property>
+                        <property name="action-name">navigation.push</property>
+                        <property name="action-target">"custom"</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwNavigationPage" id="customPage">
+            <property name="title" translatable="yes">Custom Network</property>
+            <property name="tag">custom</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-start-title-buttons">false</property>
+                    <property name="show-end-title-buttons">false</property>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="margin-start">30</property>
+                    <property name="margin-end">30</property>
+                    <property name="margin-top">30</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="spacing">24</property>
+                    <child>
+                      <object class="Gjs_ConnectionDetails" id="details">
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="addButton">
+                        <property name="label" translatable="yes">_Add</property>
+                        <property name="halign">end</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="sensitive" bind-source="details"
+                                  bind-property="can-confirm"
+                                  bind-flags="sync-create"/>
                       </object>
                     </child>
                   </object>

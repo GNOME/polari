@@ -20,14 +20,13 @@ class JoinDialog extends Adw.Window {
         'navView',
         'mainPage',
         'connectionPage',
+        'customPage',
         'connectionCombo',
-        'connectionStack',
         'filterEntry',
         'connectionsList',
         'serverRoomList',
         'details',
         'addButton',
-        'customToggle',
     ];
 
     constructor(params) {
@@ -97,16 +96,6 @@ class JoinDialog extends Adw.Window {
             this._onAccountCreated.bind(this));
         this._details.connect('account-created',
             this._onAccountCreated.bind(this));
-
-        this._customToggle.connect('notify::active', () => {
-            let isCustom = this._customToggle.active;
-            let childName = isCustom ? 'custom' : 'predefined';
-            this._connectionStack.visible_child_name = childName;
-            if (isCustom) {
-                this.set_default_widget(this._addButton);
-                this._details.reset();
-            }
-        });
 
         this._filterEntry.connect('search-changed', () => {
             this._connectionsList.setFilter(this._filterEntry.text);
@@ -191,10 +180,12 @@ class JoinDialog extends Adw.Window {
     }
 
     _onPageChanged() {
-        if (this._navView.visible_page === this._mainPage)
+        if (this._navView.visible_page === this._mainPage) {
             this._serverRoomList.focusEntry();
-        else
-            this._customToggle.active = false;
+        } else if (this._navView.visible_page === this._customPage) {
+            this.set_default_widget(this._addButton);
+            this._details.reset();
+        }
         this._updateCanJoin();
     }
 });
