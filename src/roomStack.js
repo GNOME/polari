@@ -293,8 +293,8 @@ class RoomView extends Gtk.Overlay {
     constructor(room, sizeGroup) {
         super({ name: `RoomView ${room.display_name}` });
 
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
-        this.set_child(box);
+        const toolbarView = new Adw.ToolbarView();
+        this.set_child(toolbarView);
 
         if (room.type === Tp.HandleType.CONTACT)
             this.add_overlay(new SavePasswordConfirmationBar(room));
@@ -302,13 +302,21 @@ class RoomView extends Gtk.Overlay {
         this.add_overlay(new ChannelErrorBar(room));
 
         this._view = new ChatView(room);
-        box.append(this._view);
+        toolbarView.content = this._view;
 
         this._entryArea = new EntryArea({
             room,
             sensitive: false,
         });
-        box.append(this._entryArea);
+        toolbarView.add_bottom_bar(this._entryArea);
+        this._entryArea.bind_property_full('confirmation-visible',
+            toolbarView, 'bottom-bar-style',
+            GObject.BindingFlags.SYNC_CREATE,
+            (v, source) => [
+                true,
+                source ? Adw.ToolbarStyle.RAISED : Adw.ToolbarStyle.FLAT,
+            ],
+            null);
 
         this._view.bind_property('max-nick-chars',
             this._entryArea, 'max-nick-chars',

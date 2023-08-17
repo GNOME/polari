@@ -45,8 +45,6 @@
 }
 
 .polari-paste-confirmation {
-    border: 0 solid @borders;
-    border-top-width: 1px;
     padding: 6px;
 }
 .polari-paste-confirmation:dir(ltr) {
@@ -158,9 +156,6 @@ treeview.polari-server-room-list {
 
 /* "opt-out" of insensitive view styling */
 .polari-entry-area:disabled { background-color: @view_bg_color; }
-
-/* the following adds a border on top of the inputbar when users scroll up */
-.polari-chat-view > undershoot.bottom { border-bottom: 1px solid @borders; }
 
 /* tweak labels in the user popover */
 .polari-user-popover-nick { font-weight: bold; }
