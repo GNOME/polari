@@ -78,6 +78,10 @@
     padding-left: 8px;
 }
 
+.polari-room-list row:not(.room-list-header):not(.inactive) {
+    font-weight: bold;
+}
+
 .polari-room-list row.inactive,
 .polari-room-list row.inactive:backdrop {
     color: mix(@window_fg_color, @view_bg_color, 0.3);
