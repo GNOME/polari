@@ -216,6 +216,20 @@ SPDX-License-Identifier: GPL-2.0-or-later
                   <object class="AdwHeaderBar">
                     <property name="show-start-title-buttons">false</property>
                     <property name="show-end-title-buttons">false</property>
+                    <child type="end">>
+                      <object class="GtkButton" id="addButton">
+                        <property name="label" translatable="yes">_Add</property>
+                        <property name="halign">end</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="sensitive" bind-source="details"
+                                  bind-property="can-confirm"
+                                  bind-flags="sync-create"/>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <property name="content">
@@ -225,20 +239,8 @@ SPDX-License-Identifier: GPL-2.0-or-later
                     <property name="margin-end">30</property>
                     <property name="margin-top">30</property>
                     <property name="margin-bottom">24</property>
-                    <property name="spacing">24</property>
                     <child>
                       <object class="Gjs_ConnectionDetails" id="details">
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="addButton">
-                        <property name="label" translatable="yes">_Add</property>
-                        <property name="halign">end</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-underline">True</property>
-                        <property name="sensitive" bind-source="details"
-                                  bind-property="can-confirm"
-                                  bind-flags="sync-create"/>
                       </object>
                     </child>
                   </object>
