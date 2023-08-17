@@ -76,7 +76,7 @@ class MainWindow extends Adw.ApplicationWindow {
 
         const app = this.application;
         if (app.isTestInstance)
-            this.add_css_class('test-instance');
+            this.add_css_class('devel');
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
             this.add_css_class('snapshot');
 
