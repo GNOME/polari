@@ -4,6 +4,7 @@
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
@@ -11,20 +12,15 @@ import Gtk from 'gi://Gtk';
 
 import AccountsMonitor from './accountsMonitor.js';
 
-const DialogPage = {
-    MAIN: 0,
-    CONNECTION: 1,
-};
-
 export default GObject.registerClass(
-class JoinDialog extends Gtk.Window {
+class JoinDialog extends Adw.Window {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/join-room-dialog.ui';
     static [Gtk.internalChildren] = [
-        'cancelButton',
         'joinButton',
-        'mainStack',
+        'navView',
+        'mainPage',
+        'connectionPage',
         'connectionCombo',
-        'connectionButton',
         'connectionStack',
         'filterEntry',
         'connectionsList',
@@ -32,7 +28,6 @@ class JoinDialog extends Gtk.Window {
         'details',
         'addButton',
         'customToggle',
-        'backButton',
     ];
 
     constructor(params) {
@@ -50,12 +45,12 @@ class JoinDialog extends Gtk.Window {
         this._accountAddedId =
             this._accountsMonitor.connect('account-added', (am, account) => {
                 this._accounts.set(account.display_name, account);
-                this._updateConnectionCombo();
+                this._onAccountsChanged();
             });
         this._accountRemovedId =
             this._accountsMonitor.connect('account-removed', (am, account) => {
                 this._accounts.delete(account.display_name);
-                this._updateConnectionCombo();
+                this._onAccountsChanged();
             });
 
         this._joinButton.connect('clicked',
@@ -66,13 +61,14 @@ class JoinDialog extends Gtk.Window {
             this._accountsMonitor.disconnect(this._accountRemovedId);
         });
 
-        if (this._hasAccounts)
-            this._setPage(DialogPage.MAIN);
-        else
-            this._setPage(DialogPage.CONNECTION);
+        if (!this._hasAccounts)
+            this._navView.push(this._connectionPage);
 
-        this._updateConnectionCombo();
-        this._updateCanJoin();
+        this._navView.connect('notify::visible-page',
+            () => this._onPageChanged());
+
+        this._onAccountsChanged();
+        this._onPageChanged();
     }
 
     get _hasAccounts() {
@@ -80,10 +76,6 @@ class JoinDialog extends Gtk.Window {
     }
 
     _setupMainPage() {
-        this._connectionButton.connect('clicked', () => {
-            this._setPage(DialogPage.CONNECTION);
-        });
-
         this._connectionCombo.connect('changed',
             this._onAccountChanged.bind(this));
         this._connectionCombo.sensitive = false;
@@ -93,15 +85,12 @@ class JoinDialog extends Gtk.Window {
     }
 
     _setupConnectionPage() {
-        this._backButton.connect('clicked', () => {
-            this._setPage(DialogPage.MAIN);
-        });
         this._connectionsList.connect('account-selected', () => {
-            this._setPage(DialogPage.MAIN);
+            this._navView.pop_to_page(this._mainPage);
         });
         this._addButton.connect('clicked', () => {
             this._details.save();
-            this._setPage(DialogPage.MAIN);
+            this._navView.pop_to_page(this._mainPage);
         });
 
         this._connectionsList.connect('account-created',
@@ -126,7 +115,7 @@ class JoinDialog extends Gtk.Window {
             if (this._filterEntry.text.length > 0)
                 this._filterEntry.text = '';
             else
-                this.destroy();
+                this._navView.pop();
         });
         this._filterEntry.connect('activate', () => {
             if (this._filterEntry.text.length > 0)
@@ -170,7 +159,7 @@ class JoinDialog extends Gtk.Window {
         this.destroy();
     }
 
-    _updateConnectionCombo() {
+    _onAccountsChanged() {
         this._connectionCombo.remove_all();
 
         let names = [...this._accounts.keys()].sort((a, b) => {
@@ -186,12 +175,14 @@ class JoinDialog extends Gtk.Window {
         if (activeRoom)
             activeIndex = Math.max(names.indexOf(activeRoom.account.display_name), 0);
         this._connectionCombo.set_active(activeIndex);
+
+        this._connectionPage.set_can_pop(this._hasAccounts);
     }
 
     _updateCanJoin() {
         let sensitive = false;
 
-        if (this._page === DialogPage.MAIN) {
+        if (this._navView.visible_page === this._mainPage) {
             sensitive = this._connectionCombo.get_active() > -1  &&
                         this._serverRoomList.can_join;
         }
@@ -199,27 +190,11 @@ class JoinDialog extends Gtk.Window {
         this._joinButton.sensitive = sensitive;
     }
 
-    get _page() {
-        if (this._mainStack.visible_child_name === 'connection')
-            return DialogPage.CONNECTION;
-        else
-            return DialogPage.MAIN;
-    }
-
-    _setPage(page) {
-        let isMain = page === DialogPage.MAIN;
-        let isAccountsEmpty = !this._hasAccounts;
-
-        if (isMain)
+    _onPageChanged() {
+        if (this._navView.visible_page === this._mainPage)
             this._serverRoomList.focusEntry();
         else
             this._customToggle.active = false;
-
-        this._joinButton.visible = isMain;
-        this._cancelButton.visible = isMain || isAccountsEmpty;
-        this._backButton.visible = !(isMain || isAccountsEmpty);
-        this.title = isMain ? _('Join Chat Room') : _('Add Network');
-        this._mainStack.visible_child_name = isMain ? 'main' : 'connection';
         this._updateCanJoin();
     }
 });

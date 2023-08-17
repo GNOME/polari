@@ -8,8 +8,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
 -->
 
 <interface>
-  <template class="Gjs_JoinDialog" parent="GtkWindow">
-    <property name="title" translatable="yes">Join Chat Room</property>
+  <template class="Gjs_JoinDialog" parent="AdwWindow">
     <property name="modal">True</property>
     <property name="destroy-with-parent">True</property>
     <property name="default-width">500</property>
@@ -26,207 +25,218 @@ SPDX-License-Identifier: GPL-2.0-or-later
         </child>
       </object>
     </child>
-    <child type="titlebar">
-      <object class="GtkHeaderBar">
-        <property name="show-title-buttons">False</property>
-        <child type="start">
-          <object class="GtkButton" id="backButton">
-            <property name="focus-on-click">False</property>
-            <property name="icon-name">go-previous-symbolic</property>
-            <child>
-              <object class='GtkShortcutController'>
-                <property name='scope'>managed</property>
-                <child>
-                  <object class='GtkShortcut'>
-                    <property name='trigger'>&lt;Alt&gt;Left</property>
-                    <property name='action'>signal(clicked)</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child type="start">
-          <object class="GtkButton" id="cancelButton">
-            <property name="label" translatable="yes">_Cancel</property>
-            <property name="receives-default">True</property>
-            <property name="use-underline">True</property>
-            <property name="action-name">window.close</property>
-          </object>
-        </child>
-        <child type="end">
-          <object class="GtkButton" id="joinButton">
-            <property name="label" translatable="yes">_Join</property>
-            <property name="receives-default">True</property>
-            <property name="use-underline">True</property>
-            <style>
-              <class name="suggested-action"/>
-            </style>
-          </object>
-        </child>
-      </object>
-    </child>
     <child>
-      <object class="GtkStack" id="mainStack">
-        <property name="transition-type">slide-left-right</property>
+      <object class="AdwNavigationView" id="navView">
         <child>
-          <object class="GtkStackPage">
-            <property name="name">main</property>
+          <object class="AdwNavigationPage" id="mainPage">
+            <property name="title" translatable="yes">Join Chat Room</property>
             <property name="child">
-              <object class="GtkGrid">
-                <property name="margin-start">30</property>
-                <property name="margin-end">30</property>
-                <property name="margin-top">30</property>
-                <property name="margin-bottom">24</property>
-                <property name="row-spacing">18</property>
-                <property name="column-spacing">12</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">C_onnection</property>
-                    <property name="use-underline">True</property>
-                    <property name="mnemonic-widget">connectionCombo</property>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-start-title-buttons">false</property>
+                    <property name="show-end-title-buttons">false</property>
+                    <child type="start">
+                      <object class="GtkButton">
+                        <property name="label" translatable="yes">_Cancel</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="action-name">window.close</property>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkButton" id="joinButton">
+                        <property name="label" translatable="yes">_Join</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkComboBoxText" id="connectionCombo">
-                    <property name="hexpand">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="connectionButton">
-                    <property name="receives-default">True</property>
-                    <property name="focus-on-click">False</property>
+                <property name="content">
+                  <object class="GtkGrid">
+                    <property name="margin-start">30</property>
+                    <property name="margin-end">30</property>
+                    <property name="margin-top">30</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="row-spacing">18</property>
+                    <property name="column-spacing">12</property>
                     <child>
-                      <object class='GtkShortcutController'>
-                        <property name='scope'>managed</property>
+                      <object class="GtkLabel">
+                        <property name="halign">end</property>
+                        <property name="label" translatable="yes">C_onnection</property>
+                        <property name="use-underline">True</property>
+                        <property name="mnemonic-widget">connectionCombo</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkComboBoxText" id="connectionCombo">
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="connectionButton">
+                        <property name="receives-default">True</property>
+                        <property name="focus-on-click">False</property>
+                        <property name="action-name">navigation.push</property>
+                        <property name="action-target">"connection"</property>
                         <child>
-                          <object class='GtkShortcut'>
-                            <property name='trigger'>&lt;Control&gt;n</property>
-                            <property name='action'>signal(clicked)</property>
+                          <object class='GtkShortcutController'>
+                            <property name='scope'>managed</property>
+                            <child>
+                              <object class='GtkShortcut'>
+                                <property name='trigger'>&lt;Control&gt;n</property>
+                                <property name='action'>signal(clicked)</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">list-add-symbolic</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">_Add Network</property>
+                                <property name="use-underline">True</property>
+                                <property name="mnemonic-widget">connectionButton</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">list-add-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label" translatable="yes">_Add Network</property>
-                            <property name="use-underline">True</property>
-                            <property name="mnemonic-widget">connectionButton</property>
-                          </object>
-                        </child>
+                      <object class="Gjs_ServerRoomList" id="serverRoomList">
+                        <layout>
+                          <property name="column-span">3</property>
+                          <property name="column">0</property>
+                          <property name="row">1</property>
+                        </layout>
                       </object>
                     </child>
                   </object>
-                </child>
-                <child>
-                  <object class="Gjs_ServerRoomList" id="serverRoomList">
-                    <layout>
-                      <property name="column-span">3</property>
-                      <property name="column">0</property>
-                      <property name="row">1</property>
-                    </layout>
-                  </object>
-                </child>
+                </property>
               </object>
             </property>
           </object>
         </child>
         <child>
-          <object class="GtkStackPage">
-            <property name="name">connection</property>
+          <object class="AdwNavigationPage" id="connectionPage">
+            <property name="title" translatable="yes">Add Network</property>
+            <property name="tag">connection</property>
             <property name="child">
-              <object class="GtkBox">
-                <property name="margin-start">30</property>
-                <property name="margin-end">30</property>
-                <property name="margin-top">30</property>
-                <property name="margin-bottom">24</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">18</property>
-                <child>
-                  <object class="GtkStack" id="connectionStack">
-                    <property name="vexpand">True</property>
-                    <property name="transition-type">crossfade</property>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-start-title-buttons">false</property>
+                    <property name="show-end-title-buttons">false</property>
+                    <child type="start">
+                      <object class="GtkButton" id="cancelButton">
+                        <property name="label" translatable="yes">_Cancel</property>
+                        <property name="visible" bind-source="connectionPage"
+                                  bind-property="can-pop"
+                                  bind-flags="sync-create|invert-boolean"/>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="action-name">window.close</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="GtkBox">
+                    <property name="margin-start">30</property>
+                    <property name="margin-end">30</property>
+                    <property name="margin-top">30</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">18</property>
                     <child>
-                      <object class="GtkStackPage">
-                        <property name="name">predefined</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <style>
-                              <class name="linked"/>
-                              <class name="frame"/>
-                            </style>
-                            <child>
+                      <object class="GtkStack" id="connectionStack">
+                        <property name="vexpand">True</property>
+                        <property name="transition-type">crossfade</property>
+                        <child>
+                          <object class="GtkStackPage">
+                            <property name="name">predefined</property>
+                            <property name="child">
                               <object class="GtkBox">
+                                <property name="orientation">vertical</property>
                                 <style>
-                                  <class name="polari-listbox-filterbar"/>
+                                  <class name="linked"/>
+                                  <class name="frame"/>
                                 </style>
                                 <child>
-                                  <object class="GtkSearchEntry" id="filterEntry">
-                                    <property name="hexpand">True</property>
-                                    <property name="margin-start">60</property>
-                                    <property name="margin-end">60</property>
-                                    <property name="margin-top">6</property>
-                                    <property name="margin-bottom">6</property>
+                                  <object class="GtkBox">
+                                    <style>
+                                      <class name="polari-listbox-filterbar"/>
+                                    </style>
+                                    <child>
+                                      <object class="GtkSearchEntry" id="filterEntry">
+                                        <property name="hexpand">True</property>
+                                        <property name="margin-start">60</property>
+                                        <property name="margin-end">60</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="Gjs_ConnectionsList" id="connectionsList">
+                                    <property name="vexpand">True</property>
                                   </object>
                                 </child>
                               </object>
-                            </child>
-                            <child>
-                              <object class="Gjs_ConnectionsList" id="connectionsList">
-                                <property name="vexpand">True</property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
-                        </property>
+                        </child>
+                        <child>
+                          <object class="GtkStackPage">
+                            <property name="name">custom</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">24</property>
+                                <child>
+                                  <object class="Gjs_ConnectionDetails" id="details">
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="addButton">
+                                    <property name="label" translatable="yes">_Add</property>
+                                    <property name="halign">end</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="use-underline">True</property>
+                                    <property name="sensitive" bind-source="details"
+                                              bind-property="can-confirm"
+                                              bind-flags="sync-create"/>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
-                        <property name="name">custom</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">24</property>
-                            <child>
-                              <object class="Gjs_ConnectionDetails" id="details">
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="addButton">
-                                <property name="label" translatable="yes">_Add</property>
-                                <property name="halign">end</property>
-                                <property name="receives-default">True</property>
-                                <property name="use-underline">True</property>
-                                <property name="sensitive" bind-source="details"
-                                          bind-property="can-confirm"
-                                          bind-flags="sync-create"/>
-                              </object>
-                            </child>
-                          </object>
-                        </property>
+                      <object class="GtkToggleButton" id="customToggle">
+                        <property name="label" translatable="yes">_Custom Network</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-underline">True</property>
+                        <property name="focus-on-click">False</property>
+                        <property name="halign">start</property>
                       </object>
                     </child>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkToggleButton" id="customToggle">
-                    <property name="label" translatable="yes">_Custom Network</property>
-                    <property name="receives-default">True</property>
-                    <property name="use-underline">True</property>
-                    <property name="focus-on-click">False</property>
-                    <property name="halign">start</property>
-                  </object>
-                </child>
+                </property>
               </object>
             </property>
           </object>
