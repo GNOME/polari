@@ -96,6 +96,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                           bind-property="visible" bind-flags="sync-create"/>
                 <property name="child">
                   <object class="GtkBox">
+                    <property name="valign">center</property>
                     <property name="spacing">6</property>
                     <property name="margin-end">14</property>
                     <child>
