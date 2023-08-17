@@ -168,6 +168,10 @@ class EntryArea extends Gtk.Stack {
             'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
             GObject.ParamFlags.WRITABLE,
             0, GLib.MAXUINT32, 0),
+        'confirmation-visible': GObject.ParamSpec.boolean(
+            'confirmation-visible', 'confirmation-visible', 'confirmation-visible',
+            GObject.ParamFlags.READABLE,
+            false),
     };
 
     static get _nickPopover() {
@@ -186,6 +190,9 @@ class EntryArea extends Gtk.Stack {
         super(params);
 
         this._room = room;
+
+        this.connect('notify::visible-child-name',
+            () => this.notify('confirmation-visible'));
 
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::sensitive', this._onSensitiveChanged.bind(this));
@@ -294,6 +301,19 @@ class EntryArea extends Gtk.Stack {
     set max_nick_chars(maxChars) {
         this._maxNickChars = maxChars;
         this._updateNick();
+    }
+
+    // eslint-disable-next-line camelcase
+    get confirmation_visible() {
+        return this.visible_child_name === 'paste-confirmation';
+    }
+
+    _setToolbarStyle(style) {
+        if (this._toolbarStyle === style)
+            return;
+
+        this._toolbarStyle = style;
+        this.notify('toolbar-style');
     }
 
     _updateCompletions() {
