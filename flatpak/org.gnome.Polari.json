@@ -32,6 +32,8 @@
         "--own-name=org.freedesktop.Telepathy.Client.Logger",
         "--own-name=org.freedesktop.Telepathy.Logger",
         "--talk-name=org.freedesktop.secrets",
+        "--filesystem=~/.local/share/TpLogger",
+        "--env=TPL_LOG_DIR=.local/share",
 	"--metadata=X-DConf=migrate-path=/org/gnome/polari/"
     ],
     "build-options": {
@@ -155,6 +157,10 @@
                         "type": "git",
                         "tag-pattern": "^telepathy-logger-(\\d+.[^(99)].[\\d.]+)$"
                     }
+                },
+                {
+                    "type": "patch",
+                    "path": "tpl-override-basedir.patch"
                 },
                 {
                     "type": "patch",
