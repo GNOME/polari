@@ -2,7 +2,7 @@
 
 Polari is a simple Internet Relay Chat (IRC) client that is designed to
 integrate seamlessly with the GNOME desktop. You can find additional
-information on its [GNOME project page][project-page].
+information on its [GNOME app page][app-page].
 
 ## Hacking
 
@@ -35,7 +35,7 @@ git branch -u origin/main
 git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 ```
 
-[project-page]: https://wiki.gnome.org/Apps/Polari
+[app-page]: https://apps.gnome.org/app/org.gnome.Polari
 [build-instructions]: https://wiki.gnome.org/Newcomers/BuildProject
 [irc-channel]: irc://irc.gnome.org/%23polari
 [bug-tracker]: https://gitlab.gnome.org/GNOME/polari/issues
