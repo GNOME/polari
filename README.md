@@ -14,7 +14,7 @@ start hacking on the code is to follow the recommended [GNOME guide]
 
 Surprise, there is an IRC channel! If you have any questions regarding the
 use or development of Polari, want to discuss design or simply hang out
-with nice folks, please join us in [#polari on irc.gnome.org][irc-channel].
+with nice folks, please join us in [#gnome-polari on irc.libera.chat][irc-channel].
 
 ## How to report bugs
 
@@ -37,6 +37,6 @@ git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 
 [app-page]: https://apps.gnome.org/app/org.gnome.Polari
 [build-instructions]: https://wiki.gnome.org/Newcomers/BuildProject
-[irc-channel]: irc://irc.gnome.org/%23polari
+[irc-channel]: irc://irc.libera.chat/%23gnome-polari
 [bug-tracker]: https://gitlab.gnome.org/GNOME/polari/issues
 [polari-logo]: logo.png
