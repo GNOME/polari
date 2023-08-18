@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2023-08-17 11:55+0000\n"
-"PO-Revision-Date: 2023-08-17 17:21+0300\n"
+"POT-Creation-Date: 2023-08-18 14:04+0000\n"
+"PO-Revision-Date: 2023-08-18 19:58+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -132,8 +132,7 @@ msgid "Identify username supported"
 msgstr "Підтримування ототожнення користувача"
 
 #: data/org.gnome.Polari.gschema.xml:57
-msgid ""
-"Whether the identify command is known to support the username parameter"
+msgid "Whether the identify command is known to support the username parameter"
 msgstr "Чи відомо, що команда ототожнення підтримує параметр користувача"
 
 #: data/org.gnome.Polari.gschema.xml:63
@@ -147,28 +146,29 @@ msgstr ""
 "Список користувачів, для приватних повідомлень яких не буде показано "
 "сповіщення"
 
-#: data/resources/connection-details.ui:26
+#: data/resources/connection-details.ui:20
 msgid "_Server Address"
 msgstr "Адреса _сервера"
 
-#: data/resources/connection-details.ui:32
+#: data/resources/connection-details.ui:26
 msgid "Net_work Name"
 msgstr "Назва _мережі"
 
-#: data/resources/connection-details.ui:38
+#: data/resources/connection-details.ui:32
 msgid "Use secure c_onnection"
 msgstr "Використовувати безпечне з'є_днання"
 
-#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:43
 msgid "_Nickname"
 msgstr "Прі_звисько"
 
-#: data/resources/connection-details.ui:55
+#: data/resources/connection-details.ui:49
 msgid "_Real Name"
 msgstr "С_правжнє ім'я"
 
-#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:103
-#: data/resources/join-room-dialog.ui:41 src/initialSetup.js:92
+#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:41 data/resources/join-room-dialog.ui:143
+#: src/initialSetup.js:92
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -180,7 +180,7 @@ msgstr "_Застосувати"
 msgid "Change nickname"
 msgstr "Змінити псевдонім"
 
-#: data/resources/entry-area.ui:112
+#: data/resources/entry-area.ui:113
 msgid "_Paste"
 msgstr "В_ставити"
 
@@ -301,29 +301,38 @@ msgstr ""
 "Виберіть кімнати, до яких бажаєте під'єднатися. Можете додати більше мереж і "
 "кімнат згодом, натиснувши кнопку +."
 
-#: data/resources/join-room-dialog.ui:12 src/joinDialog.js:224
+#: data/resources/join-room-dialog.ui:32
 msgid "Join Chat Room"
 msgstr "Увійти до кімнати"
 
-#: data/resources/join-room-dialog.ui:48
+#: data/resources/join-room-dialog.ui:49
 msgid "_Join"
 msgstr "_Увійти"
 
-#: data/resources/join-room-dialog.ui:74
+#: data/resources/join-room-dialog.ui:70
 msgid "C_onnection"
 msgstr "_З'єднання"
 
-#: data/resources/join-room-dialog.ui:109
+#: data/resources/join-room-dialog.ui:107
 msgid "_Add Network"
 msgstr "_Додати мережу"
 
-#: data/resources/join-room-dialog.ui:194
-msgid "_Add"
-msgstr "_Додати"
+#: data/resources/join-room-dialog.ui:133
+msgid "Add Network"
+msgstr "Додати мережу"
 
-#: data/resources/join-room-dialog.ui:211
+#: data/resources/join-room-dialog.ui:194
 msgid "_Custom Network"
 msgstr "_Інша мережа"
+
+#: data/resources/join-room-dialog.ui:211
+#| msgid "_Custom Network"
+msgid "Custom Network"
+msgstr "Нетипова мережа"
+
+#: data/resources/join-room-dialog.ui:221
+msgid "_Add"
+msgstr "_Додати"
 
 #: data/resources/main-window.ui:28
 msgid "Keyboard Shortcuts"
@@ -342,7 +351,6 @@ msgid "Quit"
 msgstr "Вийти"
 
 #: data/resources/main-window.ui:74
-#| msgid "Add rooms and networks"
 msgid "Add Rooms and Networks"
 msgstr "Додати кімнати та мережі"
 
@@ -351,13 +359,10 @@ msgid "Add rooms and networks"
 msgstr "Додати кімнати та мережі"
 
 #: data/resources/main-window.ui:90
-#| msgctxt "shortcut window"
-#| msgid "Open Menu"
 msgid "Main Menu"
 msgstr "Головне меню"
 
 #: data/resources/main-window.ui:210
-#| msgid "Show connected users"
 msgid "Show Connected Users"
 msgstr "Показати під'єднаних користувачів"
 
@@ -622,7 +627,7 @@ msgstr ""
 "Балаканину роз'єднано через помилку в мережі. Перевірте, чи поле адреси "
 "правильне."
 
-#: src/entryArea.js:364
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -631,7 +636,7 @@ msgstr[1] "Вставити %s рядки тексту та оприлюднит
 msgstr[2] "Вставити %s рядків тексту та оприлюднити на сторонньому сервісі?"
 msgstr[3] "Вставити %s рядок тексту та оприлюднити на сторонньому сервісі?"
 
-#: src/entryArea.js:369
+#: src/entryArea.js:389
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -640,33 +645,33 @@ msgstr[1] "Вивантаження %s рядків тексту на сторо
 msgstr[2] "Вивантаження %s рядків тексту на сторонній сервіс…"
 msgstr[3] "Вивантаження %s рядку тексту на сторонній сервіс…"
 
-#: src/entryArea.js:376
+#: src/entryArea.js:396
 msgid "Upload image to public paste service?"
 msgstr "Вивантажити зображення на сторонній сервіс?"
 
-#: src/entryArea.js:377
+#: src/entryArea.js:397
 msgid "Uploading image to public paste service…"
 msgstr "Вивантаження зображення на сторонній сервіс…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:394
+#: src/entryArea.js:414
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Вивантажити «%s» на сторонній сервіс?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:396
+#: src/entryArea.js:416
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Вивантаження «%s» на сторонній сервіс…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:405
+#: src/entryArea.js:425
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s в #%s"
 
-#: src/entryArea.js:407
+#: src/entryArea.js:427
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Вставити з %s"
@@ -785,10 +790,6 @@ msgstr "Користувач: %s — останні дії: %s"
 msgid "Usage: %s"
 msgstr "Використання: %s"
 
-#: src/joinDialog.js:224
-msgid "Add Network"
-msgstr "Додати мережу"
-
 #: src/mainWindow.js:293
 #, javascript-format
 msgid "%d user"
@@ -904,8 +905,7 @@ msgstr "Вас викинуто з кімнати."
 
 #: src/roomStack.js:258
 msgid "It is not possible to join the room now, but you can retry later."
-msgstr ""
-"Наразі приєднатися до кімнати неможливо, але можна спробувати пізніше."
+msgstr "Наразі приєднатися до кімнати неможливо, але можна спробувати пізніше."
 
 #: src/roomStack.js:280
 msgid "Join a room using the + button."
