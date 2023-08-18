@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2023-08-17 11:55+0000\n"
-"PO-Revision-Date: 2023-08-17 21:15+0200\n"
+"POT-Creation-Date: 2023-08-18 14:04+0000\n"
+"PO-Revision-Date: 2023-08-18 19:38+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -146,28 +146,29 @@ msgstr ""
 "მომხმარებლის სახელების სია, რომლების პირად შეტყობინებებზეც გაფრთხილება "
 "ნაჩვენები არ იქნება"
 
-#: data/resources/connection-details.ui:26
+#: data/resources/connection-details.ui:20
 msgid "_Server Address"
 msgstr "_სერვერის მისამართი"
 
-#: data/resources/connection-details.ui:32
+#: data/resources/connection-details.ui:26
 msgid "Net_work Name"
 msgstr "_ქსელური სახელი"
 
-#: data/resources/connection-details.ui:38
+#: data/resources/connection-details.ui:32
 msgid "Use secure c_onnection"
 msgstr "_უსაფრთხო მიერთების გამოყენება"
 
-#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:43
 msgid "_Nickname"
 msgstr "_მეტსახელი"
 
-#: data/resources/connection-details.ui:55
+#: data/resources/connection-details.ui:49
 msgid "_Real Name"
 msgstr "_ნამდვილი სახელი"
 
-#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:103
-#: data/resources/join-room-dialog.ui:41 src/initialSetup.js:92
+#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:41 data/resources/join-room-dialog.ui:143
+#: src/initialSetup.js:92
 msgid "_Cancel"
 msgstr "გაუქმება"
 
@@ -179,7 +180,7 @@ msgstr "_გადატარება"
 msgid "Change nickname"
 msgstr "მეტსახელის შეცვლა"
 
-#: data/resources/entry-area.ui:112
+#: data/resources/entry-area.ui:113
 msgid "_Paste"
 msgstr "_ჩასმა"
 
@@ -298,29 +299,37 @@ msgstr ""
 "აირჩიეთ ოთახები, რომლებთანაც მიერთება გნებავთ. მეტი ქსელებისა და ოთახების "
 "დასამატებლად მოგვიანებით + ღილაკით შეგიძლიათ."
 
-#: data/resources/join-room-dialog.ui:12 src/joinDialog.js:224
+#: data/resources/join-room-dialog.ui:32
 msgid "Join Chat Room"
 msgstr "საუბრის ოთახში ჩართვა"
 
-#: data/resources/join-room-dialog.ui:48
+#: data/resources/join-room-dialog.ui:49
 msgid "_Join"
 msgstr "შესვლა"
 
-#: data/resources/join-room-dialog.ui:74
+#: data/resources/join-room-dialog.ui:70
 msgid "C_onnection"
 msgstr "_შეერთება"
 
-#: data/resources/join-room-dialog.ui:109
+#: data/resources/join-room-dialog.ui:107
 msgid "_Add Network"
 msgstr "ქსელის _დამატება"
 
+#: data/resources/join-room-dialog.ui:133
+msgid "Add Network"
+msgstr "ქსელის დამატება"
+
 #: data/resources/join-room-dialog.ui:194
-msgid "_Add"
-msgstr "_დამატება"
+msgid "_Custom Network"
+msgstr "_მომხმარებლის ქსელი"
 
 #: data/resources/join-room-dialog.ui:211
-msgid "_Custom Network"
-msgstr "_ხელით მითითებული ქსელი"
+msgid "Custom Network"
+msgstr "მომხმარებლის ქსელი"
+
+#: data/resources/join-room-dialog.ui:221
+msgid "_Add"
+msgstr "_დამატება"
 
 #: data/resources/main-window.ui:28
 msgid "Keyboard Shortcuts"
@@ -611,47 +620,47 @@ msgstr ""
 "Polari ქსელის შეცდომის გამო გაითიშა. შეამოწმეთ, მისამართის ველი სწორია, თუ "
 "არა."
 
-#: src/entryArea.js:364
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
 msgstr[0] "ჩავსვა %s ხაზი ტექსტი საჯარო სერვისში?"
 msgstr[1] "ჩავსვა %s ხაზი ტექსტი საჯარო სერვისში?"
 
-#: src/entryArea.js:369
+#: src/entryArea.js:389
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
 msgstr[0] "%s ხაზი ტექსტის საჯარო სერვისზე ატვირთვა…"
 msgstr[1] "%s ხაზი ტექსტის საჯარო სერვისზე ატვირთვა…"
 
-#: src/entryArea.js:376
+#: src/entryArea.js:396
 msgid "Upload image to public paste service?"
 msgstr "ავტვირთო გამოსახულება საჯარო სერვისზე?"
 
-#: src/entryArea.js:377
+#: src/entryArea.js:397
 msgid "Uploading image to public paste service…"
 msgstr "გამოსახულების ატვირთვა საჯარო სერვისზე…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:394
+#: src/entryArea.js:414
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "ავტვირთო \"%s\" საჯარო სერვისზე?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:396
+#: src/entryArea.js:416
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "\"%s\"-ის ატვირთვა საჯარო სერვისზე…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:405
+#: src/entryArea.js:425
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s #%s-ში"
 
-#: src/entryArea.js:407
+#: src/entryArea.js:427
 #, javascript-format
 msgid "Paste from %s"
 msgstr "%s-დან ჩასმა"
@@ -773,10 +782,6 @@ msgstr "მომხმარებელი: %s - ბოლო აქტივ�
 #, javascript-format
 msgid "Usage: %s"
 msgstr "გამოყენება: %s\\"
-
-#: src/joinDialog.js:224
-msgid "Add Network"
-msgstr "ქსელის დამატება"
 
 #: src/mainWindow.js:293
 #, javascript-format
