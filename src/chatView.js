@@ -326,6 +326,7 @@ class ChatView extends Gtk.ScrolledWindow {
             editable: false, cursor_visible: false,
             wrap_mode: Gtk.WrapMode.WORD_CHAR,
             right_margin: MARGIN,
+            bottom_margin: MARGIN,
             indent_width_chars: MAX_NICK_CHARS,
             indent_spacing: NICK_SPACING,
         });
