@@ -308,25 +308,19 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._actionGroup = new Gio.SimpleActionGroup();
         this.insert_action_group('chatlog', this._actionGroup);
-
-        let action;
-        action = new Gio.SimpleAction({
-            name: 'open-url',
-            parameter_type: new GLib.VariantType('s'),
-        });
-        action.connect('activate',
-            (a, params) => Utils.openURL(params.unpack()));
-        this._actionGroup.add_action(action);
-
-        action = new Gio.SimpleAction({
-            name: 'copy-url',
-            parameter_type: new GLib.VariantType('s'),
-        });
-        action.connect('activate', (a, params) => {
-            const clipboard = this.get_clipboard();
-            clipboard.set(params.unpack());
-        });
-        this._actionGroup.add_action(action);
+        this._actionGroup.add_action_entries([
+            {
+                name: 'open-url',
+                parameter_type: 's',
+                activate: (a, params) => Utils.openURL(params.unpack()),
+            },
+            {
+                name: 'copy-url',
+                parameter_type: 's',
+                activate: (a, params) =>
+                    this.get_clipboard().set(params.unpack()),
+            },
+        ]);
 
         this._view = new TextView({
             editable: false, cursor_visible: false,
