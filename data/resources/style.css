@@ -87,7 +87,7 @@
     padding-left: 8px;
 }
 
-.polari-room-list row:not(.room-list-header):not(.inactive) {
+.polari-room-list row:not(.room-list-header):not(.inactive):not(.muted) {
     font-weight: bold;
 }
 

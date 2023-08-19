@@ -171,10 +171,13 @@ class RoomRow extends Gtk.ListBoxRow {
     }
 
     _onMutedChanged() {
-        if (this.muted)
+        if (this.muted) {
             this._icon.gicon = this._mutedIcon;
-        else
+            this.add_css_class('muted');
+        } else {
             this._icon.gicon = this.room.icon;
+            this.remove_css_class('muted');
+        }
 
         this._updatePending();
     }
