@@ -174,9 +174,6 @@ class TextView extends Gtk.TextView {
         let baseline = Math.floor(this._layout.get_baseline() / Pango.SCALE);
         let layoutY = y - baseline + Math.floor((layoutHeight - baseline) / 2) + 0.5;
 
-        const bounds = new Graphene.Rect();
-        bounds.init(MARGIN, y, width, 1);
-
         snapshot.save();
 
         snapshot.translate(new Graphene.Point({ x: layoutX, y: layoutY }));
@@ -184,19 +181,15 @@ class TextView extends Gtk.TextView {
 
         snapshot.restore();
 
-        const cr = snapshot.append_cairo(bounds);
-
         const [, color] = this.get_style_context().lookup_color('borders');
-        Gdk.cairo_set_source_rgba(cr, color);
 
-        cr.setLineWidth(1);
-        cr.moveTo(MARGIN, y);
-        cr.lineTo(layoutX - MARGIN, y);
-        cr.moveTo(layoutX + layoutWidth + MARGIN, y);
-        cr.lineTo(MARGIN + width, y);
-        cr.stroke();
+        const rect = new Graphene.Rect();
 
-        cr.$dispose();
+        rect.init(MARGIN, y, layoutX - 2 * MARGIN, 1);
+        snapshot.append_color(color, rect);
+
+        rect.init(layoutX + layoutWidth + MARGIN, y, width - layoutX - layoutWidth, 1);
+        snapshot.append_color(color, rect);
     }
 
     _onMarkSet(buffer, iter, mark) {
