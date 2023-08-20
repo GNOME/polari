@@ -28,7 +28,7 @@ class MainWindow extends Adw.ApplicationWindow {
         'showUserListButton',
         'userListPopover',
         'roomListRevealer',
-        'offlineInfoBar',
+        'offlineBanner',
         'overlay',
         'roomStack',
     ];
@@ -158,7 +158,7 @@ class MainWindow extends Adw.ApplicationWindow {
 
     _onAccountsReachableChanged() {
         let accounts = this._accountsMonitor.visibleAccounts;
-        this._offlineInfoBar.revealed =
+        this._offlineBanner.revealed =
             accounts.length > 0 && !accounts.some(a => a.reachable);
     }
 

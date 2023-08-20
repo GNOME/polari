@@ -218,28 +218,11 @@ SPDX-License-Identifier: GPL-2.0-or-later
                       </object>
                     </child>
                     <property name="content">
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkInfoBar" id="offlineInfoBar">
-                            <property name="revealed">False</property>
-                            <child>
-                              <object class="GtkBox">
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Offline</property>
-                                    <attributes>
-                                      <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-                                    </attributes>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Go online to chat and receive messages.</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
+                      <object class="GtkOverlay">
+                        <child type="overlay">
+                          <object class="AdwBanner" id="offlineBanner">
+                            <property name="title" translatable="yes">Go online to chat and receive messages.</property>
+                            <property name="valign">start</property>
                           </object>
                         </child>
                         <child>
