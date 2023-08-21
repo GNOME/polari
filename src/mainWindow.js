@@ -82,8 +82,6 @@ class MainWindow extends Adw.ApplicationWindow {
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));
-        this._roomStack.connect('notify::visible-child', () =>
-            this._splitView.activate_action('navigation.push', new GLib.Variant('s', 'content')));
 
         this._accountsMonitor = AccountsMonitor.getDefault();
         this._accountsChangedId = this._accountsMonitor.connect(

@@ -40,6 +40,8 @@ class RoomRow extends Gtk.ListBoxRow {
     constructor(room) {
         super({
             name: `RoomRow ${room.display_name}`,
+            actionName: 'navigation.push',
+            actionTarget: new GLib.Variant('s', 'content'),
         });
 
         this._room = room;
