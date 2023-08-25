@@ -57,9 +57,9 @@ workflow:
       meson gcc g++ pkgconf git gettext itstool
       desktop-file-utils */appstream-util */json-glib-validate
       nodejs npm
-      pkgconfig(gtk4) pkgconfig(gjs-1.0)
-      pkgconfig(gobject-introspection-1.0)
-      pkgconfig(telepathy-glib)
+      'pkgconfig(gtk4)' 'pkgconfig(gjs-1.0)'
+      'pkgconfig(gobject-introspection-1.0)'
+      'pkgconfig(telepathy-glib)'
     FDO_DISTRIBUTION_EXEC: |
       # For static analysis with eslint
       npm install -g eslint eslint-plugin-jsdoc &&
