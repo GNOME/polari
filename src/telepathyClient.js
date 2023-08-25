@@ -700,6 +700,9 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _logMessage(tpMessage, channel) {
+        if (this._app.isTestInstance)
+            return;
+
         const connection = Polari.util_get_tracker_connection();
 
         const accountId = channel.connection.get_account().get_path_suffix();
