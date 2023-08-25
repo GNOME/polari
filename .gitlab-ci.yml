@@ -62,7 +62,7 @@ workflow:
       'pkgconfig(telepathy-glib)'
     FDO_DISTRIBUTION_EXEC: |
       # For static analysis with eslint
-      npm install -g eslint eslint-plugin-jsdoc &&
+      npm install -g eslint@^8.0.0 eslint-plugin-jsdoc@^46.0.0 &&
 
       ./.gitlab-ci/install-meson-project.sh \
         https://gitlab.gnome.org/fmuellner/gjs-ci-tools.git \
