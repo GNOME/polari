@@ -52,11 +52,11 @@ Gio._promisify(Soup.Session.prototype,
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account',
     Secret.SchemaFlags.NONE,
-    { 'account-id': Secret.SchemaAttributeType.STRING });
+    {'account-id': Secret.SchemaAttributeType.STRING});
 const SECRET_SCHEMA_IDENTIFY = new Secret.Schema(
     'org.gnome.Polari.Identify',
     Secret.SchemaFlags.NONE,
-    { 'account-id': Secret.SchemaAttributeType.STRING });
+    {'account-id': Secret.SchemaAttributeType.STRING});
 
 const GPASTE_BASEURL = 'https://paste.gnome.org/';
 
@@ -178,7 +178,7 @@ export function storeIdentifyPassword(account, password) {
 }
 
 async function _storePassword(schema, label, account, password) {
-    let attr = { 'account-id': account.get_path_suffix() };
+    let attr = {'account-id': account.get_path_suffix()};
     let coll = Secret.COLLECTION_DEFAULT;
     try {
         await Secret.password_store(schema, attr, coll, label, password, null);
@@ -209,7 +209,7 @@ export function lookupIdentifyPassword(account) {
 }
 
 async function _lookupPassword(schema, account) {
-    let attr = { 'account-id': account.get_path_suffix() };
+    let attr = {'account-id': account.get_path_suffix()};
     let password = null;
     try {
         password = await Secret.password_lookup(schema, attr, null);
@@ -240,7 +240,7 @@ export function clearIdentifyPassword(account) {
 }
 
 async function _clearPassword(schema, account) {
-    let attr = { 'account-id': account.get_path_suffix() };
+    let attr = {'account-id': account.get_path_suffix()};
     try {
         await Secret.password_clear(schema, attr, null);
     } catch (e) {
@@ -267,7 +267,7 @@ export function findUrls(str) {
     while ((match = _urlRegexp.exec(str))) {
         let name = match[2];
         let url = GLib.uri_parse_scheme(name) ? name : `http://${name}`;
-        res.push({ name, url, pos: match.index + match[1].length });
+        res.push({name, url, pos: match.index + match[1].length});
     }
     return res;
 }
@@ -428,7 +428,7 @@ export async function imgurPaste(pixbuf, title) {
 }
 
 function checkResponse(message) {
-    const { statusCode } = message;
+    const {statusCode} = message;
     const phrase = Soup.Status.get_phrase(statusCode);
     if (statusCode !== Soup.Status.OK)
         throw new Error(`Unexpected response: ${phrase}`);

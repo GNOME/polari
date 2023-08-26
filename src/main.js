@@ -5,8 +5,8 @@
 import GLib from 'gi://GLib';
 
 import * as Config from './config.js';
-import { ngettext } from 'gettext';
-import { programInvocationName, programArgs } from 'system';
+import {ngettext} from 'gettext';
+import {programInvocationName, programArgs} from 'system';
 
 imports.package.init({
     name: Config.PACKAGE_NAME,

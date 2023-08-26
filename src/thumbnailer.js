@@ -10,8 +10,8 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk?version=3.0';
 
-import { setConsoleLogDomain } from 'console';
-import { programArgs } from 'system';
+import {setConsoleLogDomain} from 'console';
+import {programArgs} from 'system';
 
 import gi from 'gi';
 let WebKit2;
@@ -143,11 +143,11 @@ class PreviewWindow extends Gtk.Window {
         if (width === 0 || height === 0)
             throw new Error('Invalid image clip');
 
-        return { x, y, width, height };
+        return {x, y, width, height};
     }
 
     _createClippedSurface(source, clip) {
-        let { x, y, width, height } = clip;
+        let {x, y, width, height} = clip;
 
         let surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
 

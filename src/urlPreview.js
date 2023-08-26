@@ -37,7 +37,7 @@ class Thumbnailer {
     getThumbnail(uri) {
         return new Promise((resolve, reject) => {
             const filename = this._generateFilename(uri);
-            const data = { uri, filename, resolve, reject };
+            const data = {uri, filename, resolve, reject};
 
             this._processData(data);
         });
@@ -73,7 +73,7 @@ class Thumbnailer {
     }
 
     async _generateThumbnail(data) {
-        let { filename, uri } = data;
+        let {filename, uri} = data;
         this._subProc = Gio.Subprocess.new(
             ['gjs', '--module', `${pkg.pkgdatadir}/thumbnailer.js`, uri, filename],
             Gio.SubprocessFlags.NONE);

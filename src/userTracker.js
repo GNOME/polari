@@ -94,7 +94,7 @@ class UserTracker extends GObject.Object {
         this._handlerCounter = 0;
         this._app = Gio.Application.get_default();
 
-        const { settings } = account;
+        const {settings} = account;
         this._mutedUsers = settings.get_strv('muted-usernames');
         settings.connect('changed::muted-usernames', () => {
             const muted = settings.get_strv('muted-usernames');

@@ -16,8 +16,8 @@ import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 import Tpl from 'gi://TelepathyLogger';
 
-import { DropTargetIface } from './pasteManager.js';
-import { UserPopover } from './userList.js';
+import {DropTargetIface} from './pasteManager.js';
+import {UserPopover} from './userList.js';
 import UserStatusMonitor from './userTracker.js';
 import URLPreview from './urlPreview.js';
 import * as Utils from './utils.js';
@@ -176,7 +176,7 @@ class TextView extends Gtk.TextView {
 
         snapshot.save();
 
-        snapshot.translate(new Graphene.Point({ x: layoutX, y: layoutY }));
+        snapshot.translate(new Graphene.Point({x: layoutX, y: layoutY}));
         snapshot.append_layout(this._layout, this._dimColor);
 
         snapshot.restore();
@@ -215,8 +215,8 @@ class ButtonTag extends Gtk.TextTag {
     };
 
     static [GObject.signals] = {
-        'clicked': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
-        'popup-menu': { param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE] },
+        'clicked': {param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE]},
+        'popup-menu': {param_types: [GObject.TYPE_DOUBLE, GObject.TYPE_DOUBLE]},
     };
 
     clicked(...coords) {
@@ -302,7 +302,7 @@ class ChatView extends Gtk.ScrolledWindow {
     };
 
     constructor(room) {
-        super({ hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true });
+        super({hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true});
 
         this.add_css_class('polari-chat-view');
 
@@ -380,7 +380,7 @@ class ChatView extends Gtk.ScrolledWindow {
         this._view.add_controller(this._clickGesture);
 
         this._room = room;
-        this._state = { lastNick: null, lastTimestamp: 0, lastStatusGroup: 0 };
+        this._state = {lastNick: null, lastTimestamp: 0, lastStatusGroup: 0};
         this._joinTime = 0;
         this._hoveredButtonTags = [];
         this._needsIndicator = true;
@@ -388,7 +388,7 @@ class ChatView extends Gtk.ScrolledWindow {
         this._pendingLogs = [];
         this._initialPending = [];
         this._backlogTimeoutId = 0;
-        this._statusCount = { left: 0, joined: 0, total: 0 };
+        this._statusCount = {left: 0, joined: 0, total: 0};
 
         this._activeNickColor = new Gdk.RGBA();
         this._inactiveNickColor = new Gdk.RGBA();
@@ -621,7 +621,7 @@ class ChatView extends Gtk.ScrolledWindow {
         if (this._logWalker.is_end())
             return this._pendingLogs.splice(0);
 
-        let { nick, messageType: type } = this._pendingLogs[0];
+        let {nick, messageType: type} = this._pendingLogs[0];
         let maxNum = this._pendingLogs.length - this._initialPending.length;
         for (let i = 0; i < maxNum; i++) {
             if (this._pendingLogs[i].nick !== nick ||
@@ -663,7 +663,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         let indicatorIndex = pending.length - numInitialPending;
 
-        let state = { lastNick: null, lastTimestamp: 0 };
+        let state = {lastNick: null, lastTimestamp: 0};
         let iter = this._view.buffer.get_start_iter();
 
         for (let i = 0; i < pending.length; i++) {
@@ -815,7 +815,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         const menu = new Gtk.PopoverMenu({
             position: Gtk.PositionType.BOTTOM,
-            pointing_to: new Gdk.Rectangle({ x, y }),
+            pointing_to: new Gdk.Rectangle({x, y}),
             menu_model: section,
             has_arrow: false,
         });
@@ -886,7 +886,7 @@ class ChatView extends Gtk.ScrolledWindow {
         });
         indicator.add_css_class('dim-label');
 
-        let { buffer } = this._view;
+        let {buffer} = this._view;
         let iter = buffer.get_start_iter();
         let anchor = buffer.create_child_anchor(iter);
         this._view.add_child_at_anchor(indicator, anchor);
@@ -898,7 +898,7 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _hideLoadingIndicator() {
-        let { buffer } = this._view;
+        let {buffer} = this._view;
         let iter = buffer.get_start_iter();
 
         if (!iter.get_child_anchor())
@@ -912,7 +912,7 @@ class ChatView extends Gtk.ScrolledWindow {
         let lineStart = iter.copy();
         lineStart.set_line_offset(0);
 
-        let { buffer } = this._view;
+        let {buffer} = this._view;
         let mark = buffer.get_mark('indicator-line');
         if (mark) {
             let [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
@@ -1072,7 +1072,7 @@ class ChatView extends Gtk.ScrolledWindow {
             return;
 
         this._view.buffer.delete_mark(markStart);
-        this._statusCount =  { left: 0, joined: 0, total: 0 };
+        this._statusCount =  {left: 0, joined: 0, total: 0};
         this._state.lastStatusGroup++;
     }
 
@@ -1087,7 +1087,7 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _updateStatusHeader() {
-        let { buffer } = this._view;
+        let {buffer} = this._view;
         let headerMark = buffer.get_mark('idle-status-start');
 
         let headerTagName = `status-compressed${this._state.lastStatusGroup}`;
@@ -1097,9 +1097,9 @@ class ChatView extends Gtk.ScrolledWindow {
         let headerTag, headerArrowTag, groupTag;
         if (!headerMark) {
             // we are starting a new group
-            headerTag = new ButtonTag({ name: headerTagName, invisible: true });
-            headerArrowTag = new Gtk.TextTag({ name: headerArrowTagName, invisible: true });
-            groupTag = new Gtk.TextTag({ name: groupTagName });
+            headerTag = new ButtonTag({name: headerTagName, invisible: true});
+            headerArrowTag = new Gtk.TextTag({name: headerArrowTagName, invisible: true});
+            groupTag = new Gtk.TextTag({name: groupTagName});
             buffer.tag_table.add(headerTag);
             buffer.tag_table.add(headerArrowTag);
             buffer.tag_table.add(groupTag);
@@ -1212,7 +1212,7 @@ class ChatView extends Gtk.ScrolledWindow {
         let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
 
         let format;
-        let desktopSettings = new Gio.Settings({ schema_id: 'org.gnome.desktop.interface' });
+        let desktopSettings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
         let clockFormat = desktopSettings.get_string('clock-format');
         let hasAmPm = date.format('%p') !== '';
 
@@ -1324,7 +1324,7 @@ class ChatView extends Gtk.ScrolledWindow {
                 let buffer = this._view.get_buffer();
 
                 if (!nickTag) {
-                    nickTag = new ButtonTag({ name: nickTagName });
+                    nickTag = new ButtonTag({name: nickTagName});
                     nickTag.connect('clicked', this._onNickTagClicked.bind(this));
 
                     let status = this._userTracker.getNickRoomStatus(message.nick, this._room);
@@ -1357,7 +1357,7 @@ class ChatView extends Gtk.ScrolledWindow {
         let params = this._room.account.dup_parameters_vardict().deep_unpack();
         let server = params.server.deep_unpack();
 
-        let { text } = message;
+        let {text} = message;
 
         // mask identify passwords in private chats
         if (this._room.type === Tp.HandleType.CONTACT) {
@@ -1383,7 +1383,7 @@ class ChatView extends Gtk.ScrolledWindow {
                 url.name, tags.concat(this._lookupTag('url'), tag));
 
             if (GLib.uri_parse_scheme(url.url).startsWith('http'))
-                previews.push(new URLPreview({ uri: url.url }));
+                previews.push(new URLPreview({uri: url.url}));
 
             pos = url.pos + url.name.length;
         }

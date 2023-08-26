@@ -13,7 +13,7 @@ import Gtk from 'gi://Gtk?version=4.0';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
-import { setConsoleLogDomain } from 'console';
+import {setConsoleLogDomain} from 'console';
 
 import AccountsMonitor from './accountsMonitor.js';
 import * as Connections from './connections.js';
@@ -157,7 +157,7 @@ class Application extends Adw.Application {
         console.info(`Failed to activate service ${
             name}, starting manually`);
 
-        let proc = new Gio.Subprocess({ argv: [command] });
+        let proc = new Gio.Subprocess({argv: [command]});
 
         try {
             proc.init(null);
@@ -331,7 +331,7 @@ class Application extends Adw.Application {
         }];
         this.add_action_entries(actionEntries);
 
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+        this._settings = new Gio.Settings({schema_id: 'org.gnome.Polari'});
         let action = this._settings.create_action('run-in-background');
         this.add_action(action);
 
@@ -345,7 +345,7 @@ class Application extends Adw.Application {
         action = this.lookup_action('leave-current-room');
         action.enabled = false;
 
-        for (const { name, accels } of actionEntries) {
+        for (const {name, accels} of actionEntries) {
             if (accels)
                 this.set_accels_for_action(`app.${name}`, accels);
         }
@@ -402,9 +402,9 @@ class Application extends Adw.Application {
 
         if (!this.active_window) {
             if (this._needsInitialSetup()) {
-                new InitialSetupWindow({ application: this });
+                new InitialSetupWindow({application: this});
             } else {
-                let window = new MainWindow({ application: this });
+                let window = new MainWindow({application: this});
                 window.connect('notify::active-room',
                     () => this.emit('room-focus-changed'));
                 window.connect('notify::is-active',
@@ -607,7 +607,7 @@ class Application extends Adw.Application {
                 this._untrackNominalNick(account);
                 account.set_nickname_async(nominalNick);
             });
-        this._nickTrackData.set(account, { tracker, contactsChangedId });
+        this._nickTrackData.set(account, {tracker, contactsChangedId});
     }
 
     _untrackNominalNick(account) {
@@ -625,7 +625,7 @@ class Application extends Adw.Application {
             return data;
 
         let params = account.getConnectionParams();
-        let { server, account: accountName, port } = params;
+        let {server, account: accountName, port} = params;
         console.info(`Failed to connect to ${server} with username ${
             accountName}`);
 
@@ -649,7 +649,7 @@ class Application extends Adw.Application {
 
     _restoreAccountName(account) {
         let accountName = this._getTrimmedAccountName(account);
-        let params = { account: new GLib.Variant('s', accountName) };
+        let params = {account: new GLib.Variant('s', accountName)};
         let asv = new GLib.Variant('a{sv}', params);
         account.update_parameters_vardict_async(asv, []);
     }
@@ -674,7 +674,7 @@ class Application extends Adw.Application {
         let nick = oldParams['account'].deep_unpack();
 
         console.info(`Retrying with nickname ${nick}_`);
-        let params = { account: new GLib.Variant('s', `${nick}_`) };
+        let params = {account: new GLib.Variant('s', `${nick}_`)};
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
     }

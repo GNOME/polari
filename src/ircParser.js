@@ -137,7 +137,7 @@ export default class IrcParser {
                 console.warn(`Excess arguments to JOIN command: ${argv}`);
             if (!ROOM_PREFIXES.some(prefix => room.startsWith(prefix)))
                 room = `#${room}`;
-            let { account } = this._room;
+            let {account} = this._room;
             let app = Gio.Application.get_default();
             let action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssb)', [
@@ -185,7 +185,7 @@ export default class IrcParser {
                 break;
             }
 
-            let { account } = this._room;
+            let {account} = this._room;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
@@ -239,7 +239,7 @@ export default class IrcParser {
                 break;
             }
 
-            let { account } = this._room;
+            let {account} = this._room;
 
             let app = Gio.Application.get_default();
             let action = app.lookup_action('message-user');
@@ -286,7 +286,7 @@ export default class IrcParser {
             }
 
             let nick = stripCommand(text);
-            const { connection } = this._room.channel;
+            const {connection} = this._room.channel;
             const user = await connection.dup_contact_by_id_async(nick, []);
             const status = await user.request_contact_info_async(null);
             this._feedback.showFeedback(this._formatUserInfo(status, user));
@@ -359,7 +359,7 @@ class FeedbackPopover extends Gtk.Popover {
     }
 
     showFeedback(label) {
-        this._feedbackLabel.set({ label });
+        this._feedbackLabel.set({label});
         this._stack.visible_child = this._feedbackLabel;
         this.popup();
     }
@@ -376,7 +376,7 @@ class FeedbackPopover extends Gtk.Popover {
         const numCols = Math.min(numItems, 4);
         const numRows = Math.floor(numItems / numCols) + numItems % numCols;
 
-        grid.attach(new Gtk.Label({ label: header }), 0, 0, numCols, 1);
+        grid.attach(new Gtk.Label({label: header}), 0, 0, numCols, 1);
 
         let row = 1;
         for (let i = 0; i < numRows; i++) {
@@ -384,7 +384,7 @@ class FeedbackPopover extends Gtk.Popover {
                 const item = items[i + j * numRows];
                 if (!item)
                     continue;
-                const w = new Gtk.Label({ label: item });
+                const w = new Gtk.Label({label: item});
                 grid.attach(w, j, row, 1, 1);
             }
             row++;

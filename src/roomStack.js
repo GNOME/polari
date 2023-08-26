@@ -29,7 +29,7 @@ class RoomStack extends Gtk.Stack {
     constructor(params) {
         super(params);
 
-        this._sizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.VERTICAL });
+        this._sizeGroup = new Gtk.SizeGroup({mode: Gtk.SizeGroupMode.VERTICAL});
         this._rooms = new Map();
 
         this._roomManager = RoomManager.getDefault();
@@ -145,7 +145,7 @@ class MessageInfoBar extends Gtk.InfoBar {
         };
         super(Object.assign(defaultParams, params));
 
-        let box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        let box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
         this.add_child(box);
 
         this._titleLabel = new Gtk.Label({
@@ -181,7 +181,7 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
         let subtitle = vprintf(
             _('Identification will happen automatically the next time you connect to %s'),
             room.account.display_name);
-        super({ title, subtitle });
+        super({title, subtitle});
 
         this._room = room;
 
@@ -216,7 +216,7 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
 const ChannelErrorBar = GObject.registerClass(
 class ChannelErrorBar extends MessageInfoBar {
     constructor(room) {
-        super({ title: _('Failed to join the room') });
+        super({title: _('Failed to join the room')});
 
         this._room = room;
 
@@ -282,7 +282,7 @@ class ChatPlaceholder extends Gtk.Overlay {
         });
         this.set_child(statusPage);
 
-        const inputPlaceholder = new Gtk.Box({ valign: Gtk.Align.END });
+        const inputPlaceholder = new Gtk.Box({valign: Gtk.Align.END});
         sizeGroup.add_widget(inputPlaceholder);
         this.add_overlay(inputPlaceholder);
     }
@@ -291,7 +291,7 @@ class ChatPlaceholder extends Gtk.Overlay {
 const RoomView = GObject.registerClass(
 class RoomView extends Gtk.Overlay {
     constructor(room, sizeGroup) {
-        super({ name: `RoomView ${room.display_name}` });
+        super({name: `RoomView ${room.display_name}`});
 
         const toolbarView = new Adw.ToolbarView();
         this.set_child(toolbarView);

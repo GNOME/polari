@@ -143,7 +143,7 @@ class UserDetails extends Gtk.Box {
     _user = null;
 
     constructor(params = {}) {
-        let { user } = params;
+        let {user} = params;
         delete params.user;
 
         super(params);
@@ -306,7 +306,7 @@ class UserPopover extends Gtk.Popover {
     _basenick = null;
 
     constructor(params) {
-        const { room, userTracker } = params;
+        const {room, userTracker} = params;
         delete params.room;
         delete params.userTracker;
 
@@ -408,7 +408,7 @@ class UserPopover extends Gtk.Popover {
 const UserListRow = GObject.registerClass(
 class UserListRow extends Gtk.ListBoxRow {
     constructor(user) {
-        super({ name: `UserListRow ${user.alias}` });
+        super({name: `UserListRow ${user.alias}`});
 
         this._user = user;
 
@@ -439,7 +439,7 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     _createWidget() {
-        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
         this.set_child(vbox);
 
         let hbox = new Gtk.Box({
@@ -465,7 +465,7 @@ class UserListRow extends Gtk.ListBoxRow {
         hbox.append(this._arrow);
         vbox.append(hbox);
 
-        this._revealer = new Gtk.Revealer({ reveal_child: false });
+        this._revealer = new Gtk.Revealer({reveal_child: false});
         vbox.append(this._revealer);
     }
 
@@ -473,7 +473,7 @@ class UserListRow extends Gtk.ListBoxRow {
         if (this._revealer.get_child())
             return;
 
-        let details = new UserDetails({ user: this._user });
+        let details = new UserDetails({user: this._user});
 
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
@@ -537,7 +537,7 @@ class UserList extends Gtk.ScrolledWindow {
             propagate_natural_width: true,
         });
 
-        this._list = new Gtk.ListBox({ vexpand: true });
+        this._list = new Gtk.ListBox({vexpand: true});
         this.set_child(this._list);
         let placeholder = new Gtk.Box({
             halign: Gtk.Align.CENTER,

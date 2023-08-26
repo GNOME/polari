@@ -10,9 +10,6 @@ rules:
   jsdoc/require-jsdoc:
     - error
     - publicOnly: true
-  object-curly-spacing:
-    - error
-    - always
   prefer-arrow-callback: error
 globals:
   debug: readonly

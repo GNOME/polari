@@ -93,7 +93,7 @@ class SASLAuthHandler {
                 'Password not available');
 
             let prompt = new GLib.Variant('b', false);
-            let params = new GLib.Variant('a{sv}', { 'password-prompt': prompt });
+            let params = new GLib.Variant('a{sv}', {'password-prompt': prompt});
             await account.update_parameters_vardict_async(params, []);
             await account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
                 'available', '', null);
@@ -368,7 +368,7 @@ class TelepathyClient extends Tp.BaseClient {
         } finally {
             const room = this._roomManager.lookupRoom(roomId);
             if (room)
-                room.set({ channelError });
+                room.set({channelError});
             this._pendingRequests.delete(roomId);
         }
 
@@ -376,7 +376,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     async _sendIdentify(account, password) {
-        let { settings } = account;
+        let {settings} = account;
 
         let params = account.dup_parameters_vardict().deep_unpack();
         let username = settings.get_string('identify-username') ||
@@ -437,7 +437,7 @@ class TelepathyClient extends Tp.BaseClient {
         let account = this._accountsMonitor.lookupAccount(accountPath);
 
         let prompt = new GLib.Variant('b', password.length > 0);
-        let params = GLib.Variant.new('a{sv}', { 'password-prompt': prompt });
+        let params = GLib.Variant.new('a{sv}', {'password-prompt': prompt});
         await account.update_parameters_vardict_async(params, []);
         await Utils.storeAccountPassword(account, password);
         await account.reconnect_async();
@@ -520,7 +520,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _saveIdentifySettings(account, data) {
-        let { settings } = account;
+        let {settings} = account;
 
         if (data.botname === 'NickServ')
             settings.reset('identify-botname');

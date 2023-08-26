@@ -58,7 +58,7 @@ class MainWindow extends Adw.ApplicationWindow {
 
     _lastActiveRoom = null;
 
-    _settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+    _settings = new Gio.Settings({schema_id: 'org.gnome.Polari'});
 
     _currentSize = [-1, -1];
     _isMaximized = false;
@@ -275,7 +275,7 @@ class MainWindow extends Adw.ApplicationWindow {
     }
 
     showJoinRoomDialog() {
-        let dialog = new JoinDialog({ transient_for: this });
+        let dialog = new JoinDialog({transient_for: this});
         dialog.show();
     }
 

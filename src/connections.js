@@ -40,7 +40,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
         if (!params || !params.id)
             throw new Error('No id in parameters');
 
-        const { id } = params;
+        const {id} = params;
         delete params.id;
 
         super(params);
@@ -62,7 +62,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
         });
         this.set_child(box);
 
-        box.append(new Gtk.Label({ label: name, halign: Gtk.Align.START }));
+        box.append(new Gtk.Label({label: name, halign: Gtk.Align.START}));
 
         let insensitiveDesc = new Gtk.Label({
             label: _('Already added'),
@@ -93,7 +93,7 @@ class ConnectionsList extends Gtk.ScrolledWindow {
     };
 
     static [GObject.signals] = {
-        'account-created': { param_types: [Tp.Account.$gtype] },
+        'account-created': {param_types: [Tp.Account.$gtype]},
         'account-selected': {},
     };
 
@@ -189,7 +189,7 @@ class ConnectionsList extends Gtk.ScrolledWindow {
             w.run_dispose();
         });
 
-        let { accounts } = this._accountsMonitor;
+        let {accounts} = this._accountsMonitor;
         let usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);
 
         this._networksManager.networks.forEach(network => {
@@ -279,7 +279,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
     };
 
     static [GObject.signals] = {
-        'account-created': { param_types: [Tp.Account.$gtype] },
+        'account-created': {param_types: [Tp.Account.$gtype]},
     };
 
     _networksManager = NetworksManager.getDefault();
@@ -392,7 +392,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
     _populateFromAccount(account) {
         let params = account.getConnectionParams();
 
-        let { port } = params;
+        let {port} = params;
         this._savedSSL = params['use-ssl'];
         let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
         this._savedServer = params.server || '';

@@ -81,9 +81,9 @@ class DropTargetIface extends GObject.Interface {
     };
 
     static [GObject.signals] = {
-        'text-dropped': { param_types: [GObject.TYPE_STRING] },
-        'image-dropped': { param_types: [GdkPixbuf.Pixbuf] },
-        'file-dropped': { param_types: [Gio.File] },
+        'text-dropped': {param_types: [GObject.TYPE_STRING]},
+        'image-dropped': {param_types: [GdkPixbuf.Pixbuf]},
+        'file-dropped': {param_types: [Gio.File]},
     };
 
     addTargets(widget) {

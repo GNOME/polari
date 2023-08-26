@@ -20,7 +20,7 @@ export default class RoomManager {
 
     constructor() {
         this._rooms = new Map();
-        this._settings = new Gio.Settings({ schema_id: 'org.gnome.Polari' });
+        this._settings = new Gio.Settings({schema_id: 'org.gnome.Polari'});
 
         this._accountsMonitor = AccountsMonitor.getDefault();
 

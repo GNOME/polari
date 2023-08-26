@@ -67,10 +67,10 @@ export default class ServerRoomManager {
         if (this._roomLists.has(account))
             return;
 
-        let roomList = new Tp.RoomList({ account });
+        let roomList = new Tp.RoomList({account});
         roomList.connect('got-room', this._onGotRoom.bind(this));
         roomList.connect('notify::listing', this._onListingChanged.bind(this));
-        this._roomLists.set(account, { list: roomList, rooms: [] });
+        this._roomLists.set(account, {list: roomList, rooms: []});
 
         try {
             await roomList.init_async(GLib.PRIORITY_DEFAULT, null);
@@ -111,7 +111,7 @@ const RoomListColumn = {
 };
 
 function _strBaseEqual(str1, str2) {
-    return str1.localeCompare(str2, {}, { sensitivity: 'base' }) === 0;
+    return str1.localeCompare(str2, {}, {sensitivity: 'base'}) === 0;
 }
 
 export const ServerRoomList = GObject.registerClass(
@@ -272,7 +272,7 @@ class ServerRoomList extends Gtk.Box {
         if (this._filterEntry.text.trim().length === 0)
             return;
 
-        let { model } = this._list;
+        let {model} = this._list;
         let [valid, iter] = model.get_iter_first();
         if (!valid)
             return;
@@ -344,7 +344,7 @@ class ServerRoomList extends Gtk.Box {
                 let checked = !sensitive;
                 let count = `${roomInfo.get_members_count(null)}`;
 
-                let { CHECKED, NAME, COUNT, SENSITIVE } = RoomListColumn;
+                let {CHECKED, NAME, COUNT, SENSITIVE} = RoomListColumn;
                 let iter = store.insert_with_values(-1,
                     [CHECKED, NAME, COUNT, SENSITIVE],
                     [checked, name, count, sensitive]);

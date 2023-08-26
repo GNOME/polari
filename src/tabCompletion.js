@@ -33,7 +33,7 @@ export default class TabCompletion {
         });
         this._popup.set_parent(this._entry);
 
-        this._list = new Gtk.ListBox({ selection_mode: Gtk.SelectionMode.SINGLE });
+        this._list = new Gtk.ListBox({selection_mode: Gtk.SelectionMode.SINGLE});
         this._list.set_filter_func(this._filter.bind(this));
         this._list.connect('row-selected', this._onRowSelected.bind(this));
         this._list.connect('row-activated', this._stop.bind(this));

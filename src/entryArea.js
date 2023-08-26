@@ -12,7 +12,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-import { DropTargetIface, gtypeFromFormats } from './pasteManager.js';
+import {DropTargetIface, gtypeFromFormats} from './pasteManager.js';
 import IrcParser from './ircParser.js';
 import TabCompletion from './tabCompletion.js';
 
@@ -30,9 +30,9 @@ class ChatEntry extends Gtk.Entry {
     };
 
     static [GObject.signals] = {
-        'text-pasted': { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT] },
-        'image-pasted': { param_types: [GdkPixbuf.Pixbuf.$gtype] },
-        'file-pasted': { param_types: [Gio.File.$gtype] },
+        'text-pasted': {param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
+        'image-pasted': {param_types: [GdkPixbuf.Pixbuf.$gtype]},
+        'file-pasted': {param_types: [Gio.File.$gtype]},
     };
 
     constructor(params) {
@@ -73,7 +73,7 @@ class ChatEntry extends Gtk.Entry {
         editable.stop_emission_by_name('paste-clipboard');
         const clipboard = this.get_clipboard();
 
-        const { formats } = clipboard;
+        const {formats} = clipboard;
         const type = gtypeFromFormats(formats);
         const value = await this._readClipboardValue(clipboard, type);
         if (typeof value === 'string')
@@ -184,7 +184,7 @@ class EntryArea extends Gtk.Stack {
     _popoverClosedId = 0;
 
     constructor(params) {
-        const { room } = params;
+        const {room} = params;
         delete params.room;
 
         super(params);
@@ -499,7 +499,7 @@ class EntryArea extends Gtk.Stack {
     }
 
     _updateNick() {
-        let { channel } = this._room || {};
+        let {channel} = this._room || {};
         let nick = '';
         if (channel)
             nick = channel.connection.self_contact.alias;

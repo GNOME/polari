@@ -52,9 +52,9 @@ class RoomRow extends Gtk.ListBoxRow {
 
         this._connectingTimeoutId = 0;
 
-        this._mutedIcon = new Gio.EmblemedIcon({ gicon: room.icon });
+        this._mutedIcon = new Gio.EmblemedIcon({gicon: room.icon});
         this._mutedIcon.add_emblem(new Gio.Emblem({
-            icon: new Gio.ThemedIcon({ name: 'emblem-unreadable' }),
+            icon: new Gio.ThemedIcon({name: 'emblem-unreadable'}),
         }));
 
         this._icon.visible = room.icon !== null;
@@ -325,7 +325,7 @@ class RoomListHeader extends Gtk.Widget {
     };
 
     static [GObject.signals] = {
-        'activate': { flags: GObject.SignalFlags.ACTION },
+        'activate': {flags: GObject.SignalFlags.ACTION},
     };
 
     static _classInit(klass) {
@@ -338,7 +338,7 @@ class RoomListHeader extends Gtk.Widget {
     }
 
     constructor(params) {
-        const { account } = params;
+        const {account} = params;
         delete params.account;
 
         super({
@@ -830,8 +830,8 @@ class RoomList extends Gtk.ListBox {
     }
 
     _updateHeader(row, before) {
-        let { account: beforeAccount } = before || {};
-        let { account } = row;
+        let {account: beforeAccount} = before || {};
+        let {account} = row;
 
         let oldHeader = row.get_header();
 
@@ -845,7 +845,7 @@ class RoomList extends Gtk.ListBox {
         if (oldHeader)
             return;
 
-        let roomListHeader = new RoomListHeader({ account });
+        let roomListHeader = new RoomListHeader({account});
         row.set_header(roomListHeader);
     }
 
