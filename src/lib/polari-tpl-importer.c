@@ -451,11 +451,27 @@ collect_files_thread_func (GTask        *task,
                            GCancellable *cancellable)
 {
   g_autoptr(GFile) log_root = NULL;
+  const char *user_data_dir;
   g_autofree char *path = NULL;
   GList *files;
   GError *error = NULL;
 
-  path = g_build_filename (g_get_user_data_dir (), "TpLogger", "logs", NULL);
+  user_data_dir = g_getenv ("TPL_LOG_DIR");
+  if (user_data_dir)
+    {
+      g_autofree char *try_dir = NULL;
+
+      try_dir = g_build_path (G_DIR_SEPARATOR_S,
+                              user_data_dir, "TpLogger", "logs",
+                              NULL);
+      if (!g_file_test (try_dir, G_FILE_TEST_EXISTS))
+        user_data_dir = NULL;
+    }
+
+  if (!user_data_dir)
+    user_data_dir = g_get_user_data_dir ();
+
+  path = g_build_filename (user_data_dir, "TpLogger", "logs", NULL);
   log_root = g_file_new_for_path (path);
 
   files = collect_log_files (log_root, cancellable, &error);
