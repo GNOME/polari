@@ -374,7 +374,7 @@ class UserTracker extends GObject.Object {
     _notifyNickAvailable(member, room) {
         let notification = new Gio.Notification();
         notification.set_title(_('User is online'));
-        vprintf(notification.set_body(_('User %s is now online.'), member.alias));
+        notification.set_body(vprintf(_('User %s is now online.'), member.alias));
 
         let param = GLib.Variant.new('(ssb)', [
             this._account.get_object_path(),
