@@ -8,17 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari 0.0.1\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2023-08-17 11:55+0000\n"
-"PO-Revision-Date: 2023-08-18 10:01+0300\n"
+"POT-Creation-Date: 2023-08-18 14:04+0000\n"
+"PO-Revision-Date: 2023-09-04 15:42+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
-"2 : 3)\n"
-"X-Generator: Gtranslator 42.0\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? 2 : "
+"3);\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:13
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
@@ -36,21 +36,21 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"לקוח העברת שיחה באינטרנט (IRC) פשוט המשולב בצורה חלקה עם GNOME; הוא כולל "
-"ממשק פשוט ויפה המאפשר לך להתמקד בשיחות שלך."
+"לקוח העברת שיחה באינטרנט (IRC) פשוט המשולב בצורה חלקה עם GNOME; הוא כולל ממשק "
+"פשוט ויפה המאפשר לך להתמקד בשיחות שלך."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:21
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
-"private one-to-one conversations. Notifications make sure that you never "
-"miss an important message."
+"private one-to-one conversations. Notifications make sure that you never miss "
+"an important message."
 msgstr ""
 "ניתן להשתמש ב־Polari לשיחות ציבוריות עם אנשים בערוצים, וכן לשיחות פרטיות אחד "
 "על אחד. הודעות מוודאות שלעולם לא תפוספס אף הודעה חשובה."
 
 #: data/appdata/org.gnome.Polari.appdata.xml.in:53
 msgid "Florian Müllner"
-msgstr "Florian Müllner"
+msgstr "פלוריאן מולנר"
 
 #: data/org.gnome.Polari.desktop.in:4
 msgid "An Internet Relay Chat Client for GNOME"
@@ -131,41 +131,39 @@ msgstr "Identify username supported"
 
 #: data/org.gnome.Polari.gschema.xml:57
 msgid "Whether the identify command is known to support the username parameter"
-msgstr ""
-"Whether the identify command is known to support the username parameter"
+msgstr "Whether the identify command is known to support the username parameter"
 
 #: data/org.gnome.Polari.gschema.xml:63
 msgid "List of muted usernames"
 msgstr "List of muted usernames"
 
 #: data/org.gnome.Polari.gschema.xml:64
-msgid ""
-"A list of usernames for whose private messages not to show notifications"
-msgstr ""
-"A list of usernames for whose private messages not to show notifications"
+msgid "A list of usernames for whose private messages not to show notifications"
+msgstr "A list of usernames for whose private messages not to show notifications"
 
-#: data/resources/connection-details.ui:26
+#: data/resources/connection-details.ui:20
 msgid "_Server Address"
 msgstr "כתובת _שרת"
 
-#: data/resources/connection-details.ui:32
+#: data/resources/connection-details.ui:26
 msgid "Net_work Name"
 msgstr "שם _רשת"
 
-#: data/resources/connection-details.ui:38
+#: data/resources/connection-details.ui:32
 msgid "Use secure c_onnection"
 msgstr "שימוש בהת_חברות מאובטחת"
 
-#: data/resources/connection-details.ui:49
+#: data/resources/connection-details.ui:43
 msgid "_Nickname"
 msgstr "_כינוי"
 
-#: data/resources/connection-details.ui:55
+#: data/resources/connection-details.ui:49
 msgid "_Real Name"
 msgstr "שם _אמתי"
 
-#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:103
-#: data/resources/join-room-dialog.ui:41 src/initialSetup.js:92
+#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:41 data/resources/join-room-dialog.ui:143
+#: src/initialSetup.js:92
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -177,7 +175,7 @@ msgstr "ה_חלה"
 msgid "Change nickname"
 msgstr "שינוי כינוי"
 
-#: data/resources/entry-area.ui:112
+#: data/resources/entry-area.ui:113
 msgid "_Paste"
 msgstr "ה_דבקה"
 
@@ -284,8 +282,7 @@ msgid "Welcome to Polari"
 msgstr "ברוך בואך ל־Polari"
 
 #: data/resources/initial-setup-window.ui:55
-msgid ""
-"Polari is an easy way to chat using IRC. Select a network to get started."
+msgid "Polari is an easy way to chat using IRC. Select a network to get started."
 msgstr "‏Polari הוא דרך פשוטה להתכתב באמצעות IRC. יש לבחור רשת ולהתחיל."
 
 #: data/resources/initial-setup-window.ui:83
@@ -293,32 +290,40 @@ msgid ""
 "Select rooms you want to connect to. You can add more networks and rooms "
 "later, by clicking the + button."
 msgstr ""
-"יש לבחור את החדרים שברצונך להתחבר אליהם. ניתן להוסיף רשתות וחדרים נוספים "
-"מאוחר יותר, בלחיצה על כפתור ה־+."
+"יש לבחור את החדרים שברצונך להתחבר אליהם. ניתן להוסיף רשתות וחדרים נוספים מאוחר "
+"יותר, בלחיצה על כפתור ה־+."
 
-#: data/resources/join-room-dialog.ui:12 src/joinDialog.js:224
+#: data/resources/join-room-dialog.ui:32
 msgid "Join Chat Room"
 msgstr "הצטרפות לחדר צ׳אט"
 
-#: data/resources/join-room-dialog.ui:48
+#: data/resources/join-room-dialog.ui:49
 msgid "_Join"
 msgstr "ה_צטרפות"
 
-#: data/resources/join-room-dialog.ui:74
+#: data/resources/join-room-dialog.ui:70
 msgid "C_onnection"
 msgstr "_חיבור"
 
-#: data/resources/join-room-dialog.ui:109
+#: data/resources/join-room-dialog.ui:107
 msgid "_Add Network"
 msgstr "הו_ספת רשת"
 
-#: data/resources/join-room-dialog.ui:194
-msgid "_Add"
-msgstr "הו_ספה"
+#: data/resources/join-room-dialog.ui:133
+msgid "Add Network"
+msgstr "הוספת רשת"
 
-#: data/resources/join-room-dialog.ui:211
+#: data/resources/join-room-dialog.ui:194
 msgid "_Custom Network"
 msgstr "רשת _מותאמת"
+
+#: data/resources/join-room-dialog.ui:211
+msgid "Custom Network"
+msgstr "רשת אחרת"
+
+#: data/resources/join-room-dialog.ui:221
+msgid "_Add"
+msgstr "הו_ספה"
 
 #: data/resources/main-window.ui:28
 msgid "Keyboard Shortcuts"
@@ -344,8 +349,8 @@ msgstr "הוספת חדרים ורשתות"
 msgid "Add rooms and networks"
 msgstr "הוספת חדרים ורשתות"
 
-#: data/resources/main-window.ui:90
 # msgctxt "shortcut window"
+#: data/resources/main-window.ui:90
 msgid "Main Menu"
 msgstr "תפריט ראשי"
 
@@ -612,11 +617,11 @@ msgstr "מאפייני „%s”"
 
 #: src/connections.js:565
 msgid ""
-"Polari disconnected due to a network error. Please check if the address "
-"field is correct."
+"Polari disconnected due to a network error. Please check if the address field "
+"is correct."
 msgstr "‏Polari התנתק עקב שגיאת רשת. יש לבדוק אם שדה הכתובת תקין."
 
-#: src/entryArea.js:364
+#: src/entryArea.js:384
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -625,7 +630,7 @@ msgstr[1] "להדביק שתי שורות טקסט לשירות הדבקות צ�
 msgstr[2] "להדביק %s שורות טקסט לשירות הדבקות ציבורי?"
 msgstr[3] "להדביק %s שורות טקסט לשירות הדבקות ציבורי?"
 
-#: src/entryArea.js:369
+#: src/entryArea.js:389
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -634,33 +639,33 @@ msgstr[1] "שתי שורות טקסט נשלחות אל שירות הדבקות 
 msgstr[2] "‫%s שורות טקסט נשלחות אל שירות הדבקות ציבורי…"
 msgstr[3] "‫%s שורות טקסט נשלחות אל שירות הדבקות ציבורי…"
 
-#: src/entryArea.js:376
+#: src/entryArea.js:396
 msgid "Upload image to public paste service?"
 msgstr "העלאת תמונה לשרת הדבקה ציבורי?"
 
-#: src/entryArea.js:377
+#: src/entryArea.js:397
 msgid "Uploading image to public paste service…"
 msgstr "מעלה תמונה לשרת הדבקה ציבורי…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:394
+#: src/entryArea.js:414
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "העלאת „%s” לשרת הדבק ציבורי?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:396
+#: src/entryArea.js:416
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "מעלה את „%s” לשרת הדבקה ציבורי…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:405
+#: src/entryArea.js:425
 #, javascript-format
 msgid "%s in #%s"
 msgstr "‏%s בערוץ #‎%s"
 
-#: src/entryArea.js:407
+#: src/entryArea.js:427
 #, javascript-format
 msgid "Paste from %s"
 msgstr "הודבק מ־%s"
@@ -773,10 +778,6 @@ msgstr "משתמש: %s פעילות אחרונה: %s"
 msgid "Usage: %s"
 msgstr "שימוש: ‏%s"
 
-#: src/joinDialog.js:224
-msgid "Add Network"
-msgstr "הוספת רשת"
-
 #: src/mainWindow.js:293
 #, javascript-format
 msgid "%d user"
@@ -856,8 +857,7 @@ msgstr "האם לשמור את הססמה?"
 
 #: src/roomStack.js:182 src/telepathyClient.js:689
 #, javascript-format
-msgid ""
-"Identification will happen automatically the next time you connect to %s"
+msgid "Identification will happen automatically the next time you connect to %s"
 msgstr "הזיהוי יתבצע באופן אוטומטי בהתחברות הבאה אל %s"
 
 #: src/roomStack.js:190
