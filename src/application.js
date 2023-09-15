@@ -814,6 +814,7 @@ class Application extends Adw.Application {
 
     _onShowAbout() {
         let aboutParams = {
+            application_name: _('Polari'),
             developers: [
                 'Florian Müllner <fmuellner@gnome.org>',
                 'William Jon McCann <william.jon.mccann@gmail.com>',
