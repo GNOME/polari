@@ -13,7 +13,7 @@ SPDX-License-Identifier: CC0-1.0
   <name xml:lang="en">Polari</name>
   <shortdesc xml:lang="en">An IRC Client for GNOME</shortdesc>
   <description>Polari is a simple IRC Client that is designed to integrate seamlessly with GNOME</description>
-  <homepage rdf:resource="https://apps.gnome.org/app/org.gnome.Polari" />
+  <homepage rdf:resource="https://apps.gnome.org/Polari" />
   <download-page rdf:resource="http://download.gnome.org/sources/polari/" />
   <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/polari/issues" />
 

@@ -852,7 +852,7 @@ class Application extends Adw.Application {
             application_icon: 'org.gnome.Polari',
             version: pkg.version,
             issue_url: 'https://gitlab.gnome.org/GNOME/polari/-/issues',
-            website: 'https://apps.gnome.org/app/org.gnome.Polari',
+            website: 'https://apps.gnome.org/Polari',
 
             transient_for: this.active_window,
             modal: true,

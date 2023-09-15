@@ -42,7 +42,7 @@ SPDX-License-Identifier: CC0-1.0
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">org.gnome.Polari.desktop</launchable>
-  <url type="homepage">https://apps.gnome.org/app/org.gnome.Polari</url>
+  <url type="homepage">https://apps.gnome.org/Polari</url>
   <url type="bugtracker">https://gitlab.gnome.org/GNOME/polari/issues/new</url>
   <url type="vcs-browser">https://gitlab.gnome.org/GNOME/polari/</url>
   <url type="help">https://help.gnome.org/users/polari/stable/</url>
