@@ -31,7 +31,7 @@ pkg.require({
     'TelepathyGLib': '0.12',
     'TelepathyLogger': '0.2',
 });
-pkg.requireSymbol('Adw', '1', 'EntryRow');
+pkg.requireSymbol('Adw', '1', 'ToolbarView');
 pkg.checkSymbol('Soup', '3.0');
 
 import Application from './application.js';
