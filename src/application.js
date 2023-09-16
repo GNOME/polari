@@ -854,6 +854,14 @@ class Application extends Adw.Application {
             version: pkg.version,
             issue_url: 'https://gitlab.gnome.org/GNOME/polari/-/issues',
             website: 'https://apps.gnome.org/Polari',
+            release_notes: `
+              <ul>
+                <li>Adapt to latest GNOME design pattern</li>
+                <li>Improve visuals</li>
+                <li>Remove GNOME from networks list 😢</li>
+                <li>Fix user-online notifications</li>
+                <li>Fix selecting existing room in mobile view</li>
+              </ul>`,
 
             transient_for: this.active_window,
             modal: true,
