@@ -34,9 +34,7 @@ pkg.require({
 pkg.requireSymbol('Gio', '2.0', 'Application.send_notification');
 pkg.requireSymbol('GLib', '2.0', 'log_variant');
 pkg.requireSymbol('Adw', '1', 'EntryRow');
-
-if (!pkg.checkSymbol('Soup', '3.0'))
-    pkg.requireSymbol('Soup', '2.4');
+pkg.checkSymbol('Soup', '3.0');
 
 import Application from './application.js';
 

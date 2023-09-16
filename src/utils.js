@@ -11,37 +11,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
-
-import gi from 'gi';
-let Soup;
-
-try {
-    Soup = gi.require('Soup', '3.0');
-} catch (e) {
-    Soup = gi.require('Soup', '2.4');
-
-    Soup.Message.new_from_encoded_form =
-        function (method, uri, form) {
-            const message = Soup.Message.new_from_uri(method, new Soup.URI(uri));
-            message.set_request(
-                Soup.FORM_MIME_TYPE_URLENCODED,
-                Soup.MemoryUse.COPY,
-                form);
-            return message;
-        };
-
-    Soup.Session.prototype.send_and_read_async =
-        function (message, prio, cancellable, callback) {
-            this.queue_message(message, () => callback(this, message));
-        };
-    Soup.Session.prototype.send_and_read_finish =
-        function (message) {
-            if (message.status_code !== Soup.KnownStatusCode.OK)
-                return null;
-
-            return message.response_body.flatten().get_as_bytes();
-        };
-}
+import Soup from 'gi://Soup?version=3.0';
 
 Gio._promisify(Secret, 'password_store', 'password_store_finish');
 Gio._promisify(Secret, 'password_lookup', 'password_lookup_finish');
