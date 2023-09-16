@@ -834,6 +834,7 @@ class Application extends Adw.Application {
                 'unkemptArc99 <abhishekbhardwaj540@gmail.com>',
                 'Oscar Shrimpton <oscar.shrimpton.personal@gmail.com>',
                 'Daronion <stefanosdimos.98@gmail.com>',
+                'Georges Basile Stavracas Neto <georges.stavracas@gmail.com>',
             ],
             artists: [
                 'Sam Hewitt <hewittsamuel@gmail.com>',
