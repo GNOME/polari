@@ -60,7 +60,7 @@ class TextView extends Gtk.TextView {
             'indent-width-chars', 'indent-width-chars', 'indent-width-chars',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXUINT32, 0),
-        'indext-spacing': GObject.ParamSpec.uint(
+        'indent-spacing': GObject.ParamSpec.uint(
             'indent-spacing', 'indent-spacing', 'indent-spacing',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXUINT32, 0),
