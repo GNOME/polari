@@ -1,3 +1,28 @@
+45.0 — “Like Stonehenge”
+========================
+* Remove GNOME from networks list 😢 [Jeremy; !268]
+* Port to new Adwaita widgets [Florian; !275, !287, !293]
+* Improve visuals [Georges; !280, !281, !283, !285, !291]
+* Fix selecting existing room in mobile view [Florian; !292]
+* Fix user-online notification [Florian; !296]
+* Misc. bug fixes and cleanups [Florian, Jakub, Sabri, 0xMRTT; !274, !276,
+  !278, !282, !277, !279, !253, !271, !286, !288, !289, !290, !294, !295,
+  !297, !298, !300, !299]
+
+Contributors:
+  0xMRTT, Jeremy Bicha, Sveinn í Felli, Florian Müllner,
+  Georges Basile Stavracas Neto, Jakub Steiner, Sabri Ünal
+
+Translators:
+  Fabio Tomat [fur], Ekaterine Papava [ka], Sabri Ünal [tr],
+  Sveinn í Felli [is], Yuri Chornoivan [uk], Yosef Or Boczko [he],
+  Kukuh Syafaat [id], Jiri Grönroos [fi], Martin [sl], Piotr Drąg [pl],
+  Hugo Carvalho [pt], Danial Behzadi [fa], Sergej A [ru], Nathan Follens [nl],
+  Daniel Mustieles [es], Fran Dieguez [gl], Jürgen Benvenuti [de],
+  DaeHyun Sung [ko], Asier Sarasua Garmendia [eu], Luming Zh [zh_CN],
+  Yaron Shahrabani [he], Anders Jonsson [sv], Balázs Úr [hu], Daniel Rusek [cs],
+  Ask Hjorth Larsen [da]
+
 43.0 — “Hi.”
 ============
 * Move more UI to libadwaita [Florian; !256, !258]
