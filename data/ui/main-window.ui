@@ -90,6 +90,11 @@ SPDX-License-Identifier: GPL-2.0-or-later
                             <property name="tooltip-text" translatable="yes">Main Menu</property>
                           </object>
                         </child>
+                        <child type="end">
+                          <object class="GtkToggleButton" id="searchButton">
+                            <property name="icon-name">edit-find-symbolic</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <property name="content">
@@ -102,6 +107,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
                             <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkSearchBar">
+                                <property name="search-mode-enabled" bind-source="searchButton"
+                                          bind-property="active"
+                                          bind-flags="sync-create" />
                                 <child>
                                   <object class="GtkSearchEntry" id="searchEntry">
                                     <property name="hexpand">True</property>
