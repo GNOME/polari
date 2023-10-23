@@ -164,3 +164,46 @@ export class LogImporter {
         }
     }
 }
+
+export class LogFinder {
+    constructor(roomManager) {
+        this._roomManager = roomManager;
+        this._countQuery = null;
+        this._cancellable = null;
+    }
+
+    async countResults(keyword) {
+        if (!this._countQuery) {
+            const query = '/org/gnome/Polari/sparql/count-results.rq';
+            this._countQuery = new GenericQuery(query);
+        }
+
+        this._cancellable?.cancel();
+        this._cancellable = new Gio.Cancellable();
+
+        const cursor = await this._countQuery.execute({keyword}, this._cancellable);
+        const results = {};
+        const roomMap = new Map();
+        let row;
+
+        for (const room of this._roomManager.rooms) {
+            const accountId = room.account.get_path_suffix();
+            const roomName = room.channel_name;
+            const uri = `urn:channel:${accountId}:${roomName}`;
+            roomMap.set(uri, room);
+        }
+
+        // eslint-disable-next-line no-await-in-loop
+        while ((row = await this._countQuery.next(cursor, this._cancellable)) !== null) {
+            const room = roomMap.get(row.channel);
+            if (room)
+                results[room] = Number(row.matches);
+        }
+
+        return results;
+    }
+
+    cancel() {
+        this._cancellable?.cancel();
+    }
+}

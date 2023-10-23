@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2023 Gurmannat Sohal <iamgurmannatsohal@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+# Input args: keyword
+# Outputs: channel, matches
+SELECT ?channel (COUNT(?msg) AS ?matches) {
+  GRAPH polari:irc {
+    ?msg a polari:Message ;
+      polari:channel ?channel ;
+      fts:match ~keyword
+  }
+}
+GROUP BY ?channel

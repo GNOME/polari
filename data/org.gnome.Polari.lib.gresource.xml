@@ -10,5 +10,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
   <gresource prefix="/org/gnome/Polari">
     <file>ontologies/polari.ontology</file>
     <file>sparql/get-room-events.rq</file>
+    <file>sparql/count-results.rq</file>
   </gresource>
 </gresources>
