@@ -336,6 +336,9 @@ class Application extends Adw.Application {
             activate: this._onQuit.bind(this),
             accels: ['<Primary>q'],
         }, {
+            name: 'search',
+            accels: ['<Primary>s'],
+        }, {
             name: 'next-room',
             accels: ['<Primary>Page_Down', '<Alt>Down'],
         }, {

@@ -30,8 +30,11 @@ class MainWindow extends Adw.ApplicationWindow {
         'roomListRevealer',
         'offlineBanner',
         'overlay',
+        'roomList',
         'roomStack',
         'importProgress',
+        'searchButton',
+        'searchEntry',
     ];
 
     static [GObject.properties] = {
@@ -71,11 +74,27 @@ class MainWindow extends Adw.ApplicationWindow {
 
         this._userListPopover.set_parent(this._showUserListButton);
 
+        this._searchEntry.connect('search-changed', () => {
+            const searchTerms = this._searchEntry.get_text();
+            if (searchTerms)
+                this._roomList.search(searchTerms);
+            else
+                this._roomList.setSearchMode(false);
+        });
+
         const app = this.application;
         if (app.isTestInstance)
             this.add_css_class('test-instance');
         if (GLib.get_application_name().toLowerCase().includes('snapshot'))
             this.add_css_class('snapshot');
+
+        const actions = [{
+            name: 'search',
+            handler: () => this._searchButton.set_active(true),
+        }];
+        actions.forEach(a => {
+            app.lookup_action(a.name).connect('activate', a.handler);
+        });
 
         this._roomStack.connect('notify::view-height',
             () => this.notify('view-height'));

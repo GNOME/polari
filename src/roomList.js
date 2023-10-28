@@ -16,6 +16,7 @@ import Tp from 'gi://TelepathyGLib';
 import AccountsMonitor from './accountsMonitor.js';
 import RoomManager from './roomManager.js';
 import UserStatusMonitor from './userTracker.js';
+import * as Logger from './logger.js';
 
 const MIN_SPINNER_TIME = 1000000;   // in microsecond
 
@@ -46,6 +47,7 @@ class RoomRow extends Gtk.ListBoxRow {
 
         this._room = room;
         this._popover = null;
+        this._matches = 0;
 
         const mon = UserStatusMonitor.getDefault();
         this._userTracker = mon.getUserTrackerForAccount(this.account);
@@ -104,7 +106,7 @@ class RoomRow extends Gtk.ListBoxRow {
             this._clearConnectingTimeout();
         });
 
-        this._updatePending();
+        this._updateCounter();
         this._onChannelChanged();
         this._eventStack.visible_child_name = 'messages';
     }
@@ -127,7 +129,7 @@ class RoomRow extends Gtk.ListBoxRow {
 
     selected() {
         if (!this._room.channel)
-            this._updatePending();
+            this._updateCounter();
     }
 
     _getNumPending() {
@@ -181,10 +183,17 @@ class RoomRow extends Gtk.ListBoxRow {
             this.remove_css_class('muted');
         }
 
-        this._updatePending();
+        this._updateCounter();
     }
 
-    _updatePending() {
+    _updateCounter() {
+        if (this._searchMode) {
+            this._counter.label = this._matches > 99
+                ? '99+' : this._matches.toString();
+            this._counter.opacity = this._matches > 0 ? 1. : 0.;
+            return;
+        }
+
         let [nPending, nHighlights] = this._getNumPending();
 
         this._counter.label = nHighlights.toString();
@@ -207,9 +216,9 @@ class RoomRow extends Gtk.ListBoxRow {
         for (let signal of ['message-received', 'pending-message-removed']) {
             this._channelSignals.push(
                 this._room.channel.connect(signal,
-                    this._updatePending.bind(this)));
+                    this._updateCounter.bind(this)));
         }
-        this._updatePending();
+        this._updateCounter();
     }
 
     _onButtonReleased(controller) {
@@ -238,6 +247,20 @@ class RoomRow extends Gtk.ListBoxRow {
         if (this._connectingTimeoutId)
             GLib.source_remove(this._connectingTimeoutId);
         this._connectingTimeoutId = 0;
+    }
+
+    setSearchMode(enabled) {
+        this._searchMode = enabled;
+        this._updateCounter();
+    }
+
+    setMatches(matches) {
+        this._matches = matches;
+        this.setSearchMode(true);
+    }
+
+    hasMatches() {
+        return this._searchMode && this._matches > 0;
     }
 });
 
@@ -585,6 +608,7 @@ class RoomList extends Gtk.ListBox {
 
         this.set_header_func(this._updateHeader.bind(this));
         this.set_sort_func(this._sort.bind(this));
+        this.set_filter_func(this._filter.bind(this));
 
         this._placeholders = new Map();
         this._roomRows = new Map();
@@ -612,6 +636,8 @@ class RoomList extends Gtk.ListBox {
         this._roomManager.connect('room-removed',
             this._roomRemoved.bind(this));
         this._roomManager.rooms.forEach(r => this._roomAdded(this._roomManager, r));
+
+        this._logFinder = new Logger.LogFinder(this._roomManager);
 
         let app = Gio.Application.get_default();
         let actions = [{
@@ -886,5 +912,44 @@ class RoomList extends Gtk.ListBox {
             return room1.type === Tp.HandleType.ROOM ? -1 : 1;
 
         return room1.display_name.localeCompare(room2.display_name);
+    }
+
+    _filter(row) {
+        if (!this._searchMode)
+            return true;
+        if (!row.room)
+            return true;
+        return row.hasMatches();
+    }
+
+    setSearchMode(enabled) {
+        if (this._searchMode === enabled)
+            return;
+
+        this._searchMode = enabled;
+        this._roomRows.forEach(r => r.setSearchMode(enabled));
+        this.invalidate_filter();
+        this.invalidate_sort();
+
+        if (!enabled)
+            this._logFinder.cancel();
+    }
+
+    async search(searchTerms) {
+        try {
+            this.setSearchMode(true);
+
+            const results = await this._logFinder.countResults(searchTerms);
+
+            for (const room of this._roomManager.rooms) {
+                const row = this._roomRows.get(room.id);
+                row.setMatches(results[room] ?? 0);
+            }
+
+            this.invalidate_filter();
+        } catch (error) {
+            if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
+                logError(error);
+        }
     }
 });

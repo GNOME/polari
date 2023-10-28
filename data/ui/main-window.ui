@@ -124,7 +124,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                                 <property name="vexpand">True</property>
                                 <property name="hexpand">True</property>
                                 <child>
-                                  <object class="Gjs_RoomList">
+                                  <object class="Gjs_RoomList" id="roomList">
                                     <property name="selection-mode">browse</property>
                                     <style>
                                       <class name="polari-room-list"/>
