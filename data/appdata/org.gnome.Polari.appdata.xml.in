@@ -70,15 +70,14 @@ SPDX-License-Identifier: CC0-1.0
   <releases>
     <release version="45.0" date="2023-09-16">
       <description>
-        <p>It's been a while! Finally a new release:
-          <ul>
-            <li>Adapt to latest GNOME design pattern</li>
-            <li>Improve visuals</li>
-            <li>Remove GNOME from networks list 😢</li>
-            <li>Fix user-online notifications</li>
-            <li>Fix selecting existing room in mobile view</li>
-          </ul>
-        </p>
+        <p>It's been a while! Finally a new release:</p>
+        <ul>
+          <li>Adapt to latest GNOME design pattern</li>
+          <li>Improve visuals</li>
+          <li>Remove GNOME from networks list 😢</li>
+          <li>Fix user-online notifications</li>
+          <li>Fix selecting existing room in mobile view</li>
+        </ul>
       </description>
     </release>
   </releases>
