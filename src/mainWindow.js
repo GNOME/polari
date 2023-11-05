@@ -16,6 +16,7 @@ import JoinDialog from './joinDialog.js';
 import RoomList_ from './roomList.js'; // used in template
 import RoomManager from './roomManager.js';
 import RoomStack_ from './roomStack.js'; // used in template
+import SearchView_ from './searchView.js'; // used in template
 import * as UserList_ from './userList.js'; // used in template
 import * as Utils from './utils.js';
 
@@ -35,6 +36,9 @@ class MainWindow extends Adw.ApplicationWindow {
         'importProgress',
         'searchButton',
         'searchEntry',
+        'searchTitle',
+        'searchView',
+        'viewStack',
     ];
 
     static [GObject.properties] = {
@@ -74,12 +78,22 @@ class MainWindow extends Adw.ApplicationWindow {
 
         this._userListPopover.set_parent(this._showUserListButton);
 
+        this._roomList.connect('filter-changed', () => {
+            this._searchView.rooms = this._roomList.searchRooms;
+        });
+
         this._searchEntry.connect('search-changed', () => {
             const searchTerms = this._searchEntry.get_text();
-            if (searchTerms)
+            if (searchTerms) {
+                this._searchTitle.set_text(vprintf(_('Search for “%s”'), searchTerms));
                 this._roomList.search(searchTerms);
-            else
+                this._searchView.search = searchTerms;
+                this._viewStack.set_visible_child_name('search');
+            } else {
+                this._viewStack.set_visible_child_name('conversation');
                 this._roomList.setSearchMode(false);
+                this._searchView.cancel();
+            }
         });
 
         const app = this.application;

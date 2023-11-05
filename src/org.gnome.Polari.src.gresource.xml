@@ -25,6 +25,7 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
     <file>roomList.js</file>
     <file>roomManager.js</file>
     <file>roomStack.js</file>
+    <file>searchView.js</file>
     <file>serverRoomManager.js</file>
     <file>tabCompletion.js</file>
     <file>telepathyClient.js</file>

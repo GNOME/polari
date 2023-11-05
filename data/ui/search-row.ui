@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Carlos Garnacho <carlosg@gnome.org>
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<interface>
+  <template class="Gjs_SearchRow" parent="GtkListBoxRow">
+    <child>
+      <object class="GtkBox">
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
+        <property name="spacing">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="date">
+            <property name="halign">end</property>
+            <style>
+              <class name="dim-label"/>
+              <class name="caption"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkGrid" id="messages">
+            <property name="column-homogeneous">true</property>
+            <property name="column-spacing">12</property>
+            <property name="row-spacing">6</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

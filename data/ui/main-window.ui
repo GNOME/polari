@@ -149,131 +149,166 @@ SPDX-License-Identifier: GPL-2.0-or-later
                   <class name="view"/>
                 </style>
                 <property name="child">
-                  <object class="AdwToolbarView">
-                    <child type="top">
-                      <object class="AdwHeaderBar">
-                        <!-- Use a custom title widget to enable markup for subtitles
-                             (for URLs in channel topics); other than that, we want
-                             the default GtkHeaderBar behavior, e.g. the subtitle may
-                             be hidden, but is always included in the size request.
-                             We replicate this by using a stack which will only ever show
-                             its first child, but still consider the second one's size -->
-                        <property name="title-widget">
-                          <object class="GtkStack">
-                            <property name="margin-start">24</property>
-                            <property name="margin-end">24</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="valign">center</property>
+                  <object class="GtkStack" id="viewStack">
+                    <property name="hhomogeneous">True</property>
+                    <property name="vhomogeneous">True</property>
+                    <property name="transition-type">crossfade</property>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">conversation</property>
+                        <property name="child">
+                          <object class="AdwToolbarView">
+                            <child type="top">
+                              <object class="AdwHeaderBar">
+                                <!-- Use a custom title widget to enable markup for subtitles
+                                     (for URLs in channel topics); other than that, we want
+                                     the default GtkHeaderBar behavior, e.g. the subtitle may
+                                     be hidden, but is always included in the size request.
+                                     We replicate this by using a stack which will only ever show
+                                     its first child, but still consider the second one's size -->
+                                <property name="title-widget">
+                                  <object class="GtkStack">
+                                    <property name="margin-start">24</property>
+                                    <property name="margin-end">24</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="orientation">vertical</property>
+                                        <property name="valign">center</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="single-line-mode">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" bind-source="Gjs_MainWindow"
+                                                      bind-property="title" bind-flags="sync-create"/>
+                                            <style>
+                                              <class name="title"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible" bind-source="Gjs_MainWindow"
+                                                      bind-property="subtitle-visible"
+                                                      bind-flags="sync-create"/>
+                                            <property name="single-line-mode">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="label" bind-source="Gjs_MainWindow"
+                                                      bind-property="subtitle" bind-flags="sync-create"/>
+                                            <property name="has-tooltip" bind-source="Gjs_MainWindow"
+                                                      bind-property="subtitle-visible" bind-flags="sync-create" />
+                                            <property name="tooltip-markup" bind-source="Gjs_MainWindow"
+                                                      bind-property="subtitle" bind-flags="sync-create" />
+                                            <style>
+                                              <class name="subtitle"/>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="single-line-mode">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <style>
+                                              <class name="title"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="single-line-mode">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="use-markup">True</property>
+                                            <style>
+                                              <class name="subtitle"/>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                                <child type="end">
+                                  <object class="GtkToggleButton" id="showUserListButton">
+                                    <property name="focus-on-click">False</property>
+                                    <property name="action-name">app.user-list</property>
+                                    <property name="tooltip-text" translatable="yes">Show Connected Users</property>
+                                    <property name="child">
+                                      <object class="AdwButtonContent">
+                                        <property name="icon-name">people-symbolic</property>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <property name="content">
+                              <object class="GtkOverlay">
+                                <child type="overlay">
+                                  <object class="AdwBanner" id="offlineBanner">
+                                    <property name="title" translatable="yes">Go online to chat and receive messages.</property>
+                                    <property name="valign">start</property>
+                                  </object>
+                                </child>
+                                <child type="overlay">
+                                  <object class="AdwBanner">
+                                    <property name="title" translatable="yes">Importing old conversations — Will be back after conversion</property>
+                                    <property name="revealed" bind-source="importProgress"
+                                              bind-property="visible" bind-flags="sync-create"/>
+                                    <property name="valign">start</property>
+                                  </object>
+                                </child>
+                                <child type="overlay">
+                                  <object class="GtkProgressBar" id="importProgress">
+                                    <style>
+                                      <class name="osd"/>
+                                    </style>
+                                    <property name="valign">start</property>
+                                    <property name="visible">false</property>
+                                  </object>
+                                </child>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="Gjs_RoomStack" id="roomStack">
+                                    <property name="transition-type">crossfade</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">search</property>
+                        <property name="child">
+                          <object class="AdwToolbarView">
+                            <child type="top">
+                              <object class="AdwHeaderBar" id="searchHeader">
+                                <property name="title-widget">
+                                  <object class="GtkLabel" id="searchTitle">
                                     <property name="single-line-mode">True</property>
                                     <property name="ellipsize">end</property>
-                                    <property name="label" bind-source="Gjs_MainWindow"
-                                              bind-property="title" bind-flags="sync-create"/>
                                     <style>
                                       <class name="title"/>
                                     </style>
                                   </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible" bind-source="Gjs_MainWindow"
-                                              bind-property="subtitle-visible"
-                                              bind-flags="sync-create"/>
-                                    <property name="single-line-mode">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="use-markup">True</property>
-                                    <property name="label" bind-source="Gjs_MainWindow"
-                                              bind-property="subtitle" bind-flags="sync-create"/>
-                                    <property name="has-tooltip" bind-source="Gjs_MainWindow"
-                                              bind-property="subtitle-visible" bind-flags="sync-create" />
-                                    <property name="tooltip-markup" bind-source="Gjs_MainWindow"
-                                              bind-property="subtitle" bind-flags="sync-create" />
-                                    <style>
-                                      <class name="subtitle"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                </child>
+                                </property>
                               </object>
                             </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="single-line-mode">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <style>
-                                       <class name="title"/>
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="single-line-mode">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="use-markup">True</property>
-                                    <style>
-                                      <class name="subtitle"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </property>
-                        <child type="end">
-                          <object class="GtkToggleButton" id="showUserListButton">
-                            <property name="focus-on-click">False</property>
-                            <property name="action-name">app.user-list</property>
-                            <property name="tooltip-text" translatable="yes">Show Connected Users</property>
-                            <property name="child">
-                              <object class="AdwButtonContent">
-                                <property name="icon-name">people-symbolic</property>
-                              </object>
+                            <property name="content">
+                              <object class="Gjs_SearchView" id="searchView"/>
                             </property>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
-                    <property name="content">
-                      <object class="GtkOverlay">
-                        <child type="overlay">
-                          <object class="AdwBanner" id="offlineBanner">
-                            <property name="title" translatable="yes">Go online to chat and receive messages.</property>
-                            <property name="valign">start</property>
-                          </object>
-                        </child>
-                        <child type="overlay">
-                          <object class="AdwBanner">
-                            <property name="title" translatable="yes">Importing old conversations — Will be back after conversion</property>
-                            <property name="revealed" bind-source="importProgress"
-                                      bind-property="visible" bind-flags="sync-create"/>
-                            <property name="valign">start</property>
-                          </object>
-                        </child>
-                        <child type="overlay">
-                          <object class="GtkProgressBar" id="importProgress">
-                            <style>
-                              <class name="osd"/>
-                            </style>
-                            <property name="valign">start</property>
-                            <property name="visible">false</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="Gjs_RoomStack" id="roomStack">
-                            <property name="hhomogeneous">True</property>
-                            <property name="vhomogeneous">True</property>
-                            <property name="transition-type">crossfade</property>
-                          </object>
-                        </child>
-                      </object>
-                    </property>
                   </object>
                 </property>
               </object>

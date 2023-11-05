@@ -26,6 +26,8 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
     <file preprocess="xml-stripblanks">ui/nick-popover.ui</file>
     <file preprocess="xml-stripblanks">ui/room-list-header.ui</file>
     <file preprocess="xml-stripblanks">ui/room-list-row.ui</file>
+    <file preprocess="xml-stripblanks">ui/search-row.ui</file>
+    <file preprocess="xml-stripblanks">ui/search-section.ui</file>
     <file preprocess="xml-stripblanks">ui/server-room-list.ui</file>
     <file preprocess="xml-stripblanks">ui/user-details.ui</file>
     <file preprocess="xml-stripblanks">ui/user-list.ui</file>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Carlos Garnacho <carlosg@gnome.org>
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<interface>
+  <template class="Gjs_SearchSection" parent="GtkBox">
+    <property name="margin-bottom">24</property>
+    <property name="margin-top">24</property>
+    <property name="margin-start">24</property>
+    <property name="margin-end">24</property>
+    <property name="orientation">vertical</property>
+    <property name="spacing">12</property>
+    <child>
+      <object class="GtkLabel" id="title">
+        <property name="halign">start</property>
+        <style>
+          <class name="heading"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkListBox" id="list">
+        <property name="selection-mode">none</property>
+        <style>
+          <class name="boxed-list"/>
+        </style>
+        <child>
+          <object class="GtkListBoxRow" id="loadMore">
+            <property name="activatable">true</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">list-add</property>
+                <property name="margin-bottom">6</property>
+                <property name="margin-top">6</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
