@@ -603,6 +603,10 @@ class RoomListHeader extends Gtk.Widget {
 
 export default GObject.registerClass(
 class RoomList extends Gtk.ListBox {
+    static [GObject.signals] = {
+        'filter-changed': {},
+    };
+
     constructor(params) {
         super(params);
 
@@ -933,6 +937,8 @@ class RoomList extends Gtk.ListBox {
 
         if (!enabled)
             this._logFinder.cancel();
+
+        this.emit('filter-changed');
     }
 
     async search(searchTerms) {
@@ -947,9 +953,20 @@ class RoomList extends Gtk.ListBox {
             }
 
             this.invalidate_filter();
+            this.emit('filter-changed');
         } catch (error) {
             if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
                 logError(error);
         }
+    }
+
+    get searchRooms() {
+        if (!this._searchMode)
+            return [];
+
+        return [...this._roomManager.rooms.values()].filter(room => {
+            const row = this._roomRows.get(room.id);
+            return this._searchMode && row && this._filter(row);
+        });
     }
 });
