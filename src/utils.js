@@ -454,3 +454,88 @@ export function formatTimePassed(seconds) {
         '%d month ago',
         '%d months ago', months), months);
 }
+
+/**
+ * @param {GLib.DateTime} date - the datetime to format
+ * @returns {string}
+ */
+export function formatDateTime(date) {
+    let now = GLib.DateTime.new_now_local();
+
+    // 00:01 actually, just to be safe
+    let todayMidnight = GLib.DateTime.new_local(
+        now.get_year(),
+        now.get_month(),
+        now.get_day_of_month(),
+        0, 1, 0);
+    let dateMidnight = GLib.DateTime.new_local(
+        date.get_year(),
+        date.get_month(),
+        date.get_day_of_month(),
+        0, 1, 0);
+    let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
+
+    let format;
+    let desktopSettings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
+    let clockFormat = desktopSettings.get_string('clock-format');
+    let hasAmPm = date.format('%p') !== '';
+
+    if (clockFormat === '24h' || !hasAmPm) {
+        if (daysAgo < 1) { // today
+            /* Translators: Time in 24h format */
+            format = _('%H\u2236%M');
+        } else if (daysAgo < 2) { // yesterday
+            /* Translators: this is the word "Yesterday" followed by a
+               time string in 24h format. i.e. "Yesterday, 14:30" */
+            // xgettext:no-c-format
+            format = _('Yesterday, %H\u2236%M');
+        } else if (daysAgo < 7) { // this week
+            /* Translators: this is the week day name followed by a time
+               string in 24h format. i.e. "Monday, 14:30" */
+            // xgettext:no-c-format
+            format = _('%A, %H\u2236%M');
+        } else if (date.get_year() === now.get_year()) { // this year
+            /* Translators: this is the month name and day number
+               followed by a time string in 24h format.
+               i.e. "May 25, 14:30" */
+            // xgettext:no-c-format
+            format = _('%B %d, %H\u2236%M');
+        } else { // before this year
+            /* Translators: this is the month name, day number, year
+               number followed by a time string in 24h format.
+               i.e. "May 25 2012, 14:30" */
+            // xgettext:no-c-format
+            format = _('%B %d %Y, %H\u2236%M');
+        }
+    } else {
+        // eslint-disable-next-line no-lonely-if
+        if (daysAgo < 1) { // today
+            /* Translators: Time in 12h format */
+            format = _('%l\u2236%M %p');
+        } else if (daysAgo < 2) { // yesterday
+            /* Translators: this is the word "Yesterday" followed by a
+               time string in 12h format. i.e. "Yesterday, 2:30 pm" */
+            // xgettext:no-c-format
+            format = _('Yesterday, %l\u2236%M %p');
+        } else if (daysAgo < 7) { // this week
+            /* Translators: this is the week day name followed by a time
+               string in 12h format. i.e. "Monday, 2:30 pm" */
+            // xgettext:no-c-format
+            format = _('%A, %l\u2236%M %p');
+        } else if (date.get_year() === now.get_year()) { // this year
+            /* Translators: this is the month name and day number
+               followed by a time string in 12h format.
+               i.e. "May 25, 2:30 pm" */
+            // xgettext:no-c-format
+            format = _('%B %d, %l\u2236%M %p');
+        } else { // before this year
+            /* Translators: this is the month name, day number, year
+               number followed by a time string in 12h format.
+               i.e. "May 25 2012, 2:30 pm"*/
+            // xgettext:no-c-format
+            format = _('%B %d %Y, %l\u2236%M %p');
+        }
+    }
+
+    return date.format(format);
+}
