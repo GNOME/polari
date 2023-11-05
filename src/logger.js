@@ -167,6 +167,8 @@ export class LogFinder {
     constructor(roomManager) {
         this._roomManager = roomManager;
         this._countQuery = null;
+        this._fetchQuery = null;
+        this._contextQuery = null;
         this._cancellable = null;
     }
 
@@ -196,6 +198,55 @@ export class LogFinder {
             const room = roomMap.get(row.channel);
             if (room)
                 results[room] = Number(row.matches);
+        }
+
+        cursor.close();
+
+        return results;
+    }
+
+    async fetchResults(room, keyword, limit, offset, cancellable) {
+        if (!this._fetchQuery) {
+            const query = '/org/gnome/Polari/sparql/search-messages.rq';
+            this._fetchQuery = new GenericQuery(query);
+        }
+
+        if (!this._contextQuery) {
+            const query = '/org/gnome/Polari/sparql/get-context.rq';
+            this._contextQuery = new GenericQuery(query);
+        }
+
+        const accountId = room.account.get_path_suffix();
+        const roomName = room.channel_name;
+        const channel = `urn:channel:${accountId}:${roomName}`;
+
+        const params = {channel, keyword, limit, offset};
+        const cursor = await this._fetchQuery.execute(params, cancellable);
+
+        const results = [];
+        let row;
+
+        // eslint-disable-next-line no-await-in-loop
+        while ((row = await this._fetchQuery.next(cursor, cancellable)) !== null) {
+            // eslint-disable-next-line no-await-in-loop
+            const contextCursor = await this._contextQuery.execute(
+                {channel, msgTime: row.time.format_iso8601()}, cancellable);
+            let ctx = [];
+            let item;
+            // eslint-disable-next-line no-await-in-loop
+            item = await this._contextQuery.next(
+                contextCursor, cancellable);
+            if (item !== null)
+                ctx.push(item);
+
+            // eslint-disable-next-line no-await-in-loop
+            item = await this._contextQuery.next(
+                contextCursor, cancellable);
+            if (item !== null)
+                ctx.push(item);
+
+            results.push([row, ...ctx]);
+            contextCursor.close();
         }
 
         cursor.close();

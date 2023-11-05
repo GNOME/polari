@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2023 Gurmannat Sohal <iamgurmannatsohal@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+# Inputs: keyword, channel, limit, offset
+# Outputs: text, senderNick, time
+SELECT ?text ?senderNick ?time {
+  GRAPH polari:irc {
+    {
+      SELECT ?msg {
+        GRAPH polari:irc {
+          ?msg a polari:Message;
+            polari:channel ~channel ;
+            fts:match ~keyword .
+        }
+      }
+    }
+
+    ?msg a polari:Message;
+      polari:sender [ polari:nick ?senderNick ] ;
+      polari:time ?time;
+      polari:text ?text .
+  }
+}
+ORDER BY DESC(?time) DESC(tracker:id(?msg))
+LIMIT ~limit
+OFFSET ~offset

@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2023 Gurmannat Sohal <iamgurmannatsohal@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+# Input args: ~channel, ~msgTime
+# Outputs: context, text, sender, time
+SELECT ?time ?senderNick ?text {
+   GRAPH polari:irc {
+     ?msg a polari:Message;
+        polari:sender [ polari:nick ?senderNick ] ;
+        polari:text ?text ;
+        polari:channel ~channel ;
+        polari:time ?time.
+
+     FILTER (?time > ~msgTime^^xsd:dateTime).
+   }
+}
+ORDER BY ASC(?time) ASC(tracker:id(?msg))
+LIMIT 2
