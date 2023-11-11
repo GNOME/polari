@@ -12,6 +12,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <file>sparql/get-context.rq</file>
     <file>sparql/get-room-events.rq</file>
     <file>sparql/count-results.rq</file>
+    <file>sparql/get-room-events-forward.rq</file>
     <file>sparql/search-messages.rq</file>
   </gresource>
 </gresources>

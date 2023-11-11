@@ -132,6 +132,25 @@ export class LogWalker {
         });
     }
 
+    async getEventsForward(startTime, numEvents) {
+        if (!this._forwardQuery) {
+            const query = '/org/gnome/Polari/sparql/get-room-events-forward.rq';
+            this._forwardQuery = new GenericQuery(query);
+        }
+
+        const channel = this._channelIri;
+        const timeStr = startTime.format_iso8601();
+        let cursor =
+            await this._forwardQuery.execute({channel, startTime: timeStr}, null);
+
+        const results = await this._getResults(cursor, numEvents);
+
+        return results.map(m => {
+            const {text, senderNick, time, isAction, isSelf} = m;
+            return new Polari.Message(text, senderNick, time, isAction, isSelf);
+        });
+    }
+
     isEnd() {
         return this._isEnd;
     }
