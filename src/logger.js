@@ -4,7 +4,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import Gio from 'gi://Gio';
-import GLib from 'gi://GLib';
 import Polari from 'gi://Polari';
 import Tracker from 'gi://Tracker';
 
@@ -82,27 +81,13 @@ export class LogWalker {
         this._room = room;
         this._query = null;
         this._isEnd = false;
-        // Start with a date in the slight future
-        this._lastTime = GLib.DateTime.new_now_utc().add_days(1);
 
         const accountId = this._room.account.get_path_suffix();
         const roomName = this._room.channel_name;
         this._channelIri = `urn:channel:${accountId}:${roomName}`;
     }
 
-    async getEvents(numEvents) {
-        if (this._isEnd)
-            return [];
-
-        if (!this._query) {
-            const query = '/org/gnome/Polari/sparql/get-room-events.rq';
-            this._query = new GenericQuery(query);
-        }
-
-        const channel = this._channelIri;
-        const lastTime = this._lastTime.format_iso8601();
-        let cursor =
-            await this._query.execute({channel, numEvents: numEvents * 2, lastTime}, null);
+    async _getResults(cursor, numEvents) {
         let results = [];
         let event;
         let i = 0;
@@ -119,11 +104,27 @@ export class LogWalker {
             results.push(event);
         }
 
-        this._isEnd = results.length < numEvents;
         cursor.close();
+        return results;
+    }
 
-        if (!this._isEnd)
-            this._lastTime = results[results.length - 1].time;
+    async getEvents(endTime, numEvents) {
+        if (this._isEnd)
+            return [];
+
+        if (!this._query) {
+            const query = '/org/gnome/Polari/sparql/get-room-events.rq';
+            this._query = new GenericQuery(query);
+        }
+
+        const channel = this._channelIri;
+        const timeStr = endTime.format_iso8601();
+        let cursor =
+            await this._query.execute({channel, endTime: timeStr}, null);
+
+        const results = await this._getResults(cursor, numEvents);
+
+        this._isEnd = results.length < numEvents;
 
         return results.reverse().map(m => {
             const {text, senderNick, time, isAction, isSelf} = m;

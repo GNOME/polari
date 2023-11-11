@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-# Inputs: channel, lastTime
+# Inputs: channel, endTime
 # Outputs: text, senderNick, time, isAction, isSelf
 SELECT
   ?text
@@ -23,8 +23,8 @@ SELECT
     OPTIONAL { ?msg polari:isAction ?isAction }.
     BIND (EXISTS { ?sender a polari:SelfContact } AS ?isSelf).
     # Provide a lower boundary for the queried time range, 1y worth of time
-    BIND (~lastTime^^xsd:dateTime - (60 * 60 * 24 * 365) AS ?after).
-    FILTER (?time < ~lastTime^^xsd:dateTime && ?time > ?after).
+    BIND (~endTime^^xsd:dateTime - (60 * 60 * 24 * 365) AS ?after).
+    FILTER (?time < ~endTime^^xsd:dateTime && ?time > ?after).
   }
 }
 ORDER BY DESC(?time) DESC(tracker:id(?msg))

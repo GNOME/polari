@@ -342,7 +342,7 @@ class ChatView extends Gtk.ScrolledWindow {
             if (!this._queriedInitialBacklog) {
                 this._queriedInitialBacklog = true;
                 this._fetchingBacklog = true;
-                this._getLogEvents(NUM_INITIAL_LOG_EVENTS);
+                this._getLogEvents(this._oldestMessageTime, NUM_INITIAL_LOG_EVENTS);
             }
         });
 
@@ -405,6 +405,8 @@ class ChatView extends Gtk.ScrolledWindow {
         this._updateMaxNickChars(this._room.account.nickname.length);
 
         this._logWalker = new LogWalker(this._room);
+        // Start with a date in the slight future
+        this._oldestMessageTime = GLib.DateTime.new_now_utc().add_days(1);
 
         this._autoscroll = true;
         this._originalUpper = this.vadjustment.get_upper();
@@ -567,9 +569,12 @@ class ChatView extends Gtk.ScrolledWindow {
         this._logWalker = null;
     }
 
-    async _getLogEvents(num) {
+    async _getLogEvents(date, num) {
         try {
-            const events = await this._logWalker.getEvents(num);
+            const events = await this._logWalker.getEvents(date, num);
+
+            if (events[0]?.get_time().compare(this._oldestMessageTime) < 0)
+                this._oldestMessageTime = events[0].get_time();
 
             this._hideLoadingIndicator();
             this._fetchingBacklog = false;
@@ -733,7 +738,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._fetchingBacklog = true;
         this._showLoadingIndicator();
-        this._getLogEvents(NUM_LOG_EVENTS);
+        this._getLogEvents(this._oldestMessageTime, NUM_LOG_EVENTS);
         return Gdk.EVENT_STOP;
     }
 
