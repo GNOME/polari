@@ -387,7 +387,6 @@ class ChatView extends Gtk.ScrolledWindow {
         this._hoveredButtonTags = [];
         this._needsIndicator = true;
         this._pending = new Map();
-        this._pendingLogs = [];
         this._initialPending = [];
         this._statusCount = {left: 0, joined: 0, total: 0};
 
@@ -579,8 +578,7 @@ class ChatView extends Gtk.ScrolledWindow {
             this._hideLoadingIndicator();
             this._fetchingBacklog = false;
 
-            this._pendingLogs = events.concat(this._pendingLogs);
-            this._insertPendingLogs();
+            this._insertLogs(events);
         } catch (e) {
             console.debug(e);
         }
@@ -595,21 +593,6 @@ class ChatView extends Gtk.ScrolledWindow {
         }
 
         throw new Error(`Cannot create message from source ${source}`);
-    }
-
-    _getReadyLogs() {
-        if (this._logWalker.isEnd())
-            return this._pendingLogs.splice(0);
-
-        const nick = this._pendingLogs[0].get_sender();
-        const isAction = this._pendingLogs[0].is_action();
-        const maxNum = this._pendingLogs.length - this._initialPending.length;
-        for (let i = 0; i < maxNum; i++) {
-            if (this._pendingLogs[i].get_sender() !== nick ||
-                this._pendingLogs[i].is_action() !== isAction)
-                return this._pendingLogs.splice(i);
-        }
-        return [];
     }
 
     _appendInitialPending(logs) {
@@ -630,14 +613,7 @@ class ChatView extends Gtk.ScrolledWindow {
         logs.splice(pos, numLogs, ...pending);
     }
 
-    _insertPendingLogs() {
-        let pending = this._getReadyLogs();
-
-        if (!pending.length) {
-            this._fetchBacklog();
-            return;
-        }
-
+    _insertLogs(pending) {
         let numInitialPending = this._initialPending.length;
         if (numInitialPending)
             this._appendInitialPending(pending);

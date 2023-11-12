@@ -94,11 +94,15 @@ export class LogWalker {
 
         // eslint-disable-next-line no-await-in-loop
         while ((event = await this._query.next(cursor)) !== null) {
-            // Cluster events with the same time together, even if
-            // we are at the numEvents limit.
-            if (i > numEvents &&
-                event.time !== results[results.length - 1].time)
-                break;
+            if (i > numEvents) {
+                const prevEvent = results[results.length - 1];
+                // Cluster events with the same user/time together, even if
+                // we are at the numEvents limit.
+                if (event.time !== prevEvent.time &&
+                    (event.senderNick !== prevEvent.senderNick ||
+                     event.isAction !== prevEvent.isAction))
+                    break;
+            }
 
             i++;
             results.push(event);
