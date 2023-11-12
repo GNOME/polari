@@ -51,6 +51,14 @@ class SearchRow extends Gtk.ListBoxRow {
 
         this._date.label = Utils.formatDateTime(this._startTime);
     }
+
+    get startTime() {
+        return this._startTime;
+    }
+
+    get endTime() {
+        return this._endTime;
+    }
 });
 
 const SearchSection = GObject.registerClass(
@@ -78,8 +86,12 @@ class SearchSection extends Gtk.Box {
 
         this.connect('unmap', () => this._onUnmap());
         this._list.connect('row-activated', (list, row) => {
-            if (this._loadMore === row)
+            if (this._loadMore === row) {
                 this._fetchResults();
+            } else {
+                const toplevel = this.get_root();
+                toplevel.showSearchInline(this._room, row.endTime.add_seconds(1));
+            }
         });
 
         this.search = searchTerms;

@@ -336,4 +336,8 @@ class RoomView extends Gtk.Overlay {
     set inputSensitive(sensitive) {
         this._entryArea.sensitive = sensitive;
     }
+
+    showSearchInline(date) {
+        this._view.showSearchInline(date);
+    }
 });

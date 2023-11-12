@@ -279,6 +279,28 @@ class HoverFilterTag extends ButtonTag {
     }
 });
 
+const ExpandButtons = GObject.registerClass(
+class ExpandButtons extends Gtk.Box {
+    static [GObject.signals] = {
+        'expand-below': {},
+        'expand-above': {},
+    };
+
+    constructor() {
+        super({orientation: Gtk.Orientation.HORIZONTAL});
+        this.add_css_class('linked');
+        this._attachButton('go-top', 'expand-below');
+        this._attachButton('go-bottom', 'expand-above');
+    }
+
+    _attachButton(iconName, signal) {
+        const button = new Gtk.Button({iconName});
+        button.connect('clicked', () => this.emit(signal));
+        button.set_cursor(Gdk.Cursor.new_from_name('default', null));
+        this.append(button);
+    }
+});
+
 export default GObject.registerClass(
 class ChatView extends Gtk.ScrolledWindow {
     static [GObject.interfaces] = [DropTargetIface];
@@ -388,6 +410,7 @@ class ChatView extends Gtk.ScrolledWindow {
         this._needsIndicator = true;
         this._pending = new Map();
         this._initialPending = [];
+        this._expanders = [];
         this._statusCount = {left: 0, joined: 0, total: 0};
 
         this._activeNickColor = new Gdk.RGBA();
@@ -572,13 +595,20 @@ class ChatView extends Gtk.ScrolledWindow {
         try {
             const events = await this._logWalker.getEvents(date, num);
 
-            if (events[0]?.get_time().compare(this._oldestMessageTime) < 0)
-                this._oldestMessageTime = events[0].get_time();
-
             this._hideLoadingIndicator();
             this._fetchingBacklog = false;
 
-            this._insertLogs(events);
+            this._insertLogs(events, date);
+        } catch (e) {
+            console.debug(e);
+        }
+    }
+
+    async _getLogEventsForward(date, num) {
+        try {
+            const events = await this._logWalker.getEventsForward(date, num);
+            this._fetchingBacklog = false;
+            this._insertLogs(events, date);
         } catch (e) {
             console.debug(e);
         }
@@ -613,7 +643,7 @@ class ChatView extends Gtk.ScrolledWindow {
         logs.splice(pos, numLogs, ...pending);
     }
 
-    _insertLogs(pending) {
+    _insertLogs(pending, insertDate) {
         let numInitialPending = this._initialPending.length;
         if (numInitialPending)
             this._appendInitialPending(pending);
@@ -621,9 +651,14 @@ class ChatView extends Gtk.ScrolledWindow {
         let indicatorIndex = pending.length - numInitialPending;
 
         let state = {lastNick: null, lastTimestamp: 0};
-        let iter = this._view.buffer.get_start_iter();
+        const [iter, startLimit, endLimit] = this._getLogInsertionPoint(insertDate);
 
         for (let i = 0; i < pending.length; i++) {
+            if (startLimit?.compare(pending[i].get_time()) >= 0)
+                continue;
+            if (endLimit?.compare(pending[i].get_time()) <= 0)
+                continue;
+
             // Workaround https://gitlab.gnome.org/GNOME/gtk/merge_requests/395
             this.set_kinetic_scrolling(false);
             this._insertingBacklog = true;
@@ -636,6 +671,9 @@ class ChatView extends Gtk.ScrolledWindow {
             if (!iter.is_end() || i < pending.length - 1)
                 this._view.buffer.insert(iter, '\n', -1);
         }
+
+        this._updateExpanders(insertDate,
+            pending[0].get_time(), pending[pending.length - 1].get_time());
     }
 
     get max_nick_chars() {
@@ -1406,5 +1444,114 @@ class ChatView extends Gtk.ScrolledWindow {
         buffer.remove_all_tags(start, iter);
         for (let i = 0; i < tags.length; i++)
             buffer.apply_tag(tags[i], start, iter);
+    }
+
+    _getLogInsertionPoint(insertDate) {
+        const {buffer} = this._view;
+
+        if (insertDate.compare(this._oldestMessageTime) === 0)
+            return [buffer.get_start_iter(), null, null];
+
+        for (let i = 0; i < this._expanders.length; i++) {
+            const expander = this._expanders[i];
+
+            if (expander.endDate.compare(insertDate) === 0) {
+                const iter = buffer.get_iter_at_child_anchor(expander.childAnchor);
+                iter.forward_line();
+                return [iter, expander.startDate, null];
+            } else if (expander.startDate.compare(insertDate) === 0) {
+                const iter = buffer.get_iter_at_child_anchor(expander.childAnchor);
+                iter.backward_line();
+                return [iter, null, expander.endDate];
+            }
+        }
+    }
+
+    _updateExpanders(insertDate, startDate, endDate) {
+        if (endDate.compare(this._oldestMessageTime) < 0)
+            this._oldestMessageTime = startDate;
+
+        for (let i = 0; i < this._expanders.length; i++) {
+            const expander = this._expanders[i];
+
+            if (expander.startDate.compare(insertDate) !== 0 &&
+                expander.endDate.compare(insertDate) !== 0)
+                continue;
+
+            if (expander.endDate.compare(insertDate) === 0)
+                expander.endDate = startDate;
+            if (expander.startDate.compare(insertDate) === 0)
+                expander.startDate = endDate;
+
+            // If the expander is fully expanded, delete it
+            if (expander.startDate.compare(expander.endDate) >= 0) {
+                const {buffer} = this._view;
+                const start = buffer.get_iter_at_child_anchor(expander.childAnchor);
+                const end = buffer.get_iter_at_child_anchor(expander.childAnchor);
+                start.backward_line();
+                end.forward_line();
+                buffer.delete(start, end);
+                this._expanders.splice(i, 1);
+            }
+
+            break;
+        }
+    }
+
+    _createExpander(buffer, iter, startDate, endDate) {
+        const buttons = new ExpandButtons(this._logWalker);
+
+        buffer.insert(iter, '\n', -1);
+        const childAnchor = buffer.create_child_anchor(iter);
+        this._view.add_child_at_anchor(buttons, childAnchor);
+        buffer.insert(iter, '\n', -1);
+
+        const expander = {startDate, endDate, childAnchor};
+
+        buttons.connect('expand-below', () => {
+            this._getLogEvents(expander.endDate, NUM_LOG_EVENTS).catch(console.log);
+        });
+        buttons.connect('expand-above', () => {
+            this._getLogEventsForward(expander.startDate, NUM_LOG_EVENTS).catch(console.log);
+        });
+
+        return expander;
+    }
+
+    showSearchInline(date) {
+        const {buffer} = this._view;
+
+        if (date.compare(this._oldestMessageTime) < 0) {
+            const iter = buffer.get_start_iter();
+            const expander = this._createExpander(buffer, iter, date, this._oldestMessageTime);
+            this._expanders.splice(0, 0, expander);
+            this._oldestMessageTime = date;
+        } else {
+            let pos = 0;
+
+            for (pos = 0; pos < this._expanders.length; pos++) {
+                const expander = this._expanders[pos];
+                if (date.compare(expander.startDate) > 0 &&
+                    date.compare(expander.endDate) < 0)
+                    break;
+            }
+
+            if (pos === this._expanders.length)
+                return;
+
+            const prev = this._expanders[pos];
+            const endDate = prev.endDate;
+            prev.endDate = date;
+            const iter = buffer.get_iter_at_child_anchor(prev.childAnchor);
+            iter.forward_line();
+
+            const expander = this._createExpander(buffer, iter, date, endDate);
+            if (pos === this._expanders.length - 1)
+                this._expanders.push(expander);
+            else
+                this._expanders.splice(pos + 1, 0, expander);
+        }
+
+        this._getLogEvents(date, NUM_LOG_EVENTS);
     }
 });
