@@ -117,8 +117,6 @@ check-reuse:
     name: fsfe/reuse:latest
     entrypoint: [""]
   script:
-    # Work around https://github.com/fsfe/reuse-tool/issues/895
-    - sed -i '/"\.ui"/d' /opt/venv/lib/python3.11/site-packages/reuse/comment.py
     - reuse lint
 
 build-fedora-container:
