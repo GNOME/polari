@@ -18,10 +18,13 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.or>
       <summary>Run in Background</summary>
       <description>Keep running in background when closed.</description>
     </key>
-    <key type="ai" name="window-size">
-      <default>[800,500]</default>
-      <summary>Window size</summary>
-      <description>Window size (width and height).</description>
+    <key type="i" name="window-width">
+      <default>800</default>
+      <summary>Window width</summary>
+    </key>
+    <key type="i" name="window-height">
+      <default>500</default>
+      <summary>Window height</summary>
     </key>
     <key type="b" name="window-maximized">
       <default>false</default>

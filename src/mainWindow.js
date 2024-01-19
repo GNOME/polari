@@ -60,10 +60,6 @@ class MainWindow extends Adw.ApplicationWindow {
 
     _settings = new Gio.Settings({schema_id: 'org.gnome.Polari'});
 
-    _currentSize = [-1, -1];
-    _isMaximized = false;
-    _isFullscreen = false;
-
     _displayNameChangedId = 0;
     _topicChangedId = 0;
     _membersChangedId = 0;
@@ -114,25 +110,20 @@ class MainWindow extends Adw.ApplicationWindow {
                 this._userListAction.change_state(GLib.Variant.new('b', false));
         });
 
-        this.connect('notify::maximized',
-            () => (this._isMaximized = this.maximized));
-        this.connect('notify::fullscreened',
-            () => (this._isFullscreen = this.fullscreened));
-        this.connect('notify::default-width',
-            () => (this._currentSize = this.get_default_size()));
-        this.connect('notify::default-height',
-            () => (this._currentSize = this.get_default_size()));
+        this._settings.bind('window-width',
+            this, 'default-width',
+            Gio.SettingsBindFlags.DEFAULT);
+        this._settings.bind('window-height',
+            this, 'default-height',
+            Gio.SettingsBindFlags.DEFAULT);
+        this._settings.bind('window-maximized',
+            this, 'maximized',
+            Gio.SettingsBindFlags.DEFAULT);
+
         this.connect('destroy', this._onDestroy.bind(this));
         this.connect('notify::active-room', () => {
             this._updateUserListLabel();
         });
-
-        let size = this._settings.get_value('window-size').deep_unpack();
-        if (size.length === 2)
-            this.set_default_size(...size);
-
-        if (this._settings.get_boolean('window-maximized'))
-            this.maximize();
     }
 
     get subtitle() {
@@ -163,10 +154,6 @@ class MainWindow extends Adw.ApplicationWindow {
     }
 
     _onDestroy() {
-        this._settings.set_boolean('window-maximized', this._isMaximized);
-        this._settings.set_value('window-size',
-            new GLib.Variant('ai', this._currentSize));
-
         let serializedChannel = null;
         if (this._lastActiveRoom) {
             serializedChannel = new GLib.Variant('a{sv}', {
