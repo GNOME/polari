@@ -7,27 +7,16 @@ SPDX-License-Identifier: GPL-2.0-or-later
 -->
 
 <interface>
-  <template class="Gjs_ConnectionProperties" parent="AdwWindow">
-    <property name="modal">True</property>
-    <property name="destroy-with-parent">True</property>
-    <property name="default-width">450</property>
+  <template class="Gjs_ConnectionProperties" parent="AdwDialog">
+    <property name="follows-content-size">true</property>
     <property name="default-widget">applyButton</property>
-    <child>
-      <object class="GtkShortcutController">
-        <child>
-          <object class="GtkShortcut">
-            <property name="trigger">Escape</property>
-            <property name="action">action(window.close)</property>
-          </object>
-        </child>
-      </object>
-    </child>
     <child>
       <object class="AdwToolbarView" id="view">
         <property name="bottom-bar-style">raised</property>
         <child type="top">
-          <object class="GtkHeaderBar">
-            <property name="show-title-buttons">False</property>
+          <object class="AdwHeaderBar">
+            <property name="show-start-title-buttons">False</property>
+            <property name="show-end-title-buttons">False</property>
             <child type="start">
               <object class="GtkButton" id="cancelButton">
                 <property name="label" translatable="yes">_Cancel</property>

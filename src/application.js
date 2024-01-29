@@ -790,9 +790,8 @@ class Application extends Adw.Application {
     _onEditConnection(action, parameter) {
         let accountPath = parameter.deep_unpack();
         let account = this._accountsMonitor.lookupAccount(accountPath);
-        let dialog = new Connections.ConnectionProperties(account);
-        dialog.transient_for = this.active_window;
-        dialog.show();
+        const dialog = new Connections.ConnectionProperties(account);
+        dialog.present(this.activeWindow);
     }
 
     _onStartClient() {

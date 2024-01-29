@@ -508,7 +508,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
 
 
 export const ConnectionProperties = GObject.registerClass(
-class ConnectionProperties extends Adw.Window {
+class ConnectionProperties extends Adw.Dialog {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/connection-properties.ui';
     static [Gtk.internalChildren] = [
         'applyButton',
@@ -525,16 +525,6 @@ class ConnectionProperties extends Adw.Window {
         });
 
         this._details.account = account;
-
-        this._details.connect('notify::has-service', () => {
-            /* HACK:
-             * Shrink back to minimum height when the visibility of
-             * some elements in Details could have changed; this
-             * assumes that this only happens before the user could
-             * resize the dialog herself
-             */
-            this.resize(this.default_width, 1);
-        });
 
         this._applyButton.connect('clicked', () => {
             this._details.save();
