@@ -813,7 +813,7 @@ class Application extends Adw.Application {
 
     _onShowAbout() {
         const [version] = pkg.version.split('-');
-        const aboutDialog = Adw.AboutWindow.new_from_appdata(
+        const aboutDialog = Adw.AboutDialog.new_from_appdata(
             '/org/gnome/Polari/metainfo.xml', version);
 
         aboutDialog.set({
@@ -849,11 +849,10 @@ class Application extends Adw.Application {
                 'Allan Day <allanpday@gmail.com>',
             ],
             translator_credits: _('translator-credits'),
-            transient_for: this.active_window,
-            modal: true,
         });
 
         aboutDialog.show();
+        aboutDialog.present(this.activeWindow);
     }
 
     _onQuit() {
