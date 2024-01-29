@@ -13,7 +13,7 @@ import Gtk from 'gi://Gtk';
 import AccountsMonitor from './accountsMonitor.js';
 
 export default GObject.registerClass(
-class JoinDialog extends Adw.Window {
+class JoinDialog extends Adw.Dialog {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/join-room-dialog.ui';
     static [Gtk.internalChildren] = [
         'joinButton',
@@ -68,6 +68,15 @@ class JoinDialog extends Adw.Window {
 
         this._onAccountsChanged();
         this._onPageChanged();
+
+        const app = Gio.Application.get_default();
+        const action = app.lookup_action('show-join-dialog');
+
+        // disable while showing
+        this.connect('map',
+            () => (action.enabled = false));
+        this.connect('unmap',
+            () => (action.enabled = true));
     }
 
     get _hasAccounts() {

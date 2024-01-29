@@ -167,8 +167,8 @@ class ServerRoomList extends Gtk.Box {
         this._filterEntry.connect('stop-search', () => {
             if (this._filterEntry.get_text().length > 0)
                 this._filterEntry.set_text('');
-            else if (this.get_root().transient_for !== null)
-                this.get_root().activate_action('window.close', null);
+            else
+                this.get_root().closeJoinDialog();
         });
         this._filterEntry.connect('activate', () => {
             if (this._filterEntry.text.trim().length === 0)

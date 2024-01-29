@@ -262,8 +262,14 @@ class MainWindow extends Adw.ApplicationWindow {
     }
 
     showJoinRoomDialog() {
-        let dialog = new JoinDialog({transient_for: this});
-        dialog.show();
+        this._joinDialog = new JoinDialog();
+        this._joinDialog.connect('closed',
+            () => delete this._joinDialog);
+        this._joinDialog.present(this);
+    }
+
+    closeJoinDialog() {
+        this._joinDialog?.close();
     }
 
     _updateUserListLabel() {
