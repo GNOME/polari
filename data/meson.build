@@ -5,6 +5,12 @@
 subdir('metainfo')
 subdir('icons')
 
+data_resources = gnome.compile_resources(
+  'data-resources',
+  app_id + '.data.gresource.xml',
+  c_name: 'data_resources'
+)
+
 desktop_filename = app_id + '.desktop'
 desktop_file = i18n.merge_file(
   input: desktop_filename + '.in',

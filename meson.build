@@ -71,8 +71,8 @@ gnome.post_install(
   update_desktop_database: true
 )
 
-subdir('src')
 subdir('data')
+subdir('src')
 subdir('po')
 subdir('help')
 

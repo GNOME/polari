@@ -2,13 +2,6 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-data_resources = gnome.compile_resources(
-  'data-resources',
-  '../data/@0@.data.gresource.xml'.format(app_id),
-  source_dir: '../data',
-  c_name: 'data_resources'
-)
-
 config_js = vcs_tag(
   command: ['git', 'describe'],
   input: configure_file(
