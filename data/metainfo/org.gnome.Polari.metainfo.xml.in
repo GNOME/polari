@@ -8,10 +8,50 @@ SPDX-License-Identifier: CC0-1.0
 
 <component type="desktop">
   <id>org.gnome.Polari.desktop</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0+ and LGPL-2.1+</project_license>
+
   <name>Polari</name>
   <summary>Talk to people on IRC</summary>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+ and LGPL-2.1+</project_license>
+
+  <url type="homepage">https://apps.gnome.org/Polari</url>
+  <url type="bugtracker">https://gitlab.gnome.org/GNOME/polari/issues/new</url>
+  <url type="vcs-browser">https://gitlab.gnome.org/GNOME/polari/</url>
+  <url type="help">https://help.gnome.org/users/polari/stable/</url>
+  <url type="donation">https://www.gnome.org/donate/</url>
+  <url type="translate">https://wiki.gnome.org/TranslationProject</url>
+
+  <project_group>GNOME</project_group>
+  <developer_name>Florian Müllner</developer_name>
+  <update_contact>fmuellner@gnome.org</update_contact>
+
+  <translation type="gettext">polari</translation>
+  <launchable type="desktop-id">org.gnome.Polari.desktop</launchable>
+
+  <kudos>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>HighContrast</kudo>
+    <kudo>ModernToolkit</kudo>
+    <kudo>Notifications</kudo>
+    <kudo>UserDocs</kudo>
+  </kudos>
+
+  <requires>
+    <display_length compare="ge">medium</display_length>
+  </requires>
+
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-chat">intense</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+  </content_rating>
+
   <description>
     <p>
       A simple Internet Relay Chat (IRC) client that is designed to integrate
@@ -24,6 +64,22 @@ SPDX-License-Identifier: CC0-1.0
       you never miss an important message.
     </p>
   </description>
+
+  <releases>
+    <release version="45.0" date="2023-09-16">
+      <description>
+        <p>It's been a while! Finally a new release:</p>
+        <ul>
+          <li>Adapt to latest GNOME design pattern</li>
+          <li>Improve visuals</li>
+          <li>Remove GNOME from networks list 😢</li>
+          <li>Fix user-online notifications</li>
+          <li>Fix selecting existing room in mobile view</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+
   <screenshots>
     <screenshot type="default">
       <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-main.png</image>
@@ -41,48 +97,4 @@ SPDX-License-Identifier: CC0-1.0
       <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-connection-properties.png</image>
     </screenshot>
   </screenshots>
-  <launchable type="desktop-id">org.gnome.Polari.desktop</launchable>
-  <url type="homepage">https://apps.gnome.org/Polari</url>
-  <url type="bugtracker">https://gitlab.gnome.org/GNOME/polari/issues/new</url>
-  <url type="vcs-browser">https://gitlab.gnome.org/GNOME/polari/</url>
-  <url type="help">https://help.gnome.org/users/polari/stable/</url>
-  <url type="donation">https://www.gnome.org/donate/</url>
-  <url type="translate">https://wiki.gnome.org/TranslationProject</url>
-  <update_contact>fmuellner@gnome.org</update_contact>
-  <project_group>GNOME</project_group>
-  <developer_name>Florian Müllner</developer_name>
-  <kudos>
-    <kudo>HiDpiIcon</kudo>
-    <kudo>HighContrast</kudo>
-    <kudo>ModernToolkit</kudo>
-    <kudo>Notifications</kudo>
-    <kudo>UserDocs</kudo>
-  </kudos>
-  <recommends>
-    <control>pointing</control>
-    <control>keyboard</control>
-    <control>touch</control>
-  </recommends>
-  <requires>
-    <display_length compare="ge">medium</display_length>
-  </requires>
-  <translation type="gettext">polari</translation>
-  <releases>
-    <release version="45.0" date="2023-09-16">
-      <description>
-        <p>It's been a while! Finally a new release:</p>
-        <ul>
-          <li>Adapt to latest GNOME design pattern</li>
-          <li>Improve visuals</li>
-          <li>Remove GNOME from networks list 😢</li>
-          <li>Fix user-online notifications</li>
-          <li>Fix selecting existing room in mobile view</li>
-        </ul>
-      </description>
-    </release>
-  </releases>
-  <content_rating type="oars-1.1">
-    <content_attribute id="social-chat">intense</content_attribute>
-    <content_attribute id="social-contacts">intense</content_attribute>
-  </content_rating>
 </component>
