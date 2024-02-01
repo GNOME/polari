@@ -26,19 +26,19 @@ SPDX-License-Identifier: CC0-1.0
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/appdata/polari-main.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-main.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/appdata/polari-user-list.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-user-list.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/appdata/polari-join-dialog.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-join-dialog.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/appdata/polari-connection.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-connection.png</image>
     </screenshot>
     <screenshot>
-      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/appdata/polari-connection-properties.png</image>
+      <image>https://gitlab.gnome.org/GNOME/polari/raw/HEAD/data/metainfo/polari-connection-properties.png</image>
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">org.gnome.Polari.desktop</launchable>

@@ -27,7 +27,7 @@ Copyright: GNOME documentation team <gnome-doc-list@gnome.org>
 License: CC-BY-SA-4.0
 
 #screenshots
-Files: data/appdata/*.png help/*.png
+Files: data/metainfo/*.png help/*.png
 Copyright: No rights reserved
 License: CC0-1.0
 

@@ -1,6 +1,6 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/appdata/org.gnome.Polari.appdata.xml.in
+data/metainfo/org.gnome.Polari.metainfo.xml.in
 data/org.gnome.Polari.desktop.in
 data/org.gnome.Polari.gschema.xml
 data/resources/connection-details.ui

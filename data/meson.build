@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-subdir('appdata')
+subdir('metainfo')
 subdir('icons')
 
 desktop_filename = app_id + '.desktop'

@@ -82,7 +82,7 @@ if (appstream_util.found())
   meson.add_dist_script(check_version,
     meson.project_version(),
     '--type', 'metainfo',
-    'data/appdata/org.gnome.Polari.appdata.xml.in')
+    'data/metainfo/org.gnome.Polari.metainfo.xml.in')
 endif
 
 summary('prefix', get_option('prefix'))

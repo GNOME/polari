@@ -2,20 +2,19 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-appdata_name = app_id + '.appdata.xml'
-appdata = i18n.merge_file(
-  input: appdata_name + '.in',
-  output: appdata_name,
+metainfo = i18n.merge_file(
+  input: app_id + '.metainfo.xml.in',
+  output: '@BASENAME@',
   po_dir: '../../po',
   install: true,
   install_dir: metainfodir
 )
 
 if (appstream_util.found())
-  test('Validating ' + appdata_name,
+  test('Validating metainfo',
     appstream_util,
-    args: ['validate', '--nonet', appdata.full_path()],
+    args: ['validate', '--nonet', metainfo.full_path()],
     workdir: meson.current_build_dir(),
-    depends: [appdata]
+    depends: [metainfo]
   )
 endif
