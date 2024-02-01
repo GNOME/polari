@@ -8,6 +8,8 @@ subdir('icons')
 data_resources = gnome.compile_resources(
   'data-resources',
   app_id + '.data.gresource.xml',
+  dependencies: [metainfo],
+  source_dir: ['.', meson.current_build_dir()],
   c_name: 'data_resources'
 )
 

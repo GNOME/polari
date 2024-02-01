@@ -9,7 +9,6 @@ import Adw from 'gi://Adw';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Gtk from 'gi://Gtk?version=4.0';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
 
@@ -813,9 +812,11 @@ class Application extends Adw.Application {
     }
 
     _onShowAbout() {
-        let aboutParams = {
-            application_name: _('Polari'),
-            developer_name: 'Florian Müllner',
+        const [version] = pkg.version.split('-');
+        const aboutDialog = Adw.AboutWindow.new_from_appdata(
+            '/org/gnome/Polari/metainfo.xml', version);
+
+        aboutDialog.set({
             developers: [
                 'Florian Müllner <fmuellner@gnome.org>',
                 'William Jon McCann <william.jon.mccann@gmail.com>',
@@ -848,26 +849,10 @@ class Application extends Adw.Application {
                 'Allan Day <allanpday@gmail.com>',
             ],
             translator_credits: _('translator-credits'),
-            copyright: 'Copyright © 2013-2018 The Polari authors',
-            license_type: Gtk.License.GPL_2_0,
-            application_icon: 'org.gnome.Polari',
-            version: pkg.version,
-            issue_url: 'https://gitlab.gnome.org/GNOME/polari/-/issues',
-            website: 'https://apps.gnome.org/Polari',
-            release_notes: `
-              <ul>
-                <li>Adapt to latest GNOME design pattern</li>
-                <li>Improve visuals</li>
-                <li>Remove GNOME from networks list 😢</li>
-                <li>Fix user-online notifications</li>
-                <li>Fix selecting existing room in mobile view</li>
-              </ul>`,
-
             transient_for: this.active_window,
             modal: true,
-        };
+        });
 
-        const aboutDialog = new Adw.AboutWindow(aboutParams);
         aboutDialog.show();
     }
 

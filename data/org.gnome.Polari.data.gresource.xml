@@ -9,10 +9,15 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
 <gresources>
   <gresource prefix="/org/gnome/Polari">
     <file alias="style.css">resources/style.css</file>
+    <file alias="metainfo.xml">metainfo/org.gnome.Polari.metainfo.xml</file>
+
     <file alias="data/networks.json">resources/networks.json</file>
+
     <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">resources/help-overlay.ui</file>
+
     <file alias="icons/scalable/status/people-symbolic.svg" preprocess="xml-stripblanks">resources/people-symbolic.svg</file>
     <file alias="icons/scalable/status/polari-user-notify-symbolic.svg" preprocess="xml-stripblanks">resources/polari-user-notify-symbolic.svg</file>
+
     <file alias="ui/connection-details.ui" preprocess="xml-stripblanks">resources/connection-details.ui</file>
     <file alias="ui/connection-properties.ui" preprocess="xml-stripblanks">resources/connection-properties.ui</file>
     <file alias="ui/entry-area.ui" preprocess="xml-stripblanks">resources/entry-area.ui</file>
