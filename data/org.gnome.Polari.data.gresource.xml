@@ -8,27 +8,27 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
 
 <gresources>
   <gresource prefix="/org/gnome/Polari">
-    <file alias="style.css">resources/style.css</file>
+    <file alias="style.css">css/style.css</file>
     <file alias="metainfo.xml" preprocess="xml-stripblanks">metainfo/org.gnome.Polari.metainfo.xml</file>
 
-    <file alias="data/networks.json">resources/networks.json</file>
+    <file alias="data/networks.json">networks.json</file>
 
-    <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">resources/help-overlay.ui</file>
+    <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.ui</file>
 
-    <file alias="icons/scalable/status/people-symbolic.svg" preprocess="xml-stripblanks">resources/people-symbolic.svg</file>
-    <file alias="icons/scalable/status/polari-user-notify-symbolic.svg" preprocess="xml-stripblanks">resources/polari-user-notify-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/people-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/polari-user-notify-symbolic.svg</file>
 
-    <file alias="ui/connection-details.ui" preprocess="xml-stripblanks">resources/connection-details.ui</file>
-    <file alias="ui/connection-properties.ui" preprocess="xml-stripblanks">resources/connection-properties.ui</file>
-    <file alias="ui/entry-area.ui" preprocess="xml-stripblanks">resources/entry-area.ui</file>
-    <file alias="ui/join-room-dialog.ui" preprocess="xml-stripblanks">resources/join-room-dialog.ui</file>
-    <file alias="ui/main-window.ui" preprocess="xml-stripblanks">resources/main-window.ui</file>
-    <file alias="ui/nick-popover.ui" preprocess="xml-stripblanks">resources/nick-popover.ui</file>
-    <file alias="ui/room-list-header.ui" preprocess="xml-stripblanks">resources/room-list-header.ui</file>
-    <file alias="ui/room-list-row.ui" preprocess="xml-stripblanks">resources/room-list-row.ui</file>
-    <file alias="ui/server-room-list.ui" preprocess="xml-stripblanks">resources/server-room-list.ui</file>
-    <file alias="ui/user-details.ui" preprocess="xml-stripblanks">resources/user-details.ui</file>
-    <file alias="ui/user-popover.ui" preprocess="xml-stripblanks">resources/user-popover.ui</file>
-    <file alias="ui/initial-setup-window.ui" preprocess="xml-stripblanks">resources/initial-setup-window.ui</file>
+    <file preprocess="xml-stripblanks">ui/connection-details.ui</file>
+    <file preprocess="xml-stripblanks">ui/connection-properties.ui</file>
+    <file preprocess="xml-stripblanks">ui/entry-area.ui</file>
+    <file preprocess="xml-stripblanks">ui/join-room-dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/main-window.ui</file>
+    <file preprocess="xml-stripblanks">ui/nick-popover.ui</file>
+    <file preprocess="xml-stripblanks">ui/room-list-header.ui</file>
+    <file preprocess="xml-stripblanks">ui/room-list-row.ui</file>
+    <file preprocess="xml-stripblanks">ui/server-room-list.ui</file>
+    <file preprocess="xml-stripblanks">ui/user-details.ui</file>
+    <file preprocess="xml-stripblanks">ui/user-popover.ui</file>
+    <file preprocess="xml-stripblanks">ui/initial-setup-window.ui</file>
   </gresource>
 </gresources>

@@ -43,7 +43,7 @@ if (json_glib_validate.found())
   test(
     'Validating ' + 'networks.json',
     json_glib_validate,
-    args: [files('resources/networks.json')],
+    args: [files('networks.json')],
   )
 endif
 
