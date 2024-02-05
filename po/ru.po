@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2024-01-19 15:43+0000\n"
-"PO-Revision-Date: 2024-01-20 09:12+1000\n"
+"POT-Creation-Date: 2024-02-03 18:21+0000\n"
+"PO-Revision-Date: 2024-02-04 16:07+1000\n"
 "Last-Translator: Ser82-png <asvmail.as@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -20,17 +20,21 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:13
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
-#: src/application.js:817 src/roomStack.js:279
+#: src/roomStack.js:279
 msgid "Polari"
 msgstr "Polari"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:14
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Разговор с людьми в IRC"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:16
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:26
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:56
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -39,7 +43,7 @@ msgstr ""
 "Простой IRC-клиент для GNOME; имеет простой и лаконичный интерфейс, который "
 "не отвлекает от бесед."
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:21
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:61
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -48,10 +52,6 @@ msgstr ""
 "Приложение Polari используется для для публичного и приватного общения на "
 "чат-каналах. Благодаря уведомлениям вы никогда не пропустите важного "
 "сообщения."
-
-#: data/appdata/org.gnome.Polari.appdata.xml.in:53
-msgid "Florian Müllner"
-msgstr "Florian Müllner"
 
 #: data/org.gnome.Polari.desktop.in:4
 msgid "An Internet Relay Chat Client for GNOME"
@@ -167,13 +167,13 @@ msgstr "_Псевдоним"
 msgid "_Real Name"
 msgstr "_Настоящее имя"
 
-#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:104
-#: data/resources/join-room-dialog.ui:41 data/resources/join-room-dialog.ui:143
+#: data/resources/connection-properties.ui:22 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:28 data/resources/join-room-dialog.ui:130
 #: src/initialSetup.js:92
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: data/resources/connection-properties.ui:41
+#: data/resources/connection-properties.ui:30
 msgid "_Apply"
 msgstr "_Применить"
 
@@ -301,35 +301,35 @@ msgstr ""
 "Выберите комнату, к которой хотите подключиться. Вы можете добавить больше "
 "сетей и комнат позже, нажав кнопку +."
 
-#: data/resources/join-room-dialog.ui:32
+#: data/resources/join-room-dialog.ui:19
 msgid "Join Chat Room"
 msgstr "Войти в комнату"
 
-#: data/resources/join-room-dialog.ui:49
+#: data/resources/join-room-dialog.ui:36
 msgid "_Join"
 msgstr "_Войти"
 
-#: data/resources/join-room-dialog.ui:70
+#: data/resources/join-room-dialog.ui:57
 msgid "C_onnection"
 msgstr "_Подключение"
 
-#: data/resources/join-room-dialog.ui:107
+#: data/resources/join-room-dialog.ui:94
 msgid "_Add Network"
 msgstr "_Добавить сеть"
 
-#: data/resources/join-room-dialog.ui:133
+#: data/resources/join-room-dialog.ui:120
 msgid "Add Network"
 msgstr "Добавить сеть"
 
-#: data/resources/join-room-dialog.ui:194
+#: data/resources/join-room-dialog.ui:181
 msgid "_Custom Network"
 msgstr "Д_ругая сеть"
 
-#: data/resources/join-room-dialog.ui:211
+#: data/resources/join-room-dialog.ui:198
 msgid "Custom Network"
 msgstr "Другая сеть"
 
-#: data/resources/join-room-dialog.ui:221
+#: data/resources/join-room-dialog.ui:208
 msgid "_Add"
 msgstr "_Добавить"
 
@@ -368,6 +368,10 @@ msgstr "Показать подключённых пользователей"
 #: data/resources/main-window.ui:224
 msgid "Go online to chat and receive messages."
 msgstr "Выходите в интернет, чтобы общаться и получать сообщения."
+
+#: data/resources/main-window.ui:230
+msgid "Importing old conversations — Will be back after conversion"
+msgstr "Импортируем старые беседы - Вернёмся к работе после преобразования"
 
 #: data/resources/nick-popover.ui:24
 msgid "Change nickname:"
@@ -433,79 +437,79 @@ msgstr "Разрешить запуск рядом с другим экземп�
 msgid "Print version and exit"
 msgstr "Показать информацию о версии и выйти"
 
-#: src/application.js:502 src/utils.js:274
+#: src/application.js:532 src/utils.js:274
 msgid "Failed to open link"
 msgstr "Не удалось открыть ссылку"
 
-#: src/application.js:765
+#: src/application.js:799
 #, javascript-format
 msgid "%s removed."
 msgstr "%s удалён."
 
-#: src/application.js:766
+#: src/application.js:800
 msgid "Undo"
 msgstr "Отменить"
 
-#: src/application.js:850
+#: src/application.js:885
 msgid "translator-credits"
 msgstr ""
 "Станислав Соловей <whats_up@tut.by>, 2013-2019.\n"
 "Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014.\n"
 "Alexey Rubtsov <rushills@gmail.com>, 2021"
 
-#: src/chatView.js:202
+#: src/chatView.js:199
 msgid "New Messages"
 msgstr "Новые сообщения"
 
-#: src/chatView.js:813
+#: src/chatView.js:795
 msgid "Open Link"
 msgstr "Открыть ссылку"
 
-#: src/chatView.js:815
+#: src/chatView.js:797
 msgid "Copy Link Address"
 msgstr "Копировать адрес ссылки"
 
-#: src/chatView.js:1014
+#: src/chatView.js:996
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s теперь известен как %s"
 
-#: src/chatView.js:1019
+#: src/chatView.js:1001
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s отсоединился"
 
-#: src/chatView.js:1028
+#: src/chatView.js:1010
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s был выкинут %s"
 
-#: src/chatView.js:1029
+#: src/chatView.js:1011
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s был выкинут"
 
-#: src/chatView.js:1036
+#: src/chatView.js:1018
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s был заблокирован %s"
 
-#: src/chatView.js:1037
+#: src/chatView.js:1019
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s был заблокирован"
 
-#: src/chatView.js:1042
+#: src/chatView.js:1024
 #, javascript-format
 msgid "%s joined"
 msgstr "%s присоединился к чату"
 
-#: src/chatView.js:1047
+#: src/chatView.js:1029
 #, javascript-format
 msgid "%s left"
 msgstr "%s покинул чат"
 
-#: src/chatView.js:1144
+#: src/chatView.js:1126
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -513,7 +517,7 @@ msgstr[0] "%d пользователь присоединился к чату"
 msgstr[1] "%d пользователя присоединился к чату"
 msgstr[2] "%d пользователей присоединился к чату"
 
-#: src/chatView.js:1151
+#: src/chatView.js:1133
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -523,14 +527,14 @@ msgstr[2] "%d пользователей покинули чат"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1223
+#: src/chatView.js:1205
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1228
+#: src/chatView.js:1210
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Вчера, %H∶%M"
@@ -538,7 +542,7 @@ msgstr "Вчера, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1233
+#: src/chatView.js:1215
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -547,7 +551,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1239
+#: src/chatView.js:1221
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d %b., %H∶%M"
@@ -556,7 +560,7 @@ msgstr "%d %b., %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1245
+#: src/chatView.js:1227
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d %b. %Y, %H∶%M"
@@ -565,14 +569,14 @@ msgstr "%d %b. %Y, %H∶%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1251
+#: src/chatView.js:1233
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1256
+#: src/chatView.js:1238
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Вчера, %l∶%M %p"
@@ -581,7 +585,7 @@ msgstr "Вчера, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1261
+#: src/chatView.js:1243
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -591,7 +595,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1267
+#: src/chatView.js:1249
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d %b., %l∶%M %p"
@@ -601,7 +605,7 @@ msgstr "%d %b., %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1273
+#: src/chatView.js:1255
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %b. %Y, %l∶%M %p"
@@ -619,7 +623,7 @@ msgstr "Нет результатов."
 msgid "“%s” Properties"
 msgstr "Свойства «%s»"
 
-#: src/connections.js:565
+#: src/connections.js:555
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -789,7 +793,7 @@ msgstr "Пользователь: %s - Последняя активность: 
 msgid "Usage: %s"
 msgstr "Использование: %s"
 
-#: src/mainWindow.js:278
+#: src/mainWindow.js:285
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -869,7 +873,7 @@ msgstr "Не удалось подключиться к %s."
 msgid "Should the password be saved?"
 msgstr "Пароль должен быть сохранён?"
 
-#: src/roomStack.js:182 src/telepathyClient.js:689
+#: src/roomStack.js:182 src/telepathyClient.js:692
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -915,24 +919,24 @@ msgstr ""
 msgid "Join a room using the + button."
 msgstr "Присоединитесь к комнате используя клавишу +."
 
-#: src/telepathyClient.js:494
+#: src/telepathyClient.js:495
 msgid "Good Bye"
 msgstr "Пока"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for Libera"
-#: src/telepathyClient.js:687
+#: src/telepathyClient.js:690
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Сохранить пароль %s для %s?"
 
-#: src/telepathyClient.js:692
+#: src/telepathyClient.js:695
 msgid "Save"
 msgstr "Сохранить"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:728
+#: src/telepathyClient.js:759
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s в %s"
