@@ -36,7 +36,7 @@ git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
 ```
 
 [app-page]: https://apps.gnome.org/Polari
-[build-instructions]: https://wiki.gnome.org/Newcomers/BuildProject
+[build-instructions]: https://welcome.gnome.org/app/Polari
 [irc-channel]: irc://irc.libera.chat/%23gnome-polari
 [bug-tracker]: https://gitlab.gnome.org/GNOME/polari/issues
 [polari-logo]: logo.png
