@@ -18,6 +18,7 @@ SPDX-License-Identifier: CC0-1.0
   <url type="homepage">https://apps.gnome.org/Polari</url>
   <url type="bugtracker">https://gitlab.gnome.org/GNOME/polari/issues/new</url>
   <url type="vcs-browser">https://gitlab.gnome.org/GNOME/polari/</url>
+  <url type="contribute">https://welcome.gnome.org/app/Polari</url>
   <url type="help">https://help.gnome.org/users/polari/stable/</url>
   <url type="donation">https://www.gnome.org/donate/</url>
   <url type="translate">https://wiki.gnome.org/TranslationProject</url>
