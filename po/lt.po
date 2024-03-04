@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2024-01-26 16:38+0000\n"
-"PO-Revision-Date: 2024-01-30 22:59+0200\n"
+"POT-Creation-Date: 2024-02-12 01:17+0000\n"
+"PO-Revision-Date: 2024-03-04 22:32+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -20,17 +20,17 @@ msgstr ""
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:13
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
-#: src/application.js:817 src/roomStack.js:279
+#: src/roomStack.js:279
 msgid "Polari"
 msgstr "Polari"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:14
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Kalbėkite su žmonėmis IRC tinkle"
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:16
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:60
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -40,7 +40,7 @@ msgstr ""
 "sklandžiam integravimuisi su GNOME; jis turi paprastą ir gražią sąsają, kuri "
 "leidžia susitelkti ties pokalbiais."
 
-#: data/appdata/org.gnome.Polari.appdata.xml.in:21
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:65
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -49,10 +49,6 @@ msgstr ""
 "Galite naudoti Polari viešiems pokalbiams kanale bei privatiems "
 "bendravimams. Pranešimai užtikrina, kad niekuomet nepraleistumėt svarbaus "
 "pranešimo."
-
-#: data/appdata/org.gnome.Polari.appdata.xml.in:53
-msgid "Florian Müllner"
-msgstr "Florian Müllner"
 
 #: data/org.gnome.Polari.desktop.in:4
 msgid "An Internet Relay Chat Client for GNOME"
@@ -165,13 +161,13 @@ msgstr "_Slapyvardis"
 msgid "_Real Name"
 msgstr "_Tikras vardas"
 
-#: data/resources/connection-properties.ui:33 data/resources/entry-area.ui:104
-#: data/resources/join-room-dialog.ui:41 data/resources/join-room-dialog.ui:143
+#: data/resources/connection-properties.ui:22 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:28 data/resources/join-room-dialog.ui:130
 #: src/initialSetup.js:92
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: data/resources/connection-properties.ui:41
+#: data/resources/connection-properties.ui:30
 msgid "_Apply"
 msgstr "_Pritaikyti"
 
@@ -299,35 +295,35 @@ msgstr ""
 "Pasirinkite kambarius, prie kurių norite prisijungti. Vėliau galėsite "
 "pridėti daugiau tinklų bei kambarių paspaudę + mygtuką."
 
-#: data/resources/join-room-dialog.ui:32
+#: data/resources/join-room-dialog.ui:19
 msgid "Join Chat Room"
 msgstr "Prisijungti prie pokalbių kambario"
 
-#: data/resources/join-room-dialog.ui:49
+#: data/resources/join-room-dialog.ui:36
 msgid "_Join"
 msgstr "Prisi_jungti"
 
-#: data/resources/join-room-dialog.ui:70
+#: data/resources/join-room-dialog.ui:57
 msgid "C_onnection"
 msgstr "_Ryšys"
 
-#: data/resources/join-room-dialog.ui:107
+#: data/resources/join-room-dialog.ui:94
 msgid "_Add Network"
 msgstr "_Pridėti tinklą"
 
-#: data/resources/join-room-dialog.ui:133
+#: data/resources/join-room-dialog.ui:120
 msgid "Add Network"
 msgstr "Pridėti tinklą"
 
-#: data/resources/join-room-dialog.ui:194
+#: data/resources/join-room-dialog.ui:181
 msgid "_Custom Network"
 msgstr "_Pasirinktinis tinklas"
 
-#: data/resources/join-room-dialog.ui:211
+#: data/resources/join-room-dialog.ui:198
 msgid "Custom Network"
 msgstr "Pasirinktinis tinklas"
 
-#: data/resources/join-room-dialog.ui:221
+#: data/resources/join-room-dialog.ui:208
 msgid "_Add"
 msgstr "_Pridėti"
 
@@ -366,6 +362,10 @@ msgstr "Rodyti susietus naudotojus"
 #: data/resources/main-window.ui:224
 msgid "Go online to chat and receive messages."
 msgstr "Prisijunkite prie interneto ir bendraukite bei gaukite pranešimus."
+
+#: data/resources/main-window.ui:230
+msgid "Importing old conversations — Will be back after conversion"
+msgstr "Importuojami seni pokalbiai – grįšime po konvertavimo"
 
 #: data/resources/nick-popover.ui:24
 msgid "Change nickname:"
@@ -431,78 +431,78 @@ msgstr "Leisti vykdyti kelis programos vienetus"
 msgid "Print version and exit"
 msgstr "Atspausdinti versiją ir išeiti"
 
-#: src/application.js:502 src/utils.js:274
+#: src/application.js:532 src/utils.js:274
 msgid "Failed to open link"
 msgstr "Nepavyko atverti saito"
 
-#: src/application.js:765
+#: src/application.js:799
 #, javascript-format
 msgid "%s removed."
 msgstr "%s pašalinta."
 
-#: src/application.js:766
+#: src/application.js:800
 msgid "Undo"
 msgstr "Atšaukti"
 
-#: src/application.js:850
+#: src/application.js:885
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
 "Aurimas Černius <aurisc4@gmail.com>"
 
-#: src/chatView.js:202
+#: src/chatView.js:199
 msgid "New Messages"
 msgstr "Nauji pranešimai"
 
-#: src/chatView.js:813
+#: src/chatView.js:795
 msgid "Open Link"
 msgstr "Atverti saitą"
 
-#: src/chatView.js:815
+#: src/chatView.js:797
 msgid "Copy Link Address"
 msgstr "Kopijuoti saito adresą"
 
-#: src/chatView.js:1014
+#: src/chatView.js:996
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s dabar žinomas kaip %s"
 
-#: src/chatView.js:1019
+#: src/chatView.js:1001
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s atsijungė"
 
-#: src/chatView.js:1028
+#: src/chatView.js:1010
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s buvo išspirtas %s"
 
-#: src/chatView.js:1029
+#: src/chatView.js:1011
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s buvo išspirtas"
 
-#: src/chatView.js:1036
+#: src/chatView.js:1018
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s buvo užblokuotas %s"
 
-#: src/chatView.js:1037
+#: src/chatView.js:1019
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s buvo užblokuotas"
 
-#: src/chatView.js:1042
+#: src/chatView.js:1024
 #, javascript-format
 msgid "%s joined"
 msgstr "%s prisijungė"
 
-#: src/chatView.js:1047
+#: src/chatView.js:1029
 #, javascript-format
 msgid "%s left"
 msgstr "%s išėjo"
 
-#: src/chatView.js:1144
+#: src/chatView.js:1126
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -510,7 +510,7 @@ msgstr[0] "Prisijungė %d naudotojas"
 msgstr[1] "Prisijungė %d naudotojai"
 msgstr[2] "Prisijungė %d naudotojų"
 
-#: src/chatView.js:1151
+#: src/chatView.js:1133
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -520,14 +520,14 @@ msgstr[2] "Išėjo %d naudotojų"
 
 #. today
 #. Translators: Time in 24h format
-#: src/chatView.js:1223
+#: src/chatView.js:1205
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/chatView.js:1228
+#: src/chatView.js:1210
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Vakar, %H:%M"
@@ -535,7 +535,7 @@ msgstr "Vakar, %H:%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/chatView.js:1233
+#: src/chatView.js:1215
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -544,7 +544,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/chatView.js:1239
+#: src/chatView.js:1221
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%B %d, %H∶%M"
@@ -553,7 +553,7 @@ msgstr "%B %d, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/chatView.js:1245
+#: src/chatView.js:1227
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%Y %B %d, %H∶%M"
@@ -561,14 +561,14 @@ msgstr "%Y %B %d, %H∶%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/chatView.js:1251
+#: src/chatView.js:1233
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/chatView.js:1256
+#: src/chatView.js:1238
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Vakar, %l∶%M %p"
@@ -576,7 +576,7 @@ msgstr "Vakar, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/chatView.js:1261
+#: src/chatView.js:1243
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -585,7 +585,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/chatView.js:1267
+#: src/chatView.js:1249
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%B %d, %l∶%M %p"
@@ -594,7 +594,7 @@ msgstr "%B %d, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/chatView.js:1273
+#: src/chatView.js:1255
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%Y %B %d, %l∶%M %p"
@@ -612,7 +612,7 @@ msgstr "Nėra rezultatų."
 msgid "“%s” Properties"
 msgstr "„%s“ savybės"
 
-#: src/connections.js:565
+#: src/connections.js:555
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -782,7 +782,7 @@ msgstr "Naudotojas: %s - paskutinė veikla: %s"
 msgid "Usage: %s"
 msgstr "Naudojimas: %s"
 
-#: src/mainWindow.js:278
+#: src/mainWindow.js:285
 #, javascript-format
 msgid "%d user"
 msgid_plural "%d users"
@@ -862,7 +862,7 @@ msgstr "Nepavyko prisijungti prie %s."
 msgid "Should the password be saved?"
 msgstr "Ar įrašyti slaptažodį?"
 
-#: src/roomStack.js:182 src/telepathyClient.js:689
+#: src/roomStack.js:182 src/telepathyClient.js:692
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -904,24 +904,24 @@ msgstr "Dabar negalima prisijungti prie kambario, bet galite bandyti vėliau."
 msgid "Join a room using the + button."
 msgstr "Prisijunkite prie kambario paspausdami mygtuką +."
 
-#: src/telepathyClient.js:494
+#: src/telepathyClient.js:495
 msgid "Good Bye"
 msgstr "Viso gero"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for Libera"
-#: src/telepathyClient.js:687
+#: src/telepathyClient.js:690
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Įrašyti %s %s slaptažodį?"
 
-#: src/telepathyClient.js:692
+#: src/telepathyClient.js:695
 msgid "Save"
 msgstr "Įrašyti"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:728
+#: src/telepathyClient.js:759
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s kambaryje %s"
@@ -1012,6 +1012,9 @@ msgid_plural "%d months ago"
 msgstr[0] "Prieš %d mėnesį"
 msgstr[1] "Prieš %d mėnesius"
 msgstr[2] "Prieš %d mėnesių"
+
+#~ msgid "Florian Müllner"
+#~ msgstr "Florian Müllner"
 
 #~ msgid "Window size (width and height)."
 #~ msgstr "Lango dydis (plotis ir aukštis)."
