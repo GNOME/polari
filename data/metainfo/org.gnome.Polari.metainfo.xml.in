@@ -42,6 +42,11 @@ SPDX-License-Identifier: CC0-1.0
     <kudo>UserDocs</kudo>
   </kudos>
 
+  <branding>
+    <color type="primary" scheme_preference="light">#8ff0a4</color>
+    <color type="primary" scheme_preference="dark">#275942</color>
+  </branding>
+
   <requires>
     <display_length compare="ge">360</display_length>
   </requires>
