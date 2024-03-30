@@ -1,3 +1,24 @@
+46.0
+====
+* Use adaptive dialogs [Florian; !310]
+* Replace telepathy-logger with private tracker database [Florian, Carlos; !264]
+* Misc. bug fixes and cleanups [Sabri, Daniel, Florian; !302, !303, !305, !306,
+  !307, !308, !309, !304, !312, !313]
+
+Contributors:
+  Carlos Garnacho, Florian Müllner, Daniel Rusek, Sabri Ünal
+
+Translators:
+  Daniel Mustieles [es], Sveinn í Felli [is], Vasil Pupkin [be],
+  Florentina Mușat [ro], Aurimas Černius [lt], Julien Humbert [fr],
+  Ekaterine Papava [ka], Danial Behzadi [fa], Juliano de Souza Camargo [pt_BR],
+  Sergej A [ru], Yuri Chornoivan [uk], Kukuh Syafaat [id], Yosef Or Boczko [he],
+  Sabri Ünal [tr], Jürgen Benvenuti [de], Daniel Rusek [cs], Fabio Tomat [fur],
+  DaeHyun Sung [ko], Christian Kirbach [de], Luming Zh [zh_CN],
+  Anders Jonsson [sv], Yaron Shahrabani [he], Asier Sarasua Garmendia [eu],
+  Jiri Grönroos [fi], Piotr Drąg [pl], Balázs Úr [hu], Ask Hjorth Larsen [da],
+  Martin [sl]
+
 45.0 — “Like Stonehenge”
 ========================
 * Remove GNOME from networks list 😢 [Jeremy; !268]

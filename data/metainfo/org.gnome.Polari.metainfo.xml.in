@@ -76,16 +76,10 @@ SPDX-License-Identifier: CC0-1.0
   </description>
 
   <releases>
-    <release version="45.0" date="2023-09-16">
+    <release version="46.0" date="2024-03-30">
       <description>
-        <p>It's been a while! Finally a new release:</p>
-        <ul>
-          <li>Adapt to latest GNOME design pattern</li>
-          <li>Improve visuals</li>
-          <li>Remove GNOME from networks list 😢</li>
-          <li>Fix user-online notifications</li>
-          <li>Fix selecting existing room in mobile view</li>
-        </ul>
+        <p>Store chat logs in a private database.</p>
+        <p>Use adaptive dialogs.</p>
       </description>
     </release>
   </releases>
