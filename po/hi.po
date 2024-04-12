@@ -1,0 +1,998 @@
+# Hindi translation for polari.
+# Copyright (C) 2024 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Scrambled777 <weblate.scrambled777@simplelogin.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2024-03-30 17:31+0000\n"
+"PO-Revision-Date: 2024-03-31 22:19+0530\n"
+"Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
+"Language-Team: Hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 46.0\n"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
+#: src/roomStack.js:279
+msgid "Polari"
+msgstr "Polari"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
+msgid "Talk to people on IRC"
+msgstr "IRC पर लोगों से बात करें"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"एक सरल इंटरनेट रिले चैट (IRC) क्लाइंट जिसे GNOME के साथ सहजता से एकीकृत करने के लिए "
+"डिज़ाइन किया गया है; इसमें एक सरल और सुंदर इंटरफ़ेस है जो आपको अपनी बातचीत पर ध्यान "
+"केंद्रित करने की अनुमति देता है।"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:71
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message."
+msgstr ""
+"आप किसी चैनल में लोगों के साथ सार्वजनिक रूप से चैट करने और निजी एक-से-एक बातचीत करने के "
+"लिए Polari का उपयोग कर सकते हैं। सूचनाएं सुनिश्चित करती हैं कि आप कभी भी कोई महत्वपूर्ण "
+"संदेश न चूकें।"
+
+#: data/org.gnome.Polari.desktop.in:4
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr "GNOME के लिए एक इंटरनेट रिले चैट क्लाइंट"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;इंटरनेट;रिले;चैट;"
+
+#: data/org.gnome.Polari.gschema.xml:13
+msgid "Saved channel list"
+msgstr "सहेजे गए चैनल सूची"
+
+#: data/org.gnome.Polari.gschema.xml:14
+msgid "List of channels to restore on startup"
+msgstr "स्टार्टअप पर पुनर्स्थापित करने के लिए चैनलों की सूची"
+
+#: data/org.gnome.Polari.gschema.xml:18 data/resources/main-window.ui:22
+msgid "Run in Background"
+msgstr "पृष्ठभूमि में चलाएँ"
+
+#: data/org.gnome.Polari.gschema.xml:19
+msgid "Keep running in background when closed."
+msgstr "बंद होने पर पृष्ठभूमि में चालू रखें।"
+
+#: data/org.gnome.Polari.gschema.xml:23
+msgid "Window width"
+msgstr "विंडो चौड़ाई"
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Window height"
+msgstr "विंडो ऊंचाई"
+
+#: data/org.gnome.Polari.gschema.xml:31
+msgid "Window maximized"
+msgstr "विंडो अधिकतमीकृत"
+
+#: data/org.gnome.Polari.gschema.xml:32
+msgid "Window maximized state"
+msgstr "विंडो अधिकतमीकृत स्थिति"
+
+#: data/org.gnome.Polari.gschema.xml:36
+msgid "Last active channel"
+msgstr "अंतिम सक्रिय चैनल"
+
+#: data/org.gnome.Polari.gschema.xml:37
+msgid "Last active (selected) channel"
+msgstr "अंतिम सक्रिय (चयनित) चैनल"
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify botname"
+msgstr "बॉटनाम पहचानें"
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Nickname of the bot to identify with"
+msgstr "पहचाने जाने वाले बॉट का उपनाम"
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify command"
+msgstr "आदेश पहचानें"
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Command used to identify with bot"
+msgstr "आदेश का उपयोग बॉट से पहचान के लिए किया जाता है"
+
+#: data/org.gnome.Polari.gschema.xml:54
+msgid "Identify username"
+msgstr "उपयोक्तानाम पहचानें"
+
+#: data/org.gnome.Polari.gschema.xml:55
+msgid "Username to use in identify command"
+msgstr "पहचान आदेश में उपयोग के लिए उपयोक्तानाम"
+
+#: data/org.gnome.Polari.gschema.xml:59
+msgid "Identify username supported"
+msgstr "समर्थित उपयोक्तानाम पहचानें"
+
+#: data/org.gnome.Polari.gschema.xml:60
+msgid "Whether the identify command is known to support the username parameter"
+msgstr "क्या पहचान आदेश उपयोक्तानाम पैरामीटर का समर्थन करने के लिए जाना जाता है"
+
+#: data/org.gnome.Polari.gschema.xml:66
+msgid "List of muted usernames"
+msgstr "मूक किये गये उपयोक्तानामों की सूची"
+
+#: data/org.gnome.Polari.gschema.xml:67
+msgid ""
+"A list of usernames for whose private messages not to show notifications"
+msgstr "उन उपयोक्तानामों की सूची जिनके निजी संदेशों पर सूचनाएं नहीं दिखाई जाएंगी"
+
+#: data/resources/connection-details.ui:20
+msgid "_Server Address"
+msgstr "सर्वर पता (_S)"
+
+#: data/resources/connection-details.ui:26
+msgid "Net_work Name"
+msgstr "नेटवर्क का नाम (_w)"
+
+#: data/resources/connection-details.ui:32
+msgid "Use secure c_onnection"
+msgstr "सुरक्षित कनेक्शन का प्रयोग करें (_o)"
+
+#: data/resources/connection-details.ui:43
+msgid "_Nickname"
+msgstr "उपनाम (_N)"
+
+#: data/resources/connection-details.ui:49
+msgid "_Real Name"
+msgstr "वास्तविक नाम (_R)"
+
+#: data/resources/connection-properties.ui:22 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:28 data/resources/join-room-dialog.ui:130
+#: src/initialSetup.js:92
+msgid "_Cancel"
+msgstr "रद्द (_C)"
+
+#: data/resources/connection-properties.ui:30
+msgid "_Apply"
+msgstr "लागू (_A)"
+
+#: data/resources/entry-area.ui:44
+msgid "Change nickname"
+msgstr "उपनाम बदलें"
+
+#: data/resources/entry-area.ui:113
+msgid "_Paste"
+msgstr "पेस्ट (_P)"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "General"
+msgstr "जनरल"
+
+#: data/resources/help-overlay.ui:22
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "रूम से जुड़ें"
+
+#: data/resources/help-overlay.ui:28
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "रूम छोड़ें"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "उपयोक्ता सूची दिखाएँ"
+
+#: data/resources/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "इमोजी पिकर दिखाएँ"
+
+#: data/resources/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "सहायता दिखाएँ"
+
+#: data/resources/help-overlay.ui:52
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "मेनू खोलें"
+
+#: data/resources/help-overlay.ui:58
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "छोड़ें"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "कीबोर्ड शॉर्टकट"
+
+#: data/resources/help-overlay.ui:72
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "नेविगेशन"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "अगला रूम"
+
+#: data/resources/help-overlay.ui:81
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "पिछला रूम"
+
+#: data/resources/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "अपठित संदेशों वाला अगला रूम"
+
+#: data/resources/help-overlay.ui:93
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "अपठित संदेशों वाला पिछला रूम"
+
+#: data/resources/help-overlay.ui:99
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "पहला रूम"
+
+#: data/resources/help-overlay.ui:105
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "आखिरी रूम"
+
+#: data/resources/help-overlay.ui:111
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "पहला - नौवाँ रूम"
+
+#: data/resources/initial-setup-window.ui:16
+msgid "Polari Setup"
+msgstr "Polari सेटअप"
+
+#: data/resources/initial-setup-window.ui:43
+msgid "Not connected"
+msgstr "जुड़ा नहीं हैं"
+
+#: data/resources/initial-setup-window.ui:44
+msgid "Please connect to the internet to continue the setup."
+msgstr "सेटअप जारी रखने के लिए कृपया इंटरनेट से जुड़ें।"
+
+#: data/resources/initial-setup-window.ui:54
+#: data/resources/initial-setup-window.ui:82
+msgid "Welcome to Polari"
+msgstr "Polari में आपका स्वागत है"
+
+#: data/resources/initial-setup-window.ui:55
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr ""
+"Polari IRC का उपयोग करके चैट करने का एक आसान तरीका है। आरंभ करने के लिए एक नेटवर्क चुनें।"
+
+#: data/resources/initial-setup-window.ui:83
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"वे रूम चुनें जिनसे आप जुड़ना चाहते हैं। आप बाद में + बटन पर क्लिक करके अधिक नेटवर्क और रूम जोड़ "
+"सकते हैं।"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "Join Chat Room"
+msgstr "चैट रूम से जुड़ें"
+
+#: data/resources/join-room-dialog.ui:36
+msgid "_Join"
+msgstr "जुड़ें (_J)"
+
+#: data/resources/join-room-dialog.ui:57
+msgid "C_onnection"
+msgstr "कनेक्शन (_o)"
+
+#: data/resources/join-room-dialog.ui:94
+msgid "_Add Network"
+msgstr "नेटवर्क जोड़ें (_A)"
+
+#: data/resources/join-room-dialog.ui:120
+msgid "Add Network"
+msgstr "नेटवर्क जोड़ें"
+
+#: data/resources/join-room-dialog.ui:181
+msgid "_Custom Network"
+msgstr "कस्टम नेटवर्क (_C)"
+
+#: data/resources/join-room-dialog.ui:198
+msgid "Custom Network"
+msgstr "कस्टम नेटवर्क"
+
+#: data/resources/join-room-dialog.ui:208
+msgid "_Add"
+msgstr " जोड़ें (_A)"
+
+#: data/resources/main-window.ui:28
+msgid "Keyboard Shortcuts"
+msgstr "कीबोर्ड शॉर्टकट"
+
+#: data/resources/main-window.ui:32
+msgid "Help"
+msgstr "सहायता"
+
+#: data/resources/main-window.ui:36
+msgid "About"
+msgstr "बारे में"
+
+#: data/resources/main-window.ui:40 src/application.js:92
+msgid "Quit"
+msgstr "छोड़ें"
+
+#: data/resources/main-window.ui:74
+msgid "Add Rooms and Networks"
+msgstr "रूम और नेटवर्क जोड़ें"
+
+#: data/resources/main-window.ui:79
+msgid "Add rooms and networks"
+msgstr "रूम और नेटवर्क जोड़ें"
+
+#: data/resources/main-window.ui:90
+msgid "Main Menu"
+msgstr "मुख्य मेनू"
+
+#: data/resources/main-window.ui:210
+msgid "Show Connected Users"
+msgstr "कनेक्टेड उपयोक्ता दिखाएँ"
+
+#: data/resources/main-window.ui:224
+msgid "Go online to chat and receive messages."
+msgstr "चैट करने और संदेश प्राप्त करने के लिए ऑनलाइन जाएँ।"
+
+#: data/resources/main-window.ui:230
+msgid "Importing old conversations — Will be back after conversion"
+msgstr "पुरानी बातचीत आयात कर रहे हैं - रूपांतरण के बाद वापस आयेंगे"
+
+#: data/resources/nick-popover.ui:24
+msgid "Change nickname:"
+msgstr "उपनाम बदलें:"
+
+#: data/resources/nick-popover.ui:34
+msgid "_Change"
+msgstr "बदलें (_C)"
+
+#: data/resources/room-list-header.ui:150
+msgid "Connect"
+msgstr "कनेक्ट"
+
+#: data/resources/room-list-header.ui:155
+msgid "Reconnect"
+msgstr "पुनः कनेक्ट"
+
+#: data/resources/room-list-header.ui:160
+msgid "Disconnect"
+msgstr "डिस्कनेक्ट"
+
+#: data/resources/room-list-header.ui:165
+msgid "Remove"
+msgstr "हटाएँ"
+
+#: data/resources/room-list-header.ui:170
+msgid "Properties"
+msgstr "गुण"
+
+#: data/resources/server-room-list.ui:50
+msgid "Enter room name to add"
+msgstr "जोड़ने के लिए रूम का नाम दर्ज करें"
+
+#: data/resources/user-details.ui:33
+msgid "Loading details"
+msgstr "विवरण लोड हो रहा है"
+
+#: data/resources/user-details.ui:62
+msgid "Last Activity:"
+msgstr "आख़िरी गतिविधि:"
+
+#: data/resources/user-details.ui:153
+msgid "Will notify if user appears online."
+msgstr "यदि उपयोक्ता ऑनलाइन दिखाई देगा तो सूचित किया जाएगा।"
+
+#: data/resources/user-details.ui:175
+msgid "Start Conversation"
+msgstr "बातचीत प्रारंभ करें"
+
+#: src/application.js:78
+msgid "Start Telepathy client"
+msgstr "टेलीपैथी क्लाइंट प्रारंभ करें"
+
+#: src/application.js:83
+msgid "Start in debug mode"
+msgstr "डिबग मोड में प्रारंभ करें"
+
+#: src/application.js:86
+msgid "Allow running alongside another instance"
+msgstr "किसी अन्य इंस्टेंस के साथ चलने की अनुमति दें"
+
+#: src/application.js:89
+msgid "Print version and exit"
+msgstr "संस्करण प्रिंट करें और बाहर निकलें"
+
+#: src/application.js:532 src/utils.js:274
+msgid "Failed to open link"
+msgstr "लिंक खोलने में विफल"
+
+#: src/application.js:799
+#, javascript-format
+msgid "%s removed."
+msgstr "%s हटाया गया।"
+
+#: src/application.js:800
+msgid "Undo"
+msgstr "पूर्ववत"
+
+#: src/application.js:885
+msgid "translator-credits"
+msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+
+#: src/chatView.js:199
+msgid "New Messages"
+msgstr "नए संदेश"
+
+#: src/chatView.js:795
+msgid "Open Link"
+msgstr "लिंक खोलें"
+
+#: src/chatView.js:797
+msgid "Copy Link Address"
+msgstr "लिंक का पता कॉपी करें"
+
+#: src/chatView.js:996
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "%s को अब %s के नाम से जाना जाता है"
+
+#: src/chatView.js:1001
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s डिसकनेक्ट हो गया है"
+
+#: src/chatView.js:1010
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s को %s ने लात मार दी है"
+
+#: src/chatView.js:1011
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s को लात मार दी गई है"
+
+#: src/chatView.js:1018
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s को %s द्वारा प्रतिबंधित कर दिया गया है"
+
+#: src/chatView.js:1019
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s पर प्रतिबंध लगा दिया गया है"
+
+#: src/chatView.js:1024
+#, javascript-format
+msgid "%s joined"
+msgstr "%s शामिल हुए"
+
+#: src/chatView.js:1029
+#, javascript-format
+msgid "%s left"
+msgstr "%s ने छोड़ा"
+
+#: src/chatView.js:1126
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "%d उपयोक्ता जुड़े"
+msgstr[1] "%d उपयोक्ता जुड़े"
+
+#: src/chatView.js:1133
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "%d उपयोक्ता ने छोड़ा"
+msgstr[1] "%d उपयोक्ताओं ने छोड़ा"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1205
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1210
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "बिता कल, %H∶%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1215
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A, %H∶%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1221
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%B %d, %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1227
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%B %d %Y, %H∶%M"
+
+#. eslint-disable-next-line no-lonely-if
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1233
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1238
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "बिता कल, %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1243
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A, %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1249
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%B %d, %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1255
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%B %d %Y, %l∶%M %p"
+
+#: src/connections.js:68
+msgid "Already added"
+msgstr "पहले से ही जोड़ा गया"
+
+#: src/connections.js:126
+msgid "No results."
+msgstr "कोई परिणाम नहीं।"
+
+#: src/connections.js:524
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "“%s” गुण"
+
+#: src/connections.js:555
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+"नेटवर्क त्रुटि के कारण Polari डिस्कनेक्ट हो गया। कृपया जाँचें कि पता फ़ील्ड सही है या नहीं।"
+
+#: src/entryArea.js:384
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] "पाठ की %s पंक्ति को सार्वजनिक पेस्ट सेवा में पेस्ट करें?"
+msgstr[1] "पाठ की %s पंक्तियों को सार्वजनिक पेस्ट सेवा में पेस्ट करें?"
+
+#: src/entryArea.js:389
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] "सार्वजनिक पेस्ट सेवा पर पाठ की %s पंक्ति अपलोड की जा रही है…"
+msgstr[1] "सार्वजनिक पेस्ट सेवा पर पाठ की %s पंक्तियाँ अपलोड की जा रही हैं…"
+
+#: src/entryArea.js:396
+msgid "Upload image to public paste service?"
+msgstr "सार्वजनिक पेस्ट सेवा पर छवि अपलोड करें?"
+
+#: src/entryArea.js:397
+msgid "Uploading image to public paste service…"
+msgstr "सार्वजनिक पेस्ट सेवा पर छवि अपलोड की जा रही है…"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:414
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr "सार्वजनिक पेस्ट सेवा पर \"%s\" अपलोड करें?"
+
+#. Translators: %s is a filename
+#: src/entryArea.js:416
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr "सार्वजनिक पेस्ट सेवा पर \"%s\" अपलोड किया जा रहा है…"
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:425
+#, javascript-format
+msgid "%s in #%s"
+msgstr "#%s में %s"
+
+#: src/entryArea.js:427
+#, javascript-format
+msgid "Paste from %s"
+msgstr "%s से पेस्ट करें"
+
+#: src/initialSetup.js:92
+msgid "_Back"
+msgstr "पीछे (_B)"
+
+#: src/initialSetup.js:93
+msgid "_Done"
+msgstr "हो गया (_D)"
+
+#: src/initialSetup.js:93
+msgid "_Next"
+msgstr "अगला (_N)"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#.
+#.
+#: src/ircParser.js:37
+msgid ""
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr ""
+"/CLOSE [<channel>] [<reason>] — <channel> बंद करता है, डिफ़ॉल्ट रूप से वर्तमान"
+
+#: src/ircParser.js:38
+msgid ""
+"/HELP [<command>] — displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+"/HELP [<command>] — <command> के लिए सहायता, या उपलब्ध आदेशों की सूची प्रदर्शित "
+"करता है"
+
+#: src/ircParser.js:39
+msgid ""
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr ""
+"/INVITE <nick> [<channel>] — <nick> को <channel>, या वर्तमान वाले पर आमंत्रित "
+"करता है"
+
+#: src/ircParser.js:40
+msgid "/JOIN <channel> — joins <channel>"
+msgstr "/JOIN <channel> — <channel> से जुड़ता है"
+
+#: src/ircParser.js:41
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr "/KICK <nick> — वर्तमान चैनल से <nick> को बाहर निकालता है"
+
+#: src/ircParser.js:42
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr "/ME <action> — वर्तमान चैनल पर <action> भेजता है"
+
+#: src/ircParser.js:43
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr "/MSG <nick> [<message>] — <nick> को निजी संदेश भेजता है"
+
+#: src/ircParser.js:44
+msgid "/NAMES — lists users on the current channel"
+msgstr "/NAMES — वर्तमान चैनल पर उपयोक्ताओं को सूचीबद्ध करता है"
+
+#: src/ircParser.js:45
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr "/NICK <nickname> — आपका उपनाम <nickname> निर्धारित करता है"
+
+#: src/ircParser.js:46
+msgid ""
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr ""
+"/PART [<channel>] [<reason>] — <channel> को छोड़ देता है, डिफ़ॉल्ट रूप से वर्तमान "
+"वाला"
+
+#: src/ircParser.js:47
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr "/QUERY <nick> — <nick> के साथ एक निजी बातचीत खोलता है"
+
+#: src/ircParser.js:48
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr "/QUIT [<reason>] — वर्तमान सर्वर से डिस्कनेक्ट हो जाता है"
+
+#: src/ircParser.js:49
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr "/SAY <text> — <text> को वर्तमान रूम/संपर्क पर भेजता है"
+
+#: src/ircParser.js:50
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr ""
+"/TOPIC <topic> — विषय को <topic> पर निर्धारित करता है, या वर्तमान दिखाता है"
+
+#: src/ircParser.js:51
+msgid "/WHOIS <nick> — requests information on <nick>"
+msgstr "/WHOIS <nick> — <nick> पर जानकारी का अनुरोध करता है"
+
+#: src/ircParser.js:54
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "अज्ञात आदेश - उपलब्ध आदेशों की सूची के लिए /HELP आज़माएं"
+
+#: src/ircParser.js:107
+msgid "Known commands:"
+msgstr "ज्ञात आदेश:"
+
+#: src/ircParser.js:278
+msgid "No topic set"
+msgstr "कोई विषय निर्धारित नहीं"
+
+#: src/ircParser.js:315
+#, javascript-format
+msgid "User: %s - Last activity: %s"
+msgstr "उपयोक्ता: %s - अंतिम गतिविधि: %s"
+
+#: src/ircParser.js:368
+#, javascript-format
+msgid "Usage: %s"
+msgstr "उपयोग: %s"
+
+#: src/mainWindow.js:285
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "%d उपयोक्ता"
+msgstr[1] "%d उपयोक्ता"
+
+#: src/roomList.js:267
+msgid "Leave chatroom"
+msgstr "चैटरूम छोड़ें"
+
+#: src/roomList.js:267
+msgid "End conversation"
+msgstr "बातचीत समाप्त करें"
+
+#: src/roomList.js:289
+msgid "Unmute"
+msgstr "अमूक"
+
+#: src/roomList.js:293
+msgid "Mute"
+msgstr "मूक"
+
+#: src/roomList.js:458
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "नेटवर्क %s में त्रुटि है"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "Libera (irc.libera.chat)"
+#: src/roomList.js:515
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:523
+msgid "Connection Problem"
+msgstr "कनेक्शन समस्या"
+
+#: src/roomList.js:540
+msgid "Connected"
+msgstr "कनेक्टेड"
+
+#: src/roomList.js:542
+msgid "Connecting…"
+msgstr "कनेक्ट हो रहा है…"
+
+#: src/roomList.js:544 src/userList.js:391
+msgid "Offline"
+msgstr "ऑफलाइन"
+
+#: src/roomList.js:546
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: src/roomList.js:565
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "%s से सुरक्षित तरीके से कनेक्ट नहीं हो सका।"
+
+#: src/roomList.js:568
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s को पासवर्ड की आवश्यकता है।"
+
+#: src/roomList.js:574
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "%s से कनेक्ट नहीं हो सका। सर्वर व्यस्त है।"
+
+#: src/roomList.js:577
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "%s से कनेक्ट नहीं हो सका।"
+
+#: src/roomStack.js:180
+msgid "Should the password be saved?"
+msgstr "क्या पासवर्ड सहेजा जाना चाहिए?"
+
+#: src/roomStack.js:182 src/telepathyClient.js:692
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr "अगली बार जब आप %s से जुड़ेंगे तो पहचान स्वचालित रूप से हो जाएगी"
+
+#: src/roomStack.js:190
+msgid "_Save Password"
+msgstr "पासवर्ड सहेजें (_S)"
+
+#: src/roomStack.js:219
+msgid "Failed to join the room"
+msgstr "रूम से जुड़ने में विफल"
+
+#: src/roomStack.js:223
+msgid "_Retry"
+msgstr "पुन: प्रयास (_R)"
+
+#: src/roomStack.js:246
+msgid "The room is full."
+msgstr "रूम भरा हुआ है।"
+
+#: src/roomStack.js:249
+msgid "You have been banned from the room."
+msgstr "आपको रूम से प्रतिबंधित कर दिया गया है।"
+
+#: src/roomStack.js:252
+msgid "The room is invite-only."
+msgstr "रूम केवल आमंत्रितों के लिए है।"
+
+#: src/roomStack.js:255
+msgid "You have been kicked from the room."
+msgstr "आपको रूम से बाहर निकाल दिया गया है।"
+
+#: src/roomStack.js:258
+msgid "It is not possible to join the room now, but you can retry later."
+msgstr "अभी रूम में शामिल होना संभव नहीं है, लेकिन आप बाद में पुनः प्रयास कर सकते हैं।"
+
+#: src/roomStack.js:280
+msgid "Join a room using the + button."
+msgstr "+ बटन का उपयोग करके एक रूम से जुड़ें।"
+
+#: src/telepathyClient.js:495
+msgid "Good Bye"
+msgstr "अलविदा"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for Libera"
+#: src/telepathyClient.js:690
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "%s के लिए %s पासवर्ड सहेजें?"
+
+#: src/telepathyClient.js:695
+msgid "Save"
+msgstr "सहेजें"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:759
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s में %s"
+
+#: src/userList.js:387
+msgid "Available in another room."
+msgstr "दूसरे रूम में उपलब्ध है।"
+
+#: src/userList.js:389
+msgid "Online"
+msgstr "ऑनलाइन"
+
+#: src/userList.js:557
+msgid "No Results"
+msgstr "कोई परिणाम नहीं"
+
+#: src/userTracker.js:376
+msgid "User is online"
+msgstr "उपयोक्ता ऑनलाइन है"
+
+#: src/userTracker.js:377
+#, javascript-format
+msgid "User %s is now online."
+msgstr "उपयोक्ता %s अब ऑनलाइन है।"
+
+#: src/utils.js:136
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr "%s के लिए Polari सर्वर पासवर्ड"
+
+#: src/utils.js:146
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr "%s के लिए Polari NickServ पासवर्ड"
+
+#: src/utils.js:413
+msgid "Now"
+msgstr "अब"
+
+#: src/utils.js:416
+msgid "Unavailable"
+msgstr "अनुपलब्ध"
+
+#: src/utils.js:420
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] "%d सेकंड पहले"
+msgstr[1] "%d सेकंड पहले"
+
+#: src/utils.js:427
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%d मिनट पहले"
+msgstr[1] "%d मिनटों पहले"
+
+#: src/utils.js:434
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%d घंटा पहले"
+msgstr[1] "%d घंटे पहले"
+
+#: src/utils.js:441
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d दिन पहले"
+msgstr[1] "%d दिनों पहले"
+
+#: src/utils.js:448
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d हफ्ता पहले"
+msgstr[1] "%d हफ्तों पहले"
+
+#: src/utils.js:454
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d महीना पहले"
+msgstr[1] "%d महीने पहले"
