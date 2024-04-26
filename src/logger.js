@@ -18,7 +18,6 @@ class GenericQuery {
     constructor(query) {
         this._connection = Polari.util_get_tracker_connection();
         this._results = [];
-        this._closed = false;
 
         this._statement =
             this._connection.load_statement_from_gresource(query, null);
@@ -37,10 +36,8 @@ class GenericQuery {
     }
 
     async next(cursor, cancellable = null) {
-        if (!await cursor.next_async(cancellable)) {
-            cursor.close();
+        if (!await cursor.next_async(cancellable))
             return null;
-        }
 
         return this._getRow(cursor);
     }
@@ -123,6 +120,7 @@ export class LogWalker {
         }
 
         this._isEnd = results.length < numEvents;
+        cursor.close();
 
         if (!this._isEnd)
             this._lastTime = results[results.length - 1].time;
@@ -199,6 +197,8 @@ export class LogFinder {
             if (room)
                 results[room] = Number(row.matches);
         }
+
+        cursor.close();
 
         return results;
     }
