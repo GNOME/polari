@@ -141,7 +141,7 @@
             ]
         },
         {
-            "name": "tracker",
+            "name": "tinysparql",
             "buildsystem": "meson",
             "cleanup": ["/etc", "/lib/systemd"],
             "config-opts": ["--libdir=lib", "-Dbash_completion=false",
@@ -151,7 +151,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/tracker.git"
+                    "url": "https://gitlab.gnome.org/GNOME/tinysparql.git"
                 }
             ]
         },
