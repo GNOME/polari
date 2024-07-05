@@ -87,6 +87,10 @@
                 {
                     "type": "patch",
                     "path": "tp-change-uniquify.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "tp-glib-casts.patch"
                 }
             ]
         },
