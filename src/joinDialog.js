@@ -154,7 +154,7 @@ class JoinDialog extends Adw.Dialog {
             ]));
         });
 
-        this.destroy();
+        this.close();
     }
 
     _onAccountsChanged() {
