@@ -1,5 +1,5 @@
 # Turkish translation for polari.
-# Copyright (C) 2014-2023 polari's COPYRIGHT HOLDER
+# Copyright (C) 2014-2024 polari's COPYRIGHT HOLDER
 # # This file is distributed under the same license as the polari package.
 # #
 # Çağatay Yiğit Şahin <cyigitsahin@outlook.com>, 2017.
@@ -7,14 +7,14 @@
 # Nurperi Utlu <utlunurperi@gmail.com>, 2017.
 # Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2018.
 # Muhammet Kara <muhammetk@gnome.org>, 2014, 2015, 2016, 2017, 2018.
-# Sabri Ünal <libreajans@gmail.com>, 2014, 2019, 2023.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2020, 2023.
+# Sabri Ünal <yakushabb@gmail.com>, 2014, 2019, 2023, 2024.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2020, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2024-02-12 01:17+0000\n"
+"POT-Creation-Date: 2024-07-29 20:39+0000\n"
 "PO-Revision-Date: 2024-05-09 10:50+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -35,7 +35,7 @@ msgstr "Polari"
 msgid "Talk to people on IRC"
 msgstr "IRC’deki insanlarla konuş"
 
-#: data/metainfo/org.gnome.Polari.metainfo.xml.in:60
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -45,7 +45,7 @@ msgstr ""
 "Aktarımlı Sohbet (IRC) istemcisi; konuşmalarınıza odaklanmanıza sağlayan "
 "basit ve güzel arayüzü vardır."
 
-#: data/metainfo/org.gnome.Polari.metainfo.xml.in:65
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:71
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -1002,9 +1002,3 @@ msgstr[0] "%d hafta önce"
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ay önce"
-
-#~ msgid "Florian Müllner"
-#~ msgstr "Florian Müllner"
-
-#~ msgid "Window size (width and height)."
-#~ msgstr "Pencere boyutu (genişlik ve yükseklik)."
