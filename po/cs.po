@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2024-02-19 19:04+0000\n"
-"PO-Revision-Date: 2024-09-16 18:28+0200\n"
+"POT-Creation-Date: 2024-09-16 16:30+0000\n"
+"PO-Revision-Date: 2024-09-16 18:46+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -28,7 +28,7 @@ msgstr "Polari"
 msgid "Talk to people on IRC"
 msgstr "Povykládejte si s lidmi na IRC"
 
-#: data/metainfo/org.gnome.Polari.metainfo.xml.in:60
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -38,7 +38,7 @@ msgstr ""
 "zapadl do prostředí GNOME. Má jednoduché a pěkné uživatelské rozhraní, ve "
 "kterém se můžete plně věnovat diskuzím."
 
-#: data/metainfo/org.gnome.Polari.metainfo.xml.in:65
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:71
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -357,7 +357,7 @@ msgstr "Hlavní nabídka"
 
 #: data/resources/main-window.ui:210
 msgid "Show Connected Users"
-msgstr "Zobrazovat připojené uživatele"
+msgstr "Zobrazit připojené uživatele"
 
 #: data/resources/main-window.ui:224
 msgid "Go online to chat and receive messages."
