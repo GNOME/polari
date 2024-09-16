@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2024-02-12 01:17+0000\n"
-"PO-Revision-Date: 2024-02-19 19:58+0100\n"
+"POT-Creation-Date: 2024-02-19 19:04+0000\n"
+"PO-Revision-Date: 2024-09-16 18:28+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
@@ -673,7 +673,7 @@ msgstr "_Zpět"
 
 #: src/initialSetup.js:93
 msgid "_Done"
-msgstr "_Dokončít"
+msgstr "_Dokončit"
 
 #: src/initialSetup.js:93
 msgid "_Next"
