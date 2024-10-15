@@ -16,21 +16,25 @@ SPDX-FileCopyrightText = "Florian Müllner <fmuellner@gnome.org>"
 SPDX-License-Identifier = "GPL-2.0-or-later"
 
 [[annotations]]
+# managed by translation teams
 path = ["po/**.po", "help/**/**.po"]
 SPDX-FileCopyrightText = "GNOME Translation Teams <i18n@gnome.org>"
 SPDX-License-Identifier = "GPL-2.0-or-later"
 
 [[annotations]]
+# managed by translation teams
 path = ["po/LINGUAS", "help/LINGUAS", "po/POTFILES.in"]
 SPDX-FileCopyrightText = "No rights reserved"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
+# managed by docs team
 path = ["help/**.page", "help/**.xml"]
 SPDX-FileCopyrightText = "GNOME documentation team <gnome-doc-list@gnome.org>"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
+# screenshots
 path = ["data/metainfo/**.png", "help/**.png"]
 SPDX-FileCopyrightText = "No rights reserved"
 SPDX-License-Identifier = "CC0-1.0"
