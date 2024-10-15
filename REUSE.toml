@@ -1,10 +1,12 @@
+# SPDX-FileCopyrightText: 2024 Florian Müllner <fmuellner@gnome.org>
+# SPDX-License-Identifier: CC0-1.0
 version = 1
 SPDX-PackageName = "polari"
 SPDX-PackageSupplier = "Florian Müllner <fmuellner@gnome.org>"
 SPDX-PackageDownloadLocation = "https://gitlab.gnome.org/GNOME/polari"
 
 [[annotations]]
-path = ["AUTHORS", "NEWS", "README.md", "REUSE.toml", "data/icons/REUSE.toml"]
+path = ["AUTHORS", "NEWS", "README.md"]
 SPDX-FileCopyrightText = "No rights reserved"
 SPDX-License-Identifier = "CC0-1.0"
 
