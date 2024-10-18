@@ -4,7 +4,7 @@
 
 project('polari', 'c',
   version: '46.0',
-  meson_version: '>= 0.59.0',
+  meson_version: '>= 1.1.0',
   license: 'GPL2+'
 )
 
