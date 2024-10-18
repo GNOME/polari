@@ -11,11 +11,6 @@ SPDX-FileCopyrightText = "2013 Florian Müllner <fmuellner@gnome.org>"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
-path = "README.md"
-SPDX-FileCopyrightText = "2017 Florian Müllner <fmuellner@gnome.org>"
-SPDX-License-Identifier = "CC-BY-SA-4.0"
-
-[[annotations]]
 path = ["**.service.in", "**.client", "**.desktop.in", "data/resources/networks.json"]
 SPDX-FileCopyrightText = "Florian Müllner <fmuellner@gnome.org>"
 SPDX-License-Identifier = "GPL-2.0-or-later"

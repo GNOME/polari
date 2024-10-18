@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2017 Florian Müllner <fmuellner@gnome.org>
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # ![polari-logo] Polari
 
 Polari is a simple Internet Relay Chat (IRC) client that is designed to
