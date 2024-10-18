@@ -6,9 +6,14 @@ SPDX-PackageSupplier = "Florian Müllner <fmuellner@gnome.org>"
 SPDX-PackageDownloadLocation = "https://gitlab.gnome.org/GNOME/polari"
 
 [[annotations]]
-path = ["NEWS", "README.md"]
-SPDX-FileCopyrightText = "No rights reserved"
-SPDX-License-Identifier = "CC0-1.0"
+path = "NEWS"
+SPDX-FileCopyrightText = "2013 Florian Müllner <fmuellner@gnome.org>"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "README.md"
+SPDX-FileCopyrightText = "2017 Florian Müllner <fmuellner@gnome.org>"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
 
 [[annotations]]
 path = ["**.service.in", "**.client", "**.desktop.in", "data/resources/networks.json"]
