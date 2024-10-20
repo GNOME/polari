@@ -49,10 +49,10 @@ conf.set_quoted('PKGLIBDIR', pkglibdir)
 
 cc = meson.get_compiler('c')
 gjs_has_autocleanup = cc.compiles(
-'''
-#include <gjs/gjs.h>
-void main(void) { g_autoptr(GjsContext) context = NULL; }
-''',
+  '''
+  #include <gjs/gjs.h>
+  void main(void) { g_autoptr(GjsContext) context = NULL; }
+  ''',
   dependencies: [gjs],
 )
 
