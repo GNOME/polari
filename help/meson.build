@@ -13,11 +13,11 @@ gnome.yelp(meson.project_name(),
     'legal.xml',
     'network-connect.page',
     'overview.page',
-    'sharing.page'
+    'sharing.page',
   ],
   media: [
     'images/polari-paste.png',
     'images/polari-screenshot.png',
-    'images/Polari.png'
-  ]
+    'images/Polari.png',
+  ],
 )

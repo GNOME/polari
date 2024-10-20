@@ -10,13 +10,13 @@ data_resources = gnome.compile_resources(
   app_id + '.data.gresource.xml',
   dependencies: [metainfo],
   source_dir: ['.', meson.current_build_dir()],
-  c_name: 'data_resources'
+  c_name: 'data_resources',
 )
 
 lib_resources = gnome.compile_resources(
   'lib-resources',
   app_id + '.lib.gresource.xml',
-  c_name: 'lib_resources'
+  c_name: 'lib_resources',
 )
 
 desktop_filename = app_id + '.desktop'
@@ -26,7 +26,7 @@ desktop_file = i18n.merge_file(
   po_dir: '../po',
   install: true,
   install_dir: desktopdir,
-  type: 'desktop'
+  type: 'desktop',
 )
 
 if (desktop_file_validate.found())
@@ -34,14 +34,14 @@ if (desktop_file_validate.found())
     desktop_file_validate,
     args: [desktop_file.full_path()],
     workdir: meson.current_build_dir(),
-    depends: [desktop_file]
+    depends: [desktop_file],
   )
 endif
 
 if (json_glib_validate.found())
   test('Validating ' + 'networks.json',
     json_glib_validate,
-    args: [files('resources/networks.json')]
+    args: [files('resources/networks.json')],
   )
 endif
 
@@ -50,7 +50,7 @@ service_conf.set('bindir', bindir)
 
 services = [
   'org.freedesktop.Telepathy.Client.Polari.service',
-  app_id + '.service'
+  app_id + '.service',
 ]
 
 foreach s : services
@@ -58,7 +58,7 @@ foreach s : services
     input: s + '.in',
     output: s,
     configuration: service_conf,
-    install_dir: servicedir
+    install_dir: servicedir,
   )
 endforeach
 

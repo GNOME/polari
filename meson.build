@@ -5,7 +5,7 @@
 project('polari', 'c',
   version: '46.0',
   meson_version: '>= 1.1.0',
-  license: 'GPL-2.0-or-later'
+  license: 'GPL-2.0-or-later',
 )
 
 app_id = 'org.gnome.Polari'
@@ -53,7 +53,8 @@ gjs_has_autocleanup = cc.compiles(
 #include <gjs/gjs.h>
 void main(void) { g_autoptr(GjsContext) context = NULL; }
 ''',
-  dependencies: [gjs])
+  dependencies: [gjs],
+)
 
 conf.set('HAVE_STRCASESTR', cc.has_function('strcasestr'))
 conf.set('SNAPSHOT', get_option('snapshot'))
@@ -62,15 +63,15 @@ conf.set('GJS_HAS_AUTOCLEANUP', gjs_has_autocleanup)
 config_h = declare_dependency(
   sources: configure_file(
     configuration: conf,
-    output: 'config.h'
+    output: 'config.h',
   ),
-  include_directories: include_directories('.')
+  include_directories: include_directories('.'),
 )
 
 gnome.post_install(
   glib_compile_schemas: true,
   gtk_update_icon_cache: true,
-  update_desktop_database: true
+  update_desktop_database: true,
 )
 
 subdir('data')

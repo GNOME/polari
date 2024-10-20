@@ -12,21 +12,21 @@ config_js = vcs_tag(
       'LIBDIR': libdir,
     },
     input: 'config.js.in',
-    output: 'config.js.in'
+    output: 'config.js.in',
   ),
-  output: 'config.js'
+  output: 'config.js',
 )
 
 src_resources = gnome.compile_resources(
   'src-resources',
   '@0@.src.gresource.xml'.format(app_id),
   dependencies: config_js,
-  c_name: 'src_resources'
+  c_name: 'src_resources',
 )
 
 polari = executable('polari', ['polari.c', src_resources, data_resources],
   dependencies: [config_h, gio, girepository, gjs],
-  install: true
+  install: true,
 )
 
 libsources = [
@@ -39,7 +39,7 @@ libsources = [
   'lib/polari-tpl-importer.c',
   'lib/polari-tpl-importer.h',
   'lib/polari-util.c',
-  'lib/polari-util.h'
+  'lib/polari-util.h',
 ]
 
 lib_nongir_sources = [
@@ -49,19 +49,19 @@ lib_nongir_sources = [
 
 libargs = [
   '-DG_LOG_USE_STRUCTURED',
-  '-DG_LOG_DOMAIN="Polari"'
+  '-DG_LOG_DOMAIN="Polari"',
 ]
 libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources + lib_resources,
   dependencies: [gio, telepathy_glib, tracker],
   c_args: libargs,
   install: true,
-  install_dir: pkglibdir
+  install_dir: pkglibdir,
 )
 
 libpolari_dep = declare_dependency(
   include_directories: include_directories('lib'),
   dependencies: [gio, telepathy_glib, tracker],
-  link_with: libpolari
+  link_with: libpolari,
 )
 
 gnome.generate_gir(libpolari,
@@ -74,7 +74,7 @@ gnome.generate_gir(libpolari,
   extra_args: '--quiet',
   install_dir_gir: girdir,
   install_dir_typelib: typelibdir,
-  install: true
+  install: true,
 )
 
 subdir('tests')

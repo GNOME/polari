@@ -7,7 +7,7 @@ metainfo = i18n.merge_file(
   output: '@BASENAME@',
   po_dir: '../../po',
   install: true,
-  install_dir: metainfodir
+  install_dir: metainfodir,
 )
 
 if (appstream_util.found())
@@ -15,7 +15,7 @@ if (appstream_util.found())
     appstream_util,
     args: ['validate', '--nonet', metainfo.full_path()],
     workdir: meson.current_build_dir(),
-    depends: [metainfo]
+    depends: [metainfo],
   )
 endif
 
@@ -24,6 +24,6 @@ if (appstreamcli.found())
     appstreamcli,
     args: ['validate', '--no-net', '--explain', metainfo.full_path()],
     workdir: meson.current_build_dir(),
-    depends: [metainfo]
+    depends: [metainfo],
   )
 endif
