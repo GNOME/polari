@@ -2,7 +2,9 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-project('polari', 'c',
+project(
+  'polari',
+  'c',
   version: '46.0',
   meson_version: '>= 1.1.0',
   license: 'GPL-2.0-or-later',
@@ -61,10 +63,7 @@ conf.set('SNAPSHOT', get_option('snapshot'))
 conf.set('GJS_HAS_AUTOCLEANUP', gjs_has_autocleanup)
 
 config_h = declare_dependency(
-  sources: configure_file(
-    configuration: conf,
-    output: 'config.h',
-  ),
+  sources: configure_file(configuration: conf, output: 'config.h'),
   include_directories: include_directories('.'),
 )
 
@@ -82,10 +81,12 @@ subdir('help')
 meson.add_dist_script(check_version, meson.project_version(), 'NEWS')
 
 if (appstream_util.found())
-  meson.add_dist_script(check_version,
+  meson.add_dist_script(
+    check_version,
     meson.project_version(),
     '--type', 'metainfo',
-    'data/metainfo/org.gnome.Polari.metainfo.xml.in')
+    'data/metainfo/org.gnome.Polari.metainfo.xml.in',
+  )
 endif
 
 summary('prefix', get_option('prefix'))

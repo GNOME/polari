@@ -24,7 +24,9 @@ src_resources = gnome.compile_resources(
   c_name: 'src_resources',
 )
 
-polari = executable('polari', ['polari.c', src_resources, data_resources],
+polari = executable(
+  'polari',
+  ['polari.c', src_resources, data_resources],
   dependencies: [config_h, gio, girepository, gjs],
   install: true,
 )
@@ -47,11 +49,10 @@ lib_nongir_sources = [
   'lib/polari-tp-autocleanup.h',
 ]
 
-libargs = [
-  '-DG_LOG_USE_STRUCTURED',
-  '-DG_LOG_DOMAIN="Polari"',
-]
-libpolari = shared_library('polari-1.0', libsources + lib_nongir_sources + lib_resources,
+libargs = ['-DG_LOG_USE_STRUCTURED', '-DG_LOG_DOMAIN="Polari"']
+libpolari = shared_library(
+  'polari-1.0',
+  libsources + lib_nongir_sources + lib_resources,
   dependencies: [gio, telepathy_glib, tracker],
   c_args: libargs,
   install: true,
@@ -64,7 +65,8 @@ libpolari_dep = declare_dependency(
   link_with: libpolari,
 )
 
-gnome.generate_gir(libpolari,
+gnome.generate_gir(
+  libpolari,
   sources: libsources,
   nsversion: '1.0',
   namespace: 'Polari',

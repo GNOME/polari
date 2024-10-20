@@ -30,7 +30,8 @@ desktop_file = i18n.merge_file(
 )
 
 if (desktop_file_validate.found())
-  test('Validating ' + desktop_filename,
+  test(
+    'Validating ' + desktop_filename,
     desktop_file_validate,
     args: [desktop_file.full_path()],
     workdir: meson.current_build_dir(),
@@ -39,7 +40,8 @@ if (desktop_file_validate.found())
 endif
 
 if (json_glib_validate.found())
-  test('Validating ' + 'networks.json',
+  test(
+    'Validating ' + 'networks.json',
     json_glib_validate,
     args: [files('resources/networks.json')],
   )

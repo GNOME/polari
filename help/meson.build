@@ -2,7 +2,8 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-gnome.yelp(meson.project_name(),
+gnome.yelp(
+  meson.project_name(),
   sources: [
     'index.page',
     'introduction.page',

@@ -11,7 +11,8 @@ metainfo = i18n.merge_file(
 )
 
 if (appstream_util.found())
-  test('Validating metainfo via appstream-util',
+  test(
+    'Validating metainfo via appstream-util',
     appstream_util,
     args: ['validate', '--nonet', metainfo.full_path()],
     workdir: meson.current_build_dir(),
@@ -20,7 +21,8 @@ if (appstream_util.found())
 endif
 
 if (appstreamcli.found())
-  test('Validating metainfo',
+  test(
+    'Validating metainfo',
     appstreamcli,
     args: ['validate', '--no-net', '--explain', metainfo.full_path()],
     workdir: meson.current_build_dir(),
