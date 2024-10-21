@@ -35,7 +35,6 @@ typelibdir = join_paths(pkglibdir, 'girepository-1.0')
 
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 json_glib_validate = find_program('json-glib-validate', required: false)
-appstream_util = find_program('appstream-util', required: false)
 appstreamcli = find_program('appstreamcli', required: false)
 check_version = find_program('meson/check-version.py')
 
