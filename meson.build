@@ -79,15 +79,12 @@ subdir('po')
 subdir('help')
 
 meson.add_dist_script(check_version, meson.project_version(), 'NEWS')
-
-if (appstream_util.found())
-  meson.add_dist_script(
-    check_version,
-    meson.project_version(),
-    '--type', 'metainfo',
-    'data/metainfo/org.gnome.Polari.metainfo.xml.in',
-  )
-endif
+meson.add_dist_script(
+  check_version,
+  meson.project_version(),
+  '--type', 'metainfo',
+  'data/metainfo/org.gnome.Polari.metainfo.xml.in',
+)
 
 summary('prefix', get_option('prefix'))
 summary('bindir', get_option('bindir'))
