@@ -58,7 +58,7 @@ workflow:
     FDO_DISTRIBUTION_TAG: '2023-08-25.2'
     FDO_DISTRIBUTION_PACKAGES: >
       meson gcc g++ pkgconf git gettext itstool
-      desktop-file-utils */appstream-util */json-glib-validate
+      desktop-file-utils */appstreamcli */json-glib-validate
       nodejs npm
       'pkgconfig(gtk4)' 'pkgconfig(gjs-1.0)'
       'pkgconfig(gobject-introspection-1.0)'
