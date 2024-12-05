@@ -54,8 +54,8 @@ workflow:
 
 .polari.fedora:
   variables:
-    FDO_DISTRIBUTION_VERSION: 39
-    FDO_DISTRIBUTION_TAG: '2023-08-25.2'
+    FDO_DISTRIBUTION_VERSION: 41
+    FDO_DISTRIBUTION_TAG: '2024-12-05.0'
     FDO_DISTRIBUTION_PACKAGES: >
       meson gcc g++ pkgconf git gettext itstool
       desktop-file-utils */appstreamcli */json-glib-validate
