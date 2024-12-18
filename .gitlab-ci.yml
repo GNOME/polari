@@ -33,7 +33,6 @@ variables:
   FDO_UPSTREAM_REPO: GNOME/polari
   MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
   BUNDLE: "polari-git.flatpak"
-  LINT_LOG: "eslint-report.xml"
 
 workflow:
   rules:
@@ -135,15 +134,17 @@ eslint:
     - .fdo.distribution-image@fedora
     - .polari.fedora
   stage: review
+  variables:
+    LINT_LOG: "eslint-report.xml"
   needs:
     - build-fedora-container
   script:
-    - eslint -o $LINT_LOG -f junit --resolve-plugins-relative-to $(npm root -g) src
+    - eslint -o "$LINT_LOG" -f junit --resolve-plugins-relative-to $(npm root -g) src
   artifacts:
     paths:
-      - ${LINT_LOG}
+      - "$LINT_LOG"
     reports:
-      junit: ${LINT_LOG}
+      junit: "$LINT_LOG"
 
 js-check:
   extends:
