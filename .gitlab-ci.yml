@@ -56,15 +56,10 @@ workflow:
 .polari.fedora:
   variables:
     FDO_DISTRIBUTION_VERSION: 41
-    FDO_DISTRIBUTION_TAG: '2024-12-05.0'
+    FDO_DISTRIBUTION_TAG: '2024-12-18.0'
     FDO_DISTRIBUTION_PACKAGES: >
-      meson gcc g++ pkgconf git gettext itstool
-      desktop-file-utils */appstreamcli */json-glib-validate
+      meson gjs git
       nodejs npm
-      'pkgconfig(gtk4)' 'pkgconfig(gjs-1.0)'
-      'pkgconfig(gobject-introspection-1.0)'
-      'pkgconfig(tracker-sparql-3.0)'
-      'pkgconfig(telepathy-glib)'
     FDO_DISTRIBUTION_EXEC: |
       # For static analysis with eslint
       npm install -g eslint@^8.0.0 eslint-plugin-jsdoc@^46.0.0 &&
