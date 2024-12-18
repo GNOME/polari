@@ -184,45 +184,6 @@ nightly:
   needs:
     - flatpak-main
 
-fedora-build:
-  extends:
-    - .fdo.distribution-image@fedora
-    - .polari.fedora
-  stage: build
-  needs:
-    - build-fedora-container
-  script:
-    - meson setup build --werror
-    - meson compile -C build
-    - meson test -C build
-    - meson install -C build
-  artifacts:
-    paths:
-      - build
-
-fedora-dist:
-  extends:
-    - .fdo.distribution-image@fedora
-    - .polari.fedora
-  stage: deploy
-  needs:
-    - fedora-build
-  script:
-    - meson dist -C build
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      changes:
-        - meson.build
-
-fedora-dist-tarball:
-  extends: fedora-dist
-  artifacts:
-    expose_as: 'Get tarball here'
-    paths:
-      - "build/meson-dist/${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tar.xz"
-  rules:
-    - if: '$CI_COMMIT_TAG'
-
 check-flatpak-deps:
   image:
     name: ghcr.io/flathub/flatpak-external-data-checker
