@@ -9,8 +9,8 @@ include:
     inputs:
       dist-job-name: "flatpak"
       tarball-artifact-path: "${TARBALL_ARTIFACT_PATH}"
-  - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/057b052e682d8e5a20c1eb2dd60d5b87d2b56856/templates/fedora.yml'
-  - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/ci-fairy.yml'
+  - remote: 'https://gitlab.gnome.org/Infrastructure/freedesktop-ci-templates/-/raw/057b052e682d8e5a20c1eb2dd60d5b87d2b56856/templates/fedora.yml'
+  - remote: 'https://gitlab.gnome.org/Infrastructure/freedesktop-ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/ci-fairy.yml'
 
 stages:
   - pre_review
