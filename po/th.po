@@ -1,0 +1,975 @@
+# Thai translation for polari.
+# Copyright (C) 2025 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Aefgh Threenine <aefgh39622@gmail.com>,  2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
+"POT-Creation-Date: 2025-02-13 23:54+0000\n"
+"PO-Revision-Date: 2025-02-15 18:58+0700\n"
+"Last-Translator: \n"
+"Language-Team: Thai <th@li.org>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.5\n"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
+#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
+#: src/roomStack.js:279
+msgid "Polari"
+msgstr "Polari"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
+msgid "Talk to people on IRC"
+msgstr "พูดคุยกับผู้คนผ่านทาง IRC"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
+msgid ""
+"A simple Internet Relay Chat (IRC) client that is designed to integrate "
+"seamlessly with GNOME; it features a simple and beautiful interface which "
+"allows you to focus on your conversations."
+msgstr ""
+"ไคลเอ็นต์ Internet Relay Chat (IRC) อย่างง่ายที่ออกแบบมาให้ผสานรวมกับ GNOME "
+"ได้อย่างไร้รอยต่อ ซึ่งมีอินเทอร์เฟซที่เรียบง่ายและสวยงามซึ่งให้คุณมุ่งเน้นไปที่การสนทนาของคุณได้"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:71
+msgid ""
+"You can use Polari to publicly chat with people in a channel, and to have "
+"private one-to-one conversations. Notifications make sure that you never "
+"miss an important message."
+msgstr ""
+"คุณสามารถใช้ Polari เพื่อสนทนากับผู้คนอย่างเป็นสาธารณะได้ในแชนเนล "
+"และสนทนาแบบหนึ่งต่อหนึ่งอย่างเป็นส่วนตัวได้ "
+"และยังมีระบบการแจ้งเตือนที่จะช่วยให้คุณแน่ใจได้ว่าจะไม่พลาดข้อความที่สำคัญไป"
+
+#: data/org.gnome.Polari.desktop.in:4
+msgid "An Internet Relay Chat Client for GNOME"
+msgstr ""
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Polari.desktop.in:15
+msgid "IRC;Internet;Relay;Chat;"
+msgstr "IRC;Internet;Relay;Chat;ไออาร์ซี;"
+
+#: data/org.gnome.Polari.gschema.xml:13
+msgid "Saved channel list"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:14
+msgid "List of channels to restore on startup"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:18 data/resources/main-window.ui:22
+msgid "Run in Background"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:19
+msgid "Keep running in background when closed."
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:23
+msgid "Window width"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:27
+msgid "Window height"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:31
+msgid "Window maximized"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:32
+msgid "Window maximized state"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:36
+msgid "Last active channel"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:37
+msgid "Last active (selected) channel"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:44
+msgid "Identify botname"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:45
+msgid "Nickname of the bot to identify with"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:49
+msgid "Identify command"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:50
+msgid "Command used to identify with bot"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:54
+msgid "Identify username"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:55
+msgid "Username to use in identify command"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:59
+msgid "Identify username supported"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:60
+msgid "Whether the identify command is known to support the username parameter"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:66
+msgid "List of muted usernames"
+msgstr ""
+
+#: data/org.gnome.Polari.gschema.xml:67
+msgid ""
+"A list of usernames for whose private messages not to show notifications"
+msgstr ""
+
+#: data/resources/connection-details.ui:20
+msgid "_Server Address"
+msgstr "ที่อยู่เ_ซิร์ฟเวอร์"
+
+#: data/resources/connection-details.ui:26
+msgid "Net_work Name"
+msgstr "ชื่อเ_ครือข่าย"
+
+#: data/resources/connection-details.ui:32
+msgid "Use secure c_onnection"
+msgstr "ใช้การเชื่อม_ต่อปลอดภัย"
+
+#: data/resources/connection-details.ui:43
+msgid "_Nickname"
+msgstr "ชื่อเ_ล่น"
+
+#: data/resources/connection-details.ui:49
+msgid "_Real Name"
+msgstr "ชื่อ_จริง"
+
+#: data/resources/connection-properties.ui:22 data/resources/entry-area.ui:104
+#: data/resources/join-room-dialog.ui:28 data/resources/join-room-dialog.ui:130
+#: src/initialSetup.js:92
+msgid "_Cancel"
+msgstr "_ยกเลิก"
+
+#: data/resources/connection-properties.ui:30
+msgid "_Apply"
+msgstr "เ_ริ่มใช้"
+
+#: data/resources/entry-area.ui:44
+msgid "Change nickname"
+msgstr "เปลี่ยนชื่อเล่น"
+
+#: data/resources/entry-area.ui:113
+msgid "_Paste"
+msgstr "แ_ปะ"
+
+#: data/resources/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "General"
+msgstr "ทั่วไป"
+
+#: data/resources/help-overlay.ui:22
+msgctxt "shortcut window"
+msgid "Join Room"
+msgstr "เข้าร่วมห้อง"
+
+#: data/resources/help-overlay.ui:28
+msgctxt "shortcut window"
+msgid "Leave Room"
+msgstr "ออกจากห้อง"
+
+#: data/resources/help-overlay.ui:34
+msgctxt "shortcut window"
+msgid "Show Userlist"
+msgstr "แสดงรายชื่อผู้ใช้"
+
+#: data/resources/help-overlay.ui:40
+msgctxt "shortcut window"
+msgid "Show Emoji Picker"
+msgstr "แสดงเครื่องมือเลือกอิโมจิ"
+
+#: data/resources/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Show Help"
+msgstr "แสดงวิธีใช้"
+
+#: data/resources/help-overlay.ui:52
+msgctxt "shortcut window"
+msgid "Open Menu"
+msgstr "เปิดเมนู"
+
+#: data/resources/help-overlay.ui:58
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "ออก"
+
+#: data/resources/help-overlay.ui:64
+msgctxt "shortcut window"
+msgid "Keyboard Shortcuts"
+msgstr "แป้นพิมพ์ลัด"
+
+#: data/resources/help-overlay.ui:72
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "การท่องดู"
+
+#: data/resources/help-overlay.ui:75
+msgctxt "shortcut window"
+msgid "Next Room"
+msgstr "ห้องถัดไป"
+
+#: data/resources/help-overlay.ui:81
+msgctxt "shortcut window"
+msgid "Previous Room"
+msgstr "ห้องที่แล้ว"
+
+#: data/resources/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Next Room with Unread Messages"
+msgstr "ห้องถัดไปที่มีข้อความยังไม่ได้อ่าน"
+
+#: data/resources/help-overlay.ui:93
+msgctxt "shortcut window"
+msgid "Previous Room with Unread Messages"
+msgstr "ห้องที่แล้วที่มีข้อความยังไม่ได้อ่าน"
+
+#: data/resources/help-overlay.ui:99
+msgctxt "shortcut window"
+msgid "First Room"
+msgstr "ห้องแรก"
+
+#: data/resources/help-overlay.ui:105
+msgctxt "shortcut window"
+msgid "Last Room"
+msgstr "ห้องสุดท้าย"
+
+#: data/resources/help-overlay.ui:111
+msgctxt "shortcut window"
+msgid "First – Ninth Room"
+msgstr "ห้องที่ 1 – 9"
+
+#: data/resources/initial-setup-window.ui:16
+msgid "Polari Setup"
+msgstr "ตั้งค่า Polari"
+
+#: data/resources/initial-setup-window.ui:43
+msgid "Not connected"
+msgstr "ไม่ได้เชื่อมต่อ"
+
+#: data/resources/initial-setup-window.ui:44
+msgid "Please connect to the internet to continue the setup."
+msgstr "โปรดเชื่อมต่อกับอินเทอร์เน็ตเพื่อทำการตั้งค่าต่อไป"
+
+#: data/resources/initial-setup-window.ui:54
+#: data/resources/initial-setup-window.ui:82
+msgid "Welcome to Polari"
+msgstr "ยินดีต้อนรับสู่ Polari"
+
+#: data/resources/initial-setup-window.ui:55
+msgid ""
+"Polari is an easy way to chat using IRC. Select a network to get started."
+msgstr "Polari เป็นวิธีที่ง่ายในการสนทนาโดยใช้ IRC โปรดเลือกเครือข่ายเพื่อเริ่มใช้งาน"
+
+#: data/resources/initial-setup-window.ui:83
+msgid ""
+"Select rooms you want to connect to. You can add more networks and rooms "
+"later, by clicking the + button."
+msgstr ""
+"เลือกห้องที่คุณต้องการเชื่อมต่อ คุณสามารถเพิ่มเครือข่ายและห้องอื่นๆ เพิ่มเติมได้ภายหลังโดยคลิกที่ปุ่ม +"
+
+#: data/resources/join-room-dialog.ui:19
+msgid "Join Chat Room"
+msgstr "เข้าร่วมห้องสนทนา"
+
+#: data/resources/join-room-dialog.ui:36
+msgid "_Join"
+msgstr "เ_ข้าร่วม"
+
+#: data/resources/join-room-dialog.ui:57
+msgid "C_onnection"
+msgstr "การเ_ชื่อมต่อ"
+
+#: data/resources/join-room-dialog.ui:94
+msgid "_Add Network"
+msgstr "เ_พิ่มเครือข่าย"
+
+#: data/resources/join-room-dialog.ui:120
+msgid "Add Network"
+msgstr "เพิ่มเครือข่าย"
+
+#: data/resources/join-room-dialog.ui:181
+msgid "_Custom Network"
+msgstr "เครือข่าย_กำหนดเอง"
+
+#: data/resources/join-room-dialog.ui:198
+msgid "Custom Network"
+msgstr "เครือข่ายกำหนดเอง"
+
+#: data/resources/join-room-dialog.ui:208
+msgid "_Add"
+msgstr "เ_พิ่ม"
+
+#: data/resources/main-window.ui:28
+msgid "Keyboard Shortcuts"
+msgstr "แป้นพิมพ์ลัด"
+
+#: data/resources/main-window.ui:32
+msgid "Help"
+msgstr "วิธีใช้"
+
+#: data/resources/main-window.ui:36
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: data/resources/main-window.ui:40 src/application.js:92
+msgid "Quit"
+msgstr "ออก"
+
+#: data/resources/main-window.ui:74
+msgid "Add Rooms and Networks"
+msgstr "เพิ่มห้องและเครือข่าย"
+
+#: data/resources/main-window.ui:79
+msgid "Add rooms and networks"
+msgstr "เพิ่มห้องและเครือข่าย"
+
+#: data/resources/main-window.ui:90
+msgid "Main Menu"
+msgstr "เมนูหลัก"
+
+#: data/resources/main-window.ui:210
+msgid "Show Connected Users"
+msgstr "แสดงผู้ใช้ที่เชื่อมต่อ"
+
+#: data/resources/main-window.ui:224
+msgid "Go online to chat and receive messages."
+msgstr "ออนไลน์เพื่อสนทนาและรับข้อความ"
+
+#: data/resources/main-window.ui:230
+msgid "Importing old conversations — Will be back after conversion"
+msgstr "กำลังนำเข้าข้อมูลการสนทนาเก่า — จะกลับมาหลังจากแปลงข้อมูลเสร็จ"
+
+#: data/resources/nick-popover.ui:24
+msgid "Change nickname:"
+msgstr "เปลี่ยนชื่อเล่น:"
+
+#: data/resources/nick-popover.ui:34
+msgid "_Change"
+msgstr "เ_ปลี่ยน"
+
+#: data/resources/room-list-header.ui:150
+msgid "Connect"
+msgstr "เชื่อมต่อ"
+
+#: data/resources/room-list-header.ui:155
+msgid "Reconnect"
+msgstr "เชื่อมต่อใหม่"
+
+#: data/resources/room-list-header.ui:160
+msgid "Disconnect"
+msgstr "ตัดการเชื่อมต่อ"
+
+#: data/resources/room-list-header.ui:165
+msgid "Remove"
+msgstr "ลบ"
+
+#: data/resources/room-list-header.ui:170
+msgid "Properties"
+msgstr "คุณสมบัติ"
+
+#: data/resources/server-room-list.ui:50
+msgid "Enter room name to add"
+msgstr "ป้อนชื่อห้องที่จะเพิ่ม"
+
+#: data/resources/user-details.ui:33
+msgid "Loading details"
+msgstr "กำลังโหลดรายละเอียด"
+
+#: data/resources/user-details.ui:62
+msgid "Last Activity:"
+msgstr "กิจกรรมล่าสุด:"
+
+#: data/resources/user-details.ui:153
+msgid "Will notify if user appears online."
+msgstr "จะแจ้งเตือนถ้าผู้ใช้ปรากฏสถานะเป็นออนไลน์"
+
+#: data/resources/user-details.ui:175
+msgid "Start Conversation"
+msgstr "เริ่มการสนทนา"
+
+#: src/application.js:78
+msgid "Start Telepathy client"
+msgstr "เริ่มไคลเอ็นต์ Telepathy"
+
+#: src/application.js:83
+msgid "Start in debug mode"
+msgstr "เริ่มทำงานในโหมดดีบั๊ก"
+
+#: src/application.js:86
+msgid "Allow running alongside another instance"
+msgstr "อนุญาตให้เรียกทำงานควบคู่ไปกับโปรแกรมนี้อีกตัวหนึ่ง"
+
+#: src/application.js:89
+msgid "Print version and exit"
+msgstr "แสดงข้อมูลรุ่นแล้วออก"
+
+#: src/application.js:532 src/utils.js:274
+msgid "Failed to open link"
+msgstr "ไม่สามารถเปิดลิงก์ได้"
+
+#: src/application.js:799
+#, javascript-format
+msgid "%s removed."
+msgstr "ลบ %s แล้ว"
+
+#: src/application.js:800
+msgid "Undo"
+msgstr "ทำกลับ"
+
+#: src/application.js:885
+msgid "translator-credits"
+msgstr "Aefgh Threenine <aefgh39622@gmail.com>"
+
+#: src/chatView.js:199
+msgid "New Messages"
+msgstr "ข้อความใหม่"
+
+#: src/chatView.js:795
+msgid "Open Link"
+msgstr "เปิดลิงก์"
+
+#: src/chatView.js:797
+msgid "Copy Link Address"
+msgstr "คัดลอกที่อยู่ลิงก์"
+
+#: src/chatView.js:996
+#, javascript-format
+msgid "%s is now known as %s"
+msgstr "ตอนนี้ %s มีชื่อว่า %s"
+
+#: src/chatView.js:1001
+#, javascript-format
+msgid "%s has disconnected"
+msgstr "%s ตัดการเชื่อมต่อแล้ว"
+
+#: src/chatView.js:1010
+#, javascript-format
+msgid "%s has been kicked by %s"
+msgstr "%s ถูกเตะออกโดย %s"
+
+#: src/chatView.js:1011
+#, javascript-format
+msgid "%s has been kicked"
+msgstr "%s ถูกเตะออก"
+
+#: src/chatView.js:1018
+#, javascript-format
+msgid "%s has been banned by %s"
+msgstr "%s ถูกแบนโดย %s"
+
+#: src/chatView.js:1019
+#, javascript-format
+msgid "%s has been banned"
+msgstr "%s ถูกแบน"
+
+#: src/chatView.js:1024
+#, javascript-format
+msgid "%s joined"
+msgstr "%s เข้าร่วมแล้ว"
+
+#: src/chatView.js:1029
+#, javascript-format
+msgid "%s left"
+msgstr "%s ออกแล้ว"
+
+#: src/chatView.js:1126
+#, javascript-format
+msgid "%d user joined"
+msgid_plural "%d users joined"
+msgstr[0] "ผู้ใช้ %d คนเข้าร่วมแล้ว"
+
+#: src/chatView.js:1133
+#, javascript-format
+msgid "%d user left"
+msgid_plural "%d users left"
+msgstr[0] "ผู้ใช้ %d คนออกแล้ว"
+
+#. today
+#. Translators: Time in 24h format
+#: src/chatView.js:1205
+msgid "%H∶%M"
+msgstr "%H∶%M"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 24h format. i.e. "Yesterday, 14:30"
+#: src/chatView.js:1210
+#, no-c-format
+msgid "Yesterday, %H∶%M"
+msgstr "เมื่อวาน %H∶%M"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 24h format. i.e. "Monday, 14:30"
+#: src/chatView.js:1215
+#, no-c-format
+msgid "%A, %H∶%M"
+msgstr "%A %H∶%M"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 24h format.
+#. i.e. "May 25, 14:30"
+#: src/chatView.js:1221
+#, no-c-format
+msgid "%B %d, %H∶%M"
+msgstr "%d %B %H∶%M"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 24h format.
+#. i.e. "May 25 2012, 14:30"
+#: src/chatView.js:1227
+#, no-c-format
+msgid "%B %d %Y, %H∶%M"
+msgstr "%d %B %EY %H∶%M"
+
+#. eslint-disable-next-line no-lonely-if
+#. today
+#. Translators: Time in 12h format
+#: src/chatView.js:1233
+msgid "%l∶%M %p"
+msgstr "%l∶%M %p"
+
+#. yesterday
+#. Translators: this is the word "Yesterday" followed by a
+#. time string in 12h format. i.e. "Yesterday, 2:30 pm"
+#: src/chatView.js:1238
+#, no-c-format
+msgid "Yesterday, %l∶%M %p"
+msgstr "เมื่อวาน %l∶%M %p"
+
+#. this week
+#. Translators: this is the week day name followed by a time
+#. string in 12h format. i.e. "Monday, 2:30 pm"
+#: src/chatView.js:1243
+#, no-c-format
+msgid "%A, %l∶%M %p"
+msgstr "%A %l∶%M %p"
+
+#. this year
+#. Translators: this is the month name and day number
+#. followed by a time string in 12h format.
+#. i.e. "May 25, 2:30 pm"
+#: src/chatView.js:1249
+#, no-c-format
+msgid "%B %d, %l∶%M %p"
+msgstr "%d %B %l∶%M %p"
+
+#. before this year
+#. Translators: this is the month name, day number, year
+#. number followed by a time string in 12h format.
+#. i.e. "May 25 2012, 2:30 pm"
+#: src/chatView.js:1255
+#, no-c-format
+msgid "%B %d %Y, %l∶%M %p"
+msgstr "%d %B %EY %l∶%M %p"
+
+#: src/connections.js:68
+msgid "Already added"
+msgstr "เพิ่มไปแล้ว"
+
+#: src/connections.js:126
+msgid "No results."
+msgstr "ไม่มีผลลัพธ์"
+
+#: src/connections.js:524
+#, javascript-format
+msgid "“%s” Properties"
+msgstr "คุณสมบัติของ “%s”"
+
+#: src/connections.js:555
+msgid ""
+"Polari disconnected due to a network error. Please check if the address "
+"field is correct."
+msgstr ""
+
+#: src/entryArea.js:384
+#, javascript-format
+msgid "Paste %s line of text to public paste service?"
+msgid_plural "Paste %s lines of text to public paste service?"
+msgstr[0] ""
+
+#: src/entryArea.js:389
+#, javascript-format
+msgid "Uploading %s line of text to public paste service…"
+msgid_plural "Uploading %s lines of text to public paste service…"
+msgstr[0] ""
+
+#: src/entryArea.js:396
+msgid "Upload image to public paste service?"
+msgstr ""
+
+#: src/entryArea.js:397
+msgid "Uploading image to public paste service…"
+msgstr ""
+
+#. Translators: %s is a filename
+#: src/entryArea.js:414
+#, javascript-format
+msgid "Upload “%s” to public paste service?"
+msgstr ""
+
+#. Translators: %s is a filename
+#: src/entryArea.js:416
+#, javascript-format
+msgid "Uploading “%s” to public paste service…"
+msgstr ""
+
+#. translators: %s is a nick, #%s a channel
+#: src/entryArea.js:425
+#, javascript-format
+msgid "%s in #%s"
+msgstr ""
+
+#: src/entryArea.js:427
+#, javascript-format
+msgid "Paste from %s"
+msgstr ""
+
+#: src/initialSetup.js:92
+msgid "_Back"
+msgstr "_ย้อนกลับ"
+
+#: src/initialSetup.js:93
+msgid "_Done"
+msgstr "เ_สร็จสิ้น"
+
+#: src/initialSetup.js:93
+msgid "_Next"
+msgstr "_ถัดไป"
+
+#. commands that would be nice to support:
+#.
+#. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
+#. MODE: "/MODE <mode> <nick|channel> — ",
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
+#. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#.
+#.
+#: src/ircParser.js:37
+msgid ""
+"/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
+msgstr ""
+
+#: src/ircParser.js:38
+msgid ""
+"/HELP [<command>] — displays help for <command>, or a list of available "
+"commands"
+msgstr ""
+
+#: src/ircParser.js:39
+msgid ""
+"/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
+msgstr ""
+
+#: src/ircParser.js:40
+msgid "/JOIN <channel> — joins <channel>"
+msgstr ""
+
+#: src/ircParser.js:41
+msgid "/KICK <nick> — kicks <nick> from current channel"
+msgstr ""
+
+#: src/ircParser.js:42
+msgid "/ME <action> — sends <action> to the current channel"
+msgstr ""
+
+#: src/ircParser.js:43
+msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
+msgstr ""
+
+#: src/ircParser.js:44
+msgid "/NAMES — lists users on the current channel"
+msgstr ""
+
+#: src/ircParser.js:45
+msgid "/NICK <nickname> — sets your nick to <nickname>"
+msgstr ""
+
+#: src/ircParser.js:46
+msgid ""
+"/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
+msgstr ""
+
+#: src/ircParser.js:47
+msgid "/QUERY <nick> — opens a private conversation with <nick>"
+msgstr ""
+
+#: src/ircParser.js:48
+msgid "/QUIT [<reason>] — disconnects from the current server"
+msgstr ""
+
+#: src/ircParser.js:49
+msgid "/SAY <text> — sends <text> to the current room/contact"
+msgstr ""
+
+#: src/ircParser.js:50
+msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
+msgstr ""
+
+#: src/ircParser.js:51
+msgid "/WHOIS <nick> — requests information on <nick>"
+msgstr ""
+
+#: src/ircParser.js:54
+msgid "Unknown command — try /HELP for a list of available commands"
+msgstr "ไม่รู้จักคำสั่งนี้ — ลองเรียกคำสั่ง /HELP เพื่อดูรายชื่อคำสั่งที่ใช้ได้"
+
+#: src/ircParser.js:107
+msgid "Known commands:"
+msgstr "คำสั่งที่รู้จัก:"
+
+#: src/ircParser.js:278
+msgid "No topic set"
+msgstr "ไม่ได้กำหนดหัวข้อ"
+
+#: src/ircParser.js:315
+#, javascript-format
+msgid "User: %s - Last activity: %s"
+msgstr "ผู้ใช้: %s - กิจกรรมล่าสุด: %s"
+
+#: src/ircParser.js:368
+#, javascript-format
+msgid "Usage: %s"
+msgstr "วิธีใช้: %s"
+
+#: src/mainWindow.js:285
+#, javascript-format
+msgid "%d user"
+msgid_plural "%d users"
+msgstr[0] "ผู้ใช้ %d คน"
+
+#: src/roomList.js:267
+msgid "Leave chatroom"
+msgstr "ออกจากห้องสนทนา"
+
+#: src/roomList.js:267
+msgid "End conversation"
+msgstr "จบการสนทนา"
+
+#: src/roomList.js:289
+msgid "Unmute"
+msgstr "เปิดแจ้งเตือน"
+
+#: src/roomList.js:293
+msgid "Mute"
+msgstr "ปิดแจ้งเตือน"
+
+#: src/roomList.js:458
+#, javascript-format
+msgid "Network %s has an error"
+msgstr "เครือข่าย %s มีข้อผิดพลาด"
+
+#. Translators: This is an account name followed by a
+#. server address, e.g. "Libera (irc.libera.chat)"
+#: src/roomList.js:515
+#, javascript-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/roomList.js:523
+msgid "Connection Problem"
+msgstr "การเชื่อมต่อมีปัญหา"
+
+#: src/roomList.js:540
+msgid "Connected"
+msgstr "เชื่อมต่ออยู่"
+
+#: src/roomList.js:542
+msgid "Connecting…"
+msgstr "กำลังเชื่อมต่อ…"
+
+#: src/roomList.js:544 src/userList.js:391
+msgid "Offline"
+msgstr "ออฟไลน์"
+
+#: src/roomList.js:546
+msgid "Unknown"
+msgstr "ไม่ทราบ"
+
+#: src/roomList.js:565
+#, javascript-format
+msgid "Could not connect to %s in a safe way."
+msgstr "ไม่สามารถเชื่อมต่อกับ %s อย่างปลอดภัยได้"
+
+#: src/roomList.js:568
+#, javascript-format
+msgid "%s requires a password."
+msgstr "%s ต้องมีการระบุรหัสผ่าน"
+
+#: src/roomList.js:574
+#, javascript-format
+msgid "Could not connect to %s. The server is busy."
+msgstr "ไม่สามารถเชื่อมต่อกับ %s ได้ เซิร์ฟเวอร์ไม่ว่าง"
+
+#: src/roomList.js:577
+#, javascript-format
+msgid "Could not connect to %s."
+msgstr "ไม่สามารถเชื่อมต่อกับ %s ได้"
+
+#: src/roomStack.js:180
+msgid "Should the password be saved?"
+msgstr ""
+
+#: src/roomStack.js:182 src/telepathyClient.js:692
+#, javascript-format
+msgid ""
+"Identification will happen automatically the next time you connect to %s"
+msgstr ""
+
+#: src/roomStack.js:190
+msgid "_Save Password"
+msgstr ""
+
+#: src/roomStack.js:219
+msgid "Failed to join the room"
+msgstr ""
+
+#: src/roomStack.js:223
+msgid "_Retry"
+msgstr ""
+
+#: src/roomStack.js:246
+msgid "The room is full."
+msgstr ""
+
+#: src/roomStack.js:249
+msgid "You have been banned from the room."
+msgstr ""
+
+#: src/roomStack.js:252
+msgid "The room is invite-only."
+msgstr ""
+
+#: src/roomStack.js:255
+msgid "You have been kicked from the room."
+msgstr ""
+
+#: src/roomStack.js:258
+msgid "It is not possible to join the room now, but you can retry later."
+msgstr ""
+
+#: src/roomStack.js:280
+msgid "Join a room using the + button."
+msgstr "เข้าร่วมห้องโดยใช้ปุ่ม +"
+
+#: src/telepathyClient.js:495
+msgid "Good Bye"
+msgstr "ลาก่อน"
+
+#. Translators: Those are a botname and an accountName, e.g.
+#. "Save NickServ password for Libera"
+#: src/telepathyClient.js:690
+#, javascript-format
+msgid "Save %s password for %s?"
+msgstr "ต้องการบันทึกรหัสผ่าน %s ของ %s หรือไม่?"
+
+#: src/telepathyClient.js:695
+msgid "Save"
+msgstr "บันทึก"
+
+#. Translators: This is the title of the notification announcing a newly
+#. received message, in the form "user-nickname in room-display-name"
+#: src/telepathyClient.js:759
+#, javascript-format
+msgid "%s in %s"
+msgstr "%s ใน %s"
+
+#: src/userList.js:387
+msgid "Available in another room."
+msgstr ""
+
+#: src/userList.js:389
+msgid "Online"
+msgstr ""
+
+#: src/userList.js:557
+msgid "No Results"
+msgstr ""
+
+#: src/userTracker.js:376
+msgid "User is online"
+msgstr ""
+
+#: src/userTracker.js:377
+#, javascript-format
+msgid "User %s is now online."
+msgstr ""
+
+#: src/utils.js:136
+#, javascript-format
+msgid "Polari server password for %s"
+msgstr ""
+
+#: src/utils.js:146
+#, javascript-format
+msgid "Polari NickServ password for %s"
+msgstr ""
+
+#: src/utils.js:413
+msgid "Now"
+msgstr ""
+
+#: src/utils.js:416
+msgid "Unavailable"
+msgstr ""
+
+#: src/utils.js:420
+#, javascript-format
+msgid "%d second ago"
+msgid_plural "%d seconds ago"
+msgstr[0] ""
+
+#: src/utils.js:427
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+
+#: src/utils.js:434
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+
+#: src/utils.js:441
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+
+#: src/utils.js:448
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] ""
+
+#: src/utils.js:454
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] ""
