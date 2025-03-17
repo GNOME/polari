@@ -27,19 +27,6 @@ If you found a problem or have a feature suggestion, please report the
 issue to the GNOME [bug tracking system][bug-tracker].
 
 
-## Default branch
-
-The default development branch is `main`. If you still have a local
-checkout with the old name, use:
-```sh
-git checkout master
-git branch -m master main
-git fetch
-git branch --unset-upstream
-git branch -u origin/main
-git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
-```
-
 [app-page]: https://apps.gnome.org/Polari
 [build-instructions]: https://welcome.gnome.org/app/Polari
 [irc-channel]: irc://irc.libera.chat/%23gnome-polari
