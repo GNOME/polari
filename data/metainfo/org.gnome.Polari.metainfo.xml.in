@@ -7,7 +7,7 @@ SPDX-License-Identifier: CC0-1.0
 -->
 
 <component type="desktop">
-  <id>org.gnome.Polari.desktop</id>
+  <id>org.gnome.Polari</id>
 
   <name>Polari</name>
   <summary>Talk to people on IRC</summary>
