@@ -3,12 +3,12 @@
 //
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import Cairo from 'cairo';
 import Gdk from 'gi://Gdk?version=3.0';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk?version=3.0';
+import GdkPixbuf from 'gi://GdkPixbuf';
 import WebKit2 from 'gi://WebKit2?version=4.1';
 
 import {setConsoleLogDomain} from 'console';
@@ -99,10 +99,13 @@ class PreviewWindow extends Gtk.Window {
             return;
         }
 
+        const pixbuf = Gdk.pixbuf_get_from_surface(snapshot,
+            0, 0, snapshot.getWidth(), snapshot.getHeight());
+
         if (clip)
-            this._snapshot = this._createClippedSurface(snapshot, clip);
+            this._snapshot = this._createClippedPixbuf(pixbuf, clip);
         else
-            this._snapshot = snapshot;
+            this._snapshot = pixbuf;
 
         this.emit('snapshot-ready');
     }
@@ -137,17 +140,9 @@ class PreviewWindow extends Gtk.Window {
         return {x, y, width, height};
     }
 
-    _createClippedSurface(source, clip) {
+    _createClippedPixbuf(source, clip) {
         const {x, y, width, height} = clip;
-
-        const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
-
-        const cr = new Cairo.Context(surface);
-        cr.setSourceSurface(source, -x, -y);
-        cr.paint();
-        cr.$dispose();
-
-        return surface;
+        return source.new_subpixbuf(x, y, width, height);
     }
 
     getSnapshot() {
@@ -192,15 +187,15 @@ class App extends Gtk.Application {
     }
 
     _onSnapshotReady(window) {
-        const surface = window.getSnapshot();
+        const snapshot = window.getSnapshot();
         const title = window.title || this._uri;
         window.destroy();
 
-        if (!surface)
+        if (!snapshot)
             return;
 
-        const sourceWidth = surface.getWidth();
-        const sourceHeight = surface.getHeight();
+        const sourceWidth = snapshot.get_width();
+        const sourceHeight = snapshot.get_height();
         const ratio = sourceWidth / sourceHeight;
 
         let targetWidth, targetHeight;
@@ -212,20 +207,8 @@ class App extends Gtk.Application {
             targetWidth = targetHeight * ratio;
         }
 
-        const target = new Cairo.ImageSurface(Cairo.Format.ARGB32,
-            targetWidth,
-            targetHeight);
-
-        const cr = new Cairo.Context(target);
-        cr.scale(
-            targetWidth / sourceWidth,
-            targetHeight / sourceHeight);
-        cr.setSourceSurface(surface, 0, 0);
-        cr.paint();
-        cr.$dispose();
-
-        const pixbuf = Gdk.pixbuf_get_from_surface(target,
-            0, 0, targetWidth, targetHeight);
+        const pixbuf = snapshot.scale_simple(
+            targetWidth, targetHeight, GdkPixbuf.InterpType.BILINEAR);
         pixbuf.savev(this._filename, 'png', ['tEXt::Title'], [title]);
     }
 
