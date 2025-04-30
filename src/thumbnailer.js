@@ -9,18 +9,10 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk?version=3.0';
+import WebKit2 from 'gi://WebKit2?version=4.1';
 
 import {setConsoleLogDomain} from 'console';
 import {programArgs} from 'system';
-
-import gi from 'gi';
-let WebKit2;
-
-try {
-    WebKit2 = gi.require('WebKit2', '4.1');
-} catch (e) {
-    WebKit2 = gi.require('WebKit2', '4.0');
-}
 
 Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
 Gio._promisify(WebKit2.WebView.prototype, 'run_javascript', 'run_javascript_finish');
