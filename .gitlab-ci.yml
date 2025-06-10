@@ -40,8 +40,10 @@ stages:
     FDO_DISTRIBUTION_VERSION: 41
     FDO_DISTRIBUTION_TAG: '2024-12-18.0'
     FDO_DISTRIBUTION_PACKAGES: >
-      meson gjs git
-      nodejs npm
+      meson
+      gjs
+      git-core
+      npm
     FDO_DISTRIBUTION_EXEC: |
       # For static analysis with eslint
       npm install -g eslint@^8.0.0 eslint-plugin-jsdoc@^46.0.0 &&
