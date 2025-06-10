@@ -10,7 +10,6 @@ include:
   - component: gitlab.gnome.org/GNOME/citemplates/release-service@master
     inputs:
       dist-job-name: "flatpak"
-      tarball-artifact-path: "${TARBALL_ARTIFACT_PATH}"
   - project: 'Infrastructure/freedesktop-ci-templates'
     file: 'templates/fedora.yml'
     ref: '057b052e682d8e5a20c1eb2dd60d5b87d2b56856'
@@ -30,7 +29,6 @@ variables:
   FDO_UPSTREAM_REPO: GNOME/polari
   FLATPAK_MODULE: "polari"
   MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
-  TARBALL_ARTIFACT_PATH: ".flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-dist/${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tar.xz"
   BUNDLE: "polari-git.flatpak"
 
 .pipeline_guard: &pipeline_guard
