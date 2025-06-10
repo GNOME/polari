@@ -76,8 +76,6 @@ check_commit_log:
   <<: *pipeline_guard
   artifacts:
     expire_in: 1 week
-    paths:
-      - commit-message-junit-report.xml
     reports:
       junit: commit-message-junit-report.xml
 
@@ -95,8 +93,6 @@ check-merge-request:
   <<: *pipeline_guard
   artifacts:
     expire_in: 1 week
-    paths:
-      - check-merge-request-report.xml
     reports:
       junit: check-merge-request-report.xml
 
@@ -127,8 +123,6 @@ eslint:
   script:
     - eslint -o "$LINT_LOG" -f junit --resolve-plugins-relative-to $(npm root -g) src
   artifacts:
-    paths:
-      - "$LINT_LOG"
     reports:
       junit: "$LINT_LOG"
 
