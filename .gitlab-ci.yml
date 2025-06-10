@@ -116,7 +116,7 @@ eslint:
   needs:
     - build-fedora-container
   script:
-    - eslint -o "$LINT_LOG" -f junit --resolve-plugins-relative-to $(npm root -g) src
+    - ./tools/run-eslint.sh --output-file "$LINT_LOG" --format junit --stdout
   artifacts:
     reports:
       junit: "$LINT_LOG"
