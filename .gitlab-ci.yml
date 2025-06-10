@@ -37,8 +37,8 @@ stages:
 .polari.fedora:
   variables:
     FDO_UPSTREAM_REPO: GNOME/polari
-    FDO_DISTRIBUTION_VERSION: 41
-    FDO_DISTRIBUTION_TAG: '2024-12-18.0'
+    FDO_DISTRIBUTION_VERSION: 42
+    FDO_DISTRIBUTION_TAG: '2025-06-10.0'
     FDO_DISTRIBUTION_PACKAGES: >
       meson
       gjs
