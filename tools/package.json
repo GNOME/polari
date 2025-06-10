@@ -1,0 +1,14 @@
+{
+  "name": "polari-dev-scripts",
+  "version": "0.0.0",
+  "license": "GPL-2.0-or-later",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "cd .. && ci-run-eslint"
+  },
+  "dependencies": {
+    "ci-run-eslint": "git+https://gitlab.gnome.org/World/javascript/ci-run-eslint.git",
+    "eslint-plugin-jsdoc": "^48.11.0"
+  }
+}

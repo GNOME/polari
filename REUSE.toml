@@ -48,3 +48,13 @@ SPDX-License-Identifier = "CC0-1.0"
 path = "flatpak/**.patch"
 SPDX-FileCopyrightText = "Florian Müllner <fmuellner@gnome.org>"
 SPDX-License-Identifier = "GPL-2.0-or-later"
+
+[[annotations]]
+path = "tools/package.json"
+SPDX-FileCopyrightText = "Florian Müllner <fmuellner@gnome.org>"
+SPDX-License-Identifier = "GPL-2.0-or-later"
+
+[[annotations]]
+path = "tools/package-lock.json"
+SPDX-FileCopyrightText = "No rights reserved"
+SPDX-License-Identifier = "CC0-1.0"
