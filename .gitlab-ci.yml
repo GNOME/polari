@@ -25,6 +25,9 @@ stages:
   - deploy
   - housekeeping
 
+variables:
+  MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
+
 .pipeline_guard: &pipeline_guard
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -132,7 +135,6 @@ js-check:
   stage: build
   <<: *prereview_req
   variables:
-    MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
     FLATPAK_MODULE: "polari"
     APP_ID: "org.gnome.Polari"
