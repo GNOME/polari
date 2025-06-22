@@ -528,8 +528,8 @@ class UserListRow extends Gtk.ListBoxRow {
 
 const UserList = GObject.registerClass(
 class UserList extends Gtk.ScrolledWindow {
-    _init(room) {
-        super._init({
+    constructor(room) {
+        super({
             hexpand: true,
             has_frame: true,
             hscrollbar_policy: Gtk.PolicyType.NEVER,
