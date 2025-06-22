@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2025 Florian Müllner <fmuellner@gnome.org>
+
+SPDX-License-Identifier: GPL-2.0-or-later
+-->
+
+<interface>
+  <template class="Gjs_UserList" parent="GtkScrolledWindow">
+    <property name="hexpand">True</property>
+    <property name="has-frame">True</property>
+    <property name="hscrollbar-policy">never</property>
+    <property name="propagate-natural-height">True</property>
+    <property name="propagate-natural-width">True</property>
+    <property name="child">
+      <object class="GtkListBox" id="list">
+        <property name="selection-mode">none</property>
+        <property name="vexpand">True</property>
+      </object>
+    </property>
+  </template>
+</interface>
+

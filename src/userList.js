@@ -523,17 +523,14 @@ class UserListRow extends Gtk.ListBoxRow {
 
 const UserList = GObject.registerClass(
 class UserList extends Gtk.ScrolledWindow {
-    constructor(room) {
-        super({
-            hexpand: true,
-            has_frame: true,
-            hscrollbar_policy: Gtk.PolicyType.NEVER,
-            propagate_natural_height: true,
-            propagate_natural_width: true,
-        });
+    static [Gtk.template] = 'resource:///org/gnome/Polari/ui/user-list.ui';
+    static [Gtk.internalChildren] = [
+        'list',
+    ];
 
-        this._list = new Gtk.ListBox({vexpand: true});
-        this.set_child(this._list);
+    constructor(room) {
+        super();
+
         let placeholder = new Gtk.Box({
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
@@ -556,7 +553,6 @@ class UserList extends Gtk.ScrolledWindow {
 
         this._list.set_placeholder(placeholder);
 
-        this._list.set_selection_mode(Gtk.SelectionMode.NONE);
         this._filter = '';
         this._list.set_filter_func(this._filterRows.bind(this));
         this._list.set_sort_func(this._sort.bind(this));
