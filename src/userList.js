@@ -57,6 +57,7 @@ class UserListPopover extends Gtk.Popover {
 
         this._entry = new Gtk.SearchEntry();
         this._entry.connect('search-changed', this._updateFilter.bind(this));
+        this._entry.connect('stop-search', this._onStopSearch.bind(this));
         this._revealer.set_child(this._entry);
     }
 
@@ -112,6 +113,13 @@ class UserListPopover extends Gtk.Popover {
         if (!this._userList)
             return;
         this._userList.setFilter(this._entry.text);
+    }
+
+    _onStopSearch() {
+        if (this._entry.text.length > 0)
+            this._entry.text = '';
+        else
+            this.popdown();
     }
 });
 
