@@ -35,15 +35,6 @@
     border-width: 0;
 }
 
-.polari-user-list .placeholder image {
-    color: alpha(currentColor, 0.3);
-}
-
-.polari-user-list .placeholder label {
-    font-size: 1.2em;
-    color: alpha(currentColor, 0.6);
-}
-
 .polari-paste-confirmation {
     padding: 6px;
 }
