@@ -9,7 +9,7 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
 <gresources>
   <gresource prefix="/org/gnome/Polari">
     <file alias="style.css">resources/style.css</file>
-    <file alias="metainfo.xml">metainfo/org.gnome.Polari.metainfo.xml</file>
+    <file alias="metainfo.xml" preprocess="xml-stripblanks">metainfo/org.gnome.Polari.metainfo.xml</file>
 
     <file alias="data/networks.json">resources/networks.json</file>
 
