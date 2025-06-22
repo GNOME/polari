@@ -526,32 +526,11 @@ class UserList extends Gtk.ScrolledWindow {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/user-list.ui';
     static [Gtk.internalChildren] = [
         'list',
+        'stack',
     ];
 
     constructor(room) {
         super();
-
-        let placeholder = new Gtk.Box({
-            halign: Gtk.Align.CENTER,
-            valign: Gtk.Align.CENTER,
-            orientation: Gtk.Orientation.VERTICAL,
-            margin_top: 32,
-            margin_bottom: 32,
-            margin_start: 32,
-            margin_end: 32,
-            spacing: 6,
-        });
-        placeholder.append(new Gtk.Image({
-            icon_name: 'edit-find-symbolic',
-            pixel_size: 64,
-        }));
-        placeholder.append(new Gtk.Label({
-            label: _('No Results'),
-        }));
-
-        placeholder.add_css_class('placeholder');
-
-        this._list.set_placeholder(placeholder);
 
         this._filter = '';
         this._list.set_filter_func(this._filterRows.bind(this));
@@ -605,6 +584,7 @@ class UserList extends Gtk.ScrolledWindow {
     setFilter(filter) {
         this._filter = filter;
         this._list.invalidate_filter();
+        this._syncVisiblePage();
     }
 
     _onMemberRenamed(room, oldMember, newMember) {
@@ -667,5 +647,12 @@ class UserList extends Gtk.ScrolledWindow {
     _filterRows(row) {
         row.filter = this._filter;
         return row.shouldShow();
+    }
+
+    _syncVisiblePage() {
+        const hasVisibleRows = [...this._list].some(c => c.get_child_visible());
+        this._stack.visible_child_name = hasVisibleRows
+            ? 'list'
+            : 'placeholder';
     }
 });
