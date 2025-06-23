@@ -130,11 +130,11 @@ class UserDetails extends Gtk.Box {
 
     static [GObject.properties] = {
         'expanded': GObject.ParamSpec.boolean(
-            'expanded', 'expanded', 'expanded',
+            'expanded', null, null,
             GObject.ParamFlags.READWRITE,
             false),
         'notifications-enabled': GObject.ParamSpec.boolean(
-            'notifications-enabled', 'notifications-enabled', 'notifications-enabled',
+            'notifications-enabled', null, null,
             GObject.ParamFlags.READWRITE,
             false),
     };

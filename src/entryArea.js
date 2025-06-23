@@ -109,7 +109,7 @@ class NickPopover extends Gtk.Popover {
 
     static [GObject.properties] = {
         nick: GObject.ParamSpec.string(
-            'nick', 'nick', 'nick',
+            'nick', null, null,
             GObject.ParamFlags.READWRITE,
             ''),
     };
@@ -165,11 +165,11 @@ class EntryArea extends Gtk.Stack {
 
     static [GObject.properties] = {
         'max-nick-chars': GObject.ParamSpec.uint(
-            'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
+            'max-nick-chars', null, null,
             GObject.ParamFlags.WRITABLE,
             0, GLib.MAXUINT32, 0),
         'confirmation-visible': GObject.ParamSpec.boolean(
-            'confirmation-visible', 'confirmation-visible', 'confirmation-visible',
+            'confirmation-visible', null, null,
             GObject.ParamFlags.READABLE,
             false),
     };

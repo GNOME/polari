@@ -127,7 +127,7 @@ class ServerRoomList extends Gtk.Box {
 
     static [GObject.properties] = {
         'can-join': GObject.ParamSpec.boolean(
-            'can-join', 'can-join', 'can-join',
+            'can-join', null, null,
             GObject.ParamFlags.READABLE,
             false),
     };

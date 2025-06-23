@@ -54,11 +54,11 @@ const TextView = GObject.registerClass(
 class TextView extends Gtk.TextView {
     static [GObject.properties] = {
         'indent-width-chars': GObject.ParamSpec.uint(
-            'indent-width-chars', 'indent-width-chars', 'indent-width-chars',
+            'indent-width-chars', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXUINT32, 0),
         'indent-spacing': GObject.ParamSpec.uint(
-            'indent-spacing', 'indent-spacing', 'indent-spacing',
+            'indent-spacing', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             0, GLib.MAXUINT32, 0),
     };
@@ -206,7 +206,7 @@ const ButtonTag = GObject.registerClass(
 class ButtonTag extends Gtk.TextTag {
     static [GObject.properties] = {
         'hover': GObject.ParamSpec.boolean(
-            'hover', 'hover', 'hover',
+            'hover', null, null,
             GObject.ParamFlags.READWRITE,
             false),
     };
@@ -229,11 +229,11 @@ const HoverFilterTag = GObject.registerClass(
 class HoverFilterTag extends ButtonTag {
     static [GObject.properties] = {
         'filtered-tag': GObject.ParamSpec.object(
-            'filtered-tag', 'filtered-tag', 'filtered-tag',
+            'filtered-tag', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             Gtk.TextTag.$gtype),
         'hover-opacity': GObject.ParamSpec.double(
-            'hover-opacity', 'hover-opacity', 'hover-opacity',
+            'hover-opacity', null, null,
             GObject.ParamFlags.READWRITE,
             0.0, 1.0, 1.0),
     };
@@ -293,7 +293,7 @@ class ChatView extends Gtk.ScrolledWindow {
     static [GObject.properties] = {
         'can-drop': GObject.ParamSpec.override('can-drop', DropTargetIface),
         'max-nick-chars': GObject.ParamSpec.uint(
-            'max-nick-chars', 'max-nick-chars', 'max-nick-chars',
+            'max-nick-chars', null, null,
             GObject.ParamFlags.READABLE,
             0, GLib.MAXUINT32, 0),
     };

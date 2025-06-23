@@ -36,19 +36,19 @@ class MainWindow extends Adw.ApplicationWindow {
 
     static [GObject.properties] = {
         subtitle: GObject.ParamSpec.string(
-            'subtitle', 'subtitle', 'subtitle',
+            'subtitle', null, null,
             GObject.ParamFlags.READABLE,
             ''),
         'subtitle-visible': GObject.ParamSpec.boolean(
-            'subtitle-visible', 'subtitle-visible', 'subtitle-visible',
+            'subtitle-visible', null, null,
             GObject.ParamFlags.READABLE,
             false),
         'active-room': GObject.ParamSpec.object(
-            'active-room', 'active-room', 'active-room',
+            'active-room', null, null,
             GObject.ParamFlags.READWRITE,
             Polari.Room.$gtype),
         'view-height': GObject.ParamSpec.uint(
-            'view-height', 'view-height', 'view-height',
+            'view-height', null, null,
             GObject.ParamFlags.READABLE,
             0, GLib.MAXUINT32, 0),
     };

@@ -75,7 +75,7 @@ class DropTargetIface extends GObject.Interface {
     static [GObject.requires] = [GObject.Object];
     static [GObject.properties] = {
         'can-drop': GObject.ParamSpec.boolean(
-            'can-drop', 'can-drop', 'can-drop',
+            'can-drop', null, null,
             GObject.ParamFlags.READABLE,
             false),
     };

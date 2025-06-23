@@ -87,7 +87,7 @@ export const ConnectionsList = GObject.registerClass(
 class ConnectionsList extends Gtk.ScrolledWindow {
     static [GObject.properties] = {
         'favorites-only': GObject.ParamSpec.boolean(
-            'favorites-only', 'favorites-only', 'favorites-only',
+            'favorites-only', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             false),
     };
@@ -269,11 +269,11 @@ class ConnectionDetails extends Adw.PreferencesPage {
 
     static [GObject.properties] = {
         'can-confirm': GObject.ParamSpec.boolean(
-            'can-confirm', 'can-confirm', 'can-confirm',
+            'can-confirm', null, null,
             GObject.ParamFlags.READABLE,
             false),
         'has-serivce': GObject.ParamSpec.boolean(
-            'has-service', 'has-service', 'has-service',
+            'has-service', null, null,
             GObject.ParamFlags.READABLE,
             false),
     };

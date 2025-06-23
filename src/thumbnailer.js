@@ -25,7 +25,7 @@ let PreviewWindow = GObject.registerClass(
 class PreviewWindow extends Gtk.Window {
     static [GObject.properties] = {
         'uri': GObject.ParamSpec.string(
-            'uri', 'uri', 'uri',
+            'uri', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             null),
     };

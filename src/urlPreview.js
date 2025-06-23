@@ -109,7 +109,7 @@ export default GObject.registerClass(
 class URLPreview extends Gtk.Box {
     static [GObject.properties] = {
         'uri': GObject.ParamSpec.string(
-            'uri', 'uri', 'uri',
+            'uri', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY,
             null),
     };

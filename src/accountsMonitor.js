@@ -234,19 +234,19 @@ const PolariAccount = GObject.registerClass(
 class PolariAccount extends Tp.Account {
     static [GObject.properties] = {
         predefined: GObject.ParamSpec.boolean(
-            'predefined', 'predefined', 'predefined',
+            'predefined', null, null,
             GObject.ParamFlags.READABLE,
             false),
         reachable: GObject.ParamSpec.boolean(
-            'reachable', 'reachable', 'reachable',
+            'reachable', null, null,
             GObject.ParamFlags.READABLE,
             false),
         visible: GObject.ParamSpec.boolean(
-            'visible', 'visible', 'visible',
+            'visible', null, null,
             GObject.ParamFlags.READWRITE,
             true),
         settings: GObject.ParamSpec.object(
-            'settings', 'settings', 'settings',
+            'settings', null, null,
             GObject.ParamFlags.READABLE,
             Gio.Settings.$gtype),
     };

@@ -21,7 +21,7 @@ export default GObject.registerClass(
 class RoomStack extends Gtk.Stack {
     static [GObject.properties] = {
         'view-height': GObject.ParamSpec.uint(
-            'view-height', 'view-height', 'view-height',
+            'view-height', null, null,
             GObject.ParamFlags.READABLE,
             0, GLib.MAXUINT32, 0),
     };
@@ -128,11 +128,11 @@ export const MessageInfoBar = GObject.registerClass(
 class MessageInfoBar extends Gtk.InfoBar {
     static [GObject.properties] = {
         'title': GObject.ParamSpec.string(
-            'title', 'title', 'title',
+            'title', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             ''),
         'subtitle': GObject.ParamSpec.string(
-            'subtitle', 'subtitle', 'subtitle',
+            'subtitle', null, null,
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
             ''),
     };

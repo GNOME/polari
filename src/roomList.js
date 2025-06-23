@@ -319,7 +319,7 @@ class RoomListHeader extends Gtk.Widget {
 
     static [GObject.properties] = {
         'popover': GObject.ParamSpec.object(
-            'popover', 'popover', 'popover',
+            'popover', null, null,
             GObject.ParamFlags.READWRITE,
             Gtk.Popover.$gtype),
     };
