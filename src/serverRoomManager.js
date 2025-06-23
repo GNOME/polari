@@ -366,7 +366,7 @@ class ServerRoomList extends Gtk.Box {
     _checkSpinner() {
         let loading = this._pendingInfos.length ||
                       this._account && this._manager.isLoading(this._account);
-        this._spinner.spinning = loading;
+        this._spinner.visible = loading;
     }
 
     _toggleChecked(path) {

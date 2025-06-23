@@ -43,7 +43,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
           <object class="GtkSearchEntry" id="filterEntry">
             <property name="hexpand">True</property>
             <property name="margin-start">60</property>
-            <property name="margin-end">22</property>
             <property name="margin-top">6</property>
             <property name="margin-bottom">6</property>
             <property name="activates-default">True</property>
@@ -51,8 +50,14 @@ SPDX-License-Identifier: GPL-2.0-or-later
           </object>
         </child>
         <child>
-          <object class="GtkSpinner" id="spinner">
-            <property name="margin-end">22</property>
+          <object class="AdwBin">
+            <property name="width-request">60</property>
+            <property name="child">
+              <object class="AdwSpinner" id="spinner">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+              </object>
+            </property>
           </object>
         </child>
       </object>
