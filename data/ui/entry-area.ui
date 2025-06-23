@@ -67,7 +67,14 @@ SPDX-License-Identifier: GPL-2.0-or-later
               <class name="polari-paste-confirmation"/>
             </style>
             <child>
-              <object class="GtkSpinner" id="uploadSpinner"/>
+              <object class="AdwBin">
+                <property name="width-request">16</property>
+                <property name="child">
+                  <object class="AdwSpinner" id="uploadSpinner">
+                    <property name="visible">False</property>
+                  </object>
+                </property>
+              </object>
             </child>
             <child>
               <object class="GtkLabel" id="uploadLabel">

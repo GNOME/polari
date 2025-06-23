@@ -428,7 +428,7 @@ class EntryArea extends Gtk.Stack {
         this._confirmLabel.hide();
 
         this._confirmLabel.hide();
-        this._uploadSpinner.start();
+        this._uploadSpinner.show();
 
         let app = Gio.Application.get_default();
         try {
@@ -443,7 +443,7 @@ class EntryArea extends Gtk.Stack {
             console.warn(`Failed to paste content of type ${type}`);
             console.debug(e);
         } finally {
-            this._uploadSpinner.stop();
+            this._uploadSpinner.hide();
         }
     }
 
