@@ -26,7 +26,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
         <property name="hexpand">True</property>
         <property name="halign">center</property>
         <child>
-          <object class="GtkSpinner" id="spinner"/>
+          <object class="AdwSpinner"/>
         </child>
         <child>
           <object class="GtkLabel" id="label1">

@@ -120,7 +120,6 @@ class UserDetails extends Gtk.Box {
     static [Gtk.template] = 'resource:///org/gnome/Polari/ui/user-details.ui';
     static [Gtk.internalChildren] = [
         'spinnerBox',
-        'spinner',
         'detailsGrid',
         'fullnameLabel',
         'lastLabel',
@@ -207,7 +206,6 @@ class UserDetails extends Gtk.Box {
     _expand() {
         this._detailsGrid.visible = this._initialDetailsLoaded;
         this._spinnerBox.visible = !this._initialDetailsLoaded;
-        this._spinner.start();
 
         this._cancellable = new Gio.Cancellable();
 
@@ -222,8 +220,6 @@ class UserDetails extends Gtk.Box {
     }
 
     _unexpand() {
-        this._spinner.stop();
-
         if (this._cancellable)
             this._cancellable.cancel();
         this._cancellable = null;
@@ -257,7 +253,6 @@ class UserDetails extends Gtk.Box {
     }
 
     _revealDetails() {
-        this._spinner.stop();
         this._spinnerBox.hide();
         this._detailsGrid.show();
     }
