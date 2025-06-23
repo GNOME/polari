@@ -75,7 +75,7 @@ export default class ServerRoomManager {
         try {
             await roomList.init_async(GLib.PRIORITY_DEFAULT, null);
             roomList.start();
-        } catch (e) {
+        } catch {
             this._roomLists.delete(account);
         }
     }

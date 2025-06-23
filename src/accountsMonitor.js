@@ -73,7 +73,7 @@ export default class AccountsMonitor {
     _onPrepared(am, res) {
         try {
             am.prepare_finish(res);
-        } catch (e) {
+        } catch {
             this._app.release();
             return; // no point in carrying on
         }
@@ -190,7 +190,7 @@ export default class AccountsMonitor {
         try {
             let reachable = await this._canReachAny(servers);
             account._setReachable(reachable);
-        } catch (e) {
+        } catch {
             account._setReachable(false);
         }
     }

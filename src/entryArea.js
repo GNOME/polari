@@ -402,7 +402,7 @@ class EntryArea extends Gtk.Stack {
                 Gio.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
                 Gio.FileQueryInfoFlags.NONE,
                 GLib.PRIORITY_DEFAULT, null);
-        } catch (e) {
+        } catch {
             return;
         }
 

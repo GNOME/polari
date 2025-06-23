@@ -103,7 +103,7 @@ class Application extends Adw.Application {
 
             try {
                 this.register(null);
-            } catch (e) {
+            } catch {
                 return 1;
             }
 
@@ -143,7 +143,7 @@ class Application extends Adw.Application {
         try {
             proxy = Gio.DBusProxy.new_sync(
                 conn, flags, null, name, opath, iface, null);
-        } catch (e) {}
+        } catch {}
 
         return proxy !== null && proxy.get_name_owner() !== null;
     }
@@ -527,7 +527,7 @@ class Application extends Adw.Application {
         try {
             [,, server, port, room] = uri.match(IRC_SCHEMA_REGEX);
             success = true;
-        } catch (e) {
+        } catch {
             const toast = new Adw.Toast({
                 title: _('Failed to open link'),
             });

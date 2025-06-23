@@ -92,7 +92,7 @@ class Thumbnailer {
             await file.query_info_async(Gio.FILE_ATTRIBUTE_STANDARD_TYPE,
                 Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, null);
             return true;
-        } catch (e) {
+        } catch {
             return false;
         }
     }

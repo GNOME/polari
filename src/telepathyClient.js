@@ -88,7 +88,7 @@ class SASLAuthHandler {
             const password = await Utils.lookupAccountPassword(account);
             await this._proxy.StartMechanismWithDataAsync(
                 'X-TELEPATHY-PASSWORD', password);
-        } catch (e) {
+        } catch {
             await this._proxy.AbortSASLAsync(
                 SASLAbortReason.USER_ABORT,
                 'Password not available');
@@ -333,7 +333,7 @@ class TelepathyClient extends Tp.BaseClient {
         try {
             await this._requestChannel(
                 room.account, room.type, room.channel_name, null);
-        } catch (e) {}
+        } catch {}
     }
 
     async _requestChannel(account, targetType, targetId) {
@@ -390,7 +390,7 @@ class TelepathyClient extends Tp.BaseClient {
         try {
             channel = await this._requestChannel(
                 account, Tp.HandleType.CONTACT, contactName);
-        } catch (e) {
+        } catch {
             return;
         }
 
