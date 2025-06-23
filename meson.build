@@ -36,7 +36,7 @@ typelibdir = join_paths(pkglibdir, 'girepository-1.0')
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 json_glib_validate = find_program('json-glib-validate', required: false)
 appstreamcli = find_program('appstreamcli', required: false)
-check_version = find_program('meson/check-version.py')
+check_version = find_program('build-aux/meson/check-version.py')
 
 gio = dependency('gio-2.0', version: '>= 2.43.4')
 telepathy_glib = dependency('telepathy-glib')

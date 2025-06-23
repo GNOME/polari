@@ -26,7 +26,7 @@ stages:
   - housekeeping
 
 variables:
-  MANIFEST_PATH: "flatpak/org.gnome.Polari.json"
+  MANIFEST_PATH: "build-aux/flatpak/org.gnome.Polari.json"
 
 .pipeline_guard: &pipeline_guard
   rules:
