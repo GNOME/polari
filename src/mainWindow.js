@@ -131,12 +131,10 @@ class MainWindow extends Adw.ApplicationWindow {
         return this._subtitle ?? '';
     }
 
-    // eslint-disable-next-line camelcase
     get subtitle_visible() {
         return this.subtitle.length > 0;
     }
 
-    // eslint-disable-next-line camelcase
     get view_height() {
         return this._roomStack.view_height;
     }
@@ -187,12 +185,10 @@ class MainWindow extends Adw.ApplicationWindow {
         return layoutStr.split(',').filter(s => s !== 'menu').join(',');
     }
 
-    // eslint-disable-next-line camelcase
     get active_room() {
         return this._room;
     }
 
-    // eslint-disable-next-line camelcase
     set active_room(room) {
         if (room === this._room)
             return;

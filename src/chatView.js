@@ -70,12 +70,10 @@ class TextView extends Gtk.TextView {
         this.connect('notify::root', this._onScreenChanged.bind(this));
     }
 
-    // eslint-disable-next-line camelcase
     get indent_width_chars() {
         return this._indentWidthChars;
     }
 
-    // eslint-disable-next-line camelcase
     set indent_width_chars(value) {
         if (this._indentWidthChars === value)
             return;
@@ -86,12 +84,10 @@ class TextView extends Gtk.TextView {
         this._updateIndent();
     }
 
-    // eslint-disable-next-line camelcase
     get indent_spacing() {
         return this._indentSpacing;
     }
 
-    // eslint-disable-next-line camelcase
     set indent_spacing(value) {
         if (this._indentSpacing === value)
             return;
@@ -254,7 +250,6 @@ class HoverFilterTag extends ButtonTag {
         this.foreground_rgba = color;
     }
 
-    // eslint-disable-next-line camelcase
     set filtered_tag(value) {
         this._filteredTag = value;
         this.notify('filtered-tag');
@@ -265,12 +260,10 @@ class HoverFilterTag extends ButtonTag {
         this._updateColor();
     }
 
-    // eslint-disable-next-line camelcase
     get filtered_tag() {
         return this._filteredTag;
     }
 
-    // eslint-disable-next-line camelcase
     set hover_opacity(value) {
         if (this._hoverOpacity === value)
             return;
@@ -281,7 +274,6 @@ class HoverFilterTag extends ButtonTag {
             this._updateColor();
     }
 
-    // eslint-disable-next-line camelcase
     get hover_opacity() {
         return this._hoverOpacity;
     }
@@ -665,12 +657,10 @@ class ChatView extends Gtk.ScrolledWindow {
         }
     }
 
-    // eslint-disable-next-line camelcase
     get max_nick_chars() {
         return this._view.indent_width_chars;
     }
 
-    // eslint-disable-next-line camelcase
     get can_drop() {
         return this._channel !== null;
     }

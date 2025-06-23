@@ -412,7 +412,6 @@ class ConnectionDetails extends Adw.PreferencesPage {
         this._sslRow.active = this._savedSSL;
     }
 
-    // eslint-disable-next-line camelcase
     get can_confirm() {
         let paramsChanged = this._nameRow.text !== this._savedName ||
                             this._serverRow.text !== this._savedServer ||
@@ -425,7 +424,6 @@ class ConnectionDetails extends Adw.PreferencesPage {
                paramsChanged;
     }
 
-    // eslint-disable-next-line camelcase
     get has_service() {
         return this._account && this._account.predefined;
     }

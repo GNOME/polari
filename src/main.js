@@ -19,7 +19,6 @@ imports.package.init({
 pkg.initGettext();
 globalThis.ngettext = ngettext;
 
-// eslint-disable-next-line no-restricted-properties
 globalThis.vprintf = (fmt, ...args) => imports.format.vprintf(fmt, args);
 
 pkg.require({

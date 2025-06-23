@@ -88,7 +88,6 @@ class RoomStack extends Gtk.Stack {
         }
     }
 
-    // eslint-disable-next-line camelcase
     get view_height() {
         return this._viewHeight;
     }

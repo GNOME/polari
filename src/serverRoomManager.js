@@ -202,7 +202,6 @@ class ServerRoomList extends Gtk.Box {
         });
     }
 
-    // eslint-disable-next-line camelcase
     get can_join() {
         let canJoin = false;
         this._store.foreach((model, path, iter) => {

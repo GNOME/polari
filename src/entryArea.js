@@ -52,7 +52,6 @@ class ChatEntry extends Gtk.Entry {
         delegate.connect('paste-clipboard', this._onPasteClipboard.bind(this));
     }
 
-    // eslint-disable-next-line camelcase
     get can_drop() {
         return true;
     }
@@ -297,13 +296,11 @@ class EntryArea extends Gtk.Stack {
         this._chatEntry.connect('unmap', this._updateCompletions.bind(this));
     }
 
-    // eslint-disable-next-line camelcase
     set max_nick_chars(maxChars) {
         this._maxNickChars = maxChars;
         this._updateNick();
     }
 
-    // eslint-disable-next-line camelcase
     get confirmation_visible() {
         return this.visible_child_name === 'paste-confirmation';
     }
