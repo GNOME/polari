@@ -483,7 +483,7 @@ class RoomListHeader extends Gtk.Widget {
         else if (status === Tp.ConnectionStatus.DISCONNECTED)
             child = 'disconnected';
 
-        if (isError && this._spinner.spinning) {
+        if (isError && this._spinner.get_mapped()) {
             let spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
             if (spinnerTime < MIN_SPINNER_TIME) {
                 GLib.timeout_add(GLib.PRIORITY_DEFAULT, (MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
@@ -495,10 +495,9 @@ class RoomListHeader extends Gtk.Widget {
         }
 
         this._iconStack.visible_child_name = child;
-        this._spinner.spinning = child === 'connecting';
         this._popoverTitle.visible = !isAuth;
 
-        if (this._spinner.spinning)
+        if (this._spinner.get_mapped())
             this._spinnerActivationTime = GLib.get_monotonic_time();
 
         if (!isError) {
