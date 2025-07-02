@@ -31,7 +31,7 @@ pkg.require({
     'TelepathyGLib': '0.12',
     'Tracker': '3.0',
 });
-pkg.requireSymbol('Adw', '1', 'Spinner');
+pkg.requireSymbol('Adw', '1', 'ShortcutsDialog');
 pkg.checkSymbol('Soup', '3.0');
 
 import Application from './application.js';
