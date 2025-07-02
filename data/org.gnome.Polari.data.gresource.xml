@@ -13,7 +13,7 @@ SPDX-FileCopyrightText: 2015 Florian Müllner <fmuellner@gnome.org>
 
     <file alias="data/networks.json">networks.json</file>
 
-    <file alias="gtk/help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.ui</file>
+    <file alias="shortcuts-dialog.ui" preprocess="xml-stripblanks">ui/shortcuts-dialog.ui</file>
 
     <file preprocess="xml-stripblanks">icons/scalable/status/people-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/polari-user-notify-symbolic.svg</file>

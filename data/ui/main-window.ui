@@ -24,7 +24,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
     </section>
     <section>
       <item>
-        <attribute name="action">win.show-help-overlay</attribute>
+        <attribute name="action">app.shortcuts</attribute>
         <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
       </item>
       <item>

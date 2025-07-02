@@ -6,13 +6,13 @@ data/org.gnome.Polari.gschema.xml
 data/ui/connection-details.ui
 data/ui/connection-properties.ui
 data/ui/entry-area.ui
-data/ui/help-overlay.ui
 data/ui/initial-setup-window.ui
 data/ui/join-room-dialog.ui
 data/ui/main-window.ui
 data/ui/nick-popover.ui
 data/ui/room-list-header.ui
 data/ui/server-room-list.ui
+data/ui/shortcuts-dialog.ui
 data/ui/user-details.ui
 src/application.js
 src/chatView.js
