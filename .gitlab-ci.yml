@@ -12,10 +12,10 @@ include:
       dist-job-name: "flatpak"
   - project: 'Infrastructure/freedesktop-ci-templates'
     file: 'templates/fedora.yml'
-    ref: '057b052e682d8e5a20c1eb2dd60d5b87d2b56856'
+    ref: '32afe5644697e503af18a736587c8619fa036a72'
   - project: 'Infrastructure/freedesktop-ci-templates'
     file: 'templates/ci-fairy.yml'
-    ref: '34f4ade99434043f88e164933f570301fd18b125'
+    ref: '32afe5644697e503af18a736587c8619fa036a72'
 
 stages:
   - pre_review
