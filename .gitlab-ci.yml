@@ -168,6 +168,6 @@ check-flatpak-deps:
   stage: housekeeping
   <<: *prereview_req
   script:
-    - "/app/flatpak-external-data-checker ${MANIFEST_PATH}"
+    - "/app/flatpak-external-data-checker --check-outdated ${MANIFEST_PATH}"
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule" && $POLARI_SCHEDULED_JOB == "x-checker"'
