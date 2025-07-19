@@ -38,11 +38,14 @@ json_glib_validate = find_program('json-glib-validate', required: false)
 appstreamcli = find_program('appstreamcli', required: false)
 check_version = find_program('build-aux/meson/check-version.py')
 
-gio = dependency('gio-2.0', version: '>= 2.43.4')
+gio_req = '>= 2.85.1'
+gjs_req = '>= 1.85.1'
+
+gio = dependency('gio-2.0', version: gio_req)
 telepathy_glib = dependency('telepathy-glib')
 tracker = dependency('tracker-sparql-3.0')
-girepository = dependency('gobject-introspection-1.0')
-gjs = dependency('gjs-1.0', version: '>= 1.73.1')
+girepository = dependency('girepository-2.0', version: gio_req)
+gjs = dependency('gjs-1.0', version: gjs_req)
 
 conf = configuration_data()
 

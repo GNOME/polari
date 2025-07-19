@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
-#include <girepository.h>
+#include <girepository/girepository.h>
 #include <gjs/gjs.h>
 
 #include "config.h"
@@ -67,6 +67,7 @@ main (int argc, char *argv[])
   const char *search_path[] = { "resource:///org/gnome/Polari/js", NULL };
   g_autoptr (GOptionContext) option_context = NULL;
   g_autoptr (GError) error = NULL;
+  g_autoptr (GIRepository) repo = NULL;
   g_autoptr (GjsContext) context = NULL;
   g_auto (GStrv) js_argv = NULL;
   GjsProfiler *profiler = NULL;
@@ -86,8 +87,9 @@ main (int argc, char *argv[])
   g_set_application_name ("Polari");
 #endif
 
-  g_irepository_prepend_search_path (PKGLIBDIR "/girepository-1.0");
-  g_irepository_prepend_library_path (PKGLIBDIR);
+  repo = gi_repository_dup_default ();
+  gi_repository_prepend_search_path (repo, PKGLIBDIR "/girepository-1.0");
+  gi_repository_prepend_library_path (repo, PKGLIBDIR);
 
   context = g_object_new (GJS_TYPE_CONTEXT,
                           "search-path", search_path,
