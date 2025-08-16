@@ -14,6 +14,7 @@ data/ui/room-list-header.ui
 data/ui/server-room-list.ui
 data/ui/shortcuts-dialog.ui
 data/ui/user-details.ui
+data/ui/user-list.ui
 src/application.js
 src/chatView.js
 src/connections.js
