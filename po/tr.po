@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-08-16 14:21+0000\n"
-"PO-Revision-Date: 2025-09-01 22:40+0300\n"
+"POT-Creation-Date: 2025-09-13 13:54+0000\n"
+"PO-Revision-Date: 2025-09-20 11:02+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -153,11 +153,11 @@ msgstr "_Sunucu Adresi"
 
 #: data/ui/connection-details.ui:26
 msgid "Net_work Name"
-msgstr "A_ğ Adı"
+msgstr "_Ağ Adı"
 
 #: data/ui/connection-details.ui:32
 msgid "Use secure c_onnection"
-msgstr "Güvenli bağlant_ı kullan"
+msgstr "Güvenli bağlantı _kullan"
 
 #: data/ui/connection-details.ui:43
 msgid "_Nickname"
@@ -171,7 +171,7 @@ msgstr "_Gerçek Ad"
 #: data/ui/join-room-dialog.ui:28 data/ui/join-room-dialog.ui:130
 #: src/initialSetup.js:92
 msgid "_Cancel"
-msgstr "_İptal"
+msgstr "İ_ptal"
 
 #: data/ui/connection-properties.ui:30
 msgid "_Apply"
@@ -226,7 +226,7 @@ msgstr "_Katıl"
 
 #: data/ui/join-room-dialog.ui:57
 msgid "C_onnection"
-msgstr "Ba_ğlantı"
+msgstr "_Bağlantı"
 
 #: data/ui/join-room-dialog.ui:94
 msgid "_Add Network"
@@ -238,7 +238,7 @@ msgstr "Ağ Ekle"
 
 #: data/ui/join-room-dialog.ui:181
 msgid "_Custom Network"
-msgstr "_Özel Ağ"
+msgstr "Ö_zel Ağ"
 
 #: data/ui/join-room-dialog.ui:198
 msgid "Custom Network"
@@ -679,7 +679,7 @@ msgstr "_Bitti"
 
 #: src/initialSetup.js:93
 msgid "_Next"
-msgstr "_İleri"
+msgstr "İl_eri"
 
 #. commands that would be nice to support:
 #.
@@ -874,7 +874,7 @@ msgstr "%s’e sonraki bağlanışınızda tanıtma kendiliğinden gerçekleşec
 
 #: src/roomStack.js:189
 msgid "_Save Password"
-msgstr "_Parolayı Kaydet"
+msgstr "Parolayı _Kaydet"
 
 #: src/roomStack.js:218
 msgid "Failed to join the room"
