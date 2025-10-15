@@ -102,7 +102,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                       <object class="GtkSearchBar">
                         <property name="search-mode-enabled" bind-source="searchButton"
                                   bind-property="active"
-                                  bind-flags="sync-create" />
+                                  bind-flags="sync-create|bidirectional" />
                         <child>
                           <object class="GtkSearchEntry" id="searchEntry">
                             <property name="hexpand">True</property>
