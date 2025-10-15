@@ -98,41 +98,36 @@ SPDX-License-Identifier: GPL-2.0-or-later
                         </child>
                       </object>
                     </child>
+                    <child type="top">
+                      <object class="GtkSearchBar">
+                        <property name="search-mode-enabled" bind-source="searchButton"
+                                  bind-property="active"
+                                  bind-flags="sync-create" />
+                        <child>
+                          <object class="GtkSearchEntry" id="searchEntry">
+                            <property name="hexpand">True</property>
+                            <property name="placeholder-text" translatable="yes">Search Conversations…</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                     <property name="content">
                       <object class="GtkRevealer" id="roomListRevealer">
                         <property name="hexpand">False</property>
                         <property name="vexpand">True</property>
                         <property name="transition-type">slide-right</property>
                         <child>
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
+                          <object class="GtkScrolledWindow">
+                            <property name="hscrollbar-policy">never</property>
+                            <property name="vexpand">True</property>
+                            <property name="hexpand">True</property>
                             <child>
-                              <object class="GtkSearchBar">
-                                <property name="search-mode-enabled" bind-source="searchButton"
-                                          bind-property="active"
-                                          bind-flags="sync-create" />
-                                <child>
-                                  <object class="GtkSearchEntry" id="searchEntry">
-                                    <property name="hexpand">True</property>
-                                    <property name="placeholder-text" translatable="yes">Search Conversations…</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkScrolledWindow">
-                                <property name="hscrollbar-policy">never</property>
-                                <property name="vexpand">True</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="Gjs_RoomList" id="roomList">
-                                    <property name="selection-mode">browse</property>
-                                    <style>
-                                      <class name="polari-room-list"/>
-                                      <class name="navigation-sidebar"/>
-                                    </style>
-                                  </object>
-                                </child>
+                              <object class="Gjs_RoomList" id="roomList">
+                                <property name="selection-mode">browse</property>
+                                <style>
+                                  <class name="polari-room-list"/>
+                                  <class name="navigation-sidebar"/>
+                                </style>
                               </object>
                             </child>
                           </object>
