@@ -92,6 +92,7 @@ SPDX-License-Identifier: GPL-2.0-or-later
                         </child>
                         <child type="end">
                           <object class="GtkToggleButton" id="searchButton">
+                            <property name="tooltip-text" translatable="yes">Search</property>
                             <property name="icon-name">edit-find-symbolic</property>
                           </object>
                         </child>
