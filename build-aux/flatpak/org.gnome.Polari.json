@@ -145,21 +145,6 @@
             ]
         },
         {
-            "name": "tinysparql",
-            "buildsystem": "meson",
-            "cleanup": ["/etc", "/lib/systemd"],
-            "config-opts": ["--libdir=lib", "-Dbash_completion=false",
-                            "-Dsystemd_user_services=false",
-                            "-Dman=false", "-Ddocs=false",
-                            "-Dtests=false"],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/tinysparql.git"
-                }
-            ]
-        },
-        {
             "name": "polari",
             "buildsystem": "meson",
             "builddir": true,
