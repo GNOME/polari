@@ -104,7 +104,7 @@ class MainWindow extends Adw.ApplicationWindow {
 
         const actions = [{
             name: 'search',
-            handler: () => this._searchButton.set_active(true),
+            handler: () => this._searchButton.activate(),
         }];
         actions.forEach(a => {
             app.lookup_action(a.name).connect('activate', a.handler);
