@@ -128,6 +128,7 @@ class SearchSection extends Gtk.Box {
         this._offset = 0;
 
         this._list.remove_all();
+        this._list.append(this._loadMore);
 
         this._searchTerms = search;
         this._fetchResults();
