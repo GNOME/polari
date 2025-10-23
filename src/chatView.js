@@ -696,7 +696,9 @@ class ChatView extends Gtk.ScrolledWindow {
         if (!this._autoscroll)
             return;
 
-        if (this._pending.size === 0) {
+        if (this._searchMark) {
+            this._view.scroll_mark_onscreen(this._searchMark);
+        } else if (this._pending.size === 0) {
             this._view.emit('move-cursor',
                 Gtk.MovementStep.BUFFER_ENDS, 1, false);
         } else {
@@ -707,6 +709,8 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _onScroll(w, dx, dy) {
+        this._setSearchMark(null);
+
         if (dy >= 0)
             return Gdk.EVENT_PROPAGATE;
 
@@ -734,6 +738,7 @@ class ChatView extends Gtk.ScrolledWindow {
             keyval !== Gdk.KEY_KP_Page_Up)
             return Gdk.EVENT_PROPAGATE;
 
+        this._setSearchMark(null);
         this._autoscroll = false;
 
         return this._fetchBacklog();
@@ -1518,6 +1523,21 @@ class ChatView extends Gtk.ScrolledWindow {
         return expander;
     }
 
+    _setSearchMark(date) {
+        const {buffer} = this._view;
+
+        if (this._searchMark)
+            buffer.delete_mark(this._searchMark);
+        this._searchMark = null;
+
+        if (date) {
+            const [iter] = this._getLogInsertionPoint(date);
+            this._searchMark = buffer.create_mark(null, iter, true);
+        }
+
+        this._updateScroll();
+    }
+
     showSearchInline(date) {
         const {buffer} = this._view;
 
@@ -1527,17 +1547,25 @@ class ChatView extends Gtk.ScrolledWindow {
             this._expanders.splice(0, 0, expander);
             this._oldestMessageTime = date;
         } else {
-            let pos = 0;
+            let pos = -1;
 
-            for (pos = 0; pos < this._expanders.length; pos++) {
+            for (pos = this._expanders.length - 1; pos >= 0; pos--) {
                 const expander = this._expanders[pos];
                 if (date.compare(expander.startDate) > 0 &&
                     date.compare(expander.endDate) < 0)
                     break;
+
+                if (date.compare(expander.endDate) >= 0) {
+                    // Date points to the following chunk of text
+                    this._setSearchMark(expander.endDate);
+                    return;
+                }
             }
 
-            if (pos === this._expanders.length)
+            if (pos < 0) {
+                this._setSearchMark(this._oldestMessageTime);
                 return;
+            }
 
             const prev = this._expanders[pos];
             const endDate = prev.endDate;
@@ -1552,6 +1580,7 @@ class ChatView extends Gtk.ScrolledWindow {
                 this._expanders.splice(pos + 1, 0, expander);
         }
 
+        this._setSearchMark(date);
         this._getLogEvents(date, NUM_LOG_EVENTS);
     }
 });
