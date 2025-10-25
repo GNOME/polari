@@ -18,7 +18,7 @@ include:
     ref: '32afe5644697e503af18a736587c8619fa036a72'
 
 stages:
-  - pre_review
+  - pre-review
   - prepare
   - review
   - build
@@ -28,7 +28,7 @@ stages:
 variables:
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Polari.json"
 
-.pipeline_guard: &pipeline_guard
+.pipeline-guard: &pipeline_guard
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
@@ -52,15 +52,15 @@ variables:
         https://gitlab.gnome.org/World/javascript/gjs-ci-tools.git \
         main
 
-.prereview_req: &prereview_req
+.prereview-req: &prereview_req
   needs:
-    - check_commit_log
+    - check-commit-log
     - check-merge-request
 
-check_commit_log:
+check-commit-log:
   extends:
     - .fdo.ci-fairy
-  stage: pre_review
+  stage: pre-review
   script:
     - if [[ x"$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" != "x" ]] ;
       then
@@ -77,7 +77,7 @@ check_commit_log:
 check-merge-request:
   extends:
     - .fdo.ci-fairy
-  stage: pre_review
+  stage: pre-review
   script:
     - if [[ x"$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" != "x" ]] ;
       then
@@ -92,7 +92,7 @@ check-merge-request:
       junit: check-merge-request-report.xml
 
 check-reuse:
-  stage: pre_review
+  stage: pre-review
   image:
     name: fsfe/reuse:latest
     entrypoint: [""]
