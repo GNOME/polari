@@ -28,7 +28,7 @@ stages:
 variables:
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Polari.json"
 
-.pipeline-guard: &pipeline_guard
+.pipeline-guard:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
@@ -52,7 +52,7 @@ variables:
         https://gitlab.gnome.org/World/javascript/gjs-ci-tools.git \
         main
 
-.prereview-req: &prereview_req
+.prereview-req:
   needs:
     - check-commit-log
     - check-merge-request
@@ -68,7 +68,8 @@ check-commit-log:
       else
         echo "Not a merge request" ;
       fi
-  <<: *pipeline_guard
+  rules:
+    - !reference [.pipeline-guard, rules]
   artifacts:
     expire_in: 1 week
     reports:
@@ -85,7 +86,8 @@ check-merge-request:
       else
         echo "Not a merge request" ;
       fi
-  <<: *pipeline_guard
+  rules:
+    - !reference [.pipeline-guard, rules]
   artifacts:
     expire_in: 1 week
     reports:
@@ -104,7 +106,8 @@ build-fedora-container:
     - .fdo.container-build@fedora@x86_64
     - .polari.fedora
   stage: prepare
-  <<: *prereview_req
+  needs:
+    - !reference [.prereview-req, needs]
 
 eslint:
   extends:
@@ -133,7 +136,8 @@ js-check:
 
 .flatpak-template:
   stage: build
-  <<: *prereview_req
+  needs:
+    - !reference [.prereview-req, needs]
   variables:
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
     FLATPAK_MODULE: "polari"
@@ -166,7 +170,8 @@ check-flatpak-deps:
     name: ghcr.io/flathub/flatpak-external-data-checker
     entrypoint: [""]
   stage: housekeeping
-  <<: *prereview_req
+  needs:
+    - !reference [.prereview-req, needs]
   script:
     - "/app/flatpak-external-data-checker --check-outdated ${MANIFEST_PATH}"
   rules:
