@@ -115,7 +115,7 @@ js-check:
   script:
     - gjs-check-syntax
 
-.flatpak-template:
+flatpak:
   stage: build
   needs:
     - !reference [.prereview-req, needs]
@@ -125,18 +125,11 @@ js-check:
     APP_ID: "org.gnome.Polari"
     BUNDLE: "polari-git.flatpak"
   extends: .flatpak
-
-flatpak-snapshot:
-  variables:
-    BRANCH: "snapshot"
-    CONFIG_OPTS: "-Dsnapshot=true --werror --warnlevel 2"
-  extends: .flatpak-template
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-
-flatpak:
-  extends: .flatpak-template
-  rules:
+      variables:
+        BRANCH: "snapshot"
+        CONFIG_OPTS: "-Dsnapshot=true --werror --warnlevel 2"
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: '$CI_COMMIT_BRANCH =~ /^gnome-[0-9-]+$/'
     - if: '$CI_COMMIT_TAG'
