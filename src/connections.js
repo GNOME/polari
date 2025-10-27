@@ -526,7 +526,7 @@ class ConnectionProperties extends Adw.Dialog {
 
         this._applyButton.connect('clicked', () => {
             this._details.save();
-            this.destroy();
+            this.close();
         });
 
         let id = account.connect('notify::connection-status',
