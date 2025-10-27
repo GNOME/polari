@@ -349,6 +349,7 @@ class MainWindow extends Adw.ApplicationWindow {
     }
 
     showSearchInline(room, date) {
+        this._searchButton.set_active(false);
         this.active_room = room;
         this._viewStack.set_visible_child_name('conversation');
         const view = this._roomStack.get_child_by_name(room.id);
