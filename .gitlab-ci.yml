@@ -120,7 +120,6 @@ flatpak:
   needs:
     - !reference [.prereview-req, needs]
   variables:
-    RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
     FLATPAK_MODULE: "polari"
     APP_ID: "org.gnome.Polari"
     BUNDLE: "polari-git.flatpak"
