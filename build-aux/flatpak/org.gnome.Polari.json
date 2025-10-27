@@ -35,9 +35,6 @@
         "--env=TPL_LOG_DIR=.local/share",
 	"--metadata=X-DConf=migrate-path=/org/gnome/polari/"
     ],
-    "build-options": {
-        "cflags": "-O2 -g"
-    },
     "cleanup": [
         "*.la",
         "/include",
