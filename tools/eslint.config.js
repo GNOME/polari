@@ -13,6 +13,9 @@ export default defineConfig([
                 properties: 'never',
             }],
             'prefer-arrow-callback': 'error',
+            'prefer-const': ['error', {
+                destructuring: 'all',
+            }],
             'jsdoc/require-jsdoc': ['error', {
                 publicOnly: true,
             }],
