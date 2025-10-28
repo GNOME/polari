@@ -12,12 +12,14 @@ import GLib from 'gi://GLib';
 import Gtk from 'gi://Gtk';
 import Secret from 'gi://Secret';
 import Soup from 'gi://Soup?version=3.0';
+import Tracker from 'gi://Tracker';
 
 Gio._promisify(Secret, 'password_store', 'password_store_finish');
 Gio._promisify(Secret, 'password_lookup', 'password_lookup_finish');
 Gio._promisify(Secret, 'password_clear', 'password_clear_finish');
 Gio._promisify(Soup.Session.prototype,
     'send_and_read_async', 'send_and_read_finish');
+Gio._promisify(Tracker.SparqlConnection, 'new_async', 'new_finish');
 
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account',
@@ -77,6 +79,8 @@ const _channelRegexp = new RegExp('(^| )#([\\w\\+\\.-]+)', 'g');
 let _gpasteExpire;
 
 let _inFlatpakSandbox;
+
+let _sparqlStore;
 
 /**
  * @returns {bool}
@@ -540,4 +544,25 @@ export function formatDateTime(date) {
     }
 
     return date.format(format);
+}
+
+/**
+ * @returns {Tracker.SparqlConnection}
+ */
+export async function getSparqlStore() {
+    if (_sparqlStore)
+        return _sparqlStore;
+
+    const path = GLib.build_filenamev(
+        [GLib.get_user_data_dir(), 'polari', 'chatlogs.v1']);
+    const dir = Gio.File.new_for_path(path);
+    const ontology = Gio.File.new_for_uri(
+        'resource:///org/gnome/Polari/ontologies/');
+
+    _sparqlStore = await Tracker.SparqlConnection.new_async(
+        Tracker.SparqlConnectionFlags.FTS_ENABLE_STEMMER |
+        Tracker.SparqlConnectionFlags.FTS_ENABLE_UNACCENT,
+        dir, ontology, null);
+
+    return _sparqlStore;
 }
