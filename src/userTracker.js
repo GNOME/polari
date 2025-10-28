@@ -115,7 +115,7 @@ class UserTracker extends GObject.Object {
     }
 
     _onShutdown() {
-        for (let room of this._roomData.keys())
+        for (const room of this._roomData.keys())
             this._onRoomRemoved(this._roomManager, room);
     }
 
@@ -137,7 +137,7 @@ class UserTracker extends GObject.Object {
 
         this._ensureRoomMappingForRoom(room);
 
-        let roomSignals = [{
+        const roomSignals = [{
             name: 'notify::channel',
             handler: this._onChannelChanged.bind(this),
         }, {
@@ -160,7 +160,7 @@ class UserTracker extends GObject.Object {
             handler: this._onMemberLeft.bind(this),
         }];
 
-        let signalIds = this._getRoomSignals(room);
+        const signalIds = this._getRoomSignals(room);
         roomSignals.forEach(signal => {
             signalIds.push(room.connect(signal.name, signal.handler));
         });
@@ -193,8 +193,8 @@ class UserTracker extends GObject.Object {
     }
 
     _clearUsersFromRoom(room) {
-        let map = this._getRoomContacts(room);
-        for (let [, contacts] of map)
+        const map = this._getRoomContacts(room);
+        for (const [, contacts] of map)
             contacts.slice().forEach(m => this._untrackMember(m, room));
     }
 
@@ -222,9 +222,9 @@ class UserTracker extends GObject.Object {
     }
 
     _runHandlers(room, member, status) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-        let roomHandlers = this._getRoomHandlers(room);
-        for (let [, info] of roomHandlers) {
+        const baseNick = Polari.util_get_basenick(member.alias);
+        const roomHandlers = this._getRoomHandlers(room);
+        for (const [, info] of roomHandlers) {
             if (!info.nickName || info.nickName === baseNick)
                 info.handler(baseNick, status);
         }
@@ -233,15 +233,15 @@ class UserTracker extends GObject.Object {
     _pushMember(map, baseNick, member) {
         if (!map.has(baseNick))
             map.set(baseNick, []);
-        let contacts = map.get(baseNick);
+        const contacts = map.get(baseNick);
         return contacts.push(member);
     }
 
     _trackMember(member, room) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-        let status = Tp.ConnectionPresenceType.AVAILABLE;
+        const baseNick = Polari.util_get_basenick(member.alias);
+        const status = Tp.ConnectionPresenceType.AVAILABLE;
 
-        let roomMap = this._getRoomContacts(room);
+        const roomMap = this._getRoomContacts(room);
         if (this._pushMember(roomMap, baseNick, member) === 1)
             this._runHandlers(room, member, status);
 
@@ -250,7 +250,7 @@ class UserTracker extends GObject.Object {
         //       the contact to the global map, and removing it from the room
         //       map when the global count drops to 0 (see _untrackMember)
         if (room.type === Tp.HandleType.ROOM) {
-            let map = this._baseNickContacts;
+            const map = this._baseNickContacts;
             if (this._pushMember(map, baseNick, member) === 1) {
                 this.emit(`status-changed::${baseNick}`, baseNick, status);
 
@@ -265,8 +265,8 @@ class UserTracker extends GObject.Object {
     }
 
     _popMember(map, baseNick, member) {
-        let contacts = map.get(baseNick) || [];
-        let index = contacts.map(c => c.alias).indexOf(member.alias);
+        const contacts = map.get(baseNick) || [];
+        const index = contacts.map(c => c.alias).indexOf(member.alias);
         if (index < 0)
             return [false, contacts.length];
         contacts.splice(index, 1);
@@ -274,15 +274,15 @@ class UserTracker extends GObject.Object {
     }
 
     _untrackMember(member, room) {
-        let baseNick = Polari.util_get_basenick(member.alias);
-        let status = Tp.ConnectionPresenceType.OFFLINE;
+        const baseNick = Polari.util_get_basenick(member.alias);
+        const status = Tp.ConnectionPresenceType.OFFLINE;
 
-        let roomMap = this._getRoomContacts(room);
+        const roomMap = this._getRoomContacts(room);
         let [found, nContacts] = this._popMember(roomMap, baseNick, member);
         if (found && nContacts === 0)
             this._runHandlers(room, member, status);
 
-        let map = this._baseNickContacts;
+        const map = this._baseNickContacts;
         [found, nContacts] = this._popMember(map, baseNick, member);
         if (found) {
             if (nContacts === 0) {
@@ -294,7 +294,7 @@ class UserTracker extends GObject.Object {
                 // HACK: The member is no longer joined any public rooms, so
                 //       assume they disconnected and remove them from all
                 //       private chats as well
-                for (let r of this._roomData.keys())
+                for (const r of this._roomData.keys())
                     this._untrackMember(member, r);
             }
             this.emit(`contacts-changed::${baseNick}`, member.alias);
@@ -302,20 +302,20 @@ class UserTracker extends GObject.Object {
     }
 
     getNickStatus(nickName) {
-        let baseNick = Polari.util_get_basenick(nickName);
+        const baseNick = Polari.util_get_basenick(nickName);
 
-        let contacts = this._baseNickContacts.get(baseNick) || [];
+        const contacts = this._baseNickContacts.get(baseNick) || [];
         return contacts.length === 0
             ? Tp.ConnectionPresenceType.OFFLINE
             : Tp.ConnectionPresenceType.AVAILABLE;
     }
 
     getNickRoomStatus(nickName, room) {
-        let baseNick = Polari.util_get_basenick(nickName);
+        const baseNick = Polari.util_get_basenick(nickName);
 
         this._ensureRoomMappingForRoom(room);
 
-        let contacts = this._getRoomContacts(room).get(baseNick) || [];
+        const contacts = this._getRoomContacts(room).get(baseNick) || [];
         return contacts.length === 0
             ? Tp.ConnectionPresenceType.OFFLINE
             : Tp.ConnectionPresenceType.AVAILABLE;
@@ -329,7 +329,7 @@ class UserTracker extends GObject.Object {
         if (this.isMuted(nickName))
             return;
 
-        let settings = this._account.settings;
+        const settings = this._account.settings;
         settings.set_strv('muted-usernames',
             [...this._mutedUsers, nickName.toLowerCase()]);
     }
@@ -338,16 +338,16 @@ class UserTracker extends GObject.Object {
         if (!this.isMuted(nickName))
             return;
 
-        let nick = nickName.toLowerCase();
-        let settings = this._account.settings;
+        const nick = nickName.toLowerCase();
+        const settings = this._account.settings;
         settings.set_strv('muted-usernames',
             this._mutedUsers.filter(s => s !== nick));
     }
 
     lookupContact(nickName) {
-        let baseNick = Polari.util_get_basenick(nickName);
+        const baseNick = Polari.util_get_basenick(nickName);
 
-        let contacts = this._baseNickContacts.get(baseNick) || [];
+        const contacts = this._baseNickContacts.get(baseNick) || [];
         if (!contacts.length)
             return null;
 
@@ -372,11 +372,11 @@ class UserTracker extends GObject.Object {
     }
 
     _notifyNickAvailable(member, room) {
-        let notification = new Gio.Notification();
+        const notification = new Gio.Notification();
         notification.set_title(_('User is online'));
         notification.set_body(vprintf(_('User %s is now online.'), member.alias));
 
-        let param = GLib.Variant.new('(ssb)', [
+        const param = GLib.Variant.new('(ssb)', [
             this._account.get_object_path(),
             room.channel_name,
             true,
@@ -387,33 +387,33 @@ class UserTracker extends GObject.Object {
     }
 
     _shouldNotifyNick(nickName) {
-        let actionName = this._getNotifyActionNameInternal(nickName);
-        let state = this._app.get_action_state(actionName);
+        const actionName = this._getNotifyActionNameInternal(nickName);
+        const state = this._app.get_action_state(actionName);
         return state ? state.get_boolean() : false;
     }
 
     _setNotifyActionEnabled(nickName, enabled) {
-        let name = this._getNotifyActionNameInternal(nickName);
-        let action = this._app.lookup_action(name);
+        const name = this._getNotifyActionNameInternal(nickName);
+        const action = this._app.lookup_action(name);
         if (action)
             action.enabled = enabled;
     }
 
     _getNotifyActionNameInternal(nickName) {
-        let pathSuffix = this._account.get_path_suffix();
-        let baseNick = Polari.util_get_basenick(nickName);
+        const pathSuffix = this._account.get_path_suffix();
+        const baseNick = Polari.util_get_basenick(nickName);
         return `notify-user-${pathSuffix}-${baseNick}`;
     }
 
     getNotifyActionName(nickName) {
-        let name = this._getNotifyActionNameInternal(nickName);
+        const name = this._getNotifyActionNameInternal(nickName);
 
         if (!this._app.lookup_action(name)) {
-            let status = this.getNickStatus(nickName);
-            let enabled = status === Tp.ConnectionPresenceType.OFFLINE;
+            const status = this.getNickStatus(nickName);
+            const enabled = status === Tp.ConnectionPresenceType.OFFLINE;
 
-            let state = new GLib.Variant('b', false);
-            let action = new Gio.SimpleAction({
+            const state = new GLib.Variant('b', false);
+            const action = new Gio.SimpleAction({
                 name,
                 enabled,
                 state,

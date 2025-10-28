@@ -122,8 +122,8 @@ class JoinDialog extends Adw.Dialog {
     }
 
     _onAccountChanged() {
-        let selected = this._connectionCombo.get_active_text();
-        let account = this._accounts.get(selected);
+        const selected = this._connectionCombo.get_active_text();
+        const account = this._accounts.get(selected);
         if (!account)
             return;
 
@@ -137,16 +137,16 @@ class JoinDialog extends Adw.Dialog {
     _joinRoom() {
         this.hide();
 
-        let selected = this._connectionCombo.get_active_text();
-        let account = this._accounts.get(selected);
+        const selected = this._connectionCombo.get_active_text();
+        const account = this._accounts.get(selected);
 
-        let toJoinRooms = this._serverRoomList.selectedRooms;
+        const toJoinRooms = this._serverRoomList.selectedRooms;
         toJoinRooms.forEach(room => {
             if (room[0] !== '#')
                 room = `#${room}`;
 
-            let app = Gio.Application.get_default();
-            let action = app.lookup_action('join-room');
+            const app = Gio.Application.get_default();
+            const action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssb)', [
                 account.get_object_path(),
                 room,
@@ -160,14 +160,14 @@ class JoinDialog extends Adw.Dialog {
     _onAccountsChanged() {
         this._connectionCombo.remove_all();
 
-        let names = [...this._accounts.keys()].sort((a, b) => {
+        const names = [...this._accounts.keys()].sort((a, b) => {
             return a.localeCompare(b);
         });
         for (let i = 0; i < names.length; i++)
             this._connectionCombo.append(names[i], names[i]);
         this._connectionCombo.sensitive = names.length > 1;
 
-        let activeRoom = this.transient_for
+        const activeRoom = this.transient_for
             ? this.transient_for.active_room : null;
         let activeIndex = 0;
         if (activeRoom)

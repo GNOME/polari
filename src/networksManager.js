@@ -20,8 +20,8 @@ export default class NetworksManager {
         this._networks = [];
         this._networksById = new Map();
 
-        let uri = 'resource:///org/gnome/Polari/data/networks.json';
-        let file = Gio.File.new_for_uri(uri);
+        const uri = 'resource:///org/gnome/Polari/data/networks.json';
+        const file = Gio.File.new_for_uri(uri);
         let data;
         try {
             [, data] = file.load_contents(null);
@@ -51,7 +51,7 @@ export default class NetworksManager {
     }
 
     _lookupNetwork(id) {
-        let network = this._networksById.get(id);
+        const network = this._networksById.get(id);
         if (!network)
             throw new Error('Invalid network ID');
         return network;
@@ -70,7 +70,7 @@ export default class NetworksManager {
     }
 
     getNetworkIsFavorite(id) {
-        let network = this._lookupNetwork(id);
+        const network = this._lookupNetwork(id);
 
         if (Object.prototype.hasOwnProperty.call(network, 'favorite'))
             return network['favorite'];
@@ -79,12 +79,12 @@ export default class NetworksManager {
     }
 
     getNetworkDetails(id) {
-        let network = this._lookupNetwork(id);
+        const network = this._lookupNetwork(id);
         if (!network.servers || !network.servers.length)
             throw new Error(`No servers for network ${id}`);
 
-        let server = this.getNetworkServers(id)[0];
-        let details = {
+        const server = this.getNetworkServers(id)[0];
+        const details = {
             'account': new GLib.Variant('s', GLib.get_user_name()),
             'server': new GLib.Variant('s', server.address),
             'port': new GLib.Variant('u', server.port),
@@ -98,20 +98,20 @@ export default class NetworksManager {
     }
 
     getNetworkServers(id) {
-        let network = this._lookupNetwork(id);
-        let sslServers = network.servers.filter(s => s.ssl);
+        const network = this._lookupNetwork(id);
+        const sslServers = network.servers.filter(s => s.ssl);
         return sslServers.length > 0 ? sslServers : network.servers.slice();
     }
 
     getNetworkMatchTerms(id) {
-        let network = this._lookupNetwork(id);
-        let servers = network.servers.map(s => s.address);
-        let terms = [network.name, network.id, ...servers];
+        const network = this._lookupNetwork(id);
+        const servers = network.servers.map(s => s.address);
+        const terms = [network.name, network.id, ...servers];
         return terms.map(t => t.toLowerCase());
     }
 
     findByServer(server) {
-        let network = this._networks.find(n => {
+        const network = this._networks.find(n => {
             return n.servers.some(s => s.address === server);
         });
         return network ? network.id : null;

@@ -41,8 +41,8 @@ class ChatEntry extends Gtk.Entry {
         const delegate = this.get_delegate();
         this.addTargets(delegate);
 
-        let app = Gio.Application.get_default();
-        let action = app.lookup_action('show-emoji-picker');
+        const app = Gio.Application.get_default();
+        const action = app.lookup_action('show-emoji-picker');
         action.connect('activate', () => {
             if (this.is_sensitive() && this.get_mapped())
                 delegate.emit('insert-emoji');
@@ -320,7 +320,7 @@ class EntryArea extends Gtk.Stack {
             this._room &&
             this._room.channel &&
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
-            let members = this._room.channel.group_dup_members_contacts();
+            const members = this._room.channel.group_dup_members_contacts();
             nicks = members.map(member => member.alias);
         }
         this._completion.setCompletions(nicks);
@@ -344,7 +344,7 @@ class EntryArea extends Gtk.Stack {
         if (state !== 0 && state !== Gdk.ModifierType.SHIFT_MASK)
             return Gdk.EVENT_PROPAGATE;
 
-        let activationKeys = [
+        const activationKeys = [
             Gdk.KEY_Tab,
             Gdk.KEY_Return,
             Gdk.KEY_ISO_Enter,
@@ -406,7 +406,7 @@ class EntryArea extends Gtk.Stack {
             return;
         }
 
-        let name = fileInfo.get_display_name();
+        const name = fileInfo.get_display_name();
         /* Translators: %s is a filename */
         this._confirmLabel.label = vprintf(_('Upload “%s” to public paste service?'), name);
         /* Translators: %s is a filename */
@@ -416,7 +416,7 @@ class EntryArea extends Gtk.Stack {
 
     async _onPasteClicked() {
         let title;
-        let nick = this._room.channel.connection.self_contact.alias;
+        const nick = this._room.channel.connection.self_contact.alias;
         if (this._room.type === Tp.HandleType.ROOM)
             /* translators: %s is a nick, #%s a channel */
             title = vprintf(_('%s in #%s'), nick, this._room.display_name);
@@ -427,7 +427,7 @@ class EntryArea extends Gtk.Stack {
         this._confirmLabel.hide();
         this._uploadSpinner.show();
 
-        let app = Gio.Application.get_default();
+        const app = Gio.Application.get_default();
         try {
             const url =
                 await app.pasteManager.pasteContent(this._pasteContent, title);
@@ -478,7 +478,7 @@ class EntryArea extends Gtk.Stack {
         if (!this.get_mapped())
             return;
 
-        let app = Gio.Application.get_default();
+        const app = Gio.Application.get_default();
         app.setAccountNick(this._room.account, nick);
 
         // TpAccount:nickname is a local property which doesn't
@@ -496,7 +496,7 @@ class EntryArea extends Gtk.Stack {
     }
 
     _updateNick() {
-        let {channel} = this._room || {};
+        const {channel} = this._room || {};
         let nick = '';
         if (channel)
             nick = channel.connection.self_contact.alias;

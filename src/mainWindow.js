@@ -180,7 +180,7 @@ class MainWindow extends Adw.ApplicationWindow {
     }
 
     _onAccountsReachableChanged() {
-        let accounts = this._accountsMonitor.visibleAccounts;
+        const accounts = this._accountsMonitor.visibleAccounts;
         this._offlineBanner.revealed =
             accounts.length > 0 && !accounts.some(a => a.reachable);
     }
@@ -210,7 +210,7 @@ class MainWindow extends Adw.ApplicationWindow {
     }
 
     _onAccountsChanged() {
-        let hasAccounts = this._accountsMonitor.visibleAccounts.length > 0;
+        const hasAccounts = this._accountsMonitor.visibleAccounts.length > 0;
         this._roomListRevealer.reveal_child = hasAccounts;
     }
 
@@ -269,16 +269,16 @@ class MainWindow extends Adw.ApplicationWindow {
         if (this.active_room)
             return;
 
-        let selectedRoom = this._settings.get_value('last-selected-channel').deep_unpack();
-        for (let prop in selectedRoom)
+        const selectedRoom = this._settings.get_value('last-selected-channel').deep_unpack();
+        for (const prop in selectedRoom)
             selectedRoom[prop] = selectedRoom[prop].deep_unpack();
 
         if (!selectedRoom.account)
             return;
 
         let roomId = null;
-        let account = this._accountsMonitor.lookupAccount(selectedRoom.account);
-        let channelName = selectedRoom.channel;
+        const account = this._accountsMonitor.lookupAccount(selectedRoom.account);
+        const channelName = selectedRoom.channel;
         if (account && account.visible && channelName)
             roomId = Polari.create_room_id(account, channelName, Tp.HandleType.ROOM);
 
@@ -310,7 +310,7 @@ class MainWindow extends Adw.ApplicationWindow {
             this._room.channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP))
             numMembers = this._room.channel.group_dup_members_contacts().length;
 
-        let accessibleName = vprintf(ngettext(
+        const accessibleName = vprintf(ngettext(
             '%d user',
             '%d users', numMembers), numMembers);
         this._showUserListButton.update_property(
@@ -321,13 +321,13 @@ class MainWindow extends Adw.ApplicationWindow {
     _updateTitlebar() {
         let subtitle = '';
         if (this._room && this._room.topic) {
-            let urls = Utils.findUrls(this._room.topic);
+            const urls = Utils.findUrls(this._room.topic);
             let pos = 0;
             for (let i = 0; i < urls.length; i++) {
-                let url = urls[i];
-                let text = GLib.markup_escape_text(
+                const url = urls[i];
+                const text = GLib.markup_escape_text(
                     this._room.topic.substr(pos, url.pos - pos), -1);
-                let urlText = GLib.markup_escape_text(url.url, -1);
+                const urlText = GLib.markup_escape_text(url.url, -1);
                 subtitle += `${text} <a href="${urlText}">${urlText}<${'/'}a>`;
                 pos = url.pos + url.url.length;
             }

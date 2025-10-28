@@ -84,12 +84,12 @@ export default class IrcParser {
             return true;
         }
 
-        let stripCommand = txt => txt.substr(txt.indexOf(' ')).trimLeft();
+        const stripCommand = txt => txt.substr(txt.indexOf(' ')).trimLeft();
 
         let retval = true;
 
-        let argv = text.trimRight().substr(1).split(/ +/);
-        let cmd = argv.shift().toUpperCase();
+        const argv = text.trimRight().substr(1).split(/ +/);
+        const cmd = argv.shift().toUpperCase();
         switch (cmd) {
         case 'HELP': {
             let command = argv.shift();
@@ -109,15 +109,15 @@ export default class IrcParser {
             break;
         }
         case 'INVITE': {
-            let nick = argv.shift();
+            const nick = argv.shift();
             if (!nick) {
                 this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
             try {
-                let connection = this._room.channel.connection;
-                let contact = await connection.dup_contact_by_id_async(nick);
+                const connection = this._room.channel.connection;
+                const contact = await connection.dup_contact_by_id_async(nick);
                 this._room.add_member(contact);
             } catch (e) {
                 logError(e, `Failed to get contact for ${nick}`);
@@ -137,9 +137,9 @@ export default class IrcParser {
                 console.warn(`Excess arguments to JOIN command: ${argv}`);
             if (!ROOM_PREFIXES.some(prefix => room.startsWith(prefix)))
                 room = `#${room}`;
-            let {account} = this._room;
-            let app = Gio.Application.get_default();
-            let action = app.lookup_action('join-room');
+            const {account} = this._room;
+            const app = Gio.Application.get_default();
+            const action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssb)', [
                 account.get_object_path(),
                 room,
@@ -148,15 +148,15 @@ export default class IrcParser {
             break;
         }
         case 'KICK': {
-            let nick = argv.shift();
+            const nick = argv.shift();
             if (!nick) {
                 this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
             try {
-                let connection = this._room.channel.connection;
-                let contact = await connection.dup_contact_by_id_async(nick);
+                const connection = this._room.channel.connection;
+                const contact = await connection.dup_contact_by_id_async(nick);
                 this._room.remove_member(contact);
             } catch (e) {
                 logError(e, `Failed to get contact for ${nick}`);
@@ -170,25 +170,25 @@ export default class IrcParser {
                 retval = false;
                 break;
             }
-            let action = stripCommand(text);
-            let type = Tp.ChannelTextMessageType.ACTION;
-            let message = Tp.ClientMessage.new_text(type, action);
+            const action = stripCommand(text);
+            const type = Tp.ChannelTextMessageType.ACTION;
+            const message = Tp.ClientMessage.new_text(type, action);
             this._sendMessage(message);
             break;
         }
         case 'MSG': {
-            let nick = argv.shift();
-            let message = argv.join(' ');
+            const nick = argv.shift();
+            const message = argv.join(' ');
             if (!nick || !message) {
                 this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
 
-            let {account} = this._room;
+            const {account} = this._room;
 
-            let app = Gio.Application.get_default();
-            let action = app.lookup_action('message-user');
+            const app = Gio.Application.get_default();
+            const action = app.lookup_action('message-user');
             action.activate(GLib.Variant.new('(sssb)', [
                 account.get_object_path(),
                 nick,
@@ -202,7 +202,7 @@ export default class IrcParser {
             break;
         }
         case 'NICK': {
-            let nick = argv.shift();
+            const nick = argv.shift();
             if (!nick) {
                 this._feedback.showUsage(cmd);
                 retval = false;
@@ -217,7 +217,7 @@ export default class IrcParser {
         case 'PART':
         case 'CLOSE': {
             let room = null;
-            let name = argv[0];
+            const name = argv[0];
             if (name)
                 room = this._roomManager.lookupRoomByName(name, this._room.account);
             if (room)
@@ -225,24 +225,24 @@ export default class IrcParser {
             else
                 room = this._room;
 
-            let app = Gio.Application.get_default();
-            let action = app.lookup_action('leave-room');
-            let param = GLib.Variant.new('(ss)', [room.id, argv.join(' ')]);
+            const app = Gio.Application.get_default();
+            const action = app.lookup_action('leave-room');
+            const param = GLib.Variant.new('(ss)', [room.id, argv.join(' ')]);
             action.activate(param);
             break;
         }
         case 'QUERY': {
-            let nick = argv.shift();
+            const nick = argv.shift();
             if (!nick) {
                 this._feedback.showUsage(cmd);
                 retval = false;
                 break;
             }
 
-            let {account} = this._room;
+            const {account} = this._room;
 
-            let app = Gio.Application.get_default();
-            let action = app.lookup_action('message-user');
+            const app = Gio.Application.get_default();
+            const action = app.lookup_action('message-user');
             action.activate(GLib.Variant.new('(sssb)', [
                 account.get_object_path(),
                 nick,
@@ -252,8 +252,8 @@ export default class IrcParser {
             break;
         }
         case 'QUIT': {
-            let presence = Tp.ConnectionPresenceType.OFFLINE;
-            let message = stripCommand(text);
+            const presence = Tp.ConnectionPresenceType.OFFLINE;
+            const message = stripCommand(text);
             try {
                 await this._room.account.request_presence_async(presence, 'offline', message);
             } catch (e) {
@@ -285,7 +285,7 @@ export default class IrcParser {
                 break;
             }
 
-            let nick = stripCommand(text);
+            const nick = stripCommand(text);
             const {connection} = this._room.channel;
             const user = await connection.dup_contact_by_id_async(nick, []);
             const status = await user.request_contact_info_async(null);
@@ -304,7 +304,7 @@ export default class IrcParser {
     _formatUserInfo(status, user) {
         let fn, last;
         if (status) {
-            let info = user.get_contact_info();
+            const info = user.get_contact_info();
             for (let i = 0; i < info.length; i++) {
                 if (info[i].field_name === 'fn')
                     [fn] = info[i].field_value;
@@ -316,8 +316,8 @@ export default class IrcParser {
     }
 
     _sendText(text) {
-        let type = Tp.ChannelTextMessageType.NORMAL;
-        let message = Tp.ClientMessage.new_text(type, text);
+        const type = Tp.ChannelTextMessageType.NORMAL;
+        const message = Tp.ClientMessage.new_text(type, text);
         this._sendMessage(message);
     }
 

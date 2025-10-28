@@ -25,7 +25,7 @@ export default class RoomManager {
         this._accountsMonitor = AccountsMonitor.getDefault();
 
         this._app = Gio.Application.get_default();
-        let actions = [{
+        const actions = [{
             name: 'join-room',
             handler: this._onJoinActivated.bind(this),
         }, {
@@ -67,10 +67,10 @@ export default class RoomManager {
     }
 
     lookupRoomByChannel(channel) {
-        let account = channel.connection.get_account();
-        let channelName = channel.identifier;
-        let [, handleType] = channel.get_handle();
-        let id = Polari.create_room_id(account, channelName, handleType);
+        const account = channel.connection.get_account();
+        const channelName = channel.identifier;
+        const [, handleType] = channel.get_handle();
+        const id = Polari.create_room_id(account, channelName, handleType);
         return this._rooms.get(id);
     }
 
@@ -83,7 +83,7 @@ export default class RoomManager {
     }
 
     _onJoinActivated(action, parameter) {
-        let [accountPath, channelName, present] = parameter.deep_unpack();
+        const [accountPath, channelName, present] = parameter.deep_unpack();
         this._addSavedChannel(accountPath, channelName);
 
         this._accountsMonitor.prepare(() => {
@@ -92,7 +92,7 @@ export default class RoomManager {
     }
 
     _onQueryActivated(action, parameter) {
-        let [accountPath, channelName, , present] = parameter.deep_unpack();
+        const [accountPath, channelName, , present] = parameter.deep_unpack();
 
         this._accountsMonitor.prepare(() => {
             this._ensureRoom(accountPath, channelName, Tp.HandleType.CONTACT, present);
@@ -100,8 +100,8 @@ export default class RoomManager {
     }
 
     _onLeaveActivated(action, parameter) {
-        let [id] = parameter.deep_unpack();
-        let room = this._rooms.get(id);
+        const [id] = parameter.deep_unpack();
+        const room = this._rooms.get(id);
 
         this._removeSavedChannel(room.account.object_path, room.channel_name);
         this._removeRoom(room);
@@ -109,7 +109,7 @@ export default class RoomManager {
 
     _restoreRooms(accountPath) {
         this._settings.get_value('saved-channel-list').deep_unpack().forEach(c => {
-            for (let prop in c)
+            for (const prop in c)
                 c[prop] = c[prop].deep_unpack();
             if (!accountPath || c.account === accountPath)
                 this._ensureRoom(c.account, c.channel, Tp.HandleType.ROOM, false);
@@ -118,14 +118,14 @@ export default class RoomManager {
     }
 
     _removeRooms(accountPath) {
-        for (let room of this._rooms.values()) {
+        for (const room of this._rooms.values()) {
             if (!accountPath || room.account.object_path === accountPath)
                 this._removeRoom(room);
         }
     }
 
     _findChannelIndex(channels, accountPath, channelName) {
-        let matchName = channelName.toLowerCase();
+        const matchName = channelName.toLowerCase();
         return channels.findIndex(c => {
             return c.account.deep_unpack() === accountPath &&
                    c.channel.deep_unpack().toLowerCase() === matchName;
@@ -133,7 +133,7 @@ export default class RoomManager {
     }
 
     _addSavedChannel(accountPath, channelName) {
-        let channels = this._settings.get_value('saved-channel-list').deep_unpack();
+        const channels = this._settings.get_value('saved-channel-list').deep_unpack();
         if (this._findChannelIndex(channels, accountPath, channelName) !== -1)
             return;
         channels.push({
@@ -145,8 +145,8 @@ export default class RoomManager {
     }
 
     _removeSavedChannel(accountPath, channelName) {
-        let channels = this._settings.get_value('saved-channel-list').deep_unpack();
-        let pos = this._findChannelIndex(channels, accountPath, channelName);
+        const channels = this._settings.get_value('saved-channel-list').deep_unpack();
+        const pos = this._findChannelIndex(channels, accountPath, channelName);
         if (pos < 0)
             return;
         channels.splice(pos, 1);
@@ -156,7 +156,7 @@ export default class RoomManager {
 
     _removeSavedChannelsForAccount(accountPath) {
         let channels = this._settings.get_value('saved-channel-list').deep_unpack();
-        let account = new GLib.Variant('s', accountPath);
+        const account = new GLib.Variant('s', accountPath);
 
         channels = channels.filter(c => !c.account.equal(account));
         this._settings.set_value('saved-channel-list',
@@ -164,7 +164,7 @@ export default class RoomManager {
     }
 
     _ensureRoom(accountPath, channelName, type, present) {
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const account = this._accountsMonitor.lookupAccount(accountPath);
 
         if (!account) {
             this._removeSavedChannelsForAccount(accountPath);
@@ -174,7 +174,7 @@ export default class RoomManager {
         if (!account.visible)
             return null;
 
-        let id = Polari.create_room_id(account, channelName, type);
+        const id = Polari.create_room_id(account, channelName, type);
         let room = this._rooms.get(id);
         if (!room) {
             room = new Polari.Room({
@@ -193,12 +193,12 @@ export default class RoomManager {
     }
 
     ensureRoomForChannel(channel, present) {
-        let accountPath = channel.connection.get_account().object_path;
-        let targetContact = channel.target_contact;
-        let channelName = targetContact
+        const accountPath = channel.connection.get_account().object_path;
+        const targetContact = channel.target_contact;
+        const channelName = targetContact
             ? targetContact.alias : channel.identifier;
-        let [, handleType] = channel.get_handle();
-        let room = this._ensureRoom(accountPath, channelName, handleType, present);
+        const [, handleType] = channel.get_handle();
+        const room = this._ensureRoom(accountPath, channelName, handleType, present);
         room.channel = channel;
     }
 

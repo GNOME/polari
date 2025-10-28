@@ -79,7 +79,7 @@ class UserListPopover extends Gtk.Popover {
         const viewHeight = this.get_root().view_height;
         const [popoverHeight] = this.measure(Gtk.Orientation.VERTICAL, -1);
         const [userListHeight] = this._userList.measure(Gtk.Orientation.VERTICAL, -1);
-        let chromeHeight = popoverHeight - userListHeight;
+        const chromeHeight = popoverHeight - userListHeight;
         this._userList.max_content_height = viewHeight - chromeHeight;
     }
 
@@ -104,7 +104,7 @@ class UserListPopover extends Gtk.Popover {
         if (!this._userList)
             return;
 
-        let reveal = this._entry.text !== '' ||
+        const reveal = this._entry.text !== '' ||
                      this._userList.numRows > FILTER_ENTRY_THRESHOLD;
         this._revealer.reveal_child = reveal;
     }
@@ -150,7 +150,7 @@ class UserDetails extends Gtk.Box {
     _user = null;
 
     constructor(params = {}) {
-        let {user} = params;
+        const {user} = params;
         delete params.user;
 
         super(params);
@@ -237,7 +237,7 @@ class UserDetails extends Gtk.Box {
         this._initialDetailsLoaded = true;
 
         let fn, last;
-        let info = this._user.get_contact_info();
+        const info = this._user.get_contact_info();
         for (let i = 0; i < info.length; i++) {
             if (info[i].field_name === 'fn')
                 [fn] = info[i].field_value;
@@ -266,10 +266,10 @@ class UserDetails extends Gtk.Box {
     }
 
     _onMessageButtonClicked() {
-        let account = this._user.connection.get_account();
+        const account = this._user.connection.get_account();
 
-        let app = Gio.Application.get_default();
-        let action = app.lookup_action('message-user');
+        const app = Gio.Application.get_default();
+        const action = app.lookup_action('message-user');
         action.activate(GLib.Variant.new('(sssb)', [
             account.get_object_path(),
             this._user.alias,
@@ -340,7 +340,7 @@ class UserPopover extends Gtk.Popover {
         this._nickLabel.label = this._nickname;
         this._userDetails.nickname = nickname;
 
-        let actionName = this._userTracker.getNotifyActionName(this._nickname);
+        const actionName = this._userTracker.getNotifyActionName(this._nickname);
         this._notifyButton.action_name = actionName;
 
         this._setBasenick(Polari.util_get_basenick(nickname));
@@ -381,8 +381,8 @@ class UserPopover extends Gtk.Popover {
     }
 
     _onStatusChanged() {
-        let status = this._userTracker.getNickStatus(this._nickname);
-        let roomStatus = this._userTracker.getNickRoomStatus(
+        const status = this._userTracker.getNickStatus(this._nickname);
+        const roomStatus = this._userTracker.getNickRoomStatus(
             this._nickname, this._room);
 
         let label;
@@ -451,10 +451,10 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     _createWidget() {
-        let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
+        const vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
         this.set_child(vbox);
 
-        let hbox = new Gtk.Box({
+        const hbox = new Gtk.Box({
             margin_end: 12,
             margin_start: 4,
             margin_top: 4,
@@ -485,7 +485,7 @@ class UserListRow extends Gtk.ListBoxRow {
         if (this._revealer.get_child())
             return;
 
-        let details = new UserDetails({user: this._user});
+        const details = new UserDetails({user: this._user});
 
         this._revealer.bind_property('reveal-child', details, 'expanded', 0);
 
@@ -503,7 +503,7 @@ class UserListRow extends Gtk.ListBoxRow {
     }
 
     _updateArrowVisibility() {
-        let flags = this.get_state_flags();
+        const flags = this.get_state_flags();
         this._arrow.visible = this.expand ||
                               flags & Gtk.StateFlags.PRELIGHT ||
                               flags & Gtk.StateFlags.FOCUSED;
@@ -543,7 +543,7 @@ class UserList extends Gtk.ScrolledWindow {
         this._rows = new Map();
         this._activeRow = null;
 
-        let roomSignals = [{
+        const roomSignals = [{
             name: 'member-renamed',
             handler: this._onMemberRenamed.bind(this),
         }, {
@@ -610,19 +610,19 @@ class UserList extends Gtk.ScrolledWindow {
         if (!room.channel)
             return;
 
-        let members = room.channel.group_dup_members_contacts();
+        const members = room.channel.group_dup_members_contacts();
         for (let i = 0; i < members.length; i++)
             this._addMember(members[i]);
     }
 
     _addMember(member) {
-        let row = new UserListRow(member);
+        const row = new UserListRow(member);
         this._rows.set(member, row);
         this._list.append(row);
     }
 
     _removeMember(member) {
-        let row = this._rows.get(member);
+        const row = this._rows.get(member);
         if (row)
             this._list.remove(row);
         row?.run_dispose();

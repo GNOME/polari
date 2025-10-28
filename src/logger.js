@@ -67,7 +67,7 @@ class GenericQuery {
         if (nCols === 1)
             return this._getColumnValue(cursor, 0);
 
-        let value = {};
+        const value = {};
         for (let i = 0; i < nCols; i++) {
             const name = cursor.get_variable_name(i);
             value[name] = this._getColumnValue(cursor, i);
@@ -88,7 +88,7 @@ export class LogWalker {
     }
 
     async _getResults(cursor, numEvents) {
-        let results = [];
+        const results = [];
         let event;
         let i = 0;
 
@@ -123,7 +123,7 @@ export class LogWalker {
 
         const channel = this._channelIri;
         const timeStr = endTime.format_iso8601();
-        let cursor =
+        const cursor =
             await this._query.execute({channel, endTime: timeStr}, null);
 
         const results = await this._getResults(cursor, numEvents);
@@ -144,7 +144,7 @@ export class LogWalker {
 
         const channel = this._channelIri;
         const timeStr = startTime.format_iso8601();
-        let cursor =
+        const cursor =
             await this._forwardQuery.execute({channel, startTime: timeStr}, null);
 
         const results = await this._getResults(cursor, numEvents);
@@ -177,7 +177,7 @@ export class LogImporter {
             if (!file)
                 return false;
 
-            let batch = await this._importer.import_async(file, null);
+            const batch = await this._importer.import_async(file, null);
 
             return await batch.execute_async(null);
         } catch (e) {
@@ -255,7 +255,7 @@ export class LogFinder {
             // eslint-disable-next-line no-await-in-loop
             const contextCursor = await this._contextQuery.execute(
                 {channel, msgTime: row.time.format_iso8601()}, cancellable);
-            let ctx = [];
+            const ctx = [];
             let item;
             // eslint-disable-next-line no-await-in-loop
             item = await this._contextQuery.next(

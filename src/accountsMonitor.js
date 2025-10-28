@@ -34,7 +34,7 @@ export default class AccountsMonitor {
                 this._onPrepareShutdown.bind(this));
         }
 
-        let factory = new ClientFactory();
+        const factory = new ClientFactory();
         factory.add_channel_features([Tp.Channel.get_feature_quark_group()]);
         factory.add_channel_features([Tp.Channel.get_feature_quark_contacts()]);
         factory.add_contact_features([Tp.ContactFeature.ALIAS]);
@@ -63,7 +63,7 @@ export default class AccountsMonitor {
     }
 
     prepare(callback) {
-        let quark = Tp.AccountManager.get_feature_quark_core();
+        const quark = Tp.AccountManager.get_feature_quark_core();
         if (this._accountManager.is_prepared(quark))
             callback();
         else
@@ -140,7 +140,7 @@ export default class AccountsMonitor {
         account._visibleNotifyId =
             account.connect('notify::visible', () => {
                 this._updateAccountReachable(account);
-                let signal = account.visible
+                const signal = account.visible
                     ? 'account-shown' : 'account-hidden';
                 this.emit(signal, account);
                 this.emit('accounts-changed');
@@ -171,7 +171,7 @@ export default class AccountsMonitor {
     _accountEnabledChanged(am, account) {
         if (!this._accounts.has(account.object_path))
             return;
-        let signal = account.enabled ? 'account-enabled' : 'account-disabled';
+        const signal = account.enabled ? 'account-enabled' : 'account-disabled';
         this.emit(signal, account);
         this.emit('accounts-changed');
     }
@@ -180,7 +180,7 @@ export default class AccountsMonitor {
         if (!this._networkMonitor.state_valid)
             return;
 
-        let servers = account.getServers().map(s => {
+        const servers = account.getServers().map(s => {
             return new Gio.NetworkAddress({
                 hostname: s.address,
                 port: s.port,
@@ -188,7 +188,7 @@ export default class AccountsMonitor {
         });
 
         try {
-            let reachable = await this._canReachAny(servers);
+            const reachable = await this._canReachAny(servers);
             account._setReachable(reachable);
         } catch {
             account._setReachable(false);
@@ -196,7 +196,7 @@ export default class AccountsMonitor {
     }
 
     _canReachAny(servers) {
-        let reverse = promise => {
+        const reverse = promise => {
             return new Promise((resolve, reject) => {
                 return Promise.resolve(promise).then(reject, resolve);
             });
@@ -293,13 +293,13 @@ class PolariAccount extends Tp.Account {
     }
 
     getConnectionParams() {
-        let params = this.dup_parameters_vardict().deep_unpack();
-        for (let p in params)
+        const params = this.dup_parameters_vardict().deep_unpack();
+        for (const p in params)
             params[p] = params[p].deep_unpack();
 
         params['use-ssl'] = !!params['use-ssl'];
 
-        let defaultPort = params['use-ssl'] ? 6697 : 6667;
+        const defaultPort = params['use-ssl'] ? 6697 : 6667;
         params['port'] = params['port'] || defaultPort;
 
         return params;
@@ -309,7 +309,7 @@ class PolariAccount extends Tp.Account {
         if (this.predefined)
             return this._networksManager.getNetworkServers(this.service);
 
-        let params = this.getConnectionParams();
+        const params = this.getConnectionParams();
         return [{
             address: params.server,
             port: params.port,

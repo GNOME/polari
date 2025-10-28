@@ -46,14 +46,14 @@ class ConnectionRow extends Gtk.ListBoxRow {
         super(params);
 
         this._id = id;
-        let name = NetworksManager.getDefault().getNetworkName(this._id);
+        const name = NetworksManager.getDefault().getNetworkName(this._id);
         this.name = `ConnectionRow ${name}`;
 
         this.bind_property('sensitive',
             this, 'activatable',
             GObject.BindingFlags.SYNC_CREATE);
 
-        let box = new Gtk.Box({
+        const box = new Gtk.Box({
             spacing: 12,
             margin_start: 12,
             margin_end: 12,
@@ -64,7 +64,7 @@ class ConnectionRow extends Gtk.ListBoxRow {
 
         box.append(new Gtk.Label({label: name, halign: Gtk.Align.START}));
 
-        let insensitiveDesc = new Gtk.Label({
+        const insensitiveDesc = new Gtk.Label({
             label: _('Already added'),
             hexpand: true,
             halign: Gtk.Align.END,
@@ -113,7 +113,7 @@ class ConnectionsList extends Gtk.ScrolledWindow {
         this._list.set_header_func(this._updateHeader.bind(this));
         this._list.set_sort_func(this._sort.bind(this));
 
-        let placeholder = new Gtk.Box({
+        const placeholder = new Gtk.Box({
             halign: Gtk.Align.CENTER,
             valign: Gtk.Align.CENTER,
             orientation: Gtk.Orientation.VERTICAL,
@@ -131,17 +131,17 @@ class ConnectionsList extends Gtk.ScrolledWindow {
         this._list.set_placeholder(placeholder);
 
         this._accountsMonitor = AccountsMonitor.getDefault();
-        let accountAddedId =
+        const accountAddedId =
             this._accountsMonitor.connect('account-added', (mon, account) => {
                 this._setAccountRowSensitive(account, false);
             });
-        let accountRemovedId =
+        const accountRemovedId =
             this._accountsMonitor.connect('account-removed', (mon, account) => {
                 this._setAccountRowSensitive(account, true);
             });
 
         this._networksManager = NetworksManager.getDefault();
-        let networksChangedId = this._networksManager.connect('changed',
+        const networksChangedId = this._networksManager.connect('changed',
             this._networksChanged.bind(this));
         this._networksChanged();
 
@@ -158,19 +158,19 @@ class ConnectionsList extends Gtk.ScrolledWindow {
 
         this._list.invalidate_filter();
 
-        let row = this._list.get_row_at_y(0);
+        const row = this._list.get_row_at_y(0);
         if (row)
             this._list.select_row(row);
     }
 
     activateSelected() {
-        let row = this._list.get_selected_row();
+        const row = this._list.get_selected_row();
         if (row)
             row.activate();
     }
 
     _filterRows(row) {
-        let matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
+        const matchTerms = this._networksManager.getNetworkMatchTerms(row.id);
         return this._filterTerms.every(term => {
             return matchTerms.some(s => s.includes(term));
         });
@@ -189,15 +189,15 @@ class ConnectionsList extends Gtk.ScrolledWindow {
             w.run_dispose();
         });
 
-        let {accounts} = this._accountsMonitor;
-        let usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);
+        const {accounts} = this._accountsMonitor;
+        const usedNetworks = accounts.filter(a => a.predefined).map(a => a.service);
 
         this._networksManager.networks.forEach(network => {
             if (this.favoritesOnly &&
                 !this._networksManager.getNetworkIsFavorite(network.id))
                 return;
 
-            let sensitive = !usedNetworks.includes(network.id);
+            const sensitive = !usedNetworks.includes(network.id);
             this._rows.set(network.id, new ConnectionRow({
                 id: network.id,
                 sensitive,
@@ -207,8 +207,8 @@ class ConnectionsList extends Gtk.ScrolledWindow {
     }
 
     async _onRowActivated(list, row) {
-        let name = this._networksManager.getNetworkName(row.id);
-        let req = new Tp.AccountRequest({
+        const name = this._networksManager.getNetworkName(row.id);
+        const req = new Tp.AccountRequest({
             account_manager: Tp.AccountManager.dup(),
             connection_manager: 'idle',
             protocol: 'irc',
@@ -217,9 +217,9 @@ class ConnectionsList extends Gtk.ScrolledWindow {
         req.set_service(row.id);
         req.set_enabled(true);
 
-        let details = this._networksManager.getNetworkDetails(row.id);
+        const details = this._networksManager.getNetworkDetails(row.id);
 
-        for (let prop in details)
+        for (const prop in details)
             req.set_parameter(prop, details[prop]);
 
         this.emit('account-selected');
@@ -243,14 +243,14 @@ class ConnectionsList extends Gtk.ScrolledWindow {
     }
 
     _sort(row1, row2) {
-        let isFavorite1 = this._networksManager.getNetworkIsFavorite(row1.id);
-        let isFavorite2 = this._networksManager.getNetworkIsFavorite(row2.id);
+        const isFavorite1 = this._networksManager.getNetworkIsFavorite(row1.id);
+        const isFavorite2 = this._networksManager.getNetworkIsFavorite(row2.id);
 
         if (isFavorite1 !== isFavorite2)
             return isFavorite1 ? -1 : 1;
 
-        let name1 = this._networksManager.getNetworkName(row1.id);
-        let name2 = this._networksManager.getNetworkName(row2.id);
+        const name1 = this._networksManager.getNetworkName(row1.id);
+        const name2 = this._networksManager.getNetworkName(row2.id);
 
         return name1.localeCompare(name2);
     }
@@ -288,7 +288,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
     constructor(params) {
         super(params);
 
-        let id = this._networksManager.connect('changed', () => {
+        const id = this._networksManager.connect('changed', () => {
             this.notify('has-service');
         });
 
@@ -342,13 +342,13 @@ class ConnectionDetails extends Adw.PreferencesPage {
     }
 
     _getParams() {
-        let nameText = this._nameRow.text.trim();
-        let serverText = this._serverRow.text.trim();
+        const nameText = this._nameRow.text.trim();
+        const serverText = this._serverRow.text.trim();
 
-        let serverRegEx = /(.*?)(?::(\d{1,5}))?$/;
-        let [, server, port] = serverText.match(serverRegEx);
+        const serverRegEx = /(.*?)(?::(\d{1,5}))?$/;
+        const [, server, port] = serverText.match(serverRegEx);
 
-        let params = {
+        const params = {
             name: nameText.length ? nameText : server,
             server,
             account: this._nickRow.text.trim(),
@@ -390,11 +390,11 @@ class ConnectionDetails extends Adw.PreferencesPage {
     }
 
     _populateFromAccount(account) {
-        let params = account.getConnectionParams();
+        const params = account.getConnectionParams();
 
-        let {port} = params;
+        const {port} = params;
         this._savedSSL = params['use-ssl'];
-        let defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
+        const defaultPort = this._savedSSL ? DEFAULT_SSL_PORT : DEFAULT_PORT;
         this._savedServer = params.server || '';
         this._savedNick = params.account || '';
         this._savedRealname = params.fullname || '';
@@ -413,7 +413,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
     }
 
     get can_confirm() {
-        let paramsChanged = this._nameRow.text !== this._savedName ||
+        const paramsChanged = this._nameRow.text !== this._savedName ||
                             this._serverRow.text !== this._savedServer ||
                             this._nickRow.text !== this._savedNick ||
                             this._realnameRow.text !== this._savedRealname ||
@@ -448,9 +448,9 @@ class ConnectionDetails extends Adw.PreferencesPage {
     }
 
     async _createAccount() {
-        let params = this._getParams();
-        let accountManager = Tp.AccountManager.dup();
-        let req = new Tp.AccountRequest({
+        const params = this._getParams();
+        const accountManager = Tp.AccountManager.dup();
+        const req = new Tp.AccountRequest({
             account_manager: accountManager,
             connection_manager: 'idle',
             protocol: 'irc',
@@ -458,9 +458,9 @@ class ConnectionDetails extends Adw.PreferencesPage {
         });
         req.set_enabled(true);
 
-        let [details] = this._detailsFromParams(params, {});
+        const [details] = this._detailsFromParams(params, {});
 
-        for (let prop in details)
+        for (const prop in details)
             req.set_parameter(prop, details[prop]);
 
         const account = await req.create_account_async();
@@ -472,11 +472,11 @@ class ConnectionDetails extends Adw.PreferencesPage {
     }
 
     async _updateAccount() {
-        let params = this._getParams();
-        let account = this._account;
-        let oldDetails = account.dup_parameters_vardict().deep_unpack();
-        let [details, removed] = this._detailsFromParams(params, oldDetails);
-        let vardict = GLib.Variant.new('a{sv}', details);
+        const params = this._getParams();
+        const account = this._account;
+        const oldDetails = account.dup_parameters_vardict().deep_unpack();
+        const [details, removed] = this._detailsFromParams(params, oldDetails);
+        const vardict = GLib.Variant.new('a{sv}', details);
 
         await Promise.all([
             account.update_parameters_vardict_async(vardict, removed),
@@ -485,7 +485,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
     }
 
     _detailsFromParams(params, oldDetails) {
-        let details = {
+        const details = {
             account: GLib.Variant.new('s', params.account),
             username: GLib.Variant.new('s', params.account),
             server: GLib.Variant.new('s', params.server),
@@ -498,7 +498,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
         if (params.use_ssl)
             details['use-ssl'] = GLib.Variant.new('b', params.use_ssl);
 
-        let removed = Object.keys(oldDetails).filter(p => details[p] === undefined);
+        const removed = Object.keys(oldDetails).filter(p => details[p] === undefined);
 
         return [details, removed];
     }
@@ -529,7 +529,7 @@ class ConnectionProperties extends Adw.Dialog {
             this.close();
         });
 
-        let id = account.connect('notify::connection-status',
+        const id = account.connect('notify::connection-status',
             this._syncErrorMessage.bind(this));
         this._syncErrorMessage(account);
 
@@ -537,8 +537,8 @@ class ConnectionProperties extends Adw.Dialog {
     }
 
     _syncErrorMessage(account) {
-        let status = account.connection_status;
-        let reason = account.connection_status_reason;
+        const status = account.connection_status;
+        const reason = account.connection_status_reason;
 
         this._details.setErrorHint(ErrorHint.NONE);
         this._view.reveal_bottom_bars = false;

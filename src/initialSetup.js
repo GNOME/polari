@@ -87,7 +87,7 @@ class InitialSetupWindow extends Gtk.Window {
         else
             this._contentStack.visible_child_name = 'offline-hint';
 
-        let isLastPage = page === SetupPage.ROOM;
+        const isLastPage = page === SetupPage.ROOM;
 
         this._prevButton.label = isLastPage ? _('_Back') : _('_Cancel');
         this._nextButton.label = isLastPage ? _('_Done') : _('_Next');
@@ -129,15 +129,15 @@ class InitialSetupWindow extends Gtk.Window {
     _joinRooms() {
         this.hide();
 
-        let toJoinRooms = this._serverRoomList.selectedRooms;
+        const toJoinRooms = this._serverRoomList.selectedRooms;
 
-        let accountPath = this._currentAccount.get_object_path();
+        const accountPath = this._currentAccount.get_object_path();
         toJoinRooms.forEach(room => {
             if (room[0] !== '#')
                 room = `#${room}`;
 
-            let app = Gio.Application.get_default();
-            let action = app.lookup_action('join-room');
+            const app = Gio.Application.get_default();
+            const action = app.lookup_action('join-room');
             action.activate(GLib.Variant.new('(ssb)', [accountPath, room, true]));
         });
     }

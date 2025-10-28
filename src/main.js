@@ -36,7 +36,7 @@ pkg.checkSymbol('Soup', '3.0');
 
 import Application from './application.js';
 
-let application = new Application();
+const application = new Application();
 if (GLib.getenv('POLARI_PERSIST'))
     application.hold();
 application.run([programInvocationName, ...programArgs]);

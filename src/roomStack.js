@@ -118,7 +118,7 @@ class RoomStack extends Gtk.Stack {
         const room = this.get_root().active_room;
         if (!room)
             return;
-        let sensitive = room && room.channel;
+        const sensitive = room && room.channel;
         this._rooms.get(room.id).inputSensitive = sensitive;
     }
 });
@@ -137,14 +137,14 @@ class MessageInfoBar extends Gtk.InfoBar {
     };
 
     constructor(params) {
-        let defaultParams = {
+        const defaultParams = {
             show_close_button: true,
             revealed: false,
             valign: Gtk.Align.START,
         };
         super(Object.assign(defaultParams, params));
 
-        let box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
+        const box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
         this.add_child(box);
 
         this._titleLabel = new Gtk.Label({
@@ -176,8 +176,8 @@ class MessageInfoBar extends Gtk.InfoBar {
 const SavePasswordConfirmationBar = GObject.registerClass(
 class SavePasswordConfirmationBar extends MessageInfoBar {
     constructor(room) {
-        let title = _('Should the password be saved?');
-        let subtitle = vprintf(
+        const title = _('Should the password be saved?');
+        const subtitle = vprintf(
             _('Identification will happen automatically the next time you connect to %s'),
             room.account.display_name);
         super({title, subtitle});
@@ -200,8 +200,8 @@ class SavePasswordConfirmationBar extends MessageInfoBar {
         if (response === Gtk.ResponseType.ACCEPT)
             return;
 
-        let app = Gio.Application.get_default();
-        let target = new GLib.Variant('o', this._room.account.object_path);
+        const app = Gio.Application.get_default();
+        const target = new GLib.Variant('o', this._room.account.object_path);
         app.lookup_action('discard-identify-password').activate(target);
     }
 

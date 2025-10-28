@@ -23,7 +23,7 @@ class SearchRow extends Gtk.ListBoxRow {
 
         for (let i = 0; i < ctx.length; i++) {
             const message = ctx[i];
-            let nick = new Gtk.Label({
+            const nick = new Gtk.Label({
                 label: message.senderNick,
                 halign: Gtk.Align.START,
                 valign: Gtk.Align.START,
@@ -33,7 +33,7 @@ class SearchRow extends Gtk.ListBoxRow {
             nick.add_css_class('caption-heading');
             this._messages.attach(nick, 0, i, 1, 1);
 
-            let msg = new Gtk.Label({
+            const msg = new Gtk.Label({
                 label: message.text,
                 halign: Gtk.Align.START,
                 valign: Gtk.Align.START,

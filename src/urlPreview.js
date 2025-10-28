@@ -60,7 +60,7 @@ class Thumbnailer {
         else
             data.resolve(data.filename);
 
-        let nextData = this._urlQueue.shift();
+        const nextData = this._urlQueue.shift();
         if (nextData)
             this._processData(nextData);
     }
@@ -73,7 +73,7 @@ class Thumbnailer {
     }
 
     async _generateThumbnail(data) {
-        let {filename, uri} = data;
+        const {filename, uri} = data;
         this._subProc = Gio.Subprocess.new(
             ['gjs', '--module', `${pkg.pkgdatadir}/thumbnailer.js`, uri, filename],
             Gio.SubprocessFlags.NONE);
@@ -98,7 +98,7 @@ class Thumbnailer {
     }
 
     _generateFilename(url) {
-        let checksum = GLib.Checksum.new(GLib.ChecksumType.MD5);
+        const checksum = GLib.Checksum.new(GLib.ChecksumType.MD5);
         checksum.update(url);
 
         return `${this._thumbnailsDir}${checksum.get_string()}.png`;

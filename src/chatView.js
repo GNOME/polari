@@ -138,34 +138,34 @@ class TextView extends Gtk.TextView {
     vfunc_snapshot(snapshot) {
         super.vfunc_snapshot(snapshot);
 
-        let mark = this.buffer.get_mark('indicator-line');
+        const mark = this.buffer.get_mark('indicator-line');
         if (!mark)
             return;
 
-        let iter = this.buffer.get_iter_at_mark(mark);
-        let location = this.get_iter_location(iter);
+        const iter = this.buffer.get_iter_at_mark(mark);
+        const location = this.get_iter_location(iter);
         let [, y] = this.buffer_to_window_coords(Gtk.TextWindowType.TEXT,
             location.x, location.y);
 
-        let tags = iter.get_tags();
-        let pixelsAbove = tags.reduce((prev, current) => {
+        const tags = iter.get_tags();
+        const pixelsAbove = tags.reduce((prev, current) => {
             return Math.max(prev, current.pixels_above_lines);
         }, this.get_pixels_above_lines());
-        let pixelsBelow = tags.reduce((prev, current) => {
+        const pixelsBelow = tags.reduce((prev, current) => {
             return Math.max(prev, current.pixels_below_lines);
         }, this.get_pixels_below_lines());
 
-        let lineSpace = Math.floor((pixelsAbove + pixelsBelow) / 2);
+        const lineSpace = Math.floor((pixelsAbove + pixelsBelow) / 2);
         y = y - lineSpace + 0.5;
 
-        let width = this.get_allocated_width() - 2 * MARGIN;
+        const width = this.get_allocated_width() - 2 * MARGIN;
 
-        let [, extents] = this._layout.get_pixel_extents();
-        let layoutWidth = extents.width + 0.5;
-        let layoutX = extents.x + Math.floor((width - extents.width) / 2) + 0.5;
-        let layoutHeight = extents.height;
-        let baseline = Math.floor(this._layout.get_baseline() / Pango.SCALE);
-        let layoutY = y - baseline + Math.floor((layoutHeight - baseline) / 2) + 0.5;
+        const [, extents] = this._layout.get_pixel_extents();
+        const layoutWidth = extents.width + 0.5;
+        const layoutX = extents.x + Math.floor((width - extents.width) / 2) + 0.5;
+        const layoutHeight = extents.height;
+        const baseline = Math.floor(this._layout.get_baseline() / Pango.SCALE);
+        const layoutY = y - baseline + Math.floor((layoutHeight - baseline) / 2) + 0.5;
 
         snapshot.save();
 
@@ -244,7 +244,7 @@ class HoverFilterTag extends ButtonTag {
         if (!this._filteredTag)
             return;
 
-        let color = this._filteredTag.foreground_rgba;
+        const color = this._filteredTag.foreground_rgba;
         if (this.hover)
             color.alpha *= this._hoverOpacity;
         this.foreground_rgba = color;
@@ -418,7 +418,7 @@ class ChatView extends Gtk.ScrolledWindow {
         this._hoveredLinkColor = new Gdk.RGBA();
         this._statusHeaderHoverColor = new Gdk.RGBA();
 
-        let statusMonitor = UserStatusMonitor.getDefault();
+        const statusMonitor = UserStatusMonitor.getDefault();
         this._userTracker = statusMonitor.getUserTrackerForAccount(room.account);
 
         this._room.account.connect('notify::nickname', () => {
@@ -442,7 +442,7 @@ class ChatView extends Gtk.ScrolledWindow {
         this._channelSignals = [];
         this._channel = null;
 
-        let roomSignals = [{
+        const roomSignals = [{
             name: 'notify::channel',
             handler: this._onChannelChanged.bind(this),
         }, {
@@ -475,9 +475,9 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _createTags() {
-        let buffer = this._view.get_buffer();
-        let tagTable = buffer.get_tag_table();
-        let tags = [{
+        const buffer = this._view.get_buffer();
+        const tagTable = buffer.get_tag_table();
+        const tags = [{
             name: 'nick',
             left_margin: MARGIN,
             weight: Pango.Weight.BOLD,
@@ -535,9 +535,9 @@ class ChatView extends Gtk.ScrolledWindow {
         this._hoveredLinkColor = activeHoverColor;
         this._statusHeaderHoverColor = inactiveHoverColor;
 
-        let buffer = this._view.get_buffer();
-        let tagTable = buffer.get_tag_table();
-        let tags = [{
+        const buffer = this._view.get_buffer();
+        const tagTable = buffer.get_tag_table();
+        const tags = [{
             name: 'status',
             foreground_rgba: inactiveColor,
         }, {
@@ -548,8 +548,8 @@ class ChatView extends Gtk.ScrolledWindow {
             foreground_rgba: activeColor,
         }];
         tags.forEach(tagProps => {
-            let tag = tagTable.lookup(tagProps.name);
-            for (let prop in tagProps) {
+            const tag = tagTable.lookup(tagProps.name);
+            for (const prop in tagProps) {
                 if (prop === 'name')
                     continue;
                 tag[prop] = tagProps[prop];
@@ -560,12 +560,12 @@ class ChatView extends Gtk.ScrolledWindow {
             if (!tag.name)
                 return;
 
-            let nickname = this._getNickFromTagName(tag.name);
+            const nickname = this._getNickFromTagName(tag.name);
 
             if (!nickname)
                 return;
 
-            let status = this._userTracker.getNickRoomStatus(nickname, this._room);
+            const status = this._userTracker.getNickRoomStatus(nickname, this._room);
             this._updateNickTag(tag, status);
         });
     }
@@ -626,10 +626,10 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _appendInitialPending(logs) {
-        let pending = this._initialPending.splice(0);
-        let firstPending = pending[0];
+        const pending = this._initialPending.splice(0);
+        const firstPending = pending[0];
 
-        let numLogs = logs.length;
+        const numLogs = logs.length;
         let pos;
         for (pos = numLogs - pending.length; pos < numLogs; pos++) {
             if (logs[pos].get_sender() === firstPending.get_sender() &&
@@ -644,13 +644,13 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _insertLogs(pending, insertDate) {
-        let numInitialPending = this._initialPending.length;
+        const numInitialPending = this._initialPending.length;
         if (numInitialPending)
             this._appendInitialPending(pending);
 
-        let indicatorIndex = pending.length - numInitialPending;
+        const indicatorIndex = pending.length - numInitialPending;
 
-        let state = {lastNick: null, lastTimestamp: 0};
+        const state = {lastNick: null, lastTimestamp: 0};
         const [iter, startLimit, endLimit] = this._getLogInsertionPoint(insertDate);
 
         for (let i = 0; i < pending.length; i++) {
@@ -703,7 +703,7 @@ class ChatView extends Gtk.ScrolledWindow {
                 Gtk.MovementStep.BUFFER_ENDS, 1, false);
         } else {
             this._autoscroll = false;
-            let mark = [...this._pending.values()].shift();
+            const mark = [...this._pending.values()].shift();
             this._view.scroll_mark_onscreen(mark);
         }
     }
@@ -787,14 +787,14 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _pendingMessageRemoved(channel, message) {
-        let [id, valid] = message.get_pending_message_id();
+        const [id, valid] = message.get_pending_message_id();
         if (!valid || !this._pending.has(id))
             return;
         this._removePendingMark(id);
     }
 
     _removePendingMark(id) {
-        let mark = this._pending.get(id);
+        const mark = this._pending.get(id);
         // Re-enable auto-scrolling if this is the most recent message
         if (this._view.buffer.get_iter_at_mark(mark).is_end())
             this._autoscroll = true;
@@ -842,8 +842,8 @@ class ChatView extends Gtk.ScrolledWindow {
             t.hover = hoveredButtonTags.includes(t);
         });
 
-        let isHovering = hoveredButtonTags.length > 0;
-        let wasHovering = this._hoveredButtonTags.length > 0;
+        const isHovering = hoveredButtonTags.length > 0;
+        const wasHovering = this._hoveredButtonTags.length > 0;
 
         if (isHovering !== wasHovering)
             this._view.set_cursor_from_name(isHovering ? 'pointer' : 'text');
@@ -878,25 +878,25 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _showLoadingIndicator() {
-        let indicator = new Gtk.Image({
+        const indicator = new Gtk.Image({
             icon_name: 'content-loading-symbolic',
         });
         indicator.add_css_class('dim-label');
 
-        let {buffer} = this._view;
-        let iter = buffer.get_start_iter();
-        let anchor = buffer.create_child_anchor(iter);
+        const {buffer} = this._view;
+        const iter = buffer.get_start_iter();
+        const anchor = buffer.create_child_anchor(iter);
         this._view.add_child_at_anchor(indicator, anchor);
         buffer.insert(iter, '\n', -1);
 
-        let start = buffer.get_start_iter();
+        const start = buffer.get_start_iter();
         buffer.remove_all_tags(start, iter);
         buffer.apply_tag(this._lookupTag('loading'), start, iter);
     }
 
     _hideLoadingIndicator() {
-        let {buffer} = this._view;
-        let iter = buffer.get_start_iter();
+        const {buffer} = this._view;
+        const iter = buffer.get_start_iter();
 
         if (!iter.get_child_anchor())
             return;
@@ -906,13 +906,13 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _setIndicatorMark(iter) {
-        let lineStart = iter.copy();
+        const lineStart = iter.copy();
         lineStart.set_line_offset(0);
 
-        let {buffer} = this._view;
-        let mark = buffer.get_mark('indicator-line');
+        const {buffer} = this._view;
+        const mark = buffer.get_mark('indicator-line');
         if (mark) {
-            let [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
+            const [start, end] = this._getLineIters(buffer.get_iter_at_mark(mark));
             buffer.remove_tag(this._lookupTag('indicator-line'), start, end);
 
             buffer.move_mark(mark, lineStart);
@@ -920,7 +920,7 @@ class ChatView extends Gtk.ScrolledWindow {
             buffer.create_mark('indicator-line', lineStart, true);
         }
 
-        let [start, end] = this._getLineIters(lineStart);
+        const [start, end] = this._getLineIters(lineStart);
         buffer.apply_tag(this._lookupTag('indicator-line'), start, end);
 
         this._needsIndicator = false;
@@ -932,21 +932,21 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._needsIndicator = true;
 
-        let pending = this._channel.dup_pending_messages();
+        const pending = this._channel.dup_pending_messages();
         if (pending.length === 0)
             return;
 
-        let rect = this._view.get_visible_rect();
-        let buffer = this._view.get_buffer();
+        const rect = this._view.get_visible_rect();
+        const buffer = this._view.get_buffer();
         for (let i = 0; i < pending.length; i++) {
-            let [id] = pending[i].get_pending_message_id();
-            let mark = this._pending.get(id);
+            const [id] = pending[i].get_pending_message_id();
+            const mark = this._pending.get(id);
             if (!mark) {
                 this._channel.ack_message_async(pending[i], null);
                 continue;
             }
-            let iter = buffer.get_iter_at_mark(mark);
-            let iterRect = this._view.get_iter_location(iter);
+            const iter = buffer.get_iter_at_mark(mark);
+            const iterRect = this._view.get_iter_location(iter);
             if (rect.y <= iterRect.y && rect.y + rect.height > iterRect.y)
                 this._channel.ack_message_async(pending[i], null);
         }
@@ -968,7 +968,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         // Pending IDs are invalidated by channel changes, so
         // remove marks to not get stuck on highlighted messages
-        for (let id of this._pending.keys())
+        for (const id of this._pending.keys())
             this._removePendingMark(id);
 
         if (this._channel) {
@@ -978,7 +978,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._channel = this._room.channel;
 
-        let nick = this._channel
+        const nick = this._channel
             ? this._channel.connection.self_contact.alias
             : this._room.account.nickname;
         this._updateMaxNickChars(nick.length);
@@ -988,7 +988,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._joinTime = GLib.DateTime.new_now_utc().to_unix();
 
-        let channelSignals = [{
+        const channelSignals = [{
             name: 'message-received',
             handler: this._onMessageReceived.bind(this),
         }, {
@@ -1002,12 +1002,12 @@ class ChatView extends Gtk.ScrolledWindow {
             this._channelSignals.push(this._channel.connect(signal.name, signal.handler));
         });
 
-        let pending = this._channel.dup_pending_messages();
+        const pending = this._channel.dup_pending_messages();
         this._initialPending = pending.map(p => this._createMessage(p));
     }
 
     _onMemberRenamed(room, oldMember, newMember) {
-        let text = vprintf(_('%s is now known as %s'), oldMember.alias, newMember.alias);
+        const text = vprintf(_('%s is now known as %s'), oldMember.alias, newMember.alias);
         this._insertStatus(text, oldMember.alias, 'renamed');
     }
 
@@ -1019,23 +1019,23 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _onMemberKicked(room, member, actor) {
-        let [kicked, kicker] = [member.alias, actor ? actor.alias : null];
-        let msg = kicker
+        const [kicked, kicker] = [member.alias, actor ? actor.alias : null];
+        const msg = kicker
             ? vprintf(_('%s has been kicked by %s'), kicked, kicker)
             : vprintf(_('%s has been kicked'), kicked);
         this._insertStatus(msg, kicked, 'left');
     }
 
     _onMemberBanned(room, member, actor) {
-        let [banned, banner] = [member.alias, actor ? actor.alias : null];
-        let msg = banner
+        const [banned, banner] = [member.alias, actor ? actor.alias : null];
+        const msg = banner
             ? vprintf(_('%s has been banned by %s'), banned, banner)
             : vprintf(_('%s has been banned'), banned);
         this._insertStatus(msg, banned, 'left');
     }
 
     _onMemberJoined(room, member) {
-        let text = vprintf(_('%s joined'), member.alias);
+        const text = vprintf(_('%s joined'), member.alias);
         this._insertStatus(text, member.alias, 'joined');
     }
 
@@ -1051,8 +1051,8 @@ class ChatView extends Gtk.ScrolledWindow {
     _onMessageReceived(channel, tpMessage) {
         this._insertTpMessage(tpMessage);
         this._resetStatusCompressed();
-        let nick = tpMessage.sender.alias;
-        let nickTag = this._lookupTag(`nick${nick}`);
+        const nick = tpMessage.sender.alias;
+        const nickTag = this._lookupTag(`nick${nick}`);
         if (!nickTag)
             return;
         nickTag._lastActivity = GLib.get_monotonic_time();
@@ -1064,7 +1064,7 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _resetStatusCompressed() {
-        let markStart = this._view.buffer.get_mark('idle-status-start');
+        const markStart = this._view.buffer.get_mark('idle-status-start');
         if (!markStart)
             return;
 
@@ -1074,22 +1074,22 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _shouldShowStatus(nick) {
-        let nickTag = this._lookupTag(`nick${nick}`);
+        const nickTag = this._lookupTag(`nick${nick}`);
 
         if (!nickTag || !nickTag._lastActivity)
             return false;
 
-        let time = GLib.get_monotonic_time();
+        const time = GLib.get_monotonic_time();
         return (time - nickTag._lastActivity) / (1000 * 1000) < INACTIVITY_THRESHOLD;
     }
 
     _updateStatusHeader() {
-        let {buffer} = this._view;
+        const {buffer} = this._view;
         let headerMark = buffer.get_mark('idle-status-start');
 
-        let headerTagName = `status-compressed${this._state.lastStatusGroup}`;
-        let headerArrowTagName = `status-arrow-compressed${this._state.lastStatusGroup}`;
-        let groupTagName = `status${this._state.lastStatusGroup}`;
+        const headerTagName = `status-compressed${this._state.lastStatusGroup}`;
+        const headerArrowTagName = `status-arrow-compressed${this._state.lastStatusGroup}`;
+        const groupTagName = `status${this._state.lastStatusGroup}`;
 
         let headerTag, headerArrowTag, groupTag;
         if (!headerMark) {
@@ -1121,8 +1121,8 @@ class ChatView extends Gtk.ScrolledWindow {
             headerArrowTag = this._lookupTag(headerArrowTagName);
             groupTag = this._lookupTag(groupTagName);
 
-            let start = buffer.get_iter_at_mark(headerMark);
-            let end = start.copy();
+            const start = buffer.get_iter_at_mark(headerMark);
+            const end = start.copy();
             end.forward_to_line_end();
             buffer.delete(start, end);
         }
@@ -1133,7 +1133,7 @@ class ChatView extends Gtk.ScrolledWindow {
             groupTag.invisible = true;
         }
 
-        let stats = [];
+        const stats = [];
         if (this._statusCount.joined > 0) {
             stats.push(vprintf(
                 ngettext(
@@ -1149,10 +1149,10 @@ class ChatView extends Gtk.ScrolledWindow {
                 this._statusCount.left));
         }
         // TODO: How do we update the arrow direction when text direction change?
-        let iter = buffer.get_iter_at_mark(headerMark);
-        let tags = [this._lookupTag('gap'), this._lookupTag('status'), headerTag];
-        let headerText = stats.join(', ');
-        let baseDir = Pango.find_base_dir(headerText, -1);
+        const iter = buffer.get_iter_at_mark(headerMark);
+        const tags = [this._lookupTag('gap'), this._lookupTag('status'), headerTag];
+        const headerText = stats.join(', ');
+        const baseDir = Pango.find_base_dir(headerText, -1);
         this._insertWithTags(iter, `${headerText}\u00A0`, tags);
         this._insertWithTags(iter,
             baseDir === Pango.Direction.LTR ? '\u25B6' : '\u25C0',
@@ -1161,17 +1161,17 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _insertStatus(text, member, type) {
-        let time = GLib.DateTime.new_now_utc().to_unix();
+        const time = GLib.DateTime.new_now_utc().to_unix();
         if (time - this._joinTime < IGNORE_STATUS_TIME)
             return;
 
-        let grouped = time - this._state.lastTimestamp > INACTIVITY_THRESHOLD;
+        const grouped = time - this._state.lastTimestamp > INACTIVITY_THRESHOLD;
         if (!grouped && !this._shouldShowStatus(member))
             return;
 
         this._state.lastNick = null;
 
-        let tags = [this._lookupTag('status')];
+        const tags = [this._lookupTag('status')];
         let groupTag = null;
         if (grouped) {
             if (this._statusCount[type] !== undefined) {
@@ -1187,21 +1187,21 @@ class ChatView extends Gtk.ScrolledWindow {
         }
 
         this._ensureNewLine();
-        let iter = this._view.buffer.get_end_iter();
+        const iter = this._view.buffer.get_end_iter();
         this._insertWithTags(iter, text, tags);
     }
 
     _formatTimestamp(timestamp) {
-        let date = GLib.DateTime.new_from_unix_local(timestamp);
+        const date = GLib.DateTime.new_from_unix_local(timestamp);
         return Utils.formatDateTime(date);
     }
 
     _insertTpMessage(tpMessage) {
-        let message = this._createMessage(tpMessage);
+        const message = this._createMessage(tpMessage);
 
         this._ensureNewLine();
 
-        let iter = this._view.buffer.get_end_iter();
+        const iter = this._view.buffer.get_end_iter();
         this._insertMessage(iter, message, this._state);
 
         if (message.is_self() /* outgoing */ ||
@@ -1220,7 +1220,7 @@ class ChatView extends Gtk.ScrolledWindow {
         const timestamp = message.get_time().to_unix();
 
         if (timestamp - TIMESTAMP_INTERVAL > state.lastTimestamp) {
-            let tags = [this._lookupTag('timestamp')];
+            const tags = [this._lookupTag('timestamp')];
             if (needsGap)
                 tags.push(this._lookupTag('gap'));
             needsGap = false;
@@ -1231,7 +1231,7 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._updateMaxNickChars(nick.length);
 
-        let tags = [];
+        const tags = [];
         if (isAction) {
             text = `${nick} ${text}`;
             state.lastNick = null;
@@ -1240,23 +1240,23 @@ class ChatView extends Gtk.ScrolledWindow {
                 tags.push(this._lookupTag('gap'));
         } else {
             if (state.lastNick !== nick) {
-                let nickTags = [this._lookupTag('nick')];
-                let nickTagName = this._getNickTagName(nick);
+                const nickTags = [this._lookupTag('nick')];
+                const nickTagName = this._getNickTagName(nick);
                 let nickTag = this._lookupTag(nickTagName);
-                let buffer = this._view.get_buffer();
+                const buffer = this._view.get_buffer();
 
                 if (!nickTag) {
                     nickTag = new ButtonTag({name: nickTagName});
                     nickTag.connect('clicked', this._onNickTagClicked.bind(this));
 
-                    let status = this._userTracker.getNickRoomStatus(nick, this._room);
+                    const status = this._userTracker.getNickRoomStatus(nick, this._room);
                     this._updateNickTag(nickTag, status);
 
                     buffer.get_tag_table().add(nickTag);
                 }
                 nickTags.push(nickTag);
 
-                let hoverTag = new HoverFilterTag({
+                const hoverTag = new HoverFilterTag({
                     filtered_tag: nickTag,
                     hover_opacity: 0.8,
                 });
@@ -1276,27 +1276,27 @@ class ChatView extends Gtk.ScrolledWindow {
         if (highlight && this._room.type !== Tp.HandleType.CONTACT)
             tags.push(this._lookupTag('highlight'));
 
-        let params = this._room.account.dup_parameters_vardict().deep_unpack();
-        let server = params.server.deep_unpack();
+        const params = this._room.account.dup_parameters_vardict().deep_unpack();
+        const server = params.server.deep_unpack();
 
         // mask identify passwords in private chats
         if (this._room.type === Tp.HandleType.CONTACT) {
-            let [isIdentify, command_, username_, password] =
+            const [isIdentify, command_, username_, password] =
                 Polari.util_match_identify_message(text);
 
             if (isIdentify)
                 text = text.replace(password, p => p.replace(/./g, '●'));
         }
 
-        let channels = Utils.findChannels(text, server);
-        let urls = Utils.findUrls(text).concat(channels).sort((u1, u2) => u1.pos - u2.pos);
-        let previews = [];
+        const channels = Utils.findChannels(text, server);
+        const urls = Utils.findUrls(text).concat(channels).sort((u1, u2) => u1.pos - u2.pos);
+        const previews = [];
         let pos = 0;
         for (let i = 0; i < urls.length; i++) {
-            let url = urls[i];
+            const url = urls[i];
             this._insertWithTags(iter, text.substr(pos, url.pos - pos), tags);
 
-            let tag = this._createUrlTag(url.url);
+            const tag = this._createUrlTag(url.url);
             this._view.get_buffer().tag_table.add(tag);
 
             this._insertWithTags(iter,
@@ -1336,8 +1336,8 @@ class ChatView extends Gtk.ScrolledWindow {
             });
         }
 
-        let nickTagName = this._getNickTagName(baseNick);
-        let nickTag = this._lookupTag(nickTagName);
+        const nickTagName = this._getNickTagName(baseNick);
+        const nickTag = this._lookupTag(nickTagName);
 
         if (!nickTag)
             return;
@@ -1357,7 +1357,7 @@ class ChatView extends Gtk.ScrolledWindow {
         const [x, y] = view.window_to_buffer_coords(Gtk.TextWindowType.WIDGET,
             eventX, eventY);
         const [inside_, start] = view.get_iter_at_location(x, y);
-        let end = start.copy();
+        const end = start.copy();
 
         if (!start.starts_tag(tag))
             start.backward_to_tag_toggle(tag);
@@ -1365,8 +1365,8 @@ class ChatView extends Gtk.ScrolledWindow {
         if (!end.ends_tag(tag))
             end.forward_to_tag_toggle(tag);
 
-        let rect1 = view.get_iter_location(start);
-        let rect2 = view.get_iter_location(end);
+        const rect1 = view.get_iter_location(start);
+        const rect2 = view.get_iter_location(end);
 
         [rect1.y, rect1.height] = view.get_line_yrange(start);
 
@@ -1374,7 +1374,7 @@ class ChatView extends Gtk.ScrolledWindow {
         [rect2.x, rect2.y] = view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect2.x, rect2.y);
         rect1.width = rect2.x - rect1.x;
 
-        let actualNickName = view.get_buffer().get_slice(start, end, false);
+        const actualNickName = view.get_buffer().get_slice(start, end, false);
 
         if (!tag._popover) {
             tag._popover = new UserPopover({
@@ -1391,7 +1391,7 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _createUrlTag(url) {
-        let tag = new ButtonTag();
+        const tag = new ButtonTag();
         tag.connect('notify::hover', () => {
             tag.foreground_rgba = tag.hover ? this._hoveredLinkColor : null;
         });
@@ -1406,13 +1406,13 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _ensureNewLine() {
-        let buffer = this._view.get_buffer();
-        let iter = buffer.get_end_iter();
-        let tags = [];
-        let groupTag = this._lookupTag(`status${this._state.lastStatusGroup}`);
+        const buffer = this._view.get_buffer();
+        const iter = buffer.get_end_iter();
+        const tags = [];
+        const groupTag = this._lookupTag(`status${this._state.lastStatusGroup}`);
         if (groupTag && iter.ends_tag(groupTag))
             tags.push(groupTag);
-        let headerTag = this._lookupTag(`status-compressed${this._state.lastStatusGroup}`);
+        const headerTag = this._lookupTag(`status-compressed${this._state.lastStatusGroup}`);
         if (headerTag && iter.ends_tag(headerTag))
             tags.push(headerTag);
         if (iter.get_line_offset() !== 0)
@@ -1420,11 +1420,11 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _getLineIters(iter) {
-        let start = iter.copy();
+        const start = iter.copy();
         start.backward_line();
         start.forward_to_line_end();
 
-        let end = iter.copy();
+        const end = iter.copy();
         end.forward_to_line_end();
 
         return [start, end];
@@ -1439,12 +1439,12 @@ class ChatView extends Gtk.ScrolledWindow {
     }
 
     _insertWithTags(iter, text, tags) {
-        let buffer = this._view.get_buffer();
-        let offset = iter.get_offset();
+        const buffer = this._view.get_buffer();
+        const offset = iter.get_offset();
 
         buffer.insert(iter, text, -1);
 
-        let start = buffer.get_iter_at_offset(offset);
+        const start = buffer.get_iter_at_offset(offset);
 
         buffer.remove_all_tags(start, iter);
         for (let i = 0; i < tags.length; i++)

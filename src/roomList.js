@@ -76,7 +76,7 @@ class RoomRow extends Gtk.ListBoxRow {
             this._roomLabel, 'label',
             GObject.BindingFlags.SYNC_CREATE);
 
-        let channelChangedId = room.connect('notify::channel',
+        const channelChangedId = room.connect('notify::channel',
             this._onChannelChanged.bind(this));
 
         let connectionStatusChangedId = 0;
@@ -136,28 +136,28 @@ class RoomRow extends Gtk.ListBoxRow {
         if (!this._room.channel)
             return [0, 0];
 
-        let pending = this._room.channel.dup_pending_messages();
-        let nPending = pending.length;
+        const pending = this._room.channel.dup_pending_messages();
+        const nPending = pending.length;
 
         if (this.muted)
             return [nPending, 0];
 
-        let highlights = pending.filter(m => {
-            let [text] = m.to_text();
+        const highlights = pending.filter(m => {
+            const [text] = m.to_text();
             return this._room.should_highlight_message(m.sender.alias, text);
         });
         return [nPending, highlights.length];
     }
 
     _getConnectionStatus() {
-        let presence = this.account.requested_presence_type;
+        const presence = this.account.requested_presence_type;
         if (presence === Tp.ConnectionPresenceType.OFFLINE)
             return Tp.ConnectionStatus.DISCONNECTED;
         return this.account.connection_status;
     }
 
     _onConnectionStatusChanged() {
-        let status = this._getConnectionStatus();
+        const status = this._getConnectionStatus();
         // Show loading indicator if joining a room takes more than 3 seconds
         if (status === Tp.ConnectionStatus.CONNECTED && !this._room.channel) {
             this._connectingTimeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => {
@@ -194,7 +194,7 @@ class RoomRow extends Gtk.ListBoxRow {
             return;
         }
 
-        let [nPending, nHighlights] = this._getNumPending();
+        const [nPending, nHighlights] = this._getNumPending();
 
         this._counter.label = nHighlights.toString();
         this._counter.opacity = nHighlights > 0 ? 1. : 0.;
@@ -213,7 +213,7 @@ class RoomRow extends Gtk.ListBoxRow {
         this._clearConnectingTimeout();
         this._eventStack.visible_child_name = 'messages';
 
-        for (let signal of ['message-received', 'pending-message-removed']) {
+        for (const signal of ['message-received', 'pending-message-removed']) {
             this._channelSignals.push(
                 this._room.channel.connect(signal,
                     this._updateCounter.bind(this)));
@@ -402,7 +402,7 @@ class RoomListHeader extends Gtk.Widget {
             this._previousFocus?.grab_focus();
         });
 
-        let target = new GLib.Variant('o', this._account.get_object_path());
+        const target = new GLib.Variant('o', this._account.get_object_path());
         this._popoverConnect.action_target = target;
         this._popoverConnect.action_name = 'app.connect-account';
         this._popoverDisconnect.action_target = target;
@@ -415,26 +415,26 @@ class RoomListHeader extends Gtk.Widget {
         this._popoverProperties.action_name = 'app.edit-connection';
 
         this._popoverPassword.connect('activate', () => {
-            let action = this._app.lookup_action('authenticate-account');
-            let password = this._popoverPassword.text;
-            let accountPath = this._account.get_object_path();
-            let param = new GLib.Variant('(os)', [accountPath, password]);
+            const action = this._app.lookup_action('authenticate-account');
+            const password = this._popoverPassword.text;
+            const accountPath = this._account.get_object_path();
+            const param = new GLib.Variant('(os)', [accountPath, password]);
             action.activate(param);
             this.popover.hide();
         });
 
         this._spinnerActivationTime = 0;
 
-        let displayNameChangedId =
+        const displayNameChangedId =
             this._account.connect('notify::display-name',
                 this._onDisplayNameChanged.bind(this));
         this._onDisplayNameChanged();
 
-        let connectionStatusChangedId =
+        const connectionStatusChangedId =
             this._account.connect('notify::connection-status',
                 this._onConnectionStatusChanged.bind(this));
 
-        let presenceChangedId =
+        const presenceChangedId =
             this._account.connect('notify::requested-presence-type',
                 this._onRequestedPresenceChanged.bind(this));
         this._onRequestedPresenceChanged();
@@ -478,25 +478,25 @@ class RoomListHeader extends Gtk.Widget {
         if (parent)
             parent.invalidate_sort();
 
-        let accessibleName = vprintf(_('Network %s has an error'), this._account.display_name);
+        const accessibleName = vprintf(_('Network %s has an error'), this._account.display_name);
         this.update_property(
             [Gtk.AccessibleProperty.LABEL], [accessibleName]);
     }
 
     _getConnectionStatus() {
-        let presence = this._account.requested_presence_type;
+        const presence = this._account.requested_presence_type;
         if (presence === Tp.ConnectionPresenceType.OFFLINE)
             return Tp.ConnectionStatus.DISCONNECTED;
         return this._account.connection_status;
     }
 
     _onConnectionStatusChanged() {
-        let status = this._getConnectionStatus();
-        let reason = this._account.connection_status_reason;
-        let authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
-        let isError = status === Tp.ConnectionStatus.DISCONNECTED &&
+        const status = this._getConnectionStatus();
+        const reason = this._account.connection_status_reason;
+        const authError = Tp.error_get_dbus_name(Tp.Error.AUTHENTICATION_FAILED);
+        const isError = status === Tp.ConnectionStatus.DISCONNECTED &&
                       reason !== Tp.ConnectionStatusReason.REQUESTED;
-        let isAuth = isError && this._account.connection_error === authError;
+        const isAuth = isError && this._account.connection_error === authError;
 
         let child = 'default';
         if (status === Tp.ConnectionStatus.CONNECTING)
@@ -507,7 +507,7 @@ class RoomListHeader extends Gtk.Widget {
             child = 'disconnected';
 
         if (isError && this._spinner.get_mapped()) {
-            let spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
+            const spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
             if (spinnerTime < MIN_SPINNER_TIME) {
                 GLib.timeout_add(GLib.PRIORITY_DEFAULT, (MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
                     this._onConnectionStatusChanged();
@@ -528,13 +528,13 @@ class RoomListHeader extends Gtk.Widget {
             this._popoverStatus.add_css_class('caption');
             this._popoverTitle.remove_css_class('heading');
 
-            let params = this._account.dup_parameters_vardict().deep_unpack();
-            let server = params['server'].deep_unpack();
-            let accountName = this._account.display_name;
+            const params = this._account.dup_parameters_vardict().deep_unpack();
+            const server = params['server'].deep_unpack();
+            const accountName = this._account.display_name;
 
             /* Translators: This is an account name followed by a
                server address, e.g. "Libera (irc.libera.chat)" */
-            let fullTitle = vprintf(_('%s (%s)'), accountName, server);
+            const fullTitle = vprintf(_('%s (%s)'), accountName, server);
             this._popoverTitle.label = accountName === server ? accountName : fullTitle;
             this._popoverStatus.label = this._getStatusLabel();
         } else {
@@ -548,8 +548,8 @@ class RoomListHeader extends Gtk.Widget {
     }
 
     _onRequestedPresenceChanged() {
-        let presence = this._account.requested_presence_type;
-        let offline = presence === Tp.ConnectionPresenceType.OFFLINE;
+        const presence = this._account.requested_presence_type;
+        const offline = presence === Tp.ConnectionPresenceType.OFFLINE;
         this._popoverConnect.visible = offline;
         this._popoverDisconnect.visible = !offline;
         this._popoverReconnect.visible = !offline;
@@ -643,8 +643,8 @@ class RoomList extends Gtk.ListBox {
 
         this._logFinder = new Logger.LogFinder(this._roomManager);
 
-        let app = Gio.Application.get_default();
-        let actions = [{
+        const app = Gio.Application.get_default();
+        const actions = [{
             name: 'next-room',
             handler: () => this._moveSelection(Gtk.DirectionType.DOWN),
         }, {
@@ -656,7 +656,7 @@ class RoomList extends Gtk.ListBox {
         }, {
             name: 'last-room',
             handler: () => {
-                let nRows = this._roomManager.roomCount;
+                const nRows = this._roomManager.roomCount;
                 this._selectRoomAtIndex(nRows - 1);
             },
         }, {
@@ -702,13 +702,13 @@ class RoomList extends Gtk.ListBox {
     }
 
     _rowToRoomIndex(index) {
-        let placeholders = [...this._placeholders.values()];
-        let nBefore = placeholders.filter(p => p.get_index() < index).length;
+        const placeholders = [...this._placeholders.values()];
+        const nBefore = placeholders.filter(p => p.get_index() < index).length;
         return index - nBefore;
     }
 
     _roomToRowIndex(index) {
-        let roomRows = [...this].filter(r => r instanceof RoomRow);
+        const roomRows = [...this].filter(r => r instanceof RoomRow);
         return index >= 0 && index < roomRows.length ? roomRows[index].get_index() : -1;
     }
 
@@ -717,7 +717,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _selectRoomAtIndex(index) {
-        let row = this._getRoomRowAtIndex(index);
+        const row = this._getRoomRowAtIndex(index);
         if (row)
             this.select_row(row);
     }
@@ -727,11 +727,11 @@ class RoomList extends Gtk.ListBox {
     }
 
     _moveSelectionFull(direction, testFunction) {
-        let current = this.get_selected_row();
+        const current = this.get_selected_row();
         if (!current)
             return;
 
-        let inc = direction === Gtk.DirectionType.UP ? -1 : 1;
+        const inc = direction === Gtk.DirectionType.UP ? -1 : 1;
         let index = this._rowToRoomIndex(current.get_index());
 
         let row = current;
@@ -750,20 +750,20 @@ class RoomList extends Gtk.ListBox {
             return;
 
         const toplevel = this.get_root();
-        let current = this._roomRows.get(toplevel.active_room.id);
+        const current = this._roomRows.get(toplevel.active_room.id);
 
         if (current !== row)
             return;
 
-        let selected = this.get_selected_row();
+        const selected = this.get_selected_row();
         let newActive = null;
 
-        let index = this._rowToRoomIndex(row.get_index());
+        const index = this._rowToRoomIndex(row.get_index());
         this.select_row(row);
         this._moveSelection(index === 0
             ? Gtk.DirectionType.DOWN : Gtk.DirectionType.UP);
 
-        let newSelected = this.get_selected_row();
+        const newSelected = this.get_selected_row();
         if (newSelected !== row)
             newActive = newSelected.room;
         toplevel.active_room = newActive;
@@ -776,7 +776,7 @@ class RoomList extends Gtk.ListBox {
         if (this._placeholders.has(account))
             return;
 
-        let placeholder = new Gtk.ListBoxRow({
+        const placeholder = new Gtk.ListBoxRow({
             selectable: false,
             activatable: false,
             visible: false,
@@ -794,7 +794,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _accountRemoved(am, account) {
-        let placeholder = this._placeholders.get(account);
+        const placeholder = this._placeholders.get(account);
 
         if (!placeholder)
             return;
@@ -808,7 +808,7 @@ class RoomList extends Gtk.ListBox {
         if (this._roomRows.has(room.id))
             return;
 
-        let row = new RoomRow(room);
+        const row = new RoomRow(room);
         this.append(row);
         this._roomRows.set(room.id, row);
 
@@ -817,7 +817,7 @@ class RoomList extends Gtk.ListBox {
     }
 
     _roomRemoved(roomManager, room) {
-        let row = this._roomRows.get(room.id);
+        const row = this._roomRows.get(room.id);
         if (!row)
             return;
 
@@ -834,8 +834,8 @@ class RoomList extends Gtk.ListBox {
             return;
         }
 
-        let rows = [...this._roomRows.values()];
-        let hasRooms = rows.some(r => r.account === account);
+        const rows = [...this._roomRows.values()];
+        const hasRooms = rows.some(r => r.account === account);
         this._placeholders.get(account).visible = !hasRooms;
     }
 
@@ -843,7 +843,7 @@ class RoomList extends Gtk.ListBox {
         const room = this.get_root().active_room;
         if (!room)
             return;
-        let row = this._roomRows.get(room.id);
+        const row = this._roomRows.get(room.id);
         if (!row)
             return;
 
@@ -859,10 +859,10 @@ class RoomList extends Gtk.ListBox {
     }
 
     _updateHeader(row, before) {
-        let {account: beforeAccount} = before || {};
-        let {account} = row;
+        const {account: beforeAccount} = before || {};
+        const {account} = row;
 
-        let oldHeader = row.get_header();
+        const oldHeader = row.get_header();
 
         if (beforeAccount === account) {
             row.set_header(null);
@@ -874,37 +874,37 @@ class RoomList extends Gtk.ListBox {
         if (oldHeader)
             return;
 
-        let roomListHeader = new RoomListHeader({account});
+        const roomListHeader = new RoomListHeader({account});
         row.set_header(roomListHeader);
     }
 
     _sort(row1, row2) {
-        let account1 = row1.account;
-        let account2 = row2.account;
+        const account1 = row1.account;
+        const account2 = row2.account;
 
-        let hasRooms1 = !this._placeholders.get(account1).visible;
-        let hasRooms2 = !this._placeholders.get(account2).visible;
+        const hasRooms1 = !this._placeholders.get(account1).visible;
+        const hasRooms2 = !this._placeholders.get(account2).visible;
 
         if (hasRooms1 !== hasRooms2)
             return hasRooms1 ? -1 : 1;
 
 
         if (account1 !== account2) {
-            let displayName1 = account1.display_name;
-            let displayName2 = account2.display_name;
+            const displayName1 = account1.display_name;
+            const displayName2 = account2.display_name;
 
             if (displayName1 !== displayName2)
                 return displayName1.localeCompare(displayName2);
 
             // Different account with the same display name :-(
             // Fall back to the object path to guarantee a stable sort order
-            let accountPath1 = account1.get_path_suffix();
-            let accountPath2 = account2.get_path_suffix();
+            const accountPath1 = account1.get_path_suffix();
+            const accountPath2 = account2.get_path_suffix();
             return accountPath1.localeCompare(accountPath2);
         }
 
-        let room1 = row1.room;
-        let room2 = row2.room;
+        const room1 = row1.room;
+        const room2 = row2.room;
 
         if (!room1)
             return -1;

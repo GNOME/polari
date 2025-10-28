@@ -21,7 +21,7 @@ const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
 const FALLBACK_ICON_SIZE = 64;
 
-let PreviewWindow = GObject.registerClass(
+const PreviewWindow = GObject.registerClass(
 class PreviewWindow extends Gtk.Window {
     static [GObject.properties] = {
         'uri': GObject.ParamSpec.string(
@@ -40,7 +40,7 @@ class PreviewWindow extends Gtk.Window {
     constructor(params) {
         super(params);
 
-        let settings = new WebKit2.Settings({
+        const settings = new WebKit2.Settings({
             hardware_acceleration_policy: WebKit2.HardwareAccelerationPolicy.NEVER,
         });
 
@@ -83,8 +83,8 @@ class PreviewWindow extends Gtk.Window {
     }
 
     async _createSnapshot() {
-        let getClipOp = this._getImageClip();
-        let snapshotOp = this._view.get_snapshot(
+        const getClipOp = this._getImageClip();
+        const snapshotOp = this._view.get_snapshot(
             WebKit2.SnapshotRegion.VISIBLE,
             WebKit2.SnapshotOptions.NONE,
             null);
@@ -119,7 +119,7 @@ class PreviewWindow extends Gtk.Window {
         let obj = null;
 
         try {
-            let res = await this._view.run_javascript(script, null);
+            const res = await this._view.run_javascript(script, null);
             obj = res.get_js_value();
         } catch (e) {
             console.warn(`Failed to get clip information from ${this.uri}`);
@@ -129,7 +129,7 @@ class PreviewWindow extends Gtk.Window {
         if (!obj || obj.is_null())
             return null;
 
-        let [x, y, width, height] = obj.object_enumerate_properties()
+        const [x, y, width, height] = obj.object_enumerate_properties()
             .map(p => obj.object_get_property(p).to_int32());
 
         if (width === 0 || height === 0)
@@ -139,11 +139,11 @@ class PreviewWindow extends Gtk.Window {
     }
 
     _createClippedSurface(source, clip) {
-        let {x, y, width, height} = clip;
+        const {x, y, width, height} = clip;
 
-        let surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
+        const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, width, height);
 
-        let cr = new Cairo.Context(surface);
+        const cr = new Cairo.Context(surface);
         cr.setSourceSurface(source, -x, -y);
         cr.paint();
         cr.$dispose();
@@ -170,7 +170,7 @@ class App {
         if (GLib.log_writer_is_journald(2))
             GLib.setenv('G_MESSAGES_DEBUG', logDomain, false);
 
-        let window = new PreviewWindow({
+        const window = new PreviewWindow({
             uri: this._uri,
             default_width: 10 * PREVIEW_WIDTH,
             default_height: 10 * PREVIEW_HEIGHT,
@@ -185,16 +185,16 @@ class App {
     }
 
     _onSnapshotReady(window) {
-        let surface = window.getSnapshot();
-        let title = window.title || this._uri;
+        const surface = window.getSnapshot();
+        const title = window.title || this._uri;
         window.destroy();
 
         if (!surface)
             return;
 
-        let sourceWidth = surface.getWidth();
-        let sourceHeight = surface.getHeight();
-        let ratio = sourceWidth / sourceHeight;
+        const sourceWidth = surface.getWidth();
+        const sourceHeight = surface.getHeight();
+        const ratio = sourceWidth / sourceHeight;
 
         let targetWidth, targetHeight;
         if (ratio >= PREVIEW_WIDTH / PREVIEW_HEIGHT) {
@@ -205,11 +205,11 @@ class App {
             targetWidth = targetHeight * ratio;
         }
 
-        let target = new Cairo.ImageSurface(Cairo.Format.ARGB32,
+        const target = new Cairo.ImageSurface(Cairo.Format.ARGB32,
             targetWidth,
             targetHeight);
 
-        let cr = new Cairo.Context(target);
+        const cr = new Cairo.Context(target);
         cr.scale(
             targetWidth / sourceWidth,
             targetHeight / sourceHeight);
@@ -217,7 +217,7 @@ class App {
         cr.paint();
         cr.$dispose();
 
-        let pixbuf = Gdk.pixbuf_get_from_surface(target,
+        const pixbuf = Gdk.pixbuf_get_from_surface(target,
             0, 0, targetWidth, targetHeight);
         pixbuf.savev(this._filename, 'png', ['tEXt::Title'], [title]);
     }
@@ -237,6 +237,6 @@ class App {
     }
 }
 
-let [url, filename] = programArgs;
-let app = new App(url, filename);
+const [url, filename] = programArgs;
+const app = new App(url, filename);
 app.run();

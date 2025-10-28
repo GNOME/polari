@@ -52,7 +52,7 @@ const SASLAuthenticationIface = `
   </signal>
 </interface>
 </node>`;
-let SASLAuthProxy = Gio.DBusProxy.makeProxyWrapper(SASLAuthenticationIface);
+const SASLAuthProxy = Gio.DBusProxy.makeProxyWrapper(SASLAuthenticationIface);
 
 const SASLStatus = {
     NOT_STARTED: 0,
@@ -83,7 +83,7 @@ class SASLAuthHandler {
         this._proxy.connectSignal('SASLStatusChanged',
             this._onSASLStatusChanged.bind(this));
 
-        let account = this._channel.connection.get_account();
+        const account = this._channel.connection.get_account();
         try {
             const password = await Utils.lookupAccountPassword(account);
             await this._proxy.StartMechanismWithDataAsync(
@@ -93,8 +93,8 @@ class SASLAuthHandler {
                 SASLAbortReason.USER_ABORT,
                 'Password not available');
 
-            let prompt = new GLib.Variant('b', false);
-            let params = new GLib.Variant('a{sv}', {'password-prompt': prompt});
+            const prompt = new GLib.Variant('b', false);
+            const params = new GLib.Variant('a{sv}', {'password-prompt': prompt});
             await account.update_parameters_vardict_async(params, []);
             await account.request_presence_async(Tp.ConnectionPresenceType.AVAILABLE,
                 'available', '', null);
@@ -102,8 +102,8 @@ class SASLAuthHandler {
     }
 
     _onSASLStatusChanged(proxy, sender, [status]) {
-        let name = this._channel.connection.get_account().display_name;
-        let statusString = Object.keys(SASLStatus)[status];
+        const name = this._channel.connection.get_account().display_name;
+        const statusString = Object.keys(SASLStatus)[status];
         console.info(`Auth status for server ${name}: ${statusString}`);
 
         switch (status) {
@@ -163,7 +163,7 @@ class TelepathyClient extends Tp.BaseClient {
         // Track whether gnome-shell's built-in chat client is
         // running; unfortunately it uses :uniquify-name, so
         // we cannot simply use Gio.watch_bus_name()
-        let conn = this._app.get_dbus_connection();
+        const conn = this._app.get_dbus_connection();
         conn.signal_subscribe(
             'org.freedesktop.DBus', /* sender */
             'org.freedesktop.DBus', /* iface */
@@ -172,7 +172,7 @@ class TelepathyClient extends Tp.BaseClient {
             SHELL_CLIENT_PREFIX, /* arg0 */
             Gio.DBusSignalFlags.MATCH_ARG0_NAMESPACE,
             (_conn, _sender, _path, _iface, _signal, params) => {
-                let [name_, oldOwner_, newOwner] = params.deep_unpack();
+                const [name_, oldOwner_, newOwner] = params.deep_unpack();
                 this._shellHandlesPrivateChats = newOwner !== '';
             });
 
@@ -199,7 +199,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onPrepared() {
-        let actions = [{
+        const actions = [{
             name: 'message-user',
             handler: this._onQueryActivated.bind(this),
         }, {
@@ -231,19 +231,19 @@ class TelepathyClient extends Tp.BaseClient {
             this._app.lookup_action(a.name).connect('activate', a.handler);
         });
 
-        let filters = [];
+        const filters = [];
 
-        let roomFilter = {};
+        const roomFilter = {};
         roomFilter[Tp.PROP_CHANNEL_CHANNEL_TYPE] = Tp.IFACE_CHANNEL_TYPE_TEXT;
         roomFilter[Tp.PROP_CHANNEL_TARGET_HANDLE_TYPE] = Tp.HandleType.ROOM;
         filters.push(roomFilter);
 
-        let contactFilter = {};
+        const contactFilter = {};
         contactFilter[Tp.PROP_CHANNEL_CHANNEL_TYPE] = Tp.IFACE_CHANNEL_TYPE_TEXT;
         contactFilter[Tp.PROP_CHANNEL_TARGET_HANDLE_TYPE] = Tp.HandleType.CONTACT;
         filters.push(contactFilter);
 
-        let authFilter = {};
+        const authFilter = {};
         authFilter[Tp.PROP_CHANNEL_CHANNEL_TYPE] = Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
         authFilter[Tp.PROP_CHANNEL_TYPE_SERVER_AUTHENTICATION_AUTHENTICATION_METHOD] = Tp.IFACE_CHANNEL_INTERFACE_SASL_AUTHENTICATION;
         filters.push(authFilter);
@@ -275,7 +275,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onAccountReachableChanged(mon, account) {
-        let presence = account.reachable
+        const presence = account.reachable
             ? Tp.ConnectionPresenceType.AVAILABLE
             : Tp.ConnectionPresenceType.OFFLINE;
         console.info(`Account ${account.display_name} is now ${account.reachable
@@ -306,11 +306,11 @@ class TelepathyClient extends Tp.BaseClient {
         if (!account.enabled)
             return;
 
-        let statuses = Object.keys(Tp.ConnectionPresenceType)
+        const statuses = Object.keys(Tp.ConnectionPresenceType)
             .map(s => s.replace(/_/g, '-').toLowerCase());
-        let status = statuses[presence];
-        let msg = account.requested_status_message;
-        let accountName = account.display_name;
+        const status = statuses[presence];
+        const msg = account.requested_status_message;
+        const accountName = account.display_name;
 
         console.info(`Setting presence of account "${accountName}" to ${status}`);
         try {
@@ -340,9 +340,9 @@ class TelepathyClient extends Tp.BaseClient {
         if (!account || !account.enabled)
             return null;
 
-        let roomId = Polari.create_room_id(account,  targetId, targetType);
+        const roomId = Polari.create_room_id(account,  targetId, targetType);
 
-        let cancellable = new Gio.Cancellable();
+        const cancellable = new Gio.Cancellable();
         this._pendingRequests.set(roomId, cancellable);
 
         // Always use a timestamp of 0 for channels we request - rooms that
@@ -350,7 +350,7 @@ class TelepathyClient extends Tp.BaseClient {
         // action, so presenting the room after the requests completes has
         // no effect at best, but could steal the focus when the user switched
         // to a different room in the meantime
-        let req = Tp.AccountChannelRequest.new_text(account, 0);
+        const req = Tp.AccountChannelRequest.new_text(account, 0);
         req.set_target_id(targetType, targetId);
         req.set_delegate_to_preferred_handler(true);
 
@@ -377,14 +377,14 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     async _sendIdentify(account, password) {
-        let {settings} = account;
+        const {settings} = account;
 
-        let params = account.dup_parameters_vardict().deep_unpack();
+        const params = account.dup_parameters_vardict().deep_unpack();
         let username = settings.get_string('identify-username') ||
                        params.username.deep_unpack();
-        let alwaysSendUsername = settings.get_boolean('identify-username-supported');
-        let contactName = settings.get_string('identify-botname');
-        let command = settings.get_string('identify-command');
+        const alwaysSendUsername = settings.get_boolean('identify-username-supported');
+        const contactName = settings.get_string('identify-botname');
+        const command = settings.get_string('identify-command');
 
         let channel = null;
         try {
@@ -412,8 +412,8 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onConnectAccountActivated(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
         if (account.enabled)
             this._connectAccount(account);
         else
@@ -421,45 +421,45 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     async _onDisconnectAccountActivated(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
         await account.set_enabled_async(false);
         this._setAccountPresence(account, Tp.ConnectionPresenceType.OFFLINE);
     }
 
     _onReconnectAccountActivated(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
         account.reconnect_async();
     }
 
     async _onAuthenticateAccountActivated(action, parameter) {
-        let [accountPath, password] = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const [accountPath, password] = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
 
-        let prompt = new GLib.Variant('b', password.length > 0);
-        let params = GLib.Variant.new('a{sv}', {'password-prompt': prompt});
+        const prompt = new GLib.Variant('b', password.length > 0);
+        const params = GLib.Variant.new('a{sv}', {'password-prompt': prompt});
         await account.update_parameters_vardict_async(params, []);
         await Utils.storeAccountPassword(account, password);
         await account.reconnect_async();
     }
 
     async _onQueryActivated(action, parameter) {
-        let [accountPath, channelName, message, present_] = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const [accountPath, channelName, message, present_] = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
 
         if (!account || !account.enabled)
             return;
 
         try {
-            let channel = await this._requestChannel(
+            const channel = await this._requestChannel(
                 account, Tp.HandleType.CONTACT, channelName);
 
             if (!message)
                 return;
 
-            let type = Tp.ChannelTextMessageType.NORMAL;
-            let tpMessage = Tp.ClientMessage.new_text(type, message);
+            const type = Tp.ChannelTextMessageType.NORMAL;
+            const tpMessage = Tp.ClientMessage.new_text(type, message);
             await channel.send_message_async(tpMessage, 0);
         } catch (e) {
             if (!message)
@@ -473,11 +473,11 @@ class TelepathyClient extends Tp.BaseClient {
     async _onLeaveActivated(action, parameter) {
         let [id, message] = parameter.deep_unpack();
 
-        let request = this._pendingRequests.get(id);
+        const request = this._pendingRequests.get(id);
         if (request)
             request.cancel();
 
-        let room = this._roomManager.lookupRoom(id);
+        const room = this._roomManager.lookupRoom(id);
         if (!room.channel)
             return;
 
@@ -491,7 +491,7 @@ class TelepathyClient extends Tp.BaseClient {
             room.channel.ack_message_async(m, null);
         });
 
-        let reason = Tp.ChannelGroupChangeReason.NONE;
+        const reason = Tp.ChannelGroupChangeReason.NONE;
         message = message || _('Good Bye');
         try {
             await room.channel.leave_async(reason, message);
@@ -503,12 +503,12 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     async _onSaveIdentifyPasswordActivated(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
         if (!account)
             return;
 
-        let data = this._pendingBotPasswords.get(account.object_path);
+        const data = this._pendingBotPasswords.get(account.object_path);
         if (!data)
             return;
 
@@ -521,7 +521,7 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _saveIdentifySettings(account, data) {
-        let {settings} = account;
+        const {settings} = account;
 
         if (data.botname === 'NickServ')
             settings.reset('identify-botname');
@@ -537,12 +537,12 @@ class TelepathyClient extends Tp.BaseClient {
         settings.set_boolean('identify-username-supported', data.usernameSupported);
 
         // We know it's a bot, mute it by default!
-        let tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
+        const tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
         tracker.muteNick(data.botname);
     }
 
     _onDiscardIdentifyPasswordActivated(action, parameter) {
-        let accountPath = parameter.deep_unpack();
+        const accountPath = parameter.deep_unpack();
         this._discardIdentifyPassword(accountPath);
     }
 
@@ -552,19 +552,19 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _onReconnectRoomActivated(action, parameter) {
-        let roomId = parameter.deep_unpack();
-        let room = this._roomManager.lookupRoom(roomId);
+        const roomId = parameter.deep_unpack();
+        const room = this._roomManager.lookupRoom(roomId);
         this._connectRoom(room);
     }
 
     _isAuthChannel(channel) {
-        let channelType = channel.get_channel_type();
+        const channelType = channel.get_channel_type();
         return channelType === Tp.IFACE_CHANNEL_TYPE_SERVER_AUTHENTICATION;
     }
 
     _processRequest(context, connection, channels, processChannel) {
         if (connection.protocol_name !== 'irc') {
-            let message = 'Not implementing non-IRC protocols';
+            const message = 'Not implementing non-IRC protocols';
             context.fail(new Tp.Error({
                 code: Tp.Error.NOT_IMPLEMENTED,
                 message,
@@ -573,7 +573,7 @@ class TelepathyClient extends Tp.BaseClient {
         }
 
         if (this._isAuthChannel(channels[0]) && channels.length > 1) {
-            let message = 'Only one authentication channel per connection allowed';
+            const message = 'Only one authentication channel per connection allowed';
             context.fail(new Tp.Error({
                 code: Tp.Error.INVALID_ARGUMENT,
                 message,
@@ -590,13 +590,13 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     vfunc_observe_channels(...args) {
-        let [account_, connection, channels, op_, requests_, context] = args;
+        const [account_, connection, channels, op_, requests_, context] = args;
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel))
                 return;
 
             if (channel.has_interface(Tp.IFACE_CHANNEL_INTERFACE_GROUP)) {
-                let [invited] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
+                const [invited] = channel.group_get_local_pending_contact_info(channel.group_self_contact);
                 if (invited)
                     // this is an invitation - only add it in handleChannel
                     // if accepted
@@ -618,8 +618,8 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     vfunc_handle_channels(...args) {
-        let [account_, connection, channels, satisfied_, time, context] = args;
-        let [present] = Tp.user_action_time_should_present(time);
+        const [account_, connection, channels, satisfied_, time, context] = args;
+        const [present] = Tp.user_action_time_should_present(time);
 
         this._processRequest(context, connection, channels, channel => {
             if (this._isAuthChannel(channel)) {
@@ -644,11 +644,11 @@ class TelepathyClient extends Tp.BaseClient {
     }
 
     _createNotification(room, summary, body) {
-        let notification = new Gio.Notification();
+        const notification = new Gio.Notification();
         notification.set_title(summary);
         notification.set_body(body);
 
-        let params = [
+        const params = [
             room.account.object_path,
             room.channel_name,
             true,
@@ -664,15 +664,15 @@ class TelepathyClient extends Tp.BaseClient {
             params.splice(2, 0, '');
         }
 
-        let param = GLib.Variant.new(paramFormat, params);
+        const param = GLib.Variant.new(paramFormat, params);
         notification.set_default_action_and_target(actionName, param);
         return notification;
     }
 
     _onIdentifySent(room, command, username, password) {
-        let accountPath = room.account.object_path;
+        const accountPath = room.account.object_path;
 
-        let data = {
+        const data = {
             botname: room.channel.target_contact.alias,
             command,
             username: username || room.channel.connection.self_contact.alias,
@@ -684,13 +684,13 @@ class TelepathyClient extends Tp.BaseClient {
         if (this._app.isRoomFocused(room))
             return;
 
-        let accountName = room.account.display_name;
+        const accountName = room.account.display_name;
         /* Translators: Those are a botname and an accountName, e.g.
            "Save NickServ password for Libera" */
-        let summary = vprintf(_('Save %s password for %s?'), data.botname, accountName);
-        let text = vprintf(
+        const summary = vprintf(_('Save %s password for %s?'), data.botname, accountName);
+        const text = vprintf(
             _('Identification will happen automatically the next time you connect to %s'), accountName);
-        let notification = this._createNotification(room, summary, text);
+        const notification = this._createNotification(room, summary, text);
 
         notification.add_button_with_target(_('Save'),
             'app.save-identify-password',
@@ -728,8 +728,8 @@ class TelepathyClient extends Tp.BaseClient {
     _onMessageReceived(channel, msg) {
         this._logMessage(msg, channel);
 
-        let [id] = msg.get_pending_message_id();
-        let room = this._roomManager.lookupRoomByChannel(channel);
+        const [id] = msg.get_pending_message_id();
+        const room = this._roomManager.lookupRoomByChannel(channel);
 
         // Rooms are removed instantly when the user requests it, but closing
         // the corresponding channel may take a bit; it would be surprising
@@ -737,8 +737,8 @@ class TelepathyClient extends Tp.BaseClient {
         if (!room || this._app.isRoomFocused(room))
             return;
 
-        let [text] = msg.to_text();
-        let nick = msg.sender.alias;
+        const [text] = msg.to_text();
+        const nick = msg.sender.alias;
         if (!room.should_highlight_message(nick, text))
             return;
 
@@ -759,16 +759,16 @@ class TelepathyClient extends Tp.BaseClient {
             summary = vprintf(_('%s in %s'), nick, room.display_name);
         }
 
-        let notification = this._createNotification(room, summary, text);
+        const notification = this._createNotification(room, summary, text);
         this._app.send_notification(this._getPendingNotificationID(room, id), notification);
     }
 
     _onPendingMessageRemoved(channel, msg) {
-        let [id, valid] = msg.get_pending_message_id();
+        const [id, valid] = msg.get_pending_message_id();
         if (!valid)
             return;
 
-        let room = this._roomManager.lookupRoomByChannel(channel);
+        const room = this._roomManager.lookupRoomByChannel(channel);
         if (!room)
             return;
 

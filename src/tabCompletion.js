@@ -42,9 +42,9 @@ export default class TabCompletion {
         this._widgetMap = new Map();
         this._previousWasCommand = false;
 
-        let commands = Object.keys(IrcParser.knownCommands);
+        const commands = Object.keys(IrcParser.knownCommands);
         for (let i = 0; i < commands.length; i++) {
-            let row = new Gtk.ListBoxRow();
+            const row = new Gtk.ListBoxRow();
             row._text = `/${commands[i]}`;
             row._casefoldedText = row._text.toLowerCase();
             row.set_child(new Gtk.Label({
@@ -70,17 +70,17 @@ export default class TabCompletion {
 
     setCompletions(completions) {
         if (this._popup.visible) {
-            let id = this._popup.connect('unmap', () => {
+            const id = this._popup.connect('unmap', () => {
                 this._popup.disconnect(id);
                 this.setCompletions(completions);
             });
             return;
         }
 
-        let widgetMap = new Map();
+        const widgetMap = new Map();
 
         for (let i = 0; i < completions.length; i++) {
-            let nick = completions[i];
+            const nick = completions[i];
             let row = this._widgetMap.get(nick);
 
             if (row) {
@@ -111,7 +111,7 @@ export default class TabCompletion {
         });
 
         for (let i = 0; i < completions.length; i++) {
-            let row = this._widgetMap.get(completions[i]);
+            const row = this._widgetMap.get(completions[i]);
             this._list.append(row);
         }
         this._canComplete = completions.length > 0;
@@ -141,7 +141,7 @@ export default class TabCompletion {
         }
 
         if (Gdk.keyval_to_unicode(keyval) !== 0) {
-            let popupShown = this._popup.visible;
+            const popupShown = this._popup.visible;
             this._stop();
             // eat keys that would active the entry
             // when showing the popup
@@ -175,7 +175,7 @@ export default class TabCompletion {
     }
 
     _insertCompletion(completion) {
-        let pos = this._entry.get_position();
+        const pos = this._entry.get_position();
         this._endPos = this._startPos + completion.length;
         this._entry.delete_text(this._startPos, pos);
         this._entry.insert_text(completion, -1, this._startPos);
@@ -183,8 +183,8 @@ export default class TabCompletion {
     }
 
     _setPreviousCompletionChained(chained) {
-        let repl = chained ? ',' : ':';
-        let start = this._startPos - 2;
+        const repl = chained ? ',' : ':';
+        const start = this._startPos - 2;
         this._entry.delete_text(start, start + 1);
         this._entry.insert_text(repl, -1, start);
     }
@@ -193,7 +193,7 @@ export default class TabCompletion {
         if (!this._canComplete)
             return;
 
-        let text = this._entry.text.substr(0, this._entry.get_position());
+        const text = this._entry.text.substr(0, this._entry.get_position());
         this._startPos = text.lastIndexOf(' ') + 1;
         this._key = text.toLowerCase().substr(this._startPos);
 
@@ -204,13 +204,13 @@ export default class TabCompletion {
 
         // Chain completions if the current completion directly follows a previous one,
         // except when one of them was for an IRC command
-        let previousCompletion = this._endPos === this._startPos;
+        const previousCompletion = this._endPos === this._startPos;
         this._isChained = previousCompletion && !this._isCommand && !this._previousWasCommand;
 
         this._list.invalidate_filter();
 
-        let visibleRows = [...this._list].filter(c => c.get_child_visible());
-        let nVisibleRows = visibleRows.length;
+        const visibleRows = [...this._list].filter(c => c.get_child_visible());
+        const nVisibleRows = visibleRows.length;
 
         if (nVisibleRows === 0)
             return;

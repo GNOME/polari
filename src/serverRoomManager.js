@@ -44,14 +44,14 @@ export default class ServerRoomManager {
     }
 
     getRoomInfos(account) {
-        let roomList = this._roomLists.get(account);
+        const roomList = this._roomLists.get(account);
         if (!roomList || roomList.list.listing)
             return [];
         return roomList.rooms.slice();
     }
 
     isLoading(account) {
-        let roomList = this._roomLists.get(account);
+        const roomList = this._roomLists.get(account);
         if (!roomList)
             return account.connection_status === Tp.ConnectionStatus.CONNECTING;
         return roomList.list.listing;
@@ -67,7 +67,7 @@ export default class ServerRoomManager {
         if (this._roomLists.has(account))
             return;
 
-        let roomList = new Tp.RoomList({account});
+        const roomList = new Tp.RoomList({account});
         roomList.connect('got-room', this._onGotRoom.bind(this));
         roomList.connect('notify::listing', this._onListingChanged.bind(this));
         this._roomLists.set(account, {list: roomList, rooms: []});
@@ -81,7 +81,7 @@ export default class ServerRoomManager {
     }
 
     _onAccountRemoved(mon, account) {
-        let roomList = this._roomLists.get(account);
+        const roomList = this._roomLists.get(account);
         if (!roomList)
             return;
 
@@ -90,7 +90,7 @@ export default class ServerRoomManager {
     }
 
     _onGotRoom(list, roomInfo) {
-        let roomList = this._roomLists.get(list.account);
+        const roomList = this._roomLists.get(list.account);
         if (!roomList)
             return;
         roomList.rooms.push(roomInfo);
@@ -140,7 +140,7 @@ class ServerRoomList extends Gtk.Box {
         super(params);
 
         this._list.model.set_visible_func((model, iter) => {
-            let name = model.get_value(iter, RoomListColumn.NAME);
+            const name = model.get_value(iter, RoomListColumn.NAME);
             if (!name)
                 return false;
 
@@ -174,7 +174,7 @@ class ServerRoomList extends Gtk.Box {
             if (this._filterEntry.text.trim().length === 0)
                 return;
 
-            let [selected, model_, iter] = this._list.get_selection().get_selected();
+            const [selected, model_, iter] = this._list.get_selection().get_selected();
             if (selected)
                 this._toggleChecked(this._list.model.get_path(iter));
         });
@@ -185,13 +185,13 @@ class ServerRoomList extends Gtk.Box {
 
         this._toggleRenderer.connect('toggled', (cell, pathStr) => {
             // For pointer devices, ::row-activated is emitted as well
-            let dev = Gtk.get_current_event_device();
+            const dev = Gtk.get_current_event_device();
             if (dev && dev.input_source === Gdk.InputSource.KEYBOARD)
                 this._toggleChecked(Gtk.TreePath.new_from_string(pathStr));
         });
 
         this._manager = ServerRoomManager.getDefault();
-        let loadingChangedId =
+        const loadingChangedId =
             this._manager.connect('loading-changed',
                 this._onLoadingChanged.bind(this));
 
@@ -213,7 +213,7 @@ class ServerRoomList extends Gtk.Box {
     }
 
     get selectedRooms() {
-        let rooms = [];
+        const rooms = [];
         let [valid, iter] = this._store.get_iter_first();
         for (; valid; valid = this._store.iter_next(iter)) {
             if (!this._store.get_value(iter, RoomListColumn.SENSITIVE) ||
@@ -240,8 +240,8 @@ class ServerRoomList extends Gtk.Box {
     }
 
     _isCustomRoomItem(iter) {
-        let path = this._store.get_path(iter);
-        let customPath = this._store.get_path(this._customRoomItem);
+        const path = this._store.get_path(iter);
+        const customPath = this._store.get_path(this._customRoomItem);
         return path.compare(customPath) === 0;
     }
 
@@ -256,7 +256,7 @@ class ServerRoomList extends Gtk.Box {
                 if (this._isCustomRoomItem(iter))
                     return false;
 
-                let name = model.get_value(iter, RoomListColumn.NAME);
+                const name = model.get_value(iter, RoomListColumn.NAME);
                 return (exactMatch = _strBaseEqual(newName, name));
             });
 
@@ -271,8 +271,8 @@ class ServerRoomList extends Gtk.Box {
         if (this._filterEntry.text.trim().length === 0)
             return;
 
-        let {model} = this._list;
-        let [valid, iter] = model.get_iter_first();
+        const {model} = this._list;
+        const [valid, iter] = model.get_iter_first();
         if (!valid)
             return;
 
@@ -281,7 +281,7 @@ class ServerRoomList extends Gtk.Box {
     }
 
     _clearList() {
-        let [valid_, iter] = this._store.get_iter_first();
+        const [valid_, iter] = this._store.get_iter_first();
         if (this._isCustomRoomItem(iter))
             return;
         this._store.move_before(this._customRoomItem, iter);
@@ -306,10 +306,10 @@ class ServerRoomList extends Gtk.Box {
         if (!account)
             return;
 
-        let roomInfos = this._manager.getRoomInfos(account);
+        const roomInfos = this._manager.getRoomInfos(account);
         roomInfos.sort((info1, info2) => {
-            let count1 = info1.get_members_count(null);
-            let count2 = info2.get_members_count(null);
+            const count1 = info1.get_members_count(null);
+            const count2 = info2.get_members_count(null);
             if (count1 !== count2)
                 return count2 - count1;
             return info1.get_name().localeCompare(info2.get_name());
@@ -318,16 +318,16 @@ class ServerRoomList extends Gtk.Box {
 
         this._checkSpinner();
 
-        let roomManager = RoomManager.getDefault();
+        const roomManager = RoomManager.getDefault();
 
         this._idleId = GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
             let customName = this._store.get_value(
                 this._customRoomItem,
                 RoomListColumn.NAME);
-            let store = this._store;
-            let startTime = GLib.get_monotonic_time();
+            const store = this._store;
+            const startTime = GLib.get_monotonic_time();
             while (this._pendingInfos.length > 0) {
-                let roomInfo = this._pendingInfos.shift();
+                const roomInfo = this._pendingInfos.shift();
 
                 let name = roomInfo.get_name();
                 if (name[0] === '#')
@@ -338,18 +338,18 @@ class ServerRoomList extends Gtk.Box {
                         RoomListColumn.NAME, customName = '');
                 }
 
-                let room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
-                let sensitive = !room;
-                let checked = !sensitive;
-                let count = `${roomInfo.get_members_count(null)}`;
+                const room = roomManager.lookupRoomByName(roomInfo.get_name(), this._account);
+                const sensitive = !room;
+                const checked = !sensitive;
+                const count = `${roomInfo.get_members_count(null)}`;
 
-                let {CHECKED, NAME, COUNT, SENSITIVE} = RoomListColumn;
-                let iter = store.insert_with_values(-1,
+                const {CHECKED, NAME, COUNT, SENSITIVE} = RoomListColumn;
+                const iter = store.insert_with_values(-1,
                     [CHECKED, NAME, COUNT, SENSITIVE],
                     [checked, name, count, sensitive]);
                 store.move_before(iter, this._customRoomItem);
 
-                let maxTime = this._filterTerms.length > 0
+                const maxTime = this._filterTerms.length > 0
                     ? MS_PER_FILTER_IDLE : MS_PER_IDLE;
                 // Limit time spent in idle to leave room for drawing etc.
                 if (GLib.get_monotonic_time() - startTime > 1000 * maxTime)
@@ -363,17 +363,17 @@ class ServerRoomList extends Gtk.Box {
     }
 
     _checkSpinner() {
-        let loading = this._pendingInfos.length ||
+        const loading = this._pendingInfos.length ||
                       this._account && this._manager.isLoading(this._account);
         this._spinner.visible = loading;
     }
 
     _toggleChecked(path) {
-        let childPath = this._list.model.convert_path_to_child_path(path);
-        let [valid_, iter] = this._store.get_iter(childPath);
+        const childPath = this._list.model.convert_path_to_child_path(path);
+        const [valid_, iter] = this._store.get_iter(childPath);
         if (!this._store.get_value(iter, RoomListColumn.SENSITIVE))
             return;
-        let checked = this._store.get_value(iter, RoomListColumn.CHECKED);
+        const checked = this._store.get_value(iter, RoomListColumn.CHECKED);
         this._store.set_value(iter, RoomListColumn.CHECKED, !checked);
 
         this.notify('can-join');

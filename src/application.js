@@ -136,8 +136,9 @@ class Application extends Adw.Application {
     }
 
     _checkService(conn, name, opath, iface) {
-        let flags = Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
-                    Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS;
+        const flags =
+            Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES |
+            Gio.DBusProxyFlags.DO_NOT_CONNECT_SIGNALS;
         let proxy = null;
 
         try {
@@ -157,7 +158,7 @@ class Application extends Adw.Application {
         console.info(`Failed to activate service ${
             name}, starting manually`);
 
-        let proc = new Gio.Subprocess({argv: [command]});
+        const proc = new Gio.Subprocess({argv: [command]});
 
         try {
             proc.init(null);
@@ -180,9 +181,9 @@ class Application extends Adw.Application {
             this.hold();
             this._importingLogs = true;
 
-            let importer = new Logger.LogImporter();
+            const importer = new Logger.LogImporter();
 
-            let numFiles = await importer.init();
+            const numFiles = await importer.init();
             let n = 0;
             this.activeWindow?.showImportProgress(n, numFiles);
 
@@ -203,12 +204,12 @@ class Application extends Adw.Application {
     }
 
     _maybeMakeNonUnique() {
-        let bus = Gio.BusType.SESSION;
-        let name = this.application_id;
-        let flags = Gio.BusNameWatcherFlags.NONE;
+        const bus = Gio.BusType.SESSION;
+        const name = this.application_id;
+        const flags = Gio.BusNameWatcherFlags.NONE;
 
         let handled = false;
-        let id = Gio.bus_watch_name(bus, name, flags, () => {
+        const id = Gio.bus_watch_name(bus, name, flags, () => {
             console.info(
                 'Running as test instance alongside primary instance');
             this.set_flags(this.flags | Gio.ApplicationFlags.NON_UNIQUE);
@@ -219,7 +220,7 @@ class Application extends Adw.Application {
         });
 
         // Evil-ish ...
-        let main = GLib.MainContext.default();
+        const main = GLib.MainContext.default();
         while (!handled)
             main.iteration(true);
         Gio.bus_unwatch_name(id);
@@ -244,7 +245,7 @@ class Application extends Adw.Application {
     }
 
     vfunc_dbus_unregister(_conn, _path) {
-        for (let proc of this._demons)
+        for (const proc of this._demons)
             proc.force_exit();
         this._demons = [];
     }
@@ -394,7 +395,7 @@ class Application extends Adw.Application {
         // The portal implementation fetches the initial state asynchronously,
         // so track when the it becomes valid to not base decisions on an
         // incorrect offline state
-        let networkMonitor = Gio.NetworkMonitor.get_default();
+        const networkMonitor = Gio.NetworkMonitor.get_default();
         networkMonitor.state_valid =
             !Utils.isFlatpakSandbox() &&
             GLib.getenv('GTK_USE_PORTAL') !== '1';
@@ -403,7 +404,7 @@ class Application extends Adw.Application {
             if (!networkMonitor.network_metered)
                 this._serverRoomManager = ServerRoomManager.getDefault();
         } else {
-            let id = networkMonitor.connect('network-changed', () => {
+            const id = networkMonitor.connect('network-changed', () => {
                 networkMonitor.disconnect(id);
                 networkMonitor.state_valid = true;
 
@@ -416,7 +417,7 @@ class Application extends Adw.Application {
             this._onAccountStatusChanged.bind(this));
         this._accountsMonitor.connect('account-added', (am, account) => {
             // Reset nickname at startup
-            let accountName = this._getTrimmedAccountName(account);
+            const accountName = this._getTrimmedAccountName(account);
             account.set_nickname_async(accountName);
         });
         this._accountsMonitor.connect('account-removed', (am, account) => {
@@ -437,7 +438,7 @@ class Application extends Adw.Application {
             if (this._needsInitialSetup()) {
                 new InitialSetupWindow({application: this});
             } else {
-                let window = new MainWindow({application: this});
+                const window = new MainWindow({application: this});
                 window.connect('notify::active-room',
                     () => this.emit('room-focus-changed'));
                 window.connect('notify::is-active',
@@ -454,7 +455,7 @@ class Application extends Adw.Application {
         if (!(window instanceof MainWindow))
             return;
 
-        let action = this.lookup_action('leave-current-room');
+        const action = this.lookup_action('leave-current-room');
         action.enabled = window.active_room !== null;
 
         this._toplevelSignals = [
@@ -481,7 +482,7 @@ class Application extends Adw.Application {
     vfunc_open(files) {
         this.activate();
 
-        let uris = files.map(f => f.get_uri());
+        const uris = files.map(f => f.get_uri());
 
         this._accountsMonitor.prepare(() => {
             this._openURIs(uris);
@@ -489,24 +490,24 @@ class Application extends Adw.Application {
     }
 
     _openURIs(uris) {
-        let map = {};
+        const map = {};
 
         this._accountsMonitor.visibleAccounts.forEach(a => {
-            let params = a.dup_parameters_vardict().deep_unpack();
+            const params = a.dup_parameters_vardict().deep_unpack();
             map[a.get_object_path()] = {
                 server: params.server.deep_unpack(),
                 service: a.service,
             };
         });
 
-        let joinAction = this.lookup_action('join-room');
+        const joinAction = this.lookup_action('join-room');
         uris.forEach(async uri => {
-            let [success, server, port, room] = this._parseURI(uri);
+            const [success, server, port, room] = this._parseURI(uri);
             if (!success)
                 return;
 
-            let matchedId = this._networksManager.findByServer(server);
-            let matches = Object.keys(map).filter(a => {
+            const matchedId = this._networksManager.findByServer(server);
+            const matches = Object.keys(map).filter(a => {
                 return GLib.ascii_strcasecmp(map[a].server, server) === 0 ||
                        map[a].service === matchedId;
             });
@@ -556,7 +557,7 @@ class Application extends Adw.Application {
             name = server;
         }
 
-        let req = new Tp.AccountRequest({
+        const req = new Tp.AccountRequest({
             account_manager: Tp.AccountManager.dup(),
             connection_manager: 'idle',
             protocol: 'irc',
@@ -567,7 +568,7 @@ class Application extends Adw.Application {
         if (id)
             req.set_service(id);
 
-        for (let prop in params)
+        for (const prop in params)
             req.set_parameter(prop, params[prop]);
 
         const account = await req.create_account_async();
@@ -587,7 +588,7 @@ class Application extends Adw.Application {
         if (!Utils.needsOnetimeAction('initial-setup'))
             return;
 
-        let savedRooms = this._settings.get_value('saved-channel-list');
+        const savedRooms = this._settings.get_value('saved-channel-list');
         return savedRooms.n_children() === 0;
     }
 
@@ -600,8 +601,8 @@ class Application extends Adw.Application {
     }
 
     _updateUserListAction() {
-        let room = this.active_window.active_room;
-        let action = this.lookup_action('user-list');
+        const room = this.active_window.active_room;
+        const action = this.lookup_action('user-list');
         action.enabled = room && room.type === Tp.HandleType.ROOM && room.channel;
     }
 
@@ -615,12 +616,12 @@ class Application extends Adw.Application {
     }
 
     _onJoinRoom(action, parameter) {
-        let [accountPath_, channelName_, present] = parameter.deep_unpack();
+        const [accountPath_, channelName_, present] = parameter.deep_unpack();
         this._maybePresent(present);
     }
 
     _onMessageUser(action, parameter) {
-        let [accountPath_, contactName_, msg_, present] = parameter.deep_unpack();
+        const [accountPath_, contactName_, msg_, present] = parameter.deep_unpack();
         this._maybePresent(present);
     }
 
@@ -628,16 +629,16 @@ class Application extends Adw.Application {
         if (this._nickTrackData.has(account))
             return;
 
-        let nominalNick = this._getTrimmedAccountName(account);
-        let baseNick = Polari.util_get_basenick(nominalNick);
+        const nominalNick = this._getTrimmedAccountName(account);
+        const baseNick = Polari.util_get_basenick(nominalNick);
 
-        let tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
-        let contactsChangedId = tracker.connect(`contacts-changed::${baseNick}`,
+        const tracker = this._userStatusMonitor.getUserTrackerForAccount(account);
+        const contactsChangedId = tracker.connect(`contacts-changed::${baseNick}`,
             (t, nick) => {
                 if (nick !== nominalNick)
                     return;
 
-                let contact = tracker.lookupContact(nick);
+                const contact = tracker.lookupContact(nick);
                 if (contact && contact.alias === nick)
                     return;
 
@@ -648,7 +649,7 @@ class Application extends Adw.Application {
     }
 
     _untrackNominalNick(account) {
-        let data = this._nickTrackData.get(account);
+        const data = this._nickTrackData.get(account);
         if (!data)
             return;
 
@@ -661,8 +662,8 @@ class Application extends Adw.Application {
         if (data)
             return data;
 
-        let params = account.getConnectionParams();
-        let {server, account: accountName, port} = params;
+        const params = account.getConnectionParams();
+        const {server, account: accountName, port} = params;
         console.info(`Failed to connect to ${server} with username ${
             accountName}`);
 
@@ -680,14 +681,14 @@ class Application extends Adw.Application {
     }
 
     _getTrimmedAccountName(account) {
-        let params = account.getConnectionParams();
+        const params = account.getConnectionParams();
         return params.account.replace(/_+$/, '');
     }
 
     _restoreAccountName(account) {
-        let accountName = this._getTrimmedAccountName(account);
-        let params = {account: new GLib.Variant('s', accountName)};
-        let asv = new GLib.Variant('a{sv}', params);
+        const accountName = this._getTrimmedAccountName(account);
+        const params = {account: new GLib.Variant('s', accountName)};
+        const asv = new GLib.Variant('a{sv}', params);
         account.update_parameters_vardict_async(asv, []);
     }
 
@@ -700,31 +701,31 @@ class Application extends Adw.Application {
     }
 
     _retryNickRequest(account) {
-        let retryData = this._ensureRetryData(account);
+        const retryData = this._ensureRetryData(account);
 
         if (retryData.retry++ >= MAX_RETRIES)
             return false;
 
         this._trackNominalNick(account);
 
-        let oldParams = account.dup_parameters_vardict().deep_unpack();
-        let nick = oldParams['account'].deep_unpack();
+        const oldParams = account.dup_parameters_vardict().deep_unpack();
+        const nick = oldParams['account'].deep_unpack();
 
         console.info(`Retrying with nickname ${nick}_`);
-        let params = {account: new GLib.Variant('s', `${nick}_`)};
+        const params = {account: new GLib.Variant('s', `${nick}_`)};
         this._retryWithParams(account, new GLib.Variant('a{sv}', params));
         return true;
     }
 
     _retryServerRequest(account) {
-        let retryData = this._ensureRetryData(account);
+        const retryData = this._ensureRetryData(account);
 
-        let server = retryData.alternateServers.shift();
+        const server = retryData.alternateServers.shift();
         if (!server)
             return false;
 
         console.info(`Retrying with ${server.address}:${server.port}`);
-        let params = {
+        const params = {
             server: new GLib.Variant('s', server.address),
             port: new GLib.Variant('u', server.port),
             'use-ssl': new GLib.Variant('b', server.ssl),
@@ -734,13 +735,13 @@ class Application extends Adw.Application {
     }
 
     _onAccountStatusChanged(mon, account) {
-        let status = account.connection_status;
+        const status = account.connection_status;
 
         if (status === Tp.ConnectionStatus.CONNECTING)
             return;
 
         if (status === Tp.ConnectionStatus.DISCONNECTED) {
-            let reason = account.connection_status_reason;
+            const reason = account.connection_status_reason;
 
             if (reason === Tp.ConnectionStatusReason.NAME_IN_USE) {
                 if (this._retryNickRequest(account))
@@ -754,14 +755,14 @@ class Application extends Adw.Application {
             }
 
             if (reason !== Tp.ConnectionStatusReason.REQUESTED) {
-                let strReason = Object.keys(Tp.ConnectionStatusReason)[reason];
-                let name = account.display_name;
+                const strReason = Object.keys(Tp.ConnectionStatusReason)[reason];
+                const name = account.display_name;
                 console.info(`Account ${name} disconnected with reason ${
                     strReason}`);
 
                 // Connection failed, keep tp from retrying over and over
-                let presence = Tp.ConnectionPresenceType.OFFLINE;
-                let msg = account.requested_status_message;
+                const presence = Tp.ConnectionPresenceType.OFFLINE;
+                const msg = account.requested_status_message;
                 account.request_presence_async(presence, 'offline', msg);
             }
         }
@@ -770,29 +771,29 @@ class Application extends Adw.Application {
     }
 
     _onLeaveCurrentRoom() {
-        let room = this.active_window.active_room;
+        const room = this.active_window.active_room;
         if (!room)
             return;
-        let action = this.lookup_action('leave-room');
+        const action = this.lookup_action('leave-room');
         action.activate(GLib.Variant.new('(ss)', [room.id, '']));
     }
 
     _onConnectAccount(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
         if (account)
             this._restoreAccountName(account);
         this._retryData.delete(accountPath);
     }
 
     _onToggleAction(action) {
-        let state = action.get_state();
+        const state = action.get_state();
         action.change_state(GLib.Variant.new('b', !state.get_boolean()));
     }
 
     async _onRemoveConnection(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
 
         await account.set_enabled_async(false);
         this._removedAccounts.add(account);
@@ -826,8 +827,8 @@ class Application extends Adw.Application {
     }
 
     _onEditConnection(action, parameter) {
-        let accountPath = parameter.deep_unpack();
-        let account = this._accountsMonitor.lookupAccount(accountPath);
+        const accountPath = parameter.deep_unpack();
+        const account = this._accountsMonitor.lookupAccount(accountPath);
         const dialog = new Connections.ConnectionProperties(account);
         dialog.present(this.activeWindow);
     }
@@ -836,7 +837,7 @@ class Application extends Adw.Application {
         if (this._telepathyClient)
             return;
 
-        let params = {
+        const params = {
             name: 'Polari',
             account_manager: this._accountsMonitor.accountManager,
             uniquify_name: this.isTestInstance,

@@ -100,7 +100,7 @@ export function touchFile(file) {
         // not an error, carry on
     }
 
-    let stream = file.create(0, null);
+    const stream = file.create(0, null);
     stream.close(null);
 }
 
@@ -109,12 +109,12 @@ export function touchFile(file) {
  * @returns {bool}
  */
 export function needsOnetimeAction(name) {
-    let path = GLib.build_filenamev([
+    const path = GLib.build_filenamev([
         GLib.get_user_data_dir(),
         'polari',
         `${name}-completed`,
     ]);
-    let file = Gio.File.new_for_path(path);
+    const file = Gio.File.new_for_path(path);
     try {
         touchFile(file);
     } catch (e) {
@@ -133,7 +133,7 @@ export function needsOnetimeAction(name) {
  * @throws
  */
 export function storeAccountPassword(account, password) {
-    let label = vprintf(_('Polari server password for %s'), account.display_name);
+    const label = vprintf(_('Polari server password for %s'), account.display_name);
     _storePassword(SECRET_SCHEMA_ACCOUNT, label, account, password);
 }
 
@@ -143,13 +143,13 @@ export function storeAccountPassword(account, password) {
  * @throws
  */
 export function storeIdentifyPassword(account, password) {
-    let label = vprintf(_('Polari NickServ password for %s'), account.display_name);
+    const label = vprintf(_('Polari NickServ password for %s'), account.display_name);
     _storePassword(SECRET_SCHEMA_IDENTIFY, label, account, password);
 }
 
 async function _storePassword(schema, label, account, password) {
-    let attr = {'account-id': account.get_path_suffix()};
-    let coll = Secret.COLLECTION_DEFAULT;
+    const attr = {'account-id': account.get_path_suffix()};
+    const coll = Secret.COLLECTION_DEFAULT;
     try {
         await Secret.password_store(schema, attr, coll, label, password, null);
     } catch (e) {
@@ -179,7 +179,7 @@ export function lookupIdentifyPassword(account) {
 }
 
 async function _lookupPassword(schema, account) {
-    let attr = {'account-id': account.get_path_suffix()};
+    const attr = {'account-id': account.get_path_suffix()};
     let password = null;
     try {
         password = await Secret.password_lookup(schema, attr, null);
@@ -210,7 +210,7 @@ export function clearIdentifyPassword(account) {
 }
 
 async function _clearPassword(schema, account) {
-    let attr = {'account-id': account.get_path_suffix()};
+    const attr = {'account-id': account.get_path_suffix()};
     try {
         await Secret.password_clear(schema, attr, null);
     } catch (e) {
@@ -233,10 +233,11 @@ async function _clearPassword(schema, account) {
  * @returns {UrlMatch}
  */
 export function findUrls(str) {
-    let res = [], match;
+    const res = [];
+    let match;
     while ((match = _urlRegexp.exec(str))) {
-        let name = match[2];
-        let url = GLib.uri_parse_scheme(name) ? name : `http://${name}`;
+        const name = match[2];
+        const url = GLib.uri_parse_scheme(name) ? name : `http://${name}`;
         res.push({name, url, pos: match.index + match[1].length});
     }
     return res;
@@ -248,7 +249,8 @@ export function findUrls(str) {
  * @returns {UrlMatch}
  */
 export function findChannels(str, server) {
-    let res = [], match;
+    const res = [];
+    let match;
     while ((match = _channelRegexp.exec(str))) {
         res.push({
             url: `irc://${server}/${match[2]}`,
@@ -263,7 +265,7 @@ export function findChannels(str, server) {
  * @param {string} url - the url
  */
 export function openURL(url) {
-    let app = Gio.Application.get_default();
+    const app = Gio.Application.get_default();
     Gtk.show_uri_full(
         app.active_window, url, Gdk.CURRENT_TIME, null,
         (o, res) => {
@@ -285,8 +287,8 @@ export function openURL(url) {
  * @returns {bool} - whether terms changed
  */
 export function updateTerms(terms, str) {
-    let normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
-    let newTerms = normalized ? normalized.split(' ') : [];
+    const normalized = str.trim().toLowerCase().replace(/\s+/g, ' ');
+    const newTerms = normalized ? normalized.split(' ') : [];
 
     let changed = newTerms.length !== terms.length;
     for (let i = 0; i < terms.length && !changed; i++)
@@ -334,7 +336,7 @@ export async function gpaste(text, title) {
     if (title.length > MAX_PASTE_TITLE_LENGTH)
         title = `${title.substr(0, MAX_PASTE_TITLE_LENGTH - 1)}…`;
 
-    let params = {
+    const params = {
         title,
         data: text,
         expire: _gpasteExpire,
@@ -366,11 +368,11 @@ export async function gpaste(text, title) {
  * @throws
  */
 export async function imgurPaste(pixbuf, title) {
-    let [success, buffer] = pixbuf.save_to_bufferv('png', [], []);
+    const [success, buffer] = pixbuf.save_to_bufferv('png', [], []);
     if (!success)
         throw new Error('Failed to create image buffer');
 
-    let params = {
+    const params = {
         title,
         image: GLib.base64_encode(buffer),
     };
@@ -380,7 +382,7 @@ export async function imgurPaste(pixbuf, title) {
         'https://api.imgur.com/3/image',
         Soup.form_encode_hash(params));
 
-    let requestHeaders = message.request_headers;
+    const requestHeaders = message.request_headers;
     requestHeaders.append('Authorization', `Client-ID ${IMGUR_CLIENT_ID}`);
 
     const bytes = await session.send_and_read_async(
@@ -421,35 +423,35 @@ export function formatTimePassed(seconds) {
             '%d seconds ago', seconds), seconds);
     }
 
-    let minutes = seconds / 60;
+    const minutes = seconds / 60;
     if (minutes < 60) {
         return vprintf(ngettext(
             '%d minute ago',
             '%d minutes ago', minutes), minutes);
     }
 
-    let hours = minutes / 60;
+    const hours = minutes / 60;
     if (hours < 24) {
         return vprintf(ngettext(
             '%d hour ago',
             '%d hours ago', hours), hours);
     }
 
-    let days = hours / 24;
+    const days = hours / 24;
     if (days < 7) {
         return vprintf(ngettext(
             '%d day ago',
             '%d days ago', days), days);
     }
 
-    let weeks = days / 7;
+    const weeks = days / 7;
     if (days < 30) {
         return vprintf(ngettext(
             '%d week ago',
             '%d weeks ago', weeks), weeks);
     }
 
-    let months = days / 30;
+    const months = days / 30;
     return vprintf(ngettext(
         '%d month ago',
         '%d months ago', months), months);
@@ -460,25 +462,25 @@ export function formatTimePassed(seconds) {
  * @returns {string}
  */
 export function formatDateTime(date) {
-    let now = GLib.DateTime.new_now_local();
+    const now = GLib.DateTime.new_now_local();
 
     // 00:01 actually, just to be safe
-    let todayMidnight = GLib.DateTime.new_local(
+    const todayMidnight = GLib.DateTime.new_local(
         now.get_year(),
         now.get_month(),
         now.get_day_of_month(),
         0, 1, 0);
-    let dateMidnight = GLib.DateTime.new_local(
+    const dateMidnight = GLib.DateTime.new_local(
         date.get_year(),
         date.get_month(),
         date.get_day_of_month(),
         0, 1, 0);
-    let daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
+    const daysAgo = todayMidnight.difference(dateMidnight) / GLib.TIME_SPAN_DAY;
 
     let format;
-    let desktopSettings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
-    let clockFormat = desktopSettings.get_string('clock-format');
-    let hasAmPm = date.format('%p') !== '';
+    const desktopSettings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
+    const clockFormat = desktopSettings.get_string('clock-format');
+    const hasAmPm = date.format('%p') !== '';
 
     if (clockFormat === '24h' || !hasAmPm) {
         if (daysAgo < 1) { // today
