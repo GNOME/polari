@@ -14,8 +14,8 @@ Gio._promisify(Polari.TplImporter.prototype, 'collect_files_async');
 Gio._promisify(Polari.TplImporter.prototype, 'import_async');
 
 class GenericQuery {
-    constructor(query) {
-        this._connection = Polari.util_get_tracker_connection();
+    constructor(connection, query) {
+        this._connection = connection;
         this._results = [];
 
         this._statement =
@@ -116,9 +116,11 @@ export class LogWalker {
         if (this._isEnd)
             return [];
 
+        const store = Polari.util_get_tracker_connection();
+
         if (!this._query) {
             const query = '/org/gnome/Polari/sparql/get-room-events.rq';
-            this._query = new GenericQuery(query);
+            this._query = new GenericQuery(store, query);
         }
 
         const channel = this._channelIri;
@@ -137,9 +139,11 @@ export class LogWalker {
     }
 
     async getEventsForward(startTime, numEvents) {
+        const store = Polari.util_get_tracker_connection();
+
         if (!this._forwardQuery) {
             const query = '/org/gnome/Polari/sparql/get-room-events-forward.rq';
-            this._forwardQuery = new GenericQuery(query);
+            this._forwardQuery = new GenericQuery(store, query);
         }
 
         const channel = this._channelIri;
@@ -199,9 +203,11 @@ export class LogFinder {
     }
 
     async countResults(keyword) {
+        const store = Polari.util_get_tracker_connection();
+
         if (!this._countQuery) {
             const query = '/org/gnome/Polari/sparql/count-results.rq';
-            this._countQuery = new GenericQuery(query);
+            this._countQuery = new GenericQuery(store, query);
         }
 
         this._cancellable?.cancel();
@@ -232,14 +238,16 @@ export class LogFinder {
     }
 
     async fetchResults(room, keyword, limit, offset, cancellable) {
+        const store = Polari.util_get_tracker_connection();
+
         if (!this._fetchQuery) {
             const query = '/org/gnome/Polari/sparql/search-messages.rq';
-            this._fetchQuery = new GenericQuery(query);
+            this._fetchQuery = new GenericQuery(store, query);
         }
 
         if (!this._contextQuery) {
             const query = '/org/gnome/Polari/sparql/get-context.rq';
-            this._contextQuery = new GenericQuery(query);
+            this._contextQuery = new GenericQuery(store, query);
         }
 
         const accountId = room.account.get_path_suffix();
