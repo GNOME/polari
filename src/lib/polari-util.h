@@ -19,7 +19,3 @@ gboolean polari_util_match_identify_message (const char  *message,
                                              char       **command,
                                              char       **username,
                                              char       **password);
-
-TrackerSparqlConnection *polari_util_get_tracker_connection (GError **error);
-
-void polari_util_close_tracker_connection (void);
