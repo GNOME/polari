@@ -16,7 +16,17 @@
 struct _PolariTplImporter
 {
   GObject parent_instance;
+  TrackerSparqlConnection *store;
 };
+
+enum
+{
+  PROP_0,
+  PROP_STORE,
+  N_PROPS
+};
+
+static GParamSpec *props[N_PROPS] = { 0, };
 
 G_DEFINE_TYPE (PolariTplImporter, polari_tpl_importer, G_TYPE_OBJECT)
 
@@ -24,9 +34,11 @@ static void stream_read_content (GInputStream *stream,
                                  GTask        *task);
 
 PolariTplImporter *
-polari_tpl_importer_new (void)
+polari_tpl_importer_new (TrackerSparqlConnection *store)
 {
-  return g_object_new (POLARI_TYPE_TPL_IMPORTER, NULL);
+  return g_object_new (POLARI_TYPE_TPL_IMPORTER,
+                       "store", store,
+                       NULL);
 }
 
 typedef struct {
@@ -276,8 +288,8 @@ file_read_ready (GObject      *source,
                  GAsyncResult *result,
                  gpointer      user_data)
 {
-  TrackerSparqlConnection *connection;
   GTask *task = user_data;
+  PolariTplImporter *self = g_task_get_source_object (task);
   GFileInputStream *input;
   GError *error = NULL;
   ImportData *data;
@@ -292,19 +304,10 @@ file_read_ready (GObject      *source,
       return;
     }
 
-  connection = polari_util_get_tracker_connection (&error);
-
-  if (error)
-    {
-      g_task_return_error (task, error);
-      g_object_unref (task);
-      return;
-    }
-
   data = g_new0 (ImportData, 1);
   data->context = g_markup_parse_context_new (&tpl_log_parser, 0, task, NULL);
   data->content = g_malloc0 (CONTENT_BLOCK_SIZE);
-  data->batch = tracker_sparql_connection_create_batch (connection);
+  data->batch = tracker_sparql_connection_create_batch (self->store);
 
   get_channel_and_account_info (G_FILE (source),
                                 &data->account_id, &data->channel_name, &data->is_room);
@@ -515,9 +518,30 @@ polari_tpl_importer_collect_files_finish (PolariTplImporter  *self,
 }
 
 static void
+polari_tpl_importer_set_property (GObject      *object,
+                                  guint         prop_id,
+                                  const GValue *value,
+                                  GParamSpec   *pspec)
+{
+  PolariTplImporter *self = (PolariTplImporter *)object;
+
+  switch (prop_id)
+    {
+    case PROP_STORE:
+      self->store = g_value_dup_object (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+    }
+}
+
+static void
 polari_tpl_importer_finalize (GObject *object)
 {
-  //PolariTplImporter *self = (PolariTplImporter *)object;
+  PolariTplImporter *self = (PolariTplImporter *)object;
+
+  g_clear_object (&self->store);
 
   G_OBJECT_CLASS (polari_tpl_importer_parent_class)->finalize (object);
 }
@@ -528,6 +552,15 @@ polari_tpl_importer_class_init (PolariTplImporterClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = polari_tpl_importer_finalize;
+  object_class->set_property = polari_tpl_importer_set_property;
+
+  props[PROP_STORE] =
+    g_param_spec_object ("store", NULL, NULL,
+                         TRACKER_TYPE_SPARQL_CONNECTION,
+                         G_PARAM_WRITABLE |
+                         G_PARAM_CONSTRUCT_ONLY);
+
+  g_object_class_install_properties (object_class, N_PROPS, props);
 }
 
 static void

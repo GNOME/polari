@@ -163,7 +163,9 @@ export class LogWalker {
 export class LogImporter {
     constructor() {
         this._connection = Polari.util_get_tracker_connection();
-        this._importer = new Polari.TplImporter();
+        this._importer = new Polari.TplImporter({
+            store: this._connection,
+        });
     }
 
     async init() {

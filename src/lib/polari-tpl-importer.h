@@ -16,7 +16,7 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (PolariTplImporter, polari_tpl_importer, POLARI, TPL_IMPORTER, GObject)
 
-PolariTplImporter *polari_tpl_importer_new (void);
+PolariTplImporter *polari_tpl_importer_new (TrackerSparqlConnection *store);
 
 void   polari_tpl_importer_import_async  (PolariTplImporter   *self,
                                           GFile               *file,
