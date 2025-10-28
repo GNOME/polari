@@ -1,3 +1,35 @@
+49.0 — “Never Judge a Book by its Haircut”
+==========================================
+* Fix closing the join dialog [Balló; !319]
+* Use libadwaita spinner widget [Florian; !347]
+* Use libadwaita shortcuts dialog [Florian; !351]
+* Port to gjs-1.85/girepository-2.0 [Florian; !356]
+* Fix closing connection properties dialog [Florian; !362]
+* Implement backlog search [Gurmannat, Carlos, Florian; !311]
+* Make connection to log store asynchronous [Carlos; !365]
+* Show spinner while logs are loading [Florian; !368]
+* Misc. bug fixes and cleanups [Florian, Georges, Bartłomiej, Daniel, Jordan;
+  !315, !316, !317, !321, !322, !323, !324, !325, !326, !327, !331, !332, !333,
+  !334, !335, !336, !338, !339, !340, !341, !342, !343, !344, !345, !346, !348,
+  !349, !350, !355, !353, !357, !358, !360, !361, !363, !359, !366, !367, !369,
+  !370, !372]
+
+Contributors:
+  Georges Basile Stavracas Neto, Piotr Drąg, Carlos Garnacho, Balló György,
+  Guntupalli Karunakar, Andre Klapper, Florian Müllner, Jordan Petridis,
+  Bartłomiej Piotrowski, Daniel Rusek, Alexander Shopov, Gurmannat Sohal,
+  Aefgh Threenine, Sabri Ünal
+
+Translators:
+  Guntupalli Karunakar [hi], Hugo Carvalho [pt], Daniel Mustieles [es],
+  Alexander Shopov [bg], Sabri Ünal [tr], Daniel Șerbănescu [ro],
+  Vasil Pupkin [be], DaeHyun Sung [ko], Daniel Rusek [cs], Nathan Follens [nl],
+  Julien Humbert [fr], Quentin PAGÈS [oc], Aefgh Threenine [th],
+  Fabio Tomat [fur], Giannis Antypas [el], Ekaterine Papava [ka],
+  Luming Zh [zh_CN], Martin [sl], Yuri Chornoivan [uk],
+  Juliano de Souza Camargo [pt_BR], Anders Jonsson [sv], Yaron Shahrabani [he],
+  Artur S0 [ru], Danial Behzadi [fa]
+
 46.0
 ====
 * Use adaptive dialogs [Florian; !310]

@@ -76,10 +76,11 @@ SPDX-License-Identifier: CC0-1.0
   </description>
 
   <releases>
-    <release version="46.0" date="2024-03-30">
+    <release version="49.0" date="2025-11-09">
       <description>
-        <p>Store chat logs in a private database.</p>
-        <p>Use adaptive dialogs.</p>
+        <p>Allow searching the chat backlogs</p>
+        <p>Use adaptive shortcuts dialog</p>
+        <p>Use modernized spinner</p>
       </description>
     </release>
   </releases>
