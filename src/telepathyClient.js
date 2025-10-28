@@ -157,6 +157,27 @@ class TelepathyClient extends Tp.BaseClient {
 
         this._shellHandlesPrivateChats = false;
         this._monitorShellClient();
+        this._queuedMessages = [];
+        this._initStore().catch(logError);
+    }
+
+    async _initStore() {
+        this._store = await Utils.getSparqlStore();
+
+        if (this._queuedMessages?.length > 0) {
+            const batch = this._store.create_batch();
+
+            for (const msg in this._queuedMessages.splice(0))
+                batch.add_resource(DEFAULT_GRAPH, msg);
+
+            batch.execute_async(null, (o, res) => {
+                try {
+                    batch.execute_finish(res);
+                } catch (e) {
+                    log(`Failed to log messages: ${e.message}`);
+                }
+            });
+        }
     }
 
     async _monitorShellClient() {
@@ -703,8 +724,6 @@ class TelepathyClient extends Tp.BaseClient {
         if (this._app.isTestInstance)
             return;
 
-        const connection = Polari.util_get_tracker_connection();
-
         const accountId = channel.connection.get_account().get_path_suffix();
         const isRoom = channel.handle_type === Tp.HandleType.ROOM;
         const channelName = channel.identifier;
@@ -712,13 +731,19 @@ class TelepathyClient extends Tp.BaseClient {
         const message = Polari.Message.new_from_tp_message(tpMessage);
         const resource = message.to_tracker_resource(accountId, channelName, isRoom);
 
-        connection.update_resource_async(DEFAULT_GRAPH, resource, null, (o, res) => {
-            try {
-                connection.update_resource_finish(res);
-            } catch (e) {
-                log(`Failed to log message: ${e.message}`);
-            }
-        });
+        const store = this._store;
+
+        if (!store) {
+            this._queuedMessages.push(resource);
+        } else {
+            store.update_resource_async(DEFAULT_GRAPH, resource, null, (o, res) => {
+                try {
+                    store.update_resource_finish(res);
+                } catch (e) {
+                    log(`Failed to log message: ${e.message}`);
+                }
+            });
+        }
     }
 
     _onMessageSent(channel, msg) {

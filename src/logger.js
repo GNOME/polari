@@ -7,6 +7,8 @@ import Gio from 'gi://Gio';
 import Polari from 'gi://Polari';
 import Tracker from 'gi://Tracker';
 
+import * as Utils from './utils.js';
+
 Gio._promisify(Tracker.SparqlStatement.prototype, 'execute_async');
 Gio._promisify(Tracker.SparqlCursor.prototype, 'next_async');
 Gio._promisify(Tracker.Batch.prototype, 'execute_async');
@@ -116,7 +118,7 @@ export class LogWalker {
         if (this._isEnd)
             return [];
 
-        const store = Polari.util_get_tracker_connection();
+        const store = await Utils.getSparqlStore();
 
         if (!this._query) {
             const query = '/org/gnome/Polari/sparql/get-room-events.rq';
@@ -139,7 +141,7 @@ export class LogWalker {
     }
 
     async getEventsForward(startTime, numEvents) {
-        const store = Polari.util_get_tracker_connection();
+        const store = await Utils.getSparqlStore();
 
         if (!this._forwardQuery) {
             const query = '/org/gnome/Polari/sparql/get-room-events-forward.rq';
@@ -165,14 +167,9 @@ export class LogWalker {
 }
 
 export class LogImporter {
-    constructor() {
-        this._connection = Polari.util_get_tracker_connection();
-        this._importer = new Polari.TplImporter({
-            store: this._connection,
-        });
-    }
-
     async init() {
+        const store = await Utils.getSparqlStore();
+        this._importer = new Polari.TplImporter({store});
         this._files = await this._importer.collect_files_async(null);
         return this._files.length;
     }
@@ -203,7 +200,7 @@ export class LogFinder {
     }
 
     async countResults(keyword) {
-        const store = Polari.util_get_tracker_connection();
+        const store = await Utils.getSparqlStore();
 
         if (!this._countQuery) {
             const query = '/org/gnome/Polari/sparql/count-results.rq';
@@ -238,7 +235,7 @@ export class LogFinder {
     }
 
     async fetchResults(room, keyword, limit, offset, cancellable) {
-        const store = Polari.util_get_tracker_connection();
+        const store = await Utils.getSparqlStore();
 
         if (!this._fetchQuery) {
             const query = '/org/gnome/Polari/sparql/search-messages.rq';
