@@ -8,6 +8,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Polari from 'gi://Polari';
 import Tp from 'gi://TelepathyGLib';
+import Tracker from 'gi://Tracker';
 
 import AccountsMonitor from './accountsMonitor.js';
 import RoomManager from './roomManager.js';
@@ -23,6 +24,7 @@ Gio._promisify(Tp.Account.prototype, 'update_parameters_vardict_async');
 Gio._promisify(Tp.AccountChannelRequest.prototype, 'ensure_and_observe_channel_async');
 Gio._promisify(Tp.Channel.prototype, 'leave_async');
 Gio._promisify(Tp.TextChannel.prototype, 'send_message_async');
+Gio._promisify(Tracker.Batch.prototype, 'execute_async');
 
 const SHELL_CLIENT_PREFIX = 'org.freedesktop.Telepathy.Client.GnomeShell';
 const DEFAULT_GRAPH = 'polari:irc';
@@ -164,13 +166,11 @@ class TelepathyClient extends Tp.BaseClient {
             for (const msg in this._queuedMessages.splice(0))
                 batch.add_resource(DEFAULT_GRAPH, msg);
 
-            batch.execute_async(null, (o, res) => {
-                try {
-                    batch.execute_finish(res);
-                } catch (e) {
-                    log(`Failed to log messages: ${e.message}`);
-                }
-            });
+            try {
+                await batch.execute_async(null);
+            } catch (e) {
+                log(`Failed to log messages: ${e.message}`);
+            }
         }
     }
 
