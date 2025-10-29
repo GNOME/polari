@@ -11,9 +11,8 @@ const Signals = imports.signals;
 
 import NetworksManager from './networksManager.js';
 
-Gio._promisify(Tp.AccountManager.prototype, 'prepare_async', 'prepare_finish');
-Gio._promisify(Tp.Account.prototype,
-    'request_presence_async', 'request_presence_finish');
+Gio._promisify(Tp.AccountManager.prototype, 'prepare_async');
+Gio._promisify(Tp.Account.prototype, 'request_presence_async');
 
 export default class AccountsMonitor {
     static getDefault() {

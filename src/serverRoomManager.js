@@ -16,7 +16,7 @@ import AccountsMonitor from './accountsMonitor.js';
 import RoomManager from './roomManager.js';
 import * as Utils from './utils.js';
 
-Gio._promisify(Tp.RoomList.prototype, 'init_async', 'init_finish');
+Gio._promisify(Tp.RoomList.prototype, 'init_async');
 
 const MS_PER_IDLE = 10; // max time spend in idle
 const MS_PER_FILTER_IDLE = 5; // max time spend in idle while filtering

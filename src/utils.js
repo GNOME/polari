@@ -14,12 +14,11 @@ import Secret from 'gi://Secret';
 import Soup from 'gi://Soup?version=3.0';
 import Tracker from 'gi://Tracker';
 
-Gio._promisify(Secret, 'password_store', 'password_store_finish');
-Gio._promisify(Secret, 'password_lookup', 'password_lookup_finish');
-Gio._promisify(Secret, 'password_clear', 'password_clear_finish');
-Gio._promisify(Soup.Session.prototype,
-    'send_and_read_async', 'send_and_read_finish');
-Gio._promisify(Tracker.SparqlConnection, 'new_async', 'new_finish');
+Gio._promisify(Secret, 'password_store');
+Gio._promisify(Secret, 'password_lookup');
+Gio._promisify(Secret, 'password_clear');
+Gio._promisify(Soup.Session.prototype, 'send_and_read_async');
+Gio._promisify(Tracker.SparqlConnection, 'new_async');
 
 const SECRET_SCHEMA_ACCOUNT = new Secret.Schema(
     'org.gnome.Polari.Account',

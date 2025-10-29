@@ -19,8 +19,7 @@ import TabCompletion from './tabCompletion.js';
 const MAX_NICK_UPDATE_TIME = 5; /* s */
 const MAX_LINES = 5;
 
-Gio._promisify(Gio._LocalFilePrototype,
-    'query_info_async', 'query_info_finish');
+Gio._promisify(Gio._LocalFilePrototype, 'query_info_async');
 
 export const ChatEntry = GObject.registerClass(
 class ChatEntry extends Gtk.Entry {

@@ -9,7 +9,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tp from 'gi://TelepathyGLib';
 
-Gio._promisify(Tp.Account.prototype, 'remove_async', 'remove_finish');
+Gio._promisify(Tp.Account.prototype, 'remove_async');
 
 const SetupPage = {
     CONNECTION: 0,

@@ -18,12 +18,9 @@ import AccountsMonitor from './accountsMonitor.js';
 import NetworksManager from './networksManager.js';
 import * as Utils from './utils.js';
 
-Gio._promisify(Tp.Account.prototype,
-    'set_display_name_async', 'set_display_name_finish');
-Gio._promisify(Tp.Account.prototype,
-    'update_parameters_vardict_async', 'update_parameters_vardict_finish');
-Gio._promisify(Tp.AccountRequest.prototype,
-    'create_account_async', 'create_account_finish');
+Gio._promisify(Tp.Account.prototype, 'set_display_name_async');
+Gio._promisify(Tp.Account.prototype, 'update_parameters_vardict_async');
+Gio._promisify(Tp.AccountRequest.prototype, 'create_account_async');
 
 const DEFAULT_PORT = 6667;
 const DEFAULT_SSL_PORT = 6697;

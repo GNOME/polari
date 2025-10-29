@@ -27,17 +27,12 @@ import TelepathyClient from './telepathyClient.js';
 import UserStatusMonitor from './userTracker.js';
 import * as Utils from './utils.js';
 
-Gio._promisify(Tp.AccountRequest.prototype,
-    'create_account_async', 'create_account_finish');
-Gio._promisify(Tp.Account.prototype, 'remove_async', 'remove_finish');
-Gio._promisify(Tp.Account.prototype,
-    'request_presence_async', 'request_presence_finish');
-Gio._promisify(Tp.Account.prototype,
-    'set_enabled_async', 'set_enabled_finish');
-Gio._promisify(Tp.Account.prototype,
-    'set_nickname_async', 'set_nickname_finish');
-Gio._promisify(Tp.Account.prototype,
-    'update_parameters_vardict_async', 'update_parameters_vardict_finish');
+Gio._promisify(Tp.AccountRequest.prototype, 'create_account_async');
+Gio._promisify(Tp.Account.prototype, 'remove_async');
+Gio._promisify(Tp.Account.prototype, 'request_presence_async');
+Gio._promisify(Tp.Account.prototype, 'set_enabled_async');
+Gio._promisify(Tp.Account.prototype, 'set_nickname_async');
+Gio._promisify(Tp.Account.prototype, 'update_parameters_vardict_async');
 
 const MAX_RETRIES = 3;
 

@@ -11,8 +11,8 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 
-Gio._promisify(Gio._LocalFilePrototype, 'query_info_async', 'query_info_finish');
-Gio._promisify(Gio.Subprocess.prototype, 'wait_async', 'wait_finish');
+Gio._promisify(Gio._LocalFilePrototype, 'query_info_async');
+Gio._promisify(Gio.Subprocess.prototype, 'wait_async');
 
 class Thumbnailer {
     static getDefault() {

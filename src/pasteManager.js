@@ -12,13 +12,10 @@ import Gtk from 'gi://Gtk';
 
 import * as Utils from './utils.js';
 
-Gio._promisify(Gio._LocalFilePrototype,
-    'load_contents_async', 'load_contents_finish');
-Gio._promisify(Gio._LocalFilePrototype,
-    'query_info_async', 'query_info_finish');
-Gio._promisify(Gio._LocalFilePrototype, 'read_async', 'read_finish');
-Gio._promisify(GdkPixbuf.Pixbuf,
-    'new_from_stream_async', 'new_from_stream_finish');
+Gio._promisify(Gio._LocalFilePrototype, 'load_contents_async');
+Gio._promisify(Gio._LocalFilePrototype, 'query_info_async');
+Gio._promisify(Gio._LocalFilePrototype, 'read_async');
+Gio._promisify(GdkPixbuf.Pixbuf, 'new_from_stream_async');
 
 /**
  * Find a supported GType for the formats of a contents exchange

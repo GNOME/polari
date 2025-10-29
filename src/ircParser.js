@@ -15,12 +15,9 @@ const Signals = imports.signals;
 import RoomManager from './roomManager.js';
 import * as Utils from './utils.js';
 
-Gio._promisify(Tp.Account.prototype,
-    'request_presence_async', 'request_presence_finish');
-Gio._promisify(Tp.Connection.prototype,
-    'dup_contact_by_id_async', 'dup_contact_by_id_finish');
-Gio._promisify(Tp.Contact.prototype,
-    'request_contact_info_async', 'request_contact_info_finish');
+Gio._promisify(Tp.Account.prototype, 'request_presence_async');
+Gio._promisify(Tp.Connection.prototype, 'dup_contact_by_id_async');
+Gio._promisify(Tp.Contact.prototype, 'request_contact_info_async');
 
 const N_ = s => s;
 

@@ -14,8 +14,8 @@ import WebKit2 from 'gi://WebKit2?version=4.1';
 import {setConsoleLogDomain} from 'console';
 import {programArgs} from 'system';
 
-Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot', 'get_snapshot_finish');
-Gio._promisify(WebKit2.WebView.prototype, 'run_javascript', 'run_javascript_finish');
+Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot');
+Gio._promisify(WebKit2.WebView.prototype, 'run_javascript');
 
 const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;

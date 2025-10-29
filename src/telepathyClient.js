@@ -14,21 +14,15 @@ import RoomManager from './roomManager.js';
 import UserStatusMonitor from './userTracker.js';
 import * as Utils from './utils.js';
 
-Gio._promisify(Gio.DBusConnection.prototype, 'call', 'call_finish');
-Gio._promisify(Polari.Room.prototype,
-    'send_identify_message_async', 'send_identify_message_finish');
-Gio._promisify(Tp.Account.prototype, 'reconnect_async', 'reconnect_finish');
-Gio._promisify(Tp.Account.prototype,
-    'request_presence_async', 'request_presence_finish');
-Gio._promisify(Tp.Account.prototype,
-    'set_enabled_async', 'set_enabled_finish');
-Gio._promisify(Tp.Account.prototype,
-    'update_parameters_vardict_async', 'update_parameters_vardict_finish');
-Gio._promisify(Tp.AccountChannelRequest.prototype,
-    'ensure_and_observe_channel_async', 'ensure_and_observe_channel_finish');
-Gio._promisify(Tp.Channel.prototype, 'leave_async', 'leave_finish');
-Gio._promisify(Tp.TextChannel.prototype,
-    'send_message_async', 'send_message_finish');
+Gio._promisify(Gio.DBusConnection.prototype, 'call');
+Gio._promisify(Polari.Room.prototype, 'send_identify_message_async');
+Gio._promisify(Tp.Account.prototype, 'reconnect_async');
+Gio._promisify(Tp.Account.prototype, 'request_presence_async');
+Gio._promisify(Tp.Account.prototype, 'set_enabled_async');
+Gio._promisify(Tp.Account.prototype, 'update_parameters_vardict_async');
+Gio._promisify(Tp.AccountChannelRequest.prototype, 'ensure_and_observe_channel_async');
+Gio._promisify(Tp.Channel.prototype, 'leave_async');
+Gio._promisify(Tp.TextChannel.prototype, 'send_message_async');
 
 const SHELL_CLIENT_PREFIX = 'org.freedesktop.Telepathy.Client.GnomeShell';
 const DEFAULT_GRAPH = 'polari:irc';
