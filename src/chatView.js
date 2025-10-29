@@ -429,15 +429,10 @@ class ChatView extends Gtk.ScrolledWindow {
         this.addTargets(this._view);
 
         this._queriedInitialBacklog = false;
-        this.connect('map', () => {
-            if (this._app.importingLogs)
-                return;
-
-            if (!this._queriedInitialBacklog) {
-                this._fetchingBacklog = true;
-                this._getLogEvents(this._oldestMessageTime, NUM_INITIAL_LOG_EVENTS);
-            }
-        });
+        if (!this._app.importingLogs) {
+            this._fetchingBacklog = true;
+            this._getLogEvents(this._oldestMessageTime, NUM_INITIAL_LOG_EVENTS);
+        }
 
         this._roomFocusChangedId = this._app.connect('room-focus-changed',
             this._checkMessages.bind(this));
