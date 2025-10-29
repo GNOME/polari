@@ -15,7 +15,7 @@ import {setConsoleLogDomain} from 'console';
 import {programArgs} from 'system';
 
 Gio._promisify(WebKit2.WebView.prototype, 'get_snapshot');
-Gio._promisify(WebKit2.WebView.prototype, 'run_javascript');
+Gio._promisify(WebKit2.WebView.prototype, 'evaluate_javascript');
 
 const PREVIEW_WIDTH = 120;
 const PREVIEW_HEIGHT = 90;
@@ -119,8 +119,7 @@ class PreviewWindow extends Gtk.Window {
         let obj = null;
 
         try {
-            const res = await this._view.run_javascript(script, null);
-            obj = res.get_js_value();
+            obj = await this._view.evaluate_javascript(script, -1, null, null, null);
         } catch (e) {
             console.warn(`Failed to get clip information from ${this.uri}`);
             console.debug(e);
