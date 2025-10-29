@@ -81,6 +81,7 @@ let _gpasteExpire;
 let _inFlatpakSandbox;
 
 let _sparqlStore;
+let _sparqlStorePromise;
 
 /**
  * @returns {bool}
@@ -550,8 +551,13 @@ export function formatDateTime(date) {
  * @returns {Tracker.SparqlConnection}
  */
 export async function getSparqlStore() {
+    await _sparqlStorePromise;
+
     if (_sparqlStore)
         return _sparqlStore;
+
+    const {promise, resolve} = Promise.withResolvers();
+    _sparqlStorePromise = promise;
 
     const path = GLib.build_filenamev(
         [GLib.get_user_data_dir(), 'polari', 'chatlogs.v1']);
@@ -563,6 +569,8 @@ export async function getSparqlStore() {
         Tracker.SparqlConnectionFlags.FTS_ENABLE_STEMMER |
         Tracker.SparqlConnectionFlags.FTS_ENABLE_UNACCENT,
         dir, ontology, null);
+
+    resolve();
 
     return _sparqlStore;
 }
