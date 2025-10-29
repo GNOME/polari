@@ -301,7 +301,16 @@ class RoomView extends Gtk.Overlay {
         this.add_overlay(new ChannelErrorBar(room));
 
         this._view = new ChatView(room);
-        toolbarView.content = this._view;
+
+        const loadingStatus = new Adw.StatusPage();
+        loadingStatus.paintable = new Adw.SpinnerPaintable({
+            widget: loadingStatus,
+        });
+        toolbarView.content = loadingStatus;
+
+        this._view.connect('logs-ready', () => {
+            toolbarView.content = this._view;
+        });
 
         this._entryArea = new EntryArea({
             room,
