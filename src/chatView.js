@@ -312,6 +312,10 @@ class ChatView extends Gtk.ScrolledWindow {
             0, GLib.MAXUINT32, 0),
     };
 
+    static [GObject.signals] = {
+        'logs-ready': {},
+    };
+
     constructor(room) {
         super({hscrollbar_policy: Gtk.PolicyType.NEVER, vexpand: true});
 
@@ -362,7 +366,6 @@ class ChatView extends Gtk.ScrolledWindow {
                 return;
 
             if (!this._queriedInitialBacklog) {
-                this._queriedInitialBacklog = true;
                 this._fetchingBacklog = true;
                 this._getLogEvents(this._oldestMessageTime, NUM_INITIAL_LOG_EVENTS);
             }
@@ -601,6 +604,11 @@ class ChatView extends Gtk.ScrolledWindow {
             this._insertLogs(events, date);
         } catch (e) {
             console.debug(e);
+        } finally {
+            if (!this._queriedInitialBacklog) {
+                this._queriedInitialBacklog = true;
+                this.emit('logs-ready');
+            }
         }
     }
 
