@@ -360,17 +360,6 @@ class ChatView extends Gtk.ScrolledWindow {
                 this._autoscroll = true;
         });
 
-        this._queriedInitialBacklog = false;
-        this.connect('map', () => {
-            if (this._app.importingLogs)
-                return;
-
-            if (!this._queriedInitialBacklog) {
-                this._fetchingBacklog = true;
-                this._getLogEvents(this._oldestMessageTime, NUM_INITIAL_LOG_EVENTS);
-            }
-        });
-
         this.vadjustment.connect('value-changed',
             this._onValueChanged.bind(this));
         this.vadjustment.connect('changed', this._updateScroll.bind(this));
@@ -438,6 +427,17 @@ class ChatView extends Gtk.ScrolledWindow {
 
         this._app = Gio.Application.get_default();
         this.addTargets(this._view);
+
+        this._queriedInitialBacklog = false;
+        this.connect('map', () => {
+            if (this._app.importingLogs)
+                return;
+
+            if (!this._queriedInitialBacklog) {
+                this._fetchingBacklog = true;
+                this._getLogEvents(this._oldestMessageTime, NUM_INITIAL_LOG_EVENTS);
+            }
+        });
 
         this._roomFocusChangedId = this._app.connect('room-focus-changed',
             this._checkMessages.bind(this));
