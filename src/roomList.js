@@ -160,13 +160,12 @@ class RoomRow extends Gtk.ListBoxRow {
         const status = this._getConnectionStatus();
         // Show loading indicator if joining a room takes more than 3 seconds
         if (status === Tp.ConnectionStatus.CONNECTED && !this._room.channel) {
-            this._connectingTimeoutId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 3, () => {
+            this._connectingTimeoutId = GLib.timeout_add_seconds_once(GLib.PRIORITY_DEFAULT, 3, () => {
                 this._connectingTimeoutId = 0;
 
                 if (this._room.channel)
-                    return GLib.SOURCE_REMOVE;
+                    return;
                 this._eventStack.visible_child_name = 'connecting';
-                return GLib.SOURCE_REMOVE;
             });
         } else {
             this._clearConnectingTimeout();
@@ -509,10 +508,12 @@ class RoomListHeader extends Gtk.Widget {
         if (isError && this._spinner.get_mapped()) {
             const spinnerTime = GLib.get_monotonic_time() - this._spinnerActivationTime;
             if (spinnerTime < MIN_SPINNER_TIME) {
-                GLib.timeout_add(GLib.PRIORITY_DEFAULT, (MIN_SPINNER_TIME - spinnerTime) / 1000, () => {
-                    this._onConnectionStatusChanged();
-                    return GLib.SOURCE_REMOVE;
-                });
+                GLib.timeout_add_once(
+                    GLib.PRIORITY_DEFAULT,
+                    (MIN_SPINNER_TIME - spinnerTime) / 1000,
+                    () => {
+                        this._onConnectionStatusChanged();
+                    });
                 return;
             }
         }

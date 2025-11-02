@@ -62,9 +62,8 @@ class PreviewWindow extends Gtk.Window {
         this._view.connect('load-failed', () => this.emit('snapshot-failed'));
         this._view.load_uri(this.uri);
 
-        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
+        GLib.timeout_add_seconds_once(GLib.PRIORITY_DEFAULT, 60, () => {
             this._view.stop_loading();
-            return GLib.SOURCE_REMOVE;
         });
     }
 
@@ -78,9 +77,8 @@ class PreviewWindow extends Gtk.Window {
 
         /* Hopefully wait long enough for a meaningful snapshot,
            see https://bugs.webkit.org/show_bug.cgi?id=164180 */
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+        GLib.timeout_add_once(GLib.PRIORITY_DEFAULT, 1000, () => {
             this._createSnapshot().catch(console.error);
-            return GLib.SOURCE_REMOVE;
         });
     }
 

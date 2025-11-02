@@ -310,7 +310,7 @@ class ConnectionDetails extends Adw.PreferencesPage {
             if (!realname.startsWith(text))
                 return;
 
-            GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+            GLib.idle_add_once(GLib.PRIORITY_DEFAULT, () => {
                 buffer.block_signal_handler(insertedTextId);
 
                 const startPos = GLib.utf8_strlen(text, -1);
@@ -319,7 +319,6 @@ class ConnectionDetails extends Adw.PreferencesPage {
                 this._realnameRow.select_region(startPos, -1);
 
                 buffer.unblock_signal_handler(insertedTextId);
-                return GLib.SOURCE_REMOVE;
             });
         });
 

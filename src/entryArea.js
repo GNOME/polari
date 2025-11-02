@@ -488,9 +488,8 @@ class EntryArea extends Gtk.Stack {
         //
         // (set_aliases() would do what we want, but it's not
         // introspected)
-        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, MAX_NICK_UPDATE_TIME, () => {
+        GLib.timeout_add_seconds_once(GLib.PRIORITY_DEFAULT, MAX_NICK_UPDATE_TIME, () => {
             this._updateNick();
-            return GLib.SOURCE_REMOVE;
         });
     }
 

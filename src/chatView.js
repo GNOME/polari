@@ -768,10 +768,9 @@ class ChatView extends Gtk.ScrolledWindow {
         if (this._valueChangedId)
             return;
 
-        this._valueChangedId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, SCROLL_TIMEOUT, () => {
+        this._valueChangedId = GLib.timeout_add_once(GLib.PRIORITY_DEFAULT, SCROLL_TIMEOUT, () => {
             this._checkMessages();
             this._valueChangedId = 0;
-            return GLib.SOURCE_REMOVE;
         });
     }
 
