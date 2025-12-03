@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-11-05 17:00+0000\n"
-"PO-Revision-Date: 2025-11-06 11:57+0100\n"
+"POT-Creation-Date: 2025-11-30 10:52+0000\n"
+"PO-Revision-Date: 2025-12-03 15:22+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot En Òc\n"
 "Language: oc\n"
@@ -35,8 +35,8 @@ msgid ""
 "seamlessly with GNOME; it features a simple and beautiful interface which "
 "allows you to focus on your conversations."
 msgstr ""
-"Un client IRC simple qu'es concebut per s'integrar perfèitament amb GNOME. "
-"Dispausa d'una interfàcia simpla e polida que permet de vos concentrer sus "
+"Un client IRC simple qu'es concebut per s'integrar perfièchament amb GNOME. "
+"Dispausa d'una interfàcia simpla e polida que permet de vos concentrar sus "
 "vòstras conversacions."
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:71
@@ -188,7 +188,7 @@ msgstr "Configuracion de Polari"
 
 #: data/ui/initial-setup-window.ui:43
 msgid "Not connected"
-msgstr "Pas connectat"
+msgstr "Non connectat"
 
 #: data/ui/initial-setup-window.ui:44
 msgid "Please connect to the internet to continue the setup."
