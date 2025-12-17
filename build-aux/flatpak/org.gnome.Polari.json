@@ -29,7 +29,6 @@
         "--own-name=org.freedesktop.Telepathy.MissionControl5",
         "--own-name=org.freedesktop.Telepathy.ConnectionManager.idle",
         "--own-name=org.freedesktop.Telepathy.Connection.idle.irc.*",
-        "--own-name=org.freedesktop.Telepathy.Client.Logger",
         "--talk-name=org.freedesktop.secrets",
         "--filesystem=~/.local/share/TpLogger",
         "--env=TPL_LOG_DIR=.local/share",
