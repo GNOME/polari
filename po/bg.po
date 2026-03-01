@@ -1,5 +1,5 @@
 # Bulgarian translation of polari po-file.
-# Copyright (C) 2024 polari's COPYRIGHT HOLDER
+# Copyright (C) 2024, 2026 twlvnn kraftwerk.
 # This file is distributed under the same license as the polari package.
 # twlvnn kraftwerk <kraft_werk@tutanota.com>, 2024, 2026.
 #
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: polari main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2025-11-09 21:18+0000\n"
-"PO-Revision-Date: 2026-01-23 16:43+0100\n"
+"PO-Revision-Date: 2026-03-01 19:10+0100\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
@@ -450,7 +450,7 @@ msgstr "Отпечатване на версията и спиране"
 
 #: src/application.js:531 src/utils.js:280
 msgid "Failed to open link"
-msgstr "Връзката не може да бъде отворена"
+msgstr "Връзката не може да се отвори"
 
 #: src/application.js:798
 #, javascript-format
@@ -463,7 +463,16 @@ msgstr "Отмяна"
 
 #: src/application.js:884
 msgid "translator-credits"
-msgstr "twlvnn kraftwerk <kraft_werk@tutanota.com>"
+msgstr ""
+"twlvnn kraftwerk &lt;<a "
+"href='mailto:kraft_werk@tutanota.com'>kraft_werk@tutanota.com</a>&gt;\n"
+"\n"
+"\n"
+"Проектът за превод на GNOME има нужда от подкрепа.\n"
+"Научете повече за нас на <a href='https://fsa-bg.org/project/gtp'>уеб сайта</"
+"a> ни.\n"
+"Докладвайте за грешки в превода в <a href='https://fsa-bg.org/project/gtp/"
+"newticket'>съответния раздел</a>."
 
 #: src/chatView.js:195
 msgid "New Messages"
