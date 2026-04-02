@@ -1,0 +1,371 @@
+# Serbian translation for polari.
+# Copyright (C) 2026 polari's COPYRIGHT HOLDER
+# This file is distributed under the same license as the polari package.
+# Марко Костић <marko.m.kostic@gmail.com>,  2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: polari gnome-46\n"
+"POT-Creation-Date: 2026-03-21 11:07+0000\n"
+"PO-Revision-Date: 2026-04-02 15:00+0200\n"
+"Last-Translator: Марко Костић <marko.m.kostic@gmail.com>\n"
+"Language-Team: Serbian <Serbian>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 3.9\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+"Марко Костић <marko.m.kostic@gmail.com>\n"
+"Превод на српски језик https://гном.срб"
+
+#. (itstool) path: info/title
+#: C/index.page:7
+msgctxt "text"
+msgid "Polari"
+msgstr "Полари"
+
+#. (itstool) path: credit/name
+#: C/index.page:12 C/introduction.page:12 C/network-connect.page:11
+msgid "Ankit R Gadiya"
+msgstr "Анкит Р Гадија"
+
+#. (itstool) path: credit/years
+#: C/index.page:14 C/introduction.page:14 C/network-connect.page:13
+msgid "2016"
+msgstr "2016"
+
+#. (itstool) path: credit/name
+#: C/index.page:18 C/introduction.page:18 C/irc-commands.page:15 C/irc-join-room.page:13 C/irc-nick-password.page:17 C/irc-start-conversation.page:16 C/network-connect.page:16 C/overview.page:13 C/sharing.page:12
+msgid "Paul Cutler"
+msgstr "Пол Катлер"
+
+#. (itstool) path: license/p
+#: C/index.page:23 C/irc-commands.page:19 C/irc-join-room.page:17 C/irc-nick-password.page:21 C/irc-start-conversation.page:20 C/overview.page:17 C/sharing.page:17
+msgid "Creative Commons Share Alike 4.0"
+msgstr "Creative Commons Share Alike 4.0"
+
+#. (itstool) path: info/desc
+#: C/index.page:27
+msgid "<app>Polari</app> is a clean, simple, and minimal Internet Relay Chat (IRC) client which integrates with the GNOME desktop. Learn more about Polari."
+msgstr "<app>Полари</app> је чист, једноставан и минималистички клијент за ИРЦ (Internet Relay Chat) који се интегрише са Гномовом радном површином. Сазнајте више о Поларију."
+
+#. (itstool) path: page/title
+#: C/index.page:32
+msgid "<_:media-1/> Polari"
+msgstr "<_:media-1/> Полари"
+
+#. (itstool) path: section/title
+#: C/index.page:38
+msgid "Connecting to IRC Servers and Chat Rooms"
+msgstr "Повезивање на ИРЦ сервере и собе за ћаскање"
+
+#. (itstool) path: section/title
+#: C/index.page:42
+msgid "Conversations"
+msgstr "Разговори"
+
+#. (itstool) path: credit/years
+#: C/introduction.page:20 C/network-connect.page:18 C/sharing.page:14
+msgid "2017"
+msgstr "2017"
+
+#. (itstool) path: info/desc
+#: C/introduction.page:25
+msgid "An introduction to <app>Polari</app>, a clean, minimal IRC client."
+msgstr "Увод у <app>Полари</app>, чист и минималистички ИРЦ клијент."
+
+#. (itstool) path: page/title
+#: C/introduction.page:29
+msgid "Introduction"
+msgstr "Увод"
+
+#. (itstool) path: page/p
+#: C/introduction.page:31
+msgid "<app>Polari</app> is a simple Internet Relay Chat (IRC) client which integrates with the GNOME desktop and enables you to chat with people around the world through large chatrooms or private messaging."
+msgstr "<app>Полари</app> је једноставан клијент за ИРЦ (Internet Relay Chat) који се интегрише са Гномовом радном површином и омогућава вам да ћаскате са људима широм света кроз велике причаонице или приватне поруке."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/introduction.page:37
+msgctxt "_"
+msgid "external ref='images/polari-screenshot.png' md5='6b752736dd41aa5cddf337bb3b4be452'"
+msgstr "external ref='images/polari-screenshot.png' md5='6b752736dd41aa5cddf337bb3b4be452'"
+
+#. (itstool) path: media/p
+#: C/introduction.page:38
+msgid "Polari IRC Client"
+msgstr "Полари ИРЦ клијент"
+
+#. (itstool) path: info/desc
+#: C/irc-commands.page:8
+msgid "The supported IRC commands."
+msgstr "Подржане ИРЦ наредбе."
+
+#. (itstool) path: credit/name
+#: C/irc-commands.page:11 C/irc-nick-password.page:13 C/irc-start-conversation.page:12
+msgid "Milo Casagrande"
+msgstr "Мило Казагранде"
+
+#. (itstool) path: page/title
+#: C/irc-commands.page:23
+msgid "Supported IRC commands"
+msgstr "Подржане ИРЦ наредбе"
+
+#. (itstool) path: page/p
+#: C/irc-commands.page:24
+msgid "To see the list of the supported IRC commands, in a chat room type <input>/help</input> and press <key>Enter</key>."
+msgstr "Да бисте видели списак подржаних ИРЦ наредби, у соби за ћаскање укуцајте <input>/help</input> и притисните <key>Enter</key>."
+
+#. (itstool) path: note/p
+#: C/irc-commands.page:29
+msgid "All commands available will be listed and you can type <input>/help commandname</input> to get additional help with a specific command."
+msgstr "Све доступне наредбе ће бити излистане и можете укуцати <input>/help називнаредбе</input> да бисте добили додатну помоћ за одређену наредбу."
+
+#. (itstool) path: info/desc
+#: C/irc-join-room.page:10
+msgid "Join an IRC channel."
+msgstr "Придружите се ИРЦ каналу."
+
+#. (itstool) path: page/title
+#: C/irc-join-room.page:21
+msgid "Join an IRC chat room"
+msgstr "Придружите се ИРЦ соби за ћаскање"
+
+#. (itstool) path: page/p
+#: C/irc-join-room.page:23
+msgid "You can join IRC chat rooms (also known as IRC channels) on any IRC network you are connected to. To connect to an IRC network, see <link xref=\"network-connect\"/>."
+msgstr "Можете се придружити ИРЦ собама за ћаскање (такође познатим као ИРЦ канали) на било којој ИРЦ мрежи на коју сте повезани. Да бисте се повезали на ИРЦ мрежу, погледајте <link xref=\"network-connect\"/>."
+
+#. (itstool) path: page/p
+#: C/irc-join-room.page:27
+msgid "To join an IRC chat room:"
+msgstr "За придруживање ИРЦ соби за ћаскање:"
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:31
+msgid "Press <key>+</key> in the top-left corner."
+msgstr "Притисните <key>+</key> у горњем левом углу."
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:34
+msgid "Enter the name of the chat room you would like to join or select the chat room(s) from the list and then press <gui>Join</gui>. You can select multiple rooms from the list to join."
+msgstr "Унесите назив собе за ћаскање којој желите да се придружите или изаберите собу(е) са списка и притисните <gui>Придружи се</gui>. Можете изабрати више соба са списка за придруживање."
+
+#. (itstool) path: item/p
+#: C/irc-join-room.page:39
+msgid "Click the <gui>Join</gui> button to connect to the chat room or rooms."
+msgstr "Кликните на дугме <gui>Придружи се</gui> да бисте се повезали са собом или собама за ћаскање."
+
+#. (itstool) path: info/desc
+#: C/irc-nick-password.page:10
+msgid "Protect your nickname to prevent other IRC users from using it."
+msgstr "Заштитите свој надимак како бисте спречили друге ИРЦ кориснике да га користе."
+
+#. (itstool) path: page/title
+#: C/irc-nick-password.page:25
+msgid "Use a nickname password on IRC"
+msgstr "Коришћење лозинке за надимак на ИРЦ-у"
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:27
+msgid "On some IRC networks, you can register your nickname with a service called NickServ. By sending special messages to NickServ, you can set your password and identify yourself. Some IRC chat rooms may not allow you to join without a registered nickname."
+msgstr "На неким ИРЦ мрежама можете регистровати свој надимак помоћу услуге која се зове NickServ. Слањем посебних порука NickServ-у, можете поставити своју лозинку и идентификовати се. Неке ИРЦ собе за ћаскање можда неће дозволити да им се придружите без регистрованог надимка."
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:32
+msgid "<app>Polari</app> does not currently support nickname registration automatically. Each IRC network handles registering a specific nickname differently and you will need to check with the IRC network on how to register your nickname. After you have registered a nickname, you will need to message NickServ to identify yourself after connecting to the IRC Network with the following command:"
+msgstr "<app>Полари</app> тренутно не подржава аутоматску регистрацију надимка. Свака ИРЦ мрежа другачије управља регистрацијом одређеног надимка и мораћете да проверите са ИРЦ мрежом како да региструјете свој надимак. Након што региструјете надимак, мораћете да пошаљете поруку NickServ-у да бисте се идентификовали након повезивања на ИРЦ мрежу следећом наредбом:"
+
+#. (itstool) path: item/p
+#: C/irc-nick-password.page:40
+msgid "<input>/msg NickServ identify username password</input>"
+msgstr "<input>/msg NickServ identify username password</input>"
+
+#. (itstool) path: item/p
+#: C/irc-nick-password.page:43
+msgid "Press <key>Enter</key>"
+msgstr "Притисните <key>Enter</key>"
+
+#. (itstool) path: note/p
+#: C/irc-nick-password.page:47
+msgid "Use the username and password you registered with the IRC network with this command."
+msgstr "У овој наредби користите корисничко име и лозинку које сте регистровали на ИРЦ мрежи."
+
+#. (itstool) path: page/p
+#: C/irc-nick-password.page:52
+msgid "<app>Polari</app> will remember your username and password and the next time you connect to the IRC network <gui>Polari</gui> will automatically register you with the NickServ service."
+msgstr "<app>Полари</app> ће запамтити ваше корисничко име и лозинку и следећи пут када се повежете на ИРЦ мрежу, <gui>Полари</gui> ће вас аутоматски регистровати код NickServ услуге."
+
+#. (itstool) path: note/p
+#: C/irc-nick-password.page:58
+msgid "These instructions only allow you to use a password-protected nickname on certain IRC networks. It is not currently possible to register an IRC nickname or change your nickname password using <app>Polari</app>."
+msgstr "Ова упутства вам омогућавају само коришћење надимка заштићеног лозинком на одређеним ИРЦ мрежама. Тренутно није могуће регистровати ИРЦ надимак или променити лозинку надимка користећи <app>Полари</app>."
+
+#. (itstool) path: info/desc
+#: C/irc-start-conversation.page:9
+msgid "Start a conversation with an individual in IRC."
+msgstr "Започните разговор са појединцем на ИРЦ-у."
+
+#. (itstool) path: page/title
+#: C/irc-start-conversation.page:24
+msgid "Chat with somebody on IRC"
+msgstr "Ћаскајте са неким на ИРЦ-у"
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:26
+msgid "You can hold private conversations with other IRC users, outside of the public IRC chat rooms. To start a conversation with another IRC user:"
+msgstr "Можете водити приватне разговоре са другим ИРЦ корисницима, изван јавних ИРЦ соба за ћаскање. Да бисте започели разговор са другим ИРЦ корисником:"
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:31
+msgid "Click on the name of the person in the channel you would like to start a chat with."
+msgstr "Кликните на име особе у каналу са којом желите да започнете ћаскање."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:36
+msgid "Information about the user, including their name and the last time they were active in the channel, will appear. Click <gui>Start Conversation</gui> to start a private conversation."
+msgstr "Појавиће се подаци о кориснику, укључујући његово име и време када је последњи пут био активан у каналу. Кликните на <gui>Започни разговор</gui> да бисте започели приватни разговор."
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:43
+msgid "Another option to start a conversation with a user:"
+msgstr "Још једна опција за започињање разговора са корисником:"
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:47
+msgid "In the upper-right hand corner of <app>Polari</app> a number is displayed that shows the total number of users in the chat room. Click on the number."
+msgstr "У горњем десном углу <app>Поларија</app> приказан је број који показује укупан број корисника у соби за ћаскање. Кликните на тај број."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:53
+msgid "Select the name of the user you want to message. Information about the user, including their name and the last time they were active in the channel, will appear."
+msgstr "Изаберите име корисника коме желите да пошаљете поруку. Појавиће се подаци о кориснику, укључујући његово име и време када је последњи пут био активан на каналу."
+
+#. (itstool) path: item/p
+#: C/irc-start-conversation.page:58
+msgid "Press <gui>Start Conversation</gui> to start a private conversation."
+msgstr "Притисните <gui>Започни разговор</gui> да бисте започели приватни разговор."
+
+#. (itstool) path: page/p
+#: C/irc-start-conversation.page:62
+msgid "A new private conversation will start and a chat room will be created. The chat room will be shown in the left sidebar of <app>Polari</app> with the name of the person you are chatting with."
+msgstr "Нови приватни разговор ће бити започет и соба за ћаскање ће бити направљена. Соба за ћаскање ће бити приказана у левој бочној површи <app>Поларија</app> са именом особе са којом ћаскате."
+
+#. (itstool) path: p/link
+#: C/legal.xml:5
+msgid "Creative Commons Attribution-ShareAlike 4.0 International"
+msgstr "Creative Commons Attribution-ShareAlike 4.0 International"
+
+#. (itstool) path: license/p
+#: C/legal.xml:4
+msgid "This work is licensed under a <_:link-1/> license."
+msgstr "Овај рад је лиценциран под <_:link-1/> лиценцом."
+
+#. (itstool) path: license/p
+#: C/legal.xml:8
+msgid "As a special exception, the copyright holders give you permission to copy, modify, and distribute the example code contained in this documentation under the terms of your choosing, without restriction."
+msgstr "Као посебан изузетак, носиоци ауторских права вам дају дозволу да умножавате, мењате и расподељујете пример кода садржан у овој документацији под условима по вашем избору, без ограничења."
+
+#. (itstool) path: info/desc
+#: C/network-connect.page:21
+msgid "How to connect to an IRC network."
+msgstr "Како се повезати на ИРЦ мрежу."
+
+#. (itstool) path: page/title
+#: C/network-connect.page:24
+msgid "Connect to an IRC Network"
+msgstr "Повезивање на ИРЦ мрежу"
+
+#. (itstool) path: page/p
+#: C/network-connect.page:26
+msgid "The first time you start <app>Polari</app> you will be asked to join a network. <app>Polari</app> comes with over fifty IRC networks configured for you. Choose the IRC Network you would like to connect to and click on it."
+msgstr "Када први пут покренете <app>Полари</app>, бићете упитани да се придружите мрежи. <app>Полари</app> долази са преко педесет подешених ИРЦ мрежа. Изаберите ИРЦ мрежу на коју желите да се повежете и кликните на њу."
+
+#. (itstool) path: page/p
+#: C/network-connect.page:32
+msgid "If you do not see the IRC network you would like to join, you can also enter the details of the IRC network. Click the <gui>Custom Network</gui> button and enter the <gui>Server Address</gui>. You can optionally enter the name of the network as you want it to appear in the list of networks in the <gui>Network Name</gui> field."
+msgstr "Ако не видите ИРЦ мрежу којој желите да се придружите, можете и сами унети податке о ИРЦ мрежи. Кликните на дугме <gui>Произвољна мрежа</gui> и унесите <gui>Адресу сервера</gui>. Можете опционално унети назив мреже како желите да се појављује на списку мрежа у пољу <gui>Назив мреже</gui>."
+
+#. (itstool) path: page/p
+#: C/network-connect.page:39
+msgid "After you have connected to an IRC Network, you can also connect to other IRC Networks."
+msgstr "Након што се повежете на једну ИРЦ мрежу, можете се повезати и на друге ИРЦ мреже."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:45
+msgid "Press on the <key>+</key> in the top left corner."
+msgstr "Притисните на <key>+</key> у горњем левом углу."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:48
+msgid "Press <gui>Add Network</gui> and select the IRC network from the list you would like to join or press <gui>Custom Network</gui> and enter the details."
+msgstr "Притисните <gui>Додај мрежу</gui> и изаберите ИРЦ мрежу са списка којој желите да се придружите или притисните <gui>Произвољна мрежа</gui> и унесите податке."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:53
+msgid "Enter the name of the chat room you would like to join or select the chat room(s) from the list and then press <gui>Join</gui>."
+msgstr "Унесите назив собе за ћаскање којој желите да се придружите или изаберите собу (или собе) са списка и притисните <gui>Придружи се</gui>."
+
+#. (itstool) path: item/p
+#: C/network-connect.page:58
+msgid "Press the <gui>Join</gui> button to connect to the room or rooms."
+msgstr "Притисните дугме <gui>Придружи се</gui> да бисте се повезали на собу или собе."
+
+#. (itstool) path: note/p
+#: C/network-connect.page:62
+msgid "If the IRC network you are connecting to uses a custom port, you can append it to the name of the network with a colon and the port number, for example <em>irc.example.org:12345</em>"
+msgstr "Ако ИРЦ мрежа на коју се повезујете користи произвољни прикључак, можете га додати на крај назива мреже користећи двотачку и број прикључка, на пример <em>irc.example.org:12345</em>"
+
+#. (itstool) path: info/desc
+#: C/overview.page:9
+msgid "What IRC is and how you can use it."
+msgstr "Шта је ИРЦ и како га можете користити."
+
+#. (itstool) path: page/title
+#: C/overview.page:21
+msgid "Overview of Internet Relay Chat"
+msgstr "Преглед ИРЦ-а (Internet Relay Chat)"
+
+#. (itstool) path: page/p
+#: C/overview.page:23
+msgid "Internet Relay Chat (IRC) is a means of chatting with people online using public and private chatrooms. IRC networks, such as Freenode or Gimpnet, are unique and host their own servers with its own channels. IRC uses a client / server model where you can use a client, such as Polari, to connect to an IRC server and join a channel. Channels, also known as chat rooms, are where users meet online to chat."
+msgstr "ИРЦ (Internet Relay Chat) је начин ћаскања са људима на мрежи коришћењем јавних и приватних причаоница. ИРЦ мреже, као што су Фринод (Freenode) или Гимпнет (Gimpnet), јединствене су и имају сопствене сервере са сопственим каналима. ИРЦ користи модел клијента и сервера где можете користити клијент, као што је Полари, за повезивање на ИРЦ сервер и придруживање каналу. Канали, познати и као причаонице, места су где се корисници састају на мрежи ради ћаскања."
+
+#. (itstool) path: info/desc
+#: C/sharing.page:9
+msgid "How to easily share multiple lines of text or images."
+msgstr "Како лако делити више редова текста или слике."
+
+#. (itstool) path: page/title
+#: C/sharing.page:22
+msgid "Share text or images"
+msgstr "Дељење текста или слика"
+
+#. (itstool) path: page/p
+#: C/sharing.page:24
+msgid "It is considered rude in IRC to copy and paste more than five lines of text. If you attempt to paste more than five lines of text, <gui>Polari</gui> will ask you if you would like the text to automatically be pasted to a public paste service. If you agree to paste the text, press the <gui>Paste</gui> button as seen in the following screenshot. After pressing <gui>Paste</gui>, the link to the paste website will be automatically entered into the chat box. Press <key>Enter</key> to share the link with the chat room."
+msgstr "На ИРЦ-у се сматра неучтивим умножавање и убацивање више од пет редова текста. Ако покушате да убаците више од пет редова текста, <gui>Полари</gui> ће вас питати да ли желите да текст аутоматски буде убачен на јавни сервис за чување текста. Ако се сложите са убацивањем текста, притисните дугме <gui>Убаци</gui> као што је приказано на следећем снимку екрана. Након притиска на <gui>Убаци</gui>, веза до веб странице са текстом ће бити аутоматски унета у поље за ћаскање. Притисните <key>Enter</key> да поделите везу са причаоницом."
+
+#. (itstool) path: page/media
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: C/sharing.page:32
+msgctxt "_"
+msgid "external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
+msgstr "external ref='images/polari-paste.png' md5='4214a5e96ebc973942e88a29874fb77e'"
+
+#. (itstool) path: page/p
+#: C/sharing.page:34
+msgid "To share an image file, drag and drop the image from <app>Files</app> into the chat box in <app>Polari</app> or drag and drop a file from <app>Files</app> to <app>Polari</app>. You will be asked if you wish to upload the image to a public paste service. If you agree to upload the image, press the <gui>Paste</gui> button as seen in the following screenshot. After pressing <gui>Paste</gui>, the link to the where the image was uploaded will be automatically entered into the chat box. Press <key>Enter</key> to share the link with the chat room."
+msgstr "Да бисте поделили датотеку слике, превуците и пустите слику из <app>Датотека</app> у поље за ћаскање у <app>Поларију</app> или превуците и пустите датотеку из <app>Датотека</app> у <app>Полари</app>. Бићете упитани да ли желите да отпремите слику на јавни сервис за чување текста. Ако се сложите са отпремањем слике, притисните дугме <gui>Убаци</gui> као што је приказано на следећем снимку екрана. Након притиска на <gui>Убаци</gui>, веза до места где је слика отпремљена ће бити аутоматски унета у поље за ћаскање. Притисните <key>Enter</key> да поделите везу са причаоницом."
