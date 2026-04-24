@@ -149,8 +149,7 @@ polari_room_set_channel_error (PolariRoom *room,
   if (g_strcmp0 (room->channel_error, channel_error) == 0)
     return;
 
-  g_free (room->channel_error);
-  room->channel_error = g_strdup (channel_error);
+  g_set_str (&room->channel_error, channel_error);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_ERROR]);
 }
@@ -367,8 +366,7 @@ static void
 set_display_name (PolariRoom *room,
                   const char *display_name)
 {
-  g_free (room->display_name);
-  room->display_name = g_strdup (display_name);
+  g_set_str (&room->display_name, display_name);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_DISPLAY_NAME]);
 }
@@ -567,8 +565,7 @@ on_contact_info_ready (GObject      *source,
 
       if (f->field_value && *f->field_value)
         {
-          g_free (room->topic);
-          room->topic = g_strdup (*f->field_value);
+          g_set_str (&room->topic, *f->field_value);
 
           g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
         }
