@@ -3,10 +3,10 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
 */
+#include "config.h"
+
 #include <girepository/girepository.h>
 #include <gjs/gjs.h>
-
-#include "config.h"
 
 #ifndef GJS_HAS_AUTOCLEANUP
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GjsContext, g_object_unref)

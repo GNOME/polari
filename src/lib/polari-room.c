@@ -5,11 +5,12 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include "polari-room.h"
+
 #include <string.h>
 
-#include "polari-room.h"
-#include "polari-util.h"
 #include "polari-tp-autocleanup.h"
+#include "polari-util.h"
 
 typedef struct _PolariRoomPrivate PolariRoomPrivate;
 

@@ -5,11 +5,12 @@
  */
 
 #include "polari-tpl-importer.h"
+
+#include <stdio.h>
+#include <string.h>
+
 #include "polari-message-private.h"
 #include "polari-util.h"
-
-#include <string.h>
-#include <stdio.h>
 
 #define DEFAULT_GRAPH "polari:irc"
 

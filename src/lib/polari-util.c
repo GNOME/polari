@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include <string.h>
-
 #include "polari-util.h"
+
+#include <string.h>
 
 #include <glib.h>
 
