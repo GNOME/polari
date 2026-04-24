@@ -153,7 +153,7 @@ tpl_log_end_element_handler (GMarkupParseContext  *context G_GNUC_UNUSED,
       PolariMessage *message = data->message;
 
       g_string_append_c (data->message_text, '\0');
-      message->text = g_string_free (data->message_text, FALSE);
+      message->text = g_string_free_and_steal (data->message_text);
       data->message_text = NULL;
 
       resource = polari_message_to_tracker_resource (message,
