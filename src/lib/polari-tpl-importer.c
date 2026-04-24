@@ -99,7 +99,7 @@ tpl_log_start_element_handler (GMarkupParseContext  *context G_GNUC_UNUSED,
                                gpointer              user_data,
                                GError              **error)
 {
-  if (strcmp (element_name, "message") == 0)
+  if (g_strcmp0 (element_name, "message") == 0)
     {
       GTask *task = user_data;
       ImportData *data = g_task_get_task_data (task);
@@ -134,7 +134,7 @@ tpl_log_start_element_handler (GMarkupParseContext  *context G_GNUC_UNUSED,
                                    G_MARKUP_COLLECT_INVALID);
 
       message->time = parse_time_string (time_str);
-      message->is_action = strcmp (type_str, "action") == 0;
+      message->is_action = g_strcmp0 (type_str, "action") == 0;
     }
 }
 
@@ -146,7 +146,7 @@ tpl_log_end_element_handler (GMarkupParseContext  *context G_GNUC_UNUSED,
 {
   TrackerResource *resource;
 
-  if (strcmp (element_name, "message") == 0)
+  if (g_strcmp0 (element_name, "message") == 0)
     {
       GTask *task = user_data;
       ImportData *data = g_task_get_task_data (task);
@@ -263,7 +263,7 @@ get_channel_and_account_info (GFile     *file,
   *channel_name = g_file_get_basename (parent);
   *account_id = g_path_get_basename (dirname);
 
-  if (strcmp (*account_id, "chatrooms") == 0)
+  if (g_strcmp0 (*account_id, "chatrooms") == 0)
     {
       char *tmp = g_path_get_dirname (dirname);
       g_free (*account_id);

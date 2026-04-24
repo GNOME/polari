@@ -540,7 +540,7 @@ properties_changed (TpProxy     *proxy G_GNUC_UNUSED,
                     gpointer     data,
                     GObject    *weak_ref G_GNUC_UNUSED)
 {
-  if (strcmp (iface_name, TP_IFACE_CHANNEL_INTERFACE_SUBJECT) != 0)
+  if (g_strcmp0 (iface_name, TP_IFACE_CHANNEL_INTERFACE_SUBJECT) != 0)
     return;
 
   update_subject (POLARI_ROOM (data), changed);
@@ -560,7 +560,7 @@ on_contact_info_ready (GObject      *source,
     {
       TpContactInfoField *f = l->data;
 
-      if (strcmp (f->field_name, "fn") != 0)
+      if (g_strcmp0 (f->field_name, "fn") != 0)
         continue;
 
       if (f->field_value && *f->field_value)
@@ -646,7 +646,7 @@ check_channel (PolariRoom *room,
 
   account = tp_connection_get_account (tp_channel_get_connection (channel));
   return account == room->account &&
-         strcmp (tp_channel_get_identifier (channel), room->channel_name) == 0;
+         g_strcmp0 (tp_channel_get_identifier (channel), room->channel_name) == 0;
 }
 
 static void
