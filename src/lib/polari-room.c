@@ -253,6 +253,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   g_return_if_fail (command != NULL && password != NULL);
 
   task = g_task_new (room, NULL, callback, user_data);
+  g_task_set_source_tag (task, polari_room_send_identify_message_async);
 
   if (room->channel == NULL)
     {
