@@ -836,31 +836,31 @@ polari_room_class_init (PolariRoomClass *klass)
     g_param_spec_string ("id",
                          NULL, NULL,
                          NULL,
-                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_NAME);
 
   props[PROP_DISPLAY_NAME] =
     g_param_spec_string ("display-name",
                          NULL, NULL,
                          NULL,
-                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_NAME);
 
   props[PROP_TOPIC] =
     g_param_spec_string ("topic",
                          NULL, NULL,
                          NULL,
-                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_NAME);
 
   props[PROP_ICON] =
     g_param_spec_object ("icon",
                          NULL, NULL,
                          G_TYPE_ICON,
-                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY);
+                         G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_NAME);
 
   props[PROP_ACCOUNT] =
     g_param_spec_object ("account",
                          NULL, NULL,
                          TP_TYPE_ACCOUNT,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NAME);
 
   props[PROP_TYPE] =
     g_param_spec_uint ("type",
@@ -868,25 +868,25 @@ polari_room_class_init (PolariRoomClass *klass)
                        TP_HANDLE_TYPE_NONE,
                        TP_HANDLE_TYPE_GROUP,
                        TP_HANDLE_TYPE_ROOM,
-                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NAME);
 
   props[PROP_CHANNEL_ERROR] =
     g_param_spec_string ("channel-error",
                          NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_NAME);
 
   props[PROP_CHANNEL_NAME] =
     g_param_spec_string ("channel-name",
                          NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NAME);
 
   props[PROP_CHANNEL] =
     g_param_spec_object ("channel",
                          NULL, NULL,
                          TP_TYPE_CHANNEL,
-                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_NAME);
 
   g_object_class_install_properties (object_class, LAST_PROP, props);
 

@@ -558,8 +558,7 @@ polari_tpl_importer_class_init (PolariTplImporterClass *klass)
   props[PROP_STORE] =
     g_param_spec_object ("store", NULL, NULL,
                          TRACKER_TYPE_SPARQL_CONNECTION,
-                         G_PARAM_WRITABLE |
-                         G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_NAME);
 
   g_object_class_install_properties (object_class, N_PROPS, props);
 }
