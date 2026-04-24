@@ -12,15 +12,9 @@
 #include "polari-tp-autocleanup.h"
 #include "polari-util.h"
 
-typedef struct _PolariRoomPrivate PolariRoomPrivate;
-
 struct _PolariRoom {
-    GObject parent_instance;
+  GObject parent_instance;
 
-    PolariRoomPrivate *priv;
-};
-
-struct _PolariRoomPrivate {
   TpAccount *account;
   TpChannel *channel;
 
@@ -82,7 +76,7 @@ static guint signals[LAST_SIGNAL];
 
 static GRegex *color_code_regex = NULL;
 
-G_DEFINE_TYPE_WITH_PRIVATE (PolariRoom, polari_room, G_TYPE_OBJECT)
+G_DEFINE_TYPE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
 static void polari_room_set_channel (PolariRoom *room, TpChannel *channel);
 
@@ -119,9 +113,7 @@ static gboolean
 match_self_nick (PolariRoom *room,
                  const char *text)
 {
-  PolariRoomPrivate *priv = room->priv;
-
-  return polari_util_match_nick (text, priv->self_nick);
+  return polari_util_match_nick (text, room->self_nick);
 }
 
 gboolean
@@ -129,13 +121,9 @@ polari_room_should_highlight_message (PolariRoom *room,
                                       const char *sender,
                                       const char *message)
 {
-  PolariRoomPrivate *priv;
-
   g_return_val_if_fail (POLARI_IS_ROOM (room), FALSE);
 
-  priv = room->priv;
-
-  if (priv->type != TP_HANDLE_TYPE_ROOM)
+  if (room->type != TP_HANDLE_TYPE_ROOM)
     return TRUE;
 
   if (match_self_nick (room, sender))
@@ -149,7 +137,7 @@ polari_room_get_channel_error (PolariRoom *room)
 {
   g_return_val_if_fail (POLARI_IS_ROOM (room), NULL);
 
-  return room->priv->channel_error;
+  return room->channel_error;
 }
 
 void
@@ -158,11 +146,11 @@ polari_room_set_channel_error (PolariRoom *room,
 {
   g_return_if_fail (POLARI_IS_ROOM (room));
 
-  if (g_strcmp0 (room->priv->channel_error, channel_error) == 0)
+  if (g_strcmp0 (room->channel_error, channel_error) == 0)
     return;
 
-  g_free (room->priv->channel_error);
-  room->priv->channel_error = g_strdup (channel_error);
+  g_free (room->channel_error);
+  room->channel_error = g_strdup (channel_error);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_CHANNEL_ERROR]);
 }
@@ -173,7 +161,7 @@ polari_room_set_topic (PolariRoom *room,
 {
   g_return_if_fail (POLARI_IS_ROOM (room));
 
-  tp_cli_channel_interface_subject_call_set_subject (room->priv->channel, -1,
+  tp_cli_channel_interface_subject_call_set_subject (room->channel, -1,
       topic, NULL, NULL, NULL, NULL);
 
 }
@@ -186,7 +174,7 @@ polari_room_add_member (PolariRoom *room,
 
   g_return_if_fail (POLARI_IS_ROOM (room));
 
-  channel = room->priv->channel;
+  channel = room->channel;
 
   if (!tp_proxy_has_interface_by_id (TP_PROXY (channel),
                                      TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP))
@@ -209,7 +197,7 @@ polari_room_remove_member (PolariRoom *room,
 
   g_return_if_fail (POLARI_IS_ROOM (room));
 
-  channel = room->priv->channel;
+  channel = room->channel;
 
   if (!tp_proxy_has_interface_by_id (TP_PROXY (channel),
                                      TP_IFACE_QUARK_CHANNEL_INTERFACE_GROUP))
@@ -236,7 +224,7 @@ on_identify_message_sent (GObject      *source,
 
   if (!tp_text_channel_send_message_finish (channel, result, NULL, &error))
     {
-      room->priv->ignore_identify = FALSE;
+      room->ignore_identify = FALSE;
 
       g_task_return_error (task, error);
       return;
@@ -258,7 +246,6 @@ polari_room_send_identify_message_async (PolariRoom          *room,
                                          GAsyncReadyCallback  callback,
                                          gpointer             user_data)
 {
-  PolariRoomPrivate *priv;
   g_autoptr(TpMessage) message = NULL;
   g_autoptr(GTask) task = NULL;;
   g_autofree char *text = NULL;
@@ -266,11 +253,9 @@ polari_room_send_identify_message_async (PolariRoom          *room,
   g_return_if_fail (POLARI_IS_ROOM (room));
   g_return_if_fail (command != NULL && password != NULL);
 
-  priv = room->priv;
-
   task = g_task_new (room, NULL, callback, user_data);
 
-  if (priv->channel == NULL)
+  if (room->channel == NULL)
     {
       g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_NOT_CONNECTED,
                                "The room is disconnected.");
@@ -278,7 +263,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
     }
 
   /* Don't emit ::identify-sent for our own identify message */
-  room->priv->ignore_identify = TRUE;
+  room->ignore_identify = TRUE;
 
   if (username == NULL)
     text = g_strdup_printf ("%s %s", command, password);
@@ -287,7 +272,7 @@ polari_room_send_identify_message_async (PolariRoom          *room,
 
   message = tp_client_message_new_text (TP_CHANNEL_TEXT_MESSAGE_TYPE_NORMAL, text);
 
-  tp_text_channel_send_message_async (TP_TEXT_CHANNEL (priv->channel), message,
+  tp_text_channel_send_message_async (TP_TEXT_CHANNEL (room->channel), message,
                                       0, on_identify_message_sent, g_steal_pointer (&task));
 }
 
@@ -313,25 +298,24 @@ strip_color_codes (const char *string) {
 static void
 update_self_nick (PolariRoom *room)
 {
-  PolariRoomPrivate *priv = room->priv;
   const char *nick;
   g_autofree char *basenick = NULL;
 
-  g_clear_pointer (&priv->self_nick, g_free);
+  g_clear_pointer (&room->self_nick, g_free);
 
-  if (priv->channel)
+  if (room->channel)
     {
       TpConnection *conn;
       TpContact *self;
 
-      conn = tp_channel_get_connection (priv->channel);
+      conn = tp_channel_get_connection (room->channel);
       self = tp_connection_get_self_contact (conn);
 
       nick = tp_contact_get_alias (self);
     }
   else
     {
-      nick = tp_account_get_nickname (priv->account);
+      nick = tp_account_get_nickname (room->account);
     }
 
   basenick = polari_util_get_basenick (nick);
@@ -351,24 +335,23 @@ update_self_nick (PolariRoom *room)
      negatives in that case, and may prevent false positives in
      case the regular nickname contains non-alnums
    */
-  if (strstr (priv->self_user, basenick) == priv->self_user &&
-      strstr (nick, priv->self_user) == nick)
-    priv->self_nick = g_strdup (priv->self_user);
+  if (strstr (room->self_user, basenick) == room->self_user &&
+      strstr (nick, room->self_user) == nick)
+    room->self_nick = g_strdup (room->self_user);
   else
-    priv->self_nick = g_strdup (basenick);
+    room->self_nick = g_strdup (basenick);
 }
 
 static void
 update_self_user (PolariRoom *room)
 {
-  PolariRoomPrivate *priv = room->priv;
   const GHashTable *parameters;
   const char *username;
   int len;
 
-  g_clear_pointer (&priv->self_user, g_free);
+  g_clear_pointer (&room->self_user, g_free);
 
-  parameters = tp_account_get_parameters (priv->account);
+  parameters = tp_account_get_parameters (room->account);
   username = tp_asv_get_string (parameters, "account");
 
   len = strlen (username);
@@ -377,17 +360,15 @@ update_self_user (PolariRoom *room)
       break;
   while (--len > 0);
 
-  priv->self_user = g_utf8_casefold (username, len);
+  room->self_user = g_utf8_casefold (username, len);
 }
 
 static void
 set_display_name (PolariRoom *room,
                   const char *display_name)
 {
-  PolariRoomPrivate *priv = room->priv;
-
-  g_free (priv->display_name);
-  priv->display_name = g_strdup (display_name);
+  g_free (room->display_name);
+  room->display_name = g_strdup (display_name);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_DISPLAY_NAME]);
 }
@@ -395,12 +376,10 @@ set_display_name (PolariRoom *room,
 static void
 update_icon (PolariRoom *room)
 {
-  PolariRoomPrivate *priv = room->priv;
+  g_clear_object (&room->icon);
 
-  g_clear_object (&priv->icon);
-
-  if (priv->type == TP_HANDLE_TYPE_CONTACT)
-    priv->icon = g_themed_icon_new ("avatar-default-symbolic");
+  if (room->type == TP_HANDLE_TYPE_CONTACT)
+    room->icon = g_themed_icon_new ("avatar-default-symbolic");
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ICON]);
 }
@@ -494,20 +473,19 @@ on_message_sent (TpTextChannel      *channel G_GNUC_UNUSED,
                  gpointer            user_data)
 {
   PolariRoom *room = user_data;
-  PolariRoomPrivate *priv = room->priv;
   g_autofree char *command = NULL, *username = NULL, *password = NULL, *text = NULL;
 
-  if (priv->type != TP_HANDLE_TYPE_CONTACT)
+  if (room->type != TP_HANDLE_TYPE_CONTACT)
     return;
 
   text = tp_message_to_text (TP_MESSAGE (message), NULL);
 
   if (polari_util_match_identify_message (text, &command, &username, &password))
     {
-      if (!priv->ignore_identify)
+      if (!room->ignore_identify)
         g_signal_emit (room, signals[IDENTIFY_SENT], 0, command, username, password);
 
-      priv->ignore_identify = FALSE;
+      room->ignore_identify = FALSE;
     }
 }
 
@@ -525,7 +503,6 @@ static void
 update_subject (PolariRoom *room,
                 GHashTable *properties)
 {
-  PolariRoomPrivate *priv = room->priv;
   const char *raw_subject;
   g_autofree char *subject = NULL;
 
@@ -535,11 +512,11 @@ update_subject (PolariRoom *room,
     return;
 
   subject = strip_color_codes (raw_subject);
-  if (g_strcmp0 (priv->topic, subject) == 0)
+  if (g_strcmp0 (room->topic, subject) == 0)
     return;
 
-  g_free (priv->topic);
-  priv->topic = g_steal_pointer (&subject);
+  g_free (room->topic);
+  room->topic = g_steal_pointer (&subject);
 
   g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
 }
@@ -577,7 +554,6 @@ on_contact_info_ready (GObject      *source,
                        gpointer      data)
 {
   PolariRoom *room = data;
-  PolariRoomPrivate *priv = room->priv;
   g_autolist (TpContactInfoField) infos = NULL;
   GList *l;
 
@@ -591,8 +567,8 @@ on_contact_info_ready (GObject      *source,
 
       if (f->field_value && *f->field_value)
         {
-          g_free (priv->topic);
-          priv->topic = g_strdup (*f->field_value);
+          g_free (room->topic);
+          room->topic = g_strdup (*f->field_value);
 
           g_object_notify_by_pspec (G_OBJECT (room), props[PROP_TOPIC]);
         }
@@ -604,14 +580,10 @@ static void
 polari_room_set_account (PolariRoom *room,
                          TpAccount  *account)
 {
-  PolariRoomPrivate *priv;
-
   g_return_if_fail (POLARI_IS_ROOM (room));
   g_return_if_fail (TP_IS_ACCOUNT (account));
 
-  priv = room->priv;
-
-  if (g_set_object (&priv->account, account))
+  if (g_set_object (&room->account, account))
     g_object_notify_by_pspec (G_OBJECT (room), props[PROP_ACCOUNT]);
 
   update_self_user (room);
@@ -622,16 +594,12 @@ static void
 polari_room_set_type (PolariRoom *room,
                       guint       type)
 {
-  PolariRoomPrivate *priv;
-
   g_return_if_fail (POLARI_IS_ROOM (room));
 
-  priv = room->priv;
-
-  if (priv->type == type)
+  if (room->type == type)
     return;
 
-  priv->type = type;
+  room->type = type;
 
   g_object_freeze_notify (G_OBJECT (room));
 
@@ -645,13 +613,9 @@ static void
 polari_room_set_channel_name (PolariRoom *room,
                               const char *channel_name)
 {
-  PolariRoomPrivate *priv;
-
   g_return_if_fail (POLARI_IS_ROOM (room));
 
-  priv = room->priv;
-
-  g_free (priv->channel_name);
+  g_free (room->channel_name);
 
   if (channel_name)
     {
@@ -663,12 +627,12 @@ polari_room_set_channel_name (PolariRoom *room,
        *
        * [0] http://cgit.freedesktop.org/telepathy/telepathy-idle/tree/src/idle-handles.c#n158
        */
-      priv->channel_name = g_utf8_strdown (channel_name, -1);
+      room->channel_name = g_utf8_strdown (channel_name, -1);
       set_display_name (room, channel_name + (channel_name[0] == '#' ? 1 : 0));
     }
   else
     {
-      priv->channel_name = NULL;
+      room->channel_name = NULL;
       set_display_name (room, NULL);
     }
 
@@ -679,46 +643,41 @@ static gboolean
 check_channel (PolariRoom *room,
                TpChannel  *channel)
 {
-  PolariRoomPrivate *priv = room->priv;
   TpAccount *account;
 
-  g_return_val_if_fail (priv->account != NULL && priv->channel_name != NULL, FALSE);
+  g_return_val_if_fail (room->account != NULL && room->channel_name != NULL, FALSE);
 
   account = tp_connection_get_account (tp_channel_get_connection (channel));
-  return account == priv->account &&
-         strcmp (tp_channel_get_identifier (channel), priv->channel_name) == 0;
+  return account == room->account &&
+         strcmp (tp_channel_get_identifier (channel), room->channel_name) == 0;
 }
 
 static void
 polari_room_set_channel (PolariRoom *room,
                          TpChannel  *channel)
 {
-  PolariRoomPrivate *priv;
-
   g_return_if_fail (POLARI_IS_ROOM (room));
   g_return_if_fail (channel == NULL || TP_IS_TEXT_CHANNEL (channel));
 
-  priv = room->priv;
-
-  if (priv->channel == channel)
+  if (room->channel == channel)
     return;
 
-  if (priv->channel)
+  if (room->channel)
     {
-      g_signal_handlers_disconnect_by_data (priv->channel, room);
-      g_signal_handler_disconnect (tp_channel_get_connection (priv->channel),
-                                   priv->self_contact_notify_id);
+      g_signal_handlers_disconnect_by_data (room->channel, room);
+      g_signal_handler_disconnect (tp_channel_get_connection (room->channel),
+                                   room->self_contact_notify_id);
 
-      tp_proxy_signal_connection_disconnect (priv->properties_changed_id);
+      tp_proxy_signal_connection_disconnect (room->properties_changed_id);
 
-      g_clear_object (&priv->channel);
+      g_clear_object (&room->channel);
     }
 
   if (channel && check_channel (room, channel))
     {
       TpContact *target = tp_channel_get_target_contact (channel);
 
-      priv->channel = g_object_ref (channel);
+      room->channel = g_object_ref (channel);
 
       /* If we have a target contact, the chat is private; assume that this
        * is mutually exclusive with subject/topic support and look for the
@@ -733,7 +692,7 @@ polari_room_set_channel (PolariRoom *room,
                                      subject_get_all, room, NULL, NULL);
 
 
-      priv->self_contact_notify_id =
+      room->self_contact_notify_id =
         g_signal_connect (tp_channel_get_connection (channel),
                           "notify::self-contact",
                           G_CALLBACK (on_self_contact_notify), room);
@@ -745,7 +704,7 @@ polari_room_set_channel (PolariRoom *room,
                         "signal::invalidated",
 			G_CALLBACK (on_channel_invalidated), room,
                         NULL);
-      priv->properties_changed_id =
+      room->properties_changed_id =
         tp_cli_dbus_properties_connect_to_properties_changed (
                                  channel, properties_changed,
                                  room, NULL, NULL, NULL);
@@ -766,39 +725,39 @@ polari_room_get_property (GObject    *object,
                           GValue     *value,
                           GParamSpec *pspec)
 {
-  PolariRoomPrivate *priv = POLARI_ROOM(object)->priv;
+  PolariRoom *room = POLARI_ROOM (object);
 
   switch (prop_id)
     {
     case PROP_ID:
       g_value_take_string (value,
-                           polari_create_room_id (priv->account,
-                                                  priv->channel_name,
-                                                  priv->type));
+                           polari_create_room_id (room->account,
+                                                  room->channel_name,
+                                                  room->type));
       break;
     case PROP_ICON:
-      g_value_set_object (value, priv->icon);
+      g_value_set_object (value, room->icon);
       break;
     case PROP_ACCOUNT:
-      g_value_set_object (value, priv->account);
+      g_value_set_object (value, room->account);
       break;
     case PROP_TYPE:
-      g_value_set_uint (value, priv->type);
+      g_value_set_uint (value, room->type);
       break;
     case PROP_CHANNEL_ERROR:
-      g_value_set_string (value, priv->channel_error);
+      g_value_set_string (value, room->channel_error);
       break;
     case PROP_CHANNEL_NAME:
-      g_value_set_string (value, priv->channel_name);
+      g_value_set_string (value, room->channel_name);
       break;
     case PROP_CHANNEL:
-      g_value_set_object (value, priv->channel);
+      g_value_set_object (value, room->channel);
       break;
     case PROP_DISPLAY_NAME:
-      g_value_set_string (value, priv->display_name);
+      g_value_set_string (value, room->display_name);
       break;
     case PROP_TOPIC:
-      g_value_set_string (value, priv->topic);
+      g_value_set_string (value, room->topic);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -843,22 +802,22 @@ polari_room_set_property (GObject      *object,
 static void
 polari_room_dispose (GObject *object)
 {
-  PolariRoomPrivate *priv = POLARI_ROOM (object)->priv;
+  PolariRoom *room = POLARI_ROOM (object);
 
-  polari_room_set_channel (POLARI_ROOM (object), NULL);
-  g_clear_object (&priv->account);
+  polari_room_set_channel (room, NULL);
+  g_clear_object (&room->account);
   G_OBJECT_CLASS (polari_room_parent_class)->dispose (object);
 }
 
 static void
 polari_room_finalize (GObject *object)
 {
-  PolariRoomPrivate *priv = POLARI_ROOM (object)->priv;
+  PolariRoom *room = POLARI_ROOM (object);
 
-  g_clear_pointer (&priv->channel_name, g_free);
-  g_clear_pointer (&priv->display_name, g_free);
-  g_clear_pointer (&priv->self_nick, g_free);
-  g_clear_pointer (&priv->self_user, g_free);
+  g_clear_pointer (&room->channel_name, g_free);
+  g_clear_pointer (&room->display_name, g_free);
+  g_clear_pointer (&room->self_nick, g_free);
+  g_clear_pointer (&room->self_user, g_free);
 
   G_OBJECT_CLASS (polari_room_parent_class)->finalize (object);
 }
@@ -1006,7 +965,6 @@ polari_room_class_init (PolariRoomClass *klass)
 }
 
 static void
-polari_room_init (PolariRoom *room)
+polari_room_init (PolariRoom *room G_GNUC_UNUSED)
 {
-  room->priv = polari_room_get_instance_private (room);
 }
