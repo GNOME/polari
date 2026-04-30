@@ -76,7 +76,7 @@ static guint signals[LAST_SIGNAL];
 
 static GRegex *color_code_regex = NULL;
 
-G_DEFINE_FINAL_TYPE (PolariRoom, polari_room, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (PolariRoom, polari_room, G_TYPE_OBJECT)
 
 static void polari_room_set_channel (PolariRoom *room, TpChannel *channel);
 

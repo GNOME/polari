@@ -6,7 +6,7 @@
 
 #include "polari-client-factory.h"
 
-G_DEFINE_TYPE (PolariClientFactory, polari_client_factory, TP_TYPE_AUTOMATIC_CLIENT_FACTORY);
+G_DEFINE_TYPE (PolariClientFactory, polari_client_factory, TP_TYPE_AUTOMATIC_CLIENT_FACTORY)
 
 PolariClientFactory *
 polari_client_factory_new (void)

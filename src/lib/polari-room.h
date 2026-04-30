@@ -16,7 +16,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 G_BEGIN_DECLS
 
 #define POLARI_TYPE_ROOM            (polari_room_get_type())
-G_DECLARE_FINAL_TYPE (PolariRoom, polari_room, POLARI, ROOM, GObject);
+G_DECLARE_FINAL_TYPE (PolariRoom, polari_room, POLARI, ROOM, GObject)
 
 const char *polari_room_get_channel_error (PolariRoom *room);
 void        polari_room_set_channel_error (PolariRoom *room,

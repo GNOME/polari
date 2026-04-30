@@ -17,7 +17,7 @@ G_BEGIN_DECLS
 
 #define POLARI_TYPE_CLIENT_FACTORY (polari_client_factory_get_type())
 
-G_DECLARE_DERIVABLE_TYPE (PolariClientFactory, polari_client_factory, POLARI, CLIENT_FACTORY, TpAutomaticClientFactory);
+G_DECLARE_DERIVABLE_TYPE (PolariClientFactory, polari_client_factory, POLARI, CLIENT_FACTORY, TpAutomaticClientFactory)
 
 struct _PolariClientFactoryClass
 {

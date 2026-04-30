@@ -6,7 +6,7 @@
 
 #include "polari-message-private.h"
 
-G_DEFINE_BOXED_TYPE (PolariMessage, polari_message, polari_message_copy, polari_message_free);
+G_DEFINE_BOXED_TYPE (PolariMessage, polari_message, polari_message_copy, polari_message_free)
 
 PolariMessage *
 polari_message_new_empty ()
