@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Florian Müllner <fmuellner@gnome.org>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+[rules.property_enum_convention]
+style = "legacy"
+
+[rules.property_switch_exhaustiveness]
+style = "legacy"
+
+[rules.type_style]
+style = "c"
