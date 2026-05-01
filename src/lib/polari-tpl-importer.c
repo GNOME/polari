@@ -29,7 +29,7 @@ enum
 
 static GParamSpec *props[N_PROPS] = { 0, };
 
-G_DEFINE_TYPE (PolariTplImporter, polari_tpl_importer, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (PolariTplImporter, polari_tpl_importer, G_TYPE_OBJECT)
 
 static void stream_read_content (GInputStream *stream,
                                  GTask        *task);
