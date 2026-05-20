@@ -69,6 +69,10 @@ class PreviewWindow extends Gtk.Window {
         });
     }
 
+    vfunc_map() {
+        // Hack: Override map so we don't actually show the window
+    }
+
     _onLoadingChanged() {
         if (this._view.is_loading)
             return;
@@ -181,7 +185,7 @@ class App extends Gtk.Application {
             default_height: 10 * PREVIEW_HEIGHT,
         });
 
-        window.realize();
+        window.present();
         window.connect('snapshot-ready', this._onSnapshotReady.bind(this));
         window.connect('snapshot-failed', this._onSnapshotFailed.bind(this));
     }
