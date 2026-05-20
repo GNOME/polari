@@ -77,7 +77,7 @@ class PreviewWindow extends Gtk.Window {
         /* Hopefully wait long enough for a meaningful snapshot,
            see https://bugs.webkit.org/show_bug.cgi?id=164180 */
         GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
-            this._createSnapshot();
+            this._createSnapshot().catch(console.error);
             return GLib.SOURCE_REMOVE;
         });
     }
