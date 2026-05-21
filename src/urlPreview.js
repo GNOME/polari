@@ -177,8 +177,13 @@ class URLPreview extends Gtk.Box {
                 console.info(`Failed to generate thumbnail for ${this.uri}`);
                 console.debug(e);
             }
+
+            const [type, uncertain] = Gio.content_type_guess(this.uri, null);
+            const gicon = uncertain
+                ? new Gio.ThemedIcon({name: 'image-x-generic-symbolic'})
+                : Gio.content_type_get_symbolic_icon(type);
             this._image.set({
-                icon_name: 'image-x-generic-symbolic',
+                gicon,
                 pixel_size: 64,
             });
         }
