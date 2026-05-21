@@ -190,6 +190,6 @@ class URLPreview extends Gtk.Box {
 
     vfunc_map() {
         super.vfunc_map();
-        this._maybeLoadImage();
+        this._maybeLoadImage().catch(console.error);
     }
 });
