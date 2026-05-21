@@ -173,7 +173,7 @@ class URLPreview extends Gtk.Box {
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE)) {
                 this._imageLoaded = false;
-            } else {
+            } else if (!e.matches(GdkPixbuf.PixbufError, GdkPixbuf.PixbufError.CORRUPT_IMAGE)) {
                 console.info(`Failed to generate thumbnail for ${this.uri}`);
                 console.debug(e);
             }
