@@ -30,7 +30,7 @@ struct _PolariRoom {
 
   TpHandleType type;
 
-  guint self_contact_notify_id;
+  unsigned int self_contact_notify_id;
 
   gboolean ignore_identify;
 
@@ -72,7 +72,7 @@ enum
   LAST_SIGNAL
 };
 
-static guint signals[LAST_SIGNAL];
+static unsigned int signals[LAST_SIGNAL];
 
 static GRegex *color_code_regex = NULL;
 
@@ -404,7 +404,7 @@ on_group_contacts_changed (TpChannel  *channel G_GNUC_UNUSED,
   TpChannelGroupChangeReason reason;
   const char *raw_message;
   g_autofree char *message = NULL;
-  guint i;
+  unsigned int i;
 
   reason = tp_asv_get_uint32 (details, "change-reason", NULL);
   raw_message = tp_asv_get_string (details, "message");
@@ -467,7 +467,7 @@ on_group_contacts_changed (TpChannel  *channel G_GNUC_UNUSED,
 static void
 on_message_sent (TpTextChannel      *channel G_GNUC_UNUSED,
                  TpSignalledMessage *message,
-                 guint               flags G_GNUC_UNUSED,
+                 unsigned int        flags G_GNUC_UNUSED,
                  char               *token G_GNUC_UNUSED,
                  gpointer            user_data)
 {
@@ -489,11 +489,11 @@ on_message_sent (TpTextChannel      *channel G_GNUC_UNUSED,
 }
 
 static void
-on_channel_invalidated (TpProxy  *channel G_GNUC_UNUSED,
-                        guint     domain G_GNUC_UNUSED,
-                        int       code G_GNUC_UNUSED,
-                        char     *message G_GNUC_UNUSED,
-                        gpointer  user_data)
+on_channel_invalidated (TpProxy      *channel G_GNUC_UNUSED,
+                        unsigned int  domain G_GNUC_UNUSED,
+                        int           code G_GNUC_UNUSED,
+                        char         *message G_GNUC_UNUSED,
+                        gpointer      user_data)
 {
   polari_room_set_channel (POLARI_ROOM (user_data), NULL);
 }
@@ -589,8 +589,8 @@ polari_room_set_account (PolariRoom *room,
 }
 
 static void
-polari_room_set_type (PolariRoom *room,
-                      guint       type)
+polari_room_set_type (PolariRoom   *room,
+                      unsigned int  type)
 {
   g_return_if_fail (POLARI_IS_ROOM (room));
 
@@ -718,10 +718,10 @@ polari_room_set_channel (PolariRoom *room,
 }
 
 static void
-polari_room_get_property (GObject    *object,
-                          guint       prop_id,
-                          GValue     *value,
-                          GParamSpec *pspec)
+polari_room_get_property (GObject      *object,
+                          unsigned int  prop_id,
+                          GValue       *value,
+                          GParamSpec   *pspec)
 {
   PolariRoom *room = POLARI_ROOM (object);
 
@@ -764,7 +764,7 @@ polari_room_get_property (GObject    *object,
 
 static void
 polari_room_set_property (GObject      *object,
-                          guint         prop_id,
+                          unsigned int  prop_id,
                           const GValue *value,
                           GParamSpec   *pspec)
 {

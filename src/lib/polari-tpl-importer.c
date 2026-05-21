@@ -172,7 +172,7 @@ tpl_log_end_element_handler (GMarkupParseContext  *context G_GNUC_UNUSED,
 static void
 tpl_log_text_handler (GMarkupParseContext  *context G_GNUC_UNUSED,
                       const char           *text,
-                      gsize                 length,
+                      size_t                length,
                       gpointer              user_data,
                       GError              **error G_GNUC_UNUSED)
 {
@@ -200,7 +200,7 @@ content_ready (GObject      *source,
   GTask *task = user_data;
   ImportData *data = g_task_get_task_data (task);
   GError *error = NULL;
-  gssize count;
+  ssize_t count;
 
   count = g_input_stream_read_finish (stream, result, &error);
 
@@ -520,7 +520,7 @@ polari_tpl_importer_collect_files_finish (PolariTplImporter  *self,
 
 static void
 polari_tpl_importer_set_property (GObject      *object,
-                                  guint         prop_id,
+                                  unsigned int  prop_id,
                                   const GValue *value,
                                   GParamSpec   *pspec)
 {

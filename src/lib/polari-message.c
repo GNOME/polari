@@ -41,7 +41,7 @@ polari_message_new_from_tp_message (TpMessage *tp_message)
   char *text = tp_message_to_text (tp_message, NULL);
   TpContact *sender = tp_signalled_message_get_sender (tp_message);
   TpChannelTextMessageType type = tp_message_get_message_type (tp_message);
-  gint64 timestamp;
+  int64_t timestamp;
   gboolean incoming;
 
   timestamp = tp_message_get_sent_timestamp (tp_message);
