@@ -128,8 +128,9 @@ class PreviewWindow extends Gtk.Window {
         if (!obj || obj.is_null())
             return null;
 
+        const {scaleFactor} = this;
         const [x, y, width, height] = obj.object_enumerate_properties()
-            .map(p => obj.object_get_property(p).to_int32());
+            .map(p => obj.object_get_property(p).to_int32() * scaleFactor);
 
         if (width === 0 || height === 0)
             throw new Error('Invalid image clip');
