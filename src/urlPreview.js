@@ -169,6 +169,7 @@ class URLPreview extends Gtk.Box {
             title = pixbuf.get_option('tEXt::Title');
             this._image.set_from_pixbuf(pixbuf);
             this._image.remove_css_class('dim-label');
+            this._image.pixel_size = 90;
         } catch (e) {
             if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NETWORK_UNREACHABLE)) {
                 this._imageLoaded = false;
