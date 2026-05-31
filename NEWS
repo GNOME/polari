@@ -1,3 +1,20 @@
+50.0
+====
+* Improve thumbnails on HiDPI display [Florian; !375]
+* Port thumbnailer to GTK4 [Florian; !375]
+* Misc. bug fixes and cleanups [Florian; !373, !374, !376, !371]
+
+Contributors:
+  twlvnn kraftwerk, Florian Müllner, Марко Костић
+
+Translators:
+  Aurimas Aurimas Černius [lt], Victor Dargallo [ca], Jiri Grönroos [fi],
+  Quentin PAGÈS [oc], Jürgen Benvenuti [de], Asier Saratsua Garmendia [eu],
+  Julian Villodre [es], twlvnn kraftwerk [bg], Aefgh Threenine [th],
+  Baurzhan Muftakhidinov [kk], Efstathios Iosifidis [el],
+  Alexander Alexandrov Shopov [bg], DaeHyun Sung [ko], Balázs Úr [hu],
+  Guillaume Bernard [fr], Ask Hjorth Larsen [da], Марко Костић [sr]
+
 49.0 — “Never Judge a Book by its Haircut”
 ==========================================
 * Fix closing the join dialog [Balló; !319]

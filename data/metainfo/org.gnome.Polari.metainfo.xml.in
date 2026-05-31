@@ -76,11 +76,10 @@ SPDX-License-Identifier: CC0-1.0
   </description>
 
   <releases>
-    <release version="49.0" date="2025-11-09">
+    <release version="50.0" date="2026-05-31">
       <description>
-        <p>Allow searching the chat backlogs</p>
-        <p>Use adaptive shortcuts dialog</p>
-        <p>Use modernized spinner</p>
+        <p>Improve thumbails on HiDPI displays</p>
+        <p>Port thumbnailer to GTK 4</p>
       </description>
     </release>
   </releases>
