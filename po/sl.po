@@ -8,18 +8,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-10-29 20:51+0000\n"
-"PO-Revision-Date: 2025-10-29 22:01+0100\n"
+"POT-Creation-Date: 2025-11-09 21:18+0000\n"
+"PO-Revision-Date: 2026-07-27 16:35+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
+"n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Bookmarks: 77,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
@@ -31,6 +31,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Pogovor z uporabniki okolja IRC"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -209,8 +215,8 @@ msgid ""
 "Select rooms you want to connect to. You can add more networks and rooms "
 "later, by clicking the + button."
 msgstr ""
-"Izberite sobe za povezavo. Te je mogoče dodati tudi kasneje s klikom na gumb "
-"» + «."
+"Izberite sobe za povezavo. Te je mogoče dodati tudi kasneje s klikom na "
+"gumb » + «."
 
 #: data/ui/join-room-dialog.ui:19
 msgid "Join Chat Room"
@@ -471,55 +477,55 @@ msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 msgid "New Messages"
 msgstr "Novo sporočilo"
 
-#: src/chatView.js:809
+#: src/chatView.js:812
 msgid "Open Link"
 msgstr "Odpri povezavo"
 
-#: src/chatView.js:811
+#: src/chatView.js:814
 msgid "Copy Link Address"
 msgstr "Kopiraj naslov povezave"
 
-#: src/chatView.js:1010
+#: src/chatView.js:1013
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je preimenovan v %s"
 
-#: src/chatView.js:1015
+#: src/chatView.js:1018
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s je prekinil povezavo"
 
-#: src/chatView.js:1024
+#: src/chatView.js:1027
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s je bil vržen iz sobe s strani %s"
 
-#: src/chatView.js:1025
+#: src/chatView.js:1028
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s je bil vržen iz sobe"
 
-#: src/chatView.js:1032
+#: src/chatView.js:1035
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s je dobil prepoved s strani %s"
 
-#: src/chatView.js:1033
+#: src/chatView.js:1036
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s je dobil prepoved"
 
-#: src/chatView.js:1038
+#: src/chatView.js:1041
 #, javascript-format
 msgid "%s joined"
 msgstr "%s je vstopil v klepetalnico."
 
-#: src/chatView.js:1043
+#: src/chatView.js:1046
 #, javascript-format
 msgid "%s left"
 msgstr "%s preostalo"
 
-#: src/chatView.js:1140
+#: src/chatView.js:1143
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -528,7 +534,7 @@ msgstr[1] "Pridružil se je %d uporabnik"
 msgstr[2] "Pridružil sta se %d uporabnika"
 msgstr[3] "Pridružil so se %d uporabniki"
 
-#: src/chatView.js:1147
+#: src/chatView.js:1150
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
