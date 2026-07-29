@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2025-11-09 21:18+0000\n"
-"PO-Revision-Date: 2026-07-27 16:47+0500\n"
+"PO-Revision-Date: 2026-07-29 17:58+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -27,6 +27,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "IRC арқылы адамдармен сөйлесу"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -52,8 +58,7 @@ msgstr ""
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME үшін Internet Relay Chat клиенті"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:14
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;интернет;чат;"
@@ -127,8 +132,7 @@ msgid "Identify username supported"
 msgstr "Идентификациялау пайдаланушы аты қолдау көрсетіледі"
 
 #: data/org.gnome.Polari.gschema.xml:60
-msgid ""
-"Whether the identify command is known to support the username parameter"
+msgid "Whether the identify command is known to support the username parameter"
 msgstr ""
 "Идентификациялау командасы пайдаланушы аты параметрін қолдайтыны-"
 "қолдамайтыны белгілі ме"
@@ -141,8 +145,8 @@ msgstr "Дыбысы сөндірілген пайдаланушы аттары�
 msgid ""
 "A list of usernames for whose private messages not to show notifications"
 msgstr ""
-"Жеке хабарламалары үшін хабарландырулар көрсетілмейтін пайдаланушы "
-"аттарының тізімі"
+"Жеке хабарламалары үшін хабарландырулар көрсетілмейтін пайдаланушы аттарының "
+"тізімі"
 
 #: data/ui/connection-details.ui:20
 msgid "_Server Address"
@@ -609,13 +613,14 @@ msgid "_Next"
 msgstr "_Келесі"
 
 #. commands that would be nice to support:
+#.
 #. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
-#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on
-#. the server"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
 #. MODE: "/MODE <mode> <nick|channel> — ",
-#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to
-#. <nick|channel>"),
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#.
+#.
 #: src/ircParser.js:34
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
