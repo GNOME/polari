@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-11-09 21:18+0000\n"
-"PO-Revision-Date: 2026-01-25 22:41+0500\n"
+"POT-Creation-Date: 2026-05-31 15:27+0000\n"
+"PO-Revision-Date: 2026-08-22 08:20+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:2 data/ui/main-window.ui:45
@@ -27,6 +27,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "IRC желісінде адамдармен сөйлесу"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -52,8 +58,7 @@ msgstr ""
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "GNOME үшін Internet Relay Chat клиенті"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Polari.desktop.in:14
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;интернет;чат;"
@@ -127,8 +132,7 @@ msgid "Identify username supported"
 msgstr "Қолдау көрсетілетін идентификациялық пайдаланушы аты"
 
 #: data/org.gnome.Polari.gschema.xml:60
-msgid ""
-"Whether the identify command is known to support the username parameter"
+msgid "Whether the identify command is known to support the username parameter"
 msgstr ""
 "Идентификациялау командасының пайдаланушы аты параметрін қолдайтыны белгілі "
 "ма"
@@ -471,61 +475,61 @@ msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 msgid "New Messages"
 msgstr "Жаңа хабарламалар"
 
-#: src/chatView.js:812
+#: src/chatView.js:811
 msgid "Open Link"
 msgstr "Сілтемені ашу"
 
-#: src/chatView.js:814
+#: src/chatView.js:813
 msgid "Copy Link Address"
 msgstr "Сілтеме адресін көшіру"
 
-#: src/chatView.js:1013
+#: src/chatView.js:1012
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s енді %s ретінде белгілі"
 
-#: src/chatView.js:1018
+#: src/chatView.js:1017
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s ажыратылған"
 
-#: src/chatView.js:1027
+#: src/chatView.js:1026
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s %s тарапынан қуып шығарылды"
 
-#: src/chatView.js:1028
+#: src/chatView.js:1027
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s қуып шығарылды"
 
-#: src/chatView.js:1035
+#: src/chatView.js:1034
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s %s тарапынан бандалды"
 
-#: src/chatView.js:1036
+#: src/chatView.js:1035
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s бандалды"
 
-#: src/chatView.js:1041
+#: src/chatView.js:1040
 #, javascript-format
 msgid "%s joined"
 msgstr "%s кірген"
 
-#: src/chatView.js:1046
+#: src/chatView.js:1045
 #, javascript-format
 msgid "%s left"
 msgstr "%s шыққан"
 
-#: src/chatView.js:1143
+#: src/chatView.js:1142
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d пайдаланушысы кірген"
 
-#: src/chatView.js:1150
+#: src/chatView.js:1149
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -539,12 +543,12 @@ msgstr "Қосылған болып тұр"
 msgid "No results."
 msgstr "Нәтижелер жоқ."
 
-#: src/connections.js:519
+#: src/connections.js:518
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "\"%s\" қасиеттері"
 
-#: src/connections.js:550
+#: src/connections.js:549
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -608,13 +612,14 @@ msgid "_Next"
 msgstr "_Келесі"
 
 #. commands that would be nice to support:
+#.
 #. AWAY: N_("/AWAY [<message>] — sets or unsets away message"),
-#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on
-#. the server"),
+#. LIST: N_("/LIST [<channel>] — lists stats on <channel>, or all channels on the server"),
 #. MODE: "/MODE <mode> <nick|channel> — ",
-#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to
-#. <nick|channel>"),
+#. NOTICE: N_("/NOTICE <nick|channel> <message> — sends notice to <nick|channel>"),
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
+#.
+#.
 #: src/ircParser.js:34
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
@@ -719,70 +724,70 @@ msgid "%d user"
 msgid_plural "%d users"
 msgstr[0] "%d пайдаланушы"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "Leave chatroom"
 msgstr "Чат бөлмесінен шығу"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "End conversation"
 msgstr "Сөйлесуді аяқтау"
 
-#: src/roomList.js:312
+#: src/roomList.js:311
 msgid "Unmute"
 msgstr "Дыбысты іске қосу"
 
-#: src/roomList.js:316
+#: src/roomList.js:315
 msgid "Mute"
 msgstr "Дыбысты өшіру"
 
-#: src/roomList.js:481
+#: src/roomList.js:480
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "%s желіде қате бар"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "Libera (irc.libera.chat)"
-#: src/roomList.js:537
+#: src/roomList.js:538
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:545
+#: src/roomList.js:546
 msgid "Connection Problem"
 msgstr "Байланыс қатесі"
 
-#: src/roomList.js:562
+#: src/roomList.js:563
 msgid "Connected"
 msgstr "Байланысқан"
 
-#: src/roomList.js:564
+#: src/roomList.js:565
 msgid "Connecting…"
 msgstr "Байланысты орнату…"
 
-#: src/roomList.js:566 src/userList.js:394
+#: src/roomList.js:567 src/userList.js:394
 msgid "Offline"
 msgstr "Желіде емес"
 
-#: src/roomList.js:568
+#: src/roomList.js:569
 msgid "Unknown"
 msgstr "Белгісіз"
 
-#: src/roomList.js:587
+#: src/roomList.js:588
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "%s-ке қауіпсіз жолмен қосылу мүмкін емес."
 
-#: src/roomList.js:590
+#: src/roomList.js:591
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s парольді талап етеді."
 
-#: src/roomList.js:596
+#: src/roomList.js:597
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "%s байланысын орнату мүмкін емес. Сервер бос емес."
 
-#: src/roomList.js:599
+#: src/roomList.js:600
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "%s байланысын орнату мүмкін емес."
