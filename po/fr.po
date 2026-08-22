@@ -7,14 +7,14 @@
 # Alain Lojewski <allomervan@gmail.com>, 2017.
 # Charles Monzat <charles.monzat@free.fr>, 2018-2020.
 # Thibault Martin <mail@thibaultmart.in>, 2020.
-# Julien Humbert <julroy67@gmail.com>, 2024.
+# Julien Humbert <julroy67@gmail.com>, 2024-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
 "POT-Creation-Date: 2025-11-09 21:18+0000\n"
-"PO-Revision-Date: 2026-03-07 09:22+0100\n"
+"PO-Revision-Date: 2026-08-22 09:51+0200\n"
 "Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:2 data/ui/main-window.ui:45
@@ -33,6 +33,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Discuter avec des gens sur IRC"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -152,7 +158,7 @@ msgstr ""
 
 #: data/ui/connection-details.ui:20
 msgid "_Server Address"
-msgstr "Adresse du _serveur :"
+msgstr "Adresse du _serveur"
 
 #: data/ui/connection-details.ui:26
 msgid "Net_work Name"
@@ -354,7 +360,7 @@ msgstr "Afficher la liste des utilisateurs"
 #: data/ui/shortcuts-dialog.ui:34
 msgctxt "shortcut window"
 msgid "Toggle Search"
-msgstr "Basculer la recherche"
+msgstr "Afficher ou masquer la barre de recherche"
 
 #: data/ui/shortcuts-dialog.ui:40
 msgctxt "shortcut window"
@@ -709,7 +715,7 @@ msgstr "/WHOIS <pseudo> — demande des informations sur <pseudo>"
 #: src/ircParser.js:51
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr ""
-"Commande inconnue — essayez /HELP pour une liste des commandes disponibles."
+"Commande inconnue — essayez /HELP pour une liste des commandes disponibles"
 
 #: src/ircParser.js:104
 msgid "Known commands:"
@@ -1038,41 +1044,3 @@ msgstr "%d %B, %l∶%M %p"
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d %B %Y, %l∶%M %p"
-
-#~ msgid "Florian Müllner"
-#~ msgstr "Florian Müllner"
-
-#~ msgid "Window size (width and height)."
-#~ msgstr "Taille de la fenêtre (largeur et hauteur)."
-
-#~ msgid "The GNOME Project"
-#~ msgstr "Le projet GNOME"
-
-#~ msgid "optional"
-#~ msgstr "optionnel"
-
-#~ msgid "Learn more about Polari"
-#~ msgstr "En apprendre plus sur Polari"
-
-#, javascript-format
-#~ msgid "Users on %s:"
-#~ msgstr "Utilisateurs sur %s :"
-
-#~ msgid "Run Polari in the Background?"
-#~ msgstr "Exécuter Polari en arrière-plan ?"
-
-#~ msgid ""
-#~ "Polari will continue to run when closed and will be automatically started "
-#~ "on login."
-#~ msgstr ""
-#~ "Polari continuera à fonctionner s’il est fermé et sera redémarré "
-#~ "automatiquement à la connexion."
-
-#~ msgid "_Quit"
-#~ msgstr "_Quitter"
-
-#~ msgid "_Run in background"
-#~ msgstr "E_xécution en arrière-plan"
-
-#~ msgid "All"
-#~ msgstr "Tous"
