@@ -1,16 +1,16 @@
 # Hungarian translation for polari.
-# Copyright (C) 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023, 2024 Free Software Foundation, Inc.
+# Copyright (C) 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2023, 2024, 2026 Free Software Foundation, Inc.
 # This file is distributed under the same license as the polari package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2014, 2016, 2017.
 # Balázs Meskó <mesko.balazs at fsf dot hu>, 2014, 2019, 2020.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2023, 2024.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2014, 2015, 2016, 2018, 2019, 2020, 2021, 2023, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2024-02-12 01:17+0000\n"
-"PO-Revision-Date: 2024-03-11 00:23+0100\n"
+"POT-Creation-Date: 2024-09-04 12:26+0000\n"
+"PO-Revision-Date: 2026-09-03 12:11+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
-#: data/org.gnome.Polari.desktop.in:3 data/resources/main-window.ui:45
+#: data/org.gnome.Polari.desktop.in:2 data/resources/main-window.ui:45
 #: src/roomStack.js:279
 msgid "Polari"
 msgstr "Polari"
@@ -30,7 +30,13 @@ msgstr "Polari"
 msgid "Talk to people on IRC"
 msgstr "Beszéljen emberekkel IRC-n"
 
-#: data/metainfo/org.gnome.Polari.metainfo.xml.in:60
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
+
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
 "A simple Internet Relay Chat (IRC) client that is designed to integrate "
 "seamlessly with GNOME; it features a simple and beautiful interface which "
@@ -40,7 +46,7 @@ msgstr ""
 "terveztek. Egyszerű és gyönyörű felülete van, amely lehetővé teszi a "
 "beszélgetésekre való koncentrálást."
 
-#: data/metainfo/org.gnome.Polari.metainfo.xml.in:65
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:71
 msgid ""
 "You can use Polari to publicly chat with people in a channel, and to have "
 "private one-to-one conversations. Notifications make sure that you never "
@@ -50,12 +56,12 @@ msgstr ""
 "csatornán, vagy privát csevegést folytasson másokkal. Az értesítések "
 "gondoskodnak arról, hogy sose maradjon le egyetlen fontos üzenetről sem."
 
-#: data/org.gnome.Polari.desktop.in:4
+#: data/org.gnome.Polari.desktop.in:3
 msgid "An Internet Relay Chat Client for GNOME"
 msgstr "Interneten továbbított csevegés (IRC) kliens a GNOME-hoz"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Polari.desktop.in:15
+#: data/org.gnome.Polari.desktop.in:14
 msgid "IRC;Internet;Relay;Chat;"
 msgstr "IRC;Internet;Relay;Chat;Csevegés;Cset;"
 
@@ -76,12 +82,10 @@ msgid "Keep running in background when closed."
 msgstr "Bezáráskor futtatás a háttérben."
 
 #: data/org.gnome.Polari.gschema.xml:23
-#| msgid "Window size"
 msgid "Window width"
 msgstr "Ablak szélessége"
 
 #: data/org.gnome.Polari.gschema.xml:27
-#| msgid "Window size"
 msgid "Window height"
 msgstr "Ablak magassága"
 
