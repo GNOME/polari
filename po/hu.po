@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-11-09 21:18+0000\n"
-"PO-Revision-Date: 2026-03-05 02:47+0100\n"
+"POT-Creation-Date: 2026-05-31 15:27+0000\n"
+"PO-Revision-Date: 2026-09-03 12:09+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:2 data/ui/main-window.ui:45
@@ -29,6 +29,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Beszéljen emberekkel IRC-n"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -277,7 +283,6 @@ msgid "Search"
 msgstr "Keresés"
 
 #: data/ui/main-window.ui:109
-#| msgid "Start Conversation"
 msgid "Search Conversations…"
 msgstr "Beszélgetések keresése…"
 
@@ -475,62 +480,62 @@ msgstr ""
 msgid "New Messages"
 msgstr "Új üzenetek"
 
-#: src/chatView.js:812
+#: src/chatView.js:811
 msgid "Open Link"
 msgstr "Hivatkozás megnyitása"
 
-#: src/chatView.js:814
+#: src/chatView.js:813
 msgid "Copy Link Address"
 msgstr "Hivatkozás címének másolása"
 
-#: src/chatView.js:1013
+#: src/chatView.js:1012
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s mostantól %s néven ismert"
 
-#: src/chatView.js:1018
+#: src/chatView.js:1017
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s kilépett"
 
-#: src/chatView.js:1027
+#: src/chatView.js:1026
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s kirúgva %s által"
 
-#: src/chatView.js:1028
+#: src/chatView.js:1027
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s kirúgva"
 
-#: src/chatView.js:1035
+#: src/chatView.js:1034
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s kitiltva %s által"
 
-#: src/chatView.js:1036
+#: src/chatView.js:1035
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s kitiltva"
 
-#: src/chatView.js:1041
+#: src/chatView.js:1040
 #, javascript-format
 msgid "%s joined"
 msgstr "%s csatlakozott"
 
-#: src/chatView.js:1046
+#: src/chatView.js:1045
 #, javascript-format
 msgid "%s left"
 msgstr "%s kilépett"
 
-#: src/chatView.js:1143
+#: src/chatView.js:1142
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d felhasználó csatlakozott"
 msgstr[1] "%d felhasználó csatlakozott"
 
-#: src/chatView.js:1150
+#: src/chatView.js:1149
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -545,12 +550,12 @@ msgstr "Már fel van véve"
 msgid "No results."
 msgstr "Nincs találat."
 
-#: src/connections.js:519
+#: src/connections.js:518
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "„%s” tulajdonságai"
 
-#: src/connections.js:550
+#: src/connections.js:549
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -737,70 +742,70 @@ msgid_plural "%d users"
 msgstr[0] "%d felhasználó"
 msgstr[1] "%d felhasználó"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "Leave chatroom"
 msgstr "Csevegőszoba elhagyása"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "End conversation"
 msgstr "Beszélgetés befejezése"
 
-#: src/roomList.js:312
+#: src/roomList.js:311
 msgid "Unmute"
 msgstr "Némítás visszavonása"
 
-#: src/roomList.js:316
+#: src/roomList.js:315
 msgid "Mute"
 msgstr "Némítás"
 
-#: src/roomList.js:481
+#: src/roomList.js:480
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "A(z) %s hálózattal probléma van"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "Libera (irc.libera.chat)"
-#: src/roomList.js:537
+#: src/roomList.js:538
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:545
+#: src/roomList.js:546
 msgid "Connection Problem"
 msgstr "Kapcsolódási probléma"
 
-#: src/roomList.js:562
+#: src/roomList.js:563
 msgid "Connected"
 msgstr "Kapcsolódva"
 
-#: src/roomList.js:564
+#: src/roomList.js:565
 msgid "Connecting…"
 msgstr "Kapcsolódás…"
 
-#: src/roomList.js:566 src/userList.js:394
+#: src/roomList.js:567 src/userList.js:394
 msgid "Offline"
 msgstr "Nem érhető el"
 
-#: src/roomList.js:568
+#: src/roomList.js:569
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/roomList.js:587
+#: src/roomList.js:588
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Nem sikerült biztonságos módon kapcsolódni ide: %s."
 
-#: src/roomList.js:590
+#: src/roomList.js:591
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Ehhez jelszó szükséges: %s."
 
-#: src/roomList.js:596
+#: src/roomList.js:597
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nem sikerült kapcsolódni ide: %s. A kiszolgáló elfoglalt."
 
-#: src/roomList.js:599
+#: src/roomList.js:600
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nem sikerült kapcsolódni ide: %s."
