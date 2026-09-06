@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polari main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-11-09 21:18+0000\n"
-"PO-Revision-Date: 2026-03-01 19:10+0100\n"
+"POT-Creation-Date: 2026-05-31 15:27+0000\n"
+"PO-Revision-Date: 2026-09-04 09:59+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
 "Language: bg\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:2 data/ui/main-window.ui:45
@@ -27,6 +27,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Разговаряйте с хора в IRC"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -478,62 +484,62 @@ msgstr ""
 msgid "New Messages"
 msgstr "Нови съобщения"
 
-#: src/chatView.js:812
+#: src/chatView.js:811
 msgid "Open Link"
 msgstr "Отваряне на връзката"
 
-#: src/chatView.js:814
+#: src/chatView.js:813
 msgid "Copy Link Address"
 msgstr "Копиране на адреса на връзката"
 
-#: src/chatView.js:1013
+#: src/chatView.js:1012
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s вече е известен като %s"
 
-#: src/chatView.js:1018
+#: src/chatView.js:1017
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s напусна"
 
-#: src/chatView.js:1027
+#: src/chatView.js:1026
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s е изхвърлен от %s"
 
-#: src/chatView.js:1028
+#: src/chatView.js:1027
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s е изхвърлен"
 
-#: src/chatView.js:1035
+#: src/chatView.js:1034
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s е забранен от %s"
 
-#: src/chatView.js:1036
+#: src/chatView.js:1035
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s е забранен"
 
-#: src/chatView.js:1041
+#: src/chatView.js:1040
 #, javascript-format
 msgid "%s joined"
 msgstr "%s се присъедини"
 
-#: src/chatView.js:1046
+#: src/chatView.js:1045
 #, javascript-format
 msgid "%s left"
 msgstr "%s напусна"
 
-#: src/chatView.js:1143
+#: src/chatView.js:1142
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
 msgstr[0] "%d потребител се присъедини"
 msgstr[1] "%d потребители се присъединиха"
 
-#: src/chatView.js:1150
+#: src/chatView.js:1149
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -548,12 +554,12 @@ msgstr "Вече е добавен"
 msgid "No results."
 msgstr "Няма резултати."
 
-#: src/connections.js:519
+#: src/connections.js:518
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Свойства на „%s“"
 
-#: src/connections.js:550
+#: src/connections.js:549
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -733,70 +739,70 @@ msgid_plural "%d users"
 msgstr[0] "%d потребител"
 msgstr[1] "%d потребителя"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "Leave chatroom"
 msgstr "Напускане на стаята"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "End conversation"
 msgstr "Прекратяване на разговора"
 
-#: src/roomList.js:312
+#: src/roomList.js:311
 msgid "Unmute"
 msgstr "Премахване на заглушаването"
 
-#: src/roomList.js:316
+#: src/roomList.js:315
 msgid "Mute"
 msgstr "Заглушаване"
 
-#: src/roomList.js:481
+#: src/roomList.js:480
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Мрежата %s има грешка"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "Libera (irc.libera.chat)"
-#: src/roomList.js:537
+#: src/roomList.js:538
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:545
+#: src/roomList.js:546
 msgid "Connection Problem"
 msgstr "Грешка във връзката"
 
-#: src/roomList.js:562
+#: src/roomList.js:563
 msgid "Connected"
 msgstr "Свързван"
 
-#: src/roomList.js:564
+#: src/roomList.js:565
 msgid "Connecting…"
 msgstr "Свързване…"
 
-#: src/roomList.js:566 src/userList.js:394
+#: src/roomList.js:567 src/userList.js:394
 msgid "Offline"
 msgstr "Изключен"
 
-#: src/roomList.js:568
+#: src/roomList.js:569
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: src/roomList.js:587
+#: src/roomList.js:588
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "Не може да се свърже с %s по безопасен начин."
 
-#: src/roomList.js:590
+#: src/roomList.js:591
 #, javascript-format
 msgid "%s requires a password."
 msgstr "%s изисква парола."
 
-#: src/roomList.js:596
+#: src/roomList.js:597
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Не може да се свърже с %s. Сървърът е зает."
 
-#: src/roomList.js:599
+#: src/roomList.js:600
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Не може да се осъществи връзка с %s."
