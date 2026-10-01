@@ -54,8 +54,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.freedesktop.org/dbus/dbus-glib.git",
-                    "tag": "dbus-glib-0.114",
-                    "commit": "623a4f3386a675060335e20afd810c6e10ae2cc8",
+                    "tag": "dbus-glib-0.116",
+                    "commit": "e1a0d18899e6d4a714c48a778387a850d273d2d2",
                     "x-checker-data": {
                         "type": "git",
                         "tag-pattern": "^dbus-glib-([\\d.]+)$"
