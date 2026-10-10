@@ -2,21 +2,22 @@
 # Copyright (C) 2013 polari's COPYRIGHT HOLDER
 # This file is distributed under the same license as the polari package.
 # Marek Černocký <marek@manet.cz>, 2013, 2014, 2015, 2016, 2017, 2018, 2020, 2021.
+# Patrik Sivek <patriksivek@gnome.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: polari\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/polari/issues\n"
-"POT-Creation-Date: 2025-10-28 20:43+0000\n"
-"PO-Revision-Date: 2025-10-28 21:56+0100\n"
-"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
-"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
+"POT-Creation-Date: 2026-05-31 15:27+0000\n"
+"PO-Revision-Date: 2026-10-10 14:29+0200\n"
+"Last-Translator: Patrik Sivek <patriksivek@gnome.org>\n"
+"Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Gtranslator 51.0\n"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:12
 #: data/org.gnome.Polari.desktop.in:2 data/ui/main-window.ui:45
@@ -27,6 +28,12 @@ msgstr "Polari"
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:13
 msgid "Talk to people on IRC"
 msgstr "Povykládejte si s lidmi na IRC"
+
+#. developer_name tag deprecated with Appstream 1.0
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:28
+#: data/metainfo/org.gnome.Polari.metainfo.xml.in:30
+msgid "Florian Müllner"
+msgstr "Florian Müllner"
 
 #: data/metainfo/org.gnome.Polari.metainfo.xml.in:66
 msgid ""
@@ -253,7 +260,7 @@ msgstr "Nápověda"
 msgid "About"
 msgstr "O aplikaci"
 
-#: data/ui/main-window.ui:40 src/application.js:92
+#: data/ui/main-window.ui:40 src/application.js:87
 msgid "Quit"
 msgstr "Ukončit"
 
@@ -274,7 +281,6 @@ msgid "Search"
 msgstr "Hledat"
 
 #: data/ui/main-window.ui:109
-#| msgid "Start Conversation"
 msgid "Search Conversations…"
 msgstr "hledat konverzace…"
 
@@ -320,7 +326,7 @@ msgstr "Vlastnosti"
 
 #: data/ui/server-room-list.ui:49
 msgid "Enter room name to add"
-msgstr "Zadejte název místnosti, která se má přidat"
+msgstr "zadejte název místnosti, která se má přidat"
 
 #: data/ui/shortcuts-dialog.ui:13
 msgctxt "shortcut window"
@@ -432,36 +438,36 @@ msgstr "Začít konverzaci"
 msgid "No Results"
 msgstr "Žádné výsledky"
 
-#: src/application.js:78
+#: src/application.js:73
 msgid "Start Telepathy client"
 msgstr "Spustit klienta Telepathy"
 
-#: src/application.js:83
+#: src/application.js:78
 msgid "Start in debug mode"
 msgstr "Spustit v ladicím režimu"
 
-#: src/application.js:86
+#: src/application.js:81
 msgid "Allow running alongside another instance"
 msgstr "Povolit spuštění souběžně s jinou instancí"
 
-#: src/application.js:89
+#: src/application.js:84
 msgid "Print version and exit"
 msgstr "Vypsat verzi a skončit"
 
-#: src/application.js:536 src/utils.js:276
+#: src/application.js:531 src/utils.js:280
 msgid "Failed to open link"
 msgstr "Selhalo otevření odkazu"
 
-#: src/application.js:803
+#: src/application.js:798
 #, javascript-format
 msgid "%s removed."
 msgstr "Účet %s byl odstraněn."
 
-#: src/application.js:804
+#: src/application.js:799
 msgid "Undo"
 msgstr "Zpět"
 
-#: src/application.js:889
+#: src/application.js:884
 msgid "translator-credits"
 msgstr ""
 "Marek Černocký <marek@manet.cz> \n"
@@ -471,55 +477,55 @@ msgstr ""
 msgid "New Messages"
 msgstr "Nové zprávy"
 
-#: src/chatView.js:809
+#: src/chatView.js:811
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
-#: src/chatView.js:811
+#: src/chatView.js:813
 msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
-#: src/chatView.js:1010
+#: src/chatView.js:1012
 #, javascript-format
 msgid "%s is now known as %s"
 msgstr "%s je nyní znám jako %s"
 
-#: src/chatView.js:1015
+#: src/chatView.js:1017
 #, javascript-format
 msgid "%s has disconnected"
 msgstr "%s se odpojil"
 
-#: src/chatView.js:1024
+#: src/chatView.js:1026
 #, javascript-format
 msgid "%s has been kicked by %s"
 msgstr "%s byl vykopnut správcem %s"
 
-#: src/chatView.js:1025
+#: src/chatView.js:1027
 #, javascript-format
 msgid "%s has been kicked"
 msgstr "%s byl vykopnut"
 
-#: src/chatView.js:1032
+#: src/chatView.js:1034
 #, javascript-format
 msgid "%s has been banned by %s"
 msgstr "%s byl zablokován správcem %s"
 
-#: src/chatView.js:1033
+#: src/chatView.js:1035
 #, javascript-format
 msgid "%s has been banned"
 msgstr "%s byl zablokován"
 
-#: src/chatView.js:1038
+#: src/chatView.js:1040
 #, javascript-format
 msgid "%s joined"
 msgstr "%s se připojil"
 
-#: src/chatView.js:1043
+#: src/chatView.js:1045
 #, javascript-format
 msgid "%s left"
 msgstr "%s opustil místnost"
 
-#: src/chatView.js:1140
+#: src/chatView.js:1142
 #, javascript-format
 msgid "%d user joined"
 msgid_plural "%d users joined"
@@ -527,7 +533,7 @@ msgstr[0] "%d uživatel se připojil"
 msgstr[1] "%d uživatelé se připojili"
 msgstr[2] "%d uživatelů se připojilo"
 
-#: src/chatView.js:1147
+#: src/chatView.js:1149
 #, javascript-format
 msgid "%d user left"
 msgid_plural "%d users left"
@@ -535,20 +541,20 @@ msgstr[0] "%d uživatel opustil místnost"
 msgstr[1] "%d uživatelé opustili místnost"
 msgstr[2] "%d uživatelů opustilo místnost"
 
-#: src/connections.js:68
+#: src/connections.js:65
 msgid "Already added"
 msgstr "Již bylo přidáno"
 
-#: src/connections.js:126
+#: src/connections.js:123
 msgid "No results."
 msgstr "Žádné výsledky."
 
-#: src/connections.js:522
+#: src/connections.js:518
 #, javascript-format
 msgid "“%s” Properties"
 msgstr "Vlastnosti připojení „%s“"
 
-#: src/connections.js:553
+#: src/connections.js:549
 msgid ""
 "Polari disconnected due to a network error. Please check if the address "
 "field is correct."
@@ -556,7 +562,7 @@ msgstr ""
 "Polari se odpojilo kvůli chybě sítě. Zkontrolujte prosím, jestli je pole s "
 "adresou správné."
 
-#: src/entryArea.js:381
+#: src/entryArea.js:380
 #, javascript-format
 msgid "Paste %s line of text to public paste service?"
 msgid_plural "Paste %s lines of text to public paste service?"
@@ -564,7 +570,7 @@ msgstr[0] "Vložit %s řádek textu do veřejně přístupné služby?"
 msgstr[1] "Vložit %s řádky textu do veřejně přístupné služby?"
 msgstr[2] "Vložit %s řádků textu do veřejně přístupné služby?"
 
-#: src/entryArea.js:386
+#: src/entryArea.js:385
 #, javascript-format
 msgid "Uploading %s line of text to public paste service…"
 msgid_plural "Uploading %s lines of text to public paste service…"
@@ -572,33 +578,33 @@ msgstr[0] "Nahrává se %s řádek textu do veřejně přístupné služby…"
 msgstr[1] "Nahrávají se %s řádky textu do veřejně přístupné služby…"
 msgstr[2] "Nahrává se %s řádků textu do veřejně přístupné služby…"
 
-#: src/entryArea.js:393
+#: src/entryArea.js:392
 msgid "Upload image to public paste service?"
 msgstr "Nahrát obrázek do veřejně přístupné služby?"
 
-#: src/entryArea.js:394
+#: src/entryArea.js:393
 msgid "Uploading image to public paste service…"
 msgstr "Nahrává se obrázek do veřejně přístupné služby…"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:411
+#: src/entryArea.js:410
 #, javascript-format
 msgid "Upload “%s” to public paste service?"
 msgstr "Nahrát „%s“ do veřejně přístupné služby?"
 
 #. Translators: %s is a filename
-#: src/entryArea.js:413
+#: src/entryArea.js:412
 #, javascript-format
 msgid "Uploading “%s” to public paste service…"
 msgstr "Nahrává se „%s“ do veřejně přístupné služby…"
 
 #. translators: %s is a nick, #%s a channel
-#: src/entryArea.js:422
+#: src/entryArea.js:421
 #, javascript-format
 msgid "%s in #%s"
 msgstr "%s na kanále #%s"
 
-#: src/entryArea.js:424
+#: src/entryArea.js:423
 #, javascript-format
 msgid "Paste from %s"
 msgstr "Vložit od uživatele %s"
@@ -624,12 +630,12 @@ msgstr "Da_lší"
 #. OP: N_("/OP <nick> — gives channel operator status to <nick>"),
 #.
 #.
-#: src/ircParser.js:37
+#: src/ircParser.js:34
 msgid ""
 "/CLOSE [<channel>] [<reason>] — closes <channel>, by default the current one"
 msgstr "/CLOSE [<kanál>] [<důvod>] – zavře <kanál>, standardně ten aktuální"
 
-#: src/ircParser.js:38
+#: src/ircParser.js:35
 msgid ""
 "/HELP [<command>] — displays help for <command>, or a list of available "
 "commands"
@@ -637,82 +643,82 @@ msgstr ""
 "/HELP [<příkaz>] – zobrazit nápovědu pro <příkaz> nebo seznam dostupných "
 "příkazů"
 
-#: src/ircParser.js:39
+#: src/ircParser.js:36
 msgid ""
 "/INVITE <nick> [<channel>] — invites <nick> to <channel>, or the current one"
 msgstr ""
 "/INVITE <přezdívka> [<kanál>] – pozvat uživatele <přezdívka> na <kanál> nebo "
 "na aktuální kanál"
 
-#: src/ircParser.js:40
+#: src/ircParser.js:37
 msgid "/JOIN <channel> — joins <channel>"
 msgstr "/JOIN <kanál> – připojit <kanál>"
 
-#: src/ircParser.js:41
+#: src/ircParser.js:38
 msgid "/KICK <nick> — kicks <nick> from current channel"
 msgstr "/KICK <přezdívka> – vyhodit uživatele <přezdívka> z aktuálního kanálu"
 
-#: src/ircParser.js:42
+#: src/ircParser.js:39
 msgid "/ME <action> — sends <action> to the current channel"
 msgstr "/ME <akce> – poslat <akci> na aktuální kanál"
 
-#: src/ircParser.js:43
+#: src/ircParser.js:40
 msgid "/MSG <nick> [<message>] — sends a private message to <nick>"
 msgstr ""
 "/MSG <přezdívka> [<zpráva>] – odeslat soukromou zprávu uživateli <přezdívka>"
 
-#: src/ircParser.js:44
+#: src/ircParser.js:41
 msgid "/NAMES — lists users on the current channel"
 msgstr "/NAMES – vypsat uživatele na aktuálním kanále"
 
-#: src/ircParser.js:45
+#: src/ircParser.js:42
 msgid "/NICK <nickname> — sets your nick to <nickname>"
 msgstr "/NICK <přezdívka> – nastavat vaši přezdívku na <přezdívka>"
 
-#: src/ircParser.js:46
+#: src/ircParser.js:43
 msgid ""
 "/PART [<channel>] [<reason>] — leaves <channel>, by default the current one"
 msgstr "/PART [<kanál>] [<důvod>] – opustit <kanál>, standardně ten aktuální"
 
-#: src/ircParser.js:47
+#: src/ircParser.js:44
 msgid "/QUERY <nick> — opens a private conversation with <nick>"
 msgstr ""
 "/QUERY <přezdívka> – otevřít soukromou konverzaci s uživatelem <přezdívka>"
 
-#: src/ircParser.js:48
+#: src/ircParser.js:45
 msgid "/QUIT [<reason>] — disconnects from the current server"
 msgstr "/QUIT [<důvod>] – odpojit se od aktuálního serveru"
 
-#: src/ircParser.js:49
+#: src/ircParser.js:46
 msgid "/SAY <text> — sends <text> to the current room/contact"
 msgstr "/SAY <text> – poslat <text> do aktuální místnosti/aktuálnímu kontaktu"
 
-#: src/ircParser.js:50
+#: src/ircParser.js:47
 msgid "/TOPIC <topic> — sets the topic to <topic>, or shows the current one"
 msgstr "/TOPIC <téma> – nastavit téma na <téma> nebo zobrazit aktuální téma"
 
-#: src/ircParser.js:51
+#: src/ircParser.js:48
 msgid "/WHOIS <nick> — requests information on <nick>"
 msgstr "/WHOIS <přezdívka> – požádat o informace k <přezdívce>"
 
-#: src/ircParser.js:54
+#: src/ircParser.js:51
 msgid "Unknown command — try /HELP for a list of available commands"
 msgstr "Neznámý příkaz – zkuste /HELP pro zobrazení seznamu dostupných příkazů"
 
-#: src/ircParser.js:107
+#: src/ircParser.js:104
 msgid "Known commands:"
 msgstr "Známé příkazy:"
 
-#: src/ircParser.js:278
+#: src/ircParser.js:275
 msgid "No topic set"
 msgstr "Není nastaveno žádné téma"
 
-#: src/ircParser.js:315
+#: src/ircParser.js:312
 #, javascript-format
 msgid "User: %s - Last activity: %s"
 msgstr "Uživatel: %s – Naposledy aktivní: %s"
 
-#: src/ircParser.js:368
+#: src/ircParser.js:365
 #, javascript-format
 msgid "Usage: %s"
 msgstr "Použití: %s"
@@ -730,70 +736,70 @@ msgstr[0] "%d uživatel"
 msgstr[1] "%d uživatelé"
 msgstr[2] "%d uživatelů"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "Leave chatroom"
 msgstr "Opustit diskuzní místnost"
 
-#: src/roomList.js:290
+#: src/roomList.js:289
 msgid "End conversation"
 msgstr "Ukončit konverzaci"
 
-#: src/roomList.js:312
+#: src/roomList.js:311
 msgid "Unmute"
 msgstr "Zrušit ztišení"
 
-#: src/roomList.js:316
+#: src/roomList.js:315
 msgid "Mute"
 msgstr "Ztišit"
 
-#: src/roomList.js:481
+#: src/roomList.js:480
 #, javascript-format
 msgid "Network %s has an error"
 msgstr "Síť %s má chybu"
 
 #. Translators: This is an account name followed by a
 #. server address, e.g. "Libera (irc.libera.chat)"
-#: src/roomList.js:537
+#: src/roomList.js:538
 #, javascript-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: src/roomList.js:545
+#: src/roomList.js:546
 msgid "Connection Problem"
 msgstr "Problém s připojením"
 
-#: src/roomList.js:562
+#: src/roomList.js:563
 msgid "Connected"
 msgstr "Připojeno"
 
-#: src/roomList.js:564
+#: src/roomList.js:565
 msgid "Connecting…"
 msgstr "Připojuje se…"
 
-#: src/roomList.js:566 src/userList.js:394
+#: src/roomList.js:567 src/userList.js:394
 msgid "Offline"
 msgstr "Odpojeno"
 
-#: src/roomList.js:568
+#: src/roomList.js:569
 msgid "Unknown"
 msgstr "Neznámo"
 
-#: src/roomList.js:587
+#: src/roomList.js:588
 #, javascript-format
 msgid "Could not connect to %s in a safe way."
 msgstr "K účtu %s se nelze připojit zabezpečeným způsobem."
 
-#: src/roomList.js:590
+#: src/roomList.js:591
 #, javascript-format
 msgid "%s requires a password."
 msgstr "Účet %s požaduje heslo."
 
-#: src/roomList.js:596
+#: src/roomList.js:597
 #, javascript-format
 msgid "Could not connect to %s. The server is busy."
 msgstr "Nelze se připojit k účtu %s. Server je zaneprázdněn."
 
-#: src/roomList.js:599
+#: src/roomList.js:600
 #, javascript-format
 msgid "Could not connect to %s."
 msgstr "Nelze se připojit k účtu %s."
@@ -802,7 +808,7 @@ msgstr "Nelze se připojit k účtu %s."
 msgid "Should the password be saved?"
 msgstr "Má se heslo uložit?"
 
-#: src/roomStack.js:181 src/telepathyClient.js:692
+#: src/roomStack.js:181 src/telepathyClient.js:707
 #, javascript-format
 msgid ""
 "Identification will happen automatically the next time you connect to %s"
@@ -845,24 +851,24 @@ msgstr "Momentálně se nedaří do místnosti připojit, zkuste to později."
 msgid "Join a room using the + button."
 msgstr "Vstupte do místnosti pomocí tlačítka +."
 
-#: src/telepathyClient.js:495
+#: src/telepathyClient.js:510
 msgid "Good Bye"
 msgstr "Naviděnou"
 
 #. Translators: Those are a botname and an accountName, e.g.
 #. "Save NickServ password for Libera"
-#: src/telepathyClient.js:690
+#: src/telepathyClient.js:705
 #, javascript-format
 msgid "Save %s password for %s?"
 msgstr "Uložit heslo %s pro účet %s?"
 
-#: src/telepathyClient.js:695
+#: src/telepathyClient.js:710
 msgid "Save"
 msgstr "Uložit"
 
 #. Translators: This is the title of the notification announcing a newly
 #. received message, in the form "user-nickname in room-display-name"
-#: src/telepathyClient.js:759
+#: src/telepathyClient.js:778
 #, javascript-format
 msgid "%s in %s"
 msgstr "%s v místnosti %s"
@@ -884,25 +890,25 @@ msgstr "Uživatelé je připojený"
 msgid "User %s is now online."
 msgstr "Uživatel %s je nyní připojený."
 
-#: src/utils.js:136
+#: src/utils.js:140
 #, javascript-format
 msgid "Polari server password for %s"
 msgstr "Heslo serveru Polari pro účet %s"
 
-#: src/utils.js:146
+#: src/utils.js:150
 #, javascript-format
 msgid "Polari NickServ password for %s"
 msgstr "Heslo Polari NickServ pro účet %s"
 
-#: src/utils.js:415
+#: src/utils.js:419
 msgid "Now"
 msgstr "Nyní"
 
-#: src/utils.js:418
+#: src/utils.js:422
 msgid "Unavailable"
 msgstr "Nedostupné"
 
-#: src/utils.js:422
+#: src/utils.js:426
 #, javascript-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
@@ -910,7 +916,7 @@ msgstr[0] "před %d sekundou"
 msgstr[1] "před %d sekundami"
 msgstr[2] "před %d sekundami"
 
-#: src/utils.js:429
+#: src/utils.js:433
 #, javascript-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -918,7 +924,7 @@ msgstr[0] "před %d minutou"
 msgstr[1] "před %d minutami"
 msgstr[2] "před %d minutami"
 
-#: src/utils.js:436
+#: src/utils.js:440
 #, javascript-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -926,7 +932,7 @@ msgstr[0] "před %d hodinou"
 msgstr[1] "před %d hodinami"
 msgstr[2] "před %d hodinami"
 
-#: src/utils.js:443
+#: src/utils.js:447
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -934,7 +940,7 @@ msgstr[0] "před %d dnem"
 msgstr[1] "před %d dny"
 msgstr[2] "před %d dny"
 
-#: src/utils.js:450
+#: src/utils.js:454
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -942,7 +948,7 @@ msgstr[0] "před %d týdnem"
 msgstr[1] "před %d týdny"
 msgstr[2] "před %d týdny"
 
-#: src/utils.js:456
+#: src/utils.js:460
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -952,14 +958,14 @@ msgstr[2] "před %d měsíci"
 
 #. today
 #. Translators: Time in 24h format
-#: src/utils.js:488
+#: src/utils.js:492
 msgid "%H∶%M"
 msgstr "%H∶%M"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 24h format. i.e. "Yesterday, 14:30"
-#: src/utils.js:493
+#: src/utils.js:497
 #, no-c-format
 msgid "Yesterday, %H∶%M"
 msgstr "Včera, %H∶%M"
@@ -967,7 +973,7 @@ msgstr "Včera, %H∶%M"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 24h format. i.e. "Monday, 14:30"
-#: src/utils.js:498
+#: src/utils.js:502
 #, no-c-format
 msgid "%A, %H∶%M"
 msgstr "%A, %H∶%M"
@@ -976,7 +982,7 @@ msgstr "%A, %H∶%M"
 #. Translators: this is the month name and day number
 #. followed by a time string in 24h format.
 #. i.e. "May 25, 14:30"
-#: src/utils.js:504
+#: src/utils.js:508
 #, no-c-format
 msgid "%B %d, %H∶%M"
 msgstr "%d. %B, %H∶%M"
@@ -985,7 +991,7 @@ msgstr "%d. %B, %H∶%M"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 24h format.
 #. i.e. "May 25 2012, 14:30"
-#: src/utils.js:510
+#: src/utils.js:514
 #, no-c-format
 msgid "%B %d %Y, %H∶%M"
 msgstr "%d. %B %Y, %H∶%M"
@@ -993,14 +999,14 @@ msgstr "%d. %B %Y, %H∶%M"
 #. eslint-disable-next-line no-lonely-if
 #. today
 #. Translators: Time in 12h format
-#: src/utils.js:516
+#: src/utils.js:520
 msgid "%l∶%M %p"
 msgstr "%l∶%M %p"
 
 #. yesterday
 #. Translators: this is the word "Yesterday" followed by a
 #. time string in 12h format. i.e. "Yesterday, 2:30 pm"
-#: src/utils.js:521
+#: src/utils.js:525
 #, no-c-format
 msgid "Yesterday, %l∶%M %p"
 msgstr "Včera, %l∶%M %p"
@@ -1008,7 +1014,7 @@ msgstr "Včera, %l∶%M %p"
 #. this week
 #. Translators: this is the week day name followed by a time
 #. string in 12h format. i.e. "Monday, 2:30 pm"
-#: src/utils.js:526
+#: src/utils.js:530
 #, no-c-format
 msgid "%A, %l∶%M %p"
 msgstr "%A, %l∶%M %p"
@@ -1017,7 +1023,7 @@ msgstr "%A, %l∶%M %p"
 #. Translators: this is the month name and day number
 #. followed by a time string in 12h format.
 #. i.e. "May 25, 2:30 pm"
-#: src/utils.js:532
+#: src/utils.js:536
 #, no-c-format
 msgid "%B %d, %l∶%M %p"
 msgstr "%d. %B, %l∶%M %p"
@@ -1026,13 +1032,10 @@ msgstr "%d. %B, %l∶%M %p"
 #. Translators: this is the month name, day number, year
 #. number followed by a time string in 12h format.
 #. i.e. "May 25 2012, 2:30 pm"
-#: src/utils.js:538
+#: src/utils.js:542
 #, no-c-format
 msgid "%B %d %Y, %l∶%M %p"
 msgstr "%d. %B %Y, %l∶%M %p"
-
-#~ msgid "Florian Müllner"
-#~ msgstr "Florian Müllner"
 
 #~ msgid "Window size (width and height)."
 #~ msgstr "Velikost okna (šířka a výška)."
